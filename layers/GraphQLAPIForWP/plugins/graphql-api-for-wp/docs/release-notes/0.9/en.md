@@ -1581,6 +1581,7 @@ On the list of Custom Endpoints and Persisted Queries, we can visualize their ca
 
 ![List of Custom Endpoints with their categories](../../images/graphql-custom-endpoints-with-categories.png)
 
+![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
 
 ## Support block string characthers
 
