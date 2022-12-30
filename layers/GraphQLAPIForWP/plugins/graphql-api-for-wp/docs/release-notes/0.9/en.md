@@ -1628,6 +1628,9 @@ type _NamedTypeExtensions {
 
   # The "namespaced" type name
   namespacedName: String!
+
+  # Enum-like "possible values" for EnumString type resolvers, `null` otherwise
+  possibleValues: [String!]
 }
 
 extend type __Type {
