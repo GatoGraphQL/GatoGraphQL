@@ -695,6 +695,12 @@
                             "type": {
                                 "name": "String!"
                             }
+                        },
+                        {
+                            "name": "possibleValues",
+                            "type": {
+                                "name": "[String!]"
+                            }
                         }
                     ]
                 },
