@@ -93,4 +93,12 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
      * @return string[]
      */
     abstract public function getPossibleValues(): array;
+
+    public function getTypeDescription(): string
+    {
+        return sprintf(
+            $this->__('Possible values: `"%s"`.', 'schema-commons'),
+            implode('"`, `"', $this->getConsolidatedPossibleValues())
+        );
+    }
 }

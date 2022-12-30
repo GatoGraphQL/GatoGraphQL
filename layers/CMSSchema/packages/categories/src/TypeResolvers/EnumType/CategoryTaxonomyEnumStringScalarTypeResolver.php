@@ -16,6 +16,14 @@ class CategoryTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStringSca
         return 'CategoryTaxonomyEnumString';
     }
 
+    public function getTypeDescription(): string
+    {
+        return sprintf(
+            $this->__('Category taxonomies (available for querying via the API), with possible values: `"%s"`.', 'categories'),
+            implode('"`, `"', $this->getConsolidatedPossibleValues())
+        );
+    }
+
     /**
      * @return string[]
      */

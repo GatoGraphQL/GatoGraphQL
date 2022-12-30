@@ -16,6 +16,14 @@ class TagTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStringScalarTy
         return 'TagTaxonomyEnumString';
     }
 
+    public function getTypeDescription(): string
+    {
+        return sprintf(
+            $this->__('Tag taxonomies (available for querying via the API), with possible values: `"%s"`.', 'tags'),
+            implode('"`, `"', $this->getConsolidatedPossibleValues())
+        );
+    }
+
     /**
      * @return string[]
      */
