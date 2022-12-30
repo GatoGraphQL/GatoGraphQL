@@ -42,6 +42,9 @@ extend type __Type {
 type _DirectiveExtensions {
   # If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?
   needsDataToExecute: Boolean!
+
+  # Names or descriptions of the types the field directives is restricted to, or `null` if it supports any type (i.e. it defines no restrictions)
+  fieldDirectiveSupportedTypeNamesOrDescriptions: [String!]
 }
 
 extend type __Directive {
