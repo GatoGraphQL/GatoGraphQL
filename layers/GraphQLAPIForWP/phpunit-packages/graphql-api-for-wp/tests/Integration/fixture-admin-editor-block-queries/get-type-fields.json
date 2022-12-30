@@ -1804,6 +1804,9 @@
             },
             {
               "name": "namespacedName"
+            },
+            {
+              "name": "possibleValues"
             }
           ],
           "kind": "OBJECT",
@@ -2034,14 +2037,14 @@
           "namespacedName": "CategoryTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": null
+          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`."
         },
         {
           "name": "CustomPostEnumString",
           "namespacedName": "CustomPostEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": null
+          "description": "Custom post types (available for querying via the API), with possible values: `\"page\"`, `\"post\"`, `\"dummy-cpt\"`."
         },
         {
           "name": "Date",
@@ -2118,7 +2121,7 @@
           "namespacedName": "TagTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": null
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"post_tag\"`, `\"dummy-tag\"`."
         },
         {
           "name": "URL",

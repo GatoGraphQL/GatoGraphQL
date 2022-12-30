@@ -13244,6 +13244,26 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "possibleValues",
+              "description": "Enum-like \"possible values\" for EnumString type resolvers, `null` otherwise",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -14274,7 +14294,7 @@
         {
           "kind": "SCALAR",
           "name": "CategoryTaxonomyEnumString",
-          "description": null,
+          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -14284,7 +14304,7 @@
         {
           "kind": "SCALAR",
           "name": "CustomPostEnumString",
-          "description": null,
+          "description": "Custom post types (available for querying via the API), with possible values: `\"page\"`, `\"post\"`, `\"dummy-cpt\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -14394,7 +14414,7 @@
         {
           "kind": "SCALAR",
           "name": "TagTaxonomyEnumString",
-          "description": null,
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"post_tag\"`, `\"dummy-tag\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
