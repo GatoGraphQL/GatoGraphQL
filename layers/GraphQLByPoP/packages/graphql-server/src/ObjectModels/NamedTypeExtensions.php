@@ -19,6 +19,8 @@ class NamedTypeExtensions extends AbstractSchemaDefinitionReferenceObject
     }
 
     /**
+     * Enum-like "possible values" for EnumString type resolvers, `null` otherwise
+     *
      * @return string[]|null
      */
     public function getTypePossibleValues(): ?array

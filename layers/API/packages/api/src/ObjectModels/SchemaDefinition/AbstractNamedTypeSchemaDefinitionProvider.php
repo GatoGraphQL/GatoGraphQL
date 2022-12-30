@@ -30,7 +30,7 @@ abstract class AbstractNamedTypeSchemaDefinitionProvider extends AbstractTypeSch
         ];
 
         /**
-         * Enum-like "possible values": only for EnumString type resolvers
+         * Enum-like "possible values" for EnumString type resolvers, `null` otherwise
          */
         if ($this->typeResolver instanceof EnumStringScalarTypeResolverInterface) {
             /** @var EnumStringScalarTypeResolverInterface */
