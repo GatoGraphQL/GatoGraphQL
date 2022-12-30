@@ -50,4 +50,5 @@ class SchemaDefinition
     public final const DIRECTIVE_NEEDS_DATA_TO_EXECUTE = 'needsDataToExecute';
     public final const DIRECTIVE_LIMITED_TO_FIELDS = 'limitedToFields';
     public final const SCHEMA_IS_NAMESPACED = 'isSchemaNamespaced';
+    public final const POSSIBLE_VALUES = 'possibleValues';
 }

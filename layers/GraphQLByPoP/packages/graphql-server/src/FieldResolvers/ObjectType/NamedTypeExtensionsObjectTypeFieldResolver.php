@@ -46,6 +46,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         return [
             'elementName',
             'namespacedName',
+            'possibleValues',
         ];
     }
 
@@ -55,6 +56,8 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
             'elementName',
             'namespacedName'
                 => SchemaTypeModifiers::NON_NULLABLE,
+            'possibleValues',
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -65,6 +68,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         return match ($fieldName) {
             'elementName' => $this->__('The type\'s non-namespaced name', 'graphql-server'),
             'namespacedName' => $this->__('The type\'s namespaced name', 'graphql-server'),
+            'possibleValues' => $this->__('Enum-like "possible values" for EnumString type resolvers, `null` otherwise', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -80,6 +84,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         return match ($fieldDataAccessor->getFieldName()) {
             'elementName' => $namedTypeExtensions->getTypeElementName(),
             'namespacedName' => $namedTypeExtensions->getTypeNamespacedName(),
+            'possibleValues' => $namedTypeExtensions->getTypePossibleValues(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
@@ -88,7 +93,8 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         return match ($fieldName) {
             'elementName',
-            'namespacedName'
+            'namespacedName',
+            'possibleValues'
                 => $this->getStringScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

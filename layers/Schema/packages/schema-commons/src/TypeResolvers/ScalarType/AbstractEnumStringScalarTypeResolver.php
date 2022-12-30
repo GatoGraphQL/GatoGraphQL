@@ -25,7 +25,7 @@ use stdClass;
  * For whenever the option values may not satisfy these constraints,
  * this type can be used instead
  */
-abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeResolver
+abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeResolver implements EnumStringScalarTypeResolverInterface
 {
     /** @var string[]|null */
     protected ?array $consolidatedPossibleValuesCache = null;
@@ -67,7 +67,7 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
     }
 
     /**
-     * Consolidation of the schema directive arguments. Call this function to read the data
+     * Consolidation of the possible values. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      *
      * @return string[]
@@ -88,11 +88,6 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
         );
         return $this->consolidatedPossibleValuesCache;
     }
-
-    /**
-     * @return string[]
-     */
-    abstract public function getPossibleValues(): array;
 
     public function getTypeDescription(): string
     {
