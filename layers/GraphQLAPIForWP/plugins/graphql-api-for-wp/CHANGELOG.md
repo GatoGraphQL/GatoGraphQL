@@ -181,6 +181,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Support for the new "Specified By URL" meta property
 - Support for custom enum types
   - Implementation of several enum types
+- Support for "enum string" types
+  - Implementation of several "enum string" types
 - Support for input objects
   - Implementation of several input object types
 - Support for oneof input objects
