@@ -22,4 +22,12 @@ interface EnumStringScalarTypeResolverInterface
      * @return string[]
      */
     public function getPossibleValues(): array;
+
+    /**
+     * Consolidation of the possible values. Call this function to read the data
+     * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return string[]
+     */
+    public function getConsolidatedPossibleValues(): array;
 }

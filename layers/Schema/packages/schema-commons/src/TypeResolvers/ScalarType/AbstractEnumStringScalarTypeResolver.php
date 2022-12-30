@@ -67,7 +67,7 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
     }
 
     /**
-     * Consolidation of the schema directive arguments. Call this function to read the data
+     * Consolidation of the possible values. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      *
      * @return string[]
