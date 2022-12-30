@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
 use PoPAPI\API\Schema\SchemaDefinition;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
 
 abstract class AbstractNamedTypeSchemaDefinitionProvider extends AbstractTypeSchemaDefinitionProvider
 {
@@ -23,9 +24,20 @@ abstract class AbstractNamedTypeSchemaDefinitionProvider extends AbstractTypeSch
      */
     protected function getNamedTypeExtensions(): array
     {
-        return [
+        $namedTypeExtensions = [
             SchemaDefinition::NAMESPACED_NAME => $this->typeResolver->getNamespacedTypeName(),
             SchemaDefinition::ELEMENT_NAME => $this->typeResolver->getTypeName(),
         ];
+
+        /**
+         * Enum-like "possible values": only for EnumString type resolvers
+         */
+        if ($this->typeResolver instanceof AbstractEnumStringScalarTypeResolver) {
+            /** @var AbstractEnumStringScalarTypeResolver */
+            $enumStringScalarTypeResolver = $this->typeResolver;
+            $namedTypeExtensions[SchemaDefinition::POSSIBLE_VALUES] = $enumStringScalarTypeResolver->getConsolidatedPossibleValues();
+        }
+
+        return $namedTypeExtensions;
     }
 }

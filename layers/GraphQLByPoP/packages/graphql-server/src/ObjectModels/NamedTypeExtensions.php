@@ -17,4 +17,12 @@ class NamedTypeExtensions extends AbstractSchemaDefinitionReferenceObject
     {
         return $this->schemaDefinition[SchemaDefinition::NAMESPACED_NAME];
     }
+
+    /**
+     * @return string[]|null
+     */
+    public function getTypePossibleValues(): ?array
+    {
+        return $this->schemaDefinition[SchemaDefinition::POSSIBLE_VALUES] ?? null;
+    }
 }
