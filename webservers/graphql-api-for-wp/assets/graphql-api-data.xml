@@ -1294,10 +1294,10 @@ video/mp4
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 										<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
+			<category domain="post_format" nicename="post-format-aside"><![CDATA[Aside]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-			<category domain="post_format" nicename="post-format-aside"><![CDATA[Aside]]></category>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
