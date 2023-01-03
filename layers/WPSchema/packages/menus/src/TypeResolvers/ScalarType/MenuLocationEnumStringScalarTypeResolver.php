@@ -26,8 +26,6 @@ class MenuLocationEnumStringScalarTypeResolver extends AbstractEnumStringScalarT
      */
     public function getPossibleValues(): array
     {
-        $menuLocations = array_keys(\get_registered_nav_menus());
-        sort($menuLocations);
-        return $menuLocations;
+        return array_keys(\get_registered_nav_menus());
     }
 }
