@@ -6,12 +6,12 @@
                 "title": "Hello world!"
             },
             {
-                "id": 28,
-                "title": "HTTP caching improves performance"
+                "id": 13,
+                "title": "Released v0.6, check it out"
             },
             {
-                "id": 25,
-                "title": "Public or Private API mode, for extra security"
+                "id": 16,
+                "title": "Working on flat chain syntax next"
             }
         ]
     }
