@@ -32,11 +32,11 @@
         "path": [
           "\"dummy-tag\"",
           "(taxonomy: \"dummy-tag\")",
-          "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 24}) { ... }",
+          "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 27}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 24}) { ... }",
+        "field": "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 27}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
