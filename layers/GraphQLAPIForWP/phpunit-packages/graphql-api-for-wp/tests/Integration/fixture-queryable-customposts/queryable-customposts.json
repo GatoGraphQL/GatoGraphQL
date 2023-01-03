@@ -12,11 +12,11 @@
         "path": [
           "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}",
           "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]})",
-          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {order: ASC}) { ... }",
+          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {order: ASC}) { ... }",
+        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 12}, sort: {by: ID, order: ASC}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
@@ -24,7 +24,7 @@
       "message": "Value 'dummy-cpt' for type 'CustomPostEnumString' is not valid (the only valid values are: 'attachment', 'custom_css', 'nav_menu_item', 'post', 'revision')",
       "locations": [
         {
-          "line": 32,
+          "line": 33,
           "column": 12
         }
       ],

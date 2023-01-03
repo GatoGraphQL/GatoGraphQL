@@ -4,7 +4,7 @@
       "message": "Value 'dummy-cpt' for type 'CustomPostEnumString' is not valid (the only valid values are: 'attachment', 'custom_css', 'nav_menu_item', 'page', 'post', 'revision')",
       "locations": [
         {
-          "line": 32,
+          "line": 33,
           "column": 12
         }
       ],
