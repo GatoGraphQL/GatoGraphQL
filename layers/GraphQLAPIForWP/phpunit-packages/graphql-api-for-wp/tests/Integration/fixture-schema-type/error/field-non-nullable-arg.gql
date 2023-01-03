@@ -2,7 +2,7 @@
 # dateStr(format:) cannot be null
 ################################################
 query {
-  posts(pagination: { limit: 3 }) {
+  posts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
     id
     dateStr(format: null)
   }
