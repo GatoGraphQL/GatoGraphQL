@@ -57,9 +57,15 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
     {
         return <<<GRAPHQL
             query MyQuery(\$limit: Int = 3) {
-                posts(pagination: {
-                    limit: \$limit
-                }) {
+                posts(
+                    pagination: {
+                        limit: \$limit
+                    }
+                    sort: {
+                        by: ID
+                        order: ASC
+                    }
+                ) {
                     date
                     excerpt
                     slug
