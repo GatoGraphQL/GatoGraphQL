@@ -38,7 +38,7 @@
 
   customPostsByTagIDs: customPosts(
     filter: {
-      tagIDs: [17, 24]
+      tagIDs: [20, 27]
       tagTaxonomy: "dummy-tag"
     }
     pagination: {
