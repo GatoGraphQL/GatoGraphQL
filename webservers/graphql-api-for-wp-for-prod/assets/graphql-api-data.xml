@@ -743,28 +743,8 @@
 		<dc:creator><![CDATA[subscriber]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=13</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:heading -->
-<h2>Heading Block (H2)</h2>
-<!-- /wp:heading -->
-
-<!-- wp:heading -->
-<h3>You are looking at one. (H3)</h3>
-<!-- /wp:heading -->
-
-<!-- wp:heading -->
-<h2>Subhead Block</h2>
-<!-- /wp:heading -->
-
-<!-- wp:subhead -->
-<p class="wp-block-subhead">This is a Subhead</p>
-<!-- /wp:subhead -->
-
-<!-- wp:heading -->
-<h2>Paragraph Block</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>This is a paragraph block.Â Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
