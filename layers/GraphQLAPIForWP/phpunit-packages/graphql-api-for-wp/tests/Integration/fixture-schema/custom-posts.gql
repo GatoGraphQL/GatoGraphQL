@@ -58,7 +58,7 @@ query {
       title
     }
   }
-  customPostsByDateQuery: customPosts(filter: { dateQuery: { after: "2022-01-01" } }, sort: { by: ID, order: ASC }) {
+  customPostsByDateQuery: customPosts(filter: { dateQuery: { before: "2020-04-20" } }, sort: { by: ID, order: ASC }) {
     __typename
     ...on IsCustomPost {
       id
