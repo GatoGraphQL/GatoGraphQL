@@ -598,10 +598,6 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Our privacy policy is at https://graphql-api.lndo.site/privacy/, and we are based in Carimano.</p>
 <!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1</wp:post_id>
@@ -868,10 +864,6 @@
 		<content:encoded><![CDATA[<!-- wp:gallery {"linkTo":"none","className":"alignnone"} -->
 <figure class="wp-block-gallery columns-3 is-cropped alignnone"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/zd7Ehu+" alt="" data-id="1706" class="wp-image-1706"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/jXLtzZ+" alt="" data-id="1705" class="wp-image-1705"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/VhP9ud+" alt="" data-id="1704" class="wp-image-1704"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/HB0qXg+" alt="" data-id="1703" class="wp-image-1703"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/5cHfcd+" alt="" data-id="1699" class="wp-image-1699"/></figure></li></ul></figure>
 <!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>Our privacy policy is at https://graphql-api.lndo.site/privacy/, and we are based in Carimano.</p>
-<!-- /wp:paragraph -->
 
 <!-- wp:heading -->
 <h2>List Block</h2>
