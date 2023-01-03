@@ -257,6 +257,14 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             }
         }
 
+        // Sort possibleValues for each "Enum String" Type
+        /** @var string $typeName */
+        foreach (array_keys($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::SCALAR] ?? []) as $typeName) {
+            if (isset($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::SCALAR][$typeName][SchemaDefinition::POSSIBLE_VALUES])) {
+                ksort($schemaDefinition[SchemaDefinition::TYPES][TypeKinds::SCALAR][$typeName][SchemaDefinition::POSSIBLE_VALUES]);
+            }
+        }
+
         // Sort directives
         if (isset($schemaDefinition[SchemaDefinition::DIRECTIVES])) {
             ksort($schemaDefinition[SchemaDefinition::DIRECTIVES]);
