@@ -68,11 +68,11 @@
                         "id": 2
                     }
                 ],
-                "content": "<h2>Heading Block (H2)<\/h2>\n<h3>You are looking at one. (H3)<\/h3>\n<h2>Subhead Block<\/h2>\n<p class=\"wp-block-subhead\">This is a Subhead<\/p>\n<h2>Paragraph Block<\/h2>\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<\/p>\n<h2>Image Block (Standard<br \/>\n\t<g class=\"gr_ gr_3 gr-alert gr_spell gr_inline_cards gr_run_anim ContextualSpelling ins-del multiReplace\" id=\"3\" data-gr-id=\"3\">width<\/g>)<\/h2>\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
+                "content": "<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<\/p>\n<h2>Image Block (Standard<br \/>\n\t<g class=\"gr_ gr_3 gr-alert gr_spell gr_inline_cards gr_run_anim ContextualSpelling ins-del multiReplace\" id=\"3\" data-gr-id=\"3\">width<\/g>)<\/h2>\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
                 "customPostType": "post",
                 "date": "2020-12-12T03:56:13+00:00",
                 "dateStr": "December 12, 2020",
-                "excerpt": "Heading Block (H2) You are looking at one. (H3) Subhead Block Paragraph Block This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual&hellip;",
+                "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard width)",
                 "featuredImage": {
                     "id": 361,
                     "src": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
@@ -82,7 +82,7 @@
                 "id": 13,
                 "isStatus": false,
                 "metaValue": "361",
-                "rawContent": "Heading Block (H2)\nYou are looking at one. (H3)\nSubhead Block\nThis is a Subhead\nParagraph Block\nThis is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.\nImage Block (Standard\n\twidth)\n\n",
+                "rawContent": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.\nImage Block (Standard\n\twidth)\n\n",
                 "slug": "released-v0-6-check-it-out",
                 "status": "publish",
                 "title": "Released v0.6, check it out",
