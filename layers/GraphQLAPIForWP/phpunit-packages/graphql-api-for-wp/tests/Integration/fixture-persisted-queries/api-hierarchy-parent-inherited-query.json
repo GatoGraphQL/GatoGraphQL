@@ -4,12 +4,12 @@
             "name": "Blogger Davenport",
             "posts": [
                 {
-                    "id": 1,
-                    "title": "Hello world!"
-                },
-                {
                     "id": 25,
                     "title": "Public or Private API mode, for extra security"
+                },
+                {
+                    "id": 23,
+                    "title": "GraphQL or REST? Why not both?"
                 }
             ]
         }
