@@ -18,6 +18,7 @@
       limit: 12
     }
     sort: {
+      by: ID
       order: ASC
     }
   ) {
