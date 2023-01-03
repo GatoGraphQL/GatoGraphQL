@@ -12,13 +12,13 @@
         "path": [
           "@skip",
           "id @skip",
-          "posts(pagination: {limit: 3}) { ... }",
+          "posts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Post",
         "field": "id @skip",
         "code": "gql@5.4.2.1[c]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
       }
     },
     {
@@ -33,13 +33,13 @@
         "path": [
           "@include",
           "id @include",
-          "customPosts(pagination: {limit: 3}) { ... }",
+          "customPosts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "CustomPostUnion",
         "field": "id @include",
         "code": "gql@5.4.2.1[c]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
       }
     }
   ],

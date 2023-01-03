@@ -11,13 +11,13 @@
       "extensions": {
         "path": [
           "_implements",
-          "posts(pagination: {limit: 3}) { ... }",
+          "posts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Post",
         "field": "_implements",
         "code": "gql@5.4.2.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
       }
     },
     {
@@ -31,13 +31,13 @@
       "extensions": {
         "path": [
           "_isObjectType",
-          "customPosts(pagination: {limit: 3}) { ... }",
+          "customPosts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Post",
         "field": "_isObjectType",
         "code": "gql@5.4.2.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
       }
     },
     {
@@ -51,13 +51,13 @@
       "extensions": {
         "path": [
           "_isObjectType",
-          "customPosts(pagination: {limit: 3}) { ... }",
+          "customPosts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Page",
         "field": "_isObjectType",
         "code": "gql@5.4.2.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
       }
     }
   ],

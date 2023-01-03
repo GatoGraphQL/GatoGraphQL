@@ -12,7 +12,7 @@
         "path": [
           "(type: \"DoesntMatter\")",
           "_implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
-          "posts(pagination: {limit: 3}) { ... }",
+          "posts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Post",
@@ -33,7 +33,7 @@
         "path": [
           "(interface: \"DoesntMatter\")",
           "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
-          "customPosts(pagination: {limit: 3}) { ... }",
+          "customPosts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Post",
@@ -54,7 +54,7 @@
         "path": [
           "(interface: \"DoesntMatter\")",
           "_isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
-          "customPosts(pagination: {limit: 3}) { ... }",
+          "customPosts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Page",
