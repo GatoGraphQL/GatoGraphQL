@@ -169,58 +169,23 @@
                 "__typename": "Page",
                 "id": 2,
                 "title": "Sample Page"
+            },
+            {
+                "__typename": "Page",
+                "id": 666,
+                "title": "Another Page"
             }
         ],
         "customPostsByDateQuery": [
             {
-                "__typename": "GenericCustomPost",
-                "id": 613,
-                "title": "Dolor facilis repellat pariatur veniam at"
+                "__typename": "Post",
+                "id": 1,
+                "title": "Hello world!"
             },
             {
-                "__typename": "GenericCustomPost",
-                "id": 616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 619,
-                "title": "Error debitis nulla vel est"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 620,
-                "title": "Dignissimos sed dolore aut"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 622,
-                "title": "Dolore ex et deleniti mollitia"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 627,
-                "title": "Quis voluptatum tempore veniam est sit"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 629,
-                "title": "Qui ea incidunt qui"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 630,
-                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 631,
-                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi"
+                "__typename": "Page",
+                "id": 2,
+                "title": "Sample Page"
             }
         ],
         "customPostsByExcludeAuthorIDs": [
@@ -414,14 +379,14 @@
                 "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus"
             },
             {
-                "__typename": "GenericCustomPost",
-                "id": 616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
+                "__typename": "Page",
+                "id": 666,
+                "title": "Another Page"
             },
             {
                 "__typename": "GenericCustomPost",
-                "id": 630,
-                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
             }
         ],
         "customPostsSortedDESC": [
