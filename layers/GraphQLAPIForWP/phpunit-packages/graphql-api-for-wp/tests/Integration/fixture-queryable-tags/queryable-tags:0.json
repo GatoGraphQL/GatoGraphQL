@@ -32,11 +32,11 @@
         "path": [
           "post_format",
           "(taxonomy: post_format)",
-          "postFormat: tag(taxonomy: post_format, by: {id: 32}) { ... }",
+          "postFormat: tag(taxonomy: post_format, by: {id: 16}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "postFormat: tag(taxonomy: post_format, by: {id: 32}) { ... }",
+        "field": "postFormat: tag(taxonomy: post_format, by: {id: 16}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
@@ -149,38 +149,38 @@
     "dummyTags": [
       {
         "__typename": "GenericTag",
-        "id": 19,
+        "id": 22,
         "name": "Tango"
       },
       {
         "__typename": "GenericTag",
-        "id": 22,
+        "id": 25,
         "name": "Rock"
       },
       {
         "__typename": "GenericTag",
-        "id": 18,
+        "id": 21,
         "name": "Jazz"
       },
       {
         "__typename": "GenericTag",
-        "id": 20,
+        "id": 23,
         "name": "Hip Hop"
       },
       {
         "__typename": "GenericTag",
-        "id": 17,
+        "id": 20,
         "name": "Heavy metal"
       },
       {
         "__typename": "GenericTag",
-        "id": 24,
+        "id": 27,
         "name": "Classical"
       }
     ],
     "dummyTag": {
       "__typename": "GenericTag",
-      "id": 24,
+      "id": 27,
       "name": "Classical"
     },
     "dummyTagCount": 6,
