@@ -12,8 +12,8 @@
                 "comments": [],
                 "content": "\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n",
                 "customPostType": "post",
-                "date": "2022-04-17T13:06:58+00:00",
-                "dateStr": "April 17, 2022",
+                "date": "2020-04-17T13:06:58+00:00",
+                "dateStr": "April 17, 2020",
                 "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
                 "featuredImage": null,
                 "hasComments": false,
@@ -39,8 +39,8 @@
                 "comments": [],
                 "content": "<p>This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n<blockquote class=\"wp-block-quote\">\n<p>Hi there! I&#8217;m a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin&#8217; caught in the rain.)<\/p>\n<\/blockquote>\n<p>&#8230;or something like this:<\/p>\n<blockquote class=\"wp-block-quote\">\n<p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p>\n<\/blockquote>\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/graphql-api.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n",
                 "customPostType": "page",
-                "date": "2022-04-17T13:06:58+00:00",
-                "dateStr": "April 17, 2022",
+                "date": "2020-04-17T13:06:58+00:00",
+                "dateStr": "April 17, 2020",
                 "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip;",
                 "featuredImage": null,
                 "hasComments": false,
@@ -173,16 +173,6 @@
         ],
         "customPostsByDateQuery": [
             {
-                "__typename": "Post",
-                "id": 1,
-                "title": "Hello world!"
-            },
-            {
-                "__typename": "Page",
-                "id": 2,
-                "title": "Sample Page"
-            },
-            {
                 "__typename": "GenericCustomPost",
                 "id": 613,
                 "title": "Dolor facilis repellat pariatur veniam at"
@@ -221,6 +211,16 @@
                 "__typename": "GenericCustomPost",
                 "id": 630,
                 "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi"
             }
         ],
         "customPostsByExcludeAuthorIDs": [

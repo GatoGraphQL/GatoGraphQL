@@ -24,6 +24,20 @@
   "data": {
     "customPosts": [
       {
+        "id": 1,
+        "title": "Hello world!",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 2,
+        "title": "Sample Page",
+        "customPostType": "page",
+        "status": "publish",
+        "__typename": "Page"
+      },
+      {
         "id": 13,
         "title": "Released v0.6, check it out",
         "customPostType": "post",
@@ -71,20 +85,6 @@
         "customPostType": "post",
         "status": "publish",
         "__typename": "Post"
-      },
-      {
-        "id": 1,
-        "title": "Hello world!",
-        "customPostType": "post",
-        "status": "publish",
-        "__typename": "Post"
-      },
-      {
-        "id": 2,
-        "title": "Sample Page",
-        "customPostType": "page",
-        "status": "publish",
-        "__typename": "Page"
       },
       {
         "id": 361,
