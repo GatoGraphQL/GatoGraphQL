@@ -225,7 +225,7 @@
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=65</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  posts(pagination: {\n    limit: $limit\n  }) {\n    date\n    excerpt\n    slug\n    title\n    tags {\n      name\n    }\n    author {\n      displayName\n      slug\n      id\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  posts(\n    pagination: { limit: $limit },\n    sort: { by: ID, order: ASC }\n  ) {\n    date\n    excerpt\n    slug\n    title\n    tags {\n      name\n    }\n    author {\n      displayName\n      slug\n      id\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":193} /-->
 
@@ -598,10 +598,6 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Our privacy policy is at https://graphql-api.lndo.site/privacy/, and we are based in Carimano.</p>
 <!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1</wp:post_id>
@@ -868,10 +864,6 @@
 		<content:encoded><![CDATA[<!-- wp:gallery {"linkTo":"none","className":"alignnone"} -->
 <figure class="wp-block-gallery columns-3 is-cropped alignnone"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/zd7Ehu+" alt="" data-id="1706" class="wp-image-1706"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/jXLtzZ+" alt="" data-id="1705" class="wp-image-1705"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/VhP9ud+" alt="" data-id="1704" class="wp-image-1704"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/HB0qXg+" alt="" data-id="1703" class="wp-image-1703"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/5cHfcd+" alt="" data-id="1699" class="wp-image-1699"/></figure></li></ul></figure>
 <!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>Our privacy policy is at https://graphql-api.lndo.site/privacy/, and we are based in Carimano.</p>
-<!-- /wp:paragraph -->
 
 <!-- wp:heading -->
 <h2>List Block</h2>

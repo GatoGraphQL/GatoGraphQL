@@ -13,13 +13,13 @@
                     "null",
                     "(format: null)",
                     "dateStr(format: null)",
-                    "posts(pagination: {limit: 3}) { ... }",
+                    "posts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
                     "query { ... }"
                 ],
                 "type": "Post",
                 "field": "dateStr(format: null)",
                 "code": "gql@5.4.2.1[b]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
             }
         }
     ],
@@ -30,11 +30,11 @@
                 "dateStr": null
             },
             {
-                "id": 28,
+                "id": 13,
                 "dateStr": null
             },
             {
-                "id": 25,
+                "id": 16,
                 "dateStr": null
             }
         ]

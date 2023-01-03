@@ -4,7 +4,7 @@
 # it will inject `null`, and the validation must kick in
 ################################################
 query ($missingFormat: String) {
-  posts(pagination: { limit: 3 }) {
+  posts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
     id
     dateStr(format: $missingFormat)
   }

@@ -1,5 +1,5 @@
 query {
-  pages(pagination: { limit: 3 }) {
+  pages(pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
     areCommentsOpen
     author {
       id
