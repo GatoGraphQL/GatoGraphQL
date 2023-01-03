@@ -103,7 +103,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                         },
                         {
                             "date": "2020-12-12T03:56:13+00:00",
-                            "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual&hellip; <a class=\"more-link\" href=\"https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/\">Continue reading <span class=\"screen-reader-text\">HTTP caching improves performance<\/span><\/a>",
+                            "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard width)",
                             "slug": "released-v0-6-check-it-out",
                             "title": "Released v0.6, check it out",
                             "tags": [
@@ -171,7 +171,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                         },
                         {
                             "date": "2020-12-12T03:56:13+00:00",
-                            "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual&hellip; <a class=\"more-link\" href=\"https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/\">Continue reading <span class=\"screen-reader-text\">HTTP caching improves performance<\/span><\/a>",
+                            "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard width)",
                             "slug": "released-v0-6-check-it-out",
                             "title": "Released v0.6, check it out",
                             "tags": [
