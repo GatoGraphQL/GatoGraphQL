@@ -100,7 +100,7 @@ query {
     id
     title
   }
-  postsByTagIDs: posts(filter: { tagIDs: [5, 6] }) {
+  postsByTagIDs: posts(filter: { tagIDs: [6, 7] }) {
     id
     title
   }
