@@ -2044,7 +2044,7 @@
           "namespacedName": "CustomPostEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Custom post types (available for querying via the API), with possible values: `\"page\"`, `\"post\"`, `\"dummy-cpt\"`."
+          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"page\"`, `\"post\"`."
         },
         {
           "name": "Date",
@@ -2100,7 +2100,7 @@
           "namespacedName": "MenuLocationEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Menu Locations, with possible values: `\"primary\"`, `\"footer\"`."
+          "description": "Menu Locations, with possible values: `\"footer\"`, `\"primary\"`."
         },
         {
           "name": "Numeric",
@@ -2121,7 +2121,7 @@
           "namespacedName": "TagTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"post_tag\"`, `\"dummy-tag\"`."
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"post_tag\"`."
         },
         {
           "name": "URL",
