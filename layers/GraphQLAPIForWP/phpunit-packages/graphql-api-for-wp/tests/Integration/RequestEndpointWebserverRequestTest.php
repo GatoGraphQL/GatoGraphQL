@@ -90,7 +90,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                 "data": {
                     "posts": [
                         {
-                            "date": "2022-04-17T13:06:58+00:00",
+                            "date": "2020-04-17T13:06:58+00:00",
                             "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
                             "slug": "hello-world",
                             "title": "Hello world!",
@@ -102,34 +102,47 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                             }
                         },
                         {
-                            "date": "2020-12-12T04:08:47+00:00",
-                            "excerpt": "Categories Block Latest Posts Block",
-                            "slug": "http-caching-improves-performance",
-                            "title": "HTTP caching improves performance",
-                            "tags": [],
+                            "date": "2020-12-12T03:56:13+00:00",
+                            "excerpt": "Heading Block (H2) You are looking at one. (H3) Subhead Block Paragraph Block This is a paragraph block.\u00c2 Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual&hellip; <a class=\"more-link\" href=\"https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/\">Continue reading <span class=\"screen-reader-text\">HTTP caching improves performance<\/span><\/a>",
+                            "slug": "released-v0-6-check-it-out",
+                            "title": "Released v0.6, check it out",
+                            "tags": [
+                                {
+                                    "name": "release"
+                                },
+                                {
+                                    "name": "plugin"
+                                }
+                            ],
                             "author": {
-                                "displayName": "Author Marquez",
-                                "slug": "author",
-                                "id": 5
+                                "displayName": "Subscriber Bennett",
+                                "slug": "subscriber",
+                                "id": 3
                             }
                         },
                         {
-                            "date": "2020-12-12T04:06:52+00:00",
-                            "excerpt": "Verse Block Write poetry and other literary expressions honoring all spaces and line-breaks. Table Block Row 1 Column 1 Row 1 Column 2 Row 2 Column 1 Row 2 Column 2 Row 3 Column 1 Row 3 Column 2 Separator Block Spacer Block",
-                            "slug": "public-or-private-api-mode-for-extra-security",
-                            "title": "Public or Private API mode, for extra security",
+                            "date": "2020-12-12T03:59:07+00:00",
+                            "excerpt": "Image Block (Wide width) Image Block (Full width) Cover Image Block Gallery Block",
+                            "slug": "working-on-flat-chain-syntax-next",
+                            "title": "Working on flat chain syntax next",
                             "tags": [
                                 {
-                                    "name": "security"
+                                    "name": "wordpress"
+                                },
+                                {
+                                    "name": "plugin"
+                                },
+                                {
+                                    "name": "graphql"
                                 },
                                 {
                                     "name": "features"
                                 }
                             ],
                             "author": {
-                                "displayName": "Blogger Davenport",
-                                "slug": "blogger",
-                                "id": 2
+                                "displayName": "Contributor Johnson",
+                                "slug": "contributor",
+                                "id": 4
                             }
                         }
                     ]
@@ -145,7 +158,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                 "data": {
                     "posts": [
                         {
-                            "date": "2022-04-17T13:06:58+00:00",
+                            "date": "2020-04-17T13:06:58+00:00",
                             "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
                             "slug": "hello-world",
                             "title": "Hello world!",
@@ -157,15 +170,22 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                             }
                         },
                         {
-                            "date": "2020-12-12T04:08:47+00:00",
-                            "excerpt": "Categories Block Latest Posts Block",
-                            "slug": "http-caching-improves-performance",
-                            "title": "HTTP caching improves performance",
-                            "tags": [],
+                            "date": "2020-12-12T03:56:13+00:00",
+                            "excerpt": "Heading Block (H2) You are looking at one. (H3) Subhead Block Paragraph Block This is a paragraph block.\u00c2 Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual&hellip; <a class=\"more-link\" href=\"https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/\">Continue reading <span class=\"screen-reader-text\">HTTP caching improves performance<\/span><\/a>",
+                            "slug": "released-v0-6-check-it-out",
+                            "title": "Released v0.6, check it out",
+                            "tags": [
+                                {
+                                    "name": "release"
+                                },
+                                {
+                                    "name": "plugin"
+                                }
+                            ],
                             "author": {
-                                "displayName": "Author Marquez",
-                                "slug": "author",
-                                "id": 5
+                                "displayName": "Subscriber Bennett",
+                                "slug": "subscriber",
+                                "id": 3
                             }
                         }
                     ]
