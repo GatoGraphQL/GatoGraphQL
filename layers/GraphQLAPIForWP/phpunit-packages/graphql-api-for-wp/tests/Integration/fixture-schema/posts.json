@@ -137,7 +137,7 @@
                 "isStatus": false,
                 "isSticky": false,
                 "metaValue": "362",
-                "postFormat": "standard",
+                "postFormat": "chat",
                 "rawContent": "Verse Block\nWrite poetry and other literary expressions honoring all spaces and line-breaks.\nTable Block\n\n\n\n\nRow 1 Column 1\nRow 1 Column 2\n\n\nRow 2 Column 1\nRow 2 Column 2\n\n\nRow 3 Column 1\nRow 3 Column 2\n\n\n\n\nSeparator Block\n\nSpacer Block\n\n",
                 "slug": "public-or-private-api-mode-for-extra-security",
                 "status": "publish",
@@ -301,8 +301,20 @@
         "postsByStatus": [],
         "postsByTagIDs": [
             {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
                 "id": 21,
                 "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
             }
         ],
         "postsByTagSlugs": [

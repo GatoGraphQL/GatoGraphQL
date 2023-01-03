@@ -153,24 +153,24 @@
     "postFormats": [
       {
         "__typename": "GenericTag",
-        "id": 34,
-        "name": "Quote"
-      },
-      {
-        "__typename": "GenericTag",
-        "id": 33,
+        "id": 17,
         "name": "Link"
       },
       {
         "__typename": "GenericTag",
-        "id": 32,
+        "id": 16,
+        "name": "Chat"
+      },
+      {
+        "__typename": "GenericTag",
+        "id": 15,
         "name": "Aside"
       }
     ],
     "postFormat": {
       "__typename": "GenericTag",
-      "id": 32,
-      "name": "Aside"
+      "id": 16,
+      "name": "Chat"
     },
     "postFormatCount": 3,
     "postFormatNames": [
