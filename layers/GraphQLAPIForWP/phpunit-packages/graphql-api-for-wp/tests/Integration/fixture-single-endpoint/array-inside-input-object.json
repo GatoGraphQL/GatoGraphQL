@@ -2,12 +2,12 @@
     "data": {
         "posts": [
             {
-                "id": 1,
-                "title": "Hello world!"
-            },
-            {
                 "id": 28,
                 "title": "HTTP caching improves performance"
+            },
+            {
+                "id": 1,
+                "title": "Hello world!"
             }
         ]
     }
