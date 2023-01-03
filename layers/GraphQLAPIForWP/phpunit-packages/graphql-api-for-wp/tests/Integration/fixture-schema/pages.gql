@@ -52,7 +52,7 @@ query {
     id
     title
   }
-  pagesByDateQuery: pages(filter: { dateQuery: { after: "2022-01-01" } }) {
+  pagesByDateQuery: pages(filter: { dateQuery: { before: "2020-04-20" } }) {
     id
     title
   }

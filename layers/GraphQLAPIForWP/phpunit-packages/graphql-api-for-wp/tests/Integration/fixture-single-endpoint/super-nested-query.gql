@@ -1,21 +1,21 @@
 query {
-  posts(pagination: { limit: 10 }) {
+  posts(pagination: { limit: 10 }, sort: { by: ID, order: ASC }) {
     excerpt
     title
     author {
       name
-      posts(pagination: { limit: 10 }) {
+      posts(pagination: { limit: 10 }, sort: { by: ID, order: ASC }) {
         title
         tags(pagination: { limit: 10 }) {
           slug
-          posts(pagination: { limit: 10 }) {
+          posts(pagination: { limit: 10 }, sort: { by: ID, order: ASC }) {
             title
             comments(pagination: { limit: 10 }) {
               content
               date
               author {
                 name
-                posts(pagination: { limit: 10 }) {
+                posts(pagination: { limit: 10 }, sort: { by: ID, order: ASC }) {
                   title
                   comments(pagination: { limit: 10 }) {
                     content

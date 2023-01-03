@@ -976,19 +976,6 @@
             },
             {
                 "__typename": "Post",
-                "id": 1,
-                "title": "Hello world!",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 1,
-                        "name": "Uncategorized"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
                 "id": 28,
                 "title": "HTTP caching improves performance",
                 "customPostType": "post",
@@ -1095,6 +1082,19 @@
                         "__typename": "PostCategory",
                         "id": 3,
                         "name": "Blog"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1,
+                "title": "Hello world!",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 1,
+                        "name": "Uncategorized"
                     }
                 ]
             }

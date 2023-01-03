@@ -4,7 +4,7 @@
       "message": "Value 'dummy-cpt' for type 'CustomPostEnumString' is not valid (the only valid values are: 'attachment', 'custom_css', 'nav_menu_item', 'page', 'post', 'revision')",
       "locations": [
         {
-          "line": 32,
+          "line": 33,
           "column": 12
         }
       ],
@@ -23,6 +23,20 @@
   ],
   "data": {
     "customPosts": [
+      {
+        "id": 1,
+        "title": "Hello world!",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 2,
+        "title": "Sample Page",
+        "customPostType": "page",
+        "status": "publish",
+        "__typename": "Page"
+      },
       {
         "id": 13,
         "title": "Released v0.6, check it out",
@@ -71,20 +85,6 @@
         "customPostType": "post",
         "status": "publish",
         "__typename": "Post"
-      },
-      {
-        "id": 1,
-        "title": "Hello world!",
-        "customPostType": "post",
-        "status": "publish",
-        "__typename": "Post"
-      },
-      {
-        "id": 2,
-        "title": "Sample Page",
-        "customPostType": "page",
-        "status": "publish",
-        "__typename": "Page"
       },
       {
         "id": 361,

@@ -2,7 +2,7 @@ query {
   posts(
     filter: {
       dateQuery: {
-        after: "2021-01-02"
+        before: "2020-04-20"
       }
     }
   ) {

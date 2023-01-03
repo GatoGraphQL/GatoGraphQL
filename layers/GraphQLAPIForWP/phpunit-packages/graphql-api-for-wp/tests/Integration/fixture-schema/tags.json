@@ -1567,13 +1567,6 @@
             },
             {
                 "__typename": "Post",
-                "id": 1,
-                "title": "Hello world!",
-                "customPostType": "post",
-                "tags": []
-            },
-            {
-                "__typename": "Post",
                 "id": 28,
                 "title": "HTTP caching improves performance",
                 "customPostType": "post",
@@ -1695,6 +1688,13 @@
                         "name": "plugin"
                     }
                 ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1,
+                "title": "Hello world!",
+                "customPostType": "post",
+                "tags": []
             }
         ],
         "customPostsByTagIDs": [

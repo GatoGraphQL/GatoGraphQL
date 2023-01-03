@@ -14,10 +14,6 @@
                 "postCount": 4,
                 "posts": [
                     {
-                        "id": 1,
-                        "title": "Hello world!"
-                    },
-                    {
                         "id": 23,
                         "title": "GraphQL or REST? Why not both?"
                     },
@@ -28,6 +24,10 @@
                     {
                         "id": 16,
                         "title": "Working on flat chain syntax next"
+                    },
+                    {
+                        "id": 1,
+                        "title": "Hello world!"
                     }
                 ],
                 "slug": "uncategorized",
@@ -380,15 +380,6 @@
         },
         "postsByCategoryIDs": [
             {
-                "id": 1,
-                "title": "Hello world!",
-                "categories": [
-                    {
-                        "id": 1
-                    }
-                ]
-            },
-            {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security",
                 "categories": [
@@ -439,6 +430,15 @@
             {
                 "id": 16,
                 "title": "Working on flat chain syntax next",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "Hello world!",
                 "categories": [
                     {
                         "id": 1
