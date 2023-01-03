@@ -1387,7 +1387,9 @@ video/mp4
 		<wp:post_type><![CDATA[page]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-			<category domain="post_format" nicename="post-format-link"><![CDATA[Link]]></category>
+			<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
+		<category domain="category" nicename="resource"><![CDATA[Resource]]></category>
+		<category domain="post_format" nicename="post-format-link"><![CDATA[Link]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_page_template]]></wp:meta_key>
 		<wp:meta_value><![CDATA[default]]></wp:meta_value>
