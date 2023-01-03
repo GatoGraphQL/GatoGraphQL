@@ -46,6 +46,13 @@ class QueryableCustomPostsModifyPluginSettingsFixtureEndpointWebserverRequestTes
             $value[] = 'dummy-cpt';
         }
 
+        /**
+         * Sort them as to store the entries in same way as via the UI,
+         * then tests won't fail whether data was added via PHPUnit test or
+         * via user interface
+         */
+        sort($value);
+
         return $value;
     }
 }

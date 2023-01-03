@@ -86,6 +86,11 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
             $this->getPossibleValues(),
             $this,
         );
+
+        if ($this->sortPossibleValues()) {
+            sort($this->consolidatedPossibleValuesCache);
+        }
+
         return $this->consolidatedPossibleValuesCache;
     }
 
@@ -95,5 +100,10 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
             $this->__('Possible values: `"%s"`.', 'schema-commons'),
             implode('"`, `"', $this->getConsolidatedPossibleValues())
         );
+    }
+
+    public function sortPossibleValues(): bool
+    {
+        return true;
     }
 }

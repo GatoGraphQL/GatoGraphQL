@@ -6646,7 +6646,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -7228,7 +7228,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -9034,7 +9034,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -9663,7 +9663,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -14304,7 +14304,7 @@
         {
           "kind": "SCALAR",
           "name": "CustomPostEnumString",
-          "description": "Custom post types (available for querying via the API), with possible values: `\"page\"`, `\"post\"`, `\"dummy-cpt\"`.",
+          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"page\"`, `\"post\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -14384,7 +14384,7 @@
         {
           "kind": "SCALAR",
           "name": "MenuLocationEnumString",
-          "description": "Menu Locations, with possible values: `\"primary\"`, `\"footer\"`.",
+          "description": "Menu Locations, with possible values: `\"footer\"`, `\"primary\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -14414,7 +14414,7 @@
         {
           "kind": "SCALAR",
           "name": "TagTaxonomyEnumString",
-          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"post_tag\"`, `\"dummy-tag\"`.",
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"post_tag\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -17841,7 +17841,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -18231,7 +18231,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -18784,7 +18784,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -18995,7 +18995,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -19162,7 +19162,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -20356,7 +20356,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -20797,7 +20797,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"page\",\"post\",\"dummy-cpt\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",

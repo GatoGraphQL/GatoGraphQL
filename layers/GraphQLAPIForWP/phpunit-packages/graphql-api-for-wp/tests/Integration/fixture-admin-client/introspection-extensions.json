@@ -7339,9 +7339,9 @@
                         "elementName": "CustomPostEnumString",
                         "namespacedName": "CustomPostEnumString",
                         "possibleValues": [
+                            "dummy-cpt",
                             "page",
-                            "post",
-                            "dummy-cpt"
+                            "post"
                         ]
                     },
                     "fields": null,
@@ -7431,8 +7431,8 @@
                         "elementName": "MenuLocationEnumString",
                         "namespacedName": "MenuLocationEnumString",
                         "possibleValues": [
-                            "primary",
-                            "footer"
+                            "footer",
+                            "primary"
                         ]
                     },
                     "fields": null,
@@ -7467,8 +7467,8 @@
                         "elementName": "TagTaxonomyEnumString",
                         "namespacedName": "TagTaxonomyEnumString",
                         "possibleValues": [
-                            "post_tag",
-                            "dummy-tag"
+                            "dummy-tag",
+                            "post_tag"
                         ]
                     },
                     "fields": null,

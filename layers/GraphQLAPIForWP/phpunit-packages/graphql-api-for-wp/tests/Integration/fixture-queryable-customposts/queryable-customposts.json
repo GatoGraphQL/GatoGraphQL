@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'page' for type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'attachment', 'nav_menu_item', 'custom_css', 'revision')",
+      "message": "Value 'page' for type 'CustomPostEnumString' is not valid (the only valid values are: 'attachment', 'custom_css', 'nav_menu_item', 'post', 'revision')",
       "locations": [
         {
           "line": 3,
@@ -21,7 +21,7 @@
       }
     },
     {
-      "message": "Value 'dummy-cpt' for type 'CustomPostEnumString' is not valid (the only valid values are: 'post', 'attachment', 'nav_menu_item', 'custom_css', 'revision')",
+      "message": "Value 'dummy-cpt' for type 'CustomPostEnumString' is not valid (the only valid values are: 'attachment', 'custom_css', 'nav_menu_item', 'post', 'revision')",
       "locations": [
         {
           "line": 32,
