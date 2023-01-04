@@ -144,7 +144,8 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         return App::applyFilters(
             Hooks::FORBID_ACCESS,
-            false
+            false,
+            $this
         );
     }
 
