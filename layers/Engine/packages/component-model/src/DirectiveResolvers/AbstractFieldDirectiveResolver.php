@@ -13,7 +13,6 @@ use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Directives\DirectiveLocations;
 use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
-use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
