@@ -10,7 +10,6 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
-use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;

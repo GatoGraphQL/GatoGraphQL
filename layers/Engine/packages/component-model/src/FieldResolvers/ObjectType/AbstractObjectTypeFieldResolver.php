@@ -8,7 +8,6 @@ use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
@@ -401,7 +400,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              */
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->enableSemanticVersionConstraints()
+            if (
+                $moduleConfiguration->enableSemanticVersionConstraints()
                 && $this->hasFieldVersion($objectTypeResolver, $fieldName)
             ) {
                 $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName);
@@ -637,7 +637,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         /** Check if to validate the version */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableSemanticVersionConstraints()
+        if (
+            $moduleConfiguration->enableSemanticVersionConstraints()
             && $this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)
             && $this->hasFieldVersion($objectTypeResolver, $field->getName())
         ) {
