@@ -399,8 +399,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If it doesn't, then there will only be one version of it,
              * and it can be kept empty for simplicity
              */
-            if (
-                Environment::enableSemanticVersionConstraints()
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->enableSemanticVersionConstraints()
                 && $this->hasFieldVersion($objectTypeResolver, $fieldName)
             ) {
                 $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName);
@@ -634,8 +635,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $field,
     ): bool {
         /** Check if to validate the version */
-        if (
-            Environment::enableSemanticVersionConstraints()
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableSemanticVersionConstraints()
             && $this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)
             && $this->hasFieldVersion($objectTypeResolver, $field->getName())
         ) {
@@ -812,7 +814,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
 
-        if (Environment::enableSemanticVersionConstraints() && $this->hasFieldVersion($objectTypeResolver, $fieldName)) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableSemanticVersionConstraints() && $this->hasFieldVersion($objectTypeResolver, $fieldName)) {
             $schemaDefinition[SchemaDefinition::VERSION] = $this->getFieldVersion($objectTypeResolver, $fieldName);
         }
 
@@ -913,7 +917,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!Environment::enableSemanticVersionConstraints()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableSemanticVersionConstraints()) {
             return;
         }
 

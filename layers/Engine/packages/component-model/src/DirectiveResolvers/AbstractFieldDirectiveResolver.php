@@ -621,9 +621,11 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
     ): bool {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         /** Check if to validate the version */
         if (
-            Environment::enableSemanticVersionConstraints()
+            $moduleConfiguration->enableSemanticVersionConstraints()
             && $this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)
             && $this->hasDirectiveVersion($relationalTypeResolver)
         ) {
@@ -1033,8 +1035,10 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
              * If it doesn't, then there will only be one version of it,
              * and it can be kept empty for simplicity
              */
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if (
-                Environment::enableSemanticVersionConstraints()
+                $moduleConfiguration->enableSemanticVersionConstraints()
                 && $this->hasDirectiveVersion($relationalTypeResolver)
             ) {
                 $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver);
@@ -1190,7 +1194,9 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         array $idFieldSet,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        if (!Environment::enableSemanticVersionConstraints()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableSemanticVersionConstraints()) {
             return;
         }
 
@@ -1649,7 +1655,9 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
          * But it could also be that the contract doesn't change, but the implementation changes
          * it's really not their responsibility
          */
-        if (Environment::enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
             $schemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
         }
         $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getDirectiveExtensionsSchemaDefinition($relationalTypeResolver);

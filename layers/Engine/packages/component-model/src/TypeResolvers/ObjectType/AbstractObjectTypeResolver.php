@@ -1721,7 +1721,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
         FieldInterface $field,
     ): FeedbackItemResolution {
-        $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $useSemanticVersionConstraints = $moduleConfiguration->enableSemanticVersionConstraints()
             && $field->hasArgument(SchemaDefinition::VERSION_CONSTRAINT);
         if ($useSemanticVersionConstraints) {
             $versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT);

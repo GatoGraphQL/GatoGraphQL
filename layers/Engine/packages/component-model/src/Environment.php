@@ -27,17 +27,7 @@ class Environment
     public final const ENABLE_TYPENAME_GLOBAL_FIELDS = 'ENABLE_TYPENAME_GLOBAL_FIELDS';
     public final const EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS = 'EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS';
     public final const EXPOSE_SCHEMA_TYPE_DIRECTIVE_LOCATIONS = 'EXPOSE_SCHEMA_TYPE_DIRECTIVE_LOCATIONS';
-
-    /**
-     * Indicate if to enable to restrict a field and directive by version,
-     * using the same semantic versioning constraint rules used by Composer
-     *
-     * @see https://getcomposer.org/doc/articles/versions.md Composer's semver constraint rules
-     */
-    public static function enableSemanticVersionConstraints(): bool
-    {
-        return getenv('ENABLE_SEMANTIC_VERSION_CONSTRAINTS') !== false ? strtolower(getenv('ENABLE_SEMANTIC_VERSION_CONSTRAINTS')) === "true" : false;
-    }
+    public final const ENABLE_SEMANTIC_VERSION_CONSTRAINTS = 'ENABLE_SEMANTIC_VERSION_CONSTRAINTS';
 
     // public static function failIfSubcomponentTypeResolverUndefined()
     // {

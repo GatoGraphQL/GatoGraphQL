@@ -332,4 +332,23 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    /**
+     * Indicate if to enable to restrict a field and directive by version,
+     * using the same semantic versioning constraint rules used by Composer
+     *
+     * @see https://getcomposer.org/doc/articles/versions.md Composer's semver constraint rules
+     */
+    public function enableSemanticVersionConstraints(): bool
+    {
+        $envVariable = Environment::ENABLE_SEMANTIC_VERSION_CONSTRAINTS;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
