@@ -1505,6 +1505,13 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         /**
+         * Do not expose the versioned directives via introspection
+         */
+        if ($this->hasDirectiveVersion($relationalTypeResolver)) {
+            return true;
+        }
+
+        /**
          * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
          * as according to the applied WrappingType.
