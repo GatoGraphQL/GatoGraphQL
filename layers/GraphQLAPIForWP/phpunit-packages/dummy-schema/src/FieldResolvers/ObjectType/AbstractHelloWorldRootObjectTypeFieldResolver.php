@@ -9,7 +9,6 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
@@ -36,11 +35,6 @@ abstract class AbstractHelloWorldRootObjectTypeFieldResolver extends AbstractObj
         return [
             RootObjectTypeResolver::class,
         ];
-    }
-
-    public function getFieldVersionInputTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?InputTypeResolverInterface
-    {
-        return $this->getStringScalarTypeResolver();
     }
 
     /**

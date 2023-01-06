@@ -8,10 +8,10 @@ use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
@@ -33,6 +33,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -415,7 +416,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $moduleConfiguration->enableSemanticVersionConstraints()
             && $this->hasFieldVersion($objectTypeResolver, $fieldName)
         ) {
-            $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName);
+            /**
+             * The version is always of the `String` type service, but do not
+             * obtain it through method `getStringScalarTypeResolver` so that
+             * this method is not declared on all extending classes.
+             *
+             * @var StringScalarTypeResolver
+             */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $stringScalarTypeResolver;
         }
 
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
@@ -877,13 +886,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     final public function hasFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        return !empty($this->getFieldVersion($objectTypeResolver, $fieldName))
-            && $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName) !== null;
-    }
-
-    public function getFieldVersionInputTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?InputTypeResolverInterface
-    {
-        return null;
+        return !empty($this->getFieldVersion($objectTypeResolver, $fieldName));
     }
 
     protected function addValueResolutionFeedback(
