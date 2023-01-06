@@ -652,12 +652,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $versionConstraint =
                 $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)
                 ?? $this->getVersioningService()->getVersionConstraintsForField(
-                    $objectTypeResolver->getNamespacedTypeName(),
-                    $field->getName()
-                )
-                ?? $this->getVersioningService()->getVersionConstraintsForField(
-                    $objectTypeResolver->getTypeName(),
-                    $field->getName()
+                    $objectTypeResolver,
+                    $field
                 )
                 ?? App::getState('version-constraint');
             /**
