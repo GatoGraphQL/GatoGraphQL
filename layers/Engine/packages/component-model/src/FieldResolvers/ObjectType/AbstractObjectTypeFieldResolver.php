@@ -12,7 +12,6 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
@@ -896,47 +895,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->maybeAddSemanticVersionConstraintsWarningFeedback(
-            $objectTypeResolver,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-    }
-
-    protected function maybeAddSemanticVersionConstraintsWarningFeedback(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSemanticVersionConstraints()) {
-            return;
-        }
-
-        /**
-         * If passing the version, but this resolver doesn't
-         * support versioning, then show a warning.
-         */
-        $isRequestingNonRelevantVersion = $fieldDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
-            && !$this->hasFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName());
-        if (!$isRequestingNonRelevantVersion) {
-            return;
-        }
-
-        $objectTypeFieldResolutionFeedbackStore->addWarning(
-            new ObjectTypeFieldResolutionFeedback(
-                new FeedbackItemResolution(
-                    WarningFeedbackItemProvider::class,
-                    WarningFeedbackItemProvider::W2,
-                    [
-                        $fieldDataAccessor->getFieldName(),
-                        $this->getFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName()) ?? '',
-                    ]
-                ),
-                $fieldDataAccessor->getField()
-            )
-        );
     }
 
     /**
