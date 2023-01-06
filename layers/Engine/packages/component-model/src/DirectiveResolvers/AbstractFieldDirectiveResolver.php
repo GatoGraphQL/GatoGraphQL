@@ -1018,22 +1018,22 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $this,
             $relationalTypeResolver
         );
-        if ($consolidatedDirectiveArgNameTypeResolvers !== []) {
-            /**
-             * Add the version constraint (if enabled)
-             * Only add the argument if this field or directive has a version
-             * If it doesn't, then there will only be one version of it,
-             * and it can be kept empty for simplicity
-             */
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if (
-                $moduleConfiguration->enableSemanticVersionConstraints()
-                && $this->hasDirectiveVersion($relationalTypeResolver)
-            ) {
-                $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver);
-            }
+        
+        /**
+         * Add the version constraint (if enabled)
+         * Only add the argument if this field or directive has a version
+         * If it doesn't, then there will only be one version of it,
+         * and it can be kept empty for simplicity
+         */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (
+            $moduleConfiguration->enableSemanticVersionConstraints()
+            && $this->hasDirectiveVersion($relationalTypeResolver)
+        ) {
+            $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver);
         }
+
         $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey] = $consolidatedDirectiveArgNameTypeResolvers;
         return $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey];
     }

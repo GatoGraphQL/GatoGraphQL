@@ -390,23 +390,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $this,
             $objectTypeResolver,
             $fieldName,
-        );
-        if ($consolidatedFieldArgNameTypeResolvers !== []) {
-            /**
-             * Add the version constraint (if enabled)
-             * Only add the argument if this field or directive has a version
-             * If it doesn't, then there will only be one version of it,
-             * and it can be kept empty for simplicity
-             */
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if (
-                $moduleConfiguration->enableSemanticVersionConstraints()
-                && $this->hasFieldVersion($objectTypeResolver, $fieldName)
-            ) {
-                $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName);
-            }
-        }
+        );        
 
         // Exclude the sensitive field args, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
@@ -418,6 +402,21 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 fn (string $fieldArgName) => !in_array($fieldArgName, $sensitiveFieldArgNames),
                 ARRAY_FILTER_USE_KEY
             );
+        }
+        
+        /**
+         * Add the version constraint (if enabled)
+         * Only add the argument if this field or directive has a version
+         * If it doesn't, then there will only be one version of it,
+         * and it can be kept empty for simplicity
+         */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (
+            $moduleConfiguration->enableSemanticVersionConstraints()
+            && $this->hasFieldVersion($objectTypeResolver, $fieldName)
+        ) {
+            $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName);
         }
 
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
