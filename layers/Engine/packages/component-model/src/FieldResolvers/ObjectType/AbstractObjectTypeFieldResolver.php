@@ -811,7 +811,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableSemanticVersionConstraints()
+        if (
+            $moduleConfiguration->enableSemanticVersionConstraints()
             && $this->hasFieldVersion($objectTypeResolver, $fieldName)
         ) {
             $schemaDefinition[SchemaDefinition::VERSION] = $this->getFieldVersion($objectTypeResolver, $fieldName);
