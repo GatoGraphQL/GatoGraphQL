@@ -66,10 +66,10 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool
+    public function decideCanProcessFieldBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->decideCanProcessBasedOnVersionConstraint(
+        return $aliasedObjectTypeFieldResolver->decideCanProcessFieldBasedOnVersionConstraint(
             $objectTypeResolver
         );
     }
