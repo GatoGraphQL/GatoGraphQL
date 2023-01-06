@@ -17,7 +17,7 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 abstract class AbstractHelloWorldRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    
+
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;

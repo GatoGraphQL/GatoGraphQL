@@ -389,7 +389,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $this,
             $objectTypeResolver,
             $fieldName,
-        );        
+        );
 
         // Exclude the sensitive field args, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
@@ -402,7 +402,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 ARRAY_FILTER_USE_KEY
             );
         }
-        
+
         /**
          * Add the version constraint (if enabled)
          * Only add the argument if this field or directive has a version
