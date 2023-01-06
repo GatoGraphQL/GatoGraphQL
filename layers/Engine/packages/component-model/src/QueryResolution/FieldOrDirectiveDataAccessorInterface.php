@@ -9,12 +9,20 @@ use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 interface FieldOrDirectiveDataAccessorInterface
 {
     /**
+     * This method can be called even before resolving the value,
+     * as to find out if it was set (even if the value will,
+     * upon retrieval, throw a `ValueResolutionPromiseException`)
+     *
+     * @see method `getValue` in this same interface
      * @return string[]
-     * @throws AbstractValueResolutionPromiseException
      */
     public function getProperties(): array;
     /**
-     * @throws AbstractValueResolutionPromiseException
+     * This method can be called even before resolving the value,
+     * as to find out if it was set (even if the value will,
+     * upon retrieval, throw a `ValueResolutionPromiseException`)
+     *
+     * @see method `getValue` in this same interface
      */
     public function hasValue(string $propertyName): bool;
     /**
