@@ -605,14 +605,6 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
 
     /**
-     * Define if to use the version to decide if to process the directive or not
-     */
-    public function decideCanProcessDirectiveBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
-    {
-        return false;
-    }
-
-    /**
      * By default, the directiveResolver instance can process the directive
      * This function can be overriden to force certain value on the directive args before it can be executed
      */
@@ -625,7 +617,6 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         /** Check if to validate the version */
         if (
             $moduleConfiguration->enableSemanticVersionConstraints()
-            && $this->decideCanProcessDirectiveBasedOnVersionConstraint($relationalTypeResolver)
             && $this->hasDirectiveVersion($relationalTypeResolver)
         ) {
             /** @var string */
@@ -1207,9 +1198,9 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
          * might throw an exception when it's an object resolved dynamic variable,
          * as it is satisfied only later on within resolveDirective.
          */
-        $requestingNonSupportedVersion = $this->directiveDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
-            && !$this->decideCanProcessDirectiveBasedOnVersionConstraint($relationalTypeResolver);
-        if (!$requestingNonSupportedVersion) {
+        $isRequestingNonRelevantVersion = $this->directiveDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
+            && !$this->hasDirectiveVersion($relationalTypeResolver);
+        if (!$isRequestingNonRelevantVersion) {
             return;
         }
 
@@ -1653,7 +1644,9 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
          */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
+        if ($moduleConfiguration->enableSemanticVersionConstraints()
+            && $this->hasDirectiveVersion($relationalTypeResolver)
+        ) {
             $schemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
         }
         $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getDirectiveExtensionsSchemaDefinition($relationalTypeResolver);

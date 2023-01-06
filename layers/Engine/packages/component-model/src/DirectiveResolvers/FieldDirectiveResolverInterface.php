@@ -170,10 +170,6 @@ interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, At
      */
     public function getDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array;
     /**
-     * Define if to use the version to decide if to process the directive or not
-     */
-    public function decideCanProcessDirectiveBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool;
-    /**
      * The version of the directive, using semantic versioning
      */
     public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
