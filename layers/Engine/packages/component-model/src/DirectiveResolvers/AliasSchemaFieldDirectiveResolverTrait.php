@@ -297,15 +297,4 @@ trait AliasSchemaFieldDirectiveResolverTrait
             $relationalTypeResolver
         );
     }
-
-    /**
-     * Proxy pattern: execute same function on the aliased DirectiveResolver
-     */
-    public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface
-    {
-        $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
-        return $aliasedFieldDirectiveResolver->getDirectiveVersionInputTypeResolver(
-            $relationalTypeResolver
-        );
-    }
 }
