@@ -1200,11 +1200,13 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         /**
-         * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
+         * If restricting the version, and this fieldResolver doesn't have any version, then show a warning.
+         * 
+         * Just check if the value was set, instead of getting the actual value,
+         * which might throw an exception when it's an object resolved dynamic variable,
+         * as it is satisfied only later on within resolveDirective.
          */
-        $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
-        $versionConstraint = $directiveArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null;
-        if (!$versionConstraint) {
+        if (!$this->directiveDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)) {
             return;
         }
 
@@ -1224,7 +1226,6 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
                     [
                         $this->getDirectiveName(),
                         $this->getDirectiveVersion($relationalTypeResolver) ?? '',
-                        $versionConstraint,
                     ]
                 ),
                 $this->directive,
