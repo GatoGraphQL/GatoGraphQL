@@ -22,11 +22,6 @@ use SplObjectStorage;
 
 class HelloWorldDefaultVersionFieldDirectiveResolver extends AbstractHelloWorldFieldDirectiveResolver
 {
-    public function decideCanProcessDirectiveBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
-    {
-        return false;
-    }
-
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet

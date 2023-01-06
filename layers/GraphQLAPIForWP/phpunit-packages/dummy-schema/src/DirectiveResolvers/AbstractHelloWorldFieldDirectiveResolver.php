@@ -39,11 +39,6 @@ abstract class AbstractHelloWorldFieldDirectiveResolver extends AbstractGlobalFi
         return $this->getStringScalarTypeResolver();
     }
 
-    public function decideCanProcessDirectiveBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
-    {
-        return true;
-    }
-
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
