@@ -628,7 +628,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
              */
             $versionConstraint =
                 $directive->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)
-                ?? $this->getVersioningService()->getVersionConstraintsForDirective($this->getDirectiveName())
+                ?? $this->getVersioningService()->getVersionConstraintsForDirective($this)
                 ?? App::getState('version-constraint');
             /**
              * If the query doesn't restrict the version, then do not process
