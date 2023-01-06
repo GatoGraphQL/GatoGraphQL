@@ -1,1 +1,9 @@
-{}
+{
+    "data": {
+        "defaultVersion": "hello: root (version: \"no version \/ default\")",
+        "firstVersionFixed": "hello: root (version: \"0.1.0\")",
+        "firstVersionConstraint": "hello: root (version: \"0.1.0\")",
+        "secondVersionFixed": "hello: root (version: \"0.2.0\")",
+        "secondVersionConstraint": "hello: root (version: \"0.2.0\")"
+    }
+}
