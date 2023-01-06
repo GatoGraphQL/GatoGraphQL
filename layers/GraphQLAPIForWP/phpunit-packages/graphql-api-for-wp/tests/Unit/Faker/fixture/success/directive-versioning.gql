@@ -4,4 +4,9 @@
     firstVersionConstraint: id @helloWorld(versionConstraint: "^0.1")
     secondVersionFixed: id @helloWorld(versionConstraint: "0.2.0")
     secondVersionConstraint: id @helloWorld(versionConstraint: ">0.1")
+
+    alsoFirstVersionFixed: id @byeByeWorld(versionConstraint: "1.2.0")
+    alsoFirstVersionConstraint: id @byeByeWorld(versionConstraint: "^1")
+    alsoSecondVersionFixed: id @byeByeWorld(versionConstraint: "2.3.0")
+    alsoSecondVersionConstraint: id @byeByeWorld(versionConstraint: "2.*.*")
 }

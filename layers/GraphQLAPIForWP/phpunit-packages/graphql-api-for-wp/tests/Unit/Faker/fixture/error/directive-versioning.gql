@@ -1,3 +1,6 @@
 {
     nonExistingVersion: id @helloWorld(versionConstraint: "~0.3")
+    # This directive does not have a default version
+    nonExistingDefault: id @byeByeWorld
+    alsoNonExistingVersion: id @byeByeWorld(versionConstraint: "~0.3")
 }

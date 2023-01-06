@@ -19,9 +19,48 @@
                 "code": "gql@5.4.1[a]",
                 "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
             }
+        },
+        {
+            "message": "There is no field 'byeByeWorld' on type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 25
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "nonExistingDefault: byeByeWorld",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "nonExistingDefault: byeByeWorld",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        },
+        {
+            "message": "There is no field 'byeByeWorld' on type 'QueryRoot' satisfying version constraint '<0.9'",
+            "locations": [
+                {
+                    "line": 5,
+                    "column": 29
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "alsoNonExistingVersion: byeByeWorld(versionConstraint: \"<0.9\")",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "alsoNonExistingVersion: byeByeWorld(versionConstraint: \"<0.9\")",
+                "code": "PoP\/ComponentModel@e2"
+            }
         }
     ],
     "data": {
-        "nonExistingVersion": null
+        "nonExistingVersion": null,
+        "nonExistingDefault": null,
+        "alsoNonExistingVersion": null
     }
 }
