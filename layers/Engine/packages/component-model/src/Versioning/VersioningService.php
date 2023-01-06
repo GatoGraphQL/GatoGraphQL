@@ -83,7 +83,7 @@ class VersioningService implements VersioningServiceInterface
     public function getVersionConstraintsForDirective(DirectiveResolverInterface $directive): ?string
     {
         if ($this->versionConstraintsForDirectives === null) {
-            $this->versionConstraintsForDirectives = App::getState('directive-version-constraints');
+            $this->versionConstraintsForDirectives = App::getState('directive-version-constraints') ?? [];
         }
         return $this->versionConstraintsForDirectives[$directive->getDirectiveName()] ?? null;
     }
