@@ -1644,7 +1644,8 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
          */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableSemanticVersionConstraints()
+        if (
+            $moduleConfiguration->enableSemanticVersionConstraints()
             && $this->hasDirectiveVersion($relationalTypeResolver)
         ) {
             $schemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
