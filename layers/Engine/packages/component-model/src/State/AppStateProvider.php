@@ -77,15 +77,15 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['actionpath'] = Request::getActionPath();
             $state['actions'] = Request::getActions();
             $state['version-constraint'] = Request::getVersionConstraint();
-            $state['field-version-constraints'] = Request::getVersionConstraintsForFields();
-            $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives();
+            $state['field-version-constraints'] = Request::getVersionConstraintsForFields() ?? [];
+            $state['directive-version-constraints'] = Request::getVersionConstraintsForDirectives() ?? [];
         } else {
             $state['mangled'] = ParamValues::MANGLED_NONE;
             $state['actionpath'] = null;
             $state['actions'] = [];
             $state['version-constraint'] = null;
-            $state['field-version-constraints'] = null;
-            $state['directive-version-constraints'] = null;
+            $state['field-version-constraints'] = [];
+            $state['directive-version-constraints'] = [];
         }
 
         /** @var ModuleConfiguration */
