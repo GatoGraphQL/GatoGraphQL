@@ -6,13 +6,13 @@ namespace PHPUnitForGraphQLAPI\DummySchema\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class ByeByeWorldVersion351RootObjectTypeFieldResolver extends AbstractHelloWorldRootObjectTypeFieldResolver
+class ByeByeWorldVersion492RootObjectTypeFieldResolver extends AbstractHelloWorldRootObjectTypeFieldResolver
 {
     public function getHelloWorldFieldName(): string
     {
         return 'byeByeWorld';
     }
-    
+
     public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return '4.9.2';
