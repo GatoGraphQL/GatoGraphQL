@@ -1211,7 +1211,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         /**
-         * If this fieldResolver doesn't have versioning, then it accepts everything
+         * If this fieldResolver accepts versioning, then no need for the warning
          */
         if ($this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)) {
             return;
