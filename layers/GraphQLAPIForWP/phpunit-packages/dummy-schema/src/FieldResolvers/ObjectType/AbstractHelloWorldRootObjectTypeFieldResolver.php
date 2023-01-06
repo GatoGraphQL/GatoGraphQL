@@ -43,14 +43,19 @@ abstract class AbstractHelloWorldRootObjectTypeFieldResolver extends AbstractObj
     public function getFieldNamesToResolve(): array
     {
         return [
-            'helloWorld',
+            $this->getHelloWorldFieldName(),
         ];
+    }
+
+    public function getHelloWorldFieldName(): string
+    {
+        return 'helloWorld';
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'helloWorld' => $this->__('Hello world + field version', 'dummy-schema'),
+            $this->getHelloWorldFieldName() => $this->__('Hello world + field version', 'dummy-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -58,7 +63,7 @@ abstract class AbstractHelloWorldRootObjectTypeFieldResolver extends AbstractObj
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'helloWorld' => $this->getStringScalarTypeResolver(),
+            $this->getHelloWorldFieldName() => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -66,7 +71,7 @@ abstract class AbstractHelloWorldRootObjectTypeFieldResolver extends AbstractObj
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'helloWorld' => SchemaTypeModifiers::NON_NULLABLE,
+            $this->getHelloWorldFieldName() => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -79,7 +84,7 @@ abstract class AbstractHelloWorldRootObjectTypeFieldResolver extends AbstractObj
     ): mixed {
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
-            case 'helloWorld':
+            case $this->getHelloWorldFieldName():
                 return sprintf(
                     $this->__('Hello world (version: "%s")', 'dummy-schema'),
                     $this->getFieldVersion($objectTypeResolver, $fieldName) ?? 'no version / default',
