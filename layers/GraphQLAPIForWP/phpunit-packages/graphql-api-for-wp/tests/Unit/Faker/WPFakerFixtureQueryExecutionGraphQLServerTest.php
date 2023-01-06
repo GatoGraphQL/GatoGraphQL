@@ -33,6 +33,7 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
                 \PoPWPSchema\Pages\Module::class,
                 \PoPWPSchema\Comments\Module::class,
                 \PoPCMSSchema\CommentMutationsWP\Module::class,
+                \PHPUnitForGraphQLAPI\DummySchema\Module::class,
             ]
         ];
     }

@@ -1,0 +1,7 @@
+{
+    defaultVersion: id @helloWorld
+    firstVersionFixed: id @helloWorld(versionConstraint: "0.1.0")
+    firstVersionConstraint: id @helloWorld(versionConstraint: "^0.1")
+    secondVersionFixed: id @helloWorld(versionConstraint: "0.2.0")
+    secondVersionConstraint: id @helloWorld(versionConstraint: ">0.1")
+}

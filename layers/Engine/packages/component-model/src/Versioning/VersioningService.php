@@ -7,9 +7,12 @@ namespace PoP\ComponentModel\Versioning;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\Constants\Constants;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Feedback\GeneralFeedback;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\GeneralFeedback;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
 class VersioningService implements VersioningServiceInterface
@@ -60,22 +63,28 @@ class VersioningService implements VersioningServiceInterface
     /**
      * Indicates the version constraints for specific fields in the schema
      */
-    public function getVersionConstraintsForField(string $maybeNamespacedTypeName, string $fieldName): ?string
-    {
+    public function getVersionConstraintsForField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): ?string {
         if ($this->versionConstraintsForFields === null) {
             $this->initializeVersionConstraintsForFields();
         }
-        return $this->versionConstraintsForFields[$maybeNamespacedTypeName][$fieldName] ?? $this->versionConstraintsForFields[ConfigurationValues::ANY][$fieldName] ?? null;
+        $fieldName = $field->getName();
+        return $this->versionConstraintsForFields[$objectTypeResolver->getNamespacedTypeName()][$fieldName]
+            ?? $this->versionConstraintsForFields[$objectTypeResolver->getTypeName()][$fieldName]
+            ?? $this->versionConstraintsForFields[ConfigurationValues::ANY][$fieldName]
+            ?? null;
     }
 
     /**
      * Indicates the version constraints for specific directives in the schema
      */
-    public function getVersionConstraintsForDirective(string $directiveName): ?string
+    public function getVersionConstraintsForDirective(DirectiveResolverInterface $directive): ?string
     {
         if ($this->versionConstraintsForDirectives === null) {
-            $this->versionConstraintsForDirectives = App::getState('directive-version-constraints');
+            $this->versionConstraintsForDirectives = App::getState('directive-version-constraints') ?? [];
         }
-        return $this->versionConstraintsForDirectives[$directiveName] ?? null;
+        return $this->versionConstraintsForDirectives[$directive->getDirectiveName()] ?? null;
     }
 }

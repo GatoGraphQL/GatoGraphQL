@@ -14,7 +14,6 @@ use PoP\ComponentModel\Directives\DirectiveLocations;
 use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackStore;
@@ -629,7 +628,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
              */
             $versionConstraint =
                 $directive->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)
-                ?? $this->getVersioningService()->getVersionConstraintsForDirective($this->getDirectiveName())
+                ?? $this->getVersioningService()->getVersionConstraintsForDirective($this)
                 ?? App::getState('version-constraint');
             /**
              * If the query doesn't restrict the version, then do not process
@@ -1018,22 +1017,22 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $this,
             $relationalTypeResolver
         );
-        if ($consolidatedDirectiveArgNameTypeResolvers !== []) {
-            /**
-             * Add the version constraint (if enabled)
-             * Only add the argument if this field or directive has a version
-             * If it doesn't, then there will only be one version of it,
-             * and it can be kept empty for simplicity
-             */
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if (
-                $moduleConfiguration->enableSemanticVersionConstraints()
-                && $this->hasDirectiveVersion($relationalTypeResolver)
-            ) {
-                $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver);
-            }
+
+        /**
+         * Add the version constraint (if enabled)
+         * Only add the argument if this field or directive has a version
+         * If it doesn't, then there will only be one version of it,
+         * and it can be kept empty for simplicity
+         */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (
+            $moduleConfiguration->enableSemanticVersionConstraints()
+            && $this->hasDirectiveVersion($relationalTypeResolver)
+        ) {
+            $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver);
         }
+
         $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey] = $consolidatedDirectiveArgNameTypeResolvers;
         return $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey];
     }
@@ -1176,52 +1175,6 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         return null;
     }
 
-    /**
-     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     */
-    protected function maybeAddSemanticVersionConstraintsWarningFeedback(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idFieldSet,
-        EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): void {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSemanticVersionConstraints()) {
-            return;
-        }
-
-        /**
-         * If passing the version, but this resolver doesn't
-         * support versioning, then show a warning.
-         *
-         * Just check if the versionConstraint was set, as getting the actual value
-         * might throw an exception when it's an object resolved dynamic variable,
-         * as it is satisfied only later on within resolveDirective.
-         */
-        $isRequestingNonRelevantVersion = $this->directiveDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
-            && !$this->hasDirectiveVersion($relationalTypeResolver);
-        if (!$isRequestingNonRelevantVersion) {
-            return;
-        }
-
-        $fields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
-        $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
-            new SchemaFeedback(
-                new FeedbackItemResolution(
-                    WarningFeedbackItemProvider::class,
-                    WarningFeedbackItemProvider::W3,
-                    [
-                        $this->getDirectiveName(),
-                        $this->getDirectiveVersion($relationalTypeResolver) ?? '',
-                    ]
-                ),
-                $this->directive,
-                $relationalTypeResolver,
-                $fields
-            )
-        );
-    }
-
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
@@ -1299,12 +1252,6 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
         if (!$this->needsSomeIDFieldToExecute() || $this->hasSomeIDField($idFieldSet)) {
-            $this->maybeAddSemanticVersionConstraintsWarningFeedback(
-                $relationalTypeResolver,
-                $idFieldSet,
-                $engineIterationFeedbackStore,
-            );
-
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
             $feedbackItemResolution = null;

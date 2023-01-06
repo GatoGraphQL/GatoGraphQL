@@ -12,7 +12,6 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
@@ -391,22 +390,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $objectTypeResolver,
             $fieldName,
         );
-        if ($consolidatedFieldArgNameTypeResolvers !== []) {
-            /**
-             * Add the version constraint (if enabled)
-             * Only add the argument if this field or directive has a version
-             * If it doesn't, then there will only be one version of it,
-             * and it can be kept empty for simplicity
-             */
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if (
-                $moduleConfiguration->enableSemanticVersionConstraints()
-                && $this->hasFieldVersion($objectTypeResolver, $fieldName)
-            ) {
-                $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName);
-            }
-        }
 
         // Exclude the sensitive field args, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
@@ -418,6 +401,21 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 fn (string $fieldArgName) => !in_array($fieldArgName, $sensitiveFieldArgNames),
                 ARRAY_FILTER_USE_KEY
             );
+        }
+
+        /**
+         * Add the version constraint (if enabled)
+         * Only add the argument if this field or directive has a version
+         * If it doesn't, then there will only be one version of it,
+         * and it can be kept empty for simplicity
+         */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (
+            $moduleConfiguration->enableSemanticVersionConstraints()
+            && $this->hasFieldVersion($objectTypeResolver, $fieldName)
+        ) {
+            $consolidatedFieldArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getFieldVersionInputTypeResolver($objectTypeResolver, $fieldName);
         }
 
         $this->consolidatedFieldArgNameTypeResolversCache[$cacheKey] = $consolidatedFieldArgNameTypeResolvers;
@@ -652,14 +650,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * 4. Through param `versionConstraint`: applies to all fields and directives in the query
              */
             $versionConstraint =
-                $field->getArgument(SchemaDefinition::VERSION_CONSTRAINT)?->getValue()
+                $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)
                 ?? $this->getVersioningService()->getVersionConstraintsForField(
-                    $objectTypeResolver->getNamespacedTypeName(),
-                    $field->getName()
-                )
-                ?? $this->getVersioningService()->getVersionConstraintsForField(
-                    $objectTypeResolver->getTypeName(),
-                    $field->getName()
+                    $objectTypeResolver,
+                    $field
                 )
                 ?? App::getState('version-constraint');
             /**
@@ -897,47 +891,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->maybeAddSemanticVersionConstraintsWarningFeedback(
-            $objectTypeResolver,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-    }
-
-    protected function maybeAddSemanticVersionConstraintsWarningFeedback(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSemanticVersionConstraints()) {
-            return;
-        }
-
-        /**
-         * If passing the version, but this resolver doesn't
-         * support versioning, then show a warning.
-         */
-        $isRequestingNonRelevantVersion = $fieldDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
-            && !$this->hasFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName());
-        if (!$isRequestingNonRelevantVersion) {
-            return;
-        }
-
-        $objectTypeFieldResolutionFeedbackStore->addWarning(
-            new ObjectTypeFieldResolutionFeedback(
-                new FeedbackItemResolution(
-                    WarningFeedbackItemProvider::class,
-                    WarningFeedbackItemProvider::W2,
-                    [
-                        $fieldDataAccessor->getFieldName(),
-                        $this->getFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName()) ?? '',
-                    ]
-                ),
-                $fieldDataAccessor->getField()
-            )
-        );
     }
 
     /**

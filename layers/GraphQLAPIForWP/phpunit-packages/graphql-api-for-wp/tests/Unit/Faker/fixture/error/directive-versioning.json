@@ -1,0 +1,28 @@
+{
+    "errors": [
+        {
+            "message": "On directive 'helloWorld', there is no argument with name 'versionConstraint'",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 40
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(versionConstraint: \"~0.3\")",
+                    "@helloWorld(versionConstraint: \"~0.3\")",
+                    "nonExistingVersion: id @helloWorld(versionConstraint: \"~0.3\")",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "nonExistingVersion: id @helloWorld(versionConstraint: \"~0.3\")",
+                "code": "gql@5.4.1[b]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+            }
+        }
+    ],
+    "data": {
+        "nonExistingVersion": null
+    }
+}

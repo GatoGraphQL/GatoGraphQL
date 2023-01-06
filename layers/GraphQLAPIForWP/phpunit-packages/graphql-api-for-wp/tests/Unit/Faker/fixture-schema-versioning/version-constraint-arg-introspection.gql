@@ -1,0 +1,31 @@
+########################################################
+# Even though field "helloWorld" and directive "helloWorld"
+# have versioning, arg "versionConstraint" still DOES NOT
+# appear on introspection!
+# That's because the schema is retrieved from the field/directive
+# resolver without version defined, and for that one, arg
+# versionConstraint will not show up.
+########################################################
+query FieldDirectiveArgIntrospection {
+    __schema {
+        types {
+            kind
+            name
+            fields(includeDeprecated: true) {
+                name
+                args {
+                    name
+                }
+            }
+            inputFields {
+                name
+            }
+        }
+        directives {
+            name
+            args {
+                name
+            }
+        }
+    }
+}

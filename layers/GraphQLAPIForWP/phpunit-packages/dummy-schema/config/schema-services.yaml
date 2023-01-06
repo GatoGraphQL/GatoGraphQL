@@ -5,3 +5,6 @@ services:
 
     PHPUnitForGraphQLAPI\DummySchema\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
+
+    PHPUnitForGraphQLAPI\DummySchema\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
