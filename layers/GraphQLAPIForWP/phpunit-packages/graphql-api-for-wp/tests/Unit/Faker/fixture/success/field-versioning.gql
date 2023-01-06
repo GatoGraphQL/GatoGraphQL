@@ -4,4 +4,9 @@
     firstVersionConstraint: helloWorld(versionConstraint: "1.0.*")
     secondVersionFixed: helloWorld(versionConstraint: "1.1.0")
     secondVersionConstraint: helloWorld(versionConstraint: ">=1.0")
+
+    alsoFirstVersionFixed: byeByeWorld(versionConstraint: "3.5.1")
+    alsoFirstVersionConstraint: byeByeWorld(versionConstraint: "~3.2")
+    alsoSecondVersionFixed: byeByeWorld(versionConstraint: "4.9.2")
+    alsoSecondVersionConstraint: byeByeWorld(versionConstraint: "*")
 }

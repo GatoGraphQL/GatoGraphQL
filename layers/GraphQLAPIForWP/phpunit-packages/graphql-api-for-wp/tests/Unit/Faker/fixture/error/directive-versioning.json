@@ -1,6 +1,46 @@
 {
     "errors": [
         {
+            "message": "There is no directive with name 'byeByeWorld'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 29
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "@byeByeWorld",
+                    "nonExistingDefault: id @byeByeWorld",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "nonExistingDefault: id @byeByeWorld",
+                "code": "gql@5.7.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Directives-Are-Defined"
+            }
+        },
+        {
+            "message": "There is no directive with name 'byeByeWorld'",
+            "locations": [
+                {
+                    "line": 5,
+                    "column": 33
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "@byeByeWorld(versionConstraint: \"~0.3\")",
+                    "alsoNonExistingVersion: id @byeByeWorld(versionConstraint: \"~0.3\")",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "alsoNonExistingVersion: id @byeByeWorld(versionConstraint: \"~0.3\")",
+                "code": "gql@5.7.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Directives-Are-Defined"
+            }
+        },
+        {
             "message": "On directive 'helloWorld', there is no argument with name 'versionConstraint'",
             "locations": [
                 {
@@ -23,6 +63,8 @@
         }
     ],
     "data": {
-        "nonExistingVersion": null
+        "nonExistingVersion": null,
+        "nonExistingDefault": null,
+        "alsoNonExistingVersion": null
     }
 }

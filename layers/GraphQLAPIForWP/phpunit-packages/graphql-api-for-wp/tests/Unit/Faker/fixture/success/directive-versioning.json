@@ -4,6 +4,10 @@
         "firstVersionFixed": "hello: root (version: \"0.1.0\")",
         "firstVersionConstraint": "hello: root (version: \"0.1.0\")",
         "secondVersionFixed": "hello: root (version: \"0.2.0\")",
-        "secondVersionConstraint": "hello: root (version: \"0.2.0\")"
+        "secondVersionConstraint": "hello: root (version: \"0.2.0\")",
+        "alsoFirstVersionFixed": "hello: root (version: \"1.2.0\")",
+        "alsoFirstVersionConstraint": "hello: root (version: \"1.2.0\")",
+        "alsoSecondVersionFixed": "hello: root (version: \"2.3.0\")",
+        "alsoSecondVersionConstraint": "hello: root (version: \"2.3.0\")"
     }
 }

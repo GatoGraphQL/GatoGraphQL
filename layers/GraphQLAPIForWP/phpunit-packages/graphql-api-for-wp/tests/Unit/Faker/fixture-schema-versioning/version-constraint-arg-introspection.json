@@ -1087,6 +1087,14 @@
             ],
             "directives": [
                 {
+                    "name": "byeByeWorld",
+                    "args": [
+                        {
+                            "name": "versionConstraint"
+                        }
+                    ]
+                },
+                {
                     "name": "cacheControl",
                     "args": [
                         {
