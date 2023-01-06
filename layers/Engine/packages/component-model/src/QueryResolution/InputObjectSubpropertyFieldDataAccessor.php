@@ -32,11 +32,10 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
 
     /**
      * @return array<string,mixed>
-     * @throws AbstractValueResolutionPromiseException
      */
-    protected function getResolvedFieldOrDirectiveArgs(): array
+    protected function getUnresolvedFieldOrDirectiveArgs(): array
     {
-        return (array) $this->getInputObjectValue(parent::getResolvedFieldOrDirectiveArgs());
+        return (array) $this->getInputObjectValue(parent::getUnresolvedFieldOrDirectiveArgs());
     }
 
     /**

@@ -93,7 +93,6 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * to avoid throwing an Exception
      *
      * @throws QueryResolutionException If more than 1 argument is passed to the field executing the OneofMutation
-     * @throws AbstractValueResolutionPromiseException
      */
     protected function getOneofInputObjectPropertyName(FieldDataAccessorInterface $fieldDataAccessor): string
     {

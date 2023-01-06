@@ -342,7 +342,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function enableSemanticVersionConstraints(): bool
     {
         $envVariable = Environment::ENABLE_SEMANTIC_VERSION_CONSTRAINTS;
-        $defaultValue = false;
+        $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
