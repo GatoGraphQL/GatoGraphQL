@@ -290,10 +290,10 @@ trait AliasSchemaFieldDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    public function decideCanProcessDirectiveBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         $aliasedFieldDirectiveResolver = $this->getAliasedFieldDirectiveResolver();
-        return $aliasedFieldDirectiveResolver->decideCanProcessBasedOnVersionConstraint(
+        return $aliasedFieldDirectiveResolver->decideCanProcessDirectiveBasedOnVersionConstraint(
             $relationalTypeResolver
         );
     }

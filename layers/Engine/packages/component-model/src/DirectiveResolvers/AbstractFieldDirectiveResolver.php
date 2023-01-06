@@ -607,7 +607,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     /**
      * Define if to use the version to decide if to process the directive or not
      */
-    public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    public function decideCanProcessDirectiveBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return false;
     }
@@ -625,7 +625,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         /** Check if to validate the version */
         if (
             $moduleConfiguration->enableSemanticVersionConstraints()
-            && $this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)
+            && $this->decideCanProcessDirectiveBasedOnVersionConstraint($relationalTypeResolver)
             && $this->hasDirectiveVersion($relationalTypeResolver)
         ) {
             /** @var string */
@@ -1208,7 +1208,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
          * as it is satisfied only later on within resolveDirective.
          */
         $requestingNonSupportedVersion = $this->directiveDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
-            && !$this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver);
+            && !$this->decideCanProcessDirectiveBasedOnVersionConstraint($relationalTypeResolver);
         if (!$requestingNonSupportedVersion) {
             return;
         }
