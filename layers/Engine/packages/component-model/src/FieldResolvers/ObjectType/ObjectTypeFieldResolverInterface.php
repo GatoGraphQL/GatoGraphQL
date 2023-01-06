@@ -96,10 +96,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     /**
-     * Define if to use the version to decide if to process the field or not
-     */
-    public function decideCanProcessFieldBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool;
-    /**
      * Apply customizations to the field data
      *
      * @param array<string,mixed> $fieldArgs

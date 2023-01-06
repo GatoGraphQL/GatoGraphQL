@@ -619,14 +619,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * Define if to use the version to decide if to process the field or not
-     */
-    public function decideCanProcessFieldBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool
-    {
-        return false;
-    }
-
-    /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
      * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldDataAccessor->getValue('branch'))
      */
@@ -639,7 +631,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (
             $moduleConfiguration->enableSemanticVersionConstraints()
-            && $this->decideCanProcessFieldBasedOnVersionConstraint($objectTypeResolver)
             && $this->hasFieldVersion($objectTypeResolver, $field->getName())
         ) {
             /**
@@ -928,9 +919,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          * If passing the version, but this resolver doesn't
          * support versioning, then show a warning.
          */
-        $requestingNonSupportedVersion = $fieldDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
-            && !$this->decideCanProcessFieldBasedOnVersionConstraint($objectTypeResolver);
-        if (!$requestingNonSupportedVersion) {
+        $isRequestingNonRelevantVersion = $fieldDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
+            && !$this->hasFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName());
+        if (!$isRequestingNonRelevantVersion) {
             return;
         }
 
