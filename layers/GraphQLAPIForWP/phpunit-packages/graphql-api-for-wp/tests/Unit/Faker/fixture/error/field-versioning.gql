@@ -1,0 +1,3 @@
+{
+    nonExistingVersion: helloWorld(versionConstraint: ">1.1")
+}

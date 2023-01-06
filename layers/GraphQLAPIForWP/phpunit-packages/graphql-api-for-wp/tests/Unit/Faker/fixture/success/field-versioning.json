@@ -1,0 +1,9 @@
+{
+    "data": {
+        "defaultVersion": "Hello world (version: \"no version \/ default\")",
+        "firstVersionFixed": "Hello world (version: \"1.0.0\")",
+        "firstVersionConstraint": "Hello world (version: \"1.0.0\")",
+        "secondVersionFixed": "Hello world (version: \"1.1.0\")",
+        "secondVersionConstraint": "Hello world (version: \"1.1.0\")"
+    }
+}

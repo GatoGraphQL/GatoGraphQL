@@ -1,0 +1,7 @@
+{
+    defaultVersion: helloWorld
+    firstVersionFixed: helloWorld(versionConstraint: "1.0.0")
+    firstVersionConstraint: helloWorld(versionConstraint: "1.0.*")
+    secondVersionFixed: helloWorld(versionConstraint: "1.1.0")
+    secondVersionConstraint: helloWorld(versionConstraint: ">=1.0")
+}

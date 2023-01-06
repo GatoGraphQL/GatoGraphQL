@@ -1,0 +1,27 @@
+{
+    "errors": [
+        {
+            "message": "On field 'helloWorld' of type 'QueryRoot', there is no argument with name 'versionConstraint'",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 36
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(versionConstraint: \">1.1\")",
+                    "nonExistingVersion: helloWorld(versionConstraint: \">1.1\")",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "nonExistingVersion: helloWorld(versionConstraint: \">1.1\")",
+                "code": "gql@5.4.1[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+            }
+        }
+    ],
+    "data": {
+        "nonExistingVersion": null
+    }
+}
