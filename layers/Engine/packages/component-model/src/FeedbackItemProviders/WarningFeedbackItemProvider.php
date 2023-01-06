@@ -26,7 +26,12 @@ class WarningFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::W1 => $this->__('URL param \'' . Params::VERSION_CONSTRAINT_FOR_FIELDS . '\' expects the type and field name separated by \'' . Constants::TYPE_FIELD_SEPARATOR . '\' (eg: \'?' . Params::VERSION_CONSTRAINT_FOR_FIELDS . '[Post' . Constants::TYPE_FIELD_SEPARATOR . 'title]=^0.1\'), so the following value has been ignored: \'%s\'', 'component-model'),
+            self::W1 => sprintf(
+                $this->__('URL param \'%s\' expects the type and field name separated by \'%s\' (eg: \'%s\'), so the following value has been ignored: ', 'component-model'),
+                Params::VERSION_CONSTRAINT_FOR_FIELDS,
+                Constants::TYPE_FIELD_SEPARATOR,
+                '?' . Params::VERSION_CONSTRAINT_FOR_FIELDS . '[Post' . Constants::TYPE_FIELD_SEPARATOR . 'title]=^0.1'
+            ) . '\'%s\'',
             default => parent::getMessagePlaceholder($code),
         };
     }
