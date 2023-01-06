@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\DummySchema\DirectiveResolvers;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-class HelloWorldVersion010DirectiveResolver extends AbstractHelloWorldFieldDirectiveResolver
+class HelloWorldVersion010FieldDirectiveResolver extends AbstractHelloWorldFieldDirectiveResolver
 {
     public function getPriorityToAttachToClasses(): int
     {
