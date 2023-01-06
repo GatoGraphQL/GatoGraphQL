@@ -67,7 +67,7 @@ abstract class AbstractHelloWorldFieldDirectiveResolver extends AbstractGlobalFi
         foreach ($idFieldSet as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
                 $resolvedIDFieldValues[$id][$field] = sprintf(
-                    $this->__('%s: %s (version: "%s")', 'dummy-schema'),
+                    $this->__('hello: %s (version: "%s")', 'dummy-schema'),
                     $resolvedIDFieldValues[$id][$field],
                     $this->getDirectiveVersion($relationalTypeResolver) ?? 'no version / default',
                 );
