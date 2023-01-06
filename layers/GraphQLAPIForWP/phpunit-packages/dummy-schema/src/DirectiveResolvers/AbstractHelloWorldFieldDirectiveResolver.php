@@ -9,34 +9,15 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\Engine\DirectiveResolvers\AbstractGlobalFieldDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
 abstract class AbstractHelloWorldFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
 {
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-
     public function getDirectiveName(): string
     {
         return 'helloWorld';
-    }
-
-    final public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface
-    {
-        return $this->getStringScalarTypeResolver();
     }
 
     /**

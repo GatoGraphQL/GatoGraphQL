@@ -8,7 +8,6 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -174,7 +173,6 @@ interface FieldDirectiveResolverInterface extends DirectiveResolverInterface, At
      */
     public function getDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
     public function hasDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): bool;
-    public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface;
 
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
 

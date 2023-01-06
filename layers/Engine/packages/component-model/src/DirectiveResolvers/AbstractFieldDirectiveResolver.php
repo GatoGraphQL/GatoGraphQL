@@ -42,6 +42,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
@@ -908,13 +909,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
 
     final public function hasDirectiveVersion(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        return !empty($this->getDirectiveVersion($relationalTypeResolver))
-            && $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver) !== null;
-    }
-
-    public function getDirectiveVersionInputTypeResolver(RelationalTypeResolverInterface $relationalTypeResolver): ?InputTypeResolverInterface
-    {
-        return null;
+        return !empty($this->getDirectiveVersion($relationalTypeResolver));
     }
 
     /**
@@ -1030,7 +1025,15 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $moduleConfiguration->enableSemanticVersionConstraints()
             && $this->hasDirectiveVersion($relationalTypeResolver)
         ) {
-            $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $this->getDirectiveVersionInputTypeResolver($relationalTypeResolver);
+            /**
+             * The version is always of the `String` type service, but do not
+             * obtain it through method `getStringScalarTypeResolver` so that
+             * this method is not declared on all extending classes.
+             *
+             * @var StringScalarTypeResolver
+             */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $consolidatedDirectiveArgNameTypeResolvers[SchemaDefinition::VERSION_CONSTRAINT] = $stringScalarTypeResolver;
         }
 
         $this->consolidatedDirectiveArgNameTypeResolversCache[$cacheKey] = $consolidatedDirectiveArgNameTypeResolvers;
