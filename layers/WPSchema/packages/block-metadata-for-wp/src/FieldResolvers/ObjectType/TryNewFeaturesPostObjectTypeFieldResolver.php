@@ -39,7 +39,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         ];
     }
 
-    public function resolveCanProcess(
+    public function resolveCanProcessField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {

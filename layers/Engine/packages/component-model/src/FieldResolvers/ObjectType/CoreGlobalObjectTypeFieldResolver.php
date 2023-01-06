@@ -93,7 +93,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     /**
      * Only process internally
      */
-    public function resolveCanProcess(
+    public function resolveCanProcessField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {

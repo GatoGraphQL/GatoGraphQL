@@ -27,12 +27,12 @@ abstract class AbstractForPluginInternalUseListOfCPTEntitiesRootObjectTypeFieldR
         return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
     }
 
-    public function resolveCanProcess(
+    public function resolveCanProcessField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
         if (
-            !parent::resolveCanProcess(
+            !parent::resolveCanProcessField(
                 $objectTypeResolver,
                 $field,
             )

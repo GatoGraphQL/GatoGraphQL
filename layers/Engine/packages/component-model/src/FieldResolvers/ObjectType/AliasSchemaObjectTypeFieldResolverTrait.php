@@ -78,12 +78,12 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveCanProcess(
+    public function resolveCanProcessField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->resolveCanProcess(
+        return $aliasedObjectTypeFieldResolver->resolveCanProcessField(
             $objectTypeResolver,
             $this->getAliasedField($field)
         );

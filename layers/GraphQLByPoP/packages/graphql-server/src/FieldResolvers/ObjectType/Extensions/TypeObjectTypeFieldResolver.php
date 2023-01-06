@@ -46,14 +46,14 @@ class TypeObjectTypeFieldResolver extends UpstreamTypeObjectTypeFieldResolver
     /**
      * Only use this fieldResolver when parameter `namespaced` is provided. Otherwise, use the default implementation
      */
-    public function resolveCanProcess(
+    public function resolveCanProcessField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
         return match ($field->getName()) {
             'name' => $field->hasArgument('namespaced'),
             'fields' => $field->hasArgument('includeGlobal'),
-            default => parent::resolveCanProcess($objectTypeResolver, $field),
+            default => parent::resolveCanProcessField($objectTypeResolver, $field),
         };
     }
 

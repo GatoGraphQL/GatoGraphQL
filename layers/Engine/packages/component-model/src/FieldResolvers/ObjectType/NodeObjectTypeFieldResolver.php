@@ -71,7 +71,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
      *
      * @see QueryASTTransformationService.php
      */
-    public function resolveCanProcess(
+    public function resolveCanProcessField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
@@ -99,7 +99,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             return $moduleConfiguration->enableSelfField();
         }
-        return parent::resolveCanProcess(
+        return parent::resolveCanProcessField(
             $objectTypeResolver,
             $field,
         );

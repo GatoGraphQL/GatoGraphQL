@@ -1432,7 +1432,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 /**
                  * Add them to the results. We keep the list of all resolvers,
                  * so that if the first one cannot process the directive
-                 * (eg: through `resolveCanProcess`, the next one can do it)
+                 * (eg: through `resolveCanProcessDirective`, the next one can do it)
                  */
                 foreach ($attachedFieldDirectiveResolvers as $directiveResolver) {
                     if (!$directiveResolver->isDirectiveEnabled()) {
