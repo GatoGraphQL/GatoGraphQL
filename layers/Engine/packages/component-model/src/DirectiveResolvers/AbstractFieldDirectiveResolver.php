@@ -1200,9 +1200,9 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         /**
-         * If passing the version, but this resolver doesn't 
+         * If passing the version, but this resolver doesn't
          * support versioning, then show a warning.
-         * 
+         *
          * Just check if the versionConstraint was set, as getting the actual value
          * might throw an exception when it's an object resolved dynamic variable,
          * as it is satisfied only later on within resolveDirective.

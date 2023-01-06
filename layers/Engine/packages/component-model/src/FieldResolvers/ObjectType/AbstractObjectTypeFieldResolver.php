@@ -925,7 +925,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         /**
-         * If passing the version, but this resolver doesn't 
+         * If passing the version, but this resolver doesn't
          * support versioning, then show a warning.
          */
         $requestingNonSupportedVersion = $fieldDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
