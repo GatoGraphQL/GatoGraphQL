@@ -650,7 +650,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * 4. Through param `versionConstraint`: applies to all fields and directives in the query
              */
             $versionConstraint =
-                $field->getArgument(SchemaDefinition::VERSION_CONSTRAINT)?->getValue()
+                $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)
                 ?? $this->getVersioningService()->getVersionConstraintsForField(
                     $objectTypeResolver->getNamespacedTypeName(),
                     $field->getName()
