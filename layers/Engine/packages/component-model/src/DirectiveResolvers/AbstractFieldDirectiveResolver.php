@@ -1200,20 +1200,16 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         }
 
         /**
-         * If restricting the version, and this fieldResolver doesn't have any version, then show a warning.
+         * If passing the version, but this resolver doesn't 
+         * support versioning, then show a warning.
          * 
-         * Just check if the value was set, instead of getting the actual value,
-         * which might throw an exception when it's an object resolved dynamic variable,
+         * Just check if the versionConstraint was set, as getting the actual value
+         * might throw an exception when it's an object resolved dynamic variable,
          * as it is satisfied only later on within resolveDirective.
          */
-        if (!$this->directiveDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)) {
-            return;
-        }
-
-        /**
-         * If this fieldResolver accepts versioning, then no need for the warning
-         */
-        if ($this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)) {
+        $requestingNonSupportedVersion = $this->directiveDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
+            && !$this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver);
+        if (!$requestingNonSupportedVersion) {
             return;
         }
 

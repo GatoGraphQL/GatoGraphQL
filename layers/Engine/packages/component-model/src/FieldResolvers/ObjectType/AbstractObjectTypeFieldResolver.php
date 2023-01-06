@@ -925,16 +925,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         /**
-         * If restricting the version, and this directiveResolver doesn't have any version, then show a warning
+         * If passing the version, but this resolver doesn't 
+         * support versioning, then show a warning.
          */
-        if (!$fieldDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)) {
-            return;
-        }
-
-        /**
-         * If this directiveResolver accepts versioning, then no need for the warning
-         */
-        if ($this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)) {
+        $requestingNonSupportedVersion = $fieldDataAccessor->hasValue(SchemaDefinition::VERSION_CONSTRAINT)
+            && !$this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver);
+        if (!$requestingNonSupportedVersion) {
             return;
         }
 
