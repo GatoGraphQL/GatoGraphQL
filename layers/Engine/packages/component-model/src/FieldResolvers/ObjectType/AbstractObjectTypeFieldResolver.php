@@ -728,6 +728,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
+        /**
+         * Do not expose the versioned fields via introspection
+         */
+        if ($this->hasFieldVersion($objectTypeResolver, $fieldName)) {
+            return true;
+        }
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
