@@ -250,6 +250,14 @@
                             "args": []
                         },
                         {
+                            "name": "isOneOf",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "namespacedName",
                             "extensions": {
                                 "isMutation": false,

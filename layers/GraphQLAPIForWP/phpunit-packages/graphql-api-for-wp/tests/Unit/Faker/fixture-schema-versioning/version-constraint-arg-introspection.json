@@ -419,6 +419,10 @@
                             "args": []
                         },
                         {
+                            "name": "isOneOf",
+                            "args": []
+                        },
+                        {
                             "name": "namespacedName",
                             "args": []
                         },

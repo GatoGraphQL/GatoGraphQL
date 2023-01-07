@@ -442,6 +442,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "isOneOf",
+                            "description": "`true` for OneOf Input Objects, `false` otherwise",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "namespacedName",
                             "description": "The type's namespaced name",
                             "args": [],
