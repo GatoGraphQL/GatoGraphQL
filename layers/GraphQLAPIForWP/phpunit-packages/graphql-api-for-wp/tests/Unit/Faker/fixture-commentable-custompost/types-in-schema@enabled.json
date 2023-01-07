@@ -691,6 +691,12 @@
                             }
                         },
                         {
+                            "name": "isOneOf",
+                            "type": {
+                                "name": "Boolean!"
+                            }
+                        },
+                        {
                             "name": "namespacedName",
                             "type": {
                                 "name": "String!"

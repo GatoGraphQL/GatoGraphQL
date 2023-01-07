@@ -9,6 +9,7 @@ query ExtensionsIntrospectionQuery {
         elementName
         namespacedName
         possibleValues
+        isOneOf
       }
       fields {
         name

@@ -10,7 +10,8 @@
                     "extensions": {
                         "elementName": "MutationRoot",
                         "namespacedName": "MutationRoot",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -38,7 +39,8 @@
                     "extensions": {
                         "elementName": "QueryRoot",
                         "namespacedName": "QueryRoot",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -66,7 +68,8 @@
                     "extensions": {
                         "elementName": "Root",
                         "namespacedName": "Root",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -94,7 +97,8 @@
                     "extensions": {
                         "elementName": "_DirectiveExtensions",
                         "namespacedName": "_DirectiveExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -130,7 +134,8 @@
                     "extensions": {
                         "elementName": "_EnumValueExtensions",
                         "namespacedName": "_EnumValueExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -158,7 +163,8 @@
                     "extensions": {
                         "elementName": "_FieldExtensions",
                         "namespacedName": "_FieldExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -202,7 +208,8 @@
                     "extensions": {
                         "elementName": "_InputValueExtensions",
                         "namespacedName": "_InputValueExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -230,7 +237,8 @@
                     "extensions": {
                         "elementName": "_NamedTypeExtensions",
                         "namespacedName": "_NamedTypeExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -243,6 +251,14 @@
                         },
                         {
                             "name": "id",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "isOneOf",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -274,7 +290,8 @@
                     "extensions": {
                         "elementName": "_SchemaExtensions",
                         "namespacedName": "_SchemaExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -302,7 +319,8 @@
                     "extensions": {
                         "elementName": "__Directive",
                         "namespacedName": "__Directive",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -370,7 +388,8 @@
                     "extensions": {
                         "elementName": "__EnumValue",
                         "namespacedName": "__EnumValue",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -430,7 +449,8 @@
                     "extensions": {
                         "elementName": "__Field",
                         "namespacedName": "__Field",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -506,7 +526,8 @@
                     "extensions": {
                         "elementName": "__InputValue",
                         "namespacedName": "__InputValue",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -566,7 +587,8 @@
                     "extensions": {
                         "elementName": "__Schema",
                         "namespacedName": "__Schema",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -656,7 +678,8 @@
                     "extensions": {
                         "elementName": "__Type",
                         "namespacedName": "__Type",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -778,7 +801,8 @@
                     "extensions": {
                         "elementName": "Boolean",
                         "namespacedName": "Boolean",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -789,7 +813,8 @@
                     "extensions": {
                         "elementName": "ID",
                         "namespacedName": "ID",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -800,7 +825,8 @@
                     "extensions": {
                         "elementName": "Int",
                         "namespacedName": "Int",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -811,7 +837,8 @@
                     "extensions": {
                         "elementName": "String",
                         "namespacedName": "String",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -822,7 +849,8 @@
                     "extensions": {
                         "elementName": "Node",
                         "namespacedName": "PoP_ComponentModel_Node",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -842,7 +870,8 @@
                     "extensions": {
                         "elementName": "DirectiveKindEnum",
                         "namespacedName": "DirectiveKindEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -866,7 +895,8 @@
                     "extensions": {
                         "elementName": "DirectiveLocation",
                         "namespacedName": "DirectiveLocation",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -992,7 +1022,8 @@
                     "extensions": {
                         "elementName": "TypeKind",
                         "namespacedName": "TypeKind",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
