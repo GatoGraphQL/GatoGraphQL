@@ -9,6 +9,3 @@ services:
 
     PoPCMSSchema\CommentMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
-
-    PoPCMSSchema\CommentMutations\Hooks\:
-        resource: '../src/Hooks/*'
