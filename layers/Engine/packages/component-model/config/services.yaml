@@ -78,6 +78,9 @@ services:
     PoP\ComponentModel\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
 
+    PoP\ComponentModel\Hooks\:
+        resource: '../src/Hooks/*'
+
     PoP\ComponentModel\ComponentFilters\:
         resource: '../src/ComponentFilters/*'
 
