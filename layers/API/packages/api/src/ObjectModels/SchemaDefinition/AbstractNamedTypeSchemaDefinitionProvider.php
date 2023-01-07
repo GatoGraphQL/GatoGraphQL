@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
+use PoP\ComponentModel\TypeResolvers\InputObjectType\OneofInputObjectTypeResolverInterface;
 use PoPAPI\API\Schema\SchemaDefinition;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EnumStringScalarTypeResolverInterface;
 
@@ -36,6 +37,13 @@ abstract class AbstractNamedTypeSchemaDefinitionProvider extends AbstractTypeSch
             /** @var EnumStringScalarTypeResolverInterface */
             $enumStringScalarTypeResolver = $this->typeResolver;
             $namedTypeExtensions[SchemaDefinition::POSSIBLE_VALUES] = $enumStringScalarTypeResolver->getConsolidatedPossibleValues();
+        }
+
+        /**
+         * "oneOf" Input Objects
+         */
+        if ($this->typeResolver instanceof OneofInputObjectTypeResolverInterface) {
+            $namedTypeExtensions[SchemaDefinition::IS_ONE_OF] = true;
         }
 
         return $namedTypeExtensions;
