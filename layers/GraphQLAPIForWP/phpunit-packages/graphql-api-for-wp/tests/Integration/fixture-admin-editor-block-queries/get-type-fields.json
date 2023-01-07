@@ -1397,12 +1397,6 @@
               "name": "errors"
             },
             {
-              "name": "id"
-            },
-            {
-              "name": "self"
-            },
-            {
               "name": "status"
             },
             {
@@ -1421,12 +1415,6 @@
           "fields": [
             {
               "name": "errors"
-            },
-            {
-              "name": "id"
-            },
-            {
-              "name": "self"
             },
             {
               "name": "status"
