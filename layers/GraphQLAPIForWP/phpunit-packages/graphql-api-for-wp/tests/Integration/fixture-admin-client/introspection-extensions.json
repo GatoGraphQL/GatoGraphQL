@@ -10,7 +10,8 @@
                     "extensions": {
                         "elementName": "CategoryDoesNotExistErrorPayload",
                         "namespacedName": "CategoryDoesNotExistErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -30,7 +31,8 @@
                     "extensions": {
                         "elementName": "Comment",
                         "namespacedName": "Comment",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -278,7 +280,8 @@
                     "extensions": {
                         "elementName": "CommentAuthorEmailIsMissingErrorPayload",
                         "namespacedName": "CommentAuthorEmailIsMissingErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -298,7 +301,8 @@
                     "extensions": {
                         "elementName": "CommentAuthorNameIsMissingErrorPayload",
                         "namespacedName": "CommentAuthorNameIsMissingErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -318,7 +322,8 @@
                     "extensions": {
                         "elementName": "CommentParentCommentDoesNotExistErrorPayload",
                         "namespacedName": "CommentParentCommentDoesNotExistErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -338,7 +343,8 @@
                     "extensions": {
                         "elementName": "CommentsAreNotOpenForCustomPostErrorPayload",
                         "namespacedName": "CommentsAreNotOpenForCustomPostErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -358,7 +364,8 @@
                     "extensions": {
                         "elementName": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
                         "namespacedName": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -378,7 +385,8 @@
                     "extensions": {
                         "elementName": "CustomPostDoesNotExistErrorPayload",
                         "namespacedName": "CustomPostDoesNotExistErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -398,7 +406,8 @@
                     "extensions": {
                         "elementName": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
                         "namespacedName": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -418,7 +427,8 @@
                     "extensions": {
                         "elementName": "GenericCategory",
                         "namespacedName": "GenericCategory",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -582,7 +592,8 @@
                     "extensions": {
                         "elementName": "GenericCustomPost",
                         "namespacedName": "GenericCustomPost",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1047,7 +1058,8 @@
                     "extensions": {
                         "elementName": "GenericErrorPayload",
                         "namespacedName": "GenericErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1083,7 +1095,8 @@
                     "extensions": {
                         "elementName": "GenericTag",
                         "namespacedName": "GenericTag",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1239,7 +1252,8 @@
                     "extensions": {
                         "elementName": "InvalidUserEmailErrorPayload",
                         "namespacedName": "InvalidUserEmailErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1259,7 +1273,8 @@
                     "extensions": {
                         "elementName": "InvalidUsernameErrorPayload",
                         "namespacedName": "InvalidUsernameErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1279,7 +1294,8 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
                         "namespacedName": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1299,7 +1315,8 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
                         "namespacedName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1319,7 +1336,8 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
                         "namespacedName": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1339,7 +1357,8 @@
                     "extensions": {
                         "elementName": "Media",
                         "namespacedName": "Media",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1601,7 +1620,8 @@
                     "extensions": {
                         "elementName": "MediaItemDoesNotExistErrorPayload",
                         "namespacedName": "MediaItemDoesNotExistErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1621,7 +1641,8 @@
                     "extensions": {
                         "elementName": "Menu",
                         "namespacedName": "Menu",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1704,7 +1725,8 @@
                     "extensions": {
                         "elementName": "MenuItem",
                         "namespacedName": "MenuItem",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1820,7 +1842,8 @@
                     "extensions": {
                         "elementName": "MutationRoot",
                         "namespacedName": "MutationRoot",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -1991,7 +2014,8 @@
                     "extensions": {
                         "elementName": "Page",
                         "namespacedName": "Page",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -2356,7 +2380,8 @@
                     "extensions": {
                         "elementName": "PasswordIsIncorrectErrorPayload",
                         "namespacedName": "PasswordIsIncorrectErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -2376,7 +2401,8 @@
                     "extensions": {
                         "elementName": "Post",
                         "namespacedName": "Post",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -2837,7 +2863,8 @@
                     "extensions": {
                         "elementName": "PostCategory",
                         "namespacedName": "PostCategory",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -3062,7 +3089,8 @@
                     "extensions": {
                         "elementName": "PostTag",
                         "namespacedName": "PostTag",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -3210,7 +3238,8 @@
                     "extensions": {
                         "elementName": "QueryRoot",
                         "namespacedName": "QueryRoot",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -4347,7 +4376,8 @@
                     "extensions": {
                         "elementName": "Root",
                         "namespacedName": "Root",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5627,7 +5657,8 @@
                     "extensions": {
                         "elementName": "RootAddCommentToCustomPostMutationPayload",
                         "namespacedName": "RootAddCommentToCustomPostMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5671,7 +5702,8 @@
                     "extensions": {
                         "elementName": "RootCreatePostMutationPayload",
                         "namespacedName": "RootCreatePostMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5715,7 +5747,8 @@
                     "extensions": {
                         "elementName": "RootLoginUserMutationPayload",
                         "namespacedName": "RootLoginUserMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5759,7 +5792,8 @@
                     "extensions": {
                         "elementName": "RootLogoutUserMutationPayload",
                         "namespacedName": "RootLogoutUserMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5803,7 +5837,8 @@
                     "extensions": {
                         "elementName": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
                         "namespacedName": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5847,7 +5882,8 @@
                     "extensions": {
                         "elementName": "RootReplyCommentMutationPayload",
                         "namespacedName": "RootReplyCommentMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5891,7 +5927,8 @@
                     "extensions": {
                         "elementName": "RootSetCategoriesOnPostMutationPayload",
                         "namespacedName": "RootSetCategoriesOnPostMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5935,7 +5972,8 @@
                     "extensions": {
                         "elementName": "RootSetFeaturedImageOnCustomPostMutationPayload",
                         "namespacedName": "RootSetFeaturedImageOnCustomPostMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -5979,7 +6017,8 @@
                     "extensions": {
                         "elementName": "RootSetTagsOnPostMutationPayload",
                         "namespacedName": "RootSetTagsOnPostMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6023,7 +6062,8 @@
                     "extensions": {
                         "elementName": "RootUpdatePostMutationPayload",
                         "namespacedName": "RootUpdatePostMutationPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6067,7 +6107,8 @@
                     "extensions": {
                         "elementName": "User",
                         "namespacedName": "User",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6443,7 +6484,8 @@
                     "extensions": {
                         "elementName": "UserAvatar",
                         "namespacedName": "UserAvatar",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6487,7 +6529,8 @@
                     "extensions": {
                         "elementName": "UserIsLoggedInErrorPayload",
                         "namespacedName": "UserIsLoggedInErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6507,7 +6550,8 @@
                     "extensions": {
                         "elementName": "UserIsNotLoggedInErrorPayload",
                         "namespacedName": "UserIsNotLoggedInErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6527,7 +6571,8 @@
                     "extensions": {
                         "elementName": "UserRole",
                         "namespacedName": "UserRole",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6571,7 +6616,8 @@
                     "extensions": {
                         "elementName": "_DirectiveExtensions",
                         "namespacedName": "_DirectiveExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6607,7 +6653,8 @@
                     "extensions": {
                         "elementName": "_EnumValueExtensions",
                         "namespacedName": "_EnumValueExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6635,7 +6682,8 @@
                     "extensions": {
                         "elementName": "_FieldExtensions",
                         "namespacedName": "_FieldExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6679,7 +6727,8 @@
                     "extensions": {
                         "elementName": "_InputValueExtensions",
                         "namespacedName": "_InputValueExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6707,7 +6756,8 @@
                     "extensions": {
                         "elementName": "_NamedTypeExtensions",
                         "namespacedName": "_NamedTypeExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6720,6 +6770,14 @@
                         },
                         {
                             "name": "id",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "isOneOf",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -6751,7 +6809,8 @@
                     "extensions": {
                         "elementName": "_SchemaExtensions",
                         "namespacedName": "_SchemaExtensions",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6779,7 +6838,8 @@
                     "extensions": {
                         "elementName": "__Directive",
                         "namespacedName": "__Directive",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6847,7 +6907,8 @@
                     "extensions": {
                         "elementName": "__EnumValue",
                         "namespacedName": "__EnumValue",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6907,7 +6968,8 @@
                     "extensions": {
                         "elementName": "__Field",
                         "namespacedName": "__Field",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -6983,7 +7045,8 @@
                     "extensions": {
                         "elementName": "__InputValue",
                         "namespacedName": "__InputValue",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7043,7 +7106,8 @@
                     "extensions": {
                         "elementName": "__Schema",
                         "namespacedName": "__Schema",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7148,7 +7212,8 @@
                     "extensions": {
                         "elementName": "__Type",
                         "namespacedName": "__Type",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7270,7 +7335,8 @@
                     "extensions": {
                         "elementName": "AnyBuiltInScalar",
                         "namespacedName": "AnyBuiltInScalar",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7281,7 +7347,8 @@
                     "extensions": {
                         "elementName": "Boolean",
                         "namespacedName": "Boolean",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7295,7 +7362,8 @@
                         "possibleValues": [
                             "category",
                             "dummy-category"
-                        ]
+                        ],
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7310,7 +7378,8 @@
                             "dummy-cpt",
                             "page",
                             "post"
-                        ]
+                        ],
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7321,7 +7390,8 @@
                     "extensions": {
                         "elementName": "Date",
                         "namespacedName": "Date",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7332,7 +7402,8 @@
                     "extensions": {
                         "elementName": "DateTime",
                         "namespacedName": "DateTime",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7343,7 +7414,8 @@
                     "extensions": {
                         "elementName": "Email",
                         "namespacedName": "Email",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7354,7 +7426,8 @@
                     "extensions": {
                         "elementName": "HTML",
                         "namespacedName": "HTML",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7365,7 +7438,8 @@
                     "extensions": {
                         "elementName": "ID",
                         "namespacedName": "ID",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7376,7 +7450,8 @@
                     "extensions": {
                         "elementName": "Int",
                         "namespacedName": "Int",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7387,7 +7462,8 @@
                     "extensions": {
                         "elementName": "JSONObject",
                         "namespacedName": "JSONObject",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7401,7 +7477,8 @@
                         "possibleValues": [
                             "footer",
                             "primary"
-                        ]
+                        ],
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7412,7 +7489,8 @@
                     "extensions": {
                         "elementName": "Numeric",
                         "namespacedName": "Numeric",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7423,7 +7501,8 @@
                     "extensions": {
                         "elementName": "String",
                         "namespacedName": "String",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7437,7 +7516,8 @@
                         "possibleValues": [
                             "dummy-tag",
                             "post_tag"
-                        ]
+                        ],
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7448,7 +7528,8 @@
                     "extensions": {
                         "elementName": "URL",
                         "namespacedName": "URL",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7459,7 +7540,8 @@
                     "extensions": {
                         "elementName": "URLAbsolutePath",
                         "namespacedName": "URLAbsolutePath",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -7470,7 +7552,8 @@
                     "extensions": {
                         "elementName": "Commentable",
                         "namespacedName": "Commentable",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7540,7 +7623,8 @@
                     "extensions": {
                         "elementName": "IsCategory",
                         "namespacedName": "IsCategory",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7576,7 +7660,8 @@
                     "extensions": {
                         "elementName": "IsCustomPost",
                         "namespacedName": "IsCustomPost",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7747,7 +7832,8 @@
                     "extensions": {
                         "elementName": "IsErrorPayload",
                         "namespacedName": "IsErrorPayload",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7767,7 +7853,8 @@
                     "extensions": {
                         "elementName": "IsTag",
                         "namespacedName": "IsTag",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7803,7 +7890,8 @@
                     "extensions": {
                         "elementName": "Node",
                         "namespacedName": "Node",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7823,7 +7911,8 @@
                     "extensions": {
                         "elementName": "Queryable",
                         "namespacedName": "Queryable",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7859,7 +7948,8 @@
                     "extensions": {
                         "elementName": "WithAuthor",
                         "namespacedName": "WithAuthor",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7879,7 +7969,8 @@
                     "extensions": {
                         "elementName": "WithFeaturedImage",
                         "namespacedName": "WithFeaturedImage",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7907,7 +7998,8 @@
                     "extensions": {
                         "elementName": "WithMeta",
                         "namespacedName": "WithMeta",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": [
                         {
@@ -7949,7 +8041,8 @@
                     "extensions": {
                         "elementName": "CategoryByInput",
                         "namespacedName": "CategoryByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -7973,7 +8066,8 @@
                     "extensions": {
                         "elementName": "CategoryPaginationInput",
                         "namespacedName": "CategoryPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -7997,7 +8091,8 @@
                     "extensions": {
                         "elementName": "CommentByInput",
                         "namespacedName": "CommentByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8015,7 +8110,8 @@
                     "extensions": {
                         "elementName": "CommentMetaQueryInput",
                         "namespacedName": "CommentMetaQueryInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8051,7 +8147,8 @@
                     "extensions": {
                         "elementName": "CommentResponsePaginationInput",
                         "namespacedName": "CommentResponsePaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8075,7 +8172,8 @@
                     "extensions": {
                         "elementName": "CommentResponsesFilterInput",
                         "namespacedName": "CommentResponsesFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8129,7 +8227,8 @@
                     "extensions": {
                         "elementName": "CommentSortInput",
                         "namespacedName": "CommentSortInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8153,7 +8252,8 @@
                     "extensions": {
                         "elementName": "CustomPostByInput",
                         "namespacedName": "CustomPostByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8177,7 +8277,8 @@
                     "extensions": {
                         "elementName": "CustomPostCategoriesFilterInput",
                         "namespacedName": "CustomPostCategoriesFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8231,7 +8332,8 @@
                     "extensions": {
                         "elementName": "CustomPostCommentPaginationInput",
                         "namespacedName": "CustomPostCommentPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8255,7 +8357,8 @@
                     "extensions": {
                         "elementName": "CustomPostCommentsFilterInput",
                         "namespacedName": "CustomPostCommentsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8327,7 +8430,8 @@
                     "extensions": {
                         "elementName": "CustomPostMetaQueryInput",
                         "namespacedName": "CustomPostMetaQueryInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8363,7 +8467,8 @@
                     "extensions": {
                         "elementName": "CustomPostPaginationInput",
                         "namespacedName": "CustomPostPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8387,7 +8492,8 @@
                     "extensions": {
                         "elementName": "CustomPostSortInput",
                         "namespacedName": "CustomPostSortInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8411,7 +8517,8 @@
                     "extensions": {
                         "elementName": "CustomPostTagsFilterInput",
                         "namespacedName": "CustomPostTagsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8459,7 +8566,8 @@
                     "extensions": {
                         "elementName": "DateQueryInput",
                         "namespacedName": "DateQueryInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8549,7 +8657,8 @@
                     "extensions": {
                         "elementName": "LoginCredentialsInput",
                         "namespacedName": "LoginCredentialsInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8573,7 +8682,8 @@
                     "extensions": {
                         "elementName": "LoginUserByInput",
                         "namespacedName": "LoginUserByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8591,7 +8701,8 @@
                     "extensions": {
                         "elementName": "MediaItemByInput",
                         "namespacedName": "MediaItemByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8615,7 +8726,8 @@
                     "extensions": {
                         "elementName": "MediaItemSortInput",
                         "namespacedName": "MediaItemSortInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8639,7 +8751,8 @@
                     "extensions": {
                         "elementName": "MenuByInput",
                         "namespacedName": "MenuByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8669,7 +8782,8 @@
                     "extensions": {
                         "elementName": "MenuSortInput",
                         "namespacedName": "MenuSortInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8693,7 +8807,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByArrayValueInput",
                         "namespacedName": "MetaQueryCompareByArrayValueInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8717,7 +8832,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByInput",
                         "namespacedName": "MetaQueryCompareByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8753,7 +8869,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByKeyInput",
                         "namespacedName": "MetaQueryCompareByKeyInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8771,7 +8888,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByNumericValueInput",
                         "namespacedName": "MetaQueryCompareByNumericValueInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8795,7 +8913,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByStringValueInput",
                         "namespacedName": "MetaQueryCompareByStringValueInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8819,7 +8938,8 @@
                     "extensions": {
                         "elementName": "PageByInput",
                         "namespacedName": "PageByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8849,7 +8969,8 @@
                     "extensions": {
                         "elementName": "PageChildrenFilterInput",
                         "namespacedName": "PageChildrenFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8927,7 +9048,8 @@
                     "extensions": {
                         "elementName": "PagePaginationInput",
                         "namespacedName": "PagePaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -8951,7 +9073,8 @@
                     "extensions": {
                         "elementName": "PostByInput",
                         "namespacedName": "PostByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8975,7 +9098,8 @@
                     "extensions": {
                         "elementName": "PostCategoryByInput",
                         "namespacedName": "PostCategoryByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -8999,7 +9123,8 @@
                     "extensions": {
                         "elementName": "PostPaginationInput",
                         "namespacedName": "PostPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9023,7 +9148,8 @@
                     "extensions": {
                         "elementName": "PostTagByInput",
                         "namespacedName": "PostTagByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -9047,7 +9173,8 @@
                     "extensions": {
                         "elementName": "RootAddCommentToCustomPostFilterInput",
                         "namespacedName": "RootAddCommentToCustomPostFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9095,7 +9222,8 @@
                     "extensions": {
                         "elementName": "RootCategoriesFilterInput",
                         "namespacedName": "RootCategoriesFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9149,7 +9277,8 @@
                     "extensions": {
                         "elementName": "RootCommentPaginationInput",
                         "namespacedName": "RootCommentPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9173,7 +9302,8 @@
                     "extensions": {
                         "elementName": "RootCommentsFilterInput",
                         "namespacedName": "RootCommentsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9299,7 +9429,8 @@
                     "extensions": {
                         "elementName": "RootCreatePostFilterInput",
                         "namespacedName": "RootCreatePostFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9347,7 +9478,8 @@
                     "extensions": {
                         "elementName": "RootCustomPostsFilterInput",
                         "namespacedName": "RootCustomPostsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9461,7 +9593,8 @@
                     "extensions": {
                         "elementName": "RootMediaItemPaginationInput",
                         "namespacedName": "RootMediaItemPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9485,7 +9618,8 @@
                     "extensions": {
                         "elementName": "RootMediaItemsFilterInput",
                         "namespacedName": "RootMediaItemsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9545,7 +9679,8 @@
                     "extensions": {
                         "elementName": "RootMenuPaginationInput",
                         "namespacedName": "RootMenuPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9569,7 +9704,8 @@
                     "extensions": {
                         "elementName": "RootMenusFilterInput",
                         "namespacedName": "RootMenusFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9611,7 +9747,8 @@
                     "extensions": {
                         "elementName": "RootMyCommentsFilterInput",
                         "namespacedName": "RootMyCommentsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9713,7 +9850,8 @@
                     "extensions": {
                         "elementName": "RootMyCustomPostsFilterInput",
                         "namespacedName": "RootMyCustomPostsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9779,7 +9917,8 @@
                     "extensions": {
                         "elementName": "RootMyPostsFilterInput",
                         "namespacedName": "RootMyPostsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9863,7 +10002,8 @@
                     "extensions": {
                         "elementName": "RootPagesFilterInput",
                         "namespacedName": "RootPagesFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -9959,7 +10099,8 @@
                     "extensions": {
                         "elementName": "RootPostsFilterInput",
                         "namespacedName": "RootPostsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10061,7 +10202,8 @@
                     "extensions": {
                         "elementName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
                         "namespacedName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10079,7 +10221,8 @@
                     "extensions": {
                         "elementName": "RootReplyCommentFilterInput",
                         "namespacedName": "RootReplyCommentFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10121,7 +10264,8 @@
                     "extensions": {
                         "elementName": "RootSetCategoriesOnCustomPostFilterInput",
                         "namespacedName": "RootSetCategoriesOnCustomPostFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10151,7 +10295,8 @@
                     "extensions": {
                         "elementName": "RootSetFeaturedImageOnCustomPostFilterInput",
                         "namespacedName": "RootSetFeaturedImageOnCustomPostFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10175,7 +10320,8 @@
                     "extensions": {
                         "elementName": "RootSetTagsOnCustomPostFilterInput",
                         "namespacedName": "RootSetTagsOnCustomPostFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10205,7 +10351,8 @@
                     "extensions": {
                         "elementName": "RootTagsFilterInput",
                         "namespacedName": "RootTagsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10253,7 +10400,8 @@
                     "extensions": {
                         "elementName": "RootUpdatePostFilterInput",
                         "namespacedName": "RootUpdatePostFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10307,7 +10455,8 @@
                     "extensions": {
                         "elementName": "TagByInput",
                         "namespacedName": "TagByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -10331,7 +10480,8 @@
                     "extensions": {
                         "elementName": "TagPaginationInput",
                         "namespacedName": "TagPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10355,7 +10505,8 @@
                     "extensions": {
                         "elementName": "TaxonomyCustomPostsFilterInput",
                         "namespacedName": "TaxonomyCustomPostsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10439,7 +10590,8 @@
                     "extensions": {
                         "elementName": "TaxonomyMetaQueryInput",
                         "namespacedName": "TaxonomyMetaQueryInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10475,7 +10627,8 @@
                     "extensions": {
                         "elementName": "TaxonomySortInput",
                         "namespacedName": "TaxonomySortInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10499,7 +10652,8 @@
                     "extensions": {
                         "elementName": "TaxonomyTaxonomiesFilterInput",
                         "namespacedName": "TaxonomyTaxonomiesFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10547,7 +10701,8 @@
                     "extensions": {
                         "elementName": "UserByInput",
                         "namespacedName": "UserByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -10577,7 +10732,8 @@
                     "extensions": {
                         "elementName": "UserCustomPostsFilterInput",
                         "namespacedName": "UserCustomPostsFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10673,7 +10829,8 @@
                     "extensions": {
                         "elementName": "UserMetaQueryInput",
                         "namespacedName": "UserMetaQueryInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10709,7 +10866,8 @@
                     "extensions": {
                         "elementName": "UserPaginationInput",
                         "namespacedName": "UserPaginationInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10733,7 +10891,8 @@
                     "extensions": {
                         "elementName": "UserSearchByInput",
                         "namespacedName": "UserSearchByInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": true
                     },
                     "fields": null,
                     "inputFields": [
@@ -10757,7 +10916,8 @@
                     "extensions": {
                         "elementName": "UserSortInput",
                         "namespacedName": "UserSortInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10781,7 +10941,8 @@
                     "extensions": {
                         "elementName": "UsersFilterInput",
                         "namespacedName": "UsersFilterInput",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": [
@@ -10829,7 +10990,8 @@
                     "extensions": {
                         "elementName": "CommentOrderByEnum",
                         "namespacedName": "CommentOrderByEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -10925,7 +11087,8 @@
                     "extensions": {
                         "elementName": "CommentStatusEnum",
                         "namespacedName": "CommentStatusEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -10961,7 +11124,8 @@
                     "extensions": {
                         "elementName": "CommentTypeEnum",
                         "namespacedName": "CommentTypeEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -10991,7 +11155,8 @@
                     "extensions": {
                         "elementName": "CustomPostOrderByEnum",
                         "namespacedName": "CustomPostOrderByEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11081,7 +11246,8 @@
                     "extensions": {
                         "elementName": "CustomPostStatusEnum",
                         "namespacedName": "CustomPostStatusEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11117,7 +11283,8 @@
                     "extensions": {
                         "elementName": "DirectiveKindEnum",
                         "namespacedName": "DirectiveKindEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11141,7 +11308,8 @@
                     "extensions": {
                         "elementName": "DirectiveLocation",
                         "namespacedName": "DirectiveLocation",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11267,7 +11435,8 @@
                     "extensions": {
                         "elementName": "FilterCustomPostStatusEnum",
                         "namespacedName": "FilterCustomPostStatusEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11321,7 +11490,8 @@
                     "extensions": {
                         "elementName": "MediaItemOrderByEnum",
                         "namespacedName": "MediaItemOrderByEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11399,7 +11569,8 @@
                     "extensions": {
                         "elementName": "MenuOrderByEnum",
                         "namespacedName": "MenuOrderByEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11429,7 +11600,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByArrayValueOperatorEnum",
                         "namespacedName": "MetaQueryCompareByArrayValueOperatorEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11465,7 +11637,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByKeyOperatorEnum",
                         "namespacedName": "MetaQueryCompareByKeyOperatorEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11489,7 +11662,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByNumericValueOperatorEnum",
                         "namespacedName": "MetaQueryCompareByNumericValueOperatorEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11537,7 +11711,8 @@
                     "extensions": {
                         "elementName": "MetaQueryCompareByStringValueOperatorEnum",
                         "namespacedName": "MetaQueryCompareByStringValueOperatorEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11591,7 +11766,8 @@
                     "extensions": {
                         "elementName": "MetaQueryValueTypesEnum",
                         "namespacedName": "MetaQueryValueTypesEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11657,7 +11833,8 @@
                     "extensions": {
                         "elementName": "OperationStatusEnum",
                         "namespacedName": "OperationStatusEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11681,7 +11858,8 @@
                     "extensions": {
                         "elementName": "OrderEnum",
                         "namespacedName": "OrderEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11705,7 +11883,8 @@
                     "extensions": {
                         "elementName": "RelationEnum",
                         "namespacedName": "RelationEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11729,7 +11908,8 @@
                     "extensions": {
                         "elementName": "TaxonomyOrderByEnum",
                         "namespacedName": "TaxonomyOrderByEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11801,7 +11981,8 @@
                     "extensions": {
                         "elementName": "TypeKind",
                         "namespacedName": "TypeKind",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11861,7 +12042,8 @@
                     "extensions": {
                         "elementName": "UserOrderByEnum",
                         "namespacedName": "UserOrderByEnum",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11939,7 +12121,8 @@
                     "extensions": {
                         "elementName": "CategoryUnion",
                         "namespacedName": "CategoryUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11950,7 +12133,8 @@
                     "extensions": {
                         "elementName": "CustomPostUnion",
                         "namespacedName": "CustomPostUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11961,7 +12145,8 @@
                     "extensions": {
                         "elementName": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
                         "namespacedName": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11972,7 +12157,8 @@
                     "extensions": {
                         "elementName": "RootCreatePostMutationErrorPayloadUnion",
                         "namespacedName": "RootCreatePostMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11983,7 +12169,8 @@
                     "extensions": {
                         "elementName": "RootLoginUserMutationErrorPayloadUnion",
                         "namespacedName": "RootLoginUserMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -11994,7 +12181,8 @@
                     "extensions": {
                         "elementName": "RootLogoutUserMutationErrorPayloadUnion",
                         "namespacedName": "RootLogoutUserMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -12005,7 +12193,8 @@
                     "extensions": {
                         "elementName": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
                         "namespacedName": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -12016,7 +12205,8 @@
                     "extensions": {
                         "elementName": "RootReplyCommentMutationErrorPayloadUnion",
                         "namespacedName": "RootReplyCommentMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -12027,7 +12217,8 @@
                     "extensions": {
                         "elementName": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
                         "namespacedName": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -12038,7 +12229,8 @@
                     "extensions": {
                         "elementName": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
                         "namespacedName": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -12049,7 +12241,8 @@
                     "extensions": {
                         "elementName": "RootSetTagsOnPostMutationErrorPayloadUnion",
                         "namespacedName": "RootSetTagsOnPostMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -12060,7 +12253,8 @@
                     "extensions": {
                         "elementName": "RootUpdatePostMutationErrorPayloadUnion",
                         "namespacedName": "RootUpdatePostMutationErrorPayloadUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
@@ -12071,7 +12265,8 @@
                     "extensions": {
                         "elementName": "TagUnion",
                         "namespacedName": "TagUnion",
-                        "possibleValues": null
+                        "possibleValues": null,
+                        "isOneOf": false
                     },
                     "fields": null,
                     "inputFields": null,
