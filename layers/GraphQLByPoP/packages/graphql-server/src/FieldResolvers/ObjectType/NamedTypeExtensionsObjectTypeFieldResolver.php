@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use GraphQLByPoP\GraphQLServer\ObjectModels\NamedTypeExtensions;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\NamedTypeExtensionsObjectTypeResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -26,6 +28,15 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        /** @var BooleanScalarTypeResolver */
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
     }
 
     /**
@@ -47,6 +58,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
             'elementName',
             'namespacedName',
             'possibleValues',
+            'isOneOf',
         ];
     }
 
@@ -54,7 +66,8 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     {
         return match ($fieldName) {
             'elementName',
-            'namespacedName'
+            'namespacedName',
+            'isOneOf'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'possibleValues',
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -69,6 +82,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
             'elementName' => $this->__('The type\'s non-namespaced name', 'graphql-server'),
             'namespacedName' => $this->__('The type\'s namespaced name', 'graphql-server'),
             'possibleValues' => $this->__('Enum-like "possible values" for EnumString type resolvers, `null` otherwise', 'graphql-server'),
+            'isOneOf' => $this->__('`true` for OneOf Input Objects, `false` otherwise', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -85,6 +99,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
             'elementName' => $namedTypeExtensions->getTypeElementName(),
             'namespacedName' => $namedTypeExtensions->getTypeNamespacedName(),
             'possibleValues' => $namedTypeExtensions->getTypePossibleValues(),
+            'isOneOf' => $namedTypeExtensions->getTypeIsOneOfInputObjectType(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
@@ -96,6 +111,8 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
             'namespacedName',
             'possibleValues'
                 => $this->getStringScalarTypeResolver(),
+            'isOneOf'
+                => $this->getBooleanScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
