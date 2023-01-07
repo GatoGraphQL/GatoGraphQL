@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CommentMutations\Hooks;
+namespace PoP\ComponentModel\Hooks;
 
-use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\AbstractCommentMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Hooks\AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractTransientObjectObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class RemoveIDAndSelfFieldsFromCommentMutationPayloadObjectTypeHookSet extends AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
+class RemoveIDAndSelfFieldsFromTransientObjectObjectTypeHookSet extends AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
 {
     /**
      * @phpstan-return class-string<ObjectTypeResolverInterface|InterfaceTypeResolverInterface>
      */
     protected function getObjectTypeOrInterfaceTypeResolverClass(): string
     {
-        return AbstractCommentMutationPayloadObjectTypeResolver::class;
+        return AbstractTransientObjectObjectTypeResolver::class;
     }
 }

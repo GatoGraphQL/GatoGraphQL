@@ -11335,38 +11335,6 @@
               "deprecationReason": null
             },
             {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "self",
-              "description": "The same object",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "RootLoginUserMutationPayload!",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RootLoginUserMutationPayload",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "status",
               "description": "Status of the operation",
               "args": [],
@@ -11432,38 +11400,6 @@
                     "name": "RootLogoutUserMutationErrorPayloadUnion",
                     "ofType": null
                   }
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "self",
-              "description": "The same object",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "RootLogoutUserMutationPayload!",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "RootLogoutUserMutationPayload",
-                  "ofType": null
                 }
               },
               "isDeprecated": false,

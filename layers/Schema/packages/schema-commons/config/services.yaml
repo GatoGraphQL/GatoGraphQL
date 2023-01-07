@@ -12,6 +12,3 @@ services:
 
     PoPSchema\SchemaCommons\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
-
-    PoPSchema\SchemaCommons\Hooks\:
-        resource: '../src/Hooks/*'
