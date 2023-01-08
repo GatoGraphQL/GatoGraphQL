@@ -1323,7 +1323,70 @@ type User {
 }
 ```
 
-This field can be used to give a particular shape to the GraphQL response, as in [this example](https://stepzen.com/blog/bridging-graphql-queries-relay-nonrelay-schemas).
+The `self` field allows to append extra levels to the query without leaving the queried object. Running this query:
+
+```graphql
+{
+  __typename
+  self {
+    __typename
+  }
+  
+  post(by: { id: 1 }) {
+    self {
+      id
+      __typename
+    }
+  }
+  
+  user(by: { id: 1 }) {
+    self {
+      id
+      __typename
+    }
+  }
+}
+```
+
+...produces this response:
+
+```json
+{
+  "data": {
+    "__typename": "QueryRoot",
+    "self": {
+      "__typename": "QueryRoot"
+    },
+    "post": {
+      "self": {
+        "id": 1,
+        "__typename": "Post"
+      }
+    },
+    "user": {
+      "self": {
+        "id": 1,
+        "__typename": "User"
+      }
+    }
+  }
+}
+```
+
+We can use this field to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately, as to have the response from our GraphQL API match the response from another API (such as the WP REST API when doing a migration):
+
+```graphql
+{
+  categories: self {
+    edges: postCategories {
+      node: self {
+        name
+        slug
+      }
+    }
+  }
+}
+```
 
 ## Link to the online documentation of the GraphQL errors
 
