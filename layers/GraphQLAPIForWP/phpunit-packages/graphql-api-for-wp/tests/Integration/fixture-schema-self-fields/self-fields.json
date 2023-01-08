@@ -1,0 +1,421 @@
+{
+    "data": {
+        "__schema": {
+            "queryType": {
+                "fields": [
+                    {
+                        "name": "capabilities"
+                    },
+                    {
+                        "name": "categories"
+                    },
+                    {
+                        "name": "category"
+                    },
+                    {
+                        "name": "categoryCount"
+                    },
+                    {
+                        "name": "categoryNames"
+                    },
+                    {
+                        "name": "comment"
+                    },
+                    {
+                        "name": "commentCount"
+                    },
+                    {
+                        "name": "comments"
+                    },
+                    {
+                        "name": "customPost"
+                    },
+                    {
+                        "name": "customPostCount"
+                    },
+                    {
+                        "name": "customPosts"
+                    },
+                    {
+                        "name": "event"
+                    },
+                    {
+                        "name": "eventCount"
+                    },
+                    {
+                        "name": "events"
+                    },
+                    {
+                        "name": "globalID"
+                    },
+                    {
+                        "name": "id"
+                    },
+                    {
+                        "name": "imageSizeNames"
+                    },
+                    {
+                        "name": "isUserLoggedIn"
+                    },
+                    {
+                        "name": "loggedInUserID"
+                    },
+                    {
+                        "name": "me"
+                    },
+                    {
+                        "name": "mediaItem"
+                    },
+                    {
+                        "name": "mediaItemCount"
+                    },
+                    {
+                        "name": "mediaItems"
+                    },
+                    {
+                        "name": "menu"
+                    },
+                    {
+                        "name": "menuCount"
+                    },
+                    {
+                        "name": "menus"
+                    },
+                    {
+                        "name": "myComment"
+                    },
+                    {
+                        "name": "myCommentCount"
+                    },
+                    {
+                        "name": "myComments"
+                    },
+                    {
+                        "name": "myCustomPost"
+                    },
+                    {
+                        "name": "myCustomPostCount"
+                    },
+                    {
+                        "name": "myCustomPosts"
+                    },
+                    {
+                        "name": "myPost"
+                    },
+                    {
+                        "name": "myPostCount"
+                    },
+                    {
+                        "name": "myPosts"
+                    },
+                    {
+                        "name": "optionObjectValue"
+                    },
+                    {
+                        "name": "optionValue"
+                    },
+                    {
+                        "name": "optionValues"
+                    },
+                    {
+                        "name": "page"
+                    },
+                    {
+                        "name": "pageCount"
+                    },
+                    {
+                        "name": "pages"
+                    },
+                    {
+                        "name": "post"
+                    },
+                    {
+                        "name": "postCategories"
+                    },
+                    {
+                        "name": "postCategory"
+                    },
+                    {
+                        "name": "postCategoryCount"
+                    },
+                    {
+                        "name": "postCategoryNames"
+                    },
+                    {
+                        "name": "postCount"
+                    },
+                    {
+                        "name": "postTag"
+                    },
+                    {
+                        "name": "postTagCount"
+                    },
+                    {
+                        "name": "postTagNames"
+                    },
+                    {
+                        "name": "postTags"
+                    },
+                    {
+                        "name": "posts"
+                    },
+                    {
+                        "name": "roleNames"
+                    },
+                    {
+                        "name": "roles"
+                    },
+                    {
+                        "name": "tag"
+                    },
+                    {
+                        "name": "tagCount"
+                    },
+                    {
+                        "name": "tagNames"
+                    },
+                    {
+                        "name": "tags"
+                    },
+                    {
+                        "name": "user"
+                    },
+                    {
+                        "name": "userCount"
+                    },
+                    {
+                        "name": "users"
+                    },
+                    {
+                        "name": "_and"
+                    },
+                    {
+                        "name": "_arrayAddItem"
+                    },
+                    {
+                        "name": "_arrayChunk"
+                    },
+                    {
+                        "name": "_arrayDiff"
+                    },
+                    {
+                        "name": "_arrayFill"
+                    },
+                    {
+                        "name": "_arrayInnerJoinJSONObjectProperties"
+                    },
+                    {
+                        "name": "_arrayItem"
+                    },
+                    {
+                        "name": "_arrayJoin"
+                    },
+                    {
+                        "name": "_arrayLength"
+                    },
+                    {
+                        "name": "_arrayMerge"
+                    },
+                    {
+                        "name": "_arrayPad"
+                    },
+                    {
+                        "name": "_arrayRandom"
+                    },
+                    {
+                        "name": "_arrayRemoveFirst"
+                    },
+                    {
+                        "name": "_arrayRemoveLast"
+                    },
+                    {
+                        "name": "_arrayReverse"
+                    },
+                    {
+                        "name": "_arraySearch"
+                    },
+                    {
+                        "name": "_arraySetItem"
+                    },
+                    {
+                        "name": "_arraySlice"
+                    },
+                    {
+                        "name": "_arraySplice"
+                    },
+                    {
+                        "name": "_arrayUnique"
+                    },
+                    {
+                        "name": "_asyncRequest"
+                    },
+                    {
+                        "name": "_asyncRequestJSONObjectCollections"
+                    },
+                    {
+                        "name": "_asyncRequestJSONObjectItems"
+                    },
+                    {
+                        "name": "_echo"
+                    },
+                    {
+                        "name": "_env"
+                    },
+                    {
+                        "name": "_equals"
+                    },
+                    {
+                        "name": "_fail"
+                    },
+                    {
+                        "name": "_greaterThan"
+                    },
+                    {
+                        "name": "_greaterThanOrEquals"
+                    },
+                    {
+                        "name": "_if"
+                    },
+                    {
+                        "name": "_inArray"
+                    },
+                    {
+                        "name": "_intAdd"
+                    },
+                    {
+                        "name": "_intArraySum"
+                    },
+                    {
+                        "name": "_isEmpty"
+                    },
+                    {
+                        "name": "_isNull"
+                    },
+                    {
+                        "name": "_lowerThan"
+                    },
+                    {
+                        "name": "_lowerThanOrEquals"
+                    },
+                    {
+                        "name": "_not"
+                    },
+                    {
+                        "name": "_notEmpty"
+                    },
+                    {
+                        "name": "_notEquals"
+                    },
+                    {
+                        "name": "_notInArray"
+                    },
+                    {
+                        "name": "_notNull"
+                    },
+                    {
+                        "name": "_objectAddEntry"
+                    },
+                    {
+                        "name": "_objectCombine"
+                    },
+                    {
+                        "name": "_objectProperty"
+                    },
+                    {
+                        "name": "_objectRemoveEntry"
+                    },
+                    {
+                        "name": "_or"
+                    },
+                    {
+                        "name": "_propertyExistsInJSONObject"
+                    },
+                    {
+                        "name": "_propertyIsSetInJSONObject"
+                    },
+                    {
+                        "name": "_request"
+                    },
+                    {
+                        "name": "_requestGraphQL"
+                    },
+                    {
+                        "name": "_requestJSONObjectCollection"
+                    },
+                    {
+                        "name": "_requestJSONObjectItem"
+                    },
+                    {
+                        "name": "_sprintf"
+                    },
+                    {
+                        "name": "_strAppend"
+                    },
+                    {
+                        "name": "_strContains"
+                    },
+                    {
+                        "name": "_strEndsWith"
+                    },
+                    {
+                        "name": "_strLength"
+                    },
+                    {
+                        "name": "_strLowerCase"
+                    },
+                    {
+                        "name": "_strPad"
+                    },
+                    {
+                        "name": "_strPos"
+                    },
+                    {
+                        "name": "_strRegexReplace"
+                    },
+                    {
+                        "name": "_strRepeat"
+                    },
+                    {
+                        "name": "_strReplace"
+                    },
+                    {
+                        "name": "_strReverse"
+                    },
+                    {
+                        "name": "_strShuffle"
+                    },
+                    {
+                        "name": "_strSplit"
+                    },
+                    {
+                        "name": "_strStartsWith"
+                    },
+                    {
+                        "name": "_strStripSlashes"
+                    },
+                    {
+                        "name": "_strSubstr"
+                    },
+                    {
+                        "name": "_strTitleCase"
+                    },
+                    {
+                        "name": "_strToTime"
+                    },
+                    {
+                        "name": "_strTrim"
+                    },
+                    {
+                        "name": "_strUpperCase"
+                    },
+                    {
+                        "name": "_strWordCount"
+                    },
+                    {
+                        "name": "_time"
+                    }
+                ]
+            }
+        }
+    }
+}
