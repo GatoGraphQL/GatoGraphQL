@@ -1373,7 +1373,7 @@ The `self` field allows to append extra levels to the query without leaving the 
 }
 ```
 
-We can use this field to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately, as to have the response from our GraphQL API match the response from another API (such as the WP REST API when doing a migration):
+We can use this field to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately, as to have the response from our GraphQL API match the response from another API (such as the WP REST API when doing a migration, or from a different GraphQL server plugin when switching from one to another):
 
 ```graphql
 {
