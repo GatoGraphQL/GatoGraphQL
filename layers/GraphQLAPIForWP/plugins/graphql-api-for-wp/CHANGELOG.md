@@ -189,6 +189,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Implementation of several oneof input objects
 - Support for operation directives
 - Restrict field directives to specific types
+- Added module "Self Fields"
 - Link to the online documentation of the GraphQL errors
 - Namespacing is applied to new types
 - Print the full path to the GraphQL query node producing errors

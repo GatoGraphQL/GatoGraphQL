@@ -1305,6 +1305,26 @@ The query below would then not work, as field `Post.commentCount` has type `Int`
 }
 ```
 
+## Added module "Self Fields"
+
+This new module exposes a `self` field to all types in the GraphQL schema, which echoes back the same object where it is applied:
+
+```graphql
+type QueryRoot {
+  self: QueryRoot!
+}
+
+type Post {
+  self: Post!
+}
+
+type User {
+  self: User!
+}
+```
+
+This field can be used to give a particular shape to the GraphQL response, as in [this example](https://stepzen.com/blog/bridging-graphql-queries-relay-nonrelay-schemas).
+
 ## Link to the online documentation of the GraphQL errors
 
 When executing a GraphQL query and an error is returned, if the error has been documented in the GraphQL spec, then the response will now include a link to its online documentation.
