@@ -41,30 +41,33 @@ class IdentifiableObjectInterfaceTypeFieldResolver extends AbstractInterfaceType
     {
         return [
             'id',
+            'globalID',
         ];
     }
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'id' => $this->getIDScalarTypeResolver(),
+            'id',
+            'globalID' => $this->getIDScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
 
     public function getFieldTypeModifiers(string $fieldName): int
     {
-        switch ($fieldName) {
-            case 'id':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getFieldTypeModifiers($fieldName);
+        return match ($fieldName) {
+            'id',
+            'globalID' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getFieldTypeModifiers($fieldName),
+        };
     }
 
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
             'id' => $this->__('The object\'s unique identifier for its type', 'component-model'),
+            'globalID' => $this->__('The object\'s globally unique identifier', 'component-model'),
             default => parent::getFieldDescription($fieldName),
         };
     }
