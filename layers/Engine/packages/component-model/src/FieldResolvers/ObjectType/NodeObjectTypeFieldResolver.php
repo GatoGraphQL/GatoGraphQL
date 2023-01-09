@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\IdentifiableObjectInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -20,16 +20,16 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver = null;
+    private ?IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver = null;
 
-    final public function setNodeInterfaceTypeFieldResolver(NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver): void
+    final public function setIdentifiableObjectInterfaceTypeFieldResolver(IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver): void
     {
-        $this->nodeInterfaceTypeFieldResolver = $nodeInterfaceTypeFieldResolver;
+        $this->identifiableObjectInterfaceTypeFieldResolver = $identifiableObjectInterfaceTypeFieldResolver;
     }
-    final protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver
+    final protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver
     {
-        /** @var NodeInterfaceTypeFieldResolver */
-        return $this->nodeInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(NodeInterfaceTypeFieldResolver::class);
+        /** @var IdentifiableObjectInterfaceTypeFieldResolver */
+        return $this->identifiableObjectInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IdentifiableObjectInterfaceTypeFieldResolver::class);
     }
 
     /**
@@ -48,7 +48,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->getNodeInterfaceTypeFieldResolver(),
+            $this->getIdentifiableObjectInterfaceTypeFieldResolver(),
         ];
     }
 
