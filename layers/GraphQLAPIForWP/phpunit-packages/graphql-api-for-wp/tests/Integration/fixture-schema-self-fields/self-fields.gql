@@ -1,0 +1,9 @@
+query FetchRootQueryFieldNames {
+    __schema {
+        queryType {
+            fields {
+                name
+            }
+        }
+    }
+}

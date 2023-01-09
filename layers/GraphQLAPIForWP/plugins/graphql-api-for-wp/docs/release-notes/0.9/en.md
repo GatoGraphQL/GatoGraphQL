@@ -1305,6 +1305,103 @@ The query below would then not work, as field `Post.commentCount` has type `Int`
 }
 ```
 
+## Added module "Self Fields"
+
+Sometimes we need to modify the shape of the response, to emulate the same response from another GraphQL server, or from the REST API. This new module exposes a `self` field to all types in the GraphQL schema, which echoes back the same object where it is applied:
+
+```graphql
+type QueryRoot {
+  self: QueryRoot!
+}
+
+type Post {
+  self: Post!
+}
+
+type User {
+  self: User!
+}
+```
+
+The `self` field allows to append extra levels to the query without leaving the queried object. Running this query:
+
+```graphql
+{
+  __typename
+  self {
+    __typename
+  }
+  
+  post(by: { id: 1 }) {
+    self {
+      id
+      __typename
+    }
+  }
+  
+  user(by: { id: 1 }) {
+    self {
+      id
+      __typename
+    }
+  }
+}
+```
+
+...produces this response:
+
+```json
+{
+  "data": {
+    "__typename": "QueryRoot",
+    "self": {
+      "__typename": "QueryRoot"
+    },
+    "post": {
+      "self": {
+        "id": 1,
+        "__typename": "Post"
+      }
+    },
+    "user": {
+      "self": {
+        "id": 1,
+        "__typename": "User"
+      }
+    }
+  }
+}
+```
+
+We can use this field to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately.
+
+For instance, this query recreates the shape of another GraphQL server:
+
+```graphql
+{
+  categories: self {
+    edges: postCategories {
+      node: self {
+        name
+        slug
+      }
+    }
+  }
+}
+```
+
+This query recreates the shape of the WP REST API:
+
+```graphql
+{
+  post(by: {id: 1}) {
+    content: self {
+      rendered: content
+    }
+  }
+}
+```
+
 ## Link to the online documentation of the GraphQL errors
 
 When executing a GraphQL query and an error is returned, if the error has been documented in the GraphQL spec, then the response will now include a link to its online documentation.
