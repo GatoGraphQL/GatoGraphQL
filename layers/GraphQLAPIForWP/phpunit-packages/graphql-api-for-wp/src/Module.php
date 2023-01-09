@@ -16,6 +16,7 @@ class Module extends AbstractModule
     {
         return [
             \PHPUnitForGraphQLAPI\DummySchema\Module::class,
+            \PHPUnitForGraphQLAPI\DummyWPSchema\Module::class,
             \PHPUnitForGraphQLAPI\WPFakerSchema\Module::class,
             \PHPUnitForGraphQLAPI\WebserverRequests\Module::class,
         ];
