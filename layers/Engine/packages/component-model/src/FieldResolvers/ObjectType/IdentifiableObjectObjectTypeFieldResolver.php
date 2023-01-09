@@ -11,7 +11,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class IdentifiableObjectObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver = null;
 
