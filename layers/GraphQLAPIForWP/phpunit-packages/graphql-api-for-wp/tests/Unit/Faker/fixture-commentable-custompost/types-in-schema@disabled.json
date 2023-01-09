@@ -5,20 +5,7 @@
                 {
                     "name": "MutationRoot",
                     "possibleTypes": null,
-                    "fields": [
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
-                            "name": "self",
-                            "type": {
-                                "name": "MutationRoot!"
-                            }
-                        }
-                    ]
+                    "fields": []
                 },
                 {
                     "name": "Page",
@@ -70,6 +57,12 @@
                             "name": "excerpt",
                             "type": {
                                 "name": "String"
+                            }
+                        },
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
                             }
                         },
                         {
@@ -193,6 +186,12 @@
                             }
                         },
                         {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
                             "name": "id",
                             "type": {
                                 "name": "ID!"
@@ -295,6 +294,12 @@
                             }
                         },
                         {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
                             "name": "id",
                             "type": {
                                 "name": "ID!"
@@ -367,6 +372,12 @@
                             }
                         },
                         {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
                             "name": "id",
                             "type": {
                                 "name": "ID!"
@@ -427,6 +438,12 @@
                             }
                         },
                         {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
                             "name": "id",
                             "type": {
                                 "name": "ID!"
@@ -445,6 +462,12 @@
                     "possibleTypes": null,
                     "fields": [
                         {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
                             "name": "id",
                             "type": {
                                 "name": "ID!"
@@ -462,6 +485,12 @@
                     "name": "_FieldExtensions",
                     "possibleTypes": null,
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
                         {
                             "name": "id",
                             "type": {
@@ -493,6 +522,12 @@
                     "possibleTypes": null,
                     "fields": [
                         {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
                             "name": "id",
                             "type": {
                                 "name": "ID!"
@@ -514,6 +549,12 @@
                             "name": "elementName",
                             "type": {
                                 "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
                             }
                         },
                         {
@@ -546,6 +587,12 @@
                     "name": "_SchemaExtensions",
                     "possibleTypes": null,
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
                         {
                             "name": "id",
                             "type": {
@@ -580,6 +627,12 @@
                             "name": "extensions",
                             "type": {
                                 "name": "_DirectiveExtensions!"
+                            }
+                        },
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
                             }
                         },
                         {
@@ -631,6 +684,12 @@
                             }
                         },
                         {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
                             "name": "id",
                             "type": {
                                 "name": "ID!"
@@ -676,6 +735,12 @@
                             "name": "extensions",
                             "type": {
                                 "name": "_FieldExtensions!"
+                            }
+                        },
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
                             }
                         },
                         {
@@ -727,6 +792,12 @@
                             }
                         },
                         {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
                             "name": "id",
                             "type": {
                                 "name": "ID!"
@@ -760,6 +831,12 @@
                             "name": "extensions",
                             "type": {
                                 "name": "_SchemaExtensions!"
+                            }
+                        },
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
                             }
                         },
                         {
@@ -826,6 +903,12 @@
                             "name": "fields",
                             "type": {
                                 "name": "[__Field!]"
+                            }
+                        },
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
                             }
                         },
                         {
@@ -932,9 +1015,6 @@
                     "name": "IdentifiableObject",
                     "possibleTypes": [
                         {
-                            "name": "MutationRoot"
-                        },
-                        {
                             "name": "Page"
                         },
                         {
@@ -984,6 +1064,12 @@
                         }
                     ],
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
                         {
                             "name": "id",
                             "type": {

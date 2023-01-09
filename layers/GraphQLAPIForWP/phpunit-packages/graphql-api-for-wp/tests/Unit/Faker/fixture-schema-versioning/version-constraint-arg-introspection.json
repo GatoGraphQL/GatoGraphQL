@@ -5,16 +5,7 @@
                 {
                     "kind": "OBJECT",
                     "name": "MutationRoot",
-                    "fields": [
-                        {
-                            "name": "id",
-                            "args": []
-                        },
-                        {
-                            "name": "self",
-                            "args": []
-                        }
-                    ],
+                    "fields": [],
                     "inputFields": null
                 },
                 {
@@ -98,6 +89,10 @@
                         },
                         {
                             "name": "excerpt",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -208,6 +203,10 @@
                             ]
                         },
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "helloWorld",
                             "args": []
                         },
@@ -290,6 +289,10 @@
                             ]
                         },
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "helloWorld",
                             "args": []
                         },
@@ -343,6 +346,10 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -358,6 +365,10 @@
                     "name": "_EnumValueExtensions",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -372,6 +383,10 @@
                     "kind": "OBJECT",
                     "name": "_FieldExtensions",
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "args": []
+                        },
                         {
                             "name": "id",
                             "args": []
@@ -396,6 +411,10 @@
                     "name": "_InputValueExtensions",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -412,6 +431,10 @@
                     "fields": [
                         {
                             "name": "elementName",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -438,6 +461,10 @@
                     "name": "_SchemaExtensions",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -462,6 +489,10 @@
                         },
                         {
                             "name": "extensions",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -500,6 +531,10 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -532,6 +567,10 @@
                         },
                         {
                             "name": "extensions",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -570,6 +609,10 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -598,6 +641,10 @@
                         },
                         {
                             "name": "extensions",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -658,6 +705,10 @@
                                     "name": "includeDeprecated"
                                 }
                             ]
+                        },
+                        {
+                            "name": "globalID",
+                            "args": []
                         },
                         {
                             "name": "id",
@@ -770,6 +821,10 @@
                     "kind": "INTERFACE",
                     "name": "IdentifiableObject",
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "args": []
+                        },
                         {
                             "name": "id",
                             "args": []

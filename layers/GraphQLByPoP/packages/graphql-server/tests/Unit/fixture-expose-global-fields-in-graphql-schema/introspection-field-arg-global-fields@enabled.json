@@ -4,6 +4,9 @@
             "type": {
                 "fields": [
                     {
+                        "name": "globalID"
+                    },
+                    {
                         "name": "id"
                     },
                     {
