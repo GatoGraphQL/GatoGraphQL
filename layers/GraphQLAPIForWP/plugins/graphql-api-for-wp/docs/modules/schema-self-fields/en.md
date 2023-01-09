@@ -74,7 +74,9 @@ The `self` field allows to append extra levels to the query without leaving the 
 
 ## How to use
 
-Use `self` to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately:
+Use `self` to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately.
+
+For instance, this query recreates the shape of another GraphQL server:
 
 ```graphql
 {
@@ -83,7 +85,20 @@ Use `self` to artificially append the extra levels needed for the response, and 
       node: self {
         name
         slug
+        id: globalID
       }
+    }
+  }
+}
+```
+
+This query recreates the shape of the WP REST API:
+
+```graphql
+{
+  post(by: {id: 1}) {
+    content: self {
+      rendered: content
     }
   }
 }

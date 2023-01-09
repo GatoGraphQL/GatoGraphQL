@@ -1307,7 +1307,7 @@ The query below would then not work, as field `Post.commentCount` has type `Int`
 
 ## Added module "Self Fields"
 
-This new module exposes a `self` field to all types in the GraphQL schema, which echoes back the same object where it is applied:
+Sometimes we need to modify the shape of the response, to emulate the same response from another GraphQL server, or from the REST API. This new module exposes a `self` field to all types in the GraphQL schema, which echoes back the same object where it is applied:
 
 ```graphql
 type QueryRoot {
@@ -1373,7 +1373,9 @@ The `self` field allows to append extra levels to the query without leaving the 
 }
 ```
 
-We can use this field to artificially append extra levels to the response, and add field aliases to rename those levels appropriately, as to have the response from our GraphQL API match the response from another API (such as the WP REST API when doing a migration, or from a different GraphQL server plugin when switching from one to another):
+We can use this field to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately.
+
+For instance, this query recreates the shape of another GraphQL server:
 
 ```graphql
 {
@@ -1382,7 +1384,20 @@ We can use this field to artificially append extra levels to the response, and a
       node: self {
         name
         slug
+        id: globalID
       }
+    }
+  }
+}
+```
+
+This query recreates the shape of the WP REST API:
+
+```graphql
+{
+  post(by: {id: 1}) {
+    content: self {
+      rendered: content
     }
   }
 }
