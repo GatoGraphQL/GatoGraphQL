@@ -26,7 +26,7 @@ class SchemaSelfFieldsModifyPluginSettingsFixtureEndpointWebserverRequestTest ex
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapipro_schema-self-fields';
+        return 'graphqlapi_graphqlapi_schema-self-fields';
     }
 
     protected function getPluginSettingsNewValue(): mixed
