@@ -4,8 +4,8 @@
 const MODULE = 'schema-self-fields';
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const BASE_URL = process.env.NODE_ENV === 'production'
-	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-pro/master'
-	: 'https://raw.githubusercontent.com/leoloso/PRO/master/layers/GraphQLAPIForWP/plugins/graphql-api-pro'
+	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
+	: 'https://raw.githubusercontent.com/leoloso/PoP/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp'
 
 const config = require( '@wordpress/scripts/config/webpack.config' );
 const path = require( 'path' );
@@ -59,7 +59,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPIProSchemaConfigSelfFields';
+config.output.jsonpFunction = 'webpackJsonpGraphQLAPISchemaConfigSelfFields';
 // ------------------------------------------------------
 
 module.exports = config;

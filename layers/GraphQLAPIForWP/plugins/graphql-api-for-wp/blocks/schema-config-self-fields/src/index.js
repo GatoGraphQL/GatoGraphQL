@@ -25,12 +25,12 @@ import {
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api-pro/schema-config-self-fields', {
+registerBlockType( 'graphql-api/schema-config-self-fields', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( '"Self Fields" for the Schema Configuration', 'graphql-api-pro' ),
+	title: __( '"Self Fields" for the Schema Configuration', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
@@ -38,7 +38,7 @@ registerBlockType( 'graphql-api-pro/schema-config-self-fields', {
 	 */
 	description: __(
 		'Enable "self" fields in the Schema Configuration',
-		'graphql-api-pro'
+		'graphql-api'
 	),
 
 	/**
