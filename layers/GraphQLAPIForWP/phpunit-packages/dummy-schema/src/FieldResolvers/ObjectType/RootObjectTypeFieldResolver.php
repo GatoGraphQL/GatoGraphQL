@@ -17,7 +17,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?DummyCreateStringMutationResolver $dummyCreateStringMutationResolver = null;
-    
+
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
