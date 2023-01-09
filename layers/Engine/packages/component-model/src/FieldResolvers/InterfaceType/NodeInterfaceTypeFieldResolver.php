@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InterfaceType\NodeInterfaceTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\IdentifiableObjectInterfaceTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
 class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
@@ -30,7 +30,7 @@ class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
-            NodeInterfaceTypeResolver::class,
+            IdentifiableObjectInterfaceTypeResolver::class,
         ];
     }
 
