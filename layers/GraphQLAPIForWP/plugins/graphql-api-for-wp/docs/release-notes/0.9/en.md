@@ -12,6 +12,55 @@ The GraphQL schema mapping the WordPress data model has been significantly compl
 
 Let's see what new elements have been added.
 
+### Added field `globalID` to all types in the schema
+
+All types in the GraphQL schema offer the `id` field, which returns the ID for the entity in WordPress. This ID makes the object unique only within their types, so that both a user and a post (from types `User` and `Post` respectively) can have ID `1`.
+
+If a unique ID is required for all entities across all types in the GraphQL schema, for instance when using a GraphQL client that caches the response, then we can use the newly-added `globalID` field instead:
+
+```graphql
+{
+  posts {
+    id
+    globalID
+  }
+
+  users {
+    id
+    globalID
+  }
+}
+```
+
+...producing
+
+```json
+{
+  "data": {
+    "posts": [
+      {
+        "id": 1,
+        "globalID": "Post:1"
+      },
+      {
+        "id": 2,
+        "globalID": "Post:2"
+      },
+      {
+        "id": 3,
+        "globalID": "Post:3"
+      }
+    ],
+    "users": [
+      {
+        "id": 1,
+        "globalID": "User:1"
+      }
+    ]
+  }
+}
+```
+
 ### In addition to `id`, fetch single entities by `slug`, `path` and other properties
 
 Fields to fetch a single entity, such as `Root.post` or `Root.user`, used to receive argument `id` to select the entity. Now they have been expanded: `id` has been replaced with argument `by`, which is a oneof input object (explained later on) to query the entity by different properties.

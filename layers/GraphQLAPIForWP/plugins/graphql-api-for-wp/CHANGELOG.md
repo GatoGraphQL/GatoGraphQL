@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### GraphQL schema upgrade
 
+- Added field `globalID` to all types in the schema
 - In addition to `id`, fetch single entities by `slug`, `path` and other properties, on fields:
   - `Root.customPost`
   - `Root.genericCustomPost`
