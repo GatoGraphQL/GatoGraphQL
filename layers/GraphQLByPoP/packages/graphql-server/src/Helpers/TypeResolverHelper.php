@@ -13,6 +13,12 @@ class TypeResolverHelper implements TypeResolverHelperInterface
      */
     public function getObjectTypeResolverMandatoryFields(): array
     {
-        return ['id', 'globalID', 'self', '__typename'];
+        return [
+            // These ones are not part anymore from MutationRoot, so commented code
+            // 'id',
+            // 'globalID',
+            // 'self',
+            '__typename',
+        ];
     }
 }
