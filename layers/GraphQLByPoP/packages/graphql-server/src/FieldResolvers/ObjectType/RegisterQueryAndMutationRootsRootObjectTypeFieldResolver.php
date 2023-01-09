@@ -7,6 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
@@ -19,9 +20,10 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
  * Add connections to the QueryRoot and MutationRoot types,
  * so they can be accessed to generate the schema
  */
-class RegisterQueryRootRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
+    private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
 
     final public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
     {
@@ -31,6 +33,15 @@ class RegisterQueryRootRootObjectTypeFieldResolver extends AbstractObjectTypeFie
     {
         /** @var QueryRootObjectTypeResolver */
         return $this->queryRootObjectTypeResolver ??= $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+    }
+    final public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
+    {
+        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+    }
+    final protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
+    {
+        /** @var MutationRootObjectTypeResolver */
+        return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
     }
 
     /**
@@ -63,15 +74,22 @@ class RegisterQueryRootRootObjectTypeFieldResolver extends AbstractObjectTypeFie
 
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        return [
-            'queryRoot',
-        ];
+        return array_merge(
+            [
+                'queryRoot',
+            ],
+            $moduleConfiguration->enableMutations() ?
+            [
+                'mutationRoot',
+            ] : []
+        );
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             'queryRoot' => $this->__('Get the Query Root type', 'graphql-server'),
+            'mutationRoot' => $this->__('Get the Mutation Root type', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -80,6 +98,7 @@ class RegisterQueryRootRootObjectTypeFieldResolver extends AbstractObjectTypeFie
     {
         return match ($fieldName) {
             'queryRoot' => $this->getQueryRootObjectTypeResolver(),
+            'mutationRoot' => $this->getMutationRootObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
