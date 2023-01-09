@@ -2252,7 +2252,7 @@
             }
           ],
           "kind": "INTERFACE",
-          "description": "The fundamental fields that must be implemented by all objects"
+          "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'"
         },
         {
           "name": "Queryable",

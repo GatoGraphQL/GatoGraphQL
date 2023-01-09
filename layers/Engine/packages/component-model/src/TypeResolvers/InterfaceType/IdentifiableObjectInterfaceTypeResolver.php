@@ -13,6 +13,6 @@ class IdentifiableObjectInterfaceTypeResolver extends AbstractInterfaceTypeResol
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('The fundamental fields that must be implemented by all objects', 'component-model');
+        return $this->__('An object that can be uniquely identifiable within its type via an \'ID\', and within the whole schema via a \'global ID\'', 'component-model');
     }
 }
