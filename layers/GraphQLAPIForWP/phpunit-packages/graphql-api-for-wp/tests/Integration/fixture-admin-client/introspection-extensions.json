@@ -144,6 +144,14 @@
                             ]
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -490,6 +498,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -803,6 +819,14 @@
                         },
                         {
                             "name": "excerpt",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -1158,6 +1182,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -1430,6 +1462,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "height",
                             "extensions": {
                                 "isMutation": false,
@@ -1654,6 +1694,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -1747,6 +1795,14 @@
                         },
                         {
                             "name": "description",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -2195,6 +2251,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "hasComments",
                             "extensions": {
                                 "isMutation": false,
@@ -2609,6 +2673,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "hasComments",
                             "extensions": {
                                 "isMutation": false,
@@ -2953,6 +3025,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -3103,6 +3183,14 @@
                         },
                         {
                             "name": "description",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -3489,6 +3577,14 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
                         },
                         {
                             "name": "id",
@@ -4657,6 +4753,14 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
                         },
                         {
                             "name": "id",
@@ -6209,6 +6313,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "hasAnyCapability",
                             "extensions": {
                                 "isMutation": false,
@@ -6489,6 +6601,14 @@
                     },
                     "fields": [
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -6584,6 +6704,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -6629,6 +6757,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -6658,6 +6794,14 @@
                     },
                     "fields": [
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -6686,6 +6830,14 @@
                         "isOneOf": false
                     },
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
                         {
                             "name": "id",
                             "extensions": {
@@ -6732,6 +6884,14 @@
                     },
                     "fields": [
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -6762,6 +6922,14 @@
                     "fields": [
                         {
                             "name": "elementName",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -6814,6 +6982,14 @@
                     },
                     "fields": [
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -6860,6 +7036,14 @@
                         },
                         {
                             "name": "extensions",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -6936,6 +7120,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -7005,6 +7197,14 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -7067,6 +7267,14 @@
                         },
                         {
                             "name": "extensions",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -7147,6 +7355,14 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
                         },
                         {
                             "name": "id",
@@ -7261,6 +7477,14 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
                         },
                         {
                             "name": "id",
@@ -7627,6 +7851,14 @@
                         "isOneOf": false
                     },
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
                         {
                             "name": "id",
                             "extensions": {
