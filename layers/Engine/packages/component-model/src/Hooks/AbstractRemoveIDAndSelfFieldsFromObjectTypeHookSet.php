@@ -22,7 +22,9 @@ abstract class AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet extends Abstra
         ObjectTypeFieldResolverInterface | InterfaceTypeFieldResolverInterface $objectTypeOrInterfaceTypeFieldResolver,
         string $fieldName
     ): bool {
-        return $fieldName === 'id' || ($fieldName === 'self' && $this->removeSelfField());
+        return $fieldName === 'id'
+            || $fieldName === 'globalID'
+            || ($fieldName === 'self' && $this->removeSelfField());
     }
 
     protected function removeSelfField(): bool
