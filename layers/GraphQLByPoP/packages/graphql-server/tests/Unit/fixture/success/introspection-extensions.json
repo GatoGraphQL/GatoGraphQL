@@ -848,7 +848,7 @@
                     "name": "IdentifiableObject",
                     "extensions": {
                         "elementName": "IdentifiableObject",
-                        "namespacedName": "PoP_ComponentModel_Node",
+                        "namespacedName": "PoP_ComponentModel_IdentifiableObject",
                         "possibleValues": null,
                         "isOneOf": false
                     },

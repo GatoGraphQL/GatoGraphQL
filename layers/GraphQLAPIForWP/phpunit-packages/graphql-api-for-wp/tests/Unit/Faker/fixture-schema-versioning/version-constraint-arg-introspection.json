@@ -768,6 +768,17 @@
                 },
                 {
                     "kind": "INTERFACE",
+                    "name": "IdentifiableObject",
+                    "fields": [
+                        {
+                            "name": "id",
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null
+                },
+                {
+                    "kind": "INTERFACE",
                     "name": "IsCustomPost",
                     "fields": [
                         {
@@ -850,17 +861,6 @@
                         },
                         {
                             "name": "urlAbsolutePath",
-                            "args": []
-                        }
-                    ],
-                    "inputFields": null
-                },
-                {
-                    "kind": "INTERFACE",
-                    "name": "IdentifiableObject",
-                    "fields": [
-                        {
-                            "name": "id",
                             "args": []
                         }
                     ],
