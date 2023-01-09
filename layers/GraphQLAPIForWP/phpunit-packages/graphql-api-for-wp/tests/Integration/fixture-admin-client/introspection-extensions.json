@@ -7886,10 +7886,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "Node",
+                    "name": "IdentifiableObject",
                     "extensions": {
-                        "elementName": "Node",
-                        "namespacedName": "Node",
+                        "elementName": "IdentifiableObject",
+                        "namespacedName": "IdentifiableObject",
                         "possibleValues": null,
                         "isOneOf": false
                     },

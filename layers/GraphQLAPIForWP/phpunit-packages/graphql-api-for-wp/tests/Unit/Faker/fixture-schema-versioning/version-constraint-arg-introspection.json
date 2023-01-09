@@ -857,7 +857,7 @@
                 },
                 {
                     "kind": "INTERFACE",
-                    "name": "Node",
+                    "name": "IdentifiableObject",
                     "fields": [
                         {
                             "name": "id",

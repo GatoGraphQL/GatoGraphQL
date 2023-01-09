@@ -18,7 +18,7 @@ trait RemoveNodeInterfaceObjectTypeResolverTrait
     abstract protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver;
 
     /**
-     * Remove the Node interface
+     * Remove the IdentifiableObject interface
      *
      * @param InterfaceTypeFieldResolverInterface[] $interfaceTypeFieldResolvers
      * @return InterfaceTypeFieldResolverInterface[]

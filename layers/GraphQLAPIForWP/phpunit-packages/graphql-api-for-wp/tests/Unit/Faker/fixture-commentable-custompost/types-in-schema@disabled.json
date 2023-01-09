@@ -1026,7 +1026,7 @@
                     ]
                 },
                 {
-                    "name": "Node",
+                    "name": "IdentifiableObject",
                     "possibleTypes": [
                         {
                             "name": "MutationRoot"

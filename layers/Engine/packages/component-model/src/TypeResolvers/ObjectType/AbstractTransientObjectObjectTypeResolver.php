@@ -34,7 +34,7 @@ abstract class AbstractTransientObjectObjectTypeResolver extends AbstractObjectT
     }
 
     /**
-     * Remove the Node interface
+     * Remove the IdentifiableObject interface
      *
      * @param InterfaceTypeFieldResolverInterface[] $interfaceTypeFieldResolvers
      * @return InterfaceTypeFieldResolverInterface[]

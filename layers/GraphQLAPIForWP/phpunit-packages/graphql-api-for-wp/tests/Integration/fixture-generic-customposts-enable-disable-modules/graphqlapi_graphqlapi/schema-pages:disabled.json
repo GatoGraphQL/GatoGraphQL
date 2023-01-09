@@ -490,7 +490,7 @@
                     ]
                 },
                 {
-                    "name": "Node",
+                    "name": "IdentifiableObject",
                     "enumValues": null,
                     "possibleTypes": [
                         {

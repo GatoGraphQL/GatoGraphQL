@@ -8,7 +8,7 @@ class NodeInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'Node';
+        return 'IdentifiableObject';
     }
 
     public function getTypeDescription(): ?string

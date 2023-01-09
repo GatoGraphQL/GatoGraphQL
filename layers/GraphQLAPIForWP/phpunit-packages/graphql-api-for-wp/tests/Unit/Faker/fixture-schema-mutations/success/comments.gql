@@ -18,7 +18,7 @@ mutation {
       authorEmail
       customPost {
         __typename
-        ...on Node {
+        ...on IdentifiableObject {
           id
         }
         ...on Page {

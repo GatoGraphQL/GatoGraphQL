@@ -2244,8 +2244,8 @@
           "description": "Entities representing a tag"
         },
         {
-          "name": "Node",
-          "namespacedName": "Node",
+          "name": "IdentifiableObject",
+          "namespacedName": "IdentifiableObject",
           "fields": [
             {
               "name": "id"

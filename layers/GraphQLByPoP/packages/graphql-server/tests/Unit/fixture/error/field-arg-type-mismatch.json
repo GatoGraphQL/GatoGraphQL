@@ -254,7 +254,7 @@
                     "passingInputObject": null
                 },
                 {
-                    "name": "Node",
+                    "name": "IdentifiableObject",
                     "passingFloat": null,
                     "passingArray": null,
                     "passingInputObject": null
