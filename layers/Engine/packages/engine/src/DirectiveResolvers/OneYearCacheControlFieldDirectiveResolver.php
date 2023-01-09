@@ -15,6 +15,7 @@ class OneYearCacheControlFieldDirectiveResolver extends AbstractCacheControlFiel
     {
         return [
             'id',
+            'globalID',
         ];
     }
 

@@ -24,6 +24,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
     public final const SCHEMA_EXPOSE_SENSITIVE_DATA = Plugin::NAMESPACE . '\schema-expose-sensitive-data';
     public final const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
+    public final const GLOBAL_ID_FIELD = Plugin::NAMESPACE . '\global-id-field';
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -58,6 +59,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::NESTED_MUTATIONS,
             self::SCHEMA_EXPOSE_SENSITIVE_DATA,
             self::SCHEMA_SELF_FIELDS,
+            self::GLOBAL_ID_FIELD,
         ];
     }
 
@@ -88,6 +90,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose Sensitive Data in the Schema', 'graphql-api'),
             self::SCHEMA_SELF_FIELDS => \__('Self Fields', 'graphql-api'),
+            self::GLOBAL_ID_FIELD => \__('Global ID Field', 'graphql-api'),
             default => $module,
         };
     }
@@ -100,7 +103,24 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::NESTED_MUTATIONS => \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose “sensitive” data elements in the schema', 'graphql-api'),
             self::SCHEMA_SELF_FIELDS => \__('Expose "self" fields in the schema', 'graphql-api'),
+            self::GLOBAL_ID_FIELD => \__('Uniquely identify objects via field <code>globalID</code> on all types of the GraphQL schema', 'graphql-api'),
             default => parent::getDescription($module),
+        };
+    }
+
+    public function canBeDisabled(string $module): bool
+    {
+        return match ($module) {
+            self::GLOBAL_ID_FIELD => false,
+            default => parent::canBeDisabled($module),
+        };
+    }
+
+    public function isHidden(string $module): bool
+    {
+        return match ($module) {
+            self::GLOBAL_ID_FIELD => true,
+            default => parent::isHidden($module),
         };
     }
 

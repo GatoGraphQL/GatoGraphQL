@@ -37,6 +37,9 @@
                         "name": "customPosts"
                     },
                     {
+                        "name": "globalID"
+                    },
+                    {
                         "name": "id"
                     },
                     {

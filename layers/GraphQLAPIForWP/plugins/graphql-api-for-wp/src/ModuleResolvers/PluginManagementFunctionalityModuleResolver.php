@@ -45,20 +45,18 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
 
     public function canBeDisabled(string $module): bool
     {
-        switch ($module) {
-            case self::GENERAL:
-                return false;
-        }
-        return parent::canBeDisabled($module);
+        return match ($module) {
+            self::GENERAL => false,
+            default => parent::canBeDisabled($module),
+        };
     }
 
     public function isHidden(string $module): bool
     {
-        switch ($module) {
-            case self::GENERAL:
-                return true;
-        }
-        return parent::isHidden($module);
+        return match ($module) {
+            self::GENERAL => true,
+            default => parent::isHidden($module),
+        };
     }
 
     public function getName(string $module): string
@@ -71,11 +69,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
 
     public function getDescription(string $module): string
     {
-        switch ($module) {
-            case self::GENERAL:
-                return \__('General options for the plugin', 'graphql-api');
-        }
-        return parent::getDescription($module);
+        return match ($module) {
+            self::GENERAL => \__('General options for the plugin', 'graphql-api'),
+            default => parent::getDescription($module),
+        };
     }
 
     /**

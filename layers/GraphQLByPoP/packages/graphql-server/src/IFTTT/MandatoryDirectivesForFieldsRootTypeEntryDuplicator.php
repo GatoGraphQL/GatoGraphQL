@@ -47,7 +47,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
      * For each of the entries assigned to Root (RootObjectTypeResolver::class),
      * add a corresponding additional entry for QueryRoot and/or MutationRoot.
      *
-     * Fields "id", "self" and "__typename" can belong to both types.
+     * Fields "id", "globalID", "self" and "__typename" can belong to both types.
      * Otherwise, the field is added to MutationRoot if it has a MutationResolver,
      * or to QueryRoot otherwise.
      *
@@ -93,7 +93,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
 
         $additionalFieldEntries = [];
 
-        /** Fields "id", "self" and "__typename" belong to both QueryRoot and MutationRoot */
+        /** Fields "id", "globalID", "self" and "__typename" belong to both QueryRoot and MutationRoot */
         $objectTypeResolverMandatoryFields = $this->getTypeResolverHelper()->getObjectTypeResolverMandatoryFields();
 
         $rootObjectTypeResolver = $this->getRootObjectTypeResolver();

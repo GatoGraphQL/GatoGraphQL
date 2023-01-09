@@ -13,6 +13,6 @@ class TypeResolverHelper implements TypeResolverHelperInterface
      */
     public function getObjectTypeResolverMandatoryFields(): array
     {
-        return ['id', 'self', '__typename'];
+        return ['id', 'globalID', 'self', '__typename'];
     }
 }

@@ -51,6 +51,9 @@
               "name": "dateStr"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -181,6 +184,9 @@
               "name": "description"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -256,6 +262,9 @@
             },
             {
               "name": "excerpt"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "hasComments"
@@ -344,6 +353,9 @@
             },
             {
               "name": "description"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -454,6 +466,9 @@
               "name": "description"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "height"
             },
             {
@@ -521,6 +536,9 @@
               "name": "count"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -557,6 +575,9 @@
             },
             {
               "name": "description"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -680,6 +701,9 @@
               "name": "featuredImage"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "hasComments"
             },
             {
@@ -792,6 +816,9 @@
               "name": "featuredImage"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "hasComments"
             },
             {
@@ -875,6 +902,9 @@
               "name": "description"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -920,6 +950,9 @@
             },
             {
               "name": "description"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -991,6 +1024,9 @@
             },
             {
               "name": "customPosts"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -1179,6 +1215,9 @@
             },
             {
               "name": "customPosts"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -1578,6 +1617,9 @@
               "name": "firstName"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "hasAnyCapability"
             },
             {
@@ -1658,6 +1700,9 @@
           "namespacedName": "UserAvatar",
           "fields": [
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -1703,6 +1748,9 @@
               "name": "capabilities"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -1723,6 +1771,9 @@
               "name": "fieldDirectiveSupportedTypeNamesOrDescriptions"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -1737,6 +1788,9 @@
           "namespacedName": "_EnumValueExtensions",
           "fields": [
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -1750,6 +1804,9 @@
           "name": "_FieldExtensions",
           "namespacedName": "_FieldExtensions",
           "fields": [
+            {
+              "name": "globalID"
+            },
             {
               "name": "id"
             },
@@ -1771,6 +1828,9 @@
           "namespacedName": "_InputValueExtensions",
           "fields": [
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -1786,6 +1846,9 @@
           "fields": [
             {
               "name": "elementName"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -1808,6 +1871,9 @@
           "namespacedName": "_SchemaExtensions",
           "fields": [
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -1829,6 +1895,9 @@
             },
             {
               "name": "extensions"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -1860,6 +1929,9 @@
               "name": "extensions"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -1887,6 +1959,9 @@
             },
             {
               "name": "extensions"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -1918,6 +1993,9 @@
               "name": "extensions"
             },
             {
+              "name": "globalID"
+            },
+            {
               "name": "id"
             },
             {
@@ -1942,6 +2020,9 @@
             },
             {
               "name": "globalFields"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -1980,6 +2061,9 @@
             },
             {
               "name": "fields"
+            },
+            {
+              "name": "globalID"
             },
             {
               "name": "id"
@@ -2152,6 +2236,9 @@
           "name": "IdentifiableObject",
           "namespacedName": "IdentifiableObject",
           "fields": [
+            {
+              "name": "globalID"
+            },
             {
               "name": "id"
             }
