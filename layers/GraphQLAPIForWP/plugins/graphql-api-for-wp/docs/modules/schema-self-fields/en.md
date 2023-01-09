@@ -85,7 +85,6 @@ For instance, this query recreates the shape of another GraphQL server:
       node: self {
         name
         slug
-        id: globalID
       }
     }
   }
