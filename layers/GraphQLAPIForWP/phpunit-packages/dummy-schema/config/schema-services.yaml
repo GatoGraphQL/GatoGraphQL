@@ -8,3 +8,6 @@ services:
 
     PHPUnitForGraphQLAPI\DummySchema\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
+
+    PHPUnitForGraphQLAPI\DummySchema\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
