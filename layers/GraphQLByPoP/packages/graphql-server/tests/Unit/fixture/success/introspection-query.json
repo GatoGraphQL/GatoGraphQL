@@ -51,7 +51,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -100,7 +100,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -149,7 +149,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -218,7 +218,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -267,7 +267,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -348,7 +348,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -397,7 +397,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -498,7 +498,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -547,7 +547,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -688,7 +688,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -793,7 +793,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -938,7 +938,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -1043,7 +1043,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -1226,7 +1226,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -1457,7 +1457,7 @@
                     "interfaces": [
                         {
                             "kind": "INTERFACE",
-                            "name": "Node",
+                            "name": "IdentifiableObject",
                             "ofType": null
                         }
                     ],
@@ -1506,8 +1506,8 @@
                 },
                 {
                     "kind": "INTERFACE",
-                    "name": "Node",
-                    "description": "The fundamental fields that must be implemented by all objects",
+                    "name": "IdentifiableObject",
+                    "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'",
                     "fields": [
                         {
                             "name": "id",

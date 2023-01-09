@@ -1022,7 +1022,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     /**
      * Allow to override the interfaces, as for removing
-     * the Node interface whenever not exposing field "id"
+     * the IdentifiableObject interface whenever not exposing field "id"
      * in an Object Type.
      *
      * @param InterfaceTypeFieldResolverInterface[] $interfaceTypeFieldResolvers

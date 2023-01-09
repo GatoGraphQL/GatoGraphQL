@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 class SchemaConfigSelfFieldsBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
 {
     use MainPluginBlockTrait;
-    
+
     protected function getBlockName(): string
     {
         return 'schema-config-self-fields';

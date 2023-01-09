@@ -929,6 +929,70 @@
                     "fields": null
                 },
                 {
+                    "name": "IdentifiableObject",
+                    "possibleTypes": [
+                        {
+                            "name": "MutationRoot"
+                        },
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        },
+                        {
+                            "name": "QueryRoot"
+                        },
+                        {
+                            "name": "Root"
+                        },
+                        {
+                            "name": "_DirectiveExtensions"
+                        },
+                        {
+                            "name": "_EnumValueExtensions"
+                        },
+                        {
+                            "name": "_FieldExtensions"
+                        },
+                        {
+                            "name": "_InputValueExtensions"
+                        },
+                        {
+                            "name": "_NamedTypeExtensions"
+                        },
+                        {
+                            "name": "_SchemaExtensions"
+                        },
+                        {
+                            "name": "__Directive"
+                        },
+                        {
+                            "name": "__EnumValue"
+                        },
+                        {
+                            "name": "__Field"
+                        },
+                        {
+                            "name": "__InputValue"
+                        },
+                        {
+                            "name": "__Schema"
+                        },
+                        {
+                            "name": "__Type"
+                        }
+                    ],
+                    "fields": [
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        }
+                    ]
+                },
+                {
                     "name": "IsCustomPost",
                     "possibleTypes": [
                         {
@@ -1021,70 +1085,6 @@
                             "name": "urlAbsolutePath",
                             "type": {
                                 "name": "URLAbsolutePath!"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "Node",
-                    "possibleTypes": [
-                        {
-                            "name": "MutationRoot"
-                        },
-                        {
-                            "name": "Page"
-                        },
-                        {
-                            "name": "Post"
-                        },
-                        {
-                            "name": "QueryRoot"
-                        },
-                        {
-                            "name": "Root"
-                        },
-                        {
-                            "name": "_DirectiveExtensions"
-                        },
-                        {
-                            "name": "_EnumValueExtensions"
-                        },
-                        {
-                            "name": "_FieldExtensions"
-                        },
-                        {
-                            "name": "_InputValueExtensions"
-                        },
-                        {
-                            "name": "_NamedTypeExtensions"
-                        },
-                        {
-                            "name": "_SchemaExtensions"
-                        },
-                        {
-                            "name": "__Directive"
-                        },
-                        {
-                            "name": "__EnumValue"
-                        },
-                        {
-                            "name": "__Field"
-                        },
-                        {
-                            "name": "__InputValue"
-                        },
-                        {
-                            "name": "__Schema"
-                        },
-                        {
-                            "name": "__Type"
-                        }
-                    ],
-                    "fields": [
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
                             }
                         }
                     ]

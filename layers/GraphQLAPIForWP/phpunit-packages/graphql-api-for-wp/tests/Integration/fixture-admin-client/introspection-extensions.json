@@ -7619,6 +7619,27 @@
                     "enumValues": null
                 },
                 {
+                    "name": "IdentifiableObject",
+                    "extensions": {
+                        "elementName": "IdentifiableObject",
+                        "namespacedName": "IdentifiableObject",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "IsCategory",
                     "extensions": {
                         "elementName": "IsCategory",
@@ -7875,27 +7896,6 @@
                         },
                         {
                             "name": "name",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        }
-                    ],
-                    "inputFields": null,
-                    "enumValues": null
-                },
-                {
-                    "name": "Node",
-                    "extensions": {
-                        "elementName": "Node",
-                        "namespacedName": "Node",
-                        "possibleValues": null,
-                        "isOneOf": false
-                    },
-                    "fields": [
-                        {
-                            "name": "id",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false

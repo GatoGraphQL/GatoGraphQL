@@ -845,10 +845,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "Node",
+                    "name": "IdentifiableObject",
                     "extensions": {
-                        "elementName": "Node",
-                        "namespacedName": "PoP_ComponentModel_Node",
+                        "elementName": "IdentifiableObject",
+                        "namespacedName": "PoP_ComponentModel_IdentifiableObject",
                         "possibleValues": null,
                         "isOneOf": false
                     },
