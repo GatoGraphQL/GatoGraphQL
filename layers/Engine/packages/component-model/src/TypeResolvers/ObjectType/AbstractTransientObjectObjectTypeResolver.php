@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\IdentifiableObjectInterfaceTypeFieldResolver;
 use PoP\ComponentModel\ObjectModels\TransientObjectInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait;
@@ -14,16 +14,16 @@ abstract class AbstractTransientObjectObjectTypeResolver extends AbstractObjectT
 {
     use RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait;
 
-    private ?NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver = null;
+    private ?IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver = null;
 
-    final public function setNodeInterfaceTypeFieldResolver(NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver): void
+    final public function setIdentifiableObjectInterfaceTypeFieldResolver(IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver): void
     {
-        $this->nodeInterfaceTypeFieldResolver = $nodeInterfaceTypeFieldResolver;
+        $this->identifiableObjectInterfaceTypeFieldResolver = $identifiableObjectInterfaceTypeFieldResolver;
     }
-    final protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver
+    final protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver
     {
-        /** @var NodeInterfaceTypeFieldResolver */
-        return $this->nodeInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(NodeInterfaceTypeFieldResolver::class);
+        /** @var IdentifiableObjectInterfaceTypeFieldResolver */
+        return $this->identifiableObjectInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IdentifiableObjectInterfaceTypeFieldResolver::class);
     }
 
     final public function getID(object $object): string|int|null
@@ -42,7 +42,7 @@ abstract class AbstractTransientObjectObjectTypeResolver extends AbstractObjectT
     final protected function consolidateAllImplementedInterfaceTypeFieldResolvers(
         array $interfaceTypeFieldResolvers,
     ): array {
-        return $this->removeNodeInterfaceTypeFieldResolver(
+        return $this->removeIdentifiableObjectInterfaceTypeFieldResolver(
             parent::consolidateAllImplementedInterfaceTypeFieldResolvers($interfaceTypeFieldResolvers),
         );
     }

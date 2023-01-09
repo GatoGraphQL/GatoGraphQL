@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\IdentifiableObjectInterfaceTypeFieldResolver;
 
 /**
  * To be used together with:
@@ -15,7 +15,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolv
  */
 trait RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait
 {
-    abstract protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver;
+    abstract protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver;
 
     /**
      * Remove the IdentifiableObject interface
@@ -23,13 +23,13 @@ trait RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait
      * @param InterfaceTypeFieldResolverInterface[] $interfaceTypeFieldResolvers
      * @return InterfaceTypeFieldResolverInterface[]
      */
-    protected function removeNodeInterfaceTypeFieldResolver(
+    protected function removeIdentifiableObjectInterfaceTypeFieldResolver(
         array $interfaceTypeFieldResolvers,
     ): array {
-        $nodeInterfaceTypeFieldResolver = $this->getNodeInterfaceTypeFieldResolver();
+        $identifiableObjectInterfaceTypeFieldResolver = $this->getIdentifiableObjectInterfaceTypeFieldResolver();
         return array_values(array_filter(
             $interfaceTypeFieldResolvers,
-            fn (InterfaceTypeFieldResolverInterface $interfaceTypeFieldResolver) => $interfaceTypeFieldResolver !== $nodeInterfaceTypeFieldResolver
+            fn (InterfaceTypeFieldResolverInterface $interfaceTypeFieldResolver) => $interfaceTypeFieldResolver !== $identifiableObjectInterfaceTypeFieldResolver
         ));
     }
 }

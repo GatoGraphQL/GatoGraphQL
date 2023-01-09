@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\IdentifiableObjectInterfaceTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
-class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
+class IdentifiableObjectInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 

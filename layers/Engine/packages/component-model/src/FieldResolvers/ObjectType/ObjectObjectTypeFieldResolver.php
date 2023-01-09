@@ -6,8 +6,6 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -18,20 +16,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class ObjectObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver = null;
-
-    final public function setNodeInterfaceTypeFieldResolver(NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver): void
-    {
-        $this->nodeInterfaceTypeFieldResolver = $nodeInterfaceTypeFieldResolver;
-    }
-    final protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver
-    {
-        /** @var NodeInterfaceTypeFieldResolver */
-        return $this->nodeInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(NodeInterfaceTypeFieldResolver::class);
-    }
-
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
      */
@@ -43,22 +29,11 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * @return array<InterfaceTypeFieldResolverInterface>
-     */
-    public function getImplementedInterfaceTypeFieldResolvers(): array
-    {
-        return [
-            $this->getNodeInterfaceTypeFieldResolver(),
-        ];
-    }
-
-    /**
      * @return string[]
      */
     public function getFieldNamesToResolve(): array
     {
         return [
-            'id',
             'self',
         ];
     }
@@ -128,11 +103,8 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         return match ($fieldDataAccessor->getFieldName()) {
-            'id',
-            'self'
-                => $objectTypeResolver->getID($object),
-            default
-                => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
+            'self' => $objectTypeResolver->getID($object),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
 
