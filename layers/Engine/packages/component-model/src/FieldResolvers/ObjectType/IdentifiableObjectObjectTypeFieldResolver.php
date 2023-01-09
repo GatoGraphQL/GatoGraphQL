@@ -52,6 +52,7 @@ class IdentifiableObjectObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     {
         return [
             'id',
+            'globalID',
         ];
     }
 
@@ -61,9 +62,16 @@ class IdentifiableObjectObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return match ($fieldDataAccessor->getFieldName()) {
-            'id' => $objectTypeResolver->getID($object),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
-        };
+        switch ($fieldDataAccessor->getFieldName()) {
+            case 'id':
+                return $objectTypeResolver->getID($object);
+            case 'globalID':
+                return sprintf(
+                    '%s:%s',
+                    $objectTypeResolver->getNamespacedTypeName(),
+                    $objectTypeResolver->getID($object)
+                );
+        }
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
