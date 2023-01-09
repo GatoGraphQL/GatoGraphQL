@@ -3606,22 +3606,6 @@
               "deprecationReason": null
             },
             {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "loginUser",
               "description": "Log the user in",
               "args": [
@@ -3724,22 +3708,6 @@
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "RootReplyCommentMutationPayload",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "self",
-              "description": "The same object",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "MutationRoot!",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "MutationRoot",
                   "ofType": null
                 }
               },
@@ -3872,13 +3840,7 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "IdentifiableObject",
-              "ofType": null
-            }
-          ],
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -15057,11 +15019,6 @@
             {
               "kind": "OBJECT",
               "name": "MenuItem",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "MutationRoot",
               "ofType": null
             },
             {
