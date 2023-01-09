@@ -8,11 +8,11 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverIn
 use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolver;
 use PoP\ComponentModel\ObjectModels\TransientObjectInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ObjectType\RemoveNodeInterfaceObjectTypeResolverTrait;
+use PoP\ComponentModel\TypeResolvers\ObjectType\RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait;
 
 abstract class AbstractTransientObjectObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    use RemoveNodeInterfaceObjectTypeResolverTrait;
+    use RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait;
 
     private ?NodeInterfaceTypeFieldResolver $nodeInterfaceTypeFieldResolver = null;
 

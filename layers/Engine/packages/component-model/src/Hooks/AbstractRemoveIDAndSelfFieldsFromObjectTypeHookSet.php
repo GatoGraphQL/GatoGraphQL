@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 /**
  * To be used together with:
  *
- * - RemoveNodeInterfaceObjectTypeResolverTrait
+ * - RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait
  * - AbstractTransientObject
  */
 abstract class AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet extends AbstractRemoveFieldsFromObjectTypeHookSet

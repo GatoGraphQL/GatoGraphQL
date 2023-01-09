@@ -13,7 +13,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\NodeInterfaceTypeFieldResolv
  * - AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
  * - AbstractTransientObject
  */
-trait RemoveNodeInterfaceObjectTypeResolverTrait
+trait RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait
 {
     abstract protected function getNodeInterfaceTypeFieldResolver(): NodeInterfaceTypeFieldResolver;
 
