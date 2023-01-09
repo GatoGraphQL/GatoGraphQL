@@ -15,7 +15,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\SchemaCommons\Module::class,
+            \PoP\Engine\Module::class,
         ];
     }
 
