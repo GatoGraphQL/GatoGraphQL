@@ -116,6 +116,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         };
     }
 
+    public function isHidden(string $module): bool
+    {
+        return match ($module) {
+            self::GLOBAL_ID_FIELD => true,
+            default => parent::isHidden($module),
+        };
+    }
+
     /**
      * Default value for an option set by the module
      */
