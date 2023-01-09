@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
-use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\RegisterMutationRootRootObjectTypeFieldResolver;
+use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use PoP\ComponentModel\Hooks\AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -16,6 +16,6 @@ class RemoveIDAndSelfFieldsFromMutationRootObjectTypeHookSet extends AbstractRem
      */
     protected function getObjectTypeOrInterfaceTypeResolverClass(): string
     {
-        return RegisterMutationRootRootObjectTypeFieldResolver::class;
+        return MutationRootObjectTypeResolver::class;
     }
 }
