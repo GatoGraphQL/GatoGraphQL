@@ -2149,6 +2149,17 @@
           "description": "The entity can receive comments"
         },
         {
+          "name": "IdentifiableObject",
+          "namespacedName": "IdentifiableObject",
+          "fields": [
+            {
+              "name": "id"
+            }
+          ],
+          "kind": "INTERFACE",
+          "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'"
+        },
+        {
           "name": "IsCategory",
           "namespacedName": "IsCategory",
           "fields": [
@@ -2242,17 +2253,6 @@
           ],
           "kind": "INTERFACE",
           "description": "Entities representing a tag"
-        },
-        {
-          "name": "IdentifiableObject",
-          "namespacedName": "IdentifiableObject",
-          "fields": [
-            {
-              "name": "id"
-            }
-          ],
-          "kind": "INTERFACE",
-          "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'"
         },
         {
           "name": "Queryable",
