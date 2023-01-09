@@ -7,164 +7,7 @@
                     "name": "MutationRoot",
                     "fields": [
                         {
-                            "name": "id",
-                            "args": []
-                        },
-                        {
-                            "name": "self",
-                            "args": []
-                        }
-                    ],
-                    "inputFields": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "Post",
-                    "fields": [
-                        {
-                            "name": "content",
-                            "args": []
-                        },
-                        {
-                            "name": "contentSource",
-                            "args": []
-                        },
-                        {
-                            "name": "customPostType",
-                            "args": []
-                        },
-                        {
-                            "name": "date",
-                            "args": [
-                                {
-                                    "name": "gmt"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "dateStr",
-                            "args": [
-                                {
-                                    "name": "format"
-                                },
-                                {
-                                    "name": "gmt"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "dummyJSONObject",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfDates",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfFloats",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfInts",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfJSONObjects",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfListsOfDates",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfListsOfFloats",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfListsOfInts",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfListsOfJSONObjects",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfListsOfStrings",
-                            "args": []
-                        },
-                        {
-                            "name": "dummyListOfStrings",
-                            "args": []
-                        },
-                        {
-                            "name": "excerpt",
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "args": []
-                        },
-                        {
-                            "name": "isStatus",
-                            "args": [
-                                {
-                                    "name": "status"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "isSticky",
-                            "args": []
-                        },
-                        {
-                            "name": "modifiedDate",
-                            "args": [
-                                {
-                                    "name": "gmt"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "modifiedDateStr",
-                            "args": [
-                                {
-                                    "name": "format"
-                                },
-                                {
-                                    "name": "gmt"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "postFormat",
-                            "args": []
-                        },
-                        {
-                            "name": "rawContent",
-                            "args": []
-                        },
-                        {
-                            "name": "self",
-                            "args": []
-                        },
-                        {
-                            "name": "slug",
-                            "args": []
-                        },
-                        {
-                            "name": "status",
-                            "args": []
-                        },
-                        {
-                            "name": "title",
-                            "args": []
-                        },
-                        {
-                            "name": "url",
-                            "args": []
-                        },
-                        {
-                            "name": "urlAbsolutePath",
+                            "name": "dummyMutation",
                             "args": []
                         }
                     ],
@@ -175,37 +18,8 @@
                     "name": "QueryRoot",
                     "fields": [
                         {
-                            "name": "customPost",
-                            "args": [
-                                {
-                                    "name": "customPostTypes"
-                                },
-                                {
-                                    "name": "by"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "customPostCount",
-                            "args": [
-                                {
-                                    "name": "filter"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "customPosts",
-                            "args": [
-                                {
-                                    "name": "filter"
-                                },
-                                {
-                                    "name": "pagination"
-                                },
-                                {
-                                    "name": "sort"
-                                }
-                            ]
+                            "name": "globalID",
+                            "args": []
                         },
                         {
                             "name": "helloWorld",
@@ -214,36 +28,6 @@
                         {
                             "name": "id",
                             "args": []
-                        },
-                        {
-                            "name": "post",
-                            "args": [
-                                {
-                                    "name": "by"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "postCount",
-                            "args": [
-                                {
-                                    "name": "filter"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "posts",
-                            "args": [
-                                {
-                                    "name": "filter"
-                                },
-                                {
-                                    "name": "pagination"
-                                },
-                                {
-                                    "name": "sort"
-                                }
-                            ]
                         },
                         {
                             "name": "self",
@@ -257,37 +41,12 @@
                     "name": "Root",
                     "fields": [
                         {
-                            "name": "customPost",
-                            "args": [
-                                {
-                                    "name": "customPostTypes"
-                                },
-                                {
-                                    "name": "by"
-                                }
-                            ]
+                            "name": "dummyMutation",
+                            "args": []
                         },
                         {
-                            "name": "customPostCount",
-                            "args": [
-                                {
-                                    "name": "filter"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "customPosts",
-                            "args": [
-                                {
-                                    "name": "filter"
-                                },
-                                {
-                                    "name": "pagination"
-                                },
-                                {
-                                    "name": "sort"
-                                }
-                            ]
+                            "name": "globalID",
+                            "args": []
                         },
                         {
                             "name": "helloWorld",
@@ -296,36 +55,6 @@
                         {
                             "name": "id",
                             "args": []
-                        },
-                        {
-                            "name": "post",
-                            "args": [
-                                {
-                                    "name": "by"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "postCount",
-                            "args": [
-                                {
-                                    "name": "filter"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "posts",
-                            "args": [
-                                {
-                                    "name": "filter"
-                                },
-                                {
-                                    "name": "pagination"
-                                },
-                                {
-                                    "name": "sort"
-                                }
-                            ]
                         },
                         {
                             "name": "self",
@@ -340,6 +69,10 @@
                     "fields": [
                         {
                             "name": "fieldDirectiveSupportedTypeNamesOrDescriptions",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -358,6 +91,10 @@
                     "name": "_EnumValueExtensions",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -372,6 +109,10 @@
                     "kind": "OBJECT",
                     "name": "_FieldExtensions",
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "args": []
+                        },
                         {
                             "name": "id",
                             "args": []
@@ -396,6 +137,10 @@
                     "name": "_InputValueExtensions",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -412,6 +157,10 @@
                     "fields": [
                         {
                             "name": "elementName",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -438,6 +187,10 @@
                     "name": "_SchemaExtensions",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -462,6 +215,10 @@
                         },
                         {
                             "name": "extensions",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -500,6 +257,10 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -532,6 +293,10 @@
                         },
                         {
                             "name": "extensions",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -570,6 +335,10 @@
                             "args": []
                         },
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -598,6 +367,10 @@
                         },
                         {
                             "name": "extensions",
+                            "args": []
+                        },
+                        {
+                            "name": "globalID",
                             "args": []
                         },
                         {
@@ -660,6 +433,10 @@
                             ]
                         },
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         },
@@ -702,36 +479,6 @@
                 },
                 {
                     "kind": "SCALAR",
-                    "name": "CustomPostEnumString",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "SCALAR",
-                    "name": "Date",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "SCALAR",
-                    "name": "DateTime",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "SCALAR",
-                    "name": "Float",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "SCALAR",
-                    "name": "HTML",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "SCALAR",
                     "name": "ID",
                     "fields": null,
                     "inputFields": null
@@ -744,25 +491,7 @@
                 },
                 {
                     "kind": "SCALAR",
-                    "name": "JSONObject",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "SCALAR",
                     "name": "String",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "SCALAR",
-                    "name": "URL",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "SCALAR",
-                    "name": "URLAbsolutePath",
                     "fields": null,
                     "inputFields": null
                 },
@@ -771,130 +500,14 @@
                     "name": "IdentifiableObject",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "args": []
+                        },
+                        {
                             "name": "id",
                             "args": []
                         }
                     ],
-                    "inputFields": null
-                },
-                {
-                    "kind": "INTERFACE",
-                    "name": "IsCustomPost",
-                    "fields": [
-                        {
-                            "name": "content",
-                            "args": []
-                        },
-                        {
-                            "name": "customPostType",
-                            "args": []
-                        },
-                        {
-                            "name": "date",
-                            "args": [
-                                {
-                                    "name": "gmt"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "dateStr",
-                            "args": [
-                                {
-                                    "name": "format"
-                                },
-                                {
-                                    "name": "gmt"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "excerpt",
-                            "args": []
-                        },
-                        {
-                            "name": "isStatus",
-                            "args": [
-                                {
-                                    "name": "status"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "modifiedDate",
-                            "args": [
-                                {
-                                    "name": "gmt"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "modifiedDateStr",
-                            "args": [
-                                {
-                                    "name": "format"
-                                },
-                                {
-                                    "name": "gmt"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "rawContent",
-                            "args": []
-                        },
-                        {
-                            "name": "slug",
-                            "args": []
-                        },
-                        {
-                            "name": "status",
-                            "args": []
-                        },
-                        {
-                            "name": "title",
-                            "args": []
-                        },
-                        {
-                            "name": "url",
-                            "args": []
-                        },
-                        {
-                            "name": "urlAbsolutePath",
-                            "args": []
-                        }
-                    ],
-                    "inputFields": null
-                },
-                {
-                    "kind": "INTERFACE",
-                    "name": "Queryable",
-                    "fields": [
-                        {
-                            "name": "slug",
-                            "args": []
-                        },
-                        {
-                            "name": "url",
-                            "args": []
-                        },
-                        {
-                            "name": "urlAbsolutePath",
-                            "args": []
-                        }
-                    ],
-                    "inputFields": null
-                },
-                {
-                    "kind": "ENUM",
-                    "name": "CustomPostOrderByEnum",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "ENUM",
-                    "name": "CustomPostStatusEnum",
-                    "fields": null,
                     "inputFields": null
                 },
                 {
@@ -911,180 +524,7 @@
                 },
                 {
                     "kind": "ENUM",
-                    "name": "OrderEnum",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "ENUM",
-                    "name": "RelationEnum",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "ENUM",
                     "name": "TypeKind",
-                    "fields": null,
-                    "inputFields": null
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostByInput",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "id"
-                        },
-                        {
-                            "name": "slug"
-                        }
-                    ]
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostPaginationInput",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "limit"
-                        },
-                        {
-                            "name": "offset"
-                        }
-                    ]
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostSortInput",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "by"
-                        },
-                        {
-                            "name": "order"
-                        }
-                    ]
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "DateQueryInput",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "after"
-                        },
-                        {
-                            "name": "before"
-                        },
-                        {
-                            "name": "column"
-                        },
-                        {
-                            "name": "compare"
-                        },
-                        {
-                            "name": "day"
-                        },
-                        {
-                            "name": "hour"
-                        },
-                        {
-                            "name": "inclusive"
-                        },
-                        {
-                            "name": "minute"
-                        },
-                        {
-                            "name": "month"
-                        },
-                        {
-                            "name": "relation"
-                        },
-                        {
-                            "name": "second"
-                        },
-                        {
-                            "name": "week"
-                        },
-                        {
-                            "name": "year"
-                        }
-                    ]
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostByInput",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "id"
-                        },
-                        {
-                            "name": "slug"
-                        }
-                    ]
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PostPaginationInput",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "limit"
-                        },
-                        {
-                            "name": "offset"
-                        }
-                    ]
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootCustomPostsFilterInput",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "customPostTypes"
-                        },
-                        {
-                            "name": "dateQuery"
-                        },
-                        {
-                            "name": "excludeIDs"
-                        },
-                        {
-                            "name": "ids"
-                        },
-                        {
-                            "name": "search"
-                        }
-                    ]
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RootPostsFilterInput",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "dateQuery"
-                        },
-                        {
-                            "name": "excludeIDs"
-                        },
-                        {
-                            "name": "ids"
-                        },
-                        {
-                            "name": "isSticky"
-                        },
-                        {
-                            "name": "search"
-                        }
-                    ]
-                },
-                {
-                    "kind": "UNION",
-                    "name": "CustomPostUnion",
                     "fields": null,
                     "inputFields": null
                 }

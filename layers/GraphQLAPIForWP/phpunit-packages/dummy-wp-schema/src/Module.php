@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\DummySchema;
+namespace PHPUnitForGraphQLAPI\DummyWPSchema;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
@@ -15,7 +15,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoP\Engine\Module::class,
+            \PoPWPSchema\Posts\Module::class,
         ];
     }
 
@@ -28,7 +28,6 @@ class Module extends AbstractModule
         bool $skipSchema,
         array $skipSchemaModuleClasses,
     ): void {
-        $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }
 }

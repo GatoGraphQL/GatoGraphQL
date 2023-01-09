@@ -13,10 +13,20 @@
                     "kind": "OBJECT",
                     "name": "MutationRoot",
                     "description": "Mutation type, starting from which mutations are executed",
+                    "fields": [],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "QueryRoot",
+                    "description": "Query type, starting from which the query is executed",
                     "fields": [
                         {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -30,39 +40,6 @@
                             "isDeprecated": false,
                             "deprecationReason": null
                         },
-                        {
-                            "name": "self",
-                            "description": "The same object",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "MutationRoot!",
-                                "ofType": {
-                                    "kind": "OBJECT",
-                                    "name": "MutationRoot",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        }
-                    ],
-                    "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "IdentifiableObject",
-                            "ofType": null
-                        }
-                    ],
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "OBJECT",
-                    "name": "QueryRoot",
-                    "description": "Query type, starting from which the query is executed",
-                    "fields": [
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -112,6 +89,22 @@
                     "name": "Root",
                     "description": "Root type, starting from which the query is executed",
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -182,6 +175,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -231,6 +240,22 @@
                     "description": "Extensions (custom metadata) added to the enum value",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -279,6 +304,22 @@
                     "name": "_FieldExtensions",
                     "description": "Extensions (custom metadata) added to the field",
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -361,6 +402,22 @@
                     "description": "Extensions (custom metadata) added to the input value",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -419,6 +476,22 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             },
@@ -510,6 +583,22 @@
                     "name": "_SchemaExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL schema",
                     "fields": [
+                        {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
@@ -605,6 +694,22 @@
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "_DirectiveExtensions",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             },
@@ -741,6 +846,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -870,6 +991,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -984,6 +1121,22 @@
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "_InputValueExtensions",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             },
@@ -1108,6 +1261,22 @@
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "_SchemaExtensions",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             },
@@ -1325,6 +1494,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -1510,6 +1695,22 @@
                     "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'",
                     "fields": [
                         {
+                            "name": "globalID",
+                            "description": "The object's globally unique identifier",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -1530,11 +1731,6 @@
                     "interfaces": [],
                     "enumValues": null,
                     "possibleTypes": [
-                        {
-                            "kind": "OBJECT",
-                            "name": "MutationRoot",
-                            "ofType": null
-                        },
                         {
                             "kind": "OBJECT",
                             "name": "QueryRoot",

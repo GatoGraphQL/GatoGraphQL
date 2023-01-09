@@ -1933,14 +1933,6 @@
                             ]
                         },
                         {
-                            "name": "id",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
                             "name": "loginUser",
                             "extensions": {
                                 "isMutation": true,
@@ -1992,14 +1984,6 @@
                                     }
                                 }
                             ]
-                        },
-                        {
-                            "name": "self",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
                         },
                         {
                             "name": "setCategoriesOnPost",

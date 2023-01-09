@@ -624,9 +624,6 @@
               "name": "createPost"
             },
             {
-              "name": "id"
-            },
-            {
               "name": "loginUser"
             },
             {
@@ -637,9 +634,6 @@
             },
             {
               "name": "replyComment"
-            },
-            {
-              "name": "self"
             },
             {
               "name": "setCategoriesOnPost"
