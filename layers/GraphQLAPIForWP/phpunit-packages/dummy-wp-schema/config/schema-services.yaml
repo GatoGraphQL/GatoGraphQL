@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PHPUnitForGraphQLAPI\DummyWPSchema\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'

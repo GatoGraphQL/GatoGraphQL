@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\DummySchema\FieldResolvers\ObjectType;
+namespace PHPUnitForGraphQLAPI\DummyWPSchema\FieldResolvers\ObjectType;
 
 use DateTime;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -106,17 +106,17 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'dummyListOfInts' => $this->__('Dummy field that returns a list of integers: [Int]', 'dummy-schema'),
-            'dummyListOfListsOfInts' => $this->__('Dummy field that returns a list of lists of integers: [[Int]]', 'dummy-schema'),
-            'dummyListOfFloats' => $this->__('Dummy field that returns a list of floats: [Float]', 'dummy-schema'),
-            'dummyListOfListsOfFloats' => $this->__('Dummy field that returns a list of lists of floats: [[Float]]', 'dummy-schema'),
-            'dummyListOfStrings' => $this->__('Dummy field that returns a list of strings: [String]', 'dummy-schema'),
-            'dummyListOfListsOfStrings' => $this->__('Dummy field that returns a list of lists of strings: [[String]]', 'dummy-schema'),
-            'dummyListOfDates' => $this->__('Dummy field that returns a list of dates: [Date]', 'dummy-schema'),
-            'dummyListOfListsOfDates' => $this->__('Dummy field that returns a list of lists of dates: [[Date]]', 'dummy-schema'),
-            'dummyJSONObject' => $this->__('Dummy field that returns a JSON object: JSONObject', 'dummy-schema'),
-            'dummyListOfJSONObjects' => $this->__('Dummy field that returns a list of JSON objects: [JSONObject]', 'dummy-schema'),
-            'dummyListOfListsOfJSONObjects' => $this->__('Dummy field that returns a list of lists of JSON objects: [[JSONObject]]', 'dummy-schema'),
+            'dummyListOfInts' => $this->__('Dummy field that returns a list of integers: [Int]', 'dummy-wp-schema'),
+            'dummyListOfListsOfInts' => $this->__('Dummy field that returns a list of lists of integers: [[Int]]', 'dummy-wp-schema'),
+            'dummyListOfFloats' => $this->__('Dummy field that returns a list of floats: [Float]', 'dummy-wp-schema'),
+            'dummyListOfListsOfFloats' => $this->__('Dummy field that returns a list of lists of floats: [[Float]]', 'dummy-wp-schema'),
+            'dummyListOfStrings' => $this->__('Dummy field that returns a list of strings: [String]', 'dummy-wp-schema'),
+            'dummyListOfListsOfStrings' => $this->__('Dummy field that returns a list of lists of strings: [[String]]', 'dummy-wp-schema'),
+            'dummyListOfDates' => $this->__('Dummy field that returns a list of dates: [Date]', 'dummy-wp-schema'),
+            'dummyListOfListsOfDates' => $this->__('Dummy field that returns a list of lists of dates: [[Date]]', 'dummy-wp-schema'),
+            'dummyJSONObject' => $this->__('Dummy field that returns a JSON object: JSONObject', 'dummy-wp-schema'),
+            'dummyListOfJSONObjects' => $this->__('Dummy field that returns a list of JSON objects: [JSONObject]', 'dummy-wp-schema'),
+            'dummyListOfListsOfJSONObjects' => $this->__('Dummy field that returns a list of lists of JSON objects: [[JSONObject]]', 'dummy-wp-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
