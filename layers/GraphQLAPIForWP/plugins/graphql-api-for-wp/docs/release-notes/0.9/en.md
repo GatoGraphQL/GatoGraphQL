@@ -2022,9 +2022,11 @@ In addition, its block for the Schema Configuration also got renamed, so you mus
 
 Because custom scalar `AnyScalar` only represents the 5 built-in GraphQL scalar types (`String`, `Int`, `Boolean`, `Float`, and `ID`), it was renamed to `AnyBuiltInScalar` to better convey this information.
 
-### Renamed interface type `Elemental` to `Node`
+### Renamed interface type `Elemental` to `IdentifiableObject`
 
-The `Elemental` interface contains field `id: ID!`. It has been renamed to `Node` to follow the convention by most GraphQL implementations (for instance, by [GitHub's GraphQL API](https://docs.github.com/en/graphql/reference/interfaces#node)).
+The `Elemental` interface, which contains field `id: ID!`, has been renamed to `IdentifiableObject`.
+
+This interface is similar in concept to `Node`, the [interface by convention in GraphQL](https://graphql.org/learn/global-object-identification/) to identify objects, but because of the added field `globalID: ID!` then it's not sensible to use the same name, as to avoid confusion. `IdentifiableObject` is then the most suitable name.
 
 ### Renamed field `Root.option` to `Root.optionValue`
 

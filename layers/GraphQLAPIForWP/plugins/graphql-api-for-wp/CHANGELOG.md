@@ -239,7 +239,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Must update GraphQL queries to use the new `filter`, `pagination` and `sort` field arguments
 - Renamed module "Schema for the Admin" to "Expose Sensitive Data in the Schema"
 - Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
-- Renamed interface type `Elemental` to `Node`
+- Renamed interface type `Elemental` to `IdentifiableObject`
 - Renamed field `Root.option` to `Root.optionValue`
 - Removed the `genericCustomPosts` fields, unifying their logic into `customPosts`
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
