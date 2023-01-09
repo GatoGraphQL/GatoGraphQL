@@ -100,6 +100,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::NESTED_MUTATIONS => \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose “sensitive” data elements in the schema', 'graphql-api'),
             self::SCHEMA_SELF_FIELDS => \__('Expose "self" fields in the schema', 'graphql-api'),
+            default => parent::getDescription($module),
         };
     }
 
