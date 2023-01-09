@@ -388,6 +388,99 @@
                     ]
                 },
                 {
+                    "name": "IdentifiableObject",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "Comment"
+                        },
+                        {
+                            "name": "GenericCategory"
+                        },
+                        {
+                            "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "GenericTag"
+                        },
+                        {
+                            "name": "Media"
+                        },
+                        {
+                            "name": "Menu"
+                        },
+                        {
+                            "name": "MenuItem"
+                        },
+                        {
+                            "name": "MutationRoot"
+                        },
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        },
+                        {
+                            "name": "PostCategory"
+                        },
+                        {
+                            "name": "PostTag"
+                        },
+                        {
+                            "name": "QueryRoot"
+                        },
+                        {
+                            "name": "Root"
+                        },
+                        {
+                            "name": "User"
+                        },
+                        {
+                            "name": "UserAvatar"
+                        },
+                        {
+                            "name": "UserRole"
+                        },
+                        {
+                            "name": "_DirectiveExtensions"
+                        },
+                        {
+                            "name": "_EnumValueExtensions"
+                        },
+                        {
+                            "name": "_FieldExtensions"
+                        },
+                        {
+                            "name": "_InputValueExtensions"
+                        },
+                        {
+                            "name": "_NamedTypeExtensions"
+                        },
+                        {
+                            "name": "_SchemaExtensions"
+                        },
+                        {
+                            "name": "__Directive"
+                        },
+                        {
+                            "name": "__EnumValue"
+                        },
+                        {
+                            "name": "__Field"
+                        },
+                        {
+                            "name": "__InputValue"
+                        },
+                        {
+                            "name": "__Schema"
+                        },
+                        {
+                            "name": "__Type"
+                        }
+                    ]
+                },
+                {
                     "name": "IsCategory",
                     "enumValues": null,
                     "possibleTypes": [
@@ -483,99 +576,6 @@
                         },
                         {
                             "name": "PostTag"
-                        }
-                    ]
-                },
-                {
-                    "name": "IdentifiableObject",
-                    "enumValues": null,
-                    "possibleTypes": [
-                        {
-                            "name": "Comment"
-                        },
-                        {
-                            "name": "GenericCategory"
-                        },
-                        {
-                            "name": "GenericCustomPost"
-                        },
-                        {
-                            "name": "GenericTag"
-                        },
-                        {
-                            "name": "Media"
-                        },
-                        {
-                            "name": "Menu"
-                        },
-                        {
-                            "name": "MenuItem"
-                        },
-                        {
-                            "name": "MutationRoot"
-                        },
-                        {
-                            "name": "Page"
-                        },
-                        {
-                            "name": "Post"
-                        },
-                        {
-                            "name": "PostCategory"
-                        },
-                        {
-                            "name": "PostTag"
-                        },
-                        {
-                            "name": "QueryRoot"
-                        },
-                        {
-                            "name": "Root"
-                        },
-                        {
-                            "name": "User"
-                        },
-                        {
-                            "name": "UserAvatar"
-                        },
-                        {
-                            "name": "UserRole"
-                        },
-                        {
-                            "name": "_DirectiveExtensions"
-                        },
-                        {
-                            "name": "_EnumValueExtensions"
-                        },
-                        {
-                            "name": "_FieldExtensions"
-                        },
-                        {
-                            "name": "_InputValueExtensions"
-                        },
-                        {
-                            "name": "_NamedTypeExtensions"
-                        },
-                        {
-                            "name": "_SchemaExtensions"
-                        },
-                        {
-                            "name": "__Directive"
-                        },
-                        {
-                            "name": "__EnumValue"
-                        },
-                        {
-                            "name": "__Field"
-                        },
-                        {
-                            "name": "__InputValue"
-                        },
-                        {
-                            "name": "__Schema"
-                        },
-                        {
-                            "name": "__Type"
                         }
                     ]
                 },
