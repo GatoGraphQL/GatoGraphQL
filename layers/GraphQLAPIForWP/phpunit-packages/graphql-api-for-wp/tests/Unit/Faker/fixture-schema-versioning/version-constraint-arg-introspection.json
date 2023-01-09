@@ -5,7 +5,12 @@
                 {
                     "kind": "OBJECT",
                     "name": "MutationRoot",
-                    "fields": [],
+                    "fields": [
+                        {
+                            "name": "dummyMutation",
+                            "args": []
+                        }
+                    ],
                     "inputFields": null
                 },
                 {
@@ -287,6 +292,10 @@
                                     "name": "sort"
                                 }
                             ]
+                        },
+                        {
+                            "name": "dummyMutation",
+                            "args": []
                         },
                         {
                             "name": "globalID",
