@@ -163,6 +163,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
+            // Expose "self" fields in the schema?
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::ENABLE_SELF_FIELD,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_SELF_FIELDS,
+                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+            ],
             // Enable nested mutations?
             // Only assign for Admin clients. For configuration it is assigned always, via the Fixed endpoint
             [
