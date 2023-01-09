@@ -45,6 +45,6 @@ class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebs
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api-pro/schema-config-self-fields';
+        return 'graphql-api/schema-config-self-fields';
     }
 }
