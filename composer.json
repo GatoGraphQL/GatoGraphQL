@@ -556,11 +556,11 @@
             "@analyse",
             "@fix-style"
         ],
-        "test": "phpunit",
-        "unit-test": "phpunit --filter='/^((?!Integration).)*$/'",
+        "test": "phpunit --log-junit=phpunit-test-results.xml",
+        "unit-test": "phpunit --filter='/^((?!Integration).)*$/' --log-junit=phpunit-test-results.xml",
         "integration-test": [
             "@optimize-autoloader",
-            "phpunit --filter='Integration'",
+            "phpunit --filter='Integration' --log-junit=phpunit-test-results.xml",
             "@deoptimize-autoloader"
         ],
         "prod-integration-test": "INTEGRATION_TESTS_WEBSERVER_DOMAIN=graphql-api-for-prod.lndo.site phpunit --filter='Integration'",

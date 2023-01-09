@@ -2,6 +2,7 @@
 /vendor/
 phpcs.xml
 phpunit.xml
+phpunit-test-results.xml
 .phpunit.result.cache
 .php-cs-fixer.cache
 composer.lock
