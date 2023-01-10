@@ -16,13 +16,13 @@ For instance, in this query:
 
 ```graphql
 {
-    posts {
-        id
-    }
+  posts {
+    id
+  }
 
-    users {
-        id
-    }
+  users {
+    id
+  }
 }
 ```
 
@@ -30,24 +30,24 @@ For instance, in this query:
 
 ```json
 {
-    "data": {
-        "posts": [
-            {
-                "id": 1
-            },
-            {
-                "id": 2
-            },
-            {
-                "id": 3
-            }
-        ],
-        "users": [
-            {
-                "id": 1
-            }
-        ]
-    }
+  "data": {
+    "posts": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "users": [
+      {
+        "id": 1
+      }
+    ]
+  }
 }
 ```
 
@@ -57,15 +57,15 @@ If a unique ID is required for all entities across all types in the GraphQL sche
 
 ```graphql
 {
-    posts {
-        id
-        globalID
-    }
+  posts {
+    id
+    globalID
+  }
 
-    users {
-        id
-        globalID
-    }
+  users {
+    id
+    globalID
+  }
 }
 ```
 
@@ -73,27 +73,27 @@ If a unique ID is required for all entities across all types in the GraphQL sche
 
 ```json
 {
-    "data": {
-        "posts": [
-            {
-                "id": 1,
-                "globalID": "Post:1"
-            },
-            {
-                "id": 2,
-                "globalID": "Post:2"
-            },
-            {
-                "id": 3,
-                "globalID": "Post:3"
-            }
-        ],
-        "users": [
-            {
-                "id": 1,
-                "globalID": "User:1"
-            }
-        ]
-    }
+  "data": {
+    "posts": [
+      {
+        "id": 1,
+        "globalID": "UG9QQ01TU2NoZW1hX1Bvc3RzX1Bvc3Q6MTcyNA=="
+      },
+      {
+        "id": 2,
+        "globalID": "UG9QQ01TU2NoZW1hX1Bvc3RzX1Bvc3Q6MzU4"
+      },
+      {
+        "id": 3,
+        "globalID": "UG9QQ01TU2NoZW1hX1Bvc3RzX1Bvc3Q6NTU1"
+      }
+    ],
+    "users": [
+      {
+        "id": 1,
+        "globalID": "UG9QQ01TU2NoZW1hX1VzZXJzX1VzZXI6MQ=="
+      }
+    ]
+  }
 }
 ```

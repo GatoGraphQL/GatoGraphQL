@@ -40,21 +40,21 @@ If a unique ID is required for all entities across all types in the GraphQL sche
     "posts": [
       {
         "id": 1,
-        "globalID": "Post:1"
+        "globalID": "UG9QQ01TU2NoZW1hX1Bvc3RzX1Bvc3Q6MTcyNA=="
       },
       {
         "id": 2,
-        "globalID": "Post:2"
+        "globalID": "UG9QQ01TU2NoZW1hX1Bvc3RzX1Bvc3Q6MzU4"
       },
       {
         "id": 3,
-        "globalID": "Post:3"
+        "globalID": "UG9QQ01TU2NoZW1hX1Bvc3RzX1Bvc3Q6NTU1"
       }
     ],
     "users": [
       {
         "id": 1,
-        "globalID": "User:1"
+        "globalID": "UG9QQ01TU2NoZW1hX1VzZXJzX1VzZXI6MQ=="
       }
     ]
   }
