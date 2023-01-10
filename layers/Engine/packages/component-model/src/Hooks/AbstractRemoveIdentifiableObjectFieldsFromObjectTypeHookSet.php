@@ -15,7 +15,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
  * - RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait
  * - AbstractTransientObject
  */
-abstract class AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet extends AbstractRemoveFieldsFromObjectTypeHookSet
+abstract class AbstractRemoveIdentifiableObjectFieldsFromObjectTypeHookSet extends AbstractRemoveFieldsFromObjectTypeHookSet
 {
     protected function matchesCondition(
         ObjectTypeResolverInterface | InterfaceTypeResolverInterface $objectTypeOrInterfaceTypeResolver,

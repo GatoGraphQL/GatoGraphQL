@@ -10,7 +10,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\IdentifiableObjectInterfaceT
 /**
  * To be used together with:
  *
- * - AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
+ * - AbstractRemoveIdentifiableObjectFieldsFromObjectTypeHookSet
  * - AbstractTransientObject
  */
 trait RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait

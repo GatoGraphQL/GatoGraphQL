@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
-use PoP\ComponentModel\Hooks\AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet;
+use PoP\ComponentModel\Hooks\AbstractRemoveIdentifiableObjectFieldsFromObjectTypeHookSet;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
@@ -17,7 +17,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
  * @see layers/GraphQLByPoP/packages/graphql-server/src/Helpers/TypeResolverHelper.php
  * @see function `getObjectTypeResolverMandatoryFields`
  */
-class RemoveIDAndSelfFieldsFromMutationRootObjectTypeHookSet extends AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
+class RemoveIdentifiableObjectFieldsFromMutationRootObjectTypeHookSet extends AbstractRemoveIdentifiableObjectFieldsFromObjectTypeHookSet
 {
     /**
      * @phpstan-return class-string<ObjectTypeResolverInterface|InterfaceTypeResolverInterface>
