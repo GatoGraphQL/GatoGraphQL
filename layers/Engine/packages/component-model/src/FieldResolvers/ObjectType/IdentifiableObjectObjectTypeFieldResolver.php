@@ -66,11 +66,11 @@ class IdentifiableObjectObjectTypeFieldResolver extends AbstractObjectTypeFieldR
             case 'id':
                 return $objectTypeResolver->getID($object);
             case 'globalID':
-                return sprintf(
+                return base64_encode(sprintf(
                     '%s:%s',
                     $objectTypeResolver->getNamespacedTypeName(),
                     $objectTypeResolver->getID($object)
-                );
+                ));
         }
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
