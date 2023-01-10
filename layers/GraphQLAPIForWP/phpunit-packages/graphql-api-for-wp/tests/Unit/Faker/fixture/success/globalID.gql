@@ -1,17 +1,17 @@
 query {
-  users(pagination: {limit: 3}) {
+  users(pagination: { limit: 3 }) {
     id
     globalID
   }
-  posts(pagination: {limit: 3}) {
+  posts(pagination: { limit: 3 }) {
     id
     globalID
   }
-  pages(pagination: {limit: 3}) {
+  pages(pagination: { limit: 3 }) {
     id
     globalID
   }
-  comments(pagination: {limit: 3}) {
+  comments(pagination: { limit: 3 }) {
     id
     globalID
   }
