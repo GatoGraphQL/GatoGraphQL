@@ -2258,8 +2258,8 @@
           "description": "Entities representing a category"
         },
         {
-          "name": "IsCustomPost",
-          "namespacedName": "IsCustomPost",
+          "name": "CustomPost",
+          "namespacedName": "CustomPost",
           "fields": [
             {
               "name": "content"

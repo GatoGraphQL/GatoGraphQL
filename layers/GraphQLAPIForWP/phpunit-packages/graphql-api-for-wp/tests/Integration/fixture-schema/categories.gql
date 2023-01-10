@@ -14,7 +14,7 @@
     }
   ) {
     __typename
-    ...on IsCustomPost {
+    ...on CustomPost {
       id
       title
       customPostType
@@ -73,7 +73,7 @@ fragment GenericCategoryData on GenericCategory {
   }
 }
 
-fragment CustomPostData on IsCustomPost {
+fragment CustomPostData on CustomPost {
   id
   title
   categories(taxonomy: "dummy-category") {

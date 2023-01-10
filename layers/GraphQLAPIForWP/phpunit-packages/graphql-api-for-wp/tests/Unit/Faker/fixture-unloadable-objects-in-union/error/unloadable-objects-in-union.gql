@@ -2,7 +2,7 @@
   # `733` and `735` are Pages, their ID is retrieved but the DataLoader was not loaded
   customPosts (filter: { ids: [1724, 358, 733, 735, 555] }) {
     __typename
-    ...on IsCustomPost {
+    ...on CustomPost {
       id
       title
     }

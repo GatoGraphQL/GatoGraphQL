@@ -347,13 +347,13 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          * It is disabled by default in this GraphQL server, because it can produce a runtime exception
          * when creating an Access Control List:
          *
-         * - CustomPostUnionTypeResolver is set to implement IsCustomPostInterfaceType
+         * - CustomPostUnionTypeResolver is set to implement CustomPostInterfaceType
          * - CustomPostUnionTypeResolver contains types PostObjectTypeResolver and PageObjectTypeResolver
          * - Via ACL in a private schema, we disable access to field "Post.author"
-         * - Because IsCustomPostInterfaceType contains field "author", then Post suddenly
+         * - Because CustomPostInterfaceType contains field "author", then Post suddenly
          *   does not satisfy this interface anymore
          * - But Post is still part of CustomPostUnion, then the code below will throw an exception
-         *   stating that the member Post type does not implement the IsCustomPost interface!
+         *   stating that the member Post type does not implement the CustomPost interface!
          */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

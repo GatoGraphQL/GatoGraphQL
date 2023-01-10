@@ -493,7 +493,7 @@
                     ]
                 },
                 {
-                    "name": "IsCustomPost",
+                    "name": "CustomPost",
                     "enumValues": null,
                     "possibleTypes": [
                         {

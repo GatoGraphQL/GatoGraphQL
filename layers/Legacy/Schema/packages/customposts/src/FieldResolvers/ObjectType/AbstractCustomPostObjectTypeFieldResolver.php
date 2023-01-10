@@ -12,21 +12,21 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoPCMSSchema\CustomPosts\FieldResolvers\InterfaceType\IsCustomPostInterfaceTypeFieldResolver;
+use PoPCMSSchema\CustomPosts\FieldResolvers\InterfaceType\CustomPostInterfaceTypeFieldResolver;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver = null;
+    private ?CustomPostInterfaceTypeFieldResolver $customPostInterfaceTypeFieldResolver = null;
     
-    final public function setIsCustomPostInterfaceTypeFieldResolver(IsCustomPostInterfaceTypeFieldResolver $isCustomPostInterfaceTypeFieldResolver): void
+    final public function setCustomPostInterfaceTypeFieldResolver(CustomPostInterfaceTypeFieldResolver $customPostInterfaceTypeFieldResolver): void
     {
-        $this->isCustomPostInterfaceTypeFieldResolver = $isCustomPostInterfaceTypeFieldResolver;
+        $this->customPostInterfaceTypeFieldResolver = $customPostInterfaceTypeFieldResolver;
     }
-    final protected function getIsCustomPostInterfaceTypeFieldResolver(): IsCustomPostInterfaceTypeFieldResolver
+    final protected function getCustomPostInterfaceTypeFieldResolver(): CustomPostInterfaceTypeFieldResolver
     {
-        /** @var IsCustomPostInterfaceTypeFieldResolver */
-        return $this->isCustomPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeFieldResolver::class);
+        /** @var CustomPostInterfaceTypeFieldResolver */
+        return $this->customPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CustomPostInterfaceTypeFieldResolver::class);
     }
 
     /**
@@ -43,7 +43,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->isCustomPostInterfaceTypeFieldResolver,
+            $this->customPostInterfaceTypeFieldResolver,
         ];
     }
 

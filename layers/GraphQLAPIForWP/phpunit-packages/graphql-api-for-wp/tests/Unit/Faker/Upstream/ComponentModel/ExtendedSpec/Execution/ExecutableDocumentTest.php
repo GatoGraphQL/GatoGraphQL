@@ -78,7 +78,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                     }
                 }
                 
-                fragment PostData on IsCustomPost {
+                fragment PostData on CustomPost {
                     id
                     title
                 }
@@ -122,7 +122,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                 {
                     customPosts {
                         __typename
-                        ...on IsCustomPost {
+                        ...on CustomPost {
                             id
                             title
                         }
@@ -375,11 +375,11 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
             ],
             'interface' => [
                 <<<GRAPHQL
-                query (\$someVar: IsCustomPost) {
+                query (\$someVar: CustomPost) {
                     echo(value: \$someVar)
                 }
                 GRAPHQL,
-                'IsCustomPost',
+                'CustomPost',
             ],
         ];
     }

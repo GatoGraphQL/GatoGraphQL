@@ -11,7 +11,7 @@
       "extensions": {
         "path": [
           "@unsupportedFragmentDirective",
-          "fragment CustomPost on IsCustomPost { ... }"
+          "fragment CustomPost on CustomPost { ... }"
         ],
         "code": "gqlunsupported@2"
       }

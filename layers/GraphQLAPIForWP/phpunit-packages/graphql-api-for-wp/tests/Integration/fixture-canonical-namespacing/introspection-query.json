@@ -2044,7 +2044,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCustomPost",
+              "name": "CustomPost",
               "ofType": null
             },
             {
@@ -4573,7 +4573,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCustomPost",
+              "name": "CustomPost",
               "ofType": null
             },
             {
@@ -5558,7 +5558,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCustomPost",
+              "name": "CustomPost",
               "ofType": null
             },
             {
@@ -15196,7 +15196,7 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "IsCustomPost",
+          "name": "CustomPost",
           "description": "Entities representing a custom post",
           "fields": [
             {

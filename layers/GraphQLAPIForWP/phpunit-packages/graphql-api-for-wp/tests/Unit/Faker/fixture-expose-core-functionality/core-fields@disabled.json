@@ -70,12 +70,12 @@
       ],
       "extensions": {
         "path": [
-          "implementsWithNamespacing: _implements(interface: \"PoPCMSSchema_CustomPosts_IsCustomPost\")",
+          "implementsWithNamespacing: _implements(interface: \"PoPCMSSchema_CustomPosts_CustomPost\")",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "CustomPostUnion",
-        "field": "implementsWithNamespacing: _implements(interface: \"PoPCMSSchema_CustomPosts_IsCustomPost\")",
+        "field": "implementsWithNamespacing: _implements(interface: \"PoPCMSSchema_CustomPosts_CustomPost\")",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
@@ -90,12 +90,12 @@
       ],
       "extensions": {
         "path": [
-          "implementsWithoutNamespacing: _implements(interface: \"IsCustomPost\")",
+          "implementsWithoutNamespacing: _implements(interface: \"CustomPost\")",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "CustomPostUnion",
-        "field": "implementsWithoutNamespacing: _implements(interface: \"IsCustomPost\")",
+        "field": "implementsWithoutNamespacing: _implements(interface: \"CustomPost\")",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
@@ -110,12 +110,12 @@
       ],
       "extensions": {
         "path": [
-          "implementsWithWrongNamespacing: _implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost\")",
+          "implementsWithWrongNamespacing: _implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_CustomPost\")",
           "customPosts(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "CustomPostUnion",
-        "field": "implementsWithWrongNamespacing: _implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost\")",
+        "field": "implementsWithWrongNamespacing: _implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_CustomPost\")",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
@@ -250,12 +250,12 @@
       ],
       "extensions": {
         "path": [
-          "implementsWithNamespacing: _implements(interface: \"PoPCMSSchema_CustomPosts_IsCustomPost\")",
+          "implementsWithNamespacing: _implements(interface: \"PoPCMSSchema_CustomPosts_CustomPost\")",
           "users(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "User",
-        "field": "implementsWithNamespacing: _implements(interface: \"PoPCMSSchema_CustomPosts_IsCustomPost\")",
+        "field": "implementsWithNamespacing: _implements(interface: \"PoPCMSSchema_CustomPosts_CustomPost\")",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
@@ -270,12 +270,12 @@
       ],
       "extensions": {
         "path": [
-          "implementsWithoutNamespacing: _implements(interface: \"IsCustomPost\")",
+          "implementsWithoutNamespacing: _implements(interface: \"CustomPost\")",
           "users(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "User",
-        "field": "implementsWithoutNamespacing: _implements(interface: \"IsCustomPost\")",
+        "field": "implementsWithoutNamespacing: _implements(interface: \"CustomPost\")",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
@@ -290,12 +290,12 @@
       ],
       "extensions": {
         "path": [
-          "implementsWithWrongNamespacing: _implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost\")",
+          "implementsWithWrongNamespacing: _implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_CustomPost\")",
           "users(pagination: {limit: 3}) { ... }",
           "query { ... }"
         ],
         "type": "User",
-        "field": "implementsWithWrongNamespacing: _implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost\")",
+        "field": "implementsWithWrongNamespacing: _implements(interface: \"NonExisting_PoPCMSSchema_CustomPosts_CustomPost\")",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }

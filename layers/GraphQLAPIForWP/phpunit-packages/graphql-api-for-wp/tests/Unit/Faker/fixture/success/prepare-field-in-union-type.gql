@@ -7,7 +7,7 @@
 query {
   customPost(by: { id: 1724 }) {
     __typename
-    ...on IsCustomPost {
+    ...on CustomPost {
       dateStr
     }
   }

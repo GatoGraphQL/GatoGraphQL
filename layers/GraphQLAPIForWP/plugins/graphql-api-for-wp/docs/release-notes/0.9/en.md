@@ -583,7 +583,7 @@ We can also query the tags and categories added to some custom post (for CPT `"c
   customPosts(filter: { customPostTypes: "custom-cpt" }) {
     __typename
     
-    ... on IsCustomPost {
+    ... on CustomPost {
       id
       title
       customPostType

@@ -14,7 +14,7 @@
     }
   ) {
     __typename
-    ...on IsCustomPost {
+    ...on CustomPost {
       id
       title
       customPostType
@@ -94,7 +94,7 @@ fragment GenericTagData on GenericTag {
   }
 }
 
-fragment CustomPostData on IsCustomPost {
+fragment CustomPostData on CustomPost {
   id
   title
   tags(taxonomy: "dummy-tag") {
