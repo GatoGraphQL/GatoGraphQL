@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
-use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\IdentifiableObjectInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 /**
  * To be used together with:
@@ -15,7 +16,12 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\IdentifiableObjectInterfaceT
  */
 trait RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait
 {
-    abstract protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver;
+    protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var IdentifiableObjectInterfaceTypeFieldResolver */
+        return $instanceManager->getInstance(IdentifiableObjectInterfaceTypeFieldResolver::class);
+    }
 
     /**
      * Remove the IdentifiableObject interface

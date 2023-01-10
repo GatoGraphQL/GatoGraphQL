@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\MutationRootTypeDataLoader;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\IdentifiableObjectInterfaceTypeFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
@@ -21,7 +20,6 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     private ?TypeResolverHelperInterface $typeResolverHelper = null;
     private ?MutationRootTypeDataLoader $mutationRootTypeDataLoader = null;
-    private ?IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver = null;
 
     final public function setTypeResolverHelper(TypeResolverHelperInterface $typeResolverHelper): void
     {
@@ -40,15 +38,6 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
     {
         /** @var MutationRootTypeDataLoader */
         return $this->mutationRootTypeDataLoader ??= $this->instanceManager->getInstance(MutationRootTypeDataLoader::class);
-    }
-    final public function setIdentifiableObjectInterfaceTypeFieldResolver(IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver): void
-    {
-        $this->identifiableObjectInterfaceTypeFieldResolver = $identifiableObjectInterfaceTypeFieldResolver;
-    }
-    final protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver
-    {
-        /** @var IdentifiableObjectInterfaceTypeFieldResolver */
-        return $this->identifiableObjectInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IdentifiableObjectInterfaceTypeFieldResolver::class);
     }
 
     public function getTypeName(): string
