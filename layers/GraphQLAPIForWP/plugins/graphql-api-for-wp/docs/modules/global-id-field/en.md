@@ -2,11 +2,11 @@
 
 Addition of a `globalID` field to all types in the GraphQL schema, which provides a unique ID for every entity across all types.
 
-The value returned by this field is the composition of:
+The value returned by this field is the base-64-encoded composition of:
 
-- the entity's namespaced type name
-- the separator `:`
-- the entity's ID
+- The entity's namespaced type name
+- The separator `:`
+- The entity's ID
 
 ## Description
 
