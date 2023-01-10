@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Hooks;
 
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\AbstractSchemaElementExtensionsObjectTypeResolver;
-use PoP\ComponentModel\Hooks\AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet;
+use PoP\ComponentModel\Hooks\AbstractRemoveIdentifiableObjectFieldsFromObjectTypeHookSet;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class RemoveIDAndSelfFieldsFromSchemaElementExtensionsObjectTypeHookSet extends AbstractRemoveIDAndSelfFieldsFromObjectTypeHookSet
+class RemoveIdentifiableObjectFieldsFromSchemaElementExtensionsObjectTypeHookSet extends AbstractRemoveIdentifiableObjectFieldsFromObjectTypeHookSet
 {
     /**
      * @phpstan-return class-string<ObjectTypeResolverInterface|InterfaceTypeResolverInterface>
