@@ -30,7 +30,7 @@
   postFormatNames: tagNames(taxonomy: post_format)
 }
 
-fragment TagData on IsTag {
+fragment TagData on Tag {
   __typename
   id
   name

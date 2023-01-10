@@ -2430,7 +2430,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsTag",
+              "name": "Tag",
               "ofType": null
             },
             {
@@ -6341,7 +6341,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsTag",
+              "name": "Tag",
               "ofType": null
             },
             {
@@ -15666,7 +15666,7 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "IsTag",
+          "name": "Tag",
           "description": "Entities representing a tag",
           "fields": [
             {

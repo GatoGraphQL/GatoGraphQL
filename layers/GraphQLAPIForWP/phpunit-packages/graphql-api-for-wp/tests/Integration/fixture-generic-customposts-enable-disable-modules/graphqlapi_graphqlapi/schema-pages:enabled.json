@@ -579,7 +579,7 @@
                     ]
                 },
                 {
-                    "name": "IsTag",
+                    "name": "Tag",
                     "enumValues": null,
                     "possibleTypes": [
                         {

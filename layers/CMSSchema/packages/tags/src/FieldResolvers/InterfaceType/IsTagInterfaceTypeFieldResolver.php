@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\FieldResolvers\InterfaceType;
 
-use PoPCMSSchema\Tags\TypeResolvers\InterfaceType\IsTagInterfaceTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\InterfaceType\TagInterfaceTypeResolver;
 use PoPCMSSchema\Taxonomies\FieldResolvers\InterfaceType\AbstractIsTaxonomyInterfaceTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
-class IsTagInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTypeFieldResolver
+class TagInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTypeFieldResolver
 {
     /**
      * @return array<class-string<InterfaceTypeResolverInterface>>
@@ -16,7 +16,7 @@ class IsTagInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTypeFie
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
-            IsTagInterfaceTypeResolver::class,
+            TagInterfaceTypeResolver::class,
         ];
     }
 

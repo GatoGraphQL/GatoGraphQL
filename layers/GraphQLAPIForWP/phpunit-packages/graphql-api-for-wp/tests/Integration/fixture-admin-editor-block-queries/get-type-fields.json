@@ -2319,8 +2319,8 @@
           "description": "Entities representing an Error payload"
         },
         {
-          "name": "IsTag",
-          "namespacedName": "IsTag",
+          "name": "Tag",
+          "namespacedName": "Tag",
           "fields": [
             {
               "name": "count"

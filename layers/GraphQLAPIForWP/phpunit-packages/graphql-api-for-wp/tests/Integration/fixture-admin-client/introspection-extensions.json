@@ -8086,10 +8086,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "IsTag",
+                    "name": "Tag",
                     "extensions": {
-                        "elementName": "IsTag",
-                        "namespacedName": "IsTag",
+                        "elementName": "Tag",
+                        "namespacedName": "Tag",
                         "possibleValues": null,
                         "isOneOf": false
                     },
