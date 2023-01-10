@@ -155,7 +155,7 @@
 		<link>https://graphql-api.lndo.site/graphql-query/website/home-user-widget/</link>
 		<pubDate>Tue, 28 Jul 2020 11:05:44 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">http://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=8</guid>
+		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=8</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  users(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    displayName\n    websiteURL\n    email\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
 
@@ -789,7 +789,7 @@
 			<wp:comment_id>2</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 03:56:32]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 03:56:32]]></wp:comment_date_gmt>
@@ -803,7 +803,7 @@
 			<wp:comment_id>3</wp:comment_id>
 			<wp:comment_author><![CDATA[contributor]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[contributor@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 03:57:14]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 03:57:14]]></wp:comment_date_gmt>
@@ -1037,7 +1037,7 @@
 			<wp:comment_id>4</wp:comment_id>
 			<wp:comment_author><![CDATA[editor]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[editor@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:02:44]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:02:44]]></wp:comment_date_gmt>
@@ -1051,7 +1051,7 @@
 			<wp:comment_id>5</wp:comment_id>
 			<wp:comment_author><![CDATA[author]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[author@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:03:08]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:03:08]]></wp:comment_date_gmt>
@@ -1065,7 +1065,7 @@
 			<wp:comment_id>6</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:03:18]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:03:18]]></wp:comment_date_gmt>
@@ -1079,7 +1079,7 @@
 			<wp:comment_id>7</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:03:35]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:03:35]]></wp:comment_date_gmt>
@@ -1093,7 +1093,7 @@
 			<wp:comment_id>8</wp:comment_id>
 			<wp:comment_author><![CDATA[subscriber]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[subscriber@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:03:43]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:03:43]]></wp:comment_date_gmt>
@@ -1253,7 +1253,7 @@ video/mp4
 			<wp:comment_id>9</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:07:13]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:07:13]]></wp:comment_date_gmt>
@@ -1267,7 +1267,7 @@ video/mp4
 			<wp:comment_id>10</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:07:26]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:07:26]]></wp:comment_date_gmt>
@@ -1325,7 +1325,7 @@ video/mp4
 			<wp:comment_id>11</wp:comment_id>
 			<wp:comment_author><![CDATA[subscriber]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[subscriber@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:09:36]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:09:36]]></wp:comment_date_gmt>
@@ -1372,7 +1372,7 @@ video/mp4
 			<wp:comment_id>41</wp:comment_id>
 			<wp:comment_author><![CDATA[subscriber]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[subscriber@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:09:36]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:09:36]]></wp:comment_date_gmt>
@@ -1416,7 +1416,7 @@ video/mp4
 			<wp:comment_id>45</wp:comment_id>
 			<wp:comment_author><![CDATA[author]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[author@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://graphql-api-nginx.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.100]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:09:36]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:09:36]]></wp:comment_date_gmt>
