@@ -7856,10 +7856,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "IsCategory",
+                    "name": "Category",
                     "extensions": {
-                        "elementName": "IsCategory",
-                        "namespacedName": "IsCategory",
+                        "elementName": "Category",
+                        "namespacedName": "Category",
                         "possibleValues": null,
                         "isOneOf": false
                     },

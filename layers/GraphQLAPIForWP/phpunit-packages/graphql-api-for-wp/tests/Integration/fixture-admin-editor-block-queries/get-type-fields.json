@@ -2241,8 +2241,8 @@
           "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'"
         },
         {
-          "name": "IsCategory",
-          "namespacedName": "IsCategory",
+          "name": "Category",
+          "namespacedName": "Category",
           "fields": [
             {
               "name": "count"

@@ -556,7 +556,7 @@ For instance, this query retrieves all tags of taxonomy `"custom-tag"` and all c
     __typename
 
     # Common category interface
-    ... on IsCategory {
+    ... on Category {
       id
       count
       name

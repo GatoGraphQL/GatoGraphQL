@@ -492,7 +492,7 @@
                     ]
                 },
                 {
-                    "name": "IsCategory",
+                    "name": "Category",
                     "enumValues": null,
                     "possibleTypes": [
                         {

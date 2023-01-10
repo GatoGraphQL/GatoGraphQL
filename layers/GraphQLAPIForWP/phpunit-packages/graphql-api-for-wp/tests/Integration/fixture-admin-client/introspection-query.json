@@ -1078,7 +1078,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCategory",
+              "name": "Category",
               "ofType": null
             },
             {
@@ -6029,7 +6029,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCategory",
+              "name": "Category",
               "ofType": null
             },
             {
@@ -15130,7 +15130,7 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "IsCategory",
+          "name": "Category",
           "description": "Entities representing a category",
           "fields": [
             {

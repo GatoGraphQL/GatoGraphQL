@@ -6,11 +6,11 @@ namespace PoPCMSSchema\Categories\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
-class IsCategoryInterfaceTypeResolver extends AbstractInterfaceTypeResolver
+class CategoryInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'IsCategory';
+        return 'Category';
     }
 
     public function getTypeDescription(): ?string

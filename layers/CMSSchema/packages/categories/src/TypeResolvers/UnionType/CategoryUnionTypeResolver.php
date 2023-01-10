@@ -8,12 +8,12 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 use PoPCMSSchema\Categories\RelationalTypeDataLoaders\UnionType\CategoryUnionTypeDataLoader;
-use PoPCMSSchema\Categories\TypeResolvers\InterfaceType\IsCategoryInterfaceTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\InterfaceType\CategoryInterfaceTypeResolver;
 
 class CategoryUnionTypeResolver extends AbstractUnionTypeResolver
 {
     private ?CategoryUnionTypeDataLoader $categoryUnionTypeDataLoader = null;
-    private ?IsCategoryInterfaceTypeResolver $isCategoryInterfaceTypeResolver = null;
+    private ?CategoryInterfaceTypeResolver $categoryInterfaceTypeResolver = null;
 
     final public function setCategoryUnionTypeDataLoader(CategoryUnionTypeDataLoader $categoryUnionTypeDataLoader): void
     {
@@ -24,14 +24,14 @@ class CategoryUnionTypeResolver extends AbstractUnionTypeResolver
         /** @var CategoryUnionTypeDataLoader */
         return $this->categoryUnionTypeDataLoader ??= $this->instanceManager->getInstance(CategoryUnionTypeDataLoader::class);
     }
-    final public function setIsCategoryInterfaceTypeResolver(IsCategoryInterfaceTypeResolver $isCategoryInterfaceTypeResolver): void
+    final public function setCategoryInterfaceTypeResolver(CategoryInterfaceTypeResolver $categoryInterfaceTypeResolver): void
     {
-        $this->isCategoryInterfaceTypeResolver = $isCategoryInterfaceTypeResolver;
+        $this->categoryInterfaceTypeResolver = $categoryInterfaceTypeResolver;
     }
-    final protected function getIsCategoryInterfaceTypeResolver(): IsCategoryInterfaceTypeResolver
+    final protected function getCategoryInterfaceTypeResolver(): CategoryInterfaceTypeResolver
     {
-        /** @var IsCategoryInterfaceTypeResolver */
-        return $this->isCategoryInterfaceTypeResolver ??= $this->instanceManager->getInstance(IsCategoryInterfaceTypeResolver::class);
+        /** @var CategoryInterfaceTypeResolver */
+        return $this->categoryInterfaceTypeResolver ??= $this->instanceManager->getInstance(CategoryInterfaceTypeResolver::class);
     }
 
     public function getTypeName(): string
@@ -55,7 +55,7 @@ class CategoryUnionTypeResolver extends AbstractUnionTypeResolver
     public function getUnionTypeInterfaceTypeResolvers(): array
     {
         return [
-            $this->getIsCategoryInterfaceTypeResolver(),
+            $this->getCategoryInterfaceTypeResolver(),
         ];
     }
 }
