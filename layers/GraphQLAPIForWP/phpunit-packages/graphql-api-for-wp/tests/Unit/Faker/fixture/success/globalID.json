@@ -1,0 +1,60 @@
+{
+  "data": {
+    "users": [
+      {
+        "id": 1,
+        "globalID": "PoPCMSSchema_Users_User:1"
+      },
+      {
+        "id": 2,
+        "globalID": "PoPCMSSchema_Users_User:2"
+      },
+      {
+        "id": 3,
+        "globalID": "PoPCMSSchema_Users_User:3"
+      }
+    ],
+    "posts": [
+      {
+        "id": 1724,
+        "globalID": "PoPCMSSchema_Posts_Post:1724"
+      },
+      {
+        "id": 358,
+        "globalID": "PoPCMSSchema_Posts_Post:358"
+      },
+      {
+        "id": 555,
+        "globalID": "PoPCMSSchema_Posts_Post:555"
+      }
+    ],
+    "pages": [
+      {
+        "id": 2,
+        "globalID": "PoPCMSSchema_Pages_Page:2"
+      },
+      {
+        "id": 146,
+        "globalID": "PoPCMSSchema_Pages_Page:146"
+      },
+      {
+        "id": 155,
+        "globalID": "PoPCMSSchema_Pages_Page:155"
+      }
+    ],
+    "comments": [
+      {
+        "id": 1900,
+        "globalID": "PoPCMSSchema_Comments_Comment:1900"
+      },
+      {
+        "id": 1901,
+        "globalID": "PoPCMSSchema_Comments_Comment:1901"
+      },
+      {
+        "id": 1903,
+        "globalID": "PoPCMSSchema_Comments_Comment:1903"
+      }
+    ]
+  }
+}
