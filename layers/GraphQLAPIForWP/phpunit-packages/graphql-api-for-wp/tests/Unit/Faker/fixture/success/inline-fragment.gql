@@ -7,7 +7,7 @@
     __typename
     ... on CustomPostUnion {
       customPostType
-      ... on IsCustomPost {
+      ... on CustomPost {
         date
         ... on Post {
           id

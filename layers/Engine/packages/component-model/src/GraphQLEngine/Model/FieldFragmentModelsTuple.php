@@ -12,8 +12,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
  *
  * Eg: Models for field "posts"
  * { posts } => []
- * { ...on IsCustomPost { posts } } => ["IsCustomPost"]
- * { ...on IsCustomPost { ...on Post { posts } } } => ["IsCustomPost", "Post"]
+ * { ...on CustomPost { posts } } => ["CustomPost"]
+ * { ...on CustomPost { ...on Post { posts } } } => ["CustomPost", "Post"]
  */
 class FieldFragmentModelsTuple
 {

@@ -9,7 +9,7 @@ query {
     customPostCount
     customPosts {
       __typename
-      ...on IsCustomPost {
+      ...on CustomPost {
         id
         title
       }

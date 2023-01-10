@@ -532,7 +532,7 @@ For instance, this query retrieves all tags of taxonomy `"custom-tag"` and all c
     __typename
     
     # Common tag interface
-    ... on IsTag {
+    ... on Tag {
       id
       count
       name
@@ -556,7 +556,7 @@ For instance, this query retrieves all tags of taxonomy `"custom-tag"` and all c
     __typename
 
     # Common category interface
-    ... on IsCategory {
+    ... on Category {
       id
       count
       name
@@ -583,7 +583,7 @@ We can also query the tags and categories added to some custom post (for CPT `"c
   customPosts(filter: { customPostTypes: "custom-cpt" }) {
     __typename
     
-    ... on IsCustomPost {
+    ... on CustomPost {
       id
       title
       customPostType
@@ -867,7 +867,7 @@ Additional entries were added to the default allowlist for Settings:
 
 Mutations in the schema now return some "Payload" object, which provides any error(s) resulting from the mutation, or the modified object if successful (these 2 properties are most likely exclusive: either `errors` or `object` will have a value, and the other one will be `null`).
 
-Errors are provided via some "ErrorPayloadUnion" type, containing all possible errors for that mutation. Every possible error is some "ErrorPayload" type that implements the interface `IsErrorPayload`.
+Errors are provided via some "ErrorPayloadUnion" type, containing all possible errors for that mutation. Every possible error is some "ErrorPayload" type that implements the interface `ErrorPayload`.
 
 For instance, the operation `updatePost` returns a `RootUpdatePostMutationPayload`, which contains the following fields:
 
@@ -902,7 +902,7 @@ mutation UpdatePost(
     status
     errors {
       __typename
-      ...on IsErrorPayload {
+      ...on ErrorPayload {
         message
       }
       ...on GenericErrorPayload {
@@ -2262,7 +2262,7 @@ mutation UpdatePost(
     status
     errors {
       __typename
-      ...on IsErrorPayload {
+      ...on ErrorPayload {
         message
       }
       ...on GenericErrorPayload {

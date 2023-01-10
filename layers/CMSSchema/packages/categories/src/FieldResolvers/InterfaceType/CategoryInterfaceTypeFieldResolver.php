@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\FieldResolvers\InterfaceType;
 
-use PoPCMSSchema\Categories\TypeResolvers\InterfaceType\IsCategoryInterfaceTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\InterfaceType\CategoryInterfaceTypeResolver;
 use PoPCMSSchema\Taxonomies\FieldResolvers\InterfaceType\AbstractIsTaxonomyInterfaceTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 
-class IsCategoryInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTypeFieldResolver
+class CategoryInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTypeFieldResolver
 {
     /**
      * @return array<class-string<InterfaceTypeResolverInterface>>
@@ -16,7 +16,7 @@ class IsCategoryInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTy
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
-            IsCategoryInterfaceTypeResolver::class,
+            CategoryInterfaceTypeResolver::class,
         ];
     }
 

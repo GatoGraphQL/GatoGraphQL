@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\FieldResolvers\InterfaceType;
 
-use PoPSchema\SchemaCommons\TypeResolvers\InterfaceType\IsErrorPayloadInterfaceTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InterfaceType\ErrorPayloadInterfaceTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
-class IsErrorPayloadInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
+class ErrorPayloadInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
@@ -31,7 +31,7 @@ class IsErrorPayloadInterfaceTypeFieldResolver extends AbstractInterfaceTypeFiel
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
-            IsErrorPayloadInterfaceTypeResolver::class,
+            ErrorPayloadInterfaceTypeResolver::class,
         ];
     }
 

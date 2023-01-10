@@ -14,7 +14,7 @@
     }
   ) {
     __typename
-    ...on IsCustomPost {
+    ...on CustomPost {
       id
       title
       customPostType
@@ -73,7 +73,7 @@
   }
 }
 
-fragment TagData on IsTag {
+fragment TagData on Tag {
   count
   description
   id
@@ -94,12 +94,12 @@ fragment GenericTagData on GenericTag {
   }
 }
 
-fragment CustomPostData on IsCustomPost {
+fragment CustomPostData on CustomPost {
   id
   title
   tags(taxonomy: "dummy-tag") {
     __typename
-    ...on IsTag {
+    ...on Tag {
       id
       name
     }

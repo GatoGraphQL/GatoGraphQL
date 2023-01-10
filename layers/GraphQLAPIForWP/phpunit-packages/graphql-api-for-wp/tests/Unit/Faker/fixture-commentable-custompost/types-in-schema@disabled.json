@@ -1079,7 +1079,7 @@
                     ]
                 },
                 {
-                    "name": "IsCustomPost",
+                    "name": "CustomPost",
                     "possibleTypes": [
                         {
                             "name": "Page"

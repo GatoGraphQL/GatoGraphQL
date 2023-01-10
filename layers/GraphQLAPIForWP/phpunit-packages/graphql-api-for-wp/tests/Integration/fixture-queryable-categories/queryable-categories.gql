@@ -18,7 +18,7 @@
   dummyCategoryNames: categoryNames(taxonomy: "dummy-category")
 }
 
-fragment CategoryData on IsCategory {
+fragment CategoryData on Category {
   __typename
   id
   name

@@ -2241,8 +2241,8 @@
           "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'"
         },
         {
-          "name": "IsCategory",
-          "namespacedName": "IsCategory",
+          "name": "Category",
+          "namespacedName": "Category",
           "fields": [
             {
               "name": "count"
@@ -2258,8 +2258,8 @@
           "description": "Entities representing a category"
         },
         {
-          "name": "IsCustomPost",
-          "namespacedName": "IsCustomPost",
+          "name": "CustomPost",
+          "namespacedName": "CustomPost",
           "fields": [
             {
               "name": "content"
@@ -2308,8 +2308,8 @@
           "description": "Entities representing a custom post"
         },
         {
-          "name": "IsErrorPayload",
-          "namespacedName": "IsErrorPayload",
+          "name": "ErrorPayload",
+          "namespacedName": "ErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -2319,8 +2319,8 @@
           "description": "Entities representing an Error payload"
         },
         {
-          "name": "IsTag",
-          "namespacedName": "IsTag",
+          "name": "Tag",
+          "namespacedName": "Tag",
           "fields": [
             {
               "name": "count"

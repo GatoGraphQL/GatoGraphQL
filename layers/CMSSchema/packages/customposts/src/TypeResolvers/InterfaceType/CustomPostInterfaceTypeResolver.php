@@ -6,11 +6,11 @@ namespace PoPCMSSchema\CustomPosts\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
-class IsCustomPostInterfaceTypeResolver extends AbstractInterfaceTypeResolver
+class CustomPostInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'IsCustomPost';
+        return 'CustomPost';
     }
 
     public function getTypeDescription(): ?string

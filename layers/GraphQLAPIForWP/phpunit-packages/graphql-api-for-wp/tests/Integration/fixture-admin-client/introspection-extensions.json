@@ -7856,10 +7856,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "IsCategory",
+                    "name": "Category",
                     "extensions": {
-                        "elementName": "IsCategory",
-                        "namespacedName": "IsCategory",
+                        "elementName": "Category",
+                        "namespacedName": "Category",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -7893,10 +7893,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "IsCustomPost",
+                    "name": "CustomPost",
                     "extensions": {
-                        "elementName": "IsCustomPost",
-                        "namespacedName": "IsCustomPost",
+                        "elementName": "CustomPost",
+                        "namespacedName": "CustomPost",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -8065,10 +8065,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "IsErrorPayload",
+                    "name": "ErrorPayload",
                     "extensions": {
-                        "elementName": "IsErrorPayload",
-                        "namespacedName": "IsErrorPayload",
+                        "elementName": "ErrorPayload",
+                        "namespacedName": "ErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -8086,10 +8086,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "IsTag",
+                    "name": "Tag",
                     "extensions": {
-                        "elementName": "IsTag",
-                        "namespacedName": "IsTag",
+                        "elementName": "Tag",
+                        "namespacedName": "Tag",
                         "possibleValues": null,
                         "isOneOf": false
                     },

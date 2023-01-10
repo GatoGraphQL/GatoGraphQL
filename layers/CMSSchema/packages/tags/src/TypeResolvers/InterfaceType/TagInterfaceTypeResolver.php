@@ -6,11 +6,11 @@ namespace PoPCMSSchema\Tags\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
-class IsTagInterfaceTypeResolver extends AbstractInterfaceTypeResolver
+class TagInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'IsTag';
+        return 'Tag';
     }
 
     public function getTypeDescription(): ?string

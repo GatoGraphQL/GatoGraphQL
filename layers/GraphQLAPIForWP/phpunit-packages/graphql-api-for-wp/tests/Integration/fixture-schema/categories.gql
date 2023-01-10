@@ -14,7 +14,7 @@
     }
   ) {
     __typename
-    ...on IsCustomPost {
+    ...on CustomPost {
       id
       title
       customPostType
@@ -52,7 +52,7 @@
   }
 }
 
-fragment CategoryData on IsCategory {
+fragment CategoryData on Category {
   count
   description
   id
@@ -73,12 +73,12 @@ fragment GenericCategoryData on GenericCategory {
   }
 }
 
-fragment CustomPostData on IsCustomPost {
+fragment CustomPostData on CustomPost {
   id
   title
   categories(taxonomy: "dummy-category") {
     __typename
-    ...on IsCategory {
+    ...on Category {
       id
       name
     }

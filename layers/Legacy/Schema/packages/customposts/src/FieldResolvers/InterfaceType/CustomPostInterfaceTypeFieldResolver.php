@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 
-class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
+class CustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
 {
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;

@@ -9,6 +9,6 @@
   }
 }
 
-fragment CustomPost on IsCustomPost @unsupportedFragmentDirective {
+fragment CustomPost on CustomPost @unsupportedFragmentDirective {
   id
 }

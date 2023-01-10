@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\Categories\FieldResolvers\InterfaceType\IsCategoryInterfaceTypeFieldResolver;
+use PoPCMSSchema\Categories\FieldResolvers\InterfaceType\CategoryInterfaceTypeFieldResolver;
 use PoPCMSSchema\Categories\ModuleContracts\CategoryAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -21,7 +21,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
-    private ?IsCategoryInterfaceTypeFieldResolver $isCategoryInterfaceTypeFieldResolver = null;
+    private ?CategoryInterfaceTypeFieldResolver $categoryInterfaceTypeFieldResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -50,14 +50,14 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         /** @var QueryableInterfaceTypeFieldResolver */
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
-    final public function setIsCategoryInterfaceTypeFieldResolver(IsCategoryInterfaceTypeFieldResolver $isCategoryInterfaceTypeFieldResolver): void
+    final public function setCategoryInterfaceTypeFieldResolver(CategoryInterfaceTypeFieldResolver $categoryInterfaceTypeFieldResolver): void
     {
-        $this->isCategoryInterfaceTypeFieldResolver = $isCategoryInterfaceTypeFieldResolver;
+        $this->categoryInterfaceTypeFieldResolver = $categoryInterfaceTypeFieldResolver;
     }
-    final protected function getIsCategoryInterfaceTypeFieldResolver(): IsCategoryInterfaceTypeFieldResolver
+    final protected function getCategoryInterfaceTypeFieldResolver(): CategoryInterfaceTypeFieldResolver
     {
-        /** @var IsCategoryInterfaceTypeFieldResolver */
-        return $this->isCategoryInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsCategoryInterfaceTypeFieldResolver::class);
+        /** @var CategoryInterfaceTypeFieldResolver */
+        return $this->categoryInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CategoryInterfaceTypeFieldResolver::class);
     }
 
     /**
@@ -67,7 +67,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return [
             $this->getQueryableInterfaceTypeFieldResolver(),
-            $this->getIsCategoryInterfaceTypeFieldResolver(),
+            $this->getCategoryInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -82,7 +82,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'urlAbsolutePath',
             'slug',
 
-            // IsCategory interface
+            // Category interface
             'name',
             'description',
             'count',

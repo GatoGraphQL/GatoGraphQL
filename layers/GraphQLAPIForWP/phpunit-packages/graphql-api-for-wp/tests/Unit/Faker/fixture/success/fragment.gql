@@ -15,7 +15,7 @@ fragment CustomPostData on CustomPostUnion {
   ...CustomPostNodeData
 }
 
-fragment CustomPostNodeData on IsCustomPost {
+fragment CustomPostNodeData on CustomPost {
   date
   ...PostData
 }

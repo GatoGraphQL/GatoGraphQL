@@ -8,12 +8,12 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader;
-use PoPCMSSchema\CustomPosts\TypeResolvers\InterfaceType\IsCustomPostInterfaceTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InterfaceType\CustomPostInterfaceTypeResolver;
 
 class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
 {
     private ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
-    private ?IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver = null;
+    private ?CustomPostInterfaceTypeResolver $customPostInterfaceTypeResolver = null;
 
     final public function setCustomPostUnionTypeDataLoader(CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader): void
     {
@@ -24,14 +24,14 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
         /** @var CustomPostUnionTypeDataLoader */
         return $this->customPostUnionTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostUnionTypeDataLoader::class);
     }
-    final public function setIsCustomPostInterfaceTypeResolver(IsCustomPostInterfaceTypeResolver $isCustomPostInterfaceTypeResolver): void
+    final public function setCustomPostInterfaceTypeResolver(CustomPostInterfaceTypeResolver $customPostInterfaceTypeResolver): void
     {
-        $this->isCustomPostInterfaceTypeResolver = $isCustomPostInterfaceTypeResolver;
+        $this->customPostInterfaceTypeResolver = $customPostInterfaceTypeResolver;
     }
-    final protected function getIsCustomPostInterfaceTypeResolver(): IsCustomPostInterfaceTypeResolver
+    final protected function getCustomPostInterfaceTypeResolver(): CustomPostInterfaceTypeResolver
     {
-        /** @var IsCustomPostInterfaceTypeResolver */
-        return $this->isCustomPostInterfaceTypeResolver ??= $this->instanceManager->getInstance(IsCustomPostInterfaceTypeResolver::class);
+        /** @var CustomPostInterfaceTypeResolver */
+        return $this->customPostInterfaceTypeResolver ??= $this->instanceManager->getInstance(CustomPostInterfaceTypeResolver::class);
     }
 
     public function getTypeName(): string
@@ -55,7 +55,7 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
     public function getUnionTypeInterfaceTypeResolvers(): array
     {
         return [
-            $this->getIsCustomPostInterfaceTypeResolver(),
+            $this->getCustomPostInterfaceTypeResolver(),
         ];
     }
 }

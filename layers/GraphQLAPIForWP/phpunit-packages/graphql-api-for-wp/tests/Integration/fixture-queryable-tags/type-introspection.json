@@ -478,7 +478,7 @@
                     ]
                 },
                 {
-                    "name": "IsCategory",
+                    "name": "Category",
                     "enumValues": null,
                     "possibleTypes": [
                         {
@@ -490,7 +490,7 @@
                     ]
                 },
                 {
-                    "name": "IsCustomPost",
+                    "name": "CustomPost",
                     "enumValues": null,
                     "possibleTypes": [
                         {
@@ -505,7 +505,7 @@
                     ]
                 },
                 {
-                    "name": "IsErrorPayload",
+                    "name": "ErrorPayload",
                     "enumValues": null,
                     "possibleTypes": [
                         {
@@ -565,7 +565,7 @@
                     ]
                 },
                 {
-                    "name": "IsTag",
+                    "name": "Tag",
                     "enumValues": null,
                     "possibleTypes": [
                         {

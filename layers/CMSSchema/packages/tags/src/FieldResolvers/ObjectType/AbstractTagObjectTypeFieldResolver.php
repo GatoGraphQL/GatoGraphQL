@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Tags\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
-use PoPCMSSchema\Tags\FieldResolvers\InterfaceType\IsTagInterfaceTypeFieldResolver;
+use PoPCMSSchema\Tags\FieldResolvers\InterfaceType\TagInterfaceTypeFieldResolver;
 use PoPCMSSchema\Tags\ModuleContracts\TagAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -20,7 +20,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
-    private ?IsTagInterfaceTypeFieldResolver $isTagInterfaceTypeFieldResolver = null;
+    private ?TagInterfaceTypeFieldResolver $tagInterfaceTypeFieldResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -49,14 +49,14 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         /** @var QueryableInterfaceTypeFieldResolver */
         return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
     }
-    final public function setIsTagInterfaceTypeFieldResolver(IsTagInterfaceTypeFieldResolver $isTagInterfaceTypeFieldResolver): void
+    final public function setTagInterfaceTypeFieldResolver(TagInterfaceTypeFieldResolver $tagInterfaceTypeFieldResolver): void
     {
-        $this->isTagInterfaceTypeFieldResolver = $isTagInterfaceTypeFieldResolver;
+        $this->tagInterfaceTypeFieldResolver = $tagInterfaceTypeFieldResolver;
     }
-    final protected function getIsTagInterfaceTypeFieldResolver(): IsTagInterfaceTypeFieldResolver
+    final protected function getTagInterfaceTypeFieldResolver(): TagInterfaceTypeFieldResolver
     {
-        /** @var IsTagInterfaceTypeFieldResolver */
-        return $this->isTagInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsTagInterfaceTypeFieldResolver::class);
+        /** @var TagInterfaceTypeFieldResolver */
+        return $this->tagInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(TagInterfaceTypeFieldResolver::class);
     }
 
     /**
@@ -66,7 +66,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     {
         return [
             $this->getQueryableInterfaceTypeFieldResolver(),
-            $this->getIsTagInterfaceTypeFieldResolver(),
+            $this->getTagInterfaceTypeFieldResolver(),
         ];
     }
 
@@ -81,7 +81,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             'urlAbsolutePath',
             'slug',
 
-            // IsTag interface
+            // Tag interface
             'name',
             'description',
             'count',

@@ -1,7 +1,7 @@
 {
   customPosts(filter: {ids: [1724, 358, 733]}) {
     __typename
-    ...on IsCustomPost {
+    ...on CustomPost {
       id
       customPostType
     }
@@ -13,7 +13,7 @@
       status
       errors {
         __typename
-        ...on IsErrorPayload {
+        ...on ErrorPayload {
           message
         }
       }

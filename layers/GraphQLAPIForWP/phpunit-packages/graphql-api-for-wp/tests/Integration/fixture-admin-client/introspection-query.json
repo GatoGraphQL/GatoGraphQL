@@ -35,7 +35,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -554,7 +554,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -587,7 +587,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -620,7 +620,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -653,7 +653,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -686,7 +686,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -719,7 +719,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -752,7 +752,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -1078,7 +1078,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCategory",
+              "name": "Category",
               "ofType": null
             },
             {
@@ -2044,7 +2044,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCustomPost",
+              "name": "CustomPost",
               "ofType": null
             },
             {
@@ -2116,7 +2116,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -2430,7 +2430,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsTag",
+              "name": "Tag",
               "ofType": null
             },
             {
@@ -2473,7 +2473,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -2506,7 +2506,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -2539,7 +2539,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -2572,7 +2572,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -2605,7 +2605,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -3126,7 +3126,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -4573,7 +4573,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCustomPost",
+              "name": "CustomPost",
               "ofType": null
             },
             {
@@ -4626,7 +4626,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -5558,7 +5558,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCustomPost",
+              "name": "CustomPost",
               "ofType": null
             },
             {
@@ -6029,7 +6029,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsCategory",
+              "name": "Category",
               "ofType": null
             },
             {
@@ -6341,7 +6341,7 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IsTag",
+              "name": "Tag",
               "ofType": null
             },
             {
@@ -12953,7 +12953,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -12986,7 +12986,7 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IsErrorPayload",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -15130,7 +15130,7 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "IsCategory",
+          "name": "Category",
           "description": "Entities representing a category",
           "fields": [
             {
@@ -15196,7 +15196,7 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "IsCustomPost",
+          "name": "CustomPost",
           "description": "Entities representing a custom post",
           "fields": [
             {
@@ -15548,7 +15548,7 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "IsErrorPayload",
+          "name": "ErrorPayload",
           "description": "Entities representing an Error payload",
           "fields": [
             {
@@ -15666,7 +15666,7 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "IsTag",
+          "name": "Tag",
           "description": "Entities representing a tag",
           "fields": [
             {

@@ -5,13 +5,13 @@
       "locations": [
         {
           "line": 12,
-          "column": 38
+          "column": 36
         }
       ],
       "extensions": {
         "path": [
           "@unsupportedFragmentDirective",
-          "fragment CustomPost on IsCustomPost { ... }"
+          "fragment CustomPost on CustomPost { ... }"
         ],
         "code": "gqlunsupported@2"
       }
