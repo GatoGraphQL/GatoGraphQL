@@ -26,15 +26,6 @@ abstract class AbstractSchemaElementExtensionsObjectTypeResolver extends Abstrac
         /** @var SchemaDefinitionReferenceTypeDataLoader */
         return $this->schemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceTypeDataLoader::class);
     }
-    final public function setIdentifiableObjectInterfaceTypeFieldResolver(IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver): void
-    {
-        $this->identifiableObjectInterfaceTypeFieldResolver = $identifiableObjectInterfaceTypeFieldResolver;
-    }
-    final protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver
-    {
-        /** @var IdentifiableObjectInterfaceTypeFieldResolver */
-        return $this->identifiableObjectInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IdentifiableObjectInterfaceTypeFieldResolver::class);
-    }
 
     /**
      * Introspection names must start with "__".
