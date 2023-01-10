@@ -88,7 +88,7 @@
                             "class2",
                             "class3"
                         ],
-                        "target": "overriding-target",
+                        "target": "_blank",
                         "linkRelationship": "",
                         "children": []
                     },
@@ -132,7 +132,7 @@
                             "class2",
                             "class3"
                         ],
-                        "target": "overriding-target",
+                        "target": "_blank",
                         "linkRelationship": ""
                     },
                     {
@@ -174,7 +174,7 @@
                             "class2",
                             "class3"
                         ],
-                        "target": "overriding-target",
+                        "target": "_blank",
                         "description": "Some description",
                         "objectID": 2,
                         "parentID": null,
@@ -527,7 +527,7 @@
                         "class2",
                         "class3"
                     ],
-                    "target": "overriding-target",
+                    "target": "_blank",
                     "linkRelationship": "",
                     "children": []
                 },
@@ -571,7 +571,7 @@
                         "class2",
                         "class3"
                     ],
-                    "target": "overriding-target",
+                    "target": "_blank",
                     "linkRelationship": ""
                 },
                 {
@@ -613,7 +613,7 @@
                         "class2",
                         "class3"
                     ],
-                    "target": "overriding-target",
+                    "target": "_blank",
                     "description": "Some description",
                     "objectID": 2,
                     "parentID": null,

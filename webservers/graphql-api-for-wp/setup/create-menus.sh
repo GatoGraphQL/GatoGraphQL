@@ -3,7 +3,7 @@ echo "Creating menus"
 # Create menus
 wp menu create "Top Menu" --path=/app/wordpress
 wp menu item add-post top-menu 1 --path=/app/wordpress
-wp menu item add-post top-menu 2 --title="Page in Menu for testing" --description="Some description" --attr-title="Some attr-title" --target="overriding-target" --classes="class1 class2 class3" --position=3 --path=/app/wordpress
+wp menu item add-post top-menu 2 --title="Page in Menu for testing" --description="Some description" --attr-title="Some attr-title" --target="_blank" --classes="class1 class2 class3" --position=3 --path=/app/wordpress
 wp menu item add-custom top-menu Apple https://apple.com --path=/app/wordpress
 wp menu location assign top-menu primary --path=/app/wordpress
 
