@@ -505,7 +505,7 @@
                     ]
                 },
                 {
-                    "name": "IsErrorPayload",
+                    "name": "ErrorPayload",
                     "enumValues": null,
                     "possibleTypes": [
                         {

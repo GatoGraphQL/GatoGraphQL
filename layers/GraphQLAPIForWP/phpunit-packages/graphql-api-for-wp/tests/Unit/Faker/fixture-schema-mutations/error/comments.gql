@@ -22,7 +22,7 @@ fragment RootAddCommentToCustomPostMutationPayloadData on RootAddCommentToCustom
   status
   errors {
     __typename
-    ...on IsErrorPayload {
+    ...on ErrorPayload {
       message
     }
   }

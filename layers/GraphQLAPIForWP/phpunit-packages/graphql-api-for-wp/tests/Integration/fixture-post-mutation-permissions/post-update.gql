@@ -7,7 +7,7 @@ mutation {
       status
       errors {
         __typename
-        ...on IsErrorPayload {
+        ...on ErrorPayload {
           message
         }
       }
@@ -32,7 +32,7 @@ mutation {
       status
       errors {
         __typename
-        ...on IsErrorPayload {
+        ...on ErrorPayload {
           message
         }
       }

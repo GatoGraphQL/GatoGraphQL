@@ -8065,10 +8065,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "IsErrorPayload",
+                    "name": "ErrorPayload",
                     "extensions": {
-                        "elementName": "IsErrorPayload",
-                        "namespacedName": "IsErrorPayload",
+                        "elementName": "ErrorPayload",
+                        "namespacedName": "ErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },

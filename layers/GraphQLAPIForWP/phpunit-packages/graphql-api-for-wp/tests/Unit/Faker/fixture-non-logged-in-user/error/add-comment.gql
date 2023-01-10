@@ -6,7 +6,7 @@ mutation {
     status
     errors {
       __typename
-      ...on IsErrorPayload {
+      ...on ErrorPayload {
         message
       }
     }

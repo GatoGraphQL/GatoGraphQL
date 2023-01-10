@@ -867,7 +867,7 @@ Additional entries were added to the default allowlist for Settings:
 
 Mutations in the schema now return some "Payload" object, which provides any error(s) resulting from the mutation, or the modified object if successful (these 2 properties are most likely exclusive: either `errors` or `object` will have a value, and the other one will be `null`).
 
-Errors are provided via some "ErrorPayloadUnion" type, containing all possible errors for that mutation. Every possible error is some "ErrorPayload" type that implements the interface `IsErrorPayload`.
+Errors are provided via some "ErrorPayloadUnion" type, containing all possible errors for that mutation. Every possible error is some "ErrorPayload" type that implements the interface `ErrorPayload`.
 
 For instance, the operation `updatePost` returns a `RootUpdatePostMutationPayload`, which contains the following fields:
 
@@ -902,7 +902,7 @@ mutation UpdatePost(
     status
     errors {
       __typename
-      ...on IsErrorPayload {
+      ...on ErrorPayload {
         message
       }
       ...on GenericErrorPayload {
@@ -2262,7 +2262,7 @@ mutation UpdatePost(
     status
     errors {
       __typename
-      ...on IsErrorPayload {
+      ...on ErrorPayload {
         message
       }
       ...on GenericErrorPayload {

@@ -2308,8 +2308,8 @@
           "description": "Entities representing a custom post"
         },
         {
-          "name": "IsErrorPayload",
-          "namespacedName": "IsErrorPayload",
+          "name": "ErrorPayload",
+          "namespacedName": "ErrorPayload",
           "fields": [
             {
               "name": "message"

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\FieldResolvers\ObjectType;
 
-use PoPSchema\SchemaCommons\FieldResolvers\InterfaceType\IsErrorPayloadInterfaceTypeFieldResolver;
+use PoPSchema\SchemaCommons\FieldResolvers\InterfaceType\ErrorPayloadInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractErrorPayloadObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -17,7 +17,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?IsErrorPayloadInterfaceTypeFieldResolver $isErrorPayloadInterfaceTypeFieldResolver = null;
+    private ?ErrorPayloadInterfaceTypeFieldResolver $errorPayloadInterfaceTypeFieldResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -28,14 +28,14 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setIsErrorPayloadInterfaceTypeFieldResolver(IsErrorPayloadInterfaceTypeFieldResolver $isErrorPayloadInterfaceTypeFieldResolver): void
+    final public function setErrorPayloadInterfaceTypeFieldResolver(ErrorPayloadInterfaceTypeFieldResolver $errorPayloadInterfaceTypeFieldResolver): void
     {
-        $this->isErrorPayloadInterfaceTypeFieldResolver = $isErrorPayloadInterfaceTypeFieldResolver;
+        $this->errorPayloadInterfaceTypeFieldResolver = $errorPayloadInterfaceTypeFieldResolver;
     }
-    final protected function getIsErrorPayloadInterfaceTypeFieldResolver(): IsErrorPayloadInterfaceTypeFieldResolver
+    final protected function getErrorPayloadInterfaceTypeFieldResolver(): ErrorPayloadInterfaceTypeFieldResolver
     {
-        /** @var IsErrorPayloadInterfaceTypeFieldResolver */
-        return $this->isErrorPayloadInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IsErrorPayloadInterfaceTypeFieldResolver::class);
+        /** @var ErrorPayloadInterfaceTypeFieldResolver */
+        return $this->errorPayloadInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(ErrorPayloadInterfaceTypeFieldResolver::class);
     }
 
     /**
@@ -62,7 +62,7 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->getIsErrorPayloadInterfaceTypeFieldResolver(),
+            $this->getErrorPayloadInterfaceTypeFieldResolver(),
         ];
     }
 

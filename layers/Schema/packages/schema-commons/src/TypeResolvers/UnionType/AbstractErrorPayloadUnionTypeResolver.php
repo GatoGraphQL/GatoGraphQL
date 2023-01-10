@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\UnionType;
 
-use PoPSchema\SchemaCommons\TypeResolvers\InterfaceType\IsErrorPayloadInterfaceTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InterfaceType\ErrorPayloadInterfaceTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 
 abstract class AbstractErrorPayloadUnionTypeResolver extends AbstractUnionTypeResolver
 {
-    private ?IsErrorPayloadInterfaceTypeResolver $isErrorPayloadInterfaceTypeResolver = null;
+    private ?ErrorPayloadInterfaceTypeResolver $errorPayloadInterfaceTypeResolver = null;
 
-    final public function setIsErrorPayloadInterfaceTypeResolver(IsErrorPayloadInterfaceTypeResolver $isErrorPayloadInterfaceTypeResolver): void
+    final public function setErrorPayloadInterfaceTypeResolver(ErrorPayloadInterfaceTypeResolver $errorPayloadInterfaceTypeResolver): void
     {
-        $this->isErrorPayloadInterfaceTypeResolver = $isErrorPayloadInterfaceTypeResolver;
+        $this->errorPayloadInterfaceTypeResolver = $errorPayloadInterfaceTypeResolver;
     }
-    final protected function getIsErrorPayloadInterfaceTypeResolver(): IsErrorPayloadInterfaceTypeResolver
+    final protected function getErrorPayloadInterfaceTypeResolver(): ErrorPayloadInterfaceTypeResolver
     {
-        /** @var IsErrorPayloadInterfaceTypeResolver */
-        return $this->isErrorPayloadInterfaceTypeResolver ??= $this->instanceManager->getInstance(IsErrorPayloadInterfaceTypeResolver::class);
+        /** @var ErrorPayloadInterfaceTypeResolver */
+        return $this->errorPayloadInterfaceTypeResolver ??= $this->instanceManager->getInstance(ErrorPayloadInterfaceTypeResolver::class);
     }
 
     /**
@@ -28,7 +28,7 @@ abstract class AbstractErrorPayloadUnionTypeResolver extends AbstractUnionTypeRe
     public function getUnionTypeInterfaceTypeResolvers(): array
     {
         return [
-            $this->getIsErrorPayloadInterfaceTypeResolver(),
+            $this->getErrorPayloadInterfaceTypeResolver(),
         ];
     }
 }

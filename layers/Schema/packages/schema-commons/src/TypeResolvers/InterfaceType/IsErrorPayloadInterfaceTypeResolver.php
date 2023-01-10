@@ -6,11 +6,11 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
-class IsErrorPayloadInterfaceTypeResolver extends AbstractInterfaceTypeResolver
+class ErrorPayloadInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'IsErrorPayload';
+        return 'ErrorPayload';
     }
 
     public function getTypeDescription(): ?string
