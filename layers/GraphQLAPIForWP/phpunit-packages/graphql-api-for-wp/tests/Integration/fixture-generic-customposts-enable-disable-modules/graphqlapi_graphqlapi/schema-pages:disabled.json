@@ -382,105 +382,6 @@
                     "possibleTypes": null
                 },
                 {
-                    "name": "Commentable",
-                    "enumValues": null,
-                    "possibleTypes": [
-                        {
-                            "name": "GenericCustomPost"
-                        },
-                        {
-                            "name": "Post"
-                        }
-                    ]
-                },
-                {
-                    "name": "IdentifiableObject",
-                    "enumValues": null,
-                    "possibleTypes": [
-                        {
-                            "name": "Comment"
-                        },
-                        {
-                            "name": "GenericCategory"
-                        },
-                        {
-                            "name": "GenericCustomPost"
-                        },
-                        {
-                            "name": "GenericTag"
-                        },
-                        {
-                            "name": "Media"
-                        },
-                        {
-                            "name": "Menu"
-                        },
-                        {
-                            "name": "MenuItem"
-                        },
-                        {
-                            "name": "Post"
-                        },
-                        {
-                            "name": "PostCategory"
-                        },
-                        {
-                            "name": "PostTag"
-                        },
-                        {
-                            "name": "QueryRoot"
-                        },
-                        {
-                            "name": "Root"
-                        },
-                        {
-                            "name": "User"
-                        },
-                        {
-                            "name": "UserAvatar"
-                        },
-                        {
-                            "name": "UserRole"
-                        },
-                        {
-                            "name": "_DirectiveExtensions"
-                        },
-                        {
-                            "name": "_EnumValueExtensions"
-                        },
-                        {
-                            "name": "_FieldExtensions"
-                        },
-                        {
-                            "name": "_InputValueExtensions"
-                        },
-                        {
-                            "name": "_NamedTypeExtensions"
-                        },
-                        {
-                            "name": "_SchemaExtensions"
-                        },
-                        {
-                            "name": "__Directive"
-                        },
-                        {
-                            "name": "__EnumValue"
-                        },
-                        {
-                            "name": "__Field"
-                        },
-                        {
-                            "name": "__InputValue"
-                        },
-                        {
-                            "name": "__Schema"
-                        },
-                        {
-                            "name": "__Type"
-                        }
-                    ]
-                },
-                {
                     "name": "Category",
                     "enumValues": null,
                     "possibleTypes": [
@@ -489,6 +390,18 @@
                         },
                         {
                             "name": "PostCategory"
+                        }
+                    ]
+                },
+                {
+                    "name": "Commentable",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericCustomPost"
+                        },
+                        {
+                            "name": "Post"
                         }
                     ]
                 },
@@ -565,14 +478,71 @@
                     ]
                 },
                 {
-                    "name": "Tag",
+                    "name": "IdentifiableObject",
                     "enumValues": null,
                     "possibleTypes": [
+                        {
+                            "name": "Comment"
+                        },
+                        {
+                            "name": "GenericCategory"
+                        },
+                        {
+                            "name": "GenericCustomPost"
+                        },
                         {
                             "name": "GenericTag"
                         },
                         {
+                            "name": "Media"
+                        },
+                        {
+                            "name": "Menu"
+                        },
+                        {
+                            "name": "MenuItem"
+                        },
+                        {
+                            "name": "Post"
+                        },
+                        {
+                            "name": "PostCategory"
+                        },
+                        {
                             "name": "PostTag"
+                        },
+                        {
+                            "name": "QueryRoot"
+                        },
+                        {
+                            "name": "Root"
+                        },
+                        {
+                            "name": "User"
+                        },
+                        {
+                            "name": "UserAvatar"
+                        },
+                        {
+                            "name": "UserRole"
+                        },
+                        {
+                            "name": "__Directive"
+                        },
+                        {
+                            "name": "__EnumValue"
+                        },
+                        {
+                            "name": "__Field"
+                        },
+                        {
+                            "name": "__InputValue"
+                        },
+                        {
+                            "name": "__Schema"
+                        },
+                        {
+                            "name": "__Type"
                         }
                     ]
                 },
@@ -603,6 +573,18 @@
                         },
                         {
                             "name": "User"
+                        }
+                    ]
+                },
+                {
+                    "name": "Tag",
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "name": "GenericTag"
+                        },
+                        {
+                            "name": "PostTag"
                         }
                     ]
                 },

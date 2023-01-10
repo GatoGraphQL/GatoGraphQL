@@ -1073,12 +1073,12 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IdentifiableObject",
+              "name": "Category",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "Category",
+              "name": "IdentifiableObject",
               "ofType": null
             },
             {
@@ -2039,12 +2039,12 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IdentifiableObject",
+              "name": "CustomPost",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "CustomPost",
+              "name": "IdentifiableObject",
               "ofType": null
             },
             {
@@ -2430,12 +2430,12 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "Tag",
+              "name": "Queryable",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "Queryable",
+              "name": "Tag",
               "ofType": null
             },
             {
@@ -4568,12 +4568,12 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IdentifiableObject",
+              "name": "CustomPost",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "CustomPost",
+              "name": "IdentifiableObject",
               "ofType": null
             },
             {
@@ -5553,12 +5553,12 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "IdentifiableObject",
+              "name": "CustomPost",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "CustomPost",
+              "name": "IdentifiableObject",
               "ofType": null
             },
             {
@@ -6024,12 +6024,12 @@
           "interfaces": [
             {
               "kind": "INTERFACE",
-              "name": "IdentifiableObject",
+              "name": "Category",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "Category",
+              "name": "IdentifiableObject",
               "ofType": null
             },
             {
@@ -6341,12 +6341,12 @@
             },
             {
               "kind": "INTERFACE",
-              "name": "Tag",
+              "name": "Queryable",
               "ofType": null
             },
             {
               "kind": "INTERFACE",
-              "name": "Queryable",
+              "name": "Tag",
               "ofType": null
             },
             {
@@ -13124,38 +13124,6 @@
               "deprecationReason": null
             },
             {
-              "name": "globalID",
-              "description": "The object's globally unique identifier",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "needsDataToExecute",
               "description": "If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?",
               "args": [],
@@ -13173,13 +13141,7 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "IdentifiableObject",
-              "ofType": null
-            }
-          ],
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -13188,38 +13150,6 @@
           "name": "_EnumValueExtensions",
           "description": "Extensions (custom metadata) added to the enum value",
           "fields": [
-            {
-              "name": "globalID",
-              "description": "The object's globally unique identifier",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
             {
               "name": "isSensitiveDataElement",
               "description": "Is this element considered a \u201csensitive\u201d data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
@@ -13238,13 +13168,7 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "IdentifiableObject",
-              "ofType": null
-            }
-          ],
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -13253,38 +13177,6 @@
           "name": "_FieldExtensions",
           "description": "Extensions (custom metadata) added to the field",
           "fields": [
-            {
-              "name": "globalID",
-              "description": "The object's globally unique identifier",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
             {
               "name": "isGlobal",
               "description": "Is this a global field? (i.e. a field that is added to all types in the schema)",
@@ -13335,13 +13227,7 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "IdentifiableObject",
-              "ofType": null
-            }
-          ],
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -13350,38 +13236,6 @@
           "name": "_InputValueExtensions",
           "description": "Extensions (custom metadata) added to the input value",
           "fields": [
-            {
-              "name": "globalID",
-              "description": "The object's globally unique identifier",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
             {
               "name": "isSensitiveDataElement",
               "description": "Is this element considered a \u201csensitive\u201d data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
@@ -13400,13 +13254,7 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "IdentifiableObject",
-              "ofType": null
-            }
-          ],
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -13425,38 +13273,6 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "globalID",
-              "description": "The object's globally unique identifier",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
                   "ofType": null
                 }
               },
@@ -13517,13 +13333,7 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "IdentifiableObject",
-              "ofType": null
-            }
-          ],
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -13532,38 +13342,6 @@
           "name": "_SchemaExtensions",
           "description": "Extensions (custom metadata) added to the GraphQL schema",
           "fields": [
-            {
-              "name": "globalID",
-              "description": "The object's globally unique identifier",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
             {
               "name": "isNamespaced",
               "description": "Is the schema namespaced?",
@@ -13582,13 +13360,7 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "IdentifiableObject",
-              "ofType": null
-            }
-          ],
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -14805,6 +14577,72 @@
         },
         {
           "kind": "INTERFACE",
+          "name": "Category",
+          "description": "Entities representing a category",
+          "fields": [
+            {
+              "name": "count",
+              "description": "Number of custom posts containing this category",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": "Category description",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Category",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericCategory",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "PostCategory",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "INTERFACE",
           "name": "Commentable",
           "description": "The entity can receive comments",
           "fields": [
@@ -14940,256 +14778,6 @@
             {
               "kind": "OBJECT",
               "name": "Post",
-              "ofType": null
-            }
-          ]
-        },
-        {
-          "kind": "INTERFACE",
-          "name": "IdentifiableObject",
-          "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'",
-          "fields": [
-            {
-              "name": "globalID",
-              "description": "The object's globally unique identifier",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "id",
-              "description": "The object's unique identifier for its type",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": [
-            {
-              "kind": "OBJECT",
-              "name": "Comment",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "GenericCategory",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "GenericCustomPost",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "GenericTag",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Media",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Menu",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "MenuItem",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Page",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Post",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "PostCategory",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "PostTag",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "QueryRoot",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Root",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "User",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "UserAvatar",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "UserRole",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "_DirectiveExtensions",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "_EnumValueExtensions",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "_FieldExtensions",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "_InputValueExtensions",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "_NamedTypeExtensions",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "_SchemaExtensions",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__Directive",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__EnumValue",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__Field",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__InputValue",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__Schema",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "__Type",
-              "ofType": null
-            }
-          ]
-        },
-        {
-          "kind": "INTERFACE",
-          "name": "Category",
-          "description": "Entities representing a category",
-          "fields": [
-            {
-              "name": "count",
-              "description": "Number of custom posts containing this category",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "Int!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "description",
-              "description": "Category description",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "name",
-              "description": "Category",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "String!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": [
-            {
-              "kind": "OBJECT",
-              "name": "GenericCategory",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "PostCategory",
               "ofType": null
             }
           ]
@@ -15666,19 +15254,19 @@
         },
         {
           "kind": "INTERFACE",
-          "name": "Tag",
-          "description": "Entities representing a tag",
+          "name": "IdentifiableObject",
+          "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'",
           "fields": [
             {
-              "name": "count",
-              "description": "Number of custom posts containing this tag",
+              "name": "globalID",
+              "description": "The object's globally unique identifier",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "Int!",
+                "name": "ID!",
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "Int",
+                  "name": "ID",
                   "ofType": null
                 }
               },
@@ -15686,27 +15274,15 @@
               "deprecationReason": null
             },
             {
-              "name": "description",
-              "description": "Tag description",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "name",
-              "description": "Tag",
+              "name": "id",
+              "description": "The object's unique identifier for its type",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "String!",
+                "name": "ID!",
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "String",
+                  "name": "ID",
                   "ofType": null
                 }
               },
@@ -15720,12 +15296,112 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
+              "name": "Comment",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericCategory",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericCustomPost",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "GenericTag",
               "ofType": null
             },
             {
               "kind": "OBJECT",
+              "name": "Media",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Menu",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MenuItem",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Page",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Post",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "PostCategory",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "PostTag",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "QueryRoot",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Root",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserAvatar",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserRole",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "__Directive",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "__EnumValue",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "__Field",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "__InputValue",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "__Schema",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "__Type",
               "ofType": null
             }
           ]
@@ -15831,6 +15507,72 @@
             {
               "kind": "OBJECT",
               "name": "User",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "Tag",
+          "description": "Entities representing a tag",
+          "fields": [
+            {
+              "name": "count",
+              "description": "Number of custom posts containing this tag",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": "Tag description",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Tag",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericTag",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "PostTag",
               "ofType": null
             }
           ]

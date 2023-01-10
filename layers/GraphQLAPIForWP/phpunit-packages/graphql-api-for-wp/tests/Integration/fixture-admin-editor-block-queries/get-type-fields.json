@@ -1765,12 +1765,6 @@
               "name": "fieldDirectiveSupportedTypeNamesOrDescriptions"
             },
             {
-              "name": "globalID"
-            },
-            {
-              "name": "id"
-            },
-            {
               "name": "needsDataToExecute"
             }
           ],
@@ -1782,12 +1776,6 @@
           "namespacedName": "_EnumValueExtensions",
           "fields": [
             {
-              "name": "globalID"
-            },
-            {
-              "name": "id"
-            },
-            {
               "name": "isSensitiveDataElement"
             }
           ],
@@ -1798,12 +1786,6 @@
           "name": "_FieldExtensions",
           "namespacedName": "_FieldExtensions",
           "fields": [
-            {
-              "name": "globalID"
-            },
-            {
-              "name": "id"
-            },
             {
               "name": "isGlobal"
             },
@@ -1822,12 +1804,6 @@
           "namespacedName": "_InputValueExtensions",
           "fields": [
             {
-              "name": "globalID"
-            },
-            {
-              "name": "id"
-            },
-            {
               "name": "isSensitiveDataElement"
             }
           ],
@@ -1840,12 +1816,6 @@
           "fields": [
             {
               "name": "elementName"
-            },
-            {
-              "name": "globalID"
-            },
-            {
-              "name": "id"
             },
             {
               "name": "isOneOf"
@@ -1864,12 +1834,6 @@
           "name": "_SchemaExtensions",
           "namespacedName": "_SchemaExtensions",
           "fields": [
-            {
-              "name": "globalID"
-            },
-            {
-              "name": "id"
-            },
             {
               "name": "isNamespaced"
             }
@@ -2207,6 +2171,23 @@
           "description": "URL Absolute Path scalar, such as \"\/my-fabulous-page\" in URL \"https:\/\/mysite.com\/my-fabulous-page\". The absolute path starts with \"\/\", followed by the URL relative path"
         },
         {
+          "name": "Category",
+          "namespacedName": "Category",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "name"
+            }
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities representing a category"
+        },
+        {
           "name": "Commentable",
           "namespacedName": "Commentable",
           "fields": [
@@ -2225,37 +2206,6 @@
           ],
           "kind": "INTERFACE",
           "description": "The entity can receive comments"
-        },
-        {
-          "name": "IdentifiableObject",
-          "namespacedName": "IdentifiableObject",
-          "fields": [
-            {
-              "name": "globalID"
-            },
-            {
-              "name": "id"
-            }
-          ],
-          "kind": "INTERFACE",
-          "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'"
-        },
-        {
-          "name": "Category",
-          "namespacedName": "Category",
-          "fields": [
-            {
-              "name": "count"
-            },
-            {
-              "name": "description"
-            },
-            {
-              "name": "name"
-            }
-          ],
-          "kind": "INTERFACE",
-          "description": "Entities representing a category"
         },
         {
           "name": "CustomPost",
@@ -2319,21 +2269,18 @@
           "description": "Entities representing an Error payload"
         },
         {
-          "name": "Tag",
-          "namespacedName": "Tag",
+          "name": "IdentifiableObject",
+          "namespacedName": "IdentifiableObject",
           "fields": [
             {
-              "name": "count"
+              "name": "globalID"
             },
             {
-              "name": "description"
-            },
-            {
-              "name": "name"
+              "name": "id"
             }
           ],
           "kind": "INTERFACE",
-          "description": "Entities representing a tag"
+          "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'"
         },
         {
           "name": "Queryable",
@@ -2351,6 +2298,23 @@
           ],
           "kind": "INTERFACE",
           "description": "Entities that can be queried through an URL"
+        },
+        {
+          "name": "Tag",
+          "namespacedName": "Tag",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "name"
+            }
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities representing a tag"
         },
         {
           "name": "WithAuthor",
