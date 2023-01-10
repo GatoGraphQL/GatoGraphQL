@@ -320,38 +320,6 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "globalID",
-                            "description": "The object's globally unique identifier",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
                             "name": "needsDataToExecute",
                             "description": "If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?",
                             "args": [],
@@ -417,13 +385,7 @@
                         }
                     ],
                     "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "IdentifiableObject",
-                            "ofType": null
-                        }
-                    ],
+                    "interfaces": [],
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -432,38 +394,6 @@
                     "name": "_EnumValueExtensions",
                     "description": "Extensions (custom metadata) added to the enum value",
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "description": "The object's globally unique identifier",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
                         {
                             "name": "isSensitiveDataElement",
                             "description": "Is this element considered a \u201csensitive\u201d data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
@@ -530,13 +460,7 @@
                         }
                     ],
                     "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "IdentifiableObject",
-                            "ofType": null
-                        }
-                    ],
+                    "interfaces": [],
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -545,38 +469,6 @@
                     "name": "_FieldExtensions",
                     "description": "Extensions (custom metadata) added to the field",
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "description": "The object's globally unique identifier",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
                         {
                             "name": "isGlobal",
                             "description": "Is this a global field? (i.e. a field that is added to all types in the schema)",
@@ -675,13 +567,7 @@
                         }
                     ],
                     "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "IdentifiableObject",
-                            "ofType": null
-                        }
-                    ],
+                    "interfaces": [],
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -690,38 +576,6 @@
                     "name": "_InputValueExtensions",
                     "description": "Extensions (custom metadata) added to the input value",
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "description": "The object's globally unique identifier",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
                         {
                             "name": "isSensitiveDataElement",
                             "description": "Is this element considered a \u201csensitive\u201d data element in the schema? (If so, it is only exposed in the schema when 'Expose \u201csensitive\u201d data elements' is enabled)",
@@ -788,13 +642,7 @@
                         }
                     ],
                     "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "IdentifiableObject",
-                            "ofType": null
-                        }
-                    ],
+                    "interfaces": [],
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -813,38 +661,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "globalID",
-                            "description": "The object's globally unique identifier",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
                                     "ofType": null
                                 }
                             },
@@ -953,13 +769,7 @@
                         }
                     ],
                     "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "IdentifiableObject",
-                            "ofType": null
-                        }
-                    ],
+                    "interfaces": [],
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -968,38 +778,6 @@
                     "name": "_SchemaExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL schema",
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "description": "The object's globally unique identifier",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "id",
-                            "description": "The object's unique identifier for its type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "ID!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "ID",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
                         {
                             "name": "isNamespaced",
                             "description": "Is the schema namespaced?",
@@ -1066,13 +844,7 @@
                         }
                     ],
                     "inputFields": null,
-                    "interfaces": [
-                        {
-                            "kind": "INTERFACE",
-                            "name": "IdentifiableObject",
-                            "ofType": null
-                        }
-                    ],
+                    "interfaces": [],
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -2495,36 +2267,6 @@
                         {
                             "kind": "OBJECT",
                             "name": "Root",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "_DirectiveExtensions",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "_EnumValueExtensions",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "_FieldExtensions",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "_InputValueExtensions",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "_NamedTypeExtensions",
-                            "ofType": null
-                        },
-                        {
-                            "kind": "OBJECT",
-                            "name": "_SchemaExtensions",
                             "ofType": null
                         },
                         {

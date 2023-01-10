@@ -72,14 +72,6 @@
                             "args": []
                         },
                         {
-                            "name": "globalID",
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "args": []
-                        },
-                        {
                             "name": "needsDataToExecute",
                             "args": []
                         }
@@ -91,14 +83,6 @@
                     "name": "_EnumValueExtensions",
                     "fields": [
                         {
-                            "name": "globalID",
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "args": []
-                        },
-                        {
                             "name": "isSensitiveDataElement",
                             "args": []
                         }
@@ -109,14 +93,6 @@
                     "kind": "OBJECT",
                     "name": "_FieldExtensions",
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "args": []
-                        },
                         {
                             "name": "isGlobal",
                             "args": []
@@ -137,14 +113,6 @@
                     "name": "_InputValueExtensions",
                     "fields": [
                         {
-                            "name": "globalID",
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "args": []
-                        },
-                        {
                             "name": "isSensitiveDataElement",
                             "args": []
                         }
@@ -157,14 +125,6 @@
                     "fields": [
                         {
                             "name": "elementName",
-                            "args": []
-                        },
-                        {
-                            "name": "globalID",
-                            "args": []
-                        },
-                        {
-                            "name": "id",
                             "args": []
                         },
                         {
@@ -186,14 +146,6 @@
                     "kind": "OBJECT",
                     "name": "_SchemaExtensions",
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "args": []
-                        },
                         {
                             "name": "isNamespaced",
                             "args": []

@@ -612,18 +612,6 @@
                             }
                         },
                         {
-                            "name": "globalID",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
                             "name": "needsDataToExecute",
                             "type": {
                                 "name": "Boolean!"
@@ -636,18 +624,6 @@
                     "possibleTypes": null,
                     "fields": [
                         {
-                            "name": "globalID",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
                             "name": "isSensitiveDataElement",
                             "type": {
                                 "name": "Boolean!"
@@ -659,18 +635,6 @@
                     "name": "_FieldExtensions",
                     "possibleTypes": null,
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
                         {
                             "name": "isGlobal",
                             "type": {
@@ -696,18 +660,6 @@
                     "possibleTypes": null,
                     "fields": [
                         {
-                            "name": "globalID",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
                             "name": "isSensitiveDataElement",
                             "type": {
                                 "name": "Boolean!"
@@ -723,18 +675,6 @@
                             "name": "elementName",
                             "type": {
                                 "name": "String!"
-                            }
-                        },
-                        {
-                            "name": "globalID",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
                             }
                         },
                         {
@@ -761,18 +701,6 @@
                     "name": "_SchemaExtensions",
                     "possibleTypes": null,
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
                         {
                             "name": "isNamespaced",
                             "type": {
@@ -1225,76 +1153,6 @@
                     ]
                 },
                 {
-                    "name": "IdentifiableObject",
-                    "possibleTypes": [
-                        {
-                            "name": "Comment"
-                        },
-                        {
-                            "name": "Page"
-                        },
-                        {
-                            "name": "Post"
-                        },
-                        {
-                            "name": "QueryRoot"
-                        },
-                        {
-                            "name": "Root"
-                        },
-                        {
-                            "name": "_DirectiveExtensions"
-                        },
-                        {
-                            "name": "_EnumValueExtensions"
-                        },
-                        {
-                            "name": "_FieldExtensions"
-                        },
-                        {
-                            "name": "_InputValueExtensions"
-                        },
-                        {
-                            "name": "_NamedTypeExtensions"
-                        },
-                        {
-                            "name": "_SchemaExtensions"
-                        },
-                        {
-                            "name": "__Directive"
-                        },
-                        {
-                            "name": "__EnumValue"
-                        },
-                        {
-                            "name": "__Field"
-                        },
-                        {
-                            "name": "__InputValue"
-                        },
-                        {
-                            "name": "__Schema"
-                        },
-                        {
-                            "name": "__Type"
-                        }
-                    ],
-                    "fields": [
-                        {
-                            "name": "globalID",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        },
-                        {
-                            "name": "id",
-                            "type": {
-                                "name": "ID!"
-                            }
-                        }
-                    ]
-                },
-                {
                     "name": "CustomPost",
                     "possibleTypes": [
                         {
@@ -1387,6 +1245,58 @@
                             "name": "urlAbsolutePath",
                             "type": {
                                 "name": "URLAbsolutePath!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "IdentifiableObject",
+                    "possibleTypes": [
+                        {
+                            "name": "Comment"
+                        },
+                        {
+                            "name": "Page"
+                        },
+                        {
+                            "name": "Post"
+                        },
+                        {
+                            "name": "QueryRoot"
+                        },
+                        {
+                            "name": "Root"
+                        },
+                        {
+                            "name": "__Directive"
+                        },
+                        {
+                            "name": "__EnumValue"
+                        },
+                        {
+                            "name": "__Field"
+                        },
+                        {
+                            "name": "__InputValue"
+                        },
+                        {
+                            "name": "__Schema"
+                        },
+                        {
+                            "name": "__Type"
+                        }
+                    ],
+                    "fields": [
+                        {
+                            "name": "globalID",
+                            "type": {
+                                "name": "ID!"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "type": {
+                                "name": "ID!"
                             }
                         }
                     ]

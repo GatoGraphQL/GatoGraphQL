@@ -109,22 +109,6 @@
                             "args": []
                         },
                         {
-                            "name": "globalID",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
                             "name": "needsDataToExecute",
                             "extensions": {
                                 "isMutation": false,
@@ -146,22 +130,6 @@
                     },
                     "fields": [
                         {
-                            "name": "globalID",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
                             "name": "isSensitiveDataElement",
                             "extensions": {
                                 "isMutation": false,
@@ -182,22 +150,6 @@
                         "isOneOf": false
                     },
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
                         {
                             "name": "isGlobal",
                             "extensions": {
@@ -236,22 +188,6 @@
                     },
                     "fields": [
                         {
-                            "name": "globalID",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
                             "name": "isSensitiveDataElement",
                             "extensions": {
                                 "isMutation": false,
@@ -274,22 +210,6 @@
                     "fields": [
                         {
                             "name": "elementName",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
-                            "name": "globalID",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
-                            "name": "id",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -333,22 +253,6 @@
                         "isOneOf": false
                     },
                     "fields": [
-                        {
-                            "name": "globalID",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
-                            "name": "id",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
                         {
                             "name": "isNamespaced",
                             "extensions": {
