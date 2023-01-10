@@ -189,7 +189,7 @@
 		<link>https://graphql-api.lndo.site/graphql-query/website/home-tag-widget/</link>
 		<pubDate>Sat, 12 Dec 2020 04:27:17 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=44</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=44</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int = 5) {\n  postTags(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    name\n  }\n}\n"} /-->
 
@@ -223,7 +223,7 @@
 		<link>https://graphql-api.lndo.site/graphql-query/latest-posts-for-mobile-app/</link>
 		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?post_type=graphql-query&#038;p=65</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=65</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  posts(\n    pagination: { limit: $limit },\n    sort: { by: ID, order: ASC }\n  ) {\n    date\n    excerpt\n    slug\n    title\n    tags {\n      name\n    }\n    author {\n      displayName\n      slug\n      id\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
 
@@ -741,7 +741,7 @@
 		<link>https://graphql-api.lndo.site/released-v0-6-check-it-out/</link>
 		<pubDate>Sat, 12 Dec 2020 03:56:13 +0000</pubDate>
 		<dc:creator><![CDATA[subscriber]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=13</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=13</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>
@@ -819,7 +819,7 @@
 		<link>https://graphql-api.lndo.site/working-on-flat-chain-syntax-next/</link>
 		<pubDate>Sat, 12 Dec 2020 03:59:07 +0000</pubDate>
 		<dc:creator><![CDATA[contributor]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=16</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=16</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Image Block (Wide
@@ -885,7 +885,7 @@
 		<link>https://graphql-api.lndo.site/nested-mutations-are-a-must-have/</link>
 		<pubDate>Sat, 12 Dec 2020 04:00:36 +0000</pubDate>
 		<dc:creator><![CDATA[editor]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=19</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=19</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gallery {"linkTo":"none","className":"alignnone"} -->
 <figure class="wp-block-gallery columns-3 is-cropped alignnone"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/zd7Ehu+" alt="" data-id="1706" class="wp-image-1706"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/jXLtzZ+" alt="" data-id="1705" class="wp-image-1705"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/VhP9ud+" alt="" data-id="1704" class="wp-image-1704"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/HB0qXg+" alt="" data-id="1703" class="wp-image-1703"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/5cHfcd+" alt="" data-id="1699" class="wp-image-1699"/></figure></li></ul></figure>
@@ -947,7 +947,7 @@
 		<link>https://graphql-api.lndo.site/customize-the-schema-for-each-client/</link>
 		<pubDate>Sat, 12 Dec 2020 04:02:18 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=21</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=21</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Text Column Block</h2>
@@ -1109,7 +1109,7 @@
 		<link>https://graphql-api.lndo.site/graphql-or-rest-you-can-have-both/</link>
 		<pubDate>Sat, 12 Dec 2020 04:04:54 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=23</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=23</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Audio Block</h2>
@@ -1183,7 +1183,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/public-or-private-api-mode-for-extra-security/</link>
 		<pubDate>Sat, 12 Dec 2020 04:06:52 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=25</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=25</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Verse Block</h2>
@@ -1283,7 +1283,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/http-caching-improves-performance/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
 		<dc:creator><![CDATA[author]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=28</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=28</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Categories Block</h2>
@@ -1341,7 +1341,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/trashed-post/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
 		<dc:creator><![CDATA[author]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=30</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=30</guid>
 		<description></description>
 		<content:encoded><![CDATA[Trashed post for testing comments with Integration Tests]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1387,7 +1387,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/trashed-page/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
 		<dc:creator><![CDATA[editor]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api-nginx.lndo.site/?p=34</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?p=34</guid>
 		<description></description>
 		<content:encoded><![CDATA[Trashed page for testing comments with Integration Tests]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
