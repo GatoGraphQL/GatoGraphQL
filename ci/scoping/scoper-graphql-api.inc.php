@@ -94,11 +94,6 @@ return [
         // (unless adding the files to the autoload path)
         'PoPContainer',
     ],
-    'exclude-files' => [
-        // Class Composer\InstalledVersions will be regenerated without scope when
-        // doing `composer dumpautoload`, so skip it
-        convertRelativeToFullPath('vendor/composer/InstalledVersions.php'),
-    ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
             /**
