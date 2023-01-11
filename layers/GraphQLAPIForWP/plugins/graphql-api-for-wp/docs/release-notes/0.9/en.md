@@ -1371,7 +1371,7 @@ type User {
 }
 ```
 
-The `self` field allows to append extra levels to the query without leaving the queried object. Running this query:
+Running this query:
 
 ```graphql
 {
