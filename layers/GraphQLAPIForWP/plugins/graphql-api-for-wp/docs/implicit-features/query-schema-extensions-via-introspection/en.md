@@ -32,6 +32,9 @@ type _NamedTypeExtensions {
 
   # Enum-like "possible values" for EnumString type resolvers, `null` otherwise
   possibleValues: [String!]
+
+  # OneOf Input Objects are a special variant of Input Objects where the type system asserts that exactly one of the fields must be set and non-null, all others being omitted.
+  isOneOf: Boolean!
 }
 
 extend type __Type {
