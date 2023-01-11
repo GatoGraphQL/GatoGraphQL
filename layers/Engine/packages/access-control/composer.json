@@ -175,8 +175,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^0.9.1",
-        "getpop/mandatory-directives-by-configuration": "^0.9.1"
+        "getpop/component-model": "^0.10",
+        "getpop/mandatory-directives-by-configuration": "^0.10"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",

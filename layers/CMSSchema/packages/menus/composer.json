@@ -175,8 +175,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^0.9.1",
-        "pop-cms-schema/taxonomies": "^0.9.1"
+        "getpop/engine": "^0.10",
+        "pop-cms-schema/taxonomies": "^0.10"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
