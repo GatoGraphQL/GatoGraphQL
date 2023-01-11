@@ -43,7 +43,7 @@ add_action('plugins_loaded', function (): void {
      */
     $extensionVersion = '0.10.0-dev';
     $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
-    $mainPluginVersionConstraint = '^0.9';
+    $mainPluginVersionConstraint = '^0.10';
     
     /**
      * Validate the GraphQL API plugin is active
