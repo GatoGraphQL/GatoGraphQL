@@ -174,7 +174,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/cache-control": "^0.9",
+        "getpop/cache-control": "^0.10",
         "psr/cache": "^3.0"
     },
     "require-dev": {
@@ -201,7 +201,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     },
     "config": {
