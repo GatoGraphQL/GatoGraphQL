@@ -1774,7 +1774,7 @@ On the list of Custom Endpoints and Persisted Queries, we can visualize their ca
 
 ![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
 
-## Support block string characthers
+## Support block string characters
 
 Added support for the GraphQL spec-defined [block strings](https://spec.graphql.org/draft/#BlockStringCharacter), which are are strings that use `"""` as delimiter instead of `"`, allowing us to input multi-line strings.
 
