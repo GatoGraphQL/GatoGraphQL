@@ -328,10 +328,9 @@ And a new `rawContent` of type `String` was introduced:
 
 Since adding support for custom enum types (see later on), wherever possible (in fields, field/directive arguments and input types) enums are now used. This includes:
 
-- Custom post type and status
+- Custom post status
 - Comment type and status
 - "Order by" property, for all entities
-- Menu locations
 
 ### Custom posts
 
