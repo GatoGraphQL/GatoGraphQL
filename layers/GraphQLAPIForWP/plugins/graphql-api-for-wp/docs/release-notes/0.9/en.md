@@ -1966,7 +1966,7 @@ The [development code and process](https://github.com/leoloso/PoP) underwent num
 
 - Created several hundred new unit and integration tests
 - Upgraded all code to PHPStan's level 8
-- Bumped the min PHP version to 8.1 for development (transpiled to PHP 7.1 when generating the plugin)
+- Bumped the minimum PHP version to 8.1 for development (transpiled to PHP 7.1 when generating the plugin)
 
 ## Breaking changes
 
