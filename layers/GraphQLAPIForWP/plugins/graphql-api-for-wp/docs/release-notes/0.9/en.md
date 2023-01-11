@@ -1580,7 +1580,7 @@ To configure the single endpoint, go to tab "Schema Configuration" on the Settin
 
 ![Settings for the Schema Configuration for the Single Endpoint](../../images/settings-schema-configuration-for-single-endpoint.png)
 
-## Display `"causes"` for errors in response (#893)
+## Display `"causes"` for errors in response
 
 As has been [requested for the GraphQL spec on #893](https://github.com/graphql/graphql-spec/issues/893), when resolving a field fails due to multiple underlying reasons, it makes sense to show them all together under the subentry `"causes"` in the GraphQL response.
 
