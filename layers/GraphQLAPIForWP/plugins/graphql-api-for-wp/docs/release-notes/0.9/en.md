@@ -1042,7 +1042,7 @@ We can query the value via the `specifiedByURL` field, via introspection:
 ```graphql
 {
   __schema {
-    emailScalarType: type(name: "Email") {
+    types {
       specifiedByURL
     }
   }
