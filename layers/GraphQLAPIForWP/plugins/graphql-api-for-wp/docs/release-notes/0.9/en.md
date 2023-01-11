@@ -8,7 +8,7 @@ These are all the changes added for version 0.9 of the GraphQL API for WordPress
 
 The GraphQL schema mapping the WordPress data model has been significantly completed! 💪
 
-![GraphQL schema](../../images/graphql-schema-v09.png)
+![GraphQL schema](../../images/releases/v09/graphql-schema.png)
 
 Let's see what new elements have been added.
 
