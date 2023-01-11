@@ -14,14 +14,14 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/posts": "^0.9.3",
-        "pop-cms-schema/tags": "^0.9.3"
+        "pop-cms-schema/posts": "^0.10",
+        "pop-cms-schema/tags": "^0.10"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^9.5",
-        "pop-api/api": "^0.9.3",
-        "pop-api/api-rest": "^0.9.3",
+        "pop-api/api": "^0.10",
+        "pop-api/api-rest": "^0.10",
         "rector/rector": "^0.15",
         "squizlabs/php_codesniffer": "^3.6"
     },
