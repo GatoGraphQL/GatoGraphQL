@@ -173,9 +173,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^0.9.5",
-        "getpop/definitions": "^0.9.5",
-        "getpop/filestore": "^0.9.5"
+        "getpop/component-model": "^0.10",
+        "getpop/definitions": "^0.10",
+        "getpop/filestore": "^0.10"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",

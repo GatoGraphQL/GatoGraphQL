@@ -174,9 +174,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^0.9.5",
+        "getpop/engine": "^0.10",
         "leoloso/faker": "dev-master",
-        "pop-backbone/wp-data-parser": "^0.9.5"
+        "pop-backbone/wp-data-parser": "^0.10"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
