@@ -174,7 +174,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/cache-control": "^0.9.6",
+        "getpop/cache-control": "^0.10",
         "psr/cache": "^3.0"
     },
     "require-dev": {

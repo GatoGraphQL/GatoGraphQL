@@ -14,11 +14,11 @@
     ],
     "require": {
         "php": "^8.1",
-        "graphql-by-pop/graphql-request": "^0.9.6"
+        "graphql-by-pop/graphql-request": "^0.10"
     },
     "require-dev": {
-        "getpop/access-control": "^0.9.6",
-        "getpop/cache-control": "^0.9.6",
+        "getpop/access-control": "^0.10",
+        "getpop/cache-control": "^0.10",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.15",
