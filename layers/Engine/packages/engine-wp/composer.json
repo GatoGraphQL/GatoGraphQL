@@ -175,8 +175,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^0.9.8",
-        "getpop/root-wp": "^0.9.8"
+        "getpop/engine": "^0.10",
+        "getpop/root-wp": "^0.10"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",

@@ -176,7 +176,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "graphql-by-pop/graphql-server": "^0.9.8"
+        "graphql-by-pop/graphql-server": "^0.10"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.4",
