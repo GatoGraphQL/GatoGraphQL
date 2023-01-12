@@ -72,7 +72,8 @@ class AppStateProvider extends AbstractAppStateProvider
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             $persistedQuery = EngineRequest::getPersistedQuery();
-            if ($moduleConfiguration->enablePassingPersistedQueryNameViaURLParam()
+            if (
+                $moduleConfiguration->enablePassingPersistedQueryNameViaURLParam()
                 && !empty($persistedQuery)
                 && $this->getPersistedQueryManager()->hasPersistedQuery($persistedQuery)
             ) {
