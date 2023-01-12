@@ -13,5 +13,4 @@ class SchemaDefinition extends UpstreamSchemaDefinition
 
     public final const PERSISTED_FRAGMENTS = 'persistedFragments';
     public final const PERSISTED_QUERIES = 'persistedQueries';
-    public final const FRAGMENT_RESOLUTION = 'resolution';
 }

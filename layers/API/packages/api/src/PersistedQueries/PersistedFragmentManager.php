@@ -42,6 +42,5 @@ class PersistedFragmentManager implements PersistedFragmentManagerInterface
         if ($description) {
             $this->persistedFragmentsForSchema[$fragmentName][SchemaDefinition::DESCRIPTION] = $description;
         }
-        $this->persistedFragmentsForSchema[$fragmentName][SchemaDefinition::FRAGMENT_RESOLUTION] = $fragmentResolution;
     }
 }
