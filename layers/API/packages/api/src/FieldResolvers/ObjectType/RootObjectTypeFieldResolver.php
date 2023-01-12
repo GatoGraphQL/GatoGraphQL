@@ -9,8 +9,6 @@ use PoP\Root\App;
 use PoPAPI\API\Module;
 use PoPAPI\API\ModuleConfiguration;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
-use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -25,8 +23,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?PersistentCacheInterface $persistentCache = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
-    private ?PersistedFragmentManagerInterface $persistedFragmentManager = null;
-    private ?PersistedQueryManagerInterface $persistedQueryManager = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     /**
@@ -51,24 +47,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         /** @var JSONObjectScalarTypeResolver */
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
-    }
-    final public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
-    {
-        $this->persistedFragmentManager = $persistedFragmentManager;
-    }
-    final protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
-    {
-        /** @var PersistedFragmentManagerInterface */
-        return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
-    }
-    final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
-    {
-        $this->persistedQueryManager = $persistedQueryManager;
-    }
-    final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
-    {
-        /** @var PersistedQueryManagerInterface */
-        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
