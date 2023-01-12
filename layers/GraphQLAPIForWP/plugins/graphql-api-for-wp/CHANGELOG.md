@@ -4,7 +4,9 @@ All notable changes to `graphql-api-for-wp` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 0.9.0 - DATE
+## 1.0.0 - DATE
+
+## 0.9.0 - 12/01/2013
 
 ### GraphQL schema upgrade
 
