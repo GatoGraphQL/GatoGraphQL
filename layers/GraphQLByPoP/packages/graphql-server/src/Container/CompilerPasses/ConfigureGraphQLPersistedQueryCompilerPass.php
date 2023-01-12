@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Container\CompilerPasses;
 
 use PoP\Root\App;
-use GraphQLByPoP\GraphQLRequest\PersistedQueries\GraphQLPersistedQueryManagerInterface;
+use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
@@ -137,8 +137,8 @@ class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
          */
         $translationAPI = SystemTranslationAPIFacade::getInstance();
         $description = $translationAPI->__('GraphQL introspection query', 'graphql-server');
-        $graphQLPersistedQueryManagerDefinition = $containerBuilderWrapper->getDefinition(GraphQLPersistedQueryManagerInterface::class);
-        $graphQLPersistedQueryManagerDefinition->addMethodCall(
+        $persistedQueryManagerDefinition = $containerBuilderWrapper->getDefinition(PersistedQueryManagerInterface::class);
+        $persistedQueryManagerDefinition->addMethodCall(
             'addPersistedQuery',
             [
                 'introspectionQuery',
