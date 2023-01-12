@@ -6,6 +6,7 @@ namespace PoPAPI\API\State;
 
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
+use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\App;
@@ -24,6 +25,7 @@ use PoP\Root\State\AbstractAppStateProvider;
 class AppStateProvider extends AbstractAppStateProvider
 {
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
+    private ?PersistedQueryManagerInterface $persistedQueryManager = null;
 
     final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
     {
@@ -33,6 +35,15 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         /** @var GraphQLParserHelperServiceInterface */
         return $this->graphQLParserHelperService ??= $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+    }
+    final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
+    {
+        $this->persistedQueryManager = $persistedQueryManager;
+    }
+    final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
+    {
+        /** @var PersistedQueryManagerInterface */
+        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
     }
 
     /**
@@ -49,14 +60,16 @@ class AppStateProvider extends AbstractAppStateProvider
          * Passing the query via URL param? Eg: ?query={ posts { id } }
          */
         $state['query'] = EngineRequest::getQuery();
-        // @todo Fix this code
-        // /**
-        //  * If not passing the query, and passing ?persistedQuery=introspectionQuery,
-        //  * then retrieve the query from the PersistedQueryManager service
-        //  */
-        // if (empty($state['query']) && !empty(EngineRequest::getPersistedQuery())) {
-        //     $state['query'] = null;
-        // }
+        /**
+         * If not passing the query, and passing ?persistedQuery=introspectionQuery,
+         * then retrieve the query from the PersistedQueryManager service
+         */
+        if (empty($state['query'])) {
+            $persistedQuery = EngineRequest::getPersistedQuery();
+            if (!empty($persistedQuery) && $this->getPersistedQueryManager()->hasPersistedQuery($persistedQuery)) {
+                $state['query'] = $this->getPersistedQueryManager()->getPersistedQuery($persistedQuery);
+            }
+        }
         /**
          * Passing the operationName via URL param? Eg: ?operationName=One.
          *
