@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRolesWP\FieldResolvers\ObjectType;
 
-use PoP\Root\App;
+use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
+use PoPCMSSchema\UserRoles\Module;
+use PoPCMSSchema\UserRoles\ModuleConfiguration;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractReflectionPropertyObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\UserRoles\Module;
-use PoPCMSSchema\UserRoles\ModuleConfiguration;
-use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
+use PoP\Root\App;
 use WP_Role;
 
 class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTypeFieldResolver
@@ -93,5 +95,21 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
             'capabilities' => $this->__('Capabilities granted by the role', 'user-roles-wp'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        switch ($fieldDataAccessor->getFieldName()) {
+            case 'capabilities':
+                /** @var WP_Role */
+                $userRole = $object;
+                return array_keys(array_filter($userRole->capabilities));
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
