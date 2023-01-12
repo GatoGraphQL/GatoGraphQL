@@ -23,4 +23,10 @@ class EngineRequest
         $default = null;
         return App::request(QueryInputs::OPERATION_NAME) ?? App::query(QueryInputs::OPERATION_NAME, $default);
     }
+
+    public static function getPersistedQuery(): ?string
+    {
+        $default = null;
+        return App::request(QueryInputs::PERSISTED_QUERY) ?? App::query(QueryInputs::PERSISTED_QUERY, $default);
+    }
 }
