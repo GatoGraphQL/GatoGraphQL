@@ -50,6 +50,13 @@ class AppStateProvider extends AbstractAppStateProvider
          */
         $state['query'] = EngineRequest::getQuery();
         /**
+         * If not passing the query, and passing ?persistedQuery=introspectionQuery,
+         * then retrieve the query from the PersistedQueryManager service
+         */
+        if (empty($state['query']) && !empty(EngineRequest::getPersistedQuery())) {
+            $state['query'] = null;
+        }
+        /**
          * Passing the operationName via URL param? Eg: ?operationName=One.
          *
          * This is needed when using Multiple Query Execution

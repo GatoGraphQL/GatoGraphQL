@@ -58,5 +58,8 @@ abstract class AbstractPersistedQueryManager implements PersistedQueryManagerInt
         }
     }
 
-    abstract protected function addQueryResolutionToSchema(): bool;
+    protected function addQueryResolutionToSchema(): bool
+    {
+        return false;
+    }
 }
