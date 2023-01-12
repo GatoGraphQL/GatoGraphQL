@@ -49,13 +49,14 @@ class AppStateProvider extends AbstractAppStateProvider
          * Passing the query via URL param? Eg: ?query={ posts { id } }
          */
         $state['query'] = EngineRequest::getQuery();
-        /**
-         * If not passing the query, and passing ?persistedQuery=introspectionQuery,
-         * then retrieve the query from the PersistedQueryManager service
-         */
-        if (empty($state['query']) && !empty(EngineRequest::getPersistedQuery())) {
-            $state['query'] = null;
-        }
+        // @todo Fix this code
+        // /**
+        //  * If not passing the query, and passing ?persistedQuery=introspectionQuery,
+        //  * then retrieve the query from the PersistedQueryManager service
+        //  */
+        // if (empty($state['query']) && !empty(EngineRequest::getPersistedQuery())) {
+        //     $state['query'] = null;
+        // }
         /**
          * Passing the operationName via URL param? Eg: ?operationName=One.
          *
