@@ -12,6 +12,7 @@ class Environment
     public final const DISABLE_API = 'DISABLE_API';
     public final const ENABLE_SETTING_NAMESPACING_BY_URL_PARAM = 'ENABLE_SETTING_NAMESPACING_BY_URL_PARAM';
     public final const ADD_FULLSCHEMA_FIELD_TO_SCHEMA = 'ADD_FULLSCHEMA_FIELD_TO_SCHEMA';
+    public final const ENABLE_PASSING_PERSISTED_QUERY_NAME_VIA_URL_PARAM = 'ENABLE_PASSING_PERSISTED_QUERY_NAME_VIA_URL_PARAM';
 
     public static function disableAPI(): bool
     {

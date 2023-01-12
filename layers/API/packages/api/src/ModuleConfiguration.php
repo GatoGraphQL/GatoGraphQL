@@ -70,4 +70,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function enablePassingPersistedQueryNameViaURLParam(): bool
+    {
+        $envVariable = Environment::ENABLE_PASSING_PERSISTED_QUERY_NAME_VIA_URL_PARAM;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

@@ -6,6 +6,8 @@ namespace PoPAPI\API\State;
 
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
+use PoPAPI\API\Module;
+use PoPAPI\API\ModuleConfiguration;
 use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
 use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoPAPI\API\Response\Schemes as APISchemes;
@@ -60,16 +62,24 @@ class AppStateProvider extends AbstractAppStateProvider
          * Passing the query via URL param? Eg: ?query={ posts { id } }
          */
         $state['query'] = EngineRequest::getQuery();
+
         /**
-         * If not passing the query, and passing ?persistedQuery=introspectionQuery,
-         * then retrieve the query from the PersistedQueryManager service
+         * If not passing the query, and passing ?persistedQuery=someName
+         * (eg: "introspectionQuery"), then retrieve the query from
+         * the PersistedQueryManager service
          */
         if (empty($state['query'])) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             $persistedQuery = EngineRequest::getPersistedQuery();
-            if (!empty($persistedQuery) && $this->getPersistedQueryManager()->hasPersistedQuery($persistedQuery)) {
+            if ($moduleConfiguration->enablePassingPersistedQueryNameViaURLParam()
+                && !empty($persistedQuery)
+                && $this->getPersistedQueryManager()->hasPersistedQuery($persistedQuery)
+            ) {
                 $state['query'] = $this->getPersistedQueryManager()->getPersistedQuery($persistedQuery);
             }
         }
+
         /**
          * Passing the operationName via URL param? Eg: ?operationName=One.
          *
