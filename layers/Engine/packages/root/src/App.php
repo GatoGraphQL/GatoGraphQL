@@ -296,7 +296,7 @@ class App implements AppInterface
      */
     final public static function request(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->request->get($key, $default);
+        return self::$request->request->get($key, $default);
     }
 
     /**
@@ -306,7 +306,7 @@ class App implements AppInterface
      */
     final public static function query(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->query->get($key, $default);
+        return self::$request->query->get($key, $default);
     }
 
     /**
@@ -316,7 +316,7 @@ class App implements AppInterface
      */
     final public static function cookies(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->cookies->get($key, $default);
+        return self::$request->cookies->get($key, $default);
     }
 
     /**
@@ -326,7 +326,7 @@ class App implements AppInterface
      */
     final public static function files(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->files->get($key, $default);
+        return self::$request->files->get($key, $default);
     }
 
     /**
@@ -336,7 +336,7 @@ class App implements AppInterface
      */
     final public static function server(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->server->get($key, $default);
+        return self::$request->server->get($key, $default);
     }
 
     /**
@@ -346,6 +346,6 @@ class App implements AppInterface
      */
     final public static function headers(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->headers->get($key, $default);
+        return self::$request->headers->get($key, $default);
     }
 }
