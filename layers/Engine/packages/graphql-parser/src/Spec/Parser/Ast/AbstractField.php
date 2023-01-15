@@ -136,7 +136,12 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         );
     }
 
-    public function asFieldOutputQueryString(): string
+    final public function asFieldOutputQueryString(): string
+    {
+        return $this->doAsFieldOutputQueryString();
+    }
+
+    protected function doAsFieldOutputQueryString(): string
     {
         // Generate the string for arguments
         $strFieldArguments = '';
