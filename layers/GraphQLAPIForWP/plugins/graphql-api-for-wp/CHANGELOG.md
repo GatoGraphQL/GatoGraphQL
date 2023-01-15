@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.0 - DATE
 
+### Enhancement
+
+- Improved query-resolution performance
+
 ## 0.9.0 - 12/01/2013
 
 ### GraphQL schema upgrade
