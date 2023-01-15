@@ -218,7 +218,7 @@ class App implements AppInterface
      */
     final public static function getState(string|array $keyOrPath): mixed
     {
-        $appStateManager = self::getAppStateManager();
+        $appStateManager = self::$appStateManager;
         if (is_array($keyOrPath)) {
             /** @var string[] */
             $path = $keyOrPath;
@@ -235,7 +235,7 @@ class App implements AppInterface
      */
     final public static function hasState(string|array $keyOrPath): mixed
     {
-        $appStateManager = self::getAppStateManager();
+        $appStateManager = self::$appStateManager;
         if (is_array($keyOrPath)) {
             /** @var string[] */
             $path = $keyOrPath;
