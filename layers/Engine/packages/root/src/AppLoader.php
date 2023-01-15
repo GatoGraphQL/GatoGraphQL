@@ -201,33 +201,41 @@ class AppLoader implements AppLoaderInterface
             $module = $moduleManager->register($moduleClass);
 
             // Initialize all depended-upon PoP modules
-            $this->addComponentsOrderedForInitialization(
-                $module->getDependedModuleClasses(),
-                $isDev
-            );
-
-            if ($isDev) {
+            if ($dependedModuleClasses = $module->getDependedModuleClasses()) {
                 $this->addComponentsOrderedForInitialization(
-                    $module->getDevDependedModuleClasses(),
+                    $dependedModuleClasses,
                     $isDev
                 );
-                if (Environment::isApplicationEnvironmentDevPHPUnit()) {
+            }
+
+            if ($isDev) {
+                if ($devDependedModuleClasses = $module->getDevDependedModuleClasses()) {
                     $this->addComponentsOrderedForInitialization(
-                        $module->getDevPHPUnitDependedModuleClasses(),
+                        $devDependedModuleClasses,
                         $isDev
                     );
+                }
+                if (Environment::isApplicationEnvironmentDevPHPUnit()) {
+                    if ($devPHPUnitDependedModuleClasses = $module->getDevPHPUnitDependedModuleClasses()) {
+                        $this->addComponentsOrderedForInitialization(
+                            $devPHPUnitDependedModuleClasses,
+                            $isDev
+                        );
+                    }
                 }
             }
 
             // Initialize all depended-upon PoP conditional modules, if they are installed
-            $this->addComponentsOrderedForInitialization(
-                array_filter(
-                    $module->getDependedConditionalModuleClasses(),
-                    // Rector does not downgrade `class_exists(...)` properly, so keep as string
-                    'class_exists'
-                ),
-                $isDev
-            );
+            if ($dependedConditionalModuleClasses = array_filter(
+                $module->getDependedConditionalModuleClasses(),
+                // Rector does not downgrade `class_exists(...)` properly, so keep as string
+                'class_exists'
+            )) {
+                $this->addComponentsOrderedForInitialization(
+                    $dependedConditionalModuleClasses,
+                    $isDev
+                );
+            }
 
             // We reached the bottom of the rung, add the module to the list
             $this->orderedModuleClasses[] = $moduleClass;
