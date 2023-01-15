@@ -190,7 +190,7 @@ class App implements AppInterface
      */
     final public static function getContainer(): ContainerInterface
     {
-        return self::getContainerBuilderFactory()->getInstance();
+        return self::$containerBuilderFactory->getInstance();
     }
 
     /**
