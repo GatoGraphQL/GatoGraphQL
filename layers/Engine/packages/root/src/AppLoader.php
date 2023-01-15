@@ -189,10 +189,10 @@ class AppLoader implements AppLoaderInterface
          * If any module class has already been initialized,
          * then do nothing
          */
-        $moduleClasses = array_values(array_diff(
+        $moduleClasses = array_diff(
             $moduleClasses,
             $this->initializedModuleClasses
-        ));
+        );
         $moduleManager = App::getModuleManager();
         foreach ($moduleClasses as $moduleClass) {
             $this->initializedModuleClasses[] = $moduleClass;
@@ -201,7 +201,10 @@ class AppLoader implements AppLoaderInterface
             $module = $moduleManager->register($moduleClass);
 
             // Initialize all depended-upon PoP modules
-            if ($dependedModuleClasses = $module->getDependedModuleClasses()) {
+            if ($dependedModuleClasses = array_diff(
+                $module->getDependedModuleClasses(),
+                $this->initializedModuleClasses
+            )) {
                 $this->addComponentsOrderedForInitialization(
                     $dependedModuleClasses,
                     $isDev
@@ -209,14 +212,20 @@ class AppLoader implements AppLoaderInterface
             }
 
             if ($isDev) {
-                if ($devDependedModuleClasses = $module->getDevDependedModuleClasses()) {
+                if ($devDependedModuleClasses = array_diff(
+                    $module->getDevDependedModuleClasses(),
+                    $this->initializedModuleClasses
+                )) {
                     $this->addComponentsOrderedForInitialization(
                         $devDependedModuleClasses,
                         $isDev
                     );
                 }
                 if (Environment::isApplicationEnvironmentDevPHPUnit()) {
-                    if ($devPHPUnitDependedModuleClasses = $module->getDevPHPUnitDependedModuleClasses()) {
+                    if ($devPHPUnitDependedModuleClasses = array_diff(
+                        $module->getDevPHPUnitDependedModuleClasses(),
+                        $this->initializedModuleClasses
+                    )) {
                         $this->addComponentsOrderedForInitialization(
                             $devPHPUnitDependedModuleClasses,
                             $isDev
@@ -226,10 +235,14 @@ class AppLoader implements AppLoaderInterface
             }
 
             // Initialize all depended-upon PoP conditional modules, if they are installed
-            if ($dependedConditionalModuleClasses = array_filter(
+            $dependedConditionalModuleClasses = array_filter(
                 $module->getDependedConditionalModuleClasses(),
                 // Rector does not downgrade `class_exists(...)` properly, so keep as string
                 'class_exists'
+            );
+            if ($dependedConditionalModuleClasses = array_diff(
+                $dependedConditionalModuleClasses,
+                $this->initializedModuleClasses
             )) {
                 $this->addComponentsOrderedForInitialization(
                     $dependedConditionalModuleClasses,
