@@ -209,7 +209,7 @@ class App implements AppInterface
      */
     final public static function getModule(string $moduleClass): ModuleInterface
     {
-        return self::getModuleManager()->getModule($moduleClass);
+        return self::$moduleManager->getModule($moduleClass);
     }
 
     /**
