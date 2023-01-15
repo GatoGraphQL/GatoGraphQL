@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Enhancement
 
-- Improved query-resolution performance
+- Improved query-resolution performance (by caching method results in PHP)
 
 ## 0.9.0 - 12/01/2013
 
