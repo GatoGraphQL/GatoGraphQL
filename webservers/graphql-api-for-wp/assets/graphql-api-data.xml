@@ -1687,7 +1687,7 @@ video/mp4
 		<wp:post_type><![CDATA[attachment]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-						<wp:attachment_url><![CDATA[https://graphql-api.com/assets/features/namespaced-interactive-schema.png]]></wp:attachment_url>
+						<wp:attachment_url><![CDATA[https://graphql-api.com/assets/guides/namespaced-interactive-schema.png]]></wp:attachment_url>
 											<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 		<wp:meta_value><![CDATA[2022/05/namespaced-interactive-schema.png]]></wp:meta_value>
