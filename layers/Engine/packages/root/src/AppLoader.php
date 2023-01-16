@@ -201,10 +201,12 @@ class AppLoader implements AppLoaderInterface
             $module = $moduleManager->register($moduleClass);
 
             // Initialize all depended-upon PoP modules
-            if ($dependedModuleClasses = array_diff(
-                $module->getDependedModuleClasses(),
-                $this->initializedModuleClasses
-            )) {
+            if (
+                $dependedModuleClasses = array_diff(
+                    $module->getDependedModuleClasses(),
+                    $this->initializedModuleClasses
+                )
+            ) {
                 $this->addComponentsOrderedForInitialization(
                     $dependedModuleClasses,
                     $isDev
@@ -212,20 +214,24 @@ class AppLoader implements AppLoaderInterface
             }
 
             if ($isDev) {
-                if ($devDependedModuleClasses = array_diff(
-                    $module->getDevDependedModuleClasses(),
-                    $this->initializedModuleClasses
-                )) {
+                if (
+                    $devDependedModuleClasses = array_diff(
+                        $module->getDevDependedModuleClasses(),
+                        $this->initializedModuleClasses
+                    )
+                ) {
                     $this->addComponentsOrderedForInitialization(
                         $devDependedModuleClasses,
                         $isDev
                     );
                 }
                 if (Environment::isApplicationEnvironmentDevPHPUnit()) {
-                    if ($devPHPUnitDependedModuleClasses = array_diff(
-                        $module->getDevPHPUnitDependedModuleClasses(),
-                        $this->initializedModuleClasses
-                    )) {
+                    if (
+                        $devPHPUnitDependedModuleClasses = array_diff(
+                            $module->getDevPHPUnitDependedModuleClasses(),
+                            $this->initializedModuleClasses
+                        )
+                    ) {
                         $this->addComponentsOrderedForInitialization(
                             $devPHPUnitDependedModuleClasses,
                             $isDev
@@ -240,10 +246,12 @@ class AppLoader implements AppLoaderInterface
                 // Rector does not downgrade `class_exists(...)` properly, so keep as string
                 'class_exists'
             );
-            if ($dependedConditionalModuleClasses = array_diff(
-                $dependedConditionalModuleClasses,
-                $this->initializedModuleClasses
-            )) {
+            if (
+                $dependedConditionalModuleClasses = array_diff(
+                    $dependedConditionalModuleClasses,
+                    $this->initializedModuleClasses
+                )
+            ) {
                 $this->addComponentsOrderedForInitialization(
                     $dependedConditionalModuleClasses,
                     $isDev
