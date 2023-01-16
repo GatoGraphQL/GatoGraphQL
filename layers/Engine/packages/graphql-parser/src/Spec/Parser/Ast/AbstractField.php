@@ -14,6 +14,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
     use WithDirectivesTrait;
 
     protected ?string $uniqueID = null;
+    protected ?string $fieldOutputQueryString = null;
 
     /**
      * @param Argument[] $arguments
@@ -136,7 +137,15 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         );
     }
 
-    public function asFieldOutputQueryString(): string
+    final public function asFieldOutputQueryString(): string
+    {
+        if ($this->fieldOutputQueryString === null) {
+            $this->fieldOutputQueryString = $this->doAsFieldOutputQueryString();
+        }
+        return $this->fieldOutputQueryString;
+    }
+
+    protected function doAsFieldOutputQueryString(): string
     {
         // Generate the string for arguments
         $strFieldArguments = '';

@@ -190,7 +190,7 @@ class App implements AppInterface
      */
     final public static function getContainer(): ContainerInterface
     {
-        return self::getContainerBuilderFactory()->getInstance();
+        return self::$containerBuilderFactory->getInstance();
     }
 
     /**
@@ -198,7 +198,7 @@ class App implements AppInterface
      */
     final public static function getSystemContainer(): ContainerInterface
     {
-        return self::getSystemContainerBuilderFactory()->getInstance();
+        return self::$systemContainerBuilderFactory->getInstance();
     }
 
     /**
@@ -209,7 +209,7 @@ class App implements AppInterface
      */
     final public static function getModule(string $moduleClass): ModuleInterface
     {
-        return self::getModuleManager()->getModule($moduleClass);
+        return self::$moduleManager->getModule($moduleClass);
     }
 
     /**
@@ -218,7 +218,7 @@ class App implements AppInterface
      */
     final public static function getState(string|array $keyOrPath): mixed
     {
-        $appStateManager = self::getAppStateManager();
+        $appStateManager = self::$appStateManager;
         if (is_array($keyOrPath)) {
             /** @var string[] */
             $path = $keyOrPath;
@@ -235,7 +235,7 @@ class App implements AppInterface
      */
     final public static function hasState(string|array $keyOrPath): mixed
     {
-        $appStateManager = self::getAppStateManager();
+        $appStateManager = self::$appStateManager;
         if (is_array($keyOrPath)) {
             /** @var string[] */
             $path = $keyOrPath;
@@ -251,42 +251,42 @@ class App implements AppInterface
      */
     final public static function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
     {
-        self::getHookManager()->addFilter($tag, $function_to_add, $priority, $accepted_args);
+        self::$hookManager->addFilter($tag, $function_to_add, $priority, $accepted_args);
     }
     /**
      * Shortcut function.
      */
     final public static function removeFilter(string $tag, callable $function_to_remove, int $priority = 10): bool
     {
-        return self::getHookManager()->removeFilter($tag, $function_to_remove, $priority);
+        return self::$hookManager->removeFilter($tag, $function_to_remove, $priority);
     }
     /**
      * Shortcut function.
      */
     final public static function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
     {
-        return self::getHookManager()->applyFilters($tag, $value, ...$args);
+        return self::$hookManager->applyFilters($tag, $value, ...$args);
     }
     /**
      * Shortcut function.
      */
     final public static function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
     {
-        self::getHookManager()->addAction($tag, $function_to_add, $priority, $accepted_args);
+        self::$hookManager->addAction($tag, $function_to_add, $priority, $accepted_args);
     }
     /**
      * Shortcut function.
      */
     final public static function removeAction(string $tag, callable $function_to_remove, int $priority = 10): bool
     {
-        return self::getHookManager()->removeAction($tag, $function_to_remove, $priority);
+        return self::$hookManager->removeAction($tag, $function_to_remove, $priority);
     }
     /**
      * Shortcut function.
      */
     final public static function doAction(string $tag, mixed ...$args): void
     {
-        self::getHookManager()->doAction($tag, ...$args);
+        self::$hookManager->doAction($tag, ...$args);
     }
 
     /**
@@ -296,7 +296,7 @@ class App implements AppInterface
      */
     final public static function request(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->request->get($key, $default);
+        return self::$request->request->get($key, $default);
     }
 
     /**
@@ -306,7 +306,7 @@ class App implements AppInterface
      */
     final public static function query(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->query->get($key, $default);
+        return self::$request->query->get($key, $default);
     }
 
     /**
@@ -316,7 +316,7 @@ class App implements AppInterface
      */
     final public static function cookies(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->cookies->get($key, $default);
+        return self::$request->cookies->get($key, $default);
     }
 
     /**
@@ -326,7 +326,7 @@ class App implements AppInterface
      */
     final public static function files(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->files->get($key, $default);
+        return self::$request->files->get($key, $default);
     }
 
     /**
@@ -336,7 +336,7 @@ class App implements AppInterface
      */
     final public static function server(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->server->get($key, $default);
+        return self::$request->server->get($key, $default);
     }
 
     /**
@@ -346,6 +346,6 @@ class App implements AppInterface
      */
     final public static function headers(string $key, mixed $default = null): mixed
     {
-        return self::getRequest()->headers->get($key, $default);
+        return self::$request->headers->get($key, $default);
     }
 }

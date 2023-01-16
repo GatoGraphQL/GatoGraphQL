@@ -6,7 +6,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.0 - DATE
 
-## 0.9.0 - 12/01/2013
+## 0.9.9 - 16/01/2013
+
+### Enhancement
+
+- Improved query-resolution performance (by caching method results in PHP)
+
+## 0.9.3 - 12/01/2013
 
 ### GraphQL schema upgrade
 
