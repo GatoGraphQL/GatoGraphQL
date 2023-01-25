@@ -17,11 +17,11 @@
   }
   
   __schema {
-    types {
+    pageType: type(name: "Page") {
       name
-      enumValues {
-        name
-      }
+    }
+    customPostUnionType: type(name: "CustomPostUnion") {
+      name
       possibleTypes {
         name
       }
