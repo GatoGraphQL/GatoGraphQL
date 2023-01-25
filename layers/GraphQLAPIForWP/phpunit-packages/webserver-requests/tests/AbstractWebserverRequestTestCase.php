@@ -138,7 +138,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         if ($testingDomain === '') {
             return true;
         }
-        return !static::isValidTestingDomain($testingDomain);
+        return !static::isValidContinuousIntegrationTestingDomain();
     }
 
     /**
@@ -146,11 +146,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      * of approved domains. If so, the GitHub workflow is executing
      * the test against some service (eg: InstaWP)
      */
-    protected static function isValidTestingDomain(string $testingDomain): bool
+    protected static function isValidContinuousIntegrationTestingDomain(): bool
     {
-        $validTestingDomains = [
-            'instawp.xyz',
-        ];
+        $testingDomain = static::getWebserverDomain();
+        $validTestingDomains = Environment::getContinuousIntegrationValidTestingDomains();
         // Calculate the top level domain (app.site.com => site.com)
         $hostNames = array_reverse(explode('.', $testingDomain));
         $host = $hostNames[1] . '.' . $hostNames[0];
@@ -259,6 +258,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     {
         parent::setUp();
 
+        if ($this->skipTest()) {
+            $this->markTestSkipped('Test has been set to be skipped');
+        }
+
         if (static::$enableTests) {
             return;
         }
@@ -273,6 +276,14 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             throw new IntegrationTestApplicationNotAvailableException(self::$skipOrFailTestsReason);
         }
         $this->markTestSkipped(self::$skipOrFailTestsReason);
+    }
+
+    /**
+     * Indicate to not run test on CI (eg: GitHub)
+     */
+    protected function skipTest(): bool
+    {
+        return false;
     }
 
     protected function getDataName(): string
