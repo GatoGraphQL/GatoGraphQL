@@ -7,6 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
 class Environment
 {
     public final const INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES = 'INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES';
+    public final const VALID_TESTING_DOMAINS = 'VALID_TESTING_DOMAINS';
 
     /**
      * Provide the plugin namespaces (eg: also for extensions) for which
@@ -23,5 +24,22 @@ class Environment
                 explode(',', getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES'))
             )
             : ['GraphQLAPI'];
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getValidTestingDomains(): array
+    {
+        $envVar = self::VALID_TESTING_DOMAINS;
+        /** @var string|false */
+        $envVarValue = getenv($envVar);
+        if ($envVarValue === false) {
+            return [
+                'instawp.xyz',
+                'lndo.site',
+            ];
+        }
+        return explode(',', $envVarValue);
     }
 }

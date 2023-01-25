@@ -14,6 +14,7 @@ Domain Path: /languages
 */
 
 use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIMainPlugin;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Environment;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Plugin;
 use PoP\Root\Environment as RootEnvironment;
 
@@ -38,10 +39,7 @@ add_action(
          */
         $enablePlugin = RootEnvironment::isApplicationEnvironmentDev();
         if (!$enablePlugin && isset($_SERVER['HTTP_HOST'])) {
-            $validTestingDomains = [
-                'instawp.xyz',
-                'lndo.site',
-            ];
+            $validTestingDomains = Environment::getValidTestingDomains();
             // Calculate the top level domain (app.site.com => site.com)
             $hostNames = array_reverse(explode('.', $_SERVER['HTTP_HOST']));
             $host = $hostNames[1] . '.' . $hostNames[0];
