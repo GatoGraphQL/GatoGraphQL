@@ -1,10 +1,7 @@
 query GetTypeInfoByIntrospection {
   __schema {
-    types {
+    categoryUnionType: type(name: "CategoryUnion") {
       name
-      enumValues {
-        name
-      }
       possibleTypes {
         name
       }

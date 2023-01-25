@@ -1,0 +1,756 @@
+{
+  "data": {
+    "__schema": {
+      "types": [
+        {
+          "kind": "OBJECT",
+          "name": "CategoryDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Comment"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CommentAuthorEmailIsMissingErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CommentAuthorNameIsMissingErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CommentParentCommentDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CommentsAreNotOpenForCustomPostErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CustomPostDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GenericCategory"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GenericCustomPost"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GenericErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "GenericTag"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "InvalidUserEmailErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "InvalidUsernameErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Media"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "MediaItemDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Menu"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "MenuItem"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "MutationRoot"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Page"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "PasswordIsIncorrectErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Post"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "PostCategory"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "PostTag"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "QueryRoot"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Root"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootAddCommentToCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreatePostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootLoginUserMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootLogoutUserMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootReplyCommentMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetCategoriesOnPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetFeaturedImageOnCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetTagsOnPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdatePostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "User"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserAvatar"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserIsLoggedInErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserIsNotLoggedInErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserRole"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "_DirectiveExtensions"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "_EnumValueExtensions"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "_FieldExtensions"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "_InputValueExtensions"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "_NamedTypeExtensions"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "_SchemaExtensions"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__Directive"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__EnumValue"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__Field"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__InputValue"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__Schema"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "__Type"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "AnyBuiltInScalar"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "Boolean"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "CategoryTaxonomyEnumString"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "CustomPostEnumString"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "Date"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "DateTime"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "Email"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "HTML"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "ID"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "Int"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "JSONObject"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "MenuLocationEnumString"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "Numeric"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "String"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "TagTaxonomyEnumString"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "URL"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "URLAbsolutePath"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "Category"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "Commentable"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "CustomPost"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "ErrorPayload"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "IdentifiableObject"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "Queryable"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "Tag"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "WithAuthor"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "WithFeaturedImage"
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "WithMeta"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CategoryByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CategoryPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CommentByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CommentMetaQueryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CommentResponsePaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CommentResponsesFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CommentSortInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CustomPostByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CustomPostCategoriesFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CustomPostCommentPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CustomPostCommentsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CustomPostMetaQueryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CustomPostPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CustomPostSortInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CustomPostTagsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DateQueryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "LoginCredentialsInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "LoginUserByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MediaItemByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MediaItemSortInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MenuByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MenuSortInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MetaQueryCompareByArrayValueInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MetaQueryCompareByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MetaQueryCompareByKeyInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MetaQueryCompareByNumericValueInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MetaQueryCompareByStringValueInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "PageByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "PageChildrenFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "PagePaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "PostByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "PostCategoryByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "PostPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "PostTagByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootAddCommentToCustomPostFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCategoriesFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCommentPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCommentsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCreatePostFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCustomPostsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMediaItemPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMediaItemsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMenuPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMenusFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMyCommentsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMyCustomPostsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMyPostsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootPagesFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootPostsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootReplyCommentFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootSetCategoriesOnCustomPostFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootSetFeaturedImageOnCustomPostFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootSetTagsOnCustomPostFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootTagsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdatePostFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TagByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TagPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TaxonomyCustomPostsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TaxonomyMetaQueryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TaxonomySortInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TaxonomyTaxonomiesFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserCustomPostsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserMetaQueryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserSearchByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserSortInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UsersFilterInput"
+        },
+        {
+          "kind": "ENUM",
+          "name": "CommentOrderByEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "CommentStatusEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "CommentTypeEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "CustomPostOrderByEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "CustomPostStatusEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "DirectiveKindEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "DirectiveLocation"
+        },
+        {
+          "kind": "ENUM",
+          "name": "FilterCustomPostStatusEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "MediaItemOrderByEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "MenuOrderByEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "MetaQueryCompareByArrayValueOperatorEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "MetaQueryCompareByKeyOperatorEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "MetaQueryCompareByNumericValueOperatorEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "MetaQueryCompareByStringValueOperatorEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "MetaQueryValueTypesEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "OperationStatusEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "OrderEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "RelationEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "TaxonomyOrderByEnum"
+        },
+        {
+          "kind": "ENUM",
+          "name": "TypeKind"
+        },
+        {
+          "kind": "ENUM",
+          "name": "UserOrderByEnum"
+        },
+        {
+          "kind": "UNION",
+          "name": "CategoryUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "CustomPostUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootCreatePostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootLoginUserMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootLogoutUserMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootReplyCommentMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetTagsOnPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdatePostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "TagUnion"
+        }
+      ]
+    }
+  }
+}
