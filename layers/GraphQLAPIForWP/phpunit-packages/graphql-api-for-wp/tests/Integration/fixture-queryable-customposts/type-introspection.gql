@@ -1,10 +1,7 @@
 query GetTypeInfoByIntrospection {
   __schema {
-    types {
+    customPostUnionType: type(name: "CustomPostUnion") {
       name
-      enumValues {
-        name
-      }
       possibleTypes {
         name
       }
