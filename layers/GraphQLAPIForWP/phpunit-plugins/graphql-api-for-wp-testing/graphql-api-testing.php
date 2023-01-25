@@ -41,7 +41,7 @@ add_action(
         if (!$enablePlugin && isset($_SERVER['HTTP_HOST'])) {
             $validTestingDomains = array_merge(
                 Environment::getContinuousIntegrationValidTestingDomains(),
-                Environment::getLocalDevelopmentValidTestingDomains(),
+                Environment::getLocalDevelopmentValidTestingDomains()
             );
             // Calculate the top level domain (app.site.com => site.com)
             $hostNames = array_reverse(explode('.', $_SERVER['HTTP_HOST']));
