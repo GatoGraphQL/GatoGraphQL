@@ -260,7 +260,6 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
 
         if ($this->skipTest()) {
             $this->markTestSkipped('Test has been set to be skipped');
-            return;
         }
 
         if (static::$enableTests) {
