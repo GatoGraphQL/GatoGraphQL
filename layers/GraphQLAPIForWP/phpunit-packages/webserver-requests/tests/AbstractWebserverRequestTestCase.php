@@ -148,9 +148,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function isValidTestingDomain(string $testingDomain): bool
     {
-        $validTestingDomains = [
-            'instawp.xyz',
-        ];
+        $validTestingDomains = Environment::getContinuousIntegrationValidTestingDomains();
         // Calculate the top level domain (app.site.com => site.com)
         $hostNames = array_reverse(explode('.', $testingDomain));
         $host = $hostNames[1] . '.' . $hostNames[0];

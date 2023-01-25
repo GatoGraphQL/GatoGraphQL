@@ -17,6 +17,7 @@ class Environment
     public final const INTEGRATION_TESTS_AUTHENTICATED_AUTHOR_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_AUTHOR_USER_PASSWORD';
     public final const INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_USERNAME = 'INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_USERNAME';
     public final const INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_PASSWORD';
+    public final const CONTINUOUS_INTEGRATION_VALID_TESTING_DOMAINS = 'CONTINUOUS_INTEGRATION_VALID_TESTING_DOMAINS';
 
     public static function getIntegrationTestsWebserverDomain(): string
     {
@@ -106,5 +107,21 @@ class Environment
             return '';
         }
         return $envVarValue;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getContinuousIntegrationValidTestingDomains(): array
+    {
+        $envVar = self::CONTINUOUS_INTEGRATION_VALID_TESTING_DOMAINS;
+        /** @var string|false */
+        $envVarValue = getenv($envVar);
+        if ($envVarValue === false) {
+            return [
+                'instawp.xyz',
+            ];
+        }
+        return explode(',', $envVarValue);
     }
 }
