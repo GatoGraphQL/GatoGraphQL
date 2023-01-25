@@ -258,6 +258,11 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     {
         parent::setUp();
 
+        if ($this->skipTest()) {
+            $this->markTestSkipped('Test is skipped on Continuous Integration');
+            return;
+        }
+
         if (static::$enableTests) {
             return;
         }
@@ -272,6 +277,14 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             throw new IntegrationTestApplicationNotAvailableException(self::$skipOrFailTestsReason);
         }
         $this->markTestSkipped(self::$skipOrFailTestsReason);
+    }
+
+    /**
+     * Indicate to not run test on CI (eg: GitHub)
+     */
+    protected function skipTest(): bool
+    {
+        return false;
     }
 
     protected function getDataName(): string
