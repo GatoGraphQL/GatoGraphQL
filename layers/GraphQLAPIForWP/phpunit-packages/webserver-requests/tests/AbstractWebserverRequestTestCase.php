@@ -138,7 +138,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         if ($testingDomain === '') {
             return true;
         }
-        return !static::isValidTestingDomain($testingDomain);
+        return !static::isValidContinuousIntegrationTestingDomain();
     }
 
     /**
@@ -146,8 +146,9 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      * of approved domains. If so, the GitHub workflow is executing
      * the test against some service (eg: InstaWP)
      */
-    protected static function isValidTestingDomain(string $testingDomain): bool
+    protected static function isValidContinuousIntegrationTestingDomain(): bool
     {
+        $testingDomain = static::getWebserverDomain();
         $validTestingDomains = Environment::getContinuousIntegrationValidTestingDomains();
         // Calculate the top level domain (app.site.com => site.com)
         $hostNames = array_reverse(explode('.', $testingDomain));
