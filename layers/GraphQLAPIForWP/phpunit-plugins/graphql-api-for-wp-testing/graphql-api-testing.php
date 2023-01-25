@@ -39,7 +39,10 @@ add_action(
          */
         $enablePlugin = RootEnvironment::isApplicationEnvironmentDev();
         if (!$enablePlugin && isset($_SERVER['HTTP_HOST'])) {
-            $validTestingDomains = Environment::getValidTestingDomains();
+            $validTestingDomains = [
+                ...Environment::getContinuousIntegrationValidTestingDomains(),
+                ...Environment::getLocalDevelopmentValidTestingDomains(),
+            ];
             // Calculate the top level domain (app.site.com => site.com)
             $hostNames = array_reverse(explode('.', $_SERVER['HTTP_HOST']));
             $host = $hostNames[1] . '.' . $hostNames[0];
