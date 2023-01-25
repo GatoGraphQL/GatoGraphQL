@@ -259,7 +259,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         parent::setUp();
 
         if ($this->skipTest()) {
-            $this->markTestSkipped('Test is skipped on Continuous Integration');
+            $this->markTestSkipped('Test has been set to be skipped');
             return;
         }
 
