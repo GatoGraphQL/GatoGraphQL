@@ -548,10 +548,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Disable the Native endpoint
             \PoPAPI\APIEndpointsForWP\Environment::DISABLE_NATIVE_API_ENDPOINT => true,
         ];
-        $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class] = [
-            // Expose global fields
-            \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
-        ];
         $moduleClassConfiguration[CustomPostsModule::class] = [
             // The default queryable custom post types are defined by this plugin
             CustomPostsEnvironment::DISABLE_PACKAGES_ADDING_DEFAULT_QUERYABLE_CUSTOMPOST_TYPES => true,
