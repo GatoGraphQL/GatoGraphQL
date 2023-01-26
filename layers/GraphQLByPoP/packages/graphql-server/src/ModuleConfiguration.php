@@ -151,4 +151,21 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema(): bool
+    {
+        if (!$this->exposeGlobalFieldsInGraphQLSchema()) {
+            return false;
+        }
+
+        $envVariable = Environment::EXPOSE_GLOBAL_FIELDS_IN_ROOT_TYPE_ONLY_IN_GRAPHQL_SCHEMA;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
