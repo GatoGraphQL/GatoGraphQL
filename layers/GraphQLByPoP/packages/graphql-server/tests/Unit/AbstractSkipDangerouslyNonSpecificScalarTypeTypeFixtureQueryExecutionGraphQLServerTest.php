@@ -14,6 +14,19 @@ abstract class AbstractSkipDangerouslyNonSpecificScalarTypeTypeFixtureQueryExecu
     }
 
     /**
+     * @return array<class-string<ModuleInterface>>
+     */
+    protected static function getGraphQLServerModuleClasses(): array
+    {
+        return [
+            ...parent::getGraphQLServerModuleClasses(),
+            ...[
+                \PoPSchema\FunctionFields\Module::class,
+            ]
+        ];
+    }
+
+    /**
      * @return array<class-string<ModuleInterface>,array<string,mixed>>
      */
     protected static function getGraphQLServerModuleClassConfiguration(): array
@@ -26,6 +39,7 @@ abstract class AbstractSkipDangerouslyNonSpecificScalarTypeTypeFixtureQueryExecu
                 ],
                 \GraphQLByPoP\GraphQLServer\Module::class => [
                     \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
+                    \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_ROOT_TYPE_ONLY_IN_GRAPHQL_SCHEMA => true,
                 ],
             ]
         ];
