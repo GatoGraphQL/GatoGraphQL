@@ -41,9 +41,11 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
              * Default value (if not defined in DB): `default`. Then do nothing
              */
             $mutationScheme = $schemaConfigBlockDataItem['attrs'][SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? null;
-            // Only execute if it has value "standard", "nested" or "lean_nested".
-            // If "default", then the general settings will already take effect, so do nothing
-            // (And if any other unsupported value, also do nothing)
+            /**
+             * Only execute if it has any selectable value (no null, no invented).
+             * If "default", then the general settings will already take effect,
+             * so do nothing.
+             */
             if (
                 !in_array($mutationScheme, [
                     MutationSchemes::STANDARD,
@@ -53,7 +55,10 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
             ) {
                 return;
             }
-            // Define the settings value through a hook. Execute last so it overrides the default settings
+            /**
+             * Define the settings value through a hook.
+             * Execute last so it overrides the default settings
+             */
             $hookName = ModuleConfigurationHelpers::getHookName(
                 GraphQLServerModule::class,
                 GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS

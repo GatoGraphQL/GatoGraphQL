@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
-use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
+use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoPAPI\API\Schema\SchemaDefinition;
+use PoP\Root\App;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 trait HasFieldsTypeTrait
 {
@@ -16,6 +18,13 @@ trait HasFieldsTypeTrait
      * @var Field[]
      */
     protected array $fields;
+
+    protected static function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLSchemaDefinitionServiceInterface */
+        return $instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
+    }
 
     /**
      * @param array<string,mixed> $fullSchemaDefinition
@@ -43,16 +52,25 @@ trait HasFieldsTypeTrait
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
             /**
-             * Global fields have already been initialized,
-             * simply get the reference to the existing objects
-             * from the registryMap
+             * Display the Global Fields either under all types,
+             * or only under the Root type
              */
-            $globalFields = SchemaDefinitionHelpers::getFieldsFromPath(
-                $fullSchemaDefinition,
-                [
-                    SchemaDefinition::GLOBAL_FIELDS,
-                ]
-            );
+            if (
+                !$moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema()
+                || $this->getNamespacedName() === $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName()
+            ) {
+                /**
+                 * Global fields have already been initialized,
+                 * simply get the reference to the existing objects
+                 * from the registryMap
+                 */
+                $globalFields = SchemaDefinitionHelpers::getFieldsFromPath(
+                    $fullSchemaDefinition,
+                    [
+                        SchemaDefinition::GLOBAL_FIELDS,
+                    ]
+                );
+            }
         }
 
         // Maybe sort fields and connections all together
@@ -84,6 +102,8 @@ trait HasFieldsTypeTrait
             );
         }
     }
+
+    abstract public function getNamespacedName(): string;
 
     /**
      * @param bool $includeGlobal Custom parameter by this GraphQL Server (i.e. it is not present in the GraphQL spec)
