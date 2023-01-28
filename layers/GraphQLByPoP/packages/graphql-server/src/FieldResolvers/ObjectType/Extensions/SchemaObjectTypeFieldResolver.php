@@ -52,8 +52,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
     {
-        /** @var GraphQLSchemaDefinitionService */
-        return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionService::class);
+        /** @var GraphQLSchemaDefinitionServiceInterface */
+        return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
     /**
