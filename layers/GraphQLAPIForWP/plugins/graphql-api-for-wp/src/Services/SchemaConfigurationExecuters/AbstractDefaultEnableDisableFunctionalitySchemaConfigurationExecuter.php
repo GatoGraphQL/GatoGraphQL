@@ -27,9 +27,11 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
              * Default value (if not defined in DB): `default`. Then do nothing
              */
             $enableFunctionality = $schemaConfigBlockDataItem['attrs'][$this->getSchemaConfigBlockAttributeName()] ?? null;
-            // Only execute if it has value "enabled" or "disabled".
-            // If "default", then the general settings will already take effect, so do nothing
-            // (And if any other unsupported value, also do nothing)
+            /**
+             * Only execute if it has any selectable value (no null, no invented).
+             * If "default", then the general settings will already take effect,
+             * so do nothing.
+             */
             if (
                 !in_array($enableFunctionality, [
                     BlockAttributeValues::ENABLED,
@@ -38,7 +40,10 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
             ) {
                 return;
             }
-            // Define the settings value through a hook. Execute last so it overrides the default settings
+            /**
+             * Define the settings value through a hook.
+             * Execute last so it overrides the default settings
+             */
             $hookName = ModuleConfigurationHelpers::getHookName(
                 $this->getHookModuleClass(),
                 $this->getHookEnvironmentClass(),
