@@ -19,6 +19,13 @@ trait HasFieldsTypeTrait
      */
     protected array $fields;
 
+    protected static function getRootObjectTypeResolver(): RootObjectTypeResolver
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var RootObjectTypeResolver */
+        return $instanceManager->getInstance(RootObjectTypeResolver::class);
+    }
+
     /**
      * @param array<string,mixed> $fullSchemaDefinition
      * @param string[] $schemaDefinitionPath
@@ -44,20 +51,13 @@ trait HasFieldsTypeTrait
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
-            $referenceGlobalFields = false;
             /**
-             * Maybe only initialize the Global Fields in the Root type
+             * Display the Global Fields either under all types,
+             * or only under the Root type
              */
-            if ($moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema()) {
-                /** @var RootObjectTypeResolver */
-                $rootObjectTypeResolver = InstanceManagerFacade::getInstance()->getInstance(RootObjectTypeResolver::class);
-                $rootNamespacedTypeName = $rootObjectTypeResolver->getNamespacedTypeName();
-                $referenceGlobalFields = $this->getNamespacedName() === $rootNamespacedTypeName;
-            } else {
-                $referenceGlobalFields = true;
-            }
-
-            if ($referenceGlobalFields) {
+            if (!$moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema()
+                || $this->getNamespacedName() === $this->getRootObjectTypeResolver()->getNamespacedTypeName()
+            ){
                 /**
                  * Global fields have already been initialized,
                  * simply get the reference to the existing objects
