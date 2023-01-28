@@ -1,0 +1,9 @@
+query IntrospectionFieldArgGlobalFields {
+    __schema {
+        type(name: "Root") {
+            fields(includeGlobal: true) {
+                name
+            }
+        }
+    }
+}
