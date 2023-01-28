@@ -22,7 +22,8 @@ abstract class AbstractExposeGlobalFieldsInRootTypeOnlyInGraphQLSchemaFixtureQue
             ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
                 \GraphQLByPoP\GraphQLServer\Module::class => [
-                    \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => static::isEnabled(),
+                    \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
+                    \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_ROOT_TYPE_ONLY_IN_GRAPHQL_SCHEMA => static::isEnabled(),
                 ],
             ]
         ];
