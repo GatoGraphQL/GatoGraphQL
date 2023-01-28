@@ -13,56 +13,7 @@
                     "kind": "OBJECT",
                     "name": "MutationRoot",
                     "description": "Mutation type, starting from which mutations are executed",
-                    "fields": [
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        }
-                    ],
+                    "fields": [],
                     "inputFields": null,
                     "interfaces": [],
                     "enumValues": null,
@@ -122,6 +73,332 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "_and",
+                            "description": "Return an `AND` operation among several boolean properties",
+                            "args": [
+                                {
+                                    "name": "values",
+                                    "description": "The array of values on which to execute the `AND` operation",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[Boolean!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "Boolean!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "Boolean",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_arrayInnerJoinJSONObjectProperties",
+                            "description": "Fill the JSON objects inside a target array with properties from a JSON object from a source array, where a certain property is the same for both objects",
+                            "args": [
+                                {
+                                    "name": "target",
+                                    "description": "Array to copy the object properties to",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[JSONObject!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[JSONObject!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "JSONObject!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "JSONObject",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "source",
+                                    "description": "Array with the source object properties",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[JSONObject!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[JSONObject!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "JSONObject!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "JSONObject",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "index",
+                                    "description": "Property whose value must be the same on the objects from the source and target arrays",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "properties",
+                                    "description": "Properties to copy from the source to the target object. If empty, all properties in the source object will be copied",
+                                    "type": {
+                                        "kind": "LIST",
+                                        "name": "[String!]",
+                                        "ofType": {
+                                            "kind": "NON_NULL",
+                                            "name": "String!",
+                                            "ofType": {
+                                                "kind": "SCALAR",
+                                                "name": "String",
+                                                "ofType": null
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[JSONObject]!",
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[JSONObject]",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "JSONObject",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_arrayJoin",
+                            "description": "Join all the strings in an array, using a provided separator",
+                            "args": [
+                                {
+                                    "name": "array",
+                                    "description": "Array of strings to be joined all together",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[String!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "separator",
+                                    "description": "Separator with which to join all strings in the array",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "\"\""
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_fail",
+                            "description": "Trigger the failure of the GraphQL request, by creating an entry under the response's `errors`",
+                            "args": [
+                                {
+                                    "name": "message",
+                                    "description": "The reason of the failure",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "data",
+                                    "description": "Additional data to show with the error",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "JSONObject",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "AlwaysNull",
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_intAdd",
+                            "description": "Add an integer to another integer number",
+                            "args": [
+                                {
+                                    "name": "add",
+                                    "description": "First number to add",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Int!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Int",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "to",
+                                    "description": "Second number to add",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Int!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Int",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_intArraySum",
+                            "description": "Sum of the integer elements in the array",
+                            "args": [
+                                {
+                                    "name": "array",
+                                    "description": "Array of integers to sum up",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[Int!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[Int!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "Int!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "Int",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_isNull",
+                            "description": "Indicate if a value is null",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "_namespace",
                             "description": "The object's namespace",
                             "args": [],
@@ -138,6 +415,211 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "_not",
+                            "description": "Return the opposite value of a boolean property",
+                            "args": [
+                                {
+                                    "name": "value",
+                                    "description": "The value from which to return its opposite value",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_objectRemoveEntry",
+                            "description": "Removes an entry from the object",
+                            "args": [
+                                {
+                                    "name": "object",
+                                    "description": "The object to remove an entry from",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "JSONObject!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "JSONObject",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "key",
+                                    "description": "Property to remove from the object",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "JSONObject!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_or",
+                            "description": "Return an `OR` operation among several boolean properties",
+                            "args": [
+                                {
+                                    "name": "values",
+                                    "description": "The array of values on which to execute the `OR` operation",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[Boolean!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[Boolean!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "Boolean!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "Boolean",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_propertyExistsInJSONObject",
+                            "description": "Indicate if a property exists on a JSON object",
+                            "args": [
+                                {
+                                    "name": "object",
+                                    "description": "The JSON object",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "JSONObject!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "JSONObject",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "by",
+                                    "description": "Oneof input to indicate how to retrieve the property",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "JSONObjectPropertyByInput!",
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "JSONObjectPropertyByInput",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_propertyIsSetInJSONObject",
+                            "description": "Indicate if a property exists and is not `null` on a JSON object",
+                            "args": [
+                                {
+                                    "name": "object",
+                                    "description": "The JSON object",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "JSONObject!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "JSONObject",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "by",
+                                    "description": "Oneof input to indicate how to retrieve the property",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "JSONObjectPropertyByInput!",
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "JSONObjectPropertyByInput",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "_qualifiedTypeName",
                             "description": "The object's namespace + type",
                             "args": [],
@@ -147,6 +629,966 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_sprintf",
+                            "description": "Replace placeholders inside a string with provided values",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The string containing the placeholders",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "values",
+                                    "description": "The values to replace the placeholders with inside the string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[String!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strAppend",
+                            "description": "Append a string to another string",
+                            "args": [
+                                {
+                                    "name": "append",
+                                    "description": "The string to append",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "after",
+                                    "description": "The string to be appended",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strContains",
+                            "description": "Indicates if a string contains another string",
+                            "args": [
+                                {
+                                    "name": "search",
+                                    "description": "The substring to check inside the string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "in",
+                                    "description": "The string containing the substring",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strEndsWith",
+                            "description": "Indicates if a string ends with another string",
+                            "args": [
+                                {
+                                    "name": "search",
+                                    "description": "The substring to check inside the string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "in",
+                                    "description": "The string containing the substring",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strLength",
+                            "description": "Length of the string",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The string to measure its length",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strLowerCase",
+                            "description": "Transform a string to lower case",
+                            "args": [
+                                {
+                                    "name": "text",
+                                    "description": "The string to be appended",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strPad",
+                            "description": "Pad a string to a certain length with another string",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The input string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "length",
+                                    "description": "The length of the final string. If this value is less than or equal to the length of the input string, no padding takes place",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "PositiveInt!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "PositiveInt",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "padding",
+                                    "description": "The padding string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "\" \""
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strPos",
+                            "description": "Position of a substring within the string, or `null` if not found",
+                            "args": [
+                                {
+                                    "name": "search",
+                                    "description": "The string to search for the position",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "in",
+                                    "description": "The string to search within",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strRegexReplace",
+                            "description": "Execute a regular expression to search and replace a string (see: https:\/\/www.php.net\/manual\/en\/function.preg-replace.php)",
+                            "args": [
+                                {
+                                    "name": "regex",
+                                    "description": "The pattern to search for. Several PCRE modifiers are also available (see: https:\/\/www.php.net\/manual\/en\/reference.pcre.pattern.modifiers.php)",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "replaceWith",
+                                    "description": "The string to use as replacement. may contain references of the form \\n or $n, with the latter form being the preferred one. Every such reference will be replaced by the text captured by the n'th parenthesized pattern. n can be from 0 to 99, and \\0 or $0 refers to the text matched by the whole pattern. Opening parentheses are counted from left to right (starting from 1) to obtain the number of the capturing subpattern. Note that backslashes in string literals may require to be escaped",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "in",
+                                    "description": "The string where to perform the search and replace",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "limit",
+                                    "description": "The maximum possible replacements for each pattern in each subject string. Defaults to -1 (no limit)",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Int!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Int",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "-1"
+                                }
+                            ],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strRepeat",
+                            "description": "Repeat a string",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The string to repeat",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "times",
+                                    "description": "Number of time the input string should be repeated. This multiplier value has to be greater than or equal to 0. If the multiplier is set to 0, the function will return an empty string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "PositiveInt!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "PositiveInt",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strReplace",
+                            "description": "Replace a string with another string",
+                            "args": [
+                                {
+                                    "name": "replace",
+                                    "description": "Text to search and have replaced",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "with",
+                                    "description": "Replacement text",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "in",
+                                    "description": "Text within which to do the replacement",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strReverse",
+                            "description": "Reverse a string",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The string to reverse",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strShuffle",
+                            "description": "Randomly shuffles a string",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The string to shuffle",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strSplit",
+                            "description": "Split a string by another string",
+                            "args": [
+                                {
+                                    "name": "separator",
+                                    "description": "The boundary string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "string",
+                                    "description": "The input string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[String!]!",
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[String!]",
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strStartsWith",
+                            "description": "Indicates if a string starts with another string",
+                            "args": [
+                                {
+                                    "name": "search",
+                                    "description": "The substring to check inside the string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "in",
+                                    "description": "The string containing the substring",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strStripSlashes",
+                            "description": "Returns a string with backslashes stripped off. (\\' becomes ' and so on.) Double backslashes (\\\\) are made into a single backslash (\\)",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The input string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strSubstr",
+                            "description": "Return part of a string",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The input string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "offset",
+                                    "description": "If start is non-negative, the returned string will start at the start'th position in string, counting from zero. If start is negative, the returned string will start at the start'th character from the end of string",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Int!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Int",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "length",
+                                    "description": "If length is given and is positive, the string returned will contain at most length characters beginning from start (depending on the length of string). If length is given and is negative, then that many characters will be omitted from the end of string (after the start position has been calculated when a start is negative). If start denotes a position beyond this truncation, an empty string will be returned",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Int",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strTitleCase",
+                            "description": "Transform a string to title case",
+                            "args": [
+                                {
+                                    "name": "text",
+                                    "description": "The string to be transformed",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strToTime",
+                            "description": "Parse about any English textual datetime description into a Unix timestamp",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The string to parse",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "baseTimestamp",
+                                    "description": "The timestamp which is used as a base for the calculation of relative dates",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Int",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strTrim",
+                            "description": "Strip whitespace (or other characters) from the beginning and end of a string",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The string to trim",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "characters",
+                                    "description": "The characters to remove from the beginning and end of the string. Simply list all characters that you want to be stripped. With .. you can specify a range of characters",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "\" \\t\\n\\r\\u0000\\u000b\""
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strUpperCase",
+                            "description": "Transform a string to upper case",
+                            "args": [
+                                {
+                                    "name": "text",
+                                    "description": "The string to be appended",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_strWordCount",
+                            "description": "Number of words in the string",
+                            "args": [
+                                {
+                                    "name": "string",
+                                    "description": "The string to count words within",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_time",
+                            "description": "Return the time now (https:\/\/php.net\/manual\/en\/function.time.php)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
                                     "ofType": null
                                 }
                             },
@@ -233,54 +1675,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -334,54 +1728,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -404,54 +1750,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -516,54 +1814,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -586,54 +1836,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -718,54 +1920,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -788,54 +1942,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -992,54 +2098,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -1149,54 +2207,6 @@
                         {
                             "name": "name",
                             "description": "Enum value's name as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACvBBCyBH6rd)",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -1370,54 +2380,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -1534,54 +2496,6 @@
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "__Type",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
@@ -1817,54 +2731,6 @@
                                             "ofType": null
                                         }
                                     }
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
                                 }
                             },
                             "isDeprecated": false,
@@ -2116,54 +2982,6 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
-                        },
-                        {
-                            "name": "_namespace",
-                            "description": "The object's namespace",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_qualifiedTypeName",
-                            "description": "The object's namespace + type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "_typeName",
-                            "description": "The object's type",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -2174,6 +2992,16 @@
                             "ofType": null
                         }
                     ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
+                    "name": "AlwaysNull",
+                    "description": "\"Always `null`\" scalar, to indicate the the field will always be resolved as `null`",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
                     "enumValues": null,
                     "possibleTypes": null
                 },
@@ -2209,10 +3037,61 @@
                 },
                 {
                     "kind": "SCALAR",
+                    "name": "JSONObject",
+                    "description": "Custom scalar representing a JSON Object of unrestricted shape",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
+                    "name": "PositiveInt",
+                    "description": "A positive integer or 0.",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
                     "name": "String",
                     "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
                     "fields": null,
                     "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "JSONObjectPropertyByInput",
+                    "description": "Oneof input to navigate to some JSON object property, whether on the object's first level (via `key`) or deeper (via `path`)",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "key",
+                            "description": "Query a property from the object's first level",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "path",
+                            "description": "Query a property on a deeper level of the object, using `.` to navigate the levels (eg: use \"contact.email\" to retrieve the value from `{ contact: { email: \"hi@there.com\" } }`)",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
                     "interfaces": null,
                     "enumValues": null,
                     "possibleTypes": null
