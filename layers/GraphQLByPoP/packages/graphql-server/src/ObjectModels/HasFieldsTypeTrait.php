@@ -55,9 +55,10 @@ trait HasFieldsTypeTrait
              * Display the Global Fields either under all types,
              * or only under the Root type
              */
-            if (!$moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema()
+            if (
+                !$moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema()
                 || $this->getNamespacedName() === $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName()
-            ){
+            ) {
                 /**
                  * Global fields have already been initialized,
                  * simply get the reference to the existing objects
