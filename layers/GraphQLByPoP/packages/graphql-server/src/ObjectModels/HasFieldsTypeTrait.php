@@ -6,9 +6,9 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
+use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoPAPI\API\Schema\SchemaDefinition;
-use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
@@ -19,11 +19,11 @@ trait HasFieldsTypeTrait
      */
     protected array $fields;
 
-    protected static function getRootObjectTypeResolver(): RootObjectTypeResolver
+    protected static function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
     {
         $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var RootObjectTypeResolver */
-        return $instanceManager->getInstance(RootObjectTypeResolver::class);
+        /** @var GraphQLSchemaDefinitionServiceInterface */
+        return $instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
     /**
@@ -56,7 +56,7 @@ trait HasFieldsTypeTrait
              * or only under the Root type
              */
             if (!$moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema()
-                || $this->getNamespacedName() === $this->getRootObjectTypeResolver()->getNamespacedTypeName()
+                || $this->getNamespacedName() === $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName()
             ){
                 /**
                  * Global fields have already been initialized,
