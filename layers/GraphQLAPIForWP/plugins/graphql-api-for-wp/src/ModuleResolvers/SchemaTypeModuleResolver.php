@@ -443,6 +443,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_TAGS:
                 return \__('Base functionality for all tags', 'graphql-api');
             case self::SCHEMA_CATEGORIES:
+                return \__('Base functionality for all categories', 'graphql-api');
         }
         return parent::getDescription($module);
     }
