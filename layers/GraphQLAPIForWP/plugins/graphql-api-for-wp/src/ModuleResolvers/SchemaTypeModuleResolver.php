@@ -460,9 +460,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_USER_ROLES:
             case self::SCHEMA_USER_AVATARS:
             case self::SCHEMA_COMMENTS:
-            case self::SCHEMA_TAGS:
             case self::SCHEMA_POST_TAGS:
-            case self::SCHEMA_CATEGORIES:
             case self::SCHEMA_POST_CATEGORIES:
             case self::SCHEMA_MENUS:
             case self::SCHEMA_MEDIA:
