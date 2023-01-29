@@ -98,11 +98,11 @@
 .plugins .active.module-versioning td,
 .plugins .active.module-versioning th,
 .subsubsub a.module-type-versioning {
-    background-color: #f7f9fe;
+    background-color: #f8f9ec;
 }
 .plugin-update-tr.active.module-versioning td,
 .plugins .active.module-versioning th.check-column {
-    border-left-color: #0062d2;
+    border-left-color: #b4c161;
 }
 .subsubsub a.module-type-versioning {
     border-color: #0062d2;

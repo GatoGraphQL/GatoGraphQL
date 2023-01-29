@@ -106,7 +106,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 
     public function getPriority(): int
     {
-        return $this->getUpstreamPriority() - 2;
+        return $this->getUpstreamPriority() - 1;
     }
 
     /**
