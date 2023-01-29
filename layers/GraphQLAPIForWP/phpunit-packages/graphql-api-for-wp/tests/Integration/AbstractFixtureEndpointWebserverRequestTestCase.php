@@ -110,7 +110,12 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                     $graphQLVariablesForOperation = $variables;
                 }
 
-                $providerItems["${dataName}:${operationName}"] = [
+                $operationDataName = sprintf(
+                    '%s:%s',
+                    $dataName,
+                    $operationName
+                );
+                $providerItems[$operationDataName] = [
                     'application/json',
                     $graphQLResponseForOperationFileInfo->getContents(),
                     $endpoint,

@@ -119,7 +119,12 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
                 if (!\file_exists($graphQLVariablesForOperationFile)) {
                     $graphQLVariablesForOperationFile = $graphQLVariablesFile;
                 }
-                $providerItems["${dataName}:${operationName}"] = [
+                $operationDataName = sprintf(
+                    '%s:%s',
+                    $dataName,
+                    $operationName
+                );
+                $providerItems[$operationDataName] = [
                     $graphQLQueryFile,
                     $graphQLResponseForOperationFile,
                     $graphQLVariablesForOperationFile,
