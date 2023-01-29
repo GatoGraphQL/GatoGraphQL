@@ -45,11 +45,11 @@ interface QueryASTTransformationServiceInterface
      *     }
      *
      *     query Two {
-     *       firstEcho: echo(value: $name) @upperCase @export(as: "ucName")
+     *       firstEcho: _echo(value: $name) @upperCase @export(as: "ucName")
      *     }
      *
      *     query Three {
-     *       secondEcho: echo(value: $ucName)
+     *       secondEcho: _echo(value: $ucName)
      *     }
      *
      * `firstEcho` is normally resolved on the first iteration for `Root`,
@@ -68,7 +68,7 @@ interface QueryASTTransformationServiceInterface
      *     query Two {
      *       self {
      *         self {
-     *           firstEcho: echo(value: $name) @upperCase @export(as: "ucName")
+     *           firstEcho: _echo(value: $name) @upperCase @export(as: "ucName")
      *         }
      *       }
      *     }
@@ -77,7 +77,7 @@ interface QueryASTTransformationServiceInterface
      *       self {
      *         self {
      *           self {
-     *             secondEcho: echo(value: $ucName)
+     *             secondEcho: _echo(value: $ucName)
      *           }
      *         }
      *       }

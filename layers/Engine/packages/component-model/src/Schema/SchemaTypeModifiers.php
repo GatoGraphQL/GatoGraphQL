@@ -24,12 +24,12 @@ class SchemaTypeModifiers
     /**
      * The input is mandatory but can be null.
      *
-     * Eg: field arg `value` in field `echo` is mandatory,
+     * Eg: field arg `value` in field `_echo` is mandatory,
      * but it can also echo back a `null` value:
      *
      *   ```
      *   {
-     *     echo(value: null)
+     *     _echo(value: null)
      *   }
      *   ```
      */

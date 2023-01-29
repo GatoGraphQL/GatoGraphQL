@@ -618,7 +618,7 @@ class Document implements DocumentInterface
          *
          * ```
          * query UpperCaseText($text: String!) {
-         *   echo(value: [[$text]])
+         *   _echo(value: [[$text]])
          * }
          * ```
          */

@@ -22,7 +22,7 @@ interface InputTypeResolverInterface extends TypeResolverInterface
      * from the GraphQL spec.
      *
      * Called by the (GraphQL) engine to convert an input
-     * (such as field argument `"Hallo!"` in `{ echo(msg: "Hallo!") }`)
+     * (such as field argument `"Hallo!"` in `{ _echo(msg: "Hallo!") }`)
      * into the corresponding scalar entity (in this case, a String).
      *
      * Return `null` if the coercing cannot be done, and add an error

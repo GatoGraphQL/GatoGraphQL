@@ -100,7 +100,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
                  *       self {
                  *           id
                  *       }
-                 *       nonLeaf: echo(value: $__self)
+                 *       nonLeaf: _echo(value: $__self)
                  *   }
                  *   ```
                  *

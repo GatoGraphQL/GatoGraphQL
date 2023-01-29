@@ -20,7 +20,7 @@ interface ParserInterface extends UpstreamParserInterface
      *   ```
      *   {
      *     id
-     *     echo(value: $__id)
+     *     _echo(value: $__id)
      *   }
      *   ```
      *

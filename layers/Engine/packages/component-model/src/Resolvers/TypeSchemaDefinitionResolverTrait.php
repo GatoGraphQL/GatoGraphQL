@@ -85,7 +85,7 @@ trait TypeSchemaDefinitionResolverTrait
          *
          *   ```
          *   {
-         *     echo(value: null)
+         *     _echo(value: null)
          *   }
          *   ```
          *

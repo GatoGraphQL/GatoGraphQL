@@ -46,7 +46,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * ```
      * {
      *   someField
-     *   echo(value: $__someField)
+     *   _echo(value: $__someField)
      * }
      * ```
      *
@@ -707,8 +707,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      *
      * ```
      * {
-     *   first: echo(value: $second)
-     *   second: echo(value: $first)
+     *   first: _echo(value: $second)
+     *   second: _echo(value: $first)
      * }
      * ```
      *
@@ -716,7 +716,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      *
      * ```
      * {
-     *   field: echo(value: $field)
+     *   field: _echo(value: $field)
      * }
      * ```
      */
@@ -743,7 +743,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      *   ```
      *   {
      *     id
-     *     echo(value: $__id)
+     *     _echo(value: $__id)
      *   }
      *   ```
      *
