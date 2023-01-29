@@ -107,7 +107,7 @@ return [
             if ($filePath === convertRelativeToFullPath('vendor/nikic/fast-route/src/bootstrap.php')) {
                 return str_replace(
                     ["'FastRoute\\\\'", "'FastRoute'"],
-                    ["'${prefix}\\\\FastRoute\\\\'", "'${prefix}\\\\FastRoute'"],
+                    [sprintf("'%s\\\\FastRoute\\\\'", $prefix), sprintf("'%s\\\\FastRoute'", $prefix)],
                     $content
                 );
             }
@@ -117,7 +117,7 @@ return [
              */
             if (str_starts_with($filePath, convertRelativeToFullPath('vendor/brain/cortex/'))) {
                 return str_replace(
-                    "\\${prefix}\\WP",
+                    sprintf("\\%s\\WP", $prefix),
                     "\\WP",
                     $content
                 );
@@ -152,7 +152,7 @@ return [
             ) {
                 // Remove the namespace
                 $content = str_replace(
-                    "namespace ${prefix};",
+                    sprintf("namespace %s;", $prefix),
                     '',
                     $content
                 );
@@ -160,8 +160,8 @@ return [
                 // Comment out the class_alias too
                 if ($isSymfonyPolyfillFileWithGlobalClass) {
                     $content = str_replace(
-                        "\class_alias('${prefix}\\\\",
-                        "//\class_alias('${prefix}\\\\",
+                        sprintf("\class_alias('%s\\\\", $prefix),
+                        sprintf("//\class_alias('%s\\\\", $prefix),
                         $content
                     );
                 }
