@@ -82,3 +82,6 @@ pre {
 pre > code {
     padding: 0;
 }
+pre.hljs {
+    padding: 0;
+}
