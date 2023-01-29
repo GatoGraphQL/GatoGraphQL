@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.0 - DATE
 
+### Added
+
+- Docs for modules "Tags" and "Categories"
+
 ## 0.9.9 - 16/01/2013
 
 ### Enhancement
