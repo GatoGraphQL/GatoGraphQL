@@ -153,7 +153,7 @@ const SchemaConfigurationSelectCard = ( props ) => {
 
 export default compose( [
 	withState( {
-		label: __('Schema configuration', 'graphql-api'),
+		header: __('Schema configuration', 'graphql-api'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withSelect( ( select ) => {
