@@ -482,6 +482,7 @@ class AppLoader implements AppLoaderInterface
         $appStateManager = App::getAppStateManager();
         $appStateManager->initializeAppState($this->initialAppState);
         $moduleManager = App::getModuleManager();
+        // Allow to execute the SchemaConfigurator in this event
         $moduleManager->preBoot();
         $moduleManager->boot();
         /**

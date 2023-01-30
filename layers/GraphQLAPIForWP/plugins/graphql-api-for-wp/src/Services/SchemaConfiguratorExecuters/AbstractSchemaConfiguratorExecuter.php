@@ -13,6 +13,17 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
 {
     use BasicServiceTrait;
 
+    /**
+     * Execute before all the services are attached,
+     * as to use this configuration to affect these.
+     *
+     * For instance, the Queryable Custom Post Types can be
+     * configured in the Schema Configuration, and from this list
+     * will the ObjectTypeResolverPicker for the GenericCustomPost
+     * decide if to add it to the CustomPostUnion or not. Hence,
+     * this service must be executed before the Attachable services
+     * are executed.
+     */
     public function getInstantiationEvent(): string
     {
         return ApplicationEvents::PRE_BOOT;
