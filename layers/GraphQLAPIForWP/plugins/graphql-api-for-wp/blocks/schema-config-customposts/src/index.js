@@ -86,7 +86,13 @@ registerBlockType( 'graphql-api/schema-config-customposts', {
 	 *
 	 * @return {WPElement} Element to render.
 	 */
-	edit: EditBlock,
+	edit(props) {
+		const possibleCustomPostTypes = window.graphQLAPISchemaConfigCustomPosts ? window.graphQLAPISchemaConfigCustomPosts.possibleCustomPostTypes : [];
+		return <EditBlock
+			possibleCustomPostTypes={ possibleCustomPostTypes }
+			{ ...props }
+		/>
+	},
 
 	/**
 	 * The save function defines the way in which the different attributes should be combined

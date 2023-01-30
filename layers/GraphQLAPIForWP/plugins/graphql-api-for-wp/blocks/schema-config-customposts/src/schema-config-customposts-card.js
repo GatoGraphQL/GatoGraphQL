@@ -17,18 +17,19 @@ import {
 
 const SchemaConfigCustomPostsCard = ( props ) => {
 	const {
+		possibleCustomPostTypes,
 		isSelected,
 		setAttributes,
 		attributes: {
 			includedCustomPostTypes,
 		},
 	} = props;
-	const options = [
+	const options = possibleCustomPostTypes.map( customPostType => (
 		{
-			label: '@complete',
-			value: '@complete',
-		},
-	];
+			label: customPostType,
+			value: customPostType,
+		}
+	) );
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
