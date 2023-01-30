@@ -17,7 +17,7 @@ import './style.scss';
 
 const GetLabelForNotFoundValue = ( val ) => val;
 
-const GraphQLAPISelect = ( props ) => {
+const EditableSelect = ( props ) => {
 	const {
 		options,
 		defaultValue,
@@ -98,26 +98,26 @@ const GraphQLAPISelect = ( props ) => {
 	)
 }
 
-const WithDataLoadingGraphQLAPISelect = compose( [
+const WithDataLoadingEditableSelect = compose( [
 	withSpinner(),
 	withErrorMessage(),
-] )( GraphQLAPISelect );
+] )( EditableSelect );
 
 /**
  * If data has not been fetched yet, show a spinner instead of the body
  *
  * @param {Object} props
  */
-const MaybeWithDataLoadingGraphQLAPISelect = ( props ) => {
+const MaybeWithDataLoadingEditableSelect = ( props ) => {
 	const { maybeShowSpinnerOrError } = props;
 	if ( maybeShowSpinnerOrError ) {
 		return (
-			<WithDataLoadingGraphQLAPISelect { ...props } />
+			<WithDataLoadingEditableSelect { ...props } />
 		)
 	}
 	return (
-		<GraphQLAPISelect { ...props } />
+		<EditableSelect { ...props } />
 	);
 }
 
-export default MaybeWithDataLoadingGraphQLAPISelect;
+export default MaybeWithDataLoadingEditableSelect;
