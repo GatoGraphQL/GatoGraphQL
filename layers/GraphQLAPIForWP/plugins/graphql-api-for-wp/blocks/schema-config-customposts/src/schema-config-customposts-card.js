@@ -11,6 +11,7 @@ import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-l
 import {
 	InfoTooltip,
 	withCard,
+	withCustomizableConfiguration,
 	withEditableOnFocus,
 	EditableSelect,
 } from '@graphqlapi/components';
@@ -66,6 +67,7 @@ export default compose( [
 		className: 'graphql-api-customposts',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
+	withCustomizableConfiguration(),
 	withEditableOnFocus(),
 	withCard(),
 ] )( SchemaConfigCustomPostsCard );
