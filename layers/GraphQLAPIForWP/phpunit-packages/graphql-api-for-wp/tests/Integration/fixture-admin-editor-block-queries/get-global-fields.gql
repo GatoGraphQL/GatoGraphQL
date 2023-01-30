@@ -1,9 +1,0 @@
-query GetGlobalFields {
-  __schema {
-    globalFields(
-      includeDeprecated: true
-    ) {
-      name
-    }
-  }
-}
