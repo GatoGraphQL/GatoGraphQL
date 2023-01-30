@@ -12,7 +12,7 @@ import {
 	InfoTooltip,
 	withCard,
 	withEditableOnFocus,
-	SelectCard,
+	EditableSelect,
 } from '@graphqlapi/components';
 
 const SchemaConfigCustomPostsCard = ( props ) => {
@@ -46,7 +46,7 @@ const SchemaConfigCustomPostsCard = ( props ) => {
 				{ ...props }
 				text={ __('Select the custom post types that can be queried. A custom post type will be represented by its own type in the schema (such as Post or Page) or, otherwise, via GenericCustomPost.', 'graphql-api') }
 			/>
-			<SelectCard
+			<EditableSelect
 				{ ...props }
 				attributeName="includedCustomPostTypes"
 				options={ options }
