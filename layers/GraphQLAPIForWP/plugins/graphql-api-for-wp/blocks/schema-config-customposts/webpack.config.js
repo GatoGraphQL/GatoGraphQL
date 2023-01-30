@@ -1,7 +1,7 @@
 /**
  * Define constants
  */
-const MODULE = 'customposts';
+const MODULE = 'schema-customposts';
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
