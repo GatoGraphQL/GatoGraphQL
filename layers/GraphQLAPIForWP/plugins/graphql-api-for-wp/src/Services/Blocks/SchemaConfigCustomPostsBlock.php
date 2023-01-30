@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
 
 class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigBlock
 {
@@ -12,6 +13,18 @@ class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigBlock
     use OptionsBlockTrait;
 
     public final const ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES = 'includedCustomPostTypes';
+
+    private ?WPDataModelProviderInterface $wpDataModelProvider = null;
+
+    final public function setWPDataModelProvider(WPDataModelProviderInterface $wpDataModelProvider): void
+    {
+        $this->wpDataModelProvider = $wpDataModelProvider;
+    }
+    final protected function getWPDataModelProvider(): WPDataModelProviderInterface
+    {
+        /** @var WPDataModelProviderInterface */
+        return $this->wpDataModelProvider ??= $this->instanceManager->getInstance(WPDataModelProviderInterface::class);
+    }
 
     protected function getBlockName(): string
     {
@@ -38,7 +51,7 @@ class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigBlock
         return array_merge(
             parent::getLocalizedData(),
             [
-                'possibleCustomPostTypes' => ['@complete']
+                'possibleCustomPostTypes' => $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes(),
             ]
         );
     }
