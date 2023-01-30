@@ -92,7 +92,9 @@ const EditableSelect = ( props ) => {
 				</div>
 			) }
 			{ !isSelected && !value.length && (
-				<em>{ __('(not set)', 'graphql-api') }</em>
+				<div className={ `${ className }__not-set ${ componentClassName }__not-set` }>
+					<em>{ __('(not set)', 'graphql-api') }</em>
+				</div>
 			) }
 		</>
 	)
