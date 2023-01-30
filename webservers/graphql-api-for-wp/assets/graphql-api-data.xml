@@ -1440,7 +1440,9 @@ video/mp4
 
 <!-- wp:graphql-api/schema-config-namespacing /-->
 
-<!-- wp:graphql-api/schema-config-self-fields /-->]]></content:encoded>
+<!-- wp:graphql-api/schema-config-self-fields /-->
+
+<!-- wp:graphql-api/schema-config-customposts /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>191</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:03:18]]></wp:post_date>
@@ -1470,7 +1472,9 @@ video/mp4
 
 <!-- wp:graphql-api/schema-config-namespacing /-->
 
-<!-- wp:graphql-api/schema-config-self-fields /-->]]></content:encoded>
+<!-- wp:graphql-api/schema-config-self-fields /-->
+
+<!-- wp:graphql-api/schema-config-customposts /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>193</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:03:47]]></wp:post_date>
@@ -1525,7 +1529,9 @@ video/mp4
 
 <!-- wp:graphql-api/schema-config-namespacing /-->
 
-<!-- wp:graphql-api/schema-config-self-fields /-->]]></content:encoded>
+<!-- wp:graphql-api/schema-config-self-fields /-->
+
+<!-- wp:graphql-api/schema-config-customposts /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>261</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-21 06:26:40]]></wp:post_date>
@@ -1585,7 +1591,9 @@ video/mp4
 
 <!-- wp:graphql-api/schema-config-namespacing /-->
 
-<!-- wp:graphql-api/schema-config-self-fields /-->]]></content:encoded>
+<!-- wp:graphql-api/schema-config-self-fields /-->
+
+<!-- wp:graphql-api/schema-config-customposts /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>304</wp:post_id>
 		<wp:post_date><![CDATA[2022-05-06 10:21:47]]></wp:post_date>
@@ -1648,7 +1656,9 @@ video/mp4
 
 <!-- wp:graphql-api/schema-config-namespacing /-->
 
-<!-- wp:graphql-api/schema-config-self-fields /-->]]></content:encoded>
+<!-- wp:graphql-api/schema-config-self-fields /-->
+
+<!-- wp:graphql-api/schema-config-customposts /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>588</wp:post_id>
 		<wp:post_date><![CDATA[2022-10-05 06:47:18]]></wp:post_date>
