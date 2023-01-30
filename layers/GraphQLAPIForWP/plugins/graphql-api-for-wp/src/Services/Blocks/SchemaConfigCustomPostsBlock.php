@@ -52,6 +52,7 @@ class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigBlock
             parent::getLocalizedData(),
             [
                 'possibleCustomPostTypes' => $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes(),
+                'defaultCustomPostTypes' => ['post', 'page'],
             ]
         );
     }
