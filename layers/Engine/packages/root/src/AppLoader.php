@@ -473,14 +473,17 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
-     * Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components,
-     * for them to execute any custom extra logic.
+     * Trigger "moduleLoaded", "preBoot", "boot" and "afterBoot"
+     * events on all the Components, for them to execute
+     * any custom extra logic.
      */
     public function bootApplicationModules(): void
     {
         $appStateManager = App::getAppStateManager();
         $appStateManager->initializeAppState($this->initialAppState);
         $moduleManager = App::getModuleManager();
+        // Allow to execute the SchemaConfigurator in this event
+        $moduleManager->preBoot();
         $moduleManager->boot();
         /**
          * After the services have been initialized, we can then parse the GraphQL query.

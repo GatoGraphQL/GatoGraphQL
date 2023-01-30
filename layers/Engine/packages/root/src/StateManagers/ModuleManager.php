@@ -88,6 +88,19 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Boot all modules
      */
+    public function preBoot(): void
+    {
+        foreach ($this->modules as $module) {
+            if (!$module->isEnabled()) {
+                continue;
+            }
+            $module->preBoot();
+        }
+    }
+
+    /**
+     * Boot all modules
+     */
     public function boot(): void
     {
         foreach ($this->modules as $module) {
