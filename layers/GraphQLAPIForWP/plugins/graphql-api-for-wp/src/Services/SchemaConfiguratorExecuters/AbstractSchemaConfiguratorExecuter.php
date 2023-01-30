@@ -15,7 +15,7 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
 
     public function getInstantiationEvent(): string
     {
-        return ApplicationEvents::BOOT;
+        return ApplicationEvents::PRE_BOOT;
     }
 
     /**
