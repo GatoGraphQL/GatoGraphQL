@@ -87,6 +87,19 @@ class Module extends AbstractModule
     /**
      * Function called by the Bootloader after all components have been loaded
      */
+    public function preBoot(): void
+    {
+        // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass
+        /**
+         * @var ServiceInstantiatorInterface
+         */
+        $serviceInstantiator = App::getContainer()->get(ServiceInstantiatorInterface::class);
+        $serviceInstantiator->initializeServices(ApplicationEvents::PRE_BOOT);
+    }
+
+    /**
+     * Function called by the Bootloader after all components have been loaded
+     */
     public function boot(): void
     {
         // Initialize container services through AutomaticallyInstantiatedServiceCompilerPass

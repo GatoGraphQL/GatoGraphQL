@@ -92,6 +92,11 @@ interface ModuleInterface
     /**
      * Function called by the Bootloader when booting the system
      */
+    public function preBoot(): void;
+
+    /**
+     * Function called by the Bootloader when booting the system
+     */
     public function boot(): void;
 
     /**
