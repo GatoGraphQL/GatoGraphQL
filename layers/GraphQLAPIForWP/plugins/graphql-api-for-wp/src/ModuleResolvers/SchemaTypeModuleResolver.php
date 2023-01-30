@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
@@ -69,16 +70,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public final const OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA = 'treat-user-email-as-admin-data';
     public final const OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA = 'treat-user-role-as-admin-data';
     public final const OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA = 'treat-user-capability-as-admin-data';
-
-    /**
-     * Hooks
-     */
-    public final const HOOK_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':queryable-custompost-types';
-    public final const HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-queryable-custompost-types';
-    public final const HOOK_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':queryable-tag-taxonomies';
-    public final const HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':rejected-queryable-tag-taxonomies';
-    public final const HOOK_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':queryable-category-taxonomies';
-    public final const HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':rejected-queryable-category-taxonomies';
 
     /**
      * This comment used to be valid when using `autowire` functions
@@ -687,7 +678,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $this->getCustomPostTypeRegistry()->getCustomPostTypes()
                 );
                 $rejectedQueryableCustomPostTypes = \apply_filters(
-                    self::HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
+                    HookNames::HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
                     array_merge(
                         /**
                          * Post Types from GraphQL API are just for configuration
@@ -715,7 +706,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ));
                 // Allow plugins to further remove unwanted custom post types
                 $possibleCustomPostTypes = \apply_filters(
-                    self::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
+                    HookNames::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
                     $possibleCustomPostTypes
                 );
                 sort($possibleCustomPostTypes);
@@ -809,7 +800,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $this->getTaxonomyRegistry()->getTaxonomies(false)
                 );
                 $rejectedQueryableTagTaxonomies = \apply_filters(
-                    self::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
+                    HookNames::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
                     []
                 );
                 $possibleTagTaxonomies = array_values(array_diff(
@@ -819,7 +810,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ));
                 // Allow plugins to further remove unwanted custom post types
                 $possibleTagTaxonomies = \apply_filters(
-                    self::HOOK_QUERYABLE_TAG_TAXONOMIES,
+                    HookNames::HOOK_QUERYABLE_TAG_TAXONOMIES,
                     $possibleTagTaxonomies
                 );
                 sort($possibleTagTaxonomies);
@@ -877,7 +868,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $this->getTaxonomyRegistry()->getTaxonomies(true)
                 );
                 $rejectedQueryableCategoryTaxonomies = \apply_filters(
-                    self::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
+                    HookNames::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
                     []
                 );
                 $possibleCategoryTaxonomies = array_values(array_diff(
@@ -887,7 +878,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ));
                 // Allow plugins to further remove unwanted custom post types
                 $possibleCategoryTaxonomies = \apply_filters(
-                    self::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
+                    HookNames::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
                     $possibleCategoryTaxonomies
                 );
                 sort($possibleCategoryTaxonomies);
