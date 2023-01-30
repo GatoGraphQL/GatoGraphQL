@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
-const defaultCustomPostTypes = window.graphQLAPISchemaConfigCustomPosts ? window.graphQLAPISchemaConfigCustomPosts.defaultCustomPostTypes : [];
+const defaultCustomPostTypes = window.graphqlApiSchemaConfigCustomposts ? window.graphqlApiSchemaConfigCustomposts.defaultCustomPostTypes : [];
 
 /**
  * Every block starts by registering a new block type definition.
@@ -89,7 +89,7 @@ registerBlockType( 'graphql-api/schema-config-customposts', {
 	 * @return {WPElement} Element to render.
 	 */
 	edit(props) {
-		const possibleCustomPostTypes = window.graphQLAPISchemaConfigCustomPosts ? window.graphQLAPISchemaConfigCustomPosts.possibleCustomPostTypes : [];
+		const possibleCustomPostTypes = window.graphqlApiSchemaConfigCustomposts ? window.graphqlApiSchemaConfigCustomposts.possibleCustomPostTypes : [];
 		return <EditBlock
 			possibleCustomPostTypes={ possibleCustomPostTypes }
 			{ ...props }
