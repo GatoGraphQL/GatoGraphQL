@@ -28,7 +28,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     /**
      * @return string[]
      */
-    public function getPossibleCustomPostTypes(): array
+    public function getFilteredNonGraphQLAPIPluginCustomPostTypes(): array
     {
         // Get the list of custom post types from the system
         $possibleCustomPostTypes = \get_post_types();

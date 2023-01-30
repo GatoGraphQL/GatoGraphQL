@@ -666,7 +666,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ];
 
             if ($module === self::SCHEMA_CUSTOMPOSTS) {
-                $possibleCustomPostTypes = $this->getWPDataModelProvider()->getPossibleCustomPostTypes();
+                $possibleCustomPostTypes = $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes();
                 // The possible values must have key and value
                 $possibleValues = [];
                 foreach ($possibleCustomPostTypes as $value) {

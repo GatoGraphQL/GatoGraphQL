@@ -9,5 +9,5 @@ interface WPDataModelProviderInterface
     /**
      * @return string[]
      */
-    public function getPossibleCustomPostTypes(): array;
+    public function getFilteredNonGraphQLAPIPluginCustomPostTypes(): array;
 }
