@@ -67,7 +67,7 @@ export default compose( [
 		className: 'graphql-api-customposts',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withCustomizableConfiguration(),
 	withEditableOnFocus(),
 	withCard(),
+	withCustomizableConfiguration(),
 ] )( SchemaConfigCustomPostsCard );
