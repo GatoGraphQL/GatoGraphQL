@@ -18,7 +18,15 @@ import './style.scss';
 const GetLabelForNotFoundValue = ( val ) => val;
 
 const GraphQLAPISelect = ( props ) => {
-	const { options, defaultValue, className, setAttributes, isSelected, attributes, attributeName } = props;
+	const {
+		options,
+		defaultValue,
+		className,
+		setAttributes,
+		isSelected,
+		attributes,
+		attributeName
+	} = props;
 	/**
 	 * Optional props
 	 */
