@@ -17,6 +17,8 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
+const defaultCustomPostTypes = window.graphQLAPISchemaConfigCustomPosts ? window.graphQLAPISchemaConfigCustomPosts.defaultCustomPostTypes : [];
+
 /**
  * Every block starts by registering a new block type definition.
  *
@@ -60,7 +62,7 @@ registerBlockType( 'graphql-api/schema-config-customposts', {
 		 */
 		includedCustomPostTypes: {
 			type: 'array',
-			default: [],
+			default: defaultCustomPostTypes,
 		},
 	},
 
