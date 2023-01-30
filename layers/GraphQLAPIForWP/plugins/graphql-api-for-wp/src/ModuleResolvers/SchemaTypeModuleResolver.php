@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\Constants\ConfigurationDefaultValues;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
@@ -518,7 +519,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
-                ModuleSettingOptions::CUSTOMPOST_TYPES => ['post', 'page'],
+                ModuleSettingOptions::CUSTOMPOST_TYPES => ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES,
             ],
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
