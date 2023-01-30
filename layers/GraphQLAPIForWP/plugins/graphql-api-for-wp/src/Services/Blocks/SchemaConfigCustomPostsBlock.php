@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\Constants\ConfigurationDefaultValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
 
@@ -52,7 +53,7 @@ class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigBlock
             parent::getLocalizedData(),
             [
                 'possibleCustomPostTypes' => $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes(),
-                'defaultCustomPostTypes' => ['post', 'page'],
+                'defaultCustomPostTypes' => ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES,
             ]
         );
     }
