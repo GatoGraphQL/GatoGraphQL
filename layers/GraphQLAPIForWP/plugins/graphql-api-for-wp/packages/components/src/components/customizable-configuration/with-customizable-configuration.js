@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE,
 	ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_APPLY,
-} from './mutation-scheme-values';
+} from './customizable-configuration-values';
 
 const withCustomizableConfiguration = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
