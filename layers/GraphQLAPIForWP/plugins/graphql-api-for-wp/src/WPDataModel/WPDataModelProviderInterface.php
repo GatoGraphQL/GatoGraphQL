@@ -6,4 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\WPDataModel;
 
 interface WPDataModelProviderInterface
 {
+    /**
+     * @return string[]
+     */
+    public function getPossibleCustomPostTypes(): array;
 }

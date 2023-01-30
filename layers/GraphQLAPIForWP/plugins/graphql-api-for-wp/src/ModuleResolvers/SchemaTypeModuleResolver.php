@@ -10,10 +10,9 @@ use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
@@ -99,7 +98,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     private ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver = null;
     private ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
-    private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
+    private ?WPDataModelProviderInterface $wpDataModelProvider = null;
     private ?TaxonomyRegistryInterface $taxonomyRegistry = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -247,14 +246,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var UserObjectTypeResolver */
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
-    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
+    final public function setWPDataModelProvider(WPDataModelProviderInterface $wpDataModelProvider): void
     {
-        $this->customPostTypeRegistry = $customPostTypeRegistry;
+        $this->wpDataModelProvider = $wpDataModelProvider;
     }
-    final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
+    final protected function getWPDataModelProvider(): WPDataModelProviderInterface
     {
-        /** @var CustomPostTypeRegistryInterface */
-        return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+        /** @var WPDataModelProviderInterface */
+        return $this->wpDataModelProvider ??= $this->instanceManager->getInstance(WPDataModelProviderInterface::class);
     }
     final public function setTaxonomyRegistry(TaxonomyRegistryInterface $taxonomyRegistry): void
     {
@@ -667,49 +666,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ];
 
             if ($module === self::SCHEMA_CUSTOMPOSTS) {
-                // Get the list of custom post types from the system
-                $possibleCustomPostTypes = \get_post_types();
-                /**
-                 * Not all custom post types make sense or are allowed.
-                 * Remove the ones that do not
-                 */
-                $pluginCustomPostTypes = array_map(
-                    fn (CustomPostTypeInterface $customPostType) => $customPostType->getCustomPostType(),
-                    $this->getCustomPostTypeRegistry()->getCustomPostTypes()
-                );
-                $rejectedQueryableCustomPostTypes = \apply_filters(
-                    HookNames::HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
-                    array_merge(
-                        /**
-                         * Post Types from GraphQL API are just for configuration
-                         * and contain private data
-                         */
-                        $pluginCustomPostTypes,
-                        /**
-                         * WordPress internal CPTs.
-                         *
-                         * Watch out: Attachment has post_status "inherit",
-                         * which is by default not included in the "status"
-                         * filter, so the query must make it explicit:
-                         * `filter: { status: ["inherit"] }`.
-                         *
-                         * Similar with Revision and status "auto-draft"
-                         */
-                        $this->removeWordPressInternalCustomPostTypes()
-                            ? $this->getWordPressInternalCustomPostTypes()
-                            : []
-                    )
-                );
-                $possibleCustomPostTypes = array_values(array_diff(
-                    $possibleCustomPostTypes,
-                    $rejectedQueryableCustomPostTypes
-                ));
-                // Allow plugins to further remove unwanted custom post types
-                $possibleCustomPostTypes = \apply_filters(
-                    HookNames::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
-                    $possibleCustomPostTypes
-                );
-                sort($possibleCustomPostTypes);
+                $possibleCustomPostTypes = $this->getWPDataModelProvider()->getPossibleCustomPostTypes();
                 // The possible values must have key and value
                 $possibleValues = [];
                 foreach ($possibleCustomPostTypes as $value) {
@@ -1117,33 +1074,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         }
 
         return $moduleSettings;
-    }
-
-    protected function removeWordPressInternalCustomPostTypes(): bool
-    {
-        return false;
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getWordPressInternalCustomPostTypes(): array
-    {
-        return [
-            'attachment',
-            'custom_css',
-            'customize_changeset',
-            'nav_menu_item',
-            'oembed_cache',
-            'revision',
-            'user_request',
-            'wp_area',
-            'wp_block',
-            'wp_global_styles',
-            'wp_navigation',
-            'wp_template_part',
-            'wp_template',
-        ];
     }
 
     /**
