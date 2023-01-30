@@ -41,17 +41,21 @@ const SchemaConfigCustomPostsCard = ( props ) => {
 	) );
 	return (
 		<>
-			<em>{ __('Included custom post types:', 'graphql-api') }</em>
-			<InfoTooltip
-				{ ...props }
-				text={ __('Select the custom post types that can be queried. A custom post type will be represented by its own type in the schema (such as Post or Page) or, otherwise, via GenericCustomPost.', 'graphql-api') }
-			/>
-			<EditableSelect
-				{ ...props }
-				attributeName="includedCustomPostTypes"
-				options={ options }
-				defaultValue={ defaultValue }
-			/>
+			<div>
+				<span>
+					<em>{ __('Included custom post types:', 'graphql-api') }</em>
+					<InfoTooltip
+						{ ...props }
+						text={ __('Select the custom post types that can be queried. A custom post type will be represented by its own type in the schema (such as Post or Page) or, otherwise, via GenericCustomPost.', 'graphql-api') }
+					/>
+				</span>
+				<EditableSelect
+					{ ...props }
+					attributeName="includedCustomPostTypes"
+					options={ options }
+					defaultValue={ defaultValue }
+				/>
+			</div>
 		</>
 	);
 }
