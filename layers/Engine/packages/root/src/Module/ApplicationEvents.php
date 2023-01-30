@@ -7,6 +7,7 @@ namespace PoP\Root\Module;
 class ApplicationEvents
 {
     public final const MODULE_LOADED = 'moduleLoaded';
+    public final const PRE_BOOT = 'preBoot';
     public final const BOOT = 'boot';
     public final const AFTER_BOOT = 'afterBoot';
 }
