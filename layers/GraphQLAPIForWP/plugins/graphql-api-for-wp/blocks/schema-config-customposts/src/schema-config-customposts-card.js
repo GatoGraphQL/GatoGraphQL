@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RadioControl } from '@wordpress/components';
 import { compose, withState } from '@wordpress/compose';
 
 /**
@@ -13,13 +12,12 @@ import {
 	InfoTooltip,
 	withCard,
 	withEditableOnFocus,
+	SelectCard,
 } from '@graphqlapi/components';
 
 const SchemaConfigCustomPostsCard = ( props ) => {
 	const {
 		possibleCustomPostTypes,
-		isSelected,
-		setAttributes,
 		attributes: {
 			includedCustomPostTypes,
 		},
@@ -30,7 +28,17 @@ const SchemaConfigCustomPostsCard = ( props ) => {
 			value: customPostType,
 		}
 	) );
-	const optionValues = options.map( option => option.value );
+	/**
+	 * React Select expects to pass the same elements from the options as defaultValue,
+	 * including the label
+	 * { value: ..., label: ... },
+	 */
+	const defaultValue = includedCustomPostTypes.map( customPostType => (
+		{
+			label: customPostType,
+			value: customPostType,
+		}
+	) );
 	return (
 		<>
 			<em>{ __('Included custom post types', 'graphql-api') }</em>
@@ -38,29 +46,12 @@ const SchemaConfigCustomPostsCard = ( props ) => {
 				{ ...props }
 				text={ __('Select the custom post types that can be queried. A custom post type will be represented by its own type in the schema (such as Post or Page) or, otherwise, via GenericCustomPost.', 'graphql-api') }
 			/>
-			{ !isSelected && (
-				<>
-					<br />
-					{ ( includedCustomPostTypes == '@complete' || !optionValues.includes(includedCustomPostTypes) ) &&
-						<span>🟡 { __('@Complete', 'graphql-api') }</span>
-					}
-					{ includedCustomPostTypes == '@complete' &&
-						<span>❌ { __('@Complete', 'graphql-api') }</span>
-					}
-				</>
-			) }
-			{ isSelected &&
-				<RadioControl
-					{ ...props }
-					options={ options }
-					selected={ includedCustomPostTypes }
-					onChange={ newValue => (
-						setAttributes( {
-							includedCustomPostTypes: newValue
-						} )
-					)}
-				/>
-			}
+			<SelectCard
+				{ ...props }
+				attributeName="includedCustomPostTypes"
+				options={ options }
+				defaultValue={ defaultValue }
+			/>
 		</>
 	);
 }
