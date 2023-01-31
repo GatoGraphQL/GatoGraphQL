@@ -29,7 +29,6 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 				value: 'true',
 			},
 		];
-		const optionValues = options.map( option => option.value );
 		return (
 			<div className={ componentClassName }>
 				<div className="customizable-configuration-header">
