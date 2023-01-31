@@ -22,7 +22,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(customizeConfiguration) }`;
 		const options = [
 			{
-				label: __('Use default configuration from Settings', 'graphql-api'),
+				label: __('Use configuration from Settings', 'graphql-api'),
 				value: 'false',
 			},
 			{
@@ -42,7 +42,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 						<>
 							<br />
 							{ ! customizeConfiguration &&
-								<span>🟡 { __('Use default configuration from Settings', 'graphql-api') }</span>
+								<span>🟡 { __('Use configuration from Settings', 'graphql-api') }</span>
 							}
 							{ customizeConfiguration &&
 								<span>🟢 { __('Use custom configuration', 'graphql-api') }</span>
