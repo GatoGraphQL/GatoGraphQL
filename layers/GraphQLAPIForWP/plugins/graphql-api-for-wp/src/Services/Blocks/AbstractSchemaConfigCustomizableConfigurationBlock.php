@@ -34,7 +34,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
                     %s
                 </div>
                 <hr/>
-                <div class="customizable-configuration-body" style="pointer-events: none; opacity: 0.4;">
+                <div class="customizable-configuration-body" style="%s">
                     %s
                 </div>
             </div>
@@ -45,6 +45,11 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
             $className . '__title',
             $this->getBlockTitle(),
             $blockContent,
+            /**
+             * Hardcode style to disable the inputs, same as style in block.
+             * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/packages/components/src/components/base-styles/_mixins.scss
+             */
+            $customizeConfiguration ? '' : 'pointer-events: none; opacity: 0.4;',
             $this->doRenderBlock($attributes, $content)
         );
     }
