@@ -22,7 +22,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
         $blockContent = sprintf(
             $blockContentPlaceholder,
             $this->__('Customize configuration, or use default from Settings?', 'graphql-api'),
-            $customizeConfiguration
+            !$customizeConfiguration
                 ? sprintf('🟡 %s', $this->__('Use configuration from Settings', 'graphql-api'))
                 : sprintf('🟢 %s', $this->__('Use custom configuration', 'graphql-api'))
         );
