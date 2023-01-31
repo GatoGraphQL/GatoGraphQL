@@ -18,7 +18,8 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 			className,
 			setAttributes,
 			attributes: {
-				applyCustomizableConfiguration,
+				// `null` => `false`
+				applyCustomizableConfiguration = false,
 			},
 		} = props;
 		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(!! applyCustomizableConfiguration) }`;
