@@ -9,6 +9,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Docs for modules "Tags" and "Categories"
+- Configure several modules via the Schema Configuration:
+  - Custom Posts
 
 ## 0.9.9 - 16/01/2013
 
