@@ -1,5 +1,5 @@
 {
-	"name": "schema-config-customposts",
+	"name": "schema-config-schema-customposts",
 	"version": "0.1.0",
 	"description": "Configure custom post types in the the Schema Configuration",
 	"author": "Leonardo Losoviz",

@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ConfigurationDefaultValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
 
-class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigCustomizableConfigurationBlock
+class SchemaConfigSchemaCustomPostsBlock extends AbstractSchemaConfigCustomizableConfigurationBlock
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
@@ -29,7 +29,7 @@ class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigCustomizableConfi
 
     protected function getBlockName(): string
     {
-        return 'schema-config-customposts';
+        return 'schema-config-schema-customposts';
     }
 
     public function getBlockPriority(): int

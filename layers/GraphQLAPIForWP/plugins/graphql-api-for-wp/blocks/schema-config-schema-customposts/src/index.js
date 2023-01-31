@@ -24,7 +24,7 @@ const defaultCustomPostTypes = window.graphqlApiSchemaConfigCustomposts ? window
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/schema-config-customposts', {
+registerBlockType( 'graphql-api/schema-config-schema-customposts', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
@@ -66,7 +66,7 @@ registerBlockType( 'graphql-api/schema-config-customposts', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES
 		 */
 		includedCustomPostTypes: {
 			type: 'array',

@@ -1,7 +1,7 @@
 /**
  * Application imports
  */
-import SchemaConfigCustomPostsCard from './schema-config-customposts-card';
+import SchemaConfigCustomPostsCard from './schema-config-schema-customposts-card';
 
 const EditBlock = ( props ) => {
 	const { className } = props;
