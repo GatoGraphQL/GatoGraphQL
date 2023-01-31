@@ -104,6 +104,14 @@ class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigBlock
     }
 
     /**
+     * Register index.css
+     */
+    protected function registerEditorCSS(): bool
+    {
+        return true;
+    }
+
+    /**
      * Add the locale language to the localized data?
      */
     protected function addLocalLanguage(): bool
