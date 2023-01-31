@@ -12,7 +12,7 @@ use PoP\Root\Services\BasicServiceTrait;
 class WPDataModelProvider implements WPDataModelProviderInterface
 {
     use BasicServiceTrait;
-    
+
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
     final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void

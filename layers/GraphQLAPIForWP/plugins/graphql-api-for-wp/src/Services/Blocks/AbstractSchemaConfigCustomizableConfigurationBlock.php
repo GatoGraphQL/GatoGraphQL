@@ -17,7 +17,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
         $className = $this->getBlockClassName() . '-front';
 
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
-        
+
         $customizeConfiguration = $attributes[self::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
         $blockContent = sprintf(
             $blockContentPlaceholder,
