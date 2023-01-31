@@ -3,6 +3,7 @@
  */
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { getEditableOnFocusComponentClass } from '../base-styles'
+import '../base-styles/editable-on-focus.scss';
 
 /**
  * Display an error message if loading data failed
