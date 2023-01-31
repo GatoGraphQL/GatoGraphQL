@@ -60,6 +60,14 @@ registerBlockType( 'graphql-api/schema-config-customposts', {
 		 * Same attribute name as defined in
 		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES
 		 */
+		customizeConfiguration: {
+			type: 'boolean',
+			default: false,
+		},
+		/**
+		 * Same attribute name as defined in
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES
+		 */
 		includedCustomPostTypes: {
 			type: 'array',
 			default: defaultCustomPostTypes,

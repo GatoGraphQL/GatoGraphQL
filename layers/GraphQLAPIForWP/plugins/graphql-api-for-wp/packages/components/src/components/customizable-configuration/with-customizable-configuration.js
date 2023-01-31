@@ -15,10 +15,10 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 			setAttributes,
 			attributes: {
 				// `null` => `false`
-				applyCustomizableConfiguration = false,
+				customizeConfiguration = false,
 			},
 		} = props;
-		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(!! applyCustomizableConfiguration) }`;
+		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(!! customizeConfiguration) }`;
 		const options = [
 			{
 				label: __('Use default configuration from Settings', 'graphql-api'),
@@ -41,10 +41,10 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 					{ !isSelected && (
 						<>
 							<br />
-							{ ! applyCustomizableConfiguration &&
+							{ ! customizeConfiguration &&
 								<span>🟡 { __('Use default configuration from Settings', 'graphql-api') }</span>
 							}
-							{ applyCustomizableConfiguration &&
+							{ customizeConfiguration &&
 								<span>🟢 { __('Use custom configuration', 'graphql-api') }</span>
 							}
 						</>
@@ -53,10 +53,10 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 						<RadioControl
 							{ ...props }
 							options={ options }
-							selected={ applyCustomizableConfiguration }
+							selected={ customizeConfiguration }
 							onChange={ newValue => (
 								setAttributes( {
-									applyCustomizableConfiguration: newValue
+									customizeConfiguration: newValue
 								} )
 							)}
 						/>
