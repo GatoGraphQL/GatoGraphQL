@@ -43,6 +43,9 @@ services:
     GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface:
         class: \GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizer
 
+    GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface:
+        class: \GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProvider
+
     GraphQLAPI\GraphQLAPI\Services\:
         resource: ../src/Services/*
 

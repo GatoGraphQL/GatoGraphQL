@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\Constants\ConfigurationDefaultValues;
+use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
@@ -71,16 +72,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public final const OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA = 'treat-user-capability-as-admin-data';
 
     /**
-     * Hooks
-     */
-    public final const HOOK_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':queryable-custompost-types';
-    public final const HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-queryable-custompost-types';
-    public final const HOOK_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':queryable-tag-taxonomies';
-    public final const HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':rejected-queryable-tag-taxonomies';
-    public final const HOOK_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':queryable-category-taxonomies';
-    public final const HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':rejected-queryable-category-taxonomies';
-
-    /**
      * This comment used to be valid when using `autowire` functions
      * to automatically inject all services. Since migrating to lazy getters,
      * this same behavior is implicitly covered.
@@ -108,7 +99,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     private ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver = null;
     private ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
-    private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
+    private ?WPDataModelProviderInterface $wpDataModelProvider = null;
     private ?TaxonomyRegistryInterface $taxonomyRegistry = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -256,14 +247,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         /** @var UserObjectTypeResolver */
         return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
     }
-    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
+    final public function setWPDataModelProvider(WPDataModelProviderInterface $wpDataModelProvider): void
     {
-        $this->customPostTypeRegistry = $customPostTypeRegistry;
+        $this->wpDataModelProvider = $wpDataModelProvider;
     }
-    final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
+    final protected function getWPDataModelProvider(): WPDataModelProviderInterface
     {
-        /** @var CustomPostTypeRegistryInterface */
-        return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+        /** @var WPDataModelProviderInterface */
+        return $this->wpDataModelProvider ??= $this->instanceManager->getInstance(WPDataModelProviderInterface::class);
     }
     final public function setTaxonomyRegistry(TaxonomyRegistryInterface $taxonomyRegistry): void
     {
@@ -528,7 +519,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
-                ModuleSettingOptions::CUSTOMPOST_TYPES => ['post', 'page'],
+                ModuleSettingOptions::CUSTOMPOST_TYPES => ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES,
             ],
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -676,49 +667,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ];
 
             if ($module === self::SCHEMA_CUSTOMPOSTS) {
-                // Get the list of custom post types from the system
-                $possibleCustomPostTypes = \get_post_types();
-                /**
-                 * Not all custom post types make sense or are allowed.
-                 * Remove the ones that do not
-                 */
-                $pluginCustomPostTypes = array_map(
-                    fn (CustomPostTypeInterface $customPostType) => $customPostType->getCustomPostType(),
-                    $this->getCustomPostTypeRegistry()->getCustomPostTypes()
-                );
-                $rejectedQueryableCustomPostTypes = \apply_filters(
-                    self::HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
-                    array_merge(
-                        /**
-                         * Post Types from GraphQL API are just for configuration
-                         * and contain private data
-                         */
-                        $pluginCustomPostTypes,
-                        /**
-                         * WordPress internal CPTs.
-                         *
-                         * Watch out: Attachment has post_status "inherit",
-                         * which is by default not included in the "status"
-                         * filter, so the query must make it explicit:
-                         * `filter: { status: ["inherit"] }`.
-                         *
-                         * Similar with Revision and status "auto-draft"
-                         */
-                        $this->removeWordPressInternalCustomPostTypes()
-                            ? $this->getWordPressInternalCustomPostTypes()
-                            : []
-                    )
-                );
-                $possibleCustomPostTypes = array_values(array_diff(
-                    $possibleCustomPostTypes,
-                    $rejectedQueryableCustomPostTypes
-                ));
-                // Allow plugins to further remove unwanted custom post types
-                $possibleCustomPostTypes = \apply_filters(
-                    self::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
-                    $possibleCustomPostTypes
-                );
-                sort($possibleCustomPostTypes);
+                $possibleCustomPostTypes = $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes();
                 // The possible values must have key and value
                 $possibleValues = [];
                 foreach ($possibleCustomPostTypes as $value) {
@@ -734,7 +683,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Included custom post types', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
                         $this->getPostObjectTypeResolver()->getTypeName(),
                         $this->getPageObjectTypeResolver()->getTypeName(),
@@ -809,7 +758,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $this->getTaxonomyRegistry()->getTaxonomies(false)
                 );
                 $rejectedQueryableTagTaxonomies = \apply_filters(
-                    self::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
+                    HookNames::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
                     []
                 );
                 $possibleTagTaxonomies = array_values(array_diff(
@@ -819,7 +768,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ));
                 // Allow plugins to further remove unwanted custom post types
                 $possibleTagTaxonomies = \apply_filters(
-                    self::HOOK_QUERYABLE_TAG_TAXONOMIES,
+                    HookNames::HOOK_QUERYABLE_TAG_TAXONOMIES,
                     $possibleTagTaxonomies
                 );
                 sort($possibleTagTaxonomies);
@@ -854,7 +803,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                                 \__('non-', 'graphql-api'),
                                 \__('tag', 'graphql-api'),
                             ),
-                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
                         ),
                         $this->getTagUnionTypeResolver()->getTypeName(),
                         $this->getPostTagObjectTypeResolver()->getTypeName(),
@@ -877,7 +826,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $this->getTaxonomyRegistry()->getTaxonomies(true)
                 );
                 $rejectedQueryableCategoryTaxonomies = \apply_filters(
-                    self::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
+                    HookNames::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
                     []
                 );
                 $possibleCategoryTaxonomies = array_values(array_diff(
@@ -887,7 +836,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ));
                 // Allow plugins to further remove unwanted custom post types
                 $possibleCategoryTaxonomies = \apply_filters(
-                    self::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
+                    HookNames::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
                     $possibleCategoryTaxonomies
                 );
                 sort($possibleCategoryTaxonomies);
@@ -922,7 +871,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                                 '',
                                 \__('category', 'graphql-api'),
                             ),
-                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
+                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one', 'graphql-api'),
                         ),
                         $this->getCategoryUnionTypeResolver()->getTypeName(),
                         $this->getPostCategoryObjectTypeResolver()->getTypeName(),
@@ -1126,33 +1075,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         }
 
         return $moduleSettings;
-    }
-
-    protected function removeWordPressInternalCustomPostTypes(): bool
-    {
-        return false;
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getWordPressInternalCustomPostTypes(): array
-    {
-        return [
-            'attachment',
-            'custom_css',
-            'customize_changeset',
-            'nav_menu_item',
-            'oembed_cache',
-            'revision',
-            'user_request',
-            'wp_area',
-            'wp_block',
-            'wp_global_styles',
-            'wp_navigation',
-            'wp_template_part',
-            'wp_template',
-        ];
     }
 
     /**
