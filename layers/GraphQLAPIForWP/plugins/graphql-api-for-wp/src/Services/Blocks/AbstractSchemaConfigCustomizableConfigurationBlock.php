@@ -34,7 +34,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
                     %s
                 </div>
                 <hr/>
-                <div class="customizable-configuration-body">
+                <div class="customizable-configuration-body" style="pointer-events: none; opacity: 0.4;">
                     %s
                 </div>
             </div>
