@@ -62,12 +62,12 @@ const SchemaConfigCustomPostsCard = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Custom Posts', 'graphql-api'),
 		className: 'graphql-api-customposts',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 	withCustomizableConfiguration(),
 ] )( SchemaConfigCustomPostsCard );

@@ -1,0 +1,8 @@
+// @import '../base-styles/mixins.scss';
+
+// @include customizable-configuration();
+
+.customizable-configuration.is-applied-false > .customizable-configuration-body {
+    pointer-events: none;
+    opacity: 0.4;
+}

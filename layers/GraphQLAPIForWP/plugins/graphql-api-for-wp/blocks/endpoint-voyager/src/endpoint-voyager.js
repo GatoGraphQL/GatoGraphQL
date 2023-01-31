@@ -53,10 +53,10 @@ const EndpointVoyager = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Interactive Schema', 'graphql-api'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( EndpointVoyager );

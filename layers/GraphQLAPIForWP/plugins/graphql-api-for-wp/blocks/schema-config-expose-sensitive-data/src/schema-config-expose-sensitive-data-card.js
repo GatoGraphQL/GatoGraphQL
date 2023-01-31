@@ -80,11 +80,11 @@ const SchemaConfigExposeSensitiveDataCard = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Expose Sensitive Data in the Schema', 'graphql-api'),
 		className: 'graphql-api-schema-expose-sensitive-data',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( SchemaConfigExposeSensitiveDataCard );
