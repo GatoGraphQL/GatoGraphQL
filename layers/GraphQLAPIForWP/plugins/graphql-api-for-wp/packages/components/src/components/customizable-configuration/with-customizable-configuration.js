@@ -52,7 +52,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 						<RadioControl
 							{ ...props }
 							options={ options }
-							selected={ customizeConfiguration }
+							selected={ customizeConfiguration ? 'true' : 'false' }
 							onChange={ newValue => (
 								setAttributes( {
 									customizeConfiguration: newValue === true || newValue === 'true'
