@@ -6,7 +6,7 @@ import { RadioControl } from '@wordpress/components';
 import { InfoTooltip } from '../info-tooltip';
 import { __ } from '@wordpress/i18n';
 import { getCustomizableConfigurationComponentClass } from '../base-styles'
-import '../base-styles/customizable-configuration.scss';
+import './style.scss';
 
 const withCustomizableConfiguration = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
