@@ -60,6 +60,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 						)}
 					/>
 				}
+				<hr />
 				<div className="customizable-configuration-inner">
 					<WrappedComponent
 						{ ...props }
