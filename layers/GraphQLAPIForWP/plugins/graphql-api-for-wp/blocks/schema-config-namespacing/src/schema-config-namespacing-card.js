@@ -80,11 +80,11 @@ const SchemaConfigNamespacingCard = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Namespacing', 'graphql-api'),
 		className: 'graphql-api-namespacing',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( SchemaConfigNamespacingCard );

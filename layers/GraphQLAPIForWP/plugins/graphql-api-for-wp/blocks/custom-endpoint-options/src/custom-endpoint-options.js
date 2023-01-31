@@ -48,10 +48,10 @@ const CustomEndpointOptions = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Custom Endpoint Options', 'graphql-api'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( CustomEndpointOptions );

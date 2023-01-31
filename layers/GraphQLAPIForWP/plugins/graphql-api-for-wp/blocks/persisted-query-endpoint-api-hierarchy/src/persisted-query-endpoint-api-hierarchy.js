@@ -77,6 +77,7 @@ const PersistedQueryEndpointAPIHierarchy = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('API Hierarchy', 'graphql-api'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
@@ -89,6 +90,5 @@ export default compose( [
 			queryPostParent: getEditedPostAttribute( 'parent' ),
 		};
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( PersistedQueryEndpointAPIHierarchy );

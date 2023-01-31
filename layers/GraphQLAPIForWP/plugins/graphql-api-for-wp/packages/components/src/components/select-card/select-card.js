@@ -8,9 +8,9 @@ import { withCard } from '../card';
 import { EditableSelect } from '../editable-select';
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		className: 'graphql-api-select-card',
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( EditableSelect );

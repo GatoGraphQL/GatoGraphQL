@@ -84,10 +84,10 @@ const PersistedQueryEndpointOptions = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Persisted Query Options', 'graphql-api'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( PersistedQueryEndpointOptions );

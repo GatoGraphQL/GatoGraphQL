@@ -80,11 +80,11 @@ const SchemaConfigSelfFieldsCard = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Self Fields', 'graphql-api-pro'),
 		className: 'graphql-api-schema-self-fields',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( SchemaConfigSelfFieldsCard );

@@ -90,11 +90,11 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Mutation Scheme', 'graphql-api'),
 		className: 'graphql-api-mutation-scheme',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
-	withEditableOnFocus(),
 	withCard(),
 ] )( SchemaConfigMutationSchemeCard );
