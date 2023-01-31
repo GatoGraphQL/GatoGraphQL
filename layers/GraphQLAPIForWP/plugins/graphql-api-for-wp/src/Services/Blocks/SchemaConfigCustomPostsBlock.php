@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ConfigurationDefaultValues;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
 
-class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigBlock
+class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigCustomizableConfigurationBlock
 {
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
@@ -61,38 +61,27 @@ class SchemaConfigCustomPostsBlock extends AbstractSchemaConfigBlock
     /**
      * @param array<string,mixed> $attributes
      */
-    public function renderBlock(array $attributes, string $content): string
+    protected function doRenderBlock(array $attributes, string $content): string
     {
-        // Append "-front" because this style must be used only on the client, not on the admin
-        $className = $this->getBlockClassName() . '-front';
-
-        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
-
         $values = $attributes[self::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES] ?? [];
-        $blockContent = $values ?
-            sprintf(
-                '<p><strong>%s</strong></p><ul><li><code>%s</code></li></ul>',
-                $this->__('Included custom post types', 'graphql-api'),
-                implode('</code></li><li><code>', $values)
-            ) :
-            sprintf(
-                '<em>%s</em>',
-                \__('(not set)', 'graphql-api')
-            );
-
-        $blockContentPlaceholder = <<<EOT
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        EOT;
         return sprintf(
-            $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClassName(),
-            $className . '__title',
-            \__('Custom Posts', 'graphql-api'),
-            $blockContent
+            '<p><strong>%s</strong></p>%s',
+            $this->__('Included custom post types', 'graphql-api'),
+            $values ?
+                sprintf(
+                    '<ul><li><code>%s</code></li></ul>',
+                    implode('</code></li><li><code>', $values)
+                ) :
+                sprintf(
+                    '<p><em>%s</em></p>',
+                    \__('(not set)', 'graphql-api')
+                )
         );
+    }
+
+    protected function getBlockTitle(): string
+    {
+        return \__('Custom Posts', 'graphql-api');
     }
 
     /**

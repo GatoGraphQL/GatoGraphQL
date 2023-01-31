@@ -11,7 +11,7 @@ use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoP\Root\Module\ModuleConfigurationHelpers;
 
-class CustomPostsSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
+class CustomPostsSchemaConfigurationExecuter extends AbstractCustomizableConfigurationSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     private ?SchemaConfigCustomPostsBlock $schemaConfigCustomPostsBlock = null;
 
@@ -30,25 +30,26 @@ class CustomPostsSchemaConfigurationExecuter extends AbstractSchemaConfiguration
         return SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS;
     }
 
-    public function executeSchemaConfiguration(int $schemaConfigurationID): void
+    protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void
     {
         $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($schemaConfigBlockDataItem !== null) {
-            $includedCustomPostTypes = $schemaConfigBlockDataItem['attrs'][SchemaConfigCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES] ?? [];
-            /**
-             * Define the settings value through a hook.
-             * Execute last so it overrides the default settings
-             */
-            $hookName = ModuleConfigurationHelpers::getHookName(
-                CustomPostsModule::class,
-                CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES
-            );
-            \add_filter(
-                $hookName,
-                fn () => $includedCustomPostTypes,
-                PHP_INT_MAX
-            );
+        if ($schemaConfigBlockDataItem === null) {
+            return;
         }
+        $includedCustomPostTypes = $schemaConfigBlockDataItem['attrs'][SchemaConfigCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES] ?? [];
+        /**
+         * Define the settings value through a hook.
+         * Execute last so it overrides the default settings
+         */
+        $hookName = ModuleConfigurationHelpers::getHookName(
+            CustomPostsModule::class,
+            CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES
+        );
+        \add_filter(
+            $hookName,
+            fn () => $includedCustomPostTypes,
+            PHP_INT_MAX
+        );
     }
 
     protected function getBlock(): BlockInterface
