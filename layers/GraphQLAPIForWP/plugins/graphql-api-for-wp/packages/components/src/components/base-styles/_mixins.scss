@@ -1,12 +1,12 @@
-@mixin editable-on-focus() {
-	.editable-on-focus.is-selected-false:hover {
-		cursor: pointer;
-	}
-}
+// @mixin editable-on-focus() {
+// 	.editable-on-focus.is-selected-false:hover {
+// 		cursor: pointer;
+// 	}
+// }
 
-@mixin customizable-configuration() {
-	.customizable-configuration.is-applied-false > .customizable-configuration-body {
-		pointer-events: none;
-		opacity: 0.4;
-	}
-}
+// @mixin customizable-configuration() {
+// 	.customizable-configuration.is-applied-false > .customizable-configuration-body {
+// 		pointer-events: none;
+// 		opacity: 0.4;
+// 	}
+// }

@@ -1,3 +1,7 @@
-@import '../base-styles/mixins.scss';
+// @import '../base-styles/mixins.scss';
 
-@include editable-on-focus();
+// @include editable-on-focus();
+
+.editable-on-focus.is-selected-false:hover {
+    cursor: pointer;
+}
