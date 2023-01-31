@@ -5,10 +5,6 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { RadioControl } from '@wordpress/components';
 import { InfoTooltip } from '../info-tooltip';
 import { __ } from '@wordpress/i18n';
-import {
-	ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE,
-	ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_APPLY,
-} from './customizable-configuration-values';
 import { getCustomizableConfigurationComponentClass } from '../base-styles'
 
 const withCustomizableConfiguration = () => createHigherOrderComponent(
@@ -26,11 +22,11 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 		const options = [
 			{
 				label: __('Use default configuration from Settings', 'graphql-api'),
-				value: ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE,
+				value: false,
 			},
 			{
 				label: __('Use custom configuration', 'graphql-api'),
-				value: ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_APPLY,
+				value: true,
 			},
 		];
 		const optionValues = options.map( option => option.value );
@@ -45,10 +41,10 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 					{ !isSelected && (
 						<>
 							<br />
-							{ ( applyCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE ) &&
+							{ ! applyCustomizableConfiguration &&
 								<span>🟡 { __('Use default configuration from Settings', 'graphql-api') }</span>
 							}
-							{ applyCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_APPLY &&
+							{ applyCustomizableConfiguration &&
 								<span>🟢 { __('Use custom configuration', 'graphql-api') }</span>
 							}
 						</>
