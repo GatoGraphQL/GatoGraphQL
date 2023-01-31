@@ -10,8 +10,10 @@ import './style.scss';
  */
 const withEditableOnFocus = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
-		const { className, isSelected } = props;
-		const componentClassName = `${ className } ${ getEditableOnFocusComponentClass(isSelected) }`;
+		const {
+			isSelected,
+		} = props;
+		const componentClassName = `${ getEditableOnFocusComponentClass(isSelected) }`;
 		return (
 			<div className={ componentClassName }>
 				<WrappedComponent
