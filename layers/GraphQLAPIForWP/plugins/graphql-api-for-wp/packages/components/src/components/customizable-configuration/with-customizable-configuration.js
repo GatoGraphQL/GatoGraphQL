@@ -9,16 +9,19 @@ import {
 	ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE,
 	ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_APPLY,
 } from './customizable-configuration-values';
+import { getCustomizableConfigurationComponentClass } from '../base-styles'
 
 const withCustomizableConfiguration = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
 		const {
 			isSelected,
+			className,
 			setAttributes,
 			attributes: {
-				useCustomizableConfiguration,
+				applyCustomizableConfiguration,
 			},
 		} = props;
+		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(!! applyCustomizableConfiguration) }`;
 		const options = [
 			{
 				label: __('Use default configuration from Settings', 'graphql-api'),
@@ -31,42 +34,44 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 		];
 		const optionValues = options.map( option => option.value );
 		return (
-			<>
-				<em>{ __('Customize configuration, or use default from Settings?', 'graphql-api') }</em>
-				<InfoTooltip
-					{ ...props }
-					text={ __('Either use the configuration defined on the Settings page, or use a custom configuration', 'graphql-api') }
-				/>
-				{ !isSelected && (
-					<>
-						<br />
-						{ ( useCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE || !optionValues.includes(useCustomizableConfiguration) ) &&
-							<span>🟡 { __('Use default configuration from Settings', 'graphql-api') }</span>
-						}
-						{ useCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_APPLY &&
-							<span>🟢 { __('Use custom configuration', 'graphql-api') }</span>
-						}
-					</>
-				) }
-				{ isSelected &&
-					<RadioControl
+			<div className={ componentClassName }>
+				<div className="customizable-configuration-header">
+					<em>{ __('Customize configuration, or use default from Settings?', 'graphql-api') }</em>
+					<InfoTooltip
 						{ ...props }
-						options={ options }
-						selected={ useCustomizableConfiguration }
-						onChange={ newValue => (
-							setAttributes( {
-								useCustomizableConfiguration: newValue
-							} )
-						)}
+						text={ __('Either use the configuration defined on the Settings page, or use a custom configuration', 'graphql-api') }
 					/>
-				}
+					{ !isSelected && (
+						<>
+							<br />
+							{ ( applyCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE || !optionValues.includes(applyCustomizableConfiguration) ) &&
+								<span>🟡 { __('Use default configuration from Settings', 'graphql-api') }</span>
+							}
+							{ applyCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_APPLY &&
+								<span>🟢 { __('Use custom configuration', 'graphql-api') }</span>
+							}
+						</>
+					) }
+					{ isSelected &&
+						<RadioControl
+							{ ...props }
+							options={ options }
+							selected={ applyCustomizableConfiguration }
+							onChange={ newValue => (
+								setAttributes( {
+									applyCustomizableConfiguration: newValue
+								} )
+							)}
+						/>
+					}
+				</div>
 				<hr />
-				<div className="customizable-configuration-inner">
+				<div className="customizable-configuration-body">
 					<WrappedComponent
 						{ ...props }
 					/>
 				</div>
-			</>
+			</div>
 		);
 	},
 	'withCustomizableConfiguration'
