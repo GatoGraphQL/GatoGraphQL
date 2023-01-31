@@ -18,15 +18,15 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 				customizeConfiguration = false,
 			},
 		} = props;
-		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(!! customizeConfiguration) }`;
+		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(customizeConfiguration) }`;
 		const options = [
 			{
 				label: __('Use default configuration from Settings', 'graphql-api'),
-				value: false,
+				value: 'false',
 			},
 			{
 				label: __('Use custom configuration', 'graphql-api'),
-				value: true,
+				value: 'true',
 			},
 		];
 		const optionValues = options.map( option => option.value );
@@ -56,7 +56,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 							selected={ customizeConfiguration }
 							onChange={ newValue => (
 								setAttributes( {
-									customizeConfiguration: newValue
+									customizeConfiguration: newValue === true || newValue === 'true'
 								} )
 							)}
 						/>
