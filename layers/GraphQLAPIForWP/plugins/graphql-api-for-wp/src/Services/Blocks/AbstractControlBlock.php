@@ -58,11 +58,17 @@ abstract class AbstractControlBlock extends AbstractBlock
         return false;
     }
 
+    /**
+     * Register style-index.css
+     */
     protected function registerCommonStyleCSS(): bool
     {
         return true;
     }
 
+    /**
+     * Register index.css
+     */
     protected function registerEditorCSS(): bool
     {
         return true;
