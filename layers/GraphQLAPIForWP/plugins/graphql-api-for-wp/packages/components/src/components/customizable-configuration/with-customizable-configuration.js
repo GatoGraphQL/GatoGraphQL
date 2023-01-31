@@ -45,7 +45,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 					{ !isSelected && (
 						<>
 							<br />
-							{ ( applyCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE || !optionValues.includes(applyCustomizableConfiguration) ) &&
+							{ ( applyCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_IGNORE ) &&
 								<span>🟡 { __('Use default configuration from Settings', 'graphql-api') }</span>
 							}
 							{ applyCustomizableConfiguration == ATTRIBUTE_VALUE_CUSTOMIZABLE_CONFIGURATION_APPLY &&
