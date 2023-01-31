@@ -55,5 +55,8 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
     }
 
     abstract protected function getBlockTitle(): string;
+    /**
+     * @param array<string,mixed> $attributes
+     */
     abstract protected function doRenderBlock(array $attributes, string $content): string;
 }

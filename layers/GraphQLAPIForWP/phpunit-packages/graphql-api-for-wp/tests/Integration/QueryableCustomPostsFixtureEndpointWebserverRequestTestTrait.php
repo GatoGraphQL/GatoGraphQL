@@ -12,7 +12,7 @@ trait QueryableCustomPostsFixtureEndpointWebserverRequestTestTrait
     }
 
     /**
-     * @return array<string,mixed>
+     * @return string[]
      */
     protected function getIncludedCustomPostTypesNewValue(): array
     {
