@@ -19,11 +19,11 @@ class WPDataModelProvider implements WPDataModelProviderInterface
 {
     use BasicServiceTrait;
 
-    /** @var ?array<string,WP_Taxonomy> */
-    protected array $hierarchicalQueryableCustomPostsAssociatedTaxonomies = null;
+    /** @var array<string,WP_Taxonomy>|null */
+    protected ?array $hierarchicalQueryableCustomPostsAssociatedTaxonomies = null;
 
-    /** @var ?array<string,WP_Taxonomy> */
-    protected array $nonHierarchicalQueryableCustomPostsAssociatedTaxonomies = null;
+    /** @var array<string,WP_Taxonomy>|null */
+    protected ?array $nonHierarchicalQueryableCustomPostsAssociatedTaxonomies = null;
 
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
     private ?TaxonomyRegistryInterface $taxonomyRegistry = null;
