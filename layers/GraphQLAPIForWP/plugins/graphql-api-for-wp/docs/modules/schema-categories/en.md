@@ -66,11 +66,19 @@ Type `GenericCustomPost` has field `categories`, to retrieve the custom categori
 }
 ```
 
-## Configuration
+## Defining the allowed Category Taxonomies
 
-The category taxonomies that can be queried must be explicitly configured in the Settings page, under section "Included category taxonomies":
+The category taxonomies that can be queried must be explicitly configured. This can be done in 2 places.
+
+In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration, or use default from Settings?" and then selecting the desired items:
+
+![Selecting the allowed category taxonomies in the Schema Configuration](../../images/categories-schema-configuration-queryable-taxonomies.png "Selecting the allowed category taxonomies in the Schema Configuration")
+
+Or, if selecting option `"Use configuration from Settings"`, the value defined under section "Included category taxonomies" in the Settings page for `Schema Custom Posts` is used:
 
 ![Selecting the allowed category taxonomies in the Settings](../../images/categories-settings-queryable-taxonomies.png "Selecting the allowed category taxonomies in the Settings")
+
+## Additional configuration
 
 Through the Settings for `Schema Categories`, we can also define:
 
