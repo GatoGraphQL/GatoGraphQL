@@ -207,7 +207,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
         if (!$isHierarchical && $this->nonHierarchicalQueryableCustomPostsAssociatedTaxonomies !== null) {
             return $this->nonHierarchicalQueryableCustomPostsAssociatedTaxonomies;
         }
-        
+
         /** @var CustomPostsModuleConfiguration */
         $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
         $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();

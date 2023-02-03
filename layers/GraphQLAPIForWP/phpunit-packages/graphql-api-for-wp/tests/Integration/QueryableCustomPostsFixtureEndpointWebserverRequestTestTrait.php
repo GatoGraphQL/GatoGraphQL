@@ -41,6 +41,6 @@ trait QueryableCustomPostsFixtureEndpointWebserverRequestTestTrait
 
         return $value;
     }
-    
+
     abstract protected function getDataName(): string;
 }
