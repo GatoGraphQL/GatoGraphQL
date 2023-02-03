@@ -235,7 +235,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
 
         if ($isHierarchical) {
             $this->hierarchicalQueryableCustomPostsAssociatedTaxonomies = $possibleTaxonomyNameObjects;
-        } elseif (!$isHierarchical) {
+        } else {
             $this->nonHierarchicalQueryableCustomPostsAssociatedTaxonomies = $possibleTaxonomyNameObjects;
         }
 
