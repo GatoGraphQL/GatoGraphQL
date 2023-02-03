@@ -4,32 +4,24 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-trait QueryableCustomPostsFixtureEndpointWebserverRequestTestTrait
+trait QueryableTagTaxonomiesFixtureEndpointWebserverRequestTestTrait
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-queryable-customposts';
+        return __DIR__ . '/fixture-queryable-tags';
     }
 
-    /**
-     * @return string[]
-     */
-    protected function getIncludedCustomPostTypesNewValue(): array
+    protected function getIncludedTagTaxonomiesNewValue(): mixed
     {
         $value = [
-            'post',
-            'attachment',
-            'nav_menu_item',
-            'custom_css',
-            'revision',
+            'post_format',
         ];
 
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':1')) {
-            $value[] = 'page';
-        } elseif (str_ends_with($dataName, ':2')) {
-            $value[] = 'page';
-            $value[] = 'dummy-cpt';
+            $value[] = 'post_tag';
+        } else {
+            $value[] = 'dummy-tag';
         }
 
         /**

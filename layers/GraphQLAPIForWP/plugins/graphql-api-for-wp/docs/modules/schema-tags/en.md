@@ -66,11 +66,21 @@ Type `GenericCustomPost` has field `tags`, to retrieve the custom tags added to 
 }
 ```
 
-## Configuration
+## Defining the allowed Tag Taxonomies
 
-The tag taxonomies that can be queried must be explicitly configured in the Settings page, under section "Included tag taxonomies":
+The tag taxonomies that can be queried must be explicitly configured. This can be done in 2 places.
+
+In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration, or use default from Settings?" and then selecting the desired items:
+
+![Selecting the allowed tag taxonomies in the Schema Configuration](../../images/tags-schema-configuration-queryable-taxonomies.png "Selecting the allowed tag taxonomies in the Schema Configuration")
+
+_This list contains all the "non-hierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each tag taxonomy's associated custom post types is shown under <code>(CPT: ...)</code>. If your desired tag taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist._
+
+Otherwise, if selecting option `"Use configuration from Settings"`, the value defined under section "Included tag taxonomies" in the Settings page for `Schema Custom Posts` is used:
 
 ![Selecting the allowed tag taxonomies in the Settings](../../images/tags-settings-queryable-taxonomies.png "Selecting the allowed tag taxonomies in the Settings")
+
+## Additional configuration
 
 Through the Settings for `Schema Tags`, we can also define:
 
