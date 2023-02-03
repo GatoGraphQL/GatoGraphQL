@@ -19,6 +19,12 @@ class WPDataModelProvider implements WPDataModelProviderInterface
 {
     use BasicServiceTrait;
 
+    /** @var ?array<string,WP_Taxonomy> */
+    protected array $hierarchicalQueryableCustomPostsAssociatedTaxonomies = null;
+
+    /** @var ?array<string,WP_Taxonomy> */
+    protected array $nonHierarchicalQueryableCustomPostsAssociatedTaxonomies = null;
+
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
     private ?TaxonomyRegistryInterface $taxonomyRegistry = null;
 
@@ -195,6 +201,13 @@ class WPDataModelProvider implements WPDataModelProviderInterface
      */
     public function getQueryableCustomPostsAssociatedTaxonomies(bool $isHierarchical): array
     {
+        if ($isHierarchical && $this->hierarchicalQueryableCustomPostsAssociatedTaxonomies !== null) {
+            return $this->hierarchicalQueryableCustomPostsAssociatedTaxonomies;
+        }
+        if (!$isHierarchical && $this->nonHierarchicalQueryableCustomPostsAssociatedTaxonomies !== null) {
+            return $this->nonHierarchicalQueryableCustomPostsAssociatedTaxonomies;
+        }
+        
         /** @var CustomPostsModuleConfiguration */
         $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
         $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
@@ -219,6 +232,13 @@ class WPDataModelProvider implements WPDataModelProviderInterface
         foreach ($possibleTaxonomyObjects as $taxonomyObject) {
             $possibleTaxonomyNameObjects[$taxonomyObject->name] = $taxonomyObject;
         }
+
+        if ($isHierarchical) {
+            $this->hierarchicalQueryableCustomPostsAssociatedTaxonomies = $possibleTaxonomyNameObjects;
+        } elseif (!$isHierarchical) {
+            $this->nonHierarchicalQueryableCustomPostsAssociatedTaxonomies = $possibleTaxonomyNameObjects;
+        }
+
         return $possibleTaxonomyNameObjects;
     }
 }
