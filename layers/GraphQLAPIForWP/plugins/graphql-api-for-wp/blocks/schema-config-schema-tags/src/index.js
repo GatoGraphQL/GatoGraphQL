@@ -66,7 +66,7 @@ registerBlockType( 'graphql-api/schema-config-schema-tags', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_CATEGORY_TAXONOMIES
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES
 		 */
 		includedTagTaxonomies: {
 			type: 'array',
