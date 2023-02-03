@@ -44,10 +44,10 @@ const SchemaConfigCategoriesCard = ( props ) => {
 		<>
 			<div>
 				<span>
-					<em>{ __('Included custom post types:', 'graphql-api') }</em>
+					<em>{ __('Included category taxonomies:', 'graphql-api') }</em>
 					<InfoTooltip
 						{ ...props }
-						text={ __('Select the custom post types that can be queried. A custom post type will be represented by its own type in the schema if available (such as Post or Page) or, otherwise, via GenericCustomPost.', 'graphql-api') }
+						text={ __('Select the category taxonomies that can be queried. A category taxonomy will be represented by its own type in the schema if available (such as PostCategory) or, otherwise, via GenericCategory.', 'graphql-api') }
 					/>
 				</span>
 				<EditableSelect
