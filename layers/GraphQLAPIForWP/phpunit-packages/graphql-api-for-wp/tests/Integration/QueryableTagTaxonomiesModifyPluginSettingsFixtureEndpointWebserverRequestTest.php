@@ -8,14 +8,11 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 
 class QueryableTagTaxonomiesModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
+    use QueryableTagTaxonomiesFixtureEndpointWebserverRequestTestTrait;
+
     protected function getEndpoint(): string
     {
         return 'graphql/';
-    }
-
-    protected function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-queryable-tags';
     }
 
     protected function getSettingsKey(): string
@@ -30,24 +27,6 @@ class QueryableTagTaxonomiesModifyPluginSettingsFixtureEndpointWebserverRequestT
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        $value = [
-            'post_format',
-        ];
-
-        $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':1')) {
-            $value[] = 'post_tag';
-        } else {
-            $value[] = 'dummy-tag';
-        }
-
-        /**
-         * Sort them as to store the entries in same way as via the UI,
-         * then tests won't fail whether data was added via PHPUnit test or
-         * via user interface
-         */
-        sort($value);
-
-        return $value;
+        return $this->getIncludedTagTaxonomiesNewValue();
     }
 }
