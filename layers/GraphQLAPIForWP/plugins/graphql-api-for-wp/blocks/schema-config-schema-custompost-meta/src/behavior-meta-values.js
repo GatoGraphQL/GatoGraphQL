@@ -1,13 +1,13 @@
 /**
- * Same value as in PoPSchema\SchemaCommons\Constants\Behaviors::ALLOWLIST
+ * Same value as in PoPSchema\SchemaCommons\Constants\Behaviors::ALLOW
  */
-const ATTRIBUTE_VALUE_BEHAVIOR_ALLOWLIST = 'allow';
+const ATTRIBUTE_VALUE_BEHAVIOR_ALLOW = 'allow';
 /**
- * Same value as in PoPSchema\SchemaCommons\Constants\Behaviors::DENYLIST
+ * Same value as in PoPSchema\SchemaCommons\Constants\Behaviors::DENY
  */
-const ATTRIBUTE_VALUE_BEHAVIOR_DENYLIST = 'deny';
+const ATTRIBUTE_VALUE_BEHAVIOR_DENY = 'deny';
 
 export {
-	ATTRIBUTE_VALUE_BEHAVIOR_ALLOWLIST,
-	ATTRIBUTE_VALUE_BEHAVIOR_DENYLIST,
+	ATTRIBUTE_VALUE_BEHAVIOR_ALLOW,
+	ATTRIBUTE_VALUE_BEHAVIOR_DENY,
 };
