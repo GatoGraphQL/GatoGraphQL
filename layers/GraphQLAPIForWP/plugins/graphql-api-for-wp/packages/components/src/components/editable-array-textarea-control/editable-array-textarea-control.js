@@ -31,7 +31,10 @@ const EditableArrayTextareaControl = ( props ) => {
 				<div className={ `${ className }__value-group ${ componentClassName }__value-group` }>
 					{ values.map( val =>
 						<div className={ `${ className }__value-item ${ componentClassName }__value-item ` }>
-							{ val }
+							{ !!val && val }
+							{ !val && (
+								<>&nbsp;</>
+							) }
 						</div>
 					) }
 				</div>
