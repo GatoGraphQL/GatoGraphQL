@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { TextareaControl } from '@wordpress/components';
+import './style.scss';
 
 const EditableArrayTextareaControl = ( props ) => {
 	const {
