@@ -14,6 +14,7 @@ class SchemaConfigSchemaCustomPostMetaBlock extends AbstractSchemaConfigCustomiz
     use OptionsBlockTrait;
 
     public final const ATTRIBUTE_NAME_ENTRIES = 'entries';
+    public final const ATTRIBUTE_NAME_BEHAVIOR = 'behavior';
 
     protected function getBlockName(): string
     {
@@ -40,11 +41,16 @@ class SchemaConfigSchemaCustomPostMetaBlock extends AbstractSchemaConfigCustomiz
         return array_merge(
             parent::getLocalizedData(),
             [
-                'defaultBehavior' => PluginEnvironment::areUnsafeDefaultsEnabled()
-                    ? Behaviors::DENY
-                    : Behaviors::ALLOW,
+                'defaultBehavior' => $this->getDefaultBehavior(),
             ]
         );
+    }
+
+    protected function getDefaultBehavior(): string
+    {
+        return PluginEnvironment::areUnsafeDefaultsEnabled()
+            ? Behaviors::DENY
+            : Behaviors::ALLOW;
     }
 
     /**
@@ -52,19 +58,29 @@ class SchemaConfigSchemaCustomPostMetaBlock extends AbstractSchemaConfigCustomiz
      */
     protected function doRenderBlock(array $attributes, string $content): string
     {
-        $values = $attributes[self::ATTRIBUTE_NAME_ENTRIES] ?? [];
+        $placeholder = '<p><strong>%s</strong></p>%s';
+        $entries = $attributes[self::ATTRIBUTE_NAME_ENTRIES] ?? [];
+        $behavior = $attributes[self::ATTRIBUTE_NAME_BEHAVIOR] ?? $this->getDefaultBehavior();
         return sprintf(
-            '<p><strong>%s</strong></p>%s',
+            $placeholder,
             $this->__('Meta keys', 'graphql-api'),
-            $values ?
+            $entries ?
                 sprintf(
                     '<ul><li><code>%s</code></li></ul>',
-                    implode('</code></li><li><code>', $values)
+                    implode('</code></li><li><code>', $entries)
                 ) :
                 sprintf(
                     '<p><em>%s</em></p>',
                     \__('(not set)', 'graphql-api')
                 )
+        ) . sprintf(
+            $placeholder,
+            $this->__('Behavior', 'graphql-api'),
+            match ($behavior) {
+                Behaviors::ALLOW => $this->__('Allow access', 'graphql-api'),
+                Behaviors::DENY => $this->__('Deny access', 'graphql-api'),
+                default => $behavior,
+            }
         );
     }
 
