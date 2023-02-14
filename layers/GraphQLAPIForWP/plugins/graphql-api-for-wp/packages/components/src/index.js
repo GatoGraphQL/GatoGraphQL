@@ -17,6 +17,7 @@ export { getEditableOnFocusComponentClass } from './components/base-styles';
 export { withCard } from './components/card';
 export { withCustomizableConfiguration } from './components/customizable-configuration';
 export { EditableSelect } from './components/editable-select';
+export { EditableArrayTextareaControl } from './components/editable-array-textarea-control';
 export { withEditableOnFocus } from './components/editable-on-focus';
 export { getLabelForNotFoundElement } from './components/helpers';
 export { maybeGetErrorMessage } from './store/resolvers';
