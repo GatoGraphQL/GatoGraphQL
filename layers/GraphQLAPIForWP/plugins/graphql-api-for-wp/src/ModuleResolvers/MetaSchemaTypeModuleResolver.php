@@ -225,7 +225,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             ])
         ) {
             $entriesTitle = \__('Meta keys', 'graphql-api');
-            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying field <code>meta</code> on %s.', 'graphql-api');
+            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s.', 'graphql-api');
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'graphql-api');
             $ulStyle = 'list-style: initial; padding-left: 15px;';
