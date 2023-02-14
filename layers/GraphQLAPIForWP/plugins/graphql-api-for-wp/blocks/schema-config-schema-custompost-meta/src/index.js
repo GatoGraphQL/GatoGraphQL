@@ -69,7 +69,7 @@ registerBlockType( 'graphql-api/schema-config-schema-custompost-meta', {
 		 * Same attribute name as defined in
 		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCustomPostMetaBlock::ATTRIBUTE_NAME_META_KEYS
 		 */
-		metaKeys: {
+		entries: {
 			type: 'array',
 			default: [],
 		},

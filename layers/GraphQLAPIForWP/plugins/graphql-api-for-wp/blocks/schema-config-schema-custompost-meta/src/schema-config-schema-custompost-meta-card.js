@@ -21,14 +21,14 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 	const {
 		setAttributes,
 		attributes: {
-			metaKeys,
+			entries,
 			behavior,
 		},
 	} = props;
 	// const [ /*text, */setText ] = useState( '' );
 	const helpText = __('List of all the meta keys, to either allow or deny access to, when querying fields `metaValue` and `metaValues` on %s', 'graphql-api')
 		.replace('%s', __('custom posts', 'graphql-api'));
-	const attributeName = 'metaKeys';
+	const attributeName = 'entries';
 	return (
 		<>
 			<div>
@@ -43,7 +43,7 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 					// label={ __('Meta keys', 'graphql-api') }
 					help={ __('<strong>Heads up:</strong> Entries surrounded with ... @TODO complete!!!', 'graphql-api') }
 					// value={ text }
-					value={ metaKeys.join('\n') }
+					value={ entries.join('\n') }
 					// onChange={ ( value ) => setText( value ) }
 					onChange={ value =>
 						setAttributes( {
