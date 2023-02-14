@@ -45,6 +45,7 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 					// value={ text }
 					value={ entries.join('\n') }
 					// onChange={ ( value ) => setText( value ) }
+					rows='10'
 					onChange={ value =>
 						setAttributes( {
 							[ attributeName ]: value.split('\n')
