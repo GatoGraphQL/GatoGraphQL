@@ -195,7 +195,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         $defaultMetaValues = [
             ModuleSettingOptions::ENTRIES => [],
             ModuleSettingOptions::BEHAVIOR => PluginEnvironment::areUnsafeDefaultsEnabled() ?
-                Behaviors::DENYLIST
+                Behaviors::DENY
                 : Behaviors::ALLOW,
         ];
         $defaultValues = [
@@ -348,7 +348,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
                     Behaviors::ALLOW => \__('Allow access', 'graphql-api'),
-                    Behaviors::DENYLIST => \__('Deny access', 'graphql-api'),
+                    Behaviors::DENY => \__('Deny access', 'graphql-api'),
                 ],
             ];
         }

@@ -17,7 +17,7 @@ class AllowOrDenySettingsService implements AllowOrDenySettingsServiceInterface
     public function isEntryAllowed(string $name, array $entries, string $behavior): bool
     {
         if ($entries === []) {
-            return $behavior === Behaviors::DENYLIST;
+            return $behavior === Behaviors::DENY;
         }
         $matchResults = array_filter(array_map(
             function (string $termOrRegex) use ($name): bool {
@@ -35,7 +35,7 @@ class AllowOrDenySettingsService implements AllowOrDenySettingsServiceInterface
         ));
         if (
             ($behavior == Behaviors::ALLOW && count($matchResults) === 0)
-            || ($behavior == Behaviors::DENYLIST && count($matchResults) > 0)
+            || ($behavior == Behaviors::DENY && count($matchResults) > 0)
         ) {
             return false;
         }

@@ -7,5 +7,5 @@ namespace PoPSchema\SchemaCommons\Constants;
 class Behaviors
 {
     public final const ALLOW = 'allow';
-    public final const DENYLIST = 'deny';
+    public final const DENY = 'deny';
 }

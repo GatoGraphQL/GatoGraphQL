@@ -569,16 +569,16 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             $moduleClassConfiguration[\PoP\Engine\Module::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
             // Allow access to all entries for Root.option
             $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
-            $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENY;
             // Allow access to all meta values
             $moduleClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENY;
             $moduleClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
-            $moduleClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENY;
             $moduleClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
-            $moduleClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENY;
             $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
-            $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENY;
         }
         return $moduleClassConfiguration;
     }

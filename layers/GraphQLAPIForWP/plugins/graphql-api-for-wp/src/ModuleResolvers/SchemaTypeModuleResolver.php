@@ -553,7 +553,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'blog_charset',
                 ],
                 ModuleSettingOptions::BEHAVIOR => $useUnsafe ?
-                    Behaviors::DENYLIST
+                    Behaviors::DENY
                     : Behaviors::ALLOW,
             ],
             self::SCHEMA_USER_AVATARS => [
@@ -954,7 +954,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
                     Behaviors::ALLOW => \__('Allow access', 'graphql-api'),
-                    Behaviors::DENYLIST => \__('Deny access', 'graphql-api'),
+                    Behaviors::DENY => \__('Deny access', 'graphql-api'),
                 ],
             ];
         } elseif ($module === self::SCHEMA_USER_AVATARS) {
