@@ -14,6 +14,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Tags
   - Categories
 
+### Breaking changes
+
+- Modified value for `allow` behavior option in settings
+
 ## 0.9.9 - 16/01/2013
 
 ### Enhancement

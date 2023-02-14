@@ -553,8 +553,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'blog_charset',
                 ],
                 ModuleSettingOptions::BEHAVIOR => $useUnsafe ?
-                    Behaviors::DENYLIST
-                    : Behaviors::ALLOWLIST,
+                    Behaviors::DENY
+                    : Behaviors::ALLOW,
             ],
             self::SCHEMA_USER_AVATARS => [
                 self::OPTION_DEFAULT_AVATAR_SIZE => 96,
@@ -953,8 +953,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::DESCRIPTION => \__('Are the entries being allowed or denied?<ul><li>👉🏽 Allow access: only the configured entries can be accessed, and no other can.</li><li>👉🏽 Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    Behaviors::ALLOWLIST => \__('Allow access', 'graphql-api'),
-                    Behaviors::DENYLIST => \__('Deny access', 'graphql-api'),
+                    Behaviors::ALLOW => \__('Allow access', 'graphql-api'),
+                    Behaviors::DENY => \__('Deny access', 'graphql-api'),
                 ],
             ];
         } elseif ($module === self::SCHEMA_USER_AVATARS) {
