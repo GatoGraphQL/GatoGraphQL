@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { RadioControl } from '@wordpress/components';
+import { ToggleControl } from '@wordpress/components';
 import { InfoTooltip } from '../info-tooltip';
 import { __ } from '@wordpress/i18n';
 import { getCustomizableConfigurationComponentClass } from '../base-styles'
@@ -20,16 +20,6 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 			},
 		} = props;
 		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(customizeConfiguration) }`;
-		const options = [
-			{
-				label: __('Use configuration from Settings', 'graphql-api'),
-				value: 'false',
-			},
-			{
-				label: __('Use custom configuration', 'graphql-api'),
-				value: 'true',
-			},
-		];
 		return (
 			<div className={ componentClassName }>
 				<div className="customizable-configuration-header">
@@ -50,13 +40,13 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 						</>
 					) }
 					{ isSelected &&
-						<RadioControl
+						<ToggleControl
 							{ ...props }
-							options={ options }
-							selected={ customizeConfiguration ? 'true' : 'false' }
+							label={ __('Use custom configuration', 'graphql-api') }
+							checked={ customizeConfiguration }
 							onChange={ newValue => (
 								setAttributes( {
-									customizeConfiguration: newValue === true || newValue === 'true'
+									customizeConfiguration: newValue
 								} )
 							)}
 						/>
