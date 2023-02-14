@@ -29,7 +29,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getSettingsBehavior(): string
     {
         $envVariable = Environment::SETTINGS_BEHAVIOR;
-        $defaultValue = Behaviors::ALLOWLIST;
+        $defaultValue = Behaviors::ALLOW;
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

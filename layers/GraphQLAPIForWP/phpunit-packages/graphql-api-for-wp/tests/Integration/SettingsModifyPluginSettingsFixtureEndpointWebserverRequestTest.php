@@ -31,6 +31,6 @@ class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return Behaviors::ALLOWLIST;
+        return Behaviors::ALLOW;
     }
 }
