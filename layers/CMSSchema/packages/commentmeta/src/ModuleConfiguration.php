@@ -29,7 +29,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getCommentMetaBehavior(): string
     {
         $envVariable = Environment::COMMENT_META_BEHAVIOR;
-        $defaultValue = Behaviors::ALLOWLIST;
+        $defaultValue = Behaviors::ALLOW;
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

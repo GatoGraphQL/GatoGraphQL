@@ -28,3 +28,12 @@ For instance, we can now define the Custom Post Types that can be queried for so
 ![Selecting the allowed Custom Post Types in the Schema Configuration](../../images/customposts-schema-configuration-queryable-cpts.png)
 
 _Please notice: Because of the new blocks added, we will need to click on the "Reset the template" button when editing a Schema Configuration entry created on a previous version of the plugin._
+
+## Breaking changes
+
+### Modified value for "allow" behavior option in settings
+
+The value for the `allow` behavior option in the settings has been modified (from `"allowlist"` to `"allow"`), so this option must be selected and stored again for the following modules:
+
+- All the meta modules (Custom Post Meta, User Meta, Comment Meta and Taxonomy Meta)
+- Settings module
