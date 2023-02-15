@@ -30,8 +30,21 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 			behavior,
 		},
 	} = props;
-	const helpText = __('List of all the meta keys, to either allow or deny access to, when querying fields `metaValue` and `metaValues` on %s', 'graphql-api')
+	const metaKeyDesc = __('List of all the meta keys, to either allow or deny access to, when querying fields `metaValue` and `metaValues` on %s.', 'graphql-api')
 		.replace('%s', __('custom posts', 'graphql-api'));
+	const headsUpDesc = __('Entries surrounded with "/" or "#" are evaluated as regex (regular expressions).', 'graphql-api');
+	const examples = [
+		'_edit_last',
+		'/_edit_.*/',
+		'#_edit_([a-zA-Z]*)#',
+	].join('", "');
+	const entryDesc = __('For example, any of these entries match meta key "%1$s": %2$s.', 'graphql-api')
+		.replace('%1$s', '_edit_last')
+		.replace(
+			'%2$s',
+			`"${ examples }"`
+		);
+	const helpText = `${ metaKeyDesc } ${ headsUpDesc } ${ entryDesc }`;
 	const options = [
 		{
 			label: __('Allow access', 'graphql-api'),
@@ -47,16 +60,16 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 			<div>
 				<span>
 					<em>{ __('Meta keys:', 'graphql-api') }</em>
-					<InfoTooltip
+					{/* <InfoTooltip
 						{ ...props }
 						text={ helpText }
-					/>
+					/> */}
 				</span>
 				<EditableArrayTextareaControl
 					{ ...props }
 					attributeName='entries'
 					values={ entries }
-					help={ __('<strong>Heads up:</strong> Entries surrounded with ... @TODO complete!!!', 'graphql-api') }
+					help={ helpText }
 					rows='10'
 				/>
 			</div>
