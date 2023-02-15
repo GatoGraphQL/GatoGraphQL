@@ -70,7 +70,7 @@ Type `GenericCustomPost` has field `categories`, to retrieve the custom categori
 
 The category taxonomies that can be queried must be explicitly configured. This can be done in 2 places.
 
-In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration, or use default from Settings?" and then selecting the desired items:
+In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration? (Or use default from Settings?)" and then selecting the desired items:
 
 ![Selecting the allowed category taxonomies in the Schema Configuration](../../images/categories-schema-configuration-queryable-taxonomies.png "Selecting the allowed category taxonomies in the Schema Configuration")
 

@@ -21,7 +21,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
         $customizeConfiguration = $attributes[self::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            $this->__('Customize configuration, or use default from Settings?', 'graphql-api'),
+            $this->__('Customize configuration? (Or use default from Settings?)', 'graphql-api'),
             !$customizeConfiguration
                 ? sprintf('🟡 %s', $this->__('Use configuration from Settings', 'graphql-api'))
                 : sprintf('🟢 %s', $this->__('Use custom configuration', 'graphql-api'))

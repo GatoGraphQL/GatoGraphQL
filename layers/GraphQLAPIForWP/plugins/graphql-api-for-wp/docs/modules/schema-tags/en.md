@@ -70,7 +70,7 @@ Type `GenericCustomPost` has field `tags`, to retrieve the custom tags added to 
 
 The tag taxonomies that can be queried must be explicitly configured. This can be done in 2 places.
 
-In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration, or use default from Settings?" and then selecting the desired items:
+In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration? (Or use default from Settings?)" and then selecting the desired items:
 
 ![Selecting the allowed tag taxonomies in the Schema Configuration](../../images/tags-schema-configuration-queryable-taxonomies.png "Selecting the allowed tag taxonomies in the Schema Configuration")
 
