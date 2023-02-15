@@ -26,6 +26,7 @@ const SchemaConfigMetaCard = ( props ) => {
 			entries,
 			behavior,
 		},
+		entriesAttributeName="entries",
 		behaviorAttributeName="behavior",
 		labelEntity,
 		labelExampleMetaKey,
@@ -64,7 +65,7 @@ const SchemaConfigMetaCard = ( props ) => {
 				</span>
 				<EditableArrayTextareaControl
 					{ ...props }
-					attributeName='entries'
+					attributeName={ entriesAttributeName }
 					values={ entries }
 					help={ helpText }
 					rows='10'
