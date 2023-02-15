@@ -26,7 +26,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 					<em>{ __('Customize configuration? (Or use default from Settings?)', 'graphql-api') }</em>
 					<InfoTooltip
 						{ ...props }
-						text={ __('For specific entries (see inputs below), either use the configuration defined on the Settings page or a custom configuration', 'graphql-api') }
+						text={ __('The configuration items below can be customized for endpoints using this Schema Configuration. Otherwise, the general configuration (defined on the Settings page) will be used.', 'graphql-api') }
 					/>
 					{ !isSelected && (
 						<>
