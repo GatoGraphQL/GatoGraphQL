@@ -26,6 +26,7 @@ const SchemaConfigMetaCard = ( props ) => {
 			entries,
 			behavior,
 		},
+		behaviorAttributeName="behavior",
 		labelEntity,
 		labelExampleMetaKey,
 		labelExampleEntries,
@@ -93,7 +94,7 @@ const SchemaConfigMetaCard = ( props ) => {
 						selected={ behavior }
 						onChange={ newValue => (
 							setAttributes( {
-								behavior: newValue
+								[behaviorAttributeName]: newValue
 							} )
 						)}
 					/>
