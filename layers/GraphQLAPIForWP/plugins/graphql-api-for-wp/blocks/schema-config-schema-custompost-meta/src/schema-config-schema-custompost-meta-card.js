@@ -32,7 +32,7 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 		<SchemaConfigMetaCard
 			{ ...props }
 			labelEntity={ __('custom posts', 'graphql-api') }
-			labelExampleMetaKey='_edit_last'
+			labelExampleItem='_edit_last'
 			labelExampleEntries={
 				[
 					'_edit_last',

@@ -29,7 +29,9 @@ const AllowAccessToEntriesCard = ( props ) => {
 		entriesAttributeName="entries",
 		behaviorAttributeName="behavior",
 		entriesHeader,
-		entriesLabel,
+		entriesLabelDescIntro,
+		labelExampleItem,
+		labelExampleEntries,
 	} = props;
 	const options = [
 		{
@@ -41,6 +43,14 @@ const AllowAccessToEntriesCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_BEHAVIOR_DENY,
 		},
 	];
+	const entriesLabelDescRegex = __('Entries surrounded with "/" or "#" are evaluated as regex (regular expressions).', 'graphql-api');
+	const entriesLabelDescExamples = __('For example, "%1$s" is matched by any of the following entries: %2$s.', 'graphql-api')
+		.replace('%1$s', labelExampleItem)
+		.replace(
+			'%2$s',
+			`"${ labelExampleEntries.join('", "') }"`
+		);
+	const entriesLabel = `${ entriesLabelDescIntro } ${ entriesLabelDescRegex } ${ entriesLabelDescExamples }`;
 	return (
 		<>
 			<div>
