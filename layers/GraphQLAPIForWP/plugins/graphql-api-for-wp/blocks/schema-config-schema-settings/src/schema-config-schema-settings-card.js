@@ -16,7 +16,7 @@ const SchemaConfigSettingsCard = ( props ) => {
 			{ ...props }
 			entriesHeader={ __('Settings entries:', 'graphql-api') }
 			entriesLabelDescIntro={
-				__('List of all the option names, to either allow or deny access to, when querying fields <code>optionValue</code>, <code>optionValues</code> and <code>optionObjectValue</code> (one entry per line).', 'graphql-api')
+				__('List of all the option names, to either allow or deny access to, when querying fields `optionValue`, `optionValues` and `optionObjectValue` (one entry per line).', 'graphql-api')
 			}
 			labelExampleItem='siteurl'
 			labelExampleEntries={
