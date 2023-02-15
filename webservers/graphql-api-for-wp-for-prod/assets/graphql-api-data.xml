@@ -1448,6 +1448,8 @@ video/mp4
 
 <!-- wp:graphql-api/schema-config-schema-categories /-->
 
+<!-- wp:graphql-api/schema-config-schema-settings /-->
+
 <!-- wp:graphql-api/schema-config-schema-custompost-meta /-->
 
 <!-- wp:graphql-api/schema-config-schema-user-meta /-->
@@ -1491,6 +1493,8 @@ video/mp4
 <!-- wp:graphql-api/schema-config-schema-tags /-->
 
 <!-- wp:graphql-api/schema-config-schema-categories /-->
+
+<!-- wp:graphql-api/schema-config-schema-settings /-->
 
 <!-- wp:graphql-api/schema-config-schema-custompost-meta /-->
 
@@ -1560,6 +1564,8 @@ video/mp4
 <!-- wp:graphql-api/schema-config-schema-tags /-->
 
 <!-- wp:graphql-api/schema-config-schema-categories /-->
+
+<!-- wp:graphql-api/schema-config-schema-settings /-->
 
 <!-- wp:graphql-api/schema-config-schema-custompost-meta /-->
 
@@ -1634,6 +1640,8 @@ video/mp4
 <!-- wp:graphql-api/schema-config-schema-tags /-->
 
 <!-- wp:graphql-api/schema-config-schema-categories /-->
+
+<!-- wp:graphql-api/schema-config-schema-settings /-->
 
 <!-- wp:graphql-api/schema-config-schema-custompost-meta /-->
 
@@ -1711,6 +1719,8 @@ video/mp4
 <!-- wp:graphql-api/schema-config-schema-tags /-->
 
 <!-- wp:graphql-api/schema-config-schema-categories /-->
+
+<!-- wp:graphql-api/schema-config-schema-settings /-->
 
 <!-- wp:graphql-api/schema-config-schema-custompost-meta /-->
 
