@@ -2,37 +2,30 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { compose, withState } from '@wordpress/compose';
 
 /**
  * Internal dependencies
  */
-import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
-import {
-	SchemaConfigMetaCard,
-} from '@graphqlapi/components';
+import { AllowAccessToEntriesCard } from '@graphqlapi/components';
 
 const SchemaConfigSettingsCard = ( props ) => {
 	return (
-		<SchemaConfigMetaCard
+		<AllowAccessToEntriesCard
 			{ ...props }
-			labelEntity={ __('custom posts', 'graphql-api') }
-			labelExampleItem='_edit_last'
+			entriesHeader={ __('Settings entries:', 'graphql-api') }
+			entriesLabelDescIntro={
+				__('List of all the option names, to either allow or deny access to, when querying fields <code>optionValue</code>, <code>optionValues</code> and <code>optionObjectValue</code> (one entry per line).', 'graphql-api')
+			}
+			labelExampleItem='siteurl'
 			labelExampleEntries={
 				[
-					'_edit_last',
-					'/_edit_.*/',
-					'#_edit_([a-zA-Z]*)#',
+					'siteurl',
+					'/site.*/',
+					'#site([a-zA-Z]*)#',
 				]
 			}
 		/>
 	);
 }
 
-export default compose( [
-	withState( {
-		header: __('Settings', 'graphql-api'),
-		className: 'graphql-api-settings',
-		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
-	} ),
-] )( SchemaConfigSettingsCard );
+export default SchemaConfigSettingsCard;
