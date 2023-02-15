@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MetaSchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaMetaBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCustomPostMetaBlock;
 use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
@@ -38,7 +39,7 @@ class SchemaCustomPostMetaSchemaConfigurationExecuter extends AbstractCustomizab
         if ($schemaConfigBlockDataItem === null) {
             return;
         }
-        $entries = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaCustomPostMetaBlock::ATTRIBUTE_NAME_ENTRIES] ?? [];
+        $entries = $schemaConfigBlockDataItem['attrs'][AbstractSchemaConfigSchemaMetaBlock::ATTRIBUTE_NAME_ENTRIES] ?? [];
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings
@@ -52,7 +53,7 @@ class SchemaCustomPostMetaSchemaConfigurationExecuter extends AbstractCustomizab
             fn () => $entries,
             PHP_INT_MAX
         );
-        $behavior = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaCustomPostMetaBlock::ATTRIBUTE_NAME_BEHAVIOR] ?? $this->getDefaultBehavior();
+        $behavior = $schemaConfigBlockDataItem['attrs'][AbstractSchemaConfigSchemaMetaBlock::ATTRIBUTE_NAME_BEHAVIOR] ?? $this->getDefaultBehavior();
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings
