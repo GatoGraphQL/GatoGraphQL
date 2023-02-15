@@ -21,7 +21,7 @@ For instance, this query retrieves the user's `last_name` meta value (as long as
 
 ## Configuring the allowed meta keys
 
-In the "Schema User Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
+In the "User Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
 
 Each entry can either be:
 

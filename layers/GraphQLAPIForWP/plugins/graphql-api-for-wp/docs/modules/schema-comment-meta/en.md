@@ -24,7 +24,7 @@ For instance, this query retrieves the comment's `description` meta value (as lo
 
 ## Configuring the allowed meta keys
 
-In the "Schema Comment Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
+In the "Comment Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
 
 Each entry can either be:
 

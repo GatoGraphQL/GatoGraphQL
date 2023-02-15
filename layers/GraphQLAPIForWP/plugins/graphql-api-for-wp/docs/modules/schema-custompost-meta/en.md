@@ -43,7 +43,7 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 ![Defining the entries in the Schema Configuration](../../images/schema-configuration-custompost-meta-entries.png "Defining the entries in the Schema Configuration")
 
-Otherwise, the entries defined in the "Schema Custom Post Meta" tab from the Settings will be used:
+Otherwise, the entries defined in the "Custom Post Meta" tab from the Settings will be used:
 
 ![Defining the entries in the Settings](../../images/settings-custompost-meta-entries.png "Defining the entries in the Settings")
 

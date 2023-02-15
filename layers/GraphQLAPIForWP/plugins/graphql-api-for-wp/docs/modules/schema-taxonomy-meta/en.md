@@ -24,7 +24,7 @@ For instance, this query retrieves the category's `description` meta value (as l
 
 ## Configuring the allowed meta keys
 
-In the "Schema Taxonomy Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
+In the "Taxonomy Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
 
 Each entry can either be:
 
