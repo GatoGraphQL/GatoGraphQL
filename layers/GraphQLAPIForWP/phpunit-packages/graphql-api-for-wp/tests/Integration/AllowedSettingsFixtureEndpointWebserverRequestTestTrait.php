@@ -17,9 +17,9 @@ trait AllowedSettingsFixtureEndpointWebserverRequestTestTrait
     protected function getAllowedSettingsKeyEntriesNewValue(): array
     {
         $allowedEntries = [
-            'blogname',
-            '/blog.*/',
-            '#blog([a-zA-Z]*)#',
+            'mailserver_url',
+            '/mailserver_.*/',
+            '#mailserver_([a-zA-Z]*)#',
         ];
         $value = [
             'something',

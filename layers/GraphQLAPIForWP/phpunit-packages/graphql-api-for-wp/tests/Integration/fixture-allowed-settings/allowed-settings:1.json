@@ -1,26 +1,26 @@
 {
   "errors": [
     {
-      "message": "There is no option with name 'blogname'",
+      "message": "There is no option with name 'mailserver_url'",
       "locations": [
         {
           "line": 2,
-          "column": 25
+          "column": 30
         }
       ],
       "extensions": {
         "path": [
-          "(name: \"blogname\")",
-          "blogName: optionValue(name: \"blogname\")",
+          "(name: \"mailserver_url\")",
+          "mailserverURL: optionValue(name: \"mailserver_url\")",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "blogName: optionValue(name: \"blogname\")",
+        "field": "mailserverURL: optionValue(name: \"mailserver_url\")",
         "code": "PoPCMSSchema\/Settings@e1"
       }
     }
   ],
   "data": {
-    "blogName": null
+    "mailserverURL": null
   }
 }
