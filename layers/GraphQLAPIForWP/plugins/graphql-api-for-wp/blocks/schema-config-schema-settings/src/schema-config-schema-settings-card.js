@@ -2,10 +2,12 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { compose, withState } from '@wordpress/compose';
 
 /**
  * Internal dependencies
  */
+import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import { AllowAccessToEntriesCard } from '@graphqlapi/components';
 
 const SchemaConfigSettingsCard = ( props ) => {
@@ -28,4 +30,10 @@ const SchemaConfigSettingsCard = ( props ) => {
 	);
 }
 
-export default SchemaConfigSettingsCard;
+export default compose( [
+	withState( {
+		header: __('Settings', 'graphql-api'),
+		className: 'graphql-api-settings',
+		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
+	} ),
+] )( SchemaConfigSettingsCard );
