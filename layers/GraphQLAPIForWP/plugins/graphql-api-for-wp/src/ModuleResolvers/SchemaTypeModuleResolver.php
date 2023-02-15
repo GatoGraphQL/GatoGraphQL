@@ -552,8 +552,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'time_format',
                     'blog_charset',
                 ],
-                ModuleSettingOptions::BEHAVIOR => $useUnsafe ?
-                    Behaviors::DENY
+                ModuleSettingOptions::BEHAVIOR => $useUnsafe
+                    ? Behaviors::DENY
                     : Behaviors::ALLOW,
             ],
             self::SCHEMA_USER_AVATARS => [
