@@ -77,8 +77,8 @@ class SchemaConfigSchemaCustomPostMetaBlock extends AbstractSchemaConfigCustomiz
             $placeholder,
             $this->__('Behavior', 'graphql-api'),
             match ($behavior) {
-                Behaviors::ALLOW => $this->__('Allow access', 'graphql-api'),
-                Behaviors::DENY => $this->__('Deny access', 'graphql-api'),
+                Behaviors::ALLOW => sprintf('✅ %s', $this->__('Allow access', 'graphql-api')),
+                Behaviors::DENY => sprintf('❌ %s', $this->__('Deny access', 'graphql-api')),
                 default => $behavior,
             }
         );
