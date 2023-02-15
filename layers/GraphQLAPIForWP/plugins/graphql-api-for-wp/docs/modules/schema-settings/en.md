@@ -44,9 +44,9 @@ There are 2 behaviors, "Allow access" and "Deny access":
 
 ![Defining the access behavior](../../images/schema-configuration-settings-behavior.jpg "Defining the access behavior")
 
-## Default entries
+## Default options
 
-By default, only the following options can be queried:
+When the plugin is installed, the following options are pre-defined to be accessible:
 
 - `"siteurl"`
 - `"home"`
