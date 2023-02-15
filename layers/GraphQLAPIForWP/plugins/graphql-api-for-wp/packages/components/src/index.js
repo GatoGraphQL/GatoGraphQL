@@ -21,6 +21,7 @@ export { EditableArrayTextareaControl } from './components/editable-array-textar
 export { withEditableOnFocus } from './components/editable-on-focus';
 export { getLabelForNotFoundElement } from './components/helpers';
 export { ATTRIBUTE_VALUE_BEHAVIOR_ALLOW, ATTRIBUTE_VALUE_BEHAVIOR_DENY } from './components/behaviors';
+export { AllowAccessToEntriesCard } from './components/allow-access-to-entries-card';
 export { SchemaConfigMetaCard } from './components/schema-configuration-meta-card';
 export { maybeGetErrorMessage } from './store/resolvers';
 export { EMPTY_LABEL, SETTINGS_VALUE_LABEL, GROUP_FIELDS_UNDER_TYPE_FOR_PRINT } from './default-configuration';

@@ -2,32 +2,14 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { compose } from '@wordpress/compose';
-import { RadioControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { withEditableOnFocus } from '../editable-on-focus';
-import { withCard } from '../card';
-import { InfoTooltip } from '../info-tooltip';
-import { withCustomizableConfiguration } from '../customizable-configuration';
-import { EditableArrayTextareaControl } from '../editable-array-textarea-control';
-import {
-	ATTRIBUTE_VALUE_BEHAVIOR_ALLOW,
-	ATTRIBUTE_VALUE_BEHAVIOR_DENY,
-} from '../behaviors';
+import { AllowAccessToEntriesCard } from '../allow-access-to-entries-card';
 
 const SchemaConfigMetaCard = ( props ) => {
 	const {
-		isSelected,
-		setAttributes,
-		attributes: {
-			entries,
-			behavior,
-		},
-		entriesAttributeName="entries",
-		behaviorAttributeName="behavior",
 		labelEntity,
 		labelExampleMetaKey,
 		labelExampleEntries,
@@ -42,71 +24,14 @@ const SchemaConfigMetaCard = ( props ) => {
 			'%2$s',
 			`"${ examples }"`
 		);
-	const helpText = `${ metaKeyDesc } ${ headsUpDesc } ${ entryDesc }`;
-	const options = [
-		{
-			label: __('Allow access', 'graphql-api'),
-			value: ATTRIBUTE_VALUE_BEHAVIOR_ALLOW,
-		},
-		{
-			label: __('Deny access', 'graphql-api'),
-			value: ATTRIBUTE_VALUE_BEHAVIOR_DENY,
-		},
-	];
+	const entriesLabel = `${ metaKeyDesc } ${ headsUpDesc } ${ entryDesc }`;
 	return (
-		<>
-			<div>
-				<span>
-					<em>{ __('Meta keys:', 'graphql-api') }</em>
-					{/* <InfoTooltip
-						{ ...props }
-						text={ helpText }
-					/> */}
-				</span>
-				<EditableArrayTextareaControl
-					{ ...props }
-					attributeName={ entriesAttributeName }
-					values={ entries }
-					help={ helpText }
-					rows='10'
-				/>
-			</div>
-			<div>
-				<em>{ __('Behavior:', 'graphql-api') }</em>
-				<InfoTooltip
-					{ ...props }
-					text={ __('If "Allow access" is selected, only the configured entries can be accessed, and no other can; with "Deny access", the reverse applies', 'graphql-api') }
-				/>
-				{ !isSelected && (
-					<>
-						<br />
-						{ behavior == ATTRIBUTE_VALUE_BEHAVIOR_ALLOW &&
-							<span>✅ { __('Allow access', 'graphql-api') }</span>
-						}
-						{ behavior == ATTRIBUTE_VALUE_BEHAVIOR_DENY &&
-							<span>❌ { __('Deny access', 'graphql-api') }</span>
-						}
-					</>
-				) }
-				{ isSelected &&
-					<RadioControl
-						{ ...props }
-						options={ options }
-						selected={ behavior }
-						onChange={ newValue => (
-							setAttributes( {
-								[behaviorAttributeName]: newValue
-							} )
-						)}
-					/>
-				}
-			</div>
-		</>
+		<AllowAccessToEntriesCard
+			{ ...props }
+			entriesHeader={ __('Meta keys:', 'graphql-api') }
+			entriesLabel={ entriesLabel }
+		/>
 	);
 }
 
-export default compose( [
-	withEditableOnFocus(),
-	withCard(),
-	withCustomizableConfiguration(),
-] )( SchemaConfigMetaCard );
+export default SchemaConfigMetaCard;
