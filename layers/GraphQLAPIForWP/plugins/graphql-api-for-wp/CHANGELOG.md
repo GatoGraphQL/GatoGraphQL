@@ -6,9 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.0 - DATE
 
+## 0.10.0 - 16/02/2013
+
 ### Added
 
-- Docs for modules "Tags" and "Categories"
 - Configure several modules via the Schema Configuration:
   - Custom Posts
   - Tags
@@ -18,6 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Comment Meta
   - Taxonomy Meta
   - User Meta
+- Docs for modules "Tags" and "Categories"
 
 ### Breaking changes
 
