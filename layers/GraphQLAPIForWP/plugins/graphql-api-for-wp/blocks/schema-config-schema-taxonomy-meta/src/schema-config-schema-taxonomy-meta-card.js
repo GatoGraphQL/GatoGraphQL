@@ -17,12 +17,12 @@ const SchemaConfigTaxonomyMetaCard = ( props ) => {
 		<SchemaConfigMetaCard
 			{ ...props }
 			labelEntity={ __('taxonomies', 'graphql-api') }
-			labelExampleItem='_edit_last'
+			labelExampleItem='description'
 			labelExampleEntries={
 				[
-					'_edit_last',
-					'/_edit_.*/',
-					'#_edit_([a-zA-Z]*)#',
+					'description',
+					'/desc.*/',
+					'#desc([a-zA-Z]*)#',
 				]
 			}
 		/>
