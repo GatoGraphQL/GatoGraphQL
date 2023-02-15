@@ -16,7 +16,6 @@ import { __ } from '@wordpress/i18n';
  * Application imports
  */
 import EditBlock from './edit';
-// import { ATTRIBUTE_VALUE_BEHAVIOR_ALLOW } from './behavior-meta-values'
 
 const defaultBehavior = window.graphqlApiSchemaConfigSchemaCustompostMeta ? window.graphqlApiSchemaConfigSchemaCustompostMeta.defaultBehavior : [];
 

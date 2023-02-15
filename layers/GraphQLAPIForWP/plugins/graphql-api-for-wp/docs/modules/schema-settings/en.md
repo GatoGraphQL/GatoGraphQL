@@ -31,7 +31,7 @@ For instance, this query retrieves the site's URL:
 
 ## Configure the allowed options
 
-In the "Schema Settings" tab from the Settings, we must configure the list of options that can be queried via `option`.
+In the "Settings" tab from the Settings, we must configure the list of options that can be queried via `option`.
 
 Each entry can either be:
 

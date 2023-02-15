@@ -24,7 +24,7 @@ For instance, this query retrieves the comment's `description` meta value (as lo
 
 ## Configuring the allowed meta keys
 
-In the "Schema Comment Meta" tab from the Settings, we must configure the list of meta keys that can be queried via the meta fields.
+We must configure the list of meta keys that can be queried via the meta fields.
 
 Each entry can either be:
 
@@ -37,7 +37,18 @@ For instance, any of these entries match meta key `"description"`:
 - `/desc.*/`
 - `#desc([a-zA-Z]*)#`
 
-![Defining the entries](../../images/schema-configuration-comment-meta-entries.png "Defining the entries")
+There are 2 places where this configuration can take place, in order of priority:
+
+1. Custom: In the corresponding Schema Configuration
+2. General: In the Settings page
+
+In the Schema Configuration applied to the endpoint, select option `"Use custom configuration"` and then input the desired entries:
+
+![Defining the entries in the Schema Configuration](../../images/schema-configuration-comment-meta-entries.png "Defining the entries in the Schema Configuration")
+
+Otherwise, the entries defined in the "Comment Meta" tab from the Settings will be used:
+
+![Defining the entries in the Settings](../../images/settings-comment-meta-entries.png "Defining the entries in the Settings")
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
