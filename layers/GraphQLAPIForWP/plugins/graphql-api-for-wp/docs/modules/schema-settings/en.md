@@ -4,19 +4,6 @@ Retrieve the settings from the site (stored in table `wp_options`), by querying 
 
 For security reasons, which options can be queried must be explicitly configured.
 
-By default, only the following options can be queried:
-
-- `"siteurl"`
-- `"home"`
-- `"blogname"`
-- `"blogdescription"`
-- `"WPLANG"`
-- `"posts_per_page"`
-- `"comments_per_page"`
-- `"date_format"`
-- `"time_format"`
-- `"blog_charset"`
-
 ## Description
 
 Query field `Root.option`, passing the required option as field argument `name`.
@@ -52,3 +39,18 @@ There are 2 behaviors, "Allow access" and "Deny access":
 👉🏽 <strong>Deny access:</strong> the configured entries cannot be accessed, all other entries can
 
 ![Defining the access behavior](../../images/schema-configuration-settings-behavior.jpg "Defining the access behavior")
+
+## Default entries
+
+By default, only the following options can be queried:
+
+- `"siteurl"`
+- `"home"`
+- `"blogname"`
+- `"blogdescription"`
+- `"WPLANG"`
+- `"posts_per_page"`
+- `"comments_per_page"`
+- `"date_format"`
+- `"time_format"`
+- `"blog_charset"`
