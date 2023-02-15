@@ -22,20 +22,31 @@ For instance, this query retrieves the site's URL:
 
 ## Configure the allowed options
 
-In the "Settings" tab from the Settings, we must configure the list of options that can be queried via `option`.
+We must configure the list of option names that can be queried.
 
 Each entry can either be:
 
 - A regex (regular expression), if it's surrounded by `/` or `#`, or
 - The full option name, otherwise
 
-For instance, any of these entries match option name `"siteurl"`:
+For instance, any of these entries match meta key `"siteurl"`:
 
 - `siteurl`
 - `/site.*/`
 - `#site([a-zA-Z]*)#`
 
-![Defining the entries for the Settings](../../images/settings-settings-entries.jpg "Defining the entries for the Settings")
+There are 2 places where this configuration can take place, in order of priority:
+
+1. Custom: In the corresponding Schema Configuration
+2. General: In the Settings page
+
+In the Schema Configuration applied to the endpoint, select option `"Use custom configuration"` and then input the desired entries:
+
+![Defining the entries in the Schema Configuration](../../images/schema-configuration-settings-entries.png "Defining the entries in the Schema Configuration")
+
+Otherwise, the entries defined in the "Settings" tab from the Settings will be used:
+
+![Defining the entries in the Settings](../../images/settings-settings-entries.jpg "Defining the entries in the Settings")
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
