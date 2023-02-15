@@ -6,13 +6,17 @@ For security reasons, which options can be queried must be explicitly configured
 
 ## Description
 
-Query field `Root.option`, passing the required option as field argument `name`.
+The following `Root` fields receive argument `name` and retrieve the corresponding option from the `wp_options` table:
+
+- `optionValue: AnyBuiltInScalar`
+- `optionValues: [AnyBuiltInScalar]`
+- `optionObjectValue: JSONObject`
 
 For instance, this query retrieves the site's URL:
 
 ```graphql
 {
-  optionValue(name: "home")
+  homeURL: optionValue(name: "home")
 }
 ```
 
