@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
-const defaultCategoryTaxonomies = window.graphqlApiSchemaConfigSchemaCategories ? window.graphqlApiSchemaConfigSchemaCategories.defaultCategoryTaxonomies : [];
+const defaultCategoryTaxonomies = window.graphqlApiSchemaConfigSchemaCategories.defaultCategoryTaxonomies;
 
 /**
  * Every block starts by registering a new block type definition.
@@ -97,7 +97,7 @@ registerBlockType( 'graphql-api/schema-config-schema-categories', {
 	 * @return {WPElement} Element to render.
 	 */
 	edit(props) {
-		const possibleCategoryTaxonomies = window.graphqlApiSchemaConfigSchemaCategories ? window.graphqlApiSchemaConfigSchemaCategories.possibleCategoryTaxonomies : [];
+		const possibleCategoryTaxonomies = window.graphqlApiSchemaConfigSchemaCategories.possibleCategoryTaxonomies;
 		return <EditBlock
 			possibleCategoryTaxonomies={ possibleCategoryTaxonomies }
 			{ ...props }
