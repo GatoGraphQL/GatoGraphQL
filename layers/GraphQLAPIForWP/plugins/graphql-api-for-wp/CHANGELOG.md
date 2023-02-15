@@ -14,6 +14,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Tags
   - Categories
   - Custom Post Meta
+  - Comment Meta
+  - Taxonomy Meta
+  - User Meta
 
 ### Breaking changes
 
