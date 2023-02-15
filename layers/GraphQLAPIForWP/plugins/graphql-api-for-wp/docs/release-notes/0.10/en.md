@@ -1,11 +1,5 @@
 # Release Notes: 0.10
 
-## Docs for modules "Tags" and "Categories"
-
-Added documentation for modules "Tags" and "Categories", displayed when clicking on "View details" on the corresponding entries on the Modules page.
-
-![Documentation for "Tags" module](../../images/releases/v010/tags-doc.png)
-
 ## Configure several modules via the Schema Configuration
 
 The Schema Configuration now allows to configure several additional modules:
@@ -29,6 +23,12 @@ For instance, we can now define the Custom Post Types that can be queried for so
 ![Selecting the allowed Custom Post Types in the Schema Configuration](../../images/customposts-schema-configuration-queryable-cpts.png)
 
 _Please notice: Because of the new blocks added, we will need to click on the "Reset the template" button when editing a Schema Configuration entry created on a previous version of the plugin._
+
+## Added docs for modules "Tags" and "Categories"
+
+Added documentation for modules "Tags" and "Categories", displayed when clicking on "View details" on the corresponding entries on the Modules page.
+
+![Documentation for "Tags" module](../../images/releases/v010/tags-doc.png)
 
 ## Breaking changes
 
