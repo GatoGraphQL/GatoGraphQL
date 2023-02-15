@@ -17,12 +17,12 @@ const SchemaConfigUserMetaCard = ( props ) => {
 		<SchemaConfigMetaCard
 			{ ...props }
 			labelEntity={ __('users', 'graphql-api') }
-			labelExampleItem='_edit_last'
+			labelExampleItem='last_name'
 			labelExampleEntries={
 				[
-					'_edit_last',
-					'/_edit_.*/',
-					'#_edit_([a-zA-Z]*)#',
+					'last_name',
+					'/last_.*/',
+					'#last_([a-zA-Z]*)#',
 				]
 			}
 		/>
