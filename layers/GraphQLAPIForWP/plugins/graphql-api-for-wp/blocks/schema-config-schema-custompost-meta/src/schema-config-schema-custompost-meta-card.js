@@ -77,7 +77,7 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 				<em>{ __('Behavior:', 'graphql-api') }</em>
 				<InfoTooltip
 					{ ...props }
-					text={ __('Are the entries being allowed or denied access to?', 'graphql-api') }
+					text={ __('If "Allow access" is selected, only the configured entries can be accessed, and no other can; with "Deny access", the reverse applies', 'graphql-api') }
 				/>
 				{ !isSelected && (
 					<>
