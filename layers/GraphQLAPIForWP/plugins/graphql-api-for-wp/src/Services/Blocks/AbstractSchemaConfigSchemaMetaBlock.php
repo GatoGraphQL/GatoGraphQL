@@ -9,5 +9,5 @@ abstract class AbstractSchemaConfigSchemaMetaBlock extends AbstractSchemaConfigS
     protected function getRenderBlockLabel(): string
     {
         return $this->__('Meta keys', 'graphql-api');
-    }    
+    }
 }
