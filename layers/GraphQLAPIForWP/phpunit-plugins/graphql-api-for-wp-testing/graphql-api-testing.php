@@ -30,6 +30,9 @@ add_action(
         if (!class_exists(GraphQLAPIMainPlugin::class)) {
             return;
         }
+        
+        // Load Composer’s autoloader
+        require_once(__DIR__ . '/vendor/autoload.php');
 
         /**
          * Activate the plugin, only if:
@@ -62,9 +65,6 @@ add_action(
             });
             return;
         }
-        
-        // Load Composer’s autoloader
-        require_once(__DIR__ . '/vendor/autoload.php');
 
         // Initialize the plugin
         (new Plugin())->initialize();
