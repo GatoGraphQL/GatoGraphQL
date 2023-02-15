@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-trait AllowedTaxonomyMetaFixtureEndpointWebserverRequestTestTrait
+trait AllowedCommentMetaFixtureEndpointWebserverRequestTestTrait
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-allowed-taxonomy-meta';
+        return __DIR__ . '/fixture-allowed-comment-meta';
     }
 
     /**
      * @return string[]
      */
-    protected function getAllowedTaxonomyMetaKeyEntriesNewValue(): array
+    protected function getAllowedCommentMetaKeyEntriesNewValue(): array
     {
         $allowedEntries = [
             'description',

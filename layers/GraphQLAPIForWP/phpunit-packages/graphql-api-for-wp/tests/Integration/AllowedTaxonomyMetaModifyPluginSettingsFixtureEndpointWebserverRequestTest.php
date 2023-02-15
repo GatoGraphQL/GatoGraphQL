@@ -6,9 +6,9 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 
-class AllowedCommentMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class AllowedTaxonomyMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    use AllowedCommentMetaFixtureEndpointWebserverRequestTestTrait;
+    use AllowedTaxonomyMetaFixtureEndpointWebserverRequestTestTrait;
 
     protected function getEndpoint(): string
     {
@@ -22,11 +22,11 @@ class AllowedCommentMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest 
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-comment-meta';
+        return 'graphqlapi_graphqlapi_schema-taxonomy-meta';
     }
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return $this->getAllowedCommentMetaKeyEntriesNewValue();
+        return $this->getAllowedTaxonomyMetaKeyEntriesNewValue();
     }
 }
