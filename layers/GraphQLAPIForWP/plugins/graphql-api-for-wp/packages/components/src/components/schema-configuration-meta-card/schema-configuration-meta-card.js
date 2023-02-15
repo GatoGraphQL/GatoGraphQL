@@ -34,7 +34,7 @@ const SchemaConfigMetaCard = ( props ) => {
 		.replace('%s', labelEntity);
 	const headsUpDesc = __('Entries surrounded with "/" or "#" are evaluated as regex (regular expressions).', 'graphql-api');
 	const examples = labelExampleEntries.join('", "');
-	const entryDesc = __('For example, any of these entries match meta key "%1$s": %2$s.', 'graphql-api')
+	const entryDesc = __('For example, meta key "%1$s" is matched by any of the following entries: %2$s.', 'graphql-api')
 		.replace('%1$s', labelExampleMetaKey)
 		.replace(
 			'%2$s',
