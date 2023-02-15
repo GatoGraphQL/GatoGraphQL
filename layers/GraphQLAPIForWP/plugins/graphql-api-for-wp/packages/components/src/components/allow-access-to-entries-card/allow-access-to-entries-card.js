@@ -89,7 +89,7 @@ const AllowAccessToEntriesCard = ( props ) => {
 						selected={ behavior }
 						onChange={ newValue => (
 							setAttributes( {
-								[behaviorAttributeName]: newValue
+								[ behaviorAttributeName ]: newValue
 							} )
 						)}
 					/>
