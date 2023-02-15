@@ -67,7 +67,7 @@ registerBlockType( 'graphql-api/schema-config-schema-custompost-meta', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCustomPostMetaBlock::ATTRIBUTE_NAME_ENTRIES
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock::ATTRIBUTE_NAME_ENTRIES
 		 */
 		entries: {
 			type: 'array',
@@ -75,7 +75,7 @@ registerBlockType( 'graphql-api/schema-config-schema-custompost-meta', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCustomPostMetaBlock::ATTRIBUTE_NAME_BEHAVIOR
+		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock::ATTRIBUTE_NAME_BEHAVIOR
 		 */
 		behavior: {
 			type: 'string',
