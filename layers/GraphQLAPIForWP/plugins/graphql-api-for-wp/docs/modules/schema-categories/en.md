@@ -76,7 +76,7 @@ In the Schema Configuration applied to the endpoint, by selecting option `"Use c
 
 _This list contains all the "hierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". If your desired category taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist._
 
-Otherwise, if selecting option `"Use configuration from Settings"`, the value defined under section "Included category taxonomies" in the Settings page for `Schema Custom Posts` is used:
+Otherwise, the value defined under section "Included category taxonomies" in the Settings page for `Schema Custom Posts` is used:
 
 ![Selecting the allowed category taxonomies in the Settings](../../images/categories-settings-queryable-taxonomies.png "Selecting the allowed category taxonomies in the Settings")
 

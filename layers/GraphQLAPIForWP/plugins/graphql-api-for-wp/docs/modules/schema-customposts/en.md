@@ -101,7 +101,7 @@ In the Schema Configuration applied to the endpoint, by selecting option `"Use c
 
 ![Selecting the allowed Custom Post Types in the Schema Configuration](../../images/customposts-schema-configuration-queryable-cpts.png "Selecting the allowed Custom Post Types in the Schema Configuration")
 
-Or, if selecting option `"Use configuration from Settings"`, the value defined under section "Included custom post types" in the Settings page for `Schema Custom Posts` is used:
+Otherwise, the value defined under section "Included custom post types" in the Settings page for `Schema Custom Posts` is used:
 
 ![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
 
