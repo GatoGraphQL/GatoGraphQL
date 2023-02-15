@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { RadioControl } from '@wordpress/components';
+import { ToggleControl } from '@wordpress/components';
 import { InfoTooltip } from '../info-tooltip';
 import { __ } from '@wordpress/i18n';
 import { getCustomizableConfigurationComponentClass } from '../base-styles'
@@ -20,23 +20,13 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 			},
 		} = props;
 		const componentClassName = `${ className }__customizable-configuration ${ getCustomizableConfigurationComponentClass(customizeConfiguration) }`;
-		const options = [
-			{
-				label: __('Use configuration from Settings', 'graphql-api'),
-				value: 'false',
-			},
-			{
-				label: __('Use custom configuration', 'graphql-api'),
-				value: 'true',
-			},
-		];
 		return (
 			<div className={ componentClassName }>
 				<div className="customizable-configuration-header">
-					<em>{ __('Customize configuration, or use default from Settings?', 'graphql-api') }</em>
+					<em>{ __('Customize configuration? (Or use default from Settings?)', 'graphql-api') }</em>
 					<InfoTooltip
 						{ ...props }
-						text={ __('For specific entries (see inputs below), either use the configuration defined on the Settings page or a custom configuration', 'graphql-api') }
+						text={ __('The configuration items below can be customized for endpoints using this Schema Configuration. Otherwise, the general configuration (defined on the Settings page) will be used.', 'graphql-api') }
 					/>
 					{ !isSelected && (
 						<>
@@ -50,13 +40,13 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 						</>
 					) }
 					{ isSelected &&
-						<RadioControl
+						<ToggleControl
 							{ ...props }
-							options={ options }
-							selected={ customizeConfiguration ? 'true' : 'false' }
+							label={ __('Use custom configuration', 'graphql-api') }
+							checked={ customizeConfiguration }
 							onChange={ newValue => (
 								setAttributes( {
-									customizeConfiguration: newValue === true || newValue === 'true'
+									customizeConfiguration: newValue
 								} )
 							)}
 						/>

@@ -17,6 +17,7 @@ The Schema Configuration now allows to configure several additional modules:
 - Custom Posts
 - Tags
 - Categories
+- Custom Post Meta
 
 As a result, endpoints can have a unique configuration that makes sense only for them, including:
 

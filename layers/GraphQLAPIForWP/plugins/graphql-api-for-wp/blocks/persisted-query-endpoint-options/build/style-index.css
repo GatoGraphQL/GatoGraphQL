@@ -3,3 +3,4 @@
 .graphql-api-select-card__label-group{display:flex;flex:1 1 0%;flex-wrap:wrap;position:relative;overflow:hidden;box-sizing:border-box}.graphql-api-select-card__label-item.multi{border-radius:2px;color:#333;font-size:85%;overflow:hidden;padding:3px 3px 3px 6px;text-overflow:ellipsis;white-space:nowrap;box-sizing:border-box;background-color:#e6e6e6;border-radius:2px;display:flex;margin:2px;min-width:0px;box-sizing:border-box;white-space:nowrap}
 .linkable-info-tooltip__link{margin-left:-3px}.linkable-info-tooltip__link svg.components-external-link__icon{margin:auto}
 .customizable-configuration.is-applied-false>.customizable-configuration-body{pointer-events:none;opacity:.4}
+.graphql-api-textarea-control__value-group{padding-left:20px;box-sizing:border-box;border-left:2px #e6e6e6 solid}

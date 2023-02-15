@@ -19,7 +19,7 @@ class QueryableCategoryTaxonomiesOnSchemaConfigurationCPTBlockAttributesFixtureE
         /**
          * This endpoint:
          *
-         * - Has "Customize configuration, or use default from Settings?" as Default (i.e. false)
+         * - Has "Customize configuration? (Or use default from Settings?)" as Default (i.e. false)
          */
         return 'graphql/mobile-app/';
     }

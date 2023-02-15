@@ -10,7 +10,7 @@ abstract class AbstractCustomizableConfigurationSchemaConfigurationExecuter exte
 {
     /**
      * Only execute the Schema Configuration if block option
-     * "Customize configuration, or use default from Settings?"
+     * "Customize configuration? (Or use default from Settings?)"
      * has value `true` (i.e. "Use custom configuration")
      */
     final public function executeSchemaConfiguration(int $schemaConfigurationID): void
