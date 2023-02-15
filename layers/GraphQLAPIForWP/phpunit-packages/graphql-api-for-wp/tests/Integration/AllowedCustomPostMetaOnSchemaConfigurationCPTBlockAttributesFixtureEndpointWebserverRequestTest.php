@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaMetaBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Integration\AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase;
 
 class AllowedCustomPostMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
@@ -31,7 +31,7 @@ class AllowedCustomPostMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
     {
         return [
             AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION => 'true',
-            AbstractSchemaConfigSchemaMetaBlock::ATTRIBUTE_NAME_ENTRIES => $this->getAllowedCustomPostMetaKeyEntriesNewValue(),
+            AbstractSchemaConfigSchemaAllowAccessToEntriesBlock::ATTRIBUTE_NAME_ENTRIES => $this->getAllowedCustomPostMetaKeyEntriesNewValue(),
         ];
     }
 
