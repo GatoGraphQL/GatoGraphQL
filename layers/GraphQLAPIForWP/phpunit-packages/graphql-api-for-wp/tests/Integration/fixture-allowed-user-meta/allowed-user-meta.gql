@@ -1,0 +1,5 @@
+{
+  user(by: { id: 1 }) {
+    lastName: metaValue(key: "last_name")
+  }
+}
