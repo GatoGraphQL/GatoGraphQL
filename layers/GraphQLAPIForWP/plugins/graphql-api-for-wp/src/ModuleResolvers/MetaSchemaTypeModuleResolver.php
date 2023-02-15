@@ -160,26 +160,22 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         switch ($module) {
             case self::SCHEMA_CUSTOMPOST_META:
                 return sprintf(
-                    \__('Add the <code>%1$s</code> field to custom posts, such as type <code>%2$s</code>', 'graphql-api'),
-                    'metaValue',
+                    \__('Query meta values from custom posts (such as type <code>%1$s</code>)', 'graphql-api'),
                     $this->getPostObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_USER_META:
                 return sprintf(
-                    \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
-                    'metaValue',
+                    \__('Query meta values from users (for type <code>%1$s</code>)', 'graphql-api'),
                     $this->getUserObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_COMMENT_META:
                 return sprintf(
-                    \__('Add the <code>%1$s</code> field to type <code>%2$s</code>', 'graphql-api'),
-                    'metaValue',
+                    \__('Query meta values from comments (for type <code>%1$s</code>)', 'graphql-api'),
                     $this->getCommentObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_TAXONOMY_META:
                 return sprintf(
-                    \__('Add the <code>%1$s</code> field to taxonomies, such as types <code>%2$s</code> and <code>%3$s</code>', 'graphql-api'),
-                    'metaValue',
+                    \__('Query meta values for taxonomies (such as types <code>%1$s</code> and <code>%2$s</code>)', 'graphql-api'),
                     $this->getPostTagObjectTypeResolver()->getTypeName(),
                     $this->getPostCategoryObjectTypeResolver()->getTypeName()
                 );
