@@ -128,7 +128,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $menuName = $this->getMenuName();
 
         /**
-         * Add the "GraphQL Endpoint Categories" link to the menu.
+         * Add the "Endpoint Categories" link to the menu.
          * Adding `"show_in_menu" => true` or `"show_in_menu" => "graphql_api"`
          * doesn't work, so we must use a hack.
          *
@@ -157,7 +157,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         );
 
         /**
-         * When clicking on "GraphQL Endpoint Categories" it would highlight
+         * When clicking on "Endpoint Categories" it would highlight
          * the Posts menu. With this code, it highlights the GraphQL API menu.
          *
          * @see https://stackoverflow.com/a/66094349
@@ -174,7 +174,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         );
 
         /**
-         * Finally add the "GraphQL Endpoint Categories" link to the menu.
+         * Finally add the "Endpoint Categories" link to the menu.
          */
         \add_submenu_page(
             $menuName,
