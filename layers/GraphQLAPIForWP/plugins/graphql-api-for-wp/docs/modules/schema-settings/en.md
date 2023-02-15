@@ -35,7 +35,7 @@ For instance, any of these entries match option name `"siteurl"`:
 - `/site.*/`
 - `#site([a-zA-Z]*)#`
 
-![Defining the entries for the Settings](../../images/schema-configuration-settings-entries.jpg "Defining the entries for the Settings")
+![Defining the entries for the Settings](../../images/settings-settings-entries.jpg "Defining the entries for the Settings")
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
