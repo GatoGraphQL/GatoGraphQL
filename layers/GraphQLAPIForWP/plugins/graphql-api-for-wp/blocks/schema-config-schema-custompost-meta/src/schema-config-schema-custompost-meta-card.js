@@ -30,7 +30,7 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 			behavior,
 		},
 	} = props;
-	const metaKeyDesc = __('List of all the meta keys, to either allow or deny access to, when querying fields `metaValue` and `metaValues` on %s.', 'graphql-api')
+	const metaKeyDesc = __('List of all the meta keys, to either allow or deny access to, when querying fields `metaValue` and `metaValues` on %s (one entry per line).', 'graphql-api')
 		.replace('%s', __('custom posts', 'graphql-api'));
 	const headsUpDesc = __('Entries surrounded with "/" or "#" are evaluated as regex (regular expressions).', 'graphql-api');
 	const examples = [

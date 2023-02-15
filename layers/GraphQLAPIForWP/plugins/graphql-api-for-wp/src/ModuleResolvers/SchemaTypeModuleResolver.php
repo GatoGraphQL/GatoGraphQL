@@ -909,7 +909,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_SETTINGS => sprintf(
                     \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
                     sprintf(
-                        \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code>.', 'graphql-api'),
+                        \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code> (one entry per line).', 'graphql-api'),
                         'optionValue'
                     ),
                     $headsUpDesc,
