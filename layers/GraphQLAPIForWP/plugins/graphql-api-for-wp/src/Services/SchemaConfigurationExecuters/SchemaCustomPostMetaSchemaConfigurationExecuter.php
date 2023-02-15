@@ -13,16 +13,16 @@ use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class SchemaCustomPostMetaSchemaConfigurationExecuter extends AbstractSchemaMetaSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    private ?SchemaConfigSchemaCustomPostMetaBlock $schemaConfigCustomPostsBlock = null;
+    private ?SchemaConfigSchemaCustomPostMetaBlock $schemaConfigCustomPostMetaBlock = null;
 
-    final public function setSchemaConfigSchemaCustomPostMetaBlock(SchemaConfigSchemaCustomPostMetaBlock $schemaConfigCustomPostsBlock): void
+    final public function setSchemaConfigSchemaCustomPostMetaBlock(SchemaConfigSchemaCustomPostMetaBlock $schemaConfigCustomPostMetaBlock): void
     {
-        $this->schemaConfigCustomPostsBlock = $schemaConfigCustomPostsBlock;
+        $this->schemaConfigCustomPostMetaBlock = $schemaConfigCustomPostMetaBlock;
     }
     final protected function getSchemaConfigSchemaCustomPostMetaBlock(): SchemaConfigSchemaCustomPostMetaBlock
     {
         /** @var SchemaConfigSchemaCustomPostMetaBlock */
-        return $this->schemaConfigCustomPostsBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaCustomPostMetaBlock::class);
+        return $this->schemaConfigCustomPostMetaBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaCustomPostMetaBlock::class);
     }
 
     public function getEnablingModule(): ?string

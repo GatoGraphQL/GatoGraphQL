@@ -13,16 +13,16 @@ use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class SchemaTaxonomyMetaSchemaConfigurationExecuter extends AbstractSchemaMetaSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    private ?SchemaConfigSchemaTaxonomyMetaBlock $schemaConfigTaxonomysBlock = null;
+    private ?SchemaConfigSchemaTaxonomyMetaBlock $schemaConfigSchemaTaxonomyMetaBlock = null;
 
-    final public function setSchemaConfigSchemaTaxonomyMetaBlock(SchemaConfigSchemaTaxonomyMetaBlock $schemaConfigTaxonomysBlock): void
+    final public function setSchemaConfigSchemaTaxonomyMetaBlock(SchemaConfigSchemaTaxonomyMetaBlock $schemaConfigSchemaTaxonomyMetaBlock): void
     {
-        $this->schemaConfigTaxonomysBlock = $schemaConfigTaxonomysBlock;
+        $this->schemaConfigSchemaTaxonomyMetaBlock = $schemaConfigSchemaTaxonomyMetaBlock;
     }
     final protected function getSchemaConfigSchemaTaxonomyMetaBlock(): SchemaConfigSchemaTaxonomyMetaBlock
     {
         /** @var SchemaConfigSchemaTaxonomyMetaBlock */
-        return $this->schemaConfigTaxonomysBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaTaxonomyMetaBlock::class);
+        return $this->schemaConfigSchemaTaxonomyMetaBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaTaxonomyMetaBlock::class);
     }
 
     public function getEnablingModule(): ?string

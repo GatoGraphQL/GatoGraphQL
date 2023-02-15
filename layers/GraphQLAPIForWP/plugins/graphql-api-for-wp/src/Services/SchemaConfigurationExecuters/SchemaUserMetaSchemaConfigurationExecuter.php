@@ -13,16 +13,16 @@ use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class SchemaUserMetaSchemaConfigurationExecuter extends AbstractSchemaMetaSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    private ?SchemaConfigSchemaUserMetaBlock $schemaConfigUsersBlock = null;
+    private ?SchemaConfigSchemaUserMetaBlock $schemaConfigSchemaUserMetaBlock = null;
 
-    final public function setSchemaConfigSchemaUserMetaBlock(SchemaConfigSchemaUserMetaBlock $schemaConfigUsersBlock): void
+    final public function setSchemaConfigSchemaUserMetaBlock(SchemaConfigSchemaUserMetaBlock $schemaConfigSchemaUserMetaBlock): void
     {
-        $this->schemaConfigUsersBlock = $schemaConfigUsersBlock;
+        $this->schemaConfigSchemaUserMetaBlock = $schemaConfigSchemaUserMetaBlock;
     }
     final protected function getSchemaConfigSchemaUserMetaBlock(): SchemaConfigSchemaUserMetaBlock
     {
         /** @var SchemaConfigSchemaUserMetaBlock */
-        return $this->schemaConfigUsersBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaUserMetaBlock::class);
+        return $this->schemaConfigSchemaUserMetaBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaUserMetaBlock::class);
     }
 
     public function getEnablingModule(): ?string

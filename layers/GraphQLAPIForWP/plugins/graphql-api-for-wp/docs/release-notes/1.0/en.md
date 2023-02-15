@@ -17,6 +17,7 @@ The Schema Configuration now allows to configure several additional modules:
 - Custom Posts
 - Tags
 - Categories
+- Settings
 - Custom Post Meta
 - Comment Meta
 - Taxonomy Meta

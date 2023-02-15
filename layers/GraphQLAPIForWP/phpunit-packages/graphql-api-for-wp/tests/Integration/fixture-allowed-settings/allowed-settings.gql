@@ -1,0 +1,3 @@
+{
+  blogName: optionValue(name: "blogname")
+}

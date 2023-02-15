@@ -552,8 +552,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'time_format',
                     'blog_charset',
                 ],
-                ModuleSettingOptions::BEHAVIOR => $useUnsafe ?
-                    Behaviors::DENY
+                ModuleSettingOptions::BEHAVIOR => $useUnsafe
+                    ? Behaviors::DENY
                     : Behaviors::ALLOW,
             ],
             self::SCHEMA_USER_AVATARS => [
@@ -909,8 +909,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_SETTINGS => sprintf(
                     \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
                     sprintf(
-                        \__('List of all the option names, to either allow or deny access to, when querying field <code>%s</code> (one entry per line).', 'graphql-api'),
-                        'optionValue'
+                        \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'graphql-api'),
+                        'optionValue',
+                        'optionValues',
+                        'optionObjectValue'
                     ),
                     $headsUpDesc,
                     sprintf(

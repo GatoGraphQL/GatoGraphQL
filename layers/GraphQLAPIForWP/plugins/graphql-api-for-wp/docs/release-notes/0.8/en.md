@@ -176,7 +176,7 @@ For instance, this query retrives the site's name:
 
 Which options can be accessed must be explicitly configured in the settings page:
 
-![Defining the entries for the Settings](../../images/schema-configuration-settings-entries.jpg "Defining the entries for the Settings")
+![Defining the entries for the Settings](../../images/settings-settings-entries.jpg "Defining the entries for the Settings")
 
 By default, only the following options can be queried:
 
