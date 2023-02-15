@@ -154,7 +154,7 @@ Since meta values can be anything (string, integer, float, or boolean) they have
 
 Meta values may be public or private. Which meta keys can be queried must be explicitly configured in the settings page:
 
-![Defining the entries](../../images/schema-configuration-custompost-meta-entries.png "Defining the entries")
+![Defining the entries](../../images/settings-custompost-meta-entries.png "Defining the entries")
 
 By default, the list of allowed meta keys is empty.
 
