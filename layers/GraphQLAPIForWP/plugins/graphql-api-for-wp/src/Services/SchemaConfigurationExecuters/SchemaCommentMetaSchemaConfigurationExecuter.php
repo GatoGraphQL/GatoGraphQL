@@ -13,16 +13,16 @@ use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class SchemaCommentMetaSchemaConfigurationExecuter extends AbstractSchemaMetaSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    private ?SchemaConfigSchemaCommentMetaBlock $schemaConfigCommentsBlock = null;
+    private ?SchemaConfigSchemaCommentMetaBlock $schemaConfigCommentMetaBlock = null;
 
-    final public function setSchemaConfigSchemaCommentMetaBlock(SchemaConfigSchemaCommentMetaBlock $schemaConfigCommentsBlock): void
+    final public function setSchemaConfigSchemaCommentMetaBlock(SchemaConfigSchemaCommentMetaBlock $schemaConfigCommentMetaBlock): void
     {
-        $this->schemaConfigCommentsBlock = $schemaConfigCommentsBlock;
+        $this->schemaConfigCommentMetaBlock = $schemaConfigCommentMetaBlock;
     }
     final protected function getSchemaConfigSchemaCommentMetaBlock(): SchemaConfigSchemaCommentMetaBlock
     {
         /** @var SchemaConfigSchemaCommentMetaBlock */
-        return $this->schemaConfigCommentsBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaCommentMetaBlock::class);
+        return $this->schemaConfigCommentMetaBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaCommentMetaBlock::class);
     }
 
     public function getEnablingModule(): ?string
