@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Custom Posts
   - Tags
   - Categories
+  - Settings
   - Custom Post Meta
   - Comment Meta
   - Taxonomy Meta
