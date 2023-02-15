@@ -53,7 +53,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
      */
     protected function getCustomPostTypeName(): string
     {
-        return \__('Schema Configuration', 'graphql-api');
+        return \__('GraphQL Schema Configuration', 'graphql-api');
     }
 
     /**
@@ -63,7 +63,28 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
      */
     protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
-        return \__('Schema Configurations', 'graphql-api');
+        return \__('GraphQL Schema Configurations', 'graphql-api');
+    }
+
+    /**
+     * Labels for registering the post type
+     *
+     * @param string $name_uc Singular name uppercase
+     * @param string $names_uc Plural name uppercase
+     * @param string $names_lc Plural name lowercase
+     * @return array<string,string>
+     */
+    protected function getCustomPostTypeLabels(string $name_uc, string $names_uc, string $names_lc): array
+    {
+        /**
+         * Because the name is too long, shorten it for the admin menu only
+         */
+        return array_merge(
+            parent::getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
+            array(
+                'all_items' => \__('Schema Configurations', 'graphql-api'),
+            )
+        );
     }
 
     /**
