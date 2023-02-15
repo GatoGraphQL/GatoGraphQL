@@ -89,7 +89,7 @@ registerBlockType( 'graphql-api/schema-configuration', {
 	 */
 	edit(props) {
 		const { className } = props;
-		const isAPIHierarchyEnabled = window.graphqlApiSchemaConfiguration != undefined ? window.graphqlApiSchemaConfiguration.isAPIHierarchyEnabled : true;
+		const isAPIHierarchyEnabled = window.graphqlApiSchemaConfiguration.isAPIHierarchyEnabled;
 		return (
 			<div class={ className }>
 				<EditBlock
