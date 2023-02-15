@@ -18,8 +18,8 @@ trait AllowedUserMetaFixtureEndpointWebserverRequestTestTrait
     {
         $allowedEntries = [
             'last_name',
-            '/_last_.*/',
-            '#_last_([a-zA-Z]*)#',
+            '/last_.*/',
+            '#last_([a-zA-Z]*)#',
         ];
         $value = [
             'something',
