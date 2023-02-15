@@ -1,6 +1,6 @@
 # Settings
 
-Retrieve the settings from the site (stored in table `wp_options`), by querying field `option`.
+Retrieve the settings from the site (stored in table `wp_options`), by querying fields `optionValue`, `optionValues` and `optionObjectValue`.
 
 For security reasons, which options can be queried must be explicitly configured.
 
