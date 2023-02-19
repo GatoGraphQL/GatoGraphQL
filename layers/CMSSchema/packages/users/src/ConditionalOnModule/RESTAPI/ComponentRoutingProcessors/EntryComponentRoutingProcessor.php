@@ -66,7 +66,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         /** @var ComponentModelModuleConfiguration */
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getUsersRoute() => [
+            $moduleConfiguration->getUsersRoute() => new Component(
                 FieldDataloadComponentProcessor::class,
                 $componentModelModuleConfiguration->exposeSensitiveDataInSchema() ?
                     FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
@@ -76,7 +76,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                         ? App::getState('query')
                         : $this->getGraphQLQueryToResolveRESTEndpoint()
                 ]
-            ],
+            ),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
