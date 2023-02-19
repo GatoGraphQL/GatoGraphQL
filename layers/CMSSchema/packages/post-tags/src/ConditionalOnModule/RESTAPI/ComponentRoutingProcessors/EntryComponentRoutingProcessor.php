@@ -84,7 +84,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostTagsRoute() => [
+            $moduleConfiguration->getPostTagsRoute() => new Component(
                 PostTagFieldDataloadComponentProcessor::class,
                 PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST,
                 [
@@ -92,7 +92,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                         ? App::getState('query')
                         : $this->getGraphQLQueryToResolveRESTEndpoint()
                 ]
-            ],
+            ),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -106,15 +106,15 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostsRoute() => [
+            $moduleConfiguration->getPostsRoute() => new Component(
                 TagPostFieldDataloadComponentProcessor::class,
                 TagPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
                 [
                     'query' => !empty(App::getState('query'))
                         ? App::getState('query')
                         : $this->getGraphQLQueryToResolveRESTEndpoint()
-                    ]
-                ],
+                ]
+            ),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [

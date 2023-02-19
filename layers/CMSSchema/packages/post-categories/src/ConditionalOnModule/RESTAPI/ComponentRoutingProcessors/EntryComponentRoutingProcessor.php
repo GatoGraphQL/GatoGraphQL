@@ -84,7 +84,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostCategoriesRoute() => [
+            $moduleConfiguration->getPostCategoriesRoute() => new Component(
                 PostCategoryFieldDataloadComponentProcessor::class,
                 PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
                 [
@@ -92,7 +92,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                         ? App::getState('query')
                         : $this->getGraphQLQueryToResolveRESTEndpoint()
                 ]
-            ],
+            ),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -106,15 +106,15 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostsRoute() => [
+            $moduleConfiguration->getPostsRoute() => new Component(
                 CategoryPostFieldDataloadComponentProcessor::class,
                 CategoryPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
                 [
                     'query' => !empty(App::getState('query'))
                         ? App::getState('query')
                         : $this->getGraphQLQueryToResolveRESTEndpoint()
-                    ]
-                ],
+                ]
+            ),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[CategoryRequestNature::CATEGORY][$route][] = [
