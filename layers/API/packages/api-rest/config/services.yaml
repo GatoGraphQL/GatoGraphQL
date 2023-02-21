@@ -6,8 +6,6 @@ services:
 
     PoPAPI\RESTAPI\ComponentRoutingProcessors\:
         resource: '../src/ComponentRoutingProcessors/*'
-        public: true
 
     PoPAPI\RESTAPI\DataStructureFormatters\:
         resource: '../src/DataStructureFormatters/*'
-        public: true
