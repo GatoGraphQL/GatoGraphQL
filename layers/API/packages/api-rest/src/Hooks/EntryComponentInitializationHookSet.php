@@ -64,5 +64,8 @@ class EntryComponentInitializationHookSet extends AbstractHookSet
                 $this->__('When requesting a REST resource, the GraphQL AST must be built from the entry component\'s "query" string', 'component-model')
             );
         }
+
+        $graphQLQuery = $entryComponent->atts['query'];
+        $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState($graphQLQuery);
     }
 }
