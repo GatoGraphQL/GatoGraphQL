@@ -66,7 +66,7 @@ class Engine implements EngineInterface
     public final const HOOK_ENGINE_ITERATION_START = __CLASS__ . ':engine-iteration-start';
     public final const HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT = __CLASS__ . ':engine-iteration-on-dataloading-component';
     public final const HOOK_ENGINE_ITERATION_END = __CLASS__ . ':engine-iteration-end';
-    public final const INITIALIZE_COMPONENT_ENTRY = __CLASS__ . ':initialize-component-entry';
+    public final const HOOK_ENTRY_COMPONENT_INITIALIZATION = __CLASS__ . ':entry-component-initialization';
 
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
@@ -271,7 +271,7 @@ class Engine implements EngineInterface
          * into the AppState GraphQL AST
          */
         App::doAction(
-            self::INITIALIZE_COMPONENT_ENTRY,
+            self::HOOK_ENTRY_COMPONENT_INITIALIZATION,
             $engineState->entryComponent
         );
 
