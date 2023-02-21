@@ -69,6 +69,9 @@ services:
     PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\ApplicationStateHelperService
 
+    PoP\ComponentModel\HelperServices\ApplicationStateFillerServiceInterface:
+        class: \PoP\ComponentModel\HelperServices\ApplicationStateFillerService
+
     PoP\ComponentModel\State\:
         resource: '../src/State/*'
 
