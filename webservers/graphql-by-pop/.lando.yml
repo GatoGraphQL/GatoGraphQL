@@ -14,7 +14,7 @@ services:
   appserver:
     overrides:
       environment:
-        XDEBUG_MODE:
+        XDEBUG_MODE: ''
       volumes:
         - '../../layers/API/packages/api-graphql:/app/vendor/pop-api/api-graphql'
         - >-
@@ -23,8 +23,6 @@ services:
         - '../../layers/API/packages/api:/app/vendor/pop-api/api'
         - >-
           ../../layers/Backbone/packages/php-hooks:/app/vendor/pop-backbone/php-hooks
-        # - >-
-        #   ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
         - >-
           ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
         - >-
@@ -44,10 +42,8 @@ services:
         - >-
           ../../layers/Engine/packages/componentrouting:/app/vendor/getpop/componentrouting
         - '../../layers/Engine/packages/root:/app/vendor/getpop/root'
-        - >-
-          ../../layers/Engine/packages/root-wp:/app/vendor/getpop/root-wp
-        - >-
-          ../../layers/GraphQLByPoP/clients/graphiql:/app/wordpress/graphiql
+        - '../../layers/Engine/packages/root-wp:/app/vendor/getpop/root-wp'
+        - '../../layers/GraphQLByPoP/clients/graphiql:/app/wordpress/graphiql'
         - >-
           ../../layers/GraphQLByPoP/clients/graphql-voyager:/app/wordpress/graphql-interactive
         - >-
@@ -68,7 +64,8 @@ services:
           ../../layers/CMSSchema/packages/commentmeta:/app/vendor/pop-cms-schema/commentmeta
         - >-
           ../../layers/CMSSchema/packages/comments-wp:/app/vendor/pop-cms-schema/comments-wp
-        - '../../layers/CMSSchema/packages/comments:/app/vendor/pop-cms-schema/comments'
+        - >-
+          ../../layers/CMSSchema/packages/comments:/app/vendor/pop-cms-schema/comments
         - >-
           ../../layers/CMSSchema/packages/custompost-categories-wp:/app/vendor/pop-cms-schema/custompost-categories-wp
         - >-
@@ -97,17 +94,21 @@ services:
           ../../layers/CMSSchema/packages/customposts-wp:/app/vendor/pop-cms-schema/customposts-wp
         - >-
           ../../layers/CMSSchema/packages/customposts:/app/vendor/pop-cms-schema/customposts
-        - '../../layers/CMSSchema/packages/media-wp:/app/vendor/pop-cms-schema/media-wp'
+        - >-
+          ../../layers/CMSSchema/packages/media-wp:/app/vendor/pop-cms-schema/media-wp
         - '../../layers/CMSSchema/packages/media:/app/vendor/pop-cms-schema/media'
-        - '../../layers/CMSSchema/packages/menus-wp:/app/vendor/pop-cms-schema/menus-wp'
+        - >-
+          ../../layers/CMSSchema/packages/menus-wp:/app/vendor/pop-cms-schema/menus-wp
         - '../../layers/CMSSchema/packages/menus:/app/vendor/pop-cms-schema/menus'
         - '../../layers/CMSSchema/packages/meta:/app/vendor/pop-cms-schema/meta'
-        - '../../layers/CMSSchema/packages/metaquery-wp:/app/vendor/pop-cms-schema/metaquery-wp'
+        - >-
+          ../../layers/CMSSchema/packages/metaquery-wp:/app/vendor/pop-cms-schema/metaquery-wp
         - >-
           ../../layers/CMSSchema/packages/page-mutations:/app/vendor/pop-cms-schema/page-mutations
         - >-
           ../../layers/CMSSchema/packages/pagemedia-mutations:/app/vendor/pop-cms-schema/pagemedia-mutations
-        - '../../layers/CMSSchema/packages/pages-wp:/app/vendor/pop-cms-schema/pages-wp'
+        - >-
+          ../../layers/CMSSchema/packages/pages-wp:/app/vendor/pop-cms-schema/pages-wp
         - '../../layers/CMSSchema/packages/pages:/app/vendor/pop-cms-schema/pages'
         - >-
           ../../layers/CMSSchema/packages/post-categories-wp:/app/vendor/pop-cms-schema/post-categories-wp
@@ -129,7 +130,8 @@ services:
           ../../layers/CMSSchema/packages/post-tags:/app/vendor/pop-cms-schema/post-tags
         - >-
           ../../layers/CMSSchema/packages/postmedia-mutations:/app/vendor/pop-cms-schema/postmedia-mutations
-        - '../../layers/CMSSchema/packages/posts-wp:/app/vendor/pop-cms-schema/posts-wp'
+        - >-
+          ../../layers/CMSSchema/packages/posts-wp:/app/vendor/pop-cms-schema/posts-wp
         - '../../layers/CMSSchema/packages/posts:/app/vendor/pop-cms-schema/posts'
         - >-
           ../../layers/CMSSchema/packages/queriedobject-wp:/app/vendor/pop-cms-schema/queriedobject-wp
@@ -141,8 +143,10 @@ services:
           ../../layers/CMSSchema/packages/schema-commons:/app/vendor/pop-cms-schema/schema-commons
         - >-
           ../../layers/CMSSchema/packages/settings-wp:/app/vendor/pop-cms-schema/settings-wp
-        - '../../layers/CMSSchema/packages/settings:/app/vendor/pop-cms-schema/settings'
-        - '../../layers/CMSSchema/packages/tags-wp:/app/vendor/pop-cms-schema/tags-wp'
+        - >-
+          ../../layers/CMSSchema/packages/settings:/app/vendor/pop-cms-schema/settings
+        - >-
+          ../../layers/CMSSchema/packages/tags-wp:/app/vendor/pop-cms-schema/tags-wp
         - '../../layers/CMSSchema/packages/tags:/app/vendor/pop-cms-schema/tags'
         - >-
           ../../layers/CMSSchema/packages/taxonomies-wp:/app/vendor/pop-cms-schema/taxonomies-wp
@@ -176,24 +180,32 @@ services:
           ../../layers/CMSSchema/packages/usermeta-wp:/app/vendor/pop-cms-schema/usermeta-wp
         - >-
           ../../layers/CMSSchema/packages/usermeta:/app/vendor/pop-cms-schema/usermeta
-        - '../../layers/CMSSchema/packages/users-wp:/app/vendor/pop-cms-schema/users-wp'
+        - >-
+          ../../layers/CMSSchema/packages/users-wp:/app/vendor/pop-cms-schema/users-wp
         - '../../layers/CMSSchema/packages/users:/app/vendor/pop-cms-schema/users'
         - >-
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
         - >-
           ../../layers/WPSchema/packages/block-metadata-for-wp:/app/vendor/pop-wp-schema/block-metadata-for-wp
-        - '../../layers/WPSchema/packages/commentmeta:/app/vendor/pop-wp-schema/commentmeta'
-        - '../../layers/WPSchema/packages/comments:/app/vendor/pop-wp-schema/comments'
-        - '../../layers/WPSchema/packages/custompostmeta:/app/vendor/pop-wp-schema/custompostmeta'
-        - '../../layers/WPSchema/packages/customposts:/app/vendor/pop-wp-schema/customposts'
+        - >-
+          ../../layers/WPSchema/packages/commentmeta:/app/vendor/pop-wp-schema/commentmeta
+        - >-
+          ../../layers/WPSchema/packages/comments:/app/vendor/pop-wp-schema/comments
+        - >-
+          ../../layers/WPSchema/packages/custompostmeta:/app/vendor/pop-wp-schema/custompostmeta
+        - >-
+          ../../layers/WPSchema/packages/customposts:/app/vendor/pop-wp-schema/customposts
         - '../../layers/WPSchema/packages/media:/app/vendor/pop-wp-schema/media'
         - '../../layers/WPSchema/packages/menus:/app/vendor/pop-wp-schema/menus'
         - '../../layers/WPSchema/packages/meta:/app/vendor/pop-wp-schema/meta'
         - '../../layers/WPSchema/packages/pages:/app/vendor/pop-wp-schema/pages'
         - '../../layers/WPSchema/packages/posts:/app/vendor/pop-wp-schema/posts'
-        - '../../layers/WPSchema/packages/schema-commons:/app/vendor/pop-wp-schema/schema-commons'
-        - '../../layers/WPSchema/packages/taxonomymeta:/app/vendor/pop-wp-schema/taxonomymeta'
-        - '../../layers/WPSchema/packages/usermeta:/app/vendor/pop-wp-schema/usermeta'
+        - >-
+          ../../layers/WPSchema/packages/schema-commons:/app/vendor/pop-wp-schema/schema-commons
+        - >-
+          ../../layers/WPSchema/packages/taxonomymeta:/app/vendor/pop-wp-schema/taxonomymeta
+        - >-
+          ../../layers/WPSchema/packages/usermeta:/app/vendor/pop-wp-schema/usermeta
         - '../../layers/WPSchema/packages/users:/app/vendor/pop-wp-schema/users'
     build_as_root:
       - a2enmod proxy proxy_http

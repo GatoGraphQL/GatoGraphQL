@@ -10,7 +10,6 @@
             "request": "launch",
             "port": 9003,
             "pathMappings": {
-              "/app": "${workspaceFolder}",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/access-control": "${workspaceFolder}/layers/Engine/packages/access-control",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/cache-control": "${workspaceFolder}/layers/Engine/packages/cache-control",
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/component-model": "${workspaceFolder}/layers/Engine/packages/component-model",
@@ -124,13 +123,35 @@
               "/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/users": "${workspaceFolder}/layers/WPSchema/packages/users",
               "/app/wordpress/wp-content/plugins/graphql-api": "${workspaceFolder}/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp",
               "/app/wordpress/wp-content/plugins/graphql-api-testing": "${workspaceFolder}/layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing",
+
+              
               "/app/wordpress/API/": "${workspaceFolder}/layers/API/",
               "/app/wordpress/Backbone/": "${workspaceFolder}/layers/Backbone/",
               "/app/wordpress/CMSSchema/": "${workspaceFolder}/layers/CMSSchema/",
               "/app/wordpress/Engine/": "${workspaceFolder}/layers/Engine/",
               "/app/wordpress/GraphQLByPoP/": "${workspaceFolder}/layers/GraphQLByPoP/",
               "/app/wordpress/Schema/": "${workspaceFolder}/layers/Schema/",
-              "/app/wordpress/WPSchema/": "${workspaceFolder}/layers/WPSchema/"
+              "/app/wordpress/WPSchema/": "${workspaceFolder}/layers/WPSchema/",
+
+
+              "/app": "${workspaceFolder}"
+            }
+        },           
+        {
+            "name": "[Lando webserver for GraphQL by PoP] Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "pathMappings": {
+              "/app/vendor/getpop/": "${workspaceFolder}/layers/Engine/packages/",
+              "/app/vendor/graphql-api/": "${workspaceFolder}/layers/GraphQLAPIForWP/packages/",
+              "/app/vendor/graphql-by-pop/": "${workspaceFolder}/layers/GraphQLByPoP/packages/",
+              "/app/vendor/pop-api/": "${workspaceFolder}/layers/API/packages/",
+              "/app/vendor/pop-backbone/": "${workspaceFolder}/layers/Backbone/packages/",
+              "/app/vendor/pop-cms-schema/": "${workspaceFolder}/layers/CMSSchema/packages/",
+              "/app/vendor/pop-schema/": "${workspaceFolder}/layers/Schema/packages/",
+              "/app/vendor/pop-wp-schema/": "${workspaceFolder}/layers/WPSchema/packages/",
+              "": "${workspaceFolder}"
             }
         },
         {
