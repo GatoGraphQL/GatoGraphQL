@@ -103,7 +103,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          * There are not virtual component atts when loading the component
          * the first time (i.e. for the fields at the root level).
          */
-        if ($componentAtts === []) {
+        if (($componentAtts[self::COMPONENT_ATTS_FIELD_IDS] ?? null) === null) {
             $executableDocument = App::getState('executable-document-ast');
 
             // Make sure the GraphQL query exists and was parsed properly into an AST
@@ -302,7 +302,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      */
     public function ignoreConditionalFields(array $componentAtts): bool
     {
-        return $componentAtts === [] ? true : $componentAtts[self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS] ?? true;
+        return ($componentAtts[self::COMPONENT_ATTS_FIELD_IDS] ?? null) === null ? true : $componentAtts[self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS] ?? true;
     }
 
     /**
