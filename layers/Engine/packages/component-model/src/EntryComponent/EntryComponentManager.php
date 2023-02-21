@@ -14,6 +14,8 @@ class EntryComponentManager implements EntryComponentManagerInterface
 {
     use BasicServiceTrait;
 
+    private ?Component $entryComponent = null;
+
     private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
 
     final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager): void
@@ -28,6 +30,9 @@ class EntryComponentManager implements EntryComponentManagerInterface
 
     public function getEntryComponent(): ?Component
     {
-        return $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(ComponentRoutingGroups::ENTRYCOMPONENT);
+        if ($this->entryComponent === null) {
+            $this->entryComponent = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(ComponentRoutingGroups::ENTRYCOMPONENT);
+        }
+        return $this->entryComponent;
     }
 }
