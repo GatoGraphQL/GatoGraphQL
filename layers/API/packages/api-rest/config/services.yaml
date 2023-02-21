@@ -9,3 +9,6 @@ services:
 
     PoPAPI\RESTAPI\DataStructureFormatters\:
         resource: '../src/DataStructureFormatters/*'
+
+    PoPAPI\RESTAPI\Hooks\:
+        resource: '../src/Hooks/*'
