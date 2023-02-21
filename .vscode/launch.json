@@ -246,7 +246,8 @@
               "/app/vendor/pop-wp-schema/users": "${workspaceFolder}/layers/WPSchema/packages/users",
 
 
-              "/app": "${workspaceFolder}"
+              "/app": "${workspaceFolder}",
+              "": "${workspaceFolder}"
             }
         },
         {
