@@ -12,7 +12,6 @@
         "getpop/root": "<0.10.0",
         "getpop/engine-wp": "<0.10.0",
         "getpop/routing": "<0.8.9",
-        "getpop/access-control": "<0.10.0",
         "getpop/definitions": "<0.10.0",
         "getpop/engine": "<0.10.0",
         "getpop/engine-wp-bootloader": "<0.10.0",

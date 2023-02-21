@@ -8,7 +8,6 @@
         "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.10.0",
         "getpop/engine-wp": "<0.10.0",
-        "getpop/access-control": "<0.10.0",
         "getpop/definitions": "<0.10.0",
         "getpop/engine-wp-bootloader": "<0.10.0",
         "pop-api/api-rest": "<0.10.0",

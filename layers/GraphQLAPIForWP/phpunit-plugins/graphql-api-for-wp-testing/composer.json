@@ -122,7 +122,6 @@
         "getpop/componentrouting": "<0.10.0",
         "getpop/root": "<0.10.0",
         "getpop/engine-wp": "<0.10.0",
-        "getpop/access-control": "<0.10.0",
         "getpop/definitions": "<0.10.0",
         "getpop/engine": "<0.10.0",
         "getpop/graphql-parser": "<0.10.0",
