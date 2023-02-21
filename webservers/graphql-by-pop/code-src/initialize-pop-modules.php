@@ -10,6 +10,7 @@ App::stockAndInitializeModuleClasses([
     \PoPCMSSchema\CommentMutationsWP\Module::class,
     \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
     \PoPCMSSchema\CustomPostMediaWP\Module::class,
+    \PoPCMSSchema\PageMediaMutations\Module::class,
     \PoPCMSSchema\PostMediaMutations\Module::class,
     \PoPCMSSchema\PageMutations\Module::class,
     \PoPCMSSchema\PagesWP\Module::class,
