@@ -9,11 +9,11 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
 use PoP\ComponentModel\Feedback\QueryFeedback;
-use PoP\ComponentModel\Services\BasicServiceTrait;
 use PoP\GraphQLParser\Exception\AbstractASTNodeException;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\AbstractASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
+use PoP\Root\Services\BasicServiceTrait;
 
 class ApplicationStateFillerService implements ApplicationStateFillerServiceInterface
 {
