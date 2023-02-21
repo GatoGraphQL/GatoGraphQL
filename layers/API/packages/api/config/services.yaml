@@ -19,6 +19,9 @@ services:
     PoPAPI\API\QueryResolution\QueryASTTransformationServiceInterface:
         class: \PoPAPI\API\QueryResolution\QueryASTTransformationService
 
+    PoPAPI\API\HelperServices\ApplicationStateFillerServiceInterface:
+        class: \PoPAPI\API\HelperServices\ApplicationStateFillerService
+
     PoPAPI\API\State\:
         resource: '../src/State/*'
 

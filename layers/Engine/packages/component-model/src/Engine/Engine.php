@@ -7,21 +7,21 @@ namespace PoP\ComponentModel\Engine;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataProperties;
-use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
+use PoP\ComponentModel\Constants\DataSources;
+use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Constants\Response;
@@ -65,6 +65,7 @@ class Engine implements EngineInterface
     public final const HOOK_ENGINE_ITERATION_START = __CLASS__ . ':engine-iteration-start';
     public final const HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT = __CLASS__ . ':engine-iteration-on-dataloading-component';
     public final const HOOK_ENGINE_ITERATION_END = __CLASS__ . ':engine-iteration-end';
+    public final const HOOK_ENTRY_COMPONENT_INITIALIZATION = __CLASS__ . ':entry-component-initialization';
 
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
@@ -250,6 +251,18 @@ class Engine implements EngineInterface
                 $this->__('No entry component for this request', 'component-model')
             );
         }
+
+        /**
+         * Allow modules to initialize some state related
+         * to the Component.
+         *
+         * Eg: the REST module can convert the "query" att
+         * into the AppState GraphQL AST
+         */
+        App::doAction(
+            self::HOOK_ENTRY_COMPONENT_INITIALIZATION,
+            $engineState->entryComponent
+        );
 
         return $engineState->entryComponent;
     }
