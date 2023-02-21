@@ -32,6 +32,9 @@ class ApplicationStateFillerService implements ApplicationStateFillerServiceInte
     }
 
     /**
+     * Inject the GraphQL query AST and variables into
+     * the app state.
+     *
      * @param array<string,mixed> $variables
      */
     public function defineGraphQLQueryVarsInApplicationState(
