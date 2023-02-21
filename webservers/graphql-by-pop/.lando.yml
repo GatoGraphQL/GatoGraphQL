@@ -23,8 +23,8 @@ services:
         - '../../layers/API/packages/api:/app/vendor/pop-api/api'
         - >-
           ../../layers/Backbone/packages/php-hooks:/app/vendor/pop-backbone/php-hooks
-        - >-
-          ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
+        # - >-
+        #   ../../layers/Engine/packages/access-control:/app/vendor/getpop/access-control
         - >-
           ../../layers/Engine/packages/cache-control:/app/vendor/getpop/cache-control
         - >-
