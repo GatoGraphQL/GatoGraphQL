@@ -33,7 +33,6 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
-use PoP\ComponentModel\HelperServices\ApplicationStateFillerServiceInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -85,7 +84,6 @@ class Engine implements EngineInterface
     private ?ComponentHelpersInterface $componentHelpers = null;
     private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
     private ?DatabaseEntryManagerInterface $databaseEntryManager = null;
-    private ?ApplicationStateFillerServiceInterface $applicationStateFillerService = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -218,15 +216,6 @@ class Engine implements EngineInterface
         /** @var DatabaseEntryManagerInterface */
         return $this->databaseEntryManager ??= $this->instanceManager->getInstance(DatabaseEntryManagerInterface::class);
     }
-    final public function setApplicationStateFillerService(ApplicationStateFillerServiceInterface $applicationStateFillerService): void
-    {
-        $this->applicationStateFillerService = $applicationStateFillerService;
-    }
-    final protected function getApplicationStateFillerService(): ApplicationStateFillerServiceInterface
-    {
-        /** @var ApplicationStateFillerServiceInterface */
-        return $this->applicationStateFillerService ??= $this->instanceManager->getInstance(ApplicationStateFillerServiceInterface::class);
-    }
 
     /**
      * @return array<string,mixed>
@@ -274,16 +263,6 @@ class Engine implements EngineInterface
             self::HOOK_ENTRY_COMPONENT_INITIALIZATION,
             $engineState->entryComponent
         );
-
-        /**
-         * If no query was requested, and the entry component defines
-         * a query (eg: REST), then parse it and set as the app query
-         * to resolve
-         */
-        $executableDocument = App::getState('executable-document-ast');
-        if ($executableDocument === null && isset($engineState->entryComponent->atts['query'])) {
-
-        }
 
         return $engineState->entryComponent;
     }

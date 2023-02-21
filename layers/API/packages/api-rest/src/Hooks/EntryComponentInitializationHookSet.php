@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\RESTAPI\Hooks;
 
+use PoPAPI\API\HelperServices\ApplicationStateFillerServiceInterface;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\ComponentModel\Component\Component;

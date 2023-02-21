@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\HelperServices;
+namespace PoPAPI\API\Facades\HelperServices;
 
 use PoP\Root\App;
-use PoP\ComponentModel\HelperServices\ApplicationStateFillerServiceInterface;
+use PoPAPI\API\HelperServices\ApplicationStateFillerServiceInterface;
 
 class ApplicationStateFillerServiceFacade
 {

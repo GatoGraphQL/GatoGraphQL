@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\HelperServices;
+namespace PoPAPI\API\HelperServices;
 
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 

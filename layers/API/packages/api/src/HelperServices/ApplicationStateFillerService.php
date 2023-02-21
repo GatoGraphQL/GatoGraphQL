@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\HelperServices;
+namespace PoPAPI\API\HelperServices;
 
 use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoP\ComponentModel\App;
