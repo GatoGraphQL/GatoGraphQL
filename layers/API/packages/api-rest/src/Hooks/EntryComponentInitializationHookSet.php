@@ -47,7 +47,8 @@ class EntryComponentInitializationHookSet extends AbstractHookSet
 
     public function initializeEntryComponent(Component $entryComponent): void
     {
-        if (App::getState('scheme') !== APISchemes::API
+        if (
+            App::getState('scheme') !== APISchemes::API
             || App::getState('datastructure') !== $this->getRestDataStructureFormatter()->getName()
         ) {
             return;
