@@ -1,11 +1,9 @@
 {
     "name": "getpop/engine",
     "conflict": {
-        "getpop/translation": "<0.8.9",
         "getpop/mandatory-directives-by-configuration": "<0.10.0",
         "getpop/filestore": "<0.10.0",
         "getpop/root-wp": "<0.10.0",
-        "getpop/hooks": "<0.8.9",
         "getpop/root": "<0.10.0",
         "getpop/engine-wp": "<0.10.0",
         "getpop/definitions": "<0.10.0",
