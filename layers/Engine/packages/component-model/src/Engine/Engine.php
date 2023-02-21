@@ -66,6 +66,7 @@ class Engine implements EngineInterface
     public final const HOOK_ENGINE_ITERATION_START = __CLASS__ . ':engine-iteration-start';
     public final const HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT = __CLASS__ . ':engine-iteration-on-dataloading-component';
     public final const HOOK_ENGINE_ITERATION_END = __CLASS__ . ':engine-iteration-end';
+    public final const INITIALIZE_COMPONENT_ENTRY = __CLASS__ . ':initialize-component-entry';
 
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
@@ -261,6 +262,18 @@ class Engine implements EngineInterface
                 $this->__('No entry component for this request', 'component-model')
             );
         }
+
+        /**
+         * Allow modules to initialize some state related
+         * to the Component.
+         *
+         * Eg: the REST module can convert the "query" att
+         * into the AppState GraphQL AST
+         */
+        App::doAction(
+            self::INITIALIZE_COMPONENT_ENTRY,
+            $engineState->entryComponent
+        );
 
         /**
          * If no query was requested, and the entry component defines
