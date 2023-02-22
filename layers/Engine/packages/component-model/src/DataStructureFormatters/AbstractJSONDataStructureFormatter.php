@@ -36,14 +36,11 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
             return parent::getFormattedData($data);
         }
 
-        $databases = $data['databases'];
-        unset($data['databases']);
-        return [
-            ...parent::getFormattedData($data),
-            [
-                'databases' => $this->getDatabasesOutput($databases),
-            ]
-        ];
+        /**
+         * Convert entries from SplObjectStorage to string
+         */
+        $data['databases'] = $this->getDatabasesOutput($data['databases']);
+        return $data;
     }
 
     /**
