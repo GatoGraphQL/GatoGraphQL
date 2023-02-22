@@ -66,6 +66,14 @@ class Engine implements EngineInterface
     public final const HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT = __CLASS__ . ':engine-iteration-on-dataloading-component';
     public final const HOOK_ENGINE_ITERATION_END = __CLASS__ . ':engine-iteration-end';
     public final const HOOK_ENTRY_COMPONENT_INITIALIZATION = __CLASS__ . ':entry-component-initialization';
+    public final const HOOK_GENERATE_DATA_BEGINNING = __CLASS__ . ':generate-data:beginning';
+    public final const HOOK_PROCESS_AND_GENERATE_DATA_HELPER_CALCULATIONS = __CLASS__ . ':process-and-generate-data:helper-calculations';
+    public final const HOOK_ADD_ETAG_HEADER = __CLASS__ . ':add-etag-header';
+    public final const HOOK_ETAG_HEADER_COMMON_CODE = __CLASS__ . ':etag-header:common-code';
+    public final const HOOK_EXTRA_ROUTES = __CLASS__ . ':extra-routes';
+    public final const HOOK_REQUEST_META = __CLASS__ . ':request-meta';
+    public final const HOOK_SESSION_META = __CLASS__ . ':session-meta';
+    public final const HOOK_SITE_META = __CLASS__ . ':site-meta';
 
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
@@ -279,7 +287,7 @@ class Engine implements EngineInterface
      */
     protected function getEtagHeader(): ?string
     {
-        $addEtagHeader = App::applyFilters('\PoP\ComponentModel\Engine:outputData:addEtagHeader', true);
+        $addEtagHeader = App::applyFilters(self::HOOK_ADD_ETAG_HEADER, true);
         if (!$addEtagHeader) {
             return null;
         }
@@ -324,7 +332,7 @@ class Engine implements EngineInterface
 
         // Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
         $commoncode = App::applyFilters(
-            '\PoP\ComponentModel\Engine:etag_header:commoncode',
+            self::HOOK_ETAG_HEADER_COMMON_CODE,
             $commoncode
         );
         return hash('md5', $commoncode);
@@ -355,7 +363,7 @@ class Engine implements EngineInterface
 
         // Enable to add extra URLs in a fixed manner
         $engineState->extra_routes = App::applyFilters(
-            '\PoP\ComponentModel\Engine:getExtraRoutes',
+            self::HOOK_EXTRA_ROUTES,
             $engineState->extra_routes
         );
 
@@ -439,7 +447,7 @@ class Engine implements EngineInterface
         App::regenerateEngineState();
         App::regenerateMutationResolutionStore();
 
-        App::doAction('\PoP\ComponentModel\Engine:beginning');
+        App::doAction(self::HOOK_GENERATE_DATA_BEGINNING);
 
         // Process the request and obtain the results
         $this->processAndGenerateData();
@@ -583,7 +591,7 @@ class Engine implements EngineInterface
 
         // Allow for extra operations (eg: calculate resources)
         App::doAction(
-            '\PoP\ComponentModel\Engine:helperCalculations',
+            self::HOOK_PROCESS_AND_GENERATE_DATA_HELPER_CALCULATIONS,
             array(&$engineState->helperCalculations),
             $component,
             array(&$engineState->props)
@@ -804,7 +812,7 @@ class Engine implements EngineInterface
         }
 
         return App::applyFilters(
-            '\PoP\ComponentModel\Engine:request-meta',
+            self::HOOK_REQUEST_META,
             $meta
         );
     }
@@ -815,7 +823,7 @@ class Engine implements EngineInterface
     public function getSessionMeta(): array
     {
         return App::applyFilters(
-            '\PoP\ComponentModel\Engine:session-meta',
+            self::HOOK_SESSION_META,
             []
         );
     }
@@ -849,7 +857,7 @@ class Engine implements EngineInterface
             };
         }
         return App::applyFilters(
-            '\PoP\ComponentModel\Engine:site-meta',
+            self::HOOK_SITE_META,
             $meta
         );
     }
