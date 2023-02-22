@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DataStructureFormatters;
 
 use PoP\ComponentModel\DataStructureFormatters\AbstractDataStructureFormatter;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
 {
@@ -77,6 +79,10 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
                 if (!empty($val)) {
                     $str .= $this->arrayToHtmlTableRecursive($val);
                 }
+            } elseif ($val instanceof SplObjectStorage) {
+                if ($val->count() > 0) {
+                    $str .= $this->arrayToHtmlTableRecursive($this->convertSplObjectStorageToArray($val));
+                }
             } else {
                 $str .= "<strong>$val</strong>";
             }
@@ -84,5 +90,23 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
         }
         $str .= "</tbody></table>";
         return $str;
+    }
+
+    /**
+     * @param SplObjectStorage<mixed,mixed> $objectStorage
+     * @return array<mixed,mixed>
+     */
+    protected function convertSplObjectStorageToArray(SplObjectStorage $objectStorage): array
+    {
+        $ret = [];
+        foreach ($objectStorage as $key) {
+            $value = $objectStorage[$key];
+            if ($key instanceof FieldInterface) {
+                $ret[$key->getOutputKey()] = $value;
+                continue;
+            }
+            $ret[$key] = $value;
+        }
+        return $ret;
     }
 }
