@@ -72,7 +72,7 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
      * so these must be handled separately.
      *
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
-     * @param array<string,array<string|int,stdClass<string,mixed>>> $outputDatabase
+     * @param array<string,array<string|int,stdClass>> $outputDatabase
      */
     protected function addDatabaseOutput(array &$database, array &$outputDatabase): void
     {

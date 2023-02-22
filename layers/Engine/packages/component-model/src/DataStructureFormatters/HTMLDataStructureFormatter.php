@@ -65,7 +65,7 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
     }
 
     /**
-     * @param array<string,mixed> $arr
+     * @param array<string|int,mixed> $arr
      * @see https://stackoverflow.com/a/36760478
      */
     protected function arrayToHtmlTableRecursive(array $arr): string
@@ -93,19 +93,15 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
     }
 
     /**
-     * @param SplObjectStorage<mixed,mixed> $objectStorage
-     * @return array<mixed,mixed>
+     * @param SplObjectStorage<FieldInterface,mixed> $objectStorage
+     * @return array<string,mixed>
      */
     protected function convertSplObjectStorageToArray(SplObjectStorage $objectStorage): array
     {
         $ret = [];
         foreach ($objectStorage as $key) {
             $value = $objectStorage[$key];
-            if ($key instanceof FieldInterface) {
-                $ret[$key->getOutputKey()] = $value;
-                continue;
-            }
-            $ret[$key] = $value;
+            $ret[$key->getOutputKey()] = $value;
         }
         return $ret;
     }
