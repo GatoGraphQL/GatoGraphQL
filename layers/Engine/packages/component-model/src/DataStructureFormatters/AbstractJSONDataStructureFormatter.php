@@ -32,15 +32,15 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
      */
     public function getFormattedData(array $data): array
     {
-        $dataoutputitems = App::getState('dataoutputitems');
-        if (!in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
-            return parent::getFormattedData($data);
-        }
-
         /**
          * Convert entries from SplObjectStorage to string
          */
-        $data['databases'] = $this->getDatabasesOutput($data['databases']);
+        if (isset($data['databases'])) {
+            $data['databases'] = $this->getDatabasesOutput($data['databases']);
+        }
+        if (isset($data['unionTypeOutputKeyIDs'])) {
+            $data['unionTypeOutputKeyIDs'] = $this->getDatabasesOutput($data['unionTypeOutputKeyIDs']);
+        }
         return $data;
     }
 
