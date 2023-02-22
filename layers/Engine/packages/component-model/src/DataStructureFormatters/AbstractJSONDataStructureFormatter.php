@@ -49,10 +49,6 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
      */
     protected function getDatabasesOutput(array $databases): array
     {
-        if (empty($databases)) {
-            return [];
-        }
-
         $outputDatabase = [];
         $dboutputmode = App::getState('dboutputmode');
         if ($dboutputmode === DatabasesOutputModes::SPLITBYDATABASES) {
@@ -81,6 +77,7 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
     {
         foreach ($database as $dbKey => $dbObjectIDStorage) {
             foreach ($dbObjectIDStorage as $dbObjectID => $dbObjectStorage) {
+                $outputDatabase[$dbKey][$dbObjectID] ??= [];
                 /** @var FieldInterface $field */
                 foreach ($dbObjectStorage as $field) {
                     /** @var mixed $field */
