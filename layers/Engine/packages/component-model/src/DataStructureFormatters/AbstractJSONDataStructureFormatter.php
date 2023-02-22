@@ -9,6 +9,7 @@ use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
+use stdClass;
 
 abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureFormatter
 {
@@ -71,18 +72,18 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
      * so these must be handled separately.
      *
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
-     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $outputDatabase
+     * @param array<string,array<string|int,stdClass<string,mixed>>> $outputDatabase
      */
     protected function addDatabaseOutput(array &$database, array &$outputDatabase): void
     {
         foreach ($database as $dbKey => $dbObjectIDStorage) {
             foreach ($dbObjectIDStorage as $dbObjectID => $dbObjectStorage) {
-                $outputDatabase[$dbKey][$dbObjectID] ??= [];
+                $outputDatabase[$dbKey][$dbObjectID] ??= new stdClass;
                 /** @var FieldInterface $field */
                 foreach ($dbObjectStorage as $field) {
                     /** @var mixed $field */
                     $fieldValue = $dbObjectStorage[$field];
-                    $outputDatabase[$dbKey][$dbObjectID][$field->getOutputKey()] = $fieldValue;
+                    $outputDatabase[$dbKey][$dbObjectID]->{$field->getOutputKey()} = $fieldValue;
                 }
             }
         }
