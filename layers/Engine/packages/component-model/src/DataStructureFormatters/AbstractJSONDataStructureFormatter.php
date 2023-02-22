@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DataStructureFormatters;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
@@ -63,7 +62,7 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
         } elseif ($dboutputmode === DatabasesOutputModes::COMBINED) {
             $this->addDatabaseOutput($databases, $outputDatabase);
         }
-        
+
         return $outputDatabase;
     }
 
@@ -78,7 +77,7 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
     {
         foreach ($database as $dbKey => $dbObjectIDStorage) {
             foreach ($dbObjectIDStorage as $dbObjectID => $dbObjectStorage) {
-                $outputDatabase[$dbKey][$dbObjectID] ??= new stdClass;
+                $outputDatabase[$dbKey][$dbObjectID] ??= new stdClass();
                 /** @var FieldInterface $field */
                 foreach ($dbObjectStorage as $field) {
                     /** @var mixed $field */
