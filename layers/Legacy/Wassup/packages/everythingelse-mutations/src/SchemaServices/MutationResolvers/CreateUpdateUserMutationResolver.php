@@ -73,9 +73,9 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         $limited_email_domains = get_site_option('limited_email_domains');
-        if (is_array($limited_email_domains) && empty($limited_email_domains) == false) {
+        if (is_array($limited_email_domains) && empty($limited_email_domains) === false) {
             $emaildomain = substr($user_email, 1 + strpos($user_email, '@'));
-            if (in_array($emaildomain, $limited_email_domains) == false) {
+            if (in_array($emaildomain, $limited_email_domains) === false) {
                 // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
             //     new ObjectTypeFieldResolutionFeedback(
@@ -97,7 +97,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     ): void {
         // Check the username
         $user_login = $fieldDataAccessor->getValue('username');
-        if ($user_login == '') {
+        if ($user_login === '') {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
             //     new ObjectTypeFieldResolutionFeedback(

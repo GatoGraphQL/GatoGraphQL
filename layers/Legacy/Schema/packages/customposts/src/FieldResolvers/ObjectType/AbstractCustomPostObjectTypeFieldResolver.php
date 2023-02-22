@@ -69,7 +69,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 $date = $customPostTypeAPI->getPublishedDate($customPost);
                 $format = $fieldDataAccessor->getValue('format');
                 if (!$format) {
-                    $format = ($dateFormatter->format('Y', $date) == date('Y')) ? 'j M, H:i' : 'j M Y, H:i';
+                    $format = ($dateFormatter->format('Y', $date) === date('Y')) ? 'j M, H:i' : 'j M Y, H:i';
                 }
                 return $dateFormatter->format($format, $date);
         }

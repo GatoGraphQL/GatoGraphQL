@@ -244,7 +244,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     public function getDataAccessCheckpoints(Component $component, array &$props): array
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($component, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
+            if ($this->getRelevantRouteCheckpointTarget($component, $props) === DataLoading::DATA_ACCESS_CHECKPOINTS) {
                 return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getRouteCheckpoints($route));
             }
         }
@@ -259,7 +259,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     public function getActionExecutionCheckpoints(Component $component, array &$props): array
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
-            if ($this->getRelevantRouteCheckpointTarget($component, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
+            if ($this->getRelevantRouteCheckpointTarget($component, $props) === DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
                 return $this->maybeOverrideCheckpoints(SettingsManagerFactory::getInstance()->getRouteCheckpoints($route));
             }
         }

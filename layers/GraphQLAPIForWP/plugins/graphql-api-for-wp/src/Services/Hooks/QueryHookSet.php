@@ -53,7 +53,7 @@ class QueryHookSet extends AbstractHookSet
         if (
             isset($query['post_type'])
             && (!isset($options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS]) || !$options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS])
-            && isset($options[SchemaCommonsQueryOptions::RETURN_TYPE]) && $options[SchemaCommonsQueryOptions::RETURN_TYPE] == ReturnTypes::IDS
+            && isset($options[SchemaCommonsQueryOptions::RETURN_TYPE]) && $options[SchemaCommonsQueryOptions::RETURN_TYPE] === ReturnTypes::IDS
         ) {
             /**
              * All CPTs from the GraphQL API plugin and its extensions

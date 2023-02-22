@@ -190,15 +190,15 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolverBridge extends Ab
     public function getSuccessString(string|int $result_id): ?string
     {
         $status = $this->getCustomPostTypeAPI()->getStatus($result_id);
-        if ($status == CustomPostStatus::PUBLISH) {
+        if ($status === CustomPostStatus::PUBLISH) {
             $success_string = sprintf(
                 $this->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
                 $this->getCustomPostTypeAPI()->getPermalink($result_id),
                 getReloadurlLinkattrs()
             );
-        } elseif ($status == CustomPostStatus::DRAFT) {
+        } elseif ($status === CustomPostStatus::DRAFT) {
             $success_string = $this->__('The status is still “Draft”, so it won\'t be online.', 'pop-application');
-        } elseif ($status == CustomPostStatus::PENDING) {
+        } elseif ($status === CustomPostStatus::PENDING) {
             $success_string = $this->__('Now waiting for approval from the admins.', 'pop-application');
         }
 

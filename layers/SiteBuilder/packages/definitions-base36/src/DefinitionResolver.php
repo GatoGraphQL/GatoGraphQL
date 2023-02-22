@@ -50,15 +50,15 @@ class DefinitionResolver implements DefinitionResolverInterface
         $this->definition_counters[$group] = $this->definition_counters[$group] + 1;
 
         // If we reach a number whose base 36 conversion starts with a number, and not a letter, then skip
-        if ($this->definition_counters[$group] == 36) {
+        if ($this->definition_counters[$group] === 36) {
             // 36 in base 10 = 10 in base 36
             // 360 in base 10 = a0 in base 36
             $this->definition_counters[$group] = 360;
-        } elseif ($this->definition_counters[$group] == 1296) {
+        } elseif ($this->definition_counters[$group] === 1296) {
             // 1296 in base 10 = 100 in base 36
             // 12960 in base 10 = a00 in base 36
             $this->definition_counters[$group] = 12960;
-        } elseif ($this->definition_counters[$group] == 46656) {
+        } elseif ($this->definition_counters[$group] === 46656) {
             // 46656 in base 10 = 1000 in base 36
             // 466560 in base 10 = a000 in base 36
             $this->definition_counters[$group] = 466560;

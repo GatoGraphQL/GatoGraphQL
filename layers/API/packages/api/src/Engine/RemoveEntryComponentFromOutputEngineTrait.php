@@ -25,7 +25,7 @@ trait RemoveEntryComponentFromOutputEngineTrait
             App::getModule(APIModule::class)->isEnabled() &&
             App::getState('scheme') === APISchemes::API &&
             in_array(Actions::REMOVE_ENTRYCOMPONENT_FROM_OUTPUT, App::getState('actions')) &&
-            App::getState('dataoutputmode') == DataOutputModes::COMBINED
+            App::getState('dataoutputmode') === DataOutputModes::COMBINED
         ) {
             if ($data['datasetcomponentsettings'] ?? null) {
                 $data['datasetcomponentsettings'] = $this->removeEntryComponentFromOutput($data['datasetcomponentsettings']);

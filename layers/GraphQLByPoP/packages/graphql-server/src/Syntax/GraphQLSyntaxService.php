@@ -11,7 +11,7 @@ class GraphQLSyntaxService implements GraphQLSyntaxServiceInterface
      */
     public function isListWrappingType(string $typeNameOrID): bool
     {
-        return substr($typeNameOrID, 0, 1) == '[' && substr($typeNameOrID, -1) == ']';
+        return substr($typeNameOrID, 0, 1) === '[' && substr($typeNameOrID, -1) === ']';
     }
 
     /**
@@ -27,7 +27,7 @@ class GraphQLSyntaxService implements GraphQLSyntaxServiceInterface
      */
     public function isNonNullWrappingType(string $typeNameOrID): bool
     {
-        return substr($typeNameOrID, -1) == '!';
+        return substr($typeNameOrID, -1) === '!';
     }
 
     /**

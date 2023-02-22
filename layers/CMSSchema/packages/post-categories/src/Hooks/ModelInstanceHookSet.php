@@ -55,8 +55,8 @@ class ModelInstanceHookSet extends AbstractHookSet
 
         // Properties specific to each nature
         if (
-            $nature == RequestNature::CUSTOMPOST
-            && App::getState(['routing', 'queried-object-post-type']) == $this->getPostTypeAPI()->getPostCustomPostType()
+            $nature === RequestNature::CUSTOMPOST
+            && App::getState(['routing', 'queried-object-post-type']) === $this->getPostTypeAPI()->getPostCustomPostType()
         ) {
             // Single may depend on its post_type and category
             // Post and Event may be different

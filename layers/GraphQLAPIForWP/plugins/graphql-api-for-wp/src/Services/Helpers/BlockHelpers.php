@@ -36,7 +36,7 @@ class BlockHelpers
             return [];
         }
         // If it's trashed, then do not use
-        if ($configurationPost->post_status == 'trash') {
+        if ($configurationPost->post_status === 'trash') {
             return [];
         }
 

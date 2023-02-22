@@ -200,7 +200,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             \add_action(
                 "save_post_{$postType}",
                 function ($postID, $post): void {
-                    if ($post->post_status == 'auto-draft') {
+                    if ($post->post_status === 'auto-draft') {
                         return;
                     }
                     $this->getUserSettingsManager()->storeOperationalTimestamp();

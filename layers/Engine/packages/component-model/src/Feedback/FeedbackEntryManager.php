@@ -158,12 +158,12 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         $dboutputmode = App::getState('dboutputmode');
 
         // Combine all the databases or send them separate
-        if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
+        if ($dboutputmode === DatabasesOutputModes::SPLITBYDATABASES) {
             $ret[$name] = $entries;
             return;
         }
 
-        if ($dboutputmode == DatabasesOutputModes::COMBINED) {
+        if ($dboutputmode === DatabasesOutputModes::COMBINED) {
             // Filter to make sure there are entries
             if ($entries = array_filter($entries)) {
                 /** @var array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> */

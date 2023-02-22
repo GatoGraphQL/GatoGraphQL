@@ -55,7 +55,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         $ret = parent::getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 
         // Needed to loadLatest, to know from what time to get results
-        if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
+        if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] === DataSources::MUTABLEONREQUEST) {
             /** @var ComponentModelModuleInfo */
             $moduleInfo = App::getModule(ComponentModelModule::class)->getInfo();
             $ret[GD_URLPARAM_TIMESTAMP] = $moduleInfo->getTime();

@@ -22,8 +22,8 @@ trait AccessControlConfigurableMandatoryDirectivesForItemsTrait
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return
-            ($moduleConfiguration->usePrivateSchemaMode() && $individualControlSchemaMode == SchemaModes::PRIVATE_SCHEMA_MODE) ||
-            (!$moduleConfiguration->usePrivateSchemaMode() && $individualControlSchemaMode == SchemaModes::PUBLIC_SCHEMA_MODE);
+            ($moduleConfiguration->usePrivateSchemaMode() && $individualControlSchemaMode === SchemaModes::PRIVATE_SCHEMA_MODE) ||
+            (!$moduleConfiguration->usePrivateSchemaMode() && $individualControlSchemaMode === SchemaModes::PUBLIC_SCHEMA_MODE);
     }
 
     abstract protected function getSchemaMode(): string;

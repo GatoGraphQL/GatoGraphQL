@@ -140,7 +140,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         if (isset($query['limit'])) {
             $limit = (int) $query['limit'];
             // To bring all results, must use "number => 0" instead of -1
-            $query['number'] = ($limit == -1) ? 0 : $limit;
+            $query['number'] = ($limit === -1) ? 0 : $limit;
             unset($query['limit']);
         }
         if (isset($query['search'])) {
@@ -263,9 +263,9 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         $comment = $comment;
         if ($comment->comment_approved == "1") {
             return CommentStatus::APPROVE;
-        } elseif ($comment->comment_approved == "spam") {
+        } elseif ($comment->comment_approved === "spam") {
             return CommentStatus::SPAM;
-        } elseif ($comment->comment_approved == "trash") {
+        } elseif ($comment->comment_approved === "trash") {
             return CommentStatus::TRASH;
         };
         return CommentStatus::HOLD;

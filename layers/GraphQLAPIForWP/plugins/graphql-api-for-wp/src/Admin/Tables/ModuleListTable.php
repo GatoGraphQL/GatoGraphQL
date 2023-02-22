@@ -55,7 +55,7 @@ class ModuleListTable extends AbstractItemListTable
             $moduleTypeResolver = $moduleTypeRegistry->getModuleTypeResolver($moduleType);
             $moduleTypeSlug = $moduleTypeResolver->getSlug($moduleType);
             // If filtering the view, only add the items with that module type
-            if (!$currentView || $currentView == $moduleTypeSlug) {
+            if (!$currentView || $currentView === $moduleTypeSlug) {
                 $isEnabled = $moduleRegistry->isModuleEnabled($module);
                 $items[] = [
                     'module' => $module,
@@ -107,7 +107,7 @@ class ModuleListTable extends AbstractItemListTable
         $views['all'] = sprintf(
             '<a href="%s" class="%s">%s</a>',
             $url,
-            $currentView == '' ? 'current' : '',
+            $currentView === '' ? 'current' : '',
             \__('All', 'graphql-api')
         );
 
@@ -127,7 +127,7 @@ class ModuleListTable extends AbstractItemListTable
             $views[$moduleTypeSlug] = sprintf(
                 '<a href="%s" class="%s">%s</a>',
                 \add_query_arg(self::URL_PARAM_MODULE_TYPE, $moduleTypeSlug, $url),
-                'module-type-view module-type-' . $moduleTypeSlug . ($currentView == $moduleTypeSlug ? ' current' : ''),
+                'module-type-view module-type-' . $moduleTypeSlug . ($currentView === $moduleTypeSlug ? ' current' : ''),
                 $moduleTypeResolver->getName($moduleType)
             );
         }

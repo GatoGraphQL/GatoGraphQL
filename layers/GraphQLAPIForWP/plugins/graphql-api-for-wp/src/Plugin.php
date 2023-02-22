@@ -51,7 +51,7 @@ class Plugin extends AbstractMainPlugin
         // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
         $currentMinorReleaseVersion = $this->getMinorReleaseVersion($this->pluginVersion);
         $previousMinorReleaseVersion = $this->getMinorReleaseVersion($storedVersion);
-        if ($currentMinorReleaseVersion == $previousMinorReleaseVersion) {
+        if ($currentMinorReleaseVersion === $previousMinorReleaseVersion) {
             return;
         }
         // All checks passed, show the release notes

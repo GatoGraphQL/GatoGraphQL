@@ -107,7 +107,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getStatus($customPost);
 
             case 'isStatus':
-                return $fieldDataAccessor->getValue('status') == $customPostTypeAPI->getStatus($customPost);
+                return $fieldDataAccessor->getValue('status') === $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
                 /** @var string */

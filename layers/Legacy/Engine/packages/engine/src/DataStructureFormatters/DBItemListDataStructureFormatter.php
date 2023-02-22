@@ -53,11 +53,11 @@ class DBItemListDataStructureFormatter extends AbstractJSONDataStructureFormatte
                 // Eg: notifications can appear under "database" and "userstatedatabase", showing different fields on each
                 $merged_databases = array();
                 $dboutputmode = App::getState('dboutputmode');
-                if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
+                if ($dboutputmode === DatabasesOutputModes::SPLITBYDATABASES) {
                     foreach ($databases as $database_name => $database) {
                         $this->addDBEntries($database, $merged_databases);
                     }
-                } elseif ($dboutputmode == DatabasesOutputModes::COMBINED) {
+                } elseif ($dboutputmode === DatabasesOutputModes::COMBINED) {
                     $this->addDBEntries($databases, $merged_databases);
                 }
 
