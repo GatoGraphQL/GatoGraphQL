@@ -79,7 +79,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
             ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT
         );
         // `null` is stored as OPTION_VALUE_NO_VALUE_ID
-        if ($schemaConfigurationID == ModuleSettingOptionValues::NO_VALUE_ID) {
+        if ($schemaConfigurationID === ModuleSettingOptionValues::NO_VALUE_ID) {
             return null;
         }
         return $schemaConfigurationID;

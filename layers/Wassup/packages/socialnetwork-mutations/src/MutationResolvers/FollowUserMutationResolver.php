@@ -24,7 +24,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
         $user_id = App::getState('current-user-id');
         $target_id = $fieldDataAccessor->getValue('target_id');
 
-        if ($user_id == $target_id) {
+        if ($user_id === $target_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
             //     new ObjectTypeFieldResolutionFeedback(

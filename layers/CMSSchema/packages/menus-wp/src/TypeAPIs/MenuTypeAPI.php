@@ -166,7 +166,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
             // Assign the limit as the required attribute
             // To bring all results, get_categories needs "number => 0" instead of -1
-            $query['number'] = ($limit == -1) ? 0 : $limit;
+            $query['number'] = ($limit === -1) ? 0 : $limit;
             unset($query['limit']);
         }
         if (isset($query['search'])) {

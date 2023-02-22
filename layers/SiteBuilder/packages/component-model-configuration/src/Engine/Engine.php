@@ -114,14 +114,14 @@ class Engine extends UpstreamEngine implements EngineInterface
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULSETTINGS, $mutableonmodel_settings);
             }
         }
-        if ($datasourceselector == DataSourceSelectors::MODELANDREQUEST) {
+        if ($datasourceselector === DataSourceSelectors::MODELANDREQUEST) {
             $mutableonrequest_settings = $processor->getMutableonrequestSettingsComponentTree($component, $props);
         }
 
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-        if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
+        if ($dataoutputmode === DataOutputModes::SPLITBYSOURCES) {
             // Save the model settings
             if ($immutable_settings) {
                 $ret['componentsettings']['immutable'] = $immutable_settings;
@@ -132,7 +132,7 @@ class Engine extends UpstreamEngine implements EngineInterface
             if ($mutableonrequest_settings) {
                 $ret['componentsettings']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_settings) : $mutableonrequest_settings;
             }
-        } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
+        } elseif ($dataoutputmode === DataOutputModes::COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
             if (
                 $combined_settings = array_merge_recursive(

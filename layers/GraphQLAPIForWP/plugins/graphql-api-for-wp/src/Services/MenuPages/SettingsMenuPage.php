@@ -114,11 +114,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                 if (!empty($possibleValues)) {
                                     $this->printSelectField($module, $itemSetting);
-                                } elseif ($type == Properties::TYPE_ARRAY) {
+                                } elseif ($type === Properties::TYPE_ARRAY) {
                                     $this->printTextareaField($module, $itemSetting);
-                                } elseif ($type == Properties::TYPE_BOOL) {
+                                } elseif ($type === Properties::TYPE_BOOL) {
                                     $this->printCheckboxField($module, $itemSetting);
-                                } elseif ($type == Properties::TYPE_NULL) {
+                                } elseif ($type === Properties::TYPE_NULL) {
                                     $this->printLabelField($module, $itemSetting);
                                 } else {
                                     $this->printInputField($module, $itemSetting);
@@ -331,7 +331,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
         $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
-        $isNumber = isset($itemSetting[Properties::TYPE]) && $itemSetting[Properties::TYPE] == Properties::TYPE_INT;
+        $isNumber = isset($itemSetting[Properties::TYPE]) && $itemSetting[Properties::TYPE] === Properties::TYPE_INT;
         $minNumber = null;
         if ($isNumber) {
             $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;

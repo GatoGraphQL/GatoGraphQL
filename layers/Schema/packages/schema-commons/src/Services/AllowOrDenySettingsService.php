@@ -34,8 +34,8 @@ class AllowOrDenySettingsService implements AllowOrDenySettingsServiceInterface
             $entries
         ));
         if (
-            ($behavior == Behaviors::ALLOW && count($matchResults) === 0)
-            || ($behavior == Behaviors::DENY && count($matchResults) > 0)
+            ($behavior === Behaviors::ALLOW && count($matchResults) === 0)
+            || ($behavior === Behaviors::DENY && count($matchResults) > 0)
         ) {
             return false;
         }

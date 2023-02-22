@@ -108,11 +108,11 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
 EOF;
         $schemaConfigurationContent = '';
         $schemaConfigurationID = $attributes[self::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION] ?? null;
-        if ($schemaConfigurationID == self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
+        if ($schemaConfigurationID === self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
             $schemaConfigurationContent = \__('Default', 'graphql-api');
-        } elseif ($schemaConfigurationID == self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
+        } elseif ($schemaConfigurationID === self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
             $schemaConfigurationContent = \__('None', 'graphql-api');
-        } elseif ($schemaConfigurationID == self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
+        } elseif ($schemaConfigurationID === self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
             $schemaConfigurationContent = \__('Inherit from parent', 'graphql-api');
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);

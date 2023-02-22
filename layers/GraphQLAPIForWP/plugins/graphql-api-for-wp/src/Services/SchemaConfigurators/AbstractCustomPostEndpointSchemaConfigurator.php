@@ -54,11 +54,11 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
 
         $schemaConfiguration = $schemaConfigurationBlockDataItem['attrs'][EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION] ?? null;
         // Check if $schemaConfiguration is one of the meta options (default, none, inherit)
-        if ($schemaConfiguration == EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
+        if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
             return null;
-        } elseif ($schemaConfiguration == EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
+        } elseif ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
             return $this->getUserSettingSchemaConfigurationID();
-        } elseif ($schemaConfiguration == EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
+        } elseif ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
             // If disabled by module, then return nothing
             if (!$this->getModuleRegistry()->isModuleEnabled(EndpointConfigurationFunctionalityModuleResolver::API_HIERARCHY)) {
                 return null;
@@ -88,7 +88,7 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
             ModuleSettingOptions::DEFAULT_VALUE
         );
         // `null` is stored as OPTION_VALUE_NO_VALUE_ID
-        if ($schemaConfigurationID == ModuleSettingOptionValues::NO_VALUE_ID) {
+        if ($schemaConfigurationID === ModuleSettingOptionValues::NO_VALUE_ID) {
             return null;
         }
         return $schemaConfigurationID;

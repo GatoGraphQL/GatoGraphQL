@@ -342,7 +342,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
-                return ($status == AAL_POP_STATUS_READ);
+                return ($status === AAL_POP_STATUS_READ);
 
             case 'isStatusNotRead':
                 $is_read = $objectTypeResolver->resolveValue(
@@ -402,19 +402,19 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $notification->object_name;
 
             case 'isPostNotification':
-                return $notification->object_type == 'Post';
+                return $notification->object_type === 'Post';
 
             case 'isUserNotification':
-                return $notification->object_type == 'User';
+                return $notification->object_type === 'User';
 
             case 'isCommentNotification':
-                return $notification->object_type == 'Comments';
+                return $notification->object_type === 'Comments';
 
             case 'isTaxonomyNotification':
-                return $notification->object_type == 'Taxonomy';
+                return $notification->object_type === 'Taxonomy';
 
             case 'isAction':
-                return $fieldDataAccessor->getValue('action') == $notification->action;
+                return $fieldDataAccessor->getValue('action') === $notification->action;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

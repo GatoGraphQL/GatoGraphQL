@@ -205,7 +205,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         if (isset($query['limit'])) {
             $limit = (int) $query['limit'];
             // To bring all results, get_categories/get_tags needs "number => 0" instead of -1
-            $query['number'] = ($limit == -1) ? 0 : $limit;
+            $query['number'] = ($limit === -1) ? 0 : $limit;
             unset($query['limit']);
         }
         if (isset($query['search'])) {

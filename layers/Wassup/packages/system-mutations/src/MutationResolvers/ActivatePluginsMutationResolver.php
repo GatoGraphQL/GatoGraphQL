@@ -76,7 +76,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
         $version = $this->getApplicationInfo()->getVersion();
         $activated = [];
         foreach ($plugin_version as $plugin => $activate_version) {
-            if ($activate_version == $version) {
+            if ($activate_version === $version) {
                 if ($this->runActivatePlugin($plugin . '/' . $plugin . '.php')) {
                     $activated[] = $plugin;
                 }

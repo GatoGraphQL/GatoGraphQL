@@ -265,7 +265,7 @@ abstract class AbstractContentParser implements ContentParserInterface
             $panelTabs = '<h2 class="nav-tab-wrapper">';
             $headersCount = count($headers);
             for ($i = 0; $i < $headersCount; $i++) {
-                $isFirstTab = $i == 0;
+                $isFirstTab = $i === 0;
                 $panelTabs .= sprintf(
                     '<a href="#doc-panel-%s" class="nav-tab %s">%s</a>',
                     $i + 1,
@@ -346,7 +346,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                     $link
                 );
                 // 2. If there were no classes
-                if ($replacedLink == $link) {
+                if ($replacedLink === $link) {
                     $replacedLink = str_replace(
                         "<a ",
                         "<a class=\"{$classnames}\" ",

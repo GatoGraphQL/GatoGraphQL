@@ -55,7 +55,7 @@ class PluginOptionsFormHandler
     {
         global $pagenow;
         if (
-            $pagenow == 'options.php'
+            $pagenow === 'options.php'
             && App::request(SettingsMenuPage::FORM_ORIGIN) === SettingsMenuPage::SETTINGS_FIELD
         ) {
             $value = $this->getNormalizedOptionValues();

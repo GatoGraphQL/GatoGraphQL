@@ -98,7 +98,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
             $paths,
             function (string $item) use ($paths): bool {
                 foreach ($paths as $path) {
-                    if (strlen($item) > strlen($path) && str_starts_with($item, $path) && $item[strlen($path)] == ComponentPath::COMPONENT_SEPARATOR) {
+                    if (strlen($item) > strlen($path) && str_starts_with($item, $path) && $item[strlen($path)] === ComponentPath::COMPONENT_SEPARATOR) {
                         return false;
                     }
                 }

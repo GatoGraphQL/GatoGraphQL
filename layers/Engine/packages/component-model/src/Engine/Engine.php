@@ -575,7 +575,7 @@ class Engine implements EngineInterface
         $engineState->model_props = $this->getModelPropsComponentTree($component);
 
         // If only getting static content, then no need to add the mutableonrequest props
-        if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
+        if ($datasourceselector === DataSourceSelectors::ONLYMODEL) {
             $engineState->props = $engineState->model_props;
         } else {
             $engineState->props = $this->addRequestPropsComponentTree($component, $engineState->model_props);
@@ -750,11 +750,11 @@ class Engine implements EngineInterface
         // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-        if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
+        if ($dataoutputmode === DataOutputModes::SPLITBYSOURCES) {
             if ($immutable_datasetsettings) {
                 $ret['datasetcomponentsettings']['immutable'] = $immutable_datasetsettings;
             }
-        } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
+        } elseif ($dataoutputmode === DataOutputModes::COMBINED) {
             // If everything is combined, then it belongs under "mutableonrequest"
             if ($combined_datasetsettings = $immutable_datasetsettings) {
                 $ret['datasetcomponentsettings'] = $has_extra_routes ? array($current_uri => $combined_datasetsettings) : $combined_datasetsettings;
@@ -1265,7 +1265,7 @@ class Engine implements EngineInterface
             $mutableonmodel_data_properties
         );
 
-        if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
+        if ($datasourceselector === DataSourceSelectors::ONLYMODEL) {
             $root_data_properties = $model_data_properties;
         } else {
             $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetcomponentTree($root_component, $root_props);
@@ -1312,7 +1312,7 @@ class Engine implements EngineInterface
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
             // If we are only requesting data from the model alone, and this dataloading component depends on mutableonrequest, then skip it
-            if ($datasourceselector == DataSourceSelectors::ONLYMODEL && $datasource == DataSources::MUTABLEONREQUEST) {
+            if ($datasourceselector === DataSourceSelectors::ONLYMODEL && $datasource === DataSources::MUTABLEONREQUEST) {
                 continue;
             }
 
@@ -1350,7 +1350,7 @@ class Engine implements EngineInterface
                 )
             ) {
                 $component_props = &$model_props;
-            } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
+            } elseif ($datasource === DataSources::MUTABLEONREQUEST) {
                 $component_props = &$props;
             }
 
@@ -1440,7 +1440,7 @@ class Engine implements EngineInterface
                     // these ones must be fetched even if the block has a static typeResolver
                     // If it has extend, add those ids under its relationalTypeOutputKey
                     $dataload_extend_settings = $processor->getModelSupplementaryDBObjectDataComponentTree($component, $model_props);
-                    if ($datasource == DataSources::MUTABLEONREQUEST) {
+                    if ($datasource === DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
                             $dataload_extend_settings,
                             $processor->getMutableonrequestSupplementaryDBObjectDataComponentTree($component, $props)
@@ -1472,19 +1472,19 @@ class Engine implements EngineInterface
 
             // Save the results on either the static or mutableonrequest branches
             $datasetcomponentdata = $datasetcomponentmeta = null;
-            if ($datasource == DataSources::IMMUTABLE) {
+            if ($datasource === DataSources::IMMUTABLE) {
                 $datasetcomponentdata = &$immutable_datasetcomponentdata;
                 if ($add_meta) {
                     $datasetcomponentmeta = &$immutable_datasetcomponentmeta;
                 }
                 $engineState->componentdata = &$immutable_componentdata;
-            } elseif ($datasource == DataSources::MUTABLEONMODEL) {
+            } elseif ($datasource === DataSources::MUTABLEONMODEL) {
                 $datasetcomponentdata = &$mutableonmodel_datasetcomponentdata;
                 if ($add_meta) {
                     $datasetcomponentmeta = &$mutableonmodel_datasetcomponentmeta;
                 }
                 $engineState->componentdata = &$mutableonmodel_componentdata;
-            } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
+            } elseif ($datasource === DataSources::MUTABLEONREQUEST) {
                 $datasetcomponentdata = &$mutableonrequest_datasetcomponentdata;
                 if ($add_meta) {
                     $datasetcomponentmeta = &$mutableonrequest_datasetcomponentmeta;
@@ -1533,7 +1533,7 @@ class Engine implements EngineInterface
                         )
                     ) {
                         $referencer_component_props = &$referencer_model_props;
-                    } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
+                    } elseif ($datasource === DataSources::MUTABLEONREQUEST) {
                         $referencer_component_props = &$referencer_props;
                     }
                     $this->processAndAddComponentData($referencer_componentPath, $referencer_component, $referencer_component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
@@ -1571,7 +1571,7 @@ class Engine implements EngineInterface
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
-            if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
+            if ($dataoutputmode === DataOutputModes::SPLITBYSOURCES) {
                 /** @phpstan-ignore-next-line */
                 if ($immutable_componentdata) {
                     $ret['componentdata']['immutable'] = $immutable_componentdata;
@@ -1611,7 +1611,7 @@ class Engine implements EngineInterface
                         $ret['datasetcomponentmeta']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetcomponentmeta) : $mutableonrequest_datasetcomponentmeta;
                     }
                 }
-            } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
+            } elseif ($dataoutputmode === DataOutputModes::COMBINED) {
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if (
                     $combined_componentdata = array_merge_recursive(
@@ -2117,12 +2117,12 @@ class Engine implements EngineInterface
         $dboutputmode = App::getState('dboutputmode');
 
         // Combine all the databases or send them separate
-        if ($dboutputmode == DatabasesOutputModes::SPLITBYDATABASES) {
+        if ($dboutputmode === DatabasesOutputModes::SPLITBYDATABASES) {
             $ret[$name] = $entries;
             return;
         }
 
-        if ($dboutputmode == DatabasesOutputModes::COMBINED) {
+        if ($dboutputmode === DatabasesOutputModes::COMBINED) {
             // Filter to make sure there are entries
             if ($entries = array_filter($entries)) {
                 /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */

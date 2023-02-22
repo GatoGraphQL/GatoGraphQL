@@ -103,7 +103,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
         }
 
         // Validate the following conditions only if status = pending/publish
-        if ($fieldDataAccessor->getValue(MutationInputProperties::STATUS) == CustomPostStatus::DRAFT) {
+        if ($fieldDataAccessor->getValue(MutationInputProperties::STATUS) === CustomPostStatus::DRAFT) {
             return;
         }
 
@@ -140,7 +140,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
         if ($validateCategories = $this->validateCategories($fieldDataAccessor)) {
             $category_error_msgs = $this->getCategoriesErrorMessages();
             if (empty($fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES))) {
-                if ($validateCategories == self::VALIDATECATEGORIESTYPE_ATLEASTONE) {
+                if ($validateCategories === self::VALIDATECATEGORIESTYPE_ATLEASTONE) {
                     // @todo Migrate from string to FeedbackItemProvider
                 // $objectTypeFieldResolutionFeedbackStore->addError(
                 //     new ObjectTypeFieldResolutionFeedback(
@@ -152,7 +152,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
                 //     )
                 // );
                     $errors[] = $category_error_msgs['empty-categories'];
-                } elseif ($validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
+                } elseif ($validateCategories === self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
                     // @todo Migrate from string to FeedbackItemProvider
                 // $objectTypeFieldResolutionFeedbackStore->addError(
                 //     new ObjectTypeFieldResolutionFeedback(
@@ -165,7 +165,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
                 // );
                     $errors[] = $category_error_msgs['empty-category'];
                 }
-            } elseif (count($fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES)) > 1 && $validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
+            } elseif (count($fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES)) > 1 && $validateCategories === self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
                 // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
             //     new ObjectTypeFieldResolutionFeedback(

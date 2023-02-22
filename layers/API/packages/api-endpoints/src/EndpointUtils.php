@@ -35,6 +35,6 @@ class EndpointUtils
      */
     public static function doesURIEndWith(string $uri, string $endpointURI): bool
     {
-        return substr($uri, -1 * strlen($endpointURI)) == $endpointURI;
+        return substr($uri, -1 * strlen($endpointURI)) === $endpointURI;
     }
 }
