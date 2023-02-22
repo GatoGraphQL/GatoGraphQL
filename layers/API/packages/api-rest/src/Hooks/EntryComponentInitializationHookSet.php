@@ -59,8 +59,7 @@ class EntryComponentInitializationHookSet extends AbstractHookSet
          * a query (eg: REST), then parse it and set as the app query
          * to resolve
          */
-        $executableDocument = App::getState('executable-document-ast');
-        if ($executableDocument !== null || !isset($entryComponent->atts['query'])) {
+        if (!isset($entryComponent->atts['query'])) {
             throw new ImpossibleToHappenException(
                 $this->__('When requesting a REST resource, the GraphQL AST must be built from the entry component\'s "query" string', 'component-model')
             );
