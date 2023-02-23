@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use PoP\ComponentModel\App;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -125,7 +128,9 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             ];
 
             // If any extension depends on this, it shall enable it
-            if (false) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->enableSettingClientIPAddressServerPropertyName()) {
                 $moduleSettings[] = [
                     Properties::NAME => $this->getSettingOptionName(
                         $module,
