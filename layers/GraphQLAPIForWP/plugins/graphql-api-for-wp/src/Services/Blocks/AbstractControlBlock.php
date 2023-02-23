@@ -119,7 +119,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                     $fieldTypeContent = '';
                     foreach ($typeFieldsForPrint as $typeName => $fields) {
                         $fieldTypeContent .= sprintf(
-                            '<strong>%s</strong>' . $ulPlaceholder,
+                            '<em>%s</em>' . $ulPlaceholder,
                             $typeName,
                             implode(
                                 $liPlaceholder,
