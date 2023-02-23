@@ -100,7 +100,7 @@ class RequestHelperService implements RequestHelperServiceInterface
      * variable `CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME`.
      *
      * Depending on the environment, some candidates are:
-     * 
+     *
      * - 'HTTP_CLIENT_IP'
      * - 'HTTP_CF_CONNECTING_IP' (for Cloudflare)
      * - 'HTTP_X_FORWARDED_FOR' (for AWS)
