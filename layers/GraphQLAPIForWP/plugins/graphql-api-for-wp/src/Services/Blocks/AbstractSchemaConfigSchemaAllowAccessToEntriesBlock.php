@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 abstract class AbstractSchemaConfigSchemaAllowAccessToEntriesBlock extends AbstractSchemaConfigCustomizableConfigurationBlock
 {
-    public final const ATTRIBUTE_NAME_ENTRIES = 'entries';
-    public final const ATTRIBUTE_NAME_BEHAVIOR = 'behavior';
-
     /**
      * Pass localized data to the block
      *
@@ -40,8 +38,8 @@ abstract class AbstractSchemaConfigSchemaAllowAccessToEntriesBlock extends Abstr
     protected function doRenderBlock(array $attributes, string $content): string
     {
         $placeholder = '<p><strong>%s</strong></p>%s';
-        $entries = $attributes[self::ATTRIBUTE_NAME_ENTRIES] ?? [];
-        $behavior = $attributes[self::ATTRIBUTE_NAME_BEHAVIOR] ?? $this->getDefaultBehavior();
+        $entries = $attributes[BlockAttributeNames::ENTRIES] ?? [];
+        $behavior = $attributes[BlockAttributeNames::BEHAVIOR] ?? $this->getDefaultBehavior();
         return sprintf(
             $placeholder,
             $this->getRenderBlockLabel(),

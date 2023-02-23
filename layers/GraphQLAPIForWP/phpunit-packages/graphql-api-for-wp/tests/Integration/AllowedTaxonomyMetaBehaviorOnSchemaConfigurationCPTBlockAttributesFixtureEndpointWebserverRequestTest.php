@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock;
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class AllowedTaxonomyMetaBehaviorOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AllowedTaxonomyMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest
@@ -21,7 +21,7 @@ class AllowedTaxonomyMetaBehaviorOnSchemaConfigurationCPTBlockAttributesFixtureE
     {
         return [
             ...parent::getCPTBlockAttributesNewValue(),
-            AbstractSchemaConfigSchemaAllowAccessToEntriesBlock::ATTRIBUTE_NAME_BEHAVIOR => $this->getBehaviorNewValue(),
+            BlockAttributeNames::BEHAVIOR => $this->getBehaviorNewValue(),
         ];
     }
 
