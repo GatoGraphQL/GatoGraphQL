@@ -16,6 +16,7 @@ use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutati
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
@@ -33,6 +34,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     private ?CommentTypeMutationAPIInterface $commentTypeMutationAPI = null;
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?RequestHelperServiceInterface $requestHelperService = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -69,6 +71,15 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     {
         /** @var CustomPostTypeAPIInterface */
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+    }
+    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
+    {
+        $this->requestHelperService = $requestHelperService;
+    }
+    final protected function getRequestHelperService(): RequestHelperServiceInterface
+    {
+        /** @var RequestHelperServiceInterface */
+        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
     }
 
     public function validate(
@@ -228,7 +239,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     protected function getCommentData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $comment_data = [
-            'authorIP' => App::server('REMOTE_ADDR'),
+            'authorIP' => $this->getRequestHelperService()->getClientIPAddress(),
             'agent' => App::server('HTTP_USER_AGENT'),
             'content' => $fieldDataAccessor->getValue(MutationInputProperties::COMMENT),
             'parent' => $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID),
