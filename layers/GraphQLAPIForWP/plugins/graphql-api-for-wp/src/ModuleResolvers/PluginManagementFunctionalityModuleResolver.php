@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use PoP\ComponentModel\App;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -20,6 +23,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
+    public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -84,6 +88,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             self::GENERAL => [
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
+                self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME => 'REMOTE_ADDR',
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -121,6 +126,28 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::DESCRIPTION => \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied.', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
+
+            // If any extension depends on this, it shall enable it
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->enableSettingClientIPAddressServerPropertyName()) {
+                $option = self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('$_SERVER property name to retrieve the client IP', 'graphql-api'),
+                    Properties::DESCRIPTION => sprintf(
+                        '%s<br/><br/>%s<br/><br/>%s',
+                        \__('(This option has been enabled because some extension in the plugin depends on it.)', 'graphql-api'),
+                        \__('The visitor\'s IP address is retrieved from under <code>$_SERVER</code>. Property <code>\'REMOTE_ADDR\'</code> is set as default, but must be overriden depending on the platform/environment.', 'graphql-api'),
+                        \__('For instance, Cloudflare might use <code>\'HTTP_CF_CONNECTING_IP\'</code>, AWS might use <code>\'HTTP_X_FORWARDED_FOR\'</code>, etc.', 'graphql-api'),
+                    ),
+                    Properties::TYPE => Properties::TYPE_STRING,
+                ];
+            }
         }
         return $moduleSettings;
     }
