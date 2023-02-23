@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
+use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Integration\AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase;
 
 class AllowedCommentMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
@@ -31,7 +31,7 @@ class AllowedCommentMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWe
     {
         return [
             AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION => 'true',
-            AbstractSchemaConfigSchemaAllowAccessToEntriesBlock::ATTRIBUTE_NAME_ENTRIES => $this->getAllowedCommentMetaKeyEntriesNewValue(),
+            BlockAttributeNames::ENTRIES => $this->getAllowedCommentMetaKeyEntriesNewValue(),
         ];
     }
 

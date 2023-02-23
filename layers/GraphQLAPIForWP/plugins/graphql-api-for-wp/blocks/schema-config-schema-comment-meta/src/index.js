@@ -66,7 +66,7 @@ registerBlockType( 'graphql-api/schema-config-schema-comment-meta', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock::ATTRIBUTE_NAME_ENTRIES
+		 * GraphQLAPI\GraphQLAPI\Services\Constants\BlockAttributeNames::ENTRIES
 		 */
 		entries: {
 			type: 'array',
@@ -74,7 +74,7 @@ registerBlockType( 'graphql-api/schema-config-schema-comment-meta', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock::ATTRIBUTE_NAME_BEHAVIOR
+		 * GraphQLAPI\GraphQLAPI\Services\Constants\BlockAttributeNames::BEHAVIOR
 		 */
 		behavior: {
 			type: 'string',
