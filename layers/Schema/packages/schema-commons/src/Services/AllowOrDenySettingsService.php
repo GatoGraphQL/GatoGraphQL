@@ -21,6 +21,9 @@ class AllowOrDenySettingsService implements AllowOrDenySettingsServiceInterface
         }
         $matchResults = array_filter(array_map(
             function (string $termOrRegex) use ($name): bool {
+                // Remove whitespaces at either end of the string
+                $termOrRegex = trim($termOrRegex);
+
                 // Check if it is a regex expression
                 if (
                     (str_starts_with($termOrRegex, '/') && str_ends_with($termOrRegex, '/'))
