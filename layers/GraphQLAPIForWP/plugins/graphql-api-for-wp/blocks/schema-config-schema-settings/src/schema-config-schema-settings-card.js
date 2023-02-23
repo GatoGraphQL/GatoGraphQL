@@ -8,7 +8,12 @@ import { compose, withState } from '@wordpress/compose';
  * Internal dependencies
  */
 import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
-import { AllowAccessToEntriesCard } from '@graphqlapi/components';
+import {
+	AllowAccessToEntriesCard,
+	withCustomizableConfiguration,
+	withEditableOnFocus,
+	withCard,
+} from '@graphqlapi/components';
 
 const SchemaConfigSettingsCard = ( props ) => {
 	return (
@@ -31,9 +36,12 @@ const SchemaConfigSettingsCard = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Settings', 'graphql-api'),
 		className: 'graphql-api-settings',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
+	withCard(),
+	withCustomizableConfiguration(),
 ] )( SchemaConfigSettingsCard );

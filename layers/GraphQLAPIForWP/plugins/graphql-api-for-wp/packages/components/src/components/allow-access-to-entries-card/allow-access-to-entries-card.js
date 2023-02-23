@@ -2,16 +2,12 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { compose } from '@wordpress/compose';
 import { RadioControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { withEditableOnFocus } from '../editable-on-focus';
-import { withCard } from '../card';
 import { InfoTooltip } from '../info-tooltip';
-import { withCustomizableConfiguration } from '../customizable-configuration';
 import { EditableArrayTextareaControl } from '../editable-array-textarea-control';
 import {
 	ATTRIBUTE_VALUE_BEHAVIOR_ALLOW,
@@ -99,8 +95,4 @@ const AllowAccessToEntriesCard = ( props ) => {
 	);
 }
 
-export default compose( [
-	withEditableOnFocus(),
-	withCard(),
-	withCustomizableConfiguration(),
-] )( AllowAccessToEntriesCard );
+export default AllowAccessToEntriesCard;

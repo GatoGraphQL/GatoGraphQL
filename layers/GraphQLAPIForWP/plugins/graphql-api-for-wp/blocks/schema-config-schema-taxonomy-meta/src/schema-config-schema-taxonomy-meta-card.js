@@ -10,6 +10,9 @@ import { compose, withState } from '@wordpress/compose';
 import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
 	SchemaConfigMetaCard,
+	withCustomizableConfiguration,
+	withEditableOnFocus,
+	withCard,
 } from '@graphqlapi/components';
 
 const SchemaConfigTaxonomyMetaCard = ( props ) => {
@@ -30,9 +33,12 @@ const SchemaConfigTaxonomyMetaCard = ( props ) => {
 }
 
 export default compose( [
+	withEditableOnFocus(),
 	withState( {
 		header: __('Taxonomy Meta', 'graphql-api'),
 		className: 'graphql-api-taxonomy-meta',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
+	withCard(),
+	withCustomizableConfiguration(),
 ] )( SchemaConfigTaxonomyMetaCard );
