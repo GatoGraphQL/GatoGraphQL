@@ -132,7 +132,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         'intro'
                     ),
                     Properties::TITLE => \__('Info: Retrieving the visitor\'s IP address', 'graphql-api'),
-                    Properties::DESCRIPTION => \__('The visitor\'s IP address is retrieved from under `$_SERVER`. Property "REMOTE_ADDR" is set as default (it works on most cases), but must be overriden depending on the platform/environment.<br/><br/>For instance, Cloudflare might use "HTTP_CF_CONNECTING_IP", AWS might use "HTTP_X_FORWARDED_FOR", etc.', 'graphql-api'),
+                    Properties::DESCRIPTION => sprintf(
+                        '%s<br/><br/>%s<br/><br/>%s',
+                        \__('(This property has been enabled because some extension in the plugin depends on it.)', 'graphql-api'),
+                        \__('The visitor\'s IP address is retrieved from under `$_SERVER`. Property "REMOTE_ADDR" is set as default (it works on most cases), but must be overriden depending on the platform/environment.', 'graphql-api'),
+                        \__('For instance, Cloudflare might use "HTTP_CF_CONNECTING_IP", AWS might use "HTTP_X_FORWARDED_FOR", etc.', 'graphql-api'),
+                    ),
                     Properties::TYPE => Properties::TYPE_NULL,
                 ];
                 $option = self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME;
