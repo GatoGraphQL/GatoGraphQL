@@ -352,9 +352,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function getVisitorIPServerPropertyName(): string
+    public function getClientIPAddressServerPropertyName(): string
     {
-        $envVariable = Environment::VISITOR_IP_SERVER_PROPERTY_NAME;
+        $envVariable = Environment::CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME;
         $defaultValue = 'REMOTE_ADDR';
 
         return $this->retrieveConfigurationValueOrUseDefault(

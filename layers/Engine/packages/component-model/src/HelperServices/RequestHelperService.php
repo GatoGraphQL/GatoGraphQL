@@ -97,7 +97,7 @@ class RequestHelperService implements RequestHelperServiceInterface
      *
      * By default it gets the IP from $_SERVER['REMOTE_ADDR'],
      * and the property name can be configured via the environmen
-     * variable `VISITOR_IP_SERVER_PROPERTY_NAME`.
+     * variable `CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME`.
      *
      * Depending on the environment, some candidates are:
      * 
@@ -105,11 +105,11 @@ class RequestHelperService implements RequestHelperServiceInterface
      * - 'HTTP_CF_CONNECTING_IP' (for Cloudflare)
      * - 'HTTP_X_FORWARDED_FOR' (for AWS)
      */
-    public function getVisitorIP(): ?string
+    public function getClientIPAddress(): ?string
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $serverPropertyName = $moduleConfiguration->getVisitorIPServerPropertyName();
+        $serverPropertyName = $moduleConfiguration->getClientIPAddressServerPropertyName();
         return App::server($serverPropertyName);
     }
 }

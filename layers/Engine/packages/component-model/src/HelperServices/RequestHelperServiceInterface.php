@@ -22,7 +22,7 @@ interface RequestHelperServiceInterface
      *
      * By default it gets the IP from $_SERVER['REMOTE_ADDR'],
      * and the property name can be configured via the environmen
-     * variable `VISITOR_IP_SERVER_PROPERTY_NAME`.
+     * variable `CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME`.
      *
      * Depending on the environment, some candidates are:
      * 
@@ -30,5 +30,5 @@ interface RequestHelperServiceInterface
      * - 'HTTP_CF_CONNECTING_IP' (for Cloudflare)
      * - 'HTTP_X_FORWARDED_FOR' (for AWS)
      */
-    public function getVisitorIP(): ?string;
+    public function getClientIPAddress(): ?string;
 }
