@@ -774,16 +774,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $precedingMandatoryDirectivesForDirectives = [];
         $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
+            if (!$typeResolverDecorator->enabled($this)) {
+                continue;
+            }
             /**
              * `array_merge_recursive` so that if 2 different decorators add a directive
              * for the same directive, the results are merged together, not override each other.
              */
-            if ($typeResolverDecorator->enabled($this)) {
-                $precedingMandatoryDirectivesForDirectives = array_merge_recursive(
-                    $precedingMandatoryDirectivesForDirectives,
-                    $typeResolverDecorator->getPrecedingMandatoryDirectivesForDirectives($this)
-                );
-            }
+            $precedingMandatoryDirectivesForDirectives = array_merge_recursive(
+                $precedingMandatoryDirectivesForDirectives,
+                $typeResolverDecorator->getPrecedingMandatoryDirectivesForDirectives($this)
+            );
         }
 
         return $precedingMandatoryDirectivesForDirectives;
@@ -808,16 +809,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $succeedingMandatoryDirectivesForDirectives = [];
         $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
+            if (!$typeResolverDecorator->enabled($this)) {
+                continue;
+            }
             /**
              * `array_merge_recursive` so that if 2 different decorators add a directive
              * for the same directive, the results are merged together, not override each other.
              */
-            if ($typeResolverDecorator->enabled($this)) {
-                $succeedingMandatoryDirectivesForDirectives = array_merge_recursive(
-                    $succeedingMandatoryDirectivesForDirectives,
-                    $typeResolverDecorator->getSucceedingMandatoryDirectivesForDirectives($this)
-                );
-            }
+            $succeedingMandatoryDirectivesForDirectives = array_merge_recursive(
+                $succeedingMandatoryDirectivesForDirectives,
+                $typeResolverDecorator->getSucceedingMandatoryDirectivesForDirectives($this)
+            );
         }
 
         return $succeedingMandatoryDirectivesForDirectives;
