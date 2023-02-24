@@ -841,7 +841,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected function calculateAllRelationalTypeResolverDecorators(): array
     {
+        /**
+         * Order them by object ID, as to return a single instance from each
+         *
+         * @var array<string,RelationalTypeResolverDecoratorInterface>
+         */
         $typeResolverDecorators = [];
+
         /**
          * Also get the decorators for the implemented interfaces
          */
@@ -855,13 +861,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             )
         );
         foreach ($classes as $class) {
-            $typeResolverDecorators = array_merge(
-                $typeResolverDecorators,
-                $this->calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass($class)
-            );
+            $relationalTypeResolverDecorators = $this->calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass($class);
+            foreach ($relationalTypeResolverDecorators as $relationalTypeResolverDecorator) {
+                $relationalTypeResolverDecoratorObjectHash = spl_object_hash($relationalTypeResolverDecorator);
+                if (isset($typeResolverDecorators[$relationalTypeResolverDecoratorObjectHash])) {
+                    continue;
+                }
+                $typeResolverDecorators[$relationalTypeResolverDecoratorObjectHash] = $relationalTypeResolverDecorator;
+            }
         }
 
-        return $typeResolverDecorators;
+        return array_values($typeResolverDecorators);
     }
 
     /**
