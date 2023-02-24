@@ -158,7 +158,7 @@
         "pop-wp-schema/custompostmeta": "<0.10.1"
     },
     "type": "library",
-    "description": "Access Control for fields and directives",
+    "description": "Access Control for schema elements",
     "keywords": ["GraphQL", "PHP", "PoP", "AccessControl"],
     "homepage": "https://github.com/getpop/access-control",
     "license": "GPL-2.0-or-later",

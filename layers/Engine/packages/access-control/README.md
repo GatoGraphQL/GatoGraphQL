@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Access Control for fields and directives
+Access Control for schema elements
 
 ## Install
 
