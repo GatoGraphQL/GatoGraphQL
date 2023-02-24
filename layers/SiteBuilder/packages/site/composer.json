@@ -170,9 +170,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/application": "^0.10.2",
-        "getpop/definitions-base36": "^0.10.2",
-        "getpop/resourceloader": "^0.10.2"
+        "getpop/application": "^0.11",
+        "getpop/definitions-base36": "^0.11",
+        "getpop/resourceloader": "^0.11"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
