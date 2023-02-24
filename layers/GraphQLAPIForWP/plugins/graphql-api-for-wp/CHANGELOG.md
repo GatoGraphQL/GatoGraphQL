@@ -6,6 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.0 - DATE
 
+## 0.10.2 - 24/02/2013
+
+### Fixed
+
+- Performance issue where elements to resolve AST were duplicated ([#2039](https://github.com/leoloso/PoP/pull/2039))
+
 ## 0.10.0 - 16/02/2013
 
 ### Added
