@@ -870,7 +870,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass(string $class): array
     {
         /**
-         * Order them by class, as to return a single instance from each
+         * Order them by object ID, as to return a single instance from each
          *
          * @var array<string,RelationalTypeResolverDecoratorInterface>
          */
@@ -896,11 +896,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * same decorator, then do array_unique
              */            
             foreach ($attachedRelationalTypeResolverDecorators as $attachedRelationalTypeResolverDecorator) {
-                $attachedRelationalTypeResolverDecoratorClass = get_class($attachedRelationalTypeResolverDecorator);
-                if (isset($typeResolverDecorators[$attachedRelationalTypeResolverDecoratorClass])) {
+                $attachedRelationalTypeResolverDecoratorObjectHash = spl_object_hash($attachedRelationalTypeResolverDecorator);
+                if (isset($typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectHash])) {
                     continue;
                 }
-                $typeResolverDecorators[$attachedRelationalTypeResolverDecoratorClass] = $attachedRelationalTypeResolverDecorator;
+                $typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectHash] = $attachedRelationalTypeResolverDecorator;
             }
             
             // Continue iterating for the class parents
