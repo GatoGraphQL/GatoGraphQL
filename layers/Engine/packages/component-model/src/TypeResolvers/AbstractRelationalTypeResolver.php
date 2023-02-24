@@ -904,7 +904,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              *
              * A class and its parent class could be attached the
              * same decorator, then do array_unique
-             */            
+             */
             foreach ($attachedRelationalTypeResolverDecorators as $attachedRelationalTypeResolverDecorator) {
                 $attachedRelationalTypeResolverDecoratorObjectHash = spl_object_hash($attachedRelationalTypeResolverDecorator);
                 if (isset($typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectHash])) {
@@ -912,7 +912,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectHash] = $attachedRelationalTypeResolverDecorator;
             }
-            
+
             // Continue iterating for the class parents
         } while ($class = get_parent_class($class));
 
