@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MetaSchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
@@ -91,6 +92,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $isRequestingGraphQLEndpointForAdminClientOrConfiguration = $endpointHelpers->isRequestingGraphQLEndpointForAdminClientOrConfiguration();
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
         return [
+            // Client IP Server's Property Name
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
+                'module' => PluginManagementFunctionalityModuleResolver::GENERAL,
+                'option' => PluginManagementFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
+            ],
             // GraphQL single endpoint slug
             [
                 'class' => GraphQLEndpointForWPModule::class,
