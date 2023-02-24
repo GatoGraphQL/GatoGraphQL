@@ -842,7 +842,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function calculateAllRelationalTypeResolverDecorators(): array
     {
         /**
-         * Order them by object ID, as to return a single instance from each
+         * Order them by object hash, as to return a single instance from each
          *
          * @var array<string,RelationalTypeResolverDecoratorInterface>
          */
@@ -880,7 +880,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass(string $class): array
     {
         /**
-         * Order them by object ID, as to return a single instance from each
+         * Order them by object hash, as to return a single instance from each
          *
          * @var array<string,RelationalTypeResolverDecoratorInterface>
          */
