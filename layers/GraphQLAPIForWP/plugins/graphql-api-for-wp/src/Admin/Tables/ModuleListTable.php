@@ -47,7 +47,7 @@ class ModuleListTable extends AbstractItemListTable
         $items = [];
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleTypeRegistry = ModuleTypeRegistryFacade::getInstance();
-        $modules = $moduleRegistry->getAllModules();
+        $modules = $moduleRegistry->getAllModules(false, false, true);
         $currentView = $this->getCurrentView();
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
@@ -114,7 +114,7 @@ class ModuleListTable extends AbstractItemListTable
         // Entries for every module type: retrieve the moduleType from all modules
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleTypeRegistry = ModuleTypeRegistryFacade::getInstance();
-        $modules = $moduleRegistry->getAllModules();
+        $modules = $moduleRegistry->getAllModules(false, false, true);
         $moduleTypes = [];
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);

@@ -70,7 +70,7 @@ class ModuleRegistry implements ModuleRegistryInterface
     public function getAllModules(
         bool $onlyEnabled = false,
         bool $onlyHasSettings = false,
-        bool $onlyVisible = true,
+        bool $onlyVisible = false,
         bool $onlyWithVisibleSettings = false,
     ): array {
         $modules = array_keys($this->getModuleResolversByModuleAndPriority());

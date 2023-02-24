@@ -16,7 +16,7 @@ interface ModuleRegistryInterface
     public function getAllModules(
         bool $onlyEnabled = false,
         bool $onlyHasSettings = false,
-        bool $onlyVisible = true,
+        bool $onlyVisible = false,
         bool $onlyWithVisibleSettings = false,
     ): array;
     /**
