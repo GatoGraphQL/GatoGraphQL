@@ -867,6 +867,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected function calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass(string $class): array
     {
+        /**
+         * Order them by class, as to return a single instance from each
+         *
+         * @var array<string,RelationalTypeResolverDecoratorInterface>
+         */
         $typeResolverDecorators = [];
 
         $attachableExtensionManager = $this->getAttachableExtensionManager();
@@ -882,15 +887,24 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $attachedRelationalTypeResolverDecorators
             );
             array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedRelationalTypeResolverDecorators);
-            // Add them to the results
-            $typeResolverDecorators = array_merge(
-                $typeResolverDecorators,
-                $attachedRelationalTypeResolverDecorators
-            );
+            /**
+             * Add them to the results.
+             *
+             * A class and its parent class could be attached the
+             * same decorator, then do array_unique
+             */            
+            foreach ($attachedRelationalTypeResolverDecorators as $attachedRelationalTypeResolverDecorator) {
+                $attachedRelationalTypeResolverDecoratorClass = get_class($attachedRelationalTypeResolverDecorator);
+                if (isset($typeResolverDecorators[$attachedRelationalTypeResolverDecoratorClass])) {
+                    continue;
+                }
+                $typeResolverDecorators[$attachedRelationalTypeResolverDecoratorClass] = $attachedRelationalTypeResolverDecorator;
+            }
+            
             // Continue iterating for the class parents
         } while ($class = get_parent_class($class));
 
-        return $typeResolverDecorators;
+        return array_values($typeResolverDecorators);
     }
 
     /**
