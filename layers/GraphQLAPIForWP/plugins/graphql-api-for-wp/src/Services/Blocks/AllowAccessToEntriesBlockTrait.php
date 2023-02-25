@@ -19,8 +19,13 @@ trait AllowAccessToEntriesBlockTrait
     protected function getDefaultBehaviorLocalizedData(): array
     {
         return [
-            'defaultBehavior' => BehaviorHelpers::getDefaultBehavior(),
+            'defaultBehavior' => $this->getDefaultBehavior(),
         ];
+    }
+
+    protected function getDefaultBehavior(): string
+    {
+        return BehaviorHelpers::getDefaultBehavior();
     }
 
     /**

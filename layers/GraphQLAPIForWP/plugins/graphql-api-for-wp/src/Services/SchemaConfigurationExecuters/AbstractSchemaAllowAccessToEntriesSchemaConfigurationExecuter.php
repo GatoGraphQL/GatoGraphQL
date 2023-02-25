@@ -28,7 +28,7 @@ abstract class AbstractSchemaAllowAccessToEntriesSchemaConfigurationExecuter ext
             fn () => $entries,
             PHP_INT_MAX
         );
-        $behavior = $schemaConfigBlockDataItem['attrs'][BlockAttributeNames::BEHAVIOR] ?? BehaviorHelpers::getDefaultBehavior();
+        $behavior = $schemaConfigBlockDataItem['attrs'][BlockAttributeNames::BEHAVIOR] ?? $this->getDefaultBehavior();
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings
@@ -43,4 +43,9 @@ abstract class AbstractSchemaAllowAccessToEntriesSchemaConfigurationExecuter ext
 
     abstract protected function getEntriesHookName(): string;
     abstract protected function getBehaviorHookName(): string;
+
+    protected function getDefaultBehavior(): string
+    {
+        return BehaviorHelpers::getDefaultBehavior();
+    }
 }
