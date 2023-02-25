@@ -111,7 +111,7 @@
                         {
                             "name": "type",
                             "type": {
-                                "name": "String!"
+                                "name": "CommentTypeEnum!"
                             }
                         }
                     ]
