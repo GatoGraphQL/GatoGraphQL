@@ -7,6 +7,7 @@ namespace PoPCMSSchema\Comments\FieldResolvers\ObjectType;
 use DateTime;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentResponsePaginationInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentResponsesFilterInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
@@ -53,6 +54,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     private ?CommentResponsesFilterInputObjectTypeResolver $commentResponsesFilterInputObjectTypeResolver = null;
     private ?CommentResponsePaginationInputObjectTypeResolver $commentResponsePaginationInputObjectTypeResolver = null;
     private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
+    private ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -189,6 +191,15 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         /** @var CommentSortInputObjectTypeResolver */
         return $this->commentSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
     }
+    final public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
+    {
+        $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
+    }
+    final protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
+    {
+        /** @var CommentTypeEnumTypeResolver */
+        return $this->commentTypeEnumTypeResolver ??= $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -229,9 +240,10 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         return match ($fieldName) {
             'rawContent',
             'authorName',
-            'type',
             'dateStr'
                 => $this->getStringScalarTypeResolver(),
+            'type'
+                => $this->getCommentTypeEnumTypeResolver(),
             'content'
                 => $this->getHTMLScalarTypeResolver(),
             'authorURL'
