@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 trait AllowAccessToEntriesBlockTrait
@@ -18,15 +19,8 @@ trait AllowAccessToEntriesBlockTrait
     protected function getDefaultBehaviorLocalizedData(): array
     {
         return [
-            'defaultBehavior' => $this->getDefaultBehavior(),
+            'defaultBehavior' => BehaviorHelpers::getDefaultBehavior(),
         ];
-    }
-
-    protected function getDefaultBehavior(): string
-    {
-        return PluginEnvironment::areUnsafeDefaultsEnabled()
-            ? Behaviors::DENY
-            : Behaviors::ALLOW;
     }
 
     /**
