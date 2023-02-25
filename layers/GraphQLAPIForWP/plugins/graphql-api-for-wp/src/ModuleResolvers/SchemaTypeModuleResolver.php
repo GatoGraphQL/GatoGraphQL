@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver;
@@ -552,9 +553,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'time_format',
                     'blog_charset',
                 ],
-                ModuleSettingOptions::BEHAVIOR => $useUnsafe
-                    ? Behaviors::DENY
-                    : Behaviors::ALLOW,
+                ModuleSettingOptions::BEHAVIOR => BehaviorHelpers::getDefaultBehavior(),
             ],
             self::SCHEMA_USER_AVATARS => [
                 self::OPTION_DEFAULT_AVATAR_SIZE => 96,

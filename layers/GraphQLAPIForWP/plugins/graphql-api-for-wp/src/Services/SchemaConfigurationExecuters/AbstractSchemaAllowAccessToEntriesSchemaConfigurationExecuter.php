@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 abstract class AbstractSchemaAllowAccessToEntriesSchemaConfigurationExecuter extends AbstractCustomizableConfigurationSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -45,8 +46,6 @@ abstract class AbstractSchemaAllowAccessToEntriesSchemaConfigurationExecuter ext
 
     protected function getDefaultBehavior(): string
     {
-        return PluginEnvironment::areUnsafeDefaultsEnabled()
-            ? Behaviors::DENY
-            : Behaviors::ALLOW;
+        return BehaviorHelpers::getDefaultBehavior();
     }
 }

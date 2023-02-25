@@ -9,13 +9,13 @@ use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver as GraphQLAPISchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -190,9 +190,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $defaultMetaValues = [
             ModuleSettingOptions::ENTRIES => [],
-            ModuleSettingOptions::BEHAVIOR => PluginEnvironment::areUnsafeDefaultsEnabled()
-                ? Behaviors::DENY
-                : Behaviors::ALLOW,
+            ModuleSettingOptions::BEHAVIOR => BehaviorHelpers::getDefaultBehavior(),
         ];
         $defaultValues = [
             self::SCHEMA_CUSTOMPOST_META => $defaultMetaValues,
