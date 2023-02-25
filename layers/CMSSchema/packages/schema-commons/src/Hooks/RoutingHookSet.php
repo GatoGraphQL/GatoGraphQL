@@ -58,7 +58,7 @@ class RoutingHookSet extends AbstractHookSet
             return $route;
         }
 
-        $currentURL = $this->getRequestHelperService()->getCurrentURL();
+        $currentURL = $this->getRequestHelperService()->getComponentModelCurrentURL();
         if ($currentURL === null) {
             return $route;
         }
