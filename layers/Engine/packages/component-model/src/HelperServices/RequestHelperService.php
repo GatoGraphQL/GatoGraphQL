@@ -18,7 +18,7 @@ class RequestHelperService implements RequestHelperServiceInterface
 
     public final const HOOK_CURRENT_URL_REMOVE_PARAMS = __CLASS__ . ':current-url:remove-params';
 
-    public function getCurrentURL(): ?string
+    public function getComponentModelCurrentURL(): ?string
     {
         if (!App::isHTTPRequest()) {
             return null;

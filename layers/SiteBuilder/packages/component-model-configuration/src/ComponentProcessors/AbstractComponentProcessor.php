@@ -324,7 +324,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
                 Params::COMPONENTFILTER => $this->getComponentPaths()->getName(),
                 Params::COMPONENTPATHS . '[]' => $stringified_component_propagation_current_path,
             ],
-            $this->getRequestHelperService()->getCurrentURL()
+            $this->getRequestHelperService()->getComponentModelCurrentURL()
         );
 
         // If we are in the API currently, stay in the API
