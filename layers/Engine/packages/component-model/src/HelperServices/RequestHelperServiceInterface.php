@@ -13,6 +13,11 @@ interface RequestHelperServiceInterface
      */
     public function getRequestedFullURL(bool $useHostRequestedByClient = false): ?string;
 
+    /**
+     * Return the URL that is useful to the component model:
+     * The full URL minus those params that can be made invisible
+     * to the end user.
+     */
     public function getComponentModelCurrentURL(): ?string;
 
     /**
