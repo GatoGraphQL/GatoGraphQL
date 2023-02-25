@@ -18,17 +18,16 @@ const AllowAccessToEntriesCard = ( props ) => {
 	const {
 		isSelected,
 		setAttributes,
-		attributes: {
-			entries,
-			behavior,
-		},
-		entriesAttributeName="entries",
-		behaviorAttributeName="behavior",
+		attributes,
+		entriesAttributeName = "entries",
+		behaviorAttributeName = "behavior",
 		entriesHeader,
 		entriesLabelDescIntro,
 		labelExampleItem,
 		labelExampleEntries,
 	} = props;
+	const entries = attributes[ entriesAttributeName ];
+	const behavior = attributes[ behaviorAttributeName ];
 	const options = [
 		{
 			label: __('Allow access', 'graphql-api'),
