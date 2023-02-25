@@ -501,10 +501,10 @@
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "String!",
+                "name": "CommentTypeEnum!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "kind": "ENUM",
+                  "name": "CommentTypeEnum",
                   "ofType": null
                 }
               },
