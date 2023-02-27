@@ -6,6 +6,10 @@ namespace PoP\AccessControl\ConditionalOnModule\CacheControl\RelationalTypeResol
 
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForFieldsInPrivateSchemaRelationalTypeResolverDecorator;
 
+/**
+ * Add IFTTT on @cacheControl(maxAge: 0) on all rules that
+ * have been applied some ACL rule
+ */
 class ValidateACLDirectiveForFieldsPrivateSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForFieldsInPrivateSchemaRelationalTypeResolverDecorator
 {
     use NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait;

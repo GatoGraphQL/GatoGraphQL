@@ -6,6 +6,10 @@ namespace PoP\AccessControl\ConditionalOnModule\CacheControl\RelationalTypeResol
 
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator;
 
+/**
+ * Add IFTTT on @cacheControl(maxAge: 0) on all directives that
+ * have been applied some ACL rule
+ */
 class ValidateACLDirectiveForDirectivesPrivateSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator
 {
     use NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait;
