@@ -11,11 +11,11 @@ class FieldDirectiveRegistry implements FieldDirectiveRegistryInterface
     /**
      * @var array<string,FieldDirectiveResolverInterface>
      */
-    protected array $directiveResolvers = [];
+    protected array $fieldDirectiveResolvers = [];
 
-    public function addFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void
+    public function addFieldDirectiveResolver(FieldDirectiveResolverInterface $fieldDirectiveResolver): void
     {
-        $this->directiveResolvers[$directiveResolver->getDirectiveName()] = $directiveResolver;
+        $this->fieldDirectiveResolvers[$fieldDirectiveResolver->getDirectiveName()] = $fieldDirectiveResolver;
     }
 
     /**
@@ -23,11 +23,11 @@ class FieldDirectiveRegistry implements FieldDirectiveRegistryInterface
      */
     public function getFieldDirectiveResolvers(): array
     {
-        return $this->directiveResolvers;
+        return $this->fieldDirectiveResolvers;
     }
 
     public function getFieldDirectiveResolver(string $directiveName): ?FieldDirectiveResolverInterface
     {
-        return $this->directiveResolvers[$directiveName] ?? null;
+        return $this->fieldDirectiveResolvers[$directiveName] ?? null;
     }
 }

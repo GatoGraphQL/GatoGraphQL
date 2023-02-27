@@ -8,7 +8,7 @@ use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
 interface FieldDirectiveRegistryInterface
 {
-    public function addFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void;
+    public function addFieldDirectiveResolver(FieldDirectiveResolverInterface $fieldDirectiveResolver): void;
     /**
      * @return array<string,FieldDirectiveResolverInterface>
      */
