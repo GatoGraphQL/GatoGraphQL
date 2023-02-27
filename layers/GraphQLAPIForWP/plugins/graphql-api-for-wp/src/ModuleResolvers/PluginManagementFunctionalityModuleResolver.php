@@ -131,6 +131,28 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->enableSettingClientIPAddressServerPropertyName()) {
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'separator'
+                    ),
+                    Properties::DESCRIPTION => sprintf(
+                        __('<hr/>', 'graphql-api'),
+                    ),
+                    Properties::TYPE => Properties::TYPE_NULL,
+                ];
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'intro'
+                    ),
+                    Properties::TITLE => \__('Server Configuration', 'graphql-api'),
+                    Properties::DESCRIPTION => sprintf(
+                        __('The following options configure the plugin according to the platform/environment under which it is running.', 'graphql-api'),
+                    ),
+                    Properties::TYPE => Properties::TYPE_NULL,
+                ];
+
                 $option = self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -140,8 +162,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     ),
                     Properties::TITLE => \__('$_SERVER property name to retrieve the client IP', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        '%s<br/><br/>%s<br/><br/>%s',
-                        \__('(This option has been enabled because some extension in the plugin depends on it.)', 'graphql-api'),
+                        '%s<br/><br/>%s',
                         \__('The visitor\'s IP address is retrieved from under <code>$_SERVER</code>. Property <code>\'REMOTE_ADDR\'</code> is set as default, but must be overriden depending on the platform/environment.', 'graphql-api'),
                         \__('For instance, Cloudflare might use <code>\'HTTP_CF_CONNECTING_IP\'</code>, AWS might use <code>\'HTTP_X_FORWARDED_FOR\'</code>, etc.', 'graphql-api'),
                     ),
