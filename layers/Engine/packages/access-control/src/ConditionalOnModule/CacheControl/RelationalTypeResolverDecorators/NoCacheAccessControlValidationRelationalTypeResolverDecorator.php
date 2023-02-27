@@ -24,7 +24,7 @@ class NoCacheAccessControlValidationRelationalTypeResolverDecorator extends Abst
         /** @var AccessControlValidationDirectiveResolverRegistryInterface */
         return $this->accessControlValidationDirectiveResolverRegistry ??= $this->instanceManager->getInstance(AccessControlValidationDirectiveResolverRegistryInterface::class);
     }
-    
+
     /**
      * @return array<class-string<RelationalTypeResolverInterface>|string> Either the class, or the constant "*" to represent _any_ class
      */
