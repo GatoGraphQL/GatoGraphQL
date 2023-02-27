@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoP\AccessControl\ConditionalOnModule\CacheControl\RelationalTypeResolverDecorators\:
+        resource: '../../../src/ConditionalOnModule/CacheControl/RelationalTypeResolverDecorators/*'
