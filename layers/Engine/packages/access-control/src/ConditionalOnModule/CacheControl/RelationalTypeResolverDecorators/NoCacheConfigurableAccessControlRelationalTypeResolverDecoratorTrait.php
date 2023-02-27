@@ -18,4 +18,15 @@ trait NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait
             CacheControlASTNodesFactory::getNoCacheDirective(),
         ];
     }
+
+    /**
+     * Not necessarily all groups must add @cacheControl(maxAge: 0).
+     * Eg: AccessControlGroups::DISABLED does have CacheControl!
+     *
+     * @return string[]
+     */
+    protected function getSupportingCacheControlAccessControlGroups(): array
+    {
+        return [];
+    }
 }

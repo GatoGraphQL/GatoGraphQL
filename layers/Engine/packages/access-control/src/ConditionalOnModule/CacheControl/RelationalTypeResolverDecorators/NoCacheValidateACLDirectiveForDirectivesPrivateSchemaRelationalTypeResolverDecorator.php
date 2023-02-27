@@ -19,8 +19,15 @@ class NoCacheValidateACLDirectiveForDirectivesPrivateSchemaRelationalTypeResolve
      */
     protected function getConfigurationEntries(): array
     {
+        $supportingCacheControlGroups = $this->getSupportingCacheControlAccessControlGroups();
         $configurationEntries = [];
         foreach ($this->getAccessControlManager()->getDirectiveEntries() as $group => $entries) {
+            /**
+             * AccessControlGroups::DISABLED does have CacheControl!
+             */
+            if (in_array($group, $supportingCacheControlGroups)) {
+                continue;
+            }
             $configurationEntries = array_merge(
                 $configurationEntries,
                 $entries
