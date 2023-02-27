@@ -10,7 +10,7 @@ use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAcces
  * Add IFTTT on @cacheControl(maxAge: 0) on all directives that
  * have been applied some ACL rule
  */
-class ValidateACLDirectiveForDirectivesPrivateSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator
+class NoCacheValidateACLDirectiveForDirectivesPrivateSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator
 {
     use NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait;
 
