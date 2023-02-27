@@ -31,6 +31,7 @@ const withCard = () => createHigherOrderComponent(
 						}
 						{ !! getMarkdownContentCallback && (
 							<MarkdownInfoModalButton
+								{ ...props }
 								title={ documentationTitle }
 								getMarkdownContentCallback={ getMarkdownContentCallback }
 							/>
