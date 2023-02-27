@@ -20,7 +20,7 @@ const InfoModalButton = ( props ) => {
 	return (
 		<>
 			<Button
-				isTertiary
+				variant="tertiary"
 				isSmall 
 				onClick={ () => setOpen( true ) }
 				icon={ icon } 
