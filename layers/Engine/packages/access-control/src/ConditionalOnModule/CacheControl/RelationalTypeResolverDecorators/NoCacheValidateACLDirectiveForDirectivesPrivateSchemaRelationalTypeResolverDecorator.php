@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\ConditionalOnModule\CacheControl\RelationalTypeResolverDecorators;
 
+use PoP\AccessControl\ConditionalOnModule\CacheControl\Services\CacheControlForAccessControlManagerInterface;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForDirectivesInPrivateSchemaRelationalTypeResolverDecorator;
 
 /**
@@ -14,12 +15,24 @@ class NoCacheValidateACLDirectiveForDirectivesPrivateSchemaRelationalTypeResolve
 {
     use NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait;
 
+    private ?CacheControlForAccessControlManagerInterface $cacheControlForAccessControlManager = null;
+
+    final public function setCacheControlForAccessControlManager(CacheControlForAccessControlManagerInterface $cacheControlForAccessControlManager): void
+    {
+        $this->cacheControlForAccessControlManager = $cacheControlForAccessControlManager;
+    }
+    final protected function getCacheControlForAccessControlManager(): CacheControlForAccessControlManagerInterface
+    {
+        /** @var CacheControlForAccessControlManagerInterface */
+        return $this->cacheControlForAccessControlManager ??= $this->instanceManager->getInstance(CacheControlForAccessControlManagerInterface::class);
+    }
+
     /**
      * @return array<mixed[]>
      */
     protected function getConfigurationEntries(): array
     {
-        $supportingCacheControlGroups = $this->getSupportingCacheControlAccessControlGroups();
+        $supportingCacheControlGroups = $this->getCacheControlForAccessControlManager()->getSupportingCacheControlAccessControlGroups();
         $configurationEntries = [];
         foreach ($this->getAccessControlManager()->getDirectiveEntries() as $group => $entries) {
             /**
