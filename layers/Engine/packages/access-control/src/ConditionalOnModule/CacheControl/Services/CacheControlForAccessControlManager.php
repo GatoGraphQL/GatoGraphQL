@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\ConditionalOnModule\CacheControl\Services;
 
+use PoP\AccessControl\ConditionalOnModule\CacheControl\Constants\HookNames;
+use PoP\ComponentModel\App;
+use PoP\Root\Services\BasicServiceTrait;
+
 class CacheControlForAccessControlManager implements CacheControlForAccessControlManagerInterface
 {
-    // /**
-    //  * @var array<string,array<mixed[]>>
-    //  */
-    // protected array $fieldEntries = [];
+    use BasicServiceTrait;
+
+    /**
+     * @var string[]
+     */
+    protected ?array $supportingCacheControlAccessControlGroups = null;
     
     /**
      * Not necessarily all groups must add @cacheControl(maxAge: 0).
@@ -19,6 +25,12 @@ class CacheControlForAccessControlManager implements CacheControlForAccessContro
      */
     public function getSupportingCacheControlAccessControlGroups(): array
     {
-        return [];
+        if ($this->supportingCacheControlAccessControlGroups === null) {
+            $this->supportingCacheControlAccessControlGroups = App::applyFilters(
+                HookNames::SUPPORTING_CACHE_CONTROL_ACCESS_CONTROL_GROUPS,
+                []
+            );
+        }
+        return $this->supportingCacheControlAccessControlGroups;
     }
 }
