@@ -3,5 +3,8 @@ services:
         public: true
         autowire: true
 
+    PoP\AccessControl\ConditionalOnModule\CacheControl\Services\CacheControlForAccessControlManagerInterface:
+        class: \PoP\AccessControl\ConditionalOnModule\CacheControl\Services\CacheControlForAccessControlManager
+
     PoP\AccessControl\ConditionalOnModule\CacheControl\RelationalTypeResolverDecorators\:
         resource: '../../../src/ConditionalOnModule/CacheControl/RelationalTypeResolverDecorators/*'
