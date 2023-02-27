@@ -16,7 +16,7 @@ class CacheControlForAccessControlManager implements CacheControlForAccessContro
      * @var string[]
      */
     protected ?array $supportingCacheControlAccessControlGroups = null;
-    
+
     /**
      * Not necessarily all groups must add @cacheControl(maxAge: 0).
      * Eg: AccessControlGroups::DISABLED does have CacheControl!
