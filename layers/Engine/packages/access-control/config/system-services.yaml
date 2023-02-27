@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\AccessControl\Container\CompilerPasses\:
+        resource: '../src/Container/CompilerPasses/*'

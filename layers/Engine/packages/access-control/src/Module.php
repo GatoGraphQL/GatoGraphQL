@@ -55,4 +55,12 @@ class Module extends AbstractModule
         } catch (ComponentNotExistsException) {
         }
     }
+
+    /**
+     * Initialize services for the system container
+     */
+    protected function initializeSystemContainerServices(): void
+    {
+        $this->initSystemServices(dirname(__DIR__));
+    }
 }
