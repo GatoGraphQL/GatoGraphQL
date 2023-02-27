@@ -7,5 +7,5 @@ services:
     PoP\AccessControl\Services\AccessControlManagerInterface:
         class: \PoP\AccessControl\Services\AccessControlManager
 
-    PoP\AccessControl\Registries\AccessControlValidationDirectiveRegistryInterface:
-        class: \PoP\AccessControl\Registries\AccessControlValidationDirectiveRegistry
+    PoP\AccessControl\Registries\AccessControlValidationDirectiveResolverRegistryInterface:
+        class: \PoP\AccessControl\Registries\AccessControlValidationDirectiveResolverRegistry

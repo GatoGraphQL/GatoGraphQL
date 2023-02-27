@@ -6,7 +6,7 @@ namespace PoP\AccessControl\Registries;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
-interface AccessControlValidationDirectiveRegistryInterface
+interface AccessControlValidationDirectiveResolverRegistryInterface
 {
     public function addAccessControlValidationDirectiveResolver(FieldDirectiveResolverInterface $fieldDirectiveResolver): void;
     /**

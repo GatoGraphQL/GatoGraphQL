@@ -6,7 +6,7 @@ namespace PoP\AccessControl\Registries;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
-class AccessControlValidationDirectiveRegistry implements AccessControlValidationDirectiveRegistryInterface
+class AccessControlValidationDirectiveResolverRegistry implements AccessControlValidationDirectiveResolverRegistryInterface
 {
     /**
      * @var array<string,FieldDirectiveResolverInterface>
