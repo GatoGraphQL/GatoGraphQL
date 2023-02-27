@@ -42,7 +42,10 @@ const EndpointGuideButton = ( props ) => {
 	const [ isOpen, setOpen ] = useState( false );
 	return (
 		<>
-			<Button isTertiary onClick={ () => setOpen( true ) }>
+			<Button
+				variant="tertiary"
+				onClick={ () => setOpen( true ) }
+			>
 				{ buttonLabel }
 			</Button>
 			{ isOpen && (
