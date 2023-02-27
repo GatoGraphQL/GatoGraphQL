@@ -15,6 +15,7 @@ const withCard = () => createHigherOrderComponent(
 		const {
 			header,
 			tooltip,
+			isSelected,
 			getMarkdownContentCallback
 		} = props;
 		const documentationTitle = __(`Documentation for: "${ header }"`, 'graphql-api');
@@ -29,7 +30,7 @@ const withCard = () => createHigherOrderComponent(
 								text={ tooltip }
 							/>
 						}
-						{ !! getMarkdownContentCallback && (
+						{ !! getMarkdownContentCallback && isSelected && (
 							<MarkdownInfoModalButton
 								{ ...props }
 								title={ documentationTitle }
