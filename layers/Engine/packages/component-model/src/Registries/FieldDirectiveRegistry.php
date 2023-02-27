@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Registries;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
-class DirectiveRegistry implements DirectiveRegistryInterface
+class FieldDirectiveRegistry implements FieldDirectiveRegistryInterface
 {
     /**
      * @var array<string,FieldDirectiveResolverInterface>

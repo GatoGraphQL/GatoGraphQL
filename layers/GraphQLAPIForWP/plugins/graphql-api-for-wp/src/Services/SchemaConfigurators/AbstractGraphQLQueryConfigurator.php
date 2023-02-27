@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\ComponentModel\Constants\ConfigurationValues;
-use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\FieldDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -37,7 +37,7 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?TypeRegistryInterface $typeRegistry = null;
-    private ?DirectiveRegistryInterface $directiveRegistry = null;
+    private ?FieldDirectiveRegistryInterface $fieldDirectiveRegistry = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -57,14 +57,14 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
         /** @var TypeRegistryInterface */
         return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
     }
-    final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    final public function setFieldDirectiveRegistry(FieldDirectiveRegistryInterface $fieldDirectiveRegistry): void
     {
-        $this->directiveRegistry = $directiveRegistry;
+        $this->fieldDirectiveRegistry = $fieldDirectiveRegistry;
     }
-    final protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    final protected function getFieldDirectiveRegistry(): FieldDirectiveRegistryInterface
     {
-        /** @var DirectiveRegistryInterface */
-        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
+        /** @var FieldDirectiveRegistryInterface */
+        return $this->fieldDirectiveRegistry ??= $this->instanceManager->getInstance(FieldDirectiveRegistryInterface::class);
     }
 
     /**
@@ -138,14 +138,14 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
      */
     protected function initDirectiveNameClasses(): void
     {
-        $directiveResolvers = $this->getDirectiveRegistry()->getFieldDirectiveResolvers();
+        $fieldDirectiveResolvers = $this->getFieldDirectiveRegistry()->getFieldDirectiveResolvers();
         // For each class, obtain its directive name. Notice that different directives
         // can have the same name (eg: @strTranslate as implemented for Google and Azure),
         // then the mapping goes from name to list of resolvers
         $this->directiveNameClasses = [];
-        foreach ($directiveResolvers as $directiveResolver) {
-            $directiveResolverName = $directiveResolver->getDirectiveName();
-            $this->directiveNameClasses[$directiveResolverName][] = $directiveResolver::class;
+        foreach ($fieldDirectiveResolvers as $fieldDirectiveResolver) {
+            $directiveResolverName = $fieldDirectiveResolver->getDirectiveName();
+            $this->directiveNameClasses[$directiveResolverName][] = $fieldDirectiveResolver::class;
         }
     }
 
