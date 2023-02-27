@@ -8,7 +8,7 @@ use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\MetaFieldDirectiveResolverInterface;
 use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
-use PoP\ComponentModel\Registries\FieldDirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\FieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Registries\DynamicVariableDefinerDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
@@ -23,7 +23,7 @@ class Parser extends AbstractParser
 {
     private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
     private ?DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry = null;
-    private ?FieldDirectiveRegistryInterface $fieldDirectiveRegistry = null;
+    private ?FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry = null;
 
     final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
     {
@@ -43,14 +43,14 @@ class Parser extends AbstractParser
         /** @var DynamicVariableDefinerDirectiveRegistryInterface */
         return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
     }
-    final public function setFieldDirectiveRegistry(FieldDirectiveRegistryInterface $fieldDirectiveRegistry): void
+    final public function setFieldDirectiveResolverRegistry(FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry): void
     {
-        $this->fieldDirectiveRegistry = $fieldDirectiveRegistry;
+        $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
     }
-    final protected function getFieldDirectiveRegistry(): FieldDirectiveRegistryInterface
+    final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
     {
-        /** @var FieldDirectiveRegistryInterface */
-        return $this->fieldDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(FieldDirectiveRegistryInterface::class);
+        /** @var FieldDirectiveResolverRegistryInterface */
+        return $this->fieldDirectiveResolverRegistry ??= InstanceManagerFacade::getInstance()->getInstance(FieldDirectiveResolverRegistryInterface::class);
     }
 
     protected function isMetaDirective(string $directiveName): bool
@@ -106,7 +106,7 @@ class Parser extends AbstractParser
 
     protected function getFieldDirectiveResolver(string $directiveName): ?FieldDirectiveResolverInterface
     {
-        return $this->getFieldDirectiveRegistry()->getFieldDirectiveResolver($directiveName);
+        return $this->getFieldDirectiveResolverRegistry()->getFieldDirectiveResolver($directiveName);
     }
 
     protected function isDynamicVariableDefinerDirective(Directive $directive): bool

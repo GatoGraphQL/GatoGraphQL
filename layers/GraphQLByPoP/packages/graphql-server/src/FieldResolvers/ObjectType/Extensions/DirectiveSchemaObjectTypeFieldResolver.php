@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\Directive;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveKindEnumTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Registries\FieldDirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\FieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -18,7 +18,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver = null;
-    private ?FieldDirectiveRegistryInterface $fieldDirectiveRegistry = null;
+    private ?FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry = null;
 
     final public function setDirectiveKindEnumTypeResolver(DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver): void
     {
@@ -29,14 +29,14 @@ class DirectiveSchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         /** @var DirectiveKindEnumTypeResolver */
         return $this->directiveKindEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
     }
-    final public function setFieldDirectiveRegistry(FieldDirectiveRegistryInterface $fieldDirectiveRegistry): void
+    final public function setFieldDirectiveResolverRegistry(FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry): void
     {
-        $this->fieldDirectiveRegistry = $fieldDirectiveRegistry;
+        $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
     }
-    final protected function getFieldDirectiveRegistry(): FieldDirectiveRegistryInterface
+    final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
     {
-        /** @var FieldDirectiveRegistryInterface */
-        return $this->fieldDirectiveRegistry ??= $this->instanceManager->getInstance(FieldDirectiveRegistryInterface::class);
+        /** @var FieldDirectiveResolverRegistryInterface */
+        return $this->fieldDirectiveResolverRegistry ??= $this->instanceManager->getInstance(FieldDirectiveResolverRegistryInterface::class);
     }
 
     /**
