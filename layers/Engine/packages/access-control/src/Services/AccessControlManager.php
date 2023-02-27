@@ -31,6 +31,21 @@ class AccessControlManager implements AccessControlManagerInterface
     }
 
     /**
+     * @return array<string,array<mixed[]>> Key: group, value: entries
+     */
+    public function getFieldEntries(): array
+    {
+        return $this->fieldEntries;
+    }
+    /**
+     * @return array<string,array<mixed[]>> Key: group, value: entries
+     */
+    public function getDirectiveEntries(): array
+    {
+        return $this->directiveEntries;
+    }
+
+    /**
      * @param array<mixed[]> $fieldEntries
      */
     public function addEntriesForFields(string $group, array $fieldEntries): void

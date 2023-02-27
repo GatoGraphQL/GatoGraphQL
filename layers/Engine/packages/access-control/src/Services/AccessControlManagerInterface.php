@@ -15,6 +15,14 @@ interface AccessControlManagerInterface
      */
     public function getEntriesForDirectives(string $group): array;
     /**
+     * @return array<string,array<mixed[]>> Key: group, value: entries
+     */
+    public function getFieldEntries(): array;
+    /**
+     * @return array<string,array<mixed[]>> Key: group, value: entries
+     */
+    public function getDirectiveEntries(): array;
+    /**
      * @param array<mixed[]> $fieldEntries
      */
     public function addEntriesForFields(string $group, array $fieldEntries): void;
