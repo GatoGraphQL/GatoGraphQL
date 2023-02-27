@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\ConditionalOnModule\CacheControl\RelationalTypeResolverDecorators;
 
+use PoP\AccessControl\ConditionalOnModule\CacheControl\Services\CacheControlForAccessControlManagerInterface;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractConfigurableAccessControlForFieldsInPrivateSchemaRelationalTypeResolverDecorator;
 
 /**
@@ -14,13 +15,33 @@ class NoCacheValidateACLDirectiveForFieldsPrivateSchemaRelationalTypeResolverDec
 {
     use NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait;
 
+    private ?CacheControlForAccessControlManagerInterface $cacheControlForAccessControlManager = null;
+
+    final public function setCacheControlForAccessControlManager(CacheControlForAccessControlManagerInterface $cacheControlForAccessControlManager): void
+    {
+        $this->cacheControlForAccessControlManager = $cacheControlForAccessControlManager;
+    }
+    final protected function getCacheControlForAccessControlManager(): CacheControlForAccessControlManagerInterface
+    {
+        /** @var CacheControlForAccessControlManagerInterface */
+        return $this->cacheControlForAccessControlManager ??= $this->instanceManager->getInstance(CacheControlForAccessControlManagerInterface::class);
+    }
+
     /**
      * @return array<mixed[]>
      */
     protected function getConfigurationEntries(): array
     {
+        $groupEntries = $this->getAccessControlManager()->getFieldEntries();
+        $supportingCacheControlGroups = $this->getCacheControlForAccessControlManager()->getSupportingCacheControlAccessControlGroups();
         $configurationEntries = [];
-        foreach ($this->getAccessControlManager()->getFieldEntries() as $group => $entries) {
+        foreach ($groupEntries as $group => $entries) {
+            /**
+             * AccessControlGroups::DISABLED does have CacheControl!
+             */
+            if (in_array($group, $supportingCacheControlGroups)) {
+                continue;
+            }
             $configurationEntries = array_merge(
                 $configurationEntries,
                 $entries
