@@ -3,7 +3,7 @@
  */
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { Button, Modal, Icon } from '@wordpress/components';
+import { Button } from '@wordpress/components';
 import InfoModal from './info-modal';
 
 /**
