@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Facades\Registries;
 use PoP\Root\App;
 use PoP\ComponentModel\Registries\FieldDirectiveRegistryInterface;
 
-class DirectiveRegistryFacade
+class FieldDirectiveRegistryFacade
 {
     public static function getInstance(): FieldDirectiveRegistryInterface
     {
