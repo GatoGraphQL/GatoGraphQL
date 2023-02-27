@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Facades\Registries;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\FieldDirectiveRegistryInterface;
 
 class DirectiveRegistryFacade
 {
-    public static function getInstance(): DirectiveRegistryInterface
+    public static function getInstance(): FieldDirectiveRegistryInterface
     {
         /**
-         * @var DirectiveRegistryInterface
+         * @var FieldDirectiveRegistryInterface
          */
-        $service = App::getContainer()->get(DirectiveRegistryInterface::class);
+        $service = App::getContainer()->get(FieldDirectiveRegistryInterface::class);
         return $service;
     }
 }

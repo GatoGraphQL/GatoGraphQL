@@ -126,8 +126,8 @@ services:
     PoP\ComponentModel\Registries\TypeRegistryInterface:
         class: \PoP\ComponentModel\Registries\TypeRegistry
 
-    PoP\ComponentModel\Registries\DirectiveRegistryInterface:
-        class: \PoP\ComponentModel\Registries\DirectiveRegistry
+    PoP\ComponentModel\Registries\FieldDirectiveRegistryInterface:
+        class: \PoP\ComponentModel\Registries\FieldDirectiveRegistry
 
     PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface:
         class: \PoP\ComponentModel\Registries\MetaDirectiveRegistry

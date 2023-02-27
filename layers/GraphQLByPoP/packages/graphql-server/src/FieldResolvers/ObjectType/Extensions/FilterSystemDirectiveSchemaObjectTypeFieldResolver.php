@@ -14,14 +14,14 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType\DirectiveKindEnumTypeResol
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use PoPAPI\API\Schema\SchemaDefinition;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
-use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
+use PoP\ComponentModel\Registries\FieldDirectiveRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTypeFieldResolver
 {
     private ?DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver = null;
-    private ?DirectiveRegistryInterface $directiveRegistry = null;
+    private ?FieldDirectiveRegistryInterface $fieldDirectiveRegistry = null;
 
     final public function setDirectiveKindEnumTypeResolver(DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver): void
     {
@@ -32,14 +32,14 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         /** @var DirectiveKindEnumTypeResolver */
         return $this->directiveKindEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
     }
-    final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    final public function setFieldDirectiveRegistry(FieldDirectiveRegistryInterface $fieldDirectiveRegistry): void
     {
-        $this->directiveRegistry = $directiveRegistry;
+        $this->fieldDirectiveRegistry = $fieldDirectiveRegistry;
     }
-    final protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    final protected function getFieldDirectiveRegistry(): FieldDirectiveRegistryInterface
     {
-        /** @var DirectiveRegistryInterface */
-        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
+        /** @var FieldDirectiveRegistryInterface */
+        return $this->fieldDirectiveRegistry ??= $this->instanceManager->getInstance(FieldDirectiveRegistryInterface::class);
     }
 
     /**
@@ -110,7 +110,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                 $directiveIDs = $schema->getDirectiveIDs();
                 if ($ofKinds = $fieldDataAccessor->getValue('ofKinds')) {
                     $ofTypeFieldDirectiveResolvers = array_filter(
-                        $this->getDirectiveRegistry()->getFieldDirectiveResolvers(),
+                        $this->getFieldDirectiveRegistry()->getFieldDirectiveResolvers(),
                         fn (FieldDirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
                     );
                     // Calculate the directive IDs

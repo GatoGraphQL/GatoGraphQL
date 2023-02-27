@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Registries;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 
-interface DirectiveRegistryInterface
+interface FieldDirectiveRegistryInterface
 {
     public function addFieldDirectiveResolver(FieldDirectiveResolverInterface $directiveResolver): void;
     /**
