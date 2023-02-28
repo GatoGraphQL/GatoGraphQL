@@ -60,4 +60,9 @@ class SchemaConfigurationComponentEditorScript extends AbstractEditorScript
             ]
         );
     }
+
+    protected function registerStyleIndexCSS(): bool
+    {
+        return true;
+    }
 }

@@ -5,6 +5,7 @@ import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import InfoModal from './info-modal';
+import './style.scss';
 
 /**
  * Internal dependencies
@@ -25,6 +26,7 @@ const InfoModalButton = ( props ) => {
 				icon={ icon }
 				isSmall={ isSmall } 
 				onClick={ () => setOpen( true ) }
+				className="graphql-api-info-modal-button"
 			/>
 			{ isOpen && (
 				<InfoModal 
