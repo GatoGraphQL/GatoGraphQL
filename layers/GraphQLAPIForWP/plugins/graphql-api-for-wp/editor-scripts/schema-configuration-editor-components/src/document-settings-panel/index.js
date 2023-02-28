@@ -19,7 +19,7 @@ const DOCUMENT_SETTINGS_PANEL_NAME = 'schema-configuration-document-settings-pan
  */
 const implicitFeaturesDocEntries = [
     [
-        'AnyBuiltInScalar',
+        'AnyBuiltInScalar type',
         'any-built-in-scalar'
     ],
     [
