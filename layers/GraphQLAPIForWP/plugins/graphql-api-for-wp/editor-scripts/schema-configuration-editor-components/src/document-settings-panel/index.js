@@ -37,17 +37,19 @@ const DocumentSettingsPanel = () => (
         title={ __('Additional Documentation', 'graphql-api') }
     >
         <p>{ __('Browse documentation for implicit features in the GraphQL API:', 'graphql-api') }</p>
-        {
-            implicitFeaturesDocEntries.map( ( entry ) =>
-                <MarkdownInfoModalButton
-                    text={ entry[0] }
-                    title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
-                    pageFilename={ entry[1] }
-                    getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
-                    isSmall={ false }
-                />
-            )
-        }
+        <p>
+            {
+                implicitFeaturesDocEntries.map( ( entry ) =>
+                    <MarkdownInfoModalButton
+                        text={ entry[0] }
+                        title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                        pageFilename={ entry[1] }
+                        getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
+                        isSmall={ false }
+                    />
+                )
+            }
+        </p>
     </PluginDocumentSettingPanel>
 );
 export default DocumentSettingsPanel;
