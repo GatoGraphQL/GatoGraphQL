@@ -83,13 +83,21 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     abstract protected function getScriptName(): string;
 
-    // /**
-    //  * Register CSS
-    //  */
-    // protected function registerScriptCSS(): bool
-    // {
-    //     return false;
-    // }
+    /**
+     * Register CSS
+     */
+    protected function registerScriptCSS(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Register Style Index CSS
+     */
+    protected function registerStyleIndexCSS(): bool
+    {
+        return false;
+    }
 
     /**
      * Script localization name
@@ -146,6 +154,16 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     }
 
     /**
+     * Dependencies to load before the style
+     *
+     * @return string[]
+     */
+    protected function getStyleIndexDependencies(): array
+    {
+        return [];
+    }
+
+    /**
      * Registers all script assets
      */
     public function initScript(): void
@@ -180,19 +198,33 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
         );
         \wp_enqueue_script($scriptName);
 
-        // /**
-        //  * Register CSS file
-        //  */
-        // if ($this->registerScriptCSS()) {
-        //     $style_css = 'style.css';
-        //     \wp_register_style(
-        //         $scriptName,
-        //         $url . $style_css,
-        //         $this->getStyleDependencies(),
-        //         filemtime("$dir/$style_css")
-        //     );
-        //     \wp_enqueue_style($scriptName);
-        // }
+        /**
+         * Register CSS file
+         */
+        if ($this->registerScriptCSS()) {
+            $style_css = 'build/style.css';
+            \wp_register_style(
+                $scriptName,
+                $url . $style_css,
+                $this->getStyleDependencies(),
+                filemtime("$dir/$style_css")
+            );
+            \wp_enqueue_style($scriptName);
+        }
+
+        /**
+         * Register Style Index CSS file
+         */
+        if ($this->registerStyleIndexCSS()) {
+            $style_index_css = 'build/style-index.css';
+            \wp_register_style(
+                $scriptName . 'style-index',
+                $url . $style_index_css,
+                $this->getStyleIndexDependencies(),
+                filemtime("$dir/$style_index_css")
+            );
+            \wp_enqueue_style($scriptName . 'style-index');
+        }
 
         /**
          * Localize the script with custom data

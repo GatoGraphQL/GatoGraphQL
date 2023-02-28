@@ -1,4 +1,4 @@
-# `AnyBuiltInScalar`
+# AnyBuiltInScalar type
 
 Scalar type `AnyBuiltInScalar` represents any of [GraphQL's built-in scalar types](https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars):
 

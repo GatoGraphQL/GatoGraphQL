@@ -21,12 +21,12 @@ const getMarkdownContent = ( fileName, lang ) => {
  */
 const getMarkdownContentOrUseDefault = ( fileName, defaultLang, lang ) => {
 	/**
-	 * If lang or defaultLang are empty, then get them from the localized data under `window.endpointEditorComponents`
+	 * If lang or defaultLang are empty, then get them from the localized data under `window.customEndpointEditorComponents`
 	 * Property "localeLang": same as constant GraphQLAPI\GraphQLAPI\General\DocumentationConstants::LOCALE_LANG
 	 * Property "defaultLang": same as constants: same as constant GraphQLAPI\GraphQLAPI\General\DocumentationConstants::DEFAULT_LANG
 	 */
-	lang = lang || window.endpointEditorComponents?.localeLang
-	defaultLang = defaultLang || window.endpointEditorComponents?.defaultLang
+	lang = lang || window.customEndpointEditorComponents?.localeLang
+	defaultLang = defaultLang || window.customEndpointEditorComponents?.defaultLang
 	return getMarkdownContent( fileName, lang )
 		.catch(err => getMarkdownContent( fileName, defaultLang ) )
 }

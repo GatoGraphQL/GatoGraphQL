@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 /**
  * Components required to edit a GraphQL endpoint CPT
  */
-class EndpointComponentEditorScript extends AbstractEditorScript
+class CustomEndpointComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
@@ -32,7 +32,7 @@ class EndpointComponentEditorScript extends AbstractEditorScript
      */
     protected function getScriptName(): string
     {
-        return 'endpoint-editor-components';
+        return 'custom-endpoint-editor-components';
     }
 
     public function getEnablingModule(): ?string
