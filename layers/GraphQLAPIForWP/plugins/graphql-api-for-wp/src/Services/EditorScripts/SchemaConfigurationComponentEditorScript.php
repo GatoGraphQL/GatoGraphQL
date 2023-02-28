@@ -24,17 +24,14 @@ class SchemaConfigurationComponentEditorScript extends AbstractEditorScript
         return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
     }
 
-    /**
-     * Block name
-     */
     protected function getScriptName(): string
     {
-        return 'endpoint-editor-components';
+        return 'schema-configuration-editor-components';
     }
 
     public function getEnablingModule(): ?string
     {
-        return UserInterfaceFunctionalityModuleResolver::WELCOME_GUIDES;
+        return UserInterfaceFunctionalityModuleResolver::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION;
     }
 
     /**
@@ -54,26 +51,6 @@ class SchemaConfigurationComponentEditorScript extends AbstractEditorScript
         return 'en';
     }
 
-    /**
-     * In what languages is the documentation available
-     *
-     * @return string[]
-     */
-    protected function getDocLanguages(): array
-    {
-        return array_merge(
-            parent::getDocLanguages(),
-            [
-                'es', // Spanish
-            ]
-        );
-    }
-
-    /**
-     * Post types for which to register the script
-     *
-     * @return string[]
-     */
     protected function getAllowedPostTypes(): array
     {
         return array_merge(
