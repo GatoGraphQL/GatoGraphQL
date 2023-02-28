@@ -25,10 +25,12 @@ if (!defined('ABSPATH')) {
 
 /**
  * Load translations
+ * @todo Re-enable when an actual translation (*.po/*.mo) is provided
+ * @see https://github.com/leoloso/PoP/issues/2051
  */
-add_action('init', function (): void {
-    load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
-});
+// add_action('init', function (): void {
+//     load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
+// });
 
 /**
  * Plugin's name and version.

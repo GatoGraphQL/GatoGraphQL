@@ -25,10 +25,12 @@ if (!defined('ABSPATH')) {
 
 /**
  * Load translations
+ * @todo Re-enable when an actual translation (*.po/*.mo) is provided
+ * @see https://github.com/leoloso/PoP/issues/2051
  */
-\add_action('init', function (): void {
-    load_plugin_textdomain('graphql-api-extension-demo', false, plugin_basename(__FILE__) . '/languages');
-});
+// \add_action('init', function (): void {
+//     load_plugin_textdomain('graphql-api-extension-demo', false, plugin_basename(__FILE__) . '/languages');
+// });
 
 /**
  * Create and set-up the extension
