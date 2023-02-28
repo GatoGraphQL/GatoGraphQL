@@ -13,7 +13,7 @@ import { getMarkdownContentOrUseDefault } from '../markdown-loader';
 /**
  * Constants to customize
  */
-const DOCUMENT_SETTINGS_PANEL_NAME = 'endpoint-document-settings-panel';
+const DOCUMENT_SETTINGS_PANEL_NAME = 'custom-endpoint-document-settings-panel';
 const guideName = __('Creating Custom Endpoints', 'graphql-api');
 const pageFilenames = [
     'welcome-guide',
