@@ -17,26 +17,35 @@ const DOCUMENT_SETTINGS_PANEL_NAME = 'schema-configuration-document-settings-pan
 /**
  * Component
  */
+const implicitFeaturesDocEntries = [
+    [
+        'AnyBuiltInScalar',
+        'any-built-in-scalar'
+    ],
+    [
+        'OneOf Input Object',
+        'oneof-input-object'
+    ],
+    [
+        'Query Schema Extensions via Introspection',
+        'query-schema-extensions-via-introspection'
+    ],
+];
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
         title={ __('Additional Documentation', 'graphql-api') }
     >
-        <MarkdownInfoModalButton
-            title={ __('AnyBuiltInScalar', 'graphql-api') }
-            pageFilename="any-built-in-scalar"
-            getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
-        />
-        <MarkdownInfoModalButton
-            title={ __('OneOf Input Object', 'graphql-api') }
-            pageFilename="oneof-input-object"
-            getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
-        />
-        <MarkdownInfoModalButton
-            title={ __('Query Schema Extensions via Introspection', 'graphql-api') }
-            pageFilename="query-schema-extensions-via-introspection"
-            getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
-        />
+        {
+            implicitFeaturesDocEntries.map( ( entry ) =>
+                <MarkdownInfoModalButton
+                    label={ entry[0] }
+                    title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                    pageFilename={ entry[1] }
+                    getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
+                />
+            )
+        }
     </PluginDocumentSettingPanel>
 );
 export default DocumentSettingsPanel;
