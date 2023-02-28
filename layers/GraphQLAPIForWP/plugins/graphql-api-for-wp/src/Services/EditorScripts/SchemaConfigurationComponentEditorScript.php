@@ -31,7 +31,7 @@ class SchemaConfigurationComponentEditorScript extends AbstractEditorScript
 
     public function getEnablingModule(): ?string
     {
-        return UserInterfaceFunctionalityModuleResolver::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION;
+        return UserInterfaceFunctionalityModuleResolver::SCHEMA_CONFIGURATION_SIDEBAR_DOCUMENTATION;
     }
 
     /**
