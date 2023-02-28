@@ -13,15 +13,18 @@ import InfoModal from './info-modal';
 const InfoModalButton = ( props ) => {
 	const { 
 		icon = "editor-help",
+		variant = "tertiary",
+		isSmall = true
 	} = props;
 	const [ isOpen, setOpen ] = useState( false );
 	return (
 		<>
 			<Button
-				variant="tertiary"
-				isSmall 
+				{ ...props }
+				variant={ variant } 
+				icon={ icon }
+				isSmall={ isSmall } 
 				onClick={ () => setOpen( true ) }
-				icon={ icon } 
 			/>
 			{ isOpen && (
 				<InfoModal 

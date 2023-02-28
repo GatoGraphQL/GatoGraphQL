@@ -43,6 +43,7 @@ const DocumentSettingsPanel = () => (
                     title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
                     pageFilename={ entry[1] }
                     getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
+                    isSmall={ false }
                 />
             )
         }
