@@ -5,26 +5,23 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 
-/**
- * Components required to edit a GraphQL endpoint CPT
- */
-class CustomEndpointComponentEditorScript extends AbstractEditorScript
+class SchemaConfigurationComponentEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
-    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
-    final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    final public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
     {
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
     }
-    final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
     {
-        /** @var GraphQLCustomEndpointCustomPostType */
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        /** @var GraphQLSchemaConfigurationCustomPostType */
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
     }
 
     /**
@@ -32,7 +29,7 @@ class CustomEndpointComponentEditorScript extends AbstractEditorScript
      */
     protected function getScriptName(): string
     {
-        return 'custom-endpoint-editor-components';
+        return 'endpoint-editor-components';
     }
 
     public function getEnablingModule(): ?string
@@ -82,7 +79,7 @@ class CustomEndpointComponentEditorScript extends AbstractEditorScript
         return array_merge(
             parent::getAllowedPostTypes(),
             [
-                $this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType(),
+                $this->getGraphQLSchemaConfigurationCustomPostType()->getCustomPostType(),
             ]
         );
     }
