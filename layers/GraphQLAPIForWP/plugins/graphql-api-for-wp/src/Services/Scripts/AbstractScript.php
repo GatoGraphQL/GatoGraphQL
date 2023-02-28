@@ -207,7 +207,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
                 $scriptName,
                 $url . $style_css,
                 $this->getStyleDependencies(),
-                filemtime("$dir/$style_css")
+                (string)filemtime("$dir/$style_css")
             );
             \wp_enqueue_style($scriptName);
         }
@@ -221,7 +221,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
                 $scriptName . 'style-index',
                 $url . $style_index_css,
                 $this->getStyleIndexDependencies(),
-                filemtime("$dir/$style_index_css")
+                (string)filemtime("$dir/$style_index_css")
             );
             \wp_enqueue_style($scriptName . 'style-index');
         }
