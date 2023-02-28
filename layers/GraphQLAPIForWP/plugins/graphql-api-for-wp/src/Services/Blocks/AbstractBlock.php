@@ -361,12 +361,13 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          */
         if ($this->registerEditorCSS()) {
             $editor_css = 'build/index.css';
+            /** @var string */
+            $modificationTime = filemtime("$dir/$editor_css");
             \wp_register_style(
                 $blockRegistrationName . '-block-editor',
                 $url . $editor_css,
                 array(),
-                // Cast object so PHPStan doesn't throw error
-                (string)filemtime("$dir/$editor_css")
+                $modificationTime
             );
             $blockConfiguration['editor_style'] = $blockRegistrationName . '-block-editor';
         }
@@ -376,12 +377,13 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          */
         if ($this->registerCommonStyleCSS()) {
             $style_css = 'build/style-index.css';
+            /** @var string */
+            $modificationTime = filemtime("$dir/$style_css");
             \wp_register_style(
                 $blockRegistrationName . '-block',
                 $url . $style_css,
                 array(),
-                // Cast object so PHPStan doesn't throw error
-                (string)filemtime("$dir/$style_css")
+                $modificationTime
             );
             $blockConfiguration['style'] = $blockRegistrationName . '-block';
         }

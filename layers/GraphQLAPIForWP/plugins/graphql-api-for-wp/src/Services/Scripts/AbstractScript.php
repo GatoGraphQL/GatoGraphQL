@@ -203,11 +203,13 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
          */
         if ($this->registerScriptCSS()) {
             $style_css = 'build/style.css';
+            /** @var string */
+            $modificationTime = filemtime("$dir/$style_css");
             \wp_register_style(
                 $scriptName,
                 $url . $style_css,
                 $this->getStyleDependencies(),
-                (string)filemtime("$dir/$style_css")
+                $modificationTime
             );
             \wp_enqueue_style($scriptName);
         }
@@ -217,11 +219,13 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
          */
         if ($this->registerStyleIndexCSS()) {
             $style_index_css = 'build/style-index.css';
+            /** @var string */
+            $modificationTime = filemtime("$dir/$style_index_css");
             \wp_register_style(
                 $scriptName . 'style-index',
                 $url . $style_index_css,
                 $this->getStyleIndexDependencies(),
-                (string)filemtime("$dir/$style_index_css")
+                $modificationTime
             );
             \wp_enqueue_style($scriptName . 'style-index');
         }
