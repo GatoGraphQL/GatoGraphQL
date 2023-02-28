@@ -15,7 +15,8 @@ const InfoModalButton = ( props ) => {
 	const { 
 		icon = "editor-help",
 		variant = "tertiary",
-		isSmall = true
+		isSmall = true,
+		className = "graphql-api-info-modal-button"
 	} = props;
 	const [ isOpen, setOpen ] = useState( false );
 	return (
@@ -26,7 +27,7 @@ const InfoModalButton = ( props ) => {
 				icon={ icon }
 				isSmall={ isSmall } 
 				onClick={ () => setOpen( true ) }
-				className="graphql-api-info-modal-button"
+				className={ className }
 			/>
 			{ isOpen && (
 				<InfoModal 

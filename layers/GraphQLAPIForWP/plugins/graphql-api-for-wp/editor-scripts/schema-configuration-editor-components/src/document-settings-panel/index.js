@@ -46,6 +46,7 @@ const DocumentSettingsPanel = () => (
                         pageFilename={ entry[1] }
                         getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
                         isSmall={ false }
+                        className="graphql-api-info-modal-button text-wrap"
                     />
                 )
             }
