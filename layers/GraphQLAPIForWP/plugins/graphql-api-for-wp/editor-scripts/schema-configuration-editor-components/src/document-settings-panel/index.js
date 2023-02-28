@@ -39,7 +39,7 @@ const DocumentSettingsPanel = () => (
         {
             implicitFeaturesDocEntries.map( ( entry ) =>
                 <MarkdownInfoModalButton
-                    label={ entry[0] }
+                    text={ entry[0] }
                     title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
                     pageFilename={ entry[1] }
                     getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
