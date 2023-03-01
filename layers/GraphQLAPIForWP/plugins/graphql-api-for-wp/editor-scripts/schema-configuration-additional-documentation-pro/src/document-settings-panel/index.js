@@ -36,6 +36,7 @@ const implicitFeaturesDocEntries = [
     ],
 ];
 const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
+const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentationPro.proPluginWebsiteURL;
 const title = displayUnlockPROPluginMessage
     ? __('[🔒] Additional Documentation', 'graphql-api')
     : __('[PRO] Additional Documentation', 'graphql-api');
@@ -44,6 +45,9 @@ const DocumentSettingsPanel = () => (
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
         title={ title }
     >
+        { displayUnlockPROPluginMessage &&
+            <p><a target="_blank" href={ proPluginWebsiteURL } class="button">{ __('Go PRO to unlock! 🔓', 'graphql-api') }</a></p>
+        }
         <p>{ __('Docs for additional features unlocked by the GraphQL API PRO:', 'graphql-api') }</p>
         <p>
             {
