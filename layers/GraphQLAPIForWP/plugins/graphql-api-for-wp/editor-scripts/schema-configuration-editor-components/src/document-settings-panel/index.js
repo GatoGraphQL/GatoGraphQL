@@ -36,7 +36,7 @@ const DocumentSettingsPanel = () => (
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
         title={ __('Additional Documentation', 'graphql-api') }
     >
-        <p>{ __('Browse documentation for implicit features in the GraphQL API:', 'graphql-api') }</p>
+        <p>{ __('Browse documentation for additional features in the GraphQL API:', 'graphql-api') }</p>
         <p>
             {
                 implicitFeaturesDocEntries.map( ( entry ) =>

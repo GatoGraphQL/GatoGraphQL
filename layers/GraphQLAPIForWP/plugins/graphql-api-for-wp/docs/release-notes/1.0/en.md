@@ -2,7 +2,7 @@
 
 ## Browse "Additional Documentation" when editing a Schema Configuration ([#2052](https://github.com/leoloso/PoP/pull/2052))
 
-Documentation for implicit features in the GraphQL API can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
+Documentation for additional features in the GraphQL API can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
 
 ![Additional Documentation in Schema Configuration CPT](../../images/releases/v1.0/schema-configuration-additional-documentation.png)
 
