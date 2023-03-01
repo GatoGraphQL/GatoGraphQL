@@ -13,7 +13,7 @@ import { getImplicitFeaturesDocMarkdownContentOrUseDefault } from '../implicit-f
 /**
  * Constants to customize
  */
-const DOCUMENT_SETTINGS_PANEL_NAME = 'schema-configuration-document-settings-panel';
+const DOCUMENT_SETTINGS_PANEL_NAME = 'schema-configuration-additional-documentation-panel';
 /**
  * Component
  */
