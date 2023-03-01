@@ -35,10 +35,14 @@ const implicitFeaturesDocEntries = [
         'restrict-field-directives-to-specific-types'
     ],
 ];
+const displayUnlockPROPluginMessage = window.graphqlApiSchemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
+const title = displayUnlockPROPluginMessage
+    ? __('[🔒] Additional Documentation', 'graphql-api')
+    : __('Additional PRO Documentation', 'graphql-api');
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('[PRO] Additional Documentation', 'graphql-api') }
+        title={ title }
     >
         <p>{ __('Docs for additional features unlocked by the GraphQL API PRO:', 'graphql-api') }</p>
         <p>
