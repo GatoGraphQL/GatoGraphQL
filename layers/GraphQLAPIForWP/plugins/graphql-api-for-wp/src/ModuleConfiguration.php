@@ -151,4 +151,18 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    /**
+     * @todo Change the URL to the final one
+     */
+    public function getPROPluginWebsiteURL(): string
+    {
+        $envVariable = Environment::PRO_PLUGIN_WEBSITE_URL;
+        $defaultValue = 'https://graphql-api.com';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
 }
