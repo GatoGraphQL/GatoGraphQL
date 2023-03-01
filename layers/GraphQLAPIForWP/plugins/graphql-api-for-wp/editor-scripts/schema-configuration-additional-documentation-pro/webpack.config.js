@@ -1,7 +1,7 @@
 /**
  * Define constants
  */
-const IMPLICIT_FEATURES_DOCS_PATH = `docs/implicit-features-pro/`;
+const IMPLICIT_FEATURES_DOCS_PATH = `docs-pro/implicit-features/`;
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
 	: 'https://raw.githubusercontent.com/leoloso/PoP/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp'
