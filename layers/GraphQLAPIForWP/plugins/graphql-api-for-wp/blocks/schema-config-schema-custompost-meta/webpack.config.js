@@ -2,10 +2,14 @@
  * Define constants
  */
 const MODULE = 'schema-custompost-meta';
+
+
+const packageJSON = require('./package.json');
+const TAG = packageJSON.version.endsWith('-dev') ? 'master' : packageJSON.version;
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const BASE_URL = process.env.NODE_ENV === 'production'
-	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
-	: 'https://raw.githubusercontent.com/leoloso/PoP/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp'
+	? `https://raw.githubusercontent.com/leoloso/PoP/${ TAG }/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp`
+	: null
 
 const config = require( '@wordpress/scripts/config/webpack.config' );
 const path = require( 'path' );
