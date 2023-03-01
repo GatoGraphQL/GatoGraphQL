@@ -21,6 +21,7 @@ trait UnlockPROPluginScriptTrait
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return [
             'displayUnlockPROPluginMessage' => $moduleConfiguration->displayUnlockPROPluginMessage(),
+            'proPluginWebsiteURL' => $moduleConfiguration->getPROPluginWebsiteURL(),
         ];
     }
 }
