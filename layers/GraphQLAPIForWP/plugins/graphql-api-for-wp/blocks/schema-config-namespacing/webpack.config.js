@@ -3,9 +3,9 @@
  */
 const MODULE = 'schema-namespacing';
 
+const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const packageJSON = require('./package.json');
 const TAG = packageJSON.version.endsWith('-dev') ? 'master' : packageJSON.version;
-const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? `https://raw.githubusercontent.com/leoloso/PoP/${ TAG }/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp`
 	: null
@@ -26,7 +26,7 @@ config.module.rules.push(
 			{
 				loader: "markdown-loader",
 				options: {
-					baseUrl: BASE_URL !== null ? `${ BASE_URL }/${ MODULE_DOCS_PATH }` : null,
+					baseUrl: BASE_URL,
 					langPrefix: 'hljs language-',
 					highlight: (code, lang) => {
 					    if (!lang || ['text', 'literal', 'nohighlight'].includes(lang)) {

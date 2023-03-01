@@ -4,9 +4,9 @@
 const MODULE = 'schema-custompost-meta';
 
 
+const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const packageJSON = require('./package.json');
 const TAG = packageJSON.version.endsWith('-dev') ? 'master' : packageJSON.version;
-const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? `https://raw.githubusercontent.com/leoloso/PoP/${ TAG }/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp`
 	: null
