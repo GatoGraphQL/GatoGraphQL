@@ -19,6 +19,12 @@ interface ContentParserInterface
     public function setBaseURL(?string $baseDir = null): void;
 
     /**
+     * Inject the folder under which the docs are stored.
+     * If null, it uses the default value from the main plugin.
+     */
+    public function setDocsFolder(?string $docsFolder = null): void;
+
+    /**
      * Parse the file's Markdown into HTML Content
      *
      * @param string $relativePathDir Dir relative to the docs/en/ folder

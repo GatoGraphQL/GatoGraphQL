@@ -21,6 +21,7 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     protected string $baseDir = '';
     protected string $baseURL = '';
+    protected string $docsFolder = '';
 
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?LocaleHelper $localeHelper = null;
@@ -28,13 +29,16 @@ abstract class AbstractContentParser implements ContentParserInterface
     /**
      * @param string|null $baseDir Where to look for the documentation
      * @param string|null $baseURL URL for the documentation
+     * @param string|null $docsFolder folder under which the docs are stored
      */
     public function __construct(
         ?string $baseDir = null,
         ?string $baseURL = null,
+        ?string $docsFolder = null,
     ) {
         $this->setBaseDir($baseDir);
         $this->setBaseURL($baseURL);
+        $this->setDocsFolder($docsFolder);
     }
 
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -72,6 +76,15 @@ abstract class AbstractContentParser implements ContentParserInterface
     public function setBaseURL(?string $baseURL = null): void
     {
         $this->baseURL = $baseURL ?? App::getMainPlugin()->getPluginURL();
+    }
+
+    /**
+     * Inject the folder under which the docs are stored.
+     * If null, it uses the default value from the main plugin.
+     */
+    public function setDocsFolder(?string $docsFolder = null): void
+    {
+        $this->docsFolder = $docsFolder ?? 'docs';
     }
 
     /**
@@ -151,7 +164,7 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     protected function getDocsFolder(): string
     {
-        return 'docs';
+        return $this->docsFolder;
     }
 
     /**

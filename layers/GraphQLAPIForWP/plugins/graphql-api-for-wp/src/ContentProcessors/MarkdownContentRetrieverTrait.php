@@ -21,6 +21,7 @@ trait MarkdownContentRetrieverTrait
         // Inject the place to look for the documentation
         $this->getMarkdownContentParser()->setBaseDir($this->getBaseDir());
         $this->getMarkdownContentParser()->setBaseURL($this->getBaseURL());
+        $this->getMarkdownContentParser()->setDocsFolder($this->getDocsFolder());
         try {
             return $this->getMarkdownContentParser()->getContent(
                 $markdownFilename,
@@ -42,4 +43,9 @@ trait MarkdownContentRetrieverTrait
      * Get the URL where to look for the documentation.
      */
     abstract protected function getBaseURL(): string;
+
+    /**
+     * Get the folder under which the docs are stored
+     */
+    abstract protected function getDocsFolder(): string;
 }

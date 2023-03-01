@@ -19,8 +19,7 @@ trait ExtensionMarkdownContentRetrieverTrait
      */
     protected function getBaseDir(): string
     {
-        return App::getMainPlugin()->getPluginDir();
-        // return App::getExtension($this->getExtensionClass())->getPluginDir();
+        return App::getExtension($this->getExtensionClass())->getPluginDir();
     }
 
     /**
@@ -28,7 +27,14 @@ trait ExtensionMarkdownContentRetrieverTrait
      */
     protected function getBaseURL(): string
     {
-        return App::getMainPlugin()->getPluginURL();
-        // return App::getExtension($this->getExtensionClass())->getPluginURL();
+        return App::getExtension($this->getExtensionClass())->getPluginURL();
+    }
+
+    /**
+     * Get the URL where to look for the documentation.
+     */
+    protected function getDocsFolder(): string
+    {
+        return 'docs';
     }
 }

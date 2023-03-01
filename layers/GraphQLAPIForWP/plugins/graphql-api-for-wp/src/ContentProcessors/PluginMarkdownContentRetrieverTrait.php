@@ -23,4 +23,12 @@ trait PluginMarkdownContentRetrieverTrait
     {
         return App::getMainPlugin()->getPluginURL();
     }
+
+    /**
+     * Get the folder under which the docs are stored
+     */
+    protected function getDocsFolder(): string
+    {
+        return 'docs';
+    }
 }
