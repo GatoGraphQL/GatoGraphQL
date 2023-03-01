@@ -3,8 +3,8 @@
  */
 const IMPLICIT_FEATURES_DOCS_PATH = `docs-pro/implicit-features/`;
 
-const packageJSON = require('./package.json');
-const PACKAGE_TAG = packageJSON.version.endsWith('-dev') ? 'master' : packageJSON.version;
+const NPM_PACKAGE_VERSION = process.env.npm_package_version;
+const PACKAGE_TAG = NPM_PACKAGE_VERSION.endsWith('-dev') ? 'master' : NPM_PACKAGE_VERSION;
 const GITHUB_BASE_URL = `https://raw.githubusercontent.com/leoloso/PoP/${ PACKAGE_TAG }/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp`
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? `${ GITHUB_BASE_URL }/${ IMPLICIT_FEATURES_DOCS_PATH }`
