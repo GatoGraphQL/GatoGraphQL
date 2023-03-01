@@ -14,7 +14,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
 
     public final const EXCERPT_AS_DESCRIPTION = Plugin::NAMESPACE . '\excerpt-as-description';
     public final const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
-    public final const SCHEMA_CONFIGURATION_SIDEBAR_DOCUMENTATION = Plugin::NAMESPACE . '\schema-configuration-sidebar-documentation';
+    public final const SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION = Plugin::NAMESPACE . '\schema-configuration-additional-documentation';
+    public final const SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO = Plugin::NAMESPACE . '\schema-configuration-additional-documentation-pro';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -36,7 +37,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         return [
             self::EXCERPT_AS_DESCRIPTION,
             self::WELCOME_GUIDES,
-            self::SCHEMA_CONFIGURATION_SIDEBAR_DOCUMENTATION,
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION,
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO,
         ];
     }
 
@@ -55,7 +57,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                         EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                     ]
                 ];
-            case self::SCHEMA_CONFIGURATION_SIDEBAR_DOCUMENTATION:
+            case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
+            case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO:
                 return [
                     [
                         SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
@@ -86,7 +89,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::WELCOME_GUIDES:
-            case self::SCHEMA_CONFIGURATION_SIDEBAR_DOCUMENTATION:
+            case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
+            case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO:
                 return true;
         }
         return parent::isHidden($module);
@@ -97,7 +101,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         return match ($module) {
             self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'graphql-api'),
             self::WELCOME_GUIDES => \__('Welcome Guides', 'graphql-api'),
-            self::SCHEMA_CONFIGURATION_SIDEBAR_DOCUMENTATION => \__('Additional Documentation', 'graphql-api'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional Documentation', 'graphql-api'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO => \__('Additional Documentation [PRO]', 'graphql-api'),
             default => $module,
         };
     }
@@ -111,7 +116,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                 '5.5',
                 '8.2'
             ),
-            self::SCHEMA_CONFIGURATION_SIDEBAR_DOCUMENTATION => \__('Documentation on using the GraphQL API', 'graphql-api'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Documentation on using the GraphQL API', 'graphql-api'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO => \__('Documentation on using the GraphQL API PRO', 'graphql-api'),
             default => parent::getDescription($module),
         };
     }

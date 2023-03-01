@@ -2,7 +2,7 @@
  * Path to load the lazy chunks on the fly
  * @see https://v4.webpack.js.org/guides/public-path/#on-the-fly
  */
-__webpack_public_path__ = window.schemaConfigurationEditorComponents?.publicPath;
+__webpack_public_path__ = window.schemaConfigurationAdditionalDocumentation?.publicPath;
 
 /**
  * Read the content from a Markdown file in a given language, and return it as HTML
@@ -23,8 +23,8 @@ const getImplicitFeaturesDocMarkdownContent = ( fileName, lang ) => {
  * @param {string|null} lang The language to translate to. If none provided, get it from the localized data
  */
 const getImplicitFeaturesDocMarkdownContentOrUseDefault = ( fileName, defaultLang, lang ) => {
-	lang = lang || window.schemaConfigurationEditorComponents?.localeLang
-	defaultLang = defaultLang || window.schemaConfigurationEditorComponents?.defaultLang
+	lang = lang || window.schemaConfigurationAdditionalDocumentation?.localeLang
+	defaultLang = defaultLang || window.schemaConfigurationAdditionalDocumentation?.defaultLang
 	return getImplicitFeaturesDocMarkdownContent( lang )
 		.catch(err => getImplicitFeaturesDocMarkdownContent( fileName, defaultLang ) )
 }

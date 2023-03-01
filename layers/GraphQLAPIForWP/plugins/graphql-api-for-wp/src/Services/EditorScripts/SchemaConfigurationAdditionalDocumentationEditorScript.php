@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 
-class SchemaConfigurationComponentEditorScript extends AbstractEditorScript
+class SchemaConfigurationAdditionalDocumentationEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
@@ -26,12 +26,12 @@ class SchemaConfigurationComponentEditorScript extends AbstractEditorScript
 
     protected function getScriptName(): string
     {
-        return 'schema-configuration-editor-components';
+        return 'schema-configuration-additional-documentation';
     }
 
     public function getEnablingModule(): ?string
     {
-        return UserInterfaceFunctionalityModuleResolver::SCHEMA_CONFIGURATION_SIDEBAR_DOCUMENTATION;
+        return UserInterfaceFunctionalityModuleResolver::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION;
     }
 
     /**

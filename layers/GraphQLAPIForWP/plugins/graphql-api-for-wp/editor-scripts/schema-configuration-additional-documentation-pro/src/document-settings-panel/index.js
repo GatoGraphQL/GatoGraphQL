@@ -13,30 +13,34 @@ import { getImplicitFeaturesDocMarkdownContentOrUseDefault } from '../implicit-f
 /**
  * Constants to customize
  */
-const DOCUMENT_SETTINGS_PANEL_NAME = 'schema-configuration-document-settings-panel';
+const DOCUMENT_SETTINGS_PANEL_NAME = 'schema-configuration-additional-documentation-pro-panel';
 /**
  * Component
  */
 const implicitFeaturesDocEntries = [
     [
-        'AnyBuiltInScalar type',
-        'any-built-in-scalar'
+        'Custom Scalars Pack',
+        'custom-scalars'
     ],
     [
-        'OneOf Input Object',
-        'oneof-input-object'
+        'DangerouslyNonSpecificScalar Type',
+        'dangerously-non-specific-scalar'
     ],
     [
-        'Query Schema Extensions via Introspection',
-        'query-schema-extensions-via-introspection'
+        'Dynamic Variables',
+        'dynamic-variables'
+    ],
+    [
+        'Restrict Field Directives to Specific Types',
+        'restrict-field-directives-to-specific-types'
     ],
 ];
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Additional Documentation', 'graphql-api') }
+        title={ __('[PRO] Additional Documentation', 'graphql-api') }
     >
-        <p>{ __('Browse documentation for implicit features in the GraphQL API:', 'graphql-api') }</p>
+        <p>{ __('Docs for additional features unlocked by the GraphQL API PRO:', 'graphql-api') }</p>
         <p>
             {
                 implicitFeaturesDocEntries.map( ( entry ) =>

@@ -1,7 +1,7 @@
 {
-	"name": "schema-configuration-editor-components",
+	"name": "schema-configuration-additional-documentation-pro",
 	"version": "0.1.0",
-	"description": "Components required to edit a GraphQL Schema Configuration CPT",
+	"description": "Sidebar component displaying Additional Documentation for the PRO plugin when editing a GraphQL Schema Configuration CPT",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",
