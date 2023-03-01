@@ -7,7 +7,10 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 /**
  * Internal dependencies
  */
-import { MarkdownInfoModalButton } from '@graphqlapi/components';
+import {
+    MarkdownInfoModalButton,
+    GoProLink,
+} from '@graphqlapi/components';
 import { getImplicitFeaturesDocMarkdownContentOrUseDefault } from '../implicit-features-doc-markdown-loader';
 
 /**
@@ -35,11 +38,23 @@ const implicitFeaturesDocEntries = [
         'restrict-field-directives-to-specific-types'
     ],
 ];
+const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
+const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentationPro.proPluginWebsiteURL;
+const title = displayUnlockPROPluginMessage
+    ? __('[🔒] Additional Documentation', 'graphql-api')
+    : __('[PRO] Additional Documentation', 'graphql-api');
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('[PRO] Additional Documentation', 'graphql-api') }
+        title={ title }
     >
+        { displayUnlockPROPluginMessage &&
+            <p>
+                <GoProLink
+                    proPluginWebsiteURL={ proPluginWebsiteURL }
+                />
+            </p>
+        }
         <p>{ __('Docs for additional features unlocked by the GraphQL API PRO:', 'graphql-api') }</p>
         <p>
             {

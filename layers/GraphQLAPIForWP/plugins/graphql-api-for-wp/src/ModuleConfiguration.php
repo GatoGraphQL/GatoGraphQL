@@ -138,4 +138,31 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function displayUnlockPROPluginMessage(): bool
+    {
+        $envVariable = Environment::DISPLAY_UNLOCK_PRO_PLUGIN_MESSAGE;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
+     * @todo Change the URL to the final one
+     */
+    public function getPROPluginWebsiteURL(): string
+    {
+        $envVariable = Environment::PRO_PLUGIN_WEBSITE_URL;
+        $defaultValue = 'https://graphql-api.com';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
 }
