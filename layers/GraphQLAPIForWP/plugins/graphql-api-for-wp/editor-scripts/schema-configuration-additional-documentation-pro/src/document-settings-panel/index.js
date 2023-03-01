@@ -19,16 +19,20 @@ const DOCUMENT_SETTINGS_PANEL_NAME = 'schema-configuration-additional-documentat
  */
 const implicitFeaturesDocEntries = [
     [
-        'AnyBuiltInScalar type',
-        'any-built-in-scalar'
+        'Custom Scalars',
+        'custom-scalars'
     ],
     [
-        'OneOf Input Object',
-        'oneof-input-object'
+        'Dangerously Non Specific Scalar',
+        'dangerously-non-specific-scalar'
     ],
     [
-        'Query Schema Extensions via Introspection',
-        'query-schema-extensions-via-introspection'
+        'Dynamic Variables',
+        'dynamic-variables'
+    ],
+    [
+        'Restrict Field Directives to Specific Types',
+        'restrict-field-directives-to-specific-types'
     ],
 ];
 const DocumentSettingsPanel = () => (
