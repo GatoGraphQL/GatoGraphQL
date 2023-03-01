@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
+use GraphQLAPI\GraphQLAPI\PluginStaticHelpers;
+
 trait PROPluginMarkdownContentRetrieverTrait
 {
     use PluginMarkdownContentRetrieverTrait;
@@ -14,5 +16,17 @@ trait PROPluginMarkdownContentRetrieverTrait
     protected function getDocsFolder(): string
     {
         return 'docs-pro';
+    }
+
+    /**
+     * Get the GitHub repo URL, to retrieve images for PROD.
+     */
+    protected function getGithubRepoDocsPathURL(): string
+    {
+        return str_replace(
+            '/docs',
+            '/docs-pro',
+            PluginStaticHelpers::getGitHubRepoDocsPathURL(),
+        );
     }
 }

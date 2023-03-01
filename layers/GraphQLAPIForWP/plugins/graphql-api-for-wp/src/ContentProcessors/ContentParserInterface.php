@@ -25,6 +25,12 @@ interface ContentParserInterface
     public function setDocsFolder(?string $docsFolder = null): void;
 
     /**
+     * Inject the GitHub repo URL, to retrieve images for PROD.
+     * If null, it uses the default value from the main plugin.
+     */
+    public function setGithubRepoDocsPathURL(?string $githubRepoDocsPathURL = null): void;
+
+    /**
      * Parse the file's Markdown into HTML Content
      *
      * @param string $relativePathDir Dir relative to the docs/en/ folder

@@ -22,6 +22,7 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected string $baseDir = '';
     protected string $baseURL = '';
     protected string $docsFolder = '';
+    protected string $githubRepoDocsPathURL = '';
 
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?LocaleHelper $localeHelper = null;
@@ -30,15 +31,18 @@ abstract class AbstractContentParser implements ContentParserInterface
      * @param string|null $baseDir Where to look for the documentation
      * @param string|null $baseURL URL for the documentation
      * @param string|null $docsFolder folder under which the docs are stored
+     * @param string|null $githubRepoDocsPathURL GitHub repo URL, to retrieve images for PROD
      */
     public function __construct(
         ?string $baseDir = null,
         ?string $baseURL = null,
         ?string $docsFolder = null,
+        ?string $githubRepoDocsPathURL = null,
     ) {
         $this->setBaseDir($baseDir);
         $this->setBaseURL($baseURL);
         $this->setDocsFolder($docsFolder);
+        $this->setGithubRepoDocsPathURL($githubRepoDocsPathURL);
     }
 
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -88,6 +92,15 @@ abstract class AbstractContentParser implements ContentParserInterface
     }
 
     /**
+     * Inject the GitHub repo URL, to retrieve images for PROD.
+     * If null, it uses the default value from the main plugin.
+     */
+    public function setGithubRepoDocsPathURL(?string $githubRepoDocsPathURL = null): void
+    {
+        $this->githubRepoDocsPathURL = $githubRepoDocsPathURL ?? PluginStaticHelpers::getGitHubRepoDocsPathURL();
+    }
+
+    /**
      * Parse the file's Markdown into HTML Content
      *
      * @param string $relativePathDir Dir relative to the /docs/${lang}/ folder
@@ -132,7 +145,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         $pathURL = \trailingslashit($this->getDefaultFileURL()) . $relativePathDir;
         // Include the images from the GitHub repo, unless we are in DEV
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
-            $options[self::PATH_URL_TO_DOCS] = PluginStaticHelpers::getGitHubRepoDocsPathURL() . $relativePathDir;
+            $options[self::PATH_URL_TO_DOCS] = $this->githubRepoDocsPathURL . $relativePathDir;
         }
         return $this->processHTMLContent($htmlContent, $pathURL, $options);
     }
@@ -150,7 +163,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     protected function getFileDir(): string
     {
-        return $this->baseDir . '/' . $this->getDocsFolder();
+        return $this->baseDir . '/' . $this->docsFolder;
     }
 
     /**
@@ -159,12 +172,7 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected function getDefaultFileURL(): string
     {
         $lang = $this->getDefaultDocsLanguage();
-        return \trailingslashit($this->baseURL) . $this->getDocsFolder() . '/' . $lang;
-    }
-
-    protected function getDocsFolder(): string
-    {
-        return $this->docsFolder;
+        return \trailingslashit($this->baseURL) . $this->docsFolder . '/' . $lang;
     }
 
     /**
