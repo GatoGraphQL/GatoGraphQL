@@ -137,7 +137,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     protected function getFileDir(): string
     {
-        return $this->baseDir . '/' . $this->getDocsFolder();
+        return \trailingslashit($this->baseURL) . $this->getDocsFolder();
     }
 
     /**
