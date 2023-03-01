@@ -38,12 +38,4 @@ trait ExtensionMarkdownContentRetrieverTrait
     {
         return 'docs';
     }
-
-    /**
-     * Get the GitHub repo URL, to retrieve images for PROD.
-     */
-    protected function getGithubRepoDocsPathURL(): string
-    {
-        return PluginStaticHelpers::getGitHubRepoDocsPathURL();
-    }
 }
