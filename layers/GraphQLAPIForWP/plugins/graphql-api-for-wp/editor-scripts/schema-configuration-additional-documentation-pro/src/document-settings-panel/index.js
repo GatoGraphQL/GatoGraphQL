@@ -38,7 +38,7 @@ const implicitFeaturesDocEntries = [
 const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
 const title = displayUnlockPROPluginMessage
     ? __('[🔒] Additional Documentation', 'graphql-api')
-    : __('Additional PRO Documentation', 'graphql-api');
+    : __('[PRO] Additional Documentation', 'graphql-api');
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
