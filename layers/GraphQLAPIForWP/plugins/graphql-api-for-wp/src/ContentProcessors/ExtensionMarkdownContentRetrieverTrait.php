@@ -19,7 +19,8 @@ trait ExtensionMarkdownContentRetrieverTrait
      */
     protected function getBaseDir(): string
     {
-        return App::getExtension($this->getExtensionClass())->getPluginDir();
+        return App::getMainPlugin()->getPluginDir();
+        // return App::getExtension($this->getExtensionClass())->getPluginDir();
     }
 
     /**
@@ -27,6 +28,7 @@ trait ExtensionMarkdownContentRetrieverTrait
      */
     protected function getBaseURL(): string
     {
-        return App::getExtension($this->getExtensionClass())->getPluginURL();
+        return App::getMainPlugin()->getPluginURL();
+        // return App::getExtension($this->getExtensionClass())->getPluginURL();
     }
 }
