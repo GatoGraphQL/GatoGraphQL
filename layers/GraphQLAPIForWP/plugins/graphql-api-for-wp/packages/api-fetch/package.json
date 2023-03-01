@@ -1,6 +1,6 @@
 {
   "name": "@graphqlapi/api-fetch",
-  "version": "0.1.0",
+  "version": "1.0.0-dev",
   "description": "Fetch data from the server through the GraphQL API",
   "repository": {
     "type": "git",
