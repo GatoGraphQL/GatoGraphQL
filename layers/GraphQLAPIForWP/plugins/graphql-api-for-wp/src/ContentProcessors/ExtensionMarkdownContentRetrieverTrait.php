@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
+use GraphQLAPI\GraphQLAPI\PluginStaticHelpers;
 
 trait ExtensionMarkdownContentRetrieverTrait
 {
@@ -28,5 +29,13 @@ trait ExtensionMarkdownContentRetrieverTrait
     protected function getBaseURL(): string
     {
         return App::getExtension($this->getExtensionClass())->getPluginURL();
+    }
+
+    /**
+     * Get the URL where to look for the documentation.
+     */
+    protected function getDocsFolder(): string
+    {
+        return 'docs';
     }
 }
