@@ -143,7 +143,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         }
         $htmlContent = $this->getHTMLContent($fileContent);
         $lang = $this->getDefaultDocsLanguage();
-        $pathURL = \trailingslashit($this->getDefaultFileURL()) . $relativePathDir . '/' . $lang;
+        $pathURL = \trailingslashit($this->baseURL) . $this->docsFolder . '/' . $relativePathDir . '/' . $lang;
         // Include the images from the GitHub repo, unless we are in DEV
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
             $options[self::PATH_URL_TO_DOCS] = $this->githubRepoDocsPathURL . $relativePathDir;
@@ -165,14 +165,6 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected function getFileDir(): string
     {
         return $this->baseDir . '/' . $this->docsFolder;
-    }
-
-    /**
-     * Path URL to append to the local images referenced in the markdown file
-     */
-    protected function getDefaultFileURL(): string
-    {
-        return \trailingslashit($this->baseURL) . $this->docsFolder;
     }
 
     /**
