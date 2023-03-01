@@ -7,7 +7,10 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 /**
  * Internal dependencies
  */
-import { MarkdownInfoModalButton } from '@graphqlapi/components';
+import {
+    MarkdownInfoModalButton,
+    GoProLink,
+} from '@graphqlapi/components';
 import { getImplicitFeaturesDocMarkdownContentOrUseDefault } from '../implicit-features-doc-markdown-loader';
 
 /**
@@ -46,7 +49,11 @@ const DocumentSettingsPanel = () => (
         title={ title }
     >
         { displayUnlockPROPluginMessage &&
-            <p><a target="_blank" href={ proPluginWebsiteURL } class="button">{ __('Go PRO to unlock! 🔓', 'graphql-api') }</a></p>
+            <p>
+                <GoProLink
+                    proPluginWebsiteURL={ proPluginWebsiteURL }
+                />
+            </p>
         }
         <p>{ __('Docs for additional features unlocked by the GraphQL API PRO:', 'graphql-api') }</p>
         <p>
