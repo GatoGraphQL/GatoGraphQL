@@ -1,6 +1,6 @@
 # Release Notes: 1.0
 
-## Browse "Additional Documentation" when editing a Schema Configuration ([#2052](https://github.com/leoloso/PoP/pull/2052))
+## Browse "Additional Documentation" when editing a Schema Configuration ([#2052](https://github.com/leoloso/PoP/pull/2052)/[#2053](https://github.com/leoloso/PoP/pull/2053))
 
 Documentation for additional features in the GraphQL API can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
 
