@@ -26,7 +26,7 @@ class AdditionalDocumentationSchemaConfigurationComponentEditorScript extends Ab
 
     protected function getScriptName(): string
     {
-        return 'additional-documentation-schema-configuration-editor-components';
+        return 'schema-configuration-additional-documentation';
     }
 
     public function getEnablingModule(): ?string
