@@ -24,8 +24,8 @@ trait PROPluginMarkdownContentRetrieverTrait
     protected function getGithubRepoDocsPathURL(): string
     {
         return str_replace(
-            '/docs',
-            '/docs-pro',
+            '/docs/',
+            '/docs-pro/',
             PluginStaticHelpers::getGitHubRepoDocsPathURL(),
         );
     }
