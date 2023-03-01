@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Exception\ContentNotExistsException;
-use GraphQLAPI\GraphQLAPI\PluginConstants;
+use GraphQLAPI\GraphQLAPI\PluginStaticHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
@@ -119,7 +119,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         $pathURL = \trailingslashit($this->getDefaultFileURL()) . $relativePathDir;
         // Include the images from the GitHub repo, unless we are in DEV
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
-            $options[self::PATH_URL_TO_DOCS] = PluginConstants::GITHUB_REPO_DOCS_PATH_URL . $relativePathDir;
+            $options[self::PATH_URL_TO_DOCS] = PluginStaticHelpers::getGitHubRepoDocsPathURL() . $relativePathDir;
         }
         return $this->processHTMLContent($htmlContent, $pathURL, $options);
     }
