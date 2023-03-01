@@ -35,7 +35,7 @@ const implicitFeaturesDocEntries = [
         'restrict-field-directives-to-specific-types'
     ],
 ];
-const displayUnlockPROPluginMessage = window.graphqlApiSchemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
+const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
 const title = displayUnlockPROPluginMessage
     ? __('[🔒] Additional Documentation', 'graphql-api')
     : __('Additional PRO Documentation', 'graphql-api');
