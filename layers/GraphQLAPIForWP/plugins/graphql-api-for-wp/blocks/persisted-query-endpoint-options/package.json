@@ -1,6 +1,6 @@
 {
 	"name": "persisted-query-endpoint-options",
-	"version": "0.1.0",
+	"version": "1.0.0-dev",
 	"description": "Configure the GraphQL persisted query endpoint",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",

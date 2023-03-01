@@ -1,6 +1,6 @@
 {
 	"name": "schema-configuration-additional-documentation-pro",
-	"version": "0.1.0",
+	"version": "1.0.0-dev",
 	"description": "Sidebar component displaying Additional Documentation for the PRO plugin when editing a GraphQL Schema Configuration CPT",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",

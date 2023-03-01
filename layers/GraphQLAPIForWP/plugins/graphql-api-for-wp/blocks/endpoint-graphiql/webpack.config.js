@@ -2,10 +2,15 @@
  * Define constants
  */
 const MODULE = 'graphiql-for-custom-endpoints';
+
+
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
+const NPM_PACKAGE_VERSION = process.env.npm_package_version;
+const PACKAGE_TAG = NPM_PACKAGE_VERSION.endsWith('-dev') ? 'master' : NPM_PACKAGE_VERSION;
+const GITHUB_BASE_URL = `https://raw.githubusercontent.com/leoloso/PoP/${ PACKAGE_TAG }/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp`
 const BASE_URL = process.env.NODE_ENV === 'production'
-	? 'https://raw.githubusercontent.com/GraphQLAPI/graphql-api-for-wp/master'
-	: 'https://raw.githubusercontent.com/leoloso/PoP/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp'
+	? `${ GITHUB_BASE_URL }/${ MODULE_DOCS_PATH }`
+	: null;
 
 const config = require( '@wordpress/scripts/config/webpack.config' );
 const path = require( 'path' );
@@ -29,7 +34,7 @@ config.module.rules.push(
 			{
 				loader: "markdown-loader",
 				options: {
-					baseUrl: `${ BASE_URL }/${ MODULE_DOCS_PATH }`,
+					baseUrl: BASE_URL,
 					langPrefix: 'hljs language-',
 					highlight: (code, lang) => {
 					    if (!lang || ['text', 'literal', 'nohighlight'].includes(lang)) {
