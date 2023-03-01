@@ -138,4 +138,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function displayUnlockPROPluginMessage(): bool
+    {
+        $envVariable = Environment::DISPLAY_UNLOCK_PRO_PLUGIN_MESSAGE;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
