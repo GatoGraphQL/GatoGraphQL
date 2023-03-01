@@ -137,7 +137,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     protected function getFileDir(): string
     {
-        return $this->baseDir . "/docs";
+        return $this->baseDir . '/' . $this->getDocsFolder();
     }
 
     /**
@@ -146,7 +146,12 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected function getDefaultFileURL(): string
     {
         $lang = $this->getDefaultDocsLanguage();
-        return \trailingslashit($this->baseURL) . 'docs/' . $lang;
+        return \trailingslashit($this->baseURL) . $this->getDocsFolder() . '/' . $lang;
+    }
+
+    protected function getDocsFolder(): string
+    {
+        return 'docs';
     }
 
     /**
