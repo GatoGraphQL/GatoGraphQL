@@ -25,6 +25,7 @@ class PluginDataSource
                 'exclude_files' => implode(' ', [
                     'dev-helpers/\*',
                     'docs/images/\*',
+                    'docs-pro/images/\*',
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
