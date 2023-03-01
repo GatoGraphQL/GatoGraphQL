@@ -12,6 +12,6 @@ class PluginStaticHelpers
         $tag = str_ends_with($mainPluginVersion, '-dev')
             ? 'master'
             : $mainPluginVersion;
-        return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/docs/modules/';
+        return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/';
     }
 }

@@ -142,11 +142,10 @@ abstract class AbstractContentParser implements ContentParserInterface
             ));
         }
         $htmlContent = $this->getHTMLContent($fileContent);
-        $lang = $this->getDefaultDocsLanguage();
-        $pathURL = \trailingslashit($this->baseURL) . $this->docsFolder . '/' . $relativePathDir . '/' . $lang;
+        $pathURL = \trailingslashit($this->baseURL . $this->docsFolder) . $filename . '/';
         // Include the images from the GitHub repo, unless we are in DEV
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
-            $options[self::PATH_URL_TO_DOCS] = $this->githubRepoDocsPathURL . $relativePathDir;
+            $options[self::PATH_URL_TO_DOCS] = \trailingslashit($this->githubRepoDocsPathURL . $this->docsFolder) . $filename . '/';
         }
         return $this->processHTMLContent($htmlContent, $pathURL, $options);
     }
