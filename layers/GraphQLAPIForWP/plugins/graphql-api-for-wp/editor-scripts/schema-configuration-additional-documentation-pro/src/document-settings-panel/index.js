@@ -23,7 +23,7 @@ const implicitFeaturesDocEntries = [
         'custom-scalars'
     ],
     [
-        'Dangerously Non Specific Scalar',
+        'DangerouslyNonSpecificScalar Type',
         'dangerously-non-specific-scalar'
     ],
     [

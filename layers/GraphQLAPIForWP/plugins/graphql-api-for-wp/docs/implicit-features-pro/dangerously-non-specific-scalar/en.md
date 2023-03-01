@@ -1,4 +1,4 @@
-# `DangerouslyNonSpecificScalar`
+# DangerouslyNonSpecificScalar Type
 
 Scalar type `DangerouslyNonSpecificScalar` represents any scalar type (including both built-in and custom scalar types), and in addition it can be a single value, a List, or a List of Lists.
 
