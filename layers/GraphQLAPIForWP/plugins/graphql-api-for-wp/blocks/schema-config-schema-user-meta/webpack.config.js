@@ -9,7 +9,7 @@ const packageJSON = require('./package.json');
 const PACKAGE_TAG = packageJSON.version.endsWith('-dev') ? 'master' : packageJSON.version;
 const GITHUB_BASE_URL = `https://raw.githubusercontent.com/leoloso/PoP/${ PACKAGE_TAG }/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp`
 const BASE_URL = process.env.NODE_ENV === 'production'
-	? `${ GITHUB_BASE_URL }/${ IMPLICIT_FEATURES_DOCS_PATH }`
+	? `${ GITHUB_BASE_URL }/${ MODULE_DOCS_PATH }`
 	: null;
 
 const config = require( '@wordpress/scripts/config/webpack.config' );
