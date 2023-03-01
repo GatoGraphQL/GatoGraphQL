@@ -142,7 +142,8 @@ abstract class AbstractContentParser implements ContentParserInterface
             ));
         }
         $htmlContent = $this->getHTMLContent($fileContent);
-        $pathURL = \trailingslashit($this->getDefaultFileURL()) . $relativePathDir;
+        $lang = $this->getDefaultDocsLanguage();
+        $pathURL = \trailingslashit($this->getDefaultFileURL()) . $relativePathDir . '/' . $lang;
         // Include the images from the GitHub repo, unless we are in DEV
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
             $options[self::PATH_URL_TO_DOCS] = $this->githubRepoDocsPathURL . $relativePathDir;
@@ -171,8 +172,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     protected function getDefaultFileURL(): string
     {
-        $lang = $this->getDefaultDocsLanguage();
-        return \trailingslashit($this->baseURL) . $this->docsFolder . '/' . $lang;
+        return \trailingslashit($this->baseURL) . $this->docsFolder;
     }
 
     /**
