@@ -22,7 +22,7 @@ trait MarkdownContentRetrieverTrait
         $this->getMarkdownContentParser()->setBaseDir($this->getBaseDir());
         $this->getMarkdownContentParser()->setBaseURL($this->getBaseURL());
         $this->getMarkdownContentParser()->setDocsFolder($this->getDocsFolder());
-        $this->getMarkdownContentParser()->setGithubRepoDocsPathURL($this->getGitHubRepoDocsPathURL());
+        $this->getMarkdownContentParser()->setGitHubRepoDocsPathURL($this->getGitHubRepoDocsPathURL());
         try {
             return $this->getMarkdownContentParser()->getContent(
                 $markdownFilename,

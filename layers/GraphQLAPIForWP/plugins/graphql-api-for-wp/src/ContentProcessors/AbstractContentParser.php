@@ -42,7 +42,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         $this->setBaseDir($baseDir);
         $this->setBaseURL($baseURL);
         $this->setDocsFolder($docsFolder);
-        $this->setGithubRepoDocsPathURL($githubRepoDocsPathURL);
+        $this->setGitHubRepoDocsPathURL($githubRepoDocsPathURL);
     }
 
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -95,7 +95,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      * Inject the GitHub repo URL, to retrieve images for PROD.
      * If null, it uses the default value from the main plugin.
      */
-    public function setGithubRepoDocsPathURL(?string $githubRepoDocsPathURL = null): void
+    public function setGitHubRepoDocsPathURL(?string $githubRepoDocsPathURL = null): void
     {
         $this->githubRepoDocsPathURL = $githubRepoDocsPathURL ?? PluginStaticHelpers::getGitHubRepoDocsPathURL();
     }

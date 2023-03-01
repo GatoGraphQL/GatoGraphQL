@@ -28,7 +28,7 @@ interface ContentParserInterface
      * Inject the GitHub repo URL, to retrieve images for PROD.
      * If null, it uses the default value from the main plugin.
      */
-    public function setGithubRepoDocsPathURL(?string $githubRepoDocsPathURL = null): void;
+    public function setGitHubRepoDocsPathURL(?string $githubRepoDocsPathURL = null): void;
 
     /**
      * Parse the file's Markdown into HTML Content
