@@ -31,7 +31,7 @@ class AdditionalDocumentationSchemaConfigurationComponentEditorScript extends Ab
 
     public function getEnablingModule(): ?string
     {
-        return UserInterfaceFunctionalityModuleResolver::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO_SIDEBAR_COMPONENT;
+        return UserInterfaceFunctionalityModuleResolver::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO;
     }
 
     /**
