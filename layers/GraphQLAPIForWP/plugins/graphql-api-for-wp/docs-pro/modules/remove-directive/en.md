@@ -10,7 +10,17 @@ The GraphQL spec indicates that the GraphQL response needs to match exactly the 
 - It contains sensitive information (such as login credentials)
 - An empty field can be distinguished from a `null` value
 
-For instance, let's say we want to retrieve some specific data from an external REST API endpoint, and we don't need the rest of the data. Then, we can use field `_requestJSONObjectItem` (from the **HTTP Request Fields** module) to connect to the REST API, process this data to extract the needed piece of information (via **Field to Input** and the `_objectProperty` field from **Function Fields**), and finally `@remove` the original data from the REST endpoint, which is of no use to us:
+## Examples
+
+Let's say we want to retrieve some specific data from an external REST API endpoint, and we don't need the rest of the data.
+
+We can then:
+
+- Use field `_requestJSONObjectItem` (from the **HTTP Request Fields** module) to connect to the REST API
+- Process this data to extract the needed piece of information (via **Field to Input** and the `_objectProperty` field from **Function Fields**)
+- `@remove` the original data from the REST endpoint
+
+This query ties everything together:
 
 ```graphql
 {
