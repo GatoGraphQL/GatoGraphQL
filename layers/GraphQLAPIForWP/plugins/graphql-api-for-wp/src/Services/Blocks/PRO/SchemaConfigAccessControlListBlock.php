@@ -14,19 +14,19 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPlaceholder
 {
     use PROPluginBlockTrait;
 
-    public final const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
+    // public final const ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS = 'accessControlLists';
 
-    private ?GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType = null;
+    // private ?GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType = null;
 
-    final public function setGraphQLAccessControlListCustomPostType(GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType): void
-    {
-        $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
-    }
-    final protected function getGraphQLAccessControlListCustomPostType(): GraphQLAccessControlListCustomPostType
-    {
-        /** @var GraphQLAccessControlListCustomPostType */
-        return $this->graphQLAccessControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
-    }
+    // final public function setGraphQLAccessControlListCustomPostType(GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType): void
+    // {
+    //     $this->graphQLAccessControlListCustomPostType = $graphQLAccessControlListCustomPostType;
+    // }
+    // final protected function getGraphQLAccessControlListCustomPostType(): GraphQLAccessControlListCustomPostType
+    // {
+    //     /** @var GraphQLAccessControlListCustomPostType */
+    //     return $this->graphQLAccessControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLAccessControlListCustomPostType::class);
+    // }
 
     protected function getBlockName(): string
     {
@@ -43,20 +43,20 @@ class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPlaceholder
         return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;
     }
 
-    protected function getAttributeName(): string
-    {
-        return self::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS;
-    }
+    // protected function getAttributeName(): string
+    // {
+    //     return self::ATTRIBUTE_NAME_ACCESS_CONTROL_LISTS;
+    // }
 
-    protected function getCustomPostType(): string
-    {
-        return $this->getGraphQLAccessControlListCustomPostType()->getCustomPostType();
-    }
+    // protected function getCustomPostType(): string
+    // {
+    //     return $this->getGraphQLAccessControlListCustomPostType()->getCustomPostType();
+    // }
 
-    protected function getHeader(): string
-    {
-        return \__('Access Control Lists:');
-    }
+    // protected function getHeader(): string
+    // {
+    //     return \__('Access Control Lists:');
+    // }
 
     /**
      * Add the locale language to the localized data?

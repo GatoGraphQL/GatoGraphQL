@@ -14,19 +14,19 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPlaceholderB
 {
     use PROPluginBlockTrait;
 
-    public final const ATTRIBUTE_NAME_CACHE_CONTROL_LISTS = 'cacheControlLists';
+    // public final const ATTRIBUTE_NAME_CACHE_CONTROL_LISTS = 'cacheControlLists';
 
-    private ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
+    // private ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
 
-    final public function setGraphQLCacheControlListCustomPostType(GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType): void
-    {
-        $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
-    }
-    final protected function getGraphQLCacheControlListCustomPostType(): GraphQLCacheControlListCustomPostType
-    {
-        /** @var GraphQLCacheControlListCustomPostType */
-        return $this->graphQLCacheControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
-    }
+    // final public function setGraphQLCacheControlListCustomPostType(GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType): void
+    // {
+    //     $this->graphQLCacheControlListCustomPostType = $graphQLCacheControlListCustomPostType;
+    // }
+    // final protected function getGraphQLCacheControlListCustomPostType(): GraphQLCacheControlListCustomPostType
+    // {
+    //     /** @var GraphQLCacheControlListCustomPostType */
+    //     return $this->graphQLCacheControlListCustomPostType ??= $this->instanceManager->getInstance(GraphQLCacheControlListCustomPostType::class);
+    // }
 
     protected function getBlockName(): string
     {
@@ -43,20 +43,20 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPlaceholderB
         return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;
     }
 
-    protected function getAttributeName(): string
-    {
-        return self::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS;
-    }
+    // protected function getAttributeName(): string
+    // {
+    //     return self::ATTRIBUTE_NAME_CACHE_CONTROL_LISTS;
+    // }
 
-    protected function getCustomPostType(): string
-    {
-        return $this->getGraphQLCacheControlListCustomPostType()->getCustomPostType();
-    }
+    // protected function getCustomPostType(): string
+    // {
+    //     return $this->getGraphQLCacheControlListCustomPostType()->getCustomPostType();
+    // }
 
-    protected function getHeader(): string
-    {
-        return \__('Cache Control Lists:');
-    }
+    // protected function getHeader(): string
+    // {
+    //     return \__('Cache Control Lists:');
+    // }
 
     /**
      * Add the locale language to the localized data?
