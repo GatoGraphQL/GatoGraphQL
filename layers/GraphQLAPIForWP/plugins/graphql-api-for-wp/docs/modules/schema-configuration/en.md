@@ -52,27 +52,27 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 </tr>
 </thead>
 <tbody>
-<!-- <tr>
-    <td><strong>Access Control Lists</strong></td>
-    <td>(If module <code>Access Control</code> is enabled) Manage who can access the schema, by selecting the Access Control Lists that must be applied to the custom endpoint or persisted query</td>
-</tr>
-<tr>
-    <td><strong>Cache Control Lists</strong></td>
-    <td>(If module <code>Cache Control</code> is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
-</tr> -->
 <tr>
     <td><strong>Expose Sensitive Data in the Schema</strong></td>
     <td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
-<!-- <tr>
-    <td><strong>Public/Private Schema</strong></td>
-    <td>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul><li><code>"Public"</code>: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li><code>"Private"</code>: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
-</tr> -->
 <tr>
     <td><strong>Mutation Scheme</strong></td><td>Define if to enable mutations, and if the redundant fields from the root must be removed. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
     <td><strong>Namespace Types?</strong></td><td>Define if to have all types in the schema automatically namespaced. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
+</tr>
+<tr>
+    <td><strong>Access Control Lists [PRO]</strong></td>
+    <td>(If module <code>Access Control</code> is enabled) Manage who can access the schema, by selecting the Access Control Lists that must be applied to the custom endpoint or persisted query</td>
+</tr>
+<tr>
+    <td><strong>Public/Private Schema [PRO]</strong></td>
+    <td>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul><li><code>"Public"</code>: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li><code>"Private"</code>: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
+</tr>
+<tr>
+    <td><strong>Cache Control Lists [PRO]</strong></td>
+    <td>(If module <code>Cache Control</code> is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 </tbody>
 </table>
