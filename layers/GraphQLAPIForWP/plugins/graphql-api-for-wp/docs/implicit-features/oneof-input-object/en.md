@@ -78,6 +78,6 @@ It is mandatory to provide one, and only one, of the available properties. If we
 
 ## GraphQL spec
 
-This functionality is not yet part of the GraphQL spec, but it is expected to be added soon:
+This functionality is not yet part of the GraphQL spec, but has been requested:
 
 - <a href="https://github.com/graphql/graphql-spec/pull/825" target="_blank">PR #825 - RFC: OneOf Input Objects</a>
