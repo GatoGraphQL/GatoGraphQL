@@ -10,6 +10,27 @@ The GraphQL spec indicates that the GraphQL response needs to match exactly the 
 - It contains sensitive information (such as login credentials)
 - An empty field can be distinguished from a `null` value
 
+## How to use
+
+Directive `@remove` has argument `condition`, with which we can specify under what condition to remove the field. It has 3 possible values:
+
+- `ALWAYS` (default value): Remove it always
+- `IS_NULL`: Remove it whenever the value is `null`
+- `IS_EMPTY`: Remove it whenever the value is empty
+
+For instance, in the query below, when a post does not have a featured image, field `featuredImage` will have value `null`. By adding `@remove(condition: IS_NULL)`, this value will not be added to the response:
+
+```graphql
+query {
+  posts {
+    title
+    featuredImage @remove(condition: IS_NULL) {
+      src
+    }
+  }
+}
+```
+
 ## Examples
 
 Let's say we want to retrieve some specific data from an external REST API endpoint, and we don't need the rest of the data. We can then use `@remove` to make the response payload smaller, thus boosting performance:
@@ -87,27 +108,6 @@ query RetrieveGitHubActionArtifacts(
       options: { headers: $__githubRequestHeaders }
     }
   )
-}
-```
-
-## How to use
-
-Directive `@remove` has argument `condition`, with which we can specify under what condition to remove the field. It has 3 possible values:
-
-- `ALWAYS` (default value): Remove it always
-- `IS_NULL`: Remove it whenever the value is `null`
-- `IS_EMPTY`: Remove it whenever the value is empty
-
-For instance, in the query below, when a post does not have a featured image, field `featuredImage` will have value `null`. By adding `@remove(condition: IS_NULL)`, this value will not be added to the response:
-
-```graphql
-query {
-  posts {
-    title
-    featuredImage @remove(condition: IS_NULL) {
-      src
-    }
-  }
 }
 ```
 
