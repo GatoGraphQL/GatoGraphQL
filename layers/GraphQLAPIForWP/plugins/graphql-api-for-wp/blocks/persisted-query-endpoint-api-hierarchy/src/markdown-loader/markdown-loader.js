@@ -11,12 +11,12 @@ __webpack_public_path__ = window.graphqlApiPersistedQueryEndpointApiHierarchy?.p
  * @param {string} lang The language folder from which to retrieve the Markdown file
  */
 const getMarkdownContent = ( fileName, lang ) => {
-	return import( /* webpackChunkName: "docs/[request]" */ `@docs/${ lang }/${ fileName }.md` )
+	return import( /* webpackChunkName: "docs/[request]" */ `@docs/${ fileName }/${ lang }.md` )
 		.then(obj => obj.default)
 	// ---------------------------------------------
 	// Maybe uncomment for webpack v5, to not lazy load the docs,
 	// but to load a single bundle with all files per language in advance
-	// return import( /* webpackMode: "eager" */ `@docs/${ lang }/${ fileName }.md` )
+	// return import( /* webpackMode: "eager" */ `@docs/${ fileName }/${ lang }.md` )
 	// 	.then(obj => obj.default)
 	// ---------------------------------------------
 }
