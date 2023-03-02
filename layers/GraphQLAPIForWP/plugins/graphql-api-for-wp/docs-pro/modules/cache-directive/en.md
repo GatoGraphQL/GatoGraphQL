@@ -6,7 +6,10 @@ The `@cache` directive stores the result from a field in disk for a requested am
 
 Add `@cache` to the field to cache, specifying for how long (in seconds) under argument `time`.
 
-In this example, the Google-Translated `title` field is cached for 10 seconds. Executing the query twice within this time span will have the second call execute very fast. A log entry will indicate if the field is being retrieved from the cache.
+In this example, the Google-Translated `title` field is cached for 10 seconds. Executing the query twice within this time span will have the second call execute very fast.
+
+<!-- @todo Un-comment here when FeedbackCategories::LOG is enabled and documented, and `@traceExecutionTime` is supported -->
+<!-- A log entry will indicate if the field is being retrieved from the cache. -->
 
 ```graphql
 query {
@@ -19,7 +22,8 @@ query {
 }
 ```
 
-Use `@traceExecutionTime` to log the difference in field resolution time:
+<!-- @todo Un-comment here when FeedbackCategories::LOG is enabled and documented, and `@traceExecutionTime` is supported -->
+<!-- Use `@traceExecutionTime` to log the difference in field resolution time:
 
 ```graphql
 query {
@@ -32,6 +36,7 @@ query {
   }
 }
 ```
+-->
 
 ## When to use
 
