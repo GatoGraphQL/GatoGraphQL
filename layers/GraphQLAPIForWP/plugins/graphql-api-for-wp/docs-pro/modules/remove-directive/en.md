@@ -12,9 +12,7 @@ The GraphQL spec indicates that the GraphQL response needs to match exactly the 
 
 ## Examples
 
-Let's say we want to retrieve some specific data from an external REST API endpoint, and we don't need the rest of the data.
-
-We can then:
+Let's say we want to retrieve some specific data from an external REST API endpoint, and we don't need the rest of the data. We can then use `@remove` to make the response payload smaller, thus boosting performance:
 
 - Use field `_requestJSONObjectItem` (from the **HTTP Request Fields** module) to connect to the REST API
 - Process this data to extract the needed piece of information (via **Field to Input** and the `_objectProperty` field from **Function Fields**)
