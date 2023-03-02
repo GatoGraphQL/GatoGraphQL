@@ -75,11 +75,11 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPlaceholderP
         return 'en';
     }
 
-    /**
-     * Register style-index.css
-     */
-    protected function registerCommonStyleCSS(): bool
-    {
-        return true;
-    }
+    // /**
+    //  * Register style-index.css
+    //  */
+    // protected function registerCommonStyleCSS(): bool
+    // {
+    //     return true;
+    // }
 }

@@ -52,11 +52,11 @@ class SchemaConfigFieldToInputBlock extends AbstractSchemaConfigPlaceholderPROBl
         return 'en';
     }
 
-    /**
-     * Register style-index.css
-     */
-    protected function registerCommonStyleCSS(): bool
-    {
-        return true;
-    }
+    // /**
+    //  * Register style-index.css
+    //  */
+    // protected function registerCommonStyleCSS(): bool
+    // {
+    //     return true;
+    // }
 }

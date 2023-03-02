@@ -37,13 +37,13 @@ class SchemaConfigEnvironmentFieldsBlock extends AbstractSchemaConfigPlaceholder
     //     return $this->__('Allowed environment variables and constants', 'graphql-api-pro');
     // }
 
-    /**
-     * Register style-index.css
-     */
-    protected function registerCommonStyleCSS(): bool
-    {
-        return true;
-    }
+    // /**
+    //  * Register style-index.css
+    //  */
+    // protected function registerCommonStyleCSS(): bool
+    // {
+    //     return true;
+    // }
 
     /**
      * Add the locale language to the localized data?

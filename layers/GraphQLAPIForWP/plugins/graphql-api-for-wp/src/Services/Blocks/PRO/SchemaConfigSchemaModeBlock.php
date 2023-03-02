@@ -71,20 +71,20 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPlaceholderPROBloc
     //     );
     // }
 
-    /**
-     * Register index.css
-     */
-    protected function registerEditorCSS(): bool
-    {
-        return true;
-    }
-    /**
-     * Register style-index.css
-     */
-    protected function registerCommonStyleCSS(): bool
-    {
-        return true;
-    }
+    // /**
+    //  * Register index.css
+    //  */
+    // protected function registerEditorCSS(): bool
+    // {
+    //     return true;
+    // }
+    // /**
+    //  * Register style-index.css
+    //  */
+    // protected function registerCommonStyleCSS(): bool
+    // {
+    //     return true;
+    // }
 
     /**
      * Add the locale language to the localized data?
