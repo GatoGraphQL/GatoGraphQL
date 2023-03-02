@@ -41,14 +41,6 @@ const implicitFeaturesDocEntries = [
 ];
 const modulePRODocEntries = [
     [
-        'Function Fields',
-        'function-fields'
-    ],
-    [
-        'Function Directives',
-        'function-directives'
-    ],
-    [
         'Apply Field Directive',
         'apply-field-directive'
     ],
@@ -59,6 +51,14 @@ const modulePRODocEntries = [
     [
         'Default Directive',
         'default-directive'
+    ],
+    [
+        'Function Directives',
+        'function-directives'
+    ],
+    [
+        'Function Fields',
+        'function-fields'
     ],
     [
         'Pass Onwards Directive',
