@@ -101,6 +101,7 @@ const DocumentSettingsPanel = () => (
                     />
                 )
             }
+            <hr/>
             {
                 modulePRODocEntries.map( ( entry ) =>
                     <MarkdownInfoModalButton
