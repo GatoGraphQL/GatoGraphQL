@@ -17,7 +17,7 @@ query GetPost($postID: ID!) {
 }
 ```
 
-When sending the GraphQL request to the server, we must also provide the variable's value':
+When sending the GraphQL request to the server, we must also provide the variable's value:
 
 ```json
 {
