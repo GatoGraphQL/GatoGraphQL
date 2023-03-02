@@ -6,8 +6,9 @@ import './store';
 /**
  * Exports
  */
-export { withErrorMessage, withSpinner } from './components/loading';
 export { GoProLink } from './components/go-pro-link';
+export { withPROCard } from './components/pro-card';
+export { withErrorMessage, withSpinner } from './components/loading';
 export { SelectCard } from './components/select-card';
 export { LinkableInfoTooltip } from './components/linkable-info-tooltip';
 export { InfoTooltip } from './components/info-tooltip';
