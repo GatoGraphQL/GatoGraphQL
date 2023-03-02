@@ -1,8 +1,5 @@
-/**
- * Define constants
- */
 const IMPLICIT_FEATURES_DOCS_PATH = `docs-pro/implicit-features/`;
-
+const MODULE_PRO_DOCS_PATH = `docs-pro/modules/`;
 const NPM_PACKAGE_VERSION = process.env.npm_package_version;
 const PACKAGE_TAG = NPM_PACKAGE_VERSION.endsWith('-dev') ? 'master' : NPM_PACKAGE_VERSION;
 const GITHUB_BASE_URL = `https://raw.githubusercontent.com/leoloso/PoP/${ PACKAGE_TAG }/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp`
@@ -13,6 +10,7 @@ const BASE_URL = process.env.NODE_ENV === 'production'
 const config = require( '@wordpress/scripts/config/webpack.config' );
 const path = require( 'path' );
 config.resolve.alias['@implicitFeaturesDocs'] = path.resolve(process.cwd(), `../../${ IMPLICIT_FEATURES_DOCS_PATH }`)
+config.resolve.alias['@modulePRODocs'] = path.resolve(process.cwd(), `../../${ MODULE_PRO_DOCS_PATH }`)
 
 const highlight = require('highlight.js');
 
