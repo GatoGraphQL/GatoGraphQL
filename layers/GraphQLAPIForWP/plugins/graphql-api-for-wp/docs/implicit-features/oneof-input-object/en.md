@@ -1,6 +1,6 @@
 # OneOf Input Object
 
-(This feature has been implemented in advance to its [approval for the GraphQL spec](https://github.com/graphql/graphql-spec/pull/825).)
+<!-- (This feature has been implemented in advance to its [approval for the GraphQL spec](https://github.com/graphql/graphql-spec/pull/825).) -->
 
 OneOf Input Objects are a special variant of Input Objects where the type system asserts that exactly one of the fields must be set and non-null, all others being omitted.
 
