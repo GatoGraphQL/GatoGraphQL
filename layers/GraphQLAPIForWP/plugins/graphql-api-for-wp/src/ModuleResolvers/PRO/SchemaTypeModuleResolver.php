@@ -77,123 +77,123 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         };
     }
 
-    /**
-     * Default value for an option set by the module
-     */
-    public function getSettingsDefaultValue(string $module, string $option): mixed
-    {
-        $defaultMetaValues = [
-            ModuleSettingOptions::ENTRIES => [],
-            ModuleSettingOptions::BEHAVIOR => BehaviorHelpers::getDefaultBehavior(),
-        ];
-        $defaultValues = [
-            self::ENVIRONMENT_FIELDS => $defaultMetaValues,
-            self::HTTP_REQUEST_FIELDS => $defaultMetaValues,
-        ];
-        return $defaultValues[$module][$option] ?? null;
-    }
+    // /**
+    //  * Default value for an option set by the module
+    //  */
+    // public function getSettingsDefaultValue(string $module, string $option): mixed
+    // {
+    //     $defaultMetaValues = [
+    //         ModuleSettingOptions::ENTRIES => [],
+    //         ModuleSettingOptions::BEHAVIOR => BehaviorHelpers::getDefaultBehavior(),
+    //     ];
+    //     $defaultValues = [
+    //         self::ENVIRONMENT_FIELDS => $defaultMetaValues,
+    //         self::HTTP_REQUEST_FIELDS => $defaultMetaValues,
+    //     ];
+    //     return $defaultValues[$module][$option] ?? null;
+    // }
 
-    /**
-     * Array with the inputs to show as settings for the module
-     *
-     * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
-     */
-    public function getSettings(string $module): array
-    {
-        $moduleSettings = parent::getSettings($module);
+    // /**
+    //  * Array with the inputs to show as settings for the module
+    //  *
+    //  * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
+    //  */
+    // public function getSettings(string $module): array
+    // {
+    //     $moduleSettings = parent::getSettings($module);
 
-        if (
-            in_array($module, [
-                self::ENVIRONMENT_FIELDS,
-                self::HTTP_REQUEST_FIELDS,
-            ])
-        ) {
-            $entriesTitle = match ($module) {
-                self::ENVIRONMENT_FIELDS => \__('Allowed environment variables and constants', 'graphql-api-pro'),
-                self::HTTP_REQUEST_FIELDS => \__('Allowed URLs', 'graphql-api-pro'),
-                default => '',
-            };
-            $metaKeyDesc = match ($module) {
-                self::ENVIRONMENT_FIELDS => \__('List of all the environment variables and constants, to either allow or deny access to, when querying field <code>_env</code> (one entry per line).', 'graphql-api-pro'),
-                self::HTTP_REQUEST_FIELDS => \__('List of all the URLs to connect to, to either allow or deny access to, when querying fields <code>_requestJSONObjectItem</code>, <code>_requestJSONObjectCollection</code> and <code>_request</code> (and their corresponding async fields), and <code>_requestGraphQL</code> (one entry per line).', 'graphql-api-pro'),
-                default => '',
-            };
-            $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api-pro');
-            $entryDesc = \__('<strong>Example:</strong> Any of these entries match entry <code>"%1$s"</code>: %2$s', 'graphql-api-pro');
-            $ulStyle = 'list-style: initial; padding-left: 15px;';
-            $ulPlaceholder = '<ul style=" ' . $ulStyle . '"><li><code>%s</code></li></ul>';
-            $moduleDescriptions = [
-                self::ENVIRONMENT_FIELDS => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api-pro'),
-                    $metaKeyDesc,
-                    $headsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        'GITHUB_ACCESS_TOKEN',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    'GITHUB_ACCESS_TOKEN',
-                                    '#^([A-Z]*)_ACCESS_TOKEN$#',
-                                    '/GITHUB_(\S+)/',
-                                ]
-                            )
-                        )
-                    )
-                ),
-                self::HTTP_REQUEST_FIELDS => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api-pro'),
-                    $metaKeyDesc,
-                    $headsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        'https://graphql-api.com/features/',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    'https://graphql-api.com/features/',
-                                    '#https://graphql-api.com/features/?#',
-                                    '#https://graphql-api.com/.*#',
-                                    '/https:\\/\\/graphql-api.com\\/(\S+)/',
-                                ]
-                            )
-                        )
-                    )
-                ),
-            ];
-            $option = ModuleSettingOptions::ENTRIES;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => $entriesTitle,
-                Properties::DESCRIPTION => $moduleDescriptions[$module],
-                Properties::TYPE => Properties::TYPE_ARRAY,
-            ];
+    //     if (
+    //         in_array($module, [
+    //             self::ENVIRONMENT_FIELDS,
+    //             self::HTTP_REQUEST_FIELDS,
+    //         ])
+    //     ) {
+    //         $entriesTitle = match ($module) {
+    //             self::ENVIRONMENT_FIELDS => \__('Allowed environment variables and constants', 'graphql-api-pro'),
+    //             self::HTTP_REQUEST_FIELDS => \__('Allowed URLs', 'graphql-api-pro'),
+    //             default => '',
+    //         };
+    //         $metaKeyDesc = match ($module) {
+    //             self::ENVIRONMENT_FIELDS => \__('List of all the environment variables and constants, to either allow or deny access to, when querying field <code>_env</code> (one entry per line).', 'graphql-api-pro'),
+    //             self::HTTP_REQUEST_FIELDS => \__('List of all the URLs to connect to, to either allow or deny access to, when querying fields <code>_requestJSONObjectItem</code>, <code>_requestJSONObjectCollection</code> and <code>_request</code> (and their corresponding async fields), and <code>_requestGraphQL</code> (one entry per line).', 'graphql-api-pro'),
+    //             default => '',
+    //         };
+    //         $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api-pro');
+    //         $entryDesc = \__('<strong>Example:</strong> Any of these entries match entry <code>"%1$s"</code>: %2$s', 'graphql-api-pro');
+    //         $ulStyle = 'list-style: initial; padding-left: 15px;';
+    //         $ulPlaceholder = '<ul style=" ' . $ulStyle . '"><li><code>%s</code></li></ul>';
+    //         $moduleDescriptions = [
+    //             self::ENVIRONMENT_FIELDS => sprintf(
+    //                 \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api-pro'),
+    //                 $metaKeyDesc,
+    //                 $headsUpDesc,
+    //                 sprintf(
+    //                     $entryDesc,
+    //                     'GITHUB_ACCESS_TOKEN',
+    //                     sprintf(
+    //                         $ulPlaceholder,
+    //                         implode(
+    //                             '</code></li><li><code>',
+    //                             [
+    //                                 'GITHUB_ACCESS_TOKEN',
+    //                                 '#^([A-Z]*)_ACCESS_TOKEN$#',
+    //                                 '/GITHUB_(\S+)/',
+    //                             ]
+    //                         )
+    //                     )
+    //                 )
+    //             ),
+    //             self::HTTP_REQUEST_FIELDS => sprintf(
+    //                 \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api-pro'),
+    //                 $metaKeyDesc,
+    //                 $headsUpDesc,
+    //                 sprintf(
+    //                     $entryDesc,
+    //                     'https://graphql-api.com/features/',
+    //                     sprintf(
+    //                         $ulPlaceholder,
+    //                         implode(
+    //                             '</code></li><li><code>',
+    //                             [
+    //                                 'https://graphql-api.com/features/',
+    //                                 '#https://graphql-api.com/features/?#',
+    //                                 '#https://graphql-api.com/.*#',
+    //                                 '/https:\\/\\/graphql-api.com\\/(\S+)/',
+    //                             ]
+    //                         )
+    //                     )
+    //                 )
+    //             ),
+    //         ];
+    //         $option = ModuleSettingOptions::ENTRIES;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => $entriesTitle,
+    //             Properties::DESCRIPTION => $moduleDescriptions[$module],
+    //             Properties::TYPE => Properties::TYPE_ARRAY,
+    //         ];
 
-            $option = ModuleSettingOptions::BEHAVIOR;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Behavior', 'graphql-api-pro'),
-                Properties::DESCRIPTION => \__('Are the entries being allowed or denied access to?<ul><li>👉🏽 Allow access: only the configured entries can be accessed, and no other can.</li><li>👉🏽 Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api-pro'),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => [
-                    Behaviors::ALLOW => \__('Allow access', 'graphql-api-pro'),
-                    Behaviors::DENY => \__('Deny access', 'graphql-api-pro'),
-                ],
-            ];
-        }
+    //         $option = ModuleSettingOptions::BEHAVIOR;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => \__('Behavior', 'graphql-api-pro'),
+    //             Properties::DESCRIPTION => \__('Are the entries being allowed or denied access to?<ul><li>👉🏽 Allow access: only the configured entries can be accessed, and no other can.</li><li>👉🏽 Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api-pro'),
+    //             Properties::TYPE => Properties::TYPE_STRING,
+    //             Properties::POSSIBLE_VALUES => [
+    //                 Behaviors::ALLOW => \__('Allow access', 'graphql-api-pro'),
+    //                 Behaviors::DENY => \__('Deny access', 'graphql-api-pro'),
+    //             ],
+    //         ];
+    //     }
 
-        return $moduleSettings;
-    }
+    //     return $moduleSettings;
+    // }
 }

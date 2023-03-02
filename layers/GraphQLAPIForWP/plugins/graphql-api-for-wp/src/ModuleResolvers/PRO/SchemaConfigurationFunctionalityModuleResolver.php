@@ -30,13 +30,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const MULTIPLE_QUERY_EXECUTION = 'placeholder:' . Plugin::NAMESPACE . '\multiple-query-execution';
     public final const DEPRECATION_NOTIFIER = 'placeholder:' . Plugin::NAMESPACE . '\deprecation-notifier';
 
-    /**
-     * Setting options
-     */
-    public final const OPTION_MODE = 'mode';
-    public final const OPTION_ENABLE_GRANULAR = 'granular';
-    public final const DEFAULT_SCHEMA_EXPOSURE = 'default-schema-exposure';
-    public final const SCHEMA_EXPOSURE_FOR_ADMIN_CLIENTS = 'schema-exposure-for-admin-clients';
+    // /**
+    //  * Setting options
+    //  */
+    // public final const OPTION_MODE = 'mode';
+    // public final const OPTION_ENABLE_GRANULAR = 'granular';
+    // public final const DEFAULT_SCHEMA_EXPOSURE = 'default-schema-exposure';
+    // public final const SCHEMA_EXPOSURE_FOR_ADMIN_CLIENTS = 'schema-exposure-for-admin-clients';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -118,264 +118,264 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         };
     }
 
-    /**
-     * Default value for an option set by the module
-     */
-    public function getSettingsDefaultValue(string $module, string $option): mixed
-    {
-        $defaultValues = [
-            self::PUBLIC_PRIVATE_SCHEMA => [
-                self::OPTION_MODE => SchemaModes::PUBLIC_SCHEMA_MODE,
-                self::OPTION_ENABLE_GRANULAR => true,
-            ],
-            self::GLOBAL_FIELDS => [
-                self::DEFAULT_SCHEMA_EXPOSURE => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
-                self::SCHEMA_EXPOSURE_FOR_ADMIN_CLIENTS => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
-            ],
-            self::FIELD_TO_INPUT => [
-                ModuleSettingOptions::DEFAULT_VALUE => false,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
-            ],
-            self::MULTIFIELD_DIRECTIVES => [
-                ModuleSettingOptions::DEFAULT_VALUE => false,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
-            ],
-            self::COMPOSABLE_DIRECTIVES => [
-                ModuleSettingOptions::DEFAULT_VALUE => false,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
-            ],
-            self::MULTIPLE_QUERY_EXECUTION => [
-                ModuleSettingOptions::DEFAULT_VALUE => false,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
-            ],
-        ];
-        return $defaultValues[$module][$option] ?? null;
-    }
+    // /**
+    //  * Default value for an option set by the module
+    //  */
+    // public function getSettingsDefaultValue(string $module, string $option): mixed
+    // {
+    //     $defaultValues = [
+    //         self::PUBLIC_PRIVATE_SCHEMA => [
+    //             self::OPTION_MODE => SchemaModes::PUBLIC_SCHEMA_MODE,
+    //             self::OPTION_ENABLE_GRANULAR => true,
+    //         ],
+    //         self::GLOBAL_FIELDS => [
+    //             self::DEFAULT_SCHEMA_EXPOSURE => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
+    //             self::SCHEMA_EXPOSURE_FOR_ADMIN_CLIENTS => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
+    //         ],
+    //         self::FIELD_TO_INPUT => [
+    //             ModuleSettingOptions::DEFAULT_VALUE => false,
+    //             ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
+    //         ],
+    //         self::MULTIFIELD_DIRECTIVES => [
+    //             ModuleSettingOptions::DEFAULT_VALUE => false,
+    //             ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
+    //         ],
+    //         self::COMPOSABLE_DIRECTIVES => [
+    //             ModuleSettingOptions::DEFAULT_VALUE => false,
+    //             ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
+    //         ],
+    //         self::MULTIPLE_QUERY_EXECUTION => [
+    //             ModuleSettingOptions::DEFAULT_VALUE => false,
+    //             ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
+    //         ],
+    //     ];
+    //     return $defaultValues[$module][$option] ?? null;
+    // }
 
-    /**
-     * Array with the inputs to show as settings for the module
-     *
-     * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
-     */
-    public function getSettings(string $module): array
-    {
-        $moduleSettings = parent::getSettings($module);
-        $defaultValueLabel = $this->getDefaultValueLabel();
-        $defaultValueDesc = $this->getDefaultValueDescription();
-        $adminClientsDesc = $this->getAdminClientDescription();
-        if ($module === self::PUBLIC_PRIVATE_SCHEMA) {
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            $whereModules = [
-                UpstreamSchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-                AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
-            ];
-            $whereModuleNames = array_map(
-                fn ($whereModule) => '▹ ' . $this->getModuleRegistry()->getModuleResolver($whereModule)->getName($whereModule),
-                $whereModules
-            );
-            $option = self::OPTION_MODE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Default visibility', 'graphql-api-pro'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Visibility to use for fields and directives in the schema when option <code>"%s"</code> is selected (in %s)', 'graphql-api-pro'),
-                    $moduleConfiguration->getSettingsValueLabel(),
-                    implode(
-                        \__(', ', 'graphql-api-pro'),
-                        $whereModuleNames
-                    )
-                ),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => [
-                    SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api-pro'),
-                    SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api-pro'),
-                ],
-            ];
-            $option = self::OPTION_ENABLE_GRANULAR;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Enable granular control?', 'graphql-api-pro'),
-                Properties::DESCRIPTION => \__('Enable to select the visibility for a set of fields/directives when editing the Access Control List', 'graphql-api-pro'),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        } elseif ($module === self::GLOBAL_FIELDS) {
-            $globalFieldsSchemaExposureValues = [
-                GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('Do not expose', 'graphql-api-pro'),
-                GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('Expose under the Root type only', 'graphql-api-pro'),
-                GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('Expose under all types', 'graphql-api-pro'),
-            ];
-            $option = self::DEFAULT_SCHEMA_EXPOSURE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => sprintf(
-                    \__('Schema exposure. %s', 'graphql-api-pro'),
-                    $defaultValueLabel
-                ),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Under what types to expose global fields. %s', 'graphql-api-pro'),
-                    $defaultValueDesc
-                ),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => $globalFieldsSchemaExposureValues,
-            ];
-            $option = self::SCHEMA_EXPOSURE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Schema exposure for the Admin', 'graphql-api-pro'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Under what types to expose global fields in the wp-admin. %s', 'graphql-api-pro'),
-                    $adminClientsDesc
-                ),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => $globalFieldsSchemaExposureValues,
-            ];
-        } elseif ($module === self::FIELD_TO_INPUT) {
-            $option = ModuleSettingOptions::DEFAULT_VALUE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => sprintf(
-                    \__('Enable field to input? %s', 'graphql-api-pro'),
-                    $defaultValueLabel
-                ),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Enable the "field to input" feature in the schema. %s', 'graphql-api-pro'),
-                    $defaultValueDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Enable field to input for the Admin?', 'graphql-api-pro'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Enable field to input in the wp-admin? %s', 'graphql-api-pro'),
-                    $adminClientsDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        } elseif ($module === self::MULTIFIELD_DIRECTIVES) {
-            $option = ModuleSettingOptions::DEFAULT_VALUE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => sprintf(
-                    \__('Enable multi-field directives? %s', 'graphql-api-pro'),
-                    $defaultValueLabel
-                ),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Have a single directive be applied to multiple fields. %s', 'graphql-api-pro'),
-                    $defaultValueDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Enable multi-field directives for the Admin?', 'graphql-api-pro'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Enable multi-field directives in the wp-admin? %s', 'graphql-api-pro'),
-                    $adminClientsDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        } elseif ($module === self::COMPOSABLE_DIRECTIVES) {
-            $option = ModuleSettingOptions::DEFAULT_VALUE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => sprintf(
-                    \__('Enable composable directives? %s', 'graphql-api-pro'),
-                    $defaultValueLabel
-                ),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Enable adding composable directives (also called "meta-directives", such as <code>@forEach</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema. %s', 'graphql-api-pro'),
-                    $defaultValueDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Enable composable directives for the Admin?', 'graphql-api-pro'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Enable composable directives in the wp-admin? %s', 'graphql-api-pro'),
-                    $adminClientsDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        } elseif ($module === self::MULTIPLE_QUERY_EXECUTION) {
-            $option = ModuleSettingOptions::DEFAULT_VALUE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => sprintf(
-                    \__('Enable multiple query execution? %s', 'graphql-api-pro'),
-                    $defaultValueLabel
-                ),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Execute multiple queries in a single request, sharing data among them via <code>@export</code>. %s', 'graphql-api-pro'),
-                    $defaultValueDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Enable multiple query execution for the Admin?', 'graphql-api-pro'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Enable multiple query execution in the wp-admin? %s', 'graphql-api-pro'),
-                    $adminClientsDesc
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        }
+    // /**
+    //  * Array with the inputs to show as settings for the module
+    //  *
+    //  * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
+    //  */
+    // public function getSettings(string $module): array
+    // {
+    //     $moduleSettings = parent::getSettings($module);
+    //     $defaultValueLabel = $this->getDefaultValueLabel();
+    //     $defaultValueDesc = $this->getDefaultValueDescription();
+    //     $adminClientsDesc = $this->getAdminClientDescription();
+    //     if ($module === self::PUBLIC_PRIVATE_SCHEMA) {
+    //         /** @var ModuleConfiguration */
+    //         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+    //         $whereModules = [
+    //             UpstreamSchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
+    //             AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
+    //         ];
+    //         $whereModuleNames = array_map(
+    //             fn ($whereModule) => '▹ ' . $this->getModuleRegistry()->getModuleResolver($whereModule)->getName($whereModule),
+    //             $whereModules
+    //         );
+    //         $option = self::OPTION_MODE;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => \__('Default visibility', 'graphql-api-pro'),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Visibility to use for fields and directives in the schema when option <code>"%s"</code> is selected (in %s)', 'graphql-api-pro'),
+    //                 $moduleConfiguration->getSettingsValueLabel(),
+    //                 implode(
+    //                     \__(', ', 'graphql-api-pro'),
+    //                     $whereModuleNames
+    //                 )
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_STRING,
+    //             Properties::POSSIBLE_VALUES => [
+    //                 SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api-pro'),
+    //                 SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api-pro'),
+    //             ],
+    //         ];
+    //         $option = self::OPTION_ENABLE_GRANULAR;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => \__('Enable granular control?', 'graphql-api-pro'),
+    //             Properties::DESCRIPTION => \__('Enable to select the visibility for a set of fields/directives when editing the Access Control List', 'graphql-api-pro'),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //     } elseif ($module === self::GLOBAL_FIELDS) {
+    //         $globalFieldsSchemaExposureValues = [
+    //             GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('Do not expose', 'graphql-api-pro'),
+    //             GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('Expose under the Root type only', 'graphql-api-pro'),
+    //             GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('Expose under all types', 'graphql-api-pro'),
+    //         ];
+    //         $option = self::DEFAULT_SCHEMA_EXPOSURE;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => sprintf(
+    //                 \__('Schema exposure. %s', 'graphql-api-pro'),
+    //                 $defaultValueLabel
+    //             ),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Under what types to expose global fields. %s', 'graphql-api-pro'),
+    //                 $defaultValueDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_STRING,
+    //             Properties::POSSIBLE_VALUES => $globalFieldsSchemaExposureValues,
+    //         ];
+    //         $option = self::SCHEMA_EXPOSURE_FOR_ADMIN_CLIENTS;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => \__('Schema exposure for the Admin', 'graphql-api-pro'),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Under what types to expose global fields in the wp-admin. %s', 'graphql-api-pro'),
+    //                 $adminClientsDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_STRING,
+    //             Properties::POSSIBLE_VALUES => $globalFieldsSchemaExposureValues,
+    //         ];
+    //     } elseif ($module === self::FIELD_TO_INPUT) {
+    //         $option = ModuleSettingOptions::DEFAULT_VALUE;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => sprintf(
+    //                 \__('Enable field to input? %s', 'graphql-api-pro'),
+    //                 $defaultValueLabel
+    //             ),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Enable the "field to input" feature in the schema. %s', 'graphql-api-pro'),
+    //                 $defaultValueDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //         $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => \__('Enable field to input for the Admin?', 'graphql-api-pro'),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Enable field to input in the wp-admin? %s', 'graphql-api-pro'),
+    //                 $adminClientsDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //     } elseif ($module === self::MULTIFIELD_DIRECTIVES) {
+    //         $option = ModuleSettingOptions::DEFAULT_VALUE;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => sprintf(
+    //                 \__('Enable multi-field directives? %s', 'graphql-api-pro'),
+    //                 $defaultValueLabel
+    //             ),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Have a single directive be applied to multiple fields. %s', 'graphql-api-pro'),
+    //                 $defaultValueDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //         $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => \__('Enable multi-field directives for the Admin?', 'graphql-api-pro'),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Enable multi-field directives in the wp-admin? %s', 'graphql-api-pro'),
+    //                 $adminClientsDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //     } elseif ($module === self::COMPOSABLE_DIRECTIVES) {
+    //         $option = ModuleSettingOptions::DEFAULT_VALUE;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => sprintf(
+    //                 \__('Enable composable directives? %s', 'graphql-api-pro'),
+    //                 $defaultValueLabel
+    //             ),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Enable adding composable directives (also called "meta-directives", such as <code>@forEach</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema. %s', 'graphql-api-pro'),
+    //                 $defaultValueDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //         $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => \__('Enable composable directives for the Admin?', 'graphql-api-pro'),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Enable composable directives in the wp-admin? %s', 'graphql-api-pro'),
+    //                 $adminClientsDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //     } elseif ($module === self::MULTIPLE_QUERY_EXECUTION) {
+    //         $option = ModuleSettingOptions::DEFAULT_VALUE;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => sprintf(
+    //                 \__('Enable multiple query execution? %s', 'graphql-api-pro'),
+    //                 $defaultValueLabel
+    //             ),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Execute multiple queries in a single request, sharing data among them via <code>@export</code>. %s', 'graphql-api-pro'),
+    //                 $defaultValueDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //         $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+    //         $moduleSettings[] = [
+    //             Properties::INPUT => $option,
+    //             Properties::NAME => $this->getSettingOptionName(
+    //                 $module,
+    //                 $option
+    //             ),
+    //             Properties::TITLE => \__('Enable multiple query execution for the Admin?', 'graphql-api-pro'),
+    //             Properties::DESCRIPTION => sprintf(
+    //                 \__('Enable multiple query execution in the wp-admin? %s', 'graphql-api-pro'),
+    //                 $adminClientsDesc
+    //             ),
+    //             Properties::TYPE => Properties::TYPE_BOOL,
+    //         ];
+    //     }
 
-        return $moduleSettings;
-    }
+    //     return $moduleSettings;
+    // }
 }
