@@ -65,7 +65,7 @@ const modulePRODocEntries = [
         'pass-onwards-directive'
     ],
     [
-        'Remove Directive',
+        'Remove Output Directive',
         'remove-directive'
     ],
 ];
