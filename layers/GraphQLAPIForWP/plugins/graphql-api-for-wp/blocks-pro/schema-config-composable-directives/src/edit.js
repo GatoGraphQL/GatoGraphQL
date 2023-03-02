@@ -1,13 +1,13 @@
 /**
  * Application imports
  */
-import SchemaConfigComposableDirectivesCard from './schema-config-composable-directives-card';
+import EditBody from './edit-body';
 
 const EditBlock = ( props ) => {
 	const { className } = props;
 	return (
 		<div class={ className }>
-			<SchemaConfigComposableDirectivesCard
+			<EditBody
 				{ ...props }
 			/>
 		</div>

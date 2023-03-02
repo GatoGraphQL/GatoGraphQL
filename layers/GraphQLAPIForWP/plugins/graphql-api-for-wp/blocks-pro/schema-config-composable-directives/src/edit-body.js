@@ -17,7 +17,7 @@ import {
 const title = __('Composable Directives', 'graphql-api');
 const description = __('Allow directives to nest and modify the behavior of other directives.', 'graphql-api');
 
-const SchemaConfigComposableDirectivesCard = ( props ) => {
+const EditBody = ( props ) => {
 	return (
 		<GraphAPIPROBlock
 			{ ...props }
@@ -36,4 +36,4 @@ export default compose( [
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),
-] )( SchemaConfigComposableDirectivesCard );
+] )( EditBody );
