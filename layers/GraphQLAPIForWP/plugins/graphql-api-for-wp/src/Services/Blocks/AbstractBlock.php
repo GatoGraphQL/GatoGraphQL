@@ -233,7 +233,15 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     protected function getBlockDirURL(): string
     {
-        return $this->getPluginURL() . '/blocks/' . $this->getBlockName() . '/';
+        return $this->getPluginURL() . '/' . $this->getBlocksFolder() . '/' . $this->getBlockName() . '/';
+    }
+
+    /**
+     * Folder storing all the blocks
+     */
+    protected function getBlocksFolder(): string
+    {
+        return 'blocks';
     }
 
     /**
@@ -241,7 +249,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     protected function getBlockDir(): string
     {
-        return $this->getPluginDir() . '/blocks/' . $this->getBlockName();
+        return $this->getPluginDir() . '/' . $this->getBlocksFolder() . '/' . $this->getBlockName();
     }
 
     protected function getBlockCategory(): ?BlockCategoryInterface

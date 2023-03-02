@@ -6,10 +6,9 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigEditorBlockServiceTagInterface;
 
-abstract class AbstractSchemaConfigPlaceholderPROBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
+abstract class AbstractSchemaConfigPlaceholderPROBlock extends AbstractPlaceholderPROBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
     private ?SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory = null;
 
