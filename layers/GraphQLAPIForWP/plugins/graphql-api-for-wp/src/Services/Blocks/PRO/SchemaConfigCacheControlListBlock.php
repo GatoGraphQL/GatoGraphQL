@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
-use GraphQLAPI\GraphQLAPIPRO\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\PerformanceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPIPRO\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 
 /**

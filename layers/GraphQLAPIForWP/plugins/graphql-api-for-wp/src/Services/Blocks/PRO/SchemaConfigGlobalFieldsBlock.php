@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
 use GraphQLAPI\GraphQLAPIPRO\Constants\GlobalFieldsSchemaExposure;
-use GraphQLAPI\GraphQLAPIPRO\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
 use PoP\Root\App;
 
 class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigPlaceholderPROBlock

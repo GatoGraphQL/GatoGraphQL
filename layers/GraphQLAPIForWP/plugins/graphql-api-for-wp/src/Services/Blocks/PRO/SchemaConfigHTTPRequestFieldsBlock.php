@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
-use GraphQLAPI\GraphQLAPIPRO\ModuleResolvers\SchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
 
 class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPlaceholderPROBlock

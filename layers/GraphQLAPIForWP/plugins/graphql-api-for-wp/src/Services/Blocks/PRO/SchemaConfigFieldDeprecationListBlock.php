@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
-use GraphQLAPI\GraphQLAPIPRO\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\VersioningFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPIPRO\Services\CustomPostTypes\GraphQLFieldDeprecationListCustomPostType;
 
 /**
