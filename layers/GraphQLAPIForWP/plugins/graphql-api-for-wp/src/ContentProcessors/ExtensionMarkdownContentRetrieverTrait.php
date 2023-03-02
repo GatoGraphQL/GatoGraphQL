@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
-use GraphQLAPI\GraphQLAPI\PluginStaticHelpers;
 
 trait ExtensionMarkdownContentRetrieverTrait
 {
