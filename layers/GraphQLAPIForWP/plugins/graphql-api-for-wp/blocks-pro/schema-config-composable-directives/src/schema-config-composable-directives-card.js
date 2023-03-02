@@ -9,9 +9,9 @@ import { compose, withState } from '@wordpress/compose';
  */
 import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
+	GraphAPIPROBlock,
 	withPROCard,
 	withEditableOnFocus,
-	MarkdownInfoModalButton,
 } from '@graphqlapi/components';
  
 const title = __('Composable Directives', 'graphql-api');
@@ -19,18 +19,12 @@ const description = __('Allow directives to nest and modify the behavior of othe
 
 const SchemaConfigComposableDirectivesCard = ( props ) => {
 	return (
-		<>
-			<em>{ description }</em>
-			<MarkdownInfoModalButton
-				{ ...props }
-				title = { __(`Documentation for: "${ title }"`, 'graphql-api') }
-				getMarkdownContentCallback = { getModuleDocMarkdownContentOrUseDefault }
-				text = { __('View details', 'graphql-api') }
-				// icon = { null }
-				variant = ""
-				isSmall = { false }
-			/>
-		</>
+		<GraphAPIPROBlock
+			{ ...props }
+			title = { title }
+			description = { description }
+			getMarkdownContentCallback = { getModuleDocMarkdownContentOrUseDefault }
+		/>
 	);
 }
 

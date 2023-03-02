@@ -8,6 +8,7 @@ import './store';
  */
 export { GoProLink } from './components/go-pro-link';
 export { withPROCard } from './components/pro-card';
+export { GraphAPIPROBlock } from './components/pro-block';
 export { withErrorMessage, withSpinner } from './components/loading';
 export { SelectCard } from './components/select-card';
 export { LinkableInfoTooltip } from './components/linkable-info-tooltip';
