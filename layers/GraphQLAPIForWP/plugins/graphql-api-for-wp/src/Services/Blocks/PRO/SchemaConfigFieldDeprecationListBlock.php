@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPIPRO\Services\CustomPostTypes\GraphQLFieldDeprecationLis
 /**
  * Cache Control block
  */
-class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPlaceholderBlock
+class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPlaceholderPROBlock
 {
     use PROPluginBlockTrait;
 

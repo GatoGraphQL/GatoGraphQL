@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock;
 use GraphQLAPI\GraphQLAPIPRO\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigFieldToInputBlock extends AbstractSchemaConfigPlaceholderBlock
+class SchemaConfigFieldToInputBlock extends AbstractSchemaConfigPlaceholderPROBlock
 {
     use PROPluginBlockTrait;
 

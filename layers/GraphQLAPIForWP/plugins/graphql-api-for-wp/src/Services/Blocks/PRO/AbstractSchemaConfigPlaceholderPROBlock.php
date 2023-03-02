@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCateg
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigEditorBlockServiceTagInterface;
 
-abstract class AbstractSchemaConfigPlaceholderBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
+abstract class AbstractSchemaConfigPlaceholderPROBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {
     private ?SchemaConfigurationBlockCategory $schemaConfigurationBlockCategory = null;
 
