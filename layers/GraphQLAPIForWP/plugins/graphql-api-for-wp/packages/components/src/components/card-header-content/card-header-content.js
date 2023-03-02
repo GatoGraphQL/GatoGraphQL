@@ -7,9 +7,9 @@ const CardHeaderContent = ( props ) => {
 		header,
 		tooltip,
 		isSelected,
-		getMarkdownContentCallback
+		getMarkdownContentCallback,
+		documentationTitle = __(`Documentation for: "${ header }"`, 'graphql-api')
 	} = props;
-	const documentationTitle = __(`Documentation for: "${ header }"`, 'graphql-api');
 	return (
 		<span>
 			{ header }

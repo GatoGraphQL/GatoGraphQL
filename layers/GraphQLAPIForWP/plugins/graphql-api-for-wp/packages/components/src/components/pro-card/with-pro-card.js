@@ -9,11 +9,16 @@ import { __ } from '@wordpress/i18n';
 
 const withPROCard = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
+		const {
+			header,
+		} = props;
 		return (
 			<Card { ...props }>
 				<CardHeader isShady>
 					<CardHeaderContent
 						{ ...props }
+						documentationTitle={ __(`Documentation for: "${ header }"`, 'graphql-api') }
+						header={ `🔒 ${ header }` }
 					/>
 					<GoProLink
 						className="button button-secondary"

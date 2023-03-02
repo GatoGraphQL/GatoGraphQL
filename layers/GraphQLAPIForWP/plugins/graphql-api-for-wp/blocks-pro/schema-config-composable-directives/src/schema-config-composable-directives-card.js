@@ -11,19 +11,31 @@ import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-l
 import {
 	withPROCard,
 	withEditableOnFocus,
+	MarkdownInfoModalButton,
 } from '@graphqlapi/components';
  
+const title = __('Composable Directives', 'graphql-api');
+const description = __('Allow directives to nest and modify the behavior of other directives.', 'graphql-api');
+
 const SchemaConfigComposableDirectivesCard = ( props ) => {
-	const description = __('Allow directives to nest and modify the behavior of other directives.', 'graphql-api');
 	return (
-		<em>{ description }</em>
+		<>
+			<em>{ description }</em>
+			<MarkdownInfoModalButton
+				{ ...props }
+				title={ title }
+				getMarkdownContentCallback={ getModuleDocMarkdownContentOrUseDefault }
+				text={ __('[Read docs]', 'graphql-api') }
+				icon={ null }
+			/>
+		</>
 	);
 }
 
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('🔒 Composable Directives', 'graphql-api'),
+		header: title,
 		className: 'graphql-api-composable-directives',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
