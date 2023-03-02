@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PRO\ExtensionBlockTrait;
 use GraphQLAPI\GraphQLAPIPRO\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
 
-class SchemaConfigEnvironmentFieldsBlock extends AbstractSchemaConfigSchemaAllowAccessToEntriesBlock
+class SchemaConfigEnvironmentFieldsBlock extends AbstractSchemaConfigPlaceholderPROBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;
@@ -29,15 +27,15 @@ class SchemaConfigEnvironmentFieldsBlock extends AbstractSchemaConfigSchemaAllow
         return SchemaTypeModuleResolver::ENVIRONMENT_FIELDS;
     }
 
-    protected function getBlockTitle(): string
-    {
-        return \__('Environment Fields', 'graphql-api-pro');
-    }
+    // protected function getBlockTitle(): string
+    // {
+    //     return \__('Environment Fields', 'graphql-api-pro');
+    // }
 
-    protected function getRenderBlockLabel(): string
-    {
-        return $this->__('Allowed environment variables and constants', 'graphql-api-pro');
-    }
+    // protected function getRenderBlockLabel(): string
+    // {
+    //     return $this->__('Allowed environment variables and constants', 'graphql-api-pro');
+    // }
 
     /**
      * Register style-index.css

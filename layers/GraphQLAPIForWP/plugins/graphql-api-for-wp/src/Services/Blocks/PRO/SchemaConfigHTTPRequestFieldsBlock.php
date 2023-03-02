@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PRO\ExtensionBlockTrait;
 use GraphQLAPI\GraphQLAPIPRO\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigSchemaAllowAccessToEntriesBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
 
-class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigSchemaAllowAccessToEntriesBlock
+class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPlaceholderPROBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;

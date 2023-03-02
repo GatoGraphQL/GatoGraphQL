@@ -25,15 +25,15 @@ class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPlacehol
         return SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES;
     }
 
-    protected function getBlockLabel(): string
-    {
-        return \__('Enable composable directives?', 'graphql-api-pro');
-    }
+    // protected function getBlockLabel(): string
+    // {
+    //     return \__('Enable composable directives?', 'graphql-api-pro');
+    // }
 
-    protected function getBlockTitle(): string
-    {
-        return \__('Composable Directives', 'graphql-api-pro');
-    }
+    // protected function getBlockTitle(): string
+    // {
+    //     return \__('Composable Directives', 'graphql-api-pro');
+    // }
 
     /**
      * Add the locale language to the localized data?
