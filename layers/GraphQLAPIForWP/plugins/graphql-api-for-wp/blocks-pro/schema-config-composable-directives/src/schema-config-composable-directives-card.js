@@ -24,8 +24,9 @@ const SchemaConfigComposableDirectivesCard = ( props ) => {
 			<MarkdownInfoModalButton
 				{ ...props }
 				title={ title }
+				documentationTitle={ __(`Documentation for: "${ title }"`, 'graphql-api') }
 				getMarkdownContentCallback={ getModuleDocMarkdownContentOrUseDefault }
-				text={ __('[Read docs]', 'graphql-api') }
+				text={ __('[ View details ]', 'graphql-api') }
 				icon={ null }
 			/>
 		</>
