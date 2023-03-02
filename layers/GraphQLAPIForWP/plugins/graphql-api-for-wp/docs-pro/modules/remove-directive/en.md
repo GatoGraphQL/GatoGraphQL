@@ -46,6 +46,50 @@ In the response to this query, field `postData` has been removed:
 
 **Please notice:** `@remove` takes place at the very end of the resolution of all the fields under the same node. That's why, in the query above, the field `renderedTitle` is processed before field `postData` is `@remove`d.
 
+---
+
+This example connects to the GitHub API to retrieve the artifacts available in a private repository, and avoids printing the user's credentials in the response:
+
+```graphql
+query RetrieveGitHubActionArtifacts(
+  $repoOwner: String!
+  $repoProject: String!
+) {
+  githubAccessToken: _env(name: "GITHUB_ACCESS_TOKEN")
+    @remove
+
+  # Create the authorization header to send to GitHub
+  authorizationHeader: _sprintf(
+    string: "Bearer %s"
+    # "Field to Input" feature to access value from the field above
+    values: [$__githubAccessToken]
+  )
+    @remove
+
+  # Create the authorization header to send to GitHub
+  githubRequestHeaders: _echo(
+    value: [
+      { name: "Accept", value: "application/vnd.github+json" }
+      { name: "Authorization", value: $__authorizationHeader }
+    ]
+  )
+    @remove
+
+  githubAPIEndpoint: _sprintf(
+    string: "https://api.github.com/repos/%s/%s/actions/artifacts"
+    values: [$repoOwner, $repoProject]
+  )
+
+  # Use the field from "HTTP Request Fields" to connect to GitHub
+  gitHubArtifactData: _requestJSONObjectItem(
+    input: {
+      url: $__githubAPIEndpoint
+      options: { headers: $__githubRequestHeaders }
+    }
+  )
+}
+```
+
 ## How to use
 
 Directive `@remove` has argument `condition`, with which we can specify under what condition to remove the field. It has 3 possible values:
