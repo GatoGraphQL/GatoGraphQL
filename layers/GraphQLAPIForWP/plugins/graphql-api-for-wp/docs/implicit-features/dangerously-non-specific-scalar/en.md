@@ -8,6 +8,8 @@ In other words, considering a hypothetical scalar type `AnyScalar` that handles 
 - `[AnyScalar]`
 - `[[AnyScalar]]`
 
+_Please notice: This feature is available in the GraphQL API, however it is not currently used anywhere in the schema. The GraphQL API PRO does make use of it. Check the fields added by module **Function Fields**, such as `_echo`, to see examples of it._
+
 ## Description
 
 Fields cannot be defined to return all potential combinations of types and their modifiers: a single value, a list of values, or a list of list of values.

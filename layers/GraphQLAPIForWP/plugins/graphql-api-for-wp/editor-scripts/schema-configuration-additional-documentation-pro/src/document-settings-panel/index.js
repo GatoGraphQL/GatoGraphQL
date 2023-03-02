@@ -27,16 +27,8 @@ const implicitFeaturesDocEntries = [
         'custom-scalars'
     ],
     [
-        'DangerouslyNonSpecificScalar Type',
-        'dangerously-non-specific-scalar'
-    ],
-    [
         'Dynamic Variables',
         'dynamic-variables'
-    ],
-    [
-        'Restrict Field Directives to Specific Types',
-        'restrict-field-directives-to-specific-types'
     ],
 ];
 const modulePRODocEntries = [
@@ -65,15 +57,15 @@ const modulePRODocEntries = [
         'pass-onwards-directive'
     ],
     [
-        'Remove Directive',
+        'Remove Output Directive',
         'remove-directive'
     ],
 ];
 const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
 const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentationPro.proPluginWebsiteURL;
 const title = displayUnlockPROPluginMessage
-    ? __('[🔒] Additional Documentation', 'graphql-api')
-    : __('[PRO] Additional Documentation', 'graphql-api');
+    ? __('🔒 Additional PRO Documentation', 'graphql-api')
+    : __('Additional PRO Documentation', 'graphql-api');
 const buttonClassName = "graphql-api-info-modal-button text-wrap";
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel

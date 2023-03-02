@@ -1,6 +1,6 @@
 # OneOf Input Object
 
-(This feature has been implemented in advance to its [approval for the GraphQL spec](https://github.com/graphql/graphql-spec/pull/825).)
+<!-- (This feature has been implemented in advance to its [approval for the GraphQL spec](https://github.com/graphql/graphql-spec/pull/825).) -->
 
 OneOf Input Objects are a special variant of Input Objects where the type system asserts that exactly one of the fields must be set and non-null, all others being omitted.
 
@@ -78,6 +78,6 @@ It is mandatory to provide one, and only one, of the available properties. If we
 
 ## GraphQL spec
 
-This functionality is not yet part of the GraphQL spec, but it is expected to be added soon:
+This functionality is not yet part of the GraphQL spec, but has been requested:
 
 - <a href="https://github.com/graphql/graphql-spec/pull/825" target="_blank">PR #825 - RFC: OneOf Input Objects</a>
