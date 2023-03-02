@@ -7,18 +7,11 @@ __webpack_public_path__ = window.schemaConfigurationAdditionalDocumentationPro?.
 /**
  * Read the content from a Markdown file in a given language, and return it as HTML
  *
- * @param {string} fileName The Markdown file name
  * @param {string} lang The language folder from which to retrieve the Markdown file
  */
 const getModulePRODocMarkdownContent = ( fileName, lang ) => {
-	return import( /* webpackChunkName: "modulePRODocs/[request]" */ `@modulePRODocs/${ lang }/${ fileName }.md` )
+	return import( /* webpackChunkName: "modulePRODocs/[request]" */ `@modulePRODocs/${ fileName }/${ lang }.md` )
 		.then(obj => obj.default)
-	// ---------------------------------------------
-	// Maybe uncomment for webpack v5, to not lazy load the docs,
-	// but to load a single bundle with all files per language in advance
-	// return import( /* webpackMode: "eager" */ `@modulePRODocs/${ lang }/${ fileName }.md` )
-	// 	.then(obj => obj.default)
-	// ---------------------------------------------
 }
 
 /**
@@ -32,7 +25,7 @@ const getModulePRODocMarkdownContent = ( fileName, lang ) => {
 const getModulePRODocMarkdownContentOrUseDefault = ( fileName, defaultLang, lang ) => {
 	lang = lang || window.schemaConfigurationAdditionalDocumentationPro?.localeLang
 	defaultLang = defaultLang || window.schemaConfigurationAdditionalDocumentationPro?.defaultLang
-	return getModulePRODocMarkdownContent( fileName, lang )
+	return getModulePRODocMarkdownContent( lang )
 		.catch(err => getModulePRODocMarkdownContent( fileName, defaultLang ) )
 }
 export default getModulePRODocMarkdownContentOrUseDefault;
