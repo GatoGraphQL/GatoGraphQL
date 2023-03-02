@@ -1,20 +1,19 @@
 # Schema Configuration
 
-A schema configuration is used by Custom Endpoints and Persisted Queries to customize their behavior.
+A schema configuration is used by the Single Endpoint, Custom Endpoints and Persisted Queries to customize their behavior.
 
 ## Description
 
-The schema can be configured with those elements provided by the different installed and enabled modules, such as:
+The GraphQL schema can be configured with those elements provided by the different installed and enabled modules. (Go to the "Modules" page to see the list of all of them.)
 
-- Access Control Lists: to define who can access the schema
-- Cache Control Lists: to set-up HTTP caching
-
-Modules can define their own configuration to be applied in the schema through their own option blocks, such as:
+Each module can define its configuration (and allow the site's admin to customize it) through its own block in the Schema Configuration CPT. This includes blocks for:
 
 - Setting the schema as public or private
 - Enabling “sensitive” data elements
 - Namespacing the schema
 - Using nested mutations
+- Define who can access the schema via Access Control Lists [PRO]
+- Set-up HTTP caching via Cache Control Lists [PRO]
 
 ![Creating a new schema configuration](../../images/schema-configuration.png "Creating a new schema configuration")
 
