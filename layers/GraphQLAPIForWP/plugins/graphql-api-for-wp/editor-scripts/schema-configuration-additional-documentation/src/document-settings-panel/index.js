@@ -23,12 +23,20 @@ const implicitFeaturesDocEntries = [
         'any-built-in-scalar'
     ],
     [
+        'DangerouslyNonSpecificScalar Type',
+        'dangerously-non-specific-scalar'
+    ],
+    [
         'OneOf Input Object',
         'oneof-input-object'
     ],
     [
         'Query Schema Extensions via Introspection',
         'query-schema-extensions-via-introspection'
+    ],
+    [
+        'Restrict Field Directives to Specific Types',
+        'restrict-field-directives-to-specific-types'
     ],
 ];
 const DocumentSettingsPanel = () => (

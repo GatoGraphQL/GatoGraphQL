@@ -27,16 +27,8 @@ const implicitFeaturesDocEntries = [
         'custom-scalars'
     ],
     [
-        'DangerouslyNonSpecificScalar Type',
-        'dangerously-non-specific-scalar'
-    ],
-    [
         'Dynamic Variables',
         'dynamic-variables'
-    ],
-    [
-        'Restrict Field Directives to Specific Types',
-        'restrict-field-directives-to-specific-types'
     ],
 ];
 const modulePRODocEntries = [
