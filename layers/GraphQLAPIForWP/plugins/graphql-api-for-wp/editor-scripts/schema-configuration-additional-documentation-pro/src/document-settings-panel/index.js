@@ -12,6 +12,7 @@ import {
     GoProLink,
 } from '@graphqlapi/components';
 import { getImplicitFeaturesDocMarkdownContentOrUseDefault } from '../implicit-features-doc-markdown-loader';
+import { getModulePRODocMarkdownContentOrUseDefault } from '../module-pro-doc-markdown-loader';
 
 /**
  * Constants to customize
@@ -38,11 +39,42 @@ const implicitFeaturesDocEntries = [
         'restrict-field-directives-to-specific-types'
     ],
 ];
+const modulePRODocEntries = [
+    [
+        'Apply Field Directive',
+        'apply-field-directive'
+    ],
+    [
+        'Cache Directive',
+        'cache-directive'
+    ],
+    [
+        'Default Directive',
+        'default-directive'
+    ],
+    [
+        'Function Directives',
+        'function-directives'
+    ],
+    [
+        'Function Fields',
+        'function-fields'
+    ],
+    [
+        'Pass Onwards Directive',
+        'pass-onwards-directive'
+    ],
+    [
+        'Remove Directive',
+        'remove-directive'
+    ],
+];
 const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
 const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentationPro.proPluginWebsiteURL;
 const title = displayUnlockPROPluginMessage
     ? __('[🔒] Additional Documentation', 'graphql-api')
     : __('[PRO] Additional Documentation', 'graphql-api');
+const buttonClassName = "graphql-api-info-modal-button text-wrap";
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
@@ -65,7 +97,20 @@ const DocumentSettingsPanel = () => (
                         pageFilename={ entry[1] }
                         getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
                         isSmall={ false }
-                        className="graphql-api-info-modal-button text-wrap"
+                        className={ buttonClassName }
+                    />
+                )
+            }
+            <hr/>
+            {
+                modulePRODocEntries.map( ( entry ) =>
+                    <MarkdownInfoModalButton
+                        text={ entry[0] }
+                        title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                        pageFilename={ entry[1] }
+                        getMarkdownContentCallback={ getModulePRODocMarkdownContentOrUseDefault }
+                        isSmall={ false }
+                        className={ buttonClassName }
                     />
                 )
             }
