@@ -6,8 +6,8 @@ Add directive `@remove` to remove the output of a field from the response.
 
 The GraphQL spec indicates that the GraphQL response needs to match exactly the shape of the query. However, in certain circumstances we'd rather avoid sending back the response of the field, because:
 
-- It is of no value
-- We already know what it is
+- We already know what it is, and by not sending it again we can boost performance
+- It contains sensitive information (such as login credentials)
 - An empty field can be distinguished from a `null` value
 
 For instance, let's say we want to retrieve some specific data from an external REST API endpoint, and we don't need the rest of the data. Then, we can use field `_requestJSONObjectItem` (from the **HTTP Request Fields** module) to connect to the REST API, process this data to extract the needed piece of information (via **Field to Input** and the `_objectProperty` field from **Function Fields**), and finally `@remove` the original data from the REST endpoint, which is of no use to us:
