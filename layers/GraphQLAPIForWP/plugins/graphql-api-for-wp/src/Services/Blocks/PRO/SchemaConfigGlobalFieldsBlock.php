@@ -17,7 +17,7 @@ class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigPlaceholderPROBl
     use PROPluginBlockTrait;
     use OptionsBlockTrait;
 
-    public final const ATTRIBUTE_NAME_SCHEMA_EXPOSURE = 'schemaExposure';
+    // public final const ATTRIBUTE_NAME_SCHEMA_EXPOSURE = 'schemaExposure';
 
     protected function getBlockName(): string
     {
@@ -34,43 +34,43 @@ class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigPlaceholderPROBl
         return SchemaConfigurationFunctionalityModuleResolver::GLOBAL_FIELDS;
     }
 
-    /**
-     * @param array<string,mixed> $attributes
-     */
-    public function renderBlock(array $attributes, string $content): string
-    {
-        // Append "-front" because this style must be used only on the client, not on the admin
-        $className = $this->getBlockClassName() . '-front';
+    // /**
+    //  * @param array<string,mixed> $attributes
+    //  */
+    // public function renderBlock(array $attributes, string $content): string
+    // {
+    //     // Append "-front" because this style must be used only on the client, not on the admin
+    //     $className = $this->getBlockClassName() . '-front';
 
-        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
+    //     $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
-        $schemaExposureLabels = [
-            GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('⚫️ Do not expose', 'graphql-api-pro'),
-            GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('🔵 Expose under the Root type only', 'graphql-api-pro'),
-            GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('⚪️ Expose under all types', 'graphql-api-pro'),
-        ];
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $blockContent = sprintf(
-            $blockContentPlaceholder,
-            \__('Schema exposure:', 'graphql-api-pro'),
-            $schemaExposureLabels[$attributes[self::ATTRIBUTE_NAME_SCHEMA_EXPOSURE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
-        );
+    //     $schemaExposureLabels = [
+    //         GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('⚫️ Do not expose', 'graphql-api-pro'),
+    //         GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('🔵 Expose under the Root type only', 'graphql-api-pro'),
+    //         GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('⚪️ Expose under all types', 'graphql-api-pro'),
+    //     ];
+    //     /** @var ModuleConfiguration */
+    //     $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+    //     $blockContent = sprintf(
+    //         $blockContentPlaceholder,
+    //         \__('Schema exposure:', 'graphql-api-pro'),
+    //         $schemaExposureLabels[$attributes[self::ATTRIBUTE_NAME_SCHEMA_EXPOSURE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
+    //     );
 
-        $blockContentPlaceholder = <<<EOT
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        EOT;
-        return sprintf(
-            $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClassName(),
-            $className . '__title',
-            \__('Global Fields', 'graphql-api-pro'),
-            $blockContent
-        );
-    }
+    //     $blockContentPlaceholder = <<<EOT
+    //         <div class="%s">
+    //             <h3 class="%s">%s</h3>
+    //             %s
+    //         </div>
+    //     EOT;
+    //     return sprintf(
+    //         $blockContentPlaceholder,
+    //         $className . ' ' . $this->getAlignClassName(),
+    //         $className . '__title',
+    //         \__('Global Fields', 'graphql-api-pro'),
+    //         $blockContent
+    //     );
+    // }
 
     /**
      * Register style-index.css

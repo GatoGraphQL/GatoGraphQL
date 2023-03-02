@@ -27,15 +27,15 @@ class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPlaceholder
         return SchemaTypeModuleResolver::HTTP_REQUEST_FIELDS;
     }
 
-    protected function getBlockTitle(): string
-    {
-        return \__('HTTP Request Fields', 'graphql-api-pro');
-    }
+    // protected function getBlockTitle(): string
+    // {
+    //     return \__('HTTP Request Fields', 'graphql-api-pro');
+    // }
 
-    protected function getRenderBlockLabel(): string
-    {
-        return $this->__('Allowed URLs', 'graphql-api-pro');
-    }
+    // protected function getRenderBlockLabel(): string
+    // {
+    //     return $this->__('Allowed URLs', 'graphql-api-pro');
+    // }
 
     /**
      * Register style-index.css

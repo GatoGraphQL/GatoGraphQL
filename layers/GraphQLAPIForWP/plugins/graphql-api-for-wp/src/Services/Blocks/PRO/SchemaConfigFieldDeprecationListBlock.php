@@ -14,19 +14,19 @@ class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPlacehol
 {
     use PROPluginBlockTrait;
 
-    public final const ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS = 'fieldDeprecationLists';
+    // public final const ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS = 'fieldDeprecationLists';
 
-    private ?GraphQLFieldDeprecationListCustomPostType $graphQLFieldDeprecationListCustomPostType = null;
+    // private ?GraphQLFieldDeprecationListCustomPostType $graphQLFieldDeprecationListCustomPostType = null;
 
-    final public function setGraphQLFieldDeprecationListCustomPostType(GraphQLFieldDeprecationListCustomPostType $graphQLFieldDeprecationListCustomPostType): void
-    {
-        $this->graphQLFieldDeprecationListCustomPostType = $graphQLFieldDeprecationListCustomPostType;
-    }
-    final protected function getGraphQLFieldDeprecationListCustomPostType(): GraphQLFieldDeprecationListCustomPostType
-    {
-        /** @var GraphQLFieldDeprecationListCustomPostType */
-        return $this->graphQLFieldDeprecationListCustomPostType ??= $this->instanceManager->getInstance(GraphQLFieldDeprecationListCustomPostType::class);
-    }
+    // final public function setGraphQLFieldDeprecationListCustomPostType(GraphQLFieldDeprecationListCustomPostType $graphQLFieldDeprecationListCustomPostType): void
+    // {
+    //     $this->graphQLFieldDeprecationListCustomPostType = $graphQLFieldDeprecationListCustomPostType;
+    // }
+    // final protected function getGraphQLFieldDeprecationListCustomPostType(): GraphQLFieldDeprecationListCustomPostType
+    // {
+    //     /** @var GraphQLFieldDeprecationListCustomPostType */
+    //     return $this->graphQLFieldDeprecationListCustomPostType ??= $this->instanceManager->getInstance(GraphQLFieldDeprecationListCustomPostType::class);
+    // }
 
     protected function getBlockName(): string
     {
@@ -43,20 +43,20 @@ class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPlacehol
         return VersioningFunctionalityModuleResolver::FIELD_DEPRECATION;
     }
 
-    protected function getAttributeName(): string
-    {
-        return self::ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS;
-    }
+    // protected function getAttributeName(): string
+    // {
+    //     return self::ATTRIBUTE_NAME_FIELD_DEPRECATION_LISTS;
+    // }
 
-    protected function getCustomPostType(): string
-    {
-        return $this->getGraphQLFieldDeprecationListCustomPostType()->getCustomPostType();
-    }
+    // protected function getCustomPostType(): string
+    // {
+    //     return $this->getGraphQLFieldDeprecationListCustomPostType()->getCustomPostType();
+    // }
 
-    protected function getHeader(): string
-    {
-        return \__('Field Deprecation Lists:');
-    }
+    // protected function getHeader(): string
+    // {
+    //     return \__('Field Deprecation Lists:');
+    // }
 
     /**
      * Add the locale language to the localized data?

@@ -25,15 +25,15 @@ class SchemaConfigMultiFieldDirectivesBlock extends AbstractSchemaConfigPlacehol
         return SchemaConfigurationFunctionalityModuleResolver::MULTIFIELD_DIRECTIVES;
     }
 
-    protected function getBlockLabel(): string
-    {
-        return \__('Enable multi-field directives?', 'graphql-api-pro');
-    }
+    // protected function getBlockLabel(): string
+    // {
+    //     return \__('Enable multi-field directives?', 'graphql-api-pro');
+    // }
 
-    protected function getBlockTitle(): string
-    {
-        return \__('Multi-Field Directives', 'graphql-api-pro');
-    }
+    // protected function getBlockTitle(): string
+    // {
+    //     return \__('Multi-Field Directives', 'graphql-api-pro');
+    // }
 
     /**
      * Add the locale language to the localized data?

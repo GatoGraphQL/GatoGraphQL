@@ -25,15 +25,15 @@ class SchemaConfigFieldToInputBlock extends AbstractSchemaConfigPlaceholderPROBl
         return SchemaConfigurationFunctionalityModuleResolver::FIELD_TO_INPUT;
     }
 
-    protected function getBlockLabel(): string
-    {
-        return \__('Enable field to input?', 'graphql-api-pro');
-    }
+    // protected function getBlockLabel(): string
+    // {
+    //     return \__('Enable field to input?', 'graphql-api-pro');
+    // }
 
-    protected function getBlockTitle(): string
-    {
-        return \__('Field to Input', 'graphql-api-pro');
-    }
+    // protected function getBlockTitle(): string
+    // {
+    //     return \__('Field to Input', 'graphql-api-pro');
+    // }
 
     /**
      * Add the locale language to the localized data?

@@ -17,7 +17,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPlaceholderPROBloc
     use PROPluginBlockTrait;
     use OptionsBlockTrait;
 
-    public final const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
+    // public final const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
 
     protected function getBlockName(): string
     {
@@ -34,42 +34,42 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPlaceholderPROBloc
         return SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA;
     }
 
-    /**
-     * @param array<string,mixed> $attributes
-     */
-    public function renderBlock(array $attributes, string $content): string
-    {
-        // Append "-front" because this style must be used only on the client, not on the admin
-        $className = $this->getBlockClassName() . '-front';
+    // /**
+    //  * @param array<string,mixed> $attributes
+    //  */
+    // public function renderBlock(array $attributes, string $content): string
+    // {
+    //     // Append "-front" because this style must be used only on the client, not on the admin
+    //     $className = $this->getBlockClassName() . '-front';
 
-        $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
+    //     $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
-        $schemaModeLabels = [
-            SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api'),
-            SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
-        ];
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $blockContent = sprintf(
-            $blockContentPlaceholder,
-            \__('Public/Private Schema Mode:', 'graphql-api'),
-            $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
-        );
+    //     $schemaModeLabels = [
+    //         SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api'),
+    //         SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
+    //     ];
+    //     /** @var ModuleConfiguration */
+    //     $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+    //     $blockContent = sprintf(
+    //         $blockContentPlaceholder,
+    //         \__('Public/Private Schema Mode:', 'graphql-api'),
+    //         $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
+    //     );
 
-        $blockContentPlaceholder = <<<EOT
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        EOT;
-        return sprintf(
-            $blockContentPlaceholder,
-            $className . ' ' . $this->getAlignClassName(),
-            $className . '__title',
-            \__('Public/Private Schema', 'graphql-api'),
-            $blockContent
-        );
-    }
+    //     $blockContentPlaceholder = <<<EOT
+    //         <div class="%s">
+    //             <h3 class="%s">%s</h3>
+    //             %s
+    //         </div>
+    //     EOT;
+    //     return sprintf(
+    //         $blockContentPlaceholder,
+    //         $className . ' ' . $this->getAlignClassName(),
+    //         $className . '__title',
+    //         \__('Public/Private Schema', 'graphql-api'),
+    //         $blockContent
+    //     );
+    // }
 
     /**
      * Register index.css
