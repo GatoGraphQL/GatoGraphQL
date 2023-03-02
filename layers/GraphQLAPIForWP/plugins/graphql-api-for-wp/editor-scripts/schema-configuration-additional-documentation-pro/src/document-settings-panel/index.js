@@ -64,8 +64,8 @@ const modulePRODocEntries = [
 const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentationPro.displayUnlockPROPluginMessage;
 const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentationPro.proPluginWebsiteURL;
 const title = displayUnlockPROPluginMessage
-    ? __('[🔒] Additional Documentation', 'graphql-api')
-    : __('[PRO] Additional Documentation', 'graphql-api');
+    ? __('🔒 Additional PRO Documentation', 'graphql-api')
+    : __('Additional PRO Documentation', 'graphql-api');
 const buttonClassName = "graphql-api-info-modal-button text-wrap";
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
