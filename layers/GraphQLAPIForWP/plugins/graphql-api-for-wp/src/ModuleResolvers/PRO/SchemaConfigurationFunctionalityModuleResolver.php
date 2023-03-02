@@ -22,14 +22,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     use ModuleResolverTrait;
     use SchemaConfigurationFunctionalityModuleResolverTrait;
 
-    /**
-     * Setting options
-     */
-    public final const OPTION_MODE = 'mode';
-    public final const OPTION_ENABLE_GRANULAR = 'granular';
-    public final const DEFAULT_SCHEMA_EXPOSURE = 'default-schema-exposure';
-    public final const SCHEMA_EXPOSURE_FOR_ADMIN_CLIENTS = 'schema-exposure-for-admin-clients';
-
     public final const PUBLIC_PRIVATE_SCHEMA = 'placeholder:' . Plugin::NAMESPACE . '\public-private-schema';
     public final const GLOBAL_FIELDS = 'placeholder:' . Plugin::NAMESPACE . '\global-fields';
     public final const FIELD_TO_INPUT = 'placeholder:' . Plugin::NAMESPACE . '\field-to-input';
@@ -37,6 +29,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const MULTIFIELD_DIRECTIVES = 'placeholder:' . Plugin::NAMESPACE . '\multifield-directives';
     public final const MULTIPLE_QUERY_EXECUTION = 'placeholder:' . Plugin::NAMESPACE . '\multiple-query-execution';
     public final const DEPRECATION_NOTIFIER = 'placeholder:' . Plugin::NAMESPACE . '\deprecation-notifier';
+
+    /**
+     * Setting options
+     */
+    public final const OPTION_MODE = 'mode';
+    public final const OPTION_ENABLE_GRANULAR = 'granular';
+    public final const DEFAULT_SCHEMA_EXPOSURE = 'default-schema-exposure';
+    public final const SCHEMA_EXPOSURE_FOR_ADMIN_CLIENTS = 'schema-exposure-for-admin-clients';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
