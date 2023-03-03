@@ -17,12 +17,12 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     }
     use AccessControlFunctionalityModuleResolverTrait;
 
-    public final const ACCESS_CONTROL = 'placeholder:' . Plugin::NAMESPACE . '\access-control';
-    public final const ACCESS_CONTROL_RULE_DISABLE_ACCESS = 'placeholder:' . Plugin::NAMESPACE . '\access-control-rule-disable-access';
-    public final const ACCESS_CONTROL_RULE_USER_STATE = 'placeholder:' . Plugin::NAMESPACE . '\access-control-rule-user-state';
-    public final const ACCESS_CONTROL_RULE_USER_ROLES = 'placeholder:' . Plugin::NAMESPACE . '\access-control-rule-user-roles';
-    public final const ACCESS_CONTROL_RULE_USER_CAPABILITIES = 'placeholder:' . Plugin::NAMESPACE . '\access-control-rule-user-capabilities';
-    public final const ACCESS_CONTROL_RULE_VISITOR_IP = 'placeholder:' . Plugin::NAMESPACE . '\access-control-rule-visitor-ip';
+    public final const ACCESS_CONTROL = Plugin::NAMESPACE . '\access-control';
+    public final const ACCESS_CONTROL_RULE_DISABLE_ACCESS = Plugin::NAMESPACE . '\access-control-rule-disable-access';
+    public final const ACCESS_CONTROL_RULE_USER_STATE = Plugin::NAMESPACE . '\access-control-rule-user-state';
+    public final const ACCESS_CONTROL_RULE_USER_ROLES = Plugin::NAMESPACE . '\access-control-rule-user-roles';
+    public final const ACCESS_CONTROL_RULE_USER_CAPABILITIES = Plugin::NAMESPACE . '\access-control-rule-user-capabilities';
+    public final const ACCESS_CONTROL_RULE_VISITOR_IP = Plugin::NAMESPACE . '\access-control-rule-visitor-ip';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

@@ -20,9 +20,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         SchemaTypeModuleResolverTrait::getPriority as getUpstreamPriority;
     }
 
-    public final const HTTP_REQUEST_FIELDS = 'placeholder:' . Plugin::NAMESPACE . '\http-request-fields';
-    public final const ENVIRONMENT_FIELDS = 'placeholder:' . Plugin::NAMESPACE . '\environment-fields';
-    public final const FUNCTION_FIELDS = 'placeholder:' . Plugin::NAMESPACE . '\function-fields';
+    public final const HTTP_REQUEST_FIELDS = Plugin::NAMESPACE . '\http-request-fields';
+    public final const ENVIRONMENT_FIELDS = Plugin::NAMESPACE . '\environment-fields';
+    public final const FUNCTION_FIELDS = Plugin::NAMESPACE . '\function-fields';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

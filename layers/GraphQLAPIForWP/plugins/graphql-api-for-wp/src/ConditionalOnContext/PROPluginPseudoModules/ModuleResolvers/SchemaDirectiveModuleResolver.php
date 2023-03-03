@@ -15,13 +15,13 @@ class SchemaDirectiveModuleResolver extends AbstractModuleResolver
     use ModuleResolverTrait;
     use SchemaDirectiveModuleResolverTrait;
 
-    public final const CACHE_DIRECTIVE = 'placeholder:' . Plugin::NAMESPACE . '\cache-directive';
-    public final const APPLY_FIELD_DIRECTIVE = 'placeholder:' . Plugin::NAMESPACE . '\apply-field-directive';
-    public final const META_DIRECTIVES = 'placeholder:' . Plugin::NAMESPACE . '\meta-directives';
-    public final const PASS_ONWARDS_DIRECTIVE = 'placeholder:' . Plugin::NAMESPACE . '\pass-onwards-directive';
-    public final const REMOVE_DIRECTIVE = 'placeholder:' . Plugin::NAMESPACE . '\remove-directive';
-    public final const DEFAULT_DIRECTIVE = 'placeholder:' . Plugin::NAMESPACE . '\default-directive';
-    public final const FUNCTION_DIRECTIVES = 'placeholder:' . Plugin::NAMESPACE . '\function-directives';
+    public final const CACHE_DIRECTIVE = Plugin::NAMESPACE . '\cache-directive';
+    public final const APPLY_FIELD_DIRECTIVE = Plugin::NAMESPACE . '\apply-field-directive';
+    public final const META_DIRECTIVES = Plugin::NAMESPACE . '\meta-directives';
+    public final const PASS_ONWARDS_DIRECTIVE = Plugin::NAMESPACE . '\pass-onwards-directive';
+    public final const REMOVE_DIRECTIVE = Plugin::NAMESPACE . '\remove-directive';
+    public final const DEFAULT_DIRECTIVE = Plugin::NAMESPACE . '\default-directive';
+    public final const FUNCTION_DIRECTIVES = Plugin::NAMESPACE . '\function-directives';
 
     private ?UseDefaultValueIfConditionFieldDirectiveResolver $useDefaultValueIfConditionFieldDirectiveResolver = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;

@@ -15,7 +15,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     use ModuleResolverTrait;
     use UserInterfaceFunctionalityModuleResolverTrait;
 
-    public final const LOW_LEVEL_PERSISTED_QUERY_EDITING = 'placeholder:' . Plugin::NAMESPACE . '\low-level-persisted-query-editing';
+    public final const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\low-level-persisted-query-editing';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

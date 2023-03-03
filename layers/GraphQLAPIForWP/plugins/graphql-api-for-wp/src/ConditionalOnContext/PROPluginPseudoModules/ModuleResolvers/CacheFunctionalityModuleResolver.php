@@ -21,8 +21,8 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
     use ModuleResolverTrait;
     use PerformanceFunctionalityModuleResolverTrait;
 
-    public final const CONFIGURATION_CACHE = 'placeholder:' . Plugin::NAMESPACE . '\configuration-cache';
-    public final const SCHEMA_INTROSPECTION_CACHE = 'placeholder:' . Plugin::NAMESPACE . '\schema-introspection-cache';
+    public final const CONFIGURATION_CACHE = Plugin::NAMESPACE . '\configuration-cache';
+    public final const SCHEMA_INTROSPECTION_CACHE = Plugin::NAMESPACE . '\schema-introspection-cache';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

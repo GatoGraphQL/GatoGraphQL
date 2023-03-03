@@ -22,13 +22,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     use ModuleResolverTrait;
     use SchemaConfigurationFunctionalityModuleResolverTrait;
 
-    public final const PUBLIC_PRIVATE_SCHEMA = 'placeholder:' . Plugin::NAMESPACE . '\public-private-schema';
-    public final const GLOBAL_FIELDS = 'placeholder:' . Plugin::NAMESPACE . '\global-fields';
-    public final const FIELD_TO_INPUT = 'placeholder:' . Plugin::NAMESPACE . '\field-to-input';
-    public final const COMPOSABLE_DIRECTIVES = 'placeholder:' . Plugin::NAMESPACE . '\composable-directives';
-    public final const MULTIFIELD_DIRECTIVES = 'placeholder:' . Plugin::NAMESPACE . '\multifield-directives';
-    public final const MULTIPLE_QUERY_EXECUTION = 'placeholder:' . Plugin::NAMESPACE . '\multiple-query-execution';
-    public final const DEPRECATION_NOTIFIER = 'placeholder:' . Plugin::NAMESPACE . '\deprecation-notifier';
+    public final const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
+    public final const GLOBAL_FIELDS = Plugin::NAMESPACE . '\global-fields';
+    public final const FIELD_TO_INPUT = Plugin::NAMESPACE . '\field-to-input';
+    public final const COMPOSABLE_DIRECTIVES = Plugin::NAMESPACE . '\composable-directives';
+    public final const MULTIFIELD_DIRECTIVES = Plugin::NAMESPACE . '\multifield-directives';
+    public final const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\multiple-query-execution';
+    public final const DEPRECATION_NOTIFIER = Plugin::NAMESPACE . '\deprecation-notifier';
 
     // /**
     //  * Setting options

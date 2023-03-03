@@ -25,7 +25,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     use ModuleResolverTrait;
     use PerformanceFunctionalityModuleResolverTrait;
 
-    public final const CACHE_CONTROL = 'placeholder:' . Plugin::NAMESPACE . '\cache-control';
+    public final const CACHE_CONTROL = Plugin::NAMESPACE . '\cache-control';
 
     // /**
     //  * Setting options

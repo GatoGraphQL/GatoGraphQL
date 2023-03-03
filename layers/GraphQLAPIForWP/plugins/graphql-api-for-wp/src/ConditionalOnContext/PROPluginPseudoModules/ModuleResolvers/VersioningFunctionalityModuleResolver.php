@@ -18,7 +18,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
         VersioningFunctionalityModuleResolverTrait::getPriority as getUpstreamPriority;
     }
 
-    public final const FIELD_DEPRECATION = 'placeholder:' . Plugin::NAMESPACE . '\field-deprecation';
+    public final const FIELD_DEPRECATION = Plugin::NAMESPACE . '\field-deprecation';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

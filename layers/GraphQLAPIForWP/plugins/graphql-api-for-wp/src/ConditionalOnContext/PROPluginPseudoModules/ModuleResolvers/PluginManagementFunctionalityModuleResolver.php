@@ -16,7 +16,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     use ModuleResolverTrait;
     use PluginManagementFunctionalityModuleResolverTrait;
 
-    public final const SCHEMA_EDITING_ACCESS = 'placeholder:' . Plugin::NAMESPACE . '\schema-editing-access';
+    public final const SCHEMA_EDITING_ACCESS = Plugin::NAMESPACE . '\schema-editing-access';
 
     // /**
     //  * Setting options
