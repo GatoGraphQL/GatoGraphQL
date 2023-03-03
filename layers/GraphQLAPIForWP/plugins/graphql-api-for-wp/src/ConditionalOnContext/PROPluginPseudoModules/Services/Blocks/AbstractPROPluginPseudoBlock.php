@@ -15,4 +15,14 @@ abstract class AbstractPROPluginPseudoBlock extends AbstractBlock
     {
         return 'blocks-pro';
     }
+
+    /**
+     * Produce the HTML for dynamic blocks
+     *
+     * @param array<string,mixed> $attributes
+     */
+    public function renderBlock(array $attributes, string $content): string
+    {
+        return '';
+    }
 }
