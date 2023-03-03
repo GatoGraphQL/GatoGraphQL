@@ -20,9 +20,7 @@ const withPROCard = () => createHigherOrderComponent(
 						documentationTitle={ __(`Documentation for: "${ header }"`, 'graphql-api') }
 						header={ `🔒 ${ header }` }
 					/>
-					<GoProLink
-						className="button button-secondary"
-					/>
+					<GoProLink />
 				</CardHeader>
 				<CardBody>
 					<WrappedComponent
