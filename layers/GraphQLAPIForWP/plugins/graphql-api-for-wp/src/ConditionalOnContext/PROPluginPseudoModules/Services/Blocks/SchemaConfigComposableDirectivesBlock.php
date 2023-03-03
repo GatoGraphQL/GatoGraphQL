@@ -25,16 +25,6 @@ class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPROPlugi
         return SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES;
     }
 
-    // protected function getBlockLabel(): string
-    // {
-    //     return \__('Enable composable directives?', 'graphql-api-pro');
-    // }
-
-    // protected function getBlockTitle(): string
-    // {
-    //     return \__('Composable Directives', 'graphql-api-pro');
-    // }
-
     /**
      * Add the locale language to the localized data?
      */
@@ -51,12 +41,4 @@ class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPROPlugi
         // English
         return 'en';
     }
-
-    // /**
-    //  * Register style-index.css
-    //  */
-    // protected function registerCommonStyleCSS(): bool
-    // {
-    //     return true;
-    // }
 }

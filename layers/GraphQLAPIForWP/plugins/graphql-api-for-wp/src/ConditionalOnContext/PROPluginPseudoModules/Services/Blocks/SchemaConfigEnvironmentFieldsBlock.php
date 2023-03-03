@@ -27,24 +27,6 @@ class SchemaConfigEnvironmentFieldsBlock extends AbstractSchemaConfigPROPluginPs
         return SchemaTypeModuleResolver::ENVIRONMENT_FIELDS;
     }
 
-    // protected function getBlockTitle(): string
-    // {
-    //     return \__('Environment Fields', 'graphql-api-pro');
-    // }
-
-    // protected function getRenderBlockLabel(): string
-    // {
-    //     return $this->__('Allowed environment variables and constants', 'graphql-api-pro');
-    // }
-
-    // /**
-    //  * Register style-index.css
-    //  */
-    // protected function registerCommonStyleCSS(): bool
-    // {
-    //     return true;
-    // }
-
     /**
      * Add the locale language to the localized data?
      */

@@ -25,16 +25,6 @@ class SchemaConfigMultiFieldDirectivesBlock extends AbstractSchemaConfigPROPlugi
         return SchemaConfigurationFunctionalityModuleResolver::MULTIFIELD_DIRECTIVES;
     }
 
-    // protected function getBlockLabel(): string
-    // {
-    //     return \__('Enable multi-field directives?', 'graphql-api-pro');
-    // }
-
-    // protected function getBlockTitle(): string
-    // {
-    //     return \__('Multi-Field Directives', 'graphql-api-pro');
-    // }
-
     /**
      * Add the locale language to the localized data?
      */
@@ -51,12 +41,4 @@ class SchemaConfigMultiFieldDirectivesBlock extends AbstractSchemaConfigPROPlugi
         // English
         return 'en';
     }
-
-    // /**
-    //  * Register style-index.css
-    //  */
-    // protected function registerCommonStyleCSS(): bool
-    // {
-    //     return true;
-    // }
 }

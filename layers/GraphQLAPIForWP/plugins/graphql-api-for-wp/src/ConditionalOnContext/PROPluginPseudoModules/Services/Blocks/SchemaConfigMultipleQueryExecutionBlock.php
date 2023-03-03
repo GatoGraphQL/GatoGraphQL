@@ -25,16 +25,6 @@ class SchemaConfigMultipleQueryExecutionBlock extends AbstractSchemaConfigPROPlu
         return SchemaConfigurationFunctionalityModuleResolver::MULTIPLE_QUERY_EXECUTION;
     }
 
-    // protected function getBlockLabel(): string
-    // {
-    //     return \__('Enable multiple query execution?', 'graphql-api-pro');
-    // }
-
-    // protected function getBlockTitle(): string
-    // {
-    //     return \__('Multiple Query Execution', 'graphql-api-pro');
-    // }
-
     /**
      * Add the locale language to the localized data?
      */
@@ -51,12 +41,4 @@ class SchemaConfigMultipleQueryExecutionBlock extends AbstractSchemaConfigPROPlu
         // English
         return 'en';
     }
-
-    // /**
-    //  * Register style-index.css
-    //  */
-    // protected function registerCommonStyleCSS(): bool
-    // {
-    //     return true;
-    // }
 }
