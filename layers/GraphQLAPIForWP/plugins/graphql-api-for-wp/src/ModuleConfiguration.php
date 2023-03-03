@@ -139,6 +139,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function enablePROPluginPseudoModules(): bool
+    {
+        $envVariable = Environment::ENABLE_PRO_PLUGIN_PSEUDO_MODULES;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function displayUnlockPROPluginMessage(): bool
     {
         $envVariable = Environment::DISPLAY_UNLOCK_PRO_PLUGIN_MESSAGE;

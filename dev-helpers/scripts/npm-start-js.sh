@@ -55,6 +55,10 @@ maybeBuildScripts
 TARGET_DIR="$PLUGIN_DIR/blocks/"
 maybeBuildScripts
 
+# Blocks
+TARGET_DIR="$PLUGIN_DIR/blocks-pro/"
+maybeBuildScripts
+
 # Editor Scripts
 TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
 maybeBuildScripts

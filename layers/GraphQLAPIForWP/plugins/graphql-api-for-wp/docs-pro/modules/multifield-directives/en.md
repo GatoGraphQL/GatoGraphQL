@@ -1,6 +1,6 @@
 # Multi-Field Directives
 
-A single directive can be applied to multiple fields, for performance and extended use cases
+A single directive can be applied to multiple fields, for performance and extended use cases.
 
 ## Description
 

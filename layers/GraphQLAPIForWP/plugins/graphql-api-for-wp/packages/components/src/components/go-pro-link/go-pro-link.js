@@ -8,7 +8,7 @@ const GoProLink = ( props ) => {
 	const {
 		proPluginWebsiteURL = GRAPHQL_API_PRO_PLUGIN_WEBSITE_URL,
 		title = __('Go PRO to unlock! 🔓', 'graphql-api'),
-		className = "button button-primary",
+		className = "button button-secondary",
 		target = "_blank"
 	} = props;
 	return (

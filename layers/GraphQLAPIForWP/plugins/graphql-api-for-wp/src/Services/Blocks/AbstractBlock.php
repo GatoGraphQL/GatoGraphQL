@@ -131,15 +131,14 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     {
         return false;
     }
+
     /**
      * Produce the HTML for dynamic blocks
      *
      * @param array<string,mixed> $attributes
      */
-    public function renderBlock(array $attributes, string $content): string
-    {
-        return '';
-    }
+    abstract public function renderBlock(array $attributes, string $content): string;
+
     /**
      * Do not output the content, and show an error message to the visitor
      */
@@ -233,7 +232,15 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     protected function getBlockDirURL(): string
     {
-        return $this->getPluginURL() . '/blocks/' . $this->getBlockName() . '/';
+        return $this->getPluginURL() . '/' . $this->getBlocksFolder() . '/' . $this->getBlockName() . '/';
+    }
+
+    /**
+     * Folder storing all the blocks
+     */
+    protected function getBlocksFolder(): string
+    {
+        return 'blocks';
     }
 
     /**
@@ -241,7 +248,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     protected function getBlockDir(): string
     {
-        return $this->getPluginDir() . '/blocks/' . $this->getBlockName();
+        return $this->getPluginDir() . '/' . $this->getBlocksFolder() . '/' . $this->getBlockName();
     }
 
     protected function getBlockCategory(): ?BlockCategoryInterface

@@ -4,11 +4,11 @@ Provide a description for custom endpoints, persisted queries, and others, throu
 
 ## Description
 
-Use the excerpt field to provide a description for the different Custom Post Type entities in this plugin:
+Use the excerpt field to provide a description for the different Custom Post Type entities:
 
-- Persisted Queries
-- Custom Endpoints
-- Schema Configurations
+- GraphQL Persisted Queries
+- GraphQL Custom Endpoints
+- GraphQL Schema Configurations
 - Access Control Lists
 - Cache Control Lists
 - Field Deprecation Lists
