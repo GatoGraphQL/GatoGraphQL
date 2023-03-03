@@ -131,15 +131,14 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     {
         return false;
     }
+    
     /**
      * Produce the HTML for dynamic blocks
      *
      * @param array<string,mixed> $attributes
      */
-    public function renderBlock(array $attributes, string $content): string
-    {
-        return '';
-    }
+    abstract public function renderBlock(array $attributes, string $content): string;
+
     /**
      * Do not output the content, and show an error message to the visitor
      */
