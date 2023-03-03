@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaDirectiveModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use PoPSchema\DefaultDirective\DirectiveResolvers\UseDefaultValueIfConditionFieldDirectiveResolver;
 
 class SchemaDirectiveModuleResolver extends AbstractModuleResolver
 {
@@ -23,18 +22,8 @@ class SchemaDirectiveModuleResolver extends AbstractModuleResolver
     public final const DEFAULT_DIRECTIVE = Plugin::NAMESPACE . '\default-directive';
     public final const FUNCTION_DIRECTIVES = Plugin::NAMESPACE . '\function-directives';
 
-    private ?UseDefaultValueIfConditionFieldDirectiveResolver $useDefaultValueIfConditionFieldDirectiveResolver = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
-    final public function setUseDefaultValueIfConditionFieldDirectiveResolver(UseDefaultValueIfConditionFieldDirectiveResolver $useDefaultValueIfConditionFieldDirectiveResolver): void
-    {
-        $this->useDefaultValueIfConditionFieldDirectiveResolver = $useDefaultValueIfConditionFieldDirectiveResolver;
-    }
-    final protected function getUseDefaultValueIfConditionFieldDirectiveResolver(): UseDefaultValueIfConditionFieldDirectiveResolver
-    {
-        /** @var UseDefaultValueIfConditionFieldDirectiveResolver */
-        return $this->useDefaultValueIfConditionFieldDirectiveResolver ??= $this->instanceManager->getInstance(UseDefaultValueIfConditionFieldDirectiveResolver::class);
-    }
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
         $this->markdownContentParser = $markdownContentParser;
@@ -77,9 +66,6 @@ class SchemaDirectiveModuleResolver extends AbstractModuleResolver
 
     public function getDescription(string $module): string
     {
-        /** @var UseDefaultValueIfConditionFieldDirectiveResolver */
-        $useDefaultValueIfConditionFieldDirectiveResolver = $this->getUseDefaultValueIfConditionFieldDirectiveResolver();
-
         switch ($module) {
             case self::CACHE_DIRECTIVE:
                 return \__('Addition of <code>@cache</code> directive, to cache expensive operations to disk', 'graphql-api-pro');
@@ -94,7 +80,10 @@ class SchemaDirectiveModuleResolver extends AbstractModuleResolver
             case self::DEFAULT_DIRECTIVE:
                 return sprintf(
                     \__('Directive <code>@%s</code>, to set a value to null or empty fields', 'graphql-api-pro'),
-                    $useDefaultValueIfConditionFieldDirectiveResolver->getDirectiveName()
+                    /**
+                     * Same names as in UseDefaultValueIfConditionFieldDirectiveResolver->getDirectiveName()
+                     */
+                    'default'
                 );
             case self::FUNCTION_DIRECTIVES:
                 return \__('Manipulate the field output using standard programming language functions (provided via special directives)', 'graphql-api-pro');
