@@ -131,7 +131,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     {
         return false;
     }
-    
+
     /**
      * Produce the HTML for dynamic blocks
      *
