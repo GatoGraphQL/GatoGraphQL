@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaDirectiveModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
 use PoPSchema\DefaultDirective\DirectiveResolvers\UseDefaultValueIfConditionFieldDirectiveResolver;
 
 class SchemaDirectiveModuleResolver extends AbstractModuleResolver

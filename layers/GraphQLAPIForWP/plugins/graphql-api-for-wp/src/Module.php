@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterUserAuthorizationSche
 use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginModule;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
@@ -156,6 +157,12 @@ class Module extends AbstractPluginModule
             ) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
             }
+        }
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(self::class)->getConfiguration();
+        if ($moduleConfiguration->enablePROPluginPseudoModules()) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/PROPluginPseudoModules');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/PROPluginPseudoModules', 'module-services.yaml');
         }
     }
 }

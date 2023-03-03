@@ -2,37 +2,37 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigMultipleQueryExecutionBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-composable-directives';
+        return 'schema-config-multiple-query-execution';
     }
 
     public function getBlockPriority(): int
     {
-        return 2200;
+        return 2500;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES;
+        return SchemaConfigurationFunctionalityModuleResolver::MULTIPLE_QUERY_EXECUTION;
     }
 
     // protected function getBlockLabel(): string
     // {
-    //     return \__('Enable composable directives?', 'graphql-api-pro');
+    //     return \__('Enable multiple query execution?', 'graphql-api-pro');
     // }
 
     // protected function getBlockTitle(): string
     // {
-    //     return \__('Composable Directives', 'graphql-api-pro');
+    //     return \__('Multiple Query Execution', 'graphql-api-pro');
     // }
 
     /**

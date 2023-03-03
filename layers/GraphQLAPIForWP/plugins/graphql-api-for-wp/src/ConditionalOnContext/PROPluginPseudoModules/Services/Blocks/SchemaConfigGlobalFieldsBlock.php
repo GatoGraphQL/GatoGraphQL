@@ -2,36 +2,36 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigBlock;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
-use PoP\AccessControl\Schema\SchemaModes;
+use GraphQLAPI\GraphQLAPIPRO\Constants\GlobalFieldsSchemaExposure;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use PoP\Root\App;
 
-class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;
 
-    // public final const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
+    // public final const ATTRIBUTE_NAME_SCHEMA_EXPOSURE = 'schemaExposure';
 
     protected function getBlockName(): string
     {
-        return 'schema-config-schema-mode';
+        return 'schema-config-global-fields';
     }
 
     public function getBlockPriority(): int
     {
-        return 2800;
+        return 3000;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA;
+        return SchemaConfigurationFunctionalityModuleResolver::GLOBAL_FIELDS;
     }
 
     // /**
@@ -44,16 +44,17 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPROPluginPseudoBlo
 
     //     $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
-    //     $schemaModeLabels = [
-    //         SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api'),
-    //         SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
+    //     $schemaExposureLabels = [
+    //         GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('⚫️ Do not expose', 'graphql-api-pro'),
+    //         GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('🔵 Expose under the Root type only', 'graphql-api-pro'),
+    //         GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('⚪️ Expose under all types', 'graphql-api-pro'),
     //     ];
     //     /** @var ModuleConfiguration */
     //     $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
     //     $blockContent = sprintf(
     //         $blockContentPlaceholder,
-    //         \__('Public/Private Schema Mode:', 'graphql-api'),
-    //         $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
+    //         \__('Schema exposure:', 'graphql-api-pro'),
+    //         $schemaExposureLabels[$attributes[self::ATTRIBUTE_NAME_SCHEMA_EXPOSURE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
     //     );
 
     //     $blockContentPlaceholder = <<<EOT
@@ -66,18 +67,11 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPROPluginPseudoBlo
     //         $blockContentPlaceholder,
     //         $className . ' ' . $this->getAlignClassName(),
     //         $className . '__title',
-    //         \__('Public/Private Schema', 'graphql-api'),
+    //         \__('Global Fields', 'graphql-api-pro'),
     //         $blockContent
     //     );
     // }
 
-    // /**
-    //  * Register index.css
-    //  */
-    // protected function registerEditorCSS(): bool
-    // {
-    //     return true;
-    // }
     // /**
     //  * Register style-index.css
     //  */

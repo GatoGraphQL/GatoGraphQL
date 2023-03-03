@@ -2,37 +2,37 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigMultiFieldDirectivesBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-multifield-directives';
+        return 'schema-config-composable-directives';
     }
 
     public function getBlockPriority(): int
     {
-        return 2300;
+        return 2200;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::MULTIFIELD_DIRECTIVES;
+        return SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES;
     }
 
     // protected function getBlockLabel(): string
     // {
-    //     return \__('Enable multi-field directives?', 'graphql-api-pro');
+    //     return \__('Enable composable directives?', 'graphql-api-pro');
     // }
 
     // protected function getBlockTitle(): string
     // {
-    //     return \__('Multi-Field Directives', 'graphql-api-pro');
+    //     return \__('Composable Directives', 'graphql-api-pro');
     // }
 
     /**

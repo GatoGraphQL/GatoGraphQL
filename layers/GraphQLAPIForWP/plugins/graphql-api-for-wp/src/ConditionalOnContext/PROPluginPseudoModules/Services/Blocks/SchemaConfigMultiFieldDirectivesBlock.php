@@ -2,37 +2,37 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigMultipleQueryExecutionBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigMultiFieldDirectivesBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-multiple-query-execution';
+        return 'schema-config-multifield-directives';
     }
 
     public function getBlockPriority(): int
     {
-        return 2500;
+        return 2300;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::MULTIPLE_QUERY_EXECUTION;
+        return SchemaConfigurationFunctionalityModuleResolver::MULTIFIELD_DIRECTIVES;
     }
 
     // protected function getBlockLabel(): string
     // {
-    //     return \__('Enable multiple query execution?', 'graphql-api-pro');
+    //     return \__('Enable multi-field directives?', 'graphql-api-pro');
     // }
 
     // protected function getBlockTitle(): string
     // {
-    //     return \__('Multiple Query Execution', 'graphql-api-pro');
+    //     return \__('Multi-Field Directives', 'graphql-api-pro');
     // }
 
     /**
