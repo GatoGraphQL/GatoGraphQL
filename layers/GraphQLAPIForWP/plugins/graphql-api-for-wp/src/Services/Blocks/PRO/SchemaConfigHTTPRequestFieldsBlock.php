@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
 
-class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPseudoBlock
+class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;

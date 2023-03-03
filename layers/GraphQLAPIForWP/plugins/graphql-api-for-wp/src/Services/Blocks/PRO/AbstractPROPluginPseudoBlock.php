@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
 
-abstract class AbstractPROPseudoBlock extends AbstractBlock
+abstract class AbstractPROPluginPseudoBlock extends AbstractBlock
 {
     /**
      * Folder storing all the blocks

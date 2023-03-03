@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPIPRO\Constants\GlobalFieldsSchemaExposure;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
 use PoP\Root\App;
 
-class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigPROPseudoBlock
+class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;
