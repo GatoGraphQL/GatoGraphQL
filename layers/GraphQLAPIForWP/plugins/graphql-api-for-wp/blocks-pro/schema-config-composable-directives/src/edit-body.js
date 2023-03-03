@@ -14,6 +14,9 @@ import {
 	withEditableOnFocus,
 } from '@graphqlapi/components';
  
+/**
+ * Define consts
+ */
 const title = __('Composable Directives', 'graphql-api');
 const description = __('Allow directives to nest and modify the behavior of other directives.', 'graphql-api');
 
