@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigMultipleQueryExecutionBlock extends AbstractSchemaConfigPlaceholderPROBlock
+class SchemaConfigMultipleQueryExecutionBlock extends AbstractSchemaConfigPROPseudoBlock
 {
     use PROPluginBlockTrait;
 

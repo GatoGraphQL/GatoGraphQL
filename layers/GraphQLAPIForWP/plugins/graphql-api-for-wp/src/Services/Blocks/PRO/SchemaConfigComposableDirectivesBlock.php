@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPlaceholderPROBlock
+class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPROPseudoBlock
 {
     use PROPluginBlockTrait;
 

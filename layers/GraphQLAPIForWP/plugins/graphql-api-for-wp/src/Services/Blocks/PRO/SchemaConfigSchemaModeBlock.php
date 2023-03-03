@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityMo
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\Root\App;
 
-class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPlaceholderPROBlock
+class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPROPseudoBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;

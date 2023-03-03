@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPIPRO\Services\CustomPostTypes\GraphQLAccessControlListCu
 /**
  * Cache Control block
  */
-class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPlaceholderPROBlock
+class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPROPseudoBlock
 {
     use PROPluginBlockTrait;
 

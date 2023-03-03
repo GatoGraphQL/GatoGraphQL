@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks\PRO;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PRO\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigFieldToInputBlock extends AbstractSchemaConfigPlaceholderPROBlock
+class SchemaConfigFieldToInputBlock extends AbstractSchemaConfigPROPseudoBlock
 {
     use PROPluginBlockTrait;
 
