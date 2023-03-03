@@ -22,11 +22,6 @@ abstract class AbstractSchemaConfigPROPluginPseudoBlock extends AbstractPROPlugi
         return $this->schemaConfigurationBlockCategory ??= $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
     }
 
-    // protected function isDynamicBlock(): bool
-    // {
-    //     return true;
-    // }
-
     protected function getBlockCategory(): ?BlockCategoryInterface
     {
         return $this->getSchemaConfigurationBlockCategory();
