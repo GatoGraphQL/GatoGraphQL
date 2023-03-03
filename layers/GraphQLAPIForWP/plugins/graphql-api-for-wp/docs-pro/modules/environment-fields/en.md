@@ -1,6 +1,6 @@
 # Environment Fields
 
-Obtain the value from an environment variable or PHP constant.
+Query the value from an environment variable or PHP constant.
 
 ## Description
 

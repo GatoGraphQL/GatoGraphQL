@@ -101,7 +101,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::PUBLIC_PRIVATE_SCHEMA => \__('Enable to communicate the existence of some field from the schema to certain users only (private mode) or to everyone (public mode). If disabled, fields are always available to everyone (public mode)', 'graphql-api-pro'),
             self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'graphql-api-pro'),
-            self::FIELD_TO_INPUT => \__('Obtain the value of a field, manipulate it, and input it into another field, all within the same query', 'graphql-api-pro'),
+            self::FIELD_TO_INPUT => \__('Retrieve the value of a field, manipulate it, and input it into another field, all within the same query', 'graphql-api-pro'),
             self::COMPOSABLE_DIRECTIVES => \__('Have directives modify the behavior of other directives', 'graphql-api-pro'),
             self::MULTIFIELD_DIRECTIVES => \__('A single directive can be applied to multiple fields, for performance and extended use cases', 'graphql-api-pro'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Execute multiple GraphQL queries in a single operation', 'graphql-api-pro'),

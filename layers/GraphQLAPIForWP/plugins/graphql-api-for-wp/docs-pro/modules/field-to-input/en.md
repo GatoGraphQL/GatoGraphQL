@@ -1,6 +1,6 @@
 # Field to Input
 
-Obtain the value of a field, manipulate it, and input it into another field, all within the same query.
+Retrieve the value of a field, manipulate it, and input it into another field, all within the same query.
 
 ## Description
 

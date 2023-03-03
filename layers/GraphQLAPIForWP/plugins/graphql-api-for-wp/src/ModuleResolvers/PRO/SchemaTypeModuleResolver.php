@@ -71,7 +71,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::HTTP_REQUEST_FIELDS => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response', 'graphql-api-pro'),
-            self::ENVIRONMENT_FIELDS => \__('Obtain the value from an environment variable or PHP constant', 'graphql-api-pro'),
+            self::ENVIRONMENT_FIELDS => \__('Query the value from an environment variable or PHP constant', 'graphql-api-pro'),
             self::FUNCTION_FIELDS => \__('Manipulate the field output using standard programming language functions (provided via special fields)', 'graphql-api-pro'),
             default => parent::getDescription($module),
         };
