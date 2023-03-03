@@ -54,20 +54,6 @@ registerBlockType( 'graphql-api-pro/schema-config-composable-directives', {
 	icon: 'admin-users',
 
 	/**
-	 * Block default attributes.
-	 */
-	attributes: {
-		/**
-		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames::ENABLED_CONST
-		 */
-		enabledConst: {
-			type: 'string',
-			default: ATTRIBUTE_VALUE_DEFAULT,
-		},
-	},
-
-	/**
 	 * Optional block extended support features.
 	 */
 	supports: {
