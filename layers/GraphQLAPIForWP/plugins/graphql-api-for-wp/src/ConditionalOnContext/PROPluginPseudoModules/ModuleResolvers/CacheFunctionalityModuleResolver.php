@@ -71,7 +71,7 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
                  *
                  * @see https://github.com/leoloso/PoP/issues/1614
                  */
-                return false; /** @phpstan-ignore-next-line */
+                return false;
         }
         return parent::areRequirementsSatisfied($module);
     }
