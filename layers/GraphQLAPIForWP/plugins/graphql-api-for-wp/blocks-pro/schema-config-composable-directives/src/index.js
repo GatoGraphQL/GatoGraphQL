@@ -16,9 +16,6 @@ import { __ } from '@wordpress/i18n';
  * Application imports
  */
 import EditBlock from './edit';
-import {
-	ATTRIBUTE_VALUE_DEFAULT,
-} from '@graphqlapi/components';
 
 /**
  * Every block starts by registering a new block type definition.
