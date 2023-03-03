@@ -26,15 +26,15 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     private ?UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
-    final public function setUserAuthorizationSchemeRegistry(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
-    {
-        $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
-    }
-    final protected function getUserAuthorizationSchemeRegistry(): UserAuthorizationSchemeRegistryInterface
-    {
-        /** @var UserAuthorizationSchemeRegistryInterface */
-        return $this->userAuthorizationSchemeRegistry ??= $this->instanceManager->getInstance(UserAuthorizationSchemeRegistryInterface::class);
-    }
+    // final public function setUserAuthorizationSchemeRegistry(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
+    // {
+    //     $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
+    // }
+    // final protected function getUserAuthorizationSchemeRegistry(): UserAuthorizationSchemeRegistryInterface
+    // {
+    //     /** @var UserAuthorizationSchemeRegistryInterface */
+    //     return $this->userAuthorizationSchemeRegistry ??= $this->instanceManager->getInstance(UserAuthorizationSchemeRegistryInterface::class);
+    // }
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
         $this->markdownContentParser = $markdownContentParser;
