@@ -32,7 +32,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-composable-directives',
+		className: 'graphql-api-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),
