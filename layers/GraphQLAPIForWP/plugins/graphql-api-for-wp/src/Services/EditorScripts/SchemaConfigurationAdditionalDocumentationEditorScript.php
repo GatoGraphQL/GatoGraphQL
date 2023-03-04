@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 class SchemaConfigurationAdditionalDocumentationEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
+    use UnlockPROPluginScriptTrait;
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
@@ -64,5 +65,18 @@ class SchemaConfigurationAdditionalDocumentationEditorScript extends AbstractEdi
     protected function registerStyleIndexCSS(): bool
     {
         return true;
+    }
+
+    /**
+     * Pass localized data to the block
+     *
+     * @return array<string,mixed>
+     */
+    protected function getLocalizedData(): array
+    {
+        return array_merge(
+            parent::getLocalizedData(),
+            $this->getUnlockPROPluginLocalizedData()
+        );
     }
 }

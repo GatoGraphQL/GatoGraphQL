@@ -7,8 +7,13 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 /**
  * Internal dependencies
  */
-import { MarkdownInfoModalButton } from '@graphqlapi/components';
+import {
+    MarkdownInfoModalButton,
+    GoProLink,
+} from '@graphqlapi/components';
 import { getImplicitFeaturesDocMarkdownContentOrUseDefault } from '../implicit-features-doc-markdown-loader';
+import { getImplicitFeaturesPRODocMarkdownContentOrUseDefault } from '../implicit-features-pro-doc-markdown-loader';
+import { getModulePRODocMarkdownContentOrUseDefault } from '../module-pro-doc-markdown-loader';
 
 /**
  * Constants to customize
@@ -39,6 +44,49 @@ const implicitFeaturesDocEntries = [
         'restrict-field-directives-to-specific-types'
     ],
 ];
+const implicitFeaturesPRODocEntries = [
+    [
+        'Custom Scalars Pack',
+        'custom-scalars'
+    ],
+    [
+        'Dynamic Variables',
+        'dynamic-variables'
+    ],
+];
+const modulePRODocEntries = [
+    [
+        'Apply Field Directive',
+        'apply-field-directive'
+    ],
+    [
+        'Cache Directive',
+        'cache-directive'
+    ],
+    [
+        'Default Directive',
+        'default-directive'
+    ],
+    [
+        'Function Directives',
+        'function-directives'
+    ],
+    [
+        'Function Fields',
+        'function-fields'
+    ],
+    [
+        'Pass Onwards Directive',
+        'pass-onwards-directive'
+    ],
+    [
+        'Remove Output Directive',
+        'remove-directive'
+    ],
+];
+const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentation.displayUnlockPROPluginMessage;
+const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentation.proPluginWebsiteURL;
+const buttonClassName = "graphql-api-info-modal-button text-wrap";
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
@@ -55,6 +103,42 @@ const DocumentSettingsPanel = () => (
                         getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
                         isSmall={ false }
                         className="graphql-api-info-modal-button text-wrap"
+                    />
+                )
+            }
+        </p>
+        <hr/>
+        <p>
+            { __('Docs for additional features unlocked by the GraphQL API PRO:', 'graphql-api') }
+            { displayUnlockPROPluginMessage &&
+                <GoProLink
+                    proPluginWebsiteURL={ proPluginWebsiteURL }
+                />
+            }
+        </p>
+        <p>
+            {
+                implicitFeaturesPRODocEntries.map( ( entry ) =>
+                    <MarkdownInfoModalButton
+                        text={ entry[0] }
+                        title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                        pageFilename={ entry[1] }
+                        getMarkdownContentCallback={ getImplicitFeaturesPRODocMarkdownContentOrUseDefault }
+                        isSmall={ false }
+                        className={ buttonClassName }
+                    />
+                )
+            }
+            <hr/>
+            {
+                modulePRODocEntries.map( ( entry ) =>
+                    <MarkdownInfoModalButton
+                        text={ entry[0] }
+                        title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                        pageFilename={ entry[1] }
+                        getMarkdownContentCallback={ getModulePRODocMarkdownContentOrUseDefault }
+                        isSmall={ false }
+                        className={ buttonClassName }
                     />
                 )
             }
