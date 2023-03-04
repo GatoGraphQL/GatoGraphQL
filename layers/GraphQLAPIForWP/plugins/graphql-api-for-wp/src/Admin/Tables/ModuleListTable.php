@@ -57,12 +57,13 @@ class ModuleListTable extends AbstractItemListTable
             // If filtering the view, only add the items with that module type
             if (!$currentView || $currentView === $moduleTypeSlug) {
                 $isEnabled = $moduleRegistry->isModuleEnabled($module);
+                $isPredefinedEnabledOrDisabled = $moduleResolver->isPredefinedEnabledOrDisabled($module);
                 $items[] = [
                     'module' => $module,
                     'module-type' => $moduleTypeSlug,
                     'id' => $moduleResolver->getID($module),
                     'is-enabled' => $isEnabled,
-                    'can-be-disabled' => $moduleResolver->canBeDisabled($module),
+                    'can-be-disabled' => $isPredefinedEnabledOrDisabled !== null,
                     'can-be-enabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
                     'has-settings' => $moduleResolver->hasSettings($module),
                     'are-settings-hidden' => $moduleResolver->areSettingsHidden($module),
