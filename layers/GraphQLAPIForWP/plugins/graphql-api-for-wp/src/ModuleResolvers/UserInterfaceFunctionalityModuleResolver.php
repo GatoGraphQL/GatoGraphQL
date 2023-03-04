@@ -116,12 +116,12 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         };
     }
 
-    public function isEnabledByDefault(string $module): bool
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
-        switch ($module) {
-            case self::WELCOME_GUIDES:
-                return false;
-        }
-        return parent::isEnabledByDefault($module);
+        return match ($module) {
+            self::WELCOME_GUIDES => false,
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => true,
+            default => parent::isPredefinedEnabledOrDisabled($module),
+        };
     }
 }
