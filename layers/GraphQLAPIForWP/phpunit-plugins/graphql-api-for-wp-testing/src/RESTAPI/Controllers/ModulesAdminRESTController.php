@@ -140,7 +140,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             'module' => $module,
             'id' => $moduleID,
             'isEnabled' => $isEnabled,
-            'canBeDisabled' => $moduleResolver->canBeDisabled($module),
+            'isPredefinedEnabledOrDisabled' => $moduleResolver->isPredefinedEnabledOrDisabled($module),
             'canBeEnabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
             'hasSettings' => $moduleResolver->hasSettings($module),
             'name' => $moduleResolver->getName($module),
