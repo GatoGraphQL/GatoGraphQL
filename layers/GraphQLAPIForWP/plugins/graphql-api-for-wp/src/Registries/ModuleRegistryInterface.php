@@ -25,6 +25,8 @@ interface ModuleRegistryInterface
     public function getModuleResolver(string $module): ModuleResolverInterface;
     public function isModuleEnabled(string $module): bool;
     /**
+     * If a module does not set a predefined enabled/disabled state,
+     * then the user can enable/disable it.
      * If a module was disabled by the user, then the user can enable it.
      * If it is disabled because its requirements are not satisfied,
      * or its dependencies themselves disabled, then it cannot be enabled by the user.
