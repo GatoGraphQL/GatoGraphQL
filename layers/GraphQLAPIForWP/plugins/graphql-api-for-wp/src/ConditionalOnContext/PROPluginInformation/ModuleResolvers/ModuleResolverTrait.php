@@ -14,8 +14,8 @@ trait ModuleResolverTrait
     use PROPluginMarkdownContentRetrieverTrait;
     use CommonModuleResolverTrait;
 
-    public function canBeDisabled(string $module): bool
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
-        return false;
+        return true;
     }
 }

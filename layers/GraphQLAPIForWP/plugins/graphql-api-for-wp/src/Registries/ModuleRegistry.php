@@ -116,23 +116,29 @@ class ModuleRegistry implements ModuleRegistryInterface
     public function isModuleEnabled(string $module): bool
     {
         $moduleResolver = $this->getModuleResolver($module);
+
+        // If the state is predefined, then already return it
+        $isPredefinedEnabledOrDisabled = $moduleResolver->isPredefinedEnabledOrDisabled($module);
+        if ($isPredefinedEnabledOrDisabled !== null) {
+            return $isPredefinedEnabledOrDisabled;
+        }
+
         // Check that all requirements are satisfied
         if (!$moduleResolver->areRequirementsSatisfied($module)) {
             return false;
         }
+
         // Check that all depended-upon modules are enabled
         if (!$this->areDependedModulesEnabled($module)) {
             return false;
         }
-        // If the user can't disable it, then it must be enabled
-        if (!$moduleResolver->canBeDisabled($module)) {
-            return true;
-        }
-        $moduleID = $moduleResolver->getID($module);
+
         // Check if the value has been saved on the DB
+        $moduleID = $moduleResolver->getID($module);
         if ($this->getUserSettingsManager()->hasSetModuleEnabled($moduleID)) {
             return $this->getUserSettingsManager()->isModuleEnabled($moduleID);
         }
+
         // Get the default value from the resolver
         return $moduleResolver->isEnabledByDefault($module);
     }
@@ -180,6 +186,8 @@ class ModuleRegistry implements ModuleRegistryInterface
     }
 
     /**
+     * If a module does not set a predefined enabled/disabled state,
+     * then the user can enable/disable it.
      * If a module was disabled by the user, then the user can enable it.
      * If it is disabled because its requirements are not satisfied,
      * or its dependencies themselves disabled, then it cannot be enabled by the user.
@@ -187,14 +195,23 @@ class ModuleRegistry implements ModuleRegistryInterface
     public function canModuleBeEnabled(string $module): bool
     {
         $moduleResolver = $this->getModuleResolver($module);
+
+        // If the state is predefined, then the user can't set the state
+        $isPredefinedEnabledOrDisabled = $moduleResolver->isPredefinedEnabledOrDisabled($module);
+        if ($isPredefinedEnabledOrDisabled !== null) {
+            return false;
+        }
+
         // Check that all requirements are satisfied
         if (!$moduleResolver->areRequirementsSatisfied($module)) {
             return false;
         }
+
         // Check that all depended-upon modules are enabled
         if (!$this->areDependedModulesEnabled($module)) {
             return false;
         }
+
         return true;
     }
 
