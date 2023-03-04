@@ -6,10 +6,6 @@ Documentation for additional features in the GraphQL API can now be browsed when
 
 ![Additional Documentation in Schema Configuration CPT](../../images/releases/v1.0/schema-configuration-additional-documentation.png)
 
-In addition, documentation for the GraphQL API PRO are also available:
-
-![Additional PRO Documentation in Schema Configuration CPT](../../images/releases/v1.0/schema-configuration-additional-documentation-pro.png)
-
 When clicking on any of the links, a modal window is displayed with the corresponding documentation:
 
 ![Modal window with documentation](../../images/releases/v1.0/schema-configuration-additional-documentation-modal.png)
