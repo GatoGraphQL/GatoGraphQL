@@ -2,27 +2,29 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\AccessControlFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
+    use OptionsBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-access-control-lists';
+        return 'schema-config-global-fields';
     }
 
     public function getBlockPriority(): int
     {
-        return 2900;
+        return 3000;
     }
 
     public function getEnablingModule(): ?string
     {
-        return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;
+        return SchemaConfigurationFunctionalityModuleResolver::GLOBAL_FIELDS;
     }
 
     /**

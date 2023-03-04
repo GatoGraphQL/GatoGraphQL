@@ -2,28 +2,23 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
-/**
- * The cache modules have different behavior depending on the environment:
- * - "development": visible, disabled by default
- * - "production": hidden, enabled by default
- *
- * @author Leonardo Losoviz <leo@getpop.org>
- */
-class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
-    use PerformanceFunctionalityModuleResolverTrait;
+    use VersioningFunctionalityModuleResolverTrait {
+        VersioningFunctionalityModuleResolverTrait::getPriority as getUpstreamPriority;
+    }
 
-    public final const CACHE_CONTROL = Plugin::NAMESPACE . '\cache-control';
+    public final const FIELD_DEPRECATION = Plugin::NAMESPACE . '\field-deprecation';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -43,8 +38,17 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getModulesToResolve(): array
     {
         return [
-            self::CACHE_CONTROL,
+            self::FIELD_DEPRECATION,
         ];
+    }
+
+    /**
+     * The priority to display the modules from this resolver in the Modules page.
+     * The higher the number, the earlier it shows
+     */
+    public function getPriority(): int
+    {
+        return $this->getUpstreamPriority() - 5;
     }
 
     /**
@@ -53,13 +57,10 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::CACHE_CONTROL:
+            case self::FIELD_DEPRECATION:
                 return [
                     [
                         SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-                    ],
-                    [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ],
                 ];
         }
@@ -69,7 +70,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getName(string $module): string
     {
         return match ($module) {
-            self::CACHE_CONTROL => \__('Cache Control [PRO]', 'graphql-api-pro'),
+            self::FIELD_DEPRECATION => \__('Field Deprecation [PRO]', 'graphql-api-pro'),
             default => $module,
         };
     }
@@ -77,8 +78,8 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::CACHE_CONTROL:
-                return \__('Provide HTTP Caching for Persisted Queries, sending the Cache-Control header with a max-age value calculated from all fields in the query', 'graphql-api-pro');
+            case self::FIELD_DEPRECATION:
+                return \__('Deprecate fields, and explain how to replace them, through a user interface', 'graphql-api-pro');
         }
         return parent::getDescription($module);
     }

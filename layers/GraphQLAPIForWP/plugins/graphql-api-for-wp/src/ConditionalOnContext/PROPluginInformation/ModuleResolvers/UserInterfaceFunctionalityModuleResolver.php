@@ -2,23 +2,20 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolverTrait;
 
-class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
-    use VersioningFunctionalityModuleResolverTrait {
-        VersioningFunctionalityModuleResolverTrait::getPriority as getUpstreamPriority;
-    }
+    use UserInterfaceFunctionalityModuleResolverTrait;
 
-    public final const FIELD_DEPRECATION = Plugin::NAMESPACE . '\field-deprecation';
+    public final const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\low-level-persisted-query-editing';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -38,17 +35,8 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     public function getModulesToResolve(): array
     {
         return [
-            self::FIELD_DEPRECATION,
+            self::LOW_LEVEL_PERSISTED_QUERY_EDITING,
         ];
-    }
-
-    /**
-     * The priority to display the modules from this resolver in the Modules page.
-     * The higher the number, the earlier it shows
-     */
-    public function getPriority(): int
-    {
-        return $this->getUpstreamPriority() - 5;
     }
 
     /**
@@ -57,10 +45,10 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::FIELD_DEPRECATION:
+            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
                 return [
                     [
-                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
+                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ],
                 ];
         }
@@ -70,7 +58,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     public function getName(string $module): string
     {
         return match ($module) {
-            self::FIELD_DEPRECATION => \__('Field Deprecation [PRO]', 'graphql-api-pro'),
+            self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Low-Level Persisted Query Editing [PRO]', 'graphql-api-pro'),
             default => $module,
         };
     }
@@ -78,9 +66,18 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::FIELD_DEPRECATION:
-                return \__('Deprecate fields, and explain how to replace them, through a user interface', 'graphql-api-pro');
+            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
+                return \__('Have access to directives to be applied to the schema when editing persisted queries', 'graphql-api-pro');
         }
         return parent::getDescription($module);
+    }
+
+    public function isEnabledByDefault(string $module): bool
+    {
+        switch ($module) {
+            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
+                return false;
+        }
+        return parent::isEnabledByDefault($module);
     }
 }

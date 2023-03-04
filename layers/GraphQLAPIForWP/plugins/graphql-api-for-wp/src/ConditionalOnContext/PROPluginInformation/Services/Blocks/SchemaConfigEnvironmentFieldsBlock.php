@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigEnvironmentFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-schema-mode';
+        return 'schema-config-environment-fields';
     }
 
     public function getBlockPriority(): int
     {
-        return 2800;
+        return 2000;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA;
+        return SchemaTypeModuleResolver::ENVIRONMENT_FIELDS;
     }
 
     /**

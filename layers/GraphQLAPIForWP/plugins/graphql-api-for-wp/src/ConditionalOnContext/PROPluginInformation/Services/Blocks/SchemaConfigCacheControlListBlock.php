@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\VersioningFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 
-class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-field-deprecation-lists';
+        return 'schema-config-cache-control-lists';
     }
 
     public function getBlockPriority(): int
     {
-        return 2600;
+        return 2700;
     }
 
     public function getEnablingModule(): ?string
     {
-        return VersioningFunctionalityModuleResolver::FIELD_DEPRECATION;
+        return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;
     }
 
     /**

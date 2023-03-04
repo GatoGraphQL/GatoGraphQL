@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigMultipleQueryExecutionBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigMultiFieldDirectivesBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-multiple-query-execution';
+        return 'schema-config-multifield-directives';
     }
 
     public function getBlockPriority(): int
     {
-        return 2500;
+        return 2300;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::MULTIPLE_QUERY_EXECUTION;
+        return SchemaConfigurationFunctionalityModuleResolver::MULTIFIELD_DIRECTIVES;
     }
 
     /**

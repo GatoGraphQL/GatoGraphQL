@@ -2,29 +2,27 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 
-class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
-    use OptionsBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-http-request-fields';
+        return 'schema-config-access-control-lists';
     }
 
     public function getBlockPriority(): int
     {
-        return 2100;
+        return 2900;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaTypeModuleResolver::HTTP_REQUEST_FIELDS;
+        return AccessControlFunctionalityModuleResolver::ACCESS_CONTROL;
     }
 
     /**

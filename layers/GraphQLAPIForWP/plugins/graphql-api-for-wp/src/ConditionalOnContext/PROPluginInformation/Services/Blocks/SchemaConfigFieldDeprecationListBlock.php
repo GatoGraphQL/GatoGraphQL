@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\VersioningFunctionalityModuleResolver;
 
-class SchemaConfigFieldToInputBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-field-to-input';
+        return 'schema-config-field-deprecation-lists';
     }
 
     public function getBlockPriority(): int
     {
-        return 2400;
+        return 2600;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::FIELD_TO_INPUT;
+        return VersioningFunctionalityModuleResolver::FIELD_DEPRECATION;
     }
 
     /**

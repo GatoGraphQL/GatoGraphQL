@@ -2,20 +2,28 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Plugin;
 
-class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+/**
+ * The cache modules have different behavior depending on the environment:
+ * - "development": visible, disabled by default
+ * - "production": hidden, enabled by default
+ *
+ * @author Leonardo Losoviz <leo@getpop.org>
+ */
+class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
-    use UserInterfaceFunctionalityModuleResolverTrait;
+    use PerformanceFunctionalityModuleResolverTrait;
 
-    public final const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\low-level-persisted-query-editing';
+    public final const CACHE_CONTROL = Plugin::NAMESPACE . '\cache-control';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -35,7 +43,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getModulesToResolve(): array
     {
         return [
-            self::LOW_LEVEL_PERSISTED_QUERY_EDITING,
+            self::CACHE_CONTROL,
         ];
     }
 
@@ -45,8 +53,11 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
+            case self::CACHE_CONTROL:
                 return [
+                    [
+                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
+                    ],
                     [
                         EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ],
@@ -58,7 +69,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getName(string $module): string
     {
         return match ($module) {
-            self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Low-Level Persisted Query Editing [PRO]', 'graphql-api-pro'),
+            self::CACHE_CONTROL => \__('Cache Control [PRO]', 'graphql-api-pro'),
             default => $module,
         };
     }
@@ -66,18 +77,9 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getDescription(string $module): string
     {
         switch ($module) {
-            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
-                return \__('Have access to directives to be applied to the schema when editing persisted queries', 'graphql-api-pro');
+            case self::CACHE_CONTROL:
+                return \__('Provide HTTP Caching for Persisted Queries, sending the Cache-Control header with a max-age value calculated from all fields in the query', 'graphql-api-pro');
         }
         return parent::getDescription($module);
-    }
-
-    public function isEnabledByDefault(string $module): bool
-    {
-        switch ($module) {
-            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
-                return false;
-        }
-        return parent::isEnabledByDefault($module);
     }
 }

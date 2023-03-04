@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\Services\Blocks;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginPseudoModules\ModuleResolvers\PerformanceFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-cache-control-lists';
+        return 'schema-config-composable-directives';
     }
 
     public function getBlockPriority(): int
     {
-        return 2700;
+        return 2200;
     }
 
     public function getEnablingModule(): ?string
     {
-        return PerformanceFunctionalityModuleResolver::CACHE_CONTROL;
+        return SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES;
     }
 
     /**
