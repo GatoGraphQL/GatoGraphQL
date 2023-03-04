@@ -85,12 +85,12 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getName(string $module): string
     {
         return match ($module) {
-            self::ACCESS_CONTROL => \__('Access Control [PRO]', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_DISABLE_ACCESS => \__('Access Control Rule: Disable Access [PRO]', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_USER_STATE => \__('Access Control Rule: User State [PRO]', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_USER_ROLES => \__('Access Control Rule: User Roles [PRO]', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_USER_CAPABILITIES => \__('Access Control Rule: User Capabilities [PRO]', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_VISITOR_IP => \__('Access Control Rule: Visitor IP [PRO]', 'graphql-api-pro'),
+            self::ACCESS_CONTROL => \__('Access Control', 'graphql-api-pro'),
+            self::ACCESS_CONTROL_RULE_DISABLE_ACCESS => \__('Access Control Rule: Disable Access', 'graphql-api-pro'),
+            self::ACCESS_CONTROL_RULE_USER_STATE => \__('Access Control Rule: User State', 'graphql-api-pro'),
+            self::ACCESS_CONTROL_RULE_USER_ROLES => \__('Access Control Rule: User Roles', 'graphql-api-pro'),
+            self::ACCESS_CONTROL_RULE_USER_CAPABILITIES => \__('Access Control Rule: User Capabilities', 'graphql-api-pro'),
+            self::ACCESS_CONTROL_RULE_VISITOR_IP => \__('Access Control Rule: Visitor IP', 'graphql-api-pro'),
             default => $module,
         };
     }

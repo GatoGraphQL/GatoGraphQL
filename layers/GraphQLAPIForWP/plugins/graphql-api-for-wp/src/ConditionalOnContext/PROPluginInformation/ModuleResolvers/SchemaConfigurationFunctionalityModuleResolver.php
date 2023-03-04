@@ -69,13 +69,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getName(string $module): string
     {
         return match ($module) {
-            self::PUBLIC_PRIVATE_SCHEMA => \__('Public/Private Schema [PRO]', 'graphql-api-pro'),
-            self::GLOBAL_FIELDS => \__('Global Fields [PRO]', 'graphql-api-pro'),
-            self::FIELD_TO_INPUT => \__('Field to Input [PRO]', 'graphql-api-pro'),
-            self::COMPOSABLE_DIRECTIVES => \__('Composable Directives [PRO]', 'graphql-api-pro'),
-            self::MULTIFIELD_DIRECTIVES => \__('Multi-Field Directives [PRO]', 'graphql-api-pro'),
-            self::MULTIPLE_QUERY_EXECUTION => \__('Multiple Query Execution [PRO]', 'graphql-api-pro'),
-            self::DEPRECATION_NOTIFIER => \__('Deprecation Notifier [PRO]', 'graphql-api-pro'),
+            self::PUBLIC_PRIVATE_SCHEMA => \__('Public/Private Schema', 'graphql-api-pro'),
+            self::GLOBAL_FIELDS => \__('Global Fields', 'graphql-api-pro'),
+            self::FIELD_TO_INPUT => \__('Field to Input', 'graphql-api-pro'),
+            self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'graphql-api-pro'),
+            self::MULTIFIELD_DIRECTIVES => \__('Multi-Field Directives', 'graphql-api-pro'),
+            self::MULTIPLE_QUERY_EXECUTION => \__('Multiple Query Execution', 'graphql-api-pro'),
+            self::DEPRECATION_NOTIFIER => \__('Deprecation Notifier', 'graphql-api-pro'),
             default => $module,
         };
     }

@@ -41,7 +41,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access [PRO]', 'graphql-api'),
+            self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'graphql-api'),
             default => $module,
         };
     }

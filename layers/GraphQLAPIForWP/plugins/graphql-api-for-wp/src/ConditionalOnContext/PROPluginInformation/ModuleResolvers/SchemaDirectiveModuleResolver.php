@@ -53,13 +53,13 @@ class SchemaDirectiveModuleResolver extends AbstractModuleResolver implements PR
     public function getName(string $module): string
     {
         return match ($module) {
-            self::CACHE_DIRECTIVE => \__('Cache Directive [PRO]', 'graphql-api-pro'),
-            self::APPLY_FIELD_DIRECTIVE => \__('Apply Field Directive [PRO]', 'graphql-api-pro'),
-            self::META_DIRECTIVES => \__('Meta Directives [PRO]', 'graphql-api-pro'),
-            self::PASS_ONWARDS_DIRECTIVE => \__('Pass Onwards Directive [PRO]', 'graphql-api-pro'),
-            self::REMOVE_DIRECTIVE => \__('Remove Output Directive [PRO]', 'graphql-api-pro'),
-            self::DEFAULT_DIRECTIVE => \__('Default Directive [PRO]', 'graphql-api-pro'),
-            self::FUNCTION_DIRECTIVES => \__('Function Directives [PRO]', 'graphql-api-pro'),
+            self::CACHE_DIRECTIVE => \__('Cache Directive', 'graphql-api-pro'),
+            self::APPLY_FIELD_DIRECTIVE => \__('Apply Field Directive', 'graphql-api-pro'),
+            self::META_DIRECTIVES => \__('Meta Directives', 'graphql-api-pro'),
+            self::PASS_ONWARDS_DIRECTIVE => \__('Pass Onwards Directive', 'graphql-api-pro'),
+            self::REMOVE_DIRECTIVE => \__('Remove Output Directive', 'graphql-api-pro'),
+            self::DEFAULT_DIRECTIVE => \__('Default Directive', 'graphql-api-pro'),
+            self::FUNCTION_DIRECTIVES => \__('Function Directives', 'graphql-api-pro'),
             default => $module,
         };
     }

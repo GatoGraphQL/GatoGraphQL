@@ -56,9 +56,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
     public function getName(string $module): string
     {
         return match ($module) {
-            self::HTTP_REQUEST_FIELDS => \__('HTTP Request Fields [PRO]', 'graphql-api-pro'),
-            self::ENVIRONMENT_FIELDS => \__('Environment Fields [PRO]', 'graphql-api-pro'),
-            self::FUNCTION_FIELDS => \__('Function Fields [PRO]', 'graphql-api-pro'),
+            self::HTTP_REQUEST_FIELDS => \__('HTTP Request Fields', 'graphql-api-pro'),
+            self::ENVIRONMENT_FIELDS => \__('Environment Fields', 'graphql-api-pro'),
+            self::FUNCTION_FIELDS => \__('Function Fields', 'graphql-api-pro'),
             default => $module,
         };
     }

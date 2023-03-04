@@ -102,7 +102,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'graphql-api'),
             self::WELCOME_GUIDES => \__('Welcome Guides', 'graphql-api'),
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional Documentation', 'graphql-api'),
-            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO => \__('Additional Documentation [PRO]', 'graphql-api'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION_PRO => \__('Additional Documentation', 'graphql-api'),
             default => $module,
         };
     }

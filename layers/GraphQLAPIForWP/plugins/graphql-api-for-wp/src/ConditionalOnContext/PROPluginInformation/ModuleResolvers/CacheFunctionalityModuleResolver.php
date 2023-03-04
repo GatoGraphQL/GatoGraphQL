@@ -97,8 +97,8 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
     public function getName(string $module): string
     {
         return match ($module) {
-            self::CONFIGURATION_CACHE => \__('Configuration Cache [PRO]', 'graphql-api-pro'),
-            self::SCHEMA_INTROSPECTION_CACHE => \__('Schema Introspection Cache [PRO]', 'graphql-api-pro'),
+            self::CONFIGURATION_CACHE => \__('Configuration Cache', 'graphql-api-pro'),
+            self::SCHEMA_INTROSPECTION_CACHE => \__('Schema Introspection Cache', 'graphql-api-pro'),
             default => $module,
         };
     }
