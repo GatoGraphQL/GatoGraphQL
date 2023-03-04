@@ -160,7 +160,7 @@ class Module extends AbstractPluginModule
         }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(self::class)->getConfiguration();
-        if ($moduleConfiguration->enablePROPluginPseudoModules()) {
+        if ($moduleConfiguration->displayPROPluginInformationInMainPlugin()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/PROPluginPseudoModules');
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/PROPluginPseudoModules', 'module-services.yaml');
         }

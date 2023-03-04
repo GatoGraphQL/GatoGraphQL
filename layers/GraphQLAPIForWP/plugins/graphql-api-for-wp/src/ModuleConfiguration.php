@@ -139,9 +139,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function enablePROPluginPseudoModules(): bool
+    public function displayPROPluginInformationInMainPlugin(): bool
     {
-        $envVariable = Environment::ENABLE_PRO_PLUGIN_PSEUDO_MODULES;
+        $envVariable = Environment::DISPLAY_PRO_PLUGIN_INFORMATION_IN_MAIN_PLUGIN;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
