@@ -73,7 +73,7 @@ The resolvers attach themselves to the types. Each field can be handled by diffe
 
 ### Public/private schema managed through Access Control Lists
 
-From a single source of truth, expose different schemas for different users, managing it through Access Control Lists based on the user being logged-in or not, roles, capabilities, or custom rules.
+From a single source of truth, expose different schemas for different users, managing it through Access Control Lists based on the user being logged-in or not, roles, capabilities, IP, or custom rules.
 
 ### Field/directive-based versioning
 
