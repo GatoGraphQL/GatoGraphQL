@@ -91,7 +91,7 @@ const proTitlePrefix = displayUnlockPROPluginMessage ? __('🔒 ', 'graphql-api'
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Additional Documentation', 'graphql-api') }
+        title={ __('Additional GraphQL API Documentation', 'graphql-api') }
     >
         <p>{ __('Docs for additional features in the GraphQL API:', 'graphql-api') }</p>
         <p>
