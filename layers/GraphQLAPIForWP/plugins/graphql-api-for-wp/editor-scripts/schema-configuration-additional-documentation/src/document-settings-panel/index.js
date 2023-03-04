@@ -110,12 +110,14 @@ const DocumentSettingsPanel = () => (
         <hr/>
         <p>
             { __('Docs for additional features unlocked by the GraphQL API PRO:', 'graphql-api') }
-            { displayUnlockPROPluginMessage &&
+        </p>
+        { displayUnlockPROPluginMessage &&
+            <p>
                 <GoProLink
                     proPluginWebsiteURL={ proPluginWebsiteURL }
                 />
-            }
-        </p>
+            </p>
+        }
         <p>
             {
                 implicitFeaturesPRODocEntries.map( ( entry ) =>
