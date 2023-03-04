@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\Tables;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Admin\Tables;
 
 use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable as UpstreamModuleListTable;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\PROPseudoModuleResolverInterface;
