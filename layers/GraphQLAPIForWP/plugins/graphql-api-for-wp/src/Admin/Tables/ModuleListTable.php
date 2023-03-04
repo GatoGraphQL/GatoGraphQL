@@ -302,8 +302,18 @@ class ModuleListTable extends AbstractItemListTable
      */
     public function column_name($item)
     {
-        $nonce = \wp_create_nonce('graphql_api_enable_or_disable_module');
         $title = '<strong>' . $item['name'] . '</strong>';
+        $actions = $this->getColumnActions($item);
+        return $title . $this->row_actions($actions/*, $this->usePluginTableStyle()*/);
+    }
+
+    /**
+     * @param array<string,string> $item an array of DB data
+     * @return array<string,string>
+     */
+    protected function getColumnActions(array $item): array
+    {
+        $nonce = \wp_create_nonce('graphql_api_enable_or_disable_module');
         $currentView = $this->getCurrentView();
         $maybeCurrentViewParam = !empty($currentView) ? '&' . self::URL_PARAM_MODULE_TYPE . '=' . $currentView : '';
         $linkPlaceholder = '<a href="?page=%s&action=%s&item=%s&_wpnonce=%s' . ($maybeCurrentViewParam) . '">%s</a>';
@@ -362,7 +372,7 @@ class ModuleListTable extends AbstractItemListTable
             $actions['disabled'] = \__('Disabled', 'graphql-api');
             // }
         }
-        return $title . $this->row_actions($actions/*, $this->usePluginTableStyle()*/);
+        return $actions;
     }
 
     /**

@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolverTrait;
 
-class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
     use SchemaConfigurationFunctionalityModuleResolverTrait;

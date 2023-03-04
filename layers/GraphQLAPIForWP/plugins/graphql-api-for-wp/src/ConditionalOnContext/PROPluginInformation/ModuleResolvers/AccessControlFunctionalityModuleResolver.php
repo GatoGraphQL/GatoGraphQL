@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
-class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait {
         ModuleResolverTrait::hasDocumentation as upstreamHasDocumentation;

@@ -16,7 +16,7 @@ use GraphQLAPI\GraphQLAPI\Plugin;
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
     use PerformanceFunctionalityModuleResolverTrait;

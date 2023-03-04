@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolverTrait;
 
-class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
     use UserInterfaceFunctionalityModuleResolverTrait;

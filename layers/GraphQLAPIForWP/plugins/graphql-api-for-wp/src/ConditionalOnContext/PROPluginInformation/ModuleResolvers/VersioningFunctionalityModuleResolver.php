@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
-class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
     use VersioningFunctionalityModuleResolverTrait {

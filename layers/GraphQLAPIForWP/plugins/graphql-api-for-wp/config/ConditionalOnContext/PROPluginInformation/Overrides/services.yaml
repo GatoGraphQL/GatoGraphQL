@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage:
+        class: \GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages\ModulesMenuPage
