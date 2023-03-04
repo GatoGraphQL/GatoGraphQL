@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\MenuPages;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Admin\Tables\AbstractItemListTable;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Admin\Tables\ModuleListTable;
