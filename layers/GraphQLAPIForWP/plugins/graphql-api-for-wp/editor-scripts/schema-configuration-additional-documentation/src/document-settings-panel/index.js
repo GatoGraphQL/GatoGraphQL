@@ -44,52 +44,61 @@ const implicitFeaturesDocEntries = [
         'restrict-field-directives-to-specific-types'
     ],
 ];
-const implicitFeaturesPRODocEntries = [
-    [
-        'Custom Scalars Pack',
-        'custom-scalars'
-    ],
-    [
-        'Dynamic Variables',
-        'dynamic-variables'
-    ],
-];
-const modulePRODocEntries = [
+const moduleAndImplicitFeaturesPRODocEntries = [
     [
         'Apply Field Directive',
-        'apply-field-directive'
+        'apply-field-directive',
+        getModulePRODocMarkdownContentOrUseDefault
     ],
     [
         'Cache Directive',
-        'cache-directive'
+        'cache-directive',
+        getModulePRODocMarkdownContentOrUseDefault
+    ],
+    [
+        'Custom Scalars Pack',
+        'custom-scalars',
+        getImplicitFeaturesPRODocMarkdownContentOrUseDefault
     ],
     [
         'Default Directive',
-        'default-directive'
+        'default-directive',
+        getModulePRODocMarkdownContentOrUseDefault
     ],
     [
         'Deprecation Notifier',
-        'deprecation-notifier'
+        'deprecation-notifier',
+        getModulePRODocMarkdownContentOrUseDefault
+    ],
+    [
+        'Dynamic Variables',
+        'dynamic-variables',
+        getImplicitFeaturesPRODocMarkdownContentOrUseDefault
     ],
     [
         'Function Directives',
-        'function-directives'
+        'function-directives',
+        getModulePRODocMarkdownContentOrUseDefault
     ],
     [
         'Function Fields',
-        'function-fields'
+        'function-fields',
+        getModulePRODocMarkdownContentOrUseDefault
     ],
     [
         'Meta Directives',
-        'meta-directives'
+        'meta-directives',
+        getModulePRODocMarkdownContentOrUseDefault
     ],
     [
         'Pass Onwards Directive',
-        'pass-onwards-directive'
+        'pass-onwards-directive',
+        getModulePRODocMarkdownContentOrUseDefault
     ],
     [
         'Remove Output Directive',
-        'remove-directive'
+        'remove-directive',
+        getModulePRODocMarkdownContentOrUseDefault
     ],
 ];
 const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentation.displayUnlockPROPluginMessage;
@@ -129,25 +138,12 @@ const DocumentSettingsPanel = () => (
         }
         <p>
             {
-                implicitFeaturesPRODocEntries.map( ( entry ) =>
+                moduleAndImplicitFeaturesPRODocEntries.map( ( entry ) =>
                     <MarkdownInfoModalButton
                         text={ proTitlePrefix + entry[0] }
                         title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
                         pageFilename={ entry[1] }
-                        getMarkdownContentCallback={ getImplicitFeaturesPRODocMarkdownContentOrUseDefault }
-                        isSmall={ false }
-                        className={ buttonClassName }
-                    />
-                )
-            }
-            <hr/>
-            {
-                modulePRODocEntries.map( ( entry ) =>
-                    <MarkdownInfoModalButton
-                        text={ proTitlePrefix + entry[0] }
-                        title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
-                        pageFilename={ entry[1] }
-                        getMarkdownContentCallback={ getModulePRODocMarkdownContentOrUseDefault }
+                        getMarkdownContentCallback={ entry[2] }
                         isSmall={ false }
                         className={ buttonClassName }
                     />
