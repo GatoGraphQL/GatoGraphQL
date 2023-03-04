@@ -69,7 +69,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getName(string $module): string
     {
         return match ($module) {
-            self::CACHE_CONTROL => \__('Cache Control [PRO]', 'graphql-api-pro'),
+            self::CACHE_CONTROL => \__('Cache Control', 'graphql-api-pro'),
             default => $module,
         };
     }
