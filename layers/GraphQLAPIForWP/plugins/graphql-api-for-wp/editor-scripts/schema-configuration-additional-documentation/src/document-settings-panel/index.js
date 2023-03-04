@@ -110,7 +110,7 @@ const DocumentSettingsPanel = () => (
         </p>
         <hr/>
         <p>
-            { __('Docs for additional features unlocked by the GraphQL API PRO:', 'graphql-api') }
+            { __('Docs for additional features in the GraphQL API PRO:', 'graphql-api') }
         </p>
         { displayUnlockPROPluginMessage &&
             <p>
