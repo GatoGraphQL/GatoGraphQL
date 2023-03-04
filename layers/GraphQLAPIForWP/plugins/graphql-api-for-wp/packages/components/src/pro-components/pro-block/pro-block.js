@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { MarkdownInfoModalButton } from '../markdown-modal';
+import { MarkdownInfoModalButton } from '../../components/markdown-modal';
  
 const GraphAPIPROBlock = ( props ) => {
 	const {

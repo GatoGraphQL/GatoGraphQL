@@ -3,7 +3,7 @@
  */
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { Card, CardHeader, CardBody } from '@wordpress/components';
-import { CardHeaderContent } from '../card-header-content';
+import { CardHeaderContent } from '../../components/card-header-content';
 import { GoProLink } from '../go-pro-link';
 import { __ } from '@wordpress/i18n';
 
