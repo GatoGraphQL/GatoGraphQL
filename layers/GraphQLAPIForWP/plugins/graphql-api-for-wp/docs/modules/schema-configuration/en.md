@@ -12,8 +12,8 @@ Each module can define its configuration (and allow the site's admin to customiz
 - Enabling “sensitive” data elements
 - Namespacing the schema
 - Using nested mutations
-- Define who can access the schema via Access Control Lists [PRO]
-- Set-up HTTP caching via Cache Control Lists [PRO]
+- Define who can access the schema via Access Control Lists
+- Set-up HTTP caching via Cache Control Lists
 
 ![Creating a new schema configuration](../../images/schema-configuration.png "Creating a new schema configuration")
 
@@ -62,15 +62,15 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
     <td><strong>Namespace Types?</strong></td><td>Define if to have all types in the schema automatically namespaced. If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
-    <td><strong>Access Control Lists [PRO]</strong></td>
+    <td><strong>Access Control Lists</strong></td>
     <td>(If module <code>Access Control</code> is enabled) Manage who can access the schema, by selecting the Access Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 <tr>
-    <td><strong>Public/Private Schema [PRO]</strong></td>
-    <td>When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul><li><code>"Public"</code>: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li><code>"Private"</code>: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
+    <td><strong>Public/Private Schema</strong></td>
+    <td>(If module <code>Public/Private Schema</code> is enabled) When access to some a field or directive is denied, there are 2 ways for the API to behave:<ul><li><code>"Public"</code>: Provide an error message to the user, indicating why access is denied. This behavior makes the metadata from the schema always available.</li><li><code>"Private"</code>: The error message indicates that the field or directive does not exist. This behavior exposes the metadata from the schema only to those users who can access it.</li></ul>If <code>"Default"</code> is selected, the value selected in the Settings is used.</td>
 </tr>
 <tr>
-    <td><strong>Cache Control Lists [PRO]</strong></td>
+    <td><strong>Cache Control Lists</strong></td>
     <td>(If module <code>Cache Control</code> is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
 </tbody>
