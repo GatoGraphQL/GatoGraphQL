@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
-class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
     use PluginManagementFunctionalityModuleResolverTrait;
