@@ -64,7 +64,7 @@ class ModuleListTable extends AbstractItemListTable
                     'id' => $moduleResolver->getID($module),
                     'is-enabled' => $isEnabled,
                     'can-be-disabled' => $isPredefinedEnabledOrDisabled !== null,
-                    'can-be-enabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
+                    'can-be-enabled' => $isPredefinedEnabledOrDisabled !== null,
                     'has-settings' => $moduleResolver->hasSettings($module),
                     'are-settings-hidden' => $moduleResolver->areSettingsHidden($module),
                     'name' => $moduleResolver->getName($module),
