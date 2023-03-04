@@ -87,6 +87,7 @@ const modulePRODocEntries = [
 const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentation.displayUnlockPROPluginMessage;
 const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentation.proPluginWebsiteURL;
 const buttonClassName = "graphql-api-info-modal-button text-wrap";
+const proTitlePrefix = displayUnlockPROPluginMessage ? __('🔒 ', 'graphql-api') : '';
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
@@ -122,7 +123,7 @@ const DocumentSettingsPanel = () => (
             {
                 implicitFeaturesPRODocEntries.map( ( entry ) =>
                     <MarkdownInfoModalButton
-                        text={ entry[0] }
+                        text={ proTitlePrefix + entry[0] }
                         title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
                         pageFilename={ entry[1] }
                         getMarkdownContentCallback={ getImplicitFeaturesPRODocMarkdownContentOrUseDefault }
@@ -135,7 +136,7 @@ const DocumentSettingsPanel = () => (
             {
                 modulePRODocEntries.map( ( entry ) =>
                     <MarkdownInfoModalButton
-                        text={ entry[0] }
+                        text={ proTitlePrefix + entry[0] }
                         title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
                         pageFilename={ entry[1] }
                         getMarkdownContentCallback={ getModulePRODocMarkdownContentOrUseDefault }
