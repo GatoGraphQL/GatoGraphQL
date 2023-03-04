@@ -76,6 +76,10 @@ const modulePRODocEntries = [
         'function-fields'
     ],
     [
+        'Meta Directives',
+        'meta-directives'
+    ],
+    [
         'Pass Onwards Directive',
         'pass-onwards-directive'
     ],
