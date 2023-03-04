@@ -39,7 +39,7 @@ class ModuleListTable extends UpstreamModuleListTable
      */
     protected function getColumnActions(array $item): array
     {
-        if ($item['is-pro']) {
+        if ($item['is-pro'] ?? false) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             // Remove all previous items, only keep "Go PRO"
