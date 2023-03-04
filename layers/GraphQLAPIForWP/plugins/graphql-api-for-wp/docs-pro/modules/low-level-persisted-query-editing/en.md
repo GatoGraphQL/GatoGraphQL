@@ -21,6 +21,8 @@ Similarly, these directives provide Access Control for fields (and similar direc
 - `@validateIsUserNotLoggedIn`
 - `@validateDoesLoggedInUserHaveAnyRole`.
 - `@validateDoesLoggedInUserHaveAnyCapability`
+- `@validateDoesVisitorComeFromAnyAllowedIP`
+- `@validateDoesVisitorNotComeFromAnyDeniedIP`
 
 ---
 
