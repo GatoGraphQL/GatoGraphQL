@@ -13,4 +13,9 @@ trait ModuleResolverTrait
     use HasMarkdownDocumentationModuleResolverTrait;
     use PROPluginMarkdownContentRetrieverTrait;
     use CommonModuleResolverTrait;
+
+    public function canBeDisabled(string $module): bool
+    {
+        return false;
+    }
 }
