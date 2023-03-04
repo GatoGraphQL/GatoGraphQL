@@ -34,6 +34,26 @@ class ModuleListTable extends UpstreamModuleListTable
     }
 
     /**
+     * Method for name column
+     *
+     * @param array<string,string> $item an array of DB data
+     *
+     * @return string
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    public function column_name($item)
+    {
+        $columnName = parent::column_name($item);
+        if ($item['is-pro'] ?? false) {
+            return sprintf(
+                \__('🔒 %s', 'graphql-api'),
+                $columnName
+            );
+        }
+        return $columnName;
+    }
+
+    /**
      * @param array<string,string> $item an array of DB data
      * @return array<string,string>
      */
