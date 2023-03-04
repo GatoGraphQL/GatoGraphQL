@@ -68,6 +68,10 @@ const modulePRODocEntries = [
         'default-directive'
     ],
     [
+        'Deprecation Notifier',
+        'deprecation-notifier'
+    ],
+    [
         'Function Directives',
         'function-directives'
     ],
