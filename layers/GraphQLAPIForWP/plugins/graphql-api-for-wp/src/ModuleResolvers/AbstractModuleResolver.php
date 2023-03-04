@@ -45,9 +45,14 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
         return true;
     }
 
-    public function canBeDisabled(string $module): bool
+    /**
+     * Is the module's state (enabled/disable) fixed?
+     *
+     * @return boolean|null `true` as enabled, `false` as disabled, `null` as it has no predefined state
+     */
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
-        return true;
+        return null;
     }
 
     public function isHidden(string $module): bool

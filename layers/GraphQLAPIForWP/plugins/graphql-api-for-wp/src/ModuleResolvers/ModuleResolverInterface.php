@@ -34,9 +34,11 @@ interface ModuleResolverInterface
      */
     public function areRequirementsSatisfied(string $module): bool;
     /**
-     * Can the module be disabled by the user?
+     * Is the module's state (enabled/disable) fixed?
+     *
+     * @return boolean|null `true` as enabled, `false` as disabled, `null` as it has no predefined state
      */
-    public function canBeDisabled(string $module): bool;
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool;
     public function isHidden(string $module): bool;
     public function areSettingsHidden(string $module): bool;
     public function getID(string $module): string;

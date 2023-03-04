@@ -94,11 +94,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         };
     }
 
-    public function canBeDisabled(string $module): bool
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return match ($module) {
-            self::GLOBAL_FIELDS => false,
-            default => parent::canBeDisabled($module),
+            self::GLOBAL_FIELDS => true,
+            default => parent::isPredefinedEnabledOrDisabled($module),
         };
     }
 }

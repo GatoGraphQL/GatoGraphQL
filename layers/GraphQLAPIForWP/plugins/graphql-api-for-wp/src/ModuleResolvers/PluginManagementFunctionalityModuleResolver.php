@@ -47,11 +47,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         ];
     }
 
-    public function canBeDisabled(string $module): bool
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return match ($module) {
-            self::GENERAL => false,
-            default => parent::canBeDisabled($module),
+            self::GENERAL => true,
+            default => parent::isPredefinedEnabledOrDisabled($module),
         };
     }
 

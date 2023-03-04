@@ -12,7 +12,9 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 
 class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
-    use ModuleResolverTrait;
+    use ModuleResolverTrait {
+        ModuleResolverTrait::isPredefinedEnabledOrDisabled as upstreamIsPredefinedEnabledOrDisabled;
+    }
     use UserInterfaceFunctionalityModuleResolverTrait;
 
     public final const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\low-level-persisted-query-editing';
@@ -79,5 +81,14 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                 return false;
         }
         return parent::isEnabledByDefault($module);
+    }
+
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
+    {
+        switch ($module) {
+            case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
+                return false;
+        }
+        return $this->upstreamIsPredefinedEnabledOrDisabled($module);
     }
 }

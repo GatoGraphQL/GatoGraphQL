@@ -116,23 +116,29 @@ class ModuleRegistry implements ModuleRegistryInterface
     public function isModuleEnabled(string $module): bool
     {
         $moduleResolver = $this->getModuleResolver($module);
+
+        // If the state is predefined, then already return it
+        $isPredefinedEnabledOrDisabled = $moduleResolver->isPredefinedEnabledOrDisabled($module);
+        if ($isPredefinedEnabledOrDisabled !== null) {
+            return $isPredefinedEnabledOrDisabled;
+        }
+
         // Check that all requirements are satisfied
         if (!$moduleResolver->areRequirementsSatisfied($module)) {
             return false;
         }
+
         // Check that all depended-upon modules are enabled
         if (!$this->areDependedModulesEnabled($module)) {
             return false;
         }
-        // If the user can't disable it, then it must be enabled
-        if (!$moduleResolver->canBeDisabled($module)) {
-            return true;
-        }
-        $moduleID = $moduleResolver->getID($module);
+
         // Check if the value has been saved on the DB
+        $moduleID = $moduleResolver->getID($module);
         if ($this->getUserSettingsManager()->hasSetModuleEnabled($moduleID)) {
             return $this->getUserSettingsManager()->isModuleEnabled($moduleID);
         }
+
         // Get the default value from the resolver
         return $moduleResolver->isEnabledByDefault($module);
     }
