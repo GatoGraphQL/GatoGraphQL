@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { GRAPHQL_API_PRO_PLUGIN_WEBSITE_URL } from '../../constants/environment';
+import { GRAPHQL_API_PRO_PLUGIN_WEBSITE_URL } from '../../pro-constants/environment';
 
 const GoProLink = ( props ) => {
 	const {
