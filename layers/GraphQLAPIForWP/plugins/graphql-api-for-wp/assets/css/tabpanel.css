@@ -1,10 +1,9 @@
 /**
 * Override the box-shadow added to a:focus, when clicking on the tab
 */
-.graphql-api-tabpanel .nav-tab-active:focus {
+.graphql-api-tabpanel .nav-tab-active {
     box-shadow: none;
-    border-bottom: 0;
-    border-right: 1px solid #f0f0f1;
+    border-right: 0;
 }
 
 .graphql-api-tabpanel .nav-tab-wrapper > a.nav-tab {
@@ -12,7 +11,6 @@
     white-space: initial;
     float: none;
     margin: 0;
-    /* border-top: 0; */
     border-bottom: 0;
 }
 
