@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\MenuPageInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
@@ -28,6 +29,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ModuleDocumentationMenuPage $moduleDocumentationMenuPage = null;
     private ?ModulesMenuPage $modulesMenuPage = null;
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
+    private ?RecipesMenuPage $recipesMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
     private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
 
@@ -93,6 +95,15 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     {
         /** @var ReleaseNotesAboutMenuPage */
         return $this->releaseNotesAboutMenuPage ??= $this->instanceManager->getInstance(ReleaseNotesAboutMenuPage::class);
+    }
+    final public function setRecipesMenuPage(RecipesMenuPage $recipesMenuPage): void
+    {
+        $this->recipesMenuPage = $recipesMenuPage;
+    }
+    final protected function getRecipesMenuPage(): RecipesMenuPage
+    {
+        /** @var RecipesMenuPage */
+        return $this->recipesMenuPage ??= $this->instanceManager->getInstance(RecipesMenuPage::class);
     }
     final public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
     {
@@ -233,6 +244,24 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 'read',
                 home_url($clientPath),
             ];
+        }
+
+        $recipesMenuPage = $this->getRecipesMenuPage();
+        /**
+         * @var callable
+         */
+        $callable = [$recipesMenuPage, 'print'];
+        if (
+            $hookName = \add_submenu_page(
+                $menuName,
+                __('Doc: Use Cases, Best Practices and Recipes', 'graphql-api'),
+                __('Doc: Use Cases, Best Practices and Recipes', 'graphql-api'),
+                'manage_options',
+                $recipesMenuPage->getScreenID(),
+                $callable
+            )
+        ) {
+            $recipesMenuPage->setHookName($hookName);
         }
 
         /**
