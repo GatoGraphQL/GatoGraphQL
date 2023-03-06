@@ -209,61 +209,70 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             <?php \settings_errors(); ?>
 
             <?php if ($printWithTabs) : ?>
-                <!-- Tabs -->
-                <h2 class="nav-tab-wrapper">
-                    <?php
-                    foreach ($items as $item) {
-                        printf(
-                            '<a href="#%s" class="nav-tab %s">%s</a>',
-                            $item['id'],
-                            $item['id'] === $activeModuleID ? 'nav-tab-active' : '',
-                            $item['name']
-                        );
-                    }
-                    ?>
-                </h2>
+                <div class="nav-tab-container">
+                    <!-- Tabs -->
+                    <h2 class="nav-tab-wrapper">
+                        <?php
+                        foreach ($items as $item) {
+                            printf(
+                                '<a href="#%s" class="nav-tab %s">%s</a>',
+                                $item['id'],
+                                $item['id'] === $activeModuleID ? 'nav-tab-active' : '',
+                                $item['name']
+                            );
+                        }
+                        ?>
+                    </h2>
+                    <div class="nav-tab-content">
             <?php endif; ?>
-
-            <form method="post" action="options.php">
-                <!-- Artificial input as flag that the form belongs to this plugin -->
-                <input type="hidden" name="<?php echo self::FORM_ORIGIN ?>" value="<?php echo self::SETTINGS_FIELD ?>" />
-                <!--
-                    Artificial input to trigger the update of the form always, as to always purge the container/operational cache
-                    (eg: to include 3rd party extensions in the service container, or new Gutenberg blocks)
-                    This is needed because "If the new and old values are the same, no need to update."
-                    which makes "update_option_{$option}" not be triggered when there are no changes
-                    @see wp-includes/option.php
-                -->
-                <input type="hidden" name="<?php echo self::SETTINGS_FIELD?>[last_saved_timestamp]" value="<?php echo time() ?>">
-                <!-- Panels -->
-                <?php
-                $sectionClass = $printWithTabs ? 'tab-content' : '';
-                \settings_fields(self::SETTINGS_FIELD);
-                foreach ($items as $item) {
-                    $sectionStyle = '';
-                    $maybeTitle = $printWithTabs ? '' : sprintf(
-                        '<hr/><h3 id="%s">%s</h3>',
-                        $item['id'],
-                        $item['name']
-                    );
-                    if ($printWithTabs) {
-                        $sectionStyle = sprintf(
-                            'display: %s;',
-                            $item['id'] === $activeModuleID ? 'block' : 'none'
-                        );
-                    }
-                    ?>
-                    <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
-                        <?php echo $maybeTitle ?>
-                        <table class="form-table">
-                            <?php \do_settings_fields(self::SETTINGS_FIELD, $this->getSettingsFieldForModule($item['id'])) ?>
-                        </table>
-                    </div>
-                    <?php
-                }
-                \submit_button();
-                ?>
-            </form>
+                        <form method="post" action="options.php">
+                            <!-- Artificial input as flag that the form belongs to this plugin -->
+                            <input type="hidden" name="<?php echo self::FORM_ORIGIN ?>" value="<?php echo self::SETTINGS_FIELD ?>" />
+                            <!--
+                                Artificial input to trigger the update of the form always, as to always purge the container/operational cache
+                                (eg: to include 3rd party extensions in the service container, or new Gutenberg blocks)
+                                This is needed because "If the new and old values are the same, no need to update."
+                                which makes "update_option_{$option}" not be triggered when there are no changes
+                                @see wp-includes/option.php
+                            -->
+                            <input type="hidden" name="<?php echo self::SETTINGS_FIELD?>[last_saved_timestamp]" value="<?php echo time() ?>">
+                            <!-- Panels -->
+                            <?php
+                            $sectionClass = $printWithTabs ? 'tab-content' : '';
+                            \settings_fields(self::SETTINGS_FIELD);
+                            foreach ($items as $item) {
+                                $sectionStyle = '';
+                                $maybeTitle = $printWithTabs
+                                    ? sprintf(
+                                        '<h2>%s</h2>',
+                                        $item['name']
+                                    ) : sprintf(
+                                        '<br/><hr/><br/><h2 id="%s">%s</h2>',
+                                        $item['id'],
+                                        $item['name']
+                                    );
+                                if ($printWithTabs) {
+                                    $sectionStyle = sprintf(
+                                        'display: %s;',
+                                        $item['id'] === $activeModuleID ? 'block' : 'none'
+                                    );
+                                }
+                                ?>
+                                <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
+                                    <?php echo $maybeTitle ?>
+                                    <table class="form-table">
+                                        <?php \do_settings_fields(self::SETTINGS_FIELD, $this->getSettingsFieldForModule($item['id'])) ?>
+                                    </table>
+                                </div>
+                                <?php
+                            }
+                            \submit_button();
+                            ?>
+                        </form>
+            <?php if ($printWithTabs) : ?>
+                    </div> <!-- class="nav-tab-content" -->
+                </div> <!-- class="nav-tab-container" -->
+            <?php endif; ?>
         </div>
         <?php
     }

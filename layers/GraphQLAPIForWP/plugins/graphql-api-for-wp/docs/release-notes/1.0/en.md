@@ -25,6 +25,14 @@ Documentation for the corresponding PRO features can be visualized in the plugin
 
 ![Clicking on "View details" displays the documentation](../../images/releases/v1.0/pro-documentation-schema-configuration-modal.png)
 
+## The Settings page has tabs displayed vertically
+
+Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
+
+Now, the Settings page displays the tabs vertically, making it easier to browse them:
+
+![Settings page](../../images/releases/v1.0/settings-page.png)
+
 ## Fixed
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)

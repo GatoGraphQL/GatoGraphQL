@@ -6,10 +6,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.0 - DATE
 
-### Added
+### Improvements
 
 - Browse "Additional Documentation" when editing a Schema Configuration ([#2052](https://github.com/leoloso/PoP/pull/2052))
 - Added documentation for PRO modules (provided by the GraphQL API PRO plugin, released alongside the GraphQL API for WordPress plugin's v1.0), and their corresponding Schema Configuration functionalities ([#2062](https://github.com/leoloso/PoP/pull/2062))
+- The Settings page has tabs displayed vertically ([#2069](https://github.com/leoloso/PoP/pull/2069))
 
 ### Fixed
 
