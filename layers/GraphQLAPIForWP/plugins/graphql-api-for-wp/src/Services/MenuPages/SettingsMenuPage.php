@@ -242,11 +242,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             \settings_fields(self::SETTINGS_FIELD);
                             foreach ($items as $item) {
                                 $sectionStyle = '';
-                                $maybeTitle = $printWithTabs ? '' : sprintf(
-                                    '<hr/><h3 id="%s">%s</h3>',
-                                    $item['id'],
-                                    $item['name']
-                                );
+                                $maybeTitle = $printWithTabs
+                                    ? sprintf(
+                                        '<h2>%s</h2>',
+                                        $item['name']
+                                    ) : sprintf(
+                                        '<hr/><h3 id="%s">%s</h3>',
+                                        $item['id'],
+                                        $item['name']
+                                    );
                                 if ($printWithTabs) {
                                     $sectionStyle = sprintf(
                                         'display: %s;',
