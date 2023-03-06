@@ -10,7 +10,6 @@
 .graphql-api-tabpanel .nav-tab-wrapper > a.nav-tab {
     display: block;
     white-space: initial;
-    margin-left: 0;
     float: none;
     margin: 0;
 }
