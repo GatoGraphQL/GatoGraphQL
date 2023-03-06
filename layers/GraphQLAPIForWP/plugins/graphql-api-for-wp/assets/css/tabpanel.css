@@ -14,10 +14,9 @@
 
 .nav-tab-container {
     display: flex;
+    gap: 15px;
 }
 .nav-tab-container > .nav-tab-wrapper {
     flex: 0 0 200px;
-}
-.wrap .nav-tab-container > h2.nav-tab-wrapper {
-    margin: 0 15px 0 0;
+    margin: 0;
 }
