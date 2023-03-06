@@ -12,6 +12,7 @@
     white-space: initial;
     margin-left: 0;
     float: none;
+    margin: 0;
 }
 
 .graphql-api-tabpanel .nav-tab-container {
