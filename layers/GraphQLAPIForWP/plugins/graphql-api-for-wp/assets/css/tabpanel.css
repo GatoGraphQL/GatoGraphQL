@@ -12,6 +12,8 @@
     white-space: initial;
     float: none;
     margin: 0;
+    /* border-top: 0; */
+    border-bottom: 0;
 }
 
 .graphql-api-tabpanel .nav-tab-container {
