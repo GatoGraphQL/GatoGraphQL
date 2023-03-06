@@ -226,26 +226,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
-        /** @var GraphQLClientsForWPModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
-        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
-            $clientPath = $moduleConfiguration->getGraphiQLClientEndpoint();
-            $submenu[$menuName][] = [
-                __('GraphiQL (public client)', 'graphql-api'),
-                'read',
-                home_url($clientPath),
-            ];
-        }
-
-        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
-            $clientPath = $moduleConfiguration->getVoyagerClientEndpoint();
-            $submenu[$menuName][] = [
-                __('Interactive Schema (public client)', 'graphql-api'),
-                'read',
-                home_url($clientPath),
-            ];
-        }
-
         $recipesMenuPage = $this->getRecipesMenuPage();
         /**
          * @var callable
@@ -283,6 +263,26 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             ) {
                 $aboutMenuPage->setHookName($hookName);
             }
+        }
+
+        /** @var GraphQLClientsForWPModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
+        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
+            $clientPath = $moduleConfiguration->getGraphiQLClientEndpoint();
+            $submenu[$menuName][] = [
+                __('GraphiQL (public client)', 'graphql-api'),
+                'read',
+                home_url($clientPath),
+            ];
+        }
+
+        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
+            $clientPath = $moduleConfiguration->getVoyagerClientEndpoint();
+            $submenu[$menuName][] = [
+                __('Interactive Schema (public client)', 'graphql-api'),
+                'read',
+                home_url($clientPath),
+            ];
         }
     }
 
