@@ -109,10 +109,17 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 )
             );
 
+            // Hide the title from the content, as it's already shown below
+            $recipeContent = str_replace(
+                '<h1>',
+                '<h1 style="display: none;">',
+                $recipeContent
+            );
+
             $markdownContent .= sprintf(
                 <<<HTML
                     <div id="%s" class="%s" style="%s">
-                        <!--<h2>%s</h2><hr/>-->
+                        <h2>%s</h2><hr/>
                         %s
                     </div>
                 HTML,
