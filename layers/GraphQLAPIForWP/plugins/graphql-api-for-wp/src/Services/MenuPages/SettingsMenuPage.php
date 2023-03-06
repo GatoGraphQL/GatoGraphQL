@@ -247,7 +247,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                         '<h2>%s</h2>',
                                         $item['name']
                                     ) : sprintf(
-                                        '<hr/><h3 id="%s">%s</h3>',
+                                        '<br/><hr/><br/><h2 id="%s">%s</h2>',
                                         $item['id'],
                                         $item['name']
                                     );
