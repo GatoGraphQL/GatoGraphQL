@@ -116,6 +116,13 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 $recipeContent
             );
 
+            // @todo Remove this
+            $recipeContent = str_replace(
+                '<ul>',
+                sprintf('<ul style="%s">', 'list-style: initial; padding-left: 15px;'),
+                $recipeContent
+            );
+
             $markdownContent .= sprintf(
                 <<<HTML
                     <div id="%s" class="%s" style="%s">
