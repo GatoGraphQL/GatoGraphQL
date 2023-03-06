@@ -29,11 +29,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         $markdownContent = '';
         $recipeEntries = [
             [
-                'any-built-in-scalar',
+                'sample-recipe-1',
                 'Any built-in scalar',
             ],
             [
-                'oneof-input-object',
+                'sample-recipe-2',
                 'OneOf Input Object',
             ],
         ];
