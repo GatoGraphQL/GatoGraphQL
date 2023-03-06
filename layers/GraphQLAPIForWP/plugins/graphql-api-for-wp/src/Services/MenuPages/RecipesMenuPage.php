@@ -30,6 +30,10 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     {
         $recipeEntries = [
             [
+                'intro',
+                'Intro',
+            ],
+            [
                 'sample-recipe-1',
                 'Sample Recipe 1',
             ],
@@ -57,17 +61,13 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             <<<HTML
             <div id="%s" class="%s">
                 <h1>%s</h1>
-                <p>%s</p>
-                <p>%s</p>
                 <div class="nav-tab-container">
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
             HTML,
             'graphql-api-recipes',
             $class,
-            \__('GraphQL API - Documentation: Use Cases, Best Practices, and Recipes', 'graphql-api'),
-            \__('The GraphQL API is a productivity tool for interacting with data in your WordPress site, allowing you to: query data to create headless sites; expose public or private APIs; synchronize content across sites; automate tasks; complement the WP-CLI to execute admin tasks; search/replace content for site migrations; and much more.', 'graphql-api'),
-            \__('The following are descriptions of how to best make use of this tool, and of GraphQL in general, to accomplish your needs.', 'graphql-api'),
+            \__('GraphQL API - Documentation: Use Cases, Best Practices, and Recipes', 'graphql-api')
         );
 
         foreach ($recipeEntries as $recipeEntry) {
