@@ -26,22 +26,22 @@
     gap: 15px;
 }
 .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
-    flex: 0 0 150px;
+    flex: 0 0 160px;
     overflow: auto;
     max-height: calc(100vh - 120px);
 }
 @media (min-width: 600px) {
     .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
-        flex: 0 0 200px;
+        flex: 0 0 190px;
     }
 }
 @media (min-width: 783px) {
     .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
-        flex: 0 0 250px;
+        flex: 0 0 220px;
     }
 }
 @media (min-width: 961px) {
     .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
-        flex: 0 0 300px;
+        flex: 0 0 250px;
     }
 }
