@@ -57,13 +57,15 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             <<<HTML
             <div id="%s" class="%s">
                 <h1>%s</h1>
+                <p>%s</p>
                 <div class="nav-tab-container">
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
             HTML,
             'graphql-api-recipes',
             $class,
-            \__('GraphQL API Documentation: Use Cases, Best Practices, and Recipes', 'graphql-api')
+            \__('GraphQL API Documentation: Use Cases, Best Practices, and Recipes', 'graphql-api'),
+            \__('Sample description', 'graphql-api'),
         );
 
         foreach ($recipeEntries as $recipeEntry) {
