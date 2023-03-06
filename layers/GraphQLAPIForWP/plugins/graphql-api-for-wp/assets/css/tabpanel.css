@@ -30,6 +30,7 @@
     padding-top: 0;
     flex: 0 0 160px;
     overflow: auto;
+    height: 100%;
     max-height: calc(100vh - 120px);
 }
 @media (min-width: 600px) {
