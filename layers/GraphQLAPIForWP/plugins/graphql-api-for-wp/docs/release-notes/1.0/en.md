@@ -31,7 +31,7 @@ Due to the great number of modules in the plugin, the Settings page required sev
 
 Now, the Settings page displays the tabs vertically, making it easier to browse them:
 
-![Clicking on "View details" displays the documentation](../../images/releases/v1.0/settings-page.png)
+![Settings page](../../images/releases/v1.0/settings-page.png)
 
 ## Fixed
 
