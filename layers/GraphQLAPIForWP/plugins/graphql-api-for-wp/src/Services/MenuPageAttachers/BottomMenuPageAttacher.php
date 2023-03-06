@@ -254,8 +254,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('Doc: Use Cases, Best Practices and Recipes', 'graphql-api'),
-                __('Doc: Use Cases, Best Practices and Recipes', 'graphql-api'),
+                __('ℹ️ Use Cases, Best Practices and Recipes', 'graphql-api'),
+                __('ℹ️ Use Cases, Best Practices and Recipes', 'graphql-api'),
                 'manage_options',
                 $recipesMenuPage->getScreenID(),
                 $callable
