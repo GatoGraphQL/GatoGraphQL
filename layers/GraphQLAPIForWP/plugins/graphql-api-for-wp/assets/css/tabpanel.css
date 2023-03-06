@@ -24,8 +24,10 @@
 .graphql-api-tabpanel.vertical-tabs .nav-tab-container {
     display: flex;
     gap: 15px;
+    padding-top: 9px;
 }
 .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
+    padding-top: 0;
     flex: 0 0 160px;
     overflow: auto;
     max-height: calc(100vh - 120px);
