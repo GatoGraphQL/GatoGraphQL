@@ -244,7 +244,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 $sectionStyle = '';
                                 $maybeTitle = $printWithTabs
                                     ? sprintf(
-                                        '<h2>%s</h2>',
+                                        '<h2>%s</h2><hr/>',
                                         $item['name']
                                     ) : sprintf(
                                         '<br/><hr/><br/><h2 id="%s">%s</h2>',
