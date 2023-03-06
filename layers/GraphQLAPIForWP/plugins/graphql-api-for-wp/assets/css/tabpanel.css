@@ -20,6 +20,8 @@
 }
 .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
     flex: 0 0 150px;
+    overflow: auto;
+    max-height: calc(100vh - 120px);
 }
 @media (min-width: 600px) {
     .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
