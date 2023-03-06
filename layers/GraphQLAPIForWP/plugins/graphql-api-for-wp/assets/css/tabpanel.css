@@ -7,32 +7,32 @@
     border-right: 1px solid #f0f0f1;
 }
 
-.nav-tab-wrapper > a.nav-tab {
+.graphql-api-tabpanel .nav-tab-wrapper > a.nav-tab {
     display: block;
     white-space: initial;
     margin-left: 0;
     float: none;
 }
 
-.nav-tab-container {
+.graphql-api-tabpanel .nav-tab-container {
     display: flex;
     gap: 15px;
 }
-.nav-tab-container > .nav-tab-wrapper {
+.graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
     flex: 0 0 150px;
 }
 @media (min-width: 600px) {
-    .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 200px;
     }
 }
 @media (min-width: 800px) {
-    .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 250px;
     }
 }
 @media (min-width: 1000px) {
-    .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 300px;
     }
 }
