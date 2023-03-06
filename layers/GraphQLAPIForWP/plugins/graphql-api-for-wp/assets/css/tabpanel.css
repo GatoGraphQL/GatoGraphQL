@@ -3,6 +3,8 @@
 */
 .graphql-api-tabpanel .nav-tab-active:focus {
     box-shadow: none;
+    border-bottom: 0;
+    border-right: 1px solid #f0f0f1;
 }
 
 .nav-tab-wrapper > a.nav-tab {
