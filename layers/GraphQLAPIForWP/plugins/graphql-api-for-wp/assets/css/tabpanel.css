@@ -4,3 +4,20 @@
 .graphql-api-tabpanel .nav-tab-active:focus {
     box-shadow: none;
 }
+
+.nav-tab-wrapper > a.nav-tab {
+    display: block;
+    white-space: initial;
+    margin-left: 0;
+    float: none;
+}
+
+.nav-tab-container {
+    display: flex;
+}
+.nav-tab-container > .nav-tab-wrapper {
+    flex: 0 0 200px;
+}
+.wrap .nav-tab-container > h2.nav-tab-wrapper {
+    margin: 0 15px 0 0;
+}
