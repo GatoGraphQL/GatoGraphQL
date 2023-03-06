@@ -196,7 +196,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $activeModuleID = $tab;
             }
         }
-        $class = 'wrap';
+        $class = 'wrap vertical-tabs';
         if ($printWithTabs) {
             $class .= ' graphql-api-tabpanel';
         }

@@ -1,12 +1,19 @@
 /**
-* Override the box-shadow added to a:focus, when clicking on the tab
-*/
+ * Override the box-shadow added to a:focus, when clicking on the tab
+ */
 .graphql-api-tabpanel .nav-tab-active {
+    box-shadow: none;
+}
+
+/**
+ * Settings page: Make the tabs vertical
+ */
+.graphql-api-tabpanel.vertical-tabs .nav-tab-active {
     box-shadow: none;
     border-right: 0;
 }
 
-.graphql-api-tabpanel .nav-tab-wrapper > a.nav-tab {
+.graphql-api-tabpanel.vertical-tabs .nav-tab-wrapper > a.nav-tab {
     display: block;
     white-space: initial;
     float: none;
@@ -14,27 +21,27 @@
     border-bottom: 0;
 }
 
-.graphql-api-tabpanel .nav-tab-container {
+.graphql-api-tabpanel.vertical-tabs .nav-tab-container {
     display: flex;
     gap: 15px;
 }
-.graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
+.graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
     flex: 0 0 150px;
     overflow: auto;
     max-height: calc(100vh - 120px);
 }
 @media (min-width: 600px) {
-    .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 200px;
     }
 }
 @media (min-width: 783px) {
-    .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 250px;
     }
 }
 @media (min-width: 961px) {
-    .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 300px;
     }
 }
