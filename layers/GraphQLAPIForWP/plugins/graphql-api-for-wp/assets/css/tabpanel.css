@@ -19,5 +19,20 @@
     gap: 15px;
 }
 .nav-tab-container > .nav-tab-wrapper {
-    flex: 0 0 200px;
+    flex: 0 0 150px;
+}
+@media (min-width: 600px) {
+    .nav-tab-container > .nav-tab-wrapper {
+        flex: 0 0 200px;
+    }
+}
+@media (min-width: 800px) {
+    .nav-tab-container > .nav-tab-wrapper {
+        flex: 0 0 250px;
+    }
+}
+@media (min-width: 1000px) {
+    .nav-tab-container > .nav-tab-wrapper {
+        flex: 0 0 300px;
+    }
 }
