@@ -130,4 +130,14 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         HTML;
         return $markdownContent;
     }
+
+    /**
+     * Enqueue the required assets and initialize the localized scripts
+     */
+    protected function enqueueAssets(): void
+    {
+        parent::enqueueAssets();
+
+        $this->enqueueTabpanelAssets();
+    }
 }
