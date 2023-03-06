@@ -26,12 +26,12 @@
         flex: 0 0 200px;
     }
 }
-@media (min-width: 800px) {
+@media (min-width: 783px) {
     .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 250px;
     }
 }
-@media (min-width: 1000px) {
+@media (min-width: 961px) {
     .graphql-api-tabpanel .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 300px;
     }
