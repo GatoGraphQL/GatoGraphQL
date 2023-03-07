@@ -346,7 +346,10 @@ abstract class AbstractContentParser implements ContentParserInterface
                 while (str_starts_with($doc, '../')) {
                     $doc = substr($doc, 3);
                 }
-                $doc = substr($doc, 0, strrpos($doc, '/'));
+                $langPos = strrpos($doc, '/');
+                if ($langPos !== false) {
+                    $doc = substr($doc, 0, $langPos);
+                }
 
                 // The URL is the current one, plus attr to open the .md file
                 // in a modal window
