@@ -18,4 +18,6 @@ class ModuleSettingOptions
     public final const DEFAULT_VALUE = 'default-value';
     public final const VALUE_FOR_SINGLE_ENDPOINT = 'value-for-single-endpoint';
     public final const VALUE_FOR_ADMIN_CLIENTS = 'value-for-admin-clients';
+
+    public final const RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR = 'reset-settings-safe-unsafe-behavior';
 }
