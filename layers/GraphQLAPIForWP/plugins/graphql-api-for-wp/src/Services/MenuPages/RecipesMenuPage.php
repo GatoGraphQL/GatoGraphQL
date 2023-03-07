@@ -83,11 +83,13 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
+            $recipeEntryIsPRO = $recipeEntry[2] ?? false;
+
             $markdownContent .= sprintf(
                 '<a href="#%s" class="nav-tab %s">%s</a>',
                 $recipeEntryName,
                 $recipeEntryName === $activeRecipeName ? 'nav-tab-active' : '',
-                $recipeEntryTitle
+                $this->getRecipeTitleForNavbar($recipeEntryTitle, $recipeEntryIsPRO)
             );
         }
 
@@ -149,7 +151,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                     $recipeEntryName === $activeRecipeName ? 'block' : 'none'
                 ),
                 $recipeEntryTitle,
-                $recipeContent
+                $this->getRecipeContent($recipeContent, $recipeEntryIsPRO)
             );
         }
 
@@ -159,6 +161,20 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         </div>
         HTML;
         return $markdownContent;
+    }
+
+    protected function getRecipeTitleForNavbar(
+        string $recipeEntryTitle,
+        bool $recipeEntryIsPRO,
+    ): string {
+        return $recipeEntryTitle;
+    }
+
+    protected function getRecipeContent(
+        string $recipeContent,
+        bool $recipeEntryIsPRO,
+    ): string {
+        return $recipeContent;
     }
 
     /**
