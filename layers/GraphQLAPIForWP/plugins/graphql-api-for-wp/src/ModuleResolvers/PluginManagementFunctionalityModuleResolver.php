@@ -105,7 +105,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $option
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Reset all values stored in the Settings, and define the default behavior of the GraphQL API (before the new settings are stored): safe or unsafe.', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    '%s<br/><br/>%s',
+                    \__('Reset all values stored in the Settings page, and define what default setting values will the GraphQL API use: either "safe" (the default option), or "unsafe".', 'graphql-api'),
+                ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
                     '' => \__('Select', 'graphql-api'),
