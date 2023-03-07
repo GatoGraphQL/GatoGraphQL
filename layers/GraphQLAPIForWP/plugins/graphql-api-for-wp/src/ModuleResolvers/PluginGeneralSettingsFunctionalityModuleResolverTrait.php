@@ -22,6 +22,6 @@ trait PluginGeneralSettingsFunctionalityModuleResolverTrait
      */
     public function getModuleType(string $module): string
     {
-        return ModuleTypeResolver::PLUGIN_MANAGEMENT;
+        return ModuleTypeResolver::PLUGIN_GENERAL_SETTINGS;
     }
 }
