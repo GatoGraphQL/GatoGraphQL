@@ -66,7 +66,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             }
         }
         $class = 'wrap vertical-tabs graphql-api-tabpanel';
-        
+
         $markdownContent = sprintf(
             <<<HTML
             <div id="%s" class="%s">
@@ -102,7 +102,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
-            
+
             $recipeEntryRelativePathDir = ($recipeEntryIsPRO ? 'docs-pro' : 'docs') . '/recipes';
             $recipeContent = $this->getMarkdownContent(
                 $recipeEntryName,
