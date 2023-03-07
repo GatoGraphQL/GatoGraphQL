@@ -7,14 +7,14 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\ContentParserOptions;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
+use GraphQLAPI\GraphQLAPI\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractDocsMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\OpenInModalTriggerMenuPageTrait;
 
 class RecipesMenuPage extends AbstractDocsMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
-    use PluginMarkdownContentRetrieverTrait;
+    use NoDocsFolderPluginMarkdownContentRetrieverTrait;
 
     public function getMenuPageSlug(): string
     {
@@ -31,15 +31,28 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         $recipeEntries = [
             [
                 'intro',
+                'docs/recipes',
                 'Intro',
             ],
             [
                 'sample-recipe-1',
+                'docs/recipes',
                 'Sample Recipe 1',
             ],
             [
                 'sample-recipe-2',
+                'docs/recipes',
                 'Sample Recipe 2',
+            ],
+            [
+                'sample-recipe-3',
+                'docs-pro/recipes',
+                'Sample Recipe 3',
+            ],
+            [
+                'sample-recipe-4',
+                'docs-pro/recipes',
+                'Sample Recipe 4',
             ],
         ];
         // By default, focus on the first recipe
@@ -72,7 +85,8 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
-            $recipeEntryTitle = $recipeEntry[1];
+            // $recipeEntryRelativePathDir = $recipeEntry[1];
+            $recipeEntryTitle = $recipeEntry[2];
             $markdownContent .= sprintf(
                 '<a href="#%s" class="nav-tab %s">%s</a>',
                 $recipeEntryName,
@@ -93,11 +107,12 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
-            $recipeEntryTitle = $recipeEntry[1];
+            $recipeEntryRelativePathDir = $recipeEntry[1];
+            $recipeEntryTitle = $recipeEntry[2];
 
             $recipeContent = $this->getMarkdownContent(
-                'recipes/' . $recipeEntryName,
-                '',
+                $recipeEntryName,
+                $recipeEntryRelativePathDir,
                 [
                     ContentParserOptions::TAB_CONTENT => false,
                 ]
