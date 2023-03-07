@@ -19,6 +19,7 @@ use PoP\Root\App;
 class SettingsMenuPage extends AbstractPluginMenuPage
 {
     use UseTabpanelMenuPageTrait;
+    use UseDocsMenuPageTrait;
 
     public final const FORM_ORIGIN = 'form-origin';
     public final const SETTINGS_FIELD = 'graphql-api-settings';
@@ -283,6 +284,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function enqueueAssets(): void
     {
         parent::enqueueAssets();
+
+        $this->enqueueDocsAssets();
 
         if ($this->printWithTabs()) {
             $this->enqueueTabpanelAssets();
