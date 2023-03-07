@@ -109,10 +109,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     )
                 ) {
                     $values = array_intersect_key(
+                        $values,
                         [
                             $resetSettingsOptionName => ''
-                        ],
-                        $values
+                        ]
                     );
                 } else {
                     /**
