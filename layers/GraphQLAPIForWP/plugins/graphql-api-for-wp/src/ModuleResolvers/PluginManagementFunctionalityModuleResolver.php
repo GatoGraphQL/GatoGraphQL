@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
-use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsFormElements;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -114,9 +113,9 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $resetButtonName = sprintf(
                     '%s[%s]',
                     SettingsMenuPage::SETTINGS_FIELD,
-                    ResetSettingsFormElements::BUTTON_ID
+                    SettingsMenuPage::RESET_SETTINGS_BUTTON_ID
                 );
-                $buttonWrapperID = ResetSettingsFormElements::BUTTON_ID . '-wrapper';
+                $buttonWrapperID = SettingsMenuPage::RESET_SETTINGS_BUTTON_ID . '-wrapper';
                 $resetSettingsButtonsHTML = sprintf(
                     '<p class="submit"><a href="#" onclick="document.getElementById(\'%s\').style.display=\'block\';return false;" class="button secondary">%s</a></p>',
                     $buttonWrapperID,
