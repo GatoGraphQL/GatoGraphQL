@@ -337,7 +337,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Behavior', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Are the entries being allowed or denied access to?<ul><li>👉🏽 Allow access: only the configured entries can be accessed, and no other can.</li><li>👉🏽 Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Are the entries being allowed or denied access to?<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
                     Behaviors::ALLOW => \__('Allow access', 'graphql-api'),
