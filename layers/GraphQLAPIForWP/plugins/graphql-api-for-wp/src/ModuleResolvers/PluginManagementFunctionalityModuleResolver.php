@@ -118,7 +118,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                     '</li><li>',
                                     [
                                         \__('The single endpoint is disabled', 'graphql-api'),
-                                        \__('The “sensitive” data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema', 'graphql-api'),
+                                        \__('The “sensitive” data elements (eg: input field <code>status</code> to query posts with status <code>"draft"</code>) are not added to the schema', 'graphql-api'),
                                         \__('Only a few of settings options and meta keys (for posts, users, etc) can be queried', 'graphql-api'),
                                         \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
                                     ]
