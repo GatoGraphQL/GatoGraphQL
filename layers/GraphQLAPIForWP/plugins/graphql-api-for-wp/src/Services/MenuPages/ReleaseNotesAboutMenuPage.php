@@ -37,9 +37,4 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
     {
         return $this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
     }
-
-    protected function getRelativePathDir(): string
-    {
-        return 'release-notes';
-    }
 }
