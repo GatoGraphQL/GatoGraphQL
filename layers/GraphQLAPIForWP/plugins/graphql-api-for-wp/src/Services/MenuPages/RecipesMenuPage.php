@@ -93,15 +93,10 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             );
         }
 
-        $markdownContent .= sprintf(
-            <<<HTML
-                            </h2>
-                            <div class="nav-tab-content">
-            HTML,
-            'graphql-api-recipes',
-            $class,
-            \__('GraphQL API — Recipes', 'graphql-api')
-        );
+        $markdownContent .= <<<HTML
+                    </h2>
+                    <div class="nav-tab-content">
+        HTML;
 
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
