@@ -199,6 +199,10 @@ abstract class AbstractContentParser implements ContentParserInterface
             ],
             $options
         );
+        // Convert Markdown links: execute before appending path to anchors
+        if ($options[ContentParserOptions::SUPPORT_MARKDOWN_LINKS] ?? null) {
+            $htmlContent = $this->convertMarkdownLinks($htmlContent);
+        }
         // Add the path to the images
         if ($options[ContentParserOptions::APPEND_PATH_URL_TO_IMAGES] ?? null) {
             // Enable to override the path for images, to read them from
@@ -206,10 +210,6 @@ abstract class AbstractContentParser implements ContentParserInterface
             $imagePathURL = $options[self::PATH_URL_TO_DOCS] ?? $pathURL;
             $htmlContent = $this->appendPathURLToImages($imagePathURL, $htmlContent);
             $htmlContent = $this->appendPathURLToAnchors($imagePathURL, $htmlContent);
-        }
-        // Convert Markdown links: execute before appending path to anchors
-        if ($options[ContentParserOptions::SUPPORT_MARKDOWN_LINKS] ?? null) {
-            $htmlContent = $this->convertMarkdownLinks($htmlContent);
         }
         // Add the path to the anchors
         if ($options[ContentParserOptions::APPEND_PATH_URL_TO_ANCHORS] ?? null) {
