@@ -349,7 +349,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                  * The doc might be of this kind:
                  *
                  *   "../../release-notes/0.9/en"
-                 * 
+                 *
                  * It contains the language. This must be removed.
                  * The result must be:
                  *
