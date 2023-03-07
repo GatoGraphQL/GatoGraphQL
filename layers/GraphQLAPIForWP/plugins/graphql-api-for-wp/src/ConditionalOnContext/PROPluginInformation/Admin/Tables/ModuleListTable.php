@@ -6,10 +6,8 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Admin\
 
 use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable as UpstreamModuleListTable;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\PROPseudoModuleResolverInterface;
+use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\StaticHelpers\PROPluginStaticHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
-use PoP\ComponentModel\App;
 
 class ModuleListTable extends UpstreamModuleListTable
 {
@@ -45,10 +43,7 @@ class ModuleListTable extends UpstreamModuleListTable
     {
         $columnName = parent::column_name($item);
         if ($item['is-pro'] ?? false) {
-            return sprintf(
-                \__('🔒 %s', 'graphql-api'),
-                $columnName
-            );
+            return PROPluginStaticHelpers::getPROTitle($columnName);
         }
         return $columnName;
     }
@@ -60,16 +55,9 @@ class ModuleListTable extends UpstreamModuleListTable
     protected function getColumnActions(array $item): array
     {
         if ($item['is-pro'] ?? false) {
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             // Remove all previous items, only keep "Go PRO"
             $actions = [];
-            $actions['go-pro'] = \sprintf(
-                '<a href="%s" target="%s">%s</a>',
-                $moduleConfiguration->getPROPluginWebsiteURL(),
-                '_blank',
-                \__('Go PRO to unlock! 🔓', 'graphql-api')
-            );
+            $actions['go-pro'] = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML();
             return $actions;
         }
         return parent::getColumnActions($item);

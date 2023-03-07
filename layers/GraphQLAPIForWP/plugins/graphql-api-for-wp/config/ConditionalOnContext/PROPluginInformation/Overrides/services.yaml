@@ -6,3 +6,6 @@ services:
 
     GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage:
         class: \GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages\ModulesMenuPage
+
+    GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage:
+        class: \GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages\RecipesMenuPage
