@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Constants\ResetDBOptions;
+use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsFormElements;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -99,6 +100,30 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $moduleSettings = parent::getSettings($module);
         if ($module === self::PLUGIN_MANAGEMENT) {
+            $resetSettingsButtonsHTML = '';
+            /**
+             * Use `function_exists` because, when pressing on
+             * the button it will call options.php,
+             * and the function will not have been loaded yet!
+             */
+            if (function_exists('get_submit_button')) {
+                $buttonWrapperID = ResetSettingsFormElements::BUTTON_ID . '-wrapper';
+                $resetSettingsButtonsHTML = sprintf(
+                    '<p class="submit"><a href="#" onclick="document.getElementById(\'%s\').style.display=\'block\';return false;" class="button secondary">%s</a></p>',
+                    $buttonWrapperID,
+                    \__('Reset Settings', 'graphql-api')
+                );
+                $resetSettingsButtonsHTML .= sprintf(
+                    '<p id="%s" style="display: none;">%s</p>',
+                    $buttonWrapperID,
+                    get_submit_button(
+                        \__('Please confirm: Reset Settings', 'graphql-api'),
+                        'primary',
+                        ResetSettingsFormElements::BUTTON_ID,
+                        false
+                    )
+                );
+            }
             $option = self::OPTION_RESET_DB;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -141,25 +166,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             )
                         ]
                     ),
-                    /**
-                     * Use `function_exists` because, when pressing on
-                     * the button it will call options.php,
-                     * and the function will not have been loaded yet!
-                     */
-                    function_exists('get_submit_button')
-                        ? sprintf(
-                            '<p><a href="#" onclick="console.log(5);return false;" class="button secondary">%s</a></p>',
-                            \__('Reset Settings', 'graphql-api')
-                        ) . get_submit_button(
-                            \__('Please confirm: Reset Settings', 'graphql-api'),
-                            'primary',
-                            'submit-reset-settings',
-                            true,
-                            [
-                                'style' => 'display: none;'
-                            ]
-                        )
-                        : ''
+                    $resetSettingsButtonsHTML
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
