@@ -22,7 +22,7 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected string $baseDir = '';
     protected string $baseURL = '';
     protected string $docsFolder = '';
-    protected string $githubRepoDocsPathURL = '';
+    protected string $githubRepoDocsRootPathURL = '';
     protected bool $useDocsFolderInFileDir = true;
 
     private ?RequestHelperServiceInterface $requestHelperService = null;
@@ -32,19 +32,19 @@ abstract class AbstractContentParser implements ContentParserInterface
      * @param string|null $baseDir Where to look for the documentation
      * @param string|null $baseURL URL for the documentation
      * @param string|null $docsFolder folder under which the docs are stored
-     * @param string|null $githubRepoDocsPathURL GitHub repo URL, to retrieve images for PROD
+     * @param string|null $githubRepoDocsRootPathURL GitHub repo URL, to retrieve images for PROD
      */
     public function __construct(
         ?string $baseDir = null,
         ?string $baseURL = null,
         ?string $docsFolder = null,
-        ?string $githubRepoDocsPathURL = null,
+        ?string $githubRepoDocsRootPathURL = null,
         ?bool $useDocsFolderInFileDir = null,
     ) {
         $this->setBaseDir($baseDir);
         $this->setBaseURL($baseURL);
         $this->setDocsFolder($docsFolder);
-        $this->setGitHubRepoDocsPathURL($githubRepoDocsPathURL);
+        $this->setGitHubRepoDocsRootPathURL($githubRepoDocsRootPathURL);
         $this->setUseDocsFolderInFileDir($useDocsFolderInFileDir);
     }
 
@@ -98,9 +98,9 @@ abstract class AbstractContentParser implements ContentParserInterface
      * Inject the GitHub repo URL, to retrieve images for PROD.
      * If null, it uses the default value from the main plugin.
      */
-    public function setGitHubRepoDocsPathURL(?string $githubRepoDocsPathURL = null): void
+    public function setGitHubRepoDocsRootPathURL(?string $githubRepoDocsRootPathURL = null): void
     {
-        $this->githubRepoDocsPathURL = $githubRepoDocsPathURL ?? PluginStaticHelpers::getGitHubRepoDocsPathURL();
+        $this->githubRepoDocsRootPathURL = $githubRepoDocsRootPathURL ?? PluginStaticHelpers::getGitHubRepoDocsRootPathURL();
     }
 
     /**
@@ -158,7 +158,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         $pathURL = \trailingslashit($this->baseURL . $this->docsFolder) . $relativePathDir . $filename . '/';
         // Include the images from the GitHub repo, unless we are in DEV
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
-            $options[self::PATH_URL_TO_DOCS] = \trailingslashit($this->githubRepoDocsPathURL . $this->docsFolder) . $relativePathDir . $filename . '/';
+            $options[self::PATH_URL_TO_DOCS] = \trailingslashit($this->githubRepoDocsRootPathURL . $this->docsFolder) . $relativePathDir . $filename . '/';
         }
         return $this->processHTMLContent($htmlContent, $pathURL, $options);
     }

@@ -22,7 +22,7 @@ trait MarkdownContentRetrieverTrait
         $this->getMarkdownContentParser()->setBaseDir($this->getBaseDir());
         $this->getMarkdownContentParser()->setBaseURL($this->getBaseURL());
         $this->getMarkdownContentParser()->setDocsFolder($this->getDocsFolder());
-        $this->getMarkdownContentParser()->setGitHubRepoDocsPathURL($this->getGitHubRepoDocsPathURL());
+        $this->getMarkdownContentParser()->setGitHubRepoDocsRootPathURL($this->getGitHubRepoDocsRootPathURL());
         $this->getMarkdownContentParser()->setUseDocsFolderInFileDir($this->getUseDocsFolderInFileDir());
         try {
             return $this->getMarkdownContentParser()->getContent(
@@ -54,7 +54,7 @@ trait MarkdownContentRetrieverTrait
     /**
      * Get the GitHub repo URL, to retrieve images for PROD.
      */
-    abstract protected function getGitHubRepoDocsPathURL(): string;
+    abstract protected function getGitHubRepoDocsRootPathURL(): string;
 
     /**
      * Use `false` to pass the "docs" folder when requesting

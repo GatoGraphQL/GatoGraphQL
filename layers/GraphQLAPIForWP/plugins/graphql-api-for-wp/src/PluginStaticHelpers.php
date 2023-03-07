@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI;
 
 class PluginStaticHelpers
 {
-    public static function getGitHubRepoDocsPathURL(): string
+    public static function getGitHubRepoDocsRootPathURL(): string
     {
         $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
         $tag = str_ends_with($mainPluginVersion, '-dev')
