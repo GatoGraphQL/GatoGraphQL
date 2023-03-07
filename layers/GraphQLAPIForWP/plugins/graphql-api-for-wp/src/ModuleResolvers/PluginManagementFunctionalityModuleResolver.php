@@ -9,6 +9,8 @@ use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
+use function get_submit_button;
+
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
@@ -106,7 +108,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><ul><li>%s</li></ul>',
+                    '<p>%s</p><ul><li>%s</li></ul>%s',
                     \__('Reset all values stored in the Settings page, and define what default values will be used from now on:', 'graphql-api'),
                     implode(
                         '<br/></li><li>',
@@ -138,7 +140,19 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 )
                             )
                         ]
-                    )
+                    ),
+                    /**
+                     * Use `function_exists` because, when pressing on
+                     * the button it will call options.php,
+                     * and the function will not have been loaded yet!
+                     */
+                    function_exists('get_submit_button')
+                        ? get_submit_button(
+                            \__('Reset Settings (must re-confirm)', 'graphql-api'),
+                            'secondary',
+                            'submit-reset-settings',
+                        )
+                        : ''
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
