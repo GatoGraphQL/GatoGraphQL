@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+
 use function get_submit_button;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -19,6 +18,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     use PluginManagementFunctionalityModuleResolverTrait;
 
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
+
+    /**
+     * Setting options
+     */
+    public final const OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR = 'reset-settings-safe-unsafe-behavior';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -81,7 +85,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $defaultValues = [
             self::PLUGIN_MANAGEMENT => [
-                ModuleSettingOptions::RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR => '',
+                self::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR => '',
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -128,7 +132,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     )
                 );
             }
-            $option = ModuleSettingOptions::RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR;
+            $option = self::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

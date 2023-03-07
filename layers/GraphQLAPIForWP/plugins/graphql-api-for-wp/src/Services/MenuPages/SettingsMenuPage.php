@@ -93,7 +93,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             function (array $values): array {
                 $resetSettingsOptionName = $this->getPluginManagementFunctionalityModuleResolver()->getSettingOptionName(
                     PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
-                    ModuleSettingOptions::RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR
+                    PluginManagementFunctionalityModuleResolver::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR
                 );
                 /**
                  * 1st case: check that pressed on the "Reset Settings" button,
