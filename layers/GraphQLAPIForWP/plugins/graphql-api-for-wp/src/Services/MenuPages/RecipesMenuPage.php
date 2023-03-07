@@ -31,28 +31,25 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         $recipeEntries = [
             [
                 'intro',
-                'docs/recipes',
                 'Intro',
             ],
             [
                 'sample-recipe-1',
-                'docs/recipes',
                 'Sample Recipe 1',
             ],
             [
                 'sample-recipe-2',
-                'docs/recipes',
                 'Sample Recipe 2',
             ],
             [
                 'sample-recipe-3',
-                'docs-pro/recipes',
                 'Sample Recipe 3',
+                true,
             ],
             [
                 'sample-recipe-4',
-                'docs-pro/recipes',
                 'Sample Recipe 4',
+                true,
             ],
         ];
         // By default, focus on the first recipe
@@ -85,8 +82,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
-            // $recipeEntryRelativePathDir = $recipeEntry[1];
-            $recipeEntryTitle = $recipeEntry[2];
+            $recipeEntryTitle = $recipeEntry[1];
             $markdownContent .= sprintf(
                 '<a href="#%s" class="nav-tab %s">%s</a>',
                 $recipeEntryName,
@@ -107,9 +103,10 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
-            $recipeEntryRelativePathDir = $recipeEntry[1];
-            $recipeEntryTitle = $recipeEntry[2];
-
+            $recipeEntryTitle = $recipeEntry[1];
+            $recipeEntryIsPRO = $recipeEntry[2] ?? false;
+            
+            $recipeEntryRelativePathDir = ($recipeEntryIsPRO ? 'docs-pro' : 'docs') . '/recipes';
             $recipeContent = $this->getMarkdownContent(
                 $recipeEntryName,
                 $recipeEntryRelativePathDir,
