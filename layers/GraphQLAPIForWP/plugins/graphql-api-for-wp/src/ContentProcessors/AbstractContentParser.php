@@ -331,12 +331,29 @@ abstract class AbstractContentParser implements ContentParserInterface
                 if ($this->isAbsoluteURL($matches[1]) || $this->isMailto($matches[1])) {
                     return $matches[0];
                 }
+                $doc = $matches[1];
+                /**
+                 * The doc might be of this kind:
+                 *
+                 *   "../../release-notes/0.9/en"
+                 * 
+                 * It contains the relative path to the docs folder,
+                 * and the language. These must be removed. The
+                 * result must be:
+                 *
+                 *   "release-notes/0.9"
+                 */
+                while (str_starts_with($doc, '../')) {
+                    $doc = substr($doc, 3);
+                }
+                $doc = substr($doc, 0, strrpos($doc, '/'));
+
                 // The URL is the current one, plus attr to open the .md file
                 // in a modal window
                 $elementURL = \add_query_arg(
                     [
                         RequestParams::TAB => RequestParams::TAB_DOCS,
-                        RequestParams::DOC => $matches[1],
+                        RequestParams::DOC => $doc,
                         'TB_iframe' => 'true',
                     ],
                     $this->getRequestHelperService()->getRequestedFullURL()
