@@ -106,8 +106,39 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '%s<br/><br/>%s',
-                    \__('Reset all values stored in the Settings page, and define what default setting values will the GraphQL API use: either "safe" (the default option), or "unsafe".', 'graphql-api'),
+                    '%s<ul><li>%s</li></ul>',
+                    \__('Reset all values stored in the Settings page, and define what default values will be used from now on:', 'graphql-api'),
+                    implode(
+                        '<br/></li><li>',
+                        [
+                            sprintf(
+                                '%s<ul><li>%s</li></ul>',
+                                \__('<strong>Safe default settings</strong>, recommended to make a "live" site secure:', 'graphql-api'),
+                                implode(
+                                    '</li><li>',
+                                    [
+                                        \__('The single endpoint is disabled', 'graphql-api'),
+                                        \__('The “sensitive” data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema', 'graphql-api'),
+                                        \__('Only a few of settings options and meta keys (for posts, users, etc) can be queried', 'graphql-api'),
+                                        \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
+                                    ]
+                                )
+                            ),
+                            sprintf(
+                                '%s<ul><li>%s</li></ul>',
+                                \__('<strong>Unsafe default settings</strong>, recommended when building "static" sites, where the WordPress site is not exposed to the Internet:', 'graphql-api'),
+                                implode(
+                                    '</li><li>',
+                                    [
+                                        \__('The single endpoint is enabled', 'graphql-api'),
+                                        \__('The “sensitive” data elements are exposed in the schema', 'graphql-api'),
+                                        \__('All settings options and meta keys can be queried', 'graphql-api'),
+                                        \__('The number of entities that can be queried at once is unlimited', 'graphql-api'),
+                                    ]
+                                )
+                            )
+                        ]
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
