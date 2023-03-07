@@ -10,7 +10,7 @@ use PoP\ComponentModel\App;
 
 class PROPluginStaticHelpers
 {
-    public static function getLockedTitle(string $title): string
+    public static function getPROTitle(string $title): string
     {
         return sprintf(
             \__('🔒 %s', 'graphql-api'),

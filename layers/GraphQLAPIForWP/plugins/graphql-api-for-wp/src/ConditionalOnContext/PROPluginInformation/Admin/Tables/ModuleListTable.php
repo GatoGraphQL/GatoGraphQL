@@ -43,7 +43,7 @@ class ModuleListTable extends UpstreamModuleListTable
     {
         $columnName = parent::column_name($item);
         if ($item['is-pro'] ?? false) {
-            return PROPluginStaticHelpers::getLockedTitle($columnName);
+            return PROPluginStaticHelpers::getPROTitle($columnName);
         }
         return $columnName;
     }
