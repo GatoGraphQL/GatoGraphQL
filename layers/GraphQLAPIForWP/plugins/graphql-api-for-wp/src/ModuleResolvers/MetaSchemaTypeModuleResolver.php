@@ -222,8 +222,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s (one entry per line).', 'graphql-api');
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'graphql-api');
-            $ulStyle = 'list-style: initial; padding-left: 15px;';
-            $ulPlaceholder = '<ul style=" ' . $ulStyle . '"><li><code>%s</code></li></ul>';
+            $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $moduleDescriptions = [
                 self::SCHEMA_CUSTOMPOST_META => sprintf(
                     \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
