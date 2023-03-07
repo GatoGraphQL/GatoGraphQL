@@ -902,8 +902,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $entriesTitle = \__('Settings entries', 'graphql-api');
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'graphql-api');
-            $ulStyle = 'list-style: initial; padding-left: 15px;';
-            $ulPlaceholder = '<ul style=" ' . $ulStyle . '"><li><code>%s</code></li></ul>';
+            $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $moduleDescriptions = [
                 self::SCHEMA_SETTINGS => sprintf(
                     \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
