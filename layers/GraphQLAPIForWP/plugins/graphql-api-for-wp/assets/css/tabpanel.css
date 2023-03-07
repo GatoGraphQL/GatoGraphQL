@@ -33,6 +33,13 @@
     height: 100%;
     max-height: calc(100vh - 120px);
 }
+/**
+ * After saving the Settings, there'll be a "Settings saved." notice,
+ * which is 60 px high. Include it in the calculation.
+ */
+.graphql-api-tabpanel.vertical-tabs .notice + .nav-tab-container > .nav-tab-wrapper {
+    max-height: calc(100vh - 180px);
+}
 @media (min-width: 600px) {
     .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 190px;
