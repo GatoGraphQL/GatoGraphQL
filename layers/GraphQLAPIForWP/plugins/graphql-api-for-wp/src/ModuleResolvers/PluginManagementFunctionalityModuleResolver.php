@@ -22,7 +22,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     /**
      * Setting options
      */
-    public final const OPTION_RESET_DB = 'reset-db';
+    public final const OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR = 'reset-settings-safe-unsafe-behavior';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -85,7 +85,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $defaultValues = [
             self::PLUGIN_MANAGEMENT => [
-                self::OPTION_RESET_DB => '',
+                self::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR => '',
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -132,7 +132,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     )
                 );
             }
-            $option = self::OPTION_RESET_DB;
+            $option = self::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
