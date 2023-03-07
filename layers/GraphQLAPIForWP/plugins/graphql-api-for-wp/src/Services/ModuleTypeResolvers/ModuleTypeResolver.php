@@ -18,6 +18,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public final const FUNCTIONALITY = Plugin::NAMESPACE . '\functionality';
     public final const OPERATIONAL = Plugin::NAMESPACE . '\operational';
     public final const PERFORMANCE = Plugin::NAMESPACE . '\performance';
+    public final const PLUGIN_GENERAL_SETTINGS = Plugin::NAMESPACE . '\plugin-general-settings';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const SCHEMA_TYPE = Plugin::NAMESPACE . '\schema-type';
@@ -38,6 +39,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::FUNCTIONALITY,
             self::OPERATIONAL,
             self::PERFORMANCE,
+            self::PLUGIN_GENERAL_SETTINGS,
             self::PLUGIN_MANAGEMENT,
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_TYPE,
@@ -57,6 +59,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::FUNCTIONALITY => \__('Functionality', 'graphql-api'),
             self::OPERATIONAL => \__('Operational', 'graphql-api'),
             self::PERFORMANCE => \__('Performance', 'graphql-api'),
+            self::PLUGIN_GENERAL_SETTINGS => \__('General Settings', 'graphql-api'),
             self::PLUGIN_MANAGEMENT => \__('Plugin Management', 'graphql-api'),
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_TYPE => \__('Schema Type', 'graphql-api'),

@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
-trait PluginManagementFunctionalityModuleResolverTrait
+trait PluginGeneralSettingsFunctionalityModuleResolverTrait
 {
     /**
      * The priority to display the modules from this resolver in the Modules page.
@@ -22,6 +22,6 @@ trait PluginManagementFunctionalityModuleResolverTrait
      */
     public function getModuleType(string $module): string
     {
-        return ModuleTypeResolver::PLUGIN_MANAGEMENT;
+        return ModuleTypeResolver::PLUGIN_GENERAL_SETTINGS;
     }
 }

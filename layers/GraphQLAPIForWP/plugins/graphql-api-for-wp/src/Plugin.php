@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
@@ -42,8 +42,8 @@ class Plugin extends AbstractMainPlugin
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         if (
             !$userSettingsManager->getSetting(
-                PluginManagementFunctionalityModuleResolver::GENERAL,
-                PluginManagementFunctionalityModuleResolver::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE
+                PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE
             )
         ) {
             return;
@@ -106,8 +106,8 @@ class Plugin extends AbstractMainPlugin
                 'admin.php?page=%s&tab=%s',
                 $settingsMenuPage->getScreenID(),
                 $moduleRegistry
-                    ->getModuleResolver(PluginManagementFunctionalityModuleResolver::GENERAL)
-                    ->getID(PluginManagementFunctionalityModuleResolver::GENERAL)
+                    ->getModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
+                    ->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
             ));
             _e(sprintf(
                 '<div class="notice notice-success is-dismissible">' .

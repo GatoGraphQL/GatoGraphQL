@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
@@ -167,8 +167,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function printWithTabs(): bool
     {
         return $this->getUserSettingsManager()->getSetting(
-            PluginManagementFunctionalityModuleResolver::GENERAL,
-            PluginManagementFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
+            PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+            PluginGeneralSettingsFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
         );
     }
 
@@ -270,7 +270,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             \submit_button(
                                 \__('Save Changes (All)', 'graphql-api')
                             );
-                            ?>
+        ?>
                         </form>
             <?php if ($printWithTabs) : ?>
                     </div> <!-- class="nav-tab-content" -->

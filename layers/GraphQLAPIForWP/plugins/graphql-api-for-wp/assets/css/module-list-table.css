@@ -124,13 +124,26 @@
 .plugins .active.module-plugin-management td,
 .plugins .active.module-plugin-management th,
 .subsubsub a.module-type-plugin-management {
-    background-color: #fef9f7;
+    background-color: #fef7f8;
 }
 .plugin-update-tr.active.module-plugin-management td,
 .plugins .active.module-plugin-management th.check-column {
-    border-left-color: #d25400;
+    border-left-color: #e42127;
 }
 .subsubsub a.module-type-plugin-management {
+    border-color: #d20046;
+}
+
+.plugins .active.module-plugin-general-settings td,
+.plugins .active.module-plugin-general-settings th,
+.subsubsub a.module-type-plugin-general-settings {
+    background-color: #fef9f7;
+}
+.plugin-update-tr.active.module-plugin-general-settings td,
+.plugins .active.module-plugin-general-settings th.check-column {
+    border-left-color: #d25400;
+}
+.subsubsub a.module-type-plugin-general-settings {
     border-color: #d25400;
 }
 
