@@ -9,6 +9,8 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage as UpstreamRecipesM
 
 class RecipesMenuPage extends UpstreamRecipesMenuPage
 {
+    use UsePRODocsMenuPageTrait;
+
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
@@ -29,9 +31,23 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
             return $recipeContent;
         }
         return sprintf(
-            \__('<p>%s %s</p>', 'graphql-api'),
+            <<<HTML
+                <div class="go-pro-highlight">
+                    <p>%s %s</p>
+                </div>
+            HTML,
             \__('This recipe requires features available in the GraphQL API PRO.', 'graphql-api'),
             PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary')
         ) . $recipeContent;
+    }
+
+    /**
+     * Enqueue the required assets and initialize the localized scripts
+     */
+    protected function enqueueAssets(): void
+    {
+        parent::enqueueAssets();
+
+        $this->enqueuePRODocsAssets();
     }
 }
