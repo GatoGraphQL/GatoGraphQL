@@ -33,6 +33,14 @@ Now, the Settings page displays the tabs vertically, making it easier to browse 
 
 ![Settings page](../../images/releases/v1.0/settings-page.png)
 
+## Added documentation page "Use Cases, Best Practices, and Recipes"
+
+The new documentation page "Use Cases, Best Practices, and Recipes" has been added to the menu.
+
+It describes when it makes sense to use the GraphQL API and what's the best way to use it (and also GraphQL in general), and provides a handful of recipes (involving GraphQL queries) to help users achieve their goals.
+
+![Use Cases, Best Practices, and Recipes page](../../images/releases/v1.0/recipes-page.png)
+
 ## Fixed
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)
