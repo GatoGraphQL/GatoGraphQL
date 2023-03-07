@@ -6,13 +6,13 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Module
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolverTrait;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
-class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
+class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
-    use PluginManagementFunctionalityModuleResolverTrait;
+    use PluginGeneralSettingsFunctionalityModuleResolverTrait;
 
     public final const SCHEMA_EDITING_ACCESS = Plugin::NAMESPACE . '\schema-editing-access';
 

@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
-trait PluginManagementFunctionalityModuleResolverTrait
+trait PluginGeneralSettingsFunctionalityModuleResolverTrait
 {
     /**
      * The priority to display the modules from this resolver in the Modules page.

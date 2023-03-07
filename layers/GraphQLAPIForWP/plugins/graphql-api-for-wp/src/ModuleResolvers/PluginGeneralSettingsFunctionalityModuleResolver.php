@@ -11,10 +11,10 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use PoP\ComponentModel\App;
 
-class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
-    use PluginManagementFunctionalityModuleResolverTrait;
+    use PluginGeneralSettingsFunctionalityModuleResolverTrait;
 
     public final const GENERAL = Plugin::NAMESPACE . '\general';
 
