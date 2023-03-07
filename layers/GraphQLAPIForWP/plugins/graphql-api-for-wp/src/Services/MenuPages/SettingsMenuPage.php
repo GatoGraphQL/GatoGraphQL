@@ -270,7 +270,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             \submit_button(
                                 \__('Save Changes (All)', 'graphql-api')
                             );
-                            ?>
+        ?>
                         </form>
             <?php if ($printWithTabs) : ?>
                     </div> <!-- class="nav-tab-content" -->
