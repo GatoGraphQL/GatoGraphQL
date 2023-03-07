@@ -226,24 +226,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
-        $recipesMenuPage = $this->getRecipesMenuPage();
-        /**
-         * @var callable
-         */
-        $callable = [$recipesMenuPage, 'print'];
-        if (
-            $hookName = \add_submenu_page(
-                $menuName,
-                __('ℹ️ Use Cases, Best Practices and Recipes', 'graphql-api'),
-                __('ℹ️ Use Cases, Best Practices and Recipes', 'graphql-api'),
-                'manage_options',
-                $recipesMenuPage->getScreenID(),
-                $callable
-            )
-        ) {
-            $recipesMenuPage->setHookName($hookName);
-        }
-
         /**
          * Only show the About page when actually loading it
          * So it doesn't appear on the menu, but it's still available
@@ -263,6 +245,24 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             ) {
                 $aboutMenuPage->setHookName($hookName);
             }
+        }
+
+        $recipesMenuPage = $this->getRecipesMenuPage();
+        /**
+         * @var callable
+         */
+        $callable = [$recipesMenuPage, 'print'];
+        if (
+            $hookName = \add_submenu_page(
+                $menuName,
+                __('ℹ️ Use Cases, Best Practices and Recipes', 'graphql-api'),
+                __('ℹ️ Use Cases, Best Practices and Recipes', 'graphql-api'),
+                'manage_options',
+                $recipesMenuPage->getScreenID(),
+                $callable
+            )
+        ) {
+            $recipesMenuPage->setHookName($hookName);
         }
 
         /** @var GraphQLClientsForWPModuleConfiguration */
