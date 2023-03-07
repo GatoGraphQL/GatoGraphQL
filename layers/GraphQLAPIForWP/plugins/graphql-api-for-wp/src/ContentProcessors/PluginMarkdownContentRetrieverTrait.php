@@ -36,9 +36,9 @@ trait PluginMarkdownContentRetrieverTrait
     /**
      * Get the GitHub repo URL, to retrieve images for PROD.
      */
-    protected function getGitHubRepoDocsPathURL(): string
+    protected function getGitHubRepoDocsRootPathURL(): string
     {
-        return PluginStaticHelpers::getGitHubRepoDocsPathURL();
+        return PluginStaticHelpers::getGitHubRepoDocsRootPathURL();
     }
 
     /**

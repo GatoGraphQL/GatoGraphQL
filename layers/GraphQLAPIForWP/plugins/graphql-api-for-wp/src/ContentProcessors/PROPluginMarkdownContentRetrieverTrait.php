@@ -21,12 +21,12 @@ trait PROPluginMarkdownContentRetrieverTrait
     /**
      * Get the GitHub repo URL, to retrieve images for PROD.
      */
-    protected function getGitHubRepoDocsPathURL(): string
+    protected function getGitHubRepoDocsRootPathURL(): string
     {
         return str_replace(
             '/docs/',
             '/docs-pro/',
-            PluginStaticHelpers::getGitHubRepoDocsPathURL(),
+            PluginStaticHelpers::getGitHubRepoDocsRootPathURL(),
         );
     }
 }
