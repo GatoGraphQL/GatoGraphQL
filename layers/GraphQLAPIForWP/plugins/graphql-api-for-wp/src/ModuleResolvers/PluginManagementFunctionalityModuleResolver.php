@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ResetDBOptions;
+use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsFormElements;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
@@ -171,8 +171,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
                     '' => \__('Select', 'graphql-api'),
-                    ResetDBOptions::SAFE => \__('Reset settings, using "safe" default values', 'graphql-api'),
-                    ResetDBOptions::UNSAFE => \__('Reset settings, using "unsafe" default values', 'graphql-api'),
+                    ResetSettingsOptions::SAFE => \__('Reset settings, using "safe" default values', 'graphql-api'),
+                    ResetSettingsOptions::UNSAFE => \__('Reset settings, using "unsafe" default values', 'graphql-api'),
                 ],
             ];
         }
