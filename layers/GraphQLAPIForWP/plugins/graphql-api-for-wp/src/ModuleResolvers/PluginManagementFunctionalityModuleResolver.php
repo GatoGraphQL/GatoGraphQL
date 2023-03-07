@@ -162,7 +162,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     ),
                     Properties::TITLE => \__('$_SERVER property name to retrieve the client IP', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        '%s<br/><br/>%s<ul style="list-style: initial; padding-left: 15px;">%s</ul>',
+                        '%s<br/><br/>%s<ul>%s</ul>',
                         \__('The visitor\'s IP address is retrieved from under the <code>$_SERVER</code> global variable, by default under property <code>\'REMOTE_ADDR\'</code>; depending on the platform or hosting provider, a different property may need to be used.', 'graphql-api'),
                         \__('For instance:', 'graphql-api'),
                         '<li>' . implode(
