@@ -16,6 +16,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
     use UseTabpanelMenuPageTrait;
     use PrettyprintCodePageTrait;
     use MarkdownContentRetrieverTrait;
+    use UseDocsMenuPageTrait;
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -77,6 +78,8 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
     protected function enqueueAssets(): void
     {
         parent::enqueueAssets();
+
+        $this->enqueueDocsAssets();
 
         /**
          * Add styles to open the page in a modal
