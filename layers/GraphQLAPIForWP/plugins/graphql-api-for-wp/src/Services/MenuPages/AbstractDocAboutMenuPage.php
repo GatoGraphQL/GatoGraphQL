@@ -45,7 +45,21 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
             'sanitize_file_name_chars',
             $this->enableSpecialCharsForSanitization(...)
         );
+
         $filename = App::query(RequestParams::DOC, '');
+        $relativePathDir = $this->getRelativePathDir();
+
+        /**
+         * Move any potential "../" relative path from
+         * $filename to $relativePathDir.
+         *
+         * Eg: Links to release-notes .md files in wp-admin/admin.php?page=graphql_api_about
+         */
+        while (str_starts_with($filename, '../')) {
+            $filename = substr($filename, 3);
+            $relativePathDir .=  '/..';
+        }
+
         $doc = \sanitize_file_name($filename);
         remove_filter(
             'sanitize_file_name_chars',
@@ -53,7 +67,7 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
         );
         return $this->getMarkdownContent(
             $doc,
-            $this->getRelativePathDir()
+            $relativePathDir
         ) ?? sprintf(
             \__('Page \'%s\' does not exist', 'graphql-api'),
             $doc

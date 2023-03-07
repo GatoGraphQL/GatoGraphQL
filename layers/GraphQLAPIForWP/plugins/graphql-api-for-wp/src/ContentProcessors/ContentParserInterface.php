@@ -31,6 +31,13 @@ interface ContentParserInterface
     public function setGitHubRepoDocsPathURL(?string $githubRepoDocsPathURL = null): void;
 
     /**
+     * Use `false` to pass the "docs" folder when requesting
+     * the file to read (so can retrieve files from either
+     * "docs" or "docs-pro" folders)
+     */
+    public function setUseDocsFolderInFileDir(?bool $useDocsFolderInFileDir = null): void;
+
+    /**
      * Parse the file's Markdown into HTML Content
      *
      * @param string $relativePathDir Dir relative to the docs/en/ folder

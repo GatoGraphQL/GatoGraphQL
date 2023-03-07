@@ -23,6 +23,7 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected string $baseURL = '';
     protected string $docsFolder = '';
     protected string $githubRepoDocsPathURL = '';
+    protected bool $useDocsFolderInFileDir = true;
 
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?LocaleHelper $localeHelper = null;
@@ -38,11 +39,13 @@ abstract class AbstractContentParser implements ContentParserInterface
         ?string $baseURL = null,
         ?string $docsFolder = null,
         ?string $githubRepoDocsPathURL = null,
+        ?bool $useDocsFolderInFileDir = null,
     ) {
         $this->setBaseDir($baseDir);
         $this->setBaseURL($baseURL);
         $this->setDocsFolder($docsFolder);
         $this->setGitHubRepoDocsPathURL($githubRepoDocsPathURL);
+        $this->setUseDocsFolderInFileDir($useDocsFolderInFileDir);
     }
 
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
@@ -101,6 +104,16 @@ abstract class AbstractContentParser implements ContentParserInterface
     }
 
     /**
+     * Use `false` to pass the "docs" folder when requesting
+     * the file to read (so can retrieve files from either
+     * "docs" or "docs-pro" folders)
+     */
+    public function setUseDocsFolderInFileDir(?bool $useDocsFolderInFileDir = null): void
+    {
+        $this->useDocsFolderInFileDir = $useDocsFolderInFileDir ?? true;
+    }
+
+    /**
      * Parse the file's Markdown into HTML Content
      *
      * @param string $relativePathDir Dir relative to the /docs/${lang}/ folder
@@ -118,14 +131,14 @@ abstract class AbstractContentParser implements ContentParserInterface
             $relativePathDir = \trailingslashit($relativePathDir);
         }
         $localeLanguage = $this->getLocaleHelper()->getLocaleLanguage();
-        $localizeFile = \trailingslashit($this->getFileDir()) . $filename . '/' . $localeLanguage . '.' . $extension;
+        $localizeFile = \trailingslashit($this->getFileDir()) . $relativePathDir . $filename . '/' . $localeLanguage . '.' . $extension;
         if (file_exists($localizeFile)) {
             // First check if the localized version exists
             $file = $localizeFile;
         } else {
             // Otherwise, use the default language version
             $defaultDocsLanguage = $this->getDefaultDocsLanguage();
-            $file = \trailingslashit($this->getFileDir()) . $filename . '/' . $defaultDocsLanguage . '.' . $extension;
+            $file = \trailingslashit($this->getFileDir()) . $relativePathDir . $filename . '/' . $defaultDocsLanguage . '.' . $extension;
             // Make sure this file exists
             if (!file_exists($file)) {
                 throw new ContentNotExistsException(sprintf(
@@ -142,10 +155,10 @@ abstract class AbstractContentParser implements ContentParserInterface
             ));
         }
         $htmlContent = $this->getHTMLContent($fileContent);
-        $pathURL = \trailingslashit($this->baseURL . $this->docsFolder) . $filename . '/';
+        $pathURL = \trailingslashit($this->baseURL . $this->docsFolder) . $relativePathDir . $filename . '/';
         // Include the images from the GitHub repo, unless we are in DEV
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
-            $options[self::PATH_URL_TO_DOCS] = \trailingslashit($this->githubRepoDocsPathURL . $this->docsFolder) . $filename . '/';
+            $options[self::PATH_URL_TO_DOCS] = \trailingslashit($this->githubRepoDocsPathURL . $this->docsFolder) . $relativePathDir . $filename . '/';
         }
         return $this->processHTMLContent($htmlContent, $pathURL, $options);
     }
@@ -163,7 +176,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     protected function getFileDir(): string
     {
-        return $this->baseDir . '/' . $this->docsFolder;
+        return $this->baseDir . ($this->useDocsFolderInFileDir ? '/' . $this->docsFolder : '');
     }
 
     /**
@@ -336,16 +349,12 @@ abstract class AbstractContentParser implements ContentParserInterface
                  * The doc might be of this kind:
                  *
                  *   "../../release-notes/0.9/en"
-                 * 
-                 * It contains the relative path to the docs folder,
-                 * and the language. These must be removed. The
-                 * result must be:
                  *
-                 *   "release-notes/0.9"
+                 * It contains the language. This must be removed.
+                 * The result must be:
+                 *
+                 *   "../../release-notes/0.9"
                  */
-                while (str_starts_with($doc, '../')) {
-                    $doc = substr($doc, 3);
-                }
                 $langPos = strrpos($doc, '/');
                 if ($langPos !== false) {
                     $doc = substr($doc, 0, $langPos);
