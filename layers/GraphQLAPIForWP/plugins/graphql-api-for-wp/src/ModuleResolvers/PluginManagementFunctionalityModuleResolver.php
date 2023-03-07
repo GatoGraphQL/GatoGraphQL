@@ -106,13 +106,13 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '%s<ul><li>%s</li></ul>',
+                    '<p>%s</p><ul><li>%s</li></ul>',
                     \__('Reset all values stored in the Settings page, and define what default values will be used from now on:', 'graphql-api'),
                     implode(
                         '<br/></li><li>',
                         [
                             sprintf(
-                                '%s<ul><li>%s</li></ul>',
+                                '<p>%s</p><ul><li>%s</li></ul>',
                                 \__('<strong>Safe default settings</strong>, recommended to make a "live" site secure:', 'graphql-api'),
                                 implode(
                                     '</li><li>',
@@ -125,7 +125,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 )
                             ),
                             sprintf(
-                                '%s<ul><li>%s</li></ul>',
+                                '<p>%s</p><ul><li>%s</li></ul>',
                                 \__('<strong>Unsafe default settings</strong>, recommended when building "static" sites, where the WordPress site is not exposed to the Internet:', 'graphql-api'),
                                 implode(
                                     '</li><li>',
