@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsFormElements;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 
 use function get_submit_button;
 
@@ -107,6 +108,14 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
              * and the function will not have been loaded yet!
              */
             if (function_exists('get_submit_button')) {
+                /**
+                 * Have the reset button name be sent as part of the form
+                 */
+                $resetButtonName = sprintf(
+                    '%s[%s]',
+                    SettingsMenuPage::SETTINGS_FIELD,
+                    ResetSettingsFormElements::BUTTON_ID
+                );
                 $buttonWrapperID = ResetSettingsFormElements::BUTTON_ID . '-wrapper';
                 $resetSettingsButtonsHTML = sprintf(
                     '<p class="submit"><a href="#" onclick="document.getElementById(\'%s\').style.display=\'block\';return false;" class="button secondary">%s</a></p>',
@@ -119,7 +128,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     get_submit_button(
                         \__('Please confirm: Reset Settings', 'graphql-api'),
                         'primary',
-                        ResetSettingsFormElements::BUTTON_ID,
+                        $resetButtonName,
                         false
                     )
                 );
