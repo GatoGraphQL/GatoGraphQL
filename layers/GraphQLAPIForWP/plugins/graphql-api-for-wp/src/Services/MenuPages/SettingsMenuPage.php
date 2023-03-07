@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\Root\App;
 
@@ -23,9 +26,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     public final const FORM_ORIGIN = 'form-origin';
     public final const SETTINGS_FIELD = 'graphql-api-settings';
+    public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
+    private ?PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -44,6 +49,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         /** @var SettingsNormalizerInterface */
         return $this->settingsNormalizer ??= $this->instanceManager->getInstance(SettingsNormalizerInterface::class);
     }
+    final public function setPluginManagementFunctionalityModuleResolver(PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver): void
+    {
+        $this->pluginManagementFunctionalityModuleResolver = $pluginManagementFunctionalityModuleResolver;
+    }
+    final protected function getPluginManagementFunctionalityModuleResolver(): PluginManagementFunctionalityModuleResolver
+    {
+        /** @var PluginManagementFunctionalityModuleResolver */
+        return $this->pluginManagementFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginManagementFunctionalityModuleResolver::class);
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -59,16 +73,57 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         /**
          * Before saving the settings in the DB,
-         * transform the values:
+         * decide what it is that must be stored.
+         * There are 2 options.
          *
-         * - from string to bool/int
-         * - default value if input is empty
+         * 1. If button "submit-reset-settings" is sent,
+         * then the "Reset Settings" button has been pressed.
+         * Then remove all settings values, except for the
+         * safe/unsafe default value
+         * 
+         * 2. Otherwise, it's the normal Settings.
          */
         $option = self::SETTINGS_FIELD;
-        // \add_filter(
-        //     "pre_update_option_{$option}",
-        //     $this->normalizeSettings(...)
-        // );
+        \add_filter(
+            "pre_update_option_{$option}",
+            /**
+             * @param array<string,mixed> $values
+             * @return array<string,mixed>
+             */
+            function (array $values): array {
+                $resetSettingsOptionName = $this->getPluginManagementFunctionalityModuleResolver()->getSettingOptionName(
+                    PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+                    ModuleSettingOptions::RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR
+                );
+                /**
+                 * 1st case: check that pressed on the "Reset Settings" button,
+                 * and an actual "safe" or "unsafe" value was selected.
+                 */
+                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])
+                    && in_array(
+                        $values[$resetSettingsOptionName] ?? null,
+                        [
+                            ResetSettingsOptions::SAFE,
+                            ResetSettingsOptions::UNSAFE,
+                        ]
+                    )
+                ) {
+                    $values = array_intersect_key(
+                        [
+                            $resetSettingsOptionName => ''
+                        ],
+                        $values
+                    );
+                } else {
+                    /**
+                     * If haven't clicked on the "Reset Settings" button,
+                     * then do not override the whatever value was selected
+                     */
+                    unset($values[$resetSettingsOptionName]);
+                }
+                return $values;
+            }
+        );
 
         /**
          * After saving the settings in the DB:
