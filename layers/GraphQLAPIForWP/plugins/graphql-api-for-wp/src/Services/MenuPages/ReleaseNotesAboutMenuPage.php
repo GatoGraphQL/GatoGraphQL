@@ -37,4 +37,14 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
     {
         return $this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
     }
+
+    /**
+     * Any one document under release-notes. It doesn't matter
+     * which one, as all links will start with "../" anyway
+     */
+    protected function getRelativePathDir(): string
+    {
+        $anyDocumentFolder = '0.9';
+        return 'release-notes/' . $anyDocumentFolder;
+    }
 }

@@ -350,15 +350,11 @@ abstract class AbstractContentParser implements ContentParserInterface
                  *
                  *   "../../release-notes/0.9/en"
                  * 
-                 * It contains the relative path to the docs folder,
-                 * and the language. These must be removed. The
-                 * result must be:
+                 * It contains the language. This must be removed.
+                 * The result must be:
                  *
-                 *   "release-notes/0.9"
+                 *   "../../release-notes/0.9"
                  */
-                while (str_starts_with($doc, '../')) {
-                    $doc = substr($doc, 3);
-                }
                 $langPos = strrpos($doc, '/');
                 if ($langPos !== false) {
                     $doc = substr($doc, 0, $langPos);
