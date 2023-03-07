@@ -40,7 +40,7 @@ trait HasMarkdownDocumentationModuleResolverTrait
     {
         if ($markdownFilename = $this->getMarkdownFilename($module)) {
             return $this->getMarkdownContent(
-                'modules/' . $markdownFilename,
+                $markdownFilename,
                 'modules',
                 [
                     ContentParserOptions::TAB_CONTENT => true,
