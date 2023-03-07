@@ -147,10 +147,17 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                      * and the function will not have been loaded yet!
                      */
                     function_exists('get_submit_button')
-                        ? get_submit_button(
-                            \__('Reset Settings (must re-confirm)', 'graphql-api'),
-                            'secondary',
+                        ? sprintf(
+                            '<p><a href="#" onclick="console.log(5);return false;" class="button secondary">%s</a></p>',
+                            \__('Reset Settings', 'graphql-api')
+                        ) . get_submit_button(
+                            \__('Please confirm: Reset Settings', 'graphql-api'),
+                            'primary',
                             'submit-reset-settings',
+                            true,
+                            [
+                                'style' => 'display: none;'
+                            ]
                         )
                         : ''
                 ),
