@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
@@ -102,7 +102,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                  * Single endpoint is naturally disabled for PROD,
                  * unless the "unsafe defaults" are set.
                  */
-                return PluginEnvironment::areUnsafeDefaultsEnabled();
+                return BehaviorHelpers::areUnsafeDefaultsEnabled();
         }
         return parent::isEnabledByDefault($module);
     }

@@ -9,8 +9,8 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use WP_Post;
 
@@ -130,7 +130,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         // Lower the security constraints for the static app
-        $useUnsafe = PluginEnvironment::areUnsafeDefaultsEnabled();
+        $useUnsafe = BehaviorHelpers::areUnsafeDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_CONFIGURATION => [
                 ModuleSettingOptions::DEFAULT_VALUE => ModuleSettingOptionValues::NO_VALUE_ID,
