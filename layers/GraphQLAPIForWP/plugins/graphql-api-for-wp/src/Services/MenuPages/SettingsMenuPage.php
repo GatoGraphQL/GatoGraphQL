@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
@@ -91,23 +89,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * @return array<string,mixed>
              */
             function (array $values): array {
-                $resetSettingsOptionName = $this->getPluginManagementFunctionalityModuleResolver()->getSettingOptionName(
-                    PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
-                    PluginManagementFunctionalityModuleResolver::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR
-                );
                 /**
                  * 1st case: check that pressed on the "Reset Settings" button,
                  * and an actual "safe" or "unsafe" value was selected.
                  */
-                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])
-                    && in_array(
-                        $values[$resetSettingsOptionName] ?? null,
-                        [
-                            ResetSettingsOptions::SAFE,
-                            ResetSettingsOptions::UNSAFE,
-                        ]
-                    )
-                ) {
+                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                    /**
+                     * Remove all settings, except the one indicating if to use
+                     * the "safe" or "unsafe" default behavior
+                     */
+                    $resetSettingsOptionName = $this->getPluginManagementFunctionalityModuleResolver()->getSettingOptionName(
+                        PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+                        PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                    );
                     $values = array_intersect_key(
                         $values,
                         [

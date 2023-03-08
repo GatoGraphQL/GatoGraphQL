@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 
 use function get_submit_button;
@@ -22,7 +23,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     /**
      * Setting options
      */
-    public final const OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR = 'reset-settings-safe-unsafe-behavior';
+    public final const OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR = 'use-safe-or-unsafe-default-behavior';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -85,7 +86,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $defaultValues = [
             self::PLUGIN_MANAGEMENT => [
-                self::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR => '',
+                self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR => PluginEnvironment::areUnsafeDefaultsEnabled(false) ? ResetSettingsOptions::UNSAFE : ResetSettingsOptions::SAFE,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -100,6 +101,58 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $moduleSettings = parent::getSettings($module);
         if ($module === self::PLUGIN_MANAGEMENT) {
+            $option = self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Use "safe" or "unsafe" default behavior for Settings', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    '<p>%s</p><br/><p>%s</p><ul><li>%s</li></ul>',
+                    \__('Define if to use the "safe" or "unsafe" default behavior for the Settings.', 'graphql-api'),
+                    \__('<em>Explanation:</em> When the Settings values have not been configured yet, the plugin uses default values. These can have one of of two behaviors, "safe" or "unsafe":', 'graphql-api'),
+                    implode(
+                        '<br/></li><li>',
+                        [
+                            sprintf(
+                                '<p>%s</p><ul><li>%s</li></ul>',
+                                \__('<strong>Safe default settings</strong>, recommended to make a "live" site secure:', 'graphql-api'),
+                                implode(
+                                    '</li><li>',
+                                    [
+                                        \__('The single endpoint is disabled', 'graphql-api'),
+                                        \__('The “sensitive” data elements (eg: input field <code>status</code> to query posts with status <code>"draft"</code>) are not added to the schema', 'graphql-api'),
+                                        \__('Only a few of settings options and meta keys (for posts, users, etc) can be queried', 'graphql-api'),
+                                        \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
+                                    ]
+                                )
+                            ),
+                            sprintf(
+                                '<p>%s</p><ul><li>%s</li></ul>',
+                                \__('<strong>Unsafe default settings</strong>, recommended when building "static" sites, where the WordPress site is not exposed to the Internet:', 'graphql-api'),
+                                implode(
+                                    '</li><li>',
+                                    [
+                                        \__('The single endpoint is enabled', 'graphql-api'),
+                                        \__('The “sensitive” data elements are exposed in the schema', 'graphql-api'),
+                                        \__('All settings options and meta keys can be queried', 'graphql-api'),
+                                        \__('The number of entities that can be queried at once is unlimited', 'graphql-api'),
+                                    ]
+                                )
+                            )
+                        ]
+                    ),
+                ),
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => [
+                    '' => \__('Select', 'graphql-api'),
+                    ResetSettingsOptions::SAFE => \__('Use "safe" default values', 'graphql-api'),
+                    ResetSettingsOptions::UNSAFE => \__('Use "unsafe" default values', 'graphql-api'),
+                ],
+            ];
+            
             $resetSettingsButtonsHTML = '';
             /**
              * Use `function_exists` because, when pressing on
@@ -132,56 +185,18 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     )
                 );
             }
-            $option = self::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR;
             $moduleSettings[] = [
-                Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
-                    $option
+                    'reset-settings'
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><ul><li>%s</li></ul>%s',
-                    \__('Reset all values stored in the Settings page, and define what default values will be used from now on:', 'graphql-api'),
-                    implode(
-                        '<br/></li><li>',
-                        [
-                            sprintf(
-                                '<p>%s</p><ul><li>%s</li></ul>',
-                                \__('<strong>Safe default settings</strong>, recommended to make a "live" site secure:', 'graphql-api'),
-                                implode(
-                                    '</li><li>',
-                                    [
-                                        \__('The single endpoint is disabled', 'graphql-api'),
-                                        \__('The “sensitive” data elements (eg: input field <code>status</code> to query posts with status <code>"draft"</code>) are not added to the schema', 'graphql-api'),
-                                        \__('Only a few of settings options and meta keys (for posts, users, etc) can be queried', 'graphql-api'),
-                                        \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
-                                    ]
-                                )
-                            ),
-                            sprintf(
-                                '<p>%s</p><ul><li>%s</li></ul>',
-                                \__('<strong>Unsafe default settings</strong>, recommended when building "static" sites, where the WordPress site is not exposed to the Internet:', 'graphql-api'),
-                                implode(
-                                    '</li><li>',
-                                    [
-                                        \__('The single endpoint is enabled', 'graphql-api'),
-                                        \__('The “sensitive” data elements are exposed in the schema', 'graphql-api'),
-                                        \__('All settings options and meta keys can be queried', 'graphql-api'),
-                                        \__('The number of entities that can be queried at once is unlimited', 'graphql-api'),
-                                    ]
-                                )
-                            )
-                        ]
-                    ),
+                    '<p>%s</p>%s',
+                    \__('Reset the Settings for all modules; then, the values defined by either the "safe" or "unsafe" default behavior will be used (see above).', 'graphql-api'),
                     $resetSettingsButtonsHTML
                 ),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => [
-                    '' => \__('Select', 'graphql-api'),
-                    ResetSettingsOptions::SAFE => \__('Reset settings, using "safe" default values', 'graphql-api'),
-                    ResetSettingsOptions::UNSAFE => \__('Reset settings, using "unsafe" default values', 'graphql-api'),
-                ],
+                Properties::TYPE => Properties::TYPE_NULL,
             ];
         }
         return $moduleSettings;

@@ -70,8 +70,10 @@ class PluginEnvironment
      * - The “sensitive” data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
      * - Only a few of settings options and meta keys (for posts, users, etc) can be queried
      * - The number of entities (for posts, users, etc) that can be queried at once is limited
+     *
+     * @param bool $includeSettingsValue If passing `false` it provides the default value for the Settings page
      */
-    public static function areUnsafeDefaultsEnabled(): bool
+    public static function areUnsafeDefaultsEnabled(bool $includeSettingsValue = true): bool
     {
         /**
          * Priority to decide:
@@ -92,15 +94,17 @@ class PluginEnvironment
         /**
          * 3. If Settings => Reset Settings was submitted
          */
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        if ($userSettingsManager->hasSetting(
-            PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
-            PluginManagementFunctionalityModuleResolver::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR
-        )) {
-            return $userSettingsManager->getSetting(
+        if ($includeSettingsValue) {
+            $userSettingsManager = UserSettingsManagerFacade::getInstance();
+            if ($userSettingsManager->hasSetting(
                 PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
-                PluginManagementFunctionalityModuleResolver::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR
-            ) === ResetSettingsOptions::UNSAFE;
+                PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+            )) {
+                return $userSettingsManager->getSetting(
+                    PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+                    PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                ) === ResetSettingsOptions::UNSAFE;
+            }
         }
 
         /**
