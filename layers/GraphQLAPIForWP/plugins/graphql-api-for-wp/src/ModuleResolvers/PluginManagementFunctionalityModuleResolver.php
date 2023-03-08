@@ -110,40 +110,29 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Use "safe" or "unsafe" default behavior for Settings', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><hr/><p>%s</p><ul><li>%s</li></ul>',
+                    '<p>%s</p><hr/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
                     \__('Define if to use the "safe" or "unsafe" default behavior for the Settings; once defined, click on "Reset Settings" (see below) to have these default settings be applied.', 'graphql-api'),
                     \__('<strong>Explanation:</strong> When the Settings values have not been configured yet, the plugin uses default values. These can have one of of two behaviors, "safe" or "unsafe":', 'graphql-api'),
+                    \__('<strong>Safe default settings</strong>', 'graphql-api'),
+                    \__('Recommended when a public API is exposed, as to make the site secure:', 'graphql-api'),
                     implode(
-                        '<br/></li><li>',
+                        '</li><li>',
                         [
-                            sprintf(
-                                '<p>%s</p><p>%s</p><ul><li>%s</li></ul>',
-                                \__('<strong>Safe default settings</strong>', 'graphql-api'),
-                                \__('Recommended when a public API is exposed, as to make the site secure:', 'graphql-api'),
-                                implode(
-                                    '</li><li>',
-                                    [
-                                        \__('The single endpoint is disabled', 'graphql-api'),
-                                        \__('The “sensitive” data elements (eg: input field <code>status</code> to query posts with status <code>"draft"</code>) are not added to the schema', 'graphql-api'),
-                                        \__('Only a few of settings options and meta keys (for posts, users, etc) can be queried', 'graphql-api'),
-                                        \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
-                                    ]
-                                )
-                            ),
-                            sprintf(
-                                '<p>%s</p><p>%s</p><ul><li>%s</li></ul>',
-                                \__('<strong>Unsafe default settings</strong>', 'graphql-api'),
-                                \__('Recommended when the WordPress site is not publicly exposed, such as when only available on an internal network, or when building static sites:', 'graphql-api'),
-                                implode(
-                                    '</li><li>',
-                                    [
-                                        \__('The single endpoint is enabled', 'graphql-api'),
-                                        \__('The “sensitive” data elements are exposed in the schema', 'graphql-api'),
-                                        \__('All settings options and meta keys can be queried', 'graphql-api'),
-                                        \__('The number of entities that can be queried at once is unlimited', 'graphql-api'),
-                                    ]
-                                )
-                            )
+                            \__('The single endpoint is disabled', 'graphql-api'),
+                            \__('The “sensitive” data elements (eg: input field <code>status</code> to query posts with status <code>"draft"</code>) are not added to the schema', 'graphql-api'),
+                            \__('Only a few of settings options and meta keys (for posts, users, etc) can be queried', 'graphql-api'),
+                            \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
+                        ]
+                    ),
+                    \__('<strong>Unsafe default settings</strong>', 'graphql-api'),
+                    \__('Recommended when the WordPress site is not publicly exposed, such as when only available on an internal network, or when building static sites:', 'graphql-api'),
+                    implode(
+                        '</li><li>',
+                        [
+                            \__('The single endpoint is enabled', 'graphql-api'),
+                            \__('The “sensitive” data elements are exposed in the schema', 'graphql-api'),
+                            \__('All settings options and meta keys can be queried', 'graphql-api'),
+                            \__('The number of entities that can be queried at once is unlimited', 'graphql-api'),
                         ]
                     ),
                 ),
