@@ -8,12 +8,12 @@
 /**
  * Settings page: Make the tabs vertical
  */
-.graphql-api-tabpanel.vertical-tabs .nav-tab-active {
+.graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper > a.nav-tab-active {
     box-shadow: none;
     border-right: 0;
 }
 
-.graphql-api-tabpanel.vertical-tabs .nav-tab-wrapper > a.nav-tab {
+.graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper > a.nav-tab {
     display: block;
     white-space: initial;
     float: none;
@@ -21,12 +21,12 @@
     border-bottom: 0;
 }
 
-.graphql-api-tabpanel.vertical-tabs .nav-tab-container {
+.graphql-api-tabpanel.vertical-tabs > .nav-tab-container {
     display: flex;
     gap: 15px;
     padding-top: 9px;
 }
-.graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
+.graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
     padding-top: 0;
     flex: 0 0 160px;
     overflow: auto;
@@ -37,21 +37,21 @@
  * After saving the Settings, there'll be a "Settings saved." notice,
  * which is 60 px high. Include it in the calculation.
  */
-.graphql-api-tabpanel.vertical-tabs .notice + .nav-tab-container > .nav-tab-wrapper {
+.graphql-api-tabpanel.vertical-tabs > .notice + .nav-tab-container > .nav-tab-wrapper {
     max-height: calc(100vh - 180px);
 }
 @media (min-width: 600px) {
-    .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 190px;
     }
 }
 @media (min-width: 783px) {
-    .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 220px;
     }
 }
 @media (min-width: 961px) {
-    .graphql-api-tabpanel.vertical-tabs .nav-tab-container > .nav-tab-wrapper {
+    .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 250px;
     }
 }
