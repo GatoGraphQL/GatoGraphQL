@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
-use PoP\Root\Environment as RootEnvironment;
 
 class PluginEnvironment
 {
@@ -73,7 +69,7 @@ class PluginEnvironment
         if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR)) {
             return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
         }
-        
+
         return null;
     }
 }

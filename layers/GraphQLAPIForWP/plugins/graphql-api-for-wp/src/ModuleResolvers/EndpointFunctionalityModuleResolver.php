@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
-use PoP\Root\Environment as RootEnvironment;
 
 class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {

@@ -77,7 +77,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * then the "Reset Settings" button has been pressed.
          * Then remove all settings values, except for the
          * safe/unsafe default value
-         * 
+         *
          * 2. Otherwise, it's the normal Settings.
          */
         $option = self::SETTINGS_FIELD;
@@ -123,7 +123,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      */
                     $values = $this->getSettingsNormalizer()->normalizeSettings($values);
                 }
-                
+
                 return $values;
             }
         );

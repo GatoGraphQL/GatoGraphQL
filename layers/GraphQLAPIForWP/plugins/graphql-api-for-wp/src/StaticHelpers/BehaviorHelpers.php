@@ -40,10 +40,12 @@ class BehaviorHelpers
          * If Settings => Reset Settings was submitted
          */
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        if ($userSettingsManager->hasSetting(
-            PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-            PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
-        )) {
+        if (
+            $userSettingsManager->hasSetting(
+                PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+            )
+        ) {
             return $userSettingsManager->getSetting(
                 PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                 PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
