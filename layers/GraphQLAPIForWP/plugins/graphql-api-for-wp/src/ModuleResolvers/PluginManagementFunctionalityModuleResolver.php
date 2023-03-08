@@ -117,8 +117,9 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         '<br/></li><li>',
                         [
                             sprintf(
-                                '<p>%s</p><ul><li>%s</li></ul>',
-                                \__('<strong>Safe default settings</strong>: Recommended when a public API is exposed, as to make the site secure:', 'graphql-api'),
+                                '<p>%s</p><p>%s</p><ul><li>%s</li></ul>',
+                                \__('<strong>Safe default settings</strong>', 'graphql-api'),
+                                \__('Recommended when a public API is exposed, as to make the site secure:', 'graphql-api'),
                                 implode(
                                     '</li><li>',
                                     [
@@ -130,8 +131,9 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 )
                             ),
                             sprintf(
-                                '<p>%s</p><ul><li>%s</li></ul>',
-                                \__('<strong>Unsafe default settings</strong>: Recommended when the WordPress site is not publicly exposed, such as when only available on an internal network, or when building static sites:', 'graphql-api'),
+                                '<p>%s</p><p>%s</p><ul><li>%s</li></ul>',
+                                \__('<strong>Unsafe default settings</strong>', 'graphql-api'),
+                                \__('Recommended when the WordPress site is not publicly exposed, such as when only available on an internal network, or when building static sites:', 'graphql-api'),
                                 implode(
                                     '</li><li>',
                                     [
