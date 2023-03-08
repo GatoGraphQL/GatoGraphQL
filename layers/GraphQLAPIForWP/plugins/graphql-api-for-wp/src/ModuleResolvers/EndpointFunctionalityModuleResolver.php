@@ -99,15 +99,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         switch ($module) {
             case self::SINGLE_ENDPOINT:
                 /**
-                 * Enable for DEV so that running integration
-                 * tests against the single endpoint works
-                 * without the need to manually enable the module.
-                 *
                  * Single endpoint is naturally disabled for PROD,
                  * unless the "unsafe defaults" are set.
                  */
-                return RootEnvironment::isApplicationEnvironmentDev()
-                    || PluginEnvironment::areUnsafeDefaultsEnabled();
+                return PluginEnvironment::areUnsafeDefaultsEnabled();
         }
         return parent::isEnabledByDefault($module);
     }
