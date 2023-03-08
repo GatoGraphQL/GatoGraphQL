@@ -110,8 +110,9 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Use "safe" or "unsafe" default behavior for Settings', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><hr/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
-                    \__('Define if to use the "safe" or "unsafe" default behavior for the Settings; once defined, click on "Reset Settings" (see below) to have these default settings be applied.', 'graphql-api'),
+                    '<p>%s</p><br/><p>%s</p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
+                    \__('Define if to use the "safe" or "unsafe" default behavior for the Settings.', 'graphql-api'),
+                    \__('<strong>Please notice:</strong> after storing the new default value, you will need to come back to this screen, and click on the "Reset Settings" button below to have these default settings be applied.', 'graphql-api'),
                     \__('<strong>Explanation:</strong> When the Settings values have not been configured yet, the plugin uses default values. These can have one of of two behaviors, "safe" or "unsafe":', 'graphql-api'),
                     \__('<strong>Safe default settings</strong>', 'graphql-api'),
                     \__('Recommended when a public API is exposed, as to make the site secure:', 'graphql-api'),
