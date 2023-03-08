@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\Root\Environment as RootEnvironment;
 
@@ -53,16 +56,56 @@ class PluginEnvironment
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
 
+    /**
+     * Unsafe defaults enabled:
+     *
+     * - The single endpoint is enabled
+     * - The “sensitive” data elements are exposed in the schema
+     * - All settings options and meta keys can be queried
+     * - The number of entities that can be queried at once is unlimited
+     *
+     * Unsafe defaults disabled:
+     *
+     * - The single endpoint is disabled
+     * - The “sensitive” data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
+     * - Only a few of settings options and meta keys (for posts, users, etc) can be queried
+     * - The number of entities (for posts, users, etc) that can be queried at once is limited
+     */
     public static function areUnsafeDefaultsEnabled(): bool
     {
+        /**
+         * Priority to decide:
+         *
+         * 1. If env var `ENABLE_UNSAFE_DEFAULTS` is defined
+         */
         if (getenv(self::ENABLE_UNSAFE_DEFAULTS) !== false) {
             return (bool)getenv(self::ENABLE_UNSAFE_DEFAULTS);
         }
 
+        /**
+         * 2. If wp-config.php constant `GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS` is defined
+         */
         if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
             return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS);
         }
 
+        /**
+         * 3. If Settings => Reset Settings was submitted
+         */
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        if ($userSettingsManager->hasSetting(
+            PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+            PluginManagementFunctionalityModuleResolver::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR
+        )) {
+            return $userSettingsManager->getSetting(
+                PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+                PluginManagementFunctionalityModuleResolver::OPTION_RESET_SETTINGS_SAFE_UNSAFE_BEHAVIOR
+            ) === ResetSettingsOptions::UNSAFE;
+        }
+
+        /**
+         * 4. If on the DEV or PROD environment
+         */
         return RootEnvironment::isApplicationEnvironmentDev();
     }
 }
