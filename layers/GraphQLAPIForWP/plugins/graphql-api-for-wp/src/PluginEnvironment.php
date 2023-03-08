@@ -56,7 +56,7 @@ class PluginEnvironment
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
 
-    public static function getDefinedUnsafeDefaults(): ?bool
+    public static function getDefinedEnableUnsafeDefaults(): ?bool
     {
         /**
          * Priority to decide:
