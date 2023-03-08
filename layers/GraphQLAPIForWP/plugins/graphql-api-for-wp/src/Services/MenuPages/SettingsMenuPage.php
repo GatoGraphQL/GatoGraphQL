@@ -8,8 +8,8 @@ use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\Root\App;
 
@@ -23,9 +23,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     public final const FORM_ORIGIN = 'form-origin';
     public final const SETTINGS_FIELD = 'graphql-api-settings';
+    public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
+    private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -44,6 +46,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         /** @var SettingsNormalizerInterface */
         return $this->settingsNormalizer ??= $this->instanceManager->getInstance(SettingsNormalizerInterface::class);
     }
+    final public function setPluginGeneralSettingsFunctionalityModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver): void
+    {
+        $this->PluginGeneralSettingsFunctionalityModuleResolver = $PluginGeneralSettingsFunctionalityModuleResolver;
+    }
+    final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
+    {
+        /** @var PluginGeneralSettingsFunctionalityModuleResolver */
+        return $this->PluginGeneralSettingsFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -59,16 +70,63 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         /**
          * Before saving the settings in the DB,
-         * transform the values:
+         * decide what it is that must be stored.
+         * There are 2 options.
          *
-         * - from string to bool/int
-         * - default value if input is empty
+         * 1. If button "submit-reset-settings" is sent,
+         * then the "Reset Settings" button has been pressed.
+         * Then remove all settings values, except for the
+         * safe/unsafe default value
+         *
+         * 2. Otherwise, it's the normal Settings.
          */
         $option = self::SETTINGS_FIELD;
-        // \add_filter(
-        //     "pre_update_option_{$option}",
-        //     $this->normalizeSettings(...)
-        // );
+        \add_filter(
+            "pre_update_option_{$option}",
+            /**
+             * @param array<string,mixed> $values
+             * @return array<string,mixed>
+             */
+            function (array $values): array {
+                /**
+                 * 1st case: check that pressed on the "Reset Settings" button,
+                 * and an actual "safe" or "unsafe" value was selected.
+                 */
+                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                    /**
+                     * Remove all settings, except the one indicating if to use
+                     * the "safe" or "unsafe" default behavior
+                     */
+                    $resetSettingsOptionName = $this->getPluginGeneralSettingsFunctionalityModuleResolver()->getSettingOptionName(
+                        PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                        PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                    );
+                    $values = array_intersect_key(
+                        $values,
+                        [
+                            $resetSettingsOptionName => ''
+                        ]
+                    );
+                } else {
+                    /**
+                     * Execute the callback sanitazation here,
+                     * and not on entry 'sanitize_callback' from `register_setting`,
+                     * because that one will be called twice: once triggered
+                     * by `update_option` and once by `add_option`,
+                     * with `add_option` happening after the extra logic here
+                     * (i.e. added on `pre_update_option_{$option}`) has taken
+                     * place, which means that it undoes this logic that sets
+                     * the state for "reset the settings".
+                     *
+                     * This call is needed to cast the data
+                     * before saving to the DB.
+                     */
+                    $values = $this->getSettingsNormalizer()->normalizeSettings($values);
+                }
+
+                return $values;
+            }
+        );
 
         /**
          * After saving the settings in the DB:
@@ -144,9 +202,20 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     [
                         'type' => 'array',
                         'description' => \__('Settings for the GraphQL API', 'graphql-api'),
-                        // This call is needed to cast the data
-                        // before saving to the DB
-                        'sanitize_callback' => $this->getSettingsNormalizer()->normalizeSettings(...),
+                        /**
+                         * Don't execute the callback sanitazation here,
+                         * because it will be called twice: once triggered
+                         * by `update_option` and once by `add_option`,
+                         * with `add_option` happening after the extra logic
+                         * added by `pre_update_option_{$option}` has taken
+                         * place, which means that it undoes the logic added
+                         * on that hook to set the state for "reset the settings".
+                         *
+                         * Then, the sanitazation is also executed on that hook.
+                         */
+                        // // This call is needed to cast the data
+                        // // before saving to the DB
+                        // 'sanitize_callback' => $this->getSettingsNormalizer()->normalizeSettings(...),
                         'show_in_rest' => false,
                     ]
                 );

@@ -45,3 +45,7 @@ It describes when it makes sense to use the GraphQL API and what's the best way 
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)
 - Avoid error from loading non-existing translation files
+
+## Breaking changes
+
+- Environment variable `ENABLE_UNSAFE_DEFAULTS` has been renamed to `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR`, and "Reset Settings" must be clicked on the "Plugin Management" tab of the Settings page for the new value to be applied.

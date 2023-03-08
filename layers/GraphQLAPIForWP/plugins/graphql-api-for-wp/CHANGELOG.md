@@ -18,6 +18,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`) ([#2043](https://github.com/leoloso/PoP/pull/2043))
 - Avoid error from loading non-existing translation files ([2362e2c](https://github.com/leoloso/PoP/commit/2362e2cc46ab6269afabb7d072ea3345fc65aaab))
 
+### Breaking changes
+
+- Env var `ENABLE_UNSAFE_DEFAULTS` has been renamed to `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR`, and "Reset Settings" must be clicked on the "Plugin Management" tab of the Settings page for the new value to be applied
+
 ## 0.10.2 - 24/02/2013
 
 ### Fixed

@@ -8,11 +8,10 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
-use PoP\Root\Environment as RootEnvironment;
 
 class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -99,15 +98,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         switch ($module) {
             case self::SINGLE_ENDPOINT:
                 /**
-                 * Enable for DEV so that running integration
-                 * tests against the single endpoint works
-                 * without the need to manually enable the module.
-                 *
                  * Single endpoint is naturally disabled for PROD,
                  * unless the "unsafe defaults" are set.
                  */
-                return RootEnvironment::isApplicationEnvironmentDev()
-                    || PluginEnvironment::areUnsafeDefaultsEnabled();
+                return BehaviorHelpers::areUnsafeDefaultsEnabled();
         }
         return parent::isEnabledByDefault($module);
     }

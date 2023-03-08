@@ -74,7 +74,7 @@ composer enable-unsafe-defaults
 On a site in production, set in `wp-config.php`:
 
 ```php
-define( 'GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS', true );
+define( 'GRAPHQL_API_SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR', true );
 ```
 
 Or define this same key/value as an environment variable.
