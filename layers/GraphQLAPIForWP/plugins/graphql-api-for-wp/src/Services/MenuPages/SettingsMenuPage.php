@@ -116,11 +116,26 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     );
                 } else {
                     /**
+                     * Execute the callback sanitazation here,
+                     * and not on entry 'sanitize_callback' from `register_setting`,
+                     * because that one will be called twice: once triggered
+                     * by `update_option` and once by `add_option`,
+                     * with `add_option` happening after the extra logic here
+                     * (i.e. added on `pre_update_option_{$option}`) has taken
+                     * place, which means that it undoes this logic that sets
+                     * the state for "reset the settings".
+                     *
+                     * This call is needed to cast the data
+                     * before saving to the DB.
+                     */
+                    $values = $this->getSettingsNormalizer()->normalizeSettings($values);
+                    /**
                      * If haven't clicked on the "Reset Settings" button,
                      * then do not override the whatever value was selected
                      */
                     unset($values[$resetSettingsOptionName]);
                 }
+                
                 return $values;
             }
         );
@@ -199,9 +214,20 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     [
                         'type' => 'array',
                         'description' => \__('Settings for the GraphQL API', 'graphql-api'),
-                        // This call is needed to cast the data
-                        // before saving to the DB
-                        'sanitize_callback' => $this->getSettingsNormalizer()->normalizeSettings(...),
+                        /**
+                         * Don't execute the callback sanitazation here,
+                         * because it will be called twice: once triggered
+                         * by `update_option` and once by `add_option`,
+                         * with `add_option` happening after the extra logic
+                         * added by `pre_update_option_{$option}` has taken
+                         * place, which means that it undoes the logic added
+                         * on that hook to set the state for "reset the settings".
+                         *
+                         * Then, the sanitazation is also executed on that hook.
+                         */
+                        // // This call is needed to cast the data
+                        // // before saving to the DB
+                        // 'sanitize_callback' => $this->getSettingsNormalizer()->normalizeSettings(...),
                         'show_in_rest' => false,
                     ]
                 );
