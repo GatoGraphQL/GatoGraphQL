@@ -14,7 +14,7 @@ class PluginEnvironment
 {
     public final const DISABLE_CONTAINER_CACHING = 'DISABLE_CONTAINER_CACHING';
     public final const CACHE_DIR = 'CACHE_DIR';
-    public final const ENABLE_UNSAFE_DEFAULTS = 'ENABLE_UNSAFE_DEFAULTS';
+    public final const SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR = 'SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR';
 
     /**
      * If the information is provided by either environment variable
@@ -61,17 +61,17 @@ class PluginEnvironment
         /**
          * Priority to decide:
          *
-         * 1. If env var `ENABLE_UNSAFE_DEFAULTS` is defined
+         * 1. If env var `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
          */
-        if (getenv(self::ENABLE_UNSAFE_DEFAULTS) !== false) {
-            return (bool)getenv(self::ENABLE_UNSAFE_DEFAULTS);
+        if (getenv(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR) !== false) {
+            return (bool)getenv(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
         }
 
         /**
-         * 2. If wp-config.php constant `GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS` is defined
+         * 2. If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
          */
-        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
-            return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS);
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR)) {
+            return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
         }
         
         return null;
