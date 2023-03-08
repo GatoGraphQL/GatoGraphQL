@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
@@ -28,7 +27,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
-    private ?PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver = null;
+    private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -47,14 +46,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         /** @var SettingsNormalizerInterface */
         return $this->settingsNormalizer ??= $this->instanceManager->getInstance(SettingsNormalizerInterface::class);
     }
-    final public function setPluginManagementFunctionalityModuleResolver(PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver): void
+    final public function setPluginGeneralSettingsFunctionalityModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver): void
     {
-        $this->pluginManagementFunctionalityModuleResolver = $pluginManagementFunctionalityModuleResolver;
+        $this->PluginGeneralSettingsFunctionalityModuleResolver = $PluginGeneralSettingsFunctionalityModuleResolver;
     }
-    final protected function getPluginManagementFunctionalityModuleResolver(): PluginManagementFunctionalityModuleResolver
+    final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
     {
-        /** @var PluginManagementFunctionalityModuleResolver */
-        return $this->pluginManagementFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginManagementFunctionalityModuleResolver::class);
+        /** @var PluginGeneralSettingsFunctionalityModuleResolver */
+        return $this->PluginGeneralSettingsFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
     }
 
     public function getMenuPageSlug(): string
@@ -98,9 +97,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * Remove all settings, except the one indicating if to use
                      * the "safe" or "unsafe" default behavior
                      */
-                    $resetSettingsOptionName = $this->getPluginManagementFunctionalityModuleResolver()->getSettingOptionName(
-                        PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
-                        PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                    $resetSettingsOptionName = $this->getPluginGeneralSettingsFunctionalityModuleResolver()->getSettingOptionName(
+                        PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                        PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
                     );
                     $values = array_intersect_key(
                         $values,
