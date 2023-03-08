@@ -110,15 +110,15 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Use "safe" or "unsafe" default behavior for Settings', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><br/><p>%s</p><ul><li>%s</li></ul>',
+                    '<p>%s</p><hr/><p>%s</p><ul><li>%s</li></ul>',
                     \__('Define if to use the "safe" or "unsafe" default behavior for the Settings; once defined, click on "Reset Settings" (see below) to have these default settings be applied.', 'graphql-api'),
-                    \__('<em>Explanation:</em> When the Settings values have not been configured yet, the plugin uses default values. These can have one of of two behaviors, "safe" or "unsafe":', 'graphql-api'),
+                    \__('<strong>Explanation:</strong> When the Settings values have not been configured yet, the plugin uses default values. These can have one of of two behaviors, "safe" or "unsafe":', 'graphql-api'),
                     implode(
                         '<br/></li><li>',
                         [
                             sprintf(
                                 '<p>%s</p><ul><li>%s</li></ul>',
-                                \__('<strong>Safe default settings</strong>, recommended to make a "live" site secure:', 'graphql-api'),
+                                \__('<strong>Safe default settings</strong>: Recommended when a public API is exposed, as to make the site secure:', 'graphql-api'),
                                 implode(
                                     '</li><li>',
                                     [
@@ -131,7 +131,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             ),
                             sprintf(
                                 '<p>%s</p><ul><li>%s</li></ul>',
-                                \__('<strong>Unsafe default settings</strong>, recommended when building "static" sites, where the WordPress site is not exposed to the Internet:', 'graphql-api'),
+                                \__('<strong>Unsafe default settings</strong>: Recommended when the WordPress site is not publicly exposed, such as when only available on an internal network, or when building static sites:', 'graphql-api'),
                                 implode(
                                     '</li><li>',
                                     [
