@@ -83,18 +83,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     }
 
     /**
-     * Default value for an option set by the module
-     */
-    public function getSettingsDefaultValue(string $module, string $option): mixed
-    {
-        $defaultValues = [
-            self::PLUGIN_MANAGEMENT => [
-            ],
-        ];
-        return $defaultValues[$module][$option] ?? null;
-    }
-
-    /**
      * Array with the inputs to show as settings for the module
      *
      * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
