@@ -129,11 +129,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * before saving to the DB.
                      */
                     $values = $this->getSettingsNormalizer()->normalizeSettings($values);
-                    /**
-                     * If haven't clicked on the "Reset Settings" button,
-                     * then do not override the whatever value was selected
-                     */
-                    unset($values[$resetSettingsOptionName]);
                 }
                 
                 return $values;
