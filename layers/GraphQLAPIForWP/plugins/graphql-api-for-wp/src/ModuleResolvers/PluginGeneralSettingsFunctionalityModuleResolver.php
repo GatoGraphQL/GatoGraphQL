@@ -151,14 +151,13 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 ),
                 Properties::TITLE => \__('Use "safe" or "unsafe" default behavior for Settings', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><br/><p>%s</p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
-                    \__('Define if to use the "safe" or "unsafe" default behavior for the Settings.', 'graphql-api'),
+                    '<p>%s</p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
                     sprintf(
-                        \__('<strong>Please notice:</strong> after storing the new value (i.e. after submitting "Save Changes (All)"), you will need to go to the "%s" tab, and click on the "Reset Settings" button to have the new default settings be applied.', 'graphql-api'),
+                        \__('<strong>Please notice:</strong> after storing the new value (i.e. after submitting "Save Changes (All)"), you will need to go to the "%s" tab, and click on the "Reset Settings" button to have the new default behavior be applied.', 'graphql-api'),
                         $this->getPluginManagementFunctionalityModuleResolver()->getName(PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT)
                     ),
-                    \__('<strong>Explanation:</strong> When the Settings values have not been configured yet, the plugin uses default values. These can have one of of two behaviors, "safe" or "unsafe":', 'graphql-api'),
-                    \__('<strong>Safe default settings</strong>', 'graphql-api'),
+                    \__('Before values in the Settings page are configured, the plugin uses default values, which can have a "safe" or "unsafe" behavior.', 'graphql-api'),
+                    \__('<strong><u>Safe default settings</u></strong>', 'graphql-api'),
                     \__('Recommended when the site openly exposes APIs (eg: for any visitor on the Internet, or for clients, or when feeding data to a downstream server an a non-private network), as to make the site secure:', 'graphql-api'),
                     implode(
                         '</li><li>',
@@ -169,7 +168,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                             \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
                         ]
                     ),
-                    \__('<strong>Unsafe default settings</strong>', 'graphql-api'),
+                    \__('<strong><u>Unsafe default settings</u></strong>', 'graphql-api'),
                     \__('Recommended when the WordPress site is not publicly exposed, i.e. when only available on a private or internal network (as when building static sites):', 'graphql-api'),
                     implode(
                         '</li><li>',
