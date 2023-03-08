@@ -147,7 +147,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    '' => \__('Select', 'graphql-api'),
                     ResetSettingsOptions::SAFE => \__('Use "safe" default values', 'graphql-api'),
                     ResetSettingsOptions::UNSAFE => \__('Use "unsafe" default values', 'graphql-api'),
                 ],
