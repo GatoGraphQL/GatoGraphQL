@@ -30,6 +30,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
+    private ?PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -39,6 +40,15 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
+    final public function setPluginManagementFunctionalityModuleResolver(PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver): void
+    {
+        $this->pluginManagementFunctionalityModuleResolver = $pluginManagementFunctionalityModuleResolver;
+    }
+    final protected function getPluginManagementFunctionalityModuleResolver(): PluginManagementFunctionalityModuleResolver
+    {
+        /** @var PluginManagementFunctionalityModuleResolver */
+        return $this->pluginManagementFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginManagementFunctionalityModuleResolver::class);
     }
 
     /**
@@ -143,7 +153,10 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><br/><p>%s</p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
                     \__('Define if to use the "safe" or "unsafe" default behavior for the Settings.', 'graphql-api'),
-                    \__('<strong>Please notice:</strong> after storing the new value (i.e. after submitting "Save Changes (All)"), you will need to come back to this screen, and click on the "Reset Settings" button below to have these default settings be applied.', 'graphql-api'),
+                    sprintf(
+                        \__('<strong>Please notice:</strong> after storing the new value (i.e. after submitting "Save Changes (All)"), you will need to go to the "%s" tab, and click on the "Reset Settings" button to have the new default settings be applied.', 'graphql-api'),
+                        $this->getPluginManagementFunctionalityModuleResolver()->getName(PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT)
+                    ),
                     \__('<strong>Explanation:</strong> When the Settings values have not been configured yet, the plugin uses default values. These can have one of of two behaviors, "safe" or "unsafe":', 'graphql-api'),
                     \__('<strong>Safe default settings</strong>', 'graphql-api'),
                     \__('Recommended when the site openly exposes APIs (eg: for any visitor on the Internet, or for clients, or when feeding data to a downstream server an a non-private network), as to make the site secure:', 'graphql-api'),
