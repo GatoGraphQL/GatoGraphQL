@@ -112,10 +112,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><br/><p>%s</p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
                     \__('Define if to use the "safe" or "unsafe" default behavior for the Settings.', 'graphql-api'),
-                    \__('<strong>Please notice:</strong> after storing the new default value, you will need to come back to this screen, and click on the "Reset Settings" button below to have these default settings be applied.', 'graphql-api'),
+                    \__('<strong>Please notice:</strong> after storing the new value (i.e. after submitting "Save Changes (All)"), you will need to come back to this screen, and click on the "Reset Settings" button below to have these default settings be applied.', 'graphql-api'),
                     \__('<strong>Explanation:</strong> When the Settings values have not been configured yet, the plugin uses default values. These can have one of of two behaviors, "safe" or "unsafe":', 'graphql-api'),
                     \__('<strong>Safe default settings</strong>', 'graphql-api'),
-                    \__('Recommended when a public API is exposed, as to make the site secure:', 'graphql-api'),
+                    \__('Recommended when the site openly exposes APIs (eg: for any visitor on the Internet, or for clients, or when feeding data to a downstream server an a non-private network), as to make the site secure:', 'graphql-api'),
                     implode(
                         '</li><li>',
                         [
@@ -126,7 +126,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         ]
                     ),
                     \__('<strong>Unsafe default settings</strong>', 'graphql-api'),
-                    \__('Recommended when the WordPress site is not publicly exposed, such as when only available on an internal network, or when building static sites:', 'graphql-api'),
+                    \__('Recommended when the WordPress site is not publicly exposed, i.e. when only available on a private or internal network (as when building static sites):', 'graphql-api'),
                     implode(
                         '</li><li>',
                         [
