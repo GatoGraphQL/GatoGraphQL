@@ -19,6 +19,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
+    private ?PluginGeneralSettingsFunctionalityModuleResolver $pluginGeneralSettingsFunctionalityModuleResolver = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -28,6 +29,15 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
+    final public function setPluginGeneralSettingsFunctionalityModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver $pluginGeneralSettingsFunctionalityModuleResolver): void
+    {
+        $this->pluginGeneralSettingsFunctionalityModuleResolver = $pluginGeneralSettingsFunctionalityModuleResolver;
+    }
+    final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
+    {
+        /** @var PluginGeneralSettingsFunctionalityModuleResolver */
+        return $this->pluginGeneralSettingsFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
     }
 
     /**
@@ -133,7 +143,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p>%s',
-                    \__('Reset the Settings for all modules; then, the values defined by either the "safe" or "unsafe" default behavior will be used (see above).', 'graphql-api'),
+                    sprintf(
+                        \__('Delete all stored Settings values. Then, the "safe" or "unsafe" default behavior will be be applied (see tab "%s").', 'graphql-api'),
+                        $this->getPluginGeneralSettingsFunctionalityModuleResolver()->getName(
+                            PluginGeneralSettingsFunctionalityModuleResolver::GENERAL
+                        )
+                    ),
                     $resetSettingsButtonsHTML
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
