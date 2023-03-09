@@ -305,7 +305,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ob_start();
         ?>
         <div
-            id="graphql-api-module-settings"
+            id="graphql-api-graphql-api-settings"
             class="<?php echo $class ?>"
         >
             <?php if ($printWithTabs) : ?>
@@ -378,13 +378,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         </div>
         <?php
         /** @var string */
-        $moduleSettingsContent = ob_get_clean();
+        $graphQLAPISettingsContent = ob_get_clean();
 
         $primarySettingsItems = [
             [
-                'id' => 'module-settings',
-                'name' => \__('Module Settings', 'graphql-api'),
-                'content' => $moduleSettingsContent,
+                'id' => 'graphql-api-settings',
+                'name' => \__('GraphQL API Settings', 'graphql-api'),
+                'content' => $graphQLAPISettingsContent,
             ],
             [
                 'id' => 'plugin-settings',
