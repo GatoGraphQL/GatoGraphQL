@@ -100,41 +100,64 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     public function hasSetting(string $module, string $option): bool
     {
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $item = $moduleResolver->getSettingOptionName($module, $option);
-        return $this->hasItem(Options::SETTINGS, $item);
+        return $this->doHasSetting(Options::SETTINGS, $module, $option);
     }
 
     public function getSetting(string $module, string $option): mixed
     {
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $moduleResolver = $moduleRegistry->getModuleResolver($module);
-
-        // If the item is saved in the DB, retrieve it
-        $item = $moduleResolver->getSettingOptionName($module, $option);
-        if ($this->hasItem(Options::SETTINGS, $item)) {
-            return $this->getItem(Options::SETTINGS, $item);
-        }
-
-        // Otherwise, return the default value
-        return $moduleResolver->getSettingsDefaultValue($module, $option);
+        return $this->doGetSetting(Options::SETTINGS, $module, $option);
     }
 
     public function setSetting(string $module, string $option, mixed $value): void
     {
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $moduleResolver = $moduleRegistry->getModuleResolver($module);
-
-        $item = $moduleResolver->getSettingOptionName($module, $option);
-
-        $this->setOptionItem(Options::SETTINGS, $item, $value);
+        return $this->doSetSetting(Options::SETTINGS, $module, $option, $value);
     }
 
     /**
      * @param array<string,mixed> $optionValues
      */
     public function setSettings(string $module, array $optionValues): void
+    {
+        return $this->doSetSettings(Options::SETTINGS, $module, $optionValues);
+    }
+
+    protected function doHasSetting(string $dbOptionName, string $module, string $option): bool
+    {
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $item = $moduleResolver->getSettingOptionName($module, $option);
+        return $this->hasItem($dbOptionName, $item);
+    }
+
+    protected function doGetSetting(string $dbOptionName, string $module, string $option): mixed
+    {
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+
+        // If the item is saved in the DB, retrieve it
+        $item = $moduleResolver->getSettingOptionName($module, $option);
+        if ($this->hasItem($dbOptionName, $item)) {
+            return $this->getItem($dbOptionName, $item);
+        }
+
+        // Otherwise, return the default value
+        return $moduleResolver->getSettingsDefaultValue($module, $option);
+    }
+
+    protected function doSetSetting(string $dbOptionName, string $module, string $option, mixed $value): void
+    {
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+
+        $item = $moduleResolver->getSettingOptionName($module, $option);
+
+        $this->setOptionItem($dbOptionName, $item, $value);
+    }
+
+    /**
+     * @param array<string,mixed> $optionValues
+     */
+    protected function doSetSettings(string $dbOptionName, string $module, array $optionValues): void
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
@@ -145,7 +168,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
             $itemValues[$item] = $value;
         }
 
-        $this->setOptionItems(Options::SETTINGS, $itemValues);
+        $this->setOptionItems($dbOptionName, $itemValues);
     }
 
     public function hasSetModuleEnabled(string $moduleID): bool
