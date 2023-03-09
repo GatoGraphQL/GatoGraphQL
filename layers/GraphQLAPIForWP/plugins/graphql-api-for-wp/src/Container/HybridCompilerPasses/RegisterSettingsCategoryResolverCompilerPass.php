@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
+namespace GraphQLAPI\GraphQLAPI\HybridCompilerPasses\CompilerPasses;
 
 use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
