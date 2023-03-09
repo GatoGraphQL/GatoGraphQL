@@ -62,7 +62,7 @@ interface ModuleResolverInterface
     /**
      * The category where to display the settings:
      *
-     * - Module Settings
+     * - GraphQL API Settings
      * - Plugin Settings
      * - Plugin Management
      */

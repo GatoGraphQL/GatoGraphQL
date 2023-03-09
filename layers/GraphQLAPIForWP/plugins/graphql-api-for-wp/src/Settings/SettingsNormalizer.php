@@ -124,7 +124,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
             $normalizedOptionValues[$settingsOptionName] = $value;
         }
         // Normalize it
-        $normalizedOptionValues = $this->normalizeSettings($normalizedOptionValues, SettingsCategories::MODULE_SETTINGS);
+        $normalizedOptionValues = $this->normalizeSettings($normalizedOptionValues, SettingsCategories::GRAPHQL_API_SETTINGS);
 
         // Transform back
         foreach ($values as $option => $value) {

@@ -37,7 +37,7 @@ class PluginOptionsFormHandler
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
             $value = App::getRequest()->request->all()[SettingsMenuPage::SETTINGS_FIELD] ?? [];
-            $this->normalizedOptionValuesCache = $settingsNormalizer->normalizeSettings($value, SettingsCategories::MODULE_SETTINGS);
+            $this->normalizedOptionValuesCache = $settingsNormalizer->normalizeSettings($value, SettingsCategories::GRAPHQL_API_SETTINGS);
         }
         return $this->normalizedOptionValuesCache;
     }

@@ -123,7 +123,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * This call is needed to cast the data
                      * before saving to the DB.
                      */
-                    $values = $this->getSettingsNormalizer()->normalizeSettings($values, SettingsCategories::MODULE_SETTINGS);
+                    $values = $this->getSettingsNormalizer()->normalizeSettings($values, SettingsCategories::GRAPHQL_API_SETTINGS);
                 }
 
                 return $values;
@@ -157,16 +157,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
                 $settingsEntries = [
                     [
-                        'category' => SettingsCategories::MODULE_SETTINGS,
+                        'category' => SettingsCategories::GRAPHQL_API_SETTINGS,
                         'field' => self::SETTINGS_FIELD,
                         'option-name' => Options::SETTINGS,
-                        'description' => \__('Module Settings for the GraphQL API', 'graphql-api'),
+                        'description' => \__('Settings for the GraphQL API', 'graphql-api'),
                     ],
                     [
                         'category' => SettingsCategories::PLUGIN_SETTINGS,
                         'field' => self::PLUGIN_SETTINGS_FIELD,
                         'option-name' => Options::PLUGIN_SETTINGS,
-                        'description' => \__('Plugin Settings for the GraphQL API', 'graphql-api'),
+                        'description' => \__('Plugin Settings', 'graphql-api'),
                     ],
                 ];
                 foreach ($settingsEntries as $settingsEntry) {
@@ -277,21 +277,21 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             _e('There are no items to be configured', 'graphql-api');
             return;
         }
-        $moduleSettingsItems = array_filter(
+        $graphQLAPISettingsItems = array_filter(
             $settingsItems,
             /** @param array<string,mixed> $item */
-            fn (array $item) => $item['settings-category'] === SettingsCategories::MODULE_SETTINGS
+            fn (array $item) => $item['settings-category'] === SettingsCategories::GRAPHQL_API_SETTINGS
         );
 
         $printWithTabs = $this->printWithTabs();
         // By default, focus on the first module
-        $activeModuleID = $moduleSettingsItems[0]['id'];
+        $activeModuleID = $graphQLAPISettingsItems[0]['id'];
         // If passing a tab, focus on that one, if the module exists
         $tab = App::query(RequestParams::TAB);
         if ($tab !== null) {
             $moduleIDs = array_map(
                 fn ($item) => $item['id'],
-                $moduleSettingsItems
+                $graphQLAPISettingsItems
             );
             if (in_array($tab, $moduleIDs)) {
                 $activeModuleID = $tab;
@@ -313,7 +313,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
                         <?php
-                        foreach ($moduleSettingsItems as $item) {
+                        foreach ($graphQLAPISettingsItems as $item) {
                             printf(
                                 '<a href="#%s" class="nav-tab %s">%s</a>',
                                 $item['id'],
@@ -340,7 +340,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             <?php
                             $sectionClass = $printWithTabs ? 'tab-content' : '';
                             \settings_fields(self::SETTINGS_FIELD);
-                            foreach ($moduleSettingsItems as $item) {
+                            foreach ($graphQLAPISettingsItems as $item) {
                                 $sectionStyle = '';
                                 $maybeTitle = $printWithTabs
                                     ? sprintf(
