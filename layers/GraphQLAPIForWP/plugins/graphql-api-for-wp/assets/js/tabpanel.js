@@ -3,8 +3,6 @@ jQuery( document ).ready( function($){
         e.preventDefault();
         tab = $(this).attr('href');
         tabPanel = $(tab).closest('.graphql-api-tabpanel');
-        tabPanelID = tabPanel.attr('id');
-        tabPanelSelector = tabPanelID == undefined ? '.graphql-api-tabpanel' : '#' + tabPanelID;
         /**
          * Allow to specify which is the target to show/hide.
          * This allows to have a tabPanel wrapping another tabPanel,
@@ -13,11 +11,13 @@ jQuery( document ).ready( function($){
          */
         tabContentTarget = tabPanel.data('tab-content-target');
         if (tabContentTarget == undefined) {
-            tabContentTarget = tabPanelSelector +' > .nav-tab-container > .nav-tab-content .tab-content';
+            tabContentItems = tabPanel.children('.nav-tab-container').children('.nav-tab-content').find('.tab-content');
+        } else {
+            tabContentItems = $(tabContentTarget);
         }
-        $(tabContentTarget).hide();
+        $(tabContentItems).hide();
         $(tab).show();
-        $(tabPanelSelector +' > .nav-tab-container > .nav-tab-wrapper > a.nav-tab').removeClass('nav-tab-active');
-        $(tabPanelSelector +' > .nav-tab-container > .nav-tab-wrapper > a[href="'+tab+'"].nav-tab').addClass('nav-tab-active');
+        tabPanel.children('.nav-tab-container').children('.nav-tab-wrapper').children('a.nav-tab').removeClass('nav-tab-active');
+        tabPanel.children('.nav-tab-container').children('.nav-tab-wrapper').children('a[href="'+tab+'"].nav-tab').addClass('nav-tab-active');
     });
 });
