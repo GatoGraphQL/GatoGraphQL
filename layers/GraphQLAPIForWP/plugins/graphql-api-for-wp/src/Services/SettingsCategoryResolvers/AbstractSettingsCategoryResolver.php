@@ -26,13 +26,11 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
         );
     }
 
+    /**
+     * Convert "graphql-api-settings" into "graphql_api_settings" and like that
+     */
     public function getOptionsFormName(string $settingsCategory): string
     {
-        throw new ImpossibleToHappenException(
-            sprintf(
-                $this->__('Unsupported Settings Category \'%s\'', 'graphql-api'),
-                $settingsCategory
-            )
-        );
+        return str_replace('-', '_', $this->getDBOptionName($settingsCategory));
     }
 }

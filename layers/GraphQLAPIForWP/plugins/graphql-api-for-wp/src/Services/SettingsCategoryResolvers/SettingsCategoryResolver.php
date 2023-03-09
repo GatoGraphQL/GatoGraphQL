@@ -44,14 +44,4 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             default => parent::getDBOptionName($settingsCategory),
         };
     }
-
-    public function getOptionsFormName(string $settingsCategory): string
-    {
-        return match ($settingsCategory) {
-            self::GRAPHQL_API_SETTINGS => Options::SETTINGS,
-            self::PLUGIN_SETTINGS => Options::PLUGIN_SETTINGS,
-            self::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,
-            default => parent::getOptionsFormName($settingsCategory),
-        };
-    }
 }
