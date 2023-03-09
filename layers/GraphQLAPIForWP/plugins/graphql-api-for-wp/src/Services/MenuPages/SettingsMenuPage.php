@@ -152,8 +152,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         \add_action(
             'admin_init',
             function (): void {
-                $items = $this->getSettingsNormalizer()->getAllSettingsItems();
-                foreach ($items as $item) {
+                $moduleSettingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+                foreach ($moduleSettingsItems as $item) {
                     $settingsFieldForModule = $this->getSettingsFieldForModule($item['id']);
                     $module = $item['module'];
                     \add_settings_section(
@@ -246,21 +246,21 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     public function print(): void
     {
-        $items = $this->getSettingsNormalizer()->getAllSettingsItems();
-        if (!$items) {
+        $moduleSettingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+        if (!$moduleSettingsItems) {
             _e('There are no items to be configured', 'graphql-api');
             return;
         }
 
         $printWithTabs = $this->printWithTabs();
         // By default, focus on the first module
-        $activeModuleID = $items[0]['id'];
+        $activeModuleID = $moduleSettingsItems[0]['id'];
         // If passing a tab, focus on that one, if the module exists
         $tab = App::query(RequestParams::TAB);
         if ($tab !== null) {
             $moduleIDs = array_map(
                 fn ($item) => $item['id'],
-                $items
+                $moduleSettingsItems
             );
             if (in_array($tab, $moduleIDs)) {
                 $activeModuleID = $tab;
@@ -270,20 +270,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         if ($printWithTabs) {
             $class .= ' graphql-api-tabpanel vertical-tabs';
         }
+
+        ob_start();
         ?>
         <div
-            id="graphql-api-settings"
+            id="graphql-api-module-settings"
             class="<?php echo $class ?>"
         >
-            <h1><?php \_e('GraphQL API — Settings', 'graphql-api'); ?></h1>
-            <?php \settings_errors(); ?>
-
             <?php if ($printWithTabs) : ?>
                 <div class="nav-tab-container">
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
                         <?php
-                        foreach ($items as $item) {
+                        foreach ($moduleSettingsItems as $item) {
                             printf(
                                 '<a href="#%s" class="nav-tab %s">%s</a>',
                                 $item['id'],
@@ -310,7 +309,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             <?php
                             $sectionClass = $printWithTabs ? 'tab-content' : '';
                             \settings_fields(self::SETTINGS_FIELD);
-                            foreach ($items as $item) {
+                            foreach ($moduleSettingsItems as $item) {
                                 $sectionStyle = '';
                                 $maybeTitle = $printWithTabs
                                     ? sprintf(
@@ -339,13 +338,66 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             \submit_button(
                                 \__('Save Changes (All)', 'graphql-api')
                             );
-        ?>
+                            ?>
                         </form>
             <?php if ($printWithTabs) : ?>
                     </div> <!-- class="nav-tab-content" -->
                 </div> <!-- class="nav-tab-container" -->
             <?php endif; ?>
         </div>
+        <?php
+        /** @var string */
+        $moduleSettingsContent = ob_get_clean();
+
+        $primarySettingsItems = [
+            [
+                'id' => 'module-settings',
+                'name' => \__('Module Settings', 'graphql-api'),
+                'content' => $moduleSettingsContent,
+            ],
+        ];
+        $activePrimarySettingsID = $primarySettingsItems[0]['id'];
+
+        // Specify to only toggle the outer .tab-content divs (skip the inner ones)
+        ?>
+            <div
+                id="graphql-api-settings"
+                class="wrap graphql-api-tabpanel"
+                data-tab-content-target="#graphql-api-settings-nav-tab-content > .tab-content"
+            >
+                <h1><?php \_e('GraphQL API — Settings', 'graphql-api'); ?></h1>
+                <?php \settings_errors(); ?>
+                <div class="nav-tab-container">
+                    <!-- Tabs -->
+                    <h2 class="nav-tab-wrapper">
+                        <?php
+                        foreach ($primarySettingsItems as $item) {
+                            printf(
+                                '<a href="#%s" class="nav-tab %s">%s</a>',
+                                $item['id'],
+                                $item['id'] === $activePrimarySettingsID ? 'nav-tab-active' : '',
+                                $item['name']
+                            );
+                        }
+                        ?>
+                    </h2>
+                    <div id="graphql-api-settings-nav-tab-content" class="nav-tab-content">
+                        <?php
+                        foreach ($primarySettingsItems as $item) {
+                            $sectionStyle = sprintf(
+                                'display: %s;',
+                                $item['id'] === $activePrimarySettingsID ? 'block' : 'none'
+                            );
+                            ?>
+                            <div id="<?php echo $item['id'] ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
+                                <?php echo $item['content'] ?>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
         <?php
     }
 
