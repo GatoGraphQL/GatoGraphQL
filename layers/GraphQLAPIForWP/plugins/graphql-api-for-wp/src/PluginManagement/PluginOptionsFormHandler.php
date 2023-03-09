@@ -29,23 +29,17 @@ class PluginOptionsFormHandler
      *
      * @return array<string,mixed>
      */
-    public function getNormalizedOptionValues(string $formOrigin): array
+    public function getNormalizedOptionValues(string $settingsCategory): array
     {
-        if (($this->normalizedOptionValuesCache[$formOrigin] ?? null) === null) {
-            $formOriginSettingsCategories = [
-                SettingsMenuPage::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
-                SettingsMenuPage::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
-                SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD => SettingsCategories::PLUGIN_MANAGEMENT,
-            ];
-            $settingsCategory = $formOriginSettingsCategories[$formOrigin];
+        if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
-            $value = App::getRequest()->request->all()[$formOrigin] ?? [];
-            $this->normalizedOptionValuesCache[$formOrigin] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
+            $value = App::getRequest()->request->all()[$settingsCategory] ?? [];
+            $this->normalizedOptionValuesCache[$settingsCategory] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
-        return $this->normalizedOptionValuesCache[$formOrigin];
+        return $this->normalizedOptionValuesCache[$settingsCategory];
     }
 
     /**
@@ -68,10 +62,10 @@ class PluginOptionsFormHandler
                 SettingsMenuPage::PLUGIN_SETTINGS_FIELD,
                 SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
             ])) {
-                $value = $this->getNormalizedOptionValues($formOrigin);
-                // Return the specific value to this module/option
                 $moduleRegistry = SystemModuleRegistryFacade::getInstance();
                 $moduleResolver = $moduleRegistry->getModuleResolver($module);
+                $value = $this->getNormalizedOptionValues($moduleResolver->getSettingsCategory($module));
+                // Return the specific value to this module/option
                 $optionName = $moduleResolver->getSettingOptionName($module, $option);
                 return $value[$optionName];
             }
