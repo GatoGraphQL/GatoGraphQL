@@ -112,17 +112,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $this->hasItem($optionName, $item);
     }
 
-    protected function getDBOptionName(string $settingsCategory): string
-    {
-        $settingsCategoryDBOptionNames = [
-            SettingsCategories::GRAPHQL_API_SETTINGS => Options::SETTINGS,
-            SettingsCategories::PLUGIN_SETTINGS => Options::PLUGIN_SETTINGS,
-            SettingsCategories::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,
-        ];
-        /** @var string */
-        return $settingsCategoryDBOptionNames[$settingsCategory];
-    }
-
     public function getSetting(string $module, string $option): mixed
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
