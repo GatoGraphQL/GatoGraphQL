@@ -24,6 +24,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     public final const FORM_ORIGIN = 'form-origin';
     public final const SETTINGS_FIELD = 'graphql-api-settings';
+    public final const PLUGIN_SETTINGS_FIELD = 'graphql-api-plugin-settings';
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
@@ -154,78 +155,96 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             'admin_init',
             function (): void {
                 $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-                // @todo Check: can just register all of them!
-                // $moduleSettingsItems = array_filter(
-                //     $settingsItems,
-                //     /** @param array<string,mixed> $item */
-                //     fn (array $item) => $item['settings-category'] === SettingsCategories::MODULE_SETTINGS
-                // );
-                foreach ($settingsItems as $item) {
-                    $settingsFieldForModule = $this->getSettingsFieldForModule($item['id']);
-                    $module = $item['module'];
-                    \add_settings_section(
-                        $settingsFieldForModule,
-                        // The empty string ensures the render function won't output a h2.
-                        '',
-                        function (): void {
-                        },
-                        self::SETTINGS_FIELD
-                    );
-                    foreach ($item['settings'] as $itemSetting) {
-                        \add_settings_field(
-                            $itemSetting[Properties::NAME],
-                            $itemSetting[Properties::TITLE] ?? '',
-                            function () use ($module, $itemSetting): void {
-                                $type = $itemSetting[Properties::TYPE] ?? null;
-                                $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
-                                if (!empty($possibleValues)) {
-                                    $this->printSelectField($module, $itemSetting);
-                                } elseif ($type === Properties::TYPE_ARRAY) {
-                                    $this->printTextareaField($module, $itemSetting);
-                                } elseif ($type === Properties::TYPE_BOOL) {
-                                    $this->printCheckboxField($module, $itemSetting);
-                                } elseif ($type === Properties::TYPE_NULL) {
-                                    $this->printLabelField($module, $itemSetting);
-                                } else {
-                                    $this->printInputField($module, $itemSetting);
-                                }
-                            },
-                            self::SETTINGS_FIELD,
-                            $settingsFieldForModule,
-                            [
-                                'label' => $itemSetting[Properties::DESCRIPTION] ?? '',
-                                'id' => $itemSetting[Properties::NAME],
-                            ]
-                        );
-                    }
-                }
-
-                /**
-                 * Finally register all the settings
-                 */
-                \register_setting(
-                    self::SETTINGS_FIELD,
-                    Options::SETTINGS,
+                $settingsEntries = [
                     [
-                        'type' => 'array',
-                        'description' => \__('Settings for the GraphQL API', 'graphql-api'),
-                        /**
-                         * Don't execute the callback sanitazation here,
-                         * because it will be called twice: once triggered
-                         * by `update_option` and once by `add_option`,
-                         * with `add_option` happening after the extra logic
-                         * added by `pre_update_option_{$option}` has taken
-                         * place, which means that it undoes the logic added
-                         * on that hook to set the state for "reset the settings".
-                         *
-                         * Then, the sanitazation is also executed on that hook.
-                         */
-                        // // This call is needed to cast the data
-                        // // before saving to the DB
-                        // 'sanitize_callback' => $this->getSettingsNormalizer()->normalizeSettings(...),
-                        'show_in_rest' => false,
-                    ]
-                );
+                        'category' => SettingsCategories::MODULE_SETTINGS,
+                        'field' => self::SETTINGS_FIELD,
+                        'option-name' => Options::SETTINGS,
+                        'description' => \__('Module Settings for the GraphQL API', 'graphql-api'),
+                    ],
+                    [
+                        'category' => SettingsCategories::PLUGIN_SETTINGS,
+                        'field' => self::PLUGIN_SETTINGS_FIELD,
+                        'option-name' => Options::PLUGIN_SETTINGS,
+                        'description' => \__('Plugin Settings for the GraphQL API', 'graphql-api'),
+                    ],
+                ];
+                foreach ($settingsEntries as $settingsEntry) {
+                    $categorySettingsItems = array_filter(
+                        $settingsItems,
+                        /** @param array<string,mixed> $item */
+                        fn (array $item) => $item['settings-category'] === $settingsEntry['category']
+                    );
+                    $settingsField = $settingsEntry['field'];
+                    $settingsOptionName = $settingsEntry['option-name'];
+                    $settingsDescription = $settingsEntry['description'];
+                    foreach ($categorySettingsItems as $item) {
+                        $settingsFieldForModule = $this->getSettingsFieldForModule($item['id']);
+                        $module = $item['module'];
+                        \add_settings_section(
+                            $settingsFieldForModule,
+                            // The empty string ensures the render function won't output a h2.
+                            '',
+                            function (): void {
+                            },
+                            $settingsField
+                        );
+                        foreach ($item['settings'] as $itemSetting) {
+                            \add_settings_field(
+                                $itemSetting[Properties::NAME],
+                                $itemSetting[Properties::TITLE] ?? '',
+                                function () use ($module, $itemSetting): void {
+                                    $type = $itemSetting[Properties::TYPE] ?? null;
+                                    $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+                                    if (!empty($possibleValues)) {
+                                        $this->printSelectField($module, $itemSetting);
+                                    } elseif ($type === Properties::TYPE_ARRAY) {
+                                        $this->printTextareaField($module, $itemSetting);
+                                    } elseif ($type === Properties::TYPE_BOOL) {
+                                        $this->printCheckboxField($module, $itemSetting);
+                                    } elseif ($type === Properties::TYPE_NULL) {
+                                        $this->printLabelField($module, $itemSetting);
+                                    } else {
+                                        $this->printInputField($module, $itemSetting);
+                                    }
+                                },
+                                $settingsField,
+                                $settingsFieldForModule,
+                                [
+                                    'label' => $itemSetting[Properties::DESCRIPTION] ?? '',
+                                    'id' => $itemSetting[Properties::NAME],
+                                ]
+                            );
+                        }
+                    }
+
+                    /**
+                     * Finally register all the settings
+                     */
+                    \register_setting(
+                        $settingsField,
+                        $settingsOptionName,
+                        [
+                            'type' => 'array',
+                            'description' => $settingsDescription,
+                            /**
+                             * Don't execute the callback sanitazation here,
+                             * because it will be called twice: once triggered
+                             * by `update_option` and once by `add_option`,
+                             * with `add_option` happening after the extra logic
+                             * added by `pre_update_option_{$option}` has taken
+                             * place, which means that it undoes the logic added
+                             * on that hook to set the state for "reset the settings".
+                             *
+                             * Then, the sanitazation is also executed on that hook.
+                             */
+                            // // This call is needed to cast the data
+                            // // before saving to the DB
+                            // 'sanitize_callback' => $this->getSettingsNormalizer()->normalizeSettings(...),
+                            'show_in_rest' => false,
+                        ]
+                    );
+                }
             }
         );
     }
