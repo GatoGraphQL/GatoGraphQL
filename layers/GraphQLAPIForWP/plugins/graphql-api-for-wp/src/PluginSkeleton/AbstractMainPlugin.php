@@ -151,9 +151,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             Options::PLUGIN_SETTINGS,
         ];
         foreach ($storeToDBOptions as $option) {
-            if (get_option($option) === false) {
-                update_option($option, []);
+            if (get_option($option) !== false) {
+                continue;
             }
+            update_option($option, []);
         }
     }
 
