@@ -277,11 +277,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             _e('There are no items to be configured', 'graphql-api');
             return;
         }
-        $graphQLAPISettingsItems = array_filter(
+        $graphQLAPISettingsItems = array_values(array_filter(
             $settingsItems,
             /** @param array<string,mixed> $item */
             fn (array $item) => $item['settings-category'] === SettingsCategories::GRAPHQL_API_SETTINGS
-        );
+        ));
 
         $printWithTabs = $this->printWithTabs();
         // By default, focus on the first module
