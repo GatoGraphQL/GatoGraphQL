@@ -27,10 +27,12 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
     }
 
     /**
-     * Convert "graphql-api-settings" into "graphql_api_settings" and like that
+     * Please notice: the name of the field must be the same as that
+     * of the option name in the DB, or otherwise doing `register_setting`
+     * in SettingsMenuPage does not work (for some reason, $values is null).
      */
-    public function getOptionsFormName(string $settingsCategory): string
+    final public function getOptionsFormName(string $settingsCategory): string
     {
-        return str_replace('-', '_', $this->getDBOptionName($settingsCategory));
+        return $this->getDBOptionName($settingsCategory);
     }
 }
