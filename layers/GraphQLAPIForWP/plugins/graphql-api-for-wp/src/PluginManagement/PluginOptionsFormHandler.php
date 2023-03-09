@@ -63,19 +63,16 @@ class PluginOptionsFormHandler
             return $value;
         }
 
-        $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
-        $settingsCategoryOptionsFormNames = [];
-        foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
-            $settingsCategoryOptionsFormNames[] = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-        }
-        if (!in_array($formOrigin, $settingsCategoryOptionsFormNames)) {
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $settingsCategory = $moduleResolver->getSettingsCategory($module);
+        $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
+        if ($formOrigin !== $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory)) {
             return $value;
         }
 
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $value = $this->getNormalizedOptionValues($moduleResolver->getSettingsCategory($module));
+        $value = $this->getNormalizedOptionValues($settingsCategory);
         // Return the specific value to this module/option
         $optionName = $moduleResolver->getSettingOptionName($module, $option);
         return $value[$optionName];
