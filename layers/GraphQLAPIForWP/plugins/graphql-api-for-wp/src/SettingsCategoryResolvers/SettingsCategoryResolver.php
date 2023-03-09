@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SettingsCategoryResolvers;
+namespace GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers;
 
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Settings\Options;

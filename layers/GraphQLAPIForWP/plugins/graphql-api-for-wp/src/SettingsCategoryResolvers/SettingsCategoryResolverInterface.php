@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SettingsCategoryResolvers;
+namespace GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers;
 
 interface SettingsCategoryResolverInterface
 {
