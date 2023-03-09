@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
-use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
@@ -91,14 +90,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         return match ($module) {
             self::GENERAL => \__('General options for the plugin', 'graphql-api'),
             default => parent::getDescription($module),
-        };
-    }
-
-    public function getSettingsCategory(string $module): string
-    {
-        return match ($module) {
-            self::GENERAL => SettingsCategories::PLUGIN_SETTINGS,
-            default => parent::getSettingsCategory($module),
         };
     }
 
