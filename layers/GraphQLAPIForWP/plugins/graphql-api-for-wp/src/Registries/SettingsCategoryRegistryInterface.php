@@ -18,4 +18,8 @@ interface SettingsCategoryRegistryInterface
      * @return SettingsCategoryResolverInterface[]
      */
     public function getSettingsCategoryResolvers(): array;
+    /**
+     * @return array<string,SettingsCategoryResolverInterface>
+     */
+    public function getSettingsCategorySettingsCategoryResolvers(): array;
 }

@@ -65,12 +65,9 @@ class PluginOptionsFormHandler
 
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
-        $settingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategoryResolvers();
         $settingsCategoryOptionsFormNames = [];
-        foreach ($settingsCategoryResolvers as $settingsCategoryResolver) {
-            foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
-                $settingsCategoryOptionsFormNames[] = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-            }
+        foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
+            $settingsCategoryOptionsFormNames[] = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
         }
         if (!in_array($formOrigin, $settingsCategoryOptionsFormNames)) {
             return $value;

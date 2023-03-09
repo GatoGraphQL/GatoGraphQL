@@ -132,13 +132,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             'admin_init',
             function () use ($settingsCategoryRegistry): void {
                 $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-                $settingsCategorySettingsCategoryResolvers = [];
-                foreach ($settingsCategoryRegistry->getSettingsCategoryResolvers() as $settingsCategoryResolver) {
-                    foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
-                        $settingsCategorySettingsCategoryResolvers[$settingsCategory] = $settingsCategoryResolver;
-                    }
-                }
-                foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
                     $categorySettingsItems = array_values(array_filter(
                         $settingsItems,
                         /** @param array<string,mixed> $item */
@@ -280,15 +274,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ];
 
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
-        /** @var array<string,SettingsCategoryResolverInterface*/
-        $settingsCategorySettingsCategoryResolvers = [];
-        foreach ($settingsCategoryRegistry->getSettingsCategoryResolvers() as $settingsCategoryResolver) {
-            foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
-                $settingsCategorySettingsCategoryResolvers[$settingsCategory] = $settingsCategoryResolver;
-            }
-        }
         $primarySettingsItems = [];
-        foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+        foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
             $primarySettingsItems[] = [
                 'category' => $settingsCategory,
                 'id' => str_replace(['-', '\\'], '_', $settingsCategory),

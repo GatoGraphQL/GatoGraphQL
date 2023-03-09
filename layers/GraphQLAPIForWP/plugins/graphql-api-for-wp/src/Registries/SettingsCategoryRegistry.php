@@ -10,14 +10,19 @@ use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolverInte
 class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
 {
     /**
-     * @var array<string,SettingsCategoryResolverInterface>
+     * @var SettingsCategoryResolverInterface[]
      */
     protected array $settingsCategoryResolvers = [];
+    /**
+     * @var array<string,SettingsCategoryResolverInterface>
+     */
+    protected array $settingsCategorySettingsCategoryResolvers = [];
 
     public function addSettingsCategoryResolver(SettingsCategoryResolverInterface $settingsCategoryResolver): void
     {
+        $this->settingsCategoryResolvers[] = $settingsCategoryResolver;
         foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
-            $this->settingsCategoryResolvers[$settingsCategory] = $settingsCategoryResolver;
+            $this->settingsCategorySettingsCategoryResolvers[$settingsCategory] = $settingsCategoryResolver;
         }
     }
 
@@ -26,13 +31,13 @@ class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
      */
     public function getSettingsCategoryResolver(string $settingsCategory): SettingsCategoryResolverInterface
     {
-        if (!isset($this->settingsCategoryResolvers[$settingsCategory])) {
+        if (!isset($this->settingsCategorySettingsCategoryResolvers[$settingsCategory])) {
             throw new SettingsCategoryNotExistsException(sprintf(
                 \__('Settings Category \'%s\' does not exist', 'graphql-api'),
                 $settingsCategory
             ));
         }
-        return $this->settingsCategoryResolvers[$settingsCategory];
+        return $this->settingsCategorySettingsCategoryResolvers[$settingsCategory];
     }
 
     /**
@@ -40,6 +45,14 @@ class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
      */
     public function getSettingsCategoryResolvers(): array
     {
-        return array_values($this->settingsCategoryResolvers);
+        return $this->settingsCategoryResolvers;
+    }
+
+    /**
+     * @return array<string,SettingsCategoryResolverInterface>
+     */
+    public function getSettingsCategorySettingsCategoryResolvers(): array
+    {
+        return $this->settingsCategorySettingsCategoryResolvers;
     }
 }
