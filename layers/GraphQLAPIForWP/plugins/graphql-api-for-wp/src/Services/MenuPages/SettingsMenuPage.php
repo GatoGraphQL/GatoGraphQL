@@ -198,9 +198,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                              * once triggered by `update_option` and once by `add_option`,
                              * (which is called by `update_option`).
                              */
-                            'sanitize_callback' => function (array $values) use ($settingsCategory): array {
-                                return $this->sanitizeCallback($values, $settingsCategory);
-                            },
+                            'sanitize_callback' => fn (array $values) => $this->sanitizeCallback($values, $settingsCategory),
                             'show_in_rest' => false,
                         ]
                     );
