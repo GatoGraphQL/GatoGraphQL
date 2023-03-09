@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+
 use function get_submit_button;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -80,14 +79,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         return match ($module) {
             self::PLUGIN_MANAGEMENT => \__('Admin tools to manage the GraphQL API plugin', 'graphql-api'),
             default => parent::getDescription($module),
-        };
-    }
-
-    public function getSettingsCategory(string $module): string
-    {
-        return match ($module) {
-            self::PLUGIN_MANAGEMENT => SettingsCategories::PLUGIN_MANAGEMENT,
-            default => parent::getSettingsCategory($module),
         };
     }
 
