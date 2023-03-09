@@ -25,9 +25,6 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistry
-
     GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistry
 

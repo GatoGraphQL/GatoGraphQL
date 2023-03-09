@@ -7,6 +7,9 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry
 
+    GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistry
+
     GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistry'
         
