@@ -36,7 +36,7 @@ class PluginOptionsFormHandler
             $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
             $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
             $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-            
+
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them

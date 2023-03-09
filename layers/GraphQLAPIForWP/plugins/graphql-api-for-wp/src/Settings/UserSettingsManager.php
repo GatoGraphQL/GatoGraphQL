@@ -149,7 +149,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
-        
+
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $settingsCategory = $moduleResolver->getSettingsCategory($module);
         $optionName = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);

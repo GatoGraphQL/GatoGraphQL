@@ -9,7 +9,7 @@ use PoP\Root\Services\BasicServiceTrait;
 abstract class AbstractModuleTypeResolver implements ModuleTypeResolverInterface
 {
     use BasicServiceTrait;
-    
+
     /**
      * By default, the slug is the module's name, without the owner/package
      */
