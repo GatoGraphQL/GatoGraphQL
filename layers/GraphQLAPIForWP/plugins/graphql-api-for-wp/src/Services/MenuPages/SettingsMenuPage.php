@@ -82,7 +82,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                  * @param array<string,mixed> $values
                  * @return array<string,mixed>
                  */
-                function (array $values): array {
+                function (array $values) use ($option): array {
+                    $dbFormOptionSettingsCategories = [
+                        self::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
+                        self::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
+                    ];
+            
                     /**
                      * Execute the callback sanitazation here,
                      * and not on entry 'sanitize_callback' from `register_setting`,
@@ -96,7 +101,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * This call is needed to cast the data
                      * before saving to the DB.
                      */
-                    return $this->getSettingsNormalizer()->normalizeSettings($values, SettingsCategories::GRAPHQL_API_SETTINGS);
+                    return $this->getSettingsNormalizer()->normalizeSettings($values, $dbFormOptionSettingsCategories[$option]);
                 }
             );
         }
