@@ -51,7 +51,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
 
     public function getName(string $moduleType): string
     {
-        $names = [
+        return match ($moduleType) {
             self::ACCESS_CONTROL => \__('Access Control', 'graphql-api'),
             self::CLIENT => \__('Client', 'graphql-api'),
             self::ENDPOINT => \__('Endpoint', 'graphql-api'),
@@ -66,7 +66,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::SCHEMA_DIRECTIVE => \__('Schema Directive', 'graphql-api'),
             self::USER_INTERFACE => \__('User Interface', 'graphql-api'),
             self::VERSIONING => \__('Versioning', 'graphql-api'),
-        ];
-        return $names[$moduleType] ?? '';
+            default => '',
+        };
     }
 }
