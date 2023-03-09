@@ -194,7 +194,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $settingsOptionName = $settingsEntry['option-name'];
                     $settingsDescription = $settingsEntry['description'];
                     foreach ($categorySettingsItems as $item) {
-                        $settingsFieldForModule = $this->getSettingsFieldForModule($item['id']);
+                        $settingsFieldForModule = $this->getSettingsFieldForModule($settingsField, $item['id']);
                         $module = $item['module'];
                         \add_settings_section(
                             $settingsFieldForModule,
@@ -264,9 +264,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
     }
 
-    protected function getSettingsFieldForModule(string $moduleID): string
+    protected function getSettingsFieldForModule(string $optionsFormField, string $moduleID): string
     {
-        return self::SETTINGS_FIELD . '-' . $moduleID;
+        return $optionsFormField . '-' . $moduleID;
     }
 
     /**
@@ -432,7 +432,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
                                                             <?php echo $title ?>
                                                             <table class="form-table">
-                                                                <?php \do_settings_fields($optionsFormField, $this->getSettingsFieldForModule($item['id'])) ?>
+                                                                <?php \do_settings_fields($optionsFormField, $this->getSettingsFieldForModule($optionsFormField, $item['id'])) ?>
                                                             </table>
                                                         </div>
                                                         <?php
