@@ -139,11 +139,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     }
                 }
                 foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
-                    $categorySettingsItems = array_filter(
+                    $categorySettingsItems = array_values(array_filter(
                         $settingsItems,
                         /** @param array<string,mixed> $item */
                         fn (array $item) => $item['settings-category'] === $settingsCategory
-                    );
+                    ));
                     $settingsField = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
                     $settingsOptionName = $settingsCategoryResolver->getDBOptionName($settingsCategory);
                     $settingsDescription = $settingsCategoryResolver->getDescription($settingsCategory);
