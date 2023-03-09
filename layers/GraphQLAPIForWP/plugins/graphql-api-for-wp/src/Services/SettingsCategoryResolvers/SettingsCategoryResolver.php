@@ -28,7 +28,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getDescription(string $settingsCategory): ?string
     {
         return match ($settingsCategory) {
-            self::GRAPHQL_API_SETTINGS => $this->__('Settings for the GraphQL API', 'graphql-api'),
+            self::GRAPHQL_API_SETTINGS => $this->__('GraphQL API Settings', 'graphql-api'),
             self::PLUGIN_SETTINGS => $this->__('Plugin Settings', 'graphql-api'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'graphql-api'),
             default => parent::getDescription($settingsCategory),
