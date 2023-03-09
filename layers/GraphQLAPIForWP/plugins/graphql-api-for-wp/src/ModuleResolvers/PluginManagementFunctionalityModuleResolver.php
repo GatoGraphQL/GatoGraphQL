@@ -103,7 +103,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                  */
                 $resetButtonName = sprintf(
                     '%s[%s]',
-                    SettingsMenuPage::SETTINGS_FIELD,
+                    SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
                     SettingsMenuPage::RESET_SETTINGS_BUTTON_ID
                 );
                 $buttonWrapperID = SettingsMenuPage::RESET_SETTINGS_BUTTON_ID . '-wrapper';

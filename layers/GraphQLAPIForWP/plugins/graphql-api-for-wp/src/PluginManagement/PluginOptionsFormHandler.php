@@ -7,9 +7,9 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
+use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoPAPI\APIEndpoints\EndpointUtils;
 
 /**
  * Helper class with functions to set the configuration in PoP components.
@@ -19,26 +19,26 @@ class PluginOptionsFormHandler
     /**
      * Cache the options after normalizing them
      *
-     * @var array<string,mixed>|null
+     * @var array<string,array<string,mixed>|null>
      */
-    protected ?array $normalizedOptionValuesCache = null;
+    protected array $normalizedOptionValuesCache = [];
 
     /**
      * Get the values from the form submitted to options.php, and normalize them
      *
      * @return array<string,mixed>
      */
-    public function getNormalizedOptionValues(): array
+    public function getNormalizedOptionValues(string $settingsCategory): array
     {
-        if ($this->normalizedOptionValuesCache === null) {
+        if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
-            $value = App::getRequest()->request->all()[SettingsMenuPage::SETTINGS_FIELD] ?? [];
-            $this->normalizedOptionValuesCache = $settingsNormalizer->normalizeSettings($value);
+            $value = App::getRequest()->request->all()[$settingsCategory] ?? [];
+            $this->normalizedOptionValuesCache[$settingsCategory] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
-        return $this->normalizedOptionValuesCache;
+        return $this->normalizedOptionValuesCache[$settingsCategory];
     }
 
     /**
@@ -54,16 +54,22 @@ class PluginOptionsFormHandler
     public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
     {
         global $pagenow;
-        if (
-            $pagenow === 'options.php'
-            && App::request(SettingsMenuPage::FORM_ORIGIN) === SettingsMenuPage::SETTINGS_FIELD
-        ) {
-            $value = $this->getNormalizedOptionValues();
-            // Return the specific value to this module/option
-            $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $optionName = $moduleResolver->getSettingOptionName($module, $option);
-            return $value[$optionName];
+        if ($pagenow === 'options.php') {
+            $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
+            if (
+                in_array($formOrigin, [
+                SettingsMenuPage::SETTINGS_FIELD,
+                SettingsMenuPage::PLUGIN_SETTINGS_FIELD,
+                SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
+                ])
+            ) {
+                $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+                $moduleResolver = $moduleRegistry->getModuleResolver($module);
+                $value = $this->getNormalizedOptionValues($moduleResolver->getSettingsCategory($module));
+                // Return the specific value to this module/option
+                $optionName = $moduleResolver->getSettingOptionName($module, $option);
+                return $value[$optionName];
+            }
         }
         return $value;
     }

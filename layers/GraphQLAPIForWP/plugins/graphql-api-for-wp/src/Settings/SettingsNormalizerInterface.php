@@ -15,7 +15,10 @@ interface SettingsNormalizerInterface
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
      */
-    public function normalizeSettings(array $values): array;
+    public function normalizeSettings(
+        array $values,
+        string $settingsCategory,
+    ): array;
     /**
      * Normalize the form values for a specific module
      *
@@ -28,5 +31,5 @@ interface SettingsNormalizerInterface
      *
      * @return array<array<string,mixed>> Each item is an array of prop => value
      */
-    public function getAllSettingsItems(): array;
+    public function getAllSettingsItems(?string $settingsCategory = null): array;
 }

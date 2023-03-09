@@ -60,6 +60,14 @@ interface ModuleResolverInterface
      */
     public function getSettings(string $module): array;
     /**
+     * The category where to display the settings:
+     *
+     * - GraphQL API Settings
+     * - Plugin Settings
+     * - Plugin Management
+     */
+    public function getSettingsCategory(string $module): string;
+    /**
      * Default value for an option set by the module
      */
     public function getSettingOptionName(string $module, string $option): string;

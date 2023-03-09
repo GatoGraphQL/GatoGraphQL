@@ -33,11 +33,13 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
      */
-    public function normalizeSettings(array $values): array
-    {
+    public function normalizeSettings(
+        array $values,
+        string $settingsCategory,
+    ): array {
         $moduleRegistry = $this->getModuleRegistry();
-        $items = $this->getAllSettingsItems();
-        foreach ($items as $item) {
+        $settingsItems = $this->getAllSettingsItems($settingsCategory);
+        foreach ($settingsItems as $item) {
             $module = $item['module'];
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             foreach ($item['settings'] as $itemSetting) {
@@ -121,7 +123,10 @@ class SettingsNormalizer implements SettingsNormalizerInterface
             $normalizedOptionValues[$settingsOptionName] = $value;
         }
         // Normalize it
-        $normalizedOptionValues = $this->normalizeSettings($normalizedOptionValues);
+        $normalizedOptionValues = $this->normalizeSettings(
+            $normalizedOptionValues,
+            $moduleResolver->getSettingsCategory($module)
+        );
 
         // Transform back
         foreach ($values as $option => $value) {
@@ -137,20 +142,25 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      *
      * @return array<array<string,mixed>> Each item is an array of prop => value
      */
-    public function getAllSettingsItems(): array
+    public function getAllSettingsItems(?string $settingsCategory = null): array
     {
         $moduleRegistry = $this->getModuleRegistry();
-        $items = [];
+        $settingsItems = [];
         $modules = $moduleRegistry->getAllModules(true, true, false, true);
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $items[] = [
+            $moduleSettingsCategory = $moduleResolver->getSettingsCategory($module);
+            if ($settingsCategory !== null && $moduleSettingsCategory !== $settingsCategory) {
+                continue;
+            }
+            $settingsItems[] = [
                 'module' => $module,
                 'id' => $moduleResolver->getID($module),
                 'name' => $moduleResolver->getName($module),
                 'settings' => $moduleResolver->getSettings($module),
+                'settings-category' => $moduleSettingsCategory,
             ];
         }
-        return $items;
+        return $settingsItems;
     }
 }

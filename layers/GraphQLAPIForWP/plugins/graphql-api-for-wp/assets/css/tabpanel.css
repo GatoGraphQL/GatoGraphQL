@@ -13,6 +13,17 @@
     border-right: 0;
 }
 
+/**
+ * Override style from WP to add a bottom border on mobile
+ */
+@media screen and (max-width: 600px) {
+    .graphql-api-tabpanel.vertical-tabs .nav-tab-wrapper,
+    .wrap.graphql-api-tabpanel.vertical-tabs h2.nav-tab-wrapper,
+    .graphql-api-tabpanel.vertical-tabs h1.nav-tab-wrapper {
+        border-bottom: 1px solid #c3c4c7;
+    }
+}
+
 .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper > a.nav-tab {
     display: block;
     white-space: initial;
@@ -35,11 +46,21 @@
     max-height: calc(100vh - 120px);
 }
 /**
+ * The Settings page has a tabPanel inside another one.
+ * Compute for both of them
+ */
+.graphql-api-tabpanel .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
+    max-height: calc(100vh - 183px);
+}
+/**
  * After saving the Settings, there'll be a "Settings saved." notice,
  * which is 60 px high. Include it in the calculation.
  */
 .graphql-api-tabpanel.vertical-tabs > .notice + .nav-tab-container > .nav-tab-wrapper {
     max-height: calc(100vh - 180px);
+}
+.graphql-api-tabpanel > .notice + .nav-tab-container > .nav-tab-content .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
+    max-height: calc(100vh - 243px);
 }
 @media (min-width: 600px) {
     .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {

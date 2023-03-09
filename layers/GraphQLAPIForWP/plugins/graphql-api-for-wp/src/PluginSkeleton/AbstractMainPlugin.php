@@ -146,9 +146,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function maybeStoreEmptySettings(): void
     {
-        $settings = get_option(Options::SETTINGS);
-        if ($settings === false) {
-            update_option(Options::SETTINGS, []);
+        $storeToDBOptions = [
+            Options::SETTINGS,
+            Options::PLUGIN_SETTINGS,
+        ];
+        foreach ($storeToDBOptions as $option) {
+            if (get_option($option) !== false) {
+                continue;
+            }
+            update_option($option, []);
         }
     }
 

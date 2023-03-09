@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -114,6 +115,18 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     public function getSettings(string $module): array
     {
         return [];
+    }
+
+    /**
+     * The category where to display the settings:
+     *
+     * - GraphQL API Settings
+     * - Plugin Settings
+     * - Plugin Management
+     */
+    public function getSettingsCategory(string $module): string
+    {
+        return SettingsCategories::GRAPHQL_API_SETTINGS;
     }
 
     /**
