@@ -12,4 +12,6 @@ interface SettingsCategoryResolverInterface
     public function getSettingsCategoriesToResolve(): array;
 
     public function getDescription(string $settingsCategory): ?string;
+
+    public function getDBOptionName(string $settingsCategory): string;
 }
