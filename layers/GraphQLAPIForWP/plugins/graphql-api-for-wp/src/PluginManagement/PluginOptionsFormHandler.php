@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
-use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
@@ -57,11 +56,13 @@ class PluginOptionsFormHandler
         global $pagenow;
         if ($pagenow === 'options.php') {
             $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-            if (in_array($formOrigin, [
+            if (
+                in_array($formOrigin, [
                 SettingsMenuPage::SETTINGS_FIELD,
                 SettingsMenuPage::PLUGIN_SETTINGS_FIELD,
                 SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
-            ])) {
+                ])
+            ) {
                 $moduleRegistry = SystemModuleRegistryFacade::getInstance();
                 $moduleResolver = $moduleRegistry->getModuleResolver($module);
                 $value = $this->getNormalizedOptionValues($moduleResolver->getSettingsCategory($module));

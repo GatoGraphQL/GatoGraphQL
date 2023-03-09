@@ -119,7 +119,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 "update_option_{$option}",
                 $this->flushContainer(...)
             );
-
         }
 
         /**
@@ -240,7 +239,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         return $this->getSettingsNormalizer()->normalizeSettings($values, $dbFormOptionSettingsCategories[$settingsField]);
     }
-    
+
     protected function flushContainer(): void
     {
         \flush_rewrite_rules();
@@ -353,15 +352,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
                                 // If passing a tab, focus on that one, if the module exists
-                                if ($tab !== null) {
-                                    $moduleIDs = array_map(
-                                        fn ($item) => $item['id'],
-                                        $categorySettingsItems
-                                    );
-                                    if (in_array($tab, $moduleIDs)) {
-                                        $activeModuleID = $tab;
-                                    }
+                            if ($tab !== null) {
+                                $moduleIDs = array_map(
+                                    fn ($item) => $item['id'],
+                                    $categorySettingsItems
+                                );
+                                if (in_array($tab, $moduleIDs)) {
+                                    $activeModuleID = $tab;
                                 }
+                            }
                             ?>
                                 <div class="<?php echo $class ?>">
                                     <?php if ($printWithTabs) : ?>

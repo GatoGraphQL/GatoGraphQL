@@ -113,7 +113,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $settingsCategoryDBOptionNames = [
             SettingsCategories::GRAPHQL_API_SETTINGS => Options::SETTINGS,
             SettingsCategories::PLUGIN_SETTINGS => Options::PLUGIN_SETTINGS,
-            SettingsCategories::PLUGIN_MANAGEMENT=> Options::PLUGIN_MANAGEMENT,
+            SettingsCategories::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,
         ];
         /** @var string */
         return $settingsCategoryDBOptionNames[$settingsCategory];
@@ -158,7 +158,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
             $item = $moduleResolver->getSettingOptionName($module, $option);
             $itemValues[$item] = $value;
         }
-                
+
         $this->setOptionItems($optionName, $itemValues);
     }
 
