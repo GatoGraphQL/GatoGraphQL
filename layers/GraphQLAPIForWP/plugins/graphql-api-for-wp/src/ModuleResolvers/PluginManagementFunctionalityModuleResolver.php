@@ -108,7 +108,13 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 );
                 $buttonWrapperID = 'reset-button-wrapper';
                 $resetSettingsButtonsHTML = sprintf(
-                    '<p class="submit"><a href="#" onclick="document.getElementById(\'%s\').style.display=\'block\';return false;" class="button secondary">%s</a></p>',
+                    <<<HTML
+                        <p class="submit">
+                            <a href="#" onclick="document.getElementById(\'%s\').style.display=\'block\';return false;" class="button secondary">
+                                %s
+                            </a>
+                        </p>
+                    HTML,
                     $buttonWrapperID,
                     \__('Reset Settings', 'graphql-api')
                 );
