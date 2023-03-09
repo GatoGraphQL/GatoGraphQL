@@ -149,6 +149,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                 'id' => $moduleResolver->getID($module),
                 'name' => $moduleResolver->getName($module),
                 'settings' => $moduleResolver->getSettings($module),
+                'settings-category' => $moduleResolver->getSettingsCategory($module),
             ];
         }
         return $items;

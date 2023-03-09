@@ -60,6 +60,15 @@ interface ModuleResolverInterface
      */
     public function getSettings(string $module): array;
     /**
+     * The category where to display the settings:
+     *
+     * - Module Settings
+     * - Plugin Settings
+     * - Reset Module Settings
+     * - etc
+     */
+    public function getSettingsCategory(string $module): string;
+    /**
      * Default value for an option set by the module
      */
     public function getSettingOptionName(string $module, string $option): string;
