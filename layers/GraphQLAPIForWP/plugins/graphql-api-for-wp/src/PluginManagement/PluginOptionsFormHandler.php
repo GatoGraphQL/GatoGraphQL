@@ -60,26 +60,29 @@ class PluginOptionsFormHandler
     public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
     {
         global $pagenow;
-        if ($pagenow === 'options.php') {
-            $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-            $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
-            $settingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategoryResolvers();
-            $settingsCategoryOptionsFormNames = [];
-            foreach ($settingsCategoryResolvers as $settingsCategoryResolver) {
-                foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
-                    $settingsCategoryOptionsFormNames[] = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-                }
-            }
-            if (in_array($formOrigin, $settingsCategoryOptionsFormNames)) {
-                $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-                $moduleResolver = $moduleRegistry->getModuleResolver($module);
-                $value = $this->getNormalizedOptionValues($moduleResolver->getSettingsCategory($module));
-                // Return the specific value to this module/option
-                $optionName = $moduleResolver->getSettingOptionName($module, $option);
-                return $value[$optionName];
+        if ($pagenow !== 'options.php') {
+            return $value;
+        }
+
+        $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
+        $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+        $settingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategoryResolvers();
+        $settingsCategoryOptionsFormNames = [];
+        foreach ($settingsCategoryResolvers as $settingsCategoryResolver) {
+            foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
+                $settingsCategoryOptionsFormNames[] = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
             }
         }
-        return $value;
+        if (!in_array($formOrigin, $settingsCategoryOptionsFormNames)) {
+            return $value;
+        }
+
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $value = $this->getNormalizedOptionValues($moduleResolver->getSettingsCategory($module));
+        // Return the specific value to this module/option
+        $optionName = $moduleResolver->getSettingOptionName($module, $option);
+        return $value[$optionName];
     }
 
     /**
