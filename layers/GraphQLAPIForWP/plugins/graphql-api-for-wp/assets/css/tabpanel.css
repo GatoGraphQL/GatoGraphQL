@@ -13,6 +13,17 @@
     border-right: 0;
 }
 
+/**
+ * Override style from WP to add a bottom border on mobile
+ */
+@media screen and (max-width: 600px) {
+    .graphql-api-tabpanel.vertical-tabs .nav-tab-wrapper,
+    .wrap.graphql-api-tabpanel.vertical-tabs h2.nav-tab-wrapper,
+    .graphql-api-tabpanel.vertical-tabs h1.nav-tab-wrapper {
+        border-bottom: 1px solid #c3c4c7;
+    }
+}
+
 .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper > a.nav-tab {
     display: block;
     white-space: initial;
