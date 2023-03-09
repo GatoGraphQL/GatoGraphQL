@@ -31,20 +31,20 @@ class PluginOptionsFormHandler
      */
     public function getNormalizedOptionValues(string $fieldName): array
     {
-        $fieldSettingsCategories = [
-            SettingsMenuPage::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
-            SettingsMenuPage::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
-        ];
-        $settingsCategory = $fieldSettingsCategories[$fieldName];
-        if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
+        if (($this->normalizedOptionValuesCache[$fieldName] ?? null) === null) {
+            $fieldSettingsCategories = [
+                SettingsMenuPage::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
+                SettingsMenuPage::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
+            ];
+            $settingsCategory = $fieldSettingsCategories[$fieldName];
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
             $value = App::getRequest()->request->all()[$fieldName] ?? [];
-            $this->normalizedOptionValuesCache[$settingsCategory] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
+            $this->normalizedOptionValuesCache[$fieldName] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
-        return $this->normalizedOptionValuesCache[$settingsCategory];
+        return $this->normalizedOptionValuesCache[$fieldName];
     }
 
     /**
