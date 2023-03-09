@@ -83,15 +83,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 /**
                  * Check that pressed on the "Reset Settings" button
                  */
-                if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
-                    return $values;
+                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                    $this->resetSettings();
                 }
-
-                /**
-                 * Delete the Settings and flush
-                 */
-                $this->getUserSettingsManager()->storeEmptySettings(Options::SETTINGS);
-                $this->flushContainer();
 
                 /**
                  * By returning the previous value, no record will be
@@ -223,6 +217,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 }
             }
         );
+    }
+
+    /**
+     * Delete the Settings and flush
+     */
+    protected function resetSettings(): void
+    {
+        $this->getUserSettingsManager()->storeEmptySettings(Options::SETTINGS);
+        $this->flushContainer();
     }
 
     /**
