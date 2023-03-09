@@ -136,26 +136,21 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             'admin_init',
             function () use ($settingsCategoryRegistry): void {
                 $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-                $settingsEntries = [];
+                $settingsCategorySettingsCategoryResolvers = [];
                 foreach ($settingsCategoryRegistry->getSettingsCategoryResolvers() as $settingsCategoryResolver) {
                     foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
-                        $settingsEntries[] = [
-                            'category' => $settingsCategory,
-                            'field' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
-                            'option-name' => $settingsCategoryResolver->getDBOptionName($settingsCategory),
-                            'description' => $settingsCategoryResolver->getDescription($settingsCategory),
-                        ];
+                        $settingsCategorySettingsCategoryResolvers[$settingsCategory] = $settingsCategoryResolver;
                     }
                 }
-                foreach ($settingsEntries as $settingsEntry) {
+                foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
                     $categorySettingsItems = array_filter(
                         $settingsItems,
                         /** @param array<string,mixed> $item */
-                        fn (array $item) => $item['settings-category'] === $settingsEntry['category']
+                        fn (array $item) => $item['settings-category'] === $settingsCategory
                     );
-                    $settingsField = $settingsEntry['field'];
-                    $settingsOptionName = $settingsEntry['option-name'];
-                    $settingsDescription = $settingsEntry['description'];
+                    $settingsField = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                    $settingsOptionName = $settingsCategoryResolver->getDBOptionName($settingsCategory);
+                    $settingsDescription = $settingsCategoryResolver->getDescription($settingsCategory);
                     foreach ($categorySettingsItems as $item) {
                         $settingsFieldForModule = $this->getSettingsFieldForModule($settingsField, $item['id']);
                         $module = $item['module'];
