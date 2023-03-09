@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Settings;
 
+use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 
 class UserSettingsManager implements UserSettingsManagerInterface
@@ -102,19 +103,32 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $dbOptionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
         $item = $moduleResolver->getSettingOptionName($module, $option);
-        return $this->hasItem(Options::SETTINGS, $item);
+        return $this->hasItem($dbOptionName, $item);
+    }
+
+    protected function getDBOptionName(string $settingsCategory): string
+    {
+        $settingsCategoryDBOptionNames = [
+            SettingsCategories::GRAPHQL_API_SETTINGS => Options::SETTINGS,
+            SettingsCategories::PLUGIN_SETTINGS => Options::PLUGIN_SETTINGS,
+            SettingsCategories::PLUGIN_MANAGEMENT=> Options::PLUGIN_MANAGEMENT,
+        ];
+        /** @var string */
+        return $settingsCategoryDBOptionNames[$settingsCategory];
     }
 
     public function getSetting(string $module, string $option): mixed
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $dbOptionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
+        $item = $moduleResolver->getSettingOptionName($module, $option);
 
         // If the item is saved in the DB, retrieve it
-        $item = $moduleResolver->getSettingOptionName($module, $option);
-        if ($this->hasItem(Options::SETTINGS, $item)) {
-            return $this->getItem(Options::SETTINGS, $item);
+        if ($this->hasItem($dbOptionName, $item)) {
+            return $this->getItem($dbOptionName, $item);
         }
 
         // Otherwise, return the default value
@@ -125,10 +139,9 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
-
+        $dbOptionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
         $item = $moduleResolver->getSettingOptionName($module, $option);
-
-        $this->setOptionItem(Options::SETTINGS, $item, $value);
+        $this->setOptionItem($dbOptionName, $item, $value);
     }
 
     /**
@@ -138,14 +151,15 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $dbOptionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
 
         $itemValues = [];
         foreach ($optionValues as $option => $value) {
             $item = $moduleResolver->getSettingOptionName($module, $option);
             $itemValues[$item] = $value;
         }
-
-        $this->setOptionItems(Options::SETTINGS, $itemValues);
+                
+        $this->setOptionItems($dbOptionName, $itemValues);
     }
 
     public function hasSetModuleEnabled(string $moduleID): bool
