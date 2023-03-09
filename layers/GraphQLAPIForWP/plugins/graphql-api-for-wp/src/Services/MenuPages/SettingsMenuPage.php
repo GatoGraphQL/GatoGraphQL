@@ -71,41 +71,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         parent::initialize();
 
-        $storeToDBFormOptions = [
-            self::SETTINGS_FIELD,
-            self::PLUGIN_SETTINGS_FIELD,
-        ];
-        foreach ($storeToDBFormOptions as $option) {
-            \add_filter(
-                "pre_update_option_{$option}",
-                /**
-                 * @param array<string,mixed> $values
-                 * @return array<string,mixed>
-                 */
-                function (array $values) use ($option): array {
-                    $dbFormOptionSettingsCategories = [
-                        self::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
-                        self::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
-                    ];
-            
-                    /**
-                     * Execute the callback sanitazation here,
-                     * and not on entry 'sanitize_callback' from `register_setting`,
-                     * because that one will be called twice: once triggered
-                     * by `update_option` and once by `add_option`,
-                     * with `add_option` happening after the extra logic here
-                     * (i.e. added on `pre_update_option_{$option}`) has taken
-                     * place, which means that it undoes this logic that sets
-                     * the state for "reset the settings".
-                     *
-                     * This call is needed to cast the data
-                     * before saving to the DB.
-                     */
-                    return $this->getSettingsNormalizer()->normalizeSettings($values, $dbFormOptionSettingsCategories[$option]);
-                }
-            );
-        }
-
         $option = self::PLUGIN_MANAGEMENT_FIELD;
         \add_filter(
             "pre_update_option_{$option}",
@@ -243,25 +208,37 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             'type' => 'array',
                             'description' => $settingsDescription,
                             /**
-                             * Don't execute the callback sanitazation here,
-                             * because it will be called twice: once triggered
-                             * by `update_option` and once by `add_option`,
-                             * with `add_option` happening after the extra logic
-                             * added by `pre_update_option_{$option}` has taken
-                             * place, which means that it undoes the logic added
-                             * on that hook to set the state for "reset the settings".
+                             * This call is needed to cast the data
+                             * before saving to the DB.
                              *
-                             * Then, the sanitazation is also executed on that hook.
+                             * Please notice that this callback may be called twice:
+                             * once triggered by `update_option` and once by `add_option`,
+                             * (which is called by `update_option`).
                              */
-                            // // This call is needed to cast the data
-                            // // before saving to the DB
-                            // 'sanitize_callback' => $this->getSettingsNormalizer()->normalizeSettings(...),
+                            'sanitize_callback' => function (array $values) use ($settingsField): array {
+                                return $this->sanitizeCallback($values, $settingsField);
+                            },
                             'show_in_rest' => false,
                         ]
                     );
                 }
             }
         );
+    }
+
+    /**
+     * @param array<string,mixed> $values
+     * @return array<string,mixed>
+     */
+    protected function sanitizeCallback(array $values, string $settingsField): array
+    {
+        $dbFormOptionSettingsCategories = [
+            self::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
+            self::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
+            self::PLUGIN_MANAGEMENT_FIELD => SettingsCategories::PLUGIN_MANAGEMENT,
+        ];
+
+        return $this->getSettingsNormalizer()->normalizeSettings($values, $dbFormOptionSettingsCategories[$settingsField]);
     }
     
     protected function flushContainer(): void
