@@ -319,7 +319,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             /** @var string */
                             $optionsFormField = $item['options-form-field'];
                             /** @var bool */
-                            $skipSubmitButton = $item['skip-submit-button'] ?? false;
+                            $skipSubmitButton = $item['skip-submit-button'];
                             $sectionStyle = sprintf(
                                 'display: %s;',
                                 $item['id'] === $activePrimarySettingsID ? 'block' : 'none'
