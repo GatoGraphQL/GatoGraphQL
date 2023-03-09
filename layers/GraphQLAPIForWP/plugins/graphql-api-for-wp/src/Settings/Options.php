@@ -5,20 +5,23 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Settings;
 
 /**
- * Option names
+ * Option names. By convention they must all start with "graphql-api-"
  */
 class Options
 {
     /**
-     * Option name under which to store the Settings, defined by the user
+     * Option name under which to store the "GraphQL API" Settings, defined by the user
      */
-    public final const SETTINGS = 'graphql-api-settings';
+    public final const GRAPHQL_API_SETTINGS = 'graphql-api-settings';
     /**
      * Option name under which to store the Plugin Settings, defined by the user
      */
     public final const PLUGIN_SETTINGS = 'graphql-api-plugin-settings';
     /**
-     * Option name for the Plugin Management (it won't be store, but it's still needed)
+     * Option name for Plugin Management.
+     *
+     * This option won't be actually stored to DB, but it's
+     * still needed to render the corresponding form.
      */
     public final const PLUGIN_MANAGEMENT = 'graphql-api-plugin-management';
     /**

@@ -221,7 +221,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function resetSettings(): void
     {
-        $this->getUserSettingsManager()->storeEmptySettings(Options::SETTINGS);
+        $this->getUserSettingsManager()->storeEmptySettings(Options::GRAPHQL_API_SETTINGS);
         $this->flushContainer();
     }
 
