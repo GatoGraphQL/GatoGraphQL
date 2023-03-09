@@ -29,14 +29,19 @@ class PluginOptionsFormHandler
      *
      * @return array<string,mixed>
      */
-    public function getNormalizedOptionValues(string $settingsCategory): array
+    public function getNormalizedOptionValues(string $fieldName): array
     {
+        $fieldSettingsCategories = [
+            SettingsMenuPage::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
+            SettingsMenuPage::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
+        ];
+        $settingsCategory = $fieldSettingsCategories[$fieldName];
         if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
-            $value = App::getRequest()->request->all()[SettingsMenuPage::SETTINGS_FIELD] ?? [];
+            $value = App::getRequest()->request->all()[$fieldName] ?? [];
             $this->normalizedOptionValuesCache[$settingsCategory] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
         return $this->normalizedOptionValuesCache[$settingsCategory];
@@ -55,16 +60,19 @@ class PluginOptionsFormHandler
     public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
     {
         global $pagenow;
-        if (
-            $pagenow === 'options.php'
-            && App::request(SettingsMenuPage::FORM_ORIGIN) === SettingsMenuPage::SETTINGS_FIELD
-        ) {
-            $value = $this->getNormalizedOptionValues(SettingsCategories::GRAPHQL_API_SETTINGS);
-            // Return the specific value to this module/option
-            $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $optionName = $moduleResolver->getSettingOptionName($module, $option);
-            return $value[$optionName];
+        if ($pagenow === 'options.php') {
+            $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
+            if (in_array($formOrigin, [
+                SettingsMenuPage::SETTINGS_FIELD,
+                SettingsMenuPage::PLUGIN_SETTINGS_FIELD,
+            ])) {
+                $value = $this->getNormalizedOptionValues($formOrigin);
+                // Return the specific value to this module/option
+                $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+                $moduleResolver = $moduleRegistry->getModuleResolver($module);
+                $optionName = $moduleResolver->getSettingOptionName($module, $option);
+                return $value[$optionName];
+            }
         }
         return $value;
     }
