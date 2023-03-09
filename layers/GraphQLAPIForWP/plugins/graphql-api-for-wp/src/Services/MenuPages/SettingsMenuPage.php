@@ -71,46 +71,18 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         parent::initialize();
 
-        /**
-         * Before saving the settings in the DB,
-         * decide what it is that must be stored.
-         * There are 2 options.
-         *
-         * 1. If button "submit-reset-settings" is sent,
-         * then the "Reset Settings" button has been pressed.
-         * Then remove all settings values, except for the
-         * safe/unsafe default value
-         *
-         * 2. Otherwise, it's the normal Settings.
-         */
-        $option = self::SETTINGS_FIELD;
-        \add_filter(
-            "pre_update_option_{$option}",
-            /**
-             * @param array<string,mixed> $values
-             * @return array<string,mixed>
-             */
-            function (array $values): array {
+        $storeToDBFormOptions = [
+            self::SETTINGS_FIELD,
+            self::PLUGIN_SETTINGS_FIELD,
+        ];
+        foreach ($storeToDBFormOptions as $option) {
+            \add_filter(
+                "pre_update_option_{$option}",
                 /**
-                 * 1st case: check that pressed on the "Reset Settings" button,
-                 * and an actual "safe" or "unsafe" value was selected.
+                 * @param array<string,mixed> $values
+                 * @return array<string,mixed>
                  */
-                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
-                    /**
-                     * Remove all settings, except the one indicating if to use
-                     * the "safe" or "unsafe" default behavior
-                     */
-                    $resetSettingsOptionName = $this->getPluginGeneralSettingsFunctionalityModuleResolver()->getSettingOptionName(
-                        PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                        PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
-                    );
-                    $values = array_intersect_key(
-                        $values,
-                        [
-                            $resetSettingsOptionName => ''
-                        ]
-                    );
-                } else {
+                function (array $values): array {
                     /**
                      * Execute the callback sanitazation here,
                      * and not on entry 'sanitize_callback' from `register_setting`,
@@ -124,30 +96,66 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * This call is needed to cast the data
                      * before saving to the DB.
                      */
-                    $values = $this->getSettingsNormalizer()->normalizeSettings($values, SettingsCategories::GRAPHQL_API_SETTINGS);
+                    return $this->getSettingsNormalizer()->normalizeSettings($values, SettingsCategories::GRAPHQL_API_SETTINGS);
                 }
+            );
+        }
 
-                return $values;
+        $option = self::PLUGIN_MANAGEMENT_FIELD;
+        \add_filter(
+            "pre_update_option_{$option}",
+            /**
+             * @param array<string,mixed> $values
+             * @return array<string,mixed>
+             */
+            function (array $values): array {
+                /**
+                 * Check that pressed on the "Reset Settings" button,
+                 * and an actual "safe" or "unsafe" value was selected.
+                 */
+                if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                    return $values;
+                }
+                /**
+                 * Remove all settings, except the one indicating if to use
+                 * the "safe" or "unsafe" default behavior
+                 */
+                $resetSettingsOptionName = $this->getPluginGeneralSettingsFunctionalityModuleResolver()->getSettingOptionName(
+                    PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                    PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                );
+                return array_intersect_key(
+                    $values,
+                    [
+                        $resetSettingsOptionName => ''
+                    ]
+                );
             }
         );
 
-        /**
-         * After saving the settings in the DB:
-         * - Flush the rewrite rules, so different URL slugs take effect
-         * - Update the timestamp
-         *
-         * This hooks is also triggered the first time the user saves the settings
-         * (i.e. there's no update) thanks to `maybeStoreEmptySettings`
-         */
-        \add_action(
-            "update_option_{$option}",
-            function (): void {
-                \flush_rewrite_rules();
+        $regenerateConfigFormOptions = [
+            self::SETTINGS_FIELD,
+        ];
+        foreach ($regenerateConfigFormOptions as $option) {
+            /**
+             * After saving the settings in the DB:
+             * - Flush the rewrite rules, so different URL slugs take effect
+             * - Update the timestamp
+             *
+             * This hooks is also triggered the first time the user saves the settings
+             * (i.e. there's no update) thanks to `maybeStoreEmptySettings`
+             */
+            \add_action(
+                "update_option_{$option}",
+                function (): void {
+                    \flush_rewrite_rules();
+    
+                    // Update the timestamp
+                    $this->getUserSettingsManager()->storeContainerTimestamp();
+                }
+            );
 
-                // Update the timestamp
-                $this->getUserSettingsManager()->storeContainerTimestamp();
-            }
-        );
+        }
 
         /**
          * Register the settings
