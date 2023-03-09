@@ -106,7 +106,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
                     SettingsMenuPage::RESET_SETTINGS_BUTTON_ID
                 );
-                $buttonWrapperID = SettingsMenuPage::RESET_SETTINGS_BUTTON_ID . '-wrapper';
+                $buttonWrapperID = 'reset-button-wrapper';
                 $resetSettingsButtonsHTML = sprintf(
                     '<p class="submit"><a href="#" onclick="document.getElementById(\'%s\').style.display=\'block\';return false;" class="button secondary">%s</a></p>',
                     $buttonWrapperID,
