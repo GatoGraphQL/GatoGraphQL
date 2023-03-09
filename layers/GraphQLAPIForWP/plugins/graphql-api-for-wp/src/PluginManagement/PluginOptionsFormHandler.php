@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
+use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
+use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoPAPI\APIEndpoints\EndpointUtils;
 
 /**
  * Helper class with functions to set the configuration in PoP components.
@@ -36,7 +37,7 @@ class PluginOptionsFormHandler
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
             $value = App::getRequest()->request->all()[SettingsMenuPage::SETTINGS_FIELD] ?? [];
-            $this->normalizedOptionValuesCache = $settingsNormalizer->normalizeSettings($value);
+            $this->normalizedOptionValuesCache = $settingsNormalizer->normalizeSettings($value, SettingsCategories::MODULE_SETTINGS);
         }
         return $this->normalizedOptionValuesCache;
     }

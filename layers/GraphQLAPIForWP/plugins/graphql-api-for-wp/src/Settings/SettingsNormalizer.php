@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Settings;
 
+use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
@@ -33,11 +34,17 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
      */
-    public function normalizeSettings(array $values): array
-    {
+    public function normalizeSettings(
+        array $values,
+        string $settingsCategory,
+    ): array {
         $moduleRegistry = $this->getModuleRegistry();
-        $items = $this->getAllSettingsItems();
-        foreach ($items as $item) {
+        $settingsItems = array_filter(
+            $this->getAllSettingsItems(),
+            /** @param array<string,mixed> $item */
+            fn (array $item) => $item['settings-category'] === $settingsCategory
+        );
+        foreach ($settingsItems as $item) {
             $module = $item['module'];
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             foreach ($item['settings'] as $itemSetting) {
@@ -121,7 +128,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
             $normalizedOptionValues[$settingsOptionName] = $value;
         }
         // Normalize it
-        $normalizedOptionValues = $this->normalizeSettings($normalizedOptionValues);
+        $normalizedOptionValues = $this->normalizeSettings($normalizedOptionValues, SettingsCategories::MODULE_SETTINGS);
 
         // Transform back
         foreach ($values as $option => $value) {
@@ -140,11 +147,11 @@ class SettingsNormalizer implements SettingsNormalizerInterface
     public function getAllSettingsItems(): array
     {
         $moduleRegistry = $this->getModuleRegistry();
-        $items = [];
+        $settingsItems = [];
         $modules = $moduleRegistry->getAllModules(true, true, false, true);
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $items[] = [
+            $settingsItems[] = [
                 'module' => $module,
                 'id' => $moduleResolver->getID($module),
                 'name' => $moduleResolver->getName($module),
@@ -152,6 +159,6 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                 'settings-category' => $moduleResolver->getSettingsCategory($module),
             ];
         }
-        return $items;
+        return $settingsItems;
     }
 }

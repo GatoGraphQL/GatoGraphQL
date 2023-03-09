@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
@@ -121,7 +122,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * This call is needed to cast the data
                      * before saving to the DB.
                      */
-                    $values = $this->getSettingsNormalizer()->normalizeSettings($values);
+                    $values = $this->getSettingsNormalizer()->normalizeSettings($values, SettingsCategories::MODULE_SETTINGS);
                 }
 
                 return $values;
@@ -152,7 +153,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         \add_action(
             'admin_init',
             function (): void {
-                $moduleSettingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+                $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+                $moduleSettingsItems = array_filter(
+                    $settingsItems,
+                    /** @param array<string,mixed> $item */
+                    fn (array $item) => $item['settings-category'] === SettingsCategories::MODULE_SETTINGS
+                );
                 foreach ($moduleSettingsItems as $item) {
                     $settingsFieldForModule = $this->getSettingsFieldForModule($item['id']);
                     $module = $item['module'];
@@ -251,7 +257,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             _e('There are no items to be configured', 'graphql-api');
             return;
         }
-        $moduleSettingsItems = $settingsItems;
+        $moduleSettingsItems = array_filter(
+            $settingsItems,
+            /** @param array<string,mixed> $item */
+            fn (array $item) => $item['settings-category'] === SettingsCategories::MODULE_SETTINGS
+        );
 
         $printWithTabs = $this->printWithTabs();
         // By default, focus on the first module
