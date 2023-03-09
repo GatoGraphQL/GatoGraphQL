@@ -25,9 +25,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     use UseDocsMenuPageTrait;
 
     public final const FORM_ORIGIN = 'form-origin';
-    public final const SETTINGS_FIELD = 'graphql-api-settings';
-    public final const PLUGIN_SETTINGS_FIELD = 'graphql-api-plugin-settings';
-    public final const PLUGIN_MANAGEMENT_FIELD = 'graphql-api-plugin-management';
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
