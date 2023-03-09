@@ -111,31 +111,31 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             "pre_update_option_{$option}",
             /**
              * @param array<string,mixed> $values
+             * @param array<string,mixed> $previousValues
              * @return array<string,mixed>
              */
-            function (array $values): array {
+            function (array $values, mixed $previousValues): mixed {
                 /**
-                 * Check that pressed on the "Reset Settings" button,
-                 * and an actual "safe" or "unsafe" value was selected.
+                 * Check that pressed on the "Reset Settings" button
                  */
                 if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
                     return $values;
                 }
+
                 /**
-                 * Remove all settings, except the one indicating if to use
-                 * the "safe" or "unsafe" default behavior
+                 * Delete the Settings and flush
                  */
-                $resetSettingsOptionName = $this->getPluginGeneralSettingsFunctionalityModuleResolver()->getSettingOptionName(
-                    PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                    PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
-                );
-                return array_intersect_key(
-                    $values,
-                    [
-                        $resetSettingsOptionName => ''
-                    ]
-                );
-            }
+                $this->getUserSettingsManager()->storeEmptySettings(Options::SETTINGS);
+                $this->flushContainer();
+
+                /**
+                 * By returning the previous value, no record will be
+                 * stored for "plugin-management" on the DB
+                 */
+                return $previousValues;
+            },
+            10,
+            2
         );
 
         $regenerateConfigFormOptions = [
@@ -152,12 +152,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              */
             \add_action(
                 "update_option_{$option}",
-                function (): void {
-                    \flush_rewrite_rules();
-    
-                    // Update the timestamp
-                    $this->getUserSettingsManager()->storeContainerTimestamp();
-                }
+                $this->flushContainer(...)
             );
 
         }
@@ -267,6 +262,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 }
             }
         );
+    }
+    
+    protected function flushContainer(): void
+    {
+        \flush_rewrite_rules();
+
+        // Update the timestamp
+        $this->getUserSettingsManager()->storeContainerTimestamp();
     }
 
     protected function getSettingsFieldForModule(string $optionsFormField, string $moduleID): string

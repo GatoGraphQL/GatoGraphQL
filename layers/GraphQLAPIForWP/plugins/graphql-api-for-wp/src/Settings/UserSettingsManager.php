@@ -103,9 +103,9 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $dbOptionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
+        $optionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
         $item = $moduleResolver->getSettingOptionName($module, $option);
-        return $this->hasItem($dbOptionName, $item);
+        return $this->hasItem($optionName, $item);
     }
 
     protected function getDBOptionName(string $settingsCategory): string
@@ -123,12 +123,12 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $dbOptionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
+        $optionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
         $item = $moduleResolver->getSettingOptionName($module, $option);
 
         // If the item is saved in the DB, retrieve it
-        if ($this->hasItem($dbOptionName, $item)) {
-            return $this->getItem($dbOptionName, $item);
+        if ($this->hasItem($optionName, $item)) {
+            return $this->getItem($optionName, $item);
         }
 
         // Otherwise, return the default value
@@ -139,9 +139,9 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $dbOptionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
+        $optionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
         $item = $moduleResolver->getSettingOptionName($module, $option);
-        $this->setOptionItem($dbOptionName, $item, $value);
+        $this->setOptionItem($optionName, $item, $value);
     }
 
     /**
@@ -151,7 +151,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
-        $dbOptionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
+        $optionName = $this->getDBOptionName($moduleResolver->getSettingsCategory($module));
 
         $itemValues = [];
         foreach ($optionValues as $option => $value) {
@@ -159,7 +159,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
             $itemValues[$item] = $value;
         }
                 
-        $this->setOptionItems($dbOptionName, $itemValues);
+        $this->setOptionItems($optionName, $itemValues);
     }
 
     public function hasSetModuleEnabled(string $moduleID): bool
@@ -259,5 +259,10 @@ class UserSettingsManager implements UserSettingsManagerInterface
         );
         // Save to the DB
         \update_option($optionName, $this->options[$optionName]);
+    }
+
+    public function storeEmptySettings(string $optionName): void
+    {
+        update_option($optionName, []);
     }
 }

@@ -48,4 +48,5 @@ interface UserSettingsManagerInterface
      * @param array<string,bool> $moduleIDValues
      */
     public function setModulesEnabled(array $moduleIDValues): void;
+    public function storeEmptySettings(string $optionName): void;
 }
