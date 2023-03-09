@@ -246,11 +246,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     public function print(): void
     {
-        $moduleSettingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-        if (!$moduleSettingsItems) {
+        $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+        if (!$settingsItems) {
             _e('There are no items to be configured', 'graphql-api');
             return;
         }
+        $moduleSettingsItems = $settingsItems;
 
         $printWithTabs = $this->printWithTabs();
         // By default, focus on the first module
@@ -354,6 +355,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 'id' => 'module-settings',
                 'name' => \__('Module Settings', 'graphql-api'),
                 'content' => $moduleSettingsContent,
+            ],
+            [
+                'id' => 'plugin-settings',
+                'name' => \__('Plugin Settings', 'graphql-api'),
+                'content' => '@todo',
             ],
         ];
         $activePrimarySettingsID = $primarySettingsItems[0]['id'];
