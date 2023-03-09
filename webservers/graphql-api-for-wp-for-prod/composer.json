@@ -63,8 +63,14 @@
             "lando rebuild appserver -y"
         ],
         "stop-server": "lando stop",
-        "log-server-errors": "lando logs -t -f | grep \"php:error\"",
-        "log-server-warnings": "lando logs -t -f | grep \"php:warn\"",
+        "log-server-errors": [
+            "Composer\\Config::disableProcessTimeout",
+            "lando logs -t -f | grep \"php:error\""
+        ],
+        "log-server-warnings": [
+            "Composer\\Config::disableProcessTimeout",
+            "lando logs -t -f | grep \"php:warn\""
+        ],
         "enable-unsafe-defaults": [
             "lando wp config set GRAPHQL_API_SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR true --raw --path=wordpress",
             "@delete-settings"
