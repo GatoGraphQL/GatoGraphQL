@@ -169,6 +169,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         'option-name' => Options::PLUGIN_SETTINGS,
                         'description' => \__('Plugin Settings', 'graphql-api'),
                     ],
+                    [
+                        'category' => SettingsCategories::PLUGIN_MANAGEMENT,
+                        'field' => self::PLUGIN_MANAGEMENT_FIELD,
+                        'option-name' => Options::PLUGIN_MANAGEMENT,
+                        'description' => \__('Plugin Management', 'graphql-api'),
+                    ],
                 ];
                 foreach ($settingsEntries as $settingsEntry) {
                     $categorySettingsItems = array_filter(

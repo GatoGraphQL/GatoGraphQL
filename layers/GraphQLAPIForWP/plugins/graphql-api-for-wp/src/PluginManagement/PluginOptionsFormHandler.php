@@ -35,6 +35,7 @@ class PluginOptionsFormHandler
             $formOriginSettingsCategories = [
                 SettingsMenuPage::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
                 SettingsMenuPage::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
+                SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD => SettingsCategories::PLUGIN_MANAGEMENT,
             ];
             $settingsCategory = $formOriginSettingsCategories[$formOrigin];
             $instanceManager = InstanceManagerFacade::getInstance();
@@ -65,6 +66,7 @@ class PluginOptionsFormHandler
             if (in_array($formOrigin, [
                 SettingsMenuPage::SETTINGS_FIELD,
                 SettingsMenuPage::PLUGIN_SETTINGS_FIELD,
+                SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
             ])) {
                 $value = $this->getNormalizedOptionValues($formOrigin);
                 // Return the specific value to this module/option

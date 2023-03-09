@@ -18,6 +18,10 @@ class Options
      */
     public final const PLUGIN_SETTINGS = 'graphql-api-plugin-settings';
     /**
+     * Option name for the Plugin Management (it won't be store, but it's still needed)
+     */
+    public final const PLUGIN_MANAGEMENT = 'graphql-api-plugin-management';
+    /**
      * Option name under which to store the enabled/disabled Modules
      */
     public final const MODULES = 'graphql-api-modules';
