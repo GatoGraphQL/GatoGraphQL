@@ -305,7 +305,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ob_start();
         ?>
         <div
-            id="graphql-api-graphql-api-settings"
+            id="graphql-api-settings"
             class="<?php echo $class ?>"
         >
             <?php if ($printWithTabs) : ?>
@@ -402,9 +402,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         // Specify to only toggle the outer .tab-content divs (skip the inner ones)
         ?>
             <div
-                id="graphql-api-settings"
+                id="graphql-api-primary-settings"
                 class="wrap graphql-api-tabpanel"
-                data-tab-content-target="#graphql-api-settings-nav-tab-content > .tab-content"
+                data-tab-content-target="#graphql-api-primary-settings-nav-tab-content > .tab-content"
             >
                 <h1><?php \_e('GraphQL API — Settings', 'graphql-api'); ?></h1>
                 <?php \settings_errors(); ?>
@@ -422,7 +422,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         }
                         ?>
                     </h2>
-                    <div id="graphql-api-settings-nav-tab-content" class="nav-tab-content">
+                    <div id="graphql-api-primary-settings-nav-tab-content" class="nav-tab-content">
                         <?php
                         foreach ($primarySettingsItems as $item) {
                             $sectionStyle = sprintf(
