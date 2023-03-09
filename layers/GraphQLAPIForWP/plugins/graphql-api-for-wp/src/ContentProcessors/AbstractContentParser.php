@@ -292,7 +292,7 @@ abstract class AbstractContentParser implements ContentParserInterface
             ) . '</div>';
 
             // Create the tabs
-            $panelTabs = '<h2 class="nav-tab-wrapper">';
+            $panelTabs = '';
             $headersCount = count($headers);
             for ($i = 0; $i < $headersCount; $i++) {
                 $isFirstTab = $i === 0;
@@ -303,13 +303,18 @@ abstract class AbstractContentParser implements ContentParserInterface
                     $headers[$i]
                 );
             }
-            $panelTabs .= '</h2>';
 
             return
                 $contentStarter
                 . '<div class="graphql-api-tabpanel">'
-                . $panelTabs
-                . $panelContent
+                .   '<div class="nav-tab-container">'
+                .     '<h2 class="nav-tab-wrapper">'
+                .       $panelTabs
+                .     '</h2>'
+                .     '<div class="nav-tab-content">'
+                .       $panelContent
+                .     '</div>'
+                .   '</div>'
                 . '</div>';
         }
         return $htmlContent;
