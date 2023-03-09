@@ -25,4 +25,14 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
             )
         );
     }
+
+    public function getOptionsFormName(string $settingsCategory): string
+    {
+        throw new ImpossibleToHappenException(
+            sprintf(
+                $this->__('Unsupported Settings Category \'%s\'', 'graphql-api'),
+                $settingsCategory
+            )
+        );
+    }
 }
