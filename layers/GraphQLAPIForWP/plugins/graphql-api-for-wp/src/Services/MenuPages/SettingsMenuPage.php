@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
@@ -23,14 +24,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     use UseDocsMenuPageTrait;
 
     public final const FORM_ORIGIN = 'form-origin';
-    public final const SETTINGS_FIELD = 'graphql-api-settings';
-    public final const PLUGIN_SETTINGS_FIELD = 'graphql-api-plugin-settings';
-    public final const PLUGIN_MANAGEMENT_FIELD = 'graphql-api-plugin-management';
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
     private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
+    private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -58,6 +57,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         /** @var PluginGeneralSettingsFunctionalityModuleResolver */
         return $this->PluginGeneralSettingsFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
     }
+    final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
+    {
+        $this->settingsCategoryRegistry = $settingsCategoryRegistry;
+    }
+    final protected function getSettingsCategoryRegistry(): SettingsCategoryRegistryInterface
+    {
+        /** @var SettingsCategoryRegistryInterface */
+        return $this->settingsCategoryRegistry ??= $this->instanceManager->getInstance(SettingsCategoryRegistryInterface::class);
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -71,7 +79,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         parent::initialize();
 
-        $option = self::PLUGIN_MANAGEMENT_FIELD;
+        $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
+
+        $option = $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT);
         \add_filter(
             "pre_update_option_{$option}",
             /**
@@ -98,7 +108,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
 
         $regenerateConfigFormOptions = [
-            self::SETTINGS_FIELD,
+            $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::GRAPHQL_API_SETTINGS)->getOptionsFormName(SettingsCategoryResolver::GRAPHQL_API_SETTINGS),
         ];
         foreach ($regenerateConfigFormOptions as $option) {
             /**
@@ -120,37 +130,17 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          */
         \add_action(
             'admin_init',
-            function (): void {
+            function () use ($settingsCategoryRegistry): void {
                 $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-                $settingsEntries = [
-                    [
-                        'category' => SettingsCategories::GRAPHQL_API_SETTINGS,
-                        'field' => self::SETTINGS_FIELD,
-                        'option-name' => Options::SETTINGS,
-                        'description' => \__('Settings for the GraphQL API', 'graphql-api'),
-                    ],
-                    [
-                        'category' => SettingsCategories::PLUGIN_SETTINGS,
-                        'field' => self::PLUGIN_SETTINGS_FIELD,
-                        'option-name' => Options::PLUGIN_SETTINGS,
-                        'description' => \__('Plugin Settings', 'graphql-api'),
-                    ],
-                    [
-                        'category' => SettingsCategories::PLUGIN_MANAGEMENT,
-                        'field' => self::PLUGIN_MANAGEMENT_FIELD,
-                        'option-name' => Options::PLUGIN_MANAGEMENT,
-                        'description' => \__('Plugin Management', 'graphql-api'),
-                    ],
-                ];
-                foreach ($settingsEntries as $settingsEntry) {
-                    $categorySettingsItems = array_filter(
+                foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
+                    $categorySettingsItems = array_values(array_filter(
                         $settingsItems,
                         /** @param array<string,mixed> $item */
-                        fn (array $item) => $item['settings-category'] === $settingsEntry['category']
-                    );
-                    $settingsField = $settingsEntry['field'];
-                    $settingsOptionName = $settingsEntry['option-name'];
-                    $settingsDescription = $settingsEntry['description'];
+                        fn (array $item) => $item['settings-category'] === $settingsCategory
+                    ));
+                    $settingsField = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                    $settingsOptionName = $settingsCategoryResolver->getDBOptionName($settingsCategory);
+                    $settingsDescription = $settingsCategoryResolver->getDescription($settingsCategory) ?? '';
                     foreach ($categorySettingsItems as $item) {
                         $settingsFieldForModule = $this->getSettingsFieldForModule($settingsField, $item['id']);
                         $module = $item['module'];
@@ -208,9 +198,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                              * once triggered by `update_option` and once by `add_option`,
                              * (which is called by `update_option`).
                              */
-                            'sanitize_callback' => function (array $values) use ($settingsField): array {
-                                return $this->sanitizeCallback($values, $settingsField);
-                            },
+                            'sanitize_callback' => fn (array $values) => $this->sanitizeCallback($values, $settingsCategory),
                             'show_in_rest' => false,
                         ]
                     );
@@ -224,7 +212,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function resetSettings(): void
     {
-        $this->getUserSettingsManager()->storeEmptySettings(Options::SETTINGS);
+        $this->getUserSettingsManager()->storeEmptySettings(Options::GRAPHQL_API_SETTINGS);
         $this->flushContainer();
     }
 
@@ -232,15 +220,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * @param array<string,mixed> $values
      * @return array<string,mixed>
      */
-    protected function sanitizeCallback(array $values, string $settingsField): array
-    {
-        $dbFormOptionSettingsCategories = [
-            self::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
-            self::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
-            self::PLUGIN_MANAGEMENT_FIELD => SettingsCategories::PLUGIN_MANAGEMENT,
-        ];
-
-        return $this->getSettingsNormalizer()->normalizeSettings($values, $dbFormOptionSettingsCategories[$settingsField]);
+    protected function sanitizeCallback(
+        array $values,
+        string $settingsCategory,
+    ): array {
+        return $this->getSettingsNormalizer()->normalizeSettings($values, $settingsCategory);
     }
 
     protected function flushContainer(): void
@@ -282,27 +266,23 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $printWithTabs = $this->printWithTabs();
 
-        $primarySettingsItems = [
-            [
-                'id' => 'graphql-api-settings',
-                'name' => \__('GraphQL API Settings', 'graphql-api'),
-                'category' => SettingsCategories::GRAPHQL_API_SETTINGS,
-                'options-form-field' => self::SETTINGS_FIELD,
-            ],
-            [
-                'id' => 'plugin-settings',
-                'name' => \__('Plugin Settings', 'graphql-api'),
-                'category' => SettingsCategories::PLUGIN_SETTINGS,
-                'options-form-field' => self::PLUGIN_SETTINGS_FIELD,
-            ],
-            [
-                'id' => 'plugin-management',
-                'name' => \__('Plugin Management', 'graphql-api'),
-                'category' => SettingsCategories::PLUGIN_MANAGEMENT,
-                'options-form-field' => self::PLUGIN_MANAGEMENT_FIELD,
-                'skip-submit-button' => true,
-            ],
+        // Settings Categories which must avoid adding the Submit button
+        $skipSubmitButtonSettingsCategories = [
+            SettingsCategoryResolver::PLUGIN_MANAGEMENT,
         ];
+
+        $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
+        $primarySettingsItems = [];
+        foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
+            $primarySettingsItems[] = [
+                'category' => $settingsCategory,
+                'id' => str_replace(['-', '\\'], '_', $settingsCategory),
+                'name' => $settingsCategoryResolver->getDescription($settingsCategory),
+                'options-form-field' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
+                'skip-submit-button' => in_array($settingsCategory, $skipSubmitButtonSettingsCategories),
+            ];
+        }
+
         $activePrimarySettingsID = $primarySettingsItems[0]['id'];
         $tab = App::query(RequestParams::TAB);
         $class = 'wrap';
@@ -339,7 +319,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             /** @var string */
                             $optionsFormField = $item['options-form-field'];
                             /** @var bool */
-                            $skipSubmitButton = $item['skip-submit-button'] ?? false;
+                            $skipSubmitButton = $item['skip-submit-button'];
                             $sectionStyle = sprintf(
                                 'display: %s;',
                                 $item['id'] === $activePrimarySettingsID ? 'block' : 'none'

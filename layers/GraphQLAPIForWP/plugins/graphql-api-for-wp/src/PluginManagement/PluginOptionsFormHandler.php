@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
@@ -32,10 +33,14 @@ class PluginOptionsFormHandler
     {
         if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
+            $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+            $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
+            $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
-            $value = App::getRequest()->request->all()[$settingsCategory] ?? [];
+            $value = App::getRequest()->request->all()[$optionsFormName] ?? [];
             $this->normalizedOptionValuesCache[$settingsCategory] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
         return $this->normalizedOptionValuesCache[$settingsCategory];
@@ -54,24 +59,23 @@ class PluginOptionsFormHandler
     public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
     {
         global $pagenow;
-        if ($pagenow === 'options.php') {
-            $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-            if (
-                in_array($formOrigin, [
-                SettingsMenuPage::SETTINGS_FIELD,
-                SettingsMenuPage::PLUGIN_SETTINGS_FIELD,
-                SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
-                ])
-            ) {
-                $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-                $moduleResolver = $moduleRegistry->getModuleResolver($module);
-                $value = $this->getNormalizedOptionValues($moduleResolver->getSettingsCategory($module));
-                // Return the specific value to this module/option
-                $optionName = $moduleResolver->getSettingOptionName($module, $option);
-                return $value[$optionName];
-            }
+        if ($pagenow !== 'options.php') {
+            return $value;
         }
-        return $value;
+
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $settingsCategory = $moduleResolver->getSettingsCategory($module);
+        $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
+        if ($formOrigin !== $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory)) {
+            return $value;
+        }
+
+        $value = $this->getNormalizedOptionValues($settingsCategory);
+        // Return the specific value to this module/option
+        $optionName = $moduleResolver->getSettingOptionName($module, $option);
+        return $value[$optionName];
     }
 
     /**

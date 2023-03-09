@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 
 trait PluginGeneralSettingsFunctionalityModuleResolverTrait
 {
@@ -28,6 +28,6 @@ trait PluginGeneralSettingsFunctionalityModuleResolverTrait
 
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategories::PLUGIN_SETTINGS;
+        return SettingsCategoryResolver::PLUGIN_SETTINGS;
     }
 }

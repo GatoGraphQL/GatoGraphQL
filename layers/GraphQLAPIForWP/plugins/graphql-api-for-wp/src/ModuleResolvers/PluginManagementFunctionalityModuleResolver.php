@@ -7,7 +7,9 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 
 use function get_submit_button;
 
@@ -20,6 +22,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?PluginGeneralSettingsFunctionalityModuleResolver $pluginGeneralSettingsFunctionalityModuleResolver = null;
+    private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -38,6 +41,15 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         /** @var PluginGeneralSettingsFunctionalityModuleResolver */
         return $this->pluginGeneralSettingsFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
+    }
+    final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
+    {
+        $this->settingsCategoryRegistry = $settingsCategoryRegistry;
+    }
+    final protected function getSettingsCategoryRegistry(): SettingsCategoryRegistryInterface
+    {
+        /** @var SettingsCategoryRegistryInterface */
+        return $this->settingsCategoryRegistry ??= $this->instanceManager->getInstance(SettingsCategoryRegistryInterface::class);
     }
 
     /**
@@ -103,7 +115,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                  */
                 $resetButtonName = sprintf(
                     '%s[%s]',
-                    SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
+                    $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT),
                     SettingsMenuPage::RESET_SETTINGS_BUTTON_ID
                 );
                 $resetSettingsButtonsHTML = sprintf(

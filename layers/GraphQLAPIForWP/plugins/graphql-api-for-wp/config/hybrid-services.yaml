@@ -7,6 +7,9 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\ModuleRegistry
 
+    GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistry
+
     GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistry'
         
@@ -18,3 +21,8 @@ services:
     # Hence, it is defined as a Hybrid
     GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface:
         class: '\GraphQLAPI\GraphQLAPI\Security\UserAuthorization'
+
+    # These services are required when storing settings in options.php
+    # for which only the SystemContainer is available
+    GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\:
+        resource: ../src/SettingsCategoryResolvers/*

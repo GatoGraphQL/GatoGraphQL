@@ -51,22 +51,22 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
 
     public function getName(string $moduleType): string
     {
-        $names = [
-            self::ACCESS_CONTROL => \__('Access Control', 'graphql-api'),
-            self::CLIENT => \__('Client', 'graphql-api'),
-            self::ENDPOINT => \__('Endpoint', 'graphql-api'),
-            self::ENDPOINT_CONFIGURATION => \__('Endpoint Configuration', 'graphql-api'),
-            self::FUNCTIONALITY => \__('Functionality', 'graphql-api'),
-            self::OPERATIONAL => \__('Operational', 'graphql-api'),
-            self::PERFORMANCE => \__('Performance', 'graphql-api'),
-            self::PLUGIN_GENERAL_SETTINGS => \__('General Settings', 'graphql-api'),
-            self::PLUGIN_MANAGEMENT => \__('Plugin Management', 'graphql-api'),
-            self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
-            self::SCHEMA_TYPE => \__('Schema Type', 'graphql-api'),
-            self::SCHEMA_DIRECTIVE => \__('Schema Directive', 'graphql-api'),
-            self::USER_INTERFACE => \__('User Interface', 'graphql-api'),
-            self::VERSIONING => \__('Versioning', 'graphql-api'),
-        ];
-        return $names[$moduleType] ?? '';
+        return match ($moduleType) {
+            self::ACCESS_CONTROL => $this->__('Access Control', 'graphql-api'),
+            self::CLIENT => $this->__('Client', 'graphql-api'),
+            self::ENDPOINT => $this->__('Endpoint', 'graphql-api'),
+            self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'graphql-api'),
+            self::FUNCTIONALITY => $this->__('Functionality', 'graphql-api'),
+            self::OPERATIONAL => $this->__('Operational', 'graphql-api'),
+            self::PERFORMANCE => $this->__('Performance', 'graphql-api'),
+            self::PLUGIN_GENERAL_SETTINGS => $this->__('General Settings', 'graphql-api'),
+            self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'graphql-api'),
+            self::SCHEMA_CONFIGURATION => $this->__('Schema Configuration', 'graphql-api'),
+            self::SCHEMA_TYPE => $this->__('Schema Type', 'graphql-api'),
+            self::SCHEMA_DIRECTIVE => $this->__('Schema Directive', 'graphql-api'),
+            self::USER_INTERFACE => $this->__('User Interface', 'graphql-api'),
+            self::VERSIONING => $this->__('Versioning', 'graphql-api'),
+            default => '',
+        };
     }
 }

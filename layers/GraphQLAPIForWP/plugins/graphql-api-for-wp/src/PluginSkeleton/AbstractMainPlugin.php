@@ -147,7 +147,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function maybeStoreEmptySettings(): void
     {
         $storeToDBOptions = [
-            Options::SETTINGS,
+            Options::GRAPHQL_API_SETTINGS,
             Options::PLUGIN_SETTINGS,
         ];
         foreach ($storeToDBOptions as $option) {

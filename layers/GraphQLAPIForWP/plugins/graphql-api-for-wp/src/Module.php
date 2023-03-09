@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterUserAuthorizationSchemeCompilerPass;
 use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
+use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterSettingsCategoryResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
@@ -68,6 +69,7 @@ class Module extends AbstractPluginModule
     {
         return [
             RegisterModuleResolverCompilerPass::class,
+            RegisterSettingsCategoryResolverCompilerPass::class,
             RegisterUserAuthorizationSchemeCompilerPass::class,
         ];
     }
