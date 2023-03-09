@@ -25,6 +25,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     public final const FORM_ORIGIN = 'form-origin';
     public final const SETTINGS_FIELD = 'graphql-api-settings';
     public final const PLUGIN_SETTINGS_FIELD = 'graphql-api-plugin-settings';
+    public final const PLUGIN_MANAGEMENT_FIELD = 'graphql-api-plugin-management';
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
@@ -277,127 +278,36 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             _e('There are no items to be configured', 'graphql-api');
             return;
         }
-        $graphQLAPISettingsItems = array_values(array_filter(
-            $settingsItems,
-            /** @param array<string,mixed> $item */
-            fn (array $item) => $item['settings-category'] === SettingsCategories::GRAPHQL_API_SETTINGS
-        ));
 
         $printWithTabs = $this->printWithTabs();
-        // By default, focus on the first module
-        $activeModuleID = $graphQLAPISettingsItems[0]['id'];
-        // If passing a tab, focus on that one, if the module exists
-        $tab = App::query(RequestParams::TAB);
-        if ($tab !== null) {
-            $moduleIDs = array_map(
-                fn ($item) => $item['id'],
-                $graphQLAPISettingsItems
-            );
-            if (in_array($tab, $moduleIDs)) {
-                $activeModuleID = $tab;
-            }
-        }
-        $class = 'wrap';
-        if ($printWithTabs) {
-            $class .= ' graphql-api-tabpanel vertical-tabs';
-        }
-
-        ob_start();
-        ?>
-        <div
-            id="graphql-api-settings"
-            class="<?php echo $class ?>"
-        >
-            <?php if ($printWithTabs) : ?>
-                <div class="nav-tab-container">
-                    <!-- Tabs -->
-                    <h2 class="nav-tab-wrapper">
-                        <?php
-                        foreach ($graphQLAPISettingsItems as $item) {
-                            printf(
-                                '<a href="#%s" class="nav-tab %s">%s</a>',
-                                $item['id'],
-                                $item['id'] === $activeModuleID ? 'nav-tab-active' : '',
-                                $item['name']
-                            );
-                        }
-                        ?>
-                    </h2>
-                    <div class="nav-tab-content">
-            <?php endif; ?>
-                        <form method="post" action="options.php">
-                            <!-- Artificial input as flag that the form belongs to this plugin -->
-                            <input type="hidden" name="<?php echo self::FORM_ORIGIN ?>" value="<?php echo self::SETTINGS_FIELD ?>" />
-                            <!--
-                                Artificial input to trigger the update of the form always, as to always purge the container/operational cache
-                                (eg: to include 3rd party extensions in the service container, or new Gutenberg blocks)
-                                This is needed because "If the new and old values are the same, no need to update."
-                                which makes "update_option_{$option}" not be triggered when there are no changes
-                                @see wp-includes/option.php
-                            -->
-                            <input type="hidden" name="<?php echo self::SETTINGS_FIELD?>[last_saved_timestamp]" value="<?php echo time() ?>">
-                            <!-- Panels -->
-                            <?php
-                            $sectionClass = $printWithTabs ? 'tab-content' : '';
-                            \settings_fields(self::SETTINGS_FIELD);
-                            foreach ($graphQLAPISettingsItems as $item) {
-                                $sectionStyle = '';
-                                $maybeTitle = $printWithTabs
-                                    ? sprintf(
-                                        '<h2>%s</h2><hr/>',
-                                        $item['name']
-                                    ) : sprintf(
-                                        '<br/><hr/><br/><h2 id="%s">%s</h2>',
-                                        $item['id'],
-                                        $item['name']
-                                    );
-                                if ($printWithTabs) {
-                                    $sectionStyle = sprintf(
-                                        'display: %s;',
-                                        $item['id'] === $activeModuleID ? 'block' : 'none'
-                                    );
-                                }
-                                ?>
-                                <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
-                                    <?php echo $maybeTitle ?>
-                                    <table class="form-table">
-                                        <?php \do_settings_fields(self::SETTINGS_FIELD, $this->getSettingsFieldForModule($item['id'])) ?>
-                                    </table>
-                                </div>
-                                <?php
-                            }
-                            \submit_button(
-                                \__('Save Changes (All)', 'graphql-api')
-                            );
-                            ?>
-                        </form>
-            <?php if ($printWithTabs) : ?>
-                    </div> <!-- class="nav-tab-content" -->
-                </div> <!-- class="nav-tab-container" -->
-            <?php endif; ?>
-        </div>
-        <?php
-        /** @var string */
-        $graphQLAPISettingsContent = ob_get_clean();
 
         $primarySettingsItems = [
             [
                 'id' => 'graphql-api-settings',
                 'name' => \__('GraphQL API Settings', 'graphql-api'),
-                'content' => $graphQLAPISettingsContent,
+                'category' => SettingsCategories::GRAPHQL_API_SETTINGS,
+                'options-form-field' => self::SETTINGS_FIELD,
             ],
             [
                 'id' => 'plugin-settings',
                 'name' => \__('Plugin Settings', 'graphql-api'),
-                'content' => '@todo',
+                'category' => SettingsCategories::PLUGIN_SETTINGS,
+                'options-form-field' => self::PLUGIN_SETTINGS_FIELD,
             ],
             [
                 'id' => 'plugin-management',
                 'name' => \__('Plugin Management', 'graphql-api'),
-                'content' => '@todo',
+                'category' => SettingsCategories::PLUGIN_MANAGEMENT,
+                'options-form-field' => self::PLUGIN_MANAGEMENT_FIELD,
+                'skip-submit-button' => true,
             ],
         ];
         $activePrimarySettingsID = $primarySettingsItems[0]['id'];
+        $tab = App::query(RequestParams::TAB);
+        $class = 'wrap';
+        if ($printWithTabs) {
+            $class .= ' graphql-api-tabpanel vertical-tabs';
+        }
 
         // Specify to only toggle the outer .tab-content divs (skip the inner ones)
         ?>
@@ -425,13 +335,106 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     <div id="graphql-api-primary-settings-nav-tab-content" class="nav-tab-content">
                         <?php
                         foreach ($primarySettingsItems as $item) {
+                            /** @var string */
+                            $optionsFormField = $item['options-form-field'];
+                            /** @var bool */
+                            $skipSubmitButton = $item['skip-submit-button'] ?? false;
                             $sectionStyle = sprintf(
                                 'display: %s;',
                                 $item['id'] === $activePrimarySettingsID ? 'block' : 'none'
                             );
                             ?>
                             <div id="<?php echo $item['id'] ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
-                                <?php echo $item['content'] ?>
+                            <?php
+                                $categorySettingsItems = array_values(array_filter(
+                                    $settingsItems,
+                                    /** @param array<string,mixed> $item */
+                                    fn (array $settingsItem) => $settingsItem['settings-category'] === $item['category']
+                                ));
+                                // By default, focus on the first module
+                                $activeModuleID = $categorySettingsItems[0]['id'];
+                                // If passing a tab, focus on that one, if the module exists
+                                if ($tab !== null) {
+                                    $moduleIDs = array_map(
+                                        fn ($item) => $item['id'],
+                                        $categorySettingsItems
+                                    );
+                                    if (in_array($tab, $moduleIDs)) {
+                                        $activeModuleID = $tab;
+                                    }
+                                }
+                            ?>
+                                <div class="<?php echo $class ?>">
+                                    <?php if ($printWithTabs) : ?>
+                                        <div class="nav-tab-container">
+                                            <!-- Tabs -->
+                                            <h2 class="nav-tab-wrapper">
+                                                <?php
+                                                foreach ($categorySettingsItems as $item) {
+                                                    printf(
+                                                        '<a href="#%s" class="nav-tab %s">%s</a>',
+                                                        $item['id'],
+                                                        $item['id'] === $activeModuleID ? 'nav-tab-active' : '',
+                                                        $item['name']
+                                                    );
+                                                }
+                                                ?>
+                                            </h2>
+                                            <div class="nav-tab-content">
+                                    <?php endif; ?>
+                                                <form method="post" action="options.php">
+                                                    <!-- Artificial input as flag that the form belongs to this plugin -->
+                                                    <input type="hidden" name="<?php echo self::FORM_ORIGIN ?>" value="<?php echo $optionsFormField ?>" />
+                                                    <!--
+                                                        Artificial input to trigger the update of the form always, as to always purge the container/operational cache
+                                                        (eg: to include 3rd party extensions in the service container, or new Gutenberg blocks)
+                                                        This is needed because "If the new and old values are the same, no need to update."
+                                                        which makes "update_option_{$option}" not be triggered when there are no changes
+                                                        @see wp-includes/option.php
+                                                    -->
+                                                    <input type="hidden" name="<?php echo $optionsFormField?>[last_saved_timestamp]" value="<?php echo time() ?>">
+                                                    <!-- Panels -->
+                                                    <?php
+                                                    $sectionClass = $printWithTabs ? 'tab-content' : '';
+                                                    \settings_fields($optionsFormField);
+                                                    foreach ($categorySettingsItems as $item) {
+                                                        $sectionStyle = '';
+                                                        $title = $printWithTabs
+                                                            ? sprintf(
+                                                                '<h2>%s</h2><hr/>',
+                                                                $item['name']
+                                                            ) : sprintf(
+                                                                '<br/><hr/><br/><h2 id="%s">%s</h2>',
+                                                                $item['id'],
+                                                                $item['name']
+                                                            );
+                                                        if ($printWithTabs) {
+                                                            $sectionStyle = sprintf(
+                                                                'display: %s;',
+                                                                $item['id'] === $activeModuleID ? 'block' : 'none'
+                                                            );
+                                                        }
+                                                        ?>
+                                                        <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
+                                                            <?php echo $title ?>
+                                                            <table class="form-table">
+                                                                <?php \do_settings_fields($optionsFormField, $this->getSettingsFieldForModule($item['id'])) ?>
+                                                            </table>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    if (!$skipSubmitButton) {
+                                                        \submit_button(
+                                                            \__('Save Changes (All)', 'graphql-api')
+                                                        );
+                                                    }
+                                                    ?>
+                                                </form>
+                                    <?php if ($printWithTabs) : ?>
+                                            </div> <!-- class="nav-tab-content" -->
+                                        </div> <!-- class="nav-tab-container" -->
+                                    <?php endif; ?>
+                                </div>
                             </div>
                             <?php
                         }
