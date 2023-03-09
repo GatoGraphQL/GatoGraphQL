@@ -7,6 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginManagement;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
@@ -61,13 +62,15 @@ class PluginOptionsFormHandler
         global $pagenow;
         if ($pagenow === 'options.php') {
             $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-            if (
-                in_array($formOrigin, [
-                SettingsMenuPage::SETTINGS_FIELD,
-                SettingsMenuPage::PLUGIN_SETTINGS_FIELD,
-                SettingsMenuPage::PLUGIN_MANAGEMENT_FIELD,
-                ])
-            ) {
+            $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+            $settingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategoryResolvers();
+            $settingsCategoryOptionsFormNames = [];
+            foreach ($settingsCategoryResolvers as $settingsCategoryResolver) {
+                foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
+                    $settingsCategoryOptionsFormNames[] = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                }
+            }
+            if (in_array($formOrigin, $settingsCategoryOptionsFormNames)) {
                 $moduleRegistry = SystemModuleRegistryFacade::getInstance();
                 $moduleResolver = $moduleRegistry->getModuleResolver($module);
                 $value = $this->getNormalizedOptionValues($moduleResolver->getSettingsCategory($module));
