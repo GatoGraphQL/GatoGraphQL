@@ -171,6 +171,29 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $this->setOptionItems($dbOptionName, $itemValues);
     }
 
+    public function hasPluginSetting(string $module, string $option): bool
+    {
+        return $this->doHasSetting(Options::PLUGIN_SETTINGS, $module, $option);
+    }
+
+    public function getPluginSetting(string $module, string $option): mixed
+    {
+        return $this->doGetSetting(Options::PLUGIN_SETTINGS, $module, $option);
+    }
+
+    public function setPluginSetting(string $module, string $option, mixed $value): void
+    {
+        return $this->doSetSetting(Options::PLUGIN_SETTINGS, $module, $option, $value);
+    }
+
+    /**
+     * @param array<string,mixed> $optionValues
+     */
+    public function setPluginSettings(string $module, array $optionValues): void
+    {
+        return $this->doSetSettings(Options::PLUGIN_SETTINGS, $module, $optionValues);
+    }
+
     public function hasSetModuleEnabled(string $moduleID): bool
     {
         return $this->hasItem(Options::MODULES, $moduleID);
