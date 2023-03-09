@@ -278,27 +278,30 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $printWithTabs = $this->printWithTabs();
 
-        $primarySettingsItems = [
-            [
-                'id' => 'graphql-api-settings',
-                'name' => \__('GraphQL API Settings', 'graphql-api'),
-                'category' => SettingsCategories::GRAPHQL_API_SETTINGS,
-                'options-form-field' => self::SETTINGS_FIELD,
-            ],
-            [
-                'id' => 'plugin-settings',
-                'name' => \__('Plugin Settings', 'graphql-api'),
-                'category' => SettingsCategories::PLUGIN_SETTINGS,
-                'options-form-field' => self::PLUGIN_SETTINGS_FIELD,
-            ],
-            [
-                'id' => 'plugin-management',
-                'name' => \__('Plugin Management', 'graphql-api'),
-                'category' => SettingsCategories::PLUGIN_MANAGEMENT,
-                'options-form-field' => self::PLUGIN_MANAGEMENT_FIELD,
-                'skip-submit-button' => true,
-            ],
+        // Settings Categories which must avoid adding the Submit button
+        $skipSubmitButtonSettingsCategories = [
+            SettingsCategoryResolver::PLUGIN_MANAGEMENT,
         ];
+
+        $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
+        /** @var array<string,SettingsCategoryResolverInterface*/
+        $settingsCategorySettingsCategoryResolvers = [];
+        foreach ($settingsCategoryRegistry->getSettingsCategoryResolvers() as $settingsCategoryResolver) {
+            foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
+                $settingsCategorySettingsCategoryResolvers[$settingsCategory] = $settingsCategoryResolver;
+            }
+        }
+        $primarySettingsItems = [];
+        foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+            $primarySettingsItems[] = [
+                'category' => $settingsCategory,
+                'id' => str_replace(['-', '\\'], '_', $settingsCategory),
+                'name' => $settingsCategoryResolver->getDescription($settingsCategory),
+                'options-form-field' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
+                'skip-submit-button' => in_array($settingsCategory, $skipSubmitButtonSettingsCategories),
+            ];
+        }
+
         $activePrimarySettingsID = $primarySettingsItems[0]['id'];
         $tab = App::query(RequestParams::TAB);
         $class = 'wrap';
