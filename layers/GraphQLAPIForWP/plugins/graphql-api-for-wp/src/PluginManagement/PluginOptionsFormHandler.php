@@ -20,9 +20,9 @@ class PluginOptionsFormHandler
     /**
      * Cache the options after normalizing them
      *
-     * @var array<string,mixed>|null
+     * @var array<string,array<string,mixed>|null>
      */
-    protected ?array $normalizedOptionValuesCache = null;
+    protected array $normalizedOptionValuesCache = [];
 
     /**
      * Get the values from the form submitted to options.php, and normalize them
@@ -31,15 +31,15 @@ class PluginOptionsFormHandler
      */
     public function getNormalizedOptionValues(string $settingsCategory): array
     {
-        if ($this->normalizedOptionValuesCache === null) {
+        if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
             $value = App::getRequest()->request->all()[SettingsMenuPage::SETTINGS_FIELD] ?? [];
-            $this->normalizedOptionValuesCache = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
+            $this->normalizedOptionValuesCache[$settingsCategory] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
-        return $this->normalizedOptionValuesCache;
+        return $this->normalizedOptionValuesCache[$settingsCategory];
     }
 
     /**
