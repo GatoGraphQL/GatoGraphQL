@@ -3,7 +3,8 @@ jQuery( document ).ready( function($){
         e.preventDefault();
         tab = $(this).attr('href');
         tabPanel = $(tab).closest('.graphql-api-tabpanel');
-        tabPanelSelector = '#' + tabPanel.attr('id');
+        tabPanelID = tabPanel.attr('id');
+        tabPanelSelector = tabPanelID == undefined ? '.graphql-api-tabpanel' : '#' + tabPanelID;
         /**
          * Allow to specify which is the target to show/hide.
          * This allows to have a tabPanel wrapping another tabPanel,
