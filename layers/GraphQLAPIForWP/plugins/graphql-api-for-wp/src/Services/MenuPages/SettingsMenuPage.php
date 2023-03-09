@@ -154,12 +154,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             'admin_init',
             function (): void {
                 $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-                $moduleSettingsItems = array_filter(
-                    $settingsItems,
-                    /** @param array<string,mixed> $item */
-                    fn (array $item) => $item['settings-category'] === SettingsCategories::MODULE_SETTINGS
-                );
-                foreach ($moduleSettingsItems as $item) {
+                // @todo Check: can just register all of them!
+                // $moduleSettingsItems = array_filter(
+                //     $settingsItems,
+                //     /** @param array<string,mixed> $item */
+                //     fn (array $item) => $item['settings-category'] === SettingsCategories::MODULE_SETTINGS
+                // );
+                foreach ($settingsItems as $item) {
                     $settingsFieldForModule = $this->getSettingsFieldForModule($item['id']);
                     $module = $item['module'];
                     \add_settings_section(
