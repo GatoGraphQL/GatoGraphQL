@@ -34,4 +34,12 @@ class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
         }
         return $this->settingsCategoryResolvers[$settingsCategory];
     }
+
+    /**
+     * @return SettingsCategoryResolverInterface[]
+     */
+    public function getSettingsCategoryResolvers(): array
+    {
+        return array_values($this->settingsCategoryResolvers);
+    }
 }

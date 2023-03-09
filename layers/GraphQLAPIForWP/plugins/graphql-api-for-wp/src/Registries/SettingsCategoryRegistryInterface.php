@@ -14,4 +14,8 @@ interface SettingsCategoryRegistryInterface
      * @throws SettingsCategoryNotExistsException If category does not exist
      */
     public function getSettingsCategoryResolver(string $settingsCategory): SettingsCategoryResolverInterface;
+    /**
+     * @return SettingsCategoryResolverInterface[]
+     */
+    public function getSettingsCategoryResolvers(): array;
 }
