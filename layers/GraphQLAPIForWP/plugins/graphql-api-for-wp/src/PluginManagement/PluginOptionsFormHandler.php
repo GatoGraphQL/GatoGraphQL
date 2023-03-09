@@ -29,7 +29,7 @@ class PluginOptionsFormHandler
      *
      * @return array<string,mixed>
      */
-    public function getNormalizedOptionValues(): array
+    public function getNormalizedOptionValues(string $settingsCategory): array
     {
         if ($this->normalizedOptionValuesCache === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
@@ -37,7 +37,7 @@ class PluginOptionsFormHandler
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
             $value = App::getRequest()->request->all()[SettingsMenuPage::SETTINGS_FIELD] ?? [];
-            $this->normalizedOptionValuesCache = $settingsNormalizer->normalizeSettings($value, SettingsCategories::GRAPHQL_API_SETTINGS);
+            $this->normalizedOptionValuesCache = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
         return $this->normalizedOptionValuesCache;
     }
@@ -59,7 +59,7 @@ class PluginOptionsFormHandler
             $pagenow === 'options.php'
             && App::request(SettingsMenuPage::FORM_ORIGIN) === SettingsMenuPage::SETTINGS_FIELD
         ) {
-            $value = $this->getNormalizedOptionValues();
+            $value = $this->getNormalizedOptionValues(SettingsCategories::GRAPHQL_API_SETTINGS);
             // Return the specific value to this module/option
             $moduleRegistry = SystemModuleRegistryFacade::getInstance();
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
