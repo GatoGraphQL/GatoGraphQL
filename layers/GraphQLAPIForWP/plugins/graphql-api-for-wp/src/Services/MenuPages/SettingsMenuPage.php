@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModu
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SettingsCategoryResolvers\SettingsCategoryResolver;
+use GraphQLAPI\GraphQLAPI\Services\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
@@ -208,8 +209,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                              * once triggered by `update_option` and once by `add_option`,
                              * (which is called by `update_option`).
                              */
-                            'sanitize_callback' => function (array $values) use ($settingsField): array {
-                                return $this->sanitizeCallback($values, $settingsField);
+                            'sanitize_callback' => function (array $values) use ($settingsCategory): array {
+                                return $this->sanitizeCallback($values, $settingsCategory);
                             },
                             'show_in_rest' => false,
                         ]
@@ -232,15 +233,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * @param array<string,mixed> $values
      * @return array<string,mixed>
      */
-    protected function sanitizeCallback(array $values, string $settingsField): array
-    {
-        $dbFormOptionSettingsCategories = [
-            self::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
-            self::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
-            self::PLUGIN_MANAGEMENT_FIELD => SettingsCategories::PLUGIN_MANAGEMENT,
-        ];
-
-        return $this->getSettingsNormalizer()->normalizeSettings($values, $dbFormOptionSettingsCategories[$settingsField]);
+    protected function sanitizeCallback(
+        array $values,
+        string $settingsCategory,
+    ): array {
+        return $this->getSettingsNormalizer()->normalizeSettings($values, $settingsCategory);
     }
 
     protected function flushContainer(): void
