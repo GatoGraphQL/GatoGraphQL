@@ -30,6 +30,8 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
      * Please notice: the name of the field must be the same as that
      * of the option name in the DB, or otherwise doing `register_setting`
      * in SettingsMenuPage does not work (for some reason, $values is null).
+     *
+     * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
      */
     final public function getOptionsFormName(string $settingsCategory): string
     {
