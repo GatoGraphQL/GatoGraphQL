@@ -64,8 +64,7 @@ interface ModuleResolverInterface
      *
      * - Module Settings
      * - Plugin Settings
-     * - Reset Module Settings
-     * - etc
+     * - Plugin Management
      */
     public function getSettingsCategory(string $module): string;
     /**

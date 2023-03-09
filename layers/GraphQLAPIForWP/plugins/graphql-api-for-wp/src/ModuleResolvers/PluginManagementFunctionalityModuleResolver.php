@@ -86,7 +86,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getSettingsCategory(string $module): string
     {
         return match ($module) {
-            self::PLUGIN_MANAGEMENT => SettingsCategories::RESET_MODULE_SETTINGS,
+            self::PLUGIN_MANAGEMENT => SettingsCategories::PLUGIN_MANAGEMENT,
             default => parent::getSettingsCategory($module),
         };
     }

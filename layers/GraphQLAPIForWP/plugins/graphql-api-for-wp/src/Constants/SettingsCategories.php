@@ -8,5 +8,5 @@ class SettingsCategories
 {
     public final const MODULE_SETTINGS = 'module-settings';
     public final const PLUGIN_SETTINGS = 'plugin-settings';
-    public final const RESET_MODULE_SETTINGS = 'reset-module-settings';
+    public final const PLUGIN_MANAGEMENT = 'plugin-management';
 }

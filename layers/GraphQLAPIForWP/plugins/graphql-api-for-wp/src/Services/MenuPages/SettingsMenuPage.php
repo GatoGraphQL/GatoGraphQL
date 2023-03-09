@@ -391,6 +391,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 'name' => \__('Plugin Settings', 'graphql-api'),
                 'content' => '@todo',
             ],
+            [
+                'id' => 'plugin-management',
+                'name' => \__('Plugin Management', 'graphql-api'),
+                'content' => '@todo',
+            ],
         ];
         $activePrimarySettingsID = $primarySettingsItems[0]['id'];
 
