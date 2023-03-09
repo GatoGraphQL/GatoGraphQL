@@ -31,5 +31,5 @@ interface SettingsNormalizerInterface
      *
      * @return array<array<string,mixed>> Each item is an array of prop => value
      */
-    public function getAllSettingsItems(): array;
+    public function getAllSettingsItems(?string $settingsCategory = null): array;
 }
