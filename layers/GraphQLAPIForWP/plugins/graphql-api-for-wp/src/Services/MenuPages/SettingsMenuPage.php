@@ -6,9 +6,11 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Services\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
@@ -71,7 +73,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         parent::initialize();
 
-        $option = self::PLUGIN_MANAGEMENT_FIELD;
+        $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+
+        $option = $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT);
         \add_filter(
             "pre_update_option_{$option}",
             /**
@@ -98,7 +102,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
 
         $regenerateConfigFormOptions = [
-            self::SETTINGS_FIELD,
+            $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::GRAPHQL_API_SETTINGS)->getOptionsFormName(SettingsCategoryResolver::GRAPHQL_API_SETTINGS),
         ];
         foreach ($regenerateConfigFormOptions as $option) {
             /**
