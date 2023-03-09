@@ -6,10 +6,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Constants\SettingsCategories;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
@@ -33,6 +33,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
     private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
+    private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -60,6 +61,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         /** @var PluginGeneralSettingsFunctionalityModuleResolver */
         return $this->PluginGeneralSettingsFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
     }
+    final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
+    {
+        $this->settingsCategoryRegistry = $settingsCategoryRegistry;
+    }
+    final protected function getSettingsCategoryRegistry(): SettingsCategoryRegistryInterface
+    {
+        /** @var SettingsCategoryRegistryInterface */
+        return $this->settingsCategoryRegistry ??= $this->instanceManager->getInstance(SettingsCategoryRegistryInterface::class);
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -73,7 +83,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         parent::initialize();
 
-        $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+        $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
 
         $option = $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT);
         \add_filter(
