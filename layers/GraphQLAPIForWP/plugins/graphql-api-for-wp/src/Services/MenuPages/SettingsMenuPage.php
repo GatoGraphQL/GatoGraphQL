@@ -134,28 +134,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          */
         \add_action(
             'admin_init',
-            function (): void {
+            function () use ($settingsCategoryRegistry): void {
                 $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-                $settingsEntries = [
-                    [
-                        'category' => SettingsCategories::GRAPHQL_API_SETTINGS,
-                        'field' => self::SETTINGS_FIELD,
-                        'option-name' => Options::SETTINGS,
-                        'description' => \__('Settings for the GraphQL API', 'graphql-api'),
-                    ],
-                    [
-                        'category' => SettingsCategories::PLUGIN_SETTINGS,
-                        'field' => self::PLUGIN_SETTINGS_FIELD,
-                        'option-name' => Options::PLUGIN_SETTINGS,
-                        'description' => \__('Plugin Settings', 'graphql-api'),
-                    ],
-                    [
-                        'category' => SettingsCategories::PLUGIN_MANAGEMENT,
-                        'field' => self::PLUGIN_MANAGEMENT_FIELD,
-                        'option-name' => Options::PLUGIN_MANAGEMENT,
-                        'description' => \__('Plugin Management', 'graphql-api'),
-                    ],
-                ];
+                $settingsEntries = [];
+                foreach ($settingsCategoryRegistry->getSettingsCategoryResolvers() as $settingsCategoryResolver) {
+                    foreach ($settingsCategoryResolver->getSettingsCategoriesToResolve() as $settingsCategory) {
+                        $settingsEntries[] = [
+                            'category' => $settingsCategory,
+                            'field' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
+                            'option-name' => $settingsCategoryResolver->getDBOptionName($settingsCategory),
+                            'description' => $settingsCategoryResolver->getDescription($settingsCategory),
+                        ];
+                    }
+                }
                 foreach ($settingsEntries as $settingsEntry) {
                     $categorySettingsItems = array_filter(
                         $settingsItems,
