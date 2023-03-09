@@ -208,19 +208,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             \add_settings_field(
                                 $itemSetting[Properties::NAME],
                                 $itemSetting[Properties::TITLE] ?? '',
-                                function () use ($module, $itemSetting): void {
+                                function () use ($module, $itemSetting, $settingsField): void {
                                     $type = $itemSetting[Properties::TYPE] ?? null;
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                     if (!empty($possibleValues)) {
-                                        $this->printSelectField($module, $itemSetting);
+                                        $this->printSelectField($settingsField, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_ARRAY) {
-                                        $this->printTextareaField($module, $itemSetting);
+                                        $this->printTextareaField($settingsField, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_BOOL) {
-                                        $this->printCheckboxField($module, $itemSetting);
+                                        $this->printCheckboxField($settingsField, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_NULL) {
-                                        $this->printLabelField($module, $itemSetting);
+                                        $this->printLabelField($settingsField, $module, $itemSetting);
                                     } else {
-                                        $this->printInputField($module, $itemSetting);
+                                        $this->printInputField($settingsField, $module, $itemSetting);
                                     }
                                 },
                                 $settingsField,
@@ -486,14 +486,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printCheckboxField(string $module, array $itemSetting): void
+    protected function printCheckboxField(string $optionsFormField, string $module, array $itemSetting): void
     {
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
         ?>
             <label for="<?php echo $name; ?>">
-                <input type="checkbox" name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
+                <input type="checkbox" name="<?php echo $optionsFormField . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
                 <?php echo $itemSetting[Properties::DESCRIPTION] ?? ''; ?>
             </label>
         <?php
@@ -504,7 +504,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printLabelField(string $module, array $itemSetting): void
+    protected function printLabelField(string $optionsFormField, string $module, array $itemSetting): void
     {
         ?>
             <p>
@@ -518,7 +518,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printInputField(string $module, array $itemSetting): void
+    protected function printInputField(string $optionsFormField, string $module, array $itemSetting): void
     {
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
@@ -531,7 +531,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         ?>
             <label for="<?php echo $name; ?>">
-                <input name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
+                <input name="<?php echo $optionsFormField . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
                 <?php echo $label; ?>
             </label>
         <?php
@@ -542,7 +542,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printSelectField(string $module, array $itemSetting): void
+    protected function printSelectField(string $optionsFormField, string $module, array $itemSetting): void
     {
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
@@ -557,7 +557,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         ?>
             <label for="<?php echo $name; ?>">
-                <select name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']' . ($isMultiple ? '[]' : ''); ?>" id="<?php echo $name; ?>" <?php echo $isMultiple ? 'multiple="multiple" size="10"' : ''; ?>>
+                <select name="<?php echo $optionsFormField . '[' . $name . ']' . ($isMultiple ? '[]' : ''); ?>" id="<?php echo $name; ?>" <?php echo $isMultiple ? 'multiple="multiple" size="10"' : ''; ?>>
                 <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
                     <?php $maybeSelected = in_array($optionValue, $value) ? 'selected="selected"' : ''; ?>
                     <option value="<?php echo $optionValue ?>" <?php echo $maybeSelected ?>>
@@ -575,7 +575,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printTextareaField(string $module, array $itemSetting): void
+    protected function printTextareaField(string $optionsFormField, string $module, array $itemSetting): void
     {
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
@@ -584,7 +584,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         ?>
             <label for="<?php echo $name; ?>">
-                <textarea name="<?php echo self::SETTINGS_FIELD . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10" cols="40"><?php echo implode("\n", $value) ?></textarea>
+                <textarea name="<?php echo $optionsFormField . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10" cols="40"><?php echo implode("\n", $value) ?></textarea>
                 <?php echo $label; ?>
             </label>
         <?php
