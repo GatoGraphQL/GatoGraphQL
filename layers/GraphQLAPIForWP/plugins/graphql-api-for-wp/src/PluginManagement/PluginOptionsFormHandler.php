@@ -32,11 +32,11 @@ class PluginOptionsFormHandler
     public function getNormalizedOptionValues(string $formOrigin): array
     {
         if (($this->normalizedOptionValuesCache[$formOrigin] ?? null) === null) {
-            $fieldSettingsCategories = [
+            $formOriginSettingsCategories = [
                 SettingsMenuPage::SETTINGS_FIELD => SettingsCategories::GRAPHQL_API_SETTINGS,
                 SettingsMenuPage::PLUGIN_SETTINGS_FIELD => SettingsCategories::PLUGIN_SETTINGS,
             ];
-            $settingsCategory = $fieldSettingsCategories[$formOrigin];
+            $settingsCategory = $formOriginSettingsCategories[$formOrigin];
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
