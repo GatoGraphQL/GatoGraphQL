@@ -19,6 +19,7 @@
     float: none;
     margin: 0;
     border-bottom: 0;
+    transition: 0.3s;
 }
 
 .graphql-api-tabpanel.vertical-tabs > .nav-tab-container {
