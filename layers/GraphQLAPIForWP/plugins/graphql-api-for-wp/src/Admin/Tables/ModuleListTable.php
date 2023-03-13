@@ -9,8 +9,11 @@ use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
@@ -20,6 +23,17 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 class ModuleListTable extends AbstractItemListTable
 {
     public final const URL_PARAM_MODULE_TYPE = 'module-type';
+
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
 
     /**
      * Singular name of the listed records
@@ -343,11 +357,19 @@ class ModuleListTable extends AbstractItemListTable
                  * @var SettingsMenuPage
                  */
                 $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
+                /**
+                 * If the Settings page is not organized by tabs,
+                 * then scroll down to the item
+                 */
+                $settingsURLPlaceholder = 'admin.php?page=%1$s&%2$s=%3$s';
+                if (!$this->printSettingsPageWithTabs()) {
+                    $settingsURLPlaceholder .= '#%3$s';
+                }
                 $actions['settings'] = \sprintf(
                     '<a href="%s">%s</a>',
                     sprintf(
                         \admin_url(sprintf(
-                            'admin.php?page=%1$s&%2$s=%3$s#%3$s',
+                            $settingsURLPlaceholder,
                             $settingsMenuPage->getScreenID(),
                             RequestParams::TAB,
                             $item['id']
@@ -375,6 +397,19 @@ class ModuleListTable extends AbstractItemListTable
             // }
         }
         return $actions;
+    }
+
+    /**
+     * The user can define this behavior through the Settings.
+     * If `true`, print the sections using tabs
+     * If `false`, print the sections one below the other
+     */
+    protected function printSettingsPageWithTabs(): bool
+    {
+        return $this->getUserSettingsManager()->getSetting(
+            PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+            PluginGeneralSettingsFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
+        );
     }
 
     /**
