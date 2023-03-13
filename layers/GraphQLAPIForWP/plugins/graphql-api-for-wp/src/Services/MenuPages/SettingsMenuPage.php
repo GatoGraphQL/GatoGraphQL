@@ -274,7 +274,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 'id' => str_replace(['-', '\\'], '_', $settingsCategory),
                 'name' => $settingsCategoryResolver->getDescription($settingsCategory),
                 'options-form-name' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
-                'add-submit-button' => $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory),
+                'add-options-form-submit-button' => $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory),
             ];
         }
 
@@ -314,7 +314,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             /** @var string */
                             $optionsFormName = $item['options-form-name'];
                             /** @var bool */
-                            $addSubmitButton = $item['add-submit-button'];
+                            $addSubmitButton = $item['add-options-form-submit-button'];
                             $sectionStyle = sprintf(
                                 'display: %s;',
                                 $item['id'] === $activePrimarySettingsID ? 'block' : 'none'
