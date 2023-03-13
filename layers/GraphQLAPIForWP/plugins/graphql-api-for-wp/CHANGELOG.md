@@ -8,15 +8,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Browse "Additional Documentation" when editing a Schema Configuration ([#2052](https://github.com/leoloso/PoP/pull/2052))
-- Added documentation for PRO modules (provided by the GraphQL API PRO plugin, released alongside the GraphQL API for WordPress plugin's v1.0), and their corresponding Schema Configuration functionalities ([#2062](https://github.com/leoloso/PoP/pull/2062))
-- The Settings page has tabs displayed vertically ([#2069](https://github.com/leoloso/PoP/pull/2069))
-- Added documentation page "Use Cases, Best Practices, and Recipes" ([#2072](https://github.com/leoloso/PoP/pull/2072))
+- Browse "Additional Documentation" when editing a Schema Configuration
+- Added documentation for PRO modules (provided by the GraphQL API PRO plugin, released alongside the GraphQL API for WordPress plugin's v1.0), and their corresponding Schema Configuration functionalities
+- The Settings page has tabs displayed vertically
+- Added documentation page "Use Cases, Best Practices, and Recipes"
 
 ### Fixed
 
-- Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`) ([#2043](https://github.com/leoloso/PoP/pull/2043))
-- Avoid error from loading non-existing translation files ([2362e2c](https://github.com/leoloso/PoP/commit/2362e2cc46ab6269afabb7d072ea3345fc65aaab))
+- Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)
+- Avoid error from loading non-existing translation files
 
 ### Breaking changes
 
