@@ -305,7 +305,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
                             $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-                            $addSubmitButton = $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory);
                             $sectionStyle = sprintf(
                                 'display: %s;',
                                 $settingsCategoryID === $activePrimarySettingsID ? 'block' : 'none'
@@ -390,7 +389,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         </div>
                                                         <?php
                                                     }
-                                                    if ($addSubmitButton) {
+                                                    if ($settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory)) {
                                                         \submit_button(
                                                             \__('Save Changes (All)', 'graphql-api')
                                                         );
