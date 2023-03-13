@@ -90,7 +90,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         return match ($module) {
-            self::PLUGIN_MANAGEMENT => \__('Plugin Management', 'graphql-api'),
+            self::PLUGIN_MANAGEMENT => \__('Reset Settings', 'graphql-api'),
             default => $module,
         };
     }
@@ -98,7 +98,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::PLUGIN_MANAGEMENT => \__('Admin tools to manage the GraphQL API plugin', 'graphql-api'),
+            self::PLUGIN_MANAGEMENT => \__('Restore the GraphQL API Settings to default values', 'graphql-api'),
             default => parent::getDescription($module),
         };
     }
@@ -139,10 +139,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $module,
                     'reset-settings-button'
                 ),
-                Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
+                Properties::TITLE => \__('Reset the GraphQL API Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p>',
-                    \__('Restore the Settings to default values.', 'graphql-api'),
+                    \__('Restore the GraphQL API Settings to default values.', 'graphql-api'),
                     $resetSettingsButtonsHTML
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
