@@ -514,9 +514,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function printLabelField(string $optionsFormName, string $module, array $itemSetting): void
     {
         ?>
-            <p>
-                <?php echo $itemSetting[Properties::DESCRIPTION] ?? ''; ?>
-            </p>
+            <?php echo $itemSetting[Properties::DESCRIPTION] ?? ''; ?>
         <?php
     }
 
