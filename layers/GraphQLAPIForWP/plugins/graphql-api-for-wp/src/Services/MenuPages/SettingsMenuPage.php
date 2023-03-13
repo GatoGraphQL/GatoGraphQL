@@ -235,9 +235,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $this->getUserSettingsManager()->storeContainerTimestamp();
     }
 
-    protected function getSettingsFieldForModule(string $optionsFormField, string $moduleID): string
+    protected function getSettingsFieldForModule(string $optionsFormName, string $moduleID): string
     {
-        return $optionsFormField . '-' . $moduleID;
+        return $optionsFormName . '-' . $moduleID;
     }
 
     /**
@@ -312,7 +312,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         <?php
                         foreach ($primarySettingsItems as $item) {
                             /** @var string */
-                            $optionsFormField = $item['options-form-field'];
+                            $optionsFormName = $item['options-form-field'];
                             /** @var bool */
                             $addSubmitButton = $item['add-submit-button'];
                             $sectionStyle = sprintf(
@@ -360,7 +360,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     <?php endif; ?>
                                                 <form method="post" action="options.php">
                                                     <!-- Artificial input as flag that the form belongs to this plugin -->
-                                                    <input type="hidden" name="<?php echo self::FORM_ORIGIN ?>" value="<?php echo $optionsFormField ?>" />
+                                                    <input type="hidden" name="<?php echo self::FORM_ORIGIN ?>" value="<?php echo $optionsFormName ?>" />
                                                     <!--
                                                         Artificial input to trigger the update of the form always, as to always purge the container/operational cache
                                                         (eg: to include 3rd party extensions in the service container, or new Gutenberg blocks)
@@ -368,11 +368,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         which makes "update_option_{$option}" not be triggered when there are no changes
                                                         @see wp-includes/option.php
                                                     -->
-                                                    <input type="hidden" name="<?php echo $optionsFormField?>[last_saved_timestamp]" value="<?php echo time() ?>">
+                                                    <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo time() ?>">
                                                     <!-- Panels -->
                                                     <?php
                                                     $sectionClass = $printWithTabs ? 'tab-content' : '';
-                                                    \settings_fields($optionsFormField);
+                                                    \settings_fields($optionsFormName);
                                                     foreach ($categorySettingsItems as $item) {
                                                         $sectionStyle = '';
                                                         $title = $printWithTabs
@@ -394,7 +394,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
                                                             <?php echo $title ?>
                                                             <table class="form-table">
-                                                                <?php \do_settings_fields($optionsFormField, $this->getSettingsFieldForModule($optionsFormField, $item['id'])) ?>
+                                                                <?php \do_settings_fields($optionsFormName, $this->getSettingsFieldForModule($optionsFormName, $item['id'])) ?>
                                                             </table>
                                                         </div>
                                                         <?php
@@ -448,14 +448,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printCheckboxField(string $optionsFormField, string $module, array $itemSetting): void
+    protected function printCheckboxField(string $optionsFormName, string $module, array $itemSetting): void
     {
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
         ?>
             <label for="<?php echo $name; ?>">
-                <input type="checkbox" name="<?php echo $optionsFormField . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
+                <input type="checkbox" name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
                 <?php echo $itemSetting[Properties::DESCRIPTION] ?? ''; ?>
             </label>
         <?php
@@ -466,7 +466,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printLabelField(string $optionsFormField, string $module, array $itemSetting): void
+    protected function printLabelField(string $optionsFormName, string $module, array $itemSetting): void
     {
         ?>
             <p>
@@ -480,7 +480,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printInputField(string $optionsFormField, string $module, array $itemSetting): void
+    protected function printInputField(string $optionsFormName, string $module, array $itemSetting): void
     {
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
@@ -493,7 +493,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         ?>
             <label for="<?php echo $name; ?>">
-                <input name="<?php echo $optionsFormField . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
+                <input name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
                 <?php echo $label; ?>
             </label>
         <?php
@@ -504,7 +504,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printSelectField(string $optionsFormField, string $module, array $itemSetting): void
+    protected function printSelectField(string $optionsFormName, string $module, array $itemSetting): void
     {
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
@@ -519,7 +519,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         ?>
             <label for="<?php echo $name; ?>">
-                <select name="<?php echo $optionsFormField . '[' . $name . ']' . ($isMultiple ? '[]' : ''); ?>" id="<?php echo $name; ?>" <?php echo $isMultiple ? 'multiple="multiple" size="10"' : ''; ?>>
+                <select name="<?php echo $optionsFormName . '[' . $name . ']' . ($isMultiple ? '[]' : ''); ?>" id="<?php echo $name; ?>" <?php echo $isMultiple ? 'multiple="multiple" size="10"' : ''; ?>>
                 <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
                     <?php $maybeSelected = in_array($optionValue, $value) ? 'selected="selected"' : ''; ?>
                     <option value="<?php echo $optionValue ?>" <?php echo $maybeSelected ?>>
@@ -537,7 +537,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      *
      * @param array<string,mixed> $itemSetting
      */
-    protected function printTextareaField(string $optionsFormField, string $module, array $itemSetting): void
+    protected function printTextareaField(string $optionsFormName, string $module, array $itemSetting): void
     {
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
@@ -546,7 +546,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         ?>
             <label for="<?php echo $name; ?>">
-                <textarea name="<?php echo $optionsFormField . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10" cols="40"><?php echo implode("\n", $value) ?></textarea>
+                <textarea name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10" cols="40"><?php echo implode("\n", $value) ?></textarea>
                 <?php echo $label; ?>
             </label>
         <?php
