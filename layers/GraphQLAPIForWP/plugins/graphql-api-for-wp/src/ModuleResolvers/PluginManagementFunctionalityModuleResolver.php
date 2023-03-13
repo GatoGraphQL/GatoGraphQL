@@ -128,7 +128,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
                     <p class="submit">
-                        <a href="#" class="button secondary graphql-api-show-settings-sections">
+                        <a href="#" class="button secondary graphql-api-show-settings-items">
                             %1\$s
                         </a>
                     </p>
