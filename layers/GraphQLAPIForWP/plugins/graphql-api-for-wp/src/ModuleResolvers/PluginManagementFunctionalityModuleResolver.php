@@ -157,8 +157,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $option
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    '<p><strong>%s</strong></p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
-                    \__('Use "safe" or "unsafe" default behavior for Settings?', 'graphql-api'),
+                    '<p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
                     \__('Before values in the Settings page are configured, the plugin uses default values, which can have a "safe" or "unsafe" behavior.', 'graphql-api'),
                     \__('<strong><u>Safe default settings</u></strong>', 'graphql-api'),
                     \__('Recommended when the site openly exposes APIs (eg: for any visitor on the Internet, or for clients, or when feeding data to a downstream server an a non-private network), as to make the site secure:', 'graphql-api'),
@@ -185,8 +184,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    ResetSettingsOptions::SAFE => \__('Use "safe" default behavior', 'graphql-api'),
-                    ResetSettingsOptions::UNSAFE => \__('Use "unsafe" default behavior', 'graphql-api'),
+                    ResetSettingsOptions::SAFE => \__('Use "safe" default behavior for the Settings', 'graphql-api'),
+                    ResetSettingsOptions::UNSAFE => \__('Use "unsafe" default behavior for the Settings', 'graphql-api'),
                 ],
                 Properties::CSS_STYLE => 'display: none;',
             ];
