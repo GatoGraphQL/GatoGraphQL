@@ -12,6 +12,9 @@ services:
 
     GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface:
         class: '\GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistry'
+
+    GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface:
+        class: \GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizer
         
     GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\:
         resource: '../src/Security/UserAuthorizationSchemes/*'

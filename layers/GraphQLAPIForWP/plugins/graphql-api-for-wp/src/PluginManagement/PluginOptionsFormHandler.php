@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
 /**
  * Helper class with functions to set the configuration in PoP components.
@@ -32,7 +32,7 @@ class PluginOptionsFormHandler
     public function getNormalizedOptionValues(string $settingsCategory): array
     {
         if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
-            $instanceManager = InstanceManagerFacade::getInstance();
+            $instanceManager = SystemInstanceManagerFacade::getInstance();
             $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
             $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
             $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
