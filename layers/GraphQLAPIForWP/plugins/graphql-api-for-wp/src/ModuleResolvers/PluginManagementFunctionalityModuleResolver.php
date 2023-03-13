@@ -127,13 +127,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         if ($module === self::PLUGIN_MANAGEMENT) {
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
-                    <p class="submit">
-                        <a href="#" class="button secondary graphql-api-show-settings-items">
-                            %1\$s
-                        </a>
-                    </p>
+                    <a href="#" class="button secondary graphql-api-show-settings-items">
+                        %1\$s
+                    </a>
                 HTML,
-                \__('Reset Settings', 'graphql-api')
+                \__('Show me options to reset the Settings', 'graphql-api')
             );
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
@@ -142,8 +140,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p>%s',
-                    \__('Delete all stored Settings values. Then, the "safe" or "unsafe" default behavior will be be applied.', 'graphql-api'),
+                    '<p>%s</p><br/><p>%s</p>',
+                    \__('Delete all stored Settings values, and decide if to use the "safe" or "unsafe" default behavior from now on.', 'graphql-api'),
                     $resetSettingsButtonsHTML
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
@@ -205,7 +203,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $confirmResetSettingsButtonsHTML = '';
             if (function_exists('get_submit_button')) {
                 $confirmResetSettingsButtonsHTML = get_submit_button(
-                    \__('Please confirm: Reset Settings', 'graphql-api'),
+                    \__('Reset Settings!', 'graphql-api'),
                     'primary',
                     $resetButtonName,
                     false
