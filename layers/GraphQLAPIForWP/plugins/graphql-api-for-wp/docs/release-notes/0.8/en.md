@@ -258,7 +258,7 @@ It is used on the newly-introduced `option` and `metaValue(s)` field, because we
 
 Options in the Settings page are divided by tabs. From `v0.8` it is also possible to visualize them all together in a single long page.
 
-To enable this behavior, uncheck item `"Have all options in this Settings page be organized under tabs, one tab per module."` on the Settings, and press on `"Save Changes"`:
+To enable this behavior, uncheck item `"Have all options in this Settings page be organized under tabs, one tab per module."` on the Settings, and press on `"Save Changes (All)"`:
 
 ![Checkbox to enable/disable tabs in Settings](../../images/settings-without-tabs-checkbox.png)
 
