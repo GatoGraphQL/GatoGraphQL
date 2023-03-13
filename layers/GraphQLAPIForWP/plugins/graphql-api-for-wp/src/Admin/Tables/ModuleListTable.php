@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
@@ -61,6 +62,7 @@ class ModuleListTable extends AbstractItemListTable
         $items = [];
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleTypeRegistry = ModuleTypeRegistryFacade::getInstance();
+        $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(false, false, true);
         $currentView = $this->getCurrentView();
         foreach ($modules as $module) {
@@ -68,6 +70,7 @@ class ModuleListTable extends AbstractItemListTable
             $moduleType = $moduleResolver->getModuleType($module);
             $moduleTypeResolver = $moduleTypeRegistry->getModuleTypeResolver($moduleType);
             $moduleTypeSlug = $moduleTypeResolver->getSlug($moduleType);
+            $settingsCategory = $moduleResolver->getSettingsCategory($module);
             // If filtering the view, only add the items with that module type
             if (!$currentView || $currentView === $moduleTypeSlug) {
                 $isEnabled = $moduleRegistry->isModuleEnabled($module);
@@ -87,6 +90,7 @@ class ModuleListTable extends AbstractItemListTable
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
+                    'settings-category-id' => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getID($settingsCategory),
                 ];
             }
         }
@@ -361,9 +365,9 @@ class ModuleListTable extends AbstractItemListTable
                  * If the Settings page is not organized by tabs,
                  * then scroll down to the item
                  */
-                $settingsURLPlaceholder = 'admin.php?page=%1$s&%2$s=%3$s';
+                $settingsURLPlaceholder = 'admin.php?page=%1$s&%2$s=%3$s&%4$s=%5$s';
                 if (!$this->printSettingsPageWithTabs()) {
-                    $settingsURLPlaceholder .= '#%3$s';
+                    $settingsURLPlaceholder .= '#%5$s';
                 }
                 $actions['settings'] = \sprintf(
                     '<a href="%s">%s</a>',
@@ -371,6 +375,8 @@ class ModuleListTable extends AbstractItemListTable
                         \admin_url(sprintf(
                             $settingsURLPlaceholder,
                             $settingsMenuPage->getScreenID(),
+                            RequestParams::CATEGORY,
+                            $item['settings-category-id'],
                             RequestParams::TAB,
                             $item['id']
                         ))
