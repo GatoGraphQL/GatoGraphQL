@@ -40,8 +40,8 @@ class BehaviorHelpers
      */
     public static function areUnsafeDefaultsEnabled(): bool
     {
-        if (static::$areUnsafeDefaultsEnabled !== null) {
-            return static::$areUnsafeDefaultsEnabled;
+        if (self::$areUnsafeDefaultsEnabled !== null) {
+            return self::$areUnsafeDefaultsEnabled;
         }
 
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
@@ -57,7 +57,7 @@ class BehaviorHelpers
             PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
         );
         if ($useSafeOrUnsafeDefaultBehavior !== null) {            
-            static::$areUnsafeDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
+            self::$areUnsafeDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
         } elseif (
             $userSettingsManager->hasSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
@@ -71,23 +71,23 @@ class BehaviorHelpers
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
             );
-            static::$areUnsafeDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
+            self::$areUnsafeDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
         } elseif (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR) !== false) {
             /**
              * If env var `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
              */
-            static::$areUnsafeDefaultsEnabled = (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
+            self::$areUnsafeDefaultsEnabled = (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
         } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR)) {
             /**
              * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
              */
-            static::$areUnsafeDefaultsEnabled = (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
+            self::$areUnsafeDefaultsEnabled = (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
         } else {
             /**
              * Base case: If on the DEV or PROD environment
              */
-            static::$areUnsafeDefaultsEnabled = RootEnvironment::isApplicationEnvironmentDev();
+            self::$areUnsafeDefaultsEnabled = RootEnvironment::isApplicationEnvironmentDev();
         }
-        return static::$areUnsafeDefaultsEnabled;
+        return self::$areUnsafeDefaultsEnabled;
     }
 }
