@@ -312,6 +312,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             ?>
                             <div id="<?php echo $settingsCategoryID ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
                             <?php
+                                /**
+                                 * Filter all the category settings that must be printed
+                                 * under the current section
+                                 */
                                 $categorySettingsItems = array_values(array_filter(
                                     $settingsItems,
                                     /** @param array<string,mixed> $item */
