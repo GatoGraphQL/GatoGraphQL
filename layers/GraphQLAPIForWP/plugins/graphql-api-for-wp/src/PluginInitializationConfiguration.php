@@ -96,7 +96,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             [
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
-                'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::SERVER_IP_CONFIGURATION,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
             ],
             // GraphQL single endpoint slug
