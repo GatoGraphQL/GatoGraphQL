@@ -387,7 +387,7 @@ class ModuleListTable extends AbstractItemListTable
                             $settingsMenuPage->getScreenID(),
                             RequestParams::CATEGORY,
                             $item['settings-category-id'],
-                            RequestParams::TAB,
+                            RequestParams::MODULE,
                             $item['id']
                         ))
                     ),

@@ -272,25 +272,25 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * Either the one whose ID is passed by ?category=...,
          * or the 1st one otherwise.
          */
-        $activePrimarySettingsID = null;
-        $primaryCategory = App::query(RequestParams::CATEGORY);
-        if ($primaryCategory !== null) {
+        $activeCategoryID = null;
+        $activeCategory = App::query(RequestParams::CATEGORY);
+        if ($activeCategory !== null) {
             foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
                 $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
-                if ($settingsCategoryID !== $primaryCategory) {
+                if ($settingsCategoryID !== $activeCategory) {
                     continue;
                 }
-                $activePrimarySettingsID = $settingsCategoryID;
+                $activeCategoryID = $settingsCategoryID;
                 break;
             }
         }
-        if ($activePrimarySettingsID === null) {
+        if ($activeCategoryID === null) {
             /** @var string */
             $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
-            $activePrimarySettingsID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);    
+            $activeCategoryID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);    
         }
         
-        $tab = App::query(RequestParams::TAB);
+        $activeModule = App::query(RequestParams::MODULE);
         $class = 'wrap';
         if ($printWithTabs) {
             $class .= ' graphql-api-tabpanel vertical-tabs';
@@ -314,7 +314,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             printf(
                                 '<a href="#%s" class="nav-tab %s">%s</a>',
                                 $settingsCategoryID,
-                                $settingsCategoryID === $activePrimarySettingsID ? 'nav-tab-active' : '',
+                                $settingsCategoryID === $activeCategoryID ? 'nav-tab-active' : '',
                                 $settingsCategoryResolver->getName($settingsCategory)
                             );
                         }
@@ -327,7 +327,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
                             $sectionStyle = sprintf(
                                 'display: %s;',
-                                $settingsCategoryID === $activePrimarySettingsID ? 'block' : 'none'
+                                $settingsCategoryID === $activeCategoryID ? 'block' : 'none'
                             );
                             ?>
                             <div id="<?php echo $settingsCategoryID ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
@@ -344,13 +344,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
                                 // If passing a tab, focus on that one, if the module exists
-                            if ($tab !== null) {
+                            if ($activeModule !== null) {
                                 $moduleIDs = array_map(
                                     fn ($item) => $item['id'],
                                     $categorySettingsItems
                                 );
-                                if (in_array($tab, $moduleIDs)) {
-                                    $activeModuleID = $tab;
+                                if (in_array($activeModule, $moduleIDs)) {
+                                    $activeModuleID = $activeModule;
                                 }
                             }
                             ?>

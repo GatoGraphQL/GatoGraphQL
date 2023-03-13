@@ -111,7 +111,7 @@ class Plugin extends AbstractMainPlugin
                 $settingsMenuPage->getScreenID(),
                 RequestParams::CATEGORY,
                 $settingsCategoryRegistry->getSettingsCategoryResolver($generalSettingsCategory)->getID($generalSettingsCategory),
-                RequestParams::TAB,
+                RequestParams::MODULE,
                 $generalSettingsModuleResolver->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
             ));
             _e(sprintf(
