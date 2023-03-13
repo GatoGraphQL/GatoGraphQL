@@ -267,19 +267,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $printWithTabs = $this->printWithTabs();
 
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
-        $settingsCategorySettingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
-        $primarySettingsItems = [];
-        foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
-            $primarySettingsItems[] = [
-                'category' => $settingsCategory,
-                'id' => $settingsCategoryResolver->getID($settingsCategory),
-                'name' => $settingsCategoryResolver->getName($settingsCategory),
-                'options-form-name' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
-                'add-options-form-submit-button' => $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory),
-            ];
-        }
-
-        $activePrimarySettingsID = $primarySettingsItems[0]['id'];
+        $primarySettingsCategorySettingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
+        
+        /** @string */
+        $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
+        $activePrimarySettingsID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);
         $tab = App::query(RequestParams::TAB);
         $class = 'wrap';
         if ($printWithTabs) {
@@ -299,7 +291,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
                         <?php
-                        foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                        foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
                             printf(
                                 '<a href="#%s" class="nav-tab %s">%s</a>',
@@ -312,35 +304,34 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     </h2>
                     <div id="graphql-api-primary-settings-nav-tab-content" class="nav-tab-content">
                         <?php
-                        foreach ($primarySettingsItems as $item) {
-                            /** @var string */
-                            $optionsFormName = $item['options-form-name'];
-                            /** @var bool */
-                            $addSubmitButton = $item['add-options-form-submit-button'];
+                        foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                            $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
+                            $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                            $addSubmitButton = $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory);
                             $sectionStyle = sprintf(
                                 'display: %s;',
-                                $item['id'] === $activePrimarySettingsID ? 'block' : 'none'
+                                $settingsCategoryID === $activePrimarySettingsID ? 'block' : 'none'
                             );
                             ?>
-                            <div id="<?php echo $item['id'] ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
+                            <div id="<?php echo $settingsCategoryID ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
                             <?php
                                 $categorySettingsItems = array_values(array_filter(
                                     $settingsItems,
                                     /** @param array<string,mixed> $item */
-                                    fn (array $settingsItem) => $settingsItem['settings-category'] === $item['category']
+                                    fn (array $settingsItem) => $settingsItem['settings-category'] === $settingsCategory
                                 ));
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
                                 // If passing a tab, focus on that one, if the module exists
-                            if ($tab !== null) {
-                                $moduleIDs = array_map(
-                                    fn ($item) => $item['id'],
-                                    $categorySettingsItems
-                                );
-                                if (in_array($tab, $moduleIDs)) {
-                                    $activeModuleID = $tab;
+                                if ($tab !== null) {
+                                    $moduleIDs = array_map(
+                                        fn ($item) => $item['id'],
+                                        $categorySettingsItems
+                                    );
+                                    if (in_array($tab, $moduleIDs)) {
+                                        $activeModuleID = $tab;
+                                    }
                                 }
-                            }
                             ?>
                                 <div class="<?php echo $class ?>">
                                     <?php if ($printWithTabs) : ?>
