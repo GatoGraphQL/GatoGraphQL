@@ -33,6 +33,18 @@ Now, the Settings page organizes all modules into 2 levels, and displays tabs ve
 
 ![Settings page](../../images/releases/v1.0/settings-page.png)
 
+## Reset settings, and choose to use "safe" or "unsafe" default settings
+
+A GraphQL API may be exposed publicly or only privately, and depending on which is the case there are options and features that need to be restricted or not.
+
+For instance, querying values from the `wp_options` table can be unrestrained whenever building a static site (in which case the WordPress site may be on the developer's laptop, not exposed to the Internet), but must be limited to a handful of options (or even none at all) for a public API, for security reasons.
+
+The plugin has provided "safe" and "unsafe" default behaviors for the Settings since v0.8, but it required to define a PHP constant in `wp-config.php` to switch from one to the other, and then manually delete all Settings values that had to be regenerated.
+
+Now it is possible to do the switch directly via the UI: The new "Plugin Management" tab in the Settings Page has an item "Reset Settings" which restores the default settings values, and allows to decide if to use the "safe" or "unsafe" default behaviors.
+
+![Reset Settings page](../../images/releases/v1.0/reset-settings-page.png)
+
 ## Added documentation page "Use Cases, Best Practices, and Recipes"
 
 The new documentation page "Use Cases, Best Practices, and Recipes" has been added to the menu.
