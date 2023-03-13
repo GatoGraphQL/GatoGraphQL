@@ -264,6 +264,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     public function storeEmptySettings(string $optionName): void
     {
+        unset($this->options[$optionName]);
         \update_option($optionName, []);
     }
 }
