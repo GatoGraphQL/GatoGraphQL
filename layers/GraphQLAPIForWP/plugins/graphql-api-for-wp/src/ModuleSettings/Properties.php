@@ -22,4 +22,6 @@ class Properties
     public final const TYPE_INT = 'int';
     public final const TYPE_ARRAY = 'array';
     public final const TYPE_NULL = 'null';
+    public final const TYPE_HIDDEN = 'hidden';
+    public final const CSS_STYLE = 'css-style';
 }
