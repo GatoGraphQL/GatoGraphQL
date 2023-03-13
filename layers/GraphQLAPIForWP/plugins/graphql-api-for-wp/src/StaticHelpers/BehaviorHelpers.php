@@ -7,8 +7,9 @@ namespace GraphQLAPI\GraphQLAPI\StaticHelpers;
 use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
-use PoP\Root\Environment as RootEnvironment;
+use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoP\Root\Environment as RootEnvironment;
 
 class BehaviorHelpers
 {
@@ -50,6 +51,20 @@ class BehaviorHelpers
                 PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
             ) === ResetSettingsOptions::UNSAFE;
+        }
+
+        /**
+         * If env var `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
+         */
+        if (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR) !== false) {
+            return (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
+        }
+
+        /**
+         * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
+         */
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR)) {
+            return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
         }
 
         /**

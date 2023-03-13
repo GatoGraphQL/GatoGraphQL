@@ -82,29 +82,24 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
 
         $option = $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT);
-        \add_filter(
-            "pre_update_option_{$option}",
+        \add_action(
+            "update_option_{$option}",
             /**
              * @param array<string,mixed> $values
              * @param array<string,mixed> $previousValues
              * @return array<string,mixed>
              */
-            function (array $values, mixed $previousValues): mixed {
+            function (array $values): void {
                 /**
                  * Check that pressed on the "Reset Settings" button
                  */
-                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
-                    $this->resetSettings();
+                if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                    return;
                 }
-
-                /**
-                 * By returning the previous value, no record will be
-                 * stored for "plugin-management" on the DB
-                 */
-                return $previousValues;
+                $this->resetSettings();
             },
             10,
-            2
+            1
         );
 
         $regenerateConfigFormOptions = [

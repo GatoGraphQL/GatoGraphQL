@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use PoP\Root\Environment as RootEnvironment;
 
 use function get_submit_button;
@@ -107,7 +108,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        $useUnsafeDefaults = PluginEnvironment::getDefinedEnableUnsafeDefaults() ?? RootEnvironment::isApplicationEnvironmentDev();
+        $useUnsafeDefaults = BehaviorHelpers::areUnsafeDefaultsEnabled();
         $defaultValues = [
             self::PLUGIN_MANAGEMENT => [
                 self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR => $useUnsafeDefaults ? ResetSettingsOptions::UNSAFE : ResetSettingsOptions::SAFE,
