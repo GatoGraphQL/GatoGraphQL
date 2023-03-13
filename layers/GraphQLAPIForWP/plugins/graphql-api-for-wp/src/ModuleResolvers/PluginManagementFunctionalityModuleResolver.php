@@ -125,7 +125,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $moduleSettings = parent::getSettings($module);
         if ($module === self::PLUGIN_MANAGEMENT) {
-            $toggleElementID = 'reset-button-wrapper';
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
                     <p class="submit">
@@ -158,13 +157,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $module,
                     $option
                 ),
-                // Properties::TITLE => \__('Use "safe" or "unsafe" default behavior for Settings', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     '<p><strong>%s</strong></p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
-                    // sprintf(
-                    //     \__('<strong>Please notice:</strong> after storing the new value (i.e. after submitting "Save Changes (All)"), you will need to go to the "%s" tab, and click on the "Reset Settings" button to have the new default behavior be applied.', 'graphql-api'),
-                    //     $this->getPluginManagementFunctionalityModuleResolver()->getName(PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT)
-                    // ),
                     \__('Use "safe" or "unsafe" default behavior for Settings?', 'graphql-api'),
                     \__('Before values in the Settings page are configured, the plugin uses default values, which can have a "safe" or "unsafe" behavior.', 'graphql-api'),
                     \__('<strong><u>Safe default settings</u></strong>', 'graphql-api'),
