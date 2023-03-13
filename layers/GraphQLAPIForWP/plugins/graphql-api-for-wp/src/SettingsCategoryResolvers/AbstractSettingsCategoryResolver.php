@@ -13,11 +13,11 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
 
     final public function getID(string $settingsCategory): string
     {
-        return str_replace(
+        return strtolower(str_replace(
             ['-', '\\'],
             '_',
             $settingsCategory
-        );
+        ));
     }
 
     public function getName(string $settingsCategory): string
