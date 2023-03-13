@@ -271,7 +271,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
             $primarySettingsItems[] = [
                 'category' => $settingsCategory,
-                'id' => str_replace(['-', '\\'], '_', $settingsCategory),
+                'id' => $settingsCategoryResolver->getID($settingsCategory),
                 'name' => $settingsCategoryResolver->getDescription($settingsCategory),
                 'options-form-name' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
                 'add-options-form-submit-button' => $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory),

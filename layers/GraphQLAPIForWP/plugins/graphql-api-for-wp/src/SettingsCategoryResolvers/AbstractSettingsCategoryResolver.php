@@ -11,6 +11,15 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
 {
     use BasicServiceTrait;
 
+    final public function getID(string $settingsCategory): string
+    {
+        return str_replace(
+            ['-', '\\'],
+            '_',
+            $settingsCategory
+        );
+    }
+
     public function getDescription(string $settingsCategory): ?string
     {
         return null;
