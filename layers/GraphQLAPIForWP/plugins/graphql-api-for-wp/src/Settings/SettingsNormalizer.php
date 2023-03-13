@@ -146,19 +146,15 @@ class SettingsNormalizer implements SettingsNormalizerInterface
     {
         $moduleRegistry = $this->getModuleRegistry();
         $settingsItems = [];
-        $modules = $moduleRegistry->getAllModules(true, true, false, true);
+        $modules = $moduleRegistry->getAllModules(true, true, false, true, $settingsCategory);
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $moduleSettingsCategory = $moduleResolver->getSettingsCategory($module);
-            if ($settingsCategory !== null && $moduleSettingsCategory !== $settingsCategory) {
-                continue;
-            }
             $settingsItems[] = [
                 'module' => $module,
                 'id' => $moduleResolver->getID($module),
                 'name' => $moduleResolver->getName($module),
                 'settings' => $moduleResolver->getSettings($module),
-                'settings-category' => $moduleSettingsCategory,
+                'settings-category' => $moduleResolver->getSettingsCategory($module),
             ];
         }
         return $settingsItems;
