@@ -147,12 +147,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
 
-            $option = self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR;
             $moduleSettings[] = [
-                Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
-                    $option
+                    'safe-or-unsafe-behavior-description'
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
@@ -178,6 +176,21 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             \__('The number of entities that can be queried at once is unlimited', 'graphql-api'),
                         ]
                     ),
+                ),
+                Properties::TYPE => Properties::TYPE_NULL,
+                Properties::CSS_STYLE => 'display: none;',
+            ];
+
+            $option = self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    '<p>%s</p>',
+                    \__('Choose to use either the "safe" or "unsafe" default settings.', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
