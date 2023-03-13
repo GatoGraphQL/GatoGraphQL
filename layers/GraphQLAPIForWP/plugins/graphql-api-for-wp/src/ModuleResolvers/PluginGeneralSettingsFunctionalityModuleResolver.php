@@ -17,6 +17,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     use PluginGeneralSettingsFunctionalityModuleResolverTrait;
 
     public final const GENERAL = Plugin::NAMESPACE . '\general';
+    public final const SERVER_IP_CONFIGURATION = Plugin::NAMESPACE . '\server-ip-configuration';
 
     /**
      * Setting options
@@ -44,13 +45,16 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         return [
             self::GENERAL,
+            self::SERVER_IP_CONFIGURATION,
         ];
     }
 
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return match ($module) {
-            self::GENERAL => true,
+            self::GENERAL,
+            self::SERVER_IP_CONFIGURATION
+                => true,
             default => parent::isPredefinedEnabledOrDisabled($module),
         };
     }
@@ -58,7 +62,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public function isHidden(string $module): bool
     {
         return match ($module) {
-            self::GENERAL => true,
+            self::GENERAL,
+            self::SERVER_IP_CONFIGURATION
+                => true,
             default => parent::isHidden($module),
         };
     }
@@ -67,6 +73,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         return match ($module) {
             self::GENERAL => \__('General', 'graphql-api'),
+            self::SERVER_IP_CONFIGURATION => \__('Server IP Configuration', 'graphql-api'),
             default => $module,
         };
     }
@@ -75,6 +82,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         return match ($module) {
             self::GENERAL => \__('General options for the plugin', 'graphql-api'),
+            self::SERVER_IP_CONFIGURATION => \__('Configure retrieving the Client IP depending on the platform/environment', 'graphql-api'),
             default => parent::getDescription($module),
         };
     }
@@ -88,6 +96,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             self::GENERAL => [
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
+            ],
+            self::SERVER_IP_CONFIGURATION => [
                 self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME => 'REMOTE_ADDR',
             ],
         ];
@@ -126,33 +136,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::DESCRIPTION => \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied.', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-
+        } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->enableSettingClientIPAddressServerPropertyName()) {
-                $moduleSettings[] = [
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        'separator'
-                    ),
-                    Properties::DESCRIPTION => sprintf(
-                        __('<hr/>', 'graphql-api'),
-                    ),
-                    Properties::TYPE => Properties::TYPE_NULL,
-                ];
-                $moduleSettings[] = [
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        'intro'
-                    ),
-                    Properties::TITLE => \__('Server Configuration', 'graphql-api'),
-                    Properties::DESCRIPTION => sprintf(
-                        __('The following options configure the plugin according to the platform/environment under which it is running.', 'graphql-api'),
-                    ),
-                    Properties::TYPE => Properties::TYPE_NULL,
-                ];
-
                 $option = self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
