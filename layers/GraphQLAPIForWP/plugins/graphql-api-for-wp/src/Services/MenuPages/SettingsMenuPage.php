@@ -410,14 +410,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                             <table class="form-table">
                                                                 <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
-                                                        </div>
-                                                        <?php
-                                                        if (!$printWithTabs) {
-                                                            ?>
                                                             <br/>
                                                             <hr/>
-                                                            <?php
-                                                        }
+                                                        </div>
+                                                        <?php
                                                     }
                                                     if ($settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory)) {
                                                         \submit_button(
