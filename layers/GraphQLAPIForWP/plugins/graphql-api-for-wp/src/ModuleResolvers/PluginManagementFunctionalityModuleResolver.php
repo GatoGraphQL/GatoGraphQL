@@ -163,6 +163,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             \__('The “sensitive” data elements (eg: input field <code>status</code> to query posts with status <code>"draft"</code>) are not added to the schema', 'graphql-api'),
                             \__('Only a few of settings options and meta keys (for posts, users, etc) can be queried', 'graphql-api'),
                             \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
+                            \__('No environment variables or PHP constants can be queried (on the PRO version)', 'graphql-api'),
+                            \__('HTTP request calls block all URLs (on the PRO version)', 'graphql-api'),
                         ]
                     ),
                     \__('<strong><u>Unsafe default settings</u></strong>', 'graphql-api'),
@@ -174,6 +176,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             \__('The “sensitive” data elements are exposed in the schema', 'graphql-api'),
                             \__('All settings options and meta keys can be queried', 'graphql-api'),
                             \__('The number of entities that can be queried at once is unlimited', 'graphql-api'),
+                            \__('Any environment variable and PHP constant can be queried (on the PRO version)', 'graphql-api'),
+                            \__('HTTP request calls accept all URLs (on the PRO version)', 'graphql-api'),
                         ]
                     ),
                 ),

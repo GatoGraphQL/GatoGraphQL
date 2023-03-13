@@ -57,6 +57,8 @@ The GraphQL API for WordPress provides safe default settings, to make "live" sit
 - The “sensitive” data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
 - Only a few of settings options and meta keys (for posts, users, etc) can be queried
 - The number of entities (for posts, users, etc) that can be queried at once is limited
+- No environment variables or PHP constants can be queried (on the PRO version)
+- HTTP request calls block all URLs (on the PRO version)
 
 These safe default settings are not needed when building "static" sites, where the WordPress site is not exposed to the Internet. These settings can be used instead:
 
@@ -64,6 +66,8 @@ These safe default settings are not needed when building "static" sites, where t
 - The “sensitive” data elements are exposed in the schema
 - All settings options and meta keys can be queried
 - The number of entities that can be queried at once is unlimited
+- Any environment variable and PHP constant can be queried (on the PRO version)
+- HTTP request calls accept all URLs (on the PRO version)
 
 In development, to enable unsafe defaults, execute:
 

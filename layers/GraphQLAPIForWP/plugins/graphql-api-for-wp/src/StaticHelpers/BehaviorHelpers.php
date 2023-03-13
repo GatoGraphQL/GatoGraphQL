@@ -23,21 +23,6 @@ class BehaviorHelpers
             : Behaviors::ALLOW;
     }
 
-    /**
-     * Unsafe defaults enabled:
-     *
-     * - The single endpoint is enabled
-     * - The “sensitive” data elements are exposed in the schema
-     * - All settings options and meta keys can be queried
-     * - The number of entities that can be queried at once is unlimited
-     *
-     * Unsafe defaults disabled:
-     *
-     * - The single endpoint is disabled
-     * - The “sensitive” data elements (eg: input field `status` to query posts with status `"draft"`) are not added to the schema
-     * - Only a few of settings options and meta keys (for posts, users, etc) can be queried
-     * - The number of entities (for posts, users, etc) that can be queried at once is limited
-     */
     public static function areUnsafeDefaultsEnabled(): bool
     {
         if (self::$areUnsafeDefaultsEnabled !== null) {
