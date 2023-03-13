@@ -131,7 +131,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         %1\$s
                     </a>
                 HTML,
-                \__('Show me options to reset the Settings', 'graphql-api')
+                \__('Show options to reset the Settings', 'graphql-api')
             );
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
