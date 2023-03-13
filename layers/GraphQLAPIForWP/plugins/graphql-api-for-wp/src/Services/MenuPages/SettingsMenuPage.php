@@ -140,7 +140,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     ));
                     $settingsField = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
                     $settingsOptionName = $settingsCategoryResolver->getDBOptionName($settingsCategory);
-                    $settingsDescription = $settingsCategoryResolver->getName($settingsCategory) ?? '';
+                    $settingsDescription = $settingsCategoryResolver->getName($settingsCategory);
                     foreach ($categorySettingsItems as $item) {
                         $settingsFieldForModule = $this->getSettingsFieldForModule($settingsField, $item['id']);
                         $module = $item['module'];
