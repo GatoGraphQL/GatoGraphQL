@@ -56,7 +56,7 @@ class BehaviorHelpers
             PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
             PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
         );
-        if ($useSafeOrUnsafeDefaultBehavior !== null) {            
+        if ($useSafeOrUnsafeDefaultBehavior !== null) {
             self::$areUnsafeDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
         } elseif (
             $userSettingsManager->hasSetting(
