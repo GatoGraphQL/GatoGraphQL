@@ -140,7 +140,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     ));
                     $settingsField = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
                     $settingsOptionName = $settingsCategoryResolver->getDBOptionName($settingsCategory);
-                    $settingsDescription = $settingsCategoryResolver->getDescription($settingsCategory) ?? '';
+                    $settingsDescription = $settingsCategoryResolver->getName($settingsCategory) ?? '';
                     foreach ($categorySettingsItems as $item) {
                         $settingsFieldForModule = $this->getSettingsFieldForModule($settingsField, $item['id']);
                         $module = $item['module'];
@@ -267,12 +267,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $printWithTabs = $this->printWithTabs();
 
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
+        $settingsCategorySettingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
         $primarySettingsItems = [];
-        foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
+        foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
             $primarySettingsItems[] = [
                 'category' => $settingsCategory,
                 'id' => $settingsCategoryResolver->getID($settingsCategory),
-                'name' => $settingsCategoryResolver->getDescription($settingsCategory),
+                'name' => $settingsCategoryResolver->getName($settingsCategory),
                 'options-form-name' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
                 'add-options-form-submit-button' => $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory),
             ];
@@ -298,12 +299,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
                         <?php
-                        foreach ($primarySettingsItems as $item) {
+                        foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                            $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
                             printf(
                                 '<a href="#%s" class="nav-tab %s">%s</a>',
-                                $item['id'],
-                                $item['id'] === $activePrimarySettingsID ? 'nav-tab-active' : '',
-                                $item['name']
+                                $settingsCategoryID,
+                                $settingsCategoryID === $activePrimarySettingsID ? 'nav-tab-active' : '',
+                                $settingsCategoryResolver->getName($settingsCategory)
                             );
                         }
                         ?>
