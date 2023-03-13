@@ -133,7 +133,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         </a>
                     </p>
                 HTML,
-                // $toggleElementID,
                 \__('Reset Settings', 'graphql-api')
             );
             $moduleSettings[] = [
