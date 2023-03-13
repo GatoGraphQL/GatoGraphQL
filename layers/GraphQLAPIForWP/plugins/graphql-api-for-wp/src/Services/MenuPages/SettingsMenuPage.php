@@ -138,11 +138,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         /** @param array<string,mixed> $item */
                         fn (array $item) => $item['settings-category'] === $settingsCategory
                     ));
-                    $settingsField = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-                    $settingsOptionName = $settingsCategoryResolver->getDBOptionName($settingsCategory);
-                    $settingsDescription = $settingsCategoryResolver->getName($settingsCategory);
+                    $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
                     foreach ($categorySettingsItems as $item) {
-                        $settingsFieldForModule = $this->getSettingsFieldForModule($settingsField, $item['id']);
+                        $settingsFieldForModule = $this->getSettingsFieldForModule($optionsFormName, $item['id']);
                         $module = $item['module'];
                         \add_settings_section(
                             $settingsFieldForModule,
@@ -150,28 +148,28 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             '',
                             function (): void {
                             },
-                            $settingsField
+                            $optionsFormName
                         );
                         foreach ($item['settings'] as $itemSetting) {
                             \add_settings_field(
                                 $itemSetting[Properties::NAME],
                                 $itemSetting[Properties::TITLE] ?? '',
-                                function () use ($module, $itemSetting, $settingsField): void {
+                                function () use ($module, $itemSetting, $optionsFormName): void {
                                     $type = $itemSetting[Properties::TYPE] ?? null;
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                     if (!empty($possibleValues)) {
-                                        $this->printSelectField($settingsField, $module, $itemSetting);
+                                        $this->printSelectField($optionsFormName, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_ARRAY) {
-                                        $this->printTextareaField($settingsField, $module, $itemSetting);
+                                        $this->printTextareaField($optionsFormName, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_BOOL) {
-                                        $this->printCheckboxField($settingsField, $module, $itemSetting);
+                                        $this->printCheckboxField($optionsFormName, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_NULL) {
-                                        $this->printLabelField($settingsField, $module, $itemSetting);
+                                        $this->printLabelField($optionsFormName, $module, $itemSetting);
                                     } else {
-                                        $this->printInputField($settingsField, $module, $itemSetting);
+                                        $this->printInputField($optionsFormName, $module, $itemSetting);
                                     }
                                 },
-                                $settingsField,
+                                $optionsFormName,
                                 $settingsFieldForModule,
                                 [
                                     'label' => $itemSetting[Properties::DESCRIPTION] ?? '',
@@ -185,11 +183,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * Finally register all the settings
                      */
                     \register_setting(
-                        $settingsField,
-                        $settingsOptionName,
+                        $optionsFormName,
+                        $settingsCategoryResolver->getDBOptionName($settingsCategory),
                         [
                             'type' => 'array',
-                            'description' => $settingsDescription,
+                            'description' => $settingsCategoryResolver->getName($settingsCategory),
                             /**
                              * This call is needed to cast the data
                              * before saving to the DB.
