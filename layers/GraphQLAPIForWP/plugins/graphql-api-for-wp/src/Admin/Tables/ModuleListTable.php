@@ -347,8 +347,9 @@ class ModuleListTable extends AbstractItemListTable
                     '<a href="%s">%s</a>',
                     sprintf(
                         \admin_url(sprintf(
-                            'admin.php?page=%1$s&tab=%2$s#%2$s',
+                            'admin.php?page=%1$s&%2$s=%3$s#%3$s',
                             $settingsMenuPage->getScreenID(),
+                            RequestParams::TAB,
                             $item['id']
                         ))
                     ),
