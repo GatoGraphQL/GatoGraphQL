@@ -72,8 +72,36 @@ class ModuleRegistry implements ModuleRegistryInterface
         bool $onlyHasSettings = false,
         bool $onlyVisible = false,
         bool $onlyWithVisibleSettings = false,
+        ?string $settingsCategory = null,
     ): array {
         $modules = array_keys($this->getModuleResolversByModuleAndPriority());
+        /**
+         * Important: first filter by $settingsCategory, and only
+         * then by $onlyEnabled!
+         *
+         * This is to avoid an endless loop:
+         *
+         * - Module SINGLE_ENDPOINT calls
+         *   `BehaviorHelpers::areUnsafeDefaultsEnabled()` in
+         *   `isEnabledByDefault`
+         * - `BehaviorHelpers::areUnsafeDefaultsEnabled()` calls
+         *   `->normalizeSettings` which loads all modules with
+         *   `->getAllModules(`, and SINGLE_ENDPOINT is one of them,
+         *   but it would call again `areUnsafeDefaultsEnabled`
+         *   to decide if it's enabled or not...
+         *
+         * Because this issue will happen when execute Reset Settings,
+         * which is where the "safe"/"unsafe" default behavior is changed,
+         * and as SINGLE_ENDPOINT is on a different settingsCategory,
+         * then this problem is avoided by first filtering by settingsCategory,
+         * so that SINGLE_ENDPOINT will not be retrieved in `getAllModules`.
+         */
+        if ($settingsCategory !== null) {
+            $modules = array_filter(
+                $modules,
+                fn (string $module) => $this->getModuleResolver($module)->getSettingsCategory($module) === $settingsCategory
+            );
+        }
         if ($onlyEnabled) {
             $modules = array_filter(
                 $modules,

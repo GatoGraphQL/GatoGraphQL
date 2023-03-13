@@ -18,6 +18,7 @@ interface ModuleRegistryInterface
         bool $onlyHasSettings = false,
         bool $onlyVisible = false,
         bool $onlyWithVisibleSettings = false,
+        ?string $settingsCategory = null,
     ): array;
     /**
      * @throws ModuleNotExistsException If module does not exist
