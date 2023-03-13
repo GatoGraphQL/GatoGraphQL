@@ -266,11 +266,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $printWithTabs = $this->printWithTabs();
 
-        // Settings Categories which must avoid adding the Submit button
-        $skipSubmitButtonSettingsCategories = [
-            SettingsCategoryResolver::PLUGIN_MANAGEMENT,
-        ];
-
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
         $primarySettingsItems = [];
         foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
@@ -279,7 +274,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 'id' => str_replace(['-', '\\'], '_', $settingsCategory),
                 'name' => $settingsCategoryResolver->getDescription($settingsCategory),
                 'options-form-field' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
-                'skip-submit-button' => in_array($settingsCategory, $skipSubmitButtonSettingsCategories),
+                'add-submit-button' => $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory),
             ];
         }
 
@@ -319,7 +314,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             /** @var string */
                             $optionsFormField = $item['options-form-field'];
                             /** @var bool */
-                            $skipSubmitButton = $item['skip-submit-button'];
+                            $addSubmitButton = $item['add-submit-button'];
                             $sectionStyle = sprintf(
                                 'display: %s;',
                                 $item['id'] === $activePrimarySettingsID ? 'block' : 'none'
@@ -404,7 +399,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         </div>
                                                         <?php
                                                     }
-                                                    if (!$skipSubmitButton) {
+                                                    if ($addSubmitButton) {
                                                         \submit_button(
                                                             \__('Save Changes (All)', 'graphql-api')
                                                         );

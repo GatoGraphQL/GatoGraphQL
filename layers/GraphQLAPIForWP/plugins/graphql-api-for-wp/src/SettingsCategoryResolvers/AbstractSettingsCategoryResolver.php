@@ -37,4 +37,14 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
     {
         return $this->getDBOptionName($settingsCategory);
     }
+
+    /**
+     * When printing the Settings, not all categories
+     * need to submit a form. In particular,
+     * "Plugin Management" does not.
+     */
+    public function addOptionsFormSubmitButton(string $settingsCategory): bool
+    {
+        return true;
+    }
 }

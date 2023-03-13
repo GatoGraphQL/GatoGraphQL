@@ -44,4 +44,12 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             default => parent::getDBOptionName($settingsCategory),
         };
     }
+
+    public function addOptionsFormSubmitButton(string $settingsCategory): bool
+    {
+        return match ($settingsCategory) {
+            self::PLUGIN_MANAGEMENT => false,
+            default => parent::addOptionsFormSubmitButton($settingsCategory),
+        };
+    }
 }

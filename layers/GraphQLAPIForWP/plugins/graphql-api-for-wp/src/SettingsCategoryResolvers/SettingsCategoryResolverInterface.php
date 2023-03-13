@@ -16,4 +16,11 @@ interface SettingsCategoryResolverInterface
     public function getDBOptionName(string $settingsCategory): string;
 
     public function getOptionsFormName(string $settingsCategory): string;
+
+    /**
+     * When printing the Settings, not all categories
+     * need to submit a form. In particular,
+     * "Plugin Management" does not.
+     */
+    public function addOptionsFormSubmitButton(string $settingsCategory): bool;
 }
