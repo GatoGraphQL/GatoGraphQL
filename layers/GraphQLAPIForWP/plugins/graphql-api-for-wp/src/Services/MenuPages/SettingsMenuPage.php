@@ -159,7 +159,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                     $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
                                     ?>
-                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="graphql-api-settings-item" <?php if (!empty($cssStyle)) : ?>style="<?php echo $cssStyle ?>"<?php endif; ?>>
+                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="graphql-api-settings-item" <?php if (!empty($cssStyle)) :
+                                            ?>style="<?php echo $cssStyle ?>"<?php
+                                                         endif; ?>>
                                             <?php
                                             if (!empty($possibleValues)) {
                                                 $this->printSelectField($optionsFormName, $module, $itemSetting);
@@ -297,9 +299,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         if ($activeCategoryID === null) {
             /** @var string */
             $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
-            $activeCategoryID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);    
+            $activeCategoryID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);
         }
-        
+
         $activeModule = App::query(RequestParams::MODULE);
         $class = 'wrap';
         if ($printModuleSettingsWithTabs) {
@@ -455,7 +457,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         parent::enqueueAssets();
 
         $this->enqueueDocsAssets();
-        
+
         $this->enqueueSettingsAssets();
 
         /**
