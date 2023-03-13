@@ -269,7 +269,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
         $primarySettingsCategorySettingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
         
-        /** @string */
+        /** @var string */
         $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
         $activePrimarySettingsID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);
         $tab = App::query(RequestParams::TAB);
