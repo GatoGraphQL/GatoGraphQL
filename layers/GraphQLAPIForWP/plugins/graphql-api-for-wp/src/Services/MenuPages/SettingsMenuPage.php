@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
@@ -13,7 +14,6 @@ use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use PoP\Root\App;
 
 /**
  * Settings menu page
@@ -157,17 +157,24 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 function () use ($module, $itemSetting, $optionsFormName): void {
                                     $type = $itemSetting[Properties::TYPE] ?? null;
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
-                                    if (!empty($possibleValues)) {
-                                        $this->printSelectField($optionsFormName, $module, $itemSetting);
-                                    } elseif ($type === Properties::TYPE_ARRAY) {
-                                        $this->printTextareaField($optionsFormName, $module, $itemSetting);
-                                    } elseif ($type === Properties::TYPE_BOOL) {
-                                        $this->printCheckboxField($optionsFormName, $module, $itemSetting);
-                                    } elseif ($type === Properties::TYPE_NULL) {
-                                        $this->printLabelField($optionsFormName, $module, $itemSetting);
-                                    } else {
-                                        $this->printInputField($optionsFormName, $module, $itemSetting);
-                                    }
+                                    $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
+                                    ?>
+                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="settings-section" style="<?php echo $cssStyle ?>">
+                                            <?php
+                                            if (!empty($possibleValues)) {
+                                                $this->printSelectField($optionsFormName, $module, $itemSetting);
+                                            } elseif ($type === Properties::TYPE_ARRAY) {
+                                                $this->printTextareaField($optionsFormName, $module, $itemSetting);
+                                            } elseif ($type === Properties::TYPE_BOOL) {
+                                                $this->printCheckboxField($optionsFormName, $module, $itemSetting);
+                                            } elseif ($type === Properties::TYPE_NULL) {
+                                                $this->printLabelField($optionsFormName, $module, $itemSetting);
+                                            } else {
+                                                $this->printInputField($optionsFormName, $module, $itemSetting);
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php
                                 },
                                 $optionsFormName,
                                 $optionsFormModuleSectionName,
@@ -410,7 +417,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         ?>
                                                         <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
                                                             <?php echo $title ?>
-                                                            <table class="form-table">
+                                                            <table class="form-table graphql-api-settings-section">
                                                                 <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
                                                             <br/>
@@ -448,12 +455,29 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         parent::enqueueAssets();
 
         $this->enqueueDocsAssets();
+        
+        $this->enqueueSettingsAssets();
 
         /**
          * Always enqueue (even if printModuleSettingsWithTabs() is false) as the
          * outer level (for settings category) uses tabs
          */
         $this->enqueueTabpanelAssets();
+    }
+    /**
+     * Enqueue the required assets
+     */
+    protected function enqueueSettingsAssets(): void
+    {
+        $mainPluginURL = App::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+
+        \wp_enqueue_script(
+            'graphql-api-settings',
+            $mainPluginURL . 'assets/js/settings.js',
+            array('jquery'),
+            $mainPluginVersion
+        );
     }
 
     /**

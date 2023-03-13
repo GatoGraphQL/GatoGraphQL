@@ -29,7 +29,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public final const OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR = 'use-safe-or-unsafe-default-behavior';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
-    private ?PluginGeneralSettingsFunctionalityModuleResolver $pluginGeneralSettingsFunctionalityModuleResolver = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
     private ?PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver = null;
 
@@ -41,15 +40,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
-    }
-    final public function setPluginGeneralSettingsFunctionalityModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver $pluginGeneralSettingsFunctionalityModuleResolver): void
-    {
-        $this->pluginGeneralSettingsFunctionalityModuleResolver = $pluginGeneralSettingsFunctionalityModuleResolver;
-    }
-    final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
-    {
-        /** @var PluginGeneralSettingsFunctionalityModuleResolver */
-        return $this->pluginGeneralSettingsFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
     }
     final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
     {
@@ -135,60 +125,32 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $moduleSettings = parent::getSettings($module);
         if ($module === self::PLUGIN_MANAGEMENT) {
-            $resetSettingsButtonsHTML = '';
-            /**
-             * Use `function_exists` because, when pressing on
-             * the button it will call options.php,
-             * and the function will not have been loaded yet!
-             */
-            if (function_exists('get_submit_button')) {
-                /**
-                 * Have the reset button name be sent as part of the form
-                 */
-                $resetButtonName = sprintf(
-                    '%s[%s]',
-                    $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT),
-                    SettingsMenuPage::RESET_SETTINGS_BUTTON_ID
-                );
-                $resetSettingsButtonsHTML = sprintf(
-                    <<<HTML
-                        <p class="submit">
-                            <a href="#" onclick="document.getElementById('%1\$s').style.display='block';return false;" class="button secondary">
-                                %2\$s
-                            </a>
-                        </p>
-                        <p id="%1\$s" style="display: none;">
-                            %3\$s
-                        </p>
-                    HTML,
-                    'reset-button-wrapper',
-                    \__('Reset Settings', 'graphql-api'),
-                    get_submit_button(
-                        \__('Please confirm: Reset Settings', 'graphql-api'),
-                        'primary',
-                        $resetButtonName,
-                        false
-                    )
-                );
-            }
+            $toggleElementID = 'reset-button-wrapper';
+            $resetSettingsButtonsHTML = sprintf(
+                <<<HTML
+                    <p class="submit">
+                        <a href="#" class="button secondary graphql-api-show-settings-sections">
+                            %1\$s
+                        </a>
+                    </p>
+                HTML,
+                // $toggleElementID,
+                \__('Reset Settings', 'graphql-api')
+            );
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
-                    'reset-settings'
+                    'reset-settings-button'
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p>%s',
-                    sprintf(
-                        \__('Delete all stored Settings values. Then, the "safe" or "unsafe" default behavior will be be applied (see tab "%s").', 'graphql-api'),
-                        $this->getPluginGeneralSettingsFunctionalityModuleResolver()->getName(
-                            PluginGeneralSettingsFunctionalityModuleResolver::GENERAL
-                        )
-                    ),
+                    \__('Delete all stored Settings values. Then, the "safe" or "unsafe" default behavior will be be applied.', 'graphql-api'),
                     $resetSettingsButtonsHTML
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
+
             $option = self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -196,13 +158,14 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use "safe" or "unsafe" default behavior for Settings', 'graphql-api'),
+                // Properties::TITLE => \__('Use "safe" or "unsafe" default behavior for Settings', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
-                    sprintf(
-                        \__('<strong>Please notice:</strong> after storing the new value (i.e. after submitting "Save Changes (All)"), you will need to go to the "%s" tab, and click on the "Reset Settings" button to have the new default behavior be applied.', 'graphql-api'),
-                        $this->getPluginManagementFunctionalityModuleResolver()->getName(PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT)
-                    ),
+                    '<p><strong>%s</strong></p><br/><p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
+                    // sprintf(
+                    //     \__('<strong>Please notice:</strong> after storing the new value (i.e. after submitting "Save Changes (All)"), you will need to go to the "%s" tab, and click on the "Reset Settings" button to have the new default behavior be applied.', 'graphql-api'),
+                    //     $this->getPluginManagementFunctionalityModuleResolver()->getName(PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT)
+                    // ),
+                    \__('Use "safe" or "unsafe" default behavior for Settings?', 'graphql-api'),
                     \__('Before values in the Settings page are configured, the plugin uses default values, which can have a "safe" or "unsafe" behavior.', 'graphql-api'),
                     \__('<strong><u>Safe default settings</u></strong>', 'graphql-api'),
                     \__('Recommended when the site openly exposes APIs (eg: for any visitor on the Internet, or for clients, or when feeding data to a downstream server an a non-private network), as to make the site secure:', 'graphql-api'),
@@ -232,6 +195,38 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     ResetSettingsOptions::SAFE => \__('Use "safe" default behavior', 'graphql-api'),
                     ResetSettingsOptions::UNSAFE => \__('Use "unsafe" default behavior', 'graphql-api'),
                 ],
+                Properties::CSS_STYLE => 'display: none;',
+            ];
+            /**
+             * Have the reset button name be sent as part of the form
+             */
+            $resetButtonName = sprintf(
+                '%s[%s]',
+                $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT),
+                SettingsMenuPage::RESET_SETTINGS_BUTTON_ID
+            );
+            /**
+             * Use `function_exists` because, when pressing on
+             * the button it will call options.php,
+             * and the function will not have been loaded yet!
+             */
+            $confirmResetSettingsButtonsHTML = '';
+            if (function_exists('get_submit_button')) {
+                $confirmResetSettingsButtonsHTML = get_submit_button(
+                    \__('Please confirm: Reset Settings', 'graphql-api'),
+                    'primary',
+                    $resetButtonName,
+                    false
+                );
+            }
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'confirm-reset-settings-button'
+                ),
+                Properties::DESCRIPTION => $confirmResetSettingsButtonsHTML,
+                Properties::TYPE => Properties::TYPE_NULL,
+                Properties::CSS_STYLE => 'display: none;',
             ];
         }
         return $moduleSettings;
