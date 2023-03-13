@@ -159,7 +159,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                     $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
                                     ?>
-                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="settings-section" style="<?php echo $cssStyle ?>">
+                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="graphql-api-settings-item" style="<?php echo $cssStyle ?>">
                                             <?php
                                             if (!empty($possibleValues)) {
                                                 $this->printSelectField($optionsFormName, $module, $itemSetting);
@@ -415,9 +415,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                             );
                                                         }
                                                         ?>
-                                                        <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
+                                                        <div id="<?php echo $item['id'] ?>" class="graphql-api-settings-section <?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
                                                             <?php echo $title ?>
-                                                            <table class="form-table graphql-api-settings-section">
+                                                            <table class="form-table">
                                                                 <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
                                                             <br/>
