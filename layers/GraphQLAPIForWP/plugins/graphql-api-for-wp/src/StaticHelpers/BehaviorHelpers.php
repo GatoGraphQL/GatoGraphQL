@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\StaticHelpers;
 
 use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use PoP\Root\Environment as RootEnvironment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
@@ -42,13 +42,13 @@ class BehaviorHelpers
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         if (
             $userSettingsManager->hasSetting(
-                PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+                PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
             )
         ) {
             return $userSettingsManager->getSetting(
-                PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+                PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
             ) === ResetSettingsOptions::UNSAFE;
         }
 
