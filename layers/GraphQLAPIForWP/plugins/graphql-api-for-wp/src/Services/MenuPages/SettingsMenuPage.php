@@ -159,7 +159,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                     $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
                                     ?>
-                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="graphql-api-settings-item" <?php if (!empty($cssStyle)) : ?>style="<?php echo $cssStyle ?><?php endif; ?>">
+                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="graphql-api-settings-item" <?php if (!empty($cssStyle)) : ?>style="<?php echo $cssStyle ?>"<?php endif; ?>>
                                             <?php
                                             if (!empty($possibleValues)) {
                                                 $this->printSelectField($optionsFormName, $module, $itemSetting);
