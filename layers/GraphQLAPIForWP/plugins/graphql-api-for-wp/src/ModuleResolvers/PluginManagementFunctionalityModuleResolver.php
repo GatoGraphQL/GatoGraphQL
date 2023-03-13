@@ -140,8 +140,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><p>%s</p>',
-                    \__('Delete all stored Settings values, and decide if the new default Settings values will follow a "safe" or "unsafe" behavior.', 'graphql-api'),
+                    '<p>%s</p><p class="submit">%s</p>',
+                    \__('Restore the Settings to default values.', 'graphql-api'),
                     $resetSettingsButtonsHTML
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
@@ -153,7 +153,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     'safe-or-unsafe-behavior-description'
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
+                    '<p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
+                    \__('When the settings are reset, the default values can follow a "safe" or "unsafe" behavior:', 'graphql-api'),
                     \__('<strong><u>Safe default settings</u></strong>', 'graphql-api'),
                     \__('Recommended when the site openly exposes APIs (eg: for any visitor on the Internet, or for clients, or when feeding data to a downstream server an a non-private network), as to make the site secure:', 'graphql-api'),
                     implode(
@@ -215,7 +216,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $confirmResetSettingsButtonsHTML = '';
             if (function_exists('get_submit_button')) {
                 $confirmResetSettingsButtonsHTML = get_submit_button(
-                    \__('Reset Settings!', 'graphql-api'),
+                    \__('Confirm: Reset Settings', 'graphql-api'),
                     'primary',
                     $resetButtonName,
                     false
