@@ -103,8 +103,9 @@ class Plugin extends AbstractMainPlugin
             $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
             $moduleRegistry = ModuleRegistryFacade::getInstance();
             $generalSettingsURL = \admin_url(sprintf(
-                'admin.php?page=%s&tab=%s',
+                'admin.php?page=%s&%s=%s',
                 $settingsMenuPage->getScreenID(),
+                RequestParams::TAB,
                 $moduleRegistry
                     ->getModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
                     ->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
