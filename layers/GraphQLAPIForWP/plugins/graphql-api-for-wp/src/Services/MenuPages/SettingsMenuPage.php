@@ -394,7 +394,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                                 '<h2>%s</h2><hr/>',
                                                                 $item['name']
                                                             ) : sprintf(
-                                                                '<br/><hr/><br/><h2 id="%s">%s</h2>',
+                                                                '<br/><h2 id="%s">%s</h2>',
                                                                 $item['id'],
                                                                 $item['name']
                                                             );
@@ -412,6 +412,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                             </table>
                                                         </div>
                                                         <?php
+                                                        if (!$printWithTabs) {
+                                                            ?>
+                                                            <br/>
+                                                            <hr/>
+                                                            <?php
+                                                        }
                                                     }
                                                     if ($settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory)) {
                                                         \submit_button(
