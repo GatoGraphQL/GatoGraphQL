@@ -267,9 +267,29 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
         $primarySettingsCategorySettingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
 
-        /** @var string */
-        $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
-        $activePrimarySettingsID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);
+        /**
+         * Find out which primary tab will be selected:
+         * Either the one whose ID is passed by ?category=...,
+         * or the 1st one otherwise.
+         */
+        $activePrimarySettingsID = null;
+        $primaryCategory = App::query(RequestParams::CATEGORY);
+        if ($primaryCategory !== null) {
+            foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
+                if ($settingsCategoryID !== $primaryCategory) {
+                    continue;
+                }
+                $activePrimarySettingsID = $settingsCategoryID;
+                break;
+            }
+        }
+        if ($activePrimarySettingsID === null) {
+            /** @var string */
+            $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
+            $activePrimarySettingsID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);    
+        }
+        
         $tab = App::query(RequestParams::TAB);
         $class = 'wrap';
         if ($printWithTabs) {
@@ -374,7 +394,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                                 '<h2>%s</h2><hr/>',
                                                                 $item['name']
                                                             ) : sprintf(
-                                                                '<br/><hr/><br/><h2 id="%s">%s</h2>',
+                                                                '<br/><h2 id="%s">%s</h2>',
                                                                 $item['id'],
                                                                 $item['name']
                                                             );
@@ -390,6 +410,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                             <table class="form-table">
                                                                 <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
+                                                            <br/>
+                                                            <hr/>
                                                         </div>
                                                         <?php
                                                     }

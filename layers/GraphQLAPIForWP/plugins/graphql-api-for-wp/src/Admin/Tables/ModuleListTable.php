@@ -9,8 +9,12 @@ use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
@@ -20,6 +24,17 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 class ModuleListTable extends AbstractItemListTable
 {
     public final const URL_PARAM_MODULE_TYPE = 'module-type';
+
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+
+    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
 
     /**
      * Singular name of the listed records
@@ -47,13 +62,25 @@ class ModuleListTable extends AbstractItemListTable
         $items = [];
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleTypeRegistry = ModuleTypeRegistryFacade::getInstance();
+        $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(false, false, true);
         $currentView = $this->getCurrentView();
+        /** @var array<string,string> */
+        $settingsCategoryIDs = [];
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             $moduleType = $moduleResolver->getModuleType($module);
             $moduleTypeResolver = $moduleTypeRegistry->getModuleTypeResolver($moduleType);
             $moduleTypeSlug = $moduleTypeResolver->getSlug($moduleType);
+            $hasSettings = $moduleResolver->hasSettings($module);
+            $settingsCategoryID = null;
+            if ($hasSettings) {
+                $settingsCategory = $moduleResolver->getSettingsCategory($module);
+                if (!isset($settingsCategoryIDs[$settingsCategory])) {
+                    $settingsCategoryIDs[$settingsCategory] = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getID($settingsCategory);
+                }
+                $settingsCategoryID = $settingsCategoryIDs[$settingsCategory];
+            }
             // If filtering the view, only add the items with that module type
             if (!$currentView || $currentView === $moduleTypeSlug) {
                 $isEnabled = $moduleRegistry->isModuleEnabled($module);
@@ -65,7 +92,7 @@ class ModuleListTable extends AbstractItemListTable
                     'is-enabled' => $isEnabled,
                     'can-be-disabled' => $isEnabled && $isPredefinedEnabledOrDisabled === null,
                     'can-be-enabled' => !$isEnabled && $isPredefinedEnabledOrDisabled === null,
-                    'has-settings' => $moduleResolver->hasSettings($module),
+                    'has-settings' => $hasSettings,
                     'are-settings-hidden' => $moduleResolver->areSettingsHidden($module),
                     'name' => $moduleResolver->getName($module),
                     'description' => $moduleResolver->getDescription($module),
@@ -73,6 +100,7 @@ class ModuleListTable extends AbstractItemListTable
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
+                    'settings-category-id' => $settingsCategoryID,
                 ];
             }
         }
@@ -343,12 +371,23 @@ class ModuleListTable extends AbstractItemListTable
                  * @var SettingsMenuPage
                  */
                 $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
+                /**
+                 * If the Settings page is not organized by tabs,
+                 * then scroll down to the item
+                 */
+                $settingsURLPlaceholder = 'admin.php?page=%1$s&%2$s=%3$s&%4$s=%5$s';
+                if (!$this->printSettingsPageWithTabs()) {
+                    $settingsURLPlaceholder .= '#%5$s';
+                }
                 $actions['settings'] = \sprintf(
                     '<a href="%s">%s</a>',
                     sprintf(
                         \admin_url(sprintf(
-                            'admin.php?page=%1$s&tab=%2$s#%2$s',
+                            $settingsURLPlaceholder,
                             $settingsMenuPage->getScreenID(),
+                            RequestParams::CATEGORY,
+                            $item['settings-category-id'],
+                            RequestParams::TAB,
                             $item['id']
                         ))
                     ),
@@ -374,6 +413,19 @@ class ModuleListTable extends AbstractItemListTable
             // }
         }
         return $actions;
+    }
+
+    /**
+     * The user can define this behavior through the Settings.
+     * If `true`, print the sections using tabs
+     * If `false`, print the sections one below the other
+     */
+    protected function printSettingsPageWithTabs(): bool
+    {
+        return $this->getUserSettingsManager()->getSetting(
+            PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+            PluginGeneralSettingsFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
+        );
     }
 
     /**

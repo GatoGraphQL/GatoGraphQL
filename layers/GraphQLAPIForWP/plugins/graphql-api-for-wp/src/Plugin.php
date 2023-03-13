@@ -8,6 +8,7 @@ use PoP\Root\Module\ModuleInterface;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
@@ -79,6 +80,7 @@ class Plugin extends AbstractMainPlugin
         // Add the admin notice
         \add_action('admin_notices', function (): void {
             $instanceManager = InstanceManagerFacade::getInstance();
+            $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
             /**
              * @var AboutMenuPage
              */
@@ -102,12 +104,15 @@ class Plugin extends AbstractMainPlugin
              */
             $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
             $moduleRegistry = ModuleRegistryFacade::getInstance();
+            $generalSettingsModuleResolver = $moduleRegistry->getModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL);
+            $generalSettingsCategory = $generalSettingsModuleResolver->getSettingsCategory(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL);
             $generalSettingsURL = \admin_url(sprintf(
-                'admin.php?page=%s&tab=%s',
+                'admin.php?page=%s&%s=%s&%s=%s',
                 $settingsMenuPage->getScreenID(),
-                $moduleRegistry
-                    ->getModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
-                    ->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
+                RequestParams::CATEGORY,
+                $settingsCategoryRegistry->getSettingsCategoryResolver($generalSettingsCategory)->getID($generalSettingsCategory),
+                RequestParams::TAB,
+                $generalSettingsModuleResolver->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
             ));
             _e(sprintf(
                 '<div class="notice notice-success is-dismissible">' .
