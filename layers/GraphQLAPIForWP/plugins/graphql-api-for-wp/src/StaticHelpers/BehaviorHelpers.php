@@ -43,12 +43,12 @@ class BehaviorHelpers
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         if (
             $userSettingsManager->hasSetting(
-                PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+                PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
             )
         ) {
             return $userSettingsManager->getSetting(
-                PluginManagementFunctionalityModuleResolver::PLUGIN_MANAGEMENT,
+                PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
             ) === ResetSettingsOptions::UNSAFE;
         }

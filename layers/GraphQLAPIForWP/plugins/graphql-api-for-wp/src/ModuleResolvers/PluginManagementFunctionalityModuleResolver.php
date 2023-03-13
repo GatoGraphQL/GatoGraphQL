@@ -8,12 +8,10 @@ use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
-use PoP\Root\Environment as RootEnvironment;
 
 use function get_submit_button;
 
@@ -22,7 +20,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     use ModuleResolverTrait;
     use PluginManagementFunctionalityModuleResolverTrait;
 
-    public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
+    public final const RESET_SETTINGS = Plugin::NAMESPACE . '\plugin-management';
 
     /**
      * Setting options
@@ -67,14 +65,14 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getModulesToResolve(): array
     {
         return [
-            self::PLUGIN_MANAGEMENT,
+            self::RESET_SETTINGS,
         ];
     }
 
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return match ($module) {
-            self::PLUGIN_MANAGEMENT => true,
+            self::RESET_SETTINGS => true,
             default => parent::isPredefinedEnabledOrDisabled($module),
         };
     }
@@ -82,7 +80,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function isHidden(string $module): bool
     {
         return match ($module) {
-            self::PLUGIN_MANAGEMENT => true,
+            self::RESET_SETTINGS => true,
             default => parent::isHidden($module),
         };
     }
@@ -90,7 +88,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         return match ($module) {
-            self::PLUGIN_MANAGEMENT => \__('Plugin Management', 'graphql-api'),
+            self::RESET_SETTINGS => \__('Reset Settings', 'graphql-api'),
             default => $module,
         };
     }
@@ -98,7 +96,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::PLUGIN_MANAGEMENT => \__('Admin tools to manage the GraphQL API plugin', 'graphql-api'),
+            self::RESET_SETTINGS => \__('Restore the GraphQL API Settings to default values', 'graphql-api'),
             default => parent::getDescription($module),
         };
     }
@@ -110,7 +108,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $useUnsafeDefaults = BehaviorHelpers::areUnsafeDefaultsEnabled();
         $defaultValues = [
-            self::PLUGIN_MANAGEMENT => [
+            self::RESET_SETTINGS => [
                 self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR => $useUnsafeDefaults ? ResetSettingsOptions::UNSAFE : ResetSettingsOptions::SAFE,
             ],
         ];
@@ -125,7 +123,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        if ($module === self::PLUGIN_MANAGEMENT) {
+        if ($module === self::RESET_SETTINGS) {
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
                     <a href="#" class="button secondary graphql-api-show-settings-items">
@@ -139,10 +137,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $module,
                     'reset-settings-button'
                 ),
-                Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
+                Properties::TITLE => \__('Reset the GraphQL API Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p>',
-                    \__('Restore the Settings to default values.', 'graphql-api'),
+                    \__('Restore the GraphQL API Settings to default values.', 'graphql-api'),
                     $resetSettingsButtonsHTML
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
