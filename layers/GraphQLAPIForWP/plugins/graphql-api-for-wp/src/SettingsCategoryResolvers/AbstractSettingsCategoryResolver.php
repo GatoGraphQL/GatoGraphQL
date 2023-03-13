@@ -20,9 +20,14 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
         );
     }
 
-    public function getDescription(string $settingsCategory): ?string
+    public function getName(string $settingsCategory): string
     {
-        return null;
+        throw new ImpossibleToHappenException(
+            sprintf(
+                $this->__('Unsupported Settings Category \'%s\'', 'graphql-api'),
+                $settingsCategory
+            )
+        );
     }
 
     public function getDBOptionName(string $settingsCategory): string

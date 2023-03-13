@@ -138,41 +138,39 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         /** @param array<string,mixed> $item */
                         fn (array $item) => $item['settings-category'] === $settingsCategory
                     ));
-                    $settingsField = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-                    $settingsOptionName = $settingsCategoryResolver->getDBOptionName($settingsCategory);
-                    $settingsDescription = $settingsCategoryResolver->getDescription($settingsCategory) ?? '';
+                    $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
                     foreach ($categorySettingsItems as $item) {
-                        $settingsFieldForModule = $this->getSettingsFieldForModule($settingsField, $item['id']);
+                        $optionsFormModuleSectionName = $this->getOptionsFormModuleSectionName($optionsFormName, $item['id']);
                         $module = $item['module'];
                         \add_settings_section(
-                            $settingsFieldForModule,
+                            $optionsFormModuleSectionName,
                             // The empty string ensures the render function won't output a h2.
                             '',
                             function (): void {
                             },
-                            $settingsField
+                            $optionsFormName
                         );
                         foreach ($item['settings'] as $itemSetting) {
                             \add_settings_field(
                                 $itemSetting[Properties::NAME],
                                 $itemSetting[Properties::TITLE] ?? '',
-                                function () use ($module, $itemSetting, $settingsField): void {
+                                function () use ($module, $itemSetting, $optionsFormName): void {
                                     $type = $itemSetting[Properties::TYPE] ?? null;
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                     if (!empty($possibleValues)) {
-                                        $this->printSelectField($settingsField, $module, $itemSetting);
+                                        $this->printSelectField($optionsFormName, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_ARRAY) {
-                                        $this->printTextareaField($settingsField, $module, $itemSetting);
+                                        $this->printTextareaField($optionsFormName, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_BOOL) {
-                                        $this->printCheckboxField($settingsField, $module, $itemSetting);
+                                        $this->printCheckboxField($optionsFormName, $module, $itemSetting);
                                     } elseif ($type === Properties::TYPE_NULL) {
-                                        $this->printLabelField($settingsField, $module, $itemSetting);
+                                        $this->printLabelField($optionsFormName, $module, $itemSetting);
                                     } else {
-                                        $this->printInputField($settingsField, $module, $itemSetting);
+                                        $this->printInputField($optionsFormName, $module, $itemSetting);
                                     }
                                 },
-                                $settingsField,
-                                $settingsFieldForModule,
+                                $optionsFormName,
+                                $optionsFormModuleSectionName,
                                 [
                                     'label' => $itemSetting[Properties::DESCRIPTION] ?? '',
                                     'id' => $itemSetting[Properties::NAME],
@@ -185,11 +183,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * Finally register all the settings
                      */
                     \register_setting(
-                        $settingsField,
-                        $settingsOptionName,
+                        $optionsFormName,
+                        $settingsCategoryResolver->getDBOptionName($settingsCategory),
                         [
                             'type' => 'array',
-                            'description' => $settingsDescription,
+                            'description' => $settingsCategoryResolver->getName($settingsCategory),
                             /**
                              * This call is needed to cast the data
                              * before saving to the DB.
@@ -235,7 +233,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $this->getUserSettingsManager()->storeContainerTimestamp();
     }
 
-    protected function getSettingsFieldForModule(string $optionsFormName, string $moduleID): string
+    protected function getOptionsFormModuleSectionName(string $optionsFormName, string $moduleID): string
     {
         return $optionsFormName . '-' . $moduleID;
     }
@@ -267,18 +265,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $printWithTabs = $this->printWithTabs();
 
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
-        $primarySettingsItems = [];
-        foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
-            $primarySettingsItems[] = [
-                'category' => $settingsCategory,
-                'id' => $settingsCategoryResolver->getID($settingsCategory),
-                'name' => $settingsCategoryResolver->getDescription($settingsCategory),
-                'options-form-name' => $settingsCategoryResolver->getOptionsFormName($settingsCategory),
-                'add-options-form-submit-button' => $settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory),
-            ];
-        }
+        $primarySettingsCategorySettingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
 
-        $activePrimarySettingsID = $primarySettingsItems[0]['id'];
+        /** @var string */
+        $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
+        $activePrimarySettingsID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);
         $tab = App::query(RequestParams::TAB);
         $class = 'wrap';
         if ($printWithTabs) {
@@ -298,34 +289,37 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
                         <?php
-                        foreach ($primarySettingsItems as $item) {
+                        foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                            $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
                             printf(
                                 '<a href="#%s" class="nav-tab %s">%s</a>',
-                                $item['id'],
-                                $item['id'] === $activePrimarySettingsID ? 'nav-tab-active' : '',
-                                $item['name']
+                                $settingsCategoryID,
+                                $settingsCategoryID === $activePrimarySettingsID ? 'nav-tab-active' : '',
+                                $settingsCategoryResolver->getName($settingsCategory)
                             );
                         }
                         ?>
                     </h2>
                     <div id="graphql-api-primary-settings-nav-tab-content" class="nav-tab-content">
                         <?php
-                        foreach ($primarySettingsItems as $item) {
-                            /** @var string */
-                            $optionsFormName = $item['options-form-name'];
-                            /** @var bool */
-                            $addSubmitButton = $item['add-options-form-submit-button'];
+                        foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                            $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
+                            $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
                             $sectionStyle = sprintf(
                                 'display: %s;',
-                                $item['id'] === $activePrimarySettingsID ? 'block' : 'none'
+                                $settingsCategoryID === $activePrimarySettingsID ? 'block' : 'none'
                             );
                             ?>
-                            <div id="<?php echo $item['id'] ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
+                            <div id="<?php echo $settingsCategoryID ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
                             <?php
+                                /**
+                                 * Filter all the category settings that must be printed
+                                 * under the current section
+                                 */
                                 $categorySettingsItems = array_values(array_filter(
                                     $settingsItems,
                                     /** @param array<string,mixed> $item */
-                                    fn (array $settingsItem) => $settingsItem['settings-category'] === $item['category']
+                                    fn (array $settingsItem) => $settingsItem['settings-category'] === $settingsCategory
                                 ));
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
@@ -394,12 +388,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
                                                             <?php echo $title ?>
                                                             <table class="form-table">
-                                                                <?php \do_settings_fields($optionsFormName, $this->getSettingsFieldForModule($optionsFormName, $item['id'])) ?>
+                                                                <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
                                                         </div>
                                                         <?php
                                                     }
-                                                    if ($addSubmitButton) {
+                                                    if ($settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory)) {
                                                         \submit_button(
                                                             \__('Save Changes (All)', 'graphql-api')
                                                         );
