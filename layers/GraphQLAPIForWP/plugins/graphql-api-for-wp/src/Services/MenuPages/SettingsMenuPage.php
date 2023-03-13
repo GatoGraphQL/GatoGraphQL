@@ -140,10 +140,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     ));
                     $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
                     foreach ($categorySettingsItems as $item) {
-                        $settingsFieldForModule = $this->getSettingsFieldForModule($optionsFormName, $item['id']);
+                        $optionsFormModuleSectionName = $this->getOptionsFormModuleSectionName($optionsFormName, $item['id']);
                         $module = $item['module'];
                         \add_settings_section(
-                            $settingsFieldForModule,
+                            $optionsFormModuleSectionName,
                             // The empty string ensures the render function won't output a h2.
                             '',
                             function (): void {
@@ -170,7 +170,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     }
                                 },
                                 $optionsFormName,
-                                $settingsFieldForModule,
+                                $optionsFormModuleSectionName,
                                 [
                                     'label' => $itemSetting[Properties::DESCRIPTION] ?? '',
                                     'id' => $itemSetting[Properties::NAME],
@@ -233,7 +233,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $this->getUserSettingsManager()->storeContainerTimestamp();
     }
 
-    protected function getSettingsFieldForModule(string $optionsFormName, string $moduleID): string
+    protected function getOptionsFormModuleSectionName(string $optionsFormName, string $moduleID): string
     {
         return $optionsFormName . '-' . $moduleID;
     }
@@ -388,7 +388,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         <div id="<?php echo $item['id'] ?>" class="<?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
                                                             <?php echo $title ?>
                                                             <table class="form-table">
-                                                                <?php \do_settings_fields($optionsFormName, $this->getSettingsFieldForModule($optionsFormName, $item['id'])) ?>
+                                                                <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
                                                         </div>
                                                         <?php
