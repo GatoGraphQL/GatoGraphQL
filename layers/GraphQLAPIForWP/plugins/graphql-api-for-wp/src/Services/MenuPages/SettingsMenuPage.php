@@ -240,10 +240,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     /**
      * The user can define this behavior through the Settings.
-     * If `true`, print the sections using tabs
-     * If `false`, print the sections one below the other
+     *
+     * - If `true`, print the module sections using tabs
+     * - If `false`, print the module sections one below the other
+     *
+     * The outer sections, i.e. settings category, always uses tabs
      */
-    protected function printWithTabs(): bool
+    protected function printModuleSettingsWithTabs(): bool
     {
         return $this->getUserSettingsManager()->getSetting(
             PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
@@ -262,7 +265,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             return;
         }
 
-        $printWithTabs = $this->printWithTabs();
+        $printModuleSettingsWithTabs = $this->printModuleSettingsWithTabs();
 
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
         $primarySettingsCategorySettingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
@@ -292,7 +295,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         
         $activeModule = App::query(RequestParams::MODULE);
         $class = 'wrap';
-        if ($printWithTabs) {
+        if ($printModuleSettingsWithTabs) {
             $class .= ' graphql-api-tabpanel vertical-tabs';
         }
 
@@ -355,7 +358,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             }
                             ?>
                                 <div class="<?php echo $class ?>">
-                                    <?php if ($printWithTabs) : ?>
+                                    <?php if ($printModuleSettingsWithTabs) : ?>
                                         <div class="nav-tab-container">
                                             <!-- Tabs -->
                                             <h2 class="nav-tab-wrapper">
@@ -385,11 +388,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                     <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo time() ?>">
                                                     <!-- Panels -->
                                                     <?php
-                                                    $sectionClass = $printWithTabs ? 'tab-content' : '';
+                                                    $sectionClass = $printModuleSettingsWithTabs ? 'tab-content' : '';
                                                     \settings_fields($optionsFormName);
                                                     foreach ($categorySettingsItems as $item) {
                                                         $sectionStyle = '';
-                                                        $title = $printWithTabs
+                                                        $title = $printModuleSettingsWithTabs
                                                             ? sprintf(
                                                                 '<h2>%s</h2><hr/>',
                                                                 $item['name']
@@ -398,7 +401,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                                 $item['id'],
                                                                 $item['name']
                                                             );
-                                                        if ($printWithTabs) {
+                                                        if ($printModuleSettingsWithTabs) {
                                                             $sectionStyle = sprintf(
                                                                 'display: %s;',
                                                                 $item['id'] === $activeModuleID ? 'block' : 'none'
@@ -422,7 +425,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                     }
                                                     ?>
                                                 </form>
-                                    <?php if ($printWithTabs) : ?>
+                                    <?php if ($printModuleSettingsWithTabs) : ?>
                                             </div> <!-- class="nav-tab-content" -->
                                         </div> <!-- class="nav-tab-container" -->
                                     <?php endif; ?>
@@ -447,7 +450,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $this->enqueueDocsAssets();
 
         /**
-         * Always enqueue (even if printWithTabs() is false) as the
+         * Always enqueue (even if printModuleSettingsWithTabs() is false) as the
          * outer level (for settings category) uses tabs
          */
         $this->enqueueTabpanelAssets();
