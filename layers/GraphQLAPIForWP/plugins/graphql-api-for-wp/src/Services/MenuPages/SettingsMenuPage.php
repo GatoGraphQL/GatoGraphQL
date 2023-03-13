@@ -446,9 +446,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $this->enqueueDocsAssets();
 
-        if ($this->printWithTabs()) {
-            $this->enqueueTabpanelAssets();
-        }
+        /**
+         * Always enqueue (even if printWithTabs() is false) as the
+         * outer level (for settings category) uses tabs
+         */
+        $this->enqueueTabpanelAssets();
     }
 
     /**
