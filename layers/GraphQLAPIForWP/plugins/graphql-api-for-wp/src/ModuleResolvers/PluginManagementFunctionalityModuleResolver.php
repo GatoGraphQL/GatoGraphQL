@@ -140,7 +140,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TITLE => \__('Reset the Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><p class="submit">%s</p>',
+                    '<p>%s</p><p>%s</p>',
                     \__('Restore the Settings to default values.', 'graphql-api'),
                     $resetSettingsButtonsHTML
                 ),
