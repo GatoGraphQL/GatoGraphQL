@@ -267,9 +267,29 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
         $primarySettingsCategorySettingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
 
-        /** @var string */
-        $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
-        $activePrimarySettingsID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);
+        /**
+         * Find out which primary tab will be selected:
+         * Either the one whose ID is passed by ?category=...,
+         * or the 1st one otherwise.
+         */
+        $activePrimarySettingsID = null;
+        $primaryCategory = App::query(RequestParams::CATEGORY);
+        if ($primaryCategory !== null) {
+            foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
+                if ($settingsCategoryID !== $primaryCategory) {
+                    continue;
+                }
+                $activePrimarySettingsID = $settingsCategoryID;
+                break;
+            }
+        }
+        if ($activePrimarySettingsID === null) {
+            /** @var string */
+            $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
+            $activePrimarySettingsID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);    
+        }
+        
         $tab = App::query(RequestParams::TAB);
         $class = 'wrap';
         if ($printWithTabs) {

@@ -12,6 +12,7 @@ class RequestParams
     public final const VIEW_SCHEMA = 'schema';
     public final const ACTION = 'action';
     public final const ACTION_EXECUTE_QUERY = 'execute_query';
+    public final const CATEGORY = 'category';
     public final const TAB = 'tab';
     public final const TAB_DOCS = 'docs';
     public final const MODULE = 'module';
