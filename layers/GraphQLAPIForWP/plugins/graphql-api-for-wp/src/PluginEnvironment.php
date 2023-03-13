@@ -51,25 +51,4 @@ class PluginEnvironment
         // This is under wp-content/plugins/graphql-api/cache
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
-
-    public static function getDefinedEnableUnsafeDefaults(): ?bool
-    {
-        /**
-         * Priority to decide:
-         *
-         * 1. If env var `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
-         */
-        if (getenv(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR) !== false) {
-            return (bool)getenv(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
-        }
-
-        /**
-         * 2. If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
-         */
-        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR)) {
-            return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(self::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
-        }
-
-        return null;
-    }
 }
