@@ -65,12 +65,22 @@ class ModuleListTable extends AbstractItemListTable
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(false, false, true);
         $currentView = $this->getCurrentView();
+        /** @var array<string,string> */
+        $settingsCategoryIDs = [];
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             $moduleType = $moduleResolver->getModuleType($module);
             $moduleTypeResolver = $moduleTypeRegistry->getModuleTypeResolver($moduleType);
             $moduleTypeSlug = $moduleTypeResolver->getSlug($moduleType);
-            $settingsCategory = $moduleResolver->getSettingsCategory($module);
+            $hasSettings = $moduleResolver->hasSettings($module);
+            $settingsCategoryID = null;
+            if ($hasSettings) {
+                $settingsCategory = $moduleResolver->getSettingsCategory($module);
+                if (!isset($settingsCategoryIDs[$settingsCategory])) {
+                    $settingsCategoryIDs[$settingsCategory] = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getID($settingsCategory);
+                }
+                $settingsCategoryID = $settingsCategoryIDs[$settingsCategory];
+            }
             // If filtering the view, only add the items with that module type
             if (!$currentView || $currentView === $moduleTypeSlug) {
                 $isEnabled = $moduleRegistry->isModuleEnabled($module);
@@ -82,7 +92,7 @@ class ModuleListTable extends AbstractItemListTable
                     'is-enabled' => $isEnabled,
                     'can-be-disabled' => $isEnabled && $isPredefinedEnabledOrDisabled === null,
                     'can-be-enabled' => !$isEnabled && $isPredefinedEnabledOrDisabled === null,
-                    'has-settings' => $moduleResolver->hasSettings($module),
+                    'has-settings' => $hasSettings,
                     'are-settings-hidden' => $moduleResolver->areSettingsHidden($module),
                     'name' => $moduleResolver->getName($module),
                     'description' => $moduleResolver->getDescription($module),
@@ -90,7 +100,7 @@ class ModuleListTable extends AbstractItemListTable
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
-                    'settings-category-id' => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getID($settingsCategory),
+                    'settings-category-id' => $settingsCategoryID,
                 ];
             }
         }
