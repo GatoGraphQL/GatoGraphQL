@@ -21,12 +21,12 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
     protected function customizeProviderEndpointEntries(array $providerItems): array
     {
         $providerItems = parent::customizeProviderEndpointEntries($providerItems);
-        
+
         /**
          * Do not use the single endpoint (as it's disabled)
          */
         $providerItems['safe-or-unsafe-default-behavior:1'][2] = 'graphql/mobile-app/';
-        
+
         /**
          * The single endpoint is disabled, then the client returns some
          * HTML as response, not JSON
