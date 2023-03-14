@@ -152,7 +152,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     'safe-or-unsafe-behavior-description'
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><td>%s</td><td>%s</td><td>%s</td></tr></thead><tbody><tr>%s</tr></tbody></table>',
+                    '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
                     \__('When the settings are reset, the default values can follow a "safe" or "unsafe" behavior:', 'graphql-api'),
                     \__('Feature', 'graphql-api'),
                     \__('"Safe" behavior', 'graphql-api'),
