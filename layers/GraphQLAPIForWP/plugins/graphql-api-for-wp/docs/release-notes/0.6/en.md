@@ -16,7 +16,7 @@ Previously, it was only available on the GraphiQL client for creating persisted 
 - Single endpoint public GraphiQL client
 - Custom endpoint public GraphiQL clients
 
-![Public client with GraphiQL Explorer](../../images/public-client-with-graphiql-explorer.png)
+![Public client with GraphiQL Explorer](../../images/releases/v06/public-client-with-graphiql-explorer.png)
 
 Enabled by default, the GraphiQL Explorer can be disabled for selected clients via the Settings:
 
@@ -80,14 +80,12 @@ A new About page has been added containing:
 - The Slack workspace for support
 - The list of the release notes for each version
 
-![About page](../../images/about-page.png)
-
 ## Release notes
 
 Starting from this version, immediately after updating the plugin, an admin notice will display a link to read the release notes for the new version:
 
-![Offering to read the release notes via an admin notice](../../images/admin-notice-release-notes.png)
+![Offering to read the release notes via an admin notice](../../images/releases/v06/admin-notice-release-notes.png)
 
 When clicking on the link, the release notes are shown on a modal window:
 
-![Release notes in a modal window](../../images/release-notes-in-modal.png)
+![Release notes in a modal window](../../images/releases/v06/release-notes-in-modal.png)
