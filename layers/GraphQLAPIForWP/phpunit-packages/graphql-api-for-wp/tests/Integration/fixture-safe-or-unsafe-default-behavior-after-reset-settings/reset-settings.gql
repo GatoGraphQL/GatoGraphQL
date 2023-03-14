@@ -1,5 +1,5 @@
 {
-  posts(pagination: { limit: 120 }) {
+  users(pagination: { limit: 120 }) {
     id
   }
 }
