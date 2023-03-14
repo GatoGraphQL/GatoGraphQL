@@ -40,7 +40,7 @@
 }
 .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
     padding-top: 0;
-    flex: 0 0 160px;
+    flex: 0 0 150px;
     overflow: auto;
     height: 100%;
     max-height: calc(100vh - 120px);
@@ -64,16 +64,16 @@
 }
 @media (min-width: 600px) {
     .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
-        flex: 0 0 190px;
+        flex: 0 0 160px;
     }
 }
 @media (min-width: 783px) {
     .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
-        flex: 0 0 220px;
+        flex: 0 0 190px;
     }
 }
 @media (min-width: 961px) {
     .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
-        flex: 0 0 250px;
+        flex: 0 0 220px;
     }
 }

@@ -152,32 +152,70 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     'safe-or-unsafe-behavior-description'
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul><br/><p>%s</p><p>%s</p><ul><li>%s</li></ul>',
+                    '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
                     \__('When the settings are reset, the default values can follow a "safe" or "unsafe" behavior:', 'graphql-api'),
-                    \__('<strong><u>Safe default settings</u></strong>', 'graphql-api'),
-                    \__('Recommended when the site openly exposes APIs (eg: for any visitor on the Internet, or for clients, or when feeding data to a downstream server an a non-private network), as to make the site secure:', 'graphql-api'),
+                    \__('Feature', 'graphql-api'),
+                    \__('Safe behavior', 'graphql-api'),
+                    \__('Unsafe behavior', 'graphql-api'),
                     implode(
-                        '</li><li>',
+                        '</tr><tr>',
                         [
-                            \__('The single endpoint is disabled', 'graphql-api'),
-                            \__('The “sensitive” data elements (eg: input field <code>status</code> to query posts with status <code>"draft"</code>) are not added to the schema', 'graphql-api'),
-                            \__('Only a few of settings options and meta keys (for posts, users, etc) can be queried', 'graphql-api'),
-                            \__('The number of entities (for posts, users, etc) that can be queried at once is limited', 'graphql-api'),
-                            \__('No environment variables or PHP constants can be queried (on the PRO version)', 'graphql-api'),
-                            \__('HTTP request calls block all URLs (on the PRO version)', 'graphql-api'),
-                        ]
-                    ),
-                    \__('<strong><u>Unsafe default settings</u></strong>', 'graphql-api'),
-                    \__('Recommended when the WordPress site is not publicly exposed, i.e. when only available on a private or internal network (as when building static sites):', 'graphql-api'),
-                    implode(
-                        '</li><li>',
-                        [
-                            \__('The single endpoint is enabled', 'graphql-api'),
-                            \__('The “sensitive” data elements are exposed in the schema', 'graphql-api'),
-                            \__('All settings options and meta keys can be queried', 'graphql-api'),
-                            \__('The number of entities that can be queried at once is unlimited', 'graphql-api'),
-                            \__('Any environment variable and PHP constant can be queried (on the PRO version)', 'graphql-api'),
-                            \__('HTTP request calls accept all URLs (on the PRO version)', 'graphql-api'),
+                            '<td>' . implode(
+                                '</td><td>',
+                                [
+                                    \__('Single endpoint', 'graphql-api'),
+                                    \__('Disabled', 'graphql-api'),
+                                    \__('Enabled', 'graphql-api'),
+                                ]
+                            ) . '</td>',
+                            '<td>' . implode(
+                                '</td><td>',
+                                [
+                                    \__('“Sensitive” data fields', 'graphql-api'),
+                                    \__('Not added to the schema', 'graphql-api'),
+                                    \__('Added to the schema', 'graphql-api'),
+                                ]
+                            ) . '</td>',
+                            '<td>' . implode(
+                                '</td><td>',
+                                [
+                                    \__('Settings from <code>wp_options</code>', 'graphql-api'),
+                                    \__('Only a few predefined options are queryable', 'graphql-api'),
+                                    \__('All options are queryable', 'graphql-api'),
+                                ]
+                            ) . '</td>',
+                            '<td>' . implode(
+                                '</td><td>',
+                                [
+                                    \__('Meta (posts, users, comments, taxonomies)', 'graphql-api'),
+                                    \__('Only a few predefined keys are queryable', 'graphql-api'),
+                                    \__('All keys are queryable', 'graphql-api'),
+                                ]
+                            ) . '</td>',
+                            '<td>' . implode(
+                                '</td><td>',
+                                [
+                                    \__('Max limit to query entities (posts, users, etc)', 'graphql-api'),
+                                    \__('Limited', 'graphql-api'),
+                                    \__('Unlimited', 'graphql-api'),
+                                ]
+                            ) . '</td>',
+                            '<td>' . implode(
+                                '</td><td>',
+                                [
+                                    \__('Environment Fields', 'graphql-api'),
+                                    \__('No environment variables or PHP constants are queryable', 'graphql-api'),
+                                    \__('All environment variables and PHP constants are queryable', 'graphql-api'),
+                                ]
+                            ) . '</td>',
+                            '<td>' . implode(
+                                '</td><td>',
+                                [
+                                    \__('HTTP Request Fields', 'graphql-api'),
+                                    \__('No URL can be requested', 'graphql-api'),
+                                    \__('All URLs can be requested', 'graphql-api'),
+                                ]
+                            ) . '</td>',
                         ]
                     ),
                 ),
