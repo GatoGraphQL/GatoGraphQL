@@ -475,6 +475,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             array('jquery'),
             $mainPluginVersion
         );
+        \wp_enqueue_style(
+            'graphql-api-settings',
+            $mainPluginURL . 'assets/css/settings.css',
+            array(),
+            $mainPluginVersion
+        );
     }
 
     /**

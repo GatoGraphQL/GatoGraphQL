@@ -1,0 +1,7 @@
+/**
+ * Fix for header padding in table in
+ * "Settings => Plugin Management => Reset Settings"
+ */
+.graphql-api-settings-section .form-table th {
+    padding-left: 10px;
+}
