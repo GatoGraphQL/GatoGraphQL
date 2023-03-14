@@ -55,7 +55,7 @@ The GraphQL API for WordPress provides safe default settings, to make "live" sit
 
 This is how the "safe" and "unsafe" default behaviors compare:
 
-| Feature | "Safe" behavior | "Unsafe" behavior |
+| Feature | Safe behavior | Unsafe behavior |
 | --- | --- | --- |
 | Single endpoint | Disabled | Enabled |
 | “Sensitive” data fields | Not added to the schema | Added to the schema |
