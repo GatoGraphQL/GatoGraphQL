@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 
-class SafeOrUnsafeDefaultBehaviorAfterResetSettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {
@@ -21,7 +21,7 @@ class SafeOrUnsafeDefaultBehaviorAfterResetSettingsModifyPluginSettingsFixtureEn
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-safe-or-unsafe-default-behavior-after-reset-settings';
+        return __DIR__ . '/fixture-safe-or-unsafe-default-behavior';
     }
 
     protected function getSettingsKey(): string
