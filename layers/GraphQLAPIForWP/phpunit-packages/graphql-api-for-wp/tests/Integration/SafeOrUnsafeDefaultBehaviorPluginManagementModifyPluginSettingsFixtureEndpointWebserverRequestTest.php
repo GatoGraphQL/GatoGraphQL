@@ -25,14 +25,14 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
         /**
          * Do not use the single endpoint (as it's disabled)
          */
-        $providerItems['reset-settings:1'][2] = 'graphql/mobile-app/';
+        $providerItems['safe-or-unsafe-default-behavior:1'][2] = 'graphql/mobile-app/';
         
         /**
          * The single endpoint is disabled, then the client returns a 404
          * as an HTML response
          */
-        $providerItems['reset-settings'][0] = 'text/html';
-        $providerItems['reset-settings'][1] = null;
+        $providerItems['safe-or-unsafe-default-behavior'][0] = 'text/html';
+        $providerItems['safe-or-unsafe-default-behavior'][1] = null;
 
         return $providerItems;
     }
@@ -49,7 +49,7 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_reset-settings';
+        return 'graphqlapi_graphqlapi_safe-or-unsafe-default-behavior';
     }
 
     protected function getPluginSettingsNewValue(): mixed
