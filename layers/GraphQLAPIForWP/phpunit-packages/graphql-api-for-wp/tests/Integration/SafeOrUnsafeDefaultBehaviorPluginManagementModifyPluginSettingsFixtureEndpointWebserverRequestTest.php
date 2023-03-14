@@ -15,15 +15,25 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
     }
 
     /**
-     * Modify the endpoint
-     *
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
     protected function customizeProviderEndpointEntries(array $providerItems): array
     {
         $providerItems = parent::customizeProviderEndpointEntries($providerItems);
+        
+        /**
+         * Do not use the single endpoint (as it's disabled)
+         */
         $providerItems['reset-settings:1'][2] = 'graphql/mobile-app/';
+        
+        /**
+         * The single endpoint is disabled, then the client returns a 404
+         * as an HTML response
+         */
+        $providerItems['reset-settings'][0] = 'text/html';
+        $providerItems['reset-settings'][1] = null;
+
         return $providerItems;
     }
 
