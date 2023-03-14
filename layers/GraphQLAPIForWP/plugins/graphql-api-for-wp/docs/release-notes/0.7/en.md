@@ -4,7 +4,7 @@
 
 Added support for [GraphQL mutations](https://graphql.org/learn/queries/#mutations)!
 
-![Mutations in the schema docs](../../images/schema-docs-mutation.png)
+![Mutations in the schema docs](../../images/releases/v07/schema-docs-mutation.png)
 
 Through mutations, you are now able to modify data through your GraphQL queries:
 
