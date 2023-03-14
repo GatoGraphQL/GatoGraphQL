@@ -49,7 +49,7 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_safe-or-unsafe-default-behavior';
+        return 'graphqlapi_graphqlapi_reset-settings';
     }
 
     protected function getPluginSettingsNewValue(): mixed
