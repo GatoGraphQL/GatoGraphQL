@@ -1,0 +1,5 @@
+{
+  posts(pagination: { limit: 120 }) {
+    id
+  }
+}
