@@ -11,6 +11,11 @@ class SafeOrUnsafeDefaultBehaviorAfterResetSettingsModifyPluginSettingsFixtureEn
 {
     protected function getEndpoint(): string
     {
+        $dataName = $this->getDataName();
+        if (str_ends_with($dataName, ':1')) {
+            return 'graphql/mobile-app/';
+        }
+
         return 'graphql/';
     }
 
