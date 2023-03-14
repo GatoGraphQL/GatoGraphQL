@@ -28,8 +28,8 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
         $providerItems['safe-or-unsafe-default-behavior:1'][2] = 'graphql/mobile-app/';
         
         /**
-         * The single endpoint is disabled, then the client returns a 404
-         * as an HTML response
+         * The single endpoint is disabled, then the client returns some
+         * HTML as response, not JSON
          */
         $providerItems['safe-or-unsafe-default-behavior'][0] = 'text/html';
         $providerItems['safe-or-unsafe-default-behavior'][1] = null;

@@ -1,1 +1,3 @@
-{}
+{
+    "The contents on this test file don't matter!": "It won't be compared against the response, which is HTML, not JSON. Check the .php TestCase"
+}
