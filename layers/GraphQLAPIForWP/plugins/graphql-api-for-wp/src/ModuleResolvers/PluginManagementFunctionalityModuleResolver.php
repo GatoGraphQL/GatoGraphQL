@@ -188,7 +188,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 '</td><td>',
                                 [
                                     \__('Meta (posts, users, comments, taxonomies)', 'graphql-api'),
-                                    \__('Only a few predefined keys are queryable', 'graphql-api'),
+                                    \__('No keys are queryable', 'graphql-api'),
                                     \__('All keys are queryable', 'graphql-api'),
                                 ]
                             ) . '</td>',

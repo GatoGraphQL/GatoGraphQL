@@ -60,7 +60,7 @@ This is how the "safe" and "unsafe" default behaviors compare:
 | Single endpoint | Disabled | Enabled |
 | “Sensitive” data fields | Not added to the schema | Added to the schema |
 | Settings from `wp_options` | Only a few predefined options are queryable | All options are queryable |
-| Meta (posts, users, comments, taxonomies) | Only a few predefined keys are queryable | All keys are queryable |
+| Meta (posts, users, comments, taxonomies) | No keys are queryable | All keys are queryable |
 | Max limit to query entities (posts, users, etc) | Limited | Unlimited |
 | Environment Fields | No environment variables or PHP constants are queryable | All environment variables and PHP constants are queryable |
 | HTTP Request Fields | No URL can be requested | All URLs can be requested |
