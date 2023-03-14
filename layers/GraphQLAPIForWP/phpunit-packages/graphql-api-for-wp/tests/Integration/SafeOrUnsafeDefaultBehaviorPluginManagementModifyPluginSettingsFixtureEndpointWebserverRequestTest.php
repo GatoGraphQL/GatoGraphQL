@@ -11,12 +11,20 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
 {
     protected function getEndpoint(): string
     {
-        $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':1')) {
-            return 'graphql/mobile-app/';
-        }
-
         return 'graphql/';
+    }
+
+    /**
+     * Modify the endpoint
+     *
+     * @param array<string,mixed> $providerItems
+     * @return array<string,mixed>
+     */
+    protected function customizeProviderEndpointEntries(array $providerItems): array
+    {
+        $providerItems = parent::customizeProviderEndpointEntries($providerItems);
+        $providerItems['reset-settings:1'][2] = 'graphql/mobile-app/';
+        return $providerItems;
     }
 
     protected function getFixtureFolder(): string

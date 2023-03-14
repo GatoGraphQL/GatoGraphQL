@@ -1,1 +1,26 @@
-{}
+{
+    "errors": [
+        {
+            "message": "The value for input field 'limit' in input object 'UserPaginationInput' cannot be above '100', but '120' was provided",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 9
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(pagination: {limit: 120})",
+                    "users(pagination: {limit: 120}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "users(pagination: {limit: 120}) { ... }",
+                "code": "PoPCMSSchema\/SchemaCommons@e2"
+            }
+        }
+    ],
+    "data": {
+        "users": null
+    }
+}
