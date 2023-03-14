@@ -20,7 +20,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     use ModuleResolverTrait;
     use PluginManagementFunctionalityModuleResolverTrait;
 
-    public final const RESET_SETTINGS = Plugin::NAMESPACE . '\plugin-management';
+    public final const RESET_SETTINGS = Plugin::NAMESPACE . '\reset-settings';
 
     /**
      * Setting options
