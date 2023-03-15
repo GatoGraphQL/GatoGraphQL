@@ -77,7 +77,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             HTML,
             'graphql-api-recipes',
             $class,
-            \__('GraphQL API - Documentation: Use Cases, Best Practices, and Recipes', 'graphql-api')
+            \__('GraphQL API - Guides: Use Cases, Best Practices, and Recipes', 'graphql-api')
         );
 
         foreach ($recipeEntries as $recipeEntry) {
