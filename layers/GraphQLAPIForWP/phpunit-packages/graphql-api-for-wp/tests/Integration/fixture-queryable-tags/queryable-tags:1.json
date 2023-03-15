@@ -32,11 +32,11 @@
         "path": [
           "\"dummy-tag\"",
           "(taxonomy: \"dummy-tag\")",
-          "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 27}) { ... }",
+          "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 33}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 27}) { ... }",
+        "field": "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 33}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
@@ -153,23 +153,23 @@
     "postFormats": [
       {
         "__typename": "GenericTag",
-        "id": 17,
+        "id": 23,
         "name": "Link"
       },
       {
         "__typename": "GenericTag",
-        "id": 16,
+        "id": 22,
         "name": "Chat"
       },
       {
         "__typename": "GenericTag",
-        "id": 15,
+        "id": 21,
         "name": "Aside"
       }
     ],
     "postFormat": {
       "__typename": "GenericTag",
-      "id": 16,
+      "id": 22,
       "name": "Chat"
     },
     "postFormatCount": 3,

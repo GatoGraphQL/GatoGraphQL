@@ -11,7 +11,7 @@
   dummyTags: tags(taxonomy: "dummy-tag") {
     ...TagData
   }
-  dummyTag: tag(taxonomy: "dummy-tag", by: { id: 27 }) {
+  dummyTag: tag(taxonomy: "dummy-tag", by: { id: 33 }) {
     ...TagData
   }
   dummyTagCount: tagCount(taxonomy: "dummy-tag")
@@ -20,7 +20,7 @@
   postFormats: tags(taxonomy: post_format) {
     ...TagData
   }
-  postFormat: tag(taxonomy: post_format, by: { id: 16 }) {
+  postFormat: tag(taxonomy: post_format, by: { id: 22 }) {
     ...TagData
   }
   postFormatCount: tagCount(taxonomy: post_format)
