@@ -7,8 +7,8 @@ query {
     ...MenuData
   }
 
-  # id 33 => "Bottom menu" in the initial dataset
-  menuByID: menu(by: {id: 33}) {
+  # id 39 => "Bottom menu" in the initial dataset
+  menuByID: menu(by: {id: 39}) {
     ...MenuData
   }
 }

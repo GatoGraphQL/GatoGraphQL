@@ -116,6 +116,48 @@
 		<wp:tag_slug><![CDATA[also-never-used]]></wp:tag_slug>
 		<wp:tag_name><![CDATA[also-never-used]]></wp:tag_name>
 	</wp:tag>
+	<wp:term>
+		<wp:term>
+		<wp:term_id>35</wp:term_id>
+		<wp:term_taxonomy><![CDATA[graphql-endpoint-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[development]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[development]]></wp:term_name>
+	</wp:term>
+		<wp:term>
+		<wp:term_id>36</wp:term_id>
+		<wp:term_taxonomy><![CDATA[graphql-endpoint-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[internal]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[internal]]></wp:term_name>
+	</wp:term>
+		<wp:term_id>37</wp:term_id>
+		<wp:term_taxonomy><![CDATA[graphql-endpoint-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[customers]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[customers]]></wp:term_name>
+	</wp:term>
+		<wp:term>
+		<wp:term_id>38</wp:term_id>
+		<wp:term_taxonomy><![CDATA[graphql-endpoint-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[public]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[public]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>39</wp:term_id>
+		<wp:term_taxonomy><![CDATA[graphql-endpoint-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[application]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[application]]></wp:term_name>
+	</wp:term>
+		<wp:term>
+		<wp:term_id>40</wp:term_id>
+		<wp:term_taxonomy><![CDATA[graphql-endpoint-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[authorization-required]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[authorization-required]]></wp:term_name>
+	</wp:term>
 		
 			
 	<generator>https://wordpress.org/?v=6.0</generator>
@@ -149,6 +191,8 @@
 		<wp:post_type><![CDATA[graphql-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="application"><![CDATA[application]]></category>
+		<category domain="graphql-endpoint-category" nicename="public"><![CDATA[public]]></category>
 														</item>
 					<item>
 		<title><![CDATA[Home user widget]]></title>
@@ -179,6 +223,8 @@
 		<wp:post_type><![CDATA[graphql-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="application"><![CDATA[application]]></category>
+		<category domain="graphql-endpoint-category" nicename="public"><![CDATA[public]]></category>
 														<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
@@ -213,6 +259,8 @@
 		<wp:post_type><![CDATA[graphql-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="application"><![CDATA[application]]></category>
+		<category domain="graphql-endpoint-category" nicename="public"><![CDATA[public]]></category>
 														<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
@@ -247,6 +295,8 @@
 		<wp:post_type><![CDATA[graphql-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="application"><![CDATA[application]]></category>
+		<category domain="graphql-endpoint-category" nicename="public"><![CDATA[public]]></category>
 														<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
@@ -281,6 +331,7 @@
 		<wp:post_type><![CDATA[graphql-endpoint]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="application"><![CDATA[application]]></category>
 														</item>
 					<item>
 		<title><![CDATA[Website]]></title>
@@ -311,6 +362,7 @@
 		<wp:post_type><![CDATA[graphql-endpoint]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="application"><![CDATA[application]]></category>
 														</item>
 					<item>
 		<title><![CDATA[Back-end (for DEV)]]></title>
@@ -341,6 +393,8 @@
 		<wp:post_type><![CDATA[graphql-endpoint]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
 														</item>
 					<item>
 		<title><![CDATA[Website]]></title>
@@ -356,7 +410,7 @@
 <!-- wp:graphql-api/persisted-query-endpoint-options {"isEnabled":false} /-->
 
 <!-- wp:graphql-api/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<excerpt:encoded><![CDATA[Group containing persisted queries for the website, applying an overarching schema configuration]]></excerpt:encoded>
 		<wp:post_id>200</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:06:20]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2021-01-07 07:06:20]]></wp:post_date_gmt>
@@ -386,7 +440,7 @@
 <!-- wp:graphql-api/endpoint-graphiql /-->
 
 <!-- wp:graphql-api/endpoint-voyager /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<excerpt:encoded><![CDATA[Group containing all our customers, with a top-level schema configuration]]></excerpt:encoded>
 		<wp:post_id>227</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-19 06:58:09]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-04-19 06:58:09]]></wp:post_date_gmt>
@@ -435,6 +489,8 @@
 		<wp:post_type><![CDATA[graphql-endpoint]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
+		<category domain="graphql-endpoint-category" nicename="public"><![CDATA[public]]></category>
 														</item>
 					<item>
 		<title><![CDATA[User account]]></title>
@@ -465,6 +521,8 @@
 		<wp:post_type><![CDATA[graphql-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
 														<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
@@ -499,6 +557,8 @@
 		<wp:post_type><![CDATA[graphql-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
 														</item>
 					<item>
 		<title><![CDATA[Power users]]></title>
@@ -529,6 +589,9 @@
 		<wp:post_type><![CDATA[graphql-endpoint]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="authorization-required"><![CDATA[authorization-required]]></category>
+		<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
+		<category domain="graphql-endpoint-category" nicename="public"><![CDATA[public]]></category>
 														</item>
 					<item>
 		<title><![CDATA[Unrestricted schema]]></title>
@@ -559,6 +622,8 @@
 		<wp:post_type><![CDATA[graphql-endpoint]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
 														</item>
 					<item>
 		<title><![CDATA[Nested mutations]]></title>
@@ -589,6 +654,8 @@
 		<wp:post_type><![CDATA[graphql-endpoint]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
 														</item><item>
 		<title><![CDATA[Hello world!]]></title>
 		<link>https://graphql-api.lndo.site/hello-world/</link>
@@ -1685,6 +1752,8 @@ video/mp4
 		<wp:post_type><![CDATA[graphql-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="application"><![CDATA[application]]></category>
+		<category domain="graphql-endpoint-category" nicename="public"><![CDATA[public]]></category>
 														</item>
 					<item>
 		<title><![CDATA[Unrestricted schema]]></title>
