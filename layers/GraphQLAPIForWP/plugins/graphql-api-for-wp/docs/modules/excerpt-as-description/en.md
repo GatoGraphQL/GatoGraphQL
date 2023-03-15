@@ -19,7 +19,7 @@ The description is shown in the table listing the entities for each Custom Post 
 
 The description is also displayed when visualizing the entity:
 
-![Persisted query source with description](../../images/persisted-query-source-with-description.png "Persisted query source with description")
+![Persisted query source with description](../../images/persisted-query-source.png "Persisted query source with description")
 
 ## How to use
 
