@@ -182,7 +182,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                  * Persisted Queries by Category. In that case,
                  * keep the highlight on that menu item.
                  */
-                if ($pagenow !== 'edit.php'
+                if (
+                    $pagenow !== 'edit.php'
                     && $taxonomy === $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy()
                 ) {
                     $plugin_page = $submenu_file = $graphQLEndpointCategoriesRelativePath;
