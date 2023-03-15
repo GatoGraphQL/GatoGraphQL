@@ -176,8 +176,15 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         \add_filter(
             'parent_file',
             function (string $parent_file) use ($graphQLEndpointCategoriesRelativePath) {
-                global $plugin_page, $submenu_file, $taxonomy;
-                if ($taxonomy === $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy()) {
+                global $pagenow, $plugin_page, $submenu_file, $taxonomy;
+                /**
+                 * Check also we're not filtering Custom Endpoints or
+                 * Persisted Queries by Category. In that case,
+                 * keep the highlight on that menu item.
+                 */
+                if ($pagenow !== 'edit.php'
+                    && $taxonomy === $this->getGraphQLEndpointCategoryTaxonomy()->getTaxonomy()
+                ) {
                     $plugin_page = $submenu_file = $graphQLEndpointCategoriesRelativePath;
                 }
                 return $parent_file;
