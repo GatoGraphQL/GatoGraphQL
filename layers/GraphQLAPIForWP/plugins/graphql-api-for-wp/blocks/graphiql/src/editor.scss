@@ -7,9 +7,10 @@
 	@include spinner();
 
 	.graphiql-container {
-		height: 80vh;
+		height: 65vh;
 		line-height: normal;
 		box-sizing: initial;
+		max-height: 800px;
 	}
 	/**
 	 * Override the font styles in the lookup dropdowns because WordPress ruins them
