@@ -410,7 +410,7 @@
 <!-- wp:graphql-api/persisted-query-endpoint-options {"isEnabled":false} /-->
 
 <!-- wp:graphql-api/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<excerpt:encoded><![CDATA[Group containing persisted queries for the website, applying an overarching schema configuration]]></excerpt:encoded>
 		<wp:post_id>200</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:06:20]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2021-01-07 07:06:20]]></wp:post_date_gmt>
