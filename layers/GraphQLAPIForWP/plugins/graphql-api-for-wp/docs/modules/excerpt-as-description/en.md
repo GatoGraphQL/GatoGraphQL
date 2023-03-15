@@ -15,7 +15,7 @@ Use the excerpt field to provide a description for the different Custom Post Typ
 
 The description is shown in the table listing the entities for each Custom Post Type, under column `Description`:
 
-![Persisted queries with description](../../images/persisted-queries-with-description.png "Persisted queries with description")
+![Persisted queries with description](../../images/persisted-queries-page.png "Persisted queries with description")
 
 The description is also displayed when visualizing the entity:
 
