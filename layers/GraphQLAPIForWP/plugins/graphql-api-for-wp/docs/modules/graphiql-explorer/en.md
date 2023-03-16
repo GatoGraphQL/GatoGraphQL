@@ -17,4 +17,4 @@ Customize in the Settings which GraphiQL clients will have the Explorer enabled,
 - In the single endpoint's public GraphiQL client
 - In the custom endpoints' public GraphiQL client
 
-![GraphiQL Explorer settings](../../images/settings-graphiql-explorer.png)
+![GraphiQL Explorer settings](../../images/legacy/v06/settings-graphiql-explorer.png)

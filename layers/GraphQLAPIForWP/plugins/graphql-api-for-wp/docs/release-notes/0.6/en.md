@@ -20,7 +20,7 @@ Previously, it was only available on the GraphiQL client for creating persisted 
 
 Enabled by default, the GraphiQL Explorer can be disabled for selected clients via the Settings:
 
-![Public client with GraphiQL Explorer](../../images/settings-graphiql-explorer.png)
+![Public client with GraphiQL Explorer](../../images/legacy/v06/settings-graphiql-explorer.png)
 
 ## Embeddable fields
 
