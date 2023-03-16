@@ -60,4 +60,9 @@ class CustomEndpointPropertiesEditorScript extends AbstractEditorScript
             ]
         );
     }
+
+    protected function registerStyleIndexCSS(): bool
+    {
+        return true;
+    }
 }

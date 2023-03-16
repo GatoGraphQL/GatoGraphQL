@@ -7,6 +7,11 @@ import { __ } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
 import { store as editorStore } from '@wordpress/editor';
 
+/**
+ * Internal dependencies
+ */
+import './style.scss';
+
 export default function CustomEndpointProperties() {
 	const {
 		postSlug,
