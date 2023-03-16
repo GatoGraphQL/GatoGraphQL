@@ -46,7 +46,7 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 Otherwise, the entries defined in the "Settings" tab from the Settings will be used:
 
-![Defining the entries in the Settings](../../images/settings-settings-entries.jpg "Defining the entries in the Settings")
+![Defining the entries in the Settings](../../images/settings-settings-entries.png "Defining the entries in the Settings")
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
