@@ -79,7 +79,10 @@ export default function CustomEndpointProperties() {
 								{ permalinkSuffix }
 							</span>
 							<span className="editor-endoint-custom-post-url__link-view">
-								{ '?view=source' }
+								{ '?view=' }
+							</span>
+							<span className="editor-endoint-custom-post-url__link-view-item">
+								{ 'source' }
 							</span>
 						</>
 					</ExternalLink>
@@ -106,7 +109,10 @@ export default function CustomEndpointProperties() {
 								{ permalinkSuffix }
 							</span>
 							<span className="editor-endoint-custom-post-url__link-view">
-								{ '?view=graphiql' }
+								{ '?view=' }
+							</span>
+							<span className="editor-endoint-custom-post-url__link-view-item">
+								{ 'graphiql' }
 							</span>
 						</>
 					</ExternalLink>
@@ -133,7 +139,10 @@ export default function CustomEndpointProperties() {
 								{ permalinkSuffix }
 							</span>
 							<span className="editor-endoint-custom-post-url__link-view">
-								{ '?view=schema' }
+								{ '?view=' }
+							</span>
+							<span className="editor-endoint-custom-post-url__link-view-item">
+								{ 'schema' }
 							</span>
 						</>
 					</ExternalLink>
