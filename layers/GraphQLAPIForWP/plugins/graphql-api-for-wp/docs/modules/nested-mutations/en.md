@@ -73,7 +73,7 @@ For instance, these are the fields for type `Root`:
 
 Item "Default Mutation scheme" in the module settings enables to configure if to enable nested mutations or not, and its behavior:
 
-![Settings for nested mutations](../../images/settings-nested-mutations.jpg)
+![Settings for nested mutations](../../images/settings-nested-mutations.png)
 
 It has these options:
 
