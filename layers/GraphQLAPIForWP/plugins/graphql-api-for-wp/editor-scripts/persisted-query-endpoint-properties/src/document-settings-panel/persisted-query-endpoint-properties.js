@@ -24,14 +24,8 @@ export default function PersistedQueryEndpointProperties() {
 		const post = select( editorStore ).getCurrentPost();
 		const permalinkParts = select( editorStore ).getPermalinkParts();
 		const blocks = select( editorStore ).getBlocks();
-		const customEndpointOptionsBlock = blocks.filter(
+		const persistedQueryEndpointOptionsBlock = blocks.filter(
 			block => block.name === 'graphql-api/persisted-query-endpoint-options'
-		).shift();
-		const graphiQLClientBlock = blocks.filter(
-			block => block.name === 'graphql-api/endpoint-graphiql'
-		).shift();
-		const voyagerClientBlock = blocks.filter(
-			block => block.name === 'graphql-api/endpoint-voyager'
 		).shift();
 
 		return {
@@ -46,7 +40,7 @@ export default function PersistedQueryEndpointProperties() {
 			 * Same attribute name as defined in
 			 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
 			 */
-			isPersistedQueryEndpointEnabled: customEndpointOptionsBlock.attributes.isEnabled,
+			isPersistedQueryEndpointEnabled: persistedQueryEndpointOptionsBlock.attributes.isEnabled,
 		};
 	}, [] );
 
