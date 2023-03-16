@@ -10,6 +10,17 @@ When clicking on any of the links, a modal window is displayed with the correspo
 
 ![Modal window with documentation](../../images/releases/v1.0/schema-configuration-additional-documentation-modal.png)
 
+## Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
+
+A sidebar component has been added to the editor for Custom Endpoints and Persisted Query Endpoints, displaying links to:
+
+- The endpoint URL
+- Its source configuration
+- Its GraphiQL client (for the Custom Endpoint)
+- Its interactive schema client (for the Custom Endpoint)
+
+![Custom Endpoint Properties](../../images/releases/v1.0/custom-endpoint-properties.png)
+
 ## Added documentation for PRO modules and their corresponding Schema Configuration functionalities
 
 PRO modules are installed by the GraphQL API PRO plugin, which has been released alongside the GraphQL API for WordPress v1.0.
