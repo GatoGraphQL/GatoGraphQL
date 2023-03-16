@@ -72,7 +72,7 @@ Nested mutations change the root type, from `QueryRoot` and `MutationRoot`, to a
 
 In addition, a "Mutation Scheme" section has been added to a Schema Configuration, allowing to enable/disable nested mutations for a specific Custom Endpoint or Persisted Query.
 
-![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.png)
+![Mutation scheme in the schema configuration](../../images/releases/v07/schema-configuration-mutation-scheme.jpg)
 
 ## New nested mutation fields
 
