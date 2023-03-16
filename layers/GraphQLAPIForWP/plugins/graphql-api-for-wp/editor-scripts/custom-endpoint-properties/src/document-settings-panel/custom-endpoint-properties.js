@@ -6,6 +6,7 @@ import { safeDecodeURIComponent } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
 import { store as editorStore } from '@wordpress/editor';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -25,7 +26,7 @@ export default function CustomEndpointProperties() {
 	} = useSelect( ( select ) => {
 		const post = select( editorStore ).getCurrentPost();
 		const permalinkParts = select( editorStore ).getPermalinkParts();
-		const blocks = select( editorStore ).getBlocks();
+		const blocks = select( blockEditorStore ).getBlocks();
 		const customEndpointOptionsBlock = blocks.filter(
 			block => block.name === 'graphql-api/custom-endpoint-options'
 		).shift();
