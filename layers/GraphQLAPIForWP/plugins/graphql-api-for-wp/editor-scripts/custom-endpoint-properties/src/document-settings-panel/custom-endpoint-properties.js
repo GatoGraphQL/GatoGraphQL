@@ -65,7 +65,7 @@ export default function CustomEndpointProperties() {
 				<p>
 					<ExternalLink
 						className="editor-post-url__link"
-						href={ postLink }
+						href={ postLink + '?view=source' }
 						target="_blank"
 					>
 						<>
@@ -95,7 +95,7 @@ export default function CustomEndpointProperties() {
 				<p>
 					<ExternalLink
 						className="editor-post-url__link"
-						href={ postLink }
+						href={ postLink + '?view=graphiql' }
 						target="_blank"
 					>
 						<>
@@ -125,7 +125,7 @@ export default function CustomEndpointProperties() {
 				<p>
 					<ExternalLink
 						className="editor-post-url__link"
-						href={ postLink }
+						href={ postLink + '?view=schema' }
 						target="_blank"
 					>
 						<>
