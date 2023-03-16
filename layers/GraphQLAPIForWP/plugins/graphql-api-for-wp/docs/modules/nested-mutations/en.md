@@ -111,7 +111,7 @@ Same option as above, but removing the "duplicated" mutation fields from the roo
 
 A "Mutation Scheme" section has been added to a Schema Configuration, allowing to enable/disable/configure nested mutations for Custom Endpoints and Persisted Queries on an individual basis.
 
-![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.jpg)
+![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.png)
 
 ## GraphQL spec
 
