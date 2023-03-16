@@ -25,11 +25,11 @@ Clicking on the Schema Configurations link in the menu, it displays the list of 
 
 A schema configuration is a custom post type (CPT). To create a new schema configuration, click on button "Add New Schema Configuration", which will open the WordPress editor:
 
-![Creating a new Persisted Query](../../images/new-schema-configuration.png)
+![Creating a new Schema Configuration](../../images/new-schema-configuration.png)
 
 To configure the different elements in the schema configuration, click on corresponding input, and it becomes editable. Then select the entries that apply to the configuration. When you are done, click on "Publish":
 
-![Creating a new schema configuration](../../images/editing-schema-configuration.gif)
+![Creating a new Schema Configuration](../../images/editing-schema-configuration.gif)
 
 Once published, the schema configuration becomes available when editing a Custom Endpoint or Persisted Query:
 
