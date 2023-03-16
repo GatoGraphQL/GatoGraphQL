@@ -7,13 +7,8 @@ import { __ } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
 import { store as editorStore } from '@wordpress/editor';
 
-/**
- * Internal dependencies
- */
-
 export default function CustomEndpointProperties() {
 	const {
-		// isEditable,
 		postSlug,
 		postLink,
 		permalinkPrefix,
@@ -21,11 +16,8 @@ export default function CustomEndpointProperties() {
 	} = useSelect( ( select ) => {
 		const post = select( editorStore ).getCurrentPost();
 		const permalinkParts = select( editorStore ).getPermalinkParts();
-		// const hasPublishAction = post?._links?.[ 'wp:action-publish' ] ?? false;
 
 		return {
-			// isEditable:
-			// 	select( editorStore ).isPermalinkEditable() && hasPublishAction,
 			postSlug: safeDecodeURIComponent(
 				select( editorStore ).getEditedPostSlug()
 			),
@@ -38,18 +30,15 @@ export default function CustomEndpointProperties() {
 	return (
 		<>
 			<div className="editor-post-url">
-				{/* { isEditable && ( */}
 				<h3 className="editor-post-url__link-label">
 					{ __( 'Endpoint URL' ) }
 				</h3>
-				{/* ) } */}
 				<p>
 					<ExternalLink
 						className="editor-post-url__link"
 						href={ postLink }
 						target="_blank"
 					>
-						{/* { isEditable ? ( */}
 						<>
 							<span className="editor-post-url__link-prefix">
 								{ permalinkPrefix }
@@ -61,25 +50,19 @@ export default function CustomEndpointProperties() {
 								{ permalinkSuffix }
 							</span>
 						</>
-						{/* ) : (
-							postLink
-						) } */}
 					</ExternalLink>
 				</p>
 			</div>
 			<div className="editor-post-url">
-				{/* { isEditable && ( */}
 				<h3 className="editor-post-url__link-label">
 					{ __( 'Endpoint Source' ) }
 				</h3>
-				{/* ) } */}
 				<p>
 					<ExternalLink
 						className="editor-post-url__link"
 						href={ postLink }
 						target="_blank"
 					>
-						{/* { isEditable ? ( */}
 						<>
 							<span className="editor-post-url__link-prefix">
 								{ permalinkPrefix }
@@ -91,25 +74,19 @@ export default function CustomEndpointProperties() {
 								{ permalinkSuffix + '?view=source' }
 							</span>
 						</>
-						{/* ) : (
-							postLink
-						) } */}
 					</ExternalLink>
 				</p>
 			</div>
 			<div className="editor-post-url">
-				{/* { isEditable && ( */}
 				<h3 className="editor-post-url__link-label">
 					{ __( 'GraphiQL client' ) }
 				</h3>
-				{/* ) } */}
 				<p>
 					<ExternalLink
 						className="editor-post-url__link"
 						href={ postLink }
 						target="_blank"
 					>
-						{/* { isEditable ? ( */}
 						<>
 							<span className="editor-post-url__link-prefix">
 								{ permalinkPrefix }
@@ -121,25 +98,19 @@ export default function CustomEndpointProperties() {
 								{ permalinkSuffix + '?view=graphiql' }
 							</span>
 						</>
-						{/* ) : (
-							postLink
-						) } */}
 					</ExternalLink>
 				</p>
 			</div>
 			<div className="editor-post-url">
-				{/* { isEditable && ( */}
 				<h3 className="editor-post-url__link-label">
 					{ __( 'Interactive Schema Client' ) }
 				</h3>
-				{/* ) } */}
 				<p>
 					<ExternalLink
 						className="editor-post-url__link"
 						href={ postLink }
 						target="_blank"
 					>
-						{/* { isEditable ? ( */}
 						<>
 							<span className="editor-post-url__link-prefix">
 								{ permalinkPrefix }
@@ -151,9 +122,6 @@ export default function CustomEndpointProperties() {
 								{ permalinkSuffix + '?view=schema' }
 							</span>
 						</>
-						{/* ) : (
-							postLink
-						) } */}
 					</ExternalLink>
 				</p>
 			</div>
