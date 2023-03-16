@@ -17,9 +17,28 @@ The response's `max-age` value is calculated as the lowest value from all the fi
 
 ![Defining a cache control policy](../../images/cache-control.gif "Defining a cache control policy")
 
-## Executing the endpoint via `GET` to cache its response
+## Using a Cache Control List (CCL)
 
-Persisted queries are already suitable to be executed via `GET`, as they store the GraphQL query in the server, i.e. it must not be provided in the body of the request.
+After creating the CCL (see next section), we can have the endpoint use it by editing the corresponding Schema Configuration, and selecting the CCL from the list under block "Cache Control Lists".
+
+![Selecting a Cache Control List in the Schema Configuration](../../images/schema-config-cache-control-lists.png "Selecting a Cache Control List in the Schema Configuration")
+
+## Creating a Cache Control List
+
+Click on the "Cache Control Lists" page in the GraphQL API menu, and then click on "Add New Cache Control List".
+
+![Cache Control Lists](../../images/cache-control-lists.png "Cache Control Lists")
+
+Every Cache Control List contains one or many entries, each of them with the following elements:
+
+- The fields and directives which, if they appear on the GraphQL query, the selected max-age takes effect
+- The max-age
+
+![Creating a Cache Control List](../../images/cache-control-list.png "Creating a Cache Control List")
+
+## Executing the endpoint via `GET`
+
+Persisted queries are already suitable to be executed via `GET`, as they store the GraphQL query in the server (i.e. it must not be provided in the body of the request).
 
 For the single endpoint and custom endpoints, though, the query must be provided under param `?query=...` attached to the endpoint URL.
 
@@ -43,25 +62,6 @@ For instance, the following GraphQL query:
 ...can be executed via `GET` against the single endpoint like this:
 
 `https://mysite.com/graphql/?query={ posts { id title url author { id name url } } }`
-
-## Using a Cache Control List (CCL)
-
-After creating the CCL (see next section), we can have the endpoint use it by editing the corresponding Schema Configuration, and selecting the CCL from the list under block "Cache Control Lists".
-
-![Selecting a Cache Control List in the Schema Configuration](../../images/schema-config-cache-control-lists.png "Selecting a Cache Control List in the Schema Configuration")
-
-## Creating a Cache Control List
-
-Click on the "Cache Control Lists" page in the GraphQL API menu, and then click on "Add New Cache Control List".
-
-![Cache Control Lists](../../images/cache-control-lists.png "Cache Control Lists")
-
-Every Cache Control List contains one or many entries, each of them with the following elements:
-
-- The fields and directives which, if they appear on the GraphQL query, the selected max-age takes effect
-- The max-age
-
-![Creating a Cache Control List](../../images/cache-control-list.png "Creating a Cache Control List")
 
 ## Resources
 
