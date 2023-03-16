@@ -19,12 +19,16 @@ export default function CustomEndpointProperties() {
 		permalinkPrefix,
 		permalinkSuffix,
 		isGraphiQLClientEnabled,
+		isVoyagerClientEnabled,
 	} = useSelect( ( select ) => {
 		const post = select( editorStore ).getCurrentPost();
 		const permalinkParts = select( editorStore ).getPermalinkParts();
 		const blocks = select( editorStore ).getBlocks();
 		const graphiQLClientBlock = blocks.filter(
 			block => block.name === 'graphql-api/endpoint-graphiql'
+		).shift();
+		const voyagerClientBlock = blocks.filter(
+			block => block.name === 'graphql-api/endpoint-voyager'
 		).shift();
 
 		return {
@@ -34,7 +38,8 @@ export default function CustomEndpointProperties() {
 			postLink: post.link,
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
-			isGraphiQLClientEnabled: graphiQLClientBlock.attributes.isEnabled
+			isGraphiQLClientEnabled: graphiQLClientBlock.attributes.isEnabled,
+			isVoyagerClientEnabled: voyagerClientBlock.attributes.isEnabled,
 		};
 	}, [] );
 
@@ -126,36 +131,38 @@ export default function CustomEndpointProperties() {
 					</p>
 				</div>
 			) }
-			<div className="editor-post-url">
-				<h3 className="editor-post-url__link-label">
-					{ __( 'Interactive Schema Client' ) }
-				</h3>
-				<p>
-					<ExternalLink
-						className="editor-post-url__link"
-						href={ postLink + '?view=schema' }
-						target="_blank"
-					>
-						<>
-							<span className="editor-post-url__link-prefix">
-								{ permalinkPrefix }
-							</span>
-							<span className="editor-post-url__link-slug">
-								{ postSlug }
-							</span>
-							<span className="editor-post-url__link-suffix">
-								{ permalinkSuffix }
-							</span>
-							<span className="editor-endoint-custom-post-url__link-view">
-								{ '?view=' }
-							</span>
-							<span className="editor-endoint-custom-post-url__link-view-item">
-								{ 'schema' }
-							</span>
-						</>
-					</ExternalLink>
-				</p>
-			</div>
+			{ isVoyagerClientEnabled && (
+				<div className="editor-post-url">
+					<h3 className="editor-post-url__link-label">
+						{ __( 'Interactive Schema Client' ) }
+					</h3>
+					<p>
+						<ExternalLink
+							className="editor-post-url__link"
+							href={ postLink + '?view=schema' }
+							target="_blank"
+						>
+							<>
+								<span className="editor-post-url__link-prefix">
+									{ permalinkPrefix }
+								</span>
+								<span className="editor-post-url__link-slug">
+									{ postSlug }
+								</span>
+								<span className="editor-post-url__link-suffix">
+									{ permalinkSuffix }
+								</span>
+								<span className="editor-endoint-custom-post-url__link-view">
+									{ '?view=' }
+								</span>
+								<span className="editor-endoint-custom-post-url__link-view-item">
+									{ 'schema' }
+								</span>
+							</>
+						</ExternalLink>
+					</p>
+				</div>
+			) }
 		</>
 	);
 }
