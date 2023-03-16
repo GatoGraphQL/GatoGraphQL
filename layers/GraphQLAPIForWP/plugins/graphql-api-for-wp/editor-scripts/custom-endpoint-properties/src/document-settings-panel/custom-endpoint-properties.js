@@ -82,7 +82,7 @@ export default function CustomEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					🔵 { __( 'Endpoint Source' ) }
+					🔵 { __( 'View Endpoint Source' ) }
 				</h3>
 				<p>
 					<ExternalLink
