@@ -15,7 +15,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public final const EXCERPT_AS_DESCRIPTION = Plugin::NAMESPACE . '\excerpt-as-description';
     public final const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
     public final const SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION = Plugin::NAMESPACE . '\schema-configuration-additional-documentation';
-    public final const CUSTOM_ENDPOINT_URLS_AND_CLIENTS = Plugin::NAMESPACE . '\custom-endpoint-properties';
+    public final const CUSTOM_ENDPOINT_PROPERTIES = Plugin::NAMESPACE . '\custom-endpoint-properties';
+    public final const PERSISTED_QUERY_ENDPOINT_PROPERTIES = Plugin::NAMESPACE . '\persisted-query-endpoint-properties';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -38,7 +39,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::EXCERPT_AS_DESCRIPTION,
             self::WELCOME_GUIDES,
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION,
-            self::CUSTOM_ENDPOINT_URLS_AND_CLIENTS,
+            self::CUSTOM_ENDPOINT_PROPERTIES,
+            self::PERSISTED_QUERY_ENDPOINT_PROPERTIES,
         ];
     }
 
@@ -63,10 +65,16 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                         SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
                     ],
                 ];
-            case self::CUSTOM_ENDPOINT_URLS_AND_CLIENTS:
+            case self::CUSTOM_ENDPOINT_PROPERTIES:
                 return [
                     [
                         EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
+                    ],
+                ];
+            case self::PERSISTED_QUERY_ENDPOINT_PROPERTIES:
+                return [
+                    [
+                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ],
                 ];
         }
@@ -95,7 +103,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         switch ($module) {
             case self::WELCOME_GUIDES:
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
-            case self::CUSTOM_ENDPOINT_URLS_AND_CLIENTS:
+            case self::CUSTOM_ENDPOINT_PROPERTIES:
+            case self::PERSISTED_QUERY_ENDPOINT_PROPERTIES:
                 return true;
         }
         return parent::isHidden($module);
@@ -107,7 +116,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'graphql-api'),
             self::WELCOME_GUIDES => \__('Welcome Guides', 'graphql-api'),
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional GraphQL API Documentation', 'graphql-api'),
-            self::CUSTOM_ENDPOINT_URLS_AND_CLIENTS => \__('Custom Endpoint Properties', 'graphql-api'),
+            self::CUSTOM_ENDPOINT_PROPERTIES => \__('Custom Endpoint Properties', 'graphql-api'),
+            self::PERSISTED_QUERY_ENDPOINT_PROPERTIES => \__('Persisted Query Endpoint Properties', 'graphql-api'),
             default => $module,
         };
     }
@@ -122,7 +132,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                 '8.2'
             ),
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Documentation on using the GraphQL API', 'graphql-api'),
-            self::CUSTOM_ENDPOINT_URLS_AND_CLIENTS => \__('Sidebar component displaying Properties for a Custom Endpoint', 'graphql-api'),
+            self::CUSTOM_ENDPOINT_PROPERTIES => \__('Sidebar component displaying Properties for a Custom Endpoint', 'graphql-api'),
+            self::PERSISTED_QUERY_ENDPOINT_PROPERTIES => \__('Sidebar component displaying Properties for a Persisted Query Endpoint', 'graphql-api'),
             default => parent::getDescription($module),
         };
     }
@@ -133,7 +144,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::WELCOME_GUIDES
                 => false,
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION,
-            self::CUSTOM_ENDPOINT_URLS_AND_CLIENTS
+            self::CUSTOM_ENDPOINT_PROPERTIES,
+            self::PERSISTED_QUERY_ENDPOINT_PROPERTIES
                 => true,
             default
                 => parent::isPredefinedEnabledOrDisabled($module),

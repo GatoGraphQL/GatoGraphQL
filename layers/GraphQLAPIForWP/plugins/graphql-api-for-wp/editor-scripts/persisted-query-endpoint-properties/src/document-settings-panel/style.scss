@@ -1,0 +1,15 @@
+.editor-endoint-custom-post-url {
+	&__link {
+		&-view {
+			color: forestgreen;
+		}
+		&-view-item {
+			color: darkgreen;
+		}
+	}
+}
+
+.disabled-text {
+	pointer-events: none;
+	opacity: 0.4;
+}
