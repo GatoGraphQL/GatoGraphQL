@@ -18,9 +18,14 @@ export default function CustomEndpointProperties() {
 		postLink,
 		permalinkPrefix,
 		permalinkSuffix,
+		isGraphiQLClientEnabled,
 	} = useSelect( ( select ) => {
 		const post = select( editorStore ).getCurrentPost();
 		const permalinkParts = select( editorStore ).getPermalinkParts();
+		const blocks = select( editorStore ).getBlocks();
+		const graphiQLClientBlock = blocks.filter(
+			block => block.name === 'graphql-api/endpoint-graphiql'
+		).shift();
 
 		return {
 			postSlug: safeDecodeURIComponent(
@@ -29,6 +34,7 @@ export default function CustomEndpointProperties() {
 			postLink: post.link,
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
+			isGraphiQLClientEnabled: graphiQLClientBlock.attributes.isEnabled
 		};
 	}, [] );
 
@@ -88,36 +94,38 @@ export default function CustomEndpointProperties() {
 					</ExternalLink>
 				</p>
 			</div>
-			<div className="editor-post-url">
-				<h3 className="editor-post-url__link-label">
-					{ __( 'GraphiQL client' ) }
-				</h3>
-				<p>
-					<ExternalLink
-						className="editor-post-url__link"
-						href={ postLink + '?view=graphiql' }
-						target="_blank"
-					>
-						<>
-							<span className="editor-post-url__link-prefix">
-								{ permalinkPrefix }
-							</span>
-							<span className="editor-post-url__link-slug">
-								{ postSlug }
-							</span>
-							<span className="editor-post-url__link-suffix">
-								{ permalinkSuffix }
-							</span>
-							<span className="editor-endoint-custom-post-url__link-view">
-								{ '?view=' }
-							</span>
-							<span className="editor-endoint-custom-post-url__link-view-item">
-								{ 'graphiql' }
-							</span>
-						</>
-					</ExternalLink>
-				</p>
-			</div>
+			{ isGraphiQLClientEnabled && (
+				<div className="editor-post-url">
+					<h3 className="editor-post-url__link-label">
+						{ __( 'GraphiQL client' ) }
+					</h3>
+					<p>
+						<ExternalLink
+							className="editor-post-url__link"
+							href={ postLink + '?view=graphiql' }
+							target="_blank"
+						>
+							<>
+								<span className="editor-post-url__link-prefix">
+									{ permalinkPrefix }
+								</span>
+								<span className="editor-post-url__link-slug">
+									{ postSlug }
+								</span>
+								<span className="editor-post-url__link-suffix">
+									{ permalinkSuffix }
+								</span>
+								<span className="editor-endoint-custom-post-url__link-view">
+									{ '?view=' }
+								</span>
+								<span className="editor-endoint-custom-post-url__link-view-item">
+									{ 'graphiql' }
+								</span>
+							</>
+						</ExternalLink>
+					</p>
+				</div>
+			) }
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
 					{ __( 'Interactive Schema Client' ) }
