@@ -63,7 +63,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPICustomEndpointURLsAndClients';
+config.output.jsonpFunction = 'webpackJsonpGraphQLAPICustomEndpointProperties';
 // ------------------------------------------------------
 
 module.exports = config;

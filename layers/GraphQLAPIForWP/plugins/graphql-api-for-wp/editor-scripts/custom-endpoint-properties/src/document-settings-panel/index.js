@@ -7,12 +7,12 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 /**
  * Constants to customize
  */
-const DOCUMENT_SETTINGS_PANEL_NAME = 'custom-endpoint-urls-and-clients-panel';
+const DOCUMENT_SETTINGS_PANEL_NAME = 'custom-endpoint-properties-panel';
 
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Custom Endpoint URLs and Clients', 'graphql-api') }
+        title={ __('Custom Endpoint Properties', 'graphql-api') }
     >
         <p><strong>{ __('URLs:', 'graphql-api') }</strong></p>
         <p><strong>{ __('Clients:', 'graphql-api') }</strong></p>

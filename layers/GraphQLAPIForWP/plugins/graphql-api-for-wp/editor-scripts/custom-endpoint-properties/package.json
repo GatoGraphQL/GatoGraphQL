@@ -1,7 +1,7 @@
 {
-	"name": "custom-endpoint-urls-and-clients",
+	"name": "custom-endpoint-properties",
 	"version": "1.0.0-dev",
-	"description": "Sidebar component displaying URLs and Clients for a Custom Endpoint",
+	"description": "Sidebar component displaying Properties for a Custom Endpoint",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",

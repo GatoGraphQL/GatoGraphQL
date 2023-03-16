@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 
-class CustomEndpointURLsAndClientsEditorScript extends AbstractEditorScript
+class CustomEndpointPropertiesEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
@@ -26,7 +26,7 @@ class CustomEndpointURLsAndClientsEditorScript extends AbstractEditorScript
 
     protected function getScriptName(): string
     {
-        return 'custom-endpoint-urls-and-clients';
+        return 'custom-endpoint-properties';
     }
 
     public function getEnablingModule(): ?string
