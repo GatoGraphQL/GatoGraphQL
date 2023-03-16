@@ -13,7 +13,7 @@ import { store as editorStore } from '@wordpress/editor';
 
 export default function CustomEndpointProperties() {
 	const {
-		isEditable,
+		// isEditable,
 		postSlug,
 		postLink,
 		permalinkPrefix,
@@ -21,11 +21,11 @@ export default function CustomEndpointProperties() {
 	} = useSelect( ( select ) => {
 		const post = select( editorStore ).getCurrentPost();
 		const permalinkParts = select( editorStore ).getPermalinkParts();
-		const hasPublishAction = post?._links?.[ 'wp:action-publish' ] ?? false;
+		// const hasPublishAction = post?._links?.[ 'wp:action-publish' ] ?? false;
 
 		return {
-			isEditable:
-				select( editorStore ).isPermalinkEditable() && hasPublishAction,
+			// isEditable:
+			// 	select( editorStore ).isPermalinkEditable() && hasPublishAction,
 			postSlug: safeDecodeURIComponent(
 				select( editorStore ).getEditedPostSlug()
 			),
@@ -37,32 +37,32 @@ export default function CustomEndpointProperties() {
 
 	return (
 		<div className="editor-post-url">
-			{ isEditable && (
-				<h3 className="editor-post-url__link-label">
-					{ __( 'GraphQL Custom Endpoint URL' ) }
-				</h3>
-			) }
+			{/* { isEditable && ( */}
+			<h3 className="editor-post-url__link-label">
+				{ __( 'GraphQL Custom Endpoint' ) }
+			</h3>
+			{/* ) } */}
 			<p>
 				<ExternalLink
 					className="editor-post-url__link"
 					href={ postLink }
 					target="_blank"
 				>
-					{ isEditable ? (
-						<>
-							<span className="editor-post-url__link-prefix">
-								{ permalinkPrefix }
-							</span>
-							<span className="editor-post-url__link-slug">
-								{ postSlug }
-							</span>
-							<span className="editor-post-url__link-suffix">
-								{ permalinkSuffix }
-							</span>
-						</>
-					) : (
+					{/* { isEditable ? ( */}
+					<>
+						<span className="editor-post-url__link-prefix">
+							{ permalinkPrefix }
+						</span>
+						<span className="editor-post-url__link-slug">
+							{ postSlug }
+						</span>
+						<span className="editor-post-url__link-suffix">
+							{ permalinkSuffix }
+						</span>
+					</>
+					{/* ) : (
 						postLink
-					) }
+					) } */}
 				</ExternalLink>
 			</p>
 		</div>
