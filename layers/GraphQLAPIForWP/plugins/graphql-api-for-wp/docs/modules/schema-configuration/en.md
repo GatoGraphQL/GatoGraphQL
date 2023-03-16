@@ -14,6 +14,7 @@ Each module can define its configuration (and allow the site's admin to customiz
 - Using nested mutations
 - Define who can access the schema via Access Control Lists
 - Set-up HTTP caching via Cache Control Lists
+- Many others
 
 ![Creating a new schema configuration](../../images/schema-configuration.png "Creating a new schema configuration")
 
@@ -39,7 +40,7 @@ If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema
 
 ![Persisted query source](../../images/settings-default-schema-configuration.png)
 
-## Editor Inputs
+<!-- ## Editor Inputs
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
@@ -80,4 +81,4 @@ These are the inputs in the Document settings:
 
 | Input | Description |
 | --- | --- |
-| **Excerpt** | Provide a description for the schema configuration.<br/>This input is available when module `Excerpt as Description` is enabled |
+| **Excerpt** | Provide a description for the schema configuration.<br/>This input is available when module `Excerpt as Description` is enabled | -->
