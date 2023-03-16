@@ -18,12 +18,16 @@ export default function CustomEndpointProperties() {
 		postLink,
 		permalinkPrefix,
 		permalinkSuffix,
+		isCustomEndpointEnabled,
 		isGraphiQLClientEnabled,
 		isVoyagerClientEnabled,
 	} = useSelect( ( select ) => {
 		const post = select( editorStore ).getCurrentPost();
 		const permalinkParts = select( editorStore ).getPermalinkParts();
 		const blocks = select( editorStore ).getBlocks();
+		const customEndpointOptionsBlock = blocks.filter(
+			block => block.name === 'graphql-api/custom-endpoint-options'
+		).shift();
 		const graphiQLClientBlock = blocks.filter(
 			block => block.name === 'graphql-api/endpoint-graphiql'
 		).shift();
@@ -38,6 +42,7 @@ export default function CustomEndpointProperties() {
 			postLink: post.link,
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
+			isCustomEndpointEnabled: customEndpointOptionsBlock.attributes.isEnabled,
 			isGraphiQLClientEnabled: graphiQLClientBlock.attributes.isEnabled,
 			isVoyagerClientEnabled: voyagerClientBlock.attributes.isEnabled,
 		};
@@ -45,31 +50,35 @@ export default function CustomEndpointProperties() {
 
 	return (
 		<>
-			<div className="editor-post-url">
-				<h3 className="editor-post-url__link-label">
-					{ __( 'Endpoint URL' ) }
-				</h3>
-				<p>
-					<ExternalLink
-						className="editor-post-url__link"
-						href={ postLink }
-						target="_blank"
-					>
-						<>
-							<span className="editor-post-url__link-prefix">
-								{ permalinkPrefix }
-							</span>
-							<span className="editor-post-url__link-slug">
-								{ postSlug }
-							</span>
-							<span className="editor-post-url__link-suffix">
-								{ permalinkSuffix }
-							</span>
-						</>
-					</ExternalLink>
-				</p>
-			</div>
-			<hr/>
+			{ isCustomEndpointEnabled && (
+				<>
+					<div className="editor-post-url">
+						<h3 className="editor-post-url__link-label">
+							{ __( 'Custom Endpoint URL' ) }
+						</h3>
+						<p>
+							<ExternalLink
+								className="editor-post-url__link"
+								href={ postLink }
+								target="_blank"
+							>
+								<>
+									<span className="editor-post-url__link-prefix">
+										{ permalinkPrefix }
+									</span>
+									<span className="editor-post-url__link-slug">
+										{ postSlug }
+									</span>
+									<span className="editor-post-url__link-suffix">
+										{ permalinkSuffix }
+									</span>
+								</>
+							</ExternalLink>
+						</p>
+					</div>
+					<hr/>
+				</>
+			) }
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
 					{ __( 'Endpoint Source' ) }
