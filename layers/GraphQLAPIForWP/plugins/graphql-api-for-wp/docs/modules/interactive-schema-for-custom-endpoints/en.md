@@ -4,6 +4,10 @@ Each custom endpoint can be attached its own Interactive schema client, availabl
 
 ![Custom endpoint's Interactive schema](../../images/custom-endpoint-interactive-schema.png "Custom endpoint's Interactive schema")
 
-The client can be opened from the Custom Endpoints page, on link "Interactive schema" when hovering on the custom endpoint entry:
+The Interactive schema client can be opened when editing the Custom Endpoint, under sidebar panel "Custom Endpoint Properties":
+
+![Custom endpoint's link to the GraphiQL client in the editor](../../images/custom-endpoint-properties-interactive-schema.png "Custom endpoint's link to the GraphiQL client in the editor")
+
+Likewise, the client can be opened from the Custom Endpoints list page, on link "Interactive schema" when hovering on the entry:
 
 ![Custom endpoint's link to the Interactive schema client](../../images/custom-endpoints-actions-interactive-schema.png "Custom endpoint's link to the Interactive schema client")
