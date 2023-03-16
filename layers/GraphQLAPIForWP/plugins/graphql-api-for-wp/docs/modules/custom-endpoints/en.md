@@ -44,9 +44,9 @@ A custom endpoint is a custom post type (CPT). To create a new custom endpoint, 
 
 ![Creating a new Custom Endpoint](../../images/new-custom-endpoint.png)
 
-When the endpoint is ready, publish it, and its permalink becomes its endpoint:
+When the custom endpoint is ready, publish it, and its permalink becomes its endpoint URL. Links to the endpoint (and source and clients) are shown on the "Custom Endpoint Properties" sidebar panel:
 
-![Publishing the custom endpoint](../../images/publishing-custom-endpoint.gif)
+![Custom Endpoint Properties](../../images/custom-endpoint-properties.png)
 
 Appending `?view=source` to the permalink, it will show the endpoint's configuration (as long as the user has access to it):
 

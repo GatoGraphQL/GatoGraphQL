@@ -19,7 +19,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 - Its GraphiQL client (for the Custom Endpoint)
 - Its interactive schema client (for the Custom Endpoint)
 
-![Custom Endpoint Properties](../../images/releases/v1.0/custom-endpoint-properties.png)
+![Custom Endpoint Properties](../../images/custom-endpoint-properties.png)
 
 ## Added documentation for PRO modules and their corresponding Schema Configuration functionalities
 
