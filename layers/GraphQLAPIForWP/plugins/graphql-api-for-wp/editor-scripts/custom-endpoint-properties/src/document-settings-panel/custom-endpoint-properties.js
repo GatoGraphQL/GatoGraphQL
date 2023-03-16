@@ -44,8 +44,20 @@ export default function CustomEndpointProperties() {
 			isPostPublished: post.status === 'publish',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
+			/**
+			 * Same attribute name as defined in
+			 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+			 */
 			isCustomEndpointEnabled: customEndpointOptionsBlock.attributes.isEnabled,
+			/**
+			 * Same attribute name as defined in
+			 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+			 */
 			isGraphiQLClientEnabled: graphiQLClientBlock.attributes.isEnabled,
+			/**
+			 * Same attribute name as defined in
+			 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+			 */
 			isVoyagerClientEnabled: voyagerClientBlock.attributes.isEnabled,
 		};
 	}, [] );
