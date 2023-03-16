@@ -54,7 +54,7 @@ export default function CustomEndpointProperties() {
 				<>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ __( 'Custom Endpoint URL' ) }
+							🟢 { __( 'Custom Endpoint URL' ) }
 						</h3>
 						<p>
 							<ExternalLink
@@ -81,7 +81,7 @@ export default function CustomEndpointProperties() {
 			) }
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ __( 'Endpoint Source' ) }
+					🔵 { __( 'Endpoint Source' ) }
 				</h3>
 				<p>
 					<ExternalLink
@@ -114,7 +114,7 @@ export default function CustomEndpointProperties() {
 					<hr/>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ __( 'GraphiQL client' ) }
+							🟢 { __( 'GraphiQL client' ) }
 						</h3>
 						<p>
 							<ExternalLink
@@ -149,7 +149,7 @@ export default function CustomEndpointProperties() {
 					<hr/>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ __( 'Interactive Schema Client' ) }
+							🟢 { __( 'Interactive Schema Client' ) }
 						</h3>
 						<p>
 							<ExternalLink
