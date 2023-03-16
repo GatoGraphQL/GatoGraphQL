@@ -110,76 +110,78 @@ export default function CustomEndpointProperties() {
 					</ExternalLink>
 				</p>
 			</div>
-			{ isGraphiQLClientEnabled && (
-				<>
-					<hr/>
-					<div className="editor-post-url">
-						<h3 className="editor-post-url__link-label">
-							🟢 { __( 'GraphiQL client' ) }
-						</h3>
-						<p>
-							<ExternalLink
-								className="editor-post-url__link"
-								href={ postLink + '?view=graphiql' }
-								target="_blank"
-							>
-								<>
-									<span className="editor-post-url__link-prefix">
-										{ permalinkPrefix }
-									</span>
-									<span className="editor-post-url__link-slug">
-										{ postSlug }
-									</span>
-									<span className="editor-post-url__link-suffix">
-										{ permalinkSuffix }
-									</span>
-									<span className="editor-endoint-custom-post-url__link-view">
-										{ '?view=' }
-									</span>
-									<span className="editor-endoint-custom-post-url__link-view-item">
-										{ 'graphiql' }
-									</span>
-								</>
-							</ExternalLink>
-						</p>
-					</div>
-				</>
-			) }
-			{ isVoyagerClientEnabled && (
-				<>
-					<hr/>
-					<div className="editor-post-url">
-						<h3 className="editor-post-url__link-label">
-							🟢 { __( 'Interactive Schema Client' ) }
-						</h3>
-						<p>
-							<ExternalLink
-								className="editor-post-url__link"
-								href={ postLink + '?view=schema' }
-								target="_blank"
-							>
-								<>
-									<span className="editor-post-url__link-prefix">
-										{ permalinkPrefix }
-									</span>
-									<span className="editor-post-url__link-slug">
-										{ postSlug }
-									</span>
-									<span className="editor-post-url__link-suffix">
-										{ permalinkSuffix }
-									</span>
-									<span className="editor-endoint-custom-post-url__link-view">
-										{ '?view=' }
-									</span>
-									<span className="editor-endoint-custom-post-url__link-view-item">
-										{ 'schema' }
-									</span>
-								</>
-							</ExternalLink>
-						</p>
-					</div>
-				</>
-			) }
+			<hr/>
+			<div className="editor-post-url">
+				<h3 className="editor-post-url__link-label">
+					{ isGraphiQLClientEnabled ? '🟢' : '🔴'} { __( 'GraphiQL client' ) }
+				</h3>
+				<p>
+					{ isGraphiQLClientEnabled && (
+						<ExternalLink
+							className="editor-post-url__link"
+							href={ postLink + '?view=graphiql' }
+							target="_blank"
+						>
+							<>
+								<span className="editor-post-url__link-prefix">
+									{ permalinkPrefix }
+								</span>
+								<span className="editor-post-url__link-slug">
+									{ postSlug }
+								</span>
+								<span className="editor-post-url__link-suffix">
+									{ permalinkSuffix }
+								</span>
+								<span className="editor-endoint-custom-post-url__link-view">
+									{ '?view=' }
+								</span>
+								<span className="editor-endoint-custom-post-url__link-view-item">
+									{ 'graphiql' }
+								</span>
+							</>
+						</ExternalLink>
+					) }
+					{ ! isGraphiQLClientEnabled && (
+						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
+					) }
+				</p>
+			</div>
+			<hr/>
+			<div className="editor-post-url">
+				<h3 className="editor-post-url__link-label">
+					{ isVoyagerClientEnabled ? '🟢' : '🔴'} { __( 'Interactive Schema Client' ) }
+				</h3>
+				<p>
+					{ isVoyagerClientEnabled && (
+						<ExternalLink
+							className="editor-post-url__link"
+							href={ postLink + '?view=schema' }
+							target="_blank"
+						>
+							<>
+								<span className="editor-post-url__link-prefix">
+									{ permalinkPrefix }
+								</span>
+								<span className="editor-post-url__link-slug">
+									{ postSlug }
+								</span>
+								<span className="editor-post-url__link-suffix">
+									{ permalinkSuffix }
+								</span>
+								<span className="editor-endoint-custom-post-url__link-view">
+									{ '?view=' }
+								</span>
+								<span className="editor-endoint-custom-post-url__link-view-item">
+									{ 'schema' }
+								</span>
+							</>
+						</ExternalLink>
+					) }
+					{ ! isVoyagerClientEnabled && (
+						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
+					) }
+				</p>
+			</div>
 		</>
 	);
 }
