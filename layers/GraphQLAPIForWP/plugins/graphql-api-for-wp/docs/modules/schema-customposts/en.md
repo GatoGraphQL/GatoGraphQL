@@ -116,4 +116,4 @@ Through the Settings page, we can also define:
 
 If there is only one type added to `CustomPostUnion` (eg: only `Post`), we can then have the fields that resolve to `CustomPostUnion` be instead resolved to that unique type instead:
 
-![Settings for Custom Posts](../../images/settings-customposts.png "Settings for Custom Post")
+![Settings for Custom Posts](../../images/settings-customposts-single-type.png "Settings for Custom Post")
