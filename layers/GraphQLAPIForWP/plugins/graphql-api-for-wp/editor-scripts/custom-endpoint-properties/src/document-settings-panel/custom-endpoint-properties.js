@@ -5,7 +5,6 @@ import { useSelect } from '@wordpress/data';
 import { safeDecodeURIComponent, cleanForSlug } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
 import { store as editorStore } from '@wordpress/editor';
 
 /**
@@ -16,14 +15,11 @@ export default function CustomEndpointProperties( { onClose } ) {
 	const {
 		isEditable,
 		postSlug,
-		viewPostLabel,
 		postLink,
 		permalinkPrefix,
 		permalinkSuffix,
 	} = useSelect( ( select ) => {
 		const post = select( editorStore ).getCurrentPost();
-		const postTypeSlug = select( editorStore ).getCurrentPostType();
-		const postType = select( coreStore ).getPostType( postTypeSlug );
 		const permalinkParts = select( editorStore ).getPermalinkParts();
 		const hasPublishAction = post?._links?.[ 'wp:action-publish' ] ?? false;
 
@@ -33,7 +29,6 @@ export default function CustomEndpointProperties( { onClose } ) {
 			postSlug: safeDecodeURIComponent(
 				select( editorStore ).getEditedPostSlug()
 			),
-			viewPostLabel: postType?.labels.view_item,
 			postLink: post.link,
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
@@ -41,27 +36,27 @@ export default function CustomEndpointProperties( { onClose } ) {
 	}, [] );
 
 	return (
-		<div className="editor-custom-endpoint-url">
+		<div className="editor-post-url">
 			{ isEditable && (
-				<h3 className="editor-custom-endpoint-url__link-label">
-					{ viewPostLabel ?? __( 'View post' ) }
+				<h3 className="editor-post-url__link-label">
+					{ __( 'GraphQL Custom Endpoint URL' ) }
 				</h3>
 			) }
 			<p>
 				<ExternalLink
-					className="editor-custom-endpoint-url__link"
+					className="editor-post-url__link"
 					href={ postLink }
 					target="_blank"
 				>
 					{ isEditable ? (
 						<>
-							<span className="editor-custom-endpoint-url__link-prefix">
+							<span className="editor-post-url__link-prefix">
 								{ permalinkPrefix }
 							</span>
-							<span className="editor-custom-endpoint-url__link-slug">
+							<span className="editor-post-url__link-slug">
 								{ postSlug }
 							</span>
-							<span className="editor-custom-endpoint-url__link-suffix">
+							<span className="editor-post-url__link-suffix">
 								{ permalinkSuffix }
 							</span>
 						</>
