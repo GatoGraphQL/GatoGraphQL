@@ -41,29 +41,27 @@ export default function CustomEndpointProperties( { onClose } ) {
 	}, [] );
 
 	return (
-		<div className="editor-post-url">
-			<p><strong>{ __('URLs:', 'graphql-api') }</strong></p>
-			<p><strong>{ __('Clients:', 'graphql-api') }</strong></p>
+		<div className="editor-custom-endpoint-url">
 			{ isEditable && (
-				<h3 className="editor-post-url__link-label">
+				<h3 className="editor-custom-endpoint-url__link-label">
 					{ viewPostLabel ?? __( 'View post' ) }
 				</h3>
 			) }
 			<p>
 				<ExternalLink
-					className="editor-post-url__link"
+					className="editor-custom-endpoint-url__link"
 					href={ postLink }
 					target="_blank"
 				>
 					{ isEditable ? (
 						<>
-							<span className="editor-post-url__link-prefix">
+							<span className="editor-custom-endpoint-url__link-prefix">
 								{ permalinkPrefix }
 							</span>
-							<span className="editor-post-url__link-slug">
+							<span className="editor-custom-endpoint-url__link-slug">
 								{ postSlug }
 							</span>
-							<span className="editor-post-url__link-suffix">
+							<span className="editor-custom-endpoint-url__link-suffix">
 								{ permalinkSuffix }
 							</span>
 						</>
