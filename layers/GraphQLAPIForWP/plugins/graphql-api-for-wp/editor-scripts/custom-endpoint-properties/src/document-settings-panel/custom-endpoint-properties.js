@@ -50,35 +50,36 @@ export default function CustomEndpointProperties() {
 
 	return (
 		<>
-			{ isCustomEndpointEnabled && (
-				<>
-					<div className="editor-post-url">
-						<h3 className="editor-post-url__link-label">
-							🟢 { __( 'Custom Endpoint URL' ) }
-						</h3>
-						<p>
-							<ExternalLink
-								className="editor-post-url__link"
-								href={ postLink }
-								target="_blank"
-							>
-								<>
-									<span className="editor-post-url__link-prefix">
-										{ permalinkPrefix }
-									</span>
-									<span className="editor-post-url__link-slug">
-										{ postSlug }
-									</span>
-									<span className="editor-post-url__link-suffix">
-										{ permalinkSuffix }
-									</span>
-								</>
-							</ExternalLink>
-						</p>
-					</div>
-					<hr/>
-				</>
-			) }
+			<div className="editor-post-url">
+				<h3 className="editor-post-url__link-label">
+					{ isCustomEndpointEnabled ? '🟢' : '🔴'} { __( 'Custom Endpoint URL' ) }
+				</h3>
+				<p>
+					{ isCustomEndpointEnabled && (
+						<ExternalLink
+							className="editor-post-url__link"
+							href={ postLink }
+							target="_blank"
+						>
+							<>
+								<span className="editor-post-url__link-prefix">
+									{ permalinkPrefix }
+								</span>
+								<span className="editor-post-url__link-slug">
+									{ postSlug }
+								</span>
+								<span className="editor-post-url__link-suffix">
+									{ permalinkSuffix }
+								</span>
+							</>
+						</ExternalLink>
+					) }
+					{ ! isCustomEndpointEnabled && (
+						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
+					) }
+				</p>
+			</div>
+			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
 					🔵 { __( 'Endpoint Source' ) }
