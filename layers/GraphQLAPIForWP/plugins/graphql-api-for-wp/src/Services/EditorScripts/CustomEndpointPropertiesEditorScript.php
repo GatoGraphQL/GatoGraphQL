@@ -31,7 +31,7 @@ class CustomEndpointPropertiesEditorScript extends AbstractEditorScript
 
     public function getEnablingModule(): ?string
     {
-        return UserInterfaceFunctionalityModuleResolver::CUSTOM_ENDPOINT_URLS_AND_CLIENTS;
+        return UserInterfaceFunctionalityModuleResolver::CUSTOM_ENDPOINT_PROPERTIES;
     }
 
     /**
