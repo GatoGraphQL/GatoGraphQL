@@ -53,7 +53,7 @@ There are 2 behaviors, "Allow access" and "Deny access":
 👉🏽 <strong>Allow access:</strong> only the configured entries can be accessed, and no other can<br/>
 👉🏽 <strong>Deny access:</strong> the configured entries cannot be accessed, all other entries can
 
-![Defining the access behavior](../../images/schema-configuration-settings-behavior.jpg "Defining the access behavior")
+![Defining the access behavior](../../images/schema-configuration-settings-behavior.png "Defining the access behavior")
 
 ## Default options
 
