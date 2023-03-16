@@ -87,9 +87,9 @@ The main input is the GraphiQL client, which comes with the Explorer by default.
 
 ![Writing and executing a persisted query](../../images/graphiql-explorer.gif)
 
-When the query is ready, publish it, and its permalink becomes its endpoint:
+When the query is ready, publish it, and its permalink becomes its endpoint. The link to the endpoint (and to the source) is shown on the "Persisted Query Endpoint Properties" sidebar panel:
 
-![Publishing the persisted query](../../images/publishing-persisted-query.gif)
+![Persisted Query Endpoint Properties](../../images/persisted-query-endpoint-properties.png)
 
 Appending `?view=source` to the permalink, it will show the persisted query and its configuration (as long as the user has access to it):
 
