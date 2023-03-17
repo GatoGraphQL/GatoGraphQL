@@ -29,7 +29,7 @@ class PluginOptionsFormHandler
      *
      * @return array<string,mixed>
      */
-    public function getNormalizedModuleOptionValues(
+    protected function getNormalizedModuleOptionValues(
         string $settingsCategory,
         string $module,
     ): array {
