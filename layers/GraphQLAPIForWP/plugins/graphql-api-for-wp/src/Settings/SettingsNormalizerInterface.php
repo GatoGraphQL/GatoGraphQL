@@ -20,6 +20,19 @@ interface SettingsNormalizerInterface
         string $settingsCategory,
     ): array;
     /**
+     * Normalize the form values:
+     *
+     * - If the input is empty, replace with the default
+     * - Convert from string to int/bool
+     *
+     * @param array<string,string> $values All values submitted, each under its optionName as key
+     * @return array<string,mixed> Normalized values
+     */
+    public function normalizeSettingsByModule(
+        array $values,
+        string $module,
+    ): array;
+    /**
      * Normalize the form values for a specific module
      *
      * @param array<string,string> $values All values submitted, each under its optionName as key
