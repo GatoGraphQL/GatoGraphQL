@@ -52,6 +52,10 @@ class PluginOptionsFormHandler
              * If calling normalizeSettingsByCategory, this other module would
              * also be normalized, attempting to initialize these services,
              * and throwing an error.
+             *
+             * But just normalizing the modules that use `getURLPathSettingValue` and
+             * `getCPTPermalinkBasePathSettingValue` (eg: GraphiQL client path, etc),
+             * these ones currently have no other dependencies, and they do not fail.
              */
             $this->normalizedModuleOptionValuesCache[$settingsCategory][$module] = $settingsNormalizer->normalizeSettingsByModule($value, $module);
         }
