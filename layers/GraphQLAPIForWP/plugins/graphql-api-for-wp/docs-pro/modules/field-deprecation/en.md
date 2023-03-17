@@ -8,8 +8,6 @@ Fields in GraphQL can be marked as deprecated when they are not deemed necessary
 
 This module allows us to mark fields as deprecated via a user interface.
 
-![Field deprecation](../../images/field-deprecation.gif "Field deprecation")
-
 ## Using a Field Deprecation List
 
 After creating the Field Deprecation List (see next section), we can have the Custom Endpoint and Persisted Query use it by editing the corresponding Schema Configuration, and selecting the item from the list under block "Field Deprecation Lists".
