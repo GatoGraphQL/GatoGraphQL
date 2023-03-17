@@ -8,8 +8,6 @@ This feature improves performance, for whenever we need to execute an operation 
 
 Multiple query execution combines the multiple queries into a single query, making sure they are executed in the same requested order.
 
-![Executing queries independently, and then all together as a single operation](../../images/executing-multiple-queries.gif "Executing queries independently, and then all together as a single operation")
-
 This is different from query batching, in which the GraphQL server also executes multiple queries in a single request, but those queries are merely executed one after the other, independently from each other.
 
 When this feature is enabled, two directives are made available in the GraphQL schema:
