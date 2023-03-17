@@ -85,7 +85,7 @@ class ModuleRegistry implements ModuleRegistryInterface
          *   `BehaviorHelpers::areUnsafeDefaultsEnabled()` in
          *   `isEnabledByDefault`
          * - `BehaviorHelpers::areUnsafeDefaultsEnabled()` calls
-         *   `->normalizeSettings` which loads all modules with
+         *   `->normalizeSettingsByCategory` which loads all modules with
          *   `->getAllModules(`, and SINGLE_ENDPOINT is one of them,
          *   but it would call again `areUnsafeDefaultsEnabled`
          *   to decide if it's enabled or not...

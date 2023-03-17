@@ -293,7 +293,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
             $module = $this->getModuleByID($moduleID);
 
             // Normalize the values
-            $normalizedOptionValues = $this->getSettingsNormalizer()->normalizeModuleSettings($module, $optionValues);
+            $normalizedOptionValues = $this->getSettingsNormalizer()->normalizeSettingsForRESTAPIController($module, $optionValues);
 
             // Store in the DB
             $userSettingsManager = UserSettingsManagerFacade::getInstance();

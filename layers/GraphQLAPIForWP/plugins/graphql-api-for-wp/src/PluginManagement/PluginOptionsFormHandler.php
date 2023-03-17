@@ -20,30 +20,60 @@ class PluginOptionsFormHandler
     /**
      * Cache the options after normalizing them
      *
-     * @var array<string,array<string,mixed>|null>
+     * @var array<string,array<string,array<string,mixed>|null>>
      */
-    protected array $normalizedOptionValuesCache = [];
+    protected array $normalizedModuleOptionValuesCache = [];
 
     /**
      * Get the values from the form submitted to options.php, and normalize them
      *
      * @return array<string,mixed>
      */
-    public function getNormalizedOptionValues(string $settingsCategory): array
-    {
-        if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
+    protected function getNormalizedModuleOptionValues(
+        string $settingsCategory,
+        string $module,
+    ): array {
+        if (($this->normalizedModuleOptionValuesCache[$settingsCategory][$module] ?? null) === null) {
             $instanceManager = SystemInstanceManagerFacade::getInstance();
-            $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
-            $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
-            $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
+
             // Obtain the values from the POST and normalize them
-            $value = App::getRequest()->request->all()[$optionsFormName] ?? [];
-            $this->normalizedOptionValuesCache[$settingsCategory] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
+            $value = $this->getSubmittedFormOptionValues($settingsCategory);
+
+            /**
+             * Important: call normalizeSettingsByModule instead of normalizeSettingsByCategory,
+             * because there are settings that depend on other services, which are not initialized
+             * in the system service.
+             *
+             * For instance, module SCHEMA_CONFIGURATION requires service
+             * GraphQLSchemaConfigurationCustomPostType.
+             *
+             * If calling normalizeSettingsByCategory, this other module would
+             * also be normalized, attempting to initialize these services,
+             * and throwing an error.
+             *
+             * But just normalizing the modules that use `getURLPathSettingValue` and
+             * `getCPTPermalinkBasePathSettingValue` (eg: GraphiQL client path, etc),
+             * these ones currently have no other dependencies, and they do not fail.
+             */
+            $this->normalizedModuleOptionValuesCache[$settingsCategory][$module] = $settingsNormalizer->normalizeSettingsByModule($value, $module);
         }
-        return $this->normalizedOptionValuesCache[$settingsCategory];
+        return $this->normalizedModuleOptionValuesCache[$settingsCategory][$module];
+    }
+
+    /**
+     * Obtain the values from the POST
+     *
+     * @return array<string,mixed>
+     */
+    protected function getSubmittedFormOptionValues(
+        string $settingsCategory,
+    ): array {
+        $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+        $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
+        $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+        return App::getRequest()->request->all()[$optionsFormName] ?? [];
     }
 
     /**
@@ -56,8 +86,11 @@ class PluginOptionsFormHandler
      * since options.php is used everywhere, including WP core and other plugins.
      * Otherwise, it may thrown an exception!
      */
-    public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
-    {
+    public function maybeOverrideValueFromForm(
+        mixed $value,
+        string $module,
+        string $option,
+    ): mixed {
         global $pagenow;
         if ($pagenow !== 'options.php') {
             return $value;
@@ -72,7 +105,10 @@ class PluginOptionsFormHandler
             return $value;
         }
 
-        $value = $this->getNormalizedOptionValues($settingsCategory);
+        $value = $this->getNormalizedModuleOptionValues(
+            $settingsCategory,
+            $module,
+        );
         // Return the specific value to this module/option
         $optionName = $moduleResolver->getSettingOptionName($module, $option);
         return $value[$optionName];

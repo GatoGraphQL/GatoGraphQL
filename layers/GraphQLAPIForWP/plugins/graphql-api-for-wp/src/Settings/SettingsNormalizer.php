@@ -33,12 +33,46 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
      */
-    public function normalizeSettings(
+    public function normalizeSettingsByCategory(
         array $values,
         string $settingsCategory,
     ): array {
-        $moduleRegistry = $this->getModuleRegistry();
         $settingsItems = $this->getAllSettingsItems($settingsCategory);
+        return $this->normalizeSettings($values, $settingsItems);
+    }
+
+    /**
+     * Normalize the form values:
+     *
+     * - If the input is empty, replace with the default
+     * - Convert from string to int/bool
+     *
+     * @param array<string,string> $values All values submitted, each under its optionName as key
+     * @return array<string,mixed> Normalized values
+     */
+    public function normalizeSettingsByModule(
+        array $values,
+        string $module,
+    ): array {
+        $settingsItems = [$this->getSettingsItem($module)];
+        return $this->normalizeSettings($values, $settingsItems);
+    }
+
+    /**
+     * Normalize the form values:
+     *
+     * - If the input is empty, replace with the default
+     * - Convert from string to int/bool
+     *
+     * @param array<string,string> $values All values submitted, each under its optionName as key
+     * @param array<array<string, mixed>> $settingsItems Each item is an array of prop => value
+     * @return array<string,mixed> Normalized values
+     */
+    protected function normalizeSettings(
+        array $values,
+        array $settingsItems,
+    ): array {
+        $moduleRegistry = $this->getModuleRegistry();
         foreach ($settingsItems as $item) {
             $module = $item['module'];
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
@@ -104,15 +138,17 @@ class SettingsNormalizer implements SettingsNormalizerInterface
     }
 
     /**
-     * Normalize the form values:
+     * Normalize the form values for a specific module.
      *
-     * - If the input is empty, replace with the default
-     * - Convert from string to int/bool
+     * This method sets the previous values properly when
+     * called from the REST API (eg: when executing Integration Tests)
+     * as the previousValue for some Settings option could be non-existent,
+     * and it must be overriden/removed.
      *
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
      */
-    public function normalizeModuleSettings(string $module, array $values): array
+    public function normalizeSettingsForRESTAPIController(string $module, array $values): array
     {
         $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
 
@@ -123,7 +159,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
             $normalizedOptionValues[$settingsOptionName] = $value;
         }
         // Normalize it
-        $normalizedOptionValues = $this->normalizeSettings(
+        $normalizedOptionValues = $this->normalizeSettingsByCategory(
             $normalizedOptionValues,
             $moduleResolver->getSettingsCategory($module)
         );
@@ -148,15 +184,26 @@ class SettingsNormalizer implements SettingsNormalizerInterface
         $settingsItems = [];
         $modules = $moduleRegistry->getAllModules(true, true, false, true, $settingsCategory);
         foreach ($modules as $module) {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $settingsItems[] = [
-                'module' => $module,
-                'id' => $moduleResolver->getID($module),
-                'name' => $moduleResolver->getName($module),
-                'settings' => $moduleResolver->getSettings($module),
-                'settings-category' => $moduleResolver->getSettingsCategory($module),
-            ];
+            $settingsItems[] = $this->getSettingsItem($module);
         }
         return $settingsItems;
+    }
+
+    /**
+     * Return all the modules with settings
+     *
+     * @return array<string,mixed> Array of prop => value
+     */
+    protected function getSettingsItem(string $module): array
+    {
+        $moduleRegistry = $this->getModuleRegistry();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        return [
+            'module' => $module,
+            'id' => $moduleResolver->getID($module),
+            'name' => $moduleResolver->getName($module),
+            'settings' => $moduleResolver->getSettings($module),
+            'settings-category' => $moduleResolver->getSettingsCategory($module),
+        ];
     }
 }
