@@ -154,13 +154,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $settingsCategory = $moduleResolver->getSettingsCategory($module);
         $optionName = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
 
-        $itemValues = [];
-        foreach ($optionValues as $option => $value) {
-            $item = $moduleResolver->getSettingOptionName($module, $option);
-            $itemValues[$item] = $value;
-        }
-
-        $this->setOptionItems($optionName, $itemValues);
+        $this->setOptionItems($optionName, $optionValues);
     }
 
     public function hasSetModuleEnabled(string $moduleID): bool
