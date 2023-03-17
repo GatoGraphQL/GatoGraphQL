@@ -40,7 +40,7 @@ class PluginOptionsFormHandler
             
             // Obtain the values from the POST and normalize them
             $value = $this->getSubmittedFormOptionValues($settingsCategory);
-            $this->normalizedModuleOptionValuesCache[$settingsCategory][$module] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
+            $this->normalizedModuleOptionValuesCache[$settingsCategory][$module] = $settingsNormalizer->normalizeModuleSettings($module, $value);
         }
         return $this->normalizedModuleOptionValuesCache[$settingsCategory][$module];
     }
