@@ -226,7 +226,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         array $values,
         string $settingsCategory,
     ): array {
-        return $this->getSettingsNormalizer()->normalizeSettings($values, $settingsCategory);
+        return $this->getSettingsNormalizer()->normalizeSettingsByCategory($values, $settingsCategory);
     }
 
     protected function flushContainer(): void

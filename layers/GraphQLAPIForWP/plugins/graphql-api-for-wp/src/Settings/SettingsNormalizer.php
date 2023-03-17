@@ -33,7 +33,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
      */
-    public function normalizeSettings(
+    public function normalizeSettingsByCategory(
         array $values,
         string $settingsCategory,
     ): array {
@@ -123,7 +123,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
             $normalizedOptionValues[$settingsOptionName] = $value;
         }
         // Normalize it
-        $normalizedOptionValues = $this->normalizeSettings(
+        $normalizedOptionValues = $this->normalizeSettingsByCategory(
             $normalizedOptionValues,
             $moduleResolver->getSettingsCategory($module)
         );

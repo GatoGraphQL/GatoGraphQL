@@ -15,7 +15,7 @@ interface SettingsNormalizerInterface
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
      */
-    public function normalizeSettings(
+    public function normalizeSettingsByCategory(
         array $values,
         string $settingsCategory,
     ): array;
