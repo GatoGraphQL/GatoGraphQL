@@ -37,9 +37,22 @@ class PluginOptionsFormHandler
             $instanceManager = SystemInstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
-            
+
             // Obtain the values from the POST and normalize them
             $value = $this->getSubmittedFormOptionValues($settingsCategory);
+
+            /**
+             * Important: call normalizeSettingsByModule instead of normalizeSettingsByCategory,
+             * because there are settings that depend on other services, which are not initialized
+             * in the system service.
+             *
+             * For instance, module SCHEMA_CONFIGURATION requires service
+             * GraphQLSchemaConfigurationCustomPostType.
+             *
+             * If calling normalizeSettingsByCategory, this other module would
+             * also be normalized, attempting to initialize these services,
+             * and throwing an error.
+             */
             $this->normalizedModuleOptionValuesCache[$settingsCategory][$module] = $settingsNormalizer->normalizeSettingsByModule($value, $module);
         }
         return $this->normalizedModuleOptionValuesCache[$settingsCategory][$module];
