@@ -33,7 +33,12 @@ interface SettingsNormalizerInterface
         string $module,
     ): array;
     /**
-     * Normalize the form values for a specific module
+     * Normalize the form values for a specific module.
+     *
+     * This method sets the previous values properly when
+     * called from the REST API (eg: when executing Integration Tests)
+     * as the previousValue for some Settings option could be non-existent,
+     * and it must be overriden/removed.
      *
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values

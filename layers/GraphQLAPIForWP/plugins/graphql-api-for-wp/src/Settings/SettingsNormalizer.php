@@ -138,10 +138,12 @@ class SettingsNormalizer implements SettingsNormalizerInterface
     }
 
     /**
-     * Normalize the form values:
+     * Normalize the form values for a specific module.
      *
-     * - If the input is empty, replace with the default
-     * - Convert from string to int/bool
+     * This method sets the previous values properly when
+     * called from the REST API (eg: when executing Integration Tests)
+     * as the previousValue for some Settings option could be non-existent,
+     * and it must be overriden/removed.
      *
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
