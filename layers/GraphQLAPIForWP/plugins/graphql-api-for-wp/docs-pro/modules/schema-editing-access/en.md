@@ -24,9 +24,9 @@ What permissions are given to non-admin users follows the same <a href="https://
 | Contributor | Can write and manage their own posts but cannot publish them |
 | Subscriber | Can only read posts |
 
-For instance, a contributor can create, but not publish, custom endpoints:
+For instance, a contributor can create, but not publish, a persisted query:
 
-![Custom endpoint by contributor](../../images/new-custom-endpoint-by-contributor.png "Custom endpoint by contributor")
+![Persisted query by contributor](../../images/new-persisted-query-by-contributor.png "Persisted query by contributor")
 
 ## How to use
 
