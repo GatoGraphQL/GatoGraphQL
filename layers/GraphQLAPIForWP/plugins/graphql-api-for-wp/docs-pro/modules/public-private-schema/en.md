@@ -10,8 +10,6 @@ When access to some a field or directive is denied through Access Control, there
 
 **Private mode**: the schema is customized to every user, containing only the fields available to him or her, and so when attempting to access a forbidden field, the error message says that the field doesn't exist. This behavior exposes the metadata from the schema only to those users who can access it.
 
-![Public/Private schema](../../images/public-private-schema.gif "Public/Private schema")
-
 ## How to use
 
 The mode to use can be configured as follows, in order of priority:

@@ -13,8 +13,6 @@ If module `Public/Private Schema` is enabled, when access to some field or direc
 
 If this module is not enabled, the default behavior ir `Public`.
 
-![Public/Private schema](../../images/public-private-schema.gif "Public/Private schema")
-
 ## Access Control rules
 
 The GraphQL API PRO plugin makes available the following access control rules:
