@@ -138,6 +138,40 @@ class SettingsNormalizer implements SettingsNormalizerInterface
     }
 
     /**
+     * Normalize the form values:
+     *
+     * - If the input is empty, replace with the default
+     * - Convert from string to int/bool
+     *
+     * @param array<string,string> $values All values submitted, each under its optionName as key
+     * @return array<string,mixed> Normalized values
+     */
+    public function normalizeModuleSettings(string $module, array $values): array
+    {
+        $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+
+        // Obtain the settingsOptionName for each option
+        $normalizedOptionValues = [];
+        foreach ($values as $option => $value) {
+            $settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
+            $normalizedOptionValues[$settingsOptionName] = $value;
+        }
+        // Normalize it
+        $normalizedOptionValues = $this->normalizeSettingsByCategory(
+            $normalizedOptionValues,
+            $moduleResolver->getSettingsCategory($module)
+        );
+
+        // Transform back
+        foreach ($values as $option => $value) {
+            $settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
+            $values[$option] = $normalizedOptionValues[$settingsOptionName];
+        }
+
+        return $values;
+    }
+
+    /**
      * Return all the modules with settings
      *
      * @return array<array<string,mixed>> Each item is an array of prop => value

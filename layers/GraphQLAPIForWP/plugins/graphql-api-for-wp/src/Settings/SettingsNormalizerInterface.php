@@ -33,6 +33,13 @@ interface SettingsNormalizerInterface
         string $module,
     ): array;
     /**
+     * Normalize the form values for a specific module
+     *
+     * @param array<string,string> $values All values submitted, each under its optionName as key
+     * @return array<string,mixed> Normalized values
+     */
+    public function normalizeModuleSettings(string $module, array $values): array;
+    /**
      * Return all the modules with settings
      *
      * @return array<array<string,mixed>> Each item is an array of prop => value

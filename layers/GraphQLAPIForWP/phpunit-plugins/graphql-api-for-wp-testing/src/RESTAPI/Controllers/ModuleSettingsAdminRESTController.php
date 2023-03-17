@@ -291,24 +291,9 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
             }
             /** @var string */
             $module = $this->getModuleByID($moduleID);
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-
-            /**
-             * The provided values only have the input as key.
-             * Convert it to the actual settingsOptionName
-             */
-            $settingsOptionValues = [];
-            foreach ($optionValues as $input => $value) {
-                $optionName = $moduleResolver->getSettingOptionName($module, $input);
-                $settingsOptionValues[$optionName] = $value;
-            }
 
             // Normalize the values
-            $normalizedOptionValues = $this->getSettingsNormalizer()->normalizeSettingsByModule(
-                $settingsOptionValues,
-                $module,
-            );
+            $normalizedOptionValues = $this->getSettingsNormalizer()->normalizeModuleSettings($module, $optionValues);
 
             // Store in the DB
             $userSettingsManager = UserSettingsManagerFacade::getInstance();
