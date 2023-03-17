@@ -20,18 +20,20 @@ class PluginOptionsFormHandler
     /**
      * Cache the options after normalizing them
      *
-     * @var array<string,array<string,mixed>|null>
+     * @var array<string,array<string,array<string,mixed>|null>>
      */
-    protected array $normalizedOptionValuesCache = [];
+    protected array $normalizedModuleOptionValuesCache = [];
 
     /**
      * Get the values from the form submitted to options.php, and normalize them
      *
      * @return array<string,mixed>
      */
-    public function getNormalizedOptionValues(string $settingsCategory): array
-    {
-        if (($this->normalizedOptionValuesCache[$settingsCategory] ?? null) === null) {
+    public function getNormalizedModuleOptionValues(
+        string $settingsCategory,
+        string $module,
+    ): array {
+        if (($this->normalizedModuleOptionValuesCache[$settingsCategory][$module] ?? null) === null) {
             $instanceManager = SystemInstanceManagerFacade::getInstance();
             $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
             $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
@@ -41,9 +43,9 @@ class PluginOptionsFormHandler
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
             // Obtain the values from the POST and normalize them
             $value = App::getRequest()->request->all()[$optionsFormName] ?? [];
-            $this->normalizedOptionValuesCache[$settingsCategory] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
+            $this->normalizedModuleOptionValuesCache[$settingsCategory][$module] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
-        return $this->normalizedOptionValuesCache[$settingsCategory];
+        return $this->normalizedModuleOptionValuesCache[$settingsCategory][$module];
     }
 
     /**
@@ -56,8 +58,11 @@ class PluginOptionsFormHandler
      * since options.php is used everywhere, including WP core and other plugins.
      * Otherwise, it may thrown an exception!
      */
-    public function maybeOverrideValueFromForm(mixed $value, string $module, string $option): mixed
-    {
+    public function maybeOverrideValueFromForm(
+        mixed $value,
+        string $module,
+        string $option,
+    ): mixed {
         global $pagenow;
         if ($pagenow !== 'options.php') {
             return $value;
@@ -72,7 +77,10 @@ class PluginOptionsFormHandler
             return $value;
         }
 
-        $value = $this->getNormalizedOptionValues($settingsCategory);
+        $value = $this->getNormalizedModuleOptionValues(
+            $settingsCategory,
+            $module,
+        );
         // Return the specific value to this module/option
         $optionName = $moduleResolver->getSettingOptionName($module, $option);
         return $value[$optionName];
