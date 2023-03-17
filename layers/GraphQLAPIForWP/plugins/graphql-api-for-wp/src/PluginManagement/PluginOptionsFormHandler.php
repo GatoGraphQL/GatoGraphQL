@@ -35,17 +35,28 @@ class PluginOptionsFormHandler
     ): array {
         if (($this->normalizedModuleOptionValuesCache[$settingsCategory][$module] ?? null) === null) {
             $instanceManager = SystemInstanceManagerFacade::getInstance();
-            $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
-            $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
-            $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
+            
             // Obtain the values from the POST and normalize them
-            $value = App::getRequest()->request->all()[$optionsFormName] ?? [];
+            $value = $this->getSubmittedFormOptionValues($settingsCategory);
             $this->normalizedModuleOptionValuesCache[$settingsCategory][$module] = $settingsNormalizer->normalizeSettings($value, $settingsCategory);
         }
         return $this->normalizedModuleOptionValuesCache[$settingsCategory][$module];
+    }
+
+    /**
+     * Obtain the values from the POST
+     *
+     * @return array<string,mixed>
+     */
+    protected function getSubmittedFormOptionValues(
+        string $settingsCategory,
+    ): array {
+        $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+        $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
+        $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+        return App::getRequest()->request->all()[$optionsFormName] ?? [];
     }
 
     /**
