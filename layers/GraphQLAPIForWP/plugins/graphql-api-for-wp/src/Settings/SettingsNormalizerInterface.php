@@ -38,7 +38,7 @@ interface SettingsNormalizerInterface
      * @param array<string,string> $values All values submitted, each under its optionName as key
      * @return array<string,mixed> Normalized values
      */
-    public function normalizeModuleSettings(string $module, array $values): array;
+    public function normalizeSettingsForRESTAPIController(string $module, array $values): array;
     /**
      * Return all the modules with settings
      *
