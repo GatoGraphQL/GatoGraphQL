@@ -75,6 +75,6 @@ For instance, the following GraphQL query:
 
 `https://mysite.com/graphql/?query={ posts { id title url author { id name url } } }`
 
-## Resources
+<!-- ## Resources
 
-Video showing how the response's `Cache-Control` header contains different `max-age` values depending on the Cache Control configuration for the fields in the query: <a href="https://vimeo.com/413503188" target="_blank">vimeo.com/413503188</a>.
+Video showing how the response's `Cache-Control` header contains different `max-age` values depending on the Cache Control configuration for the fields in the query: <a href="https://vimeo.com/413503188" target="_blank">vimeo.com/413503188</a>. -->

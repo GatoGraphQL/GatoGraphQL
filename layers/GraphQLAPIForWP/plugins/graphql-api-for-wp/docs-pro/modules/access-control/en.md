@@ -62,6 +62,6 @@ Validation for fields from an interface is carried on all types implementing the
 
 ![Selecting a field from an interface](../../images/selecting-field-from-interface.png "Selecting a field from an interface")
 
-## Resources
+<!-- ## Resources
 
-Video showing how access to different fields is granted or not, according to the configuration and the user executing the query: <a href="https://vimeo.com/413503383" target="_blank">vimeo.com/413503383</a>.
+Video showing how access to different fields is granted or not, according to the configuration and the user executing the query: <a href="https://vimeo.com/413503383" target="_blank">vimeo.com/413503383</a>. -->

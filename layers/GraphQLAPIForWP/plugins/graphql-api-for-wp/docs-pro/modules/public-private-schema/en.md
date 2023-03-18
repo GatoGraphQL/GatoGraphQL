@@ -30,6 +30,6 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 ![Defaul Public/Private schema mode](../../images/default-public-private-schema-mode.png "Defaul Public/Private schema mode")
 
-## Resources
+<!-- ## Resources
 
-Video demonstrating usage of the public/private schema modes: <a href="https://vimeo.com/413503284" target="_blank">vimeo.com/413503284</a>.
+Video demonstrating usage of the public/private schema modes: <a href="https://vimeo.com/413503284" target="_blank">vimeo.com/413503284</a>. -->

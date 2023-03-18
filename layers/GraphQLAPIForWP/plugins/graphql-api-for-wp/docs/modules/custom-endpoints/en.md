@@ -118,6 +118,6 @@ These are the inputs in the Document settings:
 | --- | --- |
 | **Base path** | The base path for the custom endpoint URL. It defaults to `graphql` | -->
 
-## Resources
+<!-- ## Resources
 
-Video showing how to create a custom endpoint: <a href="https://vimeo.com/413503485" target="_blank">vimeo.com/413503485</a>.
+Video showing how to create a custom endpoint: <a href="https://vimeo.com/413503485" target="_blank">vimeo.com/413503485</a>. -->

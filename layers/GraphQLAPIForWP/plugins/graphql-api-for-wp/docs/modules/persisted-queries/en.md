@@ -177,6 +177,6 @@ These are the inputs in the Document settings:
 | --- | --- |
 | **Base path** | The base path for the custom endpoint URL. It defaults to `graphql-query` | -->
 
-## Resources
+<!-- ## Resources
 
-Video showing how to create a persisted query: <a href="https://vimeo.com/443790273" target="_blank">vimeo.com/443790273</a>.
+Video showing how to create a persisted query: <a href="https://vimeo.com/443790273" target="_blank">vimeo.com/443790273</a>. -->

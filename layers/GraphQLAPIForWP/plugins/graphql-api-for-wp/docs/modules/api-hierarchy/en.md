@@ -55,6 +55,6 @@ Alternatively, we can declare the configuration at the parent level, and then al
 - `/graphql-query/website/posts/`
 - `/graphql-query/website/users/`
 
-## Resources
+<!-- ## Resources
 
-Video showing how to create an API hierarchy, and override the variables defined in the parent query: <a href="https://vimeo.com/413503010" target="_blank">vimeo.com/413503010</a>.
+Video showing how to create an API hierarchy, and override the variables defined in the parent query: <a href="https://vimeo.com/413503010" target="_blank">vimeo.com/413503010</a>. -->

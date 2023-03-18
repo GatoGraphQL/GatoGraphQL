@@ -31,6 +31,6 @@ Every Field Deprecation List contains one or many entries, each of them with the
 
 ![Field Deprecation entry](../../images/field-deprecation-entry.png "Field Deprecation entry")
 
-## Resources
+<!-- ## Resources
 
-Video showing how to deprecate fields: <a href="https://vimeo.com/413503110" target="_blank">vimeo.com/413503110</a>.
+Video showing how to deprecate fields: <a href="https://vimeo.com/413503110" target="_blank">vimeo.com/413503110</a>. -->
