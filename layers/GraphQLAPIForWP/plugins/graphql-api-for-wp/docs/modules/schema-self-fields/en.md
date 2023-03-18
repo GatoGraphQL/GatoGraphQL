@@ -113,4 +113,4 @@ Exposing "self" fields in the schema can be configured as follows, in order of p
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
-![Expose self fields in the schema, in the Settings](../../images/settings-self-fields.png "Expose self fields in the schema, in the Settings")
+![Expose self fields in the schema, in the Settings](../../images/settings-self-fields-default.png "Expose self fields in the schema, in the Settings")
