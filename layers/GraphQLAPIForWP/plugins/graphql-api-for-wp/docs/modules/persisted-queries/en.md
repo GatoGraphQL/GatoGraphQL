@@ -119,6 +119,14 @@ When executing this persisted query, passing `?limit=5` will execute the query r
 
 ![Overriding value for variables in persisted query](../../images/executing-persisted-query-variables.png)
 
+## Executing the persisted query
+
+Once the persisted query is published, we can execute it via its permalink.
+
+The persisted query can be executed directly in the browser, since it is accessed via `GET`, and we will obtain the requested data, in JSON format:
+
+![Executing a persisted in the browser](../../images/persisted-query-execution.png)
+
 ## Editor Inputs
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
