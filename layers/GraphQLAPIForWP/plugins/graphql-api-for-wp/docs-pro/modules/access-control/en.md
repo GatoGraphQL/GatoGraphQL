@@ -60,7 +60,7 @@ Every entry is created by selecting the operations, fields and directives, and c
 
 Validation for fields from an interface is carried on all types implementing the interface.
 
-![Creating an Access Control List](../../images/selecting-field-from-interface.png "Selecting a field from an interface")
+![Selecting a field from an interface](../../images/selecting-field-from-interface.png "Selecting a field from an interface")
 
 ## Resources
 
