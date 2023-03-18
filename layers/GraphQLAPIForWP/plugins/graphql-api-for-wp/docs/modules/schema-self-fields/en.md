@@ -100,3 +100,17 @@ This query recreates the shape of the WP REST API:
   }
 }
 ```
+
+## How to use
+
+Exposing "self" fields in the schema can be configured as follows, in order of priority:
+
+✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
+
+![Adding self fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-self-fields-to-schema.png "Adding self fields to the schema, set in the Schema configuration")
+
+✅ Default mode, defined in the Settings
+
+If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
+
+![Expose self fields in the schema, in the Settings](../../images/settings-self-fields.png "Expose self fields in the schema, in the Settings")
