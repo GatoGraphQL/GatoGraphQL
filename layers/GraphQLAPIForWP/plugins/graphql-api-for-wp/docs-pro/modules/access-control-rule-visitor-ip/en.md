@@ -29,6 +29,6 @@ For instance:
 - Cloudflare might use `'HTTP_CF_CONNECTING_IP'`
 - AWS might use `'HTTP_X_FORWARDED_FOR'`
 
-The property name to use can be configured in the "General" tab on the Settings page:
+The property name to use can be configured in the "Plugin Settings > Server IP Configuration" tab on the Settings page:
 
 ![Configuring the $_SERVER property name to retrieve the client IP](../../images/settings-general-client-ip-address-server-property-name.png "Configuring the $_SERVER property name to retrieve the client IP")
