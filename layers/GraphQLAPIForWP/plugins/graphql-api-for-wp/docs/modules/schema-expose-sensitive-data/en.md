@@ -86,7 +86,7 @@ Exposing “sensitive” data elements in the schema can be configured as follow
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
-![Expose Sensitive Data in the Schema, in the Settings](../../images/schema-expose-sensitive-data.png "Expose Sensitive Data in the Schema, in the Settings")
+![Expose Sensitive Data in the Schema, in the Settings](../../images/settings-schema-expose-sensitive-data-default.png "Expose Sensitive Data in the Schema, in the Settings")
 
 ## When to use
 
