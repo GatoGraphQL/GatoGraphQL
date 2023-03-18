@@ -38,7 +38,7 @@ Once published, the schema configuration becomes available when editing a Custom
 
 If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema configuration selected in the Settings will be used:
 
-![Persisted query source](../../images/settings-default-schema-configuration.png)
+![Default Schema Configuration in the Settings](../../images/settings-default-schema-configuration.png)
 
 <!-- ## Editor Inputs
 
