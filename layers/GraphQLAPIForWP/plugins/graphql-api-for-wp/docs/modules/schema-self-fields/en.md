@@ -72,11 +72,9 @@ The `self` field allows to append extra levels to the query without leaving the 
 }
 ```
 
-## How to use
+## Examples
 
-Use `self` to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately.
-
-For instance, this query recreates the shape of another GraphQL server:
+This query uses `self` to artificially append the extra levels needed for the response, and field aliases to rename those levels appropriately, as to recreate the shape of another GraphQL server:
 
 ```graphql
 {
