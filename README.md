@@ -94,12 +94,6 @@ $ composer install
 10. [How scoping works](docs/how-scoping-works.md)
 11. [Installing the GraphQL API for WordPress plugin](docs/installing-graphql-api-for-wordpress.md)
 
-<!-- ## Resources
-
-- [GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
-- [Comparing the GraphQL API for WordPress vs WPGraphQL](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
-- [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/) -->
-
 ## Standards
 
 [PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
