@@ -99,6 +99,14 @@ By default, the persisted query's endpoint has path `/graphql-query/`, and this 
 
 ![Persisted query Settings](../../images/settings-persisted-queries.png)
 
+### Schema configuration
+
+Defining what elements the schema contains, and what access will users have to it, is defined in the schema configuration.
+
+So we must create a create a schema configuration, and then select it from the dropdown:
+
+![Selecting the schema configuration](../../images/select-schema-configuration.png)
+
 ## Editor Inputs
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):

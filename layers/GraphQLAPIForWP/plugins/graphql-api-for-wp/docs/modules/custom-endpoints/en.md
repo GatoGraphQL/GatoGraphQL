@@ -56,6 +56,14 @@ By default, the custom endpoint has path `/graphql/`, and this value is configur
 
 ![Custom endpoint Settings](../../images/settings-custom-endpoints.png)
 
+### Schema configuration
+
+Defining what elements the schema contains, and what access will users have to it, is defined in the schema configuration.
+
+So we must create a create a schema configuration, and then select it from the dropdown:
+
+![Selecting the schema configuration](../../images/select-schema-configuration.png)
+
 ## Editor Inputs
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
