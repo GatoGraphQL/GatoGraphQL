@@ -88,6 +88,12 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 ![Expose Sensitive Data in the Schema, in the Settings](../../images/settings-schema-expose-sensitive-data-default.png "Expose Sensitive Data in the Schema, in the Settings")
 
+### Adding “sensitive” data elements to the Admin clients
+
+In the Settings, we can select to add the “sensitive” data elements to the wp-admin's GraphiQL and Interactive Schema clients:
+
+![Expose Sensitive Data in the admin clients, in the Settings](../../images/settings-schema-expose-sensitive-data-for-admin.png "Expose Sensitive Data in the admin clients, in the Settings")
+
 ## When to use
 
 Use whenever exposing private information is allowed, such as when building a static website, fetching data from a local WordPress instance (i.e. not a public API).

@@ -30,7 +30,13 @@ Namespacing the schema can be configured as follows, in order of priority:
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
-![Namespacing in Settings](../../images/settings-namespacing.png "Namespacing in Settings")
+![Namespacing in Settings](../../images/settings-namespacing-default.png "Namespacing in Settings")
+
+### Namespacing the schema in the Admin clients
+
+Namespacing the schema in the wp-admin can be selected on the Settings. It will be applied on the GraphiQL and Interactive Schema clients, on the configuration in Access/Cache Control Lists, and possibly on other extensions.
+
+![Namespacing in Settings for the Admin](../../images/settings-namespacing-for-admin.png "Namespacing in Settings for the Admin")
 
 ## When to use
 

@@ -73,7 +73,7 @@ For instance, these are the fields for type `Root`:
 
 Item "Default Mutation scheme" in the module settings enables to configure if to enable nested mutations or not, and its behavior:
 
-![Settings for nested mutations](../../images/settings-nested-mutations.png)
+![Settings for nested mutations](../../images/settings-nested-mutations-default.png)
 
 It has these options:
 
@@ -106,6 +106,12 @@ With this option, the "duplicated" mutation fields from the root type are kept.
 ### Enable nested mutations, removing the redundant mutation fields from the root
 
 Same option as above, but removing the "duplicated" mutation fields from the root type.
+
+### Using nested mutations in the Admin clients
+
+Enabling nested mutations in the wp-admin can be selected on the Settings. It will be applied on the GraphiQL and Interactive Schema clients.
+
+![Settings for nested mutations](../../images/settings-nested-mutations-for-admin.png)
 
 ## Schema configuration
 

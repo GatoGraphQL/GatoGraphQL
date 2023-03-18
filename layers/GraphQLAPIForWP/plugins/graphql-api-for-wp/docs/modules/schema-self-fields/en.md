@@ -114,3 +114,9 @@ Exposing "self" fields in the schema can be configured as follows, in order of p
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
 ![Expose self fields in the schema, in the Settings](../../images/settings-self-fields-default.png "Expose self fields in the schema, in the Settings")
+
+### Adding `self` fields to the Admin clients
+
+In the Settings, we can select to add the `self` fields to the wp-admin's GraphiQL and Interactive Schema clients:
+
+![Expose self fields in the Admin clients](../../images/settings-self-fields-for-admin.png "Expose self fields in the Admin clients")
