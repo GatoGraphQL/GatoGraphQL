@@ -30,7 +30,7 @@ For instance, a contributor can create, but not publish, a persisted query:
 
 ## How to use
 
-Select the appropriate configuration from the dropdown in the Settings:
+Select the appropriate configuration from the dropdown in the "Plugin Settings > Schema Editing Access" tab on the Settings page:
 
 - `"Admin user(s) only"`
 - `"Use same access workflow as for editing posts"`
