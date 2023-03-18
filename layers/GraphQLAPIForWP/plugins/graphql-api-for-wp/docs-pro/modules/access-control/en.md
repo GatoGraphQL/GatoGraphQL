@@ -40,6 +40,7 @@ Then click on "Add New Access Control List" to go to the editor:
 
 Every Access Control List contains one or many entries, each of them with the following elements:
 
+- The operations to grant or deny access to
 - The fields to grant or deny access to
 - The directives to grant or deny access to
 - The list of rules to validate
