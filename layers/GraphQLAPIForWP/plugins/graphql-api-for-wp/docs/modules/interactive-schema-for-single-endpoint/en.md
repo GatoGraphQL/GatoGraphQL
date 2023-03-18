@@ -4,6 +4,6 @@ A public Interactive schema client can be made available to query the single Gra
 
 ![Single endpoint's Interactive schema client](../../images/single-endpoint-interactive-schema.png "Single endpoint's Interactive schema client")
 
-The client can be opened from the Side menu, on link "Interactive Schema (public client)":
+The client can be opened from the Side menu, on link "🟢 Interactive Schema (public client for the single endpoint":
 
 ![Single endpoint's link to the Interactive schema client](../../images/single-endpoint-interactive-schema-link.png "Single endpoint's link to the Interactive schema client")
