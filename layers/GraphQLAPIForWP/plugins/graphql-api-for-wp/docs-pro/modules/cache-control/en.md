@@ -44,6 +44,10 @@ Caching for fields from an interface is carried on all types implementing the in
 
 ![Selecting a field from an interface](../../images/selecting-field-from-interface.png "Selecting a field from an interface")
 
+Fields which are not given any specific `max-age` will use the default value, defined in the Settings page under tab "Cache Control":
+
+![Default max-age value in the Settings page](../../images/settings-cache-control.png "Default max-age value in the Settings page")
+
 ## Executing the endpoint via `GET`
 
 Persisted queries are already suitable to be executed via `GET`, as they store the GraphQL query in the server (i.e. it must not be provided in the body of the request).
