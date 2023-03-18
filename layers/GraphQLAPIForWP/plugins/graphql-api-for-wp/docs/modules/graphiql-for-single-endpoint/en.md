@@ -1,5 +1,5 @@
 # GraphiQL for Single Endpoint
- 
+
 A public GraphiQL client can be made available to query the single GraphQL endpoint, by default available under `/graphiql/` (the path can be configured through the Settings):
 
 ![Single endpoint's GraphiQL client](../../images/single-endpoint-graphiql.png "Single endpoint's GraphiQL client")
