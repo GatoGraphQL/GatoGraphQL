@@ -107,6 +107,18 @@ So we must create a create a schema configuration, and then select it from the d
 
 ![Selecting the schema configuration](../../images/select-schema-configuration.png)
 
+### Making the persisted query dynamic via URL params
+
+If the query makes use of variables, and option "Accept variables as URL params?" is enabled, then the values of the variables can be set via URL param when executing the persisted query.
+
+For instance, in this query, the number of results is controlled via variable `$limit`, with a default value of 3:
+
+![Using variables in persisted query](../../images/new-persisted-query-variables.png)
+
+When executing this persisted query, passing `?limit=5` will execute the query returning 5 results instead:
+
+![Overriding value for variables in persisted query](../../images/executing-persisted-query-variables.png)
+
 ## Editor Inputs
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
