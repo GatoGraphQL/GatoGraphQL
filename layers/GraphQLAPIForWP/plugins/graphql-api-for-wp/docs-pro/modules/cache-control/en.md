@@ -40,6 +40,10 @@ Every Cache Control List contains one or many entries, each of them with the fol
 
 ![Cache Control entry](../../images/cache-control-entry.png "Cache Control entry")
 
+Caching for fields from an interface is carried on all types implementing the interface.
+
+![Selecting a field from an interface](../../images/selecting-field-from-interface.png "Selecting a field from an interface")
+
 ## Executing the endpoint via `GET`
 
 Persisted queries are already suitable to be executed via `GET`, as they store the GraphQL query in the server (i.e. it must not be provided in the body of the request).
