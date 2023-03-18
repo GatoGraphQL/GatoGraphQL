@@ -25,16 +25,20 @@ After creating the CCL (see next section), we can have the endpoint use it by ed
 
 ## Creating a Cache Control List
 
-Click on the "Cache Control Lists" page in the GraphQL API menu, and then click on "Add New Cache Control List".
+Click on the "Cache Control Lists" page in the GraphQL API menu:
 
 ![Cache Control Lists](../../images/cache-control-lists.png "Cache Control Lists")
+
+Then click on "Add New Cache Control List" to go to the editor:
+
+![Creating a Cache Control List](../../images/cache-control-list.png "Creating a Cache Control List")
 
 Every Cache Control List contains one or many entries, each of them with the following elements:
 
 - The fields and directives which, if they appear on the GraphQL query, the selected max-age takes effect
 - The max-age
 
-![Creating a Cache Control List](../../images/cache-control-list.png "Creating a Cache Control List")
+![Cache Control entry](../../images/cache-control-entry.png "Cache Control entry")
 
 ## Executing the endpoint via `GET`
 

@@ -30,9 +30,13 @@ After creating the ACL (see next section), we can have the Custom Endpoint or Pe
 
 ## Creating an Access Control List
 
-Click on the "Access Control Lists" page in the GraphQL API menu, and then click on "Add New Access Control List".
+Click on the "Access Control Lists" page in the GraphQL API menu:
 
 ![Access Control Lists](../../images/access-control-lists.png "Access Control Lists")
+
+Then click on "Add New Access Control List" to go to the editor:
+
+![Creating an Access Control List](../../images/access-control-list.png "Creating an Access Control List")
 
 Every Access Control List contains one or many entries, each of them with the following elements:
 
@@ -40,7 +44,7 @@ Every Access Control List contains one or many entries, each of them with the fo
 - The directives to grant or deny access to
 - The list of rules to validate
 
-![Creating an Access Control List](../../images/access-control-list.png "Creating an Access Control List")
+![Access Control entry](../../images/access-control-entry.png "Access Control entry")
 
 If module `Public/Private Schema` is enabled, and option `Enable granular control?` in the settings is `on`, there is an additional element:
 

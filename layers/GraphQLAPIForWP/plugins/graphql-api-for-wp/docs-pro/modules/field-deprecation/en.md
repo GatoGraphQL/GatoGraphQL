@@ -16,16 +16,20 @@ After creating the Field Deprecation List (see next section), we can have the Cu
 
 ## Creating a Field Deprecation List
 
-Click on the "Field Deprecation Lists" page in the GraphQL API menu, and then click on "Add New Field Deprecation List".
+Click on the "Field Deprecation Lists" page in the GraphQL API menu:
 
 ![Field Deprecation Lists](../../images/field-deprecation-lists.png "Field Deprecation Lists")
+
+Then click on "Add New Field Deprecation List" to go to the editor:
+
+![Creating a Field Deprecation List](../../images/field-deprecation-list.png "Creating a Field Deprecation List")
 
 Every Field Deprecation List contains one or many entries, each of them with the following elements:
 
 - The fields to deprecate
 - The deprecation reason (to be shown in the GraphQL response when the deprecated field is queried)
 
-![Creating a Field Deprecation List](../../images/field-deprecation-list.png "Creating a Field Deprecation List")
+![Field Deprecation entry](../../images/field-deprecation-entry.png "Field Deprecation entry")
 
 ## Resources
 
