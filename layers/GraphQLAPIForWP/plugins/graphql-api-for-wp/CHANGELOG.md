@@ -19,6 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)
 - Avoid error from loading non-existing translation files
+- Updated all documentation images
 
 ### Breaking changes
 

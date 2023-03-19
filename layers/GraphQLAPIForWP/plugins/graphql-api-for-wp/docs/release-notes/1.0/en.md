@@ -68,6 +68,7 @@ It describes when it makes sense to use the GraphQL API and what's the best way 
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)
 - Avoid error from loading non-existing translation files
+- Updated all documentation images
 
 ## Breaking changes
 
