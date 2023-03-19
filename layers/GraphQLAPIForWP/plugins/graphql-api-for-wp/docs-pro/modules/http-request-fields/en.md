@@ -14,6 +14,8 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 
 This module adds global fields to the GraphQL schema to retrieve data from an external source or list of sources.
 
+Due to security reasons, the URLs that can be connected to must be explicitly configured (explained in the section below).
+
 ### `_requestJSONObjectItem`
 
 It retrieves the (REST) response for a single JSON object.
