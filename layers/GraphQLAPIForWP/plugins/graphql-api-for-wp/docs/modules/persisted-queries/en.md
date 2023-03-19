@@ -91,7 +91,7 @@ When the query is ready, publish it, and its permalink becomes its endpoint. The
 
 ![Persisted Query Endpoint Properties](../../images/persisted-query-endpoint-properties.png)
 
-Appending `?view=source` to the permalink, it will show the persisted query and its configuration (as long as the user has access to it):
+Appending `?view=source` to the permalink, it will show the persisted query and its configuration (as long as the user is logged-in and the user role has access to it):
 
 ![Persisted query source](../../images/persisted-query-source.png)
 

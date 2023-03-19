@@ -38,7 +38,7 @@ If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema
 
 ![Default Schema Configuration in the Settings](../../images/settings-default-schema-configuration.png)
 
-Opening the schema configuration's permalink in the browser will show its contents (as long as the user has access to it):
+Opening the schema configuration's permalink in the browser will show its contents (as long as the user is logged-in and the user role has access to it):
 
 ![Schema configuration's source](../../images/schema-configuration-source.png)
 

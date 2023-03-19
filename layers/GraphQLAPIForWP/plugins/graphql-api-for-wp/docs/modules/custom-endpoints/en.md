@@ -48,7 +48,7 @@ When the custom endpoint is ready, publish it, and its permalink becomes its end
 
 ![Custom Endpoint Properties](../../images/custom-endpoint-properties.png)
 
-Appending `?view=source` to the permalink, it will show the endpoint's configuration (as long as the user has access to it):
+Appending `?view=source` to the permalink, it will show the endpoint's configuration (as long as the user is logged-in and the user role has access to it):
 
 ![Custom endpoint source](../../images/custom-endpoint-source.png)
 
