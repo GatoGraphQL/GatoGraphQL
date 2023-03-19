@@ -117,6 +117,20 @@ So we must create a create a schema configuration, and then select it from the d
 
 ![Selecting the schema configuration](../../images/select-schema-configuration.png)
 
+### Organizing Persisted Queries by Category
+
+On the sidebar panel "Endpoint categories" we can add categories to help manage the Persisted Query:
+
+![Endpoint categories when editing a Persisted Query](../../images/graphql-persisted-query-editor-with-categories.png)
+
+For instance, we can create categories to manage endpoints by client, application, or any other required piece of information:
+
+![List of endpoint categories](../../images/graphql-endpoint-categories.png)
+
+On the list of Persisted Queries, we can visualize their categories and, clicking on any category link, or using the filter at the top, will only display all entries for that category:
+
+![List of Persisted Queries with their categories](../../images/graphql-persisted-queries-with-categories.png)
+
 ### Making the persisted query dynamic via URL params
 
 If the query makes use of variables, and option "Accept variables as URL params?" is enabled, then the values of the variables can be set via URL param when executing the persisted query.

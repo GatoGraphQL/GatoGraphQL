@@ -64,6 +64,22 @@ So we must create a create a schema configuration, and then select it from the d
 
 ![Selecting the schema configuration](../../images/select-schema-configuration.png)
 
+### Organizing Custom Endpoints by Category
+
+On the sidebar panel "Endpoint categories" we can add categories to help manage the Custom Endpoint:
+
+![Endpoint categories when editing a Custom Endpoint](../../images/graphql-custom-endpoint-editor-with-categories.png)
+
+For instance, we can create categories to manage endpoints by client, application, or any other required piece of information:
+
+![List of endpoint categories](../../images/graphql-endpoint-categories.png)
+
+On the list of Custom Endpoints, we can visualize their categories and, clicking on any category link, or using the filter at the top, will only display all entries for that category:
+
+![List of Custom Endpoints with their categories](../../images/graphql-custom-endpoints-with-categories.png)
+
+![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
+
 ## Editor Inputs
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
