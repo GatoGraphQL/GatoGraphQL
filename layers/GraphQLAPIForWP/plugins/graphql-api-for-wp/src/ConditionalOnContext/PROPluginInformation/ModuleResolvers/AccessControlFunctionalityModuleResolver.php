@@ -120,7 +120,6 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function hasDocumentation(string $module): bool
     {
         switch ($module) {
-            case self::ACCESS_CONTROL_RULE_DISABLE_ACCESS:
             case self::ACCESS_CONTROL_RULE_USER_STATE:
             case self::ACCESS_CONTROL_RULE_USER_ROLES:
             case self::ACCESS_CONTROL_RULE_USER_CAPABILITIES:
