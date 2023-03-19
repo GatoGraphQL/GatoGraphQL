@@ -21,6 +21,7 @@ The GraphQL API PRO plugin makes available the following access control rules:
 - Grant access only if the user is logged-in or out
 - Grant access only if the user has some role
 - Grant access only if the user has some capability
+- Grant access only if the visitor comes from an allowed IP address
 
 ## Using an Access Control List (ACL)
 
