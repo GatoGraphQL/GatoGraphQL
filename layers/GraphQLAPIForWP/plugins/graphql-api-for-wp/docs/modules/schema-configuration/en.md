@@ -42,7 +42,7 @@ Opening the schema configuration's permalink in the browser will show its conten
 
 ![Schema configuration's source](../../images/schema-configuration-source.png)
 
-<!-- ## Editor Inputs
+## Editor Inputs
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
 
@@ -76,6 +76,10 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
     <td><strong>Cache Control Lists</strong></td>
     <td>(If module <code>Cache Control</code> is enabled) Manage the behavior of HTTP caching, by selecting the Cache Control Lists that must be applied to the custom endpoint or persisted query</td>
 </tr>
+<tr>
+    <td><em>Many others</em></td>
+    <td>(Check the corresponding enabled modules...)</td>
+</tr>
 </tbody>
 </table>
 
@@ -83,4 +87,4 @@ These are the inputs in the Document settings:
 
 | Input | Description |
 | --- | --- |
-| **Excerpt** | Provide a description for the schema configuration.<br/>This input is available when module `Excerpt as Description` is enabled | -->
+| **Excerpt** | Provide a description for the schema configuration.<br/>This input is available when module `Excerpt as Description` is enabled |
