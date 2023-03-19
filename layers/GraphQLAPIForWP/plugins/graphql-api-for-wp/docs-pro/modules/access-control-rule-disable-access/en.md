@@ -12,4 +12,6 @@ To remove fields and directives from the GraphQL schema, create an **Access Cont
 
 ![Using the "disable access" rule](../../images/acl-rule-disable-access.png "Using the 'disable access' rule")
 
-Selecting the operation `"mutation"` will also remove access to all mutations in the schema.
+## Removing access to all mutations
+
+This rule can also be used to remove access to all mutations in the schema. For that, select the `"mutation"` operation.
