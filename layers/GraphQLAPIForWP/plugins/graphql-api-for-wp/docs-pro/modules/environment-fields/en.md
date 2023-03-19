@@ -4,7 +4,7 @@ Query the value from an environment variable or PHP constant.
 
 ## Description
 
-This module adds field `_env` to the GraphQL schema, which allows to obtain a value from an environment variable, or from a PHP constant (most commonly defined in `wp-config.php`, but can also be defined elsewhere).
+This module adds global field `_env` to the GraphQL schema, which allows to obtain a value from an environment variable, or from a PHP constant (most commonly defined in `wp-config.php`, but can also be defined elsewhere).
 
 Due to security reasons, the name of the environment variable and constants that can be accessed must be explicitly configured (explained in the section below).
 
