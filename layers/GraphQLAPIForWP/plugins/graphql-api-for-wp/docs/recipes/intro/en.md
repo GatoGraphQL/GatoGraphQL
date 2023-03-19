@@ -10,4 +10,6 @@ The GraphQL API is a **productivity tool for interacting with data in your WordP
 - Search/replace content for site migrations
 - ...and much more
 
-In this section, you can browse documentation explaining when you can use this tool and what's the best way to use it (and also GraphQL in general), and many recipes (involving GraphQL queries) to help you achieve your goals.
+Click on the links in this section to learn about use cases for this tool and several best practices (including for GraphQL in general).
+
+Whenever appropriate, GraphQL queries (and additional PHP code, setups, integrations and others) are included; copy/paste them in your own persisted queries, to help you achieve your goals faster.
