@@ -103,7 +103,7 @@ There are 2 behaviors, "Allow access" and "Deny access":
 
 ## When to use each field
 
-All four fields are similar but different.
+All fields are similar but different.
 
 ### `_requestJSONObjectItem`
 
