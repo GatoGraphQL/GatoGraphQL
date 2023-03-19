@@ -16,7 +16,7 @@ In addition to supporting the single endpoint, the GraphQL API also makes it pos
 
 The custom endpoint is a Custom Post Type, and its permalink is the endpoint. An endpoint with title `"My endpoint"` and slug `my-endpoint` will be accessible under `/graphql/my-endpoint/`.
 
-![Creating a custom endpoint](../../images/custom-endpoint.png "Creating a custom endpoint")
+![Custom endpoint editor](../../images/custom-endpoint.png "Custom endpoint editor")
 
 ## Clients
 
