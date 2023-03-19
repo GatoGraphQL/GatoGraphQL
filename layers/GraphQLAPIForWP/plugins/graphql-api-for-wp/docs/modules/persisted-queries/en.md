@@ -75,6 +75,14 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 
 ![Persisted query editor](../../images/persisted-query.png "Persisted query editor")
 
+## Executing the Persisted Query
+
+Once the persisted query is published, we can execute it via its permalink.
+
+The persisted query can be executed directly in the browser, since it is accessed via `GET`, and we will obtain the requested data, in JSON format:
+
+![Executing a persisted in the browser](../../images/persisted-query-execution.png)
+
 ## Creating a Persisted Query
 
 Clicking on the Persisted Queries link in the menu, it displays the list of all the created persisted queries:
@@ -120,14 +128,6 @@ For instance, in this query, the number of results is controlled via variable `$
 When executing this persisted query, passing `?limit=5` will execute the query returning 5 results instead:
 
 ![Overriding value for variables in persisted query](../../images/executing-persisted-query-variables.png)
-
-## Executing the persisted query
-
-Once the persisted query is published, we can execute it via its permalink.
-
-The persisted query can be executed directly in the browser, since it is accessed via `GET`, and we will obtain the requested data, in JSON format:
-
-![Executing a persisted in the browser](../../images/persisted-query-execution.png)
 
 ## Editor Inputs
 
