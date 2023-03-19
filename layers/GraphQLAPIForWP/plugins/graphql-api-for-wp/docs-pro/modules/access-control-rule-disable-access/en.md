@@ -1,4 +1,4 @@
-# Access Control Rule: Disable access
+# Access Control Rule: Disable Access
 
 Remove fields and directives from the GraphQL schema.
 
