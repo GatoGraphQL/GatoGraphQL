@@ -12,7 +12,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 
 ## Description
 
-This module adds fields to the GraphQL schema to retrieve data from an external source or list of sources.
+This module adds global fields to the GraphQL schema to retrieve data from an external source or list of sources.
 
 ### `_requestJSONObjectItem`
 
