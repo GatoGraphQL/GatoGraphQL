@@ -34,7 +34,7 @@ Module `Interactive Schema for Custom Endpoints` must be enabled.
 
 ![Custom endpoint's Interactive schema](../../images/custom-endpoint-interactive-schema.png "Custom endpoint's Interactive schema")
 
-## How to use
+## Creating a Custom Endpoint
 
 Clicking on the Custom Endpoints link in the menu, it displays the list of all the created custom endpoints:
 

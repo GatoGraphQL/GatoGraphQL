@@ -75,7 +75,7 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 
 ![Persisted query editor](../../images/persisted-query.png "Persisted query editor")
 
-## How to use
+## Creating a Persisted Query
 
 Clicking on the Persisted Queries link in the menu, it displays the list of all the created persisted queries:
 
