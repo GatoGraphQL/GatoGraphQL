@@ -6,3 +6,7 @@ wp user create subscriber subscriber@test.com --role=subscriber --user_pass=1111
 wp user create contributor contributor@test.com --role=contributor --user_pass=11111111 --first_name=Contributor --last_name=Johnson --user_registered="1982-06-29-17-48-24" --path=/app/wordpress
 wp user create author author@test.com --role=author --user_pass=11111111 --first_name=Author --last_name=Marquez --user_registered="1982-06-29-17-48-25" --path=/app/wordpress
 wp user create editor editor@test.com --role=editor --user_pass=11111111 --first_name=Editor --last_name=Smith --user_registered="1982-06-29-17-48-26" --path=/app/wordpress
+
+# To test meta queries
+wp user meta update 2 locale "es_ES" --path=/app/wordpress
+wp user meta update 3 locale "es_AR" --path=/app/wordpress
