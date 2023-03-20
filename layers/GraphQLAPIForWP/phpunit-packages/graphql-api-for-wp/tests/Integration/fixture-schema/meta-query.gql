@@ -86,4 +86,32 @@ query {
       id
     }
   }
+
+  spanishLocaleUsers: users(filter: { metaQuery: {
+    key: "locale",
+    compareBy: {
+      stringValue: {
+        value: "es_[A-Z]+"
+        operator: REGEXP
+      }
+    }
+  }}) {
+    id
+    name
+    locale: metaValue(key: "locale")
+  }
+
+  argentineSpanishLocaleUsers: users(filter: { metaQuery: {
+    key: "locale",
+    compareBy: {
+      stringValue: {
+        value: "es_AR"
+        operator: EQUALS
+      }
+    }
+  }}) {
+    id
+    name
+    locale: metaValue(key: "locale")
+  }
 }
