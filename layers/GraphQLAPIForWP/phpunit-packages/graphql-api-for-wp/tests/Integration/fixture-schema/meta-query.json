@@ -64,6 +64,25 @@
                 "title": "HTTP caching improves performance",
                 "featuredImage": null
             }
+        ],
+        "spanishLocaleUsers": [
+            {
+                "id": 3,
+                "name": "Subscriber Bennett",
+                "locale": "es_AR"
+            },
+            {
+                "id": 2,
+                "name": "Blogger Davenport",
+                "locale": "es_ES"
+            }
+        ],
+        "argentineSpanishLocaleUsers": [
+            {
+                "id": 3,
+                "name": "Subscriber Bennett",
+                "locale": "es_AR"
+            }
         ]
     }
 }
