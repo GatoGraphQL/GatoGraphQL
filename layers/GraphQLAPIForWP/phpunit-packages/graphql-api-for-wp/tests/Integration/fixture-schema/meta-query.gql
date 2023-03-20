@@ -52,4 +52,38 @@ query {
     id
     title
   }
+
+  postsWithFeaturedImage: posts(filter: {
+    metaQuery: {
+      key: "_thumbnail_id",
+      compareBy: {
+        key: {
+          operator: EXISTS
+        }
+      }
+    }
+  }, sort: { by: ID, order: ASC }) {
+    id
+    title
+    featuredImage {
+      id
+    }
+  }
+  
+  postsWithoutFeaturedImage: posts(filter: {
+    metaQuery: {
+      key: "_thumbnail_id",
+      compareBy: {
+        key: {
+          operator: NOT_EXISTS
+        }
+      }
+    }
+  }, sort: { by: ID, order: ASC }) {
+    id
+    title
+    featuredImage {
+      id
+    }
+  }
 }
