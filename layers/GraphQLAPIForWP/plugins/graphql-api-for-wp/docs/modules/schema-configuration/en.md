@@ -6,7 +6,7 @@ A schema configuration is used by the Single Endpoint, Custom Endpoints and Pers
 
 The GraphQL schema can be configured with those elements provided by the different installed and enabled modules. (Go to the "Modules" page to see the list of all of them.)
 
-Each module can define its configuration (and allow the site's admin to customize it) through its own block in the Schema Configuration CPT. This includes blocks for:
+Each module can define its configuration through its own block in the Schema Configuration editor. This includes blocks for:
 
 - Setting the schema as public or private
 - Enabling “sensitive” data elements
