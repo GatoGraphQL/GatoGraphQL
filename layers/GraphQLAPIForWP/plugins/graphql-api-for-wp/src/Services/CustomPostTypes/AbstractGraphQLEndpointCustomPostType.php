@@ -88,7 +88,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                         }
                     }
                 }
-            } elseif ('trash' != $post->post_status) {
+            } elseif ('trash' !== $post->post_status) {
                 if ($permalink = \get_permalink($post->ID)) {
                     $actions['view'] = sprintf(
                         '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',

@@ -150,7 +150,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         if ($sources = $this->getDataloadMultidomainSources($component, $props)) {
             $domain = $this->getCMSService()->getSiteURL();
             foreach ($sources as $source) {
-                if (substr($source, 0, strlen($domain)) != $domain) {
+                if (substr($source, 0, strlen($domain)) !== $domain) {
                     return true;
                 }
             }
