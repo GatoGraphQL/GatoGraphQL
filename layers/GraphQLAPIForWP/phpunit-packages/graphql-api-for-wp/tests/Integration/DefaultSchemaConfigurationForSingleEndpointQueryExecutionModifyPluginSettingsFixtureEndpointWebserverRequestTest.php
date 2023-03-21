@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 
 class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    public const SCHEMA_CONFIGURATION_POWERUSERS_ID = 261;
+    public const SCHEMA_CONFIGURATION_WEBSITE_ID = 191;
 
     /**
      * Single endpoint
@@ -35,7 +35,7 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        // New value: Schema Config "Power Users"
-        return self::SCHEMA_CONFIGURATION_POWERUSERS_ID;
+        // New value: Schema Config "Website"
+        return self::SCHEMA_CONFIGURATION_WEBSITE_ID;
     }
 }
