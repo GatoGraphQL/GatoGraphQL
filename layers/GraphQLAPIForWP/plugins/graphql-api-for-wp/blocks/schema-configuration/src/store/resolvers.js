@@ -20,7 +20,10 @@ import {
  */
 export const FETCH_SCHEMA_CONFIGURATIONS_GRAPHQL_QUERY = `
 	query GetSchemaConfigurations {
-		schemaConfigurations {
+		schemaConfigurations(
+			pagination: { limit: -1 }
+			sort: { by: TITLE, order: ASC }
+		) {
 			id
 			title
 			# excerpt
