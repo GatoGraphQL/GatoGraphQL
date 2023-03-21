@@ -27,7 +27,7 @@ registerBlockType( 'graphql-api-pro/schema-config-multiple-query-execution', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Multiple Query Execution for the Schema Configuration', 'graphql-api' ),
+	title: __( 'Multiple Query Execution', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.

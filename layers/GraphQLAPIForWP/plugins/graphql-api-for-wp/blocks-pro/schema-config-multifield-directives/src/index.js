@@ -27,7 +27,7 @@ registerBlockType( 'graphql-api-pro/schema-config-multifield-directives', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Multi-Field Directives for the Schema Configuration', 'graphql-api' ),
+	title: __( 'Multi-Field Directives', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
