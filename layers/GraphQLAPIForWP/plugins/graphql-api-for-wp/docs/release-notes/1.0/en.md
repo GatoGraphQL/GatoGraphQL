@@ -74,7 +74,13 @@ If we need to configure only a handful of items, displaying all blocks in the ed
 
 Now, the Gutenberg template (containing the blocks) is not locked anymore, then we can delete the blocks that we don't need. And if we need to add a block again, it can be done from the inserter (notice that every block can only be added once):
 
-![Removing and adding blocks in the Schema Configuration](../../images/removing-and-adding-blocks-in-schema-configuration.gif)
+![Removing and adding blocks in the Schema Configuration](../../images/schema-configuration-removing-and-adding-blocks.gif)
+
+## Sort the Schema Configuration entries by name
+
+In the Custom Endpoint and Persisted Query editors, the Schema Configuration entries are now sorted by name:
+
+![Selecting a Schema Configuration](../../images/releases/v1.0/selecting-schema-configuration.png)
 
 ## Fixed
 
