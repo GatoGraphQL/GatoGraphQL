@@ -64,6 +64,18 @@ It describes when it makes sense to use the GraphQL API and what's the best way 
 
 ![Use Cases, Best Practices, and Recipes page](../../images/releases/v1.0/recipes-page.png)
 
+## Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
+
+When creating a Schema Configuration, the new entry contains the whole list of options to configure:
+
+![New Schema Configuration](../../images/new-schema-configuration.png)
+
+If we need to configure only a handful of items, displaying all blocks in the editor makes it difficult to visualize.
+
+Now, the Gutenberg template (containing the blocks) is not locked anymore, then we can delete the blocks that we don't need. And if we need to add a block again, it can be done from the inserter (notice that every block can only be added once):
+
+![Removing and adding blocks in the Schema Configuration](../../images/removing-and-adding-blocks-in-schema-configuration.gif)
+
 ## Fixed
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)
