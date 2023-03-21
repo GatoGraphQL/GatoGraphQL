@@ -80,7 +80,7 @@ Now, the Gutenberg template (containing the blocks) is not locked anymore, then 
 
 In the Custom Endpoint and Persisted Query editors, the Schema Configuration entries are now sorted by name:
 
-![Selecting a Schema Configuration](../../images/releases/v1.0/selecting-schema-configuration.png)
+![Selecting a Schema Configuration](../../images/releases/v1.0/select-schema-configuration.png)
 
 ## Fixed
 
