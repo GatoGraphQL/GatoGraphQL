@@ -29,7 +29,7 @@ registerBlockType( 'graphql-api/schema-config-schema-settings', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Settings for the Schema Configuration', 'graphql-api' ),
+	title: __( 'Settings', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.

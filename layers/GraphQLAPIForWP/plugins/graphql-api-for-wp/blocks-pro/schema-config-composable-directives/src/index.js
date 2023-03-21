@@ -27,7 +27,7 @@ registerBlockType( 'graphql-api-pro/schema-config-composable-directives', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Composable Directives for the Schema Configuration', 'graphql-api' ),
+	title: __( 'Composable Directives', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
