@@ -16,6 +16,8 @@ Each module can define its configuration (and allow the site's admin to customiz
 - Set-up HTTP caching via Cache Control Lists
 - Many others
 
+![Schema Configuration editor](../../images/schema-configuration.png)
+
 ## Creating a Schema Configuration
 
 Clicking on the Schema Configurations link in the menu, it displays the list of all of them:
