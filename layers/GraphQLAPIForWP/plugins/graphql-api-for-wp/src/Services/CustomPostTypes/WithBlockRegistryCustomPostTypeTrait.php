@@ -33,12 +33,4 @@ trait WithBlockRegistryCustomPostTypeTrait
         }
         return $template;
     }
-
-    /**
-     * Indicates if to lock the Gutenberg templates
-     */
-    protected function lockGutenbergTemplate(): bool
-    {
-        return true;
-    }
 }

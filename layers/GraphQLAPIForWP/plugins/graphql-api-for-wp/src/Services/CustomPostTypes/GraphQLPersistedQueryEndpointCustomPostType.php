@@ -191,6 +191,14 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     }
 
     /**
+     * Indicates if to lock the Gutenberg templates
+     */
+    protected function lockGutenbergTemplate(): bool
+    {
+        return true;
+    }
+
+    /**
      * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
      */
     public function usePostExcerptAsDescription(): bool
