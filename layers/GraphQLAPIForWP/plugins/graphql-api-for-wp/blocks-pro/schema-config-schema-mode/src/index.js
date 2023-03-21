@@ -59,7 +59,9 @@ registerBlockType( 'graphql-api-pro/schema-config-schema-mode', {
 		// Remove support for an HTML mode.
 		html: false,
 		// Insert programatically only
-		inserter: false,
+		// inserter: false,
+		// Use the block just once per post
+		multiple: false,
 	},
 
 	/**

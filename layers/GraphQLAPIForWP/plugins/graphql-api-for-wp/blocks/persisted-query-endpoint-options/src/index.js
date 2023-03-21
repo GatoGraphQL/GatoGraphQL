@@ -81,7 +81,9 @@ registerBlockType( 'graphql-api/persisted-query-endpoint-options', {
 		// Remove support for an HTML mode.
 		html: false,
 		// Insert programatically only
-		inserter: false,
+		// inserter: false,
+		// Use the block just once per post
+		multiple: false,
 	},
 
 	/**

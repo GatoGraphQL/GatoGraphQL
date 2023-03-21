@@ -73,7 +73,9 @@ registerBlockType( 'graphql-api/endpoint-graphiql', {
 		// Remove support for an HTML mode.
 		html: false,
 		// Insert programatically only
-		inserter: false,
+		// inserter: false,
+		// Use the block just once per post
+		multiple: false,
 	},
 
 	/**
