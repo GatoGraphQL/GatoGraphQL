@@ -101,7 +101,7 @@ class DefinitionManager implements DefinitionManagerInterface
         // Allow the injected Resolver to decide how the name is resolved
         if ($definitionResolver = $this->getDefinitionResolver($group)) {
             $definition = $definitionResolver->getDefinition($name, $group);
-            if ($definition != $name && $definitionPersistence) {
+            if ($definition !== $name && $definitionPersistence) {
                 $definitionPersistence->saveDefinition($definition, $name, $group);
             }
             $this->definition_names[$group][$definition] = $name;

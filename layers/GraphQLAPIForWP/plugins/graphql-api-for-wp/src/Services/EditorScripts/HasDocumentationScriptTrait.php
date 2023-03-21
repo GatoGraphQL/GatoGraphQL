@@ -104,7 +104,7 @@ trait HasDocumentationScriptTrait
             $localeLang = $this->getLocaleHelper()->getLocaleLanguage();
             // Check the current locale has been translated, otherwise if will try to load an unexisting file
             // If the locale lang is the same as the default lang, the file has already been loaded
-            if ($localeLang != $defaultLang && in_array($localeLang, $this->getDocLanguages())) {
+            if ($localeLang !== $defaultLang && in_array($localeLang, $this->getDocLanguages())) {
                 \wp_register_script(
                     $scriptName . '-' . $localeLang,
                     $url . 'build/docs-' . $localeLang . '.js',

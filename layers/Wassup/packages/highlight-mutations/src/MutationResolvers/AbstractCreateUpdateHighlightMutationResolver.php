@@ -55,7 +55,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
                 $errors[] = $this->__('The highlighted post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($this->getCustomPostTypeAPI()->getStatus($referenced) != CustomPostStatus::PUBLISH) {
+                if ($this->getCustomPostTypeAPI()->getStatus($referenced) !== CustomPostStatus::PUBLISH) {
                     // @todo Migrate from string to FeedbackItemProvider
                 // $objectTypeFieldResolutionFeedbackStore->addError(
                 //     new ObjectTypeFieldResolutionFeedback(

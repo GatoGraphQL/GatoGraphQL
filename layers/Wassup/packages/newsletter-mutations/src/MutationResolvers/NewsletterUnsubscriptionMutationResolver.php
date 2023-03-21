@@ -74,7 +74,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 
         // Verify that the verification code corresponds to the email
         $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($fieldDataAccessor->getValue('email'));
-        if ($verificationcode != $fieldDataAccessor->getValue('verificationcode')) {
+        if ($verificationcode !== $fieldDataAccessor->getValue('verificationcode')) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
             //     new ObjectTypeFieldResolutionFeedback(

@@ -81,7 +81,7 @@ class BlockHelpers
         BlockInterface $block
     ): ?array {
         $blocks = $this->getBlocksOfTypeFromCustomPost($configurationPostOrID, $block);
-        if (count($blocks) != 1) {
+        if (count($blocks) !== 1) {
             return null;
         }
         return $blocks[0];

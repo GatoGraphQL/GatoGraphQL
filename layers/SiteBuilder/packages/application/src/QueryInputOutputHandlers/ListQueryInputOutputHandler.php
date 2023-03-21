@@ -62,7 +62,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc
-        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST) || (App::getState('loading-latest'))) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] !== DataSources::MUTABLEONREQUEST) || (App::getState('loading-latest'))) {
             return $ret;
         }
 
@@ -88,7 +88,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 
         // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
-        if (($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST)) {
+        if (($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] !== DataSources::MUTABLEONREQUEST)) {
             return $ret;
         }
 

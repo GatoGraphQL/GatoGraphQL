@@ -95,7 +95,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
             // );
             $errorcodes[] = 'error-norepeatpwd';
         }
-        if ($pwd != $repeatpwd) {
+        if ($pwd !== $repeatpwd) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
             //     new ObjectTypeFieldResolutionFeedback(
