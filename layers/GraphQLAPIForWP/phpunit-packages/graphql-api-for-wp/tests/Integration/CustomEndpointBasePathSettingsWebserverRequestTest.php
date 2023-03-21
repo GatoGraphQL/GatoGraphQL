@@ -40,7 +40,7 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
 
     protected function getCustomEndpointURL(string $basePath): string
     {
-        return $basePath . '/power-users/';
+        return $basePath . '/website/';
     }
 
     /**
