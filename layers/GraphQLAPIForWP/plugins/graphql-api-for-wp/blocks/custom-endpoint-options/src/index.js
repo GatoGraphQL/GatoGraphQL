@@ -48,7 +48,7 @@ registerBlockType( 'graphql-api/custom-endpoint-options', {
 	 * An icon property should be specified to make it easier to identify a block.
 	 * These can be any of WordPress’ Dashicons, or a custom svg element.
 	 */
-	icon: 'admin-users',
+	icon: 'admin-generic',
 
 	/**
 	 * Block default attributes.
