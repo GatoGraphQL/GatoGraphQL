@@ -24,9 +24,15 @@ Clicking on the Schema Configurations link in the menu, it displays the list of 
 
 ![Schema Configurations in the admin](../../images/schema-configurations-page.png)
 
-A schema configuration is a custom post type (CPT). To create a new schema configuration, click on button "Add New Schema Configuration", which will open the WordPress editor:
+A schema configuration is a custom post type (CPT). To create a new schema configuration, click on button "Add New Schema Configuration", which will open the WordPress editor.
+
+The editor will have all configurable blocks already added to the CPT entry:
 
 ![Creating a new Schema Configuration](../../images/new-schema-configuration.png)
+
+Configurations which are not required (for instance, those using the "Default" value from the Settings page) can have their blocks removed. The removed block can be added once again via the inserter menu, by clicking on the `+` button at the bottom (please notice that only one instance of each block can be inserted):
+
+![Removing and adding blocks in the Schema Configuration](../../images/schema-configuration-removing-and-adding-blocks.gif)
 
 To configure the different elements in the schema configuration, click on corresponding input, and it becomes editable. Then select the entries that apply to the configuration. When you are done, click on "Publish":
 
