@@ -2,20 +2,16 @@
   "data": {
     "schemaConfigurations": [
       {
-        "id": 588,
-        "title": "Nested mutations"
-      },
-      {
-        "id": 304,
-        "title": "Unrestricted schema"
+        "id": 191,
+        "title": "Website"
       },
       {
         "id": 193,
         "title": "Mobile app"
       },
       {
-        "id": 191,
-        "title": "Website"
+        "id": 304,
+        "title": "Unrestricted schema"
       }
     ]
   }
