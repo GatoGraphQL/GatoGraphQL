@@ -1,4 +1,4 @@
-# Schema Mutations
+# Mutations
 
 GraphQL mutations enable to modify data (i.e. perform side-effect) through the query.
 
@@ -19,4 +19,4 @@ mutation {
 
 The available mutation fields are those under the `MutationRoot` type:
 
-![Schema mutations](../../images/schema-mutations.png)
+![Mutations in the GraphQL schema](../../images/schema-mutations.png)
