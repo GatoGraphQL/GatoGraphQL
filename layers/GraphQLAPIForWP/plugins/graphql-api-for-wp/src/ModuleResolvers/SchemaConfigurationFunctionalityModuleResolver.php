@@ -306,8 +306,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     'intro'
                 ),
-                Properties::TITLE => \__('Info: Redundant fields', 'graphql-api'),
-                Properties::DESCRIPTION => \__('With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
+                Properties::DESCRIPTION => \__('<hr/><br/><strong>Explanation - Redundant fields:</strong><br/><br/>With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
         } elseif ($module === self::SCHEMA_EXPOSE_SENSITIVE_DATA) {
