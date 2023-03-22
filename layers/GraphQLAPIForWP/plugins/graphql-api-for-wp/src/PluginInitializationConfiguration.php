@@ -587,6 +587,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             $moduleClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENY;
             $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
             $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENY;
+            // Do not use the Payloadable types for mutations
+            $moduleClassConfiguration[\PoPCMSSchema\CommentMutations\Module::class][\PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS] = false;
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostCategoryMutations\Module::class][\PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS] = false;
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMutations\Module::class][\PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS] = false;
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostTagMutations\Module::class][\PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS] = false;
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMediaMutations\Module::class][\PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS] = false;
+            $moduleClassConfiguration[\PoPCMSSchema\UserStateMutations\Module::class][\PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS] = false;
         }
         return $moduleClassConfiguration;
     }
