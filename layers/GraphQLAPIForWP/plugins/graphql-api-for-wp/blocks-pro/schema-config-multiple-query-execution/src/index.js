@@ -58,9 +58,7 @@ registerBlockType( 'graphql-api-pro/schema-config-multiple-query-execution', {
 		customClassName: false,
 		// Remove support for an HTML mode.
 		html: false,
-		// Insert programatically only
-		// inserter: false,
-		// Use the block just once per post
+		// Use the block just once per Schema Configuration
 		multiple: false,
 	},
 
