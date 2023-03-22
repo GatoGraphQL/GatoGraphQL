@@ -179,7 +179,7 @@ abstract class AbstractCacheControlFieldDirectiveResolver extends AbstractGlobal
         // If it was provided as a directiveArg, use that value. Otherwise, use the one from the class
         $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
         $maxAge = $directiveArgs['maxAge'] ?? $this->getMaxAge();
-        if (!is_null($maxAge)) {
+        if ($maxAge !== null) {
             $this->getCacheControlEngine()->addMaxAge($maxAge);
         }
     }
