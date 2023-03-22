@@ -7,6 +7,7 @@ namespace PoP\CacheControl\DirectiveResolvers;
 use PoP\CacheControl\Module;
 use PoP\CacheControl\ModuleConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryFieldDirectiveServiceTagInterface;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
