@@ -44,7 +44,7 @@ const SchemaConfigSchemaMutationsCard = ( props ) => {
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Use “payload” types for all mutations in the schema?', 'graphql-api') }</em>
+			<em>{ __('Use “payload” types for mutations in the schema?', 'graphql-api') }</em>
 			<InfoTooltip
 				{ ...props }
 				text={ __('Either have mutations return a “payload” object type, or directly the mutated entity.', 'graphql-api') }
