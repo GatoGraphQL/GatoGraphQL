@@ -28,6 +28,11 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public final const SCHEMA_POST_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-post-category-mutations';
     public final const SCHEMA_COMMENT_MUTATIONS = Plugin::NAMESPACE . '\schema-comment-mutations';
 
+    /**
+     * Setting options
+     */
+    public final const USE_PAYLOADABLE_MUTATIONS = 'use-payloadable-mutations';
+
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
