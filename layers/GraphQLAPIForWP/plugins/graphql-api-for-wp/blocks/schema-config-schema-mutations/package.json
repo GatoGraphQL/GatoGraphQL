@@ -1,7 +1,7 @@
 {
-	"name": "schema-config-use-mutation-payload-types",
+	"name": "schema-config-schema-mutations",
 	"version": "1.0.0-dev",
-	"description": "Configure the 'Use Mutation Payload Types' module in the Schema Configuration",
+	"description": "Configure the 'Mutations' module in the Schema Configuration",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",
