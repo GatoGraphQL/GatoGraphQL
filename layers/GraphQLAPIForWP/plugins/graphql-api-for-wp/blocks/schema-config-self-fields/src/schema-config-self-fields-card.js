@@ -33,33 +33,33 @@ const SchemaConfigSelfFieldsCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Expose "self" fields in the schema', 'graphql-api-pro'),
+			label: __('Expose "self" fields in the schema', 'graphql-api'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Do not expose self fields', 'graphql-api-pro'),
+			label: __('Do not expose self fields', 'graphql-api'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Expose self fields in the schema?', 'graphql-api-pro') }</em>
+			<em>{ __('Expose self fields in the schema?', 'graphql-api') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Expose "self" fields in the GraphQL schema (such as "Post.self" and "User.self"), which can help give a particular shape to the GraphQL response', 'graphql-api-pro') }
+				text={ __('Expose "self" fields in the GraphQL schema (such as "Post.self" and "User.self"), which can help give a particular shape to the GraphQL response', 'graphql-api') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
 					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
-						<span>🟡 { __('Default', 'graphql-api-pro') }</span>
+						<span>🟡 { __('Default', 'graphql-api') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-						<span>✅ { __('Expose "self" fields', 'graphql-api-pro') }</span>
+						<span>✅ { __('Expose "self" fields', 'graphql-api') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Do not expose self fields', 'graphql-api-pro') }</span>
+						<span>❌ { __('Do not expose self fields', 'graphql-api') }</span>
 					}
 				</>
 			) }
@@ -82,7 +82,7 @@ const SchemaConfigSelfFieldsCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Self Fields', 'graphql-api-pro'),
+		header: __('Self Fields', 'graphql-api'),
 		className: 'graphql-api-schema-self-fields',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),

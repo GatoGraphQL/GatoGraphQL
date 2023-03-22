@@ -85,12 +85,12 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getName(string $module): string
     {
         return match ($module) {
-            self::ACCESS_CONTROL => \__('Access Control', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_DISABLE_ACCESS => \__('Access Control Rule: Disable Access', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_USER_STATE => \__('Access Control Rule: User State', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_USER_ROLES => \__('Access Control Rule: User Roles', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_USER_CAPABILITIES => \__('Access Control Rule: User Capabilities', 'graphql-api-pro'),
-            self::ACCESS_CONTROL_RULE_VISITOR_IP => \__('Access Control Rule: Visitor IP', 'graphql-api-pro'),
+            self::ACCESS_CONTROL => \__('Access Control', 'graphql-api'),
+            self::ACCESS_CONTROL_RULE_DISABLE_ACCESS => \__('Access Control Rule: Disable Access', 'graphql-api'),
+            self::ACCESS_CONTROL_RULE_USER_STATE => \__('Access Control Rule: User State', 'graphql-api'),
+            self::ACCESS_CONTROL_RULE_USER_ROLES => \__('Access Control Rule: User Roles', 'graphql-api'),
+            self::ACCESS_CONTROL_RULE_USER_CAPABILITIES => \__('Access Control Rule: User Capabilities', 'graphql-api'),
+            self::ACCESS_CONTROL_RULE_VISITOR_IP => \__('Access Control Rule: Visitor IP', 'graphql-api'),
             default => $module,
         };
     }
@@ -99,17 +99,17 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::ACCESS_CONTROL:
-                return \__('Set-up rules to define who can access the different elements from a schema', 'graphql-api-pro');
+                return \__('Set-up rules to define who can access the different elements from a schema', 'graphql-api');
             case self::ACCESS_CONTROL_RULE_DISABLE_ACCESS:
-                return \__('Remove access to the schema elements', 'graphql-api-pro');
+                return \__('Remove access to the schema elements', 'graphql-api');
             case self::ACCESS_CONTROL_RULE_USER_STATE:
-                return \__('Allow or reject access to the schema elements based on the user being logged-in or not', 'graphql-api-pro');
+                return \__('Allow or reject access to the schema elements based on the user being logged-in or not', 'graphql-api');
             case self::ACCESS_CONTROL_RULE_USER_ROLES:
-                return \__('Allow or reject access to the schema elements based on the user having a certain role', 'graphql-api-pro');
+                return \__('Allow or reject access to the schema elements based on the user having a certain role', 'graphql-api');
             case self::ACCESS_CONTROL_RULE_USER_CAPABILITIES:
-                return \__('Allow or reject access to the schema elements based on the user having a certain capability', 'graphql-api-pro');
+                return \__('Allow or reject access to the schema elements based on the user having a certain capability', 'graphql-api');
             case self::ACCESS_CONTROL_RULE_VISITOR_IP:
-                return \__('Allow or reject access to the schema elements based on the visitor coming from an allowed IP address', 'graphql-api-pro');
+                return \__('Allow or reject access to the schema elements based on the visitor coming from an allowed IP address', 'graphql-api');
         }
         return parent::getDescription($module);
     }

@@ -70,7 +70,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     public function getName(string $module): string
     {
         return match ($module) {
-            self::FIELD_DEPRECATION => \__('Field Deprecation', 'graphql-api-pro'),
+            self::FIELD_DEPRECATION => \__('Field Deprecation', 'graphql-api'),
             default => $module,
         };
     }
@@ -79,7 +79,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     {
         switch ($module) {
             case self::FIELD_DEPRECATION:
-                return \__('Deprecate fields, and explain how to replace them, through a user interface', 'graphql-api-pro');
+                return \__('Deprecate fields, and explain how to replace them, through a user interface', 'graphql-api');
         }
         return parent::getDescription($module);
     }

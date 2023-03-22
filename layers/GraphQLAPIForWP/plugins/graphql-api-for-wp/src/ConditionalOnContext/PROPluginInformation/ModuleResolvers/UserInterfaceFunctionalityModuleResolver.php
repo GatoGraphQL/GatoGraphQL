@@ -60,7 +60,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getName(string $module): string
     {
         return match ($module) {
-            self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Low-Level Persisted Query Editing', 'graphql-api-pro'),
+            self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Low-Level Persisted Query Editing', 'graphql-api'),
             default => $module,
         };
     }
@@ -69,7 +69,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
-                return \__('Have access to directives to be applied to the schema when editing persisted queries', 'graphql-api-pro');
+                return \__('Have access to directives to be applied to the schema when editing persisted queries', 'graphql-api');
         }
         return parent::getDescription($module);
     }
