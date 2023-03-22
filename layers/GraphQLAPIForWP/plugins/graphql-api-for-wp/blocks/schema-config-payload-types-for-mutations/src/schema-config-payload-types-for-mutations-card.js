@@ -37,7 +37,7 @@ const SchemaConfigPayloadTypesForMutationsCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Do not use “payload” types for mutations', 'graphql-api'),
+			label: __('Do not use “payload” types for mutations (i.e. return the mutated entity)', 'graphql-api'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
@@ -59,7 +59,7 @@ const SchemaConfigPayloadTypesForMutationsCard = ( props ) => {
 						<span>✅ { __('Use “payload” types for mutations', 'graphql-api') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Do not use “payload” types for mutations', 'graphql-api') }</span>
+						<span>❌ { __('Do not use “payload” types for mutations (i.e. return the mutated entity)', 'graphql-api') }</span>
 					}
 				</>
 			) }
