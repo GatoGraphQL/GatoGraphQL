@@ -18,7 +18,7 @@ class SchemaConfigSelfFieldsBlock extends AbstractDefaultEnableDisableFunctional
 
     public function getBlockPriority(): int
     {
-        return 10100;
+        return 10095;
     }
 
     public function getEnablingModule(): ?string
