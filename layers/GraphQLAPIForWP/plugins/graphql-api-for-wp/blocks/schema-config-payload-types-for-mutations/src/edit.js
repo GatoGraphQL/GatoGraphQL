@@ -1,13 +1,13 @@
 /**
  * Application imports
  */
-import SchemaConfigPayloadTypesInMutationsCard from './schema-config-payload-types-in-mutations-card';
+import SchemaConfigPayloadTypesForMutationsCard from './schema-config-payload-types-for-mutations-card';
 
 const EditBlock = ( props ) => {
 	const { className } = props;
 	return (
 		<div class={ className }>
-			<SchemaConfigPayloadTypesInMutationsCard
+			<SchemaConfigPayloadTypesForMutationsCard
 				{ ...props }
 			/>
 		</div>
