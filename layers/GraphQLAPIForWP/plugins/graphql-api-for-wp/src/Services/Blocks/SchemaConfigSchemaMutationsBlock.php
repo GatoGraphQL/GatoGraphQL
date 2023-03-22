@@ -18,7 +18,7 @@ class SchemaConfigSchemaMutationsBlock extends AbstractDefaultEnableDisableFunct
 
     public function getBlockPriority(): int
     {
-        return 10110;
+        return 10095;
     }
 
     public function getEnablingModule(): ?string
