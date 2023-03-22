@@ -17,7 +17,7 @@ class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebs
         /**
          * This endpoint:
          *
-         * - Has "Self Fields" as Default (i.e. false)
+         * - Has "Self Fields" as Default (i.e. true)
          * - Has the Schema Configuration "Mobile App" (with ID 193)
          */
         return 'graphql/mobile-app/';
