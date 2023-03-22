@@ -4,35 +4,36 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
 
-class SchemaConfigNamespacingBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
+class SchemaConfigPayloadTypesForMutationsBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
 {
     use MainPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-namespacing';
+        return 'schema-config-payload-types-for-mutations';
     }
 
     public function getBlockPriority(): int
     {
-        return 10120;
+        return 10100;
     }
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING;
+        return MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS;
     }
 
     protected function getBlockLabel(): string
     {
-        return \__('Use namespacing?', 'graphql-api');
+        return \__('Use “payload” types for mutations in the schema?', 'graphql-api');
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Namespacing', 'graphql-api');
+        return \__('“Payload” Types for Mutations', 'graphql-api');
     }
 
     /**

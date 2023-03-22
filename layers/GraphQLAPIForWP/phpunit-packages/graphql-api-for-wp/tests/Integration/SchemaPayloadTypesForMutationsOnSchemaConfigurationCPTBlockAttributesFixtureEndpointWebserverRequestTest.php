@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Integration\AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase;
 
-class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
+class SchemaPayloadTypesForMutationsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
 {
     public const MOBILE_APP_SCHEMA_CONFIGURATION_ID = 193;
 
@@ -17,7 +17,7 @@ class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebs
         /**
          * This endpoint:
          *
-         * - Has "Self Fields" as Default (i.e. true)
+         * - Has "Use Payload Types for Mutations" as Default (i.e. true)
          * - Has the Schema Configuration "Mobile App" (with ID 193)
          */
         return 'graphql/mobile-app/';
@@ -25,7 +25,7 @@ class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebs
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-schema-self-fields';
+        return __DIR__ . '/fixture-schema-payload-types-for-mutations';
     }
 
     /**
@@ -45,6 +45,6 @@ class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebs
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-self-fields';
+        return 'graphql-api/schema-config-payload-types-for-mutations';
     }
 }
