@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Integration\AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase;
 
 class SchemaPayloadTypesForMutationsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
@@ -21,12 +21,12 @@ class SchemaPayloadTypesForMutationsModifyPluginSettingsFixtureEndpointWebserver
 
     protected function getSettingsKey(): string
     {
-        return ModuleSettingOptions::DEFAULT_VALUE;
+        return MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
     }
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-payload-types-for-mutations';
+        return 'graphqlapi_graphqlapi_schema-mutations';
     }
 
     protected function getPluginSettingsNewValue(): mixed
