@@ -17,6 +17,4 @@ mutation {
 }
 ```
 
-The available mutation fields are those under the `MutationRoot` type:
-
-![Mutations in the GraphQL schema](../../images/schema-mutations.png)
+The available mutation fields are those under the `MutationRoot` type.
