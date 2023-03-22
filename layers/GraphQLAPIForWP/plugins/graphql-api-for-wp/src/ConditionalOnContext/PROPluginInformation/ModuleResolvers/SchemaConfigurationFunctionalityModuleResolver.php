@@ -69,13 +69,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getName(string $module): string
     {
         return match ($module) {
-            self::PUBLIC_PRIVATE_SCHEMA => \__('Public/Private Schema', 'graphql-api-pro'),
-            self::GLOBAL_FIELDS => \__('Global Fields', 'graphql-api-pro'),
-            self::FIELD_TO_INPUT => \__('Field to Input', 'graphql-api-pro'),
-            self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'graphql-api-pro'),
-            self::MULTIFIELD_DIRECTIVES => \__('Multi-Field Directives', 'graphql-api-pro'),
-            self::MULTIPLE_QUERY_EXECUTION => \__('Multiple Query Execution', 'graphql-api-pro'),
-            self::DEPRECATION_NOTIFIER => \__('Deprecation Notifier', 'graphql-api-pro'),
+            self::PUBLIC_PRIVATE_SCHEMA => \__('Public/Private Schema', 'graphql-api'),
+            self::GLOBAL_FIELDS => \__('Global Fields', 'graphql-api'),
+            self::FIELD_TO_INPUT => \__('Field to Input', 'graphql-api'),
+            self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'graphql-api'),
+            self::MULTIFIELD_DIRECTIVES => \__('Multi-Field Directives', 'graphql-api'),
+            self::MULTIPLE_QUERY_EXECUTION => \__('Multiple Query Execution', 'graphql-api'),
+            self::DEPRECATION_NOTIFIER => \__('Deprecation Notifier', 'graphql-api'),
             default => $module,
         };
     }
@@ -83,13 +83,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::PUBLIC_PRIVATE_SCHEMA => \__('Enable to communicate the existence of some field from the schema to certain users only (private mode) or to everyone (public mode). If disabled, fields are always available to everyone (public mode)', 'graphql-api-pro'),
-            self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'graphql-api-pro'),
-            self::FIELD_TO_INPUT => \__('Retrieve the value of a field, manipulate it, and input it into another field, all within the same query', 'graphql-api-pro'),
-            self::COMPOSABLE_DIRECTIVES => \__('Have directives modify the behavior of other directives', 'graphql-api-pro'),
-            self::MULTIFIELD_DIRECTIVES => \__('A single directive can be applied to multiple fields, for performance and extended use cases', 'graphql-api-pro'),
-            self::MULTIPLE_QUERY_EXECUTION => \__('Execute multiple GraphQL queries in a single operation', 'graphql-api-pro'),
-            self::DEPRECATION_NOTIFIER => \__('Send deprecations in the response to the query (and not only when doing introspection), under the top-level entry <code>extensions</code>', 'graphql-api-pro'),
+            self::PUBLIC_PRIVATE_SCHEMA => \__('Enable to communicate the existence of some field from the schema to certain users only (private mode) or to everyone (public mode). If disabled, fields are always available to everyone (public mode)', 'graphql-api'),
+            self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'graphql-api'),
+            self::FIELD_TO_INPUT => \__('Retrieve the value of a field, manipulate it, and input it into another field, all within the same query', 'graphql-api'),
+            self::COMPOSABLE_DIRECTIVES => \__('Have directives modify the behavior of other directives', 'graphql-api'),
+            self::MULTIFIELD_DIRECTIVES => \__('A single directive can be applied to multiple fields, for performance and extended use cases', 'graphql-api'),
+            self::MULTIPLE_QUERY_EXECUTION => \__('Execute multiple GraphQL queries in a single operation', 'graphql-api'),
+            self::DEPRECATION_NOTIFIER => \__('Send deprecations in the response to the query (and not only when doing introspection), under the top-level entry <code>extensions</code>', 'graphql-api'),
             default => parent::getDescription($module),
         };
     }

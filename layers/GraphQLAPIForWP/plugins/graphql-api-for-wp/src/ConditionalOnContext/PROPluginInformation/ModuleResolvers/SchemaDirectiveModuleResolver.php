@@ -53,13 +53,13 @@ class SchemaDirectiveModuleResolver extends AbstractModuleResolver implements PR
     public function getName(string $module): string
     {
         return match ($module) {
-            self::CACHE_DIRECTIVE => \__('Cache Directive', 'graphql-api-pro'),
-            self::APPLY_FIELD_DIRECTIVE => \__('Apply Field Directive', 'graphql-api-pro'),
-            self::META_DIRECTIVES => \__('Meta Directives', 'graphql-api-pro'),
-            self::PASS_ONWARDS_DIRECTIVE => \__('Pass Onwards Directive', 'graphql-api-pro'),
-            self::REMOVE_DIRECTIVE => \__('Remove Output Directive', 'graphql-api-pro'),
-            self::DEFAULT_DIRECTIVE => \__('Default Directive', 'graphql-api-pro'),
-            self::FUNCTION_DIRECTIVES => \__('Function Directives', 'graphql-api-pro'),
+            self::CACHE_DIRECTIVE => \__('Cache Directive', 'graphql-api'),
+            self::APPLY_FIELD_DIRECTIVE => \__('Apply Field Directive', 'graphql-api'),
+            self::META_DIRECTIVES => \__('Meta Directives', 'graphql-api'),
+            self::PASS_ONWARDS_DIRECTIVE => \__('Pass Onwards Directive', 'graphql-api'),
+            self::REMOVE_DIRECTIVE => \__('Remove Output Directive', 'graphql-api'),
+            self::DEFAULT_DIRECTIVE => \__('Default Directive', 'graphql-api'),
+            self::FUNCTION_DIRECTIVES => \__('Function Directives', 'graphql-api'),
             default => $module,
         };
     }
@@ -68,25 +68,25 @@ class SchemaDirectiveModuleResolver extends AbstractModuleResolver implements PR
     {
         switch ($module) {
             case self::CACHE_DIRECTIVE:
-                return \__('Addition of <code>@cache</code> directive, to cache expensive operations to disk', 'graphql-api-pro');
+                return \__('Addition of <code>@cache</code> directive, to cache expensive operations to disk', 'graphql-api');
             case self::APPLY_FIELD_DIRECTIVE:
-                return \__('Addition of <code>@applyField</code> directive, to execute a certain field on the resolved field\'s value', 'graphql-api-pro');
+                return \__('Addition of <code>@applyField</code> directive, to execute a certain field on the resolved field\'s value', 'graphql-api');
             case self::META_DIRECTIVES:
-                return \__('Addition of <code>@forEach</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code> directives, to add meta-scripting capabilities that modify the behavior of other directives', 'graphql-api-pro');
+                return \__('Addition of <code>@forEach</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code> directives, to add meta-scripting capabilities that modify the behavior of other directives', 'graphql-api');
             case self::PASS_ONWARDS_DIRECTIVE:
-                return \__('Addition of <code>@passOnwards</code> directive, to make the field\'s resolved value available to subsequent directives via a dynamic variable', 'graphql-api-pro');
+                return \__('Addition of <code>@passOnwards</code> directive, to make the field\'s resolved value available to subsequent directives via a dynamic variable', 'graphql-api');
             case self::REMOVE_DIRECTIVE:
-                return \__('Addition of <code>@remove</code> directive, to remove an output from the response', 'graphql-api-pro');
+                return \__('Addition of <code>@remove</code> directive, to remove an output from the response', 'graphql-api');
             case self::DEFAULT_DIRECTIVE:
                 return sprintf(
-                    \__('Directive <code>@%s</code>, to set a value to null or empty fields', 'graphql-api-pro'),
+                    \__('Directive <code>@%s</code>, to set a value to null or empty fields', 'graphql-api'),
                     /**
                      * Same names as in UseDefaultValueIfConditionFieldDirectiveResolver->getDirectiveName()
                      */
                     'default'
                 );
             case self::FUNCTION_DIRECTIVES:
-                return \__('Manipulate the field output using standard programming language functions (provided via special directives)', 'graphql-api-pro');
+                return \__('Manipulate the field output using standard programming language functions (provided via special directives)', 'graphql-api');
         }
         return parent::getDescription($module);
     }
