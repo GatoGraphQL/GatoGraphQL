@@ -32,7 +32,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Setting options
      */
-    public final const USE_PAYLOADABLE_MUTATIONS = 'use-payloadable-mutations';
+    public final const USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE = 'use-payloadable-mutations-default-value';
+    public final const USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS = 'use-payloadable-mutations-value-for-admin-clients';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -244,7 +245,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $defaultValues = [
             self::SCHEMA_MUTATIONS => [
-                self::USE_PAYLOADABLE_MUTATIONS => true,
+                self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
+                self::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -258,16 +260,50 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
+        $defaultValueLabel = $this->getDefaultValueLabel();
+        $defaultValueDesc = $this->getDefaultValueDescription();
+        $adminClientsDesc = $this->getAdminClientDescription();
         if ($module === self::SCHEMA_MUTATIONS) {
-            $option = self::USE_PAYLOADABLE_MUTATIONS;
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'payload-types-intro'
+                ),
+                Properties::TITLE => \__('Info: “Payload” types for mutations', 'graphql-api'),
+                Properties::DESCRIPTION => \__('<ul><li>✅ Checked: Mutation fields will return a “payload” object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.</li><li>❌ Unchecked: Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_NULL,
+            ];
+
+            $option = self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use “payload” types for mutations?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Indicate if the GraphQL schema should use “payload” types for mutations:<ul><li>✅ Checked: Mutation fields will return a “payload” object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.</li><li>❌ Unchecked: Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'graphql-api'),
+                Properties::TITLE => sprintf(
+                    \__('Use “payload” types for all mutations in the schema? %s', 'graphql-api'),
+                    $defaultValueLabel
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Use “payload” types for mutations? %s', 'graphql-api'),
+                    $defaultValueDesc
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Use “payload” types for the Admin?', 'graphql-api'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Use “payload” types in the wp-admin? %s', 'graphql-api'),
+                    $adminClientsDesc
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }

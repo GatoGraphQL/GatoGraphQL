@@ -473,37 +473,37 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => \PoPCMSSchema\CommentMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS,
+                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS,
+                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS,
+                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostTagMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS,
+                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMediaMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS,
+                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\UserStateMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS,
+                'option' => MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
         ];
     }
