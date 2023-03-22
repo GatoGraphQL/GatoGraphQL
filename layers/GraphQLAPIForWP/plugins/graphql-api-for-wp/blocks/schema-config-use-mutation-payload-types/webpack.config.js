@@ -1,7 +1,7 @@
 /**
  * Define constants
  */
-const MODULE = 'schema-use-mutation-payload-types';
+const MODULE = 'schema-mutations';
 
 
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
