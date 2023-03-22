@@ -82,7 +82,7 @@ const SchemaConfigPayloadTypesInMutationsCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Mutations', 'graphql-api'),
+		header: __('“Payload” Types in Mutations', 'graphql-api'),
 		className: 'graphql-api-schema-mutations',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
