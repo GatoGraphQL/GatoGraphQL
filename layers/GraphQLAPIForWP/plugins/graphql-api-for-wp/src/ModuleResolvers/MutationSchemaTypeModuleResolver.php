@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
 class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
@@ -234,5 +235,43 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                 return false;
         }
         return $this->upstreamHasDocumentation($module);
+    }
+
+    /**
+     * Default value for an option set by the module
+     */
+    public function getSettingsDefaultValue(string $module, string $option): mixed
+    {
+        $defaultValues = [
+            self::SCHEMA_MUTATIONS => [
+                self::USE_PAYLOADABLE_MUTATIONS => true,
+            ],
+        ];
+        return $defaultValues[$module][$option] ?? null;
+    }
+
+    /**
+     * Array with the inputs to show as settings for the module
+     *
+     * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
+     */
+    public function getSettings(string $module): array
+    {
+        $moduleSettings = parent::getSettings($module);
+        if ($module === self::SCHEMA_MUTATIONS) {
+            $option = self::USE_PAYLOADABLE_MUTATIONS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Use “payload” types for mutations', 'graphql-api'),
+                Properties::DESCRIPTION => \__('If checked, mutation fields will return a “payload” object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity; If unchecked, the mutation field will directly return the mutated entity in case of success or `null` in case of failure, and any error message will be displayed in the JSON response\'s top-level `errors` entry', 'graphql-api'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        }
+
+        return $moduleSettings;
     }
 }
