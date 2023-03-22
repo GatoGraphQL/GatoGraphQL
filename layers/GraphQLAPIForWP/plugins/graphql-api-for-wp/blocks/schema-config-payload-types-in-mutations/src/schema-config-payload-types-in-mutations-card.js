@@ -19,7 +19,7 @@ import {
 	withEditableOnFocus,
 } from '@graphqlapi/components';
 
-const SchemaConfigSchemaMutationsCard = ( props ) => {
+const SchemaConfigPayloadTypesInMutationsCard = ( props ) => {
 	const {
 		isSelected,
 		setAttributes,
@@ -87,4 +87,4 @@ export default compose( [
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),
-] )( SchemaConfigSchemaMutationsCard );
+] )( SchemaConfigPayloadTypesInMutationsCard );

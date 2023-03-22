@@ -9,20 +9,20 @@ use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AbstractDefaultE
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\EndpointSchemaConfigurationExecuterServiceTagInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaMutationsBlock;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigPayloadTypesInMutationsBlock;
 
 abstract class AbstractSchemaMutationsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    private ?SchemaConfigSchemaMutationsBlock $schemaConfigSchemaMutationsBlock = null;
+    private ?SchemaConfigPayloadTypesInMutationsBlock $schemaConfigPayloadTypesInMutationsBlock = null;
 
-    final public function setSchemaConfigSchemaMutationsBlock(SchemaConfigSchemaMutationsBlock $schemaConfigSchemaMutationsBlock): void
+    final public function setSchemaConfigPayloadTypesInMutationsBlock(SchemaConfigPayloadTypesInMutationsBlock $schemaConfigPayloadTypesInMutationsBlock): void
     {
-        $this->schemaConfigSchemaMutationsBlock = $schemaConfigSchemaMutationsBlock;
+        $this->schemaConfigPayloadTypesInMutationsBlock = $schemaConfigPayloadTypesInMutationsBlock;
     }
-    final protected function getSchemaConfigSchemaMutationsBlock(): SchemaConfigSchemaMutationsBlock
+    final protected function getSchemaConfigPayloadTypesInMutationsBlock(): SchemaConfigPayloadTypesInMutationsBlock
     {
-        /** @var SchemaConfigSchemaMutationsBlock */
-        return $this->schemaConfigSchemaMutationsBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaMutationsBlock::class);
+        /** @var SchemaConfigPayloadTypesInMutationsBlock */
+        return $this->schemaConfigPayloadTypesInMutationsBlock ??= $this->instanceManager->getInstance(SchemaConfigPayloadTypesInMutationsBlock::class);
     }
 
     public function getEnablingModule(): ?string
@@ -32,6 +32,6 @@ abstract class AbstractSchemaMutationsSchemaConfigurationExecuter extends Abstra
 
     protected function getBlock(): BlockInterface
     {
-        return $this->getSchemaConfigSchemaMutationsBlock();
+        return $this->getSchemaConfigPayloadTypesInMutationsBlock();
     }
 }

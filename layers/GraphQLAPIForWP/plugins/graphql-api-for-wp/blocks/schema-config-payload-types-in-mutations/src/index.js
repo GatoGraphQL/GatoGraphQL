@@ -25,7 +25,7 @@ import {
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/schema-config-schema-mutations', {
+registerBlockType( 'graphql-api/schema-config-payload-types-in-mutations', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
@@ -37,7 +37,7 @@ registerBlockType( 'graphql-api/schema-config-schema-mutations', {
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Configure mutations in the Schema Configuration',
+		'Define if to use “payload” types for mutations in the Schema Configuration',
 		'graphql-api'
 	),
 

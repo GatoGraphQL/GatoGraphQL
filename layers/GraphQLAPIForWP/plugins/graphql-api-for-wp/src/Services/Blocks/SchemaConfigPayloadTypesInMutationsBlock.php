@@ -7,13 +7,13 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
 
-class SchemaConfigSchemaMutationsBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
+class SchemaConfigPayloadTypesInMutationsBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
 {
     use MainPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-schema-mutations';
+        return 'schema-config-payload-types-in-mutations';
     }
 
     public function getBlockPriority(): int

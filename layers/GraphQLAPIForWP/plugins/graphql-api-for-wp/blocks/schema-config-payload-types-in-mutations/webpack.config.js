@@ -64,7 +64,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPISchemaConfigSchemaMutations';
+config.output.jsonpFunction = 'webpackJsonpGraphQLAPISchemaConfigPayloadTypesInMutations';
 // ------------------------------------------------------
 
 module.exports = config;
