@@ -266,7 +266,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use “payload” types for mutations', 'graphql-api'),
+                Properties::TITLE => \__('Use “payload” types for mutations?', 'graphql-api'),
                 Properties::DESCRIPTION => \__('If checked, mutation fields will return a “payload” object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity; If unchecked, the mutation field will directly return the mutated entity in case of success or `null` in case of failure, and any error message will be displayed in the JSON response\'s top-level `errors` entry', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
