@@ -10,7 +10,7 @@
  */
 .graphql-api-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper > a.nav-tab-active {
     box-shadow: none;
-    border-right: 0;
+    border-right-color: #f0f0f1;
 }
 
 /**
