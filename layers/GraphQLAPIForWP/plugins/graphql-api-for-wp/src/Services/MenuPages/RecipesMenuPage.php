@@ -40,7 +40,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'fetching-data-to-build-headless-sites',
                 'Fetching data to build headless sites',
-                true,
             ],
             [
                 'searching-data-by-meta-queries',
