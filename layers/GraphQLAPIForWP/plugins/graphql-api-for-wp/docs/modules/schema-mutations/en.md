@@ -1,12 +1,6 @@
 # Mutations
 
-GraphQL mutations enable to modify data (i.e. perform side-effects) through the query.
-
-The "Mutations" module acts as an upstream dependency for all modules containing mutations. This allows us to remove all mutations from the GraphQL schema simply by disabling this module.
-
-## Description
-
-Mutations are operations that have side effects, such as performing an insert or update of data in the database. The available mutation fields are those under the `MutationRoot` type (or some of the fields under `Root` when using nested mutations), and these can be requested in the GraphQL document via the operation type `mutation`:
+Mutations are operations that have side effects, such as performing an insert or update of data in the database. The available mutation fields are those under the `MutationRoot` type (or some of the fields under `Root` when using nested mutations), and these can be executed in the GraphQL document via the operation type `mutation`:
 
 ```graphql
 mutation {
@@ -18,6 +12,8 @@ mutation {
   }
 }
 ```
+
+The "Mutations" module acts as an upstream dependency for all modules containing mutations. This allows us to remove all mutations from the GraphQL schema simply by disabling this module.
 
 ## Returning either a “Payload” Object or the Mutated Entity
 
@@ -192,3 +188,23 @@ We must notice that, as a result, the top-level `errors` entry will contain not 
 Because there are no additional types added, the GraphQL schema will look leaner:
 
 ![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
+
+## How to use
+
+Exposing “sensitive” data elements in the schema can be configured as follows, in order of priority:
+
+✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
+
+![Adding sensitive fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-sensitive-fields-to-schema.png "Adding sensitive fields to the schema, set in the Schema configuration")
+
+✅ Default mode, defined in the Settings
+
+If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
+
+![Expose Sensitive Data in the Schema, in the Settings](../../images/settings-schema-expose-sensitive-data-default.png "Expose Sensitive Data in the Schema, in the Settings")
+
+### Adding “sensitive” data elements to the Admin clients
+
+In the Settings, we can select to add the “sensitive” data elements to the wp-admin's GraphiQL and Interactive Schema clients:
+
+![Expose Sensitive Data in the admin clients, in the Settings](../../images/settings-schema-expose-sensitive-data-for-admin.png "Expose Sensitive Data in the admin clients, in the Settings")
