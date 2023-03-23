@@ -6,7 +6,7 @@ The "Mutations" module acts as an upstream dependency for all modules containing
 
 ## Description
 
-The query must use the operation type `mutation`:
+Mutations are operations that have side effects, such as performing an insert or update of data in the database. The available mutation fields are those under the `MutationRoot` type, and these can be requested in the GraphQL document via the operation type `mutation`:
 
 ```graphql
 mutation {
@@ -19,4 +19,3 @@ mutation {
 }
 ```
 
-The available mutation fields are those under the `MutationRoot` type.
