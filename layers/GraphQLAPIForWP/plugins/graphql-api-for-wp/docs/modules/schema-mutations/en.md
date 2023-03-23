@@ -15,7 +15,7 @@ mutation {
 
 The "Mutations" module acts as an upstream dependency for all modules containing mutations. This allows us to remove all mutations from the GraphQL schema simply by disabling this module.
 
-## Returning either a “Payload” Object or the Mutated Entity
+## Returning a “Payload” Object or the Mutated Entity
 
 Mutation fields can be configured to return either of these 2 different entities:
 
