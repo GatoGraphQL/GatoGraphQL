@@ -34,12 +34,12 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Intro',
             ],
             [
-                'exposing-a-secure-public-api',
-                'Exposing a secure public API',
-            ],
-            [
                 'fetching-data-to-build-headless-sites',
                 'Fetching data to build headless sites',
+            ],
+            [
+                'exposing-a-secure-public-api',
+                'Exposing a secure public API',
             ],
             [
                 'searching-data-by-meta-queries',
