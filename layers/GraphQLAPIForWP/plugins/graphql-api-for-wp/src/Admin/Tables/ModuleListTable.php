@@ -112,7 +112,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     protected function getCurrentView(): string
     {
-        return \PoP\Root\App::request(self::URL_PARAM_MODULE_TYPE) ?? \PoP\Root\App::query(self::URL_PARAM_MODULE_TYPE, '');
+        return App::request(self::URL_PARAM_MODULE_TYPE) ?? App::query(self::URL_PARAM_MODULE_TYPE, '');
     }
 
     /**
@@ -129,7 +129,7 @@ class ModuleListTable extends AbstractItemListTable
         // Module page URL
         $url = admin_url(sprintf(
             'admin.php?page=%s',
-            esc_attr(\PoP\Root\App::request('page') ?? \PoP\Root\App::query('page', ''))
+            esc_attr(App::request('page') ?? App::query('page', ''))
         ));
 
         // All entries
@@ -346,7 +346,7 @@ class ModuleListTable extends AbstractItemListTable
         $currentView = $this->getCurrentView();
         $maybeCurrentViewParam = !empty($currentView) ? '&' . self::URL_PARAM_MODULE_TYPE . '=' . $currentView : '';
         $linkPlaceholder = '<a href="?page=%s&action=%s&item=%s&_wpnonce=%s' . ($maybeCurrentViewParam) . '">%s</a>';
-        $page = esc_attr(\PoP\Root\App::request('page') ?? \PoP\Root\App::query('page', ''));
+        $page = esc_attr(App::request('page') ?? App::query('page', ''));
         $actions = [];
         if ($item['is-enabled']) {
             // If it is enabled, offer to disable it
