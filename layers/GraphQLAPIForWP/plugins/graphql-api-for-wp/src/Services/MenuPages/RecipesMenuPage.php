@@ -44,7 +44,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'searching-data-by-meta-queries',
                 'Searching data by meta queries',
-                true,
             ],
             [
                 'complementing-wp-cli',
