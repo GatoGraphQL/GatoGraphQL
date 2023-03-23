@@ -52,6 +52,8 @@ mutation CreatePost {
     }
     post {
       id
+      title
+      content
       # This is the status of the post: publish, pending, trash, etc
       status
     }
