@@ -189,22 +189,22 @@ Because there are no additional types added, the GraphQL schema will look leaner
 
 ![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
 
-## How to use
+### Configuration
 
-Exposing “sensitive” data elements in the schema can be configured as follows, in order of priority:
+Using “payload” object types for mutations in the schema can be configured as follows, in order of priority:
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-![Adding sensitive fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-sensitive-fields-to-schema.png "Adding sensitive fields to the schema, set in the Schema configuration")
+![Defining if to use payload object types for mutations, set in the Schema configuration](../../images/schema-configuration-payload-object-types-for-mutations.png "Defining if to use payload object types for mutations, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
-![Expose Sensitive Data in the Schema, in the Settings](../../images/settings-schema-expose-sensitive-data-default.png "Expose Sensitive Data in the Schema, in the Settings")
+![Defining if to use payload object types for mutations, in the Settings](../../images/settings-payload-object-types-for-mutations-default.png "Defining if to use payload object types for mutations, in the Settings")
 
-### Adding “sensitive” data elements to the Admin clients
+#### “Payload” object types for mutations in the Admin clients
 
-In the Settings, we can select to add the “sensitive” data elements to the wp-admin's GraphiQL and Interactive Schema clients:
+In the Settings, we can select to use “payload” object types for mutations in the wp-admin's GraphiQL and Interactive Schema clients:
 
-![Expose Sensitive Data in the admin clients, in the Settings](../../images/settings-schema-expose-sensitive-data-for-admin.png "Expose Sensitive Data in the admin clients, in the Settings")
+![Defining if to use payload object types for mutations in the admin clients, in the Settings](../../images/settings-payload-object-types-for-mutations-for-admin.png "Defining if to use payload object types for mutations in the admin clients, in the Settings")
