@@ -1,9 +1,10 @@
 jQuery( document ).ready( function($){
     $('.graphql-api-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab').on('click', function(e){
         e.preventDefault();
-        tab = $(this).data('tab-target');
+        navTabAnchor = $(this);
+        tab = navTabAnchor.data('tab-target');
         if (tab == undefined) {
-            tab = $(this).attr('href');
+            tab = navTabAnchor.attr('href');
         }
         tabPanel = $(tab).closest('.graphql-api-tabpanel');
         /**
@@ -21,6 +22,6 @@ jQuery( document ).ready( function($){
         $(tabContentItems).hide();
         $(tab).show();
         tabPanel.children('.nav-tab-container').children('.nav-tab-wrapper').children('a.nav-tab').removeClass('nav-tab-active');
-        tabPanel.children('.nav-tab-container').children('.nav-tab-wrapper').children('a[href="'+tab+'"].nav-tab').addClass('nav-tab-active');
+        navTabAnchor.addClass('nav-tab-active');
     });
 });
