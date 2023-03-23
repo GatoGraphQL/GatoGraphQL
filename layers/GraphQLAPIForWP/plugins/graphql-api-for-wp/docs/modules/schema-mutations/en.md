@@ -166,9 +166,7 @@ If the operation was successful, we will receive:
 }
 ```
 
-In case of errors, these will appear under the `errors` entry of the response.
-
-For instance, if the user is not logged in, we will receive:
+In case of errors, these will appear under the `errors` entry of the response. For instance, if the user is not logged in, we will receive:
 
 ```json
 {
@@ -189,6 +187,8 @@ For instance, if the user is not logged in, we will receive:
 }
 ```
 
-Because there are no additional types added, the GraphQL schema will be leaner:
+We must notice that, as a result, the top-level `errors` entry will contain not only syntax, schema validation and logic errors (eg: not passing a field argument's name, requesting a non-existing field, or calling `_request` and the network is down respectively), but also "content validation" errors (eg: "you're not authorized to modify this post").
+
+Because there are no additional types added, the GraphQL schema will look leaner:
 
 ![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
