@@ -16,6 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added documentation page "Use Cases, Best Practices, and Recipes"
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
 - Sort the Schema Configuration entries by name
+- Configure returning a payload object or the mutated entity for mutations
 
 ### Fixed
 

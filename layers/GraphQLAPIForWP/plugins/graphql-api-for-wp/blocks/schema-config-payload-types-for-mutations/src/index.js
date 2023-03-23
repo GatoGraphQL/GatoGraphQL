@@ -37,7 +37,7 @@ registerBlockType( 'graphql-api/schema-config-payload-types-for-mutations', {
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Define if to use “payload” types for mutations in the Schema Configuration',
+		'Define if to use payload types for mutations in the Schema Configuration',
 		'graphql-api'
 	),
 
