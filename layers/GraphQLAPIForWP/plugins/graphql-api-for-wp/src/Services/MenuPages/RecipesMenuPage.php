@@ -138,7 +138,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'using-the-graphql-server-without-wordpress',
                 'Using the GraphQL server without WordPress',
                 true,
-            ],            
+            ],
         ];
         // By default, focus on the first recipe
         $activeRecipeName = $recipeEntries[0][0];
