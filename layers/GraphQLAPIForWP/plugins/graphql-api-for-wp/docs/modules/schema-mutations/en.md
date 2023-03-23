@@ -34,7 +34,7 @@ A “payload” object type contains all the data concerning the mutation:
 - The errors (if any) as a distinctive GraphQL type, or
 - The successfully mutated entity
 
-For instance, mutation `createPost` returns an object of type `RootCreatePostMutationPayload`:
+For instance, mutation `createPost` returns an object of type `RootCreatePostMutationPayload`, and we still need to query its field `post` to retrieve the created post entity:
 
 ```graphql
 mutation CreatePost {
@@ -42,6 +42,7 @@ mutation CreatePost {
     title: "Some title"
     content: "Some content"
   }) {
+    # This is the status of the mutation: SUCCESS or FAILURE
     status
     errors {
       __typename
@@ -51,18 +52,14 @@ mutation CreatePost {
     }
     post {
       id
+      # This is the status of the post: publish, pending, trash, etc
+      status
     }
   }
 }
 ```
 
-### Mutated entity
-
-Directly the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.
-
-### Comparing the 2 methods
-
-The main difference lies in that, by containing the errors, the “payload” object allows us to represent them better, even having a unique GraphQL type per kind of error. This allows us to present different reactions for different errors in the application, thus  improving the user experience.
+By containing the errors, the “payload” object allows us to represent them better, even having a unique GraphQL type per kind of error. This allows us to present different reactions for different errors in the application, thus  improving the user experience.
 
 For instance, mutation `updatePost` returns a `PostUpdateMutationPayload`, whose field `errors` returns a list of `CustomPostUpdateMutationErrorPayloadUnion`. This is a union type which contains the list of all possible errors that can happen when modifying a custom post:
 
@@ -73,3 +70,14 @@ For instance, mutation `updatePost` returns a `PostUpdateMutationPayload`, whose
 - `LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload`
 - `UserIsNotLoggedInErrorPayload`
 
+As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadUnion` and `ErrorPayload` types added, the GraphQL schema will look much bigger:
+
+
+
+### Mutated entity
+
+Directly the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.
+
+### Comparing the 2 methods
+
+The main difference lies in that, 
