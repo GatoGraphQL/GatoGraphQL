@@ -59,11 +59,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Removing a Gutenberg block from all posts',
                 true,
             ],
-            [
-                'converting-content-to-gutenberg-blocks',
-                'Converting content to Gutenberg blocks',
-                true,
-            ],
+            // [
+            //     'converting-content-to-gutenberg-blocks',
+            //     'Converting content to Gutenberg blocks',
+            //     true,
+            // ],
             [
                 'executing-admin-tasks',
                 'Executing admin tasks',
