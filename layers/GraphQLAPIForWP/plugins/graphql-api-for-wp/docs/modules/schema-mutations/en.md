@@ -15,16 +15,16 @@ mutation {
 
 The **Mutations** module acts as an upstream dependency for all modules containing mutations. This allows us to remove all mutations from the GraphQL schema simply by disabling this module.
 
-## Returning a “Payload” Object or the Mutated Entity
+## Returning a Payload Object or the Mutated Entity
 
 Mutation fields can be configured to return either of these 2 different entities:
 
-- A “payload” object type
+- A payload object type
 - Directly the mutated entity
 
-### “Payload” object type
+### Payload object type
 
-A “payload” object type contains all the data concerning the mutation:
+A payload object type contains all the data concerning the mutation:
 
 - The status of the mutation (success or failure)
 - The errors (if any) using distinctive GraphQL types, or
@@ -57,7 +57,7 @@ mutation UpdatePost {
 }
 ```
 
-The “payload” object allows us to represent better the errors, even having a unique GraphQL type per kind of error. This allows us to present different reactions for different errors in the application, thus improving the user experience.
+The payload object allows us to represent better the errors, even having a unique GraphQL type per kind of error. This allows us to present different reactions for different errors in the application, thus improving the user experience.
 
 In the example above, the `PostUpdateMutationPayload` type contains field `errors`, which returns a list of `CustomPostUpdateMutationErrorPayloadUnion`. This is a union type which includes the list of all possible errors that can happen when modifying a custom post (to be queried via introspection field `__typename`):
 
@@ -191,7 +191,7 @@ Because there are no additional types added, the GraphQL schema will look leaner
 
 ### Configuration
 
-Using “payload” object types for mutations in the schema can be configured as follows, in order of priority:
+Using payload object types for mutations in the schema can be configured as follows, in order of priority:
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
@@ -203,8 +203,8 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 ![Defining if to use payload object types for mutations, in the Settings](../../images/settings-payload-object-types-for-mutations-default.png "Defining if to use payload object types for mutations, in the Settings")
 
-#### “Payload” object types for mutations in the Admin clients
+#### Payload object types for mutations in the Admin clients
 
-In the Settings, we can select to use “payload” object types for mutations in the wp-admin's GraphiQL and Interactive Schema clients:
+In the Settings, we can select to use payload object types for mutations in the wp-admin's GraphiQL and Interactive Schema clients:
 
 ![Defining if to use payload object types for mutations in the admin clients, in the Settings](../../images/settings-payload-object-types-for-mutations-for-admin.png "Defining if to use payload object types for mutations in the admin clients, in the Settings")

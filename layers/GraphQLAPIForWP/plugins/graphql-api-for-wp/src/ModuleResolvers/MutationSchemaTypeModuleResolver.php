@@ -272,11 +272,11 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => sprintf(
-                    \__('Use “payload” types for all mutations in the schema? %s', 'graphql-api'),
+                    \__('Use payload types for all mutations in the schema? %s', 'graphql-api'),
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Use “payload” types for mutations in the schema? %s', 'graphql-api'),
+                    \__('Use payload types for mutations in the schema? %s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -289,9 +289,9 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use “payload” types for mutations for the Admin?', 'graphql-api'),
+                Properties::TITLE => \__('Use payload types for mutations for the Admin?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Use “payload” types in the wp-admin? %s', 'graphql-api'),
+                    \__('Use payload types in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -302,7 +302,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     'payload-types-intro'
                 ),
-                Properties::DESCRIPTION => \__('<hr/><br/><strong>Explanation - “Payload” types for mutations:</strong><br/><br/>✅ <u>Checked</u>:<br/><br/>Mutation fields will return a “payload” object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/>❌ <u>Unchecked</u>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'graphql-api'),
+                Properties::DESCRIPTION => \__('<hr/><br/><strong>Explanation - Payload types for mutations:</strong><br/><br/>✅ <u>Checked</u>:<br/><br/>Mutation fields will return a payload object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/>❌ <u>Unchecked</u>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
         }

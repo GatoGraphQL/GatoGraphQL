@@ -28,12 +28,12 @@ class SchemaConfigPayloadTypesForMutationsBlock extends AbstractDefaultEnableDis
 
     protected function getBlockLabel(): string
     {
-        return \__('Use “payload” types for mutations in the schema?', 'graphql-api');
+        return \__('Use payload types for mutations in the schema?', 'graphql-api');
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('“Payload” Types for Mutations', 'graphql-api');
+        return \__('Payload Types for Mutations', 'graphql-api');
     }
 
     /**
