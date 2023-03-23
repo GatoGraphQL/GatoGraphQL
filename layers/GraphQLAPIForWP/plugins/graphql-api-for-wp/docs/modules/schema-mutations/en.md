@@ -31,16 +31,17 @@ Mutation fields can be configured to return either of these 2 different entities
 A “payload” object type contains all the data concerning the mutation:
 
 - The status of the mutation (success or failure)
-- The errors (if any) as a distinctive GraphQL type, or
+- The errors (if any) using distinctive GraphQL types, or
 - The successfully mutated entity
 
-For instance, mutation `createPost` returns an object of type `RootCreatePostMutationPayload`, and we still need to query its field `post` to retrieve the created post entity:
+For instance, mutation `updatePost` returns an object of type `PostUpdateMutationPayload` (please notice that we still need to query its field `post` to retrieve the updated post entity):
 
 ```graphql
-mutation CreatePost {
-  createPost(input: {
-    title: "Some title"
-    content: "Some content"
+mutation UpdatePost {
+  updatePost(input: {
+    id: 1724,
+    title: "New title",
+    status: publish
   }) {
     # This is the status of the mutation: SUCCESS or FAILURE
     status
@@ -53,7 +54,6 @@ mutation CreatePost {
     post {
       id
       title
-      content
       # This is the status of the post: publish, pending, trash, etc
       status
     }
@@ -63,7 +63,7 @@ mutation CreatePost {
 
 The “payload” object allows us to represent better the errors, even having a unique GraphQL type per kind of error. This allows us to present different reactions for different errors in the application, thus improving the user experience.
 
-For instance, mutation `updatePost` returns a `PostUpdateMutationPayload`, whose field `errors` returns a list of `CustomPostUpdateMutationErrorPayloadUnion`. This is a union type which contains the list of all possible errors that can happen when modifying a custom post (to be queried via introspection field `__typename`):
+In the example above, the `PostUpdateMutationPayload` type contains field `errors`, which returns a list of `CustomPostUpdateMutationErrorPayloadUnion`. This is a union type which includes the list of all possible errors that can happen when modifying a custom post (to be queried via introspection field `__typename`):
 
 - `CustomPostDoesNotExistErrorPayload`
 - `GenericErrorPayload`
@@ -71,6 +71,62 @@ For instance, mutation `updatePost` returns a `PostUpdateMutationPayload`, whose
 - `LoggedInUserHasNoPermissionToEditCustomPostErrorPayload`
 - `LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload`
 - `UserIsNotLoggedInErrorPayload`
+
+If the operation was successful, we may receive:
+
+```json
+{
+  "data": {
+    "updatePost": {
+      "status": "SUCCESS",
+      "errors": null,
+      "post": {
+        "id": 1724,
+        "title": "Some title",
+        "status": "publish"
+      }
+    }
+  }
+}
+```
+
+If the user is not logged in, we will receive:
+
+```json
+{
+  "data": {
+    "updatePost": {
+      "status": "FAILURE",
+      "errors": [
+        {
+          "__typename": "UserIsNotLoggedInErrorPayload",
+          "message": "You must be logged in to create or update custom posts"
+        }
+      ],
+      "post": null
+    }
+  }
+}
+```
+
+If the user doesn't have the permission to edit posts, we will receive:
+
+```json
+{
+  "data": {
+    "updatePost": {
+      "status": "FAILURE",
+      "errors": [
+        {
+          "__typename": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+          "message": "Your user doesn't have permission for editing custom posts."
+        }
+      ],
+      "post": null
+    }
+  }
+}
+```
 
 As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadUnion` and `ErrorPayload` types added, the GraphQL schema will look bigger:
 
