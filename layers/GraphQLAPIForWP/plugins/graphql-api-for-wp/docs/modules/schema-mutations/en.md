@@ -61,9 +61,9 @@ mutation CreatePost {
 }
 ```
 
-By containing the errors, the “payload” object allows us to represent them better, even having a unique GraphQL type per kind of error. This allows us to present different reactions for different errors in the application, thus  improving the user experience.
+The “payload” object allows us to represent better the errors, even having a unique GraphQL type per kind of error. This allows us to present different reactions for different errors in the application, thus improving the user experience.
 
-For instance, mutation `updatePost` returns a `PostUpdateMutationPayload`, whose field `errors` returns a list of `CustomPostUpdateMutationErrorPayloadUnion`. This is a union type which contains the list of all possible errors that can happen when modifying a custom post:
+For instance, mutation `updatePost` returns a `PostUpdateMutationPayload`, whose field `errors` returns a list of `CustomPostUpdateMutationErrorPayloadUnion`. This is a union type which contains the list of all possible errors that can happen when modifying a custom post (to be queried via introspection field `__typename`):
 
 - `CustomPostDoesNotExistErrorPayload`
 - `GenericErrorPayload`
@@ -72,7 +72,7 @@ For instance, mutation `updatePost` returns a `PostUpdateMutationPayload`, whose
 - `LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload`
 - `UserIsNotLoggedInErrorPayload`
 
-As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadUnion` and `ErrorPayload` types added, the GraphQL schema will look much bigger:
+As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadUnion` and `ErrorPayload` types added, the GraphQL schema will look bigger:
 
 
 
