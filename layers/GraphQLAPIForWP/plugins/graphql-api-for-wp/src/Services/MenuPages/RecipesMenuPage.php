@@ -138,7 +138,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'using-the-graphql-server-without-wordpress',
                 'Using the GraphQL server without WordPress',
                 true,
-            ],            
+            ],
         ];
         // By default, focus on the first recipe
         $activeRecipeName = $recipeEntries[0][0];
@@ -168,14 +168,32 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             \__('GraphQL API - Recipes: Use Cases, Best Practices, and Useful Queries', 'graphql-api')
         );
 
+        // This page URL
+        $url = admin_url(sprintf(
+            'admin.php?page=%s',
+            esc_attr(App::request('page') ?? App::query('page', ''))
+        ));
+
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
 
+            /**
+             * Also add the tab to the URL, not because it is needed,
+             * but because we can then "Open in new tab" and it will
+             * be focused already on that recipe.
+             */
+            $recipeURL = sprintf(
+                '%1$s&%2$s=%3$s',
+                $url,
+                RequestParams::TAB,
+                $recipeEntryName
+            );
             $markdownContent .= sprintf(
-                '<a href="#%s" class="nav-tab %s">%s</a>',
-                $recipeEntryName,
+                '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
+                '#' . $recipeEntryName,
+                $recipeURL,
                 $recipeEntryName === $activeRecipeName ? 'nav-tab-active' : '',
                 $this->getRecipeTitleForNavbar($recipeEntryTitle, $recipeEntryIsPRO)
             );
