@@ -50,6 +50,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Complementing WP-CLI',
             ],
             [
+                'site-migrations',
+                'Site migrations',
+                true,
+            ],
+            [
                 'inserting-a-gutenberg-block-in-all-posts',
                 'Inserting a Gutenberg block in all posts',
                 true,
@@ -67,11 +72,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'executing-admin-tasks',
                 'Executing admin tasks',
-                true,
-            ],
-            [
-                'site-migrations',
-                'Site migrations',
                 true,
             ],
             [
