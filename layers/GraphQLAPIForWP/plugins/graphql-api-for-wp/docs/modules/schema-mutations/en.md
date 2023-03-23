@@ -31,7 +31,7 @@ Mutation fields can be configured to return either of these 2 different entities
 A “payload” object type contains all the data concerning the mutation:
 
 - The status of the mutation (success or failure)
-- The error messages (if any), or
+- The errors (if any) as a distinctive GraphQL type, or
 - The successfully mutated entity
 
 For instance, mutation `createPost` returns an object of type `RootCreatePostMutationPayload`:
@@ -59,3 +59,17 @@ mutation CreatePost {
 ### Mutated entity
 
 Directly the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.
+
+### Comparing the 2 methods
+
+The main difference lies in that, by containing the errors, the “payload” object allows us to represent them better, even having a unique GraphQL type per kind of error. This allows us to present different reactions for different errors in the application, thus  improving the user experience.
+
+For instance, mutation `updatePost` returns a `PostUpdateMutationPayload`, whose field `errors` returns a list of `CustomPostUpdateMutationErrorPayloadUnion`. This is a union type which contains the list of all possible errors that can happen when modifying a custom post:
+
+- `CustomPostDoesNotExistErrorPayload`
+- `GenericErrorPayload`
+- `LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload`
+- `LoggedInUserHasNoPermissionToEditCustomPostErrorPayload`
+- `LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload`
+- `UserIsNotLoggedInErrorPayload`
+
