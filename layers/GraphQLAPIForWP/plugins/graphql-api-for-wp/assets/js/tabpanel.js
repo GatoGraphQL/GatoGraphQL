@@ -1,7 +1,10 @@
 jQuery( document ).ready( function($){
     $('.graphql-api-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab').on('click', function(e){
         e.preventDefault();
-        tab = $(this).attr('href');
+        tab = $(this).data('tab-target');
+        if (tab == undefined) {
+            tab = $(this).attr('href');
+        }
         tabPanel = $(tab).closest('.graphql-api-tabpanel');
         /**
          * Allow to specify which is the target to show/hide.
