@@ -72,7 +72,7 @@ In the example above, the `PostUpdateMutationPayload` type contains field `error
 - `LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload`
 - `UserIsNotLoggedInErrorPayload`
 
-If the operation was successful, we may receive:
+If the operation was successful, we will receive:
 
 ```json
 {
@@ -134,6 +134,61 @@ As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadU
 
 ### Mutated entity
 
-Directly the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.
+The mutation will directly return the mutated entity in case of success, or <code>null</code> in case of failure, and any error message will be displayed in the JSON response's top-level <code>errors</code> entry.
+
+For instance, mutation `updatePost` will return the object of type `Post`:
+
+```graphql
+mutation UpdatePost {
+  updatePost(input: {
+    id: 1724,
+    title: "New title",
+    status: publish
+  }) {
+    id
+    title
+    status
+  }
+}
+```
+
+If the operation was successful, we will receive:
+
+```json
+{
+  "data": {
+    "updatePost": {
+      "id": 1724,
+      "title": "Some title",
+      "status": "publish"
+    }
+  }
+}
+```
+
+In case of errors, these will appear under the `errors` entry of the response.
+
+For instance, if the user is not logged in, we will receive:
+
+```json
+{
+    "errors": [
+      {
+        "message": "You must be logged in to create or update custom posts'",
+        "locations": [
+          {
+            "line": 2,
+            "column": 3
+          }
+        ]
+      }
+  ],
+  "data": {
+    "updatePost": null
+  }
+}
+```
+
+Because there are no additional types added, the GraphQL schema will be leaner:
 
 ![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
