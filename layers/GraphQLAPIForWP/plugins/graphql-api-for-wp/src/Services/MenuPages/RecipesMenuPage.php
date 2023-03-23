@@ -48,7 +48,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'complementing-wp-cli',
                 'Complementing WP-CLI',
-                true,
             ],
             [
                 'inserting-a-gutenberg-block-in-all-posts',
