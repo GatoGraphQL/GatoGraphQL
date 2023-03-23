@@ -34,9 +34,8 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Intro',
             ],
             [
-                'best-practices-to-set-up-the-graphql-api',
-                'Best practices to set-up the GraphQL API',
-                true,
+                'exposing-a-secure-public-api',
+                'Exposing a secure public API',
             ],
             [
                 'fetching-data-to-build-headless-sites',
