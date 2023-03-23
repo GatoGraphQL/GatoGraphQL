@@ -34,23 +34,111 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Intro',
             ],
             [
-                'sample-recipe-1',
-                'Sample Recipe 1',
+                'fetching-data-to-build-headless-sites',
+                'Fetching data to build headless sites',
             ],
             [
-                'sample-recipe-2',
-                'Sample Recipe 2',
+                'exposing-a-secure-public-api',
+                'Exposing a secure public API',
             ],
             [
-                'sample-recipe-3',
-                'Sample Recipe 3',
+                'searching-data-by-meta-queries',
+                'Searching data by meta queries',
+            ],
+            [
+                'complementing-wp-cli',
+                'Complementing WP-CLI',
+            ],
+            [
+                'inserting-a-gutenberg-block-in-all-posts',
+                'Inserting a Gutenberg block in all posts',
                 true,
             ],
             [
-                'sample-recipe-4',
-                'Sample Recipe 4',
+                'removing-a-gutenberg-block-from-all-posts',
+                'Removing a Gutenberg block from all posts',
                 true,
             ],
+            [
+                'converting-content-to-gutenberg-blocks',
+                'Converting content to Gutenberg blocks',
+                true,
+            ],
+            [
+                'executing-admin-tasks',
+                'Executing admin tasks',
+                true,
+            ],
+            [
+                'site-migrations',
+                'Site migrations',
+                true,
+            ],
+            [
+                'automating-tasks',
+                'Automating tasks',
+                true,
+            ],
+            [
+                'checking-and-fixing-content-when-published',
+                'Checking and fixing content when published',
+                true,
+            ],
+            [
+                'bulk-editing-content',
+                'Bulk editing content',
+                true,
+            ],
+            [
+                'interacting-with-3rd-party-service-apis',
+                'Interacting with 3rd-party service APIs',
+                true,
+            ],
+            [
+                'filtering-data-from-an-external-api',
+                'Filtering data from an external API',
+                true,
+            ],
+            [
+                'transforming-data-from-an-external-api',
+                'Transforming data from an external API',
+                true,
+            ],
+            [
+                'combining-user-data-from-different-systems',
+                'Combining user data from different systems',
+                true,
+            ],
+            [
+                'importing-a-post-from-another-site',
+                'Importing a post from another site',
+                true,
+            ],
+            [
+                'importing-multiple-posts-at-once-from-another-site',
+                'Importing multiple posts at once from another site',
+                true,
+            ],
+            [
+                'synchronizing-content-across-wordpress-sites',
+                'Synchronizing content across WordPress sites',
+                true,
+            ],
+            [
+                'retrieving-and-downloading-github-artifacts',
+                'Retrieving and downloading GitHub Artifacts',
+                true,
+            ],
+            [
+                'reverting-mutations-in-case-of-error',
+                'Reverting mutations in case of error',
+                true,
+            ],
+            [
+                'using-the-graphql-server-without-wordpress',
+                'Using the GraphQL server without WordPress',
+                true,
+            ],            
         ];
         // By default, focus on the first recipe
         $activeRecipeName = $recipeEntries[0][0];
