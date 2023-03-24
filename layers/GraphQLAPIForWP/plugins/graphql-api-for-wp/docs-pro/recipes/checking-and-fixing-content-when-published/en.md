@@ -1,6 +1,12 @@
 # Checking and fixing content when published
 
-Once again, use WP Webhooks for example.
+Using some webhooks plugin, to call an internal persisted query. Eg: 
+
+WP Webhooks: https://wordpress.org/plugins/wp-webhooks/ <= cannot pass vars
+AutomatorWP: https://wordpress.org/plugins/automatorwp/
+Uncanny Automator: https://wordpress.org/plugins/uncanny-automator/
+
+
 
 http => https
 URL without link => with link

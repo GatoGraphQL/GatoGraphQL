@@ -99,11 +99,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
-                'checking-and-fixing-content-when-published',
-                'Checking and fixing content when published',
-                true,
-            ],
-            [
                 'bulk-editing-content',
                 'Bulk editing content',
                 true,
