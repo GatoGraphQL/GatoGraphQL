@@ -52,19 +52,18 @@ echo $retrieveGithubActionsArtifactDownloadURLsGraphQLServer->execute();
 exit;
 ```
 
-
 ```bash
 # Execute the GraphQL query against the standalone server
 GRAPHQL_RESPONSE=$(php -f ../standalone-graphql-server-scripts/retrieve-github-actions-artifact-download-urls.php $VARIABLES_FILE_NAME)
 
 # Print the full response, or extract just the needed data (default)
 if [ -z "$PRINT_FULL_RESPONSE" ]; then
-    echo $GRAPHQL_RESPONSE \
-        | grep -E -o '"spaceSeparatedArtifactDownloadURLs\":"(.*)"' \
-        | cut -d':' -f2- | cut -d'"' -f2- | rev | cut -d'"' -f2- | rev \
-        | sed 's/\\\//\//g'
+  echo $GRAPHQL_RESPONSE \
+    | grep -E -o '"spaceSeparatedArtifactDownloadURLs\":"(.*)"' \
+    | cut -d':' -f2- | cut -d'"' -f2- | rev | cut -d'"' -f2- | rev \
+    | sed 's/\\\//\//g'
 else
-    echo $GRAPHQL_RESPONSE
+  echo $GRAPHQL_RESPONSE
 fi
 ```
 

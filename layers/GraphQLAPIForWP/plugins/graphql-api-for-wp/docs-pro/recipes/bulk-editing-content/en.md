@@ -18,8 +18,8 @@ GRAPHQL_RESPONSE=$(curl --insecure \
 
 # Extract the number of comments into a variable
 COMMENT_COUNT=$(echo $GRAPHQL_RESPONSE \
-	| grep -E -o '"commentCount\":([0-9]+)' \
-	| cut -d':' -f2-)
+  | grep -E -o '"commentCount\":([0-9]+)' \
+  | cut -d':' -f2-)
 
 echo "Number of comments: $COMMENT_COUNT"
 

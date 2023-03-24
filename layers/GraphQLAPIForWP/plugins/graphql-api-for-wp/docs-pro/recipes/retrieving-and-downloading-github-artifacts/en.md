@@ -6,12 +6,12 @@ GRAPHQL_RESPONSE=...
 
 # Print the full response, or extract just the needed data (default)
 if [ -z "$PRINT_FULL_RESPONSE" ]; then
-    echo $GRAPHQL_RESPONSE \
-        | grep -E -o '"spaceSeparatedArtifactDownloadURLs\":"(.*)"' \
-        | cut -d':' -f2- | cut -d'"' -f2- | rev | cut -d'"' -f2- | rev \
-        | sed 's/\\\//\//g'
+  echo $GRAPHQL_RESPONSE \
+    | grep -E -o '"spaceSeparatedArtifactDownloadURLs\":"(.*)"' \
+    | cut -d':' -f2- | cut -d'"' -f2- | rev | cut -d'"' -f2- | rev \
+    | sed 's/\\\//\//g'
 else
-    echo $GRAPHQL_RESPONSE
+  echo $GRAPHQL_RESPONSE
 fi
 ```
 
@@ -138,7 +138,7 @@ LANDO_WEBSERVER_PWD="$2"
 
 # Save location of Lando webserver
 if [ -z "$LANDO_WEBSERVER_PWD" ]; then
-    LANDO_WEBSERVER_PWD="$( pwd )"
+  LANDO_WEBSERVER_PWD="$( pwd )"
 fi
 ENV_FILE="$LANDO_WEBSERVER_PWD/defaults.local.env"
 
