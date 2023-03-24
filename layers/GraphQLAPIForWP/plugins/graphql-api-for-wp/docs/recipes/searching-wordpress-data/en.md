@@ -1,5 +1,7 @@
 # Searching WordPress data
 
+In WP can't look for posts or users with certain metadata. Here, can.
+
 By meta queries:
 
 ```graphql
