@@ -89,13 +89,13 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             //     true,
             // ],
             [
-                'executing-admin-tasks',
-                'Executing admin tasks',
+                'automating-tasks',
+                'Automating tasks',
                 true,
             ],
             [
-                'automating-tasks',
-                'Automating tasks',
+                'executing-admin-tasks',
+                'Executing admin tasks',
                 true,
             ],
             [
