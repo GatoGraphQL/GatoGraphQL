@@ -34,8 +34,8 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Intro',
             ],
             [
-                'searching-data-by-meta-queries',
-                'Searching data by meta queries',
+                'searching-wordpress-data',
+                'Searching WordPress data',
             ],
             [
                 'exposing-the-single-endpoint-for-private-use',
