@@ -1,5 +1,11 @@
 # Bulk editing content
 
+Nested mutations!
+
+Consider use case for plugin:
+    https://poststatus.slack.com/archives/CHNM7Q7T8/p1672258772145609
+    > Not sure the best channel to ask this, but I'm just going to throw it out here... I find that for a lot of clients I'm working with large sets of data (10,000+ product variations for 1 product, or 13,000+ media files) ... inevitably the clients want to be able to bulk edit lots of things at once - like tag 2000 media files with the same tag. Historically I've been writing cli commands that will export/import csv files to address the bulk editing. But that still very much leaves them dependent on my team to make that level of a change. We also use WP All Import/Export and have been trying WP Sheet Editor - but they just really aren't exactly what we are needing either from a client usability standpoint. Does anyone have any other suggestions for this type of thing?
+
 Paginating content:
 
 ```bash
