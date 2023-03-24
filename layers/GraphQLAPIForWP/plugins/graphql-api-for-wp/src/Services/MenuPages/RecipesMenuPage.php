@@ -69,6 +69,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
+                'fixing-content-issues',
+                'Fixing content issues',
+                true,
+            ],
+            [
                 'inserting-a-gutenberg-block-in-all-posts',
                 'Inserting a Gutenberg block in all posts',
                 true,
