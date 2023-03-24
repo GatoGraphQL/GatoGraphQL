@@ -126,3 +126,34 @@ query PrintSpaceSeparatedArtifactDownloadURLs
 }
 ```
 
+more bash:
+
+```bash
+########################################################################
+# Inputs
+# ----------------------------------------------------------------------
+VARIABLES_FILE_NAME="$1"
+LANDO_WEBSERVER_PWD="$2"
+########################################################################
+
+# Save location of Lando webserver
+if [ -z "$LANDO_WEBSERVER_PWD" ]; then
+    LANDO_WEBSERVER_PWD="$( pwd )"
+fi
+ENV_FILE="$LANDO_WEBSERVER_PWD/defaults.local.env"
+
+# Current directory
+# @see: https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself#comment16925670_59895
+BASH_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+cd $BASH_SCRIPT_DIR
+
+ARTIFACT_DOWNLOAD_URLS=$(bash -x print-github-actions-artifact-download-urls.sh "$VARIABLES_FILE_NAME" "" "$ENV_FILE")
+
+echo "Installing plugins from locations: ${ARTIFACT_DOWNLOAD_URLS}"
+
+cd $LANDO_WEBSERVER_PWD
+
+# Install the plugins using WP-CLI
+# @see https://developer.wordpress.org/cli/commands/plugin/install/
+lando wp plugin install $ARTIFACT_DOWNLOAD_URLS --force --activate --url="graphql-api-pro-for-prod.lndo.site" --path=/app/wordpress
+```
