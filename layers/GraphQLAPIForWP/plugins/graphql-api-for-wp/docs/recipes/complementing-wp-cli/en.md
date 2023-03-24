@@ -43,3 +43,50 @@ SPANISH_LOCALE_USER_IDS=$(echo $GRAPHQL_RESPONSE \
 # Then iterate the list, and execute command for each:
 for USER_ID in $(echo $SPANISH_LOCALE_USER_IDS); do wp user update "$(echo $USER_ID)" --locale=fr_FR; done
 ```
+
+or do this:
+
+```bash
+GRAPHQL_QUERY='
+  query One {
+    spanishLocaleUsers: users(filter: { metaQuery: {
+      key: "locale",
+      compareBy: {
+        stringValue: {
+          value: "es_[A-Z]+"
+          operator: REGEXP
+        }
+      }
+    }}) {
+      id @export(as: "userIDs")
+      name
+      locale: metaValue(key: "locale")
+    }
+  }
+
+  query Two @depends(on: "One") {
+    spanishLocaleUserIDs: _arrayJoin(
+      array: $userIDs,
+      separator: " "
+    )
+  }
+'
+GRAPHQL_BODY="{\"operationName\": \"Two\", \"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
+GRAPHQL_RESPONSE=$(curl --insecure \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d $GRAPHQL_BODY \
+  https://graphql-api.lndo.site/graphql/website/)
+```
+
+or do this:
+
+```bash
+GRAPHQL_QUERY=$(cat query.gql)
+GRAPHQL_BODY="{\"operationName\": \"Two\", \"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
+GRAPHQL_RESPONSE=$(curl --insecure \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d $GRAPHQL_BODY \
+  https://graphql-api.lndo.site/graphql/website/)
+```
