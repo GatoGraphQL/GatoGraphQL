@@ -38,6 +38,10 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Searching data by meta queries',
             ],
             [
+                'exposing-the-single-endpoint-for-private-use',
+                'Exposing the single endpoint for private use',
+            ],
+            [
                 'fetching-data-to-build-headless-sites',
                 'Fetching data to build headless sites',
             ],
@@ -46,8 +50,8 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Complementing WP-CLI',
             ],
             [
-                'exposing-safe-endpoints',
-                'Exposing safe endpoints',
+                'exposing-safe-persisted-queries',
+                'Exposing safe persisted queries',
             ],
             [
                 'exposing-a-secure-public-api',

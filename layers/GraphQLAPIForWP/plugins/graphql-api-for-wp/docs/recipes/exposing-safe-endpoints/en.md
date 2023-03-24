@@ -1,1 +1,0 @@
-# Exposing safe endpoints

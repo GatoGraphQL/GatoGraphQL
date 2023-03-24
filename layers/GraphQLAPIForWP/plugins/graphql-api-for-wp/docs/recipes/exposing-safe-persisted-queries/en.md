@@ -1,0 +1,1 @@
+# Exposing safe persisted queries
