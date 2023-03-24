@@ -34,16 +34,20 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Intro',
             ],
             [
-                'fetching-data-to-build-headless-sites',
-                'Fetching data to build headless sites',
-            ],
-            [
                 'searching-data-by-meta-queries',
                 'Searching data by meta queries',
             ],
             [
+                'fetching-data-to-build-headless-sites',
+                'Fetching data to build headless sites',
+            ],
+            [
                 'complementing-wp-cli',
                 'Complementing WP-CLI',
+            ],
+            [
+                'exposing-safe-endpoints',
+                'Exposing safe endpoints',
             ],
             [
                 'exposing-a-secure-public-api',
