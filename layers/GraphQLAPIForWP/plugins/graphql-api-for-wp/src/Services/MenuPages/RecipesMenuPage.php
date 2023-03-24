@@ -69,6 +69,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
+                'fixing-content-issues',
+                'Fixing content issues',
+                true,
+            ],
+            [
                 'inserting-a-gutenberg-block-in-all-posts',
                 'Inserting a Gutenberg block in all posts',
                 true,
@@ -84,18 +89,13 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             //     true,
             // ],
             [
-                'executing-admin-tasks',
-                'Executing admin tasks',
-                true,
-            ],
-            [
                 'automating-tasks',
                 'Automating tasks',
                 true,
             ],
             [
-                'checking-and-fixing-content-when-published',
-                'Checking and fixing content when published',
+                'executing-admin-tasks',
+                'Executing admin tasks',
                 true,
             ],
             [

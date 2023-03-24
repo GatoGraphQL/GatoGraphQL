@@ -1,6 +1,4 @@
-# Checking and fixing content when published
-
-Once again, use WP Webhooks for example.
+# Fixing content issues
 
 http => https
 URL without link => with link
