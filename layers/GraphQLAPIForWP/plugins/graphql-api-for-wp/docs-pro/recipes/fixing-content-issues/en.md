@@ -80,9 +80,9 @@ var
 
 ```json
 {
-    "postId": 1,
-    "replaceFrom": " ",
-    "replaceTo": "|||"
+  "postId": 1,
+  "replaceFrom": " ",
+  "replaceTo": "|||"
 }
 ```
 
@@ -181,8 +181,8 @@ var
 
 ```json
 {
-    "oldPageSlug": "/privacy/",
-    "newPageSlug": "/user-privacy/"
+  "oldPageSlug": "/privacy/",
+  "newPageSlug": "/user-privacy/"
 }
 ```
 
@@ -234,7 +234,7 @@ var
 
 ```json
 {
-    "replaceFrom": " ",
-    "replaceTo": "|||"
+  "replaceFrom": " ",
+  "replaceTo": "|||"
 }
 ```

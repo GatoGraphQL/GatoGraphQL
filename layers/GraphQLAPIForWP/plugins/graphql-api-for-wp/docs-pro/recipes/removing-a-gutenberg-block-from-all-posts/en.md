@@ -156,6 +156,6 @@ vars:
 
 ```json
 {
-    "removeBlockType": "wp:columns"
+  "removeBlockType": "wp:columns"
 }
 ```

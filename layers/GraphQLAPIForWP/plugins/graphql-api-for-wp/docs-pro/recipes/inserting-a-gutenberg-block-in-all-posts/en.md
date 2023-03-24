@@ -77,7 +77,7 @@ vars:
 
 ```json
 {
-    "postIDs": [664]
+  "postIDs": [664]
 }
 ```
 
@@ -186,8 +186,8 @@ vars:
 
 ```json
 {
-    "postIDs": [664],
-    "injectBlockMarkup": "<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
-    "injectAfterBlockCount": 3
+  "postIDs": [664],
+  "injectBlockMarkup": "<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
+  "injectAfterBlockCount": 3
 }
 ```

@@ -65,7 +65,7 @@ var:
 
 ```json
 {
-    "oldPageSlug": "/privacy/",
-    "newPageSlug": "/user-privacy/"
+  "oldPageSlug": "/privacy/",
+  "newPageSlug": "/user-privacy/"
 }
 ```

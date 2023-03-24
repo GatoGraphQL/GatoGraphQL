@@ -98,6 +98,6 @@ var
 
 ```json
 {
-    "endpoint": "https://newapi.getpop.org/wp-json/wp/v2/posts/8888888888/?_fields=id,type,title,date"
+  "endpoint": "https://newapi.getpop.org/wp-json/wp/v2/posts/8888888888/?_fields=id,type,title,date"
 }
 ```
