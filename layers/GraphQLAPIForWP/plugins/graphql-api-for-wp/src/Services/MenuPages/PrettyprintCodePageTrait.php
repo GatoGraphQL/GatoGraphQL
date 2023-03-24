@@ -67,6 +67,13 @@ trait PrettyprintCodePageTrait
             true
         );
         \wp_enqueue_script(
+            'highlight-language-bash',
+            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/bash.min.js',
+            array('highlight'),
+            $mainPluginVersion,
+            true
+        );
+        \wp_enqueue_script(
             'highlight-run',
             $mainPluginURL . 'assets/js/run_highlight.js',
             array('highlight'),
