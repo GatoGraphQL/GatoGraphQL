@@ -34,8 +34,8 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Intro',
             ],
             [
-                'searching-data-by-meta-queries',
-                'Searching data by meta queries',
+                'searching-wordpress-data',
+                'Searching WordPress data',
             ],
             [
                 'exposing-the-single-endpoint-for-private-use',
@@ -56,6 +56,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'exposing-a-secure-public-api',
                 'Exposing a secure public API',
+                true,
+            ],
+            [
+                'boosting-the-performance-of-the-api',
+                'Boosting the performance of the API',
                 true,
             ],
             [
@@ -136,6 +141,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'retrieving-and-downloading-github-artifacts',
                 'Retrieving and downloading GitHub Artifacts',
+                true,
+            ],
+            [
+                'producing-an-error-if-the-request-entry-does-not-exist',
+                'Producing an error if the requested entry does not exist',
                 true,
             ],
             [
