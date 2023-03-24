@@ -144,6 +144,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
+                'producing-an-error-if-the-request-entry-does-not-exist',
+                'Producing an error if the requested entry does not exist',
+                true,
+            ],
+            [
                 'reverting-mutations-in-case-of-error',
                 'Reverting mutations in case of error',
                 true,
