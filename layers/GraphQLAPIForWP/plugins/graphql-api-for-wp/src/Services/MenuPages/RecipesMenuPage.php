@@ -59,6 +59,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
+                'boosting-the-performance-of-the-api',
+                'Boosting the performance of the API',
+                true,
+            ],
+            [
                 'site-migrations',
                 'Site migrations',
                 true,
