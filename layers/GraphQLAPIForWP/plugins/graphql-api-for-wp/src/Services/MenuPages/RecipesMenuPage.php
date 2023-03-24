@@ -38,16 +38,17 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Fetching data to build headless sites',
             ],
             [
-                'exposing-a-secure-public-api',
-                'Exposing a secure public API',
-            ],
-            [
                 'searching-data-by-meta-queries',
                 'Searching data by meta queries',
             ],
             [
                 'complementing-wp-cli',
                 'Complementing WP-CLI',
+            ],
+            [
+                'exposing-a-secure-public-api',
+                'Exposing a secure public API',
+                true,
             ],
             [
                 'site-migrations',
