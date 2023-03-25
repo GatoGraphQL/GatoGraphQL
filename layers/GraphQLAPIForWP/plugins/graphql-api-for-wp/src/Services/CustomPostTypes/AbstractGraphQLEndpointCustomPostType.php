@@ -251,7 +251,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         ?>
             <style type="text/css">
                 .fixed .column-state {
-                    width: 5%;
+                    width: 10%;
                 }
             </style>
         <?php
