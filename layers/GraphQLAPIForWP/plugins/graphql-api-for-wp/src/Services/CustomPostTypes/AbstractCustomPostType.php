@@ -165,12 +165,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             10,
             2
         );
-        add_action(
-            "manage_posts_extra_tablenav",
-            $this->manageCustomPostsExtraTablenav(...),
-            10,
-            1
-        );
 
         /**
          * Add extra actions to the CPT table.
@@ -332,7 +326,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
 
     /**
-     * Filter by taxonomies
+     * Print styles, and filter by taxonomies
      *
      * @see wp-admin/includes/class-wp-posts-list-table.php
      */
@@ -344,6 +338,15 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         if ($which !== 'top') {
             return;
         }
+
+        /**
+         * Print table column styles for widths
+         */
+        $this->printTableStyles();
+
+        /**
+         * Print taxonomies filter
+         */
         $taxonomies = $this->getTaxonomies();
         if ($taxonomies === []) {
             return;
@@ -357,14 +360,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
     }
 
-    /**
-     * Print additional styles
-     */
-    public function manageCustomPostsExtraTablenav(string $which): void
+    protected function printTableStyles(): void
     {
-        if ($which !== 'top') {
-            return;
-        }
         ?>
             <style type="text/css">
                 .fixed .column-description {
