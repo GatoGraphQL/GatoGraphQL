@@ -1,5 +1,19 @@
 # Retrieving and downloading GitHub Artifacts
 
+Check that installing plugin in WP-CLI doesn't work:
+  For instance, this doesn't work:
+    https://api.github.com/repos/leoloso/PoP/actions/artifacts/416480816/zip
+  But resolving to, works well:
+    https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/35501/signedartifactscontent?artifactName=graphql-api-testing&urlExpires=2022-10-29T11%3A17%3A05.4139998Z&urlSigningMethod=HMACV2&urlSignature=hBUqwaCmakdI5JzHR1K8Dxs1nhc4MC5pBx5Fy46ZWkg%3D
+Source:
+    Downloading installation package from https://api.github.com/repos/leoloso/PoP/actions/artifacts/418953849/zip...
+    Warning: Download failed. "Forbidden"
+    Warning: The 'https://api.github.com/repos/leoloso/PoP/actions/artifacts/418953849/zip' plugin could not be found.
+Then, GraphQL API is the perfect complement for WP-CLI!
+  The missing "5%" to reach "100%"
+Create a solution using GraphQL to obtain and install the artifacts from GitHub!!!
+  Check the URL to download comes in the "location" header
+
 ```bash
 # Execute the GraphQL query against the standalone server
 GRAPHQL_RESPONSE=...
