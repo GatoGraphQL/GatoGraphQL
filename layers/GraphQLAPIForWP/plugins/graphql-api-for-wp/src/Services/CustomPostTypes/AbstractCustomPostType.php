@@ -147,30 +147,30 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 $this->maybeAddExcerptAsDescription(...),
                 PHP_INT_MAX
             );
-            // Add the custom columns to the post type
-            add_filter(
-                "manage_{$postType}_posts_columns",
-                $this->setTableColumns(...)
-            );
-            add_action(
-                "manage_{$postType}_posts_custom_column",
-                $this->resolveCustomColumn(...),
-                10,
-                2
-            );
-            add_action(
-                "restrict_manage_posts",
-                $this->restrictManageCustomPosts(...),
-                10,
-                2
-            );
-            add_action(
-                "manage_posts_extra_tablenav",
-                $this->manageCustomPostsExtraTablenav(...),
-                10,
-                1
-            );
         }
+        // Add the custom columns to the post type
+        add_filter(
+            "manage_{$postType}_posts_columns",
+            $this->setTableColumns(...)
+        );
+        add_action(
+            "manage_{$postType}_posts_custom_column",
+            $this->resolveCustomColumn(...),
+            10,
+            2
+        );
+        add_action(
+            "restrict_manage_posts",
+            $this->restrictManageCustomPosts(...),
+            10,
+            2
+        );
+        add_action(
+            "manage_posts_extra_tablenav",
+            $this->manageCustomPostsExtraTablenav(...),
+            10,
+            1
+        );
 
         /**
          * Add extra actions to the CPT table.
@@ -290,6 +290,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function setTableColumns(array $columns): array
     {
+        if (!($this->isExcerptAsDescriptionEnabled() && $this->usePostExcerptAsDescription())) {
+            return $columns;
+        }
         // Add the description column after the title
         $titlePos = array_search('title', array_keys($columns));
         return array_merge(
