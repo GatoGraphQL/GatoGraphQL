@@ -244,4 +244,22 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 break;
         }
     }
+
+    /**
+     * Print additional styles
+     */
+    public function manageCustomPostsExtraTablenav(string $which): void
+    {
+        parent::manageCustomPostsExtraTablenav($which);
+        if ($which !== 'top') {
+            return;
+        }
+        ?>
+            <style type="text/css">
+                .fixed .column-state {
+                    width: 5%;
+                }
+            </style>
+        <?php
+    }
 }

@@ -164,6 +164,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 10,
                 2
             );
+            add_action(
+                "manage_posts_extra_tablenav",
+                $this->manageCustomPostsExtraTablenav(...),
+                10,
+                1
+            );
         }
 
         /**
@@ -346,6 +352,23 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             }
             $this->printTaxonomyDropdowns($taxonomy);
         }
+    }
+
+    /**
+     * Print additional styles
+     */
+    public function manageCustomPostsExtraTablenav(string $which): void
+    {
+        if ($which !== 'top') {
+            return;
+        }
+        ?>
+            <style type="text/css">
+                .fixed .column-description {
+                    width: 30%;
+                }
+            </style>
+        <?php
     }
 
     /**
