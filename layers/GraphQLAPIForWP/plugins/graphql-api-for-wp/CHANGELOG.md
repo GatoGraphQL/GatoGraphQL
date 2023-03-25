@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
 - Sort the Schema Configuration entries by name
 - Configure returning a payload object or the mutated entity for mutations
+- Added "state" column to tables for Custom Endpoints and Persisted Queries
 
 ### Fixed
 
