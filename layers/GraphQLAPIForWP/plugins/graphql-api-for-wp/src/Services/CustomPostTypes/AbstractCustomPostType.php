@@ -314,9 +314,10 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                  * @var WP_Post|null
                  */
                 $post = \get_post($post_id);
-                if (!is_null($post)) {
-                    echo $this->getCPTUtils()->getCustomPostDescription($post);
+                if ($post === null) {
+                    break;
                 }
+                echo $this->getCPTUtils()->getCustomPostDescription($post);
                 break;
         }
     }
