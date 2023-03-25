@@ -206,7 +206,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 true
             ),
             [
-                'enabled' => \__('Enabled?', 'graphql-api'),
+                'state' => \__('State', 'graphql-api'),
             ],
             array_slice(
                 $columns,
@@ -221,7 +221,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     public function resolveCustomColumn(string $column, int $post_id): void
     {
         switch ($column) {
-            case 'enabled':
+            case 'state':
                 /**
                  * @var WP_Post|null
                  */
@@ -229,7 +229,15 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 if ($post === null) {
                     break;
                 }
-                echo $this->isEndpointEnabled($post) ? '✅' : '❌';
+                echo $this->isEndpointEnabled($post)
+                    ? sprintf(
+                        \__('✅ %s', 'graphql-api'),
+                        \__('Enabled', 'graphql-api')
+                    )
+                    : sprintf(
+                        \__('❌ %s', 'graphql-api'),
+                        \__('Disabled', 'graphql-api')
+                     );
                 break;
             default:
                 parent::resolveCustomColumn($column, $post_id);
