@@ -187,4 +187,73 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             $this->getEndpointOptionsBlock()
         );
     }
+
+    /**
+     * @param array<string,string> $columns
+     * @return array<string,string>
+     */
+    public function setTableColumns(array $columns): array
+    {
+        $columns = parent::setTableColumns($columns);
+
+        // Add the enabled column after the title
+        $titlePos = array_search('title', array_keys($columns));
+        return array_merge(
+            array_slice(
+                $columns,
+                0,
+                $titlePos + 1,
+                true
+            ),
+            [
+                'state' => \__('State', 'graphql-api'),
+            ],
+            array_slice(
+                $columns,
+                $titlePos + 1,
+                null,
+                true
+            )
+        );
+    }
+
+    // Add the data to the custom columns for the book post type:
+    public function resolveCustomColumn(string $column, int $post_id): void
+    {
+        switch ($column) {
+            case 'state':
+                /**
+                 * @var WP_Post|null
+                 */
+                $post = \get_post($post_id);
+                if ($post === null) {
+                    break;
+                }
+                echo $this->isEndpointEnabled($post)
+                    ? sprintf(
+                        \__('✅ %s', 'graphql-api'),
+                        \__('Enabled', 'graphql-api')
+                    )
+                    : sprintf(
+                        \__('❌ %s', 'graphql-api'),
+                        \__('Disabled', 'graphql-api')
+                    );
+                break;
+            default:
+                parent::resolveCustomColumn($column, $post_id);
+                break;
+        }
+    }
+
+    protected function printTableStyles(): void
+    {
+        parent::printTableStyles();
+        ?>
+            <style type="text/css">
+                .fixed .column-state {
+                    width: 10%;
+                }
+            </style>
+        <?php
+    }
 }

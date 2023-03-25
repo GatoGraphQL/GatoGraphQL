@@ -147,24 +147,24 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 $this->maybeAddExcerptAsDescription(...),
                 PHP_INT_MAX
             );
-            // Add the custom columns to the post type
-            add_filter(
-                "manage_{$postType}_posts_columns",
-                $this->setTableColumns(...)
-            );
-            add_action(
-                "manage_{$postType}_posts_custom_column",
-                $this->resolveCustomColumn(...),
-                10,
-                2
-            );
-            add_action(
-                "restrict_manage_posts",
-                $this->restrictManageCustomPosts(...),
-                10,
-                2
-            );
         }
+        // Add the custom columns to the post type
+        add_filter(
+            "manage_{$postType}_posts_columns",
+            $this->setTableColumns(...)
+        );
+        add_action(
+            "manage_{$postType}_posts_custom_column",
+            $this->resolveCustomColumn(...),
+            10,
+            2
+        );
+        add_action(
+            "restrict_manage_posts",
+            $this->restrictManageCustomPosts(...),
+            10,
+            2
+        );
 
         /**
          * Add extra actions to the CPT table.
@@ -284,6 +284,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function setTableColumns(array $columns): array
     {
+        if (!($this->isExcerptAsDescriptionEnabled() && $this->usePostExcerptAsDescription())) {
+            return $columns;
+        }
         // Add the description column after the title
         $titlePos = array_search('title', array_keys($columns));
         return array_merge(
@@ -314,15 +317,16 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                  * @var WP_Post|null
                  */
                 $post = \get_post($post_id);
-                if (!is_null($post)) {
-                    echo $this->getCPTUtils()->getCustomPostDescription($post);
+                if ($post === null) {
+                    break;
                 }
+                echo $this->getCPTUtils()->getCustomPostDescription($post);
                 break;
         }
     }
 
     /**
-     * Filter by taxonomies
+     * Print styles, and filter by taxonomies
      *
      * @see wp-admin/includes/class-wp-posts-list-table.php
      */
@@ -334,6 +338,15 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         if ($which !== 'top') {
             return;
         }
+
+        /**
+         * Print table column styles for widths
+         */
+        $this->printTableStyles();
+
+        /**
+         * Print taxonomies filter
+         */
         $taxonomies = $this->getTaxonomies();
         if ($taxonomies === []) {
             return;
@@ -345,6 +358,17 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             }
             $this->printTaxonomyDropdowns($taxonomy);
         }
+    }
+
+    protected function printTableStyles(): void
+    {
+        ?>
+            <style type="text/css">
+                .fixed .column-description {
+                    width: 30%;
+                }
+            </style>
+        <?php
     }
 
     /**
