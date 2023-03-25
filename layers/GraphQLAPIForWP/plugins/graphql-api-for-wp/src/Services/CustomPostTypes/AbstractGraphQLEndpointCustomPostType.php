@@ -237,7 +237,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     : sprintf(
                         \__('❌ %s', 'graphql-api'),
                         \__('Disabled', 'graphql-api')
-                     );
+                    );
                 break;
             default:
                 parent::resolveCustomColumn($column, $post_id);
