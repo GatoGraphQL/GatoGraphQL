@@ -47,20 +47,20 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
      */
     protected function provideEndpointEntries(): array
     {
-        $endpoint = 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+        $endpoint = $this->getEndpoint();
         $providerEntries = [];
         foreach ($this->getModuleNameEntries() as $moduleName => $moduleEntry) {
             $providerEntries[$moduleName . ':enabled'] = [
                 'application/json',
                 $moduleEntry['response-enabled'],
-                $endpoint,
+                $moduleEntry['endpoint'] ?? $endpoint,
                 [],
                 $moduleEntry['query'],
             ];
             $providerEntries[$moduleName . ':disabled'] = [
                 'application/json',
                 $moduleEntry['response-disabled'],
-                $endpoint,
+                $moduleEntry['endpoint'] ?? $endpoint,
                 [],
                 $moduleEntry['query'],
             ];
@@ -68,8 +68,13 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
         return $providerEntries;
     }
 
+    protected function getEndpoint(): ?string
+    {
+        return 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+    }
+
     /**
-     * @return array<string,array<string,mixed>> An array of [$moduleName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
+     * @return array<string,array<string,mixed>> An array of [$moduleName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."], 'endpoint' => "..."]
      */
     abstract protected function getModuleNameEntries(): array;
 }

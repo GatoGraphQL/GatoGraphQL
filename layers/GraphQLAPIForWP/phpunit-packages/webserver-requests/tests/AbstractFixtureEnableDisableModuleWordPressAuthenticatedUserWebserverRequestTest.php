@@ -58,9 +58,15 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
                 'query' => $query,
                 'response-enabled' => file_get_contents($moduleEnabledGraphQLResponseFile),
                 'response-disabled' => file_get_contents($moduleDisabledGraphQLResponseFile),
+                'endpoint' => $this->getModuleEndpoint($fileName),
             ];
         }
         return $moduleEntries;
+    }
+
+    protected function getModuleEndpoint(string $fileName): ?string
+    {
+        return $this->getEndpoint();
     }
 
     /**
