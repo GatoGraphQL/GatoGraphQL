@@ -336,7 +336,7 @@ We can apply function fields multiple times to perform a more complex calculatio
 }
 ```
 
-Together with the **HTTP Request Fields** module, we can dynamically generate an API endpoint to connect to (based on the data on our site), and then extract some specific field from the returned data:
+Together with the **Send HTTP Request Fields** module, we can dynamically generate an API endpoint to connect to (based on the data on our site), and then extract some specific field from the returned data:
 
 ```graphql
 {

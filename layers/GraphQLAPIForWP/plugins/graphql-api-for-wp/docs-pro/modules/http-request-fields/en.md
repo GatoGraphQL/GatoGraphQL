@@ -1,4 +1,4 @@
-# HTTP Request Fields
+# Send HTTP Request Fields
 
 Addition of fields to execute HTTP requests against a webserver and fetch their response:
 
@@ -92,7 +92,7 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 ![Defining the entries for the Schema Configuration](../../images/http-requests-schema-configuration-entries.png "Defining the entries for the Schema Configuration")
 
-Otherwise, the entries defined in the "HTTP Request Fields" tab from the Settings will be used:
+Otherwise, the entries defined in the "Send HTTP Request Fields" tab from the Settings will be used:
 
 ![Defining the entries for the Settings](../../images/http-requests-settings-entries.png "Defining the entries for the Settings")
 

@@ -10,7 +10,7 @@ The GraphQL API PRO, in addition, also offers a different kind of fields: those 
 
 These are some examples:
 
-- Those fields from the **HTTP Request Fields** module, which connect to external API endpoints and retrieve data from them:
+- Those fields from the **Send HTTP Request Fields** module, which connect to external API endpoints and retrieve data from them:
   - `_request`
   - `_requestJSONObjectItem`
   - `_requestJSONObjectCollection`
