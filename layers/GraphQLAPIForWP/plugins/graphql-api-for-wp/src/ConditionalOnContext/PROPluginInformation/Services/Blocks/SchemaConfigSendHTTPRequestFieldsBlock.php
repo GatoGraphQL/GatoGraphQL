@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Servic
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
 
-class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigSendHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;
