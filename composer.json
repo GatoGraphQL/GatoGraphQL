@@ -561,10 +561,17 @@
             "phpunit --log-junit=phpunit-test-results.xml"
         ],
         "unit-test": "phpunit --filter='/^((?!Integration).)*$/' --log-junit=phpunit-test-results.xml",
+        "stopping-unit-test": "phpunit --filter='/^((?!Integration).)*$/' --log-junit=phpunit-test-results.xml --stop-on-error --stop-on-failure",
         "integration-test": [
             "Composer\\Config::disableProcessTimeout",
             "@optimize-autoloader",
             "phpunit --filter='Integration' --log-junit=phpunit-test-results.xml",
+            "@deoptimize-autoloader"
+        ],
+        "stopping-integration-test": [
+            "Composer\\Config::disableProcessTimeout",
+            "@optimize-autoloader",
+            "phpunit --filter='Integration' --log-junit=phpunit-test-results.xml --stop-on-error --stop-on-failure",
             "@deoptimize-autoloader"
         ],
         "prod-integration-test": [
