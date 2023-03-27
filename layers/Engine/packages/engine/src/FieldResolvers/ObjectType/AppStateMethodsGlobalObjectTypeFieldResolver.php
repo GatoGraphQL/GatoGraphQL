@@ -20,7 +20,7 @@ use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
+class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
