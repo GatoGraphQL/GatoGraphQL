@@ -1,9 +1,5 @@
 # Field Deprecation
 
-User interface to deprecate fields, and indicate how they must be replaced.
-
-## Description
-
 Fields in GraphQL can be marked as deprecated when they are not deemed necessary by the application anymore.
 
 This module allows us to mark fields as deprecated via a user interface.
