@@ -62,7 +62,7 @@ query RetrieveProxyArtifactDownloadURLs
     @remove
     @export(as: "githubRequestHeaders")
   
-  # Use the field from "HTTP Request Fields" to connect to GitHub
+  # Use the field from "Send HTTP Request Fields" to connect to GitHub
   gitHubArtifactData: _requestJSONObjectItem(
     input: {
       url: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=2",

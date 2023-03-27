@@ -17,19 +17,19 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
-const defaultBehavior = window.graphqlApiProSchemaConfigHttpRequestFields.defaultBehavior;
+const defaultBehavior = window.graphqlApiProSchemaConfigSendHttpRequestFields.defaultBehavior;
 
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api-pro/schema-config-http-request-fields', {
+registerBlockType( 'graphql-api-pro/schema-config-send-http-request-fields', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'HTTP Request Fields', 'graphql-api' ),
+	title: __( 'Send HTTP Request Fields', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.

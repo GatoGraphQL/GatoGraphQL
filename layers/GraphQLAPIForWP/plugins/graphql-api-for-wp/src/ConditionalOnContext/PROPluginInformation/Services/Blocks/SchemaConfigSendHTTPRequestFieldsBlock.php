@@ -7,14 +7,14 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Servic
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\OptionsBlockTrait;
 
-class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigSendHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
     use OptionsBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-http-request-fields';
+        return 'schema-config-send-http-request-fields';
     }
 
     public function getBlockPriority(): int
@@ -24,7 +24,7 @@ class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPs
 
     public function getEnablingModule(): ?string
     {
-        return SchemaTypeModuleResolver::HTTP_REQUEST_FIELDS;
+        return SchemaTypeModuleResolver::SEND_HTTP_REQUEST_FIELDS;
     }
 
     /**

@@ -6,7 +6,7 @@ Query the value from an environment variable or PHP constant.
 
 This module adds global field `_env` to the GraphQL schema, which allows to obtain a value from an environment variable, or from a PHP constant (most commonly defined in `wp-config.php`, but can also be defined elsewhere).
 
-Due to security reasons, the name of the environment variable and constants that can be accessed must be explicitly configured (explained in the section below).
+Due to security reasons, the name of the environment variable and constants that can be accessed must be explicitly configured (explained in the next section).
 
 Field `_env` receives the name of the environment variable or constant under parameter `"name"`, and is resolved like this:
 
@@ -87,7 +87,7 @@ We can use several of the other features in the plugin to make the GraphQL query
 
 - **Field to Input** to inject the environment value into another field via a dynamic variable
 - **@remove Directive** to avoid printing the environment variable's value on the output
-- **HTTP Request Fields** to directly connect to an external service already from within the GraphQL query
+- **Send HTTP Request Fields** to directly connect to an external service already from within the GraphQL query
 
 For instance, the following query connects to the GitHub REST API using a private access token:
 
@@ -106,7 +106,7 @@ For instance, the following query connects to the GitHub REST API using a privat
     # Do not print in output
     @remove
   
-  # Use the field from "HTTP Request Fields" to connect to GitHub
+  # Use the field from "Send HTTP Request Fields" to connect to GitHub
   gitHubArtifactData: _requestJSONObjectCollection(
     url: "https://api.github.com/repos/leoloso/PoP/actions/artifacts",
     headers: [

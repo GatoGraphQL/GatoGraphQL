@@ -211,7 +211,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('HTTP Request Fields', 'graphql-api'),
+                                    \__('Send HTTP Request Fields', 'graphql-api'),
                                     \__('No URL can be requested', 'graphql-api'),
                                     \__('All URLs can be requested', 'graphql-api'),
                                 ]

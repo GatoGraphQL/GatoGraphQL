@@ -111,7 +111,7 @@ query RetrieveProxyArtifactDownloadURLs(
     values: [$repoOwner, $repoProject, $perPage, $artifactName]
   )
 
-  # Use the field from "HTTP Request Fields" to connect to GitHub
+  # Use the field from "Send HTTP Request Fields" to connect to GitHub
   gitHubArtifactData: _requestJSONObjectItem(
     input: {
       url: $__githubAPIEndpoint

@@ -1,4 +1,4 @@
-# HTTP Request Fields
+# Send HTTP Request Fields
 
 Addition of fields to execute HTTP requests against a webserver and fetch their response:
 
@@ -14,7 +14,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 
 This module adds global fields to the GraphQL schema to retrieve data from an external source or list of sources.
 
-Due to security reasons, the URLs that can be connected to must be explicitly configured (explained in the section below).
+Due to security reasons, the URLs that can be connected to must be explicitly configured (explained in the next section).
 
 ### `_requestJSONObjectItem`
 
@@ -92,7 +92,7 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 ![Defining the entries for the Schema Configuration](../../images/http-requests-schema-configuration-entries.png "Defining the entries for the Schema Configuration")
 
-Otherwise, the entries defined in the "HTTP Request Fields" tab from the Settings will be used:
+Otherwise, the entries defined in the "Send HTTP Request Fields" tab from the Settings will be used:
 
 ![Defining the entries for the Settings](../../images/http-requests-settings-entries.png "Defining the entries for the Settings")
 

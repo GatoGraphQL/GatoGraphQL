@@ -17,7 +17,7 @@ import {
 /**
  * Define consts
  */
-const title = __('HTTP Request Fields', 'graphql-api');
+const title = __('Send HTTP Request Fields', 'graphql-api');
 const description = __('Addition of fields to execute HTTP requests against a webserver and fetch their response.', 'graphql-api');
 
 const EditBody = ( props ) => {

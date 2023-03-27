@@ -35,7 +35,7 @@ query {
 
 Let's say we want to retrieve some specific data from an external REST API endpoint, and we don't need the rest of the data. We can then use `@remove` to make the response payload smaller, thus boosting performance:
 
-- Use field `_requestJSONObjectItem` (from the **HTTP Request Fields** module) to connect to the REST API
+- Use field `_requestJSONObjectItem` (from the **Send HTTP Request Fields** module) to connect to the REST API
 - Process this data to extract the needed piece of information (via **Field to Input** and the `_objectProperty` field from **Function Fields**)
 - `@remove` the original data from the REST endpoint
 
@@ -101,7 +101,7 @@ query RetrieveGitHubActionArtifacts(
     values: [$repoOwner, $repoProject]
   )
 
-  # Use the field from "HTTP Request Fields" to connect to GitHub
+  # Use the field from "Send HTTP Request Fields" to connect to GitHub
   gitHubArtifactData: _requestJSONObjectItem(
     input: {
       url: $__githubAPIEndpoint
