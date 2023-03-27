@@ -89,6 +89,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             //     true,
             // ],
             [
+                'persisted-queries-as-webhooks',
+                'Persisted Queries as Webhooks',
+                true,
+            ],
+            [
                 'automating-tasks',
                 'Automating tasks',
                 true,
