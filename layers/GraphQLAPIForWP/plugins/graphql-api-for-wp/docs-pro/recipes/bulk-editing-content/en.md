@@ -44,7 +44,7 @@ mutation TriggerRecursion
   # Only available in Persisted Queries.
   # Mode will always be asynchronous.
   # Executed in endpoint will throw an error.
-  _triggerAutomation(
+  _recursivelyExecutePersistedQuery(
     # This value is implicit
     # persistedQueryID: null,
     overridingVariables: {
@@ -92,7 +92,7 @@ mutation TriggerRecursion
   # Only available in Persisted Queries.
   # Mode will always be asynchronous.
   # Executed in endpoint will throw an error.
-  _triggerAutomation(
+  _recursivelyExecutePersistedQuery(
     # This value is implicit
     # persistedQueryID: null,
     overridingVariables: {
