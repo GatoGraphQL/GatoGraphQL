@@ -18,7 +18,8 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
         return match ($dataName) {
             'basic',
             'by-post',
-            'passing-params'
+            'passing-params',
+            'by-post-passing-params-via-body'
                 => 'graphql-query/latest-posts-for-mobile-app/',
             'do-not-override-params-with-none-set'
                 => 'graphql-query/website/home-tag-widget/',
@@ -37,8 +38,11 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
     protected function getEntryMethod(string $dataName): string
     {
         return match ($dataName) {
-            'by-post' => 'POST',
-            default => 'GET',
+            'by-post',
+            'by-post-passing-params-via-body'
+                => 'POST',
+            default
+                => 'GET',
         };
     }
 
@@ -56,6 +60,19 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
                 ],
             default
                 => parent::getParams($dataName),
+        };
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getVariables(string $dataName): array
+    {
+        return match ($dataName) {
+            'by-post-passing-params-via-body' => [
+                'limit' => 3,
+            ],
+            default => parent::getVariables($dataName),
         };
     }
 }
