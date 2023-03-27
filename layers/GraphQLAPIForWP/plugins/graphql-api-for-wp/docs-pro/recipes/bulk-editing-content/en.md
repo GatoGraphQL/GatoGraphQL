@@ -56,6 +56,8 @@ mutation TriggerRecursion
 
 Advanced:
 
+(As there is no `_sendEmail` mutation yet, comment out this code, and re-add it once the mutation is supported)
+
 ```graphql
 mutation UpdatePosts(
   $limit: Int! = 10,
