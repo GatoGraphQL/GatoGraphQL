@@ -63,7 +63,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphqlApiProSchemaConfigHttpRequestFields';
+config.output.jsonpFunction = 'webpackJsonpGraphqlApiProSchemaConfigSendHttpRequestFields';
 // ------------------------------------------------------
 
 module.exports = config;
