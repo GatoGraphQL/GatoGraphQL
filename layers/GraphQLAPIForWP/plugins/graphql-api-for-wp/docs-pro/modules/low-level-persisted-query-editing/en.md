@@ -8,7 +8,7 @@ In GraphQL, directives are functions that enable to modify the result from a fie
 
 There are 2 types of directives: those that are applied to the schema and are executed always, on every query; and those that are applied to the query, by the user or the application on the client-side.
 
-In the GraphQL API for WordPress, most functionality involved when resolving a query is executed through directives to be applied to the schema. 
+In the GraphQL API for WordPress, most functionality involved when resolving a query is executed through directives to be applied to the schema.
 
 For instance, Cache Control works by applying directive `@cacheControl` on the schema. This configuration is by default hidden, and carried out by the plugin through the user interface:
 
