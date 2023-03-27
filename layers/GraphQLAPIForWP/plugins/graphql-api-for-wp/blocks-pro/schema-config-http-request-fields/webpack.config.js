@@ -1,7 +1,7 @@
 /**
  * Define constants
  */
-const MODULE = 'http-request-fields';
+const MODULE = 'send-http-request-fields';
 
 const MODULE_DOCS_PATH = `docs-pro/modules/${ MODULE }/`;
 const NPM_PACKAGE_VERSION = process.env.npm_package_version;

@@ -24,7 +24,7 @@ const defaultBehavior = window.graphqlApiProSchemaConfigHttpRequestFields.defaul
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api-pro/schema-config-http-request-fields', {
+registerBlockType( 'graphql-api-pro/schema-config-send-http-request-fields', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.

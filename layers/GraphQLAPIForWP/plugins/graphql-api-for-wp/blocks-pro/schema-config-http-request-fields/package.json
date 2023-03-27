@@ -1,5 +1,5 @@
 {
-	"name": "schema-config-http-request-fields",
+	"name": "schema-config-send-http-request-fields",
 	"version": "1.0.0-dev",
 	"description": "Configure the HTTP Request options in the the Schema Configuration",
 	"author": "Leonardo Losoviz",

@@ -14,7 +14,7 @@ class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPs
 
     protected function getBlockName(): string
     {
-        return 'schema-config-http-request-fields';
+        return 'schema-config-send-http-request-fields';
     }
 
     public function getBlockPriority(): int

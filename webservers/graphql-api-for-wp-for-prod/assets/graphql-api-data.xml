@@ -1512,7 +1512,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-composable-directives /-->
 
-<!-- wp:graphql-api-pro/schema-config-http-request-fields /-->
+<!-- wp:graphql-api-pro/schema-config-send-http-request-fields /-->
 
 <!-- wp:graphql-api-pro/schema-config-environment-fields /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1582,7 +1582,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-composable-directives /-->
 
-<!-- wp:graphql-api-pro/schema-config-http-request-fields /-->
+<!-- wp:graphql-api-pro/schema-config-send-http-request-fields /-->
 
 <!-- wp:graphql-api-pro/schema-config-environment-fields /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1709,7 +1709,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-composable-directives /-->
 
-<!-- wp:graphql-api-pro/schema-config-http-request-fields /-->
+<!-- wp:graphql-api-pro/schema-config-send-http-request-fields /-->
 
 <!-- wp:graphql-api-pro/schema-config-environment-fields /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1812,7 +1812,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-composable-directives /-->
 
-<!-- wp:graphql-api-pro/schema-config-http-request-fields /-->
+<!-- wp:graphql-api-pro/schema-config-send-http-request-fields /-->
 
 <!-- wp:graphql-api-pro/schema-config-environment-fields /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>

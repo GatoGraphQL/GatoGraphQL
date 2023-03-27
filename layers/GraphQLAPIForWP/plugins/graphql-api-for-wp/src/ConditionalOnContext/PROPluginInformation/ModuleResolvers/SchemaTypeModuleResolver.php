@@ -16,7 +16,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
         SchemaTypeModuleResolverTrait::getPriority as getUpstreamPriority;
     }
 
-    public final const SEND_HTTP_REQUEST_FIELDS = Plugin::NAMESPACE . '\http-request-fields';
+    public final const SEND_HTTP_REQUEST_FIELDS = Plugin::NAMESPACE . '\send-http-request-fields';
     public final const ENVIRONMENT_FIELDS = Plugin::NAMESPACE . '\environment-fields';
     public final const FUNCTION_FIELDS = Plugin::NAMESPACE . '\function-fields';
 
