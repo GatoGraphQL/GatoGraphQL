@@ -24,7 +24,7 @@ class SchemaConfigHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPluginPs
 
     public function getEnablingModule(): ?string
     {
-        return SchemaTypeModuleResolver::HTTP_REQUEST_FIELDS;
+        return SchemaTypeModuleResolver::SEND_HTTP_REQUEST_FIELDS;
     }
 
     /**
