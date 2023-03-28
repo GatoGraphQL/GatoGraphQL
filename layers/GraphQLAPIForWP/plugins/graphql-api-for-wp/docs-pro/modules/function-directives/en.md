@@ -68,9 +68,17 @@ Convert a bool to its opposite value.
 
 Add an entry under the response's `errors` to trigger the failure of the GraphQL request whenever some condition on the field is met.
 
+### `@floatDivide`
+
+Divide the field value by a float number.
+
 ### `@intAdd`
 
 Add an integer number to the field value.
+
+### `@intMultiply`
+
+Multiply an integer number with the field value.
 
 ### `@objectAddEntry`
 
