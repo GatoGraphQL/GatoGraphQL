@@ -13,6 +13,6 @@ class ManageOptionsUserAuthorizationScheme extends AbstractUserAuthorizationSche
 
     public function getDescription(): string
     {
-        return \__('Admin user(s) only', 'graphql-api');
+        return \__('Admin users', 'graphql-api');
     }
 }
