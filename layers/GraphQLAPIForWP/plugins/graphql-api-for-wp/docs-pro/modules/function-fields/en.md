@@ -50,6 +50,10 @@ Access the element on the given position in the array.
 
 Join all the strings in an array, using a provided separator.
 
+### `_arrayKeys`
+
+Keys in an array.
+
 ### `_arrayLength`
 
 Number of elements in an array.
@@ -194,6 +198,10 @@ Adds an entry to the object.
 ### `_objectCombine`
 
 Create a JSON object using the elements from an array as keys, and the elements from another array as values.
+
+### `_objectProperties`
+
+Retrieve the properties in a JSON object.
 
 ### `_objectProperty`
 
