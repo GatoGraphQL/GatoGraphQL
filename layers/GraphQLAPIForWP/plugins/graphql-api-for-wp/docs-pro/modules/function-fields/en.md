@@ -127,9 +127,13 @@ Indicate if the result from a field equals a certain value.
 
 Create an entry under the response's `errors`.
 
-<!-- ### `_floatDivide`
+### `_floatCeil`
 
-Divide a number by another number. -->
+Rounds up a number to the next highest integer.
+
+### `_floatDivide`
+
+Divide a number by another number.
 
 ### `_greaterThan`
 
