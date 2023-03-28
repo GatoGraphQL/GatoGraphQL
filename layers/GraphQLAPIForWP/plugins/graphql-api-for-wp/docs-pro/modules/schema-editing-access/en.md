@@ -4,7 +4,7 @@ Grant access to users other than admins to edit the GraphQL schema
 
 ## Description
 
-By default, only users with the `admin` role have access to the different screens of plugin GraphQL API for WordPress in the admin.
+By default, only users with the `administrator` role have access to the different screens of plugin GraphQL API for WordPress in the admin.
 
 This module `Schema Editing Access` enables to grant non-admin users access to the GraphiQL and Interactive schema clients in the admin, and to read or write the different Custom Post Types from this plugin:
 
