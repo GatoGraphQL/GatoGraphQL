@@ -159,6 +159,10 @@ Add an integer to another integer number.
 
 Sum of the integer elements in the array.
 
+### `_intMultiply`
+
+Multiple an integer with another integer number.
+
 ### `_isEmpty`
 
 Indicate if a value is empty.
