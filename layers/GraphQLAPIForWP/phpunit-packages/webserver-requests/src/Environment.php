@@ -15,6 +15,8 @@ class Environment
     public final const INTEGRATION_TESTS_AUTHENTICATED_CONTRIBUTOR_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_CONTRIBUTOR_USER_PASSWORD';
     public final const INTEGRATION_TESTS_AUTHENTICATED_AUTHOR_USER_USERNAME = 'INTEGRATION_TESTS_AUTHENTICATED_AUTHOR_USER_USERNAME';
     public final const INTEGRATION_TESTS_AUTHENTICATED_AUTHOR_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_AUTHOR_USER_PASSWORD';
+    public final const INTEGRATION_TESTS_AUTHENTICATED_EDITOR_USER_USERNAME = 'INTEGRATION_TESTS_AUTHENTICATED_EDITOR_USER_USERNAME';
+    public final const INTEGRATION_TESTS_AUTHENTICATED_EDITOR_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_EDITOR_USER_PASSWORD';
     public final const INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_USERNAME = 'INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_USERNAME';
     public final const INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_PASSWORD';
     public final const CONTINUOUS_INTEGRATION_VALID_TESTING_DOMAINS = 'CONTINUOUS_INTEGRATION_VALID_TESTING_DOMAINS';
@@ -82,6 +84,26 @@ class Environment
     public static function getIntegrationTestsAuthenticatedAuthorUserPassword(): string
     {
         $envVar = self::INTEGRATION_TESTS_AUTHENTICATED_AUTHOR_USER_PASSWORD;
+        $envVarValue = getenv($envVar);
+        if ($envVarValue === false) {
+            return '';
+        }
+        return $envVarValue;
+    }
+
+    public static function getIntegrationTestsAuthenticatedEditorUserUsername(): string
+    {
+        $envVar = self::INTEGRATION_TESTS_AUTHENTICATED_EDITOR_USER_USERNAME;
+        $envVarValue = getenv($envVar);
+        if ($envVarValue === false) {
+            return '';
+        }
+        return $envVarValue;
+    }
+
+    public static function getIntegrationTestsAuthenticatedEditorUserPassword(): string
+    {
+        $envVar = self::INTEGRATION_TESTS_AUTHENTICATED_EDITOR_USER_PASSWORD;
         $envVarValue = getenv($envVar);
         if ($envVarValue === false) {
             return '';
