@@ -115,6 +115,69 @@ query Execute
 }
 ```
 
+Iterative solution:
+
+```graphql
+query CalculateVars($limit:Int! = 10) {
+  commentCount
+  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)
+    @remove
+  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)
+    @export(as:"numberExecutions")
+  placeholderArray: _arrayPad(array: [], length: $__numberExecutions, value: "")
+    @remove
+  arrayPositions: _arrayKeys(array: $__placeholderArray)
+    @remove
+  arrayOffsets: _echo(value: $__arrayPositions)
+    @forEach(passOnwardsAs: "position")
+      @intMultiply(with:$limit)
+    @export(as:"offsets")
+    @remove
+}
+
+query CalculateURLs($limit:Int! = 10)
+  @depends(on:"CalculateVars")
+{
+  urls: _echo(value: $offsets)
+    @forEach(passOnwardsAs: "offset")
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "https://graphql-api-pro.lndo.site/wp-admin/admin.php?page=graphql_api&query={posts(pagination:{limit:%s,offset:%s}){id}}"
+          values: [$limit, $offset]
+        },
+        setResultInResponse:true
+      )
+    @export(as: "urls")
+}
+
+query CalculateURLInputs
+  @depends(on:"CalculateURLs")
+{
+  urlInputs: _echo(value: $urls)
+    @forEach(passOnwardsAs: "url")
+      @applyField(
+        name: "_objectAddEntry",
+        arguments: {
+          object: {}
+          key: "url"
+          value: $url
+        },
+        setResultInResponse:true
+      )
+    @export(as: "urlInputs")
+}
+
+query ExecuteURLs
+  @depends(on:"CalculateURLInputs")
+{
+  _asyncRequest(inputs: $urlInputs) {
+    statusCode
+    body
+  }
+}
+```
+
 Another possibility: via bash.
 
 Paginating content:
@@ -145,4 +208,3 @@ echo "Number of requests to process (at $ENTRIES_TO_PROCESS entries per request)
 # Execute the requests, at one per second
 for PAGINATION_NUMBER in $(seq 0 $(($PAGINATION_COUNT - 1))); do sleep 1 && echo "\n\nPagination number: $PAGINATION_NUMBER\n" && curl --insecure -X POST -H "Content-Type: application/json" -d "{\"query\": \"{ comments(pagination: { limit: $ENTRIES_TO_PROCESS, offset: $(($PAGINATION_NUMBER * $ENTRIES_TO_PROCESS)) }) { id date content } }\"}" https://graphql-api.lndo.site/graphql/website/ ; done
 ```
-
