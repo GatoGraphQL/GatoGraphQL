@@ -199,6 +199,10 @@ Adds an entry to the object.
 
 Create a JSON object using the elements from an array as keys, and the elements from another array as values.
 
+### `_objectProperties`
+
+Retrieve the properties in a JSON object.
+
 ### `_objectProperty`
 
 Retrieve a property from a JSON object.
