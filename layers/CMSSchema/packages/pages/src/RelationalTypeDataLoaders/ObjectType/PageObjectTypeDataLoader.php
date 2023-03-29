@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Pages\RelationalTypeDataLoaders\ObjectType;
 use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostObjectTypeDataLoader;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 
-class PageTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
+class PageObjectTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
 {
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 
