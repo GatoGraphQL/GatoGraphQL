@@ -6,7 +6,7 @@ namespace PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType;
 
 use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostObjectTypeDataLoader;
 
-class HighlightTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
+class HighlightObjectTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
 {
     /**
      * @param array<string|int> $ids
