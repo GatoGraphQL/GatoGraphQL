@@ -5,7 +5,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 - `_sendJSONObjectItemHTTPRequest`
 - `_sendJSONObjectItemHTTPRequests`
 - `_sendJSONObjectCollectionHTTPRequest`
-- `_multipleRequestJSONObjectCollections`
+- `_sendJSONObjectCollectionHTTPRequests`
 - `_sendHTTPRequest`
 - `_sendHTTPRequests`
 - `_requestGraphQL`
@@ -34,11 +34,11 @@ It retrieves the (REST) response for a collection of JSON objects.
 
 **Signature:** `_sendJSONObjectCollectionHTTPRequest(input: HTTPRequestInput!): [JSONObject]`.
 
-### `_multipleRequestJSONObjectCollections`
+### `_sendJSONObjectCollectionHTTPRequests`
 
 It retrieves the (REST) response for a collection of JSON objects from multiple endpoints, executed asynchronously (in parallel) or synchronously (one after the other).
 
-**Signature:** `_multipleRequestJSONObjectCollections(inputs: [HTTPRequestInput!]!): [[JSONObject]]`.
+**Signature:** `_sendJSONObjectCollectionHTTPRequests(inputs: [HTTPRequestInput!]!): [[JSONObject]]`.
 
 ### `_sendHTTPRequest`
 
@@ -319,7 +319,7 @@ Executing the following query:
 }
 ```
 
-### Multiple-request fields: `_sendJSONObjectItemHTTPRequests`, `_multipleRequestJSONObjectCollections` and `_sendHTTPRequests`
+### Multiple-request fields: `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendHTTPRequests`
 
 These fields work similar to their corresponding non-multiple fields, but they retrieve data from several endpoints at once, either asynchronously (in parallel) or synchronously (one after the other). The responses are placed in a list, in the same order in which the URLs were defined in the `urls` parameter.
 
