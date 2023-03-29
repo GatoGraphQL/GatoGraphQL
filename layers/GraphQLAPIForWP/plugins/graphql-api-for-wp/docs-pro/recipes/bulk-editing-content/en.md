@@ -178,6 +178,9 @@ query ExecuteURLs
 }
 ```
 
+Use "timeout" to execute query, but don't wait for the response
+  Indicate it will produce an error though
+
 Use "delay" for sleep!!!
 
 ```graphql
