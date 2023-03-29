@@ -8,7 +8,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 
 use function get_role;
 
-class UserRoleTypeDataLoader extends AbstractObjectTypeDataLoader
+class UserRoleObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     /**
      * @param array<string|int> $ids

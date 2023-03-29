@@ -6,21 +6,21 @@ namespace PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPCMSSchema\UserRolesWP\RelationalTypeDataLoaders\ObjectType\UserRoleTypeDataLoader;
+use PoPCMSSchema\UserRolesWP\RelationalTypeDataLoaders\ObjectType\UserRoleObjectTypeDataLoader;
 use WP_Role;
 
 class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    private ?UserRoleTypeDataLoader $userRoleTypeDataLoader = null;
+    private ?UserRoleObjectTypeDataLoader $userRoleObjectTypeDataLoader = null;
 
-    final public function setUserRoleTypeDataLoader(UserRoleTypeDataLoader $userRoleTypeDataLoader): void
+    final public function setUserRoleObjectTypeDataLoader(UserRoleObjectTypeDataLoader $userRoleObjectTypeDataLoader): void
     {
-        $this->userRoleTypeDataLoader = $userRoleTypeDataLoader;
+        $this->userRoleObjectTypeDataLoader = $userRoleObjectTypeDataLoader;
     }
-    final protected function getUserRoleTypeDataLoader(): UserRoleTypeDataLoader
+    final protected function getUserRoleObjectTypeDataLoader(): UserRoleObjectTypeDataLoader
     {
-        /** @var UserRoleTypeDataLoader */
-        return $this->userRoleTypeDataLoader ??= $this->instanceManager->getInstance(UserRoleTypeDataLoader::class);
+        /** @var UserRoleObjectTypeDataLoader */
+        return $this->userRoleObjectTypeDataLoader ??= $this->instanceManager->getInstance(UserRoleObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -42,6 +42,6 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getUserRoleTypeDataLoader();
+        return $this->getUserRoleObjectTypeDataLoader();
     }
 }
