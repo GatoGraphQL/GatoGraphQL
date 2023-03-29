@@ -6,13 +6,13 @@ namespace PoPCMSSchema\Media\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPCMSSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaTypeDataLoader;
+use PoPCMSSchema\Media\RelationalTypeDataLoaders\ObjectType\MediaObjectTypeDataLoader;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 
 class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 {
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
-    private ?MediaTypeDataLoader $mediaTypeDataLoader = null;
+    private ?MediaObjectTypeDataLoader $mediaObjectTypeDataLoader = null;
 
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -23,14 +23,14 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
         /** @var MediaTypeAPIInterface */
         return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
-    final public function setMediaTypeDataLoader(MediaTypeDataLoader $mediaTypeDataLoader): void
+    final public function setMediaObjectTypeDataLoader(MediaObjectTypeDataLoader $mediaObjectTypeDataLoader): void
     {
-        $this->mediaTypeDataLoader = $mediaTypeDataLoader;
+        $this->mediaObjectTypeDataLoader = $mediaObjectTypeDataLoader;
     }
-    final protected function getMediaTypeDataLoader(): MediaTypeDataLoader
+    final protected function getMediaObjectTypeDataLoader(): MediaObjectTypeDataLoader
     {
-        /** @var MediaTypeDataLoader */
-        return $this->mediaTypeDataLoader ??= $this->instanceManager->getInstance(MediaTypeDataLoader::class);
+        /** @var MediaObjectTypeDataLoader */
+        return $this->mediaObjectTypeDataLoader ??= $this->instanceManager->getInstance(MediaObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -51,6 +51,6 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getMediaTypeDataLoader();
+        return $this->getMediaObjectTypeDataLoader();
     }
 }
