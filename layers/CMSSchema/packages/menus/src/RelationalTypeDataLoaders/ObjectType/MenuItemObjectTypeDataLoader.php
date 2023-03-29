@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Menus\RelationalTypeDataLoaders\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 
-class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
+class MenuItemObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry = null;
 
