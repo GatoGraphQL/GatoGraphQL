@@ -122,7 +122,7 @@ query CreateHTTPRequestInputs
 query RetrieveActualArtifactDownloadURLs
   @depends(on: "CreateHTTPRequestInputs")
 {
-  _asyncRequest(
+  _multipleRequest(
     inputs: $httpRequestInputs
   ) {
     artifactDownloadURL: header(name: "Location")
