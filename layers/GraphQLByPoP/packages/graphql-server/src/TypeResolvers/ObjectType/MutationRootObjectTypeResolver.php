@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
-use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\MutationRootTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\MutationRootObjectTypeDataLoader;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
@@ -19,7 +19,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
     use RemoveIdentifiableObjectInterfaceObjectTypeResolverTrait;
 
     private ?TypeResolverHelperInterface $typeResolverHelper = null;
-    private ?MutationRootTypeDataLoader $mutationRootTypeDataLoader = null;
+    private ?MutationRootObjectTypeDataLoader $mutationRootObjectTypeDataLoader = null;
 
     final public function setTypeResolverHelper(TypeResolverHelperInterface $typeResolverHelper): void
     {
@@ -30,14 +30,14 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
         /** @var TypeResolverHelperInterface */
         return $this->typeResolverHelper ??= $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
     }
-    final public function setMutationRootTypeDataLoader(MutationRootTypeDataLoader $mutationRootTypeDataLoader): void
+    final public function setMutationRootObjectTypeDataLoader(MutationRootObjectTypeDataLoader $mutationRootObjectTypeDataLoader): void
     {
-        $this->mutationRootTypeDataLoader = $mutationRootTypeDataLoader;
+        $this->mutationRootObjectTypeDataLoader = $mutationRootObjectTypeDataLoader;
     }
-    final protected function getMutationRootTypeDataLoader(): MutationRootTypeDataLoader
+    final protected function getMutationRootObjectTypeDataLoader(): MutationRootObjectTypeDataLoader
     {
-        /** @var MutationRootTypeDataLoader */
-        return $this->mutationRootTypeDataLoader ??= $this->instanceManager->getInstance(MutationRootTypeDataLoader::class);
+        /** @var MutationRootObjectTypeDataLoader */
+        return $this->mutationRootObjectTypeDataLoader ??= $this->instanceManager->getInstance(MutationRootObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -59,7 +59,7 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getMutationRootTypeDataLoader();
+        return $this->getMutationRootObjectTypeDataLoader();
     }
 
     public function isFieldNameConditionSatisfiedForSchema(
