@@ -178,8 +178,26 @@ query ExecuteURLs
 }
 ```
 
+Use "delay" for sleep!!!
+
+```graphql
+{
+  _sendHTTPRequest(input:{
+    url: "https://newapi.getpop.org/wp-json/wp/v2/users/1/?_fields=id,name,url"
+    options:{
+      # 2 seconds (2000 milliseconds)
+      delay: 2000
+    }
+  }) {
+    statusCode
+    body
+  }
+}
+```
+
 Also handle errors in any of the iterations. Eg: using @fail
   Or keep for another guide!?
+
 
 Another possibility: via bash.
 
