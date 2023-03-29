@@ -3,7 +3,7 @@
 Addition of fields to execute HTTP requests against a webserver and fetch their response:
 
 - `_requestJSONObjectItem`
-- `_asyncRequestJSONObjectItems`
+- `_multipleRequestJSONObjectItems`
 - `_requestJSONObjectCollection`
 - `_asyncRequestJSONObjectCollections`
 - `_request`
@@ -22,11 +22,11 @@ It retrieves the (REST) response for a single JSON object.
 
 **Signature:** `_requestJSONObjectItem(input: HTTPRequestInput!): JSONObject`.
 
-### `_asyncRequestJSONObjectItems`
+### `_multipleRequestJSONObjectItems`
 
 It retrieves the (REST) response for a single JSON object from multiple endpoints, executed asynchronously, in parallel.
 
-**Signature:** `_asyncRequestJSONObjectItems(inputs: [HTTPRequestInput!]!): [JSONObject]`.
+**Signature:** `_multipleRequestJSONObjectItems(inputs: [HTTPRequestInput!]!): [JSONObject]`.
 
 ### `_requestJSONObjectCollection`
 
@@ -319,7 +319,7 @@ Executing the following query:
 }
 ```
 
-### Async fields: `_asyncRequestJSONObjectItems`, `_asyncRequestJSONObjectCollections` and `_multipleRequest`
+### Async fields: `_multipleRequestJSONObjectItems`, `_asyncRequestJSONObjectCollections` and `_multipleRequest`
 
 These fields work similar to their corresponding non-async fields, but they retrieve data from several endpoints at once, asynchronously and in parallel. The responses are placed in a list, in the same order in which the URLs were defined in the `urls` parameter.
 
@@ -327,7 +327,7 @@ For instance, the following query:
 
 ```graphql
 {
-  weatherForecasts: _asyncRequestJSONObjectItems(
+  weatherForecasts: _multipleRequestJSONObjectItems(
     urls: [
       "https://api.weather.gov/gridpoints/TOP/31,80/forecast",
       "https://api.weather.gov/gridpoints/TOP/41,55/forecast"
