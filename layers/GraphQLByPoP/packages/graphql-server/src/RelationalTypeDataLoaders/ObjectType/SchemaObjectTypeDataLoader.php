@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractUseObjectDictionaryTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class SchemaTypeDataLoader extends AbstractUseObjectDictionaryTypeDataLoader
+class SchemaObjectTypeDataLoader extends AbstractUseObjectDictionaryTypeDataLoader
 {
     private ?SchemaObjectTypeResolver $schemaObjectTypeResolver = null;
     private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;

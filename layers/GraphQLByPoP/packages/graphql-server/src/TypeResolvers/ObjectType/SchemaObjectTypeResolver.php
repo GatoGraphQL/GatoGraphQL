@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
-use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaObjectTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
 class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    private ?SchemaTypeDataLoader $schemaTypeDataLoader = null;
+    private ?SchemaObjectTypeDataLoader $schemaObjectTypeDataLoader = null;
 
-    final public function setSchemaTypeDataLoader(SchemaTypeDataLoader $schemaTypeDataLoader): void
+    final public function setSchemaObjectTypeDataLoader(SchemaObjectTypeDataLoader $schemaObjectTypeDataLoader): void
     {
-        $this->schemaTypeDataLoader = $schemaTypeDataLoader;
+        $this->schemaObjectTypeDataLoader = $schemaObjectTypeDataLoader;
     }
-    final protected function getSchemaTypeDataLoader(): SchemaTypeDataLoader
+    final protected function getSchemaObjectTypeDataLoader(): SchemaObjectTypeDataLoader
     {
-        /** @var SchemaTypeDataLoader */
-        return $this->schemaTypeDataLoader ??= $this->instanceManager->getInstance(SchemaTypeDataLoader::class);
+        /** @var SchemaObjectTypeDataLoader */
+        return $this->schemaObjectTypeDataLoader ??= $this->instanceManager->getInstance(SchemaObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -41,6 +41,6 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getSchemaTypeDataLoader();
+        return $this->getSchemaObjectTypeDataLoader();
     }
 }
