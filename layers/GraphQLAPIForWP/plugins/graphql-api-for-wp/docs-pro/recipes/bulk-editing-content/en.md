@@ -182,13 +182,25 @@ Use "delay" for sleep!!!
 
 ```graphql
 {
-  _sendHTTPRequest(input:{
-    url: "https://newapi.getpop.org/wp-json/wp/v2/users/1/?_fields=id,name,url"
-    options:{
-      # 2 seconds (2000 milliseconds)
-      delay: 2000
-    }
-  }) {
+  _sendHTTPRequests(
+    async:false,
+    inputs:[
+      {
+        url: "https://newapi.getpop.org/wp-json/wp/v2/users/1/?_fields=id,name,url"
+        options:{
+          # 2 seconds (2000 milliseconds)
+          delay: 2000
+        }
+      },
+      {
+        url: "https://newapi.getpop.org/wp-json/wp/v2/users/2/?_fields=id,name,url"
+        options:{
+          # 2 seconds (2000 milliseconds)
+          delay: 2000
+        }
+      }
+    ]
+  ) {
     statusCode
     body
   }
