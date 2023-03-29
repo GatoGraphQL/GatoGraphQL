@@ -8,7 +8,7 @@ use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagObjectType
 use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 
-class QueryableTagListTypeDataLoader extends AbstractTagObjectTypeDataLoader
+class QueryableTagListObjectTypeDataLoader extends AbstractTagObjectTypeDataLoader
 {
     private ?QueryableTagTypeAPIInterface $queryableTagListTypeAPI = null;
 

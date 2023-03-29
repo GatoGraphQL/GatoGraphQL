@@ -6,7 +6,7 @@ namespace PoPCMSSchema\TagsWP\Overrides\RelationalTypeDataLoaders\UnionType;
 
 use PoPCMSSchema\Tags\Module as TagsModule;
 use PoPCMSSchema\Tags\ModuleConfiguration as TagsModuleConfiguration;
-use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\QueryableTagListTypeDataLoader;
+use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\QueryableTagListObjectTypeDataLoader;
 use PoPCMSSchema\Tags\RelationalTypeDataLoaders\UnionType\TagUnionTypeDataLoader as UpstreamTagUnionTypeDataLoader;
 use PoP\ComponentModel\App;
 
@@ -16,16 +16,16 @@ use PoP\ComponentModel\App;
  */
 class TagUnionTypeDataLoader extends UpstreamTagUnionTypeDataLoader
 {
-    private ?QueryableTagListTypeDataLoader $queryableTagListTypeDataLoader = null;
+    private ?QueryableTagListObjectTypeDataLoader $queryableTagListObjectTypeDataLoader = null;
 
-    final public function setQueryableTagListTypeDataLoader(QueryableTagListTypeDataLoader $queryableTagListTypeDataLoader): void
+    final public function setQueryableTagListObjectTypeDataLoader(QueryableTagListObjectTypeDataLoader $queryableTagListObjectTypeDataLoader): void
     {
-        $this->queryableTagListTypeDataLoader = $queryableTagListTypeDataLoader;
+        $this->queryableTagListObjectTypeDataLoader = $queryableTagListObjectTypeDataLoader;
     }
-    final protected function getQueryableTagListTypeDataLoader(): QueryableTagListTypeDataLoader
+    final protected function getQueryableTagListObjectTypeDataLoader(): QueryableTagListObjectTypeDataLoader
     {
-        /** @var QueryableTagListTypeDataLoader */
-        return $this->queryableTagListTypeDataLoader ??= $this->instanceManager->getInstance(QueryableTagListTypeDataLoader::class);
+        /** @var QueryableTagListObjectTypeDataLoader */
+        return $this->queryableTagListObjectTypeDataLoader ??= $this->instanceManager->getInstance(QueryableTagListObjectTypeDataLoader::class);
     }
 
     /**
@@ -34,7 +34,7 @@ class TagUnionTypeDataLoader extends UpstreamTagUnionTypeDataLoader
      */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        $query = $this->getQueryableTagListTypeDataLoader()->getQueryToRetrieveObjectsForIDs($ids);
+        $query = $this->getQueryableTagListObjectTypeDataLoader()->getQueryToRetrieveObjectsForIDs($ids);
 
         // From all taxonomies from the member typeResolvers
         /** @var TagsModuleConfiguration */
@@ -54,6 +54,6 @@ class TagUnionTypeDataLoader extends UpstreamTagUnionTypeDataLoader
     public function getObjects(array $ids): array
     {
         $query = $this->getQueryToRetrieveObjectsForIDs($ids);
-        return $this->getQueryableTagListTypeDataLoader()->executeQuery($query);
+        return $this->getQueryableTagListObjectTypeDataLoader()->executeQuery($query);
     }
 }
