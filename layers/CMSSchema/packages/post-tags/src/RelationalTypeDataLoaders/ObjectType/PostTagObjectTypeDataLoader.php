@@ -8,7 +8,7 @@ use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagObjectTypeDataLoader;
 use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 
-class PostTagTypeDataLoader extends AbstractTagObjectTypeDataLoader
+class PostTagObjectTypeDataLoader extends AbstractTagObjectTypeDataLoader
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 

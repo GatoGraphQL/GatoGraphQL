@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTags\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoPCMSSchema\PostTags\RelationalTypeDataLoaders\ObjectType\PostTagTypeDataLoader;
+use PoPCMSSchema\PostTags\RelationalTypeDataLoaders\ObjectType\PostTagObjectTypeDataLoader;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeResolvers\ObjectType\AbstractTagObjectTypeResolver;
 
 class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {
-    private ?PostTagTypeDataLoader $postTagTypeDataLoader = null;
+    private ?PostTagObjectTypeDataLoader $postTagObjectTypeDataLoader = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    final public function setPostTagTypeDataLoader(PostTagTypeDataLoader $postTagTypeDataLoader): void
+    final public function setPostTagObjectTypeDataLoader(PostTagObjectTypeDataLoader $postTagObjectTypeDataLoader): void
     {
-        $this->postTagTypeDataLoader = $postTagTypeDataLoader;
+        $this->postTagObjectTypeDataLoader = $postTagObjectTypeDataLoader;
     }
-    final protected function getPostTagTypeDataLoader(): PostTagTypeDataLoader
+    final protected function getPostTagObjectTypeDataLoader(): PostTagObjectTypeDataLoader
     {
-        /** @var PostTagTypeDataLoader */
-        return $this->postTagTypeDataLoader ??= $this->instanceManager->getInstance(PostTagTypeDataLoader::class);
+        /** @var PostTagObjectTypeDataLoader */
+        return $this->postTagObjectTypeDataLoader ??= $this->instanceManager->getInstance(PostTagObjectTypeDataLoader::class);
     }
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
@@ -54,6 +54,6 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getPostTagTypeDataLoader();
+        return $this->getPostTagObjectTypeDataLoader();
     }
 }
