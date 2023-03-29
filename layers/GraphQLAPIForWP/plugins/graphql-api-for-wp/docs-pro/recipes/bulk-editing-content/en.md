@@ -178,6 +178,9 @@ query ExecuteURLs
 }
 ```
 
+Also handle errors in any of the iterations. Eg: using @fail
+  Or keep for another guide!?
+
 Another possibility: via bash.
 
 Paginating content:
