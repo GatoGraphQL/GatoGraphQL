@@ -12,7 +12,7 @@ Mention we will need some new Custom Endpoint just to enable this
 
 ```graphql
 query CreatePostInputs {
-  githubPullRequestEntries: _requestJSONObjectCollection(
+  githubPullRequestEntries: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://api.github.com/repos/leoloso/PoP/pulls?state=closed&per_page=2&page=75"
     }

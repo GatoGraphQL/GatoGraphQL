@@ -4,7 +4,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 
 - `_sendJSONObjectItemHTTPRequest`
 - `_sendJSONObjectItemHTTPRequests`
-- `_requestJSONObjectCollection`
+- `_sendJSONObjectCollectionHTTPRequest`
 - `_multipleRequestJSONObjectCollections`
 - `_sendHTTPRequest`
 - `_sendHTTPRequests`
@@ -28,11 +28,11 @@ It retrieves the (REST) response for a single JSON object from multiple endpoint
 
 **Signature:** `_sendJSONObjectItemHTTPRequests(inputs: [HTTPRequestInput!]!): [JSONObject]`.
 
-### `_requestJSONObjectCollection`
+### `_sendJSONObjectCollectionHTTPRequest`
 
 It retrieves the (REST) response for a collection of JSON objects.
 
-**Signature:** `_requestJSONObjectCollection(input: HTTPRequestInput!): [JSONObject]`.
+**Signature:** `_sendJSONObjectCollectionHTTPRequest(input: HTTPRequestInput!): [JSONObject]`.
 
 ### `_multipleRequestJSONObjectCollections`
 
@@ -168,7 +168,7 @@ This query:
 }
 ```
 
-### `_requestJSONObjectCollection`
+### `_sendJSONObjectCollectionHTTPRequest`
 
 This field is similar to `_sendJSONObjectItemHTTPRequest`, but it retrieves a collection of JSON objects, as from the WP REST API endpoint `/wp-json/wp/v2/posts/`.
 

@@ -185,7 +185,7 @@ In this query, `@forEach` wraps `@underJSONObjectProperty`, which itself wraps `
 
 ```graphql
 query {
-  postListData: _requestJSONObjectCollection(
+  postListData: _sendJSONObjectCollectionHTTPRequest(
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/?per_page=3&_fields=id,type,title,date"
   )
     @forEach

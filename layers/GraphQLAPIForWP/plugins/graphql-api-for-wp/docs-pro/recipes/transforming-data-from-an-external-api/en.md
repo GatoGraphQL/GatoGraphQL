@@ -4,7 +4,7 @@ api-transformation.gql:
 
 ```graphql
 query AdaptExternalAPIData {
-  userList: _requestJSONObjectCollection(
+  userList: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url"
     }
@@ -77,7 +77,7 @@ conditional-data-manipulation-in-array.gql
 query ExtractEmailsFromAPIAndUpperCaseSpecialOnes
 {
   # Retrieve data from a REST API endpoint
-  userEntries: _requestJSONObjectCollection(
+  userEntries: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions"
     }

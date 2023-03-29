@@ -6,7 +6,7 @@ Modify this query! (it's for multiple entries)
 
 ```graphql
 query CreatePostInputs {
-  githubPullRequestEntries: _requestJSONObjectCollection(
+  githubPullRequestEntries: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://api.github.com/repos/leoloso/PoP/pulls?state=closed&per_page=2&page=75"
     }

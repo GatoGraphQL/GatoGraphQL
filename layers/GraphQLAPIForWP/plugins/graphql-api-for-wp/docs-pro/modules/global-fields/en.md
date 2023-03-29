@@ -13,7 +13,7 @@ These are some examples:
 - Those fields from the **Send HTTP Request Fields** module, which connect to external API endpoints and retrieve data from them:
   - `_sendHTTPRequest`
   - `_sendJSONObjectItemHTTPRequest`
-  - `_requestJSONObjectCollection`
+  - `_sendJSONObjectCollectionHTTPRequest`
   - `_requestGraphQL`
 - Those fields from the **Function Fields** module, which expose functionalities commonly found in programming languages (such as PHP):
   - `_not`

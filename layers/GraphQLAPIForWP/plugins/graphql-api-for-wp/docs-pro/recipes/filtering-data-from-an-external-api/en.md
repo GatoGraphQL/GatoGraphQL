@@ -4,7 +4,7 @@ api-filtering.gql:
 
 ```graphql
 query FilterExternalAPIData {
-  userList: _requestJSONObjectCollection(
+  userList: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url"
     }

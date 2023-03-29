@@ -107,7 +107,7 @@ For instance, the following query connects to the GitHub REST API using a privat
     @remove
   
   # Use the field from "Send HTTP Request Fields" to connect to GitHub
-  gitHubArtifactData: _requestJSONObjectCollection(
+  gitHubArtifactData: _sendJSONObjectCollectionHTTPRequest(
     url: "https://api.github.com/repos/leoloso/PoP/actions/artifacts",
     headers: [
       "Accept: application/vnd.github+json",
