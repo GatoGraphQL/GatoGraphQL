@@ -7,7 +7,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 - `_requestJSONObjectCollection`
 - `_asyncRequestJSONObjectCollections`
 - `_request`
-- `_asyncRequest`
+- `_multipleRequest`
 - `_requestGraphQL`
 
 ## Description
@@ -53,11 +53,11 @@ It connects to the specified URL and retrieves an `HTTPResponse` object, which c
 
 **Signature:** `_request(input: HTTPRequestInput!): HTTPResponse`.
 
-### `_asyncRequest`
+### `_multipleRequest`
 
 Similar to `_request` but it receives multiple URLs, and connects to them asynchronously, in parallel.
 
-**Signature:** `_asyncRequest(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
+**Signature:** `_multipleRequest(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
 
 ### `_requestGraphQL`
 
@@ -319,7 +319,7 @@ Executing the following query:
 }
 ```
 
-### Async fields: `_asyncRequestJSONObjectItems`, `_asyncRequestJSONObjectCollections` and `_asyncRequest`
+### Async fields: `_asyncRequestJSONObjectItems`, `_asyncRequestJSONObjectCollections` and `_multipleRequest`
 
 These fields work similar to their corresponding non-async fields, but they retrieve data from several endpoints at once, asynchronously and in parallel. The responses are placed in a list, in the same order in which the URLs were defined in the `urls` parameter.
 

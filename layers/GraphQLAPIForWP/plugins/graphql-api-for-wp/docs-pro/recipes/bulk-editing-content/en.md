@@ -171,7 +171,7 @@ query CalculateURLInputs
 query ExecuteURLs
   @depends(on:"CalculateURLInputs")
 {
-  _asyncRequest(inputs: $urlInputs) {
+  _multipleRequest(inputs: $urlInputs) {
     statusCode
     body
   }
