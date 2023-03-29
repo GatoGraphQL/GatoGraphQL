@@ -9,7 +9,7 @@ use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoP_Notifications_API;
 
-class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+class NotificationObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     protected function getOrderbyDefault(): string
     {
