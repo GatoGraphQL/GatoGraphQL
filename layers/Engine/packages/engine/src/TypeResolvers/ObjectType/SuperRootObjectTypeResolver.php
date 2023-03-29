@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\ObjectModels\SuperRoot;
-use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootTypeDataLoader;
+use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootObjectTypeDataLoader;
 use PoP\Engine\StaticHelpers\SuperRootHelper;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -21,17 +21,17 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 {
     use CanonicalTypeNameTypeResolverTrait;
 
-    private ?SuperRootTypeDataLoader $superRootTypeDataLoader = null;
+    private ?SuperRootObjectTypeDataLoader $superRootObjectTypeDataLoader = null;
     private ?MandatoryOperationDirectiveResolverRegistryInterface $mandatoryOperationDirectiveResolverRegistry = null;
 
-    final public function setSuperRootTypeDataLoader(SuperRootTypeDataLoader $superRootTypeDataLoader): void
+    final public function setSuperRootObjectTypeDataLoader(SuperRootObjectTypeDataLoader $superRootObjectTypeDataLoader): void
     {
-        $this->superRootTypeDataLoader = $superRootTypeDataLoader;
+        $this->superRootObjectTypeDataLoader = $superRootObjectTypeDataLoader;
     }
-    final protected function getSuperRootTypeDataLoader(): SuperRootTypeDataLoader
+    final protected function getSuperRootObjectTypeDataLoader(): SuperRootObjectTypeDataLoader
     {
-        /** @var SuperRootTypeDataLoader */
-        return $this->superRootTypeDataLoader ??= $this->instanceManager->getInstance(SuperRootTypeDataLoader::class);
+        /** @var SuperRootObjectTypeDataLoader */
+        return $this->superRootObjectTypeDataLoader ??= $this->instanceManager->getInstance(SuperRootObjectTypeDataLoader::class);
     }
     final public function setMandatoryOperationDirectiveResolverRegistry(MandatoryOperationDirectiveResolverRegistryInterface $mandatoryOperationDirectiveResolverRegistry): void
     {
@@ -62,7 +62,7 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getSuperRootTypeDataLoader();
+        return $this->getSuperRootObjectTypeDataLoader();
     }
 
     /**

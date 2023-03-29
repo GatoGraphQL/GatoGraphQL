@@ -7,7 +7,7 @@ namespace PoP\Engine\RelationalTypeDataLoaders\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\Engine\ObjectModels\Root;
 
-class RootTypeDataLoader extends AbstractObjectTypeDataLoader
+class RootObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?Root $root = null;
 
