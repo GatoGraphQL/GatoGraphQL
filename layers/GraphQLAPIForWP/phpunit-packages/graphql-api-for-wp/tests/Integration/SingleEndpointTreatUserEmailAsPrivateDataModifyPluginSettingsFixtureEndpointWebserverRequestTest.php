@@ -29,7 +29,7 @@ class SingleEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpoi
      */
     protected function customizeProviderEndpointEntries(array $providerItems): array
     {
-        $providerItems['user-email:0'] = $providerItems['user-email'];
+        $providerItems['user-email:0'][1] = $providerItems['user-email'][1];
         return $providerItems;
     }
 }
