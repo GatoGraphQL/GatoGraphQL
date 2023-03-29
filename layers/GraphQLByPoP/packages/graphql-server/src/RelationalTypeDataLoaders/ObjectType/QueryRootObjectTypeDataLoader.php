@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 
-class QueryRootTypeDataLoader extends AbstractObjectTypeDataLoader
+class QueryRootObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?QueryRoot $queryRoot = null;
 

@@ -11,7 +11,7 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTy
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+abstract class AbstractCustomPostObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
@@ -85,7 +85,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
     protected function getLimitParam(array $query_args): int
     {
         return App::applyFilters(
-            'CustomPostTypeDataLoader:query:limit',
+            'CustomPostObjectTypeDataLoader:query:limit',
             parent::getLimitParam($query_args)
         );
     }
@@ -93,6 +93,6 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
     protected function getQueryHookName(): string
     {
         // Allow to add the timestamp for loadingLatest
-        return 'CustomPostTypeDataLoader:query';
+        return 'CustomPostObjectTypeDataLoader:query';
     }
 }

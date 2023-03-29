@@ -9,7 +9,7 @@ use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+class MediaObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 

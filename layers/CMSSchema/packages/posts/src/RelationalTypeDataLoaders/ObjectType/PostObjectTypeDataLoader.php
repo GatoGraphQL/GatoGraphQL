@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Posts\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
+use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostObjectTypeDataLoader;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
-class PostTypeDataLoader extends AbstractCustomPostTypeDataLoader
+class PostObjectTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
 

@@ -6,13 +6,13 @@ namespace PoPCMSSchema\Comments\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader;
+use PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentObjectTypeDataLoader;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 
 class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 {
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
-    private ?CommentTypeDataLoader $commentTypeDataLoader = null;
+    private ?CommentObjectTypeDataLoader $commentObjectTypeDataLoader = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -23,14 +23,14 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
         /** @var CommentTypeAPIInterface */
         return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
     }
-    final public function setCommentTypeDataLoader(CommentTypeDataLoader $commentTypeDataLoader): void
+    final public function setCommentObjectTypeDataLoader(CommentObjectTypeDataLoader $commentObjectTypeDataLoader): void
     {
-        $this->commentTypeDataLoader = $commentTypeDataLoader;
+        $this->commentObjectTypeDataLoader = $commentObjectTypeDataLoader;
     }
-    final protected function getCommentTypeDataLoader(): CommentTypeDataLoader
+    final protected function getCommentObjectTypeDataLoader(): CommentObjectTypeDataLoader
     {
-        /** @var CommentTypeDataLoader */
-        return $this->commentTypeDataLoader ??= $this->instanceManager->getInstance(CommentTypeDataLoader::class);
+        /** @var CommentObjectTypeDataLoader */
+        return $this->commentObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -51,6 +51,6 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getCommentTypeDataLoader();
+        return $this->getCommentObjectTypeDataLoader();
     }
 }

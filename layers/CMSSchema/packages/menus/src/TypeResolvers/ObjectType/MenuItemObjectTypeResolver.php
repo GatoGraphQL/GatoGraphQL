@@ -7,20 +7,20 @@ namespace PoPCMSSchema\Menus\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPCMSSchema\Menus\ObjectModels\MenuItem;
-use PoPCMSSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuItemTypeDataLoader;
+use PoPCMSSchema\Menus\RelationalTypeDataLoaders\ObjectType\MenuItemObjectTypeDataLoader;
 
 class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    private ?MenuItemTypeDataLoader $menuItemTypeDataLoader = null;
+    private ?MenuItemObjectTypeDataLoader $menuItemObjectTypeDataLoader = null;
 
-    final public function setMenuItemTypeDataLoader(MenuItemTypeDataLoader $menuItemTypeDataLoader): void
+    final public function setMenuItemObjectTypeDataLoader(MenuItemObjectTypeDataLoader $menuItemObjectTypeDataLoader): void
     {
-        $this->menuItemTypeDataLoader = $menuItemTypeDataLoader;
+        $this->menuItemObjectTypeDataLoader = $menuItemObjectTypeDataLoader;
     }
-    final protected function getMenuItemTypeDataLoader(): MenuItemTypeDataLoader
+    final protected function getMenuItemObjectTypeDataLoader(): MenuItemObjectTypeDataLoader
     {
-        /** @var MenuItemTypeDataLoader */
-        return $this->menuItemTypeDataLoader ??= $this->instanceManager->getInstance(MenuItemTypeDataLoader::class);
+        /** @var MenuItemObjectTypeDataLoader */
+        return $this->menuItemObjectTypeDataLoader ??= $this->instanceManager->getInstance(MenuItemObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -42,6 +42,6 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getMenuItemTypeDataLoader();
+        return $this->getMenuItemObjectTypeDataLoader();
     }
 }

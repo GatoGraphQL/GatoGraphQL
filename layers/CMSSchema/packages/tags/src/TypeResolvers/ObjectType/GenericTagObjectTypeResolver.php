@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\TypeResolvers\ObjectType;
 
-use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\QueryableTagListTypeDataLoader;
+use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\QueryableTagListObjectTypeDataLoader;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
@@ -15,17 +15,17 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
  */
 class GenericTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 {
-    private ?QueryableTagListTypeDataLoader $queryableTagListTypeDataLoader = null;
+    private ?QueryableTagListObjectTypeDataLoader $queryableTagListObjectTypeDataLoader = null;
     private ?QueryableTagTypeAPIInterface $queryableTagListTypeAPI = null;
 
-    final public function setQueryableTagListTypeDataLoader(QueryableTagListTypeDataLoader $queryableTagListTypeDataLoader): void
+    final public function setQueryableTagListObjectTypeDataLoader(QueryableTagListObjectTypeDataLoader $queryableTagListObjectTypeDataLoader): void
     {
-        $this->queryableTagListTypeDataLoader = $queryableTagListTypeDataLoader;
+        $this->queryableTagListObjectTypeDataLoader = $queryableTagListObjectTypeDataLoader;
     }
-    final protected function getQueryableTagListTypeDataLoader(): QueryableTagListTypeDataLoader
+    final protected function getQueryableTagListObjectTypeDataLoader(): QueryableTagListObjectTypeDataLoader
     {
-        /** @var QueryableTagListTypeDataLoader */
-        return $this->queryableTagListTypeDataLoader ??= $this->instanceManager->getInstance(QueryableTagListTypeDataLoader::class);
+        /** @var QueryableTagListObjectTypeDataLoader */
+        return $this->queryableTagListObjectTypeDataLoader ??= $this->instanceManager->getInstance(QueryableTagListObjectTypeDataLoader::class);
     }
     final public function setQueryableTagTypeAPI(QueryableTagTypeAPIInterface $queryableTagListTypeAPI): void
     {
@@ -49,7 +49,7 @@ class GenericTagObjectTypeResolver extends AbstractTagObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getQueryableTagListTypeDataLoader();
+        return $this->getQueryableTagListObjectTypeDataLoader();
     }
 
     public function getTagTypeAPI(): TagTypeAPIInterface

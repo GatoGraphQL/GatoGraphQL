@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
-use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootTypeDataLoader;
+use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootObjectTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 
 class RootObjectTypeResolver extends AbstractObjectTypeResolver
@@ -17,16 +17,16 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public final const HOOK_DESCRIPTION = __CLASS__ . ':description';
 
-    private ?RootTypeDataLoader $rootTypeDataLoader = null;
+    private ?RootObjectTypeDataLoader $rootObjectTypeDataLoader = null;
 
-    final public function setRootTypeDataLoader(RootTypeDataLoader $rootTypeDataLoader): void
+    final public function setRootObjectTypeDataLoader(RootObjectTypeDataLoader $rootObjectTypeDataLoader): void
     {
-        $this->rootTypeDataLoader = $rootTypeDataLoader;
+        $this->rootObjectTypeDataLoader = $rootObjectTypeDataLoader;
     }
-    final protected function getRootTypeDataLoader(): RootTypeDataLoader
+    final protected function getRootObjectTypeDataLoader(): RootObjectTypeDataLoader
     {
-        /** @var RootTypeDataLoader */
-        return $this->rootTypeDataLoader ??= $this->instanceManager->getInstance(RootTypeDataLoader::class);
+        /** @var RootObjectTypeDataLoader */
+        return $this->rootObjectTypeDataLoader ??= $this->instanceManager->getInstance(RootObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -51,6 +51,6 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getRootTypeDataLoader();
+        return $this->getRootObjectTypeDataLoader();
     }
 }

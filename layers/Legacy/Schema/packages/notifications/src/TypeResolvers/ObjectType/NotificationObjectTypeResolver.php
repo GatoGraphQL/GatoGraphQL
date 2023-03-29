@@ -6,20 +6,20 @@ namespace PoPSchema\Notifications\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType\NotificationTypeDataLoader;
+use PoPSchema\Notifications\RelationalTypeDataLoaders\ObjectType\NotificationObjectTypeDataLoader;
 
 class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    private ?NotificationTypeDataLoader $notificationTypeDataLoader = null;
+    private ?NotificationObjectTypeDataLoader $notificationObjectTypeDataLoader = null;
     
-    final public function setNotificationTypeDataLoader(NotificationTypeDataLoader $notificationTypeDataLoader): void
+    final public function setNotificationObjectTypeDataLoader(NotificationObjectTypeDataLoader $notificationObjectTypeDataLoader): void
     {
-        $this->notificationTypeDataLoader = $notificationTypeDataLoader;
+        $this->notificationObjectTypeDataLoader = $notificationObjectTypeDataLoader;
     }
-    final protected function getNotificationTypeDataLoader(): NotificationTypeDataLoader
+    final protected function getNotificationObjectTypeDataLoader(): NotificationObjectTypeDataLoader
     {
-        /** @var NotificationTypeDataLoader */
-        return $this->notificationTypeDataLoader ??= $this->instanceManager->getInstance(NotificationTypeDataLoader::class);
+        /** @var NotificationObjectTypeDataLoader */
+        return $this->notificationObjectTypeDataLoader ??= $this->instanceManager->getInstance(NotificationObjectTypeDataLoader::class);
     }
     
     public function getTypeName(): string
@@ -40,6 +40,6 @@ class NotificationObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getNotificationTypeDataLoader();
+        return $this->getNotificationObjectTypeDataLoader();
     }
 }

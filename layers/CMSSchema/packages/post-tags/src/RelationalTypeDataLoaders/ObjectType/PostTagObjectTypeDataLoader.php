@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTags\RelationalTypeDataLoaders\ObjectType;
 
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagTypeDataLoader;
+use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagObjectTypeDataLoader;
 use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 
-class PostTagTypeDataLoader extends AbstractTagTypeDataLoader
+class PostTagObjectTypeDataLoader extends AbstractTagObjectTypeDataLoader
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 

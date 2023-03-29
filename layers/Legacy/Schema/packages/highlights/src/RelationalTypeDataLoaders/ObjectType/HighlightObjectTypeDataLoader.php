@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
+use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostObjectTypeDataLoader;
 
-class HighlightTypeDataLoader extends AbstractCustomPostTypeDataLoader
+class HighlightObjectTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
 {
     /**
      * @param array<string|int> $ids

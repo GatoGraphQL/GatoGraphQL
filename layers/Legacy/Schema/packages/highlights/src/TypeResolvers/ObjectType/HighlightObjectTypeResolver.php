@@ -7,20 +7,20 @@ namespace PoPSchema\Highlights\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Highlights\Facades\HighlightTypeAPIFacade;
-use PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType\HighlightTypeDataLoader;
+use PoPSchema\Highlights\RelationalTypeDataLoaders\ObjectType\HighlightObjectTypeDataLoader;
 
 class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    private ?HighlightTypeDataLoader $highlightTypeDataLoader = null;
+    private ?HighlightObjectTypeDataLoader $highlightObjectTypeDataLoader = null;
     
-    final public function setHighlightTypeDataLoader(HighlightTypeDataLoader $highlightTypeDataLoader): void
+    final public function setHighlightObjectTypeDataLoader(HighlightObjectTypeDataLoader $highlightObjectTypeDataLoader): void
     {
-        $this->highlightTypeDataLoader = $highlightTypeDataLoader;
+        $this->highlightObjectTypeDataLoader = $highlightObjectTypeDataLoader;
     }
-    final protected function getHighlightTypeDataLoader(): HighlightTypeDataLoader
+    final protected function getHighlightObjectTypeDataLoader(): HighlightObjectTypeDataLoader
     {
-        /** @var HighlightTypeDataLoader */
-        return $this->highlightTypeDataLoader ??= $this->instanceManager->getInstance(HighlightTypeDataLoader::class);
+        /** @var HighlightObjectTypeDataLoader */
+        return $this->highlightObjectTypeDataLoader ??= $this->instanceManager->getInstance(HighlightObjectTypeDataLoader::class);
     }
     
     public function getTypeName(): string
@@ -41,6 +41,6 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getHighlightTypeDataLoader();
+        return $this->getHighlightObjectTypeDataLoader();
     }
 }

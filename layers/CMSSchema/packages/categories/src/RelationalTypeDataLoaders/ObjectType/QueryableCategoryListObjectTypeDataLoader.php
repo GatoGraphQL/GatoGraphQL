@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\AbstractCategoryTypeDataLoader;
+use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\AbstractCategoryObjectTypeDataLoader;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 
-class QueryableCategoryListTypeDataLoader extends AbstractCategoryTypeDataLoader
+class QueryableCategoryListObjectTypeDataLoader extends AbstractCategoryObjectTypeDataLoader
 {
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI = null;
 

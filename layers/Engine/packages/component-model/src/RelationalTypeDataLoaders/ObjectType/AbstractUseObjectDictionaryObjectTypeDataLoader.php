@@ -8,7 +8,7 @@ use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-abstract class AbstractUseObjectDictionaryTypeDataLoader extends AbstractObjectTypeDataLoader
+abstract class AbstractUseObjectDictionaryObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?ObjectDictionaryInterface $objectDictionary = null;
 

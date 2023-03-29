@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 
-abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+abstract class AbstractCategoryObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    abstract public function getTagListTypeAPI(): TagListTypeAPIInterface;
+    abstract public function getCategoryListTypeAPI(): CategoryListTypeAPIInterface;
 
     /**
      * @param array<string|int> $ids
@@ -26,7 +26,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableData
 
     protected function getOrderbyDefault(): string
     {
-        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:tags:count');
+        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:categories:count');
     }
 
     protected function getOrderDefault(): string
@@ -41,8 +41,7 @@ abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableData
      */
     public function executeQuery(array $query, array $options = []): array
     {
-        $tagTypeAPI = $this->getTagListTypeAPI();
-        return $tagTypeAPI->getTags($query, $options);
+        return $this->getCategoryListTypeAPI()->getCategories($query, $options);
     }
 
     /**

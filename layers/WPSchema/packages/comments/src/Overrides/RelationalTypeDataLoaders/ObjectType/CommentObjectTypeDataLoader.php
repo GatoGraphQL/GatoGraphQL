@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Comments\Overrides\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader as UpstreamCommentTypeDataLoader;
+use PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentObjectTypeDataLoader as UpstreamCommentObjectTypeDataLoader;
 
-class CommentTypeDataLoader extends UpstreamCommentTypeDataLoader
+class CommentObjectTypeDataLoader extends UpstreamCommentObjectTypeDataLoader
 {
     /**
      * From the WordPress docs:

@@ -6,22 +6,22 @@ namespace PoPCMSSchema\Pages\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPCMSSchema\Pages\RelationalTypeDataLoaders\ObjectType\PageTypeDataLoader;
+use PoPCMSSchema\Pages\RelationalTypeDataLoaders\ObjectType\PageObjectTypeDataLoader;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 
 class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    private ?PageTypeDataLoader $pageTypeDataLoader = null;
+    private ?PageObjectTypeDataLoader $pageObjectTypeDataLoader = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    final public function setPageTypeDataLoader(PageTypeDataLoader $pageTypeDataLoader): void
+    final public function setPageObjectTypeDataLoader(PageObjectTypeDataLoader $pageObjectTypeDataLoader): void
     {
-        $this->pageTypeDataLoader = $pageTypeDataLoader;
+        $this->pageObjectTypeDataLoader = $pageObjectTypeDataLoader;
     }
-    final protected function getPageTypeDataLoader(): PageTypeDataLoader
+    final protected function getPageObjectTypeDataLoader(): PageObjectTypeDataLoader
     {
-        /** @var PageTypeDataLoader */
-        return $this->pageTypeDataLoader ??= $this->instanceManager->getInstance(PageTypeDataLoader::class);
+        /** @var PageObjectTypeDataLoader */
+        return $this->pageObjectTypeDataLoader ??= $this->instanceManager->getInstance(PageObjectTypeDataLoader::class);
     }
     final public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
     {
@@ -51,6 +51,6 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getPageTypeDataLoader();
+        return $this->getPageObjectTypeDataLoader();
     }
 }

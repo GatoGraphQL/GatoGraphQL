@@ -7,20 +7,20 @@ namespace PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPCMSSchema\UserAvatars\ObjectModels\UserAvatar;
-use PoPCMSSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarTypeDataLoader;
+use PoPCMSSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType\UserAvatarObjectTypeDataLoader;
 
 class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    private ?UserAvatarTypeDataLoader $userAvatarTypeDataLoader = null;
+    private ?UserAvatarObjectTypeDataLoader $userAvatarObjectTypeDataLoader = null;
 
-    final public function setUserAvatarTypeDataLoader(UserAvatarTypeDataLoader $userAvatarTypeDataLoader): void
+    final public function setUserAvatarObjectTypeDataLoader(UserAvatarObjectTypeDataLoader $userAvatarObjectTypeDataLoader): void
     {
-        $this->userAvatarTypeDataLoader = $userAvatarTypeDataLoader;
+        $this->userAvatarObjectTypeDataLoader = $userAvatarObjectTypeDataLoader;
     }
-    final protected function getUserAvatarTypeDataLoader(): UserAvatarTypeDataLoader
+    final protected function getUserAvatarObjectTypeDataLoader(): UserAvatarObjectTypeDataLoader
     {
-        /** @var UserAvatarTypeDataLoader */
-        return $this->userAvatarTypeDataLoader ??= $this->instanceManager->getInstance(UserAvatarTypeDataLoader::class);
+        /** @var UserAvatarObjectTypeDataLoader */
+        return $this->userAvatarObjectTypeDataLoader ??= $this->instanceManager->getInstance(UserAvatarObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -42,6 +42,6 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getUserAvatarTypeDataLoader();
+        return $this->getUserAvatarObjectTypeDataLoader();
     }
 }

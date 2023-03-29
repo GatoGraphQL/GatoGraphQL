@@ -16,9 +16,9 @@ class GraphQLAPIArrowFnUnionTypeChainedRuleContainerConfigurationService extends
             $this->pluginDir . '/vendor/getpop/component-model/src/TypeResolvers/AbstractRelationalTypeResolver.php',
             $this->pluginDir . '/vendor/getpop/component-model/src/TypeResolvers/ObjectType/AbstractObjectTypeResolver.php',
             $this->pluginDir . '/vendor/getpop/engine/src/DirectiveResolvers/FilterIDsSatisfyingConditionFieldDirectiveResolverTrait.php',
-            $this->pluginDir . '/vendor/pop-cms-schema/menus/src/RelationalTypeDataLoaders/ObjectType/MenuItemTypeDataLoader.php',
-            $this->pluginDir . '/vendor/pop-cms-schema/menus/src/RelationalTypeDataLoaders/ObjectType/MenuTypeDataLoader.php',
-            $this->pluginDir . '/vendor/pop-cms-schema/user-avatars/src/RelationalTypeDataLoaders/ObjectType/UserAvatarTypeDataLoader.php',
+            $this->pluginDir . '/vendor/pop-cms-schema/menus/src/RelationalTypeDataLoaders/ObjectType/MenuItemObjectTypeDataLoader.php',
+            $this->pluginDir . '/vendor/pop-cms-schema/menus/src/RelationalTypeDataLoaders/ObjectType/MenuObjectTypeDataLoader.php',
+            $this->pluginDir . '/vendor/pop-cms-schema/user-avatars/src/RelationalTypeDataLoaders/ObjectType/UserAvatarObjectTypeDataLoader.php',
             $this->pluginDir . '/vendor/pop-wp-schema/menus/src/FieldResolvers/ObjectType/MenuObjectTypeFieldResolver.php',
         ];
     }

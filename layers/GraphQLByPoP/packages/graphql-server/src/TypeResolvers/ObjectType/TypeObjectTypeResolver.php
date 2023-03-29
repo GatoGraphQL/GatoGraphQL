@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\TypeInterface;
-use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
 class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
-    private ?WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader = null;
+    private ?WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader = null;
 
-    final public function setWrappingTypeOrSchemaDefinitionReferenceTypeDataLoader(WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader): void
+    final public function setWrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader(WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader $wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader): void
     {
-        $this->wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader = $wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader;
+        $this->wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader = $wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader;
     }
-    final protected function getWrappingTypeOrSchemaDefinitionReferenceTypeDataLoader(): WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader
+    final protected function getWrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader(): WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader
     {
-        /** @var WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader */
-        return $this->wrappingTypeOrSchemaDefinitionReferenceTypeDataLoader ??= $this->instanceManager->getInstance(WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader::class);
+        /** @var WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader */
+        return $this->wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader ??= $this->instanceManager->getInstance(WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -41,6 +41,6 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getWrappingTypeOrSchemaDefinitionReferenceTypeDataLoader();
+        return $this->getWrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader();
     }
 }

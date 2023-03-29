@@ -7,20 +7,20 @@ namespace PoP\Multisite\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Multisite\ObjectModels\Site;
-use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteTypeDataLoader;
+use PoP\Multisite\RelationalTypeDataLoaders\ObjectType\SiteObjectTypeDataLoader;
 
 class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    private ?SiteTypeDataLoader $siteTypeDataLoader = null;
+    private ?SiteObjectTypeDataLoader $siteObjectTypeDataLoader = null;
 
-    final public function setSiteTypeDataLoader(SiteTypeDataLoader $siteTypeDataLoader): void
+    final public function setSiteObjectTypeDataLoader(SiteObjectTypeDataLoader $siteObjectTypeDataLoader): void
     {
-        $this->siteTypeDataLoader = $siteTypeDataLoader;
+        $this->siteObjectTypeDataLoader = $siteObjectTypeDataLoader;
     }
-    final protected function getSiteTypeDataLoader(): SiteTypeDataLoader
+    final protected function getSiteObjectTypeDataLoader(): SiteObjectTypeDataLoader
     {
-        /** @var SiteTypeDataLoader */
-        return $this->siteTypeDataLoader ??= $this->instanceManager->getInstance(SiteTypeDataLoader::class);
+        /** @var SiteObjectTypeDataLoader */
+        return $this->siteObjectTypeDataLoader ??= $this->instanceManager->getInstance(SiteObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -42,6 +42,6 @@ class SiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getSiteTypeDataLoader();
+        return $this->getSiteObjectTypeDataLoader();
     }
 }

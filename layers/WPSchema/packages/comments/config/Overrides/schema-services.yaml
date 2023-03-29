@@ -6,5 +6,5 @@ services:
     PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver:
         class: PoPWPSchema\Comments\Overrides\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver
 
-    PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader:
-        class: PoPWPSchema\Comments\Overrides\RelationalTypeDataLoaders\ObjectType\CommentTypeDataLoader
+    PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentObjectTypeDataLoader:
+        class: PoPWPSchema\Comments\Overrides\RelationalTypeDataLoaders\ObjectType\CommentObjectTypeDataLoader

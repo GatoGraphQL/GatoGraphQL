@@ -2,26 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\RelationalTypeDataLoaders\ObjectType;
+namespace PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 
-class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+abstract class AbstractTagObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    private ?UserTypeAPIInterface $userTypeAPI = null;
-
-    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
-    {
-        $this->userTypeAPI = $userTypeAPI;
-    }
-    final protected function getUserTypeAPI(): UserTypeAPIInterface
-    {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
-    }
+    abstract public function getTagListTypeAPI(): TagListTypeAPIInterface;
 
     /**
      * @param array<string|int> $ids
@@ -36,18 +26,12 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     protected function getOrderbyDefault(): string
     {
-        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:users:name');
+        return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:tags:count');
     }
 
     protected function getOrderDefault(): string
     {
-        return 'ASC';
-    }
-
-    protected function getQueryHookName(): string
-    {
-        // Get the role either from a provided attr, and allow PoP User Platform to set the default role
-        return 'UserTypeDataLoader:query';
+        return 'DESC';
     }
 
     /**
@@ -57,7 +41,8 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
      */
     public function executeQuery(array $query, array $options = []): array
     {
-        return $this->getUserTypeAPI()->getUsers($query, $options);
+        $tagTypeAPI = $this->getTagListTypeAPI();
+        return $tagTypeAPI->getTags($query, $options);
     }
 
     /**
