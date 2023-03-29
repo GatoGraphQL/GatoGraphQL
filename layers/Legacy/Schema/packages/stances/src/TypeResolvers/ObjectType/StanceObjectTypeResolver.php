@@ -7,20 +7,20 @@ namespace PoPSchema\Stances\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPSchema\Stances\Facades\StanceTypeAPIFacade;
-use PoPSchema\Stances\RelationalTypeDataLoaders\ObjectType\StanceTypeDataLoader;
+use PoPSchema\Stances\RelationalTypeDataLoaders\ObjectType\StanceObjectTypeDataLoader;
 
 class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    private ?StanceTypeDataLoader $stanceTypeDataLoader = null;
+    private ?StanceObjectTypeDataLoader $stanceObjectTypeDataLoader = null;
     
-    final public function setStanceTypeDataLoader(StanceTypeDataLoader $stanceTypeDataLoader): void
+    final public function setStanceObjectTypeDataLoader(StanceObjectTypeDataLoader $stanceObjectTypeDataLoader): void
     {
-        $this->stanceTypeDataLoader = $stanceTypeDataLoader;
+        $this->stanceObjectTypeDataLoader = $stanceObjectTypeDataLoader;
     }
-    final protected function getStanceTypeDataLoader(): StanceTypeDataLoader
+    final protected function getStanceObjectTypeDataLoader(): StanceObjectTypeDataLoader
     {
-        /** @var StanceTypeDataLoader */
-        return $this->stanceTypeDataLoader ??= $this->instanceManager->getInstance(StanceTypeDataLoader::class);
+        /** @var StanceObjectTypeDataLoader */
+        return $this->stanceObjectTypeDataLoader ??= $this->instanceManager->getInstance(StanceObjectTypeDataLoader::class);
     }
     
     public function getTypeName(): string
@@ -41,6 +41,6 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getStanceTypeDataLoader();
+        return $this->getStanceObjectTypeDataLoader();
     }
 }
