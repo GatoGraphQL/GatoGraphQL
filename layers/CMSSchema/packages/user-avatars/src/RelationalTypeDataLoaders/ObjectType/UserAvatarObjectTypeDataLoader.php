@@ -7,7 +7,7 @@ namespace PoPCMSSchema\UserAvatars\RelationalTypeDataLoaders\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoPCMSSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 
-class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
+class UserAvatarObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry = null;
 
