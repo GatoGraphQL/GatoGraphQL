@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
-use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\QueryRootTypeDataLoader;
+use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\QueryRootObjectTypeDataLoader;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
@@ -14,16 +14,16 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 {
     use CanonicalTypeNameTypeResolverTrait;
 
-    private ?QueryRootTypeDataLoader $queryRootTypeDataLoader = null;
+    private ?QueryRootObjectTypeDataLoader $queryRootObjectTypeDataLoader = null;
 
-    final public function setQueryRootTypeDataLoader(QueryRootTypeDataLoader $queryRootTypeDataLoader): void
+    final public function setQueryRootObjectTypeDataLoader(QueryRootObjectTypeDataLoader $queryRootObjectTypeDataLoader): void
     {
-        $this->queryRootTypeDataLoader = $queryRootTypeDataLoader;
+        $this->queryRootObjectTypeDataLoader = $queryRootObjectTypeDataLoader;
     }
-    final protected function getQueryRootTypeDataLoader(): QueryRootTypeDataLoader
+    final protected function getQueryRootObjectTypeDataLoader(): QueryRootObjectTypeDataLoader
     {
-        /** @var QueryRootTypeDataLoader */
-        return $this->queryRootTypeDataLoader ??= $this->instanceManager->getInstance(QueryRootTypeDataLoader::class);
+        /** @var QueryRootObjectTypeDataLoader */
+        return $this->queryRootObjectTypeDataLoader ??= $this->instanceManager->getInstance(QueryRootObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -45,7 +45,7 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getQueryRootTypeDataLoader();
+        return $this->getQueryRootObjectTypeDataLoader();
     }
 
     public function isFieldNameConditionSatisfiedForSchema(
