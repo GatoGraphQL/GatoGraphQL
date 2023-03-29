@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostTypeDataLoader;
+use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostObjectTypeDataLoader;
 
-class StanceTypeDataLoader extends AbstractCustomPostTypeDataLoader
+class StanceTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
 {
     /**
      * @param array<string|int> $ids
