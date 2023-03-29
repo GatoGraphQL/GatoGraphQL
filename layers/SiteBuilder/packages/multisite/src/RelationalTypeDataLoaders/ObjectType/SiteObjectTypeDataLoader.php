@@ -8,7 +8,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDa
 use PoP\Engine\FunctionAPIFactory;
 use PoP\Multisite\ObjectModels\Site;
 
-class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
+class SiteObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?Site $site = null;
 
