@@ -9,7 +9,7 @@ use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+abstract class AbstractCategoryObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     abstract public function getCategoryListTypeAPI(): CategoryListTypeAPIInterface;
 

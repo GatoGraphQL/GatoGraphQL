@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\AbstractCategoryTypeDataLoader;
+use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\AbstractCategoryObjectTypeDataLoader;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 
-class PostCategoryTypeDataLoader extends AbstractCategoryTypeDataLoader
+class PostCategoryTypeDataLoader extends AbstractCategoryObjectTypeDataLoader
 {
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
