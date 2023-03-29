@@ -9,7 +9,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 
-abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+abstract class AbstractTagObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     abstract public function getTagListTypeAPI(): TagListTypeAPIInterface;
 

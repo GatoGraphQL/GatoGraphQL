@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagTypeDataLoader;
+use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagObjectTypeDataLoader;
 use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 
-class QueryableTagListTypeDataLoader extends AbstractTagTypeDataLoader
+class QueryableTagListTypeDataLoader extends AbstractTagObjectTypeDataLoader
 {
     private ?QueryableTagTypeAPIInterface $queryableTagListTypeAPI = null;
 
