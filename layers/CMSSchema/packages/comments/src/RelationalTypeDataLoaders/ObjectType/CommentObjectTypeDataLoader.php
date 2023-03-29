@@ -12,7 +12,7 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
-class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+class CommentObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
 
