@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
 
-class CustomPostTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
+class CustomPostObjectTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
 {
 }

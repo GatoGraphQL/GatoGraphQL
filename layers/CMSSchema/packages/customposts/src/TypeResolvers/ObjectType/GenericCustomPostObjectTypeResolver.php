@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType;
 
-use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostTypeDataLoader;
+use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostObjectTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
 /**
@@ -13,16 +13,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
  */
 class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    private ?CustomPostTypeDataLoader $customPostTypeDataLoader = null;
+    private ?CustomPostObjectTypeDataLoader $customPostObjectTypeDataLoader = null;
 
-    final public function setCustomPostTypeDataLoader(CustomPostTypeDataLoader $customPostTypeDataLoader): void
+    final public function setCustomPostObjectTypeDataLoader(CustomPostObjectTypeDataLoader $customPostObjectTypeDataLoader): void
     {
-        $this->customPostTypeDataLoader = $customPostTypeDataLoader;
+        $this->customPostObjectTypeDataLoader = $customPostObjectTypeDataLoader;
     }
-    final protected function getCustomPostTypeDataLoader(): CustomPostTypeDataLoader
+    final protected function getCustomPostObjectTypeDataLoader(): CustomPostObjectTypeDataLoader
     {
-        /** @var CustomPostTypeDataLoader */
-        return $this->customPostTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostTypeDataLoader::class);
+        /** @var CustomPostObjectTypeDataLoader */
+        return $this->customPostObjectTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -37,6 +37,6 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getCustomPostTypeDataLoader();
+        return $this->getCustomPostObjectTypeDataLoader();
     }
 }

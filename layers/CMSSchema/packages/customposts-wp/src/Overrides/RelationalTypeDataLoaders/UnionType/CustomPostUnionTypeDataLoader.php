@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPostsWP\Overrides\RelationalTypeDataLoaders\UnionTy
 use PoPCMSSchema\CustomPostsWP\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
-use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostTypeDataLoader;
+use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostObjectTypeDataLoader;
 use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\UnionType\CustomPostUnionTypeDataLoader as UpstreamCustomPostUnionTypeDataLoader;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoP\ComponentModel\App;
@@ -19,17 +19,17 @@ use SplObjectStorage;
  */
 class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoader
 {
-    private ?CustomPostTypeDataLoader $customPostTypeDataLoader = null;
+    private ?CustomPostObjectTypeDataLoader $customPostObjectTypeDataLoader = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    final public function setCustomPostTypeDataLoader(CustomPostTypeDataLoader $customPostTypeDataLoader): void
+    final public function setCustomPostObjectTypeDataLoader(CustomPostObjectTypeDataLoader $customPostObjectTypeDataLoader): void
     {
-        $this->customPostTypeDataLoader = $customPostTypeDataLoader;
+        $this->customPostObjectTypeDataLoader = $customPostObjectTypeDataLoader;
     }
-    final protected function getCustomPostTypeDataLoader(): CustomPostTypeDataLoader
+    final protected function getCustomPostObjectTypeDataLoader(): CustomPostObjectTypeDataLoader
     {
-        /** @var CustomPostTypeDataLoader */
-        return $this->customPostTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostTypeDataLoader::class);
+        /** @var CustomPostObjectTypeDataLoader */
+        return $this->customPostObjectTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostObjectTypeDataLoader::class);
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -47,7 +47,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
      */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        $query = $this->getCustomPostTypeDataLoader()->getQueryToRetrieveObjectsForIDs($ids);
+        $query = $this->getCustomPostObjectTypeDataLoader()->getQueryToRetrieveObjectsForIDs($ids);
 
         // From all post types from the member typeResolvers
         /** @var CustomPostsModuleConfiguration */
@@ -65,7 +65,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     protected function getUpstreamObjects(array $ids): array
     {
         $query = $this->getQueryToRetrieveObjectsForIDs($ids);
-        return $this->getCustomPostTypeDataLoader()->executeQuery($query);
+        return $this->getCustomPostObjectTypeDataLoader()->executeQuery($query);
     }
 
     /**

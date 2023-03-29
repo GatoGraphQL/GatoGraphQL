@@ -85,7 +85,7 @@ abstract class AbstractCustomPostObjectTypeDataLoader extends AbstractObjectType
     protected function getLimitParam(array $query_args): int
     {
         return App::applyFilters(
-            'CustomPostTypeDataLoader:query:limit',
+            'CustomPostObjectTypeDataLoader:query:limit',
             parent::getLimitParam($query_args)
         );
     }
@@ -93,6 +93,6 @@ abstract class AbstractCustomPostObjectTypeDataLoader extends AbstractObjectType
     protected function getQueryHookName(): string
     {
         // Allow to add the timestamp for loadingLatest
-        return 'CustomPostTypeDataLoader:query';
+        return 'CustomPostObjectTypeDataLoader:query';
     }
 }
