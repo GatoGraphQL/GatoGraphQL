@@ -6,7 +6,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 - `_multipleRequestJSONObjectItems`
 - `_requestJSONObjectCollection`
 - `_multipleRequestJSONObjectCollections`
-- `_request`
+- `_sendHTTPRequest`
 - `_multipleRequest`
 - `_requestGraphQL`
 
@@ -40,7 +40,7 @@ It retrieves the (REST) response for a collection of JSON objects from multiple 
 
 **Signature:** `_multipleRequestJSONObjectCollections(inputs: [HTTPRequestInput!]!): [[JSONObject]]`.
 
-### `_request`
+### `_sendHTTPRequest`
 
 It connects to the specified URL and retrieves an `HTTPResponse` object, which contains the following fields:
 
@@ -51,11 +51,11 @@ It connects to the specified URL and retrieves an `HTTPResponse` object, which c
 - `header(name: String!): String`
 - `hasHeader(name: String!): Boolean!`
 
-**Signature:** `_request(input: HTTPRequestInput!): HTTPResponse`.
+**Signature:** `_sendHTTPRequest(input: HTTPRequestInput!): HTTPResponse`.
 
 ### `_multipleRequest`
 
-Similar to `_request` but it receives multiple URLs, and allows to connect to them asynchronously (in parallel).
+Similar to `_sendHTTPRequest` but it receives multiple URLs, and allows to connect to them asynchronously (in parallel).
 
 **Signature:** `_multipleRequest(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
 
@@ -215,7 +215,7 @@ This query:
 }
 ```
 
-### `_request`
+### `_sendHTTPRequest`
 
 This field retrieves an `HTTPResponse` object with all properties from the response, so we can independently query the body (which is of type `String`, i.e. it is not cast as JSON), the status code, content type and headers.
 
@@ -223,7 +223,7 @@ For instance, the following query:
 
 ```graphql
 {
-  _request(
+  _sendHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/wp/v2/comments/11/?_fields=id,date,content"
     }
@@ -243,7 +243,7 @@ For instance, the following query:
 ```json
 {
   "data": {
-    "_request": {
+    "_sendHTTPRequest": {
       "statusCode": 200,
       "contentType": "application\/json; charset=UTF-8",
       "headers": {

@@ -250,7 +250,7 @@ In case of errors, these will appear under the `errors` entry of the response. F
 }
 ```
 
-We must notice that, as a result, the top-level `errors` entry will contain not only syntax, schema validation and logic errors (eg: not passing a field argument's name, requesting a non-existing field, or calling `_request` and the network is down respectively), but also "content validation" errors (eg: "you're not authorized to modify this post").
+We must notice that, as a result, the top-level `errors` entry will contain not only syntax, schema validation and logic errors (eg: not passing a field argument's name, requesting a non-existing field, or calling `_sendHTTPRequest` and the network is down respectively), but also "content validation" errors (eg: "you're not authorized to modify this post").
 
 Because there are no additional types added, the GraphQL schema will look leaner:
 
