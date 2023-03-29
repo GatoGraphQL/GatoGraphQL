@@ -27,7 +27,7 @@ class CanonicalNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTes
     protected function customizeProviderEndpointEntries(array $providerItems): array
     {
         $providerItems = parent::customizeProviderEndpointEntries($providerItems);
-        $providerItems['introspection-types:0'] = $providerItems['introspection-types'];
+        $providerItems['introspection-types:0'][1] = $providerItems['introspection-types'][1];
         return $providerItems;
     }
 }
