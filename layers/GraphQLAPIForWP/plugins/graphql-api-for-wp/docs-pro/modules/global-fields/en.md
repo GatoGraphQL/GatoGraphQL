@@ -14,7 +14,7 @@ These are some examples:
   - `_sendHTTPRequest`
   - `_sendJSONObjectItemHTTPRequest`
   - `_sendJSONObjectCollectionHTTPRequest`
-  - `_requestGraphQL`
+  - `_sendGraphQLHTTPRequest`
 - Those fields from the **Function Fields** module, which expose functionalities commonly found in programming languages (such as PHP):
   - `_not`
   - `_if`

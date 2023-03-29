@@ -8,7 +8,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 - `_sendJSONObjectCollectionHTTPRequests`
 - `_sendHTTPRequest`
 - `_sendHTTPRequests`
-- `_requestGraphQL`
+- `_sendGraphQLHTTPRequest`
 
 ## Description
 
@@ -59,13 +59,13 @@ Similar to `_sendHTTPRequest` but it receives multiple URLs, and allows to conne
 
 **Signature:** `_sendHTTPRequests(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
 
-### `_requestGraphQL`
+### `_sendGraphQLHTTPRequest`
 
 Execute a GraphQL query against the provided endpoint, and retrieve the response as a JSON object.
 
 The input to this field accepts the data expected for GraphQL: the endpoint, GraphQL query, variables and operation name, and already sets the default method (`POST`) and content type (`application/json`).
 
-**Signature:** `_requestGraphQL(input: GraphQLRequestInput!): JSONObject`.
+**Signature:** `_sendGraphQLHTTPRequest(input: GraphQLRequestInput!): JSONObject`.
 
 ## Configuring the allowed URLs
 
@@ -268,13 +268,13 @@ Please notice that the `headers` field retrieves a `JSONObject`, with the keys a
 
 The field `header`, though, retrieves a `String`. Then, a header with multiple entries (such as `Cache-Control`) has all its values joined with `", "`.
 
-### `_requestGraphQL`
+### `_sendGraphQLHTTPRequest`
 
 Executing the following query:
 
 ```graphql
 {
-  graphQLRequest: _requestGraphQL(
+  graphQLRequest: _sendGraphQLHTTPRequest(
     input: {
       endpoint: "https://newapi.getpop.org/api/graphql/"
       query: """
