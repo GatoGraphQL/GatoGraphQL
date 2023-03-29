@@ -10,7 +10,7 @@ use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverI
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 
-class PostCategoryTypeDataLoader extends AbstractCategoryObjectTypeDataLoader
+class PostCategoryObjectTypeDataLoader extends AbstractCategoryObjectTypeDataLoader
 {
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;

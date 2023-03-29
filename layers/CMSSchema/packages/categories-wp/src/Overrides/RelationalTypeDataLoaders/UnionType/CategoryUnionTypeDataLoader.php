@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CategoriesWP\Overrides\RelationalTypeDataLoaders\UnionTyp
 
 use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoPCMSSchema\Categories\ModuleConfiguration as CategoriesModuleConfiguration;
-use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\QueryableCategoryListTypeDataLoader;
+use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\QueryableCategoryListObjectTypeDataLoader;
 use PoPCMSSchema\Categories\RelationalTypeDataLoaders\UnionType\CategoryUnionTypeDataLoader as UpstreamCategoryUnionTypeDataLoader;
 use PoP\ComponentModel\App;
 
@@ -16,16 +16,16 @@ use PoP\ComponentModel\App;
  */
 class CategoryUnionTypeDataLoader extends UpstreamCategoryUnionTypeDataLoader
 {
-    private ?QueryableCategoryListTypeDataLoader $queryableCategoryListTypeDataLoader = null;
+    private ?QueryableCategoryListObjectTypeDataLoader $queryableCategoryListObjectTypeDataLoader = null;
 
-    final public function setQueryableCategoryListTypeDataLoader(QueryableCategoryListTypeDataLoader $queryableCategoryListTypeDataLoader): void
+    final public function setQueryableCategoryListObjectTypeDataLoader(QueryableCategoryListObjectTypeDataLoader $queryableCategoryListObjectTypeDataLoader): void
     {
-        $this->queryableCategoryListTypeDataLoader = $queryableCategoryListTypeDataLoader;
+        $this->queryableCategoryListObjectTypeDataLoader = $queryableCategoryListObjectTypeDataLoader;
     }
-    final protected function getQueryableCategoryListTypeDataLoader(): QueryableCategoryListTypeDataLoader
+    final protected function getQueryableCategoryListObjectTypeDataLoader(): QueryableCategoryListObjectTypeDataLoader
     {
-        /** @var QueryableCategoryListTypeDataLoader */
-        return $this->queryableCategoryListTypeDataLoader ??= $this->instanceManager->getInstance(QueryableCategoryListTypeDataLoader::class);
+        /** @var QueryableCategoryListObjectTypeDataLoader */
+        return $this->queryableCategoryListObjectTypeDataLoader ??= $this->instanceManager->getInstance(QueryableCategoryListObjectTypeDataLoader::class);
     }
 
     /**
@@ -34,7 +34,7 @@ class CategoryUnionTypeDataLoader extends UpstreamCategoryUnionTypeDataLoader
      */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        $query = $this->getQueryableCategoryListTypeDataLoader()->getQueryToRetrieveObjectsForIDs($ids);
+        $query = $this->getQueryableCategoryListObjectTypeDataLoader()->getQueryToRetrieveObjectsForIDs($ids);
 
         // From all taxonomies from the member typeResolvers
         /** @var CategoriesModuleConfiguration */
@@ -54,6 +54,6 @@ class CategoryUnionTypeDataLoader extends UpstreamCategoryUnionTypeDataLoader
     public function getObjects(array $ids): array
     {
         $query = $this->getQueryToRetrieveObjectsForIDs($ids);
-        return $this->getQueryableCategoryListTypeDataLoader()->executeQuery($query);
+        return $this->getQueryableCategoryListObjectTypeDataLoader()->executeQuery($query);
     }
 }

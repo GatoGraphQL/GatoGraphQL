@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\TypeResolvers\ObjectType;
 
-use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\QueryableCategoryListTypeDataLoader;
+use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\QueryableCategoryListObjectTypeDataLoader;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
@@ -15,17 +15,17 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
  */
 class GenericCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {
-    private ?QueryableCategoryListTypeDataLoader $queryableCategoryListTypeDataLoader = null;
+    private ?QueryableCategoryListObjectTypeDataLoader $queryableCategoryListObjectTypeDataLoader = null;
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI = null;
 
-    final public function setQueryableCategoryListTypeDataLoader(QueryableCategoryListTypeDataLoader $queryableCategoryListTypeDataLoader): void
+    final public function setQueryableCategoryListObjectTypeDataLoader(QueryableCategoryListObjectTypeDataLoader $queryableCategoryListObjectTypeDataLoader): void
     {
-        $this->queryableCategoryListTypeDataLoader = $queryableCategoryListTypeDataLoader;
+        $this->queryableCategoryListObjectTypeDataLoader = $queryableCategoryListObjectTypeDataLoader;
     }
-    final protected function getQueryableCategoryListTypeDataLoader(): QueryableCategoryListTypeDataLoader
+    final protected function getQueryableCategoryListObjectTypeDataLoader(): QueryableCategoryListObjectTypeDataLoader
     {
-        /** @var QueryableCategoryListTypeDataLoader */
-        return $this->queryableCategoryListTypeDataLoader ??= $this->instanceManager->getInstance(QueryableCategoryListTypeDataLoader::class);
+        /** @var QueryableCategoryListObjectTypeDataLoader */
+        return $this->queryableCategoryListObjectTypeDataLoader ??= $this->instanceManager->getInstance(QueryableCategoryListObjectTypeDataLoader::class);
     }
     final public function setQueryableCategoryTypeAPI(QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI): void
     {
@@ -49,7 +49,7 @@ class GenericCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolv
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getQueryableCategoryListTypeDataLoader();
+        return $this->getQueryableCategoryListObjectTypeDataLoader();
     }
 
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface

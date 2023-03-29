@@ -8,7 +8,7 @@ use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\AbstractCategor
 use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 
-class QueryableCategoryListTypeDataLoader extends AbstractCategoryObjectTypeDataLoader
+class QueryableCategoryListObjectTypeDataLoader extends AbstractCategoryObjectTypeDataLoader
 {
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI = null;
 

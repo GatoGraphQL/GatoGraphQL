@@ -7,22 +7,22 @@ namespace PoPCMSSchema\PostCategories\TypeResolvers\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\AbstractCategoryObjectTypeResolver;
-use PoPCMSSchema\PostCategories\RelationalTypeDataLoaders\ObjectType\PostCategoryTypeDataLoader;
+use PoPCMSSchema\PostCategories\RelationalTypeDataLoaders\ObjectType\PostCategoryObjectTypeDataLoader;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
 class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 {
-    private ?PostCategoryTypeDataLoader $postCategoryTypeDataLoader = null;
+    private ?PostCategoryObjectTypeDataLoader $postCategoryObjectTypeDataLoader = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    final public function setPostCategoryTypeDataLoader(PostCategoryTypeDataLoader $postCategoryTypeDataLoader): void
+    final public function setPostCategoryObjectTypeDataLoader(PostCategoryObjectTypeDataLoader $postCategoryObjectTypeDataLoader): void
     {
-        $this->postCategoryTypeDataLoader = $postCategoryTypeDataLoader;
+        $this->postCategoryObjectTypeDataLoader = $postCategoryObjectTypeDataLoader;
     }
-    final protected function getPostCategoryTypeDataLoader(): PostCategoryTypeDataLoader
+    final protected function getPostCategoryObjectTypeDataLoader(): PostCategoryObjectTypeDataLoader
     {
-        /** @var PostCategoryTypeDataLoader */
-        return $this->postCategoryTypeDataLoader ??= $this->instanceManager->getInstance(PostCategoryTypeDataLoader::class);
+        /** @var PostCategoryObjectTypeDataLoader */
+        return $this->postCategoryObjectTypeDataLoader ??= $this->instanceManager->getInstance(PostCategoryObjectTypeDataLoader::class);
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
@@ -49,7 +49,7 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getPostCategoryTypeDataLoader();
+        return $this->getPostCategoryObjectTypeDataLoader();
     }
 
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface
