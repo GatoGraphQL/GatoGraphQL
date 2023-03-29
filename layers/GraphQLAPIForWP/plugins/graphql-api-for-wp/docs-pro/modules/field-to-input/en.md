@@ -92,7 +92,7 @@ Retrieve data from an external REST endpoint, and manipulate its data to suit yo
 
 ```graphql
 {
-  externalData: _requestJSONObjectItem(input: { url: "https://example.com/rest/some-external-endpoint"} )
+  externalData: _sendJSONObjectItemHTTPRequest(input: { url: "https://example.com/rest/some-external-endpoint"} )
   userName: _objectProperty(object: $__externalData, by: { path: "data.user.name" })
   userLastName: _objectProperty(object: $__externalData, by: { path: "data.user.surname" })
 }
@@ -122,7 +122,7 @@ Using the `@remove` directive on `externalData`, we can also avoid printing the 
 
 ```graphql
 {
-  externalData: _requestJSONObjectItem(input: { url: "https://example.com/rest/some-external-endpoint" } ) @remove
+  externalData: _sendJSONObjectItemHTTPRequest(input: { url: "https://example.com/rest/some-external-endpoint" } ) @remove
   userName: _objectProperty(object: $__externalData, by: { path: "data.user.name" })
   userLastName: _objectProperty(object: $__externalData, by: { path: "data.user.surname" })
 }

@@ -112,7 +112,7 @@ query RetrieveProxyArtifactDownloadURLs(
   )
 
   # Use the field from "Send HTTP Request Fields" to connect to GitHub
-  gitHubArtifactData: _requestJSONObjectItem(
+  gitHubArtifactData: _sendJSONObjectItemHTTPRequest(
     input: {
       url: $__githubAPIEndpoint
       options: { headers: $__githubRequestHeaders }

@@ -2,7 +2,7 @@
 
 Addition of fields to execute HTTP requests against a webserver and fetch their response:
 
-- `_requestJSONObjectItem`
+- `_sendJSONObjectItemHTTPRequest`
 - `_multipleRequestJSONObjectItems`
 - `_requestJSONObjectCollection`
 - `_multipleRequestJSONObjectCollections`
@@ -16,11 +16,11 @@ This module adds global fields to the GraphQL schema to retrieve data from an ex
 
 Due to security reasons, the URLs that can be connected to must be explicitly configured (explained in the next section).
 
-### `_requestJSONObjectItem`
+### `_sendJSONObjectItemHTTPRequest`
 
 It retrieves the (REST) response for a single JSON object.
 
-**Signature:** `_requestJSONObjectItem(input: HTTPRequestInput!): JSONObject`.
+**Signature:** `_sendJSONObjectItemHTTPRequest(input: HTTPRequestInput!): JSONObject`.
 
 ### `_multipleRequestJSONObjectItems`
 
@@ -107,7 +107,7 @@ There are 2 behaviors, "Allow access" and "Deny access":
 
 All fields are similar but different.
 
-### `_requestJSONObjectItem`
+### `_sendJSONObjectItemHTTPRequest`
 
 This field retrieves a JSON object item, which is useful when querying a single item from a REST endpoint, as from the WP REST API endpoint `/wp-json/wp/v2/posts/1/`.
 
@@ -115,7 +115,7 @@ This query:
 
 ```graphql
 {
-  postData: _requestJSONObjectItem(input: { url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/" } )
+  postData: _sendJSONObjectItemHTTPRequest(input: { url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/" } )
 }
 ```
 
@@ -170,13 +170,13 @@ This query:
 
 ### `_requestJSONObjectCollection`
 
-This field is similar to `_requestJSONObjectItem`, but it retrieves a collection of JSON objects, as from the WP REST API endpoint `/wp-json/wp/v2/posts/`.
+This field is similar to `_sendJSONObjectItemHTTPRequest`, but it retrieves a collection of JSON objects, as from the WP REST API endpoint `/wp-json/wp/v2/posts/`.
 
 This query:
 
 ```graphql
 {
-  postData: _requestJSONObjectItem(input: { url: "https://newapi.getpop.org/wp-json/wp/v2/posts/?per_page=3&_fields=id,type,title,date" } )
+  postData: _sendJSONObjectItemHTTPRequest(input: { url: "https://newapi.getpop.org/wp-json/wp/v2/posts/?per_page=3&_fields=id,type,title,date" } )
 }
 ```
 
@@ -429,7 +429,7 @@ In this query, we generate the API endpoint using the **Field to Input** feature
       $__id,
       "?_fields=name"
     ])
-    _requestJSONObjectItem(input: { url: $__endpoint } )
+    _sendJSONObjectItemHTTPRequest(input: { url: $__endpoint } )
   }
 }
 ```
@@ -443,7 +443,7 @@ In this query, we generate the API endpoint using the **Field to Input** feature
       {
         "id": 1,
         "endpoint": "https://newapi.getpop.org/wp-json/wp/v2/users/1?_fields=name",
-        "_requestJSONObjectItem": {
+        "_sendJSONObjectItemHTTPRequest": {
           "name": "leo",
           "_links": {
             "self": [
@@ -462,7 +462,7 @@ In this query, we generate the API endpoint using the **Field to Input** feature
       {
         "id": 2,
         "endpoint": "https://newapi.getpop.org/wp-json/wp/v2/users/2?_fields=name",
-        "_requestJSONObjectItem": {
+        "_sendJSONObjectItemHTTPRequest": {
           "name": "themedemos",
           "_links": {
             "self": [

@@ -370,7 +370,7 @@ Together with the **Send HTTP Request Fields** module, we can dynamically genera
     ])
     
     # Retrieve the endpoint data
-    endpointData: _requestJSONObjectItem(input: { url: $__endpoint } )
+    endpointData: _sendJSONObjectItemHTTPRequest(input: { url: $__endpoint } )
 
     # Extract specific information
     userAvatar: _objectProperty(

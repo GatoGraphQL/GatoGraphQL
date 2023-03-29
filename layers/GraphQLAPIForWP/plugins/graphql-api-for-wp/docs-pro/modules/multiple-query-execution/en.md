@@ -320,7 +320,7 @@ Import content from an external API endpoint:
 ```graphql
 query FetchDataFromExternalEndpoint
 {
-  _requestJSONObjectItem(input: { url: "https://site.com/wp-json/wp/posts/1" } )
+  _sendJSONObjectItemHTTPRequest(input: { url: "https://site.com/wp-json/wp/posts/1" } )
     @export(as: "externalData")
     @remove
 }

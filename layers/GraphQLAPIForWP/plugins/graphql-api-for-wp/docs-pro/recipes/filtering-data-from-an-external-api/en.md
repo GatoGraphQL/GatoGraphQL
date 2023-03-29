@@ -45,7 +45,7 @@ fail-if-external-api-has-errors.gql <= Check if to place it on this Recipe, or e
 
 ```graphql
 query ConnectToAPI($endpoint: String!) {
-  externalData: _requestJSONObjectItem(
+  externalData: _sendJSONObjectItemHTTPRequest(
     input: {
       url: $endpoint
     }
