@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Posts\RelationalTypeDataLoaders\ObjectType;
 use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustomPostObjectTypeDataLoader;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
-class PostTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
+class PostObjectTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
 

@@ -6,20 +6,20 @@ namespace PoPCMSSchema\Posts\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPCMSSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostTypeDataLoader;
+use PoPCMSSchema\Posts\RelationalTypeDataLoaders\ObjectType\PostObjectTypeDataLoader;
 
 class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
-    private ?PostTypeDataLoader $postTypeDataLoader = null;
+    private ?PostObjectTypeDataLoader $postObjectTypeDataLoader = null;
 
-    final public function setPostTypeDataLoader(PostTypeDataLoader $postTypeDataLoader): void
+    final public function setPostObjectTypeDataLoader(PostObjectTypeDataLoader $postObjectTypeDataLoader): void
     {
-        $this->postTypeDataLoader = $postTypeDataLoader;
+        $this->postObjectTypeDataLoader = $postObjectTypeDataLoader;
     }
-    final protected function getPostTypeDataLoader(): PostTypeDataLoader
+    final protected function getPostObjectTypeDataLoader(): PostObjectTypeDataLoader
     {
-        /** @var PostTypeDataLoader */
-        return $this->postTypeDataLoader ??= $this->instanceManager->getInstance(PostTypeDataLoader::class);
+        /** @var PostObjectTypeDataLoader */
+        return $this->postObjectTypeDataLoader ??= $this->instanceManager->getInstance(PostObjectTypeDataLoader::class);
     }
 
     public function getTypeName(): string
@@ -34,6 +34,6 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getPostTypeDataLoader();
+        return $this->getPostObjectTypeDataLoader();
     }
 }
