@@ -6,7 +6,7 @@ combine-user-data.gql
 
 ```graphql
 query ProvideNewsletterUserData {
-  userList: _requestJSONObjectCollection(
+  userList: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions"
     }
@@ -43,7 +43,7 @@ query CombineUserDataFromDisparateSources
     append: $__joinedUserEmails
   ) # @remove
 
-  userEndpointDataItems: _requestJSONObjectCollection(
+  userEndpointDataItems: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: $__userEndpoint
     }

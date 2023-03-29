@@ -2,13 +2,13 @@
 
 Addition of fields to execute HTTP requests against a webserver and fetch their response:
 
-- `_requestJSONObjectItem`
-- `_multipleRequestJSONObjectItems`
-- `_requestJSONObjectCollection`
-- `_multipleRequestJSONObjectCollections`
-- `_request`
-- `_multipleRequest`
-- `_requestGraphQL`
+- `_sendJSONObjectItemHTTPRequest`
+- `_sendJSONObjectItemHTTPRequests`
+- `_sendJSONObjectCollectionHTTPRequest`
+- `_sendJSONObjectCollectionHTTPRequests`
+- `_sendHTTPRequest`
+- `_sendHTTPRequests`
+- `_sendGraphQLHTTPRequest`
 
 ## Description
 
@@ -16,31 +16,31 @@ This module adds global fields to the GraphQL schema to retrieve data from an ex
 
 Due to security reasons, the URLs that can be connected to must be explicitly configured (explained in the next section).
 
-### `_requestJSONObjectItem`
+### `_sendJSONObjectItemHTTPRequest`
 
 It retrieves the (REST) response for a single JSON object.
 
-**Signature:** `_requestJSONObjectItem(input: HTTPRequestInput!): JSONObject`.
+**Signature:** `_sendJSONObjectItemHTTPRequest(input: HTTPRequestInput!): JSONObject`.
 
-### `_multipleRequestJSONObjectItems`
+### `_sendJSONObjectItemHTTPRequests`
 
 It retrieves the (REST) response for a single JSON object from multiple endpoints, executed asynchronously (in parallel) or synchronously (one after the other).
 
-**Signature:** `_multipleRequestJSONObjectItems(inputs: [HTTPRequestInput!]!): [JSONObject]`.
+**Signature:** `_sendJSONObjectItemHTTPRequests(inputs: [HTTPRequestInput!]!): [JSONObject]`.
 
-### `_requestJSONObjectCollection`
+### `_sendJSONObjectCollectionHTTPRequest`
 
 It retrieves the (REST) response for a collection of JSON objects.
 
-**Signature:** `_requestJSONObjectCollection(input: HTTPRequestInput!): [JSONObject]`.
+**Signature:** `_sendJSONObjectCollectionHTTPRequest(input: HTTPRequestInput!): [JSONObject]`.
 
-### `_multipleRequestJSONObjectCollections`
+### `_sendJSONObjectCollectionHTTPRequests`
 
 It retrieves the (REST) response for a collection of JSON objects from multiple endpoints, executed asynchronously (in parallel) or synchronously (one after the other).
 
-**Signature:** `_multipleRequestJSONObjectCollections(inputs: [HTTPRequestInput!]!): [[JSONObject]]`.
+**Signature:** `_sendJSONObjectCollectionHTTPRequests(inputs: [HTTPRequestInput!]!): [[JSONObject]]`.
 
-### `_request`
+### `_sendHTTPRequest`
 
 It connects to the specified URL and retrieves an `HTTPResponse` object, which contains the following fields:
 
@@ -51,21 +51,21 @@ It connects to the specified URL and retrieves an `HTTPResponse` object, which c
 - `header(name: String!): String`
 - `hasHeader(name: String!): Boolean!`
 
-**Signature:** `_request(input: HTTPRequestInput!): HTTPResponse`.
+**Signature:** `_sendHTTPRequest(input: HTTPRequestInput!): HTTPResponse`.
 
-### `_multipleRequest`
+### `_sendHTTPRequests`
 
-Similar to `_request` but it receives multiple URLs, and allows to connect to them asynchronously (in parallel).
+Similar to `_sendHTTPRequest` but it receives multiple URLs, and allows to connect to them asynchronously (in parallel).
 
-**Signature:** `_multipleRequest(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
+**Signature:** `_sendHTTPRequests(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
 
-### `_requestGraphQL`
+### `_sendGraphQLHTTPRequest`
 
 Execute a GraphQL query against the provided endpoint, and retrieve the response as a JSON object.
 
 The input to this field accepts the data expected for GraphQL: the endpoint, GraphQL query, variables and operation name, and already sets the default method (`POST`) and content type (`application/json`).
 
-**Signature:** `_requestGraphQL(input: GraphQLRequestInput!): JSONObject`.
+**Signature:** `_sendGraphQLHTTPRequest(input: GraphQLRequestInput!): JSONObject`.
 
 ## Configuring the allowed URLs
 
@@ -107,7 +107,7 @@ There are 2 behaviors, "Allow access" and "Deny access":
 
 All fields are similar but different.
 
-### `_requestJSONObjectItem`
+### `_sendJSONObjectItemHTTPRequest`
 
 This field retrieves a JSON object item, which is useful when querying a single item from a REST endpoint, as from the WP REST API endpoint `/wp-json/wp/v2/posts/1/`.
 
@@ -115,7 +115,7 @@ This query:
 
 ```graphql
 {
-  postData: _requestJSONObjectItem(input: { url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/" } )
+  postData: _sendJSONObjectItemHTTPRequest(input: { url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/" } )
 }
 ```
 
@@ -168,15 +168,15 @@ This query:
 }
 ```
 
-### `_requestJSONObjectCollection`
+### `_sendJSONObjectCollectionHTTPRequest`
 
-This field is similar to `_requestJSONObjectItem`, but it retrieves a collection of JSON objects, as from the WP REST API endpoint `/wp-json/wp/v2/posts/`.
+This field is similar to `_sendJSONObjectItemHTTPRequest`, but it retrieves a collection of JSON objects, as from the WP REST API endpoint `/wp-json/wp/v2/posts/`.
 
 This query:
 
 ```graphql
 {
-  postData: _requestJSONObjectItem(input: { url: "https://newapi.getpop.org/wp-json/wp/v2/posts/?per_page=3&_fields=id,type,title,date" } )
+  postData: _sendJSONObjectItemHTTPRequest(input: { url: "https://newapi.getpop.org/wp-json/wp/v2/posts/?per_page=3&_fields=id,type,title,date" } )
 }
 ```
 
@@ -215,7 +215,7 @@ This query:
 }
 ```
 
-### `_request`
+### `_sendHTTPRequest`
 
 This field retrieves an `HTTPResponse` object with all properties from the response, so we can independently query the body (which is of type `String`, i.e. it is not cast as JSON), the status code, content type and headers.
 
@@ -223,7 +223,7 @@ For instance, the following query:
 
 ```graphql
 {
-  _request(
+  _sendHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/wp/v2/comments/11/?_fields=id,date,content"
     }
@@ -243,7 +243,7 @@ For instance, the following query:
 ```json
 {
   "data": {
-    "_request": {
+    "_sendHTTPRequest": {
       "statusCode": 200,
       "contentType": "application\/json; charset=UTF-8",
       "headers": {
@@ -268,13 +268,13 @@ Please notice that the `headers` field retrieves a `JSONObject`, with the keys a
 
 The field `header`, though, retrieves a `String`. Then, a header with multiple entries (such as `Cache-Control`) has all its values joined with `", "`.
 
-### `_requestGraphQL`
+### `_sendGraphQLHTTPRequest`
 
 Executing the following query:
 
 ```graphql
 {
-  graphQLRequest: _requestGraphQL(
+  graphQLRequest: _sendGraphQLHTTPRequest(
     input: {
       endpoint: "https://newapi.getpop.org/api/graphql/"
       query: """
@@ -319,7 +319,7 @@ Executing the following query:
 }
 ```
 
-### Multiple-request fields: `_multipleRequestJSONObjectItems`, `_multipleRequestJSONObjectCollections` and `_multipleRequest`
+### Multiple-request fields: `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendHTTPRequests`
 
 These fields work similar to their corresponding non-multiple fields, but they retrieve data from several endpoints at once, either asynchronously (in parallel) or synchronously (one after the other). The responses are placed in a list, in the same order in which the URLs were defined in the `urls` parameter.
 
@@ -327,7 +327,7 @@ For instance, the following query:
 
 ```graphql
 {
-  weatherForecasts: _multipleRequestJSONObjectItems(
+  weatherForecasts: _sendJSONObjectItemHTTPRequests(
     urls: [
       "https://api.weather.gov/gridpoints/TOP/31,80/forecast",
       "https://api.weather.gov/gridpoints/TOP/41,55/forecast"
@@ -429,7 +429,7 @@ In this query, we generate the API endpoint using the **Field to Input** feature
       $__id,
       "?_fields=name"
     ])
-    _requestJSONObjectItem(input: { url: $__endpoint } )
+    _sendJSONObjectItemHTTPRequest(input: { url: $__endpoint } )
   }
 }
 ```
@@ -443,7 +443,7 @@ In this query, we generate the API endpoint using the **Field to Input** feature
       {
         "id": 1,
         "endpoint": "https://newapi.getpop.org/wp-json/wp/v2/users/1?_fields=name",
-        "_requestJSONObjectItem": {
+        "_sendJSONObjectItemHTTPRequest": {
           "name": "leo",
           "_links": {
             "self": [
@@ -462,7 +462,7 @@ In this query, we generate the API endpoint using the **Field to Input** feature
       {
         "id": 2,
         "endpoint": "https://newapi.getpop.org/wp-json/wp/v2/users/2?_fields=name",
-        "_requestJSONObjectItem": {
+        "_sendJSONObjectItemHTTPRequest": {
           "name": "themedemos",
           "_links": {
             "self": [

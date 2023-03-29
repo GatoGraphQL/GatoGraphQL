@@ -35,7 +35,7 @@ query {
 
 Let's say we want to retrieve some specific data from an external REST API endpoint, and we don't need the rest of the data. We can then use `@remove` to make the response payload smaller, thus boosting performance:
 
-- Use field `_requestJSONObjectItem` (from the **Send HTTP Request Fields** module) to connect to the REST API
+- Use field `_sendJSONObjectItemHTTPRequest` (from the **Send HTTP Request Fields** module) to connect to the REST API
 - Process this data to extract the needed piece of information (via **Field to Input** and the `_objectProperty` field from **Function Fields**)
 - `@remove` the original data from the REST endpoint
 
@@ -43,7 +43,7 @@ This query ties everything together:
 
 ```graphql
 {
-  postData: _requestJSONObjectItem(
+  postData: _sendJSONObjectItemHTTPRequest(
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1"
   ) @remove
   renderedTitle: _objectProperty(
@@ -102,7 +102,7 @@ query RetrieveGitHubActionArtifacts(
   )
 
   # Use the field from "Send HTTP Request Fields" to connect to GitHub
-  gitHubArtifactData: _requestJSONObjectItem(
+  gitHubArtifactData: _sendJSONObjectItemHTTPRequest(
     input: {
       url: $__githubAPIEndpoint
       options: { headers: $__githubRequestHeaders }

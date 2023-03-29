@@ -151,13 +151,13 @@ query {
 
 ## @underJSONObjectProperty
 
-`@underJSONObjectProperty` makes the next directive receive an entry from the queried JSON object. This directive is particularly useful to extract and manipulate a desired piece of data after querying an external API, which will quite likely have a generic `JSONObject` type (as when using function field `_requestJSONObjectItem`).
+`@underJSONObjectProperty` makes the next directive receive an entry from the queried JSON object. This directive is particularly useful to extract and manipulate a desired piece of data after querying an external API, which will quite likely have a generic `JSONObject` type (as when using function field `_sendJSONObjectItemHTTPRequest`).
 
 In the query below, we obtain a JSON object coming from the WP REST API, and we use `@underJSONObjectProperty` to manipulate the response's `type` property, transforming it to upper case:
 
 ```graphql
 query {
-  postData: _requestJSONObjectItem(
+  postData: _sendJSONObjectItemHTTPRequest(
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
   )
     @underJSONObjectProperty(by: { key: "type" })
@@ -171,7 +171,7 @@ In the query below, the WP REST API endpoint for a post provides property `"titl
 
 ```graphql
 query {
-  postData: _requestJSONObjectItem(
+  postData: _sendJSONObjectItemHTTPRequest(
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
   )
     @underJSONObjectProperty(by: { path: "title.rendered" })
@@ -185,7 +185,7 @@ In this query, `@forEach` wraps `@underJSONObjectProperty`, which itself wraps `
 
 ```graphql
 query {
-  postListData: _requestJSONObjectCollection(
+  postListData: _sendJSONObjectCollectionHTTPRequest(
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/?per_page=3&_fields=id,type,title,date"
   )
     @forEach

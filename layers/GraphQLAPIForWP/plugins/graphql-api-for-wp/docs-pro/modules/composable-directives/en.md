@@ -191,7 +191,7 @@ Transform a single post's `"title.rendered"` property, obtained through the WP R
 
 ```graphql
 query {
-  postData: _requestJSONObjectItem(
+  postData: _sendJSONObjectItemHTTPRequest(
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
   )
     @underJSONObjectProperty(by: { path: "title.rendered" })
@@ -203,7 +203,7 @@ Transform multiple posts' `"title.rendered"` property into upper case:
 
 ```graphql
 query {
-  postListData: _requestJSONObjectCollection(
+  postListData: _sendJSONObjectCollectionHTTPRequest(
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/?per_page=3&_fields=id,type,title,date"
   )
     @forEach
