@@ -9,6 +9,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 - `_sendHTTPRequest`
 - `_sendHTTPRequests`
 - `_sendGraphQLHTTPRequest`
+- `_sendGraphQLHTTPRequests`
 
 ## Description
 
@@ -26,7 +27,7 @@ It retrieves the (REST) response for a single JSON object.
 
 It retrieves the (REST) response for a single JSON object from multiple endpoints, executed asynchronously (in parallel) or synchronously (one after the other).
 
-**Signature:** `_sendJSONObjectItemHTTPRequests(inputs: [HTTPRequestInput!]!): [JSONObject]`.
+**Signature:** `_sendJSONObjectItemHTTPRequests(async: Boolean = true, inputs: [HTTPRequestInput!]!): [JSONObject]`.
 
 ### `_sendJSONObjectCollectionHTTPRequest`
 
@@ -38,7 +39,7 @@ It retrieves the (REST) response for a collection of JSON objects.
 
 It retrieves the (REST) response for a collection of JSON objects from multiple endpoints, executed asynchronously (in parallel) or synchronously (one after the other).
 
-**Signature:** `_sendJSONObjectCollectionHTTPRequests(inputs: [HTTPRequestInput!]!): [[JSONObject]]`.
+**Signature:** `_sendJSONObjectCollectionHTTPRequests(async: Boolean = true, inputs: [HTTPRequestInput!]!): [[JSONObject]]`.
 
 ### `_sendHTTPRequest`
 
@@ -57,7 +58,7 @@ It connects to the specified URL and retrieves an `HTTPResponse` object, which c
 
 Similar to `_sendHTTPRequest` but it receives multiple URLs, and allows to connect to them asynchronously (in parallel).
 
-**Signature:** `_sendHTTPRequests(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
+**Signature:** `_sendHTTPRequests(async: Boolean = true, inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
 
 ### `_sendGraphQLHTTPRequest`
 
@@ -66,6 +67,12 @@ Execute a GraphQL query against the provided endpoint, and retrieve the response
 The input to this field accepts the data expected for GraphQL: the endpoint, GraphQL query, variables and operation name, and already sets the default method (`POST`) and content type (`application/json`).
 
 **Signature:** `_sendGraphQLHTTPRequest(input: GraphQLRequestInput!): JSONObject`.
+
+### `_sendGraphQLHTTPRequests`
+
+Similar to `_sendGraphQLHTTPRequests` but it executes multiple GraphQL queries concurrently, whether asynchronously (in parallel) or synchronously (one after the other).
+
+**Signature:** `_sendGraphQLHTTPRequests(async: Boolean = true, inputs: [GraphQLRequestInput!]!): JSONObject`.
 
 ## Configuring the allowed URLs
 
@@ -319,7 +326,7 @@ Executing the following query:
 }
 ```
 
-### Multiple-request fields: `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendHTTPRequests`
+### Multiple-request fields: `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests`, `_sendGraphQLHTTPRequests` and `_sendHTTPRequests`
 
 These fields work similar to their corresponding non-multiple fields, but they retrieve data from several endpoints at once, either asynchronously (in parallel) or synchronously (one after the other). The responses are placed in a list, in the same order in which the URLs were defined in the `urls` parameter.
 
