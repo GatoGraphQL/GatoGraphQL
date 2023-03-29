@@ -9,7 +9,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
-class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
+class UserObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     private ?UserTypeAPIInterface $userTypeAPI = null;
 
@@ -47,7 +47,7 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     protected function getQueryHookName(): string
     {
         // Get the role either from a provided attr, and allow PoP User Platform to set the default role
-        return 'UserTypeDataLoader:query';
+        return 'UserObjectTypeDataLoader:query';
     }
 
     /**
