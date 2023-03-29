@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Menus\RelationalTypeDataLoaders\ObjectType;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 
-class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
+class MenuObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?MenuTypeAPIInterface $menuTypeAPI = null;
 
