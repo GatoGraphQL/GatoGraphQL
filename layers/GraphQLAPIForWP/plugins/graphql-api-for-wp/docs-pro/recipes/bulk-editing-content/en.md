@@ -171,7 +171,7 @@ query CalculateURLInputs
 query ExecuteURLs
   @depends(on:"CalculateURLInputs")
 {
-  _multipleRequest(inputs: $urlInputs) {
+  _sendHTTPRequests(inputs: $urlInputs) {
     statusCode
     body
   }

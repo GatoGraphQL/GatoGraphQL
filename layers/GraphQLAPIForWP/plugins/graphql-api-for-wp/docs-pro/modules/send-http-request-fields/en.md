@@ -7,7 +7,7 @@ Addition of fields to execute HTTP requests against a webserver and fetch their 
 - `_requestJSONObjectCollection`
 - `_multipleRequestJSONObjectCollections`
 - `_sendHTTPRequest`
-- `_multipleRequest`
+- `_sendHTTPRequests`
 - `_requestGraphQL`
 
 ## Description
@@ -53,11 +53,11 @@ It connects to the specified URL and retrieves an `HTTPResponse` object, which c
 
 **Signature:** `_sendHTTPRequest(input: HTTPRequestInput!): HTTPResponse`.
 
-### `_multipleRequest`
+### `_sendHTTPRequests`
 
 Similar to `_sendHTTPRequest` but it receives multiple URLs, and allows to connect to them asynchronously (in parallel).
 
-**Signature:** `_multipleRequest(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
+**Signature:** `_sendHTTPRequests(inputs: [HTTPRequestInput!]!): [HTTPResponse]`.
 
 ### `_requestGraphQL`
 
@@ -319,7 +319,7 @@ Executing the following query:
 }
 ```
 
-### Multiple-request fields: `_multipleRequestJSONObjectItems`, `_multipleRequestJSONObjectCollections` and `_multipleRequest`
+### Multiple-request fields: `_multipleRequestJSONObjectItems`, `_multipleRequestJSONObjectCollections` and `_sendHTTPRequests`
 
 These fields work similar to their corresponding non-multiple fields, but they retrieve data from several endpoints at once, either asynchronously (in parallel) or synchronously (one after the other). The responses are placed in a list, in the same order in which the URLs were defined in the `urls` parameter.
 
