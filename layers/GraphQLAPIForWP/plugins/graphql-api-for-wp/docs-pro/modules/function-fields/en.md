@@ -226,6 +226,14 @@ Append a string to another string.
 
 Indicates if a string contains another string.
 
+### `_strDecodeJSONObject`
+
+Decode a string into a JSON object, or return `null` if it is not possible.
+
+### `_strDecodeList`
+
+Decode a string into an array (of any type), or return `null` if it is not possible.
+
 ### `_strEndsWith`
 
 Indicates if a string ends with another string.
