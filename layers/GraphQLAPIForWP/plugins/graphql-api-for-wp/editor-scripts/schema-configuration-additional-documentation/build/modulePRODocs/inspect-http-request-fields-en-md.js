@@ -1,0 +1,1 @@
+(window.webpackJsonpGraphQLAPISchemaConfigurationAdditionalDocumentation=window.webpackJsonpGraphQLAPISchemaConfigurationAdditionalDocumentation||[]).push([[24],{70:function(e,t){e.exports='<h1 id="inspect-http-request-fields">Inspect HTTP Request Fields</h1> <p>Addition of field <code>_httpRequest</code> to retrieve the current HTTP request data.</p> '}}]);
