@@ -213,7 +213,7 @@
                 "name": "Tango",
                 "slug": "tango",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/tango\/",
-                "urlAbsolutePath": "\/dummy-tag\/tango\/"
+                "urlPath": "\/dummy-tag\/tango\/"
             },
             {
                 "__typename": "GenericTag",
@@ -464,7 +464,7 @@
                 "name": "Rock",
                 "slug": "rock",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/rock\/",
-                "urlAbsolutePath": "\/dummy-tag\/rock\/"
+                "urlPath": "\/dummy-tag\/rock\/"
             },
             {
                 "__typename": "GenericTag",
@@ -649,7 +649,7 @@
                 "name": "Jazz",
                 "slug": "jazz",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/jazz\/",
-                "urlAbsolutePath": "\/dummy-tag\/jazz\/"
+                "urlPath": "\/dummy-tag\/jazz\/"
             },
             {
                 "__typename": "GenericTag",
@@ -824,7 +824,7 @@
                 "name": "Hip Hop",
                 "slug": "hip-hop",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/hip-hop\/",
-                "urlAbsolutePath": "\/dummy-tag\/hip-hop\/"
+                "urlPath": "\/dummy-tag\/hip-hop\/"
             },
             {
                 "__typename": "GenericTag",
@@ -987,7 +987,7 @@
                 "name": "Heavy metal",
                 "slug": "heavy-metal",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/heavy-metal\/",
-                "urlAbsolutePath": "\/dummy-tag\/heavy-metal\/"
+                "urlPath": "\/dummy-tag\/heavy-metal\/"
             },
             {
                 "__typename": "GenericTag",
@@ -1157,7 +1157,7 @@
                 "name": "Classical",
                 "slug": "classical",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/classical\/",
-                "urlAbsolutePath": "\/dummy-tag\/classical\/"
+                "urlPath": "\/dummy-tag\/classical\/"
             }
         ],
         "customPosts": [

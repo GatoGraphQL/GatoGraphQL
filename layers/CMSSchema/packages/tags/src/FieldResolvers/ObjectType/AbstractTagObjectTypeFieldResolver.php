@@ -78,7 +78,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         return [
             // Queryable interface
             'url',
-            'urlAbsolutePath',
+            'urlPath',
             'slug',
 
             // Tag interface
@@ -92,7 +92,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     {
         return match ($fieldName) {
             'url' => $this->__('Tag URL', 'pop-tags'),
-            'urlAbsolutePath' => $this->__('Tag URL path', 'pop-tags'),
+            'urlPath' => $this->__('Tag URL path', 'pop-tags'),
             'slug' => $this->__('Tag slug', 'pop-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -111,7 +111,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 /** @var string */
                 return $tagTypeAPI->getTagURL($tag);
 
-            case 'urlAbsolutePath':
+            case 'urlPath':
                 /** @var string */
                 return $tagTypeAPI->getTagURLPath($tag);
 

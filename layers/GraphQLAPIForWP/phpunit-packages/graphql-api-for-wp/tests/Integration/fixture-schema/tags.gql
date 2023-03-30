@@ -82,7 +82,7 @@ fragment TagData on Tag {
   name
   slug
   url
-  urlAbsolutePath
+  urlPath
 }
 
 fragment GenericTagData on GenericTag {

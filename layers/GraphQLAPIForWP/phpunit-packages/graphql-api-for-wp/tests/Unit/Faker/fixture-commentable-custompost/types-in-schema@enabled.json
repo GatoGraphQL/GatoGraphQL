@@ -252,7 +252,7 @@
                             }
                         },
                         {
-                            "name": "urlAbsolutePath",
+                            "name": "urlPath",
                             "type": {
                                 "name": "URLAbsolutePath!"
                             }
@@ -402,7 +402,7 @@
                             }
                         },
                         {
-                            "name": "urlAbsolutePath",
+                            "name": "urlPath",
                             "type": {
                                 "name": "URLAbsolutePath!"
                             }
@@ -1242,7 +1242,7 @@
                             }
                         },
                         {
-                            "name": "urlAbsolutePath",
+                            "name": "urlPath",
                             "type": {
                                 "name": "URLAbsolutePath!"
                             }
@@ -1325,7 +1325,7 @@
                             }
                         },
                         {
-                            "name": "urlAbsolutePath",
+                            "name": "urlPath",
                             "type": {
                                 "name": "URLAbsolutePath!"
                             }

@@ -44,7 +44,7 @@ query {
     }
     slug
     url
-    urlAbsolutePath
+    urlPath
     username
     websiteURL
   }

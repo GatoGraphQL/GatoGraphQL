@@ -76,7 +76,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return [
             'url',
-            'urlAbsolutePath',
+            'urlPath',
             'slug',
         ];
     }
@@ -85,7 +85,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'url' => $this->__('Media element URL', 'pop-media'),
-            'urlAbsolutePath' => $this->__('Media element URL path', 'pop-media'),
+            'urlPath' => $this->__('Media element URL path', 'pop-media'),
             'slug' => $this->__('Media element slug', 'pop-media'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -101,7 +101,7 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $mediaItem = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
-            case 'urlAbsolutePath':
+            case 'urlPath':
                 $url = \get_permalink($mediaItem->ID);
                 if ($url === false) {
                     return '';

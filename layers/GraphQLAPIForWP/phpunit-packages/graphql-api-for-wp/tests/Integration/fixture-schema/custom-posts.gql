@@ -33,7 +33,7 @@ query {
       status
       title
       url
-      urlAbsolutePath
+      urlPath
     }
   }
 

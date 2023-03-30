@@ -20,7 +20,7 @@
                 "srcSet": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png 1487w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-300x175.png 300w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png 1024w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-768x448.png 768w",
                 "title": "graphql-api-search-results",
                 "url": "https:\/\/graphql-api.lndo.site\/graphql-api-search-results\/",
-                "urlAbsolutePath": "\/graphql-api-search-results\/",
+                "urlPath": "\/graphql-api-search-results\/",
                 "width": 1487
             },
             {
@@ -42,7 +42,7 @@
                 "srcSet": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg 1291w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-300x182.jpg 300w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg 1024w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-768x466.jpg 768w",
                 "title": "graphql-api-header",
                 "url": "https:\/\/graphql-api.lndo.site\/graphql-api-header\/",
-                "urlAbsolutePath": "\/graphql-api-header\/",
+                "urlPath": "\/graphql-api-header\/",
                 "width": 1291
             }
         ],
@@ -66,7 +66,7 @@
                 "srcSet": null,
                 "title": "LICENSE",
                 "url": "https:\/\/graphql-api.lndo.site\/license\/",
-                "urlAbsolutePath": "\/license\/",
+                "urlPath": "\/license\/",
                 "width": null
             },
             {
@@ -88,7 +88,7 @@
                 "srcSet": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png 1487w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-300x175.png 300w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png 1024w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-768x448.png 768w",
                 "title": "graphql-api-search-results",
                 "url": "https:\/\/graphql-api.lndo.site\/graphql-api-search-results\/",
-                "urlAbsolutePath": "\/graphql-api-search-results\/",
+                "urlPath": "\/graphql-api-search-results\/",
                 "width": 1487
             },
             {
@@ -110,7 +110,7 @@
                 "srcSet": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg 1291w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-300x182.jpg 300w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg 1024w, https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-768x466.jpg 768w",
                 "title": "graphql-api-header",
                 "url": "https:\/\/graphql-api.lndo.site\/graphql-api-header\/",
-                "urlAbsolutePath": "\/graphql-api-header\/",
+                "urlPath": "\/graphql-api-header\/",
                 "width": 1291
             }
         ],

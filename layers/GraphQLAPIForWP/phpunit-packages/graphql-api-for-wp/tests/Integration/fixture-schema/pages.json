@@ -29,7 +29,7 @@
                 "status": "publish",
                 "title": "Sample Page",
                 "url": "https:\/\/graphql-api.lndo.site\/sample-page\/",
-                "urlAbsolutePath": "\/sample-page\/"
+                "urlPath": "\/sample-page\/"
             },
             {
                 "areCommentsOpen": false,
@@ -59,7 +59,7 @@
                 "status": "publish",
                 "title": "Another Page",
                 "url": "https:\/\/graphql-api.lndo.site\/another-page\/",
-                "urlAbsolutePath": "\/another-page\/"
+                "urlPath": "\/another-page\/"
             }
         ],
         "pagesByAuthorIDs": [

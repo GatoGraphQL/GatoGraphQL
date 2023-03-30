@@ -64,7 +64,7 @@
                 "name": "World Cup",
                 "slug": "world-cup",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/world-cup\/",
-                "urlAbsolutePath": "\/dummy-category\/world-cup\/"
+                "urlPath": "\/dummy-category\/world-cup\/"
             },
             {
                 "__typename": "GenericCategory",
@@ -173,7 +173,7 @@
                 "name": "Unexpected Randomness",
                 "slug": "unexpected-randomness",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/unexpected-randomness\/",
-                "urlAbsolutePath": "\/dummy-category\/unexpected-randomness\/"
+                "urlPath": "\/dummy-category\/unexpected-randomness\/"
             },
             {
                 "__typename": "GenericCategory",
@@ -262,7 +262,7 @@
                 "name": "Perestroika",
                 "slug": "perestroika",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/perestroika\/",
-                "urlAbsolutePath": "\/dummy-category\/perestroika\/"
+                "urlPath": "\/dummy-category\/perestroika\/"
             },
             {
                 "__typename": "GenericCategory",
@@ -339,7 +339,7 @@
                 "name": "Nostradamus",
                 "slug": "nostradamus",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/nostradamus\/",
-                "urlAbsolutePath": "\/dummy-category\/nostradamus\/"
+                "urlPath": "\/dummy-category\/nostradamus\/"
             },
             {
                 "__typename": "GenericCategory",
@@ -455,7 +455,7 @@
                 "name": "Capullo",
                 "slug": "capullo",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/capullo\/",
-                "urlAbsolutePath": "\/dummy-category\/capullo\/"
+                "urlPath": "\/dummy-category\/capullo\/"
             },
             {
                 "__typename": "GenericCategory",
@@ -554,7 +554,7 @@
                 "name": "Brontosaurus",
                 "slug": "brontosaurus",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/brontosaurus\/",
-                "urlAbsolutePath": "\/dummy-category\/brontosaurus\/"
+                "urlPath": "\/dummy-category\/brontosaurus\/"
             },
             {
                 "__typename": "GenericCategory",
@@ -677,7 +677,7 @@
                 "name": "Absolute Brilliance",
                 "slug": "absolute-brilliance",
                 "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/absolute-brilliance\/",
-                "urlAbsolutePath": "\/dummy-category\/absolute-brilliance\/"
+                "urlPath": "\/dummy-category\/absolute-brilliance\/"
             }
         ],
         "customPosts": [

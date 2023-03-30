@@ -80,5 +80,5 @@ fragment PostTagData on PostTag {
   }
   slug
   url
-  urlAbsolutePath
+  urlPath
 }

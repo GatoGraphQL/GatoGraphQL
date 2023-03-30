@@ -41,7 +41,7 @@ query {
     status
     title
     url
-    urlAbsolutePath
+    urlPath
   }
 
   pagesByAuthorIDs: pages(filter: { authorIDs: 2 }) {

@@ -137,7 +137,7 @@
                 ],
                 "slug": "editor",
                 "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
-                "urlAbsolutePath": "\/author\/editor\/",
+                "urlPath": "\/author\/editor\/",
                 "username": "editor",
                 "websiteURL": null
             },
@@ -229,7 +229,7 @@
                 ],
                 "slug": "author",
                 "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
-                "urlAbsolutePath": "\/author\/author\/",
+                "urlPath": "\/author\/author\/",
                 "username": "author",
                 "websiteURL": null
             },
@@ -296,7 +296,7 @@
                 ],
                 "slug": "contributor",
                 "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
-                "urlAbsolutePath": "\/author\/contributor\/",
+                "urlPath": "\/author\/contributor\/",
                 "username": "contributor",
                 "websiteURL": null
             }
