@@ -1,5 +1,11 @@
 # Creating an API gateway
 
+HTTPRequest.headers is super powerful!
+  Can for instance implement API gateway
+  Passing an auth header for another service
+  Eg:
+    Receive header "GitHub-Bearer-Token", forward it to "Bearer-Token"
+
 Talk about validating the different inputs, provided via headers:
 
 ```graphql
