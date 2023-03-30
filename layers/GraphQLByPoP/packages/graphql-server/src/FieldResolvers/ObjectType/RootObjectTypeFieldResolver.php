@@ -146,7 +146,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $root = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case '__schema':
-                return 'schema';
+                return Schema::ID;
             case '__type':
                 // Get an instance of the schema and then execute function `getType` there
                 $schemaID = $objectTypeResolver->resolveValue(

@@ -9,6 +9,7 @@ use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInter
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractUseObjectDictionaryObjectTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Root\Exception\ShouldNotHappenException;
 
 class SchemaObjectTypeDataLoader extends AbstractUseObjectDictionaryObjectTypeDataLoader
 {
@@ -41,6 +42,13 @@ class SchemaObjectTypeDataLoader extends AbstractUseObjectDictionaryObjectTypeDa
 
     protected function getObjectTypeNewInstance(int|string $id): mixed
     {
+        if ($id !== Schema::ID) {
+            throw new ShouldNotHappenException(sprintf(
+                $this->__('The Schema object data must be unique, so must not create object with ID "%s"', 'graphql-api'),
+                $id
+            ));
+        }
+
         $fullSchemaDefinition = $this->getSchemaDefinitionReferenceRegistry()->getFullSchemaDefinitionForGraphQL();
         return new Schema(
             $fullSchemaDefinition,

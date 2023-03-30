@@ -20,6 +20,8 @@ class Schema
 {
     use StandaloneServiceTrait;
 
+    public const ID = 'schema';
+
     /** @var NamedTypeInterface[] */
     protected array $types;
     /** @var Directive[] */
