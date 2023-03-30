@@ -16,6 +16,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
         SchemaTypeModuleResolverTrait::getPriority as getUpstreamPriority;
     }
 
+    public final const INSPECT_HTTP_REQUEST_FIELDS = Plugin::NAMESPACE . '\inspect-http-request-fields';
     public final const SEND_HTTP_REQUEST_FIELDS = Plugin::NAMESPACE . '\send-http-request-fields';
     public final const ENVIRONMENT_FIELDS = Plugin::NAMESPACE . '\environment-fields';
     public final const FUNCTION_FIELDS = Plugin::NAMESPACE . '\function-fields';
@@ -38,6 +39,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
     public function getModulesToResolve(): array
     {
         return [
+            self::INSPECT_HTTP_REQUEST_FIELDS,
             self::SEND_HTTP_REQUEST_FIELDS,
             self::ENVIRONMENT_FIELDS,
             self::FUNCTION_FIELDS,
@@ -56,6 +58,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
     public function getName(string $module): string
     {
         return match ($module) {
+            self::INSPECT_HTTP_REQUEST_FIELDS => \__('Inspect HTTP Request Fields', 'graphql-api'),
             self::SEND_HTTP_REQUEST_FIELDS => \__('Send HTTP Request Fields', 'graphql-api'),
             self::ENVIRONMENT_FIELDS => \__('Environment Fields', 'graphql-api'),
             self::FUNCTION_FIELDS => \__('Function Fields', 'graphql-api'),
@@ -66,6 +69,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
     public function getDescription(string $module): string
     {
         return match ($module) {
+            self::INSPECT_HTTP_REQUEST_FIELDS => sprintf(
+                \__('Addition of field <code>%s</code> to retrieve the current HTTP request data', 'graphql-api-pro'),
+                '_httpRequest'
+            ),
             self::SEND_HTTP_REQUEST_FIELDS => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response', 'graphql-api'),
             self::ENVIRONMENT_FIELDS => \__('Query the value from an environment variable or PHP constant', 'graphql-api'),
             self::FUNCTION_FIELDS => \__('Manipulate the field output using standard programming language functions (provided via special fields)', 'graphql-api'),

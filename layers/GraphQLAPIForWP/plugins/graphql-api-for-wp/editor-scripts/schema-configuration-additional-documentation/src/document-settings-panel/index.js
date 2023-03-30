@@ -86,6 +86,11 @@ const moduleAndImplicitFeaturesPRODocEntries = [
         getModulePRODocMarkdownContentOrUseDefault
     ],
     [
+        'Inspect HTTP Request Fields',
+        'inspect-http-request-fields',
+        getModulePRODocMarkdownContentOrUseDefault
+    ],
+    [
         'Meta Directives',
         'meta-directives',
         getModulePRODocMarkdownContentOrUseDefault
