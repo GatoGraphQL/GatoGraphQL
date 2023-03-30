@@ -102,7 +102,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return [
             'url',
-            'urlAbsolutePath',
+            'urlPath',
             'slug',
             'username',
             'name',
@@ -160,7 +160,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'url' => $this->__('URL of the user\'s profile in the website', 'pop-users'),
-            'urlAbsolutePath' => $this->__('URL path of the user\'s profile in the website', 'pop-users'),
+            'urlPath' => $this->__('URL path of the user\'s profile in the website', 'pop-users'),
             'slug' => $this->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
             'username' => $this->__('User\'s username handle', 'pop-users'),
             'name' => $this->__('Name of the user', 'pop-users'),
@@ -201,7 +201,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'url':
                 return $this->getUserTypeAPI()->getUserURL($user);
 
-            case 'urlAbsolutePath':
+            case 'urlPath':
                 /** @var string */
                 return $this->getUserTypeAPI()->getUserURLPath($user);
 

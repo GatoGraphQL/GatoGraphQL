@@ -21,7 +21,7 @@
                 ],
                 "slug": "wordpress",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/wordpress\/",
-                "urlAbsolutePath": "\/tag\/wordpress\/"
+                "urlPath": "\/tag\/wordpress\/"
             },
             {
                 "count": 1,
@@ -39,7 +39,7 @@
                 ],
                 "slug": "security",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
-                "urlAbsolutePath": "\/tag\/security\/"
+                "urlPath": "\/tag\/security\/"
             },
             {
                 "count": 1,
@@ -57,7 +57,7 @@
                 ],
                 "slug": "release",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/release\/",
-                "urlAbsolutePath": "\/tag\/release\/"
+                "urlPath": "\/tag\/release\/"
             },
             {
                 "count": 3,
@@ -83,7 +83,7 @@
                 ],
                 "slug": "plugin",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/plugin\/",
-                "urlAbsolutePath": "\/tag\/plugin\/"
+                "urlPath": "\/tag\/plugin\/"
             },
             {
                 "count": 1,
@@ -101,7 +101,7 @@
                 ],
                 "slug": "ideas",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/ideas\/",
-                "urlAbsolutePath": "\/tag\/ideas\/"
+                "urlPath": "\/tag\/ideas\/"
             },
             {
                 "count": 1,
@@ -119,7 +119,7 @@
                 ],
                 "slug": "graphql",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/graphql\/",
-                "urlAbsolutePath": "\/tag\/graphql\/"
+                "urlPath": "\/tag\/graphql\/"
             },
             {
                 "count": 4,
@@ -149,7 +149,7 @@
                 ],
                 "slug": "features",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/features\/",
-                "urlAbsolutePath": "\/tag\/features\/"
+                "urlPath": "\/tag\/features\/"
             },
             {
                 "count": 0,
@@ -162,7 +162,7 @@
                 "posts": [],
                 "slug": "also-never-used",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/also-never-used\/",
-                "urlAbsolutePath": "\/tag\/also-never-used\/"
+                "urlPath": "\/tag\/also-never-used\/"
             },
             {
                 "count": 1,
@@ -180,7 +180,7 @@
                 ],
                 "slug": "advanced",
                 "url": "https:\/\/graphql-api.lndo.site\/tag\/advanced\/",
-                "urlAbsolutePath": "\/tag\/advanced\/"
+                "urlPath": "\/tag\/advanced\/"
             }
         ],
         "nonEmptyPostTags": [
@@ -235,7 +235,7 @@
                     ],
                     "slug": "security",
                     "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
-                    "urlAbsolutePath": "\/tag\/security\/"
+                    "urlPath": "\/tag\/security\/"
                 },
                 {
                     "count": 4,
@@ -265,7 +265,7 @@
                     ],
                     "slug": "features",
                     "url": "https:\/\/graphql-api.lndo.site\/tag\/features\/",
-                    "urlAbsolutePath": "\/tag\/features\/"
+                    "urlPath": "\/tag\/features\/"
                 }
             ],
             "tagsByExcludeIDs": [

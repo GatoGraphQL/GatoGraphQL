@@ -84,5 +84,5 @@ fragment PostCategoryData on PostCategory {
   }
   slug
   url
-  urlAbsolutePath
+  urlPath
 }

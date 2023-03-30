@@ -214,7 +214,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "OBJECT",
@@ -315,7 +315,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "OBJECT",
@@ -382,7 +382,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "OBJECT",
@@ -508,7 +508,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             },
             {
               "name": "width"
@@ -746,7 +746,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "OBJECT",
@@ -870,7 +870,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "OBJECT",
@@ -929,7 +929,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "OBJECT",
@@ -976,7 +976,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "OBJECT",
@@ -1677,7 +1677,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             },
             {
               "name": "username"
@@ -2248,7 +2248,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "INTERFACE",
@@ -2290,7 +2290,7 @@
               "name": "url"
             },
             {
-              "name": "urlAbsolutePath"
+              "name": "urlPath"
             }
           ],
           "kind": "INTERFACE",

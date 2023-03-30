@@ -61,7 +61,7 @@ fragment CategoryData on Category {
   name
   slug
   url
-  urlAbsolutePath
+  urlPath
 }
 
 fragment GenericCategoryData on GenericCategory {

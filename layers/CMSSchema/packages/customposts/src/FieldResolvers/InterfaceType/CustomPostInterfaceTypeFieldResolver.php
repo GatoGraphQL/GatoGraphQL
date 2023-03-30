@@ -122,7 +122,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     {
         return [
             'url',
-            'urlAbsolutePath',
+            'urlPath',
             'slug',
             'content',
             'rawContent',
@@ -188,7 +188,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     {
         return match ($fieldName) {
             'url' => $this->__('Custom post URL', 'customposts'),
-            'urlAbsolutePath' => $this->__('Custom post URL path', 'customposts'),
+            'urlPath' => $this->__('Custom post URL path', 'customposts'),
             'slug' => $this->__('Custom post slug', 'customposts'),
             'content' => $this->__('Custom post content, in HTML format', 'customposts'),
             'rawContent' => $this->__('Custom post content, in raw format', 'customposts'),

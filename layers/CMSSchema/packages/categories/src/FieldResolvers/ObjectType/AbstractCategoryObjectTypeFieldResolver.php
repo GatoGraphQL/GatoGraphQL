@@ -79,7 +79,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         return [
             // Queryable interface
             'url',
-            'urlAbsolutePath',
+            'urlPath',
             'slug',
 
             // Category interface
@@ -104,7 +104,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return match ($fieldName) {
             'url' => $this->__('Category URL', 'pop-categories'),
-            'urlAbsolutePath' => $this->__('Category URL path', 'pop-categories'),
+            'urlPath' => $this->__('Category URL path', 'pop-categories'),
             'slug' => $this->__('Category slug', 'pop-categories'),
             'parent' => $this->__('Parent category (if this category is a child of another one)', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -124,7 +124,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
                 /** @var string */
                 return $categoryTypeAPI->getCategoryURL($category);
 
-            case 'urlAbsolutePath':
+            case 'urlPath':
                 /** @var string */
                 return $categoryTypeAPI->getCategoryURLPath($category);
 

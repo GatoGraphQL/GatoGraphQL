@@ -1053,7 +1053,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "Category URL path",
               "args": [],
               "type": {
@@ -2014,7 +2014,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "URL path to query the object",
               "args": [],
               "type": {
@@ -2405,7 +2405,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "Tag URL path",
               "args": [],
               "type": {
@@ -3045,7 +3045,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "Media element URL path",
               "args": [],
               "type": {
@@ -4543,7 +4543,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "URL path to query the object",
               "args": [],
               "type": {
@@ -5528,7 +5528,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "URL path to query the object",
               "args": [],
               "type": {
@@ -6004,7 +6004,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "Category URL path",
               "args": [],
               "type": {
@@ -6316,7 +6316,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "Tag URL path",
               "args": [],
               "type": {
@@ -12765,7 +12765,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "URL path of the user's profile in the website",
               "args": [],
               "type": {
@@ -15056,7 +15056,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "Custom post URL path",
               "args": [],
               "type": {
@@ -15409,7 +15409,7 @@
               "deprecationReason": null
             },
             {
-              "name": "urlAbsolutePath",
+              "name": "urlPath",
               "description": "URL path to query the object",
               "args": [],
               "type": {

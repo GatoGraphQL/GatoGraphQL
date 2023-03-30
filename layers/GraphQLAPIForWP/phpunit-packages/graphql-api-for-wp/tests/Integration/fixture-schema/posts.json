@@ -40,7 +40,7 @@
                 "tags": [],
                 "title": "Hello world!",
                 "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
-                "urlAbsolutePath": "\/hello-world\/"
+                "urlPath": "\/hello-world\/"
             },
             {
                 "areCommentsOpen": true,
@@ -100,7 +100,7 @@
                 ],
                 "title": "Released v0.6, check it out",
                 "url": "https:\/\/graphql-api.lndo.site\/released-v0-6-check-it-out\/",
-                "urlAbsolutePath": "\/released-v0-6-check-it-out\/"
+                "urlPath": "\/released-v0-6-check-it-out\/"
             },
             {
                 "areCommentsOpen": true,
@@ -166,7 +166,7 @@
                 ],
                 "title": "Working on flat chain syntax next",
                 "url": "https:\/\/graphql-api.lndo.site\/working-on-flat-chain-syntax-next\/",
-                "urlAbsolutePath": "\/working-on-flat-chain-syntax-next\/"
+                "urlPath": "\/working-on-flat-chain-syntax-next\/"
             }
         ],
         "postsByAuthorIDs": [

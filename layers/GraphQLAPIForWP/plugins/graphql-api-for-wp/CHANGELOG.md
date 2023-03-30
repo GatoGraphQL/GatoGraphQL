@@ -89,12 +89,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `password: String`
 - Filter by `metaQuery`
 - Exclude results via field arg `excludeIDs`
-- Added field `urlAbsolutePath` on several types:
-  - `Post.urlAbsolutePath: String!`
-  - `Page.urlAbsolutePath: String!`
-  - `PostTag.urlAbsolutePath: String!`
-  - `PostCategory.urlAbsolutePath: String!`
-  - `User.urlAbsolutePath: String!`
+- Added field `urlPath` on several types:
+  - `Post.urlPath: String!`
+  - `Page.urlPath: String!`
+  - `PostTag.urlPath: String!`
+  - `PostCategory.urlPath: String!`
+  - `User.urlPath: String!`
 - `content` fields (for types `Post`, `Page` and `Comment`) are now of type `HTML`, and a new `rawContent` field of type `String` was added
 - Converted from string to Enum type whenever possible
   - Custom post type and status

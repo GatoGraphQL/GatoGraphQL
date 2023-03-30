@@ -289,23 +289,23 @@ This query filters comments where meta `upvotes` (which is an array of integers)
 }
 ```
 
-### Field `urlAbsolutePath`
+### Field `urlPath`
 
-Field `urlAbsolutePath` has been added to several types:
+Field `urlPath` has been added to several types:
 
-- `Post.urlAbsolutePath: URLAbsolutePath!`
-- `Page.urlAbsolutePath: URLAbsolutePath!`
-- `PostCategory.urlAbsolutePath: URLAbsolutePath!`
-- `PostTag.urlAbsolutePath: URLAbsolutePath!`
-- `User.urlAbsolutePath: URLAbsolutePath!`
+- `Post.urlPath: URLAbsolutePath!`
+- `Page.urlPath: URLAbsolutePath!`
+- `PostCategory.urlPath: URLAbsolutePath!`
+- `PostTag.urlPath: URLAbsolutePath!`
+- `User.urlPath: URLAbsolutePath!`
 
-For instance, if field `User.url` returns `"https://mysite.com/author/admin/"`, then field `User.urlAbsolutePath` returns `"/author/admin/"`.
+For instance, if field `User.url` returns `"https://mysite.com/author/admin/"`, then field `User.urlPath` returns `"/author/admin/"`.
 
 ```graphql
 {
   users {
     id
-    urlAbsolutePath
+    urlPath
   }
 }
 ```
@@ -398,7 +398,7 @@ fragment PageProps on Page {
   id
   title
   date
-  urlAbsolutePath
+  urlPath
 }
 ```
 
@@ -788,7 +788,7 @@ Added the following fields for media items:
     width
     slug
     url
-    urlAbsolutePath
+    urlPath
     title
     caption
     altText

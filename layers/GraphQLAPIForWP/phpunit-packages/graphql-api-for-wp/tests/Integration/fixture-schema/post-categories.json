@@ -32,7 +32,7 @@
                 ],
                 "slug": "uncategorized",
                 "url": "https:\/\/graphql-api.lndo.site\/category\/uncategorized\/",
-                "urlAbsolutePath": "\/category\/uncategorized\/",
+                "urlPath": "\/category\/uncategorized\/",
                 "children": []
             },
             {
@@ -60,7 +60,7 @@
                 ],
                 "slug": "resource",
                 "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/resource\/",
-                "urlAbsolutePath": "\/category\/blog\/resource\/",
+                "urlPath": "\/category\/blog\/resource\/",
                 "children": []
             },
             {
@@ -77,7 +77,7 @@
                 "posts": [],
                 "slug": "never-used",
                 "url": "https:\/\/graphql-api.lndo.site\/category\/never-used\/",
-                "urlAbsolutePath": "\/category\/never-used\/",
+                "urlPath": "\/category\/never-used\/",
                 "children": []
             },
             {
@@ -109,7 +109,7 @@
                 ],
                 "slug": "blog",
                 "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/",
-                "urlAbsolutePath": "\/category\/blog\/",
+                "urlPath": "\/category\/blog\/",
                 "children": [
                     {
                         "childCount": 0,
@@ -136,7 +136,7 @@
                         ],
                         "slug": "resource",
                         "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/resource\/",
-                        "urlAbsolutePath": "\/category\/blog\/resource\/"
+                        "urlPath": "\/category\/blog\/resource\/"
                     }
                 ]
             },
@@ -167,7 +167,7 @@
                 ],
                 "slug": "advanced",
                 "url": "https:\/\/graphql-api.lndo.site\/category\/advanced\/",
-                "urlAbsolutePath": "\/category\/advanced\/",
+                "urlPath": "\/category\/advanced\/",
                 "children": []
             }
         ],
@@ -216,7 +216,7 @@
                     ],
                     "slug": "resource",
                     "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/resource\/",
-                    "urlAbsolutePath": "\/category\/blog\/resource\/",
+                    "urlPath": "\/category\/blog\/resource\/",
                     "children": []
                 },
                 {
@@ -248,7 +248,7 @@
                     ],
                     "slug": "blog",
                     "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/",
-                    "urlAbsolutePath": "\/category\/blog\/",
+                    "urlPath": "\/category\/blog\/",
                     "children": [
                         {
                             "childCount": 0,
@@ -275,7 +275,7 @@
                             ],
                             "slug": "resource",
                             "url": "https:\/\/graphql-api.lndo.site\/category\/blog\/resource\/",
-                            "urlAbsolutePath": "\/category\/blog\/resource\/"
+                            "urlPath": "\/category\/blog\/resource\/"
                         }
                     ]
                 },
@@ -306,7 +306,7 @@
                     ],
                     "slug": "advanced",
                     "url": "https:\/\/graphql-api.lndo.site\/category\/advanced\/",
-                    "urlAbsolutePath": "\/category\/advanced\/",
+                    "urlPath": "\/category\/advanced\/",
                     "children": []
                 }
             ],
