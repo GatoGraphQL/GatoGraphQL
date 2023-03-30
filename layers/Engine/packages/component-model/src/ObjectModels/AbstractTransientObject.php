@@ -45,11 +45,9 @@ abstract class AbstractTransientObject implements TransientObjectInterface
         string|int|null $id = null,
     ) {
         if ($id !== null) {
-            $this->id = $id;
-        } else {
             self::$counter++;
-            $this->id = self::$counter;
         }
+        $this->id = $id !== null ? $id : self::$counter;
 
         // Register the object in the registry
         $this->getObjectDictionary()->set(get_called_class(), $this->getID(), $this);
