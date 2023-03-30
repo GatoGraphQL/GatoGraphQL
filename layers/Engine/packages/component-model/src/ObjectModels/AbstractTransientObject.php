@@ -44,7 +44,7 @@ abstract class AbstractTransientObject implements TransientObjectInterface
     public function __construct(
         string|int|null $id = null,
     ) {
-        if ($id !== null) {
+        if ($id === null) {
             self::$counter++;
         }
         $this->id = $id !== null ? $id : self::$counter;
