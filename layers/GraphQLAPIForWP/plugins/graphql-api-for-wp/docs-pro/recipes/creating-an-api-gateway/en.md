@@ -1,6 +1,6 @@
 # Creating an API gateway
 
-HTTPRequest.headers is super powerful!
+_httpRequestHeaders is super powerful!
   Can for instance implement API gateway
   Passing an auth header for another service
   Eg:
