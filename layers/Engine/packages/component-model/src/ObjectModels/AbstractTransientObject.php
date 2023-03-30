@@ -34,12 +34,22 @@ abstract class AbstractTransientObject implements TransientObjectInterface
      */
     public static int $counter = 0;
 
-    public readonly int $id;
+    public readonly string|int $id;
 
-    public function __construct()
-    {
-        self::$counter++;
-        $this->id = self::$counter;
+    /**
+     * Allow to specify the ID of the object or,
+     * if not provided, it will be automatically
+     * generated using a counter.
+     */
+    public function __construct(
+        string|int|null $id = null,
+    ) {
+        if ($id !== null) {
+            $this->id = $id;
+        } else {
+            self::$counter++;
+            $this->id = self::$counter;
+        }
 
         // Register the object in the registry
         $this->getObjectDictionary()->set(get_called_class(), $this->getID(), $this);
