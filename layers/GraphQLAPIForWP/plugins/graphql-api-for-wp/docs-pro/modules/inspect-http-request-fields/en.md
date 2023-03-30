@@ -1,14 +1,14 @@
 # Inspect HTTP Request Fields
 
-Addition of field `_httpRequest` to retrieve the current HTTP request data.
+Addition of fields to retrieve the current HTTP request data.
 
 <!-- // @todo Complete! -->
 
 ## HTTP Request Fields
 
-Type `HTTPRequest` provides the following fields to retrieve the current HTTP request data.
+The following fields are added to the GraphQL schema:
 
-### `clientIP`
+### `_httpRequestClientIP`
 
 Retrieves the client IP address. If the server is not properly configured (see below), the response is `null`.
 
