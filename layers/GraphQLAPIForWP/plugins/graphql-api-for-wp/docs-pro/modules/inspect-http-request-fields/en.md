@@ -2,8 +2,6 @@
 
 Addition of fields to retrieve the current HTTP request data.
 
-<!-- // @todo Complete! -->
-
 ## Description
 
 The following fields to retrive the current HTTP request data are added to the GraphQL schema:
