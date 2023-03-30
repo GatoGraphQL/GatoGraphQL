@@ -163,6 +163,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Reverting mutations in case of error',
                 true,
             ],
+            [
+                'content-orchestration',
+                'Content orchestration',
+                true,
+            ],
             // [
             //     'using-the-graphql-server-without-wordpress',
             //     'Using the GraphQL server without WordPress',
