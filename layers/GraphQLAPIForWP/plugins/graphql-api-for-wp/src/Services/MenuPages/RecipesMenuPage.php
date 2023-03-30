@@ -59,6 +59,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
+                'customizing-content-for-different-users',
+                'Customizing content for different users',
+                true,
+            ],
+            [
                 'boosting-the-performance-of-the-api',
                 'Boosting the performance of the API',
                 true,
