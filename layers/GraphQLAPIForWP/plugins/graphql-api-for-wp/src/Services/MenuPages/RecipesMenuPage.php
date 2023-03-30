@@ -114,6 +114,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
+                'creating-an-api-gateway',
+                'Creating an API gateway',
+                true,
+            ],
+            [
                 'filtering-data-from-an-external-api',
                 'Filtering data from an external API',
                 true,
