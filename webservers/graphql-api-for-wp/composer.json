@@ -67,6 +67,7 @@
             "@symlink-vendor-for-graphql-api-extension-demo"
         ],
         "rebuild-server": [
+            "Composer\\Config::disableProcessTimeout",
             "@purge-cache",
             "@update-deps",
             "lando rebuild appserver -y"
