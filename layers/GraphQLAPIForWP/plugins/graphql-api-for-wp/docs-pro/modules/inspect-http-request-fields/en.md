@@ -1,14 +1,20 @@
 # Inspect HTTP Request Fields
 
-Addition of field `_httpRequest` to retrieve the current HTTP request data.
+Addition of fields to retrieve the current HTTP request data.
 
-<!-- // @todo Complete! -->
+## Description
 
-## HTTP Request Fields
+The following fields to retrive the current HTTP request data are added to the GraphQL schema:
 
-Type `HTTPRequest` provides the following fields to retrieve the current HTTP request data.
+### `_httpRequestBody`
 
-### `clientIP`
+Body of the HTTP request.
+
+### `_httpRequestClientHost`
+
+Client host.
+
+### `_httpRequestClientIP`
 
 Retrieves the client IP address. If the server is not properly configured (see below), the response is `null`.
 
@@ -24,3 +30,115 @@ For instance:
 The property name to use can be configured in the "Plugin Settings > Server IP Configuration" tab on the Settings page:
 
 ![Configuring the $_SERVER property name to retrieve the client IP](../../images/settings-general-client-ip-address-server-property-name.png "Configuring the $_SERVER property name to retrieve the client IP")
+
+### `_httpRequestCookie`
+
+Request cookie value.
+
+### `_httpRequestCookies`
+
+Request cookies.
+
+### `_httpRequestDomain`
+
+Domain of the requested URL.
+
+### `_httpRequestFullURL`
+
+Requested URL (including the query params).
+
+### `_httpRequestHasCookie`
+
+Does the request contain a certain cookie?.
+
+### `_httpRequestHasHeader`
+
+Does the request contain a certain header?.
+
+### `_httpRequestHasParam`
+
+Does the request contain a certain param?.
+
+### `_httpRequestHasQueryParam`
+
+Does the request contain a certain param passed via the query?.
+
+### `_httpRequestHasRequestParam`
+
+Does the request contain a certain param passed via POST?.
+
+### `_httpRequestHeader`
+
+Request header value.
+
+### `_httpRequestHeaders`
+
+Request headers.
+
+### `_httpRequestHost`
+
+Host of the requested URL.
+
+### `_httpRequestMethod`
+
+Request method.
+
+### `_httpRequestParam`
+
+Value of a param passed whether via POST or via the URL query.
+
+### `_httpRequestParams`
+
+Params passed whether via POST or via the URL query.
+
+### `_httpRequestProtocol`
+
+Request protocol.
+
+### `_httpRequestQuery`
+
+Query params string.
+
+### `_httpRequestQueryParam`
+
+Value of a param passed in the URL query.
+
+### `_httpRequestQueryParams`
+
+Params passed in the URL query.
+
+### `_httpRequestReferer`
+
+Request referer.
+
+### `_httpRequestRequestParam`
+
+Value of a param passed via POST.
+
+### `_httpRequestRequestParams`
+
+Params passed via POST.
+
+### `_httpRequestRequestTime`
+
+Timestamp of the start of the request.
+
+### `_httpRequestScheme`
+
+Scheme of the requested URL.
+
+### `_httpRequestServerIP`
+
+Server IP address.
+
+### `_httpRequestURL`
+
+Requested URL (without query params).
+
+### `_httpRequestURLPath`
+
+Asolute path (starting with "/") of the requested URL.
+
+### `_httpRequestUserAgent`
+
+User agent.

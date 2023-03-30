@@ -69,10 +69,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::INSPECT_HTTP_REQUEST_FIELDS => sprintf(
-                \__('Addition of field <code>%s</code> to retrieve the current HTTP request data', 'graphql-api-pro'),
-                '_httpRequest'
-            ),
+            self::INSPECT_HTTP_REQUEST_FIELDS => \__('Addition of fields to retrieve the current HTTP request data', 'graphql-api'),
             self::SEND_HTTP_REQUEST_FIELDS => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response', 'graphql-api'),
             self::ENVIRONMENT_FIELDS => \__('Query the value from an environment variable or PHP constant', 'graphql-api'),
             self::FUNCTION_FIELDS => \__('Manipulate the field output using standard programming language functions (provided via special fields)', 'graphql-api'),

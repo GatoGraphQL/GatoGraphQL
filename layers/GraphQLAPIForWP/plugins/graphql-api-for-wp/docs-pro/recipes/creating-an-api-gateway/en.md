@@ -1,6 +1,6 @@
 # Creating an API gateway
 
-HTTPRequest.headers is super powerful!
+_httpRequestHeaders is super powerful!
   Can for instance implement API gateway
   Passing an auth header for another service
   Eg:
@@ -10,33 +10,30 @@ Talk about validating the different inputs, provided via headers:
 
 ```graphql
 query One {
-  _httpRequest: {
-    githubBearerToken: _header(name: "Github-Bearer-Token")
-      @export(as: "githubBearerToken")
-    slackBearerToken: _header(name: "Slack-Bearer-Token")
-      @export(as: "slackBearerToken")
-  }  
-}
-
-query Two {
-  hasAllBearerTokens: _and(values: [$githubBearerToken, $slackBearerToken])
+  githubBearerToken: _httpRequestHeader(name: "Github-Bearer-Token")
+    @export(as: "githubBearerToken")
+  slackBearerToken: _httpRequestHeader(name: "Slack-Bearer-Token")
+    @export(as: "slackBearerToken")
+  hasAllBearerTokens: _and(values: [$__githubBearerToken, $__slackBearerToken])
     @export(as: "hasAllBearerTokens")
 }
 
-query Three
+query Two
+  @depends(on: "One")
   @include(if: $hasAllBearerTokens)
 {
   # ...
 }
 
-query Four
+query Three
+  @depends(on: "One")
   @skip(if: $hasAllBearerTokens)
 {
   _fail(...)
 }
 
-query Five
-  @depends(on: ["Three", "Four"])
+query Four
+  @depends(on: ["Two", "Three"])
 {
   
 }
