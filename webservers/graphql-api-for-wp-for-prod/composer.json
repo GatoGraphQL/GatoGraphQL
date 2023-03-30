@@ -61,6 +61,7 @@
         "create-users": "lando composer create-users-within-container",
         "create-users-within-container": "/bin/sh /app/setup/create-users.sh",
         "rebuild-server": [
+            "Composer\\Config::disableProcessTimeout",
             "lando rebuild appserver -y"
         ],
         "stop-server": "lando stop",
