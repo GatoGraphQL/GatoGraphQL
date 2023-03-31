@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\StateManagers\AppStateManager;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\ModuleManager;
-use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManager;
 use PoP\Root\StateManagers\HookManagerInterface;
+use PoP\Root\StateManagers\ModuleManager;
+use PoP\Root\StateManagers\ModuleManagerInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 /**
  * Keep all state in the application stored and accessible
@@ -296,7 +297,16 @@ class App implements AppInterface
      */
     final public static function request(string $key, mixed $default = null): mixed
     {
-        return self::$request->request->get($key, $default);
+        /**
+         * `get` doesn't support arrays, then use ->all for that case
+         *
+         * @see https://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
+         */
+        try {
+            return self::$request->request->get($key, $default);
+        } catch (BadRequestException) {
+            return self::$request->request->all($key);
+        }
     }
 
     /**
@@ -306,7 +316,16 @@ class App implements AppInterface
      */
     final public static function query(string $key, mixed $default = null): mixed
     {
-        return self::$request->query->get($key, $default);
+        /**
+         * `get` doesn't support arrays, then use ->all for that case
+         *
+         * @see https://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
+         */
+        try {
+            return self::$request->query->get($key, $default);
+        } catch (BadRequestException) {
+            return self::$request->query->all($key);
+        }
     }
 
     /**
