@@ -48,8 +48,8 @@ add_action(
             );
             // Calculate the top level domain (app.site.com => site.com)
             $hostNames = array_reverse(explode('.', $_SERVER['HTTP_HOST']));
-            $host = $hostNames[1] . '.' . $hostNames[0];
-            $enablePlugin = in_array($host, $validTestingDomains);
+            $domain = $hostNames[1] . '.' . $hostNames[0];
+            $enablePlugin = in_array($domain, $validTestingDomains);
         }
         if (!$enablePlugin) {
             \add_action('admin_notices', function () {
