@@ -75,10 +75,6 @@ Host of the requested URL.
 
 Request method.
 
-### `_httpRequestStringParam`
-
-Value of a param passed via POST or GET.
-
 ### `_httpRequestParams`
 
 Params passed via POST or GET.
@@ -106,6 +102,10 @@ Scheme of the requested URL.
 ### `_httpRequestServerIP`
 
 Server IP address.
+
+### `_httpRequestStringParam`
+
+Value of a param (passed via POST or GET) of type `?param=value`.
 
 ### `_httpRequestURL`
 
