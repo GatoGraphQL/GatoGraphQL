@@ -107,6 +107,10 @@ Server IP address.
 
 Value of a param (passed via POST or GET) of type `?param=value`.
 
+### `_httpRequestStringListParam`
+
+Value of a param (passed via POST or GET) of type `?param[]=value1&param[]=value2`.
+
 ### `_httpRequestURL`
 
 Requested URL (without query params).
