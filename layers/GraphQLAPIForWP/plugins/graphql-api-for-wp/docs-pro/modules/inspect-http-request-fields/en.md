@@ -75,7 +75,7 @@ Host of the requested URL.
 
 Request method.
 
-### `_httpRequestParam`
+### `_httpRequestStringParam`
 
 Value of a param passed via POST or GET.
 
