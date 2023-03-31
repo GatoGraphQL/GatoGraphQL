@@ -91,10 +91,6 @@ Request protocol.
 
 Query params string.
 
-### `_httpRequestQueryParams`
-
-Params passed in the URL query.
-
 ### `_httpRequestReferer`
 
 Request referer.
