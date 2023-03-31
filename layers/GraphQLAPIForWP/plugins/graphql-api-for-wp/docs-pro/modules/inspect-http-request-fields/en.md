@@ -57,15 +57,7 @@ Does the request contain a certain header?.
 
 ### `_httpRequestHasParam`
 
-Does the request contain a certain param?.
-
-### `_httpRequestHasQueryParam`
-
-Does the request contain a certain param passed via the query?.
-
-### `_httpRequestHasRequestParam`
-
-Does the request contain a certain param passed via POST?.
+Does the request contain a certain parameter?.
 
 ### `_httpRequestHeader`
 
@@ -85,11 +77,11 @@ Request method.
 
 ### `_httpRequestParam`
 
-Value of a param passed whether via POST or via the URL query.
+Value of a param passed via POST or GET.
 
 ### `_httpRequestParams`
 
-Params passed whether via POST or via the URL query.
+Params passed via POST or GET.
 
 ### `_httpRequestProtocol`
 
@@ -99,25 +91,9 @@ Request protocol.
 
 Query params string.
 
-### `_httpRequestQueryParam`
-
-Value of a param passed in the URL query.
-
-### `_httpRequestQueryParams`
-
-Params passed in the URL query.
-
 ### `_httpRequestReferer`
 
 Request referer.
-
-### `_httpRequestRequestParam`
-
-Value of a param passed via POST.
-
-### `_httpRequestRequestParams`
-
-Params passed via POST.
 
 ### `_httpRequestRequestTime`
 
