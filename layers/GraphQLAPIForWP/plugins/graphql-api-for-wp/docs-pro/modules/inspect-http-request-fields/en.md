@@ -57,7 +57,7 @@ Does the request contain a certain header?.
 
 ### `_httpRequestHasParam`
 
-Does the request contain a certain param?.
+Does the request contain a certain parameter?.
 
 ### `_httpRequestHeader`
 
@@ -77,11 +77,11 @@ Request method.
 
 ### `_httpRequestParam`
 
-Value of a param passed whether via POST or via the URL query.
+Value of a param passed via POST or GET.
 
 ### `_httpRequestParams`
 
-Params passed whether via POST or via the URL query.
+Params passed via POST or GET.
 
 ### `_httpRequestProtocol`
 
