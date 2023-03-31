@@ -103,13 +103,13 @@ Scheme of the requested URL.
 
 Server IP address.
 
-### `_httpRequestStringParam`
-
-Value of a param (passed via POST or GET) of type `?param=value`.
-
 ### `_httpRequestStringListParam`
 
 Value of a param (passed via POST or GET) of type `?param[]=value1&param[]=value2`.
+
+### `_httpRequestStringParam`
+
+Value of a param (passed via POST or GET) of type `?param=value`.
 
 ### `_httpRequestURL`
 
