@@ -103,10 +103,6 @@ Params passed in the URL query.
 
 Request referer.
 
-### `_httpRequestRequestParam`
-
-Value of a param passed via POST.
-
 ### `_httpRequestRequestTime`
 
 Timestamp of the start of the request.
