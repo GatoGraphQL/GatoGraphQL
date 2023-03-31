@@ -107,10 +107,6 @@ Request referer.
 
 Value of a param passed via POST.
 
-### `_httpRequestRequestParams`
-
-Params passed via POST.
-
 ### `_httpRequestRequestTime`
 
 Timestamp of the start of the request.
