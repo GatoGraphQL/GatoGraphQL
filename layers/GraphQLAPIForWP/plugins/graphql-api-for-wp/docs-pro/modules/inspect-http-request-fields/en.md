@@ -4,7 +4,7 @@ Addition of fields to retrieve the current HTTP request data.
 
 ## Description
 
-The following fields to retrive the current HTTP request data are added to the GraphQL schema:
+The following fields to retrieve the current HTTP request data are added to the GraphQL schema:
 
 ### `_httpRequestBody`
 
@@ -75,13 +75,22 @@ Host of the requested URL.
 
 Request method.
 
-### `_httpRequestParam`
-
-Value of a param passed via POST or GET.
-
 ### `_httpRequestParams`
 
-Params passed via POST or GET.
+JSON object with all the params (passed via POST or GET).
+
+Param values can be:
+
+- Strings: `?param=value`
+- Arrays: `?someArray[]=1&someArray[]=2`
+- Array of arrays: `?someMatrix[0][0]=3&someMatrix[0][1]=4&someMatrix[1][0]=5&someMatrix[1][1]=6`
+- Associative arrays (i.e. objects): `?someAssocArray["admins"]=20&someAssocArray["authors"]=30`
+- Associative array of arrays: `?someAssocMatrix["admins"][0]=7&someAssocMatrix["admins"][1]=8&someAssocMatrix["authors"][0]=9&someAssocMatrix["authors"][1]=10`
+- Other combinations
+
+To get the value of the param, we can use fields `_httpRequestStringParam` and `_httpRequestStringListParam` for the first two cases respectively, but there are no fields for the other cases.
+
+For those, use this field `_httpRequestParams` to obtain the JSON object, and then retrieve the corresponding value from within.
 
 ### `_httpRequestProtocol`
 
@@ -106,6 +115,14 @@ Scheme of the requested URL.
 ### `_httpRequestServerIP`
 
 Server IP address.
+
+### `_httpRequestStringListParam`
+
+Value of a param (passed via POST or GET) of type `?param[]=value1&param[]=value2`.
+
+### `_httpRequestStringParam`
+
+Value of a param (passed via POST or GET) of type `?param=value`.
 
 ### `_httpRequestURL`
 
