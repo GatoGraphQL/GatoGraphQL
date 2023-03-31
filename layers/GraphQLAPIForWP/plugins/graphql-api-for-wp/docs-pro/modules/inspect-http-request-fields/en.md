@@ -99,10 +99,6 @@ Request protocol.
 
 Query params string.
 
-### `_httpRequestQueryParam`
-
-Value of a param passed in the URL query.
-
 ### `_httpRequestQueryParams`
 
 Params passed in the URL query.
