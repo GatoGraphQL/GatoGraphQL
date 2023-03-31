@@ -77,7 +77,18 @@ Request method.
 
 ### `_httpRequestParams`
 
-Params passed via POST or GET.
+JSON object with all the params (passed via POST or GET).
+
+Param values can be:
+
+- strings: `?param=value`
+- arrays: `?someArray[]=1&someArray[]=2`
+- array of arrays: `?someMatrix[0][0]=3&someMatrix[0][1]=4&someMatrix[1][0]=5&someMatrix[1][1]=6`
+- associative array of arrays (i.e. object): `?someAssocMatrix["admins"][0]=7&someAssocMatrix["admins"][1]=8&someAssocMatrix["authors"][0]=9&someAssocMatrix["authors"][1]=10`
+
+To get the value of the param for the first two cases we can use fields `_httpRequestStringParam` and `_httpRequestStringListParam` respectively, but there are no fields for the other cases.
+
+For those, use this field `_httpRequestParams` to obtain the JSON object, and then retrieve the corresponding value from within.
 
 ### `_httpRequestProtocol`
 
