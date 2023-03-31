@@ -59,10 +59,6 @@ Does the request contain a certain header?.
 
 Does the request contain a certain param?.
 
-### `_httpRequestHasRequestParam`
-
-Does the request contain a certain param passed via POST?.
-
 ### `_httpRequestHeader`
 
 Request header value.
