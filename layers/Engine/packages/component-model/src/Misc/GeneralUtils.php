@@ -77,7 +77,7 @@ class GeneralUtils
     }
 
     /**
-     * Add paramters "key" => "value" to the URL
+     * Remove parameters from the URL
      *
      * @param string[] $keys
      * @see https://stackoverflow.com/a/5809881
