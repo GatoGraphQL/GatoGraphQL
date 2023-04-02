@@ -86,6 +86,11 @@ const moduleAndImplicitFeaturesPRODocEntries = [
         getModulePRODocMarkdownContentOrUseDefault
     ],
     [
+        'Helper Fields',
+        'helper-fields',
+        getModulePRODocMarkdownContentOrUseDefault
+    ],
+    [
         'Inspect HTTP Request Fields',
         'inspect-http-request-fields',
         getModulePRODocMarkdownContentOrUseDefault

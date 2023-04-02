@@ -20,6 +20,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
     public final const SEND_HTTP_REQUEST_FIELDS = Plugin::NAMESPACE . '\send-http-request-fields';
     public final const ENVIRONMENT_FIELDS = Plugin::NAMESPACE . '\environment-fields';
     public final const FUNCTION_FIELDS = Plugin::NAMESPACE . '\function-fields';
+    public final const HELPER_FIELDS = Plugin::NAMESPACE . '\helper-fields';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -43,6 +44,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
             self::SEND_HTTP_REQUEST_FIELDS,
             self::ENVIRONMENT_FIELDS,
             self::FUNCTION_FIELDS,
+            self::HELPER_FIELDS,
         ];
     }
 
@@ -62,6 +64,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
             self::SEND_HTTP_REQUEST_FIELDS => \__('Send HTTP Request Fields', 'graphql-api'),
             self::ENVIRONMENT_FIELDS => \__('Environment Fields', 'graphql-api'),
             self::FUNCTION_FIELDS => \__('Function Fields', 'graphql-api'),
+            self::HELPER_FIELDS => \__('Helper Fields', 'graphql-api'),
             default => $module,
         };
     }
@@ -73,6 +76,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
             self::SEND_HTTP_REQUEST_FIELDS => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response', 'graphql-api'),
             self::ENVIRONMENT_FIELDS => \__('Query the value from an environment variable or PHP constant', 'graphql-api'),
             self::FUNCTION_FIELDS => \__('Manipulate the field output using standard programming language functions (provided via special fields)', 'graphql-api'),
+            self::HELPER_FIELDS => \__('Collection of fields providing useful functionality concerning URLs, Date formatting, etc', 'graphql-api'),
             default => parent::getDescription($module),
         };
     }
