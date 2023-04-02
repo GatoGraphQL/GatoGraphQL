@@ -244,3 +244,41 @@ echo "Number of requests to process (at $ENTRIES_TO_PROCESS entries per request)
 # Execute the requests, at one per second
 for PAGINATION_NUMBER in $(seq 0 $(($PAGINATION_COUNT - 1))); do sleep 1 && echo "\n\nPagination number: $PAGINATION_NUMBER\n" && curl --insecure -X POST -H "Content-Type: application/json" -d "{\"query\": \"{ comments(pagination: { limit: $ENTRIES_TO_PROCESS, offset: $(($PAGINATION_NUMBER * $ENTRIES_TO_PROCESS)) }) { id date content } }\"}" https://graphql-api.lndo.site/graphql/website/ ; done
 ```
+
+Maybe use part of this code:
+
+In combination with the **Inspect HTTP Request Fields** and **Field to Input** modules, we can retrieve the currently-requested URL when executing a GraphQL custom endpoint or persisted query, add extra parameters, and send another HTTP request to the new URL.
+
+For instance, in this query, we retrieve the IDs of the users in the website and execute a new GraphQL query passing their ID as parameter:
+
+```graphql
+{
+  users {
+    userID: id
+    url: _httpRequestFullURL
+    method: _httpRequestMethod
+    headers: _httpRequestHeaders
+    body: _httpRequestBody
+    newURL: _urlAddParams(
+      url: $__url,
+      params: {
+        userID: $__userID
+      }
+    )
+    _sendHTTPRequest(
+      input: {
+        url: $__newURL,
+        method: $__method,
+        options: {
+          headers: $__headers
+          body: $__body
+        }
+      }
+    ) {
+      statusCode
+      contentType
+      body
+    }
+  }
+}
+```
