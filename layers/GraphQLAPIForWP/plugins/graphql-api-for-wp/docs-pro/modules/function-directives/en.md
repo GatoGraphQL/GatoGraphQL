@@ -84,9 +84,17 @@ Multiply an integer number with the field value.
 
 Add an entry to the JSON object.
 
+### `@objectKeepProperties`
+
+Keep specific properties only from the JSON object.
+
 ### `@objectRemoveEntry`
 
 Removes an entry from the JSON object.
+
+### `@objectRemoveProperties`
+
+Remove specific properties from the JSON object.
 
 ### `@setNull`
 
