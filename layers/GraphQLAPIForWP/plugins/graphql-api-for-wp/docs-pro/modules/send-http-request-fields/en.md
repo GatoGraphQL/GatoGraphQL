@@ -268,10 +268,6 @@ For instance, the following query:
 }
 ```
 
-Please notice that the `headers` field retrieves a `JSONObject`, with the keys as the header names, and their values can be either `String` (as with `Content-Length` in the example above) or `[String]` (as with `Cache-Control`).
-
-The field `header`, though, retrieves a `String`. Then, a header with multiple entries (such as `Cache-Control`) has all its values joined with `", "`.
-
 ### `_sendGraphQLHTTPRequest`
 
 Executing the following query:
