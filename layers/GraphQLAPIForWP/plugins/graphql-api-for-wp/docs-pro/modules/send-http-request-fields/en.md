@@ -257,12 +257,12 @@ For instance, the following query:
         "Access-Control-Allow-Headers": "Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type",
         "Access-Control-Expose-Headers": "X-WP-Total, X-WP-TotalPages, Link",
         "Allow": "GET",
-        "Cache-Control": "max-age=300, no-store",
+        "Cache-Control": "max-age=300,no-store",
         "Content-Length": "508"
       },
       "body": "{\"id\":11,\"date\":\"2020-12-12T04:09:36\",\"content\":{\"rendered\":\"<p>Wow, this sounds awesome!<\\\/p>\\n\"},\"_links\":{\"self\":[{\"href\":\"https:\\\/\\\/newapi.getpop.org\\\/wp-json\\\/wp\\\/v2\\\/comments\\\/11\"}],\"collection\":[{\"href\":\"https:\\\/\\\/newapi.getpop.org\\\/wp-json\\\/wp\\\/v2\\\/comments\"}],\"author\":[{\"embeddable\":true,\"href\":\"https:\\\/\\\/newapi.getpop.org\\\/wp-json\\\/wp\\\/v2\\\/users\\\/3\"}],\"up\":[{\"embeddable\":true,\"post_type\":\"post\",\"href\":\"https:\\\/\\\/newapi.getpop.org\\\/wp-json\\\/wp\\\/v2\\\/posts\\\/28\"}]}}",
       "contentLengthHeader": "508",
-      "cacheControlHeader": "max-age=300, no-store"
+      "cacheControlHeader": "max-age=300,no-store"
     }
   }
 }
