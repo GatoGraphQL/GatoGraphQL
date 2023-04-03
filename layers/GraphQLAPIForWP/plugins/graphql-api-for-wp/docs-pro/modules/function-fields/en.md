@@ -190,9 +190,9 @@ Indicate if the value is not `null`.
 
 Adds an entry to the object.
 
-### `_objectCombine`
+### `_objectKeepProperties`
 
-Create a JSON object using the elements from an array as keys, and the elements from another array as values.
+Keeps specific properties only in the JSON object.
 
 ### `_objectProperties`
 
