@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommonsWP\Formatters;
 
-use DateTime;
+use DateTimeInterface;
 
 use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
 use function mysql2date;
 
 class DateFormatter implements DateFormatterInterface
 {
-    public function format(string $format, DateTime|string $dateTime): string|int|null
+    public function format(string $format, DateTimeInterface|string $dateTime): string|int|null
     {
         $date = mysql2date($format, $dateTime);
         return $date === false ? null: $date;

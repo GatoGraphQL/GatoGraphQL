@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\Formatters;
 
-use DateTime;
+use DateTimeInterface;
 
 class DateFormatter implements DateFormatterInterface
 {
-    public function format(string $format, DateTime|string $dateTime): string|int|null
+    public function format(string $format, DateTimeInterface|string $dateTime): string|int|null
     {
         $time = strtotime($dateTime);
         if ($time === false) {
