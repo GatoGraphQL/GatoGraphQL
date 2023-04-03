@@ -52,7 +52,39 @@ This query:
 }
 ```
 
-(The resulting URL is `"https://graphql-api.com?stringParam=someValue&intParam=5&stringListParam[0]=value1&stringListParam[1]=value2&intListParam[0]=8&intListParam[1]=9&intListParam[2]=4&objectParam[1st]=1stValue&objectParam[2nd]=2&objectParam[3rd][0]=uno&objectParam[3rd][1]=2.5&objectParam[4th][nestedIn]=nestedOut"`.)
+(The decoded URL is `"https://graphql-api.com?stringParam=someValue&intParam=5&stringListParam[0]=value1&stringListParam[1]=value2&intListParam[0]=8&intListParam[1]=9&intListParam[2]=4&objectParam[1st]=1stValue&objectParam[2nd]=2&objectParam[3rd][0]=uno&objectParam[3rd][1]=2.5&objectParam[4th][nestedIn]=nestedOut"`.)
+
+Please notice that `null` values are not added to the URL.
+
+This query:
+
+```graphql
+{
+  _urlAddParams(
+    url: "https://graphql-api.com",
+    params: {
+      stringParam: null,
+      listParam: [1, null, 3],
+      objectParam: {
+        uno: null,
+        dos: 2
+      }
+    }
+  )
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "_urlAddParams": "https:\/\/graphql-api.com?listParam%5B0%5D=1&listParam%5B2%5D=3&objectParam%5Bdos%5D=2"
+  }
+}
+```
+
+(The decoded URL is `"https://graphql-api.com?listParam[0]=1&listParam[2]=3&objectParam[dos]=2"`.)
 
 ### `_urlRemoveParams`
 
