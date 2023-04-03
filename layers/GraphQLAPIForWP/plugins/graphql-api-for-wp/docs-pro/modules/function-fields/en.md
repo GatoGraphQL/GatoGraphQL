@@ -204,7 +204,11 @@ Retrieve a property from a JSON object.
 
 ### `_objectRemoveEntry`
 
-Removes an entry from the object.
+Removes an entry from the JSON object.
+
+### `_objectRemoveProperties`
+
+Removes one or more entries from the JSON object.
 
 ### `_or`
 
