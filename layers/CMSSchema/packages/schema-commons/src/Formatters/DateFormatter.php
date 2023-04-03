@@ -10,6 +10,9 @@ class DateFormatter implements DateFormatterInterface
 {
     public function format(string $format, DateTimeInterface|string $dateTime): string|int|null
     {
+        if ($dateTime instanceof DateTimeInterface) {
+            $dateTime = (string) $dateTime->getTimestamp();
+        }
         $time = strtotime($dateTime);
         if ($time === false) {
             return false;
