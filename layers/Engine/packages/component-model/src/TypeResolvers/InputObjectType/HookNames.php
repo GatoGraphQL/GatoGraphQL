@@ -12,5 +12,5 @@ class HookNames
     public final const INPUT_FIELD_TYPE_MODIFIERS = __CLASS__ . ':input-field-type-modifiers';
     public final const INPUT_FIELD_EXTENSIONS = __CLASS__ . ':input-field-extensions';
     public final const INPUT_FIELD_FILTER_INPUT = __CLASS__ . ':input-field-filter-input';
-    public final const ADMIN_INPUT_FIELD_NAMES = __CLASS__ . ':admin-input-field-names';
+    public final const SENSITIVE_INPUT_FIELD_NAMES = __CLASS__ . ':sensitive-input-field-names';
 }

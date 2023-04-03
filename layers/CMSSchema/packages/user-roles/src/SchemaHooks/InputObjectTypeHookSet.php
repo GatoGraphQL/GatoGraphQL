@@ -67,7 +67,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             3
         );
         App::addFilter(
-            HookNames::ADMIN_INPUT_FIELD_NAMES,
+            HookNames::SENSITIVE_INPUT_FIELD_NAMES,
             $this->getSensitiveInputFieldNames(...),
             10,
             2
