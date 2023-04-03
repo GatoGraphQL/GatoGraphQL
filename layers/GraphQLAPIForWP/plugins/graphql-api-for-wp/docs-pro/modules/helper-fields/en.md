@@ -133,8 +133,15 @@ For instance, in this query, we retrieve the IDs of the users in the website and
         userID: $__userID
       }
     )
+    headers: _httpRequestHeaders
+    headerNameValueEntryList: _objectConvertToNameValueEntryList(
+      object: $__headers
+    )
     _sendHTTPRequest(input: {
       url: $__url
+      options: {
+        headers: $__headerNameValueEntryList
+      }
     }) {
       statusCode
       contentType
