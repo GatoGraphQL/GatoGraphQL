@@ -213,14 +213,14 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
      */
     public function getSensitiveInputFieldNames(): array
     {
-        $adminInputFieldNames = parent::getSensitiveInputFieldNames();
+        $sensitiveInputFieldNames = parent::getSensitiveInputFieldNames();
         if ($this->treatCommentStatusAsSensitiveData()) {
-            $adminInputFieldNames[] = 'status';
+            $sensitiveInputFieldNames[] = 'status';
         }
         if ($this->treatCustomPostStatusAsSensitiveData()) {
-            $adminInputFieldNames[] = 'customPostStatus';
+            $sensitiveInputFieldNames[] = 'customPostStatus';
         }
-        return $adminInputFieldNames;
+        return $sensitiveInputFieldNames;
     }
 
     protected function treatCommentStatusAsSensitiveData(): bool

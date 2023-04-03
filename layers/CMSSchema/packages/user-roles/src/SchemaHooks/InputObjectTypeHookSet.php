@@ -107,23 +107,23 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     /**
-     * @param string[] $adminInputFieldNames
+     * @param string[] $sensitiveInputFieldNames
      * @return string[]
      */
     public function getSensitiveInputFieldNames(
-        array $adminInputFieldNames,
+        array $sensitiveInputFieldNames,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
         if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
-            return $adminInputFieldNames;
+            return $sensitiveInputFieldNames;
         }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatUserRoleAsSensitiveData()) {
-            $adminInputFieldNames[] = 'roles';
-            $adminInputFieldNames[] = 'excludeRoles';
+            $sensitiveInputFieldNames[] = 'roles';
+            $sensitiveInputFieldNames[] = 'excludeRoles';
         }
-        return $adminInputFieldNames;
+        return $sensitiveInputFieldNames;
     }
 
     public function getInputFieldDescription(

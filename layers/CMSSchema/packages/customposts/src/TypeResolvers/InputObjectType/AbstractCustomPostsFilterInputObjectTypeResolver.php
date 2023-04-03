@@ -99,11 +99,11 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
      */
     public function getSensitiveInputFieldNames(): array
     {
-        $adminInputFieldNames = parent::getSensitiveInputFieldNames();
+        $sensitiveInputFieldNames = parent::getSensitiveInputFieldNames();
         if ($this->treatCustomPostStatusAsSensitiveData()) {
-            $adminInputFieldNames[] = 'status';
+            $sensitiveInputFieldNames[] = 'status';
         }
-        return $adminInputFieldNames;
+        return $sensitiveInputFieldNames;
     }
 
     protected function treatCustomPostStatusAsSensitiveData(): bool

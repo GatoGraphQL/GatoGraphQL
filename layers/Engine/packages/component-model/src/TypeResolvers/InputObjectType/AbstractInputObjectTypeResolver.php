@@ -106,10 +106,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->exposeSensitiveDataInSchema()) {
-            $adminInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
+            $sensitiveInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
             $consolidatedInputFieldNameTypeResolvers = array_filter(
                 $consolidatedInputFieldNameTypeResolvers,
-                fn (string $inputFieldName) => !in_array($inputFieldName, $adminInputFieldNames),
+                fn (string $inputFieldName) => !in_array($inputFieldName, $sensitiveInputFieldNames),
                 ARRAY_FILTER_USE_KEY
             );
         }

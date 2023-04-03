@@ -91,13 +91,13 @@ class UserSearchByInputObjectTypeResolver extends AbstractOneofQueryableInputObj
      */
     public function getSensitiveInputFieldNames(): array
     {
-        $adminInputFieldNames = parent::getSensitiveInputFieldNames();
+        $sensitiveInputFieldNames = parent::getSensitiveInputFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatUserEmailAsSensitiveData()) {
-            $adminInputFieldNames[] = 'emails';
+            $sensitiveInputFieldNames[] = 'emails';
         }
-        return $adminInputFieldNames;
+        return $sensitiveInputFieldNames;
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
