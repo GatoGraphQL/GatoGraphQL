@@ -11,5 +11,5 @@ interface DateFormatterInterface
     /**
      * Formatted date string or sum of Unix timestamp and timezone offset. False on failure.
      */
-    public function format(string $format, DateTime|string $dateTime): string|int|false;
+    public function format(string $format, DateTime|string $dateTime): string|int|null;
 }

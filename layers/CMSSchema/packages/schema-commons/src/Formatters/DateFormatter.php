@@ -8,12 +8,13 @@ use DateTime;
 
 class DateFormatter implements DateFormatterInterface
 {
-    public function format(string $format, DateTime|string $dateTime): string|int|false
+    public function format(string $format, DateTime|string $dateTime): string|int|null
     {
         $time = strtotime($dateTime);
         if ($time === false) {
             return false;
         }
-        return date($format, $time);
+        $date = date($format, $time);
+        return $date === false ? null: $date;
     }
 }

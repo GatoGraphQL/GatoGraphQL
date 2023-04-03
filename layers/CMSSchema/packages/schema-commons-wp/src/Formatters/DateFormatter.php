@@ -11,8 +11,9 @@ use function mysql2date;
 
 class DateFormatter implements DateFormatterInterface
 {
-    public function format(string $format, DateTime|string $dateTime): string|int|false
+    public function format(string $format, DateTime|string $dateTime): string|int|null
     {
-        return mysql2date($format, $dateTime);
+        $date = mysql2date($format, $dateTime);
+        return $date === false ? null: $date;
     }
 }
