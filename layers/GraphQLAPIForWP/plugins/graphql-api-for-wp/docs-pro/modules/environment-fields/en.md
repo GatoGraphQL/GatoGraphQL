@@ -99,7 +99,7 @@ For instance, the following query connects to the GitHub REST API using a privat
 
   # Create the authorization header to send to GitHub
   authorizationHeader: _sprintf(
-    string: "Authorization: Bearer %s",
+    string: "Bearer %s",
     # "Field to Input" feature to access value from the field above
     values: [$__githubAccessToken]
   )
@@ -108,13 +108,23 @@ For instance, the following query connects to the GitHub REST API using a privat
   
   # Use the field from "Send HTTP Request Fields" to connect to GitHub
   gitHubArtifactData: _sendJSONObjectCollectionHTTPRequest(
-    url: "https://api.github.com/repos/leoloso/PoP/actions/artifacts",
-    headers: [
-      "Accept: application/vnd.github+json",
-      # "Field to Input" feature to access value from the field above
-      $__authorizationHeader
-    ]
-  )    
+    input: {
+      url: "https://api.github.com/repos/leoloso/PoP/actions/artifacts",
+      options: {
+        headers: [
+          {
+            name: "Accept"
+            value: "application/vnd.github+json"
+          },
+          {
+            name: "Authorization"
+            # "Field to Input" feature to access value from the field above
+            value: $__authorizationHeader
+          },
+        ]
+      }
+    }
+  )
 }
 ```
 
