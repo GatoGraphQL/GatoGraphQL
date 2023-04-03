@@ -16,25 +16,27 @@ This is the list of currently-available helper fields.
 
 Adds params to a URL.
 
-### `_urlRemoveParams`
-
-Removes params from a URL.
-
-## Examples
-
-Field `_urlAddParams` receives a `JSONObject` of `param name => value` as input, allowing us to add not only `String` params, but also `[String]`, `[[String]]` and other combinations.
+The parameters input is a `JSONObject` of `param name => value`, allowing us to pass values of multiple types, including `String`, `Int`, List (eg: `[String]`) and also `JSONObject`.
 
 This query:
 
 ```graphql
 {
   _urlAddParams(
-    url: "https://graphql-api.com/",
+    url: "https://graphql-api.com",
     params: {
       stringParam: "someValue",
       intParam: 5,
       stringListParam: ["value1", "value2"],
       intListParam: [8, 9, 4],
+      objectParam: {
+        "1st": "1stValue",
+        "2nd": 2,
+        "3rd": ["uno", 2.5]
+        "4th": {
+          nestedIn: "nestedOut"
+        }
+      }
     }
   )
 }
@@ -45,10 +47,18 @@ This query:
 ```json
 {
   "data": {
-    "_urlAddParams": "https://graphql-api.com/?stringParam=someValue&intParam=5&stringListParam%5B0%5D=value1&stringListParam%5B1%5D=value2&intListParam%5B0%5D=8&intListParam%5B1%5D=9&intListParam%5B2%5D=4",
+    "_urlAddParams": "https:\/\/graphql-api.com?stringParam=someValue&intParam=5&stringListParam%5B0%5D=value1&stringListParam%5B1%5D=value2&intListParam%5B0%5D=8&intListParam%5B1%5D=9&intListParam%5B2%5D=4&objectParam%5B1st%5D=1stValue&objectParam%5B2nd%5D=2&objectParam%5B3rd%5D%5B0%5D=uno&objectParam%5B3rd%5D%5B1%5D=2.5&objectParam%5B4th%5D%5BnestedIn%5D=nestedOut"
   }
 }
 ```
+
+(The resulting URL is `"https://graphql-api.com?stringParam=someValue&intParam=5&stringListParam[0]=value1&stringListParam[1]=value2&intListParam[0]=8&intListParam[1]=9&intListParam[2]=4&objectParam[1st]=1stValue&objectParam[2nd]=2&objectParam[3rd][0]=uno&objectParam[3rd][1]=2.5&objectParam[4th][nestedIn]=nestedOut"`.)
+
+### `_urlRemoveParams`
+
+Removes params from a URL.
+
+## Examples
 
 In combination with the **Inspect HTTP Request Fields** and **Field to Input** modules, we can retrieve the currently-requested URL when executing a GraphQL custom endpoint or persisted query, add extra parameters, and send another HTTP request to the new URL.
 
