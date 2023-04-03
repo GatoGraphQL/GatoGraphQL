@@ -22,9 +22,9 @@ Return an `AND` operation among several boolean properties.
 
 Adds an element to the array.
 
-### `_arraySetItem`
+### `_arrayCombine`
 
-Sets an element on some position of the array.
+Create a JSON object using the elements from an array as keys, and the elements from another array as values.
 
 ### `_arrayChunk`
 
@@ -85,6 +85,10 @@ Reverse an array.
 ### `_arraySearch`
 
 Search in what position is an element placed in the array. If found, it returns its position, otherwise it returns `false`.
+
+### `_arraySetItem`
+
+Sets an element on some position of the array.
 
 ### `_arraySlice`
 
