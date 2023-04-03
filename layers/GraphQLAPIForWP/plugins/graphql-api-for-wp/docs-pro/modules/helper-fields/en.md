@@ -12,6 +12,33 @@ Helper fields are **Global Fields**, hence they are added to every single type i
 
 This is the list of currently-available helper fields.
 
+### `_objectConvertToNameValueEntryList`
+
+Retrieve the properties from a JSON object to create a list of JSON entries.
+
+This field is used to transform a `JSONObject` output from some field, into a `[JSONObject]` that is input into another field.
+
+For instance, the response from `_httpRequestHeaders` (from module **Inspect HTTP Request Fields)** is a `StringValueJSONObject`, and the headers passed as input in `_sendHTTPRequest` are `[HTTPRequestOptionHeaderInput!]`, with each `HTTPRequestOptionHeaderInput` having shape `{ name: "...", value: "..." }`. Then, the following query allows to bridge between output and input:
+
+```graphql
+{
+  headers: _httpRequestHeaders
+  headersInput: _objectConvertToNameValueEntryList(
+    object: $__headers
+  )
+  _sendHTTPRequest(
+    input: {
+      url: "...",
+      options: {
+        headers: $__headersInput
+      }
+    }
+  ) {
+    # ...
+  }
+}
+```
+
 ### `_urlAddParams`
 
 Adds params to a URL.
