@@ -46,6 +46,10 @@ A positive float (> 0)
 
 A positive integer (> 0)
 
+### `StringValueJSONObject`
+
+A JSON Object where values are strings.
+
 ### `UUID`
 
 UUID (universally unique identifier) scalar, such as `25770975-0c3d-4ff0-ba27-a0f98fe9b052`
