@@ -137,7 +137,7 @@ The response is:
 
 ### Exporting dynamic variables
 
-A meta directive can pass the value it contains as a "dynamic variable" to its nested directives, via a directive argument (sometimes via `passValueOnwardsAs`, some others via `passOnwardsAs`).
+A meta directive can pass the value it contains as a "dynamic variable" to its nested directives, via a directive argument (`passValueOnwardsAs` for `@forEach`, or `passOnwardsAs` otherwise).
 
 In the query below, the array `["Hello everyone", "How are you?"]` is iterated upon using `@forEach`, and by defining argument `passValueOnwardsAs: "text"` each value in the array is made available to the nested directive `@applyField` under the dynamic variable `$text`:
 
