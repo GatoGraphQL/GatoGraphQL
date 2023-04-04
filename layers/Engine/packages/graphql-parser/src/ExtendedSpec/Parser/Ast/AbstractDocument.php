@@ -302,7 +302,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 $dynamicVariableDefinitionArguments[] = $exportUnderVariableNameArgument;
             }
             $additionalExportUnderVariableNameArguments = $this->getAdditionalExportUnderVariableNameArguments($directive);
-            foreach ($additionalExportUnderVariableNameArguments ?? [] as $additionalExportUnderVariableNameArgument) {
+            foreach (($additionalExportUnderVariableNameArguments ?? []) as $additionalExportUnderVariableNameArgument) {
                 $dynamicVariableDefinitionArguments[] = $additionalExportUnderVariableNameArgument;
             }
         }
