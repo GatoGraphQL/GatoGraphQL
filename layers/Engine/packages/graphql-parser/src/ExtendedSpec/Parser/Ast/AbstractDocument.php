@@ -295,7 +295,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 continue;
             }
             /**
-             * Get the Argument under which the Dynamic Variable is defined
+             * Get the Argument(s) under which the Dynamic Variable(s) is defined
              */
             $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgument($directive);
             $additionalExportUnderVariableNameArguments = $this->getAdditionalExportUnderVariableNameArguments($directive);

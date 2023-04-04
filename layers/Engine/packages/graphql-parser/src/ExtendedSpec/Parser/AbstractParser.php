@@ -312,6 +312,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * Obtain the name under which to export the value,
          * and stored in the the "parsed" list.
+         * 
+         * Every directive can pass the value being modified under
+         * `getExportUnderVariableNameArgument`, and potentially
+         * additional values under `getAdditionalExportUnderVariableNameArguments`.
+         *
+         * Eg: @forEach(
+         *   passValueOnwardsAs: "value" <= getExportUnderVariableNameArgument
+         *   passKeyOnwardsAs: "key" <= getAdditionalExportUnderVariableNameArguments
+         * )
          *
          * There is no need to check if there's a (static) Variable with
          * the same name, as that validation will happen in the Document.
