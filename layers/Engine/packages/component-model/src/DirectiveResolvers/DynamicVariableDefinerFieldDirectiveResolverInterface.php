@@ -18,22 +18,17 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 interface DynamicVariableDefinerFieldDirectiveResolverInterface extends FieldDirectiveResolverInterface
 {
     /**
-     * Name for the directive arg to indicate the name of the
-     * dynamic variable.
+     * Name for the directive arg(s) to indicate the name of the
+     * dynamic variable(s).
      *
-     * Eg: @export(as: "variableName")
-     */
-    public function getExportUnderVariableNameArgumentName(): string;
-
-    /**
-     * Names for the directive arg to indicate the name of
-     * additional dynamic variables.
+     * Eg:
      *
-     * Eg: @forEach(passKeyOnwardsAs: "variableName")
+     *   - @forEach(passKeyOnwardsAs: "key", passValueOnwardsAs: "value")
+     *   - @underArrayItem(passOnwardsAs: "item")
      *
      * @return string[]
      */
-    public function getAdditionalExportUnderVariableNameArgumentNames(): array;
+    public function getExportUnderVariableNameArgumentNames(): array;
 
     /**
      * If `true`, the dynamic variable's scope is the object
