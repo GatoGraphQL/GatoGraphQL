@@ -224,16 +224,14 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                         $dependedUponOperation,
                         $upcomingDependedUponOperation,
                     );
-                    $upcomingDependedUponOperation = $dependedUponOperation;
-                    continue;
+                } else {
+                    $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
+                        $multipleQueryExecutionOperations,
+                        $dependedUponOperation,
+                        $operations
+                    );
                 }
-
-                $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
-                    $multipleQueryExecutionOperations,
-                    $dependedUponOperation,
-                    $operations
-                );
-
+                
                 $upcomingDependedUponOperation = $dependedUponOperation;
             }
         }
