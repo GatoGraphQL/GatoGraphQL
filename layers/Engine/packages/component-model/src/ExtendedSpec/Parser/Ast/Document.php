@@ -68,7 +68,7 @@ class Document extends AbstractDocument
         }
         $additionalExportUnderVariableNameArgumentNames = $dynamicVariableDefinerFieldDirectiveResolver->getAdditionalExportUnderVariableNameArgumentNames();
         return array_map(
-            fn (string $exportUnderVariableNameArgumentName) => $directive->getArgument($exportUnderVariableNameArgumentName),
+            fn (string $additionalExportUnderVariableNameArgumentName) => $directive->getArgument($additionalExportUnderVariableNameArgumentName),
             $additionalExportUnderVariableNameArgumentNames
         );
     }
