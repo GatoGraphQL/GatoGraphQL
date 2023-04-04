@@ -118,7 +118,7 @@ query {
 }
 ```
 
-`@forEach` can pass both the key and the value it is iterating on as a dynamic variable to its nested directive(s), via directive args `passKeyOnwardsAs` and `passValueOnwardsAs`. It works both when iterating arrays and `JSON` objects.
+Used with the **Dynamic Variables** feature, `@forEach` can pass both the key and the value it is iterating on as a dynamic variable to its nested directive(s), via directive args `passKeyOnwardsAs` and `passValueOnwardsAs`. It works both when iterating arrays and `JSON` objects.
 
 This query demonstrates this feature:
 
