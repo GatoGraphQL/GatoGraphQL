@@ -239,9 +239,9 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
     }
 
     /**
-     * Place the current operation behind it, to respect the
-     * execution/dependency order (there are no existing loops,
-     * or ->validate will already have failed).
+     * Place the depended-upon operation right before the current
+     * operation, to respect the execution/dependency order (there are
+     * no existing loops, or ->validate will already have failed).
      *
      * Don't assume this operation is on the first position,
      * since it could've been moved already by yet another dependency!
