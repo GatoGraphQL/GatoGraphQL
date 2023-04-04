@@ -16,7 +16,7 @@ query CreatePostInputs {
     # For each entry: Extract the title and body
     @forEach(
       affectDirectivesUnderPos: [1, 2, 3],
-      passOnwardsAs: "item"
+      passValueOnwardsAs: "item"
     )
       @applyField(
         name: "_objectProperty",
@@ -73,7 +73,7 @@ mutation ImportContentAsNewPosts
   createdPostIDs: _echo(value: $postInputs)
     # For each entry: Create a new post
     @forEach(
-      passOnwardsAs: "postInput"
+      passValueOnwardsAs: "postInput"
     )
       # The result is the list of IDs of the created posts
       @applyField(
