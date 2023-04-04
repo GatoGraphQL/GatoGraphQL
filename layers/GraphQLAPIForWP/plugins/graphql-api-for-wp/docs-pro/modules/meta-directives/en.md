@@ -118,6 +118,87 @@ query {
 }
 ```
 
+`@forEach` can pass both the key and the value it is iterating on as a dynamic variable to its nested directive(s), via directive args `passKeyOnwardsAs` and `passValueOnwardsAs`. It works both when iterating arrays and `JSON` objects.
+
+This query demonstrates this feature:
+
+```graphql
+{
+  withArray: _echo(value: ["first", "second", "third"])
+    @forEach(
+      passKeyOnwardsAs: "key"
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: {
+            key: $key,
+            value: $value
+          }
+        },
+        setResultInResponse: true
+      )
+
+  withObject: _echo(value: {
+    uno: "first",
+    dos: "second",
+    tres: "third"
+  })
+    @forEach(
+      passKeyOnwardsAs: "key"
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: {
+            key: $key,
+            value: $value
+          }
+        },
+        setResultInResponse: true
+      )
+}
+```
+
+The result is:
+
+```json
+{
+  "data": {
+    "withArray": [
+      {
+        "key": 0,
+        "value": "first"
+      },
+      {
+        "key": 1,
+        "value": "second"
+      },
+      {
+        "key": 2,
+        "value": "third"
+      }
+    ],
+    "withObject": {
+      "uno": {
+        "key": "uno",
+        "value": "first"
+      },
+      "dos": {
+        "key": "dos",
+        "value": "second"
+      },
+      "tres": {
+        "key": "tres",
+        "value": "third"
+      }
+    }
+  }
+}
+```
+
 ## @underArrayItem
 
 `@underArrayItem` makes the next directive be applied on a specific item from the array.
