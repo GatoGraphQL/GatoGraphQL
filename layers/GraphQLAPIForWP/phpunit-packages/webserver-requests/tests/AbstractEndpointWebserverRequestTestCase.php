@@ -45,19 +45,27 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         $options = static::getRequestBasicOptions();
 
         if ($doingPOST) {
-            $options[RequestOptions::BODY] = json_encode([
-                'query' => $query,
-                'variables' => $variables,
-                'operationName' => $operationName ?? '',
-            ]);
+            $options[RequestOptions::BODY] = json_encode(array_merge(
+                [
+                    'operationName' => $operationName ?? '',
+                    'query' => $query,
+                ],
+                $variables !== []
+                    ? [
+                        'variables' => $variables,
+                    ] : []
+            ));
         } elseif ($doingGET) {
             $options[RequestOptions::QUERY] = array_merge(
                 $options[RequestOptions::QUERY] ?? [],
                 [
-                    'query' => $query,
-                    'variables' => $variables,
                     'operationName' => $operationName ?? '',
-                ]
+                    'query' => $query,
+                ],
+                $variables !== []
+                    ? [
+                        'variables' => $variables,
+                    ] : []
             );
         }
 

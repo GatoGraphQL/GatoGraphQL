@@ -231,7 +231,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                         $operations
                     );
                 }
-                
+
                 $upcomingDependedUponOperation = $dependedUponOperation;
             }
         }
