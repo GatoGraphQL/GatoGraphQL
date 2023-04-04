@@ -508,6 +508,8 @@ It produces:
 }
 ```
 
+Check timeout/async combinations in recursive-and-iterative-query-with-http-request.gql
+
 
 
 Develop also the case of using field `_sendMultipleHTTPRequests` with both async true and false, and only then explain the recursive solution from below.
