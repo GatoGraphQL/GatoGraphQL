@@ -312,7 +312,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /**
          * Obtain the name under which to export the value,
          * and stored in the the "parsed" list.
-         * 
+         *
          * Every directive can pass the value being modified under
          * `getExportUnderVariableNameArgument`, and potentially
          * additional values under `getAdditionalExportUnderVariableNameArguments`.
