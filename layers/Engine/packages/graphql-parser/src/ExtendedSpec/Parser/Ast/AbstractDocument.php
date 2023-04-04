@@ -297,23 +297,23 @@ abstract class AbstractDocument extends UpstreamDocument
             /**
              * Get the Argument(s) under which the Dynamic Variable(s) is defined
              */
-            $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgument($directive);
-            $additionalExportUnderVariableNameArguments = $this->getAdditionalExportUnderVariableNameArguments($directive);
+            $exportUnderVariableNameArguments = $this->getExportUnderVariableNameArguments($directive);
+            if ($exportUnderVariableNameArguments ===  null) {
+                continue;
+            }
             $dynamicVariableDefinitionArguments = array_merge(
                 $dynamicVariableDefinitionArguments,
-                $exportUnderVariableNameArgument !== null ? [$exportUnderVariableNameArgument] : [],
-                $additionalExportUnderVariableNameArguments !== null ? $additionalExportUnderVariableNameArguments : []
+                $exportUnderVariableNameArguments
             );
         }
         return $dynamicVariableDefinitionArguments;
     }
 
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
-    abstract protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument;
     /**
      * @return Argument[]|null
      */
-    abstract protected function getAdditionalExportUnderVariableNameArguments(Directive $directive): ?array;
+    abstract protected function getExportUnderVariableNameArguments(Directive $directive): ?array;
 
     /**
      * Validate that all Resolved Field Value References

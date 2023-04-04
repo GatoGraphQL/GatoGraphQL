@@ -47,29 +47,19 @@ class Document extends AbstractDocument
         return $this->getDynamicVariableDefinerDirectiveRegistry()->getDynamicVariableDefinerFieldDirectiveResolver($directive->getName());
     }
 
-    protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument
-    {
-        $dynamicVariableDefinerFieldDirectiveResolver = $this->getDynamicVariableDefinerFieldDirectiveResolver($directive);
-        if ($dynamicVariableDefinerFieldDirectiveResolver === null) {
-            return null;
-        }
-        $exportUnderVariableNameArgumentName = $dynamicVariableDefinerFieldDirectiveResolver->getExportUnderVariableNameArgumentName();
-        return $directive->getArgument($exportUnderVariableNameArgumentName);
-    }
-
     /**
      * @return Argument[]|null
      */
-    protected function getAdditionalExportUnderVariableNameArguments(Directive $directive): ?array
+    protected function getExportUnderVariableNameArguments(Directive $directive): ?array
     {
         $dynamicVariableDefinerFieldDirectiveResolver = $this->getDynamicVariableDefinerFieldDirectiveResolver($directive);
         if ($dynamicVariableDefinerFieldDirectiveResolver === null) {
             return null;
         }
-        $additionalExportUnderVariableNameArgumentNames = $dynamicVariableDefinerFieldDirectiveResolver->getAdditionalExportUnderVariableNameArgumentNames();
+        $exportUnderVariableNameArgumentNames = $dynamicVariableDefinerFieldDirectiveResolver->getExportUnderVariableNameArgumentNames();
         return array_values(array_filter(array_map(
-            fn (string $additionalExportUnderVariableNameArgumentName) => $directive->getArgument($additionalExportUnderVariableNameArgumentName),
-            $additionalExportUnderVariableNameArgumentNames
+            fn (string $exportUnderVariableNameArgumentName) => $directive->getArgument($exportUnderVariableNameArgumentName),
+            $exportUnderVariableNameArgumentNames
         )));
     }
 
