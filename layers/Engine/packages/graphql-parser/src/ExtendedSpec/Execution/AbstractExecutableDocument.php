@@ -208,7 +208,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                      * (there are no existing loops, or ->validate
                      * will already have failed).
                      */
-                    $multipleQueryExecutionOperations = $this->moveOperationBehindItsDependedUponOperation(
+                    $multipleQueryExecutionOperations = $this->moveDependedUponOperationBeforeOperation(
                         $multipleQueryExecutionOperations,
                         $operation,
                         $dependedUponOperation,
@@ -250,7 +250,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
      * @param OperationInterface[] $multipleQueryExecutionOperations
      * @return OperationInterface[]
      */
-    protected function moveOperationBehindItsDependedUponOperation(
+    protected function moveDependedUponOperationBeforeOperation(
         array $multipleQueryExecutionOperations,
         OperationInterface $operation,
         OperationInterface $dependedUponOperation,
