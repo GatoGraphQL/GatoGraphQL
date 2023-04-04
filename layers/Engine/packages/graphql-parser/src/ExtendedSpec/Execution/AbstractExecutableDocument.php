@@ -186,6 +186,16 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
              */
             $dependedUponOperationNames = array_reverse($dependedUponOperationNames);
 
+            /**
+             * If multiple operations are depended-upon,
+             * when re-ordering them, then must inject the new one
+             * right before the upcoming one (which is processed first,
+             * as they are iterated from right to left)
+             *
+             * @var OperationInterface|null
+             */
+            $upcomingDependedUponOperation = null;
+
             foreach ($dependedUponOperationNames as $dependedUponOperationName) {
                 /**
                  * It can't be null, or it will already fail in ->validate
@@ -208,19 +218,21 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                      * (there are no existing loops, or ->validate
                      * will already have failed).
                      */
-                    $multipleQueryExecutionOperations = $this->moveOperationBehindItsDependedUponOperation(
+                    $multipleQueryExecutionOperations = $this->moveDependedUponOperationBeforeOperation(
                         $multipleQueryExecutionOperations,
                         $operation,
                         $dependedUponOperation,
+                        $upcomingDependedUponOperation,
                     );
-                    continue;
+                } else {
+                    $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
+                        $multipleQueryExecutionOperations,
+                        $dependedUponOperation,
+                        $operations
+                    );
                 }
-
-                $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
-                    $multipleQueryExecutionOperations,
-                    $dependedUponOperation,
-                    $operations
-                );
+                
+                $upcomingDependedUponOperation = $dependedUponOperation;
             }
         }
 
@@ -239,9 +251,9 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
     }
 
     /**
-     * Place the current operation behind it, to respect the
-     * execution/dependency order (there are no existing loops,
-     * or ->validate will already have failed).
+     * Place the depended-upon operation right before the current
+     * operation, to respect the execution/dependency order (there are
+     * no existing loops, or ->validate will already have failed).
      *
      * Don't assume this operation is on the first position,
      * since it could've been moved already by yet another dependency!
@@ -250,19 +262,27 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
      * @param OperationInterface[] $multipleQueryExecutionOperations
      * @return OperationInterface[]
      */
-    protected function moveOperationBehindItsDependedUponOperation(
+    protected function moveDependedUponOperationBeforeOperation(
         array $multipleQueryExecutionOperations,
         OperationInterface $operation,
         OperationInterface $dependedUponOperation,
+        ?OperationInterface $upcomingDependedUponOperation,
     ): array {
         /** @var int */
         $dependedUponOperationPos = array_search(
             $dependedUponOperation,
             $multipleQueryExecutionOperations
         );
-        /** @var int */
+        /**
+         * If multiple operations are depended-upon,
+         * then must inject the new one right before
+         * the upcoming one (which has already been processed).
+         * Otherwise, right before the depending operation.
+         *
+         * @var int
+         */
         $operationPos = array_search(
-            $operation,
+            $upcomingDependedUponOperation ?? $operation,
             $multipleQueryExecutionOperations
         );
 
@@ -277,11 +297,11 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         /**
          * To reorder:
          *
-         *   1. Place the operation after its depended-upon operation
-         *   2. Remove it from the first position
+         *   1. Remove the depended-upon operation from wherever it is
+         *   2. Place it again right before its depending operation
          */
-        array_splice($multipleQueryExecutionOperations, $dependedUponOperationPos + 1, 0, [$operation]);
-        array_splice($multipleQueryExecutionOperations, $operationPos, 1);
+        array_splice($multipleQueryExecutionOperations, $dependedUponOperationPos, 1);
+        array_splice($multipleQueryExecutionOperations, $operationPos, 0, [$dependedUponOperation]);
 
         return $multipleQueryExecutionOperations;
     }
