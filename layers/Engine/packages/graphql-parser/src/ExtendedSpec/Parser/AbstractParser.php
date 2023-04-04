@@ -302,21 +302,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
 
         /**
-         * Obtain the name under which to export the value,
-         * and stored in the the "parsed" list.
-         *
-         * There is no need to check if there's a (static) Variable with
-         * the same name, as that validation will happen in the Document.
-         *
-         * @see layers/Engine/packages/graphql-parser/src/ExtendedSpec/Parser/Ast/Document.php
-         */
-        $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgument($directive);
-        if ($exportUnderVariableNameArgument === null) {
-            return;
-        }
-        $exportUnderVariableName = (string)$exportUnderVariableNameArgument->getValue();
-
-        /**
          * The DirectiveResolver will indicate if the dynamic variable's scope
          * is the "document" or "resolved in the object"
          */
@@ -324,11 +309,38 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         if ($mustResolveDynamicVariableOnObject === null) {
             return;
         }
-        if ($mustResolveDynamicVariableOnObject) {
-            $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0][] = $exportUnderVariableName;
-            return;
+        /**
+         * Obtain the name under which to export the value,
+         * and stored in the the "parsed" list.
+         *
+         * Every directive can pass the value being modified under
+         * `getExportUnderVariableNameArgument`, and potentially
+         * additional values under `getAdditionalExportUnderVariableNameArguments`.
+         *
+         * Eg: @forEach(
+         *   passValueOnwardsAs: "value" <= getExportUnderVariableNameArgument
+         *   passKeyOnwardsAs: "key" <= getAdditionalExportUnderVariableNameArguments
+         * )
+         *
+         * There is no need to check if there's a (static) Variable with
+         * the same name, as that validation will happen in the Document.
+         *
+         * @see layers/Engine/packages/graphql-parser/src/ExtendedSpec/Parser/Ast/Document.php
+         */
+        $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgument($directive);
+        $additionalExportUnderVariableNameArguments = $this->getAdditionalExportUnderVariableNameArguments($directive);
+        $exportUnderVariableNameArguments = array_merge(
+            $exportUnderVariableNameArgument !== null ? [$exportUnderVariableNameArgument] : [],
+            $additionalExportUnderVariableNameArguments !== null ? $additionalExportUnderVariableNameArguments : []
+        );
+        foreach ($exportUnderVariableNameArguments as $exportUnderVariableNameArgument) {
+            $exportUnderVariableName = (string)$exportUnderVariableNameArgument->getValue();
+            if ($mustResolveDynamicVariableOnObject) {
+                $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0][] = $exportUnderVariableName;
+            } else {
+                $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
+            }
         }
-        $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
     }
 
     /**
@@ -978,6 +990,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
     abstract protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument;
+    /**
+     * @return Argument[]|null
+     */
+    abstract protected function getAdditionalExportUnderVariableNameArguments(Directive $directive): ?array;
     abstract protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string;
     abstract protected function mustResolveDynamicVariableOnObject(Directive $directive): ?bool;
 }

@@ -26,6 +26,16 @@ interface DynamicVariableDefinerFieldDirectiveResolverInterface extends FieldDir
     public function getExportUnderVariableNameArgumentName(): string;
 
     /**
+     * Names for the directive arg to indicate the name of
+     * additional dynamic variables.
+     *
+     * Eg: @forEach(passKeyOnwardsAs: "variableName")
+     *
+     * @return string[]
+     */
+    public function getAdditionalExportUnderVariableNameArgumentNames(): array;
+
+    /**
      * If `true`, the dynamic variable's scope is the object
      * being currently resolved.
      *

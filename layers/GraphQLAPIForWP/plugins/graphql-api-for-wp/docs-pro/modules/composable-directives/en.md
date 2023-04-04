@@ -137,14 +137,14 @@ The response is:
 
 ### Exporting dynamic variables
 
-A meta directive can pass the value it contains as a "dynamic variable" to its nested directives, via directive argument `passOnwardsAs`.
+A meta directive can pass the value it contains as a "dynamic variable" to its nested directives, via a directive argument (`passValueOnwardsAs` for `@forEach`, or `passOnwardsAs` otherwise).
 
-In the query below, the array `["Hello everyone", "How are you?"]` is iterated upon using `@forEach`, and by defining argument `passOnwardsAs: "text"` each value in the array is made available to the nested directive `@applyField` under the dynamic variable `$text`:
+In the query below, the array `["Hello everyone", "How are you?"]` is iterated upon using `@forEach`, and by defining argument `passValueOnwardsAs: "text"` each value in the array is made available to the nested directive `@applyField` under the dynamic variable `$text`:
 
 ```graphql
 query {
   _echo(value: ["Hello everyone", "How are you?"])
-    @forEach(passOnwardsAs: "text")
+    @forEach(passValueOnwardsAs: "text")
       @applyField(
         name: "_strReplace"
         arguments: {

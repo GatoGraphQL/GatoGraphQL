@@ -67,9 +67,9 @@ Similar to `@if`, but it executes the nested directives when the condition is `f
 
 ## @forEach
 
-`@forEach` iterates over a list of elements from the queried entity, and passes a reference to the iterated element to the next directive.
+`@forEach` iterates over a list of elements from the queried entity, and passes a reference to the iterated element to the nested directive(s).
 
-For instance, field `Post.categoryNames` is of type `[String]`. Using `@forEach`, we can iterate each of the category names, each of type `String`, and apply an operation to it via some nested directive.
+For instance, field `Post.categoryNames` is of type `[String]`. Using `@forEach`, we can iterate the category names and apply an operation to each of them via some nested directive.
 
 In this query, the post categories are translated from English to French:
 
@@ -113,6 +113,87 @@ query {
       "first": "hello",
       "second": "world",
       "third": ""
+    }
+  }
+}
+```
+
+Used with the **Dynamic Variables** feature, `@forEach` can pass both the key and the value it is iterating on as a dynamic variable to its nested directive(s), via directive args `passKeyOnwardsAs` and `passValueOnwardsAs`. It works both when iterating arrays and `JSON` objects.
+
+This query demonstrates this feature:
+
+```graphql
+{
+  withArray: _echo(value: ["first", "second", "third"])
+    @forEach(
+      passKeyOnwardsAs: "key"
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: {
+            key: $key,
+            value: $value
+          }
+        },
+        setResultInResponse: true
+      )
+
+  withObject: _echo(value: {
+    uno: "first",
+    dos: "second",
+    tres: "third"
+  })
+    @forEach(
+      passKeyOnwardsAs: "key"
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: {
+            key: $key,
+            value: $value
+          }
+        },
+        setResultInResponse: true
+      )
+}
+```
+
+The result is:
+
+```json
+{
+  "data": {
+    "withArray": [
+      {
+        "key": 0,
+        "value": "first"
+      },
+      {
+        "key": 1,
+        "value": "second"
+      },
+      {
+        "key": 2,
+        "value": "third"
+      }
+    ],
+    "withObject": {
+      "uno": {
+        "key": "uno",
+        "value": "first"
+      },
+      "dos": {
+        "key": "dos",
+        "value": "second"
+      },
+      "tres": {
+        "key": "tres",
+        "value": "third"
+      }
     }
   }
 }

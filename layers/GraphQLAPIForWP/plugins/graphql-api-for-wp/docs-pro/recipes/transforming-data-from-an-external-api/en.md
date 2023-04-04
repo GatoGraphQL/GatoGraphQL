@@ -25,7 +25,7 @@ query AdaptExternalAPIData {
     # Add a new "link" entry on the JSON object
     @forEach(
       affectDirectivesUnderPos: [1, 2, 3, 4],
-      passOnwardsAs: "userListItem"
+      passValueOnwardsAs: "userListItem"
     )
       @applyField(
         name: "_objectProperty",
@@ -89,7 +89,7 @@ query ExtractEmailsFromAPIAndUpperCaseSpecialOnes
     # (under the dynamic variable $userEntry)
     # to each of the next 4 directives
     @forEach(
-      passOnwardsAs: "userEntry"
+      passValueOnwardsAs: "userEntry"
       affectDirectivesUnderPos: [1, 2, 3, 4]
     )
 

@@ -129,7 +129,7 @@ query CalculateVars($limit:Int! = 10) {
   arrayPositions: _arrayKeys(array: $__placeholderArray)
     @remove
   arrayOffsets: _echo(value: $__arrayPositions)
-    @forEach(passOnwardsAs: "position")
+    @forEach(passValueOnwardsAs: "position")
       @intMultiply(with:$limit)
     @export(as:"offsets")
     @remove
@@ -139,7 +139,7 @@ query CalculateURLs($limit:Int! = 10)
   @depends(on:"CalculateVars")
 {
   urls: _echo(value: $offsets)
-    @forEach(passOnwardsAs: "offset")
+    @forEach(passValueOnwardsAs: "offset")
       @applyField(
         name: "_sprintf",
         arguments: {
@@ -155,7 +155,7 @@ query CalculateURLInputs
   @depends(on:"CalculateURLs")
 {
   urlInputs: _echo(value: $urls)
-    @forEach(passOnwardsAs: "url")
+    @forEach(passValueOnwardsAs: "url")
       @applyField(
         name: "_objectAddEntry",
         arguments: {

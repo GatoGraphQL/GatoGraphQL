@@ -126,7 +126,7 @@ query RetrieveProxyArtifactDownloadURLs(
     object: $__gitHubArtifactData
     by: { key: "artifacts" }
   )
-    @forEach(passOnwardsAs: "artifactItem")
+    @forEach(passValueOnwardsAs: "artifactItem")
       @applyField(
         name: "_objectProperty"
         arguments: { object: $artifactItem, by: { key: "archive_download_url" } }
@@ -139,7 +139,7 @@ query CreateHTTPRequestInputs
   @depends(on: "RetrieveProxyArtifactDownloadURLs")
 {
   httpRequestInputs: _echo(value: $gitHubProxyArtifactDownloadURLs)
-    @forEach(passOnwardsAs: "url")
+    @forEach(passValueOnwardsAs: "url")
       @applyField(
         name: "_objectAddEntry"
         arguments: {

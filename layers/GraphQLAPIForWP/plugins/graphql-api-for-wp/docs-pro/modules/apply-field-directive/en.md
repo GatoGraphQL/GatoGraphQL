@@ -173,7 +173,7 @@ Manipulate all items in an array, shortening to no more than 20 chars long:
 {
   posts {
     categoryNames
-      @forEach(passOnwardsAs: "categoryName")
+      @forEach(passValueOnwardsAs: "categoryName")
         @applyField(
           name: "_strSubstr"
           arguments: {
