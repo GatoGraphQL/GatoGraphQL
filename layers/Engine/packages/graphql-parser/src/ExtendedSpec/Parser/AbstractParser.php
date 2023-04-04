@@ -319,22 +319,17 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * @see layers/Engine/packages/graphql-parser/src/ExtendedSpec/Parser/Ast/Document.php
          */
         $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgument($directive);
-        if ($exportUnderVariableNameArgument !== null) {
+        $additionalExportUnderVariableNameArguments = $this->getAdditionalExportUnderVariableNameArguments($directive);
+        $exportUnderVariableNameArguments = array_merge(
+            $exportUnderVariableNameArgument !== null ? [$exportUnderVariableNameArgument] : [],
+            $additionalExportUnderVariableNameArguments !== null ? $additionalExportUnderVariableNameArguments : []
+        );
+        foreach ($exportUnderVariableNameArguments as $exportUnderVariableNameArgument) {
             $exportUnderVariableName = (string)$exportUnderVariableNameArgument->getValue();
             if ($mustResolveDynamicVariableOnObject) {
                 $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0][] = $exportUnderVariableName;
             } else {
                 $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
-            }
-        }
-
-        $additionalExportUnderVariableNameArguments = $this->getAdditionalExportUnderVariableNameArguments($directive);
-        foreach (($additionalExportUnderVariableNameArguments ?? []) as $additionalExportUnderVariableNameArgument) {
-            $additionalExportUnderVariableName = (string)$additionalExportUnderVariableNameArgument->getValue();
-            if ($mustResolveDynamicVariableOnObject) {
-                $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0][] = $additionalExportUnderVariableName;
-            } else {
-                $this->parsedDefinedDocumentDynamicVariableNames[] = $additionalExportUnderVariableName;
             }
         }
     }
