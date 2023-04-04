@@ -69,7 +69,7 @@ Similar to `@if`, but it executes the nested directives when the condition is `f
 
 `@forEach` iterates over a list of elements from the queried entity, and passes a reference to the iterated element to the nested directive(s).
 
-For instance, field `Post.categoryNames` is of type `[String]`. Using `@forEach`, we can iterate each of the category names, each of type `String`, and apply an operation to it via some nested directive.
+For instance, field `Post.categoryNames` is of type `[String]`. Using `@forEach`, we can iterate the category names and apply an operation to each of them via some nested directive.
 
 In this query, the post categories are translated from English to French:
 
