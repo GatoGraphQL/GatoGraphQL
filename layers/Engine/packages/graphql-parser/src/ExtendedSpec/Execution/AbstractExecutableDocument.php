@@ -186,6 +186,16 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
              */
             $dependedUponOperationNames = array_reverse($dependedUponOperationNames);
 
+            /**
+             * If multiple operations are depended-upon,
+             * when re-ordering them, then must inject the new one
+             * right before the upcoming one (which is processed first,
+             * as they are iterated from right to left)
+             *
+             * @var OperationInterface|null
+             */
+            $upcomingDependedUponOperation = null;
+
             foreach ($dependedUponOperationNames as $dependedUponOperationName) {
                 /**
                  * It can't be null, or it will already fail in ->validate
@@ -212,6 +222,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                         $multipleQueryExecutionOperations,
                         $operation,
                         $dependedUponOperation,
+                        $upcomingDependedUponOperation,
                     );
                     continue;
                 }
@@ -221,6 +232,8 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                     $dependedUponOperation,
                     $operations
                 );
+
+                $upcomingDependedUponOperation = $dependedUponOperation;
             }
         }
 
@@ -254,15 +267,23 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         array $multipleQueryExecutionOperations,
         OperationInterface $operation,
         OperationInterface $dependedUponOperation,
+        ?OperationInterface $upcomingDependedUponOperation,
     ): array {
         /** @var int */
         $dependedUponOperationPos = array_search(
             $dependedUponOperation,
             $multipleQueryExecutionOperations
         );
-        /** @var int */
+        /**
+         * If multiple operations are depended-upon,
+         * then must inject the new one right before
+         * the upcoming one (which has already been processed).
+         * Otherwise, right before the depending operation.
+         *
+         * @var int
+         */
         $operationPos = array_search(
-            $operation,
+            $upcomingDependedUponOperation ?? $operation,
             $multipleQueryExecutionOperations
         );
 
