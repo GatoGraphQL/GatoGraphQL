@@ -302,6 +302,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
 
         /**
+         * The DirectiveResolver will indicate if the dynamic variable's scope
+         * is the "document" or "resolved in the object"
+         */
+        $mustResolveDynamicVariableOnObject = $this->mustResolveDynamicVariableOnObject($directive);
+        if ($mustResolveDynamicVariableOnObject === null) {
+            return;
+        }
+        /**
          * Obtain the name under which to export the value,
          * and stored in the the "parsed" list.
          *
@@ -311,24 +319,24 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * @see layers/Engine/packages/graphql-parser/src/ExtendedSpec/Parser/Ast/Document.php
          */
         $exportUnderVariableNameArgument = $this->getExportUnderVariableNameArgument($directive);
-        if ($exportUnderVariableNameArgument === null) {
-            return;
+        if ($exportUnderVariableNameArgument !== null) {
+            $exportUnderVariableName = (string)$exportUnderVariableNameArgument->getValue();
+            if ($mustResolveDynamicVariableOnObject) {
+                $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0][] = $exportUnderVariableName;
+            } else {
+                $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
+            }
         }
-        $exportUnderVariableName = (string)$exportUnderVariableNameArgument->getValue();
 
-        /**
-         * The DirectiveResolver will indicate if the dynamic variable's scope
-         * is the "document" or "resolved in the object"
-         */
-        $mustResolveDynamicVariableOnObject = $this->mustResolveDynamicVariableOnObject($directive);
-        if ($mustResolveDynamicVariableOnObject === null) {
-            return;
+        $additionalExportUnderVariableNameArguments = $this->getAdditionalExportUnderVariableNameArguments($directive);
+        foreach (($additionalExportUnderVariableNameArguments ?? []) as $additionalExportUnderVariableNameArgument) {
+            $additionalExportUnderVariableName = (string)$additionalExportUnderVariableNameArgument->getValue();
+            if ($mustResolveDynamicVariableOnObject) {
+                $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0][] = $additionalExportUnderVariableName;
+            } else {
+                $this->parsedDefinedDocumentDynamicVariableNames[] = $additionalExportUnderVariableName;
+            }
         }
-        if ($mustResolveDynamicVariableOnObject) {
-            $this->parsedFieldDefinedObjectResolvedDynamicVariableNames[0][] = $exportUnderVariableName;
-            return;
-        }
-        $this->parsedDefinedDocumentDynamicVariableNames[] = $exportUnderVariableName;
     }
 
     /**
