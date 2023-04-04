@@ -978,6 +978,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
     abstract protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument;
+    /**
+     * @return Argument[]|null
+     */
+    abstract protected function getAdditionalExportUnderVariableNameArguments(Directive $directive): ?array;
     abstract protected function getAffectAdditionalFieldsUnderPosArgumentName(Directive $directive): ?string;
     abstract protected function mustResolveDynamicVariableOnObject(Directive $directive): ?bool;
 }

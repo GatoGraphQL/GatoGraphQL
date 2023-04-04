@@ -311,6 +311,10 @@ abstract class AbstractDocument extends UpstreamDocument
 
     abstract protected function isDynamicVariableDefinerDirective(Directive $directive): bool;
     abstract protected function getExportUnderVariableNameArgument(Directive $directive): ?Argument;
+    /**
+     * @return Argument[]|null
+     */
+    abstract protected function getAdditionalExportUnderVariableNameArguments(Directive $directive): ?array;
 
     /**
      * Validate that all Resolved Field Value References
