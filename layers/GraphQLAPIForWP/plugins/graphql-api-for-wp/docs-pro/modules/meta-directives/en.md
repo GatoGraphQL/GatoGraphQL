@@ -67,7 +67,7 @@ Similar to `@if`, but it executes the nested directives when the condition is `f
 
 ## @forEach
 
-`@forEach` iterates over a list of elements from the queried entity, and passes a reference to the iterated element to the next directive.
+`@forEach` iterates over a list of elements from the queried entity, and passes a reference to the iterated element to the nested directive(s).
 
 For instance, field `Post.categoryNames` is of type `[String]`. Using `@forEach`, we can iterate each of the category names, each of type `String`, and apply an operation to it via some nested directive.
 
