@@ -210,6 +210,10 @@ Removes an entry from the JSON object.
 
 Removes one or more entries from the JSON object.
 
+### `_objectValues`
+
+Retrieve the values in a JSON object.
+
 ### `_or`
 
 Return an `OR` operation among several boolean properties.
