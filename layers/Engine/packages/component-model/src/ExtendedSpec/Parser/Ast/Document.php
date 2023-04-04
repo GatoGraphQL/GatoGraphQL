@@ -67,10 +67,10 @@ class Document extends AbstractDocument
             return null;
         }
         $additionalExportUnderVariableNameArgumentNames = $dynamicVariableDefinerFieldDirectiveResolver->getAdditionalExportUnderVariableNameArgumentNames();
-        return array_map(
+        return array_values(array_filter(array_map(
             fn (string $additionalExportUnderVariableNameArgumentName) => $directive->getArgument($additionalExportUnderVariableNameArgumentName),
             $additionalExportUnderVariableNameArgumentNames
-        );
+        )));
     }
 
     protected function isOperationDependencyDefinerDirective(Directive $directive): bool
