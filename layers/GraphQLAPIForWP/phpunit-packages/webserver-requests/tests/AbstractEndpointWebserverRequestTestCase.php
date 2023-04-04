@@ -49,7 +49,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
                 'query' => $query,
                 'variables' => $variables,
                 'operationName' => $operationName ?? '',
-            ]);
+            ], JSON_FORCE_OBJECT);
         } elseif ($doingGET) {
             $options[RequestOptions::QUERY] = array_merge(
                 $options[RequestOptions::QUERY] ?? [],
