@@ -224,6 +224,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                         $dependedUponOperation,
                         $upcomingDependedUponOperation,
                     );
+                    $upcomingDependedUponOperation = $dependedUponOperation;
                     continue;
                 }
 
