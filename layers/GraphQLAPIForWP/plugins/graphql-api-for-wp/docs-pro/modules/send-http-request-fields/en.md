@@ -424,12 +424,6 @@ To find out which HTTP request is the one that failed, the error entry in the re
   "errors": [
     {
       "message": "Server error: `GET https://mysite.com/page-triggering-some-500-error` resulted in a `500 Internal Server Error` response",
-      "locations": [
-        {
-          "line": 13,
-          "column": 3
-        }
-      ],
       "extensions": {
         "httpRequestInputArrayPosition": 0,
         "field": "_sendJSONObjectItemHTTPRequests(async: false, inputs: [{url: \"https:\/\/mysite.com\/page-triggering-some-500-error\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/posts\/1\/\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/users\/1\/\"}])"
