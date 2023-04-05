@@ -142,8 +142,15 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             throw new RuntimeException('Obtaining the content of the response failed');
         }
 
+        $responseContent = $this->adaptResponseContent($responseContent);
+
         // Allow to override method
         $this->doAssertFixtureGraphQLQueryExecution($expectedResponseFile, $responseContent);
+    }
+
+    protected function adaptResponseContent(string $responseContent): string
+    {
+        return $responseContent;
     }
 
     protected function doAssertFixtureGraphQLQueryExecution(string $expectedResponseFile, string $actualResponseContent): void
