@@ -124,14 +124,16 @@ const DocumentSettingsPanel = () => (
         <p>
             {
                 implicitFeaturesDocEntries.map( ( entry ) =>
-                    <MarkdownInfoModalButton
-                        text={ entry[0] }
-                        title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
-                        pageFilename={ entry[1] }
-                        getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
-                        isSmall={ false }
-                        className="graphql-api-info-modal-button text-wrap"
-                    />
+                    <div>
+                            <MarkdownInfoModalButton
+                            text={ entry[0] }
+                            title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                            pageFilename={ entry[1] }
+                            getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
+                            isSmall={ false }
+                            className="graphql-api-info-modal-button text-wrap"
+                        />
+                    </div>
                 )
             }
         </p>
@@ -149,14 +151,16 @@ const DocumentSettingsPanel = () => (
         <p>
             {
                 moduleAndImplicitFeaturesPRODocEntries.map( ( entry ) =>
-                    <MarkdownInfoModalButton
-                        text={ proTitlePrefix + entry[0] }
-                        title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
-                        pageFilename={ entry[1] }
-                        getMarkdownContentCallback={ entry[2] }
-                        isSmall={ false }
-                        className={ buttonClassName }
-                    />
+                    <div>
+                        <MarkdownInfoModalButton
+                            text={ proTitlePrefix + entry[0] }
+                            title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                            pageFilename={ entry[1] }
+                            getMarkdownContentCallback={ entry[2] }
+                            isSmall={ false }
+                            className={ buttonClassName }
+                        />
+                    </div>
                 )
             }
         </p>
