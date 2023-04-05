@@ -407,6 +407,41 @@ For instance, the following query:
 }
 ```
 
+## Synchronous vs Asynchronous execution
+
+The fields executing multiple requests (`_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests`, `_sendHTTPRequests` and `_sendGraphQLHTTPRequests`) receive input `$async`, to define if the requests must be executed synchronously (`$async => false`) or asynchronously.
+
+### Synchronous execution
+
+The HTTP requests are executed in order, with each one executed right after the previous one has been resolved.
+
+If any HTTP request fails (for instance, if the server to connect to is offline), then the execution stops right there, i.e. the subsequent HTTP requests in the queue are not executed.
+
+To find out which HTTP request is the one that failed, the error entry in the response will contain extension `httpRequestInputArrayPosition`, with the position of the element in the list (starting from 0):
+
+```json
+{
+    "errors": [
+        {
+            "message": "Server error: `GET https://mysite.com/page-triggering-some-500-error` resulted in a `500 Internal Server Error` response",
+            "locations": [
+                {
+                    "line": 13,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "httpRequestInputArrayPosition": 0,
+                "field": "_sendJSONObjectItemHTTPRequests(async: false, inputs: [{url: \"https:\/\/mysite.com\/page-triggering-some-500-error\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/posts\/1\/\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/users\/1\/\"}])"
+            }
+        }
+    ],
+    "data": {
+        "_sendJSONObjectItemHTTPRequests": null
+    }
+}
+```
+
 ## Global Fields
 
 All these fields are **Global Fields**, so they are added to every single type in the GraphQL schema: in `QueryRoot`, but also in `Post`, `User`, `Comment`, etc.
