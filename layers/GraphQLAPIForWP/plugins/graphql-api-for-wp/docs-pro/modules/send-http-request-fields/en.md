@@ -422,7 +422,7 @@ These fields receive input `$async`, to define if the requests must be executed 
 
 The HTTP requests are executed in order, with each one executed right after the previous one has been resolved.
 
-When all HTTP requests are successful, the field prints an array with their responses, in the same order as they appear in the input list.
+When all HTTP requests are successful, the field will print an array with their responses, in the same order as they appear in the input list.
 
 If any HTTP request fails, then the execution stops right there, i.e. the subsequent HTTP requests in the input list are not executed.
 
@@ -438,7 +438,7 @@ In case of error, the field returns `null` (i.e. the response for any previous s
 {
   "errors": [
     {
-      "message": "Server error: `GET https://mysite.com/page-triggering-some-500-error` resulted in a `500 Internal Server Error` response",
+      "message": "Server error: `GET https:\/\/mysite.com\/page-triggering-some-500-error` resulted in a `500 Internal Server Error` response",
       "extensions": {
         "httpRequestInputArrayPosition": 0,
         "field": "_sendJSONObjectItemHTTPRequests(async: false, inputs: [{url: \"https:\/\/mysite.com\/page-triggering-some-500-error\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/posts\/1\/\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/users\/1\/\"}])"
@@ -453,7 +453,29 @@ In case of error, the field returns `null` (i.e. the response for any previous s
 
 ### Asynchronous execution
 
-All HTTP requests are executed concurrently and in parallel.
+All HTTP requests are executed concurrently (i.e. in parallel), and it is not known in what order will the HTTP requests be resolved.
+
+When all HTTP requests are successful, the field will print an array with their responses, in the same order as they appear in the input list.
+
+Whenever any one HTTP request fails, the execution stops immediately, however by then all other HTTP requests will very likely have been executed too. (But we will not know, as the server will not wait for their completion.)
+
+In addition, the server will not indicate which is the item in the list that failed (notice that there is not `httpRequestInputArrayPosition` extension in the response below):
+
+```json
+{
+  "errors": [
+    {
+      "message": "Server error: `GET https:\/\/mysite.com\/page-triggering-some-500-error` resulted in a `500 Internal Server Error` response",
+      "extensions": {
+        "field": "_sendJSONObjectItemHTTPRequests(async: true, inputs: [{url: \"https:\/\/mysite.com\/page-triggering-some-500-error\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/posts\/1\/\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/users\/1\/\"}])"
+      }
+    }
+  ],
+  "data": {
+    "_sendJSONObjectItemHTTPRequests": null
+  }
+}
+```
 
 ## Global Fields
 
