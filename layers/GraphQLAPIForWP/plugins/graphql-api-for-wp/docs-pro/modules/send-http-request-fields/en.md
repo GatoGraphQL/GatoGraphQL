@@ -429,8 +429,10 @@ If any HTTP request fails, then the execution stops right there, i.e. the subseq
 Some possible causes of failing HTTP requests are:
 
 - The server to connect to is offline
-- The status code of the response is not 200: a 500 internal error, a 404 not found, a 403 forbidden, etc. (This is treated as an error only by `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendGraphQLHTTPRequests`; not by `_sendHTTPRequests`, which returns the status code whichever it is.)
+- The status code of the response is not 200: a 500 internal error, a 404 not found, a 403 forbidden, etc.
 - The content type of the response is not `application/json`
+
+(The latter two are treated as an error by `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendGraphQLHTTPRequests`, which expect to handle `JSON` types only, but not by `_sendHTTPRequests`, which is not opinionated.)
 
 In case of error, the field returns `null` (i.e. the response for any previous successful HTTP request will not be printed), and the error entry will contain extension `httpRequestInputArrayPosition` to indicate which is the item from the input list that failed (starting from 0):
 
@@ -457,7 +459,7 @@ All HTTP requests are executed concurrently (i.e. in parallel), and it is not kn
 
 When all HTTP requests are successful, the field will print an array with their responses, in the same order as they appear in the input list.
 
-Whenever any one HTTP request fails, the execution stops immediately, however by then all other HTTP requests will very likely have been executed too. (But we will not know, as the server will not wait for their completion.)
+Whenever any one HTTP request fails, the execution stops immediately, however by then all other HTTP requests may have been executed too. (We can assume they will have been executed, but we will not know for sure.)
 
 In addition, the server will not indicate which is the item in the list that failed (notice that there is not `httpRequestInputArrayPosition` extension in the response below):
 
