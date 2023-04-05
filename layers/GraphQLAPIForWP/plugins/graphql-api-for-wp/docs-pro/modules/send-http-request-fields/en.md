@@ -459,7 +459,7 @@ All HTTP requests are executed concurrently (i.e. in parallel), and it is not kn
 
 When all HTTP requests are successful, the field will print an array with their responses, in the same order as they appear in the input list.
 
-Whenever any one HTTP request fails, the execution stops immediately, however by then all other HTTP requests may have been executed too. (We can assume they will have been executed, but we will not know for sure.)
+Whenever any one HTTP request fails, the execution stops immediately, however by then all other HTTP requests may have been executed too.
 
 In addition, the server will not indicate which is the item in the list that failed (notice that there is not `httpRequestInputArrayPosition` extension in the response below):
 
