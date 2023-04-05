@@ -422,15 +422,17 @@ These fields receive input `$async`, to define if the requests must be executed 
 
 The HTTP requests are executed in order, with each one executed right after the previous one has been resolved.
 
-If any HTTP request fails, then the execution stops right there, i.e. the subsequent HTTP requests in the input list are not executed. Some possible causes of failing HTTP requests are:
+When all HTTP requests are successful, the field prints an array with their responses, in the same order as they appear in the input list.
+
+If any HTTP request fails, then the execution stops right there, i.e. the subsequent HTTP requests in the input list are not executed.
+
+Some possible causes of failing HTTP requests are:
 
 - The server to connect to is offline
 - The status code of the response is not 200: a 500 internal error, a 404 not found, a 403 forbidden, etc. (This is treated as an error only by `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendGraphQLHTTPRequests`; not by `_sendHTTPRequests`, which returns the status code whichever it is.)
 - The content type of the response is not `application/json`
 
-When all HTTP requests are successful, the field prints an array with their responses (in the same order as they appear in the input list).
-
-However, whenever any one HTTP request fails, the field returns `null`, i.e. the response for any previous successful HTTP request will not be printed. In addition, the error entry in the response will contain extension `httpRequestInputArrayPosition` to indicate the position of the HTTP request that failed (starting from 0):
+In case of error, the field returns `null` (i.e. the response for any previous successful HTTP request will not be printed), and the error entry will contain extension `httpRequestInputArrayPosition` to indicate which is the item from the input list that failed (starting from 0):
 
 ```json
 {
@@ -448,6 +450,10 @@ However, whenever any one HTTP request fails, the field returns `null`, i.e. the
   }
 }
 ```
+
+### Asynchronous execution
+
+All HTTP requests are executed concurrently and in parallel.
 
 ## Global Fields
 
