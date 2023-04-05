@@ -409,13 +409,29 @@ For instance, the following query:
 
 ## Synchronous vs Asynchronous execution
 
-The fields executing multiple requests (`_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests`, `_sendHTTPRequests` and `_sendGraphQLHTTPRequests`) receive input `$async`, to define if the requests must be executed synchronously (`$async => false`) or asynchronously.
+These fields allow us to execute multiple requests:
+
+- `_sendHTTPRequests`
+- `_sendJSONObjectItemHTTPRequests`
+- `_sendJSONObjectCollectionHTTPRequests`
+- `_sendGraphQLHTTPRequests`
+
+These fields receive input `$async`, to define if the requests must be executed synchronously (`$async => false`) or asynchronously.
 
 ### Synchronous execution
 
 The HTTP requests are executed in order, with each one executed right after the previous one has been resolved.
 
-If any HTTP request fails (for instance, if the server to connect to is offline), then the execution stops right there, i.e. the subsequent HTTP requests in the queue are not executed.
+If any HTTP request fails, then the execution stops right there, i.e. the subsequent HTTP requests in the queue are not executed. Some possible causes of failing HTTP requests are:
+
+- The server to connect to is offline
+- The status code of the response is not 200: a 500 internal error, a 404 not found, a 403 forbidden, etc. (Only for `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendGraphQLHTTPRequests`; it is not an error with `_sendHTTPRequests`, which returns the status code whichever it is.)
+- The content type is not `application/json`
+
+Please notice that fields `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendGraphQLHTTPRequests` will produce an error when the page is
+
+
+ (for instance, )
 
 To find out which HTTP request is the one that failed, the error entry in the response will contain extension `httpRequestInputArrayPosition`, with the position of the element in the list (starting from 0):
 
