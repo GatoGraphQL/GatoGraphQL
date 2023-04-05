@@ -407,6 +407,78 @@ For instance, the following query:
 }
 ```
 
+## Synchronous vs Asynchronous execution
+
+These fields allow us to execute multiple requests:
+
+- `_sendHTTPRequests`
+- `_sendJSONObjectItemHTTPRequests`
+- `_sendJSONObjectCollectionHTTPRequests`
+- `_sendGraphQLHTTPRequests`
+
+These fields receive input `$async`, to define if the requests must be executed synchronously (`$async => false`) or asynchronously.
+
+### Synchronous execution
+
+The HTTP requests are executed in order, with each one executed right after the previous one has been resolved.
+
+When all HTTP requests are successful, the field will print an array with their responses, in the same order as they appear in the input list.
+
+If any HTTP request fails, then the execution stops right there, i.e. the subsequent HTTP requests in the input list are not executed.
+
+Some possible causes of failing HTTP requests are:
+
+- The server to connect to is offline
+- The status code of the response is not 200: a 500 internal error, a 404 not found, a 403 forbidden, etc.
+- The content type of the response is not `application/json`
+
+(The latter two are treated as an error by `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests` and `_sendGraphQLHTTPRequests`, which expect to handle `JSON` types only, but not by `_sendHTTPRequests`, which is not opinionated.)
+
+In case of error, the field returns `null` (i.e. the response for any previous successful HTTP request will not be printed), and the error entry will contain extension `httpRequestInputArrayPosition` to indicate which is the item from the input list that failed (starting from 0):
+
+```json
+{
+  "errors": [
+    {
+      "message": "Server error: `GET https:\/\/mysite.com\/page-triggering-some-500-error` resulted in a `500 Internal Server Error` response",
+      "extensions": {
+        "httpRequestInputArrayPosition": 0,
+        "field": "_sendJSONObjectItemHTTPRequests(async: false, inputs: [{url: \"https:\/\/mysite.com\/page-triggering-some-500-error\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/posts\/1\/\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/users\/1\/\"}])"
+      }
+    }
+  ],
+  "data": {
+    "_sendJSONObjectItemHTTPRequests": null
+  }
+}
+```
+
+### Asynchronous execution
+
+All HTTP requests are executed concurrently (i.e. in parallel), and it is not known in what order will the HTTP requests be resolved.
+
+When all HTTP requests are successful, the field will print an array with their responses, in the same order as they appear in the input list.
+
+Whenever any one HTTP request fails, the execution stops immediately, however by then all other HTTP requests may have been executed too.
+
+In addition, the server will not indicate which is the item in the list that failed (notice that there is not `httpRequestInputArrayPosition` extension in the response below):
+
+```json
+{
+  "errors": [
+    {
+      "message": "Server error: `GET https:\/\/mysite.com\/page-triggering-some-500-error` resulted in a `500 Internal Server Error` response",
+      "extensions": {
+        "field": "_sendJSONObjectItemHTTPRequests(async: true, inputs: [{url: \"https:\/\/mysite.com\/page-triggering-some-500-error\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/posts\/1\/\"}, {url: \"https:\/\/mysite.com\/wp-json\/wp\/v2\/users\/1\/\"}])"
+      }
+    }
+  ],
+  "data": {
+    "_sendJSONObjectItemHTTPRequests": null
+  }
+}
+```
+
 ## Global Fields
 
 All these fields are **Global Fields**, so they are added to every single type in the GraphQL schema: in `QueryRoot`, but also in `Post`, `User`, `Comment`, etc.
