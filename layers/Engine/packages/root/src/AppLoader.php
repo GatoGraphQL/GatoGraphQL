@@ -315,10 +315,6 @@ class AppLoader implements AppLoaderInterface
      * 3. Allow Components to customize the module configuration for themselves, and the modules they can see
      * 4. Register all Components with the ModuleManager
      * 5. Initialize the System Container, have all Components inject services, and compile it, making "system" services (eg: hooks, translation) available for initializing Application Container services
-     *
-     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
-     * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
-     * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
     public function bootSystem(): void
     {

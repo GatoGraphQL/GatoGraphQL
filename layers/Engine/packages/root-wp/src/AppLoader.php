@@ -50,6 +50,8 @@ class AppLoader extends UpstreamAppLoader
      * that only one of them will be called anyway.
      *
      * @see https://stackoverflow.com/questions/41101294/check-whether-request-is-wp-rest-api-request
+     *
+     * @return string[]
      */
     protected function getBootApplicationHooks(): array
     {
