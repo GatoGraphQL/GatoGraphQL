@@ -8,11 +8,11 @@ use Exception;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\AppObjects\ContainerCacheConfiguration;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
+use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
@@ -97,11 +97,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function getModuleClassConfiguration(): array
     {
         return $this->pluginInitializationConfiguration->getModuleClassConfiguration();
-    }
-
-    public function getContainerCacheConfiguration(): ContainerCacheConfiguration
-    {
-        return $this->pluginInitializationConfiguration->getContainerCacheConfiguration();
     }
 
     /**
