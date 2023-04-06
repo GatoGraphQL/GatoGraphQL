@@ -556,5 +556,8 @@ class AppLoader implements AppLoaderInterface
 
         // Allow to inject functionality
         App::doAction(HookNames::AFTER_BOOT_APPLICATION);
+
+        // Signal that the GraphQL server is ready to be invoked
+        $this->setReadyState(true);
     }
 }

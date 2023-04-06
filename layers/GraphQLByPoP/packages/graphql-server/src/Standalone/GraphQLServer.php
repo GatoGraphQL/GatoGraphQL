@@ -65,6 +65,7 @@ class GraphQLServer implements GraphQLServerInterface
         private readonly ?string $containerNamespace = null,
         private readonly ?string $containerDirectory = null,
     ) {
+        return;
         $this->moduleClasses = array_merge(
             $moduleClasses,
             [

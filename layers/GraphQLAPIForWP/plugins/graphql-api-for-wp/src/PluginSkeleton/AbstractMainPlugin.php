@@ -484,16 +484,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $this->handleInitializationException(...),
             PHP_INT_MAX
         );
-        add_action(
-            'plugins_loaded',
-            function (): void {
-                if ($this->inititalizationException !== null) {
-                    return;
-                }
-                $this->signalReadyState();
-            },
-            PluginLifecyclePriorities::READY_STATE
-        );
     }
 
     /**
@@ -605,22 +595,5 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ));
             }
         );
-    }
-
-    /**
-     * Signal that the application is ready
-     */
-    public function signalReadyState(): void
-    {
-        $appLoader = App::getAppLoader();
-        $appLoader->setReadyState(true);
-        $this->doSignalReadyState();
-    }
-
-    /**
-     * Custom function to signal that the application is ready
-     */
-    protected function doSignalReadyState(): void
-    {
     }
 }
