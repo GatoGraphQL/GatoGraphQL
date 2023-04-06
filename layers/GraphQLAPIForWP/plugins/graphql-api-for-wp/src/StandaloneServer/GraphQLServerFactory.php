@@ -50,7 +50,7 @@ class GraphQLServerFactory
                 )
             );
         }
-        $containerCacheConfiguration = App::getMainPlugin()->getContainerCacheConfiguration();
+        $containerCacheConfiguration = $appLoader->getContainerCacheConfiguration();
         return new GraphQLServer(
             $appLoader->getModuleClassesToInitialize(),
             $appLoader->getModuleClassConfiguration(),

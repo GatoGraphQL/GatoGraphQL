@@ -367,6 +367,11 @@ class AppLoader implements AppLoaderInterface
         $this->containerCacheConfiguration = $containerCacheConfiguration;
     }
 
+    public function getContainerCacheConfiguration(): ?ContainerCacheConfiguration
+    {
+        return $this->containerCacheConfiguration;
+    }
+
     /**
      * Boot the application. It does these steps:
      *

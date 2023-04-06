@@ -125,6 +125,8 @@ interface AppLoaderInterface
         ?ContainerCacheConfiguration $containerCacheConfiguration = null,
     ): void;
 
+    public function getContainerCacheConfiguration(): ?ContainerCacheConfiguration;
+
     /**
      * Boot the application. It does these steps:
      *
