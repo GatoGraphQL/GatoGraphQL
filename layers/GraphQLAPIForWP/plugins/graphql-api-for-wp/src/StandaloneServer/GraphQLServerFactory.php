@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\StandaloneServer;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 use PoP\Root\Module\ModuleInterface;
 
@@ -27,7 +28,7 @@ class GraphQLServerFactory
     private static function createInstance(): GraphQLServer
     {
         return new GraphQLServer(
-            static::getModuleClasses(),
+            App::getAppLoader()->getModuleClassesToInitialize(),
             static::getModuleClassConfiguration(),
             [],
             [],

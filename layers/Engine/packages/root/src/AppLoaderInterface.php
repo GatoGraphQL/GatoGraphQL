@@ -19,6 +19,16 @@ interface AppLoaderInterface
     ): void;
 
     /**
+     * Get the Module classes to be initialized.
+     *
+     * Call this method after the GraphQL server is in ready state,
+     * to signify "Module classes already initialized"
+     *
+     * @return array<class-string<ModuleInterface>> $moduleClasses List of `Module` class to initialize
+     */
+    public function getModuleClassesToInitialize(): array;
+
+    /**
      * Add configuration for the Module classes
      *
      * @param array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
