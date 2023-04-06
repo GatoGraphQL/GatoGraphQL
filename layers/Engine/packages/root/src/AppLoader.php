@@ -97,7 +97,7 @@ class AppLoader implements AppLoaderInterface
      * Call this method after the GraphQL server is in ready state,
      * to signify "Module classes already initialized"
      *
-     * @return array<class-string<ModuleInterface>> $moduleClasses List of `Module` class to initialize
+     * @return array<class-string<ModuleInterface>> List of `Module` class to initialize
      */
     public function getModuleClassesToInitialize(): array
     {
@@ -142,7 +142,7 @@ class AppLoader implements AppLoaderInterface
     /**
      * Get configuration for the Module classes
      *
-     * @return array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     public function getModuleClassConfiguration(): array
     {
@@ -164,6 +164,16 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
+     * Get the Compiler Passes to boot the System (eg: when testing)
+     *
+     * @return array<class-string<CompilerPassInterface>> List of `CompilerPass` class to initialize
+     */
+    public function getSystemContainerCompilerPassClasses(): array
+    {
+        return $this->systemContainerCompilerPassClasses;
+    }
+
+    /**
      * Inject Compiler Passes to boot the Application (eg: when testing)
      *
      * @param array<class-string<CompilerPassInterface>> $applicationContainerCompilerPassClasses List of `CompilerPass` class to initialize
@@ -175,6 +185,16 @@ class AppLoader implements AppLoaderInterface
             $this->applicationContainerCompilerPassClasses,
             $applicationContainerCompilerPassClasses
         );
+    }
+
+    /**
+     * Get the Compiler Passes to boot the Application (eg: when testing)
+     *
+     * @return array<class-string<CompilerPassInterface>> List of `CompilerPass` class to initialize
+     */
+    public function getApplicationContainerCompilerPassClasses(): array
+    {
+        return $this->applicationContainerCompilerPassClasses;
     }
 
     /**

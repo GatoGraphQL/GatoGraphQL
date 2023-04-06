@@ -52,8 +52,8 @@ class GraphQLServerFactory
         return new GraphQLServer(
             $appLoader->getModuleClassesToInitialize(),
             $appLoader->getModuleClassConfiguration(),
-            [],
-            [],
+            $appLoader->getSystemContainerCompilerPassClasses(),
+            $appLoader->getApplicationContainerCompilerPassClasses(),
             false,
         );
     }
