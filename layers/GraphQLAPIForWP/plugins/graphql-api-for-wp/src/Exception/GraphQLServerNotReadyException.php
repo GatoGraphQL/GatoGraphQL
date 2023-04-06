@@ -6,6 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Exception;
 
 use PoP\Root\Exception\AbstractClientException;
 
-final class ApplicationNotReadyException extends AbstractClientException
+final class GraphQLServerNotReadyException extends AbstractClientException
 {
 }
