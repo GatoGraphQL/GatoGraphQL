@@ -22,12 +22,14 @@ trait InitializeContainerServicesInModuleTrait
         string $fileName = 'services.yaml'
     ): void {
         // First check if the container has been cached. If so, do nothing
-        if (!App::getContainerBuilderFactory()->isCached()) {
-            // Initialize the ContainerBuilder with this module's service implementations
-            /** @var ContainerBuilder */
-            $containerBuilder = App::getContainer();
-            $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $moduleDir, $configPath, $fileName);
+        if (App::getContainerBuilderFactory()->isCached()) {
+            return;
         }
+
+        // Initialize the ContainerBuilder with this module's service implementations
+        /** @var ContainerBuilder */
+        $containerBuilder = App::getContainer();
+        $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $moduleDir, $configPath, $fileName);
     }
 
     /**
@@ -67,18 +69,20 @@ trait InitializeContainerServicesInModuleTrait
         string $configPath = '',
         string $fileName = 'schema-services.yaml'
     ): void {
-        if (!App::getContainerBuilderFactory()->isCached()) {
-            /** @var ContainerBuilder */
-            $containerBuilder = App::getContainer();
-            $modulePath = $this->getModulePath($moduleDir, $configPath);
-            $autoconfigure = !$skipSchema;
-            $loader = new SchemaServiceYamlFileLoader(
-                $containerBuilder,
-                new FileLocator($modulePath),
-                $autoconfigure
-            );
-            $loader->load($fileName);
+        if (App::getContainerBuilderFactory()->isCached()) {
+            return;
         }
+
+        /** @var ContainerBuilder */
+        $containerBuilder = App::getContainer();
+        $modulePath = $this->getModulePath($moduleDir, $configPath);
+        $autoconfigure = !$skipSchema;
+        $loader = new SchemaServiceYamlFileLoader(
+            $containerBuilder,
+            new FileLocator($modulePath),
+            $autoconfigure
+        );
+        $loader->load($fileName);
     }
 
     /**
@@ -90,11 +94,13 @@ trait InitializeContainerServicesInModuleTrait
         string $fileName = 'system-services.yaml'
     ): void {
         // First check if the container has been cached. If so, do nothing
-        if (!App::getSystemContainerBuilderFactory()->isCached()) {
-            // Initialize the ContainerBuilder with this module's service implementations
-            /** @var ContainerBuilder */
-            $containerBuilder = App::getSystemContainer();
-            $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $moduleDir, $configPath, $fileName);
+        if (App::getSystemContainerBuilderFactory()->isCached()) {
+            return;
         }
+
+        // Initialize the ContainerBuilder with this module's service implementations
+        /** @var ContainerBuilder */
+        $containerBuilder = App::getSystemContainer();
+        $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $moduleDir, $configPath, $fileName);
     }
 }
