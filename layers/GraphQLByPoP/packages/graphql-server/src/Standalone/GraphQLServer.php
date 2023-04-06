@@ -62,9 +62,7 @@ class GraphQLServer implements GraphQLServerInterface
         private readonly array $moduleClassConfiguration = [],
         private readonly array $systemContainerCompilerPassClasses = [],
         private readonly array $applicationContainerCompilerPassClasses = [],
-        ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null,
-        ?string $containerDirectory = null,
+        private readonly ?ContainerCacheConfiguration $containerCacheConfiguration = null,
     ) {
         $this->moduleClasses = array_merge(
             $moduleClasses,
@@ -83,12 +81,7 @@ class GraphQLServer implements GraphQLServerInterface
         // Inject the Compiler Passes
         $appLoader->addSystemContainerCompilerPassClasses($this->systemContainerCompilerPassClasses);
 
-        $containerCacheConfiguration = new ContainerCacheConfiguration(
-            $cacheContainerConfiguration,
-            $containerNamespace,
-            $containerDirectory
-        );
-        $appLoader->setContainerCacheConfiguration($containerCacheConfiguration);
+        $appLoader->setContainerCacheConfiguration($this->containerCacheConfiguration);
         $appLoader->bootSystem();
 
         // Only after initializing the System Container,
@@ -99,7 +92,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appLoader->addApplicationContainerCompilerPassClasses($this->applicationContainerCompilerPassClasses);
 
         // Boot the application
-        $appLoader->bootApplication($containerCacheConfiguration);
+        $appLoader->bootApplication();
 
         // After booting the application, we can access the Application Container services
         // Explicitly set the required state to execute GraphQL queries

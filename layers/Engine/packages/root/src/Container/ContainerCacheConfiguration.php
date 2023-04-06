@@ -15,9 +15,9 @@ class ContainerCacheConfiguration
      * @param string|null $containerConfigurationCacheDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
     public function __construct(
-        private readonly ?bool $cacheContainerConfiguration,
-        private readonly ?string $containerConfigurationCacheNamespace,
-        private readonly ?string $containerConfigurationCacheDirectory,
+        private readonly ?bool $cacheContainerConfiguration = null,
+        private readonly ?string $containerConfigurationCacheNamespace = null,
+        private readonly ?string $containerConfigurationCacheDirectory = null,
     ) {
     }
 
