@@ -36,6 +36,7 @@ class AppLoader implements AppLoaderInterface
      * @phpstan-var array<class-string<ModuleInterface>>
      */
     protected array $moduleClassesToInitialize = [];
+    protected bool $readyState = false;
     /**
      * [key]: Module class, [value]: Configuration
      *
@@ -101,6 +102,22 @@ class AppLoader implements AppLoaderInterface
     public function getModuleClassesToInitialize(): array
     {
         return $this->moduleClassesToInitialize;
+    }
+
+    /**
+     * Define that the application is ready to be used
+     */
+    public function setReadyState(bool $readyState): void
+    {
+        $this->readyState = $readyState;
+    }
+
+    /**
+     * Indicate if the application is ready to be used
+     */
+    public function isReadyState(): bool
+    {
+        return $this->readyState;
     }
 
     /**

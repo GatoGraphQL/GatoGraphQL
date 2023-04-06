@@ -43,4 +43,6 @@ class PluginLifecyclePriorities
     public final const BOOT_PLUGIN = 180;
     public final const BOOT_EXTENSIONS = 190;
     public final const AFTER_EVERYTHING = 200;
+    
+    public final const READY_STATE = 1000;
 }

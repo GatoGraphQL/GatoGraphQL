@@ -29,6 +29,16 @@ interface AppLoaderInterface
     public function getModuleClassesToInitialize(): array;
 
     /**
+     * Define that the application is ready to be used
+     */
+    public function setReadyState(bool $readyState): void;
+
+    /**
+     * Indicate if the application is ready to be used
+     */
+    public function isReadyState(): bool;
+
+    /**
      * Add configuration for the Module classes
      *
      * @param array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
