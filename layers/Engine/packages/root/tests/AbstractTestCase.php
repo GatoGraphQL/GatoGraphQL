@@ -30,17 +30,18 @@ abstract class AbstractTestCase extends TestCase
             static::getAppLoader(),
             static::getHookManager(),
         );
-        App::getAppLoader()->addModuleClassesToInitialize(static::getModuleClassesToInitialize());
-        App::getAppLoader()->initializeModules($isDev);
-        App::getAppLoader()->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $appLoader = App::getAppLoader();
+        $appLoader->addModuleClassesToInitialize(static::getModuleClassesToInitialize());
+        $appLoader->initializeModules($isDev);
+        $appLoader->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        App::getAppLoader()->addModuleClassConfiguration(
+        $appLoader->addModuleClassConfiguration(
             static::getModuleClassConfiguration()
         );
 
-        App::getAppLoader()->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $appLoader->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // By now, we already have the container
         self::$container = App::getContainer();
@@ -49,7 +50,7 @@ abstract class AbstractTestCase extends TestCase
         static::beforeBootApplicationModules();
 
         // Finish the initialization
-        App::getAppLoader()->bootApplicationModules();
+        $appLoader->bootApplicationModules();
     }
 
     /**

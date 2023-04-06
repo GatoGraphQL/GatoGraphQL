@@ -207,10 +207,11 @@ abstract class AbstractPlugin implements PluginInterface
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        App::getAppLoader()->addModuleClassConfiguration(
+        $appLoader = App::getAppLoader();
+        $appLoader->addModuleClassConfiguration(
             $this->getModuleClassConfiguration()
         );
-        App::getAppLoader()->addSchemaModuleClassesToSkip(
+        $appLoader->addSchemaModuleClassesToSkip(
             $this->getSchemaModuleClassesToSkip()
         );
     }
