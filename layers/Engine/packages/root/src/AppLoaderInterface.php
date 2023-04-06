@@ -49,6 +49,13 @@ interface AppLoaderInterface
     ): void;
 
     /**
+     * Get configuration for the Module classes
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     */
+    public function getModuleClassConfiguration(): array;
+
+    /**
      * Inject Compiler Pass classes (eg: for testing)
      *
      * @param array<class-string<CompilerPassInterface>> $systemContainerCompilerPassClasses List of `CompilerPass` class to initialize

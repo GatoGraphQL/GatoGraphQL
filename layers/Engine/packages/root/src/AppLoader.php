@@ -140,6 +140,16 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
+     * Get configuration for the Module classes
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     */
+    public function getModuleClassConfiguration(): array
+    {
+        return $this->moduleClassConfiguration;
+    }
+
+    /**
      * Inject Compiler Passes to boot the System (eg: when testing)
      *
      * @param array<class-string<CompilerPassInterface>> $systemContainerCompilerPassClasses List of `CompilerPass` class to initialize
