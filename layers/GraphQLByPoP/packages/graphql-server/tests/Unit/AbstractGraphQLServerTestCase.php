@@ -160,4 +160,9 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             $actualResponseContent
         );
     }
+
+    protected function getDataName(): string
+    {
+        return (string) $this->dataName();
+    }
 }
