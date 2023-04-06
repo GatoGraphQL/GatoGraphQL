@@ -88,11 +88,7 @@ class GraphQLServer implements GraphQLServerInterface
             $containerNamespace,
             $containerDirectory
         );
-        $appLoader->bootSystem(
-            $this->cacheContainerConfiguration,
-            $this->containerNamespace,
-            $this->containerDirectory
-        );
+        $appLoader->bootSystem($containerCacheConfiguration);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)

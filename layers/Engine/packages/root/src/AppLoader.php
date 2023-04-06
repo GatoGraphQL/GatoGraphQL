@@ -314,18 +314,16 @@ class AppLoader implements AppLoaderInterface
      * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
     public function bootSystem(
-        ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null,
-        ?string $containerDirectory = null,
+        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
     ): void {
         /**
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
          */
         App::getSystemContainerBuilderFactory()->init(
-            $cacheContainerConfiguration,
-            $containerNamespace,
-            $containerDirectory
+            $containerCacheConfiguration?->cacheContainerConfiguration(),
+            $containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
+            $containerCacheConfiguration?->getContainerConfigurationCacheDirectory()
         );
 
         /**

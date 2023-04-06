@@ -39,7 +39,7 @@ abstract class AbstractTestCase extends TestCase
             $containerNamespace,
             $containerDirectory
         );
-        $appLoader->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $appLoader->bootSystem($containerCacheConfiguration);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
