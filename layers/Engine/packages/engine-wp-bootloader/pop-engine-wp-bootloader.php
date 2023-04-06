@@ -26,8 +26,9 @@ if (!class_exists(App::class)) {
         new AppLoader(),
         new HookManager()
     );
-    App::getAppLoader()->initializeModules();
-    App::getAppLoader()->bootSystem();
-    App::getAppLoader()->bootApplication();
-    App::getAppLoader()->bootApplicationModules();
+    $appLoader = App::getAppLoader();
+    $appLoader->initializeModules();
+    $appLoader->bootSystem();
+    $appLoader->bootApplication();
+    $appLoader->bootApplicationModules();
 });
