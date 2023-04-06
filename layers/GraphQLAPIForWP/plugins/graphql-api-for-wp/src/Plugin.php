@@ -144,7 +144,7 @@ class Plugin extends AbstractMainPlugin
      *
      * @return array<class-string<ModuleInterface>> List of `Module` class to initialize
      */
-    public function getModuleClassesToInitialize(): array
+    protected function getModuleClassesToInitialize(): array
     {
         return [
             Module::class,

@@ -190,10 +190,7 @@ abstract class AbstractPlugin implements PluginInterface
      *
      * @return array<class-string<ModuleInterface>> List of `Module` class to initialize
      */
-    public function getModuleClassesToInitialize(): array
-    {
-        return [];
-    }
+    abstract protected function getModuleClassesToInitialize(): array;
 
     /**
      * Plugin configuration
