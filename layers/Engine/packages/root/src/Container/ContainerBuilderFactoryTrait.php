@@ -141,51 +141,62 @@ trait ContainerBuilderFactoryTrait
     public function maybeCompileAndCacheContainer(
         array $compilerPasses = []
     ): void {
-        // Compile Symfony's DependencyInjection Container Builder
-        // After compiling, cache it in disk for performance.
-        // This happens only the first time the site is accessed on the current server
-        if (!$this->cached) {
-            /** @var ContainerBuilder */
-            $containerBuilder = $this->getInstance();
-            // Inject all the compiler passes
-            foreach ($compilerPasses as $compilerPass) {
-                $containerBuilder->addCompilerPass($compilerPass);
-            }
-            // Compile the container
-            $containerBuilder->compile();
+        /**
+         * Compile Symfony's DependencyInjection Container Builder.
+         *
+         * After compiling, cache it in disk for performance.
+         *
+         * This happens only the first time the site is accessed
+         * on the current server.
+         */
+        if ($this->cached) {
+            return;
+        }
 
-            // Cache the container
-            if ($this->cacheContainerConfiguration) {
-                // Create the folder if it doesn't exist, and check it was successful
-                $dir = dirname($this->cacheFile);
-                $folderExists = file_exists($dir);
-                if (!$folderExists) {
-                    $folderExists = @mkdir($dir, 0777, true);
-                }
-                if ($folderExists) {
-                    // Save the container to disk
-                    $dumper = $this->createPHPDumper($containerBuilder);
-                    file_put_contents(
-                        $this->cacheFile,
-                        $dumper->dump(
-                            [
-                                'class' => $this->getContainerClassName(),
-                                // Save under own namespace to avoid conflicts
-                                'namespace' => $this->getContainerNamespace(),
-                                /**
-                                 * Extend from own Container since it must implement ContainerInterface.
-                                 * It must start with "\", or PhpDumper will also prepend "PoPContainer\\"
-                                 */
-                                'base_class' => '\\' . Container::class,
-                            ]
-                        )
-                    );
+        /** @var ContainerBuilder */
+        $containerBuilder = $this->getInstance();
+        // Inject all the compiler passes
+        foreach ($compilerPasses as $compilerPass) {
+            $containerBuilder->addCompilerPass($compilerPass);
+        }
+        // Compile the container
+        $containerBuilder->compile();
 
-                    // Change the permissions so it can be modified by external processes (eg: deployment)
-                    chmod($this->cacheFile, 0777);
-                }
+        // Cache the container
+        if (!$this->cacheContainerConfiguration) {
+            return;
+        }
+        // Create the folder if it doesn't exist, and check it was successful
+        $dir = dirname($this->cacheFile);
+        $folderExists = file_exists($dir);
+        if (!$folderExists) {
+            $folderExists = @mkdir($dir, 0777, true);
+            if (!$folderExists) {
+                // @todo Throw an error!?
+                return;
             }
         }
+
+        // Save the container to disk
+        $dumper = $this->createPHPDumper($containerBuilder);
+        file_put_contents(
+            $this->cacheFile,
+            $dumper->dump(
+                [
+                    'class' => $this->getContainerClassName(),
+                    // Save under own namespace to avoid conflicts
+                    'namespace' => $this->getContainerNamespace(),
+                    /**
+                     * Extend from own Container since it must implement ContainerInterface.
+                     * It must start with "\", or PhpDumper will also prepend "PoPContainer\\"
+                     */
+                    'base_class' => '\\' . Container::class,
+                ]
+            )
+        );
+
+        // Change the permissions so it can be modified by external processes (eg: deployment)
+        chmod($this->cacheFile, 0777);
     }
 
     /**
