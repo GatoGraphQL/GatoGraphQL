@@ -44,6 +44,7 @@ class AppLoader implements AppLoaderInterface
      * @phpstan-var array<class-string<ModuleInterface>,array<string,mixed>>
      */
     protected array $moduleClassConfiguration = [];
+    protected ?ContainerCacheConfiguration $containerCacheConfiguration = null;
     /**
      * [key]: State key, [value]: Value
      *
@@ -136,6 +137,12 @@ class AppLoader implements AppLoaderInterface
             $this->applicationContainerCompilerPassClasses,
             $applicationContainerCompilerPassClasses
         );
+    }
+
+    public function setContainerCacheConfiguration(
+        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
+    ): void {
+        $this->containerCacheConfiguration = $containerCacheConfiguration;
     }
 
     /**

@@ -47,6 +47,10 @@ interface AppLoaderInterface
         array $applicationContainerCompilerPassClasses
     ): void;
 
+    public function setContainerCacheConfiguration(
+        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
+    ): void;
+
     /**
      * Set the initial state, eg: when passing state via the request is disabled
      *
