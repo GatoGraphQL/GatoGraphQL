@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\StandaloneServer;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Exception\GraphQLServerNotReadyException;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginLifecyclePriorities;
 use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 
 /**
@@ -39,13 +38,13 @@ class GraphQLServerFactory
     private static function createInstance(): GraphQLServer
     {
         $appLoader = App::getAppLoader();
-        // var_dump($appLoader->getModuleClassConfiguration());die;
         if (!$appLoader->isReadyState()) {
             throw new GraphQLServerNotReadyException(
                 sprintf(
-                    \__('The GraphQL server is not yet ready. It can be invoked only after hook \'%s\' with priority \'%s\' has taken place', 'graphql-api'),
-                    'plugins_loaded',
-                    PluginLifecyclePriorities::READY_STATE
+                    \__('The initialization of the GraphQL server has not yet taken place. This takes place in these hooks: \'%s\' in the wp-admin, \'%s\' in the WP REST API, and \'%s\' otherwise (i.e. in the actual website). Invoke the GraphQL server only after these hooks have taken place. See file: layers/Engine/packages/root-wp/src/AppLoader.php', 'graphql-api'),
+                    'wp_loaded',
+                    'rest_api_init',
+                    'wp'
                 )
             );
         }
