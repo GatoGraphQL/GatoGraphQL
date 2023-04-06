@@ -18,7 +18,8 @@ class AppLoader extends UpstreamAppLoader
         foreach ($this->getBootApplicationHooks() as $actionHook) {
             App::addAction(
                 $actionHook,
-                fn () => parent::bootApplicationModules()
+                fn () => parent::bootApplicationModules(),
+                0
             );
         }
     }
