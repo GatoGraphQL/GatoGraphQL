@@ -19,6 +19,11 @@ class GraphQLServerFactory
 {
     private static ?GraphQLServer $graphQLServer = null;
 
+    /**
+     * Create a new instance of the GraphQLServer
+     *
+     * @throws ApplicationNotReadyException if the application is not ready yet
+     */
     public static function getInstance(): GraphQLServer
     {
         if (self::$graphQLServer === null) {
@@ -27,6 +32,11 @@ class GraphQLServerFactory
         return self::$graphQLServer;
     }
     
+    /**
+     * Create a new instance of the GraphQLServer
+     *
+     * @throws ApplicationNotReadyException if the application is not ready yet
+     */
     private static function createInstance(): GraphQLServer
     {
         // var_dump(App::getAppLoader()->getModuleClassesToInitialize());die;
