@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Module\ModuleInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
@@ -103,15 +104,9 @@ interface AppLoaderInterface
      *
      * 1. Initialize the Application Container, have all Components inject services, and compile it
      * 2. Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
-     *
-     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
-     * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
-     * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
     public function bootApplication(
-        ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null,
-        ?string $containerDirectory = null
+        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
     ): void;
 
     /**

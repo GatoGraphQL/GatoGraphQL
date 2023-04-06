@@ -9,6 +9,11 @@ namespace PoP\Root\Container;
  */
 class ContainerCacheConfiguration
 {
+    /**
+     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
+     * @param string|null $containerConfigurationCacheNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
+     * @param string|null $containerConfigurationCacheDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
+     */
     public function __construct(
         private readonly bool $cacheContainerConfiguration,
         private readonly ?string $containerConfigurationCacheNamespace,
