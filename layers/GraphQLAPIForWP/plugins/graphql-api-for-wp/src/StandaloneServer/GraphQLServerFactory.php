@@ -50,15 +50,12 @@ class GraphQLServerFactory
                 )
             );
         }
-        $containerCacheConfiguration = $appLoader->getContainerCacheConfiguration();
         return new GraphQLServer(
             $appLoader->getModuleClassesToInitialize(),
             $appLoader->getModuleClassConfiguration(),
             $appLoader->getSystemContainerCompilerPassClasses(),
             $appLoader->getApplicationContainerCompilerPassClasses(),
-            $containerCacheConfiguration->cacheContainerConfiguration(),
-            $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
-            $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
+            $appLoader->getContainerCacheConfiguration(),
         );
     }
 }
