@@ -8,13 +8,14 @@ use Exception;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\AppObjects\ContainerCacheConfiguration;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
+use PoP\RootWP\AppLoader;
+use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
-use PoP\RootWP\AppLoader;
-use PoP\RootWP\StateManagers\HookManager;
 
 use function __;
 use function add_action;
@@ -96,6 +97,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function getModuleClassConfiguration(): array
     {
         return $this->pluginInitializationConfiguration->getModuleClassConfiguration();
+    }
+
+    public function getContainerCacheConfiguration(): ContainerCacheConfiguration
+    {
+        return $this->pluginInitializationConfiguration->getContainerCacheConfiguration();
     }
 
     /**
@@ -509,7 +515,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
-            $containerCacheConfiguration = $this->pluginInitializationConfiguration->getContainerCacheConfiguration();
+            $containerCacheConfiguration = $this->getContainerCacheConfiguration();
             App::getAppLoader()->bootSystem(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
@@ -538,7 +544,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
-            $containerCacheConfiguration = $this->pluginInitializationConfiguration->getContainerCacheConfiguration();
+            $containerCacheConfiguration = $this->getContainerCacheConfiguration();
             $appLoader = App::getAppLoader();
             $appLoader->bootApplication(
                 $containerCacheConfiguration->cacheContainerConfiguration(),
