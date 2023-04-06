@@ -67,8 +67,10 @@ class GraphQLServer implements GraphQLServerInterface
         $this->moduleClasses = array_merge(
             $moduleClasses,
             [
-                // This is the one Module that is required to produce the GraphQL server.
-                // The other classes provide the schema and extra functionality.
+                /**
+                 * This is the one Module that is required to produce the GraphQL server.
+                 * The other classes provide the schema and extra functionality.
+                 */
                 Module::class,
             ]
         );
