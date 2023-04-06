@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\AppObjects\ContainerCacheConfiguration;
+use PoP\Root\Container\ContainerCacheConfiguration;
 
 interface MainPluginInitializationConfigurationInterface extends PluginInitializationConfigurationInterface
 {

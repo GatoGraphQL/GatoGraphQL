@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PHPUnit\Framework\TestCase;
+use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\StateManagers\HookManager;
@@ -33,7 +34,13 @@ abstract class AbstractTestCase extends TestCase
         $appLoader = App::getAppLoader();
         $appLoader->addModuleClassesToInitialize(static::getModuleClassesToInitialize());
         $appLoader->initializeModules($isDev);
-        $appLoader->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $containerCacheConfiguration = new ContainerCacheConfiguration(
+            $cacheContainerConfiguration,
+            $containerNamespace,
+            $containerDirectory
+        );
+        $appLoader->setContainerCacheConfiguration($containerCacheConfiguration);
+        $appLoader->bootSystem();
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
@@ -41,7 +48,7 @@ abstract class AbstractTestCase extends TestCase
             static::getModuleClassConfiguration()
         );
 
-        $appLoader->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
+        $appLoader->bootApplication();
 
         // By now, we already have the container
         self::$container = App::getContainer();

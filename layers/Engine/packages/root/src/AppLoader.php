@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PoP\Root\Constants\HookNames;
+use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 use PoP\Root\Module\ModuleInterface;
@@ -44,6 +45,7 @@ class AppLoader implements AppLoaderInterface
      * @phpstan-var array<class-string<ModuleInterface>,array<string,mixed>>
      */
     protected array $moduleClassConfiguration = [];
+    protected ?ContainerCacheConfiguration $containerCacheConfiguration = null;
     /**
      * [key]: State key, [value]: Value
      *
@@ -359,6 +361,12 @@ class AppLoader implements AppLoaderInterface
         $this->configureComponents();
     }
 
+    public function setContainerCacheConfiguration(
+        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
+    ): void {
+        $this->containerCacheConfiguration = $containerCacheConfiguration;
+    }
+
     /**
      * Boot the application. It does these steps:
      *
@@ -372,19 +380,16 @@ class AppLoader implements AppLoaderInterface
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
-    public function bootSystem(
-        ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null,
-        ?string $containerDirectory = null,
-    ): void {
+    public function bootSystem(): void
+    {
         /**
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
          */
         App::getSystemContainerBuilderFactory()->init(
-            $cacheContainerConfiguration,
-            $containerNamespace,
-            $containerDirectory
+            $this->containerCacheConfiguration?->cacheContainerConfiguration(),
+            $this->containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
+            $this->containerCacheConfiguration?->getContainerConfigurationCacheDirectory()
         );
 
         /**
@@ -454,16 +459,9 @@ class AppLoader implements AppLoaderInterface
      *
      * 1. Initialize the Application Container, have all Components inject services, and compile it
      * 2. Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
-     *
-     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
-     * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
-     * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
-    public function bootApplication(
-        ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null,
-        ?string $containerDirectory = null
-    ): void {
+    public function bootApplication(): void
+    {
         /**
          * Allow each module to customize the configuration for itself,
          * and for its depended-upon modules.
@@ -481,9 +479,9 @@ class AppLoader implements AppLoaderInterface
          * Initialize the Application container only
          */
         App::getContainerBuilderFactory()->init(
-            $cacheContainerConfiguration,
-            $containerNamespace,
-            $containerDirectory
+            $this->containerCacheConfiguration?->cacheContainerConfiguration(),
+            $this->containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
+            $this->containerCacheConfiguration?->getContainerConfigurationCacheDirectory()
         );
 
         /**

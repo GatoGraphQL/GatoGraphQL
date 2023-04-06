@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Module\ModuleInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
@@ -120,6 +121,10 @@ interface AppLoaderInterface
         bool $isDev = false
     ): void;
 
+    public function setContainerCacheConfiguration(
+        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
+    ): void;
+
     /**
      * Boot the application. It does these steps:
      *
@@ -128,32 +133,16 @@ interface AppLoaderInterface
      * 3. Allow Components to customize the component configuration for themselves, and the components they can see
      * 4. Register all Components with the ModuleManager
      * 5. Initialize the System Container, have all Components inject services, and compile it, making "system" services (eg: hooks, translation) available for initializing Application Container services
-     *
-     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
-     * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
-     * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
-    public function bootSystem(
-        ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null,
-        ?string $containerDirectory = null,
-    ): void;
+    public function bootSystem(): void;
 
     /**
      * Boot the application. It does these steps:
      *
      * 1. Initialize the Application Container, have all Components inject services, and compile it
      * 2. Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
-     *
-     * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
-     * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
-     * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
-    public function bootApplication(
-        ?bool $cacheContainerConfiguration = null,
-        ?string $containerNamespace = null,
-        ?string $containerDirectory = null
-    ): void;
+    public function bootApplication(): void;
 
     /**
      * Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components,

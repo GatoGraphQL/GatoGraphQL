@@ -13,6 +13,7 @@ use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
@@ -61,9 +62,9 @@ class GraphQLServer implements GraphQLServerInterface
         private readonly array $moduleClassConfiguration = [],
         private readonly array $systemContainerCompilerPassClasses = [],
         private readonly array $applicationContainerCompilerPassClasses = [],
-        private readonly ?bool $cacheContainerConfiguration = null,
-        private readonly ?string $containerNamespace = null,
-        private readonly ?string $containerDirectory = null,
+        ?bool $cacheContainerConfiguration = null,
+        ?string $containerNamespace = null,
+        ?string $containerDirectory = null,
     ) {
         $this->moduleClasses = array_merge(
             $moduleClasses,
@@ -82,11 +83,13 @@ class GraphQLServer implements GraphQLServerInterface
         // Inject the Compiler Passes
         $appLoader->addSystemContainerCompilerPassClasses($this->systemContainerCompilerPassClasses);
 
-        $appLoader->bootSystem(
-            $this->cacheContainerConfiguration,
-            $this->containerNamespace,
-            $this->containerDirectory
+        $containerCacheConfiguration = new ContainerCacheConfiguration(
+            $cacheContainerConfiguration,
+            $containerNamespace,
+            $containerDirectory
         );
+        $appLoader->setContainerCacheConfiguration($containerCacheConfiguration);
+        $appLoader->bootSystem();
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
@@ -96,11 +99,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appLoader->addApplicationContainerCompilerPassClasses($this->applicationContainerCompilerPassClasses);
 
         // Boot the application
-        $appLoader->bootApplication(
-            $this->cacheContainerConfiguration,
-            $this->containerNamespace,
-            $this->containerDirectory
-        );
+        $appLoader->bootApplication($containerCacheConfiguration);
 
         // After booting the application, we can access the Application Container services
         // Explicitly set the required state to execute GraphQL queries
