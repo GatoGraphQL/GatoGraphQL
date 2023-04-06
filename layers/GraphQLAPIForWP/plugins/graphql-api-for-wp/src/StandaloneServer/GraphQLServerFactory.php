@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\StandaloneServer;
 
 use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\Exception\ApplicationNotReadyException;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginLifecyclePriorities;
 use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 use PoP\Root\Module\ModuleInterface;
 
@@ -27,6 +29,17 @@ class GraphQLServerFactory
     
     private static function createInstance(): GraphQLServer
     {
+        // var_dump(App::getAppLoader()->getModuleClassesToInitialize());die;
+        $appLoader = App::getAppLoader();
+        if (!$appLoader->isReadyState()) {
+            throw new ApplicationNotReadyException(
+                sprintf(
+                    \__('The GraphQL server is not yet ready. It can be invoked only after hook \'%s\' with priority \'%s\' has taken place', 'graphql-api'),
+                    'plugins_loaded',
+                    PluginLifecyclePriorities::READY_STATE
+                )
+            );
+        }
         return new GraphQLServer(
             App::getAppLoader()->getModuleClassesToInitialize(),
             static::getModuleClassConfiguration(),
@@ -34,14 +47,6 @@ class GraphQLServerFactory
             [],
             false,
         );
-    }
-
-    /**
-     * @return array<class-string<ModuleInterface>>
-     */
-    private static function getModuleClasses(): array
-    {
-        return [];
     }
 
     /**
