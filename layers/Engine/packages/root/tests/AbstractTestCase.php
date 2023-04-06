@@ -39,7 +39,8 @@ abstract class AbstractTestCase extends TestCase
             $containerNamespace,
             $containerDirectory
         );
-        $appLoader->bootSystem($containerCacheConfiguration);
+        $appLoader->setContainerCacheConfiguration($containerCacheConfiguration);
+        $appLoader->bootSystem();
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
@@ -47,7 +48,7 @@ abstract class AbstractTestCase extends TestCase
             static::getModuleClassConfiguration()
         );
 
-        $appLoader->bootApplication($containerCacheConfiguration);
+        $appLoader->bootApplication();
 
         // By now, we already have the container
         self::$container = App::getContainer();

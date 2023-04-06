@@ -509,9 +509,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
-            App::getAppLoader()->bootSystem(
+            $appLoader = App::getAppLoader();
+            $appLoader->setContainerCacheConfiguration(
                 $this->pluginInitializationConfiguration->getContainerCacheConfiguration()
             );
+            $appLoader->bootSystem();
 
             // Custom logic
             $this->doBootSystem();
@@ -536,9 +538,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         try {
             // Boot all PoP components, from this plugin and all extensions
             $appLoader = App::getAppLoader();
-            $appLoader->bootApplication(
-                $this->pluginInitializationConfiguration->getContainerCacheConfiguration()
-            );
+            $appLoader->bootApplication();
             $appLoader->bootApplicationModules();
 
             // Custom logic

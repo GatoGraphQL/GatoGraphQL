@@ -47,10 +47,6 @@ interface AppLoaderInterface
         array $applicationContainerCompilerPassClasses
     ): void;
 
-    public function setContainerCacheConfiguration(
-        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
-    ): void;
-
     /**
      * Set the initial state, eg: when passing state via the request is disabled
      *
@@ -84,6 +80,10 @@ interface AppLoaderInterface
         bool $isDev = false
     ): void;
 
+    public function setContainerCacheConfiguration(
+        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
+    ): void;
+
     /**
      * Boot the application. It does these steps:
      *
@@ -93,9 +93,7 @@ interface AppLoaderInterface
      * 4. Register all Components with the ModuleManager
      * 5. Initialize the System Container, have all Components inject services, and compile it, making "system" services (eg: hooks, translation) available for initializing Application Container services
      */
-    public function bootSystem(
-        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
-    ): void;
+    public function bootSystem(): void;
 
     /**
      * Boot the application. It does these steps:
@@ -103,9 +101,7 @@ interface AppLoaderInterface
      * 1. Initialize the Application Container, have all Components inject services, and compile it
      * 2. Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
      */
-    public function bootApplication(
-        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
-    ): void;
+    public function bootApplication(): void;
 
     /**
      * Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components,

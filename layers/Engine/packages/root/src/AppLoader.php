@@ -139,12 +139,6 @@ class AppLoader implements AppLoaderInterface
         );
     }
 
-    public function setContainerCacheConfiguration(
-        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
-    ): void {
-        $this->containerCacheConfiguration = $containerCacheConfiguration;
-    }
-
     /**
      * Set the initial state, eg: when passing state via the request is disabled
      *
@@ -307,6 +301,12 @@ class AppLoader implements AppLoaderInterface
         $this->configureComponents();
     }
 
+    public function setContainerCacheConfiguration(
+        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
+    ): void {
+        $this->containerCacheConfiguration = $containerCacheConfiguration;
+    }
+
     /**
      * Boot the application. It does these steps:
      *
@@ -320,17 +320,16 @@ class AppLoader implements AppLoaderInterface
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
      * @param string|null $containerDirectory Provide the directory, to regenerate the cache whenever the application is upgraded. If null, it uses the default /tmp folder by the OS
      */
-    public function bootSystem(
-        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
-    ): void {
+    public function bootSystem(): void
+    {
         /**
          * System container: initialize it and compile it already,
          * since it will be used to initialize the Application container
          */
         App::getSystemContainerBuilderFactory()->init(
-            $containerCacheConfiguration?->cacheContainerConfiguration(),
-            $containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
-            $containerCacheConfiguration?->getContainerConfigurationCacheDirectory()
+            $this->containerCacheConfiguration?->cacheContainerConfiguration(),
+            $this->containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
+            $this->containerCacheConfiguration?->getContainerConfigurationCacheDirectory()
         );
 
         /**
@@ -401,9 +400,8 @@ class AppLoader implements AppLoaderInterface
      * 1. Initialize the Application Container, have all Components inject services, and compile it
      * 2. Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
      */
-    public function bootApplication(
-        ?ContainerCacheConfiguration $containerCacheConfiguration = null,
-    ): void {
+    public function bootApplication(): void
+    {
         /**
          * Allow each module to customize the configuration for itself,
          * and for its depended-upon modules.
@@ -421,9 +419,9 @@ class AppLoader implements AppLoaderInterface
          * Initialize the Application container only
          */
         App::getContainerBuilderFactory()->init(
-            $containerCacheConfiguration?->cacheContainerConfiguration(),
-            $containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
-            $containerCacheConfiguration?->getContainerConfigurationCacheDirectory()
+            $this->containerCacheConfiguration?->cacheContainerConfiguration(),
+            $this->containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
+            $this->containerCacheConfiguration?->getContainerConfigurationCacheDirectory()
         );
 
         /**
