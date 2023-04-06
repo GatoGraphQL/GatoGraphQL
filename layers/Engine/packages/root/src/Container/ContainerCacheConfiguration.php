@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\AppObjects;
+namespace PoP\Root\Container;
 
 /**
  * Configuration to cache the container

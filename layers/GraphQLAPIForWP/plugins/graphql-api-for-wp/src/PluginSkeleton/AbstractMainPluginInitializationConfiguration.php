@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\ContainerCacheConfigurationManagerFacade;
-use GraphQLAPI\GraphQLAPI\AppObjects\ContainerCacheConfiguration;
+use PoP\Root\Container\ContainerCacheConfiguration;
 
 /**
  * Base class to set the configuration for all the PoP components in the main plugin.
