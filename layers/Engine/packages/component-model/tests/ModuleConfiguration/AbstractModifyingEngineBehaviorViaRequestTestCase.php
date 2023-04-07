@@ -9,7 +9,7 @@ use PoP\ComponentModel\DataStructureFormatters\HTMLDataStructureFormatter;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\Root\AbstractTestCase;
+use PoP\ComponentModel\AbstractTestCase;
 use PoP\Root\App;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Module as RootModule;

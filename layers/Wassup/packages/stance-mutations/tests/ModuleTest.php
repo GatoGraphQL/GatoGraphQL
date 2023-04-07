@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations;
 
-use PoP\Root\AbstractModuleTest;
+use PoP\ComponentModel\AbstractModuleTest;
 
 /**
  * Made abstract to disable the test

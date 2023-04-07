@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\GraphQLAPI;
 
-use PoP\Root\AbstractModuleTest;
+use PoP\ComponentModel\AbstractModuleTest;
 
 class ModuleTest extends AbstractModuleTest
 {

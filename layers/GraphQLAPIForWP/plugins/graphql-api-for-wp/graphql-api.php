@@ -16,6 +16,7 @@ GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 */
 
 use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\AppThread;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
 // Exit if accessed directly
@@ -68,6 +69,7 @@ $commitHash = null;
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Initialize the GraphQL API App
+App::setAppThread(new AppThread());
 App::initializePlugin();
 
 // Create and set-up the plugin instance

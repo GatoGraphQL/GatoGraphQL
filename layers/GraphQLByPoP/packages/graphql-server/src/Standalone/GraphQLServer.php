@@ -11,6 +11,7 @@ use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\AppThread;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\Root\Container\ContainerCacheConfiguration;
@@ -75,6 +76,7 @@ class GraphQLServer implements GraphQLServerInterface
             ]
         );
 
+        App::setAppThread(new AppThread());
         App::initialize();
         $appLoader = App::getAppLoader();
         $appLoader->addModuleClassesToInitialize($this->moduleClasses);
