@@ -7,16 +7,17 @@ namespace PoP\Root\App;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoaderInterface;
-use PoP\Root\Module\ModuleInterface;
+use PoP\Root\AppThreadInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
+use PoP\Root\StateManagers\ModuleManagerInterface;
 
 /**
  * Using proxy instead of inheritance, so that the upstream App
@@ -24,6 +25,23 @@ use PoP\Root\StateManagers\HookManagerInterface;
  */
 abstract class AbstractRootAppProxy implements RootAppInterface
 {
+    /**
+     * Allow to set and get the AppThread,
+     * to initiate a new context.
+     */
+    public static function getAppThread(): AppThreadInterface
+    {
+        return RootApp::getAppThread();
+    }
+    /**
+     * Allow to set and get the AppThread,
+     * to initiate a new context.
+     */
+    public static function setAppThread(AppThreadInterface $appThread): void
+    {
+        RootApp::setAppThread($appThread);
+    }
+    
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
@@ -39,8 +57,8 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
-    ): void {
-        RootApp::initialize(
+    ): AppThreadInterface {
+        return RootApp::initialize(
             $appLoader,
             $hookManager,
             $request,
