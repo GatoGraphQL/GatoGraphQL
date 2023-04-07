@@ -20,7 +20,7 @@ class GraphQLServerFactory
     /**
      * Create a new instance of the GraphQLServer
      *
-     * @throws GraphQLServerNotReadyException if the application is not ready yet
+     * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
      */
     public static function getInstance(): GraphQLServer
     {
@@ -33,7 +33,7 @@ class GraphQLServerFactory
     /**
      * Create a new instance of the GraphQLServer
      *
-     * @throws GraphQLServerNotReadyException if the application is not ready yet
+     * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
      *
      * @see layers/Engine/packages/root-wp/src/AppLoader.php
      */
