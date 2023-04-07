@@ -9,7 +9,7 @@ use PoP\Root\AppLoaderInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\RootWP\StateManagers\HookManager;
 
-abstract class AbstractTestCase extends UpstreamAbstractTestCase
+abstract class AbstractWordPressTestCase extends UpstreamAbstractTestCase
 {
     protected static function getAppLoader(): AppLoaderInterface
     {
