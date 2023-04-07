@@ -24,23 +24,21 @@ use PoP\Root\StateManagers\HookManagerInterface;
  * but as static.
  */
 interface AppInterface
-{
+{    
     /**
-     * Allow to set and get the AppThread,
-     * to initiate a new context.
-     */
-    public static function getAppThread(): AppThreadInterface;
-    /**
-     * Allow to set and get the AppThread,
-     * to initiate a new context.
+     * This function must be invoked at the very beginning,
+     * to initialize the instance to run the application.
+     *
+     * Alos it allows to set a new AppThread instance at
+     * any time, to initiate a new context.
      */
     public static function setAppThread(AppThreadInterface $appThread): void;
 
     /**
-     * This function must be invoked at the very beginning,
-     * to initialize the instance to run the application.
+     * Allow to get the current AppThread, to store
+     * (and put back later) when initiating a new context.
      */
-    public static function createAppThread(): void;
+    public static function getAppThread(): AppThreadInterface;
 
     /**
      * All methods below are facade accessor methods to
@@ -48,8 +46,9 @@ interface AppInterface
      */
 
     /**
-     * This function must be invoked right after `createAppThread`,
-     * to initialize the instance to run the application.
+     * This function must be invoked right after calling
+     * `setAppThread` with the new AppThread instance,
+     * to initialize it to run the application.
      *
      * Either inject the desired instance, or have the Root
      * provide the default one.

@@ -27,7 +27,7 @@ abstract class AbstractTestCase extends TestCase
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
-        App::createAppThread();
+        App::setAppThread(static::getAppThread());
         App::initialize(
             static::getAppLoader(),
             static::getHookManager(),
@@ -67,6 +67,11 @@ abstract class AbstractTestCase extends TestCase
     protected static function beforeBootApplicationModules(): void
     {
         // Do nothing
+    }
+
+    protected static function getAppThread(): AppThreadInterface
+    {
+        return new AppThread();
     }
 
     protected static function getAppLoader(): AppLoaderInterface

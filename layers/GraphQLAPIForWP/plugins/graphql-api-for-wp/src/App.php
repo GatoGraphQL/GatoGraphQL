@@ -19,15 +19,6 @@ use PoP\ComponentModel\App\AbstractComponentModelAppProxy;
  */
 class App extends AbstractComponentModelAppProxy implements AppInterface
 {
-    /**
-     * This function must be invoked at the very beginning,
-     * to initialize the instance to run the application.
-     */
-    public static function createAppThread(): void
-    {
-        static::setAppThread(new AppThread());
-    }
-    
     public static function initializePlugin(
         ?MainPluginManager $mainPluginManager = null,
         ?ExtensionManager $extensionManager = null,

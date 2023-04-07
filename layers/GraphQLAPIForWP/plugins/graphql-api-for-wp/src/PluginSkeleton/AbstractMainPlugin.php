@@ -8,6 +8,7 @@ use Exception;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\AppThread;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use PoP\RootWP\AppLoader;
@@ -384,7 +385,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action(
             'plugins_loaded',
             function (): void {
-                App::createAppThread();
+                App::setAppThread(new AppThread);
                 App::initialize(
                     new AppLoader(),
                     new HookManager()

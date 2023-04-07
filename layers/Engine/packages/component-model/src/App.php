@@ -25,15 +25,6 @@ class App extends AbstractRootAppProxy implements AppInterface
     protected static EngineState $engineState;
     protected static MutationResolutionStoreInterface $mutationResolutionStore;
 
-    /**
-     * This function must be invoked at the very beginning,
-     * to initialize the instance to run the application.
-     */
-    public static function createAppThread(): void
-    {
-        static::setAppThread(new AppThread());
-    }
-
     public static function getFeedbackStore(): FeedbackStore
     {
         /** @var AppThreadInterface */
