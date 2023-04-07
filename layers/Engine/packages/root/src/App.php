@@ -11,41 +11,55 @@ use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
-use PoP\Root\StateManagers\AppStateManager;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\HookManager;
 use PoP\Root\StateManagers\HookManagerInterface;
-use PoP\Root\StateManagers\ModuleManager;
 use PoP\Root\StateManagers\ModuleManagerInterface;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 /**
- * Keep all state in the application stored and accessible
- * through this class, so that regenerating this class
- * provides a new state.
+ * Facade to the current AppThread object that hosts
+ * all the top-level instances to run the application.
  *
- * Needed for PHPUnit.
+ * This interface contains all the methods from the
+ * AppThreadInterface (to provide access to them)
+ * but as static.
  */
 class App implements AppInterface
 {
-    protected static AppLoaderInterface $appLoader;
-    protected static HookManagerInterface $hookManager;
-    protected static Request $request;
-    protected static Response $response;
-    protected static ContainerBuilderFactory $containerBuilderFactory;
-    protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
-    protected static ModuleManagerInterface $moduleManager;
-    protected static AppStateManagerInterface $appStateManager;
-    /** @var array<class-string<ModuleInterface>> */
-    protected static array $moduleClassesToInitialize = [];
-    protected static bool $isHTTPRequest;
+    protected static AppThreadInterface $appThread;
 
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
      *
+     * Alos it allows to set a new AppThread instance at
+     * any time, to initiate a new context.
+     */
+    public static function setAppThread(AppThreadInterface $appThread): void
+    {
+        self::$appThread = $appThread;
+    }
+
+    /**
+     * Allow to get the current AppThread, to store
+     * (and put back later) when initiating a new context.
+     */
+    public static function getAppThread(): AppThreadInterface
+    {
+        return self::$appThread;
+    }
+
+    /**
+     * This function must be invoked right after calling
+     * `setAppThread` with the new AppThread instance,
+     * to initialize it to run the application.
+     *
      * Either inject the desired instance, or have the Root
      * provide the default one.
+     * 
+     * It creates a new AppThread and sets it as the current
+     * object hosting all state in the application.
+     *
+     * @return AppThreadInterface The newly-created AppThread instance
      */
     public static function initialize(
         ?AppLoaderInterface $appLoader = null,
@@ -56,119 +70,65 @@ class App implements AppInterface
         ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void {
-        self::$appLoader = $appLoader ?? static::createAppLoader();
-        self::$hookManager = $hookManager ?? static::createHookManager();
-        self::$request = $request ?? static::createRequest();
-        self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
-        self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
-        self::$moduleManager = $moduleManager ?? static::createComponentManager();
-        self::$appStateManager = $appStateManager ?? static::createAppStateManager();
-
-        static::regenerateResponse();
-
-        // Inject the Components slated for initialization
-        self::$appLoader->addModuleClassesToInitialize(self::$moduleClassesToInitialize);
-        self::$moduleClassesToInitialize = [];
-
-        /**
-         * Indicate if this App is invoked via an HTTP request.
-         * If not, it may be directly invoked as a PHP component,
-         * or from a PHPUnit test.
-         */
-        self::$isHTTPRequest = self::server('REQUEST_METHOD') !== null;
-    }
-
-    protected static function createAppLoader(): AppLoaderInterface
-    {
-        return new AppLoader();
-    }
-
-    protected static function createHookManager(): HookManagerInterface
-    {
-        return new HookManager();
-    }
-
-    protected static function createRequest(): Request
-    {
-        return Request::createFromGlobals();
-    }
-
-    /**
-     * @see https://symfony.com/doc/current/components/http_foundation.html#response
-     */
-    protected static function createResponse(): Response
-    {
-        return new Response();
-    }
-
-    protected static function createContainerBuilderFactory(): ContainerBuilderFactory
-    {
-        return new ContainerBuilderFactory();
-    }
-
-    protected static function createSystemContainerBuilderFactory(): SystemContainerBuilderFactory
-    {
-        return new SystemContainerBuilderFactory();
-    }
-
-    protected static function createComponentManager(): ModuleManagerInterface
-    {
-        return new ModuleManager();
-    }
-
-    protected static function createAppStateManager(): AppStateManagerInterface
-    {
-        return new AppStateManager();
+        self::$appThread->initialize(
+            $appLoader,
+            $hookManager,
+            $request,
+            $containerBuilderFactory,
+            $systemContainerBuilderFactory,
+            $moduleManager,
+            $appStateManager,
+        );
     }
 
     public static function regenerateResponse(): void
     {
-        self::$response = static::createResponse();
+        self::$appThread->regenerateResponse();
     }
 
     public static function getAppLoader(): AppLoaderInterface
     {
-        return self::$appLoader;
+        return self::$appThread->getAppLoader();
     }
 
     public static function getHookManager(): HookManagerInterface
     {
-        return self::$hookManager;
+        return self::$appThread->getHookManager();
     }
 
     public static function getRequest(): Request
     {
-        return self::$request;
+        return self::$appThread->getRequest();
     }
 
     public static function getResponse(): Response
     {
-        return self::$response;
+        return self::$appThread->getResponse();
     }
 
     public static function getContainerBuilderFactory(): ContainerBuilderFactory
     {
-        return self::$containerBuilderFactory;
+        return self::$appThread->getContainerBuilderFactory();
     }
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory
     {
-        return self::$systemContainerBuilderFactory;
+        return self::$appThread->getSystemContainerBuilderFactory();
     }
 
     public static function getModuleManager(): ModuleManagerInterface
     {
-        return self::$moduleManager;
+        return self::$appThread->getModuleManager();
     }
 
     public static function getAppStateManager(): AppStateManagerInterface
     {
-        return self::$appStateManager;
+        return self::$appThread->getAppStateManager();
     }
 
     public static function isHTTPRequest(): bool
     {
-        return self::$isHTTPRequest;
+        return self::$appThread->isHTTPRequest();
     }
 
     /**
@@ -180,10 +140,7 @@ class App implements AppInterface
     public static function stockAndInitializeModuleClasses(
         array $moduleClasses
     ): void {
-        self::$moduleClassesToInitialize = array_merge(
-            self::$moduleClassesToInitialize,
-            $moduleClasses
-        );
+        self::$appThread->stockAndInitializeModuleClasses($moduleClasses);
     }
 
     /**
@@ -191,7 +148,7 @@ class App implements AppInterface
      */
     final public static function getContainer(): ContainerInterface
     {
-        return self::$containerBuilderFactory->getInstance();
+        return self::$appThread->getContainer();
     }
 
     /**
@@ -199,7 +156,7 @@ class App implements AppInterface
      */
     final public static function getSystemContainer(): ContainerInterface
     {
-        return self::$systemContainerBuilderFactory->getInstance();
+        return self::$appThread->getSystemContainer();
     }
 
     /**
@@ -210,7 +167,7 @@ class App implements AppInterface
      */
     final public static function getModule(string $moduleClass): ModuleInterface
     {
-        return self::$moduleManager->getModule($moduleClass);
+        return self::$appThread->getModule($moduleClass);
     }
 
     /**
@@ -219,15 +176,7 @@ class App implements AppInterface
      */
     final public static function getState(string|array $keyOrPath): mixed
     {
-        $appStateManager = self::$appStateManager;
-        if (is_array($keyOrPath)) {
-            /** @var string[] */
-            $path = $keyOrPath;
-            return $appStateManager->getUnder($path);
-        }
-        /** @var string */
-        $key = $keyOrPath;
-        return $appStateManager->get($key);
+        return self::$appThread->getState($keyOrPath);
     }
 
     /**
@@ -236,15 +185,7 @@ class App implements AppInterface
      */
     final public static function hasState(string|array $keyOrPath): mixed
     {
-        $appStateManager = self::$appStateManager;
-        if (is_array($keyOrPath)) {
-            /** @var string[] */
-            $path = $keyOrPath;
-            return $appStateManager->hasUnder($path);
-        }
-        /** @var string */
-        $key = $keyOrPath;
-        return $appStateManager->has($key);
+        return self::$appThread->hasState($keyOrPath);
     }
 
     /**
@@ -252,42 +193,42 @@ class App implements AppInterface
      */
     final public static function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
     {
-        self::$hookManager->addFilter($tag, $function_to_add, $priority, $accepted_args);
+        self::$appThread->addFilter($tag, $function_to_add, $priority, $accepted_args);
     }
     /**
      * Shortcut function.
      */
     final public static function removeFilter(string $tag, callable $function_to_remove, int $priority = 10): bool
     {
-        return self::$hookManager->removeFilter($tag, $function_to_remove, $priority);
+        return self::$appThread->removeFilter($tag, $function_to_remove, $priority);
     }
     /**
      * Shortcut function.
      */
     final public static function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
     {
-        return self::$hookManager->applyFilters($tag, $value, ...$args);
+        return self::$appThread->applyFilters($tag, $value, ...$args);
     }
     /**
      * Shortcut function.
      */
     final public static function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
     {
-        self::$hookManager->addAction($tag, $function_to_add, $priority, $accepted_args);
+        self::$appThread->addAction($tag, $function_to_add, $priority, $accepted_args);
     }
     /**
      * Shortcut function.
      */
     final public static function removeAction(string $tag, callable $function_to_remove, int $priority = 10): bool
     {
-        return self::$hookManager->removeAction($tag, $function_to_remove, $priority);
+        return self::$appThread->removeAction($tag, $function_to_remove, $priority);
     }
     /**
      * Shortcut function.
      */
     final public static function doAction(string $tag, mixed ...$args): void
     {
-        self::$hookManager->doAction($tag, ...$args);
+        self::$appThread->doAction($tag, ...$args);
     }
 
     /**
@@ -297,16 +238,7 @@ class App implements AppInterface
      */
     final public static function request(string $key, mixed $default = null): mixed
     {
-        /**
-         * `get` doesn't support arrays, then use ->all for that case
-         *
-         * @see https://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
-         */
-        try {
-            return self::$request->request->get($key, $default);
-        } catch (BadRequestException) {
-            return self::$request->request->all($key);
-        }
+        return self::$appThread->request($key, $default);
     }
 
     /**
@@ -316,16 +248,7 @@ class App implements AppInterface
      */
     final public static function query(string $key, mixed $default = null): mixed
     {
-        /**
-         * `get` doesn't support arrays, then use ->all for that case
-         *
-         * @see https://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
-         */
-        try {
-            return self::$request->query->get($key, $default);
-        } catch (BadRequestException) {
-            return self::$request->query->all($key);
-        }
+        return self::$appThread->query($key, $default);
     }
 
     /**
@@ -335,7 +258,7 @@ class App implements AppInterface
      */
     final public static function cookies(string $key, mixed $default = null): mixed
     {
-        return self::$request->cookies->get($key, $default);
+        return self::$appThread->cookies($key, $default);
     }
 
     /**
@@ -345,7 +268,7 @@ class App implements AppInterface
      */
     final public static function files(string $key, mixed $default = null): mixed
     {
-        return self::$request->files->get($key, $default);
+        return self::$appThread->files($key, $default);
     }
 
     /**
@@ -355,7 +278,7 @@ class App implements AppInterface
      */
     final public static function server(string $key, mixed $default = null): mixed
     {
-        return self::$request->server->get($key, $default);
+        return self::$appThread->server($key, $default);
     }
 
     /**
@@ -365,6 +288,6 @@ class App implements AppInterface
      */
     final public static function headers(string $key, mixed $default = null): mixed
     {
-        return self::$request->headers->get($key, $default);
+        return self::$appThread->headers($key, $default);
     }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\RootWP;
+namespace PoP\ComponentModel;
 
-use PoP\Root\App;
+use PoP\ComponentModel\App;
 
 abstract class AbstractModuleTest extends AbstractTestCase
 {

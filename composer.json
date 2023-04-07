@@ -595,18 +595,36 @@
         "init-server-prod": "composer init-server -d webservers/graphql-api-for-wp-for-prod",
         "start-server": "composer start-server -d webservers/graphql-api-for-wp",
         "destroy-server": "composer destroy-server -d webservers/graphql-api-for-wp",
-        "reset-db": "composer reset-db -d webservers/graphql-api-for-wp",
-        "reset-db-prod": "composer reset-db -d webservers/graphql-api-for-wp-for-prod",
+        "reset-db": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer reset-db -d webservers/graphql-api-for-wp"
+        ],
+        "reset-db-prod": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer reset-db -d webservers/graphql-api-for-wp-for-prod"
+        ],
         "install-site": "composer install-site -d webservers/graphql-api-for-wp",
         "import-data": "composer import-data -d webservers/graphql-api-for-wp",
         "create-users": "composer create-users -d webservers/graphql-api-for-wp",
         "update-deps": "composer update-deps -d webservers/graphql-api-for-wp",
         "optimize-autoloader": "composer optimize-autoloader -d webservers/graphql-api-for-wp",
         "deoptimize-autoloader": "composer deoptimize-autoloader -d webservers/graphql-api-for-wp",
-        "log-server-errors": "composer log-server-errors -d webservers/graphql-api-for-wp",
-        "log-server-warnings": "composer log-server-warnings -d webservers/graphql-api-for-wp",
-        "rebuild-server": "composer rebuild-server -d webservers/graphql-api-for-wp",
-        "rebuild-server-prod": "composer rebuild-server -d webservers/graphql-api-for-wp-for-prod",
+        "log-server-errors": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer log-server-errors -d webservers/graphql-api-for-wp"
+        ],
+        "log-server-warnings": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer log-server-warnings -d webservers/graphql-api-for-wp"
+        ],
+        "rebuild-server": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer rebuild-server -d webservers/graphql-api-for-wp"
+        ],
+        "rebuild-server-prod": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer rebuild-server -d webservers/graphql-api-for-wp-for-prod"
+        ],
         "stop-server": "composer stop-server -d webservers/graphql-api-for-wp",
         "enable-caching": "composer enable-caching -d webservers/graphql-api-for-wp",
         "disable-caching": "composer disable-caching -d webservers/graphql-api-for-wp",
@@ -625,9 +643,18 @@
         "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi",
         "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi",
         "remove-unused-imports": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
-        "build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp BUILD_PROD",
-        "install-deps-build-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp INSTALL_DEPS",
-        "npm-start-js": "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp COMPILE_DEV"
+        "build-js": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp BUILD_PROD"
+        ],
+        "install-deps-build-js": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp INSTALL_DEPS"
+        ],
+        "npm-start-js": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash -x dev-helpers/scripts/build-js.sh layers/GraphQLAPIForWP/plugins/graphql-api-for-wp COMPILE_DEV"
+        ]
     },
     "scripts-descriptions": {
         "all": "Execute all required tests (except downgrade)",

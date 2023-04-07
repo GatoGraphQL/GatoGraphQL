@@ -14,6 +14,7 @@ interface AppInterface extends UpstreamAppInterface
 {
     public static function initializePlugin(
         ?MainPluginManager $mainPluginManager = null,
+        ?ExtensionManager $extensionManager = null,
     ): void;
 
     public static function getMainPluginManager(): MainPluginManager;
