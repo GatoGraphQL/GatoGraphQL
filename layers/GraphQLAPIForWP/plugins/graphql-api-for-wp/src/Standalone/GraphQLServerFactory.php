@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Standalone;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Exception\GraphQLServerNotReadyException;
-use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 
 /**
  * Obtain a single instance of the GraphQLServer object,
