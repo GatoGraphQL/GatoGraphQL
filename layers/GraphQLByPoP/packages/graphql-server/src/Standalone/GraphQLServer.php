@@ -12,6 +12,7 @@ use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AppThread;
+use PoP\ComponentModel\AppThreadInterface;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\Root\Container\ContainerCacheConfiguration;
@@ -29,6 +30,7 @@ class GraphQLServer implements GraphQLServerInterface
      * @var array<class-string<ModuleInterface>>
      */
     private readonly array $moduleClasses;
+    private AppThreadInterface $appThread;
 
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
     private ?ApplicationStateFillerServiceInterface $applicationStateFillerService = null;
@@ -76,7 +78,17 @@ class GraphQLServer implements GraphQLServerInterface
             ]
         );
 
-        App::setAppThread(new AppThread());
+        /**
+         * Must generate the whole App state as if the
+         * request were a GraphQL request.
+         *
+         * Keep the current AppThread, create a new one,
+         * initialize it, and then restore the current AppThread.
+         */
+        $currentAppThread = App::getAppThread();
+
+        $this->appThread = new AppThread();
+        App::setAppThread($this->appThread);
         App::initialize();
         $appLoader = App::getAppLoader();
         $appLoader->addModuleClassesToInitialize($this->moduleClasses);
@@ -104,6 +116,9 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Finally trigger booting the components
         $appLoader->bootApplicationModules();
+
+        // Restore the original AppThread
+        App::setAppThread($currentAppThread);
     }
 
     /**
@@ -139,6 +154,13 @@ class GraphQLServer implements GraphQLServerInterface
         array $variables = [],
         ?string $operationName = null
     ): Response {
+        /**
+         * Keep the current AppThread, switch to the GraphQLServer's
+         * one, resolve the query, and then restore the current AppThread.
+         */
+        $currentAppThread = App::getAppThread();
+        App::setAppThread($this->appThread);
+        
         // Override the previous response, if any
         App::regenerateResponse();
 
@@ -154,7 +176,12 @@ class GraphQLServer implements GraphQLServerInterface
         // Generate the data, print the response to buffer, and send headers
         $engine->generateDataAndPrepareResponse();
 
+        $response = App::getResponse();
+
+        // Restore the original AppThread
+        App::setAppThread($currentAppThread);
+
         // Return the Response, so the client can retrieve content and headers
-        return App::getResponse();
+        return $response;
     }
 }
