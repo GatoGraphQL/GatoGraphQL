@@ -34,21 +34,12 @@ class GraphQLServerFactory
      * Create a new instance of the GraphQLServer
      *
      * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
-     *
-     * @see layers/Engine/packages/root-wp/src/AppLoader.php
      */
     private static function createInstance(): GraphQLServer
     {
         $appLoader = App::getAppLoader();
         if (!$appLoader->isReadyState()) {
-            throw new GraphQLServerNotReadyException(
-                sprintf(
-                    \__('The GraphQL server is not ready yet. Its initialization takes place in WordPress action hooks: \'%s\' in the wp-admin, \'%s\' in the WP REST API, and \'%s\' otherwise (i.e. in the actual website). Invoke the GraphQL server only after these hooks have been invoked.', 'graphql-api'),
-                    'wp_loaded',
-                    'rest_api_init',
-                    'wp'
-                )
-            );
+            throw new GraphQLServerNotReadyException();
         }
         return new GraphQLServer(
             $appLoader->getModuleClassesToInitialize(),
