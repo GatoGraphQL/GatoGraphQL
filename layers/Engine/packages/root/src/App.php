@@ -48,6 +48,15 @@ class App implements AppInterface
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
+     */
+    public static function createAppThread(): void
+    {
+        static::setAppThread(new AppThread());
+    }
+
+    /**
+     * This function must be invoked right after `createAppThread`,
+     * to initialize the instance to run the application.
      *
      * Either inject the desired instance, or have the Root
      * provide the default one.
@@ -65,10 +74,7 @@ class App implements AppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
-    ): AppThreadInterface {
-        // Create a new AppThread
-        self::$appThread = static::createAppThread();
-
+    ): void {
         self::$appThread->initialize(
             $appLoader,
             $hookManager,
@@ -78,16 +84,6 @@ class App implements AppInterface
             $moduleManager,
             $appStateManager,
         );
-
-        return self::$appThread;
-    }
-
-    /**
-     * Allow to override this class
-     */
-    protected static function createAppThread(): AppThreadInterface
-    {
-        return new AppThread();
     }
 
     public static function regenerateResponse(): void

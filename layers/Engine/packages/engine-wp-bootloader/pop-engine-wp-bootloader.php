@@ -22,6 +22,7 @@ if (!class_exists(App::class)) {
  * or not based on their required plugins being active.
  */
 \add_action('plugins_loaded', function(): void {
+    App::createAppThread();
     App::initialize(
         new AppLoader(),
         new HookManager()

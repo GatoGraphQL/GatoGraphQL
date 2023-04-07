@@ -9,7 +9,6 @@ use PoP\ComponentModel\Feedback\FeedbackStore;
 use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
 use PoP\ComponentModel\Tracing\TracingStore;
 use PoP\Root\App\AbstractRootAppProxy;
-use PoP\Root\AppThreadInterface as RootAppThreadInterface;
 
 /**
  * Facade to the current AppThread object that hosts
@@ -26,10 +25,13 @@ class App extends AbstractRootAppProxy implements AppInterface
     protected static EngineState $engineState;
     protected static MutationResolutionStoreInterface $mutationResolutionStore;
 
-    protected static function createAppThread(): RootAppThreadInterface
+    /**
+     * This function must be invoked at the very beginning,
+     * to initialize the instance to run the application.
+     */
+    public static function createAppThread(): void
     {
-        /** @var AppThreadInterface */
-        return new AppThread();
+        static::setAppThread(new AppThread());
     }
 
     public static function getFeedbackStore(): FeedbackStore

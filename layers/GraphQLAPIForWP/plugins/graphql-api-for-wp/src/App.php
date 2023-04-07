@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use PoP\ComponentModel\App\AbstractComponentModelAppProxy;
-use PoP\Root\AppThreadInterface as RootAppThreadInterface;
 
 /**
  * Keep all state in the application stored and accessible
@@ -20,10 +19,13 @@ use PoP\Root\AppThreadInterface as RootAppThreadInterface;
  */
 class App extends AbstractComponentModelAppProxy implements AppInterface
 {
-    protected static function createAppThread(): RootAppThreadInterface
+    /**
+     * This function must be invoked at the very beginning,
+     * to initialize the instance to run the application.
+     */
+    public static function createAppThread(): void
     {
-        /** @var AppThreadInterface */
-        return new AppThread();
+        static::setAppThread(new AppThread());
     }
     
     public static function initializePlugin(

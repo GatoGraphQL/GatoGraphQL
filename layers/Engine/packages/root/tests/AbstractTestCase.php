@@ -27,6 +27,7 @@ abstract class AbstractTestCase extends TestCase
         ?string $containerDirectory = null,
         bool $isDev = false
     ): void {
+        App::createAppThread();
         App::initialize(
             static::getAppLoader(),
             static::getHookManager(),

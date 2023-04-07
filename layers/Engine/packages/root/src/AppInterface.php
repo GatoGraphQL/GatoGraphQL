@@ -37,12 +37,18 @@ interface AppInterface
     public static function setAppThread(AppThreadInterface $appThread): void;
 
     /**
+     * This function must be invoked at the very beginning,
+     * to initialize the instance to run the application.
+     */
+    public static function createAppThread(): void;
+
+    /**
      * All methods below are facade accessor methods to
      * the AppThread class.
      */
 
     /**
-     * This function must be invoked at the very beginning,
+     * This function must be invoked right after `createAppThread`,
      * to initialize the instance to run the application.
      *
      * Either inject the desired instance, or have the Root
@@ -61,7 +67,7 @@ interface AppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
-    ): AppThreadInterface;
+    ): void;
 
     public static function regenerateResponse(): void;
 
