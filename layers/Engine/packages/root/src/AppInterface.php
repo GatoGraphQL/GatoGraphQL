@@ -55,8 +55,6 @@ interface AppInterface
      * 
      * It creates a new AppThread and sets it as the current
      * object hosting all state in the application.
-     *
-     * @return AppThreadInterface The newly-created AppThread instance
      */
     public static function initialize(
         ?AppLoaderInterface $appLoader = null,

@@ -24,7 +24,7 @@ class GraphQLServerFactory
     public static function getInstance(): GraphQLServer
     {
         if (self::$graphQLServer === null) {
-            self::$graphQLServer = static::createInstance();
+            self::$graphQLServer = self::createInstance();
         }
         return self::$graphQLServer;
     }
