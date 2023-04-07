@@ -10,6 +10,14 @@ use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
 use PoP\ComponentModel\Tracing\TracingStore;
 use PoP\Root\AppInterface as UpstreamAppInterface;
 
+/**
+ * Facade to the current AppThread object that hosts
+ * all the top-level instances to run the application.
+ *
+ * This interface contains all the methods from the
+ * AppThreadInterface (to provide access to them)
+ * but as static.
+ */
 interface AppInterface extends UpstreamAppInterface
 {
     public static function getFeedbackStore(): FeedbackStore;
