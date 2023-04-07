@@ -16,16 +16,42 @@ use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
 
 /**
- * Single class hosting all the top-level instances to run the application
+ * Facade to the current AppThread object that hosts
+ * all the top-level instances to run the application.
+ *
+ * This interface contains all the methods from the
+ * AppThreadInterface (to provide access to them)
+ * but as static.
  */
 interface AppInterface
 {
+    /**
+     * Allow to set and get the AppThread,
+     * to initiate a new context.
+     */
+    public static function getAppThread(): AppThreadInterface;
+    /**
+     * Allow to set and get the AppThread,
+     * to initiate a new context.
+     */
+    public static function setAppThread(AppThreadInterface $appThread): void;
+
+    /**
+     * All methods below are facade accessor methods to
+     * the AppThread class.
+     */
+
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
      *
      * Either inject the desired instance, or have the Root
      * provide the default one.
+     * 
+     * It creates a new AppThread and sets it as the current
+     * object hosting all state in the application.
+     *
+     * @return AppThreadInterface The newly-created AppThread instance
      */
     public static function initialize(
         ?AppLoaderInterface $appLoader = null,
@@ -35,7 +61,7 @@ interface AppInterface
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
         ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
-    ): void;
+    ): AppThreadInterface;
 
     public static function regenerateResponse(): void;
 
