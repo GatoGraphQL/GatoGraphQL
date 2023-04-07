@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\PluginUtils\Services\Helpers;
 
-use PoP\Root\AbstractTestCase;
+use PoP\ComponentModel\AbstractTestCase;
 
 class URLParamHelpersTest extends AbstractTestCase
 {

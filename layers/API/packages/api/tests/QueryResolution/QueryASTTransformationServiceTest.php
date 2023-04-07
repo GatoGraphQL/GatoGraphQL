@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\AbstractTestCase;
+use PoP\ComponentModel\AbstractTestCase;
 
 class QueryASTTransformationServiceTest extends AbstractTestCase
 {

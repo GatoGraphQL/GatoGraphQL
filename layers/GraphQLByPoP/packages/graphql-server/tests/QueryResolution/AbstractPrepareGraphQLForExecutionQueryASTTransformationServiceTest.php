@@ -18,7 +18,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\AbstractTestCase;
+use PoP\ComponentModel\AbstractTestCase;
 use PoP\Root\Module\ModuleInterface;
 use SplObjectStorage;
 
