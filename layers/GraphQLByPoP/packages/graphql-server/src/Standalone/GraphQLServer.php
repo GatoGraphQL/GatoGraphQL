@@ -15,11 +15,15 @@ use PoP\ComponentModel\AppThread;
 use PoP\ComponentModel\AppThreadInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\Root\AppLoader;
+use PoP\Root\AppLoaderInterface;
 use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Services\StandaloneServiceTrait;
+use PoP\Root\StateManagers\HookManager;
+use PoP\Root\StateManagers\HookManagerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class GraphQLServer implements GraphQLServerInterface
@@ -99,7 +103,10 @@ class GraphQLServer implements GraphQLServerInterface
 
         $this->appThread = new AppThread();
         App::setAppThread($this->appThread);
-        App::initialize();
+        App::initialize(
+            $this->getAppLoader(),
+            $this->getHookManager(),
+        );
         $appLoader = App::getAppLoader();
         $appLoader->addModuleClassesToInitialize($this->moduleClasses);
         $appLoader->initializeModules();
@@ -129,6 +136,16 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Restore the original AppThread
         App::setAppThread($currentAppThread);
+    }
+
+    protected function getAppLoader(): AppLoaderInterface
+    {
+        return new AppLoader();
+    }
+
+    protected function getHookManager(): HookManagerInterface
+    {
+        return new HookManager();
     }
 
     /**
