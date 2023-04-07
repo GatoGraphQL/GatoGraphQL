@@ -67,7 +67,7 @@ class App implements AppInterface
         ?AppStateManagerInterface $appStateManager = null,
     ): AppThreadInterface {
         // Create a new AppThread
-        self::$appThread = new AppThread();
+        self::$appThread = static::createAppThread();
 
         self::$appThread->initialize(
             $appLoader,
@@ -80,6 +80,14 @@ class App implements AppInterface
         );
 
         return self::$appThread;
+    }
+
+    /**
+     * Allow to override this class
+     */
+    protected static function createAppThread(): AppThreadInterface
+    {
+        return new AppThread();
     }
 
     public static function regenerateResponse(): void
