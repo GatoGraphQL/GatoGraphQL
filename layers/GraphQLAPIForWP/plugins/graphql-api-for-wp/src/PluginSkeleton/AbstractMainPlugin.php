@@ -385,7 +385,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action(
             'plugins_loaded',
             function (): void {
-                App::setAppThread(new AppThread);
+                App::setAppThread(new AppThread());
                 App::initialize(
                     new AppLoader(),
                     new HookManager()
