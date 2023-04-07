@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\StandaloneServer;
+namespace GraphQLAPI\GraphQLAPI\Standalone;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Exception\GraphQLServerNotReadyException;
