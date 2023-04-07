@@ -13,8 +13,8 @@ use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AppThread;
 use PoP\ComponentModel\AppThreadInterface;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
@@ -34,6 +34,7 @@ class GraphQLServer implements GraphQLServerInterface
 
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
     private ?ApplicationStateFillerServiceInterface $applicationStateFillerService = null;
+    private ?EngineInterface $engine = null;
 
     final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
     {
@@ -52,6 +53,15 @@ class GraphQLServer implements GraphQLServerInterface
     {
         /** @var ApplicationStateFillerServiceInterface */
         return $this->applicationStateFillerService ??= InstanceManagerFacade::getInstance()->getInstance(ApplicationStateFillerServiceInterface::class);
+    }
+    final public function setEngine(EngineInterface $engine): void
+    {
+        $this->engine = $engine;
+    }
+    final protected function getEngine(): EngineInterface
+    {
+        /** @var EngineInterface */
+        return $this->engine ??= InstanceManagerFacade::getInstance()->getInstance(EngineInterface::class);
     }
 
     /**
@@ -164,7 +174,7 @@ class GraphQLServer implements GraphQLServerInterface
         // Override the previous response, if any
         App::regenerateResponse();
 
-        $engine = EngineFacade::getInstance();
+        $engine = $this->getEngine();
         $engine->initializeState();
 
         $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
