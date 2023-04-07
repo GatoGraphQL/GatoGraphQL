@@ -12,20 +12,6 @@ use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
 use PoP\ComponentModel\Tracing\TracingStore;
 use PoP\Root\AppThread as RootAppThread;
 
-/**
- * Single class hosting all the top-level instances
- * to run the application. Only a single AppThread
- * will be active at a single time, and its state
- * will be accessed/modified by the whole application.
- * Access the current AppThread via the corresponding
- * methods in the `App` facade class.
- * 
- * It keeps all state in the application stored and
- * accessible in a single place, so that regenerating
- * this class provides a new state.
- *
- * Needed for PHPUnit.
- */
 class AppThread extends RootAppThread implements AppThreadInterface
 {
     protected FeedbackStore $feedbackStore;

@@ -34,56 +34,56 @@ class App extends AbstractRootAppProxy implements AppInterface
 
     public static function getFeedbackStore(): FeedbackStore
     {
-        /** @var AppThread */
+        /** @var AppThreadInterface */
         $appThread = static::getAppThread();
         return $appThread->getFeedbackStore();
     }
 
     public static function getTracingStore(): TracingStore
     {
-        /** @var AppThread */
+        /** @var AppThreadInterface */
         $appThread = static::getAppThread();
         return $appThread->getTracingStore();
     }
 
     public static function getEngineState(): EngineState
     {
-        /** @var AppThread */
+        /** @var AppThreadInterface */
         $appThread = static::getAppThread();
         return $appThread->getEngineState();
     }
 
     public static function getMutationResolutionStore(): MutationResolutionStoreInterface
     {
-        /** @var AppThread */
+        /** @var AppThreadInterface */
         $appThread = static::getAppThread();
         return $appThread->getMutationResolutionStore();
     }
 
     public static function regenerateFeedbackStore(): void
     {
-        /** @var AppThread */
+        /** @var AppThreadInterface */
         $appThread = static::getAppThread();
         $appThread->regenerateFeedbackStore();
     }
 
     public static function regenerateTracingStore(): void
     {
-        /** @var AppThread */
+        /** @var AppThreadInterface */
         $appThread = static::getAppThread();
         $appThread->regenerateTracingStore();
     }
 
     public static function regenerateEngineState(): void
     {
-        /** @var AppThread */
+        /** @var AppThreadInterface */
         $appThread = static::getAppThread();
         $appThread->regenerateEngineState();
     }
 
     public static function regenerateMutationResolutionStore(): void
     {
-        /** @var AppThread */
+        /** @var AppThreadInterface */
         $appThread = static::getAppThread();
         $appThread->regenerateMutationResolutionStore();
     }

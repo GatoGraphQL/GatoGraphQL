@@ -8,25 +8,25 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
-use PoP\ComponentModel\AppInterface as UpstreamAppInterface;
+use PoP\ComponentModel\AppThreadInterface as UpstreamAppThreadInterface;
 
-interface AppInterface extends UpstreamAppInterface
+interface AppThreadInterface extends UpstreamAppThreadInterface
 {
-    public static function initializePlugin(
+    public function initializePlugin(
         ?MainPluginManager $mainPluginManager = null,
         ?ExtensionManager $extensionManager = null,
     ): void;
 
-    public static function getMainPluginManager(): MainPluginManager;
-    public static function getExtensionManager(): ExtensionManager;
+    public function getMainPluginManager(): MainPluginManager;
+    public function getExtensionManager(): ExtensionManager;
 
     /**
      * Shortcut function.
      */
-    public static function getMainPlugin(): MainPluginInterface;
+    public function getMainPlugin(): MainPluginInterface;
 
     /**
      * Shortcut function.
      */
-    public static function getExtension(string $extensionClass): ExtensionInterface;
+    public function getExtension(string $extensionClass): ExtensionInterface;
 }

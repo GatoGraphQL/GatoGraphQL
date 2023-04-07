@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
 use PoP\ComponentModel\App\AbstractComponentModelAppProxy;
+use PoP\Root\AppThreadInterface as RootAppThreadInterface;
 
 /**
  * Keep all state in the application stored and accessible
@@ -19,35 +20,36 @@ use PoP\ComponentModel\App\AbstractComponentModelAppProxy;
  */
 class App extends AbstractComponentModelAppProxy implements AppInterface
 {
-    protected static MainPluginManager $mainPluginManager;
-    protected static ExtensionManager $extensionManager;
-
+    protected static function createAppThread(): RootAppThreadInterface
+    {
+        /** @var AppThreadInterface */
+        return new AppThread();
+    }
+    
     public static function initializePlugin(
         ?MainPluginManager $mainPluginManager = null,
         ?ExtensionManager $extensionManager = null,
     ): void {
-        self::$mainPluginManager = $mainPluginManager ?? static::createMainPluginManager();
-        self::$extensionManager = $extensionManager ?? static::createExtensionManager();
-    }
-
-    protected static function createExtensionManager(): ExtensionManager
-    {
-        return new ExtensionManager();
-    }
-
-    protected static function createMainPluginManager(): MainPluginManager
-    {
-        return new MainPluginManager();
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        $appThread->initializePlugin(
+            $mainPluginManager,
+            $extensionManager,
+        );
     }
 
     public static function getMainPluginManager(): MainPluginManager
     {
-        return self::$mainPluginManager;
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        return $appThread->getMainPluginManager();
     }
 
     public static function getExtensionManager(): ExtensionManager
     {
-        return self::$extensionManager;
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        return $appThread->getExtensionManager();
     }
 
     /**
@@ -55,7 +57,9 @@ class App extends AbstractComponentModelAppProxy implements AppInterface
      */
     public static function getMainPlugin(): MainPluginInterface
     {
-        return self::getMainPluginManager()->getPlugin();
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        return $appThread->getMainPlugin();
     }
 
     /**
@@ -65,6 +69,8 @@ class App extends AbstractComponentModelAppProxy implements AppInterface
      */
     public static function getExtension(string $extensionClass): ExtensionInterface
     {
-        return self::getExtensionManager()->getExtension($extensionClass);
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        return $appThread->getExtension($extensionClass);
     }
 }
