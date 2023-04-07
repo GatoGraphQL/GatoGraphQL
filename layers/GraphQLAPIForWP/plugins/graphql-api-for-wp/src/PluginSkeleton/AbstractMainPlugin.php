@@ -10,11 +10,12 @@ use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\Filesyste
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
+use PoP\RootWP\AppLoader;
+use PoP\RootWP\StateManagers\HookManager;
+use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
-use PoP\RootWP\AppLoader;
-use PoP\RootWP\StateManagers\HookManager;
 
 use function __;
 use function add_action;
