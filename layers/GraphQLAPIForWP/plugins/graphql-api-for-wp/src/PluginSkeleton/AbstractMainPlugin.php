@@ -383,10 +383,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         add_action(
             'plugins_loaded',
-            fn () => App::initialize(
-                new AppLoader(),
-                new HookManager()
-            ),
+            function (): void {
+                App::initialize(
+                    new AppLoader(),
+                    new HookManager()
+                );
+            },
             PluginLifecyclePriorities::INITIALIZE_APP
         );
         add_action(
