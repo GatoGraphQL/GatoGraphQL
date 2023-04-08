@@ -40,9 +40,10 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
             );
         }
         foreach ($servicesForEvent as $service) {
-            if ($service->isServiceEnabled()) {
-                $service->initialize();
+            if (!$service->isServiceEnabled()) {
+                continue;
             }
+            $service->initialize();
         }
     }
 }
