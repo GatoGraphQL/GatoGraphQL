@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
-use GraphQLByPoP\GraphQLServer\Standalone\StandaloneGraphQLServer;
+use GraphQLByPoP\GraphQLServer\Server\StandaloneGraphQLServer;
 use PHPUnit\Framework\TestCase;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Standalone;
+namespace GraphQLByPoP\GraphQLServer\Server;
 
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use GraphQLByPoP\GraphQLServer\Module;
