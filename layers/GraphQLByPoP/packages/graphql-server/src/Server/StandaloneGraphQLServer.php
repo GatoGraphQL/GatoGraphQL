@@ -109,8 +109,10 @@ class StandaloneGraphQLServer extends GraphQLServer
          * After booting the application, we can access the Application Container services.
          * Explicitly set the required state to execute GraphQL queries.
          */
-        $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
-        $graphQLRequestAppState['query'] = null;
+        $graphQLRequestAppState = [
+            ...$this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState(),
+            'query' => null,
+        ];
         $appLoader->setInitialAppState($graphQLRequestAppState);
 
         // Finally trigger booting the components
