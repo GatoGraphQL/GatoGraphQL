@@ -10,6 +10,7 @@ use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\Filesyste
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
@@ -541,6 +542,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             // Boot all PoP components, from this plugin and all extensions
             $appLoader = App::getAppLoader();
             $appLoader->bootApplication();
+
+            // After booting the application, we can access the Application Container services
+            // Explicitly set the required state to execute GraphQL queries
+            $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
+            $appLoader->setInitialAppState($graphQLRequestAppState);
+
             $appLoader->bootApplicationModules();
 
             // Custom logic
@@ -548,6 +555,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         } catch (Exception $e) {
             $this->inititalizationException = $e;
         }
+    }
+
+    protected function getGraphQLServerAppStateProviderService(): GraphQLServerAppStateProviderServiceInterface
+    {
+        /** @var GraphQLServerAppStateProviderServiceInterface */
+        return App::getContainer()->get(GraphQLServerAppStateProviderServiceInterface::class);
     }
 
     /**
