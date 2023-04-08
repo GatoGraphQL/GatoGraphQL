@@ -546,6 +546,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             /**
              * After booting the application, we can access the Application Container services.
              * Explicitly set the required state to execute GraphQL queries.
+             *
+             * Important: Setting the AppState as needed by GraphQL here
+             * means that the application is configured to always process
+             * GraphQL request, independently of what variables were actually
+             * set in the request. Then, we can obtain GraphQL responses using
+             * this plugin (eg: ?datastructure=rest is not supported).
              */
             $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
             $appLoader->setInitialAppState($graphQLRequestAppState);
