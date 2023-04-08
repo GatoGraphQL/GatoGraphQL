@@ -35,9 +35,9 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            \PoPAPI\API\Module::class,
-            \PoPAPI\RESTAPI\Module::class,
-            \PoPCMSSchema\CustomPosts\Module::class,
+            APIModule::class,
+            RESTAPIModule::class,
+            CustomPostsModule::class,
         ];
     }
 
@@ -72,7 +72,7 @@ class Module extends AbstractModule
                 $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPosts');
                 $this->initSchemaServices(
                     dirname(__DIR__),
-                    $skipSchema || in_array(\PoPCMSSchema\CustomPosts\Module::class, $skipSchemaModuleClasses),
+                    $skipSchema || in_array(CustomPostsModule::class, $skipSchemaModuleClasses),
                     '/ConditionalOnModule/CustomPosts'
                 );
 

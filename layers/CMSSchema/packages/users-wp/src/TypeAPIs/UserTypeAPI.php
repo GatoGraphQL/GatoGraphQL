@@ -88,7 +88,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         // Only difference: use `total_count` => true, `get_total` instead of `get_results`
         $args                = \wp_parse_args($query);
         $args['count_total'] = true;
-        $user_search = new \WP_User_Query($args);
+        $user_search = new WP_User_Query($args);
         $ret = (int) $user_search->get_total();
 
         // Remove the hook

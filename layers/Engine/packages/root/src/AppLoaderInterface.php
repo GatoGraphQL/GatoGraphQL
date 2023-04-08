@@ -20,6 +20,26 @@ interface AppLoaderInterface
     ): void;
 
     /**
+     * Get the Module classes to be initialized.
+     *
+     * Call this method after the GraphQL server is in ready state,
+     * to signify "Module classes already initialized"
+     *
+     * @return array<class-string<ModuleInterface>> $moduleClasses List of `Module` class to initialize
+     */
+    public function getModuleClassesToInitialize(): array;
+
+    /**
+     * Define that the application is ready to be used
+     */
+    public function setReadyState(bool $readyState): void;
+
+    /**
+     * Indicate if the application is ready to be used
+     */
+    public function isReadyState(): bool;
+
+    /**
      * Add configuration for the Module classes
      *
      * @param array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
@@ -28,6 +48,13 @@ interface AppLoaderInterface
     public function addModuleClassConfiguration(
         array $moduleClassConfiguration
     ): void;
+
+    /**
+     * Get configuration for the Module classes
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+     */
+    public function getModuleClassConfiguration(): array;
 
     /**
      * Inject Compiler Pass classes (eg: for testing)
@@ -39,6 +66,13 @@ interface AppLoaderInterface
     ): void;
 
     /**
+     * Get the Compiler Passes to boot the System (eg: when testing)
+     *
+     * @return array<class-string<CompilerPassInterface>> List of `CompilerPass` class to initialize
+     */
+    public function getSystemContainerCompilerPassClasses(): array;
+
+    /**
      * Inject Compiler Pass classes (eg: for testing)
      *
      * @param array<class-string<CompilerPassInterface>> $applicationContainerCompilerPassClasses List of `CompilerPass` class to initialize
@@ -46,6 +80,13 @@ interface AppLoaderInterface
     public function addApplicationContainerCompilerPassClasses(
         array $applicationContainerCompilerPassClasses
     ): void;
+
+    /**
+     * Get the Compiler Passes to boot the Application (eg: when testing)
+     *
+     * @return array<class-string<CompilerPassInterface>> List of `CompilerPass` class to initialize
+     */
+    public function getApplicationContainerCompilerPassClasses(): array;
 
     /**
      * Set the initial state, eg: when passing state via the request is disabled
@@ -83,6 +124,8 @@ interface AppLoaderInterface
     public function setContainerCacheConfiguration(
         ?ContainerCacheConfiguration $containerCacheConfiguration = null,
     ): void;
+
+    public function getContainerCacheConfiguration(): ?ContainerCacheConfiguration;
 
     /**
      * Boot the application. It does these steps:

@@ -14,7 +14,7 @@ abstract class AbstractLooseContractSet extends \PoP\LooseContracts\AbstractLoos
     {
         parent::initialize();
 
-        /** @var LegacyPoP\LooseContracts\LooseContractManagerInterface */
+        /** @var LooseContractManagerInterface */
         $looseContractManager = $this->getLooseContractManager();
         $looseContractManager->requireHooks(
             $this->getRequiredHooks()

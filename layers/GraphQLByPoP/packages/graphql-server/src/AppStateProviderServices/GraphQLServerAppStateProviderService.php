@@ -37,7 +37,6 @@ class GraphQLServerAppStateProviderService implements GraphQLServerAppStateProvi
             'scheme' => Schemes::API,
             'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
             'nature' => RequestNature::QUERY_ROOT,
-            'query' => null,
         ];
     }
 }

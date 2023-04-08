@@ -36,7 +36,7 @@ trait PureOperationDirectiveResolverTrait
      * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<\PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
+     * @param array<FieldDirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string,mixed> $messages
      */

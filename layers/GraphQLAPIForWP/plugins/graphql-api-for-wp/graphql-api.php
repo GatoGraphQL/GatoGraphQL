@@ -15,9 +15,8 @@ Domain Path: /languages
 GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
 */
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\AppThread;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -69,11 +68,10 @@ $commitHash = null;
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Initialize the GraphQL API App
-App::setAppThread(new AppThread());
-App::initializePlugin();
+PluginApp::initializePlugin();
 
 // Create and set-up the plugin instance
-App::getMainPluginManager()->register(new Plugin(
+PluginApp::getMainPluginManager()->register(new Plugin(
     __FILE__,
     $pluginVersion,
     $pluginName,

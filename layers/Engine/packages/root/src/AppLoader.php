@@ -37,6 +37,7 @@ class AppLoader implements AppLoaderInterface
      * @phpstan-var array<class-string<ModuleInterface>>
      */
     protected array $moduleClassesToInitialize = [];
+    protected bool $readyState = false;
     /**
      * [key]: Module class, [value]: Configuration
      *
@@ -93,6 +94,35 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
+     * Get the Module classes to be initialized.
+     *
+     * Call this method after the GraphQL server is in ready state,
+     * to signify "Module classes already initialized"
+     *
+     * @return array<class-string<ModuleInterface>> List of `Module` class to initialize
+     */
+    public function getModuleClassesToInitialize(): array
+    {
+        return $this->moduleClassesToInitialize;
+    }
+
+    /**
+     * Define that the application is ready to be used
+     */
+    public function setReadyState(bool $readyState): void
+    {
+        $this->readyState = $readyState;
+    }
+
+    /**
+     * Indicate if the application is ready to be used
+     */
+    public function isReadyState(): bool
+    {
+        return $this->readyState;
+    }
+
+    /**
      * Add configuration for the Module classes
      *
      * @param array<string,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
@@ -112,6 +142,16 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
+     * Get configuration for the Module classes
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
+     */
+    public function getModuleClassConfiguration(): array
+    {
+        return $this->moduleClassConfiguration;
+    }
+
+    /**
      * Inject Compiler Passes to boot the System (eg: when testing)
      *
      * @param array<class-string<CompilerPassInterface>> $systemContainerCompilerPassClasses List of `CompilerPass` class to initialize
@@ -126,6 +166,16 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
+     * Get the Compiler Passes to boot the System (eg: when testing)
+     *
+     * @return array<class-string<CompilerPassInterface>> List of `CompilerPass` class to initialize
+     */
+    public function getSystemContainerCompilerPassClasses(): array
+    {
+        return $this->systemContainerCompilerPassClasses;
+    }
+
+    /**
      * Inject Compiler Passes to boot the Application (eg: when testing)
      *
      * @param array<class-string<CompilerPassInterface>> $applicationContainerCompilerPassClasses List of `CompilerPass` class to initialize
@@ -137,6 +187,16 @@ class AppLoader implements AppLoaderInterface
             $this->applicationContainerCompilerPassClasses,
             $applicationContainerCompilerPassClasses
         );
+    }
+
+    /**
+     * Get the Compiler Passes to boot the Application (eg: when testing)
+     *
+     * @return array<class-string<CompilerPassInterface>> List of `CompilerPass` class to initialize
+     */
+    public function getApplicationContainerCompilerPassClasses(): array
+    {
+        return $this->applicationContainerCompilerPassClasses;
     }
 
     /**
@@ -305,6 +365,11 @@ class AppLoader implements AppLoaderInterface
         ?ContainerCacheConfiguration $containerCacheConfiguration = null,
     ): void {
         $this->containerCacheConfiguration = $containerCacheConfiguration;
+    }
+
+    public function getContainerCacheConfiguration(): ?ContainerCacheConfiguration
+    {
+        return $this->containerCacheConfiguration;
     }
 
     /**
@@ -490,5 +555,8 @@ class AppLoader implements AppLoaderInterface
 
         // Allow to inject functionality
         App::doAction(HookNames::AFTER_BOOT_APPLICATION);
+
+        // Signal that the GraphQL server is ready to be invoked
+        $this->setReadyState(true);
     }
 }

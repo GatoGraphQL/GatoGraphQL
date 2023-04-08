@@ -9,7 +9,9 @@ use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOExceptio
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
@@ -166,7 +168,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $fileSystemWrapper = new FilesystemWrapper();
         try {
             /** @var MainPluginInfoInterface */
-            $mainPluginInfo = App::getMainPlugin()->getInfo();
+            $mainPluginInfo = PluginApp::getMainPlugin()->getInfo();
             $fileSystemWrapper->remove($mainPluginInfo->getCacheDir());
         } catch (IOException) {
             // If the folder does not exist, do nothing
@@ -265,7 +267,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
                 $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
-                $registeredExtensionBaseNameInstances = App::getExtensionManager()->getExtensions();
+                $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
 
                 // Check if the main plugin has been activated or updated
                 $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
@@ -541,6 +543,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             // Boot all PoP components, from this plugin and all extensions
             $appLoader = App::getAppLoader();
             $appLoader->bootApplication();
+
+            /**
+             * After booting the application, we can access the Application Container services.
+             * Explicitly set the required state to execute GraphQL queries.
+             *
+             * Important: Setting the AppState as needed by GraphQL here
+             * means that the application is configured to always process
+             * GraphQL request, independently of what variables were actually
+             * set in the request. Then, we can obtain GraphQL responses using
+             * this plugin (eg: ?datastructure=rest is not supported).
+             */
+            $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
+            $appLoader->setInitialAppState($graphQLRequestAppState);
+
             $appLoader->bootApplicationModules();
 
             // Custom logic
@@ -548,6 +564,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         } catch (Exception $e) {
             $this->inititalizationException = $e;
         }
+    }
+
+    protected function getGraphQLServerAppStateProviderService(): GraphQLServerAppStateProviderServiceInterface
+    {
+        /** @var GraphQLServerAppStateProviderServiceInterface */
+        return App::getContainer()->get(GraphQLServerAppStateProviderServiceInterface::class);
     }
 
     /**

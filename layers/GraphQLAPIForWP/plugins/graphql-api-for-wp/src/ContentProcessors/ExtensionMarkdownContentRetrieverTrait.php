@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
-use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 
 trait ExtensionMarkdownContentRetrieverTrait
@@ -19,7 +19,7 @@ trait ExtensionMarkdownContentRetrieverTrait
      */
     protected function getBaseDir(): string
     {
-        return App::getExtension($this->getExtensionClass())->getPluginDir();
+        return PluginApp::getExtension($this->getExtensionClass())->getPluginDir();
     }
 
     /**
@@ -27,7 +27,7 @@ trait ExtensionMarkdownContentRetrieverTrait
      */
     protected function getBaseURL(): string
     {
-        return App::getExtension($this->getExtensionClass())->getPluginURL();
+        return PluginApp::getExtension($this->getExtensionClass())->getPluginURL();
     }
 
     /**

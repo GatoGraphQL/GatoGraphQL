@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use Error;
-use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
@@ -320,8 +320,8 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
              * Register Highlight.js CSS file for documentation
              */
             if ($this->registerHighlightJSCSS()) {
-                $mainPluginURL = App::getMainPlugin()->getPluginURL();
-                $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+                $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
+                $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
                 \wp_enqueue_style(
                     'highlight-style',
                     $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css',

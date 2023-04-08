@@ -29,7 +29,7 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            \PoP\CacheControl\Module::class,
+            CacheControlModule::class,
         ];
     }
 
@@ -48,7 +48,7 @@ class Module extends AbstractModule
             if (class_exists(CacheControlModule::class) && App::getModule(CacheControlModule::class)->isEnabled()) {
                 $this->initSchemaServices(
                     dirname(__DIR__),
-                    $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses),
+                    $skipSchema || in_array(CacheControlModule::class, $skipSchemaModuleClasses),
                     '/ConditionalOnModule/CacheControl'
                 );
             }

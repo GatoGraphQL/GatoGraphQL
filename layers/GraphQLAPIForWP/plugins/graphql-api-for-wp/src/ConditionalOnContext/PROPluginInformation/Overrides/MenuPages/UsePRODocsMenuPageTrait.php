@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\App;
-
+use GraphQLAPI\GraphQLAPI\PluginApp;
 trait UsePRODocsMenuPageTrait
 {
     protected function enqueuePRODocsAssets(): void
     {
-        $mainPluginURL = App::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
 
         /**
          * Add tabs to the documentation

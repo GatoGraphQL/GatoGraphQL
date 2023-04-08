@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
-use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
+use GraphQLByPoP\GraphQLServer\Server\StandaloneGraphQLServer;
 use PHPUnit\Framework\TestCase;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
@@ -15,16 +15,16 @@ use stdClass;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
 {
-    private static GraphQLServer $graphQLServer;
+    private static StandaloneGraphQLServer $standaloneGraphQLServer;
 
     public static function setUpBeforeClass(): void
     {
-        self::$graphQLServer = static::createGraphQLServer();
+        self::$standaloneGraphQLServer = static::createGraphQLServer();
     }
 
-    protected static function createGraphQLServer(): GraphQLServer
+    protected static function createGraphQLServer(): StandaloneGraphQLServer
     {
-        return new GraphQLServer(
+        return new StandaloneGraphQLServer(
             static::getGraphQLServerModuleClasses(),
             static::getGraphQLServerModuleClassConfiguration(),
             static::getGraphQLServerSystemContainerCompilerPassClasses(),
@@ -37,9 +37,9 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         return InstanceManagerFacade::getInstance()->getInstance($service);
     }
 
-    protected static function getGraphQLServer(): GraphQLServer
+    protected static function getGraphQLServer(): StandaloneGraphQLServer
     {
-        return self::$graphQLServer;
+        return self::$standaloneGraphQLServer;
     }
 
     /**

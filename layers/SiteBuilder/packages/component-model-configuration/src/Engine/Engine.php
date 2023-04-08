@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
+use LegacyPoP\LooseContracts\LooseContractManagerInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -30,7 +31,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
     protected function generateData(): void
     {
-        /** @var LegacyPoP\LooseContracts\LooseContractManagerInterface */
+        /** @var LooseContractManagerInterface */
         $looseContractManager = $this->getLooseContractManager();
 
         // Check if there are hooks that must be implemented by the CMS, that have not been done so.

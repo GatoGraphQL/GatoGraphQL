@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -441,7 +442,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     </div>
                 </div>
             </div>
-        <?php
+<?php
     }
 
     /**
@@ -466,8 +467,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function enqueueSettingsAssets(): void
     {
-        $mainPluginURL = App::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
 
         \wp_enqueue_script(
             'graphql-api-settings',

@@ -8,7 +8,7 @@ class PluginStaticHelpers
 {
     public static function getGitHubRepoDocsRootPathURL(): string
     {
-        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         $tag = str_ends_with($mainPluginVersion, '-dev')
             ? 'master'
             : $mainPluginVersion;

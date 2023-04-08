@@ -34,7 +34,7 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\Users\Module::class,
+            UsersModule::class,
         ];
     }
 

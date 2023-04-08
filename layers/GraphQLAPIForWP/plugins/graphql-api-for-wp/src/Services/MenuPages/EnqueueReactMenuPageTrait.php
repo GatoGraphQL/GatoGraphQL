@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 
 trait EnqueueReactMenuPageTrait
 {
@@ -13,8 +13,8 @@ trait EnqueueReactMenuPageTrait
      */
     protected function enqueueReactAssets(bool $addInFooter = true): void
     {
-        $mainPluginURL = App::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
 
         \wp_enqueue_script(
             'graphql-api-react',

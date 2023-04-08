@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
-use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 
 trait ExtensionScriptTrait
@@ -16,12 +16,12 @@ trait ExtensionScriptTrait
 
     protected function getPluginDir(): string
     {
-        return App::getExtension($this->getExtensionClass())->getPluginDir();
+        return PluginApp::getExtension($this->getExtensionClass())->getPluginDir();
     }
 
     protected function getPluginURL(): string
     {
         // Remove the trailing slash
-        return trim(App::getExtension($this->getExtensionClass())->getPluginURL(), '/');
+        return trim(PluginApp::getExtension($this->getExtensionClass())->getPluginURL(), '/');
     }
 }

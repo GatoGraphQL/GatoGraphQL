@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInfoInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
+use PoP\Root\Services\BasicServiceTrait;
 
 /**
  * Inject configuration to the cache
@@ -78,8 +78,8 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     protected function getMainPluginAndExtensionsTimestamp(): string
     {
         $pluginVersions = [];
-        $pluginVersions[] = App::getMainPlugin()->getPluginVersionWithCommitHash();
-        foreach (App::getExtensionManager()->getExtensions() as $extensionInstance) {
+        $pluginVersions[] = PluginApp::getMainPlugin()->getPluginVersionWithCommitHash();
+        foreach (PluginApp::getExtensionManager()->getExtensions() as $extensionInstance) {
             $pluginVersions[] = $extensionInstance->getPluginVersionWithCommitHash();
         }
         $pluginVersion = hash('md5', implode('|', $pluginVersions));
@@ -99,7 +99,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     public function getDirectory(): ?string
     {
         /** @var MainPluginInfoInterface */
-        $mainPluginInfo = App::getMainPlugin()->getInfo();
+        $mainPluginInfo = PluginApp::getMainPlugin()->getInfo();
         $mainPluginCacheDir = $mainPluginInfo->getCacheDir();
         return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . $this->getDirectoryName();
     }
