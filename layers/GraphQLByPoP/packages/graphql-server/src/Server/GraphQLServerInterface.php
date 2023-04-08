@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Standalone;
+namespace GraphQLByPoP\GraphQLServer\Server;
 
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\HttpFoundation\Response;

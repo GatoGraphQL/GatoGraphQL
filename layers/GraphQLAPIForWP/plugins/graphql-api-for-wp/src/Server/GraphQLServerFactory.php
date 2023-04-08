@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Standalone;
+namespace GraphQLAPI\GraphQLAPI\Server;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Exception\GraphQLServerNotReadyException;
+use GraphQLByPoP\GraphQLServer\Server\GraphQLServer;
 
 /**
  * Obtain a single instance of the GraphQLServer object,
@@ -40,12 +41,6 @@ class GraphQLServerFactory
         if (!$appLoader->isReadyState()) {
             throw new GraphQLServerNotReadyException();
         }
-        return new GraphQLServer(
-            $appLoader->getModuleClassesToInitialize(),
-            $appLoader->getModuleClassConfiguration(),
-            $appLoader->getSystemContainerCompilerPassClasses(),
-            $appLoader->getApplicationContainerCompilerPassClasses(),
-            $appLoader->getContainerCacheConfiguration(),
-        );
+        return new GraphQLServer();
     }
 }

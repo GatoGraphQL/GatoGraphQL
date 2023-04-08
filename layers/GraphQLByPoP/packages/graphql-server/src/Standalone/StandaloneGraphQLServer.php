@@ -6,37 +6,33 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use GraphQLByPoP\GraphQLServer\Module;
-use PoPAPI\API\HelperServices\ApplicationStateFillerServiceInterface;
+use GraphQLByPoP\GraphQLServer\Server\GraphQLServer;
 use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AppThread;
-use PoP\ComponentModel\AppThreadInterface;
-use PoP\ComponentModel\Engine\EngineInterface;
-use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\AppLoader;
 use PoP\Root\AppLoaderInterface;
 use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
-use PoP\Root\Services\StandaloneServiceTrait;
 use PoP\Root\StateManagers\HookManager;
 use PoP\Root\StateManagers\HookManagerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-class GraphQLServer implements GraphQLServerInterface
+/**
+ * This class must be used when there is no underlying
+ * PoP architecture that renders the response, hence the
+ * constructor must emulate the initialization of the
+ * whole application.
+ */
+class StandaloneGraphQLServer extends GraphQLServer
 {
-    use StandaloneServiceTrait;
-
     /**
      * @var array<class-string<ModuleInterface>>
      */
     private readonly array $moduleClasses;
-    private AppThreadInterface $appThread;
 
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
-    private ?ApplicationStateFillerServiceInterface $applicationStateFillerService = null;
-    private ?EngineInterface $engine = null;
     private ?GraphQLServerAppStateProviderServiceInterface $graphQLServerAppStateProviderService = null;
 
     final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
@@ -47,24 +43,6 @@ class GraphQLServer implements GraphQLServerInterface
     {
         /** @var GraphQLParserHelperServiceInterface */
         return $this->graphQLParserHelperService ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLParserHelperServiceInterface::class);
-    }
-    final public function setApplicationStateFillerService(ApplicationStateFillerServiceInterface $applicationStateFillerService): void
-    {
-        $this->applicationStateFillerService = $applicationStateFillerService;
-    }
-    final protected function getApplicationStateFillerService(): ApplicationStateFillerServiceInterface
-    {
-        /** @var ApplicationStateFillerServiceInterface */
-        return $this->applicationStateFillerService ??= InstanceManagerFacade::getInstance()->getInstance(ApplicationStateFillerServiceInterface::class);
-    }
-    final public function setEngine(EngineInterface $engine): void
-    {
-        $this->engine = $engine;
-    }
-    final protected function getEngine(): EngineInterface
-    {
-        /** @var EngineInterface */
-        return $this->engine ??= InstanceManagerFacade::getInstance()->getInstance(EngineInterface::class);
     }
     final public function setGraphQLServerAppStateProviderService(GraphQLServerAppStateProviderServiceInterface $graphQLServerAppStateProviderService): void
     {
@@ -100,17 +78,7 @@ class GraphQLServer implements GraphQLServerInterface
             ]
         );
 
-        /**
-         * Must generate the whole App state as if the
-         * request were a GraphQL request.
-         *
-         * Keep the current AppThread, create a new one,
-         * initialize it, and then restore the current AppThread.
-         */
-        $currentAppThread = App::getAppThread();
-
-        $this->appThread = new AppThread();
-        App::setAppThread($this->appThread);
+        App::setAppThread(new AppThread());
         App::initialize(
             $this->getAppLoader(),
             $this->getHookManager(),
@@ -146,9 +114,6 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Finally trigger booting the components
         $appLoader->bootApplicationModules();
-
-        // Restore the original AppThread
-        App::setAppThread($currentAppThread);
     }
 
     protected function getAppLoader(): AppLoaderInterface
@@ -159,48 +124,5 @@ class GraphQLServer implements GraphQLServerInterface
     protected function getHookManager(): HookManagerInterface
     {
         return new HookManager();
-    }
-
-    /**
-     * The basic state for executing GraphQL queries is already set.
-     * In addition, inject the actual GraphQL query and variables,
-     * build the AST, and generate and print the data.
-     *
-     * @param array<string,mixed> $variables
-     */
-    public function execute(
-        string|ExecutableDocument $queryOrExecutableDocument,
-        array $variables = [],
-        ?string $operationName = null
-    ): Response {
-        /**
-         * Keep the current AppThread, switch to the GraphQLServer's
-         * one, resolve the query, and then restore the current AppThread.
-         */
-        $currentAppThread = App::getAppThread();
-        App::setAppThread($this->appThread);
-        
-        // Override the previous response, if any
-        App::regenerateResponse();
-
-        $engine = $this->getEngine();
-        $engine->initializeState();
-
-        $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
-            $queryOrExecutableDocument,
-            $variables,
-            $operationName,
-        );
-
-        // Generate the data, print the response to buffer, and send headers
-        $engine->generateDataAndPrepareResponse();
-
-        $response = App::getResponse();
-
-        // Restore the original AppThread
-        App::setAppThread($currentAppThread);
-
-        // Return the Response, so the client can retrieve content and headers
-        return $response;
     }
 }
