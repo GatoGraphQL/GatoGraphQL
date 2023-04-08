@@ -46,6 +46,12 @@ trait RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait
         $xdebugTrigger = getenv(FrameworkParams::XDEBUG_TRIGGER);
         if ($xdebugTrigger !== false) {
             $options[RequestOptions::QUERY][FrameworkParams::XDEBUG_TRIGGER] = $xdebugTrigger;
+            /**
+             * Must also pass ?XDEBUG_SESSION_STOP=1 in the URL to avoid
+             * setting cookie XDEBUG_SESSION="1", which launches the
+             * debugger every single time
+             */
+            $options[RequestOptions::QUERY][FrameworkParams::XDEBUG_SESSION_STOP] = '1';
         }
         return $options;
     }

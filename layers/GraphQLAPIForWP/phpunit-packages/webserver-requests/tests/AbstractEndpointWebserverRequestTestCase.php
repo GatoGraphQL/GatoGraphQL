@@ -138,6 +138,12 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         }
         $xdebugParams = [
             'XDEBUG_TRIGGER' => getenv('XDEBUG_TRIGGER'),
+            /**
+             * Must also pass ?XDEBUG_SESSION_STOP=1 in the URL to avoid
+             * setting cookie XDEBUG_SESSION="1", which launches the
+             * debugger every single time
+             */
+            'XDEBUG_SESSION_STOP' => '1',
         ];
         if (is_array($urlOrParams)) {
             /** @var string[] */

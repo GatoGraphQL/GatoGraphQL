@@ -19,6 +19,12 @@ class RequestHelpers
         if (RootEnvironment::isApplicationEnvironmentDev() && App::getRequest()->query->has('XDEBUG_TRIGGER')) {
             $url = GeneralUtils::addQueryArgs([
                 FrameworkParams::XDEBUG_TRIGGER => (string)App::getRequest()->query->get('XDEBUG_TRIGGER'),
+                /**
+                 * Must also pass ?XDEBUG_SESSION_STOP=1 in the URL to avoid
+                 * setting cookie XDEBUG_SESSION="1", which launches the
+                 * debugger every single time
+                 */
+                FrameworkParams::XDEBUG_SESSION_STOP => '1',
             ], $url);
         }
         return $url;

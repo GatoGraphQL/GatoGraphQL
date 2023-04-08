@@ -578,7 +578,7 @@
             "Composer\\Config::disableProcessTimeout",
             "INTEGRATION_TESTS_WEBSERVER_DOMAIN=graphql-api-for-prod.lndo.site phpunit --filter='Integration'"
         ],
-        "debug": "XDEBUG_TRIGGER=debug phpunit",
+        "debug": "XDEBUG_TRIGGER=1 phpunit",
         "check-style": "phpcs -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "fix-style": "php -d memory_limit=512M vendor/bin/phpcbf -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "analyse": "phpstan analyse --memory-limit 1G --ansi",
