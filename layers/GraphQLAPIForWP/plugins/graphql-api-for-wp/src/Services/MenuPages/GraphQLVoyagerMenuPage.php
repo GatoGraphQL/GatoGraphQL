@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\PluginApp;
+
 /**
  * Voyager page
  */
@@ -30,8 +32,8 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
     {
         parent::enqueueAssets();
 
-        $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginVersion();
+        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
 
         // CSS
         \wp_enqueue_style(

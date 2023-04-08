@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use PoP\Root\App;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
 use WP_Post;
@@ -29,7 +31,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
      */
     public function maybeGetGraphQLQuerySourceContent(string $content): string
     {
-        $customPost = \PoP\Root\App::getState(['routing', 'queried-object']);
+        $customPost = App::getState(['routing', 'queried-object']);
         // Make sure there is a post (eg: it has not been deleted)
         if ($customPost !== null) {
             return $this->getGraphQLQuerySourceContent($content, $customPost);
@@ -61,7 +63,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
          */
         $linkTagPlaceholder = '<link rel="stylesheet" href="%s">';
         $scriptTagPlaceholder = '<script src="%s"></script>';
-        $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
         $content .= sprintf(
             $linkTagPlaceholder,
             $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css'

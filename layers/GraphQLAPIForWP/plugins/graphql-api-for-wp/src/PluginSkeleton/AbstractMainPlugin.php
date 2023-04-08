@@ -168,7 +168,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $fileSystemWrapper = new FilesystemWrapper();
         try {
             /** @var MainPluginInfoInterface */
-            $mainPluginInfo = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getInfo();
+            $mainPluginInfo = PluginApp::getMainPlugin()->getInfo();
             $fileSystemWrapper->remove($mainPluginInfo->getCacheDir());
         } catch (IOException) {
             // If the folder does not exist, do nothing

@@ -78,7 +78,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     protected function getMainPluginAndExtensionsTimestamp(): string
     {
         $pluginVersions = [];
-        $pluginVersions[] = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginVersionWithCommitHash();
+        $pluginVersions[] = PluginApp::getMainPlugin()->getPluginVersionWithCommitHash();
         foreach (PluginApp::getExtensionManager()->getExtensions() as $extensionInstance) {
             $pluginVersions[] = $extensionInstance->getPluginVersionWithCommitHash();
         }
@@ -99,7 +99,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     public function getDirectory(): ?string
     {
         /** @var MainPluginInfoInterface */
-        $mainPluginInfo = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getInfo();
+        $mainPluginInfo = PluginApp::getMainPlugin()->getInfo();
         $mainPluginCacheDir = $mainPluginInfo->getCacheDir();
         return $mainPluginCacheDir . \DIRECTORY_SEPARATOR . $this->getDirectoryName();
     }

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\PluginApp;
+
 trait UseDocsMenuPageTrait
 {
     protected function enqueueDocsAssets(): void
     {
-        $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginVersion();
+        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
 
         /**
          * Add tabs to the documentation

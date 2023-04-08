@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
 
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Exception\ContentNotExistsException;
 use GraphQLAPI\GraphQLAPI\PluginStaticHelpers;
@@ -72,7 +73,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseDir(?string $baseDir = null): void
     {
-        $this->baseDir = $baseDir ?? \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginDir();
+        $this->baseDir = $baseDir ?? PluginApp::getMainPlugin()->getPluginDir();
     }
 
     /**
@@ -81,7 +82,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseURL(?string $baseURL = null): void
     {
-        $this->baseURL = $baseURL ?? \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
+        $this->baseURL = $baseURL ?? PluginApp::getMainPlugin()->getPluginURL();
     }
 
     /**

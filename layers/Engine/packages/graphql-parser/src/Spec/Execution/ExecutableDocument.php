@@ -91,9 +91,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      * - If the Document has only 1 operation, then that one
      * - If it has more than 1 operation, the one indicated via ?operationName=...
      *
-     * @return OperationInterface
      * @throws InvalidRequestException
-     *
      * @see https://spec.graphql.org/draft/#sec-Executing-Requests
      */
     protected function assertAndGetRequestedOperation(): OperationInterface
