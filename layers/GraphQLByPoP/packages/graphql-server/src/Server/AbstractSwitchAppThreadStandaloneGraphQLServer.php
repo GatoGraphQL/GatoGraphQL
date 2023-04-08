@@ -75,7 +75,7 @@ abstract class AbstractSwitchAppThreadStandaloneGraphQLServer extends Standalone
          */
         $currentAppThread = App::getAppThread();
         App::setAppThread($this->appThread);
-        
+
         $response = parent::execute(
             $queryOrExecutableDocument,
             $variables,

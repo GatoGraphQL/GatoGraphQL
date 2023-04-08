@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\App;
-
 trait UsePRODocsMenuPageTrait
 {
     protected function enqueuePRODocsAssets(): void

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Admin\Tables;
 
-use GraphQLAPI\GraphQLAPI\App;
 use WP_List_Table;
 
 /**

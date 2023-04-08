@@ -29,7 +29,7 @@ class GraphQLServerFactory
         }
         return self::$graphQLServer;
     }
-    
+
     /**
      * Create a new instance of the GraphQLServer
      *
