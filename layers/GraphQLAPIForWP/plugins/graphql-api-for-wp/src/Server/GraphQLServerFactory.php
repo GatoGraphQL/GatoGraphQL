@@ -42,5 +42,22 @@ class GraphQLServerFactory
             throw new GraphQLServerNotReadyException();
         }
         return new GraphQLServer();
+
+        /**
+         * If we need to use a StandaloneGraphQLServer,
+         * then retrieve the configuration (already set
+         * by the MainPlugin and all the Extensions) from
+         * the current AppLoader.
+         *
+         * Keeping this code commented as it may prove
+         * useful at some point.
+         */
+        // return new StandaloneGraphQLServer(
+        //     $appLoader->getModuleClassesToInitialize(),
+        //     $appLoader->getModuleClassConfiguration(),
+        //     $appLoader->getSystemContainerCompilerPassClasses(),
+        //     $appLoader->getApplicationContainerCompilerPassClasses(),
+        //     $appLoader->getContainerCacheConfiguration(),
+        // );
     }
 }
