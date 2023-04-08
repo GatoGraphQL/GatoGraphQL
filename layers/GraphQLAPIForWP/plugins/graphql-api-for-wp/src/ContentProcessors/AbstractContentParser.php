@@ -73,7 +73,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseDir(?string $baseDir = null): void
     {
-        $this->baseDir = $baseDir ?? App::getMainPlugin()->getPluginDir();
+        $this->baseDir = $baseDir ?? \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginDir();
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     public function setBaseURL(?string $baseURL = null): void
     {
-        $this->baseURL = $baseURL ?? App::getMainPlugin()->getPluginURL();
+        $this->baseURL = $baseURL ?? \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
     }
 
     /**

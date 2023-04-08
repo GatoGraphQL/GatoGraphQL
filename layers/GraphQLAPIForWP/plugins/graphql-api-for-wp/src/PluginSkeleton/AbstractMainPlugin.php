@@ -9,14 +9,15 @@ use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOExceptio
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use function __;
 use function add_action;
 use function do_action;
@@ -167,7 +168,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $fileSystemWrapper = new FilesystemWrapper();
         try {
             /** @var MainPluginInfoInterface */
-            $mainPluginInfo = App::getMainPlugin()->getInfo();
+            $mainPluginInfo = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getInfo();
             $fileSystemWrapper->remove($mainPluginInfo->getCacheDir());
         } catch (IOException) {
             // If the folder does not exist, do nothing
@@ -266,7 +267,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
                 $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
-                $registeredExtensionBaseNameInstances = App::getExtensionManager()->getExtensions();
+                $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
 
                 // Check if the main plugin has been activated or updated
                 $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);

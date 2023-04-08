@@ -16,8 +16,8 @@ trait OpenInModalMenuPageTrait
      */
     protected function enqueueModalAssets(): void
     {
-        $mainPluginURL = App::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+        $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginVersion();
 
         /**
          * Hide the menus

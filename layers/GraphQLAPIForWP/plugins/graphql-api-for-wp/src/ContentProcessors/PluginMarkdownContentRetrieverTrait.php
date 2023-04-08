@@ -14,7 +14,7 @@ trait PluginMarkdownContentRetrieverTrait
      */
     protected function getBaseDir(): string
     {
-        return App::getMainPlugin()->getPluginDir();
+        return \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginDir();
     }
 
     /**
@@ -22,7 +22,7 @@ trait PluginMarkdownContentRetrieverTrait
      */
     protected function getBaseURL(): string
     {
-        return App::getMainPlugin()->getPluginURL();
+        return \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
     }
 
     /**

@@ -570,7 +570,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     protected function getPredefinedModuleClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $mainPluginURL = App::getMainPlugin()->getPluginURL();
+        $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
 
         $moduleClassConfiguration = [];
         $moduleClassConfiguration[\PoP\Root\Module::class] = [

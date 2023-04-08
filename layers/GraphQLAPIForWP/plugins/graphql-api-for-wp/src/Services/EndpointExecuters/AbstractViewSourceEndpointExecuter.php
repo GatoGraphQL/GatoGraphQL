@@ -45,7 +45,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
     {
         // Commented out Prettify
         // // $scriptSrc = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js'
-        // $mainPluginURL = App::getMainPlugin()->getPluginURL();
+        // $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
         // $scriptSrc = $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js';
         // /**
         //  * Prettyprint the code
@@ -62,7 +62,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
          */
         $linkTagPlaceholder = '<link rel="stylesheet" href="%s">';
         $scriptTagPlaceholder = '<script src="%s"></script>';
-        $mainPluginURL = App::getMainPlugin()->getPluginURL();
+        $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
         $content .= sprintf(
             $linkTagPlaceholder,
             $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css'

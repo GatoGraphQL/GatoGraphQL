@@ -13,12 +13,12 @@ trait MainPluginScriptTrait
 {
     protected function getPluginDir(): string
     {
-        return App::getMainPlugin()->getPluginDir();
+        return \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginDir();
     }
 
     protected function getPluginURL(): string
     {
         // Remove the trailing slash
-        return trim(App::getMainPlugin()->getPluginURL(), '/');
+        return trim(\GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL(), '/');
     }
 }

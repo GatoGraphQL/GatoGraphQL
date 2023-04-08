@@ -16,8 +16,8 @@ trait UseTabpanelMenuPageTrait
      */
     protected function enqueueTabpanelAssets(): void
     {
-        $mainPluginURL = App::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = App::getMainPlugin()->getPluginVersion();
+        $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginVersion();
 
         /**
          * Add tabs to the documentation
