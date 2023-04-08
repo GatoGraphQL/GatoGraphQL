@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
+use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use GraphQLByPoP\GraphQLServer\Module;
 use PoPAPI\API\HelperServices\ApplicationStateFillerServiceInterface;
 use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
-use PoPAPI\API\Response\Schemes;
-use PoPAPI\API\Routing\RequestNature;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AppThread;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
@@ -32,6 +30,8 @@ class GraphQLServer implements GraphQLServerInterface
 
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
     private ?ApplicationStateFillerServiceInterface $applicationStateFillerService = null;
+    private ?EngineInterface $engine = null;
+    private ?GraphQLServerAppStateProviderServiceInterface $graphQLServerAppStateProviderService = null;
 
     final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
     {
@@ -50,6 +50,24 @@ class GraphQLServer implements GraphQLServerInterface
     {
         /** @var ApplicationStateFillerServiceInterface */
         return $this->applicationStateFillerService ??= InstanceManagerFacade::getInstance()->getInstance(ApplicationStateFillerServiceInterface::class);
+    }
+    final public function setEngine(EngineInterface $engine): void
+    {
+        $this->engine = $engine;
+    }
+    final protected function getEngine(): EngineInterface
+    {
+        /** @var EngineInterface */
+        return $this->engine ??= InstanceManagerFacade::getInstance()->getInstance(EngineInterface::class);
+    }
+    final public function setGraphQLServerAppStateProviderService(GraphQLServerAppStateProviderServiceInterface $graphQLServerAppStateProviderService): void
+    {
+        $this->graphQLServerAppStateProviderService = $graphQLServerAppStateProviderService;
+    }
+    final protected function getGraphQLServerAppStateProviderService(): GraphQLServerAppStateProviderServiceInterface
+    {
+        /** @var GraphQLServerAppStateProviderServiceInterface */
+        return $this->graphQLServerAppStateProviderService ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLServerAppStateProviderServiceInterface::class);
     }
 
     /**
@@ -100,31 +118,11 @@ class GraphQLServer implements GraphQLServerInterface
 
         // After booting the application, we can access the Application Container services
         // Explicitly set the required state to execute GraphQL queries
-        $appLoader->setInitialAppState($this->getGraphQLRequestAppState());
+        $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
+        $appLoader->setInitialAppState($graphQLRequestAppState);
 
         // Finally trigger booting the components
         $appLoader->bootApplicationModules();
-    }
-
-    /**
-     * The required state to execute GraphQL queries.
-     *
-     * @return array<string,mixed>
-     */
-    protected function getGraphQLRequestAppState(): array
-    {
-        return [
-            'scheme' => Schemes::API,
-            'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
-            'nature' => RequestNature::QUERY_ROOT,
-            'query' => null,
-        ];
-    }
-
-    protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
-    {
-        /** @var GraphQLDataStructureFormatter */
-        return App::getContainer()->get(GraphQLDataStructureFormatter::class);
     }
 
     /**
@@ -142,7 +140,7 @@ class GraphQLServer implements GraphQLServerInterface
         // Override the previous response, if any
         App::regenerateResponse();
 
-        $engine = EngineFacade::getInstance();
+        $engine = $this->getEngine();
         $engine->initializeState();
 
         $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
