@@ -49,7 +49,9 @@ abstract class AbstractSwitchAppThreadStandaloneGraphQLServer extends Standalone
         );
 
         // Store the own AppThread
-        $this->appThread = App::getAppThread();
+        /** @var AppThreadInterface */
+        $appThread = App::getAppThread();
+        $this->appThread = $appThread;
 
         // Restore the original AppThread
         App::setAppThread($currentAppThread);
