@@ -167,7 +167,6 @@ It produces:
       "x-forwarded-host": "graphql-api-pro.lndo.site",
       "x-forwarded-port": "443",
       "x-forwarded-proto": "https",
-      "x-forwarded-server": "289bc7ca7dad",
       "x-lando": "on",
       "x-real-ip": "172.19.0.1",
       "accept-encoding": "gzip"
@@ -216,10 +215,6 @@ It produces:
       {
         "name": "x-forwarded-proto",
         "value": "https"
-      },
-      {
-        "name": "x-forwarded-server",
-        "value": "289bc7ca7dad"
       },
       {
         "name": "x-lando",
@@ -296,10 +291,6 @@ It produces:
               "value": "https"
             },
             {
-              "name": "x-forwarded-server",
-              "value": "289bc7ca7dad"
-            },
-            {
               "name": "x-lando",
               "value": "on"
             },
@@ -371,10 +362,6 @@ It produces:
               "value": "https"
             },
             {
-              "name": "x-forwarded-server",
-              "value": "289bc7ca7dad"
-            },
-            {
               "name": "x-lando",
               "value": "on"
             },
@@ -444,10 +431,6 @@ It produces:
             {
               "name": "x-forwarded-proto",
               "value": "https"
-            },
-            {
-              "name": "x-forwarded-server",
-              "value": "289bc7ca7dad"
             },
             {
               "name": "x-lando",
