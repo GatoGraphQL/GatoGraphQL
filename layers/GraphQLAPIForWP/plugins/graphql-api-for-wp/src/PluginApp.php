@@ -18,7 +18,6 @@ class PluginApp implements PluginAppInterface
         ?MainPluginManager $mainPluginManager = null,
         ?ExtensionManager $extensionManager = null,
     ): void {
-        App::setAppThread(new AppThread());
         self::$mainPluginManager = $mainPluginManager ?? static::createMainPluginManager();
         self::$extensionManager = $extensionManager ?? static::createExtensionManager();
     }
