@@ -12,7 +12,7 @@ use PoP\Root\Environment as RootEnvironment;
 class RequestHelpers
 {
     /**
-     * If XDebug enabled, append param "XDEBUG_TRIGGER" to debug the request
+     * If XDebug enabled, append param "XDEBUG_TRIGGER=debug" to debug the request
      */
     public static function maybeAddParamToDebugRequest(string $url): string
     {
