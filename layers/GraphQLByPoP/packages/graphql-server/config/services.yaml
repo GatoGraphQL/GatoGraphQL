@@ -42,3 +42,6 @@ services:
 
     GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelperInterface:
         class: \GraphQLByPoP\GraphQLServer\Helpers\TypeResolverHelper
+
+    GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface:
+        class: \GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderService
