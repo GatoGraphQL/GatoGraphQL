@@ -12,7 +12,7 @@ use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentTest as UpstreamExecutabl
 class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
 {
     use ComponentModelTestCaseTrait;
-    
+
     private ?ParserInterface $parser = null;
 
     protected function getParser(): ParserInterface

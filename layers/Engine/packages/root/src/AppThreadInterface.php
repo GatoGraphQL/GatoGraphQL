@@ -22,7 +22,7 @@ use PoP\Root\StateManagers\HookManagerInterface;
  * will be accessed/modified by the whole application.
  * Access the current AppThread via the corresponding
  * methods in the `App` facade class.
- * 
+ *
  * It keeps all state in the application stored and
  * accessible in a single place, so that regenerating
  * this class provides a new state.

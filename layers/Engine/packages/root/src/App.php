@@ -55,7 +55,7 @@ class App implements AppInterface
      *
      * Either inject the desired instance, or have the Root
      * provide the default one.
-     * 
+     *
      * It creates a new AppThread and sets it as the current
      * object hosting all state in the application.
      */
