@@ -442,7 +442,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     </div>
                 </div>
             </div>
-<?php
+        <?php
     }
 
     /**
