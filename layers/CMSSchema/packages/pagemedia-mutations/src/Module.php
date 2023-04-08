@@ -18,7 +18,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMediaMutations\Module::class,
+            CustomPostMediaMutationsModule::class,
             \PoPCMSSchema\PageMutations\Module::class,
         ];
     }

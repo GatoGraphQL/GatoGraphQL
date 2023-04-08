@@ -35,9 +35,9 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            \PoPAPI\API\Module::class,
-            \PoPAPI\RESTAPI\Module::class,
-            \PoPCMSSchema\Users\Module::class,
+            APIModule::class,
+            RESTAPIModule::class,
+            UsersModule::class,
         ];
     }
 

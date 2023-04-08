@@ -31,8 +31,8 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            \PoP\AccessControl\Module::class,
-            \PoP\CacheControl\Module::class,
+            AccessControlModule::class,
+            CacheControlModule::class,
         ];
     }
 
@@ -84,7 +84,7 @@ class Module extends AbstractModule
                     ) {
                         $this->initSchemaServices(
                             dirname(__DIR__),
-                            $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
+                            $skipSchema || in_array(CacheControlModule::class, $skipSchemaModuleClasses) || in_array(AccessControlModule::class, $skipSchemaModuleClasses),
                             '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
                         );
                     }

@@ -33,7 +33,7 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            \PoPAPI\API\Module::class,
+            APIModule::class,
             \PoPAPI\RESTAPI\Module::class,
         ];
     }

@@ -29,7 +29,7 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPosts\Module::class,
+            CustomPostsModule::class,
         ];
     }
 
