@@ -110,6 +110,7 @@ class StandaloneGraphQLServer extends GraphQLServer
          * Explicitly set the required state to execute GraphQL queries.
          */
         $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
+        $graphQLRequestAppState['query'] = null;
         $appLoader->setInitialAppState($graphQLRequestAppState);
 
         // Finally trigger booting the components
