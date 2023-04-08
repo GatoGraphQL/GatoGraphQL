@@ -24,7 +24,7 @@ use PoP\Root\StateManagers\HookManagerInterface;
  * but as static.
  */
 interface AppInterface
-{    
+{
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
@@ -52,11 +52,9 @@ interface AppInterface
      *
      * Either inject the desired instance, or have the Root
      * provide the default one.
-     * 
+     *
      * It creates a new AppThread and sets it as the current
      * object hosting all state in the application.
-     *
-     * @return AppThreadInterface The newly-created AppThread instance
      */
     public static function initialize(
         ?AppLoaderInterface $appLoader = null,

@@ -97,7 +97,7 @@ $ composer enable-caching
 
 ## Debugging
 
-XDebug is enabled by default, but must be triggered for the specific request. To do so, append param `XDEBUG_TRIGGER` to the URL:
+XDebug is enabled by default, but must be triggered for the specific request. To do so, append param `XDEBUG_TRIGGER=debug` to the URL:
 
 - In the `wp-admin`, in the URL to load the GraphiQL or Interactive schema client
 - In the URL of any public client, such as the GraphiQL or Interactive schema client attached to:
