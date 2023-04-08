@@ -543,8 +543,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $appLoader = App::getAppLoader();
             $appLoader->bootApplication();
 
-            // After booting the application, we can access the Application Container services
-            // Explicitly set the required state to execute GraphQL queries
+            /**
+             * After booting the application, we can access the Application Container services.
+             * Explicitly set the required state to execute GraphQL queries.
+             */
             $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
             $appLoader->setInitialAppState($graphQLRequestAppState);
 

@@ -43,8 +43,10 @@ abstract class AbstractTestCase extends TestCase
         $appLoader->setContainerCacheConfiguration($containerCacheConfiguration);
         $appLoader->bootSystem();
 
-        // Only after initializing the System Container,
-        // we can obtain the configuration (which may depend on hooks)
+        /**
+         * Only after initializing the System Container,
+         * we can obtain the configuration (which may depend on hooks).
+         */
         $appLoader->addModuleClassConfiguration(
             static::getModuleClassConfiguration()
         );

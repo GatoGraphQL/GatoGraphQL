@@ -125,8 +125,10 @@ class GraphQLServer implements GraphQLServerInterface
         $appLoader->setContainerCacheConfiguration($this->containerCacheConfiguration);
         $appLoader->bootSystem();
 
-        // Only after initializing the System Container,
-        // we can obtain the configuration (which may depend on hooks)
+        /**
+         * Only after initializing the System Container,
+         * we can obtain the configuration (which may depend on hooks).
+         */
         $appLoader->addModuleClassConfiguration($this->moduleClassConfiguration);
 
         // Inject the Compiler Passes
@@ -135,8 +137,10 @@ class GraphQLServer implements GraphQLServerInterface
         // Boot the application
         $appLoader->bootApplication();
 
-        // After booting the application, we can access the Application Container services
-        // Explicitly set the required state to execute GraphQL queries
+        /**
+         * After booting the application, we can access the Application Container services.
+         * Explicitly set the required state to execute GraphQL queries.
+         */
         $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
         $appLoader->setInitialAppState($graphQLRequestAppState);
 
