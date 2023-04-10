@@ -249,6 +249,17 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      */
     protected function getPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
     {
+        return $this->doGetPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
+    }
+
+    /**
+     * Get the fixed configuration for all components required in the plugin
+     * when requesting some specific group in the admin endpoint
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
+     */
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
+    {
         return [];
     }
 
