@@ -206,23 +206,27 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      */
     public function getModuleClassConfiguration(): array
     {
+        $predefinedAdminEndpointModuleClassConfiguration = [];
         // Retrieve this service from the SystemContainer
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        /**
-         * (empty) => Default admin endpoint
-         *
-         * @var string
-         */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+        if ($endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+            && !$endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()
+        ) {
+            /**
+             * (empty) => Default admin endpoint
+             *
+             * @var string
+             */
+            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+            $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
+        }
 
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return array_merge_recursive(
             $this->getPredefinedModuleClassConfiguration(),
-            $endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
-                ? $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup)
-                : [],
+            $predefinedAdminEndpointModuleClassConfiguration,
             $this->getBasedOnModuleEnabledStateModuleClassConfiguration(),
         );
     }
