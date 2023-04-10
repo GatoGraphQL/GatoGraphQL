@@ -38,7 +38,7 @@ class EndpointHelpers
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query
      */
-    public function isRequestingAdminConfigurableSchemaGraphQLEndpoint(): bool
+    public function isRequestingAdminGraphQLEndpoint(): bool
     {
         return \is_admin()
             && 'POST' === App::server('REQUEST_METHOD')
@@ -53,9 +53,9 @@ class EndpointHelpers
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor
      */
-    public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
+    public function isRequestingAdminPluginInternalWPEditorGraphQLEndpoint(): bool
     {
-        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+        return $this->isRequestingAdminGraphQLEndpoint()
             && App::query(RequestParams::ENDPOINT_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
     }
 
@@ -67,7 +67,7 @@ class EndpointHelpers
      */
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
-        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+        return $this->isRequestingAdminGraphQLEndpoint()
             && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
@@ -77,8 +77,8 @@ class EndpointHelpers
      */
     public function isRequestingGraphQLEndpointForAdminClientOnly(): bool
     {
-        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
-            && !$this->isRequestingAdminFixedSchemaGraphQLEndpoint()
+        return $this->isRequestingAdminGraphQLEndpoint()
+            && !$this->isRequestingAdminPluginInternalWPEditorGraphQLEndpoint()
             && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
     }
 
@@ -88,7 +88,7 @@ class EndpointHelpers
      */
     public function isRequestingGraphQLEndpointForAdminClientOrConfiguration(): bool
     {
-        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+        return $this->isRequestingAdminGraphQLEndpoint()
             && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
     }
 
@@ -97,7 +97,7 @@ class EndpointHelpers
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public function getAdminConfigurableSchemaGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
+    public function getAdminGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
     {
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
@@ -130,12 +130,12 @@ class EndpointHelpers
      * GraphQL endpoint to be used in the WordPress editor.
      * It has the full schema, including "admin" fields.
      */
-    public function getAdminFixedSchemaGraphQLEndpoint(): string
+    public function getAdminPluginInternalWPEditorGraphQLEndpoint(): string
     {
         return \add_query_arg(
             RequestParams::ENDPOINT_GROUP,
             EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR,
-            $this->getAdminConfigurableSchemaGraphQLEndpoint()
+            $this->getAdminGraphQLEndpoint()
         );
     }
 
@@ -149,7 +149,7 @@ class EndpointHelpers
         return \add_query_arg(
             RequestParams::PERSISTED_QUERY_ID,
             $persistedQueryEndpointCustomPostID,
-            $this->getAdminConfigurableSchemaGraphQLEndpoint($enableLowLevelQueryEditing)
+            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
         );
     }
 

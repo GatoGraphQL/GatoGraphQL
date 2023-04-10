@@ -212,7 +212,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if (
-            $endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+            $endpointHelpers->isRequestingAdminGraphQLEndpoint()
             && !$endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()
         ) {
             /**
@@ -325,7 +325,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
+        if ($endpointHelpers->isRequestingAdminPluginInternalWPEditorGraphQLEndpoint()) {
             return [];
         }
 
@@ -340,7 +340,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             $skipSchemaModuleClassesPerModule
         ));
 
-        if ($endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
+        if ($endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
             /**
              * Allow to not disable modules on the admin endpoint.
              *

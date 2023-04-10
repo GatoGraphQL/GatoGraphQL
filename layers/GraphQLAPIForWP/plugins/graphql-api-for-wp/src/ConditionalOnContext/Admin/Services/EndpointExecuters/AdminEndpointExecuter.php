@@ -88,7 +88,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
         if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {
             return false;
         }
-        return $this->getEndpointHelpers()->isRequestingAdminConfigurableSchemaGraphQLEndpoint();
+        return $this->getEndpointHelpers()->isRequestingAdminGraphQLEndpoint();
     }
 
     public function executeEndpoint(): void

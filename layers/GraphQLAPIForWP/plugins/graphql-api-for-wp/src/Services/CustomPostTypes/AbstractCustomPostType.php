@@ -234,7 +234,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         \printf(
             $scriptTag,
             'GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT',
-            $this->getEndpointHelpers()->getAdminConfigurableSchemaGraphQLEndpoint()
+            $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
         );
         /**
          * The endpoint against which to execute GraphQL queries on the WordPress editor,
@@ -248,7 +248,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         \printf(
             $scriptTag,
             'GRAPHQL_API_ADMIN_FIXEDSCHEMA_ENDPOINT',
-            $this->getEndpointHelpers()->getAdminFixedSchemaGraphQLEndpoint()
+            $this->getEndpointHelpers()->getAdminPluginInternalWPEditorGraphQLEndpoint()
         );
     }
 

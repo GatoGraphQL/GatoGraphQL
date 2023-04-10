@@ -233,7 +233,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
         /**
          * Localize the script with custom data
          * Execute on hook "wp_print_scripts" and not now,
-         * because `getLocalizedData` might call EndpointHelpers->getAdminConfigurableSchemaGraphQLEndpoint(),
+         * because `getLocalizedData` might call EndpointHelpers->getAdminGraphQLEndpoint(),
          * which calls ScriptModelScriptConfiguration::mustNamespaceTypes(),
          * which is initialized during "wp"
          */
