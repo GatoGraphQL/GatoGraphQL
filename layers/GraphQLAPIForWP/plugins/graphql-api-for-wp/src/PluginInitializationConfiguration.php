@@ -597,12 +597,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             CustomPostsEnvironment::DISABLE_PACKAGES_ADDING_DEFAULT_QUERYABLE_CUSTOMPOST_TYPES => true,
         ];
 
-        // Retrieve this service from the SystemContainer
-        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-        /** @var EndpointHelpers */
-        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        // If doing ?endpointGroup=pluginInternalWPEditor, always enable certain features
-        $moduleClassConfiguration = $endpointHelpers->addAdminEndpointModuleClassConfiguration($moduleClassConfiguration);
         return $moduleClassConfiguration;
     }
 

@@ -95,7 +95,7 @@ class EndpointHelpers
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
      */
-    protected function getAdminEndpointModuleClassConfiguration(): ?array
+    public function getAdminEndpointModuleClassConfiguration(): ?array
     {
         if (!$this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
             return null;
