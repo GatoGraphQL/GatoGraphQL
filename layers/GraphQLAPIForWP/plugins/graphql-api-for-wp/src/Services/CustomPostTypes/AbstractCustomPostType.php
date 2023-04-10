@@ -233,7 +233,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          */
         \printf(
             $scriptTag,
-            'GRAPHQL_API_ADMIN_CONFIGURABLESCHEMA_ENDPOINT',
+            'GRAPHQL_API_ADMIN_ENDPOINT',
             $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
         );
         /**
