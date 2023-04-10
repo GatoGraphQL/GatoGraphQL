@@ -15,6 +15,8 @@ services:
     PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
         class: \GraphQLAPI\GraphQLAPI\Overrides\ConfigurationCache\OperationalCacheConfigurationManager
 
-    # useTemplate needs to know when the GraphQL query was indeed requested
+    # Print the JSON response only when the GraphQL query was indeed requested
     PoP\EngineWP\Hooks\TemplateHookSet:
-        class: \GraphQLAPI\GraphQLAPI\Overrides\Hooks\TemplateHookSet
+        class: \GraphQLAPI\GraphQLAPI\Overrides\Hooks\TemplateHookSet    
+    GraphQLByPoP\GraphQLEndpointForWP\State\GraphQLEndpointHandlerAppStateProvider:
+        class: \GraphQLAPI\GraphQLAPI\Overrides\State\GraphQLEndpointHandlerAppStateProvider
