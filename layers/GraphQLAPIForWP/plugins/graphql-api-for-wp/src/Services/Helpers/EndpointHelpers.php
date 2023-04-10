@@ -66,13 +66,13 @@ class EndpointHelpers
      * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
      * @return array<class-string<ModuleInterface>,array<string,mixed>>
      */
-    public function addAdminEndpointModuleConfiguration(array $moduleClassConfiguration): array
+    public function addAdminEndpointModuleClassConfiguration(array $moduleClassConfiguration): array
     {
-        $adminEndpointModuleConfiguration = $this->getAdminEndpointModuleClassConfiguration();
-        if ($adminEndpointModuleConfiguration === null) {
+        $adminEndpointModuleClassConfiguration = $this->getAdminEndpointModuleClassConfiguration();
+        if ($adminEndpointModuleClassConfiguration === null) {
             return $moduleClassConfiguration;
         }
-        foreach ($adminEndpointModuleConfiguration as $moduleClass => $moduleEnvVarConfiguration) {
+        foreach ($adminEndpointModuleClassConfiguration as $moduleClass => $moduleEnvVarConfiguration) {
             $moduleClassConfiguration[$moduleClass] = array_merge(
                 $moduleClassConfiguration[$moduleClass] ?? [],
                 $moduleEnvVarConfiguration
