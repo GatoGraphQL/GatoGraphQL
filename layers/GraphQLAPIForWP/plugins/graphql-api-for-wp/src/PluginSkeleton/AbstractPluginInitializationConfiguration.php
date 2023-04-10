@@ -358,7 +358,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
              * @var string|null
              */
             $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
-            $schemaModuleClassesToSkip = apply_filters(
+            return apply_filters(
                 HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
                 $schemaModuleClassesToSkip,
                 $endpointGroup
