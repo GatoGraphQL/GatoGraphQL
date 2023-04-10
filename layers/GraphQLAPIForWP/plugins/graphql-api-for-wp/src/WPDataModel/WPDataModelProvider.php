@@ -63,7 +63,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             $this->getCustomPostTypeRegistry()->getCustomPostTypes()
         );
         $rejectedQueryableCustomPostTypes = \apply_filters(
-            HookNames::HOOK_REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
+            HookNames::REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
             array_merge(
                 /**
                  * Post Types from GraphQL API are just for configuration
@@ -91,7 +91,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
         ));
         // Allow plugins to further remove unwanted custom post types
         $possibleCustomPostTypes = \apply_filters(
-            HookNames::HOOK_QUERYABLE_CUSTOMPOST_TYPES,
+            HookNames::QUERYABLE_CUSTOMPOST_TYPES,
             $possibleCustomPostTypes
         );
         sort($possibleCustomPostTypes);
@@ -141,7 +141,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             $this->getTaxonomyRegistry()->getTaxonomies(false)
         );
         $rejectedQueryableTagTaxonomies = \apply_filters(
-            HookNames::HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES,
+            HookNames::REJECTED_QUERYABLE_TAG_TAXONOMIES,
             []
         );
         $possibleTagTaxonomies = array_values(array_diff(
@@ -151,7 +151,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
         ));
         // Allow plugins to further remove unwanted custom post types
         $possibleTagTaxonomies = \apply_filters(
-            HookNames::HOOK_QUERYABLE_TAG_TAXONOMIES,
+            HookNames::QUERYABLE_TAG_TAXONOMIES,
             $possibleTagTaxonomies
         );
         sort($possibleTagTaxonomies);
@@ -174,7 +174,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             $this->getTaxonomyRegistry()->getTaxonomies(true)
         );
         $rejectedQueryableCategoryTaxonomies = \apply_filters(
-            HookNames::HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
+            HookNames::REJECTED_QUERYABLE_CATEGORY_TAXONOMIES,
             []
         );
         $possibleCategoryTaxonomies = array_values(array_diff(
@@ -184,7 +184,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
         ));
         // Allow plugins to further remove unwanted custom post types
         $possibleCategoryTaxonomies = \apply_filters(
-            HookNames::HOOK_QUERYABLE_CATEGORY_TAXONOMIES,
+            HookNames::QUERYABLE_CATEGORY_TAXONOMIES,
             $possibleCategoryTaxonomies
         );
         sort($possibleCategoryTaxonomies);
