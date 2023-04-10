@@ -14,8 +14,8 @@ use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleConfigurationHelpers;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function apply_filters;
 
 /**
@@ -345,9 +345,27 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             fn ($module) => !$moduleRegistry->isModuleEnabled($module),
             ARRAY_FILTER_USE_KEY
         );
-        return GeneralUtils::arrayFlatten(array_values(
+        $schemaModuleClassesToSkip = GeneralUtils::arrayFlatten(array_values(
             $skipSchemaModuleClassesPerModule
         ));
+
+        if ($endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
+            /**
+             * Allow to not disable modules on the admin endpoint.
+             *
+             * `null` => Default admin endpoint
+             *
+             * @var string|null
+             */
+            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
+            $schemaModuleClassesToSkip = apply_filters(
+                HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
+                $schemaModuleClassesToSkip,
+                $endpointGroup
+            );
+        }
+
+        return $schemaModuleClassesToSkip;
     }
 
     /**
