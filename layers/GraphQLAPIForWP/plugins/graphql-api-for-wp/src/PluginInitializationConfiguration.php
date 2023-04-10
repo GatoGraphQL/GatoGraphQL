@@ -383,7 +383,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
-            // Enable the “sensitive” data: if doing ?behavior=unrestricted, it will already
+            // Enable the “sensitive” data: in the admin endpoint it will already
             // be set by configuration. Otherwise, it uses this mapping
             [
                 'class' => ComponentModelModule::class,
