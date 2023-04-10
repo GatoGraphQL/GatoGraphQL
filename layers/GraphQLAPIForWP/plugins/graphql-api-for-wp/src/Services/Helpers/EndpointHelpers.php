@@ -30,8 +30,9 @@ class EndpointHelpers
     }
 
     /**
-     * Indicate if we are requesting
-     * /wp-admin/edit.php?page=graphql_api&action=execute_query
+     * Indicate if we are requesting the wp-admin endpoint, under:
+     *
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query
      */
     public function isRequestingAdminConfigurableSchemaGraphQLEndpoint(): bool
     {
@@ -42,8 +43,11 @@ class EndpointHelpers
     }
 
     /**
-     * Indicate if we are requesting
-     * /wp-admin/edit.php?page=graphql_api&action=execute_query&behavior=unrestricted
+     * Indicate if we are requesting the internal wp-admin endpoint
+     * used on the WordPress editor to power this plugin's blocks
+     * (for the different CPTs: SchemaConfig, ACLs, CCLs, etc), under:
+     *
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&behavior=unrestricted
      */
     public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
     {
