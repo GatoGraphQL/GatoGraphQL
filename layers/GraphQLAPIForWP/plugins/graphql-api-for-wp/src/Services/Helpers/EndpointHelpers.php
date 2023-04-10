@@ -97,7 +97,7 @@ class EndpointHelpers
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public function getAdminConfigurableSchemaGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
+    public function getAdminGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
     {
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
@@ -135,7 +135,7 @@ class EndpointHelpers
         return \add_query_arg(
             RequestParams::ENDPOINT_GROUP,
             EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR,
-            $this->getAdminConfigurableSchemaGraphQLEndpoint()
+            $this->getAdminGraphQLEndpoint()
         );
     }
 
@@ -149,7 +149,7 @@ class EndpointHelpers
         return \add_query_arg(
             RequestParams::PERSISTED_QUERY_ID,
             $persistedQueryEndpointCustomPostID,
-            $this->getAdminConfigurableSchemaGraphQLEndpoint($enableLowLevelQueryEditing)
+            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
         );
     }
 
