@@ -81,32 +81,33 @@ class EndpointHelpers
     //     return $moduleClassConfiguration;
     // }
 
-    /**
-     * Obtain the configuration to apply to the requested admin endpoint,
-     * based on the "group" passed under param "endpointGroup".
-     * For instance, this plugins defines the configuration group
-     * "pluginInternalWPEditor" to be used on the WordPress editor to
-     * power this plugin's blocks. It shall be requested as: 
-     *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor
-     *
-     * If the configuration for this group has not been set, it returns `null`
-     * (in which case, the default admin endpoint configuration is applied).
-     *
-     * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
-     */
-    public function getAdminEndpointModuleClassConfiguration(): ?array
-    {
-        if (!$this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
-            return null;
-        }
-        /** @var string|null */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
-        if ($endpointGroup === null) {
-            return null;
-        }
-        return $this->getAdminEndpointModuleConfigurationStore()->getModuleClassConfiguration($endpointGroup);
-    }
+    // @todo Remove this code.
+    // /**
+    //  * Obtain the configuration to apply to the requested admin endpoint,
+    //  * based on the "group" passed under param "endpointGroup".
+    //  * For instance, this plugins defines the configuration group
+    //  * "pluginInternalWPEditor" to be used on the WordPress editor to
+    //  * power this plugin's blocks. It shall be requested as: 
+    //  *
+    //  *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor
+    //  *
+    //  * If the configuration for this group has not been set, it returns `null`
+    //  * (in which case, the default admin endpoint configuration is applied).
+    //  *
+    //  * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
+    //  */
+    // public function getAdminEndpointModuleClassConfiguration(): ?array
+    // {
+    //     if (!$this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
+    //         return null;
+    //     }
+    //     /** @var string|null */
+    //     $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
+    //     if ($endpointGroup === null) {
+    //         return null;
+    //     }
+    //     return $this->getAdminEndpointModuleConfigurationStore()->getModuleClassConfiguration($endpointGroup);
+    // }
 
     /**
      * Indicate if we are requesting the internal wp-admin endpoint

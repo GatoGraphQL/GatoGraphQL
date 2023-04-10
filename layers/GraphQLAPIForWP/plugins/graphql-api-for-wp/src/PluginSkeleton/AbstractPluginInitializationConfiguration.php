@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use PoP\Root\Module\ModuleInterface;
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use PoP\Root\Module\ModuleConfigurationHelpers;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Module\ModuleConfigurationHelpers;
+use PoP\Root\Module\ModuleInterface;
 
 /**
  * Base class to set the configuration for all the PoP components,
@@ -201,13 +203,38 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      */
     public function getModuleClassConfiguration(): array
     {
+        // Retrieve this service from the SystemContainer
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        $endpointGroup = $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
+
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return array_merge_recursive(
             $this->getPredefinedModuleClassConfiguration(),
-            $this->getPredefinedAdminEndpointModuleClassConfiguration(),
+            $endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+                ? $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup)
+                : [],
             $this->getBasedOnModuleEnabledStateModuleClassConfiguration(),
         );
     }
+
+    // @todo Remove this code.
+    // /**
+    //  * Get the fixed configuration for all components required in the plugin
+    //  * when requesting some specific group in the admin endpoint
+    //  *
+    //  * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
+    //  */
+    // protected function getPredefinedAdminEndpointModuleClassConfiguration(): array
+    // {
+    //     // Retrieve this service from the SystemContainer
+    //     $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+    //     /** @var EndpointHelpers */
+    //     $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+    //     // If doing ?endpointGroup=pluginInternalWPEditor, always enable certain features
+    //     return $endpointHelpers->getAdminEndpointModuleClassConfiguration() ?? [];
+    // }
 
     /**
      * Get the fixed configuration for all components required in the plugin
@@ -215,14 +242,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    protected function getPredefinedAdminEndpointModuleClassConfiguration(): array
+    protected function getPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
-        // Retrieve this service from the SystemContainer
-        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-        /** @var EndpointHelpers */
-        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        // If doing ?endpointGroup=pluginInternalWPEditor, always enable certain features
-        return $endpointHelpers->getAdminEndpointModuleClassConfiguration() ?? [];
+        return [];
     }
 
     /**
