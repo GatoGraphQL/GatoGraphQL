@@ -21,7 +21,7 @@ trait RequestURLWebserverRequestTestCaseTrait
         bool $enabled,
     ): void {
         $client = static::getClient();
-        $clientEndpointURL = static::getWebserverHomeURL() . '/' . $clientEndpoint;
+        $clientEndpointURL = static::getWebserverHomeURL() . '/' . ltrim($clientEndpoint, '/');
         $options = [
             'verify' => false,
             // Don't throw exception with 404
