@@ -547,7 +547,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $appLoader->bootApplication();
 
             /**
-             * After booting the application, we can access the Application Container services.
+             * After booting the application, we can access the Application
+             * Container services.
+             *
              * Explicitly set the required state to execute GraphQL queries.
              *
              * Important: Setting the AppState as needed by GraphQL here
@@ -555,6 +557,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * GraphQL request, independently of what variables were actually
              * set in the request. Then, we can obtain GraphQL responses using
              * this plugin (eg: ?datastructure=rest is not supported).
+             *
+             * ------------------------------------------------------------
+             * 
+             * Watch out! When calling `setInitialAppState` below,
+             * the state will always be set to '?datastructure=graphql',
+             * which will then also set '?output=json'.
+             *
+             * As a consequence, doing `ApplicationStateHelperService->doingJSON()`
+             * will always return true, and even a 404 page will be processed
+             * as a GraphQL response.
+             *
+             * @todo: Fix!!!
+             * 
+             * @see layers/Engine/packages/engine-wp/src/Hooks/TemplateHookSet.php function `useTemplate`
              */
             $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
             $appLoader->setInitialAppState($graphQLRequestAppState);
