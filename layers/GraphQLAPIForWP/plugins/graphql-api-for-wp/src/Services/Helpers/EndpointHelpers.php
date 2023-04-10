@@ -72,17 +72,6 @@ class EndpointHelpers
     }
 
     /**
-     * Indicate if we are requesting in the wp-admin:
-     * Only GraphiQL and Voyager clients
-     */
-    public function isRequestingGraphQLEndpointForAdminClientOnly(): bool
-    {
-        return $this->isRequestingAdminGraphQLEndpoint()
-            && !$this->isRequestingAdminPluginInternalWPEditorGraphQLEndpoint()
-            && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
-    }
-
-    /**
      * Indicate if we are requesting the default admin endpoint,
      * i.e. without the "endpoint_group" or "persisted_query_id" params
      */
