@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Constants\EndpointGroups;
+use GraphQLAPI\GraphQLAPI\Constants\EndpointConfigurationGroups;
 use PoP\Root\Module\ModuleInterface;
 
 class PluginInternalWPEditorAdminEndpointGroupModuleConfigurationCompilerPass extends AbstractAdminEndpointGroupModuleConfigurationCompilerPass
@@ -20,6 +20,6 @@ class PluginInternalWPEditorAdminEndpointGroupModuleConfigurationCompilerPass ex
 
     protected function getEndpointGroup(): string
     {
-        return EndpointGroups::PLUGIN_INTERNAL_WP_EDITOR;
+        return EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
     }
 }
