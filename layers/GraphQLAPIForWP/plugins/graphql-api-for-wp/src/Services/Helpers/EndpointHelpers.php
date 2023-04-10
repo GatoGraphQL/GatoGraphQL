@@ -77,7 +77,8 @@ class EndpointHelpers
      */
     public function isRequestingDefaultAdminGraphQLEndpoint(): bool
     {
-        if (!$this->isRequestingAdminGraphQLEndpoint()
+        if (
+            !$this->isRequestingAdminGraphQLEndpoint()
             || $this->isRequestingAdminPersistedQueryGraphQLEndpoint()
         ) {
             return false;
