@@ -12,4 +12,6 @@ class HookNames
     public final const HOOK_REJECTED_QUERYABLE_TAG_TAXONOMIES = __CLASS__ . ':rejected-queryable-tag-taxonomies';
     public final const HOOK_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':queryable-category-taxonomies';
     public final const HOOK_REJECTED_QUERYABLE_CATEGORY_TAXONOMIES = __CLASS__ . ':rejected-queryable-category-taxonomies';
+    
+    public final const ADMIN_ENDPOINT_GROUP_CONFIGURATION = __CLASS__ . ':admin-endpoint-group-configuration';
 }

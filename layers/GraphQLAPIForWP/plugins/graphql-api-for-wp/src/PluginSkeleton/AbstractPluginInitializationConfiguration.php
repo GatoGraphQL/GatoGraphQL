@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -13,7 +14,9 @@ use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleConfigurationHelpers;
+
 use PoP\Root\Module\ModuleInterface;
+use function apply_filters;
 
 /**
  * Base class to set the configuration for all the PoP components,
@@ -243,13 +246,20 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
     /**
      * Get the fixed configuration for all components required in the plugin
-     * when requesting some specific group in the admin endpoint
+     * when requesting some specific group in the admin endpoint.
+     *
+     * Allow developers to inject their own endpointGroups and corresnping
+     * configuration via a filter hook
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    protected function getPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
+    private function getPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
     {
-        return $this->doGetPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
+        return apply_filters(
+            HookNames::ADMIN_ENDPOINT_GROUP_CONFIGURATION,
+            $this->doGetPredefinedAdminEndpointModuleClassConfiguration($endpointGroup),
+            $endpointGroup
+        );
     }
 
     /**
