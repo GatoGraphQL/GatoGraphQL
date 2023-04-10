@@ -211,7 +211,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingGraphQLEndpointForAdminClientOrConfiguration()) {
+        if ($endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint()) {
             /**
              * (empty) => Default admin endpoint
              *

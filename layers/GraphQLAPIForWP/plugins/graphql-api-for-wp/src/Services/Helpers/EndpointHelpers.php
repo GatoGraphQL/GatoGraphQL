@@ -86,7 +86,7 @@ class EndpointHelpers
      * Indicate if we are requesting in the wp-admin:
      * GraphiQL and Voyager clients + ACL/CCL configurations
      */
-    public function isRequestingGraphQLEndpointForAdminClientOrConfiguration(): bool
+    public function isRequestingNonPersistedQueryAdminGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
             && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();

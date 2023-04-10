@@ -90,7 +90,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         // 1. Only GraphiQL and Voyager clients
         $isRequestingGraphQLEndpointForAdminClientOnly = $endpointHelpers->isRequestingGraphQLEndpointForAdminClientOnly();
         // 2. GraphiQL and Voyager clients + ACL/CCL configurations
-        $isRequestingGraphQLEndpointForAdminClientOrConfiguration = $endpointHelpers->isRequestingGraphQLEndpointForAdminClientOrConfiguration();
+        $isRequestingNonPersistedQueryAdminGraphQLEndpoint = $endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint();
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
         return [
             // Client IP Server's Property Name
@@ -170,7 +170,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Expose "self" fields in the schema?
             [
@@ -474,37 +474,37 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => \PoPCMSSchema\CommentMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostTagMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMediaMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\UserStateMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS,
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : MutationSchemaTypeModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
         ];
     }
