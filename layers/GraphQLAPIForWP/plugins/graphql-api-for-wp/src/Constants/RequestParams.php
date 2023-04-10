@@ -18,6 +18,5 @@ class RequestParams
     public final const MODULE = 'module';
     public final const DOC = 'doc';
     public final const PERSISTED_QUERY_ID = 'persisted_query_id';
-    public final const BEHAVIOR = 'behavior';
-    public final const BEHAVIOR_UNRESTRICTED = 'unrestricted';
+    public final const ENDPOINT_CONFIGURATION_GROUP = 'endpointConfigurationGroup';
 }
