@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInfoInterface;
@@ -11,6 +13,8 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
+
+use function sanitize_file_name;
 
 /**
  * Inject configuration to the cache
@@ -55,12 +59,24 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         $timestamp = '_v' . $this->getMainPluginAndExtensionsTimestamp();
         // The timestamp from when last saving settings/modules to the DB
         $timestamp .= '_' . $this->getTimestamp();
-        // admin/non-admin screens have different services enabled
-        $suffix = \is_admin() ?
-            // The WordPress editor can access the full GraphQL schema,
-            // including "admin" fields, so cache it individually
-            'a' . ($this->getEndpointHelpers()->isRequestingAdminFixedSchemaGraphQLEndpoint() ? 'u' : 'c')
-            : 'c';
+        /**
+         * admin/non-admin screens have different services enabled.
+         */
+        if (\is_admin()) {
+            /**
+             * Different admin endpoints might also have different services,
+             * hence cache a different container per endpointGroup.
+             *
+             * For instance, the WordPress editor can access the full schema,
+             * including "admin" fields, so it must be cached individually.
+             *
+             * @var string
+             */
+            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+            $suffix = 'a' . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
+        } else {
+            $suffix = 'c';
+        }
         $timestamp .= '_' . $suffix;
         return $timestamp;
     }

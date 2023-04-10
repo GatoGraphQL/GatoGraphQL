@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
+use GraphQLAPI\GraphQLAPI\Constants\EndpointConfigurationGroups;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
@@ -50,12 +51,12 @@ class EndpointHelpers
      * used on the WordPress editor to power this plugin's blocks
      * (for the different CPTs: SchemaConfig, ACLs, CCLs, etc), under:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&behavior=unrestricted
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor
      */
     public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
-            && App::query(RequestParams::BEHAVIOR) === RequestParams::BEHAVIOR_UNRESTRICTED;
+            && App::query(RequestParams::ENDPOINT_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
     }
 
     /**
@@ -132,8 +133,8 @@ class EndpointHelpers
     public function getAdminFixedSchemaGraphQLEndpoint(): string
     {
         return \add_query_arg(
-            RequestParams::BEHAVIOR,
-            RequestParams::BEHAVIOR_UNRESTRICTED,
+            RequestParams::ENDPOINT_GROUP,
+            EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR,
             $this->getAdminConfigurableSchemaGraphQLEndpoint()
         );
     }

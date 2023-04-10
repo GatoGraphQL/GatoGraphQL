@@ -18,6 +18,19 @@ class RequestParams
     public final const MODULE = 'module';
     public final const DOC = 'doc';
     public final const PERSISTED_QUERY_ID = 'persisted_query_id';
-    public final const BEHAVIOR = 'behavior';
-    public final const BEHAVIOR_UNRESTRICTED = 'unrestricted';
+
+    /**
+     * Param used to obtain the configuration to apply to the requested
+     * admin endpoint, based on an "endpointGroup".
+     *
+     * For instance, this plugin defines the configuration endpointGroup
+     * "pluginInternalWPEditor" to be used on the WordPress editor to
+     * power this plugin's blocks. It shall be requested as:
+     *
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor
+     *
+     * If the endpointGroup is not provided, the default admin endpoint
+     * configuration is applied.
+     */
+    public final const ENDPOINT_GROUP = 'endpointGroup';
 }

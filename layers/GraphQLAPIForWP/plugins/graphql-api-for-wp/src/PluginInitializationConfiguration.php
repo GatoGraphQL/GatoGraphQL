@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
+use GraphQLAPI\GraphQLAPI\Constants\EndpointConfigurationGroups;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -23,13 +24,6 @@ use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
-use PoP\ComponentModel\Environment as ComponentModelEnvironment;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\Engine\Environment as EngineEnvironment;
-use PoP\Engine\Module as EngineModule;
-use PoP\Root\Environment as RootEnvironment;
-use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
-use PoP\Root\Module\ModuleInterface;
 use PoPCMSSchema\Categories\Environment as CategoriesEnvironment;
 use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoPCMSSchema\CommentMeta\Environment as CommentMetaEnvironment;
@@ -63,6 +57,13 @@ use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
 use PoPCMSSchema\Users\Module as UsersModule;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\Engine\Environment as EngineEnvironment;
+use PoP\Engine\Module as EngineModule;
+use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Module\ModuleInterface;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -382,7 +383,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
-            // Enable the “sensitive” data: if doing ?behavior=unrestricted, it will already
+            // Enable the “sensitive” data: in the admin endpoint it will already
             // be set by configuration. Otherwise, it uses this mapping
             [
                 'class' => ComponentModelModule::class,
@@ -598,40 +599,83 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             CustomPostsEnvironment::DISABLE_PACKAGES_ADDING_DEFAULT_QUERYABLE_CUSTOMPOST_TYPES => true,
         ];
 
-        // If doing ?behavior=unrestricted, always enable certain features
-        // Retrieve this service from the SystemContainer
-        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-        /** @var EndpointHelpers */
-        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
-            // Enable the “sensitive” data
-            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA] = true;
-            // Enable the "self" fields
-            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::ENABLE_SELF_FIELD] = true;
-            // Enable Nested mutations
-            $moduleClassConfiguration[GraphQLServerModule::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
-            // Do not disable redundant mutation fields in the root type
-            $moduleClassConfiguration[EngineModule::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
+        return $moduleClassConfiguration;
+    }
+
+    /**
+     * Get the fixed configuration for all components required in the plugin
+     * when requesting some specific group in the admin endpoint
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
+     */
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
+    {
+        // Default (i.e. `null`) and all admin endpoints
+        $moduleClassConfiguration = [
+            ComponentModelModule::class => [
+                // Enable the “sensitive” data
+                ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
+                // Enable the "self" fields
+                ComponentModelEnvironment::ENABLE_SELF_FIELD => true
+            ],
             // Allow access to all entries for Root.option
-            $moduleClassConfiguration[SettingsModule::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
-            $moduleClassConfiguration[SettingsModule::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENY;
+            SettingsModule::class => [
+                SettingsEnvironment::SETTINGS_ENTRIES => [],
+                SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY,
+            ],
             // Allow access to all meta values
-            $moduleClassConfiguration[CustomPostMetaModule::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
-            $moduleClassConfiguration[CustomPostMetaModule::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENY;
-            $moduleClassConfiguration[UserMetaModule::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
-            $moduleClassConfiguration[UserMetaModule::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENY;
-            $moduleClassConfiguration[CommentMetaModule::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
-            $moduleClassConfiguration[CommentMetaModule::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENY;
-            $moduleClassConfiguration[TaxonomyMetaModule::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
-            $moduleClassConfiguration[TaxonomyMetaModule::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENY;
-            // Do not use the Payloadable types for mutations
-            $moduleClassConfiguration[\PoPCMSSchema\CommentMutations\Module::class][\PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostCategoryMutations\Module::class][\PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMutations\Module::class][\PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostTagMutations\Module::class][\PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMediaMutations\Module::class][\PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\UserStateMutations\Module::class][\PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS] = false;
+            CustomPostMetaModule::class => [
+                CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES => [],
+                CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR => Behaviors::DENY,
+            ],
+            UserMetaModule::class => [
+                UserMetaEnvironment::USER_META_ENTRIES => [],
+                UserMetaEnvironment::USER_META_BEHAVIOR => Behaviors::DENY,
+            ],
+            CommentMetaModule::class => [
+                CommentMetaEnvironment::COMMENT_META_ENTRIES => [],
+                CommentMetaEnvironment::COMMENT_META_BEHAVIOR => Behaviors::DENY,
+            ],
+            TaxonomyMetaModule::class => [
+                TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES => [],
+                TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
+            ],
+        ];
+        if ($endpointGroup === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR) {
+            $moduleClassConfiguration = array_merge_recursive(
+                $moduleClassConfiguration,
+                [
+                    GraphQLServerModule::class => [
+                        // Enable Nested mutations
+                        GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => true,
+                    ],
+                    EngineModule::class => [
+                        // Do not disable redundant mutation fields in the root type
+                        EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS => false,
+                    ],
+                    // Do not use the Payloadable types for mutations
+                    \PoPCMSSchema\CommentMutations\Module::class => [
+                        \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\CustomPostMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\CustomPostTagMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\UserStateMutations\Module::class => [
+                        \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => false,
+                    ],
+                ]
+            );
         }
+        /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return $moduleClassConfiguration;
     }
 

@@ -8,7 +8,7 @@ class WordPressAuthenticatedUserEndpoints
 {
     public const ENDPOINTS = [
         'admin-client' => 'wp-admin/edit.php?page=graphql_api&action=execute_query',
-        'admin-unrestricted-client' => 'wp-admin/edit.php?page=graphql_api&action=execute_query&behavior=unrestricted',
+        'admin-unrestricted-client' => 'wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor',
         'editing-persisted-query-client' => 'wp-admin/edit.php?page=graphql_api&action=execute_query&persisted_query_id=65',
     ];
 }

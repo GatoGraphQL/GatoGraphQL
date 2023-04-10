@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use PoP\Root\Module\ModuleInterface;
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\Constants\HookNames;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use PoP\Root\Module\ModuleConfigurationHelpers;
+use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Module\ModuleConfigurationHelpers;
+use PoP\Root\Module\ModuleInterface;
+
+use function apply_filters;
 
 /**
  * Base class to set the configuration for all the PoP components,
@@ -201,11 +206,59 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      */
     public function getModuleClassConfiguration(): array
     {
+        $predefinedAdminEndpointModuleClassConfiguration = [];
+        // Retrieve this service from the SystemContainer
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        if (
+            $endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+            && !$endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()
+        ) {
+            /**
+             * (empty) => Default admin endpoint
+             *
+             * @var string
+             */
+            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+            $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
+        }
+
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return array_merge_recursive(
             $this->getPredefinedModuleClassConfiguration(),
+            $predefinedAdminEndpointModuleClassConfiguration,
             $this->getBasedOnModuleEnabledStateModuleClassConfiguration(),
         );
+    }
+
+    /**
+     * Get the fixed configuration for all components required in the plugin
+     * when requesting some specific group in the admin endpoint.
+     *
+     * Allow developers to inject their own endpointGroups and corresnping
+     * configuration via a filter hook
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
+     */
+    private function getPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
+    {
+        return apply_filters(
+            HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CONFIGURATION,
+            $this->doGetPredefinedAdminEndpointModuleClassConfiguration($endpointGroup),
+            $endpointGroup
+        );
+    }
+
+    /**
+     * Get the fixed configuration for all components required in the plugin
+     * when requesting some specific group in the admin endpoint
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
+     */
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
+    {
+        return [];
     }
 
     /**
@@ -263,9 +316,12 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      *
      * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
-    public function getSchemaModuleClassesToSkip(): array
+    final public function getSchemaModuleClassesToSkip(): array
     {
-        // If doing ?behavior=unrestricted, always enable all schema-type modules
+        /**
+         * If doing ?endpointGroup=pluginInternalWPEditor,
+         * always enable all schema-type modules
+         */
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
@@ -280,9 +336,27 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             fn ($module) => !$moduleRegistry->isModuleEnabled($module),
             ARRAY_FILTER_USE_KEY
         );
-        return GeneralUtils::arrayFlatten(array_values(
+        $schemaModuleClassesToSkip = GeneralUtils::arrayFlatten(array_values(
             $skipSchemaModuleClassesPerModule
         ));
+
+        if ($endpointHelpers->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
+            /**
+             * Allow to not disable modules on the admin endpoint.
+             *
+             * (empty) => Default admin endpoint
+             *
+             * @var string|null
+             */
+            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+            return apply_filters(
+                HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
+                $schemaModuleClassesToSkip,
+                $endpointGroup
+            );
+        }
+
+        return $schemaModuleClassesToSkip;
     }
 
     /**
