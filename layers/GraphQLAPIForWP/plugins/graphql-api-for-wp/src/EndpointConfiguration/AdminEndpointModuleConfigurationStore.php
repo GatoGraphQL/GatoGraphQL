@@ -16,7 +16,7 @@ class AdminEndpointModuleConfigurationStore implements AdminEndpointModuleConfig
     /**
      * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
      */
-    public function addEndpointGroupModuleConfiguration(string $endpointGroup, array $moduleClassConfiguration): void
+    public function addEndpointGroupModuleClassConfiguration(string $endpointGroup, array $moduleClassConfiguration): void
     {
         $this->endpointGroupModuleClassConfigurations[$endpointGroup] ??= [];
         foreach ($moduleClassConfiguration as $moduleClass => $moduleEnvVarConfiguration) {

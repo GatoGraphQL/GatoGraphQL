@@ -15,7 +15,7 @@ abstract class AbstractAdminEndpointGroupModuleConfigurationCompilerPass extends
     {
         $adminEndpointModuleConfigurationStore = $containerBuilderWrapper->getDefinition(AdminEndpointModuleConfigurationStoreInterface::class);
         $adminEndpointModuleConfigurationStore->addMethodCall(
-            'addEndpointGroupModuleConfiguration',
+            'addEndpointGroupModuleClassConfiguration',
             [
                 $this->getEndpointGroup(),
                 $this->getModuleClassConfiguration()

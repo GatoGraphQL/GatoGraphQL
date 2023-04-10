@@ -11,7 +11,7 @@ interface AdminEndpointModuleConfigurationStoreInterface
     /**
      * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleConfiguration
      */
-    public function addEndpointGroupModuleConfiguration(string $endpointGroup, array $moduleConfiguration): void;
+    public function addEndpointGroupModuleClassConfiguration(string $endpointGroup, array $moduleConfiguration): void;
     /**
      * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
      */
