@@ -608,7 +608,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
         // Default (i.e. `null`) and all admin endpoints
         $moduleClassConfiguration = [

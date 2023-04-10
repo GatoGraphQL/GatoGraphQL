@@ -211,11 +211,11 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         /**
-         * `null` => Default admin endpoint
+         * (empty) => Default admin endpoint
          *
-         * @var string|null
+         * @var string
          */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
 
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return array_merge_recursive(
@@ -253,7 +253,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    private function getPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
+    private function getPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
         return apply_filters(
             HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CONFIGURATION,
@@ -268,7 +268,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
         return [];
     }
@@ -353,11 +353,11 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             /**
              * Allow to not disable modules on the admin endpoint.
              *
-             * `null` => Default admin endpoint
+             * (empty) => Default admin endpoint
              *
              * @var string|null
              */
-            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
+            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
             return apply_filters(
                 HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
                 $schemaModuleClassesToSkip,
