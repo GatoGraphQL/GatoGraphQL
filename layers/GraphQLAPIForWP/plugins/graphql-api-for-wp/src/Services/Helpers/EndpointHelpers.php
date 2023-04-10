@@ -60,12 +60,12 @@ class EndpointHelpers
 
     /**
      * Obtain the configuration to apply to the requested admin endpoint,
-     * based on the "group" passed under param "endpointConfigurationGroup".
+     * based on the "group" passed under param "endpointGroup".
      * For instance, this plugins defines the configuration group
      * "pluginInternalWPEditor" to be used on the WordPress editor to
      * power this plugin's blocks. It shall be requested as: 
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointConfigurationGroup=pluginInternalWPEditor
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor
      *
      * If the configuration for this group has not been set, it returns `null`
      * (in which case, the default admin endpoint configuration is applied).
@@ -78,7 +78,7 @@ class EndpointHelpers
             return null;
         }
         /** @var string|null */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_CONFIGURATION_GROUP);
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
         if ($endpointGroup === null) {
             return null;
         }
@@ -95,7 +95,7 @@ class EndpointHelpers
     public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_CONFIGURATION_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
+            && App::query(RequestParams::ENDPOINT_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
     }
 
     /**
@@ -172,7 +172,7 @@ class EndpointHelpers
     public function getAdminFixedSchemaGraphQLEndpoint(): string
     {
         return \add_query_arg(
-            RequestParams::ENDPOINT_CONFIGURATION_GROUP,
+            RequestParams::ENDPOINT_GROUP,
             EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR,
             $this->getAdminConfigurableSchemaGraphQLEndpoint()
         );
