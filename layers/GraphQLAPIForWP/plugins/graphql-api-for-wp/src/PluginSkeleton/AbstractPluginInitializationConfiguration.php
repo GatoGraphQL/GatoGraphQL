@@ -231,23 +231,6 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         );
     }
 
-    // @todo Remove this code.
-    // /**
-    //  * Get the fixed configuration for all components required in the plugin
-    //  * when requesting some specific group in the admin endpoint
-    //  *
-    //  * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
-    //  */
-    // protected function getPredefinedAdminEndpointModuleClassConfiguration(): array
-    // {
-    //     // Retrieve this service from the SystemContainer
-    //     $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-    //     /** @var EndpointHelpers */
-    //     $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-    //     // If doing ?endpointGroup=pluginInternalWPEditor, always enable certain features
-    //     return $endpointHelpers->getAdminEndpointModuleClassConfiguration() ?? [];
-    // }
-
     /**
      * Get the fixed configuration for all components required in the plugin
      * when requesting some specific group in the admin endpoint.
