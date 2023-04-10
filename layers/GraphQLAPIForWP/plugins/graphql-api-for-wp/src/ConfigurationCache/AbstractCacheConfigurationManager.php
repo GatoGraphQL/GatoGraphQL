@@ -62,7 +62,6 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         /**
          * admin/non-admin screens have different services enabled.
          */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
         if (\is_admin()) {
             /**
              * Different admin endpoints might also have different services,
