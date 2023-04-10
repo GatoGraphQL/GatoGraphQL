@@ -53,7 +53,7 @@ class EndpointHelpers
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor
      */
-    public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
+    public function isRequestingAdminPluginInternalWPEditorGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
             && App::query(RequestParams::ENDPOINT_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
@@ -78,7 +78,7 @@ class EndpointHelpers
     public function isRequestingGraphQLEndpointForAdminClientOnly(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && !$this->isRequestingAdminFixedSchemaGraphQLEndpoint()
+            && !$this->isRequestingAdminPluginInternalWPEditorGraphQLEndpoint()
             && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
     }
 

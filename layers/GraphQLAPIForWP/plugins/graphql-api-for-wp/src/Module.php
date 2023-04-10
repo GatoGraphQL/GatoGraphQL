@@ -116,7 +116,7 @@ class Module extends AbstractPluginModule
             $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
             $this->initSchemaServices(
                 dirname(__DIR__),
-                !$endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint(),
+                !$endpointHelpers->isRequestingAdminPluginInternalWPEditorGraphQLEndpoint(),
                 '/ConditionalOnContext/Admin/ConditionalOnContext/Editor'
             );
         }
