@@ -30,7 +30,10 @@ class EndpointHelpers
     }
 
     /**
-     * Indicate if we are requesting the wp-admin endpoint, under:
+     * Indicate if we are requesting the wp-admin endpoint, which
+     * powers the GraphiQL/Voyager clients, and can also be invoked
+     * by 3rd-party plugins and developers to fetch data for their
+     * blocks on the WordPress editor, under:
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query
      */
@@ -57,7 +60,7 @@ class EndpointHelpers
 
     /**
      * Indicate if we are requesting the wp-admin endpoint that
-     * fetches data for Persisted Queries:
+     * fetches data for Persisted Queries, under:
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query&persisted_query_id=...
      */
