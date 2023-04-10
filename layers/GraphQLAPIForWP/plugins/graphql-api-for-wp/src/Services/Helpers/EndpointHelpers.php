@@ -58,28 +58,28 @@ class EndpointHelpers
             && App::query(RequestParams::ACTION) === RequestParams::ACTION_EXECUTE_QUERY;
     }
 
-    /**
-     * Obtain the configuration to apply to the requested admin endpoint,
-     * based on the "group" passed under param "endpointGroup", and merge it
-     * into the provided $moduleClassConfiguration.
-     *
-     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
-     * @return array<class-string<ModuleInterface>,array<string,mixed>>
-     */
-    public function addAdminEndpointModuleClassConfiguration(array $moduleClassConfiguration): array
-    {
-        $adminEndpointModuleClassConfiguration = $this->getAdminEndpointModuleClassConfiguration();
-        if ($adminEndpointModuleClassConfiguration === null) {
-            return $moduleClassConfiguration;
-        }
-        foreach ($adminEndpointModuleClassConfiguration as $moduleClass => $moduleEnvVarConfiguration) {
-            $moduleClassConfiguration[$moduleClass] = array_merge(
-                $moduleClassConfiguration[$moduleClass] ?? [],
-                $moduleEnvVarConfiguration
-            );
-        }
-        return $moduleClassConfiguration;
-    }
+    // /**
+    //  * Obtain the configuration to apply to the requested admin endpoint,
+    //  * based on the "group" passed under param "endpointGroup", and merge it
+    //  * into the provided $moduleClassConfiguration.
+    //  *
+    //  * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
+    //  * @return array<class-string<ModuleInterface>,array<string,mixed>>
+    //  */
+    // public function addAdminEndpointModuleClassConfiguration(array $moduleClassConfiguration): array
+    // {
+    //     $adminEndpointModuleClassConfiguration = $this->getAdminEndpointModuleClassConfiguration();
+    //     if ($adminEndpointModuleClassConfiguration === null) {
+    //         return $moduleClassConfiguration;
+    //     }
+    //     foreach ($adminEndpointModuleClassConfiguration as $moduleClass => $moduleEnvVarConfiguration) {
+    //         $moduleClassConfiguration[$moduleClass] = array_merge(
+    //             $moduleClassConfiguration[$moduleClass] ?? [],
+    //             $moduleEnvVarConfiguration
+    //         );
+    //     }
+    //     return $moduleClassConfiguration;
+    // }
 
     /**
      * Obtain the configuration to apply to the requested admin endpoint,
