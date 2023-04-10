@@ -105,7 +105,7 @@ class EndpointHelpers
         if ($endpointGroup === null) {
             return null;
         }
-        return $this->getAdminEndpointModuleConfigurationStore()->getModuleConfiguration($endpointGroup);
+        return $this->getAdminEndpointModuleConfigurationStore()->getModuleClassConfiguration($endpointGroup);
     }
 
     /**

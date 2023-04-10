@@ -11,17 +11,17 @@ class AdminEndpointModuleConfigurationStore implements AdminEndpointModuleConfig
     /**
      * @var array<string,array<class-string<ModuleInterface>,array<string,mixed>>>
      */
-    protected array $endpointGroupModuleConfigurations = [];
+    protected array $endpointGroupModuleClassConfigurations = [];
 
     /**
      * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
      */
     public function addEndpointGroupModuleConfiguration(string $endpointGroup, array $moduleClassConfiguration): void
     {
-        $this->endpointGroupModuleConfigurations[$endpointGroup] ??= [];
+        $this->endpointGroupModuleClassConfigurations[$endpointGroup] ??= [];
         foreach ($moduleClassConfiguration as $moduleClass => $moduleEnvVarConfiguration) {
-            $this->endpointGroupModuleConfigurations[$endpointGroup] = array_merge(
-                $this->endpointGroupModuleConfigurations[$endpointGroup][$moduleClass] ?? [],
+            $this->endpointGroupModuleClassConfigurations[$endpointGroup] = array_merge(
+                $this->endpointGroupModuleClassConfigurations[$endpointGroup][$moduleClass] ?? [],
                 $moduleEnvVarConfiguration
             );
         };
@@ -30,8 +30,8 @@ class AdminEndpointModuleConfigurationStore implements AdminEndpointModuleConfig
     /**
      * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
      */
-    public function getModuleConfiguration(string $endpointGroup): ?array
+    public function getModuleClassConfiguration(string $endpointGroup): ?array
     {
-        return $this->endpointGroupModuleConfigurations[$endpointGroup] ?? null;
+        return $this->endpointGroupModuleClassConfigurations[$endpointGroup] ?? null;
     }
 }

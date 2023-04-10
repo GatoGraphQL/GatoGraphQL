@@ -15,5 +15,5 @@ interface AdminEndpointModuleConfigurationStoreInterface
     /**
      * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
      */
-    public function getModuleConfiguration(string $endpointGroup): ?array;
+    public function getModuleClassConfiguration(string $endpointGroup): ?array;
 }

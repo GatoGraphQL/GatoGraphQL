@@ -13,7 +13,7 @@ class PluginInternalWPEditorAdminEndpointGroupModuleConfigurationCompilerPass ex
      * @return array<string,array<string,mixed>>
      * @phpstan-return array<class-string<ModuleInterface>,array<string,mixed>>
      */
-    protected function getModuleConfiguration(): array
+    protected function getModuleClassConfiguration(): array
     {
         return [];
     }

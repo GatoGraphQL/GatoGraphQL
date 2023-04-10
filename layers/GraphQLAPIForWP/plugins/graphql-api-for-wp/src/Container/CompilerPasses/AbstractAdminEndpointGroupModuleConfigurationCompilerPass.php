@@ -18,7 +18,7 @@ abstract class AbstractAdminEndpointGroupModuleConfigurationCompilerPass extends
             'addEndpointGroupModuleConfiguration',
             [
                 $this->getEndpointGroup(),
-                $this->getModuleConfiguration()
+                $this->getModuleClassConfiguration()
             ]
         );
     }
@@ -27,6 +27,6 @@ abstract class AbstractAdminEndpointGroupModuleConfigurationCompilerPass extends
      * @return array<string,array<string,mixed>>
      * @phpstan-return array<class-string<ModuleInterface>,array<string,mixed>>
      */
-    abstract protected function getModuleConfiguration(): array;
+    abstract protected function getModuleClassConfiguration(): array;
     abstract protected function getEndpointGroup(): string;
 }
