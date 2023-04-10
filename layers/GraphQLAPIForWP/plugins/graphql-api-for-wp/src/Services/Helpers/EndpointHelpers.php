@@ -83,8 +83,10 @@ class EndpointHelpers
     }
 
     /**
-     * Indicate if we are requesting in the wp-admin:
-     * GraphiQL and Voyager clients + ACL/CCL configurations
+     * Indicate if we are requesting any admin endpoint execept persisted queries:
+     *
+     * - GraphiQL and Voyager clients
+     * - ?endpointGroup=pluginInternalWPEditor
      */
     public function isRequestingNonPersistedQueryAdminGraphQLEndpoint(): bool
     {
