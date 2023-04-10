@@ -30,7 +30,7 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
      */
     final protected function provideEndpointEntries(): array
     {
-        $accessGrantedEndpoint = 'wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor';
+        $accessGrantedEndpoint = 'wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginInternalWPEditor';
         $accessForbiddenEndpoint = 'wp-admin/edit.php?page=graphql_api&action=execute_query';
 
         $fixtureFolder = $this->getFixtureFolder();
