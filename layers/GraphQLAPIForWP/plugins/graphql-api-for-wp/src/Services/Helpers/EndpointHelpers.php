@@ -68,7 +68,7 @@ class EndpointHelpers
      */
     public function addAdminEndpointModuleConfiguration(array $moduleClassConfiguration): array
     {
-        $adminEndpointModuleConfiguration = $this->getAdminEndpointModuleConfiguration();
+        $adminEndpointModuleConfiguration = $this->getAdminEndpointModuleClassConfiguration();
         if ($adminEndpointModuleConfiguration === null) {
             return $moduleClassConfiguration;
         }
@@ -95,7 +95,7 @@ class EndpointHelpers
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
      */
-    protected function getAdminEndpointModuleConfiguration(): ?array
+    protected function getAdminEndpointModuleClassConfiguration(): ?array
     {
         if (!$this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
             return null;
