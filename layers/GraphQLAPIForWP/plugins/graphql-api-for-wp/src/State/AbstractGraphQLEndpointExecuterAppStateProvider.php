@@ -12,6 +12,8 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractAppStateProvider
 {
+    use ExecutingGraphQLRequestAppStateProviderTrait;
+
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
@@ -32,12 +34,30 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
     }
 
     /**
+     * Watch out! This logic is now being superseded by
+     * `$appLoader->setInitialAppState($graphQLRequestAppState);`
+     * in AbstractMainPlugin. However, it has not been removed
+     * as there's no harm, and it provides a backup solution.
+     *
+     * Due to that same code, ?output=json is being set always.
+     * As ->doingJSON can't then be used anymore, here the new
+     * state "executing-graphql" is added.
+     *
+     * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/PluginSkeleton/AbstractMainPlugin.php
+     * @see layers/Engine/packages/engine-wp/src/Hooks/TemplateHookSet.php
+     *
      * @param array<string,mixed> $state
      */
     public function initialize(array &$state): void
     {
         $state['scheme'] = APISchemes::API;
         $state['datastructure'] = $this->getGraphQLDataStructureFormatter()->getName();
+
+        /**
+         * Artificial state, to signify that this is indeed
+         * a GraphQL request.
+         */
+        $this->addExecutingGraphQLState($state);
     }
 
     /**

@@ -559,7 +559,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * this plugin (eg: ?datastructure=rest is not supported).
              *
              * ------------------------------------------------------------
-             * 
+             *
              * Watch out! When calling `setInitialAppState` below,
              * the state will always be set to '?datastructure=graphql',
              * which will then also set '?output=json'.
@@ -568,9 +568,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * will always return true, and even a 404 page will be processed
              * as a GraphQL response.
              *
-             * @todo: Fix!!!
-             * 
+             * As a solution, the logic for `useTemplate` instead relies on
+             * any GraphQL endpoint having been requested, added under
+             * artificial state "executing-graphql".
+             *
              * @see layers/Engine/packages/engine-wp/src/Hooks/TemplateHookSet.php function `useTemplate`
+             * @see submodules/PoP/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Overrides/State/GraphQLEndpointHandlerAppStateProvider.php
+             * @see submodules/PoP/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Overrides/Hooks/TemplateHookSet.php
+             * @see submodules/PoP/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
              */
             $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
             $appLoader->setInitialAppState($graphQLRequestAppState);
