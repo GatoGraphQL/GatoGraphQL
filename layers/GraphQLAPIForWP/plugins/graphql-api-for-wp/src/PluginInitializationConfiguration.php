@@ -368,7 +368,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
             ],
-            // White/Blacklisted entries to Root.option
+            // White/Blacklisted entries to Root.optionValue
             [
                 'class' => SettingsModule::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_ENTRIES,
@@ -618,7 +618,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 // Enable the "self" fields
                 ComponentModelEnvironment::ENABLE_SELF_FIELD => true
             ],
-            // Allow access to all entries for Root.option
+            // Allow access to all entries for Root.optionValue
             SettingsModule::class => [
                 SettingsEnvironment::SETTINGS_ENTRIES => [],
                 SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY,
