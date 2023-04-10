@@ -83,10 +83,24 @@ class EndpointHelpers
     }
 
     /**
-     * Indicate if we are requesting any admin endpoint execept persisted queries:
-     *
-     * - GraphiQL and Voyager clients
-     * - ?endpointGroup=pluginInternalWPEditor
+     * Indicate if we are requesting the default admin endpoint,
+     * i.e. without the "endpointGroup" or "persisted_query_id" params
+     */
+    public function isRequestingDefaultAdminGraphQLEndpoint(): bool
+    {
+        if (!$this->isRequestingAdminGraphQLEndpoint()
+            || $this->isRequestingAdminPersistedQueryGraphQLEndpoint()
+        ) {
+            return false;
+        }
+        /** @var string */
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+        return $endpointGroup === '';
+    }
+
+    /**
+     * Indicate if we are requesting any admin endpoint
+     * except persisted queries.
      */
     public function isRequestingNonPersistedQueryAdminGraphQLEndpoint(): bool
     {
