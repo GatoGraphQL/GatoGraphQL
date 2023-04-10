@@ -13,6 +13,6 @@ class TemplateHookSet extends UpstreamTemplateHookSet
      */
     protected function useTemplate(): bool
     {
-        return !parent::useTemplate();
+        return !$this->getApplicationStateHelperService()->doingJSON();
     }
 }
