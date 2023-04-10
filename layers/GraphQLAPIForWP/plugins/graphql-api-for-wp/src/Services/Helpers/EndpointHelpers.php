@@ -60,6 +60,29 @@ class EndpointHelpers
 
     /**
      * Obtain the configuration to apply to the requested admin endpoint,
+     * based on the "group" passed under param "endpointGroup", and merge it
+     * into the provided $moduleConfiguration.
+     *
+     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleConfiguration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>>
+     */
+    public function addAdminEndpointModuleConfiguration(array $moduleConfiguration): array
+    {
+        $adminEndpointModuleConfiguration = $this->getAdminEndpointModuleConfiguration();
+        if ($adminEndpointModuleConfiguration === null) {
+            return $moduleConfiguration;
+        }
+        foreach ($adminEndpointModuleConfiguration as $module => $moduleEnvVarConfiguration) {
+            $moduleConfiguration[$module] = array_merge(
+                $moduleConfiguration[$module] ?? [],
+                $moduleEnvVarConfiguration
+            );
+        }
+        return $moduleConfiguration;
+    }
+
+    /**
+     * Obtain the configuration to apply to the requested admin endpoint,
      * based on the "group" passed under param "endpointGroup".
      * For instance, this plugins defines the configuration group
      * "pluginInternalWPEditor" to be used on the WordPress editor to
@@ -72,7 +95,7 @@ class EndpointHelpers
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
      */
-    public function getAdminEndpointModuleConfiguration(): ?array
+    protected function getAdminEndpointModuleConfiguration(): ?array
     {
         if (!$this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
             return null;
