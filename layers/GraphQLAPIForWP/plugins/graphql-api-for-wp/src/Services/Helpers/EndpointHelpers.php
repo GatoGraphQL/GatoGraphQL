@@ -38,7 +38,7 @@ class EndpointHelpers
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query
      */
-    public function isRequestingAdminConfigurableSchemaGraphQLEndpoint(): bool
+    public function isRequestingAdminGraphQLEndpoint(): bool
     {
         return \is_admin()
             && 'POST' === App::server('REQUEST_METHOD')
@@ -55,7 +55,7 @@ class EndpointHelpers
      */
     public function isRequestingAdminFixedSchemaGraphQLEndpoint(): bool
     {
-        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+        return $this->isRequestingAdminGraphQLEndpoint()
             && App::query(RequestParams::ENDPOINT_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
     }
 
@@ -67,7 +67,7 @@ class EndpointHelpers
      */
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
-        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+        return $this->isRequestingAdminGraphQLEndpoint()
             && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
@@ -77,7 +77,7 @@ class EndpointHelpers
      */
     public function isRequestingGraphQLEndpointForAdminClientOnly(): bool
     {
-        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+        return $this->isRequestingAdminGraphQLEndpoint()
             && !$this->isRequestingAdminFixedSchemaGraphQLEndpoint()
             && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
     }
@@ -88,7 +88,7 @@ class EndpointHelpers
      */
     public function isRequestingGraphQLEndpointForAdminClientOrConfiguration(): bool
     {
-        return $this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()
+        return $this->isRequestingAdminGraphQLEndpoint()
             && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
     }
 
