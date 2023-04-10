@@ -215,7 +215,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          *
          * @var string|null
          */
-        $endpointGroup = $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
 
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return array_merge_recursive(
