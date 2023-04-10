@@ -675,6 +675,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ]
             );
         }
+        /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return $moduleClassConfiguration;
     }
 
