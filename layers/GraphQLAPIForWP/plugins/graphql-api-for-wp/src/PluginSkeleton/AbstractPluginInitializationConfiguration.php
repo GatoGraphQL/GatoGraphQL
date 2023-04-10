@@ -207,7 +207,11 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        // `null` => Default admin endpoint
+        /**
+         * `null` => Default admin endpoint
+         *
+         * @var string|null
+         */
         $endpointGroup = $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
 
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
