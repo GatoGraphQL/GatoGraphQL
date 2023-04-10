@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Overrides\State;
 
+use GraphQLAPI\GraphQLAPI\State\ExecutingGraphQLRequestAppStateProviderTrait;
 use GraphQLByPoP\GraphQLEndpointForWP\State\GraphQLEndpointHandlerAppStateProvider as UpstreamGraphQLEndpointHandlerAppStateProvider;
 
 class GraphQLEndpointHandlerAppStateProvider extends UpstreamGraphQLEndpointHandlerAppStateProvider
 {
+    use ExecutingGraphQLRequestAppStateProviderTrait;
+    
     /**
      * @param array<string,mixed> $state
      */
@@ -19,6 +22,6 @@ class GraphQLEndpointHandlerAppStateProvider extends UpstreamGraphQLEndpointHand
          * Artificial state, to signify that this is indeed
          * a GraphQL request.
          */
-        $state['executing-graphql'] = true;
+        $this->addExecutingGraphQLState($state);
     }
 }

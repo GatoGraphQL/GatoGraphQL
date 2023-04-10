@@ -12,6 +12,8 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractAppStateProvider
 {
+    use ExecutingGraphQLRequestAppStateProviderTrait;
+
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
@@ -55,7 +57,7 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
          * Artificial state, to signify that this is indeed
          * a GraphQL request.
          */
-        $state['executing-graphql'] = true;
+        $this->addExecutingGraphQLState($state);
     }
 
     /**
