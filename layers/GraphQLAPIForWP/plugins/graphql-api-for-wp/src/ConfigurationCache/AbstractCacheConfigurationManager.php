@@ -14,6 +14,8 @@ use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function sanitize_file_name;
+
 /**
  * Inject configuration to the cache
  *
@@ -72,7 +74,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              * @var string
              */
             $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
-            $suffix = 'a' . ($endpointGroup !== '' ? '_' . $endpointGroup : '');
+            $suffix = 'a' . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
         } else {
             $suffix = 'c';
         }
