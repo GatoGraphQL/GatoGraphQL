@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLEndpointForWP\State\GraphQLEndpointHandlerAppStateProvid
 class GraphQLEndpointHandlerAppStateProvider extends UpstreamGraphQLEndpointHandlerAppStateProvider
 {
     use ExecutingGraphQLRequestAppStateProviderTrait;
-    
+
     /**
      * @param array<string,mixed> $state
      */

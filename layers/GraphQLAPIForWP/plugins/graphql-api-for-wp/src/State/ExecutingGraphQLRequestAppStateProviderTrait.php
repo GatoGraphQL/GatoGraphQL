@@ -9,7 +9,7 @@ trait ExecutingGraphQLRequestAppStateProviderTrait
     /**
      * Due to `$appLoader->setInitialAppState($graphQLRequestAppState);`
      * in AbstractMainPlugin, ?output=json is being set always.
-     * 
+     *
      * As ->doingJSON can't then be used anymore to decide to print the
      * JSON response or not, we add the artificial state
      * "executing-graphql", to signify "this is indeed a GraphQL request",
