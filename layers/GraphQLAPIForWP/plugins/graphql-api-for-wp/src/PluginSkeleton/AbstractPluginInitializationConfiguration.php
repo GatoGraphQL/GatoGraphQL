@@ -328,7 +328,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      *
      * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
-    public function getSchemaModuleClassesToSkip(): array
+    final public function getSchemaModuleClassesToSkip(): array
     {
         // If doing ?behavior=unrestricted, always enable all schema-type modules
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
