@@ -61,24 +61,24 @@ class EndpointHelpers
     /**
      * Obtain the configuration to apply to the requested admin endpoint,
      * based on the "group" passed under param "endpointGroup", and merge it
-     * into the provided $moduleConfiguration.
+     * into the provided $moduleClassConfiguration.
      *
-     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleConfiguration
+     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
      * @return array<class-string<ModuleInterface>,array<string,mixed>>
      */
-    public function addAdminEndpointModuleConfiguration(array $moduleConfiguration): array
+    public function addAdminEndpointModuleConfiguration(array $moduleClassConfiguration): array
     {
         $adminEndpointModuleConfiguration = $this->getAdminEndpointModuleConfiguration();
         if ($adminEndpointModuleConfiguration === null) {
-            return $moduleConfiguration;
+            return $moduleClassConfiguration;
         }
-        foreach ($adminEndpointModuleConfiguration as $module => $moduleEnvVarConfiguration) {
-            $moduleConfiguration[$module] = array_merge(
-                $moduleConfiguration[$module] ?? [],
+        foreach ($adminEndpointModuleConfiguration as $moduleClass => $moduleEnvVarConfiguration) {
+            $moduleClassConfiguration[$moduleClass] = array_merge(
+                $moduleClassConfiguration[$moduleClass] ?? [],
                 $moduleEnvVarConfiguration
             );
         }
-        return $moduleConfiguration;
+        return $moduleClassConfiguration;
     }
 
     /**

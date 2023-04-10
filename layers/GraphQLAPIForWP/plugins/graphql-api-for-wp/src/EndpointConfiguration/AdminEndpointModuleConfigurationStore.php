@@ -14,14 +14,14 @@ class AdminEndpointModuleConfigurationStore implements AdminEndpointModuleConfig
     protected array $endpointGroupModuleConfigurations = [];
 
     /**
-     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleConfiguration
+     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration
      */
-    public function addEndpointGroupModuleConfiguration(string $endpointGroup, array $moduleConfiguration): void
+    public function addEndpointGroupModuleConfiguration(string $endpointGroup, array $moduleClassConfiguration): void
     {
         $this->endpointGroupModuleConfigurations[$endpointGroup] ??= [];
-        foreach ($moduleConfiguration as $module => $moduleEnvVarConfiguration) {
+        foreach ($moduleClassConfiguration as $moduleClass => $moduleEnvVarConfiguration) {
             $this->endpointGroupModuleConfigurations[$endpointGroup] = array_merge(
-                $this->endpointGroupModuleConfigurations[$endpointGroup][$module] ?? [],
+                $this->endpointGroupModuleConfigurations[$endpointGroup][$moduleClass] ?? [],
                 $moduleEnvVarConfiguration
             );
         };
