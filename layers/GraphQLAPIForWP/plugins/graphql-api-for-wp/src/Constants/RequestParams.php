@@ -25,7 +25,7 @@ class RequestParams
      *
      * For instance, this plugin defines the configuration endpointGroup
      * "pluginInternalWPEditor" to be used on the WordPress editor to
-     * power this plugin's blocks. It shall be requested as: 
+     * power this plugin's blocks. It shall be requested as:
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointGroup=pluginInternalWPEditor
      *
