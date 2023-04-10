@@ -62,7 +62,6 @@ use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
 use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
 use PoPCMSSchema\Users\Module as UsersModule;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -598,40 +597,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             CustomPostsEnvironment::DISABLE_PACKAGES_ADDING_DEFAULT_QUERYABLE_CUSTOMPOST_TYPES => true,
         ];
 
-        // If doing ?behavior=unrestricted, always enable certain features
         // Retrieve this service from the SystemContainer
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
-            // Enable the “sensitive” data
-            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA] = true;
-            // Enable the "self" fields
-            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::ENABLE_SELF_FIELD] = true;
-            // Enable Nested mutations
-            $moduleClassConfiguration[GraphQLServerModule::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
-            // Do not disable redundant mutation fields in the root type
-            $moduleClassConfiguration[EngineModule::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
-            // Allow access to all entries for Root.option
-            $moduleClassConfiguration[SettingsModule::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
-            $moduleClassConfiguration[SettingsModule::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENY;
-            // Allow access to all meta values
-            $moduleClassConfiguration[CustomPostMetaModule::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
-            $moduleClassConfiguration[CustomPostMetaModule::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENY;
-            $moduleClassConfiguration[UserMetaModule::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
-            $moduleClassConfiguration[UserMetaModule::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENY;
-            $moduleClassConfiguration[CommentMetaModule::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
-            $moduleClassConfiguration[CommentMetaModule::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENY;
-            $moduleClassConfiguration[TaxonomyMetaModule::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
-            $moduleClassConfiguration[TaxonomyMetaModule::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENY;
-            // Do not use the Payloadable types for mutations
-            $moduleClassConfiguration[\PoPCMSSchema\CommentMutations\Module::class][\PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostCategoryMutations\Module::class][\PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMutations\Module::class][\PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostTagMutations\Module::class][\PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMediaMutations\Module::class][\PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS] = false;
-            $moduleClassConfiguration[\PoPCMSSchema\UserStateMutations\Module::class][\PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS] = false;
-        }
+        // If doing ?endpointGroup=pluginInternalWPEditor, always enable certain features
+        $moduleClassConfiguration = $endpointHelpers->addAdminEndpointModuleClassConfiguration($moduleClassConfiguration);
         return $moduleClassConfiguration;
     }
 
