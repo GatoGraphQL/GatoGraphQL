@@ -10,7 +10,7 @@ use PoP\Root\Container\ContainerBuilderWrapperInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Module\ModuleInterface;
 
-abstract class AbstractConfigureAdminEndpointCompilerPass extends AbstractCompilerPass
+abstract class AbstractAdminEndpointGroupModuleConfigurationCompilerPass extends AbstractCompilerPass
 {
     protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
