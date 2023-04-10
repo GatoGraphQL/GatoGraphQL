@@ -242,7 +242,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    protected function getPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
+    protected function getPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
     {
         return [];
     }
