@@ -6,33 +6,30 @@ namespace GraphQLAPI\GraphQLAPI\EndpointConfiguration;
 
 class AdminEndpointModuleConfiguratorService implements AdminEndpointModuleConfiguratorServiceInterface
 {
-    // /**
-    //  * @var array<string,string>
-    //  */
-    // protected array $classOwnerAndProjectNamespaceSchemaNamespaces = [];
+    /**
+     * @var array<string,array<string,array<string,mixed>>>
+     */
+    protected array $endpointGroupModuleConfigurations = [];
 
-    // public function addSchemaNamespaceForClassOwnerAndProjectNamespace(string $classOwnerAndProjectNamespace, string $schemaNamespace): void
-    // {
-    //     $this->classOwnerAndProjectNamespaceSchemaNamespaces[$classOwnerAndProjectNamespace] = $schemaNamespace;
-    // }
+    /**
+     * @param array<string,array<string,mixed>> $moduleConfiguration
+     */
+    public function addEndpointGroupModuleConfiguration(string $endpointGroup, array $moduleConfiguration): void
+    {
+        $this->endpointGroupModuleConfigurations[$endpointGroup] ??= [];
+        foreach ($moduleConfiguration as $module => $moduleEnvVarConfiguration) {
+            $this->endpointGroupModuleConfigurations[$endpointGroup] = array_merge(
+                $this->endpointGroupModuleConfigurations[$endpointGroup][$module] ?? [],
+                $moduleEnvVarConfiguration
+            );
+        };
+    }
 
-    // public function getSchemaNamespace(string $class): string
-    // {
-    //     $classOwnerAndProjectNamespace = ClassHelpers::getClassPSR4Namespace($class);
-    //     // Check if an entry for this combination of Owner + class has been provided
-    //     if (isset($this->classOwnerAndProjectNamespaceSchemaNamespaces[$classOwnerAndProjectNamespace])) {
-    //         return $this->classOwnerAndProjectNamespaceSchemaNamespaces[$classOwnerAndProjectNamespace];
-    //     }
-    //     return $this->convertClassNamespaceToSchemaNamespace($classOwnerAndProjectNamespace);
-    // }
-
-    // protected function convertClassNamespaceToSchemaNamespace(string $classNamespace): string
-    // {
-    //     return str_replace('\\', SchemaDefinitionTokens::NAMESPACE_SEPARATOR, $classNamespace);
-    // }
-
-    // public function getSchemaNamespacedName(string $schemaNamespace, string $name): string
-    // {
-    //     return ($schemaNamespace ? $schemaNamespace . SchemaDefinitionTokens::NAMESPACE_SEPARATOR : '') . $name;
-    // }
+    /**
+     * @return array<string,array<string,mixed>>|null
+     */
+    public function getModuleConfiguration(string $endpointGroup): ?array
+    {
+        return $this->endpointGroupModuleConfigurations[$endpointGroup] ?? null;
+    }
 }

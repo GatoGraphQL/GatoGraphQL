@@ -6,6 +6,12 @@ namespace GraphQLAPI\GraphQLAPI\EndpointConfiguration;
 
 interface AdminEndpointModuleConfiguratorServiceInterface
 {
-    public function addModuleConfigurationForAdminEndpointGroup(string $group, array $configuration): void;
-    public function getModuleConfiguration(string $group): array;
+    /**
+     * @param array<string,array<string,mixed>> $moduleConfiguration
+     */
+    public function addEndpointGroupModuleConfiguration(string $endpointGroup, array $moduleConfiguration): void;
+    /**
+     * @return array<string,array<string,mixed>>|null
+     */
+    public function getModuleConfiguration(string $endpointGroup): ?array;
 }
