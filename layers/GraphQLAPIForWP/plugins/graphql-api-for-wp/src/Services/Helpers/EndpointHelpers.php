@@ -6,12 +6,14 @@ namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Constants\EndpointConfigurationGroups;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\EndpointConfiguration\AdminEndpointModuleConfigurationStoreInterface;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Constants\Params as GraphQLServerParams;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\Root\App;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 class EndpointHelpers
@@ -19,6 +21,7 @@ class EndpointHelpers
     use BasicServiceTrait;
 
     private ?PluginMenu $pluginMenu = null;
+    private ?AdminEndpointModuleConfigurationStoreInterface $adminEndpointModuleConfigurationStore = null;
 
     final public function setPluginMenu(PluginMenu $pluginMenu): void
     {
@@ -28,6 +31,15 @@ class EndpointHelpers
     {
         /** @var PluginMenu */
         return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
+    }
+    final public function setAdminEndpointModuleConfigurationStore(AdminEndpointModuleConfigurationStoreInterface $adminEndpointModuleConfigurationStore): void
+    {
+        $this->adminEndpointModuleConfigurationStore = $adminEndpointModuleConfigurationStore;
+    }
+    final protected function getAdminEndpointModuleConfigurationStore(): AdminEndpointModuleConfigurationStoreInterface
+    {
+        /** @var AdminEndpointModuleConfigurationStoreInterface */
+        return $this->adminEndpointModuleConfigurationStore ??= $this->instanceManager->getInstance(AdminEndpointModuleConfigurationStoreInterface::class);
     }
 
     /**
@@ -44,6 +56,33 @@ class EndpointHelpers
             && 'POST' === App::server('REQUEST_METHOD')
             && App::query('page') === $this->getPluginMenu()->getName()
             && App::query(RequestParams::ACTION) === RequestParams::ACTION_EXECUTE_QUERY;
+    }
+
+    /**
+     * Obtain the configuration to apply to the requested admin endpoint,
+     * based on the "group" passed under param "endpointConfigurationGroup".
+     * For instance, this plugins defines the configuration group
+     * "pluginInternalWPEditor" to be used on the WordPress editor to
+     * power this plugin's blocks. It shall be requested as: 
+     *
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpointConfigurationGroup=pluginInternalWPEditor
+     *
+     * If the configuration for this group has not been set, it returns `null`
+     * (in which case, the default admin endpoint configuration is applied).
+     *
+     * @return array<class-string<ModuleInterface>,array<string,mixed>>|null
+     */
+    public function getAdminEndpointModuleConfiguration(): ?array
+    {
+        if (!$this->isRequestingAdminConfigurableSchemaGraphQLEndpoint()) {
+            return null;
+        }
+        /** @var string|null */
+        $endpointGroup = App::query(RequestParams::ENDPOINT_CONFIGURATION_GROUP);
+        if ($endpointGroup === null) {
+            return null;
+        }
+        return $this->getAdminEndpointModuleConfigurationStore()->getModuleConfiguration($endpointGroup);
     }
 
     /**
