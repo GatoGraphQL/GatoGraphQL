@@ -256,7 +256,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     private function getPredefinedAdminEndpointModuleClassConfiguration(?string $endpointGroup): array
     {
         return apply_filters(
-            HookNames::ADMIN_ENDPOINT_GROUP_CONFIGURATION,
+            HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CONFIGURATION,
             $this->doGetPredefinedAdminEndpointModuleClassConfiguration($endpointGroup),
             $endpointGroup
         );
