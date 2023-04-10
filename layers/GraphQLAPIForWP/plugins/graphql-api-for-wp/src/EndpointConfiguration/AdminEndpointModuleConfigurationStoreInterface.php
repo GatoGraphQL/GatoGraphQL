@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\EndpointConfiguration;
 
-interface AdminEndpointModuleConfiguratorServiceInterface
+interface AdminEndpointModuleConfigurationStoreInterface
 {
     /**
      * @param array<string,array<string,mixed>> $moduleConfiguration

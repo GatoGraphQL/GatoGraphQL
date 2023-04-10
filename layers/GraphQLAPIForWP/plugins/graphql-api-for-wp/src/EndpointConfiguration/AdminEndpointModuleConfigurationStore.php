@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\EndpointConfiguration;
 
-class AdminEndpointModuleConfiguratorService implements AdminEndpointModuleConfiguratorServiceInterface
+class AdminEndpointModuleConfigurationStore implements AdminEndpointModuleConfigurationStoreInterface
 {
     /**
      * @var array<string,array<string,array<string,mixed>>>
