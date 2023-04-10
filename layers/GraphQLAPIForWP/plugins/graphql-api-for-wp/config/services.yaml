@@ -43,6 +43,9 @@ services:
     GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface:
         class: \GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProvider
 
+    GraphQLAPI\GraphQLAPI\EndpointConfiguration\AdminEndpointModuleConfiguratorServiceInterface:
+        class: \GraphQLAPI\GraphQLAPI\EndpointConfiguration\AdminEndpointModuleConfiguratorService
+
     GraphQLAPI\GraphQLAPI\Services\:
         resource: ../src/Services/*
 
