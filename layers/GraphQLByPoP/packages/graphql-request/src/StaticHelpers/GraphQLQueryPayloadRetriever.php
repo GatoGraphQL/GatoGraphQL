@@ -31,9 +31,10 @@ class GraphQLQueryPayloadRetriever
                 return null;
             }
             $json = (object) $decodedJSON;
-            $payload = [
-                'query' => $json->query,
-            ];
+            $payload = [];
+            if (isset($json->query)) {
+                $payload['query'] = $json->query;
+            }
             if (isset($json->variables)) {
                 $payload['variables'] = (array) $json->variables;
             }
@@ -48,9 +49,10 @@ class GraphQLQueryPayloadRetriever
         $entries = ['query', 'variables', 'operationName'];
         $request = App::getRequest()->request;
         foreach ($entries as $entry) {
-            if ($request->has($entry)) {
-                $payload[$entry] = App::request($entry);
+            if (!$request->has($entry)) {
+                continue;
             }
+            $payload[$entry] = App::request($entry);
         }
         return $payload;
     }
