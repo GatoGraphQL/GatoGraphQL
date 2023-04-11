@@ -20,7 +20,7 @@ trait CommonModuleResolverTrait
 
     protected function getDefaultValueDescription(): string
     {
-        return \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration. (i.e. it concerns only public endpoints: the single endpoint, custom endpoints, and persisted queries.)', 'graphql-api');
+        return \__('This value will be used on public endpoints (i.e. single endpoint, custom endpoints, and persisted queries) when option <code>"Default"</code> is selected in the corresponding Schema Configuration', 'graphql-api');
     }
 
     protected function getAdminClientDescription(): string
