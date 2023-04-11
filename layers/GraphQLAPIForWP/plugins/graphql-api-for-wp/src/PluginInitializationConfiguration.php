@@ -616,14 +616,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      */
     protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
-        /**
-         * Notice that, because we haven't registered this plugin's CPTs yet,
-         * the list here will not contain them. Same with taxonomies.
-         */
-        $customPostTypes = get_post_types();
-        $tagTaxonomies = get_taxonomies(['hierarchical' => false]);
-        $categoryTaxonomies = get_taxonomies(['hierarchical' => true]);
-        
         // Default (i.e. `null`) and all admin endpoints
         $moduleClassConfiguration = [
             ComponentModelModule::class => [
@@ -633,15 +625,20 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ComponentModelEnvironment::ENABLE_SELF_FIELD => true
             ],
 
-            // Allow access to all custom post types and taxonomies
+            /**
+             * Allow access to all custom post types and taxonomies.
+             *
+             * Notice that, because we haven't registered this plugin's CPTs yet,
+             * the list here will not contain them. Same with taxonomies.
+             */
             CustomPostsModule::class => [
-                CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES => $customPostTypes,
+                CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES => get_post_types(),
             ],
             TagsModule::class => [
-                TagsEnvironment::QUERYABLE_TAG_TAXONOMIES => $tagTaxonomies,
+                TagsEnvironment::QUERYABLE_TAG_TAXONOMIES => get_taxonomies(['hierarchical' => false]),
             ],
             CategoriesModule::class => [
-                CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES => $categoryTaxonomies,
+                CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES => get_taxonomies(['hierarchical' => true]),
             ],
 
             // Allow access to all entries for Root.optionValue
