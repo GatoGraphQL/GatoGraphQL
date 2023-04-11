@@ -65,6 +65,8 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 
+use function get_post_types;
+
 /**
  * Sets the configuration in all the PoP components from the main plugin.
  */
@@ -613,6 +615,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      */
     protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
+        /**
+         * Notice that, because we haven't registered this plugin's CPTs yet,
+         * the list here will not contain them. Same with taxonomies.
+         */
+        $customPostTypes = get_post_types();
+        
         // Default (i.e. `null`) and all admin endpoints
         $moduleClassConfiguration = [
             ComponentModelModule::class => [
@@ -620,6 +628,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
                 // Enable the "self" fields
                 ComponentModelEnvironment::ENABLE_SELF_FIELD => true
+            ],
+            // Allow access to all custom post types and taxonomies
+            CustomPostsModule::class => [
+                CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES => $customPostTypes,
             ],
             // Allow access to all entries for Root.optionValue
             SettingsModule::class => [
