@@ -635,10 +635,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $maxLimitOption
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Max limit for %s (on public endpoints)', 'graphql-api'),
+                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                    \__('Max limit for %s', 'graphql-api'),
                     $entities
-                ),
+                )),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
                     $entities,
@@ -664,7 +664,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Included custom post types (on public endpoints)', 'graphql-api'),
+                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included custom post types', 'graphql-api')),
                     Properties::DESCRIPTION => sprintf(
                         \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one. %s', 'graphql-api'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
@@ -755,7 +755,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Included tag taxonomies (on public endpoints)', 'graphql-api'),
+                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included tag taxonomies', 'graphql-api')),
                     Properties::DESCRIPTION => sprintf(
                         sprintf(
                             '%s<br/><br/>%s',
@@ -801,7 +801,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Included category taxonomies (on public endpoints)', 'graphql-api'),
+                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included category taxonomies', 'graphql-api')),
                     Properties::DESCRIPTION => sprintf(
                         sprintf(
                             '%s<br/><br/>%s',
@@ -871,7 +871,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Max limit for querying comments (on public endpoints)', 'graphql-api'),
+                Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Max limit for querying comments', 'graphql-api')),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
                     \__('comments', 'graphql-api'),
