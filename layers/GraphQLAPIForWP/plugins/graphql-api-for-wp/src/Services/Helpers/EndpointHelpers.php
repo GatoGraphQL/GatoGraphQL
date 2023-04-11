@@ -79,8 +79,7 @@ class EndpointHelpers
     }
 
     /**
-     * Indicate if we are requesting the default admin endpoint,
-     * i.e. without the "endpoint_group" or "persisted_query_id" params
+     * Indicate if we are requesting the default admin endpoint
      */
     public function isRequestingDefaultAdminGraphQLEndpoint(): bool
     {
