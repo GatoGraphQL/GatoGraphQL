@@ -89,9 +89,7 @@ class EndpointHelpers
         ) {
             return false;
         }
-        /** @var string */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
-        return $endpointGroup === '';
+        return $this->getAdminGraphQLEndpointGroup() === '';
     }
 
     /**

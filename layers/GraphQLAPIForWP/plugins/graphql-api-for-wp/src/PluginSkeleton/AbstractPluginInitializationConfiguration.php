@@ -217,7 +217,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
              *
              * @var string
              */
-            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+            $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
             $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
         }
 
@@ -340,16 +340,11 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         if ($endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
             /**
              * Allow to not disable modules on the admin endpoint.
-             *
-             * (empty) => Default admin endpoint
-             *
-             * @var string|null
              */
-            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
             return apply_filters(
                 HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
                 $schemaModuleClassesToSkip,
-                $endpointGroup
+                $endpointHelpers->getAdminGraphQLEndpointGroup()
             );
         }
 
