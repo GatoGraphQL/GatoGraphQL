@@ -258,10 +258,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => \__('Namespace the schema in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Namespace the schema in admin (private) endpoints? %s', 'graphql-api'),
-                    $adminClientsDesc
-                ),
+                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::NESTED_MUTATIONS) {
@@ -281,7 +278,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Mutation Scheme: %s', 'graphql-api'),
                     $defaultValueLabel
                 ),
-                Properties::DESCRIPTION => $defaultValueDesc,
+                Properties::DESCRIPTION => sprintf(
+                    \__('Select the mutation scheme to use in the wp-admin. %s', 'graphql-api'),
+                    $defaultValueDesc
+                ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
@@ -293,10 +293,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => \__('Mutation Scheme in the admin (private) endpoints', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Select the mutation scheme to use in the wp-admin. %s', 'graphql-api'),
-                    $adminClientsDesc
-                ),
+                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
@@ -334,10 +331,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => \__('Expose “sensitive” data elements in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Expose “sensitive” data elements in admin (private) endpoints? %s', 'graphql-api'),
-                    $adminClientsDesc
-                ),
+                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SCHEMA_SELF_FIELDS) {
@@ -366,10 +360,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => \__('Expose self fields in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Expose self fields in admin (private) endpoints? %s', 'graphql-api'),
-                    $adminClientsDesc
-                ),
+                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }
