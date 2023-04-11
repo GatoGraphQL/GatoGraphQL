@@ -178,6 +178,7 @@ class EndpointHelpers
             HookNames::SUPPORTED_ADMIN_ENDPOINT_GROUPS,
             []
         );
+        // This one is mandatory, so add it after the filter
         $supportedAdminEndpointGroups[] = EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
         return $supportedAdminEndpointGroups;
     }
