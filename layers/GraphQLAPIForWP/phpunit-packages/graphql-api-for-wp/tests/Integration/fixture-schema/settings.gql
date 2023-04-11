@@ -1,0 +1,6 @@
+{
+  existingValue: optionValue(name: "siteurl")
+  nonExistingValue: optionValue(name: "nonExisting")
+  nonExistingArray: optionValues(name: "nonExisting")
+  nonExistingObject: optionObjectValue(name: "nonExisting")
+}
