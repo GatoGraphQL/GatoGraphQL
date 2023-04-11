@@ -87,7 +87,7 @@ class EndpointHelpers
         if (!$this->isRequestingAdminGraphQLEndpoint()) {
             return false;
         }
-        return $this->getAdminGraphQLEndpointGroup() === '';
+        return $this->getAdminGraphQLEndpointGroup() === AdminGraphQLEndpointGroups::DEFAULT;
     }
 
     /**
@@ -142,14 +142,14 @@ class EndpointHelpers
     public function getAdminGraphQLEndpointGroup(): string
     {
         /** @var string */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, AdminGraphQLEndpointGroups::DEFAULT);
 
         /**
          * If the endpointGroup is not supported, use the
          * default one.
          */
         if (!in_array($endpointGroup, $this->getSupportedAdminGraphQLEndpointGroups())) {
-            return '';
+            return AdminGraphQLEndpointGroups::DEFAULT;
         }
         return $endpointGroup;
     }
@@ -178,6 +178,7 @@ class EndpointHelpers
         return array_merge(
             $supportedAdminEndpointGroups,
             [
+                AdminGraphQLEndpointGroups::DEFAULT,
                 AdminGraphQLEndpointGroups::PERSISTED_QUERY,
                 AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
             ]
