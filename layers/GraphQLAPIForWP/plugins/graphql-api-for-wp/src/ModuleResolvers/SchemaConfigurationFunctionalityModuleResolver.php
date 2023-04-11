@@ -292,7 +292,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Mutation Scheme for the Admin', 'graphql-api'),
+                Properties::TITLE => \__('Mutation Scheme in the admin (private) endpoints', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Select the mutation scheme to use in the wp-admin. %s', 'graphql-api'),
                     $adminClientsDesc
