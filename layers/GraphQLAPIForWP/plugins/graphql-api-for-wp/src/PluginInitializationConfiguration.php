@@ -66,6 +66,7 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 
 use function get_post_types;
+use function get_taxonomies;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -620,6 +621,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
          * the list here will not contain them. Same with taxonomies.
          */
         $customPostTypes = get_post_types();
+        $tagTaxonomies = get_taxonomies(['hierarchical' => false]);
+        $categoryTaxonomies = get_taxonomies(['hierarchical' => true]);
         
         // Default (i.e. `null`) and all admin endpoints
         $moduleClassConfiguration = [
@@ -629,15 +632,24 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 // Enable the "self" fields
                 ComponentModelEnvironment::ENABLE_SELF_FIELD => true
             ],
+
             // Allow access to all custom post types and taxonomies
             CustomPostsModule::class => [
                 CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES => $customPostTypes,
             ],
+            TagsModule::class => [
+                TagsEnvironment::QUERYABLE_TAG_TAXONOMIES => $tagTaxonomies,
+            ],
+            CategoriesModule::class => [
+                CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES => $categoryTaxonomies,
+            ],
+
             // Allow access to all entries for Root.optionValue
             SettingsModule::class => [
                 SettingsEnvironment::SETTINGS_ENTRIES => [],
                 SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY,
             ],
+
             // Allow access to all meta values
             CustomPostMetaModule::class => [
                 CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES => [],
