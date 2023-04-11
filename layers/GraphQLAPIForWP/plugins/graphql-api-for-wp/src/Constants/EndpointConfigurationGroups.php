@@ -6,5 +6,5 @@ namespace GraphQLAPI\GraphQLAPI\Constants;
 
 class EndpointConfigurationGroups
 {
-    public final const PLUGIN_INTERNAL_WP_EDITOR = 'pluginInternalWPEditor';
+    public final const PLUGIN_INTERNAL = 'pluginInternal';
 }
