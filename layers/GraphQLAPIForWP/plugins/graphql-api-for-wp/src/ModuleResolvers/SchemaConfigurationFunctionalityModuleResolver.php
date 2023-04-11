@@ -314,7 +314,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $option
                 ),
                 Properties::TITLE => sprintf(
-                    \__('Add “sensitive” fields to schema? %s', 'graphql-api'),
+                    \__('Add “sensitive” fields to the schema? %s', 'graphql-api'),
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
