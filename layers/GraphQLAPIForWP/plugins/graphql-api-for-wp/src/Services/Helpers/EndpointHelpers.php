@@ -57,7 +57,7 @@ class EndpointHelpers
      * used on the WordPress editor to power this plugin's blocks
      * (for the different CPTs: SchemaConfig, ACLs, CCLs, etc), under:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginInternalWPEditor
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginInternal
      */
     public function isRequestingAdminPluginInternalWPEditorGraphQLEndpoint(): bool
     {

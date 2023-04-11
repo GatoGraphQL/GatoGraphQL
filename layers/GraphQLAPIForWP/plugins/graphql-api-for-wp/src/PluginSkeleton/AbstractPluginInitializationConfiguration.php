@@ -316,7 +316,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     final public function getSchemaModuleClassesToSkip(): array
     {
         /**
-         * If doing ?endpoint_group=pluginInternalWPEditor,
+         * If doing ?endpoint_group=pluginInternal,
          * always enable all schema-type modules
          */
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
