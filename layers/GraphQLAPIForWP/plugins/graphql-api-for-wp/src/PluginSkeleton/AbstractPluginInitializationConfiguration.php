@@ -321,7 +321,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
             /** @var EndpointHelpers */
             $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-            if ($endpointHelpers->isRequestingAdminPluginInternalWPEditorGraphQLEndpoint()) {
+            if ($endpointHelpers->isRequestingAdminPluginInternalGraphQLEndpoint()) {
                 return [];
             }
         }

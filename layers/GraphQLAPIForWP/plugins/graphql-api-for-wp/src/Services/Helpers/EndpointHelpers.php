@@ -59,7 +59,7 @@ class EndpointHelpers
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginInternal
      */
-    public function isRequestingAdminPluginInternalWPEditorGraphQLEndpoint(): bool
+    public function isRequestingAdminPluginInternalGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
             && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PLUGIN_INTERNAL;
@@ -185,7 +185,7 @@ class EndpointHelpers
      * GraphQL endpoint to be used in the WordPress editor.
      * It has the full schema, including "admin" fields.
      */
-    public function getAdminPluginInternalWPEditorGraphQLEndpoint(): string
+    public function getAdminPluginInternalGraphQLEndpoint(): string
     {
         return \add_query_arg(
             RequestParams::ENDPOINT_GROUP,
