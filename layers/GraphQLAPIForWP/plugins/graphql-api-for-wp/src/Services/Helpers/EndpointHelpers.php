@@ -22,7 +22,7 @@ class EndpointHelpers
     use BasicServiceTrait;
 
     /** @var string[]|null */
-    private ?array $supportedEndpointGroups = null;
+    private ?array $supportedAdminGraphQLEndpointGroups = null;
 
     private ?PluginMenu $pluginMenu = null;
 
@@ -152,7 +152,7 @@ class EndpointHelpers
          * If the endpointGroup is not supported, use the
          * default one.
          */
-        if (!in_array($endpointGroup, $this->getSupportedAdminEndpointGroups())) {
+        if (!in_array($endpointGroup, $this->getSupportedAdminGraphQLEndpointGroups())) {
             return '';
         }
         return $endpointGroup;
@@ -161,18 +161,18 @@ class EndpointHelpers
     /**
      * @return string[]
      */
-    public function getSupportedAdminEndpointGroups(): array
+    public function getSupportedAdminGraphQLEndpointGroups(): array
     {
-        if ($this->supportedEndpointGroups === null) {
-            $this->supportedEndpointGroups = $this->doGetSupportedAdminEndpointGroups();
+        if ($this->supportedAdminGraphQLEndpointGroups === null) {
+            $this->supportedAdminGraphQLEndpointGroups = $this->doGetSupportedAdminGraphQLEndpointGroups();
         }
-        return $this->supportedEndpointGroups;
+        return $this->supportedAdminGraphQLEndpointGroups;
     }
 
     /**
      * @return string[]
      */
-    private function doGetSupportedAdminEndpointGroups(): array
+    private function doGetSupportedAdminGraphQLEndpointGroups(): array
     {
         $supportedAdminEndpointGroups =  apply_filters(
             HookNames::SUPPORTED_ADMIN_ENDPOINT_GROUPS,
