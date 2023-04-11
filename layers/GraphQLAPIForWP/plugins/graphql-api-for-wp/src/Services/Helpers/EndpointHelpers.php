@@ -221,9 +221,11 @@ class EndpointHelpers
         if (App::query(RequestParams::ENDPOINT_GROUP) !== AdminGraphQLEndpointGroups::PERSISTED_QUERY) {
             return null;
         }
-        if ($persistedQueryID = App::query(RequestParams::PERSISTED_QUERY_ID)) {
-            return (int) $persistedQueryID;
+        /** @var string|null */
+        $persistedQueryID = App::query(RequestParams::PERSISTED_QUERY_ID);
+        if ($persistedQueryID === null) {
+            return null;
         }
-        return null;
+        return (int) $persistedQueryID;
     }
 }
