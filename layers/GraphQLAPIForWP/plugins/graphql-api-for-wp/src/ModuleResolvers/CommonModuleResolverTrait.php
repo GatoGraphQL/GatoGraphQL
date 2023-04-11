@@ -13,7 +13,7 @@ trait CommonModuleResolverTrait
 {
     protected function getDefaultValueLabel(): string
     {
-        return \__('Default value for the Schema Configuration (for public endpoints)', 'graphql-api');
+        return \__('Default value for the Schema Configuration', 'graphql-api');
     }
 
     protected function getDefaultValueDescription(): string
