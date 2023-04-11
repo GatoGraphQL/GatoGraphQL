@@ -313,17 +313,17 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      */
     final public function getSchemaModuleClassesToSkip(): array
     {
-        if ($this->alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint()) {
-            /**
-             * If doing ?endpoint_group=pluginInternal,
-             * always enable all schema-type modules
-             */
-            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-            /** @var EndpointHelpers */
-            $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-            if ($endpointHelpers->isRequestingAdminPluginInternalGraphQLEndpoint()) {
-                return [];
-            }
+        /**
+         * If doing ?endpoint_group=pluginInternal,
+         * always enable all schema-type modules
+         */
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        if ($endpointHelpers->isRequestingAdminPluginInternalGraphQLEndpoint()
+            && $this->alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint()
+        ) {
+            return [];
         }
 
         // Module classes are skipped if the module is disabled
