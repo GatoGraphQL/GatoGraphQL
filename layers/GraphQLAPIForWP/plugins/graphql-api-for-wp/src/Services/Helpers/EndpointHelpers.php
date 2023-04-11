@@ -180,8 +180,8 @@ class EndpointHelpers
         return array_merge(
             $supportedAdminEndpointGroups,
             [
-                AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
                 AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+                AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
             ]
         );
     }
