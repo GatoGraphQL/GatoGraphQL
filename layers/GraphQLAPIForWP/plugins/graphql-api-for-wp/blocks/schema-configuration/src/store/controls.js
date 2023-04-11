@@ -9,7 +9,7 @@ import { fetchGraphQLQuery } from '@graphqlapi/api-fetch';
 const controls = {
 	RECEIVE_SCHEMA_CONFIGURATIONS( action ) {
 		return fetchGraphQLQuery(
-			GRAPHQL_API_PLUGIN_INTERNAL_WP_EDITOR_ADMIN_ENDPOINT,
+			GRAPHQL_API_PLUGIN_INTERNAL_ADMIN_ENDPOINT,
 			action.query
 		);
 	},

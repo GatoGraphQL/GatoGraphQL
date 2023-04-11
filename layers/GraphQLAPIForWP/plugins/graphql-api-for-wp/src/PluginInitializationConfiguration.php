@@ -641,7 +641,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
             ],
         ];
-        if ($endpointGroup === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR) {
+        if ($endpointGroup === EndpointConfigurationGroups::PLUGIN_INTERNAL) {
             $moduleClassConfiguration = array_merge_recursive(
                 $moduleClassConfiguration,
                 [

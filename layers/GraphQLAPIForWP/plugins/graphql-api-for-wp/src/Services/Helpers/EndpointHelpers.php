@@ -62,7 +62,7 @@ class EndpointHelpers
     public function isRequestingAdminPluginInternalWPEditorGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
+            && App::query(RequestParams::ENDPOINT_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL;
     }
 
     /**
@@ -177,7 +177,7 @@ class EndpointHelpers
             []
         );
         // This one is mandatory, so add it after the filter
-        $supportedAdminEndpointGroups[] = EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
+        $supportedAdminEndpointGroups[] = EndpointConfigurationGroups::PLUGIN_INTERNAL;
         return $supportedAdminEndpointGroups;
     }
 
@@ -189,7 +189,7 @@ class EndpointHelpers
     {
         return \add_query_arg(
             RequestParams::ENDPOINT_GROUP,
-            EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR,
+            EndpointConfigurationGroups::PLUGIN_INTERNAL,
             $this->getAdminGraphQLEndpoint()
         );
     }
