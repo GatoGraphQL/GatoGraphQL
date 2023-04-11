@@ -18,7 +18,7 @@ Interact with the single endpoint via the available clients.
 
 If module "GraphiQL for Single Endpoint" is enabled, then the single endpoint's GraphiQL client becomes publicly available.
 
-To open it, click on link "🟢 GraphiQL (public client for the single endpoint)" on the plugin's menu:
+To open it, click on link "🟢 GraphiQL (public client for single endpoint)" on the plugin's menu:
 
 ![Single endpoint's link to the GraphiQL client](../../images/single-endpoint-graphiql-link.png)
 
@@ -30,7 +30,7 @@ By default, the client is exposed under `/graphiql/`. This path can be modified 
 
 If module "Interactive Schema for Single Endpoint" is enabled, then the single endpoint's Voyager client becomes publicly available.
 
-To open it, click on link "🟢 Interactive Schema (public client for the single endpoint)" on the plugin's menu:
+To open it, click on link "🟢 Interactive Schema (public client for single endpoint)" on the plugin's menu:
 
 ![Single endpoint's link to the Interactive Schema client](../../images/single-endpoint-interactive-schema-link.png)
 
