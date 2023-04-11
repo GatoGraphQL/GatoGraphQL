@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Constants\EndpointConfigurationGroups;
+use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Module;
@@ -62,7 +62,7 @@ class EndpointHelpers
     public function isRequestingAdminPluginInternalWPEditorGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === EndpointConfigurationGroups::PLUGIN_INTERNAL;
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PLUGIN_INTERNAL;
     }
 
     /**
@@ -177,7 +177,7 @@ class EndpointHelpers
             []
         );
         // This one is mandatory, so add it after the filter
-        $supportedAdminEndpointGroups[] = EndpointConfigurationGroups::PLUGIN_INTERNAL;
+        $supportedAdminEndpointGroups[] = AdminGraphQLEndpointGroups::PLUGIN_INTERNAL;
         return $supportedAdminEndpointGroups;
     }
 
@@ -189,7 +189,7 @@ class EndpointHelpers
     {
         return \add_query_arg(
             RequestParams::ENDPOINT_GROUP,
-            EndpointConfigurationGroups::PLUGIN_INTERNAL,
+            AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
             $this->getAdminGraphQLEndpoint()
         );
     }

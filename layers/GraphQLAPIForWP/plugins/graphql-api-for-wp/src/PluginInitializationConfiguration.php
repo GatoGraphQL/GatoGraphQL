@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use GraphQLAPI\GraphQLAPI\Constants\EndpointConfigurationGroups;
+use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -641,7 +641,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
             ],
         ];
-        if ($endpointGroup === EndpointConfigurationGroups::PLUGIN_INTERNAL) {
+        if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_INTERNAL) {
             $moduleClassConfiguration = array_merge_recursive(
                 $moduleClassConfiguration,
                 [
