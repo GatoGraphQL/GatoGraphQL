@@ -911,14 +911,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $moduleDescriptions = [
                 self::SCHEMA_SETTINGS => sprintf(
-                    \__('%1$s %2$s<hr/>%3$s<hr/>%4$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s<hr/>%4$s', 'graphql-api'),
                     sprintf(
                         \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'graphql-api'),
                         'optionValue',
                         'optionValues',
                         'optionObjectValue'
                     ),
-                    $publicEndpointValueDescription,
                     $headsUpDesc,
                     sprintf(
                         $entryDesc,
@@ -934,7 +933,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                                 ]
                             )
                         )
-                    )
+                    ),
+                    $publicEndpointValueDescription,
                 ),
             ];
             $option = ModuleSettingOptions::ENTRIES;
@@ -960,8 +960,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::DESCRIPTION => sprintf(
                     '%s %s%s',
                     \__('Are the entries being allowed or denied access to?', 'graphql-api'),
-                    $publicEndpointValueDescription,
                     \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
+                    $publicEndpointValueDescription,
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
