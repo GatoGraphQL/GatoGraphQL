@@ -304,6 +304,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $class .= ' graphql-api-tabpanel vertical-tabs';
         }
 
+        // This page URL
+        $url = admin_url(sprintf(
+            'admin.php?page=%s',
+            esc_attr(App::request('page') ?? App::query('page', ''))
+        ));
+
         // Specify to only toggle the outer .tab-content divs (skip the inner ones)
         ?>
             <div
@@ -369,9 +375,23 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                             <h2 class="nav-tab-wrapper">
                                                 <?php
                                                 foreach ($categorySettingsItems as $item) {
+                                                    /**
+                                                     * Also add the tab to the URL, not because it is needed,
+                                                     * but because we can then "Open in new tab" and it will
+                                                     * be focused already on that item.
+                                                     */
+                                                    $settingsURL = sprintf(
+                                                        '%1$s&%2$s=%3$s&%4$s=%5$s',
+                                                        $url,
+                                                        RequestParams::CATEGORY,
+                                                        $settingsCategoryID,
+                                                        RequestParams::MODULE,
+                                                        $item['id']
+                                                    );
                                                     printf(
-                                                        '<a href="#%s" class="nav-tab %s">%s</a>',
-                                                        $item['id'],
+                                                        '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
+                                                        '#' . $item['id'],
+                                                        $settingsURL,
                                                         $item['id'] === $activeModuleID ? 'nav-tab-active' : '',
                                                         $item['name']
                                                     );
