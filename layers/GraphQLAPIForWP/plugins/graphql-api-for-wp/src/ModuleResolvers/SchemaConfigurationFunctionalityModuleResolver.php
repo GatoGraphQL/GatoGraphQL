@@ -167,7 +167,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
         $adminClientsDesc = $this->getAdminClientDescription();
-        $adminClientAndConfigDesc = $this->getAdminClientAndConfigurationDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::SCHEMA_CONFIGURATION) {
             $whereModules = [];
@@ -260,8 +259,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Namespace the schema in the admin (private) endpoints?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Namespace the schema in the private endpoints (accessed via the wp-admin)? %s', 'graphql-api'),
-                    $adminClientAndConfigDesc
+                    \__('Namespace the schema in admin (private) endpoints? %s', 'graphql-api'),
+                    $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -336,7 +335,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Expose “sensitive” data elements in the admin (private) endpoints?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose “sensitive” data elements in the private endpoints (accessed via the wp-admin)? %s', 'graphql-api'),
+                    \__('Expose “sensitive” data elements in admin (private) endpoints? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -368,7 +367,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Expose self fields in the admin (private) endpoints?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose self fields in the private endpoints (accessed via the wp-admin)? %s', 'graphql-api'),
+                    \__('Expose self fields in admin (private) endpoints? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,

@@ -24,7 +24,7 @@ trait CommonModuleResolverTrait
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('It will be reflected in the admin\'s private <a href="%1$s" target="_blank">GraphiQL%3$s</a> and <a href="%2$s" target="_blank">Interactive Schema%3$s</a> clients (and also as the default value on custom private endpoints defined via PHP code)', 'graphql-api'),
+            \__('It will be reflected in the admin\'s <a href="%1$s" target="_blank">GraphiQL%3$s</a> and <a href="%2$s" target="_blank">Interactive Schema%3$s</a> clients. (And also as the default value on custom private endpoints defined via PHP code.)', 'graphql-api'),
             \admin_url(sprintf(
                 'admin.php?page=%s',
                 $this->getGraphiQLMenuPage()->getScreenID()
@@ -49,14 +49,5 @@ trait CommonModuleResolverTrait
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLVoyagerMenuPage */
         return $instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
-    }
-
-    protected function getAdminClientAndConfigurationDescription(): string
-    {
-        return sprintf(
-            '%s%s',
-            $this->getAdminClientDescription(),
-            \__(', and configuration in extensions', 'graphql-api')
-        );
     }
 }
