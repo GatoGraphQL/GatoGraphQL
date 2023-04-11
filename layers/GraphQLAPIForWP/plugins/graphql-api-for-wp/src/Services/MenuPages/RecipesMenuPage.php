@@ -225,7 +225,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             /**
              * Also add the tab to the URL, not because it is needed,
              * but because we can then "Open in new tab" and it will
-             * be focused already on that recipe.
+             * be focused already on that item.
              */
             $recipeURL = sprintf(
                 '%1$s&%2$s=%3$s',
