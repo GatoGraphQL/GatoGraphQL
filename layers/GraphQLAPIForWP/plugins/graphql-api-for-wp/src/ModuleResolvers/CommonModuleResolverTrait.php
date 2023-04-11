@@ -22,7 +22,7 @@ trait CommonModuleResolverTrait
     {
         return sprintf(
             '<span style="color: olivedrab;">%s</span>',
-            \__('This value will be used on public endpoints (i.e. single endpoint, custom endpoints, and persisted queries) when option <code>"Default"</code> is selected in the corresponding Schema Configuration', 'graphql-api')
+            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration applied to some public endpoint:<ul><li>single endpoint</li><li>custom endpoints</li><li>persisted queries</li></ul>', 'graphql-api')
         );
     }
 
@@ -32,7 +32,7 @@ trait CommonModuleResolverTrait
             \__('%s. <br/><span style="color: olivedrab;">%s</span>', 'graphql-api'),
             \__('Same, but applied to private endpoints', 'graphql-api'),
             sprintf(
-                \__('This configuration will be reflected in the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients; when executing a GraphQL query internally (via class <code>%5$s</code> in PHP); and also as the default value on <a href="%3$s" target="_blank">custom private endpoints%4$s</a>', 'graphql-api'),
+                \__('This configuration will be reflected in:<ul><li>the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients</li><li>GraphQL queries executed internally (via class <code>%5$s</code> in PHP)</li><li><a href="%3$s" target="_blank">custom private endpoints%4$s</a> (when no pre-defined configuration is provided via PHP)</li></ul>', 'graphql-api'),
                 \admin_url(sprintf(
                     'admin.php?page=%s',
                     $this->getGraphiQLMenuPage()->getScreenID()
@@ -65,7 +65,7 @@ trait CommonModuleResolverTrait
     {
         return sprintf(
             '<span style="color: olivedrab;">%s</span>',
-            \__('This value will be used on public endpoints (i.e. single endpoint, custom endpoints, and persisted queries) only; private endpoints are unrestricted.', 'graphql-api')
+            \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api')
         );
     }
 
