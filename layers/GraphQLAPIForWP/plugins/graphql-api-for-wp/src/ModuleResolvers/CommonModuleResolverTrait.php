@@ -20,28 +20,35 @@ trait CommonModuleResolverTrait
 
     protected function getDefaultValueDescription(): string
     {
-        return \__('This value will be used on public endpoints (i.e. single endpoint, custom endpoints, and persisted queries) when option <code>"Default"</code> is selected in the corresponding Schema Configuration', 'graphql-api');
+        return sprintf(
+            '<span style="color: olivedrab;">%s</span>',
+            \__('This value will be used on public endpoints (i.e. single endpoint, custom endpoints, and persisted queries) when option <code>"Default"</code> is selected in the corresponding Schema Configuration', 'graphql-api')
+        );
     }
 
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('Same, but applied to private endpoints. This configuration will be reflected in the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients, and also as the default value on <a href="%3$s" target="_blank">custom private endpoints%4$s</a>', 'graphql-api'),
-            \admin_url(sprintf(
-                'admin.php?page=%s',
-                $this->getGraphiQLMenuPage()->getScreenID()
-            )),
-            \admin_url(sprintf(
-                'admin.php?page=%s',
-                $this->getGraphQLVoyagerMenuPage()->getScreenID()
-            )),
-            \admin_url(sprintf(
-                'admin.php?page=%s&%s=%s',
-                $this->getRecipesMenuPage()->getScreenID(),
-                RequestParams::TAB,
-                'defining-custom-private-endpoints'
-            )),
-            HTMLCodes::OPEN_IN_NEW_WINDOW
+            \__('%s. <span style="color: olivedrab;">%s</span>', 'graphql-api'),
+            \__('Same, but applied to private endpoints', 'graphql-api'),
+            sprintf(
+                \__('This configuration will be reflected in the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients, and also as the default value on <a href="%3$s" target="_blank">custom private endpoints%4$s</a>', 'graphql-api'),
+                \admin_url(sprintf(
+                    'admin.php?page=%s',
+                    $this->getGraphiQLMenuPage()->getScreenID()
+                )),
+                \admin_url(sprintf(
+                    'admin.php?page=%s',
+                    $this->getGraphQLVoyagerMenuPage()->getScreenID()
+                )),
+                \admin_url(sprintf(
+                    'admin.php?page=%s&%s=%s',
+                    $this->getRecipesMenuPage()->getScreenID(),
+                    RequestParams::TAB,
+                    'defining-custom-private-endpoints'
+                )),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            )
         );
     }
 
