@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Constants\EndpointConfigurationGroups;
+use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
@@ -14,9 +15,14 @@ use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function apply_filters;
+
 class EndpointHelpers
 {
     use BasicServiceTrait;
+
+    /** @var string[]|null */
+    private ?array $supportedEndpointGroups = null;
 
     private ?PluginMenu $pluginMenu = null;
 
@@ -141,7 +147,39 @@ class EndpointHelpers
     {
         /** @var string */
         $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+
+        /**
+         * If the endpointGroup is not supported, use the
+         * default one.
+         */
+        if (!in_array($endpointGroup, $this->getSupportedAdminEndpointGroups())) {
+            return '';
+        }
         return $endpointGroup;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSupportedAdminEndpointGroups(): array
+    {
+        if ($this->supportedEndpointGroups === null) {
+            $this->supportedEndpointGroups = $this->doGetSupportedAdminEndpointGroups();
+        }
+        return $this->supportedEndpointGroups;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function doGetSupportedAdminEndpointGroups(): array
+    {
+        $supportedAdminEndpointGroups =  apply_filters(
+            HookNames::SUPPORTED_ADMIN_ENDPOINT_GROUPS,
+            []
+        );
+        $supportedAdminEndpointGroups[] = EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
+        return $supportedAdminEndpointGroups;
     }
 
     /**
