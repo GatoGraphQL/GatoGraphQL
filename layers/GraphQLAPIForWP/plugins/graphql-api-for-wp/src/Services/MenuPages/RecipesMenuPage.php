@@ -54,6 +54,10 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Exposing safe persisted queries',
             ],
             [
+                'defining-custom-private-endpoints',
+                'Defining custom private endpoints',
+            ],
+            [
                 'exposing-a-secure-public-api',
                 'Exposing a secure public API',
                 true,

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Constants\HTMLCodes;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 trait CommonModuleResolverTrait
@@ -24,7 +26,7 @@ trait CommonModuleResolverTrait
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('It will be reflected in the admin\'s <a href="%1$s" target="_blank">GraphiQL%3$s</a> and <a href="%2$s" target="_blank">Interactive Schema%3$s</a> clients. (And also as the default value on custom private endpoints defined via PHP code.)', 'graphql-api'),
+            \__('It will be reflected in the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients. (And also as the default value on <a href="%3$s" target="_blank">custom private endpoints%4$s</a>.)', 'graphql-api'),
             \admin_url(sprintf(
                 'admin.php?page=%s',
                 $this->getGraphiQLMenuPage()->getScreenID()
@@ -32,6 +34,12 @@ trait CommonModuleResolverTrait
             \admin_url(sprintf(
                 'admin.php?page=%s',
                 $this->getGraphQLVoyagerMenuPage()->getScreenID()
+            )),
+            \admin_url(sprintf(
+                'admin.php?page=%s&%s=%s',
+                $this->getRecipesMenuPage()->getScreenID(),
+                RequestParams::TAB,
+                'defining-custom-private-endpoints'
             )),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
@@ -49,5 +57,12 @@ trait CommonModuleResolverTrait
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLVoyagerMenuPage */
         return $instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
+    }
+
+    protected function getRecipesMenuPage(): RecipesMenuPage
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var RecipesMenuPage */
+        return $instanceManager->getInstance(RecipesMenuPage::class);
     }
 }
