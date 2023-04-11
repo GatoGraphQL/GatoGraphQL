@@ -260,7 +260,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Namespace the schema in the private endpoints?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Namespace the schema in the wp-admin? %s', 'graphql-api'),
+                    \__('Namespace the schema in the private endpoints (accessed via the wp-admin)? %s', 'graphql-api'),
                     $adminClientAndConfigDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -336,7 +336,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Expose “sensitive” data elements in the private endpoints?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose “sensitive” data elements in the wp-admin? %s', 'graphql-api'),
+                    \__('Expose “sensitive” data elements in the private endpoints (accessed via the wp-admin)? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -368,7 +368,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Expose self fields in the private endpoints?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose self fields in the wp-admin? %s', 'graphql-api'),
+                    \__('Expose self fields in the private endpoints (accessed via the wp-admin)? %s', 'graphql-api'),
                     $adminClientsDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
