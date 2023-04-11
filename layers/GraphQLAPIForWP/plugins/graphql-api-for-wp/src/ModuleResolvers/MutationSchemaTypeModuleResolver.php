@@ -289,7 +289,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use payload types for mutations for the Admin?', 'graphql-api'),
+                Properties::TITLE => \__('Use payload types for mutations in the private endpoints?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Use payload types in the wp-admin? %s', 'graphql-api'),
                     $adminClientsDesc
