@@ -6,5 +6,11 @@ namespace GraphQLAPI\GraphQLAPI\Constants;
 
 class AdminGraphQLEndpointGroups
 {
+    /**
+     * This one is an empty string, as to express that if passing no param
+     * then the default one is used
+     */
+    public final const DEFAULT = '';
+    public final const PERSISTED_QUERY = 'persistedQuery';
     public final const PLUGIN_INTERNAL = 'pluginInternal';
 }

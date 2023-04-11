@@ -205,16 +205,16 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     public function getModuleClassConfiguration(): array
     {
         $predefinedAdminEndpointModuleClassConfiguration = [];
+
         // Retrieve this service from the SystemContainer
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint()) {
-            /**
-             * (empty) => Default admin endpoint
-             *
-             * @var string
-             */
+        /**
+         * The admin endpoints (other than the one for Persisted Queries)
+         * can have predefined configuration
+         */
+        if ($endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
             $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
         }
@@ -238,6 +238,18 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      */
     private function getPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
+        // Retrieve this service from the SystemContainer
+        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+        /**
+         * Persisted Queries must take the configuration from
+         * the corresponding Schema Configuration
+         */
+        if ($endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
+            return [];
+        }
+
         return apply_filters(
             HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CONFIGURATION,
             $this->doGetPredefinedAdminEndpointModuleClassConfiguration($endpointGroup),
@@ -320,7 +332,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($this->alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint()
+        if (
+            $this->alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint()
             && $endpointHelpers->isRequestingAdminPluginInternalGraphQLEndpoint()
         ) {
             return [];

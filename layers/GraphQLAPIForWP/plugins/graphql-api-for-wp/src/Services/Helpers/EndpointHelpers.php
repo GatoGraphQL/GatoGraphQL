@@ -69,27 +69,24 @@ class EndpointHelpers
      * Indicate if we are requesting the wp-admin endpoint that
      * fetches data for Persisted Queries, under:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&persisted_query_id=...
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=persistedQuery&persisted_query_id=...
      */
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PERSISTED_QUERY;
+            // && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
     /**
-     * Indicate if we are requesting the default admin endpoint,
-     * i.e. without the "endpoint_group" or "persisted_query_id" params
+     * Indicate if we are requesting the default admin endpoint
      */
     public function isRequestingDefaultAdminGraphQLEndpoint(): bool
     {
-        if (
-            !$this->isRequestingAdminGraphQLEndpoint()
-            || $this->isRequestingAdminPersistedQueryGraphQLEndpoint()
-        ) {
+        if (!$this->isRequestingAdminGraphQLEndpoint()) {
             return false;
         }
-        return $this->getAdminGraphQLEndpointGroup() === '';
+        return $this->getAdminGraphQLEndpointGroup() === AdminGraphQLEndpointGroups::DEFAULT;
     }
 
     /**
@@ -144,14 +141,14 @@ class EndpointHelpers
     public function getAdminGraphQLEndpointGroup(): string
     {
         /** @var string */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, AdminGraphQLEndpointGroups::DEFAULT);
 
         /**
          * If the endpointGroup is not supported, use the
          * default one.
          */
         if (!in_array($endpointGroup, $this->getSupportedAdminGraphQLEndpointGroups())) {
-            return '';
+            return AdminGraphQLEndpointGroups::DEFAULT;
         }
         return $endpointGroup;
     }
@@ -176,9 +173,15 @@ class EndpointHelpers
             HookNames::SUPPORTED_ADMIN_ENDPOINT_GROUPS,
             []
         );
-        // This one is mandatory, so add it after the filter
-        $supportedAdminEndpointGroups[] = AdminGraphQLEndpointGroups::PLUGIN_INTERNAL;
-        return $supportedAdminEndpointGroups;
+        // Mandatory groups, add them after the filter
+        return array_merge(
+            $supportedAdminEndpointGroups,
+            [
+                AdminGraphQLEndpointGroups::DEFAULT,
+                AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+                AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
+            ]
+        );
     }
 
     /**
@@ -202,17 +205,24 @@ class EndpointHelpers
     public function getAdminPersistedQueryGraphQLEndpoint(string|int $persistedQueryEndpointCustomPostID, bool $enableLowLevelQueryEditing = false): string
     {
         return \add_query_arg(
-            RequestParams::PERSISTED_QUERY_ID,
-            $persistedQueryEndpointCustomPostID,
+            [
+                RequestParams::ENDPOINT_GROUP => AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+                RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
+            ],
             $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
         );
     }
 
     public function getAdminPersistedQueryCustomPostID(): ?int
     {
-        if ($persistedQueryID = App::query(RequestParams::PERSISTED_QUERY_ID)) {
-            return (int) $persistedQueryID;
+        if (App::query(RequestParams::ENDPOINT_GROUP) !== AdminGraphQLEndpointGroups::PERSISTED_QUERY) {
+            return null;
         }
-        return null;
+        /** @var string|null */
+        $persistedQueryID = App::query(RequestParams::PERSISTED_QUERY_ID);
+        if ($persistedQueryID === null) {
+            return null;
+        }
+        return (int) $persistedQueryID;
     }
 }
