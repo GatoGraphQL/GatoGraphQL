@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Constants\EndpointConfigurationGroups;
+use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
@@ -14,9 +15,14 @@ use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function apply_filters;
+
 class EndpointHelpers
 {
     use BasicServiceTrait;
+
+    /** @var string[]|null */
+    private ?array $supportedAdminGraphQLEndpointGroups = null;
 
     private ?PluginMenu $pluginMenu = null;
 
@@ -83,9 +89,7 @@ class EndpointHelpers
         ) {
             return false;
         }
-        /** @var string */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
-        return $endpointGroup === '';
+        return $this->getAdminGraphQLEndpointGroup() === '';
     }
 
     /**
@@ -130,6 +134,51 @@ class EndpointHelpers
         //     $endpoint = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpoint);
         // }
         return $endpoint;
+    }
+
+    /**
+     * Admin GraphQL endpoint group. If not provided,
+     * the (empty) string represents the default group,
+     * used by the private GraphiQL client.
+     */
+    public function getAdminGraphQLEndpointGroup(): string
+    {
+        /** @var string */
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+
+        /**
+         * If the endpointGroup is not supported, use the
+         * default one.
+         */
+        if (!in_array($endpointGroup, $this->getSupportedAdminGraphQLEndpointGroups())) {
+            return '';
+        }
+        return $endpointGroup;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSupportedAdminGraphQLEndpointGroups(): array
+    {
+        if ($this->supportedAdminGraphQLEndpointGroups === null) {
+            $this->supportedAdminGraphQLEndpointGroups = $this->doGetSupportedAdminGraphQLEndpointGroups();
+        }
+        return $this->supportedAdminGraphQLEndpointGroups;
+    }
+
+    /**
+     * @return string[]
+     */
+    private function doGetSupportedAdminGraphQLEndpointGroups(): array
+    {
+        $supportedAdminEndpointGroups =  apply_filters(
+            HookNames::SUPPORTED_ADMIN_ENDPOINT_GROUPS,
+            []
+        );
+        // This one is mandatory, so add it after the filter
+        $supportedAdminEndpointGroups[] = EndpointConfigurationGroups::PLUGIN_INTERNAL_WP_EDITOR;
+        return $supportedAdminEndpointGroups;
     }
 
     /**

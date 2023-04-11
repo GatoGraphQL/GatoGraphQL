@@ -72,7 +72,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              *
              * @var string
              */
-            $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+            $endpointGroup = $this->getEndpointHelpers()->getAdminGraphQLEndpointGroup();
             $suffix = 'a' . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
         } else {
             $suffix = 'c';
