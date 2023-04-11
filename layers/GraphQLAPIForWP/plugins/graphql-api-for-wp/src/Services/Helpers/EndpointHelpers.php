@@ -176,9 +176,14 @@ class EndpointHelpers
             HookNames::SUPPORTED_ADMIN_ENDPOINT_GROUPS,
             []
         );
-        // This one is mandatory, so add it after the filter
-        $supportedAdminEndpointGroups[] = AdminGraphQLEndpointGroups::PLUGIN_INTERNAL;
-        return $supportedAdminEndpointGroups;
+        // Mandatory groups, add them after the filter
+        return array_merge(
+            $supportedAdminEndpointGroups,
+            [
+                AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
+                AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+            ]
+        );
     }
 
     /**
