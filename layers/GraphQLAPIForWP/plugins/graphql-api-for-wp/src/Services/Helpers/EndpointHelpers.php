@@ -74,8 +74,8 @@ class EndpointHelpers
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PERSISTED_QUERY
-            && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PERSISTED_QUERY;
+            // && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
     /**
