@@ -69,11 +69,12 @@ class EndpointHelpers
      * Indicate if we are requesting the wp-admin endpoint that
      * fetches data for Persisted Queries, under:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&persisted_query_id=...
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=persistedQuery&persisted_query_id=...
      */
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PERSISTED_QUERY
             && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
@@ -207,14 +208,19 @@ class EndpointHelpers
     public function getAdminPersistedQueryGraphQLEndpoint(string|int $persistedQueryEndpointCustomPostID, bool $enableLowLevelQueryEditing = false): string
     {
         return \add_query_arg(
-            RequestParams::PERSISTED_QUERY_ID,
-            $persistedQueryEndpointCustomPostID,
+            [
+                RequestParams::ENDPOINT_GROUP => AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+                RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
+            ],
             $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
         );
     }
 
     public function getAdminPersistedQueryCustomPostID(): ?int
     {
+        if (App::query(RequestParams::ENDPOINT_GROUP) !== AdminGraphQLEndpointGroups::PERSISTED_QUERY) {
+            return null;
+        }
         if ($persistedQueryID = App::query(RequestParams::PERSISTED_QUERY_ID)) {
             return (int) $persistedQueryID;
         }
