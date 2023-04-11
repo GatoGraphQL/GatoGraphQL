@@ -332,7 +332,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($this->alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint()
+        if (
+            $this->alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint()
             && $endpointHelpers->isRequestingAdminPluginInternalGraphQLEndpoint()
         ) {
             return [];
