@@ -276,7 +276,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Use payload types for mutations in the schema? %s', 'graphql-api'),
+                    \__('Use payload types for mutations in the schema?<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,

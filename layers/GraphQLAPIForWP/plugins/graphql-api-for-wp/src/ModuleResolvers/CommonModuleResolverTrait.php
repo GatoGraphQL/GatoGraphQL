@@ -29,7 +29,7 @@ trait CommonModuleResolverTrait
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('%s. <span style="color: olivedrab;">%s</span>', 'graphql-api'),
+            \__('%s. <br/><span style="color: olivedrab;">%s</span>', 'graphql-api'),
             \__('Same, but applied to private endpoints', 'graphql-api'),
             sprintf(
                 \__('This configuration will be reflected in the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients; when executing a GraphQL query internally (via class <code>%5$s</code> in PHP); and also as the default value on <a href="%3$s" target="_blank">custom private endpoints%4$s</a>', 'graphql-api'),
