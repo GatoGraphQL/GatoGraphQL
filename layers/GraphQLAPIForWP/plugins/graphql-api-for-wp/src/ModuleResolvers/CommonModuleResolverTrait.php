@@ -29,7 +29,7 @@ trait CommonModuleResolverTrait
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('%s. <span style="color: olivedrab;">%s</span>', 'graphql-api'),
+            \__('%s. <br/><span style="color: olivedrab;">%s</span>', 'graphql-api'),
             \__('Same, but applied to private endpoints', 'graphql-api'),
             sprintf(
                 \__('This configuration will be reflected in the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients; when executing a GraphQL query internally (via class <code>%5$s</code> in PHP); and also as the default value on <a href="%3$s" target="_blank">custom private endpoints%4$s</a>', 'graphql-api'),
@@ -50,6 +50,22 @@ trait CommonModuleResolverTrait
                 HTMLCodes::OPEN_IN_NEW_WINDOW,
                 'GraphQLServer'
             )
+        );
+    }
+
+    protected function getOnPublicEndpointsLabel(string $label): string
+    {
+        return sprintf(
+            '%s (on public endpoints)',
+            $label
+        );
+    }
+
+    protected function getPublicEndpointValueDescription(): string
+    {
+        return sprintf(
+            '<span style="color: olivedrab;">%s</span>',
+            \__('This value will be used on public endpoints (i.e. single endpoint, custom endpoints, and persisted queries) only; private endpoints are unrestricted.', 'graphql-api')
         );
     }
 

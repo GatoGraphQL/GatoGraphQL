@@ -245,7 +245,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Namespace types in the GraphQL schema? %s', 'graphql-api'),
+                    \__('Namespace types in the GraphQL schema?<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -279,7 +279,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Select the mutation scheme to use in the wp-admin. %s', 'graphql-api'),
+                    \__('Select the mutation scheme to use in the schema.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
@@ -318,7 +318,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data. %s', 'graphql-api'),
+                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -347,7 +347,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response. %s', 'graphql-api'),
+                    \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,

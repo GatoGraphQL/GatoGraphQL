@@ -65,6 +65,9 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 
+use function get_post_types;
+use function get_taxonomies;
+
 /**
  * Sets the configuration in all the PoP components from the main plugin.
  */
@@ -621,11 +624,53 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 // Enable the "self" fields
                 ComponentModelEnvironment::ENABLE_SELF_FIELD => true
             ],
+
+            /**
+             * Allow access to all custom post types and taxonomies,
+             * and also set no limit for them.
+             *
+             * Notice that, because we haven't registered this plugin's CPTs yet,
+             * the list here will not contain them. Same with taxonomies.
+             */
+            CustomPostsModule::class => [
+                CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES => get_post_types(),
+                CustomPostsEnvironment::CUSTOMPOST_LIST_MAX_LIMIT => -1,
+            ],
+            TagsModule::class => [
+                TagsEnvironment::QUERYABLE_TAG_TAXONOMIES => get_taxonomies(['hierarchical' => false]),
+                TagsEnvironment::TAG_LIST_MAX_LIMIT => -1,
+            ],
+            CategoriesModule::class => [
+                CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES => get_taxonomies(['hierarchical' => true]),
+                CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT => -1,
+            ],
+
+            // No limit in retrieving posts/users/etc
+            PostsModule::class => [
+                PostsEnvironment::POST_LIST_MAX_LIMIT => -1,
+            ],
+            UsersModule::class => [
+                UsersEnvironment::USER_LIST_MAX_LIMIT => -1,
+            ],
+            CommentsModule::class => [
+                CommentsEnvironment::COMMENT_LIST_MAX_LIMIT => -1,
+            ],
+            MediaModule::class => [
+                MediaEnvironment::MEDIA_LIST_MAX_LIMIT => -1,
+            ],
+            MenusModule::class => [
+                MenusEnvironment::MENU_LIST_MAX_LIMIT => -1,
+            ],
+            PagesModule::class => [
+                PagesEnvironment::PAGE_LIST_MAX_LIMIT => -1,
+            ],
+
             // Allow access to all entries for Root.optionValue
             SettingsModule::class => [
                 SettingsEnvironment::SETTINGS_ENTRIES => [],
                 SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY,
             ],
+
             // Allow access to all meta values
             CustomPostMetaModule::class => [
                 CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES => [],
