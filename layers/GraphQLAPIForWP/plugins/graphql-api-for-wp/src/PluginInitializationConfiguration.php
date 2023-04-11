@@ -621,8 +621,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ComponentModelModule::class => [
                 // Enable the “sensitive” data
                 ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
-                // Enable the "self" fields
-                ComponentModelEnvironment::ENABLE_SELF_FIELD => true
             ],
 
             /**
@@ -693,6 +691,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             $moduleClassConfiguration = array_merge_recursive(
                 $moduleClassConfiguration,
                 [
+                    ComponentModelModule::class => [
+                        // Enable the "self" fields
+                        ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
+                    ],
                     GraphQLServerModule::class => [
                         // Enable Nested mutations
                         GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => true,
