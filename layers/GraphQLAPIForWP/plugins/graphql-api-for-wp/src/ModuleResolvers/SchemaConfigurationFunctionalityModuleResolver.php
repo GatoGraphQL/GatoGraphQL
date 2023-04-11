@@ -279,7 +279,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $defaultValueLabel
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Select the mutation scheme to use in the wp-admin. %s', 'graphql-api'),
+                    \__('Select the mutation scheme to use in the schema. %s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
