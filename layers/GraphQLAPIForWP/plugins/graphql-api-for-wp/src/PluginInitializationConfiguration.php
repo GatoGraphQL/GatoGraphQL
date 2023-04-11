@@ -86,10 +86,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        // Get the possible states of wp-admin clients requesting the endpoint:
-        // 1. Only GraphiQL and Voyager clients
-        $isRequestingDefaultAdminGraphQLEndpoint = $endpointHelpers->isRequestingDefaultAdminGraphQLEndpoint();
-        // 2. GraphiQL and Voyager clients + ACL/CCL configurations
+        /**
+         * Get the possible states of wp-admin clients requesting
+         * the endpoint:
+         *
+         * - Any admin endpoint, except the Persisted Query ones
+         *   (as they take the value from the Schema Configuration)
+         */
         $isRequestingNonPersistedQueryAdminGraphQLEndpoint = $endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint();
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
         return [
@@ -177,7 +180,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_SELF_FIELD,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_SELF_FIELDS,
-                'option' => $isRequestingDefaultAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Enable nested mutations?
             // Only assign for Admin clients. For configuration it is assigned always, via the Fixed endpoint
@@ -185,7 +188,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => GraphQLServerModule::class,
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => $isRequestingDefaultAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value !== MutationSchemes::STANDARD,
             ],
             // Disable redundant mutation fields in the root type?
@@ -193,7 +196,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => EngineModule::class,
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => $isRequestingDefaultAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
             // Post default/max limits, add to CustomPostUnion
@@ -389,7 +392,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_SENSITIVE_DATA,
-                'option' => $isRequestingDefaultAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => $isRequestingNonPersistedQueryAdminGraphQLEndpoint ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // White/Blacklisted entries to CustomPost.meta
             [
