@@ -323,17 +323,18 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Expose “sensitive” data elements in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
+            // Commented out because this option is always set for admin endpoints
+            // $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
+            // $moduleSettings[] = [
+            //     Properties::INPUT => $option,
+            //     Properties::NAME => $this->getSettingOptionName(
+            //         $module,
+            //         $option
+            //     ),
+            //     Properties::TITLE => \__('Expose “sensitive” data elements in the admin (private) endpoints?', 'graphql-api'),
+            //     Properties::DESCRIPTION => $adminClientsDesc,
+            //     Properties::TYPE => Properties::TYPE_BOOL,
+            // ];
         } elseif ($module === self::SCHEMA_SELF_FIELDS) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [

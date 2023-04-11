@@ -702,13 +702,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => sprintf(
+                    Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
                         $sensitiveDataTitlePlaceholder,
                         \__('custom post status', 'graphql-api'),
-                    ),
+                    )),
                     Properties::DESCRIPTION => sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('custom post status', 'graphql-api'),
+                        \__('%s.<br/>%s', 'graphql-api'),
+                        sprintf(
+                            $sensitiveDataDescPlaceholder,
+                            \__('custom post status', 'graphql-api'),
+                        ),
+                        $publicEndpointValueDescription
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -720,13 +724,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => sprintf(
+                    Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
                         $sensitiveDataTitlePlaceholder,
                         \__('user email', 'graphql-api'),
-                    ),
+                    )),
                     Properties::DESCRIPTION => sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('user email', 'graphql-api'),
+                        \__('%s.<br/>%s', 'graphql-api'),
+                        sprintf(
+                            $sensitiveDataDescPlaceholder,
+                            \__('user email', 'graphql-api'),
+                        ),
+                        $publicEndpointValueDescription
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -889,13 +897,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
+                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('comment status', 'graphql-api'),
-                ),
+                )),
                 Properties::DESCRIPTION => sprintf(
-                    $sensitiveDataDescPlaceholder,
-                    \__('comment status', 'graphql-api'),
+                    \__('%s.<br/>%s', 'graphql-api'),
+                    sprintf(
+                        $sensitiveDataDescPlaceholder,
+                        \__('comment status', 'graphql-api'),
+                    ),
+                    $publicEndpointValueDescription
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -993,13 +1005,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
+                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('user roles', 'graphql-api'),
-                ),
+                )),
                 Properties::DESCRIPTION => sprintf(
-                    $sensitiveDataDescPlaceholder,
-                    \__('user roles', 'graphql-api'),
+                    \__('%s.<br/>%s', 'graphql-api'),
+                    sprintf(
+                        $sensitiveDataDescPlaceholder,
+                        \__('user roles', 'graphql-api'),
+                    ),
+                    $publicEndpointValueDescription
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -1011,13 +1027,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
+                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('user capabilities', 'graphql-api'),
-                ),
+                )),
                 Properties::DESCRIPTION => sprintf(
-                    $sensitiveDataDescPlaceholder,
-                    \__('user capabilities', 'graphql-api'),
+                    \__('%s.<br/>%s', 'graphql-api'),
+                    sprintf(
+                        $sensitiveDataDescPlaceholder,
+                        \__('user capabilities', 'graphql-api'),
+                    ),
+                    $publicEndpointValueDescription
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
