@@ -14,6 +14,6 @@ class TemplateHookSet extends UpstreamTemplateHookSet
      */
     protected function useTemplate(): bool
     {
-        return App::getState('executing-graphql') === true;
+        return App::getState('executing-graphql');
     }
 }
