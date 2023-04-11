@@ -226,7 +226,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $moduleDescriptions = [
                 self::SCHEMA_CUSTOMPOST_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s<br/>%4$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'custom posts'
@@ -250,7 +250,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $publicEndpointValueDescription,
                 ),
                 self::SCHEMA_USER_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s<br/>%4$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'users'
@@ -274,7 +274,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $publicEndpointValueDescription,
                 ),
                 self::SCHEMA_COMMENT_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s<br/>%4$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'comments'
@@ -298,7 +298,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $publicEndpointValueDescription,
                 ),
                 self::SCHEMA_TAXONOMY_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s<br/>%4$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'taxonomies (tags and categories)'
