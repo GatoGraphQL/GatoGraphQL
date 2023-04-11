@@ -53,6 +53,14 @@ trait CommonModuleResolverTrait
         );
     }
 
+    protected function getPublicEndpointValueDescription(): string
+    {
+        return sprintf(
+            '<span style="color: olivedrab;">%s</span>',
+            \__('This value will be used on public endpoints (i.e. single endpoint, custom endpoints, and persisted queries) only; private endpoints are unrestricted.', 'graphql-api')
+        );
+    }
+
     protected function getGraphiQLMenuPage(): GraphiQLMenuPage
     {
         $instanceManager = InstanceManagerFacade::getInstance();

@@ -579,7 +579,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $limitArg = 'limit';
         $unlimitedValue = -1;
         $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited', 'graphql-api');
-        $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited', 'graphql-api');
+        $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited. %s', 'graphql-api');
+        $publicEndpointValueDescription = $this->getPublicEndpointValueDescription();
         $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
         $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'graphql-api');
         $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each %2$s taxonomy\'s associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'graphql-api');
@@ -635,13 +636,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $maxLimitOption
                 ),
                 Properties::TITLE => sprintf(
-                    \__('Max limit for %s', 'graphql-api'),
+                    \__('Max limit for %s (on public endpoints)', 'graphql-api'),
                     $entities
                 ),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
                     $entities,
-                    $unlimitedValue
+                    $unlimitedValue,
+                    $publicEndpointValueDescription
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
@@ -866,11 +868,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Max limit for querying comments', 'graphql-api'),
+                Properties::TITLE => \__('Max limit for querying comments (on public endpoints)', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
                     \__('comments', 'graphql-api'),
-                    $unlimitedValue
+                    $unlimitedValue,
+                    $publicEndpointValueDescription
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
