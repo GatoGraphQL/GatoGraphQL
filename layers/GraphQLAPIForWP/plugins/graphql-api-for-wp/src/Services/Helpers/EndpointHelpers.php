@@ -133,6 +133,18 @@ class EndpointHelpers
     }
 
     /**
+     * Admin GraphQL endpoint group. If not provided,
+     * the (empty) string represents the default group,
+     * used by the private GraphiQL client.
+     */
+    public function getAdminGraphQLEndpointGroup(): string
+    {
+        /** @var string */
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, '');
+        return $endpointGroup;
+    }
+
+    /**
      * GraphQL endpoint to be used in the WordPress editor.
      * It has the full schema, including "admin" fields.
      */
