@@ -313,15 +313,17 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      */
     final public function getSchemaModuleClassesToSkip(): array
     {
-        /**
-         * If doing ?endpoint_group=pluginInternal,
-         * always enable all schema-type modules
-         */
-        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-        /** @var EndpointHelpers */
-        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingAdminPluginInternalWPEditorGraphQLEndpoint()) {
-            return [];
+        if ($this->alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint()) {
+            /**
+             * If doing ?endpoint_group=pluginInternal,
+             * always enable all schema-type modules
+             */
+            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
+            /** @var EndpointHelpers */
+            $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
+            if ($endpointHelpers->isRequestingAdminPluginInternalWPEditorGraphQLEndpoint()) {
+                return [];
+            }
         }
 
         // Module classes are skipped if the module is disabled
@@ -347,6 +349,18 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         }
 
         return $schemaModuleClassesToSkip;
+    }
+
+    /**
+     * Indicate if, when doing ?endpoint_group=pluginInternal,
+     * all the schema-type modules must still be enabled (even
+     * if they've been disabled).
+     *
+     * @todo Review is this right?
+     */
+    protected function alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint(): bool
+    {
+        return false;
     }
 
     /**
