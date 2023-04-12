@@ -21,9 +21,15 @@ trait CommonModuleResolverTrait
     protected function getDefaultValueDescription(): string
     {
         return sprintf(
-            '<span style="color: olivedrab;">%s</span>',
-            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration applied to some public endpoint:<ul><li>single endpoint</li><li>custom endpoints</li><li>persisted queries</li></ul>', 'graphql-api')
+            '<span style="color: olivedrab;">%s%s</span>',
+            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration applied to some public endpoint:', 'graphql-api'),
+            $this->getPublicEndpointsListDescription()
         );
+    }
+
+    protected function getPublicEndpointsListDescription(): string
+    {
+        return \__('<ul><li>single endpoint</li><li>custom endpoints</li><li>persisted queries</li></ul>', 'graphql-api');
     }
 
     protected function getAdminClientDescription(): string
