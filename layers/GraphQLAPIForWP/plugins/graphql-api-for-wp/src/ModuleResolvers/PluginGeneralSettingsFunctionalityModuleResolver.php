@@ -194,7 +194,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         'https://graphql-api.com/guides/config/browsing-enabling-and-disabling-modules/#heading-enabling/disabling-a-module',
                     ),
                     sprintf(
-                        \__('In the latter case, Schema modules are those <a href="%s" target="_blank">modules under categories Schema Type and Schema Directive</a>. For instance, when disabling the "Users" module, field <code>users</code> will be removed from the GraphQL schema, and as such there is no way to fetch user data using the GraphQL API.', 'graphql-api'),
+                        \__('In the latter case, "Schema modules" are those <a href="%s" target="_blank">modules under categories Schema Type and Schema Directive</a>. For instance, when disabling the "Users" module, field <code>users</code> will be removed from the GraphQL schema, and as such there is no way to fetch user data using the GraphQL API.', 'graphql-api'),
                         $moduleListURL,
                     ),
                     \__('These modules are certainly disabled on the public endpoints:', 'graphql-api'),
