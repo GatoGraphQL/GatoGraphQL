@@ -155,8 +155,28 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $option
                 ),
                 Properties::TITLE => \__('Do not disable Schema modules in the private endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Disabled Schema modules are always disabled from the public endpoints; indicate if they must also be disabled from the private endpoints', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'do-not-disable-schema-modules-in-private-endpoints-explanation'
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    '<hr/><br/><strong>%s</strong><br/><br/>%s<br/><br/>%s<br/><br/>%s',
+                    \__('Explanation - Disabling Schema modules in the public and private endpoints:'),
+                    sprintf(
+                        \__('We can <a href="%s" target="_blank">disable modules in the GraphQL API for WordPress</a>, to either remove some functionality from the GraphQL server (eg: the single endpoint), or remove some element from the GraphQL schema (eg: a type, a field, or a directive).', 'graphql-api'),
+                        'https://graphql-api.com/guides/config/browsing-enabling-and-disabling-modules/#heading-enabling/disabling-a-module',
+                    ),
+                    sprintf(
+                        \__('In the latter case, Schema modules are those <a href="%s" target="_blank">modules under categories Schema Type and Schema Directive</a>. For instance, when disabling the "Users" module, field <code>users</code> will be removed from the GraphQL schema, and as such there is no way to fetch user data using the GraphQL API.', 'graphql-api'),
+                        '',
+                    ),
+                    \__('These modules are certainly disabled on the public endpoints. Should they be disabled also on the private endpoints (where only logged-in users with the right permission can access it)?', 'graphql-api'),
+                ),
+                Properties::TYPE => Properties::TYPE_NULL,
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
