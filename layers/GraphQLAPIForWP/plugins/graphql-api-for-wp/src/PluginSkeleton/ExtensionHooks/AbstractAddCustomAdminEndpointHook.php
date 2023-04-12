@@ -45,13 +45,13 @@ abstract class AbstractAddCustomAdminEndpointHook
      * Fixed configuration for all components required in the plugin
      * when requesting the custom admin endpoint.
      *
-     * @param array<class-string<ModuleInterface>,array<string,mixed>> $predefinedAdminEndpointModuleClassConfiguration [key]: Module class, [value]: Configuration
+     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected function doGetPredefinedAdminEndpointModuleClassConfiguration(
-        array $predefinedAdminEndpointModuleClassConfiguration,
+        array $moduleClassConfiguration,
     ): array {
-        return $predefinedAdminEndpointModuleClassConfiguration;
+        return $moduleClassConfiguration;
     }
 
     /**
@@ -83,17 +83,17 @@ abstract class AbstractAddCustomAdminEndpointHook
      * Get the fixed configuration for all components required in the plugin
      * when requesting some specific group in the admin endpoint
      *
-     * @param array<class-string<ModuleInterface>,array<string,mixed>> $predefinedAdminEndpointModuleClassConfiguration [key]: Module class, [value]: Configuration
+     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     final public function getPredefinedAdminEndpointModuleClassConfiguration(
-        array $predefinedAdminEndpointModuleClassConfiguration,
+        array $moduleClassConfiguration,
         string $endpointGroup,
     ): array {
         if ($endpointGroup !== $this->getAdminEndpointGroup()) {
-            return $predefinedAdminEndpointModuleClassConfiguration;
+            return $moduleClassConfiguration;
         }
-        return $this->doGetPredefinedAdminEndpointModuleClassConfiguration($predefinedAdminEndpointModuleClassConfiguration);
+        return $this->doGetPredefinedAdminEndpointModuleClassConfiguration($moduleClassConfiguration);
     }
 
     /**

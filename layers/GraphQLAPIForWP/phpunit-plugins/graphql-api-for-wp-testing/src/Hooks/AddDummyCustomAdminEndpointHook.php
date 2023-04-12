@@ -24,14 +24,14 @@ class AddDummyCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
     /**
      * Do not allow querying any CPT
      *
-     * @param array<class-string<ModuleInterface>,array<string,mixed>> $predefinedAdminEndpointModuleClassConfiguration [key]: Module class, [value]: Configuration
+     * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
     protected function doGetPredefinedAdminEndpointModuleClassConfiguration(
-        array $predefinedAdminEndpointModuleClassConfiguration,
+        array $moduleClassConfiguration,
     ): array {
-        $predefinedAdminEndpointModuleClassConfiguration[CustomPostsModule::class][CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES] =[];
-        return $predefinedAdminEndpointModuleClassConfiguration;
+        $moduleClassConfiguration[CustomPostsModule::class][CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES] =[];
+        return $moduleClassConfiguration;
     }
 
     /**
