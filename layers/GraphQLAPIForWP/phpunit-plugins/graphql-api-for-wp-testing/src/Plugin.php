@@ -8,8 +8,8 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddCustomAdminEndpointHook;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
-
 use WP_REST_Response;
+
 use function add_action;
 use function delete_option;
 use function flush_rewrite_rules;
