@@ -22,9 +22,9 @@ trait CommonModuleResolverTrait
     {
         return sprintf(
             \__('%s %s', 'graphql-api'),
-            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration.', 'graphql-api'),
+            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api'),
             $this->getCollapsible(
-                \__('The Schema Configuration is applied on public endpoints:', 'graphql-api')
+                \__('Public endpoints:', 'graphql-api')
                 . $this->getPublicEndpointsListDescription()
             )
         );
@@ -41,7 +41,7 @@ trait CommonModuleResolverTrait
             \__('%s. <br/>%s', 'graphql-api'),
             \__('Same, but applied to private endpoints', 'graphql-api'),
             $this->getCollapsible(
-                \__('This configuration will be reflected in:', 'graphql-api')
+                \__('Private endpoints:', 'graphql-api')
                 . $this->getPrivateEndpointsListDescription()
             )
         );
