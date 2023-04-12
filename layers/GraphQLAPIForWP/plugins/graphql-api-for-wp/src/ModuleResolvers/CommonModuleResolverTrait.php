@@ -51,7 +51,7 @@ trait CommonModuleResolverTrait
     {
         return sprintf(
             '<a href="#" type="button" class="collapsible">%s</a><span class="collapsible-content">%s</span>',
-            \__('Show more', 'graphql-api'),
+            \__('Show details', 'graphql-api'),
             $content
         );
     }
