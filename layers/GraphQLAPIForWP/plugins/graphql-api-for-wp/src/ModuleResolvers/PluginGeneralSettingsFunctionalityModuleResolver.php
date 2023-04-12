@@ -27,7 +27,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      */
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
-    public final const OPTION_DO_NOT_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS = 'do-not-disable-schema-modules-in-private-endpoints';
+    public final const OPTION_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS = 'disable-schema-modules-in-private-endpoints';
     public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -117,7 +117,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
             ],
             self::PRIVATE_ENDPOINTS => [
-                self::OPTION_DO_NOT_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS => true,
+                self::OPTION_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS => false,
             ],
             self::SERVER_IP_CONFIGURATION => [
                 self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME => 'REMOTE_ADDR',
@@ -159,14 +159,14 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::PRIVATE_ENDPOINTS) {
-            $option = self::OPTION_DO_NOT_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS;
+            $option = self::OPTION_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Do not disable Schema modules in the private endpoints?', 'graphql-api'),
+                Properties::TITLE => \__('Disable "Schema modules" in the private endpoints?', 'graphql-api'),
                 Properties::DESCRIPTION => \__('Indicate if disabled Schema modules must also be disabled from the private endpoints (in addition to the public endpoints)', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -184,7 +184,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
-                    'do-not-disable-schema-modules-in-private-endpoints-explanation'
+                    'disable-schema-modules-in-private-endpoints-explanation'
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<strong>%s</strong><br/><br/>%s<br/><br/>%s<br/><br/>%s%s%s%s',
