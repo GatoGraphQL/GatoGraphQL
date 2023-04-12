@@ -34,18 +34,15 @@ class AddCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
     //     return $predefinedAdminEndpointModuleClassConfiguration;
     // }
 
-    // /**
-    //  * Override this method in the hook implementation.
-    //  *
-    //  * Module classes to skip initializing when requesting
-    //  * the custom admin endpoint.
-    //  *
-    //  * @param array<class-string<ModuleInterface>> $schemaModuleClassesToSkip List of `Module` class which must not initialize their Schema services
-    //  * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
-    //  */
-    // protected function doGetSchemaModuleClassesToSkip(
-    //     array $schemaModuleClassesToSkip,
-    // ): array {
-    //     return $schemaModuleClassesToSkip;
-    // }
+    /**
+     * Do not disable any schema modules
+     *
+     * @param array<class-string<ModuleInterface>> $schemaModuleClassesToSkip List of `Module` class which must not initialize their Schema services
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
+     */
+    protected function doGetSchemaModuleClassesToSkip(
+        array $schemaModuleClassesToSkip,
+    ): array {
+        return [];
+    }
 }
