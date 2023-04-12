@@ -40,26 +40,34 @@ abstract class AbstractAddCustomAdminEndpointHook
     abstract protected function getAdminEndpointGroup(): string;
 
     /**
-     * Get the fixed configuration for all components required in the plugin
-     * when requesting the custom admin endpoint
+     * Override this method in the hook implementation.
+     *
+     * Fixed configuration for all components required in the plugin
+     * when requesting the custom admin endpoint.
      *
      * @param array<class-string<ModuleInterface>,array<string,mixed>> $predefinedAdminEndpointModuleClassConfiguration [key]: Module class, [value]: Configuration
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    abstract protected function doGetPredefinedAdminEndpointModuleClassConfiguration(
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(
         array $predefinedAdminEndpointModuleClassConfiguration,
-    ): array;
+    ): array {
+        return $predefinedAdminEndpointModuleClassConfiguration;
+    }
 
     /**
-     * Add schema Module classes to skip initializing
-     * when requesting the custom admin endpoint
+     * Override this method in the hook implementation.
+     *
+     * Module classes to skip initializing when requesting
+     * the custom admin endpoint.
      *
      * @param array<class-string<ModuleInterface>> $schemaModuleClassesToSkip List of `Module` class which must not initialize their Schema services
      * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
      */
-    abstract protected function doGetSchemaModuleClassesToSkip(
+    protected function doGetSchemaModuleClassesToSkip(
         array $schemaModuleClassesToSkip,
-    ): array;
+    ): array {
+        return $schemaModuleClassesToSkip;
+    }
 
     /**
      * @param string[] $supportedAdminEndpointGroups
