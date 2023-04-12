@@ -20,9 +20,13 @@ trait CommonModuleResolverTrait
 
     protected function getDefaultValueDescription(): string
     {
-        return $this->getCollapsible(
-            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration applied to some public endpoint:', 'graphql-api')
-            . $this->getPublicEndpointsListDescription()
+        return sprintf(
+            \__('%s %s', 'graphql-api'),
+            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration.', 'graphql-api'),
+            $this->getCollapsible(
+                \__('The Schema Configuration is applied on public endpoints:', 'graphql-api')
+                . $this->getPublicEndpointsListDescription()
+            )
         );
     }
 
