@@ -339,16 +339,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             return [];
         }
 
-        // Module classes are skipped if the module is disabled
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $skipSchemaModuleClassesPerModule = array_filter(
-            $this->getModuleClassesToSkipIfModuleDisabled(),
-            fn ($module) => !$moduleRegistry->isModuleEnabled($module),
-            ARRAY_FILTER_USE_KEY
-        );
-        $schemaModuleClassesToSkip = GeneralUtils::arrayFlatten(array_values(
-            $skipSchemaModuleClassesPerModule
-        ));
+        $schemaModuleClassesToSkip = $this->doGetSchemaModuleClassesToSkip();
 
         /**
          * Allow to not disable modules on custom admin endpoints,
@@ -363,6 +354,23 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         }
 
         return $schemaModuleClassesToSkip;
+    }
+
+    /**
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
+     */
+    private function doGetSchemaModuleClassesToSkip(): array
+    {
+        // Module classes are skipped if the module is disabled
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $skipSchemaModuleClassesPerModule = array_filter(
+            $this->getModuleClassesToSkipIfModuleDisabled(),
+            fn ($module) => !$moduleRegistry->isModuleEnabled($module),
+            ARRAY_FILTER_USE_KEY
+        );
+        return GeneralUtils::arrayFlatten(array_values(
+            $skipSchemaModuleClassesPerModule
+        ));
     }
 
     /**
