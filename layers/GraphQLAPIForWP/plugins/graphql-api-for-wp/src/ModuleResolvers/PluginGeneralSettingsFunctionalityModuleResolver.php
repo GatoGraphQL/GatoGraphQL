@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable;
 use GraphQLAPI\GraphQLAPI\Constants\AdminRequestParams;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\Module;

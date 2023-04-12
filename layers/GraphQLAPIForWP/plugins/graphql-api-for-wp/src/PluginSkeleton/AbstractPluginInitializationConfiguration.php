@@ -13,8 +13,8 @@ use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleConfigurationHelpers;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function apply_filters;
 
 /**

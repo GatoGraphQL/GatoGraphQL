@@ -12,7 +12,7 @@ class DisableSchemaModulesOnPrivateEndpointsModifyPluginSettingsFixtureEndpointW
     use EnableDisableModuleWebserverRequestTestTrait;
 
     private const ARTIFICIAL_DATA_NAME = 'artificial';
-    
+
     protected function setUp(): void
     {
         parent::setUp();
