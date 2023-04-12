@@ -1,0 +1,13 @@
+############################################################
+# After having disabled module "User Roles",
+# check if the UserRole type is available or not:
+# Single endpoint: always disabled
+# Admin endpoint: disabled or not via the Settings option
+############################################################
+{
+  __schema {
+    userRoleType: type(name: "UserRole") {
+      name
+    }
+  }
+}

@@ -7,13 +7,14 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleConfigurationHelpers;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use function apply_filters;
 
 /**
@@ -339,6 +340,49 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             return [];
         }
 
+        $isRequestingAdminGraphQLEndpoint = $endpointHelpers->isRequestingAdminGraphQLEndpoint();
+
+        if ($isRequestingAdminGraphQLEndpoint) {
+            /**
+             * Private endpoints: Check Settings to decide if to
+             * disable the "Schema modules" or not
+             */
+            $userSettingsManager = UserSettingsManagerFacade::getInstance();
+            if (
+                !$userSettingsManager->getSetting(
+                    PluginGeneralSettingsFunctionalityModuleResolver::PRIVATE_ENDPOINTS,
+                    PluginGeneralSettingsFunctionalityModuleResolver::OPTION_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS
+                )
+            ) {
+                return [];
+            }
+        }
+
+        $schemaModuleClassesToSkip = $this->doGetSchemaModuleClassesToSkip();
+
+        /**
+         * Public endpoints: cannot be customized
+         */
+        if (!$isRequestingAdminGraphQLEndpoint) {
+            return $schemaModuleClassesToSkip;
+        }
+
+        /**
+         * Private endpoints: Allow to not disable modules on custom
+         * admin endpoints, for some specific group.
+         */
+        return apply_filters(
+            HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
+            $schemaModuleClassesToSkip,
+            $endpointHelpers->getAdminGraphQLEndpointGroup()
+        );
+    }
+
+    /**
+     * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
+     */
+    private function doGetSchemaModuleClassesToSkip(): array
+    {
         // Module classes are skipped if the module is disabled
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $skipSchemaModuleClassesPerModule = array_filter(
@@ -346,23 +390,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             fn ($module) => !$moduleRegistry->isModuleEnabled($module),
             ARRAY_FILTER_USE_KEY
         );
-        $schemaModuleClassesToSkip = GeneralUtils::arrayFlatten(array_values(
+        return GeneralUtils::arrayFlatten(array_values(
             $skipSchemaModuleClassesPerModule
         ));
-
-        /**
-         * Allow to not disable modules on custom admin endpoints,
-         * for some specific group.
-         */
-        if ($endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
-            return apply_filters(
-                HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
-                $schemaModuleClassesToSkip,
-                $endpointHelpers->getAdminGraphQLEndpointGroup()
-            );
-        }
-
-        return $schemaModuleClassesToSkip;
     }
 
     /**

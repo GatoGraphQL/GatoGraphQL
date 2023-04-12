@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Admin\Tables;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
+use GraphQLAPI\GraphQLAPI\Constants\AdminRequestParams;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
@@ -24,8 +25,6 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
  */
 class ModuleListTable extends AbstractItemListTable
 {
-    public final const URL_PARAM_MODULE_TYPE = 'module-type';
-
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
@@ -119,7 +118,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     protected function getCurrentViews(): array
     {
-        $currentView = App::request(self::URL_PARAM_MODULE_TYPE) ?? App::query(self::URL_PARAM_MODULE_TYPE, '');
+        $currentView = App::request(AdminRequestParams::MODULE_TYPE) ?? App::query(AdminRequestParams::MODULE_TYPE, '');
         return explode(',', $currentView);
     }
 
@@ -163,7 +162,7 @@ class ModuleListTable extends AbstractItemListTable
             $moduleTypeSlug = $moduleTypeResolver->getSlug($moduleType);
             $views[$moduleTypeSlug] = sprintf(
                 '<a href="%s" class="%s">%s</a>',
-                \add_query_arg(self::URL_PARAM_MODULE_TYPE, $moduleTypeSlug, $url),
+                \add_query_arg(AdminRequestParams::MODULE_TYPE, $moduleTypeSlug, $url),
                 'module-type-view module-type-' . $moduleTypeSlug . (in_array($moduleTypeSlug, $currentViews) ? ' current' : ''),
                 $moduleTypeResolver->getName($moduleType)
             );
@@ -352,7 +351,7 @@ class ModuleListTable extends AbstractItemListTable
     {
         $nonce = \wp_create_nonce('graphql_api_enable_or_disable_module');
         $currentViews = $this->getCurrentViews();
-        $maybeCurrentViewParam = $currentViews !== [] ? '&' . self::URL_PARAM_MODULE_TYPE . '=' . implode(',', $currentViews) : '';
+        $maybeCurrentViewParam = $currentViews !== [] ? '&' . AdminRequestParams::MODULE_TYPE . '=' . implode(',', $currentViews) : '';
         $linkPlaceholder = '<a href="?page=%s&action=%s&item=%s&_wpnonce=%s' . ($maybeCurrentViewParam) . '">%s</a>';
         $page = esc_attr(App::request('page') ?? App::query('page', ''));
         $actions = [];
