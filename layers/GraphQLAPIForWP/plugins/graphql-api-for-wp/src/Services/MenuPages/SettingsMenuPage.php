@@ -502,6 +502,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             array(),
             $mainPluginVersion
         );
+
+        \wp_enqueue_script(
+            'graphql-api-collapse',
+            $mainPluginURL . 'assets/js/collapse.js',
+            array('jquery'),
+            $mainPluginVersion
+        );
+        \wp_enqueue_style(
+            'graphql-api-collapse',
+            $mainPluginURL . 'assets/css/collapse.css',
+            array(),
+            $mainPluginVersion
+        );
     }
 
     /**

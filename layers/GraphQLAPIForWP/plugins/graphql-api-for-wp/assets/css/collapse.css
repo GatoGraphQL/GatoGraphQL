@@ -1,0 +1,22 @@
+/**
+ * Collapsible source: https://www.w3schools.com/howto/howto_js_collapsible.asp
+ */
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    color: olivedrab;
+    text-decoration: none;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.collapsible.active {
+    display: none;
+    overflow: hidden;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.collapsible-content {
+    color: olivedrab;
+    display: none;
+    overflow: hidden;
+}

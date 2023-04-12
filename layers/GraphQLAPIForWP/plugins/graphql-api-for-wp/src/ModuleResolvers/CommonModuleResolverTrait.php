@@ -21,9 +21,12 @@ trait CommonModuleResolverTrait
     protected function getDefaultValueDescription(): string
     {
         return sprintf(
-            '<span style="color: olivedrab;">%s%s</span>',
-            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration applied to some public endpoint:', 'graphql-api'),
-            $this->getPublicEndpointsListDescription()
+            \__('<span class="settings-info">%s</span><br/>%s', 'graphql-api'),
+            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api'),
+            $this->getCollapsible(
+                \__('The public endpoints are:', 'graphql-api')
+                . $this->getPublicEndpointsListDescription()
+            )
         );
     }
 
@@ -35,10 +38,21 @@ trait CommonModuleResolverTrait
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('%s. <br/><span style="color: olivedrab;">%s%s</span>', 'graphql-api'),
-            \__('Same, but applied to private endpoints', 'graphql-api'),
-            \__('This configuration will be reflected in:', 'graphql-api'),
-            $this->getPrivateEndpointsListDescription()
+            \__('%s<br/>%s', 'graphql-api'),
+            \__('Same, but applied to private endpoints.', 'graphql-api'),
+            $this->getCollapsible(
+                \__('The private endpoints are:', 'graphql-api')
+                . $this->getPrivateEndpointsListDescription()
+            )
+        );
+    }
+
+    protected function getCollapsible(string $content): string
+    {
+        return sprintf(
+            '<a href="#" type="button" class="collapsible">%s</a><span class="collapsible-content">%s</span>',
+            \__('Show details', 'graphql-api'),
+            $content
         );
     }
 
@@ -75,8 +89,7 @@ trait CommonModuleResolverTrait
 
     protected function getPublicEndpointValueDescription(): string
     {
-        return sprintf(
-            '<span style="color: olivedrab;">%s</span>',
+        return $this->getCollapsible(
             \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api')
         );
     }

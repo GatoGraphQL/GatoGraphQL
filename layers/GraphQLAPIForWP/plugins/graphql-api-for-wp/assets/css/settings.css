@@ -5,3 +5,7 @@
 .graphql-api-settings-section .form-table th {
     padding-left: 10px;
 }
+
+.settings-info {
+    color: darkcyan;
+}
