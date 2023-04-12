@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
@@ -173,7 +174,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             $moduleListURL = \admin_url(sprintf(
                 'admin.php?page=%s&%s=%s',
                 $modulesMenuPage->getScreenID(),
-                'module-type',
+                ModuleListTable::URL_PARAM_MODULE_TYPE,
                 implode(',', [
                     'schema-directive',
                     'schema-type'
