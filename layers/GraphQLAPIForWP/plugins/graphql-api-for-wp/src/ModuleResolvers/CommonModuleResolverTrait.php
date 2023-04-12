@@ -21,7 +21,7 @@ trait CommonModuleResolverTrait
     protected function getDefaultValueDescription(): string
     {
         return sprintf(
-            \__('%s %s', 'graphql-api'),
+            \__('%s<br/>%s', 'graphql-api'),
             \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api'),
             $this->getCollapsible(
                 \__('Public endpoints:', 'graphql-api')
@@ -38,8 +38,8 @@ trait CommonModuleResolverTrait
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('%s. <br/>%s', 'graphql-api'),
-            \__('Same, but applied to private endpoints', 'graphql-api'),
+            \__('%s<br/>%s', 'graphql-api'),
+            \__('Same, but applied to private endpoints.', 'graphql-api'),
             $this->getCollapsible(
                 \__('Private endpoints:', 'graphql-api')
                 . $this->getPrivateEndpointsListDescription()
