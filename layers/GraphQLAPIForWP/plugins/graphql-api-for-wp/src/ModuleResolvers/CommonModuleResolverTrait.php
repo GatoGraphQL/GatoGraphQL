@@ -24,7 +24,7 @@ trait CommonModuleResolverTrait
             \__('%s<br/>%s', 'graphql-api'),
             \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api'),
             $this->getCollapsible(
-                \__('Public endpoints:', 'graphql-api')
+                \__('The public endpoints are:', 'graphql-api')
                 . $this->getPublicEndpointsListDescription()
             )
         );
@@ -41,7 +41,7 @@ trait CommonModuleResolverTrait
             \__('%s<br/>%s', 'graphql-api'),
             \__('Same, but applied to private endpoints.', 'graphql-api'),
             $this->getCollapsible(
-                \__('Private endpoints:', 'graphql-api')
+                \__('The private endpoints are:', 'graphql-api')
                 . $this->getPrivateEndpointsListDescription()
             )
         );
