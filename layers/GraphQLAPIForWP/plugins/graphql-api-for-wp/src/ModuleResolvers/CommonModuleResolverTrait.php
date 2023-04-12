@@ -20,10 +20,9 @@ trait CommonModuleResolverTrait
 
     protected function getDefaultValueDescription(): string
     {
-        return sprintf(
-            '<a href="#" type="button" class="collapsible">Show more</a><span class="collapsible-content" style="color: olivedrab;">%s%s</span>',
-            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration applied to some public endpoint:', 'graphql-api'),
-            $this->getPublicEndpointsListDescription()
+        return $this->getCollapsible(
+            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration applied to some public endpoint:', 'graphql-api')
+            . $this->getPublicEndpointsListDescription()
         );
     }
 
@@ -35,10 +34,21 @@ trait CommonModuleResolverTrait
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('%s. <br/><a href="#" type="button" class="collapsible">Show more</a><span class="collapsible-content" style="color: olivedrab;">%s%s</span>', 'graphql-api'),
+            \__('%s. <br/>%s', 'graphql-api'),
             \__('Same, but applied to private endpoints', 'graphql-api'),
-            \__('This configuration will be reflected in:', 'graphql-api'),
-            $this->getPrivateEndpointsListDescription()
+            $this->getCollapsible(
+                \__('This configuration will be reflected in:', 'graphql-api')
+                . $this->getPrivateEndpointsListDescription()
+            )
+        );
+    }
+
+    protected function getCollapsible(string $content): string
+    {
+        return sprintf(
+            '<a href="#" type="button" class="collapsible">%s</a><span class="collapsible-content">%s</span>',
+            \__('Show more', 'graphql-api'),
+            $content
         );
     }
 
@@ -75,8 +85,7 @@ trait CommonModuleResolverTrait
 
     protected function getPublicEndpointValueDescription(): string
     {
-        return sprintf(
-            '<a href="#" type="button" class="collapsible">Show more</a><span class="collapsible-content" style="color: olivedrab;">%s</span>',
+        return $this->getCollapsible(
             \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api')
         );
     }
