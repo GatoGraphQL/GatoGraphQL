@@ -6,5 +6,11 @@ query GetTypeInfoByIntrospection {
         name
       }
     }
+    customPostEnumType: type(name: "CustomPostEnumString") {
+      name
+      extensions {
+        possibleValues
+      }
+    }
   }
 }

@@ -6,5 +6,11 @@ query GetTypeInfoByIntrospection {
         name
       }
     }
+    categoryTaxonomyEnumType: type(name: "CategoryTaxonomyEnumString") {
+      name
+      extensions {
+        possibleValues
+      }
+    }
   }
 }
