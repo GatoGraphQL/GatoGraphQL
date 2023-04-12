@@ -578,7 +578,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         // Common variables to set the limit on the schema types
         $limitArg = 'limit';
         $unlimitedValue = -1;
-        $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited', 'graphql-api');
+        $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited.', 'graphql-api');
         $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited.<br/>%s', 'graphql-api');
         $publicEndpointValueDescription = $this->getPublicEndpointValueDescription();
         $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
