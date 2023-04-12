@@ -800,6 +800,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPCMSSchema\UsersWP\Module::class,
                 \PoPCMSSchema\UserState\Module::class,
                 \PoPCMSSchema\UserStateWP\Module::class,
+                \PoPCMSSchema\UserStateMutations\Module::class,
+                \PoPCMSSchema\UserStateMutationsWP\Module::class,
                 \PoPWPSchema\Users\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_ROLES => [
