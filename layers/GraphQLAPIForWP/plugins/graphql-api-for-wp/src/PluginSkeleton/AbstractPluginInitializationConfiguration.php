@@ -7,13 +7,14 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleConfigurationHelpers;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use function apply_filters;
 
 /**
@@ -339,12 +340,30 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             return [];
         }
 
+        $isRequestingAdminGraphQLEndpoint = $endpointHelpers->isRequestingAdminGraphQLEndpoint();
+
+        if ($isRequestingAdminGraphQLEndpoint) {
+            /**
+             * Private endpoints: Check Settings to decide if to
+             * disable the "Schema modules" or not
+             */
+            $userSettingsManager = UserSettingsManagerFacade::getInstance();
+            if (
+                !$userSettingsManager->getSetting(
+                    PluginGeneralSettingsFunctionalityModuleResolver::PRIVATE_ENDPOINTS,
+                    PluginGeneralSettingsFunctionalityModuleResolver::OPTION_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS
+                )
+            ) {
+                return [];
+            }
+        }
+
         $schemaModuleClassesToSkip = $this->doGetSchemaModuleClassesToSkip();
 
         /**
          * Public endpoints: cannot be customized
          */
-        if (!$endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
+        if (!$isRequestingAdminGraphQLEndpoint) {
             return $schemaModuleClassesToSkip;
         }
 
