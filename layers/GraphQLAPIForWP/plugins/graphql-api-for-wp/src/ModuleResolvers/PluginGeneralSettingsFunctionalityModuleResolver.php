@@ -170,6 +170,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::DESCRIPTION => \__('Disabled Schema modules are always disabled from the public endpoints; indicate if they must also be disabled from the private endpoints', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
+
             $modulesMenuPage = $this->getModulesMenuPage();
             $moduleListURL = \admin_url(sprintf(
                 'admin.php?page=%s&%s=%s',
@@ -186,7 +187,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     'do-not-disable-schema-modules-in-private-endpoints-explanation'
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    '<hr/><br/><strong>%s</strong><br/><br/>%s<br/><br/>%s<br/><br/>%s',
+                    '<strong>%s</strong><br/><br/>%s<br/><br/>%s<br/><br/>%s',
                     \__('Explanation - Disabling Schema modules in the public and private endpoints:'),
                     sprintf(
                         \__('We can <a href="%s" target="_blank">disable modules in the GraphQL API for WordPress</a>, to either remove some functionality from the GraphQL server (eg: the single endpoint), or remove some element from the GraphQL schema (eg: a type, a field, or a directive).', 'graphql-api'),
