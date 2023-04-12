@@ -12,9 +12,11 @@ use PoP\Root\Module\ModuleInterface;
  */
 class AddCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
 {
+    public const ADMIN_ENDPOINT_GROUP = 'dummyCustomAdminEndpoint';
+
     protected function getAdminEndpointGroup(): string
     {
-        return 'dummyCustomAdminEndpoint';
+        return self::ADMIN_ENDPOINT_GROUP;
     }
 
     // /**
