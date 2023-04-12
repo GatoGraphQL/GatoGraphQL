@@ -9,6 +9,7 @@ use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use PoP\ComponentModel\App;
 
 class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -29,6 +30,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
+    private ?ModulesMenuPage $modulesMenuPage = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -38,6 +40,15 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
+    final public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
+    {
+        $this->modulesMenuPage = $modulesMenuPage;
+    }
+    final protected function getModulesMenuPage(): ModulesMenuPage
+    {
+        /** @var ModulesMenuPage */
+        return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
     }
 
     /**
@@ -158,6 +169,16 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::DESCRIPTION => \__('Disabled Schema modules are always disabled from the public endpoints; indicate if they must also be disabled from the private endpoints', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
+            $modulesMenuPage = $this->getModulesMenuPage();
+            $moduleListURL = \admin_url(sprintf(
+                'admin.php?page=%s&%s=%s',
+                $modulesMenuPage->getScreenID(),
+                'module-type',
+                implode(',', [
+                    'schema-directive',
+                    'schema-type'
+                ])
+            ));
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
@@ -172,7 +193,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     ),
                     sprintf(
                         \__('In the latter case, Schema modules are those <a href="%s" target="_blank">modules under categories Schema Type and Schema Directive</a>. For instance, when disabling the "Users" module, field <code>users</code> will be removed from the GraphQL schema, and as such there is no way to fetch user data using the GraphQL API.', 'graphql-api'),
-                        '',
+                        $moduleListURL,
                     ),
                     \__('These modules are certainly disabled on the public endpoints. Should they be disabled also on the private endpoints (where only logged-in users with the right permission can access it)?', 'graphql-api'),
                 ),
