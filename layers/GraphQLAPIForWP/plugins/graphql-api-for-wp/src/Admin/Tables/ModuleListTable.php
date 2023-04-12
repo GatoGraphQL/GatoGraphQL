@@ -65,7 +65,7 @@ class ModuleListTable extends AbstractItemListTable
         $moduleTypeRegistry = ModuleTypeRegistryFacade::getInstance();
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(false, false, true);
-        $currentView = $this->getCurrentView();
+        $currentViews = $this->getCurrentViews();
         /** @var array<string,string> */
         $settingsCategoryIDs = [];
         foreach ($modules as $module) {
@@ -83,7 +83,7 @@ class ModuleListTable extends AbstractItemListTable
                 $settingsCategoryID = $settingsCategoryIDs[$settingsCategory];
             }
             // If filtering the view, only add the items with that module type
-            if (!$currentView || $currentView === $moduleTypeSlug) {
+            if ($currentViews === [] || in_array($moduleTypeSlug, $currentViews)) {
                 $isEnabled = $moduleRegistry->isModuleEnabled($module);
                 $isPredefinedEnabledOrDisabled = $moduleResolver->isPredefinedEnabledOrDisabled($module);
                 $items[] = [
@@ -109,11 +109,18 @@ class ModuleListTable extends AbstractItemListTable
     }
 
     /**
-     * Gets the current filtering view
+     * Gets the current filtering view(s).
+     *
+     * Can pass more than 1 view by concatenating them with ",":
+     *
+     *   &module-type=schema-type,schema-directive
+     *
+     * @return string[]
      */
-    protected function getCurrentView(): string
+    protected function getCurrentViews(): array
     {
-        return App::request(self::URL_PARAM_MODULE_TYPE) ?? App::query(self::URL_PARAM_MODULE_TYPE, '');
+        $currentView = App::request(self::URL_PARAM_MODULE_TYPE) ?? App::query(self::URL_PARAM_MODULE_TYPE, '');
+        return explode(',', $currentView);
     }
 
     /**
@@ -125,7 +132,7 @@ class ModuleListTable extends AbstractItemListTable
     protected function get_views()
     {
         $views = [];
-        $currentView = $this->getCurrentView();
+        $currentViews = $this->getCurrentViews();
 
         // Module page URL
         $url = admin_url(sprintf(
@@ -137,7 +144,7 @@ class ModuleListTable extends AbstractItemListTable
         $views['all'] = sprintf(
             '<a href="%s" class="%s">%s</a>',
             $url,
-            $currentView === '' ? 'current' : '',
+            $currentViews === [] ? 'current' : '',
             \__('All', 'graphql-api')
         );
 
@@ -157,7 +164,7 @@ class ModuleListTable extends AbstractItemListTable
             $views[$moduleTypeSlug] = sprintf(
                 '<a href="%s" class="%s">%s</a>',
                 \add_query_arg(self::URL_PARAM_MODULE_TYPE, $moduleTypeSlug, $url),
-                'module-type-view module-type-' . $moduleTypeSlug . ($currentView === $moduleTypeSlug ? ' current' : ''),
+                'module-type-view module-type-' . $moduleTypeSlug . (in_array($moduleTypeSlug, $currentViews) ? ' current' : ''),
                 $moduleTypeResolver->getName($moduleType)
             );
         }
@@ -344,8 +351,8 @@ class ModuleListTable extends AbstractItemListTable
     protected function getColumnActions(array $item): array
     {
         $nonce = \wp_create_nonce('graphql_api_enable_or_disable_module');
-        $currentView = $this->getCurrentView();
-        $maybeCurrentViewParam = !empty($currentView) ? '&' . self::URL_PARAM_MODULE_TYPE . '=' . $currentView : '';
+        $currentViews = $this->getCurrentViews();
+        $maybeCurrentViewParam = $currentViews !== [] ? '&' . self::URL_PARAM_MODULE_TYPE . '=' . implode(',', $currentViews) : '';
         $linkPlaceholder = '<a href="?page=%s&action=%s&item=%s&_wpnonce=%s' . ($maybeCurrentViewParam) . '">%s</a>';
         $page = esc_attr(App::request('page') ?? App::query('page', ''));
         $actions = [];
