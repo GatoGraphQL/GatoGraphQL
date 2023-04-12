@@ -35,16 +35,17 @@ trait CommonModuleResolverTrait
     protected function getAdminClientDescription(): string
     {
         return sprintf(
-            \__('%s. <br/><span style="color: olivedrab;">%s</span>', 'graphql-api'),
+            \__('%s. <br/><span style="color: olivedrab;">%s%s</span>', 'graphql-api'),
             \__('Same, but applied to private endpoints', 'graphql-api'),
-            $this->getPrivateEndpointsDescription()
+            \__('This configuration will be reflected in:', 'graphql-api'),
+            $this->getPrivateEndpointsListDescription()
         );
     }
 
-    protected function getPrivateEndpointsDescription(): string
+    protected function getPrivateEndpointsListDescription(): string
     {
         return sprintf(
-            \__('This configuration will be reflected in:<ul><li>the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients</li><li>GraphQL queries executed internally (via class <code>%5$s</code> in PHP)</li><li><a href="%3$s" target="_blank">custom private endpoints%4$s</a> (when no pre-defined configuration is provided via PHP)</li></ul>', 'graphql-api'),
+            \__('<ul><li>the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients</li><li>GraphQL queries executed internally (via class <code>%5$s</code> in PHP)</li><li><a href="%3$s" target="_blank">custom private endpoints%4$s</a> (when no pre-defined configuration is provided via PHP)</li></ul>', 'graphql-api'),
             \admin_url(sprintf(
                 'admin.php?page=%s',
                 $this->getGraphiQLMenuPage()->getScreenID()

@@ -200,7 +200,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     \__('These modules are certainly disabled on the public endpoints:', 'graphql-api'),
                     $this->getPublicEndpointsListDescription(),
                     \__('Should they also be disabled on the private endpoints?', 'graphql-api'),
-                    $this->getPrivateEndpointsDescription(),
+                    $this->getPrivateEndpointsListDescription(),
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
