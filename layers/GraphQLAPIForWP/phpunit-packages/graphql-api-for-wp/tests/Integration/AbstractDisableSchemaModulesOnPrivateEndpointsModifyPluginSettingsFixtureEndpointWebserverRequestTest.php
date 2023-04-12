@@ -33,11 +33,6 @@ abstract class AbstractDisableSchemaModulesOnPrivateEndpointsModifyPluginSetting
         parent::tearDown();
     }
 
-    protected function getEndpoint(): string
-    {
-        return 'graphql/';
-    }
-
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints';
