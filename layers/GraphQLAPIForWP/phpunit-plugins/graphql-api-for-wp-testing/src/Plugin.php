@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
 
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddCustomAdminEndpointHook;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
-use WP_REST_Response;
 
+use WP_REST_Response;
 use function add_action;
 use function delete_option;
-use function get_option;
 use function flush_rewrite_rules;
+use function get_option;
 
 class Plugin
 {
@@ -27,6 +28,11 @@ class Plugin
          * Initialize REST endpoints
          */
         new AdminRESTAPIEndpointManager();
+
+        /**
+         * Initialize all the hooks
+         */
+        new AddCustomAdminEndpointHook();
 
         /**
          * Executing `flush_rewrite_rules` at the end of the execution
