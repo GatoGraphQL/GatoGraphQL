@@ -11,7 +11,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRe
 class CustomAdminEndpointSchemaQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-    
+
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-custom-admin-endpoint';

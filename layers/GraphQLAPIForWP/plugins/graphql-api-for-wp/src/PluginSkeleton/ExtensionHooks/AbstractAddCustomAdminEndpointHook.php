@@ -12,7 +12,7 @@ use function add_filter;
 abstract class AbstractAddCustomAdminEndpointHook
 {
     public function __construct()
-    {        
+    {
         add_filter(
             HookNames::SUPPORTED_ADMIN_ENDPOINT_GROUPS,
             $this->addSupportedEndpointGroup(...)
@@ -74,7 +74,7 @@ abstract class AbstractAddCustomAdminEndpointHook
      * @return string[]
      */
     public function addSupportedEndpointGroup(array $supportedAdminEndpointGroups): array
-    {        
+    {
         $supportedAdminEndpointGroups[] = $this->getAdminEndpointGroup();
         return $supportedAdminEndpointGroups;
     }
