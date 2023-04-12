@@ -167,7 +167,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $option
                 ),
                 Properties::TITLE => \__('Disable "Schema modules" in the private endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Indicate if disabled Schema modules must also be disabled from the private endpoints (in addition to the public endpoints)', 'graphql-api'),
+                Properties::DESCRIPTION => \__('Indicate if disabled "Schema modules" must also be disabled on the private endpoints (in addition to the public endpoints)', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
@@ -187,19 +187,20 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     'disable-schema-modules-in-private-endpoints-explanation'
                 ),
                 Properties::DESCRIPTION => sprintf(
-                    '<strong>%s</strong><br/><br/>%s<br/><br/>%s<br/><br/>%s%s%s%s',
+                    '<strong>%s</strong><br/><br/>%s<br/><br/>%s<br/><br/>%s%s%s<br/><br/>%s%s',
                     \__('Explanation:'),
                     sprintf(
                         \__('We can <a href="%s" target="_blank">disable modules in the GraphQL API for WordPress</a>, to either remove some functionality from the GraphQL server (eg: the single endpoint), or remove some element from the GraphQL schema (eg: a type, a field, or a directive).', 'graphql-api'),
                         'https://graphql-api.com/guides/config/browsing-enabling-and-disabling-modules/#heading-enabling/disabling-a-module',
                     ),
                     sprintf(
-                        \__('In the latter case, "Schema modules" are those <a href="%s" target="_blank">modules under categories "Schema Type" and "Schema Directive"</a>. For instance, when disabling the "Users" module, the user fields (<code>QueryRoot.users</code>, <code>Post.author</code>, and others) will be removed from the GraphQL schema, removing the possibility of fetching user data through the GraphQL API.', 'graphql-api'),
+                        \__('In the latter case, "Schema modules" are those <a href="%s" target="_blank">modules under categories "Schema Type" and "Schema Directive"</a>. For instance, when disabling the "Users" module, the user fields (<code>QueryRoot.users</code>, <code>Post.author</code>, and others) will be removed from the GraphQL schema.', 'graphql-api'),
                         $moduleListURL,
                     ),
-                    \__('These modules are certainly disabled on the public endpoints:', 'graphql-api'),
+                    \__('Disabling modules increases the security of the GraphQL API, as data must not be consumed is never exposed in first place. As such, disabling endpoints always takes effect in public endpoints:', 'graphql-api'),
                     $this->getPublicEndpointsListDescription(),
-                    \__('Should they also be disabled on the private endpoints?', 'graphql-api'),
+                    \__('However, we may only want to limit access to the "Schema modules" to visitors (i.e. on public endpoints), but not to the admin of the site (i.e. on private endpoints), who can still access the full GraphQL schema for executing internal tasks.', 'graphql-api'),
+                    \__('Should "Schema modules" also be disabled on the private endpoints?', 'graphql-api'),
                     $this->getPrivateEndpointsListDescription(),
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
