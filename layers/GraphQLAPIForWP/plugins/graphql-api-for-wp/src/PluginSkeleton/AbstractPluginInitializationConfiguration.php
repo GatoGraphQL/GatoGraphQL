@@ -342,18 +342,21 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $schemaModuleClassesToSkip = $this->doGetSchemaModuleClassesToSkip();
 
         /**
-         * Allow to not disable modules on custom admin endpoints,
-         * for some specific group.
+         * Public endpoints: cannot be customized
          */
-        if ($endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
-            return apply_filters(
-                HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
-                $schemaModuleClassesToSkip,
-                $endpointHelpers->getAdminGraphQLEndpointGroup()
-            );
+        if (!$endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
+            return $schemaModuleClassesToSkip;
         }
 
-        return $schemaModuleClassesToSkip;
+        /**
+         * Private endpoints: Allow to not disable modules on custom
+         * admin endpoints, for some specific group.
+         */
+        return apply_filters(
+            HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
+            $schemaModuleClassesToSkip,
+            $endpointHelpers->getAdminGraphQLEndpointGroup()
+        );
     }
 
     /**
