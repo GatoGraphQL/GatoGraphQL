@@ -11,6 +11,18 @@
                         "name": "Post"
                     }
                 ]
+            },
+            "customPostEnumType": {
+                "name": "CustomPostEnumString",
+                "extensions": {
+                    "possibleValues": [
+                        "attachment",
+                        "custom_css",
+                        "nav_menu_item",
+                        "post",
+                        "revision"
+                    ]
+                }
             }
         }
     }

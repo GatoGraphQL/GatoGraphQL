@@ -11,6 +11,15 @@
                         "name": "PostTag"
                     }
                 ]
+            },
+            "tagTaxonomyEnumType": {
+                "name": "TagTaxonomyEnumString",
+                "extensions": {
+                    "possibleValues": [
+                        "dummy-tag",
+                        "post_tag"
+                    ]
+                }
             }
         }
     }
