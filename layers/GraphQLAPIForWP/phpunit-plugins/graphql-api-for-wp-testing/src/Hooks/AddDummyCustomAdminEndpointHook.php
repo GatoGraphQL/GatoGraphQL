@@ -10,7 +10,7 @@ use PoP\Root\Module\ModuleInterface;
 /**
  * Test adding a custom admin endpoint
  */
-class AddCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
+class AddDummyCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
 {
     public const ADMIN_ENDPOINT_GROUP = 'dummyCustomAdminEndpoint';
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddCustomAdminEndpointHook;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddDummyCustomAdminEndpointHook;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
@@ -32,7 +32,7 @@ class Plugin
         /**
          * Initialize all the hooks
          */
-        new AddCustomAdminEndpointHook();
+        new AddDummyCustomAdminEndpointHook();
 
         /**
          * Executing `flush_rewrite_rules` at the end of the execution
