@@ -6,14 +6,11 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddDummyCustomAdminEndpointHook;
 
-class DisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractDisableSchemaModulesOnPrivateEndpointsModifyPluginSettingsFixtureEndpointWebserverRequestTest
+class DisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsModifyPluginSettingsFixtureEndpointWebserverRequestTest
 {
-    protected function getEndpoint(): string
+    protected function getAdminEndpointGroup(): string
     {
-        return sprintf(
-            'wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=%s',
-            AddDummyCustomAdminEndpointHook::ADMIN_ENDPOINT_GROUP
-        );
+        return AddDummyCustomAdminEndpointHook::ADMIN_ENDPOINT_GROUP;
     }
 
     protected function getResponseFixtureFolder(): string
