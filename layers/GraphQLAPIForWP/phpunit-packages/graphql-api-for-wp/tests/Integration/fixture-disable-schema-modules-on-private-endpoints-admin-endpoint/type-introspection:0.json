@@ -1,7 +1,7 @@
 {
     "data": {
         "__schema": {
-            "userType": {
+            "userRoleType": {
                 "name": "UserRole"
             }
         }
