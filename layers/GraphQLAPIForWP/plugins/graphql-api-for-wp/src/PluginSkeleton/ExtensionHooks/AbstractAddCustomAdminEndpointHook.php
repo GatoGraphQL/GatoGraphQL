@@ -31,6 +31,7 @@ abstract class AbstractAddCustomAdminEndpointHook
         );
     }
 
+    abstract protected function getAdminEndpointGroup(): string;
 
     /**
      * @param string[] $supportedAdminEndpointGroups
@@ -41,8 +42,6 @@ abstract class AbstractAddCustomAdminEndpointHook
         $supportedAdminEndpointGroups[] = $this->getAdminEndpointGroup();
         return $supportedAdminEndpointGroups;
     }
-
-    abstract protected function getAdminEndpointGroup(): string;
 
     /**
      * Get the fixed configuration for all components required in the plugin
