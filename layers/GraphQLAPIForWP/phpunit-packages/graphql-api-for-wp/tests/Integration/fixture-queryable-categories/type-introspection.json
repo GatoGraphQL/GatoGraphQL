@@ -8,6 +8,14 @@
                         "name": "GenericCategory"
                     }
                 ]
+            },
+            "categoryTaxonomyEnumType": {
+                "name": "CategoryTaxonomyEnumString",
+                "extensions": {
+                    "possibleValues": [
+                        "dummy-category"
+                    ]
+                }
             }
         }
     }

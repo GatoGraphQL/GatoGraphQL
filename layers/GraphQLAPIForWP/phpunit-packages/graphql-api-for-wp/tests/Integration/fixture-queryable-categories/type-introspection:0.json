@@ -11,6 +11,15 @@
                         "name": "PostCategory"
                     }
                 ]
+            },
+            "categoryTaxonomyEnumType": {
+                "name": "CategoryTaxonomyEnumString",
+                "extensions": {
+                    "possibleValues": [
+                        "category",
+                        "dummy-category"
+                    ]
+                }
             }
         }
     }

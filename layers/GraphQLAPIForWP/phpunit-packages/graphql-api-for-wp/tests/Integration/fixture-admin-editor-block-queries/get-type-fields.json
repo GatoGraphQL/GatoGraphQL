@@ -2067,14 +2067,14 @@
           "namespacedName": "CategoryTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`."
+          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`."
         },
         {
           "name": "CustomPostEnumString",
           "namespacedName": "CustomPostEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"page\"`, `\"post\"`."
+          "description": "Custom post types (available for querying via the API), with possible values: `\"attachment\"`, `\"custom_css\"`, `\"customize_changeset\"`, `\"nav_menu_item\"`, `\"oembed_cache\"`, `\"page\"`, `\"post\"`, `\"revision\"`, `\"user_request\"`, `\"wp_block\"`, `\"wp_global_styles\"`, `\"wp_navigation\"`, `\"wp_template\"`, `\"wp_template_part\"`."
         },
         {
           "name": "Date",
@@ -2151,7 +2151,7 @@
           "namespacedName": "TagTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"post_tag\"`."
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"link_category\"`, `\"nav_menu\"`, `\"post_format\"`, `\"post_tag\"`, `\"wp_template_part_area\"`, `\"wp_theme\"`."
         },
         {
           "name": "URL",
