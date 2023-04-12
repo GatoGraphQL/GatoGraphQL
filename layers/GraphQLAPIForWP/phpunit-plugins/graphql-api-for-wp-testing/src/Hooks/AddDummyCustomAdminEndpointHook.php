@@ -6,6 +6,8 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks;
 
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionHooks\AbstractAddCustomAdminEndpointHook;
 use PoP\Root\Module\ModuleInterface;
+use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 
 /**
  * Test adding a custom admin endpoint
@@ -19,20 +21,18 @@ class AddDummyCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
         return self::ADMIN_ENDPOINT_GROUP;
     }
 
-    // /**
-    //  * Override this method in the hook implementation.
-    //  *
-    //  * Fixed configuration for all components required in the plugin
-    //  * when requesting the custom admin endpoint.
-    //  *
-    //  * @param array<class-string<ModuleInterface>,array<string,mixed>> $predefinedAdminEndpointModuleClassConfiguration [key]: Module class, [value]: Configuration
-    //  * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
-    //  */
-    // protected function doGetPredefinedAdminEndpointModuleClassConfiguration(
-    //     array $predefinedAdminEndpointModuleClassConfiguration,
-    // ): array {
-    //     return $predefinedAdminEndpointModuleClassConfiguration;
-    // }
+    /**
+     * Do not allow querying any CPT
+     *
+     * @param array<class-string<ModuleInterface>,array<string,mixed>> $predefinedAdminEndpointModuleClassConfiguration [key]: Module class, [value]: Configuration
+     * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
+     */
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(
+        array $predefinedAdminEndpointModuleClassConfiguration,
+    ): array {
+        $predefinedAdminEndpointModuleClassConfiguration[CustomPostsModule::class][CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES] =[];
+        return $predefinedAdminEndpointModuleClassConfiguration;
+    }
 
     /**
      * Do not disable any schema modules
