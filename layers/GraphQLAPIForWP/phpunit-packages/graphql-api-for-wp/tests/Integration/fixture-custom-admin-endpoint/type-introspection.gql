@@ -1,0 +1,16 @@
+query GetTypeInfoByIntrospection {
+  __schema {
+    customPostUnionType: type(name: "CustomPostUnion") {
+      name
+      possibleTypes {
+        name
+      }
+    }
+    customPostEnumType: type(name: "CustomPostEnumString") {
+      name
+      extensions {
+        possibleValues
+      }
+    }
+  }
+}

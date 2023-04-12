@@ -22,7 +22,7 @@ class AddDummyCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
     }
 
     /**
-     * Do not allow querying any CPT
+     * Allow querying a specific CPT, to validate in the tests
      *
      * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
@@ -30,7 +30,7 @@ class AddDummyCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
     protected function doGetPredefinedAdminEndpointModuleClassConfiguration(
         array $moduleClassConfiguration,
     ): array {
-        $moduleClassConfiguration[CustomPostsModule::class][CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES] =[];
+        $moduleClassConfiguration[CustomPostsModule::class][CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES] = ['revision'];
         return $moduleClassConfiguration;
     }
 
