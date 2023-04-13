@@ -82,10 +82,10 @@ export default function CustomEndpointProperties() {
 						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && (
-								__('Custom endpoint is available to everyone.', 'graphql-api')
+								__('Custom endpoint is public, available to everyone.', 'graphql-api')
 							) }
 							{ isPostDraftOrPending && (
-								__('Custom endpoint is available to the Schema editors only.', 'graphql-api')
+								__('Custom endpoint is not yet public, only available to the Schema editors.', 'graphql-api')
 							) }
 							{ ! isPostAvailable && (
 								__('Custom endpoint is not yet available.', 'graphql-api')
