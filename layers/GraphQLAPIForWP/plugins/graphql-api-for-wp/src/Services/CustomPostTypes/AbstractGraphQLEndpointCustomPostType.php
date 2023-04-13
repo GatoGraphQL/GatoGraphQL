@@ -111,9 +111,11 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 }
             }
 
-            // Let the EndpointAnnotators add their own actions
-            foreach ($this->getEndpointAnnotatorRegistry()->getEnabledEndpointAnnotators() as $endpointAnnotator) {
-                $endpointAnnotator->addCustomPostTypeTableActions($actions, $post);
+            if ('trash' !== $post->post_status) {
+                // Let the EndpointAnnotators add their own actions
+                foreach ($this->getEndpointAnnotatorRegistry()->getEnabledEndpointAnnotators() as $endpointAnnotator) {
+                    $endpointAnnotator->addCustomPostTypeTableActions($actions, $post);
+                }
             }
         }
 
