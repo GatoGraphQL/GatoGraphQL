@@ -98,7 +98,8 @@ trait CommonModuleResolverTrait
     protected function getPublicEndpointValueDescription(): string
     {
         return $this->getCollapsible(
-            \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api')
+            \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api'),
+            \__('(Public/private endpoint comparison)', 'graphql-api')
         );
     }
 
