@@ -331,7 +331,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         }
 
         /**
-         * Use is_admin as loading the GraphiQL client is not executing
+         * Check `is_admin` as loading the GraphiQL client is not executing
          * the endpoint, yet it will also generate the service container,
          * which will be cached and shared from then on.
          */
@@ -362,11 +362,12 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          */
         if (
             /**
-             * Use is_admin as loading the GraphiQL client is not executing
-             * the endpoint, yet it will also generate the service container,
-             * which will be cached and shared from then on.
+             * Check `is_admin` (instead of `isRequestingAdminGraphQLEndpoint`)
+             * as loading the GraphiQL client is not executing the endpoint
+             * yet it will also generate the service container, which will
+             * be cached and shared from then on.
              */
-            !$isAdmin// !$endpointHelpers->isRequestingAdminGraphQLEndpoint()
+            !$isAdmin
             || $isRequestingAdminPersistedQueryGraphQLEndpoint
         ) {
             return $schemaModuleClassesToSkip;
