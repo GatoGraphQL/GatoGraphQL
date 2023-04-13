@@ -63,24 +63,22 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         /**
          * admin/non-admin screens have different services enabled.
          */
-        if ($endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
+        if (is_admin()/*$endpointHelpers->isRequestingAdminGraphQLEndpoint()*/) {
             /**
              * Different admin endpoints might also have different services,
              * hence cache a different container per endpointGroup.
              *
              * For instance, the WordPress editor can access the full schema,
              * including "admin" fields, so it must be cached individually.
+             * 
+             * By checking for `is_admin` we are also store the container
+             * for internal execution, via the `GraphQLServer` class, and
+             * the cache will be shared with the "default" private endpoint.
              *
              * @var string
              */
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
             $suffix = 'private' . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
-        } elseif (is_admin()) {
-            /**
-             * Store the container for internal execution, via the 
-             * `GraphQLServer` class
-             */
-            $suffix = 'internal';
         } else {
             /**
              * Single endpoint / Custom endpoints / Persisted queries
