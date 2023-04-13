@@ -78,6 +78,9 @@ export default function PersistedQueryEndpointProperties() {
 					{ ! isPersistedQueryEndpointEnabled && (
 						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
 					) }
+					{ isPersistedQueryEndpointEnabled && ! isPostPublished && (
+						<span className="not-published-text">{ __('(As the persisted query is not published yet, it is only available to the Schema editor users.)', 'graphql-api') }</span>
+					) }
 				</p>
 			</div>
 			<hr/>
