@@ -86,7 +86,7 @@ export default function PersistedQueryEndpointProperties() {
 					<hr/>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							🔵 { __( 'View Persisted Query Source' ) }
+							🟢 { __( 'View Persisted Query Source' ) }
 						</h3>
 						<p>
 							<ExternalLink
