@@ -48,7 +48,8 @@ export default function PersistedQueryEndpointProperties() {
 	}, [] );
 
 	return (
-	<>			<div className="editor-post-url">
+		<>
+			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
 					{ isPersistedQueryEndpointEnabled ? '🟢' : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
 				</h3>
