@@ -44,7 +44,7 @@ export default function CustomEndpointProperties() {
 			),
 			postLink: post.link,
 			postLinkHasParams: post.link.indexOf('?') >= 0,
-			isPostPublished: true,//post.status === 'publish',
+			isPostPublished: post.status === 'publish',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
