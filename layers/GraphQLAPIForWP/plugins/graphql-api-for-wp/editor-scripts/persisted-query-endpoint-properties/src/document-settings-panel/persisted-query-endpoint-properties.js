@@ -47,6 +47,7 @@ export default function PersistedQueryEndpointProperties() {
 		};
 	}, [] );
 
+	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
 	return (
 		<>
 			<div className="editor-post-url">
@@ -86,7 +87,7 @@ export default function PersistedQueryEndpointProperties() {
 				<p>
 					<ExternalLink
 						className="editor-post-url__link"
-						href={ postLink + postLinkHasParams + 'view=source' }
+						href={ postLink + postLinkFirstParamSymbol + 'view=source' }
 						target="_blank"
 					>
 						<>
