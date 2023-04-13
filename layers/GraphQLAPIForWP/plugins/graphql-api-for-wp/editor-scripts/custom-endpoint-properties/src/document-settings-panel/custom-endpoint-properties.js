@@ -4,7 +4,7 @@
 import { useSelect } from '@wordpress/data';
 import { safeDecodeURIComponent } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
-import { ExternalLink } from '@wordpress/components';
+import { ExternalLink, Notice } from '@wordpress/components';
 import { store as editorStore } from '@wordpress/editor';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 
@@ -18,6 +18,7 @@ export default function CustomEndpointProperties() {
 		postSlug,
 		postLink,
 		postLinkHasParams,
+		postStatus,
 		isPostPublished,
 		permalinkPrefix,
 		permalinkSuffix,
@@ -44,6 +45,7 @@ export default function CustomEndpointProperties() {
 			),
 			postLink: post.link,
 			postLinkHasParams: post.link.indexOf('?') >= 0,
+			postStatus: post.status,
 			isPostPublished: post.status === 'publish',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
@@ -69,6 +71,12 @@ export default function CustomEndpointProperties() {
 	return (
 		<>
 			<div className="editor-post-url">
+				{ isCustomEndpointEnabled && ! isPostPublished && (
+					<Notice status="warning" isDismissible={ false }>
+						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+						<span>{ __('Only available to the Schema editor users.)', 'graphql-api') }</span>
+					</Notice>
+				) }
 				<h3 className="editor-post-url__link-label">
 					{ isCustomEndpointEnabled ? statusCircle : '🔴'} { __( 'Custom Endpoint URL' ) }
 				</h3>
@@ -94,9 +102,6 @@ export default function CustomEndpointProperties() {
 					) }
 					{ ! isCustomEndpointEnabled && (
 						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
-					) }
-					{ isCustomEndpointEnabled && ! isPostPublished && (
-						<span className="not-published-text">{ __('(As the custom endpoint is not published yet, it is only available to the Schema editor users.)', 'graphql-api') }</span>
 					) }
 				</p>
 			</div>
@@ -165,9 +170,6 @@ export default function CustomEndpointProperties() {
 					{ ! isGraphiQLClientEnabled && (
 						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
 					) }
-					{ isGraphiQLClientEnabled && ! isPostPublished && (
-						<span className="not-published-text">{ __('(As the custom endpoint is not published yet, the GraphiQL client is only available to the Schema editor users.)', 'graphql-api') }</span>
-					) }
 				</p>
 			</div>
 			<hr/>
@@ -203,9 +205,6 @@ export default function CustomEndpointProperties() {
 					) }
 					{ ! isVoyagerClientEnabled && (
 						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
-					) }
-					{ isVoyagerClientEnabled && ! isPostPublished && (
-						<span className="not-published-text">{ __('(As the custom endpoint is not published yet, the Interactive Schema client is only available to the Schema editor users.)', 'graphql-api') }</span>
 					) }
 				</p>
 			</div>
