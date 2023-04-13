@@ -17,6 +17,7 @@ export default function PersistedQueryEndpointProperties() {
 	const {
 		postSlug,
 		postLink,
+		postLinkHasParams,
 		isPostPublished,
 		permalinkPrefix,
 		permalinkSuffix,
@@ -34,6 +35,7 @@ export default function PersistedQueryEndpointProperties() {
 				select( editorStore ).getEditedPostSlug()
 			),
 			postLink: post.link,
+			postLinkHasParams: post.link.indexOf('?') >= 0,
 			isPostPublished: post.status === 'publish',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
@@ -91,7 +93,7 @@ export default function PersistedQueryEndpointProperties() {
 						<p>
 							<ExternalLink
 								className="editor-post-url__link"
-								href={ postLink + '?view=source' }
+								href={ postLink + postLinkHasParams + 'view=source' }
 								target="_blank"
 							>
 								<>

@@ -17,6 +17,7 @@ export default function CustomEndpointProperties() {
 	const {
 		postSlug,
 		postLink,
+		postLinkHasParams,
 		isPostPublished,
 		permalinkPrefix,
 		permalinkSuffix,
@@ -42,7 +43,8 @@ export default function CustomEndpointProperties() {
 				select( editorStore ).getEditedPostSlug()
 			),
 			postLink: post.link,
-			isPostPublished: post.status === 'publish',
+			postLinkHasParams: post.link.indexOf('?') >= 0,
+			isPostPublished: true,//post.status === 'publish',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -62,7 +64,7 @@ export default function CustomEndpointProperties() {
 			isVoyagerClientEnabled: voyagerClientBlock.attributes.isEnabled,
 		};
 	}, [] );
-
+	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
 	return (
 		<>
 			{ ! isPostPublished && (
@@ -109,7 +111,7 @@ export default function CustomEndpointProperties() {
 						<p>
 							<ExternalLink
 								className="editor-post-url__link"
-								href={ postLink + '?view=source' }
+								href={ postLink + postLinkFirstParamSymbol + 'view=source' }
 								target="_blank"
 							>
 								<>
@@ -141,7 +143,7 @@ export default function CustomEndpointProperties() {
 							{ isGraphiQLClientEnabled && (
 								<ExternalLink
 									className="editor-post-url__link"
-									href={ postLink + '?view=graphiql' }
+									href={ postLink + postLinkFirstParamSymbol + 'view=graphiql' }
 									target="_blank"
 								>
 									<>
@@ -177,7 +179,7 @@ export default function CustomEndpointProperties() {
 							{ isVoyagerClientEnabled && (
 								<ExternalLink
 									className="editor-post-url__link"
-									href={ postLink + '?view=schema' }
+									href={ postLink + postLinkFirstParamSymbol + 'view=schema' }
 									target="_blank"
 								>
 									<>
