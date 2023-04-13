@@ -20,6 +20,7 @@ export default function PersistedQueryEndpointProperties() {
 		postLinkHasParams,
 		postStatus,
 		isPostPublished,
+		isPostDraftOrPending,
 		permalinkPrefix,
 		permalinkSuffix,
 		isPersistedQueryEndpointEnabled,
@@ -39,6 +40,7 @@ export default function PersistedQueryEndpointProperties() {
 			postLinkHasParams: post.link.indexOf('?') >= 0,
 			postStatus: post.status,
 			isPostPublished: post.status === 'publish',
+			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -50,20 +52,24 @@ export default function PersistedQueryEndpointProperties() {
 	}, [] );
 
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
-	const statusCircle = isPostPublished ? '🟢' : '🟡';
+	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending ? '🟡' : '🔴');
+	const isPostNotAvailable = ! isPostPublished && ! isPostDraftOrPending;
 	return (
 		<>
 			<div className="editor-post-url">
 				{ isPersistedQueryEndpointEnabled && (
 					<p className="notice-message">
-						<Notice status={ isPostPublished ? "success" : "warning"} isDismissible={ false }>
+						<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
 							<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
 							<span className="notice-inner-message">
 								{ isPostPublished && (
 									__('Available to everyone.', 'graphql-api')
 								) }
-								{ ! isPostPublished && (
+								{ isPostDraftOrPending && (
 									__('Available to the Schema editors only.', 'graphql-api')
+								) }
+								{ isPostNotAvailable && (
+									__('Persisted query not yet available.', 'graphql-api')
 								) }
 							</span>
 						</Notice>
@@ -100,7 +106,7 @@ export default function PersistedQueryEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					🟡 { __( 'View Persisted Query Source' ) }
+					{ isPostNotAvailable ? '🔴' : '🟡' } { __( 'View Persisted Query Source' ) }
 				</h3>
 				<p>
 					<ExternalLink

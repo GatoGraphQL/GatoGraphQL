@@ -20,6 +20,7 @@ export default function CustomEndpointProperties() {
 		postLinkHasParams,
 		postStatus,
 		isPostPublished,
+		isPostDraftOrPending,
 		permalinkPrefix,
 		permalinkSuffix,
 		isCustomEndpointEnabled,
@@ -47,6 +48,7 @@ export default function CustomEndpointProperties() {
 			postLinkHasParams: post.link.indexOf('?') >= 0,
 			postStatus: post.status,
 			isPostPublished: post.status === 'publish',
+			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -67,27 +69,31 @@ export default function CustomEndpointProperties() {
 		};
 	}, [] );
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
-	const statusCircle = isPostPublished ? '🟢' : '🟡';
+	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending ? '🟡' : '🔴');
+	const isPostNotAvailable = ! isPostPublished && ! isPostDraftOrPending;
 	return (
 		<>
 			<div className="editor-post-url">
 				{ isCustomEndpointEnabled && (
 					<p className="notice-message">
-						<Notice status={ isPostPublished ? "success" : "warning"} isDismissible={ false }>
+						<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
 							<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
 							<span className="notice-inner-message">
 								{ isPostPublished && (
 									__('Available to everyone.', 'graphql-api')
 								) }
-								{ ! isPostPublished && (
+								{ isPostDraftOrPending && (
 									__('Available to the Schema editors only.', 'graphql-api')
+								) }
+								{ isPostNotAvailable && (
+									__('Endpoint not yet available.', 'graphql-api')
 								) }
 							</span>
 						</Notice>
 					</p>
 				) }
 				<h3 className="editor-post-url__link-label">
-					{ isCustomEndpointEnabled ? statusCircle : '🔴'} { __( 'Custom Endpoint URL' ) }
+					{ isCustomEndpointEnabled ? statusCircle : '🔴' } { __( 'Custom Endpoint URL' ) }
 				</h3>
 				<p>
 					{ isCustomEndpointEnabled && (
@@ -117,7 +123,7 @@ export default function CustomEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					🟡 { __( 'View Endpoint Source' ) }
+					{ isPostNotAvailable ? '🔴' : '🟡' } { __( 'View Endpoint Source' ) }
 				</h3>
 				<p>
 					<ExternalLink
@@ -148,7 +154,7 @@ export default function CustomEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ isGraphiQLClientEnabled ? statusCircle : '🔴'} { __( 'GraphiQL client' ) }
+					{ isGraphiQLClientEnabled ? statusCircle : '🔴' } { __( 'GraphiQL client' ) }
 				</h3>
 				<p>
 					{ isGraphiQLClientEnabled && (
@@ -184,7 +190,7 @@ export default function CustomEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ isVoyagerClientEnabled ? statusCircle : '🔴'} { __( 'Interactive Schema Client' ) }
+					{ isVoyagerClientEnabled ? statusCircle : '🔴' } { __( 'Interactive Schema Client' ) }
 				</h3>
 				<p>
 					{ isVoyagerClientEnabled && (
