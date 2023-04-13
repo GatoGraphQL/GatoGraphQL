@@ -363,7 +363,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         /**
          * Public endpoints: cannot be customized
          */
-        if (!$isRequestingAdminGraphQLEndpoint) {
+        if (!$isRequestingAdminGraphQLEndpoint
+            || $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()
+        ) {
             return $schemaModuleClassesToSkip;
         }
 
