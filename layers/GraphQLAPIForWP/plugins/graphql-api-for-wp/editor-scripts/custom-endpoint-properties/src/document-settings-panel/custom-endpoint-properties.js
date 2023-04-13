@@ -70,7 +70,7 @@ export default function CustomEndpointProperties() {
 	}, [] );
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
 	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending ? '🟡' : '🔴');
-	const isPostNotAvailable = ! isPostPublished && ! isPostDraftOrPending;
+	const isPostAvailable = isPostPublished || isPostDraftOrPending;
 	return (
 		<>
 			<div className="editor-post-url">
@@ -85,7 +85,7 @@ export default function CustomEndpointProperties() {
 								{ isPostDraftOrPending && (
 									__('Available to the Schema editors only.', 'graphql-api')
 								) }
-								{ isPostNotAvailable && (
+								{ ! isPostAvailable && (
 									__('Endpoint not yet available.', 'graphql-api')
 								) }
 							</span>
@@ -123,7 +123,7 @@ export default function CustomEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ isPostNotAvailable ? '🔴' : '🟡' } { __( 'View Endpoint Source' ) }
+					{ isPostAvailable ? '🟡' : '🔴' } { __( 'View Endpoint Source' ) }
 				</h3>
 				<p>
 					<ExternalLink

@@ -53,7 +53,7 @@ export default function PersistedQueryEndpointProperties() {
 
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
 	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending ? '🟡' : '🔴');
-	const isPostNotAvailable = ! isPostPublished && ! isPostDraftOrPending;
+	const isPostAvailable = isPostPublished || isPostDraftOrPending;
 	return (
 		<>
 			<div className="editor-post-url">
@@ -68,7 +68,7 @@ export default function PersistedQueryEndpointProperties() {
 								{ isPostDraftOrPending && (
 									__('Available to the Schema editors only.', 'graphql-api')
 								) }
-								{ isPostNotAvailable && (
+								{ ! isPostAvailable && (
 									__('Persisted query not yet available.', 'graphql-api')
 								) }
 							</span>
@@ -106,7 +106,7 @@ export default function PersistedQueryEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ isPostNotAvailable ? '🔴' : '🟡' } { __( 'View Persisted Query Source' ) }
+					{ isPostAvailable ? '🟡' : '🔴' } { __( 'View Persisted Query Source' ) }
 				</h3>
 				<p>
 					<ExternalLink
