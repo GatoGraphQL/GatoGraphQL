@@ -233,7 +233,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      * Get the fixed configuration for all components required in the plugin
      * when requesting some specific group in the admin endpoint.
      *
-     * Allow developers to inject their own endpointGroups and corresnping
+     * Allow developers to inject their own endpointGroups and corresponding
      * configuration via a filter hook
      *
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
