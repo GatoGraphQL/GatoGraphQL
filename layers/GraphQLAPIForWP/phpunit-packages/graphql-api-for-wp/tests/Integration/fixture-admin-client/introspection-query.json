@@ -7622,7 +7622,7 @@
             },
             {
               "name": "optionObjectValue",
-              "description": "Object-value option saved in the DB",
+              "description": "Object-value option saved in the DB, or `null` if entry does not exist",
               "args": [
                 {
                   "name": "name",
@@ -7649,7 +7649,7 @@
             },
             {
               "name": "optionValue",
-              "description": "Single-value option saved in the DB, of any built-in scalar type",
+              "description": "Single-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist",
               "args": [
                 {
                   "name": "name",
@@ -7676,7 +7676,7 @@
             },
             {
               "name": "optionValues",
-              "description": "Array-value option saved in the DB, of any built-in scalar type",
+              "description": "Array-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist",
               "args": [
                 {
                   "name": "name",
@@ -10073,7 +10073,7 @@
             },
             {
               "name": "optionObjectValue",
-              "description": "Object-value option saved in the DB",
+              "description": "Object-value option saved in the DB, or `null` if entry does not exist",
               "args": [
                 {
                   "name": "name",
@@ -10100,7 +10100,7 @@
             },
             {
               "name": "optionValue",
-              "description": "Single-value option saved in the DB, of any built-in scalar type",
+              "description": "Single-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist",
               "args": [
                 {
                   "name": "name",
@@ -10127,7 +10127,7 @@
             },
             {
               "name": "optionValues",
-              "description": "Array-value option saved in the DB, of any built-in scalar type",
+              "description": "Array-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist",
               "args": [
                 {
                   "name": "name",
