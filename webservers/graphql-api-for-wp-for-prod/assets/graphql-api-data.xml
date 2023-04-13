@@ -1341,6 +1341,34 @@ video/mp4
 			<wp:comment_parent>0</wp:comment_parent>
 			<wp:comment_user_id>2</wp:comment_user_id>
 							</wp:comment>
+						<wp:comment>
+			<wp:comment_id>12</wp:comment_id>
+			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
+			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
+			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
+			<wp:comment_date><![CDATA[2020-12-12 04:07:36]]></wp:comment_date>
+			<wp:comment_date_gmt><![CDATA[2020-12-12 04:07:36]]></wp:comment_date_gmt>
+			<wp:comment_content><![CDATA[Btw, I really like this stuff]]></wp:comment_content>
+			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
+			<wp:comment_type><![CDATA[comment]]></wp:comment_type>
+			<wp:comment_parent>0</wp:comment_parent>
+			<wp:comment_user_id>2</wp:comment_user_id>
+							</wp:comment>
+						<wp:comment>
+			<wp:comment_id>14</wp:comment_id>
+			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
+			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
+			<wp:comment_author_url>http://graphql-api.lndo.site</wp:comment_author_url>
+			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
+			<wp:comment_date><![CDATA[2020-12-12 04:07:46]]></wp:comment_date>
+			<wp:comment_date_gmt><![CDATA[2020-12-12 04:07:46]]></wp:comment_date_gmt>
+			<wp:comment_content><![CDATA[When do you think it'll be available?]]></wp:comment_content>
+			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
+			<wp:comment_type><![CDATA[comment]]></wp:comment_type>
+			<wp:comment_parent>12</wp:comment_parent>
+			<wp:comment_user_id>2</wp:comment_user_id>
+							</wp:comment>
 					</item>
 					<item>
 		<title><![CDATA[HTTP caching improves performance]]></title>
