@@ -4,7 +4,10 @@
 import { useSelect } from '@wordpress/data';
 import { safeDecodeURIComponent } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
-import { ExternalLink } from '@wordpress/components';
+import {
+	ExternalLink,
+	Notice,
+} from '@wordpress/components';
 import { store as editorStore } from '@wordpress/editor';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 
@@ -17,7 +20,10 @@ export default function CustomEndpointProperties() {
 	const {
 		postSlug,
 		postLink,
+		postLinkHasParams,
+		postStatus,
 		isPostPublished,
+		isPostDraftOrPending,
 		permalinkPrefix,
 		permalinkSuffix,
 		isCustomEndpointEnabled,
@@ -42,7 +48,10 @@ export default function CustomEndpointProperties() {
 				select( editorStore ).getEditedPostSlug()
 			),
 			postLink: post.link,
+			postLinkHasParams: post.link.indexOf('?') >= 0,
+			postStatus: post.status,
 			isPostPublished: post.status === 'publish',
+			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -62,19 +71,34 @@ export default function CustomEndpointProperties() {
 			isVoyagerClientEnabled: voyagerClientBlock.attributes.isEnabled,
 		};
 	}, [] );
-
+	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
+	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending ? '🟡' : '🔴');
+	const isPostAvailable = isPostPublished || isPostDraftOrPending;
 	return (
 		<>
-			{ ! isPostPublished && (
-				<p className="unpublished-endpoint">
-					<em>{ __('This section will present information when the Custom Endpoint is published', 'graphql-api') }</em>
+			{ isCustomEndpointEnabled && (
+				<p className="notice-message">
+					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
+						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+						<span className="notice-inner-message">
+							{ isPostPublished && (
+								__('Custom endpoint is public, available to everyone.', 'graphql-api')
+							) }
+							{ isPostDraftOrPending && (
+								__('Custom endpoint is not yet public, only available to the Schema editors.', 'graphql-api')
+							) }
+							{ ! isPostAvailable && (
+								__('Custom endpoint is not yet available.', 'graphql-api')
+							) }
+						</span>
+					</Notice>
 				</p>
 			) }
-			{ isPostPublished && (
+			{ isPostAvailable && (
 				<>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ isCustomEndpointEnabled ? '🟢' : '🔴'} { __( 'Custom Endpoint URL' ) }
+							{ isCustomEndpointEnabled ? statusCircle : '🔴' } { __( 'Custom Endpoint URL' ) }
 						</h3>
 						<p>
 							{ isCustomEndpointEnabled && (
@@ -104,12 +128,12 @@ export default function CustomEndpointProperties() {
 					<hr/>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							🔵 { __( 'View Endpoint Source' ) }
+							{ isPostAvailable ? '🟡' : '🔴' } { __( 'View Endpoint Source' ) }
 						</h3>
 						<p>
 							<ExternalLink
 								className="editor-post-url__link"
-								href={ postLink + '?view=source' }
+								href={ postLink + postLinkFirstParamSymbol + 'view=source' }
 								target="_blank"
 							>
 								<>
@@ -135,13 +159,13 @@ export default function CustomEndpointProperties() {
 					<hr/>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ isGraphiQLClientEnabled ? '🟢' : '🔴'} { __( 'GraphiQL client' ) }
+							{ isGraphiQLClientEnabled ? statusCircle : '🔴' } { __( 'GraphiQL client' ) }
 						</h3>
 						<p>
 							{ isGraphiQLClientEnabled && (
 								<ExternalLink
 									className="editor-post-url__link"
-									href={ postLink + '?view=graphiql' }
+									href={ postLink + postLinkFirstParamSymbol + 'view=graphiql' }
 									target="_blank"
 								>
 									<>
@@ -171,13 +195,13 @@ export default function CustomEndpointProperties() {
 					<hr/>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ isVoyagerClientEnabled ? '🟢' : '🔴'} { __( 'Interactive Schema Client' ) }
+							{ isVoyagerClientEnabled ? statusCircle : '🔴' } { __( 'Interactive Schema Client' ) }
 						</h3>
 						<p>
 							{ isVoyagerClientEnabled && (
 								<ExternalLink
 									className="editor-post-url__link"
-									href={ postLink + '?view=schema' }
+									href={ postLink + postLinkFirstParamSymbol + 'view=schema' }
 									target="_blank"
 								>
 									<>

@@ -4,7 +4,10 @@
 import { useSelect } from '@wordpress/data';
 import { safeDecodeURIComponent } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
-import { ExternalLink } from '@wordpress/components';
+import {
+	ExternalLink,
+	Notice,
+} from '@wordpress/components';
 import { store as editorStore } from '@wordpress/editor';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 
@@ -17,7 +20,10 @@ export default function PersistedQueryEndpointProperties() {
 	const {
 		postSlug,
 		postLink,
+		postLinkHasParams,
+		postStatus,
 		isPostPublished,
+		isPostDraftOrPending,
 		permalinkPrefix,
 		permalinkSuffix,
 		isPersistedQueryEndpointEnabled,
@@ -34,7 +40,10 @@ export default function PersistedQueryEndpointProperties() {
 				select( editorStore ).getEditedPostSlug()
 			),
 			postLink: post.link,
+			postLinkHasParams: post.link.indexOf('?') >= 0,
+			postStatus: post.status,
 			isPostPublished: post.status === 'publish',
+			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -45,18 +54,34 @@ export default function PersistedQueryEndpointProperties() {
 		};
 	}, [] );
 
+	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
+	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending ? '🟡' : '🔴');
+	const isPostAvailable = isPostPublished || isPostDraftOrPending;
 	return (
 		<>
-			{ ! isPostPublished && (
-				<p className="unpublished-endpoint">
-					<em>{ __('This section will present information when the Persisted Query Endpoint is published', 'graphql-api') }</em>
+			{ isPersistedQueryEndpointEnabled && (
+				<p className="notice-message">
+					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
+						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+						<span className="notice-inner-message">
+							{ isPostPublished && (
+								__('Persisted query is public, available to everyone.', 'graphql-api')
+							) }
+							{ isPostDraftOrPending && (
+								__('Persisted query is not yet public, only available to the Schema editors.', 'graphql-api')
+							) }
+							{ ! isPostAvailable && (
+								__('Persisted query is not yet available.', 'graphql-api')
+							) }
+						</span>
+					</Notice>
 				</p>
 			) }
-			{ isPostPublished && (
+			{ isPostAvailable && (
 				<>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ isPersistedQueryEndpointEnabled ? '🟢' : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
+							{ isPersistedQueryEndpointEnabled ? statusCircle : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
 						</h3>
 						<p>
 							{ isPersistedQueryEndpointEnabled && (
@@ -86,12 +111,12 @@ export default function PersistedQueryEndpointProperties() {
 					<hr/>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							🔵 { __( 'View Persisted Query Source' ) }
+							{ isPostAvailable ? '🟡' : '🔴' } { __( 'View Persisted Query Source' ) }
 						</h3>
 						<p>
 							<ExternalLink
 								className="editor-post-url__link"
-								href={ postLink + '?view=source' }
+								href={ postLink + postLinkFirstParamSymbol + 'view=source' }
 								target="_blank"
 							>
 								<>
