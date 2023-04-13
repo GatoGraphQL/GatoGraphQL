@@ -6,9 +6,11 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Constants\HTMLCodes;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 trait CommonModuleResolverTrait
@@ -32,7 +34,7 @@ trait CommonModuleResolverTrait
 
     protected function getPublicEndpointsListDescription(): string
     {
-        return \__('<ul><li>single endpoint</li><li>custom endpoints</li><li>persisted queries</li></ul>', 'graphql-api');
+        return \__('<ul><li>Single endpoint</li><li>Custom endpoints</li><li>Persisted queries</li></ul>', 'graphql-api');
     }
 
     protected function getAdminClientDescription(): string
@@ -59,7 +61,11 @@ trait CommonModuleResolverTrait
     protected function getPrivateEndpointsListDescription(): string
     {
         return sprintf(
-            \__('<ul><li>the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients</li><li>GraphQL queries executed internally (via class <code>%5$s</code> in PHP)</li><li><a href="%3$s" target="_blank">custom private endpoints%4$s</a> (when no pre-defined configuration is provided via PHP)</li></ul>', 'graphql-api'),
+            \__('<ul><li>Endpoint <code>%1$s</code> (which powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be invoked in the WordPress editor to feed data to blocks)</li><li>GraphQL queries executed internally (via class <code>%6$s</code> in PHP)</li><li><a href="%4$s" target="_blank">Custom private endpoints%5$s</a> (when no pre-defined configuration is provided via PHP)</li></ul>', 'graphql-api'),
+            ltrim(
+                GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
+                '/'
+            ),
             \admin_url(sprintf(
                 'admin.php?page=%s',
                 $this->getGraphiQLMenuPage()->getScreenID()
@@ -113,5 +119,12 @@ trait CommonModuleResolverTrait
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var RecipesMenuPage */
         return $instanceManager->getInstance(RecipesMenuPage::class);
+    }
+
+    protected function getEndpointHelpers(): EndpointHelpers
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var EndpointHelpers */
+        return $instanceManager->getInstance(EndpointHelpers::class);
     }
 }
