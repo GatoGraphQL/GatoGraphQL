@@ -4,7 +4,10 @@
 import { useSelect } from '@wordpress/data';
 import { safeDecodeURIComponent } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
-import { ExternalLink, Notice } from '@wordpress/components';
+import {
+	ExternalLink,
+	Notice,
+} from '@wordpress/components';
 import { store as editorStore } from '@wordpress/editor';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 
