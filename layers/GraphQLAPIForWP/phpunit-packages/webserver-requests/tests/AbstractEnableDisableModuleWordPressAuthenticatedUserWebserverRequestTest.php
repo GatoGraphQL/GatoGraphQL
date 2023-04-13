@@ -70,7 +70,15 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
 
     protected function getEndpoint(): ?string
     {
+        if ($this->useAdminEndpoint()) {
+            return 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+        }
         return 'graphql/';
+    }
+
+    protected function useAdminEndpoint(): bool
+    {
+        return false;
     }
 
     /**
