@@ -94,13 +94,18 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             );
         }
 
+        $expectedResponseStatusCode = $this->getExpectedResponseStatusCode();
+        if ($expectedResponseStatusCode !== 200) {
+            $options[RequestOptions::HTTP_ERRORS] = false;
+        }
+
         $response = $client->request(
             $method,
             $endpointURL,
             $options
         );
 
-        $this->assertEquals($this->getExpectedResponseStatusCode(), $response->getStatusCode());
+        $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
         $this->assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
         if ($expectedResponseBody !== null) {
             $responseBody = $response->getBody()->__toString();
