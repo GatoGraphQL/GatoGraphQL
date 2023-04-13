@@ -1695,7 +1695,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=274</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query MyQuery($limit: Int) {\n  posts(\n    pagination: { limit: $limit },\n    sort: { by: ID, order: ASC }\n  ) {\n    date\n    excerpt\n    slug\n    title\n    tags {\n      name\n    }\n    author {\n      displayName\n      slug\n      id\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{ id }"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":193} /-->
 
