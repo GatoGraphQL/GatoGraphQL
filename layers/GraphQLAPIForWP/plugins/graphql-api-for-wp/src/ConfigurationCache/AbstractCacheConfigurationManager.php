@@ -58,7 +58,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         $timestamp = '_v' . $this->getMainPluginAndExtensionsTimestamp();
         // The timestamp from when last saving settings/modules to the DB
         $timestamp .= '_' . $this->getTimestamp();
-        
+
         $endpointHelpers = $this->getEndpointHelpers();
         /**
          * admin/non-admin screens have different services enabled.
@@ -70,7 +70,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              *
              * For instance, the WordPress editor can access the full schema,
              * including "admin" fields, so it must be cached individually.
-             * 
+             *
              * By checking for `is_admin` we are also store the container
              * for internal execution, via the `GraphQLServer` class, and
              * the cache will be shared with the "default" private endpoint.

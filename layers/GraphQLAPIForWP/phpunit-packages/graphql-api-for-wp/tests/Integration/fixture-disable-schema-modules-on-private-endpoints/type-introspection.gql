@@ -6,7 +6,7 @@
 ############################################################
 {
   __schema {
-    userRoleType: type(name: "UserRole") {
+    userType: type(name: "User") {
       name
     }
   }

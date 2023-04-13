@@ -18,7 +18,7 @@ abstract class AbstractDisableSchemaModulesOnPrivateEndpointsModifyPluginSetting
         parent::setUp();
 
         /**
-         * Disable the "User Roles" module before executing the test
+         * Disable the "Users" module before executing the test
          */
         $this->executeRESTEndpointToEnableOrDisableModule(self::ARTIFICIAL_DATA_NAME, false);
     }
@@ -26,7 +26,7 @@ abstract class AbstractDisableSchemaModulesOnPrivateEndpointsModifyPluginSetting
     protected function tearDown(): void
     {
         /**
-         * Re-enable the "User Roles" module after executing the test
+         * Re-enable the "Users" module after executing the test
          */
         $this->executeRESTEndpointToEnableOrDisableModule(self::ARTIFICIAL_DATA_NAME, true);
 
@@ -54,7 +54,7 @@ abstract class AbstractDisableSchemaModulesOnPrivateEndpointsModifyPluginSetting
          * Use an "artificial" $dataName to distinguish between them.
          */
         if ($dataName === self::ARTIFICIAL_DATA_NAME) {
-            return 'graphqlapi_graphqlapi_schema-user-roles';
+            return 'graphqlapi_graphqlapi_schema-users';
         }
 
         return 'graphqlapi_graphqlapi_private-endpoints';
