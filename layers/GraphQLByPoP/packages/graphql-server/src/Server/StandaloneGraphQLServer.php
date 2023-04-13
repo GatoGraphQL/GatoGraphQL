@@ -6,7 +6,6 @@ namespace GraphQLByPoP\GraphQLServer\Server;
 
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use GraphQLByPoP\GraphQLServer\Module;
-use GraphQLByPoP\GraphQLServer\Server\GraphQLServer;
 use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AppThread;
@@ -25,7 +24,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
  * constructor must emulate the initialization of the
  * whole application.
  */
-class StandaloneGraphQLServer extends GraphQLServer
+class StandaloneGraphQLServer extends AbstractGraphQLServer
 {
     /**
      * @var array<class-string<ModuleInterface>>
