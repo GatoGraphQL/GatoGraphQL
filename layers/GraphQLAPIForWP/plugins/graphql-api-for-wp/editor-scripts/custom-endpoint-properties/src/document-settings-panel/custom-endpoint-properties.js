@@ -65,11 +65,12 @@ export default function CustomEndpointProperties() {
 		};
 	}, [] );
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
+	const statusCircle = isPostPublished ? '🟢' : '🟡';
 	return (
 		<>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ isCustomEndpointEnabled ? '🟢' : '🔴'} { __( 'Custom Endpoint URL' ) }
+					{ isCustomEndpointEnabled ? statusCircle : '🔴'} { __( 'Custom Endpoint URL' ) }
 				</h3>
 				<p>
 					{ isCustomEndpointEnabled && (
@@ -130,7 +131,7 @@ export default function CustomEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ isGraphiQLClientEnabled ? '🟢' : '🔴'} { __( 'GraphiQL client' ) }
+					{ isGraphiQLClientEnabled ? statusCircle : '🔴'} { __( 'GraphiQL client' ) }
 				</h3>
 				<p>
 					{ isGraphiQLClientEnabled && (
@@ -166,7 +167,7 @@ export default function CustomEndpointProperties() {
 			<hr/>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ isVoyagerClientEnabled ? '🟢' : '🔴'} { __( 'Interactive Schema Client' ) }
+					{ isVoyagerClientEnabled ? statusCircle : '🔴'} { __( 'Interactive Schema Client' ) }
 				</h3>
 				<p>
 					{ isVoyagerClientEnabled && (

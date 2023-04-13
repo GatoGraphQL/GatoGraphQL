@@ -48,11 +48,12 @@ export default function PersistedQueryEndpointProperties() {
 	}, [] );
 
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
+	const statusCircle = isPostPublished ? '🟢' : '🟡';
 	return (
 		<>
 			<div className="editor-post-url">
 				<h3 className="editor-post-url__link-label">
-					{ isPersistedQueryEndpointEnabled ? '🟢' : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
+					{ isPersistedQueryEndpointEnabled ? statusCircle : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
 				</h3>
 				<p>
 					{ isPersistedQueryEndpointEnabled && (
