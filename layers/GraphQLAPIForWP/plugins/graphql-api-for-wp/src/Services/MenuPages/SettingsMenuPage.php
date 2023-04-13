@@ -310,6 +310,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             esc_attr(App::request('page') ?? App::query('page', ''))
         ));
 
+        $time = time();
+
         // Specify to only toggle the outer .tab-content divs (skip the inner ones)
         ?>
             <div
@@ -410,7 +412,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         which makes "update_option_{$option}" not be triggered when there are no changes
                                                         @see wp-includes/option.php
                                                     -->
-                                                    <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo time() ?>">
+                                                    <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo $time ?>">
                                                     <!-- Panels -->
                                                     <?php
                                                     $sectionClass = $printModuleSettingsWithTabs ? 'tab-content' : '';
