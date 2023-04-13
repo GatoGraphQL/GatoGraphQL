@@ -13,6 +13,6 @@ class DisableSchemaModulesOnPrivateEndpointTestOnSingleEndpointsModifyPluginSett
 
     protected function getResponseFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-single-endpoint';
+        return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-public-endpoint';
     }
 }

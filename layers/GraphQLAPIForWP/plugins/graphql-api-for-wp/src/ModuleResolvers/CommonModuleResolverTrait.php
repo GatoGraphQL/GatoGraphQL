@@ -23,11 +23,11 @@ trait CommonModuleResolverTrait
     protected function getDefaultValueDescription(): string
     {
         return sprintf(
-            \__('<span class="settings-info">%s</span><br/>%s', 'graphql-api'),
-            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api'),
+            \__('%s<br/>%s', 'graphql-api'),
+            $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api')),
             $this->getCollapsible(
-                \__('The public endpoints are:', 'graphql-api')
-                . $this->getPublicEndpointsListDescription()
+                \__('The public endpoints are:', 'graphql-api') . $this->getPublicEndpointsListDescription(),
+                \__('(Show public endpoints)', 'graphql-api')
             )
         );
     }
@@ -43,17 +43,19 @@ trait CommonModuleResolverTrait
             \__('%s<br/>%s', 'graphql-api'),
             \__('Same, but applied to private endpoints.', 'graphql-api'),
             $this->getCollapsible(
-                \__('The private endpoints are:', 'graphql-api')
-                . $this->getPrivateEndpointsListDescription()
+                \__('The private endpoints are:', 'graphql-api') . $this->getPrivateEndpointsListDescription(),
+                \__('(Show private endpoints)', 'graphql-api')
             )
         );
     }
 
-    protected function getCollapsible(string $content): string
-    {
+    protected function getCollapsible(
+        string $content,
+        ?string $showDetailsLabel = null,
+    ): string {
         return sprintf(
             '<a href="#" type="button" class="collapsible">%s</a><span class="collapsible-content">%s</span>',
-            \__('Show details', 'graphql-api'),
+            $showDetailsLabel ?? \__('Show details', 'graphql-api'),
             $content
         );
     }
@@ -61,7 +63,7 @@ trait CommonModuleResolverTrait
     protected function getPrivateEndpointsListDescription(): string
     {
         return sprintf(
-            \__('<ul><li>Endpoint <code>%1$s</code> (which powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be invoked in the WordPress editor to feed data to blocks)</li><li>GraphQL queries executed internally (via class <code>%6$s</code> in PHP)</li><li><a href="%4$s" target="_blank">Custom private endpoints%5$s</a> (when no pre-defined configuration is provided via PHP)</li></ul>', 'graphql-api'),
+            \__('<ul><li>Endpoint <code>%1$s</code> (which powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be invoked in the WordPress editor to feed data to blocks)</li><li><a href="%4$s" target="_blank">Custom private endpoints%5$s</a> (also used to feed data to blocks, but allowing to lock its configuration via PHP hooks)</li><li>GraphQL queries executed internally (via class <code>%6$s</code> in PHP)</li></ul>', 'graphql-api'),
             ltrim(
                 GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
                 '/'
@@ -95,9 +97,23 @@ trait CommonModuleResolverTrait
 
     protected function getPublicEndpointValueDescription(): string
     {
-        return $this->getCollapsible(
-            \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api')
+        return $this->getSettingsInfoContent(\__('(Private endpoints are unrestricted.)', 'graphql-api'));
+        // return $this->getCollapsible(
+        //     \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api'),
+        //     \__('(What about private endpoints?)', 'graphql-api')
+        // );
+    }
+
+    protected function getSettingsInfoContent(string $content): string
+    {
+        return sprintf(
+            '<span class="settings-info">%s</span>',
+            $content
         );
+        // return $this->getCollapsible(
+        //     \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api'),
+        //     \__('(What about private endpoints?)', 'graphql-api')
+        // );
     }
 
     protected function getGraphiQLMenuPage(): GraphiQLMenuPage

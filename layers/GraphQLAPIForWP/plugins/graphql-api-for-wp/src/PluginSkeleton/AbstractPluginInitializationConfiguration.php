@@ -16,6 +16,7 @@ use PoP\Root\Module\ModuleConfigurationHelpers;
 use PoP\Root\Module\ModuleInterface;
 
 use function apply_filters;
+use function is_admin;
 
 /**
  * Base class to set the configuration for all the PoP components,
@@ -329,9 +330,17 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             return [];
         }
 
-        $isRequestingAdminGraphQLEndpoint = $endpointHelpers->isRequestingAdminGraphQLEndpoint();
-
-        if ($isRequestingAdminGraphQLEndpoint) {
+        /**
+         * Check `is_admin` as loading the GraphiQL client is not executing
+         * the endpoint, yet it will also generate the service container,
+         * which will be cached and shared from then on.
+         */
+        $isAdmin = is_admin();
+        $isRequestingAdminPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
+        if (
+            $isAdmin
+            && !$isRequestingAdminPersistedQueryGraphQLEndpoint
+        ) {
             /**
              * Private endpoints: Check Settings to decide if to
              * disable the "Schema modules" or not
@@ -353,8 +362,14 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          * Public endpoints: cannot be customized
          */
         if (
-            !$isRequestingAdminGraphQLEndpoint
-            || $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()
+            /**
+             * Check `is_admin` (instead of `isRequestingAdminGraphQLEndpoint`)
+             * as loading the GraphiQL client is not executing the endpoint
+             * yet it will also generate the service container, which will
+             * be cached and shared from then on.
+             */
+            !$isAdmin
+            || $isRequestingAdminPersistedQueryGraphQLEndpoint
         ) {
             return $schemaModuleClassesToSkip;
         }

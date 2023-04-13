@@ -118,7 +118,11 @@ class ModuleListTable extends AbstractItemListTable
      */
     protected function getCurrentViews(): array
     {
+        /** @var string */
         $currentView = App::request(AdminRequestParams::MODULE_TYPE) ?? App::query(AdminRequestParams::MODULE_TYPE, '');
+        if ($currentView === '') {
+            return [];
+        }
         return explode(',', $currentView);
     }
 
