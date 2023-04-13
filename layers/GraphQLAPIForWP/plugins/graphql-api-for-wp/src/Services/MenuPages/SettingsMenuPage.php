@@ -103,9 +103,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             1
         );
 
-        $regenerateConfigFormOptions = [
-            $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::GRAPHQL_API_SETTINGS)->getOptionsFormName(SettingsCategoryResolver::GRAPHQL_API_SETTINGS),
+        $regenerateConfigSettingsCategories = [
+            SettingsCategoryResolver::GRAPHQL_API_SETTINGS,
+            SettingsCategoryResolver::PLUGIN_SETTINGS,
         ];
+        $regenerateConfigFormOptions = array_map(
+            fn (string $settingsCategory) => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory),
+            $regenerateConfigSettingsCategories
+        );
         foreach ($regenerateConfigFormOptions as $option) {
             /**
              * After saving the settings in the DB:
