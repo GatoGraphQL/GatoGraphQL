@@ -58,7 +58,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
          * Code copied from function `handle_row_actions` in file
          * wp-admin/includes/class-wp-posts-list-table.php
          */
-        if (!is_null($post_type_object) && \is_post_type_viewable($post_type_object)) {
+        if ($post_type_object !== null && \is_post_type_viewable($post_type_object)) {
             $title = \_draft_or_post_title();
             $isEndpointEnabled = $this->isEndpointEnabled($post);
             $executeLabel = $this->getExecuteActionLabel();
@@ -66,23 +66,23 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 $can_edit_post = \current_user_can('edit_post', $post->ID);
                 if ($can_edit_post) {
                     $preview_link = \get_preview_post_link($post);
-                    if (!is_null($preview_link)) {
+                    if ($preview_link !== null) {
                         $actions['view'] = sprintf(
                             '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
-                            esc_url(\add_query_arg(
+                            \esc_url(\add_query_arg(
                                 RequestParams::VIEW,
                                 RequestParams::VIEW_SOURCE,
                                 $preview_link
                             )),
                             /* translators: %s: Post title. */
-                            esc_attr(sprintf(__('Preview source &#8220;%s&#8221;', 'graphql-api'), $title)),
+                            \esc_attr(sprintf(__('Preview source &#8220;%s&#8221;', 'graphql-api'), $title)),
                             __('Preview source', 'graphql-api')
                         );
                         if ($isEndpointEnabled) {
                             $actions['execute'] = sprintf(
                                 '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
-                                esc_url($preview_link),
-                                esc_attr(sprintf(__('%s &#8220;%s&#8221;', 'graphql-api'), $executeLabel, $title)),
+                                \esc_url($preview_link),
+                                \esc_attr(sprintf(__('%s &#8220;%s&#8221;', 'graphql-api'), $executeLabel, $title)),
                                 $executeLabel
                             );
                         }
@@ -97,14 +97,14 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                             RequestParams::VIEW_SOURCE,
                             $permalink
                         ),
-                        esc_attr(sprintf(__('View source &#8220;%s&#8221;', 'graphql-api'), $title)),
+                        \esc_attr(sprintf(__('View source &#8220;%s&#8221;', 'graphql-api'), $title)),
                         __('View source', 'graphql-api')
                     );
                     if ($isEndpointEnabled) {
                         $actions['execute'] = sprintf(
                             '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
                             $permalink,
-                            esc_attr(sprintf(__('%s &#8220;%s&#8221;', 'graphql-api'), $executeLabel, $title)),
+                            \esc_attr(sprintf(__('%s &#8220;%s&#8221;', 'graphql-api'), $executeLabel, $title)),
                             $executeLabel
                         );
                     }
