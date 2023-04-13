@@ -26,8 +26,8 @@ trait CommonModuleResolverTrait
             \__('<span class="settings-info">%s</span><br/>%s', 'graphql-api'),
             \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api'),
             $this->getCollapsible(
-                \__('The public endpoints are:', 'graphql-api')
-                . $this->getPublicEndpointsListDescription()
+                \__('The public endpoints are:', 'graphql-api') . $this->getPublicEndpointsListDescription(),
+                \__('(Show public endpoints)', 'graphql-api')
             )
         );
     }
@@ -43,17 +43,19 @@ trait CommonModuleResolverTrait
             \__('%s<br/>%s', 'graphql-api'),
             \__('Same, but applied to private endpoints.', 'graphql-api'),
             $this->getCollapsible(
-                \__('The private endpoints are:', 'graphql-api')
-                . $this->getPrivateEndpointsListDescription()
+                \__('The private endpoints are:', 'graphql-api') . $this->getPrivateEndpointsListDescription(),
+                \__('(Show private endpoints)', 'graphql-api')
             )
         );
     }
 
-    protected function getCollapsible(string $content): string
-    {
+    protected function getCollapsible(
+        string $content,
+        ?string $showDetailsLabel = null,
+    ): string {
         return sprintf(
             '<a href="#" type="button" class="collapsible">%s</a><span class="collapsible-content">%s</span>',
-            \__('Show details', 'graphql-api'),
+            $showDetailsLabel ?? \__('Show details', 'graphql-api'),
             $content
         );
     }
