@@ -71,10 +71,17 @@ export default function CustomEndpointProperties() {
 	return (
 		<>
 			<div className="editor-post-url">
-				{ isCustomEndpointEnabled && ! isPostPublished && (
-					<Notice status="warning" isDismissible={ false }>
+				{ isCustomEndpointEnabled && (
+					<Notice status={ isPostPublished ? "success" : "warning"} isDismissible={ false }>
 						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
-						<span>{ __('Only available to the Schema editor users.)', 'graphql-api') }</span>
+						<span className="notice-message">
+							{ isPostPublished && (
+								__('Available to everyone.', 'graphql-api')
+							) }
+							{ ! isPostPublished && (
+								__('Available to the Schema editors only.', 'graphql-api')
+							) }
+						</span>
 					</Notice>
 				) }
 				<h3 className="editor-post-url__link-label">
