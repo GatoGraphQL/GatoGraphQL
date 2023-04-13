@@ -1,0 +1,5 @@
+################################################################
+# This GraphQL query doesn't matter, as the actual content
+# will come from the persisted query.
+################################################################
+{}
