@@ -18,6 +18,7 @@ export default function PersistedQueryEndpointProperties() {
 		postSlug,
 		postLink,
 		postLinkHasParams,
+		postStatus,
 		isPostPublished,
 		permalinkPrefix,
 		permalinkSuffix,
@@ -36,6 +37,7 @@ export default function PersistedQueryEndpointProperties() {
 			),
 			postLink: post.link,
 			postLinkHasParams: post.link.indexOf('?') >= 0,
+			postStatus: post.status,
 			isPostPublished: post.status === 'publish',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
@@ -52,6 +54,12 @@ export default function PersistedQueryEndpointProperties() {
 	return (
 		<>
 			<div className="editor-post-url">
+				{ isPersistedQueryEndpointEnabled && ! isPostPublished && (
+					<Notice status="warning" isDismissible={ false }>
+						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+						<span>{ __('Only available to the Schema editor users.)', 'graphql-api') }</span>
+					</Notice>
+				) }
 				<h3 className="editor-post-url__link-label">
 					{ isPersistedQueryEndpointEnabled ? statusCircle : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
 				</h3>
@@ -77,9 +85,6 @@ export default function PersistedQueryEndpointProperties() {
 					) }
 					{ ! isPersistedQueryEndpointEnabled && (
 						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
-					) }
-					{ isPersistedQueryEndpointEnabled && ! isPostPublished && (
-						<span className="not-published-text">{ __('(As the persisted query is not published yet, it is only available to the Schema editor users.)', 'graphql-api') }</span>
 					) }
 				</p>
 			</div>
