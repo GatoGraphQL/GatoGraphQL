@@ -48,76 +48,66 @@ export default function PersistedQueryEndpointProperties() {
 	}, [] );
 
 	return (
-		<>
-			{ ! isPostPublished && (
-				<p className="unpublished-endpoint">
-					<em>{ __('This section will present information when the Persisted Query Endpoint is published', 'graphql-api') }</em>
+	<>			<div className="editor-post-url">
+				<h3 className="editor-post-url__link-label">
+					{ isPersistedQueryEndpointEnabled ? '🟢' : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
+				</h3>
+				<p>
+					{ isPersistedQueryEndpointEnabled && (
+						<ExternalLink
+							className="editor-post-url__link"
+							href={ postLink }
+							target="_blank"
+						>
+							<>
+								<span className="editor-post-url__link-prefix">
+									{ permalinkPrefix }
+								</span>
+								<span className="editor-post-url__link-slug">
+									{ postSlug }
+								</span>
+								<span className="editor-post-url__link-suffix">
+									{ permalinkSuffix }
+								</span>
+							</>
+						</ExternalLink>
+					) }
+					{ ! isPersistedQueryEndpointEnabled && (
+						<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
+					) }
 				</p>
-			) }
-			{ isPostPublished && (
-				<>
-					<div className="editor-post-url">
-						<h3 className="editor-post-url__link-label">
-							{ isPersistedQueryEndpointEnabled ? '🟢' : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
-						</h3>
-						<p>
-							{ isPersistedQueryEndpointEnabled && (
-								<ExternalLink
-									className="editor-post-url__link"
-									href={ postLink }
-									target="_blank"
-								>
-									<>
-										<span className="editor-post-url__link-prefix">
-											{ permalinkPrefix }
-										</span>
-										<span className="editor-post-url__link-slug">
-											{ postSlug }
-										</span>
-										<span className="editor-post-url__link-suffix">
-											{ permalinkSuffix }
-										</span>
-									</>
-								</ExternalLink>
-							) }
-							{ ! isPersistedQueryEndpointEnabled && (
-								<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
-							) }
-						</p>
-					</div>
-					<hr/>
-					<div className="editor-post-url">
-						<h3 className="editor-post-url__link-label">
-							🟢 { __( 'View Persisted Query Source' ) }
-						</h3>
-						<p>
-							<ExternalLink
-								className="editor-post-url__link"
-								href={ postLink + postLinkHasParams + 'view=source' }
-								target="_blank"
-							>
-								<>
-									<span className="editor-post-url__link-prefix">
-										{ permalinkPrefix }
-									</span>
-									<span className="editor-post-url__link-slug">
-										{ postSlug }
-									</span>
-									<span className="editor-post-url__link-suffix">
-										{ permalinkSuffix }
-									</span>
-									<span className="editor-endoint-custom-post-url__link-view">
-										{ '?view=' }
-									</span>
-									<span className="editor-endoint-custom-post-url__link-view-item">
-										{ 'source' }
-									</span>
-								</>
-							</ExternalLink>
-						</p>
-					</div>
-				</>
-			) }
+			</div>
+			<hr/>
+			<div className="editor-post-url">
+				<h3 className="editor-post-url__link-label">
+					🟢 { __( 'View Persisted Query Source' ) }
+				</h3>
+				<p>
+					<ExternalLink
+						className="editor-post-url__link"
+						href={ postLink + postLinkHasParams + 'view=source' }
+						target="_blank"
+					>
+						<>
+							<span className="editor-post-url__link-prefix">
+								{ permalinkPrefix }
+							</span>
+							<span className="editor-post-url__link-slug">
+								{ postSlug }
+							</span>
+							<span className="editor-post-url__link-suffix">
+								{ permalinkSuffix }
+							</span>
+							<span className="editor-endoint-custom-post-url__link-view">
+								{ '?view=' }
+							</span>
+							<span className="editor-endoint-custom-post-url__link-view-item">
+								{ 'source' }
+							</span>
+						</>
+					</ExternalLink>
+				</p>
+			</div>
 		</>
 	);
 }
