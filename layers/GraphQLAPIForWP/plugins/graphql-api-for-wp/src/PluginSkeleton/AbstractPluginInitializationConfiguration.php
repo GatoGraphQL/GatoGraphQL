@@ -337,7 +337,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          */
         $isAdmin = is_admin();
         $isRequestingAdminPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
-        if ($isAdmin
+        if (
+            $isAdmin
             && !$isRequestingAdminPersistedQueryGraphQLEndpoint
         ) {
             /**
