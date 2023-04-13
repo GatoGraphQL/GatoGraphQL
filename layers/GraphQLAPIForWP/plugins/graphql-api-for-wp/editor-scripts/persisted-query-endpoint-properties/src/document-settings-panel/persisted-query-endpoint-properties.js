@@ -56,25 +56,25 @@ export default function PersistedQueryEndpointProperties() {
 	const isPostAvailable = isPostPublished || isPostDraftOrPending;
 	return (
 		<>
+			{ isPersistedQueryEndpointEnabled && (
+				<p className="notice-message">
+					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
+						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+						<span className="notice-inner-message">
+							{ isPostPublished && (
+								__('Available to everyone.', 'graphql-api')
+							) }
+							{ isPostDraftOrPending && (
+								__('Available to the Schema editors only.', 'graphql-api')
+							) }
+							{ ! isPostAvailable && (
+								__('Persisted query not yet available.', 'graphql-api')
+							) }
+						</span>
+					</Notice>
+				</p>
+			) }
 			<div className="editor-post-url">
-				{ isPersistedQueryEndpointEnabled && (
-					<p className="notice-message">
-						<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
-							<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
-							<span className="notice-inner-message">
-								{ isPostPublished && (
-									__('Available to everyone.', 'graphql-api')
-								) }
-								{ isPostDraftOrPending && (
-									__('Available to the Schema editors only.', 'graphql-api')
-								) }
-								{ ! isPostAvailable && (
-									__('Persisted query not yet available.', 'graphql-api')
-								) }
-							</span>
-						</Notice>
-					</p>
-				) }
 				<h3 className="editor-post-url__link-label">
 					{ isPersistedQueryEndpointEnabled ? statusCircle : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
 				</h3>

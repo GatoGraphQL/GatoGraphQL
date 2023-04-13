@@ -73,25 +73,25 @@ export default function CustomEndpointProperties() {
 	const isPostAvailable = isPostPublished || isPostDraftOrPending;
 	return (
 		<>
+			{ isCustomEndpointEnabled && (
+				<p className="notice-message">
+					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
+						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+						<span className="notice-inner-message">
+							{ isPostPublished && (
+								__('Available to everyone.', 'graphql-api')
+							) }
+							{ isPostDraftOrPending && (
+								__('Available to the Schema editors only.', 'graphql-api')
+							) }
+							{ ! isPostAvailable && (
+								__('Endpoint not yet available.', 'graphql-api')
+							) }
+						</span>
+					</Notice>
+				</p>
+			) }
 			<div className="editor-post-url">
-				{ isCustomEndpointEnabled && (
-					<p className="notice-message">
-						<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
-							<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
-							<span className="notice-inner-message">
-								{ isPostPublished && (
-									__('Available to everyone.', 'graphql-api')
-								) }
-								{ isPostDraftOrPending && (
-									__('Available to the Schema editors only.', 'graphql-api')
-								) }
-								{ ! isPostAvailable && (
-									__('Endpoint not yet available.', 'graphql-api')
-								) }
-							</span>
-						</Notice>
-					</p>
-				) }
 				<h3 className="editor-post-url__link-label">
 					{ isCustomEndpointEnabled ? statusCircle : '🔴' } { __( 'Custom Endpoint URL' ) }
 				</h3>
