@@ -54,11 +54,20 @@ export default function PersistedQueryEndpointProperties() {
 	return (
 		<>
 			<div className="editor-post-url">
-				{ isPersistedQueryEndpointEnabled && ! isPostPublished && (
-					<Notice status="warning" isDismissible={ false }>
-						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
-						<span>{ __('Only available to the Schema editor users.)', 'graphql-api') }</span>
-					</Notice>
+				{ isPersistedQueryEndpointEnabled && (
+					<p className="notice-message">
+						<Notice status={ isPostPublished ? "success" : "warning"} isDismissible={ false }>
+							<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+							<span className="notice-inner-message">
+								{ isPostPublished && (
+									__('Available to everyone.', 'graphql-api')
+								) }
+								{ ! isPostPublished && (
+									__('Available to the Schema editors only.', 'graphql-api')
+								) }
+							</span>
+						</Notice>
+					</p>
 				) }
 				<h3 className="editor-post-url__link-label">
 					{ isPersistedQueryEndpointEnabled ? statusCircle : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
