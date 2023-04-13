@@ -70,7 +70,7 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
 
     protected function getEndpoint(): ?string
     {
-        return 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+        return 'graphql/';
     }
 
     /**
