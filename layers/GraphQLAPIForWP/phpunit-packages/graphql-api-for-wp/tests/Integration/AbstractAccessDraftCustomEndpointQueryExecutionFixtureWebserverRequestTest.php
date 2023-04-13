@@ -20,6 +20,10 @@ abstract class AbstractAccessDraftCustomEndpointQueryExecutionFixtureWebserverRe
 
     protected function getEndpoint(): string
     {
-        return 'graphql/draft-custom-endpoint/';
+        /**
+         * Using the "draft" endpoint (otherwise
+         * it should be "graphql/draft-custom-endpoint/")
+         */
+        return '?post_type=graphql-endpoint&p=308&preview=true';
     }
 }
