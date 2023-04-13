@@ -62,13 +62,13 @@ export default function PersistedQueryEndpointProperties() {
 						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && (
-								__('Available to everyone.', 'graphql-api')
+								__('Persisted query is available to everyone.', 'graphql-api')
 							) }
 							{ isPostDraftOrPending && (
-								__('Available to the Schema editors only.', 'graphql-api')
+								__('Persisted query is available to the Schema editors only.', 'graphql-api')
 							) }
 							{ ! isPostAvailable && (
-								__('Persisted query not yet available.', 'graphql-api')
+								__('Persisted query is not yet available.', 'graphql-api')
 							) }
 						</span>
 					</Notice>
