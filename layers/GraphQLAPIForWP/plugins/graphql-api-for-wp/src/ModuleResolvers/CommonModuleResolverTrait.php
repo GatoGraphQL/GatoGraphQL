@@ -61,7 +61,7 @@ trait CommonModuleResolverTrait
     protected function getPrivateEndpointsListDescription(): string
     {
         return sprintf(
-            \__('<ul><li>Endpoint <code>%1$s</code> (which powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be invoked in the WordPress editor to feed data to blocks)</li><li>GraphQL queries executed internally (via class <code>%6$s</code> in PHP)</li><li><a href="%4$s" target="_blank">Custom private endpoints%5$s</a> (when no pre-defined configuration is provided via PHP)</li></ul>', 'graphql-api'),
+            \__('<ul><li>Endpoint <code>%1$s</code> (which powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be invoked in the WordPress editor to feed data to blocks)</li><li><a href="%4$s" target="_blank">Custom private endpoints%5$s</a> (also used to feed data to blocks, but allowing to lock its configuration via PHP hooks)</li><li>GraphQL queries executed internally (via class <code>%6$s</code> in PHP)</li></ul>', 'graphql-api'),
             ltrim(
                 GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
                 '/'
