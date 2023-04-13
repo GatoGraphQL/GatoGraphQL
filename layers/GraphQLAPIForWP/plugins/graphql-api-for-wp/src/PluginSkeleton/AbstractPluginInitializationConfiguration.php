@@ -357,7 +357,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
              * the endpoint, yet it will also generate the service container,
              * which will be cached and shared from then on.
              */
-            !is_admin() // !$endpointHelpers->isRequestingAdminGraphQLEndpoint()
+            !is_admin()// !$endpointHelpers->isRequestingAdminGraphQLEndpoint()
             || $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()
         ) {
             return $schemaModuleClassesToSkip;
