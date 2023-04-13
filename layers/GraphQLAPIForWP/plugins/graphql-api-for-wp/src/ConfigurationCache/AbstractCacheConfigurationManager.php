@@ -13,6 +13,7 @@ use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 use function sanitize_file_name;
+use function is_admin;
 
 /**
  * Inject configuration to the cache
@@ -57,10 +58,12 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         $timestamp = '_v' . $this->getMainPluginAndExtensionsTimestamp();
         // The timestamp from when last saving settings/modules to the DB
         $timestamp .= '_' . $this->getTimestamp();
+        
+        $endpointHelpers = $this->getEndpointHelpers();
         /**
          * admin/non-admin screens have different services enabled.
          */
-        if (\is_admin()) {
+        if ($endpointHelpers->isRequestingAdminGraphQLEndpoint()) {
             /**
              * Different admin endpoints might also have different services,
              * hence cache a different container per endpointGroup.
@@ -70,10 +73,19 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              *
              * @var string
              */
-            $endpointGroup = $this->getEndpointHelpers()->getAdminGraphQLEndpointGroup();
-            $suffix = 'a' . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
+            $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
+            $suffix = 'private' . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
+        } elseif (is_admin()) {
+            /**
+             * Store the container for internal execution, via the 
+             * `GraphQLServer` class
+             */
+            $suffix = 'internal';
         } else {
-            $suffix = 'c';
+            /**
+             * Single endpoint / Custom endpoints / Persisted queries
+             */
+            $suffix = 'public';
         }
         $timestamp .= '_' . $suffix;
         return $timestamp;
