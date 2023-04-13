@@ -16,6 +16,7 @@ use PoP\Root\Module\ModuleConfigurationHelpers;
 use PoP\Root\Module\ModuleInterface;
 
 use function apply_filters;
+use function is_admin;
 
 /**
  * Base class to set the configuration for all the PoP components,
@@ -351,7 +352,12 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          * Public endpoints: cannot be customized
          */
         if (
-            !$endpointHelpers->isRequestingAdminGraphQLEndpoint()
+            /**
+             * Use is_admin as loading the GraphiQL client is not executing
+             * the endpoint, yet it will also generate the service container,
+             * which will be cached and shared from then on.
+             */
+            !is_admin() // !$endpointHelpers->isRequestingAdminGraphQLEndpoint()
             || $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()
         ) {
             return $schemaModuleClassesToSkip;
