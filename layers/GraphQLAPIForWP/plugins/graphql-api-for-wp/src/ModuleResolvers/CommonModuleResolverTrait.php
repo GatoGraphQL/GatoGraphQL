@@ -23,8 +23,8 @@ trait CommonModuleResolverTrait
     protected function getDefaultValueDescription(): string
     {
         return sprintf(
-            \__('<span class="settings-info">%s</span><br/>%s', 'graphql-api'),
-            \__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api'),
+            \__('%s<br/>%s', 'graphql-api'),
+            $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api')),
             $this->getCollapsible(
                 \__('The public endpoints are:', 'graphql-api') . $this->getPublicEndpointsListDescription(),
                 \__('(Show public endpoints)', 'graphql-api')
@@ -97,10 +97,23 @@ trait CommonModuleResolverTrait
 
     protected function getPublicEndpointValueDescription(): string
     {
-        return $this->getCollapsible(
-            \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api'),
-            \__('(Public/private endpoint comparison)', 'graphql-api')
+        return $this->getSettingsInfoContent(\__('(Private endpoints are unrestricted.)', 'graphql-api'));
+        // return $this->getCollapsible(
+        //     \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api'),
+        //     \__('(What about private endpoints?)', 'graphql-api')
+        // );
+    }
+
+    protected function getSettingsInfoContent(string $content): string
+    {
+        return sprintf(
+            '<span class="settings-info">%s</span>',
+            $content
         );
+        // return $this->getCollapsible(
+        //     \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api'),
+        //     \__('(What about private endpoints?)', 'graphql-api')
+        // );
     }
 
     protected function getGraphiQLMenuPage(): GraphiQLMenuPage
