@@ -329,9 +329,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             return [];
         }
 
-        $isRequestingAdminGraphQLEndpoint = $endpointHelpers->isRequestingAdminGraphQLEndpoint();
-
-        if ($isRequestingAdminGraphQLEndpoint) {
+        if ($endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint()) {
             /**
              * Private endpoints: Check Settings to decide if to
              * disable the "Schema modules" or not
@@ -353,7 +351,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          * Public endpoints: cannot be customized
          */
         if (
-            !$isRequestingAdminGraphQLEndpoint
+            !$endpointHelpers->isRequestingAdminGraphQLEndpoint()
             || $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint()
         ) {
             return $schemaModuleClassesToSkip;
