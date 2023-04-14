@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginAppInitializationHooks;
 
 class PluginApp implements PluginAppInterface
 {
@@ -20,6 +21,17 @@ class PluginApp implements PluginAppInterface
     ): void {
         self::$mainPluginManager = $mainPluginManager ?? static::createMainPluginManager();
         self::$extensionManager = $extensionManager ?? static::createExtensionManager();
+
+        /**
+         * Trigger the plugin's AppInitialization hook
+         * on WordPress' "plugins_loaded" hook
+         */
+        \add_action(
+            'plugins_loaded',
+            fn () => do_action(PluginAppInitializationHooks::INITIALIZE_APP),
+            // Give some room for other plugins to be initialized first
+            1000
+        );
     }
 
     protected static function createExtensionManager(): ExtensionManager
