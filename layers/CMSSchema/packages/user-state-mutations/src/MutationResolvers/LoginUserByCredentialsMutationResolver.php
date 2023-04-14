@@ -17,6 +17,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use PoPCMSSchema\UserStateMutations\Constants\HookNames;
 
 class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
 {
@@ -138,7 +139,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             AppStateHelpers::resetCurrentUserInAppState();
 
             $userID = $this->getUserTypeAPI()->getUserID($user);
-            App::doAction('gd:user:loggedin', $userID);
+            App::doAction(HookNames::HOOK_USER_LOGGED_IN, $userID);
             return $userID;
         } catch (UserStateMutationException $userStateMutationException) {
             $this->transferErrorFromUserStateMutationExceptionToFieldResolutionFeedbackStore(

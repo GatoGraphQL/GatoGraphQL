@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
+use PoPCMSSchema\UserStateMutations\Constants\HookNames;
+use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
+use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
-use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
-use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
 class LogoutUserMutationResolver extends AbstractMutationResolver
 {
@@ -54,7 +55,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
         // Modify the routing-state with the newly logged in user info
         AppStateHelpers::resetCurrentUserInAppState();
 
-        App::doAction('gd:user:loggedout', $user_id);
+        App::doAction(HookNames::HOOK_USER_LOGGED_OUT, $user_id);
         return $user_id;
     }
 }
