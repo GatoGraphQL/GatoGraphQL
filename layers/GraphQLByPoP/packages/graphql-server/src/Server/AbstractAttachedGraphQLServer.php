@@ -9,7 +9,11 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\AppThread;
 use PoP\ComponentModel\AppThreadInterface;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\Root\AppLoader;
+use PoP\Root\AppLoaderInterface;
 use PoP\Root\HttpFoundation\Response;
+use PoP\Root\StateManagers\HookManager;
+use PoP\Root\StateManagers\HookManagerInterface;
 
 abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
 {
@@ -38,7 +42,20 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
 
     protected function createAppThread(): AppThreadInterface
     {
-        return new AppThread();
+        return new AppThread(
+            $this->getAppLoader(),
+            $this->getHookManager(),
+        );
+    }
+
+    protected function getAppLoader(): AppLoaderInterface
+    {
+        return new AppLoader();
+    }
+
+    protected function getHookManager(): HookManagerInterface
+    {
+        return new HookManager();
     }
 
     abstract protected function initializeApp(): void;
