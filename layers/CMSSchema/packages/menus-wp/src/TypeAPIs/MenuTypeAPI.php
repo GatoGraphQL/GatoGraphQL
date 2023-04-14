@@ -52,7 +52,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
                     $menuItem->attr_title,
                     $menuItem->url,
                     $menuItem->description,
-                    App::applyFilters('menuitem:classes', array_filter($menuItem->classes), $menuItem),
+                    array_filter($menuItem->classes),
                     $menuItem->target,
                     $menuItem->xfn,
                 );
