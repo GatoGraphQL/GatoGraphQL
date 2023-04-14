@@ -47,6 +47,11 @@ class AppThread implements AppThreadInterface
     protected array $moduleClassesToInitialize = [];
     protected bool $isHTTPRequest;
 
+    public function __construct(
+        private ?string $name = null,
+    ) {        
+    }
+
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
@@ -83,6 +88,11 @@ class AppThread implements AppThreadInterface
          * or from a PHPUnit test.
          */
         $this->isHTTPRequest = $this->server('REQUEST_METHOD') !== null;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
     }
 
     protected function createAppLoader(): AppLoaderInterface
