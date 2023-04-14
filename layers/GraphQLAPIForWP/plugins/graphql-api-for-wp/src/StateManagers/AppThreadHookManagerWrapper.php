@@ -14,6 +14,24 @@ use PoP\Root\StateManagers\HookManagerInterface;
  *
  * This way, hooks initialized for the Standard and Internal
  * GraphQL servers will not conflict with each other.
+ *
+ * For this reason, the GraphQL API application must ALWAYS
+ * use the hooks correctly:
+ *
+ * 1. Use `App::doAction/addAction/applyFilters/addFilter` with
+ *    a hook from the GraphQL API
+ * 2. Use `add_action/add_filter/do_action/apply_filters` to
+ *    use a hook defined by WordPress
+ *
+ * 1) Because the same hook might be referenced by the Standard
+ * and Internal GraphQL servers, and calling `App::doAction`
+ * (and the others) will rename the filter, prepending it with
+ * the current AppThread name ("standard" or "internal")
+ *
+ * 2) Because filter `"the_content"` (and all the others) are
+ * called exactly that, and calling it as
+ * `"AppThread:internal-the_content"` (which would happen when
+ * invoked via App::applyFilters) will certainly not work.
  */
 class AppThreadHookManagerWrapper implements HookManagerInterface
 {
