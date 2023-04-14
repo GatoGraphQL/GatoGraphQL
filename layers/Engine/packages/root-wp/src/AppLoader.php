@@ -55,6 +55,6 @@ class AppLoader extends UpstreamAppLoader
      */
     protected function getBootApplicationHooks(): array
     {
-        return \is_admin() ? ['wp_loaded'] : ['rest_api_init', 'wp'];
+        return \is_admin() ? [AppHooks::BOOT_APP_IN_ADMIN] : [AppHooks::BOOT_APP_IN_REST, AppHooks::BOOT_APP_IN_FRONTEND];
     }
 }
