@@ -16,12 +16,13 @@ use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GraphQLAPI\GraphQLAPI\StateManagers\AppThreadHookManagerWrapper;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
-use PoP\Root\Environment as RootEnvironment;
 
+use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use function __;
@@ -405,6 +406,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
                 App::setAppThread(new AppThread());
+                $hookManager = new HookManager();
                 /**
                  * Boot the standard GraphQL server only after the
                  * WordPress hooks have triggered, but the internal
@@ -417,7 +419,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     $isInternalGraphQLServer
                         ? new ImmediateAppLoader()
                         : new WPDeferredAppLoader(),
-                    new HookManager(),
+                    $isInternalGraphQLServer
+                        ? new AppThreadHookManagerWrapper($hookManager)
+                        : $hookManager,
                     null,
                     $isInternalGraphQLServer
                         ? new InternalGraphQLServerContainerBuilderFactory()
