@@ -25,17 +25,17 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
         /**
          * Register the endpoints
          */
-        App::addAction(
+        \add_action(
             'init',
             $this->addRewriteEndpoints(...)
         );
-        App::addFilter(
+        \add_filter(
             'query_vars',
             $this->addQueryVar(...),
             10,
             1
         );
-        App::addAction(
+        \add_action(
             'parse_request',
             $this->parseRequest(...)
         );

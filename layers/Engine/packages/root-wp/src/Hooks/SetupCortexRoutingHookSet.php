@@ -29,7 +29,7 @@ class SetupCortexRoutingHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        App::addAction(
+        \add_action(
             'cortex.routes',
             $this->setupCortex(...),
             1
