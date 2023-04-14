@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -220,6 +222,12 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         if ($endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint()) {
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
             $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
+        } elseif (App::getAppThread()->getName() === PluginAppGraphQLServerNames::INTERNAL) {
+            /**
+             * The internal server receives the same configuration
+             * as the default admin endpoint
+             */
+            $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration('');
         }
 
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
