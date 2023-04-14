@@ -22,16 +22,6 @@ use PoP\Root\Instances\InstanceManager;
  */
 abstract class AbstractContainerCacheConfigurationManagerFacade
 {
-    private static ?CacheConfigurationManagerInterface $instance = null;
-
-    public static function getInstance(): CacheConfigurationManagerInterface
-    {
-        if (self::$instance === null) {
-            self::$instance = self::doGetInstance();
-        }
-        return self::$instance;
-    }
-
     /**
      * We can't use the InstanceManager, since at this stage
      * it hasn't been initialized yet.
@@ -39,7 +29,7 @@ abstract class AbstractContainerCacheConfigurationManagerFacade
      * because their instantiation produces no side-effects
      * (maybe that happens under `initialize`)
      */
-    private static function doGetInstance(): CacheConfigurationManagerInterface
+    protected static function doGetInstance(): CacheConfigurationManagerInterface
     {
         $instanceManager = new InstanceManager();
         $userAuthorizationSchemeRegistry = new UserAuthorizationSchemeRegistry();
