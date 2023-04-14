@@ -28,10 +28,12 @@ class VarsHookSet extends AbstractHookSet
     {
         switch (App::getState('nature')) {
             case RequestNature::PAGE:
-                $component_types = App::applyFilters(
-                    '\PoPCMSSchema\Pages\ModelInstanceProcessor_Utils:components_from_vars:type:page',
-                    []
-                );
+                // @todo convert the hook from string to const, then re-enable
+                // $component_types = App::applyFilters(
+                //     '\PoPCMSSchema\Pages\ModelInstanceProcessor_Utils:components_from_vars:type:page',
+                //     []
+                // );
+                $component_types = [];
                 if (in_array(ModelInstanceComponentTypes::SINGLE_PAGE, $component_types)) {
                     $page_id = App::getState(['routing', 'queried-object-id']);
                     $elements[] = $this->__('page id:', 'pop-engine') . $page_id;
