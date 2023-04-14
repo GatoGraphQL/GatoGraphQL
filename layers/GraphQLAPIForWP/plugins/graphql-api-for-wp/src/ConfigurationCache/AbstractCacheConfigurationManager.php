@@ -104,8 +104,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getInternalGraphQLServerNamespace(): string
     {
-        // @todo Change from "privateInternal" to "private"
-        return $this->makeNamespace($this->getNamespaceTimestampPrefix(), 'privateInternal');
+        return $this->makeNamespace($this->getNamespaceTimestampPrefix(), 'private');
     }
 
     /**
