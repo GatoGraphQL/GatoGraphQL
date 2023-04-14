@@ -48,8 +48,13 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
      */
     public function isServiceEnabled(): bool
     {
-        return $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
-            && App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD;
+        /**
+         * Only initialize once, for the main AppThread
+         */
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+            return false;
+        }
+        return $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);
     }
 
     /**
