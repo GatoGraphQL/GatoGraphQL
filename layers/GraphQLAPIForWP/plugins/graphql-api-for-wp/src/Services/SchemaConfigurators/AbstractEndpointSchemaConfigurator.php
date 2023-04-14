@@ -59,7 +59,8 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
 
     /**
      * Extract the items defined in the Schema Configuration,
-     * and inject them into the service as to take effect in the current GraphQL query
+     * and inject them into the service as to take effect
+     * in the current GraphQL query
      */
     public function executeSchemaConfiguration(int $customPostID): void
     {
