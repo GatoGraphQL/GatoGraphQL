@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 
 add_action(
     'plugins_loaded',
-    function(): void {
+    function (): void {
         // Validate the GraphQL API plugin is installed, or exit
         if (!class_exists(GraphQLAPIMainPlugin::class)) {
             return;

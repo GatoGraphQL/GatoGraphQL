@@ -11,14 +11,15 @@ use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\AppThread;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginApp;
+use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use function __;
 use function add_action;
 use function do_action;
@@ -262,7 +263,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * Logic to check if the main plugin or any extension has just been activated or updated.
          */
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if (!is_admin() || $this->inititalizationException !== null) {
                     return;
@@ -324,7 +325,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * which is not initialized yet (eg: for calling `$userSettingsManager->getSetting`)
                  */
                 add_action(
-                    'plugins_loaded',
+                    PluginAppHooks::INITIALIZE_APP,
                     function () use (
                         $isMainPluginJustActivated,
                         $isMainPluginJustUpdated,
@@ -385,7 +386,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * - Allow other plugins to inject their own functionality
          */
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 App::setAppThread(new AppThread());
                 App::initialize(
@@ -396,7 +397,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::INITIALIZE_APP
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -406,7 +407,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::INITIALIZE_PLUGIN
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -416,7 +417,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::INITIALIZE_EXTENSIONS
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -426,7 +427,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::CONFIGURE_COMPONENTS
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -436,7 +437,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::BOOT_SYSTEM
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -446,7 +447,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::CONFIGURE_PLUGIN
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -456,7 +457,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::CONFIGURE_EXTENSIONS
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -466,7 +467,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::BOOT_APPLICATION
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -476,7 +477,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::BOOT_PLUGIN
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
@@ -486,7 +487,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginLifecyclePriorities::BOOT_EXTENSIONS
         );
         add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             $this->handleInitializationException(...),
             PHP_INT_MAX
         );

@@ -20,6 +20,20 @@ class PluginApp implements PluginAppInterface
     ): void {
         self::$mainPluginManager = $mainPluginManager ?? static::createMainPluginManager();
         self::$extensionManager = $extensionManager ?? static::createExtensionManager();
+
+        /**
+         * Trigger the plugin's AppInitialization hook
+         * on WordPress' "plugins_loaded" hook
+         */
+        \add_action(
+            'plugins_loaded',
+            fn () => do_action(PluginAppHooks::INITIALIZE_APP),
+            /**
+             * Priority 1000: Give room for the extensions (as well as for
+             * other plugins) to be initialized first.
+             */
+            1000
+        );
     }
 
     protected static function createExtensionManager(): ExtensionManager
