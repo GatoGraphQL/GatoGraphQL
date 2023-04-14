@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
-use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
+use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use PoP\Root\App;
 use WP_Post;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType implements GraphQLEndpointCustomPostTypeInterface
@@ -145,7 +146,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     protected function isAccessForbidden(): bool
     {
         return App::applyFilters(
-            Hooks::FORBID_ACCESS,
+            HookNames::FORBID_ACCESS,
             false,
             $this
         );
