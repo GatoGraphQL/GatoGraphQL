@@ -28,7 +28,10 @@ class PluginApp implements PluginAppInterface
         \add_action(
             'plugins_loaded',
             fn () => do_action(PluginAppHooks::INITIALIZE_APP),
-            // Give some room for other plugins to be initialized first
+            /**
+             * Priority 1000: Give room for the extensions (as well as for
+             * other plugins) to be initialized first.
+             */
             1000
         );
     }
