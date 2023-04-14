@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionHooks;
 
-use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use PoP\Root\Module\ModuleInterface;
+
+use function add_filter;
 
 abstract class AbstractAddCustomAdminEndpointHook
 {
     public function __construct()
     {
-        App::addFilter(
+        add_filter(
             HookNames::SUPPORTED_ADMIN_ENDPOINT_GROUPS,
             $this->addSupportedEndpointGroup(...)
         );
-        App::addFilter(
+        add_filter(
             HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CONFIGURATION,
             $this->getPredefinedAdminEndpointModuleClassConfiguration(...),
             10,
             2
         );
-        App::addFilter(
+        add_filter(
             HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
             $this->getSchemaModuleClassesToSkip(...),
             10,
