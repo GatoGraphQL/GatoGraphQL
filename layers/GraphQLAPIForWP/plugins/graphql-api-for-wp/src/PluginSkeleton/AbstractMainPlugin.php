@@ -9,6 +9,8 @@ use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOExceptio
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\AppThread;
+use GraphQLAPI\GraphQLAPI\Container\InternalGraphQLServerContainerBuilderFactory;
+use GraphQLAPI\GraphQLAPI\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
@@ -16,12 +18,12 @@ use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
-use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
+use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
+
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
-
 use function __;
 use function add_action;
 use function do_action;
@@ -410,11 +412,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * hooks will have been triggered, and so it'd not
                  * be initialized)
                  */
+                $isInternalGraphQLServer = $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL;
                 App::initialize(
-                    $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::STANDARD
-                        ? new WPDeferredAppLoader()
-                        : new ImmediateAppLoader(),
-                    new HookManager()
+                    $isInternalGraphQLServer
+                        ? new ImmediateAppLoader()
+                        : new WPDeferredAppLoader(),
+                    new HookManager(),
+                    null,
+                    $isInternalGraphQLServer
+                        ? new InternalGraphQLServerContainerBuilderFactory()
+                        : null,
+                    $isInternalGraphQLServer
+                        ? new InternalGraphQLServerSystemContainerBuilderFactory()
+                        : null
                 );
             },
             PluginLifecyclePriorities::INITIALIZE_APP
