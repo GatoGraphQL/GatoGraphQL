@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\StateManagers;
 
 use GraphQLAPI\GraphQLAPI\App;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\StateManagers\HookManagerInterface;
 
 /**
@@ -16,18 +17,23 @@ use PoP\Root\StateManagers\HookManagerInterface;
  */
 class AppThreadHookManagerWrapper implements HookManagerInterface
 {
-    private string $appThreadHash;
+    private string $appThreadName;
 
     public function __construct(
         private HookManagerInterface $hookManager,
     ) {
-        $currentAppThread = App::getAppThread();
-        $this->appThreadHash = spl_object_hash($currentAppThread);
+        $currentAppThreadName = App::getAppThread()->getName();
+        if ($currentAppThreadName === null) {
+            throw new ShouldNotHappenException(
+                \__('AppThread has no name', 'graphql-api')
+            );
+        }
+        $this->appThreadName = $currentAppThreadName;
     }
 
     private function getAppThreadTag(string $tag): string
     {
-        return $this->appThreadHash . '_' . $tag;
+        return $this->appThreadName . '_' . $tag;
     }
     
     public function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
