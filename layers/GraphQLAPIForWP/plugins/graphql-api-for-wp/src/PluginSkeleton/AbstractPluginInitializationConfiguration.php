@@ -345,9 +345,10 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          */
         $isAdmin = is_admin();
         $isRequestingAdminPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
+        $isInternalGraphQLServer = App::getAppThread()->getName() === PluginAppGraphQLServerNames::INTERNAL;
         if (
-            $isAdmin
-            && !$isRequestingAdminPersistedQueryGraphQLEndpoint
+            ($isAdmin && !$isRequestingAdminPersistedQueryGraphQLEndpoint)
+            || $isInternalGraphQLServer
         ) {
             /**
              * Private endpoints: Check Settings to decide if to
