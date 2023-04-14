@@ -35,11 +35,15 @@ class VarsHookSet extends AbstractHookSet
                 // Post and Event may be different
                 // Announcements and Articles (Posts), or Past Event and (Upcoming) Event may be different
                 // By default, we check for post type but not for categories
-                $component_types = (array) App::applyFilters(
-                    '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
-                    array(
-                        ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
-                    )
+                // @todo convert the hook from string to const, then re-enable
+                // $component_types = (array) App::applyFilters(
+                //     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:single',
+                //     array(
+                //         ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
+                //     )
+                // );
+                $component_types = array(
+                    ModelInstanceComponentTypes::SINGLE_CUSTOMPOST,
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = App::getState(['routing', 'queried-object-post-type']);
