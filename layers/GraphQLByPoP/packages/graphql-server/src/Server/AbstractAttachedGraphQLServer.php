@@ -42,21 +42,18 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
 
     protected function createAppThread(): AppThreadInterface
     {
-        return new AppThread(
-            $this->getAppLoader(),
-            $this->getHookManager(),
-        );
+        return new AppThread();
     }
 
-    protected function getAppLoader(): AppLoaderInterface
-    {
-        return new AppLoader();
-    }
+    // protected function getAppLoader(): AppLoaderInterface
+    // {
+    //     return new AppLoader();
+    // }
 
-    protected function getHookManager(): HookManagerInterface
-    {
-        return new HookManager();
-    }
+    // protected function getHookManager(): HookManagerInterface
+    // {
+    //     return new HookManager();
+    // }
 
     abstract protected function initializeApp(): void;
 

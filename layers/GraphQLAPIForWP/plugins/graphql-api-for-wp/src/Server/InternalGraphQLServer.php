@@ -17,16 +17,13 @@ class InternalGraphQLServer extends AbstractAttachedGraphQLServer
 {
     protected function createAppThread(): AppThreadInterface
     {
-        return new AppThread(
-            $this->getAppLoader(),
-            $this->getHookManager(),
-        );
+        return new AppThread();
     }
 
-    protected function getHookManager(): HookManagerInterface
-    {
-        return new HookManager();
-    }
+    // protected function getHookManager(): HookManagerInterface
+    // {
+    //     return new HookManager();
+    // }
 
     protected function initializeApp(): void
     {
