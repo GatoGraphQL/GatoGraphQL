@@ -451,11 +451,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (): void {
+            function (string $pluginAppGraphQLServerName): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->bootSystem();
+                $this->bootSystem($pluginAppGraphQLServerName);
             },
             PluginLifecyclePriorities::BOOT_SYSTEM
         );
@@ -539,14 +539,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * Boot the system
      */
-    public function bootSystem(): void
+    public function bootSystem(string $pluginAppGraphQLServerName): void
     {
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
             $appLoader = App::getAppLoader();
             $appLoader->setContainerCacheConfiguration(
-                $this->pluginInitializationConfiguration->getContainerCacheConfiguration()
+                $this->pluginInitializationConfiguration->getContainerCacheConfiguration($pluginAppGraphQLServerName)
             );
             $appLoader->bootSystem();
 
