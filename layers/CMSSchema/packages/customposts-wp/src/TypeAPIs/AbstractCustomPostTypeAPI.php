@@ -408,8 +408,8 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // Do not allow HTML tags or shortcodes
         $ret = strip_shortcodes($customPost->post_content);
         $ret = App::applyFilters('the_content', $ret);
-        App::addFilter('the_content', $wp_embed->autoembed(...), 8);
-        App::addFilter('the_content', wpautop(...));
+        \add_filter('the_content', $wp_embed->autoembed(...), 8);
+        \add_filter('the_content', wpautop(...));
 
         return strip_tags($ret);
     }
