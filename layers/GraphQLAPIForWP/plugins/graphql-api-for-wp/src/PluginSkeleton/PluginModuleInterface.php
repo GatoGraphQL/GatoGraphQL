@@ -9,5 +9,5 @@ use PoP\Root\Module\ModuleInterface;
 interface PluginModuleInterface extends ModuleInterface
 {
     public function setPluginFolder(string $pluginFolder): void;
-    public function getPluginFolder(): ?string;
+    public function getPluginFolder(): string;
 }

@@ -9,14 +9,14 @@ use PoP\Root\Module\AbstractModule;
 
 abstract class AbstractPluginModule extends AbstractModule implements PluginModuleInterface
 {
-    private ?string $pluginFolder = null;
+    private string $pluginFolder;
 
     public function setPluginFolder(string $pluginFolder): void
     {
         $this->pluginFolder = $pluginFolder;
     }
 
-    public function getPluginFolder(): ?string
+    public function getPluginFolder(): string
     {
         return $this->pluginFolder;
     }
@@ -29,9 +29,6 @@ abstract class AbstractPluginModule extends AbstractModule implements PluginModu
     protected function initializeSystemContainerServices(): void
     {
         $pluginFolder = $this->getPluginFolder();
-        if ($pluginFolder === null) {
-            return;
-        }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
             $this->initSystemServices($pluginFolder, '', 'hybrid-services.yaml');
         }
@@ -59,9 +56,6 @@ abstract class AbstractPluginModule extends AbstractModule implements PluginModu
         array $skipSchemaModuleClasses,
     ): void {
         $pluginFolder = $this->getPluginFolder();
-        if ($pluginFolder === null) {
-            return;
-        }
         if (file_exists($pluginFolder . \DIRECTORY_SEPARATOR . 'config' . \DIRECTORY_SEPARATOR . 'hybrid-services.yaml')) {
             $this->initServices($pluginFolder, '', 'hybrid-services.yaml');
         }
