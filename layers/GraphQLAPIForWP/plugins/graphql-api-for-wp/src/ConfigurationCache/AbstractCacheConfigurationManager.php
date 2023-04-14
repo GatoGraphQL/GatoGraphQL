@@ -94,17 +94,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         $timestampPrefix = '_v' . $this->getMainPluginAndExtensionsTimestamp();
         // The timestamp from when last saving settings/modules to the DB
         $timestampPrefix .= '_' . $this->getTimestamp();
-
         return $timestampPrefix;
-    }
-
-    /**
-     * The internal server is always private, and has the
-     * same configuration as the default admin endpoint.
-     */
-    public function getInternalGraphQLServerNamespace(): string
-    {
-        return $this->makeNamespace($this->getNamespaceTimestampPrefix(), 'internal');
     }
 
     /**

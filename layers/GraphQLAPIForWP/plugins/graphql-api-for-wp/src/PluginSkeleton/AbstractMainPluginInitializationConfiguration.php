@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\ConfigurationCache\ContainerCacheConfigurationManager;
 use GraphQLAPI\GraphQLAPI\Facades\ContainerCacheConfigurationManagerFacade;
+use GraphQLAPI\GraphQLAPI\Facades\InternalGraphQLServerContainerCacheConfigurationManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use PoP\Root\Container\ContainerCacheConfiguration;
 
@@ -38,18 +38,17 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
     ): ContainerCacheConfiguration {
         $containerConfigurationCacheNamespace = null;
         $containerConfigurationCacheDirectory = null;
-        if ($cacheContainerConfiguration = $this->isContainerCachingEnabled()) {
-            /** @var ContainerCacheConfigurationManager */
-            $containerCacheConfigurationManager = ContainerCacheConfigurationManagerFacade::getInstance();
+        if ($cacheContainerConfiguration = $this->isContainerCachingEnabled()) {            
             /**
-             * The internal server is always private, and has the
-             * same configuration as the default admin endpoint.
+             * The internal server has a different configuration,
+             * and must be cached on its own file.
              */
             if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
-                $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getInternalGraphQLServerNamespace();
+                $containerCacheConfigurationManager = InternalGraphQLServerContainerCacheConfigurationManagerFacade::getInstance();
             } else {
-                $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getNamespace();
+                $containerCacheConfigurationManager = ContainerCacheConfigurationManagerFacade::getInstance();
             }
+            $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getNamespace();
             $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
         }
         return new ContainerCacheConfiguration(
