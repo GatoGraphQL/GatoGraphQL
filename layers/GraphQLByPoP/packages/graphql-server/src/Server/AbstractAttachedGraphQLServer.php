@@ -23,16 +23,16 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
         $this->appThread = $this->createAppThread();
         
         /**
-         * Keep the current AppThread, switch to the GraphQLServer's
-         * one, initialize the App, and then restore the current AppThread.
+         * Steps:
+         * 
+         * 1. Keep the current AppThread
+         * 2. Switch to the GraphQLServer's one
+         * 3. Initialize the App
+         * 4. Restore the current AppThread
          */
         $currentAppThread = App::getAppThread();
         App::setAppThread($this->appThread);
-
-        // Initialize the App
-        // ...
-
-        // Restore the original AppThread
+        $this->initializeApp();
         App::setAppThread($currentAppThread);
     }
 
@@ -40,6 +40,8 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
     {
         return new AppThread();
     }
+
+    abstract protected function initializeApp(): void;
 
     /**
      * The basic state for executing GraphQL queries is already set.
