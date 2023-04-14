@@ -11,10 +11,12 @@ use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\AppThread;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginApp;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
-use PoP\RootWP\AppLoader;
+use PoP\RootWP\AppLoader as WPDeferredAppLoader;
+use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
@@ -264,8 +266,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (): void {
-                if (!is_admin() || $this->inititalizationException !== null) {
+            function (string $pluginAppGraphQLServerName): void {
+                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                    || !is_admin()
+                    || $this->inititalizationException !== null
+                ) {
                     return;
                 }
                 $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
@@ -387,10 +392,28 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (): void {
+            function (string $pluginAppGraphQLServerName): void {
+                /**
+                 * The standard server has not been initialized yet,
+                 * hence there can be no Initialization Exception
+                 */
+                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                    && $this->inititalizationException !== null
+                ) {
+                    return;
+                }
                 App::setAppThread(new AppThread());
+                /**
+                 * Boot the standard GraphQL server only after the
+                 * WordPress hooks have triggered, but the internal
+                 * GraphQL server immediately (as by then all those
+                 * hooks will have been triggered, and so it'd not
+                 * be initialized)
+                 */
                 App::initialize(
-                    new AppLoader(),
+                    $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::STANDARD
+                        ? new WPDeferredAppLoader()
+                        : new ImmediateAppLoader(),
                     new HookManager()
                 );
             },
@@ -488,7 +511,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            $this->handleInitializationException(...),
+            function (string $pluginAppGraphQLServerName): void {
+                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
+                    return;
+                }
+                $this->handleInitializationException();
+            },
             PHP_INT_MAX
         );
     }
