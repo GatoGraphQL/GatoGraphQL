@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 
@@ -126,7 +127,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
          * Priority 100: before the GraphQL API plugin is initialized
          */
         \add_action(
-            'plugins_loaded',
+            PluginAppHooks::INITIALIZE_APP,
             function (): void {
                 /**
                  * Initialize/configure/boot this extension plugin
