@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
 use PoP\Root\Module\ModuleConfigurationHelpers;
@@ -50,7 +51,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
             $this->getHookModuleClass(),
             $this->getHookEnvironmentClass(),
         );
-        \add_filter(
+        App::addFilter(
             $hookName,
             fn () => $enableFunctionality === BlockAttributeValues::ENABLED,
             PHP_INT_MAX

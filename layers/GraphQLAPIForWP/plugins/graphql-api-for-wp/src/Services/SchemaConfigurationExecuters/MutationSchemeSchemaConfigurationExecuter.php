@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
-use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\Root\Module\ModuleConfigurationHelpers;
-use PoP\Engine\Module as EngineModule;
+use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use PoP\Engine\Environment as EngineEnvironment;
+use PoP\Engine\Module as EngineModule;
+use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
@@ -65,7 +66,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
             GraphQLServerModule::class,
             GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS
         );
-        \add_filter(
+        App::addFilter(
             $hookName,
             fn () => $mutationScheme !== MutationSchemes::STANDARD,
             PHP_INT_MAX
@@ -74,7 +75,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
             EngineModule::class,
             EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS
         );
-        \add_filter(
+        App::addFilter(
             $hookName,
             fn () => $mutationScheme === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             PHP_INT_MAX
