@@ -139,7 +139,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             /** @var callable|null */
             $callback = $mapping['callback'] ?? null;
-            \add_filter(
+            App::addFilter(
                 $hookName,
                 function () use ($userSettingsManager, $optionModule, $option, $callback) {
                     $value = $userSettingsManager->getSetting($optionModule, $option);
