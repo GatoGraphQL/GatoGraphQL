@@ -7,10 +7,11 @@ namespace GraphQLAPI\GraphQLAPI\Server;
 use GraphQLAPI\GraphQLAPI\AppThread;
 use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLByPoP\GraphQLServer\Server\AbstractAttachedGraphQLServer;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\AppThreadInterface;
-use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\RootWP\StateManagers\HookManager;
 
+use PoP\Root\StateManagers\HookManagerInterface;
 use function do_action;
 
 class InternalGraphQLServer extends AbstractAttachedGraphQLServer
@@ -25,8 +26,9 @@ class InternalGraphQLServer extends AbstractAttachedGraphQLServer
     //     return new HookManager();
     // }
 
-    protected function initializeApp(): void
+    protected function initializeApp(): AppThreadInterface
     {
         do_action(PluginAppHooks::INITIALIZE_APP);
+        return App::getAppThread();
     }
 }
