@@ -4,11 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleTypeResolver implements ModuleTypeResolverInterface
 {
     use BasicServiceTrait;
+
+    /**
+     * Only initialize once, for the main AppThread
+     */
+    public function isServiceEnabled(): bool
+    {
+        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD;
+    }
 
     /**
      * By default, the slug is the module's name, without the owner/package
