@@ -35,12 +35,16 @@ class AppStateProvider extends AbstractAppStateProvider
             // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
             // (ie initial load) and when target is provided (ie loading pageSection)
             $target = strtolower(App::request(Params::TARGET) ?? App::query(Params::TARGET, ''));
-            $targets = (array) App::applyFilters(
-                'ApplicationState:targets',
-                [
-                    Targets::MAIN,
-                ]
-            );
+            // @todo convert the hook from string to const, then re-enable
+            // $targets = (array) App::applyFilters(
+            //     'ApplicationState:targets',
+            //     [
+            //         Targets::MAIN,
+            //     ]
+            // );
+            $targets = [
+                Targets::MAIN,
+            ];
             if (!in_array($target, $targets)) {
                 $target = Targets::MAIN;
             }

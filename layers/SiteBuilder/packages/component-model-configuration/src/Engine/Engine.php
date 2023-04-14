@@ -184,10 +184,12 @@ class Engine extends UpstreamEngine implements EngineInterface
                 $meta[Params::SETTINGSFORMAT] = App::getState('format');
             }
         }
-        return App::applyFilters(
-            '\PoPSiteBuilder\ComponentModel\Engine:site-meta',
-            $meta
-        );
+        // @todo convert the hook from string to const, then re-enable
+        // return App::applyFilters(
+        //     '\PoPSiteBuilder\ComponentModel\Engine:site-meta',
+        //     $meta
+        // );
+        return $meta;
     }
 
     public function addSiteMeta(): bool
@@ -209,10 +211,12 @@ class Engine extends UpstreamEngine implements EngineInterface
                 : $this->__('Oops, there was an error: ', 'pop-engine') . RequestUtils::$errors[0];
         }
 
-        return App::applyFilters(
-            '\PoPSiteBuilder\ComponentModel\Engine:request-meta',
-            $meta
-        );
+        // @todo convert the hook from string to const, then re-enable
+        // return App::applyFilters(
+        //     '\PoPSiteBuilder\ComponentModel\Engine:request-meta',
+        //     $meta
+        // );
+        return $meta;
     }
 
     /**
