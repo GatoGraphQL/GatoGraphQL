@@ -6,8 +6,8 @@ namespace GraphQLByPoP\GraphQLServer\Server;
 
 use GraphQLByPoP\GraphQLServer\Server\AbstractGraphQLServer;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\AppThreadInterface;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\Root\AppThreadInterface;
 use PoP\Root\HttpFoundation\Response;
 
 abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer

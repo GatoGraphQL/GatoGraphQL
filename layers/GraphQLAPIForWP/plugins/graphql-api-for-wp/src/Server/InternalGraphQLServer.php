@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLByPoP\GraphQLServer\Server\AbstractAttachedGraphQLServer;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\AppThreadInterface;
+use PoP\Root\AppThreadInterface;
 
 use function do_action;
 
