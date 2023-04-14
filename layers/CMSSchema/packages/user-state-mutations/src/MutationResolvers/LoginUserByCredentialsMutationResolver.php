@@ -139,7 +139,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             AppStateHelpers::resetCurrentUserInAppState();
 
             $userID = $this->getUserTypeAPI()->getUserID($user);
-            App::doAction(HookNames::HOOK_USER_LOGGED_IN, $userID);
+            App::doAction(HookNames::USER_LOGGED_IN, $userID);
             return $userID;
         } catch (UserStateMutationException $userStateMutationException) {
             $this->transferErrorFromUserStateMutationExceptionToFieldResolutionFeedbackStore(

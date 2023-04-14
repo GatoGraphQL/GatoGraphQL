@@ -6,5 +6,5 @@ namespace PoPCMSSchema\CommentMutations\Constants;
 
 class HookNames
 {
-    public const HOOK_ADD_COMMENT = __CLASS__ . ':addComment';
+    public const ADD_COMMENT = __CLASS__ . ':addComment';
 }
