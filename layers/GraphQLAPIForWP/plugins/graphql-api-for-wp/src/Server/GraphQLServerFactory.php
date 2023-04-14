@@ -16,7 +16,7 @@ use GraphQLByPoP\GraphQLServer\Server\GraphQLServerInterface;
  */
 class GraphQLServerFactory
 {
-    private static ?GraphQLServer $graphQLServer = null;
+    private static ?GraphQLServerInterface $graphQLServer = null;
 
     /**
      * Create a new instance of the GraphQLServer
