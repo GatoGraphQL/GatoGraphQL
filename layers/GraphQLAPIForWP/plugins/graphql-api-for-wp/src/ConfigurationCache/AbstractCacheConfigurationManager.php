@@ -24,6 +24,9 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
 {
     use BasicServiceTrait;
 
+    private const NAMESPACE_SUFFIX_PUBLIC = 'public';
+    private const NAMESPACE_SUFFIX_PRIVATE = 'private';
+
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?EndpointHelpers $endpointHelpers = null;
 
@@ -73,12 +76,12 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              * @var string
              */
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
-            $suffix = 'private' . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
+            $suffix = self::NAMESPACE_SUFFIX_PRIVATE . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
         } else {
             /**
              * Single endpoint / Custom endpoints / Persisted queries
              */
-            $suffix = 'public';
+            $suffix = self::NAMESPACE_SUFFIX_PUBLIC;
         }
         return $this->makeNamespace($this->getNamespaceTimestampPrefix(), $suffix);
     }
@@ -104,7 +107,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getInternalGraphQLServerNamespace(): string
     {
-        return $this->makeNamespace($this->getNamespaceTimestampPrefix(), 'private');
+        return $this->makeNamespace($this->getNamespaceTimestampPrefix(), self::NAMESPACE_SUFFIX_PRIVATE);
     }
 
     /**
