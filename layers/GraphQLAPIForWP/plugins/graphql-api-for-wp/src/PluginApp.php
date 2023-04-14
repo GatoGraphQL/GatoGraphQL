@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginAppInitializationHooks;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginAppHooks;
 
 class PluginApp implements PluginAppInterface
 {
@@ -28,7 +28,7 @@ class PluginApp implements PluginAppInterface
          */
         \add_action(
             'plugins_loaded',
-            fn () => do_action(PluginAppInitializationHooks::INITIALIZE_APP),
+            fn () => do_action(PluginAppHooks::INITIALIZE_APP),
             // Give some room for other plugins to be initialized first
             1000
         );

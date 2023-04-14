@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-class PluginAppInitializationHooks
+class PluginAppHooks
 {
     /**
      * Hook to initalize the App
