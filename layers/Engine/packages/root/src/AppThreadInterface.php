@@ -32,7 +32,7 @@ use PoP\Root\StateManagers\HookManagerInterface;
 interface AppThreadInterface
 {
     public function getName(): ?string;
-    
+
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.

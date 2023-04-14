@@ -21,7 +21,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return;
         }
-        
+
         \add_action(
             'init',
             $this->initTaxonomy(...)

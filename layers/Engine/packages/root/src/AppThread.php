@@ -49,7 +49,7 @@ class AppThread implements AppThreadInterface
 
     public function __construct(
         private ?string $name = null,
-    ) {        
+    ) {
     }
 
     /**

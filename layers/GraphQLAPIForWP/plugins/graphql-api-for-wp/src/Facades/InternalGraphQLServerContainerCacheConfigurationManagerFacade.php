@@ -17,8 +17,8 @@ use GraphQLAPI\GraphQLAPI\ConfigurationCache\InternalGraphQLServerContainerCache
 class InternalGraphQLServerContainerCacheConfigurationManagerFacade extends AbstractContainerCacheConfigurationManagerFacade
 {
     use ContainerCacheConfigurationManagerFacadeTrait;
-    
-    protected static function createContainerCacheConfigurationManager():  ContainerCacheConfigurationManager
+
+    protected static function createContainerCacheConfigurationManager(): ContainerCacheConfigurationManager
     {
         return new InternalGraphQLServerContainerCacheConfigurationManager();
     }

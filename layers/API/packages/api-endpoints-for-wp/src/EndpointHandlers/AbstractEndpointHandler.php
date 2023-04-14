@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPAPI\APIEndpointsForWP\EndpointHandlers;
 
-use PoP\ComponentModel\App;
 use PoPAPI\APIEndpoints\AbstractEndpointHandler as UpstreamAbstractEndpointHandler;
 
 abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler

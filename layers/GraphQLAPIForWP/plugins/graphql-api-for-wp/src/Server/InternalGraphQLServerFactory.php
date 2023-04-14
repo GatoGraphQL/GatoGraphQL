@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Server;
 
-use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Exception\GraphQLServerNotReadyException;
 use GraphQLByPoP\GraphQLServer\Server\GraphQLServerInterface;
 

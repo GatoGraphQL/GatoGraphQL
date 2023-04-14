@@ -21,8 +21,8 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Block_Editor_Context;
 use WP_Post;
-
 use WP_Taxonomy;
+
 use function get_taxonomy;
 use function is_object_in_taxonomy;
 use function wp_dropdown_categories;
@@ -103,7 +103,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return;
         }
-        
+
         $postType = $this->getCustomPostType();
         // To satisfy the menu position, the CPT will be initialized
         // earlier or later

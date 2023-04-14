@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\TypeAPIs;
 
-use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface

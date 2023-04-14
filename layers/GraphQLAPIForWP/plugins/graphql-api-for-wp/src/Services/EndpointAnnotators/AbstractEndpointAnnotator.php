@@ -52,7 +52,7 @@ abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return false;
         }
-        
+
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null && !$this->getModuleRegistry()->isModuleEnabled($enablingModule)) {
             return false;

@@ -270,7 +270,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action(
             PluginAppHooks::INITIALIZE_APP,
             function (string $pluginAppGraphQLServerName): void {
-                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                if (
+                    $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
                     || !is_admin()
                     || $this->inititalizationException !== null
                 ) {
@@ -400,7 +401,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * The standard server has not been initialized yet,
                  * hence there can be no Initialization Exception
                  */
-                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                if (
+                    $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
                     && $this->inititalizationException !== null
                 ) {
                     return;

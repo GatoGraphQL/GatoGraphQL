@@ -47,5 +47,5 @@ abstract class AbstractContainerCacheConfigurationManagerFacade
         return $containerCacheConfigurationManager;
     }
 
-    abstract protected static function createContainerCacheConfigurationManager():  ContainerCacheConfigurationManager;
+    abstract protected static function createContainerCacheConfigurationManager(): ContainerCacheConfigurationManager;
 }

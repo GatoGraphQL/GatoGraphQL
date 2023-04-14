@@ -16,8 +16,8 @@ use GraphQLAPI\GraphQLAPI\ConfigurationCache\ContainerCacheConfigurationManager;
 class ContainerCacheConfigurationManagerFacade extends AbstractContainerCacheConfigurationManagerFacade
 {
     use ContainerCacheConfigurationManagerFacadeTrait;
-    
-    protected static function createContainerCacheConfigurationManager():  ContainerCacheConfigurationManager
+
+    protected static function createContainerCacheConfigurationManager(): ContainerCacheConfigurationManager
     {
         return new ContainerCacheConfigurationManager();
     }

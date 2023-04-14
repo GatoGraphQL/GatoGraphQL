@@ -38,7 +38,7 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
     ): ContainerCacheConfiguration {
         $containerConfigurationCacheNamespace = null;
         $containerConfigurationCacheDirectory = null;
-        if ($cacheContainerConfiguration = $this->isContainerCachingEnabled()) {            
+        if ($cacheContainerConfiguration = $this->isContainerCachingEnabled()) {
             /**
              * The internal server has a different configuration,
              * and must be cached on its own file.

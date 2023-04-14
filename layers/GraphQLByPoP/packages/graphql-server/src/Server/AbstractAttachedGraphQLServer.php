@@ -6,14 +6,9 @@ namespace GraphQLByPoP\GraphQLServer\Server;
 
 use GraphQLByPoP\GraphQLServer\Server\AbstractGraphQLServer;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\AppThread;
 use PoP\ComponentModel\AppThreadInterface;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
-use PoP\Root\AppLoader;
-use PoP\Root\AppLoaderInterface;
 use PoP\Root\HttpFoundation\Response;
-use PoP\Root\StateManagers\HookManager;
-use PoP\Root\StateManagers\HookManagerInterface;
 
 abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
 {
@@ -26,7 +21,7 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
     {
         /**
          * Steps:
-         * 
+         *
          * 1. Keep the current AppThread
          * 2. Initialize the App, retrieve the new AppThread
          * 3. Restore the current AppThread
