@@ -28,29 +28,35 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
         string $pluginAppGraphQLServerName,
     ): ContainerCacheConfiguration {
         if (!isset($this->containerCacheConfigurationsCache[$pluginAppGraphQLServerName])) {
-            $containerConfigurationCacheNamespace = null;
-            $containerConfigurationCacheDirectory = null;
-            if ($cacheContainerConfiguration = $this->isContainerCachingEnabled()) {
-                /** @var ContainerCacheConfigurationManager */
-                $containerCacheConfigurationManager = ContainerCacheConfigurationManagerFacade::getInstance();
-                /**
-                 * The internal server is always private, and has the
-                 * same configuration as the default admin endpoint.
-                 */
-                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
-                    $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getInternalGraphQLServerNamespace();
-                } else {
-                    $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getNamespace();
-                }
-                $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
-            }
-            $this->containerCacheConfigurationsCache[$pluginAppGraphQLServerName] = new ContainerCacheConfiguration(
-                $cacheContainerConfiguration,
-                $containerConfigurationCacheNamespace,
-                $containerConfigurationCacheDirectory
-            );
+            $this->containerCacheConfigurationsCache[$pluginAppGraphQLServerName] = $this->doGetContainerCacheConfiguration($pluginAppGraphQLServerName);
         }
         return $this->containerCacheConfigurationsCache[$pluginAppGraphQLServerName];
+    }
+
+    protected function doGetContainerCacheConfiguration(
+        string $pluginAppGraphQLServerName,
+    ): ContainerCacheConfiguration {
+        $containerConfigurationCacheNamespace = null;
+        $containerConfigurationCacheDirectory = null;
+        if ($cacheContainerConfiguration = $this->isContainerCachingEnabled()) {
+            /** @var ContainerCacheConfigurationManager */
+            $containerCacheConfigurationManager = ContainerCacheConfigurationManagerFacade::getInstance();
+            /**
+             * The internal server is always private, and has the
+             * same configuration as the default admin endpoint.
+             */
+            if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
+                $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getInternalGraphQLServerNamespace();
+            } else {
+                $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getNamespace();
+            }
+            $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
+        }
+        return new ContainerCacheConfiguration(
+            $cacheContainerConfiguration,
+            $containerConfigurationCacheNamespace,
+            $containerConfigurationCacheDirectory
+        );
     }
 
     protected function isContainerCachingEnabled(): bool
