@@ -10,6 +10,9 @@ use PoP\Root\Hooks\AbstractHookSet;
 
 class DBEntriesHookSet extends AbstractHookSet
 {
+    public const HOOK_MOVE_ENTRIES_UNDER_DB_NAME_META_FIELDS = __CLASS__ . ':moveEntriesUnderDBName:metaFields';
+    public const HOOK_MOVE_ENTRIES_UNDER_DB_NAME_CONTEXT_FIELDS = __CLASS__ . ':moveEntriesUnderDBName:contextFields';
+
     protected function init(): void
     {
         App::addFilter(
@@ -28,14 +31,14 @@ class DBEntriesHookSet extends AbstractHookSet
     {
         // Enable to add all fields starting with "__" (such as "__schema") as meta
         $dbNameToFieldNames['meta'] = App::applyFilters(
-            'PoPAPI\API\DataloaderHooks:metaFields',
+            self::HOOK_MOVE_ENTRIES_UNDER_DB_NAME_META_FIELDS,
             [
                 'fullSchema',
                 'typeName',
             ]
         );
         $dbNameToFieldNames['context'] = App::applyFilters(
-            'PoPAPI\API\DataloaderHooks:contextFields',
+            self::HOOK_MOVE_ENTRIES_UNDER_DB_NAME_CONTEXT_FIELDS,
             [
                 'var',
                 'context',
