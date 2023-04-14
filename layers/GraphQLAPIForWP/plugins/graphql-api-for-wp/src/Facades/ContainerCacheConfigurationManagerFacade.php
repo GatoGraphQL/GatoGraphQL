@@ -27,26 +27,33 @@ class ContainerCacheConfigurationManagerFacade
     public static function getInstance(): CacheConfigurationManagerInterface
     {
         if (self::$instance === null) {
-            // We can't use the InstanceManager, since at this stage
-            // it hasn't been initialized yet.
-            // We can create a new instance of these classes
-            // because their instantiation produces no side-effects
-            // (maybe that happens under `initialize`)
-            $instanceManager = new InstanceManager();
-            $userAuthorizationSchemeRegistry = new UserAuthorizationSchemeRegistry();
-            $manageOptionsUserAuthorizationScheme = new ManageOptionsUserAuthorizationScheme();
-            $userAuthorizationSchemeRegistry->addUserAuthorizationScheme($manageOptionsUserAuthorizationScheme);
-            $userAuthorization = new UserAuthorization();
-            $userAuthorization->setUserAuthorizationSchemeRegistry($userAuthorizationSchemeRegistry);
-            $pluginMenu = new PluginMenu();
-            $pluginMenu->setInstanceManager($instanceManager);
-            $pluginMenu->setUserAuthorization($userAuthorization);
-            $endpointHelpers = new EndpointHelpers();
-            $endpointHelpers->setPluginMenu($pluginMenu);
-            $containerCacheConfigurationManager = new ContainerCacheConfigurationManager();
-            $containerCacheConfigurationManager->setEndpointHelpers($endpointHelpers);
-            self::$instance = $containerCacheConfigurationManager;
+            self::$instance = self::doGetInstance();
         }
         return self::$instance;
+    }
+
+    /**
+     * We can't use the InstanceManager, since at this stage
+     * it hasn't been initialized yet.
+     * We can create a new instance of these classes
+     * because their instantiation produces no side-effects
+     * (maybe that happens under `initialize`)
+     */
+    private static function doGetInstance(): CacheConfigurationManagerInterface
+    {
+        $instanceManager = new InstanceManager();
+        $userAuthorizationSchemeRegistry = new UserAuthorizationSchemeRegistry();
+        $manageOptionsUserAuthorizationScheme = new ManageOptionsUserAuthorizationScheme();
+        $userAuthorizationSchemeRegistry->addUserAuthorizationScheme($manageOptionsUserAuthorizationScheme);
+        $userAuthorization = new UserAuthorization();
+        $userAuthorization->setUserAuthorizationSchemeRegistry($userAuthorizationSchemeRegistry);
+        $pluginMenu = new PluginMenu();
+        $pluginMenu->setInstanceManager($instanceManager);
+        $pluginMenu->setUserAuthorization($userAuthorization);
+        $endpointHelpers = new EndpointHelpers();
+        $endpointHelpers->setPluginMenu($pluginMenu);
+        $containerCacheConfigurationManager = new ContainerCacheConfigurationManager();
+        $containerCacheConfigurationManager->setEndpointHelpers($endpointHelpers);
+        return $containerCacheConfigurationManager;
     }
 }
