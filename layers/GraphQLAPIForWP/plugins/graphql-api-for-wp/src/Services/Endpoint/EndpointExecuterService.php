@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Endpoint;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
@@ -31,7 +32,7 @@ class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService
          * Call it on "boot" after the WP_Query is parsed, so the single CPT
          * is loaded, and asking for `is_singular(CPT)` works.
          */
-        \add_action(
+        App::addAction(
             HookNames::AFTER_BOOT_APPLICATION,
             $this->executeRequestedEndpoint(...)
         );
