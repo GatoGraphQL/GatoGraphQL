@@ -46,10 +46,12 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
      */
     protected function getPagenumberParam(array $query_args): int
     {
-        return App::applyFilters(
-            'GD_Dataloader_List:query:pagenumber',
-            (int)$query_args[PaginationParams::PAGE_NUMBER]
-        );
+        // @todo convert the hook from string to const, then re-enable
+        // return App::applyFilters(
+        //     'GD_Dataloader_List:query:pagenumber',
+        //     (int)$query_args[PaginationParams::PAGE_NUMBER]
+        // );
+        return (int)$query_args[PaginationParams::PAGE_NUMBER];
     }
 
     /**
@@ -57,10 +59,12 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
      */
     protected function getLimitParam(array $query_args): int
     {
-        return App::applyFilters(
-            'GD_Dataloader_List:query:limit',
-            (int)$query_args[PaginationParams::LIMIT]
-        );
+        // @todo convert the hook from string to const, then re-enable
+        // return App::applyFilters(
+        //     'GD_Dataloader_List:query:limit',
+        //     (int)$query_args[PaginationParams::LIMIT]
+        // );
+        return (int)$query_args[PaginationParams::LIMIT];
     }
 
     /**
