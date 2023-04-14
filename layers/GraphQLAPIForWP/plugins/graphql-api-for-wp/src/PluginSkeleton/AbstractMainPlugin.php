@@ -21,10 +21,10 @@ use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStatePro
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
-
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
+
 use function __;
 use function add_action;
 use function do_action;
