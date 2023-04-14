@@ -33,7 +33,11 @@ class AppThreadHookManagerWrapper implements HookManagerInterface
 
     private function getAppThreadTag(string $tag): string
     {
-        return $this->appThreadName . '_' . $tag;
+        return sprintf(
+            'AppThread:%s-%s',
+            $this->appThreadName,
+            $tag
+        );
     }
     
     public function addFilter(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
