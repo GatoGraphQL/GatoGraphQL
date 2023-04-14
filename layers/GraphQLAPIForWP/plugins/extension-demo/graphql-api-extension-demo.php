@@ -17,7 +17,6 @@ Domain Path: /languages
 use GraphQLAPI\ExtensionDemo\GraphQLAPIExtension;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -37,7 +36,7 @@ if (!defined('ABSPATH')) {
  * Create and set-up the extension
  */
 add_action(
-    PluginAppHooks::INITIALIZE_APP,
+    'plugins_loaded',
     function (): void {
         /**
          * Extension's name and version.
