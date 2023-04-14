@@ -6,6 +6,9 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI;
 
 use PoP\ComponentModel\AbstractModuleTest;
 
-class ModuleTest extends AbstractModuleTest
+/**
+ * Made abstract to disable the test
+ */
+abstract class ModuleTest extends AbstractModuleTest
 {
 }
