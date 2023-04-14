@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
 use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginAppHooks;
 
 class PluginApp implements PluginAppInterface
 {

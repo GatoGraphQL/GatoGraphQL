@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace GraphQLAPI\GraphQLAPI;
 
 class PluginAppHooks
 {
