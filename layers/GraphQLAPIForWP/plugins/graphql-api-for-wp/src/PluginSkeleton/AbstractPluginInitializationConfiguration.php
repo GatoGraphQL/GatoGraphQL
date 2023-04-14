@@ -72,7 +72,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                 $envVariable
             );
 
-            \add_filter(
+            App::addFilter(
                 $hookName,
                 /**
                  * Override the value of an environment variable if it has been definedas a constant
@@ -184,7 +184,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             );
             /** @var callable */
             $callback = $mapping['callback'];
-            \add_filter(
+            App::addFilter(
                 $hookName,
                 fn () => $callback(),
             );
