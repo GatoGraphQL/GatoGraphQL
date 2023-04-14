@@ -17,10 +17,10 @@ use function do_action;
 
 class InternalGraphQLServer extends AbstractAttachedGraphQLServer
 {
-    protected function createAppThread(): AppThreadInterface
-    {
-        return new AppThread();
-    }
+    // protected function createAppThread(): AppThreadInterface
+    // {
+    //     return new AppThread();
+    // }
 
     // protected function getHookManager(): HookManagerInterface
     // {
