@@ -14,6 +14,7 @@ Domain Path: /languages
 */
 
 use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIMainPlugin;
+use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Environment;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Plugin;
 use PoP\Root\Environment as RootEnvironment;
@@ -24,8 +25,8 @@ if (!defined('ABSPATH')) {
 }
 
 add_action(
-    'plugins_loaded',
-    function(): void {
+    PluginAppHooks::INITIALIZE_APP,
+    function (): void {
         // Validate the GraphQL API plugin is installed, or exit
         if (!class_exists(GraphQLAPIMainPlugin::class)) {
             return;
