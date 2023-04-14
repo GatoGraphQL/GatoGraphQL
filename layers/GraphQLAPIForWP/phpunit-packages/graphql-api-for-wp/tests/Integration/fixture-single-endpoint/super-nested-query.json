@@ -59,6 +59,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -149,6 +157,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -188,6 +204,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -225,6 +308,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -284,6 +375,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -354,6 +453,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -407,6 +514,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -444,6 +618,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -503,6 +685,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -581,6 +771,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -620,6 +818,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -657,6 +922,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -716,6 +989,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -800,6 +1081,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -868,6 +1157,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -973,6 +1270,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -1067,6 +1372,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -1106,6 +1419,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -1143,6 +1523,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -1202,6 +1590,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -1299,6 +1695,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -1384,6 +1788,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -1423,6 +1835,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -1460,6 +1939,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -1519,6 +2006,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -1607,6 +2102,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -1697,6 +2200,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -1736,6 +2247,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -1773,6 +2351,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -1832,6 +2418,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -1902,6 +2496,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -1955,6 +2557,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -1992,6 +2661,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -2051,6 +2728,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -2129,6 +2814,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -2168,6 +2861,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -2205,6 +2965,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -2264,6 +3032,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -2352,6 +3128,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -2442,6 +3226,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -2481,6 +3273,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -2518,6 +3377,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -2577,6 +3444,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -2647,6 +3522,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -2700,6 +3583,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -2737,6 +3687,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -2796,6 +3754,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -2874,6 +3840,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -2913,6 +3887,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -2950,6 +3991,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -3009,6 +4058,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -3097,6 +4154,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -3187,6 +4252,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -3226,6 +4299,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -3263,6 +4403,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -3322,6 +4470,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -3392,6 +4548,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -3445,6 +4609,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -3482,6 +4713,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -3541,6 +4780,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -3619,6 +4866,14 @@
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
                                                                     {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
                                                                         "author": {
@@ -3658,6 +4913,73 @@
                                             "title": "Public or Private API mode, for extra security",
                                             "comments": [
                                                 {
+                                                    "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                    "date": "2020-12-12T04:07:36+00:00",
+                                                    "author": {
+                                                        "name": "Blogger Davenport",
+                                                        "posts": [
+                                                            {
+                                                                "title": "Hello world!",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Customize the schema for each client",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>How many endpoints can create?<\/p>\n",
+                                                                        "date": "2020-12-12T04:03:35+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
+                                                                        "date": "2020-12-12T04:02:44+00:00",
+                                                                        "author": {
+                                                                            "name": "Editor Smith",
+                                                                            "username": "editor"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "title": "GraphQL or REST? Why not both?",
+                                                                "comments": []
+                                                            },
+                                                            {
+                                                                "title": "Public or Private API mode, for extra security",
+                                                                "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Absolutely! And directives too!<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:26+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "content": "<p>Can I hide any field?<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:13+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
                                                     "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                     "date": "2020-12-12T04:07:26+00:00",
                                                     "author": {
@@ -3695,6 +5017,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
@@ -3754,6 +5084,14 @@
                                                             {
                                                                 "title": "Public or Private API mode, for extra security",
                                                                 "comments": [
+                                                                    {
+                                                                        "content": "<p>Btw, I really like this stuff<\/p>\n",
+                                                                        "date": "2020-12-12T04:07:36+00:00",
+                                                                        "author": {
+                                                                            "name": "Blogger Davenport",
+                                                                            "username": "blogger"
+                                                                        }
+                                                                    },
                                                                     {
                                                                         "content": "<p>Absolutely! And directives too!<\/p>\n",
                                                                         "date": "2020-12-12T04:07:26+00:00",
