@@ -228,10 +228,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getCommentContent(object $comment): string
     {
         /** @var WP_Comment $comment */
-        return App::applyFilters(
-            'comment_text',
-            $comment->comment_content
-        );
+        return apply_filters('comment_text', $comment->comment_content);
     }
     public function getCommentRawContent(object $comment): string
     {

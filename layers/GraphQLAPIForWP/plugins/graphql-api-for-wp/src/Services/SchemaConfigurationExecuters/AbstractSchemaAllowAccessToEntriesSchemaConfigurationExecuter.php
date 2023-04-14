@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 
@@ -21,7 +22,7 @@ abstract class AbstractSchemaAllowAccessToEntriesSchemaConfigurationExecuter ext
          * Execute last so it overrides the default settings
          */
         $hookName = $this->getEntriesHookName();
-        \add_filter(
+        App::addFilter(
             $hookName,
             fn () => $entries,
             PHP_INT_MAX
@@ -32,7 +33,7 @@ abstract class AbstractSchemaAllowAccessToEntriesSchemaConfigurationExecuter ext
          * Execute last so it overrides the default settings
          */
         $hookName = $this->getBehaviorHookName();
-        \add_filter(
+        App::addFilter(
             $hookName,
             fn () => $behavior,
             PHP_INT_MAX

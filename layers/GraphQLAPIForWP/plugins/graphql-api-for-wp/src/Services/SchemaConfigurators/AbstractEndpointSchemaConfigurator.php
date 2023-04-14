@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
@@ -37,10 +39,21 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     }
 
     /**
-     * Only enable the service, if the corresponding module is also enabled
+     * Only enable the service if:
+     *
+     * - The corresponding module is enabled, and
+     * - We are executing the standard GraphQL server
+     *   (i.e. not the internal one, as the SchemaConfiguration
+     *   does not apply there)
      */
     public function isServiceEnabled(): bool
     {
+        /**
+         * Only initialize once, for the main AppThread
+         */
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+            return false;
+        }
         return $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);
     }
 

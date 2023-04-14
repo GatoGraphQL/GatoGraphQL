@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -70,7 +72,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                 $envVariable
             );
 
-            \add_filter(
+            App::addFilter(
                 $hookName,
                 /**
                  * Override the value of an environment variable if it has been definedas a constant
@@ -137,7 +139,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             /** @var callable|null */
             $callback = $mapping['callback'] ?? null;
-            \add_filter(
+            App::addFilter(
                 $hookName,
                 function () use ($userSettingsManager, $optionModule, $option, $callback) {
                     $value = $userSettingsManager->getSetting($optionModule, $option);
@@ -182,7 +184,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             );
             /** @var callable */
             $callback = $mapping['callback'];
-            \add_filter(
+            App::addFilter(
                 $hookName,
                 fn () => $callback(),
             );
@@ -220,6 +222,12 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         if ($endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint()) {
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
             $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
+        } elseif (App::getAppThread()->getName() === PluginAppGraphQLServerNames::INTERNAL) {
+            /**
+             * The internal server receives the same configuration
+             * as the default admin endpoint
+             */
+            $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration('');
         }
 
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
@@ -337,9 +345,10 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          */
         $isAdmin = is_admin();
         $isRequestingAdminPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
+        $isInternalGraphQLServer = App::getAppThread()->getName() === PluginAppGraphQLServerNames::INTERNAL;
         if (
-            $isAdmin
-            && !$isRequestingAdminPersistedQueryGraphQLEndpoint
+            ($isAdmin && !$isRequestingAdminPersistedQueryGraphQLEndpoint)
+            || $isInternalGraphQLServer
         ) {
             /**
              * Private endpoints: Check Settings to decide if to

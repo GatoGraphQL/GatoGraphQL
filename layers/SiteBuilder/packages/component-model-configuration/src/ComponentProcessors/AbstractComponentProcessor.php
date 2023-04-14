@@ -231,10 +231,12 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     protected function maybeOverrideCheckpoints(array $checkpoints): array
     {
         // Allow URE to add the extra checkpoint condition of the user having the Profile role
-        return App::applyFilters(
-            'ComponentProcessor:checkpoints',
-            $checkpoints
-        );
+        // @todo convert the hook from string to const, then re-enable
+        // return App::applyFilters(
+        //     'ComponentProcessor:checkpoints',
+        //     $checkpoints
+        // );
+        return $checkpoints;
     }
 
     /**

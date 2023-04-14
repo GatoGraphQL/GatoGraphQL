@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaTagsBlock;
-use PoPCMSSchema\Tags\Module as TagsModule;
 use PoPCMSSchema\Tags\Environment as TagsEnvironment;
+use PoPCMSSchema\Tags\Module as TagsModule;
 use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class SchemaTagsSchemaConfigurationExecuter extends AbstractCustomizableConfigurationSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -45,7 +46,7 @@ class SchemaTagsSchemaConfigurationExecuter extends AbstractCustomizableConfigur
             TagsModule::class,
             TagsEnvironment::QUERYABLE_TAG_TAXONOMIES
         );
-        \add_filter(
+        App::addFilter(
             $hookName,
             fn () => $includedTagTaxonomies,
             PHP_INT_MAX

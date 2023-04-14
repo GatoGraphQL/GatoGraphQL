@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -33,6 +35,13 @@ abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
      */
     public function isServiceEnabled(): bool
     {
+        /**
+         * Only initialize once, for the main AppThread
+         */
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+            return false;
+        }
+
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null && !$this->getModuleRegistry()->isModuleEnabled($enablingModule)) {
             return false;

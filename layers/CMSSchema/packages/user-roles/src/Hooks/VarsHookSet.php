@@ -43,11 +43,15 @@ class VarsHookSet extends AbstractHookSet
             case RequestNature::USER:
                 $user_id = App::getState(['routing', 'queried-object-id']);
                 // Author: it may depend on its role
-                $component_types = App::applyFilters(
-                    '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:userrole',
-                    array(
-                        ModelInstanceComponentTypes::USER_ROLE,
-                    )
+                // @todo convert the hook from string to const, then re-enable
+                // $component_types = App::applyFilters(
+                //     '\PoP\ComponentModel\ModelInstanceProcessor_Utils:components_from_vars:type:userrole',
+                //     array(
+                //         ModelInstanceComponentTypes::USER_ROLE,
+                //     )
+                // );
+                $component_types = array(
+                    ModelInstanceComponentTypes::USER_ROLE,
                 );
                 if (in_array(ModelInstanceComponentTypes::USER_ROLE, $component_types)) {
                     /** @var string */

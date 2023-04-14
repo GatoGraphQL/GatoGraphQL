@@ -22,6 +22,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use PoPCMSSchema\CommentMutations\Constants\HookNames;
 
 /**
  * Add a comment to a custom post. The user may be logged-in or not
@@ -230,7 +231,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     protected function additionals(string|int $comment_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('gd_addcomment', $comment_id, $fieldDataAccessor);
+        App::doAction(HookNames::ADD_COMMENT, $comment_id, $fieldDataAccessor);
     }
 
     /**

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 
 /**
  * Admin menu class
@@ -20,6 +22,14 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
     protected function getMenuName(): string
     {
         return $this->getMenu()->getName();
+    }
+
+    /**
+     * Only initialize once, for the main AppThread
+     */
+    public function isServiceEnabled(): bool
+    {
+        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD;
     }
 
     /**

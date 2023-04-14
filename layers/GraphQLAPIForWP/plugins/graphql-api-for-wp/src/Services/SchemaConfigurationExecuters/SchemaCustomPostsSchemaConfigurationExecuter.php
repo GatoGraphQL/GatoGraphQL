@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCustomPostsBlock;
-use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class SchemaCustomPostsSchemaConfigurationExecuter extends AbstractCustomizableConfigurationSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -45,7 +46,7 @@ class SchemaCustomPostsSchemaConfigurationExecuter extends AbstractCustomizableC
             CustomPostsModule::class,
             CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES
         );
-        \add_filter(
+        App::addFilter(
             $hookName,
             fn () => $includedCustomPostTypes,
             PHP_INT_MAX

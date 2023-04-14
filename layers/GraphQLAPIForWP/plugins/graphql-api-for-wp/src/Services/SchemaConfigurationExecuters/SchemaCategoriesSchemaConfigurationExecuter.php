@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCategoriesBlock;
-use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoPCMSSchema\Categories\Environment as CategoriesEnvironment;
+use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class SchemaCategoriesSchemaConfigurationExecuter extends AbstractCustomizableConfigurationSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -45,7 +46,7 @@ class SchemaCategoriesSchemaConfigurationExecuter extends AbstractCustomizableCo
             CategoriesModule::class,
             CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES
         );
-        \add_filter(
+        App::addFilter(
             $hookName,
             fn () => $includedCategoryTaxonomies,
             PHP_INT_MAX

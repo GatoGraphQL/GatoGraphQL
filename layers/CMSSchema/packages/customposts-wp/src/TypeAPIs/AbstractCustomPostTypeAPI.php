@@ -376,7 +376,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         /** @var WP_Post $customPost */
-        return App::applyFilters('the_title', $customPost->post_title, $customPostID);
+        return \apply_filters('the_title', $customPost->post_title, $customPostID);
     }
 
     public function getContent(string|int|object $customPostObjectOrID): ?string
@@ -386,7 +386,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPost === null) {
             return null;
         }
-        return App::applyFilters('the_content', $customPost->post_content);
+        return \apply_filters('the_content', $customPost->post_content);
     }
 
     public function getRawContent(string|int|object $customPostObjectOrID): ?string
@@ -407,9 +407,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
         // Do not allow HTML tags or shortcodes
         $ret = strip_shortcodes($customPost->post_content);
-        $ret = App::applyFilters('the_content', $ret);
-        App::addFilter('the_content', $wp_embed->autoembed(...), 8);
-        App::addFilter('the_content', wpautop(...));
+        $ret = \apply_filters('the_content', $ret);
+        \add_filter('the_content', $wp_embed->autoembed(...), 8);
+        \add_filter('the_content', wpautop(...));
 
         return strip_tags($ret);
     }

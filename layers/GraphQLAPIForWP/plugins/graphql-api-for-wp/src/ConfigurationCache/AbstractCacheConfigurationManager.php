@@ -54,16 +54,11 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getNamespace(): string
     {
-        // (Needed for development) Don't share cache among plugin versions
-        $timestamp = '_v' . $this->getMainPluginAndExtensionsTimestamp();
-        // The timestamp from when last saving settings/modules to the DB
-        $timestamp .= '_' . $this->getTimestamp();
-
-        $endpointHelpers = $this->getEndpointHelpers();
         /**
          * admin/non-admin screens have different services enabled.
          */
         if (is_admin()/*$endpointHelpers->isRequestingAdminGraphQLEndpoint()*/) {
+            $endpointHelpers = $this->getEndpointHelpers();
             /**
              * Different admin endpoints might also have different services,
              * hence cache a different container per endpointGroup.
@@ -85,8 +80,21 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              */
             $suffix = 'public';
         }
-        $timestamp .= '_' . $suffix;
-        return $timestamp;
+        return $this->makeNamespace($this->getNamespaceTimestampPrefix(), $suffix);
+    }
+
+    protected function makeNamespace(string $prefix, string $suffix): string
+    {
+        return $prefix . '_' . $suffix;
+    }
+
+    protected function getNamespaceTimestampPrefix(): string
+    {
+        // (Needed for development) Don't share cache among plugin versions
+        $timestampPrefix = '_v' . $this->getMainPluginAndExtensionsTimestamp();
+        // The timestamp from when last saving settings/modules to the DB
+        $timestampPrefix .= '_' . $this->getTimestamp();
+        return $timestampPrefix;
     }
 
     /**

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
@@ -45,6 +47,14 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     public function getHookName(): ?string
     {
         return $this->hookName;
+    }
+
+    /**
+     * Only initialize once, for the main AppThread
+     */
+    public function isServiceEnabled(): bool
+    {
+        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD;
     }
 
     /**

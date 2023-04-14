@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 
@@ -47,5 +49,16 @@ trait CustomEndpointClientTrait
         //     $endpointURL = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpointURL);
         // }
         return $endpointURL;
+    }
+
+    /**
+     * Only initialize once, for the main AppThread
+     */
+    public function isServiceEnabled(): bool
+    {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+            return false;
+        }
+        return parent::isServiceEnabled();
     }
 }

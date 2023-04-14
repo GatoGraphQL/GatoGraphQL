@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Taxonomies;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface
@@ -13,6 +15,13 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
      */
     final public function initialize(): void
     {
+        /**
+         * Only initialize once, for the main AppThread
+         */
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+            return;
+        }
+
         \add_action(
             'init',
             $this->initTaxonomy(...)

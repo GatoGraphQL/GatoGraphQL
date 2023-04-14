@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\Root\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
@@ -84,10 +83,12 @@ abstract class AbstractCustomPostObjectTypeDataLoader extends AbstractObjectType
      */
     protected function getLimitParam(array $query_args): int
     {
-        return App::applyFilters(
-            'CustomPostObjectTypeDataLoader:query:limit',
-            parent::getLimitParam($query_args)
-        );
+        // @todo convert the hook from string to const, then re-enable
+        // return App::applyFilters(
+        //     'CustomPostObjectTypeDataLoader:query:limit',
+        //     parent::getLimitParam($query_args)
+        // );
+        return parent::getLimitParam($query_args);
     }
 
     protected function getQueryHookName(): string

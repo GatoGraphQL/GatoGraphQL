@@ -7,6 +7,7 @@ namespace PoPCMSSchema\UserState\Hooks;
 use PoP\ComponentModel\Response\DatabaseEntryManager;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use PoPCMSSchema\UserState\Constants\HookNames;
 use PoPCMSSchema\UserState\FieldResolvers\ObjectType\ObjectTypeFieldResolver;
 
 class DBEntriesHookSet extends AbstractHookSet
@@ -40,7 +41,7 @@ class DBEntriesHookSet extends AbstractHookSet
     public function moveEntriesUnderDBName(array $dbNameToFieldNames): array
     {
         $dbNameToFieldNames['userstate'] = App::applyFilters(
-            'PoPCMSSchema\UserState\DataloaderHooks:metaFields',
+            HookNames::MOVE_ENTRIES_UNDER_DB_NAME_META_FIELDS,
             $this->getObjectTypeFieldResolver()->getFieldNamesToResolve()
         );
         return $dbNameToFieldNames;

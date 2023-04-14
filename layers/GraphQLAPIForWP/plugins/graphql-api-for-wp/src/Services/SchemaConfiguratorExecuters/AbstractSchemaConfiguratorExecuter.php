@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Module\ApplicationEvents;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyInstantiatedService
 {
@@ -27,6 +29,14 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
     public function getInstantiationEvent(): string
     {
         return ApplicationEvents::PRE_BOOT;
+    }
+
+    /**
+     * Only initialize once, for the main AppThread
+     */
+    public function isServiceEnabled(): bool
+    {
+        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD;
     }
 
     /**

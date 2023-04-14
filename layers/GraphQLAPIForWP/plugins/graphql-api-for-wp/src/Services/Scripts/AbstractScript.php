@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
 use Error;
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 
 /**
  * Base class for a Gutenberg script.
@@ -61,6 +63,12 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     public function isServiceEnabled(): bool
     {
+        /**
+         * Only initialize once, for the main AppThread
+         */
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+            return false;
+        }
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
             return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
