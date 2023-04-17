@@ -38,11 +38,16 @@ class RequestHelpers
     protected static function getParamValuesFromRequest(): array
     {
         $requestParamValues = [];
+        $request = App::getRequest();
         foreach (static::getTransferrableToEndpointRequestParams() as $requestParam) {
-            if (!App::hasState($requestParam)) {
+            if (!$request->query->has($requestParam)) {
                 continue;
             }
-            $requestParamValues[$requestParam] = App::getState($requestParam);
+            /**
+             * Use `all` instead of `get` because non-scalar values
+             * (eg: arrays) are not supported by `get`
+             */
+            $requestParamValues[$requestParam] = $request->query->all()[$requestParam];
         }
         return $requestParamValues;
     }
