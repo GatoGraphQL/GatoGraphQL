@@ -27,7 +27,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     /**
      * Enable fields "_appState", "_appStateKeys" and "_appStateValue"
-     * 
+     *
      * Enable only on DEV as to test the application,
      * and only when passing ?actions[]=enable-app-state-fields
      */

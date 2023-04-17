@@ -1,0 +1,70 @@
+{
+  "data": {
+    "internalGraphQLServerResponse": {
+      "data": {
+        "__schema": {
+          "customPostEnumType": {
+            "name": "CustomPostEnumString",
+            "extensions": {
+              "possibleValues": [
+                "attachment",
+                "custom_css",
+                "customize_changeset",
+                "dummy-cpt",
+                "graphql-endpoint",
+                "graphql-query",
+                "graphql-schemaconfig",
+                "nav_menu_item",
+                "oembed_cache",
+                "page",
+                "post",
+                "revision",
+                "user_request",
+                "wp_block",
+                "wp_global_styles",
+                "wp_navigation",
+                "wp_template",
+                "wp_template_part"
+              ]
+            }
+          },
+          "tagTaxonomyEnumType": {
+            "name": "TagTaxonomyEnumString",
+            "extensions": {
+              "possibleValues": [
+                "dummy-tag",
+                "link_category",
+                "nav_menu",
+                "post_format",
+                "post_tag",
+                "wp_template_part_area",
+                "wp_theme"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "__schema": {
+      "customPostEnumType": {
+        "name": "CustomPostEnumString",
+        "extensions": {
+          "possibleValues": [
+            "dummy-cpt",
+            "page",
+            "post"
+          ]
+        }
+      },
+      "tagTaxonomyEnumType": {
+        "name": "TagTaxonomyEnumString",
+        "extensions": {
+          "possibleValues": [
+            "dummy-tag",
+            "post_tag"
+          ]
+        }
+      }
+    }
+  }
+}

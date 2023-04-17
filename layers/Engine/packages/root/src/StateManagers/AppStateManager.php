@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\Root\StateManagers;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\App;
+use PoP\Root\Constants\HookNames;
 use PoP\Root\Exception\AppStateNotExistsException;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
@@ -37,9 +39,17 @@ class AppStateManager implements AppStateManagerInterface
      */
     public function initializeAppState(array $initialAppState): void
     {
+        App::doAction(HookNames::BEFORE_INITIALIZING_APP_STATE);
+
         $this->state = [];
         $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
         $appStateProviders = $appStateProviderRegistry->getEnabledAppStateProviders();
+
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_BEFORE_INITIALIZED,
+            $this->state
+        );
 
         // First pass: initialize
         foreach ($appStateProviders as $appStateProvider) {
@@ -56,20 +66,46 @@ class AppStateManager implements AppStateManagerInterface
             $initialAppState
         );
 
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_INITIALIZED,
+            $this->state
+        );
+
         // Second pass: consolidate
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->consolidate($this->state);
         }
+
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_CONSOLIDATED,
+            $this->state
+        );
 
         // Third pass: augment
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->augment($this->state);
         }
 
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_AUGMENTED,
+            $this->state
+        );
+
         // Final pass: compute
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->compute($this->state);
         }
+
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_COMPUTED,
+            $this->state
+        );
+
+        App::doAction(HookNames::AFTER_INITIALIZING_APP_STATE);
     }
 
     /**
@@ -85,6 +121,12 @@ class AppStateManager implements AppStateManagerInterface
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->execute($this->state);
         }
+
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_EXECUTED,
+            $this->state
+        );
     }
 
     /**

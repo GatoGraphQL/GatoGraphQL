@@ -41,7 +41,7 @@ class GeneralUtils
     /**
      * Add paramters "key" => "value" to the URL
      *
-     * @param array<string,string> $keyValues
+     * @param array<string,mixed> $keyValues
      * @see https://stackoverflow.com/a/5809881
      */
     public static function addQueryArgs(array $keyValues, string $urlOrURLPath): string
