@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\Root\StateManagers;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\App;
+use PoP\Root\Constants\HookNames;
 use PoP\Root\Exception\AppStateNotExistsException;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
@@ -56,20 +58,44 @@ class AppStateManager implements AppStateManagerInterface
             $initialAppState
         );
 
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_INITIALIZED,
+            $this->state
+        );
+
         // Second pass: consolidate
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->consolidate($this->state);
         }
+
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_CONSOLIDATED,
+            $this->state
+        );
 
         // Third pass: augment
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->augment($this->state);
         }
 
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_AUGMENTED,
+            $this->state
+        );
+
         // Final pass: compute
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->compute($this->state);
         }
+
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_COMPUTED,
+            $this->state
+        );
     }
 
     /**
