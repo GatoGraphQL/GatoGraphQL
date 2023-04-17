@@ -33,7 +33,7 @@ class RequestHelpers
     /**
      * Retrieve all the needed params from the Request.
      *
-     * return array<string,mixed>
+     * @return array<string,mixed>
      */
     protected static function getParamValuesFromRequest(): array
     {

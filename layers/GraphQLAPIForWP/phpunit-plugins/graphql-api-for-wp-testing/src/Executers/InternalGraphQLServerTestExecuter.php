@@ -72,6 +72,9 @@ class InternalGraphQLServerTestExecuter
     /**
      * Set-up the GraphQL queries to execute to test
      * the `InternalGraphQLServer`
+     * 
+     * @param array<string,mixed> $state
+     * @return array<string,mixed>
      */
     protected function setupInternalGraphQLServerTesting(array $state): array
     {
