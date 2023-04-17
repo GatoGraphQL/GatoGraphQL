@@ -26,6 +26,11 @@ class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends Abs
 {
     protected function getFixtureFolder(): string
     {
+        return __DIR__ . '/fixture-introspection-and-config';
+    }
+
+    protected function getResponseFixtureFolder(): string
+    {
         return __DIR__ . '/fixture-internal-graphql-server';
     }
 
