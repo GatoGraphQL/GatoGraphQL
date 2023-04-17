@@ -125,6 +125,16 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeExecuteQueryAgainstInternalGraphQLServer(): void
     {
+        if (!App::getState('executing-graphql') || App::getState('query') === null) {
+            return;
+        }
+
+        /** @var string[] */
+        $actions = App::getState('actions');
+        if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
+            return;
+        }
+
         // Do not create an infinite loop
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return;
