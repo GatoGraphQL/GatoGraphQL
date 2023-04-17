@@ -97,8 +97,8 @@ trait ClientTrait
             );
         }
 
-        // Maybe enable XDebug
-        $endpoint = RequestHelpers::maybeAddParamToDebugRequest($endpoint);
+        // Add mandatory params from the request, and maybe enable XDebug
+        $endpoint = RequestHelpers::addRequestParamsToEndpoint($endpoint);
 
         /**
          * Must remove the protocol, or we might get an error with status 406
