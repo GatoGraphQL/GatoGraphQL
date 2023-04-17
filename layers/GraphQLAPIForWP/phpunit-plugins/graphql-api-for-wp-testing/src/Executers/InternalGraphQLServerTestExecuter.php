@@ -87,26 +87,29 @@ class InternalGraphQLServerTestExecuter
             return $state;
         }
 
+        $firstBracketPos = strpos($query, '{');
+        if ($firstBracketPos === false) {
+            return $state;
+        }
+
         /**
          * Modify the query with a simple hack:
          * Append field "_appStateValue" at the beginning of the query
          *
          * @var string|null
          */
-        $firstBracketPos = strpos($query, '{');
-        if ($firstBracketPos === false) {
-            return $state;
-        }
+        $appStateValueField = sprintf(
+            ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
+            $appStateKey
+        );
         
         $afterFirstBracketPos = $firstBracketPos + strlen('{');
         $state['query'] = substr($query, 0, $afterFirstBracketPos)
             . PHP_EOL
-            . sprintf(
-                ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
-                $appStateKey
-            )
+            . $appStateValueField
             . PHP_EOL
             . substr($query, $afterFirstBracketPos);
+
         return $state;
     }
 
@@ -117,11 +120,6 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeExecuteQueryAgainstInternalGraphQLServer(): void
     {
-        // $appStateKey = 'internal-graphql-server-response';
-        // if (!App::hasState($appStateKey)) {
-        //     return;
-        // }
-
         // Do not create an infinite loop
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return;
