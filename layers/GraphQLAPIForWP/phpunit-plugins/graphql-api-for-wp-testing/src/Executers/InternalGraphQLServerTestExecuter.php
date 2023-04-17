@@ -75,8 +75,7 @@ class InternalGraphQLServerTestExecuter
      */
     protected function setupInternalGraphQLServerTesting(array $state): array
     {
-        $appStateKey = 'internal-graphql-server-response';
-        $state[$appStateKey] = null;
+        $state[$this->getAppStateKey()] = null;
 
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return $state;
@@ -106,12 +105,16 @@ class InternalGraphQLServerTestExecuter
         return $state;
     }
 
+    protected function getAppStateKey(): string
+    {
+        return 'internal-graphql-server-response';
+    }
+
     protected function getAppStateValueFieldToAppend(): string
     {
-        $appStateKey = 'internal-graphql-server-response';
         return sprintf(
             ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
-            $appStateKey
+            $this->getAppStateKey()
         );
     }
 
@@ -163,8 +166,7 @@ class InternalGraphQLServerTestExecuter
         $content = $response->getContent();
         $jsonContent = json_decode($content, false);
 
-        $appStateKey = 'internal-graphql-server-response';
         $appStateManager = App::getAppStateManager();
-        $appStateManager->override($appStateKey, $jsonContent);
+        $appStateManager->override($this->getAppStateKey(), $jsonContent);
     }
 }
