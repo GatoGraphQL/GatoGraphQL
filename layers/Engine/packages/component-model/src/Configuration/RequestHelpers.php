@@ -43,6 +43,7 @@ class RequestHelpers
             if (!$request->query->has($requestParam)) {
                 continue;
             }
+
             /**
              * Use `all` instead of `get` because non-scalar values
              * (eg: arrays) are not supported by `get`
