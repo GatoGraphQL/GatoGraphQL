@@ -111,6 +111,12 @@ class AppStateManager implements AppStateManagerInterface
         foreach ($appStateProviders as $appStateProvider) {
             $appStateProvider->execute($this->state);
         }
+
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_EXECUTED,
+            $this->state
+        );
     }
 
     /**
