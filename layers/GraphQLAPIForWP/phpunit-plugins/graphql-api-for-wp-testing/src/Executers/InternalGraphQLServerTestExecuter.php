@@ -95,22 +95,24 @@ class InternalGraphQLServerTestExecuter
         /**
          * Modify the query with a simple hack:
          * Append field "_appStateValue" at the beginning of the query
-         *
-         * @var string|null
-         */
-        $appStateValueField = sprintf(
-            ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
-            $appStateKey
-        );
-        
+         */       
         $afterFirstBracketPos = $firstBracketPos + strlen('{');
         $state['query'] = substr($query, 0, $afterFirstBracketPos)
             . PHP_EOL
-            . $appStateValueField
+            . $this->getAppStateValueFieldToAppend()
             . PHP_EOL
             . substr($query, $afterFirstBracketPos);
 
         return $state;
+    }
+
+    protected function getAppStateValueFieldToAppend(): string
+    {
+        $appStateKey = 'internal-graphql-server-response';
+        return sprintf(
+            ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
+            $appStateKey
+        );
     }
 
     /**
@@ -141,7 +143,15 @@ class InternalGraphQLServerTestExecuter
         $variables = App::getState('variables');
         /** @var string|null */
         $operationName = App::getState('operation-name');
-        
+
+        // Comment out the added field
+        $appStateValueField = $this->getAppStateValueFieldToAppend();
+        $query = str_replace(
+            $appStateValueField,
+            '#' . $appStateValueField,
+            $query
+        );
+                    
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         $response = $graphQLServer->execute(
             $query,
