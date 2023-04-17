@@ -50,6 +50,12 @@ class ObjectSerializationManager implements ObjectSerializationManagerInterface
                 )
             );
         }
-        return $object->__serialize();
+
+        $serialized = $object->__serialize();
+        if (is_array($serialized)) {
+            return (object) $serialized;
+        }
+
+        return $serialized;
     }
 }
