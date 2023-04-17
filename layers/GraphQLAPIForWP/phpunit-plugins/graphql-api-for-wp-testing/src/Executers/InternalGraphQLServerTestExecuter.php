@@ -78,21 +78,24 @@ class InternalGraphQLServerTestExecuter
 
         /**
          * Modify the query with a simple hack:
-         * Append field "_appStateValue" at the end of the query
+         * Append field "_appStateValue" at the beginning of the query
          *
          * @var string
          */
         $query = $state['query'];
-        $closingBracketPost = strrpos($query, '}');
-        $state['query'] = substr($query, 0, $closingBracketPost)
+        $firstBracketPos = strpos($query, '{');
+        if ($firstBracketPos === false) {
+            return $state;
+        }
+        $afterFirstBracketPos = $firstBracketPos + strlen('{');
+        $state['query'] = substr($query, 0, $afterFirstBracketPos)
             . PHP_EOL
             . sprintf(
                 ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
                 $appStateKey
             )
             . PHP_EOL
-            . substr($query, $closingBracketPost);
-
+            . substr($query, $afterFirstBracketPos);
         return $state;
     }
 
