@@ -79,15 +79,14 @@ class InternalGraphQLServerTestExecuter
          */
         $query = $state['query'];
         $closingBracketPost = strrpos($query, '}');
-        $state['query'] = sprintf(
-            '%s %s %s',
-            substr($query, 0, $closingBracketPost),
-            sprintf(
-                'internalGraphQLServerResponse: _appStateValue(name: "%s")',
+        $state['query'] = substr($query, 0, $closingBracketPost)
+            . PHP_EOL
+            . sprintf(
+                ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
                 $appStateKey
-            ),
-            substr($query, $closingBracketPost)
-        );
+            )
+            . PHP_EOL
+            . substr($query, $closingBracketPost);
 
         return $state;
     }
