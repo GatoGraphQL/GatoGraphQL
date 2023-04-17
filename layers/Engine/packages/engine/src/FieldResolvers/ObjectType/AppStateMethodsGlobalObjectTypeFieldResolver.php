@@ -50,9 +50,9 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     public function getFieldNamesToResolve(): array
     {
         return [
-            '_appStateValue',
             '_appState',
             '_appStateKeys',
+            '_appStateValue',
         ];
     }
 
@@ -66,9 +66,9 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            '_appStateValue' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             '_appState' => $this->getJSONObjectScalarTypeResolver(),
             '_appStateKeys' => $this->getStringScalarTypeResolver(),
+            '_appStateValue' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -85,9 +85,9 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '_appStateValue' => $this->__('Retrieve the value of a certain property from the application state', 'component-model'),
             '_appState' => $this->__('Retrieve the application state', 'component-model'),
             '_appStateKeys' => $this->__('Retrieve the keys in the application state', 'component-model'),
+            '_appStateValue' => $this->__('Retrieve the value of a certain property from the application state', 'component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -158,12 +158,12 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
-            case '_appStateValue':
-                return App::getState($fieldDataAccessor->getValue('name'));
             case '_appState':
                 return (object) App::getAppStateManager()->all();
             case '_appStateKeys':
                 return array_keys(App::getAppStateManager()->all());
+            case '_appStateValue':
+                return App::getState($fieldDataAccessor->getValue('name'));
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
