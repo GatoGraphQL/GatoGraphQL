@@ -49,11 +49,36 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
      */
     public function getFieldNamesToResolve(): array
     {
-        return [
-            '_appState',
-            '_appStateKeys',
-            '_appStateValue',
-        ];
+        return array_merge(
+            $this->enableAppStateField()
+                ? [
+                    '_appState',
+                ]
+                : [],
+            [
+                '_appStateKeys',
+                '_appStateValue',
+            ]
+        );
+    }
+
+    /**
+     * Currently disable field '_appState' because it contains
+     * objects which do not implement the `__serialize` method,
+     * and as such an exception is thrown whenever querying this
+     * field.
+     *
+     * Solving this problem may take some time and engineering,
+     * because there are objects stored in the AppState which are
+     * not under the control of this project (eg: `WP_User`).
+     *
+     * (There are also objects from this project which do not
+     * currently implement `__serialize`, such as
+     * `ExecutableDocument`, `Document` and `LeafField`.)
+     */
+    private function enableAppStateField(): bool
+    {
+        return false;
     }
 
     public function isServiceEnabled(): bool
