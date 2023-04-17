@@ -121,8 +121,8 @@ class EndpointHelpers
             }
         }
 
-        // Maybe enable XDebug
-        $endpoint = RequestHelpers::maybeAddParamToDebugRequest($endpoint);
+        // Add mandatory params from the request, and maybe enable XDebug
+        $endpoint = RequestHelpers::addRequestParamsToEndpoint($endpoint);
 
         // If namespaced, add /?use_namespace=1 to the endpoint
         // /** @var ComponentModelModuleConfiguration */
