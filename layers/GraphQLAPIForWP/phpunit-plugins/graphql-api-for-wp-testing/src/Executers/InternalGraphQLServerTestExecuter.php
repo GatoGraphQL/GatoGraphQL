@@ -80,6 +80,7 @@ class InternalGraphQLServerTestExecuter
             $closingBracketPost
         );
         $state['query'] = $query;
+
         return $state;
     }
 
