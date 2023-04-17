@@ -51,7 +51,8 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     {
         return [
             '_var',
-            '_context',
+            '_appState',
+            '_appStateKeys',
         ];
     }
 
@@ -66,7 +67,8 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     {
         return match ($fieldName) {
             '_var' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
-            '_context' => $this->getJSONObjectScalarTypeResolver(),
+            '_appState' => $this->getJSONObjectScalarTypeResolver(),
+            '_appStateKeys' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -74,7 +76,8 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            '_context' => SchemaTypeModifiers::NON_NULLABLE,
+            '_appState' => SchemaTypeModifiers::NON_NULLABLE,
+            '_appStateKeys' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -83,7 +86,8 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     {
         return match ($fieldName) {
             '_var' => $this->__('Retrieve the value of a certain property from the application state', 'component-model'),
-            '_context' => $this->__('Retrieve the application state', 'component-model'),
+            '_appState' => $this->__('Retrieve the application state', 'component-model'),
+            '_appStateKeys' => $this->__('Retrieve the keys in the application state', 'component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -156,8 +160,10 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
         switch ($fieldDataAccessor->getFieldName()) {
             case '_var':
                 return App::getState($fieldDataAccessor->getValue('name'));
-            case '_context':
-                return App::getAppStateManager()->all();
+            case '_appState':
+                return (object) App::getAppStateManager()->all();
+            case '_appStateKeys':
+                return array_keys(App::getAppStateManager()->all());
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
