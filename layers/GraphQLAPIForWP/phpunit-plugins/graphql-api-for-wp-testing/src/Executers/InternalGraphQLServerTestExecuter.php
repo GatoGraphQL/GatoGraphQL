@@ -76,17 +76,22 @@ class InternalGraphQLServerTestExecuter
         $appStateKey = 'internal-graphql-server-response';
         $state[$appStateKey] = null;
 
+        $query = $state['query'];
+        if ($query === null) {
+            return $state;
+        }
+
         /**
          * Modify the query with a simple hack:
          * Append field "_appStateValue" at the beginning of the query
          *
-         * @var string
+         * @var string|null
          */
-        $query = $state['query'];
         $firstBracketPos = strpos($query, '{');
         if ($firstBracketPos === false) {
             return $state;
         }
+        
         $afterFirstBracketPos = $firstBracketPos + strlen('{');
         $state['query'] = substr($query, 0, $afterFirstBracketPos)
             . PHP_EOL
