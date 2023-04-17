@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers;
 
 use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
+use GraphQLAPI\GraphQLAPI\PluginAppHooks;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginLifecyclePriorities;
 use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
@@ -18,28 +21,27 @@ class InternalGraphQLServerTestExecuter
      */
     public function __construct()
     {
+        \add_action(
+            PluginAppHooks::INITIALIZE_APP,
+            $this->addHooks(...),
+            PluginLifecyclePriorities::INITIALIZE_APP
+        );
+    }
+
+    public function addHooks(): void
+    {
         /**
-         * Please notice: we can't use App::addFilter as it has
-         * not been initialized yet.
-         *
-         * As a good consecuence, the filter is only added
-         * on the "standard" AppThread, and not in all of them
-         * (i.e. not on "internal"). That's why key
-         * "internal-graphql-server-response" will not exist
-         * in the AppState when resolving the query against
-         * the InternalGraphQLServer.
-         *
          * Inject after the "consolidated" state, because
          * that's where the GraphQL query is finally retrieved.
          *
          * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
          */
-        \add_filter(
+        App::addFilter(
             HookNames::APP_STATE_CONSOLIDATED,
             $this->maybeSetupInternalGraphQLServerTesting(...)
         );
 
-        \add_action(
+        App::addAction(
             HookNames::APPLICATION_READY,
             $this->maybeExecuteQueryAgainstInternalGraphQLServer(...)
         );
@@ -76,6 +78,10 @@ class InternalGraphQLServerTestExecuter
         $appStateKey = 'internal-graphql-server-response';
         $state[$appStateKey] = null;
 
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+            return $state;
+        }
+
         $query = $state['query'];
         if ($query === null) {
             return $state;
@@ -111,8 +117,13 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeExecuteQueryAgainstInternalGraphQLServer(): void
     {
-        $appStateKey = 'internal-graphql-server-response';
-        if (!App::hasState($appStateKey)) {
+        // $appStateKey = 'internal-graphql-server-response';
+        // if (!App::hasState($appStateKey)) {
+        //     return;
+        // }
+
+        // Do not create an infinite loop
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return;
         }
 

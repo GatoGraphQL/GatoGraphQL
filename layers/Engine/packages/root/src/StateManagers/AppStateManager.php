@@ -39,9 +39,17 @@ class AppStateManager implements AppStateManagerInterface
      */
     public function initializeAppState(array $initialAppState): void
     {
+        App::doAction(HookNames::BEFORE_INITIALIZING_APP_STATE);
+        
         $this->state = [];
         $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
         $appStateProviders = $appStateProviderRegistry->getEnabledAppStateProviders();
+
+        // Allow to inject state (eg: during tests on DEV)
+        $this->state = App::applyFilters(
+            HookNames::APP_STATE_BEFORE_INITIALIZED,
+            $this->state
+        );
 
         // First pass: initialize
         foreach ($appStateProviders as $appStateProvider) {
@@ -96,6 +104,8 @@ class AppStateManager implements AppStateManagerInterface
             HookNames::APP_STATE_COMPUTED,
             $this->state
         );
+
+        App::doAction(HookNames::AFTER_INITIALIZING_APP_STATE);
     }
 
     /**
