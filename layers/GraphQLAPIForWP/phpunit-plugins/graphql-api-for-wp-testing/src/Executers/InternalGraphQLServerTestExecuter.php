@@ -18,6 +18,17 @@ class InternalGraphQLServerTestExecuter
      */
     public function __construct()
     {
+        /**
+         * Please notice: we can't use App::addFilter as it has
+         * not been initialized yet.
+         *
+         * As a good consecuence, the filter is only added
+         * on the "standard" AppThread, and not in all of them
+         * (i.e. not on "internal"). That's why key
+         * "internal-graphql-server-response" will not exist
+         * in the AppState when resolving the query against
+         * the InternalGraphQLServer.
+         */
         \add_filter(
             HookNames::APP_STATE_CONSOLIDATED,
             $this->maybeSetupInternalGraphQLServerTesting(...)
