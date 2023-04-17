@@ -28,6 +28,11 @@ class InternalGraphQLServerTestExecuter
          * "internal-graphql-server-response" will not exist
          * in the AppState when resolving the query against
          * the InternalGraphQLServer.
+         *
+         * Inject after the "consolidated" state, because
+         * that's where the GraphQL query is finally retrieved.
+         *
+         * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
          */
         \add_filter(
             HookNames::APP_STATE_CONSOLIDATED,
