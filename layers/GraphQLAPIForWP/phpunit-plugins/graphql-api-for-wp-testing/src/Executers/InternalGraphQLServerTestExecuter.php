@@ -22,6 +22,11 @@ class InternalGraphQLServerTestExecuter
             HookNames::APP_STATE_CONSOLIDATED,
             $this->maybeSetupInternalGraphQLServerTesting(...)
         );
+
+        \add_action(
+            HookNames::APPLICATION_READY,
+            $this->maybeExecuteQueryAgainstInternalGraphQLServer(...)
+        );
     }
 
     /**
@@ -52,11 +57,6 @@ class InternalGraphQLServerTestExecuter
      */
     protected function setupInternalGraphQLServerTesting(array $state): array
     {
-        \add_action(
-            HookNames::APPLICATION_READY,
-            $this->executeQueryAgainstInternalGraphQLServer(...)
-        );
-
         $appStateKey = 'internal-graphql-server-response';
         $state[$appStateKey] = null;
 
@@ -89,7 +89,22 @@ class InternalGraphQLServerTestExecuter
      * and place the response in the AppState, under key
      * "internal-graphql-server-response"
      */
-    public function executeQueryAgainstInternalGraphQLServer(): void
+    public function maybeExecuteQueryAgainstInternalGraphQLServer(): void
+    {
+        $appStateKey = 'internal-graphql-server-response';
+        if (!App::hasState($appStateKey)) {
+            return;
+        }
+
+        $this->executeQueryAgainstInternalGraphQLServer();
+    }
+
+    /**
+     * Execute the requested query against the `GraphQLServer`,
+     * and place the response in the AppState, under key
+     * "internal-graphql-server-response"
+     */
+    protected function executeQueryAgainstInternalGraphQLServer(): void
     {
         /** @var string */
         $query = App::getState('query');
