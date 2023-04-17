@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Constants\Actions as EngineActions;
-
 /**
  * Test the InternalGraphQLServer. It works like this:
  *
@@ -24,6 +20,8 @@ use PoP\Engine\Constants\Actions as EngineActions;
  */
 class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
+    use InternalGraphQLServerWebserverRequestTestTrait;
+
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-introspection-and-config';
@@ -40,14 +38,6 @@ class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends Abs
      */
     protected function getEndpoint(): string
     {
-        return GeneralUtils::addQueryArgs(
-            [
-                'actions' => [
-                    Actions::TEST_INTERNAL_GRAPHQL_SERVER,
-                    EngineActions::ENABLE_APP_STATE_FIELDS,
-                ],
-            ],
-            'graphql/'
-        );
+        return $this->getInternalGraphQLServerEndpoint('graphql/');
     }
 }
