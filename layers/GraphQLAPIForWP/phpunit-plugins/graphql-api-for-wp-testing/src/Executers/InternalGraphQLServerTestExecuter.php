@@ -72,7 +72,7 @@ class InternalGraphQLServerTestExecuter
     /**
      * Set-up the GraphQL queries to execute to test
      * the `InternalGraphQLServer`
-     * 
+     *
      * @param array<string,mixed> $state
      * @return array<string,mixed>
      */
@@ -97,7 +97,7 @@ class InternalGraphQLServerTestExecuter
         /**
          * Modify the query with a simple hack:
          * Append field "_appStateValue" at the beginning of the query
-         */       
+         */
         $afterFirstBracketPos = $firstBracketPos + strlen('{');
         $state['query'] = substr($query, 0, $afterFirstBracketPos)
             . PHP_EOL
@@ -167,7 +167,7 @@ class InternalGraphQLServerTestExecuter
             '#' . $appStateValueField,
             $query
         );
-                    
+
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         $response = $graphQLServer->execute(
             $query,

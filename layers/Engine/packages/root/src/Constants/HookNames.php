@@ -8,10 +8,10 @@ class HookNames
 {
     public final const AFTER_BOOT_APPLICATION = __CLASS__ . ':after-boot-application';
     public final const APPLICATION_READY = __CLASS__ . ':application-ready';
-    
+
     public final const BEFORE_INITIALIZING_APP_STATE = __CLASS__ . ':before-initializing-app-state';
     public final const AFTER_INITIALIZING_APP_STATE = __CLASS__ . ':after-initializing-app-state';
-    
+
     public final const APP_STATE_BEFORE_INITIALIZED = __CLASS__ . ':app-state-before-initialized';
     public final const APP_STATE_INITIALIZED = __CLASS__ . ':app-state-initialized';
     public final const APP_STATE_CONSOLIDATED = __CLASS__ . ':app-state-consolidated';

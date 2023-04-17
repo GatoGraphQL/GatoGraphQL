@@ -40,7 +40,7 @@ class AppStateManager implements AppStateManagerInterface
     public function initializeAppState(array $initialAppState): void
     {
         App::doAction(HookNames::BEFORE_INITIALIZING_APP_STATE);
-        
+
         $this->state = [];
         $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
         $appStateProviders = $appStateProviderRegistry->getEnabledAppStateProviders();
