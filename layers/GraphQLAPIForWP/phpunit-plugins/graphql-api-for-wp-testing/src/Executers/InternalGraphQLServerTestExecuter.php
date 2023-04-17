@@ -21,11 +21,15 @@ class InternalGraphQLServerTestExecuter
     }
 
     /**
-     * Check if the params are set in the request to test
-     * the `InternalGraphQLServer`
+     * When resolving a GraphQL query, check if the params
+     * are set in the request to test the `InternalGraphQLServer`
      */
     public function maybeSetupInternalGraphQLServerTesting(): void
     {
+        if (!App::getState('executing-graphql')) {
+            return;
+        }
+
         /** @var string[] */
         $actions = App::getState('actions');
         if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
