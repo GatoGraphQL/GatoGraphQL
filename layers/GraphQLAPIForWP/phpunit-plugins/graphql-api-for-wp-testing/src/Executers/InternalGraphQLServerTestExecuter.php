@@ -106,9 +106,10 @@ class InternalGraphQLServerTestExecuter
 
         /** @var string */
         $content = $response->getContent();
+        $jsonContent = json_decode($content, false);
 
         $appStateKey = 'internal-graphql-server-response';
         $appStateManager = App::getAppStateManager();
-        $appStateManager->override($appStateKey, $content);
+        $appStateManager->override($appStateKey, $jsonContent);
     }
 }
