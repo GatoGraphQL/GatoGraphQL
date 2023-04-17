@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
 
@@ -16,7 +18,7 @@ class InternalGraphQLServerTestExecuter
      */
     public function __construct()
     {
-        add_filter(
+        \add_filter(
             HookNames::APP_STATE_CONSOLIDATED,
             $this->maybeSetupInternalGraphQLServerTesting(...)
         );
@@ -50,6 +52,11 @@ class InternalGraphQLServerTestExecuter
      */
     protected function setupInternalGraphQLServerTesting(array $state): array
     {
+        \add_action(
+            HookNames::APPLICATION_READY,
+            $this->executeQueryAgainstInternalGraphQLServer(...)
+        );
+
         $appStateKey = 'internal-graphql-server-response';
         $state[$appStateKey] = null;
 
@@ -74,5 +81,34 @@ class InternalGraphQLServerTestExecuter
         );
         $state['query'] = $query;
         return $state;
+    }
+
+    /**
+     * Execute the requested query against the `GraphQLServer`,
+     * and place the response in the AppState, under key
+     * "internal-graphql-server-response"
+     */
+    public function executeQueryAgainstInternalGraphQLServer(): void
+    {
+        /** @var string */
+        $query = App::getState('query');
+        /** @var array<string,mixed> */
+        $variables = App::getState('variables');
+        /** @var string|null */
+        $operationName = App::getState('operation-name');
+        
+        $graphQLServer = InternalGraphQLServerFactory::getInstance();
+        $response = $graphQLServer->execute(
+            $query,
+            $variables,
+            $operationName,
+        );
+
+        /** @var string */
+        $content = $response->getContent();
+
+        $appStateKey = 'internal-graphql-server-response';
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->override($appStateKey, $content);
     }
 }
