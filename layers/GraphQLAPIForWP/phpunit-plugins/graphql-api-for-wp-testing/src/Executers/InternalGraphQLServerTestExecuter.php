@@ -128,7 +128,7 @@ class InternalGraphQLServerTestExecuter
 
         /**
          * For deep nested testing: Find out where is the last
-         * query operation and insert the 
+         * query operation and insert the
          * "internalGraphQLServerResponses" field there,
          * so that it can print the results of the hook on
          * the mutation that comes before.
