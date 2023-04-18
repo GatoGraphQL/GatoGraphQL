@@ -170,7 +170,8 @@ class InternalGraphQLServerTestExecuter
         bool $withDeepNested,
     ): bool {
         // 'executing-graphql' is only set on the "standard" server
-        if (App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+        if (
+            App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
             && !App::getState('executing-graphql')
         ) {
             return false;
@@ -186,7 +187,8 @@ class InternalGraphQLServerTestExecuter
             return false;
         }
 
-        if ($withDeepNested
+        if (
+            $withDeepNested
             && !in_array(Actions::TEST_DEEP_NESTED_INTERNAL_GRAPHQL_SERVER, $actions)
         ) {
             return false;
