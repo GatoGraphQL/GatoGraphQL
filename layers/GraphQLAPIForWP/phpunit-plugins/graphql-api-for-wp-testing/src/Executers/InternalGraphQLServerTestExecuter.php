@@ -45,6 +45,33 @@ class InternalGraphQLServerTestExecuter
             HookNames::APPLICATION_READY,
             $this->maybeExecuteQueryAgainstInternalGraphQLServer(...)
         );
+
+        /**
+         * Test 3 levels of nesting:
+         *
+         * standard => internal => internal
+         *
+         * This will be triggered when the executed query
+         * contains the `createPost` mutation. When that query
+         * is replicated under the "internalGraphQLServerResponse"
+         * field, that will be the 3rd level of nesting.
+         *
+         * In addition, the "standard" query will also execute
+         * this hook, then another InternalGraphQLServer
+         * execution will be requested there. Overall,
+         * we have:
+         *
+         * => "standard" <= requested query
+         *   => "internal" added by hook on `createPost`
+         *   => "internal" added via artificial "internalGraphQLServerResponse" field
+         *     => "internal" added by hook on `createPost`
+         * To stop the recursive looping, add another simple
+         * query at the 3rd level
+         */
+        \add_action(
+            'create_post',
+            $this->maybeAddNestedInternalGraphQLServerQuery(...)
+        );
     }
 
     /**
@@ -181,5 +208,31 @@ class InternalGraphQLServerTestExecuter
 
         $appStateManager = App::getAppStateManager();
         $appStateManager->override($this->getAppStateKey(), $jsonContent);
+    }
+
+    /**
+     * Execute the requested query against the `GraphQLServer`,
+     * and place the response in the AppState, under key
+     * "internal-graphql-server-response"
+     */
+    public function maybeAddNestedInternalGraphQLServerQuery(): void
+    {
+        if (!App::getState('executing-graphql') || App::getState('query') === null) {
+            return;
+        }
+
+        /** @var string[] */
+        $actions = App::getState('actions');
+        if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
+            return;
+        }
+
+        // // Do not create an infinite loop
+        // if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        //     return;
+        // }
+
+        // $this->executeQueryAgainstInternalGraphQLServer();
+        // Do something...
     }
 }
