@@ -297,7 +297,6 @@ class InternalGraphQLServerTestExecuter
         $query = <<<GRAPHQL
             {
                 insideDeepNestedQuery: id
-                executingQuery: _appStateValue(name: "query")
             }
         GRAPHQL;
 
