@@ -130,6 +130,30 @@ class AppStateManager implements AppStateManagerInterface
     }
 
     /**
+     * Called by the AttachedGraphQLServer to backup the
+     * state before executing a GraphQL request
+     *
+     * @return array<string,mixed>
+     * @internal
+     */
+    public function getAppState(): array
+    {
+        return $this->state;
+    }
+
+    /**
+     * Called by the AttachedGraphQLServer to restore the
+     * state after executing a GraphQL request
+     *
+     * @param array<string,mixed> $appState
+     * @internal
+     */
+    public function setAppState(array $appState): void
+    {
+        $this->state = $appState;
+    }
+
+    /**
      * @return array<string,mixed>
      */
     public function all(): array
