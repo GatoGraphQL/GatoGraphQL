@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginLifecyclePriorities;
 use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
+use stdClass;
 
 class InternalGraphQLServerTestExecuter
 {
@@ -45,6 +46,31 @@ class InternalGraphQLServerTestExecuter
             HookNames::APPLICATION_READY,
             $this->maybeExecuteQueryAgainstInternalGraphQLServer(...)
         );
+
+        /**
+         * Test 3 levels of nesting:
+         *
+         *   "standard" => "internal" => "internal"
+         *
+         * This will be triggered when the executed query
+         * contains the `createPost` mutation. When that query
+         * is replicated under the "internalGraphQLServerResponse"
+         * field, that will be the 3rd level of nesting.
+         *
+         * In addition, the "standard" query will also execute
+         * this hook, then another InternalGraphQLServer
+         * execution will be requested there. Overall,
+         * we have:
+         *
+         *   => "standard" <= requested query
+         *     => "internal" added by hook on `createPost`
+         *     => "internal" added via artificial "internalGraphQLServerResponse" field
+         *       => "internal" added by hook on `createPost`
+         */
+        \add_action(
+            'wp_insert_post',
+            $this->maybeAddNestedInternalGraphQLServerQuery(...)
+        );
     }
 
     /**
@@ -78,7 +104,7 @@ class InternalGraphQLServerTestExecuter
      */
     protected function setupInternalGraphQLServerTesting(array $state): array
     {
-        $state[$this->getAppStateKey()] = null;
+        $state[$this->getInternalGraphQLServerResponsesAppStateKey()] = new stdClass();
 
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return $state;
@@ -108,16 +134,16 @@ class InternalGraphQLServerTestExecuter
         return $state;
     }
 
-    protected function getAppStateKey(): string
+    protected function getInternalGraphQLServerResponsesAppStateKey(): string
     {
-        return 'internal-graphql-server-response';
+        return 'internal-graphql-server-responses';
     }
 
     protected function getAppStateValueFieldToAppend(): string
     {
         return sprintf(
-            ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
-            $this->getAppStateKey()
+            ' internalGraphQLServerResponses: _appStateValue(name: "%s") ',
+            $this->getInternalGraphQLServerResponsesAppStateKey()
         );
     }
 
@@ -128,13 +154,7 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeExecuteQueryAgainstInternalGraphQLServer(): void
     {
-        if (!App::getState('executing-graphql') || App::getState('query') === null) {
-            return;
-        }
-
-        /** @var string[] */
-        $actions = App::getState('actions');
-        if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
+        if (!$this->canExecuteQueryAgainstInternalGraphQLServer(false)) {
             return;
         }
 
@@ -144,6 +164,35 @@ class InternalGraphQLServerTestExecuter
         }
 
         $this->executeQueryAgainstInternalGraphQLServer();
+    }
+
+    protected function canExecuteQueryAgainstInternalGraphQLServer(
+        bool $withDeepNested,
+    ): bool {
+        // 'executing-graphql' is only set on the "standard" server
+        if (App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+            && !App::getState('executing-graphql')
+        ) {
+            return false;
+        }
+
+        if (App::getState('query') === null) {
+            return false;
+        }
+
+        /** @var string[] */
+        $actions = App::getState('actions');
+        if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
+            return false;
+        }
+
+        if ($withDeepNested
+            && !in_array(Actions::TEST_DEEP_NESTED_INTERNAL_GRAPHQL_SERVER, $actions)
+        ) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -178,8 +227,74 @@ class InternalGraphQLServerTestExecuter
         /** @var string */
         $content = $response->getContent();
         $jsonContent = json_decode($content, false);
+        $this->appendInternalGraphQLServerResponseToAppState($jsonContent);
+    }
+
+    /**
+     * Append the execution query, and its response, under a
+     * new key "exect_{#number}" in the JSON object
+     */
+    protected function appendInternalGraphQLServerResponseToAppState(stdClass $jsonContent): void
+    {
+        $internalGraphQLServerResponsesAppStateKey = $this->getInternalGraphQLServerResponsesAppStateKey();
+        /** @var stdClass */
+        $internalGraphQLServerResponses = App::getState($internalGraphQLServerResponsesAppStateKey);
+
+        $existingExecutionCount = count((array)$internalGraphQLServerResponses);
+        $executionKey = 'exec_' . ($existingExecutionCount + 1);
+        $internalGraphQLServerResponses->$executionKey = $jsonContent;
 
         $appStateManager = App::getAppStateManager();
-        $appStateManager->override($this->getAppStateKey(), $jsonContent);
+        $appStateManager->override($internalGraphQLServerResponsesAppStateKey, $internalGraphQLServerResponses);
+    }
+
+    /**
+     * Test a 3rd level of nesting by executing
+     * yet another query against the InternalGraphQLServer
+     * by hooking on mutation `createPost`.
+     */
+    public function maybeAddNestedInternalGraphQLServerQuery(): void
+    {
+        if (!$this->canExecuteQueryAgainstInternalGraphQLServer(true)) {
+            return;
+        }
+
+        // // Do not create an infinite loop
+        // if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        //     return;
+        // }
+
+        $this->executeDeepNestedQueryAgainstInternalGraphQLServer();
+    }
+
+    protected function executeDeepNestedQueryAgainstInternalGraphQLServer(): void
+    {
+        /** @var string */
+        $query = <<<GRAPHQL
+            {
+                insideDeepNestedQuery: id
+                executingQuery: _appStateValue(name: "query")
+            }
+        GRAPHQL;
+
+        // // Comment out the added field
+        // $appStateValueField = $this->getAppStateValueFieldToAppend();
+        // $query = str_replace(
+        //     $appStateValueField,
+        //     '#' . $appStateValueField,
+        //     $query
+        // );
+
+        $graphQLServer = InternalGraphQLServerFactory::getInstance();
+        $response = $graphQLServer->execute(
+            $query,
+            // $variables,
+            // $operationName,
+        );
+
+        /** @var string */
+        $content = $response->getContent();
+        $jsonContent = json_decode($content, false);
+        $this->appendInternalGraphQLServerResponseToAppState($jsonContent);
     }
 }
