@@ -54,7 +54,7 @@ class InternalGraphQLServerTestExecuter
          *
          * This will be triggered when the executed query
          * contains the `createPost` mutation. When that query
-         * is replicated under the "internalGraphQLServerResponse"
+         * is replicated under the "internalGraphQLServerResponses"
          * field, that will be the 3rd level of nesting.
          *
          * In addition, the "standard" query will also execute
@@ -64,7 +64,7 @@ class InternalGraphQLServerTestExecuter
          *
          *   => "standard" <= requested query
          *     => "internal" added by hook on `createPost`
-         *     => "internal" added via artificial "internalGraphQLServerResponse" field
+         *     => "internal" added via artificial "internalGraphQLServerResponses" field
          *       => "internal" added by hook on `createPost`
          */
         \add_action(
@@ -123,21 +123,31 @@ class InternalGraphQLServerTestExecuter
             return $state;
         }
 
-        $firstBracketPos = strpos($query, '{');
-        if ($firstBracketPos === false) {
+        /**
+         * For deep nested testing: Find out where is the last
+         * query operation and insert the 
+         * "internalGraphQLServerResponses" field there,
+         * so that it can print the results of the hook on
+         * the mutation that comes before.
+         */
+        $matches = [];
+        preg_match_all('/query .*?{/smS', $query, $matches, PREG_OFFSET_CAPTURE);
+        if ($matches === []) {
             return $state;
         }
+        $lastQueryMatch = $matches[0][count($matches[0]) - 1];
+        $lastQueryBracketPos = $lastQueryMatch[1] + strlen($lastQueryMatch[0]);
 
         /**
          * Modify the query with a simple hack:
-         * Append field "_appStateValue" at the beginning of the query
+         * Append field "_appStateValue" at the beginning of
+         * the last query operation
          */
-        $afterFirstBracketPos = $firstBracketPos + strlen('{');
-        $state['query'] = substr($query, 0, $afterFirstBracketPos)
+        $state['query'] = substr($query, 0, $lastQueryBracketPos)
             . PHP_EOL
             . $this->getAppStateValueFieldToAppend()
             . PHP_EOL
-            . substr($query, $afterFirstBracketPos);
+            . substr($query, $lastQueryBracketPos);
 
         return $state;
     }
