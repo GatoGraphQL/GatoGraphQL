@@ -186,7 +186,9 @@ class InternalGraphQLServerTestExecuter
             return false;
         }
 
-        if ($withDeepNested && !in_array(Actions::TEST_DEEP_NESTED_INTERNAL_GRAPHQL_SERVER, $actions)) {
+        if ($withDeepNested
+            && !in_array(Actions::TEST_DEEP_NESTED_INTERNAL_GRAPHQL_SERVER, $actions)
+        ) {
             return false;
         }
 
