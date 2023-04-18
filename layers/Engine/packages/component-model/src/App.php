@@ -80,4 +80,32 @@ class App extends AbstractRootAppProxy implements AppInterface
         $appThread = static::getAppThread();
         $appThread->regenerateMutationResolutionStore();
     }
+
+    public static function popFeedbackStore(): void
+    {
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        $appThread->popFeedbackStore();
+    }
+
+    public static function popTracingStore(): void
+    {
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        $appThread->popTracingStore();
+    }
+
+    public static function popEngineState(): void
+    {
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        $appThread->popEngineState();
+    }
+
+    public static function popMutationResolutionStore(): void
+    {
+        /** @var AppThreadInterface */
+        $appThread = static::getAppThread();
+        $appThread->popMutationResolutionStore();
+    }
 }

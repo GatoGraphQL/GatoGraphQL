@@ -57,4 +57,24 @@ abstract class AbstractComponentModelAppProxy extends AbstractRootAppProxy imple
     {
         ComponentModelApp::regenerateMutationResolutionStore();
     }
+
+    public static function popEngineState(): void
+    {
+        ComponentModelApp::popEngineState();
+    }
+
+    public static function popFeedbackStore(): void
+    {
+        ComponentModelApp::popFeedbackStore();
+    }
+
+    public static function popTracingStore(): void
+    {
+        ComponentModelApp::popTracingStore();
+    }
+
+    public static function popMutationResolutionStore(): void
+    {
+        ComponentModelApp::popMutationResolutionStore();
+    }
 }
