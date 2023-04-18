@@ -169,7 +169,14 @@ class InternalGraphQLServerTestExecuter
     protected function canExecuteQueryAgainstInternalGraphQLServer(
         bool $withDeepNested,
     ): bool {
-        if (!App::getState('executing-graphql') || App::getState('query') === null) {
+        // 'executing-graphql' is only set on the "standard" server
+        if (App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+            && !App::getState('executing-graphql')
+        ) {
+            return false;
+        }
+
+        if (App::getState('query') === null) {
             return false;
         }
 
