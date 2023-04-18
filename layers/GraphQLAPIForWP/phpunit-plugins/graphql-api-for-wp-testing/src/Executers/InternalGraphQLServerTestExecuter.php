@@ -301,19 +301,9 @@ class InternalGraphQLServerTestExecuter
             }
         GRAPHQL;
 
-        // // Comment out the added field
-        // $appStateValueField = $this->getAppStateValueFieldToAppend();
-        // $query = str_replace(
-        //     $appStateValueField,
-        //     '#' . $appStateValueField,
-        //     $query
-        // );
-
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         $response = $graphQLServer->execute(
             $query,
-            // $variables,
-            // $operationName,
         );
 
         /** @var string */
