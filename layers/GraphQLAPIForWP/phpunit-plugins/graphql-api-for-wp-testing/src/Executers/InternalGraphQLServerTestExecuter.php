@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
 use stdClass;
+use WP_Post;
 
 class InternalGraphQLServerTestExecuter
 {
@@ -69,7 +70,9 @@ class InternalGraphQLServerTestExecuter
          */
         \add_action(
             'wp_insert_post',
-            fn () => $this->maybeAddNestedInternalGraphQLServerQuery($pluginAppGraphQLServerName)
+            fn (int $postID, WP_Post $post) => $this->maybeAddNestedInternalGraphQLServerQuery($pluginAppGraphQLServerName, $post),
+            10,
+            2
         );
     }
 
@@ -277,8 +280,10 @@ class InternalGraphQLServerTestExecuter
      * yet another query against the InternalGraphQLServer
      * by hooking on mutation `createPost`.
      */
-    public function maybeAddNestedInternalGraphQLServerQuery(string $pluginAppGraphQLServerName): void
-    {
+    public function maybeAddNestedInternalGraphQLServerQuery(
+        string $pluginAppGraphQLServerName,
+        WP_Post $post,
+    ): void {
         if (App::getAppThread()->getName() !== $pluginAppGraphQLServerName) {
             return;
         }
@@ -292,15 +297,19 @@ class InternalGraphQLServerTestExecuter
         //     return;
         // }
 
-        $this->executeDeepNestedQueryAgainstInternalGraphQLServer();
+        $this->executeDeepNestedQueryAgainstInternalGraphQLServer($post);
     }
 
-    protected function executeDeepNestedQueryAgainstInternalGraphQLServer(): void
+    protected function executeDeepNestedQueryAgainstInternalGraphQLServer(WP_Post $post): void
     {
+        $postTitle = $post->post_title;
+        $postStatus = $post->post_status;
+
         /** @var string */
         $query = <<<GRAPHQL
             {
-                insideDeepNestedQuery: id
+                newPostTitle: _echo(value: "$postTitle")
+                newPostStatus: _echo(value: "$postStatus")
             }
         GRAPHQL;
 
