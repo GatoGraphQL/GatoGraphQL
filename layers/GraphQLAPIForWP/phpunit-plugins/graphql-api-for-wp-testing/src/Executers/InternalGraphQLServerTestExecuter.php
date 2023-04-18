@@ -233,7 +233,38 @@ class InternalGraphQLServerTestExecuter
         //     return;
         // }
 
-        // $this->executeQueryAgainstInternalGraphQLServer();
-        // Do something...
+        $this->executeDeepNestedQueryAgainstInternalGraphQLServer();
+    }
+
+    protected function executeDeepNestedQueryAgainstInternalGraphQLServer(): void
+    {
+        /** @var string */
+        $query = <<<GRAPHQL
+            {
+                id
+            }
+        GRAPHQL;
+
+        // // Comment out the added field
+        // $appStateValueField = $this->getAppStateValueFieldToAppend();
+        // $query = str_replace(
+        //     $appStateValueField,
+        //     '#' . $appStateValueField,
+        //     $query
+        // );
+
+        $graphQLServer = InternalGraphQLServerFactory::getInstance();
+        $response = $graphQLServer->execute(
+            $query,
+            // $variables,
+            // $operationName,
+        );
+
+        // /** @var string */
+        // $content = $response->getContent();
+        // $jsonContent = json_decode($content, false);
+
+        // $appStateManager = App::getAppStateManager();
+        // $appStateManager->override($this->getAppStateKey(), $jsonContent);
     }
 }
