@@ -287,7 +287,7 @@ class InternalGraphQLServerTestExecuter
         if (App::getAppThread()->getName() !== $pluginAppGraphQLServerName) {
             return;
         }
-        
+
         // Avoid it being executed by the WP-CLI commands
         if (!App::getAppLoader()->isReadyState()) {
             return;
