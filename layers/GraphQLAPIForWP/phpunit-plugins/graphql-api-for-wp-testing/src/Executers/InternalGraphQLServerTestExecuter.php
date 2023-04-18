@@ -155,13 +155,7 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeExecuteQueryAgainstInternalGraphQLServer(): void
     {
-        if (!App::getState('executing-graphql') || App::getState('query') === null) {
-            return;
-        }
-
-        /** @var string[] */
-        $actions = App::getState('actions');
-        if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
+        if (!$this->canExecuteQueryAgainstInternalGraphQLServer()) {
             return;
         }
 
@@ -171,6 +165,21 @@ class InternalGraphQLServerTestExecuter
         }
 
         $this->executeQueryAgainstInternalGraphQLServer();
+    }
+
+    protected function canExecuteQueryAgainstInternalGraphQLServer(): bool
+    {
+        if (!App::getState('executing-graphql') || App::getState('query') === null) {
+            return false;
+        }
+
+        /** @var string[] */
+        $actions = App::getState('actions');
+        if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -217,13 +226,7 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeAddNestedInternalGraphQLServerQuery(): void
     {
-        if (!App::getState('executing-graphql') || App::getState('query') === null) {
-            return;
-        }
-
-        /** @var string[] */
-        $actions = App::getState('actions');
-        if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
+        if (!$this->canExecuteQueryAgainstInternalGraphQLServer()) {
             return;
         }
 
