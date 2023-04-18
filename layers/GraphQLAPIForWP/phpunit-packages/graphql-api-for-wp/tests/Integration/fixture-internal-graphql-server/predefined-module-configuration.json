@@ -2,45 +2,48 @@
   "data": {
     "internalGraphQLServerResponses": {
       "exec_1": {
-        "data": {
-          "__schema": {
-            "customPostEnumType": {
-              "name": "CustomPostEnumString",
-              "extensions": {
-                "possibleValues": [
-                  "attachment",
-                  "custom_css",
-                  "customize_changeset",
-                  "dummy-cpt",
-                  "graphql-endpoint",
-                  "graphql-query",
-                  "graphql-schemaconfig",
-                  "nav_menu_item",
-                  "oembed_cache",
-                  "page",
-                  "post",
-                  "revision",
-                  "user_request",
-                  "wp_block",
-                  "wp_global_styles",
-                  "wp_navigation",
-                  "wp_template",
-                  "wp_template_part"
-                ]
-              }
-            },
-            "tagTaxonomyEnumType": {
-              "name": "TagTaxonomyEnumString",
-              "extensions": {
-                "possibleValues": [
-                  "dummy-tag",
-                  "link_category",
-                  "nav_menu",
-                  "post_format",
-                  "post_tag",
-                  "wp_template_part_area",
-                  "wp_theme"
-                ]
+        "query": "########################################################\n# This query tests that the pre-defined module configuration\n# on the admin endpoint (set on\n# `doGetPredefinedAdminEndpointModuleClassConfiguration`)\n# has taken effect. For instance, all custom post types\n# are queryable.\n########################################################\n{\n internalGraphQLServerResponses: _appStateValue(name: \"internal-graphql-server-responses\") \n\n  __schema {\n    customPostEnumType: type(name: \"CustomPostEnumString\") {\n      name\n      extensions {\n        possibleValues\n      }\n    }\n    tagTaxonomyEnumType: type(name: \"TagTaxonomyEnumString\") {\n      name\n      extensions {\n        possibleValues\n      }\n    }\n  }\n}",
+        "response": {
+          "data": {
+            "__schema": {
+              "customPostEnumType": {
+                "name": "CustomPostEnumString",
+                "extensions": {
+                  "possibleValues": [
+                    "attachment",
+                    "custom_css",
+                    "customize_changeset",
+                    "dummy-cpt",
+                    "graphql-endpoint",
+                    "graphql-query",
+                    "graphql-schemaconfig",
+                    "nav_menu_item",
+                    "oembed_cache",
+                    "page",
+                    "post",
+                    "revision",
+                    "user_request",
+                    "wp_block",
+                    "wp_global_styles",
+                    "wp_navigation",
+                    "wp_template",
+                    "wp_template_part"
+                  ]
+                }
+              },
+              "tagTaxonomyEnumType": {
+                "name": "TagTaxonomyEnumString",
+                "extensions": {
+                  "possibleValues": [
+                    "dummy-tag",
+                    "link_category",
+                    "nav_menu",
+                    "post_format",
+                    "post_tag",
+                    "wp_template_part_area",
+                    "wp_theme"
+                  ]
+                }
               }
             }
           }
