@@ -29,7 +29,7 @@ class InternalGraphQLServerTestExecuter
         );
     }
 
-    public function addHooks(): void
+    public function addHooks(string $pluginAppGraphQLServerName): void
     {
         /**
          * Inject after the "consolidated" state, because
@@ -69,7 +69,7 @@ class InternalGraphQLServerTestExecuter
          */
         \add_action(
             'wp_insert_post',
-            $this->maybeAddNestedInternalGraphQLServerQuery(...)
+            fn () => $this->maybeAddNestedInternalGraphQLServerQuery($pluginAppGraphQLServerName)
         );
     }
 
@@ -277,8 +277,12 @@ class InternalGraphQLServerTestExecuter
      * yet another query against the InternalGraphQLServer
      * by hooking on mutation `createPost`.
      */
-    public function maybeAddNestedInternalGraphQLServerQuery(): void
+    public function maybeAddNestedInternalGraphQLServerQuery(string $pluginAppGraphQLServerName): void
     {
+        if (App::getAppThread()->getName() !== $pluginAppGraphQLServerName) {
+            return;
+        }
+
         if (!$this->canExecuteQueryAgainstInternalGraphQLServer(true)) {
             return;
         }
