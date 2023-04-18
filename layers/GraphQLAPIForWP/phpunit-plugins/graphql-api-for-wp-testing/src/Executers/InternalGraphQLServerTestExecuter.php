@@ -219,13 +219,17 @@ class InternalGraphQLServerTestExecuter
         /** @var string|null */
         $operationName = App::getState('operation-name');
 
-        // Comment out the added field
-        $appStateValueField = $this->getAppStateValueFieldToAppend();
-        $query = str_replace(
-            $appStateValueField,
-            '#' . $appStateValueField,
-            $query
-        );
+        // If not testing deep nested, then comment out the added field
+        /** @var string[] */
+        $actions = App::getState('actions');
+        if (!in_array(Actions::TEST_DEEP_NESTED_INTERNAL_GRAPHQL_SERVER, $actions)) {
+            $appStateValueField = $this->getAppStateValueFieldToAppend();
+            $query = str_replace(
+                $appStateValueField,
+                '#' . $appStateValueField,
+                $query
+            );
+        }
 
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         $response = $graphQLServer->execute(
