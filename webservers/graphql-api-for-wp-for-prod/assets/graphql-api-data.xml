@@ -467,7 +467,7 @@
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=229</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration /-->
+		<content:encoded><![CDATA[<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration {"schemaConfiguration":592} /-->
 
 <!-- wp:graphql-api/custom-endpoint-options /-->
 
