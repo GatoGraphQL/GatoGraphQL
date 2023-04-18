@@ -104,7 +104,7 @@ class InternalGraphQLServerTestExecuter
      */
     protected function setupInternalGraphQLServerTesting(array $state): array
     {
-        $state[$this->getInternalGraphQLServerResponsesAppStateKey()] = new stdClass;
+        $state[$this->getInternalGraphQLServerResponsesAppStateKey()] = new stdClass();
 
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return $state;
@@ -217,10 +217,18 @@ class InternalGraphQLServerTestExecuter
     }
 
     /**
-     * Append the execution response under a new key in the JSON object
+     * Append the execution query, and its response, under a
+     * new key "exect_{#number}" in the JSON object
      */
-    protected function appendInternalGraphQLServerResponseToAppState(stdClass $jsonContent): void
+    protected function appendInternalGraphQLServerResponseToAppState(stdClass $response): void
     {
+        $jsonContent = new stdClass();
+
+        /** @var string */
+        $query = App::getState('query');
+        $jsonContent->query = $query;
+        $jsonContent->response = $response;
+
         $internalGraphQLServerResponsesAppStateKey = $this->getInternalGraphQLServerResponsesAppStateKey();
         /** @var stdClass */
         $internalGraphQLServerResponses = App::getState($internalGraphQLServerResponsesAppStateKey);
