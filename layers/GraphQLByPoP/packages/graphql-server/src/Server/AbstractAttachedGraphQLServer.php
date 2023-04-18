@@ -52,11 +52,22 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
         $currentAppThread = App::getAppThread();
         App::setAppThread($this->appThread);
 
+        /**
+         * Because an "internal" request may be triggered
+         * while resolving another "internal" request,
+         * backup and then restore the App's state.
+         */
+        $appStateManager = App::getAppStateManager();
+        $appState = $appStateManager->getAppState();
+
         $response = parent::execute(
             $queryOrExecutableDocument,
             $variables,
             $operationName,
         );
+
+        // Restore the App's state
+        $appStateManager->setAppState($appState);
 
         // Restore the original AppThread
         App::setAppThread($currentAppThread);
