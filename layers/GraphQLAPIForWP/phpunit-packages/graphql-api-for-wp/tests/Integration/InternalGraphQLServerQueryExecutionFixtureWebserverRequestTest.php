@@ -38,6 +38,9 @@ class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends Abs
      */
     protected function getEndpoint(): string
     {
-        return $this->getInternalGraphQLServerEndpoint('graphql/');
+        return $this->getInternalGraphQLServerEndpoint(
+            'graphql/',
+            false
+        );
     }
 }

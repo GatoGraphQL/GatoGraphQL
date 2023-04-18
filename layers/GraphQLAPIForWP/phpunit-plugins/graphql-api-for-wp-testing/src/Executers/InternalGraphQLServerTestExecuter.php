@@ -154,7 +154,7 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeExecuteQueryAgainstInternalGraphQLServer(): void
     {
-        if (!$this->canExecuteQueryAgainstInternalGraphQLServer()) {
+        if (!$this->canExecuteQueryAgainstInternalGraphQLServer(false)) {
             return;
         }
 
@@ -166,8 +166,9 @@ class InternalGraphQLServerTestExecuter
         $this->executeQueryAgainstInternalGraphQLServer();
     }
 
-    protected function canExecuteQueryAgainstInternalGraphQLServer(): bool
-    {
+    protected function canExecuteQueryAgainstInternalGraphQLServer(
+        bool $withDeepNested,
+    ): bool {
         if (!App::getState('executing-graphql') || App::getState('query') === null) {
             return false;
         }
@@ -175,6 +176,10 @@ class InternalGraphQLServerTestExecuter
         /** @var string[] */
         $actions = App::getState('actions');
         if (!in_array(Actions::TEST_INTERNAL_GRAPHQL_SERVER, $actions)) {
+            return false;
+        }
+
+        if ($withDeepNested && !in_array(Actions::TEST_DEEP_NESTED_INTERNAL_GRAPHQL_SERVER, $actions)) {
             return false;
         }
 
@@ -248,7 +253,7 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeAddNestedInternalGraphQLServerQuery(): void
     {
-        if (!$this->canExecuteQueryAgainstInternalGraphQLServer()) {
+        if (!$this->canExecuteQueryAgainstInternalGraphQLServer(true)) {
             return;
         }
 
