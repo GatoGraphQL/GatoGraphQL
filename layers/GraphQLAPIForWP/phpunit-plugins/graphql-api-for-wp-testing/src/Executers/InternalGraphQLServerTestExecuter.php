@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginLifecyclePriorities;
 use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
+use stdClass;
 
 class InternalGraphQLServerTestExecuter
 {
@@ -103,7 +104,7 @@ class InternalGraphQLServerTestExecuter
      */
     protected function setupInternalGraphQLServerTesting(array $state): array
     {
-        $state[$this->getAppStateKey()] = null;
+        $state[$this->getInternalGraphQLServerResponsesAppStateKey()] = new stdClass;
 
         if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
             return $state;
@@ -133,16 +134,16 @@ class InternalGraphQLServerTestExecuter
         return $state;
     }
 
-    protected function getAppStateKey(): string
+    protected function getInternalGraphQLServerResponsesAppStateKey(): string
     {
-        return 'internal-graphql-server-response';
+        return 'internal-graphql-server-responses';
     }
 
     protected function getAppStateValueFieldToAppend(): string
     {
         return sprintf(
-            ' internalGraphQLServerResponse: _appStateValue(name: "%s") ',
-            $this->getAppStateKey()
+            ' internalGraphQLServerResponses: _appStateValue(name: "%s") ',
+            $this->getInternalGraphQLServerResponsesAppStateKey()
         );
     }
 
@@ -212,9 +213,24 @@ class InternalGraphQLServerTestExecuter
         /** @var string */
         $content = $response->getContent();
         $jsonContent = json_decode($content, false);
+        $this->appendInternalGraphQLServerResponseToAppState($jsonContent);
+    }
+
+    /**
+     * Append the execution response under a new key in the JSON object
+     */
+    protected function appendInternalGraphQLServerResponseToAppState(stdClass $jsonContent): void
+    {
+        $internalGraphQLServerResponsesAppStateKey = $this->getInternalGraphQLServerResponsesAppStateKey();
+        /** @var stdClass */
+        $internalGraphQLServerResponses = App::getState($internalGraphQLServerResponsesAppStateKey);
+
+        $existingExecutionCount = count((array)$internalGraphQLServerResponses);
+        $executionKey = 'exec_' . ($existingExecutionCount + 1);
+        $internalGraphQLServerResponses->$executionKey = $jsonContent;
 
         $appStateManager = App::getAppStateManager();
-        $appStateManager->override($this->getAppStateKey(), $jsonContent);
+        $appStateManager->override($internalGraphQLServerResponsesAppStateKey, $internalGraphQLServerResponses);
     }
 
     /**
@@ -241,7 +257,7 @@ class InternalGraphQLServerTestExecuter
         /** @var string */
         $query = <<<GRAPHQL
             {
-                id
+                executingQuery: _appStateValue(name: "query")
             }
         GRAPHQL;
 
@@ -260,11 +276,9 @@ class InternalGraphQLServerTestExecuter
             // $operationName,
         );
 
-        // /** @var string */
-        // $content = $response->getContent();
-        // $jsonContent = json_decode($content, false);
-
-        // $appStateManager = App::getAppStateManager();
-        // $appStateManager->override($this->getAppStateKey(), $jsonContent);
+        /** @var string */
+        $content = $response->getContent();
+        $jsonContent = json_decode($content, false);
+        $this->appendInternalGraphQLServerResponseToAppState($jsonContent);
     }
 }
