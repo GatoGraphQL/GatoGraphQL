@@ -49,7 +49,7 @@ class InternalGraphQLServerTestExecuter
         /**
          * Test 3 levels of nesting:
          *
-         * standard => internal => internal
+         *   "standard" => "internal" => "internal"
          *
          * This will be triggered when the executed query
          * contains the `createPost` mutation. When that query
@@ -61,12 +61,10 @@ class InternalGraphQLServerTestExecuter
          * execution will be requested there. Overall,
          * we have:
          *
-         * => "standard" <= requested query
-         *   => "internal" added by hook on `createPost`
-         *   => "internal" added via artificial "internalGraphQLServerResponse" field
+         *   => "standard" <= requested query
          *     => "internal" added by hook on `createPost`
-         * To stop the recursive looping, add another simple
-         * query at the 3rd level
+         *     => "internal" added via artificial "internalGraphQLServerResponse" field
+         *       => "internal" added by hook on `createPost`
          */
         \add_action(
             'create_post',
@@ -220,9 +218,9 @@ class InternalGraphQLServerTestExecuter
     }
 
     /**
-     * Execute the requested query against the `GraphQLServer`,
-     * and place the response in the AppState, under key
-     * "internal-graphql-server-response"
+     * Test a 3rd level of nesting by executing
+     * yet another query against the InternalGraphQLServer
+     * by hooking on mutation `createPost`.
      */
     public function maybeAddNestedInternalGraphQLServerQuery(): void
     {
