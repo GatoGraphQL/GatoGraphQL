@@ -35,4 +35,12 @@ interface AppInterface extends UpstreamAppInterface
     public static function regenerateEngineState(): void;
 
     public static function regenerateMutationResolutionStore(): void;
+
+    public static function popFeedbackStore(): void;
+
+    public static function popTracingStore(): void;
+
+    public static function popEngineState(): void;
+
+    public static function popMutationResolutionStore(): void;
 }

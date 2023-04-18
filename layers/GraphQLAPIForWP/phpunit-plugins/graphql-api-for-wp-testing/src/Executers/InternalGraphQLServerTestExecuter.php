@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
 use stdClass;
+use WP_Post;
 
 class InternalGraphQLServerTestExecuter
 {
@@ -29,7 +30,7 @@ class InternalGraphQLServerTestExecuter
         );
     }
 
-    public function addHooks(): void
+    public function addHooks(string $pluginAppGraphQLServerName): void
     {
         /**
          * Inject after the "consolidated" state, because
@@ -54,7 +55,7 @@ class InternalGraphQLServerTestExecuter
          *
          * This will be triggered when the executed query
          * contains the `createPost` mutation. When that query
-         * is replicated under the "internalGraphQLServerResponse"
+         * is replicated under the "internalGraphQLServerResponses"
          * field, that will be the 3rd level of nesting.
          *
          * In addition, the "standard" query will also execute
@@ -64,12 +65,14 @@ class InternalGraphQLServerTestExecuter
          *
          *   => "standard" <= requested query
          *     => "internal" added by hook on `createPost`
-         *     => "internal" added via artificial "internalGraphQLServerResponse" field
+         *     => "internal" added via artificial "internalGraphQLServerResponses" field
          *       => "internal" added by hook on `createPost`
          */
         \add_action(
             'wp_insert_post',
-            $this->maybeAddNestedInternalGraphQLServerQuery(...)
+            fn (int $postID, WP_Post $post) => $this->maybeAddNestedInternalGraphQLServerQuery($pluginAppGraphQLServerName, $post),
+            10,
+            2
         );
     }
 
@@ -82,7 +85,15 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeSetupInternalGraphQLServerTesting(array $state): array
     {
-        if (!$state['executing-graphql'] || $state['query'] === null) {
+        // 'executing-graphql' is only set on the "standard" server
+        if (
+            App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+            && !$state['executing-graphql']
+        ) {
+            return $state;
+        }
+
+        if ($state['query'] === null) {
             return $state;
         }
 
@@ -115,21 +126,31 @@ class InternalGraphQLServerTestExecuter
             return $state;
         }
 
-        $firstBracketPos = strpos($query, '{');
-        if ($firstBracketPos === false) {
+        /**
+         * For deep nested testing: Find out where is the last
+         * query operation and insert the
+         * "internalGraphQLServerResponses" field there,
+         * so that it can print the results of the hook on
+         * the mutation that comes before.
+         */
+        $matches = [];
+        preg_match_all('/query .*?{/smS', $query, $matches, PREG_OFFSET_CAPTURE);
+        if ($matches === []) {
             return $state;
         }
+        $lastQueryMatch = $matches[0][count($matches[0]) - 1];
+        $lastQueryBracketPos = $lastQueryMatch[1] + strlen($lastQueryMatch[0]);
 
         /**
          * Modify the query with a simple hack:
-         * Append field "_appStateValue" at the beginning of the query
+         * Append field "_appStateValue" at the beginning of
+         * the last query operation
          */
-        $afterFirstBracketPos = $firstBracketPos + strlen('{');
-        $state['query'] = substr($query, 0, $afterFirstBracketPos)
+        $state['query'] = substr($query, 0, $lastQueryBracketPos)
             . PHP_EOL
             . $this->getAppStateValueFieldToAppend()
             . PHP_EOL
-            . substr($query, $afterFirstBracketPos);
+            . substr($query, $lastQueryBracketPos);
 
         return $state;
     }
@@ -211,13 +232,17 @@ class InternalGraphQLServerTestExecuter
         /** @var string|null */
         $operationName = App::getState('operation-name');
 
-        // Comment out the added field
-        $appStateValueField = $this->getAppStateValueFieldToAppend();
-        $query = str_replace(
-            $appStateValueField,
-            '#' . $appStateValueField,
-            $query
-        );
+        // If not testing deep nested, then comment out the added field
+        /** @var string[] */
+        $actions = App::getState('actions');
+        if (!in_array(Actions::TEST_DEEP_NESTED_INTERNAL_GRAPHQL_SERVER, $actions)) {
+            $appStateValueField = $this->getAppStateValueFieldToAppend();
+            $query = str_replace(
+                $appStateValueField,
+                '#' . $appStateValueField,
+                $query
+            );
+        }
 
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         $response = $graphQLServer->execute(
@@ -255,8 +280,19 @@ class InternalGraphQLServerTestExecuter
      * yet another query against the InternalGraphQLServer
      * by hooking on mutation `createPost`.
      */
-    public function maybeAddNestedInternalGraphQLServerQuery(): void
-    {
+    public function maybeAddNestedInternalGraphQLServerQuery(
+        string $pluginAppGraphQLServerName,
+        WP_Post $post,
+    ): void {
+        if (App::getAppThread()->getName() !== $pluginAppGraphQLServerName) {
+            return;
+        }
+
+        // Avoid it being executed by the WP-CLI commands
+        if (!App::getAppLoader()->isReadyState()) {
+            return;
+        }
+
         if (!$this->canExecuteQueryAgainstInternalGraphQLServer(true)) {
             return;
         }
@@ -266,32 +302,25 @@ class InternalGraphQLServerTestExecuter
         //     return;
         // }
 
-        $this->executeDeepNestedQueryAgainstInternalGraphQLServer();
+        $this->executeDeepNestedQueryAgainstInternalGraphQLServer($post);
     }
 
-    protected function executeDeepNestedQueryAgainstInternalGraphQLServer(): void
+    protected function executeDeepNestedQueryAgainstInternalGraphQLServer(WP_Post $post): void
     {
+        $postTitle = $post->post_title;
+        $postStatus = $post->post_status;
+
         /** @var string */
         $query = <<<GRAPHQL
             {
-                insideDeepNestedQuery: id
-                executingQuery: _appStateValue(name: "query")
+                newPostTitle: _echo(value: "$postTitle")
+                newPostStatus: _echo(value: "$postStatus")
             }
         GRAPHQL;
-
-        // // Comment out the added field
-        // $appStateValueField = $this->getAppStateValueFieldToAppend();
-        // $query = str_replace(
-        //     $appStateValueField,
-        //     '#' . $appStateValueField,
-        //     $query
-        // );
 
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         $response = $graphQLServer->execute(
             $query,
-            // $variables,
-            // $operationName,
         );
 
         /** @var string */

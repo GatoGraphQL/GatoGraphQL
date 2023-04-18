@@ -397,8 +397,18 @@ class Engine implements EngineInterface
 
     public function generateDataAndPrepareResponse(): void
     {
+        // @todo Temporary hack, re-check
+        // Create a new state
+        App::regenerateEngineState();
+        App::regenerateMutationResolutionStore();
+
         $this->generateData();
         $this->prepareResponse();
+
+        // @todo Temporary hack, re-check
+        // Restore the previous state
+        App::popEngineState();
+        App::popMutationResolutionStore();
     }
 
     /**
@@ -443,9 +453,10 @@ class Engine implements EngineInterface
 
     protected function generateData(): void
     {
-        // Reset the state
-        App::regenerateEngineState();
-        App::regenerateMutationResolutionStore();
+        // @todo Temporary hack, re-check
+        // // Create a new state
+        // App::regenerateEngineState();
+        // App::regenerateMutationResolutionStore();
 
         App::doAction(self::HOOK_GENERATE_DATA_BEGINNING);
 
@@ -489,6 +500,11 @@ class Engine implements EngineInterface
 
         // Keep only the data that is needed to be sent, and encode it as JSON
         $this->calculateOutputData();
+
+        // @todo Temporary hack, re-check
+        // // Restore the previous state
+        // App::popEngineState();
+        // App::popMutationResolutionStore();
     }
 
     protected function formatData(): void

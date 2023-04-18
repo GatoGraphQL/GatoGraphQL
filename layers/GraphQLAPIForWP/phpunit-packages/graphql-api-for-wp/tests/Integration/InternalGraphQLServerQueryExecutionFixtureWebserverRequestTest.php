@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 /**
  * Test the InternalGraphQLServer. It works like this:
  *
- * In the JSON response there is entry "internalGraphQLServerResponse",
+ * In the JSON response there is entry "internalGraphQLServerResponses",
  * which contains the response to the same requested GraphQL query,
  * but executed via `GraphQLServer`, using the configuration
  * of the InternalGraphQLServer.

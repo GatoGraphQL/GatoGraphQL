@@ -27,4 +27,12 @@ interface AppThreadInterface extends UpstreamAppThreadInterface
     public function regenerateEngineState(): void;
 
     public function regenerateMutationResolutionStore(): void;
+
+    public function popFeedbackStore(): void;
+
+    public function popTracingStore(): void;
+
+    public function popEngineState(): void;
+
+    public function popMutationResolutionStore(): void;
 }
