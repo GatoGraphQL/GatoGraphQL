@@ -68,7 +68,7 @@ class InternalGraphQLServerTestExecuter
          *       => "internal" added by hook on `createPost`
          */
         \add_action(
-            'create_post',
+            'wp_insert_post',
             $this->maybeAddNestedInternalGraphQLServerQuery(...)
         );
     }
