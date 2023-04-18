@@ -225,15 +225,8 @@ class InternalGraphQLServerTestExecuter
      * Append the execution query, and its response, under a
      * new key "exect_{#number}" in the JSON object
      */
-    protected function appendInternalGraphQLServerResponseToAppState(stdClass $response): void
+    protected function appendInternalGraphQLServerResponseToAppState(stdClass $jsonContent): void
     {
-        $jsonContent = new stdClass();
-
-        /** @var string */
-        $query = App::getState('query');
-        $jsonContent->query = $query;
-        $jsonContent->response = $response;
-
         $internalGraphQLServerResponsesAppStateKey = $this->getInternalGraphQLServerResponsesAppStateKey();
         /** @var stdClass */
         $internalGraphQLServerResponses = App::getState($internalGraphQLServerResponsesAppStateKey);
