@@ -82,7 +82,15 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeSetupInternalGraphQLServerTesting(array $state): array
     {
-        if (!$state['executing-graphql'] || $state['query'] === null) {
+        // 'executing-graphql' is only set on the "standard" server
+        if (
+            App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+            && !$state['executing-graphql']
+        ) {
+            return $state;
+        }
+
+        if ($state['query'] === null) {
             return $state;
         }
 
