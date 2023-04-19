@@ -50,7 +50,7 @@ interface AppThreadInterface
         ?AppStateManagerInterface $appStateManager = null,
     ): void;
 
-    public function regenerateResponse(): void;
+    public function setResponse(Response $response): void;
 
     public function getAppLoader(): AppLoaderInterface;
 

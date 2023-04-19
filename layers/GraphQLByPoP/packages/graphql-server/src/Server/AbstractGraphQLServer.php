@@ -50,10 +50,11 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         array $variables = [],
         ?string $operationName = null
     ): Response {
-        // Override the previous response, if any
-        App::regenerateResponse();
+        // Keep the current response, to be restored later on
+        $currentResponse = App::getResponse();
 
-        $engine = $this->getEngine();
+        // Set a new Response into the AppState
+        App::setResponse(new Response());
 
         $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
             $queryOrExecutableDocument,
@@ -61,11 +62,20 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
             $operationName,
         );
 
-        $engine->generateDataAndPrepareResponse(
+        /**
+         * Create and stack a new Response object, to be
+         * used during this processing
+         */
+        $this->getEngine()->generateDataAndPrepareResponse(
             $this->areFeedbackAndTracingStoresAlreadyCreated()
         );
 
-        return App::getResponse();
+        $response = App::getResponse();
+
+        // Restore the previous Response
+        App::setResponse($currentResponse);
+
+        return $response;
     }
 
     abstract protected function areFeedbackAndTracingStoresAlreadyCreated(): bool;
