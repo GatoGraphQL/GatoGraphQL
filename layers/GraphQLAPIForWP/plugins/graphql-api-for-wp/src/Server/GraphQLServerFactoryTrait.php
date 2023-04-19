@@ -30,7 +30,7 @@ trait GraphQLServerFactoryTrait
      *
      * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
      */
-    private static function doGetInstance(): GraphQLServerInterface
+    protected static function doGetInstance(): GraphQLServerInterface
     {
         if (!App::isInitialized()) {
             throw new GraphQLServerNotReadyException();
@@ -47,5 +47,5 @@ trait GraphQLServerFactoryTrait
     /**
      * Create a new instance of the GraphQLServer
      */
-    abstract private static function createInstance(): GraphQLServerInterface;
+    abstract protected static function createInstance(): GraphQLServerInterface;
 }

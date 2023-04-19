@@ -19,7 +19,7 @@ class InternalGraphQLServerFactory
     /**
      * Create a new instance of the GraphQLServer
      */
-    private static function createInstance(): GraphQLServerInterface
+    protected static function createInstance(): GraphQLServerInterface
     {
         return new InternalGraphQLServer();
     }
