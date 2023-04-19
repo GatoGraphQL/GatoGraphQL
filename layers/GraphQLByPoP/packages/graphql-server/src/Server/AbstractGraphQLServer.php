@@ -59,11 +59,21 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
             $operationName,
         );
 
+        /**
+         * Create and stack a new Response object, to be
+         * used during this processing
+         */
         $this->getEngine()->generateDataAndPrepareResponse(
             $this->areFeedbackAndTracingStoresAlreadyCreated()
         );
 
-        return App::getResponse();
+        $response = App::getResponse();
+
+        /**
+         * Restore the previous Response
+         */
+
+        return $response;
     }
 
     abstract protected function areFeedbackAndTracingStoresAlreadyCreated(): bool;
