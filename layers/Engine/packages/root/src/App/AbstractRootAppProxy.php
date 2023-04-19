@@ -42,6 +42,11 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         RootApp::setAppThread($appThread);
     }
 
+    public static function isInitialized(): bool
+    {
+        return RootApp::isInitialized();
+    }
+
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.

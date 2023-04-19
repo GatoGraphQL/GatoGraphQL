@@ -25,6 +25,8 @@ use PoP\Root\StateManagers\HookManagerInterface;
  */
 interface AppInterface
 {
+    public static function isInitialized(): bool;
+
     /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
