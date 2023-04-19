@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers\InternalGraphQLServerTestExecuter;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers\GraphQLServerNotReadyInternalGraphQLServerTestExecuter;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddDummyCustomAdminEndpointHook;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
@@ -39,6 +40,7 @@ class Plugin
          * Code to test the InternalGraphQLServer
          */
         new InternalGraphQLServerTestExecuter();
+        new GraphQLServerNotReadyInternalGraphQLServerTestExecuter();
 
         /**
          * Executing `flush_rewrite_rules` at the end of the execution
