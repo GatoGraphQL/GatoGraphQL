@@ -24,7 +24,7 @@ use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
-use PoP\ComponentModel\Constants\Response;
+use PoP\ComponentModel\Constants\Response as ConstantsResponse;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
@@ -747,7 +747,7 @@ class Engine implements EngineInterface
             // IMPORTANT: Call these methods after doing ->getComponentData, since the background_urls and other info is calculated there and printed here
             // If it has extra-uris, pass along this information, so that the client can fetch the setting from under $model_instance_id ("mutableonmodel") and $uri ("mutableonrequest")
             if ($this->getExtraRoutes()) {
-                $engineState->data['requestmeta'][Response::MULTIPLE_ROUTES] = true;
+                $engineState->data['requestmeta'][ConstantsResponse::MULTIPLE_ROUTES] = true;
             }
             if ($sitemeta = $this->getSiteMeta()) {
                 $engineState->data['sitemeta'] = $sitemeta;
@@ -822,18 +822,18 @@ class Engine implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $entryComponent = $this->getEntryComponent();
         $meta = array(
-            Response::ENTRY_COMPONENT => $entryComponent->name,
-            Response::UNIQUE_ID => $moduleInfo->getUniqueID(),
+            ConstantsResponse::ENTRY_COMPONENT => $entryComponent->name,
+            ConstantsResponse::UNIQUE_ID => $moduleInfo->getUniqueID(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceID(),
         );
 
         if (App::isHTTPRequest()) {
-            $meta[Response::URL] = $this->getRequestHelperService()->getComponentModelCurrentURL();
+            $meta[ConstantsResponse::URL] = $this->getRequestHelperService()->getComponentModelCurrentURL();
         }
 
         $engineState = App::getEngineState();
         if ($engineState->backgroundload_urls) {
-            $meta[Response::BACKGROUND_LOAD_URLS] = $engineState->backgroundload_urls;
+            $meta[ConstantsResponse::BACKGROUND_LOAD_URLS] = $engineState->backgroundload_urls;
         };
 
         // Starting from what components must do the rendering. Allow for empty arrays (eg: componentPaths[]=somewhatevervalue)
