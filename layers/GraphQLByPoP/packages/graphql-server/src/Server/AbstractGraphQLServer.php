@@ -53,7 +53,6 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         // Override the previous response, if any
         App::regenerateResponse();
 
-
         $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
             $queryOrExecutableDocument,
             $variables,
