@@ -53,9 +53,9 @@ abstract class AbstractComponentModelAppProxy extends AbstractRootAppProxy imple
         ComponentModelApp::generateAndStackTracingStore();
     }
 
-    public static function regenerateMutationResolutionStore(): void
+    public static function generateAndStackMutationResolutionStore(): void
     {
-        ComponentModelApp::regenerateMutationResolutionStore();
+        ComponentModelApp::generateAndStackMutationResolutionStore();
     }
 
     public static function popEngineState(): void

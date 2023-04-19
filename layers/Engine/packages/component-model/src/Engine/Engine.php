@@ -399,7 +399,7 @@ class Engine implements EngineInterface
     {
         // Create a new state
         App::generateAndStackEngineState();
-        App::regenerateMutationResolutionStore();
+        App::generateAndStackMutationResolutionStore();
 
         $this->generateData();
         $this->prepareResponse();

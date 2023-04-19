@@ -82,7 +82,7 @@ class AppThread extends RootAppThread implements AppThreadInterface
         array_unshift($this->engineStates, new EngineState());
     }
 
-    public function regenerateMutationResolutionStore(): void
+    public function generateAndStackMutationResolutionStore(): void
     {
         array_unshift($this->mutationResolutionStores, new MutationResolutionStore());
     }
