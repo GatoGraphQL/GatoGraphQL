@@ -47,17 +47,11 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
     protected function customizeWordPressErrorMessage(string $message, array $error): string
     {
         $exceptionMessage = $error['message'];
-        return substr(
-            $exceptionMessage,
-            0,
-            strpos(
-                $exceptionMessage,
-                sprintf(
-                    ' in %s',
-                    $error['file']
-                )
-            )
-        );
+        $pos = strpos($exceptionMessage, sprintf(' in %s', $error['file']));
+        if ($pos === false) {
+            return $exceptionMessage;
+        }
+        return substr($exceptionMessage, 0, $pos);
     }
 
     protected function executeQueryAgainstInternalGraphQLServer(): void
