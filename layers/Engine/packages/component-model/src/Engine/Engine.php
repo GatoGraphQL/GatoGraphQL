@@ -399,7 +399,7 @@ class Engine implements EngineInterface
      * This will be the case for the "main" or "standard" AppThread.
      * Additional GraphQL Servers (such as "internal") will instead
      * need to initialize their own stores.
-     * 
+     *
      * @see layers/Engine/packages/component-model/src/State/AppStateProvider.php
      * @see layers/GraphQLByPoP/packages/graphql-server/src/Server/AbstractAttachedGraphQLServer.php
      */
