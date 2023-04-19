@@ -528,10 +528,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action(
             PluginAppHooks::INITIALIZE_APP,
             function (string $pluginAppGraphQLServerName): void {
-                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
-                    return;
-                }
-                $this->handleInitializationException();
+                $this->handleInitializationException($pluginAppGraphQLServerName);
             },
             PHP_INT_MAX
         );
@@ -644,20 +641,31 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * If in development, throw the exception.
      * If in production, show the error as an admin notice.
      */
-    protected function handleInitializationException(): void
+    protected function handleInitializationException(string $pluginAppGraphQLServerName): void
     {
-        if ($this->inititalizationException === null) {
-            return;
-        }
-        if (RootEnvironment::isApplicationEnvironmentDev()) {
+        if ($this->inititalizationException !== null
+            && RootEnvironment::isApplicationEnvironmentDev()
+        ) {
             throw $this->inititalizationException;
         }
+
+        /**
+         * Add the admin_notice error only once, by the Main AppThread
+         */
+        if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
+            return;
+        }
+        
         add_action(
             'admin_notices',
             function (): void {
-                // Avoid PHPStan error
+                if ($this->inititalizationException === null) {
+                    return;
+                }
+
                 /** @var Exception */
                 $inititalizationException = $this->inititalizationException;
+
                 $errorMessage = sprintf(
                     '%s%s',
                     __('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api'),
