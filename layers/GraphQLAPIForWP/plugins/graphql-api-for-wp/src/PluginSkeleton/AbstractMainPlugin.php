@@ -17,6 +17,7 @@ use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\StateManagers\AppThreadHookManagerWrapper;
+use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
@@ -496,11 +497,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (): void {
+            function (string $pluginAppGraphQLServerName): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->bootApplication();
+                $this->bootApplication($pluginAppGraphQLServerName);
             },
             PluginLifecyclePriorities::BOOT_APPLICATION
         );
@@ -582,13 +583,41 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * Boot the application
      */
-    public function bootApplication(): void
+    public function bootApplication(string $pluginAppGraphQLServerName): void
     {
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
             $appLoader = App::getAppLoader();
             $appLoader->bootApplication();
+
+            /**
+             * After booting the application, we can access the Application
+             * Container services.
+             * 
+             * ------------------------------------------------------------
+             *
+             * For the InternalGraphQLServer: explicitly set the required
+             * state to execute GraphQL queries.
+             *
+             * For the Standard GraphQL Server there is no need, as it will
+             * already produce this state from the AppStateProvider.
+             *
+             * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
+             *
+             * Please notice: Setting the AppState as needed by GraphQL here
+             * means that the InternalGraphQLServer is configured to always
+             * process a GraphQL request, independently of what variables were
+             * actually set in the request.
+             * 
+             * But that's not the case for the standard server, which can then
+             * also process other responses too (eg: it supports ?datastructure=rest).
+             */
+            if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
+                $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
+                $appLoader->setInitialAppState($graphQLRequestAppState);
+            }
+
             $appLoader->bootApplicationModules();
 
             // Custom logic
@@ -596,6 +625,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         } catch (Exception $e) {
             $this->inititalizationException = $e;
         }
+    }
+
+    protected function getGraphQLServerAppStateProviderService(): GraphQLServerAppStateProviderServiceInterface
+    {
+        /** @var GraphQLServerAppStateProviderServiceInterface */
+        return App::getContainer()->get(GraphQLServerAppStateProviderServiceInterface::class);
     }
 
     /**
