@@ -54,7 +54,7 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         App::regenerateResponse();
 
         $engine = $this->getEngine();
-        $engine->initializeState();
+        // $engine->initializeState();
 
         $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
             $queryOrExecutableDocument,
@@ -63,8 +63,10 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         );
 
         // Generate the data, print the response to buffer, and send headers
-        $engine->generateDataAndPrepareResponse();
+        $engine->generateDataAndPrepareResponse($this->areFeedbackAndTracingStoresAlreadyCreated());
 
         return App::getResponse();
     }
+
+    abstract protected function areFeedbackAndTracingStoresAlreadyCreated(): bool;
 }

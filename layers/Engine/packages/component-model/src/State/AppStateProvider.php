@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\State;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
@@ -14,7 +15,6 @@ use PoP\ComponentModel\Variables\VariableManagerInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
@@ -119,6 +119,8 @@ class AppStateProvider extends AbstractAppStateProvider
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
 
-        $this->getEngine()->initializeState();
+        // $this->getEngine()->initializeState();
+        App::generateAndStackFeedbackStore();
+        App::generateAndStackTracingStore();
     }
 }

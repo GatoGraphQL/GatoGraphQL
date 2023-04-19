@@ -162,12 +162,13 @@ class Engine extends UpstreamEngine implements EngineInterface
         }
     }
 
-    public function generateDataAndPrepareResponse(): void
-    {
+    public function generateDataAndPrepareResponse(
+        bool $areFeedbackAndTracingStoresAlreadyCreated,
+    ): void {
         // Before anything: check if to do a redirect, and exit
         $this->maybeRedirectAndExit();
 
-        parent::generateDataAndPrepareResponse();
+        parent::generateDataAndPrepareResponse($areFeedbackAndTracingStoresAlreadyCreated);
     }
 
     /**

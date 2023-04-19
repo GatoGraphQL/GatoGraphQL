@@ -6,4 +6,8 @@ namespace GraphQLByPoP\GraphQLServer\Server;
 
 class GraphQLServer extends AbstractGraphQLServer
 {
+    protected function areFeedbackAndTracingStoresAlreadyCreated(): bool
+    {
+        return false;
+    }
 }
