@@ -310,11 +310,15 @@ class InternalGraphQLServerTestExecuter
         $postTitle = $post->post_title;
         $postStatus = $post->post_status;
 
-        /** @var string */
+        /**
+         * Also add a non-existing field, to check that its
+         * feedback is printed in the nested output
+         */
         $query = <<<GRAPHQL
             {
                 newPostTitle: _echo(value: "$postTitle")
                 newPostStatus: _echo(value: "$postStatus")
+                nonExistingField
             }
         GRAPHQL;
 
