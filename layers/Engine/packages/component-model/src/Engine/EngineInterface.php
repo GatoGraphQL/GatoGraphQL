@@ -27,9 +27,9 @@ interface EngineInterface
      * @return mixed[]
      */
     public function listExtraRouteVars(): array;
-    /** Must call before `generateDataAndPrepareResponse` */
-    public function initializeState(): void;
-    public function generateDataAndPrepareResponse(): void;
+    public function generateDataAndPrepareResponse(
+        bool $areFeedbackAndTracingStoresAlreadyCreated,
+    ): void;
     public function calculateOutputData(): void;
     /**
      * @return array<string,mixed>

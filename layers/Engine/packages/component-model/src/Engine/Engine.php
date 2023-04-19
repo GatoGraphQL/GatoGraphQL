@@ -388,18 +388,38 @@ class Engine implements EngineInterface
         return array($has_extra_routes, $model_instance_id, $current_uri);
     }
 
-    /** Must call before `generateDataAndPrepareResponse` */
-    public function initializeState(): void
-    {
-        App::generateAndStackFeedbackStore();
-        App::generateAndStackTracingStore();
-    }
-
-    public function generateDataAndPrepareResponse(): void
-    {
+    /**
+     * The Feedback and Tracing Store need to be created in the
+     * AppStateProvider before parsing the query, so that if it
+     * has any error (eg: empty GraphQL document) it can be processed.
+     *
+     * As such, do not regenerate those objects, or those errors
+     * will be lost.
+     *
+     * This will be the case for the "main" or "standard" AppThread.
+     * Additional GraphQL Servers (such as "internal") will instead
+     * need to initialize their own stores.
+     * 
+     * @see layers/Engine/packages/component-model/src/State/AppStateProvider.php
+     * @see layers/GraphQLByPoP/packages/graphql-server/src/Server/AbstractAttachedGraphQLServer.php
+     */
+    public function generateDataAndPrepareResponse(
+        bool $areFeedbackAndTracingStoresAlreadyCreated,
+    ): void {
         // Create a new state
         App::generateAndStackEngineState();
         App::generateAndStackMutationResolutionStore();
+
+        /**
+         * Create the new state for the Feedback and Tracing
+         * stores only if not already created (in the AppStateProvider)
+         *
+         * @see layers/Engine/packages/component-model/src/State/AppStateProvider.php
+         */
+        if (!$areFeedbackAndTracingStoresAlreadyCreated) {
+            App::generateAndStackFeedbackStore();
+            App::generateAndStackTracingStore();
+        }
 
         $this->generateData();
         $this->prepareResponse();
@@ -407,6 +427,23 @@ class Engine implements EngineInterface
         // Restore the previous state
         App::popEngineState();
         App::popMutationResolutionStore();
+
+        /**
+         * Because the stores had already been created, there
+         * is an expectation that those objects will still be
+         * there after running this method (eg: when running
+         * the GraphQLServer to execute Unit tests).
+         *
+         * Then, in addition to popping the stores (to delete
+         * their state, which has already been incorporated into
+         * the response), regenerate the stores with a clean state.
+         */
+        App::popFeedbackStore();
+        App::popTracingStore();
+        if ($areFeedbackAndTracingStoresAlreadyCreated) {
+            App::generateAndStackFeedbackStore();
+            App::generateAndStackTracingStore();
+        }
     }
 
     /**

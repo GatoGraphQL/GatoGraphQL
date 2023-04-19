@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\State;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
@@ -14,7 +15,6 @@ use PoP\ComponentModel\Variables\VariableManagerInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
@@ -106,7 +106,15 @@ class AppStateProvider extends AbstractAppStateProvider
      * @see layers/API/packages/api/src/State/AppStateProvider.php
      *
      * Otherwise, if there's an error (eg: empty query), it throws
-     * an exception when adding it to the FeedbackStore.     *
+     * an exception when adding it to the FeedbackStore.
+     *
+     * As such, method `generateDataAndPrepareResponse` in Engine will
+     * receive variable `$areFeedbackAndTracingStoresAlreadyCreated`
+     * as `true`, and it will not initialize these stores again:
+     *
+     * @see layers/Engine/packages/component-model/src/Engine/Engine.php
+     *
+     * -------------------------------------------------------
      *
      * Call ModuleConfiguration only after hooks from
      * SchemaConfigurationExecuter have been initialized.
@@ -119,6 +127,8 @@ class AppStateProvider extends AbstractAppStateProvider
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
 
-        $this->getEngine()->initializeState();
+        // Initialize stores to catch initial errors in the GraphQL document
+        App::generateAndStackFeedbackStore();
+        App::generateAndStackTracingStore();
     }
 }

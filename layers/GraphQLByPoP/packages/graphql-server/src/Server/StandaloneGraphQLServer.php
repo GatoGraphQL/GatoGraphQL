@@ -127,4 +127,9 @@ class StandaloneGraphQLServer extends AbstractGraphQLServer
     {
         return new HookManager();
     }
+
+    protected function areFeedbackAndTracingStoresAlreadyCreated(): bool
+    {
+        return true;
+    }
 }
