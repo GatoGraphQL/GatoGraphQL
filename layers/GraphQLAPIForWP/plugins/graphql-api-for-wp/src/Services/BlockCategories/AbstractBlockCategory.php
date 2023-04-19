@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
-use PoP\Root\Services\BasicServiceTrait;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Block_Editor_Context;
 use WP_Post;
 
@@ -20,7 +19,7 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
      */
     public function isServiceEnabled(): bool
     {
-        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL;
+        return AppHelpers::isMainAppThread();
     }
 
     final public function initialize(): void

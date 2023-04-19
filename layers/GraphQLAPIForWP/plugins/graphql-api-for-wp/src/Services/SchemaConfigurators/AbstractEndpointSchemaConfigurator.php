@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
@@ -51,7 +50,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
         /**
          * Only initialize once, for the main AppThread
          */
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
+        if (!AppHelpers::isMainAppThread()) {
             return false;
         }
         return $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);

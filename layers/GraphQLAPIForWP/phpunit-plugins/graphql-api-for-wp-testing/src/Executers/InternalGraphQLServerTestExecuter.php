@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers;
 
 use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginLifecyclePriorities;
 use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
-use stdClass;
 use WP_Post;
+use stdClass;
 
 class InternalGraphQLServerTestExecuter
 {
@@ -86,10 +86,7 @@ class InternalGraphQLServerTestExecuter
     public function maybeSetupInternalGraphQLServerTesting(array $state): array
     {
         // 'executing-graphql' is only set on the "external" server
-        if (
-            App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL
-            && !$state['executing-graphql']
-        ) {
+        if (AppHelpers::isMainAppThread() && !$state['executing-graphql']) {
             return $state;
         }
 
@@ -117,7 +114,7 @@ class InternalGraphQLServerTestExecuter
     {
         $state[$this->getInternalGraphQLServerResponsesAppStateKey()] = new stdClass();
 
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
+        if (!AppHelpers::isMainAppThread()) {
             return $state;
         }
 
@@ -180,7 +177,7 @@ class InternalGraphQLServerTestExecuter
         }
 
         // Do not create an infinite loop
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
+        if (!AppHelpers::isMainAppThread()) {
             return;
         }
 
@@ -191,10 +188,7 @@ class InternalGraphQLServerTestExecuter
         bool $withDeepNested,
     ): bool {
         // 'executing-graphql' is only set on the "external" server
-        if (
-            App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL
-            && !App::getState('executing-graphql')
-        ) {
+        if (AppHelpers::isMainAppThread() && !App::getState('executing-graphql')) {
             return false;
         }
 
@@ -296,11 +290,6 @@ class InternalGraphQLServerTestExecuter
         if (!$this->canExecuteQueryAgainstInternalGraphQLServer(true)) {
             return;
         }
-
-        // // Do not create an infinite loop
-        // if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
-        //     return;
-        // }
 
         $this->executeDeepNestedQueryAgainstInternalGraphQLServer($post);
     }

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\Root\Module\ApplicationEvents;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
@@ -36,7 +35,7 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
      */
     public function isServiceEnabled(): bool
     {
-        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL;
+        return AppHelpers::isMainAppThread();
     }
 
     /**

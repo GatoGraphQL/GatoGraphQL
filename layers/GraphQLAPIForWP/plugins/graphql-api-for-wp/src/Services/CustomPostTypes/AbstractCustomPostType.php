@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
@@ -100,7 +100,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         /**
          * Only initialize once, for the main AppThread
          */
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
+        if (!AppHelpers::isMainAppThread()) {
             return;
         }
 

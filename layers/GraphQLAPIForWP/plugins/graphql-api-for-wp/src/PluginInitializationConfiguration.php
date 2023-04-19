@@ -97,7 +97,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
          *   (as they take the value from the Schema Configuration)
          */
         $loadSettingsForAdmin = $endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint()
-            || App::getAppThread()->getName() === PluginAppGraphQLServerNames::INTERNAL;
+            || AppHelpers::isInternalGraphQLServerAppThread();
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
         return [
             // Client IP Server's Property Name

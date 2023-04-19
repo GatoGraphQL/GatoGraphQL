@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
 
 use Error;
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
@@ -66,7 +65,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
         /**
          * Only initialize once, for the main AppThread
          */
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
+        if (!AppHelpers::isMainAppThread()) {
             return false;
         }
         $enablingModule = $this->getEnablingModule();
