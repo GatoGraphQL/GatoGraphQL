@@ -72,7 +72,7 @@ class AppThread extends RootAppThread implements AppThreadInterface
         array_unshift($this->feedbackStores, new FeedbackStore());
     }
 
-    public function regenerateTracingStore(): void
+    public function generateAndStackTracingStore(): void
     {
         array_unshift($this->tracingStores, new TracingStore());
     }

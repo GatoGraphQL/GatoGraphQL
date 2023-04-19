@@ -30,7 +30,7 @@ interface AppInterface extends UpstreamAppInterface
 
     public static function generateAndStackFeedbackStore(): void;
 
-    public static function regenerateTracingStore(): void;
+    public static function generateAndStackTracingStore(): void;
 
     public static function regenerateEngineState(): void;
 

@@ -392,7 +392,7 @@ class Engine implements EngineInterface
     public function initializeState(): void
     {
         App::generateAndStackFeedbackStore();
-        App::regenerateTracingStore();
+        App::generateAndStackTracingStore();
     }
 
     public function generateDataAndPrepareResponse(): void
