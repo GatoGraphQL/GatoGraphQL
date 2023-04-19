@@ -11,16 +11,16 @@ class FeedbackStore
 
     public function __construct()
     {
-        $this->regenerateGeneralFeedbackStore();
-        $this->regenerateDocumentFeedbackStore();
+        $this->generateGeneralFeedbackStore();
+        $this->generateDocumentFeedbackStore();
     }
 
-    public function regenerateGeneralFeedbackStore(): void
+    public function generateGeneralFeedbackStore(): void
     {
         $this->generalFeedbackStore = new GeneralFeedbackStore();
     }
 
-    public function regenerateDocumentFeedbackStore(): void
+    public function generateDocumentFeedbackStore(): void
     {
         $this->documentFeedbackStore = new DocumentFeedbackStore();
     }
