@@ -67,22 +67,22 @@ class AppThread extends RootAppThread implements AppThreadInterface
         return $this->mutationResolutionStores[0];
     }
 
-    public function regenerateFeedbackStore(): void
+    public function generateAndStackFeedbackStore(): void
     {
         array_unshift($this->feedbackStores, new FeedbackStore());
     }
 
-    public function regenerateTracingStore(): void
+    public function generateAndStackTracingStore(): void
     {
         array_unshift($this->tracingStores, new TracingStore());
     }
 
-    public function regenerateEngineState(): void
+    public function generateAndStackEngineState(): void
     {
         array_unshift($this->engineStates, new EngineState());
     }
 
-    public function regenerateMutationResolutionStore(): void
+    public function generateAndStackMutationResolutionStore(): void
     {
         array_unshift($this->mutationResolutionStores, new MutationResolutionStore());
     }

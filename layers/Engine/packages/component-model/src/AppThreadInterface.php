@@ -20,13 +20,13 @@ interface AppThreadInterface extends UpstreamAppThreadInterface
 
     public function getMutationResolutionStore(): MutationResolutionStoreInterface;
 
-    public function regenerateFeedbackStore(): void;
+    public function generateAndStackFeedbackStore(): void;
 
-    public function regenerateTracingStore(): void;
+    public function generateAndStackTracingStore(): void;
 
-    public function regenerateEngineState(): void;
+    public function generateAndStackEngineState(): void;
 
-    public function regenerateMutationResolutionStore(): void;
+    public function generateAndStackMutationResolutionStore(): void;
 
     public function popFeedbackStore(): void;
 

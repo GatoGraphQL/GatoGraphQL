@@ -391,15 +391,15 @@ class Engine implements EngineInterface
     /** Must call before `generateDataAndPrepareResponse` */
     public function initializeState(): void
     {
-        App::regenerateFeedbackStore();
-        App::regenerateTracingStore();
+        App::generateAndStackFeedbackStore();
+        App::generateAndStackTracingStore();
     }
 
     public function generateDataAndPrepareResponse(): void
     {
         // Create a new state
-        App::regenerateEngineState();
-        App::regenerateMutationResolutionStore();
+        App::generateAndStackEngineState();
+        App::generateAndStackMutationResolutionStore();
 
         $this->generateData();
         $this->prepareResponse();
