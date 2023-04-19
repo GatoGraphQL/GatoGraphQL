@@ -24,10 +24,10 @@ class RequestParams
      * admin endpoint, based on an "endpointGroup".
      *
      * For instance, this plugin defines the configuration endpointGroup
-     * "pluginInternal" to be used on the WordPress editor to
+     * "pluginOwnUse" to be used on the WordPress editor to
      * power this plugin's blocks. It shall be requested as:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginInternal
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginOwnUse
      *
      * If the endpointGroup is not provided, the default admin endpoint
      * configuration is applied.

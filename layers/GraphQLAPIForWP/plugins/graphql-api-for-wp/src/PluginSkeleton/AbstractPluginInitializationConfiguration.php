@@ -325,7 +325,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     final public function getSchemaModuleClassesToSkip(): array
     {
         /**
-         * If doing ?endpoint_group=pluginInternal,
+         * If doing ?endpoint_group=pluginOwnUse,
          * always enable all schema-type modules
          */
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
@@ -412,7 +412,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     }
 
     /**
-     * Indicate if, when doing ?endpoint_group=pluginInternal,
+     * Indicate if, when doing ?endpoint_group=pluginOwnUse,
      * all the schema-type modules must still be enabled (even
      * if they've been disabled).
      *
