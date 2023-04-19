@@ -6,7 +6,6 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers;
 
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginLifecyclePriorities;
 use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
@@ -115,7 +114,7 @@ class InternalGraphQLServerTestExecuter
     {
         $state[$this->getInternalGraphQLServerResponsesAppStateKey()] = new stdClass();
 
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
+        if (!AppHelpers::isMainAppThread()) {
             return $state;
         }
 
@@ -178,7 +177,7 @@ class InternalGraphQLServerTestExecuter
         }
 
         // Do not create an infinite loop
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
+        if (!AppHelpers::isMainAppThread()) {
             return;
         }
 
@@ -291,11 +290,6 @@ class InternalGraphQLServerTestExecuter
         if (!$this->canExecuteQueryAgainstInternalGraphQLServer(true)) {
             return;
         }
-
-        // // Do not create an infinite loop
-        // if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
-        //     return;
-        // }
 
         $this->executeDeepNestedQueryAgainstInternalGraphQLServer($post);
     }

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\Clients;
 
-use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 
@@ -56,7 +55,7 @@ trait CustomEndpointClientTrait
      */
     public function isServiceEnabled(): bool
     {
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
+        if (!AppHelpers::isMainAppThread()) {
             return false;
         }
         return parent::isServiceEnabled();
