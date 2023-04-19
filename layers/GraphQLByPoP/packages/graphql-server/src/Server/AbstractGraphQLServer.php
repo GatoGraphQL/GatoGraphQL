@@ -61,8 +61,9 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
             $operationName,
         );
 
-        // Generate the data, print the response to buffer, and send headers
-        $engine->generateDataAndPrepareResponse($this->areFeedbackAndTracingStoresAlreadyCreated());
+        $engine->generateDataAndPrepareResponse(
+            $this->areFeedbackAndTracingStoresAlreadyCreated()
+        );
 
         return App::getResponse();
     }
