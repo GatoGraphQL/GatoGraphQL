@@ -106,7 +106,15 @@ class AppStateProvider extends AbstractAppStateProvider
      * @see layers/API/packages/api/src/State/AppStateProvider.php
      *
      * Otherwise, if there's an error (eg: empty query), it throws
-     * an exception when adding it to the FeedbackStore.     *
+     * an exception when adding it to the FeedbackStore.
+     *
+     * As such, method `generateDataAndPrepareResponse` in Engine will
+     * receive variable `$areFeedbackAndTracingStoresAlreadyCreated`
+     * as `true`, and it will not initialize these stores again:
+     *
+     * @see layers/Engine/packages/component-model/src/Engine/Engine.php
+     *
+     * -------------------------------------------------------
      *
      * Call ModuleConfiguration only after hooks from
      * SchemaConfigurationExecuter have been initialized.
@@ -119,6 +127,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
 
+        // Initialize stores to catch initial errors in the GraphQL document
         App::generateAndStackFeedbackStore();
         App::generateAndStackTracingStore();
     }
