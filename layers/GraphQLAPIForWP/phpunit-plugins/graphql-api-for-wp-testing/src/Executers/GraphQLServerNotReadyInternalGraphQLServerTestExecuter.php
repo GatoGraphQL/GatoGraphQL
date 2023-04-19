@@ -12,7 +12,7 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
     public function __construct()
     {
         // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
-        $actions = $_GET['actions'];
+        $actions = $_GET['actions'] ?? null;
         if ($actions === null || !is_array($actions)) {
             return;
         }
