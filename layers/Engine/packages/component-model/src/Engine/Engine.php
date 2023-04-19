@@ -391,7 +391,7 @@ class Engine implements EngineInterface
     /** Must call before `generateDataAndPrepareResponse` */
     public function initializeState(): void
     {
-        App::regenerateFeedbackStore();
+        App::generateAndStackFeedbackStore();
         App::regenerateTracingStore();
     }
 

@@ -43,9 +43,9 @@ abstract class AbstractComponentModelAppProxy extends AbstractRootAppProxy imple
         ComponentModelApp::regenerateEngineState();
     }
 
-    public static function regenerateFeedbackStore(): void
+    public static function generateAndStackFeedbackStore(): void
     {
-        ComponentModelApp::regenerateFeedbackStore();
+        ComponentModelApp::generateAndStackFeedbackStore();
     }
 
     public static function regenerateTracingStore(): void

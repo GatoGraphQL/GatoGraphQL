@@ -28,7 +28,7 @@ interface AppInterface extends UpstreamAppInterface
 
     public static function getMutationResolutionStore(): MutationResolutionStoreInterface;
 
-    public static function regenerateFeedbackStore(): void;
+    public static function generateAndStackFeedbackStore(): void;
 
     public static function regenerateTracingStore(): void;
 

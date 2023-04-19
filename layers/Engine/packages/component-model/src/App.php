@@ -53,11 +53,11 @@ class App extends AbstractRootAppProxy implements AppInterface
         return $appThread->getMutationResolutionStore();
     }
 
-    public static function regenerateFeedbackStore(): void
+    public static function generateAndStackFeedbackStore(): void
     {
         /** @var AppThreadInterface */
         $appThread = static::getAppThread();
-        $appThread->regenerateFeedbackStore();
+        $appThread->generateAndStackFeedbackStore();
     }
 
     public static function regenerateTracingStore(): void
