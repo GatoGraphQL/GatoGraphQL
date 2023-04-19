@@ -26,7 +26,7 @@ use PoP\Root\StateManagers\HookManagerInterface;
  * 1) Because the same hook might be referenced by the Standard
  * and Internal GraphQL servers, and calling `App::doAction`
  * (and the others) will rename the filter, prepending it with
- * the current AppThread name ("standard" or "internal")
+ * the current AppThread name ("external" or "internal")
  *
  * 2) Because filter `"the_content"` (and all the others) are
  * called exactly that, and calling it as

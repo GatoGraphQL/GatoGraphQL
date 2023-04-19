@@ -51,19 +51,19 @@ class InternalGraphQLServerTestExecuter
         /**
          * Test 3 levels of nesting:
          *
-         *   "standard" => "internal" => "internal"
+         *   "external" => "internal" => "internal"
          *
          * This will be triggered when the executed query
          * contains the `createPost` mutation. When that query
          * is replicated under the "internalGraphQLServerResponses"
          * field, that will be the 3rd level of nesting.
          *
-         * In addition, the "standard" query will also execute
+         * In addition, the "external" query will also execute
          * this hook, then another InternalGraphQLServer
          * execution will be requested there. Overall,
          * we have:
          *
-         *   => "standard" <= requested query
+         *   => "external" <= requested query
          *     => "internal" added by hook on `createPost`
          *     => "internal" added via artificial "internalGraphQLServerResponses" field
          *       => "internal" added by hook on `createPost`
@@ -85,9 +85,9 @@ class InternalGraphQLServerTestExecuter
      */
     public function maybeSetupInternalGraphQLServerTesting(array $state): array
     {
-        // 'executing-graphql' is only set on the "standard" server
+        // 'executing-graphql' is only set on the "external" server
         if (
-            App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+            App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL
             && !$state['executing-graphql']
         ) {
             return $state;
@@ -117,7 +117,7 @@ class InternalGraphQLServerTestExecuter
     {
         $state[$this->getInternalGraphQLServerResponsesAppStateKey()] = new stdClass();
 
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return $state;
         }
 
@@ -180,7 +180,7 @@ class InternalGraphQLServerTestExecuter
         }
 
         // Do not create an infinite loop
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return;
         }
 
@@ -190,9 +190,9 @@ class InternalGraphQLServerTestExecuter
     protected function canExecuteQueryAgainstInternalGraphQLServer(
         bool $withDeepNested,
     ): bool {
-        // 'executing-graphql' is only set on the "standard" server
+        // 'executing-graphql' is only set on the "external" server
         if (
-            App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+            App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL
             && !App::getState('executing-graphql')
         ) {
             return false;
@@ -298,7 +298,7 @@ class InternalGraphQLServerTestExecuter
         }
 
         // // Do not create an infinite loop
-        // if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        // if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
         //     return;
         // }
 

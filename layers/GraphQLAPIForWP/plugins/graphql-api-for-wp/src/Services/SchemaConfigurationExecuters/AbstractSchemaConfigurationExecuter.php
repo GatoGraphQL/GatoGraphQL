@@ -64,7 +64,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
         /**
          * Only initialize once, for the main AppThread
          */
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return false;
         }
         $enablingModule = $this->getEnablingModule();

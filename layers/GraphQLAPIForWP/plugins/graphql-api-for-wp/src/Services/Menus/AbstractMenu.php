@@ -18,7 +18,7 @@ abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService imp
      */
     public function isServiceEnabled(): bool
     {
-        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD;
+        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL;
     }
 
     /**

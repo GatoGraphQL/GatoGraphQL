@@ -66,7 +66,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
         /**
          * Only initialize once, for the main AppThread
          */
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return false;
         }
         $enablingModule = $this->getEnablingModule();

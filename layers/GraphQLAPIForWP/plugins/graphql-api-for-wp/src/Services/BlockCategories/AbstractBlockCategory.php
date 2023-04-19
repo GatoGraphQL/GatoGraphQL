@@ -20,7 +20,7 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
      */
     public function isServiceEnabled(): bool
     {
-        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD;
+        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL;
     }
 
     final public function initialize(): void

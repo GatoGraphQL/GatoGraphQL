@@ -396,7 +396,7 @@ class Engine implements EngineInterface
      * As such, do not regenerate those objects, or those errors
      * will be lost.
      *
-     * This will be the case for the "main" or "standard" AppThread.
+     * This will be the case for the "external" (i.e. the standard) AppThread.
      * Additional GraphQL Servers (such as "internal") will instead
      * need to initialize their own stores.
      *

@@ -100,7 +100,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         /**
          * Only initialize once, for the main AppThread
          */
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return;
         }
 
