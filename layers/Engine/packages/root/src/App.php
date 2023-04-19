@@ -25,6 +25,7 @@ use PoP\Root\StateManagers\ModuleManagerInterface;
  */
 class App implements AppInterface
 {
+    protected static bool $initialized = false;
     protected static AppThreadInterface $appThread;
 
     /**
@@ -48,6 +49,11 @@ class App implements AppInterface
         return self::$appThread;
     }
 
+    public static function isInitialized(): bool
+    {
+        return self::$initialized;
+    }
+
     /**
      * This function must be invoked right after calling
      * `setAppThread` with the new AppThread instance,
@@ -68,6 +74,7 @@ class App implements AppInterface
         ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void {
+        self::$initialized = true;
         self::$appThread->initialize(
             $appLoader,
             $hookManager,
