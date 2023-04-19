@@ -643,7 +643,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function handleInitializationException(string $pluginAppGraphQLServerName): void
     {
-        if ($this->inititalizationException !== null
+        if (
+            $this->inititalizationException !== null
             && RootEnvironment::isApplicationEnvironmentDev()
         ) {
             throw $this->inititalizationException;
@@ -655,7 +656,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
             return;
         }
-        
+
         add_action(
             'admin_notices',
             function (): void {
