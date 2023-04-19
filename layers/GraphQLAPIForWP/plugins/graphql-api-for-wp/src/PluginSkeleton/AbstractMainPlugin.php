@@ -594,7 +594,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             /**
              * After booting the application, we can access the Application
              * Container services.
-             * 
+             *
              * ------------------------------------------------------------
              *
              * For the InternalGraphQLServer: explicitly set the required
@@ -609,7 +609,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * means that the InternalGraphQLServer is configured to always
              * process a GraphQL request, independently of what variables were
              * actually set in the request.
-             * 
+             *
              * But that's not the case for the standard server, which can then
              * also process other responses too (eg: it supports ?datastructure=rest).
              */
