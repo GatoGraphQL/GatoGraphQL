@@ -409,6 +409,7 @@ class Engine implements EngineInterface
         // Create a new state
         App::generateAndStackEngineState();
         App::generateAndStackMutationResolutionStore();
+
         // Create then new state only if not already created (in the AppStateProvider)
         if (!$areFeedbackAndTracingStoresAlreadyCreated) {
             App::generateAndStackFeedbackStore();
@@ -421,8 +422,11 @@ class Engine implements EngineInterface
         // Restore the previous state
         App::popEngineState();
         App::popMutationResolutionStore();
-        App::popFeedbackStore();
-        App::popTracingStore();
+        
+        if (!$areFeedbackAndTracingStoresAlreadyCreated) {
+            App::popFeedbackStore();
+            App::popTracingStore();
+        }
     }
 
     /**
