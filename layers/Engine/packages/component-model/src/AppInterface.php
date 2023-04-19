@@ -32,7 +32,7 @@ interface AppInterface extends UpstreamAppInterface
 
     public static function generateAndStackTracingStore(): void;
 
-    public static function regenerateEngineState(): void;
+    public static function generateAndStackEngineState(): void;
 
     public static function regenerateMutationResolutionStore(): void;
 

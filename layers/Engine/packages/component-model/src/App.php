@@ -67,11 +67,11 @@ class App extends AbstractRootAppProxy implements AppInterface
         $appThread->generateAndStackTracingStore();
     }
 
-    public static function regenerateEngineState(): void
+    public static function generateAndStackEngineState(): void
     {
         /** @var AppThreadInterface */
         $appThread = static::getAppThread();
-        $appThread->regenerateEngineState();
+        $appThread->generateAndStackEngineState();
     }
 
     public static function regenerateMutationResolutionStore(): void

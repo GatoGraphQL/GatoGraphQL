@@ -24,7 +24,7 @@ interface AppThreadInterface extends UpstreamAppThreadInterface
 
     public function generateAndStackTracingStore(): void;
 
-    public function regenerateEngineState(): void;
+    public function generateAndStackEngineState(): void;
 
     public function regenerateMutationResolutionStore(): void;
 

@@ -398,7 +398,7 @@ class Engine implements EngineInterface
     public function generateDataAndPrepareResponse(): void
     {
         // Create a new state
-        App::regenerateEngineState();
+        App::generateAndStackEngineState();
         App::regenerateMutationResolutionStore();
 
         $this->generateData();

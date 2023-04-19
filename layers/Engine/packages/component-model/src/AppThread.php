@@ -77,7 +77,7 @@ class AppThread extends RootAppThread implements AppThreadInterface
         array_unshift($this->tracingStores, new TracingStore());
     }
 
-    public function regenerateEngineState(): void
+    public function generateAndStackEngineState(): void
     {
         array_unshift($this->engineStates, new EngineState());
     }
