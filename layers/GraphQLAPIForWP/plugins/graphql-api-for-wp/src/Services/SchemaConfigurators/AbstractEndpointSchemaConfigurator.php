@@ -51,7 +51,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
         /**
          * Only initialize once, for the main AppThread
          */
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return false;
         }
         return $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);

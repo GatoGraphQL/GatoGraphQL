@@ -87,7 +87,7 @@ class InternalGraphQLServerTestExecuter
     {
         // 'executing-graphql' is only set on the "external" server
         if (
-            App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+            App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL
             && !$state['executing-graphql']
         ) {
             return $state;
@@ -117,7 +117,7 @@ class InternalGraphQLServerTestExecuter
     {
         $state[$this->getInternalGraphQLServerResponsesAppStateKey()] = new stdClass();
 
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return $state;
         }
 
@@ -180,7 +180,7 @@ class InternalGraphQLServerTestExecuter
         }
 
         // Do not create an infinite loop
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return;
         }
 
@@ -192,7 +192,7 @@ class InternalGraphQLServerTestExecuter
     ): bool {
         // 'executing-graphql' is only set on the "external" server
         if (
-            App::getAppThread()->getName() === PluginAppGraphQLServerNames::STANDARD
+            App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL
             && !App::getState('executing-graphql')
         ) {
             return false;
@@ -298,7 +298,7 @@ class InternalGraphQLServerTestExecuter
         }
 
         // // Do not create an infinite loop
-        // if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        // if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
         //     return;
         // }
 

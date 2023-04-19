@@ -56,7 +56,7 @@ trait CustomEndpointClientTrait
      */
     public function isServiceEnabled(): bool
     {
-        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::STANDARD) {
+        if (App::getAppThread()->getName() !== PluginAppGraphQLServerNames::EXTERNAL) {
             return false;
         }
         return parent::isServiceEnabled();
