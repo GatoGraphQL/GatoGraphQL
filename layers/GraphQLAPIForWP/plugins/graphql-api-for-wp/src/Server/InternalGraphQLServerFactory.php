@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Server;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\Exception\GraphQLServerNotReadyException;
 use GraphQLByPoP\GraphQLServer\Server\GraphQLServerInterface;
 
 /**
@@ -16,37 +14,13 @@ use GraphQLByPoP\GraphQLServer\Server\GraphQLServerInterface;
  */
 class InternalGraphQLServerFactory
 {
-    private static ?GraphQLServerInterface $graphQLServer = null;
+    use GraphQLServerFactoryTrait;
 
     /**
      * Create a new instance of the GraphQLServer
-     *
-     * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
-     */
-    public static function getInstance(): GraphQLServerInterface
-    {
-        if (self::$graphQLServer === null) {
-            self::$graphQLServer = self::createInstance();
-        }
-        return self::$graphQLServer;
-    }
-
-    /**
-     * Create a new instance of the GraphQLServer
-     *
-     * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
      */
     private static function createInstance(): GraphQLServerInterface
     {
-        if (!App::isInitialized()) {
-            throw new GraphQLServerNotReadyException();
-        }
-
-        $appLoader = App::getAppLoader();
-        if (!$appLoader->isReadyState()) {
-            throw new GraphQLServerNotReadyException();
-        }
-
         return new InternalGraphQLServer();
     }
 }
