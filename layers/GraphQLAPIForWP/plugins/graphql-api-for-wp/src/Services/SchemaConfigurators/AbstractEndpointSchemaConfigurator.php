@@ -42,7 +42,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
      * Only enable the service if:
      *
      * - The corresponding module is enabled, and
-     * - We are executing the standard GraphQL server
+     * - We are executing the external GraphQL server
      *   (i.e. not the internal one, as the SchemaConfiguration
      *   does not apply there)
      */

@@ -398,7 +398,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PluginAppHooks::INITIALIZE_APP,
             function (string $pluginAppGraphQLServerName): void {
                 /**
-                 * The standard server has not been initialized yet,
+                 * The "external" (i.e. standard) server has not been initialized yet,
                  * hence there can be no Initialization Exception
                  */
                 if (
@@ -410,7 +410,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 App::setAppThread(new AppThread($pluginAppGraphQLServerName));
                 $hookManager = new HookManager();
                 /**
-                 * Boot the standard GraphQL server only after the
+                 * Boot the external GraphQL server only after the
                  * WordPress hooks have triggered, but the internal
                  * GraphQL server immediately (as by then all those
                  * hooks will have been triggered, and so it'd not
