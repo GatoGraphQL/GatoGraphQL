@@ -11,7 +11,7 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
 {
     public function __construct()
     {
-        $actions = $_REQUEST['actions'];
+        $actions = $_GET['actions'];
         if ($actions === null || !is_array($actions)) {
             return;
         }
