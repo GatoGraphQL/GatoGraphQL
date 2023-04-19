@@ -28,6 +28,9 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
          */
         \add_filter(
             'wp_php_error_message',
+            /**
+             * @param array<string,mixed> $error
+             */
             fn (string $message, array $error): string => $this->customizeWordPressErrorMessage($message, $error),
             10,
             2
@@ -36,9 +39,25 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
         $this->executeQueryAgainstInternalGraphQLServer();
     }
 
+    /**
+     * Return the original exception message, stripping the stack trace
+     *
+     * @param array<string,mixed> $error
+     */
     protected function customizeWordPressErrorMessage(string $message, array $error): string
     {
-        return $error['message'] ?? $message;
+        $exceptionMessage = $error['message'];
+        return substr(
+            $exceptionMessage,
+            0,
+            strpos(
+                $exceptionMessage,
+                sprintf(
+                    ' in %s',
+                    $error['file']
+                )
+            )
+        );
     }
 
     protected function executeQueryAgainstInternalGraphQLServer(): void

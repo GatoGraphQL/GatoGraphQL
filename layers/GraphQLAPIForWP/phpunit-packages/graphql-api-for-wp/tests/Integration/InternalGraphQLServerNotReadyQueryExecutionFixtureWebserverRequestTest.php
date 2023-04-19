@@ -57,7 +57,7 @@ class InternalGraphQLServerNotReadyQueryExecutionFixtureWebserverRequestTest ext
         return <<<JSON
         {
             "code": "internal_server_error",
-            "message": "<p>There has been a critical error on this website.<\/p><p><a href=\"https:\/\/wordpress.org\/documentation\/article\/faq-troubleshooting\/\">Learn more about troubleshooting WordPress.<\/a><\/p>",
+            "message": "Uncaught GraphQLAPI\\\\GraphQLAPI\\\\Exception\\\\GraphQLServerNotReadyException: The GraphQL server is not ready yet. Its initialization takes place in WordPress action hooks: 'wp_loaded' in the wp-admin, 'rest_api_init' in the WP REST API, and 'wp' otherwise (i.e. in the actual website). Retrieve the instance of the GraphQL server only after these hooks have been invoked.",
             "data": {
                 "status": 500
             },
