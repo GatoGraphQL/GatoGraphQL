@@ -688,7 +688,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
             ],
         ];
-        if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_INTERNAL) {
+        if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE) {
             $moduleClassConfiguration = array_merge_recursive(
                 $moduleClassConfiguration,
                 [

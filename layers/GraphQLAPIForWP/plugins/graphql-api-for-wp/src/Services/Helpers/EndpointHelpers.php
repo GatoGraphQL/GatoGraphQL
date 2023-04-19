@@ -62,7 +62,7 @@ class EndpointHelpers
     public function isRequestingAdminPluginInternalGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PLUGIN_INTERNAL;
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE;
     }
 
     /**
@@ -179,7 +179,7 @@ class EndpointHelpers
             [
                 AdminGraphQLEndpointGroups::DEFAULT,
                 AdminGraphQLEndpointGroups::PERSISTED_QUERY,
-                AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
+                AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
             ]
         );
     }
@@ -192,7 +192,7 @@ class EndpointHelpers
     {
         return \add_query_arg(
             RequestParams::ENDPOINT_GROUP,
-            AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
+            AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
             $this->getAdminGraphQLEndpoint()
         );
     }
