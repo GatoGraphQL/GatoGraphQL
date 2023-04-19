@@ -11,7 +11,8 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
 {
     public function __construct()
     {
-        $actions = $_REQUEST['actions'];
+        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
+        $actions = $_GET['actions'];
         if ($actions === null || !is_array($actions)) {
             return;
         }
@@ -47,17 +48,11 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
     protected function customizeWordPressErrorMessage(string $message, array $error): string
     {
         $exceptionMessage = $error['message'];
-        return substr(
-            $exceptionMessage,
-            0,
-            strpos(
-                $exceptionMessage,
-                sprintf(
-                    ' in %s',
-                    $error['file']
-                )
-            )
-        );
+        $pos = strpos($exceptionMessage, sprintf(' in %s', $error['file']));
+        if ($pos === false) {
+            return $exceptionMessage;
+        }
+        return substr($exceptionMessage, 0, $pos);
     }
 
     protected function executeQueryAgainstInternalGraphQLServer(): void

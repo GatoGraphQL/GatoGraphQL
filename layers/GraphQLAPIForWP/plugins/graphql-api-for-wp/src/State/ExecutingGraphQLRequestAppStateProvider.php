@@ -7,12 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\State;
 use PoP\Root\State\AbstractAppStateProvider;
 
 /**
- * Create an artificial state just to indicate
- * if we are indeed executing the GraphQL query
- * or not, as ->doingJSON can't be relied-upon.
- *
- * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/PluginSkeleton/AbstractMainPlugin.php
- * @see layers/Engine/packages/engine-wp/src/Hooks/TemplateHookSet.php
+ * State "executing-graphql" signifies "this is a request for a GraphQL endpoint"
  */
 class ExecutingGraphQLRequestAppStateProvider extends AbstractAppStateProvider
 {
