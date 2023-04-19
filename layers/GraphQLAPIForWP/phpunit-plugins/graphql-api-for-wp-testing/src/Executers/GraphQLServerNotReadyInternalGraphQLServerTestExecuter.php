@@ -37,7 +37,8 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
             2
         );
 
-        $this->executeQueryAgainstInternalGraphQLServer();
+        // Just executing this code will throw the exception
+        InternalGraphQLServerFactory::getInstance();
     }
 
     /**
@@ -53,22 +54,5 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
             return $exceptionMessage;
         }
         return substr($exceptionMessage, 0, $pos);
-    }
-
-    protected function executeQueryAgainstInternalGraphQLServer(): void
-    {
-        $query = <<<GRAPHQL
-            {
-                id
-            }
-        GRAPHQL;
-
-        $graphQLServer = InternalGraphQLServerFactory::getInstance();
-        $response = $graphQLServer->execute(
-            $query,
-        );
-
-        /** @var string */
-        $content = $response->getContent();
     }
 }
