@@ -17,7 +17,6 @@ use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\PluginAppHooks;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\StateManagers\AppThreadHookManagerWrapper;
-use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
@@ -590,41 +589,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             // Boot all PoP components, from this plugin and all extensions
             $appLoader = App::getAppLoader();
             $appLoader->bootApplication();
-
-            /**
-             * After booting the application, we can access the Application
-             * Container services.
-             *
-             * Explicitly set the required state to execute GraphQL queries.
-             *
-             * Important: Setting the AppState as needed by GraphQL here
-             * means that the application is configured to always process
-             * GraphQL request, independently of what variables were actually
-             * set in the request. Then, we can obtain GraphQL responses using
-             * this plugin (eg: ?datastructure=rest is not supported).
-             *
-             * ------------------------------------------------------------
-             *
-             * Watch out! When calling `setInitialAppState` below,
-             * the state will always be set to '?datastructure=graphql',
-             * which will then also set '?output=json'.
-             *
-             * As a consequence, doing `ApplicationStateHelperService->doingJSON()`
-             * will always return true, and even a 404 page will be processed
-             * as a GraphQL response.
-             *
-             * As a solution, the logic for `useTemplate` instead relies on
-             * any GraphQL endpoint having been requested, added under
-             * artificial state "executing-graphql".
-             *
-             * @see layers/Engine/packages/engine-wp/src/Hooks/TemplateHookSet.php function `useTemplate`
-             * @see submodules/PoP/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Overrides/State/GraphQLEndpointHandlerAppStateProvider.php
-             * @see submodules/PoP/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Overrides/Hooks/TemplateHookSet.php
-             * @see submodules/PoP/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
-             */
-            $graphQLRequestAppState = $this->getGraphQLServerAppStateProviderService()->getGraphQLRequestAppState();
-            $appLoader->setInitialAppState($graphQLRequestAppState);
-
             $appLoader->bootApplicationModules();
 
             // Custom logic
@@ -632,12 +596,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         } catch (Exception $e) {
             $this->inititalizationException = $e;
         }
-    }
-
-    protected function getGraphQLServerAppStateProviderService(): GraphQLServerAppStateProviderServiceInterface
-    {
-        /** @var GraphQLServerAppStateProviderServiceInterface */
-        return App::getContainer()->get(GraphQLServerAppStateProviderServiceInterface::class);
     }
 
     /**
