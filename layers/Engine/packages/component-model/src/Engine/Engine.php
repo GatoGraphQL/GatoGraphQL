@@ -411,8 +411,10 @@ class Engine implements EngineInterface
         App::generateAndStackMutationResolutionStore();
 
         /**
-         * Create the new state only if not already
-         * created (in the AppStateProvider)
+         * Create the new state for the Feedback and Tracing
+         * stores only if not already created (in the AppStateProvider)
+         *
+         * @see layers/Engine/packages/component-model/src/State/AppStateProvider.php
          */
         if (!$areFeedbackAndTracingStoresAlreadyCreated) {
             App::generateAndStackFeedbackStore();
@@ -425,9 +427,22 @@ class Engine implements EngineInterface
         // Restore the previous state
         App::popEngineState();
         App::popMutationResolutionStore();
-        if (!$areFeedbackAndTracingStoresAlreadyCreated) {
-            App::popFeedbackStore();
-            App::popTracingStore();
+
+        /**
+         * Because the stores had already been created, there
+         * is an expectation that those objects will still be
+         * there after running this method (eg: when running
+         * the GraphQLServer to execute Unit tests).
+         *
+         * Then, in addition to popping the stores (to delete
+         * their state, which has already been incorporated into
+         * the response), regenerate the stores with a clean state.
+         */
+        App::popFeedbackStore();
+        App::popTracingStore();
+        if ($areFeedbackAndTracingStoresAlreadyCreated) {
+            App::generateAndStackFeedbackStore();
+            App::generateAndStackTracingStore();
         }
     }
 
