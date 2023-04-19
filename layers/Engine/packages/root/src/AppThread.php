@@ -76,7 +76,7 @@ class AppThread implements AppThreadInterface
         $this->moduleManager = $moduleManager ?? $this->createComponentManager();
         $this->appStateManager = $appStateManager ?? $this->createAppStateManager();
 
-        $this->regenerateResponse();
+        $this->setResponse($this->createResponse());
 
         // Inject the Components slated for initialization
         $this->appLoader->addModuleClassesToInitialize($this->moduleClassesToInitialize);
@@ -138,9 +138,9 @@ class AppThread implements AppThreadInterface
         return new AppStateManager();
     }
 
-    public function regenerateResponse(): void
+    public function setResponse(Response $response): void
     {
-        $this->response = $this->createResponse();
+        $this->response = $response;
     }
 
     public function getAppLoader(): AppLoaderInterface

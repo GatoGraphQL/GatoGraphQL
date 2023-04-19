@@ -69,9 +69,9 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         );
     }
 
-    public static function regenerateResponse(): void
+    public static function setResponse(Response $response): void
     {
-        RootApp::regenerateResponse();
+        RootApp::setResponse($response);
     }
 
     public static function getAppLoader(): AppLoaderInterface

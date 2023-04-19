@@ -79,9 +79,9 @@ class App implements AppInterface
         );
     }
 
-    public static function regenerateResponse(): void
+    public static function setResponse(Response $response): void
     {
-        self::$appThread->regenerateResponse();
+        self::$appThread->setResponse($response);
     }
 
     public static function getAppLoader(): AppLoaderInterface

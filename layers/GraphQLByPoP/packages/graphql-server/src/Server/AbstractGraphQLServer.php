@@ -50,8 +50,11 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         array $variables = [],
         ?string $operationName = null
     ): Response {
-        // Override the previous response, if any
-        App::regenerateResponse();
+        // Keep the current response, to be restored later on
+        $currentResponse = App::getResponse();
+
+        // Set a new Response into the AppState
+        App::setResponse(new Response());
 
         $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
             $queryOrExecutableDocument,
@@ -69,9 +72,8 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
 
         $response = App::getResponse();
 
-        /**
-         * Restore the previous Response
-         */
+        // Restore the previous Response
+        App::setResponse($currentResponse);
 
         return $response;
     }

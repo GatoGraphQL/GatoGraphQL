@@ -66,7 +66,7 @@ interface AppInterface
         ?AppStateManagerInterface $appStateManager = null,
     ): void;
 
-    public static function regenerateResponse(): void;
+    public static function setResponse(Response $response): void;
 
     public static function getAppLoader(): AppLoaderInterface;
 
