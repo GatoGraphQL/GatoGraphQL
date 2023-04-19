@@ -57,12 +57,12 @@ class EndpointHelpers
      * used on the WordPress editor to power this plugin's blocks
      * (for the different CPTs: SchemaConfig, ACLs, CCLs, etc), under:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginInternal
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginOwnUse
      */
-    public function isRequestingAdminPluginInternalGraphQLEndpoint(): bool
+    public function isRequestingAdminPluginOwnUseGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PLUGIN_INTERNAL;
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE;
     }
 
     /**
@@ -179,7 +179,7 @@ class EndpointHelpers
             [
                 AdminGraphQLEndpointGroups::DEFAULT,
                 AdminGraphQLEndpointGroups::PERSISTED_QUERY,
-                AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
+                AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
             ]
         );
     }
@@ -188,11 +188,11 @@ class EndpointHelpers
      * GraphQL endpoint to be used in the WordPress editor.
      * It has the full schema, including "admin" fields.
      */
-    public function getAdminPluginInternalGraphQLEndpoint(): string
+    public function getAdminPluginOwnUseGraphQLEndpoint(): string
     {
         return \add_query_arg(
             RequestParams::ENDPOINT_GROUP,
-            AdminGraphQLEndpointGroups::PLUGIN_INTERNAL,
+            AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
             $this->getAdminGraphQLEndpoint()
         );
     }

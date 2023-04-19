@@ -12,5 +12,5 @@ class AdminGraphQLEndpointGroups
      */
     public final const DEFAULT = '';
     public final const PERSISTED_QUERY = 'persistedQuery';
-    public final const PLUGIN_INTERNAL = 'pluginInternal';
+    public final const PLUGIN_OWN_USE = 'pluginOwnUse';
 }

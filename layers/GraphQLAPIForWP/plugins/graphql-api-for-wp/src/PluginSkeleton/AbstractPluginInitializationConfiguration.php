@@ -325,15 +325,15 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     final public function getSchemaModuleClassesToSkip(): array
     {
         /**
-         * If doing ?endpoint_group=pluginInternal,
+         * If doing ?endpoint_group=pluginOwnUse,
          * always enable all schema-type modules
          */
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if (
-            $this->alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint()
-            && $endpointHelpers->isRequestingAdminPluginInternalGraphQLEndpoint()
+            $this->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
+            && $endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint()
         ) {
             return [];
         }
@@ -412,13 +412,13 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     }
 
     /**
-     * Indicate if, when doing ?endpoint_group=pluginInternal,
+     * Indicate if, when doing ?endpoint_group=pluginOwnUse,
      * all the schema-type modules must still be enabled (even
      * if they've been disabled).
      *
      * @todo Review is this right?
      */
-    protected function alwaysEnableAllSchemaTypeModulesForAdminPluginInternalGraphQLEndpoint(): bool
+    protected function alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint(): bool
     {
         return false;
     }
