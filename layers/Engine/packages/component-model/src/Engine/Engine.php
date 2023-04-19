@@ -388,13 +388,6 @@ class Engine implements EngineInterface
         return array($has_extra_routes, $model_instance_id, $current_uri);
     }
 
-    // /** Must call before `generateDataAndPrepareResponse` */
-    // public function initializeState(): void
-    // {
-    //     App::generateAndStackFeedbackStore();
-    //     App::generateAndStackTracingStore();
-    // }
-
     /**
      * The Feedback and Tracing Store need to be created in the
      * AppStateProvider before parsing the query, so that if it

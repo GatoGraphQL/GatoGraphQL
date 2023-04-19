@@ -54,7 +54,6 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         App::regenerateResponse();
 
         $engine = $this->getEngine();
-        // $engine->initializeState();
 
         $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
             $queryOrExecutableDocument,

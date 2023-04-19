@@ -119,7 +119,6 @@ class AppStateProvider extends AbstractAppStateProvider
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
 
-        // $this->getEngine()->initializeState();
         App::generateAndStackFeedbackStore();
         App::generateAndStackTracingStore();
     }

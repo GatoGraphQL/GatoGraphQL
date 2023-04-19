@@ -65,7 +65,6 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
     {
         /** @var EngineInterface */
         $engine = $this->getService(EngineInterface::class);
-        // $engine->initializeState();
         $engine->generateDataAndPrepareResponse(true);
         $this->assertEquals(
             App::getResponse()->headers->get('content-type'),
