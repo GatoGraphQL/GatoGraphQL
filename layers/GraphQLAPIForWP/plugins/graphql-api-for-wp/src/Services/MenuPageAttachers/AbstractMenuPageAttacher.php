@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
@@ -29,7 +28,7 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
      */
     public function isServiceEnabled(): bool
     {
-        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL;
+        return AppHelpers::isMainAppThread();
     }
 
     /**

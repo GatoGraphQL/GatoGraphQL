@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleTypeResolver implements ModuleTypeResolverInterface
@@ -17,7 +16,7 @@ abstract class AbstractModuleTypeResolver implements ModuleTypeResolverInterface
      */
     public function isServiceEnabled(): bool
     {
-        return App::getAppThread()->getName() === PluginAppGraphQLServerNames::EXTERNAL;
+        return AppHelpers::isMainAppThread();
     }
 
     /**
