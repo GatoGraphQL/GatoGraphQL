@@ -69,7 +69,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
      */
     protected function getCustomPostTypeName(): string
     {
-        return \__('GraphQL persisted query endpoint', 'graphql-api');
+        return \__('GraphQL public persisted query endpoint', 'graphql-api');
     }
 
     /**
@@ -79,7 +79,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
      */
     protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
-        return \__('GraphQL Persisted Queries', 'graphql-api');
+        return \__('GraphQL Public Persisted Queries', 'graphql-api');
     }
 
     /**
@@ -98,7 +98,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
         return array_merge(
             parent::getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
             array(
-                'all_items' => \__('Persisted Queries', 'graphql-api'),
+                'all_items' => \__('Persisted Queries (Public)', 'graphql-api'),
             )
         );
     }
