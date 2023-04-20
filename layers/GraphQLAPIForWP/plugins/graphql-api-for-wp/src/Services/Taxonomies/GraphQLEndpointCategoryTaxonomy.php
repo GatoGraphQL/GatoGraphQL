@@ -13,18 +13,9 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 {
     use StandaloneServiceTrait;
 
-    private ?GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType = null;
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
+    private ?GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType = null;
 
-    final public function setGraphQLPublicPersistedQueryEndpointCustomPostType(GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType): void
-    {
-        $this->graphQLPublicPersistedQueryEndpointCustomPostType = $graphQLPublicPersistedQueryEndpointCustomPostType;
-    }
-    final protected function getGraphQLPublicPersistedQueryEndpointCustomPostType(): GraphQLPublicPersistedQueryEndpointCustomPostType
-    {
-        /** @var GraphQLPublicPersistedQueryEndpointCustomPostType */
-        return $this->graphQLPublicPersistedQueryEndpointCustomPostType ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLPublicPersistedQueryEndpointCustomPostType::class);
-    }
     final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
         $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
@@ -33,6 +24,15 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
     {
         /** @var GraphQLCustomEndpointCustomPostType */
         return $this->graphQLCustomEndpointCustomPostType ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLCustomEndpointCustomPostType::class);
+    }
+    final public function setGraphQLPublicPersistedQueryEndpointCustomPostType(GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType): void
+    {
+        $this->graphQLPublicPersistedQueryEndpointCustomPostType = $graphQLPublicPersistedQueryEndpointCustomPostType;
+    }
+    final protected function getGraphQLPublicPersistedQueryEndpointCustomPostType(): GraphQLPublicPersistedQueryEndpointCustomPostType
+    {
+        /** @var GraphQLPublicPersistedQueryEndpointCustomPostType */
+        return $this->graphQLPublicPersistedQueryEndpointCustomPostType ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLPublicPersistedQueryEndpointCustomPostType::class);
     }
 
     public function getTaxonomy(): string
@@ -59,8 +59,8 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
     public function getCustomPostTypes(): array
     {
         return [
-            $this->getGraphQLPublicPersistedQueryEndpointCustomPostType()->getCustomPostType(),
             $this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType(),
+            $this->getGraphQLPublicPersistedQueryEndpointCustomPostType()->getCustomPostType(),
         ];
     }
 }
