@@ -69,7 +69,7 @@ class EndpointHelpers
      * Indicate if we are requesting the wp-admin endpoint that
      * fetches data for Public Persisted Queries, under:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=publicPersistedQuery&persisted_query_id=...
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=persistedQuery&persisted_query_id=...
      */
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
