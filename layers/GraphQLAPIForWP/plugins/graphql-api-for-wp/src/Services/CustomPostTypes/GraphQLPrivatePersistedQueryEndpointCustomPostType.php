@@ -83,12 +83,4 @@ class GraphQLPrivatePersistedQueryEndpointCustomPostType extends AbstractGraphQL
             )
         );
     }
-
-    /**
-     * The Query is not publicly accessible
-     */
-    protected function isPublic(): bool
-    {
-        return false;
-    }
 }

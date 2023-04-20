@@ -117,4 +117,12 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
     {
         return $this->getPersistedQueryEndpointOptionsBlock();
     }
+
+    /**
+     * The Query is publicly accessible, and the permalink must be configurable
+     */
+    protected function isPublic(): bool
+    {
+        return true;
+    }
 }
