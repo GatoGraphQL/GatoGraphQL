@@ -537,11 +537,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         return $this->isPublic();
     }
 
-    protected function showInREST(): bool
-    {
-        return $this->isPublic();
-    }
-
     /**
      * Is the excerpt used as description for the CPT?
      */
@@ -622,7 +617,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $securityPostTypeArgs = [
             'public' => $this->isPublic(),
             'publicly_queryable' => $this->isPubliclyQueryable(),
-            'show_in_rest' => $this->showInREST(),
+            'show_in_rest' => true,
         ];
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         /** @var array<string,mixed> */

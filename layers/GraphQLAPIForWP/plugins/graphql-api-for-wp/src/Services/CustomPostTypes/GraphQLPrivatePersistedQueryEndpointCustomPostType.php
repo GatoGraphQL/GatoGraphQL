@@ -55,11 +55,6 @@ class GraphQLPrivatePersistedQueryEndpointCustomPostType extends AbstractGraphQL
         return false;
     }
 
-    protected function showInREST(): bool
-    {
-        return false;
-    }
-
     /**
      * Custom post type name
      */
