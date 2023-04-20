@@ -74,7 +74,7 @@ class EndpointHelpers
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY;
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PERSISTED_QUERY;
             // && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
@@ -179,7 +179,7 @@ class EndpointHelpers
             [
                 AdminGraphQLEndpointGroups::DEFAULT,
                 AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
-                AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY,
+                AdminGraphQLEndpointGroups::PERSISTED_QUERY,
             ]
         );
     }
@@ -208,7 +208,7 @@ class EndpointHelpers
     ): string {
         return \add_query_arg(
             [
-                RequestParams::ENDPOINT_GROUP => AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY,
+                RequestParams::ENDPOINT_GROUP => AdminGraphQLEndpointGroups::PERSISTED_QUERY,
                 RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
             ],
             $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
@@ -217,7 +217,7 @@ class EndpointHelpers
 
     public function getAdminPersistedQueryCustomPostID(): ?int
     {
-        if (App::query(RequestParams::ENDPOINT_GROUP) !== AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY) {
+        if (App::query(RequestParams::ENDPOINT_GROUP) !== AdminGraphQLEndpointGroups::PERSISTED_QUERY) {
             return null;
         }
 
