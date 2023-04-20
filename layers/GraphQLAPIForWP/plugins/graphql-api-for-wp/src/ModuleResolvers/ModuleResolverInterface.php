@@ -22,7 +22,7 @@ interface ModuleResolverInterface
      * Eg: the Schema Configuration is enabled if either the Custom Endpoints or
      * the Persisted Query are enabled:
      * [
-     *   [self::PERSISTED_QUERIES, self::CUSTOM_ENDPOINTS],
+     *   [self::PUBLIC_PERSISTED_QUERIES, self::CUSTOM_ENDPOINTS],
      * ]
      */
     /**

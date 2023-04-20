@@ -59,7 +59,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
                         SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
                     ],
                     [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
                     ],
                 ];
         }

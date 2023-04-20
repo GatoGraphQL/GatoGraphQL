@@ -45,7 +45,7 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
             case self::API_HIERARCHY:
                 return [
                     [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
                         EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                     ],
                 ];
