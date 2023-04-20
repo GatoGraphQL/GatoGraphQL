@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 
 class PublicPersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostEndpointSchemaConfigurator
 {
-    private ?PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQueryEndpointSchemaConfigurationExecuterRegistry = null;
+    private ?PublicPersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $publicPersistedQueryEndpointSchemaConfigurationExecuterRegistry = null;
 
-    final public function setPersistedQueryEndpointSchemaConfigurationExecuterRegistry(PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $persistedQueryEndpointSchemaConfigurationExecuterRegistry): void
+    final public function setPublicPersistedQueryEndpointSchemaConfigurationExecuterRegistry(PublicPersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface $publicPersistedQueryEndpointSchemaConfigurationExecuterRegistry): void
     {
-        $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry = $persistedQueryEndpointSchemaConfigurationExecuterRegistry;
+        $this->publicPersistedQueryEndpointSchemaConfigurationExecuterRegistry = $publicPersistedQueryEndpointSchemaConfigurationExecuterRegistry;
     }
-    final protected function getPersistedQueryEndpointSchemaConfigurationExecuterRegistry(): PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface
+    final protected function getPublicPersistedQueryEndpointSchemaConfigurationExecuterRegistry(): PublicPersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface
     {
-        /** @var PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface */
-        return $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class);
+        /** @var PublicPersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface */
+        return $this->publicPersistedQueryEndpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(PublicPersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class);
     }
 
     /**
@@ -33,6 +33,6 @@ class PublicPersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostE
 
     protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface
     {
-        return $this->getPersistedQueryEndpointSchemaConfigurationExecuterRegistry();
+        return $this->getPublicPersistedQueryEndpointSchemaConfigurationExecuterRegistry();
     }
 }
