@@ -16,4 +16,9 @@ abstract class AbstractForPluginOwnUseCustomPostType extends AbstractCustomPostT
     {
         return false;
     }
+
+    protected function isPubliclyQueryable(): bool
+    {
+        return true;
+    }
 }
