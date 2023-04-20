@@ -529,14 +529,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Indicate if to make the Custom Post Type public.
-     * By default it's false because, for configuration
-     * CPTs (Access Control Lists, Cache Control Lists,
-     * Schema Configuration, etc), this data is private,
-     * must not be exposed.
      */
-    protected function isPublic(): bool
+    abstract protected function isPublic(): bool;
+
+    protected function isPubliclyQueryable(): bool
     {
-        return false;
+        return $this->isPubliclyQueryable();
     }
 
     /**
@@ -620,7 +618,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'public' => $this->isPublic(),
             'show_in_nav_menus' => true,
             'show_ui' => true,
-            'publicly_queryable' => true,
+            'publicly_queryable' => $this->isPubliclyQueryable(),
         );
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         /** @var array<string,mixed> */

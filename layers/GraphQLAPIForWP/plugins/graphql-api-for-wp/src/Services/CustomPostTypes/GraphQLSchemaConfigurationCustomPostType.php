@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
 
-class GraphQLSchemaConfigurationCustomPostType extends AbstractCustomPostType
+class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
 

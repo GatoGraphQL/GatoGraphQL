@@ -36,6 +36,11 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         return true;
     }
 
+    protected function isPublic(): bool
+    {
+        return true;
+    }
+
     /**
      * Label to show on the "execute" action in the CPT table
      */
