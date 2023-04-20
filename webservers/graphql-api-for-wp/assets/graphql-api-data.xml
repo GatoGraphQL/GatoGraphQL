@@ -1859,7 +1859,7 @@ video/mp4
 							</item>
 							<item>
 		<title><![CDATA[Users registered this month]]></title>
-		<link>https://graphql-api.lndo.site/private-query/users-registered-this-month/</link>
+		<link>https://graphql-api.lndo.site/private-query/customer-data/users-registered-this-month/</link>
 		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=282</guid>
@@ -1881,7 +1881,7 @@ video/mp4
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[users-registered-this-month]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
+		<wp:post_parent>280</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
 		<wp:post_type><![CDATA[private-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
