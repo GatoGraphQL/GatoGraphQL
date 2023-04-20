@@ -1757,7 +1757,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=276</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  comments(\n    filter: {\n      dateQuery: {\n    	  month: 12\n      }\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    date\n    content\n    customPostID\n  }\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  comments(\n    filter: { dateQuery: { month: 12 } }\n    sort: { by: ID, order: ASC }\n    pagination: { limit: 3 }\n  ) {\n    id\n    date\n    content\n    customPostID\n  }\n}\n"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":193} /-->
 
@@ -1768,8 +1768,8 @@ video/mp4
 		<wp:post_id>276</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:51:20]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2020-12-12 04:51:20]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2020-12-12 04:51:20]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2023-04-20 08:13:29]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-04-20 08:13:29]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[comments-from-this-month]]></wp:post_name>
@@ -1779,32 +1779,28 @@ video/mp4
 		<wp:post_type><![CDATA[private-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
-							</item>
-							<item>
+										<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
+						</item>
+					<item>
 		<title><![CDATA[Posts created this month]]></title>
 		<link>https://graphql-api.lndo.site/private-query/posts-created-this-month/</link>
-		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
+		<pubDate>Sat, 12 Nov 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=278</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  posts(\n    filter: {\n      dateQuery: {\n    	  month: 12\n      }\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    title\n    date\n  }\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query GetPosts($limit: Int!) {\n  posts(\n    filter: { dateQuery: { month: 12 } }\n    sort: { by: ID, order: ASC }\n    pagination: { limit: $limit }\n  ) {\n    id\n    title\n    date\n  }\n}\n"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:graphql-api/persisted-query-endpoint-options /-->
+<!-- wp:graphql-api/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
 
 <!-- wp:graphql-api/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>278</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:51:20]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2020-12-12 04:51:20]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2020-12-12 04:51:20]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2023-04-20 08:17:14]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-04-20 08:17:14]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[posts-created-this-month]]></wp:post_name>
@@ -1814,17 +1810,13 @@ video/mp4
 		<wp:post_type><![CDATA[private-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
+										<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
 		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
-		<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
-							</item>
-							<item>
+						</item>
+					<item>
 		<title><![CDATA[Customer Data]]></title>
 		<link>https://graphql-api.lndo.site/private-query/customer-data/</link>
-		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
+		<pubDate>Sat, 12 Oct 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=280</guid>
 		<description></description>
@@ -1850,17 +1842,13 @@ video/mp4
 		<wp:post_type><![CDATA[private-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
+										<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
 		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
-		<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
-							</item>
-							<item>
+						</item>
+					<item>
 		<title><![CDATA[Users registered this month]]></title>
 		<link>https://graphql-api.lndo.site/private-query/customer-data/users-registered-this-month/</link>
-		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
+		<pubDate>Sat, 12 Sep 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=282</guid>
 		<description></description>
@@ -1886,22 +1874,18 @@ video/mp4
 		<wp:post_type><![CDATA[private-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
+										<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
 		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
-		<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
-							</item>
-							<item>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
+						</item>
+					<item>
 		<title><![CDATA[Trending Tags]]></title>
 		<link>https://graphql-api.lndo.site/private-query/trending-tags/</link>
-		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
+		<pubDate>Sat, 12 Aug 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=284</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  postTags(\n    filter: {\n      hideEmpty: true\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    name\n  }\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query GetTags($limit: Int) {\n  postTags(\n    filter: {\n      hideEmpty: true\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: $limit\n    }\n  ) {\n    id\n    name\n  }\n}","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration /-->
 
@@ -1912,8 +1896,8 @@ video/mp4
 		<wp:post_id>284</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:51:20]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2020-12-12 04:51:20]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2020-12-12 04:51:20]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2023-04-20 08:17:50]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-04-20 08:17:50]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[trending-tags]]></wp:post_name>
@@ -1923,22 +1907,18 @@ video/mp4
 		<wp:post_type><![CDATA[private-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
+										<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
 		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
-		<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
-							</item>
-							<item>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
+						</item>
+					<item>
 		<title><![CDATA[Draft private persisted query]]></title>
-		<link>https://graphql-api.lndo.site/private-query/draft-private-persisted-query/</link>
-		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
+		<link>https://graphql-api-pro.lndo.site/?post_type=private-query&#038;p=286</link>
+		<pubDate>Sat, 12 Jul 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=286</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  postTags(\n    filter: {\n      hideEmpty:true\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    name\n  }\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  id\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration /-->
 
@@ -1949,8 +1929,8 @@ video/mp4
 		<wp:post_id>286</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:51:20]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2020-12-12 04:51:20]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2020-12-12 04:51:20]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2023-04-20 08:18:07]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-04-20 08:18:07]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[draft-private-persisted-query]]></wp:post_name>
@@ -1960,14 +1940,10 @@ video/mp4
 		<wp:post_type><![CDATA[private-query]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-														<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
+										<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
 		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
-		<category domain="graphql-endpoint-category" nicename="customers"><![CDATA[customers]]></category>
-							</item>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
+						</item>
 					<item>
 		<title><![CDATA[Unrestricted schema]]></title>
 		<link>https://graphql-api.lndo.site/graphql-schemaconfig/unrestricted-schema/</link>
