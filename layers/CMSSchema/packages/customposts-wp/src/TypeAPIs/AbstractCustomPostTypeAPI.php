@@ -177,16 +177,21 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if (isset($query['custompost-types']) && !empty($query['custompost-types'])) {
             $query['post_type'] = $query['custompost-types'];
             unset($query['custompost-types']);
-        } elseif (
-            !(isset($options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS]) && $options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS])
-        ) {
+        } else {
             /**
              * If not adding the custom post types, WordPress only uses "post",
              * so querying by CPT would fail loading data
              */
-            $query['post_type'] = $this->getCustomPostTypes([
-                'publicly-queryable' => true,
-            ]);
+            $allowQueryingPrivateCPTs = $options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS] ?? false;
+            if ($allowQueryingPrivateCPTs) {
+                $query['post_type'] = 'any';
+            } else {
+                $customPostTypeOptions = [
+                    'publicly-queryable' => true,
+                ];
+                $query['post_type'] = $this->getCustomPostTypes($customPostTypeOptions);
+            }
+            
         }
         // Querying "attachment" doesn't work in an array!
         if (is_array($query['post_type']) && count($query['post_type']) === 1) {
