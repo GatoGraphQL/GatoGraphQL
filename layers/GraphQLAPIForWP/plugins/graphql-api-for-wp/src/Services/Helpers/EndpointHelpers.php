@@ -96,7 +96,7 @@ class EndpointHelpers
     public function isRequestingNonPersistedQueryAdminGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && !$this->isRequestingAdminPublicPersistedQueryGraphQLEndpoint();
+            && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
     }
 
     /**

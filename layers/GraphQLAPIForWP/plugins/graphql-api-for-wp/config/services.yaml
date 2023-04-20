@@ -28,8 +28,8 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointSchemaConfigurationExecuterRegistry
+    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistry
 
     GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistry

@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPublicPersistedQueryEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PublicPersistedQueryEndpointSchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQueryEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 
-class PublicPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
+class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaConfiguratorExecuter
 {
-    private ?PublicPersistedQueryEndpointSchemaConfigurator $publicPersistedQueryEndpointSchemaConfigurator = null;
+    private ?PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator = null;
     private ?GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType = null;
 
-    final public function setPublicPersistedQueryEndpointSchemaConfigurator(PublicPersistedQueryEndpointSchemaConfigurator $publicPersistedQueryEndpointSchemaConfigurator): void
+    final public function setPersistedQueryEndpointSchemaConfigurator(PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator): void
     {
-        $this->publicPersistedQueryEndpointSchemaConfigurator = $publicPersistedQueryEndpointSchemaConfigurator;
+        $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
     }
-    final protected function getPublicPersistedQueryEndpointSchemaConfigurator(): PublicPersistedQueryEndpointSchemaConfigurator
+    final protected function getPersistedQueryEndpointSchemaConfigurator(): PersistedQueryEndpointSchemaConfigurator
     {
-        /** @var PublicPersistedQueryEndpointSchemaConfigurator */
-        return $this->publicPersistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PublicPersistedQueryEndpointSchemaConfigurator::class);
+        /** @var PersistedQueryEndpointSchemaConfigurator */
+        return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
     }
     final public function setGraphQLPublicPersistedQueryEndpointCustomPostType(GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType): void
     {
@@ -39,6 +39,6 @@ class PublicPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoa
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->getPublicPersistedQueryEndpointSchemaConfigurator();
+        return $this->getPersistedQueryEndpointSchemaConfigurator();
     }
 }
