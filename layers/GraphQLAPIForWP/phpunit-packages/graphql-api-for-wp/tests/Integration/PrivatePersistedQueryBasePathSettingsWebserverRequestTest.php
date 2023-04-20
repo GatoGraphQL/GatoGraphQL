@@ -18,4 +18,9 @@ class PrivatePersistedQueryBasePathSettingsWebserverRequestTest extends Abstract
     {
         return $basePath . '/comments-from-this-month/';
     }
+
+    protected function getNonExistingPathEntry(): string
+    {
+        return 'privaaaaaate-queeeeery';
+    }
 }

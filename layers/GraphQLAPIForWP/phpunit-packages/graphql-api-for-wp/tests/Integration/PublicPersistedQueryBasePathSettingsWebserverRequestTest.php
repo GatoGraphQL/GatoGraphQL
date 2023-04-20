@@ -18,4 +18,9 @@ class PublicPersistedQueryBasePathSettingsWebserverRequestTest extends AbstractP
     {
         return $basePath . '/latest-posts-for-mobile-app/';
     }
+
+    protected function getNonExistingPathEntry(): string
+    {
+        return 'graaaaaaaphql-queeeeery';
+    }
 }

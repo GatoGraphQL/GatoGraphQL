@@ -18,10 +18,12 @@ abstract class AbstractPersistedQueryBasePathSettingsWebserverRequestTest extend
     {
         return [
             'persisted-query-base-path' => [
-                'graaaaaaaphql-queeeeery',
+                $this->getNonExistingPathEntry(),
             ],
         ];
     }
+
+    abstract protected function getNonExistingPathEntry(): string;
 
     protected function getNewPath(string $dataItem): string
     {
