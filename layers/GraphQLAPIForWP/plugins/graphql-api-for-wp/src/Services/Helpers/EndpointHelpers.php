@@ -67,14 +67,27 @@ class EndpointHelpers
 
     /**
      * Indicate if we are requesting the wp-admin endpoint that
-     * fetches data for Persisted Queries, under:
+     * fetches data for Public Persisted Queries, under:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=persistedQuery&persisted_query_id=...
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=publicPersistedQuery&persisted_query_id=...
      */
     public function isRequestingAdminPublicPersistedQueryGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
             && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY;
+            // && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
+    }
+
+    /**
+     * Indicate if we are requesting the wp-admin endpoint that
+     * fetches data for Private Persisted Queries, under:
+     *
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=privatePersistedQuery&persisted_query_id=...
+     */
+    public function isRequestingAdminPrivatePersistedQueryGraphQLEndpoint(): bool
+    {
+        return $this->isRequestingAdminGraphQLEndpoint()
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PRIVATE_PERSISTED_QUERY;
             // && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
@@ -178,8 +191,9 @@ class EndpointHelpers
             $supportedAdminEndpointGroups,
             [
                 AdminGraphQLEndpointGroups::DEFAULT,
-                AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY,
                 AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
+                AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY,
+                AdminGraphQLEndpointGroups::PRIVATE_PERSISTED_QUERY,
             ]
         );
     }
@@ -198,7 +212,7 @@ class EndpointHelpers
     }
 
     /**
-     * GraphQL endpoint to be used in the admin, when editing Persisted Queries
+     * GraphQL endpoint to be used in the admin, when editing Public Persisted Queries
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
@@ -213,11 +227,34 @@ class EndpointHelpers
         );
     }
 
+    /**
+     * GraphQL endpoint to be used in the admin, when editing Private Persisted Queries
+     *
+     * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
+     */
+    public function getAdminPrivatePersistedQueryGraphQLEndpoint(string|int $persistedQueryEndpointCustomPostID, bool $enableLowLevelQueryEditing = false): string
+    {
+        return \add_query_arg(
+            [
+                RequestParams::ENDPOINT_GROUP => AdminGraphQLEndpointGroups::PRIVATE_PERSISTED_QUERY,
+                RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
+            ],
+            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
+        );
+    }
+
     public function getAdminPersistedQueryCustomPostID(): ?int
     {
-        if (App::query(RequestParams::ENDPOINT_GROUP) !== AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY) {
+        if (!in_array(
+            App::query(RequestParams::ENDPOINT_GROUP),
+            [
+                AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY,
+                AdminGraphQLEndpointGroups::PRIVATE_PERSISTED_QUERY,
+            ]
+        )) {
             return null;
         }
+
         /** @var string|null */
         $persistedQueryID = App::query(RequestParams::PERSISTED_QUERY_ID);
         if ($persistedQueryID === null) {
