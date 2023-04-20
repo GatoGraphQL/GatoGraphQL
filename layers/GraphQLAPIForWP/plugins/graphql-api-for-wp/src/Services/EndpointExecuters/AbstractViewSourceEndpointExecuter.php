@@ -59,7 +59,6 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
         
         // Make sure there is a post (eg: it has not been deleted)
         if ($customPost !== null) {
-
             // Make sure the visitor can access the source
             $graphQLQuerySourceContent = $this->getGraphQLQuerySourceContent($content, $customPost);
             if ($graphQLQuerySourceContent === null) {
