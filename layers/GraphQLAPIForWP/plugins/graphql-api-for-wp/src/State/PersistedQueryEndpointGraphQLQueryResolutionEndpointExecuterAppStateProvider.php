@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\State;
 
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLQueryResolutionEndpointExecuterInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
+use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\PublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
 
-class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvider extends AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider
+class PublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvider extends AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider
 {
-    private ?PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter $persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter = null;
+    private ?PublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter $publicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter = null;
 
-    final public function setPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter $persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter): void
+    final public function setPublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(PublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter $publicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter): void
     {
-        $this->persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter = $persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
+        $this->publicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter = $publicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
     }
-    final protected function getPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(): PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter
+    final protected function getPublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(): PublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter
     {
-        /** @var PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter */
-        return $this->persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter::class);
+        /** @var PublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter */
+        return $this->publicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter ??= $this->instanceManager->getInstance(PublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter::class);
     }
 
     protected function getGraphQLQueryResolutionEndpointExecuter(): GraphQLQueryResolutionEndpointExecuterInterface
     {
-        return $this->getPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter();
+        return $this->getPublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter();
     }
 }
