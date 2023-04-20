@@ -13,7 +13,7 @@ class PrivatePersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extend
 {
     private ?GraphQLPrivatePersistedQueryEndpointCustomPostType $graphQLPrivatePersistedQueryEndpointCustomPostType = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
-    
+
     final public function setGraphQLPrivatePersistedQueryEndpointCustomPostType(GraphQLPrivatePersistedQueryEndpointCustomPostType $graphQLPrivatePersistedQueryEndpointCustomPostType): void
     {
         $this->graphQLPrivatePersistedQueryEndpointCustomPostType = $graphQLPrivatePersistedQueryEndpointCustomPostType;

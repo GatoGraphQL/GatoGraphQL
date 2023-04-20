@@ -167,7 +167,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::DESCRIPTION => \__('URL base path to expose the Custom Endpoint', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
-        } elseif ($module === self::PUBLIC_PERSISTED_QUERIES
+        } elseif (
+            $module === self::PUBLIC_PERSISTED_QUERIES
             || $module === self::PRIVATE_PERSISTED_QUERIES
         ) {
             $option = ModuleSettingOptions::PATH;

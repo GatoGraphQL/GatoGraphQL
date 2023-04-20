@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPublicPersistedQueryEn
 class PublicPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter
 {
     private ?GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType = null;
-    
+
     final public function setGraphQLPublicPersistedQueryEndpointCustomPostType(GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType): void
     {
         $this->graphQLPublicPersistedQueryEndpointCustomPostType = $graphQLPublicPersistedQueryEndpointCustomPostType;

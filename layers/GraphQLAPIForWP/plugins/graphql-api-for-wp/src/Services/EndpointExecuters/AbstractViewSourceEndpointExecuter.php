@@ -16,7 +16,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
 {
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?RenderingHelpers $renderingHelpers = null;
-    
+
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
@@ -56,7 +56,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
     public function maybeGetGraphQLQuerySourceContent(string $content): string
     {
         $customPost = App::getState(['routing', 'queried-object']);
-        
+
         // Make sure there is a post (eg: it has not been deleted)
         if ($customPost !== null) {
             // Make sure the visitor can access the source
