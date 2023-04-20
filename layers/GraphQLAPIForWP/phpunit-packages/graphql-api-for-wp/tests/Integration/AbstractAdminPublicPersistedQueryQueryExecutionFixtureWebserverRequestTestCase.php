@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-abstract class AbstractAdminPersistedQueryQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
+abstract class AbstractAdminPublicPersistedQueryQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
@@ -15,6 +15,6 @@ abstract class AbstractAdminPersistedQueryQueryExecutionFixtureWebserverRequestT
      */
     protected function getEndpoint(): string
     {
-        return 'wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=persistedQuery&persisted_query_id=65';
+        return 'wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=publicPersistedQuery&persisted_query_id=65';
     }
 }
