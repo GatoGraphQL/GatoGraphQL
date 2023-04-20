@@ -7,24 +7,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\PrivatePersistedQueryEndpointAnnotatorRegistryInterface;
 use PoP\Root\App;
 
 class GraphQLPrivatePersistedQueryEndpointCustomPostType extends AbstractGraphQLPersistedQueryEndpointCustomPostType
 {
-    private ?PrivatePersistedQueryEndpointAnnotatorRegistryInterface $privatePersistedQueryEndpointAnnotatorRegistry = null;
-    
-    final public function setPrivatePersistedQueryEndpointAnnotatorRegistry(PrivatePersistedQueryEndpointAnnotatorRegistryInterface $privatePersistedQueryEndpointAnnotatorRegistry): void
-    {
-        $this->privatePersistedQueryEndpointAnnotatorRegistry = $privatePersistedQueryEndpointAnnotatorRegistry;
-    }
-    final protected function getPrivatePersistedQueryEndpointAnnotatorRegistry(): PrivatePersistedQueryEndpointAnnotatorRegistryInterface
-    {
-        /** @var PrivatePersistedQueryEndpointAnnotatorRegistryInterface */
-        return $this->privatePersistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PrivatePersistedQueryEndpointAnnotatorRegistryInterface::class);
-    }
-
     /**
      * Custom Post Type name
      */
@@ -39,11 +25,6 @@ class GraphQLPrivatePersistedQueryEndpointCustomPostType extends AbstractGraphQL
     public function getEnablingModule(): ?string
     {
         return EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES;
-    }
-
-    protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
-    {
-        return $this->getPrivatePersistedQueryEndpointAnnotatorRegistry();
     }
 
     /**

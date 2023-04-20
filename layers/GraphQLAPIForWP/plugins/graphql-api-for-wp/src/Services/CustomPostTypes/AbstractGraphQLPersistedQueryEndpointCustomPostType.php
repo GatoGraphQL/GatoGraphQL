@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
@@ -18,6 +20,7 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
     private ?PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry = null;
     private ?PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock = null;
     private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
+    private ?PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry = null;
 
     final public function setPersistedQueryEndpointBlockRegistry(PersistedQueryEndpointBlockRegistryInterface $persistedQueryEndpointBlockRegistry): void
     {
@@ -46,6 +49,15 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
         /** @var GraphQLEndpointCategoryTaxonomy */
         return $this->graphQLEndpointCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
     }
+    final public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry): void
+    {
+        $this->persistedQueryEndpointAnnotatorRegistry = $persistedQueryEndpointAnnotatorRegistry;
+    }
+    final protected function getPersistedQueryEndpointAnnotatorRegistry(): PersistedQueryEndpointAnnotatorRegistryInterface
+    {
+        /** @var PersistedQueryEndpointAnnotatorRegistryInterface */
+        return $this->persistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+    }
 
     /**
      * Label to show on the "execute" action in the CPT table
@@ -65,6 +77,11 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
         return [
             $this->getGraphQLEndpointCategoryTaxonomy(),
         ];
+    }
+
+    protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
+    {
+        return $this->getPersistedQueryEndpointAnnotatorRegistry();
     }
 
     /**
