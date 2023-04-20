@@ -8,21 +8,21 @@ use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointAnnotatorRegistryInterface;
 use PoP\Root\App;
 
 class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLPublicPersistedQueryEndpointCustomPostType
 {
-    private ?PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry = null;
+    private ?PublicPersistedQueryEndpointAnnotatorRegistryInterface $publicPersistedQueryEndpointAnnotatorRegistry = null;
     
-    final public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry): void
+    final public function setPublicPersistedQueryEndpointAnnotatorRegistry(PublicPersistedQueryEndpointAnnotatorRegistryInterface $publicPersistedQueryEndpointAnnotatorRegistry): void
     {
-        $this->persistedQueryEndpointAnnotatorRegistry = $persistedQueryEndpointAnnotatorRegistry;
+        $this->publicPersistedQueryEndpointAnnotatorRegistry = $publicPersistedQueryEndpointAnnotatorRegistry;
     }
-    final protected function getPersistedQueryEndpointAnnotatorRegistry(): PersistedQueryEndpointAnnotatorRegistryInterface
+    final protected function getPublicPersistedQueryEndpointAnnotatorRegistry(): PublicPersistedQueryEndpointAnnotatorRegistryInterface
     {
-        /** @var PersistedQueryEndpointAnnotatorRegistryInterface */
-        return $this->persistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+        /** @var PublicPersistedQueryEndpointAnnotatorRegistryInterface */
+        return $this->publicPersistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PublicPersistedQueryEndpointAnnotatorRegistryInterface::class);
     }
 
     /**
@@ -43,7 +43,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
 
     protected function getEndpointAnnotatorRegistry(): EndpointAnnotatorRegistryInterface
     {
-        return $this->getPersistedQueryEndpointAnnotatorRegistry();
+        return $this->getPublicPersistedQueryEndpointAnnotatorRegistry();
     }
 
     /**
