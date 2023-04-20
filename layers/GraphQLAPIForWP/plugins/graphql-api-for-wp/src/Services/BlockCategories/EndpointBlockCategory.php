@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
 
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPublicPersistedQueryEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPrivatePersistedQueryEndpointCustomPostType;
 
 /**
  * It comprises the endpoint and the persisted query CPTs
@@ -16,6 +17,7 @@ class EndpointBlockCategory extends AbstractBlockCategory
 
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
     private ?GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType = null;
+    private ?GraphQLPrivatePersistedQueryEndpointCustomPostType $graphQLPrivatePersistedQueryEndpointCustomPostType = null;
 
     final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
     {
@@ -35,6 +37,15 @@ class EndpointBlockCategory extends AbstractBlockCategory
         /** @var GraphQLPublicPersistedQueryEndpointCustomPostType */
         return $this->graphQLPublicPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPublicPersistedQueryEndpointCustomPostType::class);
     }
+    final public function setGraphQLPrivatePersistedQueryEndpointCustomPostType(GraphQLPrivatePersistedQueryEndpointCustomPostType $graphQLPrivatePersistedQueryEndpointCustomPostType): void
+    {
+        $this->graphQLPrivatePersistedQueryEndpointCustomPostType = $graphQLPrivatePersistedQueryEndpointCustomPostType;
+    }
+    final protected function getGraphQLPrivatePersistedQueryEndpointCustomPostType(): GraphQLPrivatePersistedQueryEndpointCustomPostType
+    {
+        /** @var GraphQLPrivatePersistedQueryEndpointCustomPostType */
+        return $this->graphQLPrivatePersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPrivatePersistedQueryEndpointCustomPostType::class);
+    }
 
     /**
      * Custom Post Type for which to enable the block category
@@ -46,6 +57,7 @@ class EndpointBlockCategory extends AbstractBlockCategory
         return [
             $this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType(),
             $this->getGraphQLPublicPersistedQueryEndpointCustomPostType()->getCustomPostType(),
+            $this->getGraphQLPrivatePersistedQueryEndpointCustomPostType()->getCustomPostType(),
         ];
     }
 

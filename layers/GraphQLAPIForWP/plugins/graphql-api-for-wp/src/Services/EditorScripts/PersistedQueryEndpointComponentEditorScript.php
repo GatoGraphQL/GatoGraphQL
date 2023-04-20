@@ -6,6 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
 
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPublicPersistedQueryEndpointCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPrivatePersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 
 /**
@@ -16,6 +17,7 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
     use MainPluginScriptTrait;
 
     private ?GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType = null;
+    private ?GraphQLPrivatePersistedQueryEndpointCustomPostType $graphQLPrivatePersistedQueryEndpointCustomPostType = null;
 
     final public function setGraphQLPublicPersistedQueryEndpointCustomPostType(GraphQLPublicPersistedQueryEndpointCustomPostType $graphQLPublicPersistedQueryEndpointCustomPostType): void
     {
@@ -25,6 +27,15 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
     {
         /** @var GraphQLPublicPersistedQueryEndpointCustomPostType */
         return $this->graphQLPublicPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPublicPersistedQueryEndpointCustomPostType::class);
+    }
+    final public function setGraphQLPrivatePersistedQueryEndpointCustomPostType(GraphQLPrivatePersistedQueryEndpointCustomPostType $graphQLPrivatePersistedQueryEndpointCustomPostType): void
+    {
+        $this->graphQLPrivatePersistedQueryEndpointCustomPostType = $graphQLPrivatePersistedQueryEndpointCustomPostType;
+    }
+    final protected function getGraphQLPrivatePersistedQueryEndpointCustomPostType(): GraphQLPrivatePersistedQueryEndpointCustomPostType
+    {
+        /** @var GraphQLPrivatePersistedQueryEndpointCustomPostType */
+        return $this->graphQLPrivatePersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPrivatePersistedQueryEndpointCustomPostType::class);
     }
 
     /**
@@ -83,6 +94,7 @@ class PersistedQueryEndpointComponentEditorScript extends AbstractEditorScript
             parent::getAllowedPostTypes(),
             [
                 $this->getGraphQLPublicPersistedQueryEndpointCustomPostType()->getCustomPostType(),
+                $this->getGraphQLPrivatePersistedQueryEndpointCustomPostType()->getCustomPostType(),
             ]
         );
     }
