@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostsWP\TypeAPIs;
 
-use PoP\Root\App;
+use PoPCMSSchema\CustomPostsWP\Constants\QueryOptions;
 use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
-use WP_Post;
+use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
+use PoP\Root\App;
 
-use function get_post_status;
-use function get_posts;
+use WP_Post;
 use function esc_sql;
-use function get_the_excerpt;
-use function get_post_types;
 use function get_permalink;
-use function get_sample_permalink;
-use function strip_shortcodes;
 use function get_post;
+use function get_post_status;
+use function get_post_types;
+use function get_posts;
+use function get_sample_permalink;
+use function get_the_excerpt;
+use function strip_shortcodes;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -108,7 +109,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getCustomPostCount(array $query, array $options = []): int
     {
         // Convert parameters
-        $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
+        $options[SchemaCommonsQueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertCustomPostsQuery($query, $options);
 
         // All results, no offset
@@ -126,7 +127,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     protected function convertCustomPostsQuery(array $query, array $options = []): array
     {
-        if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
+        if (($options[SchemaCommonsQueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
             $query['fields'] = 'ids';
         }
 
@@ -168,16 +169,29 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $query['post__not_in'] = $query['exclude-ids'];
             unset($query['exclude-ids']);
         }
-        // If querying "customPostCount(postTypes:[])" it would reset the list to only "post"
-        // So check that postTypes is not empty
+        /**
+         * If querying "customPostCount(postTypes:[])" it would reset
+         * the list to only "post". So check that customPostTypes is
+         * not empty.
+         */
         if (isset($query['custompost-types']) && !empty($query['custompost-types'])) {
             $query['post_type'] = $query['custompost-types'];
             unset($query['custompost-types']);
         } else {
-            // If not adding the post types, WordPress only uses "post", so querying by CPT would fail loading data
-            $query['post_type'] = $this->getCustomPostTypes([
-                'publicly-queryable' => true,
-            ]);
+            /**
+             * If not adding the custom post types, WordPress only uses "post",
+             * so querying by CPT would fail loading data
+             */
+            $allowQueryingPrivateCPTs = $options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS] ?? false;
+            if ($allowQueryingPrivateCPTs) {
+                $query['post_type'] = 'any';
+            } else {
+                $customPostTypeOptions = [
+                    'publicly-queryable' => true,
+                ];
+                $query['post_type'] = $this->getCustomPostTypes($customPostTypeOptions);
+            }
+            
         }
         // Querying "attachment" doesn't work in an array!
         if (is_array($query['post_type']) && count($query['post_type']) === 1) {

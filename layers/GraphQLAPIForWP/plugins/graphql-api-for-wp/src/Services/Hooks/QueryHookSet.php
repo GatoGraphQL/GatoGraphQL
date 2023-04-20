@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Constants\QueryOptions;
 use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\Hooks\AbstractHookSet;
+use PoPCMSSchema\CustomPostsWP\Constants\QueryOptions;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
