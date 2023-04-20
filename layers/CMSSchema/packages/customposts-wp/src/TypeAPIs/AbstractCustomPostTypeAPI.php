@@ -11,8 +11,8 @@ use PoPCMSSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstr
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
 use PoP\Root\App;
-
 use WP_Post;
+
 use function esc_sql;
 use function get_permalink;
 use function get_post;
@@ -191,7 +191,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
                 ];
                 $query['post_type'] = $this->getCustomPostTypes($customPostTypeOptions);
             }
-            
         }
         // Querying "attachment" doesn't work in an array!
         if (is_array($query['post_type']) && count($query['post_type']) === 1) {
