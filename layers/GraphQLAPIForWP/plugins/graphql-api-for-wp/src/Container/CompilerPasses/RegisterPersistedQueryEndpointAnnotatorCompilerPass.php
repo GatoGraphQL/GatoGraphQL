@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointAnnotatorRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\PersistedQueryEndpointAnnotatorServiceTagInterface;
 
 class RegisterPersistedQueryEndpointAnnotatorCompilerPass extends AbstractRegisterEndpointAnnotatorCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
-        return PublicPersistedQueryEndpointAnnotatorRegistryInterface::class;
+        return PersistedQueryEndpointAnnotatorRegistryInterface::class;
     }
     protected function getServiceClass(): string
     {

@@ -37,11 +37,8 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointAnnotatorRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointAnnotatorRegistry
-
-    GraphQLAPI\GraphQLAPI\Registries\PrivatePersistedQueryEndpointAnnotatorRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\PrivatePersistedQueryEndpointAnnotatorRegistry
+    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistry
 
     GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface:
         class: \GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProvider
