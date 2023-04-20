@@ -136,7 +136,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Persisted Query path
             [
                 'class' => Module::class,
-                'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
+                'envVariable' => Environment::PUBLIC_PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
                 'option' => ModuleSettingOptions::PATH,
                 'callback' => fn ($value) => $pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
