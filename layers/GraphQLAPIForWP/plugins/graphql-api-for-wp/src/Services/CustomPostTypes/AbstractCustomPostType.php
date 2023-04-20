@@ -619,16 +619,16 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          *
          * which can be @validated
          */
-        $securityPostTypeArgs = array(
+        $securityPostTypeArgs = [
             'public' => $this->isPublic(),
             'publicly_queryable' => $this->isPubliclyQueryable(),
             'show_in_rest' => $this->showInREST(),
-        );
+        ];
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         /** @var array<string,mixed> */
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
-            array(
+            [
                 'label' => $this->getCustomPostTypeName(),
                 'labels' => $this->getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
                 'capability_type' => $canAccessSchemaEditor ? 'post' : '',
@@ -646,7 +646,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                     // 'custom-fields',
                 ],
             )
-        );
+        ];
         if ($slugBase = $this->getSlugBase()) {
             $postTypeArgs['rewrite'] = ['slug' => $slugBase];
         }
