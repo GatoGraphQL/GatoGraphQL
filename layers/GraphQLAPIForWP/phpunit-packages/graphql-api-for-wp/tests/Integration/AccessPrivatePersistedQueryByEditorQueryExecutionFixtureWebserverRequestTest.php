@@ -37,6 +37,9 @@ class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTe
         return $providerItems;
     }
 
+    /**
+     * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/Helpers/RenderingHelpers.php
+     */
     protected function getGraphQLExpectedResponse(): string
     {
         return '/You are not authorized to see this content/';
