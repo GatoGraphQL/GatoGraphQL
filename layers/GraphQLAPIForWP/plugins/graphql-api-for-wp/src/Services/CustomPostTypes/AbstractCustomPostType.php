@@ -645,8 +645,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                     'revisions',
                     // 'custom-fields',
                 ],
-            )
-        ];
+            ]
+        );
         if ($slugBase = $this->getSlugBase()) {
             $postTypeArgs['rewrite'] = ['slug' => $slugBase];
         }
