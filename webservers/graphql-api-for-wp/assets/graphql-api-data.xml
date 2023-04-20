@@ -1757,7 +1757,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=276</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\\n  comments(\\n    filter: {\\n      dateQuery: {\\n    	  month: 12\\n      }\\n    },\\n    sort: {\\n      by: ID,\\n      order: ASC\\n    },\\n    pagination: {\\n      limit: 3\\n    }\\n  ) {\\n    id\\n    date\\n    content\\n    customPostID\\n  }\\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  comments(\n    filter: {\n      dateQuery: {\n    	  month: 12\n      }\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    date\n    content\n    customPostID\n  }\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":193} /-->
 
@@ -1792,7 +1792,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=278</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\\n  posts(\\n    filter: {\\n      dateQuery: {\\n    	  month: 12\\n      }\\n    },\\n    sort: {\\n      by: ID,\\n      order: ASC\\n    },\\n    pagination: {\\n      limit: 3\\n    }\\n  ) {\\n    id\\n    title\\n    date\\n  }\\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  posts(\n    filter: {\n      dateQuery: {\n    	  month: 12\n      }\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    title\n    date\n  }\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":191} /-->
 
@@ -1864,7 +1864,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=282</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\\n  users(\\n    filter: {\\n      roles: ["subscriber"]\\n    },\\n    sort: {\\n      by: ID,\\n      order: ASC\\n    },\\n    pagination: {\\n      limit: 3\\n    }\\n  ) {\\n    id\\n    name\\n  }\\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  users(\n    filter: {\n      roles: [\"subscriber\"]\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    name\n  }\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration {"schemaConfiguration":-2} /-->
 
@@ -1901,7 +1901,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=284</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\\n  postTags(\\n    filter: {\\n      hideEmpty:true\\n    },\\n    sort: {\\n      by: ID,\\n      order: ASC\\n    },\\n    pagination: {\\n      limit: 3\\n    }\\n  ) {\\n    id\\n    name\\n  }\\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  postTags(\n    filter: {\n      hideEmpty: true\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    name\n  }\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration /-->
 
@@ -1938,7 +1938,7 @@ video/mp4
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=private-query&#038;p=286</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\\n  postTags(\\n    filter: {\\n      hideEmpty:true\\n    },\\n    sort: {\\n      by: ID,\\n      order: ASC\\n    },\\n    pagination: {\\n      limit: 3\\n    }\\n  ) {\\n    id\\n    name\\n  }\\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"{\n  postTags(\n    filter: {\n      hideEmpty:true\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    name\n  }\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration /-->
 
