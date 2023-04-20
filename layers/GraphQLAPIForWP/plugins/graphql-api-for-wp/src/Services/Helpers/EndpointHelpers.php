@@ -212,18 +212,37 @@ class EndpointHelpers
     }
 
     /**
+     * GraphQL endpoint to be used in the admin, when editing Persisted Queries
+     *
+     * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
+     */
+    private function getAdminPersistedQueryGraphQLEndpoint(
+        string $endpointGroup,
+        string|int $persistedQueryEndpointCustomPostID,
+        bool $enableLowLevelQueryEditing,
+    ): string {
+        return \add_query_arg(
+            [
+                RequestParams::ENDPOINT_GROUP => $endpointGroup,
+                RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
+            ],
+            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
+        );
+    }
+
+    /**
      * GraphQL endpoint to be used in the admin, when editing Public Persisted Queries
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public function getAdminPublicPersistedQueryGraphQLEndpoint(string|int $persistedQueryEndpointCustomPostID, bool $enableLowLevelQueryEditing = false): string
-    {
-        return \add_query_arg(
-            [
-                RequestParams::ENDPOINT_GROUP => AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY,
-                RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
-            ],
-            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
+    public function getAdminPublicPersistedQueryGraphQLEndpoint(
+        string|int $persistedQueryEndpointCustomPostID,
+        bool $enableLowLevelQueryEditing = false,
+    ): string {
+        return $this->getAdminPersistedQueryGraphQLEndpoint(
+            AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY,
+            $persistedQueryEndpointCustomPostID,
+            $enableLowLevelQueryEditing,
         );
     }
 
@@ -232,14 +251,14 @@ class EndpointHelpers
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public function getAdminPrivatePersistedQueryGraphQLEndpoint(string|int $persistedQueryEndpointCustomPostID, bool $enableLowLevelQueryEditing = false): string
-    {
-        return \add_query_arg(
-            [
-                RequestParams::ENDPOINT_GROUP => AdminGraphQLEndpointGroups::PRIVATE_PERSISTED_QUERY,
-                RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
-            ],
-            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
+    public function getAdminPrivatePersistedQueryGraphQLEndpoint(
+        string|int $persistedQueryEndpointCustomPostID,
+        bool $enableLowLevelQueryEditing = false,
+    ): string {
+        return $this->getAdminPersistedQueryGraphQLEndpoint(
+            AdminGraphQLEndpointGroups::PRIVATE_PERSISTED_QUERY,
+            $persistedQueryEndpointCustomPostID,
+            $enableLowLevelQueryEditing,
         );
     }
 
