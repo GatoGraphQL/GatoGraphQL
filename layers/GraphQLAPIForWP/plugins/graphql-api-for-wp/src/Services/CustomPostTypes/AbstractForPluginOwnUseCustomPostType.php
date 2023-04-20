@@ -17,6 +17,23 @@ abstract class AbstractForPluginOwnUseCustomPostType extends AbstractCustomPostT
         return false;
     }
 
+    /**
+     * This plugin's Configuration CPTs (eg: SchemaConfig, 
+     * ACLs, CCLs, etc) are to configure data,
+     * and not to be directly accessible by themselves.
+     *
+     * Then, do not make them public, but still allow to access them.
+     *
+     * This way, executing query:
+     * 
+     *   { customPosts(customPostTypes:["graphql-schemaconfig"]) }
+     * 
+     * ...will fail, and we execute instead:
+     * 
+     *   { schemaConfigurations }
+     *
+     * which can be @validated
+     */
     protected function isPubliclyQueryable(): bool
     {
         return true;
