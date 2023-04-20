@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointAnnotatorRegistryInterface;
 use PoP\Root\App;
 
-class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLPublicPersistedQueryEndpointCustomPostType
+class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLPersistedQueryEndpointCustomPostType
 {
     private ?PublicPersistedQueryEndpointAnnotatorRegistryInterface $publicPersistedQueryEndpointAnnotatorRegistry = null;
     

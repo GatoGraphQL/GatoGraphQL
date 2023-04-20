@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
 
-abstract class AbstractGraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
+abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {
     use WithBlockRegistryCustomPostTypeTrait;
 
