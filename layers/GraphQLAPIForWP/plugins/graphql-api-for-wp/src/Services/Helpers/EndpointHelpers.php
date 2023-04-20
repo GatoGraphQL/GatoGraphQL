@@ -71,7 +71,7 @@ class EndpointHelpers
      *
      *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=persistedQuery&persisted_query_id=...
      */
-    public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
+    public function isRequestingAdminPublicPersistedQueryGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
             && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PERSISTED_QUERY;
@@ -96,7 +96,7 @@ class EndpointHelpers
     public function isRequestingNonPersistedQueryAdminGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && !$this->isRequestingAdminPersistedQueryGraphQLEndpoint();
+            && !$this->isRequestingAdminPublicPersistedQueryGraphQLEndpoint();
     }
 
     /**

@@ -37,7 +37,7 @@ class EditingPublicPersistedQueryEndpointSchemaConfiguratorExecuter extends Abst
      */
     protected function getCustomPostID(): ?int
     {
-        if ($this->getEndpointHelpers()->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
+        if ($this->getEndpointHelpers()->isRequestingAdminPublicPersistedQueryGraphQLEndpoint()) {
             return (int) $this->getEndpointHelpers()->getAdminPersistedQueryCustomPostID();
         }
         return null;

@@ -344,10 +344,10 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          * which will be cached and shared from then on.
          */
         $isAdmin = is_admin();
-        $isRequestingAdminPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
+        $isRequestingAdminPublicPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPublicPersistedQueryGraphQLEndpoint();
         $isInternalGraphQLServer = AppHelpers::isInternalGraphQLServerAppThread();
         if (
-            ($isAdmin && !$isRequestingAdminPersistedQueryGraphQLEndpoint)
+            ($isAdmin && !$isRequestingAdminPublicPersistedQueryGraphQLEndpoint)
             || $isInternalGraphQLServer
         ) {
             /**
@@ -378,7 +378,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
              * be cached and shared from then on.
              */
             !$isAdmin
-            || $isRequestingAdminPersistedQueryGraphQLEndpoint
+            || $isRequestingAdminPublicPersistedQueryGraphQLEndpoint
         ) {
             return $schemaModuleClassesToSkip;
         }
