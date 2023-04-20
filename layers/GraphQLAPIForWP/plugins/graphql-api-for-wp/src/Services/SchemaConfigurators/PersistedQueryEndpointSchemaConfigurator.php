@@ -23,11 +23,12 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostEndpoin
     }
 
     /**
-     * Only enable the service, if the corresponding module is also enabled
+     * Only enable the service, if any of the corresponding modules is also enabled
      */
     public function isServiceEnabled(): bool
     {
-        return $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)
+        return ($this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES)
+            || $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES))
             && parent::isServiceEnabled();
     }
 

@@ -9,7 +9,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestURLPathSettingsWebserv
 /**
  * Test that updating the base path for the persisted queries works well
  */
-class PersistedQueryBasePathSettingsWebserverRequestTest extends AbstractRequestURLPathSettingsWebserverRequestTest
+class PublicPersistedQueryBasePathSettingsWebserverRequestTest extends AbstractRequestURLPathSettingsWebserverRequestTest
 {
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
@@ -25,7 +25,7 @@ class PersistedQueryBasePathSettingsWebserverRequestTest extends AbstractRequest
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_persisted-queries';
+        return 'graphqlapi_graphqlapi_public-persisted-queries';
     }
 
     protected function getNewPath(string $dataItem): string

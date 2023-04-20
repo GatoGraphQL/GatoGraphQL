@@ -205,7 +205,10 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 Properties::DESCRIPTION => \__('Use the Explorer in the GraphiQL client in the admin area?', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-            if ($this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)) {
+            if (
+                $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES)
+                || $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES)
+            ) {
                 $option = self::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,

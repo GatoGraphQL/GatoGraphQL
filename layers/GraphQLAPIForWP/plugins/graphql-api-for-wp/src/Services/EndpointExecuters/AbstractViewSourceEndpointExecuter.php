@@ -4,14 +4,38 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GraphQLAPI\GraphQLAPI\PluginApp;
+use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\RenderingHelpers;
+use PoP\Root\App;
 use WP_Post;
 
 abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExecuter implements EndpointExecuterServiceTagInterface
 {
+    private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?RenderingHelpers $renderingHelpers = null;
+
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    final protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        /** @var UserAuthorizationInterface */
+        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+    }
+    final public function setRenderingHelpers(RenderingHelpers $renderingHelpers): void
+    {
+        $this->renderingHelpers = $renderingHelpers;
+    }
+    final protected function getRenderingHelpers(): RenderingHelpers
+    {
+        /** @var RenderingHelpers */
+        return $this->renderingHelpers ??= $this->instanceManager->getInstance(RenderingHelpers::class);
+    }
+
     protected function getView(): string
     {
         return RequestParams::VIEW_SOURCE;
@@ -32,9 +56,15 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
     public function maybeGetGraphQLQuerySourceContent(string $content): string
     {
         $customPost = App::getState(['routing', 'queried-object']);
+
         // Make sure there is a post (eg: it has not been deleted)
         if ($customPost !== null) {
-            return $this->getGraphQLQuerySourceContent($content, $customPost);
+            // Make sure the visitor can access the source
+            $graphQLQuerySourceContent = $this->getGraphQLQuerySourceContent($content, $customPost);
+            if ($graphQLQuerySourceContent === null) {
+                return $this->getRenderingHelpers()->getUnauthorizedAccessHTMLMessage();
+            }
+            return $graphQLQuerySourceContent;
         }
         return $content;
     }
@@ -42,8 +72,15 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
     /**
      * Render the GraphQL Query CPT
      */
-    protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): string
+    protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): ?string
     {
+        /**
+         * Show only if the user has the right permission
+         */
+        if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {
+            return null;
+        }
+
         // Commented out Prettify
         // // $scriptSrc = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js'
         // $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();

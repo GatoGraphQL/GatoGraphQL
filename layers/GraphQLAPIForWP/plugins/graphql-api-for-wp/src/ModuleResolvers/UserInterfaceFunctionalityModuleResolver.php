@@ -55,8 +55,9 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             case self::WELCOME_GUIDES:
                 return [
                     [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                         EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
+                        EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES,
                     ]
                 ];
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
@@ -74,7 +75,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             case self::PERSISTED_QUERY_ENDPOINT_PROPERTIES:
                 return [
                     [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES,
                     ],
                 ];
         }

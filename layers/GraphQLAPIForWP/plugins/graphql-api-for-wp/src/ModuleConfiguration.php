@@ -84,12 +84,26 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * The slug to use as base when accessing the persisted query
+     * The slug to use as base when accessing the public persisted query
      */
-    public function getPersistedQuerySlugBase(): string
+    public function getPublicPersistedQuerySlugBase(): string
     {
-        $envVariable = Environment::PERSISTED_QUERY_SLUG_BASE;
+        $envVariable = Environment::PUBLIC_PERSISTED_QUERY_SLUG_BASE;
         $defaultValue = 'graphql-query';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+
+    /**
+     * The slug to use as base when accessing the private persisted query
+     */
+    public function getPrivatePersistedQuerySlugBase(): string
+    {
+        $envVariable = Environment::PRIVATE_PERSISTED_QUERY_SLUG_BASE;
+        $defaultValue = 'private-query';
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

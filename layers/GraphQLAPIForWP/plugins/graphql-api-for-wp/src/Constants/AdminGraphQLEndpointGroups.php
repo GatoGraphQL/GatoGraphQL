@@ -11,6 +11,6 @@ class AdminGraphQLEndpointGroups
      * then the default one is used
      */
     public final const DEFAULT = '';
-    public final const PERSISTED_QUERY = 'persistedQuery';
     public final const PLUGIN_OWN_USE = 'pluginOwnUse';
+    public final const PERSISTED_QUERY = 'persistedQuery';
 }

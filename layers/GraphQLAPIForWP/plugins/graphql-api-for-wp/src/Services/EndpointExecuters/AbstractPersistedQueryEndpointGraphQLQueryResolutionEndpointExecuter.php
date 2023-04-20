@@ -4,27 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use WP_Post;
 
-class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter
+abstract class AbstractPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter
 {
-    private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
     private ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
 
-    final public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
-    {
-        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
-    }
-    final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
-    {
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
-    }
     final public function setGraphQLQueryPostTypeHelpers(GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers): void
     {
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
@@ -33,16 +20,6 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends Abstr
     {
         /** @var GraphQLQueryPostTypeHelpers */
         return $this->graphQLQueryPostTypeHelpers ??= $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
-    }
-
-    public function getEnablingModule(): ?string
-    {
-        return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
-    }
-
-    protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
-    {
-        return $this->getGraphQLPersistedQueryEndpointCustomPostType();
     }
 
     /**
