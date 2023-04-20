@@ -22,11 +22,16 @@ trait RequestURLWebserverRequestTestCaseTrait
     ): void {
         $client = static::getClient();
         $clientEndpointURL = static::getWebserverHomeURL() . '/' . ltrim($clientEndpoint, '/');
-        $options = [
-            'verify' => false,
-            // Don't throw exception with 404
-            'http_errors' => false,
-        ];
+        $options = array_merge(
+            [
+                'verify' => false,
+                // Don't throw exception with 404
+                'http_errors' => false,
+            ],
+            $this->sendAuthenticatedRequest()
+                ? static::getRequestBasicOptions()
+                : []
+        );
         $response = $client->get($clientEndpointURL, $options);
 
         // Disabled clients: they may assert it produced a 404
@@ -60,5 +65,15 @@ trait RequestURLWebserverRequestTestCaseTrait
     protected function getCustomHeader(): ?string
     {
         return null;
+    }
+    
+    /**
+     * @return array<string,mixed>
+     */
+    abstract protected static function getRequestBasicOptions(): array;
+
+    protected function sendAuthenticatedRequest(): bool
+    {
+        return false;
     }
 }

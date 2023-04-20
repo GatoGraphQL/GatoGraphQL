@@ -23,4 +23,9 @@ class PrivatePersistedQueryBasePathSettingsWebserverRequestTest extends Abstract
     {
         return 'privaaaaaate-queeeeery';
     }
+
+    protected function sendAuthenticatedRequest(): bool
+    {
+        return true;
+    }
 }
