@@ -597,6 +597,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $name_uc = $this->getCustomPostTypeName();
         $names_uc = $this->getCustomPostTypePluralNames(true);
         $names_lc = $this->getCustomPostTypePluralNames(false);
+
         /**
          * This plugin's Configuration CPTs (eg: SchemaConfig, 
          * ACLs, CCLs, etc) are to configure data,
