@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
-
-trait AccessPrivatePersistedQueryFailsQueryExecutionFixtureWebserverRequestTestTrait
+class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
 {
+    /**
+     * This folder doesn't actually matter, as the content will
+     * be overriden anyway
+     */
     protected function getResponseFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-private-persisted-queries-failure';
+        return __DIR__ . '/fixture-private-persisted-queries-success';
+    }
+
+    protected function viewSource(): bool
+    {
+        return true;
     }
 
     /**
@@ -25,16 +32,16 @@ trait AccessPrivatePersistedQueryFailsQueryExecutionFixtureWebserverRequestTestT
         // expectedContentType
         $providerItems['private-persisted-query'][0] = 'text/html';
         /**
-         * Except to find the "You are not authorized" message
+         * Except to NOT find the "You are not authorized" message
          *
          * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/Helpers/RenderingHelpers.php
          */
-        $providerItems['private-persisted-query'][1] = '/You are not authorized to see this content/';
+        $providerItems['private-persisted-query'][1] = '/(?<!You are not authorized to see this content)/';
         return $providerItems;
     }
 
     protected function getResponseComparisonType(): ?int
     {
-        return AbstractEndpointWebserverRequestTestCase::RESPONSE_COMPARISON_REGEX;
+        return self::RESPONSE_COMPARISON_REGEX;
     }
 }

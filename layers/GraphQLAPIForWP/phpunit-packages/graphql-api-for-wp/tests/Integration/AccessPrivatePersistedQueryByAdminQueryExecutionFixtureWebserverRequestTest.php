@@ -10,4 +10,9 @@ class AccessPrivatePersistedQueryByAdminQueryExecutionFixtureWebserverRequestTes
     {
         return __DIR__ . '/fixture-private-persisted-queries-success';
     }
+
+    protected function viewSource(): bool
+    {
+        return false;
+    }
 }

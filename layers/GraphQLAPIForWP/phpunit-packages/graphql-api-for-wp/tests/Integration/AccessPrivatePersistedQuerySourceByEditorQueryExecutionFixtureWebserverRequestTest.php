@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 
-class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
+class AccessPrivatePersistedQuerySourceByEditorQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
 {
     use AccessPrivatePersistedQueryFailsQueryExecutionFixtureWebserverRequestTestTrait;
 
@@ -22,6 +22,6 @@ class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTe
 
     protected function viewSource(): bool
     {
-        return false;
+        return true;
     }
 }

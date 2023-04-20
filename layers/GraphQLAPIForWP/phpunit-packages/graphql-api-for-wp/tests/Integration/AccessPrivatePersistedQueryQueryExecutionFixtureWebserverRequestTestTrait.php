@@ -17,6 +17,13 @@ trait AccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTestTrait
 
     protected function getEndpoint(): string
     {
-        return 'private-query/comments-from-this-month/';
+        return sprintf(
+            'private-query/comments-from-this-month/%s',
+            $this->viewSource()
+                ? '?view=source'
+                : ''
+        );
     }
+
+    abstract protected function viewSource(): bool;
 }
