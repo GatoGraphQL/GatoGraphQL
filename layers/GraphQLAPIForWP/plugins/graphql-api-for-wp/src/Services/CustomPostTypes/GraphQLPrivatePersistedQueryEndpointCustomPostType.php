@@ -50,11 +50,6 @@ class GraphQLPrivatePersistedQueryEndpointCustomPostType extends AbstractGraphQL
         return true;
     }
 
-    protected function isPubliclyQueryable(): bool
-    {
-        return false;
-    }
-
     /**
      * Custom post type name
      */
