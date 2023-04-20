@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQueryEndpointSchemaConfigurator;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PublicPersistedQueryEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 
-class EditingPublicPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
+class EditingPublicPublicPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
     private ?EndpointHelpers $endpointHelpers = null;
-    private ?PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator = null;
+    private ?PublicPersistedQueryEndpointSchemaConfigurator $publicPersistedQueryEndpointSchemaConfigurator = null;
 
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -22,14 +22,14 @@ class EditingPublicPersistedQueryEndpointSchemaConfiguratorExecuter extends Abst
         /** @var EndpointHelpers */
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
-    final public function setPersistedQueryEndpointSchemaConfigurator(PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator): void
+    final public function setPublicPersistedQueryEndpointSchemaConfigurator(PublicPersistedQueryEndpointSchemaConfigurator $publicPersistedQueryEndpointSchemaConfigurator): void
     {
-        $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
+        $this->publicPersistedQueryEndpointSchemaConfigurator = $publicPersistedQueryEndpointSchemaConfigurator;
     }
-    final protected function getPersistedQueryEndpointSchemaConfigurator(): PersistedQueryEndpointSchemaConfigurator
+    final protected function getPublicPersistedQueryEndpointSchemaConfigurator(): PublicPersistedQueryEndpointSchemaConfigurator
     {
-        /** @var PersistedQueryEndpointSchemaConfigurator */
-        return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
+        /** @var PublicPersistedQueryEndpointSchemaConfigurator */
+        return $this->publicPersistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PublicPersistedQueryEndpointSchemaConfigurator::class);
     }
 
     /**
@@ -45,6 +45,6 @@ class EditingPublicPersistedQueryEndpointSchemaConfiguratorExecuter extends Abst
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->getPersistedQueryEndpointSchemaConfigurator();
+        return $this->getPublicPersistedQueryEndpointSchemaConfigurator();
     }
 }
