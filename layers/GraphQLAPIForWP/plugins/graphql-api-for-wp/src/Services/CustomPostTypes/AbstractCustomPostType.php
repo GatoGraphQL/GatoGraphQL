@@ -534,7 +534,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     protected function isPubliclyQueryable(): bool
     {
-        return $this->isPubliclyQueryable();
+        return $this->isPublic();
     }
 
     /**
