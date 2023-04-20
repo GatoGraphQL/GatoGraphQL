@@ -52,7 +52,7 @@ class GraphQLPrivatePersistedQueryEndpointCustomPostType extends AbstractGraphQL
 
     protected function isPubliclyQueryable(): bool
     {
-        return true;
+        return false;
     }
 
     protected function showInREST(): bool
