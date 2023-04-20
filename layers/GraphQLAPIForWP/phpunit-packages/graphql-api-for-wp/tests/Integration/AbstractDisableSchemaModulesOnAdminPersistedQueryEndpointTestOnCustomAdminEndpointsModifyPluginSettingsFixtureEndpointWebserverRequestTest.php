@@ -21,6 +21,6 @@ abstract class AbstractDisableSchemaModulesOnAdminPersistedQueryEndpointTestOnCu
 
     protected function getAdminEndpointGroup(): string
     {
-        return AdminGraphQLEndpointGroups::PERSISTED_QUERY;
+        return AdminGraphQLEndpointGroups::PUBLIC_PERSISTED_QUERY;
     }
 }
