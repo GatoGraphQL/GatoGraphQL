@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PublicPersistedQueryEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 
-class EditingPublicPublicPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
+class EditingPublicPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
     private ?EndpointHelpers $endpointHelpers = null;
     private ?PublicPersistedQueryEndpointSchemaConfigurator $publicPersistedQueryEndpointSchemaConfigurator = null;
