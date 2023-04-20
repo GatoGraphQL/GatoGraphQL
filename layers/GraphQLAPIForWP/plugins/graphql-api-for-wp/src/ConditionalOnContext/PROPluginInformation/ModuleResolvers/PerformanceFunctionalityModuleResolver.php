@@ -58,9 +58,6 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
                     [
                         SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
                     ],
-                    [
-                        EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
-                    ],
                 ];
         }
         return parent::getDependedModuleLists($module);
@@ -78,7 +75,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     {
         switch ($module) {
             case self::CACHE_CONTROL:
-                return \__('Provide HTTP Caching for Persisted Queries, sending the Cache-Control header with a max-age value calculated from all fields in the query', 'graphql-api');
+                return \__('Provide HTTP Caching (for Persisted Queries or endpoints accessed via GET), sending the Cache-Control header with a max-age value calculated from all fields in the query', 'graphql-api');
         }
         return parent::getDescription($module);
     }
