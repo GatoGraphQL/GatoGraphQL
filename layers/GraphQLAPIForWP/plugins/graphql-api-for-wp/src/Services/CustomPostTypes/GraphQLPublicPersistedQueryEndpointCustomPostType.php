@@ -32,7 +32,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
      */
     protected function getMenuPosition(): int
     {
-        return 2;
+        return 3;
     }
 
     /**
