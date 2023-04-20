@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
@@ -12,20 +11,10 @@ use WP_Post;
 
 abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewSourceEndpointExecuter
 {
-    private ?UserAuthorizationInterface $userAuthorization = null;
     private ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
     private ?PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor = null;
     private ?PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock = null;
 
-    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
-    {
-        $this->userAuthorization = $userAuthorization;
-    }
-    final protected function getUserAuthorization(): UserAuthorizationInterface
-    {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
-    }
     final public function setGraphQLQueryPostTypeHelpers(GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers): void
     {
         $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
@@ -57,9 +46,13 @@ abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends 
     /**
      * Add the parent query to the rendering of the GraphQL Query CPT
      */
-    protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): string
+    protected function getGraphQLQuerySourceContent(string $content, WP_Post $graphQLQueryPost): ?string
     {
         $content = parent::getGraphQLQuerySourceContent($content, $graphQLQueryPost);
+
+        if ($content === null) {
+            return null;
+        }
 
         /**
          * If the GraphQL query has a parent, possibly it is missing the query/variables/acl/ccl attributes,
@@ -98,7 +91,7 @@ abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends 
                     $ancestorContent = $this->getPersistedQueryEndpointGraphiQLBlock()->renderBlock($inheritedGraphQLBlockAttributes, '');
                 }
             } else {
-                $ancestorContent = $this->getPersistedQueryEndpointGraphiQLBlock()->renderUnauthorizedAccess();
+                $ancestorContent = $this->getRenderingHelpers()->getUnauthorizedAccessHTMLMessage();
             }
             if ($ancestorContent !== null) {
                 $content = sprintf(

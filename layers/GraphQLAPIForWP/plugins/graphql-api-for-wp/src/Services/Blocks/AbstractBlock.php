@@ -13,6 +13,7 @@ use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\RenderingHelpers;
 use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
@@ -36,6 +37,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     private ?StringConversion $stringConversion = null;
     private ?EditorHelpers $editorHelpers = null;
     private ?LocaleHelper $localeHelper = null;
+    private ?RenderingHelpers $renderingHelpers = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -81,6 +83,15 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     {
         /** @var LocaleHelper */
         return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
+    }
+    final public function setRenderingHelpers(RenderingHelpers $renderingHelpers): void
+    {
+        $this->renderingHelpers = $renderingHelpers;
+    }
+    final protected function getRenderingHelpers(): RenderingHelpers
+    {
+        /** @var RenderingHelpers */
+        return $this->renderingHelpers ??= $this->instanceManager->getInstance(RenderingHelpers::class);
     }
 
     /**
@@ -146,16 +157,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     abstract public function renderBlock(array $attributes, string $content): string;
 
-    /**
-     * Do not output the content, and show an error message to the visitor
-     */
-    public function renderUnauthorizedAccess(): string
-    {
-        return sprintf(
-            '<p>%s</p>',
-            \__('You are not authorized to see this content', 'graphql-api')
-        );
-    }
     /**
      * Register index.css
      */
@@ -412,7 +413,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
                 $blockConfiguration['render_callback'] = $this->renderBlock(...);
             } else {
-                $blockConfiguration['render_callback'] = $this->renderUnauthorizedAccess(...);
+                $blockConfiguration['render_callback'] = $this->getRenderingHelpers()->getUnauthorizedAccessHTMLMessage(...);
             }
         }
 
