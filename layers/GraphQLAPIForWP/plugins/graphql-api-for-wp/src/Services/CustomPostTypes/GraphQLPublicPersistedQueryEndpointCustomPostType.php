@@ -13,16 +13,16 @@ use PoP\Root\App;
 
 class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLPersistedQueryEndpointCustomPostType
 {
-    private ?PersistedQueryEndpointAnnotatorRegistryInterface $publicPersistedQueryEndpointAnnotatorRegistry = null;
+    private ?PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry = null;
     
-    final public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $publicPersistedQueryEndpointAnnotatorRegistry): void
+    final public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry): void
     {
-        $this->publicPersistedQueryEndpointAnnotatorRegistry = $publicPersistedQueryEndpointAnnotatorRegistry;
+        $this->persistedQueryEndpointAnnotatorRegistry = $persistedQueryEndpointAnnotatorRegistry;
     }
     final protected function getPersistedQueryEndpointAnnotatorRegistry(): PersistedQueryEndpointAnnotatorRegistryInterface
     {
         /** @var PersistedQueryEndpointAnnotatorRegistryInterface */
-        return $this->publicPersistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+        return $this->persistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
     }
 
     /**
