@@ -51,6 +51,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                 return [
                     [
                         EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES,
                     ],
                 ];
         }
