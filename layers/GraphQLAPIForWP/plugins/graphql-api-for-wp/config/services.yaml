@@ -40,6 +40,9 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointAnnotatorRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\PublicPersistedQueryEndpointAnnotatorRegistry
 
+    GraphQLAPI\GraphQLAPI\Registries\PrivatePersistedQueryEndpointAnnotatorRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\PrivatePersistedQueryEndpointAnnotatorRegistry
+
     GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface:
         class: \GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProvider
 
