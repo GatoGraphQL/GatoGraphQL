@@ -8,10 +8,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 
 class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
 {
-    protected function getResponseFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-private-persisted-queries-by-editor';
-    }
+    use AccessPrivatePersistedQueryFailsQueryExecutionFixtureWebserverRequestTestTrait;
 
     protected static function getLoginUsername(): string
     {
@@ -21,32 +18,5 @@ class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTe
     protected static function getLoginPassword(): string
     {
         return Environment::getIntegrationTestsAuthenticatedEditorUserPassword();
-    }
-
-    /**
-     * This test disables the endpoint, then update the providerItem
-     * via code.
-     *
-     * @param array<string,mixed> $providerItems
-     * @return array<string,mixed>
-     */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
-    {
-        // expectedContentType
-        $providerItems['private-persisted-query'][0] = 'text/html';
-        return $providerItems;
-    }
-
-    /**
-     * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/Helpers/RenderingHelpers.php
-     */
-    protected function getGraphQLExpectedResponse(): string
-    {
-        return '/You are not authorized to see this content/';
-    }
-
-    protected function getResponseComparisonType(): ?int
-    {
-        return self::RESPONSE_COMPARISON_REGEX;
     }
 }

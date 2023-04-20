@@ -13,14 +13,5 @@ use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRe
 abstract class AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-
-    protected function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-private-persisted-queries';
-    }
-
-    protected function getEndpoint(): string
-    {
-        return 'private-query/comments-from-this-month/';
-    }
+    use AccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTestTrait;
 }

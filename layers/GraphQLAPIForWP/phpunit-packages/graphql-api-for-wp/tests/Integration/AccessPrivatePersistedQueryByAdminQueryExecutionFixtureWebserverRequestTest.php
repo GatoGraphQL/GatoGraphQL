@@ -8,6 +8,6 @@ class AccessPrivatePersistedQueryByAdminQueryExecutionFixtureWebserverRequestTes
 {
     protected function getResponseFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-private-persisted-queries-by-admin';
+        return __DIR__ . '/fixture-private-persisted-queries-success';
     }
 }
