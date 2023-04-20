@@ -617,7 +617,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $securityPostTypeArgs = [
             'public' => $this->isPublic(),
             'publicly_queryable' => $this->isPubliclyQueryable(),
-            'show_in_rest' => true,
         ];
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         /** @var array<string,mixed> */
@@ -633,6 +632,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'show_in_nav_menus' => true,
                 'show_ui' => true,
                 'show_in_menu' => $canAccessSchemaEditor ? $this->getMenu()->getName() : false,
+                'show_in_rest' => true,
                 'supports' => [
                     'title',
                     'editor',
