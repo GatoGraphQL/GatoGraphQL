@@ -529,8 +529,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     /**
      * Indicate if to make the Custom Post Type public.
-     * By default it's false because, for configuration CPTs (Access Control Lists,
-     * Cache Control Lists, Schema Configuration, etc), this data is private,
+     * By default it's false because, for configuration
+     * CPTs (Access Control Lists, Cache Control Lists,
+     * Schema Configuration, etc), this data is private,
      * must not be exposed.
      */
     protected function isPublic(): bool
