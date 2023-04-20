@@ -45,11 +45,6 @@ class GraphQLPrivatePersistedQueryEndpointCustomPostType extends AbstractGraphQL
         return $moduleConfiguration->getPrivatePersistedQuerySlugBase();
     }
 
-    protected function isPublic(): bool
-    {
-        return true;
-    }
-
     /**
      * Custom post type name
      */

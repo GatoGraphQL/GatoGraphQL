@@ -137,14 +137,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
 
     /**
-     * The Query is publicly accessible, and the permalink must be configurable
-     */
-    protected function isPublic(): bool
-    {
-        return true;
-    }
-
-    /**
      * Taxonomies
      *
      * @return TaxonomyInterface[]
