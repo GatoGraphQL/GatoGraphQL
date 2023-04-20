@@ -34,8 +34,16 @@ class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTe
     {
         // expectedContentType
         $providerItems['private-persisted-query'][0] = 'text/html';
-        // expectedResponseBody. null => no exection of test
-        $providerItems['private-persisted-query'][1] = null;
         return $providerItems;
+    }
+
+    protected function getGraphQLExpectedResponse(): string
+    {
+        return '/You are not authorized to see this content/';
+    }
+
+    protected function getResponseComparisonType(): ?int
+    {
+        return self::RESPONSE_COMPARISON_REGEX;
     }
 }
