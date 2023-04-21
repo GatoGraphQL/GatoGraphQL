@@ -134,7 +134,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
     public function addMenuPages(): void
     {
-        global $submenu;
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         $menuName = $this->getMenuName();
 
@@ -271,26 +270,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             )
         ) {
             $recipesMenuPage->setHookName($hookName);
-        }
-
-        /** @var GraphQLClientsForWPModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
-        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
-            $clientPath = $moduleConfiguration->getGraphiQLClientEndpoint();
-            $submenu[$menuName][] = [
-                __('🟢 GraphiQL (public client for single endpoint)', 'graphql-api'),
-                'read',
-                home_url($clientPath),
-            ];
-        }
-
-        if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
-            $clientPath = $moduleConfiguration->getVoyagerClientEndpoint();
-            $submenu[$menuName][] = [
-                __('🟢 Interactive Schema (public client for single endpoint)', 'graphql-api'),
-                'read',
-                home_url($clientPath),
-            ];
         }
     }
 
