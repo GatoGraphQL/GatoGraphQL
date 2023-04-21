@@ -4,6 +4,14 @@
 #wpcontent .graphiql-container  {
     height: calc(100vh - 32px);
 }
+#wpcontent .graphiql-root  {
+    margin-left: -10px;
+}
+@media (min-width: 783px) {
+    #wpcontent .graphiql-root  {
+        margin-left: -20px;
+    }
+}
 /**
  * The spinner in the WP Admin and in GraphiQL have both class "spinner", so they conflict,
  * and the GraphiQL spinner is not visible.

@@ -344,48 +344,50 @@ class App extends Component<{}, State> {
     // Inject settings from the application
     var response = (window.graphiQLWithExplorerClientForWP && window.graphiQLWithExplorerClientForWP.response) ? window.graphiQLWithExplorerClientForWP.response : "Click the \"Execute Query\" button, or press Ctrl+Enter (Command+Enter in Mac)";
     return (
-      <div className="graphiql-container">
-        <GraphiQLExplorer
-          schema={schema}
-          query={query}
-          onEdit={this._handleEditQuery}
-          onRunOperation={operationName =>
-            this._graphiql.handleRunQuery(operationName)
-          }
-          explorerIsOpen={this.state.explorerIsOpen}
-          onToggleExplorer={this._handleToggleExplorer}
-          // getDefaultScalarArgValue={getDefaultScalarArgValue}
-          // makeDefaultArg={makeDefaultArg}
-        />
-        <GraphiQL
-          ref={ref => (this._graphiql = ref)}
-          fetcher={fetcher}
-          schema={schema}
-          query={query}
-          onEditQuery={this._handleEditQuery}
-          onEditVariables={this._onEditVariables}
-          onEditOperationName={this._onEditOperationName}
-          response={response}
-          headerEditorEnabled={false}
-        >
-          <GraphiQL.Toolbar>
-            <GraphiQL.Button
-              onClick={() => this._graphiql.handlePrettifyQuery()}
-              label="Prettify"
-              title="Prettify Query (Shift-Ctrl-P)"
-            />
-            <GraphiQL.Button
-              onClick={() => this._graphiql.handleToggleHistory()}
-              label="History"
-              title="Show History"
-            />
-            <GraphiQL.Button
-              onClick={this._handleToggleExplorer}
-              label="Explorer"
-              title="Toggle Explorer"
-            />
-          </GraphiQL.Toolbar>
-        </GraphiQL>
+      <div className="graphiql-root">
+        <div className="graphiql-container">
+          <GraphiQLExplorer
+            schema={schema}
+            query={query}
+            onEdit={this._handleEditQuery}
+            onRunOperation={operationName =>
+              this._graphiql.handleRunQuery(operationName)
+            }
+            explorerIsOpen={this.state.explorerIsOpen}
+            onToggleExplorer={this._handleToggleExplorer}
+            // getDefaultScalarArgValue={getDefaultScalarArgValue}
+            // makeDefaultArg={makeDefaultArg}
+          />
+          <GraphiQL
+            ref={ref => (this._graphiql = ref)}
+            fetcher={fetcher}
+            schema={schema}
+            query={query}
+            onEditQuery={this._handleEditQuery}
+            onEditVariables={this._onEditVariables}
+            onEditOperationName={this._onEditOperationName}
+            response={response}
+            headerEditorEnabled={false}
+          >
+            <GraphiQL.Toolbar>
+              <GraphiQL.Button
+                onClick={() => this._graphiql.handlePrettifyQuery()}
+                label="Prettify"
+                title="Prettify Query (Shift-Ctrl-P)"
+              />
+              <GraphiQL.Button
+                onClick={() => this._graphiql.handleToggleHistory()}
+                label="History"
+                title="Show History"
+              />
+              <GraphiQL.Button
+                onClick={this._handleToggleExplorer}
+                label="Explorer"
+                title="Toggle Explorer"
+              />
+            </GraphiQL.Toolbar>
+          </GraphiQL>
+        </div>
       </div>
     );
   }
