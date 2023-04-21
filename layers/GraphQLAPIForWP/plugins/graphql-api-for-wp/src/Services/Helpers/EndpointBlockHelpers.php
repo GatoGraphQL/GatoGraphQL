@@ -18,7 +18,7 @@ use WP_Post;
 class EndpointBlockHelpers
 {
     use BasicServiceTrait;
-    
+
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?BlockHelpers $blockHelpers = null;

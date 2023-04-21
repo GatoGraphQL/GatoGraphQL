@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
     private ?EndpointBlockHelpers $endpointBlockHelpers = null;
-    
+
     final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
     {
         $this->endpointBlockHelpers = $endpointBlockHelpers;
