@@ -3,7 +3,14 @@
 }
 #wpcontent .voyager-client  {
     height: calc(100vh - 32px);
-    margin-left: -20px;
+}
+#wpcontent .voyager-client  {
+    margin-left: -10px;
+}
+@media (min-width: 783px) {
+    #wpcontent .voyager-client  {
+        margin-left: -20px;
+    }
 }
 /**
  * Fix the .menu-content being shown at the bottom of the screen, out of the viewport
