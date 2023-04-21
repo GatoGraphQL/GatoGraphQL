@@ -71,6 +71,8 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
 
     /**
      * Return the stored Schema Configuration ID
+     *
+     * @todo Use `EndpointBlockHelpers->getUserSettingSchemaConfigurationID` intead? Pass the option name as param?
      */
     protected function getUserSettingSchemaConfigurationID(): ?int
     {

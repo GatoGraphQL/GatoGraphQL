@@ -31,8 +31,11 @@ class BlockHelpers
             $configurationPostID = $configurationPostOrID;
             $configurationPost = \get_post($configurationPostID);
         }
-        // If there's either no post or ID, then that object doesn't exist (or maybe it's draft or trashed)
-        if (is_null($configurationPost) || !$configurationPostID) {
+        /**
+         * If there's either no post or ID, then that object
+         * doesn't exist (or maybe it's draft or trashed)
+         */
+        if ($configurationPost === null || !$configurationPostID) {
             return [];
         }
         // If it's trashed, then do not use

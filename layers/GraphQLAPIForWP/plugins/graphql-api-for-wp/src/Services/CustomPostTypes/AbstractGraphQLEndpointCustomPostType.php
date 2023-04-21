@@ -9,12 +9,14 @@ use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
 use PoP\Root\App;
 use WP_Post;
 
 abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostType implements GraphQLEndpointCustomPostTypeInterface
 {
     private ?BlockHelpers $blockHelpers = null;
+    private ?EndpointBlockHelpers $endpointBlockHelpers = null;
 
     final public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
@@ -24,6 +26,15 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         /** @var BlockHelpers */
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
+    }    
+    final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
+    {
+        $this->endpointBlockHelpers = $endpointBlockHelpers;
+    }
+    final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
+    {
+        /** @var EndpointBlockHelpers */
+        return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
     }
 
     /**
@@ -215,6 +226,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             ),
             [
                 'state' => \__('State', 'graphql-api'),
+                'schema-config' => \__('Schema Configuration', 'graphql-api'),
             ],
             array_slice(
                 $columns,
@@ -247,6 +259,18 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                         \__('Disabled', 'graphql-api')
                     );
                 break;
+            case 'schema-config':
+                $schemaConfigurationID = $this->getEndpointBlockHelpers()->getSchemaConfigurationID(
+                    $post_id,
+                );
+                if ($schemaConfigurationID === null) {
+                    _e('(None)', 'graphql-api');
+                    break;
+                }
+                /** @var WP_Post */
+                $schemaConfiguration = get_post($schemaConfigurationID);
+                echo $schemaConfiguration->post_title;
+                break;
             default:
                 parent::resolveCustomColumn($column, $post_id);
                 break;
@@ -259,6 +283,9 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         ?>
             <style type="text/css">
                 .fixed .column-state {
+                    width: 10%;
+                }
+                .fixed .column-schema-config {
                     width: 10%;
                 }
             </style>

@@ -4,36 +4,20 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
-use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use WP_Post;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
 
 abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
-    private ?UserSettingsManagerInterface $userSettingsManager = null;
-    private ?EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock = null;
-
-    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    private ?EndpointBlockHelpers $endpointBlockHelpers = null;
+    
+    final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
     {
-        $this->userSettingsManager = $userSettingsManager;
+        $this->endpointBlockHelpers = $endpointBlockHelpers;
     }
-    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
     {
-        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
-    }
-    final public function setEndpointSchemaConfigurationBlock(EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock): void
-    {
-        $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
-    }
-    final protected function getEndpointSchemaConfigurationBlock(): EndpointSchemaConfigurationBlock
-    {
-        /** @var EndpointSchemaConfigurationBlock */
-        return $this->endpointSchemaConfigurationBlock ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+        /** @var EndpointBlockHelpers */
+        return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
     }
 
     /**
@@ -41,71 +25,8 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
      */
     protected function getSchemaConfigurationID(int $customPostID): ?int
     {
-        $schemaConfigurationBlockDataItem = $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
+        return $this->getEndpointBlockHelpers()->getSchemaConfigurationID(
             $customPostID,
-            $this->getEndpointSchemaConfigurationBlock()
         );
-
-        /**
-         * If there was no schema configuration, then the default one
-         * has been selected.
-         * It is not saved in the DB, because it has been set as the
-         * default value in blocks/schema-configuration/src/index.js
-         */
-        if ($schemaConfigurationBlockDataItem === null) {
-            return $this->getUserSettingSchemaConfigurationID();
-        }
-
-        $schemaConfiguration = $schemaConfigurationBlockDataItem['attrs'][EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION] ?? null;
-
-        // Check if $schemaConfiguration is one of the meta options (default, none, inherit)
-        if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
-            return null;
-        }
-
-        if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
-            return $this->getUserSettingSchemaConfigurationID();
-        }
-
-        if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
-            // If disabled by module, then return nothing
-            if (!$this->getModuleRegistry()->isModuleEnabled(EndpointConfigurationFunctionalityModuleResolver::API_HIERARCHY)) {
-                return null;
-            }
-
-            /**
-             * Return the schema configuration from the parent,
-             * or null if no parent exists
-             *
-             * @var WP_Post|null
-             */
-            $customPost = \get_post($customPostID);
-            if ($customPost !== null && $customPost->post_parent) {
-                return $this->getSchemaConfigurationID($customPost->post_parent);
-            }
-            return null;
-        }
-
-        /**
-         * It is already the ID, or null if blocks returned empty
-         * (eg: because parent post was trashed)
-         */
-        return $schemaConfiguration;
-    }
-
-    /**
-     * Return the stored Schema Configuration ID
-     */
-    protected function getUserSettingSchemaConfigurationID(): ?int
-    {
-        $schemaConfigurationID = $this->getUserSettingsManager()->getSetting(
-            SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-            ModuleSettingOptions::DEFAULT_VALUE
-        );
-        // `null` is stored as OPTION_VALUE_NO_VALUE_ID
-        if ($schemaConfigurationID === ModuleSettingOptionValues::NO_VALUE_ID) {
-            return null;
-        }
-        return $schemaConfigurationID;
     }
 }
