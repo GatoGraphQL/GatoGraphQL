@@ -1,0 +1,7 @@
+/**
+ * Checkboxes in the GraphiQL Explorer are clipped,
+ * so move them a bit to the right
+ */
+.wp-block-graphql-api-graphiql .graphiql-explorer-node {
+    margin-left: 3px;
+}
