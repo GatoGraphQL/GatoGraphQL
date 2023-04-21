@@ -1,14 +1,14 @@
-.graphiql-container  {
+.graphiql-container {
     height: 100vh;
 }
-#wpcontent .graphiql-container  {
+#wpcontent .graphiql-container {
     height: calc(100vh - 32px);
 }
-#wpcontent .graphiql-root  {
+#wpcontent .graphiql-root {
     margin-left: -10px;
 }
 @media (min-width: 783px) {
-    #wpcontent .graphiql-root  {
+    #wpcontent .graphiql-root {
         margin-left: -20px;
     }
 }
@@ -24,4 +24,11 @@
     opacity: initial;
     filter: initial;
     margin: initial;
+}
+/**
+ * Checkboxes in the GraphiQL Explorer are clipped,
+ * so move them a bit to the right
+ */
+.graphiql-container .graphiql-explorer-node {
+    margin-left: 3px;
 }
