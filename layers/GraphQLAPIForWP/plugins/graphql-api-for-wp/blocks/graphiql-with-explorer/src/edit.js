@@ -14,6 +14,7 @@ import '../../graphiql/src/editor.scss';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+import './graphiql-fix.scss';
 
 import { __ } from '@wordpress/i18n';
 
