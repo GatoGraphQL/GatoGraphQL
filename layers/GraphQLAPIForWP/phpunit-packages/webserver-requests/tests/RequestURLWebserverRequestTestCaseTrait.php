@@ -66,7 +66,7 @@ trait RequestURLWebserverRequestTestCaseTrait
     {
         return null;
     }
-    
+
     /**
      * @return array<string,mixed>
      */
