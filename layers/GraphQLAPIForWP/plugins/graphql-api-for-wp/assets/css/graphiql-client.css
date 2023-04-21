@@ -28,6 +28,8 @@
 /**
  * Checkboxes in the GraphiQL Explorer are clipped,
  * so move them a bit to the right
+ *
+ * @todo Remove when upgrading to GraphiQL v3
  */
 .graphiql-container .graphiql-explorer-node {
     margin-left: 3px;
