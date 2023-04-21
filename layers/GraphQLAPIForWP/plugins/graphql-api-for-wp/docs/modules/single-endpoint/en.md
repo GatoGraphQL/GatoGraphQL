@@ -30,7 +30,7 @@ By default, the client is exposed under `/graphiql/`. This path can be modified 
 
 If module "Interactive Schema for Single Endpoint" is enabled, then the single endpoint's Voyager client becomes publicly available.
 
-To open it, click on link "🟢 Interactive Schema (public)" on the plugin's menu:
+To open it, click on link "🟢 Schema (public)" on the plugin's menu:
 
 ![Single endpoint's link to the Interactive Schema client](../../images/single-endpoint-interactive-schema-link.png)
 

@@ -51,7 +51,7 @@ class SingleEndpointClientMenuPageAttacher extends AbstractPluginMenuPageAttache
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
             $clientPath = $moduleConfiguration->getVoyagerClientEndpoint();
             $submenu[$menuName][] = [
-                __('🟢 Interactive Schema (public)', 'graphql-api'),
+                __('🟢 Schema (public)', 'graphql-api'),
                 'read',
                 home_url($clientPath),
             ];

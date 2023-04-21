@@ -92,8 +92,8 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $this->getMenuName(),
-                __('Interactive Schema', 'graphql-api'),
-                __('🟡 Interactive Schema (private)', 'graphql-api'),
+                __('GraphQL Schema', 'graphql-api'),
+                __('🟡 Schema (private)', 'graphql-api'),
                 $schemaEditorAccessCapability,
                 $this->getGraphQLVoyagerMenuPage()->getScreenID(),
                 [$this->getGraphQLVoyagerMenuPage(), 'print']
