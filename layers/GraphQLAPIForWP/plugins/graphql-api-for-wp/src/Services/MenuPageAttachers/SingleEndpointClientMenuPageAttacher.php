@@ -42,7 +42,7 @@ class SingleEndpointClientMenuPageAttacher extends AbstractPluginMenuPageAttache
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             $clientPath = $moduleConfiguration->getGraphiQLClientEndpoint();
             $submenu[$menuName][] = [
-                __('🟢 GraphiQL (public client for single endpoint)', 'graphql-api'),
+                __('🟢 GraphiQL (public)', 'graphql-api'),
                 'read',
                 home_url($clientPath),
             ];
@@ -51,7 +51,7 @@ class SingleEndpointClientMenuPageAttacher extends AbstractPluginMenuPageAttache
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
             $clientPath = $moduleConfiguration->getVoyagerClientEndpoint();
             $submenu[$menuName][] = [
-                __('🟢 Interactive Schema (public client for single endpoint)', 'graphql-api'),
+                __('🟢 Interactive Schema (public)', 'graphql-api'),
                 'read',
                 home_url($clientPath),
             ];
