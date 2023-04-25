@@ -6,5 +6,5 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests\Constants;
 
 class CustomHeaders
 {
-    public const REQUEST_SOURCE = 'X-Request-Source';
+    public const REQUEST_ORIGIN = 'X-Request-Origin';
 }

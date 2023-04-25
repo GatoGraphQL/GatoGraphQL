@@ -66,7 +66,7 @@ class Plugin
     protected function maybeAdaptRESTAPIResponse(): void
     {
         // Make sure the origin of the request is some test
-        if (($_SERVER[CustomHeaders::REQUEST_SOURCE] ?? null) !== CustomHeaderValues::REQUEST_SOURCE_VALUE) {
+        if (($_SERVER[CustomHeaders::REQUEST_ORIGIN] ?? null) !== CustomHeaderValues::REQUEST_ORIGIN_VALUE) {
             return;
         }
 

@@ -102,7 +102,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function addWebserverRequestTestCustomHeader(array $options): array
     {
-        $options[RequestOptions::HEADERS][CustomHeaders::REQUEST_SOURCE] = CustomHeaderValues::REQUEST_SOURCE_VALUE;
+        $options[RequestOptions::HEADERS][CustomHeaders::REQUEST_ORIGIN] = CustomHeaderValues::REQUEST_ORIGIN_VALUE;
         return $options;
     }
 

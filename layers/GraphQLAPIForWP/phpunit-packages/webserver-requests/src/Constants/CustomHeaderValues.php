@@ -6,5 +6,5 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests\Constants;
 
 class CustomHeaderValues
 {
-    public const REQUEST_SOURCE_VALUE = 'WebserverRequestTest';
+    public const REQUEST_ORIGIN_VALUE = 'WebserverRequestTest';
 }
