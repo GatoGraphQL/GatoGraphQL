@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
+class AccessPasswordProtectedPersistedQuerySourceSuccessQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPasswordProtectedPersistedQueryQueryExecutionFixtureWebserverRequestTest
 {
-    /**
-     * This folder doesn't actually matter, as the content will
-     * be overriden anyway
-     */
     protected function getResponseFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-private-persisted-queries-success';
+        return __DIR__ . '/fixture-password-protected-persisted-queries-success';
     }
 
     protected function viewSource(): bool
@@ -30,13 +26,13 @@ class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequ
     protected function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
-        $providerItems['private-persisted-query'][0] = 'text/html';
+        $providerItems['password-protected-persisted-query'][0] = 'text/html';
         /**
-         * Expect to NOT find the "You are not authorized" message
+         * Expect to NOT find the "This content is password protected" message
          *
-         * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/Helpers/RenderingHelpers.php
+         * @see function `get_the_password_form` in wp-includes/post-template.php
          */
-        $providerItems['private-persisted-query'][1] = '/(?<!You are not authorized to see this content)/';
+        $providerItems['password-protected-persisted-query'][1] = '/(?<!This content is password protected)/';
         return $providerItems;
     }
 
