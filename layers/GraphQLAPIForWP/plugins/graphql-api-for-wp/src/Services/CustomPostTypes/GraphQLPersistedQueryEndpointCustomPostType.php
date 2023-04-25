@@ -79,7 +79,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLPersist
         return array_merge(
             parent::getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
             array(
-                'all_items' => \__('Persisted Queries (Public)', 'graphql-api'),
+                'all_items' => \__('Persisted Queries', 'graphql-api'),
             )
         );
     }
