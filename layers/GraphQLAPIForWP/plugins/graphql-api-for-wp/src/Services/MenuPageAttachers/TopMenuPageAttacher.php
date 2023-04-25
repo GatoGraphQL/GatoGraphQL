@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
 
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
@@ -76,11 +77,15 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     {
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
 
+        $isSingleEndpointEnabled = $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT);
+
         if (
             $hookName = \add_submenu_page(
                 $this->getMenuName(),
                 __('GraphiQL', 'graphql-api'),
-                __('🟡 GraphiQL (private)', 'graphql-api'),
+                $isSingleEndpointEnabled
+                    ? __('🟡 GraphiQL (private)', 'graphql-api')
+                    : __('GraphiQL', 'graphql-api'),
                 $schemaEditorAccessCapability,
                 $this->getMenuName(),
                 [$this->getGraphiQLMenuPage(), 'print']
@@ -93,7 +98,9 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $hookName = \add_submenu_page(
                 $this->getMenuName(),
                 __('GraphQL Schema', 'graphql-api'),
-                __('🟡 Schema (private)', 'graphql-api'),
+                $isSingleEndpointEnabled
+                    ? __('🟡 Schema (private)', 'graphql-api')
+                    : __('Schema', 'graphql-api'),
                 $schemaEditorAccessCapability,
                 $this->getGraphQLVoyagerMenuPage()->getScreenID(),
                 [$this->getGraphQLVoyagerMenuPage(), 'print']
