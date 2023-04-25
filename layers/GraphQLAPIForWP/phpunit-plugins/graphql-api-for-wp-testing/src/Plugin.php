@@ -82,6 +82,7 @@ class Plugin
          * replacing all "-" with "_", and in uppercase
          */
         $header = strtoupper('HTTP_' . str_replace('-', '_', $headerName));
+        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
         if (($_SERVER[$header] ?? null) !== $headerValue) {
             return;
         }
