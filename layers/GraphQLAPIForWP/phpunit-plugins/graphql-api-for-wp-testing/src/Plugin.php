@@ -72,6 +72,8 @@ class Plugin
          *
          * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaders.php
          * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaderValues.php
+         *
+         * @todo Create a new package to make it DRY
          */
         $headerName = 'X-Request-Origin'; // CustomHeaders::REQUEST_ORIGIN;
         $headerValue = 'WebserverRequestTest'; // CustomHeaderValues::REQUEST_ORIGIN_VALUE

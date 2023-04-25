@@ -11,6 +11,8 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests\Constants;
  * with caution!
  *
  * @see layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Plugin.php
+ *
+ * @todo Create a new package to make it DRY
  */
 class CustomHeaderValues
 {
