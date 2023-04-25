@@ -59,7 +59,7 @@ export default function PersistedQueryEndpointProperties() {
 	}, [] );
 
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
-	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending || isPostPrivate ? '🟡' : '🔴');
+	const statusCircle = isPostPublished && !isPostPasswordProtected ? '🟢' : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? '🟡' : '🔴');
 	const isPostAvailable = isPostPublished || isPostDraftOrPending || isPostPrivate;
 	return (
 		<>
