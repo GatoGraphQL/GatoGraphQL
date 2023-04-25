@@ -98,20 +98,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * The slug to use as base when accessing the private persisted query
-     */
-    public function getPrivatePersistedQuerySlugBase(): string
-    {
-        $envVariable = Environment::PRIVATE_PERSISTED_QUERY_SLUG_BASE;
-        $defaultValue = 'private-query';
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-        );
-    }
-
-    /**
      * If `"admin"`, only the admin can compose a GraphQL query and endpoint
      * If `"post"`, the workflow from creating posts is employed (i.e. Author role can create
      * but not publish the query, Editor role can publish it, etc)

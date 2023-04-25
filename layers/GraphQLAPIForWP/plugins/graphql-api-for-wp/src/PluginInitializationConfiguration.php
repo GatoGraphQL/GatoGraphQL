@@ -147,19 +147,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ),
                 'condition' => 'any',
             ],
-            // Private Persisted Query path
-            [
-                'class' => Module::class,
-                'envVariable' => Environment::PRIVATE_PERSISTED_QUERY_SLUG_BASE,
-                'module' => EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES,
-                'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
-                    $value,
-                    EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES,
-                    ModuleSettingOptions::PATH
-                ),
-                'condition' => 'any',
-            ],
             // GraphiQL client slug
             [
                 'class' => GraphQLClientsForWPModule::class,

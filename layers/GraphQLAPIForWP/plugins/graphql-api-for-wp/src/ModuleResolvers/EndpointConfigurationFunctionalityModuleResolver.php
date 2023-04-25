@@ -47,7 +47,6 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
                     [
                         EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                         EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
-                        EndpointFunctionalityModuleResolver::PRIVATE_PERSISTED_QUERIES,
                     ],
                 ];
         }
