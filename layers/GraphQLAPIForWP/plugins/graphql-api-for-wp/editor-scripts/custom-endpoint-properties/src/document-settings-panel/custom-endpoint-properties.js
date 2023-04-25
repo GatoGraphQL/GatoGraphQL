@@ -83,7 +83,15 @@ export default function CustomEndpointProperties() {
 			{ isCustomEndpointEnabled && (
 				<p className="notice-message">
 					<Notice status={ isPostPublished && ! isPostPasswordProtected ? "success" : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? "warning" : "error") } isDismissible={ false }>
-						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+						<strong>
+							{ __('Status ', 'graphql-api') }
+							<code>{ postStatus }</code>
+							{ isPostPasswordProtected && (
+								__(' (protected by password)', 'graphql-api')
+							) }
+							{ __(': ', 'graphql-api') }
+						</strong>
+						<br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && ! isPostPasswordProtected && (
 								__('Custom endpoint is public, available to everyone.', 'graphql-api')

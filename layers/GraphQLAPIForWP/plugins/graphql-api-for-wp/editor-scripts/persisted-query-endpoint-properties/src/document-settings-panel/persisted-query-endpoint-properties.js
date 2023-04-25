@@ -66,7 +66,15 @@ export default function PersistedQueryEndpointProperties() {
 			{ isPersistedQueryEndpointEnabled && (
 				<p className="notice-message">
 					<Notice status={ isPostPublished && ! isPostPasswordProtected ? "success" : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? "warning" : "error") } isDismissible={ false }>
-						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+						<strong>
+							{ __('Status ', 'graphql-api') }
+							<code>{ postStatus }</code>
+							{ isPostPasswordProtected && (
+								__(' (protected by password)', 'graphql-api')
+							) }
+							{ __(': ', 'graphql-api') }
+						</strong>
+						<br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && ! isPostPasswordProtected && (
 								__('Persisted query is public, available to everyone.', 'graphql-api')
