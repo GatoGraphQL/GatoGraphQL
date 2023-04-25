@@ -24,6 +24,7 @@ export default function CustomEndpointProperties() {
 		postStatus,
 		isPostPublished,
 		isPostDraftOrPending,
+		isPostPrivate,
 		permalinkPrefix,
 		permalinkSuffix,
 		isCustomEndpointEnabled,
@@ -52,6 +53,7 @@ export default function CustomEndpointProperties() {
 			postStatus: post.status,
 			isPostPublished: post.status === 'publish',
 			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
+			isPostPrivate: post.status === 'private',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -72,13 +74,13 @@ export default function CustomEndpointProperties() {
 		};
 	}, [] );
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
-	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending ? '🟡' : '🔴');
-	const isPostAvailable = isPostPublished || isPostDraftOrPending;
+	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending || isPostPrivate ? '🟡' : '🔴');
+	const isPostAvailable = isPostPublished || isPostDraftOrPending || isPostPrivate;
 	return (
 		<>
 			{ isCustomEndpointEnabled && (
 				<p className="notice-message">
-					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
+					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending || isPostPrivate ? "warning" : "error") } isDismissible={ false }>
 						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && (
@@ -86,6 +88,9 @@ export default function CustomEndpointProperties() {
 							) }
 							{ isPostDraftOrPending && (
 								__('Custom endpoint is not yet public, only available to the Schema editors.', 'graphql-api')
+							) }
+							{ isPostPrivate && (
+								__('Custom endpoint is private, only available to the Schema editors.', 'graphql-api')
 							) }
 							{ ! isPostAvailable && (
 								__('Custom endpoint is not yet available.', 'graphql-api')

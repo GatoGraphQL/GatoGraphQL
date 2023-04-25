@@ -24,6 +24,7 @@ export default function PersistedQueryEndpointProperties() {
 		postStatus,
 		isPostPublished,
 		isPostDraftOrPending,
+		isPostPrivate,
 		permalinkPrefix,
 		permalinkSuffix,
 		isPersistedQueryEndpointEnabled,
@@ -44,6 +45,7 @@ export default function PersistedQueryEndpointProperties() {
 			postStatus: post.status,
 			isPostPublished: post.status === 'publish',
 			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
+			isPostPrivate: post.status === 'private',
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -55,13 +57,13 @@ export default function PersistedQueryEndpointProperties() {
 	}, [] );
 
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
-	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending ? '🟡' : '🔴');
-	const isPostAvailable = isPostPublished || isPostDraftOrPending;
+	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending || isPostPrivate ? '🟡' : '🔴');
+	const isPostAvailable = isPostPublished || isPostDraftOrPending || isPostPrivate;
 	return (
 		<>
 			{ isPersistedQueryEndpointEnabled && (
 				<p className="notice-message">
-					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending ? "warning" : "error") } isDismissible={ false }>
+					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending || isPostPrivate ? "warning" : "error") } isDismissible={ false }>
 						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && (
@@ -69,6 +71,9 @@ export default function PersistedQueryEndpointProperties() {
 							) }
 							{ isPostDraftOrPending && (
 								__('Persisted query is not yet public, only available to the Schema editors.', 'graphql-api')
+							) }
+							{ isPostPrivate && (
+								__('Persisted query is private, only available to the Schema editors.', 'graphql-api')
 							) }
 							{ ! isPostAvailable && (
 								__('Persisted query is not yet available.', 'graphql-api')
