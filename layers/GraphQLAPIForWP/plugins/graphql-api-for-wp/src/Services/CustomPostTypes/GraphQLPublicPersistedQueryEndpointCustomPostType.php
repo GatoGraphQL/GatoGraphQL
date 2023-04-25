@@ -24,7 +24,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
      */
     public function getEnablingModule(): ?string
     {
-        return EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES;
+        return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
 
     /**

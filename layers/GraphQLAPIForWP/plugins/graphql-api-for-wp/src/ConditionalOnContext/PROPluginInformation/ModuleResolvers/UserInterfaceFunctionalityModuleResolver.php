@@ -50,7 +50,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             case self::LOW_LEVEL_PERSISTED_QUERY_EDITING:
                 return [
                     [
-                        EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ],
                 ];
         }
