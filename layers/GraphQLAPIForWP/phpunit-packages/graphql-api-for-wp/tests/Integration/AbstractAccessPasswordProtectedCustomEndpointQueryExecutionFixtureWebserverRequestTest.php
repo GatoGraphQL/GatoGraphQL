@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 /**
  * Test that only the schema editor user can visualize/execute
- * a Private Custom Endpoint
+ * a Password-Protected Custom Endpoint
  */
 abstract class AbstractAccessPasswordProtectedCustomEndpointQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
