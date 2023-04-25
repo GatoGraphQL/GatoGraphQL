@@ -11,7 +11,7 @@ class PublicPersistedQueryBasePathSettingsWebserverRequestTest extends AbstractP
 {
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_public-persisted-queries';
+        return 'graphqlapi_graphqlapi_persisted-queries';
     }
 
     protected function getPersistedQueryURL(string $basePath): string
