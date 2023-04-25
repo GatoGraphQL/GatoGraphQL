@@ -55,7 +55,7 @@ export default function CustomEndpointProperties() {
 			isPostPublished: post.status === 'publish',
 			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
 			isPostPrivate: post.status === 'private',
-			isPostPasswordProtected: !! post.post_password,
+			isPostPasswordProtected: !! post.password,
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
