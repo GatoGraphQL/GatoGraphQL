@@ -31,12 +31,15 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
      */
     protected static function getWebserverPingOptions(): array
     {
-        return [
-            'form_params' => [
-                'log' => static::getLoginUsername(),
-                'pwd' => static::getLoginPassword(),
-            ],
-        ];
+        return array_merge(
+            parent::getWebserverPingOptions(),
+            [
+                'form_params' => [
+                    'log' => static::getLoginUsername(),
+                    'pwd' => static::getLoginPassword(),
+                ],
+            ]
+        );
     }
 
     protected static function getLoginUsername(): string
