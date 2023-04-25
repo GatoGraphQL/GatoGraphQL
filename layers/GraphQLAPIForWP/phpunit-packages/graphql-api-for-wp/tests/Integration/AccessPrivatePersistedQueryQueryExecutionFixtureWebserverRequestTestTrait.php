@@ -18,7 +18,7 @@ trait AccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTestTrait
     protected function getEndpoint(): string
     {
         return sprintf(
-            'private-query/comments-from-this-month/%s',
+            'graphql-query/comments-from-this-month/%s',
             $this->viewSource()
                 ? '?view=source'
                 : ''
