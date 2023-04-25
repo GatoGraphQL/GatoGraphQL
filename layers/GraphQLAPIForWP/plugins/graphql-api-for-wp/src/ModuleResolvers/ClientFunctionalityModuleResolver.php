@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPModuleConfiguration;
+use PoP\Root\App;
 
 /**
  * Modules exposing clients to interact with the API
@@ -50,6 +51,11 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
             self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS,
             self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS,
         ];
+    }
+
+    public function getSettingsCategory(string $module): string
+    {
+        return SettingsCategoryResolver::ACCESS_PATHS;
     }
 
     /**
