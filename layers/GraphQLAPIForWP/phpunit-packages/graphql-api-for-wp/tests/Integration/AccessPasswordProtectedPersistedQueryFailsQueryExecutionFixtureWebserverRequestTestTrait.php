@@ -30,7 +30,7 @@ trait AccessPasswordProtectedPersistedQueryFailsQueryExecutionFixtureWebserverRe
          * @see function `get_the_password_form` in wp-includes/post-template.php
          */
         $providerItems['password-protected-persisted-query'][1] = '/This content is password protected/';
-        
+
         return $providerItems;
     }
 

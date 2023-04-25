@@ -30,7 +30,7 @@ trait AccessPasswordProtectedCustomEndpointFailsQueryExecutionFixtureWebserverRe
          * @see function `get_the_password_form` in wp-includes/post-template.php
          */
         $providerItems['password-protected-custom-endpoint'][1] = '/This content is password protected/';
-        
+
         return $providerItems;
     }
 
