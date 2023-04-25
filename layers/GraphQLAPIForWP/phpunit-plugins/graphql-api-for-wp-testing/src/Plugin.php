@@ -52,13 +52,38 @@ class Plugin
             add_action('init', flush_rewrite_rules(...), PHP_INT_MAX);
         }
 
-        $this->adaptRESTAPIResponse();
+        $this->maybeAdaptRESTAPIResponse();
 
         add_action('init', $this->registerTestingTaxonomies(...));
     }
 
-    protected function adaptRESTAPIResponse(): void
+    /**
+     * For the internal tests only, remove entries from
+     * the REST response.
+     */
+    protected function maybeAdaptRESTAPIResponse(): void
     {
+        /**
+         * Make sure the origin of the request is some test.
+         * 
+         * Watch out: the classes containing these constants are not
+         * included in this plugin, hence the values are hardcoded.
+         * Update with caution!
+         *
+         * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaders.php
+         * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaderValues.php
+         */
+        $headerName = 'X-Request-Origin'; // CustomHeaders::REQUEST_ORIGIN;
+        $headerValue = 'WebserverRequestTest'; // CustomHeaderValues::REQUEST_ORIGIN_VALUE
+        /**
+         * The custom header somehow arrives prepended with "HTTP_",
+         * replacing all "-" with "_", and in uppercase
+         */
+        $header = strtoupper('HTTP_' . str_replace('-', '_', $headerName));
+        if (($_SERVER[$header] ?? null) !== $headerValue) {
+            return;
+        }
+
         /**
          * Remove the "_link" entry from the WP REST API response,
          * so that the GraphQL response does not include the domain,

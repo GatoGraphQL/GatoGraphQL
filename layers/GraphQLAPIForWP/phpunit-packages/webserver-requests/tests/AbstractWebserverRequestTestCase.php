@@ -13,6 +13,8 @@ use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
 use PHPUnit\Framework\TestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\Constants\CustomHeaders;
+use PHPUnitForGraphQLAPI\WebserverRequests\Constants\CustomHeaderValues;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
@@ -93,6 +95,18 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     }
 
     /**
+     * Used to identify the request as originating from these tests.
+     *
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
+     */
+    protected static function addWebserverRequestTestCustomHeader(array $options): array
+    {
+        $options[RequestOptions::HEADERS][CustomHeaders::REQUEST_ORIGIN] = CustomHeaderValues::REQUEST_ORIGIN_VALUE;
+        return $options;
+    }
+
+    /**
      * @return array<string,mixed>
      */
     protected static function getRequestBasicOptions(): array
@@ -108,7 +122,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         if (static::useSSL()) {
             $options[RequestOptions::VERIFY] = false;
         }
-        return $options;
+        return static::addWebserverRequestTestCustomHeader($options);
     }
 
     /**
@@ -193,7 +207,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function getWebserverPingOptions(): array
     {
-        return [];
+        $options = [];
+        return static::addWebserverRequestTestCustomHeader($options);
     }
 
     protected static function getWebserverHomeURL(): string
