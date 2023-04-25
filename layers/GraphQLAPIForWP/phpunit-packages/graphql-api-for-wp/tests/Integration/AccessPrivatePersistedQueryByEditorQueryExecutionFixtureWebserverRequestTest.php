@@ -6,7 +6,12 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 
-class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
+/**
+ * Temporarily disabled by making the class abstract.
+ *
+ * @todo Re-enable when "Private Persisted Queries" are supported again.
+ */
+abstract class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
 {
     use AccessPrivatePersistedQueryFailsQueryExecutionFixtureWebserverRequestTestTrait;
 

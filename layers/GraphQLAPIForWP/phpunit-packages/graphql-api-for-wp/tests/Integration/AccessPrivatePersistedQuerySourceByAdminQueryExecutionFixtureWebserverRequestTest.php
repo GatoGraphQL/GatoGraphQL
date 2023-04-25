@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
+/**
+ * Temporarily disabled by making the class abstract.
+ *
+ * @todo Re-enable when "Private Persisted Queries" are supported again.
+ */
+abstract class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTest
 {
     /**
      * This folder doesn't actually matter, as the content will
