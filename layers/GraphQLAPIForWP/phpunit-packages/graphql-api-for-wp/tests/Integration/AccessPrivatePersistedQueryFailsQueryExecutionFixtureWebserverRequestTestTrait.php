@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
-
 trait AccessPrivatePersistedQueryFailsQueryExecutionFixtureWebserverRequestTestTrait
 {
     protected function getResponseFixtureFolder(): string

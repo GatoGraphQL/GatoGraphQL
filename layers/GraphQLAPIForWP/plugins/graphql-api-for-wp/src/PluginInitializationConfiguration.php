@@ -64,8 +64,8 @@ use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Engine\Module as EngineModule;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function get_post_types;
 use function get_taxonomies;
 
