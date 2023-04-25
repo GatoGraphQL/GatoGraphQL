@@ -31,6 +31,11 @@ abstract class AbstractCPTEndpointExecuter extends AbstractEndpointExecuter
             return false;
         }
 
+        // Check it is not password protected
+        if (\post_password_required($post)) {
+            return false;
+        }
+
         return true;
     }
 
