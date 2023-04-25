@@ -6787,7 +6787,7 @@
                             }
                           }
                         },
-                        "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                        "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                       },
                       {
                         "name": "by",
@@ -7385,7 +7385,7 @@
                             }
                           }
                         },
-                        "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                        "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                       },
                       {
                         "name": "by",
@@ -9191,7 +9191,7 @@
                             }
                           }
                         },
-                        "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                        "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                       },
                       {
                         "name": "by",
@@ -9836,7 +9836,7 @@
                             }
                           }
                         },
-                        "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                        "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                       },
                       {
                         "name": "by",
@@ -14406,7 +14406,7 @@
               {
                 "kind": "SCALAR",
                 "name": "CustomPostEnumString",
-                "description": "Custom post types (available for querying via the API), with possible values: `\"attachment\"`, `\"custom_css\"`, `\"customize_changeset\"`, `\"dummy-cpt\"`, `\"graphql-endpoint\"`, `\"graphql-query\"`, `\"graphql-schemaconfig\"`, `\"nav_menu_item\"`, `\"oembed_cache\"`, `\"page\"`, `\"post\"`, `\"private-query\"`, `\"revision\"`, `\"user_request\"`, `\"wp_block\"`, `\"wp_global_styles\"`, `\"wp_navigation\"`, `\"wp_template\"`, `\"wp_template_part\"`.",
+                "description": "Custom post types (available for querying via the API), with possible values: `\"attachment\"`, `\"custom_css\"`, `\"customize_changeset\"`, `\"dummy-cpt\"`, `\"graphql-endpoint\"`, `\"graphql-query\"`, `\"graphql-schemaconfig\"`, `\"nav_menu_item\"`, `\"oembed_cache\"`, `\"page\"`, `\"post\"`, `\"revision\"`, `\"user_request\"`, `\"wp_block\"`, `\"wp_global_styles\"`, `\"wp_navigation\"`, `\"wp_template\"`, `\"wp_template_part\"`.",
                 "fields": null,
                 "inputFields": null,
                 "interfaces": null,
@@ -17924,7 +17924,7 @@
                         }
                       }
                     },
-                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                   },
                   {
                     "name": "dateQuery",
@@ -18314,7 +18314,7 @@
                         }
                       }
                     },
-                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                   },
                   {
                     "name": "dateQuery",
@@ -18867,7 +18867,7 @@
                         }
                       }
                     },
-                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                   },
                   {
                     "name": "dateQuery",
@@ -19078,7 +19078,7 @@
                         }
                       }
                     },
-                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                   },
                   {
                     "name": "dateQuery",
@@ -19245,7 +19245,7 @@
                         }
                       }
                     },
-                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                   },
                   {
                     "name": "dateQuery",
@@ -20439,7 +20439,7 @@
                         }
                       }
                     },
-                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                   },
                   {
                     "name": "dateQuery",
@@ -20880,7 +20880,7 @@
                         }
                       }
                     },
-                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"private-query\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                    "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"dummy-cpt\",\"graphql-endpoint\",\"graphql-query\",\"graphql-schemaconfig\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
                   },
                   {
                     "name": "dateQuery",
