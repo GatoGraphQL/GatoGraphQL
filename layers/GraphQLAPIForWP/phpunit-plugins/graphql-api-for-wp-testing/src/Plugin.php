@@ -73,8 +73,13 @@ class Plugin
          * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaders.php
          * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaderValues.php
          */
-        $header = 'X-Request-Origin'; // CustomHeaders::REQUEST_ORIGIN;
+        $headerName = 'X-Request-Origin'; // CustomHeaders::REQUEST_ORIGIN;
         $headerValue = 'WebserverRequestTest'; // CustomHeaderValues::REQUEST_ORIGIN_VALUE
+        /**
+         * The custom header somehow arrives prepended with "HTTP_",
+         * replacing all "-" with "_", and in uppercase
+         */
+        $header = strtoupper('HTTP_' . str_replace('-', '_', $headerName));
         if (($_SERVER[$header] ?? null) !== $headerValue) {
             return;
         }
