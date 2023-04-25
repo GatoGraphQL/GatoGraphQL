@@ -78,7 +78,7 @@ const PersistedQueryEndpointOptions = ( props ) => {
 				<em>{ __('Accessible to?', 'graphql-api') }</em>
 				<InfoTooltip
 					{ ...props }
-					text={ __('Can everyone access the persisted query? Or only the schema editor users?', 'graphql-api') }
+					text={ __('Once the persisted query is published, is it available to everyone? Or only to the schema editor users?', 'graphql-api') }
 				/>
 				{ !isSelected && (
 					<>
