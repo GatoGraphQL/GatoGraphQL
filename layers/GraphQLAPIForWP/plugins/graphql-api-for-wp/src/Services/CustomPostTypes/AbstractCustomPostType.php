@@ -473,29 +473,32 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function maybeAddExcerptAsDescription(string $content): string
     {
-        /**
-         * Check if it is enabled and it is this CPT...
-         */
+        // Check if it is enabled and it is this CPT...
         if (
-            $this->getUserAuthorization()->canAccessSchemaEditor()
-            && \is_singular($this->getCustomPostType())
+            !$this->getUserAuthorization()->canAccessSchemaEditor()
+            || !\is_singular($this->getCustomPostType())
         ) {
-            /**
-             * Add the excerpt (if not empty) as description of the GraphQL query
-             */
-            $customPost = App::getState(['routing', 'queried-object']);
-            // Make sure there is a post (eg: it has not been deleted)
-            if ($customPost !== null) {
-                if ($excerpt = $this->getCPTUtils()->getCustomPostDescription($customPost)) {
-                    $content = \sprintf(
-                        \__('<p class="%s"><strong>Description: </strong>%s</p>'),
-                        $this->getAlignClassName(),
-                        $excerpt
-                    ) . $content;
-                }
-            }
+            return $content;
         }
-        return $content;
+
+        // Make sure there is a post (eg: it has not been deleted)
+        $customPost = App::getState(['routing', 'queried-object']);
+        if ($customPost === null) {
+            return $content;
+        }
+
+        // Check the excerpt is not empty
+        $excerpt = $this->getCPTUtils()->getCustomPostDescription($customPost);
+        if (empty($excerpt)) {
+            return $content;
+        }
+        
+        // Add the excerpt as description of the GraphQL query
+        return \sprintf(
+            \__('<p class="%s"><strong>Description: </strong>%s</p>'),
+            $this->getAlignClassName(),
+            $excerpt
+        ) . $content;
     }
 
     /**
