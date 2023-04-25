@@ -10,6 +10,8 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddDummyCustomAdminEndpointHook
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
+use PHPUnitForGraphQLAPI\WebserverRequests\Constants\CustomHeaders;
+use PHPUnitForGraphQLAPI\WebserverRequests\Constants\CustomHeaderValues;
 use WP_REST_Response;
 
 use function add_action;
@@ -52,13 +54,22 @@ class Plugin
             add_action('init', flush_rewrite_rules(...), PHP_INT_MAX);
         }
 
-        $this->adaptRESTAPIResponse();
+        $this->maybeAdaptRESTAPIResponse();
 
         add_action('init', $this->registerTestingTaxonomies(...));
     }
 
-    protected function adaptRESTAPIResponse(): void
+    /**
+     * For the internal tests only, remove entries from
+     * the REST response.
+     */
+    protected function maybeAdaptRESTAPIResponse(): void
     {
+        // Make sure the origin of the request is some test
+        if (($_SERVER[CustomHeaders::REQUEST_SOURCE] ?? null) !== CustomHeaderValues::REQUEST_SOURCE_VALUE) {
+            return;
+        }
+
         /**
          * Remove the "_link" entry from the WP REST API response,
          * so that the GraphQL response does not include the domain,
