@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
@@ -46,6 +47,11 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             self::PUBLIC_PERSISTED_QUERIES,
             self::PRIVATE_PERSISTED_QUERIES,
         ];
+    }
+
+    public function getSettingsCategory(string $module): string
+    {
+        return SettingsCategoryResolver::ACCESS_PATHS;
     }
 
     /**
