@@ -28,7 +28,7 @@ class AccessPrivateCustomEndpointClientByAdminQueryExecutionFixtureWebserverRequ
         // expectedContentType
         $providerItems['private-custom-endpoint'][0] = 'text/html';
         /**
-         * Except to NOT find the "You are not authorized" message
+         * Expect to NOT find the "You are not authorized" message
          *
          * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/Helpers/RenderingHelpers.php
          */

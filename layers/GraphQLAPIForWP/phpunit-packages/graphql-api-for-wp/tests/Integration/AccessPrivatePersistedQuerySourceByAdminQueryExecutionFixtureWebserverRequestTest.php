@@ -32,7 +32,7 @@ class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequ
         // expectedContentType
         $providerItems['private-persisted-query'][0] = 'text/html';
         /**
-         * Except to NOT find the "You are not authorized" message
+         * Expect to NOT find the "You are not authorized" message
          *
          * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/Helpers/RenderingHelpers.php
          */
