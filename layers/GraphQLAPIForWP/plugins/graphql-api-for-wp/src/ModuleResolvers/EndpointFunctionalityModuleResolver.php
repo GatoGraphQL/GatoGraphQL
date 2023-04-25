@@ -169,8 +169,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Base path', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL base path to expose the Custom Endpoint', 'graphql-api'),
+                Properties::TITLE => \__('Endpoint base slug', 'graphql-api'),
+                Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif (
@@ -184,8 +184,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Base path', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL base path to expose the Persisted Query', 'graphql-api'),
+                Properties::TITLE => \__('Endpoint base slug', 'graphql-api'),
+                Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }

@@ -191,7 +191,7 @@ These are the inputs in the Document settings:
 
 | Option | Description | 
 | --- | --- |
-| **Base path** | The base path for the custom endpoint URL. It defaults to `graphql-query` | -->
+| **Endpoint base slug** | The base path for the custom endpoint URL. It defaults to `graphql-query` | -->
 
 <!-- ## Resources
 
