@@ -6,13 +6,10 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\RequestOptions;
-// use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
 use Psr\Http\Message\ResponseInterface;
 
 trait AccessPasswordProtectedPostWebserverRequestTestCaseTrait
 {
-    // protected static string $wpRESTNonce = '';
-
     abstract protected static function getWebserverHomeURL(): string;
 
     /**
@@ -68,18 +65,6 @@ trait AccessPasswordProtectedPostWebserverRequestTestCaseTrait
         }
         return 'Providing the password for the post did not succeed';
     }
-
-    // /**
-    //  * Store the REST Nonce
-    //  *
-    //  * @param array<string,mixed> $options
-    //  */
-    // protected static function postWebserverPingResponse(
-    //     ResponseInterface $response,
-    //     array $options
-    // ): void {
-    //     static::$wpRESTNonce = $response->getHeaderLine(CustomHeaders::WP_REST_NONCE);
-    // }
 
     /**
      * Must re-use the cookies received when providing the password
