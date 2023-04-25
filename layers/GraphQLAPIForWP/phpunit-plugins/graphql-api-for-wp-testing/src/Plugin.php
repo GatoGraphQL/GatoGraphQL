@@ -10,8 +10,6 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddDummyCustomAdminEndpointHook
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
-use PHPUnitForGraphQLAPI\WebserverRequests\Constants\CustomHeaders;
-use PHPUnitForGraphQLAPI\WebserverRequests\Constants\CustomHeaderValues;
 use WP_REST_Response;
 
 use function add_action;
@@ -65,8 +63,19 @@ class Plugin
      */
     protected function maybeAdaptRESTAPIResponse(): void
     {
-        // Make sure the origin of the request is some test
-        if (($_SERVER[CustomHeaders::REQUEST_ORIGIN] ?? null) !== CustomHeaderValues::REQUEST_ORIGIN_VALUE) {
+        /**
+         * Make sure the origin of the request is some test.
+         * 
+         * Watch out: the classes containing these constants are not
+         * included in this plugin, hence the values are hardcoded.
+         * Update with caution!
+         *
+         * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaders.php
+         * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaderValues.php
+         */
+        $header = 'X-Request-Origin'; // CustomHeaders::REQUEST_ORIGIN;
+        $headerValue = 'WebserverRequestTest'; // CustomHeaderValues::REQUEST_ORIGIN_VALUE
+        if (($_SERVER[$header] ?? null) !== $headerValue) {
             return;
         }
 
