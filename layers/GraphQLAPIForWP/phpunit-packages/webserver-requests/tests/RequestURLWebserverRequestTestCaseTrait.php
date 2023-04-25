@@ -23,14 +23,12 @@ trait RequestURLWebserverRequestTestCaseTrait
         $client = static::getClient();
         $clientEndpointURL = static::getWebserverHomeURL() . '/' . ltrim($clientEndpoint, '/');
         $options = array_merge(
+            static::getRequestBasicOptions(),
             [
                 'verify' => false,
                 // Don't throw exception with 404
                 'http_errors' => false,
             ],
-            $this->sendAuthenticatedRequest()
-                ? static::getRequestBasicOptions()
-                : []
         );
         $response = $client->get($clientEndpointURL, $options);
 
@@ -71,9 +69,4 @@ trait RequestURLWebserverRequestTestCaseTrait
      * @return array<string,mixed>
      */
     abstract protected static function getRequestBasicOptions(): array;
-
-    protected function sendAuthenticatedRequest(): bool
-    {
-        return false;
-    }
 }
