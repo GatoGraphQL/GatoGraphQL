@@ -134,7 +134,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ),
                 'condition' => 'any',
             ],
-            // Public Persisted Query path
+            // Persisted Query path
             [
                 'class' => Module::class,
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,

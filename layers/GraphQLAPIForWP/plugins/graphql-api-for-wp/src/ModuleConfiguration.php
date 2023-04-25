@@ -84,7 +84,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * The slug to use as base when accessing the public persisted query
+     * The slug to use as base when accessing the persisted query
      */
     public function getPersistedQuerySlugBase(): string
     {
