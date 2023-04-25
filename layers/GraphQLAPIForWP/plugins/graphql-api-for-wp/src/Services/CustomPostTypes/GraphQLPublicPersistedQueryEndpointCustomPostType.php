@@ -42,7 +42,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getPublicPersistedQuerySlugBase();
+        return $moduleConfiguration->getPersistedQuerySlugBase();
     }
 
     /**

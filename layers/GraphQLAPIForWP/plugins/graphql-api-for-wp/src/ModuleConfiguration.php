@@ -86,7 +86,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     /**
      * The slug to use as base when accessing the public persisted query
      */
-    public function getPublicPersistedQuerySlugBase(): string
+    public function getPersistedQuerySlugBase(): string
     {
         $envVariable = Environment::PERSISTED_QUERY_SLUG_BASE;
         $defaultValue = 'graphql-query';
