@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MetaSchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
@@ -63,8 +64,8 @@ use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Engine\Module as EngineModule;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use function get_post_types;
 use function get_taxonomies;
 
@@ -776,7 +777,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => $this->opposite(...),
             ],
             [
-                'module' => ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                'module' => DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
                 'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::USE_GRAPHIQL_EXPLORER,
             ],
