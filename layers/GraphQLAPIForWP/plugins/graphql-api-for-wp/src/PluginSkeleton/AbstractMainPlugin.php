@@ -157,6 +157,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         $storeToDBOptions = [
             Options::GRAPHQL_API_SETTINGS,
+            Options::ACCESS_PATHS,
             Options::PLUGIN_SETTINGS,
         ];
         foreach ($storeToDBOptions as $option) {

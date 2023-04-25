@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
@@ -46,6 +47,11 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             self::PUBLIC_PERSISTED_QUERIES,
             self::PRIVATE_PERSISTED_QUERIES,
         ];
+    }
+
+    public function getSettingsCategory(string $module): string
+    {
+        return SettingsCategoryResolver::ACCESS_PATHS;
     }
 
     /**
@@ -163,8 +169,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Base path', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL base path to expose the Custom Endpoint', 'graphql-api'),
+                Properties::TITLE => \__('Endpoint base slug', 'graphql-api'),
+                Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif (
@@ -178,8 +184,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Base path', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL base path to expose the Persisted Query', 'graphql-api'),
+                Properties::TITLE => \__('Endpoint base slug', 'graphql-api'),
+                Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }

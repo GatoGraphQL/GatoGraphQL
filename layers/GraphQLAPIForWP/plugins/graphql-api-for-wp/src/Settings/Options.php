@@ -14,6 +14,10 @@ class Options
      */
     public final const GRAPHQL_API_SETTINGS = 'graphql-api-settings';
     /**
+     * Option name under which to store the endpoint and client paths, defined by the user
+     */
+    public final const ACCESS_PATHS = 'access-paths';
+    /**
      * Option name under which to store the Plugin Settings, defined by the user
      */
     public final const PLUGIN_SETTINGS = 'graphql-api-plugin-settings';

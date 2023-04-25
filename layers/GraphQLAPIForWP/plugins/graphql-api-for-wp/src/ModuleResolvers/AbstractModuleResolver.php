@@ -121,6 +121,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
      * The category where to display the settings:
      *
      * - GraphQL API Settings
+     * - Access Paths
      * - Plugin Settings
      * - Plugin Management
      */

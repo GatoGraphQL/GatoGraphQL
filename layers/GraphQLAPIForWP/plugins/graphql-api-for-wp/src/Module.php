@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginModule;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
@@ -123,13 +124,13 @@ class Module extends AbstractPluginModule
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
+        $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
         if (
             \is_admin()
             && $isGraphiQLExplorerEnabled
             && $userSettingsManager->getSetting(
-                ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
+                DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                DeprecatedClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
             )
         ) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorerInAdminClient/Overrides');
@@ -137,24 +138,24 @@ class Module extends AbstractPluginModule
         if ($isGraphiQLExplorerEnabled) {
             if (
                 $userSettingsManager->getSetting(
-                    ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                    ClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
+                    DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                    DeprecatedClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
                 )
             ) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInAdminPersistedQueries/Overrides');
             }
             if (
                 $userSettingsManager->getSetting(
-                    ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                    ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT
+                    DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                    DeprecatedClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT
                 )
             ) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInSingleEndpointPublicClient/Overrides');
             }
             if (
                 $userSettingsManager->getSetting(
-                    ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                    ClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS
+                    DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
+                    DeprecatedClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS
                 )
             ) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
