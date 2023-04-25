@@ -17,7 +17,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     abstract protected static function getWebserverHomeURL(): string;
 
     /**
-     * To login a user in WordPress, request the following URL by post:
+     * To login a user in WordPress, request the following URL by POST:
      *
      *   curl 'https://graphql-api.lndo.site/wp-login.php' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'log=admin&pwd=admin'
      */
