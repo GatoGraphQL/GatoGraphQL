@@ -492,7 +492,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         if (empty($excerpt)) {
             return $content;
         }
-        
+
         // Add the excerpt as description of the GraphQL query
         return \sprintf(
             \__('<p class="%s"><strong>Description: </strong>%s</p>'),

@@ -65,7 +65,7 @@ class Plugin
     {
         /**
          * Make sure the origin of the request is some test.
-         * 
+         *
          * Watch out: the classes containing these constants are not
          * included in this plugin, hence the values are hardcoded.
          * Update with caution!
