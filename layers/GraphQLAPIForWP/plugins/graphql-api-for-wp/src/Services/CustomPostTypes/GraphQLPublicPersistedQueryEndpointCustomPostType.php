@@ -60,7 +60,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
      */
     protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
-        return \__('GraphQL Public Persisted Queries', 'graphql-api');
+        return \__('GraphQL Persisted Queries', 'graphql-api');
     }
 
     /**

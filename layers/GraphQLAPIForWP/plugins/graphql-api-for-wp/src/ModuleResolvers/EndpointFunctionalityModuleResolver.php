@@ -76,7 +76,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         return match ($module) {
             self::SINGLE_ENDPOINT => \__('Single Endpoint', 'graphql-api'),
             self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'graphql-api'),
-            self::PERSISTED_QUERIES => \__('Public Persisted Queries', 'graphql-api'),
+            self::PERSISTED_QUERIES => \__('Persisted Queries', 'graphql-api'),
             default => $module,
         };
     }

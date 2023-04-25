@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 /**
- * Test that updating the base path for the public persisted queries works well
+ * Test that updating the base path for the persisted queries works well
  */
 class PublicPersistedQueryBasePathSettingsWebserverRequestTest extends AbstractPersistedQueryBasePathSettingsWebserverRequestTest
 {
