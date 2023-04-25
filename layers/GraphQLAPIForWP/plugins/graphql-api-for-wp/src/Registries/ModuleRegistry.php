@@ -186,7 +186,7 @@ class ModuleRegistry implements ModuleRegistryInterface
          * Eg: the Schema Configuration is enabled if either the Custom Endpoints or
          * the Persisted Query are enabled:
          * [
-         *   [self::PUBLIC_PERSISTED_QUERIES, self::CUSTOM_ENDPOINTS],
+         *   [self::PERSISTED_QUERIES, self::CUSTOM_ENDPOINTS],
          * ]
          */
         foreach ($dependedModuleLists as $dependedModuleList) {

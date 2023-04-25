@@ -56,7 +56,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                 return [
                     [
                         EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                        EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ]
                 ];
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
@@ -74,7 +74,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             case self::PERSISTED_QUERY_ENDPOINT_PROPERTIES:
                 return [
                     [
-                        EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
+                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ],
                 ];
         }

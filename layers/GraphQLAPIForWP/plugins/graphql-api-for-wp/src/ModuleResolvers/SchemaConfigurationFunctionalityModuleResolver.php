@@ -172,7 +172,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             $whereModules = [];
             $maybeWhereModules = [
                 EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES,
+                EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
             ];
             foreach ($maybeWhereModules as $maybeWhereModule) {
                 if ($this->getModuleRegistry()->isModuleEnabled($maybeWhereModule)) {

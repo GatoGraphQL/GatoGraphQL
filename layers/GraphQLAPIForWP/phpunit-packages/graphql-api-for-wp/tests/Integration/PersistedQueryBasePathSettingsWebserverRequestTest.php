@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 /**
- * Test that updating the base path for the public persisted queries works well
+ * Test that updating the base path for the persisted queries works well
  */
-class PublicPersistedQueryBasePathSettingsWebserverRequestTest extends AbstractPersistedQueryBasePathSettingsWebserverRequestTest
+class PersistedQueryBasePathSettingsWebserverRequestTest extends AbstractPersistedQueryBasePathSettingsWebserverRequestTest
 {
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_public-persisted-queries';
+        return 'graphqlapi_graphqlapi_persisted-queries';
     }
 
     protected function getPersistedQueryURL(string $basePath): string

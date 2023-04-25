@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use PoP\Root\App;
 
-class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLPersistedQueryEndpointCustomPostType
+class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLPersistedQueryEndpointCustomPostType
 {
     /**
      * Custom Post Type name
@@ -24,7 +24,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
      */
     public function getEnablingModule(): ?string
     {
-        return EndpointFunctionalityModuleResolver::PUBLIC_PERSISTED_QUERIES;
+        return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
 
     /**
@@ -42,7 +42,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getPublicPersistedQuerySlugBase();
+        return $moduleConfiguration->getPersistedQuerySlugBase();
     }
 
     /**
@@ -50,7 +50,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
      */
     protected function getCustomPostTypeName(): string
     {
-        return \__('GraphQL public persisted query endpoint', 'graphql-api');
+        return \__('GraphQL persisted query endpoint', 'graphql-api');
     }
 
     /**
@@ -60,7 +60,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
      */
     protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
-        return \__('GraphQL Public Persisted Queries', 'graphql-api');
+        return \__('GraphQL Persisted Queries', 'graphql-api');
     }
 
     /**
@@ -79,7 +79,7 @@ class GraphQLPublicPersistedQueryEndpointCustomPostType extends AbstractGraphQLP
         return array_merge(
             parent::getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
             array(
-                'all_items' => \__('Persisted Queries (Public)', 'graphql-api'),
+                'all_items' => \__('Persisted Queries', 'graphql-api'),
             )
         );
     }

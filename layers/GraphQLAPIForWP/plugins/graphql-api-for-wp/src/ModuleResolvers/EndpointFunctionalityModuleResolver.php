@@ -21,7 +21,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
 
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
     public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
-    public final const PUBLIC_PERSISTED_QUERIES = Plugin::NAMESPACE . '\public-persisted-queries';
+    public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -43,7 +43,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         return [
             self::SINGLE_ENDPOINT,
             self::CUSTOM_ENDPOINTS,
-            self::PUBLIC_PERSISTED_QUERIES,
+            self::PERSISTED_QUERIES,
         ];
     }
 
@@ -61,7 +61,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             case self::SINGLE_ENDPOINT:
                 return [];
             case self::CUSTOM_ENDPOINTS:
-            case self::PUBLIC_PERSISTED_QUERIES:
+            case self::PERSISTED_QUERIES:
                 return [
                     [
                         SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
@@ -76,7 +76,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         return match ($module) {
             self::SINGLE_ENDPOINT => \__('Single Endpoint', 'graphql-api'),
             self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'graphql-api'),
-            self::PUBLIC_PERSISTED_QUERIES => \__('Public Persisted Queries', 'graphql-api'),
+            self::PERSISTED_QUERIES => \__('Persisted Queries', 'graphql-api'),
             default => $module,
         };
     }
@@ -93,7 +93,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 );
             case self::CUSTOM_ENDPOINTS:
                 return \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'graphql-api');
-            case self::PUBLIC_PERSISTED_QUERIES:
+            case self::PERSISTED_QUERIES:
                 return \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api');
         }
         return parent::getDescription($module);
@@ -124,7 +124,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             self::CUSTOM_ENDPOINTS => [
                 ModuleSettingOptions::PATH => 'graphql',
             ],
-            self::PUBLIC_PERSISTED_QUERIES => [
+            self::PERSISTED_QUERIES => [
                 ModuleSettingOptions::PATH => 'graphql-query',
             ],
         ];
@@ -165,7 +165,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif (
-            $module === self::PUBLIC_PERSISTED_QUERIES
+            $module === self::PERSISTED_QUERIES
         ) {
             $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [

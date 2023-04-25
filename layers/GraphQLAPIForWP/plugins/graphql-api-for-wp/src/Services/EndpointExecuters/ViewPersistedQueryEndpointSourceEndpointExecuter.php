@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\BlockCategories;
+namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
 
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 
-class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
+class ViewPersistedQueryEndpointSourceEndpointExecuter extends AbstractViewPersistedQueryEndpointSourceEndpointExecuter
 {
-    public final const PERSISTED_QUERY_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-persisted-query';
-
     private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
 
     final public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
@@ -22,31 +22,13 @@ class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
         return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
     }
 
-    /**
-     * Custom Post Type for which to enable the block category
-     *
-     * @return string[]
-     */
-    public function getCustomPostTypes(): array
+    public function getEnablingModule(): ?string
     {
-        return [
-            $this->getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType(),
-        ];
+        return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
 
-    /**
-     * Block category's slug
-     */
-    protected function getBlockCategorySlug(): string
+    protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
     {
-        return self::PERSISTED_QUERY_ENDPOINT_BLOCK_CATEGORY;
-    }
-
-    /**
-     * Block category's title
-     */
-    protected function getBlockCategoryTitle(): string
-    {
-        return __('GraphQL persisted query endpoint', 'graphql-api');
+        return $this->getGraphQLPersistedQueryEndpointCustomPostType();
     }
 }
