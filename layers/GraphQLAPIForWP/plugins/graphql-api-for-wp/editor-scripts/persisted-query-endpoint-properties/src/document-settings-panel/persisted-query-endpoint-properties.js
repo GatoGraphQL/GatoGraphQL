@@ -25,6 +25,7 @@ export default function PersistedQueryEndpointProperties() {
 		isPostPublished,
 		isPostDraftOrPending,
 		isPostPrivate,
+		isPostPasswordProtected,
 		permalinkPrefix,
 		permalinkSuffix,
 		isPersistedQueryEndpointEnabled,
@@ -46,6 +47,7 @@ export default function PersistedQueryEndpointProperties() {
 			isPostPublished: post.status === 'publish',
 			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
 			isPostPrivate: post.status === 'private',
+			isPostPasswordProtected: !! post.password,
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -57,20 +59,34 @@ export default function PersistedQueryEndpointProperties() {
 	}, [] );
 
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
-	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending || isPostPrivate ? '🟡' : '🔴');
+	const statusCircle = isPostPublished && !isPostPasswordProtected ? '🟢' : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? '🟡' : '🔴');
 	const isPostAvailable = isPostPublished || isPostDraftOrPending || isPostPrivate;
 	return (
 		<>
 			{ isPersistedQueryEndpointEnabled && (
 				<p className="notice-message">
-					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending || isPostPrivate ? "warning" : "error") } isDismissible={ false }>
-						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+					<Notice status={ isPostPublished && ! isPostPasswordProtected ? "success" : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? "warning" : "error") } isDismissible={ false }>
+						<strong>
+							{ __('Status ', 'graphql-api') }
+							<code>{ postStatus }</code>
+							{ isPostPasswordProtected && (
+								__(' (protected by password)', 'graphql-api')
+							) }
+							{ __(': ', 'graphql-api') }
+						</strong>
+						<br/>
 						<span className="notice-inner-message">
-							{ isPostPublished && (
+							{ isPostPublished && ! isPostPasswordProtected && (
 								__('Persisted query is public, available to everyone.', 'graphql-api')
 							) }
-							{ isPostDraftOrPending && (
+							{ isPostPublished && isPostPasswordProtected && (
+								__('Persisted query is public, available to anyone with the required password.', 'graphql-api')
+							) }
+							{ isPostDraftOrPending && ! isPostPasswordProtected && (
 								__('Persisted query is not yet public, only available to the Schema editors.', 'graphql-api')
+							) }
+							{ isPostDraftOrPending && isPostPasswordProtected && (
+								__('Persisted query is not yet public, only available to the Schema editors with the required password.', 'graphql-api')
 							) }
 							{ isPostPrivate && (
 								__('Persisted query is private, only available to the Schema editors.', 'graphql-api')

@@ -25,6 +25,7 @@ export default function CustomEndpointProperties() {
 		isPostPublished,
 		isPostDraftOrPending,
 		isPostPrivate,
+		isPostPasswordProtected,
 		permalinkPrefix,
 		permalinkSuffix,
 		isCustomEndpointEnabled,
@@ -54,6 +55,7 @@ export default function CustomEndpointProperties() {
 			isPostPublished: post.status === 'publish',
 			isPostDraftOrPending: post.status === 'draft' || post.status === 'pending',
 			isPostPrivate: post.status === 'private',
+			isPostPasswordProtected: !! post.password,
 			permalinkPrefix: permalinkParts?.prefix,
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
@@ -74,20 +76,34 @@ export default function CustomEndpointProperties() {
 		};
 	}, [] );
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
-	const statusCircle = isPostPublished ? '🟢' : (isPostDraftOrPending || isPostPrivate ? '🟡' : '🔴');
+	const statusCircle = isPostPublished && !isPostPasswordProtected ? '🟢' : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? '🟡' : '🔴');
 	const isPostAvailable = isPostPublished || isPostDraftOrPending || isPostPrivate;
 	return (
 		<>
 			{ isCustomEndpointEnabled && (
 				<p className="notice-message">
-					<Notice status={ isPostPublished ? "success" : (isPostDraftOrPending || isPostPrivate ? "warning" : "error") } isDismissible={ false }>
-						<strong>{ __('Status ', 'graphql-api') }<code>{ postStatus }</code>:</strong><br/>
+					<Notice status={ isPostPublished && ! isPostPasswordProtected ? "success" : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? "warning" : "error") } isDismissible={ false }>
+						<strong>
+							{ __('Status ', 'graphql-api') }
+							<code>{ postStatus }</code>
+							{ isPostPasswordProtected && (
+								__(' (protected by password)', 'graphql-api')
+							) }
+							{ __(': ', 'graphql-api') }
+						</strong>
+						<br/>
 						<span className="notice-inner-message">
-							{ isPostPublished && (
+							{ isPostPublished && ! isPostPasswordProtected && (
 								__('Custom endpoint is public, available to everyone.', 'graphql-api')
 							) }
-							{ isPostDraftOrPending && (
+							{ isPostPublished && isPostPasswordProtected && (
+								__('Custom endpoint is public, available to anyone with the required password.', 'graphql-api')
+							) }
+							{ isPostDraftOrPending && ! isPostPasswordProtected && (
 								__('Custom endpoint is not yet public, only available to the Schema editors.', 'graphql-api')
+							) }
+							{ isPostDraftOrPending && isPostPasswordProtected && (
+								__('Custom endpoint is not yet public, only available to the Schema editors with the required password.', 'graphql-api')
 							) }
 							{ isPostPrivate && (
 								__('Custom endpoint is private, only available to the Schema editors.', 'graphql-api')
