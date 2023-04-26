@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PrivateEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\GraphQLEndpointHandler;
 
@@ -17,9 +19,10 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
 {
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
-    private ?SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator = null;
+    private ?PrivateEndpointSchemaConfigurator $privateEndpointSchemaConfigurator = null;
     private ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
     private ?EndpointBlockHelpers $endpointBlockHelpers = null;
+    private ?EndpointHelpers $endpointHelpers = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -38,14 +41,14 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
         /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    final public function setSingleEndpointSchemaConfigurator(SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator): void
+    final public function setPrivateEndpointSchemaConfigurator(PrivateEndpointSchemaConfigurator $privateEndpointSchemaConfigurator): void
     {
-        $this->singleEndpointSchemaConfigurator = $singleEndpointSchemaConfigurator;
+        $this->privateEndpointSchemaConfigurator = $privateEndpointSchemaConfigurator;
     }
-    final protected function getSingleEndpointSchemaConfigurator(): SingleEndpointSchemaConfigurator
+    final protected function getPrivateEndpointSchemaConfigurator(): PrivateEndpointSchemaConfigurator
     {
-        /** @var SingleEndpointSchemaConfigurator */
-        return $this->singleEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(SingleEndpointSchemaConfigurator::class);
+        /** @var PrivateEndpointSchemaConfigurator */
+        return $this->privateEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PrivateEndpointSchemaConfigurator::class);
     }
     final public function setGraphQLEndpointHandler(GraphQLEndpointHandler $graphQLEndpointHandler): void
     {
@@ -65,14 +68,28 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
         /** @var EndpointBlockHelpers */
         return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
     }
+    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    final protected function getEndpointHelpers(): EndpointHelpers
+    {
+        /** @var EndpointHelpers */
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
 
     /**
      * This is the Schema Configuration ID
      */
     protected function getCustomPostID(): ?int
     {
-        // Only enable it when executing a query against the single endpoint
-        if (!$this->getGraphQLEndpointHandler()->isEndpointRequested()) {
+        /**
+         * Only enable it when executing a query against the private endpoint
+         * or the InternalGraphQLServer
+         */ 
+        if (!$this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()
+            && !AppHelpers::isInternalGraphQLServerAppThread()
+        ) {
             return null;
         }
         // Return the stored Schema Configuration ID
@@ -81,6 +98,6 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
-        return $this->getSingleEndpointSchemaConfigurator();
+        return $this->getPrivateEndpointSchemaConfigurator();
     }
 }
