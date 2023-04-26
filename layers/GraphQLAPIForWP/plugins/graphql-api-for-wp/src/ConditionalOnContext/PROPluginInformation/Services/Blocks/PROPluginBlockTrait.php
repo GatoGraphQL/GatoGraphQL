@@ -15,6 +15,6 @@ trait PROPluginBlockTrait
 
     protected function getBlockNamespace(): string
     {
-        return 'graphql-api';
+        return 'graphql-api-pro';
     }
 }
