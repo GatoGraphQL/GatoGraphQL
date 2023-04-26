@@ -269,7 +269,11 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 }
                 /** @var WP_Post */
                 $schemaConfiguration = get_post($schemaConfigurationID);
-                echo $schemaConfiguration->post_title;
+                printf(
+                    '<a href="%s">%s</a>',
+                    get_edit_post_link($schemaConfigurationID),
+                    $schemaConfiguration->post_title
+                );
                 break;
             default:
                 parent::resolveCustomColumn($column, $post_id);
