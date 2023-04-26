@@ -83,7 +83,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: __('Payload Types for Mutations', 'graphql-api'),
-		className: 'graphql-api-schema-mutations',
+		className: 'graphql-api-mutations',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

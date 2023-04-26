@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
 class SchemaConfigPayloadTypesForMutationsBlock extends AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock
 {
@@ -23,7 +23,7 @@ class SchemaConfigPayloadTypesForMutationsBlock extends AbstractDefaultEnableDis
 
     public function getEnablingModule(): ?string
     {
-        return MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS;
+        return SchemaConfigurationFunctionalityModuleResolver::MUTATIONS;
     }
 
     protected function getBlockLabel(): string

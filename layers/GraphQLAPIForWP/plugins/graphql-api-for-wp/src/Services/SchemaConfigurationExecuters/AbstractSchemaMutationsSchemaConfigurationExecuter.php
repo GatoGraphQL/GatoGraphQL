@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\EndpointSchemaConfigurationExecuterServiceTagInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters\PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\MutationSchemaTypeModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
 
 abstract class AbstractSchemaMutationsSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -27,7 +27,7 @@ abstract class AbstractSchemaMutationsSchemaConfigurationExecuter extends Abstra
 
     public function getEnablingModule(): ?string
     {
-        return MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS;
+        return SchemaConfigurationFunctionalityModuleResolver::MUTATIONS;
     }
 
     protected function getBlock(): BlockInterface
