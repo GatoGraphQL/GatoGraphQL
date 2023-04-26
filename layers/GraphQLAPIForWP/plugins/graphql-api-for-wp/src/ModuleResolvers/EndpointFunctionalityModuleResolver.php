@@ -284,7 +284,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => $module === self::SINGLE_ENDPOINT
+                Properties::TITLE => in_array($module, [
+                    self::PRIVATE_ENDPOINT,
+                    self::SINGLE_ENDPOINT,
+                ])
                     ? \__('Schema Configuration', 'graphql-api')
                     : \__('Default Schema Configuration', 'graphql-api'),
                 Properties::DESCRIPTION => $description,
