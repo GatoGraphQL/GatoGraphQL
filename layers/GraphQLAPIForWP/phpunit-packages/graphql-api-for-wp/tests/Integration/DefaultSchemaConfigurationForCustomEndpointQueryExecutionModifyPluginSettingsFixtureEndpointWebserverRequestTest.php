@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractDefaultSchemaConfigurationForEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest
+class DefaultSchemaConfigurationForCustomEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractDefaultSchemaConfigurationForEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest
 {
     /**
-     * Single endpoint
+     * Custom endpoint
      */
     protected function getEndpoint(): string
     {
-        return 'graphql';
+        return 'graphql/back-end-for-dev/';
     }
 
     protected function getResponseFixtureFolder(): string
@@ -21,6 +21,6 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_single-endpoint';
+        return 'graphqlapi_graphqlapi_custom-endpoints';
     }
 }

@@ -2,6 +2,7 @@
     "data": {
         "user": {
             "name": "Blogger Davenport",
+            "email": "blogger@test.com",
             "posts": [
                 {
                     "id": 25,
