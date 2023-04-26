@@ -9,8 +9,8 @@ use GraphQLAPI\GraphQLAPI\Settings\Options;
 
 class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
 {
-    public final const GRAPHQL_API_SETTINGS = Plugin::NAMESPACE . '\graphql-api-settings';
-    public final const ACCESS_PATHS = Plugin::NAMESPACE . '\access-paths';
+    public final const DEFAULT_SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\default-schema-configuration';
+    public final const ENDPOINT_CONFIGURATION = Plugin::NAMESPACE . '\endpoint-configuration';
     public final const PLUGIN_SETTINGS = Plugin::NAMESPACE . '\plugin-settings';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
 
@@ -20,8 +20,8 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getSettingsCategoriesToResolve(): array
     {
         return [
-            self::GRAPHQL_API_SETTINGS,
-            self::ACCESS_PATHS,
+            self::DEFAULT_SCHEMA_CONFIGURATION,
+            self::ENDPOINT_CONFIGURATION,
             self::PLUGIN_SETTINGS,
             self::PLUGIN_MANAGEMENT,
         ];
@@ -30,8 +30,8 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getName(string $settingsCategory): string
     {
         return match ($settingsCategory) {
-            self::GRAPHQL_API_SETTINGS => $this->__('GraphQL API Settings', 'graphql-api'),
-            self::ACCESS_PATHS => $this->__('Access Paths', 'graphql-api'),
+            self::DEFAULT_SCHEMA_CONFIGURATION => $this->__('Default Schema Configuration', 'graphql-api'),
+            self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'graphql-api'),
             self::PLUGIN_SETTINGS => $this->__('Plugin Settings', 'graphql-api'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'graphql-api'),
             default => parent::getName($settingsCategory),
@@ -41,8 +41,8 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getDBOptionName(string $settingsCategory): string
     {
         return match ($settingsCategory) {
-            self::GRAPHQL_API_SETTINGS => Options::GRAPHQL_API_SETTINGS,
-            self::ACCESS_PATHS => Options::ACCESS_PATHS,
+            self::DEFAULT_SCHEMA_CONFIGURATION => Options::DEFAULT_SCHEMA_CONFIGURATION,
+            self::ENDPOINT_CONFIGURATION => Options::ENDPOINT_CONFIGURATION,
             self::PLUGIN_SETTINGS => Options::PLUGIN_SETTINGS,
             self::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,
             default => parent::getDBOptionName($settingsCategory),

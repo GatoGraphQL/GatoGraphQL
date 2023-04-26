@@ -49,7 +49,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
 
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategoryResolver::ACCESS_PATHS;
+        return SettingsCategoryResolver::ENDPOINT_CONFIGURATION;
     }
 
     /**

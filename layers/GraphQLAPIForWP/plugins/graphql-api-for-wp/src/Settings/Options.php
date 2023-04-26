@@ -10,13 +10,13 @@ namespace GraphQLAPI\GraphQLAPI\Settings;
 class Options
 {
     /**
-     * Option name under which to store the "GraphQL API" Settings, defined by the user
+     * Option name under which to store the "Default Schema Configuration" values, defined by the user
      */
-    public final const GRAPHQL_API_SETTINGS = 'graphql-api-settings';
+    public final const DEFAULT_SCHEMA_CONFIGURATION = 'graphql-api-default-schema-configuration';
     /**
      * Option name under which to store the endpoint and client paths, defined by the user
      */
-    public final const ACCESS_PATHS = 'access-paths';
+    public final const ENDPOINT_CONFIGURATION = 'graphql-api-endpoint-configuration';
     /**
      * Option name under which to store the Plugin Settings, defined by the user
      */

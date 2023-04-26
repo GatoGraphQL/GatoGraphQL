@@ -120,14 +120,14 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     /**
      * The category where to display the settings:
      *
-     * - GraphQL API Settings
-     * - Access Paths
+     * - Default Schema Configuration
+     * - Endpoint Configuration
      * - Plugin Settings
      * - Plugin Management
      */
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategoryResolver::GRAPHQL_API_SETTINGS;
+        return SettingsCategoryResolver::DEFAULT_SCHEMA_CONFIGURATION;
     }
 
     /**
