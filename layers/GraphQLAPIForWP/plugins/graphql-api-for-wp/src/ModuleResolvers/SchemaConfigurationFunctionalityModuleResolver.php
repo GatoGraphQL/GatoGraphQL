@@ -166,7 +166,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $moduleSettings = parent::getSettings($module);
         $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
-        $adminClientsDesc = $this->getAdminClientDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::SCHEMA_NAMESPACING) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;

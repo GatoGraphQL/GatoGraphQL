@@ -37,18 +37,6 @@ trait CommonModuleResolverTrait
         return \__('<ul><li>Single endpoint</li><li>Custom endpoints</li><li>Persisted queries</li></ul>', 'graphql-api');
     }
 
-    protected function getAdminClientDescription(): string
-    {
-        return sprintf(
-            \__('%s<br/>%s', 'graphql-api'),
-            \__('Same, but applied to private endpoints.', 'graphql-api'),
-            $this->getCollapsible(
-                \__('The private endpoints are:', 'graphql-api') . $this->getPrivateEndpointsListDescription(),
-                \__('(Show private endpoints)', 'graphql-api')
-            )
-        );
-    }
-
     protected function getCollapsible(
         string $content,
         ?string $showDetailsLabel = null,
