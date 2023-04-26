@@ -25,12 +25,12 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
 
     protected function getSettingsKey(): string
     {
-        return ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT;
+        return ModuleSettingOptions::SCHEMA_CONFIGURATION;
     }
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-configuration';
+        return 'graphqlapi_graphqlapi_single-endpoint';
     }
 
     protected function getPluginSettingsNewValue(): mixed
