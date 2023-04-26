@@ -21,11 +21,23 @@ abstract class AbstractCustomPostEndpointSchemaConfigurator extends AbstractEndp
     }
 
     /**
+     * Only enable the service, if any of the corresponding modules is also enabled
+     */
+    public function isServiceEnabled(): bool
+    {
+        return $this->getModuleRegistry()->isModuleEnabled($this->getEnablingModule())
+            && parent::isServiceEnabled();
+    }
+
+    abstract protected function getEnablingModule(): string;
+
+    /**
      * Extract the Schema Configuration ID from the block stored in the post
      */
     protected function getSchemaConfigurationID(int $customPostID): ?int
     {
         return $this->getEndpointBlockHelpers()->getSchemaConfigurationID(
+            $this->getEnablingModule(),
             $customPostID,
         );
     }

@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
+use WP_Post;
 
 class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -24,6 +27,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
+    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -33,6 +37,15 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         /** @var MarkdownContentParserInterface */
         return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+    }
+    final public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
+    {
+        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
+    }
+    final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
+    {
+        /** @var GraphQLSchemaConfigurationCustomPostType */
+        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
     }
 
     /**
@@ -120,12 +133,15 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         $defaultValues = [
             self::SINGLE_ENDPOINT => [
                 ModuleSettingOptions::PATH => '/graphql/',
+                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::CUSTOM_ENDPOINTS => [
                 ModuleSettingOptions::PATH => 'graphql',
+                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::PERSISTED_QUERIES => [
                 ModuleSettingOptions::PATH => 'graphql-query',
+                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -164,9 +180,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
-        } elseif (
-            $module === self::PERSISTED_QUERIES
-        ) {
+        } elseif ($module === self::PERSISTED_QUERIES) {
             $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -177,6 +191,62 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::TITLE => \__('Endpoint base slug', 'graphql-api'),
                 Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
+            ];
+        }
+
+        // Add the Schema Configuration to all endpoints
+        if (
+            ($module === self::SINGLE_ENDPOINT
+            && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION))
+            || in_array($module, [
+                self::CUSTOM_ENDPOINTS,
+                self::PERSISTED_QUERIES,
+            ])
+        ) {
+            $descriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
+            $description = match ($module) {
+                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'graphql-api'),
+                self::CUSTOM_ENDPOINTS => sprintf(
+                    $descriptionPlaceholder,
+                    \__('Custom Endpoints')
+                ),
+                self::PERSISTED_QUERIES => sprintf(
+                    $descriptionPlaceholder,
+                    \__('Persisted Queries')
+                ),
+                default => '',
+            };
+            // Build all the possible values by fetching all the Schema Configuration posts
+            $possibleValues = [
+                ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
+            ];
+            /** @var GraphQLSchemaConfigurationCustomPostType */
+            $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
+            /**
+             * @var WP_Post[]
+             */
+            $customPosts = \get_posts([
+                'posts_per_page' => -1,
+                'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+                'post_status' => 'publish',
+            ]);
+            foreach ($customPosts as $customPost) {
+                $possibleValues[$customPost->ID] = $customPost->post_title;
+            }
+            $option = ModuleSettingOptions::SCHEMA_CONFIGURATION;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => $module === self::SINGLE_ENDPOINT
+                    ? \__('Schema Configuration', 'graphql-api')
+                    : \__('Default Schema Configuration', 'graphql-api'),
+                Properties::DESCRIPTION => $description,
+                Properties::TYPE => Properties::TYPE_INT,
+                // Fetch all Schema Configurations from the DB
+                Properties::POSSIBLE_VALUES => $possibleValues,
             ];
         }
         return $moduleSettings;

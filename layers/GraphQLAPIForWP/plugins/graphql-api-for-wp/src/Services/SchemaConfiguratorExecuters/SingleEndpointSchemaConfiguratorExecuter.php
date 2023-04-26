@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
@@ -20,6 +19,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator = null;
     private ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
+    private ?EndpointBlockHelpers $endpointBlockHelpers = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -56,6 +56,15 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         /** @var GraphQLEndpointHandler */
         return $this->graphQLEndpointHandler ??= $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
     }
+    final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
+    {
+        $this->endpointBlockHelpers = $endpointBlockHelpers;
+    }
+    final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
+    {
+        /** @var EndpointBlockHelpers */
+        return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+    }
 
     /**
      * This is the Schema Configuration ID
@@ -66,25 +75,8 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         if (!$this->getGraphQLEndpointHandler()->isEndpointRequested()) {
             return null;
         }
-        return $this->getUserSettingSchemaConfigurationID();
-    }
-
-    /**
-     * Return the stored Schema Configuration ID
-     *
-     * @todo Use `EndpointBlockHelpers->getUserSettingSchemaConfigurationID` intead? Pass the option name as param?
-     */
-    protected function getUserSettingSchemaConfigurationID(): ?int
-    {
-        $schemaConfigurationID = $this->getUserSettingsManager()->getSetting(
-            SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-            ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT
-        );
-        // `null` is stored as OPTION_VALUE_NO_VALUE_ID
-        if ($schemaConfigurationID === ModuleSettingOptionValues::NO_VALUE_ID) {
-            return null;
-        }
-        return $schemaConfigurationID;
+        // Return the stored Schema Configuration ID
+        return $this->getEndpointBlockHelpers()->getUserSettingSchemaConfigurationID(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT);
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface

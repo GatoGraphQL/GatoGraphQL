@@ -27,3 +27,9 @@ services:
     GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage:
         class: ~
         autoconfigure: false
+    
+    # This service is referenced when storing the Settings (via options.php)
+    GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType:
+        class: ~
+        autoconfigure: false
+

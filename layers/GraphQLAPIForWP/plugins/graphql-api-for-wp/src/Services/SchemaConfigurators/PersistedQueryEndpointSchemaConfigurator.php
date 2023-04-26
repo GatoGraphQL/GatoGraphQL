@@ -22,13 +22,9 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractCustomPostEndpoin
         return $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class);
     }
 
-    /**
-     * Only enable the service, if any of the corresponding modules is also enabled
-     */
-    public function isServiceEnabled(): bool
+    protected function getEnablingModule(): string
     {
-        return $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)
-            && parent::isServiceEnabled();
+        return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
 
     protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface

@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use WP_Post;
 
 class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -26,18 +23,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public final const GLOBAL_ID_FIELD = Plugin::NAMESPACE . '\global-id-field';
 
-    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
-    final public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
-    {
-        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-    }
-    final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
-    {
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
-    }
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
         $this->markdownContentParser = $markdownContentParser;
@@ -132,10 +119,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         // Lower the security constraints for the static app
         $useUnsafe = BehaviorHelpers::areUnsafeDefaultsEnabled();
         $defaultValues = [
-            self::SCHEMA_CONFIGURATION => [
-                ModuleSettingOptions::DEFAULT_VALUE => ModuleSettingOptionValues::NO_VALUE_ID,
-                ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT => ModuleSettingOptionValues::NO_VALUE_ID,
-            ],
             self::SCHEMA_NAMESPACING => [
                 ModuleSettingOptions::DEFAULT_VALUE => false,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
@@ -168,71 +151,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $defaultValueDesc = $this->getDefaultValueDescription();
         $adminClientsDesc = $this->getAdminClientDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module === self::SCHEMA_CONFIGURATION) {
-            $whereModules = [];
-            $maybeWhereModules = [
-                EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-            ];
-            foreach ($maybeWhereModules as $maybeWhereModule) {
-                if ($this->getModuleRegistry()->isModuleEnabled($maybeWhereModule)) {
-                    $whereModules[] = '▹ ' . $this->getModuleRegistry()->getModuleResolver($maybeWhereModule)->getName($maybeWhereModule);
-                }
-            }
-            // Build all the possible values by fetching all the Schema Configuration posts
-            $possibleValues = [
-                ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
-            ];
-            /** @var GraphQLSchemaConfigurationCustomPostType */
-            $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
-            /**
-             * @var WP_Post[]
-             */
-            $customPosts = \get_posts([
-                'posts_per_page' => -1,
-                'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-                'post_status' => 'publish',
-            ]);
-            if (!empty($customPosts)) {
-                foreach ($customPosts as $customPost) {
-                    $possibleValues[$customPost->ID] = $customPost->post_title;
-                }
-            }
-            $option = ModuleSettingOptions::DEFAULT_VALUE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Default Schema Configuration', 'graphql-api'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Schema Configuration to use in %s when option <code>"Default"</code> is selected', 'graphql-api'),
-                    implode(
-                        \__(', ', 'graphql-api'),
-                        $whereModules
-                    )
-                ),
-                Properties::TYPE => Properties::TYPE_INT,
-                // Fetch all Schema Configurations from the DB
-                Properties::POSSIBLE_VALUES => $possibleValues,
-            ];
-            if ($this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
-                $option = ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Schema Configuration for the Single Endpoint', 'graphql-api'),
-                    Properties::DESCRIPTION => \__('Schema Configuration to use in the Single Endpoint', 'graphql-api'),
-                    Properties::TYPE => Properties::TYPE_INT,
-                    // Fetch all Schema Configurations from the DB
-                    Properties::POSSIBLE_VALUES => $possibleValues,
-                ];
-            }
-        } elseif ($module === self::SCHEMA_NAMESPACING) {
+        if ($module === self::SCHEMA_NAMESPACING) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
