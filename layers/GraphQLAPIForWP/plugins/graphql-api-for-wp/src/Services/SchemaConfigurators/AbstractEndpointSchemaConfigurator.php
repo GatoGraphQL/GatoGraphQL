@@ -53,8 +53,15 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
         if (!AppHelpers::isMainAppThread()) {
             return false;
         }
-        return $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION);
+        $moduleRegistry = $this->getModuleRegistry();
+        if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
+            return false;
+        }
+        // Only enable the service if the corresponding module is also enabled
+        return $moduleRegistry->isModuleEnabled($this->getEnablingModule());
     }
+
+    abstract protected function getEnablingModule(): string;
 
     /**
      * Extract the items defined in the Schema Configuration,
