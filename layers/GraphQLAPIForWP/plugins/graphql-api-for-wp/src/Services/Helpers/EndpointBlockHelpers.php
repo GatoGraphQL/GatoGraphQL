@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
@@ -63,7 +63,7 @@ class EndpointBlockHelpers
     /**
      * Extract the Schema Configuration ID from the block stored in the post
      */
-    public function getSchemaConfigurationID(int $customPostID): ?int
+    public function getSchemaConfigurationID(string $module, int $customPostID): ?int
     {
         $schemaConfigurationBlockDataItem = $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $customPostID,
@@ -77,7 +77,7 @@ class EndpointBlockHelpers
          * default value in blocks/schema-configuration/src/index.js
          */
         if ($schemaConfigurationBlockDataItem === null) {
-            return $this->getUserSettingSchemaConfigurationID();
+            return $this->getUserSettingSchemaConfigurationID($module);
         }
 
         $schemaConfiguration = $schemaConfigurationBlockDataItem['attrs'][EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION] ?? null;
@@ -88,7 +88,7 @@ class EndpointBlockHelpers
         }
 
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
-            return $this->getUserSettingSchemaConfigurationID();
+            return $this->getUserSettingSchemaConfigurationID($module);
         }
 
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
@@ -105,7 +105,7 @@ class EndpointBlockHelpers
              */
             $customPost = \get_post($customPostID);
             if ($customPost !== null && $customPost->post_parent) {
-                return $this->getSchemaConfigurationID($customPost->post_parent);
+                return $this->getSchemaConfigurationID($module, $customPost->post_parent);
             }
             return null;
         }
@@ -120,11 +120,11 @@ class EndpointBlockHelpers
     /**
      * Return the stored Schema Configuration ID
      */
-    public function getUserSettingSchemaConfigurationID(): ?int
+    public function getUserSettingSchemaConfigurationID(string $module): ?int
     {
         $schemaConfigurationID = $this->getUserSettingsManager()->getSetting(
-            SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-            ModuleSettingOptions::DEFAULT_VALUE
+            $module,
+            ModuleSettingOptions::SCHEMA_CONFIGURATION
         );
         // `null` is stored as OPTION_VALUE_NO_VALUE_ID
         if ($schemaConfigurationID === ModuleSettingOptionValues::NO_VALUE_ID) {
