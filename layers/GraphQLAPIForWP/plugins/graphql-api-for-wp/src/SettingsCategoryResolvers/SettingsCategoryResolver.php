@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Settings\Options;
 class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
 {
     public final const GRAPHQL_API_SETTINGS = Plugin::NAMESPACE . '\graphql-api-settings';
-    public final const ENDPOINT_CONFIGURATION = Plugin::NAMESPACE . '\access-paths';
+    public final const ENDPOINT_CONFIGURATION = Plugin::NAMESPACE . '\endpoint-configuration';
     public final const PLUGIN_SETTINGS = Plugin::NAMESPACE . '\plugin-settings';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
 
