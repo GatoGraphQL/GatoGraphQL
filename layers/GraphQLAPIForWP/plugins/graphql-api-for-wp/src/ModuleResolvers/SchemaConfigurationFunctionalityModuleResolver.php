@@ -65,12 +65,21 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         switch ($module) {
             case self::SCHEMA_CONFIGURATION:
+            case self::SCHEMA_MUTATIONS:
                 return [];
             case self::SCHEMA_NAMESPACING:
+                return [
+                    [
+                        self::SCHEMA_CONFIGURATION,
+                    ],
+                ];
             case self::NESTED_MUTATIONS:
                 return [
                     [
                         self::SCHEMA_CONFIGURATION,
+                    ],
+                    [
+                        self::SCHEMA_MUTATIONS,
                     ],
                 ];
         }
