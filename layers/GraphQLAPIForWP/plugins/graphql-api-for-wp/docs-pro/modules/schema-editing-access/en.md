@@ -36,7 +36,7 @@ For instance, a contributor can create, but not publish, a persisted query:
 
 ## How to use
 
-Decide what users can edit the schema by selecting the appropriate configuration from the dropdown in the "Plugin Settings > Schema Editing Access" tab on the Settings page:
+Decide what users can edit the schema by selecting the appropriate configuration from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
 
 - `"Admin users"` (capability: `manage_options`)
 - `"Admin + Editor users"` (capability: `edit_others_posts`)

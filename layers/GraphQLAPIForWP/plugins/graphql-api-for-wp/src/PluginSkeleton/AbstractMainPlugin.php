@@ -158,7 +158,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $storeToDBOptions = [
             Options::DEFAULT_SCHEMA_CONFIGURATION,
             Options::ENDPOINT_CONFIGURATION,
-            Options::PLUGIN_SETTINGS,
+            Options::PLUGIN_CONFIGURATION,
         ];
         foreach ($storeToDBOptions as $option) {
             if (get_option($option) !== false) {

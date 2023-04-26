@@ -18,9 +18,9 @@ class Options
      */
     public final const ENDPOINT_CONFIGURATION = 'graphql-api-endpoint-configuration';
     /**
-     * Option name under which to store the Plugin Settings, defined by the user
+     * Option name under which to store the Plugin Configuration, defined by the user
      */
-    public final const PLUGIN_SETTINGS = 'graphql-api-plugin-settings';
+    public final const PLUGIN_CONFIGURATION = 'graphql-api-plugin-configuration';
     /**
      * Option name for Plugin Management.
      *

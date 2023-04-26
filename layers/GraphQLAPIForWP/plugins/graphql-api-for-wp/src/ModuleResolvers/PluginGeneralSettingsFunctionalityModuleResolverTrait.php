@@ -28,6 +28,6 @@ trait PluginGeneralSettingsFunctionalityModuleResolverTrait
 
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategoryResolver::PLUGIN_SETTINGS;
+        return SettingsCategoryResolver::PLUGIN_CONFIGURATION;
     }
 }
