@@ -213,6 +213,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $descriptionPlaceholder,
                     \__('Persisted Queries')
                 ),
+                default => '',
             };
             // Build all the possible values by fetching all the Schema Configuration posts
             $possibleValues = [
