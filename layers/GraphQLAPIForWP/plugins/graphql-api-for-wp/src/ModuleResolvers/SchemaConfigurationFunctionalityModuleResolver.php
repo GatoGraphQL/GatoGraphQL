@@ -164,7 +164,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::SCHEMA_NAMESPACING) {
@@ -175,10 +174,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Namespace the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Namespace the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Namespace types in the GraphQL schema?<br/>%s', 'graphql-api'),
                     $defaultValueDesc
@@ -193,10 +189,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Use payload types for all mutations in the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Use payload types for all mutations in the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Use payload types for mutations in the schema?<br/>%s', 'graphql-api'),
                     $defaultValueDesc
@@ -225,10 +218,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Mutation Scheme: %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Mutation Scheme:', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Select the mutation scheme to use in the schema.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
@@ -252,10 +242,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Add “sensitive” fields to the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Add “sensitive” fields to the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
@@ -270,10 +257,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Expose the self fields to all types in the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Expose the self fields to all types in the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response.<br/>%s', 'graphql-api'),
                     $defaultValueDesc

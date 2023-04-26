@@ -15,11 +15,6 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 trait CommonModuleResolverTrait
 {
-    protected function getDefaultValueLabel(): string
-    {
-        return \__('Default value for the Schema Configuration', 'graphql-api');
-    }
-
     protected function getDefaultValueDescription(): string
     {
         return $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration.', 'graphql-api'));
