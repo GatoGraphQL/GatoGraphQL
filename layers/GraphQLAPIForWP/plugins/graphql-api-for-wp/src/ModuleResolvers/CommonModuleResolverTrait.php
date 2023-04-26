@@ -22,14 +22,7 @@ trait CommonModuleResolverTrait
 
     protected function getDefaultValueDescription(): string
     {
-        return sprintf(
-            \__('%s<br/>%s', 'graphql-api'),
-            $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api')),
-            $this->getCollapsible(
-                \__('The public endpoints are:', 'graphql-api') . $this->getPublicEndpointsListDescription(),
-                \__('(Show public endpoints)', 'graphql-api')
-            )
-        );
+        return $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration.', 'graphql-api'));
     }
 
     protected function getPublicEndpointsListDescription(): string
