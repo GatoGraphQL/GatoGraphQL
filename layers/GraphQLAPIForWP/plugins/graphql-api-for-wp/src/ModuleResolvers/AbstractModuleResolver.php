@@ -122,7 +122,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
      *
      * - Default Schema Configuration
      * - Endpoint Configuration
-     * - Plugin Settings
+     * - Plugin Configuration
      * - Plugin Management
      */
     public function getSettingsCategory(string $module): string

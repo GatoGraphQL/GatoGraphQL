@@ -106,7 +106,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $regenerateConfigSettingsCategories = [
             SettingsCategoryResolver::DEFAULT_SCHEMA_CONFIGURATION,
             SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
-            SettingsCategoryResolver::PLUGIN_SETTINGS,
+            SettingsCategoryResolver::PLUGIN_CONFIGURATION,
         ];
         $regenerateConfigFormOptions = array_map(
             fn (string $settingsCategory) => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory),
