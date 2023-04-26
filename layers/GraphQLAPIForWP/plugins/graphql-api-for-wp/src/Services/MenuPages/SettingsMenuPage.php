@@ -105,7 +105,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $regenerateConfigSettingsCategories = [
             SettingsCategoryResolver::GRAPHQL_API_SETTINGS,
-            SettingsCategoryResolver::ACCESS_PATHS,
+            SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
             SettingsCategoryResolver::PLUGIN_SETTINGS,
         ];
         $regenerateConfigFormOptions = array_map(
