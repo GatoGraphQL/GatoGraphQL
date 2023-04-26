@@ -207,19 +207,28 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             ($module === self::SINGLE_ENDPOINT
             && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION))
             || in_array($module, [
+                self::PRIVATE_ENDPOINT,
                 self::CUSTOM_ENDPOINTS,
                 self::PERSISTED_QUERIES,
             ])
         ) {
-            $descriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
+            $descriptionPlaceholder = \__('Schema Configuration to use in the %s Endpoint', 'graphql-api');
+            $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
             $description = match ($module) {
-                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'graphql-api'),
-                self::CUSTOM_ENDPOINTS => sprintf(
+                self::PRIVATE_ENDPOINT => sprintf(
                     $descriptionPlaceholder,
+                    \__('Private')
+                ),
+                self::SINGLE_ENDPOINT => sprintf(
+                    $descriptionPlaceholder,
+                    \__('Single')
+                ),
+                self::CUSTOM_ENDPOINTS => sprintf(
+                    $defaultDescriptionPlaceholder,
                     \__('Custom Endpoints')
                 ),
                 self::PERSISTED_QUERIES => sprintf(
-                    $descriptionPlaceholder,
+                    $defaultDescriptionPlaceholder,
                     \__('Persisted Queries')
                 ),
                 default => '',
