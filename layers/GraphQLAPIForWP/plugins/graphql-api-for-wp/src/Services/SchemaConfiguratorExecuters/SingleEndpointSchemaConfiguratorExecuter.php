@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SingleEndpointSchemaConfigurator;
@@ -77,8 +77,8 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     protected function getUserSettingSchemaConfigurationID(): ?int
     {
         $schemaConfigurationID = $this->getUserSettingsManager()->getSetting(
-            SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-            ModuleSettingOptions::VALUE_FOR_SINGLE_ENDPOINT
+            EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
+            ModuleSettingOptions::SCHEMA_CONFIGURATION
         );
         // `null` is stored as OPTION_VALUE_NO_VALUE_ID
         if ($schemaConfigurationID === ModuleSettingOptionValues::NO_VALUE_ID) {
