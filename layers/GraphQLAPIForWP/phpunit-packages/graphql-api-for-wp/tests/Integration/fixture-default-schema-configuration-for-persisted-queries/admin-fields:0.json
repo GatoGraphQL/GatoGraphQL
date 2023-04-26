@@ -1,0 +1,27 @@
+{
+    "data": {
+        "users": [
+            {
+                "name": "Editor Smith",
+                "email": "editor@test.com",
+                "roleNames": [
+                    "editor"
+                ]
+            },
+            {
+                "name": "Author Marquez",
+                "email": "author@test.com",
+                "roleNames": [
+                    "author"
+                ]
+            },
+            {
+                "name": "Contributor Johnson",
+                "email": "contributor@test.com",
+                "roleNames": [
+                    "contributor"
+                ]
+            }
+        ]
+    }
+}

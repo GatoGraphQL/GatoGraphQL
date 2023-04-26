@@ -1,0 +1,63 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'email' on type 'User'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "email",
+                    "users(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "User",
+                "field": "email",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        },
+        {
+            "message": "There is no field 'roleNames' on type 'User'",
+            "locations": [
+                {
+                    "line": 5,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "roleNames",
+                    "users(pagination: {limit: 3}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "User",
+                "field": "roleNames",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "users": [
+            {
+                "name": "Editor Smith",
+                "email": null,
+                "roleNames": null
+            },
+            {
+                "name": "Author Marquez",
+                "email": null,
+                "roleNames": null
+            },
+            {
+                "name": "Contributor Johnson",
+                "email": null,
+                "roleNames": null
+            }
+        ]
+    }
+}

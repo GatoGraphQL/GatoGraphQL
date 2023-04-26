@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-
-class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractDefaultSchemaConfigurationForEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest
 {
-    public const SCHEMA_CONFIGURATION_WEBSITE_ID = 191;
-
     /**
      * Single endpoint
      */
@@ -18,24 +14,13 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
         return 'graphql';
     }
 
-    protected function getFixtureFolder(): string
+    protected function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-default-schema-configuration-for-single-and-custom-endpoints';
-    }
-
-    protected function getSettingsKey(): string
-    {
-        return ModuleSettingOptions::SCHEMA_CONFIGURATION;
     }
 
     protected function getModuleID(string $dataName): string
     {
         return 'graphqlapi_graphqlapi_single-endpoint';
-    }
-
-    protected function getPluginSettingsNewValue(): mixed
-    {
-        // New value: Schema Config "Website"
-        return self::SCHEMA_CONFIGURATION_WEBSITE_ID;
     }
 }
