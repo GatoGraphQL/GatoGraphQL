@@ -4,7 +4,7 @@ Nested mutations enable to perform mutations on a type other than the root type 
 
 ## Description
 
-The query below executes a standard mutation, using the mutation field `updatePost` from the root type:
+The query below executes a standard mutation, using the mutation field `updatePost` from the `Root` type:
 
 ```graphql
 mutation {
@@ -101,11 +101,11 @@ For instance:
 - `Root.updatePost`
 - `Post.update`
 
-With this option, the "duplicated" mutation fields from the root type are kept.
+With this option, the "duplicated" mutation fields from the `Root` type are kept.
 
 ### Enable nested mutations, removing the redundant mutation fields from the root
 
-Same option as above, but removing the "duplicated" mutation fields from the root type.
+Same option as above, but removing the "duplicated" mutation fields from the `Root` type.
 
 ### Using nested mutations in the Admin clients
 

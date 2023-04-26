@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\Constants\HTMLCodes;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -14,6 +15,7 @@ use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\App;
 use WP_Post;
 
@@ -228,24 +230,33 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 self::PERSISTED_QUERIES,
             ])
         ) {
-            $descriptionPlaceholder = \__('Schema Configuration to use in the %s Endpoint', 'graphql-api');
             $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
-                    $descriptionPlaceholder,
-                    \__('Private')
+                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients</li><li>PHP class <code>%4$s</code> can be used to execute GraphQL queries internally (eg: triggered by some hook)</li></ul>', 'graphql-api'),
+                    ltrim(
+                        GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
+                        '/'
+                    ),
+                    \admin_url(sprintf(
+                        'admin.php?page=%s',
+                        $this->getGraphiQLMenuPage()->getScreenID()
+                    )),
+                    \admin_url(sprintf(
+                        'admin.php?page=%s',
+                        $this->getGraphQLVoyagerMenuPage()->getScreenID()
+                    )),
+                    'InternalGraphQLServer',
+                    HTMLCodes::OPEN_IN_NEW_WINDOW,
                 ),
-                self::SINGLE_ENDPOINT => sprintf(
-                    $descriptionPlaceholder,
-                    \__('Single')
-                ),
+                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'graphql-api'),
                 self::CUSTOM_ENDPOINTS => sprintf(
                     $defaultDescriptionPlaceholder,
-                    \__('Custom Endpoints')
+                    \__('Custom Endpoints', 'graphql-api')
                 ),
                 self::PERSISTED_QUERIES => sprintf(
                     $defaultDescriptionPlaceholder,
-                    \__('Persisted Queries')
+                    \__('Persisted Queries', 'graphql-api')
                 ),
                 default => '',
             };
@@ -273,7 +284,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => $module === self::SINGLE_ENDPOINT
+                Properties::TITLE => in_array($module, [
+                    self::PRIVATE_ENDPOINT,
+                    self::SINGLE_ENDPOINT,
+                ])
                     ? \__('Schema Configuration', 'graphql-api')
                     : \__('Default Schema Configuration', 'graphql-api'),
                 Properties::DESCRIPTION => $description,

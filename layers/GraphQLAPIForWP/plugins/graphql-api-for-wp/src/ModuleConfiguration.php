@@ -165,4 +165,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $defaultValue,
         );
     }
+
+    public function useSchemaConfigurationInInternalGraphQLServer(): bool
+    {
+        $envVariable = Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

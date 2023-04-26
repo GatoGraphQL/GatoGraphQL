@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\AppHelpers;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
@@ -37,22 +40,21 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
         return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 
-    /**
-     * Only enable the service if:
-     *
-     * - The corresponding module is enabled, and
-     * - We are executing the external GraphQL server
-     *   (i.e. not the internal one, as the SchemaConfiguration
-     *   does not apply there)
-     */
     public function isServiceEnabled(): bool
     {
         /**
-         * Only initialize once, for the main AppThread
+         * Maybe do not initialize for the Internal AppThread
+         *
+         * @var ModuleConfiguration
          */
-        if (!AppHelpers::isMainAppThread()) {
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (
+            !$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
+            && AppHelpers::isInternalGraphQLServerAppThread()
+        ) {
             return false;
         }
+
         $moduleRegistry = $this->getModuleRegistry();
         if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             return false;

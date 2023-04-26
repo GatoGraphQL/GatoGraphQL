@@ -7461,8 +7461,7 @@
                                     "namespacedName": "CategoryTaxonomyEnumString",
                                     "possibleValues": [
                                         "category",
-                                        "dummy-category",
-                                        "graphql-endpoint-category"
+                                        "dummy-category"
                                     ],
                                     "isOneOf": false
                                 },
@@ -7476,24 +7475,9 @@
                                     "elementName": "CustomPostEnumString",
                                     "namespacedName": "CustomPostEnumString",
                                     "possibleValues": [
-                                        "attachment",
-                                        "custom_css",
-                                        "customize_changeset",
                                         "dummy-cpt",
-                                        "graphql-endpoint",
-                                        "graphql-query",
-                                        "graphql-schemaconfig",
-                                        "nav_menu_item",
-                                        "oembed_cache",
                                         "page",
-                                        "post",
-                                        "revision",
-                                        "user_request",
-                                        "wp_block",
-                                        "wp_global_styles",
-                                        "wp_navigation",
-                                        "wp_template",
-                                        "wp_template_part"
+                                        "post"
                                     ],
                                     "isOneOf": false
                                 },
@@ -7631,12 +7615,7 @@
                                     "namespacedName": "TagTaxonomyEnumString",
                                     "possibleValues": [
                                         "dummy-tag",
-                                        "link_category",
-                                        "nav_menu",
-                                        "post_format",
-                                        "post_tag",
-                                        "wp_template_part_area",
-                                        "wp_theme"
+                                        "post_tag"
                                     ],
                                     "isOneOf": false
                                 },

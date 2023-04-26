@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\AppHelpers;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
@@ -61,11 +64,18 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     public function isServiceEnabled(): bool
     {
         /**
-         * Only initialize once, for the main AppThread
+         * Maybe do not initialize for the Internal AppThread
+         *
+         * @var ModuleConfiguration
          */
-        if (!AppHelpers::isMainAppThread()) {
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (
+            !$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
+            && AppHelpers::isInternalGraphQLServerAppThread()
+        ) {
             return false;
         }
+
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
             return $this->getModuleRegistry()->isModuleEnabled($enablingModule);

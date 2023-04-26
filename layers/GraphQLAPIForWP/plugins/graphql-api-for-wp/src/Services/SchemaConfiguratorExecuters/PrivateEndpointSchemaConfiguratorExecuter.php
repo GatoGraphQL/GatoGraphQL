@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use GraphQLAPI\GraphQLAPI\App;
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
@@ -82,11 +86,20 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
      */
     protected function getCustomPostID(): ?int
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         /**
          * Only enable it when executing a query against the private endpoint
          * or the InternalGraphQLServer
          */
-        if (!$this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()) {
+        if (
+            !(
+            $this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()
+            || ($moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
+                && AppHelpers::isInternalGraphQLServerAppThread()
+            )
+            )
+        ) {
             return null;
         }
         // Return the stored Schema Configuration ID
