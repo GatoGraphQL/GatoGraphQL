@@ -260,8 +260,10 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     );
                 break;
             case 'schema-config':
+                /** @var string */
+                $enablingModule = $this->getEnablingModule();
                 $schemaConfigurationID = $this->getEndpointBlockHelpers()->getSchemaConfigurationID(
-                    $this->getEnablingModule(),
+                    $enablingModule,
                     $post_id,
                 );
                 if ($schemaConfigurationID === null) {
