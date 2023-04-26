@@ -33,9 +33,6 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
         return ApplicationEvents::PRE_BOOT;
     }
 
-    /**
-     * Only initialize once, for the main AppThread
-     */
     public function isServiceEnabled(): bool
     {
         /**
