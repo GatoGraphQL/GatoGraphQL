@@ -20,7 +20,7 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-default-schema-configuration-for-single-endpoint';
+        return __DIR__ . '/fixture-default-schema-configuration-for-single-and-custom-endpoints';
     }
 
     protected function getSettingsKey(): string
