@@ -259,7 +259,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Expose the self fields to all types in the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response.<br/>%s', 'graphql-api'),
+                    \__('Expose the <code>self</code> field in the GraphQL schema, which returns an instance of the same object (for whichever type it is applied on), which can be used to adapt the shape of the GraphQL response.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
