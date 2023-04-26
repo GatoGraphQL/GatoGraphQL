@@ -621,7 +621,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     // Do not disable redundant mutation fields in the root type
                     EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS => false,
                 ],
-    
+
                 /**
                  * Allow access to all custom post types and taxonomies,
                  * and also set no limit for them.
@@ -641,7 +641,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES => get_taxonomies(['hierarchical' => true]),
                     CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT => -1,
                 ],
-    
+
                 // No limit in retrieving posts/users/etc
                 PostsModule::class => [
                     PostsEnvironment::POST_LIST_MAX_LIMIT => -1,
@@ -661,13 +661,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 PagesModule::class => [
                     PagesEnvironment::PAGE_LIST_MAX_LIMIT => -1,
                 ],
-    
+
                 // Allow access to all entries for Root.optionValue
                 SettingsModule::class => [
                     SettingsEnvironment::SETTINGS_ENTRIES => [],
                     SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY,
                 ],
-    
+
                 // Allow access to all meta values
                 CustomPostMetaModule::class => [
                     CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES => [],
