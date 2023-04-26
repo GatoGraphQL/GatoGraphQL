@@ -93,7 +93,7 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
             return null;
         }
         // Return the stored Schema Configuration ID
-        return $this->getEndpointBlockHelpers()->getUserSettingSchemaConfigurationID(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT);
+        return $this->getEndpointBlockHelpers()->getUserSettingSchemaConfigurationID(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
