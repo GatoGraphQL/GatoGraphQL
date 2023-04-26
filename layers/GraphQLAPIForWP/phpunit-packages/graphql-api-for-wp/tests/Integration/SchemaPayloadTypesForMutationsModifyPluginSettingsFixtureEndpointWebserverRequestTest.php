@@ -26,7 +26,7 @@ class SchemaPayloadTypesForMutationsModifyPluginSettingsFixtureEndpointWebserver
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-mutations';
+        return 'graphqlapi_graphqlapi_mutations';
     }
 
     protected function getPluginSettingsNewValue(): mixed

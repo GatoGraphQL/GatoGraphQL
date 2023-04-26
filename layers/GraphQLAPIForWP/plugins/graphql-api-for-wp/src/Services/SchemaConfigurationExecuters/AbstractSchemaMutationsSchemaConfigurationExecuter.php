@@ -27,7 +27,7 @@ abstract class AbstractSchemaMutationsSchemaConfigurationExecuter extends Abstra
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_MUTATIONS;
+        return SchemaConfigurationFunctionalityModuleResolver::MUTATIONS;
     }
 
     protected function getBlock(): BlockInterface

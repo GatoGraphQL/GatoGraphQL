@@ -18,7 +18,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
-    public final const SCHEMA_MUTATIONS = Plugin::NAMESPACE . '\schema-mutations';
+    public final const MUTATIONS = Plugin::NAMESPACE . '\mutations';
     public final const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
     public final const SCHEMA_EXPOSE_SENSITIVE_DATA = Plugin::NAMESPACE . '\schema-expose-sensitive-data';
     public final const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
@@ -50,7 +50,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return [
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_NAMESPACING,
-            self::SCHEMA_MUTATIONS,
+            self::MUTATIONS,
             self::NESTED_MUTATIONS,
             self::SCHEMA_EXPOSE_SENSITIVE_DATA,
             self::SCHEMA_SELF_FIELDS,
@@ -65,7 +65,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         switch ($module) {
             case self::SCHEMA_CONFIGURATION:
-            case self::SCHEMA_MUTATIONS:
+            case self::MUTATIONS:
                 return [];
             case self::SCHEMA_NAMESPACING:
                 return [
@@ -79,7 +79,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                         self::SCHEMA_CONFIGURATION,
                     ],
                     [
-                        self::SCHEMA_MUTATIONS,
+                        self::MUTATIONS,
                     ],
                 ];
         }
@@ -91,7 +91,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'graphql-api'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'graphql-api'),
-            self::SCHEMA_MUTATIONS => \__('Mutations', 'graphql-api'),
+            self::MUTATIONS => \__('Mutations', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'graphql-api'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose Sensitive Data in the Schema', 'graphql-api'),
             self::SCHEMA_SELF_FIELDS => \__('Self Fields', 'graphql-api'),
@@ -105,7 +105,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'graphql-api'),
             self::SCHEMA_NAMESPACING => \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'graphql-api'),
-            self::SCHEMA_MUTATIONS => \__('Modify data by executing mutations', 'graphql-api'),
+            self::MUTATIONS => \__('Modify data by executing mutations', 'graphql-api'),
             self::NESTED_MUTATIONS => \__('Execute mutations from any type in the schema, not only from the root', 'graphql-api'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose “sensitive” data elements in the schema', 'graphql-api'),
             self::SCHEMA_SELF_FIELDS => \__('Expose "self" fields in the schema', 'graphql-api'),
@@ -142,7 +142,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::DEFAULT_VALUE => false,
                 ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
             ],
-            self::SCHEMA_MUTATIONS => [
+            self::MUTATIONS => [
                 self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
                 self::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS => true,
             ],
@@ -203,7 +203,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-        } elseif ($module === self::SCHEMA_MUTATIONS) {
+        } elseif ($module === self::MUTATIONS) {
             $option = self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,

@@ -139,7 +139,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 <tr><td><a href="docs/modules/schema-taxonomy-meta/en.md">Schema Taxonomy Meta</a></td><td>Add the <code>option</code> field to taxonomies, such as types <code>PostTag</code> and <code>PostCategory</code></td></tr>
 <tr><td>Schema Menus</td><td>Query menus, through type <code>Menu</code> added to the schema</td></tr>
 <tr><td><a href="docs/modules/schema-settings/en.md">Schema Settings</a></td><td>Fetch settings from the site</td></tr>
-<tr><td><a href="docs/modules/schema-mutations/en.md">Schema Mutations</a></td><td>Modify data by executing mutations</td></tr>
+<tr><td><a href="docs/modules/mutations/en.md">Mutations</a></td><td>Modify data by executing mutations</td></tr>
 <tr><td><a href="docs/modules/schema-user-state-mutations/en.md">Schema User State Mutations</a></td><td>Have the user log-in, and be able to perform mutations</td></tr>
 <tr><td>Schema Custom Post Mutations</td><td>Base functionality to mutate custom posts</td></tr>
 <tr><td>Schema Post Mutations</td><td>Execute mutations on podyd</td></tr>

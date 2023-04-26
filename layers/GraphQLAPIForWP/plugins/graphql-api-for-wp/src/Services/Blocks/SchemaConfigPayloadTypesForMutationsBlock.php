@@ -23,7 +23,7 @@ class SchemaConfigPayloadTypesForMutationsBlock extends AbstractDefaultEnableDis
 
     public function getEnablingModule(): ?string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::SCHEMA_MUTATIONS;
+        return SchemaConfigurationFunctionalityModuleResolver::MUTATIONS;
     }
 
     protected function getBlockLabel(): string

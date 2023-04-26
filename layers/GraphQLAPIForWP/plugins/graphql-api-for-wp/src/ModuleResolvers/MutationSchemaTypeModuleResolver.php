@@ -72,7 +72,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_USER_STATE_MUTATIONS:
                 return [
                     [
-                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_MUTATIONS,
+                        SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                     ],
                 ];
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
