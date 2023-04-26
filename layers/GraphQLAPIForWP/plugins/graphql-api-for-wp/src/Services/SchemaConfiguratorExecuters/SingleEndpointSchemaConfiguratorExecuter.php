@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -64,6 +65,17 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     {
         /** @var EndpointBlockHelpers */
         return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+    }
+    
+    /**
+     * Only initialize once, for the main AppThread
+     */
+    public function isServiceEnabled(): bool
+    {
+        if (!AppHelpers::isMainAppThread()) {
+            return false;
+        }
+        return parent::isServiceEnabled();
     }
 
     /**

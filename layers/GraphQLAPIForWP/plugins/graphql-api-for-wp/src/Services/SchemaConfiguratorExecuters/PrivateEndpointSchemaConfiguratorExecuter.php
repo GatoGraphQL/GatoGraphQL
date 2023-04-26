@@ -81,25 +81,35 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 
+    public function isServiceEnabled(): bool
+    {
+        /**
+         * Do not enable when Schema Configuration in the
+         * InternalGraphQLServer is not supported are we are
+         * in that AppThread.
+         *
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (AppHelpers::isInternalGraphQLServerAppThread()
+            && !$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
+        ) {
+            return false;
+        }
+        return parent::isServiceEnabled();
+    }
+
     /**
      * This is the Schema Configuration ID
      */
     protected function getCustomPostID(): ?int
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         /**
          * Only enable it when executing a query against the private endpoint
          * or the InternalGraphQLServer
          */
-        if (
-            !(
-            $this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()
-            || ($moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
-                && AppHelpers::isInternalGraphQLServerAppThread()
-            )
-            )
-        ) {
+        if ($this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()
+            || AppHelpers::isInternalGraphQLServerAppThread()) {
             return null;
         }
         // Return the stored Schema Configuration ID
