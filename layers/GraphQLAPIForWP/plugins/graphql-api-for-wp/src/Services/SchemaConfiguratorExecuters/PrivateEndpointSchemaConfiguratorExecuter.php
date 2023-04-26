@@ -92,11 +92,12 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
          * Only enable it when executing a query against the private endpoint
          * or the InternalGraphQLServer
          */ 
-        if (!($this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()
+        if (!(
+            $this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()
             || ($moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
-                && AppHelpers::isInternalGraphQLServerAppThread())
+                && AppHelpers::isInternalGraphQLServerAppThread()
             )
-        ) {
+        )) {
             return null;
         }
         // Return the stored Schema Configuration ID
