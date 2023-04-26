@@ -16,7 +16,7 @@ class SchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSettingsFixt
 
     protected function getResponseFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-default-schema-configuration-for-single-and-custom-endpoints';
+        return __DIR__ . '/fixture-default-schema-configuration-for-endpoints';
     }
 
     protected function getModuleID(string $dataName): string
