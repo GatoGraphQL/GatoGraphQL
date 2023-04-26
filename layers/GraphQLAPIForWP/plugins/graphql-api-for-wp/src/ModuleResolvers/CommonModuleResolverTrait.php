@@ -63,15 +63,6 @@ trait CommonModuleResolverTrait
         );
     }
 
-    protected function getPublicEndpointValueDescription(): string
-    {
-        return $this->getSettingsInfoContent(\__('(Private endpoints are unrestricted.)', 'graphql-api'));
-        // return $this->getCollapsible(
-        //     \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api'),
-        //     \__('(What about private endpoints?)', 'graphql-api')
-        // );
-    }
-
     protected function getSettingsInfoContent(string $content): string
     {
         return sprintf(
