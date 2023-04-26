@@ -22,6 +22,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     use ModuleResolverTrait;
     use EndpointFunctionalityModuleResolverTrait;
 
+    public final const PRIVATE_ENDPOINT = Plugin::NAMESPACE . '\private-endpoint';
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
     public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
     public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
@@ -54,6 +55,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getModulesToResolve(): array
     {
         return [
+            self::PRIVATE_ENDPOINT,
             self::SINGLE_ENDPOINT,
             self::CUSTOM_ENDPOINTS,
             self::PERSISTED_QUERIES,
@@ -71,6 +73,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
+            case self::PRIVATE_ENDPOINT:
             case self::SINGLE_ENDPOINT:
                 return [];
             case self::CUSTOM_ENDPOINTS:
@@ -87,6 +90,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getName(string $module): string
     {
         return match ($module) {
+            self::PRIVATE_ENDPOINT => \__('Private Endpoint', 'graphql-api'),
             self::SINGLE_ENDPOINT => \__('Single Endpoint', 'graphql-api'),
             self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'graphql-api'),
             self::PERSISTED_QUERIES => \__('Persisted Queries', 'graphql-api'),
@@ -98,18 +102,19 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         /** @var GraphQLEndpointForWPModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
-        switch ($module) {
-            case self::SINGLE_ENDPOINT:
-                return \sprintf(
-                    \__('Expose a single GraphQL endpoint under <code>%s</code>, with unrestricted access', 'graphql-api'),
-                    $moduleConfiguration->getGraphQLAPIEndpoint()
-                );
-            case self::CUSTOM_ENDPOINTS:
-                return \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'graphql-api');
-            case self::PERSISTED_QUERIES:
-                return \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api');
-        }
-        return parent::getDescription($module);
+        return match ($module) {
+            self::PRIVATE_ENDPOINT => \sprintf(
+                \__('Private GraphQL endpoint, accessible only within the wp-admin, under <code>%s</code>', 'graphql-api'),
+                $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
+            ),
+            self::SINGLE_ENDPOINT => \sprintf(
+                \__('Expose the single GraphQL endpoint under <code>%s</code>', 'graphql-api'),
+                $moduleConfiguration->getGraphQLAPIEndpoint()
+            ),
+            self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'graphql-api'),
+            self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api'),
+            default => parent::getDescription($module)
+        };
     }
 
     public function isEnabledByDefault(string $module): bool
@@ -131,6 +136,9 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         $defaultValues = [
+            self::PRIVATE_ENDPOINT => [
+                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
+            ],
             self::SINGLE_ENDPOINT => [
                 ModuleSettingOptions::PATH => '/graphql/',
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
