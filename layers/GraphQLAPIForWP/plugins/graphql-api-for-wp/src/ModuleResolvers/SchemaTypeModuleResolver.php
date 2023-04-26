@@ -635,10 +635,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $maxLimitOption
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                Properties::TITLE => sprintf(
                     \__('Max limit for %s', 'graphql-api'),
                     $entities
-                )),
+                ),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
                     $entities,
@@ -664,7 +664,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included custom post types', 'graphql-api')),
+                    Properties::TITLE => \__('Included custom post types', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
                         \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.<br/>%s', 'graphql-api'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
@@ -702,10 +702,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                    Properties::TITLE => sprintf(
                         $sensitiveDataTitlePlaceholder,
                         \__('custom post status', 'graphql-api'),
-                    )),
+                    ),
                     Properties::DESCRIPTION => sprintf(
                         \__('%s.<br/>%s', 'graphql-api'),
                         sprintf(
@@ -724,10 +724,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                    Properties::TITLE => sprintf(
                         $sensitiveDataTitlePlaceholder,
                         \__('user email', 'graphql-api'),
-                    )),
+                    ),
                     Properties::DESCRIPTION => sprintf(
                         \__('%s.<br/>%s', 'graphql-api'),
                         sprintf(
@@ -763,7 +763,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included tag taxonomies', 'graphql-api')),
+                    Properties::TITLE => \__('Included tag taxonomies', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
                         sprintf(
                             '%s<br/><br/>%s',
@@ -809,7 +809,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included category taxonomies', 'graphql-api')),
+                    Properties::TITLE => \__('Included category taxonomies', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
                         sprintf(
                             '%s<br/><br/>%s',
@@ -879,7 +879,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Max limit for querying comments', 'graphql-api')),
+                Properties::TITLE => \__('Max limit for querying comments', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
                     \__('comments', 'graphql-api'),
@@ -897,10 +897,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('comment status', 'graphql-api'),
-                )),
+                ),
                 Properties::DESCRIPTION => sprintf(
                     \__('%s.<br/>%s', 'graphql-api'),
                     sprintf(
@@ -916,7 +916,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_SETTINGS,
             ])
         ) {
-            $entriesTitle = $this->getOnPublicEndpointsLabel(\__('Settings entries', 'graphql-api'));
+            $entriesTitle = \__('Settings entries', 'graphql-api');
             $publicEndpointValueDescription = $this->getPublicEndpointValueDescription();
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'graphql-api');
@@ -1005,10 +1005,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('user roles', 'graphql-api'),
-                )),
+                ),
                 Properties::DESCRIPTION => sprintf(
                     \__('%s.<br/>%s', 'graphql-api'),
                     sprintf(
@@ -1027,10 +1027,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('user capabilities', 'graphql-api'),
-                )),
+                ),
                 Properties::DESCRIPTION => sprintf(
                     \__('%s.<br/>%s', 'graphql-api'),
                     sprintf(

@@ -218,7 +218,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_TAXONOMY_META,
             ])
         ) {
-            $entriesTitle = $this->getOnPublicEndpointsLabel(\__('Meta keys', 'graphql-api'));
+            $entriesTitle = \__('Meta keys', 'graphql-api');
             $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s (one entry per line).', 'graphql-api');
             $publicEndpointValueDescription = $this->getPublicEndpointValueDescription();
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
@@ -341,7 +341,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Behavior', 'graphql-api')),
+                Properties::TITLE => \__('Behavior', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     '%s %s%s',
                     \__('Are the entries being allowed or denied access to?', 'graphql-api'),

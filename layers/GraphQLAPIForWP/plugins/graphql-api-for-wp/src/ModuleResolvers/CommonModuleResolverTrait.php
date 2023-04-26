@@ -63,14 +63,6 @@ trait CommonModuleResolverTrait
         );
     }
 
-    protected function getOnPublicEndpointsLabel(string $label): string
-    {
-        return sprintf(
-            '%s (on public endpoints)',
-            $label
-        );
-    }
-
     protected function getPublicEndpointValueDescription(): string
     {
         return $this->getSettingsInfoContent(\__('(Private endpoints are unrestricted.)', 'graphql-api'));
