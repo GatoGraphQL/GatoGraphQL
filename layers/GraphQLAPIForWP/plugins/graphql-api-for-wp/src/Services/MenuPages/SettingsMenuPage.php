@@ -104,7 +104,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
 
         $regenerateConfigSettingsCategories = [
-            SettingsCategoryResolver::GRAPHQL_API_SETTINGS,
+            SettingsCategoryResolver::DEFAULT_SCHEMA_CONFIGURATION,
             SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
             SettingsCategoryResolver::PLUGIN_SETTINGS,
         ];
@@ -221,7 +221,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function resetSettings(): void
     {
-        $this->getUserSettingsManager()->storeEmptySettings(Options::GRAPHQL_API_SETTINGS);
+        $this->getUserSettingsManager()->storeEmptySettings(Options::DEFAULT_SCHEMA_CONFIGURATION);
         $this->flushContainer();
     }
 
