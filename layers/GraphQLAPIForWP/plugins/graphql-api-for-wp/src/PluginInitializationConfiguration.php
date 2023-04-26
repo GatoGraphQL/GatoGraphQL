@@ -17,7 +17,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModule
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
@@ -63,7 +62,6 @@ use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Engine\Module as EngineModule;
 use PoP\Root\Environment as RootEnvironment;
-use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 
 use function get_post_types;
@@ -87,18 +85,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-        /** @var EndpointHelpers */
-        $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        /**
-         * Get the possible states of wp-admin clients requesting
-         * the endpoint:
-         *
-         * - Any admin endpoint, except the Persisted Query ones
-         *   (as they take the value from the Schema Configuration)
-         */
-        $loadSettingsForAdmin = $endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint()
-            || AppHelpers::isInternalGraphQLServerAppThread();
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
         return [
             // Client IP Server's Property Name
@@ -178,14 +164,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
-                'option' => $loadSettingsForAdmin ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Expose "self" fields in the schema?
             [
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_SELF_FIELD,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_SELF_FIELDS,
-                'option' => $loadSettingsForAdmin ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Enable nested mutations?
             // Only assign for Admin clients. For configuration it is assigned always, via the Fixed endpoint
@@ -193,7 +179,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => GraphQLServerModule::class,
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => $loadSettingsForAdmin ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value !== MutationSchemes::STANDARD,
             ],
             // Disable redundant mutation fields in the root type?
@@ -201,7 +187,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => EngineModule::class,
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
-                'option' => $loadSettingsForAdmin ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
                 'callback' => fn ($value) => $moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS) && $value === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
             ],
             // Post default/max limits, add to CustomPostUnion
@@ -397,7 +383,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_EXPOSE_SENSITIVE_DATA,
-                'option' => $loadSettingsForAdmin ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // White/Blacklisted entries to CustomPost.meta
             [
@@ -482,37 +468,37 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => \PoPCMSSchema\CommentMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
-                'option' => $loadSettingsForAdmin ? SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
-                'option' => $loadSettingsForAdmin ? SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
-                'option' => $loadSettingsForAdmin ? SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostTagMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
-                'option' => $loadSettingsForAdmin ? SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMediaMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
-                'option' => $loadSettingsForAdmin ? SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
             [
                 'class' => \PoPCMSSchema\UserStateMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
-                'option' => $loadSettingsForAdmin ? SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS : SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
         ];
     }
