@@ -195,7 +195,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         }
 
         // Add the Schema Configuration to all endpoints
-        if (($module === self::SINGLE_ENDPOINT
+        if (
+            ($module === self::SINGLE_ENDPOINT
             && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION))
             || in_array($module, [
                 self::CUSTOM_ENDPOINTS,
