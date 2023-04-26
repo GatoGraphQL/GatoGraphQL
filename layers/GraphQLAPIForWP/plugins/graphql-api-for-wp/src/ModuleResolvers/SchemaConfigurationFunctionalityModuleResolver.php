@@ -28,7 +28,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * Setting options
      */
     public final const USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE = 'use-payloadable-mutations-default-value';
-    public final const USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS = 'use-payloadable-mutations-value-for-admin-clients';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -140,23 +139,18 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $defaultValues = [
             self::SCHEMA_NAMESPACING => [
                 ModuleSettingOptions::DEFAULT_VALUE => false,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
             ],
             self::MUTATIONS => [
                 self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
-                self::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS => true,
             ],
             self::NESTED_MUTATIONS => [
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => MutationSchemes::STANDARD,
             ],
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => [
                 ModuleSettingOptions::DEFAULT_VALUE => $useUnsafe,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
             self::SCHEMA_SELF_FIELDS => [
                 ModuleSettingOptions::DEFAULT_VALUE => true,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -170,9 +164,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
-        $adminClientsDesc = $this->getAdminClientDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::SCHEMA_NAMESPACING) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
@@ -182,25 +174,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Namespace the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Namespace the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Namespace types in the GraphQL schema?<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Namespace the schema in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::MUTATIONS) {
@@ -211,26 +189,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Use payload types for all mutations in the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Use payload types for all mutations in the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Use payload types for mutations in the schema?<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-
-            $option = self::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Use payload types for mutations in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
@@ -239,7 +202,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     'payload-types-intro'
                 ),
-                Properties::DESCRIPTION => \__('<hr/><br/><strong>Explanation - Payload types for mutations:</strong><br/><br/>✅ <u>Checked</u>:<br/><br/>Mutation fields will return a payload object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/>❌ <u>Unchecked</u>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'graphql-api'),
+                Properties::DESCRIPTION => \__('✅ <strong>Checked</strong>:<br/><br/>Mutation fields will return a payload object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/>🟥 <strong>Unchecked</strong>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
         } elseif ($module === self::NESTED_MUTATIONS) {
@@ -255,26 +218,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Mutation Scheme: %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Mutation Scheme:', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Select the mutation scheme to use in the schema.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => $possibleValues,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Mutation Scheme in the admin (private) endpoints', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
@@ -283,7 +231,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     'intro'
                 ),
-                Properties::DESCRIPTION => \__('<hr/><br/><strong>Explanation - Redundant fields:</strong><br/><br/>With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed', 'graphql-api'),
+                Properties::DESCRIPTION => \__('<strong>Redundant fields:</strong><br/><br/>With nested mutations, a mutation operation in the root type may be considered redundant, so it could be removed from the schema.<br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed.', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
         } elseif ($module === self::SCHEMA_EXPOSE_SENSITIVE_DATA) {
@@ -294,28 +242,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Add “sensitive” fields to the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Add “sensitive” fields to the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-            // Commented out because this option is always set for admin endpoints
-            // $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            // $moduleSettings[] = [
-            //     Properties::INPUT => $option,
-            //     Properties::NAME => $this->getSettingOptionName(
-            //         $module,
-            //         $option
-            //     ),
-            //     Properties::TITLE => \__('Expose “sensitive” data elements in the admin (private) endpoints?', 'graphql-api'),
-            //     Properties::DESCRIPTION => $adminClientsDesc,
-            //     Properties::TYPE => Properties::TYPE_BOOL,
-            // ];
         } elseif ($module === self::SCHEMA_SELF_FIELDS) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
@@ -324,25 +257,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => sprintf(
-                    \__('Expose the self fields to all types in the schema? %s', 'graphql-api'),
-                    $defaultValueLabel
-                ),
+                Properties::TITLE => \__('Expose the self fields to all types in the schema?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response.<br/>%s', 'graphql-api'),
+                    \__('Expose the <code>self</code> field in the GraphQL schema, which returns an instance of the same object (for whichever type it is applied on), which can be used to adapt the shape of the GraphQL response.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Expose self fields in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }

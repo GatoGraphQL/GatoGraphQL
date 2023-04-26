@@ -22,6 +22,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     use ModuleResolverTrait;
     use EndpointFunctionalityModuleResolverTrait;
 
+    public final const PRIVATE_ENDPOINT = Plugin::NAMESPACE . '\private-endpoint';
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
     public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
     public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
@@ -54,6 +55,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getModulesToResolve(): array
     {
         return [
+            self::PRIVATE_ENDPOINT,
             self::SINGLE_ENDPOINT,
             self::CUSTOM_ENDPOINTS,
             self::PERSISTED_QUERIES,
@@ -71,6 +73,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
+            case self::PRIVATE_ENDPOINT:
             case self::SINGLE_ENDPOINT:
                 return [];
             case self::CUSTOM_ENDPOINTS:
@@ -87,6 +90,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getName(string $module): string
     {
         return match ($module) {
+            self::PRIVATE_ENDPOINT => \__('Private Endpoint', 'graphql-api'),
             self::SINGLE_ENDPOINT => \__('Single Endpoint', 'graphql-api'),
             self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'graphql-api'),
             self::PERSISTED_QUERIES => \__('Persisted Queries', 'graphql-api'),
@@ -98,18 +102,19 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         /** @var GraphQLEndpointForWPModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
-        switch ($module) {
-            case self::SINGLE_ENDPOINT:
-                return \sprintf(
-                    \__('Expose a single GraphQL endpoint under <code>%s</code>, with unrestricted access', 'graphql-api'),
-                    $moduleConfiguration->getGraphQLAPIEndpoint()
-                );
-            case self::CUSTOM_ENDPOINTS:
-                return \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'graphql-api');
-            case self::PERSISTED_QUERIES:
-                return \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api');
-        }
-        return parent::getDescription($module);
+        return match ($module) {
+            self::PRIVATE_ENDPOINT => \sprintf(
+                \__('Private GraphQL endpoint, accessible only within the wp-admin, under <code>%s</code>', 'graphql-api'),
+                $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
+            ),
+            self::SINGLE_ENDPOINT => \sprintf(
+                \__('Expose the single GraphQL endpoint under <code>%s</code>', 'graphql-api'),
+                $moduleConfiguration->getGraphQLAPIEndpoint()
+            ),
+            self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'graphql-api'),
+            self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api'),
+            default => parent::getDescription($module)
+        };
     }
 
     public function isEnabledByDefault(string $module): bool
@@ -125,12 +130,31 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         return parent::isEnabledByDefault($module);
     }
 
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
+    {
+        return match ($module) {
+            self::PRIVATE_ENDPOINT => true,
+            default => parent::isPredefinedEnabledOrDisabled($module),
+        };
+    }
+
+    public function isHidden(string $module): bool
+    {
+        return match ($module) {
+            self::PRIVATE_ENDPOINT => true,
+            default => parent::isHidden($module),
+        };
+    }
+
     /**
      * Default value for an option set by the module
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         $defaultValues = [
+            self::PRIVATE_ENDPOINT => [
+                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
+            ],
             self::SINGLE_ENDPOINT => [
                 ModuleSettingOptions::PATH => '/graphql/',
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
@@ -199,19 +223,28 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             ($module === self::SINGLE_ENDPOINT
             && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION))
             || in_array($module, [
+                self::PRIVATE_ENDPOINT,
                 self::CUSTOM_ENDPOINTS,
                 self::PERSISTED_QUERIES,
             ])
         ) {
-            $descriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
+            $descriptionPlaceholder = \__('Schema Configuration to use in the %s Endpoint', 'graphql-api');
+            $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
             $description = match ($module) {
-                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'graphql-api'),
-                self::CUSTOM_ENDPOINTS => sprintf(
+                self::PRIVATE_ENDPOINT => sprintf(
                     $descriptionPlaceholder,
+                    \__('Private')
+                ),
+                self::SINGLE_ENDPOINT => sprintf(
+                    $descriptionPlaceholder,
+                    \__('Single')
+                ),
+                self::CUSTOM_ENDPOINTS => sprintf(
+                    $defaultDescriptionPlaceholder,
                     \__('Custom Endpoints')
                 ),
                 self::PERSISTED_QUERIES => sprintf(
-                    $descriptionPlaceholder,
+                    $defaultDescriptionPlaceholder,
                     \__('Persisted Queries')
                 ),
                 default => '',

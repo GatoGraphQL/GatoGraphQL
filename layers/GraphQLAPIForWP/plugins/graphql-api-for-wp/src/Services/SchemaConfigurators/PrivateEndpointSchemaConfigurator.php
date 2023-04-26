@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 
-class SingleEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpointSchemaConfigurator
+class PrivateEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpointSchemaConfigurator
 {
     private ?EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry = null;
 
@@ -24,7 +24,7 @@ class SingleEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpoi
 
     protected function getEnablingModule(): string
     {
-        return EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT;
+        return EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT;
     }
 
     protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface

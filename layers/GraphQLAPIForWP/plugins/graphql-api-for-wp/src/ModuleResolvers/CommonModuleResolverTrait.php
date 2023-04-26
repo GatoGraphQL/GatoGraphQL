@@ -15,38 +15,14 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 trait CommonModuleResolverTrait
 {
-    protected function getDefaultValueLabel(): string
-    {
-        return \__('Default value for the Schema Configuration', 'graphql-api');
-    }
-
     protected function getDefaultValueDescription(): string
     {
-        return sprintf(
-            \__('%s<br/>%s', 'graphql-api'),
-            $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration for any public endpoint.', 'graphql-api')),
-            $this->getCollapsible(
-                \__('The public endpoints are:', 'graphql-api') . $this->getPublicEndpointsListDescription(),
-                \__('(Show public endpoints)', 'graphql-api')
-            )
-        );
+        return $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration.', 'graphql-api'));
     }
 
     protected function getPublicEndpointsListDescription(): string
     {
         return \__('<ul><li>Single endpoint</li><li>Custom endpoints</li><li>Persisted queries</li></ul>', 'graphql-api');
-    }
-
-    protected function getAdminClientDescription(): string
-    {
-        return sprintf(
-            \__('%s<br/>%s', 'graphql-api'),
-            \__('Same, but applied to private endpoints.', 'graphql-api'),
-            $this->getCollapsible(
-                \__('The private endpoints are:', 'graphql-api') . $this->getPrivateEndpointsListDescription(),
-                \__('(Show private endpoints)', 'graphql-api')
-            )
-        );
     }
 
     protected function getCollapsible(
@@ -85,23 +61,6 @@ trait CommonModuleResolverTrait
             HTMLCodes::OPEN_IN_NEW_WINDOW,
             'GraphQLServer'
         );
-    }
-
-    protected function getOnPublicEndpointsLabel(string $label): string
-    {
-        return sprintf(
-            '%s (on public endpoints)',
-            $label
-        );
-    }
-
-    protected function getPublicEndpointValueDescription(): string
-    {
-        return $this->getSettingsInfoContent(\__('(Private endpoints are unrestricted.)', 'graphql-api'));
-        // return $this->getCollapsible(
-        //     \__('This value will be used on public endpoints only; private endpoints are unrestricted.', 'graphql-api'),
-        //     \__('(What about private endpoints?)', 'graphql-api')
-        // );
     }
 
     protected function getSettingsInfoContent(string $content): string

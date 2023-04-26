@@ -579,8 +579,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $limitArg = 'limit';
         $unlimitedValue = -1;
         $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited.', 'graphql-api');
-        $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited.<br/>%s', 'graphql-api');
-        $publicEndpointValueDescription = $this->getPublicEndpointValueDescription();
+        $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited.', 'graphql-api');
         $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
         $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'graphql-api');
         $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each %2$s taxonomy\'s associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'graphql-api');
@@ -635,15 +634,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $maxLimitOption
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                Properties::TITLE => sprintf(
                     \__('Max limit for %s', 'graphql-api'),
                     $entities
-                )),
+                ),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
                     $entities,
                     $unlimitedValue,
-                    $publicEndpointValueDescription
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
@@ -664,14 +662,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included custom post types', 'graphql-api')),
+                    Properties::TITLE => \__('Included custom post types', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.<br/>%s', 'graphql-api'),
+                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.', 'graphql-api'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
                         $this->getPostObjectTypeResolver()->getTypeName(),
                         $this->getPageObjectTypeResolver()->getTypeName(),
                         $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
-                        $publicEndpointValueDescription,
                     ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
                     // Fetch all Schema Configurations from the DB
@@ -702,17 +699,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                    Properties::TITLE => sprintf(
                         $sensitiveDataTitlePlaceholder,
                         \__('custom post status', 'graphql-api'),
-                    )),
+                    ),
                     Properties::DESCRIPTION => sprintf(
-                        \__('%s.<br/>%s', 'graphql-api'),
-                        sprintf(
-                            $sensitiveDataDescPlaceholder,
-                            \__('custom post status', 'graphql-api'),
-                        ),
-                        $publicEndpointValueDescription
+                        $sensitiveDataDescPlaceholder,
+                        \__('custom post status', 'graphql-api'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -724,17 +717,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                    Properties::TITLE => sprintf(
                         $sensitiveDataTitlePlaceholder,
                         \__('user email', 'graphql-api'),
-                    )),
+                    ),
                     Properties::DESCRIPTION => sprintf(
-                        \__('%s.<br/>%s', 'graphql-api'),
-                        sprintf(
-                            $sensitiveDataDescPlaceholder,
-                            \__('user email', 'graphql-api'),
-                        ),
-                        $publicEndpointValueDescription
+                        $sensitiveDataDescPlaceholder,
+                        \__('user email', 'graphql-api'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -763,21 +752,20 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included tag taxonomies', 'graphql-api')),
+                    Properties::TITLE => \__('Included tag taxonomies', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
+                        '%s<br/><br/>%s',
                         sprintf(
-                            '%s<br/><br/>%s',
-                            sprintf(
-                                $taxonomyDescPlaceholder,
-                                \__('non-', 'graphql-api'),
-                                \__('tag', 'graphql-api'),
-                            ),
-                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.<br/>%s', 'graphql-api'),
+                            $taxonomyDescPlaceholder,
+                            \__('non-', 'graphql-api'),
+                            \__('tag', 'graphql-api'),
                         ),
-                        $this->getTagUnionTypeResolver()->getTypeName(),
-                        $this->getPostTagObjectTypeResolver()->getTypeName(),
-                        $this->getGenericTagObjectTypeResolver()->getTypeName(),
-                        $publicEndpointValueDescription,
+                        sprintf(
+                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.', 'graphql-api'),
+                            $this->getTagUnionTypeResolver()->getTypeName(),
+                            $this->getPostTagObjectTypeResolver()->getTypeName(),
+                            $this->getGenericTagObjectTypeResolver()->getTypeName(),
+                        )
                     ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
                     // Fetch all Schema Configurations from the DB
@@ -809,21 +797,20 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Included category taxonomies', 'graphql-api')),
+                    Properties::TITLE => \__('Included category taxonomies', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
+                        '%s<br/><br/>%s',
                         sprintf(
-                            '%s<br/><br/>%s',
-                            sprintf(
-                                $taxonomyDescPlaceholder,
-                                '',
-                                \__('category', 'graphql-api'),
-                            ),
-                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.<br/>%s', 'graphql-api'),
+                            $taxonomyDescPlaceholder,
+                            '',
+                            \__('category', 'graphql-api'),
                         ),
-                        $this->getCategoryUnionTypeResolver()->getTypeName(),
-                        $this->getPostCategoryObjectTypeResolver()->getTypeName(),
-                        $this->getGenericCategoryObjectTypeResolver()->getTypeName(),
-                        $publicEndpointValueDescription,
+                        sprintf(
+                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.', 'graphql-api'),
+                            $this->getCategoryUnionTypeResolver()->getTypeName(),
+                            $this->getPostCategoryObjectTypeResolver()->getTypeName(),
+                            $this->getGenericCategoryObjectTypeResolver()->getTypeName(),
+                        )
                     ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
                     // Fetch all Schema Configurations from the DB
@@ -879,12 +866,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(\__('Max limit for querying comments', 'graphql-api')),
+                Properties::TITLE => \__('Max limit for querying comments', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
                     \__('comments', 'graphql-api'),
                     $unlimitedValue,
-                    $publicEndpointValueDescription
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
@@ -897,17 +883,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('comment status', 'graphql-api'),
-                )),
+                ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('%s.<br/>%s', 'graphql-api'),
-                    sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('comment status', 'graphql-api'),
-                    ),
-                    $publicEndpointValueDescription
+                    $sensitiveDataDescPlaceholder,
+                    \__('comment status', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -916,14 +898,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_SETTINGS,
             ])
         ) {
-            $entriesTitle = $this->getOnPublicEndpointsLabel(\__('Settings entries', 'graphql-api'));
-            $publicEndpointValueDescription = $this->getPublicEndpointValueDescription();
+            $entriesTitle = \__('Settings entries', 'graphql-api');
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'graphql-api');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $moduleDescriptions = [
                 self::SCHEMA_SETTINGS => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
                     sprintf(
                         \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'graphql-api'),
                         'optionValue',
@@ -946,7 +927,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                             )
                         )
                     ),
-                    $publicEndpointValueDescription,
                 ),
             ];
             $option = ModuleSettingOptions::ENTRIES;
@@ -970,10 +950,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => \__('Behavior', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '%s %s%s',
+                    '%s %s',
                     \__('Are the entries being allowed or denied access to?', 'graphql-api'),
                     \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
-                    $publicEndpointValueDescription,
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
@@ -1005,17 +984,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('user roles', 'graphql-api'),
-                )),
+                ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('%s.<br/>%s', 'graphql-api'),
-                    sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('user roles', 'graphql-api'),
-                    ),
-                    $publicEndpointValueDescription
+                    $sensitiveDataDescPlaceholder,
+                    \__('user roles', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -1027,17 +1002,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => $this->getOnPublicEndpointsLabel(sprintf(
+                Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
                     \__('user capabilities', 'graphql-api'),
-                )),
+                ),
                 Properties::DESCRIPTION => sprintf(
-                    \__('%s.<br/>%s', 'graphql-api'),
-                    sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('user capabilities', 'graphql-api'),
-                    ),
-                    $publicEndpointValueDescription
+                    $sensitiveDataDescPlaceholder,
+                    \__('user capabilities', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
