@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
@@ -87,9 +86,7 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
          * Only enable it when executing a query against the private endpoint
          * or the InternalGraphQLServer
          */ 
-        if (!$this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()
-            && !AppHelpers::isInternalGraphQLServerAppThread()
-        ) {
+        if (!$this->getEndpointHelpers()->isRequestingDefaultAdminGraphQLEndpoint()) {
             return null;
         }
         // Return the stored Schema Configuration ID
