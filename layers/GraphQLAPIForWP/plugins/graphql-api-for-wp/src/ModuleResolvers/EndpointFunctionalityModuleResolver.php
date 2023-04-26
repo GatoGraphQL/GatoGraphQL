@@ -195,11 +195,13 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         }
 
         // Add the Schema Configuration to all endpoints
-        if (in_array($module, [
-            self::SINGLE_ENDPOINT,
-            self::CUSTOM_ENDPOINTS,
-            self::PERSISTED_QUERIES,
-        ])) {
+        if (($module === self::SINGLE_ENDPOINT
+            && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION))
+            || in_array($module, [
+                self::CUSTOM_ENDPOINTS,
+                self::PERSISTED_QUERIES,
+            ])
+        ) {
             $descriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
             $description = match ($module) {
                 self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'graphql-api'),
