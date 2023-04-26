@@ -28,7 +28,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      * Setting options
      */
     public final const USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE = 'use-payloadable-mutations-default-value';
-    public final const USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS = 'use-payloadable-mutations-value-for-admin-clients';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -140,23 +139,18 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $defaultValues = [
             self::SCHEMA_NAMESPACING => [
                 ModuleSettingOptions::DEFAULT_VALUE => false,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => false,
             ],
             self::MUTATIONS => [
                 self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
-                self::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS => true,
             ],
             self::NESTED_MUTATIONS => [
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => MutationSchemes::STANDARD,
             ],
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => [
                 ModuleSettingOptions::DEFAULT_VALUE => $useUnsafe,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
             self::SCHEMA_SELF_FIELDS => [
                 ModuleSettingOptions::DEFAULT_VALUE => true,
-                ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -192,17 +186,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Namespace the schema in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
         } elseif ($module === self::MUTATIONS) {
             $option = self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
             $moduleSettings[] = [
@@ -219,18 +202,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Use payload types for mutations in the schema?<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-
-            $option = self::USE_PAYLOADABLE_MUTATIONS_VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Use payload types for mutations in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
@@ -266,18 +237,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Mutation Scheme in the admin (private) endpoints', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => $possibleValues,
-            ];
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
@@ -304,18 +263,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-            // Commented out because this option is always set for admin endpoints
-            // $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            // $moduleSettings[] = [
-            //     Properties::INPUT => $option,
-            //     Properties::NAME => $this->getSettingOptionName(
-            //         $module,
-            //         $option
-            //     ),
-            //     Properties::TITLE => \__('Expose “sensitive” data elements in the admin (private) endpoints?', 'graphql-api'),
-            //     Properties::DESCRIPTION => $adminClientsDesc,
-            //     Properties::TYPE => Properties::TYPE_BOOL,
-            // ];
         } elseif ($module === self::SCHEMA_SELF_FIELDS) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
@@ -332,17 +279,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('The <code>self</code> field returns an instance of the same object, which can be used to adapt the shape of the GraphQL response.<br/>%s', 'graphql-api'),
                     $defaultValueDesc
                 ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            $option = ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Expose self fields in the admin (private) endpoints?', 'graphql-api'),
-                Properties::DESCRIPTION => $adminClientsDesc,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }
