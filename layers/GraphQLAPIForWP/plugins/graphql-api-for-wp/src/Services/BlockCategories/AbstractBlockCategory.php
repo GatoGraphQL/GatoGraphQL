@@ -25,7 +25,8 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
          * @var ModuleConfiguration
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
+        if (
+            !$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
             && AppHelpers::isInternalGraphQLServerAppThread()
         ) {
             return false;

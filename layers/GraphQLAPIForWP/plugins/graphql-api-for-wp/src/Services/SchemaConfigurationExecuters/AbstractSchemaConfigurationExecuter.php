@@ -69,7 +69,8 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
          * @var ModuleConfiguration
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
+        if (
+            !$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
             && AppHelpers::isInternalGraphQLServerAppThread()
         ) {
             return false;
