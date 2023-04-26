@@ -5,20 +5,9 @@
         "name": "CustomPostEnumString",
         "extensions": {
           "possibleValues": [
-            "attachment",
-            "custom_css",
-            "customize_changeset",
-            "nav_menu_item",
-            "oembed_cache",
+            "dummy-cpt",
             "page",
-            "post",
-            "revision",
-            "user_request",
-            "wp_block",
-            "wp_global_styles",
-            "wp_navigation",
-            "wp_template",
-            "wp_template_part"
+            "post"
           ]
         }
       },
@@ -26,12 +15,8 @@
         "name": "TagTaxonomyEnumString",
         "extensions": {
           "possibleValues": [
-            "link_category",
-            "nav_menu",
-            "post_format",
-            "post_tag",
-            "wp_template_part_area",
-            "wp_theme"
+            "dummy-tag",
+            "post_tag"
           ]
         }
       }

@@ -7457,7 +7457,8 @@
                         "elementName": "CategoryTaxonomyEnumString",
                         "namespacedName": "CategoryTaxonomyEnumString",
                         "possibleValues": [
-                            "category"
+                            "category",
+                            "dummy-category"
                         ],
                         "isOneOf": false
                     },
@@ -7471,20 +7472,9 @@
                         "elementName": "CustomPostEnumString",
                         "namespacedName": "CustomPostEnumString",
                         "possibleValues": [
-                            "attachment",
-                            "custom_css",
-                            "customize_changeset",
-                            "nav_menu_item",
-                            "oembed_cache",
+                            "dummy-cpt",
                             "page",
-                            "post",
-                            "revision",
-                            "user_request",
-                            "wp_block",
-                            "wp_global_styles",
-                            "wp_navigation",
-                            "wp_template",
-                            "wp_template_part"
+                            "post"
                         ],
                         "isOneOf": false
                     },
@@ -7621,12 +7611,8 @@
                         "elementName": "TagTaxonomyEnumString",
                         "namespacedName": "TagTaxonomyEnumString",
                         "possibleValues": [
-                            "link_category",
-                            "nav_menu",
-                            "post_format",
-                            "post_tag",
-                            "wp_template_part_area",
-                            "wp_theme"
+                            "dummy-tag",
+                            "post_tag"
                         ],
                         "isOneOf": false
                     },

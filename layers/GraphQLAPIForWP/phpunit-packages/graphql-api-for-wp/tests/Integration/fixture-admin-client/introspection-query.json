@@ -6784,7 +6784,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -7382,7 +7382,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -9188,7 +9188,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -9833,7 +9833,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -14393,7 +14393,7 @@
         {
           "kind": "SCALAR",
           "name": "CategoryTaxonomyEnumString",
-          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`.",
+          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -14403,7 +14403,7 @@
         {
           "kind": "SCALAR",
           "name": "CustomPostEnumString",
-          "description": "Custom post types (available for querying via the API), with possible values: `\"attachment\"`, `\"custom_css\"`, `\"customize_changeset\"`, `\"nav_menu_item\"`, `\"oembed_cache\"`, `\"page\"`, `\"post\"`, `\"revision\"`, `\"user_request\"`, `\"wp_block\"`, `\"wp_global_styles\"`, `\"wp_navigation\"`, `\"wp_template\"`, `\"wp_template_part\"`.",
+          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"page\"`, `\"post\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -14513,7 +14513,7 @@
         {
           "kind": "SCALAR",
           "name": "TagTaxonomyEnumString",
-          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"link_category\"`, `\"nav_menu\"`, `\"post_format\"`, `\"post_tag\"`, `\"wp_template_part_area\"`, `\"wp_theme\"`.",
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"post_tag\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -17921,7 +17921,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -18311,7 +18311,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -18864,7 +18864,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -19075,7 +19075,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -19242,7 +19242,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -20436,7 +20436,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -20877,7 +20877,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"attachment\",\"custom_css\",\"customize_changeset\",\"nav_menu_item\",\"oembed_cache\",\"page\",\"post\",\"revision\",\"user_request\",\"wp_block\",\"wp_global_styles\",\"wp_navigation\",\"wp_template\",\"wp_template_part\"]"
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -22427,6 +22427,11 @@
           "interfaces": null,
           "enumValues": null,
           "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericCategory",
+              "ofType": null
+            },
             {
               "kind": "OBJECT",
               "name": "PostCategory",
