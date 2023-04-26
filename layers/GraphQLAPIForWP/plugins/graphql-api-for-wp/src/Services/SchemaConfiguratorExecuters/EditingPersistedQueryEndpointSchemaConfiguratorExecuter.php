@@ -32,7 +32,7 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
         /** @var PersistedQueryEndpointSchemaConfigurator */
         return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
     }
-    
+
     /**
      * Only initialize once, for the main AppThread
      */

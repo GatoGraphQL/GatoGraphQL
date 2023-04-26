@@ -66,7 +66,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         /** @var EndpointBlockHelpers */
         return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
     }
-    
+
     /**
      * Only initialize once, for the main AppThread
      */

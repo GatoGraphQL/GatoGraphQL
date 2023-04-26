@@ -19,7 +19,7 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
         }
         return parent::isServiceEnabled();
     }
-    
+
     /**
      * Initialize the configuration if visiting the corresponding CPT
      */
