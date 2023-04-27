@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Settings\Options;
 
 class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
 {
-    public final const DEFAULT_SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\default-schema-configuration';
+    public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const ENDPOINT_CONFIGURATION = Plugin::NAMESPACE . '\endpoint-configuration';
     public final const PLUGIN_CONFIGURATION = Plugin::NAMESPACE . '\plugin-configuration';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
@@ -20,7 +20,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getSettingsCategoriesToResolve(): array
     {
         return [
-            self::DEFAULT_SCHEMA_CONFIGURATION,
+            self::SCHEMA_CONFIGURATION,
             self::ENDPOINT_CONFIGURATION,
             self::PLUGIN_CONFIGURATION,
             self::PLUGIN_MANAGEMENT,
@@ -30,7 +30,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getName(string $settingsCategory): string
     {
         return match ($settingsCategory) {
-            self::DEFAULT_SCHEMA_CONFIGURATION => $this->__('Default Schema Configuration', 'graphql-api'),
+            self::SCHEMA_CONFIGURATION => $this->__('Schema Configuration', 'graphql-api'),
             self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'graphql-api'),
             self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'graphql-api'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'graphql-api'),
@@ -41,7 +41,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getDBOptionName(string $settingsCategory): string
     {
         return match ($settingsCategory) {
-            self::DEFAULT_SCHEMA_CONFIGURATION => Options::DEFAULT_SCHEMA_CONFIGURATION,
+            self::SCHEMA_CONFIGURATION => Options::SCHEMA_CONFIGURATION,
             self::ENDPOINT_CONFIGURATION => Options::ENDPOINT_CONFIGURATION,
             self::PLUGIN_CONFIGURATION => Options::PLUGIN_CONFIGURATION,
             self::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,

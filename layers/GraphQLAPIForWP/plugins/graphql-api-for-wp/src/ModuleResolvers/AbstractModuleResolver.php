@@ -120,14 +120,14 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     /**
      * The category where to display the settings:
      *
-     * - Default Schema Configuration
+     * - Schema Configuration
      * - Endpoint Configuration
      * - Plugin Configuration
      * - Plugin Management
      */
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategoryResolver::DEFAULT_SCHEMA_CONFIGURATION;
+        return SettingsCategoryResolver::SCHEMA_CONFIGURATION;
     }
 
     /**

@@ -104,7 +104,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
 
         $regenerateConfigSettingsCategories = [
-            SettingsCategoryResolver::DEFAULT_SCHEMA_CONFIGURATION,
+            SettingsCategoryResolver::SCHEMA_CONFIGURATION,
             SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
             SettingsCategoryResolver::PLUGIN_CONFIGURATION,
         ];
@@ -221,7 +221,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function resetSettings(): void
     {
-        $this->getUserSettingsManager()->storeEmptySettings(Options::DEFAULT_SCHEMA_CONFIGURATION);
+        $this->getUserSettingsManager()->storeEmptySettings(Options::SCHEMA_CONFIGURATION);
         $this->flushContainer();
     }
 

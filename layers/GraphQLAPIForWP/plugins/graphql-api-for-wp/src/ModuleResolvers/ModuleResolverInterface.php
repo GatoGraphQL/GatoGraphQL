@@ -62,7 +62,7 @@ interface ModuleResolverInterface
     /**
      * The category where to display the settings:
      *
-     * - Default Schema Configuration
+     * - Schema Configuration
      * - Endpoint Configuration
      * - Plugin Configuration
      * - Plugin Management
