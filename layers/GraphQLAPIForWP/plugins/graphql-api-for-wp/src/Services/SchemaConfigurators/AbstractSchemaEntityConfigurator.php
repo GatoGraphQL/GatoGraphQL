@@ -14,7 +14,7 @@ use PoP\Root\Services\BasicServiceTrait;
 /**
  * Base class for configuring the persisted GraphQL query before its execution
  */
-abstract class AbstractGraphQLQueryConfigurator implements GraphQLQueryConfiguratorInterface
+abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfiguratorInterface
 {
     use BasicServiceTrait;
 
