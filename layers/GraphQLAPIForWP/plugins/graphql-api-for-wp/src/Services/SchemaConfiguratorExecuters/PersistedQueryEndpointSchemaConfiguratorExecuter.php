@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQueryEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
@@ -40,5 +41,10 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
         return $this->getPersistedQueryEndpointSchemaConfigurator();
+    }
+
+    protected function getLoadingCPTSchemaConfiguratorModule(): string
+    {
+        return EndpointFunctionalityModuleResolver::PERSISTED_QUERIES;
     }
 }

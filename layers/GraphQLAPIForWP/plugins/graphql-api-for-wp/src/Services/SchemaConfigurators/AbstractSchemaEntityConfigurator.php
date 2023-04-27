@@ -6,7 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\Registries\FieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
@@ -15,7 +14,7 @@ use PoP\Root\Services\BasicServiceTrait;
 /**
  * Base class for configuring the persisted GraphQL query before its execution
  */
-abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInterface
+abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfiguratorInterface
 {
     use BasicServiceTrait;
 
@@ -235,17 +234,18 @@ abstract class AbstractGraphQLQueryConfigurator implements SchemaConfiguratorInt
     }
 
     /**
-     * Execute the schema configuration contained in the custom post with certain ID
+     * Execute the schema configuration for entities (fields, directives, etc),
+     * retrieving the data from the custom post with certain ID
      */
-    public function executeSchemaConfiguration(int $customPostID): void
+    final public function executeSchemaEntityConfiguration(int $customPostID): void
     {
         // Only if the module is not disabled
         if (!$this->isServiceEnabled()) {
             return;
         }
 
-        $this->doExecuteSchemaConfiguration($customPostID);
+        $this->doExecuteSchemaEntityConfiguration($customPostID);
     }
 
-    abstract protected function doExecuteSchemaConfiguration(int $customPostID): void;
+    abstract protected function doExecuteSchemaEntityConfiguration(int $customPostID): void;
 }

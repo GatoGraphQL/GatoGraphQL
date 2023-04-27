@@ -84,7 +84,7 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
     /**
      * This is the Schema Configuration ID
      */
-    protected function getCustomPostID(): ?int
+    protected function getSchemaConfigurationID(): ?int
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

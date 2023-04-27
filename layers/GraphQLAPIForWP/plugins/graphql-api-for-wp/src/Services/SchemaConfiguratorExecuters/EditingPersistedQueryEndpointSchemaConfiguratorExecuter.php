@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\AppHelpers;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQueryEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
@@ -13,6 +15,7 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
 {
     private ?EndpointHelpers $endpointHelpers = null;
     private ?PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator = null;
+    private ?EndpointBlockHelpers $endpointBlockHelpers = null;
 
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -32,6 +35,15 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
         /** @var PersistedQueryEndpointSchemaConfigurator */
         return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
     }
+    final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
+    {
+        $this->endpointBlockHelpers = $endpointBlockHelpers;
+    }
+    final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
+    {
+        /** @var EndpointBlockHelpers */
+        return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+    }
 
     /**
      * Only initialize once, for the main AppThread
@@ -47,12 +59,16 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     /**
      * Initialize the configuration if editing a persisted query
      */
-    protected function getCustomPostID(): ?int
+    protected function getSchemaConfigurationID(): ?int
     {
-        if ($this->getEndpointHelpers()->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
-            return (int) $this->getEndpointHelpers()->getAdminPersistedQueryCustomPostID();
+        if (!$this->getEndpointHelpers()->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
+            return null;
         }
-        return null;
+        $customPostID = (int) $this->getEndpointHelpers()->getAdminPersistedQueryCustomPostID();
+        return $this->getEndpointBlockHelpers()->getSchemaConfigurationID(
+            EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
+            $customPostID,
+        );
     }
 
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface

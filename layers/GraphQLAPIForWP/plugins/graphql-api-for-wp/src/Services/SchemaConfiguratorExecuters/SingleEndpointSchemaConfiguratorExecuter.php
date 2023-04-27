@@ -81,7 +81,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     /**
      * This is the Schema Configuration ID
      */
-    protected function getCustomPostID(): ?int
+    protected function getSchemaConfigurationID(): ?int
     {
         // Only enable it when executing a query against the single endpoint
         if (!$this->getGraphQLEndpointHandler()->isEndpointRequested()) {

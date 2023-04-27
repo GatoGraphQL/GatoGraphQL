@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\CustomEndpointSchemaConfigurator;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
@@ -40,5 +41,10 @@ class CustomEndpointSchemaConfiguratorExecuter extends AbstractLoadingCPTSchemaC
     protected function getSchemaConfigurator(): SchemaConfiguratorInterface
     {
         return $this->getCustomEndpointSchemaConfigurator();
+    }
+
+    protected function getLoadingCPTSchemaConfiguratorModule(): string
+    {
+        return EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS;
     }
 }

@@ -9,7 +9,7 @@ use PoP\Root\Services\ServiceInterface;
 interface SchemaConfiguratorInterface extends ServiceInterface
 {
     /**
-     * Execute the schema configuration contained in the custom post with certain ID
+     * Execute the schema configuration with certain ID
      */
-    public function executeSchemaConfiguration(int $customPostID): void;
+    public function executeSchemaConfiguration(int $schemaConfigurationID): void;
 }
