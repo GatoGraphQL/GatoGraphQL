@@ -56,16 +56,16 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
      */
     public function initialize(): void
     {
-        if ($customPostID = $this->getCustomPostID()) {
+        if ($schemaConfigurationID = $this->getSchemaConfigurationID()) {
             $schemaConfigurator = $this->getSchemaConfigurator();
-            $schemaConfigurator->executeSchemaConfiguration($customPostID);
+            $schemaConfigurator->executeSchemaConfiguration($schemaConfigurationID);
         }
     }
 
     /**
      * Provide the ID of the custom post containing the Schema Configuration block
      */
-    abstract protected function getCustomPostID(): ?int;
+    abstract protected function getSchemaConfigurationID(): ?int;
 
     /**
      * Initialize the configuration of services before the execution of the GraphQL query
