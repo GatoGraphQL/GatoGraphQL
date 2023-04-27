@@ -17,7 +17,7 @@ trait CommonModuleResolverTrait
 {
     protected function getDefaultValueDescription(): string
     {
-        return $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration.', 'graphql-api'));
+        return $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration, or when the endpoint does not have a Schema Configuration assigned to it.', 'graphql-api'));
     }
 
     protected function getPublicEndpointsListDescription(): string
