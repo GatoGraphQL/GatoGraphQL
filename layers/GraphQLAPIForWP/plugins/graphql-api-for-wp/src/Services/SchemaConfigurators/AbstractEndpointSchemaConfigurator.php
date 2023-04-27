@@ -81,8 +81,6 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
         $this->doExecuteSchemaConfiguration($schemaConfigurationID);
     }
 
-    abstract protected function getSchemaConfigurationID(int $customPostID): ?int;
-
     protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void
     {
         foreach ($this->getSchemaConfigurationExecuterRegistry()->getEnabledSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {

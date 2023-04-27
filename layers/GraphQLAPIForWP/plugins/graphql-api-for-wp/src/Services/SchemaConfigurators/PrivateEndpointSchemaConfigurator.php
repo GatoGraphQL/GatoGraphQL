@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 
-class PrivateEndpointSchemaConfigurator extends AbstractSchemaConfigurationEndpointSchemaConfigurator
+class PrivateEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurator
 {
     private ?EndpointSchemaConfigurationExecuterRegistryInterface $endpointSchemaConfigurationExecuterRegistry = null;
 
