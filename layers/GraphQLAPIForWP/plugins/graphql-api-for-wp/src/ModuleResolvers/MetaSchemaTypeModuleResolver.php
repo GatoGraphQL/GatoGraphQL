@@ -223,9 +223,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'graphql-api');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
+            $defaultValueDesc = $this->getDefaultValueDescription();
             $moduleDescriptions = [
                 self::SCHEMA_CUSTOMPOST_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'custom posts'
@@ -246,9 +247,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                             )
                         )
                     ),
+                    $defaultValueDesc,
                 ),
                 self::SCHEMA_USER_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'users'
@@ -269,9 +271,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                             )
                         )
                     ),
+                    $defaultValueDesc,
                 ),
                 self::SCHEMA_COMMENT_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'comments'
@@ -292,9 +295,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                             )
                         )
                     ),
+                    $defaultValueDesc,
                 ),
                 self::SCHEMA_TAXONOMY_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
                     sprintf(
                         $metaKeyDesc,
                         'taxonomies (tags and categories)'
@@ -315,6 +319,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                             )
                         )
                     ),
+                    $defaultValueDesc,
                 ),
             ];
             $option = ModuleSettingOptions::ENTRIES;
@@ -338,9 +343,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => \__('Behavior', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
-                    '%s %s',
+                    '%s %s%s',
                     \__('Are the entries being allowed or denied access to?', 'graphql-api'),
                     \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
+                    $defaultValueDesc,
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
