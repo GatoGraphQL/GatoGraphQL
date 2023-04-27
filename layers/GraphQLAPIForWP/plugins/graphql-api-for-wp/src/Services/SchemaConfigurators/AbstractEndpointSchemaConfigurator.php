@@ -78,12 +78,12 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
         }
 
         // Get that Schema Configuration, and load its settings
-        $this->executeSchemaConfigurationItems($schemaConfigurationID);
+        $this->doExecuteSchemaConfiguration($schemaConfigurationID);
     }
 
     abstract protected function getSchemaConfigurationID(int $customPostID): ?int;
 
-    protected function executeSchemaConfigurationItems(int $schemaConfigurationID): void
+    protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void
     {
         foreach ($this->getSchemaConfigurationExecuterRegistry()->getEnabledSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
             $schemaConfigurationExecuter->executeSchemaConfiguration($schemaConfigurationID);
