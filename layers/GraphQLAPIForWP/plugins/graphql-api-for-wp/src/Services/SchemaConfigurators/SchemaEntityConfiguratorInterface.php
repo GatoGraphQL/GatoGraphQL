@@ -9,7 +9,8 @@ use PoP\Root\Services\ServiceInterface;
 interface SchemaEntityConfiguratorInterface extends ServiceInterface
 {
     /**
-     * Execute the schema configuration contained within a custom post with certain ID
+     * Execute the schema configuration for entities (fields, directives, etc),
+     * retrieving the data from the custom post with certain ID
      */
-    public function executeSchemaConfiguration(int $customPostID): void;
+    public function executeSchemaEntityConfiguration(int $customPostID): void;
 }

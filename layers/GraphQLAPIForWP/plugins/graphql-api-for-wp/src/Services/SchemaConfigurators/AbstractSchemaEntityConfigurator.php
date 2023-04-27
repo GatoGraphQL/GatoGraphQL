@@ -234,17 +234,18 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
     }
 
     /**
-     * Execute the schema configuration contained in the custom post with certain ID
+     * Execute the schema configuration for entities (fields, directives, etc),
+     * retrieving the data from the custom post with certain ID
      */
-    final public function executeSchemaConfiguration(int $customPostID): void
+    final public function executeSchemaEntityConfiguration(int $customPostID): void
     {
         // Only if the module is not disabled
         if (!$this->isServiceEnabled()) {
             return;
         }
 
-        $this->doExecuteSchemaConfiguration($customPostID);
+        $this->doExecuteSchemaEntityConfiguration($customPostID);
     }
 
-    abstract protected function doExecuteSchemaConfiguration(int $customPostID): void;
+    abstract protected function doExecuteSchemaEntityConfiguration(int $customPostID): void;
 }
