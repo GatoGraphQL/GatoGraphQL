@@ -233,7 +233,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
-                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients</li><li>PHP class <code>%4$s</code> can be used to execute GraphQL queries internally (eg: triggered by some hook)</li></ul>', 'graphql-api'),
+                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be used to feed data to blocks in the WordPress editor</li><li>PHP class <code>%4$s</code> can be used to execute GraphQL queries internally (eg: triggered by some hook)</li></ul>', 'graphql-api'),
                     ltrim(
                         GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
                         '/'
