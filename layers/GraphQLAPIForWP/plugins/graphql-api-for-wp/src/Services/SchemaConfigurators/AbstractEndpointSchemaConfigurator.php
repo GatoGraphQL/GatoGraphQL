@@ -11,7 +11,6 @@ use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorInterface
@@ -19,7 +18,6 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     use BasicServiceTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
-    private ?BlockHelpers $blockHelpers = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -29,15 +27,6 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
     {
         /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-    }
-    final public function setBlockHelpers(BlockHelpers $blockHelpers): void
-    {
-        $this->blockHelpers = $blockHelpers;
-    }
-    final protected function getBlockHelpers(): BlockHelpers
-    {
-        /** @var BlockHelpers */
-        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
     }
 
     public function isServiceEnabled(): bool
@@ -59,6 +48,7 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
         if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             return false;
         }
+
         // Only enable the service if the corresponding module is also enabled
         return $moduleRegistry->isModuleEnabled($this->getEnablingModule());
     }
