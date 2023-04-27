@@ -236,7 +236,7 @@ abstract class AbstractGraphQLQueryConfigurator implements GraphQLQueryConfigura
     /**
      * Execute the schema configuration contained in the custom post with certain ID
      */
-    public function executeSchemaConfiguration(int $customPostID): void
+    final public function executeSchemaConfiguration(int $customPostID): void
     {
         // Only if the module is not disabled
         if (!$this->isServiceEnabled()) {
