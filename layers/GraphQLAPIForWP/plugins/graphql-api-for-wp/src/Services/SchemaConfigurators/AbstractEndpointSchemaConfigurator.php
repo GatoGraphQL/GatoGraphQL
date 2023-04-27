@@ -70,14 +70,14 @@ abstract class AbstractEndpointSchemaConfigurator implements SchemaConfiguratorI
      * and inject them into the service as to take effect
      * in the current GraphQL query
      */
-    public function executeSchemaConfiguration(int $customPostID): void
+    public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
         // Only if the module is not disabled
         if (!$this->isServiceEnabled()) {
             return;
         }
 
-        $this->doExecuteSchemaConfiguration($customPostID);
+        $this->doExecuteSchemaConfiguration($schemaConfigurationID);
     }
 
     /**
