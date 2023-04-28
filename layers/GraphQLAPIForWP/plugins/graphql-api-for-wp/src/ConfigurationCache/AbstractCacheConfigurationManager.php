@@ -77,7 +77,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              */
             $endpointHelpers = $this->getEndpointHelpers();
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
-            
+
             /**
              * The Default and Persisted Query endpoints are applied
              * the same Disabled Modules, so they have the same
@@ -89,10 +89,12 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              * a distinctive configuration of their own, so cache them
              * independently.
              */
-            if (!in_array($endpointGroup, [
+            if (
+                !in_array($endpointGroup, [
                 AdminGraphQLEndpointGroups::DEFAULT,
                 AdminGraphQLEndpointGroups::PERSISTED_QUERY,
-            ])) {
+                ])
+            ) {
                 $suffix .= '_' . sanitize_file_name($endpointGroup);
             }
         } else {
