@@ -105,6 +105,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             1
         );
 
+        /**
+         * Keep this variable for if "Plugin Configuration" eventually
+         * needs to regenerate the container once again.
+         */
+        $doesPluginConfigurationSettingsAffectTheServiceContainer = false;
         $regenerateConfigSettingsCategories = [
             'schema' => SettingsCategoryResolver::SCHEMA_CONFIGURATION,
             'endpoint' => SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
@@ -116,13 +121,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
         foreach ($regenerateConfigFormOptions as $option) {
             $regenerateContainer = null;
-            /**
-             * Keep the code below for if "Plugin Configuration" eventually
-             * needs to regenerate the container once again.
-             */
-            if ($option === $regenerateConfigFormOptions['plugin']
-                // If this code is needed, then remove this line
-                && false // @phpstan-ignore-line
+            if ($doesPluginConfigurationSettingsAffectTheServiceContainer // @phpstan-ignore-line
+                && $option === $regenerateConfigFormOptions['plugin']
             ) {
                 $regenerateContainer = true;
             }
@@ -251,14 +251,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $userSettingsManager->storeEmptySettings($option);
         }
 
-        $regenerateContainer = null;
         /**
-         * Keep the code below for if "Plugin Configuration" eventually
+         * Keep this variable for if "Plugin Configuration" eventually
          * needs to regenerate the container once again.
-         *
-         * @phpstan-ignore-next-line
          */
-        if (false) {
+        $doesPluginConfigurationSettingsAffectTheServiceContainer = false;
+        $regenerateContainer = null;
+        if ($doesPluginConfigurationSettingsAffectTheServiceContainer) { // @phpstan-ignore-line
             $regenerateContainer = true;
         }
         $this->flushContainer(true, $regenerateContainer);
