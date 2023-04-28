@@ -7,8 +7,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
+use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration as GraphQLServerModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\PluginApp;
@@ -263,8 +263,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * the service container.
          */
         if ($regenerateContainer === null) {
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            /**
+             * The System/Application Service Containers need to be regenerated
+             * when updating the plugin Settings only if Services can be added
+             * or not to the Container based on the context.
+             *
+             * @var GraphQLServerModuleConfiguration
+             */
+            $moduleConfiguration = App::getModule(GraphQLServerModule::class)->getConfiguration();
             $regenerateContainer = $moduleConfiguration->supportDefiningServicesInTheContainerBasedOnTheContext();
         }
         if ($regenerateContainer) {
