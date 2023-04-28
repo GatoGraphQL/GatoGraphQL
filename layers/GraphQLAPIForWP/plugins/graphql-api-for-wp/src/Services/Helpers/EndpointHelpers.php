@@ -215,7 +215,7 @@ class EndpointHelpers
     /**
      * @return string[]
      */
-    public function getPredefinedAdminGraphQLEndpointGroups(): array
+    protected function getPredefinedAdminGraphQLEndpointGroups(): array
     {
         return [
             AdminGraphQLEndpointGroups::DEFAULT,
