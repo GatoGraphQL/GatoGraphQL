@@ -223,8 +223,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function resetSettings(): void
     {
-        $this->getUserSettingsManager()->storeEmptySettings(Options::SCHEMA_CONFIGURATION);
-        $this->flushContainer();
+        $userSettingsManager = $this->getUserSettingsManager();
+        $userSettingsManager->storeEmptySettings(Options::SCHEMA_CONFIGURATION);
+        $userSettingsManager->storeEmptySettings(Options::ENDPOINT_CONFIGURATION);
+        $userSettingsManager->storeEmptySettings(Options::PLUGIN_CONFIGURATION);
+        $this->flushContainer(true);
     }
 
     /**
