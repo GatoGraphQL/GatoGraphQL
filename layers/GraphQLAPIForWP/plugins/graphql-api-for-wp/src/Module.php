@@ -127,12 +127,8 @@ class Module extends AbstractPluginModule
         if (
             \is_admin()
             && $isGraphiQLExplorerEnabled
-            && $userSettingsManager->getSetting(
-                DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                DeprecatedClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_CLIENT
-            )
         ) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorerInAdminClient/Overrides');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorer/Overrides');
         }
         if ($isGraphiQLExplorerEnabled) {
             if (
