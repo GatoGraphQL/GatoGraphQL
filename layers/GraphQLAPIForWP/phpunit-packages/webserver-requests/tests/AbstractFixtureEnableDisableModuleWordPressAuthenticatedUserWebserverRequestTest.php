@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
+use GraphQLByPoP\GraphQLServer\Unit\FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
+use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
 use function file_get_contents;
 
 /**
@@ -14,6 +15,7 @@ use function file_get_contents;
 abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest extends AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest
 {
     use FixtureTestCaseTrait;
+    use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
     public function getDataSetAsString(bool $includeData = true): string
     {
@@ -27,6 +29,7 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
     {
         $moduleEntries = [];
         $fixtureFolder = $this->getFixtureFolder();
+
         $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],
@@ -42,11 +45,11 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
              */
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
-            $moduleEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':enabled.json';
+            $moduleEnabledGraphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName . ':enabled');
             if (!\file_exists($moduleEnabledGraphQLResponseFile)) {
                 $this->throwFileNotExistsException($moduleEnabledGraphQLResponseFile);
             }
-            $moduleDisabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':disabled.json';
+            $moduleDisabledGraphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName . ':disabled');
             if (!\file_exists($moduleDisabledGraphQLResponseFile)) {
                 $this->throwFileNotExistsException($moduleDisabledGraphQLResponseFile);
             }
