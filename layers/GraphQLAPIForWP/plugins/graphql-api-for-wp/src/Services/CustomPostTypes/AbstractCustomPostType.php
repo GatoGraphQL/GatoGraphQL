@@ -22,8 +22,8 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Block_Editor_Context;
 use WP_Post;
-
 use WP_Taxonomy;
+
 use function get_taxonomy;
 use function is_object_in_taxonomy;
 use function wp_dropdown_categories;
@@ -266,7 +266,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         /**
          * The endpoint against which to execute GraphQL queries on the WordPress editor,
          * for Gutenberg blocks which require some field that must necessarily be enabled.
-         * 
+         *
          * This GraphQL schema is not modified by user preferences:
          * - All types/directives are always in the schema
          * - The "admin" fields are in the schema

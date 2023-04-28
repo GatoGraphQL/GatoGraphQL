@@ -382,7 +382,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         if (!$endpointHelpers->isRequestingCustomAdminGraphQLEndpoint()) {
             return $schemaModuleClassesToSkip;
         }
-        
+
         /**
          * Private endpoints: Allow to not disable modules on custom
          * admin endpoints, for some specific group.
