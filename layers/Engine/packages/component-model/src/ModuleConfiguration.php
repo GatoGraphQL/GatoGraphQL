@@ -374,6 +374,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      * When disabled (as it is by default), Services must be registered always
      * in the container, and enabled/disabled on runtime (eg: via method
      * `getFieldNamesToResolve` in the FieldResolvers).
+     *
+     * This method has been added to be able to reference the
+     * corresponding logic throughout the application (and not delete
+     * that code), but it is not expected to be set as `true`.
      */
     public function supportDefiningServicesInTheContainerBasedOnTheContext(): bool
     {
