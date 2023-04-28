@@ -9,9 +9,8 @@ use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginStaticModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -333,12 +332,10 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-        if ($endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint()) {
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()) {
-                return [];
-            }
+        if ($endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint()
+            && PluginStaticModuleConfiguration::alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
+        ) {
+            return [];
         }
 
         /**

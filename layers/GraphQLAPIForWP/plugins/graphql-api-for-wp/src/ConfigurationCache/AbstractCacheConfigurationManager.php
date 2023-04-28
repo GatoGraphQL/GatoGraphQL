@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInfoInterface;
+use GraphQLAPI\GraphQLAPI\PluginStaticModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
-use PoP\Root\Services\BasicServiceTrait;
 
+use PoP\Root\Services\BasicServiceTrait;
 use function is_admin;
 use function sanitize_file_name;
 
@@ -88,15 +86,12 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              *
              * All other admin endpoints can have a distinctive configuration
              * of their own, so cache them independently.
-             *
-             * @var ModuleConfiguration
              */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             $useDistinctiveServiceContainer =
                 $endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT
                 && $endpointGroup !== AdminGraphQLEndpointGroups::PERSISTED_QUERY
                 && ($endpointGroup !== AdminGraphQLEndpointGroups::PLUGIN_OWN_USE
-                    || $moduleConfiguration->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
+                    || PluginStaticModuleConfiguration::alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
                 );
             if ($useDistinctiveServiceContainer) {
                 $suffix .= '_' . sanitize_file_name($endpointGroup);
