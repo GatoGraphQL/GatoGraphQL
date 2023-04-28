@@ -66,6 +66,19 @@ class EndpointHelpers
     }
 
     /**
+     * Indicate if we are requesting the internal wp-admin endpoint
+     * used on the WordPress editor to power developer's blocks
+     * for their own sites, under:
+     *
+     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=blockEditor
+     */
+    public function isRequestingAdminBlockEditorGraphQLEndpoint(): bool
+    {
+        return $this->isRequestingAdminGraphQLEndpoint()
+            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::BLOCK_EDITOR;
+    }
+
+    /**
      * Indicate if we are requesting the wp-admin endpoint that
      * fetches data for Persisted Queries, under:
      *
@@ -178,8 +191,9 @@ class EndpointHelpers
             $supportedAdminEndpointGroups,
             [
                 AdminGraphQLEndpointGroups::DEFAULT,
-                AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
                 AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+                AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
+                AdminGraphQLEndpointGroups::BLOCK_EDITOR,
             ]
         );
     }
@@ -193,6 +207,19 @@ class EndpointHelpers
         return \add_query_arg(
             RequestParams::ENDPOINT_GROUP,
             AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
+            $this->getAdminGraphQLEndpoint()
+        );
+    }
+
+    /**
+     * GraphQL endpoint to be used by developers to feed data
+     * to blocks in their own sites.
+     */
+    public function getAdminBlockEditorGraphQLEndpoint(): string
+    {
+        return \add_query_arg(
+            RequestParams::ENDPOINT_GROUP,
+            AdminGraphQLEndpointGroups::BLOCK_EDITOR,
             $this->getAdminGraphQLEndpoint()
         );
     }

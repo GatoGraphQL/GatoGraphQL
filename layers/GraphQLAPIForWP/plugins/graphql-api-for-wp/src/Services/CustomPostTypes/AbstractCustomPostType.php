@@ -244,9 +244,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'GRAPHQL_API_ADMIN_ENDPOINT',
             $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
         );
+
         /**
          * The endpoint against which to execute GraphQL queries on the WordPress editor,
          * for Gutenberg blocks which require some field that must necessarily be enabled.
+         * 
          * This GraphQL schema is not modified by user preferences:
          * - All types/directives are always in the schema
          * - The "admin" fields are in the schema
@@ -257,6 +259,16 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $scriptTag,
             'GRAPHQL_API_PLUGIN_OWN_USE_ADMIN_ENDPOINT',
             $this->getEndpointHelpers()->getAdminPluginOwnUseGraphQLEndpoint()
+        );
+
+        /**
+         * Endpoint to allow developers to feed data to their Gutenberg blocks,
+         * with pre-defined config (avoiding the user preferences from the plugin).
+         */
+        \printf(
+            $scriptTag,
+            'GRAPHQL_API_BLOCK_EDITOR_ADMIN_ENDPOINT',
+            $this->getEndpointHelpers()->getAdminBlockEditorGraphQLEndpoint()
         );
     }
 
