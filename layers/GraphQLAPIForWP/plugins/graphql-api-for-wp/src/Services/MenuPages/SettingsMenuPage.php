@@ -249,7 +249,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * @var ModuleConfiguration
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->doesTheServiceContainerDependOnTheContext()) {
+        if ($moduleConfiguration->doTheServiceContainersDependOnTheContext()) {
             $this->getUserSettingsManager()->storeContainerTimestamp();
         } else {
             $this->getUserSettingsManager()->storeOperationalTimestamp();
