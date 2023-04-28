@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
 /**
@@ -22,14 +21,6 @@ class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityM
     use ClientFunctionalityModuleResolverTrait;
 
     public final const GRAPHIQL_EXPLORER = Plugin::NAMESPACE . '\graphiql-explorer';
-
-    /**
-     * Setting options
-     */
-    public final const OPTION_USE_IN_ADMIN_CLIENT = 'use-in-admin-client';
-    public final const OPTION_USE_IN_ADMIN_PERSISTED_QUERIES = 'use-in-admin-persisted-queries';
-    public final const OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT = 'use-in-public-client-for-single-endpoint';
-    public final const OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS = 'use-in-public-client-for-custom-endpoints';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -80,85 +71,6 @@ class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityM
                 return \__('Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)', 'graphql-api');
         }
         return parent::getDescription($module);
-    }
-
-    /**
-     * Default value for an option set by the module
-     */
-    public function getSettingsDefaultValue(string $module, string $option): mixed
-    {
-        $defaultValues = [
-            self::GRAPHIQL_EXPLORER => [
-                self::OPTION_USE_IN_ADMIN_CLIENT => true,
-                self::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES => true,
-                self::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT => true,
-                self::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS => true,
-            ],
-        ];
-        return $defaultValues[$module][$option] ?? null;
-    }
-
-    /**
-     * Array with the inputs to show as settings for the module
-     *
-    * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
-     */
-    public function getSettings(string $module): array
-    {
-        $moduleSettings = parent::getSettings($module);
-        if ($module === self::GRAPHIQL_EXPLORER) {
-            $option = self::OPTION_USE_IN_ADMIN_CLIENT;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Admin client', 'graphql-api'),
-                Properties::DESCRIPTION => \__('Use the Explorer in the GraphiQL client in the admin area?', 'graphql-api'),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-            if ($this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)) {
-                $option = self::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Persisted queries', 'graphql-api'),
-                    Properties::DESCRIPTION => \__('Use the Explorer when creating persisted queries in the admin area?', 'graphql-api'),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-            }
-            if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
-                $option = self::OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Single endpoint public client', 'graphql-api'),
-                    Properties::DESCRIPTION => \__('Use the Explorer in the single endpoint\'s public GraphiQL client?', 'graphql-api'),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-            }
-            if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_CUSTOM_ENDPOINTS)) {
-                $option = self::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Custom endpoint public clients', 'graphql-api'),
-                    Properties::DESCRIPTION => \__('Use the Explorer in the custom endpoints\' public GraphiQL client?', 'graphql-api'),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-            }
-        }
-        return $moduleSettings;
     }
 
     /**
