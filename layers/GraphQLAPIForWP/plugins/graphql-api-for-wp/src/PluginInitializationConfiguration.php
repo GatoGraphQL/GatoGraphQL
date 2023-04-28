@@ -604,9 +604,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      */
     protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
-        $moduleClassConfiguration = [];
         if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE) {
-            $moduleClassConfiguration = [
+            /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
+            return [
                 ComponentModelModule::class => [
                     // Enable the "self" fields
                     ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
@@ -642,8 +642,11 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => false,
                 ],
             ];
-        } elseif ($endpointGroup === AdminGraphQLEndpointGroups::BLOCK_EDITOR) {
-            $moduleClassConfiguration = [
+        }
+
+        if ($endpointGroup === AdminGraphQLEndpointGroups::BLOCK_EDITOR) {
+            /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
+            return [
                 ComponentModelModule::class => [
                     // Enable the "self" fields
                     ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
@@ -740,8 +743,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ],
             ];
         }
+
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
-        return $moduleClassConfiguration;
+        return [];
     }
 
     /**
