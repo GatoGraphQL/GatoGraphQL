@@ -15,6 +15,6 @@ class DisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsModifyPlugi
 
     protected function getResponseFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-custom-admin-endpoint';
+        return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-no-change';
     }
 }
