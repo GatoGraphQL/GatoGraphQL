@@ -482,8 +482,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                     -->
                                                     <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo $time ?>">
                                                     <?php if (RequestHelpers::isRequestingXDebug()): ?>
-                                                        <input type="hidden" name="<?php echo $optionsFormName?>[<?php echo FrameworkParams::XDEBUG_TRIGGER ?>]" value="1">
-                                                        <input type="hidden" name="<?php echo $optionsFormName?>[<?php echo FrameworkParams::XDEBUG_SESSION_STOP ?>]" value="1">
+                                                        <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_TRIGGER ?>" value="1">
+                                                        <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_SESSION_STOP ?>" value="1">
                                                     <?php endif; ?>
                                                     <!-- Panels -->
                                                     <?php
