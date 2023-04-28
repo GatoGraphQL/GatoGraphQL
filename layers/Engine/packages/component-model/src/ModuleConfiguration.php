@@ -55,7 +55,8 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     {
         return match ($envVariable) {
             Environment::ENABLE_COMPONENT_MODEL_CACHE,
-            Environment::USE_COMPONENT_MODEL_CACHE
+            Environment::USE_COMPONENT_MODEL_CACHE,
+            Environment::SUPPORT_DEFINING_SERVICES_IN_THE_CONTAINER_BASED_ON_THE_CONTEXT
                 => false,
             default => parent::enableHook($envVariable),
         };
