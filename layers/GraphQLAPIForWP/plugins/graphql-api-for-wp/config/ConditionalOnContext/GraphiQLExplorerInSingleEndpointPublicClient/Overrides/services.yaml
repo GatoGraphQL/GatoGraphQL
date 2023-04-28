@@ -1,9 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    # Override the GraphiQL clients
-    GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
-        class: '\GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient'

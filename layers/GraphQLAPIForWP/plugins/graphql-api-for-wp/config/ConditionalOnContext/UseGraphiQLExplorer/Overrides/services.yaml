@@ -1,0 +1,18 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    # Override the GraphiQL clients to use the GraphiQL Explorer
+    # Single Endpoint
+    GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
+        class: '\GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient'
+
+    # Persisted Query Endpoints
+    GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock:
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'
+
+    # Custom Endpoints
+    GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient:
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\CustomEndpointGraphiQLWithExplorerClient'
