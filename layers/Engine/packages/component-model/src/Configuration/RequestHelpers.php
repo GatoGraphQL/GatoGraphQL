@@ -67,13 +67,21 @@ class RequestHelpers
     }
 
     /**
-     * If XDebug enabled, append param "XDEBUG_TRIGGER=debug" to debug the request
+     * Indicate if param "XDEBUG_TRIGGER=1" is appended to the request
+     */
+    public static function isRequestingXDebug(): bool
+    {
+        return RootEnvironment::isApplicationEnvironmentDev() && App::getRequest()->query->has('XDEBUG_TRIGGER');
+    }
+
+    /**
+     * If XDebug enabled, append param "XDEBUG_TRIGGER=1" to debug the request
      *
      * @return string[]
      */
     protected static function getXDebugParamValues(): array
     {
-        if (!RootEnvironment::isApplicationEnvironmentDev() || !App::getRequest()->query->has('XDEBUG_TRIGGER')) {
+        if (!static::isRequestingXDebug()) {
             return [];
         }
 
