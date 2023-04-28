@@ -123,7 +123,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
         foreach ($regenerateConfigFormOptions as $option) {
             $regenerateContainer = null;
-            if ($doesPluginConfigurationSettingsAffectTheServiceContainer // @phpstan-ignore-line
+            if (
+                $doesPluginConfigurationSettingsAffectTheServiceContainer // @phpstan-ignore-line
                 && $option === $regenerateConfigFormOptions['plugin']
             ) {
                 $regenerateContainer = true;
@@ -481,7 +482,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         @see wp-includes/option.php
                                                     -->
                                                     <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo $time ?>">
-                                                    <?php if (RequestHelpers::isRequestingXDebug()): ?>
+                                                    <?php if (RequestHelpers::isRequestingXDebug()) : ?>
                                                         <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_TRIGGER ?>" value="1">
                                                         <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_SESSION_STOP ?>" value="1">
                                                     <?php endif; ?>

@@ -88,7 +88,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                  */
                 $name = (string)$itemSetting[Properties::NAME];
                 $canBeEmpty = $itemSetting[Properties::CAN_BE_EMPTY] ?? false;
-                
+
                 /**
                  * All form fields will be provided via the Settings form.
                  * If they are not, then this method has been invoked by
