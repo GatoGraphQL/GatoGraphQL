@@ -351,12 +351,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          * the endpoint, yet it will also generate the service container,
          * which will be cached and shared from then on.
          */
-        $isAdmin = is_admin();
-        $isRequestingAdminPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
-        $isInternalGraphQLServer = AppHelpers::isInternalGraphQLServerAppThread();
         if (
-            ($isAdmin && !$isRequestingAdminPersistedQueryGraphQLEndpoint)
-            || $isInternalGraphQLServer
+            (is_admin() && !$endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint())
+            || AppHelpers::isInternalGraphQLServerAppThread()
         ) {
             /**
              * Private endpoints: Check Settings to decide if to
