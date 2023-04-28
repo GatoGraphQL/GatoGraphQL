@@ -17,7 +17,7 @@ class SchemaConfigMultipleQueryExecutionBlock extends AbstractSchemaConfigPROPlu
 
     public function getBlockPriority(): int
     {
-        return 2500;
+        return 10070;
     }
 
     public function getEnablingModule(): ?string

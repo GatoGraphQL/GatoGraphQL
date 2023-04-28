@@ -19,7 +19,7 @@ class SchemaConfigSendHTTPRequestFieldsBlock extends AbstractSchemaConfigPROPlug
 
     public function getBlockPriority(): int
     {
-        return 2100;
+        return 8080;
     }
 
     public function getEnablingModule(): ?string

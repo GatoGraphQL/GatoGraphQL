@@ -34,7 +34,7 @@ class SchemaConfigSchemaTagsBlock extends AbstractSchemaConfigCustomizableConfig
 
     public function getBlockPriority(): int
     {
-        return 10080;
+        return 9080;
     }
 
     public function getEnablingModule(): ?string

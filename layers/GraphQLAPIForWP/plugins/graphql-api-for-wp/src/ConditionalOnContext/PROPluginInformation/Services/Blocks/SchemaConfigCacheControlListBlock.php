@@ -17,7 +17,7 @@ class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPROPluginPse
 
     public function getBlockPriority(): int
     {
-        return 2700;
+        return 10030;
     }
 
     public function getEnablingModule(): ?string

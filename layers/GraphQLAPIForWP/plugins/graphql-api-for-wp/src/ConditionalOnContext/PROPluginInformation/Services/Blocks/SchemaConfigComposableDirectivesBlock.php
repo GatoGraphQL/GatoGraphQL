@@ -17,7 +17,7 @@ class SchemaConfigComposableDirectivesBlock extends AbstractSchemaConfigPROPlugi
 
     public function getBlockPriority(): int
     {
-        return 2200;
+        return 10050;
     }
 
     public function getEnablingModule(): ?string

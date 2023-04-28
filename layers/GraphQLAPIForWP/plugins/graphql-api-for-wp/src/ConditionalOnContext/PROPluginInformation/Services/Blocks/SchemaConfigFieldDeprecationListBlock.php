@@ -17,7 +17,7 @@ class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPROPlugi
 
     public function getBlockPriority(): int
     {
-        return 2600;
+        return 10020;
     }
 
     public function getEnablingModule(): ?string

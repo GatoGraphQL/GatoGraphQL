@@ -18,7 +18,7 @@ class SchemaConfigSchemaCommentMetaBlock extends AbstractSchemaConfigSchemaMetaB
 
     public function getBlockPriority(): int
     {
-        return 10040;
+        return 9040;
     }
 
     public function getEnablingModule(): ?string
