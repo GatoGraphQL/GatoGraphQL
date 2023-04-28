@@ -129,15 +129,6 @@ class Module extends AbstractPluginModule
                 $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorer/Overrides');
             }            
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorer/Overrides');
-            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorer/Overrides');
-            if (
-                $userSettingsManager->getSetting(
-                    DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                    DeprecatedClientFunctionalityModuleResolver::OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS
-                )
-            ) {
-                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInCustomEndpointPublicClient/Overrides');
-            }
         }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(self::class)->getConfiguration();
