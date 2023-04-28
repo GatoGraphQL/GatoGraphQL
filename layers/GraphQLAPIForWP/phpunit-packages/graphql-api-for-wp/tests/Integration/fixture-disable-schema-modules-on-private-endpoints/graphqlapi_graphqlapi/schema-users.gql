@@ -1,8 +1,6 @@
 ############################################################
-# After having disabled module "User Roles",
-# check if the UserRole type is available or not:
-# Single endpoint: always disabled
-# Admin endpoint: disabled or not via the Settings option
+# After having disabled module "Users",
+# check if the User type is available or not
 ############################################################
 {
   __schema {

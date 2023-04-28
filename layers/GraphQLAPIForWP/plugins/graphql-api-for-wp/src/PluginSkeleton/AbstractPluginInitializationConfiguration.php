@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginStaticModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
@@ -19,7 +18,6 @@ use PoP\Root\Module\ModuleConfigurationHelpers;
 use PoP\Root\Module\ModuleInterface;
 
 use function apply_filters;
-use function is_admin;
 
 /**
  * Base class to set the configuration for all the PoP components,
@@ -345,30 +343,6 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          */
         if ($endpointHelpers->isRequestingAdminBlockEditorGraphQLEndpoint()) {
             return [];
-        }
-
-        /**
-         * Check `is_admin` as loading the GraphiQL client is not executing
-         * the endpoint, yet it will also generate the service container,
-         * which will be cached and shared from then on.
-         */
-        if (
-            (is_admin() && !$endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint())
-            || AppHelpers::isInternalGraphQLServerAppThread()
-        ) {
-            /**
-             * Private endpoints: Check Settings to decide if to
-             * disable the "Schema modules" or not
-             */
-            $userSettingsManager = UserSettingsManagerFacade::getInstance();
-            if (
-                !$userSettingsManager->getSetting(
-                    PluginGeneralSettingsFunctionalityModuleResolver::PRIVATE_ENDPOINTS,
-                    PluginGeneralSettingsFunctionalityModuleResolver::OPTION_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS
-                )
-            ) {
-                return [];
-            }
         }
 
         $schemaModuleClassesToSkip = $this->doGetSchemaModuleClassesToSkip();

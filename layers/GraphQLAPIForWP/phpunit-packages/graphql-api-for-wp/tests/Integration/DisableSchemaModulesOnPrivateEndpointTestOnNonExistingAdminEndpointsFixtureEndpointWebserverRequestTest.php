@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-class DisableSchemaModulesOnPrivateEndpointTestOnNonExistingAdminEndpointsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsModifyPluginSettingsFixtureEndpointWebserverRequestTest
+class DisableSchemaModulesOnPrivateEndpointTestOnNonExistingAdminEndpointsFixtureEndpointWebserverRequestTest extends AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsFixtureEndpointWebserverRequestTest
 {
     protected function getAdminEndpointGroup(): string
     {
@@ -17,6 +17,6 @@ class DisableSchemaModulesOnPrivateEndpointTestOnNonExistingAdminEndpointsModify
      */
     protected function getResponseFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-admin-endpoint';
+        return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-has-change';
     }
 }
