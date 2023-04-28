@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginInfoInterface;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
@@ -217,21 +214,6 @@ abstract class AbstractPlugin implements PluginInterface
             $this->getModuleClassConfiguration()
         );
 
-        /**
-         * Internal GraphQLServer may have the "Schema modules"
-         * always enabled
-         */
-        $addSchemaModuleClassesToSkip = true;
-        if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
-            $userSettingsManager = UserSettingsManagerFacade::getInstance();
-            $addSchemaModuleClassesToSkip = $userSettingsManager->getSetting(
-                PluginGeneralSettingsFunctionalityModuleResolver::PRIVATE_ENDPOINTS,
-                PluginGeneralSettingsFunctionalityModuleResolver::OPTION_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS
-            );
-        }
-        if (!$addSchemaModuleClassesToSkip) {
-            return;
-        }
         $appLoader->addSchemaModuleClassesToSkip($this->getSchemaModuleClassesToSkip());
     }
 
