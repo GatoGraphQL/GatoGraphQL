@@ -198,10 +198,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * All these values are pre-defined.
+     * These values are pre-defined.
      */
     protected function enableHook(string $envVariable): bool
     {
-        return false;
+        return match ($envVariable) {
+            Environment::DISPLAY_PRO_PLUGIN_INFORMATION_IN_MAIN_PLUGIN,
+            Environment::PRO_PLUGIN_WEBSITE_URL,
+            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER,
+            Environment::ALWAYS_ENABLE_ALL_SCHEMA_TYPE_MODULES_FOR_ADMIN_PLUGIN_OWN_USE_GRAPHQL_ENDPOINT =>
+                false,
+            default => parent::enableHook($envVariable),
+        };
     }
 }
