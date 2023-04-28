@@ -132,8 +132,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             \add_action(
                 "update_option_{$option}",
                 fn () => $this->flushContainer(
-                    $regenerateContainer,
                     $flushRewriteRules,
+                    $regenerateContainer,
                 )
             );
         }
@@ -251,8 +251,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
 
     protected function flushContainer(
-        ?bool $regenerateContainer = null,
-        bool $flushRewriteRules = true,
+        bool $flushRewriteRules,
+        ?bool $regenerateContainer,
     ): void {
         if ($flushRewriteRules) {
             \flush_rewrite_rules();
