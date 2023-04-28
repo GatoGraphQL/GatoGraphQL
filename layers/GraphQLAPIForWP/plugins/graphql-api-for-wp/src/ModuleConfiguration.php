@@ -196,4 +196,12 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    /**
+     * All these values are pre-defined.
+     */
+    protected function enableHook(string $envVariable): bool
+    {
+        return false;
+    }
 }
