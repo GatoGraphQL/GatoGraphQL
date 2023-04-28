@@ -83,15 +83,16 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              * the same Disabled Modules, so they have the same
              * Service Container, and can reuse the cache.
              *
-             * All other admin endpoints either have (such as PluginOwnUse)
+             * All other admin endpoints either have (such as PluginOwnUse,
+             * which adds a FieldResolver for field "schemaConfigurations")
              * or are allowed to have (eg: Custom Admin Endpoint, via hook)
              * a distinctive configuration of their own, so cache them
              * independently.
              */
-            $useDistinctiveServiceContainer =
-                $endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT
-                && $endpointGroup !== AdminGraphQLEndpointGroups::PERSISTED_QUERY;
-            if ($useDistinctiveServiceContainer) {
+            if (!in_array($endpointGroup, [
+                AdminGraphQLEndpointGroups::DEFAULT,
+                AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+            ])) {
                 $suffix .= '_' . sanitize_file_name($endpointGroup);
             }
         } else {
