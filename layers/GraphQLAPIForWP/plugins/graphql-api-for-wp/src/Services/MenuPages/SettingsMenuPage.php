@@ -245,7 +245,18 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $userSettingsManager->storeEmptySettings(Options::SCHEMA_CONFIGURATION);
         $userSettingsManager->storeEmptySettings(Options::ENDPOINT_CONFIGURATION);
         $userSettingsManager->storeEmptySettings(Options::PLUGIN_CONFIGURATION);
-        $this->flushContainer(true, true);
+
+        $regenerateContainer = null;
+        /**
+         * Keep the code below for if "Plugin Configuration" eventually
+         * needs to regenerate the container once again.
+         *
+         * @phpstan-ignore-next-line
+         */
+        if (false) {
+            $regenerateContainer = true;
+        }
+        $this->flushContainer(true, $regenerateContainer);
     }
 
     /**
