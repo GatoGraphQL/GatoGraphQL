@@ -82,20 +82,23 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
             
             /**
-             * The Default and Persisted Query endpoints are applied the same
-             * Disabled Modules, so they have the same Service Container,
-             * and can reuse the cache. PluginOwnUse is possibly the same case.
+             * The Default and Persisted Query (and possibly PluginOwnUse)
+             * endpoints are applied the same Disabled Modules, so they
+             * have the same Service Container, and can reuse the cache.
+             *
+             * All other admin endpoints can have a distinctive configuration
+             * of their own, so cache them independently.
              *
              * @var ModuleConfiguration
              */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            $useDistinctiveAdminEndpointContainer =
+            $useDistinctiveServiceContainer =
                 $endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT
                 && $endpointGroup !== AdminGraphQLEndpointGroups::PERSISTED_QUERY
                 && ($endpointGroup !== AdminGraphQLEndpointGroups::PLUGIN_OWN_USE
                     || $moduleConfiguration->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()    
                 );
-            if ($useDistinctiveAdminEndpointContainer) {
+            if ($useDistinctiveServiceContainer) {
                 $suffix .= '_' . sanitize_file_name($endpointGroup);
             }
         } else {
