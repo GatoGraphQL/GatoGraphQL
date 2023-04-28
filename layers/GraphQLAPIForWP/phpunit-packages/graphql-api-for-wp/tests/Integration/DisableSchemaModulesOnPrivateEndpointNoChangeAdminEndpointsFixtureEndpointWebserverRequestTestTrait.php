@@ -12,12 +12,12 @@ trait DisableSchemaModulesOnPrivateEndpointNoChangeAdminEndpointsFixtureEndpoint
     }
 
     /**
-     * @param array<string,mixed> $providerItems
-     * @return array<string,mixed>
+     * @param array<string,array<string,mixed>> $moduleEntries
+     * @return array<string,array<string,mixed>>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected function customizeModuleEntries(array $moduleEntries): array
     {
-        $providerItems['schema-users:disabled'][1] = $providerItems['schema-users:enabled'][1];
-        return $providerItems;
+        $moduleEntries['graphqlapi_graphqlapi/schema-users']['response-disabled'] = $moduleEntries['graphqlapi_graphqlapi/schema-users']['response-enabled'];
+        return $moduleEntries;
     }
 }

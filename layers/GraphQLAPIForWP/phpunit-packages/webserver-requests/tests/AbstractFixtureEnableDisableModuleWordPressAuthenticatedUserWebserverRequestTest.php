@@ -64,6 +64,15 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
                 'endpoint' => $this->getModuleEndpoint($fileName),
             ];
         }
+        return $this->customizeModuleEntries($moduleEntries);
+    }
+
+    /**
+     * @param array<string,array<string,mixed>> $moduleEntries
+     * @return array<string,array<string,mixed>>
+     */
+    protected function customizeModuleEntries(array $moduleEntries): array
+    {
         return $moduleEntries;
     }
 
