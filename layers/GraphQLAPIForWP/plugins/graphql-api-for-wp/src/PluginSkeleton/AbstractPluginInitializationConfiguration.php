@@ -376,26 +376,13 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $schemaModuleClassesToSkip = $this->doGetSchemaModuleClassesToSkip();
 
         /**
-         * Public endpoints: cannot be customized
+         * Public endpoints, and pre-defined private endpoints: do not
+         * allow them to be customized via code.
+         *
+         * Only allow to customize the custom admin endpoints,
+         * i.e. ?editorGroup={someUserDefinedGroup}
          */
-        if (
-            /**
-             * Check `is_admin` (instead of `isRequestingAdminGraphQLEndpoint`)
-             * as loading the GraphiQL client is not executing the endpoint
-             * yet it will also generate the service container, which will
-             * be cached and shared from then on.
-             */
-            !$isAdmin
-            || $isRequestingAdminPersistedQueryGraphQLEndpoint
-        ) {
-            return $schemaModuleClassesToSkip;
-        }
-
-        /**
-         * Pre-defined private endpoints: cannot be customized
-         */
-        $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
-        if (in_array($endpointGroup, $endpointHelpers->getPredefinedAdminGraphQLEndpointGroups())) {
+        if (!$endpointHelpers->isRequestingCustomAdminGraphQLEndpoint()) {
             return $schemaModuleClassesToSkip;
         }
         
@@ -406,7 +393,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         return apply_filters(
             HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
             $schemaModuleClassesToSkip,
-            $endpointGroup,
+            $endpointHelpers->getAdminGraphQLEndpointGroup(),
         );
     }
 
