@@ -94,7 +94,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * @param array<string,mixed> $previousValues
              * @return array<string,mixed>
              */
-            function (array $values): void {
+            function (mixed $oldValue, array $values): void {
                 /**
                  * Check that pressed on the "Reset Settings" button
                  */
@@ -104,7 +104,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $this->resetSettings();
             },
             10,
-            1
+            2
         );
 
         /**

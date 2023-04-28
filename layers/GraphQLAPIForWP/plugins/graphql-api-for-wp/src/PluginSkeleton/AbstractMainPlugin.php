@@ -159,6 +159,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             Options::SCHEMA_CONFIGURATION,
             Options::ENDPOINT_CONFIGURATION,
             Options::PLUGIN_CONFIGURATION,
+            Options::PLUGIN_MANAGEMENT,
         ];
         foreach ($storeToDBOptions as $option) {
             if (get_option($option) !== false) {
