@@ -238,22 +238,24 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         return $this->getSettingsNormalizer()->normalizeSettingsByCategory($values, $settingsCategory);
     }
 
-    protected function flushContainer(): void
+    protected function flushContainer(?bool $regenerateContainer = null): void
     {
         \flush_rewrite_rules();
 
         /**
          * Update the timestamp, and maybe regenerate
          * the service container.
-         *
-         * @var ModuleConfiguration
          */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->doTheServiceContainersDependOnTheContext()) {
-            $this->getUserSettingsManager()->storeContainerTimestamp();
-        } else {
-            $this->getUserSettingsManager()->storeOperationalTimestamp();
+        if ($regenerateContainer === null) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            $regenerateContainer = $moduleConfiguration->doTheServiceContainersDependOnTheContext();
         }
+        if ($regenerateContainer) {
+            $this->getUserSettingsManager()->storeContainerTimestamp();
+            return;
+        }
+        $this->getUserSettingsManager()->storeOperationalTimestamp();
     }
 
     protected function getOptionsFormModuleSectionName(string $optionsFormName, string $moduleID): string
