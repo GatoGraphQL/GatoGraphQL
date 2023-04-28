@@ -71,7 +71,7 @@ class RequestHelpers
      */
     public static function isRequestingXDebug(): bool
     {
-        return RootEnvironment::isApplicationEnvironmentDev() && App::getRequest()->query->has('XDEBUG_TRIGGER');
+        return RootEnvironment::isApplicationEnvironmentDev() && App::getRequest()->query->has(FrameworkParams::XDEBUG_TRIGGER);
     }
 
     /**
@@ -86,7 +86,7 @@ class RequestHelpers
         }
 
         return [
-            FrameworkParams::XDEBUG_TRIGGER => (string)App::getRequest()->query->get('XDEBUG_TRIGGER'),
+            FrameworkParams::XDEBUG_TRIGGER => (string)App::getRequest()->query->get(FrameworkParams::XDEBUG_TRIGGER),
             /**
              * Must also pass ?XDEBUG_SESSION_STOP=1 in the URL to avoid
              * setting cookie XDEBUG_SESSION="1", which launches the
