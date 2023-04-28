@@ -7,16 +7,16 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
-use GraphQLByPoP\GraphQLServer\ModuleConfiguration as GraphQLServerModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
-use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
 /**
  * Settings menu page
@@ -268,9 +268,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * when updating the plugin Settings only if Services can be added
              * or not to the Container based on the context.
              *
-             * @var GraphQLServerModuleConfiguration
+             * @var ComponentModelModuleConfiguration
              */
-            $moduleConfiguration = App::getModule(GraphQLServerModule::class)->getConfiguration();
+            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
             $regenerateContainer = $moduleConfiguration->supportDefiningServicesInTheContainerBasedOnTheContext();
         }
         if ($regenerateContainer) {

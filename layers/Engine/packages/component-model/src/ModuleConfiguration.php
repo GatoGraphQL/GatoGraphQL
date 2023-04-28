@@ -362,4 +362,28 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $defaultValue
         );
     }
+
+    /**
+     * Indicate if the Service Container can depend on some value
+     * set as context (eg: an env var).
+     *
+     * For instance, will updating "Nested Mutations" from "Not Enabled"
+     * to "Enabled" register some new FieldResolver in the container?
+     *
+     * When disabled (as it is by default), Services must be registered always
+     * in the container, and enabled/disabled on runtime (eg: via method
+     * `getFieldNamesToResolve` in the FieldResolvers).
+     */
+    public function supportDefiningServicesInTheContainerBasedOnTheContext(): bool
+    {
+        $envVariable = Environment::SUPPORT_DEFINING_SERVICES_IN_THE_CONTAINER_BASED_ON_THE_CONTEXT;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
