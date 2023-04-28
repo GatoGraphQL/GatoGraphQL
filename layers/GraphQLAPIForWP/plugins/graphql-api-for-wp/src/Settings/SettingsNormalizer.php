@@ -88,6 +88,23 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                  */
                 $name = (string)$itemSetting[Properties::NAME];
                 $canBeEmpty = $itemSetting[Properties::CAN_BE_EMPTY] ?? false;
+                
+                /**
+                 * All form fields will be provided via the Settings form.
+                 * If they are not, then this method has been invoked by
+                 * executing `maybeStoreEmptySettings` or
+                 * `$userSettingsManager->storeEmptySettings($option)`
+                 * in `resetOptions`, where an empty array is passed
+                 * to `update_option`.
+                 *
+                 * In that case, fill it in with the default value.
+                 *
+                 * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
+                 */
+                if (!array_key_exists($name, $values)) {
+                    $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
+                }
+
                 /**
                  * If the input is empty, replace with the default
                  * It can't be empty, because that could be equivalent
