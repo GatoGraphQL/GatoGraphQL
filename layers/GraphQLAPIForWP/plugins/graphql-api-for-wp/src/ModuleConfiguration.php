@@ -178,4 +178,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function canTheServiceContainerDependOnTheContext(): bool
+    {
+        $envVariable = Environment::CAN_THE_SERVICE_CONTAINER_DEPEND_ON_THE_CONTEXT;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

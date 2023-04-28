@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
 use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
@@ -240,8 +242,18 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         \flush_rewrite_rules();
 
-        // Update the timestamp
-        $this->getUserSettingsManager()->storeContainerTimestamp();
+        /**
+         * Update the timestamp, and maybe regenerate
+         * the service container.
+         *
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->canTheServiceContainerDependOnTheContext()) {
+            $this->getUserSettingsManager()->storeContainerTimestamp();
+        } else {
+            $this->getUserSettingsManager()->storeOperationalTimestamp();
+        }
     }
 
     protected function getOptionsFormModuleSectionName(string $optionsFormName, string $moduleID): string
