@@ -622,6 +622,39 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS => false,
                 ],
 
+                // Do not use the Payloadable types for mutations
+                \PoPCMSSchema\CommentMutations\Module::class => [
+                    \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
+                    \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\CustomPostMutations\Module::class => [
+                    \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\CustomPostTagMutations\Module::class => [
+                    \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
+                    \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\UserStateMutations\Module::class => [
+                    \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => false,
+                ],
+            ];
+        } elseif ($endpointGroup === AdminGraphQLEndpointGroups::BLOCK_EDITOR) {
+            $moduleClassConfiguration = [
+                ComponentModelModule::class => [
+                    // Enable the "self" fields
+                    ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
+                    // Enable the “sensitive” data
+                    ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
+                ],
+                GraphQLServerModule::class => [
+                    // Enable Nested mutations
+                    GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => false,
+                ],
+
                 /**
                  * Allow access to all custom post types and taxonomies,
                  * and also set no limit for them.
@@ -686,24 +719,24 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
                 ],
 
-                // Do not use the Payloadable types for mutations
+                // Do use the Payloadable types for mutations
                 \PoPCMSSchema\CommentMutations\Module::class => [
-                    \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => false,
+                    \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => false,
+                    \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\CustomPostMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => false,
+                    \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\CustomPostTagMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => false,
+                    \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => false,
+                    \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\UserStateMutations\Module::class => [
-                    \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => false,
+                    \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => true,
                 ],
             ];
         }
