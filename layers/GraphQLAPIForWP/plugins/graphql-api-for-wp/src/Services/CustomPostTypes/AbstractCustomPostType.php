@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
@@ -21,8 +22,8 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Block_Editor_Context;
 use WP_Post;
-use WP_Taxonomy;
 
+use WP_Taxonomy;
 use function get_taxonomy;
 use function is_object_in_taxonomy;
 use function wp_dropdown_categories;
@@ -37,6 +38,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     private ?CPTUtils $cptUtils = null;
     private ?PluginMenu $pluginMenu = null;
     private ?EndpointHelpers $endpointHelpers = null;
+    private ?EditorHelpers $editorHelpers = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -90,6 +92,15 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         /** @var EndpointHelpers */
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+    final public function setEditorHelpers(EditorHelpers $editorHelpers): void
+    {
+        $this->editorHelpers = $editorHelpers;
+    }
+    final protected function getEditorHelpers(): EditorHelpers
+    {
+        /** @var EditorHelpers */
+        return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
     }
 
     /**
@@ -227,6 +238,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         // Make sure the user has access to the editor
         if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {
+            return;
+        }
+
+        // Make sure we're editing this CPT, or the hook will be triggered multiple times
+        if ($this->getCustomPostType() !== $this->getEditorHelpers()->getEditingPostType()) {
             return;
         }
 
