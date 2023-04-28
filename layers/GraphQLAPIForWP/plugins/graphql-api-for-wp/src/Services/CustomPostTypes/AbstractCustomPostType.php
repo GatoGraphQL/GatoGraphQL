@@ -104,7 +104,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             return;
         }
 
-        $postType = $this->getCustomPostType();
+        $customPostType = $this->getCustomPostType();
         // To satisfy the menu position, the CPT will be initialized
         // earlier or later
         \add_action(
@@ -158,11 +158,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
         // Add the custom columns to the post type
         add_filter(
-            "manage_{$postType}_posts_columns",
+            "manage_{$customPostType}_posts_columns",
             $this->setTableColumns(...)
         );
         add_action(
-            "manage_{$postType}_posts_custom_column",
+            "manage_{$customPostType}_posts_custom_column",
             $this->resolveCustomColumn(...),
             10,
             2
@@ -206,7 +206,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             // This is also saving "draft" to "draft" for which there's no need,
             // but can't avoid it
             \add_action(
-                "save_post_{$postType}",
+                "save_post_{$customPostType}",
                 function ($postID, $post): void {
                     if ($post->post_status === 'auto-draft') {
                         return;
