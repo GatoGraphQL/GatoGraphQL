@@ -260,16 +260,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'GRAPHQL_API_PLUGIN_OWN_USE_ADMIN_ENDPOINT',
             $this->getEndpointHelpers()->getAdminPluginOwnUseGraphQLEndpoint()
         );
-
-        /**
-         * Endpoint to allow developers to feed data to their Gutenberg blocks,
-         * with pre-defined config (avoiding the user preferences from the plugin).
-         */
-        \printf(
-            $scriptTag,
-            'GRAPHQL_API_BLOCK_EDITOR_ADMIN_ENDPOINT',
-            $this->getEndpointHelpers()->getAdminBlockEditorGraphQLEndpoint()
-        );
     }
 
     public function getEnablingModule(): ?string
