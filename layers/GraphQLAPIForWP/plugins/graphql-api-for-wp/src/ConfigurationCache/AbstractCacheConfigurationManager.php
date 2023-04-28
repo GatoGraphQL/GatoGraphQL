@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
+use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInfoInterface;
@@ -12,8 +13,8 @@ use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
-use function sanitize_file_name;
 use function is_admin;
+use function sanitize_file_name;
 
 /**
  * Inject configuration to the cache
@@ -56,24 +57,51 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     {
         /**
          * admin/non-admin screens have different services enabled.
+         *
+         * By checking for `is_admin` we are also store the container
+         * for internal execution, via the `GraphQLServer` class, and
+         * the cache will be shared with the "default" private endpoint.
+         *
+         * Notice that Persisted Queries in the admin are also handled
+         * here, and not under "public", since they'll also have the services
+         * registered on ConditionalOnContext\Admin (even if they won't
+         * be used).
          */
-        if (is_admin()/*$endpointHelpers->isRequestingAdminGraphQLEndpoint()*/) {
-            $endpointHelpers = $this->getEndpointHelpers();
+        if (is_admin()) {
+            /**
+             * Admin endpoints
+             */
+            $suffix = 'private';
+
             /**
              * Different admin endpoints might also have different services,
              * hence cache a different container per endpointGroup.
              *
              * For instance, the WordPress editor can access the full schema,
              * including "admin" fields, so it must be cached individually.
-             *
-             * By checking for `is_admin` we are also store the container
-             * for internal execution, via the `GraphQLServer` class, and
-             * the cache will be shared with the "default" private endpoint.
-             *
-             * @var string
              */
+            $endpointHelpers = $this->getEndpointHelpers();
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
-            $suffix = 'private' . ($endpointGroup !== '' ? '_' . sanitize_file_name($endpointGroup) : '');
+
+            /**
+             * The Default and Persisted Query endpoints are applied
+             * the same Disabled Modules, so they have the same
+             * Service Container, and can reuse the cache.
+             *
+             * All other admin endpoints either have (such as PluginOwnUse,
+             * which adds a FieldResolver for field "schemaConfigurations")
+             * or are allowed to have (eg: Custom Admin Endpoint, via hook)
+             * a distinctive configuration of their own, so cache them
+             * independently.
+             */
+            if (
+                !in_array($endpointGroup, [
+                AdminGraphQLEndpointGroups::DEFAULT,
+                AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+                ])
+            ) {
+                $suffix .= '_' . sanitize_file_name($endpointGroup);
+            }
         } else {
             /**
              * Single endpoint / Custom endpoints / Persisted queries

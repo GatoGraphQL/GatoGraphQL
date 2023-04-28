@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GraphQLAPI\GraphQLAPI\PluginStaticModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -332,8 +333,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         /** @var EndpointHelpers */
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if (
-            $this->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
-            && $endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint()
+            $endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint()
+            && PluginStaticModuleConfiguration::alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
         ) {
             return [];
         }
@@ -409,18 +410,6 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         return GeneralUtils::arrayFlatten(array_values(
             $skipSchemaModuleClassesPerModule
         ));
-    }
-
-    /**
-     * Indicate if, when doing ?endpoint_group=pluginOwnUse,
-     * all the schema-type modules must still be enabled (even
-     * if they've been disabled).
-     *
-     * @todo Review is this right?
-     */
-    protected function alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint(): bool
-    {
-        return false;
     }
 
     /**

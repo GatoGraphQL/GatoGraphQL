@@ -178,4 +178,18 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    /**
+     * These values are pre-defined.
+     */
+    protected function enableHook(string $envVariable): bool
+    {
+        return match ($envVariable) {
+            Environment::DISPLAY_PRO_PLUGIN_INFORMATION_IN_MAIN_PLUGIN,
+            Environment::PRO_PLUGIN_WEBSITE_URL,
+            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER =>
+                false,
+            default => parent::enableHook($envVariable),
+        };
+    }
 }

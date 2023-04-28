@@ -223,9 +223,6 @@ class EndpointHelpers
         ];
     }
 
-    /**
-     * @return string[]
-     */
     protected function isPredefinedAdminGraphQLEndpointGroup(string $endpointGroup): bool
     {
         return in_array($endpointGroup, $this->getPredefinedAdminGraphQLEndpointGroups());
