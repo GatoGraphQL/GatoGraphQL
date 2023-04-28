@@ -119,11 +119,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             /**
              * Keep the code below for if "Plugin Configuration" eventually
              * needs to regenerate the container once again.
-             *
-             * @phpstan-ignore-next-line
              */
-            if (false) {
-                $regenerateContainer = $option === $regenerateConfigFormOptions['plugin'] ? true : null;
+            if ($option === $regenerateConfigFormOptions['plugin']
+                // If this code is needed, then remove this line
+                && false // @phpstan-ignore-line
+            ) {
+                $regenerateContainer = true;
             }
 
             // "Endpoint Configuration" needs to be flushed as it modifies CPT permalinks
