@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInfoInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
@@ -82,22 +79,18 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
             
             /**
-             * The Default and Persisted Query (and possibly PluginOwnUse)
-             * endpoints are applied the same Disabled Modules, so they
-             * have the same Service Container, and can reuse the cache.
+             * The Default and Persisted Query endpoints are applied
+             * the same Disabled Modules, so they have the same
+             * Service Container, and can reuse the cache.
              *
-             * All other admin endpoints can have a distinctive configuration
-             * of their own, so cache them independently.
-             *
-             * @var ModuleConfiguration
+             * All other admin endpoints either have (such as PluginOwnUse)
+             * or are allowed to have (eg: Custom Admin Endpoint, via hook)
+             * a distinctive configuration of their own, so cache them
+             * independently.
              */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             $useDistinctiveServiceContainer =
                 $endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT
-                && $endpointGroup !== AdminGraphQLEndpointGroups::PERSISTED_QUERY
-                && ($endpointGroup !== AdminGraphQLEndpointGroups::PLUGIN_OWN_USE
-                    || $moduleConfiguration->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
-                );
+                && $endpointGroup !== AdminGraphQLEndpointGroups::PERSISTED_QUERY;
             if ($useDistinctiveServiceContainer) {
                 $suffix .= '_' . sanitize_file_name($endpointGroup);
             }
