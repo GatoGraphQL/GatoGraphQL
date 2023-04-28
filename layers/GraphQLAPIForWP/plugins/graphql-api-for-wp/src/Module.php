@@ -116,7 +116,7 @@ class Module extends AbstractPluginModule
             $this->initSchemaServices(
                 dirname(__DIR__),
                 !$endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint(),
-                '/ConditionalOnContext/Admin/ConditionalOnContext/Editor'
+                '/ConditionalOnContext/Admin/ConditionalOnContext/PluginOwnUse'
             );
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
