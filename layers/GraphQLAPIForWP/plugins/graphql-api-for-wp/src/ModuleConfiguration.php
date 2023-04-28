@@ -180,6 +180,24 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
+     * Indicate if, when doing ?endpoint_group=pluginOwnUse,
+     * all the schema-type modules must still be enabled (even
+     * if they've been disabled).
+     */
+    public function alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint(): bool
+    {
+        $envVariable = Environment::ALWAYS_ENABLE_ALL_SCHEMA_TYPE_MODULES_FOR_ADMIN_PLUGIN_OWN_USE_GRAPHQL_ENDPOINT;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
      * These values are pre-defined.
      */
     protected function enableHook(string $envVariable): bool
@@ -187,7 +205,8 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         return match ($envVariable) {
             Environment::DISPLAY_PRO_PLUGIN_INFORMATION_IN_MAIN_PLUGIN,
             Environment::PRO_PLUGIN_WEBSITE_URL,
-            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER =>
+            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER,
+            Environment::ALWAYS_ENABLE_ALL_SCHEMA_TYPE_MODULES_FOR_ADMIN_PLUGIN_OWN_USE_GRAPHQL_ENDPOINT =>
                 false,
             default => parent::enableHook($envVariable),
         };
