@@ -4,7 +4,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    # Override the GraphiQL clients
+    # Override the GraphiQL clients to use the GraphiQL Explorer
     # Single Endpoint
     GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
         class: '\GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient'
