@@ -326,7 +326,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     {
         /**
          * If doing ?endpoint_group=pluginOwnUse,
-         * always enable all schema-type modules
+         * maybe always enable all schema-type modules
          */
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
@@ -339,16 +339,21 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         }
 
         /**
+         * If doing ?endpoint_group=blockEditor,
+         * always enable all schema-type modules
+         */
+        if ($endpointHelpers->isRequestingAdminBlockEditorGraphQLEndpoint()) {
+            return [];
+        }
+
+        /**
          * Check `is_admin` as loading the GraphiQL client is not executing
          * the endpoint, yet it will also generate the service container,
          * which will be cached and shared from then on.
          */
-        $isAdmin = is_admin();
-        $isRequestingAdminPersistedQueryGraphQLEndpoint = $endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint();
-        $isInternalGraphQLServer = AppHelpers::isInternalGraphQLServerAppThread();
         if (
-            ($isAdmin && !$isRequestingAdminPersistedQueryGraphQLEndpoint)
-            || $isInternalGraphQLServer
+            (is_admin() && !$endpointHelpers->isRequestingAdminPersistedQueryGraphQLEndpoint())
+            || AppHelpers::isInternalGraphQLServerAppThread()
         ) {
             /**
              * Private endpoints: Check Settings to decide if to
@@ -368,18 +373,13 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $schemaModuleClassesToSkip = $this->doGetSchemaModuleClassesToSkip();
 
         /**
-         * Public endpoints: cannot be customized
+         * Public endpoints, and pre-defined private endpoints: do not
+         * allow them to be customized via code.
+         *
+         * Only allow to customize the custom admin endpoints,
+         * i.e. ?editorGroup={someUserDefinedGroup}
          */
-        if (
-            /**
-             * Check `is_admin` (instead of `isRequestingAdminGraphQLEndpoint`)
-             * as loading the GraphiQL client is not executing the endpoint
-             * yet it will also generate the service container, which will
-             * be cached and shared from then on.
-             */
-            !$isAdmin
-            || $isRequestingAdminPersistedQueryGraphQLEndpoint
-        ) {
+        if (!$endpointHelpers->isRequestingCustomAdminGraphQLEndpoint()) {
             return $schemaModuleClassesToSkip;
         }
 
@@ -390,7 +390,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         return apply_filters(
             HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
             $schemaModuleClassesToSkip,
-            $endpointHelpers->getAdminGraphQLEndpointGroup()
+            $endpointHelpers->getAdminGraphQLEndpointGroup(),
         );
     }
 

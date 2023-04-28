@@ -11,6 +11,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
 use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
@@ -37,6 +38,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     private ?CPTUtils $cptUtils = null;
     private ?PluginMenu $pluginMenu = null;
     private ?EndpointHelpers $endpointHelpers = null;
+    private ?EditorHelpers $editorHelpers = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -91,6 +93,15 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         /** @var EndpointHelpers */
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
+    final public function setEditorHelpers(EditorHelpers $editorHelpers): void
+    {
+        $this->editorHelpers = $editorHelpers;
+    }
+    final protected function getEditorHelpers(): EditorHelpers
+    {
+        /** @var EditorHelpers */
+        return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
+    }
 
     /**
      * Add the hook to initialize the different post types
@@ -104,7 +115,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             return;
         }
 
-        $postType = $this->getCustomPostType();
+        $customPostType = $this->getCustomPostType();
         // To satisfy the menu position, the CPT will be initialized
         // earlier or later
         \add_action(
@@ -158,11 +169,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
         // Add the custom columns to the post type
         add_filter(
-            "manage_{$postType}_posts_columns",
+            "manage_{$customPostType}_posts_columns",
             $this->setTableColumns(...)
         );
         add_action(
-            "manage_{$postType}_posts_custom_column",
+            "manage_{$customPostType}_posts_custom_column",
             $this->resolveCustomColumn(...),
             10,
             2
@@ -206,7 +217,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             // This is also saving "draft" to "draft" for which there's no need,
             // but can't avoid it
             \add_action(
-                "save_post_{$postType}",
+                "save_post_{$customPostType}",
                 function ($postID, $post): void {
                     if ($post->post_status === 'auto-draft') {
                         return;
@@ -230,7 +241,14 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             return;
         }
 
+        // Make sure we're editing this CPT, or the hook will be triggered multiple times
+        if ($this->getCustomPostType() !== $this->getEditorHelpers()->getEditingPostType()) {
+            return;
+        }
+
         $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
+        $endpointHelpers = $this->getEndpointHelpers();
+
         /**
          * The endpoint against which to execute GraphQL queries on the admin.
          * This GraphQL schema is modified by user preferences:
@@ -242,11 +260,13 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         \printf(
             $scriptTag,
             'GRAPHQL_API_ADMIN_ENDPOINT',
-            $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
+            $endpointHelpers->getAdminGraphQLEndpoint()
         );
+
         /**
          * The endpoint against which to execute GraphQL queries on the WordPress editor,
          * for Gutenberg blocks which require some field that must necessarily be enabled.
+         *
          * This GraphQL schema is not modified by user preferences:
          * - All types/directives are always in the schema
          * - The "admin" fields are in the schema
@@ -256,7 +276,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         \printf(
             $scriptTag,
             'GRAPHQL_API_PLUGIN_OWN_USE_ADMIN_ENDPOINT',
-            $this->getEndpointHelpers()->getAdminPluginOwnUseGraphQLEndpoint()
+            $endpointHelpers->getAdminPluginOwnUseGraphQLEndpoint()
         );
     }
 

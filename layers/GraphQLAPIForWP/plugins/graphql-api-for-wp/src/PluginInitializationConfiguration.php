@@ -604,9 +604,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      */
     protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
-        $moduleClassConfiguration = [];
         if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE) {
-            $moduleClassConfiguration = [
+            /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
+            return [
                 ComponentModelModule::class => [
                     // Enable the "self" fields
                     ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
@@ -620,6 +620,42 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 EngineModule::class => [
                     // Do not disable redundant mutation fields in the root type
                     EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS => false,
+                ],
+
+                // Do not use the Payloadable types for mutations
+                \PoPCMSSchema\CommentMutations\Module::class => [
+                    \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
+                    \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\CustomPostMutations\Module::class => [
+                    \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\CustomPostTagMutations\Module::class => [
+                    \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
+                    \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => false,
+                ],
+                \PoPCMSSchema\UserStateMutations\Module::class => [
+                    \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => false,
+                ],
+            ];
+        }
+
+        if ($endpointGroup === AdminGraphQLEndpointGroups::BLOCK_EDITOR) {
+            /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
+            return [
+                ComponentModelModule::class => [
+                    // Enable the "self" fields
+                    ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
+                    // Enable the “sensitive” data
+                    ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
+                ],
+                GraphQLServerModule::class => [
+                    // Enable Nested mutations
+                    GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => false,
                 ],
 
                 /**
@@ -686,29 +722,30 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
                 ],
 
-                // Do not use the Payloadable types for mutations
+                // Do use the Payloadable types for mutations
                 \PoPCMSSchema\CommentMutations\Module::class => [
-                    \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => false,
+                    \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => false,
+                    \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\CustomPostMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => false,
+                    \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\CustomPostTagMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => false,
+                    \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => false,
+                    \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => true,
                 ],
                 \PoPCMSSchema\UserStateMutations\Module::class => [
-                    \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => false,
+                    \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => true,
                 ],
             ];
         }
+
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
-        return $moduleClassConfiguration;
+        return [];
     }
 
     /**
