@@ -50,15 +50,10 @@ class ModelInstance implements ModelInstanceInterface
      */
     protected function getModelInstanceElements(): array
     {
-        $elements = array();
-
         // Mix the information specific to the module, with that present in the application state
         $elements = (array)App::applyFilters(
             self::HOOK_ELEMENTS_RESULT,
-            array_merge(
-                $elements,
-                $this->getModelInstanceElementsFromAppState()
-            )
+            $this->getModelInstanceElementsFromAppState()
         );
 
         // Add the ones from package Definitions
