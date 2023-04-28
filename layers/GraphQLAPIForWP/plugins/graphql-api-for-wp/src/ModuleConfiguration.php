@@ -179,6 +179,16 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    /**
+     * Indicate if either the System or Application Service Container
+     * depends on value set as context.
+     *
+     * For instance, will updating "Nested Mutations" from "Not Enabled"
+     * to "Enabled" register some new FieldResolver in the container?
+     *
+     * If yes, then the containers need to be dumped when updating the
+     * plugin Settings; otherwise, there is no need.
+     */
     public function doTheServiceContainersDependOnTheContext(): bool
     {
         $envVariable = Environment::DO_THE_SERVICE_CONTAINERS_DEPEND_ON_THE_CONTEXT;
