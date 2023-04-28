@@ -395,7 +395,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          * Pre-defined private endpoints: cannot be customized
          */
         $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
-        if (false) {
+        if (in_array($endpointGroup, $endpointHelpers->getPredefinedAdminGraphQLEndpointGroups())) {
             return $schemaModuleClassesToSkip;
         }
         
