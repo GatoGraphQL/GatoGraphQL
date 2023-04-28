@@ -179,9 +179,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function canTheServiceContainerDependOnTheContext(): bool
+    public function doesTheServiceContainerDependOnTheContext(): bool
     {
-        $envVariable = Environment::CAN_THE_SERVICE_CONTAINER_DEPEND_ON_THE_CONTEXT;
+        $envVariable = Environment::DOES_THE_SERVICE_CONTAINER_DEPEND_ON_THE_CONTEXT;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
