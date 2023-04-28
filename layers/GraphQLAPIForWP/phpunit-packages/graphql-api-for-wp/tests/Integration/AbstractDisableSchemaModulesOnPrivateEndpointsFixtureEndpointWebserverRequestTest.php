@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use Exception;
 use PHPUnitForGraphQLAPI\WebserverRequests\EnableDisableModuleWebserverRequestTestTrait;
+use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
-abstract class AbstractDisableSchemaModulesOnPrivateEndpointsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+abstract class AbstractDisableSchemaModulesOnPrivateEndpointsFixtureEndpointWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use EnableDisableModuleWebserverRequestTestTrait;
+    use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
     private const ARTIFICIAL_DATA_NAME = 'artificial';
 
@@ -38,30 +40,14 @@ abstract class AbstractDisableSchemaModulesOnPrivateEndpointsModifyPluginSetting
         return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints';
     }
 
-    protected function getSettingsKey(): string
-    {
-        return PluginGeneralSettingsFunctionalityModuleResolver::OPTION_DISABLE_SCHEMA_MODULES_IN_PRIVATE_ENDPOINTS;
-    }
-
     protected function getModuleID(string $dataName): string
     {
         /**
-         * This method will be called from 2 different directions:
-         *
-         * - To enable/disable the module
-         * - To apply the Settings change in the DB
-         *
-         * Use an "artificial" $dataName to distinguish between them.
+         * This method will be called to enable/disable the module
          */
         if ($dataName === self::ARTIFICIAL_DATA_NAME) {
             return 'graphqlapi_graphqlapi_schema-users';
         }
-
-        return 'graphqlapi_graphqlapi_private-endpoints';
-    }
-
-    protected function getPluginSettingsNewValue(): mixed
-    {
-        return true;
+        throw new Exception(sprintf('Unexpected dataName %s', $dataName));
     }
 }
