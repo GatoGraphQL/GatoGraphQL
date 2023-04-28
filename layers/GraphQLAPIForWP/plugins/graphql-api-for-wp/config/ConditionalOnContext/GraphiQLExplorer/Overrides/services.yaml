@@ -11,8 +11,8 @@ services:
 
     # Persisted Query Endpoints
     GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock:
-        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorer\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'
 
     # Custom Endpoints
     GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient:
-        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorer\Overrides\Services\Clients\CustomEndpointGraphiQLWithExplorerClient'
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\CustomEndpointGraphiQLWithExplorerClient'

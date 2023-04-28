@@ -5,4 +5,4 @@ services:
         autoconfigure: true
 
     GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage:
-        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\GraphiQLExplorer\Overrides\Services\MenuPages\GraphiQLMenuPage'
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\MenuPages\GraphiQLMenuPage'

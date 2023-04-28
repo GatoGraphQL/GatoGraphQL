@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorer\Overrides\Services\Blocks;
+namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Blocks;
 
 /**
  * GraphiQL with Explorer block
