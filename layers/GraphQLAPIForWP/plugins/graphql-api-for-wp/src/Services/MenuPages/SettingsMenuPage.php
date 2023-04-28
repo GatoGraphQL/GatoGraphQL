@@ -106,15 +106,17 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
 
         $regenerateConfigSettingsCategories = [
-            SettingsCategoryResolver::SCHEMA_CONFIGURATION,
-            SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
-            SettingsCategoryResolver::PLUGIN_CONFIGURATION,
+            'schema' => SettingsCategoryResolver::SCHEMA_CONFIGURATION,
+            'endpoint' => SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
+            'plugin' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
         ];
         $regenerateConfigFormOptions = array_map(
             fn (string $settingsCategory) => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory),
             $regenerateConfigSettingsCategories
         );
         foreach ($regenerateConfigFormOptions as $option) {
+            // "Plugin Configuration" needs to regenerate the container
+            $regenerateContainer = $option === $regenerateConfigFormOptions['plugin'] ? true : null;
             /**
              * After saving the settings in the DB:
              * - Flush the rewrite rules, so different URL slugs take effect
@@ -125,7 +127,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              */
             \add_action(
                 "update_option_{$option}",
-                $this->flushContainer(...)
+                fn () => $this->flushContainer($regenerateContainer)
             );
         }
 
