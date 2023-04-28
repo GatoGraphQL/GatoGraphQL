@@ -262,6 +262,10 @@ The tables for the Custom Endpoint and Persisted Query CPTs now display the "sta
 
 ![State column in CPTs table](../../images/releases/v1.0/state-column-in-cpts-table.png)
 
+## Saving the Settings is faster, as it does not regenerate the service container anymore
+
+The Plugin Settings has been completely decoupled from the services registered in the container. As such, the container does not need to be regenerated when updating the Settings, leading to a performance boost.
+
 ## Fixed
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)

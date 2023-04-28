@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
-use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
 /**
  * Settings menu page
@@ -104,15 +106,21 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
 
         $regenerateConfigSettingsCategories = [
-            SettingsCategoryResolver::SCHEMA_CONFIGURATION,
-            SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
-            SettingsCategoryResolver::PLUGIN_CONFIGURATION,
+            'schema' => SettingsCategoryResolver::SCHEMA_CONFIGURATION,
+            'endpoint' => SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
+            'plugin' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
         ];
         $regenerateConfigFormOptions = array_map(
             fn (string $settingsCategory) => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory),
             $regenerateConfigSettingsCategories
         );
         foreach ($regenerateConfigFormOptions as $option) {
+            // "Plugin Configuration" needs to regenerate the container
+            $regenerateContainer = $option === $regenerateConfigFormOptions['plugin'] ? true : null;
+
+            // "Endpoint Configuration" needs to be flushed as it modifies CPT permalinks
+            $flushRewriteRules = $option === $regenerateConfigFormOptions['endpoint'];
+
             /**
              * After saving the settings in the DB:
              * - Flush the rewrite rules, so different URL slugs take effect
@@ -123,7 +131,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              */
             \add_action(
                 "update_option_{$option}",
-                $this->flushContainer(...)
+                fn () => $this->flushContainer(
+                    $flushRewriteRules,
+                    $regenerateContainer,
+                )
             );
         }
 
@@ -221,8 +232,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function resetSettings(): void
     {
-        $this->getUserSettingsManager()->storeEmptySettings(Options::SCHEMA_CONFIGURATION);
-        $this->flushContainer();
+        $userSettingsManager = $this->getUserSettingsManager();
+        $userSettingsManager->storeEmptySettings(Options::SCHEMA_CONFIGURATION);
+        $userSettingsManager->storeEmptySettings(Options::ENDPOINT_CONFIGURATION);
+        $userSettingsManager->storeEmptySettings(Options::PLUGIN_CONFIGURATION);
+        $this->flushContainer(true, true);
     }
 
     /**
@@ -236,12 +250,34 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         return $this->getSettingsNormalizer()->normalizeSettingsByCategory($values, $settingsCategory);
     }
 
-    protected function flushContainer(): void
-    {
-        \flush_rewrite_rules();
+    protected function flushContainer(
+        bool $flushRewriteRules,
+        ?bool $regenerateContainer,
+    ): void {
+        if ($flushRewriteRules) {
+            \flush_rewrite_rules();
+        }
 
-        // Update the timestamp
-        $this->getUserSettingsManager()->storeContainerTimestamp();
+        /**
+         * Update the timestamp, and maybe regenerate
+         * the service container.
+         */
+        if ($regenerateContainer === null) {
+            /**
+             * The System/Application Service Containers need to be regenerated
+             * when updating the plugin Settings only if Services can be added
+             * or not to the Container based on the context.
+             *
+             * @var ComponentModelModuleConfiguration
+             */
+            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+            $regenerateContainer = $moduleConfiguration->supportDefiningServicesInTheContainerBasedOnTheContext();
+        }
+        if ($regenerateContainer) {
+            $this->getUserSettingsManager()->storeContainerTimestamp();
+        } else {
+            $this->getUserSettingsManager()->storeOperationalTimestamp();
+        }
     }
 
     protected function getOptionsFormModuleSectionName(string $optionsFormName, string $moduleID): string
