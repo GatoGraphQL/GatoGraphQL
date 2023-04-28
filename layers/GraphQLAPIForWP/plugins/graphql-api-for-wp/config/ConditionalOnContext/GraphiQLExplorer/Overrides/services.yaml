@@ -4,5 +4,11 @@ services:
         autowire: true
         autoconfigure: true
 
+    # Override the GraphiQL clients
+    # Single Endpoint
+    GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
+        class: '\GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient'
+
+    # Persisted Queries
     GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock:
         class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorer\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'
