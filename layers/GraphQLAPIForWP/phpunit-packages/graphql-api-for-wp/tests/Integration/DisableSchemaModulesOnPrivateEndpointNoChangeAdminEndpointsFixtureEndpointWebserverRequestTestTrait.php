@@ -17,7 +17,7 @@ trait DisableSchemaModulesOnPrivateEndpointNoChangeAdminEndpointsFixtureEndpoint
      */
     protected function customizeProviderEndpointEntries(array $providerItems): array
     {
-        $providerItems['type-introspection:disabled'][1] = $providerItems['type-introspection:enabled'][1];
+        $providerItems['schema-users:disabled'][1] = $providerItems['schema-users:enabled'][1];
         return $providerItems;
     }
 }
