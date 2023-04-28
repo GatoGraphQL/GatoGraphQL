@@ -103,6 +103,25 @@ class EndpointHelpers
     }
 
     /**
+     * Indicate if we are requesting a custom admin endpoint
+     */
+    public function isRequestingCustomAdminGraphQLEndpoint(): bool
+    {
+        if (!$this->isRequestingAdminGraphQLEndpoint()) {
+            return false;
+        }
+
+        if (in_array(
+            $this->getAdminGraphQLEndpointGroup(),
+            $this->getPredefinedAdminGraphQLEndpointGroups()
+        )) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Indicate if we are requesting any admin endpoint
      * except persisted queries.
      */
