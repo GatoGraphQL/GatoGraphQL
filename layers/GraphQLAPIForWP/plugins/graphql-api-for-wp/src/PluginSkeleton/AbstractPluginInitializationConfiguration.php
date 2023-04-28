@@ -392,13 +392,21 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         }
 
         /**
+         * Pre-defined private endpoints: cannot be customized
+         */
+        $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
+        if (false) {
+            return $schemaModuleClassesToSkip;
+        }
+        
+        /**
          * Private endpoints: Allow to not disable modules on custom
          * admin endpoints, for some specific group.
          */
         return apply_filters(
             HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CLASSES_TO_SKIP,
             $schemaModuleClassesToSkip,
-            $endpointHelpers->getAdminGraphQLEndpointGroup()
+            $endpointGroup,
         );
     }
 

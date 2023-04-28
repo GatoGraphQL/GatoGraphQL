@@ -189,13 +189,21 @@ class EndpointHelpers
         // Mandatory groups, add them after the filter
         return array_merge(
             $supportedAdminEndpointGroups,
-            [
-                AdminGraphQLEndpointGroups::DEFAULT,
-                AdminGraphQLEndpointGroups::PERSISTED_QUERY,
-                AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
-                AdminGraphQLEndpointGroups::BLOCK_EDITOR,
-            ]
+            $this->getPredefinedAdminGraphQLEndpointGroups()
         );
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPredefinedAdminGraphQLEndpointGroups(): array
+    {
+        return [
+            AdminGraphQLEndpointGroups::DEFAULT,
+            AdminGraphQLEndpointGroups::PERSISTED_QUERY,
+            AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
+            AdminGraphQLEndpointGroups::BLOCK_EDITOR,
+        ];
     }
 
     /**
