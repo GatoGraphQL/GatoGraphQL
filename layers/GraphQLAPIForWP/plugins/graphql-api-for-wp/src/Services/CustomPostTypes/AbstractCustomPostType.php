@@ -247,6 +247,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
 
         $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
+        $endpointHelpers = $this->getEndpointHelpers();
 
         /**
          * The endpoint against which to execute GraphQL queries on the admin.
@@ -259,7 +260,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         \printf(
             $scriptTag,
             'GRAPHQL_API_ADMIN_ENDPOINT',
-            $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
+            $endpointHelpers->getAdminGraphQLEndpoint()
         );
 
         /**
@@ -275,7 +276,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         \printf(
             $scriptTag,
             'GRAPHQL_API_PLUGIN_OWN_USE_ADMIN_ENDPOINT',
-            $this->getEndpointHelpers()->getAdminPluginOwnUseGraphQLEndpoint()
+            $endpointHelpers->getAdminPluginOwnUseGraphQLEndpoint()
         );
     }
 
