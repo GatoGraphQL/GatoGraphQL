@@ -11,10 +11,12 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModu
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\PluginApp;
 use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
+use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
-use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
+use PoP\ComponentModel\Configuration\RequestHelpers;
+use PoP\ComponentModel\Constants\FrameworkParams;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
@@ -479,6 +481,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         @see wp-includes/option.php
                                                     -->
                                                     <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo $time ?>">
+                                                    <?php if (RequestHelpers::isRequestingXDebug()): ?>
+                                                        <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_TRIGGER ?>" value="1">
+                                                        <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_SESSION_STOP ?>" value="1">
+                                                    <?php endif; ?>
                                                     <!-- Panels -->
                                                     <?php
                                                     $sectionClass = $printModuleSettingsWithTabs ? 'tab-content' : '';

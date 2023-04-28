@@ -67,18 +67,26 @@ class RequestHelpers
     }
 
     /**
-     * If XDebug enabled, append param "XDEBUG_TRIGGER=debug" to debug the request
+     * Indicate if param "XDEBUG_TRIGGER=1" is appended to the request
+     */
+    public static function isRequestingXDebug(): bool
+    {
+        return RootEnvironment::isApplicationEnvironmentDev() && App::getRequest()->query->has(FrameworkParams::XDEBUG_TRIGGER);
+    }
+
+    /**
+     * If XDebug enabled, append param "XDEBUG_TRIGGER=1" to debug the request
      *
      * @return string[]
      */
     protected static function getXDebugParamValues(): array
     {
-        if (!RootEnvironment::isApplicationEnvironmentDev() || !App::getRequest()->query->has('XDEBUG_TRIGGER')) {
+        if (!static::isRequestingXDebug()) {
             return [];
         }
 
         return [
-            FrameworkParams::XDEBUG_TRIGGER => (string)App::getRequest()->query->get('XDEBUG_TRIGGER'),
+            FrameworkParams::XDEBUG_TRIGGER => (string)App::getRequest()->query->get(FrameworkParams::XDEBUG_TRIGGER),
             /**
              * Must also pass ?XDEBUG_SESSION_STOP=1 in the URL to avoid
              * setting cookie XDEBUG_SESSION="1", which launches the
