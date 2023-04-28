@@ -5,4 +5,4 @@ services:
         autoconfigure: true
 
     GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock:
-        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorerInAdminPersistedQueries\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'
+        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\GraphiQLExplorer\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'

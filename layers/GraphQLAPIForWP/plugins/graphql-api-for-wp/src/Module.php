@@ -128,14 +128,7 @@ class Module extends AbstractPluginModule
             if (\is_admin()) {
                 $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorer/Overrides');
             }            
-            if (
-                $userSettingsManager->getSetting(
-                    DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                    DeprecatedClientFunctionalityModuleResolver::OPTION_USE_IN_ADMIN_PERSISTED_QUERIES
-                )
-            ) {
-                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorerInAdminPersistedQueries/Overrides');
-            }
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/GraphiQLExplorer/Overrides');
             if (
                 $userSettingsManager->getSetting(
                     DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
