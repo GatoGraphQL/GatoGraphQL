@@ -247,6 +247,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
 
         $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
+
         /**
          * The endpoint against which to execute GraphQL queries on the admin.
          * This GraphQL schema is modified by user preferences:
