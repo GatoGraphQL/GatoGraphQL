@@ -111,10 +111,8 @@ class EndpointHelpers
             return false;
         }
 
-        if (in_array(
-            $this->getAdminGraphQLEndpointGroup(),
-            $this->getPredefinedAdminGraphQLEndpointGroups()
-        )) {
+        $endpointGroup = $this->getAdminGraphQLEndpointGroup();
+        if ($this->isPredefinedAdminGraphQLEndpointGroup($endpointGroup)) {
             return false;
         }
 
@@ -223,6 +221,14 @@ class EndpointHelpers
             AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
             AdminGraphQLEndpointGroups::BLOCK_EDITOR,
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function isPredefinedAdminGraphQLEndpointGroup(string $endpointGroup): bool
+    {
+        return in_array($endpointGroup, $this->getPredefinedAdminGraphQLEndpointGroups());
     }
 
     /**
