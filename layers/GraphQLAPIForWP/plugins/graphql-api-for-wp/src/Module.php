@@ -121,11 +121,12 @@ class Module extends AbstractPluginModule
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
-        if (\is_admin()
+        if (
+            \is_admin()
             && $isGraphiQLExplorerEnabled
         ) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
-        }            
+        }
         if ($isGraphiQLExplorerEnabled) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
         }

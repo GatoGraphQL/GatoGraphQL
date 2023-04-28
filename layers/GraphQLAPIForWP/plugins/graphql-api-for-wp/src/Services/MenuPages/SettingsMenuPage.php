@@ -117,8 +117,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         foreach ($regenerateConfigFormOptions as $option) {
             // "Plugin Configuration" needs to regenerate the container
             $regenerateContainer = $option === $regenerateConfigFormOptions['plugin'] ? true : null;
-            
-            // "Endpoint Configuration" needs to be flushed as it modifies CPT permalinks 
+
+            // "Endpoint Configuration" needs to be flushed as it modifies CPT permalinks
             $flushRewriteRules = $option === $regenerateConfigFormOptions['endpoint'];
 
             /**
