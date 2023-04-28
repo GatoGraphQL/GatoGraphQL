@@ -124,13 +124,10 @@ class Module extends AbstractPluginModule
         // Maybe use GraphiQL with Explorer
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
-        if (
-            \is_admin()
-            && $isGraphiQLExplorerEnabled
-        ) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorer/Overrides');
-        }
         if ($isGraphiQLExplorerEnabled) {
+            if (\is_admin()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/GraphiQLExplorer/Overrides');
+            }            
             if (
                 $userSettingsManager->getSetting(
                     DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
