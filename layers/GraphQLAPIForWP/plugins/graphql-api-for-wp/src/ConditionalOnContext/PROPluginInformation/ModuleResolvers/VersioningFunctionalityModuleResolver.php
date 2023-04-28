@@ -10,6 +10,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use PoP\Root\Environment as RootEnvironment;
 
 class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
@@ -82,5 +83,16 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
                 return \__('Deprecate fields, and explain how to replace them, through a user interface', 'graphql-api');
         }
         return parent::getDescription($module);
+    }
+
+    public function isEnabledByDefault(string $module): bool
+    {
+        return match ($module) {
+            /**
+             * Enable for DEV to execute tests
+             */
+            self::FIELD_DEPRECATION => RootEnvironment::isApplicationEnvironmentDev(),
+            default => parent::isEnabledByDefault($module),
+        };
     }
 }

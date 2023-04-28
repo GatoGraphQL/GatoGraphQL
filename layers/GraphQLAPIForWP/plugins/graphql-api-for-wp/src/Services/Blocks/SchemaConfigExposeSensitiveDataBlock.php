@@ -17,7 +17,7 @@ class SchemaConfigExposeSensitiveDataBlock extends AbstractDefaultEnableDisableF
 
     public function getBlockPriority(): int
     {
-        return 10130;
+        return 10110;
     }
 
     public function getEnablingModule(): ?string

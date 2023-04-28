@@ -18,7 +18,7 @@ class SchemaConfigPayloadTypesForMutationsBlock extends AbstractDefaultEnableDis
 
     public function getBlockPriority(): int
     {
-        return 10100;
+        return 10130;
     }
 
     public function getEnablingModule(): ?string

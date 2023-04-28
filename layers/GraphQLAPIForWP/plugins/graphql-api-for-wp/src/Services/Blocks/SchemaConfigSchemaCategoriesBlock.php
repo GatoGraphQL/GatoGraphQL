@@ -34,7 +34,7 @@ class SchemaConfigSchemaCategoriesBlock extends AbstractSchemaConfigCustomizable
 
     public function getBlockPriority(): int
     {
-        return 10070;
+        return 9070;
     }
 
     public function getEnablingModule(): ?string

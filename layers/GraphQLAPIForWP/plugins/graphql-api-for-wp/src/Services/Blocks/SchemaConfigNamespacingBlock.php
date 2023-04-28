@@ -17,7 +17,7 @@ class SchemaConfigNamespacingBlock extends AbstractDefaultEnableDisableFunctiona
 
     public function getBlockPriority(): int
     {
-        return 10120;
+        return 10140;
     }
 
     public function getEnablingModule(): ?string

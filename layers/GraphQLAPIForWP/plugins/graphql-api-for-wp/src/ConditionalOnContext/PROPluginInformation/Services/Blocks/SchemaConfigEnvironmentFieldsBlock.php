@@ -19,7 +19,7 @@ class SchemaConfigEnvironmentFieldsBlock extends AbstractSchemaConfigPROPluginPs
 
     public function getBlockPriority(): int
     {
-        return 2000;
+        return 8070;
     }
 
     public function getEnablingModule(): ?string

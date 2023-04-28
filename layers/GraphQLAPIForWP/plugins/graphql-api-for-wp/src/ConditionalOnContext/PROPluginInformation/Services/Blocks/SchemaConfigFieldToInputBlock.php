@@ -17,7 +17,7 @@ class SchemaConfigFieldToInputBlock extends AbstractSchemaConfigPROPluginPseudoB
 
     public function getBlockPriority(): int
     {
-        return 2400;
+        return 10060;
     }
 
     public function getEnablingModule(): ?string

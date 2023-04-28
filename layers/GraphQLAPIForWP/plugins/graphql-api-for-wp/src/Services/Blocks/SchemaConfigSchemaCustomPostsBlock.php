@@ -34,7 +34,7 @@ class SchemaConfigSchemaCustomPostsBlock extends AbstractSchemaConfigCustomizabl
 
     public function getBlockPriority(): int
     {
-        return 10090;
+        return 9090;
     }
 
     public function getEnablingModule(): ?string

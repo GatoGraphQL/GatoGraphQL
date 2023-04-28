@@ -18,7 +18,7 @@ class SchemaConfigSchemaCustomPostMetaBlock extends AbstractSchemaConfigSchemaMe
 
     public function getBlockPriority(): int
     {
-        return 10060;
+        return 9060;
     }
 
     public function getEnablingModule(): ?string

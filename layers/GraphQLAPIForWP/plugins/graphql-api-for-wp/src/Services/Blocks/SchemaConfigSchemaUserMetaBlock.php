@@ -18,7 +18,7 @@ class SchemaConfigSchemaUserMetaBlock extends AbstractSchemaConfigSchemaMetaBloc
 
     public function getBlockPriority(): int
     {
-        return 10050;
+        return 9050;
     }
 
     public function getEnablingModule(): ?string

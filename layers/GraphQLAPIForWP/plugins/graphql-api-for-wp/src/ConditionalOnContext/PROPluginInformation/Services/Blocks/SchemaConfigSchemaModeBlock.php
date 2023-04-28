@@ -19,7 +19,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigPROPluginPseudoBlo
 
     public function getBlockPriority(): int
     {
-        return 2800;
+        return 10080;
     }
 
     public function getEnablingModule(): ?string

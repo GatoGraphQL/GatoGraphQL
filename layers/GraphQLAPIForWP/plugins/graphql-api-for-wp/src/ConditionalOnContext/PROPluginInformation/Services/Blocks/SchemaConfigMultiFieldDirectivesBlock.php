@@ -17,7 +17,7 @@ class SchemaConfigMultiFieldDirectivesBlock extends AbstractSchemaConfigPROPlugi
 
     public function getBlockPriority(): int
     {
-        return 2300;
+        return 10040;
     }
 
     public function getEnablingModule(): ?string

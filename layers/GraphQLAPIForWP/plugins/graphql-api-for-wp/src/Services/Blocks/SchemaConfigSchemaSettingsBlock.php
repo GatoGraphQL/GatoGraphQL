@@ -18,7 +18,7 @@ class SchemaConfigSchemaSettingsBlock extends AbstractSchemaConfigSchemaAllowAcc
 
     public function getBlockPriority(): int
     {
-        return 10065;
+        return 9065;
     }
 
     public function getEnablingModule(): ?string

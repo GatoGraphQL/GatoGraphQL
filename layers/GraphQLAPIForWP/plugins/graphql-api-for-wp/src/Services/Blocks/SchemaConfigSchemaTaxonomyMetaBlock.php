@@ -18,7 +18,7 @@ class SchemaConfigSchemaTaxonomyMetaBlock extends AbstractSchemaConfigSchemaMeta
 
     public function getBlockPriority(): int
     {
-        return 10030;
+        return 9030;
     }
 
     public function getEnablingModule(): ?string
