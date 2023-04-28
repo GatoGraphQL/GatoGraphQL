@@ -117,6 +117,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         foreach ($regenerateConfigFormOptions as $option) {
             // "Plugin Configuration" needs to regenerate the container
             $regenerateContainer = $option === $regenerateConfigFormOptions['plugin'] ? true : null;
+            
+            // "Endpoint Configuration" needs to be flushed as it modifies CPT permalinks 
+            $flushRewriteRules = $option === $regenerateConfigFormOptions['endpoint'];
+
             /**
              * After saving the settings in the DB:
              * - Flush the rewrite rules, so different URL slugs take effect
@@ -127,7 +131,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              */
             \add_action(
                 "update_option_{$option}",
-                fn () => $this->flushContainer($regenerateContainer)
+                fn () => $this->flushContainer(
+                    $regenerateContainer,
+                    $flushRewriteRules,
+                )
             );
         }
 
@@ -229,7 +236,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $userSettingsManager->storeEmptySettings(Options::SCHEMA_CONFIGURATION);
         $userSettingsManager->storeEmptySettings(Options::ENDPOINT_CONFIGURATION);
         $userSettingsManager->storeEmptySettings(Options::PLUGIN_CONFIGURATION);
-        $this->flushContainer(true);
+        $this->flushContainer(true, true);
     }
 
     /**
@@ -243,9 +250,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         return $this->getSettingsNormalizer()->normalizeSettingsByCategory($values, $settingsCategory);
     }
 
-    protected function flushContainer(?bool $regenerateContainer = null): void
-    {
-        \flush_rewrite_rules();
+    protected function flushContainer(
+        ?bool $regenerateContainer = null,
+        bool $flushRewriteRules = true,
+    ): void {
+        if ($flushRewriteRules) {
+            \flush_rewrite_rules();
+        }
 
         /**
          * Update the timestamp, and maybe regenerate
@@ -258,9 +269,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         if ($regenerateContainer) {
             $this->getUserSettingsManager()->storeContainerTimestamp();
-            return;
+        } else {
+            $this->getUserSettingsManager()->storeOperationalTimestamp();
         }
-        $this->getUserSettingsManager()->storeOperationalTimestamp();
     }
 
     protected function getOptionsFormModuleSectionName(string $optionsFormName, string $moduleID): string
