@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterUserAuthorizationSche
 use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterSettingsCategoryResolverCompilerPass;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginModule;
