@@ -96,7 +96,9 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
                 $endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT
                 && $endpointGroup !== AdminGraphQLEndpointGroups::PERSISTED_QUERY
                 && ($endpointGroup !== AdminGraphQLEndpointGroups::PLUGIN_OWN_USE
-                    || $moduleConfiguration->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()    
+                    || ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE
+                        && $moduleConfiguration->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
+                    )
                 );
             if ($useDistinctiveServiceContainer) {
                 $suffix .= '_' . sanitize_file_name($endpointGroup);
