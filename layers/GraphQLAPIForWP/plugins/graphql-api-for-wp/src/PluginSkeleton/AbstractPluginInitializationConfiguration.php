@@ -326,7 +326,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     {
         /**
          * If doing ?endpoint_group=pluginOwnUse,
-         * always enable all schema-type modules
+         * maybe always enable all schema-type modules
          */
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
@@ -335,6 +335,14 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             $this->alwaysEnableAllSchemaTypeModulesForAdminPluginOwnUseGraphQLEndpoint()
             && $endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint()
         ) {
+            return [];
+        }
+
+        /**
+         * If doing ?endpoint_group=blockEditor,
+         * always enable all schema-type modules
+         */
+        if ($endpointHelpers->isRequestingAdminBlockEditorGraphQLEndpoint()) {
             return [];
         }
 
