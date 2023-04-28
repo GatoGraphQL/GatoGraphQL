@@ -148,25 +148,32 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * If accessing the plugin for first time, save empty settings,
-     * so that hook "update_option_{$option}" is triggered the
-     * first time the user saves the settings and `storeContainerTimestamp`
-     * is called
+     * If accessing the plugin for first time, save empty settings
+     * for ALL the options, so that hook "update_option_{$option}"
+     * is triggered the first time the user saves the settings
+     * (otherwise the entry is created, and the hook is not fired).
      */
     protected function maybeStoreEmptySettings(): void
     {
-        $storeToDBOptions = [
-            Options::SCHEMA_CONFIGURATION,
-            Options::ENDPOINT_CONFIGURATION,
-            Options::PLUGIN_CONFIGURATION,
-            Options::PLUGIN_MANAGEMENT,
-        ];
-        foreach ($storeToDBOptions as $option) {
+        foreach ($this->getAllSettingsOptions() as $option) {
             if (get_option($option) !== false) {
                 continue;
             }
             update_option($option, []);
         }
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getAllSettingsOptions(): array
+    {
+        return [
+            Options::SCHEMA_CONFIGURATION,
+            Options::ENDPOINT_CONFIGURATION,
+            Options::PLUGIN_CONFIGURATION,
+            Options::PLUGIN_MANAGEMENT,
+        ];
     }
 
     /**
