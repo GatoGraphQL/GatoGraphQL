@@ -61,7 +61,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
          * By checking for `is_admin` we are also store the container
          * for internal execution, via the `GraphQLServer` class, and
          * the cache will be shared with the "default" private endpoint.
-         * 
+         *
          * Notice that Persisted Queries in the admin are also handled
          * here, and not under "public", since they'll also have the services
          * registered on ConditionalOnContext\Admin (even if they won't
