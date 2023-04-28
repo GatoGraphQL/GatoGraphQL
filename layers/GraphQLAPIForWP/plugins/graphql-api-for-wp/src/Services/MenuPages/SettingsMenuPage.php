@@ -265,7 +265,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         if ($regenerateContainer === null) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            $regenerateContainer = $moduleConfiguration->doTheServiceContainersDependOnTheContext();
+            $regenerateContainer = $moduleConfiguration->supportDefiningServicesInTheContainerBasedOnTheContext();
         }
         if ($regenerateContainer) {
             $this->getUserSettingsManager()->storeContainerTimestamp();

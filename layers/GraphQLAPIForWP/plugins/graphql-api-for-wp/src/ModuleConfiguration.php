@@ -189,9 +189,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      * If yes, then the containers need to be dumped when updating the
      * plugin Settings; otherwise, there is no need.
      */
-    public function doTheServiceContainersDependOnTheContext(): bool
+    public function supportDefiningServicesInTheContainerBasedOnTheContext(): bool
     {
-        $envVariable = Environment::DO_THE_SERVICE_CONTAINERS_DEPEND_ON_THE_CONTEXT;
+        $envVariable = Environment::SUPPORT_DEFINING_SERVICES_IN_THE_CONTAINER_BASED_ON_THE_CONTEXT;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
