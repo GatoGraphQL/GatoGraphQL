@@ -172,6 +172,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             Options::SCHEMA_CONFIGURATION,
             Options::ENDPOINT_CONFIGURATION,
             Options::PLUGIN_CONFIGURATION,
+            Options::LICENSE_KEYS,
             Options::PLUGIN_MANAGEMENT,
         ];
     }

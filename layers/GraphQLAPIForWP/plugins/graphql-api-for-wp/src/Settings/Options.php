@@ -22,6 +22,10 @@ class Options
      */
     public final const PLUGIN_CONFIGURATION = 'graphql-api-plugin-configuration';
     /**
+     * Option name under which to store the License Keys, defined by the user
+     */
+    public final const LICENSE_KEYS = 'graphql-api-license-keys';
+    /**
      * Option name for Plugin Management.
      *
      * This option won't be actually stored to DB, but it's
