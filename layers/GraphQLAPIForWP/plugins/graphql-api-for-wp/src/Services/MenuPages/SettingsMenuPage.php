@@ -396,6 +396,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     <h2 class="nav-tab-wrapper">
                         <?php
                         foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                            // Make sure the category has items, otherwise skip
+                            $categorySettingsItems = $this->getCategorySettingsItems(
+                                $settingsCategory,
+                                $settingsItems,
+                            );    
+                            if ($categorySettingsItems === []) {
+                                continue;
+                            }
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
                             printf(
                                 '<a href="#%s" class="nav-tab %s">%s</a>',
