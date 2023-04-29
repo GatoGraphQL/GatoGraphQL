@@ -418,15 +418,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             ?>
                             <div id="<?php echo $settingsCategoryID ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
                             <?php
-                                /**
-                                 * Filter all the category settings that must be printed
-                                 * under the current section
-                                 */
-                                $categorySettingsItems = array_values(array_filter(
+                                $categorySettingsItems = $this->getCategorySettingsItems(
+                                    $settingsCategory,
                                     $settingsItems,
-                                    /** @param array<string,mixed> $item */
-                                    fn (array $settingsItem) => $settingsItem['settings-category'] === $settingsCategory
-                                ));
+                                );    
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
                                 // If passing a tab, focus on that one, if the module exists
@@ -539,6 +534,24 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 </div>
             </div>
         <?php
+    }
+
+    /**
+     * Filter all the category settings that must be printed
+     * under the current section
+     *
+     * @param array<array<string,mixed>> $settingsItems
+     * @return array<array<string,mixed>>
+     */
+    protected function getCategorySettingsItems(
+        string $settingsCategory,
+        array $settingsItems,
+    ): array {
+        return array_values(array_filter(
+            $settingsItems,
+            /** @param array<string,mixed> $settingsItem */
+            fn (array $settingsItem) => $settingsItem['settings-category'] === $settingsCategory
+        ));
     }
 
     /**
