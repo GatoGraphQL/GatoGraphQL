@@ -18,7 +18,9 @@ use GraphQLAPI\GraphQLAPI\Plugin;
  */
 class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
-    use ModuleResolverTrait;
+    use ModuleResolverTrait {
+        isPredefinedEnabledOrDisabled as upstreamIsPredefinedEnabledOrDisabled;
+    }
     use PerformanceFunctionalityModuleResolverTrait;
 
     public final const CONFIGURATION_CACHE = Plugin::NAMESPACE . '\configuration-cache';
@@ -112,5 +114,13 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
                 return \__('Cache the generated schema to disk when doing introspection', 'graphql-api');
         }
         return parent::getDescription($module);
+    }
+
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
+    {
+        return match ($module) {
+            self::SCHEMA_INTROSPECTION_CACHE => null,
+            default => $this->upstreamIsPredefinedEnabledOrDisabled($module),
+        };
     }
 }
