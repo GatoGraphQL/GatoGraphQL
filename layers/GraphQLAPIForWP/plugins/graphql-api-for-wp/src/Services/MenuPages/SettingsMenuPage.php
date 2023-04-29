@@ -116,6 +116,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             'schema' => SettingsCategoryResolver::SCHEMA_CONFIGURATION,
             'endpoint' => SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
             'plugin' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
+            'license-keys' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
         ];
         $regenerateConfigFormOptions = array_map(
             fn (string $settingsCategory) => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory),
@@ -395,6 +396,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     <h2 class="nav-tab-wrapper">
                         <?php
                         foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                            // Make sure the category has items, otherwise skip
+                            $categorySettingsItems = $this->getCategorySettingsItems(
+                                $settingsCategory,
+                                $settingsItems,
+                            );
+                            if ($categorySettingsItems === []) {
+                                continue;
+                            }
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
                             printf(
                                 '<a href="#%s" class="nav-tab %s">%s</a>',
@@ -417,15 +426,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             ?>
                             <div id="<?php echo $settingsCategoryID ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
                             <?php
-                                /**
-                                 * Filter all the category settings that must be printed
-                                 * under the current section
-                                 */
-                                $categorySettingsItems = array_values(array_filter(
+                                $categorySettingsItems = $this->getCategorySettingsItems(
+                                    $settingsCategory,
                                     $settingsItems,
-                                    /** @param array<string,mixed> $item */
-                                    fn (array $settingsItem) => $settingsItem['settings-category'] === $settingsCategory
-                                ));
+                                );
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
                                 // If passing a tab, focus on that one, if the module exists
@@ -538,6 +542,24 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 </div>
             </div>
         <?php
+    }
+
+    /**
+     * Filter all the category settings that must be printed
+     * under the current section
+     *
+     * @param array<array<string,mixed>> $settingsItems
+     * @return array<array<string,mixed>>
+     */
+    protected function getCategorySettingsItems(
+        string $settingsCategory,
+        array $settingsItems,
+    ): array {
+        return array_values(array_filter(
+            $settingsItems,
+            /** @param array<string,mixed> $settingsItem */
+            fn (array $settingsItem) => $settingsItem['settings-category'] === $settingsCategory
+        ));
     }
 
     /**
