@@ -1,0 +1,24 @@
+{
+    "data": {
+        "dummyCustomPosts": [
+            {
+                "__typename": "GenericCustomPost",
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at",
+                "customPostType": "dummy-cpt"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
+                "customPostType": "dummy-cpt"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "customPostType": "dummy-cpt"
+            }
+        ]
+    }
+}
