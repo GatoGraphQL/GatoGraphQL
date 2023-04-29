@@ -400,7 +400,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             $categorySettingsItems = $this->getCategorySettingsItems(
                                 $settingsCategory,
                                 $settingsItems,
-                            );    
+                            );
                             if ($categorySettingsItems === []) {
                                 continue;
                             }
@@ -429,7 +429,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 $categorySettingsItems = $this->getCategorySettingsItems(
                                     $settingsCategory,
                                     $settingsItems,
-                                );    
+                                );
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
                                 // If passing a tab, focus on that one, if the module exists
