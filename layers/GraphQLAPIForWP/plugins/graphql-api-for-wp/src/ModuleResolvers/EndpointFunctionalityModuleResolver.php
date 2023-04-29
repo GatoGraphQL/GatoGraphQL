@@ -29,6 +29,9 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
     public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
 
+    /** @var WP_Post[]|null */
+    protected ?array $schemaConfigurationCustomPosts = null;
+
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
@@ -258,18 +261,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             $possibleValues = [
                 ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
             ];
-            /** @var GraphQLSchemaConfigurationCustomPostType */
-            $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
-            /**
-             * @var WP_Post[]
-             */
-            $customPosts = \get_posts([
-                'posts_per_page' => -1,
-                'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-                'post_status' => 'publish',
-            ]);
-            foreach ($customPosts as $customPost) {
-                $possibleValues[$customPost->ID] = $customPost->post_title;
+            foreach ($this->getSchemaConfigurationCustomPosts() as $schemaConfigurationCustomPost) {
+                $possibleValues[$schemaConfigurationCustomPost->ID] = $schemaConfigurationCustomPost->post_title;
             }
             $option = ModuleSettingOptions::SCHEMA_CONFIGURATION;
             $moduleSettings[] = [
@@ -291,5 +284,32 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             ];
         }
         return $moduleSettings;
+    }
+
+    /**
+     * @return WP_Post[]
+     */
+    protected function getSchemaConfigurationCustomPosts(): array
+    {
+        if ($this->schemaConfigurationCustomPosts === null) {
+            $this->schemaConfigurationCustomPosts = $this->doGetSchemaConfigurationCustomPosts();
+        }
+
+        return $this->schemaConfigurationCustomPosts;
+    }
+
+    /**
+     * @return WP_Post[]
+     */
+    protected function doGetSchemaConfigurationCustomPosts(): array
+    {
+        /** @var GraphQLSchemaConfigurationCustomPostType */
+        $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
+
+        return \get_posts([
+            'posts_per_page' => -1,
+            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+            'post_status' => 'publish',
+        ]);
     }
 }
