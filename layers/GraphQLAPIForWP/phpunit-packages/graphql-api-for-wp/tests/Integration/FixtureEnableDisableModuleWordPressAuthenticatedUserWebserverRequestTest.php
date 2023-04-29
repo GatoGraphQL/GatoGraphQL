@@ -18,4 +18,12 @@ class FixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest e
     {
         return __DIR__ . '/fixture-enable-disable-modules';
     }
+
+    protected function getModuleEndpoint(string $fileName): ?string
+    {
+        return match ($fileName) {
+            'schema-configuration' => 'graphql/customers/penguin-books/',
+            default => parent::getModuleEndpoint($fileName),
+        };
+    }
 }
