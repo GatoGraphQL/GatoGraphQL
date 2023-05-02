@@ -86,7 +86,10 @@
             "@delete-settings"
         ],
         "delete-settings": [
-            "lando wp option delete graphql-api-settings --path=wordpress"
+            "lando wp option delete graphql-api-schema-configuration --path=wordpress",
+            "lando wp option delete graphql-api-endpoint-configuration --path=wordpress",
+            "lando wp option delete graphql-api-plugin-configuration --path=wordpress",
+            "lando wp option delete graphql-api-plugin-management --path=wordpress"
         ],
         "server-info": "lando info"
     }
