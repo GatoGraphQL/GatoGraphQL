@@ -495,14 +495,40 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
-        $defaultValues = [
-            self::SCHEMA_CUSTOMPOSTS => [
+        
+        if ($module === self::SCHEMA_CUSTOMPOSTS) {
+            return [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
-                ModuleSettingOptions::CUSTOMPOST_TYPES => ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES,
-            ],
+                ModuleSettingOptions::CUSTOMPOST_TYPES => $useRestrictiveDefaults
+                    ? ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES
+                    : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes(),
+            ];
+        }
+
+        if ($module === self::SCHEMA_TAGS) {
+            return [
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
+                ModuleSettingOptions::TAG_TAXONOMIES => $useRestrictiveDefaults
+                    ? ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES
+                    : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginTagTaxonomies(),
+            ];
+        }
+        
+        if ($module === self::SCHEMA_CATEGORIES) {
+            return [
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
+                ModuleSettingOptions::CATEGORY_TAXONOMIES => $useRestrictiveDefaults
+                    ? ConfigurationDefaultValues::DEFAULT_CATEGORY_TAXONOMIES
+                    : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCategoryTaxonomies(),
+            ];
+        }
+
+        $defaultValues = [
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
@@ -527,16 +553,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_MENUS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
-            ],
-            self::SCHEMA_TAGS => [
-                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
-                ModuleSettingOptions::TAG_TAXONOMIES => ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES,
-            ],
-            self::SCHEMA_CATEGORIES => [
-                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
-                ModuleSettingOptions::CATEGORY_TAXONOMIES => ConfigurationDefaultValues::DEFAULT_CATEGORY_TAXONOMIES,
             ],
             self::SCHEMA_SETTINGS => [
                 ModuleSettingOptions::ENTRIES => $useRestrictiveDefaults ? [
