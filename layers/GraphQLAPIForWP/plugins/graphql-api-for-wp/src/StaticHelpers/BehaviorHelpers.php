@@ -25,12 +25,12 @@ class BehaviorHelpers
     public static function areRestrictiveDefaultsEnabled(): bool
     {
         if (self::$areRestrictiveDefaultsEnabled === null) {
-            self::$areRestrictiveDefaultsEnabled = static::doAreNonRestrictiveDefaultsEnabled();
+            self::$areRestrictiveDefaultsEnabled = static::resolveAreRestrictiveDefaultsEnabled();
         }
         return self::$areRestrictiveDefaultsEnabled;
     }
 
-    protected static function doAreNonRestrictiveDefaultsEnabled(): bool
+    protected static function resolveAreRestrictiveDefaultsEnabled(): bool
     {
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
 
