@@ -17,6 +17,7 @@ class Properties
     // Used for Integers
     public final const MIN_NUMBER = 'minNumber';
     public final const TYPE = 'type';
+    public final const SUBTYPE = 'subtype';
     public final const TYPE_STRING = 'string';
     public final const TYPE_BOOL = 'bool';
     public final const TYPE_INT = 'int';

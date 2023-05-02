@@ -83,6 +83,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                     continue;
                 }
                 $type = $itemSetting[Properties::TYPE] ?? null;
+                $subtype = $itemSetting[Properties::SUBTYPE] ?? null;
                 /**
                  * Cast type so PHPStan doesn't throw error
                  */
@@ -143,6 +144,14 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                     && $values[$name] === null
                 ) {
                     $values[$name] = [];
+                } elseif (
+                    $type === Properties::TYPE_ARRAY
+                    && $subtype === Properties::TYPE_INT
+                ) {
+                    $values[$name] = array_map(
+                        fn (int|string $value) => (int) $value,
+                        $values[$name]
+                    );
                 }
 
                 // Validate it is a valid value, or reset
