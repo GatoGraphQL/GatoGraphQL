@@ -25,21 +25,21 @@ class RestrictiveOrNotDefaultBehaviorPluginManagementModifyPluginSettingsFixture
         /**
          * Do not use the single endpoint (as it's disabled)
          */
-        $providerItems['safe-or-unsafe-default-behavior:1'][2] = 'graphql/mobile-app/';
+        $providerItems['restrictive-or-not-default-behavior:1'][2] = 'graphql/mobile-app/';
 
         /**
          * The single endpoint is disabled, then the client returns some
          * HTML as response, not JSON
          */
-        $providerItems['safe-or-unsafe-default-behavior'][0] = 'text/html';
-        $providerItems['safe-or-unsafe-default-behavior'][1] = null;
+        $providerItems['restrictive-or-not-default-behavior'][0] = 'text/html';
+        $providerItems['restrictive-or-not-default-behavior'][1] = null;
 
         return $providerItems;
     }
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-safe-or-unsafe-default-behavior';
+        return __DIR__ . '/fixture-restrictive-or-not-default-behavior';
     }
 
     protected function getSettingsKey(): string
