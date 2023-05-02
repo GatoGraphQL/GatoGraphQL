@@ -63,7 +63,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPIProSchemaConfigCacheControlLists';
+config.output.jsonpFunction = 'webpackJsonpGraphQLAPIProSchemaConfigCacheControl';
 // ------------------------------------------------------
 
 module.exports = config;
