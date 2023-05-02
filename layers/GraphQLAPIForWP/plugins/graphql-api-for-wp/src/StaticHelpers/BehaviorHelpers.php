@@ -44,7 +44,7 @@ class BehaviorHelpers
             PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
         );
         if ($useRestrictiveOrNotDefaultBehavior !== null) {
-            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
+            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::RESTRICTIVE;
         }
         
         /**
@@ -61,7 +61,7 @@ class BehaviorHelpers
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             );
-            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
+            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::RESTRICTIVE;
         }
         
         /**
