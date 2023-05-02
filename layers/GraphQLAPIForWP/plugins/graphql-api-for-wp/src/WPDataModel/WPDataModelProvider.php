@@ -149,7 +149,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             $pluginTagTaxonomies,
             $rejectedQueryableTagTaxonomies
         ));
-        // Allow plugins to further remove unwanted custom post types
+        // Allow plugins to further remove unwanted tag taxonomies
         $possibleTagTaxonomies = \apply_filters(
             HookNames::QUERYABLE_TAG_TAXONOMIES,
             $possibleTagTaxonomies
@@ -182,7 +182,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             $pluginCategoryTaxonomies,
             $rejectedQueryableCategoryTaxonomies
         ));
-        // Allow plugins to further remove unwanted custom post types
+        // Allow plugins to further remove unwanted category taxonomies
         $possibleCategoryTaxonomies = \apply_filters(
             HookNames::QUERYABLE_CATEGORY_TAXONOMIES,
             $possibleCategoryTaxonomies

@@ -16,12 +16,6 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistry
-
-    GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistry
-
     GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry
 
@@ -39,9 +33,6 @@ services:
 
     GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistry
-
-    GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface:
-        class: \GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProvider
 
     GraphQLAPI\GraphQLAPI\Services\:
         resource: ../src/Services/*

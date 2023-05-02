@@ -18,6 +18,28 @@ services:
         
     GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\:
         resource: '../src/Security/UserAuthorizationSchemes/*'
+        
+
+    ################################################################################
+    # The services below are needed to get the defaultValues for options
+    # CUSTOMPOST_TYPES, TAG_TAXONOMIES and CATEGORY_TAXONOMIES
+    #
+    # @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/ModuleResolvers/SchemaTypeModuleResolver.php
+    #
+    # Even though the Registries will be empty, as the corresponding
+    # services have not been added as Hybrid Services, that's OK,
+    # since those services are to be excluded (i.e. if they are not
+    # added in first place, it's the same result)
+    ################################################################################
+    GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface:
+        class: \GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProvider
+
+    GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistry
+
+    GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface:
+        class: \GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistry
+
 
     # This service (and also ModuleRegistryInterface) is required to
     # maybe execute ModuleListTableAction in Plugin.php
