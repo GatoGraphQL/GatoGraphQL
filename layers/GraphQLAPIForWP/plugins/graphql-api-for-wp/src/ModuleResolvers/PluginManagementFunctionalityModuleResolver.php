@@ -172,14 +172,14 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     implode(
                         '</tr><tr>',
                         [
-                            '<td>' . implode(
-                                '</td><td>',
-                                [
-                                    \__('Single endpoint', 'graphql-api'),
-                                    \__('Enabled', 'graphql-api'),
-                                    \__('Disabled', 'graphql-api'),
-                                ]
-                            ) . '</td>',
+                            // '<td>' . implode(
+                            //     '</td><td>',
+                            //     [
+                            //         \__('Single endpoint', 'graphql-api'),
+                            //         \__('Enabled', 'graphql-api'),
+                            //         \__('Disabled', 'graphql-api'),
+                            //     ]
+                            // ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
