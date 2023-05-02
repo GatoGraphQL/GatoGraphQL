@@ -77,7 +77,7 @@
             "lando wp config set GRAPHQL_API_SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR true --raw --path=wordpress",
             "@delete-settings"
         ],
-        "disable-unsafe-defaults": [
+        "disable-non-restrictive-defaults": [
             "lando wp config set GRAPHQL_API_SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR false --raw --path=wordpress",
             "@delete-settings"
         ],
