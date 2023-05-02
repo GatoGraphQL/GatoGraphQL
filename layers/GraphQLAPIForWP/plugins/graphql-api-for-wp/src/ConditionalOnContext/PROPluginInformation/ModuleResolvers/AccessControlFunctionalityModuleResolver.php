@@ -8,7 +8,6 @@ use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AccessControlFunctionalityModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
 class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
@@ -58,11 +57,7 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::ACCESS_CONTROL:
-                return [
-                    [
-                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-                    ],
-                ];
+                return [];
             case self::ACCESS_CONTROL_RULE_DISABLE_ACCESS:
             case self::ACCESS_CONTROL_RULE_USER_STATE:
             case self::ACCESS_CONTROL_RULE_VISITOR_IP:
