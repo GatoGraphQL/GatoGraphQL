@@ -8,7 +8,7 @@ use Brain\Cortex\Route\QueryRoute;
 use Brain\Cortex\Route\RouteCollectionInterface;
 use Brain\Cortex\Route\RouteInterface;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\Root\Routing\RoutingManagerInterface;
+use PoP\Routing\RoutingManagerInterface;
 use PoP\RootWP\Routing\WPQueries;
 use PoP\RootWP\Routing\WPQueryRoutingManagerInterface;
 

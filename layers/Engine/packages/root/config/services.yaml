@@ -13,12 +13,6 @@ services:
     PoP\Root\Registries\FeedbackItemRegistryInterface:
         class: \PoP\Root\Registries\FeedbackItemRegistry
 
-    PoP\Root\Routing\RoutingManagerInterface:
-        class: \PoP\Root\Routing\BasicRoutingManager
-
-    PoP\Root\Routing\RoutingHelperServiceInterface:
-        class: \PoP\Root\Routing\RoutingHelperService
-
     PoP\Root\State\:
         resource: '../src/State/*'
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\RootWP;
 
 use PoP\Root\Module\ModuleInterface;
+use Brain\Cortex;
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Environment;
 
@@ -16,7 +17,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoP\Root\Module::class,
+            \PoP\Routing\Module::class,
         ];
     }
 
@@ -38,13 +39,10 @@ class Module extends AbstractModule
             return;
         };
 
-        $this->initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+        $this->initServices(dirname(__DIR__));
     }
 
-    /**
-     * Initialize services for the system container
-     */
-    protected function initializeSystemContainerServices(): void
+    public function moduleLoaded(): void
     {
         /**
          * Do not enable services when running PHPUnit tests
@@ -54,6 +52,6 @@ class Module extends AbstractModule
         if (Environment::isApplicationEnvironmentDevPHPUnit()) {
             return;
         };
-        $this->initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
+        Cortex::boot();
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\RootWP\Routing;
 
-use PoP\Root\Routing\RoutingManagerInterface;
+use PoP\Routing\RoutingManagerInterface;
 
 interface WPQueryRoutingManagerInterface extends RoutingManagerInterface
 {

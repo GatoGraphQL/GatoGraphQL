@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\Routing\RoutingManagerInterface:
+        class: \PoP\Routing\BasicRoutingManager
+
+    PoP\Routing\RoutingHelperServiceInterface:
+        class: \PoP\Routing\RoutingHelperService
+
+    PoP\Routing\State\:
+        resource: '../src/State/*'

@@ -22,23 +22,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function enablePassingRoutingStateViaRequest(): bool
-    {
-        if (!$this->enablePassingStateViaRequest()) {
-            return false;
-        }
-
-        $envVariable = Environment::ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     protected function enableHook(string $envVariable): bool
     {
         return match ($envVariable) {
