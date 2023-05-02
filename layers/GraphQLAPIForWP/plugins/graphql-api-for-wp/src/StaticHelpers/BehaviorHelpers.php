@@ -33,7 +33,6 @@ class BehaviorHelpers
     protected static function doAreNonRestrictiveDefaultsEnabled(): bool
     {
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
 
         /**
          * If Settings => Reset Settings was just submitted
@@ -48,6 +47,7 @@ class BehaviorHelpers
             return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
         }
         
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
         if (
             $userSettingsManager->hasSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
