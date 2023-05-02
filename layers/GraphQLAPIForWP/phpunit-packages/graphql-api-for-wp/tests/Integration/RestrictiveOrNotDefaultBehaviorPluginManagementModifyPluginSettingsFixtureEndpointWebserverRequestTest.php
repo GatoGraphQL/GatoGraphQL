@@ -11,30 +11,7 @@ class RestrictiveOrNotDefaultBehaviorPluginManagementModifyPluginSettingsFixture
 {
     protected function getEndpoint(): string
     {
-        return 'graphql/';
-    }
-
-    /**
-     * @param array<string,mixed> $providerItems
-     * @return array<string,mixed>
-     */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
-    {
-        $providerItems = parent::customizeProviderEndpointEntries($providerItems);
-
-        /**
-         * Do not use the single endpoint (as it's disabled)
-         */
-        $providerItems['restrictive-or-not-default-behavior:1'][2] = 'graphql/mobile-app/';
-
-        /**
-         * The single endpoint is disabled, then the client returns some
-         * HTML as response, not JSON
-         */
-        $providerItems['restrictive-or-not-default-behavior'][0] = 'text/html';
-        $providerItems['restrictive-or-not-default-behavior'][1] = null;
-
-        return $providerItems;
+        return 'graphql/mobile-app/';
     }
 
     protected function getFixtureFolder(): string
