@@ -56,12 +56,19 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
      */
     public function initialize(): void
     {
+        $schemaConfigurator = $this->getSchemaConfigurator();
         $schemaConfigurationID = $this->getSchemaConfigurationID();
-        if ($schemaConfigurationID === null) {
+        if ($schemaConfigurationID === null
+            && $this->needsSchemaConfigurationToBeExecuted()
+        ) {
             return;
         }
-        $schemaConfigurator = $this->getSchemaConfigurator();
         $schemaConfigurator->executeSchemaConfiguration($schemaConfigurationID);
+    }
+
+    public function needsSchemaConfigurationToBeExecuted(): bool
+    {
+        return true;
     }
 
     /**
