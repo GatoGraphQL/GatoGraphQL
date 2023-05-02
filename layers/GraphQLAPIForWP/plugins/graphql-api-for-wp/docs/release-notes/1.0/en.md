@@ -274,4 +274,4 @@ The Plugin Settings has been completely decoupled from the services registered i
 
 ## Breaking changes
 
-- Environment variable `ENABLE_UNSAFE_DEFAULTS` has been renamed to `SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR`, and "Reset Settings" must be clicked on the "Plugin Management" tab of the Settings page for the new value to be applied.
+- Environment variable `ENABLE_UNSAFE_DEFAULTS` has been renamed to `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR`, and "Reset Settings" must be clicked on the "Plugin Management" tab of the Settings page for the new value to be applied.
