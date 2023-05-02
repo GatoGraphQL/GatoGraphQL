@@ -18,8 +18,8 @@ class BehaviorHelpers
     public static function getDefaultBehavior(): string
     {
         return static::areRestrictiveDefaultsEnabled()
-            ? Behaviors::DENY
-            : Behaviors::ALLOW;
+            ? Behaviors::ALLOW
+            : Behaviors::DENY;
     }
 
     public static function areRestrictiveDefaultsEnabled(): bool
