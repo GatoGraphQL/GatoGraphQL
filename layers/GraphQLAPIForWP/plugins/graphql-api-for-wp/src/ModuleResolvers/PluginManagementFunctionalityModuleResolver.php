@@ -109,7 +109,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $useUnsafeDefaults = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::RESET_SETTINGS => [
-                self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useUnsafeDefaults ? ResetSettingsOptions::NON_RESTRICTIVE : ResetSettingsOptions::SAFE,
+                self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useUnsafeDefaults ? ResetSettingsOptions::NON_RESTRICTIVE : ResetSettingsOptions::RESTRICTIVE,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -236,7 +236,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    ResetSettingsOptions::SAFE => \__('Use the restrictive default behavior for the Settings', 'graphql-api'),
+                    ResetSettingsOptions::RESTRICTIVE => \__('Use the restrictive default behavior for the Settings', 'graphql-api'),
                     ResetSettingsOptions::NON_RESTRICTIVE => \__('Use the non-restrictive default behavior for the Settings', 'graphql-api'),
                 ],
                 Properties::CSS_STYLE => 'display: none;',

@@ -54,6 +54,6 @@ class RestrictiveOrNotDefaultBehaviorPluginManagementModifyPluginSettingsFixture
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return ResetSettingsOptions::SAFE;
+        return ResetSettingsOptions::RESTRICTIVE;
     }
 }
