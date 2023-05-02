@@ -109,7 +109,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::RESET_SETTINGS => [
-                self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useRestrictiveDefaults ? ResetSettingsOptions::NON_RESTRICTIVE : ResetSettingsOptions::RESTRICTIVE,
+                self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useRestrictiveDefaults ? ResetSettingsOptions::RESTRICTIVE : ResetSettingsOptions::NON_RESTRICTIVE,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
