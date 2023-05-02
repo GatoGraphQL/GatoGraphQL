@@ -51,7 +51,7 @@ Code compiled for development, i.e. after running `npm start`, cannot be commite
 
 ### Building static sites
 
-The GraphQL API for WordPress provides safe default settings, to make "live" sites secure. However, these safe default settings are not needed when building "static" sites, where the WordPress site is not exposed to the Internet.
+The GraphQL API for WordPress provides restrictive default settings, to make "live" sites secure. However, these restrictive default settings are not needed when building "static" sites, where the WordPress site is not exposed to the Internet.
 
 This is how the restrictive and non-restrictive default behaviors compare:
 
