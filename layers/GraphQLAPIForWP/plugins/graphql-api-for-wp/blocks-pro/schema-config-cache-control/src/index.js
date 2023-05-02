@@ -27,7 +27,7 @@ registerBlockType( 'graphql-api-pro/schema-config-cache-control', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Cache Control Lists', 'graphql-api' ),
+	title: __( 'Cache Control', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.

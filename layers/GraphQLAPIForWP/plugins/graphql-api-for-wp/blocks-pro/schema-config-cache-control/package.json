@@ -1,5 +1,5 @@
 {
-	"name": "schema-config-ccls",
+	"name": "schema-config-cache-control",
 	"version": "1.0.0-dev",
 	"description": "Select Cache Control Lists for the Schema Configuration",
 	"author": "Leonardo Losoviz",

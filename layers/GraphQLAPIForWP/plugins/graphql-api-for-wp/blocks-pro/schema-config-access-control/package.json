@@ -1,5 +1,5 @@
 {
-	"name": "schema-config-acls",
+	"name": "schema-config-access-control",
 	"version": "1.0.0-dev",
 	"description": "Select Access Control Lists for the Schema Configuration",
 	"author": "Leonardo Losoviz",
