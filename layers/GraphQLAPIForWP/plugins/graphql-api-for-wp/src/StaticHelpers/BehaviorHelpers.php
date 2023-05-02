@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleRes
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoP\Root\Environment as RootEnvironment;
 
 class BehaviorHelpers
 {
@@ -69,9 +68,9 @@ class BehaviorHelpers
             self::$areNonRestrictiveDefaultsEnabled = (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
         } else {
             /**
-             * Base case: If on the DEV or PROD environment
+             * Base case: Non-restrictive is the default behavior
              */
-            self::$areNonRestrictiveDefaultsEnabled = RootEnvironment::isApplicationEnvironmentDev();
+            self::$areNonRestrictiveDefaultsEnabled = true;
         }
         return self::$areNonRestrictiveDefaultsEnabled;
     }
