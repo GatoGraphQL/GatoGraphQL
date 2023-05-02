@@ -46,11 +46,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     {
         switch ($module) {
             case self::CACHE_CONTROL:
-                return [
-                    [
-                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-                    ],
-                ];
+                return [];
         }
         return parent::getDependedModuleLists($module);
     }
