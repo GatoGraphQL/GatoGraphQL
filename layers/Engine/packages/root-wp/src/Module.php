@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\RootWP;
 
-use PoP\Root\Module\ModuleInterface;
 use Brain\Cortex;
-use PoP\Root\Module\AbstractModule;
+use PoP\Root\App;
 use PoP\Root\Environment;
+use PoP\Root\Module as RootModule;
+use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
+use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -69,6 +72,13 @@ class Module extends AbstractModule
         if (Environment::isApplicationEnvironmentDevPHPUnit()) {
             return;
         };
+
+        /** @var RootModuleConfiguration */
+        $moduleConfiguration = App::getModule(RootModule::class)->getConfiguration();
+        if (!$moduleConfiguration->enablePassingRoutingStateViaRequest()) {
+            return;
+        }
+
         Cortex::boot();
     }
 }
