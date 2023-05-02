@@ -76,7 +76,9 @@ Similar to `_sendGraphQLHTTPRequests` but it executes multiple GraphQL queries c
 
 ## Configuring the allowed URLs
 
-We must configure the list of URLs that we can connect to. By default, this list is initially empty. (Unless the non-restrictive default settings to <a href="https://graphql-api.com/guides/config/building-static-sites" target="_blank">build static sites</a> are enabled, in which case any URL is allowed by default.)
+We must configure the list of URLs that we can connect to.
+
+<!-- By default, this list is initially empty. (Unless the non-restrictive default settings to <a href="https://graphql-api.com/guides/config/building-static-sites" target="_blank">build static sites</a> are enabled, in which case any URL is allowed by default.) -->
 
 Each entry can either be:
 
