@@ -153,10 +153,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
-                    \__('When the settings are reset, the default values can follow a "safe" or "unsafe" behavior:', 'graphql-api'),
+                    \__('When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:', 'graphql-api'),
                     \__('Feature', 'graphql-api'),
-                    \__('Safe behavior', 'graphql-api'),
-                    \__('Unsafe behavior', 'graphql-api'),
+                    \__('Restrictive behavior', 'graphql-api'),
+                    \__('Non-restrictive behavior', 'graphql-api'),
                     implode(
                         '</tr><tr>',
                         [

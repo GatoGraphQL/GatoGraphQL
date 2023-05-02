@@ -91,8 +91,8 @@ class ModuleRegistry implements ModuleRegistryInterface
          *   to decide if it's enabled or not...
          *
          * Because this issue will happen when execute Reset Settings,
-         * which is where the "safe"/"unsafe" default behavior is changed,
-         * and as SINGLE_ENDPOINT is on a different settingsCategory,
+         * which is where the restrictive/non-restrictive default behavior
+         * is changed, and as SINGLE_ENDPOINT is on a different settingsCategory,
          * then this problem is avoided by first filtering by settingsCategory,
          * so that SINGLE_ENDPOINT will not be retrieved in `getAllModules`.
          */

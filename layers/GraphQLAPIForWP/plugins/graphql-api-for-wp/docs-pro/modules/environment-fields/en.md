@@ -24,7 +24,7 @@ For instance, this query retrieves the environment constant `GITHUB_ACCESS_TOKEN
 
 ## Configuring access to the environment constants
 
-We must configure the list of allowed environment variables and constants that can be queried. By default, this list is initially empty. (Unless the unsafe default settings to <a href="https://graphql-api.com/guides/config/building-static-sites" target="_blank">build static sites</a> are enabled, in which case any name is allowed by default.)
+We must configure the list of allowed environment variables and constants that can be queried. By default, this list is initially empty. (Unless the non-restrictive default settings to <a href="https://graphql-api.com/guides/config/building-static-sites" target="_blank">build static sites</a> are enabled, in which case any name is allowed by default.)
 
 Each entry can either be:
 
