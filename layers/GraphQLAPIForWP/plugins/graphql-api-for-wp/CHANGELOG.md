@@ -12,7 +12,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
 - Added documentation for PRO modules (provided by the GraphQL API PRO plugin, released alongside the GraphQL API for WordPress plugin's v1.0), and their corresponding Schema Configuration functionalities
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
-- Reset settings, and choose to use restrictive default settings or not
+- Reset settings, and choose to use restrictive or non-restrictive default settings
 - Added documentation page "Use Cases, Best Practices, and Recipes"
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
 - Sort the Schema Configuration entries by name

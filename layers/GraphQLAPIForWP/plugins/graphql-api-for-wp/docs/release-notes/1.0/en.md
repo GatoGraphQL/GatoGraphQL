@@ -44,7 +44,7 @@ Now, the Settings page organizes all modules into 2 levels, and displays tabs ve
 
 ![Settings page](../../images/releases/v1.0/settings-page.png)
 
-## Reset settings, and choose to use the restrictive default settings or not
+## Reset settings, and choose to use the restrictive or non-restrictive default settings
 
 A GraphQL API may be exposed publicly or only privately, and depending on which is the case there are options and features that need to be restricted or not.
 

@@ -232,7 +232,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p>',
-                    \__('Choose if to use restrictive default settings or not.', 'graphql-api'),
+                    \__('Choose if to use restrictive or non-restrictive default settings.', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
