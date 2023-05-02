@@ -63,7 +63,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPIProSchemaConfigAccessControlLists';
+config.output.jsonpFunction = 'webpackJsonpGraphQLAPIProSchemaConfigAccessControl';
 // ------------------------------------------------------
 
 module.exports = config;
