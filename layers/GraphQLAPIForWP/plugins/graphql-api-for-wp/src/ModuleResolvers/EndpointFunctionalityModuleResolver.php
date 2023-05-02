@@ -261,8 +261,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             $possibleValues = [
                 ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
             ];
-            foreach ($this->getSchemaConfigurationCustomPosts() as $schemaConfigurationCustomPost) {
-                $possibleValues[$schemaConfigurationCustomPost->ID] = $schemaConfigurationCustomPost->post_title;
+            foreach ($this->getSchemaConfigurationCustomPosts() as $customPost) {
+                $possibleValues[$customPost->ID] = $customPost->post_title;
             }
             $option = ModuleSettingOptions::SCHEMA_CONFIGURATION;
             $moduleSettings[] = [
