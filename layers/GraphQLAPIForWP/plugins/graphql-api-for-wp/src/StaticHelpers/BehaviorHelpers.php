@@ -24,10 +24,14 @@ class BehaviorHelpers
 
     public static function areNonRestrictiveDefaultsEnabled(): bool
     {
-        if (self::$areNonRestrictiveDefaultsEnabled !== null) {
-            return self::$areNonRestrictiveDefaultsEnabled;
+        if (self::$areNonRestrictiveDefaultsEnabled === null) {
+            self::$areNonRestrictiveDefaultsEnabled = static::doAreNonRestrictiveDefaultsEnabled();
         }
+        return self::$areNonRestrictiveDefaultsEnabled;
+    }
 
+    protected static function doAreNonRestrictiveDefaultsEnabled(): bool
+    {
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
 
@@ -41,8 +45,10 @@ class BehaviorHelpers
             PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
         );
         if ($useRestrictiveOrNotDefaultBehavior !== null) {
-            self::$areNonRestrictiveDefaultsEnabled = $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
-        } elseif (
+            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
+        }
+        
+        if (
             $userSettingsManager->hasSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
@@ -55,23 +61,26 @@ class BehaviorHelpers
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             );
-            self::$areNonRestrictiveDefaultsEnabled = $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
-        } elseif (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR) !== false) {
+            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
+        }
+        
+        if (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR) !== false) {
             /**
              * If env var `SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
              */
-            self::$areNonRestrictiveDefaultsEnabled = (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
-        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
+            return (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
+        }
+        
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
             /**
              * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
              */
-            self::$areNonRestrictiveDefaultsEnabled = (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
-        } else {
-            /**
-             * Base case: Non-restrictive is the default behavior
-             */
-            self::$areNonRestrictiveDefaultsEnabled = true;
+            return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
         }
-        return self::$areNonRestrictiveDefaultsEnabled;
+
+        /**
+         * Base case: Non-restrictive is the default behavior
+         */
+        return true;
     }
 }
