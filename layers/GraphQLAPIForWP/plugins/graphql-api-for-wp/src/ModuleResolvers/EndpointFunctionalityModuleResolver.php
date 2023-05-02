@@ -12,11 +12,11 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\App;
+use PoP\Root\Environment as RootEnvironment;
 use WP_Post;
 
 class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -122,10 +122,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         switch ($module) {
             case self::SINGLE_ENDPOINT:
                 /**
-                 * Single endpoint is naturally disabled for PROD,
-                 * unless the non-restrictive defaults are set.
+                 * Single endpoint is naturally disabled for PROD.
+                 * Enable for DEV to execute tests.
                  */
-                return BehaviorHelpers::areRestrictiveDefaultsEnabled();
+                return RootEnvironment::isApplicationEnvironmentDev();
         }
         return parent::isEnabledByDefault($module);
     }
