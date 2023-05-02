@@ -28,7 +28,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
-- Env var `ENABLE_UNSAFE_DEFAULTS` has been renamed to `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR`, and "Reset Settings" must be clicked on the "Plugin Management" tab of the Settings page for the new value to be applied
+- Env var `ENABLE_UNSAFE_DEFAULTS` has been renamed to `SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR`, and "Reset Settings" must be clicked on the "Plugin Management" tab of the Settings page for the new value to be applied
 
 ## 0.10.2 - 24/02/2013
 
