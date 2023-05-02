@@ -6,13 +6,13 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Servic
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\PerformanceFunctionalityModuleResolver;
 
-class SchemaConfigCacheControlListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigCacheControlBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-cache-control-lists';
+        return 'schema-config-cache-control';
     }
 
     public function getBlockPriority(): int
