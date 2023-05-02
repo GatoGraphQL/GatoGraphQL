@@ -1614,7 +1614,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-global-fields /-->
 
-<!-- wp:graphql-api-pro/schema-config-access-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-access-control /-->
 
 <!-- wp:graphql-api-pro/schema-config-schema-mode /-->
 
@@ -1684,7 +1684,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-global-fields /-->
 
-<!-- wp:graphql-api-pro/schema-config-access-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-access-control /-->
 
 <!-- wp:graphql-api-pro/schema-config-schema-mode /-->
 
@@ -2072,7 +2072,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-global-fields /-->
 
-<!-- wp:graphql-api-pro/schema-config-access-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-access-control /-->
 
 <!-- wp:graphql-api-pro/schema-config-schema-mode /-->
 
@@ -2175,7 +2175,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-global-fields /-->
 
-<!-- wp:graphql-api-pro/schema-config-access-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-access-control /-->
 
 <!-- wp:graphql-api-pro/schema-config-schema-mode /-->
 

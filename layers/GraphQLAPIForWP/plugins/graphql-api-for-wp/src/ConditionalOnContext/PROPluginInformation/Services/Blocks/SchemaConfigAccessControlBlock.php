@@ -6,13 +6,13 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Servic
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 
-class SchemaConfigAccessControlListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigAccessControlBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-access-control-lists';
+        return 'schema-config-access-control';
     }
 
     public function getBlockPriority(): int
