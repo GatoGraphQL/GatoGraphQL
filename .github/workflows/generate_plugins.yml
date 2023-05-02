@@ -81,7 +81,7 @@ jobs:
                 run: mkdir build && mkdir build/dist-plugin
 
             -   name: Install zip
-                uses: montudor/action-zip@v0.1.1
+                uses: montudor/action-zip@v1.0.0
 
             # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
             -   name: Use PHP 8.1

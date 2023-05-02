@@ -107,7 +107,7 @@ jobs:
                 run: mkdir build
                 if: ${{ needs.provide_data.outputs.generate_artifact }}
             -   name: Install zip
-                uses: montudor/action-zip@v0.1.1
+                uses: montudor/action-zip@v1.0.0
                 if: ${{ needs.provide_data.outputs.generate_artifact }}
             -   name: Create zip
                 run: zip -X -r build/downgraded-code.zip . -x *.git* build/\* php-parallel-lint/\*
