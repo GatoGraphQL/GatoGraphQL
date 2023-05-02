@@ -496,25 +496,28 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
 
-        if ($module === self::SCHEMA_CUSTOMPOSTS
+        if (
+            $module === self::SCHEMA_CUSTOMPOSTS
             && $option === ModuleSettingOptions::CUSTOMPOST_TYPES
         ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES
                 : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes();
         }
-        
-        if ($module === self::SCHEMA_TAGS
+
+        if (
+            $module === self::SCHEMA_TAGS
             && $option === ModuleSettingOptions::TAG_TAXONOMIES
-         ) {
+        ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES
                 : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginTagTaxonomies();
         }
-        
-        if ($module === self::SCHEMA_CATEGORIES
+
+        if (
+            $module === self::SCHEMA_CATEGORIES
             && $option === ModuleSettingOptions::CATEGORY_TAXONOMIES
-         ) {
+        ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_CATEGORY_TAXONOMIES
                 : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCategoryTaxonomies();
