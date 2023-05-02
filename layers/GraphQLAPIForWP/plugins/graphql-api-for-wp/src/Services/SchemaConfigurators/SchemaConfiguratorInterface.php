@@ -13,6 +13,10 @@ interface SchemaConfiguratorInterface extends ServiceInterface
      */
     public function executeSchemaConfiguration(int $schemaConfigurationID): void;
     /**
+     * Execute logic when no schema configuration was selected
+     */
+    public function executeNoneAppliedSchemaConfiguration(): void;
+    /**
      * Indicate if the Configurator can be executed when the
      * endpoint does not have a Schema Configuration assigned
      */

@@ -58,9 +58,11 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
     {
         $schemaConfigurator = $this->getSchemaConfigurator();
         $schemaConfigurationID = $this->getSchemaConfigurationID();
-        if ($schemaConfigurationID === null
-            && $this->needsSchemaConfigurationToBeExecuted()
-        ) {
+        if ($schemaConfigurationID === null) {
+            if ($this->needsSchemaConfigurationToBeExecuted()) {
+                return;
+            }
+            $schemaConfigurator->executeNoneAppliedSchemaConfiguration();
             return;
         }
         $schemaConfigurator->executeSchemaConfiguration($schemaConfigurationID);
