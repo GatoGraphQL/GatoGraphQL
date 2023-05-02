@@ -13,21 +13,21 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class BehaviorHelpers
 {
-    private static ?bool $areNonRestrictiveDefaultsEnabled = null;
+    private static ?bool $areRestrictiveDefaultsEnabled = null;
 
     public static function getDefaultBehavior(): string
     {
-        return static::areNonRestrictiveDefaultsEnabled()
+        return static::areRestrictiveDefaultsEnabled()
             ? Behaviors::DENY
             : Behaviors::ALLOW;
     }
 
-    public static function areNonRestrictiveDefaultsEnabled(): bool
+    public static function areRestrictiveDefaultsEnabled(): bool
     {
-        if (self::$areNonRestrictiveDefaultsEnabled === null) {
-            self::$areNonRestrictiveDefaultsEnabled = static::doAreNonRestrictiveDefaultsEnabled();
+        if (self::$areRestrictiveDefaultsEnabled === null) {
+            self::$areRestrictiveDefaultsEnabled = static::doAreNonRestrictiveDefaultsEnabled();
         }
-        return self::$areNonRestrictiveDefaultsEnabled;
+        return self::$areRestrictiveDefaultsEnabled;
     }
 
     protected static function doAreNonRestrictiveDefaultsEnabled(): bool

@@ -106,7 +106,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        $useNonRestrictive = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
+        $useNonRestrictive = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::RESET_SETTINGS => [
                 self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useNonRestrictive ? ResetSettingsOptions::NON_RESTRICTIVE : ResetSettingsOptions::RESTRICTIVE,
