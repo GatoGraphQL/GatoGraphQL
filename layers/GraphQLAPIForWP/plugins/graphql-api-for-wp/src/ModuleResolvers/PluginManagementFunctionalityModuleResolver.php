@@ -124,6 +124,13 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $moduleSettings = parent::getSettings($module);
         if ($module === self::RESET_SETTINGS) {
+            $resetSettingsCategories = [
+                'schema' => SettingsCategoryResolver::SCHEMA_CONFIGURATION,
+                'endpoint' => SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
+                'plugin' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
+                'license-keys' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
+            ];
+            $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
                     <a href="#" class="button secondary graphql-api-show-settings-items">
@@ -140,7 +147,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::TITLE => \__('Reset the GraphQL API Settings?', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p>',
-                    \__('Restore the GraphQL API Settings to default values.', 'graphql-api'),
+                    sprintf(
+                        \__('Restore all settings under tabs "%s", "%s" and "%s" to their default values.', 'graphql-api'),
+                        $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::SCHEMA_CONFIGURATION)->getName(SettingsCategoryResolver::SCHEMA_CONFIGURATION),
+                        $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::ENDPOINT_CONFIGURATION)->getName(SettingsCategoryResolver::ENDPOINT_CONFIGURATION),
+                        $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_CONFIGURATION)->getName(SettingsCategoryResolver::PLUGIN_CONFIGURATION),
+                    ),
                     $resetSettingsButtonsHTML
                 ),
                 Properties::TYPE => Properties::TYPE_NULL,
