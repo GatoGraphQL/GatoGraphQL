@@ -79,7 +79,8 @@ class BehaviorHelpers
         }
 
         /**
-         * Base case: Non-restrictive is the default behavior
+         * Base case: Restrictive is NOT the default behavior
+         * (non-restrictive is)
          */
         return false;
     }
