@@ -25,7 +25,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     /**
      * Setting options
      */
-    public final const OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR = 'use-safe-or-unsafe-default-behavior';
+    public final const OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR = 'use-restrictive-or-not-default-behavior';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
@@ -109,7 +109,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $useUnsafeDefaults = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::RESET_SETTINGS => [
-                self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR => $useUnsafeDefaults ? ResetSettingsOptions::UNSAFE : ResetSettingsOptions::SAFE,
+                self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useUnsafeDefaults ? ResetSettingsOptions::UNSAFE : ResetSettingsOptions::SAFE,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -223,7 +223,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::CSS_STYLE => 'display: none;',
             ];
 
-            $option = self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR;
+            $option = self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

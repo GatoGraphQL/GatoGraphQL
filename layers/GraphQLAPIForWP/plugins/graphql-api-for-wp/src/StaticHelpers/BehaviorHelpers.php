@@ -39,14 +39,14 @@ class BehaviorHelpers
         $useSafeOrUnsafeDefaultBehavior = $pluginOptionsFormHandler->maybeOverrideValueFromForm(
             null,
             PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
-            PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+            PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
         );
         if ($useSafeOrUnsafeDefaultBehavior !== null) {
             self::$areNonRestrictiveDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
         } elseif (
             $userSettingsManager->hasSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
-                PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             )
         ) {
             /**
@@ -54,7 +54,7 @@ class BehaviorHelpers
              */
             $useSafeOrUnsafeDefaultBehavior = $userSettingsManager->getSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
-                PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             );
             self::$areNonRestrictiveDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
         } elseif (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR) !== false) {

@@ -44,7 +44,7 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
 
     protected function getSettingsKey(): string
     {
-        return PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR;
+        return PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR;
     }
 
     protected function getModuleID(string $dataName): string
