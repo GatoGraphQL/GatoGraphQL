@@ -65,10 +65,10 @@ This is how the restrictive and non-restrictive default behaviors compare:
 | Environment Fields | No environment variables or PHP constants are queryable | All environment variables and PHP constants are queryable |
 | Send HTTP Request Fields | No URL can be requested | All URLs can be requested |
 
-In development, to enable non-restrictive defaults, execute:
+In development, to enable restrictive defaults, execute:
 
 ```bash
-composer enable-non-restrictive-defaults
+composer enable-restrictive-defaults
 ```
 
 On a site in production, set in `wp-config.php`:

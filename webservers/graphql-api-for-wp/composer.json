@@ -111,15 +111,15 @@
             "lando wp config set GRAPHQL_API_DISABLE_CACHING true --raw --path=wordpress",
             "@purge-cache"
         ],
-        "enable-non-restrictive-defaults": [
+        "enable-restrictive-defaults": [
             "lando wp config set GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR true --raw --path=wordpress",
             "@delete-settings"
         ],
-        "disable-non-restrictive-defaults": [
+        "disable-restrictive-defaults": [
             "lando wp config set GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR false --raw --path=wordpress",
             "@delete-settings"
         ],
-        "use-default-non-restrictive-defaults": [
+        "use-default-restrictive-defaults": [
             "lando wp config delete GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR --path=wordpress",
             "@delete-settings"
         ],
