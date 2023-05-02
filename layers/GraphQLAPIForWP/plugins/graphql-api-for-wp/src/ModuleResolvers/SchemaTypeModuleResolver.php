@@ -494,7 +494,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        // Lower the security constraints for the static app
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_CUSTOMPOSTS => [
