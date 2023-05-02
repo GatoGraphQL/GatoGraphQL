@@ -82,4 +82,11 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
         }
         return true;
     }
+    
+    /**
+     * By default, do nothing
+     */
+    public function executeNoneAppliedSchemaConfiguration(): void
+    {
+    }
 }
