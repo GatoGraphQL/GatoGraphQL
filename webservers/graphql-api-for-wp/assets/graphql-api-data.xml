@@ -1620,7 +1620,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-cache-control /-->
 
-<!-- wp:graphql-api-pro/schema-config-field-deprecation-lists /-->
+<!-- wp:graphql-api-pro/schema-config-field-deprecation /-->
 
 <!-- wp:graphql-api-pro/schema-config-multiple-query-execution /-->
 
@@ -1690,7 +1690,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-cache-control /-->
 
-<!-- wp:graphql-api-pro/schema-config-field-deprecation-lists /-->
+<!-- wp:graphql-api-pro/schema-config-field-deprecation /-->
 
 <!-- wp:graphql-api-pro/schema-config-multiple-query-execution /-->
 
@@ -2078,7 +2078,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-cache-control /-->
 
-<!-- wp:graphql-api-pro/schema-config-field-deprecation-lists /-->
+<!-- wp:graphql-api-pro/schema-config-field-deprecation /-->
 
 <!-- wp:graphql-api-pro/schema-config-multiple-query-execution /-->
 
@@ -2181,7 +2181,7 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-cache-control /-->
 
-<!-- wp:graphql-api-pro/schema-config-field-deprecation-lists /-->
+<!-- wp:graphql-api-pro/schema-config-field-deprecation /-->
 
 <!-- wp:graphql-api-pro/schema-config-multiple-query-execution /-->
 

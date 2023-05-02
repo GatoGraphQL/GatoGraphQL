@@ -22,12 +22,12 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api-pro/schema-config-field-deprecation-lists', {
+registerBlockType( 'graphql-api-pro/schema-config-field-deprecation', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Field Deprecation Lists', 'graphql-api' ),
+	title: __( 'Field Deprecation', 'graphql-api' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.

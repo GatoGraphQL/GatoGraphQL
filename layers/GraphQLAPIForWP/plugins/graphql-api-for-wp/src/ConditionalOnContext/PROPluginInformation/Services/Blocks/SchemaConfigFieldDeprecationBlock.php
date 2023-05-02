@@ -6,13 +6,13 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Servic
 
 use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\VersioningFunctionalityModuleResolver;
 
-class SchemaConfigFieldDeprecationListBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+class SchemaConfigFieldDeprecationBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
     protected function getBlockName(): string
     {
-        return 'schema-config-field-deprecation-lists';
+        return 'schema-config-field-deprecation';
     }
 
     public function getBlockPriority(): int

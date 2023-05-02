@@ -1,5 +1,5 @@
 {
-	"name": "schema-config-field-deprecation-lists",
+	"name": "schema-config-field-deprecation",
 	"version": "1.0.0-dev",
 	"description": "Select Field Deprecation Lists for the Schema Configuration",
 	"author": "Leonardo Losoviz",
