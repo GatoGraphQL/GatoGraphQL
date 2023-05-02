@@ -68,7 +68,7 @@ This is how the "safe" and "unsafe" default behaviors compare:
 In development, to enable unsafe defaults, execute:
 
 ```bash
-composer enable-unsafe-defaults
+composer enable-non-restrictive-defaults
 ```
 
 On a site in production, set in `wp-config.php`:

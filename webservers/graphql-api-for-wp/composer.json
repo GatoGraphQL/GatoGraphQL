@@ -111,7 +111,7 @@
             "lando wp config set GRAPHQL_API_DISABLE_CACHING true --raw --path=wordpress",
             "@purge-cache"
         ],
-        "enable-unsafe-defaults": [
+        "enable-non-restrictive-defaults": [
             "lando wp config set GRAPHQL_API_SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR true --raw --path=wordpress",
             "@delete-settings"
         ],
