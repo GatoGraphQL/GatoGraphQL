@@ -66,10 +66,5 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
         // Do nothing
     }
 
-    public function needsSchemaConfigurationToBeExecuted(): bool
-    {
-        return true;
-    }
-
     abstract protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface;
 }
