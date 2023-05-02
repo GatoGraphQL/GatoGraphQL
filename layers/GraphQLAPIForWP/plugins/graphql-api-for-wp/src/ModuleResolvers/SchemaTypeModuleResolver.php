@@ -494,27 +494,50 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        // Lower the security constraints for the static app
-        $useNonRestrictive = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
+        $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
+
+        if ($module === self::SCHEMA_CUSTOMPOSTS
+            && $option === ModuleSettingOptions::CUSTOMPOST_TYPES
+        ) {
+            return $useRestrictiveDefaults
+                ? ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES
+                : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes();
+        }
+        
+        if ($module === self::SCHEMA_TAGS
+            && $option === ModuleSettingOptions::TAG_TAXONOMIES
+         ) {
+            return $useRestrictiveDefaults
+                ? ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES
+                : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginTagTaxonomies();
+        }
+        
+        if ($module === self::SCHEMA_CATEGORIES
+            && $option === ModuleSettingOptions::CATEGORY_TAXONOMIES
+         ) {
+            return $useRestrictiveDefaults
+                ? ConfigurationDefaultValues::DEFAULT_CATEGORY_TAXONOMIES
+                : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCategoryTaxonomies();
+        }
+
         $defaultValues = [
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
-                ModuleSettingOptions::CUSTOMPOST_TYPES => ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES,
             ],
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
             ],
             self::SCHEMA_PAGES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
             ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
                 self::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_USER_ROLES => [
@@ -523,24 +546,22 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             self::SCHEMA_MEDIA => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
             ],
             self::SCHEMA_MENUS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
             ],
             self::SCHEMA_TAGS => [
-                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 200,
-                ModuleSettingOptions::TAG_TAXONOMIES => ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES,
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
             ],
             self::SCHEMA_CATEGORIES => [
-                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 200,
-                ModuleSettingOptions::CATEGORY_TAXONOMIES => ConfigurationDefaultValues::DEFAULT_CATEGORY_TAXONOMIES,
+                ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
             ],
             self::SCHEMA_SETTINGS => [
-                ModuleSettingOptions::ENTRIES => $useNonRestrictive ? [] : [
+                ModuleSettingOptions::ENTRIES => $useRestrictiveDefaults ? [
                     'siteurl',
                     'home',
                     'blogname',
@@ -551,8 +572,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'date_format',
                     'time_format',
                     'blog_charset',
-                ],
-                ModuleSettingOptions::BEHAVIOR => BehaviorHelpers::getDefaultBehavior(),
+                ] : [],
+                ModuleSettingOptions::BEHAVIOR => $useRestrictiveDefaults ? Behaviors::ALLOW : Behaviors::DENY,
             ],
             self::SCHEMA_USER_AVATARS => [
                 self::OPTION_DEFAULT_AVATAR_SIZE => 96,

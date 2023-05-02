@@ -9,28 +9,20 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class BehaviorHelpers
 {
-    private static ?bool $areNonRestrictiveDefaultsEnabled = null;
+    private static ?bool $areRestrictiveDefaultsEnabled = null;
 
-    public static function getDefaultBehavior(): string
+    public static function areRestrictiveDefaultsEnabled(): bool
     {
-        return static::areNonRestrictiveDefaultsEnabled()
-            ? Behaviors::DENY
-            : Behaviors::ALLOW;
-    }
-
-    public static function areNonRestrictiveDefaultsEnabled(): bool
-    {
-        if (self::$areNonRestrictiveDefaultsEnabled === null) {
-            self::$areNonRestrictiveDefaultsEnabled = static::doAreNonRestrictiveDefaultsEnabled();
+        if (self::$areRestrictiveDefaultsEnabled === null) {
+            self::$areRestrictiveDefaultsEnabled = static::doAreRestrictiveDefaultsEnabled();
         }
-        return self::$areNonRestrictiveDefaultsEnabled;
+        return self::$areRestrictiveDefaultsEnabled;
     }
 
-    protected static function doAreNonRestrictiveDefaultsEnabled(): bool
+    protected static function doAreRestrictiveDefaultsEnabled(): bool
     {
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
 
@@ -44,9 +36,9 @@ class BehaviorHelpers
             PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
         );
         if ($useRestrictiveOrNotDefaultBehavior !== null) {
-            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
+            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::RESTRICTIVE;
         }
-        
+
         /**
          * Take stored value of Settings => Reset Settings on DB
          */
@@ -61,26 +53,27 @@ class BehaviorHelpers
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             );
-            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
+            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::RESTRICTIVE;
         }
-        
+
         /**
          * If env var `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
          */
         if (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR) !== false) {
-            return (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR);
+            return strtolower(getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) === "true";
         }
-        
+
         /**
          * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
          */
         if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
-            return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR);
+            return strtolower(PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) === "true";
         }
 
         /**
-         * Base case: Non-restrictive is the default behavior
+         * Base case: Restrictive is NOT the default behavior
+         * (non-restrictive is)
          */
-        return true;
+        return false;
     }
 }

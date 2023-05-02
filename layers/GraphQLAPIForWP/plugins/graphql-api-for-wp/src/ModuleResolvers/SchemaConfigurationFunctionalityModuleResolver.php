@@ -126,8 +126,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        // Lower the security constraints for the static app
-        $useNonRestrictive = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
+        $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_NAMESPACING => [
                 ModuleSettingOptions::DEFAULT_VALUE => false,
@@ -139,7 +138,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
             ],
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => [
-                ModuleSettingOptions::DEFAULT_VALUE => $useNonRestrictive,
+                ModuleSettingOptions::DEFAULT_VALUE => !$useRestrictiveDefaults,
             ],
             self::SCHEMA_SELF_FIELDS => [
                 ModuleSettingOptions::DEFAULT_VALUE => true,

@@ -188,9 +188,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
+        $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         $defaultMetaValues = [
             ModuleSettingOptions::ENTRIES => [],
-            ModuleSettingOptions::BEHAVIOR => BehaviorHelpers::getDefaultBehavior(),
+            ModuleSettingOptions::BEHAVIOR => $useRestrictiveDefaults ? Behaviors::ALLOW : Behaviors::DENY,
         ];
         $defaultValues = [
             self::SCHEMA_CUSTOMPOST_META => $defaultMetaValues,
