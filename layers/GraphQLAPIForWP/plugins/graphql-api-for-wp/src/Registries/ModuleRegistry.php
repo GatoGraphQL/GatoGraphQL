@@ -82,12 +82,12 @@ class ModuleRegistry implements ModuleRegistryInterface
          * This is to avoid an endless loop:
          *
          * - Module SINGLE_ENDPOINT calls
-         *   `BehaviorHelpers::areUnsafeDefaultsEnabled()` in
+         *   `BehaviorHelpers::areNonRestrictiveDefaultsEnabled()` in
          *   `isEnabledByDefault`
-         * - `BehaviorHelpers::areUnsafeDefaultsEnabled()` calls
+         * - `BehaviorHelpers::areNonRestrictiveDefaultsEnabled()` calls
          *   `->normalizeSettingsByCategory` which loads all modules with
          *   `->getAllModules(`, and SINGLE_ENDPOINT is one of them,
-         *   but it would call again `areUnsafeDefaultsEnabled`
+         *   but it would call again `areNonRestrictiveDefaultsEnabled`
          *   to decide if it's enabled or not...
          *
          * Because this issue will happen when execute Reset Settings,

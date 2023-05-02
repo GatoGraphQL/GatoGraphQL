@@ -127,7 +127,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         // Lower the security constraints for the static app
-        $useUnsafe = BehaviorHelpers::areUnsafeDefaultsEnabled();
+        $useUnsafe = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_NAMESPACING => [
                 ModuleSettingOptions::DEFAULT_VALUE => false,

@@ -106,7 +106,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        $useUnsafeDefaults = BehaviorHelpers::areUnsafeDefaultsEnabled();
+        $useUnsafeDefaults = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::RESET_SETTINGS => [
                 self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR => $useUnsafeDefaults ? ResetSettingsOptions::UNSAFE : ResetSettingsOptions::SAFE,
