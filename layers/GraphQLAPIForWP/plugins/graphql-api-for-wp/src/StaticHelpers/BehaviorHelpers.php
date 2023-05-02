@@ -38,7 +38,7 @@ class BehaviorHelpers
         if ($useRestrictiveOrNotDefaultBehavior !== null) {
             return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::RESTRICTIVE;
         }
-        
+
         /**
          * Take stored value of Settings => Reset Settings on DB
          */
@@ -55,14 +55,14 @@ class BehaviorHelpers
             );
             return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::RESTRICTIVE;
         }
-        
+
         /**
          * If env var `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
          */
         if (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR) !== false) {
             return strtolower(getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) === "true";
         }
-        
+
         /**
          * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
          */
