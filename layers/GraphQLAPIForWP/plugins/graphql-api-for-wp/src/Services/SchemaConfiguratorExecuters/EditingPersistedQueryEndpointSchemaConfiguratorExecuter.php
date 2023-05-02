@@ -56,14 +56,16 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
         return parent::isServiceEnabled();
     }
 
+    protected function isSchemaConfiguratorActive(): bool
+    {
+        return $this->getEndpointHelpers()->isRequestingAdminPersistedQueryGraphQLEndpoint();
+    }
+
     /**
      * Initialize the configuration if editing a persisted query
      */
     protected function getSchemaConfigurationID(): ?int
     {
-        if (!$this->getEndpointHelpers()->isRequestingAdminPersistedQueryGraphQLEndpoint()) {
-            return null;
-        }
         $customPostID = (int) $this->getEndpointHelpers()->getAdminPersistedQueryCustomPostID();
         return $this->getEndpointBlockHelpers()->getSchemaConfigurationID(
             EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,

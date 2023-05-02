@@ -81,10 +81,7 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
         return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
     }
 
-    /**
-     * This is the Schema Configuration ID
-     */
-    protected function getSchemaConfigurationID(): ?int
+    protected function isSchemaConfiguratorActive(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -100,8 +97,16 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
             )
             )
         ) {
-            return null;
+            return false;
         }
+        return true;
+    }
+
+    /**
+     * This is the Schema Configuration ID
+     */
+    protected function getSchemaConfigurationID(): ?int
+    {
         // Return the stored Schema Configuration ID
         return $this->getEndpointBlockHelpers()->getUserSettingSchemaConfigurationID(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
     }

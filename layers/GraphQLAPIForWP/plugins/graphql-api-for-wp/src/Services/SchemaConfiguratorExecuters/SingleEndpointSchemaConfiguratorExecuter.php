@@ -78,15 +78,16 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
         return parent::isServiceEnabled();
     }
 
+    protected function isSchemaConfiguratorActive(): bool
+    {
+        return $this->getGraphQLEndpointHandler()->isEndpointRequested();
+    }
+
     /**
      * This is the Schema Configuration ID
      */
     protected function getSchemaConfigurationID(): ?int
     {
-        // Only enable it when executing a query against the single endpoint
-        if (!$this->getGraphQLEndpointHandler()->isEndpointRequested()) {
-            return null;
-        }
         // Return the stored Schema Configuration ID
         return $this->getEndpointBlockHelpers()->getUserSettingSchemaConfigurationID(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT);
     }

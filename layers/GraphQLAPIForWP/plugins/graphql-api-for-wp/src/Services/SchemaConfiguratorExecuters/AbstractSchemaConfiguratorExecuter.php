@@ -56,6 +56,9 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
      */
     public function initialize(): void
     {
+        if (!$this->isSchemaConfiguratorActive()) {
+            return;
+        }
         $schemaConfigurator = $this->getSchemaConfigurator();
         $schemaConfigurationID = $this->getSchemaConfigurationID();
         if ($schemaConfigurationID === null) {
@@ -64,6 +67,8 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
         }
         $schemaConfigurator->executeSchemaConfiguration($schemaConfigurationID);
     }
+
+    abstract protected function isSchemaConfiguratorActive(): bool;
 
     /**
      * Provide the ID of the custom post containing the Schema Configuration block
