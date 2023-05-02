@@ -36,13 +36,13 @@ class BehaviorHelpers
          * If Settings => Reset Settings was just submitted
          * (i.e. we are in options.php)
          */
-        $useSafeOrUnsafeDefaultBehavior = $pluginOptionsFormHandler->maybeOverrideValueFromForm(
+        $useRestrictiveOrNotDefaultBehavior = $pluginOptionsFormHandler->maybeOverrideValueFromForm(
             null,
             PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
             PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
         );
-        if ($useSafeOrUnsafeDefaultBehavior !== null) {
-            self::$areNonRestrictiveDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
+        if ($useRestrictiveOrNotDefaultBehavior !== null) {
+            self::$areNonRestrictiveDefaultsEnabled = $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::UNSAFE;
         } elseif (
             $userSettingsManager->hasSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
@@ -52,11 +52,11 @@ class BehaviorHelpers
             /**
              * Take stored value of Settings => Reset Settings on DB
              */
-            $useSafeOrUnsafeDefaultBehavior = $userSettingsManager->getSetting(
+            $useRestrictiveOrNotDefaultBehavior = $userSettingsManager->getSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             );
-            self::$areNonRestrictiveDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
+            self::$areNonRestrictiveDefaultsEnabled = $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::UNSAFE;
         } elseif (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR) !== false) {
             /**
              * If env var `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
