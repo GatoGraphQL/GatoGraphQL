@@ -10,7 +10,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleRes
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoP\Root\Environment as RootEnvironment;
 
 class BehaviorHelpers
 {
@@ -25,12 +24,15 @@ class BehaviorHelpers
 
     public static function areNonRestrictiveDefaultsEnabled(): bool
     {
-        if (self::$areNonRestrictiveDefaultsEnabled !== null) {
-            return self::$areNonRestrictiveDefaultsEnabled;
+        if (self::$areNonRestrictiveDefaultsEnabled === null) {
+            self::$areNonRestrictiveDefaultsEnabled = static::doAreNonRestrictiveDefaultsEnabled();
         }
+        return self::$areNonRestrictiveDefaultsEnabled;
+    }
 
+    protected static function doAreNonRestrictiveDefaultsEnabled(): bool
+    {
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
 
         /**
          * If Settings => Reset Settings was just submitted
@@ -42,37 +44,43 @@ class BehaviorHelpers
             PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
         );
         if ($useRestrictiveOrNotDefaultBehavior !== null) {
-            self::$areNonRestrictiveDefaultsEnabled = $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
-        } elseif (
+            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
+        }
+        
+        /**
+         * Take stored value of Settings => Reset Settings on DB
+         */
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        if (
             $userSettingsManager->hasSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             )
         ) {
-            /**
-             * Take stored value of Settings => Reset Settings on DB
-             */
             $useRestrictiveOrNotDefaultBehavior = $userSettingsManager->getSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
                 PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             );
-            self::$areNonRestrictiveDefaultsEnabled = $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
-        } elseif (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR) !== false) {
-            /**
-             * If env var `SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
-             */
-            self::$areNonRestrictiveDefaultsEnabled = (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
-        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
-            /**
-             * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
-             */
-            self::$areNonRestrictiveDefaultsEnabled = (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
-        } else {
-            /**
-             * Base case: If on the DEV or PROD environment
-             */
-            self::$areNonRestrictiveDefaultsEnabled = RootEnvironment::isApplicationEnvironmentDev();
+            return $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
         }
-        return self::$areNonRestrictiveDefaultsEnabled;
+        
+        /**
+         * If env var `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
+         */
+        if (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR) !== false) {
+            return (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR);
+        }
+        
+        /**
+         * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
+         */
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
+            return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR);
+        }
+
+        /**
+         * Base case: Non-restrictive is the default behavior
+         */
+        return true;
     }
 }

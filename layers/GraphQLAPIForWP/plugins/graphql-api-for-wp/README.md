@@ -49,9 +49,9 @@ Compiled JavaScript code (such as all files under a block's `build/` folder) is 
 
 Code compiled for development, i.e. after running `npm start`, cannot be commited/pushed to the repo.
 
-### Building static sites
+<!-- ### Building static sites
 
-The GraphQL API for WordPress provides restrictive default settings, to make "live" sites secure. However, these restrictive default settings are not needed when building "static" sites, where the WordPress site is not exposed to the Internet.
+The GraphQL API for WordPress provides non-restrictive default settings, which simplify the configuration for building "static" sites.
 
 This is how the restrictive and non-restrictive default behaviors compare:
 
@@ -65,19 +65,19 @@ This is how the restrictive and non-restrictive default behaviors compare:
 | Environment Fields | No environment variables or PHP constants are queryable | All environment variables and PHP constants are queryable |
 | Send HTTP Request Fields | No URL can be requested | All URLs can be requested |
 
-In development, to enable non-restrictive defaults, execute:
+In development, to enable restrictive defaults, execute:
 
 ```bash
-composer enable-non-restrictive-defaults
+composer enable-restrictive-defaults
 ```
 
 On a site in production, set in `wp-config.php`:
 
 ```php
-define( 'GRAPHQL_API_SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR', true );
+define( 'GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR', true );
 ```
 
-Or define this same key/value as an environment variable.
+Or define this same key/value as an environment variable. -->
 
 <!-- ### CMS-agnosticism
 
