@@ -139,7 +139,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
             ],
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => [
-                ModuleSettingOptions::DEFAULT_VALUE => $useRestrictiveDefaults,
+                ModuleSettingOptions::DEFAULT_VALUE => !$useRestrictiveDefaults,
             ],
             self::SCHEMA_SELF_FIELDS => [
                 ModuleSettingOptions::DEFAULT_VALUE => true,
