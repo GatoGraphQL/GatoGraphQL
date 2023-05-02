@@ -167,8 +167,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
                     \__('When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:', 'graphql-api'),
                     \__('Feature', 'graphql-api'),
-                    \__('Restrictive behavior', 'graphql-api'),
                     \__('Non-restrictive behavior', 'graphql-api'),
+                    \__('Restrictive behavior', 'graphql-api'),
                     implode(
                         '</tr><tr>',
                         [
@@ -176,56 +176,56 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 '</td><td>',
                                 [
                                     \__('Single endpoint', 'graphql-api'),
-                                    \__('Disabled', 'graphql-api'),
                                     \__('Enabled', 'graphql-api'),
+                                    \__('Disabled', 'graphql-api'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('“Sensitive” data fields', 'graphql-api'),
-                                    \__('Not added to the schema', 'graphql-api'),
                                     \__('Added to the schema', 'graphql-api'),
+                                    \__('Not added to the schema', 'graphql-api'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('Settings from <code>wp_options</code>', 'graphql-api'),
-                                    \__('Only a few predefined options are queryable', 'graphql-api'),
                                     \__('All options are queryable', 'graphql-api'),
+                                    \__('Only a few predefined options are queryable', 'graphql-api'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('Meta (posts, users, comments, taxonomies)', 'graphql-api'),
-                                    \__('No keys are queryable', 'graphql-api'),
                                     \__('All keys are queryable', 'graphql-api'),
+                                    \__('No keys are queryable', 'graphql-api'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('Max limit to query entities (posts, users, etc)', 'graphql-api'),
-                                    \__('Limited', 'graphql-api'),
                                     \__('Unlimited', 'graphql-api'),
+                                    \__('Limited', 'graphql-api'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('Environment Fields', 'graphql-api'),
-                                    \__('No environment variables or PHP constants are queryable', 'graphql-api'),
                                     \__('All environment variables and PHP constants are queryable', 'graphql-api'),
+                                    \__('No environment variables or PHP constants are queryable', 'graphql-api'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('Send HTTP Request Fields', 'graphql-api'),
-                                    \__('No URL can be requested', 'graphql-api'),
                                     \__('All URLs can be requested', 'graphql-api'),
+                                    \__('No URL can be requested', 'graphql-api'),
                                 ]
                             ) . '</td>',
                         ]
