@@ -36,7 +36,7 @@ class SetupCortexRoutingHookSet extends AbstractHookSet
         if (!$moduleConfiguration->enablePassingRoutingStateViaRequest()) {
             return;
         }
-        
+
         \add_action(
             'cortex.routes',
             $this->setupCortex(...),

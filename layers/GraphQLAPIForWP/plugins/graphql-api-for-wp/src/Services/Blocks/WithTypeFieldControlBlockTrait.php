@@ -42,6 +42,7 @@ trait WithTypeFieldControlBlockTrait
             $interfaceTypeResolverNamespacedName = $interfaceTypeResolver->getNamespacedTypeName();
             $namespacedInterfaceTypeNameNames[$interfaceTypeResolverNamespacedName] = $interfaceTypeResolver->getMaybeNamespacedTypeName();
         }
+        /** @var string[]|array<string,string[]> */
         $typeFieldsForPrint = [];
         foreach ($typeFields as $selectedField) {
             // The field is composed by the type namespaced name, and the field name, separated by "."
@@ -61,12 +62,13 @@ trait WithTypeFieldControlBlockTrait
              * If $groupFieldsUnderTypeForPrint is false, replace namespacedTypeName for typeName and "." for "/"
              * */
             if ($groupFieldsUnderTypeForPrint) {
+                /** @var array<string,string[]> $typeFieldsForPrint */
                 $typeFieldsForPrint[$objectTypeOrInterfaceTypeName][] = $field;
             } else {
+                /** @var string[] $typeFieldsForPrint */
                 $typeFieldsForPrint[] = $objectTypeOrInterfaceTypeName . BlockConstants::TYPE_FIELD_SEPARATOR_FOR_PRINT . $field;
             }
         }
-        /** @var string[]|array<string,string[]> */
         return $typeFieldsForPrint;
     }
 }
