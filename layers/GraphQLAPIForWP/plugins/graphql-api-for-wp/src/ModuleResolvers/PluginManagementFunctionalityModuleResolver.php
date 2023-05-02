@@ -149,7 +149,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
-                    'safe-or-unsafe-behavior-description'
+                    'restrictive-or-not-behavior-description'
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
