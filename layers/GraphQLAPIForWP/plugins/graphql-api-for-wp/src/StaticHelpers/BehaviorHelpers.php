@@ -9,18 +9,10 @@ use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class BehaviorHelpers
 {
     private static ?bool $areRestrictiveDefaultsEnabled = null;
-
-    public static function getDefaultBehavior(): string
-    {
-        return static::areRestrictiveDefaultsEnabled()
-            ? Behaviors::ALLOW
-            : Behaviors::DENY;
-    }
 
     public static function areRestrictiveDefaultsEnabled(): bool
     {

@@ -24,7 +24,8 @@ trait AllowAccessToEntriesBlockTrait
 
     protected function getDefaultBehavior(): string
     {
-        return BehaviorHelpers::getDefaultBehavior();
+        $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
+        return $useRestrictiveDefaults ? Behaviors::ALLOW : Behaviors::DENY;
     }
 
     /**
