@@ -49,7 +49,7 @@ Compiled JavaScript code (such as all files under a block's `build/` folder) is 
 
 Code compiled for development, i.e. after running `npm start`, cannot be commited/pushed to the repo.
 
-### Building static sites
+<!-- ### Building static sites
 
 The GraphQL API for WordPress provides non-restrictive default settings, which simplify the configuration for building "static" sites.
 
@@ -77,7 +77,7 @@ On a site in production, set in `wp-config.php`:
 define( 'GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR', true );
 ```
 
-Or define this same key/value as an environment variable.
+Or define this same key/value as an environment variable. -->
 
 <!-- ### CMS-agnosticism
 
