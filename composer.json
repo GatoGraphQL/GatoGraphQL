@@ -13,7 +13,7 @@
         "php": "^8.1",
         "ext-mbstring": "*",
         "boxuk/wp-muplugin-loader": "^1.6",
-        "brain/cortex": "1.0.0-alpha.7",
+        "brain/cortex": "1.0.0-alpha.9",
         "composer/installers": "~1.0",
         "composer/semver": "^3.2",
         "jrfnl/php-cast-to-type": "^2.0",
