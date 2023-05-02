@@ -123,9 +123,9 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             case self::SINGLE_ENDPOINT:
                 /**
                  * Single endpoint is naturally disabled for PROD,
-                 * unless the "unsafe defaults" are set.
+                 * unless the non-restrictive defaults are set.
                  */
-                return BehaviorHelpers::areUnsafeDefaultsEnabled();
+                return BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
         }
         return parent::isEnabledByDefault($module);
     }

@@ -25,7 +25,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     /**
      * Setting options
      */
-    public final const OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR = 'use-safe-or-unsafe-default-behavior';
+    public final const OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR = 'use-restrictive-or-not-default-behavior';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
@@ -106,10 +106,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
-        $useUnsafeDefaults = BehaviorHelpers::areUnsafeDefaultsEnabled();
+        $useNonRestrictive = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::RESET_SETTINGS => [
-                self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR => $useUnsafeDefaults ? ResetSettingsOptions::UNSAFE : ResetSettingsOptions::SAFE,
+                self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useNonRestrictive ? ResetSettingsOptions::NON_RESTRICTIVE : ResetSettingsOptions::RESTRICTIVE,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -149,14 +149,14 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
-                    'safe-or-unsafe-behavior-description'
+                    'restrictive-or-not-behavior-description'
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
-                    \__('When the settings are reset, the default values can follow a "safe" or "unsafe" behavior:', 'graphql-api'),
+                    \__('When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:', 'graphql-api'),
                     \__('Feature', 'graphql-api'),
-                    \__('Safe behavior', 'graphql-api'),
-                    \__('Unsafe behavior', 'graphql-api'),
+                    \__('Restrictive behavior', 'graphql-api'),
+                    \__('Non-restrictive behavior', 'graphql-api'),
                     implode(
                         '</tr><tr>',
                         [
@@ -223,7 +223,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::CSS_STYLE => 'display: none;',
             ];
 
-            $option = self::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR;
+            $option = self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -232,12 +232,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p>',
-                    \__('Choose to use either the "safe" or "unsafe" default settings.', 'graphql-api'),
+                    \__('Choose if to use restrictive or non-restrictive default settings.', 'graphql-api'),
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    ResetSettingsOptions::SAFE => \__('Use "safe" default behavior for the Settings', 'graphql-api'),
-                    ResetSettingsOptions::UNSAFE => \__('Use "unsafe" default behavior for the Settings', 'graphql-api'),
+                    ResetSettingsOptions::RESTRICTIVE => \__('Use the restrictive default behavior for the Settings', 'graphql-api'),
+                    ResetSettingsOptions::NON_RESTRICTIVE => \__('Use the non-restrictive default behavior for the Settings', 'graphql-api'),
                 ],
                 Properties::CSS_STYLE => 'display: none;',
             ];

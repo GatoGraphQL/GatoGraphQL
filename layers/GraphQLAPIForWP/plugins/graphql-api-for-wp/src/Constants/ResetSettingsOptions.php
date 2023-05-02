@@ -6,6 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Constants;
 
 class ResetSettingsOptions
 {
-    public final const SAFE = 'safe';
-    public final const UNSAFE = 'unsafe';
+    public final const RESTRICTIVE = 'restrictive';
+    public final const NON_RESTRICTIVE = 'nonRestrictive';
 }

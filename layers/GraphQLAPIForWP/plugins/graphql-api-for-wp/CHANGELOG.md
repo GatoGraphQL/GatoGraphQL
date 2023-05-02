@@ -12,7 +12,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
 - Added documentation for PRO modules (provided by the GraphQL API PRO plugin, released alongside the GraphQL API for WordPress plugin's v1.0), and their corresponding Schema Configuration functionalities
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
-- Reset settings, and choose to use "safe" or "unsafe" default settings
+- Reset settings, and choose to use restrictive or non-restrictive default settings
 - Added documentation page "Use Cases, Best Practices, and Recipes"
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
 - Sort the Schema Configuration entries by name
@@ -28,7 +28,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
-- Env var `ENABLE_UNSAFE_DEFAULTS` has been renamed to `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR`, and "Reset Settings" must be clicked on the "Plugin Management" tab of the Settings page for the new value to be applied
+- Env var `ENABLE_UNSAFE_DEFAULTS` has been renamed to `SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR`, and "Reset Settings" must be clicked on the "Plugin Management" tab of the Settings page for the new value to be applied
 
 ## 0.10.2 - 24/02/2013
 

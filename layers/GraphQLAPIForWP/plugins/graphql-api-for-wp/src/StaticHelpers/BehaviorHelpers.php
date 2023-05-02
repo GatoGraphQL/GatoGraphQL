@@ -14,19 +14,19 @@ use PoP\Root\Environment as RootEnvironment;
 
 class BehaviorHelpers
 {
-    private static ?bool $areUnsafeDefaultsEnabled = null;
+    private static ?bool $areNonRestrictiveDefaultsEnabled = null;
 
     public static function getDefaultBehavior(): string
     {
-        return static::areUnsafeDefaultsEnabled()
+        return static::areNonRestrictiveDefaultsEnabled()
             ? Behaviors::DENY
             : Behaviors::ALLOW;
     }
 
-    public static function areUnsafeDefaultsEnabled(): bool
+    public static function areNonRestrictiveDefaultsEnabled(): bool
     {
-        if (self::$areUnsafeDefaultsEnabled !== null) {
-            return self::$areUnsafeDefaultsEnabled;
+        if (self::$areNonRestrictiveDefaultsEnabled !== null) {
+            return self::$areNonRestrictiveDefaultsEnabled;
         }
 
         $pluginOptionsFormHandler = new PluginOptionsFormHandler();
@@ -36,43 +36,43 @@ class BehaviorHelpers
          * If Settings => Reset Settings was just submitted
          * (i.e. we are in options.php)
          */
-        $useSafeOrUnsafeDefaultBehavior = $pluginOptionsFormHandler->maybeOverrideValueFromForm(
+        $useRestrictiveOrNotDefaultBehavior = $pluginOptionsFormHandler->maybeOverrideValueFromForm(
             null,
             PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
-            PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+            PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
         );
-        if ($useSafeOrUnsafeDefaultBehavior !== null) {
-            self::$areUnsafeDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
+        if ($useRestrictiveOrNotDefaultBehavior !== null) {
+            self::$areNonRestrictiveDefaultsEnabled = $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
         } elseif (
             $userSettingsManager->hasSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
-                PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             )
         ) {
             /**
              * Take stored value of Settings => Reset Settings on DB
              */
-            $useSafeOrUnsafeDefaultBehavior = $userSettingsManager->getSetting(
+            $useRestrictiveOrNotDefaultBehavior = $userSettingsManager->getSetting(
                 PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
-                PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR
+                PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR
             );
-            self::$areUnsafeDefaultsEnabled = $useSafeOrUnsafeDefaultBehavior === ResetSettingsOptions::UNSAFE;
-        } elseif (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR) !== false) {
+            self::$areNonRestrictiveDefaultsEnabled = $useRestrictiveOrNotDefaultBehavior === ResetSettingsOptions::NON_RESTRICTIVE;
+        } elseif (getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR) !== false) {
             /**
-             * If env var `SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
+             * If env var `SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
              */
-            self::$areUnsafeDefaultsEnabled = (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
-        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR)) {
+            self::$areNonRestrictiveDefaultsEnabled = (bool)getenv(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
+        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
             /**
-             * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR` is defined
+             * If wp-config.php constant `GRAPHQL_API_SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined
              */
-            self::$areUnsafeDefaultsEnabled = (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_UNSAFE_DEFAULT_BEHAVIOR);
+            self::$areNonRestrictiveDefaultsEnabled = (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_NON_RESTRICTIVE_DEFAULT_BEHAVIOR);
         } else {
             /**
              * Base case: If on the DEV or PROD environment
              */
-            self::$areUnsafeDefaultsEnabled = RootEnvironment::isApplicationEnvironmentDev();
+            self::$areNonRestrictiveDefaultsEnabled = RootEnvironment::isApplicationEnvironmentDev();
         }
-        return self::$areUnsafeDefaultsEnabled;
+        return self::$areNonRestrictiveDefaultsEnabled;
     }
 }

@@ -495,26 +495,26 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         // Lower the security constraints for the static app
-        $useUnsafe = BehaviorHelpers::areUnsafeDefaultsEnabled();
+        $useNonRestrictive = BehaviorHelpers::areNonRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
                 ModuleSettingOptions::CUSTOMPOST_TYPES => ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES,
             ],
             self::SCHEMA_POSTS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
             ],
             self::SCHEMA_PAGES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
             ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
                 self::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_USER_ROLES => [
@@ -523,24 +523,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             self::SCHEMA_MEDIA => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
             ],
             self::SCHEMA_MENUS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 100,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 100,
             ],
             self::SCHEMA_TAGS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 200,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 200,
                 ModuleSettingOptions::TAG_TAXONOMIES => ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES,
             ],
             self::SCHEMA_CATEGORIES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 20,
-                ModuleSettingOptions::LIST_MAX_LIMIT => $useUnsafe ? -1 : 200,
+                ModuleSettingOptions::LIST_MAX_LIMIT => $useNonRestrictive ? -1 : 200,
                 ModuleSettingOptions::CATEGORY_TAXONOMIES => ConfigurationDefaultValues::DEFAULT_CATEGORY_TAXONOMIES,
             ],
             self::SCHEMA_SETTINGS => [
-                ModuleSettingOptions::ENTRIES => $useUnsafe ? [] : [
+                ModuleSettingOptions::ENTRIES => $useNonRestrictive ? [] : [
                     'siteurl',
                     'home',
                     'blogname',

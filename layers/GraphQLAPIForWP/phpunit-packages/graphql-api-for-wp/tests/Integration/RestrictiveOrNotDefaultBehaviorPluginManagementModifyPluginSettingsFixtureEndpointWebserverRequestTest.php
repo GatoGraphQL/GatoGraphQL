@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 
-class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class RestrictiveOrNotDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {
@@ -25,26 +25,26 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
         /**
          * Do not use the single endpoint (as it's disabled)
          */
-        $providerItems['safe-or-unsafe-default-behavior:1'][2] = 'graphql/mobile-app/';
+        $providerItems['restrictive-or-not-default-behavior:1'][2] = 'graphql/mobile-app/';
 
         /**
          * The single endpoint is disabled, then the client returns some
          * HTML as response, not JSON
          */
-        $providerItems['safe-or-unsafe-default-behavior'][0] = 'text/html';
-        $providerItems['safe-or-unsafe-default-behavior'][1] = null;
+        $providerItems['restrictive-or-not-default-behavior'][0] = 'text/html';
+        $providerItems['restrictive-or-not-default-behavior'][1] = null;
 
         return $providerItems;
     }
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-safe-or-unsafe-default-behavior';
+        return __DIR__ . '/fixture-restrictive-or-not-default-behavior';
     }
 
     protected function getSettingsKey(): string
     {
-        return PluginManagementFunctionalityModuleResolver::OPTION_USE_SAFE_OR_UNSAFE_DEFAULT_BEHAVIOR;
+        return PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR;
     }
 
     protected function getModuleID(string $dataName): string
@@ -54,6 +54,6 @@ class SafeOrUnsafeDefaultBehaviorPluginManagementModifyPluginSettingsFixtureEndp
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return ResetSettingsOptions::SAFE;
+        return ResetSettingsOptions::RESTRICTIVE;
     }
 }
