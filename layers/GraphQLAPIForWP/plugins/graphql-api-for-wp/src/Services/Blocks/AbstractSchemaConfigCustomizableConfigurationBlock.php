@@ -11,7 +11,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
     /**
      * @param array<string,mixed> $attributes
      */
-    public function renderBlock(array $attributes, string $content): string
+    final public function renderBlock(array $attributes, string $content): string
     {
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
