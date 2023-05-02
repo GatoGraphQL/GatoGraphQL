@@ -27,4 +27,23 @@ abstract class AbstractCustomizableConfigurationSchemaConfigurationExecuter exte
     }
 
     abstract protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void;
+
+    /**
+     * Only execute the Schema Configuration if block option
+     * "Customize configuration? (Or use default from Settings?)"
+     * has value `true` (i.e. "Use custom configuration")
+     */
+    final public function executeNonAppliedSchemaConfiguration(): void
+    {
+        $customizeConfiguration = $schemaConfigBlockDataItem['attrs'][AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
+        if (!$customizeConfiguration) {
+            return;
+        }
+        $this->doExecuteNonAppliedSchemaConfiguration();
+    }
+
+    protected function doExecuteNonAppliedSchemaConfiguration(): void
+    {
+        // By default, do nothing
+    }
 }
