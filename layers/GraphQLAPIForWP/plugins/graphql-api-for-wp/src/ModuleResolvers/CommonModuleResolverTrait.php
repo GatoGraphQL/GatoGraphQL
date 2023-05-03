@@ -20,7 +20,7 @@ trait CommonModuleResolverTrait
         return $this->getSettingsInfoContent(
             sprintf(
                 '%s<ul><li>%s</li><li>%s</li><li>%s</li></ul>',
-                \__('This value will be used when:', 'graphql-api'),
+                \__('This value will be used whenever:', 'graphql-api'),
                 \__('The endpoint does not have a Schema Configuration assigned to it', 'graphql-api'),
                 sprintf(
                     \__('Block <code>%s</code> has not been added to the Schema Configuration', 'graphql-api'),
