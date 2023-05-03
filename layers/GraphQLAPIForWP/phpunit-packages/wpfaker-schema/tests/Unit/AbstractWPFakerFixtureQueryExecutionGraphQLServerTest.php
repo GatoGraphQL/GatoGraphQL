@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\WPFakerSchema\Unit;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
-use GraphQLByPoP\GraphQLServer\Unit\AbstractFixtureQueryExecutionGraphQLServerTestCase;
+use GraphQLByPoP\GraphQLServer\Unit\AbstractFixtureQueryExecutionGraphQLServerTestCaseCase;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnitForGraphQLAPI\WPFakerSchema\DataParsing\WordPressDataParser;
@@ -21,7 +21,7 @@ use function Brain\Monkey\Functions\stubEscapeFunctions;
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
 
-abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
+abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase extends AbstractFixtureQueryExecutionGraphQLServerTestCaseCase
 {
     use MockeryPHPUnitIntegration;
 

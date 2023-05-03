@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-abstract class AbstractModifyCPTBlockAttributesWebserverRequestTest extends AbstractWebserverRequestTestCase
+abstract class AbstractModifyCPTBlockAttributesWebserverRequestTestCase extends AbstractWebserverRequestTestCaseCase
 {
     use ModifyCPTBlockAttributesWebserverRequestTestCaseTrait;
 

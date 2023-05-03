@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-abstract class AbstractSingleEndpointQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
+abstract class AbstractSingleEndpointQueryExecutionFixtureWebserverRequestTestCaseCase extends AbstractFixtureEndpointWebserverRequestTestCaseCase
 {
     /**
      * Single endpoint, with non-logged-in user

@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 use PoP\Root\Module\ModuleInterface;
 
-abstract class AbstractConvertInputValueFromSingleToListFixtureQueryExecutionGraphQLServerTest extends AbstractEnabledDisabledFixtureQueryExecutionGraphQLServerTestCase
+abstract class AbstractConvertInputValueFromSingleToListFixtureQueryExecutionGraphQLServerTestCase extends AbstractEnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseCase
 {
     protected function getFixtureFolder(): string
     {

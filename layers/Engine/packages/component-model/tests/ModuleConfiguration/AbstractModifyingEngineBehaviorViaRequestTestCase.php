@@ -9,13 +9,13 @@ use PoP\ComponentModel\DataStructureFormatters\HTMLDataStructureFormatter;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\AbstractTestCase;
+use PoP\ComponentModel\AbstractTestCaseCase;
 use PoP\Root\App;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Module as RootModule;
 use PoP\Root\Module\ModuleInterface;
 
-abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends AbstractTestCase
+abstract class AbstractModifyingEngineBehaviorViaRequestTestCaseCase extends AbstractTestCaseCase
 {
     protected static function beforeBootApplicationModules(): void
     {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\RootWP;
 
-use PoP\Root\AbstractTestCase as UpstreamAbstractTestCase;
+use PoP\Root\AbstractTestCaseCase as UpstreamAbstractTestCaseCase;
 use PoP\Root\AppLoaderInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\RootWP\StateManagers\HookManager;
 
-abstract class AbstractWordPressTestCase extends UpstreamAbstractTestCase
+abstract class AbstractWordPressTestCaseCase extends UpstreamAbstractTestCaseCase
 {
     protected static function getAppLoader(): AppLoaderInterface
     {

@@ -10,7 +10,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
  * "introspection-query.json" (namespaced schema) and
  * "introspection-query:0.json" (non-namespaced schema) are the same.
  */
-class CanonicalNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTest
+class CanonicalNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getFixtureFolder(): string
     {

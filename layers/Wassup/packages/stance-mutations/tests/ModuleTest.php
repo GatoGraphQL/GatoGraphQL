@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations;
 
-use PoP\ComponentModel\AbstractModuleTest;
+use PoP\ComponentModel\AbstractModuleTestCase;
 
 /**
  * Made abstract to disable the test
  */
-abstract class ModuleTest extends AbstractModuleTest
+abstract class ModuleTest extends AbstractModuleTestCase
 {
 }

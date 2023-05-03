@@ -9,7 +9,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 /**
  * Test that enabling/disabling a module works well.
  */
-abstract class AbstractCodeEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest extends AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest
+abstract class AbstractCodeEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase
 {
     /**
      * @return array<string,array<string,mixed>> An array of [$moduleName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]

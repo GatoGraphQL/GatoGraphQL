@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractClientPathSettingsWebserverRequestTest;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractClientPathSettingsWebserverRequestTestCase;
 
 /**
  * Test that updating the path for a client (GraphiQL/Voyager) works well
  */
-class ClientPathSettingsWebserverRequestTest extends AbstractClientPathSettingsWebserverRequestTest
+class ClientPathSettingsWebserverRequestTest extends AbstractClientPathSettingsWebserverRequestTestCase
 {
     use SingleEndpointClientWebserverRequestTestCaseTrait;
 

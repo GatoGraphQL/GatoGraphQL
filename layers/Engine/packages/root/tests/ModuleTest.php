@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-class ModuleTest extends AbstractTestCase
+class ModuleTest extends AbstractTestCaseCase
 {
     /**
      * The root module cannot have any dependency

@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 /**
  * Test that accepting a URL produces the expected status code
  */
-abstract class AbstractRequestURLPathSettingsWebserverRequestTest extends AbstractModifyPluginSettingsWebserverRequestTest
+abstract class AbstractRequestURLPathSettingsWebserverRequestTestCase extends AbstractModifyPluginSettingsWebserverRequestTestCase
 {
     use RequestURLWebserverRequestTestCaseTrait;
 

@@ -6,7 +6,7 @@ namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\App;
 
-abstract class AbstractModuleTest extends AbstractTestCase
+abstract class AbstractModuleTestCase extends AbstractTestCaseCase
 {
     /**
      * The module must have some dependency (only the root has not)

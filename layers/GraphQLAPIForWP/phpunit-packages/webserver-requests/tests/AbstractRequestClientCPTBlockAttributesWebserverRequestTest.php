@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 /**
  * Test that accepting a URL produces the expected status code
  */
-abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTest extends AbstractModifyCPTBlockAttributesWebserverRequestTest
+abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase extends AbstractModifyCPTBlockAttributesWebserverRequestTestCase
 {
     use RequestURLWebserverRequestTestCaseTrait;
 

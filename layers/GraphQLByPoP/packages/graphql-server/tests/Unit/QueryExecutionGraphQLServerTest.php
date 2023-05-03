@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 use PoP\Engine\ObjectModels\Root;
 
-class QueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQLServerTestCase
+class QueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQLServerTestCaseCase
 {
     /**
      * @return mixed[]

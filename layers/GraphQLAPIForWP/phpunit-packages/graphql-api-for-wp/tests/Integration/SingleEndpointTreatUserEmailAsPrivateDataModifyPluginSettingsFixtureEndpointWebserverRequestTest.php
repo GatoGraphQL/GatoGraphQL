@@ -9,7 +9,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
  * assigned to it, so there is no validation to allow or deny
  * access to "private data" fields, and these are always accessible
  */
-class SingleEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest
+class SingleEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {

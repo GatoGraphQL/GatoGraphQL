@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCaseCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
 use function file_get_contents;
 
-abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
+abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCaseCase extends AbstractEndpointWebserverRequestTestCaseCase
 {
     use FixtureTestCaseTrait;
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;

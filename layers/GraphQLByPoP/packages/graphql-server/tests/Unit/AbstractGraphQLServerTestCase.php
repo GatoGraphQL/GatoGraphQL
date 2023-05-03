@@ -13,7 +13,7 @@ use RuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use stdClass;
 
-abstract class AbstractGraphQLServerTestCase extends TestCase
+abstract class AbstractGraphQLServerTestCaseCase extends TestCase
 {
     private static StandaloneGraphQLServer $standaloneGraphQLServer;
 

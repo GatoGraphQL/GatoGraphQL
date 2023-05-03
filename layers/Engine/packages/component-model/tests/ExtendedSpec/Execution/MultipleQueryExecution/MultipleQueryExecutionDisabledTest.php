@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ExtendedSpec\Execution\MultipleQueryExecution;
 
-class MultipleQueryExecutionDisabledTest extends AbstractMultipleQueryExecutionTest
+class MultipleQueryExecutionDisabledTest extends AbstractMultipleQueryExecutionTestCase
 {
     protected static function enabled(): bool
     {

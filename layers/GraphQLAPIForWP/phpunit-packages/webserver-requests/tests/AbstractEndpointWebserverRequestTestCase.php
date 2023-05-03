@@ -8,7 +8,7 @@ use GuzzleHttp\RequestOptions;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use RuntimeException;
 
-abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserverRequestTestCase
+abstract class AbstractEndpointWebserverRequestTestCaseCase extends AbstractWebserverRequestTestCaseCase
 {
     public const RESPONSE_COMPARISON_EQUALS = 0;
     public const RESPONSE_COMPARISON_NOT_EQUALS = 1;

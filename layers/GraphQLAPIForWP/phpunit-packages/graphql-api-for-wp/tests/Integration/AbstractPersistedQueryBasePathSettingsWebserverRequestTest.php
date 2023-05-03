@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestURLPathSettingsWebserverRequestTest;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestURLPathSettingsWebserverRequestTestCase;
 
 /**
  * Test that updating the base path for the persisted queries works well
  */
-abstract class AbstractPersistedQueryBasePathSettingsWebserverRequestTest extends AbstractRequestURLPathSettingsWebserverRequestTest
+abstract class AbstractPersistedQueryBasePathSettingsWebserverRequestTestCase extends AbstractRequestURLPathSettingsWebserverRequestTestCase
 {
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newPath} ]

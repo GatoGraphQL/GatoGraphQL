@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestClientCPTBlockAttributesWebserverRequestTest;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase;
 
-abstract class AbstractExposeClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractRequestClientCPTBlockAttributesWebserverRequestTest
+abstract class AbstractExposeClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTestCase extends AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase
 {
     protected function getClientURL(): string
     {

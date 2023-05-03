@@ -10,7 +10,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRe
  * Test that only the schema editor user can visualize/execute
  * a Private Custom Endpoint
  */
-abstract class AbstractAccessPrivateCustomEndpointQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
+abstract class AbstractAccessPrivateCustomEndpointQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCaseCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
     use AccessPrivateCustomEndpointQueryExecutionFixtureWebserverRequestTestTrait;

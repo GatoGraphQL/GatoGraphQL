@@ -9,7 +9,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 /**
  * Test that enabling/disabling a required 3rd-party plugin works well.
  */
-abstract class AbstractCodeThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest
+abstract class AbstractCodeThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase
 {
     /**
      * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]

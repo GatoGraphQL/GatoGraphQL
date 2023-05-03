@@ -11,6 +11,6 @@ use PHPUnit\Framework\TestCase;
  * the plugin to be considered for PHPStan,
  * since the /tests folder is required
  */
-abstract class AbstractPluginTest extends TestCase
+abstract class AbstractPluginTestCase extends TestCase
 {
 }

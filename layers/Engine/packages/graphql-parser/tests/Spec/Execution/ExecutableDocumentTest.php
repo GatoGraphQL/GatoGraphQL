@@ -15,11 +15,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
-use PoP\Root\AbstractTestCase;
+use PoP\Root\AbstractTestCaseCase;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class ExecutableDocumentTest extends AbstractTestCase
+class ExecutableDocumentTest extends AbstractTestCaseCase
 {
     private ?ParserInterface $parser = null;
 

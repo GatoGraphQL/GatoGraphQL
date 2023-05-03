@@ -12,7 +12,7 @@ use function file_get_contents;
 /**
  * Test that enabling/disabling a module works well.
  */
-abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest extends AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest
+abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase
 {
     use FixtureTestCaseTrait;
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;

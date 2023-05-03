@@ -29,12 +29,12 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Ast\SubscriptionOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
-use PoP\Root\AbstractTestCase;
+use PoP\Root\AbstractTestCaseCase;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 use stdClass;
 
-class ParserTest extends AbstractTestCase
+class ParserTest extends AbstractTestCaseCase
 {
     private ?ParserInterface $parser = null;
 

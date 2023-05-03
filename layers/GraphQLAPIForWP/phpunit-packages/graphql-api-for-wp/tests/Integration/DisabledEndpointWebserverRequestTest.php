@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCaseCase;
 
-class DisabledEndpointWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
+class DisabledEndpointWebserverRequestTest extends AbstractEndpointWebserverRequestTestCaseCase
 {
     /**
      * Assert that the endpoints are disabled,

@@ -11,7 +11,7 @@ use function file_get_contents;
 /**
  * Test that enabling/disabling a required 3rd-party plugin works well.
  */
-abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest
+abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase
 {
     use FixtureTestCaseTrait;
 

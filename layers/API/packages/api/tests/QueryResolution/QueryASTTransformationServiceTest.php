@@ -13,9 +13,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\ComponentModel\AbstractTestCase;
+use PoP\ComponentModel\AbstractTestCaseCase;
 
-class QueryASTTransformationServiceTest extends AbstractTestCase
+class QueryASTTransformationServiceTest extends AbstractTestCaseCase
 {
     protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {

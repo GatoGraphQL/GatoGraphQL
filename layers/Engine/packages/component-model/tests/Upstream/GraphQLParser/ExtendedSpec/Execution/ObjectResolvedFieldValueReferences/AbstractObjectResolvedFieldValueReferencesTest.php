@@ -20,7 +20,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\ComponentModel\AbstractTestCase;
+use PoP\ComponentModel\AbstractTestCaseCase;
 use PoP\Root\Module\ModuleInterface;
 
 /**
@@ -39,7 +39,7 @@ use PoP\Root\Module\ModuleInterface;
  *
  *   AST entity `DocumentDynamicVariableReference` remains as is
  */
-abstract class AbstractObjectResolvedFieldValueReferencesTest extends AbstractTestCase
+abstract class AbstractObjectResolvedFieldValueReferencesTestCase extends AbstractTestCaseCase
 {
     private ?ParserInterface $parser = null;
 

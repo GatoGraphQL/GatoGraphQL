@@ -19,9 +19,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\AbstractTestCase;
+use PoP\Root\AbstractTestCaseCase;
 
-class RequestValidatorTest extends AbstractTestCase
+class RequestValidatorTest extends AbstractTestCaseCase
 {
     /**
      * @dataProvider invalidRequestProvider

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
-abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends AbstractGraphQLServerTestCase
+abstract class AbstractFixtureQueryExecutionGraphQLServerTestCaseCase extends AbstractGraphQLServerTestCaseCase
 {
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 

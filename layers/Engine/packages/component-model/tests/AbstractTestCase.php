@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\Root\AbstractTestCase as UpstreamAbstractTestCase;
+use PoP\Root\AbstractTestCaseCase as UpstreamAbstractTestCaseCase;
 
-abstract class AbstractTestCase extends UpstreamAbstractTestCase
+abstract class AbstractTestCaseCase extends UpstreamAbstractTestCaseCase
 {
     use ComponentModelTestCaseTrait;
 }

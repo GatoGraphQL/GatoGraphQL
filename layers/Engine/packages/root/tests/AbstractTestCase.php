@@ -12,7 +12,7 @@ use PoP\Root\StateManagers\HookManager;
 use PoP\Root\StateManagers\HookManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class AbstractTestCase extends TestCase
+abstract class AbstractTestCaseCase extends TestCase
 {
     protected static ContainerInterface $container;
 

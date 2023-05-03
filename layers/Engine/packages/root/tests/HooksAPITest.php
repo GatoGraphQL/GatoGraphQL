@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\AbstractTestCase;
+use PoP\Root\AbstractTestCaseCase;
 
-class HooksAPITest extends AbstractTestCase
+class HooksAPITest extends AbstractTestCaseCase
 {
     /**
      * Test that applyFilter returns $value

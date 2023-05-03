@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Engine;
 
-use PoP\ComponentModel\AbstractModuleTest;
+use PoP\ComponentModel\AbstractModuleTestCase;
 
-class ModuleTest extends AbstractModuleTest
+class ModuleTest extends AbstractModuleTestCase
 {
 }

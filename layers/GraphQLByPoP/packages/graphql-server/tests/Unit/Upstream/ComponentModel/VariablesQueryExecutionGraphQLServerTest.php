@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit\Upstream\ComponentModel;
 
-use GraphQLByPoP\GraphQLServer\Unit\AbstractGraphQLServerTestCase;
+use GraphQLByPoP\GraphQLServer\Unit\AbstractGraphQLServerTestCaseCase;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class VariablesQueryExecutionGraphQLServerTest extends AbstractGraphQLServerTestCase
+class VariablesQueryExecutionGraphQLServerTest extends AbstractGraphQLServerTestCaseCase
 {
     public function testQueries(): void
     {
