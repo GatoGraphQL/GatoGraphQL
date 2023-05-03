@@ -7,16 +7,8 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Module
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
-/**
- * The cache modules have different behavior depending on the environment:
- * - "development": visible, disabled by default
- * - "production": hidden, enabled by default
- *
- * @author Leonardo Losoviz <leo@getpop.org>
- */
 class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
@@ -53,11 +45,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     {
         switch ($module) {
             case self::CACHE_CONTROL:
-                return [
-                    [
-                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-                    ],
-                ];
+                return [];
         }
         return parent::getDependedModuleLists($module);
     }

@@ -25,6 +25,11 @@ trait CommonModuleResolverTrait
         return \__('<ul><li>Single endpoint</li><li>Custom endpoints</li><li>Persisted queries</li></ul>', 'graphql-api');
     }
 
+    protected function getPressCtrlToSelectMoreThanOneOptionLabel(): string
+    {
+        return \__('Press <code>ctrl</code> or <code>shift</code> keys to select more than one.', 'graphql-api');
+    }
+
     protected function getCollapsible(
         string $content,
         ?string $showDetailsLabel = null,

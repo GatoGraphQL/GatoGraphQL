@@ -61,5 +61,22 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
         }
     }
 
+    final public function executeNoneAppliedSchemaConfiguration(): void
+    {
+        // Only if the module is not disabled
+        if (!$this->isServiceEnabled()) {
+            return;
+        }
+
+        $this->doExecuteNoneAppliedSchemaConfiguration();
+    }
+
+    protected function doExecuteNoneAppliedSchemaConfiguration(): void
+    {
+        foreach ($this->getSchemaConfigurationExecuterRegistry()->getEnabledSchemaConfigurationExecuters() as $schemaConfigurationExecuter) {
+            $schemaConfigurationExecuter->executeNoneAppliedSchemaConfiguration();
+        }
+    }
+
     abstract protected function getSchemaConfigurationExecuterRegistry(): SchemaConfigurationExecuterRegistryInterface;
 }

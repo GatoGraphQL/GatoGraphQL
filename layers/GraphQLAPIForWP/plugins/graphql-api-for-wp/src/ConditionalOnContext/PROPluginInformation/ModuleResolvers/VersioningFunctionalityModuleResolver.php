@@ -7,7 +7,6 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Module
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use PoP\Root\Environment as RootEnvironment;
@@ -59,11 +58,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     {
         switch ($module) {
             case self::FIELD_DEPRECATION:
-                return [
-                    [
-                        SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-                    ],
-                ];
+                return [];
         }
         return parent::getDependedModuleLists($module);
     }

@@ -9,13 +9,6 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\PerformanceFunctionalityModuleResolverTrait;
 use GraphQLAPI\GraphQLAPI\Plugin;
 
-/**
- * The cache modules have different behavior depending on the environment:
- * - "development": visible, disabled by default
- * - "production": hidden, enabled by default
- *
- * @author Leonardo Losoviz <leo@getpop.org>
- */
 class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait {

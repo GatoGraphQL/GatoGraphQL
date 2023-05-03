@@ -9,8 +9,6 @@ use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractSchemaConfigurationExecuter implements SchemaConfigurationExecuterInterface
@@ -18,7 +16,6 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
     use BasicServiceTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
-    private ?BlockHelpers $blockHelpers = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -29,29 +26,6 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
         /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    final public function setBlockHelpers(BlockHelpers $blockHelpers): void
-    {
-        $this->blockHelpers = $blockHelpers;
-    }
-    final protected function getBlockHelpers(): BlockHelpers
-    {
-        /** @var BlockHelpers */
-        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
-    }
-
-    /**
-     * @return array<string,mixed>|null Data inside the block is saved as key (string) => value
-     */
-    protected function getSchemaConfigBlockDataItem(int $schemaConfigurationID): ?array
-    {
-        $block = $this->getBlock();
-        return $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
-            $schemaConfigurationID,
-            $block
-        );
-    }
-
-    abstract protected function getBlock(): BlockInterface;
 
     public function getEnablingModule(): ?string
     {
@@ -81,5 +55,12 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
             return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
         }
         return true;
+    }
+
+    /**
+     * By default, do nothing
+     */
+    public function executeNoneAppliedSchemaConfiguration(): void
+    {
     }
 }

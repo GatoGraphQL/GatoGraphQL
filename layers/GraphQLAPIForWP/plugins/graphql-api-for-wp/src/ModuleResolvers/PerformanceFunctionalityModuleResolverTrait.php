@@ -6,13 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
 use GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
-/**
- * The cache modules have different behavior depending on the environment:
- * - "development": visible, disabled by default
- * - "production": hidden, enabled by default
- *
- * @author Leonardo Losoviz <leo@getpop.org>
- */
 trait PerformanceFunctionalityModuleResolverTrait
 {
     /**

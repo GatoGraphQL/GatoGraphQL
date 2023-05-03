@@ -713,6 +713,38 @@
 		<wp:is_sticky>0</wp:is_sticky>
 		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
 		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
+														</item>
+					<item>
+		<title><![CDATA[With empty schema config]]></title>
+		<link>https://graphql-api.lndo.site/graphql/with-empty-schema-config/</link>
+		<pubDate>Wed, 05 Oct 2022 06:47:42 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-endpoint&#038;p=596</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-configuration {"schemaConfiguration":594} /-->
+
+<!-- wp:graphql-api/custom-endpoint-options /-->
+
+<!-- wp:graphql-api/endpoint-graphiql /-->
+
+<!-- wp:graphql-api/endpoint-voyager /-->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>596</wp:post_id>
+		<wp:post_date><![CDATA[2022-10-05 06:47:42]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-10-05 06:47:42]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-10-05 06:47:42]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-10-05 06:47:42]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[with-empty-schema-config]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[graphql-endpoint]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="graphql-endpoint-category" nicename="development"><![CDATA[development]]></category>
+		<category domain="graphql-endpoint-category" nicename="internal"><![CDATA[internal]]></category>
 														</item><item>
 		<title><![CDATA[Hello world!]]></title>
 		<link>https://graphql-api.lndo.site/hello-world/</link>
@@ -1614,13 +1646,13 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-global-fields /-->
 
-<!-- wp:graphql-api-pro/schema-config-access-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-access-control /-->
 
 <!-- wp:graphql-api-pro/schema-config-schema-mode /-->
 
-<!-- wp:graphql-api-pro/schema-config-cache-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-cache-control /-->
 
-<!-- wp:graphql-api-pro/schema-config-field-deprecation-lists /-->
+<!-- wp:graphql-api-pro/schema-config-field-deprecation /-->
 
 <!-- wp:graphql-api-pro/schema-config-multiple-query-execution /-->
 
@@ -1684,13 +1716,13 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-global-fields /-->
 
-<!-- wp:graphql-api-pro/schema-config-access-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-access-control /-->
 
 <!-- wp:graphql-api-pro/schema-config-schema-mode /-->
 
-<!-- wp:graphql-api-pro/schema-config-cache-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-cache-control /-->
 
-<!-- wp:graphql-api-pro/schema-config-field-deprecation-lists /-->
+<!-- wp:graphql-api-pro/schema-config-field-deprecation /-->
 
 <!-- wp:graphql-api-pro/schema-config-multiple-query-execution /-->
 
@@ -2072,13 +2104,13 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-global-fields /-->
 
-<!-- wp:graphql-api-pro/schema-config-access-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-access-control /-->
 
 <!-- wp:graphql-api-pro/schema-config-schema-mode /-->
 
-<!-- wp:graphql-api-pro/schema-config-cache-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-cache-control /-->
 
-<!-- wp:graphql-api-pro/schema-config-field-deprecation-lists /-->
+<!-- wp:graphql-api-pro/schema-config-field-deprecation /-->
 
 <!-- wp:graphql-api-pro/schema-config-multiple-query-execution /-->
 
@@ -2175,13 +2207,13 @@ video/mp4
 
 <!-- wp:graphql-api-pro/schema-config-global-fields /-->
 
-<!-- wp:graphql-api-pro/schema-config-access-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-access-control /-->
 
 <!-- wp:graphql-api-pro/schema-config-schema-mode /-->
 
-<!-- wp:graphql-api-pro/schema-config-cache-control-lists /-->
+<!-- wp:graphql-api-pro/schema-config-cache-control /-->
 
-<!-- wp:graphql-api-pro/schema-config-field-deprecation-lists /-->
+<!-- wp:graphql-api-pro/schema-config-field-deprecation /-->
 
 <!-- wp:graphql-api-pro/schema-config-multiple-query-execution /-->
 
@@ -2280,7 +2312,7 @@ video/mp4
 		<link>https://graphql-api.lndo.site/graphql-schemaconfig/client-access/</link>
 		<pubDate>Tue, 21 Mar 2023 05:57:33 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=809</guid>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=592</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:graphql-api/schema-config-expose-sensitive-data {"enabledConst":"disabled"} /-->
 
@@ -2296,6 +2328,30 @@ video/mp4
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[client-access]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														</item>
+					<item>
+		<title><![CDATA[Empty schema config]]></title>
+		<link>https://graphql-api.lndo.site/graphql-schemaconfig/empty-schema-config/</link>
+		<pubDate>Tue, 21 Mar 2023 05:57:33 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-schemaconfig&#038;p=594</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>594</wp:post_id>
+		<wp:post_date><![CDATA[2023-03-21 05:57:33]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2023-03-21 05:57:33]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2023-03-21 05:57:33]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-03-21 05:57:33]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[empty-schema-config]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>

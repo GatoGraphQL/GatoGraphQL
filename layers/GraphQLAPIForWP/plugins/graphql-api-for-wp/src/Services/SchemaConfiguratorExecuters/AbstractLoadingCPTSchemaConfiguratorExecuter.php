@@ -33,18 +33,24 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
         return parent::isServiceEnabled();
     }
 
+    protected function isSchemaConfiguratorActive(): bool
+    {
+        if (!\is_singular($this->getCustomPostType())) {
+            return false;
+        }
+        $customPostID = App::getState(['routing', 'queried-object-id']);
+        if ($customPostID === null) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Initialize the configuration if visiting the corresponding CPT
      */
     protected function getSchemaConfigurationID(): ?int
     {
-        if (!\is_singular($this->getCustomPostType())) {
-            return null;
-        }
         $customPostID = App::getState(['routing', 'queried-object-id']);
-        if ($customPostID === null) {
-            return null;
-        }
         return $this->getEndpointBlockHelpers()->getSchemaConfigurationID(
             $this->getLoadingCPTSchemaConfiguratorModule(),
             $customPostID,

@@ -689,11 +689,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Included custom post types', 'graphql-api'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.<br/>%s', 'graphql-api'),
+                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'graphql-api'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
                         $this->getPostObjectTypeResolver()->getTypeName(),
                         $this->getPageObjectTypeResolver()->getTypeName(),
                         $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
+                        $this->getPressCtrlToSelectMoreThanOneOptionLabel(),
                         $defaultValueDesc,
                     ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
@@ -787,10 +788,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                             \__('tag', 'graphql-api'),
                         ),
                         sprintf(
-                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.<br/>%s', 'graphql-api'),
+                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'graphql-api'),
                             $this->getTagUnionTypeResolver()->getTypeName(),
                             $this->getPostTagObjectTypeResolver()->getTypeName(),
                             $this->getGenericTagObjectTypeResolver()->getTypeName(),
+                            $this->getPressCtrlToSelectMoreThanOneOptionLabel(),
                             $defaultValueDesc,
                         )
                     ),
@@ -833,10 +835,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                             \__('category', 'graphql-api'),
                         ),
                         sprintf(
-                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>Press <code>ctrl</code> or <code>shift</code> keys to select more than one.<br/>%s', 'graphql-api'),
+                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'graphql-api'),
                             $this->getCategoryUnionTypeResolver()->getTypeName(),
                             $this->getPostCategoryObjectTypeResolver()->getTypeName(),
                             $this->getGenericCategoryObjectTypeResolver()->getTypeName(),
+                            $this->getPressCtrlToSelectMoreThanOneOptionLabel(),
                             $defaultValueDesc,
                         )
                     ),
