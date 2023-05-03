@@ -26,7 +26,7 @@ class CustomEndpointPropertiesEditorScript extends AbstractEditorScript
 
     protected function getScriptName(): string
     {
-        return 'custom-endpoint-properties';
+        return 'custom-endpoint-overview';
     }
 
     public function getEnablingModule(): ?string
