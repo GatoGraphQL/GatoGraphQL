@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
@@ -36,20 +35,8 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
      */
     public function isServiceEnabled(): bool
     {
-        $moduleRegistry = $this->getModuleRegistry();
-        if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
-            && $this->requiresSchemaConfigurationModuleEnabled()
-        ) {
-            return false;
-        }
-
         // Only enable the service if the corresponding module is also enabled
-        return $moduleRegistry->isModuleEnabled($this->getEnablingModule());
-    }
-
-    protected function requiresSchemaConfigurationModuleEnabled(): bool
-    {
-        return true;
+        return $this->getModuleRegistry()->isModuleEnabled($this->getEnablingModule());
     }
 
     abstract protected function getEnablingModule(): string;
