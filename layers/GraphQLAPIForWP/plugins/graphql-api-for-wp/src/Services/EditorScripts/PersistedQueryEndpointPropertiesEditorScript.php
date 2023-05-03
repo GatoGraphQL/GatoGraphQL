@@ -31,7 +31,7 @@ class PersistedQueryEndpointPropertiesEditorScript extends AbstractEditorScript
 
     public function getEnablingModule(): ?string
     {
-        return UserInterfaceFunctionalityModuleResolver::PERSISTED_QUERY_ENDPOINT_PROPERTIES;
+        return UserInterfaceFunctionalityModuleResolver::PERSISTED_QUERY_ENDPOINT_OVERVIEW;
     }
 
     /**
