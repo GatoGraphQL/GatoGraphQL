@@ -53,7 +53,7 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
 
         $moduleRegistry = $this->getModuleRegistry();
         if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
-            && $this->requiresSchemaConfigurationModuleEnabled()
+            && !$this->mustAlsoExecuteWhenSchemaConfigurationModuleIsDisabled()
         ) {
             return false;
         }
@@ -65,9 +65,9 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
         return true;
     }
 
-    protected function requiresSchemaConfigurationModuleEnabled(): bool
+    protected function mustAlsoExecuteWhenSchemaConfigurationModuleIsDisabled(): bool
     {
-        return true;
+        return false;
     }
 
     /**
