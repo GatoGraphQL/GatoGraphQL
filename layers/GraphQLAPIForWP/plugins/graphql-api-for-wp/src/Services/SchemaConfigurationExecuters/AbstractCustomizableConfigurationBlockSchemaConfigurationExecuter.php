@@ -25,6 +25,9 @@ abstract class AbstractCustomizableConfigurationBlockSchemaConfigurationExecuter
         $this->doExecuteBlockSchemaConfiguration($schemaConfigBlockDataItem);
     }
 
+    /**
+     * @param array<string,mixed> $schemaConfigBlockDataItem
+     */
     abstract protected function doExecuteBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void;
 
     protected function executeNotCustomizedSchemaConfiguration(): void
