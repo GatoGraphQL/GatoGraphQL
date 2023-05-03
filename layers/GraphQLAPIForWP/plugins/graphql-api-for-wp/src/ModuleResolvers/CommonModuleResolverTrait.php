@@ -23,11 +23,12 @@ trait CommonModuleResolverTrait
                 \__('This is the default value for the schema configuration.', 'graphql-api'),
                 $this->getCollapsible(
                     sprintf(
-                        '<br/>%s<ul><li>%s</li><li>%s</li><li>%s</li></ul>',
+                        '<br/>%s<ul><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>',
                         \__('It will be used whenever:', 'graphql-api'),
                         \__('The endpoint does not have a Schema Configuration assigned to it', 'graphql-api'),
+                        \__('The endpoint has Schema Configuration <code>"None"</code> assigned to it', 'graphql-api'),
                         sprintf(
-                            \__('Block <code>%s</code> has not been added to the Schema Configuration', 'graphql-api'),
+                            \__('Block <code>%s</code> has not been added to the selected Schema Configuration', 'graphql-api'),
                             $blockTitle
                         ),
                         \__('The value selected in the block is <code>"Default"</code>', 'graphql-api')
