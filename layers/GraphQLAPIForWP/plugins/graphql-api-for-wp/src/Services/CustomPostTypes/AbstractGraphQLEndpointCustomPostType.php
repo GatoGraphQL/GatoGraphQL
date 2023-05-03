@@ -267,12 +267,12 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     $enablingModule,
                     $post_id,
                 );
-                if ($schemaConfigurationID === null) {
-                    _e('(None selected)', 'graphql-api');
-                    break;
-                }
                 if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
                     _e('(None)', 'graphql-api');
+                    break;
+                }
+                if ($schemaConfigurationID === null) {
+                    _e('(None selected)', 'graphql-api');
                     break;
                 }
                 /** @var WP_Post */
