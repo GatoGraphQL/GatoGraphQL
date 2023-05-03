@@ -60,7 +60,9 @@ class EndpointBlockHelpers
     }
 
     /**
-     * Extract the Schema Configuration ID from the block stored in the post
+     * Extract the Schema Configuration ID from the block stored in the post.
+     *
+     * @return int|null The Schema Configuration ID, null if none was selected (in which case a default Schema Configuration can be applied), or -1 if "None" was selected (i.e. no default Schema Configuration must be applied)
      */
     public function getSchemaConfigurationID(string $module, int $customPostID): ?int
     {
@@ -86,9 +88,9 @@ class EndpointBlockHelpers
             return $this->getUserSettingSchemaConfigurationID($module);
         }
 
-        // Check if $schemaConfiguration is one of the meta options (default, none, inherit)
+        // Return `-1` to signify "Do not apply a Schema Configuration at all"
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
-            return null;
+            return EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE;
         }
 
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {

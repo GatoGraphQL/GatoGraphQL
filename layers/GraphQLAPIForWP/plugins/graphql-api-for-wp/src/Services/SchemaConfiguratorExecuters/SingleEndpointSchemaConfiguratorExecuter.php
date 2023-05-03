@@ -84,7 +84,9 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
 
     /**
-     * This is the Schema Configuration ID
+     * This is the Schema Configuration ID.
+     *
+     * @return int|null The Schema Configuration ID, null if none was selected (in which case a default Schema Configuration can be applied), or -1 if "None" was selected (i.e. no default Schema Configuration must be applied)
      */
     protected function getSchemaConfigurationID(): ?int
     {

@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\HookNames;
 use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
 use PoP\Root\App;
@@ -266,6 +267,10 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     $enablingModule,
                     $post_id,
                 );
+                if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
+                    _e('"None" selected', 'graphql-api');
+                    break;
+                }
                 if ($schemaConfigurationID === null) {
                     _e('(None)', 'graphql-api');
                     break;

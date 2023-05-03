@@ -62,7 +62,9 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     }
 
     /**
-     * Initialize the configuration if editing a persisted query
+     * Initialize the configuration if editing a persisted query.
+     *
+     * @return int|null The Schema Configuration ID, null if none was selected (in which case a default Schema Configuration can be applied), or -1 if "None" was selected (i.e. no default Schema Configuration must be applied)
      */
     protected function getSchemaConfigurationID(): ?int
     {
