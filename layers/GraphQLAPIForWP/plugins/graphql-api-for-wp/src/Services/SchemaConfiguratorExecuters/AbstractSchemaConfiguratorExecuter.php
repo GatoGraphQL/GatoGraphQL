@@ -61,7 +61,9 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
             return;
         }
         $schemaConfigurationID = $this->getSchemaConfigurationID();
-        if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
+        if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE
+            && $this->doesSchemaConfigurationNoneSkipApplyingTheDefaultSettings()
+        ) {
             return;
         }
         $schemaConfigurator = $this->getSchemaConfigurator();
@@ -70,6 +72,18 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
             return;
         }
         $schemaConfigurator->executeSchemaConfiguration($schemaConfigurationID);
+    }
+
+    
+    /**
+     * Should selecting Schema Configuration "None" (with artificial ID "-1")
+     * also apply the default Settings? It has been decided that no, it must not.
+     *
+     * This is a legacy method, kept for documentation purposes.
+     */
+    private function doesSchemaConfigurationNoneSkipApplyingTheDefaultSettings(): bool
+    {
+        return false;
     }
 
     abstract protected function isSchemaConfiguratorActive(): bool;
