@@ -18,7 +18,10 @@ trait CommonModuleResolverTrait
     protected function getDefaultValueDescription(string $blockTitle): string
     {
         return $this->getSettingsInfoContent(
-            \__('This value will be used when the endpoint does not have a Schema Configuration assigned to it, when block <code>%s</code> has not been added to the Schema Configuration, or when the block has selected option <code>"Default"</code>.', 'graphql-api')
+            sprintf(
+                \__('This value will be used when the endpoint does not have a Schema Configuration assigned to it, when block <code>%s</code> has not been added to the Schema Configuration, or when the block has selected option <code>"Default"</code>.', 'graphql-api'),
+                $blockTitle
+            )
         );
     }
 
