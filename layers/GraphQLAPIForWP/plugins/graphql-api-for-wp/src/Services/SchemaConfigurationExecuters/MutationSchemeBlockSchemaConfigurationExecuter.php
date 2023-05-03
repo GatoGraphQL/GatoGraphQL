@@ -34,16 +34,15 @@ class MutationSchemeBlockSchemaConfigurationExecuter extends AbstractBlockSchema
         return SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS;
     }
 
-    public function executeSchemaConfiguration(int $schemaConfigurationID): void
+    /**
+     * @param array<string,mixed> $blockDataItem
+     */
+    protected function executeBlockSchemaConfiguration(array $blockDataItem): void
     {
-        $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($schemaConfigBlockDataItem === null) {
-            return;
-        }
         /**
          * Default value (if not defined in DB): `default`. Then do nothing
          */
-        $mutationScheme = $schemaConfigBlockDataItem['attrs'][SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? null;
+        $mutationScheme = $blockDataItem['attrs'][SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? null;
         /**
          * Only execute if it has any selectable value (no null, no invented).
          * If "default", then the general settings will already take effect,
