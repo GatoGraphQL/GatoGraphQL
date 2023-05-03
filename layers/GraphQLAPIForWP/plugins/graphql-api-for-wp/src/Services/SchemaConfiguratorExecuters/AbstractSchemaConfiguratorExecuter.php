@@ -61,7 +61,10 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
             return;
         }
         $schemaConfigurationID = $this->getSchemaConfigurationID();
-        if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
+        if (
+            $schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE
+            && $this->doesSchemaConfigurationNoneSkipApplyingTheDefaultSettings()
+        ) {
             return;
         }
         $schemaConfigurator = $this->getSchemaConfigurator();
@@ -70,6 +73,24 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
             return;
         }
         $schemaConfigurator->executeSchemaConfiguration($schemaConfigurationID);
+    }
+
+
+    /**
+     * Selecting Schema Configuration "None" (with artificial ID "-1")
+     * also applies the default Settings.
+     *
+     * This is because otherwise this default behavior (which is executed
+     * in the SchemaConfigurationExecuter, for ACLs, CCLs and FDLs)
+     * would be different from the default settings added in
+     * PluginInitializationConfiguration (Namespacing, Nested mutations, etc),
+     * which are always executed.
+     *
+     * This is a legacy method, kept for documentation purposes.
+     */
+    private function doesSchemaConfigurationNoneSkipApplyingTheDefaultSettings(): bool
+    {
+        return false;
     }
 
     abstract protected function isSchemaConfiguratorActive(): bool;
