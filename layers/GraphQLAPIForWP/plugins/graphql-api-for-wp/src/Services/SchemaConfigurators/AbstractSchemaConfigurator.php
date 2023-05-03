@@ -25,6 +25,15 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
+    /**
+     * Important! Do not check if the SCHEMA_CONFIGURATION module
+     * is enabled, as to configure the schema with default Settings.
+     *
+     * That check will happen in AbstractSchemaConfigurationExecuter,
+     * where each executer can decide if to run or not.
+     *
+     * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/SchemaConfigurationExecuters/AbstractSchemaConfigurationExecuter.php
+     */
     public function isServiceEnabled(): bool
     {
         $moduleRegistry = $this->getModuleRegistry();
