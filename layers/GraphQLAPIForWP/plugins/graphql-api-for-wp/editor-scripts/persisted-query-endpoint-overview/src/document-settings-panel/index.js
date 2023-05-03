@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
-import PersistedQueryEndpointProperties from './persisted-query-endpoint-overview.js';
+import PersistedQueryEndpointOverview from './persisted-query-endpoint-overview.js';
 
 /**
  * Constants to customize
@@ -15,7 +15,7 @@ const DocumentSettingsPanel = () => (
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
         title={ __('Persisted Query Endpoint Overview', 'graphql-api') }
     >
-        <PersistedQueryEndpointProperties />
+        <PersistedQueryEndpointOverview />
     </PluginDocumentSettingPanel>
 );
 export default DocumentSettingsPanel;

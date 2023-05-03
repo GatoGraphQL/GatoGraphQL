@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 
-class PersistedQueryEndpointPropertiesEditorScript extends AbstractEditorScript
+class PersistedQueryEndpointOverviewEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
