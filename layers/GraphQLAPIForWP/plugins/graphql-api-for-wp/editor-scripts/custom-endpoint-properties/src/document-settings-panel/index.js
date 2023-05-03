@@ -13,7 +13,7 @@ const DOCUMENT_SETTINGS_PANEL_NAME = 'custom-endpoint-properties-panel';
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Custom Endpoint Properties', 'graphql-api') }
+        title={ __('Custom Endpoint Overview', 'graphql-api') }
     >
         <CustomEndpointProperties />
     </PluginDocumentSettingPanel>
