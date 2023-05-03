@@ -607,7 +607,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
         $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'graphql-api');
         $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each %2$s taxonomy\'s associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'graphql-api');
-        $defaultValueDesc = $this->getDefaultValueDescription();
+        $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if (
             in_array($module, [
