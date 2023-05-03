@@ -15,9 +15,26 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 trait CommonModuleResolverTrait
 {
-    protected function getDefaultValueDescription(): string
+    protected function getDefaultValueDescription(string $blockTitle): string
     {
-        return $this->getSettingsInfoContent(\__('This value will be used when option <code>"Default"</code> is selected in the Schema Configuration, or when the endpoint does not have a Schema Configuration assigned to it.', 'graphql-api'));
+        return $this->getSettingsInfoContent(
+            sprintf(
+                \__('%s %s', 'graphql-api'),
+                \__('This is the default value for the schema configuration.', 'graphql-api'),
+                $this->getCollapsible(
+                    sprintf(
+                        '<br/>%s<ul><li>%s</li><li>%s</li><li>%s</li></ul>',
+                        \__('It will be used whenever:', 'graphql-api'),
+                        \__('The endpoint does not have a Schema Configuration assigned to it', 'graphql-api'),
+                        sprintf(
+                            \__('Block <code>%s</code> has not been added to the Schema Configuration', 'graphql-api'),
+                            $blockTitle
+                        ),
+                        \__('The value selected in the block is <code>"Default"</code>', 'graphql-api')
+                    ),
+                )
+            )
+        );
     }
 
     protected function getPublicEndpointsListDescription(): string

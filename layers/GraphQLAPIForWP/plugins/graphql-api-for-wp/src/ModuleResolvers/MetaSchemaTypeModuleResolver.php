@@ -224,7 +224,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'graphql-api');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
-            $defaultValueDesc = $this->getDefaultValueDescription();
+            $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
             $moduleDescriptions = [
                 self::SCHEMA_CUSTOMPOST_META => sprintf(
                     \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
