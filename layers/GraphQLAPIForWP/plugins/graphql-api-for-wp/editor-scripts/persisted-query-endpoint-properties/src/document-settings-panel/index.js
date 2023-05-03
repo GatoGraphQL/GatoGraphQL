@@ -13,7 +13,7 @@ const DOCUMENT_SETTINGS_PANEL_NAME = 'persisted-query-endpoint-properties-panel'
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Persisted Query Endpoint Properties', 'graphql-api') }
+        title={ __('Persisted Query Endpoint Overview', 'graphql-api') }
     >
         <PersistedQueryEndpointProperties />
     </PluginDocumentSettingPanel>

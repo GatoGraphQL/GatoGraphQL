@@ -117,7 +117,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::WELCOME_GUIDES => \__('Welcome Guides', 'graphql-api'),
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional GraphQL API Documentation', 'graphql-api'),
             self::CUSTOM_ENDPOINT_PROPERTIES => \__('Custom Endpoint Overview', 'graphql-api'),
-            self::PERSISTED_QUERY_ENDPOINT_PROPERTIES => \__('Persisted Query Endpoint Properties', 'graphql-api'),
+            self::PERSISTED_QUERY_ENDPOINT_PROPERTIES => \__('Persisted Query Endpoint Overview', 'graphql-api'),
             default => $module,
         };
     }
