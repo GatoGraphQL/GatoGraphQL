@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
-class OrderedFieldsFixtureQueryExecutionGraphQLServerTest extends AbstractOrderedFieldsFixtureQueryExecutionGraphQLServerTest
+class OrderedFieldsFixtureQueryExecutionGraphQLServerTest extends AbstractOrderedFieldsFixtureQueryExecutionGraphQLServerTestCase
 {
     /**
      * Directory under the fixture files are placed

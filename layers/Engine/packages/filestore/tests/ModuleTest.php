@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\FileStore;
 
-use PoP\Root\AbstractModuleTest;
+use PoP\Root\AbstractModuleTestCase;
 
-class ModuleTest extends AbstractModuleTest
+class ModuleTest extends AbstractModuleTestCase
 {
 }

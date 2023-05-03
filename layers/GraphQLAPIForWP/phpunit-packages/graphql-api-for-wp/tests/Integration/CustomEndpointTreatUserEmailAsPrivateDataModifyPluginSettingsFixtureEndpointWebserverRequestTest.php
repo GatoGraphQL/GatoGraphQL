@@ -11,7 +11,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
  * Then, those fields treated as “sensitive” won't be added to the schema,
  * and the query will produce an error.
  */
-class CustomEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest
+class CustomEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {

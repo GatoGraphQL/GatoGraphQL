@@ -24,7 +24,7 @@ class CustomHeaderAppender
      * Send the WP REST nonce as a header, to make it easier
      * to execute REST endpoints for integration tests.
      *
-     * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/tests/AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest.php
+     * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/tests/AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase.php
      */
     public function addRESTNonceAsHeader(): void
     {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
-use PoP\Root\AbstractModuleTest;
+use PoP\Root\AbstractModuleTestCase;
 
 /**
  * Made abstract to disable the test
  */
-abstract class ModuleTest extends AbstractModuleTest
+abstract class ModuleTest extends AbstractModuleTestCase
 {
 }
