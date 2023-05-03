@@ -28,12 +28,19 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
     public function isServiceEnabled(): bool
     {
         $moduleRegistry = $this->getModuleRegistry();
-        if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
+        if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
+            && $this->requiresSchemaConfigurationModuleEnabled()
+        ) {
             return false;
         }
 
         // Only enable the service if the corresponding module is also enabled
         return $moduleRegistry->isModuleEnabled($this->getEnablingModule());
+    }
+
+    protected function requiresSchemaConfigurationModuleEnabled(): bool
+    {
+        return true;
     }
 
     abstract protected function getEnablingModule(): string;
