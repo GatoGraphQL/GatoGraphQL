@@ -58,7 +58,7 @@ For the single endpoint and custom endpoints, though, the query must be provided
 For instance, the following GraphQL query:
 
 ```graphql
-{
+query {
   posts {
     id
     title
