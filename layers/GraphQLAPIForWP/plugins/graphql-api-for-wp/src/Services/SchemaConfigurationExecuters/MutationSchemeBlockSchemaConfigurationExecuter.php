@@ -15,7 +15,7 @@ use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Engine\Module as EngineModule;
 use PoP\Root\Module\ModuleConfigurationHelpers;
 
-class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
+class MutationSchemeBlockSchemaConfigurationExecuter extends AbstractBlockSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
     private ?SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock = null;
 

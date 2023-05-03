@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock;
 
-abstract class AbstractCustomizableConfigurationSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter
+abstract class AbstractCustomizableConfigurationBlockSchemaConfigurationExecuter extends AbstractBlockSchemaConfigurationExecuter
 {
     /**
      * Only execute the Schema Configuration if block option
