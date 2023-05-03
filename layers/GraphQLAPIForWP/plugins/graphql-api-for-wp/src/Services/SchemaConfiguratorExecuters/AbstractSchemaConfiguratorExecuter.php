@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
+use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\Root\Module\ApplicationEvents;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
@@ -59,8 +60,11 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
         if (!$this->isSchemaConfiguratorActive()) {
             return;
         }
-        $schemaConfigurator = $this->getSchemaConfigurator();
         $schemaConfigurationID = $this->getSchemaConfigurationID();
+        if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
+            return;
+        }
+        $schemaConfigurator = $this->getSchemaConfigurator();
         if ($schemaConfigurationID === null) {
             $schemaConfigurator->executeNoneAppliedSchemaConfiguration();
             return;
@@ -71,7 +75,9 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
     abstract protected function isSchemaConfiguratorActive(): bool;
 
     /**
-     * Provide the ID of the custom post containing the Schema Configuration block
+     * Provide the ID of the custom post containing the Schema Configuration block.
+     *
+     * @return int|null The Schema Configuration ID, null if none was selected (in which case a default Schema Configuration can be applied), or -1 if "None" was selected (i.e. no default Schema Configuration must be applied)
      */
     abstract protected function getSchemaConfigurationID(): ?int;
 
