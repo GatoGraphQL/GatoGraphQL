@@ -31,13 +31,12 @@ class SchemaCategoriesSchemaConfigurationExecuter extends AbstractCustomizableCo
         return SchemaTypeModuleResolver::SCHEMA_CATEGORIES;
     }
 
-    protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void
+    /**
+     * @param array<string,mixed> $blockDataItem
+     */
+    protected function doExecuteSchemaConfiguration(array $blockDataItem): void
     {
-        $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($schemaConfigBlockDataItem === null) {
-            return;
-        }
-        $includedCategoryTaxonomies = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaCategoriesBlock::ATTRIBUTE_NAME_INCLUDED_CATEGORY_TAXONOMIES] ?? [];
+        $includedCategoryTaxonomies = $blockDataItem['attrs'][SchemaConfigSchemaCategoriesBlock::ATTRIBUTE_NAME_INCLUDED_CATEGORY_TAXONOMIES] ?? [];
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings

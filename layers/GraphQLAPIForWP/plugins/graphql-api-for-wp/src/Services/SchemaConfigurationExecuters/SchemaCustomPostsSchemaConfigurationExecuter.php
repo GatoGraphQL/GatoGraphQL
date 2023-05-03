@@ -31,13 +31,12 @@ class SchemaCustomPostsSchemaConfigurationExecuter extends AbstractCustomizableC
         return SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS;
     }
 
-    protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void
+    /**
+     * @param array<string,mixed> $blockDataItem
+     */
+    protected function doExecuteSchemaConfiguration(array $blockDataItem): void
     {
-        $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($schemaConfigBlockDataItem === null) {
-            return;
-        }
-        $includedCustomPostTypes = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES] ?? [];
+        $includedCustomPostTypes = $blockDataItem['attrs'][SchemaConfigSchemaCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES] ?? [];
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings

@@ -11,13 +11,12 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 abstract class AbstractSchemaAllowAccessToEntriesSchemaConfigurationExecuter extends AbstractCustomizableConfigurationSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
-    protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void
+    /**
+     * @param array<string,mixed> $blockDataItem
+     */
+    protected function doExecuteSchemaConfiguration(array $blockDataItem): void
     {
-        $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($schemaConfigBlockDataItem === null) {
-            return;
-        }
-        $entries = $schemaConfigBlockDataItem['attrs'][BlockAttributeNames::ENTRIES] ?? [];
+        $entries = $blockDataItem['attrs'][BlockAttributeNames::ENTRIES] ?? [];
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings
@@ -28,7 +27,7 @@ abstract class AbstractSchemaAllowAccessToEntriesSchemaConfigurationExecuter ext
             fn () => $entries,
             PHP_INT_MAX
         );
-        $behavior = $schemaConfigBlockDataItem['attrs'][BlockAttributeNames::BEHAVIOR] ?? $this->getDefaultBehavior();
+        $behavior = $blockDataItem['attrs'][BlockAttributeNames::BEHAVIOR] ?? $this->getDefaultBehavior();
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings

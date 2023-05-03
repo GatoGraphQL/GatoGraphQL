@@ -31,13 +31,12 @@ class SchemaTagsSchemaConfigurationExecuter extends AbstractCustomizableConfigur
         return SchemaTypeModuleResolver::SCHEMA_CATEGORIES;
     }
 
-    protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void
+    /**
+     * @param array<string,mixed> $blockDataItem
+     */
+    protected function doExecuteSchemaConfiguration(array $blockDataItem): void
     {
-        $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($schemaConfigBlockDataItem === null) {
-            return;
-        }
-        $includedTagTaxonomies = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES] ?? [];
+        $includedTagTaxonomies = $blockDataItem['attrs'][SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES] ?? [];
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings

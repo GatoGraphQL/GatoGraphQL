@@ -25,10 +25,13 @@ abstract class AbstractCustomizableConfigurationSchemaConfigurationExecuter exte
             $this->executeNotCustomizedSchemaConfiguration();
             return;
         }
-        $this->doExecuteSchemaConfiguration($schemaConfigurationID);
+        $this->doExecuteSchemaConfiguration($schemaConfigBlockDataItem);
     }
 
-    abstract protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void;
+    /**
+     * @param array<string,mixed> $blockDataItem
+     */
+    abstract protected function doExecuteSchemaConfiguration(array $blockDataItem): void;
 
     protected function executeNotCustomizedSchemaConfiguration(): void
     {
