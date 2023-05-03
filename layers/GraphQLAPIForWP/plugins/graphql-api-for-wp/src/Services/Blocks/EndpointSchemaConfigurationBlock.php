@@ -100,12 +100,12 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         /**
          * Print the list of all the contained Access Control blocks
          */
-        $blockContentPlaceholder = <<<EOF
-        <div class="%s">
-            <h3 class="%s">%s</strong></h3>
-            %s
-        </div>
-EOF;
+        $blockContentPlaceholder = <<<HTML
+            <div class="%s">
+                <h3 class="%s">%s</strong></h3>
+                %s
+            </div>
+        HTML;
         $schemaConfigurationContent = '';
         $schemaConfigurationID = $attributes[self::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION] ?? null;
         if ($schemaConfigurationID === self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {

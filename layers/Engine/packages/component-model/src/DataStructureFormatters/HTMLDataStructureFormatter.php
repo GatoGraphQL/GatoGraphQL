@@ -41,7 +41,7 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
 
     protected function getCSSStyles(): string
     {
-        return <<<EOF
+        return <<<HTML
         <style>
         table {
             #width: 100%;
@@ -61,7 +61,7 @@ class HTMLDataStructureFormatter extends AbstractDataStructureFormatter
             background-color: lightblue;
         }
         </style>
-        EOF;
+        HTML;
     }
 
     /**
