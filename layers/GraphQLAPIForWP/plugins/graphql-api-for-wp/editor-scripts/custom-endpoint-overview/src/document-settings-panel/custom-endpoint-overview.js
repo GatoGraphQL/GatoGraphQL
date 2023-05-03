@@ -16,7 +16,7 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
  */
 import './style.scss';
 
-export default function CustomEndpointProperties() {
+export default function CustomEndpointOverview() {
 	const {
 		postSlug,
 		postLink,
