@@ -76,8 +76,14 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
 
     
     /**
-     * Should selecting Schema Configuration "None" (with artificial ID "-1")
-     * also apply the default Settings? It has been decided that no, it must not.
+     * Selecting Schema Configuration "None" (with artificial ID "-1")
+     * also applies the default Settings.
+     * 
+     * This is because otherwise this default behavior (which is executed
+     * in the SchemaConfigurationExecuter, for ACLs, CCLs and FDLs)
+     * would be different from the default settings added in
+     * PluginInitializationConfiguration (Namespacing, Nested mutations, etc),
+     * which are always executed.
      *
      * This is a legacy method, kept for documentation purposes.
      */
