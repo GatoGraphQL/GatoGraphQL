@@ -88,9 +88,9 @@ class EndpointBlockHelpers
             return $this->getUserSettingSchemaConfigurationID($module);
         }
 
-        // Check if $schemaConfiguration is one of the meta options (default, none, inherit)
+        // Return `-1` to signify "Do not apply a Schema Configuration at all"
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
-            return null;
+            return EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE;
         }
 
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
