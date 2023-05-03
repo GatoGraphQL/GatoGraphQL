@@ -88,7 +88,7 @@ class EndpointBlockHelpers
             return $this->getUserSettingSchemaConfigurationID($module);
         }
 
-        // Return `-1` to signify "Do not apply a Schema Configuration at all"
+        // Return `-1` to allow to signify "Do not apply a Schema Configuration at all"
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
             return EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE;
         }
