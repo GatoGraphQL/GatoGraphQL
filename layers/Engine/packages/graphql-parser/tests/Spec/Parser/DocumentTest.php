@@ -8,10 +8,10 @@ use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
-use PoP\Root\AbstractTestCaseCase;
+use PoP\Root\AbstractTestCase;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-class DocumentTest extends AbstractTestCaseCase
+class DocumentTest extends AbstractTestCase
 {
     private ?ParserInterface $parser = null;
 

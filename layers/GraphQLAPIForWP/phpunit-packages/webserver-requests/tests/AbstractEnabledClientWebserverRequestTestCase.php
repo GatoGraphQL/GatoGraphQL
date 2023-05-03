@@ -8,7 +8,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
  * Test that enabling/disabling clients (GraphiQL/Voyager)
  * in Custom Endpoints works well
  */
-abstract class AbstractEnabledClientWebserverRequestTestCaseCase extends AbstractWebserverRequestTestCaseCase
+abstract class AbstractEnabledClientWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
     use ClientWebserverRequestTestCaseTrait;
 

@@ -18,7 +18,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
  *
  * @see layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
  */
-class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCaseCase
+class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use InternalGraphQLServerWebserverRequestTestTrait;
 

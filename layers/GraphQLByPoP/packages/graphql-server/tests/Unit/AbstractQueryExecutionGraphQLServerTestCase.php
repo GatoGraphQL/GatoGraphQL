@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
-abstract class AbstractQueryExecutionGraphQLServerTestCaseCase extends AbstractGraphQLServerTestCaseCase
+abstract class AbstractQueryExecutionGraphQLServerTestCase extends AbstractGraphQLServerTestCase
 {
     /**
      * @dataProvider graphQLServerExecutionProvider

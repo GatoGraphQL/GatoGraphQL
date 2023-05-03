@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-class AdminClientQueryExecutionFixtureWebserverRequestTest extends AbstractAdminClientQueryExecutionFixtureWebserverRequestTestCaseCase
+class AdminClientQueryExecutionFixtureWebserverRequestTest extends AbstractAdminClientQueryExecutionFixtureWebserverRequestTestCase
 {
     protected function getFixtureFolder(): string
     {

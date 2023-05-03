@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 /**
  * Test that disabling clients (GraphiQL/Voyager) works well
  */
-abstract class AbstractDisabledClientWebserverRequestTestCaseCase extends AbstractWebserverRequestTestCaseCase
+abstract class AbstractDisabledClientWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
     use ClientWebserverRequestTestCaseTrait;
 

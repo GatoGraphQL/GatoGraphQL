@@ -15,10 +15,10 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
-use PoP\Root\AbstractTestCaseCase;
+use PoP\Root\AbstractTestCase;
 use PoP\Root\Exception\ShouldNotHappenException;
 
-class AstTest extends AbstractTestCaseCase
+class AstTest extends AbstractTestCase
 {
     public function testArgument(): void
     {

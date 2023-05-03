@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-class MyContentQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCaseCase
+class MyContentQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 

@@ -17,10 +17,10 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\AbstractTestCaseCase;
+use PoP\Root\AbstractTestCase;
 use stdClass;
 
-class FieldEqualsToTest extends AbstractTestCaseCase
+class FieldEqualsToTest extends AbstractTestCase
 {
     /**
      * @dataProvider getLeafFieldEqualsToLeafFieldProviderEntries

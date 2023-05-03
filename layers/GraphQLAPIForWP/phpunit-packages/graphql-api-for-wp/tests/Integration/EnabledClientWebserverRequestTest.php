@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEnabledClientWebserverRequestTestCaseCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEnabledClientWebserverRequestTestCase;
 
 /**
  * Test that enabling clients (GraphiQL/Voyager) works well
  */
-class EnabledClientWebserverRequestTest extends AbstractEnabledClientWebserverRequestTestCaseCase
+class EnabledClientWebserverRequestTest extends AbstractEnabledClientWebserverRequestTestCase
 {
     /**
      * @return array<string,string[]>

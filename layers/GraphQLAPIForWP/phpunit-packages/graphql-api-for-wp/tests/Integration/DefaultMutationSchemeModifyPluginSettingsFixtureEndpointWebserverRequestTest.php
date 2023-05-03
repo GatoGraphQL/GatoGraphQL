@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 
-class DefaultMutationSchemeModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCaseCase
+class DefaultMutationSchemeModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {

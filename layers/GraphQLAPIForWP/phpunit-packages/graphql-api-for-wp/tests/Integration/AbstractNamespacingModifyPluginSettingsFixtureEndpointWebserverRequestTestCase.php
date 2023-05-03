@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 
-abstract class AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCaseCase
+abstract class AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     /**
      * Custom endpoint "unrestricted-schema" has no ACLs (so we get all the

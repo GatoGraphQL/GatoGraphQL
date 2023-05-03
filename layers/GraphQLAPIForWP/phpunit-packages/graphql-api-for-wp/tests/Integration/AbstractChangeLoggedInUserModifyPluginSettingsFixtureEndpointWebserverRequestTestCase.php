@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 /**
  * Execute the operations with a user other than the "admin"
  */
-abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCaseCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCaseCase
+abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected static ?string $differentUsername = null;
     protected static ?string $differentPassword = null;

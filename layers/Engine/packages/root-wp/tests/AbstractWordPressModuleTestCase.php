@@ -6,7 +6,7 @@ namespace PoP\RootWP;
 
 use PoP\Root\App;
 
-abstract class AbstractWordPressModuleTestCase extends AbstractWordPressTestCaseCase
+abstract class AbstractWordPressModuleTestCase extends AbstractWordPressTestCase
 {
     /**
      * The module must have some dependency (only the root has not)

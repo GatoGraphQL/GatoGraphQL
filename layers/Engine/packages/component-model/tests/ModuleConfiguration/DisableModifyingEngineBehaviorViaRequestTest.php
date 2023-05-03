@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleConfiguration;
 
-class DisableModifyingEngineBehaviorViaRequestTest extends AbstractModifyingEngineBehaviorViaRequestTestCaseCase
+class DisableModifyingEngineBehaviorViaRequestTest extends AbstractModifyingEngineBehaviorViaRequestTestCase
 {
     protected static function enableModifyingEngineBehaviorViaRequest(): bool
     {

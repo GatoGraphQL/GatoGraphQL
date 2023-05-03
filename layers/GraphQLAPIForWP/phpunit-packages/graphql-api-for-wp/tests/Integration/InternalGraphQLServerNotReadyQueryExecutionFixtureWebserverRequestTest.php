@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCaseCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 
 /**
  * Test the InternalGraphQLServer throws the GraphQLServerNotReady exception.
  *
  * @see layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
  */
-class InternalGraphQLServerNotReadyQueryExecutionFixtureWebserverRequestTest extends AbstractEndpointWebserverRequestTestCaseCase
+class InternalGraphQLServerNotReadyQueryExecutionFixtureWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
     use InternalGraphQLServerWebserverRequestTestTrait;
 

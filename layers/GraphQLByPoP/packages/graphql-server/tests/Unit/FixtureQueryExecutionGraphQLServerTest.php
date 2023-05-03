@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 use PoP\Root\Module\ModuleInterface;
 
-class FixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCaseCase
+class FixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
     /**
      * Directory under the fixture files are placed

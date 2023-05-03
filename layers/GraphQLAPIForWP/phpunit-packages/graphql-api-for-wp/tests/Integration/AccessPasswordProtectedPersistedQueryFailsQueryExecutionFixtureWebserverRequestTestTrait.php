@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCaseCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 
 trait AccessPasswordProtectedPersistedQueryFailsQueryExecutionFixtureWebserverRequestTestTrait
 {
@@ -36,6 +36,6 @@ trait AccessPasswordProtectedPersistedQueryFailsQueryExecutionFixtureWebserverRe
 
     protected function getResponseComparisonType(): ?int
     {
-        return AbstractEndpointWebserverRequestTestCaseCase::RESPONSE_COMPARISON_REGEX;
+        return AbstractEndpointWebserverRequestTestCase::RESPONSE_COMPARISON_REGEX;
     }
 }

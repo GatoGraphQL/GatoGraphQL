@@ -11,7 +11,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
  * the test. That's why these tests are done with the authenticated user
  * in WordPress, so the user can execute operations via the REST endpoint.
  */
-abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCaseCase
+abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 

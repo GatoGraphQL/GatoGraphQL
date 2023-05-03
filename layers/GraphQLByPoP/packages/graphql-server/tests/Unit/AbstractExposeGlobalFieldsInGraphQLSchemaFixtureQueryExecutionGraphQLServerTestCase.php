@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 use PoP\Root\Module\ModuleInterface;
 
-abstract class AbstractExposeGlobalFieldsInGraphQLSchemaFixtureQueryExecutionGraphQLServerTestCase extends AbstractEnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseCase
+abstract class AbstractExposeGlobalFieldsInGraphQLSchemaFixtureQueryExecutionGraphQLServerTestCase extends AbstractEnabledDisabledFixtureQueryExecutionGraphQLServerTestCase
 {
     protected function getFixtureFolder(): string
     {

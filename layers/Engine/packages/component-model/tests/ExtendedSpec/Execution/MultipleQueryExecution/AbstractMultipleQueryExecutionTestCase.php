@@ -18,11 +18,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
-use PoP\ComponentModel\AbstractTestCaseCase;
+use PoP\ComponentModel\AbstractTestCase;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Module\ModuleInterface;
 
-abstract class AbstractMultipleQueryExecutionTestCase extends AbstractTestCaseCase
+abstract class AbstractMultipleQueryExecutionTestCase extends AbstractTestCase
 {
     private ?ParserInterface $parser = null;
 

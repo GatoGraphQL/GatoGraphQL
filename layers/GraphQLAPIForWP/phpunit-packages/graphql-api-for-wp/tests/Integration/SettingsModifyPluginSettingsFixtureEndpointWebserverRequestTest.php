@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCaseCase
+class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {

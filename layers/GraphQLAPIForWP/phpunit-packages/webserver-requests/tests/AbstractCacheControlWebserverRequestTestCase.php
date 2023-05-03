@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-abstract class AbstractCacheControlWebserverRequestTestCaseCase extends AbstractWebserverRequestTestCaseCase
+abstract class AbstractCacheControlWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
     /**
      * @dataProvider provideCacheControlEntries

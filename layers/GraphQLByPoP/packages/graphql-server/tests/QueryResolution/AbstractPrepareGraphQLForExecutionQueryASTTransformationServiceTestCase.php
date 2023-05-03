@@ -18,11 +18,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\ComponentModel\AbstractTestCaseCase;
+use PoP\ComponentModel\AbstractTestCase;
 use PoP\Root\Module\ModuleInterface;
 use SplObjectStorage;
 
-abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTestCase extends AbstractTestCaseCase
+abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTestCase extends AbstractTestCase
 {
     /**
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration

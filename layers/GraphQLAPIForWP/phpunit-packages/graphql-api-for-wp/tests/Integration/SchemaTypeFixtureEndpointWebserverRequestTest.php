@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-class SchemaTypeFixtureEndpointWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCaseCase
+class SchemaTypeFixtureEndpointWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     protected function getFixtureFolder(): string
     {

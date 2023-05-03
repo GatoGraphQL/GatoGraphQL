@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use PHPUnitForGraphQLAPI\GraphQLAPI\Integration\AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCaseCase;
+use PHPUnitForGraphQLAPI\GraphQLAPI\Integration\AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase;
 
-class SchemaSelfFieldsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCaseCase
+class SchemaSelfFieldsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {

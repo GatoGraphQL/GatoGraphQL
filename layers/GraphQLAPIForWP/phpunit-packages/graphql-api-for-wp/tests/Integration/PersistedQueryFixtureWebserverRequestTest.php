@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractPersistedQueryFixtureWebserverRequestTestCaseCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractPersistedQueryFixtureWebserverRequestTestCase;
 
-class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFixtureWebserverRequestTestCaseCase
+class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFixtureWebserverRequestTestCase
 {
     protected function getFixtureFolder(): string
     {

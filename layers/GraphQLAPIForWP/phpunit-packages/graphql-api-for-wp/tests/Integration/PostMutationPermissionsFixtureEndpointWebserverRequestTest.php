@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 
-class PostMutationPermissionsFixtureEndpointWebserverRequestTest extends AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCaseCase
+class PostMutationPermissionsFixtureEndpointWebserverRequestTest extends AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getEndpoint(): string
     {

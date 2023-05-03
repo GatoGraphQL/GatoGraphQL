@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCaseCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\EnableDisableModuleWebserverRequestTestTrait;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
 /**
  * Test that disabling clients (GraphiQL/Voyager) works well
  */
-class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserverRequestTestCaseCase
+class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserverRequestTestCase
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
     use SingleEndpointClientWebserverRequestTestCaseTrait;

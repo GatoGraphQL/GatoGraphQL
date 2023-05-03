@@ -9,7 +9,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRe
 /**
  * Test that only the admin can access a draft custom endpoint
  */
-abstract class AbstractAccessDraftCustomEndpointQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCaseCase
+abstract class AbstractAccessDraftCustomEndpointQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 

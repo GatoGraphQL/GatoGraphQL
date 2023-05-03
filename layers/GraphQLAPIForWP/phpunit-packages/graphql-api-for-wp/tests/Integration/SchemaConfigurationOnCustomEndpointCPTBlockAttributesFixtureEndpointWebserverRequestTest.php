@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
 
-class SchemaConfigurationOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCaseCase
+class SchemaConfigurationOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
 {
     public const WEBSITE_CUSTOM_ENDPOINT_ID = 196;
     public const UNRESTRICTED_SCHEMA_SCHEMA_CONFIGURATION_ID = 304;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLByPoP\GraphQLServer\Unit\FixtureQueryExecutionGraphQLServerTestCaseTrait;
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCaseCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 use RuntimeException;
 use stdClass;
 
@@ -13,7 +13,7 @@ use function file_exists;
 use function file_get_contents;
 use function json_decode;
 
-abstract class AbstractFixtureEndpointWebserverRequestTestCaseCase extends AbstractEndpointWebserverRequestTestCaseCase
+abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 

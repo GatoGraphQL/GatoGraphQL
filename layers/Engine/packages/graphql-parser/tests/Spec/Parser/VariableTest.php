@@ -7,10 +7,10 @@ namespace PoP\GraphQLParser\Spec\Parser;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
-use PoP\Root\AbstractTestCaseCase;
+use PoP\Root\AbstractTestCase;
 use PoP\Root\Exception\ShouldNotHappenException;
 
-class VariableTest extends AbstractTestCaseCase
+class VariableTest extends AbstractTestCase
 {
     /**
      * Test if variable value equals expected value

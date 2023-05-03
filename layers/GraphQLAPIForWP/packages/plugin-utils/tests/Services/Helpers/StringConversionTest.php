@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\PluginUtils\Services\Helpers;
 
-use PoP\ComponentModel\AbstractTestCaseCase;
+use PoP\ComponentModel\AbstractTestCase;
 
-class StringConversionTest extends AbstractTestCaseCase
+class StringConversionTest extends AbstractTestCase
 {
     public function testDashesToCamelCase(): void
     {

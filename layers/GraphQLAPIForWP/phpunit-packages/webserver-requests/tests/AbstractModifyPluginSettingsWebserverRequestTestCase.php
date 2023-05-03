@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-abstract class AbstractModifyPluginSettingsWebserverRequestTestCase extends AbstractWebserverRequestTestCaseCase
+abstract class AbstractModifyPluginSettingsWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
     use ModifyPluginSettingsWebserverRequestTestCaseTrait;
 

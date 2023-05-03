@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\PluginUtils\Services\Helpers;
 
-use PoP\ComponentModel\AbstractTestCaseCase;
+use PoP\ComponentModel\AbstractTestCase;
 
-class URLParamHelpersTest extends AbstractTestCaseCase
+class URLParamHelpersTest extends AbstractTestCase
 {
     public function testEncodeURIComponent(): void
     {

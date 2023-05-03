@@ -9,7 +9,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRe
 /**
  * Test that only the admin can access a pending persisted query
  */
-abstract class AbstractAccessPendingPersistedQueryEndpointQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCaseCase
+abstract class AbstractAccessPendingPersistedQueryEndpointQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 

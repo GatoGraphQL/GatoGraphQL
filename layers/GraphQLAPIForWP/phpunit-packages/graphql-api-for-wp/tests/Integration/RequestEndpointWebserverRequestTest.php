@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCaseCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 
-class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverRequestTestCaseCase
+class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
     /**
      * Execute a GraphQL query against each of the endpoints

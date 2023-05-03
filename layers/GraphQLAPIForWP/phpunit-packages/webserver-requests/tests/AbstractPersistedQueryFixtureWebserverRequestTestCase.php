@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
 use RuntimeException;
 
-abstract class AbstractPersistedQueryFixtureWebserverRequestTestCaseCase extends AbstractEndpointWebserverRequestTestCaseCase
+abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
     use FixtureTestCaseTrait;
 

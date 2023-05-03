@@ -20,7 +20,7 @@ use RuntimeException;
 
 use function getenv;
 
-abstract class AbstractWebserverRequestTestCaseCase extends TestCase
+abstract class AbstractWebserverRequestTestCase extends TestCase
 {
     protected static ?Client $client = null;
     protected static ?CookieJar $cookieJar = null;
