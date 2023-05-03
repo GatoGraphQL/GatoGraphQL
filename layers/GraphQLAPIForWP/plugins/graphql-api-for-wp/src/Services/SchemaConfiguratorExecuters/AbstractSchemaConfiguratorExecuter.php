@@ -61,7 +61,8 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
             return;
         }
         $schemaConfigurationID = $this->getSchemaConfigurationID();
-        if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE
+        if (
+            $schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE
             && $this->doesSchemaConfigurationNoneSkipApplyingTheDefaultSettings()
         ) {
             return;
@@ -74,11 +75,11 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
         $schemaConfigurator->executeSchemaConfiguration($schemaConfigurationID);
     }
 
-    
+
     /**
      * Selecting Schema Configuration "None" (with artificial ID "-1")
      * also applies the default Settings.
-     * 
+     *
      * This is because otherwise this default behavior (which is executed
      * in the SchemaConfigurationExecuter, for ACLs, CCLs and FDLs)
      * would be different from the default settings added in
