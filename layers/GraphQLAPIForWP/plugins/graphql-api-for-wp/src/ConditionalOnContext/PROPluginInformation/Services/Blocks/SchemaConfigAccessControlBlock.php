@@ -17,7 +17,7 @@ class SchemaConfigAccessControlBlock extends AbstractSchemaConfigPROPluginPseudo
 
     public function getBlockPriority(): int
     {
-        return 10085;
+        return 10035;
     }
 
     public function getEnablingModule(): ?string
