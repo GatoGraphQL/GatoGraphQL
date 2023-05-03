@@ -16,7 +16,7 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
  */
 import './style.scss';
 
-export default function CustomEndpointProperties() {
+export default function PersistedQueryEndpointOverview() {
 	const {
 		postSlug,
 		postLink,
@@ -28,21 +28,13 @@ export default function CustomEndpointProperties() {
 		isPostPasswordProtected,
 		permalinkPrefix,
 		permalinkSuffix,
-		isCustomEndpointEnabled,
-		isGraphiQLClientEnabled,
-		isVoyagerClientEnabled,
+		isPersistedQueryEndpointEnabled,
 	} = useSelect( ( select ) => {
 		const post = select( editorStore ).getCurrentPost();
 		const permalinkParts = select( editorStore ).getPermalinkParts();
 		const blocks = select( blockEditorStore ).getBlocks();
-		const customEndpointOptionsBlock = blocks.filter(
-			block => block.name === 'graphql-api/custom-endpoint-options'
-		).shift();
-		const graphiQLClientBlock = blocks.filter(
-			block => block.name === 'graphql-api/endpoint-graphiql'
-		).shift();
-		const voyagerClientBlock = blocks.filter(
-			block => block.name === 'graphql-api/endpoint-voyager'
+		const persistedQueryEndpointOptionsBlock = blocks.filter(
+			block => block.name === 'graphql-api/persisted-query-endpoint-options'
 		).shift();
 
 		return {
@@ -62,25 +54,16 @@ export default function CustomEndpointProperties() {
 			 * Same attribute name as defined in
 			 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
 			 */
-			isCustomEndpointEnabled: customEndpointOptionsBlock.attributes.isEnabled,
-			/**
-			 * Same attribute name as defined in
-			 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
-			 */
-			isGraphiQLClientEnabled: graphiQLClientBlock.attributes.isEnabled,
-			/**
-			 * Same attribute name as defined in
-			 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
-			 */
-			isVoyagerClientEnabled: voyagerClientBlock.attributes.isEnabled,
+			isPersistedQueryEndpointEnabled: persistedQueryEndpointOptionsBlock.attributes.isEnabled,
 		};
 	}, [] );
+
 	const postLinkFirstParamSymbol = postLinkHasParams ? '&' : '?';
 	const statusCircle = isPostPublished && !isPostPasswordProtected ? '🟢' : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? '🟡' : '🔴');
 	const isPostAvailable = isPostPublished || isPostDraftOrPending || isPostPrivate;
 	return (
 		<>
-			{ isCustomEndpointEnabled && (
+			{ isPersistedQueryEndpointEnabled && (
 				<p className="notice-message">
 					<Notice status={ isPostPublished && ! isPostPasswordProtected ? "success" : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? "warning" : "error") } isDismissible={ false }>
 						<strong>
@@ -94,22 +77,22 @@ export default function CustomEndpointProperties() {
 						<br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && ! isPostPasswordProtected && (
-								__('Custom endpoint is public, available to everyone.', 'graphql-api')
+								__('Persisted query is public, available to everyone.', 'graphql-api')
 							) }
 							{ isPostPublished && isPostPasswordProtected && (
-								__('Custom endpoint is public, available to anyone with the required password.', 'graphql-api')
+								__('Persisted query is public, available to anyone with the required password.', 'graphql-api')
 							) }
 							{ isPostDraftOrPending && ! isPostPasswordProtected && (
-								__('Custom endpoint is not yet public, only available to the Schema editors.', 'graphql-api')
+								__('Persisted query is not yet public, only available to the Schema editors.', 'graphql-api')
 							) }
 							{ isPostDraftOrPending && isPostPasswordProtected && (
-								__('Custom endpoint is not yet public, only available to the Schema editors with the required password.', 'graphql-api')
+								__('Persisted query is not yet public, only available to the Schema editors with the required password.', 'graphql-api')
 							) }
 							{ isPostPrivate && (
-								__('Custom endpoint is private, only available to the Schema editors.', 'graphql-api')
+								__('Persisted query is private, only available to the Schema editors.', 'graphql-api')
 							) }
 							{ ! isPostAvailable && (
-								__('Custom endpoint is not yet available.', 'graphql-api')
+								__('Persisted query is not yet available.', 'graphql-api')
 							) }
 						</span>
 					</Notice>
@@ -119,10 +102,10 @@ export default function CustomEndpointProperties() {
 				<>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ isCustomEndpointEnabled ? statusCircle : '🔴' } { __( 'Custom Endpoint URL' ) }
+							{ isPersistedQueryEndpointEnabled ? statusCircle : '🔴'} { __( 'Persisted Query Endpoint URL' ) }
 						</h3>
 						<p>
-							{ isCustomEndpointEnabled && (
+							{ isPersistedQueryEndpointEnabled && (
 								<ExternalLink
 									className="editor-post-url__link"
 									href={ postLink }
@@ -141,7 +124,7 @@ export default function CustomEndpointProperties() {
 									</>
 								</ExternalLink>
 							) }
-							{ ! isCustomEndpointEnabled && (
+							{ ! isPersistedQueryEndpointEnabled && (
 								<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
 							) }
 						</p>
@@ -149,7 +132,7 @@ export default function CustomEndpointProperties() {
 					<hr/>
 					<div className="editor-post-url">
 						<h3 className="editor-post-url__link-label">
-							{ isPostAvailable ? '🟡' : '🔴' } { __( 'View Endpoint Source' ) }
+							{ isPostAvailable ? '🟡' : '🔴' } { __( 'View Persisted Query Source' ) }
 						</h3>
 						<p>
 							<ExternalLink
@@ -175,78 +158,6 @@ export default function CustomEndpointProperties() {
 									</span>
 								</>
 							</ExternalLink>
-						</p>
-					</div>
-					<hr/>
-					<div className="editor-post-url">
-						<h3 className="editor-post-url__link-label">
-							{ isGraphiQLClientEnabled ? statusCircle : '🔴' } { __( 'GraphiQL client' ) }
-						</h3>
-						<p>
-							{ isGraphiQLClientEnabled && (
-								<ExternalLink
-									className="editor-post-url__link"
-									href={ postLink + postLinkFirstParamSymbol + 'view=graphiql' }
-									target="_blank"
-								>
-									<>
-										<span className="editor-post-url__link-prefix">
-											{ permalinkPrefix }
-										</span>
-										<span className="editor-post-url__link-slug">
-											{ postSlug }
-										</span>
-										<span className="editor-post-url__link-suffix">
-											{ permalinkSuffix }
-										</span>
-										<span className="editor-endoint-custom-post-url__link-view">
-											{ '?view=' }
-										</span>
-										<span className="editor-endoint-custom-post-url__link-view-item">
-											{ 'graphiql' }
-										</span>
-									</>
-								</ExternalLink>
-							) }
-							{ ! isGraphiQLClientEnabled && (
-								<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
-							) }
-						</p>
-					</div>
-					<hr/>
-					<div className="editor-post-url">
-						<h3 className="editor-post-url__link-label">
-							{ isVoyagerClientEnabled ? statusCircle : '🔴' } { __( 'Interactive Schema Client' ) }
-						</h3>
-						<p>
-							{ isVoyagerClientEnabled && (
-								<ExternalLink
-									className="editor-post-url__link"
-									href={ postLink + postLinkFirstParamSymbol + 'view=schema' }
-									target="_blank"
-								>
-									<>
-										<span className="editor-post-url__link-prefix">
-											{ permalinkPrefix }
-										</span>
-										<span className="editor-post-url__link-slug">
-											{ postSlug }
-										</span>
-										<span className="editor-post-url__link-suffix">
-											{ permalinkSuffix }
-										</span>
-										<span className="editor-endoint-custom-post-url__link-view">
-											{ '?view=' }
-										</span>
-										<span className="editor-endoint-custom-post-url__link-view-item">
-											{ 'schema' }
-										</span>
-									</>
-								</ExternalLink>
-							) }
-							{ ! isVoyagerClientEnabled && (
-								<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
-							) }
 						</p>
 					</div>
 				</>

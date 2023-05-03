@@ -1,7 +1,7 @@
 {
-	"name": "custom-endpoint-properties",
+	"name": "persisted-query-endpoint-overview",
 	"version": "1.0.0-dev",
-	"description": "Sidebar component displaying Properties for a Custom Endpoint",
+	"description": "Sidebar component displaying Properties for a Persisted Query Endpoint",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",

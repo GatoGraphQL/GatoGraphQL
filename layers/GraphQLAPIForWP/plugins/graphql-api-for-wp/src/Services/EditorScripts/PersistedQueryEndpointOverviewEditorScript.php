@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 
-class PersistedQueryEndpointPropertiesEditorScript extends AbstractEditorScript
+class PersistedQueryEndpointOverviewEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
@@ -26,12 +26,12 @@ class PersistedQueryEndpointPropertiesEditorScript extends AbstractEditorScript
 
     protected function getScriptName(): string
     {
-        return 'persisted-query-endpoint-properties';
+        return 'persisted-query-endpoint-overview';
     }
 
     public function getEnablingModule(): ?string
     {
-        return UserInterfaceFunctionalityModuleResolver::PERSISTED_QUERY_ENDPOINT_PROPERTIES;
+        return UserInterfaceFunctionalityModuleResolver::PERSISTED_QUERY_ENDPOINT_OVERVIEW;
     }
 
     /**

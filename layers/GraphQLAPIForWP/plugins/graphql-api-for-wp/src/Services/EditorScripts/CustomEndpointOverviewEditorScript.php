@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
 
-class CustomEndpointPropertiesEditorScript extends AbstractEditorScript
+class CustomEndpointOverviewEditorScript extends AbstractEditorScript
 {
     use MainPluginScriptTrait;
 
@@ -26,12 +26,12 @@ class CustomEndpointPropertiesEditorScript extends AbstractEditorScript
 
     protected function getScriptName(): string
     {
-        return 'custom-endpoint-properties';
+        return 'custom-endpoint-overview';
     }
 
     public function getEnablingModule(): ?string
     {
-        return UserInterfaceFunctionalityModuleResolver::CUSTOM_ENDPOINT_PROPERTIES;
+        return UserInterfaceFunctionalityModuleResolver::CUSTOM_ENDPOINT_OVERVIEW;
     }
 
     /**
