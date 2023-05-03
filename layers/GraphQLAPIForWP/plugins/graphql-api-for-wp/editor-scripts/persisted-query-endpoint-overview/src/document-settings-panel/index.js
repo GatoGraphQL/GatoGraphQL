@@ -3,12 +3,12 @@
  */
 import { __ } from '@wordpress/i18n';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
-import PersistedQueryEndpointProperties from './persisted-query-endpoint-properties.js';
+import PersistedQueryEndpointProperties from './persisted-query-endpoint-overview.js';
 
 /**
  * Constants to customize
  */
-const DOCUMENT_SETTINGS_PANEL_NAME = 'persisted-query-endpoint-properties-panel';
+const DOCUMENT_SETTINGS_PANEL_NAME = 'persisted-query-endpoint-overview-panel';
 
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel

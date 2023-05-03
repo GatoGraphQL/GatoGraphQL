@@ -1,5 +1,5 @@
 {
-	"name": "persisted-query-endpoint-properties",
+	"name": "persisted-query-endpoint-overview",
 	"version": "1.0.0-dev",
 	"description": "Sidebar component displaying Properties for a Persisted Query Endpoint",
 	"author": "Leonardo Losoviz",

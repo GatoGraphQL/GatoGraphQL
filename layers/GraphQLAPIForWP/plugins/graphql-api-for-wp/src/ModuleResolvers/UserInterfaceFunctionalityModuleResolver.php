@@ -16,7 +16,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public final const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
     public final const SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION = Plugin::NAMESPACE . '\schema-configuration-additional-documentation';
     public final const CUSTOM_ENDPOINT_OVERVIEW = Plugin::NAMESPACE . '\custom-endpoint-overview';
-    public final const PERSISTED_QUERY_ENDPOINT_OVERVIEW = Plugin::NAMESPACE . '\persisted-query-endpoint-properties';
+    public final const PERSISTED_QUERY_ENDPOINT_OVERVIEW = Plugin::NAMESPACE . '\persisted-query-endpoint-overview';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

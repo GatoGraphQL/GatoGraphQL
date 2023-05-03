@@ -26,7 +26,7 @@ class PersistedQueryEndpointPropertiesEditorScript extends AbstractEditorScript
 
     protected function getScriptName(): string
     {
-        return 'persisted-query-endpoint-properties';
+        return 'persisted-query-endpoint-overview';
     }
 
     public function getEnablingModule(): ?string
