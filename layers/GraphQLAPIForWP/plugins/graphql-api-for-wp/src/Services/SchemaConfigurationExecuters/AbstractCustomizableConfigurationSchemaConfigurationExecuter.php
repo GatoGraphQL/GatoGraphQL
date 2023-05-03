@@ -17,7 +17,7 @@ abstract class AbstractCustomizableConfigurationSchemaConfigurationExecuter exte
     {
         $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
         if ($schemaConfigBlockDataItem === null) {
-            $this->executeNoneAppliedSchemaConfiguration();
+            $this->executeNotCustomizedSchemaConfiguration();
             return;
         }
         $customizeConfiguration = $schemaConfigBlockDataItem['attrs'][AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
@@ -30,13 +30,8 @@ abstract class AbstractCustomizableConfigurationSchemaConfigurationExecuter exte
 
     abstract protected function doExecuteSchemaConfiguration(int $schemaConfigurationID): void;
 
-    public function executeNoneAppliedSchemaConfiguration(): void
-    {
-        // By default, do nothing
-    }
-
     protected function executeNotCustomizedSchemaConfiguration(): void
     {
-        $this->executeNoneAppliedSchemaConfiguration();
+        // By default, do nothing
     }
 }
