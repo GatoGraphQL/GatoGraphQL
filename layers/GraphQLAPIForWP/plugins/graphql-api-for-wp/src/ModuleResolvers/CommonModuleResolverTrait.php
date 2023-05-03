@@ -19,14 +19,20 @@ trait CommonModuleResolverTrait
     {
         return $this->getSettingsInfoContent(
             sprintf(
-                '%s<ul><li>%s</li><li>%s</li><li>%s</li></ul>',
-                \__('This value will be used whenever:', 'graphql-api'),
-                \__('The endpoint does not have a Schema Configuration assigned to it', 'graphql-api'),
-                sprintf(
-                    \__('Block <code>%s</code> has not been added to the Schema Configuration', 'graphql-api'),
-                    $blockTitle
-                ),
-                \__('The value selected in the block is <code>"Default"</code>', 'graphql-api')
+                \__('%s %s', 'graphql-api'),
+                \__('This is the default value, to be used whenever:', 'graphql-api'),
+                $this->getCollapsible(
+                    sprintf(
+                        '<ul><li>%s</li><li>%s</li><li>%s</li></ul>',
+                        \__('The endpoint does not have a Schema Configuration assigned to it', 'graphql-api'),
+                        sprintf(
+                            \__('Block <code>%s</code> has not been added to the Schema Configuration', 'graphql-api'),
+                            $blockTitle
+                        ),
+                        \__('The value selected in the block is <code>"Default"</code>', 'graphql-api')
+                    ),
+                    \__('expand', 'graphql-api')
+                )
             )
         );
     }
