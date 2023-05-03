@@ -14,7 +14,7 @@ abstract class AbstractSchemaAllowAccessToEntriesBlockSchemaConfigurationExecute
     /**
      * @param array<string,mixed> $blockDataItem
      */
-    protected function doExecuteSchemaConfiguration(array $blockDataItem): void
+    protected function doExecuteBlockSchemaConfiguration(array $blockDataItem): void
     {
         $entries = $blockDataItem['attrs'][BlockAttributeNames::ENTRIES] ?? [];
         /**

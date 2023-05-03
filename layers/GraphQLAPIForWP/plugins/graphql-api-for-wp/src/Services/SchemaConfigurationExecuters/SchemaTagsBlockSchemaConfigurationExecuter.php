@@ -34,7 +34,7 @@ class SchemaTagsBlockSchemaConfigurationExecuter extends AbstractCustomizableCon
     /**
      * @param array<string,mixed> $blockDataItem
      */
-    protected function doExecuteSchemaConfiguration(array $blockDataItem): void
+    protected function doExecuteBlockSchemaConfiguration(array $blockDataItem): void
     {
         $includedTagTaxonomies = $blockDataItem['attrs'][SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES] ?? [];
         /**

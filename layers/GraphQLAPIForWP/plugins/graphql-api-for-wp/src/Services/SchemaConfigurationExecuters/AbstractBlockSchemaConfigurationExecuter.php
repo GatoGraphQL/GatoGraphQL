@@ -34,4 +34,29 @@ abstract class AbstractBlockSchemaConfigurationExecuter extends AbstractSchemaCo
     }
 
     abstract protected function getBlock(): BlockInterface;
+
+    /**
+     * Only execute the Schema Configuration if block option
+     * "Customize configuration? (Or use default from Settings?)"
+     * has value `true` (i.e. "Use custom configuration")
+     */
+    final public function executeSchemaConfiguration(int $schemaConfigurationID): void
+    {
+        $blockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
+        if ($blockDataItem === null) {
+            $this->executeNoBlockSchemaConfiguration();
+            return;
+        }
+        $this->executeBlockSchemaConfiguration($blockDataItem);
+    }
+
+    protected function executeNoBlockSchemaConfiguration(): void
+    {
+        // By default, do nothing
+    }
+
+    /**
+     * @param array<string,mixed> $blockDataItem
+     */
+    abstract protected function executeBlockSchemaConfiguration(array $blockDataItem): void;
 }

@@ -12,29 +12,28 @@ abstract class AbstractCustomizableConfigurationBlockSchemaConfigurationExecuter
      * Only execute the Schema Configuration if block option
      * "Customize configuration? (Or use default from Settings?)"
      * has value `true` (i.e. "Use custom configuration")
+     *
+     * @param array<string,mixed> $blockDataItem
      */
-    final public function executeSchemaConfiguration(int $schemaConfigurationID): void
+    final protected function executeBlockSchemaConfiguration(array $blockDataItem): void
     {
-        $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($schemaConfigBlockDataItem === null) {
-            $this->executeNotCustomizedSchemaConfiguration();
-            return;
-        }
-        $customizeConfiguration = $schemaConfigBlockDataItem['attrs'][AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
+        $customizeConfiguration = $blockDataItem['attrs'][AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
         if (!$customizeConfiguration) {
             $this->executeNotCustomizedSchemaConfiguration();
             return;
         }
-        $this->doExecuteSchemaConfiguration($schemaConfigBlockDataItem);
+        $this->doExecuteBlockSchemaConfiguration($blockDataItem);
     }
 
-    /**
-     * @param array<string,mixed> $blockDataItem
-     */
-    abstract protected function doExecuteSchemaConfiguration(array $blockDataItem): void;
+    abstract protected function doExecuteBlockSchemaConfiguration(array $blockDataItem): void;
 
     protected function executeNotCustomizedSchemaConfiguration(): void
     {
         // By default, do nothing
+    }
+
+    protected function executeNoBlockSchemaConfiguration(): void
+    {
+        $this->executeNotCustomizedSchemaConfiguration();
     }
 }
