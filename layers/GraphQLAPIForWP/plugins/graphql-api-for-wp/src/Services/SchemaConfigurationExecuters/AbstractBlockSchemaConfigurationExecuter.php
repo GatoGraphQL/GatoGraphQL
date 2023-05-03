@@ -56,6 +56,14 @@ abstract class AbstractBlockSchemaConfigurationExecuter extends AbstractSchemaCo
     }
 
     /**
+     * By default, do nothing
+     */
+    public function executeNoneAppliedSchemaConfiguration(): void
+    {
+        $this->executeNoBlockSchemaConfiguration();
+    }
+
+    /**
      * @param array<string,mixed> $schemaConfigBlockDataItem
      */
     abstract protected function executeBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void;
