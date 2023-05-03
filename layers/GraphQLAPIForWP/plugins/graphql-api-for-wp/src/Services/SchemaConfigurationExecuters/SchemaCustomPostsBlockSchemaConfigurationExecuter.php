@@ -32,11 +32,11 @@ class SchemaCustomPostsBlockSchemaConfigurationExecuter extends AbstractCustomiz
     }
 
     /**
-     * @param array<string,mixed> $blockDataItem
+     * @param array<string,mixed> $schemaConfigBlockDataItem
      */
-    protected function doExecuteBlockSchemaConfiguration(array $blockDataItem): void
+    protected function doExecuteBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void
     {
-        $includedCustomPostTypes = $blockDataItem['attrs'][SchemaConfigSchemaCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES] ?? [];
+        $includedCustomPostTypes = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES] ?? [];
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings

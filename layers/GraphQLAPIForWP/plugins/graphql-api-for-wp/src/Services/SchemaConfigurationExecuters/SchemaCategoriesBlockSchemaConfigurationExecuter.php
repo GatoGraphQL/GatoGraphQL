@@ -32,11 +32,11 @@ class SchemaCategoriesBlockSchemaConfigurationExecuter extends AbstractCustomiza
     }
 
     /**
-     * @param array<string,mixed> $blockDataItem
+     * @param array<string,mixed> $schemaConfigBlockDataItem
      */
-    protected function doExecuteBlockSchemaConfiguration(array $blockDataItem): void
+    protected function doExecuteBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void
     {
-        $includedCategoryTaxonomies = $blockDataItem['attrs'][SchemaConfigSchemaCategoriesBlock::ATTRIBUTE_NAME_INCLUDED_CATEGORY_TAXONOMIES] ?? [];
+        $includedCategoryTaxonomies = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaCategoriesBlock::ATTRIBUTE_NAME_INCLUDED_CATEGORY_TAXONOMIES] ?? [];
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings

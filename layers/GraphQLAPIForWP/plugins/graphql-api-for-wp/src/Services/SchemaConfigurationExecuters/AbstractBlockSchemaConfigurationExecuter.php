@@ -42,12 +42,12 @@ abstract class AbstractBlockSchemaConfigurationExecuter extends AbstractSchemaCo
      */
     final public function executeSchemaConfiguration(int $schemaConfigurationID): void
     {
-        $blockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
-        if ($blockDataItem === null) {
+        $schemaConfigBlockDataItem = $this->getSchemaConfigBlockDataItem($schemaConfigurationID);
+        if ($schemaConfigBlockDataItem === null) {
             $this->executeNoBlockSchemaConfiguration();
             return;
         }
-        $this->executeBlockSchemaConfiguration($blockDataItem);
+        $this->executeBlockSchemaConfiguration($schemaConfigBlockDataItem);
     }
 
     protected function executeNoBlockSchemaConfiguration(): void
@@ -56,7 +56,7 @@ abstract class AbstractBlockSchemaConfigurationExecuter extends AbstractSchemaCo
     }
 
     /**
-     * @param array<string,mixed> $blockDataItem
+     * @param array<string,mixed> $schemaConfigBlockDataItem
      */
-    abstract protected function executeBlockSchemaConfiguration(array $blockDataItem): void;
+    abstract protected function executeBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void;
 }

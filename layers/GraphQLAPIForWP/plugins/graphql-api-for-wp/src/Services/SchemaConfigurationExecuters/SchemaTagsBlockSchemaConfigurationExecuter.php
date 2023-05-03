@@ -32,11 +32,11 @@ class SchemaTagsBlockSchemaConfigurationExecuter extends AbstractCustomizableCon
     }
 
     /**
-     * @param array<string,mixed> $blockDataItem
+     * @param array<string,mixed> $schemaConfigBlockDataItem
      */
-    protected function doExecuteBlockSchemaConfiguration(array $blockDataItem): void
+    protected function doExecuteBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void
     {
-        $includedTagTaxonomies = $blockDataItem['attrs'][SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES] ?? [];
+        $includedTagTaxonomies = $schemaConfigBlockDataItem['attrs'][SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES] ?? [];
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings

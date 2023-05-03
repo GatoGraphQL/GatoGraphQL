@@ -13,19 +13,19 @@ abstract class AbstractCustomizableConfigurationBlockSchemaConfigurationExecuter
      * "Customize configuration? (Or use default from Settings?)"
      * has value `true` (i.e. "Use custom configuration")
      *
-     * @param array<string,mixed> $blockDataItem
+     * @param array<string,mixed> $schemaConfigBlockDataItem
      */
-    final protected function executeBlockSchemaConfiguration(array $blockDataItem): void
+    final protected function executeBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void
     {
-        $customizeConfiguration = $blockDataItem['attrs'][AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
+        $customizeConfiguration = $schemaConfigBlockDataItem['attrs'][AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
         if (!$customizeConfiguration) {
             $this->executeNotCustomizedSchemaConfiguration();
             return;
         }
-        $this->doExecuteBlockSchemaConfiguration($blockDataItem);
+        $this->doExecuteBlockSchemaConfiguration($schemaConfigBlockDataItem);
     }
 
-    abstract protected function doExecuteBlockSchemaConfiguration(array $blockDataItem): void;
+    abstract protected function doExecuteBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void;
 
     protected function executeNotCustomizedSchemaConfiguration(): void
     {

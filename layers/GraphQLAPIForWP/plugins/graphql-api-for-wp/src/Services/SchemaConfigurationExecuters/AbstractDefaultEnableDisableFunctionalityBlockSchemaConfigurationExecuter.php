@@ -21,14 +21,14 @@ abstract class AbstractDefaultEnableDisableFunctionalityBlockSchemaConfiguration
     abstract public function getHookEnvironmentClass(): string;
 
     /**
-     * @param array<string,mixed> $blockDataItem
+     * @param array<string,mixed> $schemaConfigBlockDataItem
      */
-    protected function executeBlockSchemaConfiguration(array $blockDataItem): void
+    protected function executeBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void
     {
         /**
          * Default value (if not defined in DB): `default`. Then do nothing
          */
-        $enableFunctionality = $blockDataItem['attrs'][$this->getSchemaConfigBlockAttributeName()] ?? null;
+        $enableFunctionality = $schemaConfigBlockDataItem['attrs'][$this->getSchemaConfigBlockAttributeName()] ?? null;
         /**
          * Only execute if it has any selectable value (no null, no invented).
          * If "default", then the general settings will already take effect,

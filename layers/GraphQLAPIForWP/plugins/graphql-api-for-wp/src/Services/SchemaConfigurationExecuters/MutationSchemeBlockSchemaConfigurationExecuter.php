@@ -35,14 +35,14 @@ class MutationSchemeBlockSchemaConfigurationExecuter extends AbstractBlockSchema
     }
 
     /**
-     * @param array<string,mixed> $blockDataItem
+     * @param array<string,mixed> $schemaConfigBlockDataItem
      */
-    protected function executeBlockSchemaConfiguration(array $blockDataItem): void
+    protected function executeBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void
     {
         /**
          * Default value (if not defined in DB): `default`. Then do nothing
          */
-        $mutationScheme = $blockDataItem['attrs'][SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? null;
+        $mutationScheme = $schemaConfigBlockDataItem['attrs'][SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? null;
         /**
          * Only execute if it has any selectable value (no null, no invented).
          * If "default", then the general settings will already take effect,
