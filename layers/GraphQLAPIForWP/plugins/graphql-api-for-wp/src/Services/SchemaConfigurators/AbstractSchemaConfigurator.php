@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigurationExecuterRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
@@ -25,15 +24,19 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
 
+    /**
+     * Important! Do not check if the SCHEMA_CONFIGURATION module
+     * is enabled, as to configure the schema with default Settings.
+     *
+     * That check will happen in AbstractSchemaConfigurationExecuter,
+     * where each executer can decide if to run or not.
+     *
+     * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/SchemaConfigurationExecuters/AbstractSchemaConfigurationExecuter.php
+     */
     public function isServiceEnabled(): bool
     {
-        $moduleRegistry = $this->getModuleRegistry();
-        if (!$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
-            return false;
-        }
-
         // Only enable the service if the corresponding module is also enabled
-        return $moduleRegistry->isModuleEnabled($this->getEnablingModule());
+        return $this->getModuleRegistry()->isModuleEnabled($this->getEnablingModule());
     }
 
     abstract protected function getEnablingModule(): string;

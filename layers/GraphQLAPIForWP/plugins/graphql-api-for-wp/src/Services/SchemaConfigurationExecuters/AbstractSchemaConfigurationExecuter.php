@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\AppHelpers;
 use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
+use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -50,11 +51,24 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
             return false;
         }
 
+        $moduleRegistry = $this->getModuleRegistry();
+        if (
+            !$moduleRegistry->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
+            && !$this->mustAlsoExecuteWhenSchemaConfigurationModuleIsDisabled()
+        ) {
+            return false;
+        }
+
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
+            return $moduleRegistry->isModuleEnabled($enablingModule);
         }
         return true;
+    }
+
+    protected function mustAlsoExecuteWhenSchemaConfigurationModuleIsDisabled(): bool
+    {
+        return false;
     }
 
     /**
