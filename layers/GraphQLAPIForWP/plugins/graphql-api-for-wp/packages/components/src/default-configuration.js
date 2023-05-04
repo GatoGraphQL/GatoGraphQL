@@ -9,9 +9,9 @@ import { __ } from '@wordpress/i18n';
  */
 export const GROUP_FIELDS_UNDER_TYPE_FOR_PRINT = true;
 /**
- * Same default value as for environment variable `EMPTY_LABEL` in PHP
+ * Same default value as for environment variable `NO_ITEMS_SELECTED_LABEL` in PHP
  */
-export const EMPTY_LABEL = __('(not set)', 'graphql-api');
+export const NO_ITEMS_SELECTED_LABEL = __('(none selected)', 'graphql-api');
 /**
  * Same default value as for environment variable `SETTINGS_VALUE_LABEL` in PHP
  */

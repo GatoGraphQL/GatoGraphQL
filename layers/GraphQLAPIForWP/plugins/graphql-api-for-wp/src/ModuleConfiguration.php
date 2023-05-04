@@ -44,10 +44,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     /**
      * The label to show when the value is empty
      */
-    public function getEmptyLabel(): string
+    public function getNoItemsSelectedLabel(): string
     {
-        $envVariable = Environment::EMPTY_LABEL;
-        $defaultValue = \__('(not set)', 'graphql-api');
+        $envVariable = Environment::NO_ITEMS_SELECTED_LABEL;
+        $defaultValue = \__('(none selected)', 'graphql-api');
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
