@@ -161,6 +161,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function maybeRemoveStoredPluginVersionWhenPluginDeactivated(string $pluginFile): void
     {
         // Check if this is the main plugin
+        if (PluginApp::getMainPlugin()->getPluginFile() === $pluginFile) {
+            $this->removePluginFileFromStoredPluginVersions($pluginFile);
+            return;
+        }
+
+        // Check if this is any extension plugin
         $extensionManager = PluginApp::getExtensionManager();
         $extensionBaseNames = array_keys($extensionManager->getExtensions());
         if (!in_array($pluginFile, $extensionBaseNames)) {
