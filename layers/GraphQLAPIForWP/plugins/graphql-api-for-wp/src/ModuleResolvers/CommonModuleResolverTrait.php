@@ -47,7 +47,7 @@ trait CommonModuleResolverTrait
                 \__('Block <code>%s</code> has not been added to the selected Schema Configuration', 'graphql-api'),
                 $blockTitle
             ),
-            \__('The value selected in the block is <code>"Default"</code>', 'graphql-api')
+            \__('The block in the Schema Configuration has value <code>"Default"</code>', 'graphql-api')
         ];
     }
 
