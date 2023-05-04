@@ -143,12 +143,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $inactiveExtensionDependedUponPluginFiles = $extensionManager->getInactiveExtensionsDependedUponPluginFiles();
         $extensionBaseNameInstances = $extensionManager->getExtensions();
         foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
-            // Only when deactivating an extension this condition will be true
-            if (false) {
-                $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
-                unset($storedPluginVersions[$extensionBaseName]);
-                update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
-            }
             if (!($extensionBaseName === $pluginFile
                 || in_array($pluginFile, $extensionInstance->getDependedUponPluginFiles())
                 || in_array($pluginFile, $inactiveExtensionDependedUponPluginFiles)
@@ -166,6 +160,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     public function maybeRemoveStoredPluginVersionWhenPluginDeactivated(string $pluginFile): void
     {
+        // Check if this is the main plugin
         $extensionManager = PluginApp::getExtensionManager();
         $extensionBaseNames = array_keys($extensionManager->getExtensions());
         if (!in_array($pluginFile, $extensionBaseNames)) {
@@ -351,15 +346,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
                     }
                 }
-
-                // Check if any extension has been deactivated
-                $justDeactivatedExtensionBaseNames = array_diff(
-                    array_keys($storedPluginVersions),
-                    [
-                        $this->pluginBaseName,
-                    ],
-                    array_keys($registeredExtensionBaseNameInstances)
-                );
 
                 // If there were no changes, nothing to do
                 if (
