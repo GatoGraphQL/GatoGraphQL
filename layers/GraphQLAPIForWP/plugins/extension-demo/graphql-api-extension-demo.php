@@ -55,9 +55,11 @@ add_action(
         if (!class_exists(Plugin::class)) {
             \add_action('admin_notices', function () use ($extensionName) {
                 _e(sprintf(
-                    '<div class="notice notice-error">' .
-                        '<p>%s</p>' .
-                    '</div>',
+                    <<<HTML
+                        <div class="notice notice-error">
+                            <p>%s</p>
+                        </div>
+                    HTML,
                     sprintf(
                         __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'graphql-api-extension-demo'),
                         __('GraphQL API for WordPress', 'graphql-api-extension-demo'),
@@ -77,7 +79,7 @@ add_action(
         )) {
             return;
         }
-        
+
         /**
          * The commit hash is added to the plugin version 
          * through the CI when merging the PR.
