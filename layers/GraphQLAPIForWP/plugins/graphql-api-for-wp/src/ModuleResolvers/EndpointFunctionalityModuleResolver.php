@@ -201,7 +201,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::SINGLE_ENDPOINT => [
-                ModuleSettingOptions::PATH => '/graphql/',
+                ModuleSettingOptions::PATH => 'graphql/',
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::CUSTOM_ENDPOINTS => [

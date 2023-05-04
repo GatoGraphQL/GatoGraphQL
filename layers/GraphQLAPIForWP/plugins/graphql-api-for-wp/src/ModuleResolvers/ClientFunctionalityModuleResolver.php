@@ -136,10 +136,10 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     {
         $defaultValues = [
             self::GRAPHIQL_FOR_SINGLE_ENDPOINT => [
-                ModuleSettingOptions::PATH => '/graphiql/',
+                ModuleSettingOptions::PATH => 'graphiql/',
             ],
             self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT => [
-                ModuleSettingOptions::PATH => '/schema/',
+                ModuleSettingOptions::PATH => 'schema/',
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
