@@ -6,9 +6,14 @@ namespace GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes;
 
 class AdminRoleUserAuthorizationScheme extends AbstractByRoleUserAuthorizationScheme
 {
-    public function getSchemaEditorAccessRole(): string
+    /**
+     * @return string[]
+     */
+    protected function getSchemaEditorAccessRoles(): array
     {
-        return 'administrator';
+        return [
+            'administrator',
+        ];
     }
 
     public function getPriority(): int
