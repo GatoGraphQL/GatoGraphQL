@@ -34,7 +34,6 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 					) }
 					{ !isSelected && (
 						<>
-							<br />
 							{ ! customizeConfiguration &&
 								<span>🟡 { __('Use configuration from Settings', 'graphql-api') }</span>
 							}
