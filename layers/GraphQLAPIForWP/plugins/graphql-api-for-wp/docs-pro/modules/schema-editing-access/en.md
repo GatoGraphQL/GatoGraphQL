@@ -50,5 +50,4 @@ Alternatively, you can select a group of user roles which can edit the GraphQL s
 - `Users with any role: "administrator", "editor"`
 - `Users with any role: "administrator", "editor", "author"`
 
-
 ![Configuring the schema editing access in the Settings](../../images/settings-schema-editing-access.png "Configuring the schema editing access in the Settings")
