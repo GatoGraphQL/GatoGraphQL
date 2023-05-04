@@ -5,13 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Facades;
 
 use GraphQLAPI\GraphQLAPI\ConfigurationCache\ContainerCacheConfigurationManager;
-use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistry;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorization;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\ManageOptionsUserAuthorizationScheme;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
-use PoP\Root\Instances\InstanceManager;
 
 /**
  * Obtain an instance of the ContainerCacheConfigurationManager.
@@ -31,17 +26,11 @@ abstract class AbstractContainerCacheConfigurationManagerFacade
      */
     protected static function doGetInstance(): CacheConfigurationManagerInterface
     {
-        $instanceManager = new InstanceManager();
-        $userAuthorizationSchemeRegistry = new UserAuthorizationSchemeRegistry();
-        $manageOptionsUserAuthorizationScheme = new ManageOptionsUserAuthorizationScheme();
-        $userAuthorizationSchemeRegistry->addUserAuthorizationScheme($manageOptionsUserAuthorizationScheme);
-        $userAuthorization = new UserAuthorization();
-        $userAuthorization->setUserAuthorizationSchemeRegistry($userAuthorizationSchemeRegistry);
-        $pluginMenu = new PluginMenu();
-        $pluginMenu->setInstanceManager($instanceManager);
-        $pluginMenu->setUserAuthorization($userAuthorization);
+        /**
+         * Only this service will be required, and this one
+         * will itself not require any other service
+         */
         $endpointHelpers = new EndpointHelpers();
-        $endpointHelpers->setPluginMenu($pluginMenu);
         $containerCacheConfigurationManager = static::createContainerCacheConfigurationManager();
         $containerCacheConfigurationManager->setEndpointHelpers($endpointHelpers);
         return $containerCacheConfigurationManager;
