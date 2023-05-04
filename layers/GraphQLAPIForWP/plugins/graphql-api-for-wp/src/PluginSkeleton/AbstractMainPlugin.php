@@ -295,20 +295,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action('deactivate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
         add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
 
-        /**
-         * PoP depends on hook "init" to set-up the endpoint rewrite,
-         * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
-         * However, activating the plugin takes place AFTER hooks "plugins_loaded"
-         * and "init". Hence, the code cannot flush the rewrite_rules when the plugin
-         * is activated, and any non-default GraphQL endpoint is not set.
-         *
-         * The solution (hack) is to check if the plugin has just been installed,
-         * and then apply the logic, on every request in the admin!
-         *
-         * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
-         */
-        // register_activation_hook($this->getPluginFile(), $this->activate(...));
-
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
 
