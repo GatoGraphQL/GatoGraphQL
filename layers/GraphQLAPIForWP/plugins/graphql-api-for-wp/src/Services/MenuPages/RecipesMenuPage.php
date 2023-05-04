@@ -54,6 +54,10 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Exposing safe persisted queries',
             ],
             [
+                'feeding-data-to-blocks-in-the-editor',
+                'Feeding data to blocks in the editor',
+            ],
+            [
                 'defining-custom-private-endpoints',
                 'Defining custom private endpoints',
             ],
