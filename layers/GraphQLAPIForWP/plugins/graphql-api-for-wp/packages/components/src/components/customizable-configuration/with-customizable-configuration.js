@@ -24,7 +24,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 			<div className={ componentClassName }>
 				<div className="customizable-configuration-header">
 					{ ! isSelected && ! customizeConfiguration && (
-						<span>🟡 { __('Default', 'graphql-api') }</span>
+						<span>🟡 { __('Use configuration from Settings', 'graphql-api') }</span>
 					) }
 					{ isSelected && (
 						<>
