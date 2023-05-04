@@ -43,6 +43,7 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 									} )
 								)}
 							/>
+							<hr/>
 						</>
 					) }
 				</div>
