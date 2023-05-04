@@ -132,7 +132,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * (eg: "Events Manager", required by "GraphQL API - Events Manager")
      * the container must be regenerated.
      */
-    public function handlePluginActivatedOrDeactivated(string $pluginFile): void
+    public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): void
     {
         /**
          * Check that the activated/deactivated plugin is
@@ -143,6 +143,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $inactiveExtensionDependedUponPluginFiles = $extensionManager->getInactiveExtensionsDependedUponPluginFiles();
         $extensionBaseNameInstances = $extensionManager->getExtensions();
         foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
+            // Only when deactivating an extension this condition will be true
+            if (false) {
+                $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
+                unset($storedPluginVersions[$extensionBaseName]);
+                update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+            }
             if (!($extensionBaseName === $pluginFile
                 || in_array($pluginFile, $extensionInstance->getDependedUponPluginFiles())
                 || in_array($pluginFile, $inactiveExtensionDependedUponPluginFiles)
@@ -152,6 +158,27 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $this->purgeContainer();
             break;
 		}
+    }
+
+    /**
+     * When deactivating the main plugin or an extension,
+     * remove the stored version from the DB
+     */
+    public function maybeRemoveStoredPluginVersionWhenPluginDeactivated(string $pluginFile): void
+    {
+        $extensionManager = PluginApp::getExtensionManager();
+        $extensionBaseNames = array_keys($extensionManager->getExtensions());
+        if (!in_array($pluginFile, $extensionBaseNames)) {
+            return;
+        }
+        $this->removePluginFileFromStoredPluginVersions($pluginFile);
+    }
+
+    protected function removePluginFileFromStoredPluginVersions(string $pluginBaseName): void
+    {
+        $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
+        unset($storedPluginVersions[$pluginBaseName]);
+        update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
     }
 
 
@@ -255,15 +282,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         parent::setup();
 
         /**
-         * When activating/deactivating ANY plugin (either from GraphQL API
-         * or 3rd-parties), the cached service container and the config
-         * must be dumped, so that they can be regenerated.
-         *
-         * This way, extensions depending on 3rd-party plugins
-         * can have their functionality automatically enabled/disabled.
+         * Operations to do when activating/deactivating plugins
          */
-        add_action('activate_plugin', $this->handlePluginActivatedOrDeactivated(...));
-        add_action('deactivate_plugin', $this->handlePluginActivatedOrDeactivated(...));
+        add_action('activate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
+        add_action('deactivate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
+        add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
 
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
@@ -344,7 +367,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     && !$isMainPluginJustUpdated
                     && $justActivatedExtensions === []
                     && $justUpdatedExtensions === []
-                    && $justDeactivatedExtensionBaseNames === []
                 ) {
                     return;
                 }
@@ -353,9 +375,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $storedPluginVersions[$this->pluginBaseName] = $this->getPluginVersionWithCommitHash();
                 foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
                     $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
-                }
-                foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
-                    unset($storedPluginVersions[$extensionBaseName]);
                 }
                 update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
 
