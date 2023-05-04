@@ -118,14 +118,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * When activating/deactivating ANY plugin (either from GraphQL API
-     * or 3rd-parties), the cached service container and the config
+     * When activating/deactivating an extension plugin for the
+     * GraphQL API, the cached service container and the config
      * must be dumped, so that they can be regenerated.
      *
      * This way, extensions depending on 3rd-party plugins
      * can have their functionality automatically enabled/disabled.
+     *
+     * Do not do it for other plugins as dumping the container is
+     * time intensive.
      */
-    public function handleAnyPluginActivatedOrDeactivated(): void
+    public function handleAnyPluginActivatedOrDeactivated(string $pluginFile): void
     {
         $this->purgeContainer();
     }
