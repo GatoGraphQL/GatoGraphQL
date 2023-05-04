@@ -124,12 +124,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $moduleSettings = parent::getSettings($module);
         if ($module === self::RESET_SETTINGS) {
-            $resetSettingsCategories = [
-                'schema' => SettingsCategoryResolver::SCHEMA_CONFIGURATION,
-                'endpoint' => SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
-                'plugin' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
-                'license-keys' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
-            ];
             $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
