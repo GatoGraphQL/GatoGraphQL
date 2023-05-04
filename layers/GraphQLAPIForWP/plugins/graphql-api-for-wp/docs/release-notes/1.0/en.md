@@ -266,6 +266,12 @@ The tables for the Custom Endpoint and Persisted Query CPTs now display the "sta
 
 The Plugin Settings has been completely decoupled from the services registered in the container. As such, the container does not need to be regenerated when updating the Settings, leading to a performance boost.
 
+## Only activating/deactivating GraphQL API extension plugins will regenerate the service container
+
+Before, the service container (upon which the GraphQL schema is based) was regenerated whenever any plugin (whether it was related to the GraphQL API plugin or not) was activated or deactivated.
+
+Now, only GraphQL API extension plugins trigger this process.
+
 ## Fixed
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)

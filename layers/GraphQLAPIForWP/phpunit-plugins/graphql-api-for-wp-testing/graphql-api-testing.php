@@ -54,9 +54,11 @@ add_action(
         if (!$enablePlugin) {
             \add_action('admin_notices', function () {
                 _e(sprintf(
-                    '<div class="notice notice-error">' .
-                        '<p>%s</p>' .
-                    '</div>',
+                    <<<HTML
+                        <div class="notice notice-error">
+                            <p>%s</p>
+                        </div>
+                    HTML,
                     sprintf(
                         __('Functionality in plugin <strong>%s</strong> can only be enabled during development or testing.', 'graphql-api-testing'),
                         __('GraphQL API - Testing', 'graphql-api-testing')

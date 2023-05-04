@@ -11,6 +11,9 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
 
 class ExtensionManager extends AbstractPluginManager
 {
+    /** @var string[] */
+    private array $inactiveExtensionDependedUponPluginFiles = [];
+
     /**
      * Have the extensions organized by their class
      *
@@ -115,5 +118,30 @@ class ExtensionManager extends AbstractPluginManager
         }
 
         return true;
+    }
+
+    /**
+     * Register the depended-upon plugin main file(s), so that
+     * when the plugin is activated, the container is regenerated
+     *
+     * @param string[] $inactiveExtensionDependedUponPluginFiles
+     */
+    public function registerInactiveExtensionDependedUponPluginFiles(array $inactiveExtensionDependedUponPluginFiles): void
+    {
+        $this->inactiveExtensionDependedUponPluginFiles = array_merge(
+            $this->inactiveExtensionDependedUponPluginFiles,
+            $inactiveExtensionDependedUponPluginFiles
+        );
+    }
+
+    /**
+     * Plugin main files that need to be activated in order
+     * for some GraphQL API extension to become active.
+     *
+     * @return string[]
+     */
+    public function getInactiveExtensionsDependedUponPluginFiles(): array
+    {
+        return $this->inactiveExtensionDependedUponPluginFiles;
     }
 }

@@ -118,16 +118,74 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * When activating/deactivating ANY plugin (either from GraphQL API
-     * or 3rd-parties), the cached service container and the config
+     * This method dumps the container whenever activating a depended-upon
+     * plugin, or deactivating a GraphQL API extension.
+     *
+     * When activating an extension plugin for the GraphQL API,
+     * the container will be regenerated through method
+     * `handleNewActivations` (in this same class).
+     *
+     * When deactivating an extension, the cached service container
      * must be dumped, so that they can be regenerated.
      *
-     * This way, extensions depending on 3rd-party plugins
-     * can have their functionality automatically enabled/disabled.
+     * Likewise, when activating/deactivating a depended-upon plugin
+     * (eg: "Events Manager", required by "GraphQL API - Events Manager")
+     * the container must be regenerated.
      */
-    public function handleAnyPluginActivatedOrDeactivated(): void
+    public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): void
     {
-        $this->purgeContainer();
+        /**
+         * Check that the activated/deactivated plugin is
+         * a GraphQL API extension, or any plugin depended-upon
+         * by any extension.
+         */
+        $extensionManager = PluginApp::getExtensionManager();
+        $inactiveExtensionDependedUponPluginFiles = $extensionManager->getInactiveExtensionsDependedUponPluginFiles();
+        $extensionBaseNameInstances = $extensionManager->getExtensions();
+        foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
+            if (
+                !($extensionBaseName === $pluginFile
+                || in_array($pluginFile, $extensionInstance->getDependedUponPluginFiles())
+                || in_array($pluginFile, $inactiveExtensionDependedUponPluginFiles)
+                )
+            ) {
+                continue;
+            }
+            $this->purgeContainer();
+            break;
+        }
+    }
+
+    /**
+     * When deactivating the main plugin or an extension,
+     * remove the stored version from the DB
+     */
+    public function maybeRemoveStoredPluginVersionWhenPluginDeactivated(string $pluginFile): void
+    {
+        $removePluginFileFromStoredPluginVersions = false;
+
+        // Check if this is the main plugin
+        if (PluginApp::getMainPlugin()->getPluginFile() === $pluginFile) {
+            $removePluginFileFromStoredPluginVersions = true;
+        } else {
+            // Check if this is any extension plugin
+            $extensionManager = PluginApp::getExtensionManager();
+            $extensionBaseNames = array_keys($extensionManager->getExtensions());
+            $removePluginFileFromStoredPluginVersions = in_array($pluginFile, $extensionBaseNames);
+        }
+
+        if (!$removePluginFileFromStoredPluginVersions) {
+            return;
+        }
+
+        $this->removePluginFileFromStoredPluginVersions($pluginFile);
+    }
+
+    protected function removePluginFileFromStoredPluginVersions(string $pluginBaseName): void
+    {
+        $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
+        unset($storedPluginVersions[$pluginBaseName]);
+        update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
     }
 
 
@@ -231,15 +289,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         parent::setup();
 
         /**
-         * When activating/deactivating ANY plugin (either from GraphQL API
-         * or 3rd-parties), the cached service container and the config
-         * must be dumped, so that they can be regenerated.
-         *
-         * This way, extensions depending on 3rd-party plugins
-         * can have their functionality automatically enabled/disabled.
+         * Operations to do when activating/deactivating plugins
          */
-        add_action('activate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
-        add_action('deactivate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
+        add_action('activate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
+        add_action('deactivate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
+        add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
 
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
@@ -305,22 +359,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     }
                 }
 
-                // Check if any extension has been deactivated
-                $justDeactivatedExtensionBaseNames = array_diff(
-                    array_keys($storedPluginVersions),
-                    [
-                        $this->pluginBaseName,
-                    ],
-                    array_keys($registeredExtensionBaseNameInstances)
-                );
-
                 // If there were no changes, nothing to do
                 if (
                     !$isMainPluginJustActivated
                     && !$isMainPluginJustUpdated
                     && $justActivatedExtensions === []
                     && $justUpdatedExtensions === []
-                    && $justDeactivatedExtensionBaseNames === []
                 ) {
                     return;
                 }
@@ -329,9 +373,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $storedPluginVersions[$this->pluginBaseName] = $this->getPluginVersionWithCommitHash();
                 foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
                     $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
-                }
-                foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
-                    unset($storedPluginVersions[$extensionBaseName]);
                 }
                 update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
 

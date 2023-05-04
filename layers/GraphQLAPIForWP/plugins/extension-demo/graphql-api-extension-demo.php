@@ -55,9 +55,11 @@ add_action(
         if (!class_exists(Plugin::class)) {
             \add_action('admin_notices', function () use ($extensionName) {
                 _e(sprintf(
-                    '<div class="notice notice-error">' .
-                        '<p>%s</p>' .
-                    '</div>',
+                    <<<HTML
+                        <div class="notice notice-error">
+                            <p>%s</p>
+                        </div>
+                    HTML,
                     sprintf(
                         __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'graphql-api-extension-demo'),
                         __('GraphQL API for WordPress', 'graphql-api-extension-demo'),
@@ -69,37 +71,39 @@ add_action(
         }
 
         $extensionManager = PluginApp::getExtensionManager();
-        if ($extensionManager->assertIsValid(
+        if (!$extensionManager->assertIsValid(
             GraphQLAPIExtension::class,
             $extensionVersion,
             $extensionName,
             $mainPluginVersionConstraint
         )) {
-            /**
-             * The commit hash is added to the plugin version 
-             * through the CI when merging the PR.
-             *
-             * It is required to regenerate the container when
-             * testing a generated .zip plugin without modifying
-             * the plugin version.
-             * (Otherwise, we'd have to @purge-cache.)
-             *
-             * Important: Do not modify this code!
-             * It will be replaced in the CI to append "#{commit hash}"
-             * when generating the plugin. 
-             */
-            $commitHash = null;
-
-            // Load Composer’s autoloader
-            require_once(__DIR__ . '/vendor/autoload.php');
-
-            // Create and set-up the extension instance
-            $extensionManager->register(new GraphQLAPIExtension(
-                __FILE__,
-                $extensionVersion,
-                $extensionName,
-                $commitHash
-            ))->setup();
+            return;
         }
+
+        /**
+         * The commit hash is added to the plugin version 
+         * through the CI when merging the PR.
+         *
+         * It is required to regenerate the container when
+         * testing a generated .zip plugin without modifying
+         * the plugin version.
+         * (Otherwise, we'd have to @purge-cache.)
+         *
+         * Important: Do not modify this code!
+         * It will be replaced in the CI to append "#{commit hash}"
+         * when generating the plugin. 
+         */
+        $commitHash = null;
+
+        // Load Composer’s autoloader
+        require_once(__DIR__ . '/vendor/autoload.php');
+
+        // Create and set-up the extension instance
+        $extensionManager->register(new GraphQLAPIExtension(
+            __FILE__,
+            $extensionVersion,
+            $extensionName,
+            $commitHash
+        ))->setup();
     }
 );
