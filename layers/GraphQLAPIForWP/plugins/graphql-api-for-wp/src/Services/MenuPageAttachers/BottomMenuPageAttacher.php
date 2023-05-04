@@ -242,7 +242,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                     $menuName,
                     __('About', 'graphql-api'),
                     __('About', 'graphql-api'),
-                    'manage_options',
+                    $schemaEditorAccessCapability,
                     $aboutMenuPage->getScreenID(),
                     [$aboutMenuPage, 'print']
                 )
@@ -261,7 +261,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 $menuName,
                 __('Recipes', 'graphql-api'),
                 __('Recipes', 'graphql-api'),
-                'manage_options',
+                $schemaEditorAccessCapability,
                 $recipesMenuPage->getScreenID(),
                 $callable
             )
