@@ -19,6 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Configure returning a payload object or the mutated entity for mutations
 - Added "state" column to tables for Custom Endpoints and Persisted Queries
 - Saving the Settings is faster, as it does not regenerate the service container anymore
+- Only activating/deactivating GraphQL API extension plugins will regenerate the service container
 
 ### Fixed
 
