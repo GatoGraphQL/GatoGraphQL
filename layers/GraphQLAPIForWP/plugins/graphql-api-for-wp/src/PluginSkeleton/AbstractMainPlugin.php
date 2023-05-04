@@ -132,18 +132,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         /**
          * Check that the activated/deactivated plugin is
-         * a GraphQL API extension
+         * a GraphQL API extension, or any plugin depended-upon
+         * by any extension.
          */
         $extensions = PluginApp::getExtensionManager()->getExtensions();
+        $mustPurgeContainer = false;
 		foreach ($extensions as $extension) {
-            if ($extension->getPluginFile() !== $pluginFile
-                && !in_array($pluginFile, $extension->getDependedUponPluginFiles())
+            if ($extension->getPluginFile() === $pluginFile
+                || in_array($pluginFile, $extension->getDependedUponPluginFiles())
             ) {
-                continue;
+                $mustPurgeContainer = true;
+                break;
             }
-            $this->purgeContainer();
-            return;
 		}
+        if (!$mustPurgeContainer) {
+            return;
+        }
+        $this->purgeContainer();
     }
 
 
