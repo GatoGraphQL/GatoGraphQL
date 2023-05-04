@@ -30,4 +30,9 @@ abstract class AbstractByCapabilityUserAuthorizationScheme extends AbstractUserA
     {
         return user_can($user, $this->getSchemaEditorAccessCapability());
     }
+
+    final public function getSchemaEditorAccessMinimumRequiredCapability(): string
+    {
+        return $this->getSchemaEditorAccessCapability();
+    }
 }

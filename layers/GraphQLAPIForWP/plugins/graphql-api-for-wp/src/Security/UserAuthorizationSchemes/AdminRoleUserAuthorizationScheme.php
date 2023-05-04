@@ -20,4 +20,9 @@ class AdminRoleUserAuthorizationScheme extends AbstractByRoleUserAuthorizationSc
     {
         return 3;
     }
+
+    public function getSchemaEditorAccessMinimumRequiredCapability(): string
+    {
+        return 'manage_options';
+    }
 }
