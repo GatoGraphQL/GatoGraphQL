@@ -130,7 +130,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     public function handleAnyPluginActivatedOrDeactivated(string $pluginFile): void
     {
-        $this->purgeContainer();
+        /**
+         * Check that the activated/deactivated plugin is
+         * a GraphQL API extension
+         */
+        $extensions = PluginApp::getExtensionManager()->getExtensions();
+		foreach ($extensions as $extension) {
+            if ($extension->getPluginFile() !== $pluginFile
+                && !in_array($pluginFile, $extension->getDependedUponPluginFiles())
+            ) {
+                continue;
+            }
+            $this->purgeContainer();
+            return;
+		}
     }
 
 
