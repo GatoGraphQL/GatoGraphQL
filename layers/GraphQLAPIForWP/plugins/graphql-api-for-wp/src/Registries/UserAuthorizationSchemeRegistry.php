@@ -31,11 +31,18 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
     }
 
     /**
+     * Registered UserAuthorizationSchemes, ordered by priority.
+     *
      * @return UserAuthorizationSchemeInterface[]
      */
     public function getUserAuthorizationSchemes(): array
     {
-        return array_values($this->userAuthorizationSchemes);
+        $userAuthorizationSchemes = array_values($this->userAuthorizationSchemes);
+        usort(
+            $userAuthorizationSchemes,
+            fn (UserAuthorizationSchemeInterface $a, UserAuthorizationSchemeInterface $b) => $a->getPriority() <=> $b->getPriority()
+        );
+        return $userAuthorizationSchemes;
     }
 
     public function getUserAuthorizationScheme(string $name): UserAuthorizationSchemeInterface
