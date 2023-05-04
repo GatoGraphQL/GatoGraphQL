@@ -127,7 +127,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      *
      * When deactivating an extension, the cached service container
      * must be dumped, so that they can be regenerated.
-     * 
+     *
      * Likewise, when activating/deactivating a depended-upon plugin
      * (eg: "Events Manager", required by "GraphQL API - Events Manager")
      * the container must be regenerated.
@@ -143,15 +143,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $inactiveExtensionDependedUponPluginFiles = $extensionManager->getInactiveExtensionsDependedUponPluginFiles();
         $extensionBaseNameInstances = $extensionManager->getExtensions();
         foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
-            if (!($extensionBaseName === $pluginFile
+            if (
+                !($extensionBaseName === $pluginFile
                 || in_array($pluginFile, $extensionInstance->getDependedUponPluginFiles())
                 || in_array($pluginFile, $inactiveExtensionDependedUponPluginFiles)
-            )) {
+                )
+            ) {
                 continue;
             }
             $this->purgeContainer();
             break;
-		}
+        }
     }
 
     /**
@@ -161,7 +163,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function maybeRemoveStoredPluginVersionWhenPluginDeactivated(string $pluginFile): void
     {
         $removePluginFileFromStoredPluginVersions = false;
-        
+
         // Check if this is the main plugin
         if (PluginApp::getMainPlugin()->getPluginFile() === $pluginFile) {
             $removePluginFileFromStoredPluginVersions = true;
@@ -175,7 +177,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         if (!$removePluginFileFromStoredPluginVersions) {
             return;
         }
-        
+
         $this->removePluginFileFromStoredPluginVersions($pluginFile);
     }
 
