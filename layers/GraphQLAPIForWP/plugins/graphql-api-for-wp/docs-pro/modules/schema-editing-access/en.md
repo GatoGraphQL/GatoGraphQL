@@ -6,7 +6,7 @@ Grant access to users other than admins to edit the GraphQL schema
 
 By default, only admin users (those with the `manage_options` capability) have access to the different screens of plugin GraphQL API for WordPress in the admin.
 
-This module `Schema Editing Access` enables to grant non-admin users access to the GraphiQL and Interactive schema clients in the admin, and to read or write the different Custom Post Types from this plugin:
+This module `Schema Editing Access` enables to grant non-admin users access to the GraphiQL and Interactive schema clients in the admin, and to read and/or write the different Custom Post Types from this plugin:
 
 - Persisted Queries
 - Custom Endpoints
@@ -14,6 +14,11 @@ This module `Schema Editing Access` enables to grant non-admin users access to t
 - Access Control Lists
 - Cache Control Lists
 - Others
+
+This is achieved via two different methods:
+
+1. By assigning the custom capability `manage_graphql_schema` to the user
+2. By selecting the user roles that can edit the schema (down to the "Author" level)
 
 <!-- The non-admin roles that can be selected are:
 
@@ -36,9 +41,11 @@ For instance, a contributor can create, but not publish, a persisted query:
 
 ## How to use
 
-Decide what users can edit the schema by selecting the appropriate configuration from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
+Assign capability `manage_graphql_schema` to any user that must be able to edit the schema (you can do this with a 3rd-party plugin, such as [User Role Editor](https://wordpress.org/plugins/search/role/)).
 
-- `"Admin users"` (capability: `manage_options`)
+Alternatively, you can decide what user roles can edit the GraphQL schema by selecting the appropriate configuration from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
+
+- `"Admin users"` (capability: `manage_graphql_schema`)
 - `"Admin + Editor users"` (capability: `edit_others_posts`)
 - `"Admin + Editor + Author users"` (capability: `publish_posts`)
 

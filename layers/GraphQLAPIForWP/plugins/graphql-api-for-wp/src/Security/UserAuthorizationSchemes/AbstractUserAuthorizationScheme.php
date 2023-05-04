@@ -15,4 +15,9 @@ abstract class AbstractUserAuthorizationScheme extends AbstractAutomaticallyInst
             $this->getSchemaEditorAccessCapability()
         );
     }
+
+    public function getPriority(): int
+    {
+        return 10;
+    }
 }

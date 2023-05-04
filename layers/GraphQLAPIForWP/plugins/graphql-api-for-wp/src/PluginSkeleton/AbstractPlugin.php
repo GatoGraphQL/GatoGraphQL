@@ -309,6 +309,7 @@ abstract class AbstractPlugin implements PluginInterface
     {
         // Functions to execute when activating/deactivating the plugin
         \register_deactivation_hook($this->getPluginFile(), $this->deactivate(...));
+
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
          * as in function `addRewriteEndpoints` in `AbstractEndpointHandler`
@@ -321,15 +322,7 @@ abstract class AbstractPlugin implements PluginInterface
          *
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
-        \register_activation_hook($this->getPluginFile(), $this->activate(...));
-    }
-
-    /**
-     * Activate the plugin
-     */
-    public function activate(): void
-    {
-        // Override if needed
+        // register_activation_hook($this->getPluginFile(), $this->activate(...));
     }
 
     /**
