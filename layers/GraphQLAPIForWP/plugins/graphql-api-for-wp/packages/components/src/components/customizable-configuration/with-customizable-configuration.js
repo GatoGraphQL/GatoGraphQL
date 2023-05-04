@@ -23,6 +23,9 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 		return (
 			<div className={ componentClassName }>
 				<div className="customizable-configuration-header">
+					{ ! isSelected && ! customizeConfiguration && (
+						<span>🟡 { __('Default', 'graphql-api') }</span>
+					) }
 					{ isSelected && (
 						<>
 							<em>{ __('Customize configuration?', 'graphql-api') }</em>
@@ -30,25 +33,20 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 								{ ...props }
 								text={ __('The configuration items below can be customized for endpoints using this Schema Configuration. Otherwise, the general configuration (defined on the Settings page) will be used.', 'graphql-api') }
 							/>
+							<ToggleControl
+								{ ...props }
+								label={ __('Use custom configuration', 'graphql-api') }
+								checked={ customizeConfiguration }
+								onChange={ newValue => (
+									setAttributes( {
+										customizeConfiguration: newValue
+									} )
+								)}
+							/>
 						</>
 					) }
-					{ !isSelected && ! customizeConfiguration && (
-						<span>🟡 { __('Default', 'graphql-api') }</span>
-					) }
-					{ isSelected &&
-						<ToggleControl
-							{ ...props }
-							label={ __('Use custom configuration', 'graphql-api') }
-							checked={ customizeConfiguration }
-							onChange={ newValue => (
-								setAttributes( {
-									customizeConfiguration: newValue
-								} )
-							)}
-						/>
-					}
 				</div>
-				{ (isSelected || customizeConfiguration) && (
+				{ ( isSelected || customizeConfiguration ) && (
 					<div className="customizable-configuration-body">
 						<WrappedComponent
 							{ ...props }
