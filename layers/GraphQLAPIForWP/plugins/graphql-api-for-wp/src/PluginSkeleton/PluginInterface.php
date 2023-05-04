@@ -34,6 +34,14 @@ interface PluginInterface
     public function getPluginFile(): string;
 
     /**
+     * Dependencies on other plugins, to regenerate the schema
+     * when these are activated/deactived
+     *
+     * @return string[]
+     */
+    public function getDependedUponPluginFiles(): array;
+
+    /**
      * Commit hash when merging PR in repo, injected during the CI run
      * when generating the .zip plugin.
      */

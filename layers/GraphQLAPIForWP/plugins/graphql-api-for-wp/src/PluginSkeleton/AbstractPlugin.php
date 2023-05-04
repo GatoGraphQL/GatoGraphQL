@@ -56,6 +56,17 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
+     * Dependencies on other plugins, to regenerate the schema
+     * when these are activated/deactived
+     *
+     * @return string[]
+     */
+    public function getDependedUponPluginFiles(): array
+    {
+        return [];
+    }
+
+    /**
      * Plugin version
      */
     public function getPluginVersion(): string
