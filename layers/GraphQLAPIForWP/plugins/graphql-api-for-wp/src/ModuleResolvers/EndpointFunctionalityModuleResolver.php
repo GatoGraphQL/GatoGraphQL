@@ -7,10 +7,15 @@ namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 use GraphQLAPI\GraphQLAPI\Constants\HTMLCodes;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage;
 use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
@@ -34,6 +39,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
+    private ?EndpointHelpers $endpointHelpers = null;
+    private ?GraphiQLMenuPage $graphiQLMenuPage = null;
+    private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
+    private ?RecipesMenuPage $recipesMenuPage = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -52,6 +61,42 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         /** @var GraphQLSchemaConfigurationCustomPostType */
         return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+    }
+    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
+    {
+        $this->endpointHelpers = $endpointHelpers;
+    }
+    final protected function getEndpointHelpers(): EndpointHelpers
+    {
+        /** @var EndpointHelpers */
+        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+    }
+    final public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
+    {
+        $this->graphiQLMenuPage = $graphiQLMenuPage;
+    }
+    final protected function getGraphiQLMenuPage(): GraphiQLMenuPage
+    {
+        /** @var GraphiQLMenuPage */
+        return $this->graphiQLMenuPage ??= $this->instanceManager->getInstance(GraphiQLMenuPage::class);
+    }
+    final public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
+    {
+        $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
+    }
+    final protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
+    {
+        /** @var GraphQLVoyagerMenuPage */
+        return $this->graphQLVoyagerMenuPage ??= $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
+    }
+    final public function setRecipesMenuPage(RecipesMenuPage $recipesMenuPage): void
+    {
+        $this->recipesMenuPage = $recipesMenuPage;
+    }
+    final protected function getRecipesMenuPage(): RecipesMenuPage
+    {
+        /** @var RecipesMenuPage */
+        return $this->recipesMenuPage ??= $this->instanceManager->getInstance(RecipesMenuPage::class);
     }
 
     /**
@@ -230,7 +275,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
-                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be used to feed data to blocks in the WordPress editor</li><li>PHP class <code>%4$s</code> can be used to execute GraphQL queries internally (eg: triggered by some hook)</li></ul>', 'graphql-api'),
+                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%6$s</a> and <a href="%3$s" target="_blank">Interactive Schema%6$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%6$s</a></li><li>PHP class <code>%5$s</code> can be used to execute GraphQL queries internally (eg: triggered by some hook)</li></ul>', 'graphql-api'),
                     ltrim(
                         GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
                         '/'
@@ -242,6 +287,12 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     \admin_url(sprintf(
                         'admin.php?page=%s',
                         $this->getGraphQLVoyagerMenuPage()->getScreenID()
+                    )),
+                    \admin_url(sprintf(
+                        'admin.php?page=%s&%s=%s',
+                        $this->getRecipesMenuPage()->getScreenID(),
+                        RequestParams::TAB,
+                        'feeding-data-to-blocks-in-the-editor'
                     )),
                     'InternalGraphQLServer',
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
