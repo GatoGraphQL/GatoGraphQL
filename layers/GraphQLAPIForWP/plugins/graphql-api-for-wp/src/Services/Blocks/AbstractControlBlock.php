@@ -95,7 +95,7 @@ abstract class AbstractControlBlock extends AbstractBlock
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($this->enableOperations()) {
-            $operationContent = $moduleConfiguration->getEmptyLabel();
+            $operationContent = $moduleConfiguration->getNoItemsSelectedLabel();
             $operations = $attributes[self::ATTRIBUTE_NAME_OPERATIONS] ?? [];
             if ($operations) {
                 $operationContent = sprintf(
@@ -105,7 +105,7 @@ abstract class AbstractControlBlock extends AbstractBlock
             }
         }
         if ($this->enableTypeFields()) {
-            $fieldTypeContent = $moduleConfiguration->getEmptyLabel();
+            $fieldTypeContent = $moduleConfiguration->getNoItemsSelectedLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];
             if ($typeFields) {
                 $typeFieldsForPrint = $this->getTypeFieldsForPrint($typeFields);
@@ -144,7 +144,7 @@ abstract class AbstractControlBlock extends AbstractBlock
             }
         }
         if ($this->enableGlobalFields()) {
-            $globalFieldContent = $moduleConfiguration->getEmptyLabel();
+            $globalFieldContent = $moduleConfiguration->getNoItemsSelectedLabel();
             $globalFields = $attributes[self::ATTRIBUTE_NAME_GLOBAL_FIELDS] ?? [];
             if ($globalFields) {
                 $globalFieldContent = sprintf(
@@ -154,7 +154,7 @@ abstract class AbstractControlBlock extends AbstractBlock
             }
         }
         if ($this->enableDirectives()) {
-            $directiveContent = $moduleConfiguration->getEmptyLabel();
+            $directiveContent = $moduleConfiguration->getNoItemsSelectedLabel();
             $directives = $attributes[self::ATTRIBUTE_NAME_DIRECTIVES] ?? [];
             if ($directives) {
                 $directiveContent = sprintf(
