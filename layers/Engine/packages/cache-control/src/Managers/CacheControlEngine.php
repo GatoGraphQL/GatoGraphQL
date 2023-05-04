@@ -19,7 +19,7 @@ class CacheControlEngine implements CacheControlEngineInterface
             return;
         }
         // Keep the minumum max age
-        if (is_null($this->minimumMaxAge) || $maxAge < $this->minimumMaxAge) {
+        if ($this->minimumMaxAge === null || $maxAge < $this->minimumMaxAge) {
             $this->minimumMaxAge = $maxAge;
         }
     }
