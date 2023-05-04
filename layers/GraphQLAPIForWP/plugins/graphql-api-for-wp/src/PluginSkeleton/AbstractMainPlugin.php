@@ -307,7 +307,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          *
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
-        register_activation_hook($this->getPluginFile(), $this->activate(...));
+        // register_activation_hook($this->getPluginFile(), $this->activate(...));
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
