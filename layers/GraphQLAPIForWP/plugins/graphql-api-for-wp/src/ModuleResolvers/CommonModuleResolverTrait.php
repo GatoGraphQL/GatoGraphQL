@@ -15,8 +15,14 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 trait CommonModuleResolverTrait
 {
-    protected function getDefaultValueDescription(string $blockTitle): string
-    {
+    /**
+     * @param string[]|null $applicableItems
+     */
+    protected function getDefaultValueDescription(
+        string $blockTitle,
+        ?array $applicableItems = null
+    ): string {
+        $applicableItems ??= $this->getDefaultValueApplicableItems($blockTitle);
         return $this->getSettingsInfoContent(
             sprintf(
                 \__('%s %s', 'graphql-api'),
@@ -27,7 +33,7 @@ trait CommonModuleResolverTrait
                         \__('It will be used whenever:', 'graphql-api'),
                         implode(
                             '</li><li>',
-                            $this->getDefaultValueApplicableItems($blockTitle)
+                            $applicableItems
                         )
                     ),
                 )
