@@ -16,6 +16,14 @@ abstract class AbstractByCapabilityUserAuthorizationScheme extends AbstractUserA
         );
     }
 
+    public function getDescription(): string
+    {
+        return sprintf(
+            \__('Users with capability "%s"', 'graphql-api'),
+            $this->getSchemaEditorAccessCapability()
+        );
+    }
+
     abstract protected function getSchemaEditorAccessCapability(): string;
 
     public function canAccessSchemaEditor(WP_User $user): bool
