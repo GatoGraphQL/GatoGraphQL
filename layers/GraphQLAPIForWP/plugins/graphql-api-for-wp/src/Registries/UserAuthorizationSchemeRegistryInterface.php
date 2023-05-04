@@ -18,8 +18,5 @@ interface UserAuthorizationSchemeRegistryInterface
      * @throws UserAuthorizationException When the scheme is not registered
      */
     public function getUserAuthorizationScheme(string $name): UserAuthorizationSchemeInterface;
-    /**
-     * @throws UserAuthorizationException When no default object has been set
-     */
     public function getDefaultUserAuthorizationScheme(): UserAuthorizationSchemeInterface;
 }

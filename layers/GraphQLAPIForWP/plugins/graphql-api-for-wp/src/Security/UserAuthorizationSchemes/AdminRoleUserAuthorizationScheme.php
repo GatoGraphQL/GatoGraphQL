@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes;
 
-class AdminRoleUserAuthorizationScheme extends AbstractUserAuthorizationScheme implements DefaultUserAuthorizationSchemeServiceTagInterface
+class AdminRoleUserAuthorizationScheme extends AbstractUserAuthorizationScheme
 {
     public function getSchemaEditorAccessCapability(): string
     {
@@ -14,5 +14,10 @@ class AdminRoleUserAuthorizationScheme extends AbstractUserAuthorizationScheme i
     public function getDescription(): string
     {
         return \__('Admin users', 'graphql-api');
+    }
+
+    public function getPriority(): int
+    {
+        return 1;
     }
 }

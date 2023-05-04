@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Registries;
 
 use GraphQLAPI\GraphQLAPI\Exception\UserAuthorizationException;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\DefaultUserAuthorizationSchemeServiceTagInterface;
 use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
 
 class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistryInterface
@@ -19,15 +18,7 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
     public function addUserAuthorizationScheme(
         UserAuthorizationSchemeInterface $userAuthorizationScheme
     ): void {
-        if ($userAuthorizationScheme instanceof DefaultUserAuthorizationSchemeServiceTagInterface) {
-            $this->defaultUserAuthorizationScheme = $userAuthorizationScheme;
-            // Place the default one at the top
-            // @see http://www.mendoweb.be/blog/php-array_unshift-key-array_unshift-associative-array/
-            $this->userAuthorizationSchemes = [$userAuthorizationScheme->getName() => $userAuthorizationScheme] + $this->userAuthorizationSchemes;
-        } else {
-            // Place at the end
-            $this->userAuthorizationSchemes[$userAuthorizationScheme->getName()] = $userAuthorizationScheme;
-        }
+        $this->userAuthorizationSchemes[$userAuthorizationScheme->getName()] = $userAuthorizationScheme;
     }
 
     /**
@@ -45,6 +36,9 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
         return $userAuthorizationSchemes;
     }
 
+    /**
+     * @throws UserAuthorizationException When the scheme is not registered
+     */
     public function getUserAuthorizationScheme(string $name): UserAuthorizationSchemeInterface
     {
         if (!isset($this->userAuthorizationSchemes[$name])) {
@@ -59,9 +53,9 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
     public function getDefaultUserAuthorizationScheme(): UserAuthorizationSchemeInterface
     {
         if ($this->defaultUserAuthorizationScheme === null) {
-            throw new UserAuthorizationException(
-                \__('No default user authorization scheme has been set', 'graphql-api')
-            );
+            // They are ordered by priority => get the first item
+            $userAuthorizationSchemes = $this->getUserAuthorizationSchemes();
+            $this->defaultUserAuthorizationScheme = $userAuthorizationSchemes[0];
         }
         return $this->defaultUserAuthorizationScheme;
     }
