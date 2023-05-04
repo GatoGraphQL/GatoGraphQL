@@ -31,7 +31,6 @@ use function do_action;
 use function get_called_class;
 use function get_option;
 use function is_admin;
-use function register_activation_hook;
 use function update_option;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
