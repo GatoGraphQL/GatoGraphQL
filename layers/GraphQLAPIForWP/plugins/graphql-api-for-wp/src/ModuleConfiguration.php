@@ -47,7 +47,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getEmptyLabel(): string
     {
         $envVariable = Environment::EMPTY_LABEL;
-        $defaultValue = \__('---', 'graphql-api');
+        $defaultValue = \__('(not set)', 'graphql-api');
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
