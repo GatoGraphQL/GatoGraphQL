@@ -32,15 +32,8 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 							/>
 						</>
 					) }
-					{ !isSelected && (
-						<>
-							{ ! customizeConfiguration &&
-								<span>🟡 { __('Default', 'graphql-api') }</span>
-							}
-							{/* { customizeConfiguration &&
-								<span>🟢 { __('Use custom configuration', 'graphql-api') }</span>
-							} */}
-						</>
+					{ !isSelected && ! customizeConfiguration && (
+						<span>🟡 { __('Default', 'graphql-api') }</span>
 					) }
 					{ isSelected &&
 						<ToggleControl
@@ -56,14 +49,11 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 					}
 				</div>
 				{ (isSelected || customizeConfiguration) && (
-					<>
-						<hr />
-						<div className="customizable-configuration-body">
-							<WrappedComponent
-								{ ...props }
-							/>
-						</div>
-					</>
+					<div className="customizable-configuration-body">
+						<WrappedComponent
+							{ ...props }
+						/>
+					</div>
 				) }
 			</div>
 		);
