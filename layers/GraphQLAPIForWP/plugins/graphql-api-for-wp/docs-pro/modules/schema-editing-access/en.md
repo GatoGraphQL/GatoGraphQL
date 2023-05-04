@@ -41,9 +41,13 @@ For instance, a contributor can create, but not publish, a persisted query:
 
 ## How to use
 
-Assign capability `manage_graphql_schema` to any user role or any specific user that must be able to edit the schema. To do this, you can use a 3rd-party plugin, such as [User Role Editor](https://wordpress.org/plugins/search/role/).
+Assign capability `manage_graphql_schema` to any user role or any specific user that must be able to edit the schema.
 
-Alternatively, you can select a group of user roles which can edit the GraphQL schema. For this, select the appropriate configuration from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
+(You can use a 3rd-party plugin to do this, such as [User Role Editor](https://wordpress.org/plugins/search/role/).)
+
+You can also select a group of user roles which can edit the GraphQL schema.
+
+The appropriate configuration must be selected from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
 
 - `Users with capability: "manage_graphql_schema"`
 - `Users with role: "administrator"`
