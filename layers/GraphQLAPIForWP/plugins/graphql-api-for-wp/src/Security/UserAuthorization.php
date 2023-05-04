@@ -12,7 +12,6 @@ use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\UserAuthorizationSch
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
-use function current_user_can;
 use function is_user_logged_in;
 
 /**
