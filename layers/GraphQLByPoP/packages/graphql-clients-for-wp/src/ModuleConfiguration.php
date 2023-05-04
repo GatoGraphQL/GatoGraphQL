@@ -64,7 +64,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     {
         $envVariable = Environment::GRAPHIQL_CLIENT_ENDPOINT;
         $defaultValue = '/graphiql/';
-        $callback = [EndpointUtils::class, 'slashURI'];
+        $callback = EndpointUtils::slashURI(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -96,7 +96,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     {
         $envVariable = Environment::VOYAGER_CLIENT_ENDPOINT;
         $defaultValue = '/schema/';
-        $callback = [EndpointUtils::class, 'slashURI'];
+        $callback = EndpointUtils::slashURI(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

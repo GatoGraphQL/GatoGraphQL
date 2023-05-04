@@ -27,7 +27,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     {
         $envVariable = Environment::GRAPHQL_API_ENDPOINT;
         $defaultValue = '/api/graphql/';
-        $callback = [EndpointUtils::class, 'slashURI'];
+        $callback = EndpointUtils::slashURI(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

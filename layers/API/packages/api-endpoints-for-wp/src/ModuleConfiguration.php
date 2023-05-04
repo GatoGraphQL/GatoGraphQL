@@ -27,7 +27,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     {
         $envVariable = Environment::NATIVE_API_ENDPOINT;
         $defaultValue = '/api/';
-        $callback = [EndpointUtils::class, 'slashURI'];
+        $callback = EndpointUtils::slashURI(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
