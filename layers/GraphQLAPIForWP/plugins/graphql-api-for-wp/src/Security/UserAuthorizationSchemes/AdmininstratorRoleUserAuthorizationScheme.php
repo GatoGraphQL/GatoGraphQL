@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes;
 
-class AdminRoleUserAuthorizationScheme extends AbstractByRoleUserAuthorizationScheme
+class AdmininstratorRoleUserAuthorizationScheme extends AbstractByRoleUserAuthorizationScheme
 {
     /**
      * @return string[]
