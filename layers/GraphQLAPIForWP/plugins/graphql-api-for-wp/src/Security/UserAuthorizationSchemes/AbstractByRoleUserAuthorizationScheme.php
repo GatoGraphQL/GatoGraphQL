@@ -16,6 +16,14 @@ abstract class AbstractByRoleUserAuthorizationScheme extends AbstractUserAuthori
         );
     }
 
+    public function getDescription(): string
+    {
+        return sprintf(
+            \__('Users with role "%s"', 'graphql-api'),
+            $this->getSchemaEditorAccessRole()
+        );
+    }
+
     abstract protected function getSchemaEditorAccessRole(): string;
 
     public function canAccessSchemaEditor(WP_User $user): bool
