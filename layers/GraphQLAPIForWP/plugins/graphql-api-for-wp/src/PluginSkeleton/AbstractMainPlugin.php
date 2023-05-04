@@ -136,19 +136,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * by any extension.
          */
         $extensions = PluginApp::getExtensionManager()->getExtensions();
-        $mustPurgeContainer = false;
-		foreach ($extensions as $extension) {
-            if ($extension->getPluginFile() === $pluginFile
+        foreach ($extensions as $extension) {
+            if (!($extension->getPluginFile() === $pluginFile
                 || in_array($pluginFile, $extension->getDependedUponPluginFiles())
-            ) {
-                $mustPurgeContainer = true;
-                break;
+            )) {
+                continue;
             }
+            $this->purgeContainer();
+            break;
 		}
-        if (!$mustPurgeContainer) {
-            return;
-        }
-        $this->purgeContainer();
     }
 
 
