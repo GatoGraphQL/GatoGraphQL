@@ -128,7 +128,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * Do not do it for other plugins as dumping the container is
      * time intensive.
      */
-    public function handleAnyPluginActivatedOrDeactivated(string $pluginFile): void
+    public function handlePluginActivatedOrDeactivated(string $pluginFile): void
     {
         /**
          * Check that the activated/deactivated plugin is
@@ -255,8 +255,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * This way, extensions depending on 3rd-party plugins
          * can have their functionality automatically enabled/disabled.
          */
-        add_action('activate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
-        add_action('deactivate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
+        add_action('activate_plugin', $this->handlePluginActivatedOrDeactivated(...));
+        add_action('deactivate_plugin', $this->handlePluginActivatedOrDeactivated(...));
 
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
