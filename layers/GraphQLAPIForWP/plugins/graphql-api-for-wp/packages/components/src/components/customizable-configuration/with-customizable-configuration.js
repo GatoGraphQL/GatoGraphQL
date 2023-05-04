@@ -56,12 +56,16 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 						/>
 					}
 				</div>
-				<hr />
-				<div className="customizable-configuration-body">
-					<WrappedComponent
-						{ ...props }
-					/>
-				</div>
+				{ (isSelected || customizeConfiguration) && (
+					<>
+						<hr />
+						<div className="customizable-configuration-body">
+							<WrappedComponent
+								{ ...props }
+							/>
+						</div>
+					</>
+				) }
 			</div>
 		);
 	},
