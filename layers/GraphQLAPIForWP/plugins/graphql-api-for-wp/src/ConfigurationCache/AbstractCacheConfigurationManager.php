@@ -80,8 +80,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              * For instance, the WordPress editor can access the full schema,
              * including "admin" fields, so it must be cached individually.
              */
-            $endpointHelpers = $this->getEndpointHelpers();
-            $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
+            $endpointGroup = $this->getEndpointHelpers()->getAdminGraphQLEndpointGroup();
 
             /**
              * The Default and Persisted Query endpoints are applied
