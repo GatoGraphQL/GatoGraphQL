@@ -74,15 +74,15 @@
             "lando logs -t -f | grep \"php:warn\""
         ],
         "enable-restrictive-defaults": [
-            "lando wp config set GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR true --raw --path=wordpress",
+            "lando wp config set GATO_GRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR true --raw --path=wordpress",
             "@delete-settings"
         ],
         "disable-restrictive-defaults": [
-            "lando wp config set GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR false --raw --path=wordpress",
+            "lando wp config set GATO_GRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR false --raw --path=wordpress",
             "@delete-settings"
         ],
         "use-default-restrictive-defaults": [
-            "lando wp config delete GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR --path=wordpress",
+            "lando wp config delete GATO_GRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR --path=wordpress",
             "@delete-settings"
         ],
         "delete-settings": [

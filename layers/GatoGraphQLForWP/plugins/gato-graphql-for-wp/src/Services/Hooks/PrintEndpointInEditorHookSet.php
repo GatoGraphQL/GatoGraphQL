@@ -62,7 +62,7 @@ class PrintEndpointInEditorHookSet extends AbstractHookSet
          */
         \printf(
             $scriptTag,
-            'GRAPHQL_API_BLOCK_EDITOR_ADMIN_ENDPOINT',
+            'GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT',
             $this->getEndpointHelpers()->getAdminBlockEditorGraphQLEndpoint()
         );
     }

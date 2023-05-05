@@ -9,7 +9,7 @@ import './store';
 export { GoProLink } from './pro-components/go-pro-link';
 export { withPROCard } from './pro-components/pro-card';
 export { GraphAPIPROBlock } from './pro-components/pro-block';
-export { GRAPHQL_API_PRO_PLUGIN_WEBSITE_URL } from './pro-constants/environment';
+export { GATO_GRAPHQL_PRO_PLUGIN_WEBSITE_URL } from './pro-constants/environment';
 
 export { withErrorMessage, withSpinner } from './components/loading';
 export { SelectCard } from './components/select-card';

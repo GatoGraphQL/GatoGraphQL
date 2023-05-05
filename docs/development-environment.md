@@ -82,10 +82,10 @@ composer purge-cache
 
 ### Disable caching
 
-Caching is disabled by setting constant `GRAPHQL_API_DISABLE_CACHING` in `wp-config.php` to `true`:
+Caching is disabled by setting constant `GATO_GRAPHQL_DISABLE_CACHING` in `wp-config.php` to `true`:
 
 ```php
-define( 'GRAPHQL_API_DISABLE_CACHING', 'true' );
+define( 'GATO_GRAPHQL_DISABLE_CACHING', 'true' );
 ```
 
 To define this constant, we can execute the following Composer scripts:

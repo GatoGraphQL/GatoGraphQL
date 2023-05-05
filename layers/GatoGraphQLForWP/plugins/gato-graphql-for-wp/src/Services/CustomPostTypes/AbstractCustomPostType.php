@@ -259,7 +259,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          */
         \printf(
             $scriptTag,
-            'GRAPHQL_API_ADMIN_ENDPOINT',
+            'GATO_GRAPHQL_ADMIN_ENDPOINT',
             $endpointHelpers->getAdminGraphQLEndpoint()
         );
 
@@ -275,7 +275,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          */
         \printf(
             $scriptTag,
-            'GRAPHQL_API_PLUGIN_OWN_USE_ADMIN_ENDPOINT',
+            'GATO_GRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT',
             $endpointHelpers->getAdminPluginOwnUseGraphQLEndpoint()
         );
     }

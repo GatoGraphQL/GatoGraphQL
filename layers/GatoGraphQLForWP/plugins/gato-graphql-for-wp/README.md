@@ -74,7 +74,7 @@ composer enable-restrictive-defaults
 On a site in production, set in `wp-config.php`:
 
 ```php
-define( 'GRAPHQL_API_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR', true );
+define( 'GATO_GRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR', true );
 ```
 
 Or define this same key/value as an environment variable. -->
