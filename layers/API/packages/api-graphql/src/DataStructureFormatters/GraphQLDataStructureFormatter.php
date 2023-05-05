@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\GatoGraphQL\DataStructureFormatters;
+namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
-use PoPAPI\GatoGraphQL\Module;
-use PoPAPI\GatoGraphQL\ModuleConfiguration;
+use PoPAPI\GraphQLAPI\Module;
+use PoPAPI\GraphQLAPI\ModuleConfiguration;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;

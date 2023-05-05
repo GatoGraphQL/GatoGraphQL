@@ -16,7 +16,7 @@ class Module extends AbstractModule
     {
         return [
             \PoPAPI\APIEndpointsForWP\Module::class,
-            \PoPAPI\GatoGraphQL\Module::class,
+            \PoPAPI\GraphQLAPI\Module::class,
         ];
     }
 

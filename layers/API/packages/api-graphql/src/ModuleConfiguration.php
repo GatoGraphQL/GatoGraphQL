@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\GatoGraphQL;
+namespace PoPAPI\GraphQLAPI;
 
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;

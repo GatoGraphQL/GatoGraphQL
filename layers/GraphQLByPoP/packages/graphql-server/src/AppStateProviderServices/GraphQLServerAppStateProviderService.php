@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\AppStateProviderServices;
 
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
-use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 

@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\State;
 
 use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
 

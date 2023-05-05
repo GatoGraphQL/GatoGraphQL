@@ -15,7 +15,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPAPI\GatoGraphQL\Module::class,
+            \PoPAPI\GraphQLAPI\Module::class,
         ];
     }
 
