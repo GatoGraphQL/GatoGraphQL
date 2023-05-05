@@ -1,0 +1,10 @@
+query GetSchemaConfigurations {
+    schemaConfigurations(
+        pagination: { limit: -1 }
+        sort: { by: TITLE, order: ASC }
+    ) {
+        id
+        title
+        # excerpt
+    }
+}

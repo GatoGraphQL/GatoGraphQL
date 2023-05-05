@@ -18,18 +18,8 @@ import {
 /**
  * GraphQL query to fetch the list of schemaConfigurations from the GraphQL schema
  */
-export const FETCH_SCHEMA_CONFIGURATIONS_GRAPHQL_QUERY = `
-	query GetSchemaConfigurations {
-		schemaConfigurations(
-			pagination: { limit: -1 }
-			sort: { by: TITLE, order: ASC }
-		) {
-			id
-			title
-			# excerpt
-		}
-	}
-`
+import schemaConfigurationsGraphQLQuery from '../../graphql-documents/schema-configurations.gql';
+export const FETCH_SCHEMA_CONFIGURATIONS_GRAPHQL_QUERY = schemaConfigurationsGraphQLQuery
 
 export default {
 	/**
