@@ -162,7 +162,7 @@
     "type": "library",
     "description": "Demonstration of extending the GraphQL schema, for the Gato GraphQL for WordPress",
     "keywords": ["GraphQL", "PHP", "WordPress", "GraphQL", "API"],
-    "homepage": "https://github.com/GatoGraphQL/extension-demo",
+    "homepage": "https://github.com/GraphQLAPI/extension-demo",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

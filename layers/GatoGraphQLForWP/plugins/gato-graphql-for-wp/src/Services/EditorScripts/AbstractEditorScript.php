@@ -116,7 +116,7 @@ abstract class AbstractEditorScript extends AbstractScript
         /**
          * Register the documentation (from under folder "docs/"), for the locale and the default language
          * @todo Maybe uncomment for webpack v5, to not duplicate the content of the docs inside build/index.js
-         * @see https://github.com/GatoGraphQL/gato-graphql-for-wp/issues/1
+         * @see https://github.com/GraphQLAPI/gato-graphql-for-wp/issues/1
          */
         // $this->initDocumentationScripts();
     }
