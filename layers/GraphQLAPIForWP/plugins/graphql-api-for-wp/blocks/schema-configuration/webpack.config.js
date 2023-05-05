@@ -55,8 +55,8 @@ config.module.rules.push(
 		],
 	},
 	{
-	  test: /\.gql$/i,
-	  use: 'raw-loader',
+	    test: /\.gql$/i,
+	    use: 'raw-loader',
 	},
 );
 
