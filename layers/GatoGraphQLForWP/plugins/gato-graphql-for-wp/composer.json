@@ -1,9 +1,9 @@
 {
-    "name": "gato-graphql/gato-graphql-for-wp",
+    "name": "gato-graphql/gato-graphql",
     "type": "wordpress-plugin",
     "description": "Gato GraphQL",
     "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
-    "homepage": "https://github.com/GraphQLAPI/gato-graphql-for-wp",
+    "homepage": "https://github.com/GraphQLAPI/gato-graphql",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -183,8 +183,8 @@
         "phpunit-for-gato-graphql/wpfaker-schema": "<0.10.2",
         "phpunit-for-gato-graphql/webserver-requests": "<0.10.2",
         "phpunit-for-gato-graphql/dummy-wp-schema": "<0.10.2",
-        "phpunit-for-gato-graphql/gato-graphql-for-wp": "<0.10.2",
-        "phpunit-for-gato-graphql/gato-graphql-for-wp-testing": "<0.10.2",
+        "phpunit-for-gato-graphql/gato-graphql": "<0.10.2",
+        "phpunit-for-gato-graphql/gato-graphql-testing": "<0.10.2",
         "pop-schema/schema-commons": "<0.10.2",
         "pop-wp-schema/meta": "<0.10.2",
         "getpop/access-control": "<0.10.2"

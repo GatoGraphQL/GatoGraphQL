@@ -17,7 +17,7 @@ PoP is a monorepo containing several projects.
 
 - Website: [gatographql.com](https://gatographql.com)
 - [Download](https://github.com/leoloso/PoP/releases/latest/download/gato-graphql.zip)
-- [Plugin source code](layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp)
+- [Plugin source code](layers/GatoGraphQLForWP/plugins/gato-graphql)
 - [Development](docs/development-environment.md)
 
 Plugins can extend the GraphQL schema, to fetch their own data.

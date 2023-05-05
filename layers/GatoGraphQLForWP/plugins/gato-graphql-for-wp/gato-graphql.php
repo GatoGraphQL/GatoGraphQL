@@ -12,7 +12,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Text Domain: gato-graphql
 Domain Path: /languages
-GitHub Plugin URI: GatoGraphQL/gato-graphql-for-wp-dist
+GitHub Plugin URI: GatoGraphQL/gato-graphql-dist
 */
 
 use GatoGraphQL\GatoGraphQL\Plugin;

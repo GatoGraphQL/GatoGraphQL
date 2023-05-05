@@ -16,7 +16,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  * that the original response, as the two are using different
  * configurations.
  *
- * @see layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
+ * @see layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Executers/InternalGraphQLServerTestExecuter.php
  */
 class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {

@@ -1,5 +1,5 @@
 {
-    "name": "phpunit-for-gato-graphql/gato-graphql-for-wp",
+    "name": "phpunit-for-gato-graphql/gato-graphql",
     "conflict": {
         "getpop/componentrouting": "<0.10.2",
         "getpop/loosecontracts": "<0.10.2",
@@ -91,7 +91,7 @@
         "graphql-by-pop/graphql-server": "<0.10.2",
         "gato-graphql/external-dependency-wrappers": "<0.10.2",
         "gato-graphql/extension-demo": "<0.10.2",
-        "gato-graphql/gato-graphql-for-wp": "<0.10.2",
+        "gato-graphql/gato-graphql": "<0.10.2",
         "getpop/definitions-emoji": "<0.10.2",
         "getpop/static-site-generator": "<0.10.2",
         "getpop/resources": "<0.10.2",
@@ -138,7 +138,7 @@
         "getpop/engine": "<0.10.2",
         "gato-graphql/markdown-convertor": "<0.10.2",
         "gato-graphql/plugin-utils": "<0.10.2",
-        "phpunit-for-gato-graphql/gato-graphql-for-wp-testing": "<0.10.2",
+        "phpunit-for-gato-graphql/gato-graphql-testing": "<0.10.2",
         "pop-schema/schema-commons": "<0.10.2",
         "pop-wp-schema/taxonomymeta": "<0.10.2",
         "pop-wp-schema/usermeta": "<0.10.2",
@@ -150,7 +150,7 @@
     "type": "library",
     "description": "Mock the WordPress schema when running PHPUnit tests",
     "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit", "API"],
-    "homepage": "https://github.com/PHPUnitForGatoGraphQL/gato-graphql-for-wp",
+    "homepage": "https://github.com/PHPUnitForGatoGraphQL/gato-graphql",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

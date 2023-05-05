@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Wrap classes from 3rd-party dependencies which must be accessed by Gato GraphQL, so they can be scoped (package `gato-graphql/gato-graphql-for-wp` is not scoped)
+Wrap classes from 3rd-party dependencies which must be accessed by Gato GraphQL, so they can be scoped (package `gato-graphql/gato-graphql` is not scoped)
 
 ## Install
 

@@ -8,7 +8,7 @@ const IMPLICIT_FEATURES_PRO_DOCS_PATH = `docs-pro/implicit-features/`;
 const MODULE_PRO_DOCS_PATH = `docs-pro/modules/`;
 const NPM_PACKAGE_VERSION = process.env.npm_package_version;
 const PACKAGE_TAG = NPM_PACKAGE_VERSION.endsWith('-dev') ? 'master' : NPM_PACKAGE_VERSION;
-const GITHUB_BASE_URL = `https://raw.githubusercontent.com/leoloso/PoP/${ PACKAGE_TAG }/layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp`
+const GITHUB_BASE_URL = `https://raw.githubusercontent.com/leoloso/PoP/${ PACKAGE_TAG }/layers/GatoGraphQLForWP/plugins/gato-graphql`
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? `${ GITHUB_BASE_URL }/${ IMPLICIT_FEATURES_DOCS_PATH }/${ ANY_IMPLICIT_FEATURE }`
 	: null;

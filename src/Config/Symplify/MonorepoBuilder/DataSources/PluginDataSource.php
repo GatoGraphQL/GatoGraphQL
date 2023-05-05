@@ -19,7 +19,7 @@ class PluginDataSource
         return [
             // Gato GraphQL
             [
-                'path' => 'layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp',
+                'path' => 'layers/GatoGraphQLForWP/plugins/gato-graphql',
                 'zip_file' => 'gato-graphql',
                 'main_file' => 'gato-graphql.php',
                 'exclude_files' => implode(' ', [
@@ -32,7 +32,7 @@ class PluginDataSource
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
                 ]),
                 'dist_repo_organization' => 'GatoGraphQL',
-                'dist_repo_name' => 'gato-graphql-for-wp-dist',
+                'dist_repo_name' => 'gato-graphql-dist',
                 'additional_rector_configs' => [
                     $this->rootDir . '/config/rector/downgrade/gato-graphql/chained-rules/rector-cacheitem.php',
                     $this->rootDir . '/config/rector/downgrade/gato-graphql/chained-rules/rector-arrowfunction-mixedtype.php',
@@ -49,7 +49,7 @@ class PluginDataSource
             ],
             // Gato GraphQL - Testing <= To run integration tests with InstaWP
             [
-                'path' => 'layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-for-wp-testing',
+                'path' => 'layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing',
                 'zip_file' => 'gato-graphql-testing',
                 'main_file' => 'gato-graphql-testing.php',
                 'dist_repo_organization' => 'GatoGraphQL',

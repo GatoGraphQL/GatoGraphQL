@@ -636,7 +636,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * For the Standard GraphQL Server there is no need, as it will
              * already produce this state from the AppStateProvider.
              *
-             * @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
+             * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
              *
              * Please notice: Setting the AppState as needed by GraphQL here
              * means that the InternalGraphQLServer is configured to always

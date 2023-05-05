@@ -52,7 +52,7 @@
         "psr-4": {
             "GatoGraphQL\\ExtensionDemo\\": "layers/GatoGraphQLForWP/plugins/extension-demo/src",
             "GatoGraphQL\\ExternalDependencyWrappers\\": "layers/GatoGraphQLForWP/packages/external-dependency-wrappers/src",
-            "GatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/src",
+            "GatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/plugins/gato-graphql/src",
             "GatoGraphQL\\MarkdownConvertor\\": "layers/GatoGraphQLForWP/packages/markdown-convertor/src",
             "GatoGraphQL\\PluginUtils\\": "layers/GatoGraphQLForWP/packages/plugin-utils/src",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/src",
@@ -61,8 +61,8 @@
             "GraphQLByPoP\\GraphQLServer\\": "layers/GraphQLByPoP/packages/graphql-server/src",
             "PHPUnitForGatoGraphQL\\DummySchema\\": "layers/GatoGraphQLForWP/phpunit-packages/dummy-schema/src",
             "PHPUnitForGatoGraphQL\\DummyWPSchema\\": "layers/GatoGraphQLForWP/phpunit-packages/dummy-wp-schema/src",
-            "PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\": "layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-for-wp-testing/src",
-            "PHPUnitForGatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-for-wp/src",
+            "PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\": "layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src",
+            "PHPUnitForGatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/phpunit-packages/gato-graphql/src",
             "PHPUnitForGatoGraphQL\\WPFakerSchema\\": "layers/GatoGraphQLForWP/phpunit-packages/wpfaker-schema/src",
             "PHPUnitForGatoGraphQL\\WebserverRequests\\": "layers/GatoGraphQLForWP/phpunit-packages/webserver-requests/src",
             "PoPAPI\\APIClients\\": "layers/API/packages/api-clients/src",
@@ -212,7 +212,7 @@
         "psr-4": {
             "GatoGraphQL\\ExtensionDemo\\": "layers/GatoGraphQLForWP/plugins/extension-demo/tests",
             "GatoGraphQL\\ExternalDependencyWrappers\\": "layers/GatoGraphQLForWP/packages/external-dependency-wrappers/tests",
-            "GatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/tests",
+            "GatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/plugins/gato-graphql/tests",
             "GatoGraphQL\\MarkdownConvertor\\": "layers/GatoGraphQLForWP/packages/markdown-convertor/tests",
             "GatoGraphQL\\PluginUtils\\": "layers/GatoGraphQLForWP/packages/plugin-utils/tests",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/tests",
@@ -221,8 +221,8 @@
             "GraphQLByPoP\\GraphQLServer\\": "layers/GraphQLByPoP/packages/graphql-server/tests",
             "PHPUnitForGatoGraphQL\\DummySchema\\": "layers/GatoGraphQLForWP/phpunit-packages/dummy-schema/tests",
             "PHPUnitForGatoGraphQL\\DummyWPSchema\\": "layers/GatoGraphQLForWP/phpunit-packages/dummy-wp-schema/tests",
-            "PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\": "layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-for-wp-testing/tests",
-            "PHPUnitForGatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-for-wp/tests",
+            "PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\": "layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/tests",
+            "PHPUnitForGatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/phpunit-packages/gato-graphql/tests",
             "PHPUnitForGatoGraphQL\\WPFakerSchema\\": "layers/GatoGraphQLForWP/phpunit-packages/wpfaker-schema/tests",
             "PHPUnitForGatoGraphQL\\WebserverRequests\\": "layers/GatoGraphQLForWP/phpunit-packages/webserver-requests/tests",
             "PoPAPI\\APIClients\\": "layers/API/packages/api-clients/tests",
@@ -410,7 +410,7 @@
         "getpop/static-site-generator": "0.10.2",
         "gato-graphql/extension-demo": "0.10.2",
         "gato-graphql/external-dependency-wrappers": "0.10.2",
-        "gato-graphql/gato-graphql-for-wp": "0.10.2",
+        "gato-graphql/gato-graphql": "0.10.2",
         "gato-graphql/markdown-convertor": "0.10.2",
         "gato-graphql/plugin-utils": "0.10.2",
         "graphql-by-pop/graphiql": "0.10.2",
@@ -421,8 +421,8 @@
         "graphql-by-pop/graphql-voyager": "0.10.2",
         "phpunit-for-gato-graphql/dummy-schema": "0.10.2",
         "phpunit-for-gato-graphql/dummy-wp-schema": "0.10.2",
-        "phpunit-for-gato-graphql/gato-graphql-for-wp": "0.10.2",
-        "phpunit-for-gato-graphql/gato-graphql-for-wp-testing": "0.10.2",
+        "phpunit-for-gato-graphql/gato-graphql": "0.10.2",
+        "phpunit-for-gato-graphql/gato-graphql-testing": "0.10.2",
         "phpunit-for-gato-graphql/webserver-requests": "0.10.2",
         "phpunit-for-gato-graphql/wpfaker-schema": "0.10.2",
         "pop-api/api": "0.10.2",
@@ -588,52 +588,52 @@
             "@preview-src-downgrade",
             "@preview-vendor-downgrade"
         ],
-        "preview-gato-graphql-downgrade": "bash -x ci/downgrade/downgrade_code.sh config/rector/downgrade/gato-graphql/rector.php --dry-run layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp \"\" \"$(monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)\"",
-        "ssh-server": "composer ssh-server -d webservers/gato-graphql-for-wp",
-        "build-server": "composer build-server -d webservers/gato-graphql-for-wp",
-        "init-server": "composer init-server -d webservers/gato-graphql-for-wp",
-        "init-server-prod": "composer init-server -d webservers/gato-graphql-for-wp-for-prod",
-        "start-server": "composer start-server -d webservers/gato-graphql-for-wp",
-        "destroy-server": "composer destroy-server -d webservers/gato-graphql-for-wp",
+        "preview-gato-graphql-downgrade": "bash -x ci/downgrade/downgrade_code.sh config/rector/downgrade/gato-graphql/rector.php --dry-run layers/GatoGraphQLForWP/plugins/gato-graphql \"\" \"$(monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)\"",
+        "ssh-server": "composer ssh-server -d webservers/gato-graphql",
+        "build-server": "composer build-server -d webservers/gato-graphql",
+        "init-server": "composer init-server -d webservers/gato-graphql",
+        "init-server-prod": "composer init-server -d webservers/gato-graphql-for-prod",
+        "start-server": "composer start-server -d webservers/gato-graphql",
+        "destroy-server": "composer destroy-server -d webservers/gato-graphql",
         "reset-db": [
             "Composer\\Config::disableProcessTimeout",
-            "composer reset-db -d webservers/gato-graphql-for-wp"
+            "composer reset-db -d webservers/gato-graphql"
         ],
         "reset-db-prod": [
             "Composer\\Config::disableProcessTimeout",
-            "composer reset-db -d webservers/gato-graphql-for-wp-for-prod"
+            "composer reset-db -d webservers/gato-graphql-for-prod"
         ],
-        "install-site": "composer install-site -d webservers/gato-graphql-for-wp",
-        "import-data": "composer import-data -d webservers/gato-graphql-for-wp",
-        "create-users": "composer create-users -d webservers/gato-graphql-for-wp",
-        "update-deps": "composer update-deps -d webservers/gato-graphql-for-wp",
-        "optimize-autoloader": "composer optimize-autoloader -d webservers/gato-graphql-for-wp",
-        "deoptimize-autoloader": "composer deoptimize-autoloader -d webservers/gato-graphql-for-wp",
+        "install-site": "composer install-site -d webservers/gato-graphql",
+        "import-data": "composer import-data -d webservers/gato-graphql",
+        "create-users": "composer create-users -d webservers/gato-graphql",
+        "update-deps": "composer update-deps -d webservers/gato-graphql",
+        "optimize-autoloader": "composer optimize-autoloader -d webservers/gato-graphql",
+        "deoptimize-autoloader": "composer deoptimize-autoloader -d webservers/gato-graphql",
         "log-server-errors": [
             "Composer\\Config::disableProcessTimeout",
-            "composer log-server-errors -d webservers/gato-graphql-for-wp"
+            "composer log-server-errors -d webservers/gato-graphql"
         ],
         "log-server-warnings": [
             "Composer\\Config::disableProcessTimeout",
-            "composer log-server-warnings -d webservers/gato-graphql-for-wp"
+            "composer log-server-warnings -d webservers/gato-graphql"
         ],
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
-            "composer rebuild-server -d webservers/gato-graphql-for-wp"
+            "composer rebuild-server -d webservers/gato-graphql"
         ],
         "rebuild-server-prod": [
             "Composer\\Config::disableProcessTimeout",
-            "composer rebuild-server -d webservers/gato-graphql-for-wp-for-prod"
+            "composer rebuild-server -d webservers/gato-graphql-for-prod"
         ],
-        "stop-server": "composer stop-server -d webservers/gato-graphql-for-wp",
-        "enable-caching": "composer enable-caching -d webservers/gato-graphql-for-wp",
-        "disable-caching": "composer disable-caching -d webservers/gato-graphql-for-wp",
-        "enable-restrictive-defaults": "composer enable-restrictive-defaults -d webservers/gato-graphql-for-wp",
-        "disable-restrictive-defaults": "composer disable-restrictive-defaults -d webservers/gato-graphql-for-wp",
-        "use-default-restrictive-defaults": "composer use-default-restrictive-defaults -d webservers/gato-graphql-for-wp",
-        "delete-settings": "composer delete-settings -d webservers/gato-graphql-for-wp",
-        "purge-cache": "composer purge-cache -d webservers/gato-graphql-for-wp",
-        "server-info": "composer server-info -d webservers/gato-graphql-for-wp",
+        "stop-server": "composer stop-server -d webservers/gato-graphql",
+        "enable-caching": "composer enable-caching -d webservers/gato-graphql",
+        "disable-caching": "composer disable-caching -d webservers/gato-graphql",
+        "enable-restrictive-defaults": "composer enable-restrictive-defaults -d webservers/gato-graphql",
+        "disable-restrictive-defaults": "composer disable-restrictive-defaults -d webservers/gato-graphql",
+        "use-default-restrictive-defaults": "composer use-default-restrictive-defaults -d webservers/gato-graphql",
+        "delete-settings": "composer delete-settings -d webservers/gato-graphql",
+        "purge-cache": "composer purge-cache -d webservers/gato-graphql",
+        "server-info": "composer server-info -d webservers/gato-graphql",
         "merge-monorepo": "monorepo-builder merge --config=config/monorepo-builder/merge.php --ansi",
         "propagate-monorepo": "monorepo-builder propagate --config=config/monorepo-builder/propagate.php --ansi",
         "validate-monorepo": "monorepo-builder validate --config=config/monorepo-builder/validate.php --ansi",
@@ -645,15 +645,15 @@
         "remove-unused-imports": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
         "build-js": [
             "Composer\\Config::disableProcessTimeout",
-            "bash -x dev-helpers/scripts/build-js.sh layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp BUILD_PROD"
+            "bash -x dev-helpers/scripts/build-js.sh layers/GatoGraphQLForWP/plugins/gato-graphql BUILD_PROD"
         ],
         "install-deps-build-js": [
             "Composer\\Config::disableProcessTimeout",
-            "bash -x dev-helpers/scripts/build-js.sh layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp INSTALL_DEPS"
+            "bash -x dev-helpers/scripts/build-js.sh layers/GatoGraphQLForWP/plugins/gato-graphql INSTALL_DEPS"
         ],
         "npm-start-js": [
             "Composer\\Config::disableProcessTimeout",
-            "bash -x dev-helpers/scripts/build-js.sh layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp COMPILE_DEV"
+            "bash -x dev-helpers/scripts/build-js.sh layers/GatoGraphQLForWP/plugins/gato-graphql COMPILE_DEV"
         ]
     },
     "scripts-descriptions": {

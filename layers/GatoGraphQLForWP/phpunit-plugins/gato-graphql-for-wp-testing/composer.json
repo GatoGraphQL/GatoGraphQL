@@ -1,9 +1,9 @@
 {
-    "name": "phpunit-for-gato-graphql/gato-graphql-for-wp-testing",
+    "name": "phpunit-for-gato-graphql/gato-graphql-testing",
     "type": "wordpress-plugin",
     "description": "Utilities for testing Gato GraphQL",
     "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
-    "homepage": "https://github.com/PHPUnitForGatoGraphQL/gato-graphql-for-wp-testing",
+    "homepage": "https://github.com/PHPUnitForGatoGraphQL/gato-graphql-testing",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -135,9 +135,9 @@
         "phpunit-for-gato-graphql/wpfaker-schema": "<0.10.2",
         "phpunit-for-gato-graphql/webserver-requests": "<0.10.2",
         "phpunit-for-gato-graphql/dummy-wp-schema": "<0.10.2",
-        "phpunit-for-gato-graphql/gato-graphql-for-wp": "<0.10.2",
+        "phpunit-for-gato-graphql/gato-graphql": "<0.10.2",
         "gato-graphql/extension-demo": "<0.10.2",
-        "gato-graphql/gato-graphql-for-wp": "<0.10.2",
+        "gato-graphql/gato-graphql": "<0.10.2",
         "graphql-by-pop/graphiql": "<0.10.2",
         "graphql-by-pop/graphql-voyager": "<0.10.2",
         "graphql-by-pop/graphql-clients-for-wp": "<0.10.2",

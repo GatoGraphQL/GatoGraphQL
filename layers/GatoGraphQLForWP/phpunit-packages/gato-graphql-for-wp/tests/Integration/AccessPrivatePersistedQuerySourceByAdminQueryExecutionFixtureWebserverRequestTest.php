@@ -34,7 +34,7 @@ class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequ
         /**
          * Expect to NOT find the "You are not authorized" message
          *
-         * @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/src/Services/Helpers/RenderingHelpers.php
+         * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Helpers/RenderingHelpers.php
          */
         $providerItems['private-persisted-query'][1] = '/(?<!You are not authorized to see this content)/';
         return $providerItems;

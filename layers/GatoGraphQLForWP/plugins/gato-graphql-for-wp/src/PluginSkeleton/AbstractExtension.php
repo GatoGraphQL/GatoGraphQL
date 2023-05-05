@@ -9,7 +9,7 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 
 /**
- * This class is hosted within the gato-graphql-for-wp plugin, and not
+ * This class is hosted within the gato-graphql plugin, and not
  * within the extension plugin. That means that the main plugin
  * must be installed, for any extension to work.
  *

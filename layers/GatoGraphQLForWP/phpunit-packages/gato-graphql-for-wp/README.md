@@ -16,12 +16,12 @@ Mock the WordPress schema when running PHPUnit tests
 Via Composer
 
 ``` bash
-composer require phpunit-for-gato-graphql/gato-graphql-for-wp
+composer require phpunit-for-gato-graphql/gato-graphql
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/phpunit-packages/gato-graphql-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-for-wp).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/phpunit-packages/gato-graphql`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/phpunit-packages/gato-graphql).
 
 ## Usage
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/phpunit-for-gato-graphql/gato-graphql-for-wp.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/phpunit-for-gato-graphql/gato-graphql.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/phpunit-for-gato-graphql/gato-graphql-for-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-gato-graphql/gato-graphql-for-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-gato-graphql/gato-graphql-for-wp.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-gato-graphql/gato-graphql-for-wp.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/phpunit-for-gato-graphql/gato-graphql/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-gato-graphql/gato-graphql.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-gato-graphql/gato-graphql.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-gato-graphql/gato-graphql.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/phpunit-for-gato-graphql/gato-graphql-for-wp
-[link-travis]: https://travis-ci.org/phpunit-for-gato-graphql/gato-graphql-for-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/gato-graphql-for-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/gato-graphql-for-wp
-[link-downloads]: https://packagist.org/packages/phpunit-for-gato-graphql/gato-graphql-for-wp
+[link-packagist]: https://packagist.org/packages/phpunit-for-gato-graphql/gato-graphql
+[link-travis]: https://travis-ci.org/phpunit-for-gato-graphql/gato-graphql
+[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/gato-graphql/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/gato-graphql
+[link-downloads]: https://packagist.org/packages/phpunit-for-gato-graphql/gato-graphql
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

@@ -35,7 +35,7 @@ Please read the author's [introduction to Gato GraphQL](https://leoloso.com/post
 
 ## Development
 
-<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/gato-graphql-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp). -->
+<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/gato-graphql`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/gato-graphql). -->
 
 👀 Instructions: [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
 
@@ -182,7 +182,7 @@ Explanation of how the codebase is split into granular packages, to enable CMS-a
 
 Description of how the plugin is scoped:
 
-- [Gato GraphQL is now scoped, thanks to PHP-Scoper!](https://gatographql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)
+- [Gato GraphQL is now scoped, thanks to PHP-Scoper!](https://gatographql.com/blog/gato-graphql-is-now-scoped-thanks-to-php-scoper/)
 
 ### GraphQL by PoP documentation
 
@@ -296,18 +296,18 @@ If you discover any security related issues, please email leo@getpop.org instead
 GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/GatoGraphQL/gato-graphql-for-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GatoGraphQL/gato-graphql-for-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/GatoGraphQL/gato-graphql-for-wp.svg?style=flat-square
-[ico-release]: https://img.shields.io/github/release/GatoGraphQL/gato-graphql-for-wp.svg
-[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/gato-graphql-for-wp/total.svg
+[ico-travis]: https://img.shields.io/travis/GatoGraphQL/gato-graphql/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GatoGraphQL/gato-graphql.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/GatoGraphQL/gato-graphql.svg?style=flat-square
+[ico-release]: https://img.shields.io/github/release/GatoGraphQL/gato-graphql.svg
+[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/gato-graphql/total.svg
 
-[link-travis]: https://travis-ci.com/github/GatoGraphQL/gato-graphql-for-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/gato-graphql-for-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/gato-graphql-for-wp
-[link-downloads]: https://GitHub.com/GatoGraphQL/gato-graphql-for-wp/releases/
-[link-release]: https://GitHub.com/GatoGraphQL/gato-graphql-for-wp/releases/
-[link-downloads]: https://GitHub.com/GatoGraphQL/gato-graphql-for-wp/releases/
+[link-travis]: https://travis-ci.com/github/GatoGraphQL/gato-graphql
+[link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/gato-graphql/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/gato-graphql
+[link-downloads]: https://GitHub.com/GatoGraphQL/gato-graphql/releases/
+[link-release]: https://GitHub.com/GatoGraphQL/gato-graphql/releases/
+[link-downloads]: https://GitHub.com/GatoGraphQL/gato-graphql/releases/
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
 

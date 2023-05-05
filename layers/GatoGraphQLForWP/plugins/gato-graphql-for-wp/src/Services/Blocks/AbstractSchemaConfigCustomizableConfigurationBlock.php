@@ -47,7 +47,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
             $blockContent,
             /**
              * Hardcode style to disable the inputs, same as style in block.
-             * @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/packages/components/src/components/base-styles/_mixins.scss
+             * @see layers/GatoGraphQLForWP/plugins/gato-graphql/packages/components/src/components/base-styles/_mixins.scss
              */
             $customizeConfiguration ? '' : 'pointer-events: none; opacity: 0.4;',
             $this->doRenderBlock($attributes, $content)
