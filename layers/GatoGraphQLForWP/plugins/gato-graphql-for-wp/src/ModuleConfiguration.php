@@ -10,13 +10,13 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
     // /**
-    //  * URL base for the module, pointing to gato-graphql.com
+    //  * URL base for the module, pointing to gatographql.com
     //  */
     // public function getModuleURLBase(): string
     // {
     //     // Define properties
     //     $envVariable = Environment::MODULE_URL_BASE;
-    //     $defaultValue = 'https://gato-graphql.com/modules/';
+    //     $defaultValue = 'https://gatographql.com/modules/';
     //     // Initialize property from the environment/hook
     //     $this->retrieveConfigurationValueOrUseDefault(
     //         $envVariable,
@@ -158,7 +158,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getPROPluginWebsiteURL(): string
     {
         $envVariable = Environment::PRO_PLUGIN_WEBSITE_URL;
-        $defaultValue = 'https://gato-graphql.com';
+        $defaultValue = 'https://gatographql.com';
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

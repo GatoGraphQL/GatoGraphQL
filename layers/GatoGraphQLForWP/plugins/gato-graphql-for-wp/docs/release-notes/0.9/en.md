@@ -212,7 +212,7 @@ Depending on the chosen option, different data must be provided. For instance, f
 
 We can pass several items under `metaQuery`, and decide if to do an `AND` or `OR` of their conditions by passing input `relation` on the first item in the list.
 
-Concerning security, meta entries are by default not exposed. To make them accessible, their meta key [must be added to the corresponding allowlist](https://gato-graphql.com/guides/config/querying-by-meta-values/), or an error will be returned.
+Concerning security, meta entries are by default not exposed. To make them accessible, their meta key [must be added to the corresponding allowlist](https://gatographql.com/guides/config/querying-by-meta-values/), or an error will be returned.
 
 Let's see some examples. This query filters posts where meta key `_thumbnail_id` exists:
 
@@ -833,7 +833,7 @@ Now, we can execute the following query:
 ```json
 {
   "data": {
-    "siteURL": "https://gato-graphql.com",
+    "siteURL": "https://gatographql.com",
     "stickyPosts": [
       1241,
       1788,
@@ -1493,7 +1493,7 @@ Will produce this response:
 
 ## Namespacing is applied to new types
 
-The newly introduced types (scalars, enums and input objects), as well as the existing types (object, interfaces and unions) [have their names namespaced](https://gato-graphql.com/guides/schema/namespacing-the-schema/).
+The newly introduced types (scalars, enums and input objects), as well as the existing types (object, interfaces and unions) [have their names namespaced](https://gatographql.com/guides/schema/namespacing-the-schema/).
 
 That means that, if your plugin includes a custom scalar type `Price`, and another plugin does the same, these names will be namespaced (becoming `YourPlugin_Price` and `TheOtherPlugin_Price`), thus avoiding conflicts in the schema.
 
@@ -1666,7 +1666,7 @@ Now, they have their own:
 
 ## Return an error if access is not allowed for the option name or meta key
 
-When executing field `Root.option`, if [access to the option name is not allowed in the Settings](https://gato-graphql.com/guides/config/defining-settings-allowed-entries/), the query now returns an error.
+When executing field `Root.option`, if [access to the option name is not allowed in the Settings](https://gatographql.com/guides/config/defining-settings-allowed-entries/), the query now returns an error.
 
 For instance, executing this query:
 
@@ -1696,7 +1696,7 @@ Returns:
 }
 ```
 
-The same behavior happens for the meta fields, when querying for a meta key whose [access is not allowed in the Settings](https://gato-graphql.com/guides/config/querying-by-meta-values/):
+The same behavior happens for the meta fields, when querying for a meta key whose [access is not allowed in the Settings](https://gatographql.com/guides/config/querying-by-meta-values/):
 
 - `Post.metaValue`
 - `Post.metaValues`

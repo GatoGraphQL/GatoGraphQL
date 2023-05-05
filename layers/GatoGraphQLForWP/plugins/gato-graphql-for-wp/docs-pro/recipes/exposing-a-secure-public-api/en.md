@@ -26,6 +26,6 @@ PRO:
         disabling-schema-introspection-field-in-acl.png
         introspection-disabled-graphiql-error.png
         schema-introspection-field-in-acl.png
-    Then copy again to gato-graphql.com
+    Then copy again to gatographql.com
 Contents from:
     src/guides/config/removing-types-from-the-schema.md

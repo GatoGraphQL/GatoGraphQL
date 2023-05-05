@@ -78,19 +78,19 @@ Similar to `_sendGraphQLHTTPRequests` but it executes multiple GraphQL queries c
 
 We must configure the list of URLs that we can connect to.
 
-<!-- By default, this list is initially empty. (Unless the non-restrictive default settings to <a href="https://gato-graphql.com/guides/config/building-static-sites" target="_blank">build static sites</a> are enabled, in which case any URL is allowed by default.) -->
+<!-- By default, this list is initially empty. (Unless the non-restrictive default settings to <a href="https://gatographql.com/guides/config/building-static-sites" target="_blank">build static sites</a> are enabled, in which case any URL is allowed by default.) -->
 
 Each entry can either be:
 
 - A regex (regular expression), if it's surrounded by `/` or `#`, or
 - The complete URL, otherwise
 
-For instance, any of these entries match URL `"https://gato-graphql.com/features/"`:
+For instance, any of these entries match URL `"https://gatographql.com/features/"`:
 
-- `https://gato-graphql.com/features/`
-- `#https://gato-graphql.com/features/?#`
-- `#https://gato-graphql.com/.*#`
-- `/https:\\/\\/gato-graphql.com\\/(\S+)/`
+- `https://gatographql.com/features/`
+- `#https://gatographql.com/features/?#`
+- `#https://gatographql.com/.*#`
+- `/https:\\/\\/gatographql.com\\/(\S+)/`
 
 There are 2 places where this configuration can take place, in order of priority:
 

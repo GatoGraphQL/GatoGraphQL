@@ -29,7 +29,7 @@ The codebase for the GraphQL server has been refactored, to use a service contai
 
 This is a milestone, which introduces a single approach for developing the plugin and its extensions, greatly simplifying their code and documentation.
 
-Docs on how to create custom extensions for the GraphQL API can finally be written. Work on them will start soon, and will be published on [gato-graphql.com/guides](https://gato-graphql.com/guides).
+Docs on how to create custom extensions for the GraphQL API can finally be written. Work on them will start soon, and will be published on [gatographql.com/guides](https://gatographql.com/guides).
 
 ## Cache is saved under `wp-content`
 
@@ -338,7 +338,7 @@ And then, ship `1.0` around year-end or early 2022, including:
 - Complete documentation guides on creating extensions
 - Launch of the GraphQL API plugin in `wp.org`
 
-To receive notifications on the current status, you can [subscribe to the newsletter](https://gato-graphql.com/newsletter/).
+To receive notifications on the current status, you can [subscribe to the newsletter](https://gatographql.com/newsletter/).
 
 ---
 

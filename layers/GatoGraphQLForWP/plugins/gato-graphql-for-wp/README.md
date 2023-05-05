@@ -9,7 +9,7 @@
 <!-- [![GitHub release][ico-release]][link-release] -->
 <!-- [![Github all releases][ico-downloads]][link-downloads] -->
 
-Transform your WordPress site into a modern GraphQL server: [gato-graphql.com](https://gato-graphql.com).
+Transform your WordPress site into a modern GraphQL server: [gatographql.com](https://gatographql.com).
 
 ![The interactive schema visualizer](docs/images/interactive-schema.png)
 
@@ -156,7 +156,7 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 - [YouTube video: Gato GraphQL for WordPress demo](https://youtu.be/LnyNyT2RwwI)
 - [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
 - [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
-- [Comparing the Gato GraphQL for WordPress vs WPGraphQL](https://gato-graphql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
+- [Comparing the Gato GraphQL for WordPress vs WPGraphQL](https://gatographql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
 
 <details>
 
@@ -182,7 +182,7 @@ Explanation of how the codebase is split into granular packages, to enable CMS-a
 
 Description of how the plugin is scoped:
 
-- [Gato GraphQL for WordPress is now scoped, thanks to PHP-Scoper!](https://gato-graphql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)
+- [Gato GraphQL for WordPress is now scoped, thanks to PHP-Scoper!](https://gatographql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)
 
 ### GraphQL by PoP documentation
 

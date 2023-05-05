@@ -15,6 +15,6 @@ Minimizing the amount of code that must be re-implemented, and avoiding duplicat
 
 ## Additional resources
 
-- [💁🏽‍♂️ Why to support CMS-agnosticism, the Gato GraphQL was split to ~90 packages, and benefits and drawbacks of this approach](https://gato-graphql.com/blog/why-to-support-cms-agnosticism-the-gato-graphql-split-to-around-90-packages/)
+- [💁🏽‍♂️ Why to support CMS-agnosticism, the Gato GraphQL was split to ~90 packages, and benefits and drawbacks of this approach](https://gatographql.com/blog/why-to-support-cms-agnosticism-the-gato-graphql-split-to-around-90-packages/)
 - [Abstracting WordPress Code To Reuse With Other CMSs: Concepts (Part 1)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-cms-concepts/)
 - [Abstracting WordPress Code To Reuse With Other CMSs: Implementation (Part 2)](https://www.smashingmagazine.com/2019/11/abstracting-wordpress-code-reuse-with-other-cms-implementation/)

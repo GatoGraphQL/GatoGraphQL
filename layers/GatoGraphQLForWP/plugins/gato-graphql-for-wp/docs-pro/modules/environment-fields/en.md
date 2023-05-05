@@ -26,7 +26,7 @@ For instance, this query retrieves the environment constant `GITHUB_ACCESS_TOKEN
 
 We must configure the list of allowed environment variables and constants that can be queried.
 
-<!-- By default, this list is initially empty. (Unless the non-restrictive default settings to <a href="https://gato-graphql.com/guides/config/building-static-sites" target="_blank">build static sites</a> are enabled, in which case any name is allowed by default.) -->
+<!-- By default, this list is initially empty. (Unless the non-restrictive default settings to <a href="https://gatographql.com/guides/config/building-static-sites" target="_blank">build static sites</a> are enabled, in which case any name is allowed by default.) -->
 
 Each entry can either be:
 

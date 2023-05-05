@@ -152,7 +152,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     }
 
     // /**
-    //  * By default, point to https://gato-graphql.com/modules/{component-slug}
+    //  * By default, point to https://gatographql.com/modules/{component-slug}
     //  */
     // public function getURL(string $module): ?string
     // {
@@ -175,7 +175,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
 
     // /**
     //  * Return the default URL base for the module, defined through configuration
-    //  * By default, point to https://gato-graphql.com/modules/{component-slug}
+    //  * By default, point to https://gatographql.com/modules/{component-slug}
     //  */
     // protected function getURLBase(string $module): string
     // {

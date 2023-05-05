@@ -6,5 +6,5 @@ Overall, there are around 200 packages in the repo. The only way to manage such 
 
 ## Additional resources
 
-- [💁🏻‍♀️ Why the Gato GraphQL needs a Monorepo, and How it's optimized](https://gato-graphql.com/blog/extending-the-monorepo-builder/)
+- [💁🏻‍♀️ Why the Gato GraphQL needs a Monorepo, and How it's optimized](https://gatographql.com/blog/extending-the-monorepo-builder/)
 - [Hosting all your PHP packages together in a monorepo](https://blog.logrocket.com/hosting-all-your-php-packages-together-in-a-monorepo/)

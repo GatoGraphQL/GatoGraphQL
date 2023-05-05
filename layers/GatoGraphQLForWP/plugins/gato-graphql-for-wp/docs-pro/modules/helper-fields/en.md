@@ -50,7 +50,7 @@ This query:
 ```graphql
 {
   _urlAddParams(
-    url: "https://gato-graphql.com",
+    url: "https://gatographql.com",
     params: {
       stringParam: "someValue",
       intParam: 5,
@@ -74,12 +74,12 @@ This query:
 ```json
 {
   "data": {
-    "_urlAddParams": "https:\/\/gato-graphql.com?stringParam=someValue&intParam=5&stringListParam%5B0%5D=value1&stringListParam%5B1%5D=value2&intListParam%5B0%5D=8&intListParam%5B1%5D=9&intListParam%5B2%5D=4&objectParam%5B1st%5D=1stValue&objectParam%5B2nd%5D=2&objectParam%5B3rd%5D%5B0%5D=uno&objectParam%5B3rd%5D%5B1%5D=2.5&objectParam%5B4th%5D%5BnestedIn%5D=nestedOut"
+    "_urlAddParams": "https:\/\/gatographql.com?stringParam=someValue&intParam=5&stringListParam%5B0%5D=value1&stringListParam%5B1%5D=value2&intListParam%5B0%5D=8&intListParam%5B1%5D=9&intListParam%5B2%5D=4&objectParam%5B1st%5D=1stValue&objectParam%5B2nd%5D=2&objectParam%5B3rd%5D%5B0%5D=uno&objectParam%5B3rd%5D%5B1%5D=2.5&objectParam%5B4th%5D%5BnestedIn%5D=nestedOut"
   }
 }
 ```
 
-(The decoded URL is `"https://gato-graphql.com?stringParam=someValue&intParam=5&stringListParam[0]=value1&stringListParam[1]=value2&intListParam[0]=8&intListParam[1]=9&intListParam[2]=4&objectParam[1st]=1stValue&objectParam[2nd]=2&objectParam[3rd][0]=uno&objectParam[3rd][1]=2.5&objectParam[4th][nestedIn]=nestedOut"`.)
+(The decoded URL is `"https://gatographql.com?stringParam=someValue&intParam=5&stringListParam[0]=value1&stringListParam[1]=value2&intListParam[0]=8&intListParam[1]=9&intListParam[2]=4&objectParam[1st]=1stValue&objectParam[2nd]=2&objectParam[3rd][0]=uno&objectParam[3rd][1]=2.5&objectParam[4th][nestedIn]=nestedOut"`.)
 
 Please notice that `null` values are not added to the URL.
 
@@ -88,7 +88,7 @@ This query:
 ```graphql
 {
   _urlAddParams(
-    url: "https://gato-graphql.com",
+    url: "https://gatographql.com",
     params: {
       stringParam: null,
       listParam: [1, null, 3],
@@ -106,12 +106,12 @@ This query:
 ```json
 {
   "data": {
-    "_urlAddParams": "https:\/\/gato-graphql.com?listParam%5B0%5D=1&listParam%5B2%5D=3&objectParam%5Bdos%5D=2"
+    "_urlAddParams": "https:\/\/gatographql.com?listParam%5B0%5D=1&listParam%5B2%5D=3&objectParam%5Bdos%5D=2"
   }
 }
 ```
 
-(The decoded URL is `"https://gato-graphql.com?listParam[0]=1&listParam[2]=3&objectParam[dos]=2"`.)
+(The decoded URL is `"https://gatographql.com?listParam[0]=1&listParam[2]=3&objectParam[dos]=2"`.)
 
 ### `_urlRemoveParams`
 
