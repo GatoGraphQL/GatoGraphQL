@@ -212,7 +212,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             HTML,
             'gato-graphql-recipes',
             $class,
-            \__('GraphQL API - Recipes: Use Cases, Best Practices, and Useful Queries', 'gato-graphql')
+            \__('Gato GraphQL - Recipes: Use Cases, Best Practices, and Useful Queries', 'gato-graphql')
         );
 
         // This page URL

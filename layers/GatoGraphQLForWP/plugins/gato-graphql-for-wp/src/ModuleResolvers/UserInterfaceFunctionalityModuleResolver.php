@@ -115,7 +115,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         return match ($module) {
             self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'gato-graphql'),
             self::WELCOME_GUIDES => \__('Welcome Guides', 'gato-graphql'),
-            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional GraphQL API Documentation', 'gato-graphql'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional Gato GraphQL Documentation', 'gato-graphql'),
             self::CUSTOM_ENDPOINT_OVERVIEW => \__('Custom Endpoint Overview', 'gato-graphql'),
             self::PERSISTED_QUERY_ENDPOINT_OVERVIEW => \__('Persisted Query Endpoint Overview', 'gato-graphql'),
             default => $module,
@@ -131,7 +131,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                 '5.5',
                 '8.2'
             ),
-            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Documentation on using the GraphQL API', 'gato-graphql'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Documentation on using the Gato GraphQL', 'gato-graphql'),
             self::CUSTOM_ENDPOINT_OVERVIEW => \__('Sidebar component displaying Properties for a Custom Endpoint', 'gato-graphql'),
             self::PERSISTED_QUERY_ENDPOINT_OVERVIEW => \__('Sidebar component displaying Properties for a Persisted Query Endpoint', 'gato-graphql'),
             default => parent::getDescription($module),

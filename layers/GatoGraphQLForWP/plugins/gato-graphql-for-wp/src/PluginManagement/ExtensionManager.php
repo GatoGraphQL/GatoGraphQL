@@ -95,7 +95,7 @@ class ExtensionManager extends AbstractPluginManager
         }
 
         /**
-         * Validate that the required version of the GraphQL API for WP plugin is installed.
+         * Validate that the required version of the Gato GraphQL for WP plugin is installed.
          */
         $mainPlugin = PluginApp::getMainPluginManager()->getPlugin();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
@@ -136,7 +136,7 @@ class ExtensionManager extends AbstractPluginManager
 
     /**
      * Plugin main files that need to be activated in order
-     * for some GraphQL API extension to become active.
+     * for some Gato GraphQL extension to become active.
      *
      * @return string[]
      */

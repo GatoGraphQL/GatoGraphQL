@@ -159,7 +159,7 @@
         "getpop/access-control": "<0.10.2"
     },
     "type": "library",
-    "description": "Wrap classes from 3rd-party dependencies which must be accessed by GraphQL API, so they can be scoped (package `gato-graphql/gato-graphql-for-wp` is not scoped)",
+    "description": "Wrap classes from 3rd-party dependencies which must be accessed by Gato GraphQL, so they can be scoped (package `gato-graphql/gato-graphql-for-wp` is not scoped)",
     "keywords": ["GraphQL", "PHP", "PoP", "external-dependency-wrappers"],
     "homepage": "https://github.com/GatoGraphQL/external-dependency-wrappers",
     "license": "GPL-2.0-or-later",

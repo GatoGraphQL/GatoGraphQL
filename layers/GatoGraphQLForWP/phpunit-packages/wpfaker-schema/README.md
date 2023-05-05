@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Utilities to execute PHPUnit for the GraphQL API for WordPress
+Utilities to execute PHPUnit for the Gato GraphQL for WordPress
 
 ## Install
 

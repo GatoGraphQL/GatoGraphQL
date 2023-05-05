@@ -15,7 +15,7 @@ If this module is not enabled, the default behavior ir `Public`.
 
 ## Access Control rules
 
-The GraphQL API PRO plugin makes available the following access control rules:
+The Gato GraphQL PRO plugin makes available the following access control rules:
 
 - Disable access
 - Grant access only if the user is logged-in or out
@@ -31,7 +31,7 @@ After creating the ACL (see next section), we can have the Custom Endpoint or Pe
 
 ## Creating an Access Control List
 
-Click on the "Access Control Lists" page in the GraphQL API menu:
+Click on the "Access Control Lists" page in the Gato GraphQL menu:
 
 ![Access Control Lists](../../images/access-control-lists.png "Access Control Lists")
 

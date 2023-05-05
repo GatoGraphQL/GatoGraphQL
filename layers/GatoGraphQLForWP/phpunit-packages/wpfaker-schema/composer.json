@@ -158,7 +158,7 @@
         "getpop/access-control": "<0.10.2"
     },
     "type": "library",
-    "description": "Utilities to execute PHPUnit for the GraphQL API for WordPress",
+    "description": "Utilities to execute PHPUnit for the Gato GraphQL for WordPress",
     "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit"],
     "homepage": "https://github.com/PHPUnitForGatoGraphQL/wpfaker-schema",
     "license": "GPL-2.0-or-later",

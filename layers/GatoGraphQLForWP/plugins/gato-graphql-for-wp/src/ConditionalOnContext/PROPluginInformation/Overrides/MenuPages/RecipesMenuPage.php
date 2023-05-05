@@ -36,7 +36,7 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
                     <p>%s %s</p>
                 </div>
             HTML,
-            \__('This recipe requires features available in the GraphQL API PRO.', 'gato-graphql'),
+            \__('This recipe requires features available in the Gato GraphQL PRO.', 'gato-graphql'),
             PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary')
         ) . $recipeContent;
     }

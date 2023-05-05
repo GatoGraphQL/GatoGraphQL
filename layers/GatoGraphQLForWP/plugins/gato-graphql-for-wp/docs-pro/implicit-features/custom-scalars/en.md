@@ -56,7 +56,7 @@ UUID (universally unique identifier) scalar, such as `25770975-0c3d-4ff0-ba27-a0
 
 ## Introspection
 
-When installing the GraphQL API PRO plugin, these custom scalars will always be available for your use to extend the GraphQL schema.
+When installing the Gato GraphQL PRO plugin, these custom scalars will always be available for your use to extend the GraphQL schema.
 
 However, please notice that only when a custom scalar type is referenced will it appear on the GraphQL schema, as [defined by the spec for built-in scalars](https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars):
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Configuring the GraphQL API plugin settings"
+echo "Configuring the Gato GraphQL plugin settings"
 echo "Selecting \"dummy\" CPT, categories and tags"
 
 ADMIN_USER_APP_PASSWORD=$(wp user meta get 1 app_password --path=/app/wordpress)

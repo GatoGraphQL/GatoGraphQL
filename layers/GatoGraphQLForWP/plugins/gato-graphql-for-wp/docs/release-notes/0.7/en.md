@@ -64,7 +64,7 @@ mutation {
 }
 ```
 
-Nested mutations have been [requested for the GraphQL spec](https://github.com/graphql/graphql-spec/issues/252) but not yet approved, hence GraphQL API adds support for them as an opt-in feature, via module "Nested Mutations" (which must be enabled).
+Nested mutations have been [requested for the GraphQL spec](https://github.com/graphql/graphql-spec/issues/252) but not yet approved, hence Gato GraphQL adds support for them as an opt-in feature, via module "Nested Mutations" (which must be enabled).
 
 Nested mutations change the root type, from `QueryRoot` and `MutationRoot`, to a single `Root` type handling both queries and mutations:
 

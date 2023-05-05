@@ -4,7 +4,7 @@ Cache the generated schema when doing introspection, for each custom endpoint an
 
 ## How it works
 
-The GraphQL API for WordPress supports a dynamic schema, generated on runtime, which allows to customize access to data by the different custom endpoints and persisted queries (for instance, involving different Access Control rules to expose or hide fields).
+The Gato GraphQL for WordPress supports a dynamic schema, generated on runtime, which allows to customize access to data by the different custom endpoints and persisted queries (for instance, involving different Access Control rules to expose or hide fields).
 
 The dynamic schema needs to be generated when executing the introspection query. By caching it to disk, the server can reuse an already-generated schema from a previous introspection request, thus improving speed.
 

@@ -26,7 +26,7 @@ class PluginEnvironmentHelpers
 
     /**
      * Constants defined in wp-config.php must start with this prefix
-     * to override GraphQL API environment variables
+     * to override Gato GraphQL environment variables
      */
     public static function getWPConfigConstantName(string $envVariable): string
     {

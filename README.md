@@ -9,11 +9,11 @@ PoP is a monorepo containing several projects.
 ![Generate plugins](https://github.com/leoloso/PoP/actions/workflows/generate_plugins.yml/badge.svg)
 <!-- ![PHPStan](https://github.com/leoloso/PoP/actions/workflows/phpstan.yml/badge.svg) -->
 
-## The GraphQL API for WordPress plugin
+## The Gato GraphQL for WordPress plugin
 
 <p align="center"><img src="https://gato-graphql.com/assets/gato-graphql-logo-with-name.png" width="450" /></p>
 
-**GraphQL API for WordPress** is a forward-looking and powerful GraphQL server for WordPress.
+**Gato GraphQL for WordPress** is a forward-looking and powerful GraphQL server for WordPress.
 
 - Website: [gato-graphql.com](https://gato-graphql.com)
 - [Download](https://github.com/leoloso/PoP/releases/latest/download/gato-graphql.zip)
@@ -92,7 +92,7 @@ $ composer install
 8. [Why a monorepo](docs/why-monorepo.md)
 9. [How transpiling works](docs/how-transpiling-works.md)
 10. [How scoping works](docs/how-scoping-works.md)
-11. [Installing the GraphQL API for WordPress plugin](docs/installing-gato-graphql-for-wordpress.md)
+11. [Installing the Gato GraphQL for WordPress plugin](docs/installing-gato-graphql-for-wordpress.md)
 
 ## Standards
 

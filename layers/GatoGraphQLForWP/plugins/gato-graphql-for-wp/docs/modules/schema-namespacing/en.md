@@ -40,7 +40,7 @@ Namespacing the schema in the wp-admin can be selected on the Settings. It will 
 
 ## When to use
 
-If plugins WooCommerce and Easy Digital Downloads both implemented a `Product` type for the GraphQL API, then we could not normally install both plugins at the same time. The Schema namespacing module helps avert this conflict, because their type names would be converted into `WC_Product` and `EDD_Product` respectively.
+If plugins WooCommerce and Easy Digital Downloads both implemented a `Product` type for the Gato GraphQL, then we could not normally install both plugins at the same time. The Schema namespacing module helps avert this conflict, because their type names would be converted into `WC_Product` and `EDD_Product` respectively.
 
 Similarly, the Marketing and Tutorials teams from the same company can release their own type `Discount`, instead of `Marketing_Discount` and `Tutorial_Discount`.
 

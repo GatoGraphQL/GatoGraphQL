@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: GraphQL API - Extension Demo
+Plugin Name: Gato GraphQL - Extension Demo
 Plugin URI: https://github.com/GatoGraphQL/extension-demo
-Description: Demonstration of extending the GraphQL schema, for the GraphQL API for WordPress
+Description: Demonstration of extending the GraphQL schema, for the Gato GraphQL for WordPress
 Version: 1.0.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
@@ -46,11 +46,11 @@ add_action(
          * @see https://getcomposer.org/doc/articles/versions.md#stabilities
          */
         $extensionVersion = '1.0.0-dev';
-        $extensionName = \__('GraphQL API - Extension Demo', 'gato-graphql-extension-demo');
+        $extensionName = \__('Gato GraphQL - Extension Demo', 'gato-graphql-extension-demo');
         $mainPluginVersionConstraint = '^1.0';
         
         /**
-         * Validate the GraphQL API plugin is active
+         * Validate the Gato GraphQL plugin is active
          */
         if (!class_exists(Plugin::class)) {
             \add_action('admin_notices', function () use ($extensionName) {
@@ -58,7 +58,7 @@ add_action(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
                         __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gato-graphql-extension-demo'),
-                        __('GraphQL API for WordPress', 'gato-graphql-extension-demo'),
+                        __('Gato GraphQL for WordPress', 'gato-graphql-extension-demo'),
                         $extensionName
                     )
                 ));

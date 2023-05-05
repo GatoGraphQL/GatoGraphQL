@@ -8,7 +8,7 @@ This works naturally for persisted queries, and for the single endpoint and cust
 
 HTTP caching works by sending a `Cache-Control` header with a `max-age` value in the response, indicating for how long the response must be cached.
 
-The GraphQL API PRO plugin offers Cache Control Lists, where custom `max-age` values are defined for fields and directives. Hence, different queries containing different combinations of fields and directives will produce a different `max-age` value.
+The Gato GraphQL PRO plugin offers Cache Control Lists, where custom `max-age` values are defined for fields and directives. Hence, different queries containing different combinations of fields and directives will produce a different `max-age` value.
 
 The response's `max-age` value is calculated as the lowest value from all the fields and directives in the requested query, or `no-store` if either:
 
@@ -26,7 +26,7 @@ After creating the CCL (see next section), we can have the endpoint use it by ed
 
 ## Creating a Cache Control List
 
-Click on the "Cache Control Lists" page in the GraphQL API menu:
+Click on the "Cache Control Lists" page in the Gato GraphQL menu:
 
 ![Cache Control Lists](../../images/cache-control-lists.png "Cache Control Lists")
 

@@ -118,9 +118,9 @@ const proTitlePrefix = displayUnlockPROPluginMessage ? __('🔒 ', 'gato-graphql
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Additional GraphQL API Documentation', 'gato-graphql') }
+        title={ __('Additional Gato GraphQL Documentation', 'gato-graphql') }
     >
-        <p>{ __('Docs for additional features in the GraphQL API:', 'gato-graphql') }</p>
+        <p>{ __('Docs for additional features in the Gato GraphQL:', 'gato-graphql') }</p>
         <p>
             {
                 implicitFeaturesDocEntries.map( ( entry ) =>
@@ -139,7 +139,7 @@ const DocumentSettingsPanel = () => (
         </p>
         <hr/>
         <p>
-            { __('Docs for additional features in the GraphQL API PRO:', 'gato-graphql') }
+            { __('Docs for additional features in the Gato GraphQL PRO:', 'gato-graphql') }
         </p>
         { displayUnlockPROPluginMessage &&
             <p>

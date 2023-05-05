@@ -1,4 +1,4 @@
-# GraphQL API for WordPress - PHPUnit & Testing Utilities
+# Gato GraphQL for WordPress - PHPUnit & Testing Utilities
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Utilities for testing the GraphQL API for WordPress
+Utilities for testing the Gato GraphQL for WordPress
 
 ## Install
 

@@ -165,7 +165,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         /**
          * When clicking on "Endpoint Categories" it would highlight
-         * the Posts menu. With this code, it highlights the GraphQL API menu.
+         * the Posts menu. With this code, it highlights the Gato GraphQL menu.
          *
          * @see https://stackoverflow.com/a/66094349
          */

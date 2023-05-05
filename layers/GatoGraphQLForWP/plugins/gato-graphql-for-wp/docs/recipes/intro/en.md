@@ -1,6 +1,6 @@
 # Intro
 
-The GraphQL API is a **productivity tool for interacting with data in your WordPress site**. Among others, it allows you to:
+The Gato GraphQL is a **productivity tool for interacting with data in your WordPress site**. Among others, it allows you to:
 
 - Query data to create headless sites
 - Expose public or private APIs

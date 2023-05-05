@@ -2,7 +2,7 @@
 
 ## Browse "Additional Documentation" when editing a Schema Configuration
 
-Documentation for additional features in the GraphQL API can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
+Documentation for additional features in the Gato GraphQL can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
 
 ![Additional Documentation in Schema Configuration CPT](../../images/releases/v1.0/schema-configuration-additional-documentation.png)
 
@@ -23,7 +23,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ## Added documentation for PRO modules and their corresponding Schema Configuration functionalities
 
-PRO modules are installed by the GraphQL API PRO plugin, which has been released alongside the GraphQL API for WordPress v1.0.
+PRO modules are installed by the Gato GraphQL PRO plugin, which has been released alongside the Gato GraphQL for WordPress v1.0.
 
 Documentation for the corresponding PRO features can be visualized in the plugin, by:
 
@@ -46,7 +46,7 @@ Now, the Settings page organizes all modules into 2 levels, and displays tabs ve
 
 ## Reset settings, and choose to use the restrictive or non-restrictive default settings
 
-A GraphQL API may be exposed publicly or only privately, and depending on which is the case there are options and features that need to be restricted or not.
+A Gato GraphQL may be exposed publicly or only privately, and depending on which is the case there are options and features that need to be restricted or not.
 
 For instance, querying values from the `wp_options` table can be unrestrained whenever building a static site (in which case the WordPress site may be on the developer's laptop, not exposed to the Internet), but must be limited to a handful of options (or even none at all) for a public API, for security reasons.
 
@@ -60,7 +60,7 @@ Now it is possible to do the switch directly via the UI: The new "Plugin Managem
 
 The new documentation page "Use Cases, Best Practices, and Recipes" has been added to the menu.
 
-It describes when it makes sense to use the GraphQL API and what's the best way to use it (and also GraphQL in general), and provides a handful of recipes (involving GraphQL queries) to help users achieve their goals.
+It describes when it makes sense to use the Gato GraphQL and what's the best way to use it (and also GraphQL in general), and provides a handful of recipes (involving GraphQL queries) to help users achieve their goals.
 
 ![Use Cases, Best Practices, and Recipes page](../../images/releases/v1.0/recipes-page.png)
 
@@ -266,11 +266,11 @@ The tables for the Custom Endpoint and Persisted Query CPTs now display the "sta
 
 The Plugin Settings has been completely decoupled from the services registered in the container. As such, the container does not need to be regenerated when updating the Settings, leading to a performance boost.
 
-## Only activating/deactivating GraphQL API extension plugins will regenerate the service container
+## Only activating/deactivating Gato GraphQL extension plugins will regenerate the service container
 
-Before, the service container (upon which the GraphQL schema is based) was regenerated whenever any plugin (whether it was related to the GraphQL API plugin or not) was activated or deactivated.
+Before, the service container (upon which the GraphQL schema is based) was regenerated whenever any plugin (whether it was related to the Gato GraphQL plugin or not) was activated or deactivated.
 
-Now, only GraphQL API extension plugins trigger this process.
+Now, only Gato GraphQL extension plugins trigger this process.
 
 ## Fixed
 

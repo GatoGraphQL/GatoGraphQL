@@ -1,7 +1,7 @@
 {
 	"name": "@gatographql/packages",
 	"version": "1.0.0-dev",
-	"description": "All packages required for all blocks/editor-scripts/packages in GraphQL API",
+	"description": "All packages required for all blocks/editor-scripts/packages in Gato GraphQL",
 	"author": "Leonardo Losoviz",
 	"license": "MIT",
 	"main": "build/index.js",

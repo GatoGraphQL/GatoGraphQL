@@ -118,9 +118,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * This method dumps the container whenever activating a depended-upon
-     * plugin, or deactivating a GraphQL API extension.
+     * plugin, or deactivating a Gato GraphQL extension.
      *
-     * When activating an extension plugin for the GraphQL API,
+     * When activating an extension plugin for the Gato GraphQL,
      * the container will be regenerated through method
      * `handleNewActivations` (in this same class).
      *
@@ -128,14 +128,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * must be dumped, so that they can be regenerated.
      *
      * Likewise, when activating/deactivating a depended-upon plugin
-     * (eg: "Events Manager", required by "GraphQL API - Events Manager")
+     * (eg: "Events Manager", required by "Gato GraphQL - Events Manager")
      * the container must be regenerated.
      */
     public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): void
     {
         /**
          * Check that the activated/deactivated plugin is
-         * a GraphQL API extension, or any plugin depended-upon
+         * a Gato GraphQL extension, or any plugin depended-upon
          * by any extension.
          */
         $extensionManager = PluginApp::getExtensionManager();

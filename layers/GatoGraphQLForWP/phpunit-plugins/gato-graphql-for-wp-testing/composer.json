@@ -1,7 +1,7 @@
 {
     "name": "phpunit-for-gato-graphql/gato-graphql-for-wp-testing",
     "type": "wordpress-plugin",
-    "description": "Utilities for testing the GraphQL API for WordPress",
+    "description": "Utilities for testing the Gato GraphQL for WordPress",
     "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
     "homepage": "https://github.com/PHPUnitForGatoGraphQL/gato-graphql-for-wp-testing",
     "license": "GPL-2.0-or-later",

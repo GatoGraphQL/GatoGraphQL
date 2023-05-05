@@ -22,7 +22,7 @@ Include as many relevant details about the environment you experienced the bug i
 
 | Software | Version |
 | --- | --- |
-| GraphQL API plugin | <!-- complete here --> |
+| Gato GraphQL plugin | <!-- complete here --> |
 | PHP | <!-- complete here --> |
 | WordPress | <!-- complete here --> |
 | Gutenberg | <!-- complete here --> |

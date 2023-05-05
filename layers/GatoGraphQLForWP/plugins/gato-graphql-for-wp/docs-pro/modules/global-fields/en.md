@@ -6,7 +6,7 @@ Global fields are fields that are accessible under every single type in the Grap
 
 The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
 
-The GraphQL API PRO, in addition, also offers a different kind of fields: those providing "functionality" instead of data.
+The Gato GraphQL PRO, in addition, also offers a different kind of fields: those providing "functionality" instead of data.
 
 These are some examples:
 
@@ -30,7 +30,7 @@ These are some examples:
 
 As can be appreciated from these available modules, functionality fields are useful for obtaining data that is stored outside of WordPress, and for manipulating the data once it has been retrieved, allowing us to transform a field value in whatever way it is required, and granting us powerful data import/export capabilities.
 
-Functionality fields belong not to a specific type, such as `Post` or `User`, but to all the types in the schema. That's why these are handled in a distinctive way in the GraphQL API PRO, under the name of "global fields".
+Functionality fields belong not to a specific type, such as `Post` or `User`, but to all the types in the schema. That's why these are handled in a distinctive way in the Gato GraphQL PRO, under the name of "global fields".
 
 ## Examples
 

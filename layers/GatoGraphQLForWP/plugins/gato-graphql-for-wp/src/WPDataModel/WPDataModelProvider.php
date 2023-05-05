@@ -66,7 +66,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             HookNames::REJECTED_QUERYABLE_CUSTOMPOST_TYPES,
             array_merge(
                 /**
-                 * Post Types from GraphQL API are just for configuration
+                 * Post Types from Gato GraphQL are just for configuration
                  * and contain private data
                  */
                 $pluginCustomPostTypes,

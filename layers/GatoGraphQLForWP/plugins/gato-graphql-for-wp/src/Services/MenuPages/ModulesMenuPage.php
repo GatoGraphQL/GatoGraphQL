@@ -23,7 +23,7 @@ class ModulesMenuPage extends AbstractTableMenuPage
 
     protected function getHeader(): string
     {
-        return \__('GraphQL API — Modules', 'gato-graphql');
+        return \__('Gato GraphQL — Modules', 'gato-graphql');
     }
 
     protected function hasViews(): bool

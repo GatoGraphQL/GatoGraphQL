@@ -15,17 +15,17 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
  *
  * To attain the needed order, we execute them using hook "plugins_loaded":
  *
- * 1. GraphQL API => setup(): immediately (not on "plugins_loaded")
+ * 1. Gato GraphQL => setup(): immediately (not on "plugins_loaded")
  * 2. System => handleNewActivations(): priority 90 (before container is to be created)
- * 3. GraphQL API extensions => setup(): priority 100
- * 4. GraphQL API => initialize(): priority 110
- * 5. GraphQL API extensions => initialize(): priority 120
- * 6. GraphQL API => bootSystem(): priority 130
- * 7. GraphQL API => configure(): priority 140
- * 8. GraphQL API extensions => configure(): priority 150
- * 9. GraphQL API => bootApplication(): priority 160
- * 10. GraphQL API => boot(): priority 170
- * 11. GraphQL API extensions => boot(): priority 180
+ * 3. Gato GraphQL extensions => setup(): priority 100
+ * 4. Gato GraphQL => initialize(): priority 110
+ * 5. Gato GraphQL extensions => initialize(): priority 120
+ * 6. Gato GraphQL => bootSystem(): priority 130
+ * 7. Gato GraphQL => configure(): priority 140
+ * 8. Gato GraphQL extensions => configure(): priority 150
+ * 9. Gato GraphQL => bootApplication(): priority 160
+ * 10. Gato GraphQL => boot(): priority 170
+ * 11. Gato GraphQL extensions => boot(): priority 180
  * 12. After everything: priority 190
  */
 class PluginLifecyclePriorities

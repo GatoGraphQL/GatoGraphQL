@@ -6,7 +6,7 @@ Create custom schemas, with custom access rules for different users, each availa
 
 A GraphQL server normally exposes a single endpoint for retrieving and posting data.
 
-In addition to supporting the single endpoint, the GraphQL API also makes it possible to create custom endpoints, providing different schema configurations to deal with the needs from different targets, such as:
+In addition to supporting the single endpoint, the Gato GraphQL also makes it possible to create custom endpoints, providing different schema configurations to deal with the needs from different targets, such as:
 
 - Some specific client or user
 - A group of users with more access to features (such as PRO users)

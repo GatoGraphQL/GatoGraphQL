@@ -17,7 +17,7 @@ class PluginDataSource
     {
         $excludeJSBlockFilesPlaceholder = $this->getExcludeJSBlockFilesPlaceholder();
         return [
-            // GraphQL API for WordPress
+            // Gato GraphQL for WordPress
             [
                 'path' => 'layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp',
                 'zip_file' => 'gato-graphql',
@@ -47,7 +47,7 @@ class PluginDataSource
                     'after_downgrade_code' => 'ci/downgrade/after_downgrade_code.sh',
                 ],
             ],
-            // GraphQL API - Testing <= To run integration tests with InstaWP
+            // Gato GraphQL - Testing <= To run integration tests with InstaWP
             [
                 'path' => 'layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-for-wp-testing',
                 'zip_file' => 'gato-graphql-testing',
@@ -56,7 +56,7 @@ class PluginDataSource
                 'dist_repo_name' => 'gato-graphql-testing-dist',
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing/rector.php',
             ],
-            // GraphQL API - Extension Demo
+            // Gato GraphQL - Extension Demo
             // @todo Re-enable when the demo is actually complete
             // [
             //     'path' => 'layers/GatoGraphQLForWP/plugins/extension-demo',

@@ -15,11 +15,11 @@ use PoP\Root\StateManagers\HookManagerInterface;
  * This way, hooks initialized for the Standard and Internal
  * GraphQL servers will not conflict with each other.
  *
- * For this reason, the GraphQL API application must ALWAYS
+ * For this reason, the Gato GraphQL application must ALWAYS
  * use the hooks correctly:
  *
  * 1. Use `App::doAction/addAction/applyFilters/addFilter` with
- *    a hook from the GraphQL API
+ *    a hook from the Gato GraphQL
  * 2. Use `add_action/add_filter/do_action/apply_filters` to
  *    use a hook defined by WordPress
  *

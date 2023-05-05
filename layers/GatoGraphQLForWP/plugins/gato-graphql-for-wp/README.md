@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/img/gato-graphql-logo-with-name.jpg" width="450" /></p>
 
-# GraphQL API for WordPress
+# Gato GraphQL for WordPress
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -17,7 +17,7 @@ This plugin is the implementation for WordPress of [GraphQL by PoP](https://grap
 
 <!-- ## Why
 
-Please read the author's [introduction to the GraphQL API for WordPress](https://leoloso.com/posts/introducing-the-gato-graphql-for-wordpress/), which describes:
+Please read the author's [introduction to the Gato GraphQL for WordPress](https://leoloso.com/posts/introducing-the-gato-graphql-for-wordpress/), which describes:
 
 - How does it compare with the existing solutions: WP REST API and WPGraphQL
 - An overview of all its features
@@ -31,7 +31,7 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 
 ## Installing the plugin (for production)
 
-👀 Instructions: [Installing the GraphQL API for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-gato-graphql-for-wordpress.md).
+👀 Instructions: [Installing the Gato GraphQL for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-gato-graphql-for-wordpress.md).
 
 ## Development
 
@@ -51,7 +51,7 @@ Code compiled for development, i.e. after running `npm start`, cannot be commite
 
 <!-- ### Building static sites
 
-The GraphQL API for WordPress provides non-restrictive default settings, which simplify the configuration for building "static" sites.
+The Gato GraphQL for WordPress provides non-restrictive default settings, which simplify the configuration for building "static" sites.
 
 This is how the restrictive and non-restrictive default behaviors compare:
 
@@ -92,7 +92,7 @@ This method requires the code for the component to be divided into 2 separate pa
 
 ## Modules
 
-GraphQL API is extensible, and ships with the following modules (organized by category):
+Gato GraphQL is extensible, and ships with the following modules (organized by category):
 
 <table>
 <thead>
@@ -153,10 +153,10 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 
 ## Resources
 
-- [YouTube video: GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
+- [YouTube video: Gato GraphQL for WordPress demo](https://youtu.be/LnyNyT2RwwI)
 - [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
 - [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
-- [Comparing the GraphQL API for WordPress vs WPGraphQL](https://gato-graphql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
+- [Comparing the Gato GraphQL for WordPress vs WPGraphQL](https://gato-graphql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
 
 <details>
 
@@ -182,11 +182,11 @@ Explanation of how the codebase is split into granular packages, to enable CMS-a
 
 Description of how the plugin is scoped:
 
-- [GraphQL API for WordPress is now scoped, thanks to PHP-Scoper!](https://gato-graphql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)
+- [Gato GraphQL for WordPress is now scoped, thanks to PHP-Scoper!](https://gato-graphql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)
 
 ### GraphQL by PoP documentation
 
-GraphQL API for WordPress is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
+Gato GraphQL for WordPress is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
 
 Technical information on how the GraphQL server works:
 

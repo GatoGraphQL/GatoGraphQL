@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: GraphQL API for WordPress - PHPUnit & Testing Utilities
-Description: Utilities for testing the GraphQL API for WordPress
+Plugin Name: Gato GraphQL for WordPress - PHPUnit & Testing Utilities
+Description: Utilities for testing the Gato GraphQL for WordPress
 Version: 1.0.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) {
 add_action(
     'plugins_loaded',
     function (): void {
-        // Validate the GraphQL API plugin is installed, or exit
+        // Validate the Gato GraphQL plugin is installed, or exit
         if (!class_exists(GatoGraphQLMainPlugin::class)) {
             return;
         }
@@ -57,7 +57,7 @@ add_action(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
                         __('Functionality in plugin <strong>%s</strong> can only be enabled during development or testing.', 'gato-graphql-testing'),
-                        __('GraphQL API - Testing', 'gato-graphql-testing')
+                        __('Gato GraphQL - Testing', 'gato-graphql-testing')
                     )
                 ));
             });

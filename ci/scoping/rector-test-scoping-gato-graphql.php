@@ -35,7 +35,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip([
         '*/tests/*',
 
-        // The GraphQL API plugin does not require the REST package
+        // The Gato GraphQL plugin does not require the REST package
         // So ignore all code depending on it, or it throws error:
         //   "Could not process
         //   "vendor/pop-schema/pages/src/ConditionalOnModule/RESTAPI/ComponentRoutingProcessors/EntryComponentRoutingProcessor.php" file, due to:

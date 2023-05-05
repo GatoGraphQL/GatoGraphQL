@@ -1,6 +1,6 @@
 {
     "name": "leoloso/gato-graphql-for-prod-dev",
-    "description": "GraphQL API for PROD (PHP 7.1 + Generated .zip plugins)",
+    "description": "Gato GraphQL for PROD (PHP 7.1 + Generated .zip plugins)",
     "homepage": "https://gato-graphql.com",
     "license": "GPL-2.0-or-later",
     "authors": [

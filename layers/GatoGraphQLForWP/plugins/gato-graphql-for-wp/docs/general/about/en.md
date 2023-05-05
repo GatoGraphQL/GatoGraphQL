@@ -1,6 +1,6 @@
-# About the GraphQL API for WordPress
+# About the Gato GraphQL for WordPress
 
-The GraphQL API for WordPress is open source software.
+The Gato GraphQL for WordPress is open source software.
 
 Visit the website: [gato-graphql.com](https://gato-graphql.com).
 

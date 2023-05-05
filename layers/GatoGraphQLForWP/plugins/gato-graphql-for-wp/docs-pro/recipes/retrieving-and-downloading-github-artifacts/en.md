@@ -9,7 +9,7 @@ Source:
     Downloading installation package from https://api.github.com/repos/leoloso/PoP/actions/artifacts/418953849/zip...
     Warning: Download failed. "Forbidden"
     Warning: The 'https://api.github.com/repos/leoloso/PoP/actions/artifacts/418953849/zip' plugin could not be found.
-Then, GraphQL API is the perfect complement for WP-CLI!
+Then, Gato GraphQL is the perfect complement for WP-CLI!
   The missing "5%" to reach "100%"
 Create a solution using GraphQL to obtain and install the artifacts from GitHub!!!
   Check the URL to download comes in the "location" header

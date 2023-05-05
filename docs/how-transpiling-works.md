@@ -27,6 +27,6 @@ Transpiling PHP code enables to use the latest PHP features for development, yet
 
 ## Additional resources
 
-- [🦸🏿‍♂️ The GraphQL API for WordPress is now transpiled from PHP 8.0 to 7.1](https://gato-graphql.com/blog/the-plugin-is-now-transpiled-from-php-80-to-71/)
+- [🦸🏿‍♂️ The Gato GraphQL for WordPress is now transpiled from PHP 8.0 to 7.1](https://gato-graphql.com/blog/the-plugin-is-now-transpiled-from-php-80-to-71/)
 - [Transpiling PHP code from 8.0 to 7.x via Rector](https://blog.logrocket.com/transpiling-php-code-from-8-0-to-7-x-via-rector/)
 - [Coding in PHP 7.4 and deploying to 7.1 via Rector and GitHub Actions](https://blog.logrocket.com/coding-in-php-7-4-and-deploying-to-7-1-via-rector-and-github-actions/)

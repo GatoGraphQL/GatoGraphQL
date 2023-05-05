@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 use GatoGraphQL\GatoGraphQL\Services\Scripts\MainPluginScriptTrait;
 
 /**
- * Trait to set common functions for a Gutenberg block for this plugin (GraphQL API)
+ * Trait to set common functions for a Gutenberg block for this plugin (Gato GraphQL)
  */
 trait MainPluginBlockTrait
 {

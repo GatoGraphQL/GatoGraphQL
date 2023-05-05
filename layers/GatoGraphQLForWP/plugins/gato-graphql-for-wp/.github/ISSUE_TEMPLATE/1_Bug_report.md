@@ -12,7 +12,7 @@ about: Report errors and problems
 <!--
 Include as many relevant details about the environment you experienced the bug in and how to reproduce it.
 
-* Version used (e.g. PHP 5.6, WordPress 5.5, GraphQL API v 0.5.0)
+* Version used (e.g. PHP 5.6, WordPress 5.5, Gato GraphQL v 0.5.0)
 * Browser (Firefox, Chrome, Safari)
 * ...
 * ...

@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: GraphQL API for WordPress
+Plugin Name: Gato GraphQL for WordPress
 Plugin URI: https://gato-graphql.com
 Description: Transform your WordPress site into a GraphQL server.
 Version: 1.0.0-dev
@@ -40,7 +40,7 @@ if (!defined('ABSPATH')) {
  * @see https://getcomposer.org/doc/articles/versions.md#stabilities
  */
 $pluginVersion = '1.0.0-dev';
-$pluginName = __('GraphQL API for WordPress', 'gato-graphql');
+$pluginName = __('Gato GraphQL for WordPress', 'gato-graphql');
 
 /**
  * If the plugin is already registered, print an error and halt loading
@@ -67,7 +67,7 @@ $commitHash = null;
 // Load Composer’s autoloader
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Initialize the GraphQL API App
+// Initialize the Gato GraphQL App
 PluginApp::initializePlugin();
 
 // Create and set-up the plugin instance

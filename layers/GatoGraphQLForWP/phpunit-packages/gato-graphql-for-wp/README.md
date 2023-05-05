@@ -1,4 +1,4 @@
-# WPFaker PHPUnit tests for the GraphQL API for WordPress
+# WPFaker PHPUnit tests for the Gato GraphQL for WordPress
 
 <!--
 [![Build Status][ico-travis]][link-travis]

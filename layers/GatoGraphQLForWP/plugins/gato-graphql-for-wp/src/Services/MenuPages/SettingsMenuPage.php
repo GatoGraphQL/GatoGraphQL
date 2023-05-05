@@ -389,7 +389,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 class="wrap gato-graphql-tabpanel"
                 data-tab-content-target="#gato-graphql-primary-settings-nav-tab-content > .tab-content"
             >
-                <h1><?php \_e('GraphQL API — Settings', 'gato-graphql'); ?></h1>
+                <h1><?php \_e('Gato GraphQL — Settings', 'gato-graphql'); ?></h1>
                 <?php \settings_errors(); ?>
                 <div class="nav-tab-container">
                     <!-- Tabs -->

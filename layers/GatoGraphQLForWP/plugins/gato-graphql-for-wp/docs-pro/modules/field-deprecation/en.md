@@ -12,7 +12,7 @@ After creating the Field Deprecation List (see next section), we can have the Cu
 
 ## Creating a Field Deprecation List
 
-Click on the "Field Deprecation Lists" page in the GraphQL API menu:
+Click on the "Field Deprecation Lists" page in the Gato GraphQL menu:
 
 ![Field Deprecation Lists](../../images/field-deprecation-lists.png "Field Deprecation Lists")
 

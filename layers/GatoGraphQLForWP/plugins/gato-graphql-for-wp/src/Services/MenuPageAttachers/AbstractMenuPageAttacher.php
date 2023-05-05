@@ -33,7 +33,7 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
 
     /**
      * Priority to add the submenu page. It must be above "5",
-     * which is the priority for the menu "GraphQL API" to be added
+     * which is the priority for the menu "Gato GraphQL" to be added
      */
     protected function getPriority(): int
     {

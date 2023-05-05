@@ -96,7 +96,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::RESET_SETTINGS => \__('Restore the GraphQL API Settings to default values', 'gato-graphql'),
+            self::RESET_SETTINGS => \__('Restore the Gato GraphQL Settings to default values', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }
@@ -138,7 +138,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $module,
                     'reset-settings-button'
                 ),
-                Properties::TITLE => \__('Reset the GraphQL API Settings?', 'gato-graphql'),
+                Properties::TITLE => \__('Reset the Gato GraphQL Settings?', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p>',
                     sprintf(

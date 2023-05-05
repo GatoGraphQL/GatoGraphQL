@@ -1,6 +1,6 @@
-# Extension Demo for the GraphQL API
+# Extension Demo for the Gato GraphQL
 
-Demonstration of extending the GraphQL schema, for the GraphQL API for WordPress
+Demonstration of extending the GraphQL schema, for the Gato GraphQL for WordPress
 
 ## Install
 
