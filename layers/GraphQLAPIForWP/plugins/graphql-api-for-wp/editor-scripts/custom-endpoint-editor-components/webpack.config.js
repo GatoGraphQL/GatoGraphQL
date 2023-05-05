@@ -35,7 +35,11 @@ config.module.rules.push(
 				loader: "markdown-loader"
 			}
 		]
-	}
+	},
+	{
+	    test: /\.gql$/i,
+	    use: 'raw-loader',
+	},
 );
 
 /**
