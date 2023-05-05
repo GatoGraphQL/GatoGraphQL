@@ -19,7 +19,6 @@ import {
  * GraphQL query to fetch the list of schemaConfigurations from the GraphQL schema
  */
 import schemaConfigurationsGraphQLQuery from '../../graphql-documents/schema-configurations.gql';
-export const FETCH_SCHEMA_CONFIGURATIONS_GRAPHQL_QUERY = schemaConfigurationsGraphQLQuery
 
 export default {
 	/**
@@ -27,7 +26,7 @@ export default {
 	 */
 	* getSchemaConfigurations() {
 
-		const response = yield receiveSchemaConfigurations( FETCH_SCHEMA_CONFIGURATIONS_GRAPHQL_QUERY );
+		const response = yield receiveSchemaConfigurations( schemaConfigurationsGraphQLQuery );
 		/**
 		 * If there were erros when executing the query, return an empty list, and keep the error in the state
 		 */

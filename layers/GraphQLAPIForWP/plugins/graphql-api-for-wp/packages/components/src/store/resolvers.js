@@ -21,20 +21,17 @@ import { DIRECTIVE_KINDS } from '../constants/directive-kinds'
  * GraphQL query to fetch the list of types and their fields from the GraphQL schema
  */
 import typeFieldsGraphQLQuery from '../../graphql-documents/type-fields.gql';
-export const FETCH_TYPE_FIELDS_GRAPHQL_QUERY = typeFieldsGraphQLQuery
 
 /**
  * GraphQL query to fetch the global fields from the GraphQL schema
 */
 import globalFieldsGraphQLQuery from '../../graphql-documents/global-fields.gql';
-export const FETCH_GLOBAL_FIELDS_GRAPHQL_QUERY = globalFieldsGraphQLQuery
 
 /**
  * GraphQL query to fetch the list of directives from the GraphQL schema
  * Fetch only query-type directives, exclude schema-type ones.
  */
 import directivesGraphQLQuery from '../../graphql-documents/directives.gql';
-export const FETCH_DIRECTIVES_GRAPHQL_QUERY = directivesGraphQLQuery
 
 /**
  * If the response contains error(s), return a concatenated error message
@@ -62,7 +59,7 @@ export default {
 	 */
 	* getTypeFields( keepScalarTypes = false, keepIntrospectionTypes = false ) {
 
-		const response = yield receiveTypeFields( FETCH_TYPE_FIELDS_GRAPHQL_QUERY );
+		const response = yield receiveTypeFields( typeFieldsGraphQLQuery );
 		/**
 		 * If there were erros when executing the query, return an empty list, and keep the error in the state
 		 */
@@ -93,7 +90,7 @@ export default {
 	 */
 	* getGlobalFields() {
 
-		const response = yield receiveGlobalFields( FETCH_GLOBAL_FIELDS_GRAPHQL_QUERY );
+		const response = yield receiveGlobalFields( globalFieldsGraphQLQuery );
 		/**
 		 * If there were erros when executing the query, return an empty list, and keep the error in the state
 		 */
@@ -113,7 +110,7 @@ export default {
 	 */
 	* getDirectives() {
 
-		const response = yield receiveDirectives( FETCH_DIRECTIVES_GRAPHQL_QUERY, { directiveKinds: [ DIRECTIVE_KINDS.QUERY ]} );
+		const response = yield receiveDirectives( directivesGraphQLQuery, { directiveKinds: [ DIRECTIVE_KINDS.QUERY ]} );
 		/**
 		 * If there were erros when executing the query, return an empty list, and keep the error in the state
 		 */
