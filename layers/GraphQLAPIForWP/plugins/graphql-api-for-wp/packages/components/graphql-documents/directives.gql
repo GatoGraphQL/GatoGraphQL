@@ -1,6 +1,6 @@
-query GetDirectives {
+query GetDirectives($directiveKinds: [String!]) {
     __schema {
-        directives(ofKinds: [ "${ DIRECTIVE_KINDS.QUERY }" ]) {
+        directives(ofKinds: $directiveKinds) {
             name
         }
     }

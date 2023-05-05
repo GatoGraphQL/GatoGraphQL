@@ -113,7 +113,7 @@ export default {
 	 */
 	* getDirectives() {
 
-		const response = yield receiveDirectives( FETCH_DIRECTIVES_GRAPHQL_QUERY );
+		const response = yield receiveDirectives( FETCH_DIRECTIVES_GRAPHQL_QUERY, { directiveKinds: [ DIRECTIVE_KINDS.QUERY ]} );
 		/**
 		 * If there were erros when executing the query, return an empty list, and keep the error in the state
 		 */
