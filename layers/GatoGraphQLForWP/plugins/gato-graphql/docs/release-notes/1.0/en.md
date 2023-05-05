@@ -282,3 +282,4 @@ Now, only Gato GraphQL extension plugins trigger this process.
 
 - Non-restrictive Settings values are used by default
 - Env var `ENABLE_UNSAFE_DEFAULTS` has been removed and `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` added in its place, to indicate to use the restrictive Settings values by default
+- Renamed plugin to "Gato GraphQL"
