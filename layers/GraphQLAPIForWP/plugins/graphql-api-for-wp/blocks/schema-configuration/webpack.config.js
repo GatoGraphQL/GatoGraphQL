@@ -38,11 +38,7 @@ config.module.rules.push(
 					    return `<span class="hljs">${html}</span>`;
 					},
 				}
-			},
-			{
-			  test: /\.gql$/i,
-			  use: 'raw-loader',
-			},
+			}
 		]
 	},
 	{
@@ -57,7 +53,11 @@ config.module.rules.push(
 				},
 			},
 		],
-	}
+	},
+	{
+	  test: /\.gql$/i,
+	  use: 'raw-loader',
+	},
 );
 
 /**
