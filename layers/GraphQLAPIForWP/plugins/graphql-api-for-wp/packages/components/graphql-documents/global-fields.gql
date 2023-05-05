@@ -1,0 +1,7 @@
+query GetGlobalFields {
+    __schema {
+        globalFields {
+            name
+        }
+    }
+}

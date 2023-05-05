@@ -81,9 +81,10 @@ export function setDirectives( directives, errorMessage ) {
  *
  * @return {Object} Action object.
  */
-export function receiveDirectives( query ) {
+export function receiveDirectives( query, variables ) {
 	return {
 		type: 'RECEIVE_DIRECTIVES',
 		query,
+		variables,
 	};
 };

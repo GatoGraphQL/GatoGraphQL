@@ -1,0 +1,7 @@
+query GetDirectives($directiveKinds: [String!]) {
+    __schema {
+        directives(ofKinds: $directiveKinds) {
+            name
+        }
+    }
+}
