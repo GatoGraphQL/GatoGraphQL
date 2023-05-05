@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { fetchGraphQLQuery } from '@graphqlapi/api-fetch';
+import { fetchGraphQLQuery } from '@gatographql/api-fetch';
 
 /**
  * Execute the GraphQL queries

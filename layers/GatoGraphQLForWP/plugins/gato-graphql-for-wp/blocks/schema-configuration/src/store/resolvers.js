@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { maybeGetErrorMessage } from '@graphqlapi/components';
+import { maybeGetErrorMessage } from '@gatographql/components';
 
 /**
  * External dependencies

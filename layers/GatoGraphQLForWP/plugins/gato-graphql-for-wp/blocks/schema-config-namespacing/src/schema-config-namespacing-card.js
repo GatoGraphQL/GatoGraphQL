@@ -17,7 +17,7 @@ import {
 	ATTRIBUTE_VALUE_DISABLED,
 	withCard,
 	withEditableOnFocus,
-} from '@graphqlapi/components';
+} from '@gatographql/components';
 
 const SchemaConfigNamespacingCard = ( props ) => {
 	const {

@@ -13,7 +13,7 @@ import {
 	withCustomizableConfiguration,
 	withEditableOnFocus,
 	withCard,
-} from '@graphqlapi/components';
+} from '@gatographql/components';
 
 const SchemaConfigCommentMetaCard = ( props ) => {
 	return (

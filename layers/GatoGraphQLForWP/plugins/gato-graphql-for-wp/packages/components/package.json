@@ -1,5 +1,5 @@
 {
-  "name": "@graphqlapi/components",
+  "name": "@gatographql/components",
   "version": "1.0.0-dev",
   "description": "Components used by the GraphQL API for WordPress plugin",
   "repository": {
@@ -26,7 +26,7 @@
     "packages-update": "wp-scripts packages-update"
   },
   "devDependencies": {
-    "@graphqlapi/api-fetch": "file:../api-fetch",
+    "@gatographql/api-fetch": "file:../api-fetch",
     "@wordpress/base-styles": "^2.0.0",
     "@wordpress/components": "^10.0.0",
     "@wordpress/compose": "^3.19.0",

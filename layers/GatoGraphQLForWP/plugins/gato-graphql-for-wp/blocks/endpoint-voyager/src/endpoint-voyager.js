@@ -13,7 +13,7 @@ import {
 	withCard,
 	withEditableOnFocus,
 	InfoTooltip,
-} from '@graphqlapi/components';
+} from '@gatographql/components';
 
 const EndpointVoyager = ( props ) => {
 	const {

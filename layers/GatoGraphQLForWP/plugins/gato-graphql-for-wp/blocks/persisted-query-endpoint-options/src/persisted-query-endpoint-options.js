@@ -13,7 +13,7 @@ import {
 	withCard,
 	withEditableOnFocus,
 	MarkdownInfoModalButton,
-} from '@graphqlapi/components';
+} from '@gatographql/components';
 import { getMarkdownContentOrUseDefault } from './markdown-loader';
 
 const getViewBooleanLabel = ( value ) => value ? `✅ ${ __('Yes', 'gato-graphql') }` : `❌ ${ __('No', 'gato-graphql') }`

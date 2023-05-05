@@ -12,7 +12,7 @@ import {
 	GraphAPIPROBlock,
 	withPROCard,
 	withEditableOnFocus,
-} from '@graphqlapi/components';
+} from '@gatographql/components';
  
 /**
  * Define consts

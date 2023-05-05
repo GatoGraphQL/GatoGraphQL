@@ -14,7 +14,7 @@ import {
 	withCustomizableConfiguration,
 	withEditableOnFocus,
 	EditableSelect,
-} from '@graphqlapi/components';
+} from '@gatographql/components';
 
 const SchemaConfigCustomPostsCard = ( props ) => {
 	const {

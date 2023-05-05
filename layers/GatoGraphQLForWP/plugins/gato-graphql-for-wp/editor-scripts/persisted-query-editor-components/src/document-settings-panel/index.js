@@ -7,7 +7,7 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 /**
  * Internal dependencies
  */
-import { MarkdownGuideButton } from '@graphqlapi/components';
+import { MarkdownGuideButton } from '@gatographql/components';
 import { getMarkdownContentOrUseDefault } from '../markdown-loader';
 // import PersistedQueryEndpointGuideButton from './guide-for-css-tricks-article';
 

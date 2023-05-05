@@ -14,7 +14,7 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"@graphqlapi/components": "file:../../packages/components",
+		"@gatographql/components": "file:../../packages/components",
 		"@wordpress/components": "^10.0.0",
 		"@wordpress/i18n": "^3.14.0",
 		"@wordpress/scripts": "^12.1.0",

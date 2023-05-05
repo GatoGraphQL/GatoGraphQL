@@ -12,7 +12,7 @@ import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-l
 import {
 	withCard,
 	withEditableOnFocus,
-} from '@graphqlapi/components';
+} from '@gatographql/components';
 
 const CustomEndpointOptions = ( props ) => {
 	const {

@@ -20,7 +20,7 @@ import {
 	SETTINGS_VALUE_LABEL,
 	withCard,
 	withEditableOnFocus,
-} from '@graphqlapi/components';
+} from '@gatographql/components';
 
 const SchemaConfigMutationSchemeCard = ( props ) => {
 	const {
