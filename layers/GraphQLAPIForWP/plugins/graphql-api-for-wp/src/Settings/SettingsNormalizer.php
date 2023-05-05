@@ -101,6 +101,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                     $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                 }
             }
+            return $values;
         }
 
         foreach ($settingsItems as $item) {
@@ -161,9 +162,11 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                     $type === Properties::TYPE_ARRAY
                     && $subtype === Properties::TYPE_INT
                 ) {
+                    /** @var mixed[] */
+                    $arrayValue = $values[$name];
                     $values[$name] = array_map(
                         fn (int|string $value) => (int) $value,
-                        $values[$name]
+                        $arrayValue
                     );
                 }
 
