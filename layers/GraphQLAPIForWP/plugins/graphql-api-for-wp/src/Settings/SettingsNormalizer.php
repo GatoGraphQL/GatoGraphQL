@@ -73,6 +73,36 @@ class SettingsNormalizer implements SettingsNormalizerInterface
         array $settingsItems,
     ): array {
         $moduleRegistry = $this->getModuleRegistry();
+
+        /**
+         * All form fields will be provided via the Settings form.
+         * If they are not, then this method has been invoked by
+         * executing `maybeStoreEmptySettings` or
+         * `$userSettingsManager->storeEmptySettings($option)`
+         * in `resetOptions`, where an empty array is passed
+         * to `update_option`.
+         *
+         * In that case, fill it in with the default values.
+         *
+         * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
+         */
+        if ($values === []) {
+            foreach ($settingsItems as $item) {
+                $module = $item['module'];
+                $moduleResolver = $moduleRegistry->getModuleResolver($module);
+                foreach ($item['settings'] as $itemSetting) {
+                    $option = $itemSetting[Properties::INPUT] ?? null;
+                    // No option => it is a label
+                    if ($option === null) {
+                        continue;
+                    }
+                    /** @var string */
+                    $name = $itemSetting[Properties::NAME];
+                    $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
+                }
+            }
+        }
+
         foreach ($settingsItems as $item) {
             $module = $item['module'];
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
@@ -84,27 +114,10 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                 }
                 $type = $itemSetting[Properties::TYPE] ?? null;
                 $subtype = $itemSetting[Properties::SUBTYPE] ?? null;
-                /**
-                 * Cast type so PHPStan doesn't throw error
-                 */
-                $name = (string)$itemSetting[Properties::NAME];
+                /** @var string */
+                $name = $itemSetting[Properties::NAME];
+                /** @var bool */
                 $canBeEmpty = $itemSetting[Properties::CAN_BE_EMPTY] ?? false;
-
-                /**
-                 * All form fields will be provided via the Settings form.
-                 * If they are not, then this method has been invoked by
-                 * executing `maybeStoreEmptySettings` or
-                 * `$userSettingsManager->storeEmptySettings($option)`
-                 * in `resetOptions`, where an empty array is passed
-                 * to `update_option`.
-                 *
-                 * In that case, fill it in with the default value.
-                 *
-                 * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
-                 */
-                if (!array_key_exists($name, $values)) {
-                    $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
-                }
 
                 /**
                  * If the input is empty, replace with the default
