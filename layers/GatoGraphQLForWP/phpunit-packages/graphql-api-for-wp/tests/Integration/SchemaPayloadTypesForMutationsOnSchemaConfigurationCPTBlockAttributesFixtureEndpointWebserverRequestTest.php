@@ -45,6 +45,6 @@ class SchemaPayloadTypesForMutationsOnSchemaConfigurationCPTBlockAttributesFixtu
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-payload-types-for-mutations';
+        return 'gato-graphql/schema-config-payload-types-for-mutations';
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: GraphQL API for WordPress
-Plugin URI: https://graphql-api.com
+Plugin URI: https://gato-graphql.com
 Description: Transform your WordPress site into a GraphQL server.
 Version: 1.0.0-dev
 Requires at least: 5.4
@@ -10,9 +10,9 @@ Author: Leonardo Losoviz
 Author URI: https://leoloso.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-Text Domain: graphql-api
+Text Domain: gato-graphql
 Domain Path: /languages
-GitHub Plugin URI: GatoGraphQL/graphql-api-for-wp-dist
+GitHub Plugin URI: GatoGraphQL/gato-graphql-for-wp-dist
 */
 
 use GatoGraphQL\GatoGraphQL\Plugin;
@@ -29,7 +29,7 @@ if (!defined('ABSPATH')) {
  * @see https://github.com/leoloso/PoP/issues/2051
  */
 // add_action('init', function (): void {
-//     load_plugin_textdomain('graphql-api', false, plugin_basename(__FILE__) . '/languages');
+//     load_plugin_textdomain('gato-graphql', false, plugin_basename(__FILE__) . '/languages');
 // });
 
 /**
@@ -40,7 +40,7 @@ if (!defined('ABSPATH')) {
  * @see https://getcomposer.org/doc/articles/versions.md#stabilities
  */
 $pluginVersion = '1.0.0-dev';
-$pluginName = __('GraphQL API for WordPress', 'graphql-api');
+$pluginName = __('GraphQL API for WordPress', 'gato-graphql');
 
 /**
  * If the plugin is already registered, print an error and halt loading

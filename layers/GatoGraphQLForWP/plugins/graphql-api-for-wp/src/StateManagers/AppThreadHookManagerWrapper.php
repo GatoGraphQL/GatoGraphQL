@@ -43,7 +43,7 @@ class AppThreadHookManagerWrapper implements HookManagerInterface
         $currentAppThreadName = App::getAppThread()->getName();
         if ($currentAppThreadName === null) {
             throw new ShouldNotHappenException(
-                \__('AppThread has no name', 'graphql-api')
+                \__('AppThread has no name', 'gato-graphql')
             );
         }
         $this->appThreadName = $currentAppThreadName;

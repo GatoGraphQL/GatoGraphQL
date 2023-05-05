@@ -33,7 +33,7 @@ class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
     {
         if (!isset($this->settingsCategorySettingsCategoryResolvers[$settingsCategory])) {
             throw new SettingsCategoryNotExistsException(sprintf(
-                \__('Settings Category \'%s\' does not exist', 'graphql-api'),
+                \__('Settings Category \'%s\' does not exist', 'gato-graphql'),
                 $settingsCategory
             ));
         }

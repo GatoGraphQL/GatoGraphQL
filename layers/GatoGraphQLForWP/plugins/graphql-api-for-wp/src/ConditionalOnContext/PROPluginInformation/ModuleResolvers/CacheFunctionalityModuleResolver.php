@@ -92,8 +92,8 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
     public function getName(string $module): string
     {
         return match ($module) {
-            self::CONFIGURATION_CACHE => \__('Configuration Cache', 'graphql-api'),
-            self::SCHEMA_INTROSPECTION_CACHE => \__('Schema Introspection Cache', 'graphql-api'),
+            self::CONFIGURATION_CACHE => \__('Configuration Cache', 'gato-graphql'),
+            self::SCHEMA_INTROSPECTION_CACHE => \__('Schema Introspection Cache', 'gato-graphql'),
             default => $module,
         };
     }
@@ -102,9 +102,9 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
     {
         switch ($module) {
             case self::CONFIGURATION_CACHE:
-                return \__('Cache the generated application configuration to disk', 'graphql-api');
+                return \__('Cache the generated application configuration to disk', 'gato-graphql');
             case self::SCHEMA_INTROSPECTION_CACHE:
-                return \__('Cache the generated schema to disk when doing introspection', 'graphql-api');
+                return \__('Cache the generated schema to disk when doing introspection', 'gato-graphql');
         }
         return parent::getDescription($module);
     }

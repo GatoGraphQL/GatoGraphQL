@@ -16,7 +16,7 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
     public function print(): void
     {
         ?>
-        <div id="voyager" class="voyager-client"><?php echo __('Loading...', 'graphql-api') ?></div>
+        <div id="voyager" class="voyager-client"><?php echo __('Loading...', 'gato-graphql') ?></div>
         <?php
     }
 
@@ -37,13 +37,13 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
 
         // CSS
         \wp_enqueue_style(
-            'graphql-api-voyager-client',
+            'gato-graphql-voyager-client',
             $mainPluginURL . 'assets/css/voyager-client.css',
             array(),
             $mainPluginVersion
         );
         \wp_enqueue_style(
-            'graphql-api-voyager',
+            'gato-graphql-voyager',
             $mainPluginURL . 'assets/css/vendors/voyager.css',
             array(),
             $mainPluginVersion
@@ -52,23 +52,23 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
         // JS: execute them all in the footer
         $this->enqueueReactAssets(true);
         \wp_enqueue_script(
-            'graphql-api-voyager',
+            'gato-graphql-voyager',
             $mainPluginURL . 'assets/js/vendors/voyager.min.js',
-            array('graphql-api-react-dom'),
+            array('gato-graphql-react-dom'),
             $mainPluginVersion,
             true
         );
         \wp_enqueue_script(
-            'graphql-api-voyager-client',
+            'gato-graphql-voyager-client',
             $mainPluginURL . 'assets/js/voyager-client.js',
-            array('graphql-api-voyager'),
+            array('gato-graphql-voyager'),
             $mainPluginVersion,
             true
         );
 
         // Load data into the script
         \wp_localize_script(
-            'graphql-api-voyager-client',
+            'gato-graphql-voyager-client',
             'graphQLByPoPGraphiQLSettings',
             array(
                 'nonce' => \wp_create_nonce('wp_rest'),

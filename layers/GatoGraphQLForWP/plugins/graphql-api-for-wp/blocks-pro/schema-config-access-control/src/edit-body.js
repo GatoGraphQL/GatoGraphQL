@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Access Control', 'graphql-api');
-const description = __('Manage who can access every field and directive in the schema through Access Control Lists.', 'graphql-api');
+const title = __('Access Control', 'gato-graphql');
+const description = __('Manage who can access every field and directive in the schema through Access Control Lists.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

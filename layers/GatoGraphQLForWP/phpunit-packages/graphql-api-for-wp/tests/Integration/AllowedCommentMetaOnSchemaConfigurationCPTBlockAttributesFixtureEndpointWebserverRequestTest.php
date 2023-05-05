@@ -42,6 +42,6 @@ class AllowedCommentMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWe
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-schema-comment-meta';
+        return 'gato-graphql/schema-config-schema-comment-meta';
     }
 }

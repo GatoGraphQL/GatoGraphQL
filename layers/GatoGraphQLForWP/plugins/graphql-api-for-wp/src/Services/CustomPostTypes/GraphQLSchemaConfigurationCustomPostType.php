@@ -53,7 +53,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCu
      */
     protected function getCustomPostTypeName(): string
     {
-        return \__('GraphQL Schema Configuration', 'graphql-api');
+        return \__('GraphQL Schema Configuration', 'gato-graphql');
     }
 
     /**
@@ -63,7 +63,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCu
      */
     protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
-        return \__('GraphQL Schema Configurations', 'graphql-api');
+        return \__('GraphQL Schema Configurations', 'gato-graphql');
     }
 
     /**
@@ -82,7 +82,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCu
         return array_merge(
             parent::getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
             array(
-                'all_items' => \__('Schema Configurations', 'graphql-api'),
+                'all_items' => \__('Schema Configurations', 'gato-graphql'),
             )
         );
     }

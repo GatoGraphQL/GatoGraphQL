@@ -1,6 +1,6 @@
 parameters:
     bootstrapFiles:
-        - graphql-api-extension-demo.php
+        - gato-graphql-extension-demo.php
     level: 8
     paths:
         - src/

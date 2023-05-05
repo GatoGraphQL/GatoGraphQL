@@ -11,7 +11,7 @@ class RenderingHelpers
      */
     public function getUnauthorizedAccessMessage(): string
     {
-        return \__('You are not authorized to see this content', 'graphql-api');
+        return \__('You are not authorized to see this content', 'gato-graphql');
     }
 
     /**

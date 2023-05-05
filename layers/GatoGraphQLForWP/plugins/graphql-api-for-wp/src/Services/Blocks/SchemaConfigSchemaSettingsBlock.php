@@ -28,12 +28,12 @@ class SchemaConfigSchemaSettingsBlock extends AbstractSchemaConfigSchemaAllowAcc
 
     protected function getBlockTitle(): string
     {
-        return \__('Settings', 'graphql-api');
+        return \__('Settings', 'gato-graphql');
     }
 
     protected function getRenderBlockLabel(): string
     {
-        return $this->__('Settings entries', 'graphql-api');
+        return $this->__('Settings entries', 'gato-graphql');
     }
 
     /**

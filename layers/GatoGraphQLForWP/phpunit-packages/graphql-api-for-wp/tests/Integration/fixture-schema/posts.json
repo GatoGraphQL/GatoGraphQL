@@ -39,7 +39,7 @@
                 "tagNames": [],
                 "tags": [],
                 "title": "Hello world!",
-                "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/hello-world\/",
                 "urlPath": "\/hello-world\/"
             },
             {
@@ -71,7 +71,7 @@
                 "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard width)",
                 "featuredImage": {
                     "id": 361,
-                    "src": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
+                    "src": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
                 },
                 "hasComments": true,
                 "hasFeaturedImage": true,
@@ -99,7 +99,7 @@
                     }
                 ],
                 "title": "Released v0.6, check it out",
-                "url": "https:\/\/graphql-api.lndo.site\/released-v0-6-check-it-out\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/released-v0-6-check-it-out\/",
                 "urlPath": "\/released-v0-6-check-it-out\/"
             },
             {
@@ -127,7 +127,7 @@
                 "excerpt": "Image Block (Wide width) Image Block (Full width) Cover Image Block Gallery Block",
                 "featuredImage": {
                     "id": 361,
-                    "src": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
+                    "src": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
                 },
                 "hasComments": false,
                 "hasFeaturedImage": true,
@@ -165,7 +165,7 @@
                     }
                 ],
                 "title": "Working on flat chain syntax next",
-                "url": "https:\/\/graphql-api.lndo.site\/working-on-flat-chain-syntax-next\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/working-on-flat-chain-syntax-next\/",
                 "urlPath": "\/working-on-flat-chain-syntax-next\/"
             }
         ],

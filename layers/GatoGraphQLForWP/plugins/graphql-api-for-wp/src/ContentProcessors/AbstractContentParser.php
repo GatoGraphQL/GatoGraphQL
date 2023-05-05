@@ -142,7 +142,7 @@ abstract class AbstractContentParser implements ContentParserInterface
             // Make sure this file exists
             if (!file_exists($file)) {
                 throw new ContentNotExistsException(sprintf(
-                    \__('File \'%s\' does not exist', 'graphql-api'),
+                    \__('File \'%s\' does not exist', 'gato-graphql'),
                     $file
                 ));
             }
@@ -150,7 +150,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         $fileContent = file_get_contents($file);
         if ($fileContent === false) {
             throw new ContentNotExistsException(sprintf(
-                \__('File \'%s\' is corrupted', 'graphql-api'),
+                \__('File \'%s\' is corrupted', 'gato-graphql'),
                 $file
             ));
         }
@@ -306,7 +306,7 @@ abstract class AbstractContentParser implements ContentParserInterface
 
             return
                 $contentStarter
-                . '<div class="graphql-api-tabpanel">'
+                . '<div class="gato-graphql-tabpanel">'
                 .   '<div class="nav-tab-container">'
                 .     '<h2 class="nav-tab-wrapper">'
                 .       $panelTabs

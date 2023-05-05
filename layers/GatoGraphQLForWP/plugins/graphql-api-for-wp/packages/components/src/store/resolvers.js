@@ -42,8 +42,8 @@ import directivesGraphQLQuery from '../../graphql-documents/directives.gql';
 const maybeGetErrorMessage = (response) => {
 	if (response.errors && response.errors.length) {
 		return sprintf(
-			__(`There were errors connecting to the API: %s`, 'graphql-api'),
-			response.errors.map(error => error.message).join( __('; ', 'graphql-api') )
+			__(`There were errors connecting to the API: %s`, 'gato-graphql'),
+			response.errors.map(error => error.message).join( __('; ', 'gato-graphql') )
 		);
 	}
 	return null;

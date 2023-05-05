@@ -136,7 +136,7 @@
                     }
                 ],
                 "slug": "editor",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/author\/editor\/",
                 "urlPath": "\/author\/editor\/",
                 "username": "editor",
                 "websiteURL": null
@@ -228,7 +228,7 @@
                     }
                 ],
                 "slug": "author",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/author\/author\/",
                 "urlPath": "\/author\/author\/",
                 "username": "author",
                 "websiteURL": null
@@ -295,7 +295,7 @@
                     }
                 ],
                 "slug": "contributor",
-                "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/author\/contributor\/",
                 "urlPath": "\/author\/contributor\/",
                 "username": "contributor",
                 "websiteURL": null

@@ -9,7 +9,7 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 
 /**
- * This class is hosted within the graphql-api-for-wp plugin, and not
+ * This class is hosted within the gato-graphql-for-wp plugin, and not
  * within the extension plugin. That means that the main plugin
  * must be installed, for any extension to work.
  *
@@ -21,7 +21,7 @@ use PoP\Root\Module\ModuleInterface;
  *
  * Then, the activation is done when registering the extension.
  *
- * @see https://github.com/leoloso/PoP/blob/bccf2f0/layers/GatoGraphQLForWP/plugins/extension-demo/graphql-api-extension-demo.php#L73-L77
+ * @see https://github.com/leoloso/PoP/blob/bccf2f0/layers/GatoGraphQLForWP/plugins/extension-demo/gato-graphql-extension-demo.php#L73-L77
  */
 abstract class AbstractExtension extends AbstractPlugin implements ExtensionInterface
 {

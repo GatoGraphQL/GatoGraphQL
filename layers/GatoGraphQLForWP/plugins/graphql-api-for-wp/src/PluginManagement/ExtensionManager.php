@@ -46,7 +46,7 @@ class ExtensionManager extends AbstractPluginManager
         if (!isset($this->extensionClassInstances[$extensionClass])) {
             throw new ExtensionNotRegisteredException(
                 sprintf(
-                    \__('The extension with class \'%s\' has not been registered yet', 'graphql-api'),
+                    \__('The extension with class \'%s\' has not been registered yet', 'gato-graphql'),
                     $extensionClass
                 )
             );
@@ -85,7 +85,7 @@ class ExtensionManager extends AbstractPluginManager
         if (isset($this->extensionClassInstances[$extensionClass])) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'graphql-api'),
+                    __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'gato-graphql'),
                     $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
                     $this->extensionClassInstances[$extensionClass]->getPluginVersion(),
                     $extensionVersion,
@@ -107,7 +107,7 @@ class ExtensionManager extends AbstractPluginManager
         ) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    __('Extension <strong>%s</strong> requires plugin <strong>%s</strong> to satisfy version constraint <code>%s</code>, but the current version <code>%s</code> does not. The extension has not been loaded.', 'graphql-api'),
+                    __('Extension <strong>%s</strong> requires plugin <strong>%s</strong> to satisfy version constraint <code>%s</code>, but the current version <code>%s</code> does not. The extension has not been loaded.', 'gato-graphql'),
                     $extensionName ?? $extensionClass,
                     $mainPlugin->getPluginName(),
                     $mainPluginVersionConstraint,

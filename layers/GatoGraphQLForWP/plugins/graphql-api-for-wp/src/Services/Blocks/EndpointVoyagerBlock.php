@@ -62,7 +62,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            \__('Expose the Interactive Schema client?', 'graphql-api'),
+            \__('Expose the Interactive Schema client?', 'gato-graphql'),
             $this->getBooleanLabel($attributes[BlockAttributeNames::IS_ENABLED] ?? true)
         );
 
@@ -76,7 +76,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
-            \__('Interactive Schema', 'graphql-api'),
+            \__('Interactive Schema', 'gato-graphql'),
             $blockContent
         );
     }

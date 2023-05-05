@@ -41,7 +41,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'graphql-api'),
+            self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'gato-graphql'),
             default => $module,
         };
     }
@@ -50,7 +50,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         switch ($module) {
             case self::SCHEMA_EDITING_ACCESS:
-                return \__('Grant access to users other than admins to edit the GraphQL schema', 'graphql-api');
+                return \__('Grant access to users other than admins to edit the GraphQL schema', 'gato-graphql');
         }
         return parent::getDescription($module);
     }

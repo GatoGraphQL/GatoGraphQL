@@ -212,7 +212,7 @@
                 "metaValues": null,
                 "name": "Tango",
                 "slug": "tango",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/tango\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-tag\/tango\/",
                 "urlPath": "\/dummy-tag\/tango\/"
             },
             {
@@ -463,7 +463,7 @@
                 "metaValues": null,
                 "name": "Rock",
                 "slug": "rock",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/rock\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-tag\/rock\/",
                 "urlPath": "\/dummy-tag\/rock\/"
             },
             {
@@ -648,7 +648,7 @@
                 "metaValues": null,
                 "name": "Jazz",
                 "slug": "jazz",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/jazz\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-tag\/jazz\/",
                 "urlPath": "\/dummy-tag\/jazz\/"
             },
             {
@@ -823,7 +823,7 @@
                 "metaValues": null,
                 "name": "Hip Hop",
                 "slug": "hip-hop",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/hip-hop\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-tag\/hip-hop\/",
                 "urlPath": "\/dummy-tag\/hip-hop\/"
             },
             {
@@ -986,7 +986,7 @@
                 "metaValues": null,
                 "name": "Heavy metal",
                 "slug": "heavy-metal",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/heavy-metal\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-tag\/heavy-metal\/",
                 "urlPath": "\/dummy-tag\/heavy-metal\/"
             },
             {
@@ -1156,7 +1156,7 @@
                 "metaValues": null,
                 "name": "Classical",
                 "slug": "classical",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-tag\/classical\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-tag\/classical\/",
                 "urlPath": "\/dummy-tag\/classical\/"
             }
         ],

@@ -42,6 +42,6 @@ class QueryableCategoryTaxonomiesOnSchemaConfigurationCPTBlockAttributesFixtureE
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-schema-categories';
+        return 'gato-graphql/schema-config-schema-categories';
     }
 }

@@ -10,13 +10,13 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
     // /**
-    //  * URL base for the module, pointing to graphql-api.com
+    //  * URL base for the module, pointing to gato-graphql.com
     //  */
     // public function getModuleURLBase(): string
     // {
     //     // Define properties
     //     $envVariable = Environment::MODULE_URL_BASE;
-    //     $defaultValue = 'https://graphql-api.com/modules/';
+    //     $defaultValue = 'https://gato-graphql.com/modules/';
     //     // Initialize property from the environment/hook
     //     $this->retrieveConfigurationValueOrUseDefault(
     //         $envVariable,
@@ -47,7 +47,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getNoItemsSelectedLabel(): string
     {
         $envVariable = Environment::NO_ITEMS_SELECTED_LABEL;
-        $defaultValue = \__('(none selected)', 'graphql-api');
+        $defaultValue = \__('(none selected)', 'gato-graphql');
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -61,7 +61,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getSettingsValueLabel(): string
     {
         $envVariable = Environment::SETTINGS_VALUE_LABEL;
-        $defaultValue = \__('🟡 Default', 'graphql-api');
+        $defaultValue = \__('🟡 Default', 'gato-graphql');
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -158,7 +158,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getPROPluginWebsiteURL(): string
     {
         $envVariable = Environment::PRO_PLUGIN_WEBSITE_URL;
-        $defaultValue = 'https://graphql-api.com';
+        $defaultValue = 'https://gato-graphql.com';
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

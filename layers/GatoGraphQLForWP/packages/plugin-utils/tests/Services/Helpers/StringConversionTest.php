@@ -16,14 +16,14 @@ class StringConversionTest extends AbstractTestCase
         $this->assertSame(
             'graphqlApiSchemaConfigOptions',
             $stringConversion->dashesToCamelCase(
-                'graphql-api-schema-config-options'
+                'gato-graphql-schema-config-options'
             )
         );
 
         $this->assertSame(
             'GraphqlApiSchemaConfigOptions',
             $stringConversion->dashesToCamelCase(
-                'graphql-api-schema-config-options',
+                'gato-graphql-schema-config-options',
                 true
             )
         );

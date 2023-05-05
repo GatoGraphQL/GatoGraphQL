@@ -60,11 +60,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
     public function getName(string $module): string
     {
         return match ($module) {
-            self::INSPECT_HTTP_REQUEST_FIELDS => \__('Inspect HTTP Request Fields', 'graphql-api'),
-            self::SEND_HTTP_REQUEST_FIELDS => \__('Send HTTP Request Fields', 'graphql-api'),
-            self::ENVIRONMENT_FIELDS => \__('Environment Fields', 'graphql-api'),
-            self::FUNCTION_FIELDS => \__('Function Fields', 'graphql-api'),
-            self::HELPER_FIELDS => \__('Helper Fields', 'graphql-api'),
+            self::INSPECT_HTTP_REQUEST_FIELDS => \__('Inspect HTTP Request Fields', 'gato-graphql'),
+            self::SEND_HTTP_REQUEST_FIELDS => \__('Send HTTP Request Fields', 'gato-graphql'),
+            self::ENVIRONMENT_FIELDS => \__('Environment Fields', 'gato-graphql'),
+            self::FUNCTION_FIELDS => \__('Function Fields', 'gato-graphql'),
+            self::HELPER_FIELDS => \__('Helper Fields', 'gato-graphql'),
             default => $module,
         };
     }
@@ -72,11 +72,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::INSPECT_HTTP_REQUEST_FIELDS => \__('Addition of fields to retrieve the current HTTP request data', 'graphql-api'),
-            self::SEND_HTTP_REQUEST_FIELDS => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response', 'graphql-api'),
-            self::ENVIRONMENT_FIELDS => \__('Query the value from an environment variable or PHP constant', 'graphql-api'),
-            self::FUNCTION_FIELDS => \__('Manipulate the field output using standard programming language functions (provided via special fields)', 'graphql-api'),
-            self::HELPER_FIELDS => \__('Collection of fields providing useful functionality concerning URLs, Date formatting, etc', 'graphql-api'),
+            self::INSPECT_HTTP_REQUEST_FIELDS => \__('Addition of fields to retrieve the current HTTP request data', 'gato-graphql'),
+            self::SEND_HTTP_REQUEST_FIELDS => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response', 'gato-graphql'),
+            self::ENVIRONMENT_FIELDS => \__('Query the value from an environment variable or PHP constant', 'gato-graphql'),
+            self::FUNCTION_FIELDS => \__('Manipulate the field output using standard programming language functions (provided via special fields)', 'gato-graphql'),
+            self::HELPER_FIELDS => \__('Collection of fields providing useful functionality concerning URLs, Date formatting, etc', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }

@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Environment Fields', 'graphql-api');
-const description = __('Query the value from an environment variable or PHP constant.', 'graphql-api');
+const title = __('Environment Fields', 'gato-graphql');
+const description = __('Query the value from an environment variable or PHP constant.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

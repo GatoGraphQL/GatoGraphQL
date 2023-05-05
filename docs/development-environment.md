@@ -49,9 +49,9 @@ composer reset-db
 
 ## Site URL
 
-The site will be available under `https://graphql-api.lndo.site`.
+The site will be available under `https://gato-graphql.lndo.site`.
 
-To access the [wp-admin](https://graphql-api.lndo.site/wp-admin/):
+To access the [wp-admin](https://gato-graphql.lndo.site/wp-admin/):
 
 - User: `admin`
 - Password: `admin`

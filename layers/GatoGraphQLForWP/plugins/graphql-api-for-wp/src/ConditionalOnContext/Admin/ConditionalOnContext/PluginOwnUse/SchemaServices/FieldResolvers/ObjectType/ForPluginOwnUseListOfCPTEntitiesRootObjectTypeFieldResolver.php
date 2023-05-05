@@ -38,7 +38,7 @@ class ForPluginOwnUseListOfCPTEntitiesRootObjectTypeFieldResolver extends Abstra
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'schemaConfigurations' => $this->__('Schema Configurations', 'graphql-api'),
+            'schemaConfigurations' => $this->__('Schema Configurations', 'gato-graphql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

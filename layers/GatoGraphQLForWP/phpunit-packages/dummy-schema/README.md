@@ -16,7 +16,7 @@ Dummy schema resolvers for testing with PHPUnit
 Via Composer
 
 ``` bash
-composer require phpunit-for-graphql-api/dummy-schema
+composer require phpunit-for-gato-graphql/dummy-schema
 ```
 
 ## Development
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/phpunit-for-graphql-api/dummy-schema.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/phpunit-for-gato-graphql/dummy-schema.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/phpunit-for-graphql-api/dummy-schema/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-graphql-api/dummy-schema.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-graphql-api/dummy-schema.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-graphql-api/dummy-schema.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/phpunit-for-gato-graphql/dummy-schema/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-gato-graphql/dummy-schema.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-gato-graphql/dummy-schema.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-gato-graphql/dummy-schema.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/phpunit-for-graphql-api/dummy-schema
-[link-travis]: https://travis-ci.org/phpunit-for-graphql-api/dummy-schema
-[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-graphql-api/dummy-schema/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-graphql-api/dummy-schema
-[link-downloads]: https://packagist.org/packages/phpunit-for-graphql-api/dummy-schema
+[link-packagist]: https://packagist.org/packages/phpunit-for-gato-graphql/dummy-schema
+[link-travis]: https://travis-ci.org/phpunit-for-gato-graphql/dummy-schema
+[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/dummy-schema/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/dummy-schema
+[link-downloads]: https://packagist.org/packages/phpunit-for-gato-graphql/dummy-schema
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

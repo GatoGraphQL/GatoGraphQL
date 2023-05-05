@@ -10,19 +10,19 @@ curl -i --insecure \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonEncodedOptionValues": "{\"custompost-types\":[\"dummy-cpt\",\"page\",\"post\"]}"}' \
-  $(echo $SITE_DOMAIN)/wp-json/graphql-api/v1/admin/module-settings/graphqlapi_graphqlapi_schema-customposts
+  $(echo $SITE_DOMAIN)/wp-json/gato-graphql/v1/admin/module-settings/graphqlapi_graphqlapi_schema-customposts
 
 curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonEncodedOptionValues": "{\"tag-taxonomies\":[\"dummy-tag\",\"post_tag\"]}"}' \
-  $(echo $SITE_DOMAIN)/wp-json/graphql-api/v1/admin/module-settings/graphqlapi_graphqlapi_schema-tags
+  $(echo $SITE_DOMAIN)/wp-json/gato-graphql/v1/admin/module-settings/graphqlapi_graphqlapi_schema-tags
 
 curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonEncodedOptionValues": "{\"category-taxonomies\":[\"category\",\"dummy-category\"]}"}' \
-  $(echo $SITE_DOMAIN)/wp-json/graphql-api/v1/admin/module-settings/graphqlapi_graphqlapi_schema-categories
+  $(echo $SITE_DOMAIN)/wp-json/gato-graphql/v1/admin/module-settings/graphqlapi_graphqlapi_schema-categories
  

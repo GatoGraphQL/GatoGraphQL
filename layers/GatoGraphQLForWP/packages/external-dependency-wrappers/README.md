@@ -9,14 +9,14 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Wrap classes from 3rd-party dependencies which must be accessed by GraphQL API, so they can be scoped (package `graphql-api/graphql-api-for-wp` is not scoped)
+Wrap classes from 3rd-party dependencies which must be accessed by GraphQL API, so they can be scoped (package `gato-graphql/gato-graphql-for-wp` is not scoped)
 
 ## Install
 
 Via Composer
 
 ``` bash
-composer require graphql-api/external-dependency-wrappers
+composer require gato-graphql/external-dependency-wrappers
 ```
 
 ## Development
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/graphql-api/external-dependency-wrappers.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/gato-graphql/external-dependency-wrappers.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/graphql-api/external-dependency-wrappers/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/graphql-api/external-dependency-wrappers.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/graphql-api/external-dependency-wrappers.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/graphql-api/external-dependency-wrappers.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/gato-graphql/external-dependency-wrappers/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gato-graphql/external-dependency-wrappers.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/gato-graphql/external-dependency-wrappers.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/gato-graphql/external-dependency-wrappers.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/graphql-api/external-dependency-wrappers
-[link-travis]: https://travis-ci.org/graphql-api/external-dependency-wrappers
-[link-scrutinizer]: https://scrutinizer-ci.com/g/graphql-api/external-dependency-wrappers/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/graphql-api/external-dependency-wrappers
-[link-downloads]: https://packagist.org/packages/graphql-api/external-dependency-wrappers
+[link-packagist]: https://packagist.org/packages/gato-graphql/external-dependency-wrappers
+[link-travis]: https://travis-ci.org/gato-graphql/external-dependency-wrappers
+[link-scrutinizer]: https://scrutinizer-ci.com/g/gato-graphql/external-dependency-wrappers/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/gato-graphql/external-dependency-wrappers
+[link-downloads]: https://packagist.org/packages/gato-graphql/external-dependency-wrappers
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

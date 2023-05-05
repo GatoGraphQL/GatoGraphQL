@@ -24,7 +24,7 @@ services:
     # The services below are needed to get the defaultValues for options
     # CUSTOMPOST_TYPES, TAG_TAXONOMIES and CATEGORY_TAXONOMIES
     #
-    # @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/ModuleResolvers/SchemaTypeModuleResolver.php
+    # @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/src/ModuleResolvers/SchemaTypeModuleResolver.php
     #
     # Even though the Registries will be empty, as the corresponding
     # services have not been added as Hybrid Services, that's OK,

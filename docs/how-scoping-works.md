@@ -14,4 +14,4 @@ This way, some packages will be scoped and others will not, and they all form th
 ## Additional resources
 
 - [PHP-Scoper](https://github.com/humbug/php-scoper)
-- [🍾 GraphQL API for WordPress is now scoped, thanks to PHP-Scoper!](https://graphql-api.com/blog/graphql-api-for-wp-is-now-scoped-thanks-to-php-scoper/)
+- [🍾 GraphQL API for WordPress is now scoped, thanks to PHP-Scoper!](https://gato-graphql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)

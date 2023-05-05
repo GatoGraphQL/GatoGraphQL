@@ -32,7 +32,7 @@ GRAPHQL_RESPONSE=$(curl --insecure \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"operationName": "Two", "query": "query One {\n  spanishLocaleUsers: users(filter: { metaQuery: {\n    key: \"locale\",\n    compareBy: {\n      stringValue: {\n        value: \"es_[A-Z]+\"\n        operator: REGEXP\n      }\n    }\n  }}) {\n    id @export(as: \"userIDs\")\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}\n\nquery Two @depends(on: \"One\") {\n  spanishLocaleUserIDs: _arrayJoin(\n    array: $userIDs,\n    separator: \" \"\n  )\n}"}' \
-  https://graphql-api-pro.lndo.site/graphql/nested-mutations/)
+  https://gato-graphql-pro.lndo.site/graphql/nested-mutations/)
 
 SPANISH_LOCALE_USER_IDS=$(echo $GRAPHQL_RESPONSE \
   | grep -E -o '"spanishLocaleUserIDs\":"(.*)"' \
@@ -76,7 +76,7 @@ GRAPHQL_RESPONSE=$(curl --insecure \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://graphql-api.lndo.site/graphql/website/)
+  https://gato-graphql.lndo.site/graphql/website/)
 ```
 
 or do this:
@@ -88,5 +88,5 @@ GRAPHQL_RESPONSE=$(curl --insecure \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://graphql-api.lndo.site/graphql/website/)
+  https://gato-graphql.lndo.site/graphql/website/)
 ```

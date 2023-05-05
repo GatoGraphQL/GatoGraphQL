@@ -10,7 +10,7 @@ Author: Leonardo Losoviz
 Author URI: https://leoloso.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-Text Domain: graphql-api-extension-demo
+Text Domain: gato-graphql-extension-demo
 Domain Path: /languages
 */
 
@@ -29,7 +29,7 @@ if (!defined('ABSPATH')) {
  * @see https://github.com/leoloso/PoP/issues/2051
  */
 // \add_action('init', function (): void {
-//     load_plugin_textdomain('graphql-api-extension-demo', false, plugin_basename(__FILE__) . '/languages');
+//     load_plugin_textdomain('gato-graphql-extension-demo', false, plugin_basename(__FILE__) . '/languages');
 // });
 
 /**
@@ -46,7 +46,7 @@ add_action(
          * @see https://getcomposer.org/doc/articles/versions.md#stabilities
          */
         $extensionVersion = '1.0.0-dev';
-        $extensionName = \__('GraphQL API - Extension Demo', 'graphql-api-extension-demo');
+        $extensionName = \__('GraphQL API - Extension Demo', 'gato-graphql-extension-demo');
         $mainPluginVersionConstraint = '^1.0';
         
         /**
@@ -57,8 +57,8 @@ add_action(
                 _e(sprintf(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
-                        __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'graphql-api-extension-demo'),
-                        __('GraphQL API for WordPress', 'graphql-api-extension-demo'),
+                        __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gato-graphql-extension-demo'),
+                        __('GraphQL API for WordPress', 'gato-graphql-extension-demo'),
                         $extensionName
                     )
                 ));

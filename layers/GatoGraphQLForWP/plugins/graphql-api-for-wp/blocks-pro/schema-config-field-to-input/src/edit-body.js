@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Field to Input', 'graphql-api');
-const description = __('Retrieve the value of a field, manipulate it, and input it into another field, all within the same query.', 'graphql-api');
+const title = __('Field to Input', 'gato-graphql');
+const description = __('Retrieve the value of a field, manipulate it, and input it into another field, all within the same query.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

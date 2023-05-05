@@ -24,18 +24,18 @@ const withCustomizableConfiguration = () => createHigherOrderComponent(
 			<div className={ componentClassName }>
 				<div className="customizable-configuration-header">
 					{ ! isSelected && ! customizeConfiguration && (
-						<span>🟡 { __('Use configuration from Settings', 'graphql-api') }</span>
+						<span>🟡 { __('Use configuration from Settings', 'gato-graphql') }</span>
 					) }
 					{ isSelected && (
 						<>
-							<em>{ __('Customize configuration?', 'graphql-api') }</em>
+							<em>{ __('Customize configuration?', 'gato-graphql') }</em>
 							<InfoTooltip
 								{ ...props }
-								text={ __('The configuration items below can be customized for endpoints using this Schema Configuration. Otherwise, the general configuration (defined on the Settings page) will be used.', 'graphql-api') }
+								text={ __('The configuration items below can be customized for endpoints using this Schema Configuration. Otherwise, the general configuration (defined on the Settings page) will be used.', 'gato-graphql') }
 							/>
 							<ToggleControl
 								{ ...props }
-								label={ __('Use custom configuration', 'graphql-api') }
+								label={ __('Use custom configuration', 'gato-graphql') }
 								checked={ customizeConfiguration }
 								onChange={ newValue => (
 									setAttributes( {

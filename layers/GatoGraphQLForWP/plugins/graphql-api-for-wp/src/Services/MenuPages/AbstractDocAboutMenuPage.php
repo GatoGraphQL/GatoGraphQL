@@ -69,7 +69,7 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
             $doc,
             $relativePathDir
         ) ?? sprintf(
-            \__('Page \'%s\' does not exist', 'graphql-api'),
+            \__('Page \'%s\' does not exist', 'gato-graphql'),
             $doc
         );
     }

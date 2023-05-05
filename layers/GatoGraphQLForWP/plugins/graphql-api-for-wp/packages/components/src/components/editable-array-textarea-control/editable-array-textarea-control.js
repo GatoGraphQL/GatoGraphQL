@@ -13,7 +13,7 @@ const EditableArrayTextareaControl = ( props ) => {
 		isSelected,
 		attributeName
 	} = props;
-	const componentClassName = 'graphql-api-textarea-control';
+	const componentClassName = 'gato-graphql-textarea-control';
 	return (
 		<>
 			{ isSelected &&
@@ -41,7 +41,7 @@ const EditableArrayTextareaControl = ( props ) => {
 			) }
 			{ !isSelected && !values.length && (
 				<div className={ `${ className }__not-set ${ componentClassName }__not-set` }>
-					<em>{ __('(not set)', 'graphql-api') }</em>
+					<em>{ __('(not set)', 'gato-graphql') }</em>
 				</div>
 			) }
 		</>

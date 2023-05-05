@@ -41,7 +41,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     public function getItemSingularName(): string
     {
-        return \__('Module', 'graphql-api');
+        return \__('Module', 'gato-graphql');
     }
 
     /**
@@ -49,7 +49,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     public function getItemPluralName(): string
     {
-        return \__('Modules', 'graphql-api');
+        return \__('Modules', 'gato-graphql');
     }
 
     /**
@@ -148,7 +148,7 @@ class ModuleListTable extends AbstractItemListTable
             '<a href="%s" class="%s">%s</a>',
             $url,
             $currentViews === [] ? 'current' : '',
-            \__('All', 'graphql-api')
+            \__('All', 'gato-graphql')
         );
 
         // Entries for every module type: retrieve the moduleType from all modules
@@ -239,7 +239,7 @@ class ModuleListTable extends AbstractItemListTable
                         \esc_url($url),
                         'thickbox open-plugin-details-modal',
                         \esc_attr($item['name']),
-                        \__('View details', 'graphql-api')
+                        \__('View details', 'gato-graphql')
                     );
                 }
                 return sprintf(
@@ -255,7 +255,7 @@ class ModuleListTable extends AbstractItemListTable
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
                 $dependedModuleLists = $item[$column_name];
                 if (!$dependedModuleLists) {
-                    return \__('-', 'graphql-api');
+                    return \__('-', 'gato-graphql');
                 }
                 /**
                  * This is a list of lists of modules, as to model both OR and AND conditions
@@ -272,7 +272,7 @@ class ModuleListTable extends AbstractItemListTable
                             if ($moduleRegistry->isInverseDependency($dependedModule)) {
                                 // Revert to the normal module
                                 $dependedModule = $moduleRegistry->getInverseDependency($dependedModule);
-                                $after = \__('⇠ as disabled', 'graphql-api');
+                                $after = \__('⇠ as disabled', 'gato-graphql');
                             }
                             $moduleResolver = $moduleRegistry->getModuleResolver($dependedModule);
                             return sprintf(
@@ -287,11 +287,11 @@ class ModuleListTable extends AbstractItemListTable
                     if (count($dependedModuleListNames) >= 2) {
                         $lastElem = array_pop($dependedModuleListNames);
                         $commaElems = implode(
-                            \__(', ', 'graphql-api'),
+                            \__(', ', 'gato-graphql'),
                             $dependedModuleListNames
                         );
                         $items[] = sprintf(
-                            \__('%s or %s', 'graphql-api'),
+                            \__('%s or %s', 'gato-graphql'),
                             $commaElems,
                             $lastElem
                         );
@@ -303,7 +303,7 @@ class ModuleListTable extends AbstractItemListTable
             case 'enabled':
                 return \sprintf(
                     '<span role="img" aria-label="%s">%s</span>',
-                    $item['is-enabled'] ? \__('Yes', 'graphql-api') : \__('No', 'graphql-api'),
+                    $item['is-enabled'] ? \__('Yes', 'gato-graphql') : \__('No', 'gato-graphql'),
                     $item['is-enabled'] ? '✅' : '❌'
                 );
         }
@@ -369,10 +369,10 @@ class ModuleListTable extends AbstractItemListTable
                     ModuleListTableAction::ACTION_DISABLE,
                     $item['id'],
                     $nonce,
-                    \__('Disable', 'graphql-api')
+                    \__('Disable', 'gato-graphql')
                 );
             } else {
-                $actions['enabled'] = \__('Enabled', 'graphql-api');
+                $actions['enabled'] = \__('Enabled', 'gato-graphql');
             }
 
             // Maybe add settings links
@@ -402,7 +402,7 @@ class ModuleListTable extends AbstractItemListTable
                             $item['id']
                         ))
                     ),
-                    \__('Settings', 'graphql-api')
+                    \__('Settings', 'gato-graphql')
                 );
             }
         } elseif ($item['can-be-enabled']) {
@@ -413,14 +413,14 @@ class ModuleListTable extends AbstractItemListTable
                 ModuleListTableAction::ACTION_ENABLE,
                 $item['id'],
                 $nonce,
-                \__('Enable', 'graphql-api')
+                \__('Enable', 'gato-graphql')
             );
         } else {
             // Not enabled and can't be enabled, mention requirements not met
             // Not enabled for "striped" table style because, without a link, color contrast is not good:
             // gray font color over gray background
             // if ($this->usePluginTableStyle()) {
-            $actions['disabled'] = \__('Disabled', 'graphql-api');
+            $actions['disabled'] = \__('Disabled', 'gato-graphql');
             // }
         }
         return $actions;
@@ -458,16 +458,16 @@ class ModuleListTable extends AbstractItemListTable
         return array_merge(
             [
                 'cb' => '<input type="checkbox" />',
-                'name' => \__('Module', 'graphql-api'),
+                'name' => \__('Module', 'gato-graphql'),
             ],
             $this->usePluginTableStyle() ?
                 [] :
                 [
-                    'enabled' => \__('Enabled', 'graphql-api'),
+                    'enabled' => \__('Enabled', 'gato-graphql'),
                 ],
             [
-                'desc' => \__('Description', 'graphql-api'),
-                'depends-on' => \__('Depends on', 'graphql-api'),
+                'desc' => \__('Description', 'gato-graphql'),
+                'depends-on' => \__('Depends on', 'gato-graphql'),
             ]
         );
     }
@@ -481,8 +481,8 @@ class ModuleListTable extends AbstractItemListTable
     public function get_bulk_actions()
     {
         return [
-            ModuleListTableAction::ACTION_ENABLE => \__('Enable', 'graphql-api'),
-            ModuleListTableAction::ACTION_DISABLE => \__('Disable', 'graphql-api'),
+            ModuleListTableAction::ACTION_ENABLE => \__('Enable', 'gato-graphql'),
+            ModuleListTableAction::ACTION_DISABLE => \__('Disable', 'gato-graphql'),
         ];
     }
 
@@ -615,7 +615,7 @@ class ModuleListTable extends AbstractItemListTable
          * Fix the issues with the WP List Table
          */
         \wp_enqueue_style(
-            'graphql-api-module-list-table',
+            'gato-graphql-module-list-table',
             $mainPluginURL . 'assets/css/module-list-table.css',
             array(),
             $mainPluginVersion

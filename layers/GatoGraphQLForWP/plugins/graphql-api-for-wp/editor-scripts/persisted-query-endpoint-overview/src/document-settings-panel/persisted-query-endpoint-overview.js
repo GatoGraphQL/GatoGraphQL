@@ -34,7 +34,7 @@ export default function PersistedQueryEndpointOverview() {
 		const permalinkParts = select( editorStore ).getPermalinkParts();
 		const blocks = select( blockEditorStore ).getBlocks();
 		const persistedQueryEndpointOptionsBlock = blocks.filter(
-			block => block.name === 'graphql-api/persisted-query-endpoint-options'
+			block => block.name === 'gato-graphql/persisted-query-endpoint-options'
 		).shift();
 
 		return {
@@ -67,32 +67,32 @@ export default function PersistedQueryEndpointOverview() {
 				<p className="notice-message">
 					<Notice status={ isPostPublished && ! isPostPasswordProtected ? "success" : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? "warning" : "error") } isDismissible={ false }>
 						<strong>
-							{ __('Status ', 'graphql-api') }
+							{ __('Status ', 'gato-graphql') }
 							<code>{ postStatus }</code>
 							{ isPostPasswordProtected && (
-								__(' (protected by password)', 'graphql-api')
+								__(' (protected by password)', 'gato-graphql')
 							) }
-							{ __(': ', 'graphql-api') }
+							{ __(': ', 'gato-graphql') }
 						</strong>
 						<br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && ! isPostPasswordProtected && (
-								__('Persisted query is public, available to everyone.', 'graphql-api')
+								__('Persisted query is public, available to everyone.', 'gato-graphql')
 							) }
 							{ isPostPublished && isPostPasswordProtected && (
-								__('Persisted query is public, available to anyone with the required password.', 'graphql-api')
+								__('Persisted query is public, available to anyone with the required password.', 'gato-graphql')
 							) }
 							{ isPostDraftOrPending && ! isPostPasswordProtected && (
-								__('Persisted query is not yet public, only available to the Schema editors.', 'graphql-api')
+								__('Persisted query is not yet public, only available to the Schema editors.', 'gato-graphql')
 							) }
 							{ isPostDraftOrPending && isPostPasswordProtected && (
-								__('Persisted query is not yet public, only available to the Schema editors with the required password.', 'graphql-api')
+								__('Persisted query is not yet public, only available to the Schema editors with the required password.', 'gato-graphql')
 							) }
 							{ isPostPrivate && (
-								__('Persisted query is private, only available to the Schema editors.', 'graphql-api')
+								__('Persisted query is private, only available to the Schema editors.', 'gato-graphql')
 							) }
 							{ ! isPostAvailable && (
-								__('Persisted query is not yet available.', 'graphql-api')
+								__('Persisted query is not yet available.', 'gato-graphql')
 							) }
 						</span>
 					</Notice>
@@ -125,7 +125,7 @@ export default function PersistedQueryEndpointOverview() {
 								</ExternalLink>
 							) }
 							{ ! isPersistedQueryEndpointEnabled && (
-								<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
+								<span className="disabled-text">{ __('Disabled', 'gato-graphql') }</span>
 							) }
 						</p>
 					</div>

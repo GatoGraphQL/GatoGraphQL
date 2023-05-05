@@ -32,8 +32,8 @@ class PluginMenu extends AbstractMenu
     {
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         \add_menu_page(
-            __('GraphQL API', 'graphql-api'),
-            __('GraphQL API', 'graphql-api'),
+            __('GraphQL API', 'gato-graphql'),
+            __('GraphQL API', 'gato-graphql'),
             $schemaEditorAccessCapability,
             $this->getName(),
             function (): void {

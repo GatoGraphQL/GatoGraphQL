@@ -185,7 +185,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                     $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
                                     ?>
-                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="graphql-api-settings-item" <?php if (!empty($cssStyle)) :
+                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="gato-graphql-settings-item" <?php if (!empty($cssStyle)) :
                                             ?>style="<?php echo $cssStyle ?>"<?php
                                                          endif; ?>>
                                             <?php
@@ -336,7 +336,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
         if (!$settingsItems) {
-            _e('There are no items to be configured', 'graphql-api');
+            _e('There are no items to be configured', 'gato-graphql');
             return;
         }
 
@@ -371,7 +371,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $activeModule = App::query(RequestParams::MODULE);
         $class = 'wrap';
         if ($printModuleSettingsWithTabs) {
-            $class .= ' graphql-api-tabpanel vertical-tabs';
+            $class .= ' gato-graphql-tabpanel vertical-tabs';
         }
 
         // This page URL
@@ -385,11 +385,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         // Specify to only toggle the outer .tab-content divs (skip the inner ones)
         ?>
             <div
-                id="graphql-api-primary-settings"
-                class="wrap graphql-api-tabpanel"
-                data-tab-content-target="#graphql-api-primary-settings-nav-tab-content > .tab-content"
+                id="gato-graphql-primary-settings"
+                class="wrap gato-graphql-tabpanel"
+                data-tab-content-target="#gato-graphql-primary-settings-nav-tab-content > .tab-content"
             >
-                <h1><?php \_e('GraphQL API — Settings', 'graphql-api'); ?></h1>
+                <h1><?php \_e('GraphQL API — Settings', 'gato-graphql'); ?></h1>
                 <?php \settings_errors(); ?>
                 <div class="nav-tab-container">
                     <!-- Tabs -->
@@ -414,7 +414,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         }
                         ?>
                     </h2>
-                    <div id="graphql-api-primary-settings-nav-tab-content" class="nav-tab-content">
+                    <div id="gato-graphql-primary-settings-nav-tab-content" class="nav-tab-content">
                         <?php
                         foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
@@ -512,7 +512,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                             );
                                                         }
                                                         ?>
-                                                        <div id="<?php echo $item['id'] ?>" class="graphql-api-settings-section <?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
+                                                        <div id="<?php echo $item['id'] ?>" class="gato-graphql-settings-section <?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
                                                             <?php echo $title ?>
                                                             <table class="form-table">
                                                                 <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
@@ -524,7 +524,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                     }
                                                     if ($settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory)) {
                                                         \submit_button(
-                                                            \__('Save Changes (All)', 'graphql-api')
+                                                            \__('Save Changes (All)', 'gato-graphql')
                                                         );
                                                     }
                                                     ?>
@@ -588,26 +588,26 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
 
         \wp_enqueue_script(
-            'graphql-api-settings',
+            'gato-graphql-settings',
             $mainPluginURL . 'assets/js/settings.js',
             array('jquery'),
             $mainPluginVersion
         );
         \wp_enqueue_style(
-            'graphql-api-settings',
+            'gato-graphql-settings',
             $mainPluginURL . 'assets/css/settings.css',
             array(),
             $mainPluginVersion
         );
 
         \wp_enqueue_script(
-            'graphql-api-collapse',
+            'gato-graphql-collapse',
             $mainPluginURL . 'assets/js/collapse.js',
             array('jquery'),
             $mainPluginVersion
         );
         \wp_enqueue_style(
-            'graphql-api-collapse',
+            'gato-graphql-collapse',
             $mainPluginURL . 'assets/css/collapse.css',
             array(),
             $mainPluginVersion

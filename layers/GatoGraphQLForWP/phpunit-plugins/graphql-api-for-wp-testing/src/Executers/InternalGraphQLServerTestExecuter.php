@@ -36,7 +36,7 @@ class InternalGraphQLServerTestExecuter
          * Inject after the "consolidated" state, because
          * that's where the GraphQL query is finally retrieved.
          *
-         * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
+         * @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
          */
         App::addFilter(
             HookNames::APP_STATE_CONSOLIDATED,

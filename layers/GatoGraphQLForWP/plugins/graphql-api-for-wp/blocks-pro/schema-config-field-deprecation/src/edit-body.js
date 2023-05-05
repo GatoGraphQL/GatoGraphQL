@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Field Deprecation', 'graphql-api');
-const description = __('User interface to deprecate fields, and indicate how they must be replaced.', 'graphql-api');
+const title = __('Field Deprecation', 'gato-graphql');
+const description = __('User interface to deprecate fields, and indicate how they must be replaced.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

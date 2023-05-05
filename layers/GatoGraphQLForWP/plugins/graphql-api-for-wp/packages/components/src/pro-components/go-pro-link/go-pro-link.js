@@ -7,7 +7,7 @@ import { GRAPHQL_API_PRO_PLUGIN_WEBSITE_URL } from '../../pro-constants/environm
 const GoProLink = ( props ) => {
 	const {
 		proPluginWebsiteURL = GRAPHQL_API_PRO_PLUGIN_WEBSITE_URL,
-		title = __('Go PRO to unlock! 🔓', 'graphql-api'),
+		title = __('Go PRO to unlock! 🔓', 'gato-graphql'),
 		className = "button button-secondary",
 		target = "_blank"
 	} = props;

@@ -113,25 +113,25 @@ const moduleAndImplicitFeaturesPRODocEntries = [
 ];
 const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentation.displayUnlockPROPluginMessage;
 const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentation.proPluginWebsiteURL;
-const buttonClassName = "graphql-api-info-modal-button text-wrap";
-const proTitlePrefix = displayUnlockPROPluginMessage ? __('🔒 ', 'graphql-api') : '';
+const buttonClassName = "gato-graphql-info-modal-button text-wrap";
+const proTitlePrefix = displayUnlockPROPluginMessage ? __('🔒 ', 'gato-graphql') : '';
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Additional GraphQL API Documentation', 'graphql-api') }
+        title={ __('Additional GraphQL API Documentation', 'gato-graphql') }
     >
-        <p>{ __('Docs for additional features in the GraphQL API:', 'graphql-api') }</p>
+        <p>{ __('Docs for additional features in the GraphQL API:', 'gato-graphql') }</p>
         <p>
             {
                 implicitFeaturesDocEntries.map( ( entry ) =>
                     <div>
                             <MarkdownInfoModalButton
                             text={ entry[0] }
-                            title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                            title={ __(`Documentation for: "${ entry[0] }"`, 'gato-graphql') }
                             pageFilename={ entry[1] }
                             getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
                             isSmall={ false }
-                            className="graphql-api-info-modal-button text-wrap"
+                            className="gato-graphql-info-modal-button text-wrap"
                         />
                     </div>
                 )
@@ -139,7 +139,7 @@ const DocumentSettingsPanel = () => (
         </p>
         <hr/>
         <p>
-            { __('Docs for additional features in the GraphQL API PRO:', 'graphql-api') }
+            { __('Docs for additional features in the GraphQL API PRO:', 'gato-graphql') }
         </p>
         { displayUnlockPROPluginMessage &&
             <p>
@@ -154,7 +154,7 @@ const DocumentSettingsPanel = () => (
                     <div>
                         <MarkdownInfoModalButton
                             text={ proTitlePrefix + entry[0] }
-                            title={ __(`Documentation for: "${ entry[0] }"`, 'graphql-api') }
+                            title={ __(`Documentation for: "${ entry[0] }"`, 'gato-graphql') }
                             pageFilename={ entry[1] }
                             getMarkdownContentCallback={ entry[2] }
                             isSmall={ false }

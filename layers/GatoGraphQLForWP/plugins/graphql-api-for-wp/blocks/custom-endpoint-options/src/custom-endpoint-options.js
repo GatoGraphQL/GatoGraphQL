@@ -26,17 +26,17 @@ const CustomEndpointOptions = ( props ) => {
 	} = props;
 	return (
 		<div className={ `${ className }__enabled` }>
-			<em>{ __('Enabled?', 'graphql-api') }</em>
+			<em>{ __('Enabled?', 'gato-graphql') }</em>
 			{ !isSelected && (
 				<>
 					<br />
-					{ isEnabled ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }` }
+					{ isEnabled ? `✅ ${ __('Yes', 'gato-graphql') }` : `❌ ${ __('No', 'gato-graphql') }` }
 				</>
 			) }
 			{ isSelected &&
 				<ToggleControl
 					{ ...props }
-					label={ isEnabled ? __('Yes', 'graphql-api') : __('No', 'graphql-api') }
+					label={ isEnabled ? __('Yes', 'gato-graphql') : __('No', 'gato-graphql') }
 					checked={ isEnabled }
 					onChange={ newValue => setAttributes( {
 						isEnabled: newValue,
@@ -50,7 +50,7 @@ const CustomEndpointOptions = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Custom Endpoint Options', 'graphql-api'),
+		header: __('Custom Endpoint Options', 'gato-graphql'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

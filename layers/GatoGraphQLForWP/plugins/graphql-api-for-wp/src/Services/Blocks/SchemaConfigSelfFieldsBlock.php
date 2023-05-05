@@ -28,12 +28,12 @@ class SchemaConfigSelfFieldsBlock extends AbstractDefaultEnableDisableFunctional
 
     protected function getBlockLabel(): string
     {
-        return \__('Expose self fields in the schema?', 'graphql-api');
+        return \__('Expose self fields in the schema?', 'gato-graphql');
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Self Fields', 'graphql-api');
+        return \__('Self Fields', 'gato-graphql');
     }
 
     /**

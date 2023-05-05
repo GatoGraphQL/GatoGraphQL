@@ -88,7 +88,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         return match ($module) {
-            self::RESET_SETTINGS => \__('Reset Settings', 'graphql-api'),
+            self::RESET_SETTINGS => \__('Reset Settings', 'gato-graphql'),
             default => $module,
         };
     }
@@ -96,7 +96,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::RESET_SETTINGS => \__('Restore the GraphQL API Settings to default values', 'graphql-api'),
+            self::RESET_SETTINGS => \__('Restore the GraphQL API Settings to default values', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }
@@ -127,22 +127,22 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
-                    <a href="#" class="button secondary graphql-api-show-settings-items">
+                    <a href="#" class="button secondary gato-graphql-show-settings-items">
                         %1\$s
                     </a>
                 HTML,
-                \__('Show options to reset the Settings', 'graphql-api')
+                \__('Show options to reset the Settings', 'gato-graphql')
             );
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     'reset-settings-button'
                 ),
-                Properties::TITLE => \__('Reset the GraphQL API Settings?', 'graphql-api'),
+                Properties::TITLE => \__('Reset the GraphQL API Settings?', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p>',
                     sprintf(
-                        \__('Restore all settings under tabs "%s", "%s" and "%s" to their default values.', 'graphql-api'),
+                        \__('Restore all settings under tabs "%s", "%s" and "%s" to their default values.', 'gato-graphql'),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::SCHEMA_CONFIGURATION)->getName(SettingsCategoryResolver::SCHEMA_CONFIGURATION),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::ENDPOINT_CONFIGURATION)->getName(SettingsCategoryResolver::ENDPOINT_CONFIGURATION),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_CONFIGURATION)->getName(SettingsCategoryResolver::PLUGIN_CONFIGURATION),
@@ -159,67 +159,67 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
-                    \__('When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:', 'graphql-api'),
-                    \__('Feature', 'graphql-api'),
-                    \__('Non-restrictive behavior', 'graphql-api'),
-                    \__('Restrictive behavior', 'graphql-api'),
+                    \__('When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:', 'gato-graphql'),
+                    \__('Feature', 'gato-graphql'),
+                    \__('Non-restrictive behavior', 'gato-graphql'),
+                    \__('Restrictive behavior', 'gato-graphql'),
                     implode(
                         '</tr><tr>',
                         [
                             // '<td>' . implode(
                             //     '</td><td>',
                             //     [
-                            //         \__('Single endpoint', 'graphql-api'),
-                            //         \__('Enabled', 'graphql-api'),
-                            //         \__('Disabled', 'graphql-api'),
+                            //         \__('Single endpoint', 'gato-graphql'),
+                            //         \__('Enabled', 'gato-graphql'),
+                            //         \__('Disabled', 'gato-graphql'),
                             //     ]
                             // ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('“Sensitive” data fields', 'graphql-api'),
-                                    \__('Added to the schema', 'graphql-api'),
-                                    \__('Not added to the schema', 'graphql-api'),
+                                    \__('“Sensitive” data fields', 'gato-graphql'),
+                                    \__('Added to the schema', 'gato-graphql'),
+                                    \__('Not added to the schema', 'gato-graphql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Settings from <code>wp_options</code>', 'graphql-api'),
-                                    \__('All options are queryable', 'graphql-api'),
-                                    \__('Only a few predefined options are queryable', 'graphql-api'),
+                                    \__('Settings from <code>wp_options</code>', 'gato-graphql'),
+                                    \__('All options are queryable', 'gato-graphql'),
+                                    \__('Only a few predefined options are queryable', 'gato-graphql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Meta (posts, users, comments, taxonomies)', 'graphql-api'),
-                                    \__('All keys are queryable', 'graphql-api'),
-                                    \__('No keys are queryable', 'graphql-api'),
+                                    \__('Meta (posts, users, comments, taxonomies)', 'gato-graphql'),
+                                    \__('All keys are queryable', 'gato-graphql'),
+                                    \__('No keys are queryable', 'gato-graphql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Max limit to query entities (posts, users, etc)', 'graphql-api'),
-                                    \__('Unlimited', 'graphql-api'),
-                                    \__('Limited', 'graphql-api'),
+                                    \__('Max limit to query entities (posts, users, etc)', 'gato-graphql'),
+                                    \__('Unlimited', 'gato-graphql'),
+                                    \__('Limited', 'gato-graphql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Environment Fields', 'graphql-api'),
-                                    \__('All environment variables and PHP constants are queryable', 'graphql-api'),
-                                    \__('No environment variables or PHP constants are queryable', 'graphql-api'),
+                                    \__('Environment Fields', 'gato-graphql'),
+                                    \__('All environment variables and PHP constants are queryable', 'gato-graphql'),
+                                    \__('No environment variables or PHP constants are queryable', 'gato-graphql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Send HTTP Request Fields', 'graphql-api'),
-                                    \__('All URLs can be requested', 'graphql-api'),
-                                    \__('No URL can be requested', 'graphql-api'),
+                                    \__('Send HTTP Request Fields', 'gato-graphql'),
+                                    \__('All URLs can be requested', 'gato-graphql'),
+                                    \__('No URL can be requested', 'gato-graphql'),
                                 ]
                             ) . '</td>',
                         ]
@@ -238,12 +238,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p>',
-                    \__('Choose if to use restrictive or non-restrictive default settings.', 'graphql-api'),
+                    \__('Choose if to use restrictive or non-restrictive default settings.', 'gato-graphql'),
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    ResetSettingsOptions::RESTRICTIVE => \__('Use the restrictive default behavior for the Settings', 'graphql-api'),
-                    ResetSettingsOptions::NON_RESTRICTIVE => \__('Use the non-restrictive default behavior for the Settings', 'graphql-api'),
+                    ResetSettingsOptions::RESTRICTIVE => \__('Use the restrictive default behavior for the Settings', 'gato-graphql'),
+                    ResetSettingsOptions::NON_RESTRICTIVE => \__('Use the non-restrictive default behavior for the Settings', 'gato-graphql'),
                 ],
                 Properties::CSS_STYLE => 'display: none;',
             ];
@@ -263,7 +263,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $confirmResetSettingsButtonsHTML = '';
             if (function_exists('get_submit_button')) {
                 $confirmResetSettingsButtonsHTML = get_submit_button(
-                    \__('Confirm: Reset Settings', 'graphql-api'),
+                    \__('Confirm: Reset Settings', 'gato-graphql'),
                     'primary',
                     $resetButtonName,
                     false

@@ -63,7 +63,7 @@
                 "metaValues": null,
                 "name": "World Cup",
                 "slug": "world-cup",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/world-cup\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/world-cup\/",
                 "urlPath": "\/dummy-category\/world-cup\/"
             },
             {
@@ -172,7 +172,7 @@
                 "metaValues": null,
                 "name": "Unexpected Randomness",
                 "slug": "unexpected-randomness",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/unexpected-randomness\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/unexpected-randomness\/",
                 "urlPath": "\/dummy-category\/unexpected-randomness\/"
             },
             {
@@ -261,7 +261,7 @@
                 "metaValues": null,
                 "name": "Perestroika",
                 "slug": "perestroika",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/perestroika\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/perestroika\/",
                 "urlPath": "\/dummy-category\/perestroika\/"
             },
             {
@@ -338,7 +338,7 @@
                 "metaValues": null,
                 "name": "Nostradamus",
                 "slug": "nostradamus",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/nostradamus\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus\/",
                 "urlPath": "\/dummy-category\/nostradamus\/"
             },
             {
@@ -454,7 +454,7 @@
                 "metaValues": null,
                 "name": "Capullo",
                 "slug": "capullo",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/capullo\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/capullo\/",
                 "urlPath": "\/dummy-category\/capullo\/"
             },
             {
@@ -553,7 +553,7 @@
                 "metaValues": null,
                 "name": "Brontosaurus",
                 "slug": "brontosaurus",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/brontosaurus\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/brontosaurus\/",
                 "urlPath": "\/dummy-category\/brontosaurus\/"
             },
             {
@@ -676,7 +676,7 @@
                 "metaValues": null,
                 "name": "Absolute Brilliance",
                 "slug": "absolute-brilliance",
-                "url": "https:\/\/graphql-api.lndo.site\/dummy-category\/absolute-brilliance\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/absolute-brilliance\/",
                 "urlPath": "\/dummy-category\/absolute-brilliance\/"
             }
         ],

@@ -16,12 +16,12 @@ Utilities for testing the GraphQL API for WordPress
 Via Composer
 
 ``` bash
-composer require phpunit-for-graphql-api/graphql-api-for-wp-testing
+composer require phpunit-for-gato-graphql/gato-graphql-for-wp-testing
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/phpunit-plugins/gato-graphql-for-wp-testing`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-for-wp-testing).
 
 ## Usage
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/phpunit-for-graphql-api/graphql-api-for-wp-testing.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/phpunit-for-gato-graphql/gato-graphql-for-wp-testing.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/phpunit-for-graphql-api/graphql-api-for-wp-testing/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-graphql-api/graphql-api-for-wp-testing.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-graphql-api/graphql-api-for-wp-testing.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-graphql-api/graphql-api-for-wp-testing.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/phpunit-for-gato-graphql/gato-graphql-for-wp-testing/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-gato-graphql/gato-graphql-for-wp-testing.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-gato-graphql/gato-graphql-for-wp-testing.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-gato-graphql/gato-graphql-for-wp-testing.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/phpunit-for-graphql-api/graphql-api-for-wp-testing
-[link-travis]: https://travis-ci.org/phpunit-for-graphql-api/graphql-api-for-wp-testing
-[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-graphql-api/graphql-api-for-wp-testing/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-graphql-api/graphql-api-for-wp-testing
-[link-downloads]: https://packagist.org/packages/phpunit-for-graphql-api/graphql-api-for-wp-testing
+[link-packagist]: https://packagist.org/packages/phpunit-for-gato-graphql/gato-graphql-for-wp-testing
+[link-travis]: https://travis-ci.org/phpunit-for-gato-graphql/gato-graphql-for-wp-testing
+[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/gato-graphql-for-wp-testing/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/gato-graphql-for-wp-testing
+[link-downloads]: https://packagist.org/packages/phpunit-for-gato-graphql/gato-graphql-for-wp-testing
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

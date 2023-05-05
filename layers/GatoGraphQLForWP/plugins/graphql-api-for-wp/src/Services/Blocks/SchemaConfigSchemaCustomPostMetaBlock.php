@@ -28,7 +28,7 @@ class SchemaConfigSchemaCustomPostMetaBlock extends AbstractSchemaConfigSchemaMe
 
     protected function getBlockTitle(): string
     {
-        return \__('Custom Post Meta', 'graphql-api');
+        return \__('Custom Post Meta', 'gato-graphql');
     }
 
     /**

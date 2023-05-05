@@ -22,12 +22,12 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/persisted-query-endpoint-options', {
+registerBlockType( 'gato-graphql/persisted-query-endpoint-options', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Options for the GraphQL persisted query endpoint', 'graphql-api' ),
+	title: __( 'Options for the GraphQL persisted query endpoint', 'gato-graphql' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
@@ -35,14 +35,14 @@ registerBlockType( 'graphql-api/persisted-query-endpoint-options', {
 	 */
 	description: __(
 		'Configure the GraphQL persisted query endpoint',
-		'graphql-api'
+		'gato-graphql'
 	),
 
 	/**
 	 * Blocks are grouped into categories to help users browse and discover them.
 	 * The categories provided by core are `common`, `embed`, `formatting`, `layout` and `widgets`.
 	 */
-	category: 'graphql-api-persisted-query',
+	category: 'gato-graphql-persisted-query',
 
 	/**
 	 * An icon property should be specified to make it easier to identify a block.

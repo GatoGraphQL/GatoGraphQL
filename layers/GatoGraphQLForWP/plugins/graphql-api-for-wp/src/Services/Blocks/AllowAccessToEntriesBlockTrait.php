@@ -46,14 +46,14 @@ trait AllowAccessToEntriesBlockTrait
                 ) :
                 sprintf(
                     '<p><em>%s</em></p>',
-                    \__('(not set)', 'graphql-api')
+                    \__('(not set)', 'gato-graphql')
                 )
         ) . sprintf(
             $placeholder,
-            $this->__('Behavior', 'graphql-api'),
+            $this->__('Behavior', 'gato-graphql'),
             match ($behavior) {
-                Behaviors::ALLOW => sprintf('✅ %s', $this->__('Allow access', 'graphql-api')),
-                Behaviors::DENY => sprintf('❌ %s', $this->__('Deny access', 'graphql-api')),
+                Behaviors::ALLOW => sprintf('✅ %s', $this->__('Allow access', 'gato-graphql')),
+                Behaviors::DENY => sprintf('❌ %s', $this->__('Deny access', 'gato-graphql')),
                 default => $behavior,
             }
         );

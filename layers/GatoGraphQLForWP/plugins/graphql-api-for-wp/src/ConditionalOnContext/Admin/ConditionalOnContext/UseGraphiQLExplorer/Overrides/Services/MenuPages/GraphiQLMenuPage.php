@@ -75,7 +75,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         $cssFileURLs = $matches[1];
         foreach ($cssFileURLs as $index => $cssFileURL) {
             \wp_enqueue_style(
-                'graphql-api-graphiql-with-explorer-' . $index,
+                'gato-graphql-graphiql-with-explorer-' . $index,
                 $cssFileURL,
                 array(),
                 $mainPluginVersion
@@ -85,7 +85,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         $jsFileURLs = $matches[1];
         foreach ($jsFileURLs as $index => $jsFileURL) {
             \wp_enqueue_script(
-                'graphql-api-graphiql-with-explorer-' . $index,
+                'gato-graphql-graphiql-with-explorer-' . $index,
                 $jsFileURL,
                 array(),
                 $mainPluginVersion,
@@ -95,7 +95,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 
         // Override styles for the admin, so load last
         \wp_enqueue_style(
-            'graphql-api-graphiql-with-explorer-client',
+            'gato-graphql-graphiql-with-explorer-client',
             $mainPluginURL . 'assets/css/graphiql-with-explorer-client.css',
             array(),
             $mainPluginVersion
@@ -104,7 +104,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         // Load data into the script. Because no script is enqueued since it is
         // in the body, then localize it to React
         \wp_localize_script(
-            'graphql-api-graphiql-with-explorer-0',
+            'gato-graphql-graphiql-with-explorer-0',
             'graphiQLWithExplorerClientForWP',
             $scriptSettings
         );

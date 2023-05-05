@@ -27,12 +27,12 @@ class SchemaConfigNamespacingBlock extends AbstractDefaultEnableDisableFunctiona
 
     protected function getBlockLabel(): string
     {
-        return \__('Use namespacing?', 'graphql-api');
+        return \__('Use namespacing?', 'gato-graphql');
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Namespacing', 'graphql-api');
+        return \__('Namespacing', 'gato-graphql');
     }
 
     /**

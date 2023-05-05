@@ -43,7 +43,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
             ]
         ) ?? sprintf(
             '<p>%s</p>',
-            \__('Oops, there was a problem loading the page', 'graphql-api')
+            \__('Oops, there was a problem loading the page', 'gato-graphql')
         );
     }
 

@@ -31,7 +31,7 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
      * That check will happen in AbstractSchemaConfigurationExecuter,
      * where each executer can decide if to run or not.
      *
-     * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/Services/SchemaConfigurationExecuters/AbstractSchemaConfigurationExecuter.php
+     * @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/src/Services/SchemaConfigurationExecuters/AbstractSchemaConfigurationExecuter.php
      */
     public function isServiceEnabled(): bool
     {

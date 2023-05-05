@@ -15,7 +15,7 @@ trait AccessPasswordProtectedPostWebserverRequestTestCaseTrait
     /**
      * To provide the password for the post in WordPress, request the following URL by POST:
      *
-     *   curl 'https://graphql-api.lndo.site/wp-login.php?action=postpass' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'post_password=password'
+     *   curl 'https://gato-graphql.lndo.site/wp-login.php?action=postpass' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'post_password=password'
      */
     protected static function getWebserverPingURL(): string
     {

@@ -50,7 +50,7 @@ class PackageOrganizationDataSource
     public function getPackageDirectoryExcludes(): array
     {
         return [
-            'graphql-api-for-wp/wordpress',
+            'gato-graphql-for-wp/wordpress',
         ];
     }
 }

@@ -59,7 +59,7 @@ curl --insecure https://127.0.0.1/graphql-query/accessing-field-with-visitor-ip-
       "id": 2,
       "approved": true,
       "authorEmail": null,
-      "authorURL": "http:\/\/graphql-api.lndo.site",
+      "authorURL": "http:\/\/gato-graphql.lndo.site",
       "karma": null
     }
   }

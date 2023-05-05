@@ -22,12 +22,12 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api-pro/schema-config-global-fields', {
+registerBlockType( 'gato-graphql-pro/schema-config-global-fields', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Global Fields', 'graphql-api' ),
+	title: __( 'Global Fields', 'gato-graphql' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
@@ -35,14 +35,14 @@ registerBlockType( 'graphql-api-pro/schema-config-global-fields', {
 	 */
 	description: __(
 		'Configure the schema exposure of global fields in the Schema Configuration',
-		'graphql-api'
+		'gato-graphql'
 	),
 
 	/**
 	 * Blocks are grouped into categories to help users browse and discover them.
 	 * The categories provided by core are `common`, `embed`, `formatting`, `layout` and `widgets`.
 	 */
-	category: 'graphql-api-schema-config',
+	category: 'gato-graphql-schema-config',
 
 	/**
 	 * An icon property should be specified to make it easier to identify a block.

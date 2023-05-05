@@ -16,8 +16,8 @@ import {
 } from '@graphqlapi/components';
 import { getMarkdownContentOrUseDefault } from './markdown-loader';
 
-const getViewBooleanLabel = ( value ) => value ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }`
-const getEditBooleanLabel = ( value ) => value ? __('Yes', 'graphql-api') : __('No', 'graphql-api')
+const getViewBooleanLabel = ( value ) => value ? `✅ ${ __('Yes', 'gato-graphql') }` : `❌ ${ __('No', 'gato-graphql') }`
+const getEditBooleanLabel = ( value ) => value ? __('Yes', 'gato-graphql') : __('No', 'gato-graphql')
 
 const PersistedQueryEndpointOptions = ( props ) => {
 	const {
@@ -30,11 +30,11 @@ const PersistedQueryEndpointOptions = ( props ) => {
 			acceptVariablesAsURLParams,
 		}
 	} = props;
-	const variablesAsURLParamsTitle = __('Accept variables as URL params?', 'graphql-api')
+	const variablesAsURLParamsTitle = __('Accept variables as URL params?', 'gato-graphql')
 	return (
 		<>
 			<div className={ `${ className }__enabled` }>
-				<em>{ __('Enabled?', 'graphql-api') }</em>
+				<em>{ __('Enabled?', 'gato-graphql') }</em>
 				{ !isSelected && (
 					<>
 						<br />
@@ -86,7 +86,7 @@ const PersistedQueryEndpointOptions = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Persisted Query Options', 'graphql-api'),
+		header: __('Persisted Query Options', 'gato-graphql'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

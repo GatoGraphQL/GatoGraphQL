@@ -9,7 +9,7 @@ Author: Leonardo Losoviz
 Author URI: https://leoloso.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-Text Domain: graphql-api-testing
+Text Domain: gato-graphql-testing
 Domain Path: /languages
 */
 
@@ -56,8 +56,8 @@ add_action(
                 _e(sprintf(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
-                        __('Functionality in plugin <strong>%s</strong> can only be enabled during development or testing.', 'graphql-api-testing'),
-                        __('GraphQL API - Testing', 'graphql-api-testing')
+                        __('Functionality in plugin <strong>%s</strong> can only be enabled during development or testing.', 'gato-graphql-testing'),
+                        __('GraphQL API - Testing', 'gato-graphql-testing')
                     )
                 ));
             });

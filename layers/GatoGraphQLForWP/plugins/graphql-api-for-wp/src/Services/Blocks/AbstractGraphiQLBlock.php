@@ -141,20 +141,20 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         $variables = $attributes[self::ATTRIBUTE_NAME_VARIABLES] ?? null;
         $content .= sprintf(
             '<p><strong>%s</strong></p>',
-            \__('GraphQL Query:', 'graphql-api')
+            \__('GraphQL Query:', 'gato-graphql')
         ) . (
             $query ? sprintf(
                 '<pre><code class="prettyprint hljs language-graphql">%s</code></pre>',
                 $query
             ) : sprintf(
                 '<p><em>%s</em></p>',
-                \__('(not set)', 'graphql-api')
+                \__('(not set)', 'gato-graphql')
             )
         );
         if ($variables) {
             $content .= sprintf(
                 '<p><strong>%s</strong></p>',
-                \__('Variables:', 'graphql-api')
+                \__('Variables:', 'gato-graphql')
             ) . sprintf(
                 '<pre><code class="prettyprint hljs language-json">%s</code></pre>',
                 $variables

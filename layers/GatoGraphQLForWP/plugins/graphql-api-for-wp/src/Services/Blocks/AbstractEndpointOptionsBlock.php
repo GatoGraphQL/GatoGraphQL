@@ -35,7 +35,7 @@ abstract class AbstractEndpointOptionsBlock extends AbstractBlock
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
-            \__('Options', 'graphql-api'),
+            \__('Options', 'gato-graphql'),
             $this->getBlockContent($attributes, $content)
         );
     }
@@ -48,7 +48,7 @@ abstract class AbstractEndpointOptionsBlock extends AbstractBlock
         $blockContentPlaceholder = '<p><strong>%s</strong> %s</p>';
         return sprintf(
             $blockContentPlaceholder,
-            \__('Enabled:', 'graphql-api'),
+            \__('Enabled:', 'gato-graphql'),
             $this->getBooleanLabel($attributes[BlockAttributeNames::IS_ENABLED] ?? true)
         );
     }

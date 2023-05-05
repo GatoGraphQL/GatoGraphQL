@@ -636,7 +636,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * For the Standard GraphQL Server there is no need, as it will
              * already produce this state from the AppStateProvider.
              *
-             * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
+             * @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
              *
              * Please notice: Setting the AppState as needed by GraphQL here
              * means that the InternalGraphQLServer is configured to always
@@ -705,9 +705,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
                 $errorMessage = sprintf(
                     '%s%s',
-                    __('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api'),
+                    __('<p><em>(This message is visible only by the admin.)</em></p>', 'gato-graphql'),
                     sprintf(
-                        __('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
+                        __('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'gato-graphql'),
                         $this->pluginName,
                         $inititalizationException->getMessage(),
                         $inititalizationException->getTraceAsString()

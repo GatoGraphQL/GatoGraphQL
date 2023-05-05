@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Composable Directives', 'graphql-api');
-const description = __('Allow directives to nest and modify the behavior of other directives.', 'graphql-api');
+const title = __('Composable Directives', 'gato-graphql');
+const description = __('Allow directives to nest and modify the behavior of other directives.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

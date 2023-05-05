@@ -21,10 +21,10 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
         $customizeConfiguration = $attributes[self::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION] ?? false;
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            $this->__('Customize configuration? (Or use default from Settings?)', 'graphql-api'),
+            $this->__('Customize configuration? (Or use default from Settings?)', 'gato-graphql'),
             !$customizeConfiguration
-                ? sprintf('🟡 %s', $this->__('Use configuration from Settings', 'graphql-api'))
-                : sprintf('🟢 %s', $this->__('Use custom configuration', 'graphql-api'))
+                ? sprintf('🟡 %s', $this->__('Use configuration from Settings', 'gato-graphql'))
+                : sprintf('🟢 %s', $this->__('Use custom configuration', 'gato-graphql'))
         );
 
         $blockContentPlaceholder = <<<EOT
@@ -47,7 +47,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
             $blockContent,
             /**
              * Hardcode style to disable the inputs, same as style in block.
-             * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/packages/components/src/components/base-styles/_mixins.scss
+             * @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/packages/components/src/components/base-styles/_mixins.scss
              */
             $customizeConfiguration ? '' : 'pointer-events: none; opacity: 0.4;',
             $this->doRenderBlock($attributes, $content)

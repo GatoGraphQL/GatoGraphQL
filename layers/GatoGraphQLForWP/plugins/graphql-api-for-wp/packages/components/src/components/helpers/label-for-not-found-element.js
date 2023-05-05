@@ -9,7 +9,7 @@ import { __, sprintf } from '@wordpress/i18n';
  * @param {int} id
  */
 const getLabelForNotFoundElement = ( id ) => sprintf(
-	__('(Undefined or unpublished item with ID \'%s\')', 'graphql-api'),
+	__('(Undefined or unpublished item with ID \'%s\')', 'gato-graphql'),
 	id
 );
 

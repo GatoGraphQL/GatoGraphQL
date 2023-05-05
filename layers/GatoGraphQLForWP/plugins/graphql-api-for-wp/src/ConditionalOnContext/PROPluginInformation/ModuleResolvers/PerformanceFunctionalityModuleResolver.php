@@ -53,7 +53,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     public function getName(string $module): string
     {
         return match ($module) {
-            self::CACHE_CONTROL => \__('Cache Control', 'graphql-api'),
+            self::CACHE_CONTROL => \__('Cache Control', 'gato-graphql'),
             default => $module,
         };
     }
@@ -62,7 +62,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     {
         switch ($module) {
             case self::CACHE_CONTROL:
-                return \__('Provide HTTP Caching (for Persisted Queries or endpoints accessed via GET), sending the Cache-Control header with a max-age value calculated from all fields in the query', 'graphql-api');
+                return \__('Provide HTTP Caching (for Persisted Queries or endpoints accessed via GET), sending the Cache-Control header with a max-age value calculated from all fields in the query', 'gato-graphql');
         }
         return parent::getDescription($module);
     }

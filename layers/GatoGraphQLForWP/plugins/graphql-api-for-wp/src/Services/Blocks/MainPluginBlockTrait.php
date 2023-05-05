@@ -15,6 +15,6 @@ trait MainPluginBlockTrait
 
     protected function getBlockNamespace(): string
     {
-        return 'graphql-api';
+        return 'gato-graphql';
     }
 }

@@ -17,7 +17,7 @@ trait UsePRODocsMenuPageTrait
          * Add tabs to the documentation
          */
         \wp_enqueue_style(
-            'graphql-api-docs-pro',
+            'gato-graphql-docs-pro',
             $mainPluginURL . 'assets-pro/css/docs.css',
             array(),
             $mainPluginVersion

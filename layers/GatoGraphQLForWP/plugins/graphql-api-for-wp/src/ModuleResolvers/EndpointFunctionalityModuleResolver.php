@@ -135,10 +135,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getName(string $module): string
     {
         return match ($module) {
-            self::PRIVATE_ENDPOINT => \__('Private Endpoint', 'graphql-api'),
-            self::SINGLE_ENDPOINT => \__('Single Endpoint', 'graphql-api'),
-            self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'graphql-api'),
-            self::PERSISTED_QUERIES => \__('Persisted Queries', 'graphql-api'),
+            self::PRIVATE_ENDPOINT => \__('Private Endpoint', 'gato-graphql'),
+            self::SINGLE_ENDPOINT => \__('Single Endpoint', 'gato-graphql'),
+            self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'gato-graphql'),
+            self::PERSISTED_QUERIES => \__('Persisted Queries', 'gato-graphql'),
             default => $module,
         };
     }
@@ -149,15 +149,15 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
         return match ($module) {
             self::PRIVATE_ENDPOINT => \sprintf(
-                \__('Private GraphQL endpoint, accessible only within the wp-admin, under <code>%s</code>', 'graphql-api'),
+                \__('Private GraphQL endpoint, accessible only within the wp-admin, under <code>%s</code>', 'gato-graphql'),
                 $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
             ),
             self::SINGLE_ENDPOINT => \sprintf(
-                \__('Expose the single GraphQL endpoint under <code>%s</code>', 'graphql-api'),
+                \__('Expose the single GraphQL endpoint under <code>%s</code>', 'gato-graphql'),
                 $moduleConfiguration->getGatoGraphQLEndpoint()
             ),
-            self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'graphql-api'),
-            self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api'),
+            self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'gato-graphql'),
+            self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'gato-graphql'),
             default => parent::getDescription($module)
         };
     }
@@ -233,8 +233,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Endpoint path', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL path to expose the single GraphQL endpoint', 'graphql-api'),
+                Properties::TITLE => \__('Endpoint path', 'gato-graphql'),
+                Properties::DESCRIPTION => \__('URL path to expose the single GraphQL endpoint', 'gato-graphql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module === self::CUSTOM_ENDPOINTS) {
@@ -245,8 +245,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Endpoint base slug', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'graphql-api'),
+                Properties::TITLE => \__('Endpoint base slug', 'gato-graphql'),
+                Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'gato-graphql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module === self::PERSISTED_QUERIES) {
@@ -257,8 +257,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Endpoint base slug', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'graphql-api'),
+                Properties::TITLE => \__('Endpoint base slug', 'gato-graphql'),
+                Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'gato-graphql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }
@@ -272,10 +272,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 self::PERSISTED_QUERIES,
             ]) && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
         ) {
-            $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'graphql-api');
+            $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'gato-graphql');
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
-                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%6$s</a> and <a href="%3$s" target="_blank">Interactive Schema%6$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%6$s</a></li><li>PHP class <code>%5$s</code> can be used to execute GraphQL queries internally (eg: triggered by some hook)</li></ul>', 'graphql-api'),
+                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%6$s</a> and <a href="%3$s" target="_blank">Interactive Schema%6$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%6$s</a></li><li>PHP class <code>%5$s</code> can be used to execute GraphQL queries internally (eg: triggered by some hook)</li></ul>', 'gato-graphql'),
                     ltrim(
                         GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
                         '/'
@@ -297,20 +297,20 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     'InternalGraphQLServer',
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 ),
-                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'graphql-api'),
+                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'gato-graphql'),
                 self::CUSTOM_ENDPOINTS => sprintf(
                     $defaultDescriptionPlaceholder,
-                    \__('Custom Endpoints', 'graphql-api')
+                    \__('Custom Endpoints', 'gato-graphql')
                 ),
                 self::PERSISTED_QUERIES => sprintf(
                     $defaultDescriptionPlaceholder,
-                    \__('Persisted Queries', 'graphql-api')
+                    \__('Persisted Queries', 'gato-graphql')
                 ),
                 default => '',
             };
             // Build all the possible values by fetching all the Schema Configuration posts
             $possibleValues = [
-                ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'graphql-api'),
+                ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'gato-graphql'),
             ];
             foreach ($this->getSchemaConfigurationCustomPosts() as $customPost) {
                 $possibleValues[$customPost->ID] = $customPost->post_title;
@@ -326,8 +326,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     self::PRIVATE_ENDPOINT,
                     self::SINGLE_ENDPOINT,
                 ])
-                    ? \__('Schema Configuration', 'graphql-api')
-                    : \__('Default Schema Configuration', 'graphql-api'),
+                    ? \__('Schema Configuration', 'gato-graphql')
+                    : \__('Default Schema Configuration', 'gato-graphql'),
                 Properties::DESCRIPTION => $description,
                 Properties::TYPE => Properties::TYPE_INT,
                 // Fetch all Schema Configurations from the DB

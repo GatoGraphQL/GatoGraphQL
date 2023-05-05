@@ -47,7 +47,7 @@ trait HasMarkdownDocumentationModuleResolverTrait
                 ]
             ) ?? sprintf(
                 '<p>%s</p>',
-                \__('Oops, the documentation for this module is not available', 'graphql-api')
+                \__('Oops, the documentation for this module is not available', 'gato-graphql')
             );
         }
         return null;

@@ -27,6 +27,6 @@ class ExposeVoyagerClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebser
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/endpoint-voyager';
+        return 'gato-graphql/endpoint-voyager';
     }
 }

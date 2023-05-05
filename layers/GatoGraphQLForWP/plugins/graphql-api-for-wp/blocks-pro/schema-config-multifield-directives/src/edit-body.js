@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Multi-Field Directives', 'graphql-api');
-const description = __('A single directive can be applied to multiple fields, for performance and extended use cases.', 'graphql-api');
+const title = __('Multi-Field Directives', 'gato-graphql');
+const description = __('A single directive can be applied to multiple fields, for performance and extended use cases.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

@@ -23,7 +23,7 @@ class SchemaQueryExecutionFixtureWebserverRequestTest extends AbstractSingleEndp
     {
         return str_replace(
             WebserverRequestsEnvironment::getIntegrationTestsWebserverDomain(),
-            'graphql-api.lndo.site',
+            'gato-graphql.lndo.site',
             $responseBody
         );
     }

@@ -36,13 +36,13 @@ export default function CustomEndpointOverview() {
 		const permalinkParts = select( editorStore ).getPermalinkParts();
 		const blocks = select( blockEditorStore ).getBlocks();
 		const customEndpointOptionsBlock = blocks.filter(
-			block => block.name === 'graphql-api/custom-endpoint-options'
+			block => block.name === 'gato-graphql/custom-endpoint-options'
 		).shift();
 		const graphiQLClientBlock = blocks.filter(
-			block => block.name === 'graphql-api/endpoint-graphiql'
+			block => block.name === 'gato-graphql/endpoint-graphiql'
 		).shift();
 		const voyagerClientBlock = blocks.filter(
-			block => block.name === 'graphql-api/endpoint-voyager'
+			block => block.name === 'gato-graphql/endpoint-voyager'
 		).shift();
 
 		return {
@@ -84,32 +84,32 @@ export default function CustomEndpointOverview() {
 				<p className="notice-message">
 					<Notice status={ isPostPublished && ! isPostPasswordProtected ? "success" : (isPostDraftOrPending || isPostPrivate || isPostPasswordProtected ? "warning" : "error") } isDismissible={ false }>
 						<strong>
-							{ __('Status ', 'graphql-api') }
+							{ __('Status ', 'gato-graphql') }
 							<code>{ postStatus }</code>
 							{ isPostPasswordProtected && (
-								__(' (protected by password)', 'graphql-api')
+								__(' (protected by password)', 'gato-graphql')
 							) }
-							{ __(': ', 'graphql-api') }
+							{ __(': ', 'gato-graphql') }
 						</strong>
 						<br/>
 						<span className="notice-inner-message">
 							{ isPostPublished && ! isPostPasswordProtected && (
-								__('Custom endpoint is public, available to everyone.', 'graphql-api')
+								__('Custom endpoint is public, available to everyone.', 'gato-graphql')
 							) }
 							{ isPostPublished && isPostPasswordProtected && (
-								__('Custom endpoint is public, available to anyone with the required password.', 'graphql-api')
+								__('Custom endpoint is public, available to anyone with the required password.', 'gato-graphql')
 							) }
 							{ isPostDraftOrPending && ! isPostPasswordProtected && (
-								__('Custom endpoint is not yet public, only available to the Schema editors.', 'graphql-api')
+								__('Custom endpoint is not yet public, only available to the Schema editors.', 'gato-graphql')
 							) }
 							{ isPostDraftOrPending && isPostPasswordProtected && (
-								__('Custom endpoint is not yet public, only available to the Schema editors with the required password.', 'graphql-api')
+								__('Custom endpoint is not yet public, only available to the Schema editors with the required password.', 'gato-graphql')
 							) }
 							{ isPostPrivate && (
-								__('Custom endpoint is private, only available to the Schema editors.', 'graphql-api')
+								__('Custom endpoint is private, only available to the Schema editors.', 'gato-graphql')
 							) }
 							{ ! isPostAvailable && (
-								__('Custom endpoint is not yet available.', 'graphql-api')
+								__('Custom endpoint is not yet available.', 'gato-graphql')
 							) }
 						</span>
 					</Notice>
@@ -142,7 +142,7 @@ export default function CustomEndpointOverview() {
 								</ExternalLink>
 							) }
 							{ ! isCustomEndpointEnabled && (
-								<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
+								<span className="disabled-text">{ __('Disabled', 'gato-graphql') }</span>
 							) }
 						</p>
 					</div>
@@ -209,7 +209,7 @@ export default function CustomEndpointOverview() {
 								</ExternalLink>
 							) }
 							{ ! isGraphiQLClientEnabled && (
-								<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
+								<span className="disabled-text">{ __('Disabled', 'gato-graphql') }</span>
 							) }
 						</p>
 					</div>
@@ -245,7 +245,7 @@ export default function CustomEndpointOverview() {
 								</ExternalLink>
 							) }
 							{ ! isVoyagerClientEnabled && (
-								<span className="disabled-text">{ __('Disabled', 'graphql-api') }</span>
+								<span className="disabled-text">{ __('Disabled', 'gato-graphql') }</span>
 							) }
 						</p>
 					</div>

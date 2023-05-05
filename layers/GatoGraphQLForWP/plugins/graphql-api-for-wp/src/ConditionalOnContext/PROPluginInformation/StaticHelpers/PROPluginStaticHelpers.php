@@ -13,7 +13,7 @@ class PROPluginStaticHelpers
     public static function getPROTitle(string $title): string
     {
         return sprintf(
-            \__('🔒 %s', 'graphql-api'),
+            \__('🔒 %s', 'gato-graphql'),
             $title
         );
     }
@@ -27,7 +27,7 @@ class PROPluginStaticHelpers
             $moduleConfiguration->getPROPluginWebsiteURL(),
             '_blank',
             $class,
-            \__('Go PRO to unlock! 🔓', 'graphql-api')
+            \__('Go PRO to unlock! 🔓', 'gato-graphql')
         );
     }
 }

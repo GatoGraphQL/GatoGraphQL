@@ -42,6 +42,6 @@ class AllowedUserMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebse
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-schema-user-meta';
+        return 'gato-graphql/schema-config-schema-user-meta';
     }
 }

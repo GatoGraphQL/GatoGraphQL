@@ -32,11 +32,11 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getName(string $settingsCategory): string
     {
         return match ($settingsCategory) {
-            self::SCHEMA_CONFIGURATION => $this->__('Schema Configuration', 'graphql-api'),
-            self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'graphql-api'),
-            self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'graphql-api'),
-            self::LICENSE_KEYS => $this->__('License/API Keys', 'graphql-api'),
-            self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'graphql-api'),
+            self::SCHEMA_CONFIGURATION => $this->__('Schema Configuration', 'gato-graphql'),
+            self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'gato-graphql'),
+            self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'gato-graphql'),
+            self::LICENSE_KEYS => $this->__('License/API Keys', 'gato-graphql'),
+            self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'gato-graphql'),
             default => parent::getName($settingsCategory),
         };
     }

@@ -28,7 +28,7 @@ class SchemaConfigSchemaTaxonomyMetaBlock extends AbstractSchemaConfigSchemaMeta
 
     protected function getBlockTitle(): string
     {
-        return \__('Taxonomy Meta', 'graphql-api');
+        return \__('Taxonomy Meta', 'gato-graphql');
     }
 
     /**

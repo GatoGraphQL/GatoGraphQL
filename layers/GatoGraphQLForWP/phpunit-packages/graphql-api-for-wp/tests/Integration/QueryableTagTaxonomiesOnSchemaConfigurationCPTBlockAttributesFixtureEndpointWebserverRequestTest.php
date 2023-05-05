@@ -42,6 +42,6 @@ class QueryableTagTaxonomiesOnSchemaConfigurationCPTBlockAttributesFixtureEndpoi
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-schema-tags';
+        return 'gato-graphql/schema-config-schema-tags';
     }
 }

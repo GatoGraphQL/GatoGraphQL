@@ -1,7 +1,7 @@
 {
-    "name": "leoloso/graphql-api-for-prod-dev",
+    "name": "leoloso/gato-graphql-for-prod-dev",
     "description": "GraphQL API for PROD (PHP 7.1 + Generated .zip plugins)",
-    "homepage": "https://graphql-api.com",
+    "homepage": "https://gato-graphql.com",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -40,7 +40,7 @@
     "scripts": {
         "ssh-server": "lando ssh",
         "build-server": [
-            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api-for-prod",
+            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gato-graphql-for-prod",
             "@start-server",
             "@install-site"
         ],
@@ -86,10 +86,10 @@
             "@delete-settings"
         ],
         "delete-settings": [
-            "lando wp option delete graphql-api-schema-configuration --path=wordpress",
-            "lando wp option delete graphql-api-endpoint-configuration --path=wordpress",
-            "lando wp option delete graphql-api-plugin-configuration --path=wordpress",
-            "lando wp option delete graphql-api-plugin-management --path=wordpress"
+            "lando wp option delete gato-graphql-schema-configuration --path=wordpress",
+            "lando wp option delete gato-graphql-endpoint-configuration --path=wordpress",
+            "lando wp option delete gato-graphql-plugin-configuration --path=wordpress",
+            "lando wp option delete gato-graphql-plugin-management --path=wordpress"
         ],
         "server-info": "lando info"
     }

@@ -66,7 +66,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     public function getName(string $module): string
     {
         return match ($module) {
-            self::FIELD_DEPRECATION => \__('Field Deprecation', 'graphql-api'),
+            self::FIELD_DEPRECATION => \__('Field Deprecation', 'gato-graphql'),
             default => $module,
         };
     }
@@ -75,7 +75,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     {
         switch ($module) {
             case self::FIELD_DEPRECATION:
-                return \__('Deprecate fields, and explain how to replace them, through a user interface', 'graphql-api');
+                return \__('Deprecate fields, and explain how to replace them, through a user interface', 'gato-graphql');
         }
         return parent::getDescription($module);
     }

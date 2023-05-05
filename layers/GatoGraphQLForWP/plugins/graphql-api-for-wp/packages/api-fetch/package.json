@@ -4,7 +4,7 @@
   "description": "Fetch data from the server through the GraphQL API",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GatoGraphQL/graphql-api.git",
+    "url": "https://github.com/GatoGraphQL/gato-graphql.git",
     "directory": "packages/api-fetch"
   },
   "keywords": [

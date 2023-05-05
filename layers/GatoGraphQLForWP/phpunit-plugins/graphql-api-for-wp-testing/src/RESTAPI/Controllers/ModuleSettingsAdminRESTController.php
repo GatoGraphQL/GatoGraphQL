@@ -32,7 +32,7 @@ use function rest_url;
  *   -X POST \
  *   -H "Content-Type: application/json" \
  *   -d '{"jsonEncodedOptionValues": "{\"path\":\"/anotherGraphiQL/\"}"}' \
- *   https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/module-settings/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
+ *   https://gato-graphql.lndo.site/wp-json/gato-graphql/v1/admin/module-settings/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
  * ```
  */
 class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
@@ -82,7 +82,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
                     'args' => [
                         Params::MODULE_ID => $this->getModuleIDParamArgs(),
                         Params::JSON_ENCODED_OPTION_VALUES => [
-                            'description' => __('JSON-encoded array of [\'option\' (also called \'input\' in the settings) => \'value\']. Different modules can receive different options', 'graphql-api-testing'),
+                            'description' => __('JSON-encoded array of [\'option\' (also called \'input\' in the settings) => \'value\']. Different modules can receive different options', 'gato-graphql-testing'),
                             'type' => 'string',
                             // 'properties' => [
                             //     'option'  => [
@@ -115,7 +115,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('Property \'%s\' is not JSON-encoded properly', 'graphql-api-testing'),
+                    __('Property \'%s\' is not JSON-encoded properly', 'gato-graphql-testing'),
                     Params::JSON_ENCODED_OPTION_VALUES,
                 ),
                 [
@@ -150,7 +150,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
                 return new WP_Error(
                     '1',
                     sprintf(
-                        __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api-testing'),
+                        __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'gato-graphql-testing'),
                         $option,
                         $module,
                         $moduleID
@@ -314,7 +314,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
-                __('Settings for module \'%s\' (with ID \'%s\') have been updated successfully', 'graphql-api-testing'),
+                __('Settings for module \'%s\' (with ID \'%s\') have been updated successfully', 'gato-graphql-testing'),
                 $module,
                 $moduleID
             );

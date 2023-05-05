@@ -42,6 +42,6 @@ class AllowedTaxonomyMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpointW
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-schema-taxonomy-meta';
+        return 'gato-graphql/schema-config-schema-taxonomy-meta';
     }
 }

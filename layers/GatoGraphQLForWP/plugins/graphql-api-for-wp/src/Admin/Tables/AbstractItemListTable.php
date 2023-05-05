@@ -82,7 +82,7 @@ abstract class AbstractItemListTable extends WP_List_Table
          * Fix the issues with the WP List Table
          */
         \wp_enqueue_style(
-            'graphql-api-wp-list-table-fix',
+            'gato-graphql-wp-list-table-fix',
             $mainPluginURL . 'assets/css/wp-list-table-fix.css',
             array(),
             $mainPluginVersion
@@ -97,6 +97,6 @@ abstract class AbstractItemListTable extends WP_List_Table
      */
     public function no_items()
     {
-        _e('No items found.', 'graphql-api');
+        _e('No items found.', 'gato-graphql');
     }
 }

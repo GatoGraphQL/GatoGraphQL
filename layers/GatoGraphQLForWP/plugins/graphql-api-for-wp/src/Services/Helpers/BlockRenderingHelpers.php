@@ -15,12 +15,12 @@ class BlockRenderingHelpers
     {
         $title = $customPostObject->post_title ?
             $customPostObject->post_title :
-            \__('(No title)', 'graphql-api');
+            \__('(No title)', 'gato-graphql');
 
         // If the post is either draft/pending (or maybe trash?), add that info in the title
         if ($customPostObject->post_status !== 'publish') {
             $title = sprintf(
-                \__('(%s) %s', 'graphql-api'),
+                \__('(%s) %s', 'gato-graphql'),
                 ucwords($customPostObject->post_status),
                 $title
             );

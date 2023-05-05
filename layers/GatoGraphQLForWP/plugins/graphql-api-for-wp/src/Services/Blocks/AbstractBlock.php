@@ -325,7 +325,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * then register the block only if we are on any of those CPTs.
          * Otherwise, the block would be registered but the category is not,
          * printing error console such as:
-         * > The block "graphql-api/schema-configuration" must have a registered category.
+         * > The block "gato-graphql/schema-configuration" must have a registered category.
          */
         if (\is_admin()) {
             if ($postTypes = $this->getAllowedPostTypes()) {
@@ -356,7 +356,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         if (!file_exists($script_asset_path)) {
             throw new Error(
                 sprintf(
-                    \__('You need to run `npm start` or `npm run build` for the "%s" block first.', 'graphql-api'),
+                    \__('You need to run `npm start` or `npm run build` for the "%s" block first.', 'gato-graphql'),
                     $blockFullName
                 )
             );
@@ -449,7 +449,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         /**
          * Register the documentation (from under folder "docs/"), for the locale and the default language
          * @todo Maybe uncomment for webpack v5, to not duplicate the content of the docs inside build/index.js
-         * @see https://github.com/GatoGraphQL/graphql-api-for-wp/issues/1
+         * @see https://github.com/GatoGraphQL/gato-graphql-for-wp/issues/1
          */
         // $this->initDocumentationScripts();
     }

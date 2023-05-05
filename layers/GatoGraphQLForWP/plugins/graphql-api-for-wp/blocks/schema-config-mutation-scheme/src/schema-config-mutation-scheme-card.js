@@ -36,40 +36,40 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT,
 		},
 		{
-			label: __('Do not enable nested mutations', 'graphql-api'),
+			label: __('Do not enable nested mutations', 'gato-graphql'),
 			value: ATTRIBUTE_VALUE_MUTATION_SCHEME_STANDARD,
 		},
 		{
-			label: __('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api'),
+			label: __('Enable nested mutations, keeping all mutation fields in the root', 'gato-graphql'),
 			value: ATTRIBUTE_VALUE_MUTATION_SCHEME_NESTED_WITH_REDUNDANT_ROOT_FIELDS,
 		},
 		{
-			label: __('Enable nested mutations, removing the redundant mutation fields from the root', 'graphql-api'),
+			label: __('Enable nested mutations, removing the redundant mutation fields from the root', 'gato-graphql'),
 			value: ATTRIBUTE_VALUE_MUTATION_SCHEME_NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS,
 		},
 	];
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Support nested mutations?', 'graphql-api') }</em>
+			<em>{ __('Support nested mutations?', 'gato-graphql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Add mutation fields on entities other than the root type?', 'graphql-api') }
+				text={ __('Add mutation fields on entities other than the root type?', 'gato-graphql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
 					{ ( mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_DEFAULT || !optionValues.includes(mutationScheme) ) &&
-						<span>🟡 { __('Default', 'graphql-api') }</span>
+						<span>🟡 { __('Default', 'gato-graphql') }</span>
 					}
 					{ mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_STANDARD &&
-						<span>❌ { __('Do not enable nested mutations', 'graphql-api') }</span>
+						<span>❌ { __('Do not enable nested mutations', 'gato-graphql') }</span>
 					}
 					{ mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_NESTED_WITH_REDUNDANT_ROOT_FIELDS &&
-						<span>✅ { __('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api') }</span>
+						<span>✅ { __('Enable nested mutations, keeping all mutation fields in the root', 'gato-graphql') }</span>
 					}
 					{ mutationScheme == ATTRIBUTE_VALUE_MUTATION_SCHEME_NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS &&
-						<span>✳️ { __('Enable nested mutations, removing the redundant mutation fields from the root', 'graphql-api') }</span>
+						<span>✳️ { __('Enable nested mutations, removing the redundant mutation fields from the root', 'gato-graphql') }</span>
 					}
 				</>
 			) }
@@ -92,8 +92,8 @@ const SchemaConfigMutationSchemeCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Mutation Scheme', 'graphql-api'),
-		className: 'graphql-api-mutation-scheme',
+		header: __('Mutation Scheme', 'gato-graphql'),
+		className: 'gato-graphql-mutation-scheme',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

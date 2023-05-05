@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Multiple Query Execution', 'graphql-api');
-const description = __('Multiple queries are combined together, and executed as a single operation, reusing their state and their data, and improving the performance of the application.', 'graphql-api');
+const title = __('Multiple Query Execution', 'gato-graphql');
+const description = __('Multiple queries are combined together, and executed as a single operation, reusing their state and their data, and improving the performance of the application.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

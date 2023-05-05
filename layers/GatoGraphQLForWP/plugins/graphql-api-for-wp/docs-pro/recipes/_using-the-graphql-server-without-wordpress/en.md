@@ -28,9 +28,9 @@ $rootDir = dirname(__DIR__, 2);
 /** @var string|false */
 $useGeneratedPluginsAsStandaloneCode = getenv('USE_GENERATED_PLUGINS_AS_STANDALONE_CODE');
 if ($useGeneratedPluginsAsStandaloneCode === 'true') {
-    $prodWebserverDir = $rootDir . '/webservers/graphql-api-pro-for-prod';
-    require_once ($prodWebserverDir . '/wordpress/wp-content/plugins/graphql-api/vendor/scoper-autoload.php');
-    require_once ($prodWebserverDir . '/wordpress/wp-content/plugins/graphql-api-pro/vendor/scoper-autoload.php');
+    $prodWebserverDir = $rootDir . '/webservers/gato-graphql-pro-for-prod';
+    require_once ($prodWebserverDir . '/wordpress/wp-content/plugins/gato-graphql/vendor/scoper-autoload.php');
+    require_once ($prodWebserverDir . '/wordpress/wp-content/plugins/gato-graphql-pro/vendor/scoper-autoload.php');
 } else {
     require_once ($rootDir . '/vendor/autoload.php');
 }

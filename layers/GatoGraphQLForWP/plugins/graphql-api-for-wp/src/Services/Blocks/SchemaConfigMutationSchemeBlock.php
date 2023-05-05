@@ -43,15 +43,15 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
         $mutationSchemeLabels = [
-            MutationSchemes::STANDARD => \__('❌ Do not enable nested mutations', 'graphql-api'),
-            MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('✅ Nested mutations enabled, keeping all mutation fields in the Root type', 'graphql-api'),
-            MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('✳️ Nested mutations enabled, removing the redundant mutation fields from the Root type', 'graphql-api'),
+            MutationSchemes::STANDARD => \__('❌ Do not enable nested mutations', 'gato-graphql'),
+            MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('✅ Nested mutations enabled, keeping all mutation fields in the Root type', 'gato-graphql'),
+            MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('✳️ Nested mutations enabled, removing the redundant mutation fields from the Root type', 'gato-graphql'),
         ];
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            \__('Mutation Scheme', 'graphql-api'),
+            \__('Mutation Scheme', 'gato-graphql'),
             $mutationSchemeLabels[$attributes[self::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
         );
 
@@ -65,7 +65,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
-            \__('Mutation Scheme', 'graphql-api'),
+            \__('Mutation Scheme', 'gato-graphql'),
             $blockContent
         );
     }

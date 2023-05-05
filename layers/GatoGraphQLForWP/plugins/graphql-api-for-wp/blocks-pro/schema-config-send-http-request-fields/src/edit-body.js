@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Send HTTP Request Fields', 'graphql-api');
-const description = __('Addition of fields to execute HTTP requests against a webserver and fetch their response.', 'graphql-api');
+const title = __('Send HTTP Request Fields', 'gato-graphql');
+const description = __('Addition of fields to execute HTTP requests against a webserver and fetch their response.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

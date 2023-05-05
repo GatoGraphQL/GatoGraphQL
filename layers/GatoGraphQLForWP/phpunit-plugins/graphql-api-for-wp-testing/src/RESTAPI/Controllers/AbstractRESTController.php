@@ -55,7 +55,7 @@ abstract class AbstractRESTController extends WP_REST_Controller
 
     final protected function getPluginNamespace(): string
     {
-        return 'graphql-api';
+        return 'gato-graphql';
     }
 
     protected function getVersion(): string

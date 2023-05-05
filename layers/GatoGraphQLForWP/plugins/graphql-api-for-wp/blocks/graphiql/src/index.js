@@ -17,7 +17,7 @@ import EditBlock from './edit.js';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'graphql-api/graphiql', {
+registerBlockType( 'gato-graphql/graphiql', {
     /**
      * Shared settings
      */

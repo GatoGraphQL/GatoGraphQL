@@ -82,10 +82,10 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $this->getMenuName(),
-                __('GraphiQL', 'graphql-api'),
+                __('GraphiQL', 'gato-graphql'),
                 $isSingleEndpointEnabled
-                    ? __('🟡 GraphiQL (private)', 'graphql-api')
-                    : __('GraphiQL', 'graphql-api'),
+                    ? __('🟡 GraphiQL (private)', 'gato-graphql')
+                    : __('GraphiQL', 'gato-graphql'),
                 $schemaEditorAccessCapability,
                 $this->getMenuName(),
                 [$this->getGraphiQLMenuPage(), 'print']
@@ -97,10 +97,10 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $this->getMenuName(),
-                __('GraphQL Schema', 'graphql-api'),
+                __('GraphQL Schema', 'gato-graphql'),
                 $isSingleEndpointEnabled
-                    ? __('🟡 Schema (private)', 'graphql-api')
-                    : __('Schema', 'graphql-api'),
+                    ? __('🟡 Schema (private)', 'gato-graphql')
+                    : __('Schema', 'gato-graphql'),
                 $schemaEditorAccessCapability,
                 $this->getGraphQLVoyagerMenuPage()->getScreenID(),
                 [$this->getGraphQLVoyagerMenuPage(), 'print']

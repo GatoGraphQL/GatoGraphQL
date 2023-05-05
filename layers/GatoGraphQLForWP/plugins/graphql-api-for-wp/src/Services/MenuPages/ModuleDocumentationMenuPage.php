@@ -79,7 +79,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
             return sprintf(
                 '<p>%s</p>',
                 sprintf(
-                    \__('Oops, module \'%s\' does not exist', 'graphql-api'),
+                    \__('Oops, module \'%s\' does not exist', 'gato-graphql'),
                     $module
                 )
             );
@@ -93,7 +93,7 @@ class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
             return sprintf(
                 '<p>%s</p>',
                 sprintf(
-                    \__('Oops, module \'%s\' has no documentation', 'graphql-api'),
+                    \__('Oops, module \'%s\' has no documentation', 'gato-graphql'),
                     $moduleResolver->getName($module)
                 )
             );

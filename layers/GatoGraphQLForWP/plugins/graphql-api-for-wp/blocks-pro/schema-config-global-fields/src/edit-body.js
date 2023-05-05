@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Global Fields', 'graphql-api');
-const description = __('Global fields are fields that are accessible under every single type in the GraphQL schema (while being defined only once).', 'graphql-api');
+const title = __('Global Fields', 'gato-graphql');
+const description = __('Global fields are fields that are accessible under every single type in the GraphQL schema (while being defined only once).', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

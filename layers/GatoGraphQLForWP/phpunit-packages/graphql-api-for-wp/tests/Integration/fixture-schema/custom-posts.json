@@ -25,7 +25,7 @@
                 "slug": "hello-world",
                 "status": "publish",
                 "title": "Hello world!",
-                "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/hello-world\/",
                 "urlPath": "\/hello-world\/"
             },
             {
@@ -37,11 +37,11 @@
                 },
                 "commentCount": 0,
                 "comments": [],
-                "content": "<p>This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n<blockquote class=\"wp-block-quote\">\n<p>Hi there! I&#8217;m a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin&#8217; caught in the rain.)<\/p>\n<\/blockquote>\n<p>&#8230;or something like this:<\/p>\n<blockquote class=\"wp-block-quote\">\n<p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p>\n<\/blockquote>\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/graphql-api.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n",
+                "content": "<p>This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n<blockquote class=\"wp-block-quote\">\n<p>Hi there! I&#8217;m a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin&#8217; caught in the rain.)<\/p>\n<\/blockquote>\n<p>&#8230;or something like this:<\/p>\n<blockquote class=\"wp-block-quote\">\n<p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p>\n<\/blockquote>\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gato-graphql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n",
                 "customPostType": "page",
                 "date": "2020-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2020",
-                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/\">Continue reading <span class=\"screen-reader-text\">HTTP caching improves performance<\/span><\/a>",
+                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gato-graphql.lndo.site\/http-caching-improves-performance\/\">Continue reading <span class=\"screen-reader-text\">HTTP caching improves performance<\/span><\/a>",
                 "featuredImage": null,
                 "hasComments": false,
                 "hasFeaturedImage": false,
@@ -52,7 +52,7 @@
                 "slug": "sample-page",
                 "status": "publish",
                 "title": "Sample Page",
-                "url": "https:\/\/graphql-api.lndo.site\/sample-page\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/sample-page\/",
                 "urlPath": "\/sample-page\/"
             },
             {
@@ -75,7 +75,7 @@
                 "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard width)",
                 "featuredImage": {
                     "id": 361,
-                    "src": "https:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
+                    "src": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
                 },
                 "hasComments": true,
                 "hasFeaturedImage": true,
@@ -86,7 +86,7 @@
                 "slug": "released-v0-6-check-it-out",
                 "status": "publish",
                 "title": "Released v0.6, check it out",
-                "url": "https:\/\/graphql-api.lndo.site\/released-v0-6-check-it-out\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/released-v0-6-check-it-out\/",
                 "urlPath": "\/released-v0-6-check-it-out\/"
             }
         ],

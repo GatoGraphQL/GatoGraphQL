@@ -63,7 +63,7 @@ const EditableSelect = ( props ) => {
 			entry.label
 			: getLabelForNotFoundValueCallback( val );
 	} );
-	const componentClassName = 'graphql-api-select-card';
+	const componentClassName = 'gato-graphql-select-card';
 	const multiOrSingleClass = isMulti ? 'multi' : 'single';
 	return (
 		<>
@@ -93,7 +93,7 @@ const EditableSelect = ( props ) => {
 			) }
 			{ !isSelected && !value.length && (
 				<div className={ `${ className }__not-set ${ componentClassName }__not-set` }>
-					<em>{ __('(not set)', 'graphql-api') }</em>
+					<em>{ __('(not set)', 'gato-graphql') }</em>
 				</div>
 			) }
 		</>

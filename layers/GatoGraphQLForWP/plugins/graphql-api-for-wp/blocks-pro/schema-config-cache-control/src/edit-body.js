@@ -17,8 +17,8 @@ import {
 /**
  * Define consts
  */
-const title = __('Cache Control', 'graphql-api');
-const description = __('Provide HTTP caching for persisted queries, caching their response via the `Cache-Control` header.', 'graphql-api');
+const title = __('Cache Control', 'gato-graphql');
+const description = __('Provide HTTP caching for persisted queries, caching their response via the `Cache-Control` header.', 'gato-graphql');
 
 const EditBody = ( props ) => {
 	return (
@@ -35,7 +35,7 @@ export default compose( [
 	withEditableOnFocus(),
 	withState( {
 		header: title,
-		className: 'graphql-api-pro-block',
+		className: 'gato-graphql-pro-block',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withPROCard(),

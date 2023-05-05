@@ -62,7 +62,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            \__('Expose GraphiQL client?', 'graphql-api'),
+            \__('Expose GraphiQL client?', 'gato-graphql'),
             $this->getBooleanLabel($attributes[BlockAttributeNames::IS_ENABLED] ?? true)
         );
 
@@ -76,7 +76,7 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
-            \__('GraphiQL', 'graphql-api'),
+            \__('GraphiQL', 'gato-graphql'),
             $blockContent
         );
     }

@@ -58,7 +58,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     protected function getExecuteActionLabel(): string
     {
-        return __('Execute', 'graphql-api');
+        return __('Execute', 'gato-graphql');
     }
 
     /**
@@ -93,14 +93,14 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                                 $preview_link
                             )),
                             /* translators: %s: Post title. */
-                            \esc_attr(sprintf(__('Preview source &#8220;%s&#8221;', 'graphql-api'), $title)),
-                            __('Preview source', 'graphql-api')
+                            \esc_attr(sprintf(__('Preview source &#8220;%s&#8221;', 'gato-graphql'), $title)),
+                            __('Preview source', 'gato-graphql')
                         );
                         if ($isEndpointEnabled) {
                             $actions['execute'] = sprintf(
                                 '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
                                 \esc_url($preview_link),
-                                \esc_attr(sprintf(__('%s &#8220;%s&#8221;', 'graphql-api'), $executeLabel, $title)),
+                                \esc_attr(sprintf(__('%s &#8220;%s&#8221;', 'gato-graphql'), $executeLabel, $title)),
                                 $executeLabel
                             );
                         }
@@ -115,14 +115,14 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                             RequestParams::VIEW_SOURCE,
                             $permalink
                         ),
-                        \esc_attr(sprintf(__('View source &#8220;%s&#8221;', 'graphql-api'), $title)),
-                        __('View source', 'graphql-api')
+                        \esc_attr(sprintf(__('View source &#8220;%s&#8221;', 'gato-graphql'), $title)),
+                        __('View source', 'gato-graphql')
                     );
                     if ($isEndpointEnabled) {
                         $actions['execute'] = sprintf(
                             '<a href="%s" rel="bookmark" aria-label="%s">%s</a>',
                             $permalink,
-                            \esc_attr(sprintf(__('%s &#8220;%s&#8221;', 'graphql-api'), $executeLabel, $title)),
+                            \esc_attr(sprintf(__('%s &#8220;%s&#8221;', 'gato-graphql'), $executeLabel, $title)),
                             $executeLabel
                         );
                     }
@@ -152,7 +152,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
         // Execute at the beginning. If access is forbidden, the process must end
         \add_action('init', function (): void {
             if ($this->isAccessForbidden()) {
-                wp_die(\__('Access forbidden', 'graphql-api'));
+                wp_die(\__('Access forbidden', 'gato-graphql'));
             }
         }, 0);
     }
@@ -226,8 +226,8 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 true
             ),
             [
-                'state' => \__('State', 'graphql-api'),
-                'schema-config' => \__('Schema Configuration', 'graphql-api'),
+                'state' => \__('State', 'gato-graphql'),
+                'schema-config' => \__('Schema Configuration', 'gato-graphql'),
             ],
             array_slice(
                 $columns,
@@ -252,12 +252,12 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 }
                 echo $this->isEndpointEnabled($post)
                     ? sprintf(
-                        \__('✅ %s', 'graphql-api'),
-                        \__('Enabled', 'graphql-api')
+                        \__('✅ %s', 'gato-graphql'),
+                        \__('Enabled', 'gato-graphql')
                     )
                     : sprintf(
-                        \__('❌ %s', 'graphql-api'),
-                        \__('Disabled', 'graphql-api')
+                        \__('❌ %s', 'gato-graphql'),
+                        \__('Disabled', 'gato-graphql')
                     );
                 break;
             case 'schema-config':
@@ -268,11 +268,11 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     $post_id,
                 );
                 if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
-                    _e('"None" selected', 'graphql-api');
+                    _e('"None" selected', 'gato-graphql');
                     break;
                 }
                 if ($schemaConfigurationID === null) {
-                    _e('(None)', 'graphql-api');
+                    _e('(None)', 'gato-graphql');
                     break;
                 }
                 /** @var WP_Post */

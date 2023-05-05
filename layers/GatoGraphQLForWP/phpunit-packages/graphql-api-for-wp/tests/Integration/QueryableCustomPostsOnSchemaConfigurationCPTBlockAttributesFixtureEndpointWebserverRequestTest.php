@@ -42,6 +42,6 @@ class QueryableCustomPostsOnSchemaConfigurationCPTBlockAttributesFixtureEndpoint
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-config-schema-customposts';
+        return 'gato-graphql/schema-config-schema-customposts';
     }
 }

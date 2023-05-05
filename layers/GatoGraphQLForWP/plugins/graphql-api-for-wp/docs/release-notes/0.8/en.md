@@ -29,13 +29,13 @@ The codebase for the GraphQL server has been refactored, to use a service contai
 
 This is a milestone, which introduces a single approach for developing the plugin and its extensions, greatly simplifying their code and documentation.
 
-Docs on how to create custom extensions for the GraphQL API can finally be written. Work on them will start soon, and will be published on [graphql-api.com/guides](https://graphql-api.com/guides).
+Docs on how to create custom extensions for the GraphQL API can finally be written. Work on them will start soon, and will be published on [gato-graphql.com/guides](https://gato-graphql.com/guides).
 
 ## Cache is saved under `wp-content`
 
 The plugin caches results to disk to optimize performance.
 
-The cached files were previously stored under a system folder, out of view to the admin user. From now on, they are stored under `wp-content/graphql-api/cache`.
+The cached files were previously stored under a system folder, out of view to the admin user. From now on, they are stored under `wp-content/gato-graphql/cache`.
 
 ## A "fixed schema" GraphQL endpoint was introduced to power the WordPress editor
 
@@ -338,7 +338,7 @@ And then, ship `1.0` around year-end or early 2022, including:
 - Complete documentation guides on creating extensions
 - Launch of the GraphQL API plugin in `wp.org`
 
-To receive notifications on the current status, you can [subscribe to the newsletter](https://graphql-api.com/newsletter/).
+To receive notifications on the current status, you can [subscribe to the newsletter](https://gato-graphql.com/newsletter/).
 
 ---
 

@@ -15,7 +15,7 @@ trait WithModuleParamRESTControllerTrait
     protected function getModuleIDParamArgs(): array
     {
         return [
-            'description' => __('Module ID', 'graphql-api-testing'),
+            'description' => __('Module ID', 'gato-graphql-testing'),
             'type' => 'string',
             'required' => true,
             'validate_callback' => $this->validateModule(...),
@@ -32,7 +32,7 @@ trait WithModuleParamRESTControllerTrait
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('There is no module with ID \'%s\'', 'graphql-api'),
+                    __('There is no module with ID \'%s\'', 'gato-graphql'),
                     $moduleID
                 ),
                 [

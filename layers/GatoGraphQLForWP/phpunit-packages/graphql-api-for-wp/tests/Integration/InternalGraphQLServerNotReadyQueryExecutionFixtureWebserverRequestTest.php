@@ -9,7 +9,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEndpointWebserverRequestTest
 /**
  * Test the InternalGraphQLServer throws the GraphQLServerNotReady exception.
  *
- * @see layers/GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
+ * @see layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
  */
 class InternalGraphQLServerNotReadyQueryExecutionFixtureWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {

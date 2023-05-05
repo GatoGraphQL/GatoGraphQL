@@ -44,6 +44,6 @@ class SchemaConfigurationOnCustomEndpointCPTBlockAttributesFixtureEndpointWebser
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'graphql-api/schema-configuration';
+        return 'gato-graphql/schema-configuration';
     }
 }

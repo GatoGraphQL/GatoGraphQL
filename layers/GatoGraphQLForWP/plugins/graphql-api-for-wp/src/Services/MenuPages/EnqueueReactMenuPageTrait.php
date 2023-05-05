@@ -17,16 +17,16 @@ trait EnqueueReactMenuPageTrait
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
 
         \wp_enqueue_script(
-            'graphql-api-react',
+            'gato-graphql-react',
             $mainPluginURL . 'assets/js/vendors/react.min.js',
             array(),
             $mainPluginVersion,
             $addInFooter
         );
         \wp_enqueue_script(
-            'graphql-api-react-dom',
+            'gato-graphql-react-dom',
             $mainPluginURL . 'assets/js/vendors/react-dom.min.js',
-            array('graphql-api-react'),
+            array('gato-graphql-react'),
             $mainPluginVersion,
             $addInFooter
         );

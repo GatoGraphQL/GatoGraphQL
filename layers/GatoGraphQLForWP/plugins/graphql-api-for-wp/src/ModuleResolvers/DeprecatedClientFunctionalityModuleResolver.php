@@ -59,7 +59,7 @@ class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         return match ($module) {
-            self::GRAPHIQL_EXPLORER => \__('GraphiQL Explorer', 'graphql-api'),
+            self::GRAPHIQL_EXPLORER => \__('GraphiQL Explorer', 'gato-graphql'),
             default => $module,
         };
     }
@@ -68,7 +68,7 @@ class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         switch ($module) {
             case self::GRAPHIQL_EXPLORER:
-                return \__('Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)', 'graphql-api');
+                return \__('Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)', 'gato-graphql');
         }
         return parent::getDescription($module);
     }

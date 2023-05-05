@@ -84,7 +84,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
          *
          * In that case, fill it in with the default values.
          *
-         * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
+         * @see layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp/src/Services/MenuPages/SettingsMenuPage.php
          */
         if ($values === []) {
             foreach ($settingsItems as $item) {

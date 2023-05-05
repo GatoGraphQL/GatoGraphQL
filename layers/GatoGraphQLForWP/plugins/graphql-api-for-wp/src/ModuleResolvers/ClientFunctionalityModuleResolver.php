@@ -98,10 +98,10 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getName(string $module): string
     {
         return match ($module) {
-            self::GRAPHIQL_FOR_SINGLE_ENDPOINT => \__('GraphiQL for Single Endpoint', 'graphql-api'),
-            self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS => \__('GraphiQL for Custom Endpoints', 'graphql-api'),
-            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT => \__('Interactive Schema for Single Endpoint', 'graphql-api'),
-            self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS => \__('Interactive Schema for Custom Endpoints', 'graphql-api'),
+            self::GRAPHIQL_FOR_SINGLE_ENDPOINT => \__('GraphiQL for Single Endpoint', 'gato-graphql'),
+            self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS => \__('GraphiQL for Custom Endpoints', 'gato-graphql'),
+            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT => \__('Interactive Schema for Single Endpoint', 'gato-graphql'),
+            self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS => \__('Interactive Schema for Custom Endpoints', 'gato-graphql'),
             default => $module,
         };
     }
@@ -113,18 +113,18 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
         switch ($module) {
             case self::GRAPHIQL_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
-                    \__('Make a public GraphiQL client available under <code>%s</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled', 'graphql-api'),
+                    \__('Make a public GraphiQL client available under <code>%s</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled', 'gato-graphql'),
                     $moduleConfiguration->getGraphiQLClientEndpoint()
                 );
             case self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS:
-                return \__('Enable custom endpoints to be attached their own GraphiQL client, to execute queries against them', 'graphql-api');
+                return \__('Enable custom endpoints to be attached their own GraphiQL client, to execute queries against them', 'gato-graphql');
             case self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
-                    \__('Make a public Interactive Schema client available under <code>%s</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled', 'graphql-api'),
+                    \__('Make a public Interactive Schema client available under <code>%s</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled', 'gato-graphql'),
                     $moduleConfiguration->getVoyagerClientEndpoint()
                 );
             case self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS:
-                return \__('Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset', 'graphql-api');
+                return \__('Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset', 'gato-graphql');
         }
         return parent::getDescription($module);
     }
@@ -162,8 +162,8 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Client path', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL path to access the public GraphiQL client', 'graphql-api'),
+                Properties::TITLE => \__('Client path', 'gato-graphql'),
+                Properties::DESCRIPTION => \__('URL path to access the public GraphiQL client', 'gato-graphql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module === self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT) {
@@ -174,8 +174,8 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Client path', 'graphql-api'),
-                Properties::DESCRIPTION => \__('URL path to access the public Interactive Schema client', 'graphql-api'),
+                Properties::TITLE => \__('Client path', 'gato-graphql'),
+                Properties::DESCRIPTION => \__('URL path to access the public Interactive Schema client', 'gato-graphql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }

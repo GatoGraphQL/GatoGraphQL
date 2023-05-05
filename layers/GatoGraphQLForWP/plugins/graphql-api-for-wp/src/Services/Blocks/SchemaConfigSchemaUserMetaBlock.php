@@ -28,7 +28,7 @@ class SchemaConfigSchemaUserMetaBlock extends AbstractSchemaConfigSchemaMetaBloc
 
     protected function getBlockTitle(): string
     {
-        return \__('User Meta', 'graphql-api');
+        return \__('User Meta', 'gato-graphql');
     }
 
     /**

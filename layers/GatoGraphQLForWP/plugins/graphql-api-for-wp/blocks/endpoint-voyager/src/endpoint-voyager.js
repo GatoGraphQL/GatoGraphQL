@@ -27,21 +27,21 @@ const EndpointVoyager = ( props ) => {
 	} = props;
 	return (
 		<div className={ `${ className }__voyager_enabled` }>
-			<em>{ __('Expose the Interactive Schema client?', 'graphql-api') }</em>
+			<em>{ __('Expose the Interactive Schema client?', 'gato-graphql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Publicly available under /{endpoint-slug}/?view=schema', 'graphql-api') }
+				text={ __('Publicly available under /{endpoint-slug}/?view=schema', 'gato-graphql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
-					{ isEnabled ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }` }
+					{ isEnabled ? `✅ ${ __('Yes', 'gato-graphql') }` : `❌ ${ __('No', 'gato-graphql') }` }
 				</>
 			) }
 			{ isSelected &&
 				<ToggleControl
 					{ ...props }
-					label={ isEnabled ? __('Yes', 'graphql-api') : __('No', 'graphql-api') }
+					label={ isEnabled ? __('Yes', 'gato-graphql') : __('No', 'gato-graphql') }
 					checked={ isEnabled }
 					onChange={ newValue => setAttributes( {
 						isEnabled: newValue,
@@ -55,7 +55,7 @@ const EndpointVoyager = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Interactive Schema', 'graphql-api'),
+		header: __('Interactive Schema', 'gato-graphql'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

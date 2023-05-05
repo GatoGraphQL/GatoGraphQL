@@ -1,6 +1,6 @@
 parameters:
     # bootstrapFiles:
-    #     - graphql-api.php
+    #     - gato-graphql.php
     level: 8
     paths:
         - src/

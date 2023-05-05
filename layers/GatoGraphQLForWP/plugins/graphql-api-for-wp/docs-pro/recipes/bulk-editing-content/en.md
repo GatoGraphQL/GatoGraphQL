@@ -153,18 +153,18 @@ It produces:
       10,
       20
     ],
-    "url": "https:\/\/graphql-api-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
+    "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
     "method": "POST",
     "headers": {
       "authorization": "",
-      "host": "graphql-api-pro.lndo.site",
+      "host": "gato-graphql-pro.lndo.site",
       "user-agent": "GuzzleHttp\/7",
       "content-length": "3364",
       "accept": "application\/json",
       "content-type": "application\/json",
       "cookie": "wordpress_test_cookie=WP%20Cookie%20check; wordpress_sec_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wordpress_logged_in_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wp-settings-time-1={REPLACED_FOR_TESTING}",
       "x-forwarded-for": "172.19.0.1",
-      "x-forwarded-host": "graphql-api-pro.lndo.site",
+      "x-forwarded-host": "gato-graphql-pro.lndo.site",
       "x-forwarded-port": "443",
       "x-forwarded-proto": "https",
       "x-lando": "on",
@@ -178,7 +178,7 @@ It produces:
       },
       {
         "name": "host",
-        "value": "graphql-api-pro.lndo.site"
+        "value": "gato-graphql-pro.lndo.site"
       },
       {
         "name": "user-agent",
@@ -206,7 +206,7 @@ It produces:
       },
       {
         "name": "x-forwarded-host",
-        "value": "graphql-api-pro.lndo.site"
+        "value": "gato-graphql-pro.lndo.site"
       },
       {
         "name": "x-forwarded-port",
@@ -242,7 +242,7 @@ It produces:
     },
     "requestInputs": [
       {
-        "url": "https:\/\/graphql-api-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
+        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -252,7 +252,7 @@ It produces:
             },
             {
               "name": "host",
-              "value": "graphql-api-pro.lndo.site"
+              "value": "gato-graphql-pro.lndo.site"
             },
             {
               "name": "user-agent",
@@ -280,7 +280,7 @@ It produces:
             },
             {
               "name": "x-forwarded-host",
-              "value": "graphql-api-pro.lndo.site"
+              "value": "gato-graphql-pro.lndo.site"
             },
             {
               "name": "x-forwarded-port",
@@ -313,7 +313,7 @@ It produces:
         }
       },
       {
-        "url": "https:\/\/graphql-api-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
+        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -323,7 +323,7 @@ It produces:
             },
             {
               "name": "host",
-              "value": "graphql-api-pro.lndo.site"
+              "value": "gato-graphql-pro.lndo.site"
             },
             {
               "name": "user-agent",
@@ -351,7 +351,7 @@ It produces:
             },
             {
               "name": "x-forwarded-host",
-              "value": "graphql-api-pro.lndo.site"
+              "value": "gato-graphql-pro.lndo.site"
             },
             {
               "name": "x-forwarded-port",
@@ -384,7 +384,7 @@ It produces:
         }
       },
       {
-        "url": "https:\/\/graphql-api-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
+        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -394,7 +394,7 @@ It produces:
             },
             {
               "name": "host",
-              "value": "graphql-api-pro.lndo.site"
+              "value": "gato-graphql-pro.lndo.site"
             },
             {
               "name": "user-agent",
@@ -422,7 +422,7 @@ It produces:
             },
             {
               "name": "x-forwarded-host",
-              "value": "graphql-api-pro.lndo.site"
+              "value": "gato-graphql-pro.lndo.site"
             },
             {
               "name": "x-forwarded-port",
@@ -632,7 +632,7 @@ query CalculateURLs($limit:Int! = 10)
       @applyField(
         name: "_sprintf",
         arguments: {
-          string: "https://graphql-api-pro.lndo.site/wp-admin/admin.php?page=graphql_api&query={posts(pagination:{limit:%s,offset:%s}){id}}"
+          string: "https://gato-graphql-pro.lndo.site/wp-admin/admin.php?page=graphql_api&query={posts(pagination:{limit:%s,offset:%s}){id}}"
           values: [$limit, $offset]
         },
         setResultInResponse:true
@@ -713,7 +713,7 @@ GRAPHQL_RESPONSE=$(curl --insecure \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"query": "{\n  commentCount\n}"}' \
-  https://graphql-api.lndo.site/graphql/website/)
+  https://gato-graphql.lndo.site/graphql/website/)
 
 # Extract the number of comments into a variable
 COMMENT_COUNT=$(echo $GRAPHQL_RESPONSE \
@@ -731,7 +731,7 @@ PAGINATION_COUNT=$(($(($COMMENT_COUNT / $ENTRIES_TO_PROCESS)) + $(($(($COMMENT_C
 echo "Number of requests to process (at $ENTRIES_TO_PROCESS entries per request): $PAGINATION_COUNT"
 
 # Execute the requests, at one per second
-for PAGINATION_NUMBER in $(seq 0 $(($PAGINATION_COUNT - 1))); do sleep 1 && echo "\n\nPagination number: $PAGINATION_NUMBER\n" && curl --insecure -X POST -H "Content-Type: application/json" -d "{\"query\": \"{ comments(pagination: { limit: $ENTRIES_TO_PROCESS, offset: $(($PAGINATION_NUMBER * $ENTRIES_TO_PROCESS)) }) { id date content } }\"}" https://graphql-api.lndo.site/graphql/website/ ; done
+for PAGINATION_NUMBER in $(seq 0 $(($PAGINATION_COUNT - 1))); do sleep 1 && echo "\n\nPagination number: $PAGINATION_NUMBER\n" && curl --insecure -X POST -H "Content-Type: application/json" -d "{\"query\": \"{ comments(pagination: { limit: $ENTRIES_TO_PROCESS, offset: $(($PAGINATION_NUMBER * $ENTRIES_TO_PROCESS)) }) { id date content } }\"}" https://gato-graphql.lndo.site/graphql/website/ ; done
 ```
 
 Maybe use part of this code:

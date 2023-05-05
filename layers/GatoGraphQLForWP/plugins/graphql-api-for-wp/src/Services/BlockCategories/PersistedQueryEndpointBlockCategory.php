@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpoi
 
 class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
 {
-    public final const PERSISTED_QUERY_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-persisted-query';
+    public final const PERSISTED_QUERY_ENDPOINT_BLOCK_CATEGORY = 'gato-graphql-persisted-query';
 
     private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
 
@@ -47,6 +47,6 @@ class PersistedQueryEndpointBlockCategory extends AbstractBlockCategory
      */
     protected function getBlockCategoryTitle(): string
     {
-        return __('GraphQL persisted query endpoint', 'graphql-api');
+        return __('GraphQL persisted query endpoint', 'gato-graphql');
     }
 }

@@ -109,11 +109,11 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
         $schemaConfigurationContent = '';
         $schemaConfigurationID = $attributes[self::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION] ?? null;
         if ($schemaConfigurationID === self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT) {
-            $schemaConfigurationContent = \__('Default', 'graphql-api');
+            $schemaConfigurationContent = \__('Default', 'gato-graphql');
         } elseif ($schemaConfigurationID === self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
-            $schemaConfigurationContent = \__('None', 'graphql-api');
+            $schemaConfigurationContent = \__('None', 'gato-graphql');
         } elseif ($schemaConfigurationID === self::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {
-            $schemaConfigurationContent = \__('Inherit from parent', 'graphql-api');
+            $schemaConfigurationContent = \__('Inherit from parent', 'gato-graphql');
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);
             if (!is_null($schemaConfigurationObject)) {
@@ -140,7 +140,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
             $blockContentPlaceholder,
             $className,
             $className . '-front',
-            \__('Schema Configuration', 'graphql-api'),
+            \__('Schema Configuration', 'gato-graphql'),
             $schemaConfigurationContent
         );
     }

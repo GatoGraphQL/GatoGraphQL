@@ -51,7 +51,7 @@ class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator imp
                 ),
                 /* translators: %s: Post title. */
                 \esc_attr(\sprintf(\__('Schema &#8220;%s&#8221;'), $title)),
-                __('Interactive schema', 'graphql-api')
+                __('Interactive schema', 'gato-graphql')
             );
         }
     }

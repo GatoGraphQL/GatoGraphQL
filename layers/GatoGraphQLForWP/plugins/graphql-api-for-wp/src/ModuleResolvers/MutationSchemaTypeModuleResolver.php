@@ -163,16 +163,16 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_USER_STATE_MUTATIONS => \__('User State Mutations', 'graphql-api'),
-            self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Custom Post Mutations', 'graphql-api'),
-            self::SCHEMA_PAGE_MUTATIONS => \__('Page Mutations', 'graphql-api'),
-            self::SCHEMA_POST_MUTATIONS => \__('Post Mutations', 'graphql-api'),
-            self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Custom Post Media Mutations', 'graphql-api'),
-            self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Page Media Mutations', 'graphql-api'),
-            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Post Media Mutations', 'graphql-api'),
-            self::SCHEMA_POST_TAG_MUTATIONS => \__('Post Tag Mutations', 'graphql-api'),
-            self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Post Category Mutations', 'graphql-api'),
-            self::SCHEMA_COMMENT_MUTATIONS => \__('Comment Mutations', 'graphql-api'),
+            self::SCHEMA_USER_STATE_MUTATIONS => \__('User State Mutations', 'gato-graphql'),
+            self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Custom Post Mutations', 'gato-graphql'),
+            self::SCHEMA_PAGE_MUTATIONS => \__('Page Mutations', 'gato-graphql'),
+            self::SCHEMA_POST_MUTATIONS => \__('Post Mutations', 'gato-graphql'),
+            self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Custom Post Media Mutations', 'gato-graphql'),
+            self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Page Media Mutations', 'gato-graphql'),
+            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Post Media Mutations', 'gato-graphql'),
+            self::SCHEMA_POST_TAG_MUTATIONS => \__('Post Tag Mutations', 'gato-graphql'),
+            self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Post Category Mutations', 'gato-graphql'),
+            self::SCHEMA_COMMENT_MUTATIONS => \__('Comment Mutations', 'gato-graphql'),
             default => $module,
         };
     }
@@ -181,27 +181,27 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         switch ($module) {
             case self::SCHEMA_USER_STATE_MUTATIONS:
-                return \__('Have the user log-in, and be able to perform mutations', 'graphql-api');
+                return \__('Have the user log-in, and be able to perform mutations', 'gato-graphql');
             case self::SCHEMA_CUSTOMPOST_MUTATIONS:
-                return \__('Base functionality to mutate custom posts', 'graphql-api');
+                return \__('Base functionality to mutate custom posts', 'gato-graphql');
             case self::SCHEMA_PAGE_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:
                 return sprintf(
-                    \__('Execute mutations on %1$s', 'graphql-api'),
-                    $module === self::SCHEMA_PAGE_MUTATIONS ? \__('pages', 'graphql-api') : \__('posts', 'graphql-api')
+                    \__('Execute mutations on %1$s', 'gato-graphql'),
+                    $module === self::SCHEMA_PAGE_MUTATIONS ? \__('pages', 'gato-graphql') : \__('posts', 'gato-graphql')
                 );
             case self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS:
-                return \__('Execute mutations concerning media items on custom posts', 'graphql-api');
+                return \__('Execute mutations concerning media items on custom posts', 'gato-graphql');
             case self::SCHEMA_PAGEMEDIA_MUTATIONS:
-                return \__('Execute mutations concerning media items on pages', 'graphql-api');
+                return \__('Execute mutations concerning media items on pages', 'gato-graphql');
             case self::SCHEMA_POSTMEDIA_MUTATIONS:
-                return \__('Execute mutations concerning media items on posts', 'graphql-api');
+                return \__('Execute mutations concerning media items on posts', 'gato-graphql');
             case self::SCHEMA_POST_TAG_MUTATIONS:
-                return \__('Add tags to posts', 'graphql-api');
+                return \__('Add tags to posts', 'gato-graphql');
             case self::SCHEMA_POST_CATEGORY_MUTATIONS:
-                return \__('Add categories to posts', 'graphql-api');
+                return \__('Add categories to posts', 'gato-graphql');
             case self::SCHEMA_COMMENT_MUTATIONS:
-                return \__('Create comments', 'graphql-api');
+                return \__('Create comments', 'gato-graphql');
         }
         return parent::getDescription($module);
     }

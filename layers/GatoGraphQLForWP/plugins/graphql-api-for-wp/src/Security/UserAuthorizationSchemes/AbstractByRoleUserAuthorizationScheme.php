@@ -21,12 +21,12 @@ abstract class AbstractByRoleUserAuthorizationScheme extends AbstractUserAuthori
         $schemaEditorAccessRoles = $this->getSchemaEditorAccessRoles();
         if (count($schemaEditorAccessRoles) === 1) {
             return sprintf(
-                \__('Users with role: "%s"', 'graphql-api'),
+                \__('Users with role: "%s"', 'gato-graphql'),
                 $schemaEditorAccessRoles[0]
             );
         }
         return sprintf(
-            \__('Users with any role: "%s"', 'graphql-api'),
+            \__('Users with any role: "%s"', 'gato-graphql'),
             implode('", "', $schemaEditorAccessRoles)
         );
     }

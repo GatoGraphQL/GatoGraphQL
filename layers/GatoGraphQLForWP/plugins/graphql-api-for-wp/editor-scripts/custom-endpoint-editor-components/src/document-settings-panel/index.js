@@ -14,7 +14,7 @@ import { getMarkdownContentOrUseDefault } from '../markdown-loader';
  * Constants to customize
  */
 const DOCUMENT_SETTINGS_PANEL_NAME = 'custom-endpoint-document-settings-panel';
-const guideName = __('Creating Custom Endpoints', 'graphql-api');
+const guideName = __('Creating Custom Endpoints', 'gato-graphql');
 const pageFilenames = [
     'welcome-guide',
     'schema-config-options',
@@ -25,7 +25,7 @@ const pageFilenames = [
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Welcome Guide', 'graphql-api') }
+        title={ __('Welcome Guide', 'gato-graphql') }
     >
         <MarkdownGuideButton
             getMarkdownContentCallback={ getMarkdownContentOrUseDefault }

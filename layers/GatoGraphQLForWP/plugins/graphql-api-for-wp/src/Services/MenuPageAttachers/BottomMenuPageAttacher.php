@@ -207,8 +207,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('Modules', 'graphql-api'),
-                __('Modules', 'graphql-api'),
+                __('Modules', 'gato-graphql'),
+                __('Modules', 'gato-graphql'),
                 'manage_options',
                 $modulesMenuPage->getScreenID(),
                 $callable
@@ -220,8 +220,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('Settings', 'graphql-api'),
-                __('Settings', 'graphql-api'),
+                __('Settings', 'gato-graphql'),
+                __('Settings', 'gato-graphql'),
                 'manage_options',
                 $this->getSettingsMenuPage()->getScreenID(),
                 [$this->getSettingsMenuPage(), 'print']
@@ -240,8 +240,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             if (
                 $hookName = \add_submenu_page(
                     $menuName,
-                    __('About', 'graphql-api'),
-                    __('About', 'graphql-api'),
+                    __('About', 'gato-graphql'),
+                    __('About', 'gato-graphql'),
                     $schemaEditorAccessCapability,
                     $aboutMenuPage->getScreenID(),
                     [$aboutMenuPage, 'print']
@@ -259,8 +259,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('Recipes', 'graphql-api'),
-                __('Recipes', 'graphql-api'),
+                __('Recipes', 'gato-graphql'),
+                __('Recipes', 'gato-graphql'),
                 $schemaEditorAccessCapability,
                 $recipesMenuPage->getScreenID(),
                 $callable

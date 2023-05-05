@@ -43,7 +43,7 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
     {
         if (!isset($this->userAuthorizationSchemes[$name])) {
             throw new UserAuthorizationException(sprintf(
-                \__('User authorization scheme with name \'%s\' does not exist', 'graphql-api'),
+                \__('User authorization scheme with name \'%s\' does not exist', 'gato-graphql'),
                 $name
             ));
         }

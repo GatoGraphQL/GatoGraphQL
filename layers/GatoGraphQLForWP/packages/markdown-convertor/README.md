@@ -16,7 +16,7 @@ Convert Markdown to HTML
 Via Composer
 
 ``` bash
-composer require graphql-api/markdown-convertor
+composer require gato-graphql/markdown-convertor
 ```
 
 ## Development
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/graphql-api/markdown-convertor.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/gato-graphql/markdown-convertor.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/graphql-api/markdown-convertor/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/graphql-api/markdown-convertor.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/graphql-api/markdown-convertor.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/graphql-api/markdown-convertor.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/gato-graphql/markdown-convertor/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gato-graphql/markdown-convertor.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/gato-graphql/markdown-convertor.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/gato-graphql/markdown-convertor.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/graphql-api/markdown-convertor
-[link-travis]: https://travis-ci.org/graphql-api/markdown-convertor
-[link-scrutinizer]: https://scrutinizer-ci.com/g/graphql-api/markdown-convertor/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/graphql-api/markdown-convertor
-[link-downloads]: https://packagist.org/packages/graphql-api/markdown-convertor
+[link-packagist]: https://packagist.org/packages/gato-graphql/markdown-convertor
+[link-travis]: https://travis-ci.org/gato-graphql/markdown-convertor
+[link-scrutinizer]: https://scrutinizer-ci.com/g/gato-graphql/markdown-convertor/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/gato-graphql/markdown-convertor
+[link-downloads]: https://packagist.org/packages/gato-graphql/markdown-convertor
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

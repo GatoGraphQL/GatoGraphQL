@@ -4,7 +4,7 @@ Check that installing plugin in WP-CLI doesn't work:
   For instance, this doesn't work:
     https://api.github.com/repos/leoloso/PoP/actions/artifacts/416480816/zip
   But resolving to, works well:
-    https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/35501/signedartifactscontent?artifactName=graphql-api-testing&urlExpires=2022-10-29T11%3A17%3A05.4139998Z&urlSigningMethod=HMACV2&urlSignature=hBUqwaCmakdI5JzHR1K8Dxs1nhc4MC5pBx5Fy46ZWkg%3D
+    https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/35501/signedartifactscontent?artifactName=gato-graphql-testing&urlExpires=2022-10-29T11%3A17%3A05.4139998Z&urlSigningMethod=HMACV2&urlSignature=hBUqwaCmakdI5JzHR1K8Dxs1nhc4MC5pBx5Fy46ZWkg%3D
 Source:
     Downloading installation package from https://api.github.com/repos/leoloso/PoP/actions/artifacts/418953849/zip...
     Warning: Download failed. "Forbidden"
@@ -169,5 +169,5 @@ cd $LANDO_WEBSERVER_PWD
 
 # Install the plugins using WP-CLI
 # @see https://developer.wordpress.org/cli/commands/plugin/install/
-lando wp plugin install $ARTIFACT_DOWNLOAD_URLS --force --activate --url="graphql-api-pro-for-prod.lndo.site" --path=/app/wordpress
+lando wp plugin install $ARTIFACT_DOWNLOAD_URLS --force --activate --url="gato-graphql-pro-for-prod.lndo.site" --path=/app/wordpress
 ```

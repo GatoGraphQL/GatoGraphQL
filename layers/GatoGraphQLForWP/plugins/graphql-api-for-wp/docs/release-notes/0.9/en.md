@@ -212,7 +212,7 @@ Depending on the chosen option, different data must be provided. For instance, f
 
 We can pass several items under `metaQuery`, and decide if to do an `AND` or `OR` of their conditions by passing input `relation` on the first item in the list.
 
-Concerning security, meta entries are by default not exposed. To make them accessible, their meta key [must be added to the corresponding allowlist](https://graphql-api.com/guides/config/querying-by-meta-values/), or an error will be returned.
+Concerning security, meta entries are by default not exposed. To make them accessible, their meta key [must be added to the corresponding allowlist](https://gato-graphql.com/guides/config/querying-by-meta-values/), or an error will be returned.
 
 Let's see some examples. This query filters posts where meta key `_thumbnail_id` exists:
 
@@ -833,7 +833,7 @@ Now, we can execute the following query:
 ```json
 {
   "data": {
-    "siteURL": "https://graphql-api.com",
+    "siteURL": "https://gato-graphql.com",
     "stickyPosts": [
       1241,
       1788,
@@ -1493,7 +1493,7 @@ Will produce this response:
 
 ## Namespacing is applied to new types
 
-The newly introduced types (scalars, enums and input objects), as well as the existing types (object, interfaces and unions) [have their names namespaced](https://graphql-api.com/guides/schema/namespacing-the-schema/).
+The newly introduced types (scalars, enums and input objects), as well as the existing types (object, interfaces and unions) [have their names namespaced](https://gato-graphql.com/guides/schema/namespacing-the-schema/).
 
 That means that, if your plugin includes a custom scalar type `Price`, and another plugin does the same, these names will be namespaced (becoming `YourPlugin_Price` and `TheOtherPlugin_Price`), thus avoiding conflicts in the schema.
 
@@ -1666,7 +1666,7 @@ Now, they have their own:
 
 ## Return an error if access is not allowed for the option name or meta key
 
-When executing field `Root.option`, if [access to the option name is not allowed in the Settings](https://graphql-api.com/guides/config/defining-settings-allowed-entries/), the query now returns an error.
+When executing field `Root.option`, if [access to the option name is not allowed in the Settings](https://gato-graphql.com/guides/config/defining-settings-allowed-entries/), the query now returns an error.
 
 For instance, executing this query:
 
@@ -1696,7 +1696,7 @@ Returns:
 }
 ```
 
-The same behavior happens for the meta fields, when querying for a meta key whose [access is not allowed in the Settings](https://graphql-api.com/guides/config/querying-by-meta-values/):
+The same behavior happens for the meta fields, when querying for a meta key whose [access is not allowed in the Settings](https://gato-graphql.com/guides/config/querying-by-meta-values/):
 
 - `Post.metaValue`
 - `Post.metaValues`
@@ -1946,7 +1946,7 @@ The underlying GraphQL server powering the plugin can now be installed and execu
 
 This opens the doors to using the GraphQL API with other frameworks (eg: Laravel), and on any PHP environment, whether WordPress is available or not (such as when executing a Continous Integration task).
 
-This plugin itself benefits from this feature: the unit tests in the repo are being [executed in GitHub Actions](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml) (yet there's no instance of WordPress running). As an example, [this PHPUnit test](https://github.com/leoloso/PoP/blob/b6cc58227a06bc2e58b5d31da0d3fdaeec7eacad/layers/GatoGraphQLForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/WPFakerFixtureQueryExecutionGraphQLServerTest.php) asserts that [this GraphQL query](https://github.com/leoloso/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/fixture/success/query.gql) produces [this response](https://github.com/leoloso/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/graphql-api-for-wp/tests/Unit/Faker/fixture/success/query.json).
+This plugin itself benefits from this feature: the unit tests in the repo are being [executed in GitHub Actions](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml) (yet there's no instance of WordPress running). As an example, [this PHPUnit test](https://github.com/leoloso/PoP/blob/b6cc58227a06bc2e58b5d31da0d3fdaeec7eacad/layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-for-wp/tests/Unit/Faker/WPFakerFixtureQueryExecutionGraphQLServerTest.php) asserts that [this GraphQL query](https://github.com/leoloso/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-for-wp/tests/Unit/Faker/fixture/success/query.gql) produces [this response](https://github.com/leoloso/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-for-wp/tests/Unit/Faker/fixture/success/query.json).
 
 ## Browse documentation when editing a Schema Configuration, Custom Endpoint and Persisted Query
 

@@ -20,7 +20,7 @@
                     }
                 ],
                 "slug": "wordpress",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/wordpress\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/wordpress\/",
                 "urlPath": "\/tag\/wordpress\/"
             },
             {
@@ -38,7 +38,7 @@
                     }
                 ],
                 "slug": "security",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/security\/",
                 "urlPath": "\/tag\/security\/"
             },
             {
@@ -56,7 +56,7 @@
                     }
                 ],
                 "slug": "release",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/release\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/release\/",
                 "urlPath": "\/tag\/release\/"
             },
             {
@@ -82,7 +82,7 @@
                     }
                 ],
                 "slug": "plugin",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/plugin\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/plugin\/",
                 "urlPath": "\/tag\/plugin\/"
             },
             {
@@ -100,7 +100,7 @@
                     }
                 ],
                 "slug": "ideas",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/ideas\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/ideas\/",
                 "urlPath": "\/tag\/ideas\/"
             },
             {
@@ -118,7 +118,7 @@
                     }
                 ],
                 "slug": "graphql",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/graphql\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/graphql\/",
                 "urlPath": "\/tag\/graphql\/"
             },
             {
@@ -148,7 +148,7 @@
                     }
                 ],
                 "slug": "features",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/features\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/features\/",
                 "urlPath": "\/tag\/features\/"
             },
             {
@@ -161,7 +161,7 @@
                 "postCount": 0,
                 "posts": [],
                 "slug": "also-never-used",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/also-never-used\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/also-never-used\/",
                 "urlPath": "\/tag\/also-never-used\/"
             },
             {
@@ -179,7 +179,7 @@
                     }
                 ],
                 "slug": "advanced",
-                "url": "https:\/\/graphql-api.lndo.site\/tag\/advanced\/",
+                "url": "https:\/\/gato-graphql.lndo.site\/tag\/advanced\/",
                 "urlPath": "\/tag\/advanced\/"
             }
         ],
@@ -234,7 +234,7 @@
                         }
                     ],
                     "slug": "security",
-                    "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
+                    "url": "https:\/\/gato-graphql.lndo.site\/tag\/security\/",
                     "urlPath": "\/tag\/security\/"
                 },
                 {
@@ -264,7 +264,7 @@
                         }
                     ],
                     "slug": "features",
-                    "url": "https:\/\/graphql-api.lndo.site\/tag\/features\/",
+                    "url": "https:\/\/gato-graphql.lndo.site\/tag\/features\/",
                     "urlPath": "\/tag\/features\/"
                 }
             ],

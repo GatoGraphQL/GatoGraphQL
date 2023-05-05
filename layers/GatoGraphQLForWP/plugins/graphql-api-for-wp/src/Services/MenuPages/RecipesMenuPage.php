@@ -200,7 +200,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 $activeRecipeName = $tab;
             }
         }
-        $class = 'wrap vertical-tabs graphql-api-tabpanel';
+        $class = 'wrap vertical-tabs gato-graphql-tabpanel';
 
         $markdownContent = sprintf(
             <<<HTML
@@ -210,9 +210,9 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
             HTML,
-            'graphql-api-recipes',
+            'gato-graphql-recipes',
             $class,
-            \__('GraphQL API - Recipes: Use Cases, Best Practices, and Useful Queries', 'graphql-api')
+            \__('GraphQL API - Recipes: Use Cases, Best Practices, and Useful Queries', 'gato-graphql')
         );
 
         // This page URL
@@ -266,7 +266,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             ) ?? sprintf(
                 '<p>%s</p>',
                 sprintf(
-                    \__('Oops, there was a problem loading recipe "%s"', 'graphql-api'),
+                    \__('Oops, there was a problem loading recipe "%s"', 'gato-graphql'),
                     $recipeEntryTitle
                 )
             );

@@ -17,7 +17,7 @@ const withPROCard = () => createHigherOrderComponent(
 				<CardHeader isShady>
 					<CardHeaderContent
 						{ ...props }
-						documentationTitle={ __(`Documentation for: "${ header }"`, 'graphql-api') }
+						documentationTitle={ __(`Documentation for: "${ header }"`, 'gato-graphql') }
 						header={ `🔒 ${ header }` }
 					/>
 					<GoProLink />

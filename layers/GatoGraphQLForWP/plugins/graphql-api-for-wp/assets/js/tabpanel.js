@@ -1,12 +1,12 @@
 jQuery( document ).ready( function($){
-    $('.graphql-api-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab').on('click', function(e){
+    $('.gato-graphql-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab').on('click', function(e){
         e.preventDefault();
         navTabAnchor = $(this);
         tab = navTabAnchor.data('tab-target');
         if (tab == undefined) {
             tab = navTabAnchor.attr('href');
         }
-        tabPanel = $(tab).closest('.graphql-api-tabpanel');
+        tabPanel = $(tab).closest('.gato-graphql-tabpanel');
         /**
          * Allow to specify which is the target to show/hide.
          * This allows to have a tabPanel wrapping another tabPanel,

@@ -329,20 +329,20 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_POSTS => \__('Posts', 'graphql-api'),
-            self::SCHEMA_COMMENTS => \__('Comments', 'graphql-api'),
-            self::SCHEMA_USERS => \__('Users', 'graphql-api'),
-            self::SCHEMA_USER_ROLES => \__('User Roles', 'graphql-api'),
-            self::SCHEMA_USER_AVATARS => \__('User Avatars', 'graphql-api'),
-            self::SCHEMA_PAGES => \__('Pages', 'graphql-api'),
-            self::SCHEMA_MEDIA => \__('Media', 'graphql-api'),
-            self::SCHEMA_TAGS => \__('Tags', 'graphql-api'),
-            self::SCHEMA_POST_TAGS => \__('Post Tags', 'graphql-api'),
-            self::SCHEMA_CATEGORIES => \__('Categories', 'graphql-api'),
-            self::SCHEMA_POST_CATEGORIES => \__('Post Categories', 'graphql-api'),
-            self::SCHEMA_MENUS => \__('Menus', 'graphql-api'),
-            self::SCHEMA_SETTINGS => \__('Settings', 'graphql-api'),
-            self::SCHEMA_CUSTOMPOSTS => \__('Custom Posts', 'graphql-api'),
+            self::SCHEMA_POSTS => \__('Posts', 'gato-graphql'),
+            self::SCHEMA_COMMENTS => \__('Comments', 'gato-graphql'),
+            self::SCHEMA_USERS => \__('Users', 'gato-graphql'),
+            self::SCHEMA_USER_ROLES => \__('User Roles', 'gato-graphql'),
+            self::SCHEMA_USER_AVATARS => \__('User Avatars', 'gato-graphql'),
+            self::SCHEMA_PAGES => \__('Pages', 'gato-graphql'),
+            self::SCHEMA_MEDIA => \__('Media', 'gato-graphql'),
+            self::SCHEMA_TAGS => \__('Tags', 'gato-graphql'),
+            self::SCHEMA_POST_TAGS => \__('Post Tags', 'gato-graphql'),
+            self::SCHEMA_CATEGORIES => \__('Categories', 'gato-graphql'),
+            self::SCHEMA_POST_CATEGORIES => \__('Post Categories', 'gato-graphql'),
+            self::SCHEMA_MENUS => \__('Menus', 'gato-graphql'),
+            self::SCHEMA_SETTINGS => \__('Settings', 'gato-graphql'),
+            self::SCHEMA_CUSTOMPOSTS => \__('Custom Posts', 'gato-graphql'),
             default => $module,
         };
     }
@@ -352,72 +352,72 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         switch ($module) {
             case self::SCHEMA_POSTS:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('posts', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('posts', 'gato-graphql'),
                     $this->getPostObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_USERS:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('users', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('users', 'gato-graphql'),
                     $this->getUserObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_USER_ROLES:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('user roles', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('user roles', 'gato-graphql'),
                     $this->getUserRoleObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_USER_AVATARS:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('user avatars', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('user avatars', 'gato-graphql'),
                     $this->getUserAvatarObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_PAGES:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('pages', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('pages', 'gato-graphql'),
                     $this->getPageObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_MEDIA:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('media elements', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('media elements', 'gato-graphql'),
                     $this->getMediaObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_COMMENTS:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('comments', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('comments', 'gato-graphql'),
                     $this->getCommentObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_POST_TAGS:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('post tags', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('post tags', 'gato-graphql'),
                     $this->getPostTagObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_POST_CATEGORIES:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('post categories', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('post categories', 'gato-graphql'),
                     $this->getPostCategoryObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_MENUS:
                 return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'graphql-api'),
-                    \__('menus', 'graphql-api'),
+                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                    \__('menus', 'gato-graphql'),
                     $this->getMenuObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_SETTINGS:
-                return \__('Fetch settings from the site', 'graphql-api');
+                return \__('Fetch settings from the site', 'gato-graphql');
             case self::SCHEMA_CUSTOMPOSTS:
-                return \__('Base functionality for all custom posts', 'graphql-api');
+                return \__('Base functionality for all custom posts', 'gato-graphql');
             case self::SCHEMA_TAGS:
-                return \__('Base functionality for all tags', 'graphql-api');
+                return \__('Base functionality for all tags', 'gato-graphql');
             case self::SCHEMA_CATEGORIES:
-                return \__('Base functionality for all categories', 'graphql-api');
+                return \__('Base functionality for all categories', 'gato-graphql');
         }
         return parent::getDescription($module);
     }
@@ -602,11 +602,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         // Common variables to set the limit on the schema types
         $limitArg = 'limit';
         $unlimitedValue = -1;
-        $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited.', 'graphql-api');
-        $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited.', 'graphql-api');
-        $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'graphql-api');
-        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'graphql-api');
-        $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each %2$s taxonomy\'s associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'graphql-api');
+        $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited.', 'gato-graphql');
+        $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited.', 'gato-graphql');
+        $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'gato-graphql');
+        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gato-graphql');
+        $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each %2$s taxonomy\'s associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'gato-graphql');
         $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if (
@@ -622,14 +622,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ])
         ) {
             $moduleEntities = [
-                self::SCHEMA_CUSTOMPOSTS => \__('custom posts', 'graphql-api'),
-                self::SCHEMA_POSTS => \__('posts', 'graphql-api'),
-                self::SCHEMA_USERS => \__('users', 'graphql-api'),
-                self::SCHEMA_MEDIA => \__('media items', 'graphql-api'),
-                self::SCHEMA_MENUS => \__('menus', 'graphql-api'),
-                self::SCHEMA_TAGS => \__('tags', 'graphql-api'),
-                self::SCHEMA_CATEGORIES => \__('categories', 'graphql-api'),
-                self::SCHEMA_PAGES => \__('pages', 'graphql-api'),
+                self::SCHEMA_CUSTOMPOSTS => \__('custom posts', 'gato-graphql'),
+                self::SCHEMA_POSTS => \__('posts', 'gato-graphql'),
+                self::SCHEMA_USERS => \__('users', 'gato-graphql'),
+                self::SCHEMA_MEDIA => \__('media items', 'gato-graphql'),
+                self::SCHEMA_MENUS => \__('menus', 'gato-graphql'),
+                self::SCHEMA_TAGS => \__('tags', 'gato-graphql'),
+                self::SCHEMA_CATEGORIES => \__('categories', 'gato-graphql'),
+                self::SCHEMA_PAGES => \__('pages', 'gato-graphql'),
             ];
             $entities = $moduleEntities[$module];
             $defaultLimitOption = ModuleSettingOptions::LIST_DEFAULT_LIMIT;
@@ -641,7 +641,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultLimitOption
                 ),
                 Properties::TITLE => sprintf(
-                    \__('Default limit for %s', 'graphql-api'),
+                    \__('Default limit for %s', 'gato-graphql'),
                     $entities
                 ),
                 Properties::DESCRIPTION => sprintf(
@@ -660,7 +660,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $maxLimitOption
                 ),
                 Properties::TITLE => sprintf(
-                    \__('Max limit for %s', 'graphql-api'),
+                    \__('Max limit for %s', 'gato-graphql'),
                     $entities
                 ),
                 Properties::DESCRIPTION => sprintf(
@@ -687,9 +687,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Included custom post types', 'graphql-api'),
+                    Properties::TITLE => \__('Included custom post types', 'gato-graphql'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'graphql-api'),
+                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'gato-graphql'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
                         $this->getPostObjectTypeResolver()->getTypeName(),
                         $this->getPageObjectTypeResolver()->getTypeName(),
@@ -710,9 +710,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Use single type instead of union type?', 'graphql-api'),
+                    Properties::TITLE => \__('Use single type instead of union type?', 'gato-graphql'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then directly return this single type, instead of the union type?', 'graphql-api'),
+                        \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then directly return this single type, instead of the union type?', 'gato-graphql'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
                         $this->getPostObjectTypeResolver()->getTypeName(),
                     ),
@@ -728,11 +728,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => sprintf(
                         $sensitiveDataTitlePlaceholder,
-                        \__('custom post status', 'graphql-api'),
+                        \__('custom post status', 'gato-graphql'),
                     ),
                     Properties::DESCRIPTION => sprintf(
                         $sensitiveDataDescPlaceholder,
-                        \__('custom post status', 'graphql-api'),
+                        \__('custom post status', 'gato-graphql'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -746,11 +746,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => sprintf(
                         $sensitiveDataTitlePlaceholder,
-                        \__('user email', 'graphql-api'),
+                        \__('user email', 'gato-graphql'),
                     ),
                     Properties::DESCRIPTION => sprintf(
                         $sensitiveDataDescPlaceholder,
-                        \__('user email', 'graphql-api'),
+                        \__('user email', 'gato-graphql'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -763,10 +763,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 foreach ($possibleTagTaxonomies as $tagTaxonomyName) {
                     $tagTaxonomyObject = $queryableTagTaxonomyNameObjects[$tagTaxonomyName];
                     $possibleValues[$tagTaxonomyName] = sprintf(
-                        $this->__('%s (CPT: "%s")', 'graphql-api'),
+                        $this->__('%s (CPT: "%s")', 'gato-graphql'),
                         $tagTaxonomyName,
                         implode(
-                            $this->__('", "', 'graphql-api'),
+                            $this->__('", "', 'gato-graphql'),
                             $tagTaxonomyObject->object_type
                         )
                     );
@@ -779,16 +779,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Included tag taxonomies', 'graphql-api'),
+                    Properties::TITLE => \__('Included tag taxonomies', 'gato-graphql'),
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
                         sprintf(
                             $taxonomyDescPlaceholder,
-                            \__('non-', 'graphql-api'),
-                            \__('tag', 'graphql-api'),
+                            \__('non-', 'gato-graphql'),
+                            \__('tag', 'gato-graphql'),
                         ),
                         sprintf(
-                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'graphql-api'),
+                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'gato-graphql'),
                             $this->getTagUnionTypeResolver()->getTypeName(),
                             $this->getPostTagObjectTypeResolver()->getTypeName(),
                             $this->getGenericTagObjectTypeResolver()->getTypeName(),
@@ -810,10 +810,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 foreach ($possibleCategoryTaxonomies as $categoryTaxonomyName) {
                     $categoryTaxonomyObject = $queryableCategoryTaxonomyNameObjects[$categoryTaxonomyName];
                     $possibleValues[$categoryTaxonomyName] = sprintf(
-                        $this->__('%s (CPT: "%s")', 'graphql-api'),
+                        $this->__('%s (CPT: "%s")', 'gato-graphql'),
                         $categoryTaxonomyName,
                         implode(
-                            $this->__('", "', 'graphql-api'),
+                            $this->__('", "', 'gato-graphql'),
                             $categoryTaxonomyObject->object_type
                         )
                     );
@@ -826,16 +826,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Included category taxonomies', 'graphql-api'),
+                    Properties::TITLE => \__('Included category taxonomies', 'gato-graphql'),
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
                         sprintf(
                             $taxonomyDescPlaceholder,
                             '',
-                            \__('category', 'graphql-api'),
+                            \__('category', 'gato-graphql'),
                         ),
                         sprintf(
-                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'graphql-api'),
+                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'gato-graphql'),
                             $this->getCategoryUnionTypeResolver()->getTypeName(),
                             $this->getPostCategoryObjectTypeResolver()->getTypeName(),
                             $this->getGenericCategoryObjectTypeResolver()->getTypeName(),
@@ -857,7 +857,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default limit for querying comments in the Root', 'graphql-api'),
+                Properties::TITLE => \__('Default limit for querying comments in the Root', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
                     $defaultLimitMessagePlaceholder,
                     '<code>Root.comments</code>',
@@ -875,11 +875,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default limit for querying comments under a custom post or comment', 'graphql-api'),
+                Properties::TITLE => \__('Default limit for querying comments under a custom post or comment', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
                     $defaultLimitMessagePlaceholder,
                     sprintf(
-                        \__('%s and %s', 'graphql-api'),
+                        \__('%s and %s', 'gato-graphql'),
                         '<code>Commentable.comments</code>',
                         '<code>Comment.responses</code>'
                     ),
@@ -897,10 +897,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Max limit for querying comments', 'graphql-api'),
+                Properties::TITLE => \__('Max limit for querying comments', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
-                    \__('comments', 'graphql-api'),
+                    \__('comments', 'gato-graphql'),
                     $unlimitedValue,
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
@@ -916,11 +916,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
-                    \__('comment status', 'graphql-api'),
+                    \__('comment status', 'gato-graphql'),
                 ),
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
-                    \__('comment status', 'graphql-api'),
+                    \__('comment status', 'gato-graphql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -929,15 +929,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_SETTINGS,
             ])
         ) {
-            $entriesTitle = \__('Settings entries', 'graphql-api');
-            $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'graphql-api');
-            $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'graphql-api');
+            $entriesTitle = \__('Settings entries', 'gato-graphql');
+            $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gato-graphql');
+            $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'gato-graphql');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $moduleDescriptions = [
                 self::SCHEMA_SETTINGS => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'graphql-api'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gato-graphql'),
                     sprintf(
-                        \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'graphql-api'),
+                        \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'gato-graphql'),
                         'optionValue',
                         'optionValues',
                         'optionObjectValue'
@@ -980,17 +980,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Behavior', 'graphql-api'),
+                Properties::TITLE => \__('Behavior', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
                     '%s %s%s',
-                    \__('Are the entries being allowed or denied access to?', 'graphql-api'),
-                    \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'graphql-api'),
+                    \__('Are the entries being allowed or denied access to?', 'gato-graphql'),
+                    \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'gato-graphql'),
                     $defaultValueDesc,
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    Behaviors::ALLOW => \__('Allow access', 'graphql-api'),
-                    Behaviors::DENY => \__('Deny access', 'graphql-api'),
+                    Behaviors::ALLOW => \__('Allow access', 'gato-graphql'),
+                    Behaviors::DENY => \__('Deny access', 'gato-graphql'),
                 ],
             ];
         } elseif ($module === self::SCHEMA_USER_AVATARS) {
@@ -1001,9 +1001,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default avatar size', 'graphql-api'),
+                Properties::TITLE => \__('Default avatar size', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Size of the avatar (in pixels) when not providing argument <code>"size"</code> in field <code>%s.avatar</code>', 'graphql-api'),
+                    \__('Size of the avatar (in pixels) when not providing argument <code>"size"</code> in field <code>%s.avatar</code>', 'gato-graphql'),
                     $this->getUserObjectTypeResolver()->getTypeName()
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
@@ -1019,11 +1019,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
-                    \__('user roles', 'graphql-api'),
+                    \__('user roles', 'gato-graphql'),
                 ),
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
-                    \__('user roles', 'graphql-api'),
+                    \__('user roles', 'gato-graphql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -1037,11 +1037,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
-                    \__('user capabilities', 'graphql-api'),
+                    \__('user capabilities', 'gato-graphql'),
                 ),
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
-                    \__('user capabilities', 'graphql-api'),
+                    \__('user capabilities', 'gato-graphql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];

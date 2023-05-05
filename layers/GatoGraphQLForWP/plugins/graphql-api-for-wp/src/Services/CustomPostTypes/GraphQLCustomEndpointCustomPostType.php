@@ -102,7 +102,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
      */
     protected function getCustomPostTypeName(): string
     {
-        return \__('GraphQL custom endpoint', 'graphql-api');
+        return \__('GraphQL custom endpoint', 'gato-graphql');
     }
 
     /**
@@ -112,7 +112,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
      */
     protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
-        return \__('GraphQL Custom Endpoints', 'graphql-api');
+        return \__('GraphQL Custom Endpoints', 'gato-graphql');
     }
 
     /**
@@ -131,7 +131,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         return array_merge(
             parent::getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
             array(
-                'all_items' => \__('Custom Endpoints', 'graphql-api'),
+                'all_items' => \__('Custom Endpoints', 'gato-graphql'),
             )
         );
     }
@@ -182,7 +182,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
      */
     protected function getExecuteActionLabel(): string
     {
-        return __('View endpoint', 'graphql-api');
+        return __('View endpoint', 'gato-graphql');
     }
 
     public function getEndpointOptionsBlock(): BlockInterface

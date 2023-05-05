@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/img/graphql-api-logo-with-name.jpg" width="450" /></p>
+<p align="center"><img src="assets/img/gato-graphql-logo-with-name.jpg" width="450" /></p>
 
 # GraphQL API for WordPress
 
@@ -9,7 +9,7 @@
 <!-- [![GitHub release][ico-release]][link-release] -->
 <!-- [![Github all releases][ico-downloads]][link-downloads] -->
 
-Transform your WordPress site into a modern GraphQL server: [graphql-api.com](https://graphql-api.com).
+Transform your WordPress site into a modern GraphQL server: [gato-graphql.com](https://gato-graphql.com).
 
 ![The interactive schema visualizer](docs/images/interactive-schema.png)
 
@@ -17,7 +17,7 @@ This plugin is the implementation for WordPress of [GraphQL by PoP](https://grap
 
 <!-- ## Why
 
-Please read the author's [introduction to the GraphQL API for WordPress](https://leoloso.com/posts/introducing-the-graphql-api-for-wordpress/), which describes:
+Please read the author's [introduction to the GraphQL API for WordPress](https://leoloso.com/posts/introducing-the-gato-graphql-for-wordpress/), which describes:
 
 - How does it compare with the existing solutions: WP REST API and WPGraphQL
 - An overview of all its features
@@ -31,11 +31,11 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 
 ## Installing the plugin (for production)
 
-👀 Instructions: [Installing the GraphQL API for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-graphql-api-for-wordpress.md).
+👀 Instructions: [Installing the GraphQL API for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-gato-graphql-for-wordpress.md).
 
 ## Development
 
-<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/graphql-api-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/graphql-api-for-wp). -->
+<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/gato-graphql-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp). -->
 
 👀 Instructions: [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
 
@@ -156,7 +156,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 - [YouTube video: GraphQL API for WordPress demo](https://youtu.be/LnyNyT2RwwI)
 - [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
 - [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
-- [Comparing the GraphQL API for WordPress vs WPGraphQL](https://graphql-api.com/blog/graphql-api-vs-wpgraphql-the-fight/)
+- [Comparing the GraphQL API for WordPress vs WPGraphQL](https://gato-graphql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
 
 <details>
 
@@ -182,7 +182,7 @@ Explanation of how the codebase is split into granular packages, to enable CMS-a
 
 Description of how the plugin is scoped:
 
-- [GraphQL API for WordPress is now scoped, thanks to PHP-Scoper!](https://graphql-api.com/blog/graphql-api-for-wp-is-now-scoped-thanks-to-php-scoper/)
+- [GraphQL API for WordPress is now scoped, thanks to PHP-Scoper!](https://gato-graphql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)
 
 ### GraphQL by PoP documentation
 
@@ -296,22 +296,22 @@ If you discover any security related issues, please email leo@getpop.org instead
 GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/GatoGraphQL/graphql-api-for-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GatoGraphQL/graphql-api-for-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/GatoGraphQL/graphql-api-for-wp.svg?style=flat-square
-[ico-release]: https://img.shields.io/github/release/GatoGraphQL/graphql-api-for-wp.svg
-[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/graphql-api-for-wp/total.svg
+[ico-travis]: https://img.shields.io/travis/GatoGraphQL/gato-graphql-for-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GatoGraphQL/gato-graphql-for-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/GatoGraphQL/gato-graphql-for-wp.svg?style=flat-square
+[ico-release]: https://img.shields.io/github/release/GatoGraphQL/gato-graphql-for-wp.svg
+[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/gato-graphql-for-wp/total.svg
 
-[link-travis]: https://travis-ci.com/github/GatoGraphQL/graphql-api-for-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/graphql-api-for-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/graphql-api-for-wp
-[link-downloads]: https://GitHub.com/GatoGraphQL/graphql-api-for-wp/releases/
-[link-release]: https://GitHub.com/GatoGraphQL/graphql-api-for-wp/releases/
-[link-downloads]: https://GitHub.com/GatoGraphQL/graphql-api-for-wp/releases/
+[link-travis]: https://travis-ci.com/github/GatoGraphQL/gato-graphql-for-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/gato-graphql-for-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/gato-graphql-for-wp
+[link-downloads]: https://GitHub.com/GatoGraphQL/gato-graphql-for-wp/releases/
+[link-release]: https://GitHub.com/GatoGraphQL/gato-graphql-for-wp/releases/
+[link-downloads]: https://GitHub.com/GatoGraphQL/gato-graphql-for-wp/releases/
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
 
-[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/graphql-api.zip
+[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gato-graphql.zip
 
 
 <!--

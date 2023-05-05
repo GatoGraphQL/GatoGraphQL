@@ -106,13 +106,13 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
             $blockContentPlaceholder = '<p><em>%s</em></p>';
             $blockContent = sprintf(
                 $blockContentPlaceholder,
-                \__('This section is not enabled, since the persisted query has no ancestor.', 'graphql-api')
+                \__('This section is not enabled, since the persisted query has no ancestor.', 'gato-graphql')
             );
         } else {
             $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
             $blockContent = sprintf(
                 $blockContentPlaceholder,
-                \__('Inherit query from ancestor(s):', 'graphql-api'),
+                \__('Inherit query from ancestor(s):', 'gato-graphql'),
                 $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_INHERIT_QUERY] ?? false)
             );
         }
@@ -128,7 +128,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
-            \__('API Hierarchy', 'graphql-api'),
+            \__('API Hierarchy', 'gato-graphql'),
             $blockContent
         );
     }

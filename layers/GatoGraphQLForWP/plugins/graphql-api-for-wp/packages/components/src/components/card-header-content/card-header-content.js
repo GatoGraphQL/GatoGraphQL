@@ -8,7 +8,7 @@ const CardHeaderContent = ( props ) => {
 		tooltip,
 		isSelected,
 		getMarkdownContentCallback,
-		documentationTitle = __(`Documentation for: "${ header }"`, 'graphql-api')
+		documentationTitle = __(`Documentation for: "${ header }"`, 'gato-graphql')
 	} = props;
 	return (
 		<span>

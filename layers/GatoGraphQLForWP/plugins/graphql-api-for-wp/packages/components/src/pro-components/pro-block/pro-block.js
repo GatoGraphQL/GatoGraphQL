@@ -19,9 +19,9 @@ const GraphAPIPROBlock = ( props ) => {
 			<em>{ description }</em>
 			<MarkdownInfoModalButton
 				{ ...props }
-				title = { __(`Documentation for: "${ title }"`, 'graphql-api') }
+				title = { __(`Documentation for: "${ title }"`, 'gato-graphql') }
 				getMarkdownContentCallback = { getMarkdownContentCallback }
-				text = { __('View details', 'graphql-api') }
+				text = { __('View details', 'gato-graphql') }
 				// icon = { null }
 				variant = ""
 				isSmall = { false }
