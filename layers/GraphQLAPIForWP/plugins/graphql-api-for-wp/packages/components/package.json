@@ -34,6 +34,7 @@
     "@wordpress/edit-post": "^3.21.0",
     "@wordpress/scripts": "^12.1.0",
     "prettier": "npm:wp-prettier@2.0.5",
+    "raw-loader": "^4.0.2",
     "react-select": "^3.0.8"
   }
 }
