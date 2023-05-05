@@ -23,7 +23,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ## Added documentation for PRO modules and their corresponding Schema Configuration functionalities
 
-PRO modules are installed by the Gato GraphQL PRO plugin, which has been released alongside the Gato GraphQL for WordPress v1.0.
+PRO modules are installed by the Gato GraphQL PRO plugin, which has been released alongside the Gato GraphQL plugin v1.0.
 
 Documentation for the corresponding PRO features can be visualized in the plugin, by:
 

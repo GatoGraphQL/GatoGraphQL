@@ -17,7 +17,7 @@ This plugin is the implementation for WordPress of [GraphQL by PoP](https://grap
 
 <!-- ## Why
 
-Please read the author's [introduction to the Gato GraphQL for WordPress](https://leoloso.com/posts/introducing-the-gato-graphql-for-wordpress/), which describes:
+Please read the author's [introduction to the Gato GraphQL plugin](https://leoloso.com/posts/introducing-the-gato-graphql-for-wordpress/), which describes:
 
 - How does it compare with the existing solutions: WP REST API and WPGraphQL
 - An overview of all its features
@@ -31,7 +31,7 @@ Please read the author's [introduction to the Gato GraphQL for WordPress](https:
 
 ## Installing the plugin (for production)
 
-👀 Instructions: [Installing the Gato GraphQL for WordPress plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-gato-graphql-for-wordpress.md).
+👀 Instructions: [Installing the Gato GraphQL plugin](https://github.com/leoloso/PoP/blob/master/docs/installing-gato-graphql-for-wordpress.md).
 
 ## Development
 
@@ -156,7 +156,7 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 - [YouTube video: Gato GraphQL for WordPress demo](https://youtu.be/LnyNyT2RwwI)
 - [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
 - [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
-- [Comparing the Gato GraphQL for WordPress vs WPGraphQL](https://gatographql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
+- [Comparing the Gato GraphQL plugin vs WPGraphQL](https://gatographql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
 
 <details>
 

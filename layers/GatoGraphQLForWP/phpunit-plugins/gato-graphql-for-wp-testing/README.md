@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Utilities for testing the Gato GraphQL for WordPress
+Utilities for testing the Gato GraphQL plugin
 
 ## Install
 

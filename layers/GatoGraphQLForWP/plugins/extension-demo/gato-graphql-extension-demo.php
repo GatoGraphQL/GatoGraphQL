@@ -2,7 +2,7 @@
 /*
 Plugin Name: Gato GraphQL - Extension Demo
 Plugin URI: https://github.com/GraphQLAPI/extension-demo
-Description: Demonstration of extending the GraphQL schema, for the Gato GraphQL for WordPress
+Description: Demonstration of extending the GraphQL schema, for the Gato GraphQL plugin
 Version: 1.0.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1

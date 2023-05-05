@@ -1,7 +1,7 @@
 {
   "name": "@gatographql/components",
   "version": "1.0.0-dev",
-  "description": "Components used by the Gato GraphQL for WordPress plugin",
+  "description": "Components used by the Gato GraphQL plugin",
   "repository": {
     "type": "git",
     "url": "https://github.com/GraphQLAPI/gato-graphql-for-wp.git",
