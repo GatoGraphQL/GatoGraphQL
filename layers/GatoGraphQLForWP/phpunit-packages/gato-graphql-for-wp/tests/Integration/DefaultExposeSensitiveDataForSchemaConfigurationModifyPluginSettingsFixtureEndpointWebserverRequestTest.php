@@ -26,7 +26,7 @@ class DefaultExposeSensitiveDataForSchemaConfigurationModifyPluginSettingsFixtur
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-expose-sensitive-data';
+        return 'gatographql_gatographql_schema-expose-sensitive-data';
     }
 
     protected function getPluginSettingsNewValue(): mixed

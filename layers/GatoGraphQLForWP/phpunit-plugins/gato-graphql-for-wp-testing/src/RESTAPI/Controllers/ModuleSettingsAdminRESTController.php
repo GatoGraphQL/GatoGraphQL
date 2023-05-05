@@ -32,7 +32,7 @@ use function rest_url;
  *   -X POST \
  *   -H "Content-Type: application/json" \
  *   -d '{"jsonEncodedOptionValues": "{\"path\":\"/anotherGraphiQL/\"}"}' \
- *   https://gato-graphql.lndo.site/wp-json/gato-graphql/v1/admin/module-settings/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
+ *   https://gato-graphql.lndo.site/wp-json/gato-graphql/v1/admin/module-settings/gatographql_gatographql_graphiql-for-single-endpoint/
  * ```
  */
 class ModuleSettingsAdminRESTController extends AbstractAdminRESTController

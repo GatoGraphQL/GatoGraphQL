@@ -22,7 +22,7 @@ class AllowedTaxonomyMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-taxonomy-meta';
+        return 'gatographql_gatographql_schema-taxonomy-meta';
     }
 
     protected function getPluginSettingsNewValue(): mixed

@@ -21,6 +21,6 @@ class SchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSettingsFixt
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_single-endpoint';
+        return 'gatographql_gatographql_single-endpoint';
     }
 }

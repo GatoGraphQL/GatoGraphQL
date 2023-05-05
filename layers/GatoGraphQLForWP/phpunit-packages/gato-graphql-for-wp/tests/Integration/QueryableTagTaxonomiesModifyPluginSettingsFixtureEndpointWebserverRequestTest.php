@@ -22,7 +22,7 @@ class QueryableTagTaxonomiesModifyPluginSettingsFixtureEndpointWebserverRequestT
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-tags';
+        return 'gatographql_gatographql_schema-tags';
     }
 
     protected function getPluginSettingsNewValue(): mixed

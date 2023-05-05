@@ -17,7 +17,7 @@ trait DisableSchemaModulesOnPrivateEndpointNoChangeAdminEndpointsFixtureEndpoint
      */
     protected function customizeModuleEntries(array $moduleEntries): array
     {
-        $moduleEntries['graphqlapi_graphqlapi/schema-users']['response-disabled'] = $moduleEntries['graphqlapi_graphqlapi/schema-users']['response-enabled'];
+        $moduleEntries['gatographql_gatographql/schema-users']['response-disabled'] = $moduleEntries['gatographql_gatographql/schema-users']['response-enabled'];
         return $moduleEntries;
     }
 }

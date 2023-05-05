@@ -22,7 +22,7 @@ class QueryableCustomPostsModifyPluginSettingsFixtureEndpointWebserverRequestTes
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-customposts';
+        return 'gatographql_gatographql_schema-customposts';
     }
 
     protected function getPluginSettingsNewValue(): mixed

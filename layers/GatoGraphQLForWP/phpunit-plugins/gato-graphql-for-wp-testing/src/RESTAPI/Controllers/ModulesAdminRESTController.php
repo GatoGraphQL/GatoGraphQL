@@ -28,7 +28,7 @@ use function rest_url;
  *   -X POST \
  *   -H "Content-Type: application/json" \
  *   -d '{"state": "enabled"}' \
- *   https://gato-graphql.lndo.site/wp-json/gato-graphql/v1/admin/modules/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
+ *   https://gato-graphql.lndo.site/wp-json/gato-graphql/v1/admin/modules/gatographql_gatographql_graphiql-for-single-endpoint/
  * ```
  */
 class ModulesAdminRESTController extends AbstractAdminRESTController

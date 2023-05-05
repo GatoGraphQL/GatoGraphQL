@@ -21,6 +21,6 @@ class DefaultSchemaConfigurationForPersistedQueryEndpointQueryExecutionModifyPlu
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_persisted-queries';
+        return 'gatographql_gatographql_persisted-queries';
     }
 }

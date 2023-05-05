@@ -22,7 +22,7 @@ class AllowedSettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest ext
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-settings';
+        return 'gatographql_gatographql_schema-settings';
     }
 
     protected function getPluginSettingsNewValue(): mixed

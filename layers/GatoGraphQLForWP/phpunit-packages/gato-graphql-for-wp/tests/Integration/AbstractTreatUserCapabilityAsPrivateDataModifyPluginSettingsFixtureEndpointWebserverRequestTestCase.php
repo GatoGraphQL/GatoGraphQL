@@ -20,7 +20,7 @@ abstract class AbstractTreatUserCapabilityAsPrivateDataModifyPluginSettingsFixtu
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-user-roles';
+        return 'gatographql_gatographql_schema-user-roles';
     }
 
     protected function getPluginSettingsNewValue(): mixed

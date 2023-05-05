@@ -28,7 +28,7 @@ class PostMutationPermissionsFixtureEndpointWebserverRequestTest extends Abstrac
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_nested-mutations';
+        return 'gatographql_gatographql_nested-mutations';
     }
 
     protected function getPluginSettingsNewValue(): mixed

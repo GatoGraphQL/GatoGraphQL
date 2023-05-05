@@ -21,6 +21,6 @@ class SchemaConfigurationForPrivateEndpointQueryExecutionModifyPluginSettingsFix
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_private-endpoint';
+        return 'gatographql_gatographql_private-endpoint';
     }
 }

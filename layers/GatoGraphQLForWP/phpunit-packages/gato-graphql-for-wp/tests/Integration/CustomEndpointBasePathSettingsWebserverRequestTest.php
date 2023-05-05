@@ -25,7 +25,7 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_custom-endpoints';
+        return 'gatographql_gatographql_custom-endpoints';
     }
 
     protected function getNewPath(string $dataItem): string

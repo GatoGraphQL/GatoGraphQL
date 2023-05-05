@@ -25,7 +25,7 @@ class UserMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-user-meta';
+        return 'gatographql_gatographql_schema-user-meta';
     }
 
     protected function getPluginSettingsNewValue(): mixed

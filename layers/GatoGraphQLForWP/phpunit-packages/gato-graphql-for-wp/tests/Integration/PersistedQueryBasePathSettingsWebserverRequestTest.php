@@ -11,7 +11,7 @@ class PersistedQueryBasePathSettingsWebserverRequestTest extends AbstractPersist
 {
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_persisted-queries';
+        return 'gatographql_gatographql_persisted-queries';
     }
 
     protected function getPersistedQueryURL(string $basePath): string

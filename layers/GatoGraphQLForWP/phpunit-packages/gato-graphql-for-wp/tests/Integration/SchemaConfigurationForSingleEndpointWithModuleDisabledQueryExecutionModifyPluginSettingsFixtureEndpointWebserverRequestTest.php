@@ -43,7 +43,7 @@ class SchemaConfigurationForSingleEndpointWithModuleDisabledQueryExecutionModify
          * Use an "artificial" $dataName to distinguish between them.
          */
         if ($dataName === self::ARTIFICIAL_DATA_NAME) {
-            return 'graphqlapi_graphqlapi_schema-configuration';
+            return 'gatographql_gatographql_schema-configuration';
         }
 
         return parent::getModuleID($dataName);

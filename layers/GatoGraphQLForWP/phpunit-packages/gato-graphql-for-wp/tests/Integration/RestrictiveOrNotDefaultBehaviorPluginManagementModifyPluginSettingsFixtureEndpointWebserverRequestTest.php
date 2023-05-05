@@ -26,7 +26,7 @@ class RestrictiveOrNotDefaultBehaviorPluginManagementModifyPluginSettingsFixture
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_reset-settings';
+        return 'gatographql_gatographql_reset-settings';
     }
 
     protected function getPluginSettingsNewValue(): mixed

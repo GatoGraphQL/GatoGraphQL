@@ -21,6 +21,6 @@ class DefaultSchemaConfigurationForCustomEndpointQueryExecutionModifyPluginSetti
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_custom-endpoints';
+        return 'gatographql_gatographql_custom-endpoints';
     }
 }

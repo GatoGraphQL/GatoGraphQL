@@ -22,7 +22,7 @@ class QueryableCategoryTaxonomiesModifyPluginSettingsFixtureEndpointWebserverReq
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-categories';
+        return 'gatographql_gatographql_schema-categories';
     }
 
     protected function getPluginSettingsNewValue(): mixed

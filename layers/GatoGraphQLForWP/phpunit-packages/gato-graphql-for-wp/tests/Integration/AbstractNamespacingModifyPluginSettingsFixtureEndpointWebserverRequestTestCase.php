@@ -24,7 +24,7 @@ abstract class AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRe
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-namespacing';
+        return 'gatographql_gatographql_schema-namespacing';
     }
 
     protected function getPluginSettingsNewValue(): mixed

@@ -16,8 +16,8 @@ trait SingleEndpointClientWebserverRequestTestCaseTrait
     protected function getSingleEndpointClientModuleID(string $dataName): string
     {
         return match ($dataName) {
-            'single-endpoint-graphiql' => 'graphqlapi_graphqlapi_graphiql-for-single-endpoint',
-            'single-endpoint-voyager' => 'graphqlapi_graphqlapi_interactive-schema-for-single-endpoint',
+            'single-endpoint-graphiql' => 'gatographql_gatographql_graphiql-for-single-endpoint',
+            'single-endpoint-voyager' => 'gatographql_gatographql_interactive-schema-for-single-endpoint',
             default => throw new ShouldNotHappenException(
                 sprintf(
                     'There is no moduleID configured for $dataName \'%s\'',

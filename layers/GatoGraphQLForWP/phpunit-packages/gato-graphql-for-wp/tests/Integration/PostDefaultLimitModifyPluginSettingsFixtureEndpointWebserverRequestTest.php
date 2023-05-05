@@ -25,7 +25,7 @@ class PostDefaultLimitModifyPluginSettingsFixtureEndpointWebserverRequestTest ex
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-posts';
+        return 'gatographql_gatographql_schema-posts';
     }
 
     protected function getPluginSettingsNewValue(): mixed

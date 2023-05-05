@@ -20,7 +20,7 @@ abstract class AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEnd
 
     protected function getModuleID(string $dataName): string
     {
-        return 'graphqlapi_graphqlapi_schema-users';
+        return 'gatographql_gatographql_schema-users';
     }
 
     protected function getPluginSettingsNewValue(): mixed
