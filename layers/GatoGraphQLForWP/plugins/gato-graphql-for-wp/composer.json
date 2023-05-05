@@ -1,7 +1,7 @@
 {
     "name": "gato-graphql/gato-graphql-for-wp",
     "type": "wordpress-plugin",
-    "description": "Gato GraphQL for WordPress",
+    "description": "Gato GraphQL",
     "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
     "homepage": "https://github.com/GraphQLAPI/gato-graphql-for-wp",
     "license": "GPL-2.0-or-later",

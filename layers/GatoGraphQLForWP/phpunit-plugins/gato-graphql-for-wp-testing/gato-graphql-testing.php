@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Gato GraphQL for WordPress - PHPUnit & Testing Utilities
+Plugin Name: Gato GraphQL - PHPUnit & Testing Utilities
 Description: Utilities for testing Gato GraphQL
 Version: 1.0.0-dev
 Requires at least: 5.4

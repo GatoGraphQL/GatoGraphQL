@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/img/gato-graphql-logo-with-name.jpg" width="450" /></p>
 
-# Gato GraphQL for WordPress
+# Gato GraphQL
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -51,7 +51,7 @@ Code compiled for development, i.e. after running `npm start`, cannot be commite
 
 <!-- ### Building static sites
 
-The Gato GraphQL for WordPress provides non-restrictive default settings, which simplify the configuration for building "static" sites.
+Gato GraphQL provides non-restrictive default settings, which simplify the configuration for building "static" sites.
 
 This is how the restrictive and non-restrictive default behaviors compare:
 
@@ -153,7 +153,7 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 
 ## Resources
 
-- [YouTube video: Gato GraphQL for WordPress demo](https://youtu.be/LnyNyT2RwwI)
+- [YouTube video: Gato GraphQL demo](https://youtu.be/LnyNyT2RwwI)
 - [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
 - [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
 - [Comparing Gato GraphQL vs WPGraphQL](https://gatographql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
@@ -182,11 +182,11 @@ Explanation of how the codebase is split into granular packages, to enable CMS-a
 
 Description of how the plugin is scoped:
 
-- [Gato GraphQL for WordPress is now scoped, thanks to PHP-Scoper!](https://gatographql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)
+- [Gato GraphQL is now scoped, thanks to PHP-Scoper!](https://gatographql.com/blog/gato-graphql-for-wp-is-now-scoped-thanks-to-php-scoper/)
 
 ### GraphQL by PoP documentation
 
-Gato GraphQL for WordPress is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
+Gato GraphQL is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
 
 Technical information on how the GraphQL server works:
 

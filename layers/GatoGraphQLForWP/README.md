@@ -1,6 +1,6 @@
 <p align="center"><img src="plugins/gato-graphql-for-wp/assets/img/gato-graphql-logo-with-name.jpg" width="450" /></p>
 
-# Gato GraphQL for WordPress layer
+# Gato GraphQL layer
 
 Transform your WordPress site into a modern GraphQL server: [gatographql.com](https://gatographql.com).
 
@@ -8,5 +8,5 @@ Transform your WordPress site into a modern GraphQL server: [gatographql.com](ht
 
 This layer provides the implementation for WordPress of [GraphQL by PoP](https://graphql-by-pop.com/). It comprises:
 
-- The main plugin, [Gato GraphQL for WordPress](plugins/gato-graphql-for-wp) ([gatographql.com](https://gatographql.com)).
+- The main plugin, [Gato GraphQL](plugins/gato-graphql-for-wp) ([gatographql.com](https://gatographql.com)).
 - An [extension demo](layers/GatoGraphQLForWP/plugins/extension-demo) plugin, demonstrating how to extend the GraphQL schema.

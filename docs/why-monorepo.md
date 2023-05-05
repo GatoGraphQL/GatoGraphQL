@@ -1,6 +1,6 @@
 # Why monorepo
 
-The Gato GraphQL for WordPress plugins contains around 91 packages. GraphQL by PoP contains around 100 packages. The Site Builder layer (still WIP) will require even more.
+Gato GraphQL contains around 91 packages. GraphQL by PoP contains around 100 packages. The Site Builder layer (still WIP) will require even more.
 
 Overall, there are around 200 packages in the repo. The only way to manage such a project efficiently is through a monorepo.
 

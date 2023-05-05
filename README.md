@@ -9,11 +9,11 @@ PoP is a monorepo containing several projects.
 ![Generate plugins](https://github.com/leoloso/PoP/actions/workflows/generate_plugins.yml/badge.svg)
 <!-- ![PHPStan](https://github.com/leoloso/PoP/actions/workflows/phpstan.yml/badge.svg) -->
 
-## The Gato GraphQL for WordPress plugin
+## The Gato GraphQL plugin for WordPress
 
 <p align="center"><img src="https://gatographql.com/assets/gato-graphql-logo-with-name.png" width="450" /></p>
 
-**Gato GraphQL for WordPress** is a forward-looking and powerful GraphQL server for WordPress.
+**Gato GraphQL** is a forward-looking and powerful GraphQL server for WordPress.
 
 - Website: [gatographql.com](https://gatographql.com)
 - [Download](https://github.com/leoloso/PoP/releases/latest/download/gato-graphql.zip)

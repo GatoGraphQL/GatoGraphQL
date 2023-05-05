@@ -58,7 +58,7 @@ add_action(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
                         __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gato-graphql-extension-demo'),
-                        __('Gato GraphQL for WordPress', 'gato-graphql-extension-demo'),
+                        __('Gato GraphQL', 'gato-graphql-extension-demo'),
                         $extensionName
                     )
                 ));

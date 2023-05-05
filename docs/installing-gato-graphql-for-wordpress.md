@@ -1,6 +1,6 @@
 # Installing Gato GraphQL
 
-These are the several ways to install the [Gato GraphQL for WordPress](../layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp) plugin.
+These are the several ways to install the [Gato GraphQL](../layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp) plugin.
 
 ## Requirements
 

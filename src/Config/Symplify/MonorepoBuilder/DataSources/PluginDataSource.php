@@ -17,7 +17,7 @@ class PluginDataSource
     {
         $excludeJSBlockFilesPlaceholder = $this->getExcludeJSBlockFilesPlaceholder();
         return [
-            // Gato GraphQL for WordPress
+            // Gato GraphQL
             [
                 'path' => 'layers/GatoGraphQLForWP/plugins/gato-graphql-for-wp',
                 'zip_file' => 'gato-graphql',

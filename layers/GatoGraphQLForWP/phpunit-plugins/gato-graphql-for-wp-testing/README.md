@@ -1,4 +1,4 @@
-# Gato GraphQL for WordPress - PHPUnit & Testing Utilities
+# Gato GraphQL - PHPUnit & Testing Utilities
 
 <!--
 [![Build Status][ico-travis]][link-travis]
