@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 interface SchemaConfigEditorBlockServiceTagInterface extends EditorBlockInterface
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\State;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\Services\State;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointExecuters\AdminEndpointExecuter;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
-use GraphQLAPI\GraphQLAPI\State\AbstractGraphQLEndpointExecuterAppStateProvider;
+use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\Services\EndpointExecuters\AdminEndpointExecuter;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
+use GatoGraphQL\GatoGraphQL\State\AbstractGraphQLEndpointExecuterAppStateProvider;
 
 class AdminGraphQLEndpointExecuterAppStateProvider extends AbstractGraphQLEndpointExecuterAppStateProvider
 {

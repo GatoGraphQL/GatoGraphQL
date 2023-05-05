@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/endpoint-graphiql', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Constants::ATTRIBUTE_NAME_ENABLED
+		 * GatoGraphQL\GatoGraphQL\Constants::ATTRIBUTE_NAME_ENABLED
 		 */
 		isEnabled: {
 			type: 'boolean',

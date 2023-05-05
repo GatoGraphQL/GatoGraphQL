@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\State;
+namespace GatoGraphQL\GatoGraphQL\State;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLQueryResolutionEndpointExecuterInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
+use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\GraphQLQueryResolutionEndpointExecuterInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
 
 class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvider extends AbstractGraphQLQueryResolutionEndpointExecuterAppStateProvider
 {

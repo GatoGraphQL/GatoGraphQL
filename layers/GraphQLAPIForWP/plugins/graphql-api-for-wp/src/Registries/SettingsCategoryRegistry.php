@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Registries;
+namespace GatoGraphQL\GatoGraphQL\Registries;
 
-use GraphQLAPI\GraphQLAPI\Exception\SettingsCategoryNotExistsException;
-use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
+use GatoGraphQL\GatoGraphQL\Exception\SettingsCategoryNotExistsException;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
 
 class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
 {

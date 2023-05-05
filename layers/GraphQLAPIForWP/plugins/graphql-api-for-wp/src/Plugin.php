@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace GatoGraphQL\GatoGraphQL;
 
 use PoP\Root\Module\ModuleInterface;
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPlugin;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractMainPlugin;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 

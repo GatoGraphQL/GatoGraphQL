@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Scripts;
+namespace GatoGraphQL\GatoGraphQL\Services\Scripts;
 
 use Error;
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\PluginUtils\Services\Helpers\StringConversion;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 

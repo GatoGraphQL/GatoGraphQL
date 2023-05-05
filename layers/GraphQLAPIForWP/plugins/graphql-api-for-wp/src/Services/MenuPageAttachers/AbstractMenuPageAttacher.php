@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 

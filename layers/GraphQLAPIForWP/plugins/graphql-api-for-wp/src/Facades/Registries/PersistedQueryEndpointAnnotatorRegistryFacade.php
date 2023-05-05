@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Facades\Registries;
+namespace GatoGraphQL\GatoGraphQL\Facades\Registries;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
 
 class PersistedQueryEndpointAnnotatorRegistryFacade
 {

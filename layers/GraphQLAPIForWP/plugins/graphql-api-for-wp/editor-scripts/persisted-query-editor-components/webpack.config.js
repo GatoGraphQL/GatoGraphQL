@@ -50,7 +50,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPIPersistedQueryEditorComponents';
+config.output.jsonpFunction = 'webpackJsonpGatoGraphQLPersistedQueryEditorComponents';
 // ------------------------------------------------------
 
 module.exports = config;

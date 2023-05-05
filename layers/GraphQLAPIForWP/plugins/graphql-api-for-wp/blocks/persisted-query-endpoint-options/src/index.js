@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/persisted-query-endpoint-options', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
 		 */
 		isEnabled: {
 			type: 'boolean',
@@ -64,7 +64,7 @@ registerBlockType( 'graphql-api/persisted-query-endpoint-options', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS
 		 */
 		acceptVariablesAsURLParams: {
 			type: 'boolean',

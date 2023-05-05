@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 
 /**
  * GraphiQL with Explorer block

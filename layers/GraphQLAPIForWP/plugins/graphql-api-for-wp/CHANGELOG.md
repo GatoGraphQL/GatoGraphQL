@@ -390,7 +390,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Point GitHub Updater to GraphQLAPI/graphql-api-for-wp-dist
+- Point GitHub Updater to GatoGraphQL/graphql-api-for-wp-dist
 
 ## 0.7.5 to 0.7.6 - 2021-01-09
 
@@ -408,7 +408,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Mutations and nested mutations ([#28](https://github.com/GraphQLAPI/graphql-api-for-wp/issues/28)) - Thanks to [WPKube](https://www.wpkube.com/) for sponsoring this feature ❤️
+- Mutations and nested mutations ([#28](https://github.com/GatoGraphQL/graphql-api-for-wp/issues/28)) - Thanks to [WPKube](https://www.wpkube.com/) for sponsoring this feature ❤️
 - Mutations in the schema:
   - `Root.createPost`
   - `Root.updatePost`

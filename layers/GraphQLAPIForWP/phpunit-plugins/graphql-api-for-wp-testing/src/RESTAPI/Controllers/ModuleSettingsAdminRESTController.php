@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers;
 
 use Exception;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ResponseStatus;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Response\ResponseKeys;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
 use WP_REST_Request;

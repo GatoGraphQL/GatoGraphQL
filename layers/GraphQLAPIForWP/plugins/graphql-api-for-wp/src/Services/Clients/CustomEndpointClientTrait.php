@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Clients;
+namespace GatoGraphQL\GatoGraphQL\Services\Clients;
 
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 
 trait CustomEndpointClientTrait

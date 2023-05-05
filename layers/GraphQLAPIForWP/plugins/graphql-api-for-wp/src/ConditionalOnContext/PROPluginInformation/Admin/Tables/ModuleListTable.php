@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Admin\Tables;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Admin\Tables;
 
-use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable as UpstreamModuleListTable;
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers\PROPseudoModuleResolverInterface;
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\StaticHelpers\PROPluginStaticHelpers;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Admin\Tables\ModuleListTable as UpstreamModuleListTable;
+use GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers\PROPseudoModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\StaticHelpers\PROPluginStaticHelpers;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 
 class ModuleListTable extends UpstreamModuleListTable
 {

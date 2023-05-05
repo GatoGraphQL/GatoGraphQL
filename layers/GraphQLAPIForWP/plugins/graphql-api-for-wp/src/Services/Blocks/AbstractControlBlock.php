@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 
 /**

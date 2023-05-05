@@ -21,7 +21,7 @@ composer require graphql-api/plugin-utils
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPI/packages/plugin-utils`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPI/packages/plugin-utils).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQL/packages/plugin-utils`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQL/packages/plugin-utils).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GraphQLAPI\PluginUtils\Module::class,
+    \GatoGraphQL\PluginUtils\Module::class,
 ]);
 ```
 

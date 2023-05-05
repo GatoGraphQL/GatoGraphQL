@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Server;
+namespace GatoGraphQL\GatoGraphQL\Server;
 
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
-use GraphQLAPI\GraphQLAPI\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
+use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GraphQLByPoP\GraphQLServer\Server\AbstractAttachedGraphQLServer;
 use PoP\ComponentModel\App;
 use PoP\Root\AppThreadInterface;

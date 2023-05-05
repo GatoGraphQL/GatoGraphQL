@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractBlock;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractBlock;
 
 abstract class AbstractPROPluginPseudoBlock extends AbstractBlock
 {

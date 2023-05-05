@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ExternalDependencyWrappers;
+namespace GatoGraphQL\ExternalDependencyWrappers;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

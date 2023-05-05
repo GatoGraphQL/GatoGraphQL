@@ -1,8 +1,8 @@
 /**
  * Same (name and) value as in:
  *
- * - GraphQLAPI\GraphQLAPI\Environment
- * - GraphQLAPI\GraphQLAPI\ModuleConfiguration
+ * - GatoGraphQL\GatoGraphQL\Environment
+ * - GatoGraphQL\GatoGraphQL\ModuleConfiguration
  *
  * @todo Change the URL to the final one
  */

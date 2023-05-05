@@ -4,10 +4,10 @@ services:
         autowire: true
         autoconfigure: true
 
-    GraphQLAPI\GraphQLAPI\Container\CompilerPasses\:
+    GatoGraphQL\GatoGraphQL\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'
 
-    GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\:
+    GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\:
         resource: '../src/Container/HybridCompilerPasses/*'
 
     # All these services are required to maybe execute ModuleListTableAction in Plugin.php
@@ -15,21 +15,21 @@ services:
     # Please notice: they must NOT be autoconfigured!
     # Otherwise, they will also be inititalized twice.
     # @see https://github.com/leoloso/PoP/issues/636
-    GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper:
+    GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper:
         class: ~
         autoconfigure: false
-    GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu:
+    GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu:
         class: ~
         autoconfigure: false
-    GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers:
+    GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers:
         class: ~
         autoconfigure: false
-    GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage:
+    GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage:
         class: ~
         autoconfigure: false
     
     # This service is referenced when storing the Settings (via options.php)
-    GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType:
+    GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType:
         class: ~
         autoconfigure: false
 

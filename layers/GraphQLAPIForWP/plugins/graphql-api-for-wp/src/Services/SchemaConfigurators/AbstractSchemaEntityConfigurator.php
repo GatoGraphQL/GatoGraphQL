@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators;
 
-use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Constants\BlockConstants;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\Registries\FieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;

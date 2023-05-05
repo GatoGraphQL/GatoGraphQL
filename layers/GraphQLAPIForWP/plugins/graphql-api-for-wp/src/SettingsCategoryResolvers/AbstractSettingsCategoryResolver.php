@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers;
+namespace GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers;
 
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Services\BasicServiceTrait;
@@ -45,7 +45,7 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
      * of the option name in the DB, or otherwise doing `register_setting`
      * in SettingsMenuPage does not work (for some reason, $values is null).
      *
-     * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
+     * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
      */
     final public function getOptionsFormName(string $settingsCategory): string
     {

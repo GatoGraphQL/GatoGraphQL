@@ -21,7 +21,7 @@ composer require phpunit-for-graphql-api/webserver-requests
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/phpunit-packages/webserver-requests`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/phpunit-packages/webserver-requests).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/phpunit-packages/webserver-requests`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/phpunit-packages/webserver-requests).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PHPUnitForGraphQLAPI\WebserverRequests\Module::class,
+    \PHPUnitForGatoGraphQL\WebserverRequests\Module::class,
 ]);
 ```
 

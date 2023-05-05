@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
-use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
-use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
+use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
+use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
 
 /**
  * Admin menu class

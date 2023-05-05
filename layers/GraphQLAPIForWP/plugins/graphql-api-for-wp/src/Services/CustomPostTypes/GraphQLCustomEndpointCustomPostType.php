@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
+namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\CustomEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Registries\BlockRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\CustomEndpointAnnotatorRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\EndpointAnnotatorRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\EndpointBlockRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\CustomEndpointOptionsBlock;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
 use PoP\Root\App;
 
 class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType

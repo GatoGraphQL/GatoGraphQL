@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors;
 use GraphQLByPoP\GraphQLServer\ComponentProcessors\SuperRootGraphQLRelationalFieldDataloadComponentProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 

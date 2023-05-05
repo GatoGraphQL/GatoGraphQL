@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Unit\Faker;
 
-use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase;
+use PHPUnitForGatoGraphQL\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase;
 use PoP\Root\Module\ModuleInterface;
 
 class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase
@@ -33,7 +33,7 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
                 \PoPWPSchema\Pages\Module::class,
                 \PoPWPSchema\Comments\Module::class,
                 \PoPCMSSchema\CommentMutationsWP\Module::class,
-                \PHPUnitForGraphQLAPI\DummySchema\Module::class,
+                \PHPUnitForGatoGraphQL\DummySchema\Module::class,
             ]
         ];
     }

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;

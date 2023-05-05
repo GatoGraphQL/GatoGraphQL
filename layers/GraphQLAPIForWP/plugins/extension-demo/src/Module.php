@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ExtensionDemo;
+namespace GatoGraphQL\ExtensionDemo;
 
 use PoP\Root\Module\ModuleInterface;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtensionModule;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractExtensionModule;
 
 class Module extends AbstractExtensionModule
 {

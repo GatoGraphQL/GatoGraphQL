@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
+namespace GatoGraphQL\GatoGraphQL\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
+use GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterUserAuthorizationSchemeCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
+namespace GatoGraphQL\GatoGraphQL\ConfigurationCache;
 
 class ContainerCacheConfigurationManager extends AbstractCacheConfigurationManager
 {

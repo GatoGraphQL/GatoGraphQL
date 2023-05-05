@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCustomPostsBlock;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigSchemaCustomPostsBlock;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoP\Root\Module\ModuleConfigurationHelpers;

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests;
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\RequestOptions;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
-use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\CustomHeaders;
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use Psr\Http\Message\ResponseInterface;
 
 trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait

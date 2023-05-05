@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: GraphQL API - Extension Demo
-Plugin URI: https://github.com/GraphQLAPI/extension-demo
+Plugin URI: https://github.com/GatoGraphQL/extension-demo
 Description: Demonstration of extending the GraphQL schema, for the GraphQL API for WordPress
 Version: 1.0.0-dev
 Requires at least: 5.4
@@ -14,9 +14,9 @@ Text Domain: graphql-api-extension-demo
 Domain Path: /languages
 */
 
-use GraphQLAPI\ExtensionDemo\GraphQLAPIExtension;
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginApp;
+use GatoGraphQL\ExtensionDemo\GatoGraphQLExtension;
+use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -68,7 +68,7 @@ add_action(
 
         $extensionManager = PluginApp::getExtensionManager();
         if (!$extensionManager->assertIsValid(
-            GraphQLAPIExtension::class,
+            GatoGraphQLExtension::class,
             $extensionVersion,
             $extensionName,
             $mainPluginVersionConstraint
@@ -95,7 +95,7 @@ add_action(
         require_once(__DIR__ . '/vendor/autoload.php');
 
         // Create and set-up the extension instance
-        $extensionManager->register(new GraphQLAPIExtension(
+        $extensionManager->register(new GatoGraphQLExtension(
             __FILE__,
             $extensionVersion,
             $extensionName,

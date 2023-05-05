@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
-use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
+use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
+use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
 /**
  * Test that the authenticated user can access the GraphQL endpoints.

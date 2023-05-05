@@ -10,9 +10,9 @@ services:
         class: '\GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient'
 
     # Persisted Query Endpoints
-    GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointGraphiQLBlock:
-        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'
+    GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointGraphiQLBlock:
+        class: '\GatoGraphQL\GatoGraphQL\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Blocks\PersistedQueryEndpointGraphiQLWithExplorerBlock'
 
     # Custom Endpoints
-    GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient:
-        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\CustomEndpointGraphiQLWithExplorerClient'
+    GatoGraphQL\GatoGraphQL\Services\Clients\CustomEndpointGraphiQLClient:
+        class: '\GatoGraphQL\GatoGraphQL\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\CustomEndpointGraphiQLWithExplorerClient'

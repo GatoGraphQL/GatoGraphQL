@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace GatoGraphQL\GatoGraphQL;
 
 class Environment
 {

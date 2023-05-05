@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\GraphQLAPIContainerConfigurationService;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\GatoGraphQLContainerConfigurationService;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
-    $containerConfigurationService = new GraphQLAPIContainerConfigurationService(
+    $containerConfigurationService = new GatoGraphQLContainerConfigurationService(
         $rectorConfig,
         dirname(__DIR__, 4)
     );

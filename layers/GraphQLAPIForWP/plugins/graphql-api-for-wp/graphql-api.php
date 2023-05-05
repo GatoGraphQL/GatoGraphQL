@@ -12,11 +12,11 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Text Domain: graphql-api
 Domain Path: /languages
-GitHub Plugin URI: GraphQLAPI/graphql-api-for-wp-dist
+GitHub Plugin URI: GatoGraphQL/graphql-api-for-wp-dist
 */
 
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\PluginApp;
+use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {

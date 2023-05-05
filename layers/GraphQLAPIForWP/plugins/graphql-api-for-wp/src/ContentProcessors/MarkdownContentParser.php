@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
+namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
-use GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface;
+use GatoGraphQL\MarkdownConvertor\MarkdownConvertorInterface;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Admin\Tables;
+namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_List_Table;
 
 /**

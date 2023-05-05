@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Taxonomies;
+namespace GatoGraphQL\GatoGraphQL\Services\Taxonomies;
 
-use GraphQLAPI\GraphQLAPI\AppHelpers;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 interface PluginInterface
 {

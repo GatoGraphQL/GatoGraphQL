@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 /**
  * Test that only the schema editor user can visualize/execute

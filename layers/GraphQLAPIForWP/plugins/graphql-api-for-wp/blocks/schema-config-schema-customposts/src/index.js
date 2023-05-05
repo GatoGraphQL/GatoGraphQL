@@ -58,7 +58,7 @@ registerBlockType( 'graphql-api/schema-config-schema-customposts', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION
 		 */
 		customizeConfiguration: {
 			type: 'boolean',
@@ -66,7 +66,7 @@ registerBlockType( 'graphql-api/schema-config-schema-customposts', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigSchemaCustomPostsBlock::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES
 		 */
 		includedCustomPostTypes: {
 			type: 'array',

@@ -28,7 +28,7 @@ class SkipDowngradeTestPathsDataSource
     {
         return [
             'layers/Legacy/',
-            'layers/GraphQLAPIForWP/phpunit-packages/',
+            'layers/GatoGraphQLForWP/phpunit-packages/',
         ];
     }
 

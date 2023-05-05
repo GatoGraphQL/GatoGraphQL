@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\DummySchema\FieldResolvers\ObjectType;
+namespace PHPUnitForGatoGraphQL\DummySchema\FieldResolvers\ObjectType;
 
-use PHPUnitForGraphQLAPI\DummySchema\MutationResolvers\DummyCreateStringMutationResolver;
+use PHPUnitForGatoGraphQL\DummySchema\MutationResolvers\DummyCreateStringMutationResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;

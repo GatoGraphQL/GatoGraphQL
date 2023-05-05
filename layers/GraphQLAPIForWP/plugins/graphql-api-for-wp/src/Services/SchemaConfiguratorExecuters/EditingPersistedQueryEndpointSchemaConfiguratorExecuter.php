@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PersistedQueryEndpointSchemaConfigurator;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointBlockHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators\PersistedQueryEndpointSchemaConfigurator;
+use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 
 class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {

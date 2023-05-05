@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses;
+namespace GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterModuleResolverCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockHelpers;
 
 abstract class AbstractBlockSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter
 {

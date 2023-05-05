@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ConfigurationDefaultValues;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
-use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
+use GatoGraphQL\GatoGraphQL\Constants\ConfigurationDefaultValues;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
+use GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
@@ -502,7 +502,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES
-                : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes();
+                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes();
         }
 
         if (
@@ -511,7 +511,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES
-                : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginTagTaxonomies();
+                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginTagTaxonomies();
         }
 
         if (
@@ -520,7 +520,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_CATEGORY_TAXONOMIES
-                : $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCategoryTaxonomies();
+                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCategoryTaxonomies();
         }
 
         $defaultValues = [
@@ -673,7 +673,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ];
 
             if ($module === self::SCHEMA_CUSTOMPOSTS) {
-                $possibleCustomPostTypes = $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes();
+                $possibleCustomPostTypes = $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes();
                 // The possible values must have key and value
                 $possibleValues = [];
                 foreach ($possibleCustomPostTypes as $value) {
@@ -755,7 +755,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             } elseif ($module === self::SCHEMA_TAGS) {
-                $possibleTagTaxonomies = $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginTagTaxonomies();
+                $possibleTagTaxonomies = $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginTagTaxonomies();
                 $queryableTagTaxonomyNameObjects = $this->getWPDataModelProvider()->getQueryableCustomPostsAssociatedTaxonomies(false);
 
                 // The possible values must have key and value
@@ -802,7 +802,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::IS_MULTIPLE => true,
                 ];
             } elseif ($module === self::SCHEMA_CATEGORIES) {
-                $possibleCategoryTaxonomies = $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCategoryTaxonomies();
+                $possibleCategoryTaxonomies = $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCategoryTaxonomies();
                 $queryableCategoryTaxonomyNameObjects = $this->getWPDataModelProvider()->getQueryableCustomPostsAssociatedTaxonomies(true);
 
                 // The possible values must have key and value

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests;
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\RequestOptions;
-use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
-use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
-use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
+use PHPUnitForGatoGraphQL\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
+use PHPUnitForGatoGraphQL\WebserverRequests\Exception\UnauthenticatedUserException;
 use PHPUnit\Framework\TestCase;
-use PHPUnitForGraphQLAPI\WebserverRequests\Constants\CustomHeaders;
-use PHPUnitForGraphQLAPI\WebserverRequests\Constants\CustomHeaderValues;
+use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaders;
+use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaderValues;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 

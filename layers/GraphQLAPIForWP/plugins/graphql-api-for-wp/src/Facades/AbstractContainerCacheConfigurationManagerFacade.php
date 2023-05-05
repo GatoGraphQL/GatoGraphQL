@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Facades;
+namespace GatoGraphQL\GatoGraphQL\Facades;
 
-use GraphQLAPI\GraphQLAPI\ConfigurationCache\ContainerCacheConfigurationManager;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\ConfigurationCache\ContainerCacheConfigurationManager;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
 /**

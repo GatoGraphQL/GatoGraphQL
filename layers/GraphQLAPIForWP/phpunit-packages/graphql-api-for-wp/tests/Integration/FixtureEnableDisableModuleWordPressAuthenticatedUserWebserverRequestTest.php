@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase;
+use PHPUnitForGatoGraphQL\WebserverRequests\AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase;
 
 /**
  * Test that enabling/disabling a module works well.

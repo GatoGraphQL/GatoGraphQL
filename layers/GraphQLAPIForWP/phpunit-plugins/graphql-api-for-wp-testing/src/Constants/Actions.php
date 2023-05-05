@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants;
 
 class Actions
 {

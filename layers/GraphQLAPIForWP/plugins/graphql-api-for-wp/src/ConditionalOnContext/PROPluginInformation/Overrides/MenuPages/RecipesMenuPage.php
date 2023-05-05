@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\StaticHelpers\PROPluginStaticHelpers;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage as UpstreamRecipesMenuPage;
+use GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\StaticHelpers\PROPluginStaticHelpers;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage as UpstreamRecipesMenuPage;
 
 class RecipesMenuPage extends UpstreamRecipesMenuPage
 {

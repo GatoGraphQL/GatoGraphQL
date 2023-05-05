@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage:
-        class: \GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages\ModulesMenuPage
+    GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage:
+        class: \GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages\ModulesMenuPage
 
-    GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage:
-        class: \GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages\RecipesMenuPage
+    GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage:
+        class: \GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages\RecipesMenuPage

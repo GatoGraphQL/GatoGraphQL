@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Registries;
+namespace GatoGraphQL\GatoGraphQL\Registries;
 
 class EndpointExecuterRegistry extends AbstractEndpointExecuterRegistry implements EndpointExecuterRegistryInterface
 {

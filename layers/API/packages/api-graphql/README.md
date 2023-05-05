@@ -55,7 +55,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPAPI\GraphQLAPI\Module::class,
+    \PoPAPI\GatoGraphQL\Module::class,
 ]);
 ```
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes;
+namespace GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes;
 
 use WP_User;
 

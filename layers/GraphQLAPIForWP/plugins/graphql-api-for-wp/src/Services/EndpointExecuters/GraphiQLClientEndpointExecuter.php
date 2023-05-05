@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Clients\CustomEndpointGraphiQLClient;
-use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\GraphiQLClientEndpointAnnotator;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\Clients\CustomEndpointGraphiQLClient;
+use GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators\GraphiQLClientEndpointAnnotator;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 
 class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter

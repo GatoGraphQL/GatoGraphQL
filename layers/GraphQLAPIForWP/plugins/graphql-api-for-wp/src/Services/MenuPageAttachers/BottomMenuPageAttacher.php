@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\MenuPageInterface;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModuleDocumentationMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\MenuPageInterface;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModuleDocumentationMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\ReleaseNotesAboutMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use PoP\Root\App;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher

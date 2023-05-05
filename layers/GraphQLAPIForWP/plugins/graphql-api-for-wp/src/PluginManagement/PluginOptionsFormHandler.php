@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginManagement;
+namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
+use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;

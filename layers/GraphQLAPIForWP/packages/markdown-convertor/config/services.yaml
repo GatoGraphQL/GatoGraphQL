@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    GraphQLAPI\MarkdownConvertor\MarkdownConvertorInterface:
-        class: \GraphQLAPI\MarkdownConvertor\MarkdownConvertor
+    GatoGraphQL\MarkdownConvertor\MarkdownConvertorInterface:
+        class: \GatoGraphQL\MarkdownConvertor\MarkdownConvertor
 

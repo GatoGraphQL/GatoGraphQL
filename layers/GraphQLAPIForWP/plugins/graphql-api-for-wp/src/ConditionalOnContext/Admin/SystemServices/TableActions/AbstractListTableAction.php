@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 

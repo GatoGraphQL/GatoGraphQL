@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
-use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\ResetSettingsOptions;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 
 use function get_submit_button;
 

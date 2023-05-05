@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers;
+namespace GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers;
 
 interface SettingsCategoryResolverInterface
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
-use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
+use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
+use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
 use function file_get_contents;
 

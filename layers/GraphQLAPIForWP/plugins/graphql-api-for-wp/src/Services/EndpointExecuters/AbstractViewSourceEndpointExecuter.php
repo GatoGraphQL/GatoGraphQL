@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\RenderingHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\RenderingHelpers;
 use PoP\Root\App;
 use WP_Post;
 
@@ -83,7 +83,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
 
         // Commented out Prettify
         // // $scriptSrc = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js'
-        // $mainPluginURL = \GraphQLAPI\GraphQLAPI\PluginApp::getMainPlugin()->getPluginURL();
+        // $mainPluginURL = \GatoGraphQL\GatoGraphQL\PluginApp::getMainPlugin()->getPluginURL();
         // $scriptSrc = $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js';
         // /**
         //  * Prettyprint the code

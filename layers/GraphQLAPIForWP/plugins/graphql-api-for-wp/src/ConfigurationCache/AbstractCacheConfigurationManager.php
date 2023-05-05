@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConfigurationCache;
+namespace GatoGraphQL\GatoGraphQL\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInfoInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInfoInterface;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 

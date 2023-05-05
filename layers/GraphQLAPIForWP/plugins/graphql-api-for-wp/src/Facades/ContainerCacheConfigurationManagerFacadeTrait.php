@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Facades;
+namespace GatoGraphQL\GatoGraphQL\Facades;
 
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 

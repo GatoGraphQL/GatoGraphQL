@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Menus;
+namespace GatoGraphQL\GatoGraphQL\Services\Menus;
 
-use GraphQLAPI\GraphQLAPI\AppHelpers;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\GraphQLAPI;
+namespace PoPAPI\GatoGraphQL;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
@@ -21,7 +21,7 @@ class Module extends AbstractModule
 
     protected function resolveEnabled(): bool
     {
-        return !Environment::disableGraphQLAPI();
+        return !Environment::disableGatoGraphQL();
     }
 
     /**

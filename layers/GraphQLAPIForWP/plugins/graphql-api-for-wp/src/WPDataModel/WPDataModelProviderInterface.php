@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\WPDataModel;
+namespace GatoGraphQL\GatoGraphQL\WPDataModel;
 
 use WP_Taxonomy;
 
@@ -11,15 +11,15 @@ interface WPDataModelProviderInterface
     /**
      * @return string[]
      */
-    public function getFilteredNonGraphQLAPIPluginCustomPostTypes(): array;
+    public function getFilteredNonGatoGraphQLPluginCustomPostTypes(): array;
     /**
      * @return string[]
      */
-    public function getFilteredNonGraphQLAPIPluginTagTaxonomies(): array;
+    public function getFilteredNonGatoGraphQLPluginTagTaxonomies(): array;
     /**
      * @return string[]
      */
-    public function getFilteredNonGraphQLAPIPluginCategoryTaxonomies(): array;
+    public function getFilteredNonGatoGraphQLPluginCategoryTaxonomies(): array;
     /**
      * Retrieve the taxonomies which are associated to custom posts
      * which have been enabled as queryable.

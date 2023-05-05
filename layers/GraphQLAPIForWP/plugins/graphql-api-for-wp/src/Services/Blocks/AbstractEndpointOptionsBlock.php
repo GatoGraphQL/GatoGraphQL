@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 
 /**
  * Endpoint (custom endpoint and persisted query) Options block

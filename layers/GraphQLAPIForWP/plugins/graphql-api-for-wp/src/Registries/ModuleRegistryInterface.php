@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Registries;
+namespace GatoGraphQL\GatoGraphQL\Registries;
 
-use GraphQLAPI\GraphQLAPI\Exception\ModuleNotExistsException;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 
 interface ModuleRegistryInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\DummyWPSchema;
+namespace PHPUnitForGatoGraphQL\DummyWPSchema;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

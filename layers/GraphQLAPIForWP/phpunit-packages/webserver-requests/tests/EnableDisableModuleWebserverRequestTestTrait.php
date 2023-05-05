@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests;
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
-use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCaseTrait;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ParamValues;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
+use PHPUnitForGatoGraphQL\GatoGraphQL\Constants\RESTAPIEndpoints;
 
 trait EnableDisableModuleWebserverRequestTestTrait
 {

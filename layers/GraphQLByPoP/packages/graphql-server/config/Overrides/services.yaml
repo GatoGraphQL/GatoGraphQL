@@ -5,7 +5,7 @@ services:
         autoconfigure: true
 
     # Change the properties printed for the standard GraphQL response:
-    PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter:
+    PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter:
         class: \GraphQLByPoP\GraphQLServer\Overrides\DataStructureFormatters\GraphQLDataStructureFormatter
 
     PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface:

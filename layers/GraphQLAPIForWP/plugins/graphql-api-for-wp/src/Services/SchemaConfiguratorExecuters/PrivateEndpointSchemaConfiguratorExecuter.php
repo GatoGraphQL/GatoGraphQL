@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\PrivateEndpointSchemaConfigurator;
-use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
-use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointBlockHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators\PrivateEndpointSchemaConfigurator;
+use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators\SchemaConfiguratorInterface;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\GraphQLEndpointHandler;
 
 class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter

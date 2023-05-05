@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests;
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 
 /**
  * Test that accepting a URL produces the expected status code

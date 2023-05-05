@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\BlockCategoryInterface;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\SchemaConfigurationBlockCategory;
 
 abstract class AbstractSchemaConfigBlock extends AbstractBlock implements SchemaConfigEditorBlockServiceTagInterface
 {

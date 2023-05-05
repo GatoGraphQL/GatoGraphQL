@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Exception;
+namespace GatoGraphQL\GatoGraphQL\Exception;
 
 use PoP\RootWP\AppHooks;
 use PoP\Root\Exception\AbstractClientException;

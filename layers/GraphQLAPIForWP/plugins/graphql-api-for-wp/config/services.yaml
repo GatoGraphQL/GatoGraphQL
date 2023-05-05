@@ -4,38 +4,38 @@ services:
         autowire: true
         autoconfigure: true
 
-    GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface:
-        class: \GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParser
+    GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface:
+        class: \GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParser
 
-    GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistry
+    GatoGraphQL\GatoGraphQL\Registries\SchemaConfigBlockRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\SchemaConfigBlockRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistry
+    GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointBlockRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointBlockRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\EndpointBlockRegistry
+    GatoGraphQL\GatoGraphQL\Registries\EndpointBlockRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\EndpointBlockRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\ModuleTypeRegistry
+    GatoGraphQL\GatoGraphQL\Registries\ModuleTypeRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\ModuleTypeRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\EndpointSchemaConfigurationExecuterRegistry
+    GatoGraphQL\GatoGraphQL\Registries\EndpointSchemaConfigurationExecuterRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\EndpointSchemaConfigurationExecuterRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistry
+    GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistry
+    GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\CustomEndpointAnnotatorRegistry
+    GatoGraphQL\GatoGraphQL\Registries\CustomEndpointAnnotatorRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\CustomEndpointAnnotatorRegistry
 
-    GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
-        class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistry
+    GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistry
 
-    GraphQLAPI\GraphQLAPI\Services\:
+    GatoGraphQL\GatoGraphQL\Services\:
         resource: ../src/Services/*
 
-    GraphQLAPI\GraphQLAPI\State\:
+    GatoGraphQL\GatoGraphQL\State\:
         resource: '../src/State/*'

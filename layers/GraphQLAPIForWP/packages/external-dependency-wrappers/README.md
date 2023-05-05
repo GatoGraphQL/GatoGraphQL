@@ -21,7 +21,7 @@ composer require graphql-api/external-dependency-wrappers
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPI/packages/external-dependency-wrappers`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPI/packages/external-dependency-wrappers).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQL/packages/external-dependency-wrappers`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQL/packages/external-dependency-wrappers).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GraphQLAPI\ExternalDependencyWrappers\Module::class,
+    \GatoGraphQL\ExternalDependencyWrappers\Module::class,
 ]);
 ```
 

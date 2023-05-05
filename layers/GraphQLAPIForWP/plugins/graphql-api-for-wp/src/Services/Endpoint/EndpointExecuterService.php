@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Endpoint;
+namespace GatoGraphQL\GatoGraphQL\Services\Endpoint;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointExecuterRegistryInterface;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistryInterface;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Admin\Tables\AbstractItemListTable;
+use GatoGraphQL\GatoGraphQL\Admin\Tables\AbstractItemListTable;
 
 /**
  * Table menu page

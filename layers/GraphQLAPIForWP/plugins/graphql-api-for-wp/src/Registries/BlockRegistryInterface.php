@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Registries;
+namespace GatoGraphQL\GatoGraphQL\Registries;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
 
 interface BlockRegistryInterface
 {

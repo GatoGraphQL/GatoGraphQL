@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Unit\Faker;
 
 use GraphQLByPoP\GraphQLServer\Unit\EnabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 

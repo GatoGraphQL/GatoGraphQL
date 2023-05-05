@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
+namespace GatoGraphQL\GatoGraphQL\Services\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GatoGraphQL\GatoGraphQL\Services\Scripts\MainPluginScriptTrait;
 
 /**
  * Components required to edit a GraphQL endpoint CPT

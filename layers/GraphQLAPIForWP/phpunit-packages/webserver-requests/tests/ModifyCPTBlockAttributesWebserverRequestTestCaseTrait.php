@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests;
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GuzzleHttp\RequestOptions;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
-use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCaseTrait;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Response\ResponseKeys;
+use PHPUnitForGatoGraphQL\GatoGraphQL\Constants\RESTAPIEndpoints;
 
 trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
 {

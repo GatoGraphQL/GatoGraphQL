@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ExternalDependencyWrappers\Composer\Semver;
+namespace GatoGraphQL\ExternalDependencyWrappers\Composer\Semver;
 
 use Composer\Semver\Semver;
 

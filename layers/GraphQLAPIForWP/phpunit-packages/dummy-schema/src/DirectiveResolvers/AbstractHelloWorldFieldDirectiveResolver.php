@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\DummySchema\DirectiveResolvers;
+namespace PHPUnitForGatoGraphQL\DummySchema\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;

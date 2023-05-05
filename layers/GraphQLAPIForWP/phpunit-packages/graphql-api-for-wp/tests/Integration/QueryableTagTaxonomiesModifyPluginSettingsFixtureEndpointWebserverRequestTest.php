@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 
 class QueryableTagTaxonomiesModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {

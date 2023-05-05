@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ExternalDependencyWrappers;
+namespace GatoGraphQL\ExternalDependencyWrappers;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\GraphQLQueryPostTypeHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use WP_Post;
 
 abstract class AbstractPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraphQLQueryResolutionEndpointExecuter

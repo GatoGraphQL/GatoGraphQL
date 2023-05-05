@@ -35,7 +35,7 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 
 ## Development
 
-<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/plugins/graphql-api-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp). -->
+<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/graphql-api-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/graphql-api-for-wp). -->
 
 👀 Instructions: [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
 
@@ -296,18 +296,18 @@ If you discover any security related issues, please email leo@getpop.org instead
 GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/GraphQLAPI/graphql-api-for-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GraphQLAPI/graphql-api-for-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/GraphQLAPI/graphql-api-for-wp.svg?style=flat-square
-[ico-release]: https://img.shields.io/github/release/GraphQLAPI/graphql-api-for-wp.svg
-[ico-downloads]: https://img.shields.io/github/downloads/GraphQLAPI/graphql-api-for-wp/total.svg
+[ico-travis]: https://img.shields.io/travis/GatoGraphQL/graphql-api-for-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GatoGraphQL/graphql-api-for-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/GatoGraphQL/graphql-api-for-wp.svg?style=flat-square
+[ico-release]: https://img.shields.io/github/release/GatoGraphQL/graphql-api-for-wp.svg
+[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/graphql-api-for-wp/total.svg
 
-[link-travis]: https://travis-ci.com/github/GraphQLAPI/graphql-api-for-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/GraphQLAPI/graphql-api-for-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/GraphQLAPI/graphql-api-for-wp
-[link-downloads]: https://GitHub.com/GraphQLAPI/graphql-api-for-wp/releases/
-[link-release]: https://GitHub.com/GraphQLAPI/graphql-api-for-wp/releases/
-[link-downloads]: https://GitHub.com/GraphQLAPI/graphql-api-for-wp/releases/
+[link-travis]: https://travis-ci.com/github/GatoGraphQL/graphql-api-for-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/graphql-api-for-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/graphql-api-for-wp
+[link-downloads]: https://GitHub.com/GatoGraphQL/graphql-api-for-wp/releases/
+[link-release]: https://GitHub.com/GatoGraphQL/graphql-api-for-wp/releases/
+[link-downloads]: https://GitHub.com/GatoGraphQL/graphql-api-for-wp/releases/
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
 

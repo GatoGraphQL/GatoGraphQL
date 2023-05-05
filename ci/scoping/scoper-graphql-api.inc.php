@@ -36,7 +36,7 @@ use Isolated\Symfony\Component\Finder\Finder;
 function convertRelativeToFullPath(string $relativePath): string
 {
     $monorepoDir = dirname(__DIR__, 2);
-    $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
+    $pluginDir = $monorepoDir . '/layers/GatoGraphQLForWP/plugins/graphql-api-for-wp';
     return $pluginDir . '/' . $relativePath;
 }
 return [
@@ -84,7 +84,7 @@ return [
         'PoPWPSchema',
         'PoP',
         'GraphQLByPoP',
-        'GraphQLAPI',
+        'GatoGraphQL',
         // Own container cache namespace
         // Watch out! This value is being hardcoded!
         // In the application, it can be overriden via code:

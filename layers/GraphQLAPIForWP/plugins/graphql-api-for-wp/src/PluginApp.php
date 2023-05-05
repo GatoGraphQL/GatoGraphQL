@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace GatoGraphQL\GatoGraphQL;
 
-use GraphQLAPI\GraphQLAPI\PluginManagement\ExtensionManager;
-use GraphQLAPI\GraphQLAPI\PluginManagement\MainPluginManager;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
+use GatoGraphQL\GatoGraphQL\PluginManagement\ExtensionManager;
+use GatoGraphQL\GatoGraphQL\PluginManagement\MainPluginManager;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInterface;
 
 class PluginApp implements PluginAppInterface
 {

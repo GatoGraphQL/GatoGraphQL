@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\DummySchema\DirectiveResolvers;
+namespace PHPUnitForGatoGraphQL\DummySchema\DirectiveResolvers;
 
-use PHPUnitForGraphQLAPI\DummySchema\FeedbackItemProviders\WarningFeedbackItemProvider;
+use PHPUnitForGatoGraphQL\DummySchema\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;

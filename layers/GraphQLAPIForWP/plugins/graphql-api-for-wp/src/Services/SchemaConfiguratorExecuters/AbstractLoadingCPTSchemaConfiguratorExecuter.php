@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfiguratorExecuters;
 
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointBlockHelpers;
 use PoP\Root\App;
 
 abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter

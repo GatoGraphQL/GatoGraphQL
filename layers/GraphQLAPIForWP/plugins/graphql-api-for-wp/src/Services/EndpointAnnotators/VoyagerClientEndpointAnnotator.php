@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointVoyagerBlock;
 use WP_Post;
 
 class VoyagerClientEndpointAnnotator extends AbstractClientEndpointAnnotator implements CustomEndpointAnnotatorServiceTagInterface

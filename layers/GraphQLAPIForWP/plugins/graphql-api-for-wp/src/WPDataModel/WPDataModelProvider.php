@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\WPDataModel;
+namespace GatoGraphQL\GatoGraphQL\WPDataModel;
 
-use GraphQLAPI\GraphQLAPI\Constants\HookNames;
-use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use GatoGraphQL\GatoGraphQL\Constants\HookNames;
+use GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\TaxonomyRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoP\ComponentModel\App;
@@ -50,7 +50,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     /**
      * @return string[]
      */
-    public function getFilteredNonGraphQLAPIPluginCustomPostTypes(): array
+    public function getFilteredNonGatoGraphQLPluginCustomPostTypes(): array
     {
         // Get the list of custom post types from the system
         $possibleCustomPostTypes = \get_post_types();
@@ -128,7 +128,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     /**
      * @return string[]
      */
-    public function getFilteredNonGraphQLAPIPluginTagTaxonomies(): array
+    public function getFilteredNonGatoGraphQLPluginTagTaxonomies(): array
     {
         // Get the list of tag taxonomies from the system
         $queryableTagTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(false);
@@ -161,7 +161,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     /**
      * @return string[]
      */
-    public function getFilteredNonGraphQLAPIPluginCategoryTaxonomies(): array
+    public function getFilteredNonGatoGraphQLPluginCategoryTaxonomies(): array
     {
         // Get the list of category taxonomies from the system
         $queryableCategoryTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(true);

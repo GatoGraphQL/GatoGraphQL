@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers;
+namespace GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
+use GatoGraphQL\GatoGraphQL\Plugin;
 
 /**
  * All module types used in this plugin. Others can be registered by extensions

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WPFakerSchema\DataParsing;
+namespace PHPUnitForGatoGraphQL\WPFakerSchema\DataParsing;
 
-use PHPUnitForGraphQLAPI\WPFakerSchema\Exception\DatasetFileException;
+use PHPUnitForGatoGraphQL\WPFakerSchema\Exception\DatasetFileException;
 use PoPBackbone\WPDataParser\WPDataParser;
 
 class WordPressDataParser

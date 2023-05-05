@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
+namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
-use GraphQLAPI\GraphQLAPI\Constants\HookNames;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
-use GraphQLAPI\GraphQLAPI\Services\Menus\PluginMenu;
+use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Constants\HookNames;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
 use GraphQLByPoP\GraphQLServer\Constants\Params as GraphQLServerParams;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\Root\App;

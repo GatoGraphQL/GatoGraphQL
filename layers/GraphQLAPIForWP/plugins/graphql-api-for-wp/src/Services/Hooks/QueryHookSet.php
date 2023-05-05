@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
+namespace GatoGraphQL\GatoGraphQL\Services\Hooks;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Registries\CustomPostTypeRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\Constants\QueryOptions;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;

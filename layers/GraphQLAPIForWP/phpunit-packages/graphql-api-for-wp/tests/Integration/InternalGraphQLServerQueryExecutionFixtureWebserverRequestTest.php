@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 /**
  * Test the InternalGraphQLServer. It works like this:
@@ -16,7 +16,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
  * that the original response, as the two are using different
  * configurations.
  *
- * @see layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
+ * @see layers/GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
  */
 class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {

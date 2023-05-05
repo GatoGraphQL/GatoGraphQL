@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class AccessPrivateCustomEndpointClientByAdminQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivateCustomEndpointQueryExecutionFixtureWebserverRequestTestCase
 {
@@ -30,7 +30,7 @@ class AccessPrivateCustomEndpointClientByAdminQueryExecutionFixtureWebserverRequ
         /**
          * Expect to NOT find the "You are not authorized" message
          *
-         * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/Helpers/RenderingHelpers.php
+         * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/Services/Helpers/RenderingHelpers.php
          */
         $providerItems['private-custom-endpoint'][1] = '/(?<!You are not authorized to see this content)/';
         return $providerItems;

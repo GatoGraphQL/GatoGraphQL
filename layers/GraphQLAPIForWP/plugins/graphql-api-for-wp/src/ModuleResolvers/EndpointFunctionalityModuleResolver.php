@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\HTMLCodes;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\RecipesMenuPage;
-use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptionValues;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -154,7 +154,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             ),
             self::SINGLE_ENDPOINT => \sprintf(
                 \__('Expose the single GraphQL endpoint under <code>%s</code>', 'graphql-api'),
-                $moduleConfiguration->getGraphQLAPIEndpoint()
+                $moduleConfiguration->getGatoGraphQLEndpoint()
             ),
             self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'graphql-api'),
             self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api'),

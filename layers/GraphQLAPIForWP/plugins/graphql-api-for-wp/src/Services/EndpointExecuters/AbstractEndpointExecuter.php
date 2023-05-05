@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractEndpointExecuter implements EndpointExecuterInterface

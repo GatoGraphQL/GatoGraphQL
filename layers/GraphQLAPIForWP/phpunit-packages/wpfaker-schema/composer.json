@@ -160,7 +160,7 @@
     "type": "library",
     "description": "Utilities to execute PHPUnit for the GraphQL API for WordPress",
     "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit"],
-    "homepage": "https://github.com/PHPUnitForGraphQLAPI/wpfaker-schema",
+    "homepage": "https://github.com/PHPUnitForGatoGraphQL/wpfaker-schema",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -183,12 +183,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "src"
+            "PHPUnitForGatoGraphQL\\WPFakerSchema\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "tests"
+            "PHPUnitForGatoGraphQL\\WPFakerSchema\\": "tests"
         }
     },
     "scripts": {

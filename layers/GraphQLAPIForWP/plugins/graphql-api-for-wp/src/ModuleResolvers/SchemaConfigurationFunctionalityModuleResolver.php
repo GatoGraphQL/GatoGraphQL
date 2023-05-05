@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 
 class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver

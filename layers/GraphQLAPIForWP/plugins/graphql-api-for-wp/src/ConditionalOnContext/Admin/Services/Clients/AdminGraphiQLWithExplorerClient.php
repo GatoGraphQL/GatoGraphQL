@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\Services\Clients;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\Clients\GraphiQLWithExplorerClient;
 
 class AdminGraphiQLWithExplorerClient extends GraphiQLWithExplorerClient

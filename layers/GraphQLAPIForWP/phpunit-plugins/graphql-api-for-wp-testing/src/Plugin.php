@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers\InternalGraphQLServerTestExecuter;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers\GraphQLServerNotReadyInternalGraphQLServerTestExecuter;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks\AddDummyCustomAdminEndpointHook;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\InternalGraphQLServerTestExecuter;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GraphQLServerNotReadyInternalGraphQLServerTestExecuter;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\AddDummyCustomAdminEndpointHook;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Settings\Options;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
 use WP_REST_Response;
 
 use function add_action;
@@ -70,8 +70,8 @@ class Plugin
          * included in this plugin, hence the values are hardcoded.
          * Update with caution!
          *
-         * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaders.php
-         * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaderValues.php
+         * @see layers/GatoGraphQLForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaders.php
+         * @see layers/GatoGraphQLForWP/phpunit-packages/webserver-requests/src/Constants/CustomHeaderValues.php
          *
          * @todo Create a new package to make it DRY
          */

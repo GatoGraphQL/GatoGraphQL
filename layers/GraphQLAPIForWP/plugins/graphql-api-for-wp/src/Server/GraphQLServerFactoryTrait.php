@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Server;
+namespace GatoGraphQL\GatoGraphQL\Server;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\Exception\GraphQLServerNotReadyException;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Exception\GraphQLServerNotReadyException;
 use GraphQLByPoP\GraphQLServer\Server\GraphQLServerInterface;
 
 trait GraphQLServerFactoryTrait

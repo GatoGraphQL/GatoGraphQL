@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    GraphQLAPI\PluginUtils\Services\:
+    GatoGraphQL\PluginUtils\Services\:
         resource: ../src/Services/*
 

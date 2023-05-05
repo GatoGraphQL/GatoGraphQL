@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\State;
+namespace GatoGraphQL\GatoGraphQL\State;
 
 use PoP\Root\State\AbstractAppStateProvider;
 

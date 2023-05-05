@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\StaticHelpers;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\StaticHelpers;
 
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use PoP\ComponentModel\App;
 
 class PROPluginStaticHelpers

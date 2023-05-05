@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\TableActions;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions;
 
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\Root\App;
 
 /**

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Facades;
+namespace GatoGraphQL\GatoGraphQL\Facades;
 
-use GraphQLAPI\GraphQLAPI\ConfigurationCache\ContainerCacheConfigurationManager;
-use GraphQLAPI\GraphQLAPI\ConfigurationCache\InternalGraphQLServerContainerCacheConfigurationManager;
+use GatoGraphQL\GatoGraphQL\ConfigurationCache\ContainerCacheConfigurationManager;
+use GatoGraphQL\GatoGraphQL\ConfigurationCache\InternalGraphQLServerContainerCacheConfigurationManager;
 
 /**
  * Obtain an instance of the InternalGraphQLServerContainerCacheConfigurationManager.

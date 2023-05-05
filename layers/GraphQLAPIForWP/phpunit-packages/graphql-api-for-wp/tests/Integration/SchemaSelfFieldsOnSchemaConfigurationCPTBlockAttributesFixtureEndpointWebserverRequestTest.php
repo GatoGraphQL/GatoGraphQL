@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
-use PHPUnitForGraphQLAPI\GraphQLAPI\Integration\AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
+use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase;
 
 class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
 {

@@ -3,7 +3,7 @@
     "type": "wordpress-plugin",
     "description": "Utilities for testing the GraphQL API for WordPress",
     "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
-    "homepage": "https://github.com/PHPUnitForGraphQLAPI/graphql-api-for-wp-testing",
+    "homepage": "https://github.com/PHPUnitForGatoGraphQL/graphql-api-for-wp-testing",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\GraphQLAPITesting\\": "src"
+            "PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\GraphQLAPITesting\\": "tests"
+            "PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\": "tests"
         }
     },
     "config": {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPageAttachers;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\MenuPageHelper;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphQLVoyagerMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {

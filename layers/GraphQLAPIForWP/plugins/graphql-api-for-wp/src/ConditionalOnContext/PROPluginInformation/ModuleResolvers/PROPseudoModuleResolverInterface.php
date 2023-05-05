@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 
 interface PROPseudoModuleResolverInterface extends ModuleResolverInterface
 {

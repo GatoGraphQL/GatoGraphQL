@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\EndpointExecuterInterface;
 use WP_Post;
 
 interface GraphQLEndpointExecuterInterface extends EndpointExecuterInterface

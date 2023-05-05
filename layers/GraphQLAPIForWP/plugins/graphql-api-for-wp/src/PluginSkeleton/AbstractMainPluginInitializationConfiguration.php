@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\Facades\ContainerCacheConfigurationManagerFacade;
-use GraphQLAPI\GraphQLAPI\Facades\InternalGraphQLServerContainerCacheConfigurationManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
+use GatoGraphQL\GatoGraphQL\Facades\ContainerCacheConfigurationManagerFacade;
+use GatoGraphQL\GatoGraphQL\Facades\InternalGraphQLServerContainerCacheConfigurationManagerFacade;
+use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use PoP\Root\Container\ContainerCacheConfiguration;
 
 /**

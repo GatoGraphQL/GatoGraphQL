@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 
@@ -21,7 +21,7 @@ use PoP\Root\Module\ModuleInterface;
  *
  * Then, the activation is done when registering the extension.
  *
- * @see https://github.com/leoloso/PoP/blob/bccf2f0/layers/GraphQLAPIForWP/plugins/extension-demo/graphql-api-extension-demo.php#L73-L77
+ * @see https://github.com/leoloso/PoP/blob/bccf2f0/layers/GatoGraphQLForWP/plugins/extension-demo/graphql-api-extension-demo.php#L73-L77
  */
 abstract class AbstractExtension extends AbstractPlugin implements ExtensionInterface
 {

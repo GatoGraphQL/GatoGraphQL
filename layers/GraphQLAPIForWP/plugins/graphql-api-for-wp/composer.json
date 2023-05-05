@@ -3,7 +3,7 @@
     "type": "wordpress-plugin",
     "description": "GraphQL API for WordPress",
     "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
-    "homepage": "https://github.com/GraphQLAPI/graphql-api-for-wp",
+    "homepage": "https://github.com/GatoGraphQL/graphql-api-for-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -191,12 +191,12 @@
     },
     "autoload": {
         "psr-4": {
-            "GraphQLAPI\\GraphQLAPI\\": "src"
+            "GatoGraphQL\\GatoGraphQL\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GraphQLAPI\\GraphQLAPI\\": "tests"
+            "GatoGraphQL\\GatoGraphQL\\": "tests"
         }
     },
     "scripts": {

@@ -52,7 +52,7 @@ export default function PersistedQueryEndpointOverview() {
 			permalinkSuffix: permalinkParts?.suffix,
 			/**
 			 * Same attribute name as defined in
-			 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+			 * GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
 			 */
 			isPersistedQueryEndpointEnabled: persistedQueryEndpointOptionsBlock.attributes.isEnabled,
 		};

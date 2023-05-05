@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends AbstractSchemaConfigBlock
 {
@@ -47,7 +47,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
             $blockContent,
             /**
              * Hardcode style to disable the inputs, same as style in block.
-             * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/packages/components/src/components/base-styles/_mixins.scss
+             * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/packages/components/src/components/base-styles/_mixins.scss
              */
             $customizeConfiguration ? '' : 'pointer-events: none; opacity: 0.4;',
             $this->doRenderBlock($attributes, $content)

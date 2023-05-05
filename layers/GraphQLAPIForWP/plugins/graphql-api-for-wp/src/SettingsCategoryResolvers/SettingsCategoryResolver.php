@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers;
+namespace GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers;
 
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\Settings\Options;
+use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\Settings\Options;
 
 class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
 {

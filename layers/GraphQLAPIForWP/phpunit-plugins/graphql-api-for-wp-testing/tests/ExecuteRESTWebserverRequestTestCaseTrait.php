@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ResponseStatus;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\RESTResponse;
 use Psr\Http\Message\ResponseInterface;
 
 trait ExecuteRESTWebserverRequestTestCaseTrait

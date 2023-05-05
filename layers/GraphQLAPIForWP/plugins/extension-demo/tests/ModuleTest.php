@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ExtensionDemo;
+namespace GatoGraphQL\ExtensionDemo;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

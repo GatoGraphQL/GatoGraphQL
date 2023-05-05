@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Registries;
+namespace GatoGraphQL\GatoGraphQL\Registries;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\EndpointAnnotatorInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators\EndpointAnnotatorInterface;
 use PoP\Root\Services\ServiceInterface;
 
 abstract class AbstractEndpointAnnotatorRegistry implements EndpointAnnotatorRegistryInterface

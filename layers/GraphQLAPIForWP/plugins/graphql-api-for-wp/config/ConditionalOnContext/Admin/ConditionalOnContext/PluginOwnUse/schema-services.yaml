@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\PluginOwnUse\SchemaServices\:
+    GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\ConditionalOnContext\PluginOwnUse\SchemaServices\:
         resource: '../../../../../src/ConditionalOnContext/Admin/ConditionalOnContext/PluginOwnUse/SchemaServices/*'

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
+namespace GatoGraphQL\GatoGraphQL\Services\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use PoP\ComponentModel\App;
 
 trait UnlockPROPluginScriptTrait

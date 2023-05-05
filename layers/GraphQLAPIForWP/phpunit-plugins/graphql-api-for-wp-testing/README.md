@@ -21,7 +21,7 @@ composer require phpunit-for-graphql-api/graphql-api-for-wp-testing
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PHPUnitForGraphQLAPI\GraphQLAPITesting\Module::class,
+    \PHPUnitForGatoGraphQL\GatoGraphQLTesting\Module::class,
 ]);
 ```
 

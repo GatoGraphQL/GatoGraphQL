@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\Services\Clients\AdminGraphiQLWithExplorerClient;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage as UpstreamGraphiQLMenuPage;
 use PoPAPI\API\Schema\QueryInputs;
 
 /**

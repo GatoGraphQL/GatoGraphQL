@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Menus;
+namespace GatoGraphQL\GatoGraphQL\Services\Menus;
 
 use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 

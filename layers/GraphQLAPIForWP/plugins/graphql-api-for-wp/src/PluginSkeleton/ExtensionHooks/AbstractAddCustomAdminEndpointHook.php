@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionHooks;
+namespace GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionHooks;
 
-use GraphQLAPI\GraphQLAPI\Constants\HookNames;
+use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use PoP\Root\Module\ModuleInterface;
 
 use function add_filter;

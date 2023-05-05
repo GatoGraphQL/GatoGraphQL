@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 
 class SchemaUserStateMutationsBlockSchemaConfigurationExecuter extends AbstractSchemaMutationsBlockSchemaConfigurationExecuter
 {

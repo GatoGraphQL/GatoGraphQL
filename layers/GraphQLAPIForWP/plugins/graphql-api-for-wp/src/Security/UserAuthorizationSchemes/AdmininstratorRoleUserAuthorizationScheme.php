@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes;
+namespace GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes;
 
 class AdmininstratorRoleUserAuthorizationScheme extends AbstractByRoleUserAuthorizationScheme
 {

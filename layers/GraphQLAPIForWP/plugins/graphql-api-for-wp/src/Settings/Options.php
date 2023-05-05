@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Settings;
+namespace GatoGraphQL\GatoGraphQL\Settings;
 
 /**
  * Option names. By convention they must all start with "graphql-api-"

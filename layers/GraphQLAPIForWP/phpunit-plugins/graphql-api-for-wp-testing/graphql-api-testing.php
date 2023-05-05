@@ -13,9 +13,9 @@ Text Domain: graphql-api-testing
 Domain Path: /languages
 */
 
-use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIMainPlugin;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Environment;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Plugin;
+use GatoGraphQL\GatoGraphQL\Plugin as GatoGraphQLMainPlugin;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Environment;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Plugin;
 use PoP\Root\Environment as RootEnvironment;
 
 // Exit if accessed directly
@@ -27,7 +27,7 @@ add_action(
     'plugins_loaded',
     function (): void {
         // Validate the GraphQL API plugin is installed, or exit
-        if (!class_exists(GraphQLAPIMainPlugin::class)) {
+        if (!class_exists(GatoGraphQLMainPlugin::class)) {
             return;
         }
         

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\Registries\SettingsCategoryRegistryInterface;
-use GraphQLAPI\GraphQLAPI\SettingsCategoryResolvers\SettingsCategoryResolver;
-use GraphQLAPI\GraphQLAPI\Settings\Options;
-use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
-use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
+use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Constants\FrameworkParams;
 use PoP\ComponentModel\Module as ComponentModelModule;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Unit\Faker;
 
-use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase;
+use PHPUnitForGatoGraphQL\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase;
 use PoP\Root\Module\ModuleInterface;
 
 class SchemaVersioningWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase
@@ -22,7 +22,7 @@ class SchemaVersioningWPFakerFixtureQueryExecutionGraphQLServerTest extends Abst
         return [
             ...parent::getGraphQLServerModuleClasses(),
             ...[
-                \PHPUnitForGraphQLAPI\DummySchema\Module::class,
+                \PHPUnitForGatoGraphQL\DummySchema\Module::class,
             ]
         ];
     }

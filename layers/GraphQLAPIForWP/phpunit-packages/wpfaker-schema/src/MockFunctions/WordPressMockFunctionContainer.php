@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WPFakerSchema\MockFunctions;
+namespace PHPUnitForGatoGraphQL\WPFakerSchema\MockFunctions;
 
 /**
  * Class containing functions copied from WordPress

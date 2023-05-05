@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
-use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
+use GatoGraphQL\GatoGraphQL\Server\InternalGraphQLServerFactory;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 
 class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
 {

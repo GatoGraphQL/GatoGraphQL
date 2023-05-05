@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
-class GraphQLAPIContainerConfigurationService extends AbstractMainPluginDowngradeContainerConfigurationService
+class GatoGraphQLContainerConfigurationService extends AbstractMainPluginDowngradeContainerConfigurationService
 {
-    use GraphQLAPIContainerConfigurationServiceTrait;
+    use GatoGraphQLContainerConfigurationServiceTrait;
 
     /**
      * @return string[]

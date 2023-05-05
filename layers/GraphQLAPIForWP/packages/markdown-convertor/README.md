@@ -21,7 +21,7 @@ composer require graphql-api/markdown-convertor
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPI/packages/markdown-convertor`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPI/packages/markdown-convertor).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQL/packages/markdown-convertor`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQL/packages/markdown-convertor).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GraphQLAPI\MarkdownConvertor\Module::class,
+    \GatoGraphQL\MarkdownConvertor\Module::class,
 ]);
 ```
 

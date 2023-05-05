@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Taxonomies;
+namespace GatoGraphQL\GatoGraphQL\Services\Taxonomies;
 
 abstract class AbstractTag extends AbstractTaxonomy
 {

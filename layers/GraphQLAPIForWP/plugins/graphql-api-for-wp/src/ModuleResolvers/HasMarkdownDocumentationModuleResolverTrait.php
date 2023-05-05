@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ContentProcessors\ContentParserOptions;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentRetrieverTrait;
 
 trait HasMarkdownDocumentationModuleResolverTrait
 {

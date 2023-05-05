@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 
 use PHPUnit\Framework\TestCase;
 

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\Constants\HookNames;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginStaticModuleConfiguration;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\HookNames;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleConfigurationHelpers;

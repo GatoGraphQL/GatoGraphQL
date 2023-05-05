@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace GatoGraphQL\GatoGraphQL;
 
-use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginEnvironmentHelpers;
 
 class PluginEnvironment
 {

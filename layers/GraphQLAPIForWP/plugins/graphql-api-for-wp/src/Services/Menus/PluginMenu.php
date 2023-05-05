@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Menus;
+namespace GatoGraphQL\GatoGraphQL\Services\Menus;
 
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 
 /**
  * Main plugin's admin menu

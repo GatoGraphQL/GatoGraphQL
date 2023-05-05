@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers;
 
 use WP_REST_Controller;
 

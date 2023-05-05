@@ -8,6 +8,6 @@ trait ExtensionDemoContainerConfigurationServiceTrait
 {
     protected function getPluginRelativePath(): string
     {
-        return 'layers/GraphQLAPIForWP/plugins/extension-demo';
+        return 'layers/GatoGraphQLForWP/plugins/extension-demo';
     }
 }

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Security;
+namespace GatoGraphQL\GatoGraphQL\Security;
 
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
-use GraphQLAPI\GraphQLAPI\Exception\UserAuthorizationException;
-use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Exception\UserAuthorizationException;
+use GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 

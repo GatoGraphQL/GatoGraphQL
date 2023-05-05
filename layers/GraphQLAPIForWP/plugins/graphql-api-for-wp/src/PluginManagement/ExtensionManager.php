@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginManagement;
+namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
-use GraphQLAPI\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
-use GraphQLAPI\GraphQLAPI\Exception\ExtensionNotRegisteredException;
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
+use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
+use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 
 class ExtensionManager extends AbstractPluginManager
 {

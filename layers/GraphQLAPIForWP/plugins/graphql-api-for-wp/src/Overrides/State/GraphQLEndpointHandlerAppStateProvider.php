@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Overrides\State;
+namespace GatoGraphQL\GatoGraphQL\Overrides\State;
 
-use GraphQLAPI\GraphQLAPI\State\ExecutingGraphQLRequestAppStateProviderTrait;
+use GatoGraphQL\GatoGraphQL\State\ExecutingGraphQLRequestAppStateProviderTrait;
 use GraphQLByPoP\GraphQLEndpointForWP\State\GraphQLEndpointHandlerAppStateProvider as UpstreamGraphQLEndpointHandlerAppStateProvider;
 
 class GraphQLEndpointHandlerAppStateProvider extends UpstreamGraphQLEndpointHandlerAppStateProvider

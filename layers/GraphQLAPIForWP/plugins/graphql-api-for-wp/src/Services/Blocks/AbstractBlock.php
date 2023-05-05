@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 use Error;
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
-use GraphQLAPI\GraphQLAPI\Services\EditorScripts\HasDocumentationScriptTrait;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\RenderingHelpers;
-use GraphQLAPI\PluginUtils\Services\Helpers\StringConversion;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\BlockCategoryInterface;
+use GatoGraphQL\GatoGraphQL\Services\EditorScripts\HasDocumentationScriptTrait;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EditorHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\RenderingHelpers;
+use GatoGraphQL\PluginUtils\Services\Helpers\StringConversion;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -449,7 +449,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         /**
          * Register the documentation (from under folder "docs/"), for the locale and the default language
          * @todo Maybe uncomment for webpack v5, to not duplicate the content of the docs inside build/index.js
-         * @see https://github.com/GraphQLAPI/graphql-api-for-wp/issues/1
+         * @see https://github.com/GatoGraphQL/graphql-api-for-wp/issues/1
          */
         // $this->initDocumentationScripts();
     }

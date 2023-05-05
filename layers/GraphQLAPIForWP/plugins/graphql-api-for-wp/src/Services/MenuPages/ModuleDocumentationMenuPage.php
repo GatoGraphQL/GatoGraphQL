@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\PluginMarkdownContentRetrieverTrait;
-use GraphQLAPI\GraphQLAPI\Exception\ContentNotExistsException;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\Root\App;
 
 /**

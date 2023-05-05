@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
+namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointOptionsBlock;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use GatoGraphQL\GatoGraphQL\Registries\BlockRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\EndpointAnnotatorRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointBlockRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
 
 abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpointCustomPostType
 {

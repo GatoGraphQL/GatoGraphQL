@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Unit\Faker;
 
-use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase;
+use PHPUnitForGatoGraphQL\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase;
 use PoP\Root\Module\ModuleInterface;
 
 use function Brain\Monkey\Functions\expect;

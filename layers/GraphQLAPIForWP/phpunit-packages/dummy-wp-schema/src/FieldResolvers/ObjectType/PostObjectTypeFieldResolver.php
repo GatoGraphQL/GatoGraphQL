@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\DummyWPSchema\FieldResolvers\ObjectType;
+namespace PHPUnitForGatoGraphQL\DummyWPSchema\FieldResolvers\ObjectType;
 
 use DateTime;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;

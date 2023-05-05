@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 trait AllowAccessToEntriesBlockTrait

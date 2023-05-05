@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    GraphQLAPI\GraphQLAPI\ModuleResolvers\:
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\:
         resource: '../src/ModuleResolvers/*'

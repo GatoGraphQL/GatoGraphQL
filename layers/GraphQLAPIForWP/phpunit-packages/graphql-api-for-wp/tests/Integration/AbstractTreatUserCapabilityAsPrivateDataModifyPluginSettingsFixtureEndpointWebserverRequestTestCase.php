@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
 
 abstract class AbstractTreatUserCapabilityAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {

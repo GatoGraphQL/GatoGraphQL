@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
+namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EditorBlockInterface;
+use GatoGraphQL\GatoGraphQL\Registries\BlockRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\EditorBlockInterface;
 
 trait WithBlockRegistryCustomPostTypeTrait
 {

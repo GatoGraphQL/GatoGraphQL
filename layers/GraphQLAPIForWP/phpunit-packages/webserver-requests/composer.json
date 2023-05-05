@@ -161,7 +161,7 @@
     "type": "library",
     "description": "Test the response from requests against a webserver using PHPUnit and Guzzle",
     "keywords": ["GraphQL", "PHP", "PoP", "guzzle", "phpunit"],
-    "homepage": "https://github.com/PHPUnitForGraphQLAPI/webserver-requests",
+    "homepage": "https://github.com/PHPUnitForGatoGraphQL/webserver-requests",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -183,12 +183,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\WebserverRequests\\": "src"
+            "PHPUnitForGatoGraphQL\\WebserverRequests\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\WebserverRequests\\": "tests"
+            "PHPUnitForGatoGraphQL\\WebserverRequests\\": "tests"
         }
     },
     "scripts": {

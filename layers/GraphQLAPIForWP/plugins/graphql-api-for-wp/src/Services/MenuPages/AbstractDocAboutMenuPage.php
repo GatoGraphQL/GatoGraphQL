@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 
 /**
  * Open documentation within the About page

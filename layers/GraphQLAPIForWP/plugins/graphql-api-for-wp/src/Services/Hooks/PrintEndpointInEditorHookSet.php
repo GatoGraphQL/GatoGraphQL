@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Hooks;
+namespace GatoGraphQL\GatoGraphQL\Services\Hooks;
 
-use GraphQLAPI\GraphQLAPI\Security\UserAuthorizationInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class PrintEndpointInEditorHookSet extends AbstractHookSet

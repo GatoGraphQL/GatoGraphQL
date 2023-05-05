@@ -8,6 +8,6 @@ trait TestingContainerConfigurationServiceTrait
 {
     protected function getPluginRelativePath(): string
     {
-        return 'layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing';
+        return 'layers/GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing';
     }
 }

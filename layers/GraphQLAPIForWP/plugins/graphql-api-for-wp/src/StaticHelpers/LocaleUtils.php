@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\StaticHelpers;
+namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 /**
  * "Static" because it can be invoked from a TypeModuleResolver's getSettingsDefaultValue

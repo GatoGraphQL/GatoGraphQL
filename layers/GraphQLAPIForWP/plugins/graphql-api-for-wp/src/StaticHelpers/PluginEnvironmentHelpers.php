@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\StaticHelpers;
+namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 class PluginEnvironmentHelpers
 {

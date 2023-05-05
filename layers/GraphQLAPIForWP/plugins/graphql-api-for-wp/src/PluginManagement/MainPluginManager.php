@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginManagement;
+namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
-use GraphQLAPI\GraphQLAPI\Exception\MainPluginNotRegisteredException;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\MainPluginInterface;
+use GatoGraphQL\GatoGraphQL\Exception\MainPluginNotRegisteredException;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInterface;
 
 class MainPluginManager extends AbstractPluginManager
 {

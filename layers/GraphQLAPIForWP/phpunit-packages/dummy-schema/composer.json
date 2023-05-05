@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Dummy schema resolvers for testing with PHPUnit",
     "keywords": ["GraphQL", "PHP", "PoP", "dummy", "schema"],
-    "homepage": "https://github.com/PHPUnitForGraphQLAPI/dummy-schema",
+    "homepage": "https://github.com/PHPUnitForGatoGraphQL/dummy-schema",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -181,12 +181,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\DummySchema\\": "src"
+            "PHPUnitForGatoGraphQL\\DummySchema\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\DummySchema\\": "tests"
+            "PHPUnitForGatoGraphQL\\DummySchema\\": "tests"
         }
     },
     "scripts": {

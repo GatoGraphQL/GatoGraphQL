@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Facades;
+namespace GatoGraphQL\GatoGraphQL\Facades;
 
-use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManager;
-use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManager;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 
 /**
  * Obtain an instance of the UserSettingsManager.

@@ -58,7 +58,7 @@ registerBlockType( 'graphql-api/schema-config-schema-tags', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION
 		 */
 		customizeConfiguration: {
 			type: 'boolean',
@@ -66,7 +66,7 @@ registerBlockType( 'graphql-api/schema-config-schema-tags', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigSchemaTagsBlock::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES
 		 */
 		includedTagTaxonomies: {
 			type: 'array',

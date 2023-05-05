@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PHPUnitForGraphQLAPI\DummySchema\FeedbackItemProviders\:
+    PHPUnitForGatoGraphQL\DummySchema\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'

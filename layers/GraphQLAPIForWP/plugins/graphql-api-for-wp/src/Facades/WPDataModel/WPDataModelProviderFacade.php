@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Facades\WPDataModel;
+namespace GatoGraphQL\GatoGraphQL\Facades\WPDataModel;
 
-use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
+use GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface;
 use PoP\Root\App;
 
 class WPDataModelProviderFacade

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators;
 
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockHelpers;
 use WP_Post;
 
 abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator implements ClientEndpointAnnotatorInterface

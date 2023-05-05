@@ -5,5 +5,5 @@ services:
         autoconfigure: true
 
     # These classes are invoked after `bootSystem` and before `bootApplication`
-    GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\SystemServices\:
+    GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\:
         resource: '../../../src/ConditionalOnContext/Admin/SystemServices/*'

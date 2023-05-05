@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI;
 
 use Psr\Http\Message\ResponseInterface;
 use stdClass;

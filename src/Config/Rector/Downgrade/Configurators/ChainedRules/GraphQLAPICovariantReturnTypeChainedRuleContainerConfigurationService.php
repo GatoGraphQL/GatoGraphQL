@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\GraphQLAPIContainerConfigurationServiceTrait;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\GatoGraphQLContainerConfigurationServiceTrait;
 
-class GraphQLAPICovariantReturnTypeChainedRuleContainerConfigurationService extends AbstractPluginArrowFnUnionTypeChainedRuleContainerConfigurationService
+class GatoGraphQLCovariantReturnTypeChainedRuleContainerConfigurationService extends AbstractPluginArrowFnUnionTypeChainedRuleContainerConfigurationService
 {
-    use GraphQLAPIContainerConfigurationServiceTrait;
+    use GatoGraphQLContainerConfigurationServiceTrait;
 
     protected function getPaths(): array
     {

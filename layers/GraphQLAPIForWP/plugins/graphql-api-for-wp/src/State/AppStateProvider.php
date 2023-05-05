@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\State;
+namespace GatoGraphQL\GatoGraphQL\State;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\Root\App;
 use PoP\Root\Routing\RequestNature;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 

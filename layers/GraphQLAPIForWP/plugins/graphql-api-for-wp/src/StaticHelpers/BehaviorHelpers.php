@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\StaticHelpers;
+namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ResetSettingsOptions;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
+use GatoGraphQL\GatoGraphQL\Constants\ResetSettingsOptions;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\PluginEnvironment;
+use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
 
 class BehaviorHelpers
 {

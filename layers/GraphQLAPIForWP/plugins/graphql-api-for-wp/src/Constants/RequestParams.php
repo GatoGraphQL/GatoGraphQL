@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Constants;
+namespace GatoGraphQL\GatoGraphQL\Constants;
 
 class RequestParams
 {

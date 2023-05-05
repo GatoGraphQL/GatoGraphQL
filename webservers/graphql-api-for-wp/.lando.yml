@@ -17,11 +17,11 @@ services:
         XDEBUG_MODE: ''
       volumes:
         - >-
-          ../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing:/app/wordpress/wp-content/plugins/graphql-api-testing
+          ../../layers/GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing:/app/wordpress/wp-content/plugins/graphql-api-testing
         - >-
-          ../../layers/GraphQLAPIForWP/plugins/extension-demo:/app/wordpress/wp-content/plugins/graphql-api-extension-demo
+          ../../layers/GatoGraphQLForWP/plugins/extension-demo:/app/wordpress/wp-content/plugins/graphql-api-extension-demo
         - >-
-          ../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp:/app/wordpress/wp-content/plugins/graphql-api
+          ../../layers/GatoGraphQLForWP/plugins/graphql-api-for-wp:/app/wordpress/wp-content/plugins/graphql-api
         - >-
           ../../layers/API/packages/api-clients:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-api/api-clients
         - >-
@@ -59,11 +59,11 @@ services:
         - >-
           ../../layers/Engine/packages/root-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/getpop/root-wp
         - >-
-          ../../layers/GraphQLAPIForWP/packages/external-dependency-wrappers:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/external-dependency-wrappers
+          ../../layers/GatoGraphQLForWP/packages/external-dependency-wrappers:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/external-dependency-wrappers
         - >-
-          ../../layers/GraphQLAPIForWP/packages/markdown-convertor:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/markdown-convertor
+          ../../layers/GatoGraphQLForWP/packages/markdown-convertor:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/markdown-convertor
         - >-
-          ../../layers/GraphQLAPIForWP/packages/plugin-utils:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/plugin-utils
+          ../../layers/GatoGraphQLForWP/packages/plugin-utils:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-api/plugin-utils
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-clients-for-wp:/app/wordpress/wp-content/plugins/graphql-api/vendor/graphql-by-pop/graphql-clients-for-wp
         - >-

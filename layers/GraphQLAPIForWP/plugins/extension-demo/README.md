@@ -16,7 +16,7 @@ Then, in the WordPress admin:
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/plugins/extension-demo`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/plugins/extension-demo).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/extension-demo`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/extension-demo).
 
 ## Credits
 

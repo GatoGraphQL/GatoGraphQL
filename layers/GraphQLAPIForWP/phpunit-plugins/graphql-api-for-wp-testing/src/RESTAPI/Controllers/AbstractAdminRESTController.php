@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Roles;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Roles;
 
 use function current_user_can;
 

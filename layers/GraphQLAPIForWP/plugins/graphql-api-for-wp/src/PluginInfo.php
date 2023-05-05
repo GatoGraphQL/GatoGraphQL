@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace GatoGraphQL\GatoGraphQL;
 
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInfo;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractMainPluginInfo;
 
 class PluginInfo extends AbstractMainPluginInfo
 {

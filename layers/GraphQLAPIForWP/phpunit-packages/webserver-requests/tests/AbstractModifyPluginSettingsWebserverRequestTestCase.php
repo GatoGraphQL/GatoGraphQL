@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests;
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 abstract class AbstractModifyPluginSettingsWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {

@@ -21,7 +21,7 @@ composer require phpunit-for-graphql-api/dummy-wp-schema
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/phpunit-packages/dummy-wp-schema`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/phpunit-packages/dummy-wp-schema).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/phpunit-packages/dummy-wp-schema`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/phpunit-packages/dummy-wp-schema).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PHPUnitForGraphQLAPI\DummyWPSchema\Module::class,
+    \PHPUnitForGatoGraphQL\DummyWPSchema\Module::class,
 ]);
 ```
 

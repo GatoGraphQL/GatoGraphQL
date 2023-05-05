@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaSettingsBlock;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigSchemaSettingsBlock;
 use PoPCMSSchema\Settings\Environment as SettingsEnvironment;
 use PoPCMSSchema\Settings\Module as SettingsModule;
 use PoP\Root\Module\ModuleConfigurationHelpers;

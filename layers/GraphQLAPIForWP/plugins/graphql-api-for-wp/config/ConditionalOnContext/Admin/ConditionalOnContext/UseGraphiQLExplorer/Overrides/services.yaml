@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    GraphQLAPI\GraphQLAPI\Services\MenuPages\GraphiQLMenuPage:
-        class: '\GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\MenuPages\GraphiQLMenuPage'
+    GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage:
+        class: '\GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\MenuPages\GraphiQLMenuPage'

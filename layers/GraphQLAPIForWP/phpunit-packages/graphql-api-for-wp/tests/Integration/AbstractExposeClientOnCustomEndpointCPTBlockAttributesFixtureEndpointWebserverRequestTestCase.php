@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use PHPUnitForGatoGraphQL\WebserverRequests\AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase;
 
 abstract class AbstractExposeClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebserverRequestTestCase extends AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase
 {

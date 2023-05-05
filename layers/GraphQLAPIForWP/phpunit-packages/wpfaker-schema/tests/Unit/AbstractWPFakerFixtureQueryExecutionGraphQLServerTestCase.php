@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WPFakerSchema\Unit;
+namespace PHPUnitForGatoGraphQL\WPFakerSchema\Unit;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
 use GraphQLByPoP\GraphQLServer\Unit\AbstractFixtureQueryExecutionGraphQLServerTestCase;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use PHPUnitForGraphQLAPI\WPFakerSchema\DataParsing\WordPressDataParser;
-use PHPUnitForGraphQLAPI\WPFakerSchema\MockFunctions\WordPressMockFunctionContainer;
-use PHPUnitForGraphQLAPI\WPFakerSchema\Seed\FakerWordPressDataSeeder;
+use PHPUnitForGatoGraphQL\WPFakerSchema\DataParsing\WordPressDataParser;
+use PHPUnitForGatoGraphQL\WPFakerSchema\MockFunctions\WordPressMockFunctionContainer;
+use PHPUnitForGatoGraphQL\WPFakerSchema\Seed\FakerWordPressDataSeeder;
 use PoP\Root\Module\ModuleInterface;
 
 use function Brain\faker;
@@ -145,7 +145,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase extends
         return [
             ...parent::getGraphQLServerModuleClasses(),
             ...[
-                \PHPUnitForGraphQLAPI\WPFakerSchema\Module::class,
+                \PHPUnitForGatoGraphQL\WPFakerSchema\Module::class,
             ]
         ];
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container;
+namespace GatoGraphQL\GatoGraphQL\Container;
 
 use PoP\Root\Container\ContainerBuilderFactory;
 

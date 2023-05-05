@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

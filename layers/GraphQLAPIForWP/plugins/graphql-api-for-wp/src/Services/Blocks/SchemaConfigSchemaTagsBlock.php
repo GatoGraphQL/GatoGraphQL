@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Constants\ConfigurationDefaultValues;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
+use GatoGraphQL\GatoGraphQL\Constants\ConfigurationDefaultValues;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
+use GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface;
 
 class SchemaConfigSchemaTagsBlock extends AbstractSchemaConfigCustomizableConfigurationBlock
 {
@@ -52,7 +52,7 @@ class SchemaConfigSchemaTagsBlock extends AbstractSchemaConfigCustomizableConfig
         return array_merge(
             parent::getLocalizedData(),
             [
-                'possibleTagTaxonomies' => $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginTagTaxonomies(),
+                'possibleTagTaxonomies' => $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginTagTaxonomies(),
                 'defaultTagTaxonomies' => ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES,
             ]
         );

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Constants\ConfigurationDefaultValues;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\WPDataModel\WPDataModelProviderInterface;
+use GatoGraphQL\GatoGraphQL\Constants\ConfigurationDefaultValues;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
+use GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface;
 
 class SchemaConfigSchemaCustomPostsBlock extends AbstractSchemaConfigCustomizableConfigurationBlock
 {
@@ -52,7 +52,7 @@ class SchemaConfigSchemaCustomPostsBlock extends AbstractSchemaConfigCustomizabl
         return array_merge(
             parent::getLocalizedData(),
             [
-                'possibleCustomPostTypes' => $this->getWPDataModelProvider()->getFilteredNonGraphQLAPIPluginCustomPostTypes(),
+                'possibleCustomPostTypes' => $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes(),
                 'defaultCustomPostTypes' => ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES,
             ]
         );

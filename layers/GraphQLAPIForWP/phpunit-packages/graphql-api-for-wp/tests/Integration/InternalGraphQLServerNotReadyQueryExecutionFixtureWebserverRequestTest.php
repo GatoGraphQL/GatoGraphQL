@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
+use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 
 /**
  * Test the InternalGraphQLServer throws the GraphQLServerNotReady exception.
  *
- * @see layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
+ * @see layers/GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Executers/InternalGraphQLServerTestExecuter.php
  */
 class InternalGraphQLServerNotReadyQueryExecutionFixtureWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
@@ -57,7 +57,7 @@ class InternalGraphQLServerNotReadyQueryExecutionFixtureWebserverRequestTest ext
         return <<<JSON
         {
             "code": "internal_server_error",
-            "message": "Uncaught GraphQLAPI\\\\GraphQLAPI\\\\Exception\\\\GraphQLServerNotReadyException: The GraphQL server is not ready yet. Its initialization takes place in WordPress action hooks: 'wp_loaded' in the wp-admin, 'rest_api_init' in the WP REST API, and 'wp' otherwise (i.e. in the actual website). Retrieve the instance of the GraphQL server only after these hooks have been invoked.",
+            "message": "Uncaught GatoGraphQL\\\\GatoGraphQL\\\\Exception\\\\GraphQLServerNotReadyException: The GraphQL server is not ready yet. Its initialization takes place in WordPress action hooks: 'wp_loaded' in the wp-admin, 'rest_api_init' in the WP REST API, and 'wp' otherwise (i.e. in the actual website). Retrieve the instance of the GraphQL server only after these hooks have been invoked.",
             "data": {
                 "status": 500
             },

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
+namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
-use GraphQLAPI\GraphQLAPI\Constants\HookNames;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointSchemaConfigurationBlock;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointBlockHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
+use GatoGraphQL\GatoGraphQL\Constants\HookNames;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Registries\EndpointAnnotatorRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointBlockHelpers;
 use PoP\Root\App;
 use WP_Post;
 

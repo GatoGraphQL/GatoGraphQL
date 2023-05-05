@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Settings\Options;
 
 use function update_option;
 

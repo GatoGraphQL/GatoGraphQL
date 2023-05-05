@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Unit\Faker;
 
-use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractEnableDisableWPFakerFixtureQueryExecutionGraphQLServerTestCase;
+use PHPUnitForGatoGraphQL\WPFakerSchema\Unit\AbstractEnableDisableWPFakerFixtureQueryExecutionGraphQLServerTestCase;
 use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractEnableDisableSingleTypeInsteadOfCustomPostUnionTypeFixtureQueryExecutionGraphQLServerTestCase extends AbstractEnableDisableWPFakerFixtureQueryExecutionGraphQLServerTestCase

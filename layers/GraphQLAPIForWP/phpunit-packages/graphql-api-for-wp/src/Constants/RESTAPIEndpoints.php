@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Constants;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Constants;
 
 class RESTAPIEndpoints
 {

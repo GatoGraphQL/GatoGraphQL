@@ -9,4 +9,4 @@ Transform your WordPress site into a modern GraphQL server: [graphql-api.com](ht
 This layer provides the implementation for WordPress of [GraphQL by PoP](https://graphql-by-pop.com/). It comprises:
 
 - The main plugin, [GraphQL API for WordPress](plugins/graphql-api-for-wp) ([graphql-api.com](https://graphql-api.com)).
-- An [extension demo](layers/GraphQLAPIForWP/plugins/extension-demo) plugin, demonstrating how to extend the GraphQL schema.
+- An [extension demo](layers/GatoGraphQLForWP/plugins/extension-demo) plugin, demonstrating how to extend the GraphQL schema.

@@ -21,7 +21,7 @@ composer require phpunit-for-graphql-api/wpfaker-schema
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/phpunit-packages/wpfaker-schema`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/phpunit-packages/wpfaker-schema`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/phpunit-packages/wpfaker-schema).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PHPUnitForGraphQLAPI\WPFakerSchema\Module::class,
+    \PHPUnitForGatoGraphQL\WPFakerSchema\Module::class,
 ]);
 ```
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
-use PHPUnitForGraphQLAPI\WebserverRequests\EnableDisableModuleWebserverRequestTestTrait;
-use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
+use PHPUnitForGatoGraphQL\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
+use PHPUnitForGatoGraphQL\WebserverRequests\EnableDisableModuleWebserverRequestTestTrait;
+use PHPUnitForGatoGraphQL\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
 /**
  * Test that disabling clients (GraphiQL/Voyager) works well

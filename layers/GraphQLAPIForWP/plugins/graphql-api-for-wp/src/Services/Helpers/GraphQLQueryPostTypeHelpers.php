@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
+namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
-use GraphQLAPI\GraphQLAPI\Services\BlockAccessors\PersistedQueryEndpointGraphiQLBlockAccessor;
+use GatoGraphQL\GatoGraphQL\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
+use GatoGraphQL\GatoGraphQL\Services\BlockAccessors\PersistedQueryEndpointGraphiQLBlockAccessor;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Post;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Settings;
+namespace GatoGraphQL\GatoGraphQL\Settings;
 
 interface SettingsNormalizerInterface
 {

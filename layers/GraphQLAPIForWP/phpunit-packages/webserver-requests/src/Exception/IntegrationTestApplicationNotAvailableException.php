@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests\Exception;
+namespace PHPUnitForGatoGraphQL\WebserverRequests\Exception;
 
 use Exception;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GraphQLAPI\GraphQLAPI\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 
 class DisableSchemaModulesOnPrivateEndpointTestOnBlockEditorAdminEndpointsFixtureEndpointWebserverRequestTest extends AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsFixtureEndpointWebserverRequestTestCase
 {

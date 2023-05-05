@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointExecuters;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
 use GraphQLByPoP\GraphQLRequest\Execution\QueryRetrieverInterface;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter;
 use WP_Post;
 
 abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractCPTEndpointExecuter implements GraphQLQueryResolutionEndpointExecuterInterface, EndpointExecuterServiceTagInterface

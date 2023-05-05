@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/custom-endpoint-options', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractEndpointOptionsBlock::ATTRIBUTE_NAME_IS_ENABLED
 		 */
 		isEnabled: {
 			type: 'boolean',

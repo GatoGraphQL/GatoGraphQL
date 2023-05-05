@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\State;
+namespace GatoGraphQL\GatoGraphQL\State;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\App;
 use PoP\Root\State\AbstractAppStateProvider;
 

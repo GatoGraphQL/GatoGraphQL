@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLRequest\State;
 use GraphQLByPoP\GraphQLRequest\StaticHelpers\GraphQLQueryPayloadRetriever;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider

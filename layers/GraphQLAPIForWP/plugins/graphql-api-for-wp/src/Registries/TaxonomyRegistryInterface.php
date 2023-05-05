@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Registries;
+namespace GatoGraphQL\GatoGraphQL\Registries;
 
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
 
 interface TaxonomyRegistryInterface
 {

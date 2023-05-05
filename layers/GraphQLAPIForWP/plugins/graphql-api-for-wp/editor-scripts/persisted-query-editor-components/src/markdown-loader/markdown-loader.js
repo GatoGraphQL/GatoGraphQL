@@ -22,8 +22,8 @@ const getMarkdownContent = ( fileName, lang ) => {
 const getMarkdownContentOrUseDefault = ( fileName, defaultLang, lang ) => {
 	/**
 	 * If lang or defaultLang are empty, then get them from the localized data under `window.persistedQueryEndpointEditorComponents`
-	 * Property "localeLang": same as constant GraphQLAPI\GraphQLAPI\General\DocumentationConstants::LOCALE_LANG
-	 * Property "defaultLang": same as constants: same as constant GraphQLAPI\GraphQLAPI\General\DocumentationConstants::DEFAULT_LANG
+	 * Property "localeLang": same as constant GatoGraphQL\GatoGraphQL\General\DocumentationConstants::LOCALE_LANG
+	 * Property "defaultLang": same as constants: same as constant GatoGraphQL\GatoGraphQL\General\DocumentationConstants::DEFAULT_LANG
 	 */
 	lang = lang || window.persistedQueryEndpointEditorComponents?.localeLang
 	defaultLang = defaultLang || window.persistedQueryEndpointEditorComponents?.defaultLang

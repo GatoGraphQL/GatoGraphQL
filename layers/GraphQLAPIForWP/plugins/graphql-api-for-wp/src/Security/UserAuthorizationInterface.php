@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Security;
+namespace GatoGraphQL\GatoGraphQL\Security;
 
 interface UserAuthorizationInterface
 {

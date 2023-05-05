@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators;
+namespace GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators;
 
 interface PersistedQueryEndpointAnnotatorServiceTagInterface extends EndpointAnnotatorInterface
 {

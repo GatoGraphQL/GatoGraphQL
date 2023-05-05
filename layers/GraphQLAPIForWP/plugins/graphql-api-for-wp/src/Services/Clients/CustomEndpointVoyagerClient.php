@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Clients;
+namespace GatoGraphQL\GatoGraphQL\Services\Clients;
 
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\VoyagerClient;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 

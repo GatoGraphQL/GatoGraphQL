@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaTypeModuleResolver as GraphQLAPISchemaTypeModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLAPI\GraphQLAPI\StaticHelpers\BehaviorHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver as GatoGraphQLSchemaTypeModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
@@ -118,26 +118,26 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_CUSTOMPOST_META:
                 return [
                     [
-                        GraphQLAPISchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                        GatoGraphQLSchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                     ],
                 ];
             case self::SCHEMA_USER_META:
                 return [
                     [
-                        GraphQLAPISchemaTypeModuleResolver::SCHEMA_USERS,
+                        GatoGraphQLSchemaTypeModuleResolver::SCHEMA_USERS,
                     ],
                 ];
             case self::SCHEMA_COMMENT_META:
                 return [
                     [
-                        GraphQLAPISchemaTypeModuleResolver::SCHEMA_COMMENTS,
+                        GatoGraphQLSchemaTypeModuleResolver::SCHEMA_COMMENTS,
                     ],
                 ];
             case self::SCHEMA_TAXONOMY_META:
                 return [
                     [
-                        GraphQLAPISchemaTypeModuleResolver::SCHEMA_TAGS,
-                        GraphQLAPISchemaTypeModuleResolver::SCHEMA_CATEGORIES,
+                        GatoGraphQLSchemaTypeModuleResolver::SCHEMA_TAGS,
+                        GatoGraphQLSchemaTypeModuleResolver::SCHEMA_CATEGORIES,
                     ],
                 ];
         }

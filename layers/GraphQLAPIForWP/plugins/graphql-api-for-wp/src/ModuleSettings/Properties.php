@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ModuleSettings;
+namespace GatoGraphQL\GatoGraphQL\ModuleSettings;
 
 class Properties
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Endpoints;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Environment;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\AbstractRESTController;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\CPTBlockAttributesAdminRESTController;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\ModulesAdminRESTController;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\ModuleSettingsAdminRESTController;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Environment;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers\AbstractRESTController;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers\CPTBlockAttributesAdminRESTController;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers\ModulesAdminRESTController;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers\ModuleSettingsAdminRESTController;
 
 class AdminRESTAPIEndpointManager extends AbstractRESTAPIEndpointManager
 {

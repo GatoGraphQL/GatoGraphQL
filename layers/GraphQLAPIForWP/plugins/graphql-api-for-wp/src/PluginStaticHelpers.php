@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace GatoGraphQL\GatoGraphQL;
 
 class PluginStaticHelpers
 {
@@ -12,6 +12,6 @@ class PluginStaticHelpers
         $tag = str_ends_with($mainPluginVersion, '-dev')
             ? 'master'
             : $mainPluginVersion;
-        return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/';
+        return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/';
     }
 }

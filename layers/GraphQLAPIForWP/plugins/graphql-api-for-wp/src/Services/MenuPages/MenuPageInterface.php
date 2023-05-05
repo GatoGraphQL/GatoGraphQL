@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\Services\Menus\MenuInterface;
+use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
 
 /**
  * Menu Page

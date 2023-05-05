@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\MarkdownConvertor;
+namespace GatoGraphQL\MarkdownConvertor;
 
 use Michelf\MarkdownExtra;
 

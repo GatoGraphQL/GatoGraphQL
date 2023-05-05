@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
-use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 
 class PostMutationPermissionsFixtureEndpointWebserverRequestTest extends AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {

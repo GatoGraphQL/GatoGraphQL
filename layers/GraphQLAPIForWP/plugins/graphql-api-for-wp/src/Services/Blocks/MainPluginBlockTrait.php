@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\Scripts\MainPluginScriptTrait;
+use GatoGraphQL\GatoGraphQL\Services\Scripts\MainPluginScriptTrait;
 
 /**
  * Trait to set common functions for a Gutenberg block for this plugin (GraphQL API)

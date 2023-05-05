@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use WP_Error;
 
 trait WithModuleParamRESTControllerTrait

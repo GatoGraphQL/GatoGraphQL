@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
+namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 
 class RenderingHelpers
 {

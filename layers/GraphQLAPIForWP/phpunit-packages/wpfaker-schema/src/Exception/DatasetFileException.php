@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WPFakerSchema\Exception;
+namespace PHPUnitForGatoGraphQL\WPFakerSchema\Exception;
 
 use Exception;
 

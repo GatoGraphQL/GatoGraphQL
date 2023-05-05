@@ -59,7 +59,7 @@ registerBlockType( 'graphql-api/schema-config-namespacing', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames::ENABLED_CONST
+		 * GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames::ENABLED_CONST
 		 */
 		enabledConst: {
 			type: 'string',

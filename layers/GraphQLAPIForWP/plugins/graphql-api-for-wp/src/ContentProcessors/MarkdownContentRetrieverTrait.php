@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
+namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
-use GraphQLAPI\GraphQLAPI\Exception\ContentNotExistsException;
+use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
 
 trait MarkdownContentRetrieverTrait
 {

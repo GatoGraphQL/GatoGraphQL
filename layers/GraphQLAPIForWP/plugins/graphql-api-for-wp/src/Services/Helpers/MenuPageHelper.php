@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
+namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use PoP\Root\App;
 
 /**

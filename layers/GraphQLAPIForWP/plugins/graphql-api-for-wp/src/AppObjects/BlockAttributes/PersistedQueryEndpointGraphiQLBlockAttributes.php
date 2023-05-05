@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\AppObjects\BlockAttributes;
+namespace GatoGraphQL\GatoGraphQL\AppObjects\BlockAttributes;
 
 class PersistedQueryEndpointGraphiQLBlockAttributes
 {

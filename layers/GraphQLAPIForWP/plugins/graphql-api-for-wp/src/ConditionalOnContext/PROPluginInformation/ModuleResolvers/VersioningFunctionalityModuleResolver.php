@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\AbstractFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\ModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\VersioningFunctionalityModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\Plugin;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\VersioningFunctionalityModuleResolverTrait;
+use GatoGraphQL\GatoGraphQL\Plugin;
 use PoP\Root\Environment as RootEnvironment;
 
 class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface

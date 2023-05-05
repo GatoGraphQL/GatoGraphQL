@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 
 trait UsePRODocsMenuPageTrait
 {

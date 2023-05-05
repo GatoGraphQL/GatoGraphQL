@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\CommonModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\HasMarkdownDocumentationModuleResolverTrait;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\PROPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\CommonModuleResolverTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\HasMarkdownDocumentationModuleResolverTrait;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\PROPluginMarkdownContentRetrieverTrait;
 
 trait ModuleResolverTrait
 {

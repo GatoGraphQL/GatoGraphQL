@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\StateManagers;
+namespace GatoGraphQL\GatoGraphQL\StateManagers;
 
-use GraphQLAPI\GraphQLAPI\App;
+use GatoGraphQL\GatoGraphQL\App;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\StateManagers\HookManagerInterface;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
+namespace GatoGraphQL\GatoGraphQL\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Registries\TaxonomyRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Taxonomies\TaxonomyInterface;
+use GatoGraphQL\GatoGraphQL\Registries\TaxonomyRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterTaxonomyCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass

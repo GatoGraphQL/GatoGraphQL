@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests\Constants;
+namespace PHPUnitForGatoGraphQL\WebserverRequests\Constants;
 
 /**
  * Watch out: the constants in this class are referenced from
@@ -10,7 +10,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests\Constants;
  * included there, hence its values are hardcoded. Update
  * with caution!
  *
- * @see layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Plugin.php
+ * @see layers/GatoGraphQLForWP/phpunit-plugins/graphql-api-for-wp-testing/src/Plugin.php
  *
  * @todo Create a new package to make it DRY
  */

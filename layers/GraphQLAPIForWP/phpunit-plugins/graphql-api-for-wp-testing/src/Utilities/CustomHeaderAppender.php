@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\CustomHeaders;
 
 use function add_action;
 use function is_user_logged_in;
@@ -24,7 +24,7 @@ class CustomHeaderAppender
      * Send the WP REST nonce as a header, to make it easier
      * to execute REST endpoints for integration tests.
      *
-     * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/tests/AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase.php
+     * @see layers/GatoGraphQLForWP/phpunit-packages/webserver-requests/tests/AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase.php
      */
     public function addRESTNonceAsHeader(): void
     {

@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Exception\EnvParameterException;
  * ```
  *   protected function getClientFunctionalityModuleResolverService()
  *   {
- *       $this->services['GraphQLAPI\\GraphQLAPI\\ModuleResolvers\\ClientFunctionalityModuleResolver'] = $instance = new \GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver();
+ *       $this->services['GatoGraphQL\\GatoGraphQL\\ModuleResolvers\\ClientFunctionalityModuleResolver'] = $instance = new \GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver();
  *
  *       $instance->setInstanceManager(($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] ??= new \PoP\Root\Instances\SystemInstanceManager()));
  *
@@ -30,7 +30,7 @@ use Symfony\Component\DependencyInjection\Exception\EnvParameterException;
  * ```
  *   protected function getClientFunctionalityModuleResolverService()
  *   {
- *       $this->services['GraphQLAPI\\GraphQLAPI\\ModuleResolvers\\ClientFunctionalityModuleResolver'] = $instance = new \GraphQLAPI\GraphQLAPI\ModuleResolvers\ClientFunctionalityModuleResolver();
+ *       $this->services['GatoGraphQL\\GatoGraphQL\\ModuleResolvers\\ClientFunctionalityModuleResolver'] = $instance = new \GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver();
  *
  *       $instance->setInstanceManager(($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] ?? ($this->services['PoP\\Root\\Instances\\InstanceManagerInterface'] = new \PoP\Root\Instances\SystemInstanceManager())));
  *

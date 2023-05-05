@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\BlockCategoryInterface;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 
 /**
  * Persisted Query Options block

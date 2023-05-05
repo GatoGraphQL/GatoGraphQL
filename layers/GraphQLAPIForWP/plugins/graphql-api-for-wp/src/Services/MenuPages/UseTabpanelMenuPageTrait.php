@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
  * Menu page that uses tabpanels to organize its content

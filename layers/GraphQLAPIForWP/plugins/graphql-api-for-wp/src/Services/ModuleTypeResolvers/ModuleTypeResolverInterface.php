@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\ModuleTypeResolvers;
+namespace GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers;
 
 interface ModuleTypeResolverInterface
 {

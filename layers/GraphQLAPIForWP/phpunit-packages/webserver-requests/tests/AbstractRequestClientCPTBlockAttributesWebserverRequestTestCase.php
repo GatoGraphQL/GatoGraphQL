@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WebserverRequests;
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
-use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 
 /**

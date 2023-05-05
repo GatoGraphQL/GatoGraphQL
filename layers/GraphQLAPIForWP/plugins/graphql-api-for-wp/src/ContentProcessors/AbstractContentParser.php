@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
+namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\Exception\ContentNotExistsException;
-use GraphQLAPI\GraphQLAPI\PluginStaticHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
+use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;

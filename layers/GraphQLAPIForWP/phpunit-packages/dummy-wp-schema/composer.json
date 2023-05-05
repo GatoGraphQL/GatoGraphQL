@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Dummy schema resolvers for testing with PHPUnit under (faked) WordPress",
     "keywords": ["GraphQL", "PHP", "PoP", "WP", "dummy", "schema"],
-    "homepage": "https://github.com/PHPUnitForGraphQLAPI/dummy-wp-schema",
+    "homepage": "https://github.com/PHPUnitForGatoGraphQL/dummy-wp-schema",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -183,12 +183,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\DummyWPSchema\\": "src"
+            "PHPUnitForGatoGraphQL\\DummyWPSchema\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\DummyWPSchema\\": "tests"
+            "PHPUnitForGatoGraphQL\\DummyWPSchema\\": "tests"
         }
     },
     "scripts": {

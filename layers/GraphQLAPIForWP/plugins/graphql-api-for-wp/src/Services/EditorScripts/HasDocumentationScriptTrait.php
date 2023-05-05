@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
+namespace GatoGraphQL\GatoGraphQL\Services\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\Constants\DocumentationConstants;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
+use GatoGraphQL\GatoGraphQL\Constants\DocumentationConstants;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 
 /**
  * Add translatable documentation to the script.

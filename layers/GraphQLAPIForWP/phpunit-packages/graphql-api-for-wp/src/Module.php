@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
@@ -15,10 +15,10 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PHPUnitForGraphQLAPI\DummySchema\Module::class,
-            \PHPUnitForGraphQLAPI\DummyWPSchema\Module::class,
-            \PHPUnitForGraphQLAPI\WPFakerSchema\Module::class,
-            \PHPUnitForGraphQLAPI\WebserverRequests\Module::class,
+            \PHPUnitForGatoGraphQL\DummySchema\Module::class,
+            \PHPUnitForGatoGraphQL\DummyWPSchema\Module::class,
+            \PHPUnitForGatoGraphQL\WPFakerSchema\Module::class,
+            \PHPUnitForGatoGraphQL\WebserverRequests\Module::class,
         ];
     }
 }

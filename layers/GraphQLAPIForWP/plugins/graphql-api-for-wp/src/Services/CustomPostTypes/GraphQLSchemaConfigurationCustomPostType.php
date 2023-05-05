@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
+namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Registries\SchemaConfigBlockRegistryInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Registries\BlockRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\SchemaConfigBlockRegistryInterface;
 
 class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCustomPostType
 {

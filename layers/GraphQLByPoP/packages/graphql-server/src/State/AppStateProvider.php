@@ -11,7 +11,7 @@ use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
+use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class AppStateProvider extends AbstractAppStateProvider
 {

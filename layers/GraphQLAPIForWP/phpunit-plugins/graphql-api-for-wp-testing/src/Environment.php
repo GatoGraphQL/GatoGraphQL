@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 
 class Environment
 {
@@ -24,7 +24,7 @@ class Environment
                 trim(...),
                 explode(',', getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES'))
             )
-            : ['GraphQLAPI'];
+            : ['GatoGraphQL'];
     }
 
     /**

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers;
 
 use Exception;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ResponseStatus;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Response\ResponseKeys;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\RESTResponse;
 use WP_Error;
 use WP_Post;
 use WP_REST_Request;

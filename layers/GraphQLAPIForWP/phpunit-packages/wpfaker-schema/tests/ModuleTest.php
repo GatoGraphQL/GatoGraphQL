@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WPFakerSchema;
+namespace PHPUnitForGatoGraphQL\WPFakerSchema;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

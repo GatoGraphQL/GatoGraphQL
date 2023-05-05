@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Settings;
+namespace GatoGraphQL\GatoGraphQL\Settings;
 
-use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 class SettingsNormalizer implements SettingsNormalizerInterface
@@ -84,7 +84,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
          *
          * In that case, fill it in with the default values.
          *
-         * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
+         * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/Services/MenuPages/SettingsMenuPage.php
          */
         if ($values === []) {
             foreach ($settingsItems as $item) {

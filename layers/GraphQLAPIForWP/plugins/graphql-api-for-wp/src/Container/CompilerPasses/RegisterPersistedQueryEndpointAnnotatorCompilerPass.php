@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
+namespace GatoGraphQL\GatoGraphQL\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\PersistedQueryEndpointAnnotatorServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators\PersistedQueryEndpointAnnotatorServiceTagInterface;
 
 class RegisterPersistedQueryEndpointAnnotatorCompilerPass extends AbstractRegisterEndpointAnnotatorCompilerPass
 {

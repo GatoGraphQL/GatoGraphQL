@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\EditorScripts;
+namespace GatoGraphQL\GatoGraphQL\Services\EditorScripts;
 
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EditorHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\LocaleHelper;
-use GraphQLAPI\GraphQLAPI\Services\Scripts\AbstractScript;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EditorHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
+use GatoGraphQL\GatoGraphQL\Services\Scripts\AbstractScript;
 
 /**
  * Base class for a Gutenberg script.
@@ -116,7 +116,7 @@ abstract class AbstractEditorScript extends AbstractScript
         /**
          * Register the documentation (from under folder "docs/"), for the locale and the default language
          * @todo Maybe uncomment for webpack v5, to not duplicate the content of the docs inside build/index.js
-         * @see https://github.com/GraphQLAPI/graphql-api-for-wp/issues/1
+         * @see https://github.com/GatoGraphQL/graphql-api-for-wp/issues/1
          */
         // $this->initDocumentationScripts();
     }

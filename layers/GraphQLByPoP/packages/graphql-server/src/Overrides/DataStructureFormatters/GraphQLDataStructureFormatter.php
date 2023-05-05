@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\Overrides\DataStructureFormatters;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\QueryResolution\GraphQLQueryASTTransformationServiceInterface;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
+use PoPAPI\GatoGraphQL\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\GraphQLAPIArrowFnUnionTypeChainedRuleContainerConfigurationService;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\GatoGraphQLArrowFnUnionTypeChainedRuleContainerConfigurationService;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
-    $containerConfigurationService = new GraphQLAPIArrowFnUnionTypeChainedRuleContainerConfigurationService(
+    $containerConfigurationService = new GatoGraphQLArrowFnUnionTypeChainedRuleContainerConfigurationService(
         $rectorConfig,
         dirname(__DIR__, 5)
     );

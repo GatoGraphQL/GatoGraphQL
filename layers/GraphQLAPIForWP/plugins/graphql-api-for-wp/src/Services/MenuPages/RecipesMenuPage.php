@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
+namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\Constants\RequestParams;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\ContentParserOptions;
-use GraphQLAPI\GraphQLAPI\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\AbstractDocsMenuPage;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\OpenInModalTriggerMenuPageTrait;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\OpenInModalTriggerMenuPageTrait;
 
 class RecipesMenuPage extends AbstractDocsMenuPage
 {

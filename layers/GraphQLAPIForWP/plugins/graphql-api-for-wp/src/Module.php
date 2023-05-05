@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI;
+namespace GatoGraphQL\GatoGraphQL;
 
-use GraphQLAPI\GraphQLAPI\Container\CompilerPasses\RegisterUserAuthorizationSchemeCompilerPass;
-use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
-use GraphQLAPI\GraphQLAPI\Container\HybridCompilerPasses\RegisterSettingsCategoryResolverCompilerPass;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginModule;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\Container\CompilerPasses\RegisterUserAuthorizationSchemeCompilerPass;
+use GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
+use GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\RegisterSettingsCategoryResolverCompilerPass;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractPluginModule;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -24,9 +24,9 @@ class Module extends AbstractPluginModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \GraphQLAPI\ExternalDependencyWrappers\Module::class,
-            \GraphQLAPI\MarkdownConvertor\Module::class,
-            \GraphQLAPI\PluginUtils\Module::class,
+            \GatoGraphQL\ExternalDependencyWrappers\Module::class,
+            \GatoGraphQL\MarkdownConvertor\Module::class,
+            \GatoGraphQL\PluginUtils\Module::class,
             \GraphQLByPoP\GraphQLClientsForWP\Module::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Module::class,
             \GraphQLByPoP\GraphQLServer\Module::class,

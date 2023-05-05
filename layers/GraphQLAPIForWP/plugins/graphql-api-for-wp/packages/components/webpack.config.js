@@ -15,7 +15,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPIComponents';
+config.output.jsonpFunction = 'webpackJsonpGatoGraphQLComponents';
 // ------------------------------------------------------
 
 module.exports = config;

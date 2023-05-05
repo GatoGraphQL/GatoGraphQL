@@ -56,7 +56,7 @@ registerBlockType( 'graphql-api/persisted-query-endpoint-api-hierarchy', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock::ATTRIBUTE_NAME_INHERIT_QUERY
 		 */
 		inheritQuery: {
 			type: 'boolean',

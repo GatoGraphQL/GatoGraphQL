@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Executers;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\AppHelpers;
-use GraphQLAPI\GraphQLAPI\PluginAppHooks;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginLifecyclePriorities;
-use GraphQLAPI\GraphQLAPI\Server\InternalGraphQLServerFactory;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
+use GatoGraphQL\GatoGraphQL\Server\InternalGraphQLServerFactory;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
 use WP_Post;
 use stdClass;
@@ -36,7 +36,7 @@ class InternalGraphQLServerTestExecuter
          * Inject after the "consolidated" state, because
          * that's where the GraphQL query is finally retrieved.
          *
-         * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
+         * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
          */
         App::addFilter(
             HookNames::APP_STATE_CONSOLIDATED,

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Server;
+namespace GatoGraphQL\GatoGraphQL\Server;
 
 use GraphQLByPoP\GraphQLServer\Server\GraphQLServerInterface;
 

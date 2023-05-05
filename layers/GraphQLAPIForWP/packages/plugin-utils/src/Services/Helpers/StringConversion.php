@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\PluginUtils\Services\Helpers;
+namespace GatoGraphQL\PluginUtils\Services\Helpers;
 
 class StringConversion
 {

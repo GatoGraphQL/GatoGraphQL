@@ -66,7 +66,7 @@ Now, the PHP requirements are:
 
 This enables the plugin to make use of the latest features from PHP, while not restricting its userbase.
 
-The list of supported PHP features is [on the project's GitHub repo](https://github.com/GraphQLAPI/graphql-api-for-wp#supported-php-features).
+The list of supported PHP features is [on the project's GitHub repo](https://github.com/GatoGraphQL/graphql-api-for-wp#supported-php-features).
 
 ## PHPStan upgraded to level 8
 

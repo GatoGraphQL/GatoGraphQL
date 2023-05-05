@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem;
+namespace GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Filesystem;
 
 use Exception;
-use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
+use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\StandaloneServiceTrait;
 use Symfony\Component\Filesystem\Filesystem;

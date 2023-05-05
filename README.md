@@ -17,12 +17,12 @@ PoP is a monorepo containing several projects.
 
 - Website: [graphql-api.com](https://graphql-api.com)
 - [Download](https://github.com/leoloso/PoP/releases/latest/download/graphql-api.zip)
-- [Plugin source code](layers/GraphQLAPIForWP/plugins/graphql-api-for-wp)
+- [Plugin source code](layers/GatoGraphQLForWP/plugins/graphql-api-for-wp)
 - [Development](docs/development-environment.md)
 
 Plugins can extend the GraphQL schema, to fetch their own data.
 
-- [Extension demo source code](layers/GraphQLAPIForWP/plugins/extension-demo)
+- [Extension demo source code](layers/GatoGraphQLForWP/plugins/extension-demo)
 
 ## GraphQL By PoP
 

@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 use Exception;
-use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
-use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
-use GraphQLAPI\GraphQLAPI\App;
-use GraphQLAPI\GraphQLAPI\AppThread;
-use GraphQLAPI\GraphQLAPI\Container\InternalGraphQLServerContainerBuilderFactory;
-use GraphQLAPI\GraphQLAPI\Container\InternalGraphQLServerSystemContainerBuilderFactory;
-use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\PluginAppGraphQLServerNames;
-use GraphQLAPI\GraphQLAPI\PluginAppHooks;
-use GraphQLAPI\GraphQLAPI\Settings\Options;
-use GraphQLAPI\GraphQLAPI\StateManagers\AppThreadHookManagerWrapper;
+use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
+use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\AppThread;
+use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
+use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
+use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
@@ -636,7 +636,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * For the Standard GraphQL Server there is no need, as it will
              * already produce this state from the AppStateProvider.
              *
-             * @see layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
+             * @see layers/GatoGraphQLForWP/plugins/graphql-api-for-wp/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
              *
              * Please notice: Setting the AppState as needed by GraphQL here
              * means that the InternalGraphQLServer is configured to always

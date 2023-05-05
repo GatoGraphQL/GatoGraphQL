@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\PROPluginInformation\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\SchemaConfigurationBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigEditorBlockServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\BlockCategoryInterface;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\SchemaConfigurationBlockCategory;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigEditorBlockServiceTagInterface;
 
 abstract class AbstractSchemaConfigPROPluginPseudoBlock extends AbstractPROPluginPseudoBlock implements SchemaConfigEditorBlockServiceTagInterface
 {

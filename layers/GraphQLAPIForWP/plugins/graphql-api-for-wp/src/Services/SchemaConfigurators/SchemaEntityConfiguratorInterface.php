@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators;
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators;
 
 use PoP\Root\Services\ServiceInterface;
 

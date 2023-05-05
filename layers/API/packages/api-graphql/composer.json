@@ -182,12 +182,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPAPI\\GraphQLAPI\\": "src"
+            "PoPAPI\\GatoGraphQL\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPAPI\\GraphQLAPI\\": "tests"
+            "PoPAPI\\GatoGraphQL\\": "tests"
         }
     },
     "scripts": {

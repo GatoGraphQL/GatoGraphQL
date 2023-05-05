@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Response;
 
 class ResponseKeys
 {

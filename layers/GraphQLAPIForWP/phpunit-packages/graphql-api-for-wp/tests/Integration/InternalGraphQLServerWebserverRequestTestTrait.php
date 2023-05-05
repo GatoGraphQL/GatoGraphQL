@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\Actions;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Constants\Actions as EngineActions;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
+namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
-use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
-use GraphQLAPI\GraphQLAPI\Services\BlockCategories\EndpointBlockCategory;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\BlockRenderingHelpers;
-use GraphQLAPI\GraphQLAPI\Services\Helpers\CPTUtils;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\BlockCategoryInterface;
+use GatoGraphQL\GatoGraphQL\Services\BlockCategories\EndpointBlockCategory;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockRenderingHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\CPTUtils;
 
 /**
  * SchemaConfiguration block

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEnabledClientWebserverRequestTestCase;
+use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEnabledClientWebserverRequestTestCase;
 
 /**
  * Test that enabling clients (GraphiQL/Voyager) works well

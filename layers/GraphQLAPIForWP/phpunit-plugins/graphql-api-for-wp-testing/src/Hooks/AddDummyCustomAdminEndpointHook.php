@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\Hooks;
+namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks;
 
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionHooks\AbstractAddCustomAdminEndpointHook;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionHooks\AbstractAddCustomAdminEndpointHook;
 use PoP\Root\Module\ModuleInterface;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;

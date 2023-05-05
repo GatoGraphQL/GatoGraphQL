@@ -58,7 +58,7 @@ registerBlockType( 'graphql-api/schema-config-schema-categories', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION
 		 */
 		customizeConfiguration: {
 			type: 'boolean',
@@ -66,7 +66,7 @@ registerBlockType( 'graphql-api/schema-config-schema-categories', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaCategoriesBlock::ATTRIBUTE_NAME_INCLUDED_CATEGORY_TAXONOMIES
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigSchemaCategoriesBlock::ATTRIBUTE_NAME_INCLUDED_CATEGORY_TAXONOMIES
 		 */
 		includedCategoryTaxonomies: {
 			type: 'array',

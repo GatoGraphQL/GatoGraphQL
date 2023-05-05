@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\Services\EndpointExecuters;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\Services\EndpointExecuters;
 
-use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
 
 interface AdminEndpointExecuterServiceTagInterface extends EndpointExecuterServiceTagInterface
 {

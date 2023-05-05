@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Overrides\ConfigurationCache;
+namespace GatoGraphQL\GatoGraphQL\Overrides\ConfigurationCache;
 
-use GraphQLAPI\GraphQLAPI\ConfigurationCache\AbstractCacheConfigurationManager;
+use GatoGraphQL\GatoGraphQL\ConfigurationCache\AbstractCacheConfigurationManager;
 
 class OperationalCacheConfigurationManager extends AbstractCacheConfigurationManager
 {

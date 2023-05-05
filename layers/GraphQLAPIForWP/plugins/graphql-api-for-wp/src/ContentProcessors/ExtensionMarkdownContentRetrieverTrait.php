@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\ContentProcessors;
+namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
-use GraphQLAPI\GraphQLAPI\PluginApp;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\ExtensionInterface;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 
 trait ExtensionMarkdownContentRetrieverTrait
 {

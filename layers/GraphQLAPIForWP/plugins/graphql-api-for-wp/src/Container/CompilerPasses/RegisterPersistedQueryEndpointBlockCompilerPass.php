@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Container\CompilerPasses;
+namespace GatoGraphQL\GatoGraphQL\Container\CompilerPasses;
 
-use GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointBlockRegistryInterface;
-use GraphQLAPI\GraphQLAPI\Services\Blocks\PersistedQueryEndpointEditorBlockServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointBlockRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointEditorBlockServiceTagInterface;
 
 class RegisterPersistedQueryEndpointBlockCompilerPass extends AbstractRegisterEditorBlockCompilerPass
 {

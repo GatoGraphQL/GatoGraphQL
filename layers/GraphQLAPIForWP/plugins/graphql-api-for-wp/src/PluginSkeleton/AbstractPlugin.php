@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
+namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\CustomPostTypeRegistryFacade;
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\PluginInfoInterface;
-use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\CustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInfoInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;

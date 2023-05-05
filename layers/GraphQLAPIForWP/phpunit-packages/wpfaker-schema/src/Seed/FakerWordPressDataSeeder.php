@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WPFakerSchema\Seed;
+namespace PHPUnitForGatoGraphQL\WPFakerSchema\Seed;
 
 use Brain\Faker\Providers;
 

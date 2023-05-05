@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\ExtensionDemo;
+namespace GatoGraphQL\ExtensionDemo;
 
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtensionInfo;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractExtensionInfo;
 
 class ExtensionInfo extends AbstractExtensionInfo
 {

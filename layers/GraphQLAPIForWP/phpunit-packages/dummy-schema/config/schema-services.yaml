@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PHPUnitForGraphQLAPI\DummySchema\FieldResolvers\:
+    PHPUnitForGatoGraphQL\DummySchema\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PHPUnitForGraphQLAPI\DummySchema\DirectiveResolvers\:
+    PHPUnitForGatoGraphQL\DummySchema\DirectiveResolvers\:
         resource: '../src/DirectiveResolvers/*'
 
-    PHPUnitForGraphQLAPI\DummySchema\MutationResolvers\:
+    PHPUnitForGatoGraphQL\DummySchema\MutationResolvers\:
         resource: '../src/MutationResolvers/*'

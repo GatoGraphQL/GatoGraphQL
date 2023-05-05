@@ -6,7 +6,7 @@ const MODULE = 'multifield-directives';
 const MODULE_DOCS_PATH = `docs-pro/modules/${ MODULE }/`;
 const NPM_PACKAGE_VERSION = process.env.npm_package_version;
 const PACKAGE_TAG = NPM_PACKAGE_VERSION.endsWith('-dev') ? 'master' : NPM_PACKAGE_VERSION;
-const GITHUB_BASE_URL = `https://raw.githubusercontent.com/leoloso/PoP/${ PACKAGE_TAG }/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp`
+const GITHUB_BASE_URL = `https://raw.githubusercontent.com/leoloso/PoP/${ PACKAGE_TAG }/layers/GatoGraphQLForWP/plugins/graphql-api-for-wp`
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? `${ GITHUB_BASE_URL }/${ MODULE_DOCS_PATH }`
 	: null;
@@ -67,7 +67,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphQLAPIProSchemaConfigMultiFieldDirectives';
+config.output.jsonpFunction = 'webpackJsonpGatoGraphQLProSchemaConfigMultiFieldDirectives';
 // ------------------------------------------------------
 
 module.exports = config;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\Settings;
+namespace GatoGraphQL\GatoGraphQL\Settings;
 
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemSettingsCategoryRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 
 class UserSettingsManager implements UserSettingsManagerInterface
 {
