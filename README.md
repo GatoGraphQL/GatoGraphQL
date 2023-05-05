@@ -92,7 +92,7 @@ $ composer install
 8. [Why a monorepo](docs/why-monorepo.md)
 9. [How transpiling works](docs/how-transpiling-works.md)
 10. [How scoping works](docs/how-scoping-works.md)
-11. [Installing the Gato GraphQL plugin](docs/installing-gato-graphql-for-wordpress.md)
+11. [Installing Gato GraphQL](docs/installing-gato-graphql-for-wordpress.md)
 
 ## Standards
 

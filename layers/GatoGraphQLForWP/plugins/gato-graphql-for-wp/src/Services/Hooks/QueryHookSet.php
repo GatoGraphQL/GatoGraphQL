@@ -56,7 +56,7 @@ class QueryHookSet extends AbstractHookSet
             && isset($options[SchemaCommonsQueryOptions::RETURN_TYPE]) && $options[SchemaCommonsQueryOptions::RETURN_TYPE] === ReturnTypes::IDS
         ) {
             /**
-             * All CPTs from the Gato GraphQL plugin and its extensions
+             * All CPTs from Gato GraphQL and its extensions
              * must not be queried from outside, since they are used for
              * configuration purposes only, which is private data.
              */

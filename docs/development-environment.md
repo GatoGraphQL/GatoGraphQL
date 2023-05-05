@@ -11,7 +11,7 @@ These are the instructions on how to set-up a local development environment.
 [Lando](https://lando.dev/) is a Docker-based tool. It is used to spin the webserver for development, providing:
 
 - WordPress installed
-- the Gato GraphQL plugin installed and activated
+- Gato GraphQL installed and activated
 - symlinking to the source code
 
 ## Install

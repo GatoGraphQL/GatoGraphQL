@@ -8,7 +8,7 @@ class CustomPostStatus
 {
     /**
      * Using 'publish' instead of 'published' to make it work directly with WordPress,
-     * used by the Gato GraphQL plugin.
+     * used by Gato GraphQL.
      *
      * Otherwise, this plugin should override fields 'status' and 'isStatus',
      * to transform from one to the other value and back,

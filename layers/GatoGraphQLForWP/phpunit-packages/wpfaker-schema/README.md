@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Utilities to execute PHPUnit for the Gato GraphQL plugin
+Utilities to execute PHPUnit for Gato GraphQL
 
 ## Install
 

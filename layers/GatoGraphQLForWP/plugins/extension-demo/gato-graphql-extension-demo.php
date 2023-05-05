@@ -2,7 +2,7 @@
 /*
 Plugin Name: Gato GraphQL - Extension Demo
 Plugin URI: https://github.com/GraphQLAPI/extension-demo
-Description: Demonstration of extending the GraphQL schema, for the Gato GraphQL plugin
+Description: Demonstration of extending the GraphQL schema, for Gato GraphQL
 Version: 1.0.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
@@ -50,7 +50,7 @@ add_action(
         $mainPluginVersionConstraint = '^1.0';
         
         /**
-         * Validate the Gato GraphQL plugin is active
+         * Validate Gato GraphQL is active
          */
         if (!class_exists(Plugin::class)) {
             \add_action('admin_notices', function () use ($extensionName) {

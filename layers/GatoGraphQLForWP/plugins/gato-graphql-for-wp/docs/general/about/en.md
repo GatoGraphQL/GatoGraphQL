@@ -1,4 +1,4 @@
-# About the Gato GraphQL plugin
+# About Gato GraphQL
 
 The Gato GraphQL for WordPress is open source software.
 

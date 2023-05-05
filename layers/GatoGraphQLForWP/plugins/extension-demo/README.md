@@ -1,6 +1,6 @@
 # Extension Demo for the Gato GraphQL
 
-Demonstration of extending the GraphQL schema, for the Gato GraphQL plugin
+Demonstration of extending the GraphQL schema, for Gato GraphQL
 
 ## Install
 

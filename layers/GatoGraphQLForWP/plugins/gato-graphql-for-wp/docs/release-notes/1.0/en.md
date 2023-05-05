@@ -23,7 +23,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ## Added documentation for PRO modules and their corresponding Schema Configuration functionalities
 
-PRO modules are installed by the Gato GraphQL PRO plugin, which has been released alongside the Gato GraphQL plugin v1.0.
+PRO modules are installed by the Gato GraphQL PRO plugin, which has been released alongside Gato GraphQL v1.0.
 
 Documentation for the corresponding PRO features can be visualized in the plugin, by:
 
@@ -268,7 +268,7 @@ The Plugin Settings has been completely decoupled from the services registered i
 
 ## Only activating/deactivating Gato GraphQL extension plugins will regenerate the service container
 
-Before, the service container (upon which the GraphQL schema is based) was regenerated whenever any plugin (whether it was related to the Gato GraphQL plugin or not) was activated or deactivated.
+Before, the service container (upon which the GraphQL schema is based) was regenerated whenever any plugin (whether it was related to Gato GraphQL or not) was activated or deactivated.
 
 Now, only Gato GraphQL extension plugins trigger this process.
 

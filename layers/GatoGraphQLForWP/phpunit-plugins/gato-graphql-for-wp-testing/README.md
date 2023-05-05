@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Utilities for testing the Gato GraphQL plugin
+Utilities for testing Gato GraphQL
 
 ## Install
 

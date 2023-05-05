@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Browse "Additional Documentation" when editing a Schema Configuration
 - Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
-- Added documentation for PRO modules (provided by the Gato GraphQL PRO plugin, released alongside the Gato GraphQL plugin's v1.0), and their corresponding Schema Configuration functionalities
+- Added documentation for PRO modules (provided by the Gato GraphQL PRO plugin, released alongside Gato GraphQL's v1.0), and their corresponding Schema Configuration functionalities
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings
 - Added documentation page "Use Cases, Best Practices, and Recipes"

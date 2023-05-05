@@ -700,8 +700,8 @@
         "merge-phpstan": "Generate a single PHPStan config for the monorepo, invoking the config for the PHPStan config for all packages",
         "improve-code-quality": "Improve code quality (via Rector)",
         "remove-unused-imports": "Remove unused `use` imports",
-        "build-js": "Build all JS packages, blocks and editor scripts from the Gato GraphQL plugin",
-        "install-deps-build-js": "Build all JS packages, blocks and editor scripts from the Gato GraphQL plugin, installing all dependencies from npm"
+        "build-js": "Build all JS packages, blocks and editor scripts from Gato GraphQL",
+        "install-deps-build-js": "Build all JS packages, blocks and editor scripts from Gato GraphQL, installing all dependencies from npm"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
