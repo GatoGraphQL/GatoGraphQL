@@ -1,4 +1,4 @@
-<p align="center"><img src="plugins/gato-graphql/assets/img/gato-graphql-logo-with-name.jpg" width="450" /></p>
+<p align="center"><img src="https://graphql-api.com/assets/graphql-api-logo-with-name.png" width="450" /></p>
 
 # Gato GraphQL layer
 
