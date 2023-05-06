@@ -40,6 +40,7 @@
     "scripts": {
         "ssh-server": "lando ssh",
         "build-server": [
+            "Composer\\Config::disableProcessTimeout",
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gato-graphql-for-prod",
             "@start-server",
             "@install-site"

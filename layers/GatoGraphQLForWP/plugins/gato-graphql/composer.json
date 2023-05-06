@@ -201,6 +201,7 @@
     },
     "scripts": {
         "build-server": [
+            "Composer\\Config::disableProcessTimeout",
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gato-graphql-dev",
             "@start-server"
         ],
