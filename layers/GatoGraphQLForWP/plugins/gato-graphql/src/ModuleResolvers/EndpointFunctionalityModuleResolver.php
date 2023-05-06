@@ -275,7 +275,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'gato-graphql');
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
-                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%6$s</a> and <a href="%3$s" target="_blank">Interactive Schema%6$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%6$s</a></li><li>PHP class <code>%5$s</code> can be used to execute GraphQL queries internally (eg: triggered by some hook)</li></ul>', 'gato-graphql'),
+                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%7$s</a> and <a href="%3$s" target="_blank">Interactive Schema%7$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%7$s</a></li><li>PHP class <code>%5$s</code> can be used to <a href="%6$s" target="_blank">execute GraphQL queries internally%7$s</a> (eg: triggered by some hook)</li></ul>', 'gato-graphql'),
                     ltrim(
                         GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
                         '/'
@@ -295,6 +295,12 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                         'feeding-data-to-blocks-in-the-editor'
                     )),
                     'InternalGraphQLServer',
+                    \admin_url(sprintf(
+                        'admin.php?page=%s&%s=%s',
+                        $this->getRecipesMenuPage()->getScreenID(),
+                        RequestParams::TAB,
+                        'executing-graphql-queries-internally'
+                    )),
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 ),
                 self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'gato-graphql'),

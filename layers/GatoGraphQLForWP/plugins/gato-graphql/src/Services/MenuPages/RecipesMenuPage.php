@@ -58,6 +58,10 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'Feeding data to blocks in the editor',
             ],
             [
+                'executing-graphql-queries-internally',
+                'Executing GraphQL queries internally',
+            ],
+            [
                 'defining-custom-private-endpoints',
                 'Defining custom private endpoints',
             ],
