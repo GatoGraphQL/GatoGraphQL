@@ -820,10 +820,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
         // Get all the blocks involved in the template
         return array_values(array_unique(array_map(
-            function (array $blockConfiguration) {
-                // The block is the first item from the $blockConfiguration
-                return $blockConfiguration[0];
-            },
+            // The block is the first item from the $blockConfiguration
+            fn (array $blockConfiguration) => $blockConfiguration[0],
             $template
         )));
     }
