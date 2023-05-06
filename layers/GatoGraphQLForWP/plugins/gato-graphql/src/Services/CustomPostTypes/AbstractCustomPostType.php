@@ -758,12 +758,14 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function maybeLockGutenbergTemplate(): void
     {
-        if (!empty($this->getGutenbergTemplate()) && $this->lockGutenbergTemplate()) {
-            $post_type_object = \get_post_type_object($this->getCustomPostType());
-            if (!is_null($post_type_object)) {
-                $post_type_object->template_lock = 'all';
-            }
+        if ($this->getGutenbergTemplate() === [] || !$this->lockGutenbergTemplate()) {
+            return;
         }
+        $post_type_object = \get_post_type_object($this->getCustomPostType());
+        if ($post_type_object === null) {
+            return;
+        }
+        $post_type_object->template_lock = 'all';
     }
 
     /**
@@ -813,17 +815,17 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * If the CPT defined a template, then maybe restrict to those blocks
          */
         $template = $this->getGutenbergTemplate();
-        if (!empty($template) && $this->enableOnlyGutenbergTemplateBlocks()) {
-            // Get all the blocks involved in the template
-            return array_values(array_unique(array_map(
-                function (array $blockConfiguration) {
-                    // The block is the first item from the $blockConfiguration
-                    return $blockConfiguration[0];
-                },
-                $template
-            )));
+        if ($template === [] || !$this->enableOnlyGutenbergTemplateBlocks()) {
+            return [];
         }
-        return [];
+        // Get all the blocks involved in the template
+        return array_values(array_unique(array_map(
+            function (array $blockConfiguration) {
+                // The block is the first item from the $blockConfiguration
+                return $blockConfiguration[0];
+            },
+            $template
+        )));
     }
 
     /**
