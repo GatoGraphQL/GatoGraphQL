@@ -126,13 +126,15 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             'wp_template',
         ];
     }
+
     /**
+     * @param string[]|null $queryableCustomPostTypes
      * @return string[]
      */
-    public function getFilteredNonGatoGraphQLPluginTagTaxonomies(): array
+    public function getFilteredNonGatoGraphQLPluginTagTaxonomies(?array $queryableCustomPostTypes = null): array
     {
         // Get the list of tag taxonomies from the system
-        $queryableTagTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(false);
+        $queryableTagTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(false, $queryableCustomPostTypes);
         /**
          * Possibly not all tag taxonomies must be allowed.
          * Remove the ones that do not
@@ -160,12 +162,13 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     }
 
     /**
+     * @param string[]|null $queryableCustomPostTypes
      * @return string[]
      */
-    public function getFilteredNonGatoGraphQLPluginCategoryTaxonomies(): array
+    public function getFilteredNonGatoGraphQLPluginCategoryTaxonomies(?array $queryableCustomPostTypes = null): array
     {
         // Get the list of category taxonomies from the system
-        $queryableCategoryTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(true);
+        $queryableCategoryTaxonomyNameObjects = $this->getQueryableCustomPostsAssociatedTaxonomies(true, $queryableCustomPostTypes);
         /**
          * Possibly not all category taxonomies must be allowed.
          * Remove the ones that do not
@@ -198,9 +201,10 @@ class WPDataModelProvider implements WPDataModelProviderInterface
      *
      * Please notice all entries in "object_type" must be in the whitelist.
      *
+     * @param string[]|null $queryableCustomPostTypes
      * @return array<string,WP_Taxonomy> Taxonomy name => taxonomy object
      */
-    public function getQueryableCustomPostsAssociatedTaxonomies(bool $isHierarchical): array
+    public function getQueryableCustomPostsAssociatedTaxonomies(bool $isHierarchical, ?array $queryableCustomPostTypes = null): array
     {
         if ($isHierarchical && $this->hierarchicalQueryableCustomPostsAssociatedTaxonomies !== null) {
             return $this->hierarchicalQueryableCustomPostsAssociatedTaxonomies;
@@ -211,16 +215,16 @@ class WPDataModelProvider implements WPDataModelProviderInterface
 
         /**
          * When we are saving the Settings on option.php, do not
-         * restrict the taxonomies to the previous values.
+         * restrict the taxonomies to the previous CPT values stored
+         * in the DB. That's why this value can be provided from outside.
          *
-         * Eg: when clicking on "Reset Settings" and all CPTs are
-         * exposed, all tags/categories must also be exposed, and
-         * not those ones associated to the previously-stored CPTs.
+         * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/ModuleResolvers/SchemaTypeModuleResolver.php method `getSettingsDefaultValue`
+         *
+         * In particular: when clicking on "Reset Settings" and all CPTs are
+         * exposed, all tags/categories must also be exposed, and not those
+         * ones associated to the previously-stored CPTs.
          */
-        global $pagenow;
-        if ($pagenow === 'options.php') {
-            $queryableCustomPostTypes = $this->getFilteredNonGatoGraphQLPluginCustomPostTypes();            
-        } else {
+        if ($queryableCustomPostTypes === null) {
             /** @var CustomPostsModuleConfiguration */
             $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
             $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
