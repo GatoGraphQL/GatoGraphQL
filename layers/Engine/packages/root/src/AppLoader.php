@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use PoP\Root\Constants\HookNamePlaceholders;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
@@ -560,6 +561,10 @@ class AppLoader implements AppLoaderInterface
         $this->setReadyState(true);
 
         // Allow to inject functionality
+        App::doAction(sprintf(
+            HookNamePlaceholders::APPLICATION_READY_FOR_APP_THREAD,
+            App::getAppThread()->getName() ?? ''
+        ));
         App::doAction(HookNames::APPLICATION_READY);
     }
 }
