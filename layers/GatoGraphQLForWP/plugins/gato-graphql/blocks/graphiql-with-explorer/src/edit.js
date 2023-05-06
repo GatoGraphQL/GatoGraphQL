@@ -20,13 +20,13 @@ import { __ } from '@wordpress/i18n';
 
 function fetcher(params) {
 	return fetch(
-		window.graphqlApiGraphiql.endpoint,
+		window.gatoGraphqlGraphiql.endpoint,
 		{
 			method: "POST",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
-				'X-WP-Nonce': window.graphqlApiGraphiql.nonce
+				'X-WP-Nonce': window.gatoGraphqlGraphiql.nonce
 			},
 			body: JSON.stringify(params)
 		}

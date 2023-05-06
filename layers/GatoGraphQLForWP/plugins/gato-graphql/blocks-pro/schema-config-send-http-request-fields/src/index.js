@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
-const defaultBehavior = window.graphqlApiProSchemaConfigSendHttpRequestFields.defaultBehavior;
+const defaultBehavior = window.gatoGraphqlProSchemaConfigSendHttpRequestFields.defaultBehavior;
 
 /**
  * Every block starts by registering a new block type definition.

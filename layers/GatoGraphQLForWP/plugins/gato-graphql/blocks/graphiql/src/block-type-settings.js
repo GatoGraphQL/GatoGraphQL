@@ -68,7 +68,7 @@ export const blockTypeSettings = {
 		 */
 		query: {
 			type: 'string',
-			default: window.graphqlApiGraphiql?.defaultQuery,
+			default: window.gatoGraphqlGraphiql?.defaultQuery,
 		},
 		/**
 		 * Same attribute name as defined in

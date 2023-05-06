@@ -17,12 +17,12 @@ import './graphiql-restore.scss';
 import './editor.scss';
 
 const graphQLFetcher = ( graphQLParams ) => {
-	return fetch( window.graphqlApiGraphiql.endpoint, {
+	return fetch( window.gatoGraphqlGraphiql.endpoint, {
 		method: 'post',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
-			'X-WP-Nonce': window.graphqlApiGraphiql.nonce
+			'X-WP-Nonce': window.gatoGraphqlGraphiql.nonce
 		},
 		body: JSON.stringify( graphQLParams ),
 	} ).then( ( response ) => response.json() );

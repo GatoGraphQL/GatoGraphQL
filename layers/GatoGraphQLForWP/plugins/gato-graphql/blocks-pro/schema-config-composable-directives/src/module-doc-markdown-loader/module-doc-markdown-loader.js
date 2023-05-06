@@ -2,7 +2,7 @@
  * Path to load the lazy chunks on the fly
  * @see https://v4.webpack.js.org/guides/public-path/#on-the-fly
  */
-__webpack_public_path__ = window.graphqlApiProSchemaConfigComposableDirectives?.publicPath;
+__webpack_public_path__ = window.gatoGraphqlProSchemaConfigComposableDirectives?.publicPath;
 
 /**
  * Read the content from a Markdown file in a given language, and return it as HTML
@@ -22,8 +22,8 @@ const getModuleDocMarkdownContent = ( lang ) => {
  * @param {string|null} lang The language to translate to. If none provided, get it from the localized data
  */
 const getModuleDocMarkdownContentOrUseDefault = ( defaultLang, lang ) => {
-	lang = lang || window.graphqlApiProSchemaConfigComposableDirectives?.localeLang
-	defaultLang = defaultLang || window.graphqlApiProSchemaConfigComposableDirectives?.defaultLang
+	lang = lang || window.gatoGraphqlProSchemaConfigComposableDirectives?.localeLang
+	defaultLang = defaultLang || window.gatoGraphqlProSchemaConfigComposableDirectives?.defaultLang
 	return getModuleDocMarkdownContent( lang )
 		.catch(err => getModuleDocMarkdownContent( defaultLang ) )
 }

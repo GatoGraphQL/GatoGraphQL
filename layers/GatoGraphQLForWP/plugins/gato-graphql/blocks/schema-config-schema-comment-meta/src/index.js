@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
-const defaultBehavior = window.graphqlApiSchemaConfigSchemaCommentMeta.defaultBehavior;
+const defaultBehavior = window.gatoGraphqlSchemaConfigSchemaCommentMeta.defaultBehavior;
 
 /**
  * Every block starts by registering a new block type definition.

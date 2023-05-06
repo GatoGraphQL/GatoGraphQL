@@ -89,7 +89,7 @@ registerBlockType( 'gato-graphql/schema-configuration', {
 	 */
 	edit(props) {
 		const { className } = props;
-		const isAPIHierarchyEnabled = window.graphqlApiSchemaConfiguration.isAPIHierarchyEnabled;
+		const isAPIHierarchyEnabled = window.gatoGraphqlSchemaConfiguration.isAPIHierarchyEnabled;
 		return (
 			<div class={ className }>
 				<EditBlock
