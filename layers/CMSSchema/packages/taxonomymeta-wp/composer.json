@@ -158,7 +158,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Taxonomy Meta\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "taxonomymeta-wp"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "taxonomymeta-wp"],
     "homepage": "https://github.com/PoPCMSSchema/taxonomymeta-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

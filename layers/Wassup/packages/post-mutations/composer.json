@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Adds support for post mutations",
-    "keywords": ["GraphQL", "PHP", "Gato", "post-mutations"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "post-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/post-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

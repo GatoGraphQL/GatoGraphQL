@@ -158,7 +158,7 @@
     },
     "type": "library",
     "description": "Add tags to posts",
-    "keywords": ["GraphQL", "PHP", "Gato", "post-tag-mutations"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "post-tag-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/post-tag-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

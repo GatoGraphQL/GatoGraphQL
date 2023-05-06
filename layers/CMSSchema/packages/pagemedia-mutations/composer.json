@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Adds support for media mutations on pages",
-    "keywords": ["GraphQL", "PHP", "Gato", "pagemedia-mutations"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "pagemedia-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/pagemedia-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

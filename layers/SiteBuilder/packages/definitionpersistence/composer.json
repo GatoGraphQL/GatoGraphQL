@@ -158,7 +158,7 @@
     },
     "type": "library",
     "description": "Store definitions across sessions",
-    "keywords": ["GraphQL", "PHP", "Gato", "definitionpersistence"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "definitionpersistence"],
     "homepage": "https://github.com/getpop/definitionpersistence",
     "license": "GPL-2.0-or-later",
     "authors": [

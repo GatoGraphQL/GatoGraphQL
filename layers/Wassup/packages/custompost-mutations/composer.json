@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Adds support for custom post mutations",
-    "keywords": ["GraphQL", "PHP", "Gato", "custompost-mutations"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/custompost-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

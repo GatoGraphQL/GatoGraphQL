@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Mirror the query in the API response",
-    "keywords": ["GraphQL", "PHP", "Gato", "api-mirrorquery"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "api-mirrorquery"],
     "homepage": "https://github.com/PoP-PoPAPI/api-mirrorquery",
     "license": "GPL-2.0-or-later",
     "authors": [

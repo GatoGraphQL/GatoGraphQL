@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Adds support for post link mutations",
-    "keywords": ["GraphQL", "PHP", "Gato", "postlink-mutations"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "postlink-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/postlink-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

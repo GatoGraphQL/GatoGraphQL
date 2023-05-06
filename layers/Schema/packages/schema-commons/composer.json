@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Code shared by the schema packages",
-    "keywords": ["GraphQL", "PHP", "Gato", "schema-commons"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "schema-commons"],
     "homepage": "https://github.com/PoPSchema/schema-commons",
     "license": "GPL-2.0-or-later",
     "authors": [

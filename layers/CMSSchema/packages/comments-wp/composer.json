@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Comments\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "comments-wp"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "comments-wp"],
     "homepage": "https://github.com/PoPCMSSchema/comments-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -162,7 +162,7 @@
     },
     "type": "library",
     "description": "Adds support for media mutations on posts",
-    "keywords": ["GraphQL", "PHP", "Gato", "postmedia-mutations"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "postmedia-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/postmedia-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/wassup",
     "type": "library",
     "description": "PoP site => Wassup",
-    "keywords": ["GraphQL", "PHP", "Gato", "wassup"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "wassup"],
     "homepage": "https://github.com/PoPSites-Wassup/wassup",
     "license": "GPL-2.0-or-later",
     "authors": [

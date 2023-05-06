@@ -158,7 +158,7 @@
     },
     "type": "library",
     "description": "Adds mutations for social network functionality",
-    "keywords": ["GraphQL", "PHP", "Gato", "socialnetwork-mutations"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "socialnetwork-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/socialnetwork-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

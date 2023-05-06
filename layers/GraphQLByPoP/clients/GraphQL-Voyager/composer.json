@@ -2,7 +2,7 @@
     "name": "graphql-by-pop/graphql-voyager",
     "type": "graphql-voyager",
     "description": "GraphQL Voyager client for GraphQL by PoP",
-    "keywords": ["GraphQL", "PHP", "Gato", "GraphQL", "API", "GraphiQL"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "GraphQL", "API", "GraphiQL"],
     "homepage": "https://github.com/GraphQLByPoP/GraphQL-Voyager",
     "license": "MIT",
     "authors": [

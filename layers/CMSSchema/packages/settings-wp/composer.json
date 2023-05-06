@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Settings\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "settings-wp"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "settings-wp"],
     "homepage": "https://github.com/PoPCMSSchema/settings-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

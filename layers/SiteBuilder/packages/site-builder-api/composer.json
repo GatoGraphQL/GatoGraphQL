@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Component-based API",
-    "keywords": ["GraphQL", "PHP", "Gato", "site-builder-api"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "site-builder-api"],
     "homepage": "https://github.com/getpop/site-builder-api",
     "license": "GPL-2.0-or-later",
     "authors": [

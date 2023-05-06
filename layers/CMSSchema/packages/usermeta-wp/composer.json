@@ -158,7 +158,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"User Meta\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "usermeta-wp"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "usermeta-wp"],
     "homepage": "https://github.com/PoPCMSSchema/usermeta-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

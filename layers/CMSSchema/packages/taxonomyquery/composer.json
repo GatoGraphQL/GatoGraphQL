@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Adds support for taxonomy (category and tag) queries",
-    "keywords": ["GraphQL", "PHP", "Gato", "taxonomyquery"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "taxonomyquery"],
     "homepage": "https://github.com/PoPCMSSchema/taxonomyquery",
     "license": "GPL-2.0-or-later",
     "authors": [

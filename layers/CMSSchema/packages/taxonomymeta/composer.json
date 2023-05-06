@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Adds support for taxonomy (category and tag) meta",
-    "keywords": ["GraphQL", "PHP", "Gato", "taxonomymeta"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "taxonomymeta"],
     "homepage": "https://github.com/PoPCMSSchema/taxonomymeta",
     "license": "GPL-2.0-or-later",
     "authors": [

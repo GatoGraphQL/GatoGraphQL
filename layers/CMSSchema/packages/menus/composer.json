@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Adds support for menus",
-    "keywords": ["GraphQL", "PHP", "Gato", "menus"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "menus"],
     "homepage": "https://github.com/PoPCMSSchema/menus",
     "license": "GPL-2.0-or-later",
     "authors": [

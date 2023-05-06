@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"User State Mutations\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "user-state-mutations-wp"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "user-state-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/user-state-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

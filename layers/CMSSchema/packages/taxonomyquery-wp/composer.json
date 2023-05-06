@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Taxonomy Query\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "taxonomyquery-wp"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "taxonomyquery-wp"],
     "homepage": "https://github.com/PoPCMSSchema/taxonomyquery-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

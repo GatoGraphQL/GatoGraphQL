@@ -2,7 +2,7 @@
     "name": "pop-api/api",
     "type": "library",
     "description": "Component-based API",
-    "keywords": ["GraphQL", "PHP", "Gato", "api"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "api"],
     "homepage": "https://github.com/PoP-PoPAPI/api",
     "license": "GPL-2.0-or-later",
     "authors": [

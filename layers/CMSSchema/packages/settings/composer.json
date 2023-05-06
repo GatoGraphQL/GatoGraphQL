@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Fetch settings from the site",
-    "keywords": ["GraphQL", "PHP", "Gato", "settings"],
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "settings"],
     "homepage": "https://github.com/PoPCMSSchema/settings",
     "license": "GPL-2.0-or-later",
     "authors": [
