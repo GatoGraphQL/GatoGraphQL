@@ -48,12 +48,13 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     }
 
     /**
+     * @param array<string,mixed> $customPostTypeArgs
      * @return string[]
      */
-    public function getFilteredNonGatoGraphQLPluginCustomPostTypes(): array
+    public function getFilteredNonGatoGraphQLPluginCustomPostTypes(array $customPostTypeArgs = []): array
     {
         // Get the list of custom post types from the system
-        $possibleCustomPostTypes = \get_post_types();
+        $possibleCustomPostTypes = \get_post_types($customPostTypeArgs);
         /**
          * Not all custom post types make sense or are allowed.
          * Remove the ones that do not

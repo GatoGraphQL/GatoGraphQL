@@ -502,7 +502,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES
-                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes();
+                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes([
+                    'publicly_queryable' => true,
+                ]);
         }
 
         if (

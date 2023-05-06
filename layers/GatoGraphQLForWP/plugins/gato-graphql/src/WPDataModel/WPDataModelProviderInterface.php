@@ -9,9 +9,10 @@ use WP_Taxonomy;
 interface WPDataModelProviderInterface
 {
     /**
+     * @param array<string,mixed> $customPostTypeArgs
      * @return string[]
      */
-    public function getFilteredNonGatoGraphQLPluginCustomPostTypes(): array;
+    public function getFilteredNonGatoGraphQLPluginCustomPostTypes(array $customPostTypeArgs = []): array;
     /**
      * @return string[]
      */
