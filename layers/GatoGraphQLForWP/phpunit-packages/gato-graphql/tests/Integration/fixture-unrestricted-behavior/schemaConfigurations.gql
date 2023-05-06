@@ -1,6 +1,6 @@
 query GetSchemaConfigurations {
   schemaConfigurations(
-    pagination: { limit: 3 }
+    pagination: { limit: 2 }
     sort: { by: ID, order: ASC }
   ) {
     id
