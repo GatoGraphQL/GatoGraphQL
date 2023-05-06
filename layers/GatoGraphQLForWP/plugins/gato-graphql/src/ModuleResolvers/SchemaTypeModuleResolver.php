@@ -496,13 +496,38 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
 
+        /**
+         * When resetting the Settings, the associated tags/categories
+         * must be applied on the new set of CPTs, and not on the values
+         * stored on the DB
+         */
+        $defaultQueryableCustomPostTypes = [];
+        if (
+            !$useRestrictiveDefaults
+            && ((
+                $module === self::SCHEMA_CUSTOMPOSTS
+                && $option === ModuleSettingOptions::CUSTOMPOST_TYPES
+            ) || (
+                $module === self::SCHEMA_TAGS
+                && $option === ModuleSettingOptions::TAG_TAXONOMIES
+            ) || (
+                $module === self::SCHEMA_CATEGORIES
+                && $option === ModuleSettingOptions::CATEGORY_TAXONOMIES
+            )
+            )
+        ) {
+            $defaultQueryableCustomPostTypes = $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes([
+                'publicly_queryable' => true,
+            ]);
+        }
+
         if (
             $module === self::SCHEMA_CUSTOMPOSTS
             && $option === ModuleSettingOptions::CUSTOMPOST_TYPES
         ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_CUSTOMPOST_TYPES
-                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes();
+                : $defaultQueryableCustomPostTypes;
         }
 
         if (
@@ -511,7 +536,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_TAG_TAXONOMIES
-                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginTagTaxonomies();
+                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginTagTaxonomies($defaultQueryableCustomPostTypes);
         }
 
         if (
@@ -520,7 +545,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         ) {
             return $useRestrictiveDefaults
                 ? ConfigurationDefaultValues::DEFAULT_CATEGORY_TAXONOMIES
-                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCategoryTaxonomies();
+                : $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCategoryTaxonomies($defaultQueryableCustomPostTypes);
         }
 
         $defaultValues = [
