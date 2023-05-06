@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Mock the WordPress schema when running PHPUnit tests",
-    "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit", "API"],
+    "keywords": ["GraphQL", "PHP", "Gato", "wpfaker", "phpunit", "API"],
     "homepage": "https://github.com/PHPUnitForGatoGraphQL/gato-graphql",
     "license": "GPL-2.0-or-later",
     "authors": [

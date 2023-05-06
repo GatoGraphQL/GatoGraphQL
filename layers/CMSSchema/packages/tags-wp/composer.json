@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Tags\"",
-    "keywords": ["GraphQL", "PHP", "PoP", "tags-wp"],
+    "keywords": ["GraphQL", "PHP", "Gato", "tags-wp"],
     "homepage": "https://github.com/PoPCMSSchema/tags-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

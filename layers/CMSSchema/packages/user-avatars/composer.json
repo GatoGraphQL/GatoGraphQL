@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Adds support for user avatars",
-    "keywords": ["GraphQL", "PHP", "PoP", "user-avatars"],
+    "keywords": ["GraphQL", "PHP", "Gato", "user-avatars"],
     "homepage": "https://github.com/PoPCMSSchema/user-avatars",
     "license": "GPL-2.0-or-later",
     "authors": [

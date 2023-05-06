@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Query Custom Post Types",
-    "keywords": ["GraphQL", "PHP", "PoP", "customposts"],
+    "keywords": ["GraphQL", "PHP", "Gato", "customposts"],
     "homepage": "https://github.com/PoPCMSSchema/customposts",
     "license": "GPL-2.0-or-later",
     "authors": [

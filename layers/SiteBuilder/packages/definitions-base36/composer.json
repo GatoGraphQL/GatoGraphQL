@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Provides definitions using a base 36 counter",
-    "keywords": ["GraphQL", "PHP", "PoP", "definitions-base36"],
+    "keywords": ["GraphQL", "PHP", "Gato", "definitions-base36"],
     "homepage": "https://github.com/getpop/definitions-base36",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Adds support for meta",
-    "keywords": ["GraphQL", "PHP", "PoP", "meta"],
+    "keywords": ["GraphQL", "PHP", "Gato", "meta"],
     "homepage": "https://github.com/PoPCMSSchema/meta",
     "license": "GPL-2.0-or-later",
     "authors": [

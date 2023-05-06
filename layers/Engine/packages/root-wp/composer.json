@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Implementation of the Root package for WordPress",
-    "keywords": ["GraphQL", "PHP", "PoP", "root", "WordPress"],
+    "keywords": ["GraphQL", "PHP", "Gato", "root", "WordPress"],
     "homepage": "https://github.com/getpop/root-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

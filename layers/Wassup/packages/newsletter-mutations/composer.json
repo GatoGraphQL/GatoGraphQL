@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Adds mutations for newsletter functionality",
-    "keywords": ["GraphQL", "PHP", "PoP", "newsletter-mutations"],
+    "keywords": ["GraphQL", "PHP", "Gato", "newsletter-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/newsletter-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

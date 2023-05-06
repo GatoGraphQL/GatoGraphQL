@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Adds support for tags",
-    "keywords": ["GraphQL", "PHP", "PoP", "tags"],
+    "keywords": ["GraphQL", "PHP", "Gato", "tags"],
     "homepage": "https://github.com/PoPCMSSchema/tags",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Adds support for user meta",
-    "keywords": ["GraphQL", "PHP", "PoP", "usermeta"],
+    "keywords": ["GraphQL", "PHP", "Gato", "usermeta"],
     "homepage": "https://github.com/PoPCMSSchema/usermeta",
     "license": "GPL-2.0-or-later",
     "authors": [

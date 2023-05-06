@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Resources for the website (CSS, JS files)",
-    "keywords": ["GraphQL", "PHP", "PoP", "resources"],
+    "keywords": ["GraphQL", "PHP", "Gato", "resources"],
     "homepage": "https://github.com/getpop/resources",
     "license": "GPL-2.0-or-later",
     "authors": [

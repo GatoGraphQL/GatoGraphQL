@@ -160,7 +160,7 @@
     },
     "type": "library",
     "description": "Adds support for taxonomies",
-    "keywords": ["GraphQL", "PHP", "PoP", "taxonomies"],
+    "keywords": ["GraphQL", "PHP", "Gato", "taxonomies"],
     "homepage": "https://github.com/PoPCMSSchema/taxonomies",
     "license": "GPL-2.0-or-later",
     "authors": [

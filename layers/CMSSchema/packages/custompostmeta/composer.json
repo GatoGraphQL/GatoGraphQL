@@ -159,7 +159,7 @@
     },
     "type": "library",
     "description": "Adds support for post meta",
-    "keywords": ["GraphQL", "PHP", "PoP", "custompostmeta"],
+    "keywords": ["GraphQL", "PHP", "Gato", "custompostmeta"],
     "homepage": "https://github.com/PoPCMSSchema/custompostmeta",
     "license": "GPL-2.0-or-later",
     "authors": [
