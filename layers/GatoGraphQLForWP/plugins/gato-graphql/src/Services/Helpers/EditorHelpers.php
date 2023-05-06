@@ -14,7 +14,7 @@ class EditorHelpers
      * phpcs:disable Generic.PHP.DisallowRequestSuperglobal
      * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
      */
-    public function getEditingPostType(): ?string
+    public function getEditingCustomPostType(): ?string
     {
         // When in the editor, there is no direct way to obtain the post type in hook "init",
         // since $typenow has not been initialized yet

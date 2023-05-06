@@ -328,8 +328,8 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * > The block "gato-graphql/schema-configuration" must have a registered category.
          */
         if (\is_admin()) {
-            if ($postTypes = $this->getAllowedPostTypes()) {
-                if (!in_array($this->getEditorHelpers()->getEditingPostType(), $postTypes)) {
+            if ($customPostTypes = $this->getAllowedPostTypes()) {
+                if (!in_array($this->getEditorHelpers()->getEditingCustomPostType(), $customPostTypes)) {
                     return;
                 }
             }

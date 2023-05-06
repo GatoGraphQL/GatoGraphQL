@@ -104,8 +104,8 @@ abstract class AbstractEditorScript extends AbstractScript
          * Maybe only load the script when creating/editing for some CPT only
          */
         if (\is_admin()) {
-            if ($postTypes = $this->getAllowedPostTypes()) {
-                if (!in_array($this->getEditorHelpers()->getEditingPostType(), $postTypes)) {
+            if ($customPostTypes = $this->getAllowedPostTypes()) {
+                if (!in_array($this->getEditorHelpers()->getEditingCustomPostType(), $customPostTypes)) {
                     return;
                 }
             }

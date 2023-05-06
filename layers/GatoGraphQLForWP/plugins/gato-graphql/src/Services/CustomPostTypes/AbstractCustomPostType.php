@@ -242,7 +242,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
 
         // Make sure we're editing this CPT, or the hook will be triggered multiple times
-        if ($this->getCustomPostType() !== $this->getEditorHelpers()->getEditingPostType()) {
+        if ($this->getCustomPostType() !== $this->getEditorHelpers()->getEditingCustomPostType()) {
             return;
         }
 
