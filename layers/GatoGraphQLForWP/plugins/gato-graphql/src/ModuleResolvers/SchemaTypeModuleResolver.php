@@ -502,7 +502,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
          * stored on the DB
          */
         $defaultQueryableCustomPostTypes = [];
-        if (!$useRestrictiveDefaults
+        if (
+            !$useRestrictiveDefaults
             && ((
                 $module === self::SCHEMA_CUSTOMPOSTS
                 && $option === ModuleSettingOptions::CUSTOMPOST_TYPES
@@ -513,7 +514,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 $module === self::SCHEMA_CATEGORIES
                 && $option === ModuleSettingOptions::CATEGORY_TAXONOMIES
             )
-        )) {
+            )
+        ) {
             $defaultQueryableCustomPostTypes = $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes([
                 'publicly_queryable' => true,
             ]);
