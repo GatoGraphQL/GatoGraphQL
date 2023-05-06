@@ -509,8 +509,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ) || (
                 $module === self::SCHEMA_TAGS
                 && $option === ModuleSettingOptions::TAG_TAXONOMIES
-            ) || ($module === self::SCHEMA_TAGS
-                && $option === ModuleSettingOptions::TAG_TAXONOMIES
+            ) || (
+                $module === self::SCHEMA_CATEGORIES
+                && $option === ModuleSettingOptions::CATEGORY_TAXONOMIES
             )
         )) {
             $defaultQueryableCustomPostTypes = $this->getWPDataModelProvider()->getFilteredNonGatoGraphQLPluginCustomPostTypes([
