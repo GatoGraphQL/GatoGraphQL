@@ -209,9 +209,22 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             return $this->nonHierarchicalQueryableCustomPostsAssociatedTaxonomies;
         }
 
-        /** @var CustomPostsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
-        $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
+        /**
+         * When we are saving the Settings on option.php, do not
+         * restrict the taxonomies to the previous values.
+         *
+         * Eg: when clicking on "Reset Settings" and all CPTs are
+         * exposed, all tags/categories must also be exposed, and
+         * not those ones associated to the previously-stored CPTs.
+         */
+        global $pagenow;
+        if ($pagenow === 'options.php') {
+            $queryableCustomPostTypes = $this->getFilteredNonGatoGraphQLPluginCustomPostTypes();            
+        } else {
+            /** @var CustomPostsModuleConfiguration */
+            $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
+            $queryableCustomPostTypes = $moduleConfiguration->getQueryableCustomPostTypes();
+        }
 
         /** @var WP_Taxonomy[] */
         $possibleTaxonomyObjects = \get_taxonomies(
