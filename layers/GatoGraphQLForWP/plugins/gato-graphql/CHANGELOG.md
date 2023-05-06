@@ -409,7 +409,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Mutations and nested mutations ([#28](https://github.com/GraphQLAPI/gato-graphql/issues/28)) - Thanks to [WPKube](https://www.wpkube.com/) for sponsoring this feature ❤️
+- Mutations and nested mutations ([#28](https://github.com/GraphQLAPI/graphql-api-for-wp/issues/28)) - Thanks to [WPKube](https://www.wpkube.com/) for sponsoring this feature ❤️
 - Mutations in the schema:
   - `Root.createPost`
   - `Root.updatePost`
