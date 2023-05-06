@@ -3,7 +3,7 @@
     "type": "wordpress-plugin",
     "description": "Gato GraphQL",
     "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
-    "homepage": "https://github.com/GraphQLAPI/gato-graphql",
+    "homepage": "https://github.com/GatoGraphQL/gato-graphql",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

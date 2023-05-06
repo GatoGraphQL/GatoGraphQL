@@ -4,7 +4,7 @@
   "description": "Components used by Gato GraphQL",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GraphQLAPI/gato-graphql.git",
+    "url": "https://github.com/GatoGraphQL/gato-graphql.git",
     "directory": "packages/components"
   },
   "keywords": [

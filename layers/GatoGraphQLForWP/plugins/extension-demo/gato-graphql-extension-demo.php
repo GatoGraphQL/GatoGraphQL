@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Gato GraphQL - Extension Demo
-Plugin URI: https://github.com/GraphQLAPI/gato-graphql-extension-demo-dist
+Plugin URI: https://github.com/GatoGraphQL/gato-graphql-extension-demo-dist
 Description: Demonstration of extending the GraphQL schema, for Gato GraphQL
 Version: 1.0.0-dev
 Requires at least: 5.4
