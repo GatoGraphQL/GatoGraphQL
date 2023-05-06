@@ -21,7 +21,7 @@ class StringConversionTest extends AbstractTestCase
         );
 
         $this->assertSame(
-            'GraphqlApiSchemaConfigOptions',
+            'GatoGraphqlSchemaConfigOptions',
             $stringConversion->dashesToCamelCase(
                 'gato-graphql-schema-config-options',
                 true

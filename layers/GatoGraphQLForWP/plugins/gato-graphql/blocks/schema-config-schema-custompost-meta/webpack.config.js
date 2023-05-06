@@ -68,7 +68,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGraphqlApiSchemaConfigSchemaCustompostMeta';
+config.output.jsonpFunction = 'webpackJsonpGatoGraphqlSchemaConfigSchemaCustompostMeta';
 // ------------------------------------------------------
 
 module.exports = config;
