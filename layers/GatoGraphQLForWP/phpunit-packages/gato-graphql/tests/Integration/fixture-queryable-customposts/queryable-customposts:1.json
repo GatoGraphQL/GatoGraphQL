@@ -88,14 +88,14 @@
       },
       {
         "id": 361,
-        "title": "gato-graphql-header",
+        "title": "graphql-api-header",
         "customPostType": "attachment",
         "status": "publish",
         "__typename": "GenericCustomPost"
       },
       {
         "id": 362,
-        "title": "gato-graphql-search-results",
+        "title": "graphql-api-search-results",
         "customPostType": "attachment",
         "status": "publish",
         "__typename": "GenericCustomPost"
