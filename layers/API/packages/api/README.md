@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Convert the application into a powerful API. Install the [GraphQL API](https://github.com/PoP-PoPAPI/api-graphql) package to convert it into a GraphQL server, and the [REST API](https://github.com/PoP-PoPAPI/api-rest) package to enable adding REST endpoints.
+Convert the application into a powerful API. Install the [Gato GraphQL](https://github.com/PoP-PoPAPI/api-graphql) package to convert it into a GraphQL server, and the [REST API](https://github.com/PoP-PoPAPI/api-rest) package to enable adding REST endpoints.
 
 ## Install
 
@@ -155,10 +155,10 @@ Please refer to the syntax from the [Field Query](https://github.com/getpop/fiel
 
 The API can transform the application into both a GraphQL and/or REST server, simply by installing the corresponding extension:
 
-- [GraphQL API](https://github.com/PoP-PoPAPI/api-graphql)
+- [Gato GraphQL](https://github.com/PoP-PoPAPI/api-graphql)
 - [REST API](https://github.com/PoP-PoPAPI/api-rest)
 
-The PoP API manages to provide all the same benefits of both REST and GraphQL APIs, **at the same time**:
+The PoP API manages to provide all the same benefits of both REST and Gato GraphQLs, **at the same time**:
 
 _From GraphQL:_
 
@@ -253,7 +253,7 @@ REST, GraphQL and PoP native compare like this:
 <tr><th>Is data normalized?</th><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><th>Support for configuration values?</th><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><th>Cacheable on server-side?</th><td>Yes</td><td>No</td><td>Yes</td></tr>
-<tr><th>Open to DoS attack?</th><td>No</td><td><a href="https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b">Yes</a></td><td>No</td></tr>
+<tr><th>Open to DoS attack?</th><td>No</td><td><a href="https://blog.apollographql.com/securing-your-gato-graphql-from-malicious-queries-16130a324a6b">Yes</a></td><td>No</td></tr>
 <tr><th>Compatible with the other APIs</th><td>No</td><td>No</a></td><td>Yes</td></tr>
 </table>
 - - >
@@ -304,7 +304,7 @@ Within composable fields, errors bubble up: Since the output from a field is the
 
 ## Examples
 
-Examples below use the GraphQL API. More examples can be found on the [Field Query](https://github.com/getpop/field-query) package.
+Examples below use the Gato GraphQL. More examples can be found on the [Field Query](https://github.com/getpop/field-query) package.
 
 ### Queries
 

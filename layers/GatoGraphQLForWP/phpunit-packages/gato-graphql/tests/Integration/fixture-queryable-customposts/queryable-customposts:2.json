@@ -1,0 +1,152 @@
+{
+  "data": {
+    "customPosts": [
+      {
+        "id": 1,
+        "title": "Hello world!",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 2,
+        "title": "Sample Page",
+        "customPostType": "page",
+        "status": "publish",
+        "__typename": "Page"
+      },
+      {
+        "id": 13,
+        "title": "Released v0.6, check it out",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 16,
+        "title": "Working on flat chain syntax next",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 19,
+        "title": "Nested mutations are a must have",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 21,
+        "title": "Customize the schema for each client",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 23,
+        "title": "GraphQL or REST? Why not both?",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 25,
+        "title": "Public or Private API mode, for extra security",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 28,
+        "title": "HTTP caching improves performance",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
+        "id": 361,
+        "title": "gato-graphql-header",
+        "customPostType": "attachment",
+        "status": "publish",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 362,
+        "title": "gato-graphql-search-results",
+        "customPostType": "attachment",
+        "status": "publish",
+        "__typename": "GenericCustomPost"
+      },
+      {
+        "id": 363,
+        "title": "LICENSE",
+        "customPostType": "attachment",
+        "status": "publish",
+        "__typename": "GenericCustomPost"
+      }
+    ],
+    "dummyCustomPosts": [
+      {
+        "__typename": "GenericCustomPost",
+        "id": 649,
+        "title": "Nulla numquam totam eaque",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 619,
+        "title": "Error debitis nulla vel est",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 634,
+        "title": "Recusandae vel deleniti est expedita dolores quasi",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 636,
+        "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 639,
+        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 622,
+        "title": "Dolore ex et deleniti mollitia",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 648,
+        "title": "Nostrum consequatur non fugit vel",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 644,
+        "title": "Impedit eaque numquam quas inventore",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 630,
+        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 641,
+        "title": "Impedit necessitatibus dolor est",
+        "customPostType": "dummy-cpt"
+      }
+    ]
+  }
+}

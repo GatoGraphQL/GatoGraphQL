@@ -1,0 +1,35 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GatoGraphQL\GatoGraphQL\Container\CompilerPasses\:
+        resource: '../src/Container/CompilerPasses/*'
+
+    GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\:
+        resource: '../src/Container/HybridCompilerPasses/*'
+
+    # All these services are required to maybe execute ModuleListTableAction in Plugin.php
+    # Hence, they are defined both in the Application and System containers
+    # Please notice: they must NOT be autoconfigured!
+    # Otherwise, they will also be inititalized twice.
+    # @see https://github.com/leoloso/PoP/issues/636
+    GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper:
+        class: ~
+        autoconfigure: false
+    GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu:
+        class: ~
+        autoconfigure: false
+    GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers:
+        class: ~
+        autoconfigure: false
+    GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage:
+        class: ~
+        autoconfigure: false
+    
+    # This service is referenced when storing the Settings (via options.php)
+    GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType:
+        class: ~
+        autoconfigure: false
+

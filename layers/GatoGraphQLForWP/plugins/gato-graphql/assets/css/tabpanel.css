@@ -1,0 +1,95 @@
+/**
+ * Override the box-shadow added to a:focus, when clicking on the tab
+ */
+.gato-graphql-tabpanel .nav-tab-active {
+    box-shadow: none;
+}
+
+/**
+ * Settings page: Make the tabs vertical
+ */
+.gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper > a.nav-tab-active {
+    box-shadow: none;
+    border-right-color: #f0f0f1;
+}
+
+/**
+ * Override style from WP to add a bottom border on mobile
+ */
+@media screen and (max-width: 600px) {
+    .gato-graphql-tabpanel.vertical-tabs .nav-tab-wrapper,
+    .wrap.gato-graphql-tabpanel.vertical-tabs h2.nav-tab-wrapper,
+    .gato-graphql-tabpanel.vertical-tabs h1.nav-tab-wrapper {
+        border-bottom: 1px solid #c3c4c7;
+    }
+}
+
+.gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper > a.nav-tab {
+    display: block;
+    white-space: initial;
+    float: none;
+    margin: 0;
+    border-bottom: 0;
+    transition: 0.3s;
+}
+
+.gato-graphql-tabpanel.vertical-tabs > .nav-tab-container {
+    display: flex;
+    gap: 15px;
+    padding-top: 9px;
+}
+.gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
+    padding-top: 0;
+    flex: 0 0 150px;
+    overflow: auto;
+    height: 100%;
+    max-height: calc(100vh - 120px);
+}
+/**
+ * The Settings page has a tabPanel inside another one.
+ * Compute for both of them
+ */
+.gato-graphql-tabpanel .gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
+    max-height: calc(100vh - 183px);
+}
+/**
+ * The pre > code are not scrollable, but expand outside the viewport.
+ * So constrain it calculating the max-width for each case!
+ */
+.gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre > code {
+    max-width: calc(100vw - 10px - 150px - 15px - 2em - 1px - 10px);
+}
+/**
+ * After saving the Settings, there'll be a "Settings saved." notice,
+ * which is 60 px high. Include it in the calculation.
+ */
+.gato-graphql-tabpanel.vertical-tabs > .notice + .nav-tab-container > .nav-tab-wrapper {
+    max-height: calc(100vh - 180px);
+}
+.gato-graphql-tabpanel > .notice + .nav-tab-container > .nav-tab-content .gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
+    max-height: calc(100vh - 243px);
+}
+@media (min-width: 600px) {
+    .gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
+        flex: 0 0 160px;
+    }
+    .gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre > code {
+        max-width: calc(100vw - 10px - 160px - 15px - 2em - 1px - 10px);
+    }
+}
+@media (min-width: 783px) {
+    .gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
+        flex: 0 0 190px;
+    }
+    .gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre > code {
+        max-width: calc(100vw - 56px - 190px - 15px - 2em - 1px - 15px);
+    }
+}
+@media (min-width: 961px) {
+    .gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
+        flex: 0 0 220px;
+    }
+    .gato-graphql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre > code {
+        max-width: calc(100vw - 180px - 220px - 15px - 2em - 1px - 15px);
+    }
+}

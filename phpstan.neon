@@ -42,16 +42,16 @@ includes:
     - layers/WPSchema/packages/customposts/phpstan.neon.dist
     - layers/CMSSchema/packages/customposts-wp/phpstan.neon.dist
     - layers/Engine/packages/definitions/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/phpunit-packages/dummy-schema/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/phpunit-packages/dummy-wp-schema/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/phpunit-packages/dummy-schema/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/phpunit-packages/dummy-wp-schema/phpstan.neon.dist
     - layers/Engine/packages/engine/phpstan.neon.dist
     - layers/Engine/packages/engine-wp/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/plugins/extension-demo/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/packages/external-dependency-wrappers/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/plugins/extension-demo/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/packages/external-dependency-wrappers/phpstan.neon.dist
     - layers/Engine/packages/filestore/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/phpunit-packages/gato-graphql/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/plugins/gato-graphql/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-clients-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/phpstan.neon.dist
     - layers/Engine/packages/graphql-parser/phpstan.neon.dist
@@ -59,7 +59,7 @@ includes:
     - layers/GraphQLByPoP/packages/graphql-server/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
     - layers/Engine/packages/mandatory-directives-by-configuration/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/packages/markdown-convertor/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/packages/markdown-convertor/phpstan.neon.dist
     - layers/CMSSchema/packages/media/phpstan.neon.dist
     - layers/WPSchema/packages/media/phpstan.neon.dist
     - layers/CMSSchema/packages/media-wp/phpstan.neon.dist
@@ -74,7 +74,7 @@ includes:
     - layers/CMSSchema/packages/pages/phpstan.neon.dist
     - layers/WPSchema/packages/pages/phpstan.neon.dist
     - layers/CMSSchema/packages/pages-wp/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/packages/plugin-utils/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/packages/plugin-utils/phpstan.neon.dist
     - layers/CMSSchema/packages/post-categories/phpstan.neon.dist
     - layers/CMSSchema/packages/post-categories-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/post-category-mutations/phpstan.neon.dist
@@ -121,6 +121,6 @@ includes:
     - layers/CMSSchema/packages/users/phpstan.neon.dist
     - layers/WPSchema/packages/users/phpstan.neon.dist
     - layers/CMSSchema/packages/users-wp/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/phpunit-packages/webserver-requests/phpstan.neon.dist
     - layers/Backbone/packages/wp-data-parser/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/phpunit-packages/wpfaker-schema/phpstan.neon.dist

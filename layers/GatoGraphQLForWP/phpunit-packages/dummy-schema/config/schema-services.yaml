@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PHPUnitForGatoGraphQL\DummySchema\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PHPUnitForGatoGraphQL\DummySchema\DirectiveResolvers\:
+        resource: '../src/DirectiveResolvers/*'
+
+    PHPUnitForGatoGraphQL\DummySchema\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'

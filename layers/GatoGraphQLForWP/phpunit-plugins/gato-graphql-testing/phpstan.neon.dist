@@ -1,0 +1,36 @@
+parameters:
+    level: 8
+    paths:
+        - src/
+        - tests/
+    ignoreErrors:
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\CPTBlockAttributesAdminRESTController::retrieveAllItems\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/CPTBlockAttributesAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\CPTBlockAttributesAdminRESTController::retrieveItem\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/CPTBlockAttributesAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\CPTBlockAttributesAdminRESTController::updateItem\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/CPTBlockAttributesAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\ModuleSettingsAdminRESTController::validateOptions\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/ModuleSettingsAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\ModuleSettingsAdminRESTController::retrieveAllItems\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/ModuleSettingsAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\ModuleSettingsAdminRESTController::retrieveItem\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/ModuleSettingsAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\ModuleSettingsAdminRESTController::updateItem\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/ModuleSettingsAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\ModulesAdminRESTController::retrieveAllItems\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/ModulesAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\ModulesAdminRESTController::retrieveItem\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/ModulesAdminRESTController.php
+        - 
+            message: '#Method PHPUnitForGatoGraphQL\\GatoGraphQLTesting\\RESTAPI\\Controllers\\ModulesAdminRESTController::updateItem\(\) has parameter \$request with generic class WP_REST_Request but does not specify its types: T#'
+            path: src/RESTAPI/Controllers/ModulesAdminRESTController.php

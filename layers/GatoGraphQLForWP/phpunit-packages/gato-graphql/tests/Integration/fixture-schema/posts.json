@@ -1,0 +1,371 @@
+{
+    "data": {
+        "posts": [
+            {
+                "areCommentsOpen": true,
+                "author": {
+                    "id": 2,
+                    "name": "Blogger Davenport"
+                },
+                "categories": [
+                    {
+                        "id": 1,
+                        "name": "Uncategorized"
+                    }
+                ],
+                "categoryCount": 1,
+                "categoryNames": [
+                    "Uncategorized"
+                ],
+                "commentCount": 0,
+                "comments": [],
+                "content": "\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n",
+                "customPostType": "post",
+                "date": "2020-04-17T13:06:58+00:00",
+                "dateStr": "April 17, 2020",
+                "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+                "featuredImage": null,
+                "hasComments": false,
+                "hasFeaturedImage": false,
+                "id": 1,
+                "isStatus": false,
+                "isSticky": false,
+                "metaValue": null,
+                "postFormat": "standard",
+                "rawContent": "\nWelcome to WordPress. This is your first post. Edit or delete it, then start writing!\n",
+                "slug": "hello-world",
+                "status": "publish",
+                "tagCount": 0,
+                "tagNames": [],
+                "tags": [],
+                "title": "Hello world!",
+                "url": "https:\/\/gato-graphql.lndo.site\/hello-world\/",
+                "urlPath": "\/hello-world\/"
+            },
+            {
+                "areCommentsOpen": true,
+                "author": {
+                    "id": 3,
+                    "name": "Subscriber Bennett"
+                },
+                "categories": [
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
+                "categoryCount": 1,
+                "categoryNames": [
+                    "Blog"
+                ],
+                "commentCount": 1,
+                "comments": [
+                    {
+                        "id": 2
+                    }
+                ],
+                "content": "<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<\/p>\n<h2 class=\"wp-block-heading\">Image Block (Standard<br \/>\n\t<g class=\"gr_ gr_3 gr-alert gr_spell gr_inline_cards gr_run_anim ContextualSpelling ins-del multiReplace\" id=\"3\" data-gr-id=\"3\">width<\/g>)<\/h2>\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
+                "customPostType": "post",
+                "date": "2020-12-12T03:56:13+00:00",
+                "dateStr": "December 12, 2020",
+                "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard width)",
+                "featuredImage": {
+                    "id": 361,
+                    "src": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
+                },
+                "hasComments": true,
+                "hasFeaturedImage": true,
+                "id": 13,
+                "isStatus": false,
+                "isSticky": false,
+                "metaValue": "361",
+                "postFormat": "standard",
+                "rawContent": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.\nImage Block (Standard\n\twidth)\n\n",
+                "slug": "released-v0-6-check-it-out",
+                "status": "publish",
+                "tagCount": 2,
+                "tagNames": [
+                    "release",
+                    "plugin"
+                ],
+                "tags": [
+                    {
+                        "id": 11,
+                        "name": "release"
+                    },
+                    {
+                        "id": 10,
+                        "name": "plugin"
+                    }
+                ],
+                "title": "Released v0.6, check it out",
+                "url": "https:\/\/gato-graphql.lndo.site\/released-v0-6-check-it-out\/",
+                "urlPath": "\/released-v0-6-check-it-out\/"
+            },
+            {
+                "areCommentsOpen": true,
+                "author": {
+                    "id": 4,
+                    "name": "Contributor Johnson"
+                },
+                "categories": [
+                    {
+                        "id": 1,
+                        "name": "Uncategorized"
+                    }
+                ],
+                "categoryCount": 1,
+                "categoryNames": [
+                    "Uncategorized"
+                ],
+                "commentCount": 0,
+                "comments": [],
+                "content": "<h2 class=\"wp-block-heading\">Image Block (Wide<br \/>\n\t<g class=\"gr_ gr_3 gr-alert gr_spell gr_inline_cards gr_run_anim ContextualSpelling ins-del multiReplace\" id=\"3\" data-gr-id=\"3\">width<\/g>)<\/h2>\n<figure class=\"wp-block-image alignwide\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<h2 class=\"wp-block-heading\">Image Block (Full width)<\/h2>\n<figure class=\"wp-block-image alignfull\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<h2 class=\"wp-block-heading\">Cover Image Block<\/h2>\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https:\/\/d.pr\/i\/8pTmgY+)\">\n<div class=\"wp-block-cover__inner-container\">\n<p class=\"has-text-align-center has-large-font-size\">This block can be used for Hero section.<br \/>Full width\u00c2 has been applied.<\/p>\n<\/div>\n<\/div>\n<h2 class=\"wp-block-heading\">Gallery Block<\/h2>\n",
+                "customPostType": "post",
+                "date": "2020-12-12T03:59:07+00:00",
+                "dateStr": "December 12, 2020",
+                "excerpt": "Image Block (Wide width) Image Block (Full width) Cover Image Block Gallery Block",
+                "featuredImage": {
+                    "id": 361,
+                    "src": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
+                },
+                "hasComments": false,
+                "hasFeaturedImage": true,
+                "id": 16,
+                "isStatus": false,
+                "isSticky": false,
+                "metaValue": "361",
+                "postFormat": "standard",
+                "rawContent": "Image Block (Wide\n\twidth)\n\nImage Block (Full width)\n\nCover Image Block\n\n\nThis block can be used for Hero section.Full width\u00c2 has been applied.\n\n\nGallery Block\n",
+                "slug": "working-on-flat-chain-syntax-next",
+                "status": "publish",
+                "tagCount": 4,
+                "tagNames": [
+                    "wordpress",
+                    "plugin",
+                    "graphql",
+                    "features"
+                ],
+                "tags": [
+                    {
+                        "id": 13,
+                        "name": "wordpress"
+                    },
+                    {
+                        "id": 10,
+                        "name": "plugin"
+                    },
+                    {
+                        "id": 8,
+                        "name": "graphql"
+                    },
+                    {
+                        "id": 7,
+                        "name": "features"
+                    }
+                ],
+                "title": "Working on flat chain syntax next",
+                "url": "https:\/\/gato-graphql.lndo.site\/working-on-flat-chain-syntax-next\/",
+                "urlPath": "\/working-on-flat-chain-syntax-next\/"
+            }
+        ],
+        "postsByAuthorIDs": [
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            }
+        ],
+        "postsByAuthorSlug": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByCategoryIDs": [
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByDateQuery": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByExcludeAuthorIDs": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            },
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByExcludeIDs": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByHasPassword": [],
+        "postsByIds": [
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByIsSticky": [],
+        "postsByMetaQuery": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByPassword": [],
+        "postsBySearch": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByStatus": [],
+        "postsByTagIDs": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            }
+        ],
+        "postsByTagSlugs": [
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsSortedASC": [
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsSortedDESC": [
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            }
+        ]
+    }
+}

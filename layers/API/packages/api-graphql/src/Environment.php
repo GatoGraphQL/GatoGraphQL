@@ -8,7 +8,7 @@ class Environment
 {
     public final const PRINT_DYNAMIC_FIELD_IN_EXTENSIONS_OUTPUT = 'PRINT_DYNAMIC_FIELD_IN_EXTENSIONS_OUTPUT';
 
-    public static function disableGraphQLAPI(): bool
+    public static function disableGatoGraphQL(): bool
     {
         return getenv('DISABLE_GRAPHQL_API') !== false ? strtolower(getenv('DISABLE_GRAPHQL_API')) === "true" : false;
     }

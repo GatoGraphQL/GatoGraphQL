@@ -20,10 +20,10 @@ class PackageOrganizationDataSource
             'layers/Backbone/packages' => 'PoPBackbone',
             'layers/CMSSchema/packages' => 'PoPCMSSchema',
             'layers/Engine/packages' => 'getpop',
-            'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
-            'layers/GraphQLAPIForWP/phpunit-packages' => 'PHPUnitForGraphQLAPI',
-            'layers/GraphQLAPIForWP/phpunit-plugins' => 'PHPUnitForGraphQLAPI',
-            'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
+            'layers/GatoGraphQLForWP/packages' => 'GatoGraphQL',
+            'layers/GatoGraphQLForWP/phpunit-packages' => 'PHPUnitForGatoGraphQL',
+            'layers/GatoGraphQLForWP/phpunit-plugins' => 'PHPUnitForGatoGraphQL',
+            'layers/GatoGraphQLForWP/plugins' => 'GatoGraphQL',
             'layers/GraphQLByPoP/clients' => 'GraphQLByPoP',
             'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
             'layers/Schema/packages' => 'PoPSchema',
@@ -50,7 +50,7 @@ class PackageOrganizationDataSource
     public function getPackageDirectoryExcludes(): array
     {
         return [
-            'graphql-api-for-wp/wordpress',
+            'gato-graphql/wordpress',
         ];
     }
 }

@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
+
+abstract class AbstractModifyPluginSettingsWebserverRequestTestCase extends AbstractWebserverRequestTestCase
+{
+    use ModifyPluginSettingsWebserverRequestTestCaseTrait;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->modifyPluginSettingsSetUp();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->modifyPluginSettingsTearDown();
+
+        parent::tearDown();
+    }
+}

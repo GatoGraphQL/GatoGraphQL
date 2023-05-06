@@ -1,9 +1,0 @@
-<?php
-
-declare(strict_types=1);
-
-namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
-
-abstract class AbstractSchemaMetaBlockSchemaConfigurationExecuter extends AbstractSchemaAllowAccessToEntriesBlockSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
-{
-}

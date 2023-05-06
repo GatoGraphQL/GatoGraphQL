@@ -18,7 +18,7 @@ class MonorepoDowngradeContainerConfigurationService extends AbstractDowngradeCo
                 $this->rootDirectory . '/src/*',
 
                 // Ignore downgrading the testing packages
-                $this->rootDirectory . '/layers/GraphQLAPIForWP/phpunit-packages/*',
+                $this->rootDirectory . '/layers/GatoGraphQLForWP/phpunit-packages/*',
 
                 // This library is used for testing the source; it is added under "require" so it must be excluded
                 $this->rootDirectory . '/vendor/fakerphp/faker/*',

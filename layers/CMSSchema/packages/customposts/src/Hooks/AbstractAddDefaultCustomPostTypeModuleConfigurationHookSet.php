@@ -19,7 +19,7 @@ abstract class AbstractAddDefaultCustomPostTypeModuleConfigurationHookSet extend
     protected function init(): void
     {
         /**
-         * Allow the GraphQL API plugin to set its own values,
+         * Allow Gato GraphQL to set its own values,
          * completely overriding the hooks set by the independent
          * packages Posts and Pages.
          */

@@ -1,0 +1,20 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    # Make sure the GraphiQL client is used, without the Explorer
+    # Because if isGraphiQLExplorerEnabled might be true, the explorer is enabled
+    # but if disabled for the single endpoint, then it must not
+    # (for that case, it will be overriden once again by another ConditionalOnContext)
+    GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
+        class: \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient
+
+    # Override to configure the cache with dynamic values
+    PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Overrides\ConfigurationCache\OperationalCacheConfigurationManager
+
+    # Inject "executing-graphql" into the state
+    GraphQLByPoP\GraphQLEndpointForWP\State\GraphQLEndpointHandlerAppStateProvider:
+        class: \GatoGraphQL\GatoGraphQL\Overrides\State\GraphQLEndpointHandlerAppStateProvider

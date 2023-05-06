@@ -1,0 +1,53 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\ModuleRegistry
+
+    GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistry
+
+    GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface:
+        class: '\GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistry'
+
+    GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizer
+        
+    GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes\:
+        resource: '../src/Security/UserAuthorizationSchemes/*'
+        
+
+    ################################################################################
+    # The services below are needed to get the defaultValues for options
+    # CUSTOMPOST_TYPES, TAG_TAXONOMIES and CATEGORY_TAXONOMIES
+    #
+    # @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/ModuleResolvers/SchemaTypeModuleResolver.php
+    #
+    # Even though the Registries will be empty, as the corresponding
+    # services have not been added as Hybrid Services, that's OK,
+    # since those services are to be excluded (i.e. if they are not
+    # added in first place, it's the same result)
+    ################################################################################
+    GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface:
+        class: \GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProvider
+
+    GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistry
+
+    GatoGraphQL\GatoGraphQL\Registries\TaxonomyRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\TaxonomyRegistry
+
+
+    # This service (and also ModuleRegistryInterface) is required to
+    # maybe execute ModuleListTableAction in Plugin.php
+    # Hence, it is defined as a Hybrid
+    GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface:
+        class: '\GatoGraphQL\GatoGraphQL\Security\UserAuthorization'
+
+    # These services are required when storing settings in options.php
+    # for which only the SystemContainer is available
+    GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\:
+        resource: ../src/SettingsCategoryResolvers/*

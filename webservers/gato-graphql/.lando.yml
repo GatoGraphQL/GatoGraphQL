@@ -1,0 +1,245 @@
+name: gato-graphql
+recipe: wordpress
+config:
+  webroot: wordpress
+  php: '8.1'
+  ssl: true
+  database: mariadb
+  xdebug: true
+  config:
+    php: ../shared/config/php.ini
+services:
+  database:
+    portforward: true
+  appserver:
+    overrides:
+      environment:
+        XDEBUG_MODE: ''
+      volumes:
+        - >-
+          ../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing:/app/wordpress/wp-content/plugins/gato-graphql-testing
+        - >-
+          ../../layers/GatoGraphQLForWP/plugins/extension-demo:/app/wordpress/wp-content/plugins/gato-graphql-extension-demo
+        - >-
+          ../../layers/GatoGraphQLForWP/plugins/gato-graphql:/app/wordpress/wp-content/plugins/gato-graphql
+        - >-
+          ../../layers/API/packages/api-clients:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-api/api-clients
+        - >-
+          ../../layers/API/packages/api-endpoints-for-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-api/api-endpoints-for-wp
+        - >-
+          ../../layers/API/packages/api-endpoints:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-api/api-endpoints
+        - >-
+          ../../layers/API/packages/api-graphql:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-api/api-graphql
+        - >-
+          ../../layers/API/packages/api-mirrorquery:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-api/api-mirrorquery
+        - >-
+          ../../layers/API/packages/api:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-api/api
+        - >-
+          ../../layers/Backbone/packages/php-hooks:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-backbone/php-hooks
+        - >-
+          ../../layers/Engine/packages/cache-control:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/cache-control
+        - >-
+          ../../layers/Engine/packages/component-model:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/component-model
+        - >-
+          ../../layers/Engine/packages/definitions:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/definitions
+        - >-
+          ../../layers/Engine/packages/engine-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine-wp
+        - >-
+          ../../layers/Engine/packages/engine:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine
+        - >-
+          ../../layers/Engine/packages/graphql-parser:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/graphql-parser
+        - >-
+          ../../layers/Engine/packages/loosecontracts:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/loosecontracts
+        - >-
+          ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/mandatory-directives-by-configuration
+        - >-
+          ../../layers/Engine/packages/componentrouting:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/componentrouting
+        - >-
+          ../../layers/Engine/packages/root:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/root
+        - >-
+          ../../layers/Engine/packages/root-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/root-wp
+        - >-
+          ../../layers/GatoGraphQLForWP/packages/external-dependency-wrappers:/app/wordpress/wp-content/plugins/gato-graphql/vendor/gato-graphql/external-dependency-wrappers
+        - >-
+          ../../layers/GatoGraphQLForWP/packages/markdown-convertor:/app/wordpress/wp-content/plugins/gato-graphql/vendor/gato-graphql/markdown-convertor
+        - >-
+          ../../layers/GatoGraphQLForWP/packages/plugin-utils:/app/wordpress/wp-content/plugins/gato-graphql/vendor/gato-graphql/plugin-utils
+        - >-
+          ../../layers/GraphQLByPoP/packages/graphql-clients-for-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/graphql-by-pop/graphql-clients-for-wp
+        - >-
+          ../../layers/GraphQLByPoP/packages/graphql-endpoint-for-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/graphql-by-pop/graphql-endpoint-for-wp
+        - >-
+          ../../layers/GraphQLByPoP/packages/graphql-request:/app/wordpress/wp-content/plugins/gato-graphql/vendor/graphql-by-pop/graphql-request
+        - >-
+          ../../layers/GraphQLByPoP/packages/graphql-server:/app/wordpress/wp-content/plugins/gato-graphql/vendor/graphql-by-pop/graphql-server
+        - >-
+          ../../layers/CMSSchema/packages/categories-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/categories-wp
+        - >-
+          ../../layers/CMSSchema/packages/categories:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/categories
+        - >-
+          ../../layers/CMSSchema/packages/comment-mutations-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/comment-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/comment-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/comment-mutations
+        - >-
+          ../../layers/CMSSchema/packages/commentmeta-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/commentmeta-wp
+        - >-
+          ../../layers/CMSSchema/packages/commentmeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/commentmeta
+        - >-
+          ../../layers/CMSSchema/packages/comments-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/comments-wp
+        - >-
+          ../../layers/CMSSchema/packages/comments:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/comments
+        - >-
+          ../../layers/CMSSchema/packages/custompost-categories-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompost-categories-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompost-category-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompost-category-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompost-mutations-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompost-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompost-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompost-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompost-tag-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompost-tag-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompost-tags-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompost-tags-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompostmedia-mutations-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompostmedia-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompostmedia-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompostmedia-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompostmedia-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompostmedia-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompostmedia:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompostmedia
+        - >-
+          ../../layers/CMSSchema/packages/custompostmeta-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompostmeta-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompostmeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompostmeta
+        - >-
+          ../../layers/CMSSchema/packages/customposts-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/customposts-wp
+        - >-
+          ../../layers/CMSSchema/packages/customposts:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/customposts
+        - >-
+          ../../layers/CMSSchema/packages/media-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/media-wp
+        - >-
+          ../../layers/CMSSchema/packages/media:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/media
+        - >-
+          ../../layers/CMSSchema/packages/menus-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/menus-wp
+        - >-
+          ../../layers/CMSSchema/packages/menus:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/menus
+        - >-
+          ../../layers/CMSSchema/packages/meta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/meta
+        - >-
+          ../../layers/CMSSchema/packages/metaquery-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/metaquery-wp
+        - >-
+          ../../layers/CMSSchema/packages/page-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/page-mutations
+        - >-
+          ../../layers/CMSSchema/packages/pagemedia-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/pagemedia-mutations
+        - >-
+          ../../layers/CMSSchema/packages/pages-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/pages-wp
+        - >-
+          ../../layers/CMSSchema/packages/pages:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/pages
+        - >-
+          ../../layers/CMSSchema/packages/post-categories-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-categories-wp
+        - >-
+          ../../layers/CMSSchema/packages/post-categories:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-categories
+        - >-
+          ../../layers/CMSSchema/packages/post-category-mutations-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-category-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/post-category-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-category-mutations
+        - >-
+          ../../layers/CMSSchema/packages/post-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-mutations
+        - >-
+          ../../layers/CMSSchema/packages/post-tag-mutations-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-tag-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/post-tag-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-tag-mutations
+        - >-
+          ../../layers/CMSSchema/packages/post-tags-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-tags-wp
+        - >-
+          ../../layers/CMSSchema/packages/post-tags:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/post-tags
+        - >-
+          ../../layers/CMSSchema/packages/postmedia-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/postmedia-mutations
+        - >-
+          ../../layers/CMSSchema/packages/posts-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/posts-wp
+        - >-
+          ../../layers/CMSSchema/packages/posts:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/posts
+        - >-
+          ../../layers/CMSSchema/packages/queriedobject-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/queriedobject-wp
+        - >-
+          ../../layers/CMSSchema/packages/queriedobject:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/queriedobject
+        - >-
+          ../../layers/CMSSchema/packages/schema-commons-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/schema-commons-wp
+        - >-
+          ../../layers/CMSSchema/packages/schema-commons:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/schema-commons
+        - >-
+          ../../layers/CMSSchema/packages/settings-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/settings-wp
+        - >-
+          ../../layers/CMSSchema/packages/settings:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/settings
+        - >-
+          ../../layers/CMSSchema/packages/tags-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/tags-wp
+        - >-
+          ../../layers/CMSSchema/packages/tags:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/tags
+        - >-
+          ../../layers/CMSSchema/packages/taxonomies-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/taxonomies-wp
+        - >-
+          ../../layers/CMSSchema/packages/taxonomies:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/taxonomies
+        - >-
+          ../../layers/CMSSchema/packages/taxonomyquery-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/taxonomyquery-wp
+        - >-
+          ../../layers/CMSSchema/packages/taxonomyquery:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/taxonomyquery
+        - >-
+          ../../layers/CMSSchema/packages/taxonomymeta-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/taxonomymeta-wp
+        - >-
+          ../../layers/CMSSchema/packages/taxonomymeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/taxonomymeta
+        - >-
+          ../../layers/CMSSchema/packages/user-avatars-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/user-avatars-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-avatars:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/user-avatars
+        - >-
+          ../../layers/CMSSchema/packages/user-roles-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/user-roles-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-roles:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/user-roles
+        - >-
+          ../../layers/CMSSchema/packages/user-state-mutations-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/user-state-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-state-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/user-state-mutations
+        - >-
+          ../../layers/CMSSchema/packages/user-state-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/user-state-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-state:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/user-state
+        - >-
+          ../../layers/CMSSchema/packages/usermeta-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/usermeta-wp
+        - >-
+          ../../layers/CMSSchema/packages/usermeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/usermeta
+        - >-
+          ../../layers/CMSSchema/packages/users-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/users-wp
+        - >-
+          ../../layers/CMSSchema/packages/users:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/users
+        - >-
+          ../../layers/Schema/packages/schema-commons:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-schema/schema-commons
+        - >-
+          ../../layers/WPSchema/packages/commentmeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/commentmeta
+        - >-
+          ../../layers/WPSchema/packages/comments:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/comments
+        - >-
+          ../../layers/WPSchema/packages/custompostmeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/custompostmeta
+        - >-
+          ../../layers/WPSchema/packages/customposts:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/customposts
+        - >-
+          ../../layers/WPSchema/packages/media:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/media
+        - >-
+          ../../layers/WPSchema/packages/menus:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/menus
+        - >-
+          ../../layers/WPSchema/packages/meta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/meta
+        - >-
+          ../../layers/WPSchema/packages/pages:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/pages
+        - >-
+          ../../layers/WPSchema/packages/posts:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/posts
+        - >-
+          ../../layers/WPSchema/packages/schema-commons:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/schema-commons
+        - >-
+          ../../layers/WPSchema/packages/taxonomymeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/taxonomymeta
+        - >-
+          ../../layers/WPSchema/packages/usermeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/usermeta
+        - >-
+          ../../layers/WPSchema/packages/users:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/users
+env_file:
+  - defaults.env
+  - defaults.local.env

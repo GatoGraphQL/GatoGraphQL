@@ -21,7 +21,7 @@ class Module extends AbstractModule
 
     protected function resolveEnabled(): bool
     {
-        return !Environment::disableGraphQLAPI();
+        return !Environment::disableGatoGraphQL();
     }
 
     /**

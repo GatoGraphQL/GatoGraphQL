@@ -1,0 +1,109 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
+
+use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\RequestOptions;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\CustomHeaders;
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
+use Psr\Http\Message\ResponseInterface;
+
+trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
+{
+    protected static string $wpRESTNonce = '';
+
+    abstract protected static function getWebserverHomeURL(): string;
+
+    /**
+     * To login a user in WordPress, request the following URL by POST:
+     *
+     *   curl 'https://gato-graphql.lndo.site/wp-login.php' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'log=admin&pwd=admin'
+     */
+    protected static function getWebserverPingURL(): string
+    {
+        return static::getWebserverHomeURL() . '/wp-login.php';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getWebserverPingOptions(): array
+    {
+        return array_merge(
+            parent::getWebserverPingOptions(),
+            [
+                'form_params' => [
+                    'log' => static::getLoginUsername(),
+                    'pwd' => static::getLoginPassword(),
+                ],
+            ]
+        );
+    }
+
+    protected static function getLoginUsername(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedAdminUserUsername();
+    }
+
+    protected static function getLoginPassword(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedAdminUserPassword();
+    }
+
+    protected static function getWebserverPingMethod(): string
+    {
+        return 'POST';
+    }
+
+    /**
+     * Make sure the user was successfully logged-in
+     *
+     * @param array<string,mixed> $options
+     */
+    protected static function validateWebserverPingResponse(
+        ResponseInterface $response,
+        array $options
+    ): ?string {
+        /** @var CookieJar */
+        $cookieJar = $options[RequestOptions::COOKIES];
+        foreach ($cookieJar->getIterator() as $cookie) {
+            if (str_starts_with($cookie->getName(), 'wordpress_logged_in_')) {
+                return null;
+            }
+        }
+        $username = static::getLoginUsername();
+        if ($username === '' || static::getLoginPassword() === '') {
+            return 'The credentials to authenticate the user are incomplete or missing';
+        }
+        return 'Authentication of the admin user did not succeed';
+    }
+
+    /**
+     * Store the REST Nonce
+     *
+     * @param array<string,mixed> $options
+     */
+    protected static function postWebserverPingResponse(
+        ResponseInterface $response,
+        array $options
+    ): void {
+        static::$wpRESTNonce = $response->getHeaderLine(CustomHeaders::WP_REST_NONCE);
+    }
+
+    /**
+     * Must re-use the cookies received when logging in
+     *
+     * @see https://docs.guzzlephp.org/en/stable/quickstart.html#cookies
+     */
+    protected static function shareCookies(): bool
+    {
+        return true;
+    }
+
+    protected function getMethod(): string
+    {
+        return 'POST';
+    }
+}

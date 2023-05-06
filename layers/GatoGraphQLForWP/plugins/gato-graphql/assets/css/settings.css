@@ -1,0 +1,11 @@
+/**
+ * Fix for header padding in table in
+ * "Settings => Plugin Management => Reset Settings"
+ */
+.gato-graphql-settings-section .form-table th {
+    padding-left: 10px;
+}
+
+.settings-info {
+    color: darkcyan;
+}

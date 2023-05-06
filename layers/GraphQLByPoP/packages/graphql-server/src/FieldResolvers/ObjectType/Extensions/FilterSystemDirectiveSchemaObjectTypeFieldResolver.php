@@ -84,7 +84,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofKinds'] => $this->__('Include only directives of provided types', 'graphql-api'),
+            ['directives' => 'ofKinds'] => $this->__('Include only directives of provided types', 'gato-graphql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

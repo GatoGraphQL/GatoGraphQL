@@ -11,7 +11,7 @@ These are the instructions on how to set-up a local development environment.
 [Lando](https://lando.dev/) is a Docker-based tool. It is used to spin the webserver for development, providing:
 
 - WordPress installed
-- the GraphQL API plugin installed and activated
+- Gato GraphQL installed and activated
 - symlinking to the source code
 
 ## Install
@@ -49,9 +49,9 @@ composer reset-db
 
 ## Site URL
 
-The site will be available under `https://graphql-api.lndo.site`.
+The site will be available under `https://gato-graphql.lndo.site`.
 
-To access the [wp-admin](https://graphql-api.lndo.site/wp-admin/):
+To access the [wp-admin](https://gato-graphql.lndo.site/wp-admin/):
 
 - User: `admin`
 - Password: `admin`
@@ -82,10 +82,10 @@ composer purge-cache
 
 ### Disable caching
 
-Caching is disabled by setting constant `GRAPHQL_API_DISABLE_CACHING` in `wp-config.php` to `true`:
+Caching is disabled by setting constant `GATO_GRAPHQL_DISABLE_CACHING` in `wp-config.php` to `true`:
 
 ```php
-define( 'GRAPHQL_API_DISABLE_CACHING', 'true' );
+define( 'GATO_GRAPHQL_DISABLE_CACHING', 'true' );
 ```
 
 To define this constant, we can execute the following Composer scripts:
