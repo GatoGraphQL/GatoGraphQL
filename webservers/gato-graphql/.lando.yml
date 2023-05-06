@@ -13,6 +13,7 @@ services:
     portforward: true
   appserver:
     scanner:
+      retry: 10
       okCodes:
         - 200
         - 301
