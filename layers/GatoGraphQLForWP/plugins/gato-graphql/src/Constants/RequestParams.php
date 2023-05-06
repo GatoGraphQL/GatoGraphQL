@@ -27,7 +27,7 @@ class RequestParams
      * "pluginOwnUse" to be used on the WordPress editor to
      * power this plugin's blocks. It shall be requested as:
      *
-     *   /wp-admin/edit.php?page=graphql_api&action=execute_query&endpoint_group=pluginOwnUse
+     *   /wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=pluginOwnUse
      *
      * If the endpointGroup is not provided, the default admin endpoint
      * configuration is applied.

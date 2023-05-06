@@ -53,7 +53,7 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
          * Move any potential "../" relative path from
          * $filename to $relativePathDir.
          *
-         * Eg: Links to release-notes .md files in wp-admin/admin.php?page=graphql_api_about
+         * Eg: Links to release-notes .md files in wp-admin/admin.php?page=gato_graphql_about
          */
         while (str_starts_with($filename, '../')) {
             $filename = substr($filename, 3);

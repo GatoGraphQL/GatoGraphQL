@@ -353,7 +353,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     protected function getColumnActions(array $item): array
     {
-        $nonce = \wp_create_nonce('graphql_api_enable_or_disable_module');
+        $nonce = \wp_create_nonce('gato_graphql_enable_or_disable_module');
         $currentViews = $this->getCurrentViews();
         $maybeCurrentViewParam = $currentViews !== [] ? '&' . AdminRequestParams::MODULE_TYPE . '=' . implode(',', $currentViews) : '';
         $linkPlaceholder = '<a href="?page=%s&action=%s&item=%s&_wpnonce=%s' . ($maybeCurrentViewParam) . '">%s</a>';

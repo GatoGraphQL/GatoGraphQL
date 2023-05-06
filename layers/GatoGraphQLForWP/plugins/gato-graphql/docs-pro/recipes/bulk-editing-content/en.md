@@ -153,7 +153,7 @@ It produces:
       10,
       20
     ],
-    "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
+    "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=gato_graphql&action=execute_query",
     "method": "POST",
     "headers": {
       "authorization": "",
@@ -242,7 +242,7 @@ It produces:
     },
     "requestInputs": [
       {
-        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
+        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=gato_graphql&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -313,7 +313,7 @@ It produces:
         }
       },
       {
-        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
+        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=gato_graphql&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -384,7 +384,7 @@ It produces:
         }
       },
       {
-        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=graphql_api&action=execute_query",
+        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=gato_graphql&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -632,7 +632,7 @@ query CalculateURLs($limit:Int! = 10)
       @applyField(
         name: "_sprintf",
         arguments: {
-          string: "https://gato-graphql-pro.lndo.site/wp-admin/admin.php?page=graphql_api&query={posts(pagination:{limit:%s,offset:%s}){id}}"
+          string: "https://gato-graphql-pro.lndo.site/wp-admin/admin.php?page=gato_graphql&query={posts(pagination:{limit:%s,offset:%s}){id}}"
           values: [$limit, $offset]
         },
         setResultInResponse:true

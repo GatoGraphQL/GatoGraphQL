@@ -83,7 +83,7 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
 
     protected function getAdminEndpoint(): string
     {
-        return 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+        return 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
     }
 
     /**

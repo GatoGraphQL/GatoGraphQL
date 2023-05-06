@@ -126,7 +126,7 @@ class ModuleListTableAction extends AbstractListTableAction
         if ($isSingleAction) {
             // Verify the nonce
             $nonce = \esc_attr(App::request('_wpnonce') ?? App::query('_wpnonce', ''));
-            if (!\wp_verify_nonce($nonce, 'graphql_api_enable_or_disable_module')) {
+            if (!\wp_verify_nonce($nonce, 'gato_graphql_enable_or_disable_module')) {
                 $noParamsCurrentURL = \admin_url(sprintf(
                     'admin.php?page=%s',
                     App::query('page', '')

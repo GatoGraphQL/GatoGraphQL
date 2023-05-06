@@ -46,7 +46,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      */
     protected function provideEndpointEntries(): array
     {
-        $endpoint = 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+        $endpoint = 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
         $providerEntries = [];
         foreach ($this->getPluginNameEntries() as $pluginName => $pluginEntry) {
             $providerEntries[$pluginName . ':enabled'] = [

@@ -25,7 +25,7 @@ class PluginMenu extends AbstractMenu
 
     public function getName(): string
     {
-        return 'graphql_api';
+        return 'gato_graphql';
     }
 
     public function addMenuPage(): void

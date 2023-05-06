@@ -8,7 +8,7 @@ class DisableSchemaModulesOnPrivateEndpointTestOnAdminEndpointsFixtureEndpointWe
 {
     protected function getEndpoint(): string
     {
-        return 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+        return 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
     }
 
     protected function getResponseFixtureFolder(): string
