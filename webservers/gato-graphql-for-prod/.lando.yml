@@ -5,6 +5,11 @@ config:
   php: '7.1'
   ssl: true
 services:
+  appserver:
+    scanner:
+      okCodes:
+        - 200
+        - 301
   database:
     portforward: true
 env_file:
