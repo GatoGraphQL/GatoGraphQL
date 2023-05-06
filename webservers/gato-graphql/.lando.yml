@@ -12,6 +12,11 @@ services:
   database:
     portforward: true
   appserver:
+    scanner:
+      retry: 10
+      okCodes:
+        - 200
+        - 301
     overrides:
       environment:
         XDEBUG_MODE: ''
