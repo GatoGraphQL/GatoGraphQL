@@ -106,7 +106,7 @@ class GatoGraphQL
      * (such as the public endpoint "graphql/").
      *
      * For instance: Let's say that we have configured the single endpoint
-     * "graphql/" to apply some Access Control Lists to validate users by IP,
+     * "graphql/" to apply an Access Control List to validate users by IP,
      * and we execute mutation `createPost` against this endpoint:
      *
      *   ```
@@ -117,7 +117,9 @@ class GatoGraphQL
      *   }
      *   ```
      * 
-     * Then there is a hook on `wp_insert_post`, that executes some
+     * Then only visitors from that IP will be able to execute this mutation.
+     * 
+     * Then there is a hook on `wp_insert_post` that executes some
      * query against the internal GraphQL server (eg: to send a notification
      * to the site admin):
      *
@@ -128,10 +130,12 @@ class GatoGraphQL
      *   );
      *   ```
      *
-     * This GraphQL query be resolved using the configuration applied to
-     * the internal GraphQL server, and not to the public endpoint. Hence,
-     * the validation by user IP will not take place (unless those Access
-     * Control Lists were also applied to the internal GraphQL server).
+     * This GraphQL query will be resolved using the configuration applied to
+     * the internal GraphQL server, and not to the public endpoint.
+     * 
+     * As a result, the validation by user IP will not take place
+     * (that is, unless that Access Control List was also applied
+     * to the internal GraphQL server).
      * 
      * @param array<string,mixed> $variables
      * @return Response A Response object containing the response body and headers from resolving the query
