@@ -335,8 +335,10 @@ class InternalGraphQLServerTestExecuter
             /**
              * This persisted query, stored in the DB data, contains
              * the same GraphqL query as ExecuteInternalQuery.gql
+             *
+             * @see entry `<wp:post_id>290</wp:post_id>` (or `<title><![CDATA[Internal GraphQL Server Test]]></title>`) in `gato-graphql-data.xml`
              */
-            $persistedQueryID = 0;
+            $persistedQueryID = 290;
             return GatoGraphQL::executePersistedQuery(
                 $persistedQueryID,
                 $variables
