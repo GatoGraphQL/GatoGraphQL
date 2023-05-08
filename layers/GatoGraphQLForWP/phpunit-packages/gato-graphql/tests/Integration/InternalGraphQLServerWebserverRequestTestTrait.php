@@ -10,12 +10,19 @@ use PoP\Engine\Constants\Actions as EngineActions;
 
 trait InternalGraphQLServerWebserverRequestTestTrait
 {
+    /**
+     * @param array<string,mixed> $options
+     */
     protected function getInternalGraphQLServerEndpoint(
         string $endpoint,
-        bool $withDeepNested,
-        bool $withExecuteQueryInFile = false,
-        bool $withNotReady = false
+        array $options
     ): string {
+        /** @var bool */
+        $withDeepNested = $options['withDeepNested'];
+        /** @var bool */
+        $withExecuteQueryInFile = $options['withExecuteQueryInFile'] ?? false;
+        /** @var bool */
+        $withNotReady = $options['withNotReady'] ?? false;
         return GeneralUtils::addQueryArgs(
             [
                 'actions' => array_merge(

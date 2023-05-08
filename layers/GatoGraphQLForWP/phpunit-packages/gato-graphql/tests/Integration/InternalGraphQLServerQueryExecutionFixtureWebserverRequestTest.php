@@ -40,7 +40,9 @@ class InternalGraphQLServerQueryExecutionFixtureWebserverRequestTest extends Abs
     {
         return $this->getInternalGraphQLServerEndpoint(
             'graphql/',
-            false
+            [
+                'withDeepNested' => false,
+            ]
         );
     }
 }
