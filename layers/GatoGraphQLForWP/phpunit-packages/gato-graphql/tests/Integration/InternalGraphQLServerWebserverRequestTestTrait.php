@@ -13,6 +13,7 @@ trait InternalGraphQLServerWebserverRequestTestTrait
     protected function getInternalGraphQLServerEndpoint(
         string $endpoint,
         bool $withDeepNested,
+        bool $withExecuteQueryInFile = false,
         bool $withNotReady = false
     ): string {
         return GeneralUtils::addQueryArgs(
@@ -25,6 +26,11 @@ trait InternalGraphQLServerWebserverRequestTestTrait
                     $withDeepNested
                         ? [
                             Actions::TEST_DEEP_NESTED_INTERNAL_GRAPHQL_SERVER,
+                        ]
+                        : [],
+                    $withExecuteQueryInFile
+                        ? [
+                            Actions::TEST_GATO_GRAPHQL_EXECUTE_QUERY_IN_FILE_METHOD,
                         ]
                         : [],
                     $withNotReady
