@@ -9,6 +9,8 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 
 class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
 {
+    use OutputOriginalExceptionMessageTestExecuterTrait;
+
     public function __construct()
     {
         // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
@@ -39,20 +41,5 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
 
         // Just executing this code will throw the exception
         InternalGraphQLServerFactory::getInstance();
-    }
-
-    /**
-     * Return the original exception message, stripping the stack trace
-     *
-     * @param array<string,mixed> $error
-     */
-    protected function customizeWordPressErrorMessage(string $message, array $error): string
-    {
-        $exceptionMessage = $error['message'];
-        $pos = strpos($exceptionMessage, sprintf(' in %s', $error['file']));
-        if ($pos === false) {
-            return $exceptionMessage;
-        }
-        return substr($exceptionMessage, 0, $pos);
     }
 }
