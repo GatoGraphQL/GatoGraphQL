@@ -14,6 +14,6 @@ class GatoGraphQL
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var EndpointHelpers */
         $endpointHelpers = $instanceManager->getInstance(EndpointHelpers::class);
-        return $endpointHelpers->getAdminGraphQLEndpoint();
+        return $endpointHelpers->getAdminGraphQLEndpoint($endpointGroup);
     }
 }
