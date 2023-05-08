@@ -77,16 +77,16 @@ class GatoGraphQL
      *
      * This query execution is affected by the configuration selected in the
      * Settings page, for the selected Schema Configuration for the private
-     * endpoint, and/or default Settings values.
+     * endpoint, and by the selected default values.
      *
-     * This situation also applies whenever the query executed against the
-     * internal GraphQL server was triggered by another GraphQL query
-     * while being resolved in an endpoint with a different configuration (
-     * such as the public endpoint "graphql/").
+     * Please notice: This situation also applies whenever the query executed
+     * against the internal GraphQL server was triggered by some other GraphQL
+     * query while being resolved in an endpoint with a different configuration
+     * (such as the public endpoint "graphql/").
      *
      * For instance: Let's say that we have configured the single endpoint
-     * "graphql/" to apply some Access Control Lists, and we execute
-     * mutation `createPost` against it:
+     * "graphql/" to apply some Access Control Lists to validate users by IP,
+     * and we execute mutation `createPost` against this endpoint:
      *
      *   ```
      *   mutation {
@@ -108,9 +108,9 @@ class GatoGraphQL
      *   ```
      *
      * This GraphQL query be resolved using the configuration applied to
-     * the internal GraphQL server, and not to the public endpoint (hence,
-     * those Access Control Lists will be applied only if they are also
-     * part of that configuration).
+     * the internal GraphQL server, and not to the public endpoint. Hence,
+     * the validation by user IP will not take place (unless those Access
+     * Control Lists were also applied to the internal GraphQL server).
      * 
      * @param array<string,mixed> $variables
      * @return Response A Response object containing the response body and headers from resolving the query
