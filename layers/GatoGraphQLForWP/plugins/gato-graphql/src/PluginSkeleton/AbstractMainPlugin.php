@@ -12,6 +12,7 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -299,6 +300,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
+
+        // Register hooks for wp-cron
+        $this->setupPublicHooks();
     }
 
     /**
@@ -567,6 +571,48 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $this->handleInitializationException($pluginAppGraphQLServerName);
             },
             PHP_INT_MAX
+        );
+    }
+
+    /**
+     * Register public-facing hooks, using string for the
+     * hook names (instead of consts).
+     */
+    protected function setupPublicHooks(): void
+    {
+        add_action(
+            'gato_graphql__execute_query',
+            function (
+                string $query,
+                array $variables = [],
+                ?string $operationName = null
+            ): void {
+                // No need to print the response
+                GatoGraphQL::executeQuery(
+                    $query,
+                    $variables,
+                    $operationName
+                );
+            },
+            10,
+            3
+        );
+        add_action(
+            'gato_graphql__execute_persisted_query',
+            function (
+                string|int $persistedQueryIDOrSlug,
+                array $variables = [],
+                ?string $operationName = null
+            ): void {
+                // No need to print the response
+                GatoGraphQL::executePersistedQuery(
+                    $persistedQueryIDOrSlug,
+                    $variables,
+                    $operationName
+                );
+            },
+            10,
+            3
         );
     }
 

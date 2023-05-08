@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Server;
 
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\WordPressHelpers;
 use GraphQLByPoP\GraphQLServer\Server\AbstractAttachedGraphQLServer;
 use PoP\ComponentModel\App;
 use PoP\Root\AppThreadInterface;
@@ -21,5 +22,17 @@ class InternalGraphQLServer extends AbstractAttachedGraphQLServer
             PluginAppGraphQLServerNames::INTERNAL,
         );
         return App::getAppThread();
+    }
+
+    /**
+     * When doing wp-cron, the InternalGraphQLServer will use
+     * the Store created for the (never-to-be-executed) endpoint
+     */
+    protected function areFeedbackAndTracingStoresAlreadyCreated(): bool
+    {
+        if (WordPressHelpers::doingCron()) {
+            return true;
+        }
+        return parent::areFeedbackAndTracingStoresAlreadyCreated();
     }
 }
