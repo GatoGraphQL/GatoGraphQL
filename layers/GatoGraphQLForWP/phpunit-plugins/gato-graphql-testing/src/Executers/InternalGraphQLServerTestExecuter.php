@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
+use PoP\Root\HttpFoundation\Response;
 use WP_Post;
 use stdClass;
 
@@ -295,6 +296,16 @@ class InternalGraphQLServerTestExecuter
 
     protected function executeDeepNestedQueryAgainstInternalGraphQLServer(WP_Post $post): void
     {
+        $response = $this->executeInternalGraphQLQuery($post);
+
+        /** @var string */
+        $content = $response->getContent();
+        $jsonContent = json_decode($content, false);
+        $this->appendInternalGraphQLServerResponseToAppState($jsonContent);
+    }
+
+    protected function executeInternalGraphQLQuery(WP_Post $post): Response
+    {
         $postTitle = $post->post_title;
         $postStatus = $post->post_status;
 
@@ -310,11 +321,6 @@ class InternalGraphQLServerTestExecuter
             }
         GRAPHQL;
 
-        $response = GatoGraphQL::executeQuery($query);
-
-        /** @var string */
-        $content = $response->getContent();
-        $jsonContent = json_decode($content, false);
-        $this->appendInternalGraphQLServerResponseToAppState($jsonContent);
+        return GatoGraphQL::executeQuery($query);
     }
 }
