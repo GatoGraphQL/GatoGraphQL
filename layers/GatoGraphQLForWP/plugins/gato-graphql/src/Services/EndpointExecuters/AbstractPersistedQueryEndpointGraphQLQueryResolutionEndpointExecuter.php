@@ -32,7 +32,11 @@ abstract class AbstractPersistedQueryEndpointGraphQLQueryResolutionEndpointExecu
         /**
          * Extract the query from the post (or from its parents), and set it in the application state
          */
-        return $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+        $graphQLQueryPostAttributes = $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+        return [
+            $graphQLQueryPostAttributes->query,
+            $graphQLQueryPostAttributes->variables,
+        ];
     }
 
     /**
