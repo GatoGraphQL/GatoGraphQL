@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Exception;
 
 use PoP\RootWP\AppHooks;
-use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\Exception\AbstractSystemException;
 use Throwable;
 
 /**
@@ -14,7 +14,7 @@ use Throwable;
  *
  * @see layers/Engine/packages/root-wp/src/AppLoader.php
  */
-final class GraphQLServerNotReadyException extends AbstractClientException
+final class GraphQLServerNotReadyException extends AbstractSystemException
 {
     public function __construct(
         string $message = "",
