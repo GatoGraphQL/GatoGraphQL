@@ -21,7 +21,6 @@ class InternalGraphQLServerNotReadyQueryExecutionFixtureWebserverRequestTest ext
             'graphql/',
             [
                 'withDeepNested' => false,
-                'withExecuteQueryInFile' => false,
                 'withNotReady' => true,
             ]
         );
