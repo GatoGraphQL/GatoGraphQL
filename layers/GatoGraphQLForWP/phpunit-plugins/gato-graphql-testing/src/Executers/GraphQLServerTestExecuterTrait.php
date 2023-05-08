@@ -12,7 +12,7 @@ trait GraphQLServerTestExecuterTrait
      *
      * @see wp-includes/class-wp-fatal-error-handler.php
      */
-    protected function setupToOutputOriginalExceptionMessage()
+    protected function setupToOutputOriginalExceptionMessage(): void
     {
         /**
          * @see wp-includes/class-wp-fatal-error-handler.php
