@@ -139,7 +139,7 @@ class InternalGraphQLServerTestExecuter
             return $state;
         }
         $lastQueryMatch = $matches[0][count($matches[0]) - 1];
-        $lastQueryBracketPos = $lastQueryMatch[1] + strlen($lastQueryMatch[0]);
+        $lastQueryBracketPos = $lastQueryMatch[1] + strlen($lastQueryMatch[0] ?? '');
 
         /**
          * Modify the query with a simple hack:
