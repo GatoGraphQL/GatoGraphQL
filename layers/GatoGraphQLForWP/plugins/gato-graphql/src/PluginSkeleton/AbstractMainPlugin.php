@@ -581,41 +581,36 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function setupPublicHooks(): void
     {
         add_action(
-            PluginAppHooks::INITIALIZE_APP,
-            function (string $pluginAppGraphQLServerName): void {
-                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
-                    return;
-                }
-                add_action(
-                    'gato_graphql__execute_query',
-                    function (string $query, ?array $variables = [], ?string $operationName = null): void
-                    {
-                        // No need to print the response
-                        GatoGraphQL::executeQuery(
-                            $query,
-                            $variables,
-                            $operationName
-                        );
-                    },
-                    10,
-                    3
-                );
-                add_action(
-                    'gato_graphql__execute_persisted_query',
-                    function (string|int $persistedQueryIDOrSlug, ?array $variables = [], ?string $operationName = null): void
-                    {
-                        // No need to print the response
-                        GatoGraphQL::executePersistedQuery(
-                            $persistedQueryIDOrSlug,
-                            $variables,
-                            $operationName
-                        );
-                    },
-                    10,
-                    3
+            'gato_graphql__execute_query',
+            function (
+                string $query,
+                array $variables = [],
+                ?string $operationName = null
+            ): void {
+                // No need to print the response
+                GatoGraphQL::executeQuery(
+                    $query,
+                    $variables,
+                    $operationName
                 );
             },
-            PluginLifecyclePriorities::AFTER_EVERYTHING
+            10,
+            3
+        );
+        add_action(
+            'gato_graphql__execute_persisted_query',
+            function (
+                string|int $persistedQueryIDOrSlug,
+                array $variables = [],
+                ?string $operationName = null
+            ): void {
+                // No need to print the response
+                GatoGraphQL::executePersistedQuery(
+                    $persistedQueryIDOrSlug,
+                    $variables,
+                    $operationName
+                );
+            }
         );
     }
 
