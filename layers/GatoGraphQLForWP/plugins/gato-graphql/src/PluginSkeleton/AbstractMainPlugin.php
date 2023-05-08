@@ -580,12 +580,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function setupPublicHooks(): void
     {
-        /**
-         * Wait until "plugins_loaded" to initialize the plugin, because:
-         *
-         * - ModuleListTableAction requires `wp_verify_nonce`, loaded in pluggable.php
-         * - Allow other plugins to inject their own functionality
-         */
         add_action(
             PluginAppHooks::INITIALIZE_APP,
             function (string $pluginAppGraphQLServerName): void {
