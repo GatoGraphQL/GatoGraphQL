@@ -610,7 +610,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     $variables,
                     $operationName
                 );
-            }
+            },
+            10,
+            3
         );
     }
 
