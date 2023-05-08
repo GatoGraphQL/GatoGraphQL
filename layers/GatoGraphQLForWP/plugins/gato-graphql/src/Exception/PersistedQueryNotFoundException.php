@@ -6,6 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\Exception;
 
 use PoP\Root\Exception\AbstractSystemException;
 
-final class FileNotFoundException extends AbstractSystemException
+final class PersistedQueryNotFoundException extends AbstractSystemException
 {
 }

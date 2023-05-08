@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Exception;
 
-use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\Exception\AbstractSystemException;
 
-final class FileCorruptedException extends AbstractClientException
+final class FileCorruptedException extends AbstractSystemException
 {
 }

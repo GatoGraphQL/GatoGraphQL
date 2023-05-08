@@ -19,9 +19,10 @@ class InternalGraphQLServerNotReadyQueryExecutionFixtureWebserverRequestTest ext
     {
         return $this->getInternalGraphQLServerEndpoint(
             'graphql/',
-            false,
-            false,
-            true
+            [
+                'withDeepNested' => false,
+                'withNotReady' => true,
+            ]
         );
     }
 
