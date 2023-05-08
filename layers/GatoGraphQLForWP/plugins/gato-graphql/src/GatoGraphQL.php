@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL;
 
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\HttpFoundation\Response;
 
 class GatoGraphQL
 {
@@ -67,5 +68,83 @@ class GatoGraphQL
     final public static function getAdminCustomEndpoint(string $endpointGroup): string
     {
         return self::getEndpointHelpers()->getAdminGraphQLEndpoint($endpointGroup);
+    }
+
+    /**
+     * Execute a GraphQL query against the internal GraphQL Server.
+     *
+     * This query execution is affected by the configuration selected in the
+     * Settings page (for the selected Schema Configuration for the private
+     * endpoint, and/or default Settings values).
+     *
+     * This situation also applies whenever the query executed against the
+     * internal GraphQL server was triggered by another GraphQL query
+     * while being resolved in an endpoint with a different configuration (
+     * such as the public endpoint "graphql/").
+     *
+     * For instance: Let's say that we have configured the single endpoint
+     * "graphql/" to apply some Access Control Lists, and we execute
+     * mutation `createPost` against it:
+     *
+     *   ```
+     *   mutation {
+     *     createPost(input: {...}) {
+     *       # ...
+     *     }
+     *   }
+     *   ```
+     * 
+     * Then there is a hook on `wp_insert_post`, that executes some
+     * query against the internal GraphQL server (eg: to send a notification
+     * to the site admin):
+     *
+     *   ```
+     *   add_action(
+     *     "wp_insert_post",
+     *     fn (int $post_id) => GatoGraphQL::executeQuery("...", ["postID" => $post_id])
+     *   );
+     *   ```
+     *
+     * This GraphQL query be resolved using the configuration applied to
+     * the internal GraphQL server, and not to the public endpoint (hence,
+     * those Access Control Lists will be applied only if they are also
+     * part of that configuration).
+     * 
+     * @param array<string,mixed> $variables
+     * @return Response A Response object containing the response body and headers from resolving the query
+     */
+    public static function executeQuery(
+        string $query,
+        array $variables = [],
+        ?string $operationName = null
+    ): Response {
+        /**
+         * Keep the current AppThread, switch to the GraphQLServer's
+         * one, resolve the query, and then restore the current AppThread.
+         */
+        $currentAppThread = App::getAppThread();
+        App::setAppThread($this->appThread);
+
+        /**
+         * Because an "internal" request may be triggered
+         * while resolving another "internal" request,
+         * backup and then restore the App's state.
+         */
+        $appStateManager = App::getAppStateManager();
+        $appState = $appStateManager->getAppState();
+
+        $response = parent::execute(
+            $query,
+            $variables,
+            $operationName,
+        );
+
+        // Restore the App's state
+        $appStateManager->setAppState($appState);
+
+        // Restore the original AppThread
+        App::setAppThread($currentAppThread);
+
+        return $response;
     }
 }
