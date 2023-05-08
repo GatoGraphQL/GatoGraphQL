@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
-use GatoGraphQL\GatoGraphQL\Server\InternalGraphQLServerFactory;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
 use WP_Post;
@@ -311,8 +310,7 @@ class InternalGraphQLServerTestExecuter
             }
         GRAPHQL;
 
-        $graphQLServer = InternalGraphQLServerFactory::getInstance();
-        $response = $graphQLServer->execute(
+        $response = GatoGraphQL::executeQuery(
             $query,
         );
 
