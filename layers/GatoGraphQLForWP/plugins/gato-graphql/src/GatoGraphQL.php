@@ -9,13 +9,20 @@ use GatoGraphQL\GatoGraphQL\Exception\FileNotFoundException;
 use GatoGraphQL\GatoGraphQL\Exception\GraphQLServerNotReadyException;
 use GatoGraphQL\GatoGraphQL\Exception\PersistedQueryNotFoundException;
 use GatoGraphQL\GatoGraphQL\Server\InternalGraphQLServerFactory;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
+
+use function get_page_by_path;
+use function get_post;
 
 class GatoGraphQL
 {
     private static ?EndpointHelpers $endpointHelpers = null;
+    private static ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
+    private static ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
 
     final protected static function getEndpointHelpers(): EndpointHelpers
     {
@@ -26,6 +33,26 @@ class GatoGraphQL
             self::$endpointHelpers = $endpointHelpers;
         }
         return self::$endpointHelpers;
+    }
+    final protected static function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
+    {
+        if (self::$graphQLQueryPostTypeHelpers === null) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var GraphQLQueryPostTypeHelpers */
+            $graphQLQueryPostTypeHelpers = $instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
+            self::$graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
+        }
+        return self::$graphQLQueryPostTypeHelpers;
+    }
+    final protected static function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
+    {
+        if (self::$graphQLPersistedQueryEndpointCustomPostType === null) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var GraphQLPersistedQueryEndpointCustomPostType */
+            $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+            self::$graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+        }
+        return self::$graphQLPersistedQueryEndpointCustomPostType;
     }
 
     /**
@@ -334,11 +361,21 @@ class GatoGraphQL
     ): Response {
         $isPersistedQueryID = is_integer($persistedQueryIDOrSlug);
         if ($isPersistedQueryID) {
-            $persistedQuery = '';
+            $graphQLQueryPost = get_post($isPersistedQueryID);
         } else {
-            $persistedQuery = '';
+            $graphQLQueryPost = get_page_by_path(
+                $isPersistedQueryID,
+                OBJECT,
+                self::getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType()
+            );
         }
-        if ($persistedQuery === null) {
+
+        /**
+        * Extract the query from the post (or from its parents), and set it in the application state
+        */
+        $persistedQueryPostAttributes = self::getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+
+        if ($persistedQueryPostAttributes === null) {
             throw new PersistedQueryNotFoundException(
                 $isPersistedQueryID
                     ? sprintf('Persisted query with ID \'%s\' does not exist', $persistedQueryIDOrSlug)
