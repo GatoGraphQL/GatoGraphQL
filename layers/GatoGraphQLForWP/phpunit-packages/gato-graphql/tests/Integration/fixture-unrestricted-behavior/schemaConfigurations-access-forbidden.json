@@ -10,11 +10,11 @@
       ],
       "extensions": {
         "path": [
-          "schemaConfigurations(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
+          "schemaConfigurations(pagination: {limit: 2}, sort: {by: ID, order: ASC}) { ... }",
           "query GetSchemaConfigurations { ... }"
         ],
         "type": "QueryRoot",
-        "field": "schemaConfigurations(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
+        "field": "schemaConfigurations(pagination: {limit: 2}, sort: {by: ID, order: ASC}) { ... }",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
