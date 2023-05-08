@@ -16,12 +16,18 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
     {
         $this->init();
 
+        /** @var WP_Query|null */
+        $query = $this->query;
+        if ($query === null) {
+            return null;
+        }
+
         if ($this->isGeneric()) {
             return null;
         }
 
-        /** @var WP_Query */
-        $query = $this->query;
+        // /** @var WP_Query */
+        // $query = $this->query;
 
         if (
             $query->is_tag() ||
@@ -40,12 +46,18 @@ class CMSRoutingStateService implements CMSRoutingStateServiceInterface
     {
         $this->init();
 
+        /** @var WP_Query|null */
+        $query = $this->query;
+        if ($query === null) {
+            return null;
+        }
+
         if ($this->isGeneric()) {
             return null;
         }
 
-        /** @var WP_Query */
-        $query = $this->query;
+        // /** @var WP_Query */
+        // $query = $this->query;
 
         if (
             $query->is_tag() ||
