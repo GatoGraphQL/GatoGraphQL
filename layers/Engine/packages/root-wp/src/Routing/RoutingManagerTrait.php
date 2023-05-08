@@ -28,7 +28,7 @@ trait RoutingManagerTrait
         // (included in $query->query_vars) throws error
         return !empty(
             array_intersect(
-                array_keys($query->query_vars),
+                array_keys($query->query_vars ?? []),
                 array_keys(WPQueries::GENERIC_NATURE)
             )
         );
