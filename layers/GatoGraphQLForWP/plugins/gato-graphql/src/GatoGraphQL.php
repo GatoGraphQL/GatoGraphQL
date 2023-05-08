@@ -14,6 +14,7 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
+use WP_Post;
 
 use function get_page_by_path;
 use function get_post;
@@ -360,13 +361,21 @@ class GatoGraphQL
         ?string $operationName = null
     ): Response {
         $isPersistedQueryID = is_integer($persistedQueryIDOrSlug);
-        if ($isPersistedQueryID) {
-            $graphQLQueryPost = get_post($isPersistedQueryID);
-        } else {
-            $graphQLQueryPost = get_page_by_path(
+        
+        /** @var WP_Post|null */
+        $graphQLQueryPost = $isPersistedQueryID
+            ? get_post($isPersistedQueryID)
+            : get_page_by_path(
                 $isPersistedQueryID,
                 OBJECT,
                 self::getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType()
+            );
+
+        if ($graphQLQueryPost === null) {
+            throw new PersistedQueryNotFoundException(
+                $isPersistedQueryID
+                    ? sprintf('Persisted query with ID \'%s\' does not exist', $persistedQueryIDOrSlug)
+                    : sprintf('Persisted query with slug \'%s\' does not exist', $persistedQueryIDOrSlug)
             );
         }
 
@@ -375,13 +384,6 @@ class GatoGraphQL
         */
         $persistedQueryPostAttributes = self::getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
 
-        if ($persistedQueryPostAttributes === null) {
-            throw new PersistedQueryNotFoundException(
-                $isPersistedQueryID
-                    ? sprintf('Persisted query with ID \'%s\' does not exist', $persistedQueryIDOrSlug)
-                    : sprintf('Persisted query with slug \'%s\' does not exist', $persistedQueryIDOrSlug)
-            );
-        }
 
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         return $graphQLServer->execute(
