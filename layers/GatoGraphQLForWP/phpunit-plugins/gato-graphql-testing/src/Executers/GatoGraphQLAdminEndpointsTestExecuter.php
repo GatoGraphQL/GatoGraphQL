@@ -50,6 +50,11 @@ class GatoGraphQLAdminEndpointsTestExecuter
 
         foreach ($methodToExpectedEndpoints as $methodEndpoint => $expectedEndpoint) {
             $expectedEndpoint = \home_url($expectedEndpoint);
+            // The "?actions=..." param is also added to the endpoint
+            // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
+            $actions = $_GET['actions'] ?? null;
+            $expectedEndpoint = add_query_arg('actions', $actions, $expectedEndpoint);
+
             if ($methodEndpoint === $expectedEndpoint) {
                 continue;
             }
