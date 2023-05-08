@@ -54,7 +54,9 @@ trait GraphQLServerTestExecuterTrait
             'Content-Type',
             'application/json'
         ));
-        _e(json_encode(['artificialError' => $errorMessage]));
+        /** @var string */
+        $jsonResponse = json_encode(['artificialError' => $errorMessage]);
+        _e($jsonResponse);
         exit;
     }
 }
