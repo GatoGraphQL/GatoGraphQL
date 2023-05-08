@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Server;
 
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\WordPressHelpers;
 use GraphQLByPoP\GraphQLServer\Server\AbstractAttachedGraphQLServer;
 use PoP\ComponentModel\App;
 use PoP\Root\AppThreadInterface;
@@ -29,8 +30,7 @@ class InternalGraphQLServer extends AbstractAttachedGraphQLServer
      */
     protected function areFeedbackAndTracingStoresAlreadyCreated(): bool
     {
-        $doingCron = defined('DOING_CRON') && DOING_CRON;
-        if ($doingCron) {
+        if (WordPressHelpers::doingCron()) {
             return true;
         }
         return parent::areFeedbackAndTracingStoresAlreadyCreated();

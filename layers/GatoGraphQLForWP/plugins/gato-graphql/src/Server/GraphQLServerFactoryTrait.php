@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Server;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Exception\GraphQLServerNotReadyException;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\WordPressHelpers;
 use GraphQLByPoP\GraphQLServer\Server\GraphQLServerInterface;
 
 trait GraphQLServerFactoryTrait
@@ -32,8 +33,7 @@ trait GraphQLServerFactoryTrait
      */
     protected static function doGetInstance(): GraphQLServerInterface
     {
-        $doingCron = defined('DOING_CRON') && DOING_CRON;
-        if (!$doingCron) {
+        if (!WordPressHelpers::doingCron()) {
             if (!App::isInitialized()) {
                 throw new GraphQLServerNotReadyException();
             }
