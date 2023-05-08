@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
-class GatoGraphQL
+final class GatoGraphQL
 {
     public static function getAdminEndpoint(): string
     {
