@@ -159,14 +159,15 @@ class GatoGraphQL
     }
 
     /**
-     * Execute a GraphQL query against the internal GraphQL Server.
+     * Execute the GraphQL query contained in a file against the
+     * internal GraphQL Server.
      *
      * The response is a Response object. To obtain the response content,
      * execute:
      *
      * ```php
-     * $query = "{ ... }";
-     * $response = GatoGraphQL::executeQuery($query);
+     * $file = "/path/to/file/myQuery.gql";
+     * $response = GatoGraphQL::executeQueryInFile($file);
      * $responseContent = json_decode($response->getContent(), false);
      * $responseData = $responseContent->data;
      * $responseErrors = $responseContent->errors;
@@ -212,7 +213,7 @@ class GatoGraphQL
      *   ```
      *   add_action(
      *     "wp_insert_post",
-     *     fn (int $post_id) => GatoGraphQL::executeQuery("...", ["postID" => $post_id])
+     *     fn (int $post_id) => GatoGraphQL::executeQueryInFile("...", ["postID" => $post_id])
      *   );
      *   ```
      *
@@ -246,7 +247,7 @@ class GatoGraphQL
                 sprintf('Loading GraphQL query file \'%s\' failed', $file)
             );
         }
-        
+
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         return $graphQLServer->execute(
             $query,
