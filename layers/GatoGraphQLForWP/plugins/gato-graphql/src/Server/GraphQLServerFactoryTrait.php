@@ -33,15 +33,21 @@ trait GraphQLServerFactoryTrait
      */
     protected static function doGetInstance(): GraphQLServerInterface
     {
-        if (!WordPressHelpers::doingCron()) {
-            if (!App::isInitialized()) {
-                throw new GraphQLServerNotReadyException();
-            }
+        /**
+         * No need to wait for the InternalGraphQLServer to be ready
+         * when doing wp-cron
+         */
+        if (WordPressHelpers::doingCron()) {
+            return new InternalGraphQLServer();
+        }
 
-            $appLoader = App::getAppLoader();
-            if (!$appLoader->isReadyState()) {
-                throw new GraphQLServerNotReadyException();
-            }
+        if (!App::isInitialized()) {
+            throw new GraphQLServerNotReadyException();
+        }
+
+        $appLoader = App::getAppLoader();
+        if (!$appLoader->isReadyState()) {
+            throw new GraphQLServerNotReadyException();
         }
 
         return new InternalGraphQLServer();
