@@ -350,7 +350,8 @@ class GatoGraphQL
      * (that is, unless that Access Control List was also applied
      * to the internal GraphQL server).
      *
-     * @param array<string,mixed> $variables
+     * @param string|int $persistedQueryIDOrSlug The parameter is considered to be the persisted query ID if it is an integer, or the slug if it is a string
+     * @param array<string,mixed> $variables Variable values to override over those stored in the persisted query entry
      * @return Response A Response object containing the response body and headers from resolving the query
      * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
      * @throws PersistedQueryNotFoundException If the persisted query does not exist
