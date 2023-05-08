@@ -10,8 +10,11 @@ use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\HttpFoundation\Response;
+use RuntimeException;
+use SebastianBergmann\Environment\Runtime;
 use WP_Post;
 use stdClass;
 
@@ -333,14 +336,28 @@ class InternalGraphQLServerTestExecuter
 
         if (in_array(Actions::TEST_GATO_GRAPHQL_EXECUTE_PERSISTED_QUERY_METHOD, $actions)) {
             /**
-             * This persisted query, stored in the DB data, contains
-             * the same GraphqL query as ExecuteInternalQuery.gql
+             * This persisted query, stored in the DB data, must contain
+             * the same GraphQL query as ExecuteInternalQuery.gql
              *
              * @see entry `<wp:post_id>290</wp:post_id>` (or `<title><![CDATA[Internal GraphQL Server Test]]></title>`) in `gato-graphql-data.xml`
              */
-            $persistedQueryID = 290;
+            if (App::getRequest()->query->has(Params::PERSISTED_QUERY_ID)) {
+                $persistedQueryIDOrSlug = (int)App::getRequest()->query->get(Params::PERSISTED_QUERY_ID);
+            } else {
+                $persistedQueryIDOrSlug = App::getRequest()->query->get(Params::PERSISTED_QUERY_SLUG);
+                if ($persistedQueryIDOrSlug === null) {
+                    throw new RuntimeException(
+                        sprintf(
+                            \__('Must provide either the persisted query ID or slug, via params "%s" or "%s'),
+                            Params::PERSISTED_QUERY_ID,
+                            Params::PERSISTED_QUERY_SLUG
+                        )
+                    );
+                }
+                $persistedQueryIDOrSlug = (string)$persistedQueryIDOrSlug;
+            }
             return GatoGraphQL::executePersistedQuery(
-                $persistedQueryID,
+                $persistedQueryIDOrSlug,
                 $variables
             );
         }
