@@ -134,14 +134,25 @@ class EndpointHelpers
      *
      * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
-    public function getAdminGraphQLEndpoint(bool $enableLowLevelQueryEditing = false): string
-    {
+    public function getAdminGraphQLEndpoint(
+        ?string $endpointGroup = null,
+        bool $enableLowLevelQueryEditing = false,
+    ): string {
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
             $this->getPluginMenu()->getName(),
             RequestParams::ACTION,
             RequestParams::ACTION_EXECUTE_QUERY
         ));
+
+        if ($endpointGroup !== null) {
+            $endpoint = \add_query_arg(
+                RequestParams::ENDPOINT_GROUP,
+                $endpointGroup,
+                $endpoint
+            );
+        }
+
         if ($enableLowLevelQueryEditing) {
             // Add /?edit_schema=1 so the query-type directives are also visible
             /** @var ModuleConfiguration */
@@ -152,15 +163,7 @@ class EndpointHelpers
         }
 
         // Add mandatory params from the request, and maybe enable XDebug
-        $endpoint = RequestHelpers::addRequestParamsToEndpoint($endpoint);
-
-        // If namespaced, add /?use_namespace=1 to the endpoint
-        // /** @var ComponentModelModuleConfiguration */
-        // $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        // if ($moduleConfiguration->mustNamespaceTypes()) {
-        //     $endpoint = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpoint);
-        // }
-        return $endpoint;
+        return RequestHelpers::addRequestParamsToEndpoint($endpoint);
     }
 
     /**
@@ -234,11 +237,7 @@ class EndpointHelpers
      */
     public function getAdminPluginOwnUseGraphQLEndpoint(): string
     {
-        return \add_query_arg(
-            RequestParams::ENDPOINT_GROUP,
-            AdminGraphQLEndpointGroups::PLUGIN_OWN_USE,
-            $this->getAdminGraphQLEndpoint()
-        );
+        return $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PLUGIN_OWN_USE);
     }
 
     /**
@@ -247,11 +246,7 @@ class EndpointHelpers
      */
     public function getAdminBlockEditorGraphQLEndpoint(): string
     {
-        return \add_query_arg(
-            RequestParams::ENDPOINT_GROUP,
-            AdminGraphQLEndpointGroups::BLOCK_EDITOR,
-            $this->getAdminGraphQLEndpoint()
-        );
+        return $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::BLOCK_EDITOR);
     }
 
     /**
@@ -265,10 +260,9 @@ class EndpointHelpers
     ): string {
         return \add_query_arg(
             [
-                RequestParams::ENDPOINT_GROUP => AdminGraphQLEndpointGroups::PERSISTED_QUERY,
                 RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
             ],
-            $this->getAdminGraphQLEndpoint($enableLowLevelQueryEditing)
+            $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PERSISTED_QUERY, $enableLowLevelQueryEditing)
         );
     }
 
