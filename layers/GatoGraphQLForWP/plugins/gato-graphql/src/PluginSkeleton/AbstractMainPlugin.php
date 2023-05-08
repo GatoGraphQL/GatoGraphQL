@@ -590,6 +590,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     'gato_graphql__execute_query',
                     function (string $query, ?array $variables = [], ?string $operationName = null): void
                     {
+                        // No need to print the response
                         GatoGraphQL::executeQuery(
                             $query,
                             $variables,
@@ -603,6 +604,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     'gato_graphql__execute_persisted_query',
                     function (string|int $persistedQueryIDOrSlug, ?array $variables = [], ?string $operationName = null): void
                     {
+                        // No need to print the response
                         GatoGraphQL::executePersistedQuery(
                             $persistedQueryIDOrSlug,
                             $variables,
