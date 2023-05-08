@@ -6,6 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
 use GatoGraphQL\GatoGraphQL\Server\InternalGraphQLServerFactory;
@@ -238,8 +239,7 @@ class InternalGraphQLServerTestExecuter
             );
         }
 
-        $graphQLServer = InternalGraphQLServerFactory::getInstance();
-        $response = $graphQLServer->execute(
+        $response = GatoGraphQL::executeQuery(
             $query,
             $variables,
             $operationName,
