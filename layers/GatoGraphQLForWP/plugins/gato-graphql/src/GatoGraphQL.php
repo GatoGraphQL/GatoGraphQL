@@ -114,9 +114,9 @@ class GatoGraphQL
      * ```php
      * $query = "{ ... }";
      * $response = GatoGraphQL::executeQuery($query);
-     * $responseContent = json_decode($response->getContent(), false);
-     * $responseData = $responseContent->data;
-     * $responseErrors = $responseContent->errors;
+     * $responseContent = json_decode($response->getContent(), true);
+     * $responseData = $responseContent["data"] ?? [];
+     * $responseErrors = $responseContent["errors"] ?? [];
      * ```
      *
      * The Response object also contains any produced header (eg: if some Cache
@@ -197,9 +197,9 @@ class GatoGraphQL
      * ```php
      * $file = "/path/to/file/myQuery.gql";
      * $response = GatoGraphQL::executeQueryInFile($file);
-     * $responseContent = json_decode($response->getContent(), false);
-     * $responseData = $responseContent->data;
-     * $responseErrors = $responseContent->errors;
+     * $responseContent = json_decode($response->getContent(), true);
+     * $responseData = $responseContent["data"] ?? [];
+     * $responseErrors = $responseContent["errors"] ?? [];
      * ```
      *
      * The Response object also contains any produced header (eg: if some Cache
@@ -294,9 +294,9 @@ class GatoGraphQL
      * ```php
      * $persistedQueryID = 33;
      * $response = GatoGraphQL::executePersistedQuery($persistedQueryID);
-     * $responseContent = json_decode($response->getContent(), false);
-     * $responseData = $responseContent->data;
-     * $responseErrors = $responseContent->errors;
+     * $responseContent = json_decode($response->getContent(), true);
+     * $responseData = $responseContent["data"] ?? [];
+     * $responseErrors = $responseContent["errors"] ?? [];
      * ```
      *
      * The Response object also contains any produced header (eg: if some Cache
