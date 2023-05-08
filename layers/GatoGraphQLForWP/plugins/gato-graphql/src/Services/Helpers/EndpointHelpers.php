@@ -152,7 +152,7 @@ class EndpointHelpers
                 $endpoint
             );
         }
-        
+
         if ($enableLowLevelQueryEditing) {
             // Add /?edit_schema=1 so the query-type directives are also visible
             /** @var ModuleConfiguration */
@@ -163,15 +163,7 @@ class EndpointHelpers
         }
 
         // Add mandatory params from the request, and maybe enable XDebug
-        $endpoint = RequestHelpers::addRequestParamsToEndpoint($endpoint);
-
-        // If namespaced, add /?use_namespace=1 to the endpoint
-        // /** @var ComponentModelModuleConfiguration */
-        // $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        // if ($moduleConfiguration->mustNamespaceTypes()) {
-        //     $endpoint = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpoint);
-        // }
-        return $endpoint;
+        return RequestHelpers::addRequestParamsToEndpoint($endpoint);
     }
 
     /**
