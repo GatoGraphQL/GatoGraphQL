@@ -588,28 +588,26 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 }
                 add_action(
                     'gato_graphql__execute_query',
-                    function (string $query, ?array $variables = [], ?string $operationName = null): array {
-                        $response = GatoGraphQL::executeQuery(
+                    function (string $query, ?array $variables = [], ?string $operationName = null): void
+                    {
+                        GatoGraphQL::executeQuery(
                             $query,
                             $variables,
                             $operationName
                         );
-                        /** @var array<string,mixed> */
-                        return json_decode($response->getContent(), true);
                     },
                     10,
                     3
                 );
                 add_action(
                     'gato_graphql__execute_persisted_query',
-                    function (string|int $persistedQueryIDOrSlug, ?array $variables = [], ?string $operationName = null): array {
-                        $response = GatoGraphQL::executePersistedQuery(
+                    function (string|int $persistedQueryIDOrSlug, ?array $variables = [], ?string $operationName = null): void
+                    {
+                        GatoGraphQL::executePersistedQuery(
                             $persistedQueryIDOrSlug,
                             $variables,
                             $operationName
                         );
-                        /** @var array<string,mixed> */
-                        return json_decode($response->getContent(), true);
                     },
                     10,
                     3
