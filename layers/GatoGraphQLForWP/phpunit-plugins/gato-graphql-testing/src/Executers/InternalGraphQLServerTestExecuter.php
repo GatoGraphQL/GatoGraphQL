@@ -305,8 +305,11 @@ class InternalGraphQLServerTestExecuter
     }
 
     /**
-     * Execute the query either via methods `executeQuery`
-     * or `executeQueryInFile`, to test them both.
+     * Execute the query by any of these methods (to also test them):
+     * 
+     *   - `GatoGraphQL::executeQuery`
+     *   - `GatoGraphQL::executeQueryInFile`
+     *   - `GatoGraphQL::executePersistedQuery`
      */
     protected function executeInternalGraphQLQuery(WP_Post $post): Response
     {
@@ -324,6 +327,18 @@ class InternalGraphQLServerTestExecuter
         if (in_array(Actions::TEST_GATO_GRAPHQL_EXECUTE_QUERY_IN_FILE_METHOD, $actions)) {
             return GatoGraphQL::executeQueryInFile(
                 $file,
+                $variables
+            );
+        }
+
+        if (in_array(Actions::TEST_GATO_GRAPHQL_EXECUTE_PERSISTED_QUERY_METHOD, $actions)) {
+            /**
+             * This persisted query, stored in the DB data, contains
+             * the same GraphqL query as ExecuteInternalQuery.gql
+             */
+            $persistedQueryID = 0;
+            return GatoGraphQL::executePersistedQuery(
+                $persistedQueryID,
                 $variables
             );
         }
