@@ -22,6 +22,8 @@ trait InternalGraphQLServerWebserverRequestTestTrait
         /** @var bool */
         $withExecuteQueryInFile = $options['withExecuteQueryInFile'] ?? false;
         /** @var bool */
+        $withExecutePersistedQuery = $options['withExecutePersistedQuery'] ?? false;
+        /** @var bool */
         $withNotReady = $options['withNotReady'] ?? false;
         return GeneralUtils::addQueryArgs(
             [
@@ -38,6 +40,11 @@ trait InternalGraphQLServerWebserverRequestTestTrait
                     $withExecuteQueryInFile
                         ? [
                             Actions::TEST_GATO_GRAPHQL_EXECUTE_QUERY_IN_FILE_METHOD,
+                        ]
+                        : [],
+                    $withExecutePersistedQuery
+                        ? [
+                            Actions::TEST_GATO_GRAPHQL_EXECUTE_PERSISTED_QUERY_METHOD,
                         ]
                         : [],
                     $withNotReady
