@@ -58,13 +58,18 @@ class GatoGraphQLAdminEndpointsTestExecuter
             if ($methodEndpoint === $expectedEndpoint) {
                 continue;
             }
-            throw new RuntimeException(
-                sprintf(
-                    \__('Admin endpoint "%s" is expected, but "%s" is returned instead'),
-                    $expectedEndpoint,
-                    $methodEndpoint
-                )
+            $errorMessage = sprintf(
+                \__('Admin endpoint "%s" is expected, but "%s" is returned instead', 'gato-graphql-testing'),
+                $expectedEndpoint,
+                $methodEndpoint
             );
+            header(sprintf(
+                '%s: %s',
+                'Content-Type',
+                'application/json'
+            ));
+            _e(json_encode(['artificialError' => $errorMessage]));
+            exit;
         }
     }
 }
