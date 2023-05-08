@@ -310,9 +310,7 @@ class InternalGraphQLServerTestExecuter
             }
         GRAPHQL;
 
-        $response = GatoGraphQL::executeQuery(
-            $query,
-        );
+        $response = GatoGraphQL::executeQuery($query);
 
         /** @var string */
         $content = $response->getContent();
