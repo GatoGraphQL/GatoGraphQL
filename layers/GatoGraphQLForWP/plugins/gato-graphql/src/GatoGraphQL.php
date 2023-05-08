@@ -364,9 +364,9 @@ class GatoGraphQL
         
         /** @var WP_Post|null */
         $graphQLQueryPost = $isPersistedQueryID
-            ? get_post($isPersistedQueryID)
+            ? get_post($persistedQueryIDOrSlug)
             : get_page_by_path(
-                $isPersistedQueryID,
+                $persistedQueryIDOrSlug,
                 OBJECT,
                 self::getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType()
             );
