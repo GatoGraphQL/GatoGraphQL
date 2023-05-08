@@ -313,7 +313,7 @@ class InternalGraphQLServerTestExecuter
         $postTitle = $post->post_title;
         $postStatus = $post->post_status;
 
-        $file = $this->getInternalGraphQLQueryFile(); 
+        $file = $this->getInternalGraphQLQueryFile();
         $variables = [
             'postTitle' => $postTitle,
             'postStatus' => $postStatus,
