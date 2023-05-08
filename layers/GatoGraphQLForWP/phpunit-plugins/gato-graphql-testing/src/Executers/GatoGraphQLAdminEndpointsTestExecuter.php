@@ -43,9 +43,13 @@ class GatoGraphQLAdminEndpointsTestExecuter
     public function testGatoGraphQLAdminEndpoints(): void
     {
         $methodToExpectedEndpoints = [
-            GatoGraphQL::getAdminEndpoint() => '',
+            GatoGraphQL::getAdminEndpoint() => '/wp-admin/edit.php?page=gato_graphql&action=execute_query',
+            GatoGraphQL::getAdminBlockEditorEndpoint() => '/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor',
+            GatoGraphQL::getAdminCustomEndpoint('myCustomEndpointGroup') => '/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=myCustomEndpointGroup',
         ];
+
         foreach ($methodToExpectedEndpoints as $methodEndpoint => $expectedEndpoint) {
+            $expectedEndpoint = \home_url($expectedEndpoint);
             if ($methodEndpoint === $expectedEndpoint) {
                 continue;
             }
