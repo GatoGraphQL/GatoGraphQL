@@ -55,7 +55,7 @@ class GatoGraphQLAdminEndpointsTestExecuter
             }
             throw new RuntimeException(
                 sprintf(
-                    \__('Admin endpoint "%s" was expected, but "%s" is the actual value'),
+                    \__('Admin endpoint "%s" is expected, but "%s" is returned instead'),
                     $expectedEndpoint,
                     $methodEndpoint
                 )
