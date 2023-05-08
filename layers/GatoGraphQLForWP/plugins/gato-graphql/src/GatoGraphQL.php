@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
+use GatoGraphQL\GatoGraphQL\Exception\FileCorruptedException;
+use GatoGraphQL\GatoGraphQL\Exception\FileNotFoundException;
 use GatoGraphQL\GatoGraphQL\Exception\GraphQLServerNotReadyException;
 use GatoGraphQL\GatoGraphQL\Server\InternalGraphQLServerFactory;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
@@ -148,6 +150,103 @@ class GatoGraphQL
         array $variables = [],
         ?string $operationName = null
     ): Response {
+        $graphQLServer = InternalGraphQLServerFactory::getInstance();
+        return $graphQLServer->execute(
+            $query,
+            $variables,
+            $operationName,
+        );
+    }
+
+    /**
+     * Execute a GraphQL query against the internal GraphQL Server.
+     *
+     * The response is a Response object. To obtain the response content,
+     * execute:
+     *
+     * ```php
+     * $query = "{ ... }";
+     * $response = GatoGraphQL::executeQuery($query);
+     * $responseContent = json_decode($response->getContent(), false);
+     * $responseData = $responseContent->data;
+     * $responseErrors = $responseContent->errors;
+     * ```
+     *
+     * The Response object also contains any produced header (eg: if some Cache
+     * Control List was applied, it would add the "Cache-Control" header):
+     *
+     * ```php
+     * $responseHeaders = $response->getHeaders();
+     * $responseCacheControlHeader = $response->getHeaderLine('Cache-Control');
+     * ```
+     *
+     * --------------------------------------------------------------------
+     *
+     * This query execution is affected by the configuration selected in the
+     * Settings page, for the selected Schema Configuration for the private
+     * endpoint, and by the selected default values.
+     *
+     * Please notice: This situation also applies whenever the query executed
+     * against the internal GraphQL server was triggered by some other GraphQL
+     * query while being resolved in an endpoint with a different configuration
+     * (such as the public endpoint "graphql/").
+     *
+     * For instance: Let's say that we have configured the single endpoint
+     * "graphql/" to apply an Access Control List to validate users by IP,
+     * and we execute mutation `createPost` against this endpoint:
+     *
+     *   ```
+     *   mutation {
+     *     createPost(input: {...}) {
+     *       # ...
+     *     }
+     *   }
+     *   ```
+     *
+     * Then only visitors from that IP will be able to execute this mutation.
+     *
+     * Then there is a hook on `wp_insert_post` that executes some
+     * query against the internal GraphQL server (eg: to send a notification
+     * to the site admin):
+     *
+     *   ```
+     *   add_action(
+     *     "wp_insert_post",
+     *     fn (int $post_id) => GatoGraphQL::executeQuery("...", ["postID" => $post_id])
+     *   );
+     *   ```
+     *
+     * This GraphQL query will be resolved using the configuration applied to
+     * the internal GraphQL server, and not to the public endpoint.
+     *
+     * As a result, the validation by user IP will not take place
+     * (that is, unless that Access Control List was also applied
+     * to the internal GraphQL server).
+     *
+     * @param array<string,mixed> $variables
+     * @return Response A Response object containing the response body and headers from resolving the query
+     * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
+     * @throws FileNotFoundException If the file does not exist
+     * @throws FileCorruptedException If the file cannot be read
+     */
+    public static function executeQueryInFile(
+        string $file,
+        array $variables = [],
+        ?string $operationName = null
+    ): Response {
+        if (!file_exists($file)) {
+            throw new FileNotFoundException(
+                sprintf('GraphQL query file \'%s\' does not exist', $file)
+            );
+        }
+
+        $query = file_get_contents($file);
+        if ($query === false) {
+            throw new FileCorruptedException(
+                sprintf('Loading GraphQL query file \'%s\' failed', $file)
+            );
+        }
+        
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         return $graphQLServer->execute(
             $query,
