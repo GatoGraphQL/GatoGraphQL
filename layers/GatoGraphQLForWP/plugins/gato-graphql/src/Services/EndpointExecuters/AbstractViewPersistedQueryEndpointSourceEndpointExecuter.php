@@ -74,18 +74,15 @@ abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends 
                     && $persistedQueryEndpointAPIHierarchyBlockAttributes->isInheritQuery()
                 ) {
                     // Fetch the attributes using inheritance
-                    list(
-                        $inheritedGraphQLQuery,
-                        $inheritedGraphQLVariables
-                    ) = $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
-                    // To render the variables in the block, they must be json_encoded
-                    if ($inheritedGraphQLVariables) {
-                        $inheritedGraphQLVariables = (string)json_encode($inheritedGraphQLVariables);
-                    }
+                    $graphQLQueryPostAttributesEntry = $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+                    
                     // Render the block again, using the inherited attributes
                     $inheritedGraphQLBlockAttributes = [
-                        PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $inheritedGraphQLQuery,
-                        PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $inheritedGraphQLVariables,
+                        PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $graphQLQueryPostAttributesEntry->query,
+                        // To render the variables in the block, they must be json_encoded
+                        PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $graphQLQueryPostAttributesEntry->variables !== []
+                            ? (string)json_encode($graphQLQueryPostAttributesEntry->variables)
+                            : []
                     ];
                     // Add the new rendering to the output, and a description for each
                     $ancestorContent = $this->getPersistedQueryEndpointGraphiQLBlock()->renderBlock($inheritedGraphQLBlockAttributes, '');
