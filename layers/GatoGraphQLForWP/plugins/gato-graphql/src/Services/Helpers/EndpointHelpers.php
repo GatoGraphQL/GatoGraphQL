@@ -146,7 +146,7 @@ class EndpointHelpers
         ));
 
         if ($endpointGroup !== null) {
-            \add_query_arg(
+            $endpoint = \add_query_arg(
                 RequestParams::ENDPOINT_GROUP,
                 $endpointGroup,
                 $endpoint
