@@ -1,0 +1,22 @@
+{
+    "data": {
+        "__schema": {
+            "customPostUnionType": {
+                "name": "CustomPostUnion",
+                "possibleTypes": [
+                    {
+                        "name": "GenericCustomPost"
+                    }
+                ]
+            },
+            "customPostEnumType": {
+                "name": "CustomPostEnumString",
+                "extensions": {
+                    "possibleValues": [
+                        "revision"
+                    ]
+                }
+            }
+        }
+    }
+}

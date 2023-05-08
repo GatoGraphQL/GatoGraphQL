@@ -14,7 +14,12 @@ class AdminCustomEndpointSchemaQueryExecutionFixtureWebserverRequestTest extends
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-admin-custom-endpoint';
+        return __DIR__ . '/fixture-admin-endpoint';
+    }
+
+    protected function getResponseFixtureFolder(): string
+    {
+        return __DIR__ . '/fixture-admin-endpoint-custom';
     }
 
     protected function getEndpoint(): string
