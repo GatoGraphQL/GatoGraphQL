@@ -11,8 +11,8 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\AddDummyCustomAdminEndpointHo
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Settings\Options;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
-
 use WP_REST_Response;
+
 use function add_action;
 use function delete_option;
 use function flush_rewrite_rules;

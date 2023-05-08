@@ -11,7 +11,7 @@ final class GatoGraphQL
 {
     private static ?EndpointHelpers $endpointHelpers = null;
 
-    final static private function getEndpointHelpers(): EndpointHelpers
+    final private static function getEndpointHelpers(): EndpointHelpers
     {
         if (self::$endpointHelpers === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
