@@ -13,6 +13,7 @@ use PoP\Root\HttpFoundation\Response;
 abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
 {
     private AppThreadInterface $appThread;
+    private bool $isAppInitialized;
 
     /**
      * Initialize the App with a new AppThread
@@ -26,9 +27,14 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
          * 2. Initialize the App, retrieve the new AppThread
          * 3. Restore the current AppThread
          */
-        $currentAppThread = App::getAppThread();
+        $this->isAppInitialized = App::isInitialized();
+        if ($this->isAppInitialized) {
+            $currentAppThread = App::getAppThread();
+        }
         $this->appThread = $this->initializeApp();
-        App::setAppThread($currentAppThread);
+        if ($this->isAppInitialized) {
+            App::setAppThread($currentAppThread);
+        }
     }
 
     abstract protected function initializeApp(): AppThreadInterface;
@@ -49,7 +55,9 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
          * Keep the current AppThread, switch to the GraphQLServer's
          * one, resolve the query, and then restore the current AppThread.
          */
-        $currentAppThread = App::getAppThread();
+        if ($this->isAppInitialized) {
+            $currentAppThread = App::getAppThread();
+        }
         App::setAppThread($this->appThread);
 
         /**
@@ -70,7 +78,9 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
         $appStateManager->setAppState($appState);
 
         // Restore the original AppThread
-        App::setAppThread($currentAppThread);
+        if ($this->isAppInitialized) {
+            App::setAppThread($currentAppThread);
+        }
 
         return $response;
     }
