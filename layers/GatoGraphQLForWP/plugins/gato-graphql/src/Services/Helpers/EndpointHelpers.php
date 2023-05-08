@@ -144,6 +144,7 @@ class EndpointHelpers
             RequestParams::ACTION,
             RequestParams::ACTION_EXECUTE_QUERY
         ));
+
         if ($endpointGroup !== null) {
             \add_query_arg(
                 RequestParams::ENDPOINT_GROUP,
@@ -151,6 +152,7 @@ class EndpointHelpers
                 $endpoint
             );
         }
+        
         if ($enableLowLevelQueryEditing) {
             // Add /?edit_schema=1 so the query-type directives are also visible
             /** @var ModuleConfiguration */
