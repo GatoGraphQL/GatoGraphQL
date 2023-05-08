@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 
+use GatoGraphQL\GatoGraphQL\ObjectModels\GraphQLQueryPostAttributesEntry;
 use GatoGraphQL\GatoGraphQL\Services\BlockAccessors\PersistedQueryEndpointAPIHierarchyBlockAccessor;
 use GatoGraphQL\GatoGraphQL\Services\BlockAccessors\PersistedQueryEndpointGraphiQLBlockAccessor;
 use PoP\Root\Services\BasicServiceTrait;
@@ -51,9 +52,8 @@ class GraphQLQueryPostTypeHelpers
      *
      * @param WP_Post|null $graphQLQueryPost The post to extract the attributes from
      * @param bool $inheritAttributes Indicate if to fetch attributes (query/variables) from ancestor posts
-     * @return array{0:string,1:array<string,mixed>} Array of 2 elements: [query, variables]
      */
-    public function getGraphQLQueryPostAttributes(?WP_Post $graphQLQueryPost, bool $inheritAttributes): array
+    public function getGraphQLQueryPostAttributes(?WP_Post $graphQLQueryPost, bool $inheritAttributes): GraphQLQueryPostAttributesEntry
     {
         /**
          * Obtain the attributes from the block:
@@ -101,9 +101,9 @@ class GraphQLQueryPostTypeHelpers
                 $graphQLQueryPost = null;
             }
         }
-        return [
+        return new GraphQLQueryPostAttributesEntry(
             $graphQLQuery,
             $graphQLVariables,
-        ];
+        );
     }
 }

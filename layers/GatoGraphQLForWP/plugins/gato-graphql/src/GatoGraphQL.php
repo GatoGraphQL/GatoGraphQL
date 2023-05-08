@@ -383,22 +383,19 @@ class GatoGraphQL
         /**
          * Extract the query and variables from the persisted query post
          */
-        list(
-            $query,
-            $graphQLVariables
-        ) = self::getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+        $graphQLQueryPostAttributesEntry = self::getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
 
         /**
          * Merge the variables in the document with the provided ones
          */
         $variables = array_merge(
-            $graphQLVariables,
+            $graphQLQueryPostAttributesEntry->variables,
             $variables
         );
 
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         return $graphQLServer->execute(
-            $query,
+            $graphQLQueryPostAttributesEntry->query,
             $variables,
             $operationName,
         );

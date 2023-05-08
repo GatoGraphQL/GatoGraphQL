@@ -56,16 +56,13 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
         /**
          * Get the query and variables from the implementing class
          */
-        list(
-            $graphQLQuery,
-            $graphQLVariables
-        ) = $this->getGraphQLEndpointExecuter()->getGraphQLQueryAndVariables(App::getState(['routing', 'queried-object']));
-        if ($graphQLQuery === null) {
+        $graphQLQueryVariablesEntry = $this->getGraphQLEndpointExecuter()->getGraphQLQueryAndVariables(App::getState(['routing', 'queried-object']));
+        if ($graphQLQueryVariablesEntry->query === null) {
             // If there is no query, nothing to do!
             return;
         }
 
-        $state['query'] = $graphQLQuery;
+        $state['query'] = $graphQLQueryVariablesEntry->query;
 
         /**
          * Merge the variables into $state?
@@ -75,7 +72,7 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
          * by setting "Accept Variables as URL Params" => false
          * When editing in the editor, 'queried-object' will be null, and that's OK
          */
-        $graphQLVariables ??= [];
+        $graphQLVariables = $graphQLQueryVariablesEntry->variables ?? [];
         $state['variables'] = $this->getGraphQLEndpointExecuter()->doURLParamsOverrideGraphQLVariables(App::getState(['routing', 'queried-object'])) ?
             array_merge(
                 $graphQLVariables,
