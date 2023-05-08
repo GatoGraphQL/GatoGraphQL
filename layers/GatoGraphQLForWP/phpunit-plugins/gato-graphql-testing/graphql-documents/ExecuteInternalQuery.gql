@@ -1,0 +1,8 @@
+query ExecuteInternalQuery(
+    $postTitle: String!,
+    $postStatus: String!
+) {
+    newPostTitle: _echo(value: $postTitle)
+    newPostStatus: _echo(value: $postStatus)
+    nonExistingField
+}
