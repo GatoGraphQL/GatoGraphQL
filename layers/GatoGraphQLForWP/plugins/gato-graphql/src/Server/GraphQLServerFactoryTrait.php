@@ -32,13 +32,16 @@ trait GraphQLServerFactoryTrait
      */
     protected static function doGetInstance(): GraphQLServerInterface
     {
-        if (!App::isInitialized()) {
-            throw new GraphQLServerNotReadyException();
-        }
+        $doingCron = defined('DOING_CRON') && DOING_CRON;
+        if (!$doingCron) {
+            if (!App::isInitialized()) {
+                throw new GraphQLServerNotReadyException();
+            }
 
-        $appLoader = App::getAppLoader();
-        if (!$appLoader->isReadyState()) {
-            throw new GraphQLServerNotReadyException();
+            $appLoader = App::getAppLoader();
+            if (!$appLoader->isReadyState()) {
+                throw new GraphQLServerNotReadyException();
+            }
         }
 
         return new InternalGraphQLServer();

@@ -22,4 +22,17 @@ class InternalGraphQLServer extends AbstractAttachedGraphQLServer
         );
         return App::getAppThread();
     }
+
+    /**
+     * When doing wp-cron, the InternalGraphQLServer will use
+     * the Store created for the (never-to-be-executed) endpoint
+     */
+    protected function areFeedbackAndTracingStoresAlreadyCreated(): bool
+    {
+        $doingCron = defined('DOING_CRON') && DOING_CRON;
+        if ($doingCron) {
+            return true;
+        }
+        return parent::areFeedbackAndTracingStoresAlreadyCreated();
+    }
 }
