@@ -313,37 +313,28 @@ class InternalGraphQLServerTestExecuter
         $postTitle = $post->post_title;
         $postStatus = $post->post_status;
 
+        $variables = [
+            'postTitle' => $postTitle,
+            'postStatus' => $postStatus,
+        ];
+
+        /**
+         * Use the same query in the .gql file to test both `executeQuery`
+         * and `executeQueryInFile`
+         */
+        $file = dirname(__DIR__, 3) . '/graphql-documents/ExecuteInternalQuery.gql';        
+
         /** @var string[] */
         $actions = App::getState('actions');
         if (in_array(Actions::TEST_GATO_GRAPHQL_EXECUTE_QUERY_IN_FILE_METHOD, $actions)) {
-            /**
-             * The same query as below is defined in the .gql file
-             */
-            $file = dirname(__DIR__, 3) . '/graphql-documents/ExecuteInternalQuery.gql';
             return GatoGraphQL::executeQueryInFile(
                 $file,
-                [
-                    'postTitle' => $postTitle,
-                    'postStatus' => $postStatus,
-                ]
+                $variables
             );
         }
 
-        /**
-         * Also add a non-existing field, to check that its
-         * feedback is printed in the nested output
-         */
-        $query = <<<GRAPHQL
-            query ExecuteInternalQuery(
-                $postTitle: String!,
-                $postStatus: String!
-            ) {
-                newPostTitle: _echo(value: $postTitle)
-                newPostStatus: _echo(value: $postStatus)
-                nonExistingField
-            }
-        GRAPHQL;
-
-        return GatoGraphQL::executeQuery($query);
+        /** @var string */
+        $query = file_get_contents($file);
+        return GatoGraphQL::executeQuery($query, $variables);
     }
 }

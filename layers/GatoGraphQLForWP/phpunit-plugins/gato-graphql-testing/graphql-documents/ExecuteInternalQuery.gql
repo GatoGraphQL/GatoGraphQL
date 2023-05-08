@@ -1,3 +1,7 @@
+############################################################
+# Also add a non-existing field, to check that its
+# feedback is printed in the nested output
+############################################################
 query ExecuteInternalQuery(
     $postTitle: String!,
     $postStatus: String!
