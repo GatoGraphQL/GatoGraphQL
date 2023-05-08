@@ -12,6 +12,7 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -299,6 +300,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
+
+        // Register hooks for wp-cron
+        $this->setupPublicHooks();
     }
 
     /**
@@ -567,6 +571,49 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $this->handleInitializationException($pluginAppGraphQLServerName);
             },
             PHP_INT_MAX
+        );
+    }
+
+    /**
+     * Register public-facing hooks, using string for the
+     * hook names (instead of consts).
+     */
+    protected function setupPublicHooks(): void
+    {
+        /**
+         * Wait until "plugins_loaded" to initialize the plugin, because:
+         *
+         * - ModuleListTableAction requires `wp_verify_nonce`, loaded in pluggable.php
+         * - Allow other plugins to inject their own functionality
+         */
+        add_action(
+            PluginAppHooks::INITIALIZE_APP,
+            function (string $pluginAppGraphQLServerName): void {
+                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL) {
+                    return;
+                }
+                add_action(
+                    'gato_graphql__execute_query',
+                    fn (string $query, ?array $variables = [], ?string $operationName = null) => GatoGraphQL::executeQuery(
+                        $query,
+                        $variables,
+                        $operationName
+                    ),
+                    10,
+                    3
+                );
+                add_action(
+                    'gato_graphql__execute_persisted_query',
+                    fn (string|int $persistedQueryIDOrSlug, ?array $variables = [], ?string $operationName = null) => GatoGraphQL::executePersistedQuery(
+                        $persistedQueryIDOrSlug,
+                        $variables,
+                        $operationName
+                    ),
+                    10,
+                    3
+                );
+            },
+            PluginLifecyclePriorities::AFTER_EVERYTHING
         );
     }
 
