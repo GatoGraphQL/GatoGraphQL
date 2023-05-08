@@ -16,7 +16,8 @@ class GatoGraphQL
         if (self::$endpointHelpers === null) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var EndpointHelpers */
-            self::$endpointHelpers = $instanceManager->getInstance(EndpointHelpers::class);
+            $endpointHelpers = $instanceManager->getInstance(EndpointHelpers::class);
+            self::$endpointHelpers = $endpointHelpers;
         }
         return self::$endpointHelpers;
     }
