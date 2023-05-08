@@ -75,6 +75,27 @@ class GatoGraphQL
     /**
      * Execute a GraphQL query against the internal GraphQL Server.
      *
+     * The response is a Response object. To obtain the response content,
+     * execute:
+     *
+     * ```php
+     * $query = "{ ... }";
+     * $response = GatoGraphQL::executeQuery($query);
+     * $responseContent = json_decode($response->getContent(), true);
+     * $responseData = $responseContent["data"];
+     * $responseErrors = $responseContent["errors"];
+     * ```
+     * 
+     * The Response object also contains any produced header (eg: if some Cache
+     * Control List was applied, it would add the "Cache-Control" header):
+     *
+     * ```php
+     * $responseHeaders = $response->getHeaders();
+     * $responseCacheControlHeader = $response->getHeaderLine('Cache-Control');
+     * ```
+     *
+     * --------------------------------------------------------------------
+     *
      * This query execution is affected by the configuration selected in the
      * Settings page, for the selected Schema Configuration for the private
      * endpoint, and by the selected default values.
