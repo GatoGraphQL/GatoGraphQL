@@ -6,7 +6,6 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
 use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
-use RuntimeException;
 
 class GatoGraphQLAdminEndpointsTestExecuter
 {
@@ -23,8 +22,6 @@ class GatoGraphQLAdminEndpointsTestExecuter
         if (!in_array(Actions::TEST_GATO_GRAPHQL_ADMIN_ENDPOINTS, $actions)) {
             return;
         }
-
-        $this->setupToOutputOriginalExceptionMessage();
 
         \add_action(
             'init',
@@ -58,18 +55,11 @@ class GatoGraphQLAdminEndpointsTestExecuter
             if ($methodEndpoint === $expectedEndpoint) {
                 continue;
             }
-            $errorMessage = sprintf(
+            $this->outputArtificialErrorAsJSONResponse(sprintf(
                 \__('Admin endpoint "%s" is expected, but "%s" is returned instead', 'gato-graphql-testing'),
                 $expectedEndpoint,
                 $methodEndpoint
-            );
-            header(sprintf(
-                '%s: %s',
-                'Content-Type',
-                'application/json'
             ));
-            _e(json_encode(['artificialError' => $errorMessage]));
-            exit;
         }
     }
 }

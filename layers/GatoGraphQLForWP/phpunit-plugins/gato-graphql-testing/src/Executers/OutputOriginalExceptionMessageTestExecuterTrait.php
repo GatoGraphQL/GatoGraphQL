@@ -42,4 +42,15 @@ trait OutputOriginalExceptionMessageTestExecuterTrait
         }
         return substr($exceptionMessage, 0, $pos);
     }
+
+    protected function outputArtificialErrorAsJSONResponse(string $errorMessage): never
+    {
+        header(sprintf(
+            '%s: %s',
+            'Content-Type',
+            'application/json'
+        ));
+        _e(json_encode(['artificialError' => $errorMessage]));
+        exit;
+    }
 }
