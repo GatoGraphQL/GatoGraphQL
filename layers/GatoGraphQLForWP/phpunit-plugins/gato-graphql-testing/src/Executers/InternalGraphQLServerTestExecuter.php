@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PoP\Root\Constants\HookNames;
+use PoP\Root\HttpFoundation\Response;
 use WP_Post;
 use stdClass;
 
@@ -295,26 +296,49 @@ class InternalGraphQLServerTestExecuter
 
     protected function executeDeepNestedQueryAgainstInternalGraphQLServer(WP_Post $post): void
     {
-        $postTitle = $post->post_title;
-        $postStatus = $post->post_status;
-
-        /**
-         * Also add a non-existing field, to check that its
-         * feedback is printed in the nested output
-         */
-        $query = <<<GRAPHQL
-            {
-                newPostTitle: _echo(value: "$postTitle")
-                newPostStatus: _echo(value: "$postStatus")
-                nonExistingField
-            }
-        GRAPHQL;
-
-        $response = GatoGraphQL::executeQuery($query);
+        $response = $this->executeInternalGraphQLQuery($post);
 
         /** @var string */
         $content = $response->getContent();
         $jsonContent = json_decode($content, false);
         $this->appendInternalGraphQLServerResponseToAppState($jsonContent);
+    }
+
+    /**
+     * Execute the query either via methods `executeQuery`
+     * or `executeQueryInFile`, to test them both.
+     */
+    protected function executeInternalGraphQLQuery(WP_Post $post): Response
+    {
+        $postTitle = $post->post_title;
+        $postStatus = $post->post_status;
+
+        $file = $this->getInternalGraphQLQueryFile();
+        $variables = [
+            'postTitle' => $postTitle,
+            'postStatus' => $postStatus,
+        ];
+
+        /** @var string[] */
+        $actions = App::getState('actions');
+        if (in_array(Actions::TEST_GATO_GRAPHQL_EXECUTE_QUERY_IN_FILE_METHOD, $actions)) {
+            return GatoGraphQL::executeQueryInFile(
+                $file,
+                $variables
+            );
+        }
+
+        /** @var string */
+        $query = file_get_contents($file);
+        return GatoGraphQL::executeQuery($query, $variables);
+    }
+
+    /**
+     * Use the same query in the .gql file to test both `executeQuery`
+     * and `executeQueryInFile`
+     */
+    protected function getInternalGraphQLQueryFile(): string
+    {
+        return dirname(__DIR__, 2) . '/graphql-documents/ExecuteInternalQuery.gql';
     }
 }
