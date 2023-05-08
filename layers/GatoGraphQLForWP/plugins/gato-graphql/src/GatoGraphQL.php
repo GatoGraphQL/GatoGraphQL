@@ -380,14 +380,24 @@ class GatoGraphQL
         }
 
         /**
-        * Extract the query from the post (or from its parents), and set it in the application state
-        */
-        $persistedQueryPostAttributes = self::getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
+         * Extract the query and variables from the persisted query post
+         */
+        list(
+            $query,
+            $graphQLVariables
+        ) = self::getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
 
+        /**
+         * Merge the variables in the document with the provided ones
+         */
+        $variables = array_merge(
+            $graphQLVariables,
+            $variables
+        );
 
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         return $graphQLServer->execute(
-            $persistedQuery,
+            $query,
             $variables,
             $operationName,
         );
