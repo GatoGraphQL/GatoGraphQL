@@ -9,7 +9,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 
 class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
 {
-    use OutputOriginalExceptionMessageTestExecuterTrait;
+    use GraphQLServerTestExecuterTrait;
 
     public function __construct()
     {

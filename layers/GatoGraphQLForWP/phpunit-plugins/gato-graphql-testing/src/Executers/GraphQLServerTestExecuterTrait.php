@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
-trait OutputOriginalExceptionMessageTestExecuterTrait
+trait GraphQLServerTestExecuterTrait
 {
     /**
      * Customize the WordPress error message, to indeed validate
