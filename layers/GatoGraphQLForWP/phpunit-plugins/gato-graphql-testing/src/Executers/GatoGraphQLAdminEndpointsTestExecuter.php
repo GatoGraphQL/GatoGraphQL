@@ -11,7 +11,7 @@ use RuntimeException;
 class GatoGraphQLAdminEndpointsTestExecuter
 {
     use OutputOriginalExceptionMessageTestExecuterTrait;
-    
+
     public function __construct()
     {
         // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
@@ -23,6 +23,8 @@ class GatoGraphQLAdminEndpointsTestExecuter
         if (!in_array(Actions::TEST_GATO_GRAPHQL_ADMIN_ENDPOINTS, $actions)) {
             return;
         }
+
+        $this->setupToOutputOriginalExceptionMessage();
 
         \add_action(
             'init',

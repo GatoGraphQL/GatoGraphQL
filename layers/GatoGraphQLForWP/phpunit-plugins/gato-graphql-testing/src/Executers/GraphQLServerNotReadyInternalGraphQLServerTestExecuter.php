@@ -23,21 +23,7 @@ class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
             return;
         }
 
-        /**
-         * Customize the WordPress error message, to indeed validate
-         * that the thrown exception is the expected one.
-         *
-         * @see wp-includes/class-wp-fatal-error-handler.php
-         */
-        \add_filter(
-            'wp_php_error_message',
-            /**
-             * @param array<string,mixed> $error
-             */
-            fn (string $message, array $error): string => $this->customizeWordPressErrorMessage($message, $error),
-            10,
-            2
-        );
+        $this->setupToOutputOriginalExceptionMessage();
 
         // Just executing this code will throw the exception
         InternalGraphQLServerFactory::getInstance();
