@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
+use GatoGraphQL\GatoGraphQL\ObjectModels\NullableGraphQLQueryVariablesEntry;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use WP_Post;
@@ -24,19 +25,17 @@ abstract class AbstractPersistedQueryEndpointGraphQLQueryResolutionEndpointExecu
 
     /**
      * Provide the query to execute and its variables
-     *
-     * @return array{0:?string,1:?array<string,mixed>} Array of 2 elements: [query, variables]
      */
-    public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
+    public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): NullableGraphQLQueryVariablesEntry
     {
         /**
          * Extract the query from the post (or from its parents), and set it in the application state
          */
         $graphQLQueryPostAttributes = $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
-        return [
+        return new NullableGraphQLQueryVariablesEntry(
             $graphQLQueryPostAttributes->query,
             $graphQLQueryPostAttributes->variables,
-        ];
+        );
     }
 
     /**

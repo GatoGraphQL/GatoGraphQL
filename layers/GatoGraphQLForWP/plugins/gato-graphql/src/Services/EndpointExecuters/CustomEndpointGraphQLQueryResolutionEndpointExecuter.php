@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ObjectModels\NullableGraphQLQueryVariablesEntry;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use WP_Post;
@@ -35,18 +36,16 @@ class CustomEndpointGraphQLQueryResolutionEndpointExecuter extends AbstractGraph
 
     /**
      * Provide the query to execute and its variables
-     *
-     * @return array{0:?string,1:?array<string,mixed>} Array of 2 elements: [query, variables]
      */
-    public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): array
+    public function getGraphQLQueryAndVariables(?WP_Post $graphQLQueryPost): NullableGraphQLQueryVariablesEntry
     {
         /**
          * Extract the query from the BODY through standard GraphQL endpoint execution
          */
         $graphQLQueryPayload = $this->getQueryRetriever()->extractRequestedGraphQLQueryPayload();
-        return [
+        return new NullableGraphQLQueryVariablesEntry(
             $graphQLQueryPayload->query,
             $graphQLQueryPayload->variables,
-        ];
+        );
     }
 }
