@@ -87,7 +87,7 @@ class GatoGraphQL
      * $responseData = $responseContent->data;
      * $responseErrors = $responseContent->errors;
      * ```
-     * 
+     *
      * The Response object also contains any produced header (eg: if some Cache
      * Control List was applied, it would add the "Cache-Control" header):
      *
@@ -118,9 +118,9 @@ class GatoGraphQL
      *     }
      *   }
      *   ```
-     * 
+     *
      * Then only visitors from that IP will be able to execute this mutation.
-     * 
+     *
      * Then there is a hook on `wp_insert_post` that executes some
      * query against the internal GraphQL server (eg: to send a notification
      * to the site admin):
@@ -134,11 +134,11 @@ class GatoGraphQL
      *
      * This GraphQL query will be resolved using the configuration applied to
      * the internal GraphQL server, and not to the public endpoint.
-     * 
+     *
      * As a result, the validation by user IP will not take place
      * (that is, unless that Access Control List was also applied
      * to the internal GraphQL server).
-     * 
+     *
      * @param array<string,mixed> $variables
      * @return Response A Response object containing the response body and headers from resolving the query
      * @throws GraphQLServerNotReadyException If the GraphQL Server is not ready yet
