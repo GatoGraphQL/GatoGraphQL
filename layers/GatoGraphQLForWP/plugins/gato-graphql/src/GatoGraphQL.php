@@ -81,9 +81,9 @@ class GatoGraphQL
      * ```php
      * $query = "{ ... }";
      * $response = GatoGraphQL::executeQuery($query);
-     * $responseContent = json_decode($response->getContent(), true);
-     * $responseData = $responseContent["data"];
-     * $responseErrors = $responseContent["errors"];
+     * $responseContent = json_decode($response->getContent(), false);
+     * $responseData = $responseContent->data;
+     * $responseErrors = $responseContent->errors;
      * ```
      * 
      * The Response object also contains any produced header (eg: if some Cache
