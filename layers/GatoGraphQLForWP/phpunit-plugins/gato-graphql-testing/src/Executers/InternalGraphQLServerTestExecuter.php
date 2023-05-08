@@ -313,16 +313,11 @@ class InternalGraphQLServerTestExecuter
         $postTitle = $post->post_title;
         $postStatus = $post->post_status;
 
+        $file = $this->getInternalGraphQLQueryFile(); 
         $variables = [
             'postTitle' => $postTitle,
             'postStatus' => $postStatus,
         ];
-
-        /**
-         * Use the same query in the .gql file to test both `executeQuery`
-         * and `executeQueryInFile`
-         */
-        $file = dirname(__DIR__, 3) . '/graphql-documents/ExecuteInternalQuery.gql';        
 
         /** @var string[] */
         $actions = App::getState('actions');
@@ -336,5 +331,14 @@ class InternalGraphQLServerTestExecuter
         /** @var string */
         $query = file_get_contents($file);
         return GatoGraphQL::executeQuery($query, $variables);
+    }
+
+    /**
+     * Use the same query in the .gql file to test both `executeQuery`
+     * and `executeQueryInFile`
+     */
+    protected function getInternalGraphQLQueryFile(): string
+    {
+        return dirname(__DIR__, 2) . '/graphql-documents/ExecuteInternalQuery.gql';
     }
 }
