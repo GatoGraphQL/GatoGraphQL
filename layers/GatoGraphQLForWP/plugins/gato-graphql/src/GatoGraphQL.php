@@ -34,7 +34,7 @@ class GatoGraphQL
      */
     final public static function getAdminEndpoint(): string
     {
-        return static::getEndpointHelpers()->getAdminGraphQLEndpoint();
+        return self::getEndpointHelpers()->getAdminGraphQLEndpoint();
     }
 
     /**
@@ -50,7 +50,7 @@ class GatoGraphQL
      */
     final public static function getAdminBlockEditorEndpoint(): string
     {
-        return static::getEndpointHelpers()->getAdminBlockEditorGraphQLEndpoint();
+        return self::getEndpointHelpers()->getAdminBlockEditorGraphQLEndpoint();
     }
 
     /**
@@ -66,6 +66,6 @@ class GatoGraphQL
      */
     final public static function getAdminCustomEndpoint(string $endpointGroup): string
     {
-        return static::getEndpointHelpers()->getAdminGraphQLEndpoint($endpointGroup);
+        return self::getEndpointHelpers()->getAdminGraphQLEndpoint($endpointGroup);
     }
 }
