@@ -43,6 +43,10 @@ trait GraphQLServerTestExecuterTrait
         return substr($exceptionMessage, 0, $pos);
     }
 
+    /**
+     * Print the message under an artificial entry
+     * in the JSON response, and exit
+     */
     protected function outputArtificialErrorAsJSONResponse(string $errorMessage): never
     {
         header(sprintf(
