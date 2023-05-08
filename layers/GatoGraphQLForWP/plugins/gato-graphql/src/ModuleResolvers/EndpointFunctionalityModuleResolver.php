@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptionValues;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
@@ -275,7 +276,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'gato-graphql');
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
-                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%7$s</a> and <a href="%3$s" target="_blank">Interactive Schema%7$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%7$s</a></li><li>PHP class <code>%5$s</code> can be used to <a href="%6$s" target="_blank">execute GraphQL queries internally%7$s</a> (eg: triggered by some hook)</li></ul>', 'gato-graphql'),
+                    \__('Schema Configuration to use in the Private Endpoint and Internal GraphQL Server:<ul><li>The private endpoint <code>%1$s</code> powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%10$s</a> and <a href="%3$s" target="_blank">Interactive Schema%10$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%10$s</a></li><li>The methods on PHP class <code>%5$s</code> to execute queries (<code>%6$s</code>, <code>%7$s</code> and <code>%8$s</code>) are resolved against <a href="%9$s" target="_blank">an Internal GraphQL Server%10$s</a></li></ul>', 'gato-graphql'),
                     ltrim(
                         GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
                         '/'
@@ -294,7 +295,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                         RequestParams::TAB,
                         'feeding-data-to-blocks-in-the-editor'
                     )),
-                    'InternalGraphQLServer',
+                    GatoGraphQL::class,
+                    'executeQuery',
+                    'executeQueryInFile',
+                    'executePersistedQuery',
                     \admin_url(sprintf(
                         'admin.php?page=%s&%s=%s',
                         $this->getRecipesMenuPage()->getScreenID(),
