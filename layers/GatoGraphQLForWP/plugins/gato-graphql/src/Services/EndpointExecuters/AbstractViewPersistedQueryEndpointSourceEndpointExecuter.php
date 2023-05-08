@@ -75,7 +75,7 @@ abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends 
                 ) {
                     // Fetch the attributes using inheritance
                     $graphQLQueryPostAttributesEntry = $this->getGraphQLQueryPostTypeHelpers()->getGraphQLQueryPostAttributes($graphQLQueryPost, true);
-                    
+
                     // Render the block again, using the inherited attributes
                     $inheritedGraphQLBlockAttributes = [
                         PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $graphQLQueryPostAttributesEntry->query,
