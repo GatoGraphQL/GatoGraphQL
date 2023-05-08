@@ -14,7 +14,6 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\HttpFoundation\Response;
 use RuntimeException;
-use SebastianBergmann\Environment\Runtime;
 use WP_Post;
 use stdClass;
 
@@ -309,7 +308,7 @@ class InternalGraphQLServerTestExecuter
 
     /**
      * Execute the query by any of these methods (to also test them):
-     * 
+     *
      *   - `GatoGraphQL::executeQuery`
      *   - `GatoGraphQL::executeQueryInFile`
      *   - `GatoGraphQL::executePersistedQuery`

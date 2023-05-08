@@ -362,7 +362,7 @@ class GatoGraphQL
         ?string $operationName = null
     ): Response {
         $isPersistedQueryID = is_integer($persistedQueryIDOrSlug);
-        
+
         /** @var WP_Post|null */
         $graphQLQueryPost = $isPersistedQueryID
             ? get_post($persistedQueryIDOrSlug)
