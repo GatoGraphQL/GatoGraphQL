@@ -332,10 +332,23 @@ class GatoGraphQL
         array $variables = [],
         ?string $operationName = null
     ): Response {
+        $isPersistedQueryID = is_integer($persistedQueryIDOrSlug);
+        if ($isPersistedQueryID) {
+            $persistedQuery = '';
+        } else {
+            $persistedQuery = '';
+        }
+        if ($persistedQuery === null) {
+            throw new PersistedQueryNotFoundException(
+                $isPersistedQueryID
+                    ? sprintf('Persisted query with ID \'%s\' does not exist', $persistedQueryIDOrSlug)
+                    : sprintf('Persisted query with slug \'%s\' does not exist', $persistedQueryIDOrSlug)
+            );
+        }
 
         $graphQLServer = InternalGraphQLServerFactory::getInstance();
         return $graphQLServer->execute(
-            $query,
+            $persistedQuery,
             $variables,
             $operationName,
         );
