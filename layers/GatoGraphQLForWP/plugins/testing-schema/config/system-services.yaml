@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GatoGraphQL\TestingSchema\Container\CompilerPasses\:
+        resource: '../src/Container/CompilerPasses/*'
+
