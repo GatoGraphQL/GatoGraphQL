@@ -15,6 +15,7 @@ class Module extends AbstractExtensionModule
     public function getDependedModuleClasses(): array
     {
         return [
+            \PoP\Engine\Module::class,
         ];
     }
 }
