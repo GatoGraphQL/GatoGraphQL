@@ -135,6 +135,11 @@ jobs:
                     sed -i "s/$commitHash = null;/$commitHash = '${{ github.sha }}';/" ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
+            # Avoid Composer bug: https://github.com/composer/composer/issues/11458
+            -   name: Delete `composer.lock`
+                run: rm composer.lock
+                working-directory: ${{ matrix.pluginConfig.path }}
+
             -   name: Build project for production
                 run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
