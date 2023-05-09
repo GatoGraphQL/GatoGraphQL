@@ -47,13 +47,13 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $timestamps[$key];
     }
     /**
-     * Add the PHP process ID to `time()` to make it truly unique,
+     * Add a random number to `time()` to make it truly unique,
      * as to avoid a bug when 2 requests with different schema
      * configuration come in at the same time (i.e. with same `time()`).
      */
     protected function getUniqueTimestamp(): string
     {
-        return (string)\time() . '_' . (string)\getmypid();
+        return (string)\time() . '_' . (string)\rand(1, 999999999);
     }
     /**
      * Static timestamp, reflecting when the service container has been regenerated.
