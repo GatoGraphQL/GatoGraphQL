@@ -41,7 +41,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * a one-time-use before accessing the wp-admin and
      * having a new timestamp generated via `purgeContainer`.
      */
-    protected function getUniqueTimestamp(string $key): string
+    protected function getOptionUniqueTimestamp(string $key): string
     {
         $timestamps = \get_option(Options::TIMESTAMPS, [$key => time()]);
         return $timestamps[$key];
@@ -52,7 +52,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getContainerUniqueTimestamp(): string
     {
-        return $this->getUniqueTimestamp(self::TIMESTAMP_CONTAINER);
+        return $this->getOptionUniqueTimestamp(self::TIMESTAMP_CONTAINER);
     }
     /**
      * Dynamic timestamp, reflecting when new entities modifying the schema are
@@ -60,7 +60,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getOperationalUniqueTimestamp(): string
     {
-        return $this->getUniqueTimestamp(self::TIMESTAMP_OPERATIONAL);
+        return $this->getOptionUniqueTimestamp(self::TIMESTAMP_OPERATIONAL);
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
