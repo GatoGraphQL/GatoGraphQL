@@ -165,15 +165,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
 
     public function isEnabledByDefault(string $module): bool
     {
-        switch ($module) {
-            case self::SINGLE_ENDPOINT:
-                /**
-                 * Single endpoint is naturally disabled for PROD.
-                 * Enable for DEV to execute tests.
-                 */
-                return RootEnvironment::isApplicationEnvironmentDev();
-        }
-        return parent::isEnabledByDefault($module);
+        return match ($module) {
+            self::SINGLE_ENDPOINT => false,
+            default => parent::isEnabledByDefault($module),
+        };
     }
 
     public function isPredefinedEnabledOrDisabled(string $module): ?bool

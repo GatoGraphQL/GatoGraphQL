@@ -1,9 +1,19 @@
 #!/bin/sh
-echo "Configuring the Gato GraphQL plugin settings"
-echo "Selecting \"dummy\" CPT, categories and tags"
+echo Configuring the Gato GraphQL plugin settings
+echo Enabling modules for DEV
 
 ADMIN_USER_APP_PASSWORD=$(wp user meta get 1 app_password --path=/app/wordpress)
 SITE_DOMAIN=$(wp option get siteurl --path=/app/wordpress)
+
+curl -i --insecure \
+  --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"state": "enabled"}' \
+  $(echo $SITE_DOMAIN)/wp-json/gato-graphql/v1/admin/modules/gatographql_gatographql_single-endpoint
+
+
+echo Selecting "dummy" CPT, categories and tags
 
 curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
