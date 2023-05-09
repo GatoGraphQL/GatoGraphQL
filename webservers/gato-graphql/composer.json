@@ -64,6 +64,7 @@
         "create-users-within-container": "/bin/sh /app/setup/create-users.sh",
         "update-deps": [
             "@symlink-vendor-for-gato-graphql-plugin",
+            "@symlink-vendor-for-gato-graphql-testing-schema-plugin",
             "@symlink-vendor-for-gato-graphql-testing-plugin",
             "@symlink-vendor-for-gato-graphql-extension-demo"
         ],
@@ -78,6 +79,11 @@
             "php -r \"copy('../../layers/GatoGraphQLForWP/plugins/gato-graphql/composer.json', '../../layers/GatoGraphQLForWP/plugins/gato-graphql/composer.local.json');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/plugins/gato-graphql/composer.local.json",
             "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/plugins/gato-graphql"
+        ],
+        "symlink-vendor-for-gato-graphql-testing-schema-plugin": [
+            "php -r \"copy('../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing-schema/composer.json', '../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing-schema/composer.local.json');\"",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing-schema/composer.local.json",
+            "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing-schema"
         ],
         "symlink-vendor-for-gato-graphql-testing-plugin": [
             "php -r \"copy('../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/composer.json', '../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/composer.local.json');\"",
