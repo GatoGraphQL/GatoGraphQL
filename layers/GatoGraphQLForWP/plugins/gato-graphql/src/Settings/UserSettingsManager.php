@@ -41,26 +41,35 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * a one-time-use before accessing the wp-admin and
      * having a new timestamp generated via `purgeContainer`.
      */
-    protected function getTimestamp(string $key): int
+    protected function getOptionUniqueTimestamp(string $key): string
     {
-        $timestamps = \get_option(Options::TIMESTAMPS, [$key => time()]);
-        return (int) $timestamps[$key];
+        $timestamps = \get_option(Options::TIMESTAMPS, [$key => $this->getUniqueIdentifier()]);
+        return $timestamps[$key];
+    }
+    /**
+     * Add a random number to `time()` to make it truly unique,
+     * as to avoid a bug when 2 requests with different schema
+     * configuration come in at the same time (i.e. with same `time()`).
+     */
+    protected function getUniqueIdentifier(): string
+    {
+        return \uniqid();
     }
     /**
      * Static timestamp, reflecting when the service container has been regenerated.
      * Should change not so often
      */
-    public function getContainerTimestamp(): int
+    public function getContainerUniqueTimestamp(): string
     {
-        return $this->getTimestamp(self::TIMESTAMP_CONTAINER);
+        return $this->getOptionUniqueTimestamp(self::TIMESTAMP_CONTAINER);
     }
     /**
      * Dynamic timestamp, reflecting when new entities modifying the schema are
      * added to the DB. Can change often
      */
-    public function getOperationalTimestamp(): int
+    public function getOperationalUniqueTimestamp(): string
     {
-        return $this->getTimestamp(self::TIMESTAMP_OPERATIONAL);
+        return $this->getOptionUniqueTimestamp(self::TIMESTAMP_OPERATIONAL);
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
@@ -71,7 +80,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeContainerTimestamp(): void
     {
-        $time = time();
+        $time = $this->getUniqueIdentifier();
         $timestamps = [
             self::TIMESTAMP_CONTAINER => $time,
             self::TIMESTAMP_OPERATIONAL => $time,
@@ -86,8 +95,8 @@ class UserSettingsManager implements UserSettingsManagerInterface
     public function storeOperationalTimestamp(): void
     {
         $timestamps = [
-            self::TIMESTAMP_CONTAINER => $this->getContainerTimestamp(),
-            self::TIMESTAMP_OPERATIONAL => time(),
+            self::TIMESTAMP_CONTAINER => $this->getContainerUniqueTimestamp(),
+            self::TIMESTAMP_OPERATIONAL => $this->getUniqueIdentifier(),
         ];
         \update_option(Options::TIMESTAMPS, $timestamps);
     }
