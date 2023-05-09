@@ -101,13 +101,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    /**
-     * By default, validate for DEV only
-     */
     public function validateFieldTypeResponseWithSchemaDefinition(): bool
     {
         $envVariable = Environment::VALIDATE_FIELD_TYPE_RESPONSE_WITH_SCHEMA_DEFINITION;
-        $defaultValue = RootEnvironment::isApplicationEnvironmentDev();
+        $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
