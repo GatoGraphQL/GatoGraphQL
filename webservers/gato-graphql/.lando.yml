@@ -28,6 +28,8 @@ services:
         - >-
           ../../layers/GatoGraphQLForWP/plugins/gato-graphql:/app/wordpress/wp-content/plugins/gato-graphql
         - >-
+          ../../layers/GatoGraphQLForWP/plugins/testing-schema:/app/wordpress/wp-content/plugins/gato-graphql-testing-schema
+        - >-
           ../../layers/API/packages/api-clients:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-api/api-clients
         - >-
           ../../layers/API/packages/api-endpoints-for-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-api/api-endpoints-for-wp

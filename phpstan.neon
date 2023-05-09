@@ -107,6 +107,7 @@ includes:
     - layers/CMSSchema/packages/taxonomymeta-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomyquery/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomyquery-wp/phpstan.neon.dist
+    - layers/GatoGraphQLForWP/plugins/testing-schema/phpstan.neon.dist
     - layers/CMSSchema/packages/user-avatars/phpstan.neon.dist
     - layers/CMSSchema/packages/user-avatars-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/user-roles/phpstan.neon.dist

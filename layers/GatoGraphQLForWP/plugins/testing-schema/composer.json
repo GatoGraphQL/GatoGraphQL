@@ -1,0 +1,69 @@
+{
+    "name": "gato-graphql/testing-schema",
+    "type": "wordpress-plugin",
+    "description": "Addition of elements to the GraphQL schema to test the Gato GraphQL plugin",
+    "keywords": ["WordPress", "GraphQL", "API"],
+    "homepage": "https://github.com/GatoGraphQL/testing-schema",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "getpop/engine": "^0.11"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.8",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.6",
+        "szepeviktor/phpstan-wordpress": "^1.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GatoGraphQL\\TestingSchema\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GatoGraphQL\\TestingSchema\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "phpstan": "phpstan analyse -l 8 src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.11-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "replace": {
+        "getpop/cache-control": "^0.11",
+        "getpop/component-model": "^0.11",
+        "getpop/componentrouting": "^0.11",
+        "getpop/definitions": "^0.11",
+        "getpop/engine": "^0.11",
+        "getpop/loosecontracts": "^0.11",
+        "getpop/root": "^0.11"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

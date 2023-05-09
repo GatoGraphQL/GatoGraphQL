@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GatoGraphQL\TestingSchema\ModuleResolvers\:
+        resource: '../src/ModuleResolvers/*'

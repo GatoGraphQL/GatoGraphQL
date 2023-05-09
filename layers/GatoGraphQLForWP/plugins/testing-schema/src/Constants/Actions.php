@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Constants;
+namespace GatoGraphQL\TestingSchema\Constants;
 
 class Actions
 {

@@ -121,8 +121,9 @@
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/taxonomymeta": "${workspaceFolder}/layers/WPSchema/packages/taxonomymeta",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/usermeta": "${workspaceFolder}/layers/WPSchema/packages/usermeta",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/users": "${workspaceFolder}/layers/WPSchema/packages/users",
-              "/app/wordpress/wp-content/plugins/gato-graphql": "${workspaceFolder}/layers/GraphQLAPIForWP/plugins/gato-graphql-for-wp",
-              "/app/wordpress/wp-content/plugins/gato-graphql-testing": "${workspaceFolder}/layers/GraphQLAPIForWP/phpunit-plugins/gato-graphql-for-wp-testing",
+              "/app/wordpress/wp-content/plugins/gato-graphql": "${workspaceFolder}/layers/GraphQLAPIForWP/plugins/gato-graphql",
+              "/app/wordpress/wp-content/plugins/gato-graphql-testing-schema": "${workspaceFolder}/layers/GraphQLAPIForWP/phpunit-plugins/gato-graphql-testing-schema",
+              "/app/wordpress/wp-content/plugins/gato-graphql-testing": "${workspaceFolder}/layers/GraphQLAPIForWP/phpunit-plugins/gato-graphql-testing",
 
               
               "/app/wordpress/API/": "${workspaceFolder}/layers/API/",
