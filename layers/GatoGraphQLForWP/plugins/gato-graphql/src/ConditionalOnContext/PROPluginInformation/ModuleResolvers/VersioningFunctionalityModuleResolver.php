@@ -83,10 +83,7 @@ class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleR
     public function isEnabledByDefault(string $module): bool
     {
         return match ($module) {
-            /**
-             * Enable for DEV to execute tests
-             */
-            self::FIELD_DEPRECATION => RootEnvironment::isApplicationEnvironmentDev(),
+            self::FIELD_DEPRECATION => false,
             default => parent::isEnabledByDefault($module),
         };
     }
