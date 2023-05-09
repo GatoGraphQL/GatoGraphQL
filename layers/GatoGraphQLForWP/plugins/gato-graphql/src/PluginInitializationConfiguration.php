@@ -604,148 +604,161 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      */
     protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
     {
+        /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
+        $moduleClassConfiguration = [
+            ComponentModelModule::class => [
+                // Show exception messages in the admin endpoints
+                ComponentModelEnvironment::SEND_EXCEPTION_ERROR_MESSAGES => true,
+                ComponentModelEnvironment::SEND_EXCEPTION_TRACES => true,
+            ]
+        ];
         if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE) {
             /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
-            return [
-                ComponentModelModule::class => [
-                    // Enable the "self" fields
-                    ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
-                    // Enable the “sensitive” data
-                    ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
-                ],
-                GraphQLServerModule::class => [
-                    // Enable Nested mutations
-                    GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => true,
-                ],
-                EngineModule::class => [
-                    // Do not disable redundant mutation fields in the root type
-                    EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS => false,
-                ],
+            return array_merge_recursive(
+                $moduleClassConfiguration,
+                [
+                    ComponentModelModule::class => [
+                        // Enable the "self" fields
+                        ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
+                        // Enable the “sensitive” data
+                        ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
+                    ],
+                    GraphQLServerModule::class => [
+                        // Enable Nested mutations
+                        GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => true,
+                    ],
+                    EngineModule::class => [
+                        // Do not disable redundant mutation fields in the root type
+                        EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS => false,
+                    ],
 
-                // Do not use the Payloadable types for mutations
-                \PoPCMSSchema\CommentMutations\Module::class => [
-                    \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => false,
-                ],
-                \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => false,
-                ],
-                \PoPCMSSchema\CustomPostMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => false,
-                ],
-                \PoPCMSSchema\CustomPostTagMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => false,
-                ],
-                \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => false,
-                ],
-                \PoPCMSSchema\UserStateMutations\Module::class => [
-                    \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => false,
-                ],
-            ];
+                    // Do not use the Payloadable types for mutations
+                    \PoPCMSSchema\CommentMutations\Module::class => [
+                        \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\CustomPostMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\CustomPostTagMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => false,
+                    ],
+                    \PoPCMSSchema\UserStateMutations\Module::class => [
+                        \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => false,
+                    ],
+                ]
+            );
         }
 
         if ($endpointGroup === AdminGraphQLEndpointGroups::BLOCK_EDITOR) {
             /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
-            return [
-                ComponentModelModule::class => [
-                    // Enable the "self" fields
-                    ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
-                    // Enable the “sensitive” data
-                    ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
-                ],
-                GraphQLServerModule::class => [
-                    // Enable Nested mutations
-                    GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => false,
-                ],
+            return array_merge_recursive(
+                $moduleClassConfiguration,
+                [
+                    ComponentModelModule::class => [
+                        // Enable the "self" fields
+                        ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
+                        // Enable the “sensitive” data
+                        ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
+                    ],
+                    GraphQLServerModule::class => [
+                        // Enable Nested mutations
+                        GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => false,
+                    ],
 
-                /**
-                 * Allow access to all custom post types and taxonomies,
-                 * and also set no limit for them.
-                 *
-                 * Notice that, because we haven't registered this plugin's CPTs yet,
-                 * the list here will not contain them. Same with taxonomies.
-                 */
-                CustomPostsModule::class => [
-                    CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES => get_post_types(),
-                    CustomPostsEnvironment::CUSTOMPOST_LIST_MAX_LIMIT => -1,
-                ],
-                TagsModule::class => [
-                    TagsEnvironment::QUERYABLE_TAG_TAXONOMIES => get_taxonomies(['hierarchical' => false]),
-                    TagsEnvironment::TAG_LIST_MAX_LIMIT => -1,
-                ],
-                CategoriesModule::class => [
-                    CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES => get_taxonomies(['hierarchical' => true]),
-                    CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT => -1,
-                ],
+                    /**
+                     * Allow access to all custom post types and taxonomies,
+                     * and also set no limit for them.
+                     *
+                     * Notice that, because we haven't registered this plugin's CPTs yet,
+                     * the list here will not contain them. Same with taxonomies.
+                     */
+                    CustomPostsModule::class => [
+                        CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES => get_post_types(),
+                        CustomPostsEnvironment::CUSTOMPOST_LIST_MAX_LIMIT => -1,
+                    ],
+                    TagsModule::class => [
+                        TagsEnvironment::QUERYABLE_TAG_TAXONOMIES => get_taxonomies(['hierarchical' => false]),
+                        TagsEnvironment::TAG_LIST_MAX_LIMIT => -1,
+                    ],
+                    CategoriesModule::class => [
+                        CategoriesEnvironment::QUERYABLE_CATEGORY_TAXONOMIES => get_taxonomies(['hierarchical' => true]),
+                        CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT => -1,
+                    ],
 
-                // No limit in retrieving posts/users/etc
-                PostsModule::class => [
-                    PostsEnvironment::POST_LIST_MAX_LIMIT => -1,
-                ],
-                UsersModule::class => [
-                    UsersEnvironment::USER_LIST_MAX_LIMIT => -1,
-                ],
-                CommentsModule::class => [
-                    CommentsEnvironment::COMMENT_LIST_MAX_LIMIT => -1,
-                ],
-                MediaModule::class => [
-                    MediaEnvironment::MEDIA_LIST_MAX_LIMIT => -1,
-                ],
-                MenusModule::class => [
-                    MenusEnvironment::MENU_LIST_MAX_LIMIT => -1,
-                ],
-                PagesModule::class => [
-                    PagesEnvironment::PAGE_LIST_MAX_LIMIT => -1,
-                ],
+                    // No limit in retrieving posts/users/etc
+                    PostsModule::class => [
+                        PostsEnvironment::POST_LIST_MAX_LIMIT => -1,
+                    ],
+                    UsersModule::class => [
+                        UsersEnvironment::USER_LIST_MAX_LIMIT => -1,
+                    ],
+                    CommentsModule::class => [
+                        CommentsEnvironment::COMMENT_LIST_MAX_LIMIT => -1,
+                    ],
+                    MediaModule::class => [
+                        MediaEnvironment::MEDIA_LIST_MAX_LIMIT => -1,
+                    ],
+                    MenusModule::class => [
+                        MenusEnvironment::MENU_LIST_MAX_LIMIT => -1,
+                    ],
+                    PagesModule::class => [
+                        PagesEnvironment::PAGE_LIST_MAX_LIMIT => -1,
+                    ],
 
-                // Allow access to all entries for Root.optionValue
-                SettingsModule::class => [
-                    SettingsEnvironment::SETTINGS_ENTRIES => [],
-                    SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY,
-                ],
+                    // Allow access to all entries for Root.optionValue
+                    SettingsModule::class => [
+                        SettingsEnvironment::SETTINGS_ENTRIES => [],
+                        SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY,
+                    ],
 
-                // Allow access to all meta values
-                CustomPostMetaModule::class => [
-                    CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES => [],
-                    CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR => Behaviors::DENY,
-                ],
-                UserMetaModule::class => [
-                    UserMetaEnvironment::USER_META_ENTRIES => [],
-                    UserMetaEnvironment::USER_META_BEHAVIOR => Behaviors::DENY,
-                ],
-                CommentMetaModule::class => [
-                    CommentMetaEnvironment::COMMENT_META_ENTRIES => [],
-                    CommentMetaEnvironment::COMMENT_META_BEHAVIOR => Behaviors::DENY,
-                ],
-                TaxonomyMetaModule::class => [
-                    TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES => [],
-                    TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
-                ],
+                    // Allow access to all meta values
+                    CustomPostMetaModule::class => [
+                        CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES => [],
+                        CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR => Behaviors::DENY,
+                    ],
+                    UserMetaModule::class => [
+                        UserMetaEnvironment::USER_META_ENTRIES => [],
+                        UserMetaEnvironment::USER_META_BEHAVIOR => Behaviors::DENY,
+                    ],
+                    CommentMetaModule::class => [
+                        CommentMetaEnvironment::COMMENT_META_ENTRIES => [],
+                        CommentMetaEnvironment::COMMENT_META_BEHAVIOR => Behaviors::DENY,
+                    ],
+                    TaxonomyMetaModule::class => [
+                        TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES => [],
+                        TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
+                    ],
 
-                // Do use the Payloadable types for mutations
-                \PoPCMSSchema\CommentMutations\Module::class => [
-                    \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => true,
-                ],
-                \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => true,
-                ],
-                \PoPCMSSchema\CustomPostMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => true,
-                ],
-                \PoPCMSSchema\CustomPostTagMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => true,
-                ],
-                \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
-                    \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => true,
-                ],
-                \PoPCMSSchema\UserStateMutations\Module::class => [
-                    \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => true,
-                ],
-            ];
+                    // Do use the Payloadable types for mutations
+                    \PoPCMSSchema\CommentMutations\Module::class => [
+                        \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => true,
+                    ],
+                    \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => true,
+                    ],
+                    \PoPCMSSchema\CustomPostMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => true,
+                    ],
+                    \PoPCMSSchema\CustomPostTagMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => true,
+                    ],
+                    \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
+                        \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => true,
+                    ],
+                    \PoPCMSSchema\UserStateMutations\Module::class => [
+                        \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => true,
+                    ],
+                ]
+            );
         }
 
-        /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
-        return [];
+        return $moduleClassConfiguration;
     }
 
     /**
