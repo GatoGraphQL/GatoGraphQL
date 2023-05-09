@@ -11,7 +11,7 @@ class ContainerCacheConfigurationManager extends AbstractCacheConfigurationManag
      */
     protected function getUniqueTimestamp(): string
     {
-        return $this->getUserSettingsManager()->getContainerTimestamp();
+        return $this->getUserSettingsManager()->getContainerUniqueTimestamp();
     }
 
     /**

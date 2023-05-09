@@ -150,7 +150,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
     /**
      * The timestamp from when last saving settings/modules to the DB
      */
-    abstract protected function getTimestamp(): int;
+    abstract protected function getUniqueTimestamp(): string;
 
     /**
      * Cache under the plugin's cache/ subfolder

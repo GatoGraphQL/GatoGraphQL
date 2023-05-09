@@ -13,7 +13,7 @@ class OperationalCacheConfigurationManager extends AbstractCacheConfigurationMan
      */
     protected function getUniqueTimestamp(): string
     {
-        return $this->getUserSettingsManager()->getOperationalTimestamp();
+        return $this->getUserSettingsManager()->getOperationalUniqueTimestamp();
     }
 
     /**

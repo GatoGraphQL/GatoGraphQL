@@ -50,7 +50,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * Static timestamp, reflecting when the service container has been regenerated.
      * Should change not so often
      */
-    public function getContainerTimestamp(): int
+    public function getContainerUniqueTimestamp(): string
     {
         return $this->getUniqueTimestamp(self::TIMESTAMP_CONTAINER);
     }
@@ -58,7 +58,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * Dynamic timestamp, reflecting when new entities modifying the schema are
      * added to the DB. Can change often
      */
-    public function getOperationalTimestamp(): int
+    public function getOperationalUniqueTimestamp(): string
     {
         return $this->getUniqueTimestamp(self::TIMESTAMP_OPERATIONAL);
     }
@@ -86,7 +86,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     public function storeOperationalTimestamp(): void
     {
         $timestamps = [
-            self::TIMESTAMP_CONTAINER => $this->getContainerTimestamp(),
+            self::TIMESTAMP_CONTAINER => $this->getContainerUniqueTimestamp(),
             self::TIMESTAMP_OPERATIONAL => time(),
         ];
         \update_option(Options::TIMESTAMPS, $timestamps);
