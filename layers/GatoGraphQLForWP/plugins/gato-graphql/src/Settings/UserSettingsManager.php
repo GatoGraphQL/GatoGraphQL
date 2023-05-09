@@ -43,7 +43,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     protected function getOptionUniqueTimestamp(string $key): string
     {
-        $timestamps = \get_option(Options::TIMESTAMPS, [$key => $this->getUniqueTimestamp()]);
+        $timestamps = \get_option(Options::TIMESTAMPS, [$key => $this->getUniqueIdentifier()]);
         return $timestamps[$key];
     }
     /**
@@ -51,7 +51,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * as to avoid a bug when 2 requests with different schema
      * configuration come in at the same time (i.e. with same `time()`).
      */
-    protected function getUniqueTimestamp(): string
+    protected function getUniqueIdentifier(): string
     {
         return \uniqid();
     }
@@ -80,7 +80,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeContainerTimestamp(): void
     {
-        $time = $this->getUniqueTimestamp();
+        $time = $this->getUniqueIdentifier();
         $timestamps = [
             self::TIMESTAMP_CONTAINER => $time,
             self::TIMESTAMP_OPERATIONAL => $time,
@@ -96,7 +96,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $timestamps = [
             self::TIMESTAMP_CONTAINER => $this->getContainerUniqueTimestamp(),
-            self::TIMESTAMP_OPERATIONAL => $this->getUniqueTimestamp(),
+            self::TIMESTAMP_OPERATIONAL => $this->getUniqueIdentifier(),
         ];
         \update_option(Options::TIMESTAMPS, $timestamps);
     }
