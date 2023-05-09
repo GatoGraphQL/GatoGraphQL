@@ -20,7 +20,6 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
     protected function getModuleClasses(): array
     {
         return [
-            \PoPSchema\AppStateFields\Module::class,
         ];
     }
 }
