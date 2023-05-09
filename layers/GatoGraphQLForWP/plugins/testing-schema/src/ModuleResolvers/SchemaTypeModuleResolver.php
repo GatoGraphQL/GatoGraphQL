@@ -12,9 +12,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolverTrait;
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
     use ModuleResolverTrait;
-    use SchemaTypeModuleResolverTrait {
-        SchemaTypeModuleResolverTrait::getPriority as getUpstreamPriority;
-    }
+    use SchemaTypeModuleResolverTrait;
 
     public final const SCHEMA_TESTING = GatoGraphQLExtension::NAMESPACE . '\schema-testing';
 
@@ -40,15 +38,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         ];
     }
 
-    /**
-     * The priority to display the modules from this resolver in the Modules page.
-     * The higher the number, the earlier it shows
-     */
-    public function getPriority(): int
-    {
-        return $this->getUpstreamPriority() - 10;
-    }
-
     public function getName(string $module): string
     {
         return match ($module) {
@@ -61,6 +50,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::SCHEMA_TESTING => \__('Addition of elements to the GraphQL schema to test the Gato GraphQL plugin', 'gato-graphql-testing-schema'),
+            default => parent::getDescription($module),
+        };
+    }
+
+    public function isHidden(string $module): bool
+    {
+        return match ($module) {
+            self::SCHEMA_TESTING => true,
             default => parent::getDescription($module),
         };
     }
