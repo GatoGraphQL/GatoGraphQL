@@ -53,7 +53,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     protected function getUniqueTimestamp(): string
     {
-        return (string)\time() . '_' . (string)\rand(1, 999999999);
+        return \uniqid();
     }
     /**
      * Static timestamp, reflecting when the service container has been regenerated.
