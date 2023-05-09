@@ -20,8 +20,7 @@
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.6",
-        "szepeviktor/phpstan-wordpress": "^1.0",
-        "wpackagist-plugin/testing-schema": "^6.1"
+        "szepeviktor/phpstan-wordpress": "^1.0"
     },
     "repositories": [
         {
