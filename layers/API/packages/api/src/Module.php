@@ -49,6 +49,8 @@ class Module extends AbstractModule
     public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration
     ): void {
+        parent::customizeModuleClassConfiguration($moduleClassConfiguration);
+        
         // If passing ?use_namespace=1, set it on the configuration
         $useNamespacing = Request::mustNamespaceTypes();
         if ($useNamespacing !== null) {
