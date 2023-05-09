@@ -7,7 +7,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\Constants\Actions as EngineActions;
+use GatoGraphQL\TestingSchema\Constants\Actions as TestingSchemaActions;
 
 trait InternalGraphQLServerWebserverRequestTestTrait
 {
@@ -40,7 +40,7 @@ trait InternalGraphQLServerWebserverRequestTestTrait
             'actions' => array_merge(
                 [
                     Actions::TEST_INTERNAL_GRAPHQL_SERVER,
-                    EngineActions::ENABLE_APP_STATE_FIELDS,
+                    TestingSchemaActions::ENABLE_APP_STATE_FIELDS,
                 ],
                 $withDeepNested
                     ? [
