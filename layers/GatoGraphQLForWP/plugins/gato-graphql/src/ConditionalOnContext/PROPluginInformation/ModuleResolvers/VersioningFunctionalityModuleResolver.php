@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverTrait;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\VersioningFunctionalityModuleResolverTrait;
 use GatoGraphQL\GatoGraphQL\Plugin;
-use PoP\Root\Environment as RootEnvironment;
 
 class VersioningFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {

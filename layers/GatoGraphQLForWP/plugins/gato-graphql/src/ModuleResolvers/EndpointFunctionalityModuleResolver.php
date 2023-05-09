@@ -22,7 +22,6 @@ use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\App;
-use PoP\Root\Environment as RootEnvironment;
 use WP_Post;
 
 class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
