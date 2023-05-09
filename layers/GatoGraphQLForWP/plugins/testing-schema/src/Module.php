@@ -6,7 +6,6 @@ namespace GatoGraphQL\TestingSchema;
 
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractExtensionModule;
 use GatoGraphQL\TestingSchema\Constants\Actions;
-use PoP\Root\App;
 use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractExtensionModule
@@ -38,7 +37,7 @@ class Module extends AbstractExtensionModule
             return;
         }
         /** @var string[] $actions */
-        if (in_array(Actions::ENABLE_APP_STATE_FIELDS, $actions)) {            
+        if (in_array(Actions::ENABLE_APP_STATE_FIELDS, $actions)) {
             $moduleClassConfiguration[\PoP\Engine\Module::class][\PoP\Engine\Environment::ENABLE_QUERYING_APP_STATE_FIELDS] = true;
         }
     }

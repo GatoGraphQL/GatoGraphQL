@@ -50,7 +50,7 @@ class Module extends AbstractModule
         array &$moduleClassConfiguration
     ): void {
         parent::customizeModuleClassConfiguration($moduleClassConfiguration);
-        
+
         // If passing ?use_namespace=1, set it on the configuration
         $useNamespacing = Request::mustNamespaceTypes();
         if ($useNamespacing !== null) {
