@@ -47,10 +47,15 @@ class Module extends AbstractModule
     public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration
     ): void {
-        // The mutation scheme can be set by param ?mutation_scheme=..., with values:
-        // - "standard" => Use QueryRoot and MutationRoot
-        // - "nested" => Use Root, and nested mutations with redundant root fields
-        // - "lean_nested" => Use Root, and nested mutations without redundant root fields
+        parent::customizeModuleClassConfiguration($moduleClassConfiguration);
+
+        /**
+         * The mutation scheme can be set by param ?mutation_scheme=..., with values:
+         *
+         *   - "standard" => Use QueryRoot and MutationRoot
+         *   - "nested" => Use Root, and nested mutations with redundant root fields
+         *   - "lean_nested" => Use Root, and nested mutations without redundant root fields
+         */
         $mutationScheme = Request::getMutationScheme();
         if ($mutationScheme !== null) {
             $moduleClassConfiguration[self::class][Environment::ENABLE_NESTED_MUTATIONS] = $mutationScheme !== MutationSchemes::STANDARD;
