@@ -47,6 +47,15 @@ class PluginDataSource
                     'after_downgrade_code' => 'ci/downgrade/after_downgrade_code.sh',
                 ],
             ],
+            // Gato GraphQL - Testing Schema <= To run integration tests
+            [
+                'path' => 'layers/GatoGraphQLForWP/plugins/testing-schema',
+                'zip_file' => 'gato-graphql-testing-schema',
+                'main_file' => 'gato-graphql-testing-schema.php',
+                'dist_repo_organization' => 'GatoGraphQL',
+                'dist_repo_name' => 'gato-graphql-testing-schema-dist',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing-schema/rector.php',
+            ],
             // Gato GraphQL - Testing <= To run integration tests with InstaWP
             [
                 'path' => 'layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing',
