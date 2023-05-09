@@ -58,7 +58,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::SCHEMA_TESTING => true,
-            default => parent::getDescription($module),
+            default => parent::isHidden($module),
         };
     }
 }
