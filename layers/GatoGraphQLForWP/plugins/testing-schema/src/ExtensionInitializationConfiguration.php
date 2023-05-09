@@ -23,6 +23,7 @@ class ExtensionInitializationConfiguration extends AbstractExtensionInitializati
     {
         return [
             SchemaTypeModuleResolver::SCHEMA_TESTING => [
+                \PoPSchema\AppStateFields\Module::class,
             ],
         ];
     }
