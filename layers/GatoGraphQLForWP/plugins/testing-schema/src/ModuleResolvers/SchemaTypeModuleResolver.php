@@ -61,4 +61,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             default => parent::isHidden($module),
         };
     }
+
+    public function hasDocumentation(string $module): bool
+    {
+        return match ($module) {
+            self::SCHEMA_TESTING => false,
+            default => parent::hasDocumentation($module),
+        };
+    }
 }
