@@ -120,7 +120,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
         // (Needed for development) Don't share cache among plugin versions
         $timestampPrefix = '_v' . $this->getMainPluginAndExtensionsTimestamp();
         // The timestamp from when last saving settings/modules to the DB
-        $timestampPrefix .= '_' . $this->getTimestamp();
+        $timestampPrefix .= '_' . $this->getUniqueTimestamp();
         return $timestampPrefix;
     }
 

@@ -9,7 +9,7 @@ class ContainerCacheConfigurationManager extends AbstractCacheConfigurationManag
     /**
      * The timestamp from when last saving settings/modules to the DB
      */
-    protected function getTimestamp(): int
+    protected function getUniqueTimestamp(): string
     {
         return $this->getUserSettingsManager()->getContainerTimestamp();
     }
