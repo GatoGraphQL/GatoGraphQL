@@ -1,5 +1,5 @@
 query GetTrashedPostWithUniqueSlug(
-    $postSlug = String!
+    $postSlug: String!
 ) {
     post(by:{slug: $postSlug}) {
         slug
