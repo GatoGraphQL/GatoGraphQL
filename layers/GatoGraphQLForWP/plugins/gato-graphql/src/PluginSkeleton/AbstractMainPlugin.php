@@ -595,6 +595,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ?int $executeAsUserID = null,
             ): void {
                 $this->maybeLogUserInForWPCronExecution($executeAsUserID);
+
                 // No need to print the response
                 GatoGraphQL::executeQuery(
                     $query,
@@ -605,7 +606,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             10,
             4
         );
-        
+
         add_action(
             'gato_graphql__execute_persisted_query',
             function (
@@ -615,6 +616,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ?int $executeAsUserID = null,
             ): void {
                 $this->maybeLogUserInForWPCronExecution($executeAsUserID);
+                
                 // No need to print the response
                 GatoGraphQL::executePersistedQuery(
                     $persistedQueryIDOrSlug,
