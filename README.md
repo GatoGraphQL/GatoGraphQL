@@ -2,10 +2,7 @@
 
 PoP is a monorepo containing several projects.
 
-![Unit tests](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml/badge.svg)
-<!-- @todo Re-enable executing integration tests for PROD in CI -->
-<!-- @see https://github.com/leoloso/PoP/issues/2253 -->
-<!-- ![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg) -->
+![Unit tests](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/leoloso/PoP/issues/2253 --><!-- ![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg) -->
 ![Downgrade PHP tests](https://github.com/leoloso/PoP/actions/workflows/downgrade_php_tests.yml/badge.svg)
 ![Scoping tests](https://github.com/leoloso/PoP/actions/workflows/scoping_tests.yml/badge.svg)
 ![Generate plugins](https://github.com/leoloso/PoP/actions/workflows/generate_plugins.yml/badge.svg)
