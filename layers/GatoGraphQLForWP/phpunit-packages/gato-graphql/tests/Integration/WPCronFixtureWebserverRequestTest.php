@@ -37,10 +37,7 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
 
         $uniquePostSlugID = 888888888;
         $variables['postSlug'] = str_replace(
-            [
-                ' ',
-                ':',
-            ],
+            [' ', ':'],
             '-',
             sprintf(
                 'Testing wp-cron: %s',
