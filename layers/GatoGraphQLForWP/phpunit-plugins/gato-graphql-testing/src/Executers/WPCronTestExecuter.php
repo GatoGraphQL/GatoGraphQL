@@ -52,6 +52,22 @@ class WPCronTestExecuter
 
     protected function executeWPCron(): void
     {
-        
+        if (!\wp_next_scheduled('gato_graphql__execute_query')) {
+            \wp_schedule_event(
+                time(),
+                'weekly',
+                'gato_graphql__execute_query',
+                [
+                    <<<GRAPHQL
+                    {
+                        id
+                    }
+                    GRAPHQL,
+                ]
+            );
+        } else {
+            $timestamp = \wp_next_scheduled( 'gato_graphql__execute_query');
+            \wp_unschedule_event($timestamp, 'gato_graphql__execute_query');
+        }
     }
 }
