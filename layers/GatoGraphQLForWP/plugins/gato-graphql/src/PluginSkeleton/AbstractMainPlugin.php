@@ -576,7 +576,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Register public-facing hooks, using string for the
+     * Register wp-cron hooks, using string for the
      * hook names (instead of consts).
      */
     protected function setupWPCronHooks(): void
@@ -601,7 +601,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     $variables,
                     $operationName
                 );
-                
+
                 $this->maybeLogUserOutForWPCronExecution($executeAsUserID);
             },
             10,
@@ -632,6 +632,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
     }
 
+    /**
+     * When running wp-cron there is no user logged-in.
+     * Offer the possibility to log a user, in particular
+     * to be able to execute mutations.
+     */
     protected function maybeLogUserInForWPCronExecution(?int $userID): void
     {
         if ($userID === null) {
@@ -640,6 +645,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_set_current_user($userID);
     }
 
+    /**
+     * If the user was logged-in, then also log it out
+     * for symmetry and to keep things as they were.
+     */
     protected function maybeLogUserOutForWPCronExecution(?int $userID): void
     {
         if ($userID === null) {
