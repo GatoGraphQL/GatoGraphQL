@@ -1,5 +1,5 @@
 {
-    "name": "getpop-pro/guzzle-http",
+    "name": "getpop/guzzle-http",
     "conflict": {
         "getpop/componentrouting": "<0.10.2",
         "getpop/loosecontracts": "<0.10.2",
