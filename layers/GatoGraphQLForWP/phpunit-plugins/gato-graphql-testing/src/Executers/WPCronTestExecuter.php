@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Placeholders;
 use PoP\Root\Constants\HookNames;
 use RuntimeException;
 
@@ -75,7 +76,7 @@ class WPCronTestExecuter
         }
 
         $postTitle = sprintf(
-            'Testing wp-cron: %s',
+            Placeholders::WP_CRON_UNIQUE_POST_TITLE,
             $uniquePostSlugID
         );
         \wp_schedule_event(

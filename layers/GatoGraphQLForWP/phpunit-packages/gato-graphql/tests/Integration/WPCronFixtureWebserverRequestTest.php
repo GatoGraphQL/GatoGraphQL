@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Placeholders;
+
 /**
  * Test WP-Cron.
  *
@@ -50,7 +52,7 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
             [' ', ':'],
             '-',
             sprintf(
-                'Testing wp-cron: %s',
+                Placeholders::WP_CRON_UNIQUE_POST_TITLE,
                 self::$timestamp
             ),
         );
