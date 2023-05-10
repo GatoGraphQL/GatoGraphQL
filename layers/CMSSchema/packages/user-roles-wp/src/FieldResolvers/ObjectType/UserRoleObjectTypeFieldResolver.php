@@ -108,7 +108,9 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
             case 'capabilities':
                 /** @var WP_Role */
                 $userRole = $object;
-                return array_keys(array_filter($userRole->capabilities));
+                $capabilities = array_keys(array_filter($userRole->capabilities));
+                sort($capabilities);
+                return $capabilities;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
