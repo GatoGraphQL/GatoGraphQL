@@ -99,6 +99,8 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $options[RequestOptions::HTTP_ERRORS] = false;
         }
 
+        $options = $this->customizeRequestOptions($options);
+
         $response = $client->request(
             $method,
             $endpointURL,
@@ -176,6 +178,15 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     protected function getExpectedResponseStatusCode(): int
     {
         return 200;
+    }
+
+    /**
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
+     */
+    protected function customizeRequestOptions(array $options): array
+    {
+        return $options;
     }
 
     /**
