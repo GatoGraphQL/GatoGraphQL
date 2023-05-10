@@ -21,7 +21,7 @@ composer require getpop/guzzle-http
 
 ## Development
 
-The source code is hosted on the [PRO monorepo for PoP](https://github.com/leoloso/PRO), under [`Engine/packages/guzzle-http`](https://github.com/leoloso/PRO/tree/master/layers/Engine/packages/guzzle-http).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/guzzle-http`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/guzzle-http).
 
 ## Usage
 
