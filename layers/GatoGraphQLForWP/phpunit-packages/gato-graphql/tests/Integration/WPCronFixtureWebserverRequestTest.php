@@ -39,7 +39,7 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
     }
 
     /**
-     * Enable the wp-cront testing via the endpoint
+     * Enable the wp-cron testing via the endpoint
      */
     protected function getFixtureCustomEndpoint(string $dataName): ?string
     {
@@ -48,19 +48,14 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
             return 'wp-cron.php?doing_wp_cron';
         }
 
-        if (str_ends_with($dataName, ':0')
-            || str_ends_with($dataName, ':1')
-        ) {
-            $this->maybeInitTimestamp();
-            return $this->getWPCronEndpoint(
-                $this->getEndpoint(),
-                [
-                    'timestamp' => $this->timestamp,
-                ]
-            );
-        }
-
-        return parent::getFixtureCustomEndpoint($dataName);
+        // For the other tests, schedule/unschedule the wp-cron event
+        $this->maybeInitTimestamp();
+        return $this->getWPCronEndpoint(
+            $this->getEndpoint(),
+            [
+                'timestamp' => $this->timestamp,
+            ]
+        );
     }
 
     /**
