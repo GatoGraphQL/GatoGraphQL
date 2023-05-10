@@ -54,8 +54,7 @@ class WPCronTestExecuter
             return;
         }
 
-        $timestamp = App::getState(Params::TIMESTAMP);
-        if ($timestamp === null) {
+        if (!App::hasState(Params::TIMESTAMP)) {
             throw new RuntimeException(
                 sprintf(
                     \__('When testing wp-cron, must provide param "%s"'),
@@ -64,7 +63,8 @@ class WPCronTestExecuter
             );
         }
 
-        $this->executeWPCron((int)$timestamp);
+        $timestamp = (int)App::getState(Params::TIMESTAMP);
+        $this->executeWPCron($timestamp);
     }
 
     protected function executeWPCron(int $uniquePostSlugID): void
