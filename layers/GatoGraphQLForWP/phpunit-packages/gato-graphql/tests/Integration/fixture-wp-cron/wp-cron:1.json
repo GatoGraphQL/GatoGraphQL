@@ -1,5 +1,7 @@
 {
     "data": {
-        "post": null
+        "post": {
+            "status": "trash"
+        }
     }
 }

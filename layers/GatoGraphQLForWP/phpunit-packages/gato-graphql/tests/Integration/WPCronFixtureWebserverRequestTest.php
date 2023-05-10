@@ -44,8 +44,13 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
      */
     protected function getFixtureCustomEndpoint(string $dataName): ?string
     {
+        // Trigger the execution of wp-cron!
+        if ($dataName === 'wp-cron') {
+            return 'wp-cron.php?doing_wp_cron';
+        }
+
         if (str_ends_with($dataName, ':0')
-            || str_ends_with($dataName, ':2')
+            || str_ends_with($dataName, ':1')
         ) {
             $this->maybeInitTimestamp();
             return $this->getWPCronEndpoint(
@@ -55,6 +60,7 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
                 ]
             );
         }
+
         return parent::getFixtureCustomEndpoint($dataName);
     }
 
@@ -69,26 +75,24 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
         return $this->reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
     }
 
-    /**
-     * Wait a few seconds to make sure wp-cron has been executed.
-     * 
-     * @param array<string,mixed> $options
-     * @return array<string,mixed>
-     */
-    protected function customizeRequestOptions(array $options): array
-    {
-        $options = parent::customizeRequestOptions($options);
+    // /**
+    //  * Wait a few seconds to make sure wp-cron has been executed.
+    //  * 
+    //  * @param array<string,mixed> $options
+    //  * @return array<string,mixed>
+    //  */
+    // protected function customizeRequestOptions(array $options): array
+    // {
+    //     $options = parent::customizeRequestOptions($options);
 
-        if ($this->getDataName() === 'wp-cron') {
-            $options[RequestOptions::DELAY] = 2000;
-        } elseif ($this->getDataName() === 'wp-cron:1') {
-            $options[RequestOptions::DELAY] = 2000;
-        } elseif ($this->getDataName() === 'wp-cron:2') {
-            $options[RequestOptions::DELAY] = 2000;
-        }
+    //     if ($this->getDataName() === 'wp-cron') {
+    //         $options[RequestOptions::DELAY] = 2000;
+    //     } elseif ($this->getDataName() === 'wp-cron:1') {
+    //         $options[RequestOptions::DELAY] = 2000;
+    //     }
 
-        return $options;
-    }
+    //     return $options;
+    // }
 
     /**
      * @return array<string,mixed>
