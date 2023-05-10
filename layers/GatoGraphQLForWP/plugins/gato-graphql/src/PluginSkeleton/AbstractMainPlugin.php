@@ -636,6 +636,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * When running wp-cron there is no user logged-in.
      * Offer the possibility to log a user, in particular
      * to be able to execute mutations.
+     *
+     * For instance, pass these args to the wp-cron entry
+     * to execute a mutation as the admin user (with ID '1'):
+     *
+     *   ```
+     *   ["mutation { ... }",[],null,1]
+     *   ```
      */
     protected function maybeLogUserInForWPCronExecution(?int $userID): void
     {
