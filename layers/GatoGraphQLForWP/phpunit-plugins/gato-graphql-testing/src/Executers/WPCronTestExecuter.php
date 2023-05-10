@@ -67,47 +67,60 @@ class WPCronTestExecuter
         $this->executeWPCron((int)$timestamp);
     }
 
+    /**
+     * The first execution (wp-cron.json) sets-up the wp-cron execution.
+     * The second execution (wp-cron:1.json) removes it.
+     */
     protected function executeWPCron(int $uniquePostSlugID): void
     {
-        $timestamp = \wp_next_scheduled('gato_graphql__execute_query');
+        $args = $this->getWPCronArgs($uniquePostSlugID);
+        $timestamp = \wp_next_scheduled('gato_graphql__execute_query', $args);
         if ($timestamp !== false) {
-            \wp_unschedule_event($timestamp, 'gato_graphql__execute_query');
+            \wp_unschedule_event($timestamp, 'gato_graphql__execute_query', $args);
             return;
         }
 
-        $postTitle = sprintf(
-            Placeholders::WP_CRON_UNIQUE_POST_TITLE,
-            $uniquePostSlugID
-        );
         \wp_schedule_event(
             time(),
             'weekly',
             'gato_graphql__execute_query',
-            [
-                <<<GRAPHQL
-                mutation CreateTrashedPostWithUniqueSlug(
-                    \$postTitle: String!
-                ) {
-                    createPost(input:{
-                        title: \$postTitle
-                        status: trash
-                    }) {
-                        status
-                        errors {
-                            __typename
-                            ...on ErrorPayload {
-                                message
-                            }
+            $args
+        );
+    }
+
+    /**
+     * @return array<int,mixed>
+     */
+    protected function getWPCronArgs(int $uniquePostSlugID): array
+    {
+        $postTitle = sprintf(
+            Placeholders::WP_CRON_UNIQUE_POST_TITLE,
+            $uniquePostSlugID
+        );
+        return [
+            <<<GRAPHQL
+            mutation CreateTrashedPostWithUniqueSlug(
+                \$postTitle: String!
+            ) {
+                createPost(input:{
+                    title: \$postTitle
+                    status: trash
+                }) {
+                    status
+                    errors {
+                        __typename
+                        ...on ErrorPayload {
+                            message
                         }
                     }
                 }
-                GRAPHQL,
-                [
-                    'postTitle' => $postTitle
-                ],
-                'CreateTrashedPostWithUniqueSlug',
-                1 // This is the admin user's ID
-            ]
-        );
+            }
+            GRAPHQL,
+            [
+                'postTitle' => $postTitle
+            ],
+            'CreateTrashedPostWithUniqueSlug',
+            1 // This is the admin user's ID
+        ];
     }
 }
