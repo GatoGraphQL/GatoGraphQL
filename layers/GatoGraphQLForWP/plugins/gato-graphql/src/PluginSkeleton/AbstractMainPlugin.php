@@ -587,9 +587,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 string $query,
                 array $variables = [],
                 ?string $operationName = null,
-                ?int $userID = null,
+                ?int $executeAsUserID = null,
             ): void {
-                $this->maybeLogUserInForWPCronExecution($userID);
+                $this->maybeLogUserInForWPCronExecution($executeAsUserID);
                 // No need to print the response
                 GatoGraphQL::executeQuery(
                     $query,
@@ -606,9 +606,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 string|int $persistedQueryIDOrSlug,
                 array $variables = [],
                 ?string $operationName = null,
-                ?int $userID = null,
+                ?int $executeAsUserID = null,
             ): void {
-                $this->maybeLogUserInForWPCronExecution($userID);
+                $this->maybeLogUserInForWPCronExecution($executeAsUserID);
                 // No need to print the response
                 GatoGraphQL::executePersistedQuery(
                     $persistedQueryIDOrSlug,
