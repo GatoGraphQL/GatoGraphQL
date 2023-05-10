@@ -20,7 +20,7 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
     use WPCronWebserverRequestTestTrait;
 
     private ?int $timestamp = null;
-    
+
     public function maybeInitTimestamp(): void
     {
         $this->timestamp ??= time();
