@@ -1,0 +1,11 @@
+query GetTrashedPostWithUniqueSlug(
+    $postSlug: String!
+) {
+    post(
+        by: { slug: $postSlug }
+        status: trash
+    ) {
+        # slug
+        status
+    }
+}
