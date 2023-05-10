@@ -65,13 +65,21 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
     }
 
     /**
-     * Make sure "wp-cron:0" executes first
-     *
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
     protected function customizeProviderEndpointEntries(array $providerItems): array
     {
+        /**
+         * Do not execute the test against "wp-cron.json",
+         * as it merely triggers the execution of wp-cron
+         */
+        // expectedContentType
+        $providerItems['wp-cron'][0] = 'text/html';
+        // expectedResponseBody. null => no exection of test
+        $providerItems['wp-cron'][1] = null;
+
+        // Make sure "wp-cron:0" executes first
         return $this->reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
     }
 
