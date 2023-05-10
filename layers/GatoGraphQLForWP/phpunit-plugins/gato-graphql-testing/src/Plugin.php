@@ -7,12 +7,13 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GatoGraphQLAdminEndpointsTestExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GraphQLServerNotReadyInternalGraphQLServerTestExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\InternalGraphQLServerTestExecuter;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\WPCronTestExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\AddDummyCustomAdminEndpointHook;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Settings\Options;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
-use WP_REST_Response;
 
+use WP_REST_Response;
 use function add_action;
 use function delete_option;
 use function flush_rewrite_rules;
@@ -38,11 +39,12 @@ class Plugin
         new AddDummyCustomAdminEndpointHook();
 
         /**
-         * Code to test the InternalGraphQLServer
+         * Test executers
          */
         new InternalGraphQLServerTestExecuter();
         new GraphQLServerNotReadyInternalGraphQLServerTestExecuter();
         new GatoGraphQLAdminEndpointsTestExecuter();
+        new WPCronTestExecuter();
 
         /**
          * Executing `flush_rewrite_rules` at the end of the execution
