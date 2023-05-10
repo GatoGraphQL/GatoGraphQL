@@ -69,7 +69,7 @@ class WPCronTestExecuter
 
     protected function executeWPCron(int $uniquePostSlugID): void
     {
-        $timestamp = \wp_next_scheduled( 'gato_graphql__execute_query');
+        $timestamp = \wp_next_scheduled('gato_graphql__execute_query');
         if ($timestamp !== false) {
             \wp_unschedule_event($timestamp, 'gato_graphql__execute_query');
             return;
@@ -86,10 +86,10 @@ class WPCronTestExecuter
             [
                 <<<GRAPHQL
                 mutation CreateTrashedPostWithUniqueSlug(
-                    $postTitle: String!
+                    \$postTitle: String!
                 ) {
                     createPost(input:{
-                        title: $postTitle
+                        title: \$postTitle
                         status: trash
                     }) {
                         status
