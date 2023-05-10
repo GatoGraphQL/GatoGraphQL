@@ -33,6 +33,8 @@ services:
         - >-
           ../../layers/Engine/packages/graphql-parser:/app/vendor/getpop/graphql-parser
         - >-
+          ../../layers/Engine/packages/guzzle-http:/app/vendor/getpop/guzzle-http
+        - >-
           ../../layers/GraphQLByPoP/packages/graphql-request:/app/vendor/graphql-by-pop/graphql-request
         - >-
           ../../layers/GraphQLByPoP/packages/graphql-server:/app/vendor/graphql-by-pop/graphql-server

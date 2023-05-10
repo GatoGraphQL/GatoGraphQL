@@ -60,6 +60,15 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                 'response-disabled' => file_get_contents($pluginDisabledGraphQLResponseFile),
             ];
         }
+        return $this->customizePluginNameEntries($pluginEntries);
+    }
+
+    /**
+     * @param array<string,array<string,mixed>> $pluginEntries
+     * @return array<string,array<string,mixed>>
+     */
+    protected function customizePluginNameEntries(array $pluginEntries): array
+    {
         return $pluginEntries;
     }
 }
