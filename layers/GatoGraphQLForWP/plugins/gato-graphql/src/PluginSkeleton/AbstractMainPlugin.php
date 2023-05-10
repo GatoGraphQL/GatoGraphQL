@@ -33,7 +33,9 @@ use function do_action;
 use function get_called_class;
 use function get_option;
 use function is_admin;
+use function wp_logout;
 use function update_option;
+use function wp_set_current_user;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
@@ -649,7 +651,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         if ($userID === null) {
             return;
         }
-        \wp_set_current_user($userID);
+        wp_set_current_user($userID);
     }
 
     /**
