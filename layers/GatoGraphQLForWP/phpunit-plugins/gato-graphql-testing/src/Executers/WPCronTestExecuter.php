@@ -105,7 +105,8 @@ class WPCronTestExecuter
                 [
                     'postTitle' => $postTitle
                 ],
-                'CreateTrashedPostWithUniqueSlug'
+                'CreateTrashedPostWithUniqueSlug',
+                1 // This is the admin user's ID
             ]
         );
     }
