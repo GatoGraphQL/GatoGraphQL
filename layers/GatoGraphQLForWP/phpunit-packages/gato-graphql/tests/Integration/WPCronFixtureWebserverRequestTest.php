@@ -9,10 +9,12 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Placeholders;
 /**
  * Test WP-Cron. It works like this:
  *
- * The first execution (wp-cron:0.json) sets-up the wp-cron execution.
- * The second execution (wp-cron.json) triggers the wp-cron.
- * By the time of the third execution (wp-cron:1.json) a new trashed
- * post should've been created (by WPCronTestExecuter), and we query it.
+ * - The first execution (wp-cron:0.json) schedules the wp-cron event.
+ * - The second execution (wp-cron.json) triggers the wp-cron.
+ * - The third execution (wp-cron:1.json) unschedules the wp-cron event.
+ *
+ * By the time of the third execution, a new trashed post should've
+ * been created (by WPCronTestExecuter), and we query it.
  *
  * @see layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Executers/WPCronTestExecuter.php
  */
