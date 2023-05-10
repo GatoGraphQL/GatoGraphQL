@@ -6,6 +6,7 @@
   colors="true"
   verbose="true"
   stderr="true"
+  cacheResults="true"
 >
   <coverage processUncoveredFiles="true">
     <include>
