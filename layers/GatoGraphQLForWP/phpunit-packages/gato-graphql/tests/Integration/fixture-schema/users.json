@@ -37,9 +37,9 @@
                     "moderate_comments",
                     "publish_pages",
                     "publish_posts",
+                    "read",
                     "read_private_pages",
                     "read_private_posts",
-                    "read",
                     "unfiltered_html",
                     "upload_files"
                 ],
@@ -127,9 +127,9 @@
                             "moderate_comments",
                             "publish_pages",
                             "publish_posts",
+                            "read",
                             "read_private_pages",
                             "read_private_posts",
-                            "read",
                             "unfiltered_html",
                             "upload_files"
                         ]
