@@ -19,13 +19,14 @@ use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
+use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use function __;
 use function add_action;
 use function do_action;
@@ -583,10 +584,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action(
             'gato_graphql__execute_query',
             function (
+                ?int $userID,
                 string $query,
                 array $variables = [],
                 ?string $operationName = null
             ): void {
+                $this->maybeLogUserInForWPCronExecution($userID);
                 // No need to print the response
                 GatoGraphQL::executeQuery(
                     $query,
@@ -595,15 +598,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 );
             },
             10,
-            3
+            4
         );
         add_action(
             'gato_graphql__execute_persisted_query',
             function (
+                ?int $userID,
                 string|int $persistedQueryIDOrSlug,
                 array $variables = [],
                 ?string $operationName = null
             ): void {
+                $this->maybeLogUserInForWPCronExecution($userID);
                 // No need to print the response
                 GatoGraphQL::executePersistedQuery(
                     $persistedQueryIDOrSlug,
@@ -612,8 +617,25 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 );
             },
             10,
-            3
+            4
         );
+    }
+
+    protected function maybeLogUserInForWPCronExecution(?int $userID): void
+    {
+        if ($userID === null) {
+            return;
+        }
+        \wp_set_current_user($userID);
+
+        /**
+         * Reset the AppState with the new current user,
+         * but only if the service is not disabled
+         */
+        if (!App::hasState('is-user-logged-in')) {
+            return;
+        }
+        AppStateHelpers::resetCurrentUserInAppState();
     }
 
     /**
