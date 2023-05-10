@@ -47,22 +47,35 @@ class WPCronTestExecuter
             return;
         }
 
-        $this->executeWPCron();
+        $timestamp = 888888888;
+        $this->executeWPCron($timestamp);
     }
 
-    protected function executeWPCron(): void
+    protected function executeWPCron(int $timestamp): void
     {
         if (!\wp_next_scheduled('gato_graphql__execute_query')) {
+            $postTitle = sprintf(
+                'Post created with wp-cron with timestamp %s',
+                $timestamp
+            );
             \wp_schedule_event(
                 time(),
                 'weekly',
                 'gato_graphql__execute_query',
                 [
                     <<<GRAPHQL
-                    {
-                        id
+                    mutation($postTitle: String!) {
+                        createPost(input:{
+                            title: $postTitle
+                            status: trash
+                        }) {
+                            status
+                        }
                     }
                     GRAPHQL,
+                    [
+                        'postTitle' => $postTitle
+                    ]
                 ]
             );
         } else {
