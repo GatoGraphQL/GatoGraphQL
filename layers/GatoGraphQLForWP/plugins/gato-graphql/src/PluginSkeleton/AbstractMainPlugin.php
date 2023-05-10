@@ -20,14 +20,13 @@ use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\WordPressHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
-use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function __;
 use function add_action;
 use function do_action;
@@ -616,7 +615,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ?int $executeAsUserID = null,
             ): void {
                 $this->maybeLogUserInForWPCronExecution($executeAsUserID);
-                
+
                 // No need to print the response
                 GatoGraphQL::executePersistedQuery(
                     $persistedQueryIDOrSlug,
@@ -635,15 +634,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             return;
         }
         \wp_set_current_user($userID);
-
-        /**
-         * Reset the AppState with the new current user,
-         * but only if the service is not disabled
-         */
-        if (!App::hasState('is-user-logged-in')) {
-            return;
-        }
-        AppStateHelpers::resetCurrentUserInAppState();
     }
 
     /**
