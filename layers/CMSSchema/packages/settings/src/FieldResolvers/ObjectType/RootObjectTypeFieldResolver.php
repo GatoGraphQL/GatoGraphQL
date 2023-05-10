@@ -182,22 +182,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
     }
 
-    public function validateResolvedFieldType(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): bool {
-        switch ($field->getName()) {
-            case 'optionValue':
-            case 'optionValues':
-            case 'optionObjectValue':
-                return true;
-        }
-        return parent::validateResolvedFieldType(
-            $objectTypeResolver,
-            $field,
-        );
-    }
-
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,

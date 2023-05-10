@@ -83,19 +83,4 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 break;
         }
     }
-
-    public function validateResolvedFieldType(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): bool {
-        switch ($field->getName()) {
-            case 'metaValue':
-            case 'metaValues':
-                return true;
-        }
-        return parent::validateResolvedFieldType(
-            $objectTypeResolver,
-            $field,
-        );
-    }
 }
