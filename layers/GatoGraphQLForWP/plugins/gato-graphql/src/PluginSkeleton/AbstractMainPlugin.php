@@ -18,6 +18,7 @@ use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\WordPressHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
@@ -303,7 +304,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $this->executeSetupProcedure();
 
         // Register hooks for wp-cron
-        $this->setupPublicHooks();
+        $this->setupWPCronHooks();
     }
 
     /**
@@ -579,8 +580,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * Register public-facing hooks, using string for the
      * hook names (instead of consts).
      */
-    protected function setupPublicHooks(): void
+    protected function setupWPCronHooks(): void
     {
+        if (!WordPressHelpers::doingCron()) {
+            return;
+        }
+
         add_action(
             'gato_graphql__execute_query',
             function (
@@ -600,6 +605,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             10,
             4
         );
+        
         add_action(
             'gato_graphql__execute_persisted_query',
             function (
