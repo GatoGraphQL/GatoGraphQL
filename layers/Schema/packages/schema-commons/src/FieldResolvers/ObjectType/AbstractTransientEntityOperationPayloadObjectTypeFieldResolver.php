@@ -11,6 +11,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractTransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -72,5 +73,19 @@ abstract class AbstractTransientEntityOperationPayloadObjectTypeFieldResolver ex
                 return $objectMutationTransientOperationPayload->objectID;
         }
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        switch ($field->getName()) {
+            case $this->getObjectIDFieldName():
+                return false;
+        }
+        return parent::validateResolvedFieldType(
+            $objectTypeResolver,
+            $field,
+        );
     }
 }

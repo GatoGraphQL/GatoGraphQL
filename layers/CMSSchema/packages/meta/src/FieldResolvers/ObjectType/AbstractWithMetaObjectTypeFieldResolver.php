@@ -10,7 +10,6 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverIn
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\Meta\FeedbackItemProviders\FeedbackItemProvider;
 use PoPCMSSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
@@ -82,20 +81,5 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 }
                 break;
         }
-    }
-
-    public function validateResolvedFieldType(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): bool {
-        switch ($field->getName()) {
-            case 'metaValue':
-            case 'metaValues':
-                return true;
-        }
-        return parent::validateResolvedFieldType(
-            $objectTypeResolver,
-            $field,
-        );
     }
 }

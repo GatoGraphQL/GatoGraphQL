@@ -102,35 +102,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * This method could return `true`, which means:
-     *
-     *   "Do always automatically validate the type
-     *   of the result against the type declared in the schema".
-     *
-     * However, the great majority of fields already return
-     * the proper type as it is the response from the method they
-     * call, then there's no need to execute this validation.
-     *
-     * For this reason, keep the value in `false`, and have
-     * every field that is not sure what it will return
-     * (eg: calling App::request(...) or a Guzzle HTTP request)
-     * indicate that it must be validated, by defining
-     * `validateResolvedFieldType` => `true`
-     */
-    public function validateFieldTypeResponseWithSchemaDefinition(): bool
-    {
-        $envVariable = Environment::VALIDATE_FIELD_TYPE_RESPONSE_WITH_SCHEMA_DEFINITION;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
-    /**
      * Indicate: If a directive fails, then set those fields in `null`
      * and remove the affected IDs/fields from the upcoming stages
      * of the directive pipeline execution.

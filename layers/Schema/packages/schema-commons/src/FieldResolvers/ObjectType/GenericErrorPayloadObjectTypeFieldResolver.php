@@ -13,6 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class GenericErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -90,5 +91,22 @@ class GenericErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeField
         /** @var ErrorPayloadInterface */
         $errorPayload = $object;
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * Since the return type is known for all the fields in this
+     * FieldResolver, there's no need to validate them
+     */
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        return match ($field->getName()) {
+            'code' => false,
+            default => parent::validateResolvedFieldType(
+                $objectTypeResolver,
+                $field,
+            ),
+        };
     }
 }

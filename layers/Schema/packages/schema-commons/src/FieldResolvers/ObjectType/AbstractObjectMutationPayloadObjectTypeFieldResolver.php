@@ -9,6 +9,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractObjectMutationPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -49,5 +50,19 @@ abstract class AbstractObjectMutationPayloadObjectTypeFieldResolver extends Abst
                 return $objectMutationTransientOperationPayload->objectID;
         }
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        switch ($field->getName()) {
+            case $this->getObjectFieldName():
+                return false;
+        }
+        return parent::validateResolvedFieldType(
+            $objectTypeResolver,
+            $field,
+        );
     }
 }

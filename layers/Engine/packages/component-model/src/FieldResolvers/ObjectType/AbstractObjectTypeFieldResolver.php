@@ -679,13 +679,29 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return true;
     }
 
+    /**
+     * This method returning `true` means:
+     *
+     *   "By default, do automatically validate the type of the
+     *   field's result against the type declared in the schema".
+     *
+     * This is a conservative approach, needed as there are
+     * fields that cannot guarantee what they will return,
+     * because their called methods could return many types of
+     * values (eg: `App::request(...): mixed` or sending an HTTP request)
+     *
+     * However, most fields already return the proper type
+     * as it is the response from the method they call (eg:
+     * 'title' => $post->post_title)
+     *
+     * For these, as there's no need to execute this validation,
+     * this method can return `false`, as to optimize the application.
+     */
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->validateFieldTypeResponseWithSchemaDefinition();
+        return true;
     }
 
     /**
