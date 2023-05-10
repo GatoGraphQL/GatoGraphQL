@@ -62,7 +62,7 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
     {
         return \str_replace(
             [' ', ':'],
-            '-',
+            ['-', ''],
             $postTitle,
         );
     }
