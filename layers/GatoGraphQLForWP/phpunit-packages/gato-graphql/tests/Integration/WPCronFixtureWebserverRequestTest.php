@@ -48,15 +48,21 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
     {
         $variables = parent::getGraphQLVariables($graphQLVariablesFile);
 
-        $variables['postSlug'] = str_replace(
-            [' ', ':'],
-            '-',
-            sprintf(
-                Placeholders::WP_CRON_UNIQUE_POST_TITLE,
-                self::$timestamp
-            ),
+        $postTitle = sprintf(
+            Placeholders::WP_CRON_UNIQUE_POST_TITLE,
+            self::$timestamp
         );
+        $variables['postSlug'] = $this->getSlugFromPostTitle($postTitle);
 
         return $variables;
+    }
+
+    protected function getSlugFromPostTitle(string $postTitle): string
+    {
+        return \str_replace(
+            [' ', ':'],
+            '-',
+            $postTitle,
+        );
     }
 }
