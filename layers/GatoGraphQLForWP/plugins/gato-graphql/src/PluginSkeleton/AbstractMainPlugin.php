@@ -584,10 +584,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action(
             'gato_graphql__execute_query',
             function (
-                ?int $userID,
                 string $query,
                 array $variables = [],
-                ?string $operationName = null
+                ?string $operationName = null,
+                ?int $userID = null,
             ): void {
                 $this->maybeLogUserInForWPCronExecution($userID);
                 // No need to print the response
@@ -603,10 +603,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action(
             'gato_graphql__execute_persisted_query',
             function (
-                ?int $userID,
                 string|int $persistedQueryIDOrSlug,
                 array $variables = [],
-                ?string $operationName = null
+                ?string $operationName = null,
+                ?int $userID = null,
             ): void {
                 $this->maybeLogUserInForWPCronExecution($userID);
                 // No need to print the response
