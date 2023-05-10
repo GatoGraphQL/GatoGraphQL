@@ -601,6 +601,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     $variables,
                     $operationName
                 );
+                
+                $this->maybeLogUserOutForWPCronExecution($executeAsUserID);
             },
             10,
             4
@@ -622,6 +624,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     $variables,
                     $operationName
                 );
+
+                $this->maybeLogUserOutForWPCronExecution($executeAsUserID);
             },
             10,
             4
@@ -634,6 +638,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             return;
         }
         \wp_set_current_user($userID);
+    }
+
+    protected function maybeLogUserOutForWPCronExecution(?int $userID): void
+    {
+        if ($userID === null) {
+            return;
+        }
+        wp_logout();
+        global $current_user;
+        $current_user = null;
+        wp_set_current_user(0);
     }
 
     /**
