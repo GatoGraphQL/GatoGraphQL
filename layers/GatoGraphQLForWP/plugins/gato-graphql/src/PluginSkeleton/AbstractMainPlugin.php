@@ -25,7 +25,6 @@ use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
-use RuntimeException;
 
 use function __;
 use function add_action;
@@ -589,19 +588,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ?string $operationName = null
             ): void {
                 // No need to print the response
-                $response = GatoGraphQL::executeQuery(
+                GatoGraphQL::executeQuery(
                     $query,
                     $variables,
                     $operationName
-                );
-                throw new RuntimeException(
-                    json_encode([
-                        'user' => get_current_user_id(),
-                        'response' => $response->getContent(),
-                        'query' => $query,
-                        'variables' => $variables,
-                        'operationName' => $operationName,
-                    ])
                 );
             },
             10,
