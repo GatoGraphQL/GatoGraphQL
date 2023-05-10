@@ -64,7 +64,9 @@ class WPCronTestExecuter
                 'gato_graphql__execute_query',
                 [
                     <<<GRAPHQL
-                    mutation($postTitle: String!) {
+                    mutation CreateTrashedPostWithSpecificTimestamp(
+                        $postTitle: String!
+                    ) {
                         createPost(input:{
                             title: $postTitle
                             status: trash
