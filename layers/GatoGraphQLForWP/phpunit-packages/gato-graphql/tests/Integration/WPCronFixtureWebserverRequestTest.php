@@ -15,12 +15,11 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
 {
     use WPCronWebserverRequestTestTrait;
 
-    private static int $timestamp;
+    private ?int $timestamp = null;
     
-    public static function setUpBeforeClass(): void
+    public function maybeInitTimestamp(): void
     {
-        parent::setUpBeforeClass();
-        self::$timestamp = time();
+        $this->timestamp ??= time();
     }
 
     protected function getFixtureFolder(): string
@@ -33,10 +32,11 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
      */
     protected function getEndpoint(): string
     {
+        $this->maybeInitTimestamp();
         return $this->getWPCronEndpoint(
             'graphql/',
             [
-                'timestamp' => self::$timestamp,
+                'timestamp' => $this->timestamp,
             ]
         );
     }
@@ -48,9 +48,10 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
     {
         $variables = parent::getGraphQLVariables($graphQLVariablesFile);
 
+        $this->maybeInitTimestamp();
         $postTitle = sprintf(
             Placeholders::WP_CRON_UNIQUE_POST_TITLE,
-            self::$timestamp
+            $this->timestamp
         );
         $variables['postSlug'] = $this->getSlugFromPostTitle($postTitle);
 
