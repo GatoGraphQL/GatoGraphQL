@@ -27,4 +27,27 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
             'graphql/'
         );
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getGraphQLVariables(string $graphQLVariablesFile): array
+    {
+        $variables = parent::getGraphQLVariables($graphQLVariablesFile);
+
+        $uniquePostSlugID = 888888888;
+        $variables['postSlug'] = str_replace(
+            [
+                ' ',
+                ':',
+            ],
+            '-',
+            sprintf(
+                'Testing wp-cron: %s',
+                $uniquePostSlugID
+            ),
+        );
+
+        return $variables;
+    }
 }
