@@ -691,7 +691,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * values (eg: `App::request(...): mixed` or sending an HTTP request)
      *
      * However, most fields already return the proper type
-     * as it is the response from the method they call (eg: 
+     * as it is the response from the method they call (eg:
      * 'title' => $post->post_title)
      *
      * For these, as there's no need to execute this validation,
