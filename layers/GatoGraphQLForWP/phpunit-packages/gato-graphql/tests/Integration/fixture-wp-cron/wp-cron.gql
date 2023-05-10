@@ -5,7 +5,7 @@ query GetTrashedPostWithUniqueSlug(
         by: { slug: $postSlug }
         status: trash
     ) {
-        slug
+        # slug
         status
     }
 }
