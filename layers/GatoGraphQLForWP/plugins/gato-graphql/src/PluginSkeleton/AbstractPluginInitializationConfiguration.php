@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
@@ -217,17 +218,19 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
          * can have predefined configuration. Persisted Queries must take
          * the configuration from the corresponding Schema Configuration.
          */
-        $predefinedAdminEndpointModuleClassConfiguration = [];
+        $endpointGroup = null;
         if ($endpointHelpers->isRequestingNonPersistedQueryAdminGraphQLEndpoint()) {
             $endpointGroup = $endpointHelpers->getAdminGraphQLEndpointGroup();
-            $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup);
         } elseif (AppHelpers::isInternalGraphQLServerAppThread()) {
             /**
              * The internal server receives the same configuration
              * as the default admin endpoint
              */
-            $predefinedAdminEndpointModuleClassConfiguration = $this->getPredefinedAdminEndpointModuleClassConfiguration('');
+            $endpointGroup = AdminGraphQLEndpointGroups::DEFAULT;
         }
+        $predefinedAdminEndpointModuleClassConfiguration = $endpointGroup !== null
+            ? $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup)
+            : [];
 
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         return array_merge_recursive(
