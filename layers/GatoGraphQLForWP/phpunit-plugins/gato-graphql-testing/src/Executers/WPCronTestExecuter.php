@@ -47,16 +47,16 @@ class WPCronTestExecuter
             return;
         }
 
-        $timestamp = 888888888;
-        $this->executeWPCron($timestamp);
+        $uniqueSlugID = 888888888;
+        $this->executeWPCron($uniqueSlugID);
     }
 
-    protected function executeWPCron(int $timestamp): void
+    protected function executeWPCron(int $uniqueSlugID): void
     {
         if (!\wp_next_scheduled('gato_graphql__execute_query')) {
             $postTitle = sprintf(
-                'Post created with wp-cron with timestamp %s',
-                $timestamp
+                'Testing wp-cron: %s',
+                $uniqueSlugID
             );
             \wp_schedule_event(
                 time(),
