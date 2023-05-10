@@ -47,16 +47,16 @@ class WPCronTestExecuter
             return;
         }
 
-        $uniqueSlugID = 888888888;
-        $this->executeWPCron($uniqueSlugID);
+        $uniquePostSlugID = 888888888;
+        $this->executeWPCron($uniquePostSlugID);
     }
 
-    protected function executeWPCron(int $uniqueSlugID): void
+    protected function executeWPCron(int $uniquePostSlugID): void
     {
         if (!\wp_next_scheduled('gato_graphql__execute_query')) {
             $postTitle = sprintf(
                 'Testing wp-cron: %s',
-                $uniqueSlugID
+                $uniquePostSlugID
             );
             \wp_schedule_event(
                 time(),
