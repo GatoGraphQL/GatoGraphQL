@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\ConditionalOnContext\PluginOwnUse\SchemaServices\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\CustomPostsWP\Constants\QueryOptions;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
-use PoPCMSSchema\CustomPostsWP\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -19,6 +19,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 /**
  * ObjectTypeFieldResolver for the Custom Post Types from this plugin
@@ -138,6 +139,17 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
             QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS => true,
         ];
         return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
+    }
+
+    /**
+     * Since the return type is known for all the fields in this
+     * FieldResolver, there's no need to validate them
+     */
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        return false;
     }
 
     abstract protected function getFieldCustomPostType(FieldDataAccessorInterface $fieldDataAccessor): string;

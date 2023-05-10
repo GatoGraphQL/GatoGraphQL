@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\Overrides\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoPCMSSchema\Menus\FieldResolvers\ObjectType\RootObjectTypeFieldResolver as UpstreamRootObjectTypeFieldResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
 {
@@ -41,5 +42,16 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * Since the return type is known for all the fields in this
+     * FieldResolver, there's no need to validate them
+     */
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        return false;
     }
 }

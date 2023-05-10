@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Users\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use DateTime;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\CommonFilterInputContainerComponentProcessor;
+use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use DateTime;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\ComponentProcessors\CommonFilterInputContainerComponentProcessor;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
-use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_User;
 
 class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
@@ -148,5 +149,16 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * Since the return type is known for all the fields in this
+     * FieldResolver, there's no need to validate them
+     */
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        return false;
     }
 }

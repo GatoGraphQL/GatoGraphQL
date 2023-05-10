@@ -108,6 +108,17 @@ class ObjectObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
+    /**
+     * Since the return type is known for all the fields in this
+     * FieldResolver, there's no need to validate them
+     */
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        return false;
+    }
+
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {

@@ -17,6 +17,7 @@ use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\ObjectModels\SuperRoot;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\SuperRootObjectTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -128,5 +129,16 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default
                 => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
+    }
+
+    /**
+     * Since the return type is known for all the fields in this
+     * FieldResolver, there's no need to validate them
+     */
+    public function validateResolvedFieldType(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        return false;
     }
 }
