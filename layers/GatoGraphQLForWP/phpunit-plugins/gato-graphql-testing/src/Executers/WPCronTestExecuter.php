@@ -53,36 +53,37 @@ class WPCronTestExecuter
 
     protected function executeWPCron(int $uniquePostSlugID): void
     {
-        if (!\wp_next_scheduled('gato_graphql__execute_query')) {
-            $postTitle = sprintf(
-                'Testing wp-cron: %s',
-                $uniquePostSlugID
-            );
-            \wp_schedule_event(
-                time(),
-                'weekly',
-                'gato_graphql__execute_query',
-                [
-                    <<<GRAPHQL
-                    mutation CreateTrashedPostWithUniqueSlug(
-                        $postTitle: String!
-                    ) {
-                        createPost(input:{
-                            title: $postTitle
-                            status: trash
-                        }) {
-                            status
-                        }
-                    }
-                    GRAPHQL,
-                    [
-                        'postTitle' => $postTitle
-                    ]
-                ]
-            );
-        } else {
-            $timestamp = \wp_next_scheduled( 'gato_graphql__execute_query');
+        $timestamp = \wp_next_scheduled( 'gato_graphql__execute_query');
+        if ($timestamp !== false) {
             \wp_unschedule_event($timestamp, 'gato_graphql__execute_query');
+            return;
         }
+        
+        $postTitle = sprintf(
+            'Testing wp-cron: %s',
+            $uniquePostSlugID
+        );
+        \wp_schedule_event(
+            time(),
+            'weekly',
+            'gato_graphql__execute_query',
+            [
+                <<<GRAPHQL
+                mutation CreateTrashedPostWithUniqueSlug(
+                    $postTitle: String!
+                ) {
+                    createPost(input:{
+                        title: $postTitle
+                        status: trash
+                    }) {
+                        status
+                    }
+                }
+                GRAPHQL,
+                [
+                    'postTitle' => $postTitle
+                ]
+            ]
+        );
     }
 }
