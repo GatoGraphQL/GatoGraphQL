@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
+use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Placeholders;
 
 /**
  * Test WP-Cron. It works like this:
  *
- * The first execution (wp-cron.json) sets-up the wp-cron execution.
- * By the time of the second execution (wp-cron:1.json) a new trashed
+ * The first execution (wp-cron:0.json) sets-up the wp-cron execution.
+ * The second execution (wp-cron.json) triggers the wp-cron.
+ * By the time of the third execution (wp-cron:1.json) a new trashed
  * post should've been created (by WPCronTestExecuter), and we query it.
  *
  * @see layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Executers/WPCronTestExecuter.php
@@ -18,6 +20,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Placeholders;
 class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WPCronWebserverRequestTestTrait;
+    use ModifyValueFixtureEndpointWebserverRequestTestCaseTrait;
 
     private ?int $timestamp = null;
 
@@ -31,18 +34,60 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
         return __DIR__ . '/fixture-wp-cron';
     }
 
+    protected function getEndpoint(): string
+    {
+        return 'graphql/';
+    }
+
     /**
      * Enable the wp-cront testing via the endpoint
      */
-    protected function getEndpoint(): string
+    protected function getFixtureCustomEndpoint(string $dataName): ?string
     {
-        $this->maybeInitTimestamp();
-        return $this->getWPCronEndpoint(
-            'graphql/',
-            [
-                'timestamp' => $this->timestamp,
-            ]
-        );
+        if (str_ends_with($dataName, ':0')
+            || str_ends_with($dataName, ':2')
+        ) {
+            $this->maybeInitTimestamp();
+            return $this->getWPCronEndpoint(
+                $this->getEndpoint(),
+                [
+                    'timestamp' => $this->timestamp,
+                ]
+            );
+        }
+        return parent::getFixtureCustomEndpoint($dataName);
+    }
+
+    /**
+     * Make sure "wp-cron:0" executes first
+     *
+     * @param array<string,mixed> $providerItems
+     * @return array<string,mixed>
+     */
+    protected function customizeProviderEndpointEntries(array $providerItems): array
+    {
+        return $this->reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
+    }
+
+    /**
+     * Wait a few seconds to make sure wp-cron has been executed.
+     * 
+     * @param array<string,mixed> $options
+     * @return array<string,mixed>
+     */
+    protected function customizeRequestOptions(array $options): array
+    {
+        $options = parent::customizeRequestOptions($options);
+
+        if ($this->getDataName() === 'wp-cron') {
+            $options[RequestOptions::DELAY] = 2000;
+        } elseif ($this->getDataName() === 'wp-cron:1') {
+            $options[RequestOptions::DELAY] = 2000;
+        } elseif ($this->getDataName() === 'wp-cron:2') {
+            $options[RequestOptions::DELAY] = 2000;
+        }
+
+        return $options;
     }
 
     /**
