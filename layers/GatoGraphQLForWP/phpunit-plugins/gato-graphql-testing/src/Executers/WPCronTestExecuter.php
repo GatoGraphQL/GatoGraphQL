@@ -85,20 +85,47 @@ class WPCronTestExecuter
             'gato_graphql__execute_query',
             [
                 <<<GRAPHQL
+                mutation LogUserIn {
+                    loginUser(by: {
+                        credentials: {
+                            usernameOrEmail: "admin",
+                            password: "admin"
+                        }
+                    }) {
+                        status
+                        errors {
+                            __typename
+                            ...on ErrorPayload {
+                                message
+                            }
+                        }
+                        user {
+                            id
+                            username
+                        }
+                    }
+                }
                 mutation CreateTrashedPostWithUniqueSlug(
                     \$postTitle: String!
-                ) {
+                ) @depends(on: "LogUserIn") {
                     createPost(input:{
                         title: \$postTitle
                         status: trash
                     }) {
                         status
+                        errors {
+                            __typename
+                            ...on ErrorPayload {
+                                message
+                            }
+                        }
                     }
                 }
                 GRAPHQL,
                 [
                     'postTitle' => $postTitle
-                ]
+                ],
+                'CreateTrashedPostWithUniqueSlug'
             ]
         );
     }
