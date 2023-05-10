@@ -13,6 +13,14 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
 {
     use WPCronWebserverRequestTestTrait;
 
+    private static int $timestamp;
+    
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
+        self::$timestamp = time();
+    }
+
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-wp-cron';
@@ -24,7 +32,10 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
     protected function getEndpoint(): string
     {
         return $this->getWPCronEndpoint(
-            'graphql/'
+            'graphql/',
+            [
+                'timestamp' => self::$timestamp,
+            ]
         );
     }
 
@@ -35,13 +46,12 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
     {
         $variables = parent::getGraphQLVariables($graphQLVariablesFile);
 
-        $uniquePostSlugID = 888888888;
         $variables['postSlug'] = str_replace(
             [' ', ':'],
             '-',
             sprintf(
                 'Testing wp-cron: %s',
-                $uniquePostSlugID
+                self::$timestamp
             ),
         );
 

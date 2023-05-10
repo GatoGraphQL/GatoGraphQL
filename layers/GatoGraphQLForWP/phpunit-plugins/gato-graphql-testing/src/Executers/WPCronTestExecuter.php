@@ -9,7 +9,9 @@ use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\Root\Constants\HookNames;
+use RuntimeException;
 
 class WPCronTestExecuter
 {
@@ -41,14 +43,27 @@ class WPCronTestExecuter
             return;
         }
 
-        /** @var string[] */
         $actions = App::getState('actions');
+        if (!is_array($actions)) {
+            return;
+        }
+
+        /** @var string[] $actions */
         if (!in_array(Actions::TEST_WP_CRON, $actions)) {
             return;
         }
 
-        $uniquePostSlugID = 888888888;
-        $this->executeWPCron($uniquePostSlugID);
+        $timestamp = App::getState(Params::TIMESTAMP);
+        if ($timestamp === null) {
+            throw new RuntimeException(
+                sprintf(
+                    \__('When testing wp-cron, must provide param "%s"'),
+                    Params::TIMESTAMP
+                )
+            );
+        }
+
+        $this->executeWPCron((int)$timestamp);
     }
 
     protected function executeWPCron(int $uniquePostSlugID): void
@@ -58,7 +73,7 @@ class WPCronTestExecuter
             \wp_unschedule_event($timestamp, 'gato_graphql__execute_query');
             return;
         }
-        
+
         $postTitle = sprintf(
             'Testing wp-cron: %s',
             $uniquePostSlugID
