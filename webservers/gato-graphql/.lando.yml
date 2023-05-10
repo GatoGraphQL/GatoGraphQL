@@ -56,6 +56,8 @@ services:
         - >-
           ../../layers/Engine/packages/graphql-parser:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/graphql-parser
         - >-
+          ../../layers/Engine/packages/guzzle-http:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/guzzle-http
+        - >-
           ../../layers/Engine/packages/loosecontracts:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/loosecontracts
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/mandatory-directives-by-configuration
