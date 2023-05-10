@@ -82,7 +82,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
             $providerItems[$dataName] = [
                 'application/json',
                 file_get_contents($graphQLResponseFile),
-                $endpoint,
+                $this->getFixtureCustomEndpoint($dataName) ?? $endpoint,
                 [],
                 $query,
                 $variables,
@@ -118,7 +118,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 $providerItems[$operationDataName] = [
                     'application/json',
                     $graphQLResponseForOperationFileInfo->getContents(),
-                    $endpoint,
+                    $this->getFixtureCustomEndpoint($operationDataName) ?? $endpoint,
                     [],
                     $query,
                     $graphQLVariablesForOperation,
@@ -160,6 +160,11 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
     }
 
     protected function getMainFixtureOperationName(string $dataName): ?string
+    {
+        return null;
+    }
+
+    protected function getFixtureCustomEndpoint(string $dataName): ?string
     {
         return null;
     }
