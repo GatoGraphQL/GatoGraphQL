@@ -7,7 +7,11 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Placeholders;
 
 /**
- * Test WP-Cron.
+ * Test WP-Cron. It works like this:
+ *
+ * The first execution (wp-cron.json) sets-up the wp-cron execution.
+ * By the time of the second execution (wp-cron:1.json) a new trashed
+ * post should've been created (by WPCronTestExecuter), and we query it.
  *
  * @see layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Executers/WPCronTestExecuter.php
  */
