@@ -47,7 +47,9 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
             );
         }
         /** @var string[] */
-        return array_values(array_unique($capabilities));
+        $capabilities = array_values(array_unique($capabilities));
+        sort($capabilities);
+        return $capabilities;
     }
 
     /**
