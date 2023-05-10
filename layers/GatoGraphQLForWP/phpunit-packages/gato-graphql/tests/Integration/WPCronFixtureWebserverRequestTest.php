@@ -83,25 +83,6 @@ class WPCronFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserver
         return $this->reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
     }
 
-    // /**
-    //  * Wait a few seconds to make sure wp-cron has been executed.
-    //  * 
-    //  * @param array<string,mixed> $options
-    //  * @return array<string,mixed>
-    //  */
-    // protected function customizeRequestOptions(array $options): array
-    // {
-    //     $options = parent::customizeRequestOptions($options);
-
-    //     if ($this->getDataName() === 'wp-cron') {
-    //         $options[RequestOptions::DELAY] = 2000;
-    //     } elseif ($this->getDataName() === 'wp-cron:1') {
-    //         $options[RequestOptions::DELAY] = 2000;
-    //     }
-
-    //     return $options;
-    // }
-
     /**
      * @return array<string,mixed>
      */
