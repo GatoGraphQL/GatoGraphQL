@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\GuzzleHTTP\Services\GuzzleServiceInterface:
+        class: \PoP\GuzzleHTTP\Services\GuzzleService
+
+    PoP\GuzzleHTTP\Services\HTTPResponseValidatorInterface:
+        class: \PoP\GuzzleHTTP\Services\HTTPResponseValidator
