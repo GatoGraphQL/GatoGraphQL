@@ -96,15 +96,15 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
             case self::ACCESS_CONTROL:
                 return \__('Set-up rules to define who can access the different elements from a schema', 'gato-graphql');
             case self::ACCESS_CONTROL_RULE_DISABLE_ACCESS:
-                return \__('Remove access to the schema elements', 'gato-graphql');
+                return \__('Remove access to schema elements', 'gato-graphql');
             case self::ACCESS_CONTROL_RULE_USER_STATE:
-                return \__('Allow or reject access to the schema elements based on the user being logged-in or not', 'gato-graphql');
+                return \__('Allow or reject access to schema elements based on the user being logged-in or not', 'gato-graphql');
             case self::ACCESS_CONTROL_RULE_USER_ROLES:
-                return \__('Allow or reject access to the schema elements based on the user having a certain role', 'gato-graphql');
+                return \__('Allow or reject access to schema elements based on the user having a certain role', 'gato-graphql');
             case self::ACCESS_CONTROL_RULE_USER_CAPABILITIES:
-                return \__('Allow or reject access to the schema elements based on the user having a certain capability', 'gato-graphql');
+                return \__('Allow or reject access to schema elements based on the user having a certain capability', 'gato-graphql');
             case self::ACCESS_CONTROL_RULE_VISITOR_IP:
-                return \__('Allow or reject access to the schema elements based on the visitor coming from an allowed IP address', 'gato-graphql');
+                return \__('Allow or reject access to schema elements based on the visitor coming from an allowed IP address', 'gato-graphql');
         }
         return parent::getDescription($module);
     }
