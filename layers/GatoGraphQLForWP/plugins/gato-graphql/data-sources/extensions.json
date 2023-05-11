@@ -30,7 +30,7 @@
             "downloaded": null,
             "last_updated": null,
             "added": null,
-            "homepage": "https://gatographql.com",
+            "homepage": "https://gatographql.com/extensions/access-control-visitor-ip",
             "short_description": "Allow or reject access to schema elements based on the visitor coming from an allowed IP address.",
             "description": "<p>Grant access to the selected schema elements based on the visitor coming from an allowed IP address</p>\n",
             "download_link": null,
