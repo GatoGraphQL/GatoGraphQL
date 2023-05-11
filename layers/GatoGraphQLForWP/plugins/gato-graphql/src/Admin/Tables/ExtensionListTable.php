@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Error;
@@ -37,7 +38,9 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         add_filter('plugins_api', $this->overridePluginsAPI(...));
         add_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
+        add_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), 10, 2);
         parent::prepare_items();
+        remove_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), 10, 2);
         remove_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
         remove_filter('plugins_api', $this->overridePluginsAPI(...));
         remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
@@ -111,6 +114,31 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         );
     }
 
+    /**
+     * Replace "Install Now" with "Get Extension"
+     *
+     * @param string[] $action_links
+     * @param array<string,mixed> $plugin
+     * @return string[]
+     */
+    public function overridePluginInstallActionLinks(array $action_links, array $plugin): array
+    {
+        if (str_starts_with($action_links[0] ?? '', '<a class="install-now button"')) {
+            $action_links[0] = sprintf(
+                '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s%s</a>',
+                esc_attr( $plugin['slug'] ),
+                esc_url( $plugin['homepage'] ),
+                /* translators: %s: Plugin name and version. */
+                esc_attr( sprintf( _x( 'Get extension %s', 'plugin' ), $plugin['name'] ) ),
+                esc_attr( $plugin['name'] ),
+                '_blank',
+                __('Get Extension', 'gato-graphql'),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            );
+        }
+        return $action_links;
+    }
+
     public function no_items() {
 		if ( isset( $this->error ) ) {
             parent::no_items();
@@ -138,12 +166,12 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      */
     protected function adaptDisplayRowsHTML(string $html): string
     {
-        /**
-         * Change the "More information" link to open the
-         * extension website, and not the plugin page
-         * on wp.org (which does not exist!)
-         */
-		foreach ( (array) $this->items as $plugin ) {
+        foreach ( (array) $this->items as $plugin ) {
+            /**
+             * Change the "More information" link to open the
+             * extension website, and not the plugin page
+             * on wp.org (which does not exist!)
+             */
             // Code copied from `display_rows` in the parent class
             $details_link = self_admin_url(
                 'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] .
