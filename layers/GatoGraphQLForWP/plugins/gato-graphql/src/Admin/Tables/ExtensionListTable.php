@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Error;
 use WP_Plugin_Install_List_Table;
@@ -116,5 +118,53 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
 			<div class="no-plugin-results"><?php _e('Ooops something went wrong: No extensions found. Please contact the admin.', 'gato-graphql'); ?></div>
 			<?php
 		}
+	}
+
+	/**
+     * Adapt the generated HTML content
+     */
+    public function display_rows() {
+		ob_start();
+        parent::display_rows();
+		$html = ob_get_clean();
+
+        $html = $this->adaptDisplayRowsHTML($html);
+
+		echo $html;
+	}
+
+	/**
+     * Adapt the generated HTML content
+     */
+    protected function adaptDisplayRowsHTML(string $html): string
+    {
+        /**
+         * Change the "More information" link to open the
+         * extension website, and not the plugin page
+         * on wp.org (which does not exist!)
+         */
+		foreach ( (array) $this->items as $plugin ) {
+            // Code copied from `display_rows` in the parent class
+            $details_link = self_admin_url(
+                'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] .
+                '&amp;TB_iframe=true&amp;width=600&amp;height=550'
+            );
+            // Replace it with this other link
+            $adaptedDetailsLink = \admin_url(sprintf(
+                'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true&width=600&height=550',
+                App::request('page') ?? App::query('page', ''),
+                RequestParams::TAB,
+                RequestParams::TAB_DOCS,
+                RequestParams::MODULE,
+                urlencode($plugin['gato_doc_module'])
+            ));
+            $html = str_replace(
+                esc_url($details_link),
+                esc_url($adaptedDetailsLink),
+                $html
+            );
+        }
+
+		return $html;
 	}
 }

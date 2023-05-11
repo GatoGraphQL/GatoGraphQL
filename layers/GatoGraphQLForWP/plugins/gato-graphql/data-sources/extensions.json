@@ -44,7 +44,8 @@
             "icons": {
                 "1x": "{$PLUGIN_URL}/assets-pro/img/example-extension.svg",
                 "svg": "{$PLUGIN_URL}/assets-pro/img/example-extension.svg"
-            }
+            },
+            "gato_doc_module": "GatoGraphQL\\GatoGraphQLPRO\\access-control-rule-disable-access"
         }
     ]
 }
