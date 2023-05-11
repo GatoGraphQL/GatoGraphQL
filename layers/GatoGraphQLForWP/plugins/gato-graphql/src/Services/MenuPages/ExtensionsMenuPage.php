@@ -6,7 +6,10 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Admin\Tables\ExtensionListTable;
 use GatoGraphQL\GatoGraphQL\Admin\Tables\ItemListTableInterface;
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
@@ -97,11 +100,13 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         parent::printHeader();
 
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         printf(
             '<p>%s</p>',
             sprintf(
                 __('Extensions add functionality and expand the GraphQL schema. You can browse and get extensions on the <a href="%s" target="%s">Gato GraphQL shop%s</a>.', 'gato-graphql'),
-                'https://gatographql.com',
+                $moduleConfiguration->getPROPluginWebsiteURL(),
                 '_blank',
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             )
