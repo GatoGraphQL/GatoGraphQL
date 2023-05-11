@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use stdClass;
+use WP_Error;
 use WP_Plugin_Install_List_Table;
 
 /**
@@ -84,9 +85,12 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      */
     public function overridePluginsAPIResult(): mixed
     {
-        $data = [
-
-        ];
-        return (object) $data;
+        $extensionsDataSourceFile = dirname(__DIR__, 3) . '/data-sources/extensions.json';
+        $extensionsDataSource = file_get_contents($extensionsDataSourceFile);
+        if ($extensionsDataSource === false) {
+            return new stdClass();
+        }
+        $extensionsData = json_decode($extensionsDataSource, true);
+        return (object) $extensionsData;
     }
 }
