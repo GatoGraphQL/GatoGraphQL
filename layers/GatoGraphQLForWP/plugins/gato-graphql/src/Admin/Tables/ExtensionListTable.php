@@ -28,11 +28,11 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
 	 */
 	public function prepare_items() {
 		
-        add_filter('install_plugins_tabs', $this->getInstallPluginTabs(...));
-        add_filter('install_plugins_nonmenu_tabs', $this->getInstallPluginNonMenuTabs(...));
+        add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
+        add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         parent::prepare_items();
-        remove_filter('install_plugins_nonmenu_tabs', $this->getInstallPluginNonMenuTabs(...));
-        remove_filter('install_plugins_tabs', $this->getInstallPluginTabs(...));
+        remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
+        remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
 	}
 
     /**
@@ -41,7 +41,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      * @param string[] $tabs
      * @return string[]
      */
-    public function getInstallPluginTabs(array $tabs): array
+    public function overrideInstallPluginTabs(array $tabs): array
     {
         return array_intersect_key(
             ['featured' => true],
@@ -55,7 +55,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      * @param string[] $tabs
      * @return string[]
      */
-    public function getInstallPluginNonMenuTabs(array $tabs): array
+    public function overrideInstallPluginNonMenuTabs(array $tabs): array
     {
         return [];
     }
