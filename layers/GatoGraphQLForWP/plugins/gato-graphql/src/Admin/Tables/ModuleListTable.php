@@ -491,8 +491,8 @@ class ModuleListTable extends AbstractItemListTable
     *
     * @since 3.1.0
     *
-     * @return mixed[]|string[] Array of CSS classes for the table tag.
-    phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    * @return mixed[]|string[] Array of CSS classes for the table tag.
+    * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     */
     protected function get_table_classes()
     {
