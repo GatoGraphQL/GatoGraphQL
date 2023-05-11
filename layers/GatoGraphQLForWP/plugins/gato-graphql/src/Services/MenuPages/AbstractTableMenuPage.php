@@ -35,8 +35,9 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
             ?>
             <form method="post">
                 <?php
-                $this->tableObject->prepare_items();
-                $this->tableObject->display(); ?>
+                    $this->tableObject->prepare_items();
+                    $this->tableObject->display();
+                ?>
             </form>
         </div>
         <?php
