@@ -22,7 +22,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
 
     public function print(): void
     {
-        if (is_null($this->tableObject)) {
+        if ($this->tableObject === null) {
             return;
         }
         ?>
