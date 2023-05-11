@@ -71,4 +71,18 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 
         $this->enqueueModalTriggerAssets();
     }
+
+    protected function printHeader(): void
+    {
+        parent::printHeader();
+
+        printf(
+            '<p>%s</p>',
+            sprintf(
+                __('Extensions add functionality and expand the GraphQL schema. You may obtain extensions from the <a href="%s" target="%s">Gato GraphQL website</a>.', 'gato-graphql'),
+                'https://gatographql.com',
+                '_blank'
+            )
+        );
+    }
 }
