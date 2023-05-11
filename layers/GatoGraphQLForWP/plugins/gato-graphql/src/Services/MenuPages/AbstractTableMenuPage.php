@@ -28,18 +28,28 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
         ?>
         <div class="wrap">
             <h1><?php echo $this->getHeader() ?></h1>
-            <?php
-            if ($this->hasViews()) {
-                $this->tableObject->views();
-            }
-            ?>
+            <?php $this->printHeader() ?>
+            <?php $this->printBody() ?>
+        </div>
+        <?php
+    }
+
+    protected function printHeader(): void
+    {
+        if ($this->hasViews()) {
+            $this->tableObject->views();
+        }
+    }
+
+    protected function printBody(): void
+    {
+        ?>
             <form method="post">
                 <?php
                     $this->tableObject->prepare_items();
                     $this->tableObject->display();
                 ?>
             </form>
-        </div>
         <?php
     }
 
