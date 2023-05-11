@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\Admin\Tables\ItemListTableInterface;
 use GatoGraphQL\GatoGraphQL\Admin\Tables\ExtensionListTable;
+use GatoGraphQL\GatoGraphQL\Admin\Tables\ItemListTableInterface;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
  * Extension menu page
@@ -70,7 +71,26 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         parent::enqueueAssets();
 
-        $this->enqueueModalTriggerAssets();
+        // $this->enqueueModalTriggerAssets();
+        $this->enqueueExtensionAssets();
+    }
+
+    protected function enqueueExtensionAssets(): void
+    {
+        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+
+        /**
+         * Hide the bottom part of the extension items on the table,
+         * as it contains unneeded information, and just hiding it
+         * is easier than editing the PHP code
+         */
+        \wp_enqueue_style(
+            'gato-graphql-extensions',
+            $mainPluginURL . 'assets-pro/css/extensions.css',
+            array(),
+            $mainPluginVersion
+        );
     }
 
     protected function printHeader(): void
