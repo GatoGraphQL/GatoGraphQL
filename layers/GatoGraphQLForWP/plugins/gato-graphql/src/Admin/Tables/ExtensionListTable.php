@@ -91,8 +91,22 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         if ($extensionsDataSource === false) {
             return new stdClass();
         }
+        $extensionsDataSource = $this->replaceVariablesInJSONDataSource($extensionsDataSource);
         $extensionsData = json_decode($extensionsDataSource, true);
         return (object) $extensionsData;
+    }
+
+    /**
+     * The JSON data contains variable placeholders that
+     * must be replaced to their actual values
+     */
+    protected function replaceVariablesInJSONDataSource(string $extensionsDataSource): string
+    {
+        return str_replace(
+            '{$PLUGIN_URL}',
+            PluginApp::getMainPlugin()->getPluginURL(),
+            $extensionsDataSource
+        );
     }
 
     public function no_items() {
