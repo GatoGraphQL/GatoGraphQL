@@ -1,92 +1,49 @@
 {
     "info": {
         "page": 1,
-        "pages": 27736,
-        "results": 55471
+        "pages": 1,
+        "results": 1
     },
     "plugins": [
         {
-            "name": "Contact Form 7",
-            "slug": "contact-form-7",
-            "version": "5.7.6",
-            "author": "<a href=\"https:\/\/ideasilo.wordpress.com\/\">Takayuki Miyoshi<\/a>",
-            "author_profile": "https:\/\/profiles.wordpress.org\/takayukister\/",
-            "requires": "6.0",
+            "name": "Access Control: Visitor IP",
+            "slug": "gato-graphql-access-control-visitor-ip",
+            "version": "1.0.0-dev",
+            "author": "<a href=\"https://gatographql.com\">Gato GraphQL</a>",
+            "author_profile": "https://profiles.wordpress.org/leoloso/",
+            "requires": "5.4",
             "tested": "6.2",
             "requires_php": false,
             "requires_plugins": [],
-            "rating": 80,
+            "rating": null,
             "ratings": {
-                "5": 1392,
-                "4": 141,
-                "3": 69,
-                "2": 61,
-                "1": 370
+                "5": null,
+                "4": null,
+                "3": null,
+                "2": null,
+                "1": null
             },
-            "num_ratings": 2033,
-            "support_threads": 348,
-            "support_threads_resolved": 111,
-            "active_installs": 5000000,
-            "downloaded": 272752265,
-            "last_updated": "2023-04-23 8:44am GMT",
-            "added": "2007-08-02",
-            "homepage": "https:\/\/contactform7.com\/",
-            "short_description": "Just another contact form plugin. Simple but flexible.",
-            "description": "<p>Contact Form 7 can manage multiple contact forms, plus you can customize the form and the mail contents flexibly with simple markup. The form supports Ajax-powered submitting, CAPTCHA, Akismet spam filtering and so on.<\/p>\n<h4>Docs and support<\/h4>\n<p>You can find <a href=\"https:\/\/contactform7.com\/docs\/\" rel=\"nofollow ugc\">docs<\/a>, <a href=\"https:\/\/contactform7.com\/faq\/\" rel=\"nofollow ugc\">FAQ<\/a> and more detailed information about Contact Form 7 on <a href=\"https:\/\/contactform7.com\/\" rel=\"nofollow ugc\">contactform7.com<\/a>. When you cannot find the answer to your question on the FAQ or in any of the documentation, check the <a href=\"https:\/\/wordpress.org\/support\/plugin\/contact-form-7\/\" rel=\"ugc\">support forum<\/a> on WordPress.org. If you cannot locate any topics that pertain to your particular issue, post a new topic for it.<\/p>\n<h4>Contact Form 7 needs your support<\/h4>\n<p>It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Contact Form 7 and find it useful, please consider <a href=\"https:\/\/contactform7.com\/donate\/\" rel=\"nofollow ugc\">making a donation<\/a>. Your donation will help encourage and support the plugin&#8217;s continued development and better user support.<\/p>\n<h4>Privacy notices<\/h4>\n<p>With the default configuration, this plugin, in itself, does not:<\/p>\n<ul>\n<li>track users by stealth;<\/li>\n<li>write any user personal data to the database;<\/li>\n<li>send any data to external servers;<\/li>\n<li>use cookies.<\/li>\n<\/ul>\n<p>If you activate certain features in this plugin, the contact form submitter&#8217;s personal data, including their IP address, may be sent to the service provider. Thus, confirming the provider&#8217;s privacy policy is recommended. These features include:<\/p>\n<ul>\n<li>reCAPTCHA (<a href=\"https:\/\/policies.google.com\/?hl=en\" rel=\"nofollow ugc\">Google<\/a>)<\/li>\n<li>Akismet (<a href=\"https:\/\/automattic.com\/privacy\/\" rel=\"nofollow ugc\">Automattic<\/a>)<\/li>\n<li>Constant Contact (<a href=\"https:\/\/www.endurance.com\/privacy\" rel=\"nofollow ugc\">Endurance International Group<\/a>)<\/li>\n<li><a href=\"https:\/\/www.sendinblue.com\/legal\/privacypolicy\/\" rel=\"nofollow ugc\">Sendinblue<\/a><\/li>\n<li><a href=\"https:\/\/stripe.com\/privacy\" rel=\"nofollow ugc\">Stripe<\/a><\/li>\n<\/ul>\n<h4>Recommended plugins<\/h4>\n<p>The following plugins are recommended for Contact Form 7 users:<\/p>\n<ul>\n<li><a href=\"https:\/\/wordpress.org\/plugins\/flamingo\/\" rel=\"ugc\">Flamingo<\/a> by Takayuki Miyoshi &#8211; With Flamingo, you can save submitted messages via contact forms in the database.<\/li>\n<li><a href=\"https:\/\/wordpress.org\/plugins\/bogo\/\" rel=\"ugc\">Bogo<\/a> by Takayuki Miyoshi &#8211; Bogo is a straight-forward multilingual plugin that does not cause headaches.<\/li>\n<\/ul>\n<h4>Translations<\/h4>\n<p>You can <a href=\"https:\/\/contactform7.com\/translating-contact-form-7\/\" rel=\"nofollow ugc\">translate Contact Form 7<\/a> on <a href=\"https:\/\/translate.wordpress.org\/projects\/wp-plugins\/contact-form-7\" rel=\"nofollow ugc\">translate.wordpress.org<\/a>.<\/p>\n",
-            "download_link": "https:\/\/downloads.wordpress.org\/plugin\/contact-form-7.5.7.6.zip",
+            "num_ratings": null,
+            "support_threads": null,
+            "support_threads_resolved": null,
+            "active_installs": null,
+            "downloaded": null,
+            "last_updated": null,
+            "added": null,
+            "homepage": "https://gatographql.com",
+            "short_description": "Allow or reject access to schema elements based on the visitor coming from an allowed IP address.",
+            "description": "<p>Grant access to the selected schema elements based on the visitor coming from an allowed IP address</p>\n",
+            "download_link": null,
             "tags": {
-                "contact": "contact",
-                "contact-form": "contact form",
-                "email": "email",
-                "feedback": "feedback",
-                "form": "form"
-            },
-            "donate_link": "https:\/\/contactform7.com\/donate\/",
-            "icons": {
-                "1x": "https:\/\/ps.w.org\/contact-form-7\/assets\/icon.svg?rev=2339255",
-                "svg": "https:\/\/ps.w.org\/contact-form-7\/assets\/icon.svg?rev=2339255"
-            }
-        },
-        {
-            "name": "Yoast SEO",
-            "slug": "wordpress-seo",
-            "version": "20.7",
-            "author": "<a href=\"https:\/\/yoa.st\/1uk\">Team Yoast<\/a>",
-            "author_profile": "https:\/\/profiles.wordpress.org\/yoast\/",
-            "requires": "6.1",
-            "tested": "6.2",
-            "requires_php": "7.2.5",
-            "requires_plugins": [],
-            "rating": 96,
-            "ratings": {
-                "5": 25847,
-                "4": 623,
-                "3": 188,
-                "2": 130,
-                "1": 781
-            },
-            "num_ratings": 27569,
-            "support_threads": 424,
-            "support_threads_resolved": 388,
-            "active_installs": 5000000,
-            "downloaded": 545326120,
-            "last_updated": "2023-05-09 7:53am GMT",
-            "added": "2010-10-11",
-            "homepage": "https:\/\/yoa.st\/1uj",
-            "short_description": "Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.",
-            "description": "<h3>Yoast SEO: the #1 WordPress SEO plugin<\/h3>\n<p>Since 2008 Yoast SEO has helped millions of websites worldwide to <strong>rank higher in search engines<\/strong>.<\/p>\n<p>Yoast\u2019s mission is <strong>SEO for Everyone<\/strong>. Our plugin\u2019s users range from the bakery around the corner to some of the most popular sites on the planet.<\/p>\n<p>Yoast SEO Free contains everything that you need to manage your SEO, and the <a href=\"https:\/\/yoa.st\/1v8\" rel=\"nofollow ugc\">Yoast SEO Premium<\/a> plugin and its extensions unlock even more tools and functionality.<\/p>\n<h4>GET AHEAD OF THE COMPETITION<\/h4>\n<p>To rank highly in search engines, you need to beat the competition. You need a better, faster, stronger website than the people who sell or do the same kinds of things as you.<\/p>\n<p>Yoast SEO is the most-used WordPress SEO plugin, and has helped millions of people like you to get ahead, and to stay ahead.<\/p>\n<h4>TAKING CARE OF YOUR WORDPRESS SEO<\/h4>\n<p>Yoast SEO is packed full of features, designed to help visitors and search engines to get the most out of your website. Some of our favourites are:<\/p>\n<ul>\n<li>Automated technical SEO improvements, like <strong>canonical URLs<\/strong> and <strong>meta tags<\/strong>.<\/li>\n<li>Advanced <strong>XML sitemaps<\/strong>; making it easy for Google to understand your site structure.<\/li>\n<li>Title and meta description templating, for <strong>better branding<\/strong> and consistent snippets in the search results.<\/li>\n<li>An in-depth Schema.org integration that will <strong>increase your chance of getting rich results<\/strong>, by helping search engines to understand your content.<\/li>\n<li>Full control over <strong>site breadcrumbs<\/strong>, so that users and search engines always know where they are.<\/li>\n<li><strong>Faster loading times<\/strong> for your whole website, due to an innovative way of managing data in WordPress.<\/li>\n<li><strong>[Premium]<\/strong> E-mail support for our <a href=\"https:\/\/yoa.st\/1v8\" rel=\"nofollow ugc\">Yoast SEO Premium<\/a> users.<\/li>\n<li><strong>[Premium]<\/strong> The possibility to expand Yoast SEO with the <a href=\"https:\/\/yoa.st\/1uv\" rel=\"nofollow ugc\">News SEO<\/a>, <a href=\"https:\/\/yoa.st\/1uw\" rel=\"nofollow ugc\">Video SEO<\/a>, <a href=\"https:\/\/yoa.st\/1uu\" rel=\"nofollow ugc\">Local SEO<\/a> and <a href=\"https:\/\/yoa.st\/3rh\" rel=\"nofollow ugc\">WooCommerce SEO<\/a> extensions.<\/li>\n<li><strong>[Premium]<\/strong> <strong>New!<\/strong> Yoast SEO Premium comes with an IndexNow integration to ping search engines like Microsoft Bing whenever you publish or update content.<\/li>\n<li><strong>New!<\/strong> Yoast SEO comes with wide-ranging crawl settings that help you improve how search engines crawl your site, lowering its carbon footprint.<\/li>\n<\/ul>\n<h4>WRITE KILLER CONTENT WITH YOAST SEO<\/h4>\n<p>We know content is king, that&#8217;s why Yoast SEO is famous for its <strong>state-of-the-art content and SEO analysis<\/strong>. Yoast SEO gives you:<\/p>\n<ul>\n<li><strong>SEO analysis<\/strong>: an invaluable tool while writing SEO-friendly content with the right (focus) keyphrases in mind.<\/li>\n<li><strong>Readability analysis<\/strong>: ensures that humans and search engines can read and understand your content.<\/li>\n<li><strong>Full language support<\/strong> for: English, German, French, Dutch, Spanish, Italian, Russian, Indonesian, Polish, Portuguese, Arabic, Swedish, Hebrew, Hungarian, Turkish, Czech, Norwegian, Slovak and Greek.<\/li>\n<li><strong>A Google preview<\/strong>, which shows what your listings will look like in the search results. Even on mobile devices!<\/li>\n<li><strong>Innovative Schema blocks<\/strong> for the WordPress block editor, so that your FAQ and HowTo content can be shown directly in the search results. Plus a breadcrumbs block to guide your users.<\/li>\n<li><strong>[Premium] Internal linking blocks<\/strong> to easily improve the structure of your content. Easily add a <strong>table of contents block<\/strong>, a <strong>related links block<\/strong>, a <strong>subpages<\/strong> block, or <strong>siblings block<\/strong>! Plus, we\u2019ll keep adding these easy-to-add blocks to improve your site structure.<\/li>\n<li><strong>[Premium]<\/strong> Social previews to show you how your content will be shown on Twitter and Facebook. Plus: Social Appearance Templates to guarantee a consistent look.<\/li>\n<li><strong>[Premium]<\/strong> The Insights tool that shows you what your text focuses on. This way you can keep your article in line with your keyphrases.<\/li>\n<li><strong>[Premium]<\/strong> Optimize your content for synonyms and related keyphrases.<\/li>\n<li><strong>[Premium]<\/strong> Optimize your article for different word forms of your keyphrases, as the singular and plural. But also different verb forms, synonyms, and related keyphrases. This makes for more natural content!<\/li>\n<li><strong>[Premium]<\/strong> Automatic internal linking suggestions: write your article and get automatic suggested posts to link to!<\/li>\n<li><strong>[Premium]<\/strong> An orphaned content filter to detect posts that have no links pointing towards them!<\/li>\n<li><strong>[Premium]<\/strong> SEO workouts to make working on your site as easy as ABC. These SEO workflows will get your site into shape in no time!<\/li>\n<li><strong>[Premium]<\/strong> <strong>New!<\/strong> Yoast SEO Premium comes with a new word complexity feature that gives you actionable feedback on using difficult words. This feature is in beta and English only for now.<\/li>\n<li><strong>New!<\/strong> Yoast SEO Free and Premium come with a new inclusive language analysis that helps you write inclusive content. This feature is opt-in and English-only for now.<\/li>\n<\/ul>\n<h4>KEEP YOUR SITE IN PERFECT SHAPE<\/h4>\n<p>Whether you are an online entrepreneur, blogger or content creator, a developer, a (WordPress) SEO expert or a business owner, Yoast SEO helps you keep your website in perfect shape by:<\/p>\n<ul>\n<li>Tuning the engine of your website, so you can work on creating great content!<\/li>\n<li>Giving you <strong>cornerstone content<\/strong> and <strong>internal linking<\/strong> features to help you optimize your site structure in a breeze.<\/li>\n<li>Translating your content to <strong>structured data<\/strong> where possible, to help search engines understand your website.<\/li>\n<li>Helping you manage your team: with our <strong>SEO roles<\/strong> you can give colleagues access to specific sections of the Yoast SEO plugin.<\/li>\n<li><strong>[Premium] Automatically creating redirects<\/strong> when URLs change or when pages are deleted, and providing tools to manage or create redirects.<\/li>\n<li><strong>[Premium]<\/strong> Showing you <strong>social previews<\/strong> to manage the way your page is shared on social networks like Facebook and Twitter.<\/li>\n<\/ul>\n<h4>TRUST THE EXPERTS<\/h4>\n<p>Yoast is powered by a team of expert developers, testers, software architects, and SEO consultants. They work constantly to stay at the cutting edge of WordPress SEO, and to improve the plugin with every release.<\/p>\n<p>Yoast SEO is the <strong>only WordPress SEO plugin made by world-renowned SEO experts<\/strong>.<\/p>\n<h3>GET PREMIUM SUPPORT<\/h3>\n<p>The Yoast team offers regular support on the WordPress.org forums. But we hope you understand that we prioritize our Premium customers. This one-on-one email support is available to people who have purchased Yoast SEO Premium.<\/p>\n<p>Did you know that <a href=\"https:\/\/yoa.st\/1v8\" rel=\"nofollow ugc\">Yoast SEO Premium<\/a> contains a lot of extra features:<\/p>\n<ul>\n<li>A <strong>redirect manager<\/strong> that prevents \u201c404: page not found\u201d errors<\/li>\n<li>Optimize without worrying about over-optimization with <strong>intelligent word form recognition<\/strong> available in multiple languages.<\/li>\n<li><strong>Internal linking blocks<\/strong> to structure your site easily.<\/li>\n<li><strong>Internal linking suggestions<\/strong> while you\u2019re writing.<\/li>\n<li>Preview your content to see what it will look like in the search results and when shared on social media using the <strong>Google preview<\/strong> and <strong>social preview<\/strong>.<\/li>\n<li><strong>Cornerstone content checks<\/strong> that point search engines to your most important pages.<\/li>\n<li>Connect Yoast SEO to Zapier to easily <strong>create zaps that instantly share your published posts<\/strong> with 2000+ destinations like Twitter, Facebook, and much more.<\/li>\n<\/ul>\n<p>If you are serious about your WordPress SEO, install the <a href=\"https:\/\/yoa.st\/1v8\" rel=\"nofollow ugc\">Yoast SEO Premium plugin<\/a>! <strong>Costs a little, saves a lot of time!<\/strong><\/p>\n<h4>OUR EXTENSIONS TO FURTHER IMPROVE YOUR WORDPRESS SEO<\/h4>\n<p>Check out these SEO add-ons by Yoast:<\/p>\n<ul>\n<li><strong><a href=\"https:\/\/yoa.st\/1uu\" rel=\"nofollow ugc\">Yoast Local SEO<\/a><\/strong> optimizes your website for a local audience.<\/li>\n<li><strong><a href=\"https:\/\/yoa.st\/1uw\" rel=\"nofollow ugc\">Yoast Video SEO<\/a><\/strong> ensures that Google understands what your video is about, increasing the chances of ranking in the video results.<\/li>\n<li><strong><a href=\"https:\/\/yoa.st\/1uv\" rel=\"nofollow ugc\">Yoast News SEO<\/a><\/strong> for news websites that want to improve their visibility and performance in Google News.<\/li>\n<li><strong><a href=\"https:\/\/yoa.st\/3rh\" rel=\"nofollow ugc\">WooCommerce SEO<\/a><\/strong> for all online shops that want to perform better in the search results and social media.<\/li>\n<\/ul>\n<p>These extensions work fine with the free version of Yoast SEO. Of course, the premium extensions also include 24\/7 support.<\/p>\n<p>Oh, don&#8217;t forget: our <strong><a href=\"https:\/\/yoa.st\/3ri\" rel=\"nofollow ugc\">Yoast Academy<\/a><\/strong> is for all entrepreneurs, bloggers, and anyone who wants to learn more about optimizing websites, improving your WordPress SEO, and if you want to take your content to the next level!<\/p>\n<h3>INTEGRATIONS<\/h3>\n<p>Yoast SEO integrates seamlessly into a range of themes and plugins. We work particularly well with:<\/p>\n<ul>\n<li>The <a href=\"https:\/\/wordpress.org\/support\/article\/wordpress-editor\/\" rel=\"ugc\">WordPress block editor<\/a> (or \u2018Gutenberg\u2019 editor).<\/li>\n<li>The official <a href=\"https:\/\/wordpress.org\/plugins\/amp\/\" rel=\"ugc\">AMP<\/a> plugin, which changes your templates to use the \u2018AMP\u2019 HTML format.<\/li>\n<li>Google\u2019s <a href=\"https:\/\/wordpress.org\/plugins\/web-stories\/\" rel=\"ugc\">Web Stories<\/a> plugin, which helps you to create \u2018<a href=\"https:\/\/amp.dev\/about\/stories\/\" rel=\"nofollow ugc\">web stories<\/a>\u2019.<\/li>\n<li>The <a href=\"https:\/\/wordpress.org\/plugins\/advanced-custom-fields\/\" rel=\"ugc\">Advanced Custom Fields<\/a> plugin, when you also activate the <a href=\"https:\/\/wordpress.org\/plugins\/acf-content-analysis-for-yoast-seo\/\" rel=\"ugc\">ACF Content Analysis for Yoast SEO<\/a> plugin.<\/li>\n<li>The <a href=\"https:\/\/wordpress.org\/plugins\/elementor\/\" rel=\"ugc\">Elementor<\/a> website builder.<\/li>\n<li><a href=\"https:\/\/wordpress.org\/plugins\/wp-search-with-algolia\/\" rel=\"ugc\">Algolia<\/a> integration to improve the quality of your site search.<\/li>\n<li><a href=\"https:\/\/wordproof.com\/\" rel=\"nofollow ugc\">WordProof<\/a>, which helps you prove ownership by adding timestamps.<\/li>\n<\/ul>\n<h3>BUG REPORTS<\/h3>\n<p>Do you want to report a bug for Yoast SEO? Best to do so in the WordPress SEO <a href=\"https:\/\/github.com\/Yoast\/wordpress-seo\" rel=\"nofollow ugc\">repository on GitHub<\/a>. Please note that GitHub is not a support forum and issues will be closed if they don\u2019t meet the bug requirements.<\/p>\n<h3>READ MORE<\/h3>\n<p>Want more information on search engine optimization and Yoast SEO? Have a look at:<\/p>\n<ul>\n<li>The <a href=\"https:\/\/yoa.st\/1v8\" rel=\"nofollow ugc\">Yoast SEO Plugin<\/a> official homepage.<\/li>\n<li>The <a href=\"https:\/\/yoa.st\/1va\" rel=\"nofollow ugc\">Yoast SEO Help center<\/a>.<\/li>\n<li><a href=\"https:\/\/yoa.st\/1v6\" rel=\"nofollow ugc\">WordPress SEO &#8211; The definitive Guide by Yoast<\/a>.<\/li>\n<li>Other <a href=\"https:\/\/yoa.st\/1v9\" rel=\"nofollow ugc\">WordPress Plugins<\/a> by Team Yoast.<\/li>\n<li>Also follow Yoast on <a href=\"https:\/\/facebook.com\/yoast\" rel=\"nofollow ugc\">Facebook<\/a>, <a href=\"https:\/\/www.instagram.com\/yoast\/\" rel=\"nofollow ugc\">Instagram<\/a> &amp; <a href=\"https:\/\/twitter.com\/yoast\" rel=\"nofollow ugc\">Twitter<\/a>.<\/li>\n<\/ul>\n",
-            "download_link": "https:\/\/downloads.wordpress.org\/plugin\/wordpress-seo.20.7.zip",
-            "tags": {
-                "content-analysis": "Content analysis",
-                "readability": "Readability",
+                "access-control": "access control",
+                "graphql": "graphql",
                 "schema": "schema",
-                "seo": "seo",
-                "xml-sitemap": "xml sitemap"
+                "validation": "validation"
             },
-            "donate_link": "https:\/\/yoa.st\/1up",
+            "donate_link": null,
             "icons": {
-                "1x": "https:\/\/ps.w.org\/wordpress-seo\/assets\/icon.svg?rev=2363699",
-                "svg": "https:\/\/ps.w.org\/wordpress-seo\/assets\/icon.svg?rev=2363699"
+                "1x": "https://ps.w.org/contact-form-7/assets/icon.svg?rev=2339255",
+                "svg": "https://ps.w.org/contact-form-7/assets/icon.svg?rev=2339255"
             }
         }
     ]
