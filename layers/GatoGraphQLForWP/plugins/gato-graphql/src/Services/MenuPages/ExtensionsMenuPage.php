@@ -28,7 +28,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 
     protected function hasViews(): bool
     {
-        return true;
+        return false;
     }
 
     protected function getScreenOptionLabel(): string
