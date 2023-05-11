@@ -74,7 +74,13 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
     }
 
     /**
-     * Hardcoded data with extensions
+     * Hardcoded data with extensions.
+     *
+     * To see what data must be retrieved, execute:
+     *
+     * http://api.wordpress.org/plugins/info/1.2/?action=query_plugins&per_page=1
+     *
+     * @see http://api.wordpress.org/plugins/info/1.2/?action=query_plugins&per_page=1
      */
     public function overridePluginsAPIResult(): mixed
     {
