@@ -30,7 +30,9 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
 		
         add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
         add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
+        add_filter('plugins_api', $this->overridePluginsAPI(...));
         parent::prepare_items();
+        remove_filter('plugins_api', $this->overridePluginsAPI(...));
         remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
 	}
@@ -58,5 +60,13 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
     public function overrideInstallPluginNonMenuTabs(array $tabs): array
     {
         return [];
+    }
+
+    /**
+     * Do not connect to wordpress.org to retrieve data
+     */
+    public function overridePluginsAPI(): bool
+    {
+        return true;
     }
 }
