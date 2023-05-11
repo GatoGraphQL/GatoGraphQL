@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
+use stdClass;
 use WP_Plugin_Install_List_Table;
 
 /**
@@ -31,7 +32,9 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
         add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         add_filter('plugins_api', $this->overridePluginsAPI(...));
+        add_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
         parent::prepare_items();
+        remove_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
         remove_filter('plugins_api', $this->overridePluginsAPI(...));
         remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
@@ -65,8 +68,19 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
     /**
      * Do not connect to wordpress.org to retrieve data
      */
-    public function overridePluginsAPI(): bool
+    public function overridePluginsAPI(): mixed
     {
-        return true;
+        return new stdClass();
+    }
+
+    /**
+     * Hardcoded data with extensions
+     */
+    public function overridePluginsAPIResult(): mixed
+    {
+        $data = [
+
+        ];
+        return (object) $data;
     }
 }
