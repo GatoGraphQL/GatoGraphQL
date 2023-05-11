@@ -124,7 +124,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * This method dumps the container whenever activating a depended-upon
      * plugin, or deactivating a Gato GraphQL extension.
      *
-     * When activating an extension plugin for the Gato GraphQL,
+     * When activating an extension plugin for Gato GraphQL,
      * the container will be regenerated through method
      * `handleNewActivations` (in this same class).
      *

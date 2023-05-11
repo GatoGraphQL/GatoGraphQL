@@ -1,4 +1,4 @@
-# Extension Demo for the Gato GraphQL
+# Extension Demo for Gato GraphQL
 
 Demonstration of extending the GraphQL schema, for Gato GraphQL
 
