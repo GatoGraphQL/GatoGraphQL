@@ -104,7 +104,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
     {
         return str_replace(
             '{$PLUGIN_URL}',
-            PluginApp::getMainPlugin()->getPluginURL(),
+            rtrim(PluginApp::getMainPlugin()->getPluginURL(), '/'),
             $extensionsDataSource
         );
     }
