@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Admin\Tables\ItemListTableInterface;
 use GatoGraphQL\GatoGraphQL\Admin\Tables\ExtensionListTable;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 
 /**
  * Extension menu page
@@ -79,9 +80,10 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         printf(
             '<p>%s</p>',
             sprintf(
-                __('Extensions add functionality and expand the GraphQL schema. You may obtain extensions from the <a href="%s" target="%s">Gato GraphQL website</a>.', 'gato-graphql'),
+                __('Extensions add functionality and expand the GraphQL schema. You may obtain extensions from the <a href="%s" target="%s">Gato GraphQL website%s</a>.', 'gato-graphql'),
                 'https://gatographql.com',
-                '_blank'
+                '_blank',
+                HTMLCodes::OPEN_IN_NEW_WINDOW
             )
         );
     }
