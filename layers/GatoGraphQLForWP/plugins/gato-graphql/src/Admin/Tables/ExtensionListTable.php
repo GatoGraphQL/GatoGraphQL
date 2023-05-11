@@ -19,12 +19,15 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+use WP_Plugin_Install_List_Table;
 
 /**
  * Extension Table
  */
-class ExtensionListTable extends AbstractItemListTable
+class ExtensionListTable extends WP_Plugin_Install_List_Table/*AbstractItemListTable*/ implements ItemListTableInterface
 {
+    use ItemListTableTrait;
+    
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
