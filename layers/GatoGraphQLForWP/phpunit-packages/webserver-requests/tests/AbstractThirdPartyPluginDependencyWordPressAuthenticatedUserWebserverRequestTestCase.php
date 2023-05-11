@@ -46,7 +46,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      */
     protected function provideEndpointEntries(): array
     {
-        $endpoint = 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
+        $endpoint = $this->getEndpoint();
         $providerEntries = [];
         foreach ($this->getPluginNameEntries() as $pluginName => $pluginEntry) {
             $providerEntries[$pluginName . ':enabled'] = [
@@ -65,6 +65,11 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             ];
         }
         return $providerEntries;
+    }
+
+    protected function getEndpoint(): string
+    {
+        return 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
     }
 
     /**
