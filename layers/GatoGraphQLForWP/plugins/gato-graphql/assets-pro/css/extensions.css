@@ -1,0 +1,7 @@
+/**
+ * Hide the bottom part of the extension items on the table,
+ * as it contains unneeded information
+ */
+ .plugin-card-bottom {
+    display: none;
+}

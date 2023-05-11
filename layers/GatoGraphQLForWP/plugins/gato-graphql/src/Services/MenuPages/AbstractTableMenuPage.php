@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\Admin\Tables\AbstractItemListTable;
+use GatoGraphQL\GatoGraphQL\Admin\Tables\ItemListTableInterface;
 
 /**
  * Table menu page
  */
 abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
 {
-    protected ?AbstractItemListTable $tableObject;
+    protected ?ItemListTableInterface $tableObject;
 
     abstract protected function getHeader(): string;
 
@@ -22,23 +22,34 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
 
     public function print(): void
     {
-        if (is_null($this->tableObject)) {
+        if ($this->tableObject === null) {
             return;
         }
         ?>
         <div class="wrap">
             <h1><?php echo $this->getHeader() ?></h1>
-            <?php
-            if ($this->hasViews()) {
-                $this->tableObject->views();
-            }
-            ?>
+            <?php $this->printHeader() ?>
+            <?php $this->printBody() ?>
+        </div>
+        <?php
+    }
+
+    protected function printHeader(): void
+    {
+        if ($this->hasViews()) {
+            $this->tableObject->views();
+        }
+    }
+
+    protected function printBody(): void
+    {
+        ?>
             <form method="post">
                 <?php
-                $this->tableObject->prepare_items();
-                $this->tableObject->display(); ?>
+                    $this->tableObject->prepare_items();
+                    $this->tableObject->display();
+                ?>
             </form>
-        </div>
         <?php
     }
 
@@ -61,7 +72,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
     }
 
     /**
-     * @return class-string<AbstractItemListTable>
+     * @return class-string<ItemListTableInterface>
      */
     abstract protected function getTableClass(): string;
 

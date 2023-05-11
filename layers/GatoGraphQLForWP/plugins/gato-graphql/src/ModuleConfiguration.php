@@ -166,6 +166,20 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    /**
+     * @todo Change the URL to the final one
+     */
+    public function getPROPluginShopURL(): string
+    {
+        $envVariable = Environment::PRO_PLUGIN_SHOP_URL;
+        $defaultValue = 'https://shop.gatographql.com';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+
     public function useSchemaConfigurationInInternalGraphQLServer(): bool
     {
         $envVariable = Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER;
