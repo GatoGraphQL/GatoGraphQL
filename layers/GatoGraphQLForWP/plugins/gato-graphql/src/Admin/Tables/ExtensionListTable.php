@@ -18,4 +18,32 @@ require_once ABSPATH . 'wp-admin/includes/class-wp-plugin-install-list-table.php
 class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemListTableInterface
 {
     use ItemListTableTrait;
+
+    /**
+	 * @global array  $tabs
+	 * @global string $tab
+	 * @global int    $paged
+	 * @global string $type
+	 * @global string $term
+	 */
+	public function prepare_items() {
+		
+        add_filter('install_plugins_tabs', $this->getInstallPluginTabs(...));
+        parent::prepare_items();
+        remove_filter('install_plugins_tabs', $this->getInstallPluginTabs(...));
+	}
+
+    /**
+     * Keep only the "Featured" tab
+     *
+     * @param string[] $tabs
+     * @return string[]
+     */
+    public function getInstallPluginTabs(array $tabs): array
+    {
+        return array_intersect_key(
+            ['featured' => true],
+            $tabs
+        );
+    }
 }
