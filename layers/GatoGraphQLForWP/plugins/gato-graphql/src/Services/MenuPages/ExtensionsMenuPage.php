@@ -100,7 +100,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         printf(
             '<p>%s</p>',
             sprintf(
-                __('Extensions add functionality and expand the GraphQL schema. You may obtain extensions from the <a href="%s" target="%s">Gato GraphQL website%s</a>.', 'gato-graphql'),
+                __('Extensions add functionality and expand the GraphQL schema. You can browse and get extensions on the <a href="%s" target="%s">Gato GraphQL shop%s</a>.', 'gato-graphql'),
                 'https://gatographql.com',
                 '_blank',
                 HTMLCodes::OPEN_IN_NEW_WINDOW
