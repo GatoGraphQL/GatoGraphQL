@@ -42,8 +42,8 @@
             },
             "donate_link": null,
             "icons": {
-                "1x": "https://ps.w.org/contact-form-7/assets/icon.svg?rev=2339255",
-                "svg": "https://ps.w.org/contact-form-7/assets/icon.svg?rev=2339255"
+                "1x": "{$PLUGIN_URL}/assets-pro/img/example-extension.svg",
+                "svg": "{$PLUGIN_URL}/assets-pro/img/example-extension.svg"
             }
         }
     ]
