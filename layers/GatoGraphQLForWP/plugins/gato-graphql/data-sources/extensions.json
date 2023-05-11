@@ -10,7 +10,7 @@
             "slug": "gato-graphql-access-control-visitor-ip",
             "version": "1.0.0-dev",
             "author": "<a href=\"https://gatographql.com\">Gato GraphQL</a>",
-            "author_profile": "https://profiles.wordpress.org/leoloso/",
+            "author_profile": null,
             "requires": "5.4",
             "tested": "6.2",
             "requires_php": false,
