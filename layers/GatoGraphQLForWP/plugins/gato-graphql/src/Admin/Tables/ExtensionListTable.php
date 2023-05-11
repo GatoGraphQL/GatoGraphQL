@@ -93,4 +93,13 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         $extensionsData = json_decode($extensionsDataSource, true);
         return (object) $extensionsData;
     }
+
+    public function no_items() {
+		if ( isset( $this->error ) ) {
+            parent::no_items();
+        } else { ?>
+			<div class="no-plugin-results"><?php _e('Ooops something went wrong: No extensions found. Please contact the admin.', 'gato-graphql'); ?></div>
+			<?php
+		}
+	}
 }
