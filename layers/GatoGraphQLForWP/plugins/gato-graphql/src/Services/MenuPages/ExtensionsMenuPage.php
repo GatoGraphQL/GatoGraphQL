@@ -71,7 +71,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         parent::enqueueAssets();
 
-        // $this->enqueueModalTriggerAssets();
+        $this->enqueueModalTriggerAssets();
         $this->enqueueExtensionAssets();
     }
 
