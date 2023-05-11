@@ -29,7 +29,9 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
 	public function prepare_items() {
 		
         add_filter('install_plugins_tabs', $this->getInstallPluginTabs(...));
+        add_filter('install_plugins_nonmenu_tabs', $this->getInstallPluginNonMenuTabs(...));
         parent::prepare_items();
+        remove_filter('install_plugins_nonmenu_tabs', $this->getInstallPluginNonMenuTabs(...));
         remove_filter('install_plugins_tabs', $this->getInstallPluginTabs(...));
 	}
 
@@ -45,5 +47,16 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
             ['featured' => true],
             $tabs
         );
+    }
+
+    /**
+     * Remove all tabs
+     *
+     * @param string[] $tabs
+     * @return string[]
+     */
+    public function getInstallPluginNonMenuTabs(array $tabs): array
+    {
+        return [];
     }
 }
