@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\Admin\Tables\AbstractItemListTable;
+use GatoGraphQL\GatoGraphQL\Admin\Tables\ItemListTableInterface;
 use GatoGraphQL\GatoGraphQL\Admin\Tables\ModuleListTable;
 
 /**
@@ -50,7 +50,7 @@ class ModulesMenuPage extends AbstractTableMenuPage
     }
 
     /**
-     * @return class-string<AbstractItemListTable>
+     * @return class-string<ItemListTableInterface>
      */
     protected function getTableClass(): string
     {

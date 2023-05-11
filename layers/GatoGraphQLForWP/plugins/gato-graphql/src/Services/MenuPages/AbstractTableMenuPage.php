@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\Admin\Tables\AbstractItemListTable;
+use GatoGraphQL\GatoGraphQL\Admin\Tables\ItemListTableInterface;
 
 /**
  * Table menu page
  */
 abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
 {
-    protected ?AbstractItemListTable $tableObject;
+    protected ?ItemListTableInterface $tableObject;
 
     abstract protected function getHeader(): string;
 
@@ -62,7 +62,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
     }
 
     /**
-     * @return class-string<AbstractItemListTable>
+     * @return class-string<ItemListTableInterface>
      */
     abstract protected function getTableClass(): string;
 

@@ -10,28 +10,9 @@ use WP_List_Table;
 /**
  * Module Table
  */
-abstract class AbstractItemListTable extends WP_List_Table
+abstract class AbstractItemListTable extends WP_List_Table implements ItemListTableInterface
 {
-    protected string $itemsPerPageOptionName = '';
-    protected int $defaultItemsPerPage = 10;
-
-    public function setItemsPerPageOptionName(string $itemsPerPageOptionName): void
-    {
-        $this->itemsPerPageOptionName = $itemsPerPageOptionName;
-    }
-    public function setDefaultItemsPerPage(int $defaultItemsPerPage): void
-    {
-        $this->defaultItemsPerPage = $defaultItemsPerPage;
-    }
-
-    public function getItemsPerPageOptionName(): string
-    {
-        return $this->itemsPerPageOptionName;
-    }
-    public function getDefaultItemsPerPage(): int
-    {
-        return $this->defaultItemsPerPage;
-    }
+    use ItemListTableTrait;
 
     /**
      * Singular name of the listed records
