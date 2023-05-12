@@ -8,23 +8,18 @@ interface ItemListTableInterface
 {
     /**
 	 * Displays the list of views available on this table.
-	 *
-	 * @since 3.1.0
 	 */
 	public function views();
     /**
 	 * Prepares the list of items for displaying.
-	 *
-	 * @uses WP_List_Table::set_pagination_args()
-	 *
-	 * @since 3.1.0
-	 * @abstract
+     * @return void
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	public function prepare_items();
     /**
 	 * Displays the table.
-	 *
-	 * @since 3.1.0
+     * @return void
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	public function display();
 

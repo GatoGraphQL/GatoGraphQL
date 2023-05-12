@@ -26,11 +26,8 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
     use ItemListTableTrait;
 
     /**
-	 * @global array  $tabs
-	 * @global string $tab
-	 * @global int    $paged
-	 * @global string $type
-	 * @global string $term
+     * @return void
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	public function prepare_items() {
 		
@@ -139,7 +136,11 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         return $action_links;
     }
 
-    public function no_items() {
+    /**
+     * @return void
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+	 */
+	public function no_items() {
 		if ( isset( $this->error ) ) {
             parent::no_items();
         } else { ?>
@@ -150,6 +151,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
 
 	/**
      * Adapt the generated HTML content
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     public function display_rows() {
 		ob_start();
