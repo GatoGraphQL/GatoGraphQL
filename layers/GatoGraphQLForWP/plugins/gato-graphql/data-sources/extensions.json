@@ -2,9 +2,16 @@
     "info": {
         "page": 1,
         "pages": 1,
-        "results": 1
+        "results": 2
     },
     "plugins": [
+        {
+            "name": "Gato GraphQL PRO",
+            "slug": "gato-graphql-pro",
+            "short_description": "PRO version of Gato GraphQL, with plenty of additional features.",
+            "homepage": "https://gatographql.com/pro",
+            "gato_extension_extension_slug": "gato-graphql-pro"
+        },
         {
             "name": "Access Control: Visitor IP",
             "slug": "gato-graphql-access-control-visitor-ip",
