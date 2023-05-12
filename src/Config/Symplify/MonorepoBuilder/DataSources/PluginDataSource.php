@@ -26,6 +26,7 @@ class PluginDataSource
                     'dev-helpers/\*',
                     'docs/images/\*',
                     'docs-pro/images/\*',
+                    'docs-extensions/images/\*',
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks-pro'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
