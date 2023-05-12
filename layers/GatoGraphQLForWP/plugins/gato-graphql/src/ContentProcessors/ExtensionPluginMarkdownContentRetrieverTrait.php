@@ -15,8 +15,10 @@ trait ExtensionPluginMarkdownContentRetrieverTrait
      */
     protected function getDocsFolder(): string
     {
-        return 'docs-extensions';
+        return 'docs-extensions/' . $this->getExtensionSubfolder();
     }
+
+    abstract protected function getExtensionSubfolder(): string;
 
     /**
      * Get the GitHub repo URL, to retrieve images for PROD.

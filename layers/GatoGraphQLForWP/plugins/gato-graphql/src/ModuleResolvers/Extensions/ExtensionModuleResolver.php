@@ -32,4 +32,9 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::ACCESS_CONTROL_VISITOR_IP,
         ];
     }
+
+    protected function getExtensionSubfolder(): string
+    {
+        return 'access-control-visitor-ip';
+    }
 }
