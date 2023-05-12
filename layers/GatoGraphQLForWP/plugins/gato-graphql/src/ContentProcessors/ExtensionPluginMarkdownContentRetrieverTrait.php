@@ -15,7 +15,7 @@ trait ExtensionPluginMarkdownContentRetrieverTrait
      */
     protected function getDocsFolder(): string
     {
-        return 'docs-extensions/' . $this->getExtensionSubfolder();
+        return 'extensions/' . $this->getExtensionSubfolder() . '/docs';
     }
 
     abstract protected function getExtensionSubfolder(): string;
@@ -27,7 +27,7 @@ trait ExtensionPluginMarkdownContentRetrieverTrait
     {
         return str_replace(
             '/docs/',
-            '/docs-extensions/',
+            '/extensions/' . $this->getExtensionSubfolder() . '/docs/',
             PluginStaticHelpers::getGitHubRepoDocsRootPathURL(),
         );
     }
