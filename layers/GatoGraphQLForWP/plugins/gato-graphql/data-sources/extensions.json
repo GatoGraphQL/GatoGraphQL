@@ -8,9 +8,10 @@
         {
             "name": "Gato GraphQL PRO",
             "slug": "gato-graphql-pro",
-            "short_description": "PRO version of Gato GraphQL, with plenty of additional features.",
+            "short_description": "Superpower your application with PRO features: Access Control, Cache Control, Multiple Query Execution, and many more.",
             "homepage": "https://gatographql.com/pro",
-            "gato_extension_slug": "gato-graphql-pro"
+            "gato_extension_slug": "gato-graphql-pro",
+            "gato_is_featured": true
         },
         {
             "name": "Access Control: Visitor IP",
