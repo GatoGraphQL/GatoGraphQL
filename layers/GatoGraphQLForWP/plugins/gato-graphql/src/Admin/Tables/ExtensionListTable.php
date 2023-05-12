@@ -251,6 +251,17 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
                 esc_url($adaptedDetailsLink),
                 $html
             );
+
+            /**
+             * Print the Gato GraphQL PRO plugin in a different background
+             */
+            if ($plugin['gato_is_featured'] ?? false) {
+                $html = str_replace(
+                    '<div class="plugin-card plugin-card-' . sanitize_html_class( $plugin['slug'] ) . '">',
+                    '<div class="plugin-card plugin-card-' . sanitize_html_class( $plugin['slug'] ) . ' plugin-card-is-featured">',
+                    $html
+                );
+            }
         }
 
         return $html;
