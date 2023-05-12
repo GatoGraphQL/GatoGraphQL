@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ExtensionModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverTrait;
 use GatoGraphQL\GatoGraphQL\Plugin;
 
 class ExtensionModuleResolver extends AbstractExtensionModuleResolver
 {
-    use ModuleResolverTrait;
-
     public final const ACCESS_CONTROL_VISITOR_IP = Plugin::NAMESPACE . '\extensions\access-control-visitor-ip';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
