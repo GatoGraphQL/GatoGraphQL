@@ -54,8 +54,8 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
         /** @var array<array<string,mixed>> */
         $items = &$this->items;
-        foreach (array_keys($items) as $key) {
-            $items[$key]['icons'] ??= [
+        foreach ($items as &$plugin) {
+            $plugin['icons'] ??= [
                 'svg' =>  $gatoGraphQLLogoFile,
                 '1x' =>  $gatoGraphQLLogoFile,
             ];
