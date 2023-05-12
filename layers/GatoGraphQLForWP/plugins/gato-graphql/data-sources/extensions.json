@@ -45,7 +45,7 @@
                 "1x": "{$PLUGIN_URL}/assets-pro/img/example-extension.svg",
                 "svg": "{$PLUGIN_URL}/assets-pro/img/example-extension.svg"
             },
-            "gato_doc_module": "GatoGraphQL\\AccessControlVisitorIP\\access-control-rule-visitor-ip"
+            "gato_extension_doc_module": "GatoGraphQL\\AccessControlVisitorIP\\access-control-rule-visitor-ip"
         }
     ]
 }

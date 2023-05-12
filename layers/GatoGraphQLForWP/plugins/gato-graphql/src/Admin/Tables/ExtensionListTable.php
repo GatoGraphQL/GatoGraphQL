@@ -191,7 +191,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
                 RequestParams::TAB,
                 RequestParams::TAB_DOCS,
                 RequestParams::MODULE,
-                urlencode($plugin['gato_doc_module'])
+                urlencode($plugin['gato_extension_doc_module'])
             ));
             $html = str_replace(
                 esc_url($details_link),
