@@ -11,11 +11,8 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
 use stdClass;
 
-/**
- * The file containing class WP_Plugin_Install_List_Table is not
- * loaded by default in WordPress.
- */
-
+// The file containing class WP_Plugin_Install_List_Table is not
+// loaded by default in WordPress.
 require_once ABSPATH . 'wp-admin/includes/class-wp-plugin-install-list-table.php';
 
 /**
