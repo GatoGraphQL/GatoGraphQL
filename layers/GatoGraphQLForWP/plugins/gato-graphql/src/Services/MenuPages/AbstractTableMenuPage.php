@@ -111,12 +111,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
          */
         $tableClass = $this->getTableClass();
         $tableObject = new $tableClass();
-
-        /**
-         * Set properties
-         */
-        $tableObject->setItemsPerPageOptionName($this->getScreenOptionName());
-        $tableObject->setDefaultItemsPerPage($this->getScreenOptionDefault());
+        
         return $tableObject;
     }
 
