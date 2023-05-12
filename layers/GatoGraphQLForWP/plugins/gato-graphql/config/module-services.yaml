@@ -6,3 +6,6 @@ services:
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\:
         resource: '../src/ModuleResolvers/*'
+
+    GatoGraphQL\GatoGraphQL\ExtensionModuleResolvers\:
+        resource: '../../../src/ExtensionModuleResolvers/*'

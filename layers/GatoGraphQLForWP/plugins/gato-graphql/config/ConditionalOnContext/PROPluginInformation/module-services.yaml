@@ -6,6 +6,3 @@ services:
 
     GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers\:
         resource: '../../../src/ConditionalOnContext/PROPluginInformation/ModuleResolvers/*'
-
-    GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ExtensionModuleResolvers\:
-        resource: '../../../src/ConditionalOnContext/PROPluginInformation/ExtensionModuleResolvers/*'

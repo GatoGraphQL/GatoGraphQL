@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ExtensionModuleResolvers;
+namespace GatoGraphQL\GatoGraphQL\ExtensionModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers\ModuleResolverTrait;
