@@ -58,7 +58,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         $mainPluginVersion = $mainPlugin->getPluginVersion();
         $pluginURL = $mainPlugin->getPluginURL();
         $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
-        
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
@@ -70,7 +70,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
          * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
          */
         $gatoGraphQLPluginData = get_plugin_data($mainPlugin->getPluginFile());
-            
+
         /** @var array<array<string,mixed>> */
         $items = &$this->items;
         foreach ($items as &$plugin) {
@@ -257,8 +257,8 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
              */
             if ($plugin['gato_is_featured'] ?? false) {
                 $html = str_replace(
-                    '<div class="plugin-card plugin-card-' . sanitize_html_class( $plugin['slug'] ) . '">',
-                    '<div class="plugin-card plugin-card-' . sanitize_html_class( $plugin['slug'] ) . ' plugin-card-is-featured">',
+                    '<div class="plugin-card plugin-card-' . sanitize_html_class($plugin['slug']) . '">',
+                    '<div class="plugin-card plugin-card-' . sanitize_html_class($plugin['slug']) . ' plugin-card-is-featured">',
                     $html
                 );
             }
