@@ -58,6 +58,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         $mainPluginVersion = $mainPlugin->getPluginVersion();
         $pluginURL = $mainPlugin->getPluginURL();
         $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+        
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
@@ -81,6 +82,11 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
             );
             $plugin['requires'] ??= $gatoGraphQLPluginData['RequiresWP'];
             $plugin['requires_php'] ??= $gatoGraphQLPluginData['RequiresPHP'];
+            $plugin['homepage'] ??= sprintf(
+                '%s/extensions/%s',
+                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+                $plugin['gato_extension_extension_slug']
+            );
             $plugin['icons'] ??= [
                 'svg' =>  $gatoGraphQLLogoFile,
                 '1x' =>  $gatoGraphQLLogoFile,
