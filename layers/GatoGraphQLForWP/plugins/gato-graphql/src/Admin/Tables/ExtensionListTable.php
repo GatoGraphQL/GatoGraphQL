@@ -50,7 +50,9 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      */
     protected function injectDefaultValuesToItems(): void
     {
-        $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
+        $pluginURL = $mainPlugin->getPluginURL();
         $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
         /** @var array<array<string,mixed>> */
         $items = &$this->items;
@@ -59,6 +61,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
                 'svg' =>  $gatoGraphQLLogoFile,
                 '1x' =>  $gatoGraphQLLogoFile,
             ];
+            $plugin['version'] ??= $mainPluginVersion;
         }
     }
 
