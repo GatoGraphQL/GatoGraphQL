@@ -151,12 +151,17 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
 
 	/**
      * Adapt the generated HTML content
+     * @return void
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     public function display_rows() {
 		ob_start();
         parent::display_rows();
 		$html = ob_get_clean();
+
+        if ($html === false) {
+            return;
+        }
 
         $html = $this->adaptDisplayRowsHTML($html);
 
