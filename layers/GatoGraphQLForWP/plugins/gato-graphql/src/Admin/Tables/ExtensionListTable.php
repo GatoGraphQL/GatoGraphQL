@@ -53,8 +53,8 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
     public function overrideInstallPluginTabs(array $tabs): array
     {
         return array_intersect_key(
-            ['featured' => true],
-            $tabs
+            $tabs,
+            ['featured' => true]
         );
     }
 
