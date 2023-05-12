@@ -10,7 +10,7 @@ use GatoGraphQL\GatoGraphQL\Admin\Tables\ModuleListTable;
 /**
  * Module menu page
  */
-class ModulesMenuPage extends AbstractTableMenuPage
+class ModulesMenuPage extends AbstractItemListTableMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
 
