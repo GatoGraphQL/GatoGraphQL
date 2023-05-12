@@ -37,7 +37,9 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
     protected function printHeader(): void
     {
         if ($this->hasViews()) {
-            $this->tableObject->views();
+            /** @var ItemListTableInterface */
+            $tableObject = $this->tableObject;
+            $tableObject->views();
         }
     }
 
@@ -46,8 +48,10 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
         ?>
             <form method="post">
                 <?php
-                    $this->tableObject->prepare_items();
-                    $this->tableObject->display();
+                    /** @var ItemListTableInterface */
+                    $tableObject = $this->tableObject;
+                    $tableObject->prepare_items();
+                    $tableObject->display();
                 ?>
             </form>
         <?php
