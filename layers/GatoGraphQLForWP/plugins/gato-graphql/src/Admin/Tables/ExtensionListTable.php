@@ -185,7 +185,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
                 '&amp;TB_iframe=true&amp;width=600&amp;height=550'
             );
             // Replace it with this other link
-            $extensionModule = 'GatoGraphQL\\GatoGraphQL\\extensions\\' . $plugin['gato_extension_doc_module'];
+            $extensionModule = 'GatoGraphQL\\GatoGraphQL\\extensions\\' . $plugin['gato_extension_extension_slug'];
             $adaptedDetailsLink = \admin_url(sprintf(
                 'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true&width=600&height=550',
                 App::request('page') ?? App::query('page', ''),
