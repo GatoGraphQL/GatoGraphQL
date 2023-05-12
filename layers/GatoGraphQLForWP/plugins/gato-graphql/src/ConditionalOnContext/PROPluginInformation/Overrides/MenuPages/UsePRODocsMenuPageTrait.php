@@ -10,8 +10,9 @@ trait UsePRODocsMenuPageTrait
 {
     protected function enqueuePRODocsAssets(): void
     {
-        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginURL = $mainPlugin->getPluginURL();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         /**
          * Add tabs to the documentation

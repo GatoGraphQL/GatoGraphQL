@@ -584,8 +584,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function enqueueSettingsAssets(): void
     {
-        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginURL = $mainPlugin->getPluginURL();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_script(
             'gato-graphql-settings',

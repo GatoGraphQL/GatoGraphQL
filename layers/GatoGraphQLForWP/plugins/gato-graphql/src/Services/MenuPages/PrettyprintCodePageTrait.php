@@ -16,8 +16,9 @@ trait PrettyprintCodePageTrait
      */
     protected function enqueueHighlightJSAssets(): void
     {
-        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginURL = $mainPlugin->getPluginURL();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         // Commented out Prettify
         // \wp_enqueue_style(

@@ -80,8 +80,9 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 
     protected function enqueueExtensionAssets(): void
     {
-        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginURL = $mainPlugin->getPluginURL();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         /**
          * Hide the bottom part of the extension items on the table,
