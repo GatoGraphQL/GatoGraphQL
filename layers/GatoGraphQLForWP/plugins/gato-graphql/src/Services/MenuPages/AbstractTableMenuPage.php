@@ -98,18 +98,26 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
             \add_screen_option($option, $args);
         }
 
+        $this->tableObject = $this->createTableObject();
+    }
+
+    protected function createTableObject(): ItemListTableInterface
+    {
         /**
          * Instantiate the table object.
-         * It inherits from \WP_List_Table, which is not available when defining services.
-         * Hence, cannot use the container.
+         * 
+         * It inherits from \WP_List_Table, which is not available
+         * when defining services. Hence, cannot use the container.
          */
         $tableClass = $this->getTableClass();
-        $this->tableObject = new $tableClass();
+        $tableObject = new $tableClass();
+
         /**
          * Set properties
          */
-        $this->tableObject->setItemsPerPageOptionName($this->getScreenOptionName());
-        $this->tableObject->setDefaultItemsPerPage($this->getScreenOptionDefault());
+        $tableObject->setItemsPerPageOptionName($this->getScreenOptionName());
+        $tableObject->setDefaultItemsPerPage($this->getScreenOptionDefault());
+        return $tableObject;
     }
 
     public function initialize(): void
