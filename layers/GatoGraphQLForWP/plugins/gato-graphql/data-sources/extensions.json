@@ -10,7 +10,8 @@
             "slug": "gato-graphql-pro",
             "short_description": "PRO version of Gato GraphQL, with plenty of additional features.",
             "homepage": "https://gatographql.com/pro",
-            "gato_extension_slug": "gato-graphql-pro"
+            "gato_extension_slug": "gato-graphql-pro",
+            "gato_is_featured": true
         },
         {
             "name": "Access Control: Visitor IP",
