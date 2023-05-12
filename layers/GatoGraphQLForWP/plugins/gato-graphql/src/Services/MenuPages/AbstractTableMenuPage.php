@@ -105,13 +105,13 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
     {
         /**
          * Instantiate the table object.
-         * 
+         *
          * It inherits from \WP_List_Table, which is not available
          * when defining services. Hence, cannot use the container.
          */
         $tableClass = $this->getTableClass();
         $tableObject = new $tableClass();
-        
+
         return $tableObject;
     }
 
