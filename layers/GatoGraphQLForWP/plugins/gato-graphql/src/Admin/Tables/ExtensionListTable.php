@@ -13,6 +13,8 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
 use stdClass;
 
+use function get_plugin_data;
+
 // The file containing class WP_Plugin_Install_List_Table is not
 // loaded by default in WordPress.
 require_once ABSPATH . 'wp-admin/includes/class-wp-plugin-install-list-table.php';
@@ -58,6 +60,15 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+
+        /**
+         * Retrieve the plugin data for the Gato GraphQL plugin.
+         * As all extensions live in the same monorepo, they have
+         * the same requirements.
+         *
+         * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
+         */
+        $gatoGraphQLPluginData = get_plugin_data($mainPlugin->getPluginFile());
             
         /** @var array<array<string,mixed>> */
         $items = &$this->items;
@@ -65,9 +76,11 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
             $plugin['version'] ??= $mainPluginVersion;
             $plugin['author'] ??= sprintf(
                 '<a href="%s">%s</a>',
-                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
-                'Gato GraphQL'
+                $gatoGraphQLPluginData['AuthorURI'],
+                $gatoGraphQLPluginData['Author']
             );
+            $plugin['requires'] ??= $gatoGraphQLPluginData['RequiresWP'];
+            $plugin['requires_php'] ??= $gatoGraphQLPluginData['RequiresPHP'];
             $plugin['icons'] ??= [
                 'svg' =>  $gatoGraphQLLogoFile,
                 '1x' =>  $gatoGraphQLLogoFile,
