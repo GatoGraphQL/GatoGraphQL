@@ -1,7 +1,14 @@
 /**
- * Hide the bottom part of the extension items on the table,
- * as it contains unneeded information
+ * Hide elements on the bottom part of the extension items on the table,
+ * as they contain unneeded information
  */
- .plugin-card-bottom {
+.plugin-card-bottom > .column-rating,
+.plugin-card-bottom > .column-updated,
+.plugin-card-bottom > .column-downloaded
+{
     display: none;
+}
+.plugin-card-bottom > .column-compatibility
+{
+    width: auto;
 }
