@@ -338,8 +338,9 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
              * Register Highlight.js CSS file for documentation
              */
             if ($this->registerHighlightJSCSS()) {
-                $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
-                $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+                $mainPlugin = PluginApp::getMainPlugin();
+                $mainPluginURL = $mainPlugin->getPluginURL();
+                $mainPluginVersion = $mainPlugin->getPluginVersion();
                 \wp_enqueue_style(
                     'highlight-style',
                     $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css',

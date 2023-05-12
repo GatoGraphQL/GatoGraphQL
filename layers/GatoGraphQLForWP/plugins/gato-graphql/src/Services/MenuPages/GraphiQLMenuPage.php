@@ -45,8 +45,9 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
      */
     protected function enqueueGraphiQLClientAssets(): void
     {
-        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginURL = $mainPlugin->getPluginURL();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_style(
             'gato-graphql-graphiql-client',
@@ -67,8 +68,9 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             'response' => $this->getResponse(),
         );
 
-        $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
-        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginURL = $mainPlugin->getPluginURL();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_style(
             'gato-graphql-graphiql',
