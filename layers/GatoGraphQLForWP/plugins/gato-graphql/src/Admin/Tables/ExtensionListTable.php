@@ -7,6 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
 use stdClass;
@@ -54,14 +56,22 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         $mainPluginVersion = $mainPlugin->getPluginVersion();
         $pluginURL = $mainPlugin->getPluginURL();
         $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            
         /** @var array<array<string,mixed>> */
         $items = &$this->items;
         foreach ($items as &$plugin) {
+            $plugin['version'] ??= $mainPluginVersion;
+            $plugin['author'] ??= sprintf(
+                '<a href="%s">%s</a>',
+                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+                'Gato GraphQL'
+            );
             $plugin['icons'] ??= [
                 'svg' =>  $gatoGraphQLLogoFile,
                 '1x' =>  $gatoGraphQLLogoFile,
             ];
-            $plugin['version'] ??= $mainPluginVersion;
         }
     }
 
