@@ -8,7 +8,6 @@
         {
             "name": "Access Control: Visitor IP",
             "slug": "gato-graphql-access-control-visitor-ip",
-            "author_profile": null,
             "requires": "5.4",
             "tested": "6.2",
             "requires_php": false,
