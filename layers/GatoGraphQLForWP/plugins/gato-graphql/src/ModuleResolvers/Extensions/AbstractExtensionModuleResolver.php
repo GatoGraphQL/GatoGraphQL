@@ -13,7 +13,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
 abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver
 {
     use ExtensionModuleResolverTrait;
-    
+
     /**
      * The type of the module doesn't matter, as these modules
      * are all hidden anyway
