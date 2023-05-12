@@ -21,7 +21,6 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     public final const ACCESS_CONTROL_RULE_USER_STATE = Plugin::NAMESPACE . '\access-control-rule-user-state';
     public final const ACCESS_CONTROL_RULE_USER_ROLES = Plugin::NAMESPACE . '\access-control-rule-user-roles';
     public final const ACCESS_CONTROL_RULE_USER_CAPABILITIES = Plugin::NAMESPACE . '\access-control-rule-user-capabilities';
-    public final const ACCESS_CONTROL_RULE_VISITOR_IP = Plugin::NAMESPACE . '\access-control-rule-visitor-ip';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -46,7 +45,6 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::ACCESS_CONTROL_RULE_USER_STATE,
             self::ACCESS_CONTROL_RULE_USER_ROLES,
             self::ACCESS_CONTROL_RULE_USER_CAPABILITIES,
-            self::ACCESS_CONTROL_RULE_VISITOR_IP,
         ];
     }
 
@@ -60,7 +58,6 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
                 return [];
             case self::ACCESS_CONTROL_RULE_DISABLE_ACCESS:
             case self::ACCESS_CONTROL_RULE_USER_STATE:
-            case self::ACCESS_CONTROL_RULE_VISITOR_IP:
                 return [
                     [
                         self::ACCESS_CONTROL,
@@ -85,7 +82,6 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::ACCESS_CONTROL_RULE_USER_STATE => \__('Access Control Rule: User State', 'gato-graphql'),
             self::ACCESS_CONTROL_RULE_USER_ROLES => \__('Access Control Rule: User Roles', 'gato-graphql'),
             self::ACCESS_CONTROL_RULE_USER_CAPABILITIES => \__('Access Control Rule: User Capabilities', 'gato-graphql'),
-            self::ACCESS_CONTROL_RULE_VISITOR_IP => \__('Access Control Rule: Visitor IP', 'gato-graphql'),
             default => $module,
         };
     }
@@ -103,8 +99,6 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
                 return \__('Allow or reject access to schema elements based on the user having a certain role', 'gato-graphql');
             case self::ACCESS_CONTROL_RULE_USER_CAPABILITIES:
                 return \__('Allow or reject access to schema elements based on the user having a certain capability', 'gato-graphql');
-            case self::ACCESS_CONTROL_RULE_VISITOR_IP:
-                return \__('Allow or reject access to schema elements based on the visitor coming from an allowed IP address', 'gato-graphql');
         }
         return parent::getDescription($module);
     }
