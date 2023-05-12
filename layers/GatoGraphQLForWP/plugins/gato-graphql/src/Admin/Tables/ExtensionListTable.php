@@ -28,7 +28,6 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      */
     public function prepare_items()
     {
-
         add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
         add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         add_filter('plugins_api', $this->overridePluginsAPI(...));
@@ -40,6 +39,27 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         remove_filter('plugins_api', $this->overridePluginsAPI(...));
         remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
+
+        $this->injectDefaultValuesToItems();
+    }
+
+    /**
+     * Inject default items (and those that can be retrieved
+     * via PHP) via code, so that it's not needed to repeat
+     * these extensions.json
+     */
+    protected function injectDefaultValuesToItems(): void
+    {
+        $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+        /** @var array<array<string,mixed>> */
+        $items = &$this->items;
+        foreach (array_keys($items) as $key) {
+            $items[$key]['icons'] ??= [
+                'svg' =>  $gatoGraphQLLogoFile,
+                '1x' =>  $gatoGraphQLLogoFile,
+            ];
+        }
     }
 
     /**

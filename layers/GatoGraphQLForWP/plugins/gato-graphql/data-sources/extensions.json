@@ -17,10 +17,6 @@
             "requires_plugins": [],
             "homepage": "https://gatographql.com/extensions/access-control-visitor-ip",
             "short_description": "Allow or reject access to schema elements based on the visitor coming from an allowed IP address.",
-            "icons": {
-                "1x": "{$PLUGIN_URL}/assets-pro/img/GatoGraphQL-logo.svg",
-                "svg": "{$PLUGIN_URL}/assets-pro/img/GatoGraphQL-logo.svg"
-            },
             "gato_extension_extension_slug": "access-control-visitor-ip"
         }
     ]
