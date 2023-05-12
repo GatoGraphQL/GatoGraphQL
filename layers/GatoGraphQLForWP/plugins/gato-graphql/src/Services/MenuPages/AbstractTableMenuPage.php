@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\Admin\Tables\ItemListTableInterface;
+use GatoGraphQL\GatoGraphQL\Admin\Tables\TableInterface;
 
 /**
  * Table menu page
  */
 abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
 {
-    protected ?ItemListTableInterface $tableObject;
+    protected ?TableInterface $tableObject;
 
     abstract protected function getHeader(): string;
 
@@ -37,7 +37,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
     protected function printHeader(): void
     {
         if ($this->hasViews()) {
-            /** @var ItemListTableInterface */
+            /** @var TableInterface */
             $tableObject = $this->tableObject;
             $tableObject->views();
         }
@@ -48,7 +48,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
         ?>
             <form method="post">
                 <?php
-                    /** @var ItemListTableInterface */
+                    /** @var TableInterface */
                     $tableObject = $this->tableObject;
                     $tableObject->prepare_items();
                     $tableObject->display();
@@ -76,7 +76,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
     }
 
     /**
-     * @return class-string<ItemListTableInterface>
+     * @return class-string<TableInterface>
      */
     abstract protected function getTableClass(): string;
 
@@ -98,18 +98,21 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
             \add_screen_option($option, $args);
         }
 
+        $this->tableObject = $this->createTableObject();
+    }
+
+    protected function createTableObject(): TableInterface
+    {
         /**
          * Instantiate the table object.
-         * It inherits from \WP_List_Table, which is not available when defining services.
-         * Hence, cannot use the container.
+         *
+         * It inherits from \WP_List_Table, which is not available
+         * when defining services. Hence, cannot use the container.
          */
         $tableClass = $this->getTableClass();
-        $this->tableObject = new $tableClass();
-        /**
-         * Set properties
-         */
-        $this->tableObject->setItemsPerPageOptionName($this->getScreenOptionName());
-        $this->tableObject->setDefaultItemsPerPage($this->getScreenOptionDefault());
+        $tableObject = new $tableClass();
+
+        return $tableObject;
     }
 
     public function initialize(): void
