@@ -2,4 +2,4 @@
 
 @todo Complete doc for extension!
 
-![Sample pic](../../images/sample-acl-rule-visitor-ip-block.png)
+![Some pic](../../images/acl-rule-visitor-ip-block.png)
