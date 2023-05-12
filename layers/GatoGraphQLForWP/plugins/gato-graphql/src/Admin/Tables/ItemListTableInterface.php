@@ -7,7 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 interface ItemListTableInterface
 {
     /**
-	 * Displays the list of views available on this table.
+     * Displays the list of views available on this table.
+     * @return void
 	 */
 	public function views();
 
