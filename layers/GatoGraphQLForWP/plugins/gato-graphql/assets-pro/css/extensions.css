@@ -12,3 +12,6 @@
 {
     width: auto;
 }
+.plugin-card-is-featured {
+    background-color: aliceblue;
+}
