@@ -8,7 +8,6 @@
         {
             "name": "Access Control: Visitor IP",
             "slug": "gato-graphql-access-control-visitor-ip",
-            "tested": "6.2",
             "short_description": "Allow or reject access to schema elements based on the visitor coming from an allowed IP address.",
             "gato_extension_extension_slug": "access-control-visitor-ip"
         }
