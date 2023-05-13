@@ -25,6 +25,8 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
  */
 class ModuleListTable extends AbstractItemListTable
 {
+    use WithOpeningModuleDocInModalListTableTrait;
+
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
@@ -228,14 +230,10 @@ class ModuleListTable extends AbstractItemListTable
                  */
                 $modulesMenuPage = $instanceManager->getInstance(ModulesMenuPage::class);
                 if ($item['has-docs']) {
-                    $url = \admin_url(sprintf(
-                        'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true&width=600&height=550',
+                    $url = $this->getOpeningModuleDocInModalLinkURL(
                         $modulesMenuPage->getScreenID(),
-                        RequestParams::TAB,
-                        RequestParams::TAB_DOCS,
-                        RequestParams::MODULE,
-                        urlencode($item['module'])
-                    ));
+                        $item['module']
+                    );
                     $actions['docs'] = \sprintf(
                         '<a href="%s" class="%s" data-title="%s">%s</a>',
                         \esc_url($url),
