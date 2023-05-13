@@ -90,10 +90,11 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
         }
         return sprintf(
             <<<HTML
-                <div class="go-pro-highlight">
+                <div class="%s">
                     <p>%s %s</p>
                 </div>
             HTML,
+            'go-pro-highlight' . ($recipeEntryPROExtensionModule !== null ? ' pro-extension' : ''),
             $message,
             $button
         ) . $recipeContent;
