@@ -52,6 +52,11 @@ class ExtensionListTable extends AbstractExtensionListTable
                     'slug' => $moduleResolver->getSlug($module),
                     'short_description' => $moduleResolver->getDescription($module),
                     'homepage' => $moduleResolver->getWebsiteURL($module),
+
+                    /**
+                     * These are custom properties, not required by the upstream class,
+                     * but used internally to modify the generated HTML content
+                     */
                     'gato_extension_module' => $module,
                     'gato_extension_slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
                 ]
