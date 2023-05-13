@@ -41,6 +41,7 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
         }
         return PROPluginStaticHelpers::getPROTitle(
             $recipeEntryTitle,
+            $recipeEntryPROExtensionModule,
         );
     }
 
