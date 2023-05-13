@@ -20,9 +20,4 @@ class AccessControlVisitorIPExtensionModuleResolver extends AbstractExtensionMod
             self::EXTENSION_MODULE,
         ];
     }
-
-    protected function getExtensionSubfolder(): string
-    {
-        return self::EXTENSION_SLUG;
-    }
 }
