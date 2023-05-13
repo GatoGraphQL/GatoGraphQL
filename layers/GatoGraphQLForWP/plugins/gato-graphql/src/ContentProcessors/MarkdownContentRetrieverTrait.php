@@ -44,11 +44,12 @@ trait MarkdownContentRetrieverTrait
         string $relativePathDir = '',
         array $options = []
     ): void {
-        $this->getMarkdownContentParser()->setBaseDir($this->getBaseDir());
-        $this->getMarkdownContentParser()->setBaseURL($this->getBaseURL());
-        $this->getMarkdownContentParser()->setDocsFolder($this->getDocsFolder());
-        $this->getMarkdownContentParser()->setGitHubRepoDocsRootPathURL($this->getGitHubRepoDocsRootPathURL());
-        $this->getMarkdownContentParser()->setUseDocsFolderInFileDir($this->getUseDocsFolderInFileDir());
+        $markdownContentParser = $this->getMarkdownContentParser();
+        $markdownContentParser->setBaseDir($this->getBaseDir());
+        $markdownContentParser->setBaseURL($this->getBaseURL());
+        $markdownContentParser->setDocsFolder($this->getDocsFolder());
+        $markdownContentParser->setGitHubRepoDocsRootPathURL($this->getGitHubRepoDocsRootPathURL());
+        $markdownContentParser->setUseDocsFolderInFileDir($this->getUseDocsFolderInFileDir());
     }
 
     /**
