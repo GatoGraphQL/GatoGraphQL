@@ -162,7 +162,7 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
     {
         $items = [];
         $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $modules = $moduleRegistry->getAllModules(true, false, true);
+        $modules = $moduleRegistry->getAllModules(true, false, false);
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
