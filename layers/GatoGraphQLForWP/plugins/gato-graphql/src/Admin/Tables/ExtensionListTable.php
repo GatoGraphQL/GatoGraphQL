@@ -138,14 +138,25 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      */
     public function overridePluginsAPIResult(): mixed
     {
+        return (object) $this->getAllItems();
+    }
+
+    /**
+     * Return all the items to display on the table
+     *
+     * @return mixed[]
+     */
+    protected function getAllItems(): array
+    {
         $extensionsDataSourceFile = PluginApp::getMainPlugin()->getPluginDir() . '/data-sources/extensions.json';
         $extensionsDataSource = file_get_contents($extensionsDataSourceFile);
         if ($extensionsDataSource === false) {
-            return new stdClass();
+            return [];
         }
         $extensionsDataSource = $this->replaceVariablesInJSONDataSource($extensionsDataSource);
+        /** @var mixed[] */
         $extensionsData = json_decode($extensionsDataSource, true);
-        return (object) $extensionsData;
+        return $extensionsData;
     }
 
     /**
