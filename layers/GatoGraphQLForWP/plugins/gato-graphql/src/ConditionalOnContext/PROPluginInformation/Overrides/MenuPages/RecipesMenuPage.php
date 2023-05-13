@@ -42,6 +42,17 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
         if (!$recipeEntryIsPRO) {
             return $recipeContent;
         }
+        if ($recipeEntryPROExtension !== null) {
+            return sprintf(
+                <<<HTML
+                    <div class="go-pro-highlight">
+                        <p>%s %s</p>
+                    </div>
+                HTML,
+                \__('This recipe requires extension "%s" to be installed.', 'gato-graphql'),
+                PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary')
+            ) . $recipeContent;            
+        }
         return sprintf(
             <<<HTML
                 <div class="go-pro-highlight">
