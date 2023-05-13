@@ -28,7 +28,7 @@ class PROPluginStaticHelpers
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return static::getUnlockFeaturesAnchorHTML(
             $moduleConfiguration->getPROPluginWebsiteURL(),
-            \__('Go PRO to unlock!', 'gato-graphql'),
+            \__('Go PRO to unlock! 🔓', 'gato-graphql'),
             $class,
         );
     }
@@ -41,7 +41,7 @@ class PROPluginStaticHelpers
         return static::getUnlockFeaturesAnchorHTML(
             $extensionModuleResolver->getWebsiteURL($extensionModule),
             sprintf(
-                \__('Get "%s" to unlock!', 'gato-graphql'),
+                \__('Go to the "%s" extension\'s website', 'gato-graphql'),
                 $extensionModuleResolver->getName($extensionModule),
             ),
             $class,
@@ -58,10 +58,7 @@ class PROPluginStaticHelpers
             $url,
             '_blank',
             $class,
-            sprintf(
-                \__('%s 🔓', 'gato-graphql'),
-                $title,
-            )
+            $title,
         );
     }
 }
