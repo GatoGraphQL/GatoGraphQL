@@ -2,3 +2,7 @@ ul {
     list-style: initial;
     padding-left: 15px;
 }
+
+.recipe-entry-title-extension {
+    background-color: lightyellow;
+}

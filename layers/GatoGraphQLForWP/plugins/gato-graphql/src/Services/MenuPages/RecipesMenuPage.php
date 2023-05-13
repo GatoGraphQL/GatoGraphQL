@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\OpenInModalTriggerMenuPageTrait;
 
@@ -15,6 +19,18 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
+
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    final protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        /** @var ModuleRegistryInterface */
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -146,6 +162,12 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
+                'translating-all-posts-to-a-different-language',
+                'Translating all posts to a different language',
+                true,
+                ExtensionModuleResolver::GOOGLE_TRANSLATE,
+            ],
+            [
                 'combining-user-data-from-different-systems',
                 'Combining user data from different systems',
                 true,
@@ -229,6 +251,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
+            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
 
             /**
              * Also add the tab to the URL, not because it is needed,
@@ -246,7 +269,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 '#' . $recipeEntryName,
                 $recipeURL,
                 $recipeEntryName === $activeRecipeName ? 'nav-tab-active' : '',
-                $this->getRecipeTitleForNavbar($recipeEntryTitle, $recipeEntryIsPRO)
+                $this->getRecipeTitleForNavbar(
+                    $recipeEntryTitle,
+                    $recipeEntryIsPRO,
+                    $recipeEntryPROExtensionModule,
+                )
             );
         }
 
@@ -259,8 +286,22 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
+            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
 
-            $recipeEntryRelativePathDir = ($recipeEntryIsPRO ? 'docs-pro' : 'docs') . '/recipes';
+            if ($recipeEntryPROExtensionModule !== null) {
+                /** @var ExtensionModuleResolverInterface */
+                $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
+                $recipeEntryTitle = sprintf(
+                    \__('%s <span class="recipe-entry-title-extension">(via extension <strong><a href="%s" target="_blank">%s%s</a>)</span>'),
+                    $recipeEntryTitle,
+                    $extensionModuleResolver->getWebsiteURL($recipeEntryPROExtensionModule),
+                    $extensionModuleResolver->getName($recipeEntryPROExtensionModule),
+                    HTMLCodes::OPEN_IN_NEW_WINDOW
+                );
+            }
+
+            $docsBaseDir = $recipeEntryIsPRO ? ($recipeEntryPROExtensionModule !== null ? 'docs-pro-extensions' : 'docs-pro') : 'docs';
+            $recipeEntryRelativePathDir = $docsBaseDir . '/recipes';
             $recipeContent = $this->getMarkdownContent(
                 $recipeEntryName,
                 $recipeEntryRelativePathDir,
@@ -296,7 +337,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                     $recipeEntryName === $activeRecipeName ? 'block' : 'none'
                 ),
                 $recipeEntryTitle,
-                $this->getRecipeContent($recipeContent, $recipeEntryIsPRO)
+                $this->getRecipeContent(
+                    $recipeContent,
+                    $recipeEntryIsPRO,
+                    $recipeEntryPROExtensionModule,
+                )
             );
         }
 
@@ -311,6 +356,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
+        ?string $recipeEntryPROExtensionModule,
     ): string {
         return $recipeEntryTitle;
     }
@@ -318,6 +364,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
+        ?string $recipeEntryPROExtensionModule,
     ): string {
         return $recipeContent;
     }
