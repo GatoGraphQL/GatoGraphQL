@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
  * Container modules to display documentation for extensions
  * in the Extensions page.
  */
-abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver
+abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver implements ExtensionModuleResolverInterface
 {
     use ExtensionModuleResolverTrait;
 
