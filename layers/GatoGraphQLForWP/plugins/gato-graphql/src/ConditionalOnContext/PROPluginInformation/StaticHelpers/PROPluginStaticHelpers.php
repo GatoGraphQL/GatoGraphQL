@@ -17,7 +17,7 @@ class PROPluginStaticHelpers
     ): string {
         return sprintf(
             \__('%s %s', 'gato-graphql'),
-            $recipeEntryPROExtensionModule !== null ? '🔒' : '🔐',
+            $recipeEntryPROExtensionModule === null ? '🔒' : '🔐',
             $title
         );
     }
