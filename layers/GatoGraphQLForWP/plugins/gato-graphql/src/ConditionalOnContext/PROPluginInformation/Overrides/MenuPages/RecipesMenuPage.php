@@ -47,13 +47,13 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
                 \__('This recipe requires extension "%s" to be installed.', 'gato-graphql'),
                 ''
             );
-            $button = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary');
+            $buttonHTML = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary');
         } else {
             $message = sprintf(
                 \__('This recipe requires features available in the Gato GraphQL PRO.', 'gato-graphql'),
                 ''
             );
-            $button = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary');
+            $buttonHTML = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary');
         }
         return sprintf(
             <<<HTML
@@ -62,7 +62,7 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
                 </div>
             HTML,
             $message,
-            $button
+            $buttonHTML
         ) . $recipeContent;
     }
 
