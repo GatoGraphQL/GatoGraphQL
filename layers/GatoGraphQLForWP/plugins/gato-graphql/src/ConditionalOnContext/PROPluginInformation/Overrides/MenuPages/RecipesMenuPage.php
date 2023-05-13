@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\StaticHelpers\PROPluginStaticHelpers;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage as UpstreamRecipesMenuPage;
@@ -71,7 +72,7 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
                 );
             }
             $message = sprintf(
-                \__('This recipe requires extension "%s" to be installed.', 'gato-graphql'),
+                \__('This recipe requires extension <strong>%s</strong> to be installed.', 'gato-graphql'),
                 $extensionModuleResolver->getName($recipeEntryPROExtensionModule)
             );
             $button = PROPluginStaticHelpers::getGetExtensionToUnlockAnchorHTML(
@@ -80,7 +81,11 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
                 $buttonClassnames,
             );
         } else {
-            $message = \__('This recipe requires features available in the Gato GraphQL PRO.', 'gato-graphql');
+            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver(ExtensionModuleResolver::GATO_GRAPHQL_PRO);
+            $message = sprintf(
+                \__('This recipe requires <strong>%s</strong> to be installed.', 'gato-graphql'),
+                $extensionModuleResolver->getName(ExtensionModuleResolver::GATO_GRAPHQL_PRO)
+            );
             $button = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML($buttonClassnames);
         }
         return sprintf(
