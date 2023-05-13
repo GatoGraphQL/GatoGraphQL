@@ -68,7 +68,7 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
 
     protected function getDocumentationMarkdownContentRelativePathDir(
         string $module,
-    ): ?string {
+    ): string {
         return $this->getSlug($module) . '/docs/modules';
     }
 }

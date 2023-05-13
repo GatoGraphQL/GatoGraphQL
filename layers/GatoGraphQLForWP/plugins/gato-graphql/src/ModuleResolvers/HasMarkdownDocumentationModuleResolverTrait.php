@@ -67,7 +67,7 @@ trait HasMarkdownDocumentationModuleResolverTrait
 
     protected function getDocumentationMarkdownContentRelativePathDir(
         string $module,
-    ): ?string {
+    ): string {
         return 'modules';
     }
 }
