@@ -49,7 +49,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 $commonPluginData,
                 [
                     'name' => $moduleResolver->getName($module),
-                    'slug' => $moduleResolver->getSlug($module),
+                    'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
                     'short_description' => $moduleResolver->getDescription($module),
                     'homepage' => $moduleResolver->getWebsiteURL($module),
 
@@ -58,7 +58,6 @@ class ExtensionListTable extends AbstractExtensionListTable
                      * but used internally to modify the generated HTML content
                      */
                     'gato_extension_module' => $module,
-                    'gato_extension_slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
                 ]
             );
         }
