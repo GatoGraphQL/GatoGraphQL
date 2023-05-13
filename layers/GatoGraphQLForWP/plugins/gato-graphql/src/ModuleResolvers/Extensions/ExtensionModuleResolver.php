@@ -11,10 +11,10 @@ use GatoGraphQL\GatoGraphQL\Plugin;
 
 class ExtensionModuleResolver extends AbstractExtensionModuleResolver
 {
-    private const GATO_GRAPHQL_PRO = Plugin::NAMESPACE . '\\extensions\\gato-graphql-pro';
-    private const ACCESS_CONTROL_VISITOR_IP = Plugin::NAMESPACE . '\\extensions\\access-control-visitor-ip';
-    private const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
-    private const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
+    public const GATO_GRAPHQL_PRO = Plugin::NAMESPACE . '\\extensions\\gato-graphql-pro';
+    public const ACCESS_CONTROL_VISITOR_IP = Plugin::NAMESPACE . '\\extensions\\access-control-visitor-ip';
+    public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
+    public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
 
     /**
      * @return string[]
