@@ -163,6 +163,9 @@ class ModuleListTable extends AbstractItemListTable
         $moduleTypes = array_unique($moduleTypes);
         foreach ($moduleTypes as $moduleType) {
             $moduleTypeResolver = $moduleTypeRegistry->getModuleTypeResolver($moduleType);
+            if ($moduleTypeResolver->isHidden($moduleType)) {
+                continue;
+            }
             $moduleTypeSlug = $moduleTypeResolver->getSlug($moduleType);
             $views[$moduleTypeSlug] = sprintf(
                 '<a href="%s" class="%s">%s</a>',

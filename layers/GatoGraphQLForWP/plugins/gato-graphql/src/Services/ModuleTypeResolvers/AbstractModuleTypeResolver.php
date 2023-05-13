@@ -29,4 +29,9 @@ abstract class AbstractModuleTypeResolver implements ModuleTypeResolverInterface
     {
         return $this->getSlug($moduleType);
     }
+
+    public function isHidden(string $moduleType): bool
+    {
+        return false;
+    }
 }

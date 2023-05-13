@@ -76,4 +76,12 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             default => '',
         };
     }
+
+    public function isHidden(string $moduleType): bool
+    {
+        return match ($moduleType) {
+            self::EXTENSION => true,
+            default => parent::isHidden($moduleType),
+        };
+    }
 }
