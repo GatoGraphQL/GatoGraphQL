@@ -26,7 +26,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return match ($module) {
             self::GATO_GRAPHQL_PRO => \__('Gato GraphQL PRO', 'gato-graphql'),
-            self::ACCESS_CONTROL_VISITOR_IP => \__('Superpower your application with PRO features: Access Control, Cache Control, Multiple Query Execution, and many more.', 'gato-graphql'),
+            self::ACCESS_CONTROL_VISITOR_IP => \__('Access Control: Visitor IP', 'gato-graphql'),
             default => parent::getName($module),
         };
     }
@@ -34,9 +34,17 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::GATO_GRAPHQL_PRO => \__('Access Control: Visitor IP', 'gato-graphql'),
+            self::GATO_GRAPHQL_PRO => \__('Superpower your application with PRO features: Access Control, Cache Control, Multiple Query Execution, and many more.', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Gato GraphQL PRO is rquired).', 'gato-graphql'),
             default => parent::getDescription($module),
+        };
+    }
+
+    public function getGatoGraphQLExtensionSlug(string $module): string
+    {
+        return match ($module) {
+            self::GATO_GRAPHQL_PRO => $this->getSlug($module),
+            default => parent::getGatoGraphQLExtensionSlug($module),
         };
     }
 }
