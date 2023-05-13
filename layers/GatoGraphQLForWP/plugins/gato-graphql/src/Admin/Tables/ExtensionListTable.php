@@ -7,8 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
 use stdClass;
@@ -43,55 +43,6 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
         remove_filter('plugins_api', $this->overridePluginsAPI(...));
         remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
-
-        $this->injectDefaultValuesToItems();
-    }
-
-    /**
-     * Inject default items (and those that can be retrieved
-     * via PHP) via code, so that it's not needed to repeat
-     * these extensions.json
-     */
-    protected function injectDefaultValuesToItems(): void
-    {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-        $pluginURL = $mainPlugin->getPluginURL();
-        $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
-
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-
-        /**
-         * Retrieve the plugin data for the Gato GraphQL plugin.
-         * As all extensions live in the same monorepo, they have
-         * the same requirements.
-         *
-         * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
-         */
-        $gatoGraphQLPluginData = get_plugin_data($mainPlugin->getPluginFile());
-
-        /** @var array<array<string,mixed>> */
-        $items = &$this->items;
-        foreach ($items as &$plugin) {
-            $plugin['version'] ??= $mainPluginVersion;
-            $plugin['author'] ??= sprintf(
-                '<a href="%s">%s</a>',
-                $gatoGraphQLPluginData['AuthorURI'],
-                $gatoGraphQLPluginData['Author']
-            );
-            $plugin['requires'] ??= $gatoGraphQLPluginData['RequiresWP'];
-            $plugin['requires_php'] ??= $gatoGraphQLPluginData['RequiresPHP'];
-            $plugin['homepage'] ??= sprintf(
-                '%s/extensions/%s',
-                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
-                $plugin['gato_extension_slug']
-            );
-            $plugin['icons'] ??= [
-                'svg' =>  $gatoGraphQLLogoFile,
-                '1x' =>  $gatoGraphQLLogoFile,
-            ];
-        }
     }
 
     /**
@@ -138,27 +89,76 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      */
     public function overridePluginsAPIResult(): mixed
     {
-        $extensionsDataSourceFile = PluginApp::getMainPlugin()->getPluginDir() . '/data-sources/extensions.json';
-        $extensionsDataSource = file_get_contents($extensionsDataSourceFile);
-        if ($extensionsDataSource === false) {
-            return new stdClass();
-        }
-        $extensionsDataSource = $this->replaceVariablesInJSONDataSource($extensionsDataSource);
-        $extensionsData = json_decode($extensionsDataSource, true);
-        return (object) $extensionsData;
+        $plugins = $this->getAllItems();
+        return (object) [
+            'info' => [
+                'page' => 1,
+                'pages' => 1,
+                'results' => count($plugins),
+            ],
+            'plugins' => $plugins,
+        ];
     }
 
     /**
-     * The JSON data contains variable placeholders that
-     * must be replaced to their actual values
+     * Retrieve all the Extensions from the Registry, and
+     * generate an array with the data in the expected format
+     * by the upstream WordPress class.
+     *
+     * @return mixed[]
      */
-    protected function replaceVariablesInJSONDataSource(string $extensionsDataSource): string
+    protected function getAllItems(): array
     {
-        return str_replace(
-            '{$PLUGIN_URL}',
-            rtrim(PluginApp::getMainPlugin()->getPluginURL(), '/'),
-            $extensionsDataSource
-        );
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
+        $pluginURL = $mainPlugin->getPluginURL();
+        $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+
+        /**
+         * Retrieve the plugin data for the Gato GraphQL plugin.
+         * As all extensions live in the same monorepo, they have
+         * the same requirements.
+         *
+         * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
+         */
+        $gatoGraphQLPluginData = get_plugin_data($mainPlugin->getPluginFile());
+
+        $commonPluginData = [
+            'version' => $mainPluginVersion,
+            'author' => sprintf(
+                '<a href="%s">%s</a>',
+                $gatoGraphQLPluginData['AuthorURI'],
+                $gatoGraphQLPluginData['Author']
+            ),
+            'requires' => $gatoGraphQLPluginData['RequiresWP'],
+            'requires_php' => $gatoGraphQLPluginData['RequiresPHP'],
+            'icons' => [
+                'svg' => $gatoGraphQLLogoFile,
+                '1x' => $gatoGraphQLLogoFile,
+            ],
+        ];
+
+        $items = [];
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $modules = $moduleRegistry->getAllModules(true, false, false);
+        foreach ($modules as $module) {
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
+                continue;
+            }
+            $items[] = array_merge(
+                $commonPluginData,
+                [
+                    'name' => $moduleResolver->getName($module),
+                    'slug' => $moduleResolver->getSlug($module),
+                    'short_description' => $moduleResolver->getDescription($module),
+                    'homepage' => $moduleResolver->getWebsiteURL($module),
+                    'gato_extension_module' => $module,
+                    'gato_extension_slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
+                ]
+            );
+        }
+        return $items;
     }
 
     /**
@@ -237,14 +237,13 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
                 '&amp;TB_iframe=true&amp;width=600&amp;height=550'
             );
             // Replace it with this other link
-            $extensionModule = 'GatoGraphQL\\GatoGraphQL\\extensions\\' . $plugin['gato_extension_slug'];
             $adaptedDetailsLink = \admin_url(sprintf(
                 'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true&width=600&height=550',
                 App::request('page') ?? App::query('page', ''),
                 RequestParams::TAB,
                 RequestParams::TAB_DOCS,
                 RequestParams::MODULE,
-                urlencode($extensionModule)
+                urlencode($plugin['gato_extension_module'])
             ));
             $html = str_replace(
                 esc_url($details_link),

@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
  * Container modules to display documentation for extensions
  * in the Extensions page.
  */
-abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver
+abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver implements ExtensionModuleResolverInterface
 {
     use ExtensionModuleResolverTrait;
 
@@ -28,12 +32,12 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver
     }
 
     /**
-     * The type of the module doesn't matter, as these modules
-     * are all hidden anyway
+     * The type of the module doesn't really matter,
+     * as these modules are all hidden anyway
      */
     public function getModuleType(string $module): string
     {
-        return '';
+        return ModuleTypeResolver::EXTENSION;
     }
 
     public function isHidden(string $module): bool
@@ -46,19 +50,25 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver
         return true;
     }
 
-    public function getName(string $module): string
+    public function getGatoGraphQLExtensionSlug(string $module): string
     {
-        return '';
+        return 'gato-graphql-' . $this->getSlug($module);
     }
 
-    public function getDescription(string $module): string
+    public function getWebsiteURL(string $module): string
     {
-        return '';
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return sprintf(
+            '%s/extensions/%s',
+            $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+            $this->getSlug($module)
+        );
     }
 
     protected function getDocumentationMarkdownContentRelativePathDir(
         string $module,
-    ): ?string {
+    ): string {
         return $this->getSlug($module) . '/docs/modules';
     }
 }

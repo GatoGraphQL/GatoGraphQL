@@ -163,6 +163,9 @@ class ModuleListTable extends AbstractItemListTable
         $moduleTypes = array_unique($moduleTypes);
         foreach ($moduleTypes as $moduleType) {
             $moduleTypeResolver = $moduleTypeRegistry->getModuleTypeResolver($moduleType);
+            if ($moduleTypeResolver->isHidden($moduleType)) {
+                continue;
+            }
             $moduleTypeSlug = $moduleTypeResolver->getSlug($moduleType);
             $views[$moduleTypeSlug] = sprintf(
                 '<a href="%s" class="%s">%s</a>',
@@ -178,10 +181,9 @@ class ModuleListTable extends AbstractItemListTable
     /**
      * List of item data
      *
-     * @param int $per_page
-     * @param int $page_number
+     * @return array<array<string,mixed>>
      */
-    public function getItems($per_page = 5, $page_number = 1): mixed
+    public function getItems(int $per_page, int $page_number): mixed
     {
         $results = $this->getAllItems();
         return array_splice(
