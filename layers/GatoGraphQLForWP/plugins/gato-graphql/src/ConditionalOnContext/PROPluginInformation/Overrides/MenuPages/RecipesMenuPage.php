@@ -30,8 +30,13 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
+        string $recipeEntryPROExtension,
     ): string {
-        $recipeContent = parent::getRecipeContent($recipeContent, $recipeEntryIsPRO);
+        $recipeContent = parent::getRecipeContent(
+            $recipeContent,
+            $recipeEntryIsPRO,
+            $recipeEntryPROExtension,
+        );
         if (!$recipeEntryIsPRO) {
             return $recipeContent;
         }

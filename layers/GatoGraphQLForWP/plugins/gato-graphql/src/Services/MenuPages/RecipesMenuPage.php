@@ -310,7 +310,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                     $recipeEntryName === $activeRecipeName ? 'block' : 'none'
                 ),
                 $recipeEntryTitle,
-                $this->getRecipeContent($recipeContent, $recipeEntryIsPRO)
+                $this->getRecipeContent(
+                    $recipeContent,
+                    $recipeEntryIsPRO,
+                    $recipeEntryPROExtension,
+                )
             );
         }
 
@@ -333,6 +337,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
+        string $recipeEntryPROExtension,
     ): string {
         return $recipeContent;
     }
