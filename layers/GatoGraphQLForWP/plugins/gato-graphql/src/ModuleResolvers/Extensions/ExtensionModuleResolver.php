@@ -46,7 +46,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GATO_GRAPHQL_PRO => \__('Superpower your app with PRO features: Access Control, Cache Control, Multiple Query Execution, and more.', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Gato GraphQL PRO is rquired).', 'gato-graphql'),
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gato-graphql'),
-            self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the GraphQL schema to fetch event data.', 'gato-graphql'),
+            self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }
