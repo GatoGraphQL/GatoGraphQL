@@ -25,12 +25,27 @@ class PROPluginStaticHelpers
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return static::getUnlockFeaturesAnchorHTML(
+            $moduleConfiguration->getPROPluginWebsiteURL(),
+            \__('Go PRO to unlock!', 'gato-graphql'),
+            $class,
+        );
+    }
+
+    public static function getUnlockFeaturesAnchorHTML(
+        string $url,
+        string $title,
+        string $class = '',
+    ): string {
         return \sprintf(
             '<a href="%s" target="%s" class="%s">%s</a>',
-            $moduleConfiguration->getPROPluginWebsiteURL(),
+            $url,
             '_blank',
             $class,
-            \__('Go PRO to unlock! 🔓', 'gato-graphql')
+            sprintf(
+                \__('%s 🔓', 'gato-graphql'),
+                $title,
+            )
         );
     }
 }
