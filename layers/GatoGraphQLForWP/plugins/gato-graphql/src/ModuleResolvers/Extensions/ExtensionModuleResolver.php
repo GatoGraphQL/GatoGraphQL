@@ -30,7 +30,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
         return match ($module) {
             self::GATO_GRAPHQL_PRO => \__('Gato GraphQL PRO', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Access Control: Visitor IP', 'gato-graphql'),
-            default => parent::getName($module),
+            default => $module,
         };
     }
 
