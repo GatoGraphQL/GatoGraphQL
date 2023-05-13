@@ -7,13 +7,15 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use WP_Plugin_Install_List_Table;
-use stdClass;
 
+use WP_Plugin_Install_List_Table;
 use function get_plugin_data;
+use stdClass;
 
 // The file containing class WP_Plugin_Install_List_Table is not
 // loaded by default in WordPress.
@@ -142,20 +144,34 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
     }
 
     /**
-     * Return all the items to display on the table
+     * Retrieve all the Extensions from the Registry, and
+     * generate an array with the data in the expected format
+     * by the upstream WordPress class.
      *
      * @return mixed[]
      */
     protected function getAllItems(): array
     {
-        $extensionsDataSourceFile = PluginApp::getMainPlugin()->getPluginDir() . '/data-sources/extensions.json';
-        $extensionsDataSource = file_get_contents($extensionsDataSourceFile);
-        if ($extensionsDataSource === false) {
-            return [];
+        $items = [];
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $modules = $moduleRegistry->getAllModules(true, false, true);
+        foreach ($modules as $module) {
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
+                continue;
+            }
+            $moduleSlug = $moduleResolver->getSlug($module);
+            $items[] = [
+                'name' =>  $moduleResolver->getName($module),
+                'slug' =>  $moduleResolver->getSlug($module),
+                'short_description' =>  $moduleResolver->getDescription($module),
+                'gato_extension_slug' =>  sprintf(
+                    'gato-graphql-',
+                    $moduleSlug
+                ),
+            ];
         }
-        /** @var mixed[] */
-        $extensionsData = json_decode($extensionsDataSource, true);
-        return $extensionsData;
+        return $items;
     }
 
     /**
