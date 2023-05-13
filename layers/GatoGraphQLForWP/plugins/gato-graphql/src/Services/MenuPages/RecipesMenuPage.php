@@ -236,7 +236,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
-            $recipeEntryPROExtension = $recipeEntryIsPRO ? $recipeEntry[3] : null;
+            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? $recipeEntry[3] : null;
 
             /**
              * Also add the tab to the URL, not because it is needed,
@@ -257,7 +257,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 $this->getRecipeTitleForNavbar(
                     $recipeEntryTitle,
                     $recipeEntryIsPRO,
-                    $recipeEntryPROExtension,
+                    $recipeEntryPROExtensionModule,
                 )
             );
         }
@@ -271,9 +271,9 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
-            $recipeEntryPROExtension = $recipeEntryIsPRO ? $recipeEntry[3] : null;
+            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? $recipeEntry[3] : null;
 
-            $docsBaseDir = $recipeEntryIsPRO ? ($recipeEntryPROExtension !== null ? 'docs-pro-extensions' : 'docs-pro') : 'docs';
+            $docsBaseDir = $recipeEntryIsPRO ? ($recipeEntryPROExtensionModule !== null ? 'docs-pro-extensions' : 'docs-pro') : 'docs';
             $recipeEntryRelativePathDir = $docsBaseDir . '/recipes';
             $recipeContent = $this->getMarkdownContent(
                 $recipeEntryName,
@@ -313,7 +313,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 $this->getRecipeContent(
                     $recipeContent,
                     $recipeEntryIsPRO,
-                    $recipeEntryPROExtension,
+                    $recipeEntryPROExtensionModule,
                 )
             );
         }
@@ -329,7 +329,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
-        ?string $recipeEntryPROExtension,
+        ?string $recipeEntryPROExtensionModule,
     ): string {
         return $recipeEntryTitle;
     }
@@ -337,7 +337,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
-        ?string $recipeEntryPROExtension,
+        ?string $recipeEntryPROExtensionModule,
     ): string {
         return $recipeContent;
     }

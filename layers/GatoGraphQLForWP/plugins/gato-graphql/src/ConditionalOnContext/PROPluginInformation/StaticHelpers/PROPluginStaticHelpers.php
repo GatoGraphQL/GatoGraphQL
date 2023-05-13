@@ -12,11 +12,11 @@ class PROPluginStaticHelpers
 {
     public static function getPROTitle(
         string $title,
-        ?string $recipeEntryPROExtension
+        ?string $recipeEntryPROExtensionModule
     ): string {
         return sprintf(
             \__('%s %s', 'gato-graphql'),
-            $recipeEntryPROExtension !== null ? '🔒' : '🔐',
+            $recipeEntryPROExtensionModule !== null ? '🔒' : '🔐',
             $title
         );
     }

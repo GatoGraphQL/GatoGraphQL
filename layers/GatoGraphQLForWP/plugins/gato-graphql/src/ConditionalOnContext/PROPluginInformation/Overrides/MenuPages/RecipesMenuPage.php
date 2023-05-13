@@ -14,12 +14,12 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
-        ?string $recipeEntryPROExtension,
+        ?string $recipeEntryPROExtensionModule,
     ): string {
         $recipeEntryTitle = parent::getRecipeTitleForNavbar(
             $recipeEntryTitle,
             $recipeEntryIsPRO,
-            $recipeEntryPROExtension,
+            $recipeEntryPROExtensionModule,
         );
         if (!$recipeEntryIsPRO) {
             return $recipeEntryTitle;
@@ -32,17 +32,17 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
-        ?string $recipeEntryPROExtension,
+        ?string $recipeEntryPROExtensionModule,
     ): string {
         $recipeContent = parent::getRecipeContent(
             $recipeContent,
             $recipeEntryIsPRO,
-            $recipeEntryPROExtension,
+            $recipeEntryPROExtensionModule,
         );
         if (!$recipeEntryIsPRO) {
             return $recipeContent;
         }
-        if ($recipeEntryPROExtension !== null) {
+        if ($recipeEntryPROExtensionModule !== null) {
             return sprintf(
                 <<<HTML
                     <div class="go-pro-highlight">
