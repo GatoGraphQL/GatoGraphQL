@@ -42,6 +42,7 @@ trait HasMarkdownDocumentationModuleResolverTrait
         if ($markdownFilename === null || $markdownFilename === '') {
             return null;
         }
+        
         return $this->getMarkdownContent(
             $markdownFilename,
             'modules',
