@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
-use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
-use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
 use stdClass;
@@ -188,15 +186,6 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         foreach ((array) $this->items as $plugin) {
             /**
-             * This is a custom property, not required by the upstream class,
-             * but used internally to modify the generated HTML content
-             */
-            $extensionModule = $plugin['gato_extension_module'] ?? null;
-            if ($extensionModule === null) {
-                continue;
-            }
-
-            /**
              * Change the "More information" link to open the
              * extension website, and not the plugin page
              * on wp.org (which does not exist!)
@@ -207,14 +196,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 '&amp;TB_iframe=true&amp;width=600&amp;height=550'
             );
             // Replace it with this other link.
-            $adaptedDetailsLink = \admin_url(sprintf(
-                'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true&width=600&height=550',
-                App::request('page') ?? App::query('page', ''),
-                RequestParams::TAB,
-                RequestParams::TAB_DOCS,
-                RequestParams::MODULE,
-                urlencode($extensionModule)
-            ));
+            $adaptedDetailsLink = $this->getAdaptedDetailsLink($plugin);
             $html = str_replace(
                 esc_url($details_link),
                 esc_url($adaptedDetailsLink),
@@ -224,4 +206,9 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
 
         return $html;
     }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    abstract protected function getAdaptedDetailsLink(array $plugin): string;
 }

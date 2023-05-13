@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 
@@ -62,5 +64,27 @@ class ExtensionListTable extends AbstractExtensionListTable
             );
         }
         return $items;
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    protected function getAdaptedDetailsLink(array $plugin): string
+    {
+        /**
+         * This is a custom property, not required by the upstream class,
+         * but used internally to modify the generated HTML content
+         *
+         * @var string
+         */
+        $extensionModule = $plugin['gato_extension_module'];
+        return \admin_url(sprintf(
+            'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true&width=600&height=550',
+            App::request('page') ?? App::query('page', ''),
+            RequestParams::TAB,
+            RequestParams::TAB_DOCS,
+            RequestParams::MODULE,
+            urlencode($extensionModule)
+        ));
     }
 }
