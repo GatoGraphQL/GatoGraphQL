@@ -140,7 +140,15 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
      */
     public function overridePluginsAPIResult(): mixed
     {
-        return (object) $this->getAllItems();
+        $plugins = $this->getAllItems();
+        return (object) [
+            'info' => [
+                'page' => 1,
+                'pages' => 1,
+                'results' => count($plugins),
+            ],
+            'plugins' => $plugins,
+        ];
     }
 
     /**
