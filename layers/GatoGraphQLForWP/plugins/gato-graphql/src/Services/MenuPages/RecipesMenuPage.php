@@ -254,7 +254,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 '#' . $recipeEntryName,
                 $recipeURL,
                 $recipeEntryName === $activeRecipeName ? 'nav-tab-active' : '',
-                $this->getRecipeTitleForNavbar($recipeEntryTitle, $recipeEntryIsPRO)
+                $this->getRecipeTitleForNavbar(
+                    $recipeEntryTitle,
+                    $recipeEntryIsPRO,
+                    $recipeEntryPROExtension,
+                )
             );
         }
 
@@ -321,6 +325,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
+        string $recipeEntryPROExtension,
     ): string {
         return $recipeEntryTitle;
     }

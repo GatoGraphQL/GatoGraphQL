@@ -14,8 +14,13 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
+        string $recipeEntryPROExtension,
     ): string {
-        $recipeEntryTitle = parent::getRecipeTitleForNavbar($recipeEntryTitle, $recipeEntryIsPRO);
+        $recipeEntryTitle = parent::getRecipeTitleForNavbar(
+            $recipeEntryTitle,
+            $recipeEntryIsPRO,
+            $recipeEntryPROExtension,
+        );
         if (!$recipeEntryIsPRO) {
             return $recipeEntryTitle;
         }
