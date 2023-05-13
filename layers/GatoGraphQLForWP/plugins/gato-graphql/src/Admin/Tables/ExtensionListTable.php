@@ -90,8 +90,8 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
                 $plugin['gato_extension_slug']
             );
             $plugin['icons'] ??= [
-                'svg' =>  $gatoGraphQLLogoFile,
-                '1x' =>  $gatoGraphQLLogoFile,
+                'svg' => $gatoGraphQLLogoFile,
+                '1x' => $gatoGraphQLLogoFile,
             ];
         }
     }
@@ -161,10 +161,11 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
                 continue;
             }
             $items[] = [
-                'name' =>  $moduleResolver->getName($module),
-                'slug' =>  $moduleResolver->getSlug($module),
-                'short_description' =>  $moduleResolver->getDescription($module),
-                'gato_extension_slug' =>  $moduleResolver->getGatoGraphQLExtensionSlug($module),
+                'name' => $moduleResolver->getName($module),
+                'slug' => $moduleResolver->getSlug($module),
+                'short_description' => $moduleResolver->getDescription($module),
+                'homepage' => $moduleResolver->getWebsiteURL($module),
+                'gato_extension_slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
             ];
         }
         return $items;

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
@@ -50,6 +53,17 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
     public function getGatoGraphQLExtensionSlug(string $module): string
     {
         return 'gato-graphql-' . $this->getSlug($module);
+    }
+
+    public function getWebsiteURL(string $module): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return sprintf(
+            '%s/extensions/%s',
+            $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+            $this->getSlug($module)
+        );
     }
 
     protected function getDocumentationMarkdownContentRelativePathDir(
