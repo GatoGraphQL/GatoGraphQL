@@ -13,6 +13,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
 {
     private const GATO_GRAPHQL_PRO = Plugin::NAMESPACE . '\\extensions\\gato-graphql-pro';
     private const ACCESS_CONTROL_VISITOR_IP = Plugin::NAMESPACE . '\\extensions\\access-control-visitor-ip';
+    private const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
 
     /**
      * @return string[]
@@ -22,6 +23,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
         return [
             self::GATO_GRAPHQL_PRO,
             self::ACCESS_CONTROL_VISITOR_IP,
+            self::GOOGLE_TRANSLATE,
         ];
     }
 
@@ -30,6 +32,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
         return match ($module) {
             self::GATO_GRAPHQL_PRO => \__('Gato GraphQL PRO', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Access Control: Visitor IP', 'gato-graphql'),
+            self::GOOGLE_TRANSLATE => \__('Google Translate', 'gato-graphql'),
             default => $module,
         };
     }
@@ -39,6 +42,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
         return match ($module) {
             self::GATO_GRAPHQL_PRO => \__('Superpower your application with PRO features: Access Control, Cache Control, Multiple Query Execution, and many more.', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Gato GraphQL PRO is rquired).', 'gato-graphql'),
+            self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }
