@@ -23,58 +23,17 @@
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
 }
 .plugin-card:nth-child(2) {
-    background-color: #f9fef7;
-    /* background-color: #00d251; */
+    background-color: #c4d200;
 }
 .plugin-card:nth-child(3) {
-    background-color: #fcf7fe;
-    /* background-color: #9000d2; */
+    background-color: #00cbd2;
 }
 .plugin-card:nth-child(4) {
-    background-color: #fefdf7;
-    /* background-color: #c4d200; */
+    background-color: #00d2a5;
 }
 .plugin-card:nth-child(5) {
-    background-color: #f7fefd;
-    /* background-color: #00cbd2; */
+    background-color: #d29a00;
 }
 .plugin-card:nth-child(6) {
-    background-color: #fef7f9;
-    /* background-color: #d20046; */
-}
-.plugin-card:nth-child(7) {
-    background-color: #f7fbfe;
-    /* background-color: #005bd2; */
-}
-.plugin-card:nth-child(8) {
-    background-color: #f8f9ec;
-    /* background-color: #b4c161; */
-}
-.plugin-card:nth-child(9) {
-    background-color: #fefbf7;
-    /* background-color: #d29a00; */
-}
-.plugin-card:nth-child(10) {
-    background-color: #fef7f8;
-    /* background-color: #e42127; */
-}
-.plugin-card:nth-child(11) {
-    background-color: #fef9f7;
-    /* background-color: #d25400; */
-}
-.plugin-card:nth-child(12) {
-    background-color: #f7fefb;
-    /* background-color: #00d2a5; */
-}
-.plugin-card:nth-child(13) {
-    background-color: #fdf7fe;
-    /* background-color: #9700d2; */
-}
-.plugin-card:nth-child(14) {
-    background-color: #fcf7fe;
-    /* background-color: #d200cf; */
-}
-.plugin-card:nth-child(15) {
-    background-color: #f0faf4;
-    /* background-color: #00acd2; */
+    background-color: #b4c161;
 }
