@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Stat
 
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use PoP\ComponentModel\App;
 
 class PROPluginStaticHelpers
@@ -32,7 +33,19 @@ class PROPluginStaticHelpers
         );
     }
 
-    public static function getUnlockFeaturesAnchorHTML(
+    public static function getGetExtensionToUnlockAnchorHTML(
+        ExtensionModuleResolverInterface $extensionModuleResolver,
+        string $extensionModule,
+        string $class = '',
+    ): string {
+        return static::getUnlockFeaturesAnchorHTML(
+            $extensionModuleResolver->getWebsiteURL($extensionModule),
+            \__('Get the extension to unlock!', 'gato-graphql'),
+            'button button-secondary',
+        );
+    }
+
+    protected static function getUnlockFeaturesAnchorHTML(
         string $url,
         string $title,
         string $class = '',

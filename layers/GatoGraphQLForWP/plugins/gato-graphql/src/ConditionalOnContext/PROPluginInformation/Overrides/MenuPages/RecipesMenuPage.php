@@ -58,9 +58,10 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
         if (!$recipeEntryIsPRO) {
             return $recipeContent;
         }
+        $buttonClassnames = 'button button-secondary';
         if ($recipeEntryPROExtensionModule !== null) {
-            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
-            if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
+            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
+            if (!($extensionModuleResolver instanceof ExtensionModuleResolverInterface)) {
                 throw new ShouldNotHappenException(
                     sprintf(
                         \__('Module "%s" must implement interface "%s"', 'gato-graphql'),
@@ -71,16 +72,16 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
             }
             $message = sprintf(
                 \__('This recipe requires extension "%s" to be installed.', 'gato-graphql'),
-                $moduleResolver->getName($recipeEntryPROExtensionModule)
+                $extensionModuleResolver->getName($recipeEntryPROExtensionModule)
             );
-            $buttonHTML = PROPluginStaticHelpers::getUnlockFeaturesAnchorHTML(
-                $moduleResolver->getWebsiteURL($recipeEntryPROExtensionModule),
-                \__('Get the extension to unlock!', 'gato-graphql'),
-                'button button-secondary',
+            $buttonHTML = PROPluginStaticHelpers::getGetExtensionToUnlockAnchorHTML(
+                $extensionModuleResolver,
+                $recipeEntryPROExtensionModule,
+                $buttonClassnames,
             );
         } else {
             $message = \__('This recipe requires features available in the Gato GraphQL PRO.', 'gato-graphql');
-            $buttonHTML = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary');
+            $buttonHTML = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML($buttonClassnames);
         }
         return sprintf(
             <<<HTML
