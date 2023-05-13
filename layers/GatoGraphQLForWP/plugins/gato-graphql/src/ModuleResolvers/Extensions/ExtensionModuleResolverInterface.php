@@ -8,4 +8,5 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 
 interface ExtensionModuleResolverInterface extends ModuleResolverInterface
 {
+    public function getGatoGraphQLExtensionSlug(string $module): string;
 }

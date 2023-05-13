@@ -160,15 +160,11 @@ class ExtensionListTable extends WP_Plugin_Install_List_Table implements ItemLis
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
-            $moduleSlug = $moduleResolver->getSlug($module);
             $items[] = [
                 'name' =>  $moduleResolver->getName($module),
                 'slug' =>  $moduleResolver->getSlug($module),
                 'short_description' =>  $moduleResolver->getDescription($module),
-                'gato_extension_slug' =>  sprintf(
-                    'gato-graphql-',
-                    $moduleSlug
-                ),
+                'gato_extension_slug' =>  $moduleResolver->getGatoGraphQLExtensionSlug($module),
             ];
         }
         return $items;
