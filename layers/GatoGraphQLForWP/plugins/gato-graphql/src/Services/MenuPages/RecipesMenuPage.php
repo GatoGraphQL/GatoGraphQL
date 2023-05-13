@@ -293,7 +293,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 /** @var ExtensionModuleResolverInterface */
                 $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
                 $recipeEntryTitle = sprintf(
-                    \__('%s (via extension <strong><a href="%s" target="_blank">%s%s</a>)'),
+                    \__('%s <span class="recipe-entry-title-extension">(via extension <strong><a href="%s" target="_blank">%s%s</a>)</span>'),
                     $recipeEntryTitle,
                     $extensionModuleResolver->getWebsiteURL($recipeEntryPROExtensionModule),
                     $extensionModuleResolver->getName($recipeEntryPROExtensionModule),
