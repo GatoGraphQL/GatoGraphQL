@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
-use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
+use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\Root\App;
@@ -58,7 +58,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         $module = urldecode($requestedModule);
         try {
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
-        } catch (ContentNotExistsException) {
+        } catch (ModuleNotExistsException) {
             return sprintf(
                 '<p>%s</p>',
                 $this->getModuleDoesNotExistErrorMessage($module)
