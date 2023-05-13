@@ -41,7 +41,7 @@ class PROPluginStaticHelpers
         return static::getUnlockFeaturesAnchorHTML(
             $extensionModuleResolver->getWebsiteURL($extensionModule),
             sprintf(
-                \__('Go to the "%s" extension\'s website', 'gato-graphql'),
+                \__('Get extension <strong>%s</strong> to unlock! 🔓', 'gato-graphql'),
                 $extensionModuleResolver->getName($extensionModule),
             ),
             $class,
