@@ -146,6 +146,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 true,
             ],
             [
+                'translating-all-posts-to-a-different-language',
+                'Translating all posts to a different language',
+                true,
+            ],
+            [
                 'combining-user-data-from-different-systems',
                 'Combining user data from different systems',
                 true,
