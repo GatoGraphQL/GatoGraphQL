@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Plugin;
 
 class ExtensionModuleResolver extends AbstractExtensionModuleResolver
@@ -44,6 +47,19 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return match ($module) {
             self::GATO_GRAPHQL_PRO => $this->getSlug($module),
+            default => parent::getGatoGraphQLExtensionSlug($module),
+        };
+    }
+
+    public function getWebsiteURL(string $module): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return match ($module) {
+            self::GATO_GRAPHQL_PRO => sprintf(
+                '%s/pro',
+                $moduleConfiguration->getGatoGraphQLWebsiteURL()
+            ),
             default => parent::getGatoGraphQLExtensionSlug($module),
         };
     }
