@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\Root\App;
 
@@ -60,10 +61,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         } catch (ContentNotExistsException) {
             return sprintf(
                 '<p>%s</p>',
-                sprintf(
-                    \__('Oops, module \'%s\' does not exist', 'gato-graphql'),
-                    $module
-                )
+                $this->getModuleDoesNotExistErrorMessage($module)
             );
         }
         $hasDocumentation = $moduleResolver->hasDocumentation($module);
@@ -74,12 +72,30 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         if (!$hasDocumentation || $documentation === null) {
             return sprintf(
                 '<p>%s</p>',
-                sprintf(
-                    \__('Oops, module \'%s\' has no documentation', 'gato-graphql'),
-                    $moduleResolver->getName($module)
+                $this->getModuleHasNoDocumentationErrorMessage(
+                    $module,
+                    $moduleResolver,
                 )
             );
         }
         return $documentation;
+    }
+
+    protected function getModuleDoesNotExistErrorMessage(string $module): string
+    {
+        return sprintf(
+            \__('Oops, module \'%s\' does not exist', 'gato-graphql'),
+            $module
+        );
+    }
+
+    protected function getModuleHasNoDocumentationErrorMessage(
+        string $module,
+        ModuleResolverInterface $moduleResolver,
+    ): string {
+        return sprintf(
+            \__('Oops, module \'%s\' has no documentation', 'gato-graphql'),
+            $moduleResolver->getName($module)
+        );
     }
 }
