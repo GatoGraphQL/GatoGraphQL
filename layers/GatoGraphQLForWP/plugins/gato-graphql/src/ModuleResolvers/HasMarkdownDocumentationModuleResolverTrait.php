@@ -58,10 +58,16 @@ trait HasMarkdownDocumentationModuleResolverTrait
     ): ?string {
         return $this->getMarkdownContent(
             $markdownFilename,
-            'modules',
+            $this->getDocumentationMarkdownContentRelativePathDir($module),
             [
                 ContentParserOptions::TAB_CONTENT => true,
             ]
         );
+    }
+
+    protected function getDocumentationMarkdownContentRelativePathDir(
+        string $module,
+    ): ?string {
+        return 'modules';
     }
 }
