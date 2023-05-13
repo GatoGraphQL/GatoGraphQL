@@ -60,7 +60,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
                 '%s/pro',
                 $moduleConfiguration->getGatoGraphQLWebsiteURL()
             ),
-            default => parent::getGatoGraphQLExtensionSlug($module),
+            default => parent::getWebsiteURL($module),
         };
     }
 }
