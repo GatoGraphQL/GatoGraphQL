@@ -251,8 +251,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
-            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? $recipeEntry[3] : null;
-            
+            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
 
             /**
              * Also add the tab to the URL, not because it is needed,
@@ -287,7 +286,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
-            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? $recipeEntry[3] : null;
+            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
 
             if ($recipeEntryPROExtensionModule !== null) {
                 /** @var ExtensionModuleResolverInterface */
