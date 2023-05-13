@@ -23,17 +23,17 @@
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
 }
 .plugin-card:nth-child(2) {
-    background-color: #c4d200;
+    background-color: #b2f4f7;
 }
 .plugin-card:nth-child(3) {
-    background-color: #00cbd2;
+    background-color: #d9e163;
 }
 .plugin-card:nth-child(4) {
-    background-color: #00d2a5;
+    background-color: #a9d591;
 }
 .plugin-card:nth-child(5) {
-    background-color: #d29a00;
+    background-color: #ddb4a8;
 }
 .plugin-card:nth-child(6) {
-    background-color: #b4c161;
+    background-color: #8ddbca;
 }
