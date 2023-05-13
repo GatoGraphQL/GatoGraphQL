@@ -197,14 +197,21 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] .
                 '&amp;TB_iframe=true&amp;width=600&amp;height=550'
             );
-            // Replace it with this other link
+            
+            /**
+             * Replace it with this other link.
+             * 
+             * This is a custom property, not required by the upstream class,
+             * but used internally to modify the generated HTML content
+             */
+            $module = $plugin['gato_extension_module'];
             $adaptedDetailsLink = \admin_url(sprintf(
                 'admin.php?page=%s&%s=%s&%s=%s&TB_iframe=true&width=600&height=550',
                 App::request('page') ?? App::query('page', ''),
                 RequestParams::TAB,
                 RequestParams::TAB_DOCS,
                 RequestParams::MODULE,
-                urlencode($plugin['gato_extension_module'])
+                urlencode($module)
             ));
             $html = str_replace(
                 esc_url($details_link),
