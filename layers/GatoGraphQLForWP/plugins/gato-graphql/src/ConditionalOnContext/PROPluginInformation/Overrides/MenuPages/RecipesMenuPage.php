@@ -14,7 +14,7 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
-        string $recipeEntryPROExtension,
+        ?string $recipeEntryPROExtension,
     ): string {
         $recipeEntryTitle = parent::getRecipeTitleForNavbar(
             $recipeEntryTitle,
@@ -24,13 +24,15 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
         if (!$recipeEntryIsPRO) {
             return $recipeEntryTitle;
         }
-        return PROPluginStaticHelpers::getPROTitle($recipeEntryTitle);
+        return PROPluginStaticHelpers::getPROTitle(
+            $recipeEntryTitle,
+        );
     }
 
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
-        string $recipeEntryPROExtension,
+        ?string $recipeEntryPROExtension,
     ): string {
         $recipeContent = parent::getRecipeContent(
             $recipeContent,

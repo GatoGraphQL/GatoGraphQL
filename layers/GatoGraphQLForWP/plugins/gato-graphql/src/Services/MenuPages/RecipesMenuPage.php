@@ -329,7 +329,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
-        string $recipeEntryPROExtension,
+        ?string $recipeEntryPROExtension,
     ): string {
         return $recipeEntryTitle;
     }
@@ -337,7 +337,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
-        string $recipeEntryPROExtension,
+        ?string $recipeEntryPROExtension,
     ): string {
         return $recipeContent;
     }
