@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\OpenInModalTriggerMenuPageTrait;
 
@@ -149,6 +150,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 'translating-all-posts-to-a-different-language',
                 'Translating all posts to a different language',
                 true,
+                ExtensionModuleResolver::GOOGLE_TRANSLATE,
             ],
             [
                 'combining-user-data-from-different-systems',
@@ -234,6 +236,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
+            $recipeEntryPROExtension = $recipeEntryIsPRO ? $recipeEntry[3] : null;
 
             /**
              * Also add the tab to the URL, not because it is needed,
@@ -264,8 +267,10 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
+            $recipeEntryPROExtension = $recipeEntryIsPRO ? $recipeEntry[3] : null;
 
-            $recipeEntryRelativePathDir = ($recipeEntryIsPRO ? 'docs-pro' : 'docs') . '/recipes';
+            $docsBaseDir = $recipeEntryIsPRO ? ($recipeEntryPROExtension !== null ? 'docs-pro-extensions' : 'docs-pro') : 'docs';
+            $recipeEntryRelativePathDir = $docsBaseDir . '/recipes';
             $recipeContent = $this->getMarkdownContent(
                 $recipeEntryName,
                 $recipeEntryRelativePathDir,
