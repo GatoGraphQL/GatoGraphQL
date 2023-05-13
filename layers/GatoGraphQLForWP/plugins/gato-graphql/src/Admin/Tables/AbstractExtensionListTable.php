@@ -7,8 +7,11 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
 use stdClass;
+
+use function get_plugin_data;
 
 // The file containing class WP_Plugin_Install_List_Table is not
 // loaded by default in WordPress.
@@ -83,6 +86,41 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      * @see http://api.wordpress.org/plugins/info/1.2/?action=query_plugins&per_page=1
      */
     abstract public function overridePluginsAPIResult(): mixed;
+
+    /**
+     * Common plugin data for the Gato GraphQL plugin and extensions.
+     * As all of these are stored in the same monorepo, they have
+     * the same author/version/requirements/etc.
+     *
+     * @return array<string,mixed>
+     */
+    protected function getCommonPluginData(): array
+    {
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
+        $pluginURL = $mainPlugin->getPluginURL();
+        $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+
+        /**
+         * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
+         */
+        $gatoGraphQLPluginData = get_plugin_data($mainPlugin->getPluginFile());
+
+        return [
+            'version' => $mainPluginVersion,
+            'author' => sprintf(
+                '<a href="%s">%s</a>',
+                $gatoGraphQLPluginData['AuthorURI'],
+                $gatoGraphQLPluginData['Author']
+            ),
+            'requires' => $gatoGraphQLPluginData['RequiresWP'],
+            'requires_php' => $gatoGraphQLPluginData['RequiresPHP'],
+            'icons' => [
+                'svg' => $gatoGraphQLLogoFile,
+                '1x' => $gatoGraphQLLogoFile,
+            ],
+        ];
+    }
 
     /**
      * Replace "Install Now" with "Get Extension"

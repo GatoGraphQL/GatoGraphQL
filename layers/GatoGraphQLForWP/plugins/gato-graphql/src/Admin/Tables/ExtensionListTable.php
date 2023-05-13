@@ -6,9 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
-use GatoGraphQL\GatoGraphQL\PluginApp;
-
-use function get_plugin_data;
 
 /**
  * Extension Table implementation, which retrieves the Extensions
@@ -38,34 +35,7 @@ class ExtensionListTable extends AbstractExtensionListTable
      */
     protected function getAllItems(): array
     {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-        $pluginURL = $mainPlugin->getPluginURL();
-        $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
-
-        /**
-         * Retrieve the plugin data for the Gato GraphQL plugin.
-         * As all extensions live in the same monorepo, they have
-         * the same requirements.
-         *
-         * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
-         */
-        $gatoGraphQLPluginData = get_plugin_data($mainPlugin->getPluginFile());
-
-        $commonPluginData = [
-            'version' => $mainPluginVersion,
-            'author' => sprintf(
-                '<a href="%s">%s</a>',
-                $gatoGraphQLPluginData['AuthorURI'],
-                $gatoGraphQLPluginData['Author']
-            ),
-            'requires' => $gatoGraphQLPluginData['RequiresWP'],
-            'requires_php' => $gatoGraphQLPluginData['RequiresPHP'],
-            'icons' => [
-                'svg' => $gatoGraphQLLogoFile,
-                '1x' => $gatoGraphQLLogoFile,
-            ],
-        ];
+        $commonPluginData = $this->getCommonPluginData();
 
         $items = [];
         $moduleRegistry = ModuleRegistryFacade::getInstance();
