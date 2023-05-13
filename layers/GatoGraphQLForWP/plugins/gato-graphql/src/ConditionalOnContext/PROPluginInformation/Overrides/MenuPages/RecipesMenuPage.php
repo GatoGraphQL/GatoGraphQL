@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Overrides\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\StaticHelpers\PROPluginStaticHelpers;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage as UpstreamRecipesMenuPage;
+use PoP\Root\Exception\ShouldNotHappenException;
 
 class RecipesMenuPage extends UpstreamRecipesMenuPage
 {
@@ -56,12 +58,25 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
             return $recipeContent;
         }
         if ($recipeEntryPROExtensionModule !== null) {
-            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);            
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
+            if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
+                throw new ShouldNotHappenException(
+                    sprintf(
+                        \__('Module "%s" must implement interface "%s"', 'gato-graphql'),
+                        $recipeEntryPROExtensionModule,
+                        ExtensionModuleResolverInterface::class
+                    )
+                );
+            }
             $message = sprintf(
                 \__('This recipe requires extension "%s" to be installed.', 'gato-graphql'),
                 $moduleResolver->getName($recipeEntryPROExtensionModule)
             );
-            $buttonHTML = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary');
+            $buttonHTML = PROPluginStaticHelpers::getUnlockFeaturesAnchorHTML(
+                $moduleResolver->getWebsiteURL($recipeEntryPROExtensionModule),
+                \__('Get the extension to unlock!', 'gato-graphql'),
+                'button button-secondary',
+            );
         } else {
             $message = \__('This recipe requires features available in the Gato GraphQL PRO.', 'gato-graphql');
             $buttonHTML = PROPluginStaticHelpers::getGoPROToUnlockAnchorHTML('button button-secondary');
