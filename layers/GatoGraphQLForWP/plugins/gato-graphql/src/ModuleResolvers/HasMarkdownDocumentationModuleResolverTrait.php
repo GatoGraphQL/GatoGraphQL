@@ -42,16 +42,26 @@ trait HasMarkdownDocumentationModuleResolverTrait
         if ($markdownFilename === null || $markdownFilename === '') {
             return null;
         }
-        
+
+        return $this->getDocumentationMarkdownContent(
+            $module,
+            $markdownFilename,
+        ) ?? sprintf(
+            '<p>%s</p>',
+            \__('Oops, the documentation for this module is not available', 'gato-graphql')
+        );
+    }
+
+    protected function getDocumentationMarkdownContent(
+        string $module,
+        string $markdownFilename,
+    ): ?string {
         return $this->getMarkdownContent(
             $markdownFilename,
             'modules',
             [
                 ContentParserOptions::TAB_CONTENT => true,
             ]
-        ) ?? sprintf(
-            '<p>%s</p>',
-            \__('Oops, the documentation for this module is not available', 'gato-graphql')
         );
     }
 }
