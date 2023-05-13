@@ -18,12 +18,11 @@ trait MarkdownContentRetrieverTrait
         string $relativePathDir = '',
         array $options = []
     ): ?string {
-        // Inject the place to look for the documentation
-        $this->getMarkdownContentParser()->setBaseDir($this->getBaseDir());
-        $this->getMarkdownContentParser()->setBaseURL($this->getBaseURL());
-        $this->getMarkdownContentParser()->setDocsFolder($this->getDocsFolder());
-        $this->getMarkdownContentParser()->setGitHubRepoDocsRootPathURL($this->getGitHubRepoDocsRootPathURL());
-        $this->getMarkdownContentParser()->setUseDocsFolderInFileDir($this->getUseDocsFolderInFileDir());
+        $this->initializeMarkdownContentParser(
+            $markdownFilename,
+            $relativePathDir,
+            $options,
+        );
         try {
             return $this->getMarkdownContentParser()->getContent(
                 $markdownFilename,
@@ -34,6 +33,22 @@ trait MarkdownContentRetrieverTrait
         } catch (ContentNotExistsException) {
             return null;
         }
+    }
+
+    /**
+     * Inject the place to look for the documentation
+     * @param array<string,mixed> $options
+     */
+    protected function initializeMarkdownContentParser(
+        string $markdownFilename,
+        string $relativePathDir = '',
+        array $options = []
+    ): void {
+        $this->getMarkdownContentParser()->setBaseDir($this->getBaseDir());
+        $this->getMarkdownContentParser()->setBaseURL($this->getBaseURL());
+        $this->getMarkdownContentParser()->setDocsFolder($this->getDocsFolder());
+        $this->getMarkdownContentParser()->setGitHubRepoDocsRootPathURL($this->getGitHubRepoDocsRootPathURL());
+        $this->getMarkdownContentParser()->setUseDocsFolderInFileDir($this->getUseDocsFolderInFileDir());
     }
 
     /**
