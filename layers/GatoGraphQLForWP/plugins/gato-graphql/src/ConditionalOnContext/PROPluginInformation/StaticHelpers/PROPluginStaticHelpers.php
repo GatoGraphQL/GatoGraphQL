@@ -10,10 +10,13 @@ use PoP\ComponentModel\App;
 
 class PROPluginStaticHelpers
 {
-    public static function getPROTitle(string $title): string
-    {
+    public static function getPROTitle(
+        string $title,
+        ?string $recipeEntryPROExtension
+    ): string {
         return sprintf(
-            \__('🔒 %s', 'gato-graphql'),
+            \__('%s %s', 'gato-graphql'),
+            $recipeEntryPROExtension !== null ? '🔒' : '🔐',
             $title
         );
     }
