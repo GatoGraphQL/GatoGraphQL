@@ -36,6 +36,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     private array $pluginActionLinks = [];
 
     /**
+     * Slug for the additional and artificial "Request an extension" plugin item
+     */
+    private string $artificialRequestAnExtensionPluginItemSlug = 'artificial-request-an-extension';
+
+    /**
      * @return void
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
@@ -159,7 +164,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return [
             'name' => \__('Request an Extension', 'gato-graphql'),
-            'slug' => 'artificial-request-an-extension',
+            'slug' => $this->artificialRequestAnExtensionPluginItemSlug,
             'short_description' => \__('Needing some extra functionality, or an integration with some plugin? Let us know to make it happen.', 'gato-graphql'),
             'homepage' => $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
         ];
@@ -207,8 +212,8 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     public function getPluginCardButtonActionMessage(array $plugin): string
     {
         /** @var string */
-        $pluginName = $plugin['name'];
-        return ($pluginName === '') ? __('Contact Us', 'gato-graphql') : __('Get Extension', 'gato-graphql');
+        $pluginSlug = $plugin['slug'];
+        return ($pluginSlug === $this->artificialRequestAnExtensionPluginItemSlug) ? __('Contact Us', 'gato-graphql') : __('Get Extension', 'gato-graphql');
     }
 
     /**
