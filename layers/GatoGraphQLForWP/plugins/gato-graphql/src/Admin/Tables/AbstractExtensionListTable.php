@@ -163,9 +163,9 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return [
-            'name' => \__('Request an Extension', 'gato-graphql'),
+            'name' => \__('Missing an Extension?', 'gato-graphql'),
             'slug' => $this->artificialRequestAnExtensionPluginItemSlug,
-            'short_description' => \__('Needing some extra functionality, or an integration with some plugin? Let us know to make it happen.', 'gato-graphql'),
+            'short_description' => \__('Needing some functionality? Or an integration with some plugin? Let us know, and we will try to make it happen.', 'gato-graphql'),
             'homepage' => $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
         ];
     }
@@ -213,7 +213,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         /** @var string */
         $pluginSlug = $plugin['slug'];
-        return ($pluginSlug === $this->artificialRequestAnExtensionPluginItemSlug) ? __('Contact Us', 'gato-graphql') : __('Get Extension', 'gato-graphql');
+        return ($pluginSlug === $this->artificialRequestAnExtensionPluginItemSlug) ? __('Request an Extension', 'gato-graphql') : __('Get Extension', 'gato-graphql');
     }
 
     /**
