@@ -59,12 +59,6 @@ class ExtensionListTable extends AbstractExtensionListTable
                 'gato_extension_module' => $module,
             ];
         }
-
-        /**
-         * Add an additional and artificial "Request an extension" item
-         */
-        $items[] = $this->getArtificialRequestAnExtensionItem();
-
         return $this->combineExtensionItemsWithCommonPluginData($items);
     }
 
