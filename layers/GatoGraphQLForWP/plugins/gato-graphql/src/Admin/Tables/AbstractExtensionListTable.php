@@ -297,7 +297,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                         %6\$s
                     </div>
                 </div>
-                <div class="plugin-card-top">
+                <div class="plugin-card-top plugin-card-top-request-extension">
                     <div class="name column-name">
                         <h3>
                             %1\$s

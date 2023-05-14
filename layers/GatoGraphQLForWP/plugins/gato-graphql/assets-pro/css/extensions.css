@@ -39,3 +39,10 @@
     border-color: lightseagreen;
     background-color: #b2f4f7;
 }
+
+/**
+ * Have the Suki logo spring from the very top
+ */
+.plugin-card-top-request-extension .plugin-icon {
+    top: 0;
+}
