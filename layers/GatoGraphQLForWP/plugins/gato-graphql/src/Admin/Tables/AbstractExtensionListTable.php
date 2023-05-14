@@ -128,7 +128,6 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
-        $gatoGraphQLLogoURL = $this->getGatoGraphQLLogoURL();
 
         /**
          * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
@@ -144,10 +143,6 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             ),
             'requires' => $gatoGraphQLPluginData['RequiresWP'],
             'requires_php' => $gatoGraphQLPluginData['RequiresPHP'],
-            'icons' => [
-                'svg' => $gatoGraphQLLogoURL,
-                '1x' => $gatoGraphQLLogoURL,
-            ],
         ];
     }
 
@@ -328,10 +323,16 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
+        $alternativeGatoGraphQLLogoURL = str_replace(
+            'GatoGraphQL-logo.svg',
+            'GatoGraphQL-logo2.svg',
+            $this->getGatoGraphQLLogoURL(),
+        );
+
         return sprintf(
             $additionalItemHTMLPlaceholder,
             \__('Missing an Extension?', 'gato-graphql'),
-            $this->getGatoGraphQLLogoURL(),
+            $alternativeGatoGraphQLLogoURL,
             $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
             \__('Request an Extension', 'gato-graphql'),
             \__('Needing an integration with a 3rd-party plugin? Or some new feature? Let us know, and we can help develop a solution.', 'gato-graphql'),

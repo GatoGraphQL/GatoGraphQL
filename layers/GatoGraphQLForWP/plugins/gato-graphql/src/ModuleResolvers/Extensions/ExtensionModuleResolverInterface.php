@@ -10,4 +10,5 @@ interface ExtensionModuleResolverInterface extends ModuleResolverInterface
 {
     public function getGatoGraphQLExtensionSlug(string $module): string;
     public function getWebsiteURL(string $module): string;
+    public function getLogoURL(string $module): string;
 }

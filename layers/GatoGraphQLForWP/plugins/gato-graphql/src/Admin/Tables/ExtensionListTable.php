@@ -46,11 +46,16 @@ class ExtensionListTable extends AbstractExtensionListTable
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
+            $gatoGraphQLLogoURL = $moduleResolver->getLogoURL($module);
             $items[] = [
                 'name' => $moduleResolver->getName($module),
                 'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
                 'short_description' => $moduleResolver->getDescription($module),
                 'homepage' => $moduleResolver->getWebsiteURL($module),
+                'icons' => [
+                    'svg' => $gatoGraphQLLogoURL,
+                    '1x' => $gatoGraphQLLogoURL,
+                ],
 
                 /**
                  * These are custom properties, not required by the upstream class,
