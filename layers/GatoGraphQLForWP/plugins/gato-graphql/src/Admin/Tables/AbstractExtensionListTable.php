@@ -129,8 +129,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
-        $pluginURL = $mainPlugin->getPluginURL();
-        $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+        $gatoGraphQLLogoURL = $this->getGatoGraphQLLogoURL();
 
         /**
          * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
@@ -147,10 +146,17 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             'requires' => $gatoGraphQLPluginData['RequiresWP'],
             'requires_php' => $gatoGraphQLPluginData['RequiresPHP'],
             'icons' => [
-                'svg' => $gatoGraphQLLogoFile,
-                '1x' => $gatoGraphQLLogoFile,
+                'svg' => $gatoGraphQLLogoURL,
+                '1x' => $gatoGraphQLLogoURL,
             ],
         ];
+    }
+
+    protected function getGatoGraphQLLogoURL(): string
+    {
+        $mainPlugin = PluginApp::getMainPlugin();
+        $pluginURL = $mainPlugin->getPluginURL();
+        return $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
     }
 
     /**
@@ -293,6 +299,46 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 );
             }
         }
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        
+        // Add an additional item
+        $additionalItemHTMLPlaceholder = <<<HTML
+            <div class="plugin-card plugin-card-highlight">
+                <div class="plugin-card-top">
+                    <div class="name column-name">
+                        <h3>
+                            %1\$s
+                            <img src="%2\$s" class="plugin-icon" alt="">
+                        </h3>
+                    </div>
+                    <div class="action-links">
+                        <ul class="plugin-action-buttons">
+                            <li>
+                                <a class="install-now button" href="%3\$s" aria-label="%1\$s" target="_blank">
+                                    %4\$s%6\$s
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="desc column-description">
+                        <p>%5\$s</p>
+                    </div>
+                </div>
+            </div>
+        HTML;
+        $additionalItemHTML = sprintf(
+            $additionalItemHTMLPlaceholder,
+            \__('Missing an Extension?', 'gato-graphql'),
+            $this->getGatoGraphQLLogoURL(),
+            $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
+            \__('Request an Extension', 'gato-graphql'),
+            \__('Needing some functionality? Or an integration with some plugin? Let us know, and we will try to make it happen.', 'gato-graphql'),
+            HTMLCodes::OPEN_IN_NEW_WINDOW
+        );
+
+        $html = $html . $additionalItemHTML;
 
         return $html;
     }
