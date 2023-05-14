@@ -14,15 +14,20 @@
 }
 
 /**
- * The 1st item is Gato GraphQL PRO, and after that
- * all other extensions
+ * Add a distinctive style to the 1st and last items:
+ * - The 1st item is Gato GraphQL PRO
+ * - The last item is "Request an Extension"
  */
-.plugin-card:nth-child(1) {
-    border-color: darksalmon;
+.plugin-card:nth-child(1),
+.plugin-card:last-child {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+/**
+ * Add a background-color to all extensions
+ */
 .plugin-card-highlight.plugin-card:nth-child(1) {
+    border-color: darksalmon;
     background-color: khaki;
 }
 .plugin-card-highlight.plugin-card:nth-child(2) {
@@ -39,4 +44,8 @@
 }
 .plugin-card-highlight.plugin-card:nth-child(6) {
     background-color: #8ddbca;
+}
+.plugin-card-highlight.plugin-card:last-child {
+    border-color: cyan;
+    background-color: lightcyan;
 }
