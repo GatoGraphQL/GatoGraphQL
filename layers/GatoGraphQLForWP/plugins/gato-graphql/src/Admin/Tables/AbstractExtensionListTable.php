@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
-use stdClass;
-
 use function get_plugin_data;
+use stdClass;
 
 // The file containing class WP_Plugin_Install_List_Table is not
 // loaded by default in WordPress.
@@ -126,6 +129,23 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 'svg' => $gatoGraphQLLogoFile,
                 '1x' => $gatoGraphQLLogoFile,
             ],
+        ];
+    }
+
+    /**
+     * Data for an additional and artificial "Request an extension" plugin item
+     *
+     * @return array<string,mixed>
+     */
+    protected function getArtificialRequestAnExtensionItem(): array
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return [
+            'name' => \__('Request an Extension', 'gato-graphql'),
+            'slug' => 'artificial-request-an-extension',
+            'short_description' => \__('Needing some extra functionality, or an integration with some plugin? Let us know to make it happen.', 'gato-graphql'),
+            'homepage' => $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
         ];
     }
 

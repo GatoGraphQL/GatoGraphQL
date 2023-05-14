@@ -52,18 +52,7 @@ class ExtensionListTable extends AbstractExtensionListTable
             }
             $items[] = array_merge(
                 $commonPluginData,
-                [
-                    'name' => $moduleResolver->getName($module),
-                    'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
-                    'short_description' => $moduleResolver->getDescription($module),
-                    'homepage' => $moduleResolver->getWebsiteURL($module),
-
-                    /**
-                     * These are custom properties, not required by the upstream class,
-                     * but used internally to modify the generated HTML content
-                     */
-                    'gato_extension_module' => $module,
-                ]
+                $this->getArtificialRequestAnExtensionItem()
             );
         }
 
