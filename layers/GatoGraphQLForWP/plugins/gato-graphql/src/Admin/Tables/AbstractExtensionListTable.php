@@ -98,6 +98,22 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     abstract public function overridePluginsAPIResult(): mixed;
 
     /**
+     * @param array<array<string,mixed>> $items
+     * @return array<array<string,mixed>>
+     */
+    protected function combineExtensionItemsWithCommonPluginData(array $items): array
+    {
+        $commonPluginData = $this->getCommonPluginData();
+        return array_map(
+            fn (array $item) => array_merge(
+                $commonPluginData,
+                $item
+            ),
+            $items
+        );
+    }
+
+    /**
      * Common plugin data for the Gato GraphQL plugin and extensions.
      * As all of these are stored in the same monorepo, they have
      * the same author/version/requirements/etc.
