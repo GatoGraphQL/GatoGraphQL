@@ -142,8 +142,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
          * Keep a copy of the $action_links for each plugin,
          * so that their corresponding HTML can be modified
          * based on that state.
+         *
+         * @var string
          */
-        $this->pluginActionLinks[$plugin['name']] = $action_links;
+        $pluginName = $plugin['name'];
+        $this->pluginActionLinks[$pluginName] = $action_links;
 
         if (str_starts_with($action_links[0] ?? '', '<a class="install-now button"')) {
             $action_links[0] = sprintf(
@@ -221,8 +224,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
 
             /**
              * Highlight non-installed extensions
+             *
+             * @var string
              */
-            $actionLinks = $this->pluginActionLinks[$plugin['name']] ?? [];
+            $pluginName = $plugin['name'];
+            $actionLinks = $this->pluginActionLinks[$pluginName] ?? [];
             if (str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')) {
                 $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug']);
                 $html = str_replace(
