@@ -230,6 +230,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         }
 
         $html = $this->adaptDisplayRowsHTML($html);
+        $html .= $this->getArtificialRequestAnExtensionPluginItem();
 
         echo $html;
     }
@@ -278,6 +279,14 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             }
         }
 
+        return $html;
+    }
+
+    /**
+     * Get the HTML for the additional "Request an Extension" plugin item
+     */
+    protected function getArtificialRequestAnExtensionPluginItem(): string
+    {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         
@@ -306,7 +315,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 </div>
             </div>
         HTML;
-        $additionalItemHTML = sprintf(
+        return sprintf(
             $additionalItemHTMLPlaceholder,
             \__('Missing an Extension?', 'gato-graphql'),
             $this->getGatoGraphQLLogoURL(),
@@ -315,10 +324,6 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             \__('Needing some functionality? Or an integration with some plugin? Let us know, and we will try to make it happen.', 'gato-graphql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
-
-        $html = $html . $additionalItemHTML;
-
-        return $html;
     }
 
     /**
