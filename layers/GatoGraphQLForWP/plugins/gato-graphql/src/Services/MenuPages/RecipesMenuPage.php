@@ -288,7 +288,9 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
             $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
 
-            if ($recipeEntryPROExtensionModule !== null && $this->addLinkToExtensionInRecipeTitle()) {
+            if ($recipeEntryPROExtensionModule !== null
+                && $this->addLinkToExtensionInRecipeTitle()
+            ) {
                 /** @var ExtensionModuleResolverInterface */
                 $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
                 $recipeEntryTitle = sprintf(
