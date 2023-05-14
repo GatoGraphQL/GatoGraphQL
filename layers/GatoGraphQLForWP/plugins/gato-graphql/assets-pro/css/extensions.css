@@ -18,23 +18,25 @@
  * all other extensions
  */
 .plugin-card:nth-child(1) {
-    background-color: khaki;
     border-color: darksalmon;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.plugin-card:nth-child(2) {
+.plugin-card-highlight.plugin-card:nth-child(1) {
+    background-color: khaki;
+}
+.plugin-card-highlight.plugin-card:nth-child(2) {
     background-color: #b2f4f7;
 }
-.plugin-card:nth-child(3) {
+.plugin-card-highlight.plugin-card:nth-child(3) {
     background-color: #f4c5e6;
 }
-.plugin-card:nth-child(4) {
+.plugin-card-highlight.plugin-card:nth-child(4) {
     background-color: #c2dbb5;
 }
-.plugin-card:nth-child(5) {
+.plugin-card-highlight.plugin-card:nth-child(5) {
     background-color: #ddb4a8;
 }
-.plugin-card:nth-child(6) {
+.plugin-card-highlight.plugin-card:nth-child(6) {
     background-color: #8ddbca;
 }

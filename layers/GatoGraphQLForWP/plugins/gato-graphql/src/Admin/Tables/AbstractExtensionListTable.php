@@ -24,6 +24,15 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     use ItemListTableTrait;
 
     /**
+     * Keep a copy of the $action_links for each plugin,
+     * so that their corresponding HTML can be modified
+     * based on that state.
+     *
+     * @var array<string,string[]>
+     */
+    private array $pluginActionLinks = [];
+
+    /**
      * @return void
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
@@ -33,9 +42,9 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
         add_filter('plugins_api', $this->overridePluginsAPI(...));
         add_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
-        add_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), 10, 2);
+        add_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), PHP_INT_MAX, 2);
         parent::prepare_items();
-        remove_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), 10);
+        remove_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), PHP_INT_MAX);
         remove_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
         remove_filter('plugins_api', $this->overridePluginsAPI(...));
         remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
@@ -129,6 +138,13 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      */
     public function overridePluginInstallActionLinks(array $action_links, array $plugin): array
     {
+        /**
+         * Keep a copy of the $action_links for each plugin,
+         * so that their corresponding HTML can be modified
+         * based on that state.
+         */
+        $this->pluginActionLinks[$plugin['name']] = $action_links;
+
         if (str_starts_with($action_links[0] ?? '', '<a class="install-now button"')) {
             $action_links[0] = sprintf(
                 '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s%s</a>',
@@ -202,6 +218,19 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_url($adaptedDetailsLink),
                 $html
             );
+
+            /**
+             * Highlight non-installed extensions
+             */
+            $actionLinks = $this->pluginActionLinks[$plugin['name']] ?? [];
+            if (str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')) {
+                $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug']);
+                $html = str_replace(
+                    $pluginCardClassname,
+                    $pluginCardClassname . ' plugin-card-highlight',
+                    $html
+                );
+            }
         }
 
         return $html;
