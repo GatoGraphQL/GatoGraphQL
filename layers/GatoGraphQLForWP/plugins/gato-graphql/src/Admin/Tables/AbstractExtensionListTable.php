@@ -13,10 +13,9 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
+use stdClass;
 
 use function get_plugin_data;
-
-use stdClass;
 
 // The file containing class WP_Plugin_Install_List_Table is not
 // loaded by default in WordPress.
