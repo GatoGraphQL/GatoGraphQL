@@ -6,8 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 
 /**
@@ -52,23 +50,27 @@ class ExtensionListTable extends AbstractExtensionListTable
             }
             $items[] = array_merge(
                 $commonPluginData,
-                $this->getArtificialRequestAnExtensionItem()
+                [
+                    'name' => $moduleResolver->getName($module),
+                    'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
+                    'short_description' => $moduleResolver->getDescription($module),
+                    'homepage' => $moduleResolver->getWebsiteURL($module),
+
+                    /**
+                     * These are custom properties, not required by the upstream class,
+                     * but used internally to modify the generated HTML content
+                     */
+                    'gato_extension_module' => $module,
+                ]
             );
         }
 
         /**
          * Add an additional and artificial "Request an extension" item
          */
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $items[] = array_merge(
             $commonPluginData,
-            [
-                'name' => \__('Request an Extension', 'gato-graphql'),
-                'slug' => 'artificial-request-an-extension',
-                'short_description' => \__('Needing some extra functionality, or an integration with some plugin? Let us know to make it happen.', 'gato-graphql'),
-                'homepage' => $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
-            ]
+            $this->getArtificialRequestAnExtensionItem()
         );
 
         return $items;
