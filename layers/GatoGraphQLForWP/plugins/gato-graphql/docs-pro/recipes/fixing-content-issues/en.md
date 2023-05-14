@@ -98,9 +98,9 @@ query GetPostData(
     contentSource
     contentSourceWithLinks: _strRegexReplace(
       # @see https://stackoverflow.com/a/206087
-      regex: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
-      replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
-      in: $__contentSource
+      pattern: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
+      replacement: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
+      subject: $__contentSource
     )
   }
 }

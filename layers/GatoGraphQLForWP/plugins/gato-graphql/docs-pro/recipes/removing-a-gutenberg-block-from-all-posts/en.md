@@ -21,9 +21,9 @@ mutation RemoveBlock
     id
     contentSource
     adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
-      regex: "#(<!-- wp:columns -->[\\s\\S]+<!-- /wp:columns -->)#",
-      replaceWith: ""
+      subject: $__contentSource,
+      pattern: "#(<!-- wp:columns -->[\\s\\S]+<!-- /wp:columns -->)#",
+      replacement: ""
     )
     update(input: {
       content: $__adaptedContentSource,
@@ -103,9 +103,9 @@ mutation RemoveBlock
     id
     contentSource
     adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
-      regex: $regex,
-      replaceWith: ""
+      subject: $__contentSource,
+      pattern: $regex,
+      replacement: ""
     )
     update(input: {
       content: $__adaptedContentSource,
