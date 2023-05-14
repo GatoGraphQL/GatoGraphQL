@@ -144,7 +144,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
          * based on that state.
          */
         $this->pluginActionLinks[$plugin['name']] = $action_links;
-        
+
         if (str_starts_with($action_links[0] ?? '', '<a class="install-now button"')) {
             $action_links[0] = sprintf(
                 '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s%s</a>',
