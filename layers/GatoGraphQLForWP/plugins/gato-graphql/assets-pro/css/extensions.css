@@ -33,7 +33,7 @@
     background-color: khaki;
 }
 .plugin-card-highlight.plugin-card:last-child {
-    border-color: cyan;
+    border-color: skyblue;
     background-color: lightcyan;
 }
 /* .plugin-card-highlight.plugin-card:nth-child(2) {
