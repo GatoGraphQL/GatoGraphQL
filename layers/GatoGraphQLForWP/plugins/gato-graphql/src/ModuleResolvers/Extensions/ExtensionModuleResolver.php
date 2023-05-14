@@ -78,7 +78,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GATO_GRAPHQL_PRO => parent::getLogoURL($module),
             default => str_replace(
                 'GatoGraphQL-logo.png',
-                'GatoGraphQL-logo4.png',
+                'GatoGraphQL-logo2.png',
                 parent::getLogoURL($module),
             ),
         };
