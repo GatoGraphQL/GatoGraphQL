@@ -288,7 +288,9 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
             $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
 
-            if ($recipeEntryPROExtensionModule !== null) {
+            if ($recipeEntryPROExtensionModule !== null
+                && $this->addLinkToExtensionInRecipeTitleInContent()
+            ) {
                 /** @var ExtensionModuleResolverInterface */
                 $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
                 $recipeEntryTitle = sprintf(
@@ -351,6 +353,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         </div>
         HTML;
         return $markdownContent;
+    }
+
+    protected function addLinkToExtensionInRecipeTitleInContent(): bool
+    {
+        return true;
     }
 
     protected function getRecipeTitleForNavbar(

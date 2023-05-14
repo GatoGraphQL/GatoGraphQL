@@ -8,11 +8,3 @@
 .go-pro-highlight.pro-extension {
     background-color: lightgoldenrodyellow;
 }
-
-/**
- * Since the link is already added to the content, can hide the link
- * on the title
- */
-.recipe-entry-title-extension {
-    display: none;
-}
