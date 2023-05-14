@@ -13,7 +13,9 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
+
 use function get_plugin_data;
+
 use stdClass;
 
 // The file containing class WP_Plugin_Install_List_Table is not
@@ -260,7 +262,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 '&amp;TB_iframe=true&amp;width=600&amp;height=550'
             );
             // Replace it with this other link.
-            $adaptedDetailsLink = $this->getAdaptedDetailsLink($plugin);            
+            $adaptedDetailsLink = $this->getAdaptedDetailsLink($plugin);
             $html = str_replace(
                 esc_url($details_link),
                 esc_url($adaptedDetailsLink),
@@ -291,7 +293,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      * Get the HTML for the additional "Request an Extension" plugin item
      */
     protected function getArtificialRequestAnExtensionPluginItem(): string
-    {        
+    {
         // Add an additional item
         $additionalItemHTMLPlaceholder = <<<HTML
             <div class="plugin-card plugin-card-highlight">
