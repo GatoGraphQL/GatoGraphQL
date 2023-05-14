@@ -291,10 +291,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      * Get the HTML for the additional "Request an Extension" plugin item
      */
     protected function getArtificialRequestAnExtensionPluginItem(): string
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        
+    {        
         // Add an additional item
         $additionalItemHTMLPlaceholder = <<<HTML
             <div class="plugin-card plugin-card-highlight">
@@ -309,7 +306,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                         <ul class="plugin-action-buttons">
                             <li>
                                 <a class="install-now button" href="%3\$s" aria-label="%1\$s" target="_blank">
-                                    %4\$s%6\$s
+                                    %4\$s%7\$s
                                 </a>
                             </li>
                         </ul>
@@ -318,8 +315,17 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                         <p>%5\$s</p>
                     </div>
                 </div>
+                <div class="plugin-card-bottom">
+                    <div class="column-compatibility">
+                        %6\$s
+                    </div>
+                </div>
             </div>
         HTML;
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+
         return sprintf(
             $additionalItemHTMLPlaceholder,
             \__('Missing an Extension?', 'gato-graphql'),
@@ -327,6 +333,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
             \__('Request an Extension', 'gato-graphql'),
             \__('Needing some functionality? Or an integration with some plugin? Let us know, and we will try to make it happen.', 'gato-graphql'),
+            \__('Expand the schema with <strong>Gato GraphQL</strong>'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }
