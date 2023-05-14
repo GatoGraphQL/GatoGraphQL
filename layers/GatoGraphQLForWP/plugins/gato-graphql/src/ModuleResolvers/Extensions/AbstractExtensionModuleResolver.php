@@ -71,7 +71,7 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $pluginURL = $mainPlugin->getPluginURL();
-        return $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+        return $pluginURL . 'assets-pro/img/GatoGraphQL-logo.png';
     }
 
     protected function getDocumentationMarkdownContentRelativePathDir(
