@@ -6,9 +6,11 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
-
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
 use function get_plugin_data;
@@ -197,7 +199,13 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         /** @var string */
         $pluginSlug = $plugin['slug'];
-        return ($pluginSlug === '') ? __('Go PRO', 'gato-graphql') : __('Get Extension', 'gato-graphql');
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        /** @var ExtensionModuleResolverInterface */
+        $moduleResolver = $moduleRegistry->getModuleResolver(ExtensionModuleResolver::GATO_GRAPHQL_PRO);
+        if ($pluginSlug === $moduleResolver->getSlug(ExtensionModuleResolver::GATO_GRAPHQL_PRO)) {
+            return __('Get <strong>PRO</strong> Extension', 'gato-graphql');
+        }
+        return __('Get Extension', 'gato-graphql');
     }
 
     /**
