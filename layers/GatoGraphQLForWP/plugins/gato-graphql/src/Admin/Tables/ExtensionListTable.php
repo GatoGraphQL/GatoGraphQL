@@ -77,7 +77,7 @@ class ExtensionListTable extends AbstractExtensionListTable
             [
                 'name' => \__('Request an Extension', 'gato-graphql'),
                 'slug' => 'artificial-request-an-extension',
-                'short_description' => \__('Needing some extra functionality, or an integration with some plugin? Let\'s make it happen.', 'gato-graphql'),
+                'short_description' => \__('Needing some extra functionality, or an integration with some plugin? Let us know to make it happen.', 'gato-graphql'),
                 'homepage' => $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
             ]
         );
