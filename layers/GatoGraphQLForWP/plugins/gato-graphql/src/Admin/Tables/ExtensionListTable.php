@@ -88,15 +88,18 @@ class ExtensionListTable extends AbstractExtensionListTable
     /**
      * @param array<string,mixed> $plugin
      */
-    protected function getAdaptedDetailsLink(array $plugin): string
+    protected function getAdaptedDetailsLink(array $plugin): ?string
     {
         /**
          * This is a custom property, not required by the upstream class,
          * but used internally to modify the generated HTML content
          *
-         * @var string
+         * @var string|null
          */
-        $extensionModule = $plugin['gato_extension_module'];
+        $extensionModule = $plugin['gato_extension_module'] ?? null;
+        if ($extensionModule === null) {
+            return null;
+        }
         return $this->getOpeningModuleDocInModalLinkURL(
             App::request('page') ?? App::query('page', ''),
             $extensionModule,
