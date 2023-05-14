@@ -218,6 +218,19 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_url($adaptedDetailsLink),
                 $html
             );
+
+            /**
+             * Highlight non-installed extensions
+             */
+            $actionLinks = $this->pluginActionLinks[$plugin['name']] ?? [];
+            if (str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')) {
+                $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug']);
+                $html = str_replace(
+                    $pluginCardClassname,
+                    $pluginCardClassname . ' plugin-card-highlight',
+                    $html
+                );
+            }
         }
 
         return $html;
