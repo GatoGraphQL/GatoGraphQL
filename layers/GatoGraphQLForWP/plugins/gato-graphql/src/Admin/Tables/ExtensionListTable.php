@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 
 /**
@@ -64,6 +66,22 @@ class ExtensionListTable extends AbstractExtensionListTable
                 ]
             );
         }
+
+        /**
+         * Add an additional and artificial "Request an extension" item
+         */
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $items[] = array_merge(
+            $commonPluginData,
+            [
+                'name' => \__('Request an Extension', 'gato-graphql'),
+                'slug' => 'artificial-request-an-extension',
+                'short_description' => \__('Needing some extra functionality, or an integration with some plugin? Let\'s make it happen.', 'gato-graphql'),
+                'homepage' => $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
+            ]
+        );
+
         return $items;
     }
 
