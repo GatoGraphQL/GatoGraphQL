@@ -297,6 +297,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         // Add an additional item
         $additionalItemHTMLPlaceholder = <<<HTML
             <div class="plugin-card plugin-card-highlight">
+                <div class="plugin-card-bottom">
+                    <div class="">
+                        %6\$s
+                    </div>
+                </div>
                 <div class="plugin-card-top">
                     <div class="name column-name">
                         <h3>
@@ -317,11 +322,6 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                         <p>%5\$s</p>
                     </div>
                 </div>
-                <div class="plugin-card-bottom">
-                    <div class="column-compatibility">
-                        %6\$s
-                    </div>
-                </div>
             </div>
         HTML;
 
@@ -335,7 +335,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
             \__('Request an Extension', 'gato-graphql'),
             \__('Needing an integration with a 3rd-party plugin? Or some new feature? Let us know, and we can help develop a solution.', 'gato-graphql'),
-            \__('Contact <strong>Gato GraphQL</strong> to support the needs of your app'),
+            \__('<strong>Gato GraphQL</strong> can help support the needs of your app'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }
