@@ -14,29 +14,35 @@
 }
 
 /**
- * The 1st item is Gato GraphQL PRO, and after that
- * all other extensions
+ * Add a shadow and dotted background to all plugin cards
  */
-.plugin-card:nth-child(1) {
-    border-color: darksalmon;
+.plugin-card {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+/**
+ * Add a background-color to all extensions
+ */
+.plugin-card-highlight.plugin-card {
+    background-color: #f4d7ec;
+}
+/**
+ * Add a distinctive background color to the 1st and last items:
+ * - The 1st item is Gato GraphQL PRO
+ * - The last item is "Request an Extension"
+ */
 .plugin-card-highlight.plugin-card:nth-child(1) {
+    border-color: darksalmon;
     background-color: khaki;
 }
-.plugin-card-highlight.plugin-card:nth-child(2) {
+.plugin-card-highlight.plugin-card:last-child {
+    border-color: #3fe1d8;
     background-color: #b2f4f7;
 }
-.plugin-card-highlight.plugin-card:nth-child(3) {
-    background-color: #f4c5e6;
-}
-.plugin-card-highlight.plugin-card:nth-child(4) {
-    background-color: #c2dbb5;
-}
-.plugin-card-highlight.plugin-card:nth-child(5) {
-    background-color: #ddb4a8;
-}
-.plugin-card-highlight.plugin-card:nth-child(6) {
-    background-color: #8ddbca;
+
+/**
+ * Have the Suki logo spring from the very top
+ */
+.plugin-card-top-request-extension .plugin-icon {
+    top: 0;
 }

@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Plugin_Install_List_Table;
-use stdClass;
 
 use function get_plugin_data;
+
+use stdClass;
 
 // The file containing class WP_Plugin_Install_List_Table is not
 // loaded by default in WordPress.
@@ -95,6 +102,22 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     abstract public function overridePluginsAPIResult(): mixed;
 
     /**
+     * @param array<array<string,mixed>> $items
+     * @return array<array<string,mixed>>
+     */
+    protected function combineExtensionItemsWithCommonPluginData(array $items): array
+    {
+        $commonPluginData = $this->getCommonPluginData();
+        return array_map(
+            fn (array $item) => array_merge(
+                $commonPluginData,
+                $item
+            ),
+            $items
+        );
+    }
+
+    /**
      * Common plugin data for the Gato GraphQL plugin and extensions.
      * As all of these are stored in the same monorepo, they have
      * the same author/version/requirements/etc.
@@ -105,8 +128,6 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
-        $pluginURL = $mainPlugin->getPluginURL();
-        $gatoGraphQLLogoFile = $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
 
         /**
          * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
@@ -122,16 +143,17 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             ),
             'requires' => $gatoGraphQLPluginData['RequiresWP'],
             'requires_php' => $gatoGraphQLPluginData['RequiresPHP'],
-            'icons' => [
-                'svg' => $gatoGraphQLLogoFile,
-                '1x' => $gatoGraphQLLogoFile,
-            ],
         ];
     }
 
+    protected function getGatoGraphQLLogoURL(): string
+    {
+        $mainPlugin = PluginApp::getMainPlugin();
+        $pluginURL = $mainPlugin->getPluginURL();
+        return $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+    }
+
     /**
-     * Replace "Install Now" with "Get Extension"
-     *
      * @param string[] $action_links
      * @param array<string,mixed> $plugin
      * @return string[]
@@ -149,6 +171,9 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         $this->pluginActionLinks[$pluginName] = $action_links;
 
         if (str_starts_with($action_links[0] ?? '', '<a class="install-now button"')) {
+            /**
+             * Replace the "Install Now" action message
+             */
             $action_links[0] = sprintf(
                 '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s%s</a>',
                 esc_attr($plugin['slug']),
@@ -157,11 +182,27 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
                 esc_attr($plugin['name']),
                 '_blank',
-                __('Get Extension', 'gato-graphql'),
+                $this->getPluginCardButtonActionMessage($plugin),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
         }
         return $action_links;
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    public function getPluginCardButtonActionMessage(array $plugin): string
+    {
+        /** @var string */
+        $pluginSlug = $plugin['slug'];
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        /** @var ExtensionModuleResolverInterface */
+        $moduleResolver = $moduleRegistry->getModuleResolver(ExtensionModuleResolver::GATO_GRAPHQL_PRO);
+        if ($pluginSlug === $moduleResolver->getSlug(ExtensionModuleResolver::GATO_GRAPHQL_PRO)) {
+            return __('Get <strong>PRO</strong> Extension', 'gato-graphql');
+        }
+        return __('Get Extension', 'gato-graphql');
     }
 
     /**
@@ -194,6 +235,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         }
 
         $html = $this->adaptDisplayRowsHTML($html);
+        $html .= $this->getArtificialRequestAnExtensionPluginItem();
 
         echo $html;
     }
@@ -240,6 +282,63 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         }
 
         return $html;
+    }
+
+    /**
+     * Get the HTML for the additional "Request an Extension" plugin item
+     */
+    protected function getArtificialRequestAnExtensionPluginItem(): string
+    {
+        // Add an additional item
+        $additionalItemHTMLPlaceholder = <<<HTML
+            <div class="plugin-card plugin-card-highlight">
+                <div class="plugin-card-top plugin-card-top-request-extension">
+                    <div class="name column-name">
+                        <h3>
+                            %1\$s
+                            <img src="%2\$s" class="plugin-icon" alt="">
+                        </h3>
+                    </div>
+                    <div class="action-links">
+                        <ul class="plugin-action-buttons">
+                            <li>
+                                <a class="install-now button" href="%3\$s" aria-label="%1\$s" target="_blank">
+                                    %4\$s%7\$s
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="desc column-description">
+                        <p>%5\$s</p>
+                    </div>
+                </div>
+                <div class="plugin-card-bottom">
+                    <div class="column-compatibility">
+                        %6\$s
+                    </div>
+                </div>
+            </div>
+        HTML;
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+
+        $alternativeGatoGraphQLLogoURL = str_replace(
+            'GatoGraphQL-logo.svg',
+            'GatoGraphQL-logo3.svg',
+            $this->getGatoGraphQLLogoURL(),
+        );
+
+        return sprintf(
+            $additionalItemHTMLPlaceholder,
+            \__('Missing an Extension?', 'gato-graphql'),
+            $alternativeGatoGraphQLLogoURL,
+            $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
+            \__('Request an Extension', 'gato-graphql'),
+            \__('Needing an integration with a 3rd-party plugin? Or some new feature? Let us know, and we can help develop a solution.', 'gato-graphql'),
+            \__('<strong>Gato GraphQL</strong> can help support the needs of your app'),
+            HTMLCodes::OPEN_IN_NEW_WINDOW
+        );
     }
 
     /**

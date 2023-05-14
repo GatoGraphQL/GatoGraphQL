@@ -38,8 +38,6 @@ class ExtensionListTable extends AbstractExtensionListTable
      */
     protected function getAllItems(): array
     {
-        $commonPluginData = $this->getCommonPluginData();
-
         $items = [];
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(true, false, false);
@@ -48,23 +46,25 @@ class ExtensionListTable extends AbstractExtensionListTable
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
-            $items[] = array_merge(
-                $commonPluginData,
-                [
-                    'name' => $moduleResolver->getName($module),
-                    'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
-                    'short_description' => $moduleResolver->getDescription($module),
-                    'homepage' => $moduleResolver->getWebsiteURL($module),
+            $gatoGraphQLLogoURL = $moduleResolver->getLogoURL($module);
+            $items[] = [
+                'name' => $moduleResolver->getName($module),
+                'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
+                'short_description' => $moduleResolver->getDescription($module),
+                'homepage' => $moduleResolver->getWebsiteURL($module),
+                'icons' => [
+                    'svg' => $gatoGraphQLLogoURL,
+                    '1x' => $gatoGraphQLLogoURL,
+                ],
 
-                    /**
-                     * These are custom properties, not required by the upstream class,
-                     * but used internally to modify the generated HTML content
-                     */
-                    'gato_extension_module' => $module,
-                ]
-            );
+                /**
+                 * These are custom properties, not required by the upstream class,
+                 * but used internally to modify the generated HTML content
+                 */
+                'gato_extension_module' => $module,
+            ];
         }
-        return $items;
+        return $this->combineExtensionItemsWithCommonPluginData($items);
     }
 
     /**

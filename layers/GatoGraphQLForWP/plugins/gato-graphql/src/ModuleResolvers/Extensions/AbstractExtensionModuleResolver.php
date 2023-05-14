@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
@@ -64,6 +65,13 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
             $moduleConfiguration->getGatoGraphQLWebsiteURL(),
             $this->getSlug($module)
         );
+    }
+
+    public function getLogoURL(string $module): string
+    {
+        $mainPlugin = PluginApp::getMainPlugin();
+        $pluginURL = $mainPlugin->getPluginURL();
+        return $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
     }
 
     protected function getDocumentationMarkdownContentRelativePathDir(
