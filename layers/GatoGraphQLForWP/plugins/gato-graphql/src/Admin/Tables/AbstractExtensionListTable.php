@@ -150,7 +150,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $pluginURL = $mainPlugin->getPluginURL();
-        return $pluginURL . 'assets-pro/img/GatoGraphQL-logo.svg';
+        return $pluginURL . 'assets-pro/img/GatoGraphQL-logo.png';
     }
 
     /**
@@ -324,8 +324,8 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
         $alternativeGatoGraphQLLogoURL = str_replace(
-            'GatoGraphQL-logo.svg',
-            'GatoGraphQL-logo3.svg',
+            'GatoGraphQL-logo.png',
+            'GatoGraphQL-logo2.png',
             $this->getGatoGraphQLLogoURL(),
         );
 
