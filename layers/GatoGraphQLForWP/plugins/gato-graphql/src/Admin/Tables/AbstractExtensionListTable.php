@@ -130,8 +130,6 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     }
 
     /**
-     * Replace "Install Now" with "Get Extension"
-     *
      * @param string[] $action_links
      * @param array<string,mixed> $plugin
      * @return string[]
@@ -149,6 +147,9 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         $this->pluginActionLinks[$pluginName] = $action_links;
 
         if (str_starts_with($action_links[0] ?? '', '<a class="install-now button"')) {
+            /**
+             * Replace the "Install Now" action message
+             */
             $action_links[0] = sprintf(
                 '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s%s</a>',
                 esc_attr($plugin['slug']),
@@ -157,11 +158,21 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
                 esc_attr($plugin['name']),
                 '_blank',
-                __('Get Extension', 'gato-graphql'),
+                $this->getPluginCardButtonActionMessage($plugin),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
         }
         return $action_links;
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    public function getPluginCardButtonActionMessage(array $plugin): string
+    {
+        /** @var string */
+        $pluginName = $plugin['name'];
+        return ($pluginName === '') ? __('Contact Us', 'gato-graphql') : __('Get Extension', 'gato-graphql');
     }
 
     /**
