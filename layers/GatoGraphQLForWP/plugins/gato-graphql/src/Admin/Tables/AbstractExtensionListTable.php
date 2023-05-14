@@ -325,7 +325,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
 
         $alternativeGatoGraphQLLogoURL = str_replace(
             'GatoGraphQL-logo.svg',
-            'GatoGraphQL-logo2.svg',
+            'GatoGraphQL-logo3.svg',
             $this->getGatoGraphQLLogoURL(),
         );
 
