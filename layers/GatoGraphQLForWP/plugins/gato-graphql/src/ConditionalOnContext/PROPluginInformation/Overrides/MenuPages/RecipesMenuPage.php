@@ -13,7 +13,7 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
 {
     use UsePRODocsMenuPageTrait;
 
-    protected function addLinkToExtensionInRecipeTitle(): bool
+    protected function addLinkToExtensionInRecipeTitleInContent(): bool
     {
         return false;
     }

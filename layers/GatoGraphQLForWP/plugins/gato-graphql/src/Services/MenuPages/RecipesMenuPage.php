@@ -289,7 +289,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
 
             if ($recipeEntryPROExtensionModule !== null
-                && $this->addLinkToExtensionInRecipeTitle()
+                && $this->addLinkToExtensionInRecipeTitleInContent()
             ) {
                 /** @var ExtensionModuleResolverInterface */
                 $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
@@ -355,7 +355,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         return $markdownContent;
     }
 
-    protected function addLinkToExtensionInRecipeTitle(): bool
+    protected function addLinkToExtensionInRecipeTitleInContent(): bool
     {
         return true;
     }
