@@ -246,21 +246,18 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
              * extension website, and not the plugin page
              * on wp.org (which does not exist!)
              */
+            // Code copied from `display_rows` in the parent class
+            $details_link = self_admin_url(
+                'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] .
+                '&amp;TB_iframe=true&amp;width=600&amp;height=550'
+            );
             // Replace it with this other link.
-            $adaptedDetailsLink = $this->getAdaptedDetailsLink($plugin);
-            if ($adaptedDetailsLink !== null) {
-                // Code copied from `display_rows` in the parent class
-                $details_link = self_admin_url(
-                    'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] .
-                    '&amp;TB_iframe=true&amp;width=600&amp;height=550'
-                );
-                
-                $html = str_replace(
-                    esc_url($details_link),
-                    esc_url($adaptedDetailsLink),
-                    $html
-                );
-            }
+            $adaptedDetailsLink = $this->getAdaptedDetailsLink($plugin);            
+            $html = str_replace(
+                esc_url($details_link),
+                esc_url($adaptedDetailsLink),
+                $html
+            );
 
             /**
              * Highlight non-installed extensions
@@ -329,5 +326,5 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     /**
      * @param array<string,mixed> $plugin
      */
-    abstract protected function getAdaptedDetailsLink(array $plugin): ?string;
+    abstract protected function getAdaptedDetailsLink(array $plugin): string;
 }
