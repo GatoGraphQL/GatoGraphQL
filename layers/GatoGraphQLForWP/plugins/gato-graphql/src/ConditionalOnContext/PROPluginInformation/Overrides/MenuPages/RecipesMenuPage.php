@@ -13,6 +13,11 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
 {
     use UsePRODocsMenuPageTrait;
 
+    protected function addLinkToExtensionInRecipeTitle(): bool
+    {
+        return false;
+    }
+
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
