@@ -205,11 +205,21 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
                 esc_attr($plugin['name']),
                 '_blank',
-                __('Get Extension', 'gato-graphql'),
+                $this->getPluginCardButtonActionMessage($plugin),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
         }
         return $action_links;
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    public function getPluginCardButtonActionMessage(array $plugin): string
+    {
+        /** @var string */
+        $pluginSlug = $plugin['slug'];
+        return ($pluginSlug === $this->artificialRequestAnExtensionPluginItemSlug) ? __('Request an Extension', 'gato-graphql') : __('Get Extension', 'gato-graphql');
     }
 
     /**
