@@ -21,20 +21,23 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /**
+ * Add a background-color to all extensions
+ */
+.plugin-card-highlight.plugin-card {
+    background-color: #b2f4f7;
+}
+/**
  * Add a distinctive background color to the 1st and last items:
  * - The 1st item is Gato GraphQL PRO
  * - The last item is "Request an Extension"
- */
-/**
- * Add a background-color to all extensions
  */
 .plugin-card-highlight.plugin-card:nth-child(1) {
     border-color: darksalmon;
     background-color: khaki;
 }
 .plugin-card-highlight.plugin-card:last-child {
-    border-color: skyblue;
-    background-color: lightcyan;
+    border-color: violet;
+    background-color: #f4d7ec;
 }
 /* .plugin-card-highlight.plugin-card:nth-child(2) {
     background-color: #b2f4f7;
