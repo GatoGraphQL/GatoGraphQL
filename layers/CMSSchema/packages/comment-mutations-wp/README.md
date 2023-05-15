@@ -1,4 +1,4 @@
-# Custom Posts Media Mutations for WordPress
+# Comment Mutations for WordPress
 
 <!--
 [![Build Status][ico-travis]][link-travis]
