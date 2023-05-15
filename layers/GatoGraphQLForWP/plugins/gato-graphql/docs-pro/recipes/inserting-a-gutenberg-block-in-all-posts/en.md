@@ -16,7 +16,7 @@ mutation InjectBlock(
     adaptedContentSource: _strRegexReplace(
       subject: $__contentSource,
       pattern: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
-      replacement: "$1<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
+      replaceWith: "$1<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
       limit: 1
     )
     update(input: {
@@ -124,7 +124,7 @@ mutation InjectBlock(
     adaptedContentSource: _strRegexReplace(
       subject: $__contentSource,
       pattern: $regex,
-      replacement: $replaceWith,
+      replaceWith: $replaceWith,
       limit: $times
     )
     update(input: {
