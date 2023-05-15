@@ -100,7 +100,7 @@ query GetPostData(
       # @see https://stackoverflow.com/a/206087
       pattern: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
       replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
-      subject: $__contentSource
+      in: $__contentSource
     )
   }
 }

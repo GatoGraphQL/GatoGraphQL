@@ -14,7 +14,7 @@ mutation InjectBlock(
     id
     contentSource
     adaptedContentSource: _strRegexReplace(
-      subject: $__contentSource,
+      in: $__contentSource,
       pattern: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
       replaceWith: "$1<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
       limit: 1
@@ -122,7 +122,7 @@ mutation InjectBlock(
     id
     contentSource
     adaptedContentSource: _strRegexReplace(
-      subject: $__contentSource,
+      in: $__contentSource,
       pattern: $regex,
       replaceWith: $replaceWith,
       limit: $times
