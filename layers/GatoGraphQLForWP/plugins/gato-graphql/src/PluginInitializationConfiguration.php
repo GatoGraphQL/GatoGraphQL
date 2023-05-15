@@ -463,7 +463,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA,
             ],
-            // Do not use the Payloadable types for mutations
+            // Payloadable types for mutations
             [
                 'class' => \PoPCMSSchema\CommentMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS,
