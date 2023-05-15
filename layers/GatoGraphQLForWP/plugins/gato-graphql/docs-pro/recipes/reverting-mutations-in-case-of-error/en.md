@@ -108,7 +108,7 @@ mutation RemoveBlock
     contentSource
     adaptedContentSource: _strRegexReplace(
       in: $__contentSource,
-      regex: $regex,
+      searchRegex: $regex,
       replaceWith: ""
     )
     update(input: {
