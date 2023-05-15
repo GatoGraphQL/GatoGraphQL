@@ -247,11 +247,18 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             esc_attr(App::request('page') ?? App::query('page', ''))
         ));
 
-        foreach ($recipeEntries as $recipeEntry) {
+        foreach ($recipeEntries as $i => $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
             $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
+
+            // Enumerate the recipes
+            $recipeEntryTitle = sprintf(
+                \__('#%s: %s', 'gato-graphql'),
+                $i + 1,
+                $recipeEntryTitle
+            );
 
             /**
              * Also add the tab to the URL, not because it is needed,
