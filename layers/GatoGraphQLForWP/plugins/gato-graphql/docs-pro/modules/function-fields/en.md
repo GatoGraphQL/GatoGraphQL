@@ -270,6 +270,10 @@ Position of a substring within the string, or `null` if not found
 
 Execute a regular expression to search and replace a string.
 
+### `_strRegexReplaceMultiple`
+
+Execute regular expressions to search and replace strings.
+
 ### `_strRepeat`
 
 Repeat a string
@@ -277,6 +281,10 @@ Repeat a string
 ### `_strReplace`
 
 Replace a string with another string.
+
+### `_strReplaceMultiple`
+
+Replace a list of strings with another list of strings.
 
 ### `_strReverse`
 
