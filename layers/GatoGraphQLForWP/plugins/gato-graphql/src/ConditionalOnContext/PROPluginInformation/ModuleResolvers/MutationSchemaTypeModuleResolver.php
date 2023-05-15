@@ -9,7 +9,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolverTrait;
 
-class MutationTypeModuleResolver extends AbstractModuleResolver implements PROPseudoModuleResolverInterface
+class MutationSchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
     use SchemaTypeModuleResolverTrait {
