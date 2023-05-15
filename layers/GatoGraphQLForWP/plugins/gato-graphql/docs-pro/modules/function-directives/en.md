@@ -120,6 +120,10 @@ Append some string to the beginning of the string in the field value.
 
 Execute a regular expression to search and replace a string (see [documentation for PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php)).
 
+### `@strRegexReplaceMultiple`
+
+Execute regular expressions to search and replace a list of strings (see [documentation for PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php)).
+
 ### `@strRepeat`
 
 Repeat a string.
@@ -127,6 +131,10 @@ Repeat a string.
 ### `@strReplace`
 
 Replace a string with another string.
+
+### `@strReplaceMultiple`
+
+Replace a list of strings with another list of strings.
 
 ### `@strReverse`
 

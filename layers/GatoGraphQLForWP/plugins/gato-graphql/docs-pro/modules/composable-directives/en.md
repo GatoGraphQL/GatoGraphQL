@@ -148,8 +148,8 @@ query {
       @applyField(
         name: "_strReplace"
         arguments: {
-            replace: " "
-            with: "-"
+            search: " "
+            replaceWith: "-"
             in: $text
         },
         setResultInResponse: true

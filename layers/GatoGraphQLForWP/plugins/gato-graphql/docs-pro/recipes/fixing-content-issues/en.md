@@ -25,8 +25,8 @@ query AdaptPostData(
     @applyField(
       name: "_strReplace"
       arguments: {
-        replace: $replaceFrom
-        with: $replaceTo
+        search: $replaceFrom
+        replaceWith: $replaceTo
         in: $titleInput
       },
       setResultInResponse: true
@@ -38,8 +38,8 @@ query AdaptPostData(
     @applyField(
       name: "_strReplace"
       arguments: {
-        replace: $replaceFrom
-        with: $replaceTo
+        search: $replaceFrom
+        replaceWith: $replaceTo
         in: $contentInput
       },
       setResultInResponse: true
@@ -98,7 +98,7 @@ query GetPostData(
     contentSource
     contentSourceWithLinks: _strRegexReplace(
       # @see https://stackoverflow.com/a/206087
-      regex: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
+      searchRegex: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
       replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
       in: $__contentSource
     )
@@ -124,8 +124,8 @@ query ExportSiteURL
   siteURL: optionValue(name: "siteurl")
     # Hack for this test to work in both "Integration Tests" and "PROD Integration Tests"
     @strReplace(
-      replace: "-for-prod.lndo.site"
-      with: ".lndo.site"
+      search: "-for-prod.lndo.site"
+      replaceWith: ".lndo.site"
     )
     @export(as: "siteURL")
 }
@@ -154,8 +154,8 @@ mutation ReplaceOldWithNewURLInPosts
     id
     contentSource
     adaptedContentSource: _strReplace(
-      replace: $oldPageURL
-      with: $newPageURL
+      search: $oldPageURL
+      replaceWith: $newPageURL
       in: $__contentSource
     )
     update(input: {
@@ -199,8 +199,8 @@ query ExportAndTransformData(
     title @strReverse
     content: contentSource
       @strReplace(
-        replace: $replaceFrom
-        with: $replaceTo
+        search: $replaceFrom
+        replaceWith: $replaceTo
       )
       @deferredExport(
         as: "postProps"

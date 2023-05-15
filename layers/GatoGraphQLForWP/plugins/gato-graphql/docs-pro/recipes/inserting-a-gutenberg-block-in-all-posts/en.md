@@ -15,7 +15,7 @@ mutation InjectBlock(
     contentSource
     adaptedContentSource: _strRegexReplace(
       in: $__contentSource,
-      regex: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
+      searchRegex: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
       replaceWith: "$1<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
       limit: 1
     )
@@ -45,8 +45,8 @@ mutation RestorePosts(
     contentSource
     restoredContentSource: _strReplace(
       in: $__contentSource,
-      replace: "<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
-      with: ""
+      search: "<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
+      replaceWith: ""
     )
     update(input: {
       content: $__restoredContentSource,
@@ -123,7 +123,7 @@ mutation InjectBlock(
     contentSource
     adaptedContentSource: _strRegexReplace(
       in: $__contentSource,
-      regex: $regex,
+      searchRegex: $regex,
       replaceWith: $replaceWith,
       limit: $times
     )
@@ -154,8 +154,8 @@ mutation RestorePosts(
     contentSource
     restoredContentSource: _strReplace(
       in: $__contentSource,
-      replace: $injectBlockMarkup,
-      with: ""
+      search: $injectBlockMarkup,
+      replaceWith: ""
     )
     update(input: {
       content: $__restoredContentSource,

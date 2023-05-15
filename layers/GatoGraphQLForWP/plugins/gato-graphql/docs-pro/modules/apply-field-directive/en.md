@@ -124,8 +124,8 @@ In the query below, there are 2 `@applyFunction` operations applied:
       @applyField(
         name: "_strReplace"
         arguments: {
-          replace: " ",
-          with: "-",
+          search: " ",
+          replaceWith: "-",
           in: $ucTitle
         },
         setResultInResponse: true
