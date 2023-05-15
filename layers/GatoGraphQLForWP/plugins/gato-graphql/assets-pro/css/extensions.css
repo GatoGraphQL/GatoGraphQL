@@ -38,6 +38,7 @@
 .plugin-card-highlight.plugin-card:last-child {
     border-color: #3fe1d8;
     background-color: #b2f4f7;
+    border-style: dashed;
 }
 
 .plugin-card-top-request-extension .plugin-icon {
