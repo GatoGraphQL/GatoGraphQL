@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
 
-use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolverTrait;
+use GatoGraphQL\GatoGraphQL\Plugin;
 
 class MutationSchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseudoModuleResolverInterface
 {
@@ -47,6 +48,22 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver implements
     public function getPriority(): int
     {
         return $this->getUpstreamPriority() - 7;
+    }
+
+    /**
+     * @return array<string[]> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
+     */
+    public function getDependedModuleLists(string $module): array
+    {
+        switch ($module) {
+            case self::EMAIL_SENDER:
+                return [
+                    [
+                        SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
+                    ],
+                ];
+        }
+        return parent::getDependedModuleLists($module);
     }
 
     public function getName(string $module): string
