@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Implementation for WordPress of contracts from package "Custom Posts Media Mutations"
+Implementation for WordPress of contracts from package "Comment Mutations"
 
 ## Install
 
