@@ -62,7 +62,7 @@ class ThirdLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
-            'input' => new stdClass(),
+            'input' => [[new stdClass()]],
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
