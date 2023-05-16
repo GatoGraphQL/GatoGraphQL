@@ -638,18 +638,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             /**
              * If the arg is an InputObject, let it perform validations on its input fields.
              * Please notice the value can also be `null`, as the input
-             * could be nullable (i.e. it can receive `{ ... }` and also `null`):
-             * 
-             *   ```
-             *   _sendHTTPRequest(
-             *     input: {
-             *       url: "...",
-             *       options: {
-             *         allowRedirects: null
-             *       }
-             *     }
-             *   )
-             *   ```
+             * could be nullable (it could receive even an explicit `null`)
              */
             $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
             if (!($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface)) {
