@@ -153,10 +153,11 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 
                 /** @var ObjectType */
                 $queryRootType = $schema->getType($queryRootNamespacedTypeName);
-                $queryAndMutationRootTypeFields = $queryRootType->getFields(
+                $queryRootTypeFields = $queryRootType->getFields(
                     $fieldDataAccessor->getValue('includeDeprecated') ?? false,
                     true
                 );
+                $queryAndMutationRootTypeFields = $queryRootTypeFields;
 
                 $schemaMutationRootObjectTypeResolver = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver();
                 if ($schemaMutationRootObjectTypeResolver !== null) {
