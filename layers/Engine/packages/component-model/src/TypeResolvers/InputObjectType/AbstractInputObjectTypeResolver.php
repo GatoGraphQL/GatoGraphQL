@@ -637,6 +637,19 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
             /**
              * If the arg is an InputObject, let it perform validations on its input fields.
+             * Please notice the value can also be `null`, as the input
+             * could be nullable (i.e. it can receive `{ ... }` and also `null`):
+             * 
+             *   ```
+             *   _sendHTTPRequest(
+             *     input: {
+             *       url: "...",
+             *       options: {
+             *         allowRedirects: null
+             *       }
+             *     }
+             *   )
+             *   ```
              */
             $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
             if (!($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface)) {
@@ -647,9 +660,12 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
             $inputFieldIsArrayType = $inputFieldIsArrayOfArraysType || ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
             if ($inputFieldIsArrayOfArraysType) {
-                /** @var stdClass[][] $inputFieldValue */
+                /** @var array<array<stdClass|null>> $inputFieldValue */
                 foreach ($inputFieldValue as $arrayInputFieldValue) {
                     foreach ($arrayInputFieldValue as $arrayOfArraysInputFieldValue) {
+                        if ($arrayOfArraysInputFieldValue === null) {
+                            continue;
+                        }
                         $inputFieldTypeResolver->validateInputValue(
                             $arrayOfArraysInputFieldValue,
                             $astNode,
@@ -658,8 +674,11 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     }
                 }
             } elseif ($inputFieldIsArrayType) {
-                /** @var stdClass[] $inputFieldValue */
+                /** @var array<stdClass|null> $inputFieldValue */
                 foreach ($inputFieldValue as $arrayInputFieldValue) {
+                    if ($arrayInputFieldValue === null) {
+                        continue;
+                    }
                     $inputFieldTypeResolver->validateInputValue(
                         $arrayInputFieldValue,
                         $astNode,
@@ -667,7 +686,10 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                     );
                 }
             } else {
-                /** @var stdClass $inputFieldValue */
+                /** @var stdClass|null $inputFieldValue */
+                if ($inputFieldValue === null) {
+                    continue;
+                }
                 $inputFieldTypeResolver->validateInputValue(
                     $inputFieldValue,
                     $astNode,

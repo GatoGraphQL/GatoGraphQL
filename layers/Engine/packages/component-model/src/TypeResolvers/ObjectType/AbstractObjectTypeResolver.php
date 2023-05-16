@@ -1873,14 +1873,30 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $astNode = $field->getArgument($argName) ?? $field;
             /**
              * If the arg is an InputObject, let it perform validations on its input fields.
+             * Please notice the value can also be `null`, as the input
+             * could be nullable (i.e. it can receive `{ ... }` and also `null`)
+             * 
+             *   ```
+             *   _sendHTTPRequest(
+             *     input: {
+             *       url: "...",
+             *       options: {
+             *         allowRedirects: null
+             *       }
+             *     }
+             *   )
+             *   ```
              */
             if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface) {
                 $fieldArgIsArrayOfArraysType = $fieldArgSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
                 $fieldArgIsArrayType = $fieldArgSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
                 if ($fieldArgIsArrayOfArraysType) {
-                    /** @var stdClass[][] $argValue */
+                    /** @var array<array<stdClass|null>> $argValue */
                     foreach ($argValue as $arrayArgValue) {
                         foreach ($arrayArgValue as $arrayOfArraysArgValue) {
+                            if ($arrayOfArraysArgValue === null) {
+                                continue;
+                            }
                             $fieldArgTypeResolver->validateInputValue(
                                 $arrayOfArraysArgValue,
                                 $astNode,
@@ -1889,8 +1905,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         }
                     }
                 } elseif ($fieldArgIsArrayType) {
-                    /** @var stdClass[] $argValue */
+                    /** @var array<stdClass|null> $argValue */
                     foreach ($argValue as $arrayArgValue) {
+                        if ($arrayArgValue === null) {
+                            continue;
+                        }
                         $fieldArgTypeResolver->validateInputValue(
                             $arrayArgValue,
                             $astNode,
@@ -1898,7 +1917,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         );
                     }
                 } else {
-                    /** @var stdClass $argValue */
+                    /** @var stdClass|null $argValue */
+                    if ($argValue === null) {
+                        continue;
+                    }
                     $fieldArgTypeResolver->validateInputValue(
                         $argValue,
                         $astNode,
