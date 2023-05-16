@@ -1,5 +1,11 @@
 {
-    dummyReceivingInputObjectWithNestedValidationField(input: {
-        input: {}
-    })
+    dummyReceivingInputObjectWithNestedValidationField(
+        input: {
+            input: {
+                input: {
+                    name: "Hola"
+                }
+            }
+        }
+    )
 }
