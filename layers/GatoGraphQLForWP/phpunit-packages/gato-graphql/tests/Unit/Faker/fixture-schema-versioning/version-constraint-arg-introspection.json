@@ -18,6 +18,14 @@
                     "name": "QueryRoot",
                     "fields": [
                         {
+                            "name": "dummyReceivingInputObjectWithNestedValidationField",
+                            "args": [
+                                {
+                                    "name": "input"
+                                }
+                            ]
+                        },
+                        {
                             "name": "globalID",
                             "args": []
                         },
@@ -43,6 +51,14 @@
                         {
                             "name": "dummyMutation",
                             "args": []
+                        },
+                        {
+                            "name": "dummyReceivingInputObjectWithNestedValidationField",
+                            "args": [
+                                {
+                                    "name": "input"
+                                }
+                            ]
                         },
                         {
                             "name": "globalID",
@@ -479,6 +495,46 @@
                     "name": "TypeKind",
                     "fields": null,
                     "inputFields": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "FirstLayerInput",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "inputOn1stLevel"
+                        }
+                    ]
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "FourthLayerInput",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "name"
+                        }
+                    ]
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "SecondLayerInput",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "inputOn2ndLevel"
+                        }
+                    ]
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ThirdLayerInput",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "inputOn3rdLevel"
+                        }
+                    ]
                 }
             ],
             "directives": [
