@@ -39,14 +39,14 @@ class FirstLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'input' => $this->getSecondLayerInputObjectTypeResolver(),
+            'input2nd' => $this->getSecondLayerInputObjectTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'input' => $this->__('Inner Input Object', 'dummy-schema'),
+            'input2nd' => $this->__('Inner Input Object', 'dummy-schema'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
@@ -54,7 +54,7 @@ class FirstLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            'input' => SchemaTypeModifiers::MANDATORY,
+            'input2nd' => SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
@@ -62,7 +62,7 @@ class FirstLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
-            'input' => new stdClass(),
+            'input2nd' => new stdClass(),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
