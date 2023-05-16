@@ -58,12 +58,4 @@ class SecondLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
-
-    public function getInputFieldDefaultValue(string $inputFieldName): mixed
-    {
-        return match ($inputFieldName) {
-            'inputOn2ndLevel' => [new stdClass()],
-            default => parent::getInputFieldDefaultValue($inputFieldName),
-        };
-    }
 }
