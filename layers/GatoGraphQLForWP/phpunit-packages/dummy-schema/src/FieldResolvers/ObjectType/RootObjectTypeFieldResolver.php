@@ -112,7 +112,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'dummyReceivingInputObjectWithNestedValidationField' => [
-                'input1st' => $this->getFirstLayerInputObjectTypeResolver(),
+                'input' => $this->getFirstLayerInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -121,7 +121,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['dummyReceivingInputObjectWithNestedValidationField' => 'input1st'] => $this->__('First level of Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
+            ['dummyReceivingInputObjectWithNestedValidationField' => 'input'] => $this->__('First level of Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -129,7 +129,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['dummyReceivingInputObjectWithNestedValidationField' => 'input1st'] => SchemaTypeModifiers::MANDATORY,
+            ['dummyReceivingInputObjectWithNestedValidationField' => 'input'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -146,7 +146,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return sprintf(
                     $this->__('Received: %s', 'dummy-schema'),
                     json_encode(
-                        $fieldDataAccessor->getValue('input1st')
+                        $fieldDataAccessor->getValue('input')
                     )
                 );
         }

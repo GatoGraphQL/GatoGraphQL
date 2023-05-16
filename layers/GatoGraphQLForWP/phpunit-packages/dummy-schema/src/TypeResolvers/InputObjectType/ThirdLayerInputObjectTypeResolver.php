@@ -39,14 +39,14 @@ class ThirdLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'input4th' => $this->getFourthLayerInputObjectTypeResolver(),
+            'inputOn3rdLevel' => $this->getFourthLayerInputObjectTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'input4th' => $this->__('Inner Input Object', 'dummy-schema'),
+            'inputOn3rdLevel' => $this->__('Inner Input Object', 'dummy-schema'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
@@ -54,7 +54,7 @@ class ThirdLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            'input4th' => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS,
+            'inputOn3rdLevel' => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
@@ -62,7 +62,7 @@ class ThirdLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
-            'input4th' => [[new stdClass()]],
+            'inputOn3rdLevel' => [[new stdClass()]],
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
