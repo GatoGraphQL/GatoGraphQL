@@ -150,7 +150,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  */
                 $graphQLSchemaDefinitionService = $this->getGraphQLSchemaDefinitionService();
                 $queryRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName();
-                
+
                 /** @var ObjectType */
                 $queryRootType = $schema->getType($queryRootNamespacedTypeName);
                 $queryRootTypeFields = $queryRootType->getFields(
@@ -175,7 +175,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         $mutationRootTypeFields
                     );
                 }
-                
+
                 $globalFields = array_filter(
                     $queryAndMutationRootTypeFields,
                     fn (Field $field) => $field->getExtensions()->isGlobal(),
