@@ -1,0 +1,211 @@
+{
+    "errors": [
+        {
+            "message": "Mandatory argument 'input' in field 'dummyReceivingInputObjectWithNestedValidationField' of type 'QueryRoot' has not been provided",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 14
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "noInput: dummyReceivingInputObjectWithNestedValidationField",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "noInput: dummyReceivingInputObjectWithNestedValidationField",
+                "code": "gql@5.4.2.1[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
+            }
+        },
+        {
+            "message": "Mandatory input field 'inputOn1stLevel' in input object 'FirstLayerInput' has not been provided",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 80
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{}",
+                    "(input: {})",
+                    "no1stLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "no1stLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {})",
+                "code": "gql@5.6.4[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
+            }
+        },
+        {
+            "message": "Mandatory input field 'inputOn2ndLevel' in input object 'SecondLayerInput' has not been provided",
+            "locations": [
+                {
+                    "line": 6,
+                    "column": 80
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{inputOn1stLevel: {}}",
+                    "(input: {inputOn1stLevel: {}})",
+                    "no2ndLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {}})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "no2ndLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {}})",
+                "code": "gql@5.6.4[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
+            }
+        },
+        {
+            "message": "Mandatory input field 'inputOn3rdLevel' in input object 'ThirdLayerInput' has not been provided",
+            "locations": [
+                {
+                    "line": 9,
+                    "column": 80
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{inputOn1stLevel: {inputOn2ndLevel: {}}}",
+                    "(input: {inputOn1stLevel: {inputOn2ndLevel: {}}})",
+                    "no3rdLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: {}}})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "no3rdLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: {}}})",
+                "code": "gql@5.6.4[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
+            }
+        },
+        {
+            "message": "Mandatory input field 'name' in input object 'FourthLayerInput' has not been provided",
+            "locations": [
+                {
+                    "line": 14,
+                    "column": 80
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{inputOn1stLevel: {inputOn2ndLevel: {inputOn3rdLevel: {}}}}",
+                    "(input: {inputOn1stLevel: {inputOn2ndLevel: {inputOn3rdLevel: {}}}})",
+                    "no4thLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: {inputOn3rdLevel: {}}}})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "no4thLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: {inputOn3rdLevel: {}}}})",
+                "code": "gql@5.6.4[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
+            }
+        },
+        {
+            "message": "Input 'name' cannot be empty",
+            "locations": [
+                {
+                    "line": 21,
+                    "column": 84
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(input: {inputOn1stLevel: {inputOn2ndLevel: {inputOn3rdLevel: {name: \"\"}}}})",
+                    "noEmptyNameOn4thLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: {inputOn3rdLevel: {name: \"\"}}}})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "noEmptyNameOn4thLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: {inputOn3rdLevel: {name: \"\"}}}})",
+                "code": "PoP\/Root@e1"
+            }
+        },
+        {
+            "message": "Input 'name' cannot be empty",
+            "locations": [
+                {
+                    "line": 30,
+                    "column": 93
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                    "noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                "code": "PoP\/Root@e1"
+            }
+        },
+        {
+            "message": "Input 'name' cannot be empty",
+            "locations": [
+                {
+                    "line": 30,
+                    "column": 93
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                    "noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                "code": "PoP\/Root@e1"
+            }
+        },
+        {
+            "message": "Input 'name' cannot be empty",
+            "locations": [
+                {
+                    "line": 30,
+                    "column": 93
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                    "noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                "code": "PoP\/Root@e1"
+            }
+        },
+        {
+            "message": "Input 'name' cannot be empty",
+            "locations": [
+                {
+                    "line": 30,
+                    "column": 93
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                    "noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}, {inputOn3rdLevel: [[{name: \"\"}], [{name: \"\"}]]}]}})",
+                "code": "PoP\/Root@e1"
+            }
+        }
+    ],
+    "data": {
+        "noInput": null,
+        "no1stLevelInput": null,
+        "no2ndLevelInput": null,
+        "no3rdLevelInput": null,
+        "no4thLevelInput": null,
+        "noEmptyNameOn4thLevelInput": null,
+        "noEmptyNameOnMultiple4thLevelInputs": null
+    }
+}
