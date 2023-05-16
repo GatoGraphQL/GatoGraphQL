@@ -74,11 +74,15 @@ query ExportLoggedInUserEmail {
 }
 
 mutation SendWelcomeEmailToLoggedInUser {
-  sendEmail(
-    from: $adminName
-    fromEmail: $adminEmail
-    toEmail: $userEmail
-    content: "Thanks for creating an account on our site!"
+  _sendEmail(
+    from: {
+      name: $adminName
+      email: $adminEmail
+    }
+    to: $userEmail
+    messageAs: {
+      text: "Thanks for creating an account on our site!"
+    }
   ) {
     status
   }

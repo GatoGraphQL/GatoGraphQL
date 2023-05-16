@@ -159,11 +159,15 @@ Send a newsletter defining the `to` and `from` emails through the `optionValue` 
 mutation {
   fromEmail: optionValue(name: "admin_email")
   toEmail: optionValue(name: "subscribers_email_list_recipient_address")
-  sendEmail(
-    from: $__fromEmail
+  _sendEmail(
+    from: {
+      email: $__fromEmail
+    }
     to: $__toEmail
     subject: "Weekly summary"
-    content: "..."
+    messageAs: {
+      html: "..."
+    }
   )
 }
 ```
