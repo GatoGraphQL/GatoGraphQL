@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\DummySchema\FieldResolvers\ObjectType;
 
 use PHPUnitForGatoGraphQL\DummySchema\MutationResolvers\DummyCreateStringMutationResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -54,6 +56,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return [
             'dummyMutation',
+            'dummyReceivingNestedInputObjectArgField',
         ];
     }
 
@@ -61,6 +64,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'dummyMutation' => $this->__('Dummy mutation (nothing really happens, but it returs a String)', 'dummy-schema'),
+            'dummyReceivingNestedInputObjectArgField' => $this->__('Dummy field, receiving an Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -85,7 +89,57 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'dummyMutation' => $this->getStringScalarTypeResolver(),
+            'dummyReceivingNestedInputObjectArgField' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        return match ($fieldName) {
+            'dummyReceivingNestedInputObjectArgField' => [
+                'input' => $this->getStringScalarTypeResolver(),
+            ],
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['dummyReceivingNestedInputObjectArgField' => 'input'] => $this->__('First level of Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['dummyReceivingNestedInputObjectArgField' => 'input'] => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case 'dummyReceivingNestedInputObjectArgField':
+                return sprintf(
+                    $this->__('Received: %s', 'dummy-schema'),
+                    json_encode(
+                        $fieldDataAccessor->getValue('input')
+                    )
+                );
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
