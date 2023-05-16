@@ -19,7 +19,7 @@ class InputObjectInnerValidationsWPFakerFixtureQueryExecutionGraphQLServerTest e
     {
         return __DIR__ . '/fixture-input-object-inner-validations';
     }
-    
+
     /**
      * @return array<class-string<ModuleInterface>>
      */

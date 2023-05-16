@@ -7,7 +7,6 @@ namespace PHPUnitForGatoGraphQL\DummySchema\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use stdClass;
 
 class SecondLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
