@@ -53,23 +53,46 @@ trait HasFieldsTypeTrait
         if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
             /**
              * Display the Global Fields either under all types,
-             * or only under the Root type
+             * or only under the Root type ("global fields" can mean
+             * "fields" under Query Root, or "mutations" under Mutation Root)
              */
+            $exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema = $moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema();
+            $graphQLSchemaDefinitionService = $this->getGraphQLSchemaDefinitionService();
+            $namespacedName = $this->getNamespacedName();
+            $queryRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName();
+            $mutationRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver()?->getNamespacedTypeName();
             if (
-                !$moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema()
-                || $this->getNamespacedName() === $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName()
+                !$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema
+                || $namespacedName === $queryRootNamespacedTypeName
+                || $namespacedName === $mutationRootNamespacedTypeName
             ) {
                 /**
                  * Global fields have already been initialized,
                  * simply get the reference to the existing objects
                  * from the registryMap
                  */
-                $globalFields = SchemaDefinitionHelpers::getFieldsFromPath(
+                $fieldAndMutationGlobalFields = SchemaDefinitionHelpers::getFieldsFromPath(
                     $fullSchemaDefinition,
                     [
                         SchemaDefinition::GLOBAL_FIELDS,
                     ]
                 );
+                /**
+                 * Filter fields/mutations for either QueryRoot or MutationRoot
+                 */
+                if (!$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema) {
+                    $globalFields = $fieldAndMutationGlobalFields;
+                } elseif ($namespacedName === $queryRootNamespacedTypeName) {
+                    $globalFields = array_values(array_filter(
+                        $fieldAndMutationGlobalFields,
+                        fn (Field $field) => !$field->getExtensions()->isMutation()
+                    ));
+                } elseif ($namespacedName === $mutationRootNamespacedTypeName) {
+                    $globalFields = array_values(array_filter(
+                        $fieldAndMutationGlobalFields,
+                        fn (Field $field) => $field->getExtensions()->isMutation()
+                    ));
+                }
             }
         }
 

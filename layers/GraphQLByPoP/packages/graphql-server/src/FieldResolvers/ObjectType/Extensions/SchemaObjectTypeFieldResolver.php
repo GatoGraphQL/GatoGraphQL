@@ -141,19 +141,43 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  * Get the QueryRoot type from the schema,
                  * and obtain the global fields from it.
                  *
-                 * Get it from this type, because by default env var
+                 * Likewise, attach the "global mutations"
+                 * from the MutationRoot type.
+                 *
+                 * Get it from these types, because by default env var
                  * `EXPOSE_GLOBAL_FIELDS_IN_ROOT_TYPE_ONLY_IN_GRAPHQL_SCHEMA`
                  * is enabled.
                  */
-                $queryRootNamespacedTypeName = $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName();
+                $graphQLSchemaDefinitionService = $this->getGraphQLSchemaDefinitionService();
+                $queryRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName();
+
                 /** @var ObjectType */
                 $queryRootType = $schema->getType($queryRootNamespacedTypeName);
                 $queryRootTypeFields = $queryRootType->getFields(
                     $fieldDataAccessor->getValue('includeDeprecated') ?? false,
                     true
                 );
+                $queryAndMutationRootTypeFields = $queryRootTypeFields;
+
+                $schemaMutationRootObjectTypeResolver = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver();
+                if ($schemaMutationRootObjectTypeResolver !== null) {
+                    $mutationRootNamespacedTypeName = $schemaMutationRootObjectTypeResolver->getNamespacedTypeName();
+
+                    /** @var ObjectType */
+                    $mutationRootType = $schema->getType($mutationRootNamespacedTypeName);
+                    $mutationRootTypeFields = $mutationRootType->getFields(
+                        $fieldDataAccessor->getValue('includeDeprecated') ?? false,
+                        true
+                    );
+
+                    $queryAndMutationRootTypeFields = array_merge(
+                        $queryAndMutationRootTypeFields,
+                        $mutationRootTypeFields
+                    );
+                }
+
                 $globalFields = array_filter(
-                    $queryRootTypeFields,
+                    $queryAndMutationRootTypeFields,
                     fn (Field $field) => $field->getExtensions()->isGlobal(),
                 );
                 return array_map(

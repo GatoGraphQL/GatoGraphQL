@@ -1,0 +1,26 @@
+{
+    "errors": [
+        {
+            "message": "There is no field '_dummyGlobalField' on type 'MutationRoot'",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "_dummyGlobalField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"Hola\"}]]}]}})",
+                    "mutation { ... }"
+                ],
+                "type": "MutationRoot",
+                "field": "_dummyGlobalField(input: {inputOn1stLevel: {inputOn2ndLevel: [{inputOn3rdLevel: [[{name: \"Hola\"}]]}]}})",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "_dummyGlobalField": null
+    }
+}
