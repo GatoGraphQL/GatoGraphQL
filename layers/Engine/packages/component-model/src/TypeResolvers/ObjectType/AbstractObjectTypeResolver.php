@@ -1878,7 +1878,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldArgIsArrayOfArraysType = $fieldArgSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
                 $fieldArgIsArrayType = $fieldArgSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
                 if ($fieldArgIsArrayOfArraysType) {
-                    /** var stdClass[][] $argValue */
+                    /** @var stdClass[][] $argValue */
                     foreach ($argValue as $arrayArgValue) {
                         foreach ($arrayArgValue as $arrayOfArraysArgValue) {
                             $fieldArgTypeResolver->validateInputValue(
@@ -1889,7 +1889,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         }
                     }
                 } elseif ($fieldArgIsArrayType) {
-                    /** var stdClass[] $argValue */
+                    /** @var stdClass[] $argValue */
                     foreach ($argValue as $arrayArgValue) {
                         $fieldArgTypeResolver->validateInputValue(
                             $arrayArgValue,
@@ -1898,7 +1898,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         );
                     }
                 } else {
-                    /** var stdClass $argValue */
+                    /** @var stdClass $argValue */
                     $fieldArgTypeResolver->validateInputValue(
                         $argValue,
                         $astNode,
