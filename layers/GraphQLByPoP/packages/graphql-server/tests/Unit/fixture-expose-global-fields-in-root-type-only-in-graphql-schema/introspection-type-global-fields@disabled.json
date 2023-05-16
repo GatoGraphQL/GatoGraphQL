@@ -1,8 +1,30 @@
 {
     "data": {
         "__schema": {
-            "type": {
+            "mutationRootType": {
                 "fields": []
+            },
+            "queryRootType": {
+                "fields": [
+                    {
+                        "name": "globalID"
+                    },
+                    {
+                        "name": "id"
+                    },
+                    {
+                        "name": "self"
+                    },
+                    {
+                        "name": "_namespace"
+                    },
+                    {
+                        "name": "_qualifiedTypeName"
+                    },
+                    {
+                        "name": "_typeName"
+                    }
+                ]
             }
         }
     }
