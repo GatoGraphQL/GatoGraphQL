@@ -39,6 +39,64 @@ For instance, the response from `_httpRequestHeaders` (from module **Inspect HTT
 }
 ```
 
+### `_strConvertMarkdownToHTML`
+
+Converts Markdown to HTML.
+
+This method can help produce HTML content that is provided as input to some field or mutation. That is the case with mutation `_sendEmail` (from the **Email Sender** module), which can send emails in HTML format.
+
+For instance, this query uses Markdown content to produce the HTML to send in the email:
+
+```graphql
+query GetPostData($postID: ID!) {
+  post(by: {id: $postID}) {
+    title @export(as: "postTitle")
+    excerpt @export(as: "postExcerpt")
+    url @export(as: "postLink")
+    author {
+      name @export(as: "postAuthorName")
+      url @export(as: "postAuthorLink")
+    }
+  }
+}
+
+query GetEmailData @depends(on: "GetPostData") {
+  emailMessageTemplate: _strConvertMarkdownToHTML(
+    text: """
+
+There is a new post by [{$postAuthorName}]({$postAuthorLink}):
+
+**{$postTitle}**: {$postExcerpt}
+
+[Read online]({$postLink})
+
+    """
+  )
+  emailMessage: _strReplaceMultiple(
+    search: ["{$postAuthorName}", "{$postAuthorLink}", "{$postTitle}", "{$postExcerpt}", "{$postLink}"],
+    replaceWith: [$postAuthorName, $postAuthorLink, $postTitle, $postExcerpt, $postLink],
+    in: $__emailMessageTemplate
+  )
+    @export(as: "emailMessage")
+  subject: _sprintf(string: "New post created by %s", values: [$postAuthorName])
+    @export(as: "emailSubject")
+}
+
+mutation SendEmail @depends(on: "GetEmailData") {
+  _sendEmail(
+    input: {
+      to: "target@email.com"
+      subject: $emailSubject
+      messageAs: {
+        html: $emailMessage
+      }
+    }
+  ) {
+    status
+  }
+}
+```
+
 ### `_urlAddParams`
 
 Adds params to a URL.
