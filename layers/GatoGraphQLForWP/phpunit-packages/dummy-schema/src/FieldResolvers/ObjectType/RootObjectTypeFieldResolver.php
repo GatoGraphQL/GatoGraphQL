@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\DummySchema\FieldResolvers\ObjectType;
 
 use PHPUnitForGatoGraphQL\DummySchema\MutationResolvers\DummyCreateStringMutationResolver;
+use PHPUnitForGatoGraphQL\DummySchema\TypeResolvers\InputObjectType\FirstLayerInputObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -18,6 +19,7 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?FirstLayerInputObjectTypeResolver $firstLayerInputObjectTypeResolver = null;
     private ?DummyCreateStringMutationResolver $dummyCreateStringMutationResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
@@ -28,6 +30,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setFirstLayerInputObjectTypeResolver(FirstLayerInputObjectTypeResolver $firstLayerInputObjectTypeResolver): void
+    {
+        $this->firstLayerInputObjectTypeResolver = $firstLayerInputObjectTypeResolver;
+    }
+    final protected function getFirstLayerInputObjectTypeResolver(): FirstLayerInputObjectTypeResolver
+    {
+        /** @var FirstLayerInputObjectTypeResolver */
+        return $this->firstLayerInputObjectTypeResolver ??= $this->instanceManager->getInstance(FirstLayerInputObjectTypeResolver::class);
     }
     final public function setDummyCreateStringMutationResolver(DummyCreateStringMutationResolver $dummyCreateStringMutationResolver): void
     {
@@ -101,7 +112,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'dummyReceivingInputObjectWithNestedValidationField' => [
-                'input' => $this->getStringScalarTypeResolver(),
+                'input' => $this->getFirstLayerInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
