@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GatoGraphQL\MarkdownConvertor\Module::class,
+    \PoP\MarkdownConvertor\Module::class,
 ]);
 ```
 

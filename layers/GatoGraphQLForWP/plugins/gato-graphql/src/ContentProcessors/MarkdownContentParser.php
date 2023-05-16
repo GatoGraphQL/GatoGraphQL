@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
-use GatoGraphQL\MarkdownConvertor\MarkdownConvertorInterface;
+use PoP\MarkdownConvertor\MarkdownConvertorInterface;
 
 class MarkdownContentParser extends AbstractContentParser implements MarkdownContentParserInterface
 {

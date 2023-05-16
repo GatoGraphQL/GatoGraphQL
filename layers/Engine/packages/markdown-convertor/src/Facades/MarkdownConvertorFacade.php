@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\MarkdownConvertor\Facades;
+namespace PoP\MarkdownConvertor\Facades;
 
 use PoP\Root\App;
-use GatoGraphQL\MarkdownConvertor\MarkdownConvertorInterface;
+use PoP\MarkdownConvertor\MarkdownConvertorInterface;
 
 class MarkdownConvertorFacade
 {
