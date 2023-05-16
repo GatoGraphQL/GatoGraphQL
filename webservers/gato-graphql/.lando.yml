@@ -70,7 +70,7 @@ services:
         - >-
           ../../layers/GatoGraphQLForWP/packages/external-dependency-wrappers:/app/wordpress/wp-content/plugins/gato-graphql/vendor/gato-graphql/external-dependency-wrappers
         - >-
-          ../../layers/GatoGraphQLForWP/packages/markdown-convertor:/app/wordpress/wp-content/plugins/gato-graphql/vendor/gato-graphql/markdown-convertor
+          ../../layers/GatoGraphQLForWP/packages/markdown-convertor:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/markdown-convertor
         - >-
           ../../layers/GatoGraphQLForWP/packages/plugin-utils:/app/wordpress/wp-content/plugins/gato-graphql/vendor/gato-graphql/plugin-utils
         - >-

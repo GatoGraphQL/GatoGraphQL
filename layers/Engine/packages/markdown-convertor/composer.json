@@ -1,5 +1,5 @@
 {
-    "name": "gato-graphql/markdown-convertor",
+    "name": "getpop/markdown-convertor",
     "conflict": {
         "getpop/componentrouting": "<0.10.2",
         "getpop/loosecontracts": "<0.10.2",
