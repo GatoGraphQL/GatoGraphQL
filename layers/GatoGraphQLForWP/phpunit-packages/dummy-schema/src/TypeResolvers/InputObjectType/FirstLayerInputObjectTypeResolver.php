@@ -30,7 +30,7 @@ class FirstLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input Object containing another Input Objects, to test their validation is performed', 'dummy-schema');
+        return $this->__('Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema');
     }
 
     /**

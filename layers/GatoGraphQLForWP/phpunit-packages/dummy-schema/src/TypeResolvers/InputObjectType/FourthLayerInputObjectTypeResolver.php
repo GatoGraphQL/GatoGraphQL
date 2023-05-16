@@ -31,7 +31,7 @@ class FourthLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Last level of the Input Object containing another Input Objects, to test their validation is performed', 'dummy-schema');
+        return $this->__('Last level of the Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema');
     }
 
     /**
