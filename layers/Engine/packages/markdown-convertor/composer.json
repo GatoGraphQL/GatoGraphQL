@@ -1,5 +1,5 @@
 {
-    "name": "gato-graphql/markdown-convertor",
+    "name": "getpop/markdown-convertor",
     "conflict": {
         "getpop/componentrouting": "<0.10.2",
         "getpop/loosecontracts": "<0.10.2",
@@ -161,7 +161,7 @@
     "type": "library",
     "description": "Convert Markdown to HTML",
     "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "markdown-convertor"],
-    "homepage": "https://github.com/GatoGraphQL/markdown-convertor",
+    "homepage": "https://github.com/getpop/markdown-convertor",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -183,12 +183,12 @@
     },
     "autoload": {
         "psr-4": {
-            "GatoGraphQL\\MarkdownConvertor\\": "src"
+            "PoP\\MarkdownConvertor\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GatoGraphQL\\MarkdownConvertor\\": "tests"
+            "PoP\\MarkdownConvertor\\": "tests"
         }
     },
     "scripts": {

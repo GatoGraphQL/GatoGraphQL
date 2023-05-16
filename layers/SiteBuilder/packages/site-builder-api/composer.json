@@ -94,7 +94,7 @@
         "getpop/graphql-parser": "<0.10.2",
         "graphql-by-pop/graphql-server": "<0.10.2",
         "gato-graphql/external-dependency-wrappers": "<0.10.2",
-        "gato-graphql/markdown-convertor": "<0.10.2",
+        "getpop/markdown-convertor": "<0.10.2",
         "gato-graphql/extension-demo": "<0.10.2",
         "gato-graphql/gato-graphql": "<0.10.2",
         "getpop/definitions-emoji": "<0.10.2",

@@ -143,7 +143,7 @@
         "pop-cms-schema/pagemedia-mutations": "<0.10.2",
         "pop-cms-schema/page-mutations": "<0.10.2",
         "pop-cms-schema/schema-commons-wp": "<0.10.2",
-        "gato-graphql/markdown-convertor": "<0.10.2",
+        "getpop/markdown-convertor": "<0.10.2",
         "phpunit-for-gato-graphql/dummy-schema": "<0.10.2",
         "phpunit-for-gato-graphql/wpfaker-schema": "<0.10.2",
         "phpunit-for-gato-graphql/webserver-requests": "<0.10.2",

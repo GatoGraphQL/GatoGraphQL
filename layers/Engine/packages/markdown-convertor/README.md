@@ -16,12 +16,12 @@ Convert Markdown to HTML
 Via Composer
 
 ``` bash
-composer require gato-graphql/markdown-convertor
+composer require getpop/markdown-convertor
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQL/packages/markdown-convertor`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQL/packages/markdown-convertor).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/markdown-convertor`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/markdown-convertor).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GatoGraphQL\MarkdownConvertor\Module::class,
+    \PoP\MarkdownConvertor\Module::class,
 ]);
 ```
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/gato-graphql/markdown-convertor.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/getpop/markdown-convertor.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/gato-graphql/markdown-convertor/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gato-graphql/markdown-convertor.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/gato-graphql/markdown-convertor.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/gato-graphql/markdown-convertor.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/getpop/markdown-convertor/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/markdown-convertor.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/markdown-convertor.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/getpop/markdown-convertor.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/gato-graphql/markdown-convertor
-[link-travis]: https://travis-ci.org/gato-graphql/markdown-convertor
-[link-scrutinizer]: https://scrutinizer-ci.com/g/gato-graphql/markdown-convertor/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/gato-graphql/markdown-convertor
-[link-downloads]: https://packagist.org/packages/gato-graphql/markdown-convertor
+[link-packagist]: https://packagist.org/packages/getpop/markdown-convertor
+[link-travis]: https://travis-ci.org/getpop/markdown-convertor
+[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/markdown-convertor/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/getpop/markdown-convertor
+[link-downloads]: https://packagist.org/packages/getpop/markdown-convertor
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

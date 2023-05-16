@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\MarkdownConvertor;
+namespace PoP\MarkdownConvertor;
 
 interface MarkdownConvertorInterface
 {

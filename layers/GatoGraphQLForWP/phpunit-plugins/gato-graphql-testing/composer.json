@@ -129,7 +129,7 @@
         "getpop/engine-wp-bootloader": "<0.10.2",
         "getpop/cache-control": "<0.10.2",
         "gato-graphql/external-dependency-wrappers": "<0.10.2",
-        "gato-graphql/markdown-convertor": "<0.10.2",
+        "getpop/markdown-convertor": "<0.10.2",
         "gato-graphql/plugin-utils": "<0.10.2",
         "phpunit-for-gato-graphql/dummy-schema": "<0.10.2",
         "phpunit-for-gato-graphql/wpfaker-schema": "<0.10.2",

@@ -25,7 +25,7 @@ class Module extends AbstractPluginModule
     {
         return [
             \GatoGraphQL\ExternalDependencyWrappers\Module::class,
-            \GatoGraphQL\MarkdownConvertor\Module::class,
+            \PoP\MarkdownConvertor\Module::class,
             \GatoGraphQL\PluginUtils\Module::class,
             \GraphQLByPoP\GraphQLClientsForWP\Module::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Module::class,
