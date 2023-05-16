@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
@@ -626,6 +626,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             $this->validateInputFieldValue(
                 $inputFieldName,
@@ -633,6 +634,46 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $astNode,
                 $objectTypeFieldResolutionFeedbackStore,
             );
+
+            /**
+             * If the arg is an InputObject, let it perform validations on its input fields.
+             */
+            $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
+            if (!($inputFieldTypeResolver instanceof InputObjectTypeResolverInterface)) {
+                continue;
+            }
+            /** @var InputObjectTypeResolverInterface $inputFieldTypeResolver */
+            $inputFieldTypeModifiers = $this->getConsolidatedInputFieldTypeModifiers($inputFieldName);
+            $inputFieldIsArrayOfArraysType = ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+            $inputFieldIsArrayType = $inputFieldIsArrayOfArraysType || ($inputFieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+            if ($inputFieldIsArrayOfArraysType) {
+                /** @var stdClass[][] $inputFieldValue */
+                foreach ($inputFieldValue as $arrayInputFieldValue) {
+                    foreach ($arrayInputFieldValue as $arrayOfArraysInputFieldValue) {
+                        $inputFieldTypeResolver->validateInputValue(
+                            $arrayOfArraysInputFieldValue,
+                            $astNode,
+                            $objectTypeFieldResolutionFeedbackStore,
+                        );
+                    }
+                }
+            } elseif ($inputFieldIsArrayType) {
+                /** @var stdClass[] $inputFieldValue */
+                foreach ($inputFieldValue as $arrayInputFieldValue) {
+                    $inputFieldTypeResolver->validateInputValue(
+                        $arrayInputFieldValue,
+                        $astNode,
+                        $objectTypeFieldResolutionFeedbackStore,
+                    );
+                }
+            } else {
+                /** @var stdClass $inputFieldValue */
+                $inputFieldTypeResolver->validateInputValue(
+                    $inputFieldValue,
+                    $astNode,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+            }
         }
     }
     /**
