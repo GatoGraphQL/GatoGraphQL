@@ -48,6 +48,8 @@ services:
         - >-
           ../../layers/Engine/packages/component-model:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/component-model
         - >-
+          ../../layers/Engine/packages/componentrouting:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/componentrouting
+        - >-
           ../../layers/Engine/packages/definitions:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/definitions
         - >-
           ../../layers/Engine/packages/engine-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine-wp
@@ -62,15 +64,13 @@ services:
         - >-
           ../../layers/Engine/packages/mandatory-directives-by-configuration:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/mandatory-directives-by-configuration
         - >-
-          ../../layers/Engine/packages/componentrouting:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/componentrouting
+          ../../layers/Engine/packages/markdown-convertor:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/markdown-convertor
         - >-
           ../../layers/Engine/packages/root:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/root
         - >-
           ../../layers/Engine/packages/root-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/root-wp
         - >-
           ../../layers/GatoGraphQLForWP/packages/external-dependency-wrappers:/app/wordpress/wp-content/plugins/gato-graphql/vendor/gato-graphql/external-dependency-wrappers
-        - >-
-          ../../layers/GatoGraphQLForWP/packages/markdown-convertor:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/markdown-convertor
         - >-
           ../../layers/GatoGraphQLForWP/packages/plugin-utils:/app/wordpress/wp-content/plugins/gato-graphql/vendor/gato-graphql/plugin-utils
         - >-
