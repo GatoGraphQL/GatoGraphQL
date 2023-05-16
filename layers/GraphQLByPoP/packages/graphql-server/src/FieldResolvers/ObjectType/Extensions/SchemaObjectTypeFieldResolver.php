@@ -150,26 +150,30 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  */
                 $graphQLSchemaDefinitionService = $this->getGraphQLSchemaDefinitionService();
                 $queryRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName();
-                $mutationRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver()->getNamespacedTypeName();
                 
                 /** @var ObjectType */
                 $queryRootType = $schema->getType($queryRootNamespacedTypeName);
-                $queryRootTypeFields = $queryRootType->getFields(
+                $queryAndMutationRootTypeFields = $queryRootType->getFields(
                     $fieldDataAccessor->getValue('includeDeprecated') ?? false,
                     true
                 );
 
-                /** @var ObjectType */
-                $mutationRootType = $schema->getType($mutationRootNamespacedTypeName);
-                $mutationRootTypeFields = $mutationRootType->getFields(
-                    $fieldDataAccessor->getValue('includeDeprecated') ?? false,
-                    true
-                );
+                $schemaMutationRootObjectTypeResolver = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver();
+                if ($schemaMutationRootObjectTypeResolver !== null) {
+                    $mutationRootNamespacedTypeName = $schemaMutationRootObjectTypeResolver->getNamespacedTypeName();
 
-                $queryAndMutationRootTypeFields = array_merge(
-                    $queryRootTypeFields,
-                    $mutationRootTypeFields
-                );
+                    /** @var ObjectType */
+                    $mutationRootType = $schema->getType($mutationRootNamespacedTypeName);
+                    $mutationRootTypeFields = $mutationRootType->getFields(
+                        $fieldDataAccessor->getValue('includeDeprecated') ?? false,
+                        true
+                    );
+
+                    $queryAndMutationRootTypeFields = array_merge(
+                        $queryAndMutationRootTypeFields,
+                        $mutationRootTypeFields
+                    );
+                }
                 
                 $globalFields = array_filter(
                     $queryAndMutationRootTypeFields,
