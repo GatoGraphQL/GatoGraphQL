@@ -21,7 +21,7 @@ composer require getpop/markdown-convertor
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQL/packages/markdown-convertor`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQL/packages/markdown-convertor).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/markdown-convertor`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/markdown-convertor).
 
 ## Usage
 
