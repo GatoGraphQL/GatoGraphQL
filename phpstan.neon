@@ -60,7 +60,7 @@ includes:
     - layers/Engine/packages/guzzle-http/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
     - layers/Engine/packages/mandatory-directives-by-configuration/phpstan.neon.dist
-    - layers/GatoGraphQLForWP/packages/markdown-convertor/phpstan.neon.dist
+    - layers/Engine/packages/markdown-convertor/phpstan.neon.dist
     - layers/CMSSchema/packages/media/phpstan.neon.dist
     - layers/WPSchema/packages/media/phpstan.neon.dist
     - layers/CMSSchema/packages/media-wp/phpstan.neon.dist
