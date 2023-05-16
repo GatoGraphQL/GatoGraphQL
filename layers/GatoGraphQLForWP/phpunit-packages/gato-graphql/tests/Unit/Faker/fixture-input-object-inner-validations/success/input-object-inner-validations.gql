@@ -1,0 +1,13 @@
+{
+    dummyReceivingInputObjectWithNestedValidationField(
+        input: {
+            inputOn1stLevel: {
+                inputOn2ndLevel: [{
+                    inputOn3rdLevel: [[{
+                        name: "Hola"
+                    }]]
+                }]
+            }
+        }
+    )
+}

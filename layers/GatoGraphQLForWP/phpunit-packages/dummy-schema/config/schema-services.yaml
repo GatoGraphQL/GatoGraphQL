@@ -11,3 +11,6 @@ services:
 
     PHPUnitForGatoGraphQL\DummySchema\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
+
+    PHPUnitForGatoGraphQL\DummySchema\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

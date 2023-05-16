@@ -1,0 +1,5 @@
+{
+    "data": {
+        "dummyReceivingInputObjectWithNestedValidationField": "Received: {\"inputOn1stLevel\":{\"inputOn2ndLevel\":[{\"inputOn3rdLevel\":[[{\"name\":\"Hola\"}]]}]}}"
+    }
+}

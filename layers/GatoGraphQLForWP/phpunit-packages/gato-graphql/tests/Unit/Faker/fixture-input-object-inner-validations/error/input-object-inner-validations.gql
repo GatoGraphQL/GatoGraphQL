@@ -1,0 +1,47 @@
+{
+    noInput: dummyReceivingInputObjectWithNestedValidationField()
+    no1stLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {
+
+    })
+    no2ndLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {
+        inputOn1stLevel: {}
+    })
+    no3rdLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {
+        inputOn1stLevel: {
+            inputOn2ndLevel: {}
+        }
+    })
+    no4thLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {
+        inputOn1stLevel: {
+            inputOn2ndLevel: {
+                inputOn3rdLevel: {}
+            }
+        }
+    })
+    noEmptyNameOn4thLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {
+        inputOn1stLevel: {
+            inputOn2ndLevel: {
+                inputOn3rdLevel: {
+                    name: ""
+                }
+            }
+        }
+    })
+    noEmptyNameOnMultiple4thLevelInputs: dummyReceivingInputObjectWithNestedValidationField(input: {
+        inputOn1stLevel: {
+            inputOn2ndLevel: [{
+                inputOn3rdLevel: [[{
+                    name: ""
+                }], [{
+                    name: ""
+                }]]
+            }, {
+                inputOn3rdLevel: [[{
+                    name: ""
+                }], [{
+                    name: ""
+                }]]
+            }]
+        }
+    })
+}
