@@ -56,7 +56,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return [
             'dummyMutation',
-            'dummyReceivingNestedInputObjectArgField',
+            'dummyReceivingInputObjectWithNestedValidationField',
         ];
     }
 
@@ -64,7 +64,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'dummyMutation' => $this->__('Dummy mutation (nothing really happens, but it returs a String)', 'dummy-schema'),
-            'dummyReceivingNestedInputObjectArgField' => $this->__('Dummy field, receiving an Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
+            'dummyReceivingInputObjectWithNestedValidationField' => $this->__('Dummy field, receiving an Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -89,7 +89,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'dummyMutation' => $this->getStringScalarTypeResolver(),
-            'dummyReceivingNestedInputObjectArgField' => $this->getStringScalarTypeResolver(),
+            'dummyReceivingInputObjectWithNestedValidationField' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -100,7 +100,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'dummyReceivingNestedInputObjectArgField' => [
+            'dummyReceivingInputObjectWithNestedValidationField' => [
                 'input' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -110,7 +110,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['dummyReceivingNestedInputObjectArgField' => 'input'] => $this->__('First level of Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
+            ['dummyReceivingInputObjectWithNestedValidationField' => 'input'] => $this->__('First level of Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -118,7 +118,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['dummyReceivingNestedInputObjectArgField' => 'input'] => SchemaTypeModifiers::MANDATORY,
+            ['dummyReceivingInputObjectWithNestedValidationField' => 'input'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -131,7 +131,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
-            case 'dummyReceivingNestedInputObjectArgField':
+            case 'dummyReceivingInputObjectWithNestedValidationField':
                 return sprintf(
                     $this->__('Received: %s', 'dummy-schema'),
                     json_encode(
