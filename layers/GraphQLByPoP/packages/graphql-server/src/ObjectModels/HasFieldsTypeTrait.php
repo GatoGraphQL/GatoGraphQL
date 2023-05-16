@@ -53,11 +53,15 @@ trait HasFieldsTypeTrait
         if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
             /**
              * Display the Global Fields either under all types,
-             * or only under the Root type
+             * or only under the Root type ("global fields" can mean
+             * "fields" under Query Root, or "mutations" under Mutation Root)
              */
+            $graphQLSchemaDefinitionService = $this->getGraphQLSchemaDefinitionService();
+            $namespacedName = $this->getNamespacedName();
             if (
                 !$moduleConfiguration->exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema()
-                || $this->getNamespacedName() === $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName()
+                || $namespacedName === $graphQLSchemaDefinitionService->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName()
+                || $namespacedName === $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver()->getNamespacedTypeName()
             ) {
                 /**
                  * Global fields have already been initialized,
