@@ -60,7 +60,7 @@ trait HasFieldsTypeTrait
             $graphQLSchemaDefinitionService = $this->getGraphQLSchemaDefinitionService();
             $namespacedName = $this->getNamespacedName();
             $queryRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaQueryRootObjectTypeResolver()->getNamespacedTypeName();
-            $mutationRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver()->getNamespacedTypeName();
+            $mutationRootNamespacedTypeName = $graphQLSchemaDefinitionService->getSchemaMutationRootObjectTypeResolver()?->getNamespacedTypeName();
             if (
                 !$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema
                 || $namespacedName === $queryRootNamespacedTypeName
