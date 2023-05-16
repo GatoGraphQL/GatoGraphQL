@@ -2,17 +2,7 @@
     "data": {
         "__schema": {
             "type": {
-                "fields": [
-                    {
-                        "name": "_namespace"
-                    },
-                    {
-                        "name": "_qualifiedTypeName"
-                    },
-                    {
-                        "name": "_typeName"
-                    }
-                ]
+                "fields": []
             }
         }
     }
