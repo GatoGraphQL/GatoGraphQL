@@ -18,22 +18,11 @@
             }
         }
     })
-    noNameOn4thLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {
-        inputOn1stLevel: {
-            inputOn2ndLevel: {
-                inputOn3rdLevel: {
-                    inputOn4thLevel: {}
-                }
-            }
-        }
-    })
     noEmptyNameOn4thLevelInput: dummyReceivingInputObjectWithNestedValidationField(input: {
         inputOn1stLevel: {
             inputOn2ndLevel: {
                 inputOn3rdLevel: {
-                    inputOn4thLevel: {
-                        name: ""
-                    }
+                    name: ""
                 }
             }
         }
