@@ -54,7 +54,7 @@ class SecondLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            'inputOn2ndLevel' => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            'inputOn2ndLevel' => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
