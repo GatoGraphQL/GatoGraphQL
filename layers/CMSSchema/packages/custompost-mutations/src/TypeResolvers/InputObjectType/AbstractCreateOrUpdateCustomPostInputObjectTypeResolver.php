@@ -79,7 +79,7 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
         );
     }
 
-    protected function getContentAsOneofInputObjectTypeResolver(): CustomPostContentAsOneofInputObjectTypeResolver
+    protected function getContentAsOneofInputObjectTypeResolver(): AbstractCustomPostContentAsOneofInputObjectTypeResolver
     {
         return $this->getCustomPostContentAsOneofInputObjectTypeResolver();
     }

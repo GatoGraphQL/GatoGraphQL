@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostContentAsOneofInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractCustomPostContentAsOneofInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateInputObjectTypeResolver;
 
 class PostUpdateInputObjectTypeResolver extends CustomPostUpdateInputObjectTypeResolver implements UpdatePostInputObjectTypeResolverInterface
@@ -26,7 +26,7 @@ class PostUpdateInputObjectTypeResolver extends CustomPostUpdateInputObjectTypeR
         return 'PostUpdateInput';
     }
 
-    protected function getContentAsOneofInputObjectTypeResolver(): CustomPostContentAsOneofInputObjectTypeResolver
+    protected function getContentAsOneofInputObjectTypeResolver(): AbstractCustomPostContentAsOneofInputObjectTypeResolver
     {
         return $this->getPostContentAsOneofInputObjectTypeResolver();
     }
