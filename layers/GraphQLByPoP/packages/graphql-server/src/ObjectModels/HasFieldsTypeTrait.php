@@ -79,22 +79,32 @@ trait HasFieldsTypeTrait
                 );
                 /**
                  * Filter fields/mutations for either QueryRoot or MutationRoot.
-                 * Check for the condition of these 2 first, as their fields
+                 * Check for the condition MutationRoot first, as its fields
                  * need to be filtered. If it's not any of these, only then
                  * add all globalFields to all other fields.
                  */
-                if ($namespacedName === $queryRootNamespacedTypeName) {
-                    $globalFields = array_values(array_filter(
-                        $fieldAndMutationGlobalFields,
-                        fn (Field $field) => !$field->getExtensions()->isMutation()
-                    ));
-                } elseif ($namespacedName === $mutationRootNamespacedTypeName) {
+                if ($namespacedName === $mutationRootNamespacedTypeName) {
                     $globalFields = array_values(array_filter(
                         $fieldAndMutationGlobalFields,
                         fn (Field $field) => $field->getExtensions()->isMutation()
                     ));
-                } elseif (!$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema) {
-                    $globalFields = $fieldAndMutationGlobalFields;
+                } else {
+                    // Condition satisfied here:
+                    //   $namespacedName === $queryRootNamespacedTypeName
+                    // or
+                    //   !$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema
+                    /**
+                     * Field other than MutationRoot (i.e. QueryRoot and all others):
+                     * 
+                     * - Nested mutations is enabled => also add mutations
+                     * - Otherwise, only add fields
+                     */
+                    $globalFields = $moduleConfiguration->enableNestedMutations()
+                        ? $fieldAndMutationGlobalFields
+                        : array_values(array_filter(
+                            $fieldAndMutationGlobalFields,
+                            fn (Field $field) => !$field->getExtensions()->isMutation()
+                        ));
                 }
             }
         }
