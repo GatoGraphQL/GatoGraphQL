@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 use PoPCMSSchema\CustomPostMutations\Module;
 use PoPCMSSchema\CustomPostMutations\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateFilterInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateInputObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -17,16 +17,16 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?CustomPostUpdateFilterInputObjectTypeResolver $customPostUpdateFilterInputObjectTypeResolver = null;
+    private ?CustomPostUpdateInputObjectTypeResolver $customPostUpdateInputObjectTypeResolver = null;
 
-    final public function setCustomPostUpdateFilterInputObjectTypeResolver(CustomPostUpdateFilterInputObjectTypeResolver $customPostUpdateFilterInputObjectTypeResolver): void
+    final public function setCustomPostUpdateInputObjectTypeResolver(CustomPostUpdateInputObjectTypeResolver $customPostUpdateInputObjectTypeResolver): void
     {
-        $this->customPostUpdateFilterInputObjectTypeResolver = $customPostUpdateFilterInputObjectTypeResolver;
+        $this->customPostUpdateInputObjectTypeResolver = $customPostUpdateInputObjectTypeResolver;
     }
-    final protected function getCustomPostUpdateFilterInputObjectTypeResolver(): CustomPostUpdateFilterInputObjectTypeResolver
+    final protected function getCustomPostUpdateInputObjectTypeResolver(): CustomPostUpdateInputObjectTypeResolver
     {
-        /** @var CustomPostUpdateFilterInputObjectTypeResolver */
-        return $this->customPostUpdateFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostUpdateFilterInputObjectTypeResolver::class);
+        /** @var CustomPostUpdateInputObjectTypeResolver */
+        return $this->customPostUpdateInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostUpdateInputObjectTypeResolver::class);
     }
 
     /**
@@ -68,7 +68,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'update' => [
-                MutationInputProperties::INPUT => $this->getCustomPostUpdateFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCustomPostUpdateInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
