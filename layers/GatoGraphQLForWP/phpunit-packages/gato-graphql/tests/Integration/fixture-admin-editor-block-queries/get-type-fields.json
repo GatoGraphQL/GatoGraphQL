@@ -2717,8 +2717,8 @@
           "description": "Input to remove the featured image from a custom post"
         },
         {
-          "name": "RootReplyCommentFilterInput",
-          "namespacedName": "RootReplyCommentFilterInput",
+          "name": "RootReplyCommentInput",
+          "namespacedName": "RootReplyCommentInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add a comment to a custom post"

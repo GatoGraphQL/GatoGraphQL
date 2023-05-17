@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType;
 
-class RootReplyCommentFilterInputObjectTypeResolver extends AbstractAddCommentToCustomPostInputObjectTypeResolver
+class RootReplyCommentInputObjectTypeResolver extends AbstractAddCommentToCustomPostInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'RootReplyCommentFilterInput';
+        return 'RootReplyCommentInput';
     }
 
     public function getTypeDescription(): ?string

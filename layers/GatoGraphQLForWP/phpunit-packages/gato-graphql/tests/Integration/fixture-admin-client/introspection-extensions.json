@@ -10360,10 +10360,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootReplyCommentFilterInput",
+                    "name": "RootReplyCommentInput",
                     "extensions": {
-                        "elementName": "RootReplyCommentFilterInput",
-                        "namespacedName": "RootReplyCommentFilterInput",
+                        "elementName": "RootReplyCommentInput",
+                        "namespacedName": "RootReplyCommentInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
