@@ -13,7 +13,7 @@ query CreateVars {
     contentSource
     originalInputs: _echo(value: {
       id: $__id,
-      content: $__contentSource
+      contentAs: { html: $__contentSource }
     }) @export(as: "originalInputs")
   }
 }
@@ -30,7 +30,7 @@ mutation RemoveBlock
       replaceWith: ""
     )
     update(input: {
-      content: $__adaptedContentSource,
+      contentAs: { html: $__adaptedContentSource },
     }) {
       status
       errors {
@@ -95,7 +95,7 @@ query CreateVars(
     contentSource
     originalInputs: _echo(value: {
       id: $__id,
-      content: $__contentSource
+      contentAs: { html: $__contentSource }
     }) @export(as: "originalInputs")
   }
 }
@@ -112,7 +112,7 @@ mutation RemoveBlock
       replaceWith: ""
     )
     update(input: {
-      content: $__adaptedContentSource,
+      contentAs: { html: $__adaptedContentSource },
     }) {
       status
       errors {

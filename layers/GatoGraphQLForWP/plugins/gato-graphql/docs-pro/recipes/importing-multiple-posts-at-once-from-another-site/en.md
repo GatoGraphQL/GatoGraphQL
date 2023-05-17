@@ -49,7 +49,7 @@ query CreatePostInputs {
         arguments: {
           value: {
             title: $itemTitle,
-            content: $itemBody,
+            contentAs: { html: $itemBody },
             status: draft
           }
         },

@@ -41,7 +41,7 @@ mutation {
     id
     update(input: {
       title: "Second title",
-      content: "Some content"
+      contentAs: { html: "Some content" }
     }) {
       title
       content

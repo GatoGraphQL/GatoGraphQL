@@ -20,7 +20,7 @@ mutation InjectBlock(
       limit: 1
     )
     update(input: {
-      content: $__adaptedContentSource,
+      contentAs: { html: $__adaptedContentSource },
     }) {
       status
       errors {
@@ -49,7 +49,7 @@ mutation RestorePosts(
       replaceWith: ""
     )
     update(input: {
-      content: $__restoredContentSource,
+      contentAs: { html: $__restoredContentSource },
     }) {
       status
       errors {
@@ -128,7 +128,7 @@ mutation InjectBlock(
       limit: $times
     )
     update(input: {
-      content: $__adaptedContentSource,
+      contentAs: { html: $__adaptedContentSource },
     }) {
       status
       errors {
@@ -158,7 +158,7 @@ mutation RestorePosts(
       replaceWith: ""
     )
     update(input: {
-      content: $__restoredContentSource,
+      contentAs: { html: $__restoredContentSource },
     }) {
       status
       errors {
