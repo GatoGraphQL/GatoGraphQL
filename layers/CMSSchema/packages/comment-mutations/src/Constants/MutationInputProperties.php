@@ -13,4 +13,6 @@ class MutationInputProperties
     public final const AUTHOR_NAME = 'authorName';
     public final const AUTHOR_EMAIL = 'authorEmail';
     public final const AUTHOR_URL = 'authorURL';
+    
+    public final const HTML = 'html';
 }
