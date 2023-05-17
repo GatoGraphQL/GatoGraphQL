@@ -12,9 +12,7 @@ mutation {
   }
 
   addCommentToCustomPost3(input: {
-    commentAs: {
-      html: null
-    }
+    commentAs: { html: null }
   }) {
     commentID
   }
