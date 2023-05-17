@@ -189,8 +189,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
      */
     protected function addCreateOrUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)) {
-            $post_data['content'] = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT_AS)) {
+            $post_data['content'] = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT_AS);
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
             $post_data['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
