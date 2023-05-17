@@ -11,7 +11,7 @@ use PoP\Root\Module\ModuleInterface;
 abstract class AbstractExposeGlobalFieldsInRootTypeOnlyInGraphQLSchemaFixtureQueryExecutionGraphQLServerTestCase extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase
 {
     use EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
-    
+
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-expose-global-fields-in-root-type-only-in-graphql-schema';
