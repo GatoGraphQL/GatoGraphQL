@@ -72,10 +72,15 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
             ] : [],
             [
                 MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::CONTENT_AS => $this->getCustomPostContentAsOneofInputObjectTypeResolver(),
+                MutationInputProperties::CONTENT_AS => $this->getContentAsOneofInputObjectTypeResolver(),
                 MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
+    }
+
+    protected function getContentAsOneofInputObjectTypeResolver(): CustomPostContentAsOneofInputObjectTypeResolver
+    {
+        return $this->getCustomPostContentAsOneofInputObjectTypeResolver();
     }
 
     abstract protected function addCustomPostInputField(): bool;
