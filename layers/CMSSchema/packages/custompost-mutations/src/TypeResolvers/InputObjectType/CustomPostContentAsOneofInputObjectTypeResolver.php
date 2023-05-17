@@ -31,6 +31,11 @@ class CustomPostContentAsOneofInputObjectTypeResolver extends AbstractOneofInput
         return 'CustomPostContentInput';
     }
 
+    protected function isOneInputValueMandatory(): bool
+    {
+        return false;
+    }
+
     /**
      * @return array<string,InputTypeResolverInterface>
      */
