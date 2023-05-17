@@ -195,7 +195,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
          */
         if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT_AS)) {
             /** @var stdClass */
-            $contentAs = $fieldDataAccessor->hasValue(MutationInputProperties::CONTENT_AS);
+            $contentAs = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT_AS);
             if (isset($contentAs->{MutationInputProperties::HTML})) {
                 $post_data['content'] = $contentAs->{MutationInputProperties::HTML};
             }
