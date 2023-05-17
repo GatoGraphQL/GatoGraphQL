@@ -13,7 +13,7 @@ use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostFilterInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
@@ -75,7 +75,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
         return $inputObjectTypeResolver instanceof CreateCustomPostInputObjectTypeResolverInterface
-            || $inputObjectTypeResolver instanceof UpdateCustomPostFilterInputObjectTypeResolverInterface;
+            || $inputObjectTypeResolver instanceof UpdateCustomPostInputObjectTypeResolverInterface;
     }
 
     public function maybeAddInputFieldDescription(

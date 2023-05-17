@@ -329,7 +329,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
             ],
             'inputObject' => [
                 <<<GRAPHQL
-                query (\$someVar: RootUpdateCustomPostFilterInput) {
+                query (\$someVar: RootUpdateCustomPostInput) {
                     echo(value: \$someVar)
                 }
                 GRAPHQL,
