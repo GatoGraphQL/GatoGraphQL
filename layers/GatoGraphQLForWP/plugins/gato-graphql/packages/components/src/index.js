@@ -6,11 +6,18 @@ import './store';
 /**
  * Exports
  */
+
+/**
+ * PRO
+ */
 export { GoProLink } from './pro-components/go-pro-link';
 export { withPROCard } from './pro-components/pro-card';
 export { GraphAPIPROBlock } from './pro-components/pro-block';
 export { GATO_GRAPHQL_PRO_PLUGIN_WEBSITE_URL } from './pro-constants/environment';
 
+/**
+ * Standard
+ */
 export { withErrorMessage, withSpinner } from './components/loading';
 export { SelectCard } from './components/select-card';
 export { LinkableInfoTooltip } from './components/linkable-info-tooltip';
@@ -32,3 +39,11 @@ export { maybeGetErrorMessage } from './store/resolvers';
 export { NO_ITEMS_SELECTED_LABEL, SETTINGS_VALUE_LABEL, GROUP_FIELDS_UNDER_TYPE_FOR_PRINT } from './default-configuration';
 export { ATTRIBUTE_VALUE_DEFAULT, ATTRIBUTE_VALUE_ENABLED, ATTRIBUTE_VALUE_DISABLED } from './constants/enabled-disabled-values';
 export { ATTRIBUTE_NO_VALUE_ID } from './constants/option-values';
+
+/**
+ * Schema Config
+ */
+export { default as withSchemaElementsMultiSelectControl } from './schema-config-components/schema-elements-multi-select-control';
+export { MaybeWithSpinnerPostListPrintout } from './schema-config-components/post-list-multi-select-control';
+export { AddUndefinedSelectedItemIDs } from './schema-config-components/multi-select-control';
+export { default as MultiSelectControl } from './schema-config-components/multi-select-control';
