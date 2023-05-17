@@ -484,7 +484,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootAddCommentToCustomPostFilterInput"
+          "name": "RootAddCommentToCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -500,7 +500,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootCreatePostFilterInput"
+          "name": "RootCreatePostInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -544,23 +544,23 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput"
+          "name": "RootRemoveFeaturedImageFromCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootReplyCommentFilterInput"
+          "name": "RootReplyCommentInput"
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetCategoriesOnCustomPostFilterInput"
+          "name": "RootSetCategoriesOnCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetFeaturedImageOnCustomPostFilterInput"
+          "name": "RootSetFeaturedImageOnCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetTagsOnCustomPostFilterInput"
+          "name": "RootSetTagsOnCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -568,7 +568,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootUpdatePostFilterInput"
+          "name": "RootUpdatePostInput"
         },
         {
           "kind": "INPUT_OBJECT",

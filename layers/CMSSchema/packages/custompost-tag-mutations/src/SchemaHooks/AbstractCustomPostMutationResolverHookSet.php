@@ -11,8 +11,8 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInte
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostFilterInputObjectTypeResolverInterface;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostFilterInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
@@ -70,8 +70,8 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        return $inputObjectTypeResolver instanceof CreateCustomPostFilterInputObjectTypeResolverInterface
-            || $inputObjectTypeResolver instanceof UpdateCustomPostFilterInputObjectTypeResolverInterface;
+        return $inputObjectTypeResolver instanceof CreateCustomPostInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdateCustomPostInputObjectTypeResolverInterface;
     }
 
     public function maybeAddInputFieldDescription(

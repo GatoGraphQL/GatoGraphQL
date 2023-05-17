@@ -66,7 +66,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setTags' => [
-                MutationInputProperties::INPUT => $this->getCustomPostSetTagsFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCustomPostSetTagsInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

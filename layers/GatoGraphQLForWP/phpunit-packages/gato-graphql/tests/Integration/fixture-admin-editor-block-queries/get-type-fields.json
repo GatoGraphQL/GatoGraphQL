@@ -2605,8 +2605,8 @@
           "description": "Oneof input to specify the property and data to fetch a tag"
         },
         {
-          "name": "RootAddCommentToCustomPostFilterInput",
-          "namespacedName": "RootAddCommentToCustomPostFilterInput",
+          "name": "RootAddCommentToCustomPostInput",
+          "namespacedName": "RootAddCommentToCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add a comment to a custom post"
@@ -2633,8 +2633,8 @@
           "description": "Input to filter comments"
         },
         {
-          "name": "RootCreatePostFilterInput",
-          "namespacedName": "RootCreatePostFilterInput",
+          "name": "RootCreatePostInput",
+          "namespacedName": "RootCreatePostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post"
@@ -2710,36 +2710,36 @@
           "description": "Input to filter posts"
         },
         {
-          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-          "namespacedName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+          "name": "RootRemoveFeaturedImageFromCustomPostInput",
+          "namespacedName": "RootRemoveFeaturedImageFromCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to remove the featured image from a custom post"
         },
         {
-          "name": "RootReplyCommentFilterInput",
-          "namespacedName": "RootReplyCommentFilterInput",
+          "name": "RootReplyCommentInput",
+          "namespacedName": "RootReplyCommentInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add a comment to a custom post"
         },
         {
-          "name": "RootSetCategoriesOnCustomPostFilterInput",
-          "namespacedName": "RootSetCategoriesOnCustomPostFilterInput",
+          "name": "RootSetCategoriesOnCustomPostInput",
+          "namespacedName": "RootSetCategoriesOnCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set categories on a custom post"
         },
         {
-          "name": "RootSetFeaturedImageOnCustomPostFilterInput",
-          "namespacedName": "RootSetFeaturedImageOnCustomPostFilterInput",
+          "name": "RootSetFeaturedImageOnCustomPostInput",
+          "namespacedName": "RootSetFeaturedImageOnCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set the featured image on a custom post"
         },
         {
-          "name": "RootSetTagsOnCustomPostFilterInput",
-          "namespacedName": "RootSetTagsOnCustomPostFilterInput",
+          "name": "RootSetTagsOnCustomPostInput",
+          "namespacedName": "RootSetTagsOnCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set tags on a custom post"
@@ -2752,8 +2752,8 @@
           "description": "Input to filter tags"
         },
         {
-          "name": "RootUpdatePostFilterInput",
-          "namespacedName": "RootUpdatePostFilterInput",
+          "name": "RootUpdatePostInput",
+          "namespacedName": "RootUpdatePostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post"

@@ -10,8 +10,8 @@ use PoPCMSSchema\PostMutations\MutationResolvers\CreatePostMutationResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableCreatePostMutationResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\PayloadableUpdatePostMutationResolver;
 use PoPCMSSchema\PostMutations\MutationResolvers\UpdatePostMutationResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootCreatePostFilterInputObjectTypeResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootUpdatePostFilterInputObjectTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootCreatePostInputObjectTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootUpdatePostInputObjectTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\RootCreatePostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\RootUpdatePostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -38,8 +38,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
     private ?PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver = null;
     private ?PayloadableCreatePostMutationResolver $payloadableCreatePostMutationResolver = null;
-    private ?RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver = null;
-    private ?RootCreatePostFilterInputObjectTypeResolver $rootCreatePostFilterInputObjectTypeResolver = null;
+    private ?RootUpdatePostInputObjectTypeResolver $rootUpdatePostInputObjectTypeResolver = null;
+    private ?RootCreatePostInputObjectTypeResolver $rootCreatePostInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
@@ -105,23 +105,23 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var PayloadableCreatePostMutationResolver */
         return $this->payloadableCreatePostMutationResolver ??= $this->instanceManager->getInstance(PayloadableCreatePostMutationResolver::class);
     }
-    final public function setRootUpdatePostFilterInputObjectTypeResolver(RootUpdatePostFilterInputObjectTypeResolver $rootUpdatePostFilterInputObjectTypeResolver): void
+    final public function setRootUpdatePostInputObjectTypeResolver(RootUpdatePostInputObjectTypeResolver $rootUpdatePostInputObjectTypeResolver): void
     {
-        $this->rootUpdatePostFilterInputObjectTypeResolver = $rootUpdatePostFilterInputObjectTypeResolver;
+        $this->rootUpdatePostInputObjectTypeResolver = $rootUpdatePostInputObjectTypeResolver;
     }
-    final protected function getRootUpdatePostFilterInputObjectTypeResolver(): RootUpdatePostFilterInputObjectTypeResolver
+    final protected function getRootUpdatePostInputObjectTypeResolver(): RootUpdatePostInputObjectTypeResolver
     {
-        /** @var RootUpdatePostFilterInputObjectTypeResolver */
-        return $this->rootUpdatePostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootUpdatePostFilterInputObjectTypeResolver::class);
+        /** @var RootUpdatePostInputObjectTypeResolver */
+        return $this->rootUpdatePostInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootUpdatePostInputObjectTypeResolver::class);
     }
-    final public function setRootCreatePostFilterInputObjectTypeResolver(RootCreatePostFilterInputObjectTypeResolver $rootCreatePostFilterInputObjectTypeResolver): void
+    final public function setRootCreatePostInputObjectTypeResolver(RootCreatePostInputObjectTypeResolver $rootCreatePostInputObjectTypeResolver): void
     {
-        $this->rootCreatePostFilterInputObjectTypeResolver = $rootCreatePostFilterInputObjectTypeResolver;
+        $this->rootCreatePostInputObjectTypeResolver = $rootCreatePostInputObjectTypeResolver;
     }
-    final protected function getRootCreatePostFilterInputObjectTypeResolver(): RootCreatePostFilterInputObjectTypeResolver
+    final protected function getRootCreatePostInputObjectTypeResolver(): RootCreatePostInputObjectTypeResolver
     {
-        /** @var RootCreatePostFilterInputObjectTypeResolver */
-        return $this->rootCreatePostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCreatePostFilterInputObjectTypeResolver::class);
+        /** @var RootCreatePostInputObjectTypeResolver */
+        return $this->rootCreatePostInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCreatePostInputObjectTypeResolver::class);
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
@@ -193,10 +193,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'createPost' => [
-                'input' => $this->getRootCreatePostFilterInputObjectTypeResolver(),
+                'input' => $this->getRootCreatePostInputObjectTypeResolver(),
             ],
             'updatePost' => [
-                'input' => $this->getRootUpdatePostFilterInputObjectTypeResolver(),
+                'input' => $this->getRootUpdatePostInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

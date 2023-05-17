@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType;
 
-class RootSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver extends AbstractSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver
+class CustomPostSetFeaturedImageInputObjectTypeResolver extends AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'RootSetFeaturedImageOnCustomPostFilterInput';
+        return 'CustomPostSetFeaturedImageInput';
     }
 
     protected function addCustomPostInputField(): bool
     {
-        return true;
+        return false;
     }
 }

@@ -3552,10 +3552,10 @@
                   "description": "Input to add a comment to a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootAddCommentToCustomPostFilterInput!",
+                    "name": "RootAddCommentToCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootAddCommentToCustomPostFilterInput",
+                      "name": "RootAddCommentToCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -3583,10 +3583,10 @@
                   "description": "Input to update a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootCreatePostFilterInput!",
+                    "name": "RootCreatePostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootCreatePostFilterInput",
+                      "name": "RootCreatePostInput",
                       "ofType": null
                     }
                   },
@@ -3661,10 +3661,10 @@
                   "description": "Input to remove the featured image from a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput!",
+                    "name": "RootRemoveFeaturedImageFromCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                      "name": "RootRemoveFeaturedImageFromCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -3692,10 +3692,10 @@
                   "description": "Input to add a comment to a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootReplyCommentFilterInput!",
+                    "name": "RootReplyCommentInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootReplyCommentFilterInput",
+                      "name": "RootReplyCommentInput",
                       "ofType": null
                     }
                   },
@@ -3723,10 +3723,10 @@
                   "description": "Input to set categories on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetCategoriesOnCustomPostFilterInput!",
+                    "name": "RootSetCategoriesOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetCategoriesOnCustomPostFilterInput",
+                      "name": "RootSetCategoriesOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -3754,10 +3754,10 @@
                   "description": "Input to set the featured image on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetFeaturedImageOnCustomPostFilterInput!",
+                    "name": "RootSetFeaturedImageOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                      "name": "RootSetFeaturedImageOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -3785,10 +3785,10 @@
                   "description": "Input to set tags on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetTagsOnCustomPostFilterInput!",
+                    "name": "RootSetTagsOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetTagsOnCustomPostFilterInput",
+                      "name": "RootSetTagsOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -3816,10 +3816,10 @@
                   "description": "Input to update a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootUpdatePostFilterInput!",
+                    "name": "RootUpdatePostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootUpdatePostFilterInput",
+                      "name": "RootUpdatePostInput",
                       "ofType": null
                     }
                   },
@@ -8714,10 +8714,10 @@
                   "description": "Input to add a comment to a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootAddCommentToCustomPostFilterInput!",
+                    "name": "RootAddCommentToCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootAddCommentToCustomPostFilterInput",
+                      "name": "RootAddCommentToCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -9120,10 +9120,10 @@
                   "description": "Input to update a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootCreatePostFilterInput!",
+                    "name": "RootCreatePostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootCreatePostFilterInput",
+                      "name": "RootCreatePostInput",
                       "ofType": null
                     }
                   },
@@ -10755,10 +10755,10 @@
                   "description": "Input to remove the featured image from a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput!",
+                    "name": "RootRemoveFeaturedImageFromCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                      "name": "RootRemoveFeaturedImageFromCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -10786,10 +10786,10 @@
                   "description": "Input to add a comment to a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootReplyCommentFilterInput!",
+                    "name": "RootReplyCommentInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootReplyCommentFilterInput",
+                      "name": "RootReplyCommentInput",
                       "ofType": null
                     }
                   },
@@ -10881,10 +10881,10 @@
                   "description": "Input to set categories on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetCategoriesOnCustomPostFilterInput!",
+                    "name": "RootSetCategoriesOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetCategoriesOnCustomPostFilterInput",
+                      "name": "RootSetCategoriesOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -10912,10 +10912,10 @@
                   "description": "Input to set the featured image on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetFeaturedImageOnCustomPostFilterInput!",
+                    "name": "RootSetFeaturedImageOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                      "name": "RootSetFeaturedImageOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -10943,10 +10943,10 @@
                   "description": "Input to set tags on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetTagsOnCustomPostFilterInput!",
+                    "name": "RootSetTagsOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetTagsOnCustomPostFilterInput",
+                      "name": "RootSetTagsOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -11194,10 +11194,10 @@
                   "description": "Input to update a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootUpdatePostFilterInput!",
+                    "name": "RootUpdatePostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootUpdatePostFilterInput",
+                      "name": "RootUpdatePostInput",
                       "ofType": null
                     }
                   },
@@ -17634,7 +17634,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootAddCommentToCustomPostFilterInput",
+          "name": "RootAddCommentToCustomPostInput",
           "description": "Input to add a comment to a custom post",
           "fields": null,
           "inputFields": [
@@ -18190,7 +18190,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootCreatePostFilterInput",
+          "name": "RootCreatePostInput",
           "description": "Input to update a custom post",
           "fields": null,
           "inputFields": [
@@ -19913,7 +19913,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+          "name": "RootRemoveFeaturedImageFromCustomPostInput",
           "description": "Input to remove the featured image from a custom post",
           "fields": null,
           "inputFields": [
@@ -19938,7 +19938,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootReplyCommentFilterInput",
+          "name": "RootReplyCommentInput",
           "description": "Input to add a comment to a custom post",
           "fields": null,
           "inputFields": [
@@ -20007,7 +20007,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetCategoriesOnCustomPostFilterInput",
+          "name": "RootSetCategoriesOnCustomPostInput",
           "description": "Input to set categories on a custom post",
           "fields": null,
           "inputFields": [
@@ -20064,7 +20064,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+          "name": "RootSetFeaturedImageOnCustomPostInput",
           "description": "Input to set the featured image on a custom post",
           "fields": null,
           "inputFields": [
@@ -20103,7 +20103,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetTagsOnCustomPostFilterInput",
+          "name": "RootSetTagsOnCustomPostInput",
           "description": "Input to set tags on a custom post",
           "fields": null,
           "inputFields": [
@@ -20267,7 +20267,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootUpdatePostFilterInput",
+          "name": "RootUpdatePostInput",
           "description": "Input to update a custom post",
           "fields": null,
           "inputFields": [

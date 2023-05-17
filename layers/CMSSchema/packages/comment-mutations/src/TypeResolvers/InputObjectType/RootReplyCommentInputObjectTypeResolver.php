@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType;
 
-class CommentReplyFilterInputObjectTypeResolver extends AbstractAddCommentToCustomPostFilterInputObjectTypeResolver
+class RootReplyCommentInputObjectTypeResolver extends AbstractAddCommentToCustomPostInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'CommentReplyFilterInput';
+        return 'RootReplyCommentInput';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to reply to a comment', 'comment-mutations');
+        return $this->__('Input to add a comment to a custom post', 'comment-mutations');
     }
 
     protected function addCustomPostInputField(): bool
@@ -23,11 +23,11 @@ class CommentReplyFilterInputObjectTypeResolver extends AbstractAddCommentToCust
 
     protected function addParentCommentInputField(): bool
     {
-        return false;
+        return true;
     }
 
     protected function isParentCommentInputFieldMandatory(): bool
     {
-        return false;
+        return true;
     }
 }

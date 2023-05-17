@@ -80,7 +80,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetCategoriesFieldName() => [
-                'input' => $this->getCustomPostSetCategoriesFilterInputObjectTypeResolver(),
+                'input' => $this->getCustomPostSetCategoriesInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

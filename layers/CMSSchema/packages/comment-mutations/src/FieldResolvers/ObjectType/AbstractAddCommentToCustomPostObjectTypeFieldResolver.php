@@ -9,7 +9,7 @@ use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ModuleConfiguration;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableAddCommentToCustomPostMutationResolver;
-use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CustomPostAddCommentFilterInputObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CustomPostAddCommentInputObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CustomPostAddCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\FieldResolvers\ObjectType\MaybeCommentableCustomPostObjectTypeFieldResolverTrait;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -29,7 +29,7 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
 
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
-    private ?CustomPostAddCommentFilterInputObjectTypeResolver $customPostAddCommentFilterInputObjectTypeResolver = null;
+    private ?CustomPostAddCommentInputObjectTypeResolver $customPostAddCommentInputObjectTypeResolver = null;
     private ?CustomPostAddCommentMutationPayloadObjectTypeResolver $customPostAddCommentMutationPayloadObjectTypeResolver = null;
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
@@ -52,14 +52,14 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
         /** @var AddCommentToCustomPostMutationResolver */
         return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
     }
-    final public function setCustomPostAddCommentFilterInputObjectTypeResolver(CustomPostAddCommentFilterInputObjectTypeResolver $customPostAddCommentFilterInputObjectTypeResolver): void
+    final public function setCustomPostAddCommentInputObjectTypeResolver(CustomPostAddCommentInputObjectTypeResolver $customPostAddCommentInputObjectTypeResolver): void
     {
-        $this->customPostAddCommentFilterInputObjectTypeResolver = $customPostAddCommentFilterInputObjectTypeResolver;
+        $this->customPostAddCommentInputObjectTypeResolver = $customPostAddCommentInputObjectTypeResolver;
     }
-    final protected function getCustomPostAddCommentFilterInputObjectTypeResolver(): CustomPostAddCommentFilterInputObjectTypeResolver
+    final protected function getCustomPostAddCommentInputObjectTypeResolver(): CustomPostAddCommentInputObjectTypeResolver
     {
-        /** @var CustomPostAddCommentFilterInputObjectTypeResolver */
-        return $this->customPostAddCommentFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostAddCommentFilterInputObjectTypeResolver::class);
+        /** @var CustomPostAddCommentInputObjectTypeResolver */
+        return $this->customPostAddCommentInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostAddCommentInputObjectTypeResolver::class);
     }
     final public function setCustomPostAddCommentMutationPayloadObjectTypeResolver(CustomPostAddCommentMutationPayloadObjectTypeResolver $customPostAddCommentMutationPayloadObjectTypeResolver): void
     {
@@ -133,7 +133,7 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     {
         return match ($fieldName) {
             'addComment' => [
-                MutationInputProperties::INPUT => $this->getCustomPostAddCommentFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCustomPostAddCommentInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

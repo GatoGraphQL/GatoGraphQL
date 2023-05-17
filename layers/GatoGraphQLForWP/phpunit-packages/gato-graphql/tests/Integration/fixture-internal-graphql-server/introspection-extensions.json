@@ -9315,10 +9315,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootAddCommentToCustomPostFilterInput",
+                                "name": "RootAddCommentToCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootAddCommentToCustomPostFilterInput",
-                                    "namespacedName": "RootAddCommentToCustomPostFilterInput",
+                                    "elementName": "RootAddCommentToCustomPostInput",
+                                    "namespacedName": "RootAddCommentToCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -9571,10 +9571,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootCreatePostFilterInput",
+                                "name": "RootCreatePostInput",
                                 "extensions": {
-                                    "elementName": "RootCreatePostFilterInput",
-                                    "namespacedName": "RootCreatePostFilterInput",
+                                    "elementName": "RootCreatePostInput",
+                                    "namespacedName": "RootCreatePostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -10350,10 +10350,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                                "name": "RootRemoveFeaturedImageFromCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-                                    "namespacedName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                                    "elementName": "RootRemoveFeaturedImageFromCustomPostInput",
+                                    "namespacedName": "RootRemoveFeaturedImageFromCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -10369,10 +10369,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootReplyCommentFilterInput",
+                                "name": "RootReplyCommentInput",
                                 "extensions": {
-                                    "elementName": "RootReplyCommentFilterInput",
-                                    "namespacedName": "RootReplyCommentFilterInput",
+                                    "elementName": "RootReplyCommentInput",
+                                    "namespacedName": "RootReplyCommentInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -10412,10 +10412,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootSetCategoriesOnCustomPostFilterInput",
+                                "name": "RootSetCategoriesOnCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootSetCategoriesOnCustomPostFilterInput",
-                                    "namespacedName": "RootSetCategoriesOnCustomPostFilterInput",
+                                    "elementName": "RootSetCategoriesOnCustomPostInput",
+                                    "namespacedName": "RootSetCategoriesOnCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -10443,10 +10443,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                                "name": "RootSetFeaturedImageOnCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootSetFeaturedImageOnCustomPostFilterInput",
-                                    "namespacedName": "RootSetFeaturedImageOnCustomPostFilterInput",
+                                    "elementName": "RootSetFeaturedImageOnCustomPostInput",
+                                    "namespacedName": "RootSetFeaturedImageOnCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -10468,10 +10468,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootSetTagsOnCustomPostFilterInput",
+                                "name": "RootSetTagsOnCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootSetTagsOnCustomPostFilterInput",
-                                    "namespacedName": "RootSetTagsOnCustomPostFilterInput",
+                                    "elementName": "RootSetTagsOnCustomPostInput",
+                                    "namespacedName": "RootSetTagsOnCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -10548,10 +10548,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootUpdatePostFilterInput",
+                                "name": "RootUpdatePostInput",
                                 "extensions": {
-                                    "elementName": "RootUpdatePostFilterInput",
-                                    "namespacedName": "RootUpdatePostFilterInput",
+                                    "elementName": "RootUpdatePostInput",
+                                    "namespacedName": "RootUpdatePostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -21794,10 +21794,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootAddCommentToCustomPostFilterInput",
+                    "name": "RootAddCommentToCustomPostInput",
                     "extensions": {
-                        "elementName": "RootAddCommentToCustomPostFilterInput",
-                        "namespacedName": "RootAddCommentToCustomPostFilterInput",
+                        "elementName": "RootAddCommentToCustomPostInput",
+                        "namespacedName": "RootAddCommentToCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22050,10 +22050,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootCreatePostFilterInput",
+                    "name": "RootCreatePostInput",
                     "extensions": {
-                        "elementName": "RootCreatePostFilterInput",
-                        "namespacedName": "RootCreatePostFilterInput",
+                        "elementName": "RootCreatePostInput",
+                        "namespacedName": "RootCreatePostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22829,10 +22829,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                    "name": "RootRemoveFeaturedImageFromCustomPostInput",
                     "extensions": {
-                        "elementName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-                        "namespacedName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                        "elementName": "RootRemoveFeaturedImageFromCustomPostInput",
+                        "namespacedName": "RootRemoveFeaturedImageFromCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22848,10 +22848,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootReplyCommentFilterInput",
+                    "name": "RootReplyCommentInput",
                     "extensions": {
-                        "elementName": "RootReplyCommentFilterInput",
-                        "namespacedName": "RootReplyCommentFilterInput",
+                        "elementName": "RootReplyCommentInput",
+                        "namespacedName": "RootReplyCommentInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22891,10 +22891,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootSetCategoriesOnCustomPostFilterInput",
+                    "name": "RootSetCategoriesOnCustomPostInput",
                     "extensions": {
-                        "elementName": "RootSetCategoriesOnCustomPostFilterInput",
-                        "namespacedName": "RootSetCategoriesOnCustomPostFilterInput",
+                        "elementName": "RootSetCategoriesOnCustomPostInput",
+                        "namespacedName": "RootSetCategoriesOnCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22922,10 +22922,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                    "name": "RootSetFeaturedImageOnCustomPostInput",
                     "extensions": {
-                        "elementName": "RootSetFeaturedImageOnCustomPostFilterInput",
-                        "namespacedName": "RootSetFeaturedImageOnCustomPostFilterInput",
+                        "elementName": "RootSetFeaturedImageOnCustomPostInput",
+                        "namespacedName": "RootSetFeaturedImageOnCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22947,10 +22947,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootSetTagsOnCustomPostFilterInput",
+                    "name": "RootSetTagsOnCustomPostInput",
                     "extensions": {
-                        "elementName": "RootSetTagsOnCustomPostFilterInput",
-                        "namespacedName": "RootSetTagsOnCustomPostFilterInput",
+                        "elementName": "RootSetTagsOnCustomPostInput",
+                        "namespacedName": "RootSetTagsOnCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -23027,10 +23027,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootUpdatePostFilterInput",
+                    "name": "RootUpdatePostInput",
                     "extensions": {
-                        "elementName": "RootUpdatePostFilterInput",
-                        "namespacedName": "RootUpdatePostFilterInput",
+                        "elementName": "RootUpdatePostInput",
+                        "namespacedName": "RootUpdatePostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },

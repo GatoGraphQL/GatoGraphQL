@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 
-interface CreateCustomPostFilterInputObjectTypeResolverInterface
+interface UpdateCustomPostInputObjectTypeResolverInterface
 {
 }

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTagMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
-use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\PayloadableSetTagsOnPostMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
-use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\PostSetTagsFilterInputObjectTypeResolver;
+use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\PostSetTagsInputObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\PostSetTagsMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -19,7 +19,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
-    private ?PostSetTagsFilterInputObjectTypeResolver $postSetTagsFilterInputObjectTypeResolver = null;
+    private ?PostSetTagsInputObjectTypeResolver $postSetTagsInputObjectTypeResolver = null;
     private ?PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver = null;
     private ?PostSetTagsMutationPayloadObjectTypeResolver $postSetTagsMutationPayloadObjectTypeResolver = null;
 
@@ -41,14 +41,14 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         /** @var SetTagsOnPostMutationResolver */
         return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
     }
-    final public function setPostSetTagsFilterInputObjectTypeResolver(PostSetTagsFilterInputObjectTypeResolver $postSetTagsFilterInputObjectTypeResolver): void
+    final public function setPostSetTagsInputObjectTypeResolver(PostSetTagsInputObjectTypeResolver $postSetTagsInputObjectTypeResolver): void
     {
-        $this->postSetTagsFilterInputObjectTypeResolver = $postSetTagsFilterInputObjectTypeResolver;
+        $this->postSetTagsInputObjectTypeResolver = $postSetTagsInputObjectTypeResolver;
     }
-    final protected function getPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
+    final protected function getPostSetTagsInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
-        /** @var PostSetTagsFilterInputObjectTypeResolver */
-        return $this->postSetTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostSetTagsFilterInputObjectTypeResolver::class);
+        /** @var PostSetTagsInputObjectTypeResolver */
+        return $this->postSetTagsInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostSetTagsInputObjectTypeResolver::class);
     }
     final public function setPayloadableSetTagsOnPostMutationResolver(PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver): void
     {
@@ -79,9 +79,9 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         return $this->getSetTagsOnPostMutationResolver();
     }
 
-    public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
+    public function getCustomPostSetTagsInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
-        return $this->getPostSetTagsFilterInputObjectTypeResolver();
+        return $this->getPostSetTagsInputObjectTypeResolver();
     }
 
     protected function getCustomPostSetTagsMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface

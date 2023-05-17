@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType;
 
-class PostSetCategoriesFilterInputObjectTypeResolver extends AbstractSetCategoriesOnPostFilterInputObjectTypeResolver
+class PostSetCategoriesInputObjectTypeResolver extends AbstractSetCategoriesOnPostInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'PostSetCategoriesFilterInput';
+        return 'PostSetCategoriesInput';
     }
 
     protected function addCustomPostInputField(): bool

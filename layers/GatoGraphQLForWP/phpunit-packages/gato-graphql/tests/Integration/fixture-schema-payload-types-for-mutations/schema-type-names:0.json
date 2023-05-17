@@ -363,7 +363,7 @@
           "name": "PostTagByInput"
         },
         {
-          "name": "RootAddCommentToCustomPostFilterInput"
+          "name": "RootAddCommentToCustomPostInput"
         },
         {
           "name": "RootCategoriesFilterInput"
@@ -375,7 +375,7 @@
           "name": "RootCommentsFilterInput"
         },
         {
-          "name": "RootCreatePostFilterInput"
+          "name": "RootCreatePostInput"
         },
         {
           "name": "RootCustomPostsFilterInput"
@@ -408,25 +408,25 @@
           "name": "RootPostsFilterInput"
         },
         {
-          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput"
+          "name": "RootRemoveFeaturedImageFromCustomPostInput"
         },
         {
-          "name": "RootReplyCommentFilterInput"
+          "name": "RootReplyCommentInput"
         },
         {
-          "name": "RootSetCategoriesOnCustomPostFilterInput"
+          "name": "RootSetCategoriesOnCustomPostInput"
         },
         {
-          "name": "RootSetFeaturedImageOnCustomPostFilterInput"
+          "name": "RootSetFeaturedImageOnCustomPostInput"
         },
         {
-          "name": "RootSetTagsOnCustomPostFilterInput"
+          "name": "RootSetTagsOnCustomPostInput"
         },
         {
           "name": "RootTagsFilterInput"
         },
         {
-          "name": "RootUpdatePostFilterInput"
+          "name": "RootUpdatePostInput"
         },
         {
           "name": "TagByInput"
