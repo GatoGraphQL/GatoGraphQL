@@ -20,7 +20,7 @@ class RootUpdatePostFilterInputObjectTypeResolver extends RootUpdateCustomPostFi
         /** @var PostContentAsOneofInputObjectTypeResolver */
         return $this->postContentAsOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostContentAsOneofInputObjectTypeResolver::class);
     }
-    
+
     public function getTypeName(): string
     {
         return 'RootUpdatePostFilterInput';
