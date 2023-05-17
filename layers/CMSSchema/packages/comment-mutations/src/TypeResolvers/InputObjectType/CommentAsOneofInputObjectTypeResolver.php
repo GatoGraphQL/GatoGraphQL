@@ -9,7 +9,7 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-class AddCommentAsOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
+class CommentAsOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
     private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
 
