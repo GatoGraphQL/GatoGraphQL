@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "There is no input field 'nonExistingArg' in input object 'RootAddCommentToCustomPostFilterInput'",
+      "message": "There is no input field 'nonExistingArg' in input object 'RootAddCommentToCustomPostInput'",
       "locations": [
         {
           "line": 2,

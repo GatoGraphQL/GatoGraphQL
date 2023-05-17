@@ -484,7 +484,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootAddCommentToCustomPostFilterInput"
+          "name": "RootAddCommentToCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",

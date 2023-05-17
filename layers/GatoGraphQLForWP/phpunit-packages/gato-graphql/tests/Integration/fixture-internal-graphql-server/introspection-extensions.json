@@ -9315,10 +9315,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootAddCommentToCustomPostFilterInput",
+                                "name": "RootAddCommentToCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootAddCommentToCustomPostFilterInput",
-                                    "namespacedName": "RootAddCommentToCustomPostFilterInput",
+                                    "elementName": "RootAddCommentToCustomPostInput",
+                                    "namespacedName": "RootAddCommentToCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -21794,10 +21794,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootAddCommentToCustomPostFilterInput",
+                    "name": "RootAddCommentToCustomPostInput",
                     "extensions": {
-                        "elementName": "RootAddCommentToCustomPostFilterInput",
-                        "namespacedName": "RootAddCommentToCustomPostFilterInput",
+                        "elementName": "RootAddCommentToCustomPostInput",
+                        "namespacedName": "RootAddCommentToCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },

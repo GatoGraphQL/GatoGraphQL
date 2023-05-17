@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "There is no input field 'authorName' in input object 'RootAddCommentToCustomPostFilterInput'",
+      "message": "There is no input field 'authorName' in input object 'RootAddCommentToCustomPostInput'",
       "locations": [
         {
           "line": 2,
@@ -22,7 +22,7 @@
       }
     },
     {
-      "message": "There is no input field 'authorEmail' in input object 'RootAddCommentToCustomPostFilterInput'",
+      "message": "There is no input field 'authorEmail' in input object 'RootAddCommentToCustomPostInput'",
       "locations": [
         {
           "line": 2,

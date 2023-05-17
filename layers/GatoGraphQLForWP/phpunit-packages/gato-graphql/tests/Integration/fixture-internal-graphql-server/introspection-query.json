@@ -3555,10 +3555,10 @@
                         "description": "Input to add a comment to a custom post",
                         "type": {
                           "kind": "NON_NULL",
-                          "name": "RootAddCommentToCustomPostFilterInput!",
+                          "name": "RootAddCommentToCustomPostInput!",
                           "ofType": {
                             "kind": "INPUT_OBJECT",
-                            "name": "RootAddCommentToCustomPostFilterInput",
+                            "name": "RootAddCommentToCustomPostInput",
                             "ofType": null
                           }
                         },
@@ -8717,10 +8717,10 @@
                         "description": "Input to add a comment to a custom post",
                         "type": {
                           "kind": "NON_NULL",
-                          "name": "RootAddCommentToCustomPostFilterInput!",
+                          "name": "RootAddCommentToCustomPostInput!",
                           "ofType": {
                             "kind": "INPUT_OBJECT",
-                            "name": "RootAddCommentToCustomPostFilterInput",
+                            "name": "RootAddCommentToCustomPostInput",
                             "ofType": null
                           }
                         },
@@ -17637,7 +17637,7 @@
               },
               {
                 "kind": "INPUT_OBJECT",
-                "name": "RootAddCommentToCustomPostFilterInput",
+                "name": "RootAddCommentToCustomPostInput",
                 "description": "Input to add a comment to a custom post",
                 "fields": null,
                 "inputFields": [
@@ -26584,10 +26584,10 @@
                   "description": "Input to add a comment to a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootAddCommentToCustomPostFilterInput!",
+                    "name": "RootAddCommentToCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootAddCommentToCustomPostFilterInput",
+                      "name": "RootAddCommentToCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -31746,10 +31746,10 @@
                   "description": "Input to add a comment to a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootAddCommentToCustomPostFilterInput!",
+                    "name": "RootAddCommentToCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootAddCommentToCustomPostFilterInput",
+                      "name": "RootAddCommentToCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -40666,7 +40666,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootAddCommentToCustomPostFilterInput",
+          "name": "RootAddCommentToCustomPostInput",
           "description": "Input to add a comment to a custom post",
           "fields": null,
           "inputFields": [

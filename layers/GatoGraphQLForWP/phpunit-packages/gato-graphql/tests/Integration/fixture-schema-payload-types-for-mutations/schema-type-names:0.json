@@ -363,7 +363,7 @@
           "name": "PostTagByInput"
         },
         {
-          "name": "RootAddCommentToCustomPostFilterInput"
+          "name": "RootAddCommentToCustomPostInput"
         },
         {
           "name": "RootCategoriesFilterInput"
