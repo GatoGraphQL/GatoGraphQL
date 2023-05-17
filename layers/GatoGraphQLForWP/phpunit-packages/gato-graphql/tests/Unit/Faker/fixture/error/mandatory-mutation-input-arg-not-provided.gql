@@ -5,13 +5,13 @@ mutation {
     commentID
   }
 
-  addCommentToCustomPost2(input: {
+  addCommentToCustomPost2: addCommentToCustomPost(input: {
     commentAs: {}
   }) {
     commentID
   }
 
-  addCommentToCustomPost3(input: {
+  addCommentToCustomPost3: addCommentToCustomPost(input: {
     commentAs: { html: null }
   }) {
     commentID
