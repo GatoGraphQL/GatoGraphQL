@@ -17,7 +17,8 @@ import './style.scss';
  * Internal dependencies
  */
 import MultiSelectControlGroup from './group';
-import { withSpinner, withErrorMessage } from '../../.';
+import withSpinner from '../../components/loading/with-spinner';
+import withErrorMessage from '../../components/loading/with-error-message';
 
 function MultiSelectControl( props ) {
 	const {

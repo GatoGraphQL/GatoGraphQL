@@ -3,7 +3,7 @@
  */
 import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { getLabelForNotFoundElement } from '../../.';
+import getLabelForNotFoundElement from '../../components/helpers/label-for-not-found-element';
 
 const AddUndefinedSelectedItemIDs = withSelect(
 	( select, { items, selectedItems } ) => {

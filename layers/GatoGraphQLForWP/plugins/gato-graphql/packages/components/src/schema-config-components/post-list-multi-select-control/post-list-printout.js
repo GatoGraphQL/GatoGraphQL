@@ -4,12 +4,10 @@
 import { compose } from '@wordpress/compose';
 import { Card, CardHeader, CardBody, CheckboxControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import {
-	withSpinner,
-	withErrorMessage,
-	getLabelForNotFoundElement,
-	NO_ITEMS_SELECTED_LABEL,
-} from '../../.';
+import withSpinner from '../../components/loading/with-spinner';
+import withErrorMessage from '../../components/loading/with-error-message';
+import getLabelForNotFoundElement from '../../components/helpers/label-for-not-found-element';
+import { NO_ITEMS_SELECTED_LABEL } from '../../default-configuration';
 import '../base-styles/checkbox-list.scss';
 
 const noItemsSelectedLabel = NO_ITEMS_SELECTED_LABEL;

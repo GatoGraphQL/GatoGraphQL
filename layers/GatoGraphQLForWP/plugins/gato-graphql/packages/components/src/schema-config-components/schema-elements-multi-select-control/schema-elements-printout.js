@@ -6,11 +6,10 @@ import { withSelect } from '@wordpress/data';
 import { Card, CardHeader, CardBody, CheckboxControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { TYPE_FIELD_SEPARATOR_FOR_DB, TYPE_FIELD_SEPARATOR_FOR_PRINT } from './block-constants';
-import {
-	withSpinner,
-	withErrorMessage,
-	GROUP_FIELDS_UNDER_TYPE_FOR_PRINT,
-} from '../../.';
+import withSpinner from '../../components/loading/with-spinner';
+import withErrorMessage from '../../components/loading/with-error-message';
+import { GROUP_FIELDS_UNDER_TYPE_FOR_PRINT } from '../../default-configuration';
+
 import '../base-styles/checkbox-list.scss';
 
 const noItemsSelectedLabel = '---';
