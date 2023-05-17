@@ -1,6 +1,6 @@
 # Helper Fields
 
-Collection of fields providing useful functionality concerning URLs, Date formatting, etc
+Collection of fields providing useful functionality concerning URLs, date formatting, text manipulation, and others
 
 ## Description
 

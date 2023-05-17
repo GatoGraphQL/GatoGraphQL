@@ -76,7 +76,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver implements PROPseu
             self::SEND_HTTP_REQUEST_FIELDS => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response', 'gato-graphql'),
             self::ENVIRONMENT_FIELDS => \__('Query the value from an environment variable or PHP constant', 'gato-graphql'),
             self::FUNCTION_FIELDS => \__('Manipulate the field output using standard programming language functions (provided via special fields)', 'gato-graphql'),
-            self::HELPER_FIELDS => \__('Collection of fields providing useful functionality concerning URLs, Date formatting, etc', 'gato-graphql'),
+            self::HELPER_FIELDS => \__('Collection of fields providing useful functionality concerning URLs, date formatting, text manipulation, and others', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }
