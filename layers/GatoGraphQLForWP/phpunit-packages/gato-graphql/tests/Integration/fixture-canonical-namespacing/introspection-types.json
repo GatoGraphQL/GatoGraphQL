@@ -352,6 +352,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CommentContentInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CommentMetaQueryInput"
         },
         {
@@ -465,6 +469,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "PostCategoryByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "PostContentInput"
         },
         {
           "kind": "INPUT_OBJECT",
