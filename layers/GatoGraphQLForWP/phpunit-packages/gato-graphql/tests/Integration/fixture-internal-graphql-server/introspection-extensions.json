@@ -9571,10 +9571,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootCreatePostFilterInput",
+                                "name": "RootCreatePostInput",
                                 "extensions": {
-                                    "elementName": "RootCreatePostFilterInput",
-                                    "namespacedName": "RootCreatePostFilterInput",
+                                    "elementName": "RootCreatePostInput",
+                                    "namespacedName": "RootCreatePostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -22050,10 +22050,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootCreatePostFilterInput",
+                    "name": "RootCreatePostInput",
                     "extensions": {
-                        "elementName": "RootCreatePostFilterInput",
-                        "namespacedName": "RootCreatePostFilterInput",
+                        "elementName": "RootCreatePostInput",
+                        "namespacedName": "RootCreatePostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },

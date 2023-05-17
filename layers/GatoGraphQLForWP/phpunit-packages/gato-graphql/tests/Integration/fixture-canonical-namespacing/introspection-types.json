@@ -500,7 +500,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootCreatePostFilterInput"
+          "name": "RootCreatePostInput"
         },
         {
           "kind": "INPUT_OBJECT",

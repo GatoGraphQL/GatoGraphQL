@@ -3583,10 +3583,10 @@
                   "description": "Input to update a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootCreatePostFilterInput!",
+                    "name": "RootCreatePostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootCreatePostFilterInput",
+                      "name": "RootCreatePostInput",
                       "ofType": null
                     }
                   },
@@ -9120,10 +9120,10 @@
                   "description": "Input to update a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootCreatePostFilterInput!",
+                    "name": "RootCreatePostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootCreatePostFilterInput",
+                      "name": "RootCreatePostInput",
                       "ofType": null
                     }
                   },
@@ -18190,7 +18190,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootCreatePostFilterInput",
+          "name": "RootCreatePostInput",
           "description": "Input to update a custom post",
           "fields": null,
           "inputFields": [

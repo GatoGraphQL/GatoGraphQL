@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostContentAsOneofInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\RootCreateCustomPostInputObjectTypeResolver;
 
-class RootCreatePostFilterInputObjectTypeResolver extends RootCreateCustomPostInputObjectTypeResolver implements CreatePostFilterInputObjectTypeResolverInterface
+class RootCreatePostInputObjectTypeResolver extends RootCreateCustomPostInputObjectTypeResolver implements CreatePostInputObjectTypeResolverInterface
 {
     private ?PostContentAsOneofInputObjectTypeResolver $postContentAsOneofInputObjectTypeResolver = null;
 
@@ -23,7 +23,7 @@ class RootCreatePostFilterInputObjectTypeResolver extends RootCreateCustomPostIn
 
     public function getTypeName(): string
     {
-        return 'RootCreatePostFilterInput';
+        return 'RootCreatePostInput';
     }
 
     protected function getContentAsOneofInputObjectTypeResolver(): CustomPostContentAsOneofInputObjectTypeResolver

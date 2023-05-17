@@ -6,6 +6,6 @@ namespace PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
 
-interface CreatePostFilterInputObjectTypeResolverInterface extends CreateCustomPostInputObjectTypeResolverInterface
+interface CreatePostInputObjectTypeResolverInterface extends CreateCustomPostInputObjectTypeResolverInterface
 {
 }

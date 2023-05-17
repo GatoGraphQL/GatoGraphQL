@@ -2633,8 +2633,8 @@
           "description": "Input to filter comments"
         },
         {
-          "name": "RootCreatePostFilterInput",
-          "namespacedName": "RootCreatePostFilterInput",
+          "name": "RootCreatePostInput",
+          "namespacedName": "RootCreatePostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post"
