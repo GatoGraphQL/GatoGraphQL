@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 
-class RootCreateCustomPostFilterInputObjectTypeResolver extends AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver implements CreateCustomPostFilterInputObjectTypeResolverInterface
+class RootCreateCustomPostFilterInputObjectTypeResolver extends AbstractCreateOrUpdateCustomPostInputObjectTypeResolver implements CreateCustomPostFilterInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {
