@@ -57,4 +57,3 @@ By using `@default`, we can then retrieve some default image:
   }
 }
 ```
-
