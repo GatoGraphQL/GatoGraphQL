@@ -60,19 +60,18 @@ mutation {
 
 `_sendEmail` is a global field (or, more precisely, a global mutation). This means that, if **Nested Mutations** are enabled, this mutations can be executed on any type (i.e. not only in `MutationRoot`).
 
-This is useful for iterating a list of users, and sending an email to each of them (notice that the mutation is triggered while in the `User` type):
+This is useful for iterating a list of users, and sending an email to each of them (in this case, the mutation is triggered while in the `User` type):
 
 ```graphql
 mutation {
   users {
-    displayName
     email
     _sendEmail(
       input: {
         to: $__email
-        subject: $__displayName
+        subject: "..."
         messageAs: {
-          text: "Hello!"
+          text: "..."
         }
       }
     ) {
@@ -95,7 +94,7 @@ mutation {
     email
     displayName
     remainingCredits: metaValue(key: "credits")
-    emailMessage: sprintf(
+    emailMessage: _sprintf(
       string: """
       <p>Hello %s!</p>
       <p>Your have <strong>%s remaining credits</strong> in your account.</p>
@@ -130,7 +129,12 @@ mutation {
 
 ## Further examples
 
-This query sends some post's content to the admin user (eg: it can be triggered whenever a new post is published). It uses the **Multiple Query Execution** module to manage the query into logical units, and field `_strConvertMarkdownToHTML` from the **Helper Fields** module to compose the email message using Markdown:
+The query below sends an email to the admin user with some post's content (eg: it can be triggered whenever a new post is published). It uses:
+
+- **Multiple Query Execution** to manage the query into logical units
+- Field `_strConvertMarkdownToHTML` from **Helper Fields** to compose the email message using Markdown
+- Fields `_strReplaceMultiple` and `_sprintf` from **Function Fields** to dynamically inject values into the email subject and message
+- **Field to Input** to retrieve and provide the admin's email from `wp_options`
 
 ```graphql
 query GetPostData($postID: ID!) {
