@@ -95,7 +95,7 @@ trait HasFieldsTypeTrait
                     //   !$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema
                     /**
                      * Field other than MutationRoot (i.e. QueryRoot and all others):
-                     * 
+                     *
                      * - Nested mutations is enabled => also add mutations
                      * - Otherwise, only add fields
                      */
