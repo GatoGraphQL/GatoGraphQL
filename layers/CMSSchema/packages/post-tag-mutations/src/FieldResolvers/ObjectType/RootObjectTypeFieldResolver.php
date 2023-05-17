@@ -94,7 +94,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->__('post', 'post-tag-mutations');
     }
 
-    public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
+    public function getCustomPostSetTagsInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
         return $this->getRootSetTagsOnCustomPostInputObjectTypeResolver();
     }

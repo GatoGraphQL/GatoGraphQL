@@ -12,6 +12,6 @@ interface SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface;
     public function getSetTagsMutationResolver(): MutationResolverInterface;
-    public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver;
+    public function getCustomPostSetTagsInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver;
     public function getPayloadableSetTagsMutationResolver(): MutationResolverInterface;
 }
