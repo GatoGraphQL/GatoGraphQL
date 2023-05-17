@@ -1,6 +1,6 @@
 {
   addCommentToCustomPost(input: {
-    comment: "Great insight!",
+    commentAs: { html: "Great insight!" },
     customPostID: 1724,
     authorName: "Leo"
     authorEmail: "leo@saronga.com",

@@ -23,6 +23,7 @@ use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\CommentMutations\Constants\HookNames;
+use stdClass;
 
 /**
  * Add a comment to a custom post. The user may be logged-in or not
@@ -208,7 +209,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
                 }
             }
         }
-        if (!$fieldDataAccessor->getValue(MutationInputProperties::COMMENT)) {
+        /** @var stdClass */
+        $commentAs = $fieldDataAccessor->getValue(MutationInputProperties::COMMENT_AS);
+        /**
+         * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
+         */
+        if (!$commentAs->{MutationInputProperties::HTML}) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -239,10 +245,15 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
      */
     protected function getCommentData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
+        /** @var stdClass */
+        $commentAs = $fieldDataAccessor->getValue(MutationInputProperties::COMMENT_AS);
         $comment_data = [
             'authorIP' => $this->getRequestHelperService()->getClientIPAddress(),
             'agent' => App::server('HTTP_USER_AGENT'),
-            'content' => $fieldDataAccessor->getValue(MutationInputProperties::COMMENT),
+            /**
+             * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
+             */
+            'content' => $commentAs->{MutationInputProperties::HTML},
             'parent' => $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID),
             'customPostID' => $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID),
         ];

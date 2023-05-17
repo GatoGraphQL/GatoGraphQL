@@ -16,6 +16,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
+use stdClass;
 
 abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {
@@ -189,11 +190,21 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
      */
     protected function addCreateOrUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)) {
-            $post_data['content'] = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT);
-        }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
             $post_data['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
+        }
+        /**
+         * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
+         */
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT_AS)) {
+            /** @var stdClass */
+            $contentAs = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT_AS);
+            if (isset($contentAs->{MutationInputProperties::HTML})) {
+                $post_data['content'] = $contentAs->{MutationInputProperties::HTML};
+            }
+        }
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::EXCERPT)) {
+            $post_data['excerpt'] = $fieldDataAccessor->getValue(MutationInputProperties::EXCERPT);
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
             $post_data['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);

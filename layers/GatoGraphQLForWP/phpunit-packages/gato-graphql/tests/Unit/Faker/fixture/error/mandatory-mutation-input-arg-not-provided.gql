@@ -1,6 +1,18 @@
 mutation {
   addCommentToCustomPost(input: {
-    comment: null
+    commentAs: null
+  }) {
+    commentID
+  }
+
+  addCommentToCustomPost2: addCommentToCustomPost(input: {
+    commentAs: {}
+  }) {
+    commentID
+  }
+
+  addCommentToCustomPost3: addCommentToCustomPost(input: {
+    commentAs: { html: null }
   }) {
     commentID
   }

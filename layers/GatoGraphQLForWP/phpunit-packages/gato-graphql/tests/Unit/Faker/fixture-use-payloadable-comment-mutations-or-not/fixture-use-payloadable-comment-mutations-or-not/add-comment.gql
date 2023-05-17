@@ -1,6 +1,6 @@
 mutation {
   addCommentToCustomPost(input: {
-    comment: "Great insight!",
+    commentAs: { html: "Great insight!" },
     customPostID: 1724,
   }) {
     status

@@ -8211,6 +8211,25 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CommentContentInput",
+                    "extensions": {
+                        "elementName": "CommentContentInput",
+                        "namespacedName": "CommentContentInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "html",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "CommentMetaQueryInput",
                     "extensions": {
                         "elementName": "CommentMetaQueryInput",
@@ -9224,6 +9243,25 @@
                     "enumValues": null
                 },
                 {
+                    "name": "PostContentInput",
+                    "extensions": {
+                        "elementName": "PostContentInput",
+                        "namespacedName": "PostContentInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "html",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "PostPaginationInput",
                     "extensions": {
                         "elementName": "PostPaginationInput",
@@ -9302,7 +9340,7 @@
                             }
                         },
                         {
-                            "name": "comment",
+                            "name": "commentAs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -9546,7 +9584,7 @@
                             }
                         },
                         {
-                            "name": "content",
+                            "name": "contentAs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10350,7 +10388,7 @@
                             }
                         },
                         {
-                            "name": "comment",
+                            "name": "commentAs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10517,7 +10555,7 @@
                             }
                         },
                         {
-                            "name": "content",
+                            "name": "contentAs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

@@ -107,7 +107,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
             return;
         }
 
-        if (empty($fieldDataAccessor->getValue(MutationInputProperties::CONTENT))) {
+        if (empty($fieldDataAccessor->getValue(MutationInputProperties::CONTENT_AS))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
             //     new ObjectTypeFieldResolutionFeedback(

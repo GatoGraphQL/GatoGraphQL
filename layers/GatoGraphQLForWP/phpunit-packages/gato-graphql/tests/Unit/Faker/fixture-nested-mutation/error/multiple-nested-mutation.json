@@ -9,14 +9,14 @@
         }
       ],
       "extensions": {
-        "type": "Post",
-        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "path": [
-          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@2"
+        "type": "Post",
+        "field": "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+        "code": "PoP\/ComponentModel@2"
       }
     },
     {
@@ -28,14 +28,14 @@
         }
       ],
       "extensions": {
-        "type": "Page",
-        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "path": [
-          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@2"
+        "type": "Page",
+        "field": "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+        "code": "PoP\/ComponentModel@2"
       }
     }
   ],

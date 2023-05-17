@@ -51,10 +51,10 @@ Mutations can also modify data on the result from another mutation:
 mutation {
   createPost(title: "First title") {
     id
-    update(title: "Second title", content: "Some content") {
+    update(title: "Second title", contentAs: { html: "Some content" } ) {
       title
       content
-      addComment(comment: "My first comment") {
+      addComment(commentAs: { html: "My first comment" }) {
         id
         content
         date

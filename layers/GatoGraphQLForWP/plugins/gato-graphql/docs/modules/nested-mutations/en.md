@@ -41,12 +41,12 @@ mutation {
     id
     update(input: {
       title: "Second title",
-      content: "Some content"
+      contentAs: { html: "Some content" }
     }) {
       title
       content
       addComment(input: {
-        comment: "My first comment"
+        commentAs: { html: "My first comment" }
       }) {
         id
         content

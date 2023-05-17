@@ -1,6 +1,6 @@
 mutation {
   commentsNotSupportedByCPT: addCommentToCustomPost(input: {
-    comment: "Great insight!",
+    commentAs: { html: "Great insight!" },
     customPostID: 1809,
     authorName: "Leo"
     authorEmail: "leo@saronga.com",
@@ -9,7 +9,7 @@ mutation {
   }
 
   commentsNotOpenForCustomPost: addCommentToCustomPost(input: {
-    comment: "Great insight!",
+    commentAs: { html: "Great insight!" },
     customPostID: 1730,
     authorName: "Leo"
     authorEmail: "leo@saronga.com",

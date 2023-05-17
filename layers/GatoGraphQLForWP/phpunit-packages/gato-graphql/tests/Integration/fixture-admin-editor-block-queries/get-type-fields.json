@@ -2374,6 +2374,13 @@
           "description": "Oneof input to specify the property and data to fetch a comment"
         },
         {
+          "name": "CommentContentInput",
+          "namespacedName": "CommentContentInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": null
+        },
+        {
           "name": "CommentMetaQueryInput",
           "namespacedName": "CommentMetaQueryInput",
           "fields": null,
@@ -2575,6 +2582,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Oneof input to specify the property and data to fetch a category"
+        },
+        {
+          "name": "PostContentInput",
+          "namespacedName": "PostContentInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": null
         },
         {
           "name": "PostPaginationInput",

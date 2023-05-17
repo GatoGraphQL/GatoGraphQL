@@ -9,15 +9,15 @@
         }
       ],
       "extensions": {
-        "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, nonExistingArg: \"Doesnt Matter\") { ... }",
         "path": [
           "(nonExistingArg: \"Doesnt Matter\")",
-          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, nonExistingArg: \"Doesnt Matter\") { ... }",
+          "addCommentToCustomPost(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, nonExistingArg: \"Doesnt Matter\") { ... }",
           "mutation { ... }"
         ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPost(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, nonExistingArg: \"Doesnt Matter\") { ... }",
         "code": "gql@5.4.1[a]",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
       }
     }
   ],

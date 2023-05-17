@@ -15838,6 +15838,27 @@
               },
               {
                 "kind": "INPUT_OBJECT",
+                "name": "CommentContentInput",
+                "description": null,
+                "fields": null,
+                "inputFields": [
+                  {
+                    "name": "html",
+                    "description": "Use HTML as content for the comment",
+                    "type": {
+                      "kind": "SCALAR",
+                      "name": "HTML",
+                      "ofType": null
+                    },
+                    "defaultValue": null
+                  }
+                ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+              },
+              {
+                "kind": "INPUT_OBJECT",
                 "name": "CommentMetaQueryInput",
                 "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
                 "fields": null,
@@ -17533,6 +17554,27 @@
               },
               {
                 "kind": "INPUT_OBJECT",
+                "name": "PostContentInput",
+                "description": null,
+                "fields": null,
+                "inputFields": [
+                  {
+                    "name": "html",
+                    "description": "Use HTML as content for the post",
+                    "type": {
+                      "kind": "SCALAR",
+                      "name": "HTML",
+                      "ofType": null
+                    },
+                    "defaultValue": null
+                  }
+                ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+              },
+              {
+                "kind": "INPUT_OBJECT",
                 "name": "PostPaginationInput",
                 "description": "Input to paginate posts",
                 "fields": null,
@@ -17630,14 +17672,14 @@
                     "defaultValue": null
                   },
                   {
-                    "name": "comment",
+                    "name": "commentAs",
                     "description": "The comment to add",
                     "type": {
                       "kind": "NON_NULL",
-                      "name": "String!",
+                      "name": "CommentContentInput!",
                       "ofType": {
-                        "kind": "SCALAR",
-                        "name": "String",
+                        "kind": "INPUT_OBJECT",
+                        "name": "CommentContentInput",
                         "ofType": null
                       }
                     },
@@ -18174,8 +18216,18 @@
                     "defaultValue": null
                   },
                   {
-                    "name": "content",
+                    "name": "contentAs",
                     "description": "The content of the custom post",
+                    "type": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostContentInput",
+                      "ofType": null
+                    },
+                    "defaultValue": null
+                  },
+                  {
+                    "name": "excerpt",
+                    "description": "The excerpt of the custom post",
                     "type": {
                       "kind": "SCALAR",
                       "name": "String",
@@ -19934,14 +19986,14 @@
                     "defaultValue": null
                   },
                   {
-                    "name": "comment",
+                    "name": "commentAs",
                     "description": "The comment to add",
                     "type": {
                       "kind": "NON_NULL",
-                      "name": "String!",
+                      "name": "CommentContentInput!",
                       "ofType": {
-                        "kind": "SCALAR",
-                        "name": "String",
+                        "kind": "INPUT_OBJECT",
+                        "name": "CommentContentInput",
                         "ofType": null
                       }
                     },
@@ -20251,8 +20303,18 @@
                     "defaultValue": null
                   },
                   {
-                    "name": "content",
+                    "name": "contentAs",
                     "description": "The content of the custom post",
+                    "type": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PostContentInput",
+                      "ofType": null
+                    },
+                    "defaultValue": null
+                  },
+                  {
+                    "name": "excerpt",
+                    "description": "The excerpt of the custom post",
                     "type": {
                       "kind": "SCALAR",
                       "name": "String",
@@ -38805,6 +38867,27 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CommentContentInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "html",
+              "description": "Use HTML as content for the comment",
+              "type": {
+                "kind": "SCALAR",
+                "name": "HTML",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CommentMetaQueryInput",
           "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
           "fields": null,
@@ -40500,6 +40583,27 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "PostContentInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "html",
+              "description": "Use HTML as content for the post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "HTML",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "PostPaginationInput",
           "description": "Input to paginate posts",
           "fields": null,
@@ -40597,14 +40701,14 @@
               "defaultValue": null
             },
             {
-              "name": "comment",
+              "name": "commentAs",
               "description": "The comment to add",
               "type": {
                 "kind": "NON_NULL",
-                "name": "String!",
+                "name": "CommentContentInput!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentContentInput",
                   "ofType": null
                 }
               },
@@ -41141,8 +41245,18 @@
               "defaultValue": null
             },
             {
-              "name": "content",
+              "name": "contentAs",
               "description": "The content of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "PostContentInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excerpt",
+              "description": "The excerpt of the custom post",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -42901,14 +43015,14 @@
               "defaultValue": null
             },
             {
-              "name": "comment",
+              "name": "commentAs",
               "description": "The comment to add",
               "type": {
                 "kind": "NON_NULL",
-                "name": "String!",
+                "name": "CommentContentInput!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentContentInput",
                   "ofType": null
                 }
               },
@@ -43218,8 +43332,18 @@
               "defaultValue": null
             },
             {
-              "name": "content",
+              "name": "contentAs",
               "description": "The content of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "PostContentInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excerpt",
+              "description": "The excerpt of the custom post",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",

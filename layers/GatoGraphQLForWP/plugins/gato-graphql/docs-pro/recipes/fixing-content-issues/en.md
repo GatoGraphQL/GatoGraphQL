@@ -53,7 +53,7 @@ query PreparePostDataAsInput(
   adaptedPostData: _echo(value: {
     id: $postId,
     title: $adaptedPostTitle,
-    content: $adaptedPostContent,
+    contentAs: { html: $adaptedPostContent },
   })
     @export(as: "adaptedPostData")
 }
@@ -159,7 +159,7 @@ mutation ReplaceOldWithNewURLInPosts
       in: $__contentSource
     )
     update(input: {
-      content: $__adaptedContentSource
+      contentAs: { html: $__adaptedContentSource }
     }) {
       status
       errors {
@@ -197,7 +197,7 @@ query ExportAndTransformData(
   posts: posts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { excludeIDs: 28 }) {
     id @export(as: "postIDs")
     title @strReverse
-    content: contentSource
+    excerpt
       @strReplace(
         search: $replaceFrom
         replaceWith: $replaceTo

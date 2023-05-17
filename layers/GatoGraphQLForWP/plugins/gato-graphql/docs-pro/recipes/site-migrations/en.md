@@ -43,7 +43,7 @@ mutation ReplaceOldWithNewURLInPosts
       in: $__contentSource
     )
     update(input: {
-      content: $__adaptedContentSource
+      contentAs: { html: $__adaptedContentSource }
     }) {
       status
       errors {

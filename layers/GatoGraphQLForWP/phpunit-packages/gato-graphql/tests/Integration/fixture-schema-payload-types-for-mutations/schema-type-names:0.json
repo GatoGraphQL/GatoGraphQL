@@ -264,6 +264,9 @@
           "name": "CommentByInput"
         },
         {
+          "name": "CommentContentInput"
+        },
+        {
           "name": "CommentMetaQueryInput"
         },
         {
@@ -349,6 +352,9 @@
         },
         {
           "name": "PostCategoryByInput"
+        },
+        {
+          "name": "PostContentInput"
         },
         {
           "name": "PostPaginationInput"

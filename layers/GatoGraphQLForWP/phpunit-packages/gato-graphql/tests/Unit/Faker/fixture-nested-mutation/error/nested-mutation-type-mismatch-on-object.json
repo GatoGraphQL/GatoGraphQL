@@ -10,14 +10,14 @@
       ],
       "extensions": {
         "path": [
-          "{comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}",
-          "(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]})",
-          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
+          "{commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}",
+          "(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]})",
+          "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "mutation { ... }"
         ],
         "type": "Post",
-        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
+        "field": "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
         "code": "gql@5.6.1[8]",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
@@ -32,14 +32,14 @@
       ],
       "extensions": {
         "path": [
-          "{comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}",
-          "(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]})",
-          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
+          "{commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}",
+          "(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]})",
+          "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "mutation { ... }"
         ],
         "type": "Page",
-        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
+        "field": "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}) { ... }",
         "code": "gql@5.6.1[8]",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
