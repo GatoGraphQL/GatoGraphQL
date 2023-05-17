@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Input field 'comment' in input object 'RootAddCommentToCustomPostFilterInput' cannot be null",
+      "message": "Input field 'commentAs' in input object 'RootAddCommentToCustomPostFilterInput' cannot be null",
       "locations": [
         {
           "line": 2,
@@ -10,13 +10,13 @@
       ],
       "extensions": {
         "path": [
-          "{comment: null}",
-          "(input: {comment: null})",
-          "addCommentToCustomPost(input: {comment: null}) { ... }",
+          "{commentAs: null}",
+          "(input: {commentAs: null})",
+          "addCommentToCustomPost(input: {commentAs: null}) { ... }",
           "mutation { ... }"
         ],
         "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: null}) { ... }",
+        "field": "addCommentToCustomPost(input: {commentAs: null}) { ... }",
         "code": "gql@5.6.4[b]",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
       }
@@ -31,19 +31,105 @@
       ],
       "extensions": {
         "path": [
-          "{comment: null}",
-          "(input: {comment: null})",
-          "addCommentToCustomPost(input: {comment: null}) { ... }",
+          "{commentAs: null}",
+          "(input: {commentAs: null})",
+          "addCommentToCustomPost(input: {commentAs: null}) { ... }",
           "mutation { ... }"
         ],
         "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: null}) { ... }",
+        "field": "addCommentToCustomPost(input: {commentAs: null}) { ... }",
+        "code": "gql@5.6.4[a]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
+      }
+    },
+    {
+      "message": "No input value was provided to the oneof input object 'CommentContentInput'",
+      "locations": [
+        {
+          "line": 8,
+          "column": 58
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{commentAs: {}}",
+          "(input: {commentAs: {}})",
+          "addCommentToCustomPost2: addCommentToCustomPost(input: {commentAs: {}}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPost2: addCommentToCustomPost(input: {commentAs: {}}) { ... }",
+        "code": "gql@5.6.1[7]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    },
+    {
+      "message": "Mandatory input field 'customPostID' in input object 'RootAddCommentToCustomPostFilterInput' has not been provided",
+      "locations": [
+        {
+          "line": 8,
+          "column": 58
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{commentAs: {}}",
+          "(input: {commentAs: {}})",
+          "addCommentToCustomPost2: addCommentToCustomPost(input: {commentAs: {}}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPost2: addCommentToCustomPost(input: {commentAs: {}}) { ... }",
+        "code": "gql@5.6.4[a]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
+      }
+    },
+    {
+      "message": "Property 'html' in oneof input object 'CommentContentInput' cannot receive `null`",
+      "locations": [
+        {
+          "line": 14,
+          "column": 58
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{commentAs: {html: null}}",
+          "(input: {commentAs: {html: null}})",
+          "addCommentToCustomPost3: addCommentToCustomPost(input: {commentAs: {html: null}}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPost3: addCommentToCustomPost(input: {commentAs: {html: null}}) { ... }",
+        "code": "gql@5.6.1[19]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    },
+    {
+      "message": "Mandatory input field 'customPostID' in input object 'RootAddCommentToCustomPostFilterInput' has not been provided",
+      "locations": [
+        {
+          "line": 14,
+          "column": 58
+        }
+      ],
+      "extensions": {
+        "path": [
+          "{commentAs: {html: null}}",
+          "(input: {commentAs: {html: null}})",
+          "addCommentToCustomPost3: addCommentToCustomPost(input: {commentAs: {html: null}}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPost3: addCommentToCustomPost(input: {commentAs: {html: null}}) { ... }",
         "code": "gql@5.6.4[a]",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Required-Fields"
       }
     }
   ],
   "data": {
-    "addCommentToCustomPost": null
+    "addCommentToCustomPost": null,
+    "addCommentToCustomPost2": null,
+    "addCommentToCustomPost3": null
   }
 }

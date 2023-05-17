@@ -9,16 +9,16 @@
         }
       ],
       "extensions": {
-        "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "path": [
-          "{comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}",
-          "(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
-          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "{commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}",
+          "(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
+          "addCommentToCustomPost(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "mutation { ... }"
         ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPost(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "code": "gql@5.6.2",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Input-Object-Field-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Field-Names"
       }
     },
     {
@@ -30,16 +30,16 @@
         }
       ],
       "extensions": {
-        "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "path": [
-          "{comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}",
-          "(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
-          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "{commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}",
+          "(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
+          "addCommentToCustomPost(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "mutation { ... }"
         ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPost(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "code": "gql@5.6.2",
-        "specifiedBy": "https://spec.graphql.org/draft/#sec-Input-Object-Field-Names"
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Input-Object-Field-Names"
       }
     }
   ],

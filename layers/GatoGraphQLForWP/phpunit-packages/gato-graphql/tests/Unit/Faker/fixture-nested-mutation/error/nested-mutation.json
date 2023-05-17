@@ -9,14 +9,14 @@
         }
       ],
       "extensions": {
-        "type": "Post",
-        "field": "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "path": [
-          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
           "customPost(by: {id: 1724}) { ... }",
           "query { ... }"
         ],
-        "code": "PoP/ComponentModel@2"
+        "type": "Post",
+        "field": "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+        "code": "PoP\/ComponentModel@2"
       }
     }
   ],
