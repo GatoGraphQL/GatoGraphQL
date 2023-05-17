@@ -94,7 +94,16 @@ trait HasFieldsTypeTrait
                         fn (Field $field) => $field->getExtensions()->isMutation()
                     ));
                 } elseif (!$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema) {
-                    $globalFields = $fieldAndMutationGlobalFields;
+                    /**
+                     * Add mutations to fields other than MutationRoot only
+                     * if nested mutations is enabled
+                     */
+                    $globalFields = $moduleConfiguration->enableNestedMutations()
+                        ? $fieldAndMutationGlobalFields
+                        : array_values(array_filter(
+                            $fieldAndMutationGlobalFields,
+                            fn (Field $field) => !$field->getExtensions()->isMutation()
+                        ));
                 }
             }
         }
