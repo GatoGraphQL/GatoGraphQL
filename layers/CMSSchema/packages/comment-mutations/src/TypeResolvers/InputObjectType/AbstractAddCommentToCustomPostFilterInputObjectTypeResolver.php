@@ -22,6 +22,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?CommentAsOneofInputObjectTypeResolver $commentAsOneofInputObjectTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -59,6 +60,15 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setCommentAsOneofInputObjectTypeResolver(CommentAsOneofInputObjectTypeResolver $commentAsOneofInputObjectTypeResolver): void
+    {
+        $this->commentAsOneofInputObjectTypeResolver = $commentAsOneofInputObjectTypeResolver;
+    }
+    final protected function getCommentAsOneofInputObjectTypeResolver(): CommentAsOneofInputObjectTypeResolver
+    {
+        /** @var CommentAsOneofInputObjectTypeResolver */
+        return $this->commentAsOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentAsOneofInputObjectTypeResolver::class);
+    }
 
     /**
      * @return array<string,InputTypeResolverInterface>
@@ -69,7 +79,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_merge(
             [
-                MutationInputProperties::COMMENT_AS => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::COMMENT_AS => $this->getCommentAsOneofInputObjectTypeResolver(),
             ],
             $this->addCustomPostInputField() ? [
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
