@@ -339,7 +339,7 @@
           "name": "RootTagsFilterInput"
         },
         {
-          "name": "RootUpdatePostFilterInput"
+          "name": "RootUpdatePostInput"
         },
         {
           "name": "TagByInput"

@@ -568,7 +568,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootUpdatePostFilterInput"
+          "name": "RootUpdatePostInput"
         },
         {
           "kind": "INPUT_OBJECT",

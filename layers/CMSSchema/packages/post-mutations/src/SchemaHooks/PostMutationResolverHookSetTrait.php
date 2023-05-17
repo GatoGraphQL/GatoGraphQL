@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostMutations\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\CreatePostInputObjectTypeResolverInterface;
-use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\UpdatePostFilterInputObjectTypeResolverInterface;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\UpdatePostInputObjectTypeResolverInterface;
 
 trait PostMutationResolverHookSetTrait
 {
@@ -14,6 +14,6 @@ trait PostMutationResolverHookSetTrait
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
         return $inputObjectTypeResolver instanceof CreatePostInputObjectTypeResolverInterface
-            || $inputObjectTypeResolver instanceof UpdatePostFilterInputObjectTypeResolverInterface;
+            || $inputObjectTypeResolver instanceof UpdatePostInputObjectTypeResolverInterface;
     }
 }

@@ -10548,10 +10548,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootUpdatePostFilterInput",
+                                "name": "RootUpdatePostInput",
                                 "extensions": {
-                                    "elementName": "RootUpdatePostFilterInput",
-                                    "namespacedName": "RootUpdatePostFilterInput",
+                                    "elementName": "RootUpdatePostInput",
+                                    "namespacedName": "RootUpdatePostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -23027,10 +23027,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootUpdatePostFilterInput",
+                    "name": "RootUpdatePostInput",
                     "extensions": {
-                        "elementName": "RootUpdatePostFilterInput",
-                        "namespacedName": "RootUpdatePostFilterInput",
+                        "elementName": "RootUpdatePostInput",
+                        "namespacedName": "RootUpdatePostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },

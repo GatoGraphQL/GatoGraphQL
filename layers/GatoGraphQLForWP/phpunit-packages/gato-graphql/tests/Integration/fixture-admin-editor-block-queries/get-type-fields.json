@@ -2752,8 +2752,8 @@
           "description": "Input to filter tags"
         },
         {
-          "name": "RootUpdatePostFilterInput",
-          "namespacedName": "RootUpdatePostFilterInput",
+          "name": "RootUpdatePostInput",
+          "namespacedName": "RootUpdatePostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post"
