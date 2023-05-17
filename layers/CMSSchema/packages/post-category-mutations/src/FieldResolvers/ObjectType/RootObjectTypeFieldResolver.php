@@ -96,7 +96,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getPostCategoryObjectTypeResolver();
     }
 
-    public function getCustomPostSetCategoriesFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostInputObjectTypeResolver
+    public function getCustomPostSetCategoriesInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostInputObjectTypeResolver
     {
         return $this->getRootSetCategoriesOnCustomPostInputObjectTypeResolver();
     }

@@ -14,6 +14,6 @@ interface SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface;
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
     public function getSetCategoriesMutationResolver(): MutationResolverInterface;
-    public function getCustomPostSetCategoriesFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostInputObjectTypeResolver;
+    public function getCustomPostSetCategoriesInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostInputObjectTypeResolver;
     public function getPayloadableSetCategoriesMutationResolver(): MutationResolverInterface;
 }
