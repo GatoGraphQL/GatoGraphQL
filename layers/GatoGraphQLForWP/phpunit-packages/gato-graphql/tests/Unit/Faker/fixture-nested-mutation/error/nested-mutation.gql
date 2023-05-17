@@ -1,7 +1,7 @@
 {
   customPost(by: {id: 1724}) {
     addComment(input: {
-      comment: "Great insight!",
+      commentAs: { html: "Great insight!" },
       authorName: "Leo"
       authorEmail: "leo@saronga.com",
     }) {

@@ -6,7 +6,7 @@
       customPostType
     }
     addComment(input: {
-      comment: "Great insight!",
+      commentAs: { html: "Great insight!" },
       authorName: "Leo"
       authorEmail: "leo@saronga.com",
     }) {
