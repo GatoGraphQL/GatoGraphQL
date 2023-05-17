@@ -3,7 +3,7 @@
  */
 import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { getLabelForNotFoundElement } from '@gatographql/components';
+import { getLabelForNotFoundElement } from '../../.';
 
 const AddUndefinedSelectedItemIDs = withSelect(
 	( select, { items, selectedItems } ) => {

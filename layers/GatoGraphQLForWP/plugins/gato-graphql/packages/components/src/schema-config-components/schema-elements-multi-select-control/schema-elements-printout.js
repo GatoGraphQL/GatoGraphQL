@@ -10,7 +10,7 @@ import {
 	withSpinner,
 	withErrorMessage,
 	GROUP_FIELDS_UNDER_TYPE_FOR_PRINT,
-} from '@gatographql/components';
+} from '../../.';
 import '../base-styles/checkbox-list.scss';
 
 const noItemsSelectedLabel = '---';

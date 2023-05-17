@@ -9,7 +9,7 @@ import {
 	withErrorMessage,
 	getLabelForNotFoundElement,
 	NO_ITEMS_SELECTED_LABEL,
-} from '@gatographql/components';
+} from '../../.';
 import '../base-styles/checkbox-list.scss';
 
 const noItemsSelectedLabel = NO_ITEMS_SELECTED_LABEL;

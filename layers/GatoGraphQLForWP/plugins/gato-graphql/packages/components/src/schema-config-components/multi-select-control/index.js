@@ -17,7 +17,7 @@ import './style.scss';
  * Internal dependencies
  */
 import MultiSelectControlGroup from './group';
-import { withSpinner, withErrorMessage } from '@gatographql/components';
+import { withSpinner, withErrorMessage } from '../../.';
 
 function MultiSelectControl( props ) {
 	const {
