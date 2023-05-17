@@ -190,6 +190,9 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
      */
     protected function addCreateOrUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
+            $post_data['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
+        }
         /**
          * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
          */
@@ -200,8 +203,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 $post_data['content'] = $contentAs->{MutationInputProperties::HTML};
             }
         }
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
-            $post_data['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::EXCERPT)) {
+            $post_data['excerpt'] = $fieldDataAccessor->getValue(MutationInputProperties::EXCERPT);
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
             $post_data['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);

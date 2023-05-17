@@ -73,6 +73,7 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
             [
                 MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::CONTENT_AS => $this->getContentAsOneofInputObjectTypeResolver(),
+                MutationInputProperties::EXCERPT => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
@@ -91,6 +92,7 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
             MutationInputProperties::ID => $this->__('The ID of the custom post to update', 'custompost-mutations'),
             MutationInputProperties::TITLE => $this->__('The title of the custom post', 'custompost-mutations'),
             MutationInputProperties::CONTENT_AS => $this->__('The content of the custom post', 'custompost-mutations'),
+            MutationInputProperties::EXCERPT => $this->__('The excerpt of the custom post', 'custompost-mutations'),
             MutationInputProperties::STATUS => $this->__('The status of the custom post', 'custompost-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
