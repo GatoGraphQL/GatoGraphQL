@@ -78,11 +78,12 @@ trait HasFieldsTypeTrait
                     ]
                 );
                 /**
-                 * Filter fields/mutations for either QueryRoot or MutationRoot
+                 * Filter fields/mutations for either QueryRoot or MutationRoot.
+                 * Check for the condition of these 2 first, as their fields
+                 * need to be filtered. If it's not any of these, only then
+                 * add all globalFields to all other fields.
                  */
-                if (!$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema) {
-                    $globalFields = $fieldAndMutationGlobalFields;
-                } elseif ($namespacedName === $queryRootNamespacedTypeName) {
+                if ($namespacedName === $queryRootNamespacedTypeName) {
                     $globalFields = array_values(array_filter(
                         $fieldAndMutationGlobalFields,
                         fn (Field $field) => !$field->getExtensions()->isMutation()
@@ -92,6 +93,8 @@ trait HasFieldsTypeTrait
                         $fieldAndMutationGlobalFields,
                         fn (Field $field) => $field->getExtensions()->isMutation()
                     ));
+                } elseif (!$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema) {
+                    $globalFields = $fieldAndMutationGlobalFields;
                 }
             }
         }

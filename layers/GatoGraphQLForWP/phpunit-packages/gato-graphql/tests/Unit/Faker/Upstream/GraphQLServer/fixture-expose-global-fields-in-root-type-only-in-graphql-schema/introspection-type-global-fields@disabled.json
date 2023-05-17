@@ -1,0 +1,125 @@
+{
+    "data": {
+        "__schema": {
+            "queryRootType": {
+                "fields": [
+                    {
+                        "name": "customPost"
+                    },
+                    {
+                        "name": "customPostCount"
+                    },
+                    {
+                        "name": "customPosts"
+                    },
+                    {
+                        "name": "globalID"
+                    },
+                    {
+                        "name": "id"
+                    },
+                    {
+                        "name": "page"
+                    },
+                    {
+                        "name": "pageCount"
+                    },
+                    {
+                        "name": "pages"
+                    },
+                    {
+                        "name": "self"
+                    },
+                    {
+                        "name": "_namespace"
+                    },
+                    {
+                        "name": "_qualifiedTypeName"
+                    },
+                    {
+                        "name": "_typeName"
+                    }
+                ]
+            },
+            "pageType": {
+                "fields": [
+                    {
+                        "name": "childCount"
+                    },
+                    {
+                        "name": "children"
+                    },
+                    {
+                        "name": "content"
+                    },
+                    {
+                        "name": "contentSource"
+                    },
+                    {
+                        "name": "customPostType"
+                    },
+                    {
+                        "name": "date"
+                    },
+                    {
+                        "name": "dateStr"
+                    },
+                    {
+                        "name": "excerpt"
+                    },
+                    {
+                        "name": "globalID"
+                    },
+                    {
+                        "name": "id"
+                    },
+                    {
+                        "name": "isStatus"
+                    },
+                    {
+                        "name": "menuOrder"
+                    },
+                    {
+                        "name": "modifiedDate"
+                    },
+                    {
+                        "name": "modifiedDateStr"
+                    },
+                    {
+                        "name": "parent"
+                    },
+                    {
+                        "name": "rawContent"
+                    },
+                    {
+                        "name": "self"
+                    },
+                    {
+                        "name": "slug"
+                    },
+                    {
+                        "name": "status"
+                    },
+                    {
+                        "name": "title"
+                    },
+                    {
+                        "name": "url"
+                    },
+                    {
+                        "name": "urlPath"
+                    },
+                    {
+                        "name": "_namespace"
+                    },
+                    {
+                        "name": "_qualifiedTypeName"
+                    },
+                    {
+                        "name": "_typeName"
+                    }
+                ]
+            }
+        }
+    }
+}

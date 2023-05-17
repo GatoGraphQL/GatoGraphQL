@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Unit;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Unit\Faker\Upstream\GraphQLServer;
 
 use PoP\Root\Module\ModuleInterface;
 

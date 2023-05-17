@@ -1,9 +1,0 @@
-query IntrospectionFieldArgGlobalFields {
-    __schema {
-        type(name: "MutationRoot") {
-            fields(includeGlobal: true) {
-                name
-            }
-        }
-    }
-}
