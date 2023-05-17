@@ -11,7 +11,7 @@ use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\PayloadableRemoveFea
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\PayloadableSetFeaturedImageOnCustomPostMutationResolver;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\RemoveFeaturedImageFromCustomPostMutationResolver;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolver;
-use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType\CustomPostSetFeaturedImageFilterInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType\CustomPostSetFeaturedImageInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
@@ -36,7 +36,7 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
     private ?RemoveFeaturedImageFromCustomPostMutationResolver $removeFeaturedImageFromCustomPostMutationResolver = null;
-    private ?CustomPostSetFeaturedImageFilterInputObjectTypeResolver $customPostSetFeaturedImageFilterInputObjectTypeResolver = null;
+    private ?CustomPostSetFeaturedImageInputObjectTypeResolver $customPostSetFeaturedImageInputObjectTypeResolver = null;
     private ?PayloadableSetFeaturedImageOnCustomPostMutationResolver $payloadableSetFeaturedImageOnCustomPostMutationResolver = null;
     private ?PayloadableRemoveFeaturedImageFromCustomPostMutationResolver $payloadableRemoveFeaturedImageFromCustomPostMutationResolver = null;
     private ?CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver $customPostSetFeaturedImageMutationPayloadObjectTypeResolver = null;
@@ -79,14 +79,14 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
         /** @var RemoveFeaturedImageFromCustomPostMutationResolver */
         return $this->removeFeaturedImageFromCustomPostMutationResolver ??= $this->instanceManager->getInstance(RemoveFeaturedImageFromCustomPostMutationResolver::class);
     }
-    final public function setCustomPostSetFeaturedImageFilterInputObjectTypeResolver(CustomPostSetFeaturedImageFilterInputObjectTypeResolver $customPostSetFeaturedImageFilterInputObjectTypeResolver): void
+    final public function setCustomPostSetFeaturedImageInputObjectTypeResolver(CustomPostSetFeaturedImageInputObjectTypeResolver $customPostSetFeaturedImageInputObjectTypeResolver): void
     {
-        $this->customPostSetFeaturedImageFilterInputObjectTypeResolver = $customPostSetFeaturedImageFilterInputObjectTypeResolver;
+        $this->customPostSetFeaturedImageInputObjectTypeResolver = $customPostSetFeaturedImageInputObjectTypeResolver;
     }
-    final protected function getCustomPostSetFeaturedImageFilterInputObjectTypeResolver(): CustomPostSetFeaturedImageFilterInputObjectTypeResolver
+    final protected function getCustomPostSetFeaturedImageInputObjectTypeResolver(): CustomPostSetFeaturedImageInputObjectTypeResolver
     {
-        /** @var CustomPostSetFeaturedImageFilterInputObjectTypeResolver */
-        return $this->customPostSetFeaturedImageFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSetFeaturedImageFilterInputObjectTypeResolver::class);
+        /** @var CustomPostSetFeaturedImageInputObjectTypeResolver */
+        return $this->customPostSetFeaturedImageInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSetFeaturedImageInputObjectTypeResolver::class);
     }
     final public function setPayloadableSetFeaturedImageOnCustomPostMutationResolver(PayloadableSetFeaturedImageOnCustomPostMutationResolver $payloadableSetFeaturedImageOnCustomPostMutationResolver): void
     {
@@ -172,7 +172,7 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     {
         return match ($fieldName) {
             'setFeaturedImage' => [
-                MutationInputProperties::INPUT => $this->getCustomPostSetFeaturedImageFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCustomPostSetFeaturedImageInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
