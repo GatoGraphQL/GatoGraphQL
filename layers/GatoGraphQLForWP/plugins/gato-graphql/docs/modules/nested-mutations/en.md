@@ -46,7 +46,7 @@ mutation {
       title
       content
       addComment(input: {
-        comment: "My first comment"
+        commentAs: { html: "My first comment" }
       }) {
         id
         content

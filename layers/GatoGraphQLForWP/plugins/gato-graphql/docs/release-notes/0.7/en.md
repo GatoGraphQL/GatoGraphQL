@@ -54,7 +54,7 @@ mutation {
     update(title: "Second title", content: "Some content") {
       title
       content
-      addComment(comment: "My first comment") {
+      addComment(commentAs: { html: "My first comment" }) {
         id
         content
         date
