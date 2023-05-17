@@ -327,13 +327,13 @@
           "name": "RootReplyCommentInput"
         },
         {
-          "name": "RootSetCategoriesOnCustomPostFilterInput"
+          "name": "RootSetCategoriesOnCustomPostInput"
         },
         {
-          "name": "RootSetFeaturedImageOnCustomPostFilterInput"
+          "name": "RootSetFeaturedImageOnCustomPostInput"
         },
         {
-          "name": "RootSetTagsOnCustomPostFilterInput"
+          "name": "RootSetTagsOnCustomPostInput"
         },
         {
           "name": "RootTagsFilterInput"

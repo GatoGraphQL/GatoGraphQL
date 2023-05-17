@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType;
 
-class RootSetTagsOnCustomPostFilterInputObjectTypeResolver extends AbstractSetTagsOnPostFilterInputObjectTypeResolver
+class RootSetTagsOnCustomPostInputObjectTypeResolver extends AbstractSetTagsOnPostFilterInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'RootSetTagsOnCustomPostFilterInput';
+        return 'RootSetTagsOnCustomPostInput';
     }
 
     protected function addCustomPostInputField(): bool

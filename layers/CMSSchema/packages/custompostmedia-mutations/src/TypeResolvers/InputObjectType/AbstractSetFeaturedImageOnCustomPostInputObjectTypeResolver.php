@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeReso
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
 
-abstract class AbstractSetFeaturedImageOnCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+abstract class AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 

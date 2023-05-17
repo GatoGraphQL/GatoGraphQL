@@ -10412,10 +10412,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootSetCategoriesOnCustomPostFilterInput",
+                                "name": "RootSetCategoriesOnCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootSetCategoriesOnCustomPostFilterInput",
-                                    "namespacedName": "RootSetCategoriesOnCustomPostFilterInput",
+                                    "elementName": "RootSetCategoriesOnCustomPostInput",
+                                    "namespacedName": "RootSetCategoriesOnCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -10443,10 +10443,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                                "name": "RootSetFeaturedImageOnCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootSetFeaturedImageOnCustomPostFilterInput",
-                                    "namespacedName": "RootSetFeaturedImageOnCustomPostFilterInput",
+                                    "elementName": "RootSetFeaturedImageOnCustomPostInput",
+                                    "namespacedName": "RootSetFeaturedImageOnCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -10468,10 +10468,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootSetTagsOnCustomPostFilterInput",
+                                "name": "RootSetTagsOnCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootSetTagsOnCustomPostFilterInput",
-                                    "namespacedName": "RootSetTagsOnCustomPostFilterInput",
+                                    "elementName": "RootSetTagsOnCustomPostInput",
+                                    "namespacedName": "RootSetTagsOnCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -22891,10 +22891,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootSetCategoriesOnCustomPostFilterInput",
+                    "name": "RootSetCategoriesOnCustomPostInput",
                     "extensions": {
-                        "elementName": "RootSetCategoriesOnCustomPostFilterInput",
-                        "namespacedName": "RootSetCategoriesOnCustomPostFilterInput",
+                        "elementName": "RootSetCategoriesOnCustomPostInput",
+                        "namespacedName": "RootSetCategoriesOnCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22922,10 +22922,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                    "name": "RootSetFeaturedImageOnCustomPostInput",
                     "extensions": {
-                        "elementName": "RootSetFeaturedImageOnCustomPostFilterInput",
-                        "namespacedName": "RootSetFeaturedImageOnCustomPostFilterInput",
+                        "elementName": "RootSetFeaturedImageOnCustomPostInput",
+                        "namespacedName": "RootSetFeaturedImageOnCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22947,10 +22947,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootSetTagsOnCustomPostFilterInput",
+                    "name": "RootSetTagsOnCustomPostInput",
                     "extensions": {
-                        "elementName": "RootSetTagsOnCustomPostFilterInput",
-                        "namespacedName": "RootSetTagsOnCustomPostFilterInput",
+                        "elementName": "RootSetTagsOnCustomPostInput",
+                        "namespacedName": "RootSetTagsOnCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },

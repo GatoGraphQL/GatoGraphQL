@@ -2,20 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 
-abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver extends AbstractInputObjectTypeResolver
+abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -35,10 +36,19 @@ abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver ex
         /** @var IDScalarTypeResolver */
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        /** @var StringScalarTypeResolver */
+        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to set categories on a custom post', 'comment-mutations');
+        return $this->__('Input to set tags on a custom post', 'comment-mutations');
     }
 
     /**
@@ -51,7 +61,7 @@ abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver ex
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::CATEGORY_IDS => $this->getIDScalarTypeResolver(),
+                MutationInputProperties::TAGS => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
         );
@@ -59,20 +69,16 @@ abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver ex
 
     abstract protected function addCustomPostInputField(): bool;
     abstract protected function getEntityName(): string;
-    abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
             MutationInputProperties::CUSTOMPOST_ID => sprintf(
-                $this->__('The ID of the %s', 'custompost-category-mutations'),
+                $this->__('The ID of the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
-            MutationInputProperties::CATEGORY_IDS => sprintf(
-                $this->__('The IDs of the categories to set, of type \'%s\'', 'custompost-category-mutations'),
-                $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
-            ),
-            MutationInputProperties::APPEND => $this->__('Append the categories to the existing ones?', 'custompost-category-mutations'),
+            MutationInputProperties::TAGS => $this->__('The tags to set', 'custompost-tag-mutations'),
+            MutationInputProperties::APPEND => $this->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
             default => null,
         };
     }
@@ -90,7 +96,7 @@ abstract class AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver ex
         return match ($inputFieldName) {
             MutationInputProperties::APPEND => SchemaTypeModifiers::NON_NULLABLE,
             MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::CATEGORY_IDS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::TAGS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTagMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractRootObjectTypeFieldResolver;
-use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\PayloadableSetTagsOnPostMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
-use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\RootSetTagsOnCustomPostFilterInputObjectTypeResolver;
+use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\RootSetTagsOnCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\RootSetTagsOnPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -19,7 +19,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver = null;
-    private ?RootSetTagsOnCustomPostFilterInputObjectTypeResolver $rootSetTagsOnCustomPostFilterInputObjectTypeResolver = null;
+    private ?RootSetTagsOnCustomPostInputObjectTypeResolver $rootSetTagsOnCustomPostInputObjectTypeResolver = null;
     private ?PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver = null;
     private ?RootSetTagsOnPostMutationPayloadObjectTypeResolver $rootSetTagsOnPostMutationPayloadObjectTypeResolver = null;
 
@@ -41,14 +41,14 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         /** @var SetTagsOnPostMutationResolver */
         return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
     }
-    final public function setRootSetTagsOnCustomPostFilterInputObjectTypeResolver(RootSetTagsOnCustomPostFilterInputObjectTypeResolver $rootSetTagsOnCustomPostFilterInputObjectTypeResolver): void
+    final public function setRootSetTagsOnCustomPostInputObjectTypeResolver(RootSetTagsOnCustomPostInputObjectTypeResolver $rootSetTagsOnCustomPostInputObjectTypeResolver): void
     {
-        $this->rootSetTagsOnCustomPostFilterInputObjectTypeResolver = $rootSetTagsOnCustomPostFilterInputObjectTypeResolver;
+        $this->rootSetTagsOnCustomPostInputObjectTypeResolver = $rootSetTagsOnCustomPostInputObjectTypeResolver;
     }
-    final protected function getRootSetTagsOnCustomPostFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
+    final protected function getRootSetTagsOnCustomPostInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
-        /** @var RootSetTagsOnCustomPostFilterInputObjectTypeResolver */
-        return $this->rootSetTagsOnCustomPostFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetTagsOnCustomPostFilterInputObjectTypeResolver::class);
+        /** @var RootSetTagsOnCustomPostInputObjectTypeResolver */
+        return $this->rootSetTagsOnCustomPostInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetTagsOnCustomPostInputObjectTypeResolver::class);
     }
     final public function setPayloadableSetTagsOnPostMutationResolver(PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver): void
     {
@@ -94,9 +94,9 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->__('post', 'post-tag-mutations');
     }
 
-    public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
+    public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
-        return $this->getRootSetTagsOnCustomPostFilterInputObjectTypeResolver();
+        return $this->getRootSetTagsOnCustomPostInputObjectTypeResolver();
     }
 
     protected function getSetTagsFieldName(): string

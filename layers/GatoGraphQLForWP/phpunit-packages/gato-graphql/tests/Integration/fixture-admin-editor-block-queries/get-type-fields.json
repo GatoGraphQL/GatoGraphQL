@@ -2724,22 +2724,22 @@
           "description": "Input to add a comment to a custom post"
         },
         {
-          "name": "RootSetCategoriesOnCustomPostFilterInput",
-          "namespacedName": "RootSetCategoriesOnCustomPostFilterInput",
+          "name": "RootSetCategoriesOnCustomPostInput",
+          "namespacedName": "RootSetCategoriesOnCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set categories on a custom post"
         },
         {
-          "name": "RootSetFeaturedImageOnCustomPostFilterInput",
-          "namespacedName": "RootSetFeaturedImageOnCustomPostFilterInput",
+          "name": "RootSetFeaturedImageOnCustomPostInput",
+          "namespacedName": "RootSetFeaturedImageOnCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set the featured image on a custom post"
         },
         {
-          "name": "RootSetTagsOnCustomPostFilterInput",
-          "namespacedName": "RootSetTagsOnCustomPostFilterInput",
+          "name": "RootSetTagsOnCustomPostInput",
+          "namespacedName": "RootSetTagsOnCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set tags on a custom post"

@@ -552,15 +552,15 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetCategoriesOnCustomPostFilterInput"
+          "name": "RootSetCategoriesOnCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetFeaturedImageOnCustomPostFilterInput"
+          "name": "RootSetFeaturedImageOnCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetTagsOnCustomPostFilterInput"
+          "name": "RootSetTagsOnCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",

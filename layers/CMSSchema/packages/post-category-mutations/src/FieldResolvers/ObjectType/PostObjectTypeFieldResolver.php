@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
-use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\AbstractSetCategoriesOnCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\PayloadableSetCategoriesOnPostMutationResolver;
@@ -57,7 +57,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     {
         $this->postSetCategoriesFilterInputObjectTypeResolver = $postSetCategoriesFilterInputObjectTypeResolver;
     }
-    final protected function getPostSetCategoriesFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver
+    final protected function getPostSetCategoriesFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostInputObjectTypeResolver
     {
         /** @var PostSetCategoriesFilterInputObjectTypeResolver */
         return $this->postSetCategoriesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostSetCategoriesFilterInputObjectTypeResolver::class);
@@ -96,7 +96,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         return $this->getPostCategoryObjectTypeResolver();
     }
 
-    public function getCustomPostSetCategoriesFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostFilterInputObjectTypeResolver
+    public function getCustomPostSetCategoriesFilterInputObjectTypeResolver(): AbstractSetCategoriesOnCustomPostInputObjectTypeResolver
     {
         return $this->getPostSetCategoriesFilterInputObjectTypeResolver();
     }

@@ -3726,10 +3726,10 @@
                         "description": "Input to set categories on a custom post",
                         "type": {
                           "kind": "NON_NULL",
-                          "name": "RootSetCategoriesOnCustomPostFilterInput!",
+                          "name": "RootSetCategoriesOnCustomPostInput!",
                           "ofType": {
                             "kind": "INPUT_OBJECT",
-                            "name": "RootSetCategoriesOnCustomPostFilterInput",
+                            "name": "RootSetCategoriesOnCustomPostInput",
                             "ofType": null
                           }
                         },
@@ -3757,10 +3757,10 @@
                         "description": "Input to set the featured image on a custom post",
                         "type": {
                           "kind": "NON_NULL",
-                          "name": "RootSetFeaturedImageOnCustomPostFilterInput!",
+                          "name": "RootSetFeaturedImageOnCustomPostInput!",
                           "ofType": {
                             "kind": "INPUT_OBJECT",
-                            "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                            "name": "RootSetFeaturedImageOnCustomPostInput",
                             "ofType": null
                           }
                         },
@@ -3788,10 +3788,10 @@
                         "description": "Input to set tags on a custom post",
                         "type": {
                           "kind": "NON_NULL",
-                          "name": "RootSetTagsOnCustomPostFilterInput!",
+                          "name": "RootSetTagsOnCustomPostInput!",
                           "ofType": {
                             "kind": "INPUT_OBJECT",
-                            "name": "RootSetTagsOnCustomPostFilterInput",
+                            "name": "RootSetTagsOnCustomPostInput",
                             "ofType": null
                           }
                         },
@@ -10884,10 +10884,10 @@
                         "description": "Input to set categories on a custom post",
                         "type": {
                           "kind": "NON_NULL",
-                          "name": "RootSetCategoriesOnCustomPostFilterInput!",
+                          "name": "RootSetCategoriesOnCustomPostInput!",
                           "ofType": {
                             "kind": "INPUT_OBJECT",
-                            "name": "RootSetCategoriesOnCustomPostFilterInput",
+                            "name": "RootSetCategoriesOnCustomPostInput",
                             "ofType": null
                           }
                         },
@@ -10915,10 +10915,10 @@
                         "description": "Input to set the featured image on a custom post",
                         "type": {
                           "kind": "NON_NULL",
-                          "name": "RootSetFeaturedImageOnCustomPostFilterInput!",
+                          "name": "RootSetFeaturedImageOnCustomPostInput!",
                           "ofType": {
                             "kind": "INPUT_OBJECT",
-                            "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                            "name": "RootSetFeaturedImageOnCustomPostInput",
                             "ofType": null
                           }
                         },
@@ -10946,10 +10946,10 @@
                         "description": "Input to set tags on a custom post",
                         "type": {
                           "kind": "NON_NULL",
-                          "name": "RootSetTagsOnCustomPostFilterInput!",
+                          "name": "RootSetTagsOnCustomPostInput!",
                           "ofType": {
                             "kind": "INPUT_OBJECT",
-                            "name": "RootSetTagsOnCustomPostFilterInput",
+                            "name": "RootSetTagsOnCustomPostInput",
                             "ofType": null
                           }
                         },
@@ -20020,7 +20020,7 @@
               },
               {
                 "kind": "INPUT_OBJECT",
-                "name": "RootSetCategoriesOnCustomPostFilterInput",
+                "name": "RootSetCategoriesOnCustomPostInput",
                 "description": "Input to set categories on a custom post",
                 "fields": null,
                 "inputFields": [
@@ -20077,7 +20077,7 @@
               },
               {
                 "kind": "INPUT_OBJECT",
-                "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                "name": "RootSetFeaturedImageOnCustomPostInput",
                 "description": "Input to set the featured image on a custom post",
                 "fields": null,
                 "inputFields": [
@@ -20116,7 +20116,7 @@
               },
               {
                 "kind": "INPUT_OBJECT",
-                "name": "RootSetTagsOnCustomPostFilterInput",
+                "name": "RootSetTagsOnCustomPostInput",
                 "description": "Input to set tags on a custom post",
                 "fields": null,
                 "inputFields": [
@@ -26755,10 +26755,10 @@
                   "description": "Input to set categories on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetCategoriesOnCustomPostFilterInput!",
+                    "name": "RootSetCategoriesOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetCategoriesOnCustomPostFilterInput",
+                      "name": "RootSetCategoriesOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -26786,10 +26786,10 @@
                   "description": "Input to set the featured image on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetFeaturedImageOnCustomPostFilterInput!",
+                    "name": "RootSetFeaturedImageOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                      "name": "RootSetFeaturedImageOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -26817,10 +26817,10 @@
                   "description": "Input to set tags on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetTagsOnCustomPostFilterInput!",
+                    "name": "RootSetTagsOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetTagsOnCustomPostFilterInput",
+                      "name": "RootSetTagsOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -33913,10 +33913,10 @@
                   "description": "Input to set categories on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetCategoriesOnCustomPostFilterInput!",
+                    "name": "RootSetCategoriesOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetCategoriesOnCustomPostFilterInput",
+                      "name": "RootSetCategoriesOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -33944,10 +33944,10 @@
                   "description": "Input to set the featured image on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetFeaturedImageOnCustomPostFilterInput!",
+                    "name": "RootSetFeaturedImageOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+                      "name": "RootSetFeaturedImageOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -33975,10 +33975,10 @@
                   "description": "Input to set tags on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetTagsOnCustomPostFilterInput!",
+                    "name": "RootSetTagsOnCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetTagsOnCustomPostFilterInput",
+                      "name": "RootSetTagsOnCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -43049,7 +43049,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetCategoriesOnCustomPostFilterInput",
+          "name": "RootSetCategoriesOnCustomPostInput",
           "description": "Input to set categories on a custom post",
           "fields": null,
           "inputFields": [
@@ -43106,7 +43106,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetFeaturedImageOnCustomPostFilterInput",
+          "name": "RootSetFeaturedImageOnCustomPostInput",
           "description": "Input to set the featured image on a custom post",
           "fields": null,
           "inputFields": [
@@ -43145,7 +43145,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetTagsOnCustomPostFilterInput",
+          "name": "RootSetTagsOnCustomPostInput",
           "description": "Input to set tags on a custom post",
           "fields": null,
           "inputFields": [

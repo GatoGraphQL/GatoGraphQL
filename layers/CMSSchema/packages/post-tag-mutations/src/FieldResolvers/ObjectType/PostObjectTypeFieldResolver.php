@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTagMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
-use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\PayloadableSetTagsOnPostMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\SetTagsOnPostMutationResolver;
@@ -45,7 +45,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     {
         $this->postSetTagsFilterInputObjectTypeResolver = $postSetTagsFilterInputObjectTypeResolver;
     }
-    final protected function getPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
+    final protected function getPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
         /** @var PostSetTagsFilterInputObjectTypeResolver */
         return $this->postSetTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostSetTagsFilterInputObjectTypeResolver::class);
@@ -79,7 +79,7 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         return $this->getSetTagsOnPostMutationResolver();
     }
 
-    public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostFilterInputObjectTypeResolver
+    public function getCustomPostSetTagsFilterInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
         return $this->getPostSetTagsFilterInputObjectTypeResolver();
     }
