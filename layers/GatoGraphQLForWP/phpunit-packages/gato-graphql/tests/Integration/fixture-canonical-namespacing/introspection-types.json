@@ -544,7 +544,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput"
+          "name": "RootRemoveFeaturedImageFromCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",

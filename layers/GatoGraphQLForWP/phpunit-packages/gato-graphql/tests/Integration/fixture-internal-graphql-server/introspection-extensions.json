@@ -10350,10 +10350,10 @@
                                 "enumValues": null
                             },
                             {
-                                "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                                "name": "RootRemoveFeaturedImageFromCustomPostInput",
                                 "extensions": {
-                                    "elementName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-                                    "namespacedName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                                    "elementName": "RootRemoveFeaturedImageFromCustomPostInput",
+                                    "namespacedName": "RootRemoveFeaturedImageFromCustomPostInput",
                                     "possibleValues": null,
                                     "isOneOf": false
                                 },
@@ -22829,10 +22829,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                    "name": "RootRemoveFeaturedImageFromCustomPostInput",
                     "extensions": {
-                        "elementName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-                        "namespacedName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                        "elementName": "RootRemoveFeaturedImageFromCustomPostInput",
+                        "namespacedName": "RootRemoveFeaturedImageFromCustomPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },

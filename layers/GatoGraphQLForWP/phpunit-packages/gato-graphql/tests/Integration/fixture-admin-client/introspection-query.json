@@ -3661,10 +3661,10 @@
                   "description": "Input to remove the featured image from a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput!",
+                    "name": "RootRemoveFeaturedImageFromCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                      "name": "RootRemoveFeaturedImageFromCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -10755,10 +10755,10 @@
                   "description": "Input to remove the featured image from a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootRemoveFeaturedImageFromCustomPostFilterInput!",
+                    "name": "RootRemoveFeaturedImageFromCustomPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+                      "name": "RootRemoveFeaturedImageFromCustomPostInput",
                       "ofType": null
                     }
                   },
@@ -19913,7 +19913,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+          "name": "RootRemoveFeaturedImageFromCustomPostInput",
           "description": "Input to remove the featured image from a custom post",
           "fields": null,
           "inputFields": [

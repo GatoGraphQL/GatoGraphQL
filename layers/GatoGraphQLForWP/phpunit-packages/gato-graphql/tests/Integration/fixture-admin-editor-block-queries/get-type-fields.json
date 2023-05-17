@@ -2710,8 +2710,8 @@
           "description": "Input to filter posts"
         },
         {
-          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput",
-          "namespacedName": "RootRemoveFeaturedImageFromCustomPostFilterInput",
+          "name": "RootRemoveFeaturedImageFromCustomPostInput",
+          "namespacedName": "RootRemoveFeaturedImageFromCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to remove the featured image from a custom post"

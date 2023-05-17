@@ -321,7 +321,7 @@
           "name": "RootPostsFilterInput"
         },
         {
-          "name": "RootRemoveFeaturedImageFromCustomPostFilterInput"
+          "name": "RootRemoveFeaturedImageFromCustomPostInput"
         },
         {
           "name": "RootReplyCommentInput"
