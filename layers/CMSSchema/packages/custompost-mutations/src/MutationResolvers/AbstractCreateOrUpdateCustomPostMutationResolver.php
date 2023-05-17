@@ -16,6 +16,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
+use stdClass;
 
 abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {
@@ -190,7 +191,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     protected function addCreateOrUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT_AS)) {
-            $post_data['content'] = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT_AS);
+            /** @var stdClass */
+            $contentAs = $fieldDataAccessor->hasValue(MutationInputProperties::CONTENT_AS);
+            if (isset($contentAs->{MutationInputProperties::HTML})) {
+                $post_data['content'] = $contentAs->{MutationInputProperties::HTML};
+            }
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
             $post_data['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);

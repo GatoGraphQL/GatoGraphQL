@@ -17,6 +17,7 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?CustomPostContentAsOneofInputObjectTypeResolver $customPostContentAsOneofInputObjectTypeResolver = null;
 
     final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
     {
@@ -45,6 +46,15 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setCustomPostContentAsOneofInputObjectTypeResolver(CustomPostContentAsOneofInputObjectTypeResolver $customPostContentAsOneofInputObjectTypeResolver): void
+    {
+        $this->customPostContentAsOneofInputObjectTypeResolver = $customPostContentAsOneofInputObjectTypeResolver;
+    }
+    final protected function getCustomPostContentAsOneofInputObjectTypeResolver(): CustomPostContentAsOneofInputObjectTypeResolver
+    {
+        /** @var CustomPostContentAsOneofInputObjectTypeResolver */
+        return $this->customPostContentAsOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostContentAsOneofInputObjectTypeResolver::class);
+    }
 
     public function getTypeDescription(): ?string
     {
@@ -62,7 +72,7 @@ abstract class AbstractCreateOrUpdateCustomPostFilterInputObjectTypeResolver ext
             ] : [],
             [
                 MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::CONTENT_AS => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::CONTENT_AS => $this->getCustomPostContentAsOneofInputObjectTypeResolver(),
                 MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
