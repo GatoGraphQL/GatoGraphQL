@@ -9,6 +9,9 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
+/**
+ * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
+ */
 class CustomPostContentAsOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
     private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;

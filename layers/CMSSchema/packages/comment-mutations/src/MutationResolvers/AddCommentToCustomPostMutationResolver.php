@@ -211,6 +211,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         }
         /** @var stdClass */
         $commentAs = $fieldDataAccessor->getValue(MutationInputProperties::COMMENT_AS);
+        /**
+         * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
+         */
         if (!$commentAs->{MutationInputProperties::HTML}) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
@@ -247,6 +250,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $comment_data = [
             'authorIP' => $this->getRequestHelperService()->getClientIPAddress(),
             'agent' => App::server('HTTP_USER_AGENT'),
+            /**
+             * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
+             */
             'content' => $commentAs->{MutationInputProperties::HTML},
             'parent' => $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID),
             'customPostID' => $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID),
