@@ -1,11 +1,11 @@
 query IntrospectionFieldArgGlobalFields {
     __schema {
-        mutationRootType: type(name: "MutationRoot") {
+        queryRootType: type(name: "QueryRoot") {
             fields(includeGlobal: true) {
                 name
             }
         }
-        queryRootType: type(name: "QueryRoot") {
+        pageType: type(name: "Page") {
             fields(includeGlobal: true) {
                 name
             }
