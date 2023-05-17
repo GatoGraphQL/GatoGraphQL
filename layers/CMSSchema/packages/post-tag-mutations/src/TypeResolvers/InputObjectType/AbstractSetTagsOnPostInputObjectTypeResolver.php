@@ -8,7 +8,7 @@ use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\AbstractSetTagsOnCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 
-abstract class AbstractSetTagsOnPostFilterInputObjectTypeResolver extends AbstractSetTagsOnCustomPostInputObjectTypeResolver
+abstract class AbstractSetTagsOnPostInputObjectTypeResolver extends AbstractSetTagsOnCustomPostInputObjectTypeResolver
 {
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
 

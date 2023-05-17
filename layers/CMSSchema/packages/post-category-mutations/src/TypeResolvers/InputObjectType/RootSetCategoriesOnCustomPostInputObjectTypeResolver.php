@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType;
 
-class RootSetCategoriesOnCustomPostInputObjectTypeResolver extends AbstractSetCategoriesOnPostFilterInputObjectTypeResolver
+class RootSetCategoriesOnCustomPostInputObjectTypeResolver extends AbstractSetCategoriesOnPostInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
