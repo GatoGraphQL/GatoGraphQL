@@ -69,7 +69,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_merge(
             [
-                MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::COMMENT_AS => $this->getStringScalarTypeResolver(),
             ],
             $this->addCustomPostInputField() ? [
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
@@ -92,7 +92,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::COMMENT => $this->__('The comment to add', 'comment-mutations'),
+            MutationInputProperties::COMMENT_AS => $this->__('The comment to add', 'comment-mutations'),
             MutationInputProperties::PARENT_COMMENT_ID => $this->__('The ID of the parent comment', 'comment-mutations'),
             MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post to add a comment to', 'comment-mutations'),
             MutationInputProperties::AUTHOR_NAME => $this->__('The comment author\'s name', 'comment-mutations'),
@@ -105,7 +105,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::COMMENT => SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::COMMENT_AS => SchemaTypeModifiers::MANDATORY,
             MutationInputProperties::PARENT_COMMENT_ID => $this->isParentCommentInputFieldMandatory() ? SchemaTypeModifiers::MANDATORY : SchemaTypeModifiers::NONE,
             MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),

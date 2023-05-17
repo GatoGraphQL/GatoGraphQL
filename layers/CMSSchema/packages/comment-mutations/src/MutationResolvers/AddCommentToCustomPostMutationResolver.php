@@ -208,7 +208,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
                 }
             }
         }
-        if (!$fieldDataAccessor->getValue(MutationInputProperties::COMMENT)) {
+        if (!$fieldDataAccessor->getValue(MutationInputProperties::COMMENT_AS)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -242,7 +242,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $comment_data = [
             'authorIP' => $this->getRequestHelperService()->getClientIPAddress(),
             'agent' => App::server('HTTP_USER_AGENT'),
-            'content' => $fieldDataAccessor->getValue(MutationInputProperties::COMMENT),
+            'content' => $fieldDataAccessor->getValue(MutationInputProperties::COMMENT_AS),
             'parent' => $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID),
             'customPostID' => $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID),
         ];
