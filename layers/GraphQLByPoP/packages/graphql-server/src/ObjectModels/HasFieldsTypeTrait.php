@@ -97,7 +97,7 @@ trait HasFieldsTypeTrait
                     //   $namespacedName === $queryRootNamespacedTypeName
                     // or
                     //   !$exposeGlobalFieldsInRootTypeOnlyInGraphQLSchema
-                    
+
                     /**
                      * Field other than MutationRoot (i.e. QueryRoot and all others):
                      *
