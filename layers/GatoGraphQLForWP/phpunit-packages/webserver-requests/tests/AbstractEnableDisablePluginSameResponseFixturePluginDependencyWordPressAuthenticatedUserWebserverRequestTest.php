@@ -12,7 +12,7 @@ abstract class AbstractEnableDisablePluginSameResponseFixturePluginDependencyWor
 {
     /**
      * The response before/after must be the same.
-     * 
+     *
      * For that, have the ":disabled.json" file copy
      * the contents of ":enabled.json".
      *
