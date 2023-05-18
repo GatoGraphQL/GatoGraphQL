@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PHPUnitForGatoGraphQL\GatoGraphQL\MockServices\GuzzleHTTP\MockGuzzleServiceInterface:
+        class: \PHPUnitForGatoGraphQL\GatoGraphQL\MockServices\GuzzleHTTP\MockGuzzleService
+        decorates: PoP\GuzzleHTTP\Services\GuzzleServiceInterface
