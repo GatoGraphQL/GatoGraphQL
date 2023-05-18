@@ -19,6 +19,19 @@ class Module extends AbstractModule
             \PHPUnitForGatoGraphQL\DummyWPSchema\Module::class,
             \PHPUnitForGatoGraphQL\WPFakerSchema\Module::class,
             \PHPUnitForGatoGraphQL\WebserverRequests\Module::class,
+            \PoP\GuzzleHTTP\Module::class,
         ];
+    }
+
+    /**
+     * Initialize services
+     *
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
+     */
+    protected function initializeContainerServices(
+        bool $skipSchema,
+        array $skipSchemaModuleClasses,
+    ): void {
+        $this->initServices(dirname(__DIR__));
     }
 }
