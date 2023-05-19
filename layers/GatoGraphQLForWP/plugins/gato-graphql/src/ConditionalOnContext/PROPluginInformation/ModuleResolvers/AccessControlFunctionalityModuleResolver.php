@@ -9,7 +9,11 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AccessControlFunctionalityModuleResolverTrait;
 
-class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
+/**
+ * Made abstract to disable
+ * @todo Completely remove this class
+ */
+abstract class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait {
         ModuleResolverTrait::hasDocumentation as upstreamHasDocumentation;
