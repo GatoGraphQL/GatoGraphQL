@@ -56,7 +56,7 @@ registerBlockType( 'gato-graphql/schema-config-global-fields', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GatoGraphQL\GatoGraphQLPRO\Services\Blocks\SchemaConfigGlobalFieldsBlock::ATTRIBUTE_NAME_SCHEMA_EXPOSURE
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigGlobalFieldsBlock::ATTRIBUTE_NAME_SCHEMA_EXPOSURE
 		 */
 		schemaExposure: {
 			type: 'string',
