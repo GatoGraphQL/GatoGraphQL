@@ -272,11 +272,14 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             $actionLinks = $this->pluginActionLinks[$pluginName] ?? [];
             if (str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')) {
                 $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug']);
-                $html = str_replace(
-                    $pluginCardClassname,
-                    $pluginCardClassname . ' plugin-card-highlight',
-                    $html
-                );
+                /**
+                 * Only replace the 1st occurrence, to avoid "access-control" also
+                 * being replaced in "access-control-visitor-ip"
+                 */
+                $pos = strpos($html, $pluginCardClassname);
+                if ($pos !== false) {
+                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-highlight', $pos, strlen($pluginCardClassname));
+                }
             }
         }
 
