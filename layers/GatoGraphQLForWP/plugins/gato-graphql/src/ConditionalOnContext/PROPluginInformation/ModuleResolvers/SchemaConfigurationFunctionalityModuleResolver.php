@@ -9,11 +9,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolverTrait;
 
-/**
- * Made abstract to disable
- * @todo Completely remove this class
- */
-abstract class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
+class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver implements PROPseudoModuleResolverInterface
 {
     use ModuleResolverTrait;
     use SchemaConfigurationFunctionalityModuleResolverTrait;
