@@ -4449,6 +4449,29 @@
                                                 }
                                             }
                                         ]
+                                    },
+                                    {
+                                        "name": "_appStateKeys",
+                                        "extensions": {
+                                            "isMutation": false,
+                                            "isSensitiveDataElement": false
+                                        },
+                                        "args": []
+                                    },
+                                    {
+                                        "name": "_appStateValue",
+                                        "extensions": {
+                                            "isMutation": false,
+                                            "isSensitiveDataElement": false
+                                        },
+                                        "args": [
+                                            {
+                                                "name": "name",
+                                                "extensions": {
+                                                    "isSensitiveDataElement": false
+                                                }
+                                            }
+                                        ]
                                     }
                                 ],
                                 "inputFields": null,
@@ -5733,6 +5756,29 @@
                                             },
                                             {
                                                 "name": "sort",
+                                                "extensions": {
+                                                    "isSensitiveDataElement": false
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "_appStateKeys",
+                                        "extensions": {
+                                            "isMutation": false,
+                                            "isSensitiveDataElement": false
+                                        },
+                                        "args": []
+                                    },
+                                    {
+                                        "name": "_appStateValue",
+                                        "extensions": {
+                                            "isMutation": false,
+                                            "isSensitiveDataElement": false
+                                        },
+                                        "args": [
+                                            {
+                                                "name": "name",
                                                 "extensions": {
                                                     "isSensitiveDataElement": false
                                                 }
@@ -7479,6 +7525,18 @@
                                         "page",
                                         "post"
                                     ],
+                                    "isOneOf": false
+                                },
+                                "fields": null,
+                                "inputFields": null,
+                                "enumValues": null
+                            },
+                            {
+                                "name": "DangerouslyNonSpecificScalar",
+                                "extensions": {
+                                    "elementName": "DangerouslyNonSpecificScalar",
+                                    "namespacedName": "DangerouslyNonSpecificScalar",
+                                    "possibleValues": null,
                                     "isOneOf": false
                                 },
                                 "fields": null,
@@ -16928,6 +16986,29 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "name": "_appStateKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "_appStateValue",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
                         }
                     ],
                     "inputFields": null,
@@ -18212,6 +18293,29 @@
                                 },
                                 {
                                     "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "_appStateKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "_appStateValue",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "name",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -19958,6 +20062,18 @@
                             "page",
                             "post"
                         ],
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "DangerouslyNonSpecificScalar",
+                    "extensions": {
+                        "elementName": "DangerouslyNonSpecificScalar",
+                        "namespacedName": "DangerouslyNonSpecificScalar",
+                        "possibleValues": null,
                         "isOneOf": false
                     },
                     "fields": null,

@@ -3,7 +3,6 @@
  */
 const MODULE = 'nested-mutations';
 
-
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
 const NPM_PACKAGE_VERSION = process.env.npm_package_version;
 const PACKAGE_TAG = NPM_PACKAGE_VERSION.endsWith('-dev') ? 'master' : NPM_PACKAGE_VERSION;

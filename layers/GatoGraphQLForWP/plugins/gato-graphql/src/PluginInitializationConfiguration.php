@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL;
 
 use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -172,6 +173,22 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => ComponentModelEnvironment::ENABLE_SELF_FIELD,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_SELF_FIELDS,
                 'option' => ModuleSettingOptions::DEFAULT_VALUE,
+            ],
+            // Expose global fields?
+            [
+                'class' => GraphQLServerModule::class,
+                'envVariable' => GraphQLServerEnvironment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::GLOBAL_FIELDS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::DEFAULT_SCHEMA_EXPOSURE,
+                'callback' => fn ($value) => $value !== GlobalFieldsSchemaExposure::DO_NOT_EXPOSE,
+            ],
+            // Expose global fields in root type only?
+            [
+                'class' => GraphQLServerModule::class,
+                'envVariable' => GraphQLServerEnvironment::EXPOSE_GLOBAL_FIELDS_IN_ROOT_TYPE_ONLY_IN_GRAPHQL_SCHEMA,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::GLOBAL_FIELDS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::DEFAULT_SCHEMA_EXPOSURE,
+                'callback' => fn ($value) => $value === GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
             ],
             // Enable nested mutations?
             // Only assign for Admin clients. For configuration it is assigned always, via the Fixed endpoint
@@ -624,6 +641,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
                     ],
                     GraphQLServerModule::class => [
+                        // Expose global fields
+                        GraphQLServerEnvironment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
+                        GraphQLServerEnvironment::EXPOSE_GLOBAL_FIELDS_IN_ROOT_TYPE_ONLY_IN_GRAPHQL_SCHEMA => false,
                         // Enable Nested mutations
                         GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => true,
                     ],
@@ -667,6 +687,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
                     ],
                     GraphQLServerModule::class => [
+                        // Expose global fields
+                        GraphQLServerEnvironment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
+                        GraphQLServerEnvironment::EXPOSE_GLOBAL_FIELDS_IN_ROOT_TYPE_ONLY_IN_GRAPHQL_SCHEMA => true,
                         // Enable Nested mutations
                         GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS => false,
                     ],

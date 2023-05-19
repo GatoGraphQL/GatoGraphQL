@@ -18223,6 +18223,16 @@
               "defaultValue": null
             },
             {
+              "name": "excerpt",
+              "description": "The excerpt of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "featuredImageID",
               "description": "The ID of the image to set as featured",
               "type": {
@@ -20295,6 +20305,16 @@
               "type": {
                 "kind": "INPUT_OBJECT",
                 "name": "PostContentInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excerpt",
+              "description": "The excerpt of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               },
               "defaultValue": null

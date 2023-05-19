@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -18,6 +19,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
+    public final const GLOBAL_FIELDS = Plugin::NAMESPACE . '\global-fields';
     public final const MUTATIONS = Plugin::NAMESPACE . '\mutations';
     public final const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
     public final const SCHEMA_EXPOSE_SENSITIVE_DATA = Plugin::NAMESPACE . '\schema-expose-sensitive-data';
@@ -27,6 +29,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     /**
      * Setting options
      */
+    public final const DEFAULT_SCHEMA_EXPOSURE = 'default-schema-exposure';
     public final const USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE = 'use-payloadable-mutations-default-value';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -49,6 +52,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return [
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_NAMESPACING,
+            self::GLOBAL_FIELDS,
             self::MUTATIONS,
             self::NESTED_MUTATIONS,
             self::SCHEMA_EXPOSE_SENSITIVE_DATA,
@@ -63,10 +67,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
-            case self::SCHEMA_CONFIGURATION:
-            case self::MUTATIONS:
-            case self::SCHEMA_NAMESPACING:
-                return [];
             case self::NESTED_MUTATIONS:
                 return [
                     [
@@ -82,6 +82,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'gato-graphql'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'gato-graphql'),
+            self::GLOBAL_FIELDS => \__('Global Fields', 'gato-graphql-pro'),
             self::MUTATIONS => \__('Mutations', 'gato-graphql'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'gato-graphql'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose Sensitive Data in the Schema', 'gato-graphql'),
@@ -96,6 +97,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'gato-graphql'),
             self::SCHEMA_NAMESPACING => \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'gato-graphql'),
+            self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'gato-graphql-pro'),
             self::MUTATIONS => \__('Modify data by executing mutations', 'gato-graphql'),
             self::NESTED_MUTATIONS => \__('Execute mutations from any type in the schema, not only from the root', 'gato-graphql'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose “sensitive” data elements in the schema', 'gato-graphql'),
@@ -108,6 +110,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return match ($module) {
+            self::GLOBAL_FIELDS => true,
             self::GLOBAL_ID_FIELD => true,
             default => parent::isPredefinedEnabledOrDisabled($module),
         };
@@ -130,6 +133,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $defaultValues = [
             self::SCHEMA_NAMESPACING => [
                 ModuleSettingOptions::DEFAULT_VALUE => false,
+            ],
+            self::GLOBAL_FIELDS => [
+                self::DEFAULT_SCHEMA_EXPOSURE => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
             ],
             self::MUTATIONS => [
                 self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
@@ -171,6 +177,27 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        } elseif ($module === self::GLOBAL_FIELDS) {
+            $globalFieldsSchemaExposureValues = [
+                GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('Do not expose', 'gato-graphql-pro'),
+                GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('Expose under the Root type only', 'gato-graphql-pro'),
+                GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('Expose under all types', 'gato-graphql-pro'),
+            ];
+            $option = self::DEFAULT_SCHEMA_EXPOSURE;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Schema exposure.', 'gato-graphql-pro'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Under what types to expose global fields.<br/>%s', 'gato-graphql-pro'),
+                    $defaultValueDesc
+                ),
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => $globalFieldsSchemaExposureValues,
             ];
         } elseif ($module === self::MUTATIONS) {
             $option = self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;

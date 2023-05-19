@@ -22,7 +22,7 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'gato-graphql-pro/schema-config-global-fields', {
+registerBlockType( 'gato-graphql/schema-config-global-fields', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
@@ -49,6 +49,19 @@ registerBlockType( 'gato-graphql-pro/schema-config-global-fields', {
 	 * These can be any of WordPress’ Dashicons, or a custom svg element.
 	 */
 	icon: 'admin-generic',
+
+	/**
+	 * Block default attributes.
+	 */
+	attributes: {
+		/**
+		 * Same attribute name as defined in
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigGlobalFieldsBlock::ATTRIBUTE_NAME_SCHEMA_EXPOSURE
+		 */
+		schemaExposure: {
+			type: 'string',
+		},
+	},
 
 	/**
 	 * Optional block extended support features.
