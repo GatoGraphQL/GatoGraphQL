@@ -9590,6 +9590,12 @@
                             }
                         },
                         {
+                            "name": "excerpt",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "featuredImageID",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -10556,6 +10562,12 @@
                         },
                         {
                             "name": "contentAs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "excerpt",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

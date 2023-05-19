@@ -8690,6 +8690,57 @@
                     },
                     "isDeprecated": false,
                     "deprecationReason": null
+                  },
+                  {
+                    "name": "_appStateKeys",
+                    "description": "Retrieve the keys in the application state",
+                    "args": [],
+                    "type": {
+                      "kind": "NON_NULL",
+                      "name": "[String!]!",
+                      "ofType": {
+                        "kind": "LIST",
+                        "name": "[String!]",
+                        "ofType": {
+                          "kind": "NON_NULL",
+                          "name": "String!",
+                          "ofType": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                          }
+                        }
+                      }
+                    },
+                    "isDeprecated": false,
+                    "deprecationReason": null
+                  },
+                  {
+                    "name": "_appStateValue",
+                    "description": "Retrieve the value of a certain property from the application state",
+                    "args": [
+                      {
+                        "name": "name",
+                        "description": "The name of the variable to retrieve from the application state",
+                        "type": {
+                          "kind": "NON_NULL",
+                          "name": "String!",
+                          "ofType": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                          }
+                        },
+                        "defaultValue": null
+                      }
+                    ],
+                    "type": {
+                      "kind": "SCALAR",
+                      "name": "DangerouslyNonSpecificScalar",
+                      "ofType": null
+                    },
+                    "isDeprecated": false,
+                    "deprecationReason": null
                   }
                 ],
                 "inputFields": null,
@@ -11324,6 +11375,57 @@
                           }
                         }
                       }
+                    },
+                    "isDeprecated": false,
+                    "deprecationReason": null
+                  },
+                  {
+                    "name": "_appStateKeys",
+                    "description": "Retrieve the keys in the application state",
+                    "args": [],
+                    "type": {
+                      "kind": "NON_NULL",
+                      "name": "[String!]!",
+                      "ofType": {
+                        "kind": "LIST",
+                        "name": "[String!]",
+                        "ofType": {
+                          "kind": "NON_NULL",
+                          "name": "String!",
+                          "ofType": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                          }
+                        }
+                      }
+                    },
+                    "isDeprecated": false,
+                    "deprecationReason": null
+                  },
+                  {
+                    "name": "_appStateValue",
+                    "description": "Retrieve the value of a certain property from the application state",
+                    "args": [
+                      {
+                        "name": "name",
+                        "description": "The name of the variable to retrieve from the application state",
+                        "type": {
+                          "kind": "NON_NULL",
+                          "name": "String!",
+                          "ofType": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                          }
+                        },
+                        "defaultValue": null
+                      }
+                    ],
+                    "type": {
+                      "kind": "SCALAR",
+                      "name": "DangerouslyNonSpecificScalar",
+                      "ofType": null
                     },
                     "isDeprecated": false,
                     "deprecationReason": null
@@ -14407,6 +14509,16 @@
                 "kind": "SCALAR",
                 "name": "CustomPostEnumString",
                 "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"page\"`, `\"post\"`.",
+                "fields": null,
+                "inputFields": null,
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+              },
+              {
+                "kind": "SCALAR",
+                "name": "DangerouslyNonSpecificScalar",
+                "description": "Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`).",
                 "fields": null,
                 "inputFields": null,
                 "interfaces": null,
@@ -31719,6 +31831,57 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "_appStateKeys",
+              "description": "Retrieve the keys in the application state",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[String!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[String!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "_appStateValue",
+              "description": "Retrieve the value of a certain property from the application state",
+              "args": [
+                {
+                  "name": "name",
+                  "description": "The name of the variable to retrieve from the application state",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DangerouslyNonSpecificScalar",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -34353,6 +34516,57 @@
                     }
                   }
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "_appStateKeys",
+              "description": "Retrieve the keys in the application state",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[String!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[String!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "_appStateValue",
+              "description": "Retrieve the value of a certain property from the application state",
+              "args": [
+                {
+                  "name": "name",
+                  "description": "The name of the variable to retrieve from the application state",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "String!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DangerouslyNonSpecificScalar",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -37436,6 +37650,16 @@
           "kind": "SCALAR",
           "name": "CustomPostEnumString",
           "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"page\"`, `\"post\"`.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
+          "name": "DangerouslyNonSpecificScalar",
+          "description": "Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`).",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
