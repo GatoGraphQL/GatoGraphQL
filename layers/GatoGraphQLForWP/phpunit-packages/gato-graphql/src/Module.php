@@ -15,8 +15,6 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PHPUnitForGatoGraphQL\DummySchema\Module::class,
-            \PHPUnitForGatoGraphQL\DummyWPSchema\Module::class,
             \PHPUnitForGatoGraphQL\WPFakerSchema\Module::class,
             \PHPUnitForGatoGraphQL\WebserverRequests\Module::class,
             \PoP\GuzzleHTTP\Module::class,

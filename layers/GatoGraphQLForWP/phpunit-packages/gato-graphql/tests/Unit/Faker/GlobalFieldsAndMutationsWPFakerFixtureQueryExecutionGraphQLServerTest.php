@@ -26,6 +26,8 @@ class GlobalFieldsAndMutationsWPFakerFixtureQueryExecutionGraphQLServerTest exte
         return [
             ...parent::getGraphQLServerModuleClasses(),
             ...[
+                \PHPUnitForGatoGraphQL\DummySchema\Module::class,
+                \PHPUnitForGatoGraphQL\DummyWPSchema\Module::class,
                 \PHPUnitForGatoGraphQL\GatoGraphQL\Module::class,
             ]
         ];
