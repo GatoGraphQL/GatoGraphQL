@@ -22,12 +22,12 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'gato-graphql-pro/schema-config-global-fields', {
+registerBlockType( 'gato-graphql/schema-config-global-fields', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Global Fields', 'gato-graphql-pro' ),
+	title: __( 'Global Fields', 'gato-graphql' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
@@ -35,7 +35,7 @@ registerBlockType( 'gato-graphql-pro/schema-config-global-fields', {
 	 */
 	description: __(
 		'Configure the schema exposure of global fields in the Schema Configuration',
-		'gato-graphql-pro'
+		'gato-graphql'
 	),
 
 	/**
