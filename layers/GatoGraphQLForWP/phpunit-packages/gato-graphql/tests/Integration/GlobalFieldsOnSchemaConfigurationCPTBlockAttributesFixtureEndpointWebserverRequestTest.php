@@ -44,6 +44,6 @@ class GlobalFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserve
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'gato-graphql-pro/schema-config-global-fields';
+        return 'gato-graphql/schema-config-global-fields';
     }
 }
