@@ -1791,8 +1791,6 @@ video/mp4
 
 <!-- wp:gato-graphql/schema-config-global-fields /-->
 
-<!-- wp:gato-graphql-pro/schema-config-access-control /-->
-
 <!-- wp:gato-graphql-pro/schema-config-schema-mode /-->
 
 <!-- wp:gato-graphql-pro/schema-config-cache-control /-->
@@ -1860,8 +1858,6 @@ video/mp4
 <!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
 
 <!-- wp:gato-graphql/schema-config-global-fields /-->
-
-<!-- wp:gato-graphql-pro/schema-config-access-control /-->
 
 <!-- wp:gato-graphql-pro/schema-config-schema-mode /-->
 
@@ -2249,8 +2245,6 @@ video/mp4
 
 <!-- wp:gato-graphql/schema-config-global-fields /-->
 
-<!-- wp:gato-graphql-pro/schema-config-access-control /-->
-
 <!-- wp:gato-graphql-pro/schema-config-schema-mode /-->
 
 <!-- wp:gato-graphql-pro/schema-config-cache-control /-->
@@ -2351,8 +2345,6 @@ video/mp4
 <!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
 
 <!-- wp:gato-graphql/schema-config-global-fields /-->
-
-<!-- wp:gato-graphql-pro/schema-config-access-control /-->
 
 <!-- wp:gato-graphql-pro/schema-config-schema-mode /-->
 
