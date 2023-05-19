@@ -142,7 +142,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function displayPROPluginInformationInMainPlugin(): bool
     {
         $envVariable = Environment::DISPLAY_PRO_PLUGIN_INFORMATION_IN_MAIN_PLUGIN;
-        $defaultValue = true;
+        $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
