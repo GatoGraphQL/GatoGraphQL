@@ -6,7 +6,11 @@ namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Serv
 
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers\AccessControlFunctionalityModuleResolver;
 
-class SchemaConfigAccessControlBlock extends AbstractSchemaConfigPROPluginPseudoBlock
+/**
+ * Made abstract to disable
+ * @todo Completely remove this class
+ */
+abstract class SchemaConfigAccessControlBlock extends AbstractSchemaConfigPROPluginPseudoBlock
 {
     use PROPluginBlockTrait;
 
