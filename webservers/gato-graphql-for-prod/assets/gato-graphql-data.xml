@@ -1789,8 +1789,6 @@ video/mp4
 
 <!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
 
-<!-- wp:gato-graphql/schema-config-global-fields /-->
-
 <!-- wp:gato-graphql-pro/schema-config-cache-control /-->
 
 <!-- wp:gato-graphql-pro/schema-config-field-deprecation /-->
@@ -1854,8 +1852,6 @@ video/mp4
 <!-- wp:gato-graphql/schema-config-schema-comment-meta /-->
 
 <!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
-
-<!-- wp:gato-graphql/schema-config-global-fields /-->
 
 <!-- wp:gato-graphql-pro/schema-config-cache-control /-->
 
@@ -2239,8 +2235,6 @@ video/mp4
 
 <!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
 
-<!-- wp:gato-graphql/schema-config-global-fields /-->
-
 <!-- wp:gato-graphql-pro/schema-config-cache-control /-->
 
 <!-- wp:gato-graphql-pro/schema-config-field-deprecation /-->
@@ -2337,8 +2331,6 @@ video/mp4
 <!-- wp:gato-graphql/schema-config-schema-comment-meta /-->
 
 <!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
-
-<!-- wp:gato-graphql/schema-config-global-fields /-->
 
 <!-- wp:gato-graphql-pro/schema-config-cache-control /-->
 
