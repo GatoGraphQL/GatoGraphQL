@@ -1,0 +1,14 @@
+query IntrospectionFieldArgGlobalFields {
+    __schema {
+        rootType: type(name: "Root") {
+            fields(includeGlobal: true) {
+                name
+            }
+        }
+        postType: type(name: "Post") {
+            fields(includeGlobal: true) {
+                name
+            }
+        }
+    }
+}
