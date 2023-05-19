@@ -1,9 +1,9 @@
-# Copyright (C) 2021 GraphQL API - Extension Demo
-# This file is distributed under the same license as the GraphQL API - Extension Demo package.
+# Copyright (C) 2021 Gato GraphQL - Extension Demo
+# This file is distributed under the same license as the Gato GraphQL - Extension Demo package.
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GraphQL API - Extension Demo\n"
+"Project-Id-Version: Gato GraphQL - Extension Demo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

@@ -1,9 +1,9 @@
-# Copyright (C) 2020 GraphQL API - Testing Schema
-# This file is distributed under the same license as the GraphQL API - Testing Schema package.
+# Copyright (C) 2020 Gato GraphQL - Testing Schema
+# This file is distributed under the same license as the Gato GraphQL - Testing Schema package.
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: GraphQL API - Testing Schema\n"
+"Project-Id-Version: Gato GraphQL - Testing Schema\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
