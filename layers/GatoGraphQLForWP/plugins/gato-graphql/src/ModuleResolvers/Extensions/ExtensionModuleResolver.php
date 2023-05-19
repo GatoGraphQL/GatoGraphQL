@@ -12,6 +12,7 @@ use GatoGraphQL\GatoGraphQL\Plugin;
 class ExtensionModuleResolver extends AbstractExtensionModuleResolver
 {
     public const GATO_GRAPHQL_PRO = Plugin::NAMESPACE . '\\extensions\\gato-graphql-pro';
+    public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\extensions\\access-control';
     public const ACCESS_CONTROL_VISITOR_IP = Plugin::NAMESPACE . '\\extensions\\access-control-visitor-ip';
     public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
@@ -23,6 +24,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return [
             self::GATO_GRAPHQL_PRO,
+            self::ACCESS_CONTROL,
             self::ACCESS_CONTROL_VISITOR_IP,
             self::GOOGLE_TRANSLATE,
             self::EVENTS_MANAGER,
@@ -33,6 +35,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return match ($module) {
             self::GATO_GRAPHQL_PRO => \__('Gato GraphQL PRO', 'gato-graphql'),
+            self::ACCESS_CONTROL => \__('Access Control', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Access Control: Visitor IP', 'gato-graphql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gato-graphql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gato-graphql'),
@@ -44,7 +47,8 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return match ($module) {
             self::GATO_GRAPHQL_PRO => \__('Superpower your app with PRO features: Access Control, Cache Control, Multiple Query Execution, and more.', 'gato-graphql'),
-            self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Gato GraphQL PRO is rquired).', 'gato-graphql'),
+            self::ACCESS_CONTROL => \__('Grant user access to schema elements via Access Control Lists.', 'gato-graphql'),
+            self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Access Control extension is rquired).', 'gato-graphql'),
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gato-graphql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gato-graphql'),
             default => parent::getDescription($module),
