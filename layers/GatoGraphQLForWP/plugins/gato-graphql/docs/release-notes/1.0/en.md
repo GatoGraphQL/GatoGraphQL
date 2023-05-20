@@ -76,6 +76,24 @@ Now, the Gutenberg template (containing the blocks) is not locked anymore, then 
 
 ![Removing and adding blocks in the Schema Configuration](../../images/schema-configuration-removing-and-adding-blocks.gif)
 
+## Implementation of standard custom scalar types
+
+Several standard custom scalar types have been implemented, so they are readily-available to be used in your GraphQL schema:
+
+- `Domain`
+- `IP`
+- `IPv4`
+- `IPv6`
+- `MACAddress`
+- `PhoneNumber`
+- `PositiveInt`
+- `StrictlyPositiveInt`
+- `PositiveFloat`
+- `StrictlyPositiveFloat`
+- `UUID`
+
+Please notice that these do not currently appear in the Interactive Schema client, as they are not being referenced anywhere within the WordPress model (as [defined by the spec](https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars), only types referenced by another type are reachable via introspection).
+
 ## Sort the Schema Configuration entries by name
 
 In the Custom Endpoint and Persisted Query editors, the Schema Configuration entries are now sorted by name:

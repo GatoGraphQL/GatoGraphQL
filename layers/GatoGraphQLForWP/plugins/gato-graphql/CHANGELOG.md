@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Reset settings, and choose to use restrictive or non-restrictive default settings
 - Added documentation page "Use Cases, Best Practices, and Recipes"
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
+- Implementation of standard custom scalar types
 - Sort the Schema Configuration entries by name
 - Configure returning a payload object or the mutated entity for mutations
 - Added "state" column to tables for Custom Endpoints and Persisted Queries
