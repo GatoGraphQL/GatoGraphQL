@@ -11,7 +11,6 @@ use GatoGraphQL\GatoGraphQL\Plugin;
  */
 class ModuleTypeResolver extends AbstractModuleTypeResolver
 {
-    public final const ACCESS_CONTROL = Plugin::NAMESPACE . '\access-control';
     public final const CLIENT = Plugin::NAMESPACE . '\client';
     public final const ENDPOINT = Plugin::NAMESPACE . '\endpoint';
     public final const ENDPOINT_CONFIGURATION = Plugin::NAMESPACE . '\endpoint-configuration';
@@ -37,7 +36,6 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public function getModuleTypesToResolve(): array
     {
         return [
-            self::ACCESS_CONTROL,
             self::CLIENT,
             self::ENDPOINT,
             self::ENDPOINT_CONFIGURATION,
@@ -58,7 +56,6 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public function getName(string $moduleType): string
     {
         return match ($moduleType) {
-            self::ACCESS_CONTROL => $this->__('Access Control', 'gato-graphql'),
             self::CLIENT => $this->__('Client', 'gato-graphql'),
             self::ENDPOINT => $this->__('Endpoint', 'gato-graphql'),
             self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'gato-graphql'),
