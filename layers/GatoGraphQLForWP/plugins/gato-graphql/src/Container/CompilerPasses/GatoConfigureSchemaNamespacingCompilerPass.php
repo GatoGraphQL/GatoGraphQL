@@ -24,6 +24,7 @@ class GatoConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchema
             \PoP\ComponentModel\Module::class,
             \PoP\Engine\Module::class,
             \PoPSchema\SchemaCommons\Module::class,
+            \PoPSchema\ExtendedSchemaCommons\Module::class,
         ];
     }
 }
