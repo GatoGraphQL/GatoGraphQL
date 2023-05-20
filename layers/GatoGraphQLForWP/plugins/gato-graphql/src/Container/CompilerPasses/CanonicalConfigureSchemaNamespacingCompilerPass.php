@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Container\CompilerPasses;
 
 use PoP\Root\Module\ModuleInterface;
 
-class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaNamespacingCompilerPass
+class CanonicalConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaNamespacingCompilerPass
 {
     /**
      * The entities from the WordPress data model (Post, User, Comment, etc)
@@ -24,18 +24,12 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
     protected function getModuleClasses(): array
     {
         return [
-            \GraphQLByPoP\GraphQLServer\Module::class,
-            \PoP\ComponentModel\Module::class,
-            \PoP\Engine\Module::class,
             \PoPCMSSchema\Categories\Module::class,
             \PoPCMSSchema\CommentMeta\Module::class,
             \PoPCMSSchema\CommentMutations\Module::class,
             \PoPCMSSchema\Comments\Module::class,
             \PoPCMSSchema\Taxonomies\Module::class,
             \PoPCMSSchema\CustomPostMutations\Module::class,
-            \PoPCMSSchema\SchemaCommons\Module::class,
-            \PoPSchema\SchemaCommons\Module::class,
-            \PoPCMSSchema\SchemaCommonsWP\Module::class,
             \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
             \PoPCMSSchema\CustomPostTagMutations\Module::class,
             \PoPCMSSchema\CustomPostMedia\Module::class,
@@ -79,10 +73,12 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPWPSchema\Meta\Module::class,
             \PoPWPSchema\Pages\Module::class,
             \PoPWPSchema\Posts\Module::class,
-            \PoPWPSchema\SchemaCommons\Module::class,
             \PoPWPSchema\TaxonomyMeta\Module::class,
             \PoPWPSchema\UserMeta\Module::class,
             \PoPWPSchema\Users\Module::class,
+            \PoPCMSSchema\SchemaCommons\Module::class,
+            \PoPCMSSchema\SchemaCommonsWP\Module::class,
+            \PoPWPSchema\SchemaCommons\Module::class,
         ];
     }
 }

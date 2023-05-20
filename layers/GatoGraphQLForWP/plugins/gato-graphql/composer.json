@@ -40,6 +40,7 @@
         "pop-cms-schema/user-roles-wp": "^0.11",
         "pop-cms-schema/user-state-mutations-wp": "^0.11",
         "pop-cms-schema/user-state-wp": "^0.11",
+        "pop-schema/extended-schema-commons": "^0.11",
         "pop-wp-schema/commentmeta": "^0.11",
         "pop-wp-schema/comments": "^0.11",
         "pop-wp-schema/custompostmeta": "^0.11",

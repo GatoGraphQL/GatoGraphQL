@@ -1,9 +1,9 @@
 {
-    "name": "getpop/guzzle-http",
+    "name": "pop-schema/extended-schema-commons",
     "type": "library",
-    "description": "Provide (scoped) access to Guzzle HTTP",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "guzzle-http"],
-    "homepage": "https://github.com/getpop/guzzle-http",
+    "description": "Code shared by the schema packages",
+    "keywords": ["extended-schema-commons"],
+    "homepage": "https://github.com/PoPSchema/extended-schema-commons",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -14,8 +14,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^0.11",
-        "guzzlehttp/guzzle": "^7.4"
+        "pop-schema/schema-commons": "^0.11"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -25,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoP\\GuzzleHTTP\\": "src"
+            "PoPSchema\\ExtendedSchemaCommons\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoP\\GuzzleHTTP\\": "tests"
+            "PoPSchema\\ExtendedSchemaCommons\\": "tests"
         }
     },
     "scripts": {

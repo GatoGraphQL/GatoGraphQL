@@ -30,6 +30,7 @@ class Module extends AbstractPluginModule
             \GraphQLByPoP\GraphQLClientsForWP\Module::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Module::class,
             \GraphQLByPoP\GraphQLServer\Module::class,
+            \PoPSchema\ExtendedSchemaCommons\Module::class,
             \PoP\GuzzleHTTP\Module::class,
             \PoPCMSSchema\CommentMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
