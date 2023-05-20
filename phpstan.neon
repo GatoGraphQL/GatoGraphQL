@@ -46,6 +46,7 @@ includes:
     - layers/GatoGraphQLForWP/phpunit-packages/dummy-wp-schema/phpstan.neon.dist
     - layers/Engine/packages/engine/phpstan.neon.dist
     - layers/Engine/packages/engine-wp/phpstan.neon.dist
+    - layers/Schema/packages/extended-schema-commons/phpstan.neon.dist
     - layers/GatoGraphQLForWP/plugins/extension-demo/phpstan.neon.dist
     - layers/GatoGraphQLForWP/packages/external-dependency-wrappers/phpstan.neon.dist
     - layers/Engine/packages/filestore/phpstan.neon.dist
