@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPSchema\ExtendedSchemaCommons\HelperServices\ArrayOrJSONObjectTraversionHelperServiceInterface:
+        class: \PoPSchema\ExtendedSchemaCommons\HelperServices\ArrayOrJSONObjectTraversionHelperService
+
+    PoPSchema\ExtendedSchemaCommons\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
