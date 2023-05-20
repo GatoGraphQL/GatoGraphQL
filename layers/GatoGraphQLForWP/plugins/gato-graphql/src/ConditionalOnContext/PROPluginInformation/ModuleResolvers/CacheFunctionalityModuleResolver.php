@@ -17,7 +17,6 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
     use PerformanceFunctionalityModuleResolverTrait;
 
     public final const CONFIGURATION_CACHE = Plugin::NAMESPACE . '\configuration-cache';
-    public final const SCHEMA_INTROSPECTION_CACHE = Plugin::NAMESPACE . '\schema-introspection-cache';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -38,7 +37,6 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
     {
         return [
             self::CONFIGURATION_CACHE,
-            self::SCHEMA_INTROSPECTION_CACHE,
         ];
     }
 
@@ -79,12 +77,6 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
         switch ($module) {
             case self::CONFIGURATION_CACHE:
                 return [];
-            case self::SCHEMA_INTROSPECTION_CACHE:
-                return [
-                    [
-                        $this->getModuleRegistry()->getInverseDependency(SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA),
-                    ],
-                ];
         }
         return parent::getDependedModuleLists($module);
     }
@@ -93,7 +85,6 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
     {
         return match ($module) {
             self::CONFIGURATION_CACHE => \__('Configuration Cache', 'gato-graphql'),
-            self::SCHEMA_INTROSPECTION_CACHE => \__('Schema Introspection Cache', 'gato-graphql'),
             default => $module,
         };
     }
@@ -103,17 +94,7 @@ class CacheFunctionalityModuleResolver extends AbstractFunctionalityModuleResolv
         switch ($module) {
             case self::CONFIGURATION_CACHE:
                 return \__('Cache the generated application configuration to disk', 'gato-graphql');
-            case self::SCHEMA_INTROSPECTION_CACHE:
-                return \__('Cache the generated schema to disk when doing introspection', 'gato-graphql');
         }
         return parent::getDescription($module);
-    }
-
-    public function isPredefinedEnabledOrDisabled(string $module): ?bool
-    {
-        return match ($module) {
-            self::SCHEMA_INTROSPECTION_CACHE => null,
-            default => $this->upstreamIsPredefinedEnabledOrDisabled($module),
-        };
     }
 }
