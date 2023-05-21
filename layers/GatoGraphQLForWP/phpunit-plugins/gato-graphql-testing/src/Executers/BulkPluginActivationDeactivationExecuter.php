@@ -88,10 +88,7 @@ class BulkPluginActivationDeactivationExecuter
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
-            $extensionModules = $moduleResolver->getModulesToResolve();
-            foreach ($extensionModules as $extensionModule) {
-                $gatoGraphQLExtensions[] = $moduleResolver->getGatoGraphQLExtensionSlug($extensionModule);
-            }
+            $gatoGraphQLExtensions[] = $moduleResolver->getGatoGraphQLExtensionSlug($module);
         }
 
         // Load the WordPress file with the functions
