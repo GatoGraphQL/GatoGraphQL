@@ -47,7 +47,7 @@ class BulkPluginActivationDeactivationExecuter
         /** @var string[] $actions */
         $executeBulkPluginActivation = in_array(Actions::EXECUTE_BULK_PLUGIN_ACTIVATION, $actions);
         $executeBulkPluginDeactivation = in_array(Actions::EXECUTE_BULK_PLUGIN_DEACTIVATION, $actions);
-        if (!$executeBulkPluginActivation && $executeBulkPluginDeactivation) {
+        if (!$executeBulkPluginActivation && !$executeBulkPluginDeactivation) {
             return;
         }
 
