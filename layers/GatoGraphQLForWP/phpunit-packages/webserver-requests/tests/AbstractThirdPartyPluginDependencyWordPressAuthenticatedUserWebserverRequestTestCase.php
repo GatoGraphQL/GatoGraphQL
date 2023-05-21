@@ -31,7 +31,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkDeactivatePlugins(
-                $this->getBulkPluginDeactivationPluginsToSkip($dataName)
+                $this->getBulkPluginDeactivationPluginFilesToSkip($dataName)
             );
         }
     }
@@ -133,11 +133,12 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @return string[]
      */
-    protected function getBulkPluginDeactivationPluginsToSkip(string $dataName): array
+    protected function getBulkPluginDeactivationPluginFilesToSkip(string $dataName): array
     {
         $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':only-one-enabled'));
+        $pluginFile = $pluginName . '.php';
         return [
-            $pluginName,
+            $pluginFile,
         ];
     }
 
