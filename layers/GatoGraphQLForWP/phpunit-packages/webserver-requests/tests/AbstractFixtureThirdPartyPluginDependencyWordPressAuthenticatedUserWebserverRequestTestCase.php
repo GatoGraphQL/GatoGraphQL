@@ -53,7 +53,7 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             $pluginOnlyOneEnabledGraphQLResponse = null;
             $pluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
             if (\file_exists($pluginOnlyOneEnabledGraphQLResponseFile)) {
-                $pluginOnlyOneEnabledGraphQLResponse = file_get_contents($pluginDisabledGraphQLResponseFile);
+                $pluginOnlyOneEnabledGraphQLResponse = file_get_contents($pluginOnlyOneEnabledGraphQLResponseFile);
             }
 
             // The plugin name is created by the folder (plugin vendor) + fileName (plugin name)
