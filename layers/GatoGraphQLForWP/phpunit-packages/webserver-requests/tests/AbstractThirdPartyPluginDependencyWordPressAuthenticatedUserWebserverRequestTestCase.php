@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
+
 /**
  * Test that enabling/disabling a required 3rd-party plugin works well.
  *
@@ -25,6 +28,10 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+        } elseif (str_ends_with($dataName, ':only-one-enabled')) {
+            $this->executeEndpointToBulkDeactivatePlugins(
+                $this->getBulkPluginDeactivationPluginsToSkip($dataName)
+            );
         }
     }
 
@@ -36,6 +43,8 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+        } elseif (str_ends_with($dataName, ':only-one-enabled')) {
+            $this->executeEndpointToBulkActivatePlugins();
         }
 
         parent::tearDown();
@@ -92,6 +101,55 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 $pluginName,
                 $status
             ),
+            static::getRESTEndpointRequestOptions()
+        );
+    }
+
+    /**
+     * @param string[] $skipDeactivatingPlugins
+     */
+    protected function executeEndpointToBulkDeactivatePlugins(
+        array $skipDeactivatingPlugins,
+    ): void {
+        $endpointParams = [
+            Actions::EXECUTE_BULK_PLUGIN_DEACTIVATION,
+            Params::SKIP_DEACTIVATING_PLUGINS => $skipDeactivatingPlugins,
+        ];
+        $this->executeEndpointViaParamsAgainstWPAdmin($endpointParams);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getBulkPluginDeactivationPluginsToSkip(string $dataName): array
+    {
+        $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':only-one-disabled'));
+        return [
+            $pluginName,
+        ];
+    }
+
+    protected function executeEndpointToBulkActivatePlugins(): void
+    {
+        $endpointParams = [
+            Actions::EXECUTE_BULK_PLUGIN_ACTIVATION,
+        ];
+        $this->executeEndpointViaParamsAgainstWPAdmin($endpointParams);
+    }
+
+    /**
+     * @param array<string,mixed> $endpointParams
+     */
+    protected function executeEndpointViaParamsAgainstWPAdmin(
+        array $endpointParams,
+    ): void {
+        $client = static::getClient();
+        $endpoint = add_query_arg(
+            $endpointParams,
+            static::getWebserverHomeURL() . '/' . 'wp-admin/index.php'
+        );
+        $client->post(
+            $endpoint,
             static::getRESTEndpointRequestOptions()
         );
     }
