@@ -94,6 +94,9 @@ class BulkPluginActivationDeactivationExecuter
             }
         }
 
+        // Load the WordPress file with the functions
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
         if ($executeBulkPluginDeactivation) {
             $gatoGraphQLExtensionsToDeactivate = array_diff(
                 $gatoGraphQLExtensions,
