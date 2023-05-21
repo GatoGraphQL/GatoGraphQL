@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 
 interface ExtensionModuleResolverInterface extends ModuleResolverInterface
 {
+    public function getGatoGraphQLExtensionFilename(string $module): string;
     public function getGatoGraphQLExtensionSlug(string $module): string;
     public function getWebsiteURL(string $module): string;
     public function getLogoURL(string $module): string;
