@@ -73,10 +73,10 @@ class BulkPluginActivationDeactivationExecuter
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
-            $gatoGraphQLExtensions = [
-                ...$gatoGraphQLExtensions,
-                $moduleResolver->getModulesToResolve()
-            ];
+            $extensionModules = $moduleResolver->getModulesToResolve();
+            foreach ($extensionModules as $extensionModule) {
+                $gatoGraphQLExtension[] = $moduleResolver->getGatoGraphQLExtensionSlug($extensionModule);
+            }
         }
 
         if ($executeBulkPluginDeactivation) {
