@@ -135,7 +135,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      */
     protected function getBulkPluginDeactivationPluginsToSkip(string $dataName): array
     {
-        $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':only-one-disabled'));
+        $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':only-one-enabled'));
         return [
             $pluginName,
         ];
