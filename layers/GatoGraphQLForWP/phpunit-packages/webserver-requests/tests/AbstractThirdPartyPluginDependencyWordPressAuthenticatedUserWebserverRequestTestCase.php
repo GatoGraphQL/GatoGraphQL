@@ -72,6 +72,15 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 [],
                 $pluginEntry['query'],
             ];
+            if (isset($pluginEntry['response-only-one-enabled'])) {
+                $providerEntries[$pluginName . ':only-one-enabled'] = [
+                    'application/json',
+                    $pluginEntry['response-only-one-enabled'],
+                    $endpoint,
+                    [],
+                    $pluginEntry['query'],
+                ];
+            }
         }
         return $providerEntries;
     }
