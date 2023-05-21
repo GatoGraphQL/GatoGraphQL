@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoP\Root\Constants\HookNames;
 use RuntimeException;
 
 /**
@@ -31,18 +32,31 @@ class BulkPluginActivationDeactivationExecuter
     {
         \add_action(
             PluginAppHooks::INITIALIZE_APP,
-            $this->maybeExecute(...),
+            $this->addHooks(...),
             PluginLifecyclePriorities::INITIALIZE_APP
         );
     }
 
-    protected function maybeExecute(): void
+    public function addHooks(string $pluginAppGraphQLServerName): void
     {
-        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
-        $actions = $_GET['actions'] ?? null;
-        if ($actions === null || !is_array($actions)) {
+        if ($pluginAppGraphQLServerName !== PluginAppGraphQLServerNames::EXTERNAL) {
             return;
         }
+
+        App::addAction(
+            HookNames::APPLICATION_READY,
+            $this->maybeExecute(...)
+        );
+    }
+
+    protected function maybeExecute(): void
+    {        
+        if (!App::hasState('actions')) {
+            return;
+        }
+        
+        /** @var string[] */
+        $actions = App::getState('actions');
 
         /** @var string[] $actions */
         $executeBulkPluginActivation = in_array(Actions::EXECUTE_BULK_PLUGIN_ACTIVATION, $actions);
@@ -52,8 +66,7 @@ class BulkPluginActivationDeactivationExecuter
         }
 
         if ($executeBulkPluginDeactivation) {
-            $skipDeactivatingPlugins = $_GET[Params::SKIP_DEACTIVATING_PLUGINS];
-            if ($skipDeactivatingPlugins === null || !is_array($skipDeactivatingPlugins)) {
+            if (!App::getRequest()->query->has(Params::SKIP_DEACTIVATING_PLUGINS)) {
                 throw new RuntimeException(
                     sprintf(
                         \__('Must provide parameter "%s" when bulk deactivating plugins'),
@@ -61,6 +74,8 @@ class BulkPluginActivationDeactivationExecuter
                     ),
                 );
             }
+            /** @var string[] */
+            $skipDeactivatingPlugins = App::getRequest()->query->all()[Params::SKIP_DEACTIVATING_PLUGINS];
         }
 
         // Obtain the list of all the Gato GraphQL Extensions
