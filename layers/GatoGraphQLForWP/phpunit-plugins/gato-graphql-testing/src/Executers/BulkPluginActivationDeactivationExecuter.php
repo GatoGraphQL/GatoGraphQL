@@ -90,7 +90,7 @@ class BulkPluginActivationDeactivationExecuter
             }
             $extensionModules = $moduleResolver->getModulesToResolve();
             foreach ($extensionModules as $extensionModule) {
-                $gatoGraphQLExtension[] = $moduleResolver->getGatoGraphQLExtensionSlug($extensionModule);
+                $gatoGraphQLExtensions[] = $moduleResolver->getGatoGraphQLExtensionSlug($extensionModule);
             }
         }
 
