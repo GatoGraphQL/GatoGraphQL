@@ -82,13 +82,13 @@ class BulkPluginActivationDeactivationExecuter
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(true, false, false);
         /** @var string[] */
-        $gatoGraphQLExtensions = [];
+        $gatoGraphQLExtensionPluginFiles = [];
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
-            $gatoGraphQLExtensions[] = $moduleResolver->getGatoGraphQLExtensionFilename($module);
+            $gatoGraphQLExtensionPluginFiles[] = $moduleResolver->getGatoGraphQLExtensionPluginFile($module);
         }
 
         // Load the WordPress file with the functions
@@ -96,7 +96,7 @@ class BulkPluginActivationDeactivationExecuter
 
         if ($executeBulkPluginDeactivation) {
             $gatoGraphQLExtensionsToDeactivate = array_diff(
-                $gatoGraphQLExtensions,
+                $gatoGraphQLExtensionPluginFiles,
                 $skipDeactivatingPlugins
             );
             \deactivate_plugins($gatoGraphQLExtensionsToDeactivate);
@@ -105,10 +105,10 @@ class BulkPluginActivationDeactivationExecuter
                 implode('", "', $gatoGraphQLExtensionsToDeactivate)
             );
         } else {
-            \activate_plugins($gatoGraphQLExtensions);
+            \activate_plugins($gatoGraphQLExtensionPluginFiles);
             $message = sprintf(
                 \__('Activated plugins: "%s"'),
-                implode('", "', $gatoGraphQLExtensions)
+                implode('", "', $gatoGraphQLExtensionPluginFiles)
             );
         }
         

@@ -51,7 +51,7 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
         return true;
     }
 
-    public function getGatoGraphQLExtensionFilename(string $module): string
+    public function getGatoGraphQLExtensionPluginFile(string $module): string
     {
         $pluginSlug = 'gato-graphql-' . $this->getSlug($module);
         return sprintf(
