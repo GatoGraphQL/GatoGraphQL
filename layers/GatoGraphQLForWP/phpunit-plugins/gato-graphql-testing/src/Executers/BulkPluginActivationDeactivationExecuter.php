@@ -113,6 +113,6 @@ class BulkPluginActivationDeactivationExecuter
         }
 
         // There's no need to keep execution, objective achieved!
-        // $this->outputJSONResponseAndExit(['message' => $message]);
+        $this->outputJSONResponseAndExit(['message' => $message]);
     }
 }
