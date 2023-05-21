@@ -66,16 +66,16 @@ class BulkPluginActivationDeactivationExecuter
         }
 
         if ($executeBulkPluginDeactivation) {
-            if (!App::getRequest()->query->has(Params::SKIP_DEACTIVATING_PLUGINS)) {
+            if (!App::getRequest()->query->has(Params::SKIP_DEACTIVATING_PLUGIN_FILES)) {
                 throw new RuntimeException(
                     sprintf(
                         \__('Must provide parameter "%s" when bulk deactivating plugins'),
-                        Params::SKIP_DEACTIVATING_PLUGINS
+                        Params::SKIP_DEACTIVATING_PLUGIN_FILES
                     ),
                 );
             }
             /** @var string[] */
-            $skipDeactivatingPlugins = App::getRequest()->query->all()[Params::SKIP_DEACTIVATING_PLUGINS];
+            $skipDeactivatingPlugins = App::getRequest()->query->all()[Params::SKIP_DEACTIVATING_PLUGIN_FILES];
         }
 
         // Obtain the list of all the Gato GraphQL Extensions

@@ -116,16 +116,16 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     }
 
     /**
-     * @param string[] $skipDeactivatingPlugins
+     * @param string[] $skipDeactivatingPluginFiles
      */
     protected function executeEndpointToBulkDeactivatePlugins(
-        array $skipDeactivatingPlugins,
+        array $skipDeactivatingPluginFiles,
     ): void {
         $endpointParams = [
             'actions' => [
                 Actions::EXECUTE_BULK_PLUGIN_DEACTIVATION,
             ],
-            Params::SKIP_DEACTIVATING_PLUGINS => $skipDeactivatingPlugins,
+            Params::SKIP_DEACTIVATING_PLUGIN_FILES => $skipDeactivatingPluginFiles,
         ];
         $this->executeEndpointViaParamsAgainstWPAdmin($endpointParams);
     }
