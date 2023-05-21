@@ -6,6 +6,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 /**
  * Test that enabling/disabling a required 3rd-party plugin works well.
@@ -157,7 +158,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         array $endpointParams,
     ): void {
         $client = static::getClient();
-        $endpoint = add_query_arg(
+        $endpoint = GeneralUtils::addQueryArgs(
             $endpointParams,
             static::getWebserverHomeURL() . '/' . 'wp-admin/index.php'
         );
