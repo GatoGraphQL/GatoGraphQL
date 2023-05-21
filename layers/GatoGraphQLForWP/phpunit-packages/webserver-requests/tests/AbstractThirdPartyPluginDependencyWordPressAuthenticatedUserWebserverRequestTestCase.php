@@ -112,7 +112,9 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         array $skipDeactivatingPlugins,
     ): void {
         $endpointParams = [
-            Actions::EXECUTE_BULK_PLUGIN_DEACTIVATION,
+            'actions' => [
+                Actions::EXECUTE_BULK_PLUGIN_DEACTIVATION,
+            ],
             Params::SKIP_DEACTIVATING_PLUGINS => $skipDeactivatingPlugins,
         ];
         $this->executeEndpointViaParamsAgainstWPAdmin($endpointParams);
@@ -132,7 +134,9 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     protected function executeEndpointToBulkActivatePlugins(): void
     {
         $endpointParams = [
-            Actions::EXECUTE_BULK_PLUGIN_ACTIVATION,
+            'actions' => [
+                Actions::EXECUTE_BULK_PLUGIN_ACTIVATION,
+            ],
         ];
         $this->executeEndpointViaParamsAgainstWPAdmin($endpointParams);
     }
