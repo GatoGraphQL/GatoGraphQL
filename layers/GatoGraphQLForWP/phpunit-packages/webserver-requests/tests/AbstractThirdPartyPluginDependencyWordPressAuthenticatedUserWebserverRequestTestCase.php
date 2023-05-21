@@ -163,9 +163,10 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             $endpointParams,
             static::getWebserverHomeURL() . '/' . 'wp-admin/index.php'
         );
+        $options = static::getRESTEndpointRequestOptions();
         $client->post(
             $endpoint,
-            static::getRESTEndpointRequestOptions()
+            $options
         );
     }
 }
