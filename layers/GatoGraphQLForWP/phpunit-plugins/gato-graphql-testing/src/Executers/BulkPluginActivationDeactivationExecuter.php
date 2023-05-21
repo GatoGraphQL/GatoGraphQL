@@ -51,6 +51,18 @@ class BulkPluginActivationDeactivationExecuter
             return;
         }
 
+        if ($executeBulkPluginDeactivation) {
+            $skipDeactivatingPlugins = $_GET[Params::SKIP_DEACTIVATING_PLUGINS];
+            if ($skipDeactivatingPlugins === null || !is_array($skipDeactivatingPlugins)) {
+                throw new RuntimeException(
+                    sprintf(
+                        \__('Must provide parameter "%s" when bulk deactivating plugins'),
+                        Params::SKIP_DEACTIVATING_PLUGINS
+                    ),
+                );
+            }
+        }
+
         // Obtain the list of all the Gato GraphQL Extensions
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(true, false, false);
@@ -77,33 +89,5 @@ class BulkPluginActivationDeactivationExecuter
         
         // There's no need to keep execution, objective achieved!
         $this->outputJSONResponseAndExit(['message' => $message]);
-    }
-
-    protected function executeBulkPluginDeactivation(): void
-    {
-        $skipDeactivatingPlugins = $_GET[Params::SKIP_DEACTIVATING_PLUGINS];
-        if ($skipDeactivatingPlugins === null || !is_array($skipDeactivatingPlugins)) {
-            throw new RuntimeException(
-                sprintf(
-                    \__('Must provide parameter "%s" when bulk deactivating plugins'),
-                    Params::SKIP_DEACTIVATING_PLUGINS
-                ),
-            );
-        }
-
-    }
-
-    protected function executeBulkPluginActivation(): void
-    {
-        $skipDeactivatingPlugins = $_GET[Params::SKIP_DEACTIVATING_PLUGINS];
-        if ($skipDeactivatingPlugins === null || !is_array($skipDeactivatingPlugins)) {
-            throw new RuntimeException(
-                sprintf(
-                    \__('Must provide parameter "%s" when bulk deactivating plugins'),
-                    Params::SKIP_DEACTIVATING_PLUGINS
-                ),
-            );
-        }
-
     }
 }
