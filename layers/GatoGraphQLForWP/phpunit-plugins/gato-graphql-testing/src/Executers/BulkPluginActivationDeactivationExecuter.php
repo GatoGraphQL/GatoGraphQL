@@ -50,11 +50,11 @@ class BulkPluginActivationDeactivationExecuter
     }
 
     protected function maybeExecute(): void
-    {        
+    {
         if (!App::hasState('actions')) {
             return;
         }
-        
+
         /** @var string[] */
         $actions = App::getState('actions');
 
@@ -111,7 +111,7 @@ class BulkPluginActivationDeactivationExecuter
                 implode('", "', $gatoGraphQLExtensionPluginFiles)
             );
         }
-        
+
         // There's no need to keep execution, objective achieved!
         // $this->outputJSONResponseAndExit(['message' => $message]);
     }
