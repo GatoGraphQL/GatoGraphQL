@@ -85,10 +85,16 @@ class BulkPluginActivationDeactivationExecuter
                 $skipDeactivatingPlugins
             );
             \deactivate_plugins($gatoGraphQLExtensionsToDeactivate);
-            $message = \__('Plugins deactivated successfully');
+            $message = sprintf(
+                \__('Deactivated plugins: "%s"'),
+                implode('", "', $gatoGraphQLExtensionsToDeactivate)
+            );
         } else {
             \activate_plugins($gatoGraphQLExtensions);
-            $message = \__('Plugins activated successfully');
+            $message = sprintf(
+                \__('Activated plugins: "%s"'),
+                implode('", "', $gatoGraphQLExtensions)
+            );
         }
         
         // There's no need to keep execution, objective achieved!
