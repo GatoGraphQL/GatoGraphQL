@@ -49,13 +49,21 @@ trait GraphQLServerTestExecuterTrait
      */
     protected function outputArtificialErrorAsJSONResponse(string $errorMessage): never
     {
+        $this->outputJSONResponseAndExit(['artificialError' => $errorMessage]);
+    }
+
+    /**
+     * @param array<string,mixed> $json
+     */
+    protected function outputJSONResponseAndExit(array $json): never
+    {
         header(sprintf(
             '%s: %s',
             'Content-Type',
             'application/json'
         ));
         /** @var string */
-        $jsonResponse = json_encode(['artificialError' => $errorMessage]);
+        $jsonResponse = json_encode($json);
         _e($jsonResponse);
         exit;
     }
