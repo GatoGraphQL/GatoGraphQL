@@ -80,10 +80,14 @@ class BulkPluginActivationDeactivationExecuter
         }
 
         if ($executeBulkPluginDeactivation) {
-            $this->executeBulkPluginDeactivation($gatoGraphQLExtensions);
+            $gatoGraphQLExtensionsToDeactivate = array_diff(
+                $gatoGraphQLExtensions,
+                $skipDeactivatingPlugins
+            );
+            \deactivate_plugins($gatoGraphQLExtensionsToDeactivate);
             $message = \__('Plugins deactivated successfully');
         } else {
-            $this->executeBulkPluginActivation($gatoGraphQLExtensions);
+            \activate_plugins($gatoGraphQLExtensions);
             $message = \__('Plugins activated successfully');
         }
         
