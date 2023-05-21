@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -164,6 +165,19 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             static::getWebserverHomeURL() . '/' . 'wp-admin/index.php'
         );
         $options = static::getRESTEndpointRequestOptions();
+        /**
+         * If "query" is set in the options, it will override
+         * the params in the URL, so transfer them there
+         */
+        if (isset($options[RequestOptions::QUERY])) {
+            /** @var array<string,mixed> */
+            $optionsQuery = $options[RequestOptions::QUERY];
+            $endpoint = GeneralUtils::addQueryArgs(
+                $optionsQuery,
+                $endpoint
+            );
+            unset($options[RequestOptions::QUERY]);
+        }
         $client->post(
             $endpoint,
             $options
