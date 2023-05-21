@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\BulkPluginActivationDeactivationExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GatoGraphQLAdminEndpointsTestExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GraphQLServerNotReadyInternalGraphQLServerTestExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\InternalGraphQLServerTestExecuter;
@@ -45,6 +46,7 @@ class Plugin
         new GraphQLServerNotReadyInternalGraphQLServerTestExecuter();
         new GatoGraphQLAdminEndpointsTestExecuter();
         new WPCronTestExecuter();
+        new BulkPluginActivationDeactivationExecuter();
 
         /**
          * Executing `flush_rewrite_rules` at the end of the execution

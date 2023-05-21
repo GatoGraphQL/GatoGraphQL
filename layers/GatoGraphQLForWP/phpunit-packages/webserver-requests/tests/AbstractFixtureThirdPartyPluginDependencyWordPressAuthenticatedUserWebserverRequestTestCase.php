@@ -50,6 +50,11 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             if (!\file_exists($pluginDisabledGraphQLResponseFile)) {
                 $this->throwFileNotExistsException($pluginDisabledGraphQLResponseFile);
             }
+            $pluginOnlyOneEnabledGraphQLResponse = null;
+            $pluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
+            if (\file_exists($pluginOnlyOneEnabledGraphQLResponseFile)) {
+                $pluginOnlyOneEnabledGraphQLResponse = file_get_contents($pluginOnlyOneEnabledGraphQLResponseFile);
+            }
 
             // The plugin name is created by the folder (plugin vendor) + fileName (plugin name)
             $pluginVendor = substr($filePath, strlen($fixtureFolder . '/'));
@@ -59,6 +64,9 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                 'response-enabled' => file_get_contents($pluginEnabledGraphQLResponseFile),
                 'response-disabled' => file_get_contents($pluginDisabledGraphQLResponseFile),
             ];
+            if ($pluginOnlyOneEnabledGraphQLResponse !== null) {
+                $pluginEntries[$pluginName]['response-only-one-enabled'] = $pluginOnlyOneEnabledGraphQLResponse;
+            }
         }
         return $this->customizePluginNameEntries($pluginEntries);
     }
