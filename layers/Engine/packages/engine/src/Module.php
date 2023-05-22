@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\Engine;
 
-use PoP\Root\Module\ModuleInterface;
+use PoP\ComponentModel\App;
+use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
+use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -41,5 +43,17 @@ class Module extends AbstractModule
         $this->initServices(dirname(__DIR__));
         $this->initServices(dirname(__DIR__), '/Overrides');
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
+
+        // Conditional packages
+        try {
+            if (class_exists(CacheControlModule::class) && App::getModule(CacheControlModule::class)->isEnabled()) {
+                $this->initSchemaServices(
+                    dirname(__DIR__),
+                    $skipSchema || in_array(CacheControlModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/CacheControl'
+                );
+            }
+        } catch (ComponentNotExistsException) {
+        }
     }
 }
