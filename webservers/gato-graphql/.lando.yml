@@ -44,8 +44,6 @@ services:
         - >-
           ../../layers/Backbone/packages/php-hooks:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-backbone/php-hooks
         - >-
-          ../../layers/Engine/packages/cache-control:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/cache-control
-        - >-
           ../../layers/Engine/packages/component-model:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/component-model
         - >-
           ../../layers/Engine/packages/componentrouting:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/componentrouting
