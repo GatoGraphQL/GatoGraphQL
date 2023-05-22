@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Container\CompilerPasses;
 
 use PoP\Root\Module\ModuleInterface;
 
-class CanonicalConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaNamespacingCompilerPass
+class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaNamespacingCompilerPass
 {
     /**
      * The entities from the WordPress data model (Post, User, Comment, etc)
@@ -18,12 +18,25 @@ class CanonicalConfigureSchemaNamespacingCompilerPass extends AbstractConfigureS
     }
 
     /**
+     * Also include the Gato-owned schema as canonical,
+     * because it includes classes such as `ErrorPayload`
+     * or `IdentifiableObject` which are not nice to
+     * prepend with `Gato_`.
+     *
      * @return string[]
      * @phpstan-return array<class-string<ModuleInterface>>
      */
     protected function getModuleClasses(): array
     {
         return [
+            // Gato-owned schema
+            \GraphQLByPoP\GraphQLServer\Module::class,
+            \PoP\ComponentModel\Module::class,
+            \PoP\Engine\Module::class,
+            \PoPSchema\SchemaCommons\Module::class,
+            \PoPSchema\ExtendedSchemaCommons\Module::class,
+
+            // WordPress schema
             \PoPCMSSchema\Categories\Module::class,
             \PoPCMSSchema\CommentMeta\Module::class,
             \PoPCMSSchema\CommentMutations\Module::class,
