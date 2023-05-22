@@ -56,7 +56,6 @@
         }
     },
     "replace": {
-        "getpop/cache-control": "^0.11",
         "getpop/component-model": "^0.11",
         "getpop/componentrouting": "^0.11",
         "getpop/definitions": "^0.11",

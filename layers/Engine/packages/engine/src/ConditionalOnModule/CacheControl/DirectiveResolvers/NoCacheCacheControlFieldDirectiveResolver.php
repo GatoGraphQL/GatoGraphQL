@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UserState\DirectiveResolvers;
+namespace PoP\Engine\ConditionalOnModule\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlFieldDirectiveResolver;
 
@@ -14,8 +14,9 @@ class NoCacheCacheControlFieldDirectiveResolver extends AbstractCacheControlFiel
     public function getFieldNamesToApplyTo(): array
     {
         return [
-            'me',
-            'isUserLoggedIn',
+            '_appState',
+            '_appStateKeys',
+            '_appStateValue',
         ];
     }
 

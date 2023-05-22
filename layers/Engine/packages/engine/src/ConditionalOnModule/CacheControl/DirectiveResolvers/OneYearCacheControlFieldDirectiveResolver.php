@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\DirectiveResolvers;
+namespace PoP\Engine\ConditionalOnModule\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlFieldDirectiveResolver;
 
-class NoCacheCacheControlFieldDirectiveResolver extends AbstractCacheControlFieldDirectiveResolver
+class OneYearCacheControlFieldDirectiveResolver extends AbstractCacheControlFieldDirectiveResolver
 {
     /**
      * @return string[]
@@ -14,15 +14,14 @@ class NoCacheCacheControlFieldDirectiveResolver extends AbstractCacheControlFiel
     public function getFieldNamesToApplyTo(): array
     {
         return [
-            'var',
-            'context',
-            'time',
+            'id',
+            'globalID',
         ];
     }
 
     public function getMaxAge(): ?int
     {
-        // Do not cache
-        return 0;
+        // One year = 315360000 seconds
+        return 315360000;
     }
 }

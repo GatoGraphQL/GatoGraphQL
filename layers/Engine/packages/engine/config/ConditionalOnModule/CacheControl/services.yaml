@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\Engine\ConditionalOnModule\CacheControl\Hooks\:
+        resource: '../../../src/ConditionalOnModule/CacheControl/Hooks/*'
