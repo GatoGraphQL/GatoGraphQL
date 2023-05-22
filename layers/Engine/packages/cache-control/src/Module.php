@@ -19,11 +19,6 @@ class Module extends AbstractModule
         ];
     }
 
-    protected function resolveEnabled(): bool
-    {
-        return !Environment::disableCacheControl();
-    }
-
     /**
      * Initialize services
      *
