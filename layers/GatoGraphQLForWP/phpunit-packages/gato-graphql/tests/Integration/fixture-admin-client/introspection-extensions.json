@@ -7230,6 +7230,21 @@
                             "args": []
                         },
                         {
+                            "name": "globalFields",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "includeDeprecated",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "globalID",
                             "extensions": {
                                 "isMutation": false,
@@ -12429,21 +12444,6 @@
                 }
             ],
             "directives": [
-                {
-                    "name": "cacheControl",
-                    "extensions": {
-                        "needsDataToExecute": false,
-                        "fieldDirectiveSupportedTypeNamesOrDescriptions": null
-                    },
-                    "args": [
-                        {
-                            "name": "maxAge",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        }
-                    ]
-                },
                 {
                     "name": "include",
                     "extensions": {
