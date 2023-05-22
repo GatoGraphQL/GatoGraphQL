@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine;
 
+use PoP\CacheControl\Module as CacheControlModule;
 use PoP\ComponentModel\App;
 use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
@@ -27,7 +28,7 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            \PoP\CacheControl\Module::class,
+            CacheControlModule::class,
         ];
     }
 
