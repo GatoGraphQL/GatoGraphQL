@@ -14,9 +14,9 @@ class NoCacheCacheControlFieldDirectiveResolver extends AbstractCacheControlFiel
     public function getFieldNamesToApplyTo(): array
     {
         return [
-            'var',
-            'context',
-            'time',
+            '_appState',
+            '_appStateKeys',
+            '_appStateValue',
         ];
     }
 
