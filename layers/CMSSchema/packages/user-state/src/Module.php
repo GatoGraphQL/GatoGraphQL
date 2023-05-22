@@ -28,6 +28,16 @@ class Module extends AbstractModule
     }
 
     /**
+     * @return array<class-string<ModuleInterface>>
+     */
+    public function getDependedConditionalModuleClasses(): array
+    {
+        return [
+            CacheControlModule::class,
+        ];
+    }
+
+    /**
      * Initialize services
      *
      * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
