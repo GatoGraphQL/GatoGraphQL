@@ -1977,6 +1977,9 @@
               "name": "extensions"
             },
             {
+              "name": "globalFields"
+            },
+            {
               "name": "globalID"
             },
             {
