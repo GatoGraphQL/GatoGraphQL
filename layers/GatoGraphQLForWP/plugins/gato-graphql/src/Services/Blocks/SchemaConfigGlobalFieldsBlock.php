@@ -26,7 +26,7 @@ class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigBlock
 
     public function getBlockPriority(): int
     {
-        return 10115;
+        return 10090;
     }
 
     public function getEnablingModule(): ?string
