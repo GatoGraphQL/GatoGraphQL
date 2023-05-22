@@ -13989,6 +13989,41 @@
               "deprecationReason": null
             },
             {
+              "name": "globalFields",
+              "description": "[Custom introspection field] All global fields (i.e. fields which are added to all types in the schema)",
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": "Include deprecated fields?",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[__Field!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[__Field!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "__Field!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "__Field",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "globalID",
               "description": "The object's globally unique identifier",
               "args": [],
@@ -22955,25 +22990,6 @@
         }
       ],
       "directives": [
-        {
-          "name": "cacheControl",
-          "description": "HTTP caching (https:\/\/tools.ietf.org\/html\/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding 'no-store' value is sent, indicating to not cache the response",
-          "locations": [
-            "FIELD_DEFINITION"
-          ],
-          "args": [
-            {
-              "name": "maxAge",
-              "description": "Use a specific max-age value for the field, instead of the one configured in the directive",
-              "type": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              },
-              "defaultValue": null
-            }
-          ]
-        },
         {
           "name": "include",
           "description": "Include the field value in the output only if the argument 'if' evals to `true`",
