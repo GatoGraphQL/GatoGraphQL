@@ -47,6 +47,7 @@ class Module extends AbstractModule
         // Conditional packages
         try {
             if (class_exists(CacheControlModule::class) && App::getModule(CacheControlModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CacheControl');
                 $this->initSchemaServices(
                     dirname(__DIR__),
                     $skipSchema || in_array(CacheControlModule::class, $skipSchemaModuleClasses),

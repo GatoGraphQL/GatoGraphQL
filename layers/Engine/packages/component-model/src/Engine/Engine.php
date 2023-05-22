@@ -74,6 +74,7 @@ class Engine implements EngineInterface
     public final const HOOK_REQUEST_META = __CLASS__ . ':request-meta';
     public final const HOOK_SESSION_META = __CLASS__ . ':session-meta';
     public final const HOOK_SITE_META = __CLASS__ . ':site-meta';
+    public final const HOOK_HEADERS = __CLASS__ . ':headers';
 
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
@@ -483,7 +484,11 @@ class Engine implements EngineInterface
             $headers['Content-Type'] = $contentType;
         }
 
-        return $headers;
+        // Allow modules to inject their own headers
+        return App::applyFilters(
+            self::HOOK_HEADERS,
+            $headers
+        );
     }
 
     protected function generateData(): void
