@@ -15,6 +15,16 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
+            \PoP\ComponentModel\Module::class,
+        ];
+    }
+
+    /**
+     * @return array<class-string<ModuleInterface>>
+     */
+    public function getDependedConditionalModuleClasses(): array
+    {
+        return [
             \PoP\CacheControl\Module::class,
         ];
     }
