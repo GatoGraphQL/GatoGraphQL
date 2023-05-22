@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UserState\DirectiveResolvers;
+namespace PoPCMSSchema\UserState\ConditionalOnModule\CacheControl\DirectiveResolvers;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlFieldDirectiveResolver;
 
