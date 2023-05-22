@@ -19,7 +19,6 @@ class Module extends AbstractModule
     {
         return [
             \PoP\MandatoryDirectivesByConfiguration\Module::class,
-            \PoP\ComponentModel\Module::class,
         ];
     }
 
