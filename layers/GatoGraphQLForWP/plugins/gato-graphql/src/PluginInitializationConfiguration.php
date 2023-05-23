@@ -59,14 +59,15 @@ use PoPCMSSchema\Users\Environment as UsersEnvironment;
 use PoPCMSSchema\Users\Module as UsersModule;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Engine\Module as EngineModule;
 use PoP\GraphQLParser\Environment as GraphQLParserEnvironment;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\Root\Environment as RootEnvironment;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use function get_post_types;
 use function get_taxonomies;
 
@@ -610,6 +611,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
         ];
         $moduleClassConfiguration[ComponentModelModule::class] = [
+            ComponentModelEnvironment::ENABLE_COMPONENT_MODEL_CACHE => true,
+            ComponentModelEnvironment::ENABLE_FEEDBACK_CATEGORY_EXTENSIONS => [
+                FeedbackCategories::WARNING,
+                // FeedbackCategories::NOTICE,
+                // FeedbackCategories::SUGGESTION,
+            ],
             ComponentModelEnvironment::ENABLE_TYPENAME_GLOBAL_FIELDS => false,
             /**
              * Enable Mutations?
