@@ -1,0 +1,49 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
+
+use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
+use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\AbstractDefaultEnableDisableFunctionalityBlockSchemaConfigurationExecuter;
+use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\EndpointSchemaConfigurationExecuterServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigComposableDirectivesBlock;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
+use PoP\GraphQLParser\Environment as GraphQLParserEnvironment;
+
+class ComposableDirectivesBlockSchemaConfigurationExecuter extends AbstractDefaultEnableDisableFunctionalityBlockSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
+{
+    private ?SchemaConfigComposableDirectivesBlock $schemaConfigComposableDirectivesBlock = null;
+
+    final public function setSchemaConfigComposableDirectivesBlock(SchemaConfigComposableDirectivesBlock $schemaConfigComposableDirectivesBlock): void
+    {
+        $this->schemaConfigComposableDirectivesBlock = $schemaConfigComposableDirectivesBlock;
+    }
+    final protected function getSchemaConfigComposableDirectivesBlock(): SchemaConfigComposableDirectivesBlock
+    {
+        /** @var SchemaConfigComposableDirectivesBlock */
+        return $this->schemaConfigComposableDirectivesBlock ??= $this->instanceManager->getInstance(SchemaConfigComposableDirectivesBlock::class);
+    }
+
+    public function getEnablingModule(): ?string
+    {
+        return SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES;
+    }
+
+    protected function getBlock(): BlockInterface
+    {
+        return $this->getSchemaConfigComposableDirectivesBlock();
+    }
+
+    public function getHookModuleClass(): string
+    {
+        return GraphQLParserModule::class;
+    }
+
+    public function getHookEnvironmentClass(): string
+    {
+        return GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES;
+    }
+}

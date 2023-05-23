@@ -20,12 +20,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
     public final const GLOBAL_FIELDS = Plugin::NAMESPACE . '\global-fields';
+    public final const COMPOSABLE_DIRECTIVES = Plugin::NAMESPACE . '\composable-directives';
+    public final const MULTIFIELD_DIRECTIVES = Plugin::NAMESPACE . '\multifield-directives';
     public final const MUTATIONS = Plugin::NAMESPACE . '\mutations';
     public final const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
     public final const SCHEMA_EXPOSE_SENSITIVE_DATA = Plugin::NAMESPACE . '\schema-expose-sensitive-data';
     public final const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public final const GLOBAL_ID_FIELD = Plugin::NAMESPACE . '\global-id-field';
-
+    
     /**
      * Setting options
      */
@@ -53,6 +55,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_NAMESPACING,
             self::GLOBAL_FIELDS,
+            self::COMPOSABLE_DIRECTIVES,
+            self::MULTIFIELD_DIRECTIVES,
             self::MUTATIONS,
             self::NESTED_MUTATIONS,
             self::SCHEMA_EXPOSE_SENSITIVE_DATA,
@@ -82,7 +86,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'gato-graphql'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'gato-graphql'),
-            self::GLOBAL_FIELDS => \__('Global Fields', 'gato-graphql-pro'),
+            self::GLOBAL_FIELDS => \__('Global Fields', 'gato-graphql'),
+            self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'gato-graphql'),
+            self::MULTIFIELD_DIRECTIVES => \__('Multi-Field Directives', 'gato-graphql'),
             self::MUTATIONS => \__('Mutations', 'gato-graphql'),
             self::NESTED_MUTATIONS => \__('Nested Mutations', 'gato-graphql'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose Sensitive Data in the Schema', 'gato-graphql'),
@@ -97,7 +103,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'gato-graphql'),
             self::SCHEMA_NAMESPACING => \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'gato-graphql'),
-            self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'gato-graphql-pro'),
+            self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'gato-graphql'),
+            self::COMPOSABLE_DIRECTIVES => \__('Have directives modify the behavior of other directives', 'gato-graphql'),
+            self::MULTIFIELD_DIRECTIVES => \__('A single directive can be applied to multiple fields, for performance and extended use cases', 'gato-graphql'),
             self::MUTATIONS => \__('Modify data by executing mutations', 'gato-graphql'),
             self::NESTED_MUTATIONS => \__('Execute mutations from any type in the schema, not only from the root', 'gato-graphql'),
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose “sensitive” data elements in the schema', 'gato-graphql'),
@@ -136,6 +144,12 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             ],
             self::GLOBAL_FIELDS => [
                 self::DEFAULT_SCHEMA_EXPOSURE => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
+            ],
+            self::MULTIFIELD_DIRECTIVES => [
+                ModuleSettingOptions::DEFAULT_VALUE => true,
+            ],
+            self::COMPOSABLE_DIRECTIVES => [
+                ModuleSettingOptions::DEFAULT_VALUE => true,
             ],
             self::MUTATIONS => [
                 self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
@@ -180,9 +194,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             ];
         } elseif ($module === self::GLOBAL_FIELDS) {
             $globalFieldsSchemaExposureValues = [
-                GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('Do not expose', 'gato-graphql-pro'),
-                GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('Expose under the Root type only', 'gato-graphql-pro'),
-                GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('Expose under all types', 'gato-graphql-pro'),
+                GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('Do not expose', 'gato-graphql'),
+                GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('Expose under the Root type only', 'gato-graphql'),
+                GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('Expose under all types', 'gato-graphql'),
             ];
             $option = self::DEFAULT_SCHEMA_EXPOSURE;
             $moduleSettings[] = [
@@ -191,13 +205,43 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Schema exposure.', 'gato-graphql-pro'),
+                Properties::TITLE => \__('Schema exposure.', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Under what types to expose global fields.<br/>%s', 'gato-graphql-pro'),
+                    \__('Under what types to expose global fields.<br/>%s', 'gato-graphql'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $globalFieldsSchemaExposureValues,
+            ];
+        } elseif ($module === self::MULTIFIELD_DIRECTIVES) {
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable multi-field directives?', 'gato-graphql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Enable having a single directive be applied to multiple fields.<br/>%s', 'gato-graphql'),
+                    $defaultValueDesc
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        } elseif ($module === self::COMPOSABLE_DIRECTIVES) {
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable composable directives?', 'gato-graphql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Enable adding composable directives (also called "meta-directives", such as <code>@forEach</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema.<br/>%s', 'gato-graphql'),
+                    $defaultValueDesc
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::MUTATIONS) {
             $option = self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;

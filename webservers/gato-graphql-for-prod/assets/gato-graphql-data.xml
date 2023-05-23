@@ -1793,9 +1793,9 @@ video/mp4
 
 <!-- wp:gato-graphql-pro/schema-config-field-to-input /-->
 
-<!-- wp:gato-graphql-pro/schema-config-multifield-directives /-->
+<!-- wp:gato-graphql/schema-config-multifield-directives /-->
 
-<!-- wp:gato-graphql-pro/schema-config-composable-directives /-->
+<!-- wp:gato-graphql/schema-config-composable-directives /-->
 
 <!-- wp:gato-graphql-pro/schema-config-send-http-request-fields /-->
 
@@ -1853,9 +1853,9 @@ video/mp4
 
 <!-- wp:gato-graphql-pro/schema-config-field-to-input /-->
 
-<!-- wp:gato-graphql-pro/schema-config-multifield-directives /-->
+<!-- wp:gato-graphql/schema-config-multifield-directives /-->
 
-<!-- wp:gato-graphql-pro/schema-config-composable-directives /-->
+<!-- wp:gato-graphql/schema-config-composable-directives /-->
 
 <!-- wp:gato-graphql-pro/schema-config-send-http-request-fields /-->
 
@@ -2231,9 +2231,9 @@ video/mp4
 
 <!-- wp:gato-graphql-pro/schema-config-field-to-input /-->
 
-<!-- wp:gato-graphql-pro/schema-config-multifield-directives /-->
+<!-- wp:gato-graphql/schema-config-multifield-directives /-->
 
-<!-- wp:gato-graphql-pro/schema-config-composable-directives /-->
+<!-- wp:gato-graphql/schema-config-composable-directives /-->
 
 <!-- wp:gato-graphql-pro/schema-config-send-http-request-fields /-->
 
@@ -2324,9 +2324,9 @@ video/mp4
 
 <!-- wp:gato-graphql-pro/schema-config-field-to-input /-->
 
-<!-- wp:gato-graphql-pro/schema-config-multifield-directives /-->
+<!-- wp:gato-graphql/schema-config-multifield-directives /-->
 
-<!-- wp:gato-graphql-pro/schema-config-composable-directives /-->
+<!-- wp:gato-graphql/schema-config-composable-directives /-->
 
 <!-- wp:gato-graphql-pro/schema-config-send-http-request-fields /-->
 

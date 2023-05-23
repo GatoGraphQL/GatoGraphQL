@@ -62,6 +62,8 @@ use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Engine\Module as EngineModule;
+use PoP\GraphQLParser\Environment as GraphQLParserEnvironment;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Module\ModuleInterface;
 
@@ -159,6 +161,22 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     ModuleSettingOptions::PATH
                 ),
                 'condition' => 'any',
+            ],
+            // Enable "multi-field directives"?
+            // No need to enable it for the ACL/CCL config
+            [
+                'class' => GraphQLParserModule::class,
+                'envVariable' => GraphQLParserEnvironment::ENABLE_MULTIFIELD_DIRECTIVES,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::MULTIFIELD_DIRECTIVES,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
+            ],
+            // Enable "composable directives"?
+            // No need to enable it for the ACL/CCL config
+            [
+                'class' => GraphQLParserModule::class,
+                'envVariable' => GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // Use namespacing?
             [
@@ -634,6 +652,11 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             return array_merge_recursive(
                 $moduleClassConfiguration,
                 [
+                    GraphQLParserModule::class => [
+                        // No need for these, then directly disable them to have a clear state on the config
+                        GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => false,
+                        GraphQLParserEnvironment::ENABLE_MULTIFIELD_DIRECTIVES => false,
+                    ],
                     ComponentModelModule::class => [
                         // Enable the "self" fields
                         ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
@@ -685,6 +708,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
                         // Enable the “sensitive” data
                         ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
+                    ],
+                    GraphQLParserModule::class => [
+                        GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => true,
+                        GraphQLParserEnvironment::ENABLE_MULTIFIELD_DIRECTIVES => true,
                     ],
                     GraphQLServerModule::class => [
                         // Expose global fields
