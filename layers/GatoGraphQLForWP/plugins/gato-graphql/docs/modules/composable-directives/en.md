@@ -1,6 +1,6 @@
 # Composable Directives
 
-Allow directives to nest and modify the behavior of other directives. This is the base functionality over which module "Meta Directives" is based.
+Allow directives to nest and modify the behavior of other directives.
 
 ## Description
 
