@@ -32,33 +32,33 @@ const SchemaConfigMultiFieldDirectivesCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Enable', 'gato-graphql-pro'),
+			label: __('Enable', 'gato-graphql'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Disable', 'gato-graphql-pro'),
+			label: __('Disable', 'gato-graphql'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Enable multi-field directives?', 'gato-graphql-pro') }</em>
+			<em>{ __('Enable multi-field directives?', 'gato-graphql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('A single directive can be applied to multiple fields, for performance and extended use cases', 'gato-graphql-pro') }
+				text={ __('A single directive can be applied to multiple fields, for performance and extended use cases', 'gato-graphql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
 					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
-						<span>🟡 { __('Default', 'gato-graphql-pro') }</span>
+						<span>🟡 { __('Default', 'gato-graphql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-						<span>✅ { __('Enabled', 'gato-graphql-pro') }</span>
+						<span>✅ { __('Enabled', 'gato-graphql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Disabled', 'gato-graphql-pro') }</span>
+						<span>❌ { __('Disabled', 'gato-graphql') }</span>
 					}
 				</>
 			) }
@@ -81,7 +81,7 @@ const SchemaConfigMultiFieldDirectivesCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Multi-Field Directives', 'gato-graphql-pro'),
+		header: __('Multi-Field Directives', 'gato-graphql'),
 		className: 'gato-graphql-multifield-directives',
 	} ),
 	withCard(),

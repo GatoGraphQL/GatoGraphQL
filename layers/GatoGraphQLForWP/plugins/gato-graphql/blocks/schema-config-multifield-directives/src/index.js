@@ -25,12 +25,12 @@ import {
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'gato-graphql-pro/schema-config-multifield-directives', {
+registerBlockType( 'gato-graphql/schema-config-multifield-directives', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Multi-Field Directives', 'gato-graphql-pro' ),
+	title: __( 'Multi-Field Directives', 'gato-graphql' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
@@ -38,7 +38,7 @@ registerBlockType( 'gato-graphql-pro/schema-config-multifield-directives', {
 	 */
 	description: __(
 		'Enable multi-field directives in the Schema Configuration',
-		'gato-graphql-pro'
+		'gato-graphql'
 	),
 
 	/**

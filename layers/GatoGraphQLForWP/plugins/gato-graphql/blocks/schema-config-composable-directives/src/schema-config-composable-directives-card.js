@@ -33,33 +33,33 @@ const SchemaConfigComposableDirectivesCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Enable', 'gato-graphql-pro'),
+			label: __('Enable', 'gato-graphql'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Disable', 'gato-graphql-pro'),
+			label: __('Disable', 'gato-graphql'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Enable composable directives?', 'gato-graphql-pro') }</em>
+			<em>{ __('Enable composable directives?', 'gato-graphql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Add composable directives to the schema, which are directives that can nest and modify the behavior of other directives', 'gato-graphql-pro') }
+				text={ __('Add composable directives to the schema, which are directives that can nest and modify the behavior of other directives', 'gato-graphql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
 					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
-						<span>🟡 { __('Default', 'gato-graphql-pro') }</span>
+						<span>🟡 { __('Default', 'gato-graphql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-						<span>✅ { __('Enabled', 'gato-graphql-pro') }</span>
+						<span>✅ { __('Enabled', 'gato-graphql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Disabled', 'gato-graphql-pro') }</span>
+						<span>❌ { __('Disabled', 'gato-graphql') }</span>
 					}
 				</>
 			) }
@@ -82,7 +82,7 @@ const SchemaConfigComposableDirectivesCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Composable Directives', 'gato-graphql-pro'),
+		header: __('Composable Directives', 'gato-graphql'),
 		className: 'gato-graphql-composable-directives',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),

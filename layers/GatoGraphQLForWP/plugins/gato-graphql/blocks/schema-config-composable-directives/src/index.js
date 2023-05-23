@@ -25,12 +25,12 @@ import {
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'gato-graphql-pro/schema-config-composable-directives', {
+registerBlockType( 'gato-graphql/schema-config-composable-directives', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Composable Directives', 'gato-graphql-pro' ),
+	title: __( 'Composable Directives', 'gato-graphql' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
@@ -38,7 +38,7 @@ registerBlockType( 'gato-graphql-pro/schema-config-composable-directives', {
 	 */
 	description: __(
 		'Enable composable directives in the Schema Configuration',
-		'gato-graphql-pro'
+		'gato-graphql'
 	),
 
 	/**
