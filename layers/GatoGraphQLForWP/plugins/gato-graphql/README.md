@@ -121,6 +121,9 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 <tr><th colspan="2"><br/>Schema Type</th></tr>
 <tr><td><a href="docs/modules/schema-expose-sensitive-data/en.md">Expose Sensitive Data in the Schema</a></td><td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data</td></tr>
 <tr><td><a href="docs/modules/schema-self-fields/en.md">Self Fields</a></td><td>Expose "self" fields in the GraphQL schema (such as <code>Post.self</code> and <code>User.self</code>), which can help give a particular shape to the GraphQL response</td></tr>
+<tr><th colspan="2"><br/>Operational</th></tr>
+<tr><td><a href="docs/modules/composable-directives/en.md">Composable Directives</a></td><td>Have directives modify the behavior of other directives</td></tr>
+<tr><td><a href="docs/modules/multifield-directives/en.md">Multi-Field Directives</a></td><td>A single directive can be applied to multiple fields, for performance and extended use cases</td></tr>
 <tr><td><a href="docs/modules/schema-customposts/en.md">Schema Custom Posts</a></td><td>Query Custom Post Types</td></tr>
 <tr><td>Schema Posts</td><td>Query posts, through type <code>Post</code> added to the schema</td></tr>
 <tr><td>Schema Pages</td><td>Query pages, through type <code>Page</code> added to the schema</td></tr>
