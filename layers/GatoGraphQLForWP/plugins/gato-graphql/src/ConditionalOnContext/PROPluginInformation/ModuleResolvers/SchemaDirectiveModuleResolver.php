@@ -72,7 +72,7 @@ class SchemaDirectiveModuleResolver extends AbstractModuleResolver implements PR
             case self::APPLY_FIELD_DIRECTIVE:
                 return \__('Addition of <code>@applyField</code> directive, to execute a certain field on the resolved field\'s value', 'gato-graphql');
             case self::META_DIRECTIVES:
-                return \__('Addition of <code>@forEach</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code> directives, to add meta-scripting capabilities that modify the behavior of other directives', 'gato-graphql');
+                return \__('Addition of meta directives <code>@if</code>, <code>@unless</code>, <code>@forEach</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code> (which modify the behavior of nested directives) to the GraphQL schema', 'gato-graphql');
             case self::PASS_ONWARDS_DIRECTIVE:
                 return \__('Addition of <code>@passOnwards</code> directive, to make the field\'s resolved value available to subsequent directives via a dynamic variable', 'gato-graphql');
             case self::REMOVE_DIRECTIVE:
