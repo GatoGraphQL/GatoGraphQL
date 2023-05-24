@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema-pro/http-requests",
+    "name": "pop-schema/http-requests",
     "conflict": {
         "getpop/componentrouting": "<0.10.2",
         "getpop/loosecontracts": "<0.10.2",

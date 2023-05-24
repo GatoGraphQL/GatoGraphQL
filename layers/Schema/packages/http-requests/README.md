@@ -16,7 +16,7 @@ Handle HTTP requests
 Via Composer
 
 ``` bash
-composer require pop-schema-pro/http-requests
+composer require pop-schema/http-requests
 ```
 
 ## Development
@@ -113,18 +113,18 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema-pro/http-requests.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-schema/http-requests.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema-pro/http-requests/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema-pro/http-requests.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema-pro/http-requests.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema-pro/http-requests.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-schema/http-requests/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/http-requests.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/http-requests.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/http-requests.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema-pro/http-requests
-[link-travis]: https://travis-ci.org/pop-schema-pro/http-requests
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema-pro/http-requests/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema-pro/http-requests
-[link-downloads]: https://packagist.org/packages/pop-schema-pro/http-requests
+[link-packagist]: https://packagist.org/packages/pop-schema/http-requests
+[link-travis]: https://travis-ci.org/pop-schema/http-requests
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/http-requests/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/http-requests
+[link-downloads]: https://packagist.org/packages/pop-schema/http-requests
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
 
