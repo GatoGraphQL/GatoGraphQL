@@ -73,15 +73,16 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
 
     public function getWebsiteURL(string $module): string
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return match ($module) {
-            self::GATO_GRAPHQL_PRO => sprintf(
+        if ($module === self::GATO_GRAPHQL_PRO) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            return sprintf(
                 '%s/pro',
                 $moduleConfiguration->getGatoGraphQLWebsiteURL()
-            ),
-            default => parent::getWebsiteURL($module),
-        };
+            );
+        }
+        
+        return parent::getWebsiteURL($module);
     }
 
     public function getLogoURL(string $module): string
