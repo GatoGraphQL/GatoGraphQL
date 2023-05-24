@@ -42,6 +42,7 @@ includes:
     - layers/WPSchema/packages/customposts/phpstan.neon.dist
     - layers/CMSSchema/packages/customposts-wp/phpstan.neon.dist
     - layers/Engine/packages/definitions/phpstan.neon.dist
+    - layers/Schema/packages/directive-commons/phpstan.neon.dist
     - layers/GatoGraphQLForWP/phpunit-packages/dummy-schema/phpstan.neon.dist
     - layers/GatoGraphQLForWP/phpunit-packages/dummy-wp-schema/phpstan.neon.dist
     - layers/Engine/packages/engine/phpstan.neon.dist
@@ -59,6 +60,7 @@ includes:
     - layers/GraphQLByPoP/packages/graphql-request/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-server/phpstan.neon.dist
     - layers/Engine/packages/guzzle-http/phpstan.neon.dist
+    - layers/Schema/packages/http-requests/phpstan.neon.dist
     - layers/Engine/packages/loosecontracts/phpstan.neon.dist
     - layers/Engine/packages/mandatory-directives-by-configuration/phpstan.neon.dist
     - layers/Engine/packages/markdown-convertor/phpstan.neon.dist

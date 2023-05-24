@@ -195,6 +195,8 @@ services:
         - >-
           ../../layers/Schema/packages/extended-schema-commons:/app/vendor/pop-schema/extended-schema-commons
         - >-
+          ../../layers/Schema/packages/http-requests:/app/vendor/pop-schema/http-requests
+        - >-
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
         - >-
           ../../layers/WPSchema/packages/block-metadata-for-wp:/app/vendor/pop-wp-schema/block-metadata-for-wp

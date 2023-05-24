@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPSchema\HTTPRequests\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'

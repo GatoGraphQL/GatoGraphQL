@@ -33,8 +33,10 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \GraphQLByPoP\GraphQLServer\Module::class,
             \PoP\ComponentModel\Module::class,
             \PoP\Engine\Module::class,
-            \PoPSchema\SchemaCommons\Module::class,
+            \PoPSchema\HTTPRequests\Module::class,
+            \PoPSchema\DirectiveCommons\Module::class,
             \PoPSchema\ExtendedSchemaCommons\Module::class,
+            \PoPSchema\SchemaCommons\Module::class,
 
             // WordPress schema
             \PoPCMSSchema\Categories\Module::class,
