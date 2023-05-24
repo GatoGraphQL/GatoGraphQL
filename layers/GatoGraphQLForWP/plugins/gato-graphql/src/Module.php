@@ -30,7 +30,6 @@ class Module extends AbstractPluginModule
             \GraphQLByPoP\GraphQLClientsForWP\Module::class,
             \GraphQLByPoP\GraphQLEndpointForWP\Module::class,
             \GraphQLByPoP\GraphQLServer\Module::class,
-            \PoPSchema\ExtendedSchemaCommons\Module::class,
             \PoP\MandatoryDirectivesByConfiguration\Module::class,
             \PoP\GuzzleHTTP\Module::class,
             \PoPCMSSchema\CommentMutationsWP\Module::class,
@@ -59,6 +58,16 @@ class Module extends AbstractPluginModule
             \PoPWPSchema\Posts\Module::class,
             \PoPWPSchema\TaxonomyMeta\Module::class,
             \PoPWPSchema\UserMeta\Module::class,
+
+            /**
+             * These modules are part of the main Gato GraphQL plugin,
+             * but they are to be referenced by extensions only
+             * (the main plugin does not use any of these),
+             * so there's no need to load them.
+             */
+            // \PoPSchema\DirectiveCommons\Module::class,
+            // \PoPSchema\ExtendedSchemaCommons\Module::class,
+            // \PoPSchema\HTTPRequests\Module::class,
         ];
     }
 
