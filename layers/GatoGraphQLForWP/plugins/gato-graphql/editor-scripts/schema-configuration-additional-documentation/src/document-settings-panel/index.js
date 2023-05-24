@@ -28,6 +28,14 @@ const implicitFeaturesDocEntries = [
         'any-built-in-scalar'
     ],
     [
+        'Custom Scalars Pack',
+        'custom-scalars',
+    ],
+    [
+        'Dynamic Variables',
+        'dynamic-variables',
+    ],
+    [
         'DangerouslyNonSpecificScalar Type',
         'dangerously-non-specific-scalar'
     ],
@@ -56,11 +64,6 @@ const moduleAndImplicitFeaturesPRODocEntries = [
         getModulePRODocMarkdownContentOrUseDefault
     ],
     [
-        'Custom Scalars Pack',
-        'custom-scalars',
-        getImplicitFeaturesPRODocMarkdownContentOrUseDefault
-    ],
-    [
         'Default Directive',
         'default-directive',
         getModulePRODocMarkdownContentOrUseDefault
@@ -69,11 +72,6 @@ const moduleAndImplicitFeaturesPRODocEntries = [
         'Deprecation Notifier',
         'deprecation-notifier',
         getModulePRODocMarkdownContentOrUseDefault
-    ],
-    [
-        'Dynamic Variables',
-        'dynamic-variables',
-        getImplicitFeaturesPRODocMarkdownContentOrUseDefault
     ],
     [
         'Function Directives',
