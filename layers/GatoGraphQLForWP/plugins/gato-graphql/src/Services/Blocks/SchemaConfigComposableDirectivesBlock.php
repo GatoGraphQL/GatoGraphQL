@@ -28,12 +28,12 @@ class SchemaConfigComposableDirectivesBlock extends AbstractDefaultEnableDisable
 
     protected function getBlockLabel(): string
     {
-        return \__('Enable composable directives?', 'gato-graphql-pro');
+        return \__('Enable composable directives?', 'gato-graphql');
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Composable Directives', 'gato-graphql-pro');
+        return \__('Composable Directives', 'gato-graphql');
     }
 
     /**

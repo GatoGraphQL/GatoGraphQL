@@ -27,7 +27,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const SCHEMA_EXPOSE_SENSITIVE_DATA = Plugin::NAMESPACE . '\schema-expose-sensitive-data';
     public final const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public final const GLOBAL_ID_FIELD = Plugin::NAMESPACE . '\global-id-field';
-    
+
     /**
      * Setting options
      */

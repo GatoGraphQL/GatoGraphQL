@@ -28,12 +28,12 @@ class SchemaConfigMultiFieldDirectivesBlock extends AbstractDefaultEnableDisable
 
     protected function getBlockLabel(): string
     {
-        return \__('Enable multi-field directives?', 'gato-graphql-pro');
+        return \__('Enable multi-field directives?', 'gato-graphql');
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Multi-Field Directives', 'gato-graphql-pro');
+        return \__('Multi-Field Directives', 'gato-graphql');
     }
 
     /**
