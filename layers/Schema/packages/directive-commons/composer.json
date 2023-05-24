@@ -1,5 +1,5 @@
 {
-    "name": "pop-schema-pro/directive-commons",
+    "name": "pop-schema/directive-commons",
     "conflict": {
         "getpop-pro/trace-tools": "<0.10.2",
         "pop-cms-schema-pro/locations-wp-em": "<0.10.2",

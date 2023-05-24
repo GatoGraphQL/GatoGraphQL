@@ -16,7 +16,7 @@ Code shared by the packages with directives
 Via Composer
 
 ``` bash
-composer require pop-schema-pro/directive-commons
+composer require pop-schema/directive-commons
 ```
 
 ## Development
@@ -110,17 +110,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-schema-pro/directive-commons.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-schema/directive-commons.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-schema-pro/directive-commons/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema-pro/directive-commons.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema-pro/directive-commons.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema-pro/directive-commons.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-schema/directive-commons/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-schema/directive-commons.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-schema/directive-commons.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-schema/directive-commons.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-schema-pro/directive-commons
-[link-travis]: https://travis-ci.org/pop-schema-pro/directive-commons
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema-pro/directive-commons/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema-pro/directive-commons
-[link-downloads]: https://packagist.org/packages/pop-schema-pro/directive-commons
+[link-packagist]: https://packagist.org/packages/pop-schema/directive-commons
+[link-travis]: https://travis-ci.org/pop-schema/directive-commons
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-schema/directive-commons/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/directive-commons
+[link-downloads]: https://packagist.org/packages/pop-schema/directive-commons
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
