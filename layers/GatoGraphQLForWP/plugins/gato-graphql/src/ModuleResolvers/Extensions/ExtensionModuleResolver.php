@@ -112,7 +112,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gato-graphql'),
             self::HELPER_FUNCTION_COLLECTION => \__('Collection of fields and directives providing useful functionality.', 'gato-graphql'),
             self::HTTP_CLIENT => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response.', 'gato-graphql'),
-            self::HTTP_REQUEST_VIA_SCHEMA => \__('Addition of fields to retrieve the current HTTP request data', 'gato-graphql.'),
+            self::HTTP_REQUEST_VIA_SCHEMA => \__('Addition of fields to retrieve the current HTTP request data.', 'gato-graphql'),
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Make normally-hidden directives (which inject some functionality into the GraphQL server) visible when editing a persisted query.', 'gato-graphql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple queries into a single query, sharing state across them and making sure they are executed in the requested order.', 'gato-graphql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('Query the value from an environment variable or PHP constant.', 'gato-graphql'),
