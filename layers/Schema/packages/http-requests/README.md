@@ -21,7 +21,7 @@ composer require pop-schema-pro/http-requests
 
 ## Development
 
-The source code is hosted on the [PRO monorepo for PoP](https://github.com/leoloso/PRO), under [`Schema/packages/http-requests`](https://github.com/leoloso/PRO/tree/master/layers/Schema/packages/http-requests).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/http-requests`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/http-requests).
 
 ## Usage
 
