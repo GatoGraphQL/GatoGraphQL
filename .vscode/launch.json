@@ -108,6 +108,7 @@
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/usermeta": "${workspaceFolder}/layers/CMSSchema/packages/usermeta",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/users-wp": "${workspaceFolder}/layers/CMSSchema/packages/users-wp",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/users": "${workspaceFolder}/layers/CMSSchema/packages/users",
+              "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-schema/directive-commons": "${workspaceFolder}/layers/Schema/packages/directive-commons",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-schema/extended-schema-commons": "${workspaceFolder}/layers/Schema/packages/extended-schema-commons",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-schema/schema-commons": "${workspaceFolder}/layers/Schema/packages/schema-commons",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/commentmeta": "${workspaceFolder}/layers/WPSchema/packages/commentmeta",
