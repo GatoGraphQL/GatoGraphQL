@@ -12,7 +12,6 @@ import {
     GoProLink,
 } from '@gatographql/components';
 import { getImplicitFeaturesDocMarkdownContentOrUseDefault } from '../implicit-features-doc-markdown-loader';
-import { getImplicitFeaturesPRODocMarkdownContentOrUseDefault } from '../implicit-features-pro-doc-markdown-loader';
 import { getModulePRODocMarkdownContentOrUseDefault } from '../module-pro-doc-markdown-loader';
 
 /**
