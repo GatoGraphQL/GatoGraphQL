@@ -21,7 +21,7 @@ composer require pop-schema-pro/directive-commons
 
 ## Development
 
-The source code is hosted on the [PRO monorepo for PoP](https://github.com/leoloso/PRO), under [`Schema/packages/directive-commons`](https://github.com/leoloso/PRO/tree/master/layers/Schema/packages/directive-commons).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/directive-commons`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/directive-commons).
 
 ## Usage
 
