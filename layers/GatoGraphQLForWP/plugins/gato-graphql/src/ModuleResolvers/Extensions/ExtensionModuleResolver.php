@@ -15,9 +15,9 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\extensions\\access-control';
     public const ACCESS_CONTROL_VISITOR_IP = Plugin::NAMESPACE . '\\extensions\\access-control-visitor-ip';
     public const CACHE_CONTROL = Plugin::NAMESPACE . '\\extensions\\cache-control';
+    public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
     public const FIELD_DEPRECATION = Plugin::NAMESPACE . '\\extensions\\field-deprecation';
     public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
-    public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
 
     /**
      * @return string[]
@@ -29,9 +29,9 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::ACCESS_CONTROL,
             self::ACCESS_CONTROL_VISITOR_IP,
             self::CACHE_CONTROL,
+            self::EVENTS_MANAGER,
             self::FIELD_DEPRECATION,
             self::GOOGLE_TRANSLATE,
-            self::EVENTS_MANAGER,
         ];
     }
 
@@ -42,9 +42,9 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::ACCESS_CONTROL => \__('Access Control', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Access Control: Visitor IP', 'gato-graphql'),
             self::CACHE_CONTROL => \__('Cache Control', 'gato-graphql'),
+            self::EVENTS_MANAGER => \__('Events Manager', 'gato-graphql'),
             self::FIELD_DEPRECATION => \__('Field Deprecation', 'gato-graphql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gato-graphql'),
-            self::EVENTS_MANAGER => \__('Events Manager', 'gato-graphql'),
             default => $module,
         };
     }
@@ -56,9 +56,9 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::ACCESS_CONTROL => \__('Grant user access to schema elements via Access Control Lists.', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Access Control extension is rquired).', 'gato-graphql'),
             self::CACHE_CONTROL => \__('Provide HTTP Caching for endpoints accessed via GET, with the max-age value automatically calculated from the query.', 'gato-graphql'),
+            self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gato-graphql'),
             self::FIELD_DEPRECATION => \__('Deprecate fields, and explain how to replace them, through a user interface.', 'gato-graphql'),
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gato-graphql'),
-            self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }
