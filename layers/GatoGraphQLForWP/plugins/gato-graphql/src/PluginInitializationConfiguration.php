@@ -66,8 +66,8 @@ use PoP\Engine\Module as EngineModule;
 use PoP\GraphQLParser\Environment as GraphQLParserEnvironment;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\Root\Environment as RootEnvironment;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function get_post_types;
 use function get_taxonomies;
 
