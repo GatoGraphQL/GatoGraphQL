@@ -202,6 +202,8 @@ services:
         - >-
           ../../layers/Schema/packages/extended-schema-commons:/app/vendor/pop-schema/extended-schema-commons
         - >-
+          ../../layers/Schema/packages/http-requests:/app/vendor/pop-schema/http-requests
+        - >-
           ../../layers/Schema/packages/schema-commons:/app/vendor/pop-schema/schema-commons
         - '../../layers/WPSchema/packages/commentmeta:/app/vendor/pop-wp-schema/commentmeta'
         - '../../layers/WPSchema/packages/comments:/app/vendor/pop-wp-schema/comments'
