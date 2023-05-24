@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPSchema\DirectiveCommons\StateServices\ObjectResolvedDynamicVariablesServiceInterface:
+        class: \PoPSchema\DirectiveCommons\StateServices\ObjectResolvedDynamicVariablesService
+
+    PoPSchema\DirectiveCommons\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
