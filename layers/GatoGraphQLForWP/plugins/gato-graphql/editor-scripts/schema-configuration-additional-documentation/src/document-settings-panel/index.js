@@ -108,10 +108,10 @@ const implicitFeaturesDocEntries = [
 //         getModulePRODocMarkdownContentOrUseDefault
 //     ],
 // ];
-const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentation.displayUnlockPROPluginMessage;
-const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentation.proPluginWebsiteURL;
-const buttonClassName = "gato-graphql-info-modal-button text-wrap";
-const proTitlePrefix = displayUnlockPROPluginMessage ? __('🔒 ', 'gato-graphql') : '';
+// const displayUnlockPROPluginMessage = window.schemaConfigurationAdditionalDocumentation.displayUnlockPROPluginMessage;
+// const proPluginWebsiteURL = window.schemaConfigurationAdditionalDocumentation.proPluginWebsiteURL;
+// const buttonClassName = "gato-graphql-info-modal-button text-wrap";
+// const proTitlePrefix = displayUnlockPROPluginMessage ? __('🔒 ', 'gato-graphql') : '';
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
