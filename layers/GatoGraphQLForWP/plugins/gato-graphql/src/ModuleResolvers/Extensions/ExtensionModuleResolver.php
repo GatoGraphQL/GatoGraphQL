@@ -86,13 +86,15 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
 
     public function getLogoURL(string $module): string
     {
-        return match ($module) {
-            self::GATO_GRAPHQL_PRO => parent::getLogoURL($module),
-            default => str_replace(
-                'GatoGraphQL-logo.png',
-                'GatoGraphQL-logo2.png',
-                parent::getLogoURL($module),
-            ),
-        };
+        $logoURL = parent::getLogoURL($module);
+        if ($module === self::GATO_GRAPHQL_PRO) {
+            return $logoURL;
+        }
+
+        return str_replace(
+            'GatoGraphQL-logo.png',
+            'GatoGraphQL-logo2.png',
+            $logoURL,
+        );
     }
 }
