@@ -97,7 +97,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::GATO_GRAPHQL_PRO => \__('Superpower your app with PRO features: Access Control, Cache Control, Multiple Query Execution, and more.', 'gato-graphql'),
+            self::GATO_GRAPHQL_PRO => \__('Superpower your app with PRO features.', 'gato-graphql'),
             self::ACCESS_CONTROL => \__('Grant user access to schema elements via Access Control Lists.', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Access Control extension is rquired).', 'gato-graphql'),
             self::CACHE_CONTROL => \__('Provide HTTP Caching for endpoints accessed via GET, with the max-age value automatically calculated from the query.', 'gato-graphql'),
