@@ -131,8 +131,6 @@ class EndpointHelpers
 
     /**
      * GraphQL single endpoint to be used in wp-admin
-     *
-     * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
     public function getAdminGraphQLEndpoint(
         ?string $endpointGroup = null,
@@ -241,8 +239,6 @@ class EndpointHelpers
 
     /**
      * GraphQL endpoint to be used in the admin, when editing Persisted Queries
-     *
-     * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
     public function getAdminPersistedQueryGraphQLEndpoint(
         string|int $persistedQueryEndpointCustomPostID,
