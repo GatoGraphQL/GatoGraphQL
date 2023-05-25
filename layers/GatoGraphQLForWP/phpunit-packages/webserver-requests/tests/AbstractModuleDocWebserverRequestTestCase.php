@@ -51,10 +51,8 @@ abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWebserv
     {
         $entries = [];
         foreach ($this->getModules() as $module) {
-            $moduleSlug = substr(
-                $module,
-                strrpos($module, '\\')
-            );
+            $pos = strrpos($module, '\\');
+            $moduleSlug = $pos === false ? $module : substr($module, $pos);
             $entries[$moduleSlug] = [
                 $this->getModuleEndpoint($module),
             ];
