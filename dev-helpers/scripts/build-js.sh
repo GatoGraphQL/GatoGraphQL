@@ -98,10 +98,6 @@ maybeRunCommandInTargetDirectory
 TARGET_DIR="$PLUGIN_DIR/blocks/"
 maybeRunCommandInTargetDirectory
 
-# Blocks PRO
-TARGET_DIR="$PLUGIN_DIR/blocks-pro/"
-maybeRunCommandInTargetDirectory
-
 # Editor Scripts
 TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
 maybeRunCommandInTargetDirectory
