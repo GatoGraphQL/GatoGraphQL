@@ -6,6 +6,8 @@ namespace GraphQLByPoP\GraphQLServer\Hooks;
 
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -26,7 +28,10 @@ class VarsHookSet extends AbstractHookSet
      */
     public function getModelInstanceElementsFromAppState(array $elements): array
     {
-        $elements[] = $this->__('edit schema:', 'graphql-server') . App::getState('edit-schema');
+        /** @var ComponentModelModuleConfiguration */
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        $elements[] = $this->__('edit schema:', 'graphql-server') . $moduleConfiguration->includeSchemaTypeDirectivesInSchema();
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $elements[] = $this->__('enable nested mutations:', 'graphql-server') . $moduleConfiguration->enableNestedMutations();

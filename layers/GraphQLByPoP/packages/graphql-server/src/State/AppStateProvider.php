@@ -30,20 +30,6 @@ class AppStateProvider extends AbstractAppStateProvider
     /**
      * @param array<string,mixed> $state
      */
-    public function initialize(array &$state): void
-    {
-        /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
-        if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
-            $state['edit-schema'] = Request::editSchema();
-        } else {
-            $state['edit-schema'] = null;
-        }
-    }
-
-    /**
-     * @param array<string,mixed> $state
-     */
     public function execute(array &$state): void
     {
         /**

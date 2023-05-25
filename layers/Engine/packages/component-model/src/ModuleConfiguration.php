@@ -13,6 +13,19 @@ use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
+    public function includeSchemaTypeDirectivesInSchema(): bool
+    {
+        $envVariable = Environment::INCLUDE_SCHEMA_TYPE_DIRECTIVES_IN_SCHEMA;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function enableComponentModelCache(): bool
     {
         $envVariable = Environment::ENABLE_COMPONENT_MODEL_CACHE;

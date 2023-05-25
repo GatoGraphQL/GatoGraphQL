@@ -11,15 +11,6 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 
 class Request
 {
-    public static function editSchema(): bool
-    {
-        $editSchema = App::request(Params::EDIT_SCHEMA) ?? App::query(Params::EDIT_SCHEMA);
-        if ($editSchema === null) {
-            return false;
-        }
-        return EnvironmentValueHelpers::toBool($editSchema);
-    }
-
     public static function getMutationScheme(): ?string
     {
         if (!Environment::enableSettingMutationSchemeByURLParam()) {

@@ -8,6 +8,7 @@ use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 
 class Environment
 {
+    public final const INCLUDE_SCHEMA_TYPE_DIRECTIVES_IN_SCHEMA = 'INCLUDE_SCHEMA_TYPE_DIRECTIVES_IN_SCHEMA';
     public final const ENABLE_COMPONENT_MODEL_CACHE = 'ENABLE_COMPONENT_MODEL_CACHE';
     public final const USE_COMPONENT_MODEL_CACHE = 'USE_COMPONENT_MODEL_CACHE';
     public final const NAMESPACE_TYPES_AND_INTERFACES = 'NAMESPACE_TYPES_AND_INTERFACES';
