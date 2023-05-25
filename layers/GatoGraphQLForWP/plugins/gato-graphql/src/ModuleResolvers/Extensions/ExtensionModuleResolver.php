@@ -34,6 +34,8 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const RESPONSE_ERROR_TRIGGER = Plugin::NAMESPACE . '\\extensions\\response-error-trigger';
     public const SCHEMA_EDITING_ACCESS = Plugin::NAMESPACE . '\\extensions\\schema-editing-access';
 
+    private string $lastLogoFileName = '';
+
     /**
      * @return string[]
      */
@@ -152,9 +154,13 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             return $logoURL;
         }
 
+        $this->lastLogoFileName = $this->lastLogoFileName === 'GatoGraphQL-logo2.png'
+            ? 'GatoGraphQL-logo3.png'
+            : 'GatoGraphQL-logo2.png';
+
         return str_replace(
             'GatoGraphQL-logo.png',
-            'GatoGraphQL-logo2.png',
+            $this->lastLogoFileName,
             $logoURL,
         );
     }
