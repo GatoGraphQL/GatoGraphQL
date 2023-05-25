@@ -17,7 +17,7 @@ abstract class AbstractExtensionModuleDocWebserverRequestTestCase extends Abstra
             RequestParams::TAB,
             RequestParams::TAB_DOCS,
             RequestParams::MODULE,
-            $module,
+            urlencode($module),
         );
     }
 }
