@@ -24,19 +24,15 @@ abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWebserv
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertStringStartsWith('text/html', $response->getHeaderLine('content-type'));
+        
+        /**
+         * Assert that the response does NOT contain the
+         * "There is no documentation for this module" error message
+         */
         $responseBody = $response->getBody()->__toString();
-        $this->assertMatchesRegularExpression($this->getRegularExpression(), $responseBody);
-    }
-
-    /**
-     * Assert that the response does NOT contain the
-     * "There is no documentation for this module" error message
-     */
-    protected function getRegularExpression(): string
-    {
-        return sprintf(
-            '/(?<!%s)/',
-            $this->getModuleDocErrorMessage()
+        $this->assertStringNotContainsString(
+            $this->getModuleDocErrorMessage(),
+            $responseBody
         );
     }
 
