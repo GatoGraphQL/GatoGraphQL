@@ -6,6 +6,8 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
+    use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
+
     /**
      * @dataProvider provideModuleDocEntries
      */
