@@ -121,11 +121,11 @@ if ((parameters.show_logs && strToBool(parameters.show_logs)) || (scriptParams.h
   apiURL += (apiURLHasParams ? '&' : '?') + 'actions[]=show-logs';
   apiURLHasParams = true;
 }
-// Provide "edit_schema" param either through URL or through script source
-if ((parameters.edit_schema && strToBool(parameters.edit_schema)) || (scriptParams.has('edit_schema') && strToBool(scriptParams.get('edit_schema')))) {
-  apiURL += (apiURLHasParams ? '&' : '?') + 'edit_schema=true';
-  apiURLHasParams = true;
-}
+// // Provide "edit_schema" param either through URL or through script source
+// if ((parameters.edit_schema && strToBool(parameters.edit_schema)) || (scriptParams.has('edit_schema') && strToBool(scriptParams.get('edit_schema')))) {
+//   apiURL += (apiURLHasParams ? '&' : '?') + 'edit_schema=true';
+//   apiURLHasParams = true;
+// }
 // Provide "mutation_scheme" param either through URL or through script source
 if (parameters.mutation_scheme || scriptParams.has('mutation_scheme')) {
   apiURL += (apiURLHasParams ? '&' : '?') + 'mutation_scheme=' + (parameters.mutation_scheme || scriptParams.get('mutation_scheme'));
