@@ -1724,12 +1724,15 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     protected function isQueryTypeDirective(): bool
     {
         /** @var GraphQLParserModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        $graphQLParserModuleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+
+        /** @var ModuleConfiguration */
+        $componentModelModuleConfiguration = App::getModule(Module::class)->getConfiguration();
 
         $directiveKind = $this->getDirectiveKind();
         return $directiveKind === DirectiveKinds::QUERY
-            || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
-            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives());
+            || ($directiveKind === DirectiveKinds::SCHEMA && $componentModelModuleConfiguration->includeSchemaTypeDirectivesInSchema())
+            || ($directiveKind === DirectiveKinds::INDEXING && $graphQLParserModuleConfiguration->enableComposableDirectives());
     }
 
     /**

@@ -113,19 +113,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function enableLowLevelPersistedQueryEditing(): bool
-    {
-        $envVariable = Environment::ENABLE_LOW_LEVEL_PERSISTED_QUERY_EDITING;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function enableSettingClientIPAddressServerPropertyName(): bool
     {
         $envVariable = Environment::ENABLE_SETTING_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME;

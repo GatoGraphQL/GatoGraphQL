@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\State;
 
-use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use PoP\Root\App;
-use PoP\Root\Module as RootModule;
-use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
@@ -25,20 +22,6 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         /** @var GraphQLDataStructureFormatter */
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
-    }
-
-    /**
-     * @param array<string,mixed> $state
-     */
-    public function initialize(array &$state): void
-    {
-        /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
-        if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
-            $state['edit-schema'] = Request::editSchema();
-        } else {
-            $state['edit-schema'] = null;
-        }
     }
 
     /**

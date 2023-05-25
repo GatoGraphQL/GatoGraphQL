@@ -124,10 +124,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             // Use different caches for the normal and namespaced schemas,
             // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
             $cacheType = CacheTypes::GRAPHQL_SCHEMA_DEFINITION;
+            /** @var ComponentModelModuleConfiguration */
+            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
             $cacheKeyElements = array_merge(
                 CacheUtils::getSchemaCacheKeyElements(),
                 [
-                    'edit-schema' => App::getState('edit-schema'),
+                    'edit-schema' => $moduleConfiguration->includeSchemaTypeDirectivesInSchema(),
                 ]
             );
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
@@ -325,7 +327,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
 
     /**
-     * When doing /?edit_schema=true, "Schema" type directives will also be added the FIELD location,
+     * When EDIT_SCHEMA = true, "Schema" type directives will also be added the FIELD location,
      * so that they show up in GraphiQL and can be added to a persisted query
      * When that happens, append '("Schema" type directive)' to the directive's description
      *
@@ -336,7 +338,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         array &$fullSchemaDefinitionForGraphQL,
         array $directiveSchemaDefinitionPath,
     ): void {
-        if (!App::getState('edit-schema')) {
+        /** @var ComponentModelModuleConfiguration */
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        if (!$moduleConfiguration->includeSchemaTypeDirectivesInSchema()) {
             return;
         }
         $directiveSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinitionForGraphQL, $directiveSchemaDefinitionPath);

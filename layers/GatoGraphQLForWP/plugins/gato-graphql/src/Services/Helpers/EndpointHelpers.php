@@ -7,10 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
-use GraphQLByPoP\GraphQLServer\Constants\Params as GraphQLServerParams;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
@@ -131,12 +128,9 @@ class EndpointHelpers
 
     /**
      * GraphQL single endpoint to be used in wp-admin
-     *
-     * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
     public function getAdminGraphQLEndpoint(
         ?string $endpointGroup = null,
-        bool $enableLowLevelQueryEditing = false,
     ): string {
         $endpoint = \admin_url(sprintf(
             'edit.php?page=%s&%s=%s',
@@ -151,15 +145,6 @@ class EndpointHelpers
                 $endpointGroup,
                 $endpoint
             );
-        }
-
-        if ($enableLowLevelQueryEditing) {
-            // Add /?edit_schema=1 so the query-type directives are also visible
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->enableLowLevelPersistedQueryEditing()) {
-                $endpoint = \add_query_arg(GraphQLServerParams::EDIT_SCHEMA, true, $endpoint);
-            }
         }
 
         // Add mandatory params from the request, and maybe enable XDebug
@@ -251,18 +236,15 @@ class EndpointHelpers
 
     /**
      * GraphQL endpoint to be used in the admin, when editing Persisted Queries
-     *
-     * @param boolean $enableLowLevelQueryEditing Enable persisted queries to access schema-type directives
      */
     public function getAdminPersistedQueryGraphQLEndpoint(
         string|int $persistedQueryEndpointCustomPostID,
-        bool $enableLowLevelQueryEditing = false,
     ): string {
         return \add_query_arg(
             [
                 RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
             ],
-            $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PERSISTED_QUERY, $enableLowLevelQueryEditing)
+            $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PERSISTED_QUERY)
         );
     }
 
