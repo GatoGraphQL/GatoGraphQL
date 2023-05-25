@@ -15,10 +15,10 @@
 
 /**
  * Actually, hide not-really-needed elements:
- * - WordPress compatibility
+ * - WordPress compatibility???
  * - Plugin owner
  */
-.plugin-card-bottom,
+/* .plugin-card-bottom, */
 .plugin-card-top p.authors {
     display: none;
 }
