@@ -145,7 +145,6 @@ class Module extends AbstractPluginModule
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(self::class)->getConfiguration();
         if ($moduleConfiguration->displayPROPluginInformationInMainPlugin()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/PROPluginInformation');
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/PROPluginInformation/Overrides');
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/PROPluginInformation', 'module-services.yaml');
         }

@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Services\:
-        resource: '../../../src/ConditionalOnContext/PROPluginInformation/Services/*'
