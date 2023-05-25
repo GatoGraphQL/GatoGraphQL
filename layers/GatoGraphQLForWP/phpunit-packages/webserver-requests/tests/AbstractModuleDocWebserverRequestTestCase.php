@@ -49,5 +49,24 @@ abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWebserv
     /**
      * @return array<string,string[]>
      */
-    abstract protected function provideModuleDocEntries(): array;
+    protected function provideModuleDocEntries(): array
+    {
+        $entries = [];
+        foreach ($this->getModules() as $module) {
+            $moduleSlug = substr(
+                $module,
+                strrpos($module, '\\')
+            );
+            $entries[$moduleSlug] = [
+                $this->getModuleEndpoint($module),
+            ];
+        }
+        return $entries;
+    }
+    
+    /**
+     * @return string[]
+     */
+    abstract protected function getModules(): array;
+    abstract protected function getModuleEndpoint(string $module): string;
 }
