@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\State;
 
-use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use PoP\Root\App;
-use PoP\Root\Module as RootModule;
-use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 

@@ -125,7 +125,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
             $cacheType = CacheTypes::GRAPHQL_SCHEMA_DEFINITION;
             /** @var ComponentModelModuleConfiguration */
-            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();            
+            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
             $cacheKeyElements = array_merge(
                 CacheUtils::getSchemaCacheKeyElements(),
                 [
@@ -339,7 +339,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         array $directiveSchemaDefinitionPath,
     ): void {
         /** @var ComponentModelModuleConfiguration */
-        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();            
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         if (!$moduleConfiguration->includeSchemaTypeDirectivesInSchema()) {
             return;
         }
