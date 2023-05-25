@@ -21718,6 +21718,12 @@
           "interfaces": null,
           "enumValues": [
             {
+              "name": "indexing",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "query",
               "description": null,
               "isDeprecated": false,

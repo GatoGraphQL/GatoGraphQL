@@ -11521,6 +11521,12 @@
                                 "inputFields": null,
                                 "enumValues": [
                                     {
+                                        "name": "indexing",
+                                        "extensions": {
+                                            "isSensitiveDataElement": false
+                                        }
+                                    },
+                                    {
                                         "name": "query",
                                         "extensions": {
                                             "isSensitiveDataElement": false
@@ -24057,6 +24063,12 @@
                     "fields": null,
                     "inputFields": null,
                     "enumValues": [
+                        {
+                            "name": "indexing",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
                         {
                             "name": "query",
                             "extensions": {
