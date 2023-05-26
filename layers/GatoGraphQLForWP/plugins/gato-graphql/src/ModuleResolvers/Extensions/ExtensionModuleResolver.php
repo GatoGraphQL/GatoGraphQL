@@ -113,7 +113,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::FIELD_DEEP_TRAVERSAL_AND_MANIPULATION => \__('Extract and manipulate the deep inner values of array and object fields.', 'gato-graphql'),
             self::FIELD_DEFAULT_VALUE => \__('Set a field to some default value, whenever it is <code>null</code> or empty.', 'gato-graphql'),
             self::FIELD_DEPRECATION => \__('Deprecate fields, and explain how to replace them, through a user interface.', 'gato-graphql'),
-            self::FIELD_ON_FIELD => \__('Add the <code>@applyField</code> directive to the schema, to execute a certain field on the resolved field\'s value.', 'gato-graphql'),
+            self::FIELD_ON_FIELD => \__('Manipulate the value of a field by applying some other field on it.', 'gato-graphql'),
             self::FIELD_RESOLUTION_CACHING => \__('Cache and retrieve the response for expensive field operations.', 'gato-graphql'),
             self::FIELD_RESPONSE_REMOVAL => \__('Remove the output of a field from the response.', 'gato-graphql'),
             self::FIELD_TO_INPUT => \__('Retrieve the value of a field, manipulate it, and input it into another field, all within the same query.', 'gato-graphql'),
