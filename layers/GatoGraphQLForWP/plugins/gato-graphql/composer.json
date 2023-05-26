@@ -215,7 +215,7 @@
             "lando start"
         ],
         "destroy-server": "lando destroy -y",
-        "rebuild-server": "lando rebuild -y",
+        "rebuild-app-and-server": "lando rebuild -y",
         "stop-server": "lando stop",
         "test": "phpunit",
         "check-style": "phpcs src tests",

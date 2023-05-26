@@ -632,17 +632,17 @@
             "Composer\\Config::disableProcessTimeout",
             "composer log-server-warnings -d webservers/gato-graphql"
         ],
-        "rebuild-lando-server": [
-            "Composer\\Config::disableProcessTimeout",
-            "composer rebuild-lando-server -d webservers/gato-graphql"
-        ],
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
             "composer rebuild-server -d webservers/gato-graphql"
         ],
-        "rebuild-server-prod": [
+        "rebuild-app-and-server": [
             "Composer\\Config::disableProcessTimeout",
-            "composer rebuild-server -d webservers/gato-graphql-for-prod"
+            "composer rebuild-app-and-server -d webservers/gato-graphql"
+        ],
+        "rebuild-app-and-server-prod": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer rebuild-app-and-server -d webservers/gato-graphql-for-prod"
         ],
         "stop-server": "composer stop-server -d webservers/gato-graphql",
         "enable-caching": "composer enable-caching -d webservers/gato-graphql",
@@ -700,7 +700,7 @@
         "deoptimize-autoloader": "Removes the optimization of the Composer autoloaders for all the plugins installed in the webserver",
         "log-server-errors": "Show (on real time) the errors from the Lando webserver",
         "log-server-warnings": "Show (on real time) the warnings from the Lando webserver",
-        "rebuild-server": "Rebuild the Lando webserver",
+        "rebuild-app-and-server": "Update the App dependencies (from Composer) and rebuild the Lando webserver",
         "stop-server": "Stop the Lando webserver",
         "enable-caching": "Enable caching for the 'Gato GraphQL' in DEV",
         "disable-caching": "Disable caching for the 'Gato GraphQL' in DEV",

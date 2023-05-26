@@ -68,12 +68,12 @@
             "@symlink-vendor-for-gato-graphql-testing-plugin",
             "@symlink-vendor-for-gato-graphql-extension-demo"
         ],
-        "rebuild-lando-server": [
+        "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
             "@purge-cache",
             "lando rebuild appserver -y"
         ],
-        "rebuild-server": [
+        "rebuild-app-and-server": [
             "Composer\\Config::disableProcessTimeout",
             "@purge-cache",
             "@update-deps",

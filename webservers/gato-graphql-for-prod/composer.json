@@ -61,11 +61,11 @@
         "import-data-within-container": "/bin/sh /app/setup/import-data.sh",
         "create-users": "lando composer create-users-within-container",
         "create-users-within-container": "/bin/sh /app/setup/create-users.sh",
-        "rebuild-lando-server": [
+        "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
             "lando rebuild appserver -y"
         ],
-        "rebuild-server": "@rebuild-lando-server",
+        "rebuild-app-and-server": "@rebuild-server",
         "stop-server": "lando stop",
         "log-server-errors": [
             "Composer\\Config::disableProcessTimeout",
