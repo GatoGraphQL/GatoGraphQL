@@ -10,6 +10,6 @@ class EmailFilterInput extends AbstractValueToQueryFilterInput
 {
     protected function getQueryArgKey(): string
     {
-        return 'emails';
+        return 'email';
     }
 }

@@ -144,16 +144,24 @@ class UserTypeAPI extends AbstractUserTypeAPI
      */
     protected function filterByEmails(array &$query): bool
     {
+        $emails = null;
         if (isset($query['emails'])) {
             $emails = $query['emails'];
-            // This works for either 1 or many emails
-            $query['search'] = implode(',', $emails);
-            $query['search_columns'] = ['user_email'];
-            // But if there's more than 1 email, we must modify the SQL query with a hook
-            if (count($emails) > 1) {
-                return true;
-            }
+        } elseif (isset($query['email'])) {
+            $emails = [$query['email']];
         }
+        if ($emails === null) {
+            return false;
+        }
+        
+        // This works for either 1 or many emails
+        $query['search'] = implode(',', $emails);
+        $query['search_columns'] = ['user_email'];
+        // But if there's more than 1 email, we must modify the SQL query with a hook
+        if (count($emails) > 1) {
+            return true;
+        }
+
         return false;
     }
 
