@@ -19,6 +19,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const EMAIL_SENDER = Plugin::NAMESPACE . '\\extensions\\email-sender';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
     public const FIELD_DEEP_TRAVERSAL_AND_MANIPULATION = Plugin::NAMESPACE . '\\extensions\\field-deep-traversal-and-manipulation';
+    public const FIELD_DEFAULT_VALUE = Plugin::NAMESPACE . '\\extensions\\field-default-value';
     public const FIELD_DEPRECATION = Plugin::NAMESPACE . '\\extensions\\field-deprecation';
     public const FIELD_RESOLUTION_CACHING = Plugin::NAMESPACE . '\\extensions\\field-resolution-caching';
     public const FIELD_RESPONSE_REMOVAL = Plugin::NAMESPACE . '\\extensions\\field-response-removal';
@@ -48,6 +49,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::EMAIL_SENDER,
             self::EVENTS_MANAGER,
             self::FIELD_DEEP_TRAVERSAL_AND_MANIPULATION,
+            self::FIELD_DEFAULT_VALUE,
             self::FIELD_DEPRECATION,
             self::FIELD_RESOLUTION_CACHING,
             self::FIELD_RESPONSE_REMOVAL,
@@ -76,6 +78,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::EMAIL_SENDER => \__('Email Sender', 'gato-graphql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gato-graphql'),
             self::FIELD_DEEP_TRAVERSAL_AND_MANIPULATION => \__('Field Deep Traversal and Manipulation', 'gato-graphql'),
+            self::FIELD_DEFAULT_VALUE => \__('Field Default Value', 'gato-graphql'),
             self::FIELD_DEPRECATION => \__('Field Deprecation', 'gato-graphql'),
             self::FIELD_RESOLUTION_CACHING => \__('Field Resolution Caching', 'gato-graphql'),
             self::FIELD_RESPONSE_REMOVAL => \__('Field Response Removal', 'gato-graphql'),
@@ -105,6 +108,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::EMAIL_SENDER => \__('Send emails via global mutation <code>_sendEmail</code>.', 'gato-graphql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gato-graphql'),
             self::FIELD_DEEP_TRAVERSAL_AND_MANIPULATION => \__('Extract and manipulate the deep inner values of array and object fields.', 'gato-graphql'),
+            self::FIELD_DEFAULT_VALUE => \__('Set a field to some default value, whenever it is <code>null</code> or empty.', 'gato-graphql'),
             self::FIELD_DEPRECATION => \__('Deprecate fields, and explain how to replace them, through a user interface.', 'gato-graphql'),
             self::FIELD_RESOLUTION_CACHING => \__('Cache and retrieve the response for expensive field operations.', 'gato-graphql'),
             self::FIELD_RESPONSE_REMOVAL => \__('Remove the output of a field from the response.', 'gato-graphql'),
