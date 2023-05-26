@@ -153,7 +153,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         if ($emails === null) {
             return false;
         }
-        
+
         // This works for either 1 or many emails
         $query['search'] = implode(',', $emails);
         $query['search_columns'] = ['user_email'];
