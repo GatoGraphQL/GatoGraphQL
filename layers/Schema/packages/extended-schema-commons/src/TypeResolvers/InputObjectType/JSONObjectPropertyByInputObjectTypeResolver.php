@@ -29,7 +29,7 @@ class JSONObjectPropertyByInputObjectTypeResolver extends AbstractOneofInputObje
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to navigate to some JSON object property, whether on the object\'s first level (via `key`) or deeper (via `path`)', 'function-fields');
+        return $this->__('Oneof input to navigate to some JSON object property, whether on the object\'s first level (via `key`) or deeper (via `path`)', 'extended-schema-commons');
     }
 
     /**
@@ -46,8 +46,8 @@ class JSONObjectPropertyByInputObjectTypeResolver extends AbstractOneofInputObje
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'key' => $this->__('Query a property from the object\'s first level', 'function-fields'),
-            'path' => $this->__('Query a property on a deeper level of the object, using `.` to navigate the levels (eg: use "contact.email" to retrieve the value from `{ contact: { email: "hi@there.com" } }`)', 'function-fields'),
+            'key' => $this->__('Query a property from the object\'s first level', 'extended-schema-commons'),
+            'path' => $this->__('Query a property on a deeper level of the object, using `.` to navigate the levels (eg: use "contact.email" to retrieve the value from `{ contact: { email: "hi@there.com" } }`)', 'extended-schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
