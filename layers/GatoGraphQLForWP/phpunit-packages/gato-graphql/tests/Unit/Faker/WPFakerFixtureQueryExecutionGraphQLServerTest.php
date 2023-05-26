@@ -52,6 +52,9 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
                 \PoPCMSSchema\UserRoles\Module::class => [
                     \PoPCMSSchema\UserRoles\Environment::TREAT_USER_ROLE_AS_SENSITIVE_DATA => false,
                 ],
+                \PoPCMSSchema\Users\Module::class => [
+                    \PoPCMSSchema\Users\Environment::TREAT_USER_EMAIL_AS_SENSITIVE_DATA => false,
+                ],
                 \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::EXPOSE_CORE_FUNCTIONALITY_GLOBAL_FIELDS => true,
                 ],

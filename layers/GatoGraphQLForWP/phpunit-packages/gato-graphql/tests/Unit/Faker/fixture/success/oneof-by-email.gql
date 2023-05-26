@@ -1,0 +1,11 @@
+query {
+  adminUser: user(by: {email: "admin@gmail.com"}) {
+    id
+    name
+  }
+
+  nonExistingUser: user(by: {email: "no@existing.user"}) {
+    id
+    name
+  }
+}

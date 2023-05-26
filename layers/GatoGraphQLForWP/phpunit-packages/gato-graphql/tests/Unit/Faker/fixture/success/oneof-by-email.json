@@ -1,0 +1,9 @@
+{
+  "data": {
+    "adminUser": {
+      "id": 1,
+      "name": "Leo"
+    },
+    "nonExistingUser": null
+  }
+}
