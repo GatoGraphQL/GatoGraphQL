@@ -117,7 +117,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple queries into a single query, sharing state across them and making sure they are executed in the requested order.', 'gato-graphql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('Query the value from an environment variable or PHP constant.', 'gato-graphql'),
             self::PHP_FUNCTIONS_VIA_SCHEMA => \__('Manipulate the field output using standard programming language functions available in PHP.', 'gato-graphql'),
-            self::RESPONSE_ERROR_TRIGGER => \__('Add an error entry to the response to trigger the failure of the GraphQL request (whenever a field does not meet the expected conditions).', 'gato-graphql'),
+            self::RESPONSE_ERROR_TRIGGER => \__('Explicitly add an error entry to the response to trigger the failure of the GraphQL request (whenever a field does not meet the expected conditions).', 'gato-graphql'),
             self::SCHEMA_EDITING_ACCESS => \__('Grant access to users other than admins to edit the GraphQL schema.', 'gato-graphql'),
             default => parent::getDescription($module),
         };
