@@ -105,7 +105,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':disabled'));
+        $pluginName = $this->getPluginNameFromDataName($dataName, ':disabled');
         $client->post(
             sprintf(
                 $endpointURLPlaceholder,
@@ -114,6 +114,22 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             ),
             static::getRESTEndpointRequestOptions()
         );
+    }
+
+    /**
+     * Support executing many enable/disable plugin tests:
+     * If the $dataName ends with ":1" or ":2" or etc, strip
+     * them off, as they are "this is another test of the
+     * same plugin"
+     */
+    protected function getPluginNameFromDataName(string $dataName, string $suffix): string
+    {
+        $pluginName = substr($dataName, 0, strlen($dataName) - strlen($suffix));
+        $matches = [];
+        if (preg_match('/(.*)\:\d+/', $pluginName, $matches)) {
+            return $matches[1];
+        }
+        return $pluginName;
     }
 
     /**
@@ -136,7 +152,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      */
     protected function getBulkPluginDeactivationPluginFilesToSkip(string $dataName): array
     {
-        $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':only-one-enabled'));
+        $pluginName = $this->getPluginNameFromDataName($dataName, ':only-one-enabled');
         $pluginFile = $pluginName . '.php';
         return [
             $pluginFile,
