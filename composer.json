@@ -632,6 +632,10 @@
             "Composer\\Config::disableProcessTimeout",
             "composer log-server-warnings -d webservers/gato-graphql"
         ],
+        "rebuild-lando-server": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer rebuild-lando-server -d webservers/gato-graphql"
+        ],
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
             "composer rebuild-server -d webservers/gato-graphql"

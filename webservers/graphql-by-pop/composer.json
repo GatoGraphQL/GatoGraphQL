@@ -97,6 +97,11 @@
             "lando start"
         ],
         "destroy-server": "lando destroy -y",
+        "rebuild-lando-server": [
+            "Composer\\Config::disableProcessTimeout",
+            "@purge-cache",
+            "lando rebuild appserver -y"
+        ],
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
             "@purge-cache",
