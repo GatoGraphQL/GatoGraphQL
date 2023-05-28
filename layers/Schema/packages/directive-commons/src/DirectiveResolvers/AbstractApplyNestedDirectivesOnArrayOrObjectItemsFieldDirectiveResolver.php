@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\DirectiveResolvers;
+namespace PoPSchema\DirectiveCommons\DirectiveResolvers;
 
 use PoPSchema\DirectiveCommons\StateServices\ObjectResolvedDynamicVariablesServiceInterface;
 use PoP\ComponentModel\App;
