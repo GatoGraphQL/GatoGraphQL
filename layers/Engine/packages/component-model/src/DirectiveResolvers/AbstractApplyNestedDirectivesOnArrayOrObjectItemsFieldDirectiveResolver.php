@@ -99,8 +99,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            $this->getPassValueOnwardsAsVariableArgumentName() => $this->__('The name of the dynamic variable under which to export the array element value from the current iteration', 'meta-directives'),
-            'passKeyOnwardsAs' => $this->__('The name of the dynamic variable under which to export the array element key from the current iteration', 'meta-directives'),
+            $this->getPassValueOnwardsAsVariableArgumentName() => $this->__('The name of the dynamic variable under which to export the array element value from the current iteration', 'component-model'),
+            'passKeyOnwardsAs' => $this->__('The name of the dynamic variable under which to export the array element key from the current iteration', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
