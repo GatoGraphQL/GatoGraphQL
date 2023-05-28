@@ -6,7 +6,7 @@ namespace PoPSchema\DirectiveCommons\Module;
 
 use PoP\Root\Module\AbstractModule;
 
-abstract class AbstractWithPassOnwardsArgDirectiveModule extends AbstractModule
+abstract class AbstractEnableDynamicVariablesModule extends AbstractModule
 {
     /**
      * These environment variables must be `true` for "passOnwardsAs" to work
