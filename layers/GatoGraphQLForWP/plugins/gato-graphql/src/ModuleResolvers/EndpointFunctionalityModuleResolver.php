@@ -21,7 +21,6 @@ use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\App;
-use WP_Post;
 
 class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -32,9 +31,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
     public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
     public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
-
-    /** @var WP_Post[]|null */
-    protected ?array $schemaConfigurationCustomPosts = null;
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
@@ -328,32 +324,5 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             ];
         }
         return $moduleSettings;
-    }
-
-    /**
-     * @return WP_Post[]
-     */
-    protected function getSchemaConfigurationCustomPosts(): array
-    {
-        if ($this->schemaConfigurationCustomPosts === null) {
-            $this->schemaConfigurationCustomPosts = $this->doGetSchemaConfigurationCustomPosts();
-        }
-
-        return $this->schemaConfigurationCustomPosts;
-    }
-
-    /**
-     * @return WP_Post[]
-     */
-    protected function doGetSchemaConfigurationCustomPosts(): array
-    {
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
-
-        return \get_posts([
-            'posts_per_page' => -1,
-            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-            'post_status' => 'publish',
-        ]);
     }
 }
