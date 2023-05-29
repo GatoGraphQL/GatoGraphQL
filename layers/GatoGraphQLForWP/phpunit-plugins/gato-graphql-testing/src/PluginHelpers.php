@@ -13,11 +13,11 @@ class PluginHelpers
         if (RootEnvironment::isApplicationEnvironmentDev()) {
             return true;
         }
-        
+
         if (!isset($_SERVER['HTTP_HOST'])) {
             return false;
         }
-        
+
         /** @var string */
         $httpHost = $_SERVER['HTTP_HOST'];
 
@@ -25,7 +25,7 @@ class PluginHelpers
             Environment::getContinuousIntegrationValidTestingDomains(),
             Environment::getLocalDevelopmentValidTestingDomains()
         );
-        
+
         // Calculate the top level domain (app.site.com => site.com)
         $hostNames = array_reverse(explode('.', $httpHost));
         $domain = $hostNames[1] . '.' . $hostNames[0];
