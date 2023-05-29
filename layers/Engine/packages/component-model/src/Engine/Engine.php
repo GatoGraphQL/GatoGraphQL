@@ -449,7 +449,7 @@ class Engine implements EngineInterface
         foreach ($this->getHeaders() as $name => $value) {
             $response->headers->set($name, $value);
         }
-        
+
         // Allow to execute some action on the response
         App::doAction(
             EngineHookNames::PREPARE_RESPONSE,
