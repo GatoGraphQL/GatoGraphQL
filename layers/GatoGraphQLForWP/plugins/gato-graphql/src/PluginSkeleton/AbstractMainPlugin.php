@@ -12,13 +12,11 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
-use GatoGraphQL\GatoGraphQL\StaticHelpers\WordPressHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
@@ -33,9 +31,7 @@ use function do_action;
 use function get_called_class;
 use function get_option;
 use function is_admin;
-use function wp_logout;
 use function update_option;
-use function wp_set_current_user;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
@@ -303,9 +299,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
-
-        // Register hooks for wp-cron
-        $this->setupWPCronHooks();
     }
 
     /**
@@ -575,98 +568,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PHP_INT_MAX
         );
-    }
-
-    /**
-     * Register wp-cron hooks, using string for the
-     * hook names (instead of consts).
-     */
-    protected function setupWPCronHooks(): void
-    {
-        if (!WordPressHelpers::doingCron()) {
-            return;
-        }
-
-        add_action(
-            'gato_graphql__execute_query',
-            function (
-                string $query,
-                array $variables = [],
-                ?string $operationName = null,
-                ?int $executeAsUserID = null,
-            ): void {
-                $this->maybeLogUserInForWPCronExecution($executeAsUserID);
-
-                // No need to print the response
-                GatoGraphQL::executeQuery(
-                    $query,
-                    $variables,
-                    $operationName
-                );
-
-                $this->maybeLogUserOutForWPCronExecution($executeAsUserID);
-            },
-            10,
-            4
-        );
-
-        add_action(
-            'gato_graphql__execute_persisted_query',
-            function (
-                string|int $persistedQueryIDOrSlug,
-                array $variables = [],
-                ?string $operationName = null,
-                ?int $executeAsUserID = null,
-            ): void {
-                $this->maybeLogUserInForWPCronExecution($executeAsUserID);
-
-                // No need to print the response
-                GatoGraphQL::executePersistedQuery(
-                    $persistedQueryIDOrSlug,
-                    $variables,
-                    $operationName
-                );
-
-                $this->maybeLogUserOutForWPCronExecution($executeAsUserID);
-            },
-            10,
-            4
-        );
-    }
-
-    /**
-     * When running wp-cron there is no user logged-in.
-     * Offer the possibility to log a user, in particular
-     * to be able to execute mutations.
-     *
-     * For instance, pass these args to the wp-cron entry
-     * to execute a mutation as the admin user (with ID '1'):
-     *
-     *   ```
-     *   ["mutation { ... }",[],null,1]
-     *   ```
-     */
-    protected function maybeLogUserInForWPCronExecution(?int $userID): void
-    {
-        if ($userID === null) {
-            return;
-        }
-        wp_set_current_user($userID);
-    }
-
-    /**
-     * If the user was logged-in, then also log it out
-     * for symmetry and to keep things as they were.
-     */
-    protected function maybeLogUserOutForWPCronExecution(?int $userID): void
-    {
-        if ($userID === null) {
-            return;
-        }
-        wp_logout();
-        global $current_user;
-        $current_user = null;
-        wp_set_current_user(0);
     }
 
     /**

@@ -31,6 +31,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const HELPER_FUNCTION_COLLECTION = Plugin::NAMESPACE . '\\extensions\\helper-function-collection';
     public const HTTP_CLIENT = Plugin::NAMESPACE . '\\extensions\\http-client';
     public const HTTP_REQUEST_VIA_SCHEMA = Plugin::NAMESPACE . '\\extensions\\http-request-via-schema';
+    public const INTERNAL_GRAPHQL_SERVER = Plugin::NAMESPACE . '\\extensions\\internal-graphql-server';
     public const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\\extensions\\low-level-persisted-query-editing';
     public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\extensions\\multiple-query-execution';
     public const PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA = Plugin::NAMESPACE . '\\extensions\\php-constants-and-environment-variables-via-schema';
@@ -64,6 +65,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::HELPER_FUNCTION_COLLECTION,
             self::HTTP_CLIENT,
             self::HTTP_REQUEST_VIA_SCHEMA,
+            self::INTERNAL_GRAPHQL_SERVER,
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING,
             self::MULTIPLE_QUERY_EXECUTION,
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
@@ -96,6 +98,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::HELPER_FUNCTION_COLLECTION => \__('Helper Function Collection', 'gato-graphql'),
             self::HTTP_CLIENT => \__('HTTP Client', 'gato-graphql'),
             self::HTTP_REQUEST_VIA_SCHEMA => \__('HTTP Request via Schema', 'gato-graphql'),
+            self::INTERNAL_GRAPHQL_SERVER => \__('Internal GraphQL Server', 'gato-graphql'),
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Low-Level Persisted Query Editing', 'gato-graphql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Multiple Query Execution', 'gato-graphql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('PHP Constants and Environment Variables via Schema', 'gato-graphql'),
@@ -129,6 +132,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::HELPER_FUNCTION_COLLECTION => \__('Collection of fields providing useful functionality.', 'gato-graphql'),
             self::HTTP_CLIENT => \__('Addition of fields to execute HTTP requests against a webserver and fetch their response.', 'gato-graphql'),
             self::HTTP_REQUEST_VIA_SCHEMA => \__('Addition of fields to retrieve the current HTTP request data.', 'gato-graphql'),
+            self::INTERNAL_GRAPHQL_SERVER => \__('Execute GraphQL queries directly within your application (without accessing an endpoint), using PHP code.', 'gato-graphql'),
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Make normally-hidden directives (which inject some functionality into the GraphQL server) visible when editing a persisted query.', 'gato-graphql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple queries into a single query, sharing state across them and making sure they are executed in the requested order.', 'gato-graphql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('Query the value from an environment variable or PHP constant.', 'gato-graphql'),

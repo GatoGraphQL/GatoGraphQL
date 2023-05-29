@@ -195,6 +195,11 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    /**
+     * This function is not expected to be configured,
+     * but it's mainly to help identify all related
+     * functionality.
+     */
     public function useSchemaConfigurationInInternalGraphQLServer(): bool
     {
         $envVariable = Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER;
@@ -216,9 +221,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         return match ($envVariable) {
             Environment::DISPLAY_PRO_PLUGIN_INFORMATION_IN_MAIN_PLUGIN,
             Environment::PRO_PLUGIN_WEBSITE_URL,
-            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER =>
-                false,
-            default => parent::enableHook($envVariable),
+            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
+                => false,
+            default
+                => parent::enableHook($envVariable),
         };
     }
 }
