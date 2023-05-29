@@ -255,7 +255,7 @@ class Engine implements EngineInterface
          * into the AppState GraphQL AST
          */
         App::doAction(
-            HookNames::ENTRY_COMPONENT_INITIALIZATION,
+            EngineHookNames::ENTRY_COMPONENT_INITIALIZATION,
             $engineState->entryComponent
         );
 
@@ -274,7 +274,7 @@ class Engine implements EngineInterface
      */
     protected function getEtagHeader(): ?string
     {
-        $addEtagHeader = App::applyFilters(HookNames::ADD_ETAG_HEADER, true);
+        $addEtagHeader = App::applyFilters(EngineHookNames::ADD_ETAG_HEADER, true);
         if (!$addEtagHeader) {
             return null;
         }
@@ -319,7 +319,7 @@ class Engine implements EngineInterface
 
         // Allow plug-ins to replace their own non-needed content (eg: thumbprints, defined in Core)
         $commoncode = App::applyFilters(
-            HookNames::ETAG_HEADER_COMMON_CODE,
+            EngineHookNames::ETAG_HEADER_COMMON_CODE,
             $commoncode
         );
         return hash('md5', $commoncode);
@@ -350,7 +350,7 @@ class Engine implements EngineInterface
 
         // Enable to add extra URLs in a fixed manner
         $engineState->extra_routes = App::applyFilters(
-            HookNames::EXTRA_ROUTES,
+            EngineHookNames::EXTRA_ROUTES,
             $engineState->extra_routes
         );
 
@@ -472,14 +472,14 @@ class Engine implements EngineInterface
 
         // Allow modules to inject their own headers
         return App::applyFilters(
-            HookNames::HEADERS,
+            EngineHookNames::HEADERS,
             $headers
         );
     }
 
     protected function generateData(): void
     {
-        App::doAction(HookNames::GENERATE_DATA_BEGINNING);
+        App::doAction(EngineHookNames::GENERATE_DATA_BEGINNING);
 
         // Process the request and obtain the results
         $this->processAndGenerateData();
@@ -623,7 +623,7 @@ class Engine implements EngineInterface
 
         // Allow for extra operations (eg: calculate resources)
         App::doAction(
-            HookNames::PROCESS_AND_GENERATE_DATA_HELPER_CALCULATIONS,
+            EngineHookNames::PROCESS_AND_GENERATE_DATA_HELPER_CALCULATIONS,
             array(&$engineState->helperCalculations),
             $component,
             array(&$engineState->props)
@@ -844,7 +844,7 @@ class Engine implements EngineInterface
         }
 
         return App::applyFilters(
-            HookNames::REQUEST_META,
+            EngineHookNames::REQUEST_META,
             $meta
         );
     }
@@ -855,7 +855,7 @@ class Engine implements EngineInterface
     public function getSessionMeta(): array
     {
         return App::applyFilters(
-            HookNames::SESSION_META,
+            EngineHookNames::SESSION_META,
             []
         );
     }
@@ -889,7 +889,7 @@ class Engine implements EngineInterface
             };
         }
         return App::applyFilters(
-            HookNames::SITE_META,
+            EngineHookNames::SITE_META,
             $meta
         );
     }
@@ -1271,7 +1271,7 @@ class Engine implements EngineInterface
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
-            HookNames::ENGINE_ITERATION_START,
+            EngineHookNames::ENGINE_ITERATION_START,
             $root_component,
             array(&$root_model_props),
             array(&$root_props),
@@ -1582,7 +1582,7 @@ class Engine implements EngineInterface
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
             App::doAction(
-                HookNames::ENGINE_ITERATION_ON_DATALOADING_COMPONENT,
+                EngineHookNames::ENGINE_ITERATION_ON_DATALOADING_COMPONENT,
                 $component,
                 array(&$component_props),
                 array(&$data_properties),
@@ -1687,7 +1687,7 @@ class Engine implements EngineInterface
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
-            HookNames::ENGINE_ITERATION_END,
+            EngineHookNames::ENGINE_ITERATION_END,
             $root_component,
             array(&$root_model_props),
             array(&$root_props),

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-class HookNames
+class EngineHookNames
 {
     public final const ENGINE_ITERATION_START = __CLASS__ . ':engine-iteration-start';
     public final const ENGINE_ITERATION_ON_DATALOADING_COMPONENT = __CLASS__ . ':engine-iteration-on-dataloading-component';
