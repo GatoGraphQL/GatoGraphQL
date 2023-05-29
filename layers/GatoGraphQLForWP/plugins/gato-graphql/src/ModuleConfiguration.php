@@ -195,6 +195,11 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    /**
+     * This function is not expected to be configured,
+     * but it's mainly to help identify all related
+     * functionality.
+     */
     public function useSchemaConfigurationInInternalGraphQLServer(): bool
     {
         $envVariable = Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER;
