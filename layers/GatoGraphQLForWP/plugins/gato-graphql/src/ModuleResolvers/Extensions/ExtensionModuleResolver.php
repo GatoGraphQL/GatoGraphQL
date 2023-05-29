@@ -14,6 +14,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const GATO_GRAPHQL_PRO = Plugin::NAMESPACE . '\\extensions\\gato-graphql-pro';
     public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\extensions\\access-control';
     public const ACCESS_CONTROL_VISITOR_IP = Plugin::NAMESPACE . '\\extensions\\access-control-visitor-ip';
+    public const AUTOMATION = Plugin::NAMESPACE . '\\extensions\\automation';
     public const CACHE_CONTROL = Plugin::NAMESPACE . '\\extensions\\cache-control';
     public const CONDITIONAL_FIELD_MANIPULATION = Plugin::NAMESPACE . '\\extensions\\conditional-field-manipulation';
     public const DEPRECATION_NOTIFIER = Plugin::NAMESPACE . '\\extensions\\deprecation-notifier';
@@ -48,6 +49,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GATO_GRAPHQL_PRO,
             self::ACCESS_CONTROL,
             self::ACCESS_CONTROL_VISITOR_IP,
+            self::AUTOMATION,
             self::CACHE_CONTROL,
             self::CONDITIONAL_FIELD_MANIPULATION,
             self::DEPRECATION_NOTIFIER,
@@ -81,6 +83,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GATO_GRAPHQL_PRO => \__('Gato GraphQL PRO', 'gato-graphql'),
             self::ACCESS_CONTROL => \__('Access Control', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Access Control: Visitor IP', 'gato-graphql'),
+            self::AUTOMATION => \__('Automation', 'gato-graphql'),
             self::CACHE_CONTROL => \__('Cache Control', 'gato-graphql'),
             self::CONDITIONAL_FIELD_MANIPULATION => \__('Conditional Field Manipulation', 'gato-graphql'),
             self::DEPRECATION_NOTIFIER => \__('Deprecation Notifier', 'gato-graphql'),
@@ -115,6 +118,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GATO_GRAPHQL_PRO => \__('Superpower your app with PRO features.', 'gato-graphql'),
             self::ACCESS_CONTROL => \__('Grant user access to schema elements via Access Control Lists.', 'gato-graphql'),
             self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Access Control extension is rquired).', 'gato-graphql'),
+            self::AUTOMATION => \__('Automate tasks by chaining GraphQL queries via hooks and triggering them via WP-Cron.', 'gato-graphql'),
             self::CACHE_CONTROL => \__('Provide HTTP Caching for endpoints accessed via GET, with the max-age value automatically calculated from the query.', 'gato-graphql'),
             self::CONDITIONAL_FIELD_MANIPULATION => \__('Apply a directive on a field only if some condition is met.', 'gato-graphql'),
             self::DEPRECATION_NOTIFIER => \__('Send deprecations in the response to the query (and not only when doing introspection).', 'gato-graphql'),
