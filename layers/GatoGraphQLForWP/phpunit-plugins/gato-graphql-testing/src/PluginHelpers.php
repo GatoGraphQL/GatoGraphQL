@@ -14,11 +14,15 @@ class PluginHelpers
             return true;
         }
 
+        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
         if (!isset($_SERVER['HTTP_HOST'])) {
             return false;
         }
 
-        /** @var string */
+        /**
+         * @var string
+         * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
+         */
         $httpHost = $_SERVER['HTTP_HOST'];
 
         $validTestingDomains = array_merge(
