@@ -6,9 +6,9 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
-use GatoGraphQL\GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecyclePriorities;
+use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\Root\Constants\HookNames;
@@ -241,7 +241,7 @@ class InternalGraphQLServerTestExecuter
             );
         }
 
-        $response = GatoGraphQL::executeQuery(
+        $response = GraphQLServer::executeQuery(
             $query,
             $variables,
             $operationName,
@@ -309,9 +309,9 @@ class InternalGraphQLServerTestExecuter
     /**
      * Execute the query by any of these methods (to also test them):
      *
-     *   - `GatoGraphQL::executeQuery`
-     *   - `GatoGraphQL::executeQueryInFile`
-     *   - `GatoGraphQL::executePersistedQuery`
+     *   - `GraphQLServer::executeQuery`
+     *   - `GraphQLServer::executeQueryInFile`
+     *   - `GraphQLServer::executePersistedQuery`
      */
     protected function executeInternalGraphQLQuery(WP_Post $post): Response
     {
@@ -327,7 +327,7 @@ class InternalGraphQLServerTestExecuter
         /** @var string[] */
         $actions = App::getState('actions');
         if (in_array(Actions::TEST_GATO_GRAPHQL_EXECUTE_QUERY_IN_FILE_METHOD, $actions)) {
-            return GatoGraphQL::executeQueryInFile(
+            return GraphQLServer::executeQueryInFile(
                 $file,
                 $variables
             );
@@ -355,7 +355,7 @@ class InternalGraphQLServerTestExecuter
                 }
                 $persistedQueryIDOrSlug = (string)$persistedQueryIDOrSlug;
             }
-            return GatoGraphQL::executePersistedQuery(
+            return GraphQLServer::executePersistedQuery(
                 $persistedQueryIDOrSlug,
                 $variables
             );
@@ -363,7 +363,7 @@ class InternalGraphQLServerTestExecuter
 
         /** @var string */
         $query = file_get_contents($file);
-        return GatoGraphQL::executeQuery($query, $variables);
+        return GraphQLServer::executeQuery($query, $variables);
     }
 
     /**
