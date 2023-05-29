@@ -23,12 +23,6 @@ class PluginHelpers
             return false;
         }
 
-        /**
-         * @var string
-         * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
-         */
-        $httpHost = $_SERVER['HTTP_HOST'];
-
         $validTestingDomains = array_merge(
             Environment::getContinuousIntegrationValidTestingDomains(),
             Environment::getLocalDevelopmentValidTestingDomains()
