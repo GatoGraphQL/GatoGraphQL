@@ -96,7 +96,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::FIELD_RESPONSE_REMOVAL => \__('Field Response Removal', 'gato-graphql'),
             self::FIELD_TO_INPUT => \__('Field To Input', 'gato-graphql'),
             self::FIELD_VALUE_DATA_EXTRACTION_MANIPULATION => \__('Field Value Data Extraction and Manipulation', 'gato-graphql'),
-            self::FIELD_VALUE_ITERATION_AND_MANIPULATION => \__('Field Value Interation and Manipulation', 'gato-graphql'),
+            self::FIELD_VALUE_ITERATION_AND_MANIPULATION => \__('Field Value Iteration and Manipulation', 'gato-graphql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gato-graphql'),
             self::HELPER_FUNCTION_COLLECTION => \__('Helper Function Collection', 'gato-graphql'),
             self::HTTP_CLIENT => \__('HTTP Client', 'gato-graphql'),
