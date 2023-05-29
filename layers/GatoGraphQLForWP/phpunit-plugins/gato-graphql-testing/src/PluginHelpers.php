@@ -23,12 +23,11 @@ class PluginHelpers
             return false;
         }
 
+        $domain = static::getDomainFromHTTPHost($httpHost);
         $validTestingDomains = array_merge(
             Environment::getContinuousIntegrationValidTestingDomains(),
             Environment::getLocalDevelopmentValidTestingDomains()
         );
-
-        $domain = static::getDomainFromHTTPHost($httpHost);
         return in_array($domain, $validTestingDomains);
     }
 
