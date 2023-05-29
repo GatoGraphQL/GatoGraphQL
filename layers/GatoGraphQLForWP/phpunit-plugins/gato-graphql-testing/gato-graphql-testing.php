@@ -14,9 +14,8 @@ Domain Path: /languages
 */
 
 use GatoGraphQL\GatoGraphQL\Plugin as GatoGraphQLMainPlugin;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Environment;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Plugin;
-use PoP\Root\Environment as RootEnvironment;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\PluginHelpers;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -40,18 +39,7 @@ add_action(
          * - we are in the DEV environment, or
          * - we are executing integration tests (hosted in InstaWP)
          */
-        $enablePlugin = RootEnvironment::isApplicationEnvironmentDev();
-        if (!$enablePlugin && isset($_SERVER['HTTP_HOST'])) {
-            $validTestingDomains = array_merge(
-                Environment::getContinuousIntegrationValidTestingDomains(),
-                Environment::getLocalDevelopmentValidTestingDomains()
-            );
-            // Calculate the top level domain (app.site.com => site.com)
-            $hostNames = array_reverse(explode('.', $_SERVER['HTTP_HOST']));
-            $domain = $hostNames[1] . '.' . $hostNames[0];
-            $enablePlugin = in_array($domain, $validTestingDomains);
-        }
-        if (!$enablePlugin) {
+        if (!PluginHelpers::enablePlugin()) {
             \add_action('admin_notices', function () {
                 _e(sprintf(
                     '<div class="notice notice-error"><p>%s</p></div>',

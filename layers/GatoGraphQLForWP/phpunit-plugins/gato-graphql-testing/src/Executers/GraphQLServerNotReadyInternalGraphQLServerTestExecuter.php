@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
-use GatoGraphQL\GatoGraphQL\Server\InternalGraphQLServerFactory;
+use GatoGraphQL\InternalGraphQLServer\Server\InternalGraphQLServerFactory;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 
 class GraphQLServerNotReadyInternalGraphQLServerTestExecuter
