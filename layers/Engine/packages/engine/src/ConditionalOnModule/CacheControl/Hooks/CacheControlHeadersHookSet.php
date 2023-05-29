@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\ConditionalOnModule\CacheControl\Hooks;
 
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
-use PoP\ComponentModel\Engine\Engine;
+use PoP\ComponentModel\Engine\EngineHookNames;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
@@ -26,7 +26,7 @@ class CacheControlHeadersHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            Engine::HOOK_HEADERS,
+            EngineHookNames::HEADERS,
             $this->addHeaders(...)
         );
     }

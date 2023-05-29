@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\Hooks;
 
-use PoP\ComponentModel\Engine\Engine;
+use PoP\ComponentModel\Engine\EngineHookNames;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -14,7 +14,7 @@ class RoutingHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            Engine::HOOK_EXTRA_ROUTES,
+            EngineHookNames::EXTRA_ROUTES,
             $this->getExtraRoutes(...),
             10,
             1

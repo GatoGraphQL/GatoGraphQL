@@ -10,8 +10,8 @@ use PoP\Application\Constants\Actions;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
-use PoP\ComponentModel\Engine\Engine;
 use PoP\ComponentModel\Engine\EngineInterface;
+use PoP\ComponentModel\Engine\EngineHookNames;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ConfigurationComponentModel\Constants\Targets;
@@ -46,19 +46,19 @@ class LazyLoadHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            Engine::HOOK_ENGINE_ITERATION_START,
+            EngineHookNames::ENGINE_ITERATION_START,
             $this->start(...),
             10,
             4
         );
         App::addAction(
-            Engine::HOOK_ENGINE_ITERATION_ON_DATALOADING_COMPONENT,
+            EngineHookNames::ENGINE_ITERATION_ON_DATALOADING_COMPONENT,
             $this->calculateDataloadingComponentData(...),
             10,
             8
         );
         App::addAction(
-            Engine::HOOK_ENGINE_ITERATION_END,
+            EngineHookNames::ENGINE_ITERATION_END,
             $this->end(...),
             10,
             5

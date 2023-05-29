@@ -8,7 +8,7 @@ use PoPAPI\API\HelperServices\ApplicationStateFillerServiceInterface;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\ComponentModel\Component\Component;
-use PoP\ComponentModel\Engine\Engine;
+use PoP\ComponentModel\Engine\EngineHookNames;
 use PoP\Root\App;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -40,7 +40,7 @@ class EntryComponentInitializationHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            Engine::HOOK_ENTRY_COMPONENT_INITIALIZATION,
+            EngineHookNames::ENTRY_COMPONENT_INITIALIZATION,
             $this->initializeEntryComponent(...)
         );
     }
