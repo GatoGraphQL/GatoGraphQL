@@ -350,10 +350,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
 
-        return \get_posts([
-            'posts_per_page' => -1,
-            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-            'post_status' => 'publish',
-        ]);
+        return $this->getSchemaEntityListCustomPosts($graphQLSchemaConfigurationCustomPostType->getCustomPostType());
     }
 }
