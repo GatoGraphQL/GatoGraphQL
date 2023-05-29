@@ -28,14 +28,14 @@ class PluginHelpers
             Environment::getLocalDevelopmentValidTestingDomains()
         );
 
-        $domain = static::getDomainFromHostName($httpHost);
+        $domain = static::getDomainFromHTTPHost($httpHost);
         return in_array($domain, $validTestingDomains);
     }
 
     /**
      * Calculate the top level domain (app.site.com => site.com)
      */
-    protected static function getDomainFromHostName(string $httpHost): string
+    protected static function getDomainFromHTTPHost(string $httpHost): string
     {
         $hostNames = array_reverse(explode('.', $httpHost));
         return $hostNames[1] . '.' . $hostNames[0];
