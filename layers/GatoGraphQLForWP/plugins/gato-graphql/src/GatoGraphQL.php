@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
-use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
-use GatoGraphQL\GatoGraphQL\Services\Helpers\GraphQLQueryPostTypeHelpers;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class GatoGraphQL
 {
     private static ?EndpointHelpers $endpointHelpers = null;
-    private static ?GraphQLQueryPostTypeHelpers $graphQLQueryPostTypeHelpers = null;
-    private static ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
 
     final protected static function getEndpointHelpers(): EndpointHelpers
     {
@@ -24,26 +20,6 @@ class GatoGraphQL
             self::$endpointHelpers = $endpointHelpers;
         }
         return self::$endpointHelpers;
-    }
-    final protected static function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
-    {
-        if (self::$graphQLQueryPostTypeHelpers === null) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var GraphQLQueryPostTypeHelpers */
-            $graphQLQueryPostTypeHelpers = $instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
-            self::$graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
-        }
-        return self::$graphQLQueryPostTypeHelpers;
-    }
-    final protected static function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
-    {
-        if (self::$graphQLPersistedQueryEndpointCustomPostType === null) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var GraphQLPersistedQueryEndpointCustomPostType */
-            $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
-            self::$graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
-        }
-        return self::$graphQLPersistedQueryEndpointCustomPostType;
     }
 
     /**
