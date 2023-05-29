@@ -4,46 +4,18 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfiguratorExecuters;
 
-use GatoGraphQL\GatoGraphQL\App;
-use GatoGraphQL\GatoGraphQL\AppHelpers;
-use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointBlockHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators\PrivateEndpointSchemaConfigurator;
 use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators\SchemaConfiguratorInterface;
-use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
-use GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers\GraphQLEndpointHandler;
 
 class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfiguratorExecuter
 {
-    private ?UserSettingsManagerInterface $userSettingsManager = null;
-    private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?PrivateEndpointSchemaConfigurator $privateEndpointSchemaConfigurator = null;
-    private ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
     private ?EndpointBlockHelpers $endpointBlockHelpers = null;
     private ?EndpointHelpers $endpointHelpers = null;
 
-    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
-    {
-        $this->userSettingsManager = $userSettingsManager;
-    }
-    protected function getUserSettingsManager(): UserSettingsManagerInterface
-    {
-        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
-    }
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-    final protected function getModuleRegistry(): ModuleRegistryInterface
-    {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-    }
     final public function setPrivateEndpointSchemaConfigurator(PrivateEndpointSchemaConfigurator $privateEndpointSchemaConfigurator): void
     {
         $this->privateEndpointSchemaConfigurator = $privateEndpointSchemaConfigurator;
@@ -52,15 +24,6 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
     {
         /** @var PrivateEndpointSchemaConfigurator */
         return $this->privateEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PrivateEndpointSchemaConfigurator::class);
-    }
-    final public function setGraphQLEndpointHandler(GraphQLEndpointHandler $graphQLEndpointHandler): void
-    {
-        $this->graphQLEndpointHandler = $graphQLEndpointHandler;
-    }
-    final protected function getGraphQLEndpointHandler(): GraphQLEndpointHandler
-    {
-        /** @var GraphQLEndpointHandler */
-        return $this->graphQLEndpointHandler ??= $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
     }
     final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
     {
