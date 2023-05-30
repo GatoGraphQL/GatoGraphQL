@@ -33,7 +33,7 @@ interface ContentParserInterface
     /**
      * Use `false` to pass the "docs" folder when requesting
      * the file to read (so can retrieve files from either
-     * "docs" or "docs-pro" folders)
+     * "docs" or "docs-extensions" folders)
      */
     public function setUseDocsFolderInFileDir(?bool $useDocsFolderInFileDir = null): void;
 

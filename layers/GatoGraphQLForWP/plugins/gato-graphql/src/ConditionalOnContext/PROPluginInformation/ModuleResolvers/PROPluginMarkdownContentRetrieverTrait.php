@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
+namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 
 trait PROPluginMarkdownContentRetrieverTrait
@@ -15,7 +16,7 @@ trait PROPluginMarkdownContentRetrieverTrait
      */
     protected function getDocsFolder(): string
     {
-        return 'docs-pro';
+        return 'docs-extensions';
     }
 
     /**
@@ -25,7 +26,7 @@ trait PROPluginMarkdownContentRetrieverTrait
     {
         return str_replace(
             '/docs/',
-            '/docs-pro/',
+            '/docs-extensions/',
             PluginStaticHelpers::getGitHubRepoDocsRootPathURL(),
         );
     }
