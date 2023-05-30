@@ -611,7 +611,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
         ];
         $moduleClassConfiguration[ComponentModelModule::class] = [
-            ComponentModelEnvironment::ENABLE_COMPONENT_MODEL_CACHE => true,
             ComponentModelEnvironment::ENABLE_FEEDBACK_CATEGORY_EXTENSIONS => [
                 FeedbackCategories::WARNING,
                 // FeedbackCategories::NOTICE,
