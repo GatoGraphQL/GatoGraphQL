@@ -310,7 +310,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 );
             }
 
-            $docsBaseDir = $recipeEntryIsPRO ? ($recipeEntryPROExtensionModule !== null ? 'docs-pro-extensions' : 'docs-pro') : 'docs';
+            $docsBaseDir = $recipeEntryIsPRO ? ($recipeEntryPROExtensionModule !== null ? 'docs-extensions' : 'docs-extensions') : 'docs';
             $recipeEntryRelativePathDir = $docsBaseDir . '/recipes';
             $recipeContent = $this->getMarkdownContent(
                 $recipeEntryName,

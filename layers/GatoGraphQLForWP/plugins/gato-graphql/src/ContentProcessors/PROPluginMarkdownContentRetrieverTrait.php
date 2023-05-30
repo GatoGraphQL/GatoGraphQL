@@ -15,7 +15,7 @@ trait PROPluginMarkdownContentRetrieverTrait
      */
     protected function getDocsFolder(): string
     {
-        return 'docs-pro';
+        return 'docs-extensions';
     }
 
     /**
@@ -25,7 +25,7 @@ trait PROPluginMarkdownContentRetrieverTrait
     {
         return str_replace(
             '/docs/',
-            '/docs-pro/',
+            '/docs-extensions/',
             PluginStaticHelpers::getGitHubRepoDocsRootPathURL(),
         );
     }
