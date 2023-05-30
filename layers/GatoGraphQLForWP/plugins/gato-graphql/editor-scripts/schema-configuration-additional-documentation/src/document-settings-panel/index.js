@@ -9,7 +9,6 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
  */
 import {
     MarkdownInfoModalButton,
-    GoProLink,
 } from '@gatographql/components';
 import { getImplicitFeaturesDocMarkdownContentOrUseDefault } from '../implicit-features-doc-markdown-loader';
 

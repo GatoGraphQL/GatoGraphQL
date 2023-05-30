@@ -8,14 +8,6 @@ import './store';
  */
 
 /**
- * PRO
- */
-export { GoProLink } from './pro-components/go-pro-link';
-export { withPROCard } from './pro-components/pro-card';
-export { GraphAPIPROBlock } from './pro-components/pro-block';
-export { GATO_GRAPHQL_PRO_PLUGIN_WEBSITE_URL } from './pro-constants/environment';
-
-/**
  * Standard
  */
 export { withErrorMessage, withSpinner } from './components/loading';
