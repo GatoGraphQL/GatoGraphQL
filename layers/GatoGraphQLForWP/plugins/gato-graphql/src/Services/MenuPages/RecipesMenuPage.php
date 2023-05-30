@@ -44,175 +44,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 
     protected function getContentToPrint(): string
     {
-        $recipeEntries = [
-            [
-                'intro',
-                'Intro',
-            ],
-            [
-                'searching-wordpress-data',
-                'Searching WordPress data',
-            ],
-            [
-                'exposing-the-single-endpoint-for-private-use',
-                'Exposing the single endpoint for private use',
-            ],
-            [
-                'fetching-data-to-build-headless-sites',
-                'Fetching data to build headless sites',
-            ],
-            [
-                'complementing-wp-cli',
-                'Complementing WP-CLI',
-            ],
-            [
-                'exposing-safe-persisted-queries',
-                'Exposing safe persisted queries',
-            ],
-            [
-                'feeding-data-to-blocks-in-the-editor',
-                'Feeding data to blocks in the editor',
-            ],
-            [
-                'executing-graphql-queries-internally',
-                'Executing GraphQL queries internally',
-            ],
-            [
-                'defining-custom-private-endpoints',
-                'Defining custom private endpoints',
-            ],
-            [
-                'exposing-a-secure-public-api',
-                'Exposing a secure public API',
-                true,
-            ],
-            [
-                'customizing-content-for-different-users',
-                'Customizing content for different users',
-                true,
-            ],
-            [
-                'boosting-the-performance-of-the-api',
-                'Boosting the performance of the API',
-                true,
-            ],
-            [
-                'site-migrations',
-                'Site migrations',
-                true,
-            ],
-            [
-                'fixing-content-issues',
-                'Fixing content issues',
-                true,
-            ],
-            [
-                'inserting-a-gutenberg-block-in-all-posts',
-                'Inserting a Gutenberg block in all posts',
-                true,
-            ],
-            [
-                'removing-a-gutenberg-block-from-all-posts',
-                'Removing a Gutenberg block from all posts',
-                true,
-            ],
-            // [
-            //     'converting-content-to-gutenberg-blocks',
-            //     'Converting content to Gutenberg blocks',
-            //     true,
-            // ],
-            [
-                'persisted-queries-as-webhooks',
-                'Persisted Queries as Webhooks',
-                true,
-            ],
-            [
-                'automating-tasks',
-                'Automating tasks',
-                true,
-            ],
-            [
-                'executing-admin-tasks',
-                'Executing admin tasks',
-                true,
-            ],
-            [
-                'bulk-editing-content',
-                'Bulk editing content',
-                true,
-            ],
-            [
-                'interacting-with-3rd-party-service-apis',
-                'Interacting with 3rd-party service APIs',
-                true,
-            ],
-            [
-                'creating-an-api-gateway',
-                'Creating an API gateway',
-                true,
-            ],
-            [
-                'filtering-data-from-an-external-api',
-                'Filtering data from an external API',
-                true,
-            ],
-            [
-                'transforming-data-from-an-external-api',
-                'Transforming data from an external API',
-                true,
-            ],
-            [
-                'translating-all-posts-to-a-different-language',
-                'Translating all posts to a different language',
-                true,
-                ExtensionModuleResolver::GOOGLE_TRANSLATE,
-            ],
-            [
-                'combining-user-data-from-different-systems',
-                'Combining user data from different systems',
-                true,
-            ],
-            [
-                'importing-a-post-from-another-site',
-                'Importing a post from another site',
-                true,
-            ],
-            [
-                'importing-multiple-posts-at-once-from-another-site',
-                'Importing multiple posts at once from another site',
-                true,
-            ],
-            [
-                'synchronizing-content-across-wordpress-sites',
-                'Synchronizing content across WordPress sites',
-                true,
-            ],
-            [
-                'retrieving-and-downloading-github-artifacts',
-                'Retrieving and downloading GitHub Artifacts',
-                true,
-            ],
-            [
-                'producing-an-error-if-the-request-entry-does-not-exist',
-                'Producing an error if the requested entry does not exist',
-                true,
-            ],
-            [
-                'reverting-mutations-in-case-of-error',
-                'Reverting mutations in case of error',
-                true,
-            ],
-            [
-                'content-orchestration',
-                'Content orchestration',
-                true,
-            ],
-            // [
-            //     'using-the-graphql-server-without-wordpress',
-            //     'Using the GraphQL server without WordPress',
-            //     true,
-            // ],
-        ];
+        $recipeEntries = $this->getRecipeEntries();
         // By default, focus on the first recipe
         $activeRecipeName = $recipeEntries[0][0];
         // If passing a tab, focus on that one, if the module exists
@@ -391,5 +223,182 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         parent::enqueueAssets();
 
         $this->enqueueTabpanelAssets();
+    }
+
+    /**
+     * @better-return array<array{0:string,1:string,2:?bool,3:?string}>
+     * @return array<array<mixed>>
+     */
+    protected function getRecipeEntries(): array
+    {
+        return [
+            [
+                'intro',
+                'Intro',
+            ],
+            [
+                'searching-wordpress-data',
+                'Searching WordPress data',
+            ],
+            [
+                'exposing-the-single-endpoint-for-private-use',
+                'Exposing the single endpoint for private use',
+            ],
+            [
+                'fetching-data-to-build-headless-sites',
+                'Fetching data to build headless sites',
+            ],
+            [
+                'complementing-wp-cli',
+                'Complementing WP-CLI',
+            ],
+            [
+                'exposing-safe-persisted-queries',
+                'Exposing safe persisted queries',
+            ],
+            [
+                'feeding-data-to-blocks-in-the-editor',
+                'Feeding data to blocks in the editor',
+            ],
+            [
+                'executing-graphql-queries-internally',
+                'Executing GraphQL queries internally',
+            ],
+            [
+                'defining-custom-private-endpoints',
+                'Defining custom private endpoints',
+            ],
+            [
+                'exposing-a-secure-public-api',
+                'Exposing a secure public API',
+                true,
+            ],
+            [
+                'customizing-content-for-different-users',
+                'Customizing content for different users',
+                true,
+            ],
+            [
+                'boosting-the-performance-of-the-api',
+                'Boosting the performance of the API',
+                true,
+            ],
+            [
+                'site-migrations',
+                'Site migrations',
+                true,
+            ],
+            [
+                'fixing-content-issues',
+                'Fixing content issues',
+                true,
+            ],
+            [
+                'inserting-a-gutenberg-block-in-all-posts',
+                'Inserting a Gutenberg block in all posts',
+                true,
+            ],
+            [
+                'removing-a-gutenberg-block-from-all-posts',
+                'Removing a Gutenberg block from all posts',
+                true,
+            ],
+            // [
+            //     'converting-content-to-gutenberg-blocks',
+            //     'Converting content to Gutenberg blocks',
+            //     true,
+            // ],
+            [
+                'persisted-queries-as-webhooks',
+                'Persisted Queries as Webhooks',
+                true,
+            ],
+            [
+                'automating-tasks',
+                'Automating tasks',
+                true,
+            ],
+            [
+                'executing-admin-tasks',
+                'Executing admin tasks',
+                true,
+            ],
+            [
+                'bulk-editing-content',
+                'Bulk editing content',
+                true,
+            ],
+            [
+                'interacting-with-3rd-party-service-apis',
+                'Interacting with 3rd-party service APIs',
+                true,
+            ],
+            [
+                'creating-an-api-gateway',
+                'Creating an API gateway',
+                true,
+            ],
+            [
+                'filtering-data-from-an-external-api',
+                'Filtering data from an external API',
+                true,
+            ],
+            [
+                'transforming-data-from-an-external-api',
+                'Transforming data from an external API',
+                true,
+            ],
+            [
+                'translating-all-posts-to-a-different-language',
+                'Translating all posts to a different language',
+                true,
+                ExtensionModuleResolver::GOOGLE_TRANSLATE,
+            ],
+            [
+                'combining-user-data-from-different-systems',
+                'Combining user data from different systems',
+                true,
+            ],
+            [
+                'importing-a-post-from-another-site',
+                'Importing a post from another site',
+                true,
+            ],
+            [
+                'importing-multiple-posts-at-once-from-another-site',
+                'Importing multiple posts at once from another site',
+                true,
+            ],
+            [
+                'synchronizing-content-across-wordpress-sites',
+                'Synchronizing content across WordPress sites',
+                true,
+            ],
+            [
+                'retrieving-and-downloading-github-artifacts',
+                'Retrieving and downloading GitHub Artifacts',
+                true,
+            ],
+            [
+                'producing-an-error-if-the-request-entry-does-not-exist',
+                'Producing an error if the requested entry does not exist',
+                true,
+            ],
+            [
+                'reverting-mutations-in-case-of-error',
+                'Reverting mutations in case of error',
+                true,
+            ],
+            [
+                'content-orchestration',
+                'Content orchestration',
+                true,
+            ],
+            // [
+            //     'using-the-graphql-server-without-wordpress',
+            //     'Using the GraphQL server without WordPress',
+            //     true,
+            // ],
+        ];
     }
 }
