@@ -6,7 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\PROPluginInformation\Modu
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\CommonModuleResolverTrait;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\HasMarkdownDocumentationModuleResolverTrait;
-use GatoGraphQL\GatoGraphQL\ContentProcessors\PROPluginMarkdownContentRetrieverTrait;
 
 trait ModuleResolverTrait
 {
