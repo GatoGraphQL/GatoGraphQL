@@ -8,6 +8,11 @@ use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractPluginWPAdminPageWebse
 
 class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPageWebserverRequestTestCase
 {
+    protected function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string
+    {
+        return 'graphiql';
+    }
+
     /**
      * Provide all the MenuPageSlug registered by Gato GraphQL.
      * These are under function `getMenuPageSlug` from `MenuPageInterface`,
