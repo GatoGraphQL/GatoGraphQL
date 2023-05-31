@@ -21,6 +21,18 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 
     public final const SCREEN_OPTION_NAME = 'gato_graphql_extensions_per_page';
 
+    private ?ExtensionDocsMenuPage $extensionDocsMenuPage = null;
+
+    final public function setExtensionDocsMenuPage(ExtensionDocsMenuPage $extensionDocsMenuPage): void
+    {
+        $this->extensionDocsMenuPage = $extensionDocsMenuPage;
+    }
+    final protected function getExtensionDocsMenuPage(): ExtensionDocsMenuPage
+    {
+        /** @var ExtensionDocsMenuPage */
+        return $this->extensionDocsMenuPage ??= $this->instanceManager->getInstance(ExtensionDocsMenuPage::class);
+    }
+
     public function getMenuPageSlug(): string
     {
         return 'extensions';
@@ -106,10 +118,14 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         printf(
             '<p>%s</p>',
             sprintf(
-                __('Extensions add functionality and expand the GraphQL schema. You can browse and get extensions on the <a href="%s" target="%s">Gato GraphQL shop%s</a>.', 'gato-graphql'),
+                __('Extensions add functionality and expand the GraphQL schema. You can get extensions on the <a href="%1$s" target="%2$s">Gato GraphQL shop%4$s</a>. Browse their documentation more easily on the <a href="%3$s">Extension Docs</a> page.', 'gato-graphql'),
                 $moduleConfiguration->getPROPluginShopURL(),
                 '_blank',
-                HTMLCodes::OPEN_IN_NEW_WINDOW
+                \admin_url(sprintf(
+                    'admin.php?page=%s',
+                    $this->getExtensionDocsMenuPage()->getScreenID()
+                )),
+                HTMLCodes::OPEN_IN_NEW_WINDOW,
             )
         );
     }
