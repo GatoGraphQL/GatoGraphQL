@@ -12,7 +12,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings
-- Added documentation page "Use Cases, Best Practices, and Recipes"
+- Added the Extensions page, to browse and install Gato GraphQL extensions
+- Added the Recipes page, providing use examples of GraphQL queries for different use cases
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
 - Implementation of standard custom scalar types
 - Sort the Schema Configuration entries by name
