@@ -23,7 +23,7 @@ class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRe
             // Default menu page entry
             'default' => [
                 sprintf(
-                    'wp-admin/edit.php?page=%s',
+                    'wp-admin/admin.php?page=%s',
                     $pluginMenuName
                 ),
             ]
@@ -31,7 +31,7 @@ class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRe
         foreach ($this->getGatoGraphQLPluginMenuPageSlugs() as $pageSlug) {
             $entries[$pageSlug] = [
                 sprintf(
-                    'wp-admin/edit.php?page=%s_%s',
+                    'wp-admin/admin.php?page=%s_%s',
                     $pluginMenuName,
                     $pageSlug
                 ),
