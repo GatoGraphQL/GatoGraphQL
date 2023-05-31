@@ -1,8 +1,8 @@
-# Custom Scalars Pack
+# Custom Scalars
 
 Collection of additional custom scalar types.
 
-## Custom Scalars
+## List of Custom Scalars
 
 The following custom scalar types are made available in the GraphQL schema:
 
@@ -56,8 +56,8 @@ UUID (universally unique identifier) scalar, such as `25770975-0c3d-4ff0-ba27-a0
 
 ## Introspection
 
-When installing the Gato GraphQL PRO plugin, these custom scalars will always be available for your use to extend the GraphQL schema.
+When installing the Gato GraphQL plugin, these custom scalars will be available to be used in your application.
 
-However, please notice that only when a custom scalar type is referenced will it appear on the GraphQL schema, as [defined by the spec for built-in scalars](https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars):
+However, please notice that currently they are not referenced anywhere in the WordPress GraphQL schema, and as such they do not appear on the clients (GraphiQL and Interactive Schema). This is because a custom scalar type must be referenced to appear on the GraphQL schema, as [defined by the spec for built-in scalars](https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars):
 
 > When returning the set of types from the `__Schema` introspection type, all referenced built-in scalars must be included. If a built-in scalar type is not referenced anywhere in a schema (there is no field, argument, or input field of that type) then it must not be included.
