@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsExtensionsFolderPluginMarkdownContentRetrieverTrait;
 
 class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 {
-    use NoDocsFolderPluginMarkdownContentRetrieverTrait;
+    use NoDocsExtensionsFolderPluginMarkdownContentRetrieverTrait;
 
     public function getMenuPageSlug(): string
     {
