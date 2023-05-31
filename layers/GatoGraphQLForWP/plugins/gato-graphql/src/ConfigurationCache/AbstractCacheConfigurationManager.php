@@ -88,11 +88,11 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              * or are allowed to have (eg: Custom Admin Endpoint, via hook)
              * a distinctive configuration of their own, so cache them
              * independently.
-             * 
+             *
              * This also applies to Persisted Query endpoints. Normally,
              * they are the same as the Default admin endpoint (they are
              * applied the same Disabled Modules, so they have the same
-             * Service Container) with the unique exception of 
+             * Service Container) with the unique exception of
              * Low-Level Persisted Query Editing, so then can't reuse the cache.
              */
             if ($endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT) {

@@ -4,26 +4,16 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
-abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWebserverRequestTestCase
+use Psr\Http\Message\ResponseInterface;
+
+abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWPAdminPageWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-    /**
-     * @dataProvider provideModuleDocEntries
-     */
-    public function testModuleDocsExist(
-        string $endpoint,
+    protected function executeAsserts(
+        ResponseInterface $response,
     ): void {
-        $client = static::getClient();
-        $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
-        $options = static::getRequestBasicOptions();
-        $response = $client->get(
-            $endpointURL,
-            $options
-        );
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertStringStartsWith('text/html', $response->getHeaderLine('content-type'));
+        parent::executeAsserts($response);
 
         /**
          * Assert that the response does NOT contain the
@@ -42,6 +32,14 @@ abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWebserv
     protected function getModuleDocErrorMessage(): string
     {
         return 'Oops, the documentation for this module is not available';
+    }
+
+    /**
+     * @return array<string,string[]>
+     */
+    final protected function providePageEntries(): array
+    {
+        return $this->provideModuleDocEntries();
     }
 
     /**
