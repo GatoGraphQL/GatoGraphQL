@@ -282,6 +282,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'site-migrations',
                 \__('Site migrations', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
             ],
             [
                 'fixing-content-issues',
@@ -290,6 +295,11 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'inserting-a-gutenberg-block-in-all-posts',
                 \__('Inserting a Gutenberg block in all posts', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
             ],
             [
                 'removing-a-gutenberg-block-from-all-posts',
@@ -297,7 +307,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             ],
             // [
             //     'converting-content-to-gutenberg-blocks',
-            //     'Converting content to Gutenberg blocks',
+            //      \__('Converting content to Gutenberg blocks', 'gato-graphql'),
             //     true,
             // ],
             [
@@ -337,7 +347,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 \__('Translating all posts to a different language', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
-                ]
+                ],
             ],
             [
                 'combining-user-data-from-different-systems',
@@ -373,7 +383,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             ],
             // [
             //     'using-the-graphql-server-without-wordpress',
-            //     'Using the GraphQL server without WordPress',
+            //      \__('Using the GraphQL server without WordPress', 'gato-graphql'),
             //     true,
             // ],
         ];
