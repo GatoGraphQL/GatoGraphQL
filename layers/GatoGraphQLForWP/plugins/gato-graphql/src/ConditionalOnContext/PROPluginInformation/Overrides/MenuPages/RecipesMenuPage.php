@@ -11,8 +11,6 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage as UpstreamRecipe
 
 class RecipesMenuPage extends UpstreamRecipesMenuPage
 {
-    use UsePRODocsMenuPageTrait;
-
     protected function addLinkToExtensionInRecipeTitleInContent(): bool
     {
         return false;
@@ -82,15 +80,5 @@ class RecipesMenuPage extends UpstreamRecipesMenuPage
             $message,
             $button
         ) . $recipeContent;
-    }
-
-    /**
-     * Enqueue the required assets and initialize the localized scripts
-     */
-    protected function enqueueAssets(): void
-    {
-        parent::enqueueAssets();
-
-        $this->enqueuePRODocsAssets();
     }
 }
