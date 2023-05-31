@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionDocumentationMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\MenuPageInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModuleDocumentationMenuPage;
@@ -27,7 +27,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?SettingsMenuPage $settingsMenuPage = null;
     private ?ModuleDocumentationMenuPage $moduleDocumentationMenuPage = null;
     private ?ModulesMenuPage $modulesMenuPage = null;
-    private ?ExtensionDocumentationMenuPage $extensionDocumentationMenuPage = null;
+    private ?ExtensionModuleDocumentationMenuPage $extensionModuleDocumentationMenuPage = null;
     private ?ExtensionsMenuPage $extensionsMenuPage = null;
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     private ?RecipesMenuPage $recipesMenuPage = null;
@@ -88,14 +88,14 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         /** @var ModulesMenuPage */
         return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
     }
-    final public function setExtensionDocumentationMenuPage(ExtensionDocumentationMenuPage $extensionDocumentationMenuPage): void
+    final public function setExtensionModuleDocumentationMenuPage(ExtensionModuleDocumentationMenuPage $extensionModuleDocumentationMenuPage): void
     {
-        $this->extensionDocumentationMenuPage = $extensionDocumentationMenuPage;
+        $this->extensionModuleDocumentationMenuPage = $extensionModuleDocumentationMenuPage;
     }
-    final protected function getExtensionDocumentationMenuPage(): ExtensionDocumentationMenuPage
+    final protected function getExtensionModuleDocumentationMenuPage(): ExtensionModuleDocumentationMenuPage
     {
-        /** @var ExtensionDocumentationMenuPage */
-        return $this->extensionDocumentationMenuPage ??= $this->instanceManager->getInstance(ExtensionDocumentationMenuPage::class);
+        /** @var ExtensionModuleDocumentationMenuPage */
+        return $this->extensionModuleDocumentationMenuPage ??= $this->instanceManager->getInstance(ExtensionModuleDocumentationMenuPage::class);
     }
     final public function setExtensionsMenuPage(ExtensionsMenuPage $extensionsMenuPage): void
     {
@@ -330,7 +330,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     {
         return
             $this->getMenuPageHelper()->isDocumentationScreen() ?
-                $this->getExtensionDocumentationMenuPage()
+                $this->getExtensionModuleDocumentationMenuPage()
                 : $this->getExtensionsMenuPage();
     }
 

@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 
-class ExtensionDocumentationMenuPage extends AbstractModuleDocsMenuPage
+class ExtensionModuleDocumentationMenuPage extends AbstractModuleDocsMenuPage
 {
     private ?ExtensionsMenuPage $extensionsMenuPage = null;
 
