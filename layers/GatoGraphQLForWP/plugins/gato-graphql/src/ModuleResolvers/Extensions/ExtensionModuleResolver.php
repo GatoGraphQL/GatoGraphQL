@@ -110,8 +110,8 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return match ($module) {
             self::ACCESS_CONTROL => \__('Grant user access to schema elements via Access Control Lists.', 'gato-graphql'),
-            self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Access Control extension is rquired).', 'gato-graphql'),
-            self::AUTOMATION => \__('Automate tasks by chaining GraphQL queries via hooks and triggering them via WP-Cron.', 'gato-graphql'),
+            self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Access Control extension is required).', 'gato-graphql'),
+            self::AUTOMATION => \__('Automate tasks by chaining GraphQL queries via hooks and triggering them via WP-Cron (Internal GraphQL Server extension is required).', 'gato-graphql'),
             self::CACHE_CONTROL => \__('Provide HTTP Caching for endpoints accessed via GET, with the max-age value automatically calculated from the query.', 'gato-graphql'),
             self::CONDITIONAL_FIELD_MANIPULATION => \__('Apply a directive on a field only if some condition is met.', 'gato-graphql'),
             self::DEPRECATION_NOTIFIER => \__('Send deprecations in the response to the query (and not only when doing introspection).', 'gato-graphql'),
