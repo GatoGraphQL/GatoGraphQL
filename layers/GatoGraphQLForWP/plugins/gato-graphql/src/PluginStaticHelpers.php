@@ -14,4 +14,10 @@ class PluginStaticHelpers
             : $mainPluginVersion;
         return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/gato-graphql/';
     }
+
+    public static function isWordPressPluginActive(string $pluginFile): bool
+    {
+        $activePlugins = apply_filters('active_plugins', get_option('active_plugins'));
+        return in_array($pluginFile, $activePlugins);
+    }
 }
