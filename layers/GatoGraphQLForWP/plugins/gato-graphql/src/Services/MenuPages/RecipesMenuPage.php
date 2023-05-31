@@ -233,67 +233,67 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         return [
             [
                 'intro',
-                'Intro',
+                \__('Intro', 'gato-graphql'),
             ],
             [
                 'searching-wordpress-data',
-                'Searching WordPress data',
+                \__('Searching WordPress data', 'gato-graphql'),
             ],
             [
                 'exposing-the-single-endpoint-for-private-use',
-                'Exposing the single endpoint for private use',
+                \__('Exposing the single endpoint for private use', 'gato-graphql'),
             ],
             [
                 'fetching-data-to-build-headless-sites',
-                'Fetching data to build headless sites',
+                \__('Fetching data to build headless sites', 'gato-graphql'),
             ],
             [
                 'complementing-wp-cli',
-                'Complementing WP-CLI',
+                \__('Complementing WP-CLI', 'gato-graphql'),
             ],
             [
                 'exposing-safe-persisted-queries',
-                'Exposing safe persisted queries',
+                \__('Exposing safe persisted queries', 'gato-graphql'),
             ],
             [
                 'feeding-data-to-blocks-in-the-editor',
-                'Feeding data to blocks in the editor',
+                \__('Feeding data to blocks in the editor', 'gato-graphql'),
             ],
             [
                 'executing-graphql-queries-internally',
-                'Executing GraphQL queries internally',
+                \__('Executing GraphQL queries internally', 'gato-graphql'),
             ],
             [
                 'defining-custom-private-endpoints',
-                'Defining custom private endpoints',
+                \__('Defining custom private endpoints', 'gato-graphql'),
             ],
             [
                 'exposing-a-secure-public-api',
-                'Exposing a secure public API',
+                \__('Exposing a secure public API', 'gato-graphql'),
             ],
             [
                 'customizing-content-for-different-users',
-                'Customizing content for different users',
+                \__('Customizing content for different users', 'gato-graphql'),
             ],
             [
                 'boosting-the-performance-of-the-api',
-                'Boosting the performance of the API',
+                \__('Boosting the performance of the API', 'gato-graphql'),
             ],
             [
                 'site-migrations',
-                'Site migrations',
+                \__('Site migrations', 'gato-graphql'),
             ],
             [
                 'fixing-content-issues',
-                'Fixing content issues',
+                \__('Fixing content issues', 'gato-graphql'),
             ],
             [
                 'inserting-a-gutenberg-block-in-all-posts',
-                'Inserting a Gutenberg block in all posts',
+                \__('Inserting a Gutenberg block in all posts', 'gato-graphql'),
             ],
             [
                 'removing-a-gutenberg-block-from-all-posts',
-                'Removing a Gutenberg block from all posts',
+                \__('Removing a Gutenberg block from all posts', 'gato-graphql'),
             ],
             // [
             //     'converting-content-to-gutenberg-blocks',
@@ -302,74 +302,74 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             // ],
             [
                 'persisted-queries-as-webhooks',
-                'Persisted Queries as Webhooks',
+                \__('Persisted Queries as Webhooks', 'gato-graphql'),
             ],
             [
                 'automating-tasks',
-                'Automating tasks',
+                \__('Automating tasks', 'gato-graphql'),
             ],
             [
                 'executing-admin-tasks',
-                'Executing admin tasks',
+                \__('Executing admin tasks', 'gato-graphql'),
             ],
             [
                 'bulk-editing-content',
-                'Bulk editing content',
+                \__('Bulk editing content', 'gato-graphql'),
             ],
             [
                 'interacting-with-3rd-party-service-apis',
-                'Interacting with 3rd-party service APIs',
+                \__('Interacting with 3rd-party service APIs', 'gato-graphql'),
             ],
             [
                 'creating-an-api-gateway',
-                'Creating an API gateway',
+                \__('Creating an API gateway', 'gato-graphql'),
             ],
             [
                 'filtering-data-from-an-external-api',
-                'Filtering data from an external API',
+                \__('Filtering data from an external API', 'gato-graphql'),
             ],
             [
                 'transforming-data-from-an-external-api',
-                'Transforming data from an external API',
+                \__('Transforming data from an external API', 'gato-graphql'),
             ],
             [
                 'translating-all-posts-to-a-different-language',
-                'Translating all posts to a different language',
+                \__('Translating all posts to a different language', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                 ]
             ],
             [
                 'combining-user-data-from-different-systems',
-                'Combining user data from different systems',
+                \__('Combining user data from different systems', 'gato-graphql'),
             ],
             [
                 'importing-a-post-from-another-site',
-                'Importing a post from another site',
+                \__('Importing a post from another site', 'gato-graphql'),
             ],
             [
                 'importing-multiple-posts-at-once-from-another-site',
-                'Importing multiple posts at once from another site',
+                \__('Importing multiple posts at once from another site', 'gato-graphql'),
             ],
             [
                 'synchronizing-content-across-wordpress-sites',
-                'Synchronizing content across WordPress sites',
+                \__('Synchronizing content across WordPress sites', 'gato-graphql'),
             ],
             [
                 'retrieving-and-downloading-github-artifacts',
-                'Retrieving and downloading GitHub Artifacts',
+                \__('Retrieving and downloading GitHub Artifacts', 'gato-graphql'),
             ],
             [
                 'producing-an-error-if-the-request-entry-does-not-exist',
-                'Producing an error if the requested entry does not exist',
+                \__('Producing an error if the requested entry does not exist', 'gato-graphql'),
             ],
             [
                 'reverting-mutations-in-case-of-error',
-                'Reverting mutations in case of error',
+                \__('Reverting mutations in case of error', 'gato-graphql'),
             ],
             [
                 'content-orchestration',
-                'Content orchestration',
+                \__('Content orchestration', 'gato-graphql'),
             ],
             // [
             //     'using-the-graphql-server-without-wordpress',
