@@ -8,7 +8,6 @@ use GatoGraphQL\GatoGraphQL\Container\CompilerPasses\RegisterUserAuthorizationSc
 use GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\RegisterSettingsCategoryResolverCompilerPass;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractPluginModule;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;

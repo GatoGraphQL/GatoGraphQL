@@ -180,7 +180,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     ): string {
         if ($recipeEntryExtensionModules === []) {
             return $recipeContent;
-        }        
+        }
         $messagePlaceholder = count($recipeEntryExtensionModules) === 1
             ? \__('%s This recipe requires extension %s to be active.', 'gato-graphql')
             : \__('%s This recipe requires extensions %s to be active.', 'gato-graphql');
