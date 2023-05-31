@@ -8,14 +8,6 @@ use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractPluginWPAdminPageWebse
 
 class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPageWebserverRequestTestCase
 {
-    /**
-     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
-     */
-    protected function getPluginMenuName(): string
-    {
-        return 'gato_graphql';
-    }
-
     protected function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string
     {
         return 'graphiql';

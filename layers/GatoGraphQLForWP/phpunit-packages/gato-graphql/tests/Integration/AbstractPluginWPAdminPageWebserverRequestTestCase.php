@@ -52,11 +52,17 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
                 ),
             ];
         }
-        
+
         return $entries;
     }
 
-    abstract protected function getPluginMenuName(): string;
+    /**
+     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
+     */
+    protected function getPluginMenuName(): string
+    {
+        return 'gato_graphql';
+    }
 
     /**
      * Provide all the MenuPageSlug registered by Gato GraphQL.
