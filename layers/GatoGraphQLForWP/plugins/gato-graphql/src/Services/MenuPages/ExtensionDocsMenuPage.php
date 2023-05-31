@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 
 class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 {
