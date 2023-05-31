@@ -39,6 +39,13 @@ class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRe
     {
         return [
             'about',
+            'extensiondocs',
+            'extensions',
+            'graphiql',
+            'voyager',
+            'modules',
+            'recipes',
+            'settings',
         ];
     }
 }
