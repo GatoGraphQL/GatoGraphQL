@@ -1,4 +1,17 @@
 /**
+ * Make all items have the same height
+ */
+.gato-graphql-list-table  #the-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.gato-graphql-list-table .plugin-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/**
  * Hide elements on the bottom part of the extension items on the table,
  * as they contain unneeded information
  */
