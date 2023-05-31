@@ -75,7 +75,10 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
      */
     abstract protected function getGatoGraphQLPluginMenuPageSlugs(): array;
     
-    abstract protected function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string;
+    protected function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string
+    {
+        return null;
+    }
 
     /**
      * Provide all the Custom Post Types registered by Gato GraphQL.
