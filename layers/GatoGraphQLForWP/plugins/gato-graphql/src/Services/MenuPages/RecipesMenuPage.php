@@ -82,7 +82,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         foreach ($recipeEntries as $i => $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
-            $recipeEntryPROExtensionModule = $recipeEntry[2] ?? null;
+            $recipeEntryExtensionModule = $recipeEntry[2] ?? null;
 
             // Enumerate the recipes
             $recipeEntryTitle = sprintf(
@@ -119,7 +119,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
-            $recipeEntryPROExtensionModule = $recipeEntry[2] ?? null;
+            $recipeEntryExtensionModule = $recipeEntry[2] ?? null;
 
             $recipeEntryRelativePathDir = 'docs/recipes';
             $recipeContent = $this->getMarkdownContent(
@@ -159,7 +159,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 $recipeEntryTitle,
                 $this->getRecipeContent(
                     $recipeContent,
-                    $recipeEntryPROExtensionModule,
+                    $recipeEntryExtensionModule,
                 )
             );
         }
@@ -174,21 +174,21 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 
     protected function getRecipeContent(
         string $recipeContent,
-        ?string $recipeEntryPROExtensionModule,
+        ?string $recipeEntryExtensionModule,
     ): string {
-        if ($recipeEntryPROExtensionModule === null) {
+        if ($recipeEntryExtensionModule === null) {
             return $recipeContent;
         }        
         $buttonClassnames = 'button button-secondary';
         /** @var ExtensionModuleResolverInterface */
-        $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
+        $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryExtensionModule);
         $message = sprintf(
             \__('This recipe requires extension <strong>%s</strong> to be installed.', 'gato-graphql'),
-            $extensionModuleResolver->getName($recipeEntryPROExtensionModule)
+            $extensionModuleResolver->getName($recipeEntryExtensionModule)
         );
         $button = $this->getGetExtensionToUnlockAnchorHTML(
             $extensionModuleResolver,
-            $recipeEntryPROExtensionModule,
+            $recipeEntryExtensionModule,
             $buttonClassnames,
         );
         return sprintf(
@@ -197,7 +197,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                     <p>%s %s</p>
                 </div>
             HTML,
-            'go-pro-highlight' . ($recipeEntryPROExtensionModule !== null ? ' pro-extension' : ''),
+            'go-pro-highlight' . ($recipeEntryExtensionModule !== null ? ' pro-extension' : ''),
             $message,
             $button
         ) . $recipeContent;
