@@ -199,7 +199,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         }
         $messageHTML = sprintf(
             $messagePlaceholder,
-            '📣',
+            '🌀',
             implode(
                 \__(', ', 'gato-graphql'),
                 $extensionHTMLItems
