@@ -180,7 +180,48 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         bool $recipeEntryIsPRO,
         ?string $recipeEntryPROExtensionModule,
     ): string {
-        return $recipeContent;
+        if (!$recipeEntryIsPRO) {
+            return $recipeContent;
+        }        
+        $buttonClassnames = 'button button-secondary';
+        /** @var ExtensionModuleResolverInterface */
+        $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
+        $message = sprintf(
+            \__('This recipe requires extension <strong>%s</strong> to be installed.', 'gato-graphql'),
+            $extensionModuleResolver->getName($recipeEntryPROExtensionModule)
+        );
+        $button = $this->getGetExtensionToUnlockAnchorHTML(
+            $extensionModuleResolver,
+            $recipeEntryPROExtensionModule,
+            $buttonClassnames,
+        );
+        return sprintf(
+            <<<HTML
+                <div class="%s">
+                    <p>%s %s</p>
+                </div>
+            HTML,
+            'go-pro-highlight' . ($recipeEntryPROExtensionModule !== null ? ' pro-extension' : ''),
+            $message,
+            $button
+        ) . $recipeContent;
+    }
+
+    protected function getGetExtensionToUnlockAnchorHTML(
+        ExtensionModuleResolverInterface $extensionModuleResolver,
+        string $extensionModule,
+        string $class = '',
+    ): string {
+        return \sprintf(
+            '<a href="%s" target="%s" class="%s">%s</a>',
+            $extensionModuleResolver->getWebsiteURL($extensionModule),
+            '_blank',
+            $class,
+            sprintf(
+                \__('Get extension <strong>%s</strong> to unlock! 🔓', 'gato-graphql'),
+                $extensionModuleResolver->getName($extensionModule),
+            ),
+        );
     }
 
     /**
