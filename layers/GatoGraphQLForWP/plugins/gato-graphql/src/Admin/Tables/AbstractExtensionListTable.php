@@ -344,8 +344,8 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             $alternativeGatoGraphQLLogoURL,
             $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
             \__('Request an Extension', 'gato-graphql'),
-            \__('Needing an integration with a 3rd-party plugin? Let us know, and we can help develop a solution.', 'gato-graphql'),
-            \__('<strong>Gato GraphQL</strong> can help support the needs of your app'),
+            \__('Needing an integration with a 3rd-party plugin? Let us know, and we can work on an extension.', 'gato-graphql'),
+            \__('Supporting the needs of your app via <strong>Gato GraphQL</strong>'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }
