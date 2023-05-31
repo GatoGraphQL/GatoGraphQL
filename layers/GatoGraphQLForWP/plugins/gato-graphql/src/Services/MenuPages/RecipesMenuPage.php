@@ -82,7 +82,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         foreach ($recipeEntries as $i => $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
-            $recipeEntryExtensionModule = $recipeEntry[2] ?? null;
 
             // Enumerate the recipes
             $recipeEntryTitle = sprintf(
@@ -119,7 +118,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
-            $recipeEntryExtensionModule = $recipeEntry[2] ?? null;
+            $recipeEntryExtensionModules = $recipeEntry[2] ?? [];
 
             $recipeEntryRelativePathDir = 'docs/recipes';
             $recipeContent = $this->getMarkdownContent(
@@ -159,7 +158,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 $recipeEntryTitle,
                 $this->getRecipeContent(
                     $recipeContent,
-                    $recipeEntryExtensionModule,
+                    $recipeEntryExtensionModules,
                 )
             );
         }
@@ -172,35 +171,41 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         return $markdownContent;
     }
 
+    /**
+     * @param string[] $recipeEntryExtensionModules
+     */
     protected function getRecipeContent(
         string $recipeContent,
-        ?string $recipeEntryExtensionModule,
+        array $recipeEntryExtensionModules,
     ): string {
-        if ($recipeEntryExtensionModule === null) {
+        if ($recipeEntryExtensionModules === []) {
             return $recipeContent;
         }        
         $buttonClassnames = 'button button-secondary';
-        /** @var ExtensionModuleResolverInterface */
-        $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryExtensionModule);
-        $message = sprintf(
-            \__('This recipe requires extension <strong>%s</strong> to be installed.', 'gato-graphql'),
-            $extensionModuleResolver->getName($recipeEntryExtensionModule)
-        );
-        $button = $this->getGetExtensionToUnlockAnchorHTML(
-            $extensionModuleResolver,
-            $recipeEntryExtensionModule,
-            $buttonClassnames,
-        );
-        return sprintf(
-            <<<HTML
-                <div class="%s">
-                    <p>%s %s</p>
-                </div>
-            HTML,
-            'go-pro-highlight' . ($recipeEntryExtensionModule !== null ? ' pro-extension' : ''),
-            $message,
-            $button
-        ) . $recipeContent;
+        foreach ($recipeEntryExtensionModules as $recipeEntryExtensionModule) {
+            /** @var ExtensionModuleResolverInterface */
+            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryExtensionModule);
+            $message = sprintf(
+                \__('This recipe requires extension <strong>%s</strong> to be installed.', 'gato-graphql'),
+                $extensionModuleResolver->getName($recipeEntryExtensionModule)
+            );
+            $button = $this->getGetExtensionToUnlockAnchorHTML(
+                $extensionModuleResolver,
+                $recipeEntryExtensionModule,
+                $buttonClassnames,
+            );
+            $recipeContent = sprintf(
+                <<<HTML
+                    <div class="%s">
+                        <p>%s %s</p>
+                    </div>
+                HTML,
+                'go-pro-highlight pro-extension',
+                $message,
+                $button
+            ) . $recipeContent;
+        }
+        return $recipeContent;
     }
 
     protected function getGetExtensionToUnlockAnchorHTML(
@@ -341,7 +346,9 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'translating-all-posts-to-a-different-language',
                 'Translating all posts to a different language',
-                ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                [
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                ]
             ],
             [
                 'combining-user-data-from-different-systems',
