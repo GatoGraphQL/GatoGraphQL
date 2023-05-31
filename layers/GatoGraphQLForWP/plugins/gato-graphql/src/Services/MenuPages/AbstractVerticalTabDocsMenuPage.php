@@ -169,7 +169,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     {
         return '';
     }
-    
+
     protected function getContentID(): string
     {
         return 'gato-graphql-vertical-tab-docs';
