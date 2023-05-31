@@ -25,7 +25,7 @@ const implicitFeaturesDocEntries = [
         'any-built-in-scalar'
     ],
     [
-        'Custom Scalars Pack',
+        'Custom Scalars',
         'custom-scalars',
     ],
     [
