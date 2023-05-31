@@ -85,7 +85,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 
             // Enumerate the recipes
             $recipeEntryTitle = sprintf(
-                \__('#%s: %s', 'gato-graphql'),
+                \__('%s. %s', 'gato-graphql'),
                 $i + 1,
                 $recipeEntryTitle
             );
