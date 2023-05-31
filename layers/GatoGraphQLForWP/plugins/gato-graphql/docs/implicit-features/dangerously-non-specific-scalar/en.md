@@ -8,7 +8,7 @@ In other words, considering a hypothetical scalar type `AnyScalar` that handles 
 - `[AnyScalar]`
 - `[[AnyScalar]]`
 
-_Please notice: This feature is available in the Gato GraphQL, however it is not currently used anywhere in the schema. Several Gato GraphQL extensions do make use of it. For instance, check the fields added by extension **PHP Functions via Schema** (such as `_echo`) to see examples of it._
+_Please notice: While this feature is readily available in Gato GraphQL, it is not used by the WordPress schema. Several Gato GraphQL extensions do make use of it. For instance, check the fields added by extension **PHP Functions via Schema** (such as `_echo`) to see examples of it._
 
 ## Description
 
