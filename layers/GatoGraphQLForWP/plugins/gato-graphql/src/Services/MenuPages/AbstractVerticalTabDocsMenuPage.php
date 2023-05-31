@@ -163,7 +163,6 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
     abstract protected function getEntryRelativePathDir(): string;
 
-
     /**
      * @param array<array{0:string,1:string}> $entry
      */
