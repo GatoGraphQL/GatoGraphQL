@@ -131,21 +131,21 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                 if (
                     (!$canBeEmpty && empty($values[$name]))
                     && $type !== Properties::TYPE_BOOL
-                    && !($type === Properties::TYPE_INT && $values[$name] == '0')
+                    && !($type === Properties::TYPE_INT && ($values[$name] ?? null) == '0')
                 ) {
                     $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                 } elseif ($type === Properties::TYPE_BOOL) {
                     $values[$name] = !empty($values[$name]);
                 } elseif ($type === Properties::TYPE_INT) {
-                    $values[$name] = (int) $values[$name];
+                    $values[$name] = (int) ($values[$name] ?? null);
                     // If the value is below its minimum, reset to the default one
                     $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
-                    if (!is_null($minNumber) && $values[$name] < $minNumber) {
+                    if ($minNumber !== null && $values[$name] < $minNumber) {
                         $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                     }
                 } elseif (
                     $type === Properties::TYPE_ARRAY
-                    && is_string($values[$name])
+                    && is_string($values[$name] ?? null)
                 ) {
                     // Check if the type is array, but it's delivered as a string via a textarea
                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
@@ -155,7 +155,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                 } elseif (
                     $type === Properties::TYPE_ARRAY
                     && $canBeEmpty
-                    && $values[$name] === null
+                    && ($values[$name] ?? null) === null
                 ) {
                     $values[$name] = [];
                 } elseif (
@@ -171,7 +171,7 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                 }
 
                 // Validate it is a valid value, or reset
-                if (!$moduleResolver->isValidValue($module, $option, $values[$name])) {
+                if (!$moduleResolver->isValidValue($module, $option, $values[$name] ?? null)) {
                     $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                 }
             }
