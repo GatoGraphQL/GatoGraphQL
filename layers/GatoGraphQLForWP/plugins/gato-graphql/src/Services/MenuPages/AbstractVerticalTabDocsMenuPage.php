@@ -166,10 +166,12 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     /**
      * @param array<array{0:string,1:string}> $entry
      */
-    abstract protected function getEntryContent(
+    protected function getEntryContent(
         string $entryContent,
         array $entry,
-    ): string;
+    ): string {
+        return $entryContent;
+    }
 
     /**
      * Enqueue the required assets and initialize the localized scripts
