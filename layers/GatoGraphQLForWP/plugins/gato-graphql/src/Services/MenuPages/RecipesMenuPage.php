@@ -180,7 +180,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         bool $recipeEntryIsPRO,
         ?string $recipeEntryPROExtensionModule,
     ): string {
-        if (!$recipeEntryIsPRO) {
+        if ($recipeEntryPROExtensionModule === null) {
             return $recipeContent;
         }        
         $buttonClassnames = 'button button-secondary';
