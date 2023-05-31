@@ -5,10 +5,24 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 
 class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 {
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
+
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    final protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        /** @var ModuleRegistryInterface */
+        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -36,16 +50,16 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string,2?:string[]}>
+     * @return array<array{0:string,1:string}>
      */
     protected function getEntries(): array
     {
         $entries = [];
-        foreach ($this->getExtensionModuleEntries() as $extension => $extensionName) {
+        foreach ($this->getExtensionModuleItems() as $extensionSlug => $extensionName) {
             $entries[] = [
                 sprintf(
                     '%1$s/docs/modules/%1$s',
-                    $extension
+                    $extensionSlug
                 ),
                 $extensionName,
             ];
@@ -54,13 +68,20 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @return array<string,string>
+     * @return array<string,string> Key: extension slug, Value: extension name
      */
-    protected function getExtensionModuleEntries(): array
+    protected function getExtensionModuleItems(): array
     {
-        return [
-            'access-control' => \__('Access Control', 'gato-graphql'),
-            'access-control-visitor-ip' => \__('Access Control: Visitor IP', 'gato-graphql'),
-        ];
+        $moduleRegistry = $this->getModuleRegistry();
+        $modules = $moduleRegistry->getAllModules(true, false, false);
+        $items = [];
+        foreach ($modules as $module) {
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
+                continue;
+            }
+            $items[$moduleResolver->getSlug($module)] = $moduleResolver->getName($module);
+        }
+        return $items;
     }
 }
