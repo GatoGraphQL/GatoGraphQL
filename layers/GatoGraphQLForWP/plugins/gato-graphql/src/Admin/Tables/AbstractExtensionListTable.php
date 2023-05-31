@@ -278,7 +278,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                  */
                 $pos = strpos($html, $pluginCardClassname);
                 if ($pos !== false) {
-                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-highlight', $pos, strlen($pluginCardClassname));
+                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed', $pos, strlen($pluginCardClassname));
                 }
             }
         }

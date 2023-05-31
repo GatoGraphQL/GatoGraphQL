@@ -33,7 +33,7 @@
 /**
  * Add a background-color to all extensions
  */
-.plugin-card.plugin-card-highlight {
+.plugin-card.plugin-card-non-installed {
     background-color: #f4d7ec;
 }
 /**
