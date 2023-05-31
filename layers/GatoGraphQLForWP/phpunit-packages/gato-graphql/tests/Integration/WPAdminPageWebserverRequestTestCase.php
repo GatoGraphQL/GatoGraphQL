@@ -42,10 +42,10 @@ class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRe
             'extensiondocs',
             'extensions',
             'graphiql',
-            'voyager',
             'modules',
             'recipes',
             'settings',
+            'voyager',
         ];
     }
 }
