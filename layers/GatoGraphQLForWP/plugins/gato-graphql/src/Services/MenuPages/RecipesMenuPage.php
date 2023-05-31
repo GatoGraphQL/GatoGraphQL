@@ -182,8 +182,8 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             return $recipeContent;
         }        
         $messagePlaceholder = count($recipeEntryExtensionModules) === 1
-            ? \__('%s This recipe requires extension %s to be installed.', 'gato-graphql')
-            : \__('%s This recipe requires extensions %s to be installed.', 'gato-graphql');
+            ? \__('%s This recipe requires extension %s to be active.', 'gato-graphql')
+            : \__('%s This recipe requires extensions %s to be active.', 'gato-graphql');
         $extensionHTMLItems = [];
         foreach ($recipeEntryExtensionModules as $recipeEntryExtensionModule) {
             /** @var ExtensionModuleResolverInterface */
