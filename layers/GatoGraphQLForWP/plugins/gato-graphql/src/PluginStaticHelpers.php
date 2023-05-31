@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
+use function apply_filters;
+
 class PluginStaticHelpers
 {
     /**
