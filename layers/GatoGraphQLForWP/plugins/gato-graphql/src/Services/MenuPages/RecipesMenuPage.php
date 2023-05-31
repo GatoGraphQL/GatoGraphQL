@@ -82,8 +82,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         foreach ($recipeEntries as $i => $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
-            $recipeEntryIsPRO = $recipeEntry[2] ?? false;
-            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
+            $recipeEntryPROExtensionModule = $recipeEntry[2] ?? null;
 
             // Enumerate the recipes
             $recipeEntryTitle = sprintf(
@@ -120,8 +119,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         foreach ($recipeEntries as $recipeEntry) {
             $recipeEntryName = $recipeEntry[0];
             $recipeEntryTitle = $recipeEntry[1];
-            $recipeEntryIsPRO = $recipeEntry[2] ?? false;
-            $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
+            $recipeEntryPROExtensionModule = $recipeEntry[2] ?? null;
 
             $recipeEntryRelativePathDir = 'docs/recipes';
             $recipeContent = $this->getMarkdownContent(
@@ -161,7 +159,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 $recipeEntryTitle,
                 $this->getRecipeContent(
                     $recipeContent,
-                    $recipeEntryIsPRO,
                     $recipeEntryPROExtensionModule,
                 )
             );
@@ -177,7 +174,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
 
     protected function getRecipeContent(
         string $recipeContent,
-        bool $recipeEntryIsPRO,
         ?string $recipeEntryPROExtensionModule,
     ): string {
         if ($recipeEntryPROExtensionModule === null) {
@@ -280,37 +276,30 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'exposing-a-secure-public-api',
                 'Exposing a secure public API',
-                true,
             ],
             [
                 'customizing-content-for-different-users',
                 'Customizing content for different users',
-                true,
             ],
             [
                 'boosting-the-performance-of-the-api',
                 'Boosting the performance of the API',
-                true,
             ],
             [
                 'site-migrations',
                 'Site migrations',
-                true,
             ],
             [
                 'fixing-content-issues',
                 'Fixing content issues',
-                true,
             ],
             [
                 'inserting-a-gutenberg-block-in-all-posts',
                 'Inserting a Gutenberg block in all posts',
-                true,
             ],
             [
                 'removing-a-gutenberg-block-from-all-posts',
                 'Removing a Gutenberg block from all posts',
-                true,
             ],
             // [
             //     'converting-content-to-gutenberg-blocks',
@@ -320,88 +309,71 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             [
                 'persisted-queries-as-webhooks',
                 'Persisted Queries as Webhooks',
-                true,
             ],
             [
                 'automating-tasks',
                 'Automating tasks',
-                true,
             ],
             [
                 'executing-admin-tasks',
                 'Executing admin tasks',
-                true,
             ],
             [
                 'bulk-editing-content',
                 'Bulk editing content',
-                true,
             ],
             [
                 'interacting-with-3rd-party-service-apis',
                 'Interacting with 3rd-party service APIs',
-                true,
             ],
             [
                 'creating-an-api-gateway',
                 'Creating an API gateway',
-                true,
             ],
             [
                 'filtering-data-from-an-external-api',
                 'Filtering data from an external API',
-                true,
             ],
             [
                 'transforming-data-from-an-external-api',
                 'Transforming data from an external API',
-                true,
             ],
             [
                 'translating-all-posts-to-a-different-language',
                 'Translating all posts to a different language',
-                true,
                 ExtensionModuleResolver::GOOGLE_TRANSLATE,
             ],
             [
                 'combining-user-data-from-different-systems',
                 'Combining user data from different systems',
-                true,
             ],
             [
                 'importing-a-post-from-another-site',
                 'Importing a post from another site',
-                true,
             ],
             [
                 'importing-multiple-posts-at-once-from-another-site',
                 'Importing multiple posts at once from another site',
-                true,
             ],
             [
                 'synchronizing-content-across-wordpress-sites',
                 'Synchronizing content across WordPress sites',
-                true,
             ],
             [
                 'retrieving-and-downloading-github-artifacts',
                 'Retrieving and downloading GitHub Artifacts',
-                true,
             ],
             [
                 'producing-an-error-if-the-request-entry-does-not-exist',
                 'Producing an error if the requested entry does not exist',
-                true,
             ],
             [
                 'reverting-mutations-in-case-of-error',
                 'Reverting mutations in case of error',
-                true,
             ],
             [
                 'content-orchestration',
                 'Content orchestration',
-                true,
             ],
             // [
             //     'using-the-graphql-server-without-wordpress',
