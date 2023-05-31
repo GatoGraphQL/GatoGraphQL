@@ -153,7 +153,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
     protected function getEntryID(string $entryName): string
     {
-        return str_replace([':', ' ', '/'], '_', $entryName);
+        return str_replace([':', ' ', '/', '.'], '_', $entryName);
     }
 
     protected function enumerateEntries(): bool
