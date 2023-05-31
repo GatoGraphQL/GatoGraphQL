@@ -63,7 +63,7 @@ class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRe
             'about',
             'extensiondocs',
             'extensions',
-            'graphiql',
+            // 'graphiql', // This is the default one, which works only without slug!
             'modules',
             'recipes',
             'settings',
