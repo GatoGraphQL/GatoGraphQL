@@ -4,50 +4,23 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGatoGraphQL\WebserverRequests\AbstractWPAdminPageWebserverRequestTestCase;
+use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractPluginWPAdminPageWebserverRequestTestCase;
 
-class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRequestTestCase
+class WPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPageWebserverRequestTestCase
 {
     /**
-     * Test that all pages added by the plugin produce
-     * a 200 status code.
-     *
-     * @return array<string,string[]>
+     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
      */
-    protected function providePageEntries(): array
+    protected function getPluginMenuName(): string
     {
-        // @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
-        $pluginMenuName = 'gato_graphql';
-
-        $entries = [
-            // Default menu page entry
-            'default' => [
-                sprintf(
-                    'wp-admin/admin.php?page=%s',
-                    $pluginMenuName
-                ),
-            ]
-        ];
-        foreach ($this->getGatoGraphQLPluginMenuPageSlugs() as $pageSlug) {
-            $entries[$pageSlug] = [
-                sprintf(
-                    'wp-admin/admin.php?page=%s_%s',
-                    $pluginMenuName,
-                    $pageSlug
-                ),
-            ];
-        }
-        foreach ($this->getGatoGraphQLPluginCustomPostTypes() as $customPostType) {
-            $entries[$customPostType] = [
-                sprintf(
-                    'wp-admin/edit.php?post_type=%s',
-                    $customPostType
-                ),
-            ];
-        }
-        return $entries;
+        return 'gato_graphql';
     }
 
+    protected function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string
+    {
+        return 'graphiql';
+    }
+    
     /**
      * Provide all the MenuPageSlug registered by Gato GraphQL.
      * These are under function `getMenuPageSlug` from `MenuPageInterface`,
@@ -63,7 +36,7 @@ class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRe
             'about',
             'extensiondocs',
             'extensions',
-            // 'graphiql', // This is the default one, which works only without slug!
+            'graphiql',
             'modules',
             'recipes',
             'settings',
