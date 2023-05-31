@@ -126,19 +126,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function displayPROPluginInformationInMainPlugin(): bool
-    {
-        $envVariable = Environment::DISPLAY_PRO_PLUGIN_INFORMATION_IN_MAIN_PLUGIN;
-        $defaultValue = true;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     /**
      * @todo Change the URL to the final one
      */
@@ -219,7 +206,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     protected function enableHook(string $envVariable): bool
     {
         return match ($envVariable) {
-            Environment::DISPLAY_PRO_PLUGIN_INFORMATION_IN_MAIN_PLUGIN,
             Environment::PRO_PLUGIN_WEBSITE_URL,
             Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
                 => false,
