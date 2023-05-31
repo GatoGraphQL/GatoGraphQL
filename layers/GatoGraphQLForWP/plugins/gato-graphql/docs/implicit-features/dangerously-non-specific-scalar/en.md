@@ -16,7 +16,7 @@ Fields cannot be defined to return all potential combinations of types and their
 
 For instance, field `optionValue` returns type `AnyBuiltInScalar` (i.e. it can handle any of [GraphQL's built-in scalar types](https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars)), but it can only retrieve a single value, and not a list of values. If we need to retrieve a list of values, then we need to use field `optionValues` instead, which returns `[AnyBuiltInScalar]`.
 
-However, being able to return either a single value, a list of values, or a list of lists of values, always from the same field, is useful for the **Function Fields**, as they provide functionalities which, in many cases, are independent of the type or cardinality of the value.
+However, being able to return either a single value, a list of values, or a list of lists of values, always from the same field, is useful for the "function" fields (as those provided by the **PHP Functions via Schema** extension), as these provide functionalities which are (in many cases) independent of the type or cardinality of the value.
 
 An example is the field `_echo` which, whatever input it gets:
 

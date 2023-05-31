@@ -10,21 +10,26 @@ Gato GraphQL, in addition, offers a different kind of fields: those providing "f
 
 These are some examples:
 
-- Those fields from the **Send HTTP Request Fields** module, which connect to external API endpoints and retrieve data from them:
-  - `_sendHTTPRequest`
-  - `_sendJSONObjectItemHTTPRequest`
-  - `_sendJSONObjectCollectionHTTPRequest`
-  - `_sendGraphQLHTTPRequest`
-- Those fields from the **Function Fields** module, which expose functionalities commonly found in programming languages (such as PHP):
-  - `_not`
-  - `_if`
-  - `_equals`
-  - `_isEmpty`
-  - `_echo`
-  - `_sprintf`
-  - `_arrayItem`
-  - `_arrayAddItem`
-  - `_arrayUnique`
+Those fields from the **HTTP Client** extension, which connect to external API endpoints and retrieve data from them:
+
+- `_sendHTTPRequest`
+- `_sendJSONObjectItemHTTPRequest`
+- `_sendJSONObjectCollectionHTTPRequest`
+- `_sendGraphQLHTTPRequest`
+- ...
+
+Those fields from the **PHP Functions via Schema** extension, which expose functionalities commonly found in programming languages (such as PHP):
+
+- `_not`
+- `_if`
+- `_equals`
+- `_isEmpty`
+- `_echo`
+- `_sprintf`
+- `_arrayItem`
+- `_arrayAddItem`
+- `_arrayUnique`
+- ...
 
 **Please notice:** By convention, all these fields start with `"_"`. This convention helps differentiate which are data (i.e. "normal") fields, and which are functionality fields, when visualizing the GraphQL schema.
 
