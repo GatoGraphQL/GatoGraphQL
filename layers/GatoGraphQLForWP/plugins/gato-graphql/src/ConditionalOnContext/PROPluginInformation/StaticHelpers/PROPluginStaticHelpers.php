@@ -11,17 +11,6 @@ use PoP\ComponentModel\App;
 
 class PROPluginStaticHelpers
 {
-    public static function getPROTitle(
-        string $title,
-        ?string $recipeEntryPROExtensionModule = null
-    ): string {
-        return sprintf(
-            \__('%s %s', 'gato-graphql'),
-            $recipeEntryPROExtensionModule === null ? '🔒' : '🔐',
-            $title
-        );
-    }
-
     public static function getGoPROToUnlockAnchorHTML(string $class = ''): string
     {
         /** @var ModuleConfiguration */

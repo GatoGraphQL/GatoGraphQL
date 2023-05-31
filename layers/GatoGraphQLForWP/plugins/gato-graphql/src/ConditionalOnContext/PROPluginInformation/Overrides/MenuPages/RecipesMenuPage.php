@@ -11,25 +11,6 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage as UpstreamRecipe
 
 class RecipesMenuPage extends UpstreamRecipesMenuPage
 {
-    protected function getRecipeTitleForNavbar(
-        string $recipeEntryTitle,
-        bool $recipeEntryIsPRO,
-        ?string $recipeEntryPROExtensionModule,
-    ): string {
-        $recipeEntryTitle = parent::getRecipeTitleForNavbar(
-            $recipeEntryTitle,
-            $recipeEntryIsPRO,
-            $recipeEntryPROExtensionModule,
-        );
-        if (!$recipeEntryIsPRO) {
-            return $recipeEntryTitle;
-        }
-        return PROPluginStaticHelpers::getPROTitle(
-            $recipeEntryTitle,
-            $recipeEntryPROExtensionModule,
-        );
-    }
-
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
