@@ -181,27 +181,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
                 esc_attr($plugin['name']),
                 '_blank',
-                $this->getPluginCardButtonActionMessage($plugin),
+                \__('Get Extension', 'gato-graphql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
         }
         return $action_links;
-    }
-
-    /**
-     * @param array<string,mixed> $plugin
-     */
-    public function getPluginCardButtonActionMessage(array $plugin): string
-    {
-        /** @var string */
-        $pluginSlug = $plugin['slug'];
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        /** @var ExtensionModuleResolverInterface */
-        $moduleResolver = $moduleRegistry->getModuleResolver(ExtensionModuleResolver::GATO_GRAPHQL_PRO);
-        if ($pluginSlug === $moduleResolver->getSlug(ExtensionModuleResolver::GATO_GRAPHQL_PRO)) {
-            return __('Get <strong>PRO</strong> Extension', 'gato-graphql');
-        }
-        return __('Get Extension', 'gato-graphql');
     }
 
     /**
