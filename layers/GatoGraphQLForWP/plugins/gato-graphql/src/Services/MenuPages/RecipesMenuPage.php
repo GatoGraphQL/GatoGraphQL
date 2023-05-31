@@ -236,7 +236,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     }
 
     /**
-     * @better-return array<array{0:string,1:string,2:?bool,3:?string}>
+     * @better-return array<array{0:string,1:string,3?:string[]}>
      * @return array<array<mixed>>
      */
     protected function getRecipeEntries(): array
