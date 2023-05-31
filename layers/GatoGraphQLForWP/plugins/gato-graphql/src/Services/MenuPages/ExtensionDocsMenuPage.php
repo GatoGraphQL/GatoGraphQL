@@ -40,12 +40,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
      */
     protected function getEntries(): array
     {
-        $extensions = [
-            'access-control' => \__('Access Control', 'gato-graphql'),
-            'access-control-visitor-ip' => \__('Access Control: Visitor IP', 'gato-graphql'),
-        ];
         $entries = [];
-        foreach ($extensions as $extension => $extensionName) {
+        foreach ($this->getExtensionModuleEntries() as $extension => $extensionName) {
             $entries[] = [
                 sprintf(
                     '%1$s/docs/modules/%1$s',
@@ -55,5 +51,16 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             ];
         }
         return $entries;
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    protected function getExtensionModuleEntries(): array
+    {
+        return [
+            'access-control' => \__('Access Control', 'gato-graphql'),
+            'access-control-visitor-ip' => \__('Access Control: Visitor IP', 'gato-graphql'),
+        ];
     }
 }
