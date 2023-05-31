@@ -11,11 +11,6 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage as UpstreamRecipe
 
 class RecipesMenuPage extends UpstreamRecipesMenuPage
 {
-    protected function addLinkToExtensionInRecipeTitleInContent(): bool
-    {
-        return false;
-    }
-
     protected function getRecipeTitleForNavbar(
         string $recipeEntryTitle,
         bool $recipeEntryIsPRO,
