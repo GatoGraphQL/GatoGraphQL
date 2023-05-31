@@ -108,11 +108,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 '#' . $recipeEntryName,
                 $recipeURL,
                 $recipeEntryName === $activeRecipeName ? 'nav-tab-active' : '',
-                $this->getRecipeTitleForNavbar(
-                    $recipeEntryTitle,
-                    $recipeEntryIsPRO,
-                    $recipeEntryPROExtensionModule,
-                )
+                $recipeEntryTitle
             );
         }
 
@@ -177,14 +173,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         </div>
         HTML;
         return $markdownContent;
-    }
-
-    protected function getRecipeTitleForNavbar(
-        string $recipeEntryTitle,
-        bool $recipeEntryIsPRO,
-        ?string $recipeEntryPROExtensionModule,
-    ): string {
-        return $recipeEntryTitle;
     }
 
     protected function getRecipeContent(
