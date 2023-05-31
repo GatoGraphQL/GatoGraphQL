@@ -4,20 +4,14 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
-use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
-use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\OpenInModalTriggerMenuPageTrait;
 
-class RecipesMenuPage extends AbstractDocsMenuPage
+class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
 {
-    use OpenInModalTriggerMenuPageTrait;
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -37,147 +31,29 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         return 'recipes';
     }
 
-    protected function useTabpanelForContent(): bool
+    protected function getContentID(): string
     {
-        return false;
+        return 'gato-graphql-recipes';
     }
 
-    protected function getContentToPrint(): string
+    protected function getPageTitle(): string
     {
-        $recipeEntries = $this->getRecipeEntries();
-        // By default, focus on the first recipe
-        $activeRecipeName = $recipeEntries[0][0];
-        // If passing a tab, focus on that one, if the module exists
-        $tab = App::query(RequestParams::TAB);
-        if ($tab !== null) {
-            $recipeNames = array_map(
-                fn (array $recipeEntry) => $recipeEntry[0],
-                $recipeEntries
-            );
-            if (in_array($tab, $recipeNames)) {
-                $activeRecipeName = $tab;
-            }
-        }
-        $class = 'wrap vertical-tabs gato-graphql-tabpanel';
+        return \__('Gato GraphQL - Entries: Use Cases, Best Practices, and Useful Queries', 'gato-graphql');
+    }
 
-        $markdownContent = sprintf(
-            <<<HTML
-            <div id="%s" class="%s">
-                <h1>%s</h1>
-                <div class="nav-tab-container">
-                    <!-- Tabs -->
-                    <h2 class="nav-tab-wrapper">
-            HTML,
-            'gato-graphql-recipes',
-            $class,
-            \__('Gato GraphQL - Recipes: Use Cases, Best Practices, and Useful Queries', 'gato-graphql')
-        );
-
-        // This page URL
-        $url = admin_url(sprintf(
-            'admin.php?page=%s',
-            esc_attr(App::request('page') ?? App::query('page', ''))
-        ));
-
-        foreach ($recipeEntries as $i => $recipeEntry) {
-            $recipeEntryName = $recipeEntry[0];
-            $recipeEntryTitle = $recipeEntry[1];
-
-            // Enumerate the recipes
-            $recipeEntryTitle = sprintf(
-                \__('%s. %s', 'gato-graphql'),
-                $i + 1,
-                $recipeEntryTitle
-            );
-
-            /**
-             * Also add the tab to the URL, not because it is needed,
-             * but because we can then "Open in new tab" and it will
-             * be focused already on that item.
-             */
-            $recipeURL = sprintf(
-                '%1$s&%2$s=%3$s',
-                $url,
-                RequestParams::TAB,
-                $recipeEntryName
-            );
-            $markdownContent .= sprintf(
-                '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
-                '#' . $recipeEntryName,
-                $recipeURL,
-                $recipeEntryName === $activeRecipeName ? 'nav-tab-active' : '',
-                $recipeEntryTitle
-            );
-        }
-
-        $markdownContent .= <<<HTML
-                    </h2>
-                    <div class="nav-tab-content">
-        HTML;
-
-        foreach ($recipeEntries as $recipeEntry) {
-            $recipeEntryName = $recipeEntry[0];
-            $recipeEntryTitle = $recipeEntry[1];
-            $recipeEntryExtensionModules = $recipeEntry[2] ?? [];
-
-            $recipeEntryRelativePathDir = 'docs/recipes';
-            $recipeContent = $this->getMarkdownContent(
-                $recipeEntryName,
-                $recipeEntryRelativePathDir,
-                [
-                    ContentParserOptions::TAB_CONTENT => false,
-                ]
-            ) ?? sprintf(
-                '<p>%s</p>',
-                sprintf(
-                    \__('Oops, there was a problem loading recipe "%s"', 'gato-graphql'),
-                    $recipeEntryTitle
-                )
-            );
-
-            // Hide the title from the content, as it's already shown below
-            $recipeContent = str_replace(
-                '<h1>',
-                '<h1 style="display: none;">',
-                $recipeContent
-            );
-
-            $markdownContent .= sprintf(
-                <<<HTML
-                    <div id="%s" class="%s" style="%s">
-                        <h2>%s</h2><hr/>
-                        %s
-                    </div>
-                HTML,
-                $recipeEntryName,
-                'tab-content',
-                sprintf(
-                    'display: %s;',
-                    $recipeEntryName === $activeRecipeName ? 'block' : 'none'
-                ),
-                $recipeEntryTitle,
-                $this->getRecipeContent(
-                    $recipeContent,
-                    $recipeEntryExtensionModules,
-                )
-            );
-        }
-
-        $markdownContent .= <<<HTML
-                </div> <!-- class="nav-tab-content" -->
-            </div> <!-- class="nav-tab-container" -->
-        </div>
-        HTML;
-        return $markdownContent;
+    protected function getEntryRelativePathDir(): string
+    {
+        return 'docs/recipes';
     }
 
     /**
-     * @param string[] $recipeEntryExtensionModules
+     * @param array<array{0:string,1:string,2?:string[]}> $entry
      */
-    protected function getRecipeContent(
+    protected function getEntryContent(
         string $recipeContent,
-        array $recipeEntryExtensionModules,
+        array $recipeEntry,
     ): string {
+        $recipeEntryExtensionModules = $recipeEntry[2] ?? [];
         if ($recipeEntryExtensionModules === []) {
             return $recipeContent;
         }
@@ -216,19 +92,9 @@ class RecipesMenuPage extends AbstractDocsMenuPage
     }
 
     /**
-     * Enqueue the required assets and initialize the localized scripts
-     */
-    protected function enqueueAssets(): void
-    {
-        parent::enqueueAssets();
-
-        $this->enqueueTabpanelAssets();
-    }
-
-    /**
      * @return array<array{0:string,1:string,2?:string[]}>
      */
-    protected function getRecipeEntries(): array
+    protected function getEntries(): array
     {
         return [
             [
