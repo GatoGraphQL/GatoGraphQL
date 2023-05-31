@@ -6,6 +6,11 @@ namespace GatoGraphQL\GatoGraphQL;
 
 class PluginStaticHelpers
 {
+    /**
+     * @var string[]|null
+     */
+    private static ?array $activeWordPressPluginFiles = null;
+
     public static function getGitHubRepoDocsRootPathURL(): string
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
@@ -17,7 +22,9 @@ class PluginStaticHelpers
 
     public static function isWordPressPluginActive(string $pluginFile): bool
     {
-        $activePlugins = apply_filters('active_plugins', get_option('active_plugins'));
-        return in_array($pluginFile, $activePlugins);
+        if (self::$activeWordPressPluginFiles === null) {
+            self::$activeWordPressPluginFiles = apply_filters('active_plugins', get_option('active_plugins', []));
+        }
+        return in_array($pluginFile, self::$activeWordPressPluginFiles);
     }
 }
