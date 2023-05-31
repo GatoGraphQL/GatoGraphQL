@@ -210,7 +210,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                     <p>%s</p>
                 </div>
             HTML,
-            'go-pro-highlight pro-extension',
+            'extension-highlight',
             $messageHTML,
         ) . $recipeContent;
     }
