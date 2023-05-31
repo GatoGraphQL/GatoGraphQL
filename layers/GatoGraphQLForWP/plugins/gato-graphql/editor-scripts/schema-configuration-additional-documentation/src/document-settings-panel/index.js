@@ -54,7 +54,7 @@ const DocumentSettingsPanel = () => (
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
         title={ __('Additional Gato GraphQL Documentation', 'gato-graphql') }
     >
-        <p>{ __('Docs for additional features in the Gato GraphQL:', 'gato-graphql') }</p>
+        <p>{ __('Docs for additional features in Gato GraphQL:', 'gato-graphql') }</p>
         <p>
             {
                 implicitFeaturesDocEntries.map( ( entry ) =>
