@@ -268,22 +268,29 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $extensionsMenuPage->setHookName($hookName);
         }
 
-        $extensionDocsMenuPage = $this->getExtensionDocsMenuPage();
         /**
-         * @var callable
+         * Only show the Extension Docs page when actually loading it
+         * So it doesn't appear on the menu, but it's still available
+         * when opening it via the Extensions page
          */
-        $callable = [$extensionDocsMenuPage, 'print'];
-        if (
-            $hookName = \add_submenu_page(
-                $menuName,
-                __('Extension Docs', 'gato-graphql'),
-                __('Extension Docs', 'gato-graphql'),
-                $schemaEditorAccessCapability,
-                $extensionDocsMenuPage->getScreenID(),
-                $callable
-            )
-        ) {
-            $extensionDocsMenuPage->setHookName($hookName);
+        $extensionDocsMenuPage = $this->getExtensionDocsMenuPage();
+        if (App::query('page') === $extensionDocsMenuPage->getScreenID()) {
+            /**
+             * @var callable
+             */
+            $callable = [$extensionDocsMenuPage, 'print'];
+            if (
+                $hookName = \add_submenu_page(
+                    $menuName,
+                    __('Extension Docs', 'gato-graphql'),
+                    __('Extension Docs', 'gato-graphql'),
+                    $schemaEditorAccessCapability,
+                    $extensionDocsMenuPage->getScreenID(),
+                    $callable
+                )
+            ) {
+                $extensionDocsMenuPage->setHookName($hookName);
+            }
         }
 
         if (
