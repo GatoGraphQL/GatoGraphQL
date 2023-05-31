@@ -21,21 +21,6 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
 
-## Added documentation for PRO modules and their corresponding Schema Configuration functionalities
-
-PRO modules are installed by the Gato GraphQL PRO plugin, which has been released alongside Gato GraphQL v1.0.
-
-Documentation for the corresponding PRO features can be visualized in the plugin, by:
-
-- Clicking on the corresponding module's "View details" link, on the Modules page
-- Clicking on the corresponding block's "View details" link, when editing a Schema Configuration
-
-![PRO modules in the Modules page](../../images/releases/v1.0/pro-documentation-modules.png)
-
-![PRO blocks when editing a Schema Configuration](../../images/releases/v1.0/pro-documentation-schema-configuration.png)
-
-![Clicking on "View details" displays the documentation](../../images/releases/v1.0/pro-documentation-schema-configuration-modal.png)
-
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
