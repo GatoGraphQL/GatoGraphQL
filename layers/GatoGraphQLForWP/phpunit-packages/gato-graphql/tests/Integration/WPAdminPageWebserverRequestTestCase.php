@@ -16,12 +16,23 @@ class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRe
      */
     protected function providePageEntries(): array
     {
-        $entries = [];
+        // @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
+        $pluginMenuName = 'gato_graphql';
+
+        $entries = [
+            // Default menu page entry
+            'default' => [
+                sprintf(
+                    'wp-admin/edit.php?page=%s',
+                    $pluginMenuName
+                ),
+            ]
+        ];
         foreach ($this->getGatoGraphQLPluginMenuPageSlugs() as $pageSlug) {
             $entries[$pageSlug] = [
                 sprintf(
                     'wp-admin/edit.php?page=%s_%s',
-                    'gato_graphql', // @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
+                    $pluginMenuName,
                     $pageSlug
                 ),
             ];
