@@ -149,7 +149,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $pluginURL = $mainPlugin->getPluginURL();
-        return $pluginURL . 'assets-pro/img/GatoGraphQL-logo.png';
+        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo.png';
     }
 
     /**

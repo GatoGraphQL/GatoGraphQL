@@ -91,7 +91,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
          */
         \wp_enqueue_style(
             'gato-graphql-extensions',
-            $mainPluginURL . 'assets-pro/css/extensions.css',
+            $mainPluginURL . 'assets/css/extensions.css',
             array(),
             $mainPluginVersion
         );
