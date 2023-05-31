@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractPluginWPAdminPageWebserverRequestTestCase;
 
-class WPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPageWebserverRequestTestCase
+class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPageWebserverRequestTestCase
 {
     /**
      * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
@@ -20,7 +20,7 @@ class WPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPageWebse
     {
         return 'graphiql';
     }
-    
+
     /**
      * Provide all the MenuPageSlug registered by Gato GraphQL.
      * These are under function `getMenuPageSlug` from `MenuPageInterface`,
