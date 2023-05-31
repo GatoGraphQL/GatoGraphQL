@@ -41,13 +41,15 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             <<<HTML
             <div id="%s" class="%s">
                 <h1>%s</h1>
+                %s
                 <div class="nav-tab-container">
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
             HTML,
             $this->getContentID(),
             $class,
-            $this->getPageTitle()
+            $this->getPageTitle(),
+            $this->getPageHeaderHTML()
         );
 
         // This page URL
@@ -162,6 +164,11 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     }
 
     abstract protected function getPageTitle(): string;
+
+    protected function getPageHeaderHTML(): string
+    {
+        return '';
+    }
     
     protected function getContentID(): string
     {

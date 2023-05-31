@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 
@@ -47,6 +51,21 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     protected function getDocsFolder(): string
     {
         return '';
+    }
+
+    protected function getPageHeaderHTML(): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return sprintf(
+            '<p>%s</p>',
+            sprintf(
+                __('Extensions add functionality and expand the GraphQL schema. You can browse and get extensions on the <a href="%1$s" target="%2$s">Gato GraphQL shop%3$s</a>.', 'gato-graphql'),
+                $moduleConfiguration->getPROPluginShopURL(),
+                '_blank',
+                HTMLCodes::OPEN_IN_NEW_WINDOW,
+            )
+        );
     }
 
     /**
