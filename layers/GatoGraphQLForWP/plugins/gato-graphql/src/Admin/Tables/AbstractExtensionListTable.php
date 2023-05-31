@@ -234,7 +234,9 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         }
 
         $html = $this->adaptDisplayRowsHTML($html);
-        $html .= $this->getArtificialRequestAnExtensionPluginItem();
+        if ($this->addArtificialRequestAnExtensionPluginItem()) {
+            $html .= $this->getArtificialRequestAnExtensionPluginItem();
+        }
 
         echo $html;
     }
@@ -286,6 +288,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         return $html;
     }
 
+    protected function addArtificialRequestAnExtensionPluginItem(): bool
+    {
+        return true;
+    }
+
     /**
      * Get the HTML for the additional "Request an Extension" plugin item
      */
@@ -293,7 +300,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         // Add an additional item
         $additionalItemHTMLPlaceholder = <<<HTML
-            <div class="plugin-card">
+            <div class="plugin-card plugin-card-artificially-added">
                 <div class="plugin-card-top plugin-card-top-request-extension">
                     <div class="name column-name">
                         <h3>
