@@ -143,20 +143,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     /**
      * @todo Change the URL to the final one
      */
-    public function getPROPluginWebsiteURL(): string
-    {
-        $envVariable = Environment::PRO_PLUGIN_WEBSITE_URL;
-        $defaultValue = 'https://gatographql.com';
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-        );
-    }
-
-    /**
-     * @todo Change the URL to the final one
-     */
     public function getPROPluginShopURL(): string
     {
         $envVariable = Environment::PRO_PLUGIN_SHOP_URL;
@@ -206,7 +192,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     protected function enableHook(string $envVariable): bool
     {
         return match ($envVariable) {
-            Environment::PRO_PLUGIN_WEBSITE_URL,
+            Environment::PRO_PLUGIN_SHOP_URL,
             Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
                 => false,
             default
