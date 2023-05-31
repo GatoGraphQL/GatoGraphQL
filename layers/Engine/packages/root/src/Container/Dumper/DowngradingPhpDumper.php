@@ -63,13 +63,19 @@ class DowngradingPhpDumper extends PhpDumper
         $dump = parent::dump($options);
 
         /**
-         * Regex: match anything except whitespaces => it'll capture the service name or class
+         * Regex: match anything except whitespaces => it'll capture the service name or class.
+         *
+         * This regex will match code like this one:
+         *
+         *   ```
+         *   $instance->setInstanceManager(($container->services['PoP\\Root\\Instances\\InstanceManagerInterface'] ??= new \PoP\Root\Instances\SystemInstanceManager()));
+         *   ```
          *
          * @var string|string[]
          */
         return preg_replace(
-            '/\$this->services\[\'([^\s]*)\'\] \?\?= new ([^\s]*)\(\)/',
-            '$this->services[\'$1\'] ?? ($this->services[\'$1\'] = new $2())',
+            '/\$([a-zA-Z0-9_]+)->services\[\'([^\s]*)\'\] \?\?= new ([^\s]*)\(\)/',
+            '\$$1->services[\'$2\'] ?? (\$$1->services[\'$2\'] = new $3())',
             $dump
         );
     }
