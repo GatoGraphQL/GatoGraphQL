@@ -181,48 +181,38 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         if ($recipeEntryExtensionModules === []) {
             return $recipeContent;
         }        
-        $buttonClassnames = 'button button-secondary';
+        $messagePlaceholder = count($recipeEntryExtensionModules) === 1
+            ? \__('✳️ This recipe requires extension %s to be installed.', 'gato-graphql')
+            : \__('✳️ This recipe requires extensions %s to be installed.', 'gato-graphql');
+        $extensionHTMLItems = [];
         foreach ($recipeEntryExtensionModules as $recipeEntryExtensionModule) {
             /** @var ExtensionModuleResolverInterface */
             $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryExtensionModule);
-            $message = sprintf(
-                \__('This recipe requires extension <strong>%s</strong> to be installed.', 'gato-graphql'),
-                $extensionModuleResolver->getName($recipeEntryExtensionModule)
+            $extensionHTMLItems[] = sprintf(
+                \__('<strong><a href="%s" target="%s" class="%s">%s%s</a></strong>', 'gato-graphql'),
+                $extensionModuleResolver->getWebsiteURL($recipeEntryExtensionModule),
+                '_blank',
+                '',
+                $extensionModuleResolver->getName($recipeEntryExtensionModule),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
             );
-            $button = $this->getGetExtensionToUnlockAnchorHTML(
-                $extensionModuleResolver,
-                $recipeEntryExtensionModule,
-                $buttonClassnames,
-            );
-            $recipeContent = sprintf(
-                <<<HTML
-                    <div class="%s">
-                        <p>%s %s</p>
-                    </div>
-                HTML,
-                'go-pro-highlight pro-extension',
-                $message,
-                $button
-            ) . $recipeContent;
         }
-        return $recipeContent;
-    }
-
-    protected function getGetExtensionToUnlockAnchorHTML(
-        ExtensionModuleResolverInterface $extensionModuleResolver,
-        string $extensionModule,
-        string $class = '',
-    ): string {
-        return \sprintf(
-            '<a href="%s" target="%s" class="%s">%s</a>',
-            $extensionModuleResolver->getWebsiteURL($extensionModule),
-            '_blank',
-            $class,
-            sprintf(
-                \__('Get extension <strong>%s</strong> to unlock! 🔓', 'gato-graphql'),
-                $extensionModuleResolver->getName($extensionModule),
-            ),
+        $messageHTML = sprintf(
+            $messagePlaceholder,
+            implode(
+                \__(', ', 'gato-graphql'),
+                $extensionHTMLItems
+            )
         );
+        return sprintf(
+            <<<HTML
+                <div class="%s">
+                    <p>%s</p>
+                </div>
+            HTML,
+            'go-pro-highlight pro-extension',
+            $messageHTML,
+        ) . $recipeContent;
     }
 
     /**
