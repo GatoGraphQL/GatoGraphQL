@@ -174,7 +174,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             // [
             //     'converting-content-to-gutenberg-blocks',
             //      \__('Converting content to Gutenberg blocks', 'gato-graphql'),
-            //     true,
             // ],
             [
                 'persisted-queries-as-webhooks',
@@ -250,7 +249,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             // [
             //     'using-the-graphql-server-without-wordpress',
             //      \__('Using the GraphQL server without WordPress', 'gato-graphql'),
-            //     true,
             // ],
         ];
     }
