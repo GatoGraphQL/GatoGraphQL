@@ -49,7 +49,9 @@ class EngineRequest
             return $default;
         }
 
-        return App::request(Params::DATASTRUCTURE) ?? App::query(Params::DATASTRUCTURE, $default);
+        return RequestHelpers::getStringOrNullRequestParamValue(
+            App::request(Params::DATASTRUCTURE) ?? App::query(Params::DATASTRUCTURE, $default)
+        );
     }
 
     public static function getScheme(bool $enableModifyingEngineBehaviorViaRequest): ?string
@@ -59,7 +61,9 @@ class EngineRequest
             return $default;
         }
 
-        return App::request(Params::SCHEME) ?? App::query(Params::SCHEME, $default);
+        return RequestHelpers::getStringOrNullRequestParamValue(
+            App::request(Params::SCHEME) ?? App::query(Params::SCHEME, $default)
+        );
     }
 
     public static function getDataSourceSelector(bool $enableModifyingEngineBehaviorViaRequest): string

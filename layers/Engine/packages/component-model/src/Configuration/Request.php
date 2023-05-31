@@ -19,7 +19,9 @@ class Request
 
     public static function getActionPath(): ?string
     {
-        return App::request(Params::ACTION_PATH) ?? App::query(Params::ACTION_PATH);
+        return RequestHelpers::getStringOrNullRequestParamValue(
+            App::request(Params::ACTION_PATH) ?? App::query(Params::ACTION_PATH)
+        );
     }
 
     /**
@@ -27,7 +29,9 @@ class Request
      */
     public static function getVersionConstraint(): ?string
     {
-        return App::request(Params::VERSION_CONSTRAINT) ?? App::query(Params::VERSION_CONSTRAINT);
+        return RequestHelpers::getStringOrNullRequestParamValue(
+            App::request(Params::VERSION_CONSTRAINT) ?? App::query(Params::VERSION_CONSTRAINT)
+        );
     }
 
     /**
@@ -37,7 +41,9 @@ class Request
      */
     public static function getVersionConstraintsForFields(): ?array
     {
-        return App::request(Params::VERSION_CONSTRAINT_FOR_FIELDS) ?? App::query(Params::VERSION_CONSTRAINT_FOR_FIELDS);
+        return RequestHelpers::getArrayOrNullRequestParamValue(
+            App::request(Params::VERSION_CONSTRAINT_FOR_FIELDS) ?? App::query(Params::VERSION_CONSTRAINT_FOR_FIELDS)
+        );
     }
 
     /**
@@ -47,7 +53,9 @@ class Request
      */
     public static function getVersionConstraintsForDirectives(): ?array
     {
-        return App::request(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES) ?? App::query(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES);
+        return RequestHelpers::getArrayOrNullRequestParamValue(
+            App::request(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES) ?? App::query(Params::VERSION_CONSTRAINT_FOR_DIRECTIVES)
+        );
     }
 
     /**
@@ -64,7 +72,9 @@ class Request
 
     public static function getComponentFilter(): ?string
     {
-        return App::request(Params::COMPONENTFILTER) ?? App::query(Params::COMPONENTFILTER);
+        return RequestHelpers::getStringOrNullRequestParamValue(
+            App::request(Params::COMPONENTFILTER) ?? App::query(Params::COMPONENTFILTER)
+        );
     }
 
     /**

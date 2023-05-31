@@ -95,4 +95,29 @@ class RequestHelpers
             FrameworkParams::XDEBUG_SESSION_STOP => '1',
         ];
     }
+
+    /**
+     * Param "query" (and possibly others) might be used by WordPress,
+     * passing an array. But in Gato it can only be a string or null.
+     * If it's none of these, then simply ignore this value (it's not
+     * used by this software) by returning null.
+     */
+    public static function getStringOrNullRequestParamValue(mixed $value): ?string
+    {
+        if ($value === null || !is_string($value)) {
+            return null;
+        }
+        return $value;
+    }
+
+    /**
+     * @return mixed[]|null
+     */
+    public static function getArrayOrNullRequestParamValue(mixed $value): ?array
+    {
+        if ($value === null || !is_array($value)) {
+            return null;
+        }
+        return $value;
+    }
 }
