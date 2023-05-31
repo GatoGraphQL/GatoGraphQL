@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionModuleDocumentationMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionDocsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\MenuPageInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModuleDocumentationMenuPage;
@@ -30,6 +31,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ExtensionModuleDocumentationMenuPage $extensionModuleDocumentationMenuPage = null;
     private ?ExtensionsMenuPage $extensionsMenuPage = null;
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
+    private ?ExtensionDocsMenuPage $extensionDocsMenuPage = null;
     private ?RecipesMenuPage $recipesMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
     private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
@@ -114,6 +116,15 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     {
         /** @var ReleaseNotesAboutMenuPage */
         return $this->releaseNotesAboutMenuPage ??= $this->instanceManager->getInstance(ReleaseNotesAboutMenuPage::class);
+    }
+    final public function setExtensionDocsMenuPage(ExtensionDocsMenuPage $extensionDocsMenuPage): void
+    {
+        $this->extensionDocsMenuPage = $extensionDocsMenuPage;
+    }
+    final protected function getExtensionDocsMenuPage(): ExtensionDocsMenuPage
+    {
+        /** @var ExtensionDocsMenuPage */
+        return $this->extensionDocsMenuPage ??= $this->instanceManager->getInstance(ExtensionDocsMenuPage::class);
     }
     final public function setRecipesMenuPage(RecipesMenuPage $recipesMenuPage): void
     {
@@ -255,6 +266,31 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             )
         ) {
             $extensionsMenuPage->setHookName($hookName);
+        }
+
+        /**
+         * Only show the Extension Docs page when actually loading it
+         * So it doesn't appear on the menu, but it's still available
+         * when opening it via the Extensions page
+         */
+        $extensionDocsMenuPage = $this->getExtensionDocsMenuPage();
+        if (App::query('page') === $extensionDocsMenuPage->getScreenID()) {
+            /**
+             * @var callable
+             */
+            $callable = [$extensionDocsMenuPage, 'print'];
+            if (
+                $hookName = \add_submenu_page(
+                    $menuName,
+                    __('Extension Docs', 'gato-graphql'),
+                    __('Extension Docs', 'gato-graphql'),
+                    $schemaEditorAccessCapability,
+                    $extensionDocsMenuPage->getScreenID(),
+                    $callable
+                )
+            ) {
+                $extensionDocsMenuPage->setHookName($hookName);
+            }
         }
 
         if (

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
-use GatoGraphQL\GatoGraphQL\App;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Plugin;
 
 class ExtensionModuleResolver extends AbstractExtensionModuleResolver

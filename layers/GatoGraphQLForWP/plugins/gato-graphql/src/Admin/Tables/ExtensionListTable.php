@@ -84,19 +84,20 @@ class ExtensionListTable extends AbstractExtensionListTable
     }
 
     /**
-	 * Gets a list of CSS classes for the WP_List_Table table tag.
-	 *
-	 * @since 3.1.0
-	 *
-	 * @return string[] Array of CSS classes for the table tag.
+     * Gets a list of CSS classes for the WP_List_Table table tag.
+     *
+     * @since 3.1.0
+     *
+     * @return string[] Array of CSS classes for the table tag.
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-	 */
-	protected function get_table_classes() {
-		return array_merge(
+     */
+    protected function get_table_classes()
+    {
+        return array_merge(
             parent::get_table_classes(),
             [
                 'gato-graphql-list-table',
             ]
         );
-	}
+    }
 }

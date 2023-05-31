@@ -41,13 +41,15 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             <<<HTML
             <div id="%s" class="%s">
                 <h1>%s</h1>
+                %s
                 <div class="nav-tab-container">
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
             HTML,
             $this->getContentID(),
             $class,
-            $this->getPageTitle()
+            $this->getPageTitle(),
+            $this->getPageHeaderHTML()
         );
 
         // This page URL
@@ -153,7 +155,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
     protected function getEntryID(string $entryName): string
     {
-        return str_replace([':', ' ', '/'], '_', $entryName);
+        return str_replace([':', ' ', '/', '.'], '_', $entryName);
     }
 
     protected function enumerateEntries(): bool
@@ -162,7 +164,12 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     }
 
     abstract protected function getPageTitle(): string;
-    
+
+    protected function getPageHeaderHTML(): string
+    {
+        return '';
+    }
+
     protected function getContentID(): string
     {
         return 'gato-graphql-vertical-tab-docs';
@@ -171,7 +178,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     abstract protected function getEntryRelativePathDir(): string;
 
     /**
-     * @param array<array{0:string,1:string}> $entry
+     * @param array{0:string,1:string} $entry
      */
     protected function getEntryContent(
         string $entryContent,

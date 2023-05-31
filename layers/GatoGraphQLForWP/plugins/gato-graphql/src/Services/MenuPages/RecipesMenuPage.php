@@ -52,28 +52,28 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @param array<array{0:string,1:string,2?:string[]}> $entry
+     * @param array{0:string,1:string,2?:string[]} $entry
      */
     protected function getEntryContent(
-        string $recipeContent,
-        array $recipeEntry,
+        string $entryContent,
+        array $entry,
     ): string {
-        $recipeEntryExtensionModules = $recipeEntry[2] ?? [];
-        if ($recipeEntryExtensionModules === []) {
-            return $recipeContent;
+        $entryExtensionModules = $entry[2] ?? [];
+        if ($entryExtensionModules === []) {
+            return $entryContent;
         }
-        $messagePlaceholder = count($recipeEntryExtensionModules) === 1
+        $messagePlaceholder = count($entryExtensionModules) === 1
             ? \__('%s This recipe requires extension %s to be active.', 'gato-graphql')
             : \__('%s This recipe requires extensions %s to be active.', 'gato-graphql');
         $extensionHTMLItems = [];
-        foreach ($recipeEntryExtensionModules as $recipeEntryExtensionModule) {
+        foreach ($entryExtensionModules as $entryExtensionModule) {
             /** @var ExtensionModuleResolverInterface */
-            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryExtensionModule);
+            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryExtensionModule);
             $extensionHTMLItems[] = sprintf(
                 \__('<strong><a href="%s" target="%s">%s%s</a></strong>', 'gato-graphql'),
-                $extensionModuleResolver->getWebsiteURL($recipeEntryExtensionModule),
+                $extensionModuleResolver->getWebsiteURL($entryExtensionModule),
                 '_blank',
-                $extensionModuleResolver->getName($recipeEntryExtensionModule),
+                $extensionModuleResolver->getName($entryExtensionModule),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
         }
@@ -93,7 +93,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             HTML,
             'extension-highlight',
             $messageHTML,
-        ) . $recipeContent;
+        ) . $entryContent;
     }
 
     /**
