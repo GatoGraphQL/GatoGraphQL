@@ -80,10 +80,10 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeContainerTimestamp(): void
     {
-        $time = $this->getUniqueIdentifier();
+        $uniqueID = $this->getUniqueIdentifier();
         $timestamps = [
-            self::TIMESTAMP_CONTAINER => $time,
-            self::TIMESTAMP_OPERATIONAL => $time,
+            self::TIMESTAMP_CONTAINER => $uniqueID,
+            self::TIMESTAMP_OPERATIONAL => $uniqueID,
         ];
         \update_option(Options::TIMESTAMPS, $timestamps);
     }
