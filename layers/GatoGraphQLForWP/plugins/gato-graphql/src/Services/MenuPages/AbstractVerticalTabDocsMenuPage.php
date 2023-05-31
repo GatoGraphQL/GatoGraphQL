@@ -80,9 +80,10 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                 RequestParams::TAB,
                 $entryName
             );
+            $entryID = $this->getEntryID($entryName);
             $markdownContent .= sprintf(
                 '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
-                '#' . $entryName,
+                '#' . $entryID,
                 $entryURL,
                 $entryName === $activeEntryName ? 'nav-tab-active' : '',
                 $entryTitle
@@ -120,6 +121,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                 $entryContent
             );
 
+            $entryID = $this->getEntryID($entryName);
             $markdownContent .= sprintf(
                 <<<HTML
                     <div id="%s" class="%s" style="%s">
@@ -127,7 +129,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                         %s
                     </div>
                 HTML,
-                $entryName,
+                $entryID,
                 'tab-content',
                 sprintf(
                     'display: %s;',
@@ -147,6 +149,11 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         </div>
         HTML;
         return $markdownContent;
+    }
+
+    protected function getEntryID(string $entryName): string
+    {
+        return str_replace([':', ' ', '/'], '_', $entryName);
     }
 
     protected function enumerateEntries(): bool
