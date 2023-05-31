@@ -108,11 +108,7 @@ class RecipesMenuPage extends AbstractDocsMenuPage
                 '#' . $recipeEntryName,
                 $recipeURL,
                 $recipeEntryName === $activeRecipeName ? 'nav-tab-active' : '',
-                $this->getRecipeTitleForNavbar(
-                    $recipeEntryTitle,
-                    $recipeEntryIsPRO,
-                    $recipeEntryPROExtensionModule,
-                )
+                $recipeEntryTitle
             );
         }
 
@@ -126,21 +122,6 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             $recipeEntryTitle = $recipeEntry[1];
             $recipeEntryIsPRO = $recipeEntry[2] ?? false;
             $recipeEntryPROExtensionModule = $recipeEntryIsPRO ? ($recipeEntry[3] ?? null) : null;
-
-            if (
-                $recipeEntryPROExtensionModule !== null
-                && $this->addLinkToExtensionInRecipeTitleInContent()
-            ) {
-                /** @var ExtensionModuleResolverInterface */
-                $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
-                $recipeEntryTitle = sprintf(
-                    \__('%s <span class="recipe-entry-title-extension">(via extension <strong><a href="%s" target="_blank">%s%s</a>)</span>'),
-                    $recipeEntryTitle,
-                    $extensionModuleResolver->getWebsiteURL($recipeEntryPROExtensionModule),
-                    $extensionModuleResolver->getName($recipeEntryPROExtensionModule),
-                    HTMLCodes::OPEN_IN_NEW_WINDOW
-                );
-            }
 
             $recipeEntryRelativePathDir = 'docs/recipes';
             $recipeContent = $this->getMarkdownContent(
@@ -194,25 +175,53 @@ class RecipesMenuPage extends AbstractDocsMenuPage
         return $markdownContent;
     }
 
-    protected function addLinkToExtensionInRecipeTitleInContent(): bool
-    {
-        return true;
-    }
-
-    protected function getRecipeTitleForNavbar(
-        string $recipeEntryTitle,
-        bool $recipeEntryIsPRO,
-        ?string $recipeEntryPROExtensionModule,
-    ): string {
-        return $recipeEntryTitle;
-    }
-
     protected function getRecipeContent(
         string $recipeContent,
         bool $recipeEntryIsPRO,
         ?string $recipeEntryPROExtensionModule,
     ): string {
-        return $recipeContent;
+        if ($recipeEntryPROExtensionModule === null) {
+            return $recipeContent;
+        }        
+        $buttonClassnames = 'button button-secondary';
+        /** @var ExtensionModuleResolverInterface */
+        $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryPROExtensionModule);
+        $message = sprintf(
+            \__('This recipe requires extension <strong>%s</strong> to be installed.', 'gato-graphql'),
+            $extensionModuleResolver->getName($recipeEntryPROExtensionModule)
+        );
+        $button = $this->getGetExtensionToUnlockAnchorHTML(
+            $extensionModuleResolver,
+            $recipeEntryPROExtensionModule,
+            $buttonClassnames,
+        );
+        return sprintf(
+            <<<HTML
+                <div class="%s">
+                    <p>%s %s</p>
+                </div>
+            HTML,
+            'go-pro-highlight' . ($recipeEntryPROExtensionModule !== null ? ' pro-extension' : ''),
+            $message,
+            $button
+        ) . $recipeContent;
+    }
+
+    protected function getGetExtensionToUnlockAnchorHTML(
+        ExtensionModuleResolverInterface $extensionModuleResolver,
+        string $extensionModule,
+        string $class = '',
+    ): string {
+        return \sprintf(
+            '<a href="%s" target="%s" class="%s">%s</a>',
+            $extensionModuleResolver->getWebsiteURL($extensionModule),
+            '_blank',
+            $class,
+            sprintf(
+                \__('Get extension <strong>%s</strong> to unlock! 🔓', 'gato-graphql'),
+                $extensionModuleResolver->getName($extensionModule),
+            ),
+        );
     }
 
     /**
