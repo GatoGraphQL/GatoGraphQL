@@ -34,17 +34,15 @@
  * Add a background-color to all extensions
  */
 .plugin-card.plugin-card-non-installed {
-    background-color: #f4d7ec;
+    /* background-color: #f4d7ec; */
+    border-color: burlywood;
+    background-color: antiquewhite;
 }
-/**
- * Add a distinctive background color to the 1st and last items:
- * - The 1st item is Gato GraphQL PRO
- * - The last item is "Request an Extension"
- */
-.plugin-card:nth-child(1) {
+
+/* .plugin-card:nth-child(1) {
     border-color: darksalmon;
     background-color: khaki;
-}
+} */
 .plugin-card.plugin-card-artificially-added {
     border-color: #3fe1d8;
     background-color: #b2f4f7;
