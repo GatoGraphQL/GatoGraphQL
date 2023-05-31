@@ -293,7 +293,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         // Add an additional item
         $additionalItemHTMLPlaceholder = <<<HTML
-            <div class="plugin-card plugin-card-highlight">
+            <div class="plugin-card">
                 <div class="plugin-card-top plugin-card-top-request-extension">
                     <div class="name column-name">
                         <h3>

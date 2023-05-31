@@ -33,7 +33,7 @@
 /**
  * Add a background-color to all extensions
  */
-.plugin-card-highlight.plugin-card {
+.plugin-card.plugin-card-highlight {
     background-color: #f4d7ec;
 }
 /**
@@ -41,11 +41,11 @@
  * - The 1st item is Gato GraphQL PRO
  * - The last item is "Request an Extension"
  */
-.plugin-card-highlight.plugin-card:nth-child(1) {
+.plugin-card:nth-child(1) {
     border-color: darksalmon;
     background-color: khaki;
 }
-.plugin-card-highlight.plugin-card:last-child {
+.plugin-card:last-child {
     border-color: #3fe1d8;
     background-color: #b2f4f7;
     border-style: dashed;
