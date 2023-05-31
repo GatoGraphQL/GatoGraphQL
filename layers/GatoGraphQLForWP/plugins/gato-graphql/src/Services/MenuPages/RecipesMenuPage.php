@@ -31,19 +31,24 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return 'recipes';
     }
 
-    protected function getContentID(): string
-    {
-        return 'gato-graphql-recipes';
-    }
-
     protected function getPageTitle(): string
     {
         return \__('Gato GraphQL - Entries: Use Cases, Best Practices, and Useful Queries', 'gato-graphql');
     }
 
+    protected function getContentID(): string
+    {
+        return 'gato-graphql-recipes';
+    }
+
     protected function getEntryRelativePathDir(): string
     {
         return 'docs/recipes';
+    }
+
+    protected function enumerateEntries(): bool
+    {
+        return true;
     }
 
     /**

@@ -151,9 +151,11 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
     protected function enumerateEntries(): bool
     {
-        return true;
+        return false;
     }
 
+    abstract protected function getPageTitle(): string;
+    
     protected function getContentID(): string
     {
         return 'gato-graphql-vertical-tab-doc-entries';
@@ -161,7 +163,6 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
     abstract protected function getEntryRelativePathDir(): string;
 
-    abstract protected function getPageTitle(): string;
 
     /**
      * @param array<array{0:string,1:string}> $entry
