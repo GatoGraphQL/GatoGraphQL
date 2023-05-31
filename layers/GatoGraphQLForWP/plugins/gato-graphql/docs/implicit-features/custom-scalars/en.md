@@ -1,10 +1,10 @@
 # Custom Scalars
 
-Collection of additional custom scalar types.
+Gato GraphQL supports custom scalars, and makes available several standard custom scalar types to be used in your application.
 
 ## List of Custom Scalars
 
-The following custom scalar types are made available in the GraphQL schema:
+In addition to those that appear via introspection (i.e. in the GraphiQL and Interactive Schema clients), the following custom scalar types are available in the GraphQL schema:
 
 ### `Domain`
 
