@@ -19,7 +19,8 @@ class WPAdminPageWebserverRequestTestCase extends AbstractWPAdminPageWebserverRe
         $entries = [];
         foreach ($this->getGatoGraphQLPluginMenuPageSlugs() as $pageSlug) {
             $entries[$pageSlug] = sprintf(
-                'wp-admin/edit.php?page=gato_graphql_%s',
+                'wp-admin/edit.php?page=%s_%s',
+                'gato_graphql', // @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
                 $pageSlug
             );
         }
