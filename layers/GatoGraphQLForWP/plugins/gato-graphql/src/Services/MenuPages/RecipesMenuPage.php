@@ -189,10 +189,9 @@ class RecipesMenuPage extends AbstractDocsMenuPage
             /** @var ExtensionModuleResolverInterface */
             $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($recipeEntryExtensionModule);
             $extensionHTMLItems[] = sprintf(
-                \__('<strong><a href="%s" target="%s" class="%s">%s%s</a></strong>', 'gato-graphql'),
+                \__('<strong><a href="%s" target="%s">%s%s</a></strong>', 'gato-graphql'),
                 $extensionModuleResolver->getWebsiteURL($recipeEntryExtensionModule),
                 '_blank',
-                '',
                 $extensionModuleResolver->getName($recipeEntryExtensionModule),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
