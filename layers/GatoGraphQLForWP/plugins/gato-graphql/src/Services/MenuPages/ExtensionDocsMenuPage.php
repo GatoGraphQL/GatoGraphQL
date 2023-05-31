@@ -36,15 +36,20 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
      */
     protected function getEntries(): array
     {
-        return [
-            [
-                'access-control/docs/modules/access-control',
-                \__('Access Control', 'gato-graphql'),
-            ],
-            [
-                'access-control-visitor-ip/docs/modules/access-control-visitor-ip',
-                \__('Access Control: Visitor IP', 'gato-graphql'),
-            ],
+        $extensions = [
+            'access-control' => \__('Access Control', 'gato-graphql'),
+            'access-control-visitor-ip' => \__('Access Control: Visitor IP', 'gato-graphql'),
         ];
+        $entries = [];
+        foreach ($extensions as $extension => $extensionName) {
+            $entries[] = [
+                sprintf(
+                    '%1$s/docs/modules/%1$s',
+                    $extension
+                ),
+                $extensionName,
+            ];
+        }
+        return $entries;
     }
 }
