@@ -99,7 +99,7 @@ class ModuleListTable extends AbstractItemListTable
                     'are-settings-hidden' => $moduleResolver->areSettingsHidden($module),
                     'name' => $moduleResolver->getName($module),
                     'description' => $moduleResolver->getDescription($module),
-                    'depends-on' => $moduleResolver->getDependedModuleLists($module),
+                    'depends-on-modules' => $moduleResolver->getDependedModuleLists($module),
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
@@ -254,7 +254,7 @@ class ModuleListTable extends AbstractItemListTable
                 // It's formatted like this: module1, module2, ..., module5 or module6
                 $items = [];
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
-                $dependedModuleLists = $item[$column_name];
+                $dependedModuleLists = $item['depends-on-modules'];
                 if (!$dependedModuleLists) {
                     return \__('-', 'gato-graphql');
                 }
