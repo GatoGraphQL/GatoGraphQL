@@ -4,16 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
-use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use PoP\Root\Services\BasicServiceTrait;
-
-use function dirname;
-use function get_file_data;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
@@ -58,37 +52,6 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
 
     final public function areRequirementsSatisfied(string $module): bool
     {
-        /**
-         * Check that all required plugins are active, and possibly
-         * satisfying some version constraint (as Composer semver).
-         *
-         * @see https://getcomposer.org/doc/articles/versions.md
-         */
-        foreach ($this->getDependedWordPressPlugins($module) as $dependedPlugin) {
-            // Check that all required plugins are active
-            if (!PluginStaticHelpers::isWordPressPluginActive($dependedPlugin->file)) {
-                return false;
-            }
-            
-            // Check the version constraint (as Composer semver)
-            if ($dependedPlugin->versionConstraint === null) {
-                continue;
-            }
-
-            $pluginDir = dirname(PluginApp::getMainPlugin()->getPluginDir());
-            $dependedPluginAbsolutePathFile = $pluginDir . '/' . $dependedPlugin->file;            
-            $dependedPluginData = get_file_data($dependedPluginAbsolutePathFile, array('Version'), 'plugin');
-            $dependedPluginVersion = $dependedPluginData[0];
-            if ($dependedPluginVersion === ''
-                || !SemverWrapper::satisfies(
-                    $dependedPluginVersion,
-                    $dependedPlugin->versionConstraint
-                )
-            ) {
-                return false;
-            }
-        }
-
         return $this->doAreRequirementsSatisfied($module);
     }
 
