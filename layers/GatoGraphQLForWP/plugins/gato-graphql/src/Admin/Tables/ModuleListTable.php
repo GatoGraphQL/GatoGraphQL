@@ -251,8 +251,8 @@ class ModuleListTable extends AbstractItemListTable
                 );
             case 'depends-on':
                 $dependedModuleLists = $item['depends-on-modules'];
-                $dependedPlugins = $item['depends-on-plugins'];
-                if (!$dependedModuleLists && !$dependedPlugins) {
+                $dependedPluginSlugs = $item['depends-on-plugins'];
+                if (!$dependedModuleLists && !$dependedPluginSlugs) {
                     return \__('-', 'gato-graphql');
                 }
                 
@@ -307,6 +307,15 @@ class ModuleListTable extends AbstractItemListTable
                         $moduleItems[] = $dependedModuleListNames[0];
                     }
                 }
+
+                /**
+                 * List of WordPress plugin slugs that must be active
+                 * for the module to be enabled
+                 */
+                foreach ($dependedPluginSlugs as $pluginSlug) {
+                    $pluginItems[] = sprintf('%s', $pluginSlug);
+                }
+                
                 return implode('<br/>', array_merge($moduleItems, $pluginItems));
             case 'enabled':
                 return \sprintf(
