@@ -53,6 +53,12 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
 
     final public function areRequirementsSatisfied(string $module): bool
     {
+        /**
+         * Check that all required plugins are active, and possibly
+         * satisfying some version constraint (as Composer semver).
+         *
+         * @see https://getcomposer.org/doc/articles/versions.md
+         */
         foreach ($this->getDependedWordPressPlugins($module) as $dependedWordPressPlugin) {
             if (!PluginStaticHelpers::isWordPressPluginActive($dependedWordPressPlugin->slug)) {
                 return false;
