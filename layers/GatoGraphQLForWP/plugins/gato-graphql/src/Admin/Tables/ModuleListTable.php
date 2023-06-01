@@ -261,7 +261,7 @@ class ModuleListTable extends AbstractItemListTable
                  * Each list is an OR list of depended modules.
                  * It's formatted like this: module1, module2, module3 or module4, ..., module12
                  */
-                $items = [];
+                $moduleItems = [];
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
                 /**
                  * This is a list of lists of modules, as to model both OR and AND conditions
@@ -296,16 +296,16 @@ class ModuleListTable extends AbstractItemListTable
                             \__(', ', 'gato-graphql'),
                             $dependedModuleListNames
                         );
-                        $items[] = sprintf(
+                        $moduleItems[] = sprintf(
                             \__('%s or %s', 'gato-graphql'),
                             $commaElems,
                             $lastElem
                         );
                     } else {
-                        $items[] = $dependedModuleListNames[0];
+                        $moduleItems[] = $dependedModuleListNames[0];
                     }
                 }
-                return implode('<br/>', $items);
+                return implode('<br/>', $moduleItems);
             case 'enabled':
                 return \sprintf(
                     '<span role="img" aria-label="%s">%s</span>',
