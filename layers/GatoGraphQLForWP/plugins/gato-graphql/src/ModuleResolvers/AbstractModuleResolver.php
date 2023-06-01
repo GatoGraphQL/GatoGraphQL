@@ -45,7 +45,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     /**
      * @return DependedWordPressPlugin[]
      */
-    public function getDependedWordPressPluginSlugs(string $module): array
+    public function getDependedWordPressPlugins(string $module): array
     {
         return [];
     }
