@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Registries;
 
+use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
+
+use function dirname;
+use function get_file_data;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
@@ -161,6 +167,11 @@ class ModuleRegistry implements ModuleRegistryInterface
             return false;
         }
 
+        // Check that all depended-upon plugins are active
+        if (!$this->areDependedPluginsActive($module)) {
+            return false;
+        }
+
         // Check if the value has been saved on the DB
         $moduleID = $moduleResolver->getID($module);
         if ($this->getUserSettingsManager()->hasSetModuleEnabled($moduleID)) {
@@ -214,6 +225,49 @@ class ModuleRegistry implements ModuleRegistryInterface
     }
 
     /**
+     * Indicate if a module's depended-upon plugins are all active
+     */
+    protected function areDependedPluginsActive(string $module): bool
+    {
+        $moduleResolver = $this->getModuleResolver($module);
+        $pluginDir = null;
+
+        /**
+         * Check that all required plugins are active, and possibly
+         * satisfying some version constraint (as Composer semver).
+         *
+         * @see https://getcomposer.org/doc/articles/versions.md
+         */
+        foreach ($moduleResolver->getDependedWordPressPlugins($module) as $dependedPlugin) {
+            // Check that all required plugins are active
+            if (!PluginStaticHelpers::isWordPressPluginActive($dependedPlugin->file)) {
+                return false;
+            }
+
+            // Check the version constraint (as Composer semver)
+            if ($dependedPlugin->versionConstraint === null || $dependedPlugin->versionConstraint === '') {
+                continue;
+            }
+
+            $pluginDir ??= dirname(PluginApp::getMainPlugin()->getPluginDir());
+            $dependedPluginAbsolutePathFile = $pluginDir . '/' . $dependedPlugin->file;
+            $dependedPluginData = get_file_data($dependedPluginAbsolutePathFile, array('Version'), 'plugin');
+            $dependedPluginVersion = $dependedPluginData[0];
+            if (
+                $dependedPluginVersion === ''
+                || !SemverWrapper::satisfies(
+                    $dependedPluginVersion,
+                    $dependedPlugin->versionConstraint
+                )
+            ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * If a module does not set a predefined enabled/disabled state,
      * then the user can enable/disable it.
      * If a module was disabled by the user, then the user can enable it.
@@ -237,6 +291,11 @@ class ModuleRegistry implements ModuleRegistryInterface
 
         // Check that all depended-upon modules are enabled
         if (!$this->areDependedModulesEnabled($module)) {
+            return false;
+        }
+
+        // Check that all depended-upon plugins are active
+        if (!$this->areDependedPluginsActive($module)) {
             return false;
         }
 

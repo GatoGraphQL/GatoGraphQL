@@ -7,8 +7,9 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Controllers;
 use Exception;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ParamValues;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\RESTResponse;
 use WP_Error;
@@ -146,7 +147,11 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             'settingsCategory' => $moduleResolver->getSettingsCategory($module),
             'name' => $moduleResolver->getName($module),
             'description' => $moduleResolver->getDescription($module),
-            'dependsOn' => $moduleResolver->getDependedModuleLists($module),
+            'dependsOnModules' => $moduleResolver->getDependedModuleLists($module),
+            'dependsOnPlugins' => array_map(
+                fn (DependedWordPressPlugin $dependedWordPressPlugin) => $dependedWordPressPlugin->name,
+                $moduleResolver->getDependedWordPressPlugins($module)
+            ),
             // 'url' => $moduleResolver->getURL($module),
             'slug' => $moduleResolver->getSlug($module),
             'hasDocs' => $moduleResolver->hasDocumentation($module),

@@ -7,12 +7,14 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GatoGraphQL\GatoGraphQL\Constants\AdminRequestParams;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleTypeRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
@@ -99,7 +101,8 @@ class ModuleListTable extends AbstractItemListTable
                     'are-settings-hidden' => $moduleResolver->areSettingsHidden($module),
                     'name' => $moduleResolver->getName($module),
                     'description' => $moduleResolver->getDescription($module),
-                    'depends-on' => $moduleResolver->getDependedModuleLists($module),
+                    'depends-on-modules' => $moduleResolver->getDependedModuleLists($module),
+                    'depends-on-plugins' => $moduleResolver->getDependedWordPressPlugins($module),
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
@@ -248,18 +251,27 @@ class ModuleListTable extends AbstractItemListTable
                     $item['description'],
                     $this->row_actions($actions, true)
                 );
+
             case 'depends-on':
-                // Output the list with AND lists of dependencies
-                // Each list is an OR list of depended modules
-                // It's formatted like this: module1, module2, ..., module5 or module6
-                $items = [];
-                $moduleRegistry = ModuleRegistryFacade::getInstance();
-                $dependedModuleLists = $item[$column_name];
-                if (!$dependedModuleLists) {
+                /** @var array<array<string>> */
+                $dependedModuleLists = $item['depends-on-modules'];
+                /** @var DependedWordPressPlugin[] */
+                $dependedPlugins = $item['depends-on-plugins'];
+                if (!$dependedModuleLists && !$dependedPlugins) {
                     return \__('-', 'gato-graphql');
                 }
+
+                $moduleItems = [];
+                $pluginItems = [];
+                $moduleRegistry = ModuleRegistryFacade::getInstance();
+
                 /**
-                 * This is a list of lists of modules, as to model both OR and AND conditions
+                 * This is a list of lists of modules, as to model both OR
+                 * and AND conditions.
+                 *
+                 * - Outer level: List with AND lists of dependencies.
+                 * - Inner level: List item is an OR list of depended modules.
+                 *   It's formatted like this: module1, module2, module3 or module4, ...
                  */
                 foreach ($dependedModuleLists as $dependedModuleList) {
                     if (!$dependedModuleList) {
@@ -291,16 +303,46 @@ class ModuleListTable extends AbstractItemListTable
                             \__(', ', 'gato-graphql'),
                             $dependedModuleListNames
                         );
-                        $items[] = sprintf(
+                        $moduleItems[] = sprintf(
                             \__('%s or %s', 'gato-graphql'),
                             $commaElems,
                             $lastElem
                         );
                     } else {
-                        $items[] = $dependedModuleListNames[0];
+                        $moduleItems[] = $dependedModuleListNames[0];
                     }
                 }
-                return implode('<br/>', $items);
+
+                /**
+                 * List of WordPress plugin slugs that must be active
+                 * for the module to be enabled
+                 */
+                foreach ($dependedPlugins as $dependedPlugin) {
+                    $dependedPluginHTML = $dependedPlugin->url === ''
+                        ? $dependedPlugin->name
+                        : sprintf(
+                            '<a href="%s" target="%s">%s%s</a>',
+                            $dependedPlugin->url,
+                            '_blank',
+                            $dependedPlugin->name,
+                            HTMLCodes::OPEN_IN_NEW_WINDOW
+                        );
+                    if ($dependedPlugin->versionConstraint !== null) {
+                        $dependedPluginHTML = sprintf(
+                            \__('%s (version constraint: <code>%s</code>)', 'gato-graphql'),
+                            $dependedPluginHTML,
+                            $dependedPlugin->versionConstraint
+                        );
+                    }
+                    $pluginItems[] = sprintf(
+                        '%1$s %2$s',
+                        '◇',
+                        $dependedPluginHTML
+                    );
+                }
+
+                return implode('<br/>', array_merge($moduleItems, $pluginItems));
+
             case 'enabled':
                 return \sprintf(
                     '<span role="img" aria-label="%s">%s</span>',
@@ -468,7 +510,7 @@ class ModuleListTable extends AbstractItemListTable
                 ],
             [
                 'desc' => \__('Description', 'gato-graphql'),
-                'depends-on' => \__('Depends on', 'gato-graphql'),
+                'depends-on' => \__('Depends on (▹ module, ◇ plugin)', 'gato-graphql'),
             ]
         );
     }

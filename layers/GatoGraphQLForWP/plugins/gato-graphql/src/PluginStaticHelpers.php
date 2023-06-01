@@ -58,8 +58,7 @@ class PluginStaticHelpers
     {
         if (self::$activeWordPressPluginSlugs === null) {
             self::$activeWordPressPluginSlugs = array_map(
-                function (string $pluginFile): string
-                {
+                function (string $pluginFile): string {
                     $pos = strpos($pluginFile, '/');
                     if ($pos === false) {
                         return $pluginFile;
