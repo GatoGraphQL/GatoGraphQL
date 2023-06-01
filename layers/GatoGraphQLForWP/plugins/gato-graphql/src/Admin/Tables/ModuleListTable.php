@@ -256,9 +256,11 @@ class ModuleListTable extends AbstractItemListTable
                     return \__('-', 'gato-graphql');
                 }
                 
-                // Output the list with AND lists of dependencies
-                // Each list is an OR list of depended modules
-                // It's formatted like this: module1, module2, ..., module5 or module6
+                /**
+                 * Output the list with AND lists of dependencies.
+                 * Each list is an OR list of depended modules.
+                 * It's formatted like this: module1, module2, module3 or module4, ..., module12
+                 */
                 $items = [];
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
                 /**
