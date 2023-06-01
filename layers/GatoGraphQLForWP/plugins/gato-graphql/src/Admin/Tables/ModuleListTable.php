@@ -7,12 +7,14 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GatoGraphQL\GatoGraphQL\Constants\AdminRequestParams;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleTypeRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
@@ -251,9 +253,11 @@ class ModuleListTable extends AbstractItemListTable
                 );
 
             case 'depends-on':
+                /** @var array<array<string>> */
                 $dependedModuleLists = $item['depends-on-modules'];
-                $dependedPluginSlugs = $item['depends-on-plugins'];
-                if (!$dependedModuleLists && !$dependedPluginSlugs) {
+                /** @var DependedWordPressPlugin[] */
+                $dependedPlugins = $item['depends-on-plugins'];
+                if (!$dependedModuleLists && !$dependedPlugins) {
                     return \__('-', 'gato-graphql');
                 }
                 
@@ -313,11 +317,31 @@ class ModuleListTable extends AbstractItemListTable
                  * List of WordPress plugin slugs that must be active
                  * for the module to be enabled
                  */
-                foreach ($dependedPluginSlugs as $pluginSlug) {
+                foreach ($dependedPlugins as $dependedPlugin) {
+                    /**
+                     * Passing a null URL, it builds it pointing to the WP repo.
+                     * To avoid passing an URL, instantiate it with empty string.
+                     */
+                    $url = $dependedPlugin->url;
+                    if ($url === null) {
+                        $url = sprintf(
+                            'https://wordpress.org/plugins/%s/',
+                            $dependedPlugin->slug
+                        );
+                    }
+                    $dependedPluginHTML = $url === ''
+                        ? $dependedPlugin->name
+                        : sprintf(
+                            '<a href="%s" target="%s">%s%s</a>',
+                            $url,
+                            '_blank',
+                            $dependedPlugin->name,
+                            HTMLCodes::OPEN_IN_NEW_WINDOW
+                        );
                     $pluginItems[] = sprintf(
                         '%1$s %2$s',
                         '◇',
-                        $pluginSlug
+                        $dependedPluginHTML
                     );
                 }
 
