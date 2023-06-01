@@ -12,6 +12,10 @@ class PluginStaticHelpers
      * @var string[]|null
      */
     private static ?array $activeWordPressPluginFiles = null;
+    /**
+     * @var string[]|null
+     */
+    private static ?array $activeWordPressPluginSlugs = null;
 
     public static function getGitHubRepoDocsRootPathURL(): string
     {
@@ -22,11 +26,49 @@ class PluginStaticHelpers
         return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/gato-graphql/';
     }
 
-    public static function isWordPressPluginActive(string $pluginFile): bool
+    /**
+     * If param $pluginFileOrSlug ends with ".php", then it's the
+     * plugin file, otherwise it's the plugin slug.
+     */
+    public static function isWordPressPluginActive(string $pluginFileOrSlug): bool
+    {
+        if (str_ends_with($pluginFileOrSlug, '.php')) {
+            $pluginFile = $pluginFileOrSlug;
+            return in_array($pluginFile, static::getActiveWordPressPluginFiles());
+        }
+        $pluginSlug = $pluginFileOrSlug;
+        return in_array($pluginSlug, static::getActiveWordPressPluginSlugs());
+    }
+
+    /**
+     * @return string[]
+     */
+    protected static function getActiveWordPressPluginFiles(): array
     {
         if (self::$activeWordPressPluginFiles === null) {
             self::$activeWordPressPluginFiles = apply_filters('active_plugins', get_option('active_plugins', []));
         }
-        return in_array($pluginFile, self::$activeWordPressPluginFiles);
+        return self::$activeWordPressPluginFiles;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected static function getActiveWordPressPluginSlugs(): array
+    {
+        if (self::$activeWordPressPluginSlugs === null) {
+            self::$activeWordPressPluginSlugs = array_map(
+                function (string $pluginFile): string
+                {
+                    $pos = strpos($pluginFile, '/');
+                    if ($pos === false) {
+                        return $pluginFile;
+                    }
+                    return substr($pluginFile, 0, $pos);
+                },
+                static::getActiveWordPressPluginFiles()
+            );
+        }
+        return self::$activeWordPressPluginSlugs;
     }
 }
