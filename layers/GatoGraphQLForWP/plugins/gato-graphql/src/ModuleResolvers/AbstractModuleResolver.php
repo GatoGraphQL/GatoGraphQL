@@ -51,7 +51,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
         return [];
     }
 
-    public function areRequirementsSatisfied(string $module): bool
+    final public function areRequirementsSatisfied(string $module): bool
     {
         foreach ($this->getDependedWordPressPlugins($module) as $dependedWordPressPlugin) {
             if (!PluginStaticHelpers::isWordPressPluginActive($dependedWordPressPlugin->slug)) {
@@ -59,6 +59,11 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
             }
         }
 
+        return $this->doAreRequirementsSatisfied($module);
+    }
+
+    protected function doAreRequirementsSatisfied(string $module): bool
+    {
         return true;
     }
 
