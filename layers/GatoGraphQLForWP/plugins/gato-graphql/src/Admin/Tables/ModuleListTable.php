@@ -514,7 +514,7 @@ class ModuleListTable extends AbstractItemListTable
                 ],
             [
                 'desc' => \__('Description', 'gato-graphql'),
-                'depends-on' => \__('Depends on', 'gato-graphql'),
+                'depends-on' => \__('Depends on (▹ module, ◇ plugin)', 'gato-graphql'),
             ]
         );
     }
