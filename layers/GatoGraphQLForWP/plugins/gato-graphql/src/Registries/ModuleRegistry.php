@@ -245,7 +245,7 @@ class ModuleRegistry implements ModuleRegistryInterface
             }
 
             // Check the version constraint (as Composer semver)
-            if ($dependedPlugin->versionConstraint === null) {
+            if ($dependedPlugin->versionConstraint === null || $dependedPlugin->versionConstraint === '') {
                 continue;
             }
 
