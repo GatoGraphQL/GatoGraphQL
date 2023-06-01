@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use PoP\Root\Services\BasicServiceTrait;
@@ -52,6 +53,12 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
 
     public function areRequirementsSatisfied(string $module): bool
     {
+        foreach ($this->getDependedWordPressPlugins($module) as $dependedWordPressPlugin) {
+            if (!PluginStaticHelpers::isWordPressPluginActive($dependedWordPressPlugin->slug)) {
+                return false;
+            }
+        }
+
         return true;
     }
 
