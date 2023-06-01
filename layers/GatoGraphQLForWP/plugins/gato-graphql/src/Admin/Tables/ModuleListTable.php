@@ -307,7 +307,7 @@ class ModuleListTable extends AbstractItemListTable
                         $moduleItems[] = $dependedModuleListNames[0];
                     }
                 }
-                return implode('<br/>', $moduleItems);
+                return implode('<br/>', array_merge($moduleItems, $pluginItems));
             case 'enabled':
                 return \sprintf(
                     '<span role="img" aria-label="%s">%s</span>',
