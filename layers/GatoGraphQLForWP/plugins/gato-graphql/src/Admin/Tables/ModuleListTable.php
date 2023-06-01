@@ -260,7 +260,7 @@ class ModuleListTable extends AbstractItemListTable
                 if (!$dependedModuleLists && !$dependedPlugins) {
                     return \__('-', 'gato-graphql');
                 }
-                
+
                 $moduleItems = [];
                 $pluginItems = [];
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
@@ -268,7 +268,7 @@ class ModuleListTable extends AbstractItemListTable
                 /**
                  * This is a list of lists of modules, as to model both OR
                  * and AND conditions.
-                 * 
+                 *
                  * - Outer level: List with AND lists of dependencies.
                  * - Inner level: List item is an OR list of depended modules.
                  *   It's formatted like this: module1, module2, module3 or module4, ...

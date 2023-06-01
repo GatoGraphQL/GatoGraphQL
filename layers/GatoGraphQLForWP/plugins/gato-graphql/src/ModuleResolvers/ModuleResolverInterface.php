@@ -12,20 +12,20 @@ interface ModuleResolverInterface
      * @return string[]
      */
     public function getModulesToResolve(): array;
-    
+
     /**
      * The priority to display the modules from this resolver in the Modules page.
      * The higher the number, the earlier it shows
      */
     public function getPriority(): int;
-    
+
     /**
      * This is a list of lists of modules, as to model both OR and AND conditions
      * The innermost list is an OR: if any module is enabled, then the condition succeeds
      * The outermost list is an AND: all list must succeed for this module to be enabled
      * Eg: the Schema Configuration is enabled if either the Custom Endpoints or
      * the Persisted Query are enabled:
-     * 
+     *
      *   [
      *     [self::PERSISTED_QUERIES, self::CUSTOM_ENDPOINTS],
      *   ]
@@ -87,12 +87,12 @@ interface ModuleResolverInterface
      * Default value for an option set by the module
      */
     public function getSettingOptionName(string $module, string $option): string;
-    
+
     /**
      * Indicate if the given value is valid for that option
      */
     public function isValidValue(string $module, string $option, mixed $value): bool;
-    
+
     /**
      * Default value for an option set by the module
      */
@@ -100,12 +100,12 @@ interface ModuleResolverInterface
     public function isEnabledByDefault(string $module): bool;
     // public function getURL(string $module): ?string;
     public function getSlug(string $module): string;
-    
+
     /**
      * Does the module have HTML Documentation?
      */
     public function hasDocumentation(string $module): bool;
-    
+
     /**
      * HTML Documentation for the module
      */

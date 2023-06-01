@@ -12,6 +12,9 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 
+use function dirname;
+use function get_file_data;
+
 class ModuleRegistry implements ModuleRegistryInterface
 {
     private ?UserSettingsManagerInterface $userSettingsManager = null;
@@ -240,17 +243,18 @@ class ModuleRegistry implements ModuleRegistryInterface
             if (!PluginStaticHelpers::isWordPressPluginActive($dependedPlugin->file)) {
                 return false;
             }
-            
+
             // Check the version constraint (as Composer semver)
             if ($dependedPlugin->versionConstraint === null) {
                 continue;
             }
 
             $pluginDir ??= dirname(PluginApp::getMainPlugin()->getPluginDir());
-            $dependedPluginAbsolutePathFile = $pluginDir . '/' . $dependedPlugin->file;            
+            $dependedPluginAbsolutePathFile = $pluginDir . '/' . $dependedPlugin->file;
             $dependedPluginData = get_file_data($dependedPluginAbsolutePathFile, array('Version'), 'plugin');
             $dependedPluginVersion = $dependedPluginData[0];
-            if ($dependedPluginVersion === ''
+            if (
+                $dependedPluginVersion === ''
                 || !SemverWrapper::satisfies(
                     $dependedPluginVersion,
                     $dependedPlugin->versionConstraint
@@ -259,7 +263,7 @@ class ModuleRegistry implements ModuleRegistryInterface
                 return false;
             }
         }
-        
+
         return true;
     }
 
