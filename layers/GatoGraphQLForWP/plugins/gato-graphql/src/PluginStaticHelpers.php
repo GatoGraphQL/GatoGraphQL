@@ -34,10 +34,10 @@ class PluginStaticHelpers
     {
         if (str_ends_with($pluginFileOrSlug, '.php')) {
             $pluginFile = $pluginFileOrSlug;
-            return in_array($pluginFile, static::getActiveWordPressPluginSlugs());
+            return in_array($pluginFile, static::getActiveWordPressPluginFiles());
         }
         $pluginSlug = $pluginFileOrSlug;
-        return in_array($pluginSlug, static::$activeWordPressPluginSlugs);
+        return in_array($pluginSlug, static::getActiveWordPressPluginSlugs());
     }
 
     /**
