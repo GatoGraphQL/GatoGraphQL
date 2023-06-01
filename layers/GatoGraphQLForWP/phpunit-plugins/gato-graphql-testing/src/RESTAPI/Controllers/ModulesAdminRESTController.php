@@ -149,7 +149,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             'description' => $moduleResolver->getDescription($module),
             'dependsOnModules' => $moduleResolver->getDependedModuleLists($module),
             'dependsOnPlugins' => array_map(
-                fn (DependedWordPressPlugin $dependedWordPressPlugin) => $dependedWordPressPlugin->slug,
+                fn (DependedWordPressPlugin $dependedWordPressPlugin) => $dependedWordPressPlugin->name,
                 $moduleResolver->getDependedWordPressPlugins($module)
             ),
             // 'url' => $moduleResolver->getURL($module),
