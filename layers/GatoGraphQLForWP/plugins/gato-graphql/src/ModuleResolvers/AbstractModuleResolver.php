@@ -50,12 +50,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
         return [];
     }
 
-    final public function areRequirementsSatisfied(string $module): bool
-    {
-        return $this->doAreRequirementsSatisfied($module);
-    }
-
-    protected function doAreRequirementsSatisfied(string $module): bool
+    public function areRequirementsSatisfied(string $module): bool
     {
         return true;
     }

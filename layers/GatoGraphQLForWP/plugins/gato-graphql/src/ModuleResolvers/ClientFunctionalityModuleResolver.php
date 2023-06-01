@@ -82,7 +82,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
         return parent::getDependedModuleLists($module);
     }
 
-    protected function doAreRequirementsSatisfied(string $module): bool
+    public function areRequirementsSatisfied(string $module): bool
     {
         switch ($module) {
             case self::GRAPHIQL_FOR_SINGLE_ENDPOINT:
@@ -92,7 +92,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                  */
                 return !empty(\get_option('permalink_structure'));
         }
-        return parent::doAreRequirementsSatisfied($module);
+        return parent::areRequirementsSatisfied($module);
     }
 
     public function getName(string $module): string

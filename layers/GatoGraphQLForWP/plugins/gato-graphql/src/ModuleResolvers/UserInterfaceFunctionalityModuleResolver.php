@@ -81,7 +81,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         return parent::getDependedModuleLists($module);
     }
 
-    protected function doAreRequirementsSatisfied(string $module): bool
+    public function areRequirementsSatisfied(string $module): bool
     {
         switch ($module) {
             case self::WELCOME_GUIDES:
@@ -95,7 +95,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                         \version_compare(constant('GUTENBERG_VERSION'), '8.2', '>=')
                     );
         }
-        return parent::doAreRequirementsSatisfied($module);
+        return parent::areRequirementsSatisfied($module);
     }
 
     public function isHidden(string $module): bool
