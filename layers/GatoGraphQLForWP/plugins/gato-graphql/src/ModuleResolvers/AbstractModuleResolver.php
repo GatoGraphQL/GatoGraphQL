@@ -62,20 +62,20 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
          *
          * @see https://getcomposer.org/doc/articles/versions.md
          */
-        foreach ($this->getDependedWordPressPlugins($module) as $dependedWordPressPlugin) {
-            if (!PluginStaticHelpers::isWordPressPluginActive($dependedWordPressPlugin->file)) {
+        foreach ($this->getDependedWordPressPlugins($module) as $dependedPlugin) {
+            if (!PluginStaticHelpers::isWordPressPluginActive($dependedPlugin->file)) {
                 return false;
             }
-            if ($dependedWordPressPlugin->versionConstraint === null) {
+            if ($dependedPlugin->versionConstraint === null) {
                 continue;
             }
-            $dependedPluginData = get_plugin_data($dependedWordPressPlugin->file);
+            $dependedPluginData = get_plugin_data($dependedPlugin->file);
             /** @var string */
             $dependedPluginVersion = $dependedPluginData['Version'] ?? '';
             if ($dependedPluginVersion === ''
                 || !SemverWrapper::satisfies(
                     $dependedPluginVersion,
-                    $dependedWordPressPlugin->versionConstraint
+                    $dependedPlugin->versionConstraint
                 )
             ) {
                 return false;
