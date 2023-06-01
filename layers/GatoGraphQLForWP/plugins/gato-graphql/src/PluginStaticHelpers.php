@@ -64,7 +64,7 @@ class PluginStaticHelpers
                     if ($pos === false) {
                         return $pluginFile;
                     }
-                    return substr($pluginFile, 0, $pos + 1);
+                    return substr($pluginFile, 0, $pos);
                 },
                 static::getActiveWordPressPluginFiles()
             );
