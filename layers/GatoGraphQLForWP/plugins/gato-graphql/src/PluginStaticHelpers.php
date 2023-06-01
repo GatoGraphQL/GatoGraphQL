@@ -75,14 +75,16 @@ class PluginStaticHelpers
     }
 
     public static function doesActivePluginSatisfyVersionConstraint(
-        string $pluginAbsolutePathFile,
+        string $pluginFile,
         string $versionConstraint
     ): bool {
-        $dependedPluginData = get_file_data($pluginAbsolutePathFile, array('Version'), 'plugin');
-        $dependedPluginVersion = $dependedPluginData[0];
-        if ($dependedPluginVersion === '') {
+        $pluginDir = dirname(PluginApp::getMainPlugin()->getPluginDir());
+        $pluginAbsolutePathFile = $pluginDir . '/' . $pluginFile;
+        $pluginData = get_file_data($pluginAbsolutePathFile, array('Version'), 'plugin');
+        $pluginVersion = $pluginData[0];
+        if ($pluginVersion === '') {
             return false;
         }
-        return SemverWrapper::satisfies($dependedPluginVersion, $versionConstraint);
+        return SemverWrapper::satisfies($pluginVersion, $versionConstraint);
     }
 }

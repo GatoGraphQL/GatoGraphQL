@@ -228,7 +228,6 @@ class ModuleRegistry implements ModuleRegistryInterface
     protected function areDependedPluginsActive(string $module): bool
     {
         $moduleResolver = $this->getModuleResolver($module);
-        $pluginDir = null;
 
         /**
          * Check that all required plugins are active, and possibly
@@ -247,10 +246,8 @@ class ModuleRegistry implements ModuleRegistryInterface
                 continue;
             }
 
-            $pluginDir ??= dirname(PluginApp::getMainPlugin()->getPluginDir());
-            $dependedPluginAbsolutePathFile = $pluginDir . '/' . $dependedPlugin->file;
             if (!PluginStaticHelpers::doesActivePluginSatisfyVersionConstraint(
-                $dependedPluginAbsolutePathFile,
+                $dependedPlugin->file,
                 $dependedPlugin->versionConstraint
             )) {
                 return false;
