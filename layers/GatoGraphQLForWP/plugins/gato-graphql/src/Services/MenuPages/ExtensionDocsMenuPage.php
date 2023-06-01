@@ -129,7 +129,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @param array<array{slug:string,name:string,module:string}> $entry
+     * @param array<array{0:string,1:string,2:string}> $entry
+     * @phpstan-ignore-next-line
      */
     protected function getEntryTitle(
         string $entryTitle,
