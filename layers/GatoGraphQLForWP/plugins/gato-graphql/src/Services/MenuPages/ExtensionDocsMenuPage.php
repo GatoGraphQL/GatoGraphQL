@@ -69,25 +69,32 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string}>
+     * @return array<array{0:string,1:string,2:string}>
      */
     protected function getEntries(): array
     {
         $entries = [];
-        foreach ($this->getExtensionModuleItems() as $extensionSlug => $extensionName) {
+        foreach ($this->getExtensionModuleItems() as $extensionModuleItem) {
+            /** @var string */
+            $extensionSlug = $extensionModuleItem['slug'];
+            /** @var string */
+            $extensionName = $extensionModuleItem['name'];
+            /** @var string */
+            $extensionModule = $extensionModuleItem['module'];
             $entries[] = [
                 sprintf(
                     '%1$s/docs/modules/%1$s',
                     $extensionSlug
                 ),
                 $extensionName,
+                $extensionModule,
             ];
         }
         return $entries;
     }
 
     /**
-     * @return array<string,string> Key: extension slug, Value: extension name
+     * @return array<array{slug:string,name:string,module:string}>
      */
     protected function getExtensionModuleItems(): array
     {
@@ -99,8 +106,34 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
-            $items[$moduleResolver->getSlug($module)] = $moduleResolver->getName($module);
+            $items[] = [
+                'slug' => $moduleResolver->getSlug($module),
+                'name' => $moduleResolver->getName($module),
+                'module' => $module,
+                'module-resolver' => $moduleResolver,
+            ];
         }
         return $items;
+    }
+
+    /**
+     * @param array<array{slug:string,name:string,module:string}> $entry
+     */
+    protected function getEntryTitle(
+        string $entryTitle,
+        array $entry,
+    ): string {
+        /** @var string */
+        $entryModule = $entry[2];
+        /** @var ExtensionModuleResolverInterface */
+        $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
+        return sprintf(
+            \__('%s <small>(<a href="%s" target="%s" title="%s">get extension%s</a>)</small>', 'gato-graphql'),
+            $entryTitle,
+            $entryModuleResolver->getWebsiteURL($entryModule),
+            '_blank',
+            \__('Open in shop', 'gato-graphql'),
+            HTMLCodes::OPEN_IN_NEW_WINDOW
+        );
     }
 }

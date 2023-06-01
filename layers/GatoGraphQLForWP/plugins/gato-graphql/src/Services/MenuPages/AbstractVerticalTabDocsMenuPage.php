@@ -137,7 +137,10 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                     'display: %s;',
                     $entryName === $activeEntryName ? 'block' : 'none'
                 ),
-                $entryTitle,
+                $this->getEntryTitle(
+                    $entryTitle,
+                    $entry,
+                ),
                 $this->getEntryContent(
                     $entryContent,
                     $entry,
@@ -177,6 +180,16 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
     abstract protected function getEntryRelativePathDir(): string;
 
+    /**
+     * @param array{0:string,1:string} $entry
+     */
+    protected function getEntryTitle(
+        string $entryTitle,
+        array $entry,
+    ): string {
+        return $entryTitle;
+    }
+    
     /**
      * @param array{0:string,1:string} $entry
      */
