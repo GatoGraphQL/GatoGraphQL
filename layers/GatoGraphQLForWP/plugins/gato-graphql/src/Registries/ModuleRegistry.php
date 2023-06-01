@@ -7,11 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Registries;
 use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
-
-use function dirname;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
@@ -246,10 +243,12 @@ class ModuleRegistry implements ModuleRegistryInterface
                 continue;
             }
 
-            if (!PluginStaticHelpers::doesActivePluginSatisfyVersionConstraint(
-                $dependedPlugin->file,
-                $dependedPlugin->versionConstraint
-            )) {
+            if (
+                !PluginStaticHelpers::doesActivePluginSatisfyVersionConstraint(
+                    $dependedPlugin->file,
+                    $dependedPlugin->versionConstraint
+                )
+            ) {
                 return false;
             }
         }
