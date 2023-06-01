@@ -6,12 +6,14 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use PoP\Root\Services\BasicServiceTrait;
 
-use function get_plugin_data;
+use function dirname;
+use function get_file_data;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
@@ -73,14 +75,10 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
                 continue;
             }
 
-            // This function is not loaded by default!
-            if(!\function_exists('get_plugin_data')) {
-                require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-            }
-            
-            $dependedPluginData = get_plugin_data($dependedPlugin->file);
-            /** @var string */
-            $dependedPluginVersion = $dependedPluginData['Version'] ?? '';
+            $pluginDir = dirname(PluginApp::getMainPlugin()->getPluginDir());
+            $dependedPluginAbsolutePathFile = $pluginDir . '/' . $dependedPlugin->file;            
+            $dependedPluginData = get_file_data($dependedPluginAbsolutePathFile, array('Version'), 'plugin');
+            $dependedPluginVersion = $dependedPluginData[0];
             if ($dependedPluginVersion === ''
                 || !SemverWrapper::satisfies(
                     $dependedPluginVersion,
