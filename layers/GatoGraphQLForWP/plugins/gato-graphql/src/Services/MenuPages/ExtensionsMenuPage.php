@@ -113,20 +113,28 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         parent::printHeader();
 
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         printf(
             '<p>%s</p>',
             sprintf(
-                __('Extensions add functionality and expand the GraphQL schema. Browse and get extensions on the <a href="%1$s" target="%2$s">Gato GraphQL shop%4$s</a>. Switch to the <a href="%3$s">Extension Docs</a> view to browse through their docs more easily.', 'gato-graphql'),
-                $moduleConfiguration->getPROPluginShopURL(),
-                '_blank',
+                __('%s Switch to the <a href="%s">Extension Docs</a> view to browse through their docs more easily.', 'gato-graphql'),
+                $this->getHeaderMessage(),
                 \admin_url(sprintf(
                     'admin.php?page=%s',
                     $this->getExtensionDocsMenuPage()->getScreenID()
                 )),
-                HTMLCodes::OPEN_IN_NEW_WINDOW,
             )
+        );
+    }
+
+    public function getHeaderMessage(): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return sprintf(
+            __('Extensions add functionality and expand the GraphQL schema. Browse and get extensions on the <a href="%1$s" target="%2$s">Gato GraphQL shop%3$s</a>.', 'gato-graphql'),
+            $moduleConfiguration->getPROPluginShopURL(),
+            '_blank',
+            HTMLCodes::OPEN_IN_NEW_WINDOW,
         );
     }
 }

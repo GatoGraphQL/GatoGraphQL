@@ -66,19 +66,16 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getPageHeaderHTML(): string
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $extensionsMenuPage = $this->getExtensionsMenuPage();
         return sprintf(
             '<p>%s</p>',
             sprintf(
-                __('Extensions add functionality and expand the GraphQL schema. Browse and get extensions on the <a href="%1$s" target="%2$s">Gato GraphQL shop%4$s</a>. Switch back to the <a href="%3$s">Extensions</a> page.', 'gato-graphql'),
-                $moduleConfiguration->getPROPluginShopURL(),
-                '_blank',
+                __('%s Switch back to the <a href="%s">Extensions</a> view.', 'gato-graphql'),
+                $extensionsMenuPage->getHeaderMessage(),
                 \admin_url(sprintf(
                     'admin.php?page=%s',
-                    $this->getExtensionsMenuPage()->getScreenID()
+                    $extensionsMenuPage->getScreenID()
                 )),
-                HTMLCodes::OPEN_IN_NEW_WINDOW,
             )
         );
     }
