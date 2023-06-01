@@ -146,7 +146,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             'settingsCategory' => $moduleResolver->getSettingsCategory($module),
             'name' => $moduleResolver->getName($module),
             'description' => $moduleResolver->getDescription($module),
-            'dependsOn' => $moduleResolver->getDependedModuleLists($module),
+            'dependsOnModules' => $moduleResolver->getDependedModuleLists($module),
             // 'url' => $moduleResolver->getURL($module),
             'slug' => $moduleResolver->getSlug($module),
             'hasDocs' => $moduleResolver->hasDocumentation($module),
