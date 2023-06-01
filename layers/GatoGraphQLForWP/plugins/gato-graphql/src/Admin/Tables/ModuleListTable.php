@@ -318,22 +318,11 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependedPlugins as $dependedPlugin) {
-                    /**
-                     * Passing a null URL, it builds it pointing to the WP repo.
-                     * To avoid passing an URL, instantiate it with empty string.
-                     */
-                    $url = $dependedPlugin->url;
-                    if ($url === null) {
-                        $url = sprintf(
-                            'https://wordpress.org/plugins/%s/',
-                            $dependedPlugin->slug
-                        );
-                    }
-                    $dependedPluginHTML = $url === ''
+                    $dependedPluginHTML = $dependedPlugin->url === ''
                         ? $dependedPlugin->name
                         : sprintf(
                             '<a href="%s" target="%s">%s%s</a>',
-                            $url,
+                            $dependedPlugin->url,
                             '_blank',
                             $dependedPlugin->name,
                             HTMLCodes::OPEN_IN_NEW_WINDOW
