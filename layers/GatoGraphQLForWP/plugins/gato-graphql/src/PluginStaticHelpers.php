@@ -24,6 +24,15 @@ class PluginStaticHelpers
 
     public static function isWordPressPluginActive(string $pluginSlug): bool
     {
+        $activeWordPressPluginSlugs = static::getActiveWordPressPluginSlugs();
+        return in_array($pluginSlug, $activeWordPressPluginSlugs);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected static function getActiveWordPressPluginSlugs(): array
+    {
         if (self::$activeWordPressPluginSlugs === null) {
             $activeWordPressPluginFiles = apply_filters('active_plugins', get_option('active_plugins', []));
             self::$activeWordPressPluginSlugs = array_map(
@@ -38,6 +47,6 @@ class PluginStaticHelpers
                 $activeWordPressPluginFiles
             );
         }
-        return in_array($pluginSlug, self::$activeWordPressPluginSlugs);
+        return self::$activeWordPressPluginSlugs;
     }
 }
