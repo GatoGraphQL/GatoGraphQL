@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
+use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
+
 use function apply_filters;
+use function get_file_data;
 
 class PluginStaticHelpers
 {
@@ -69,5 +72,19 @@ class PluginStaticHelpers
             );
         }
         return self::$activeWordPressPluginSlugs;
+    }
+
+    public static function doesActivePluginSatisfyVersionConstraint(
+        string $pluginFile,
+        string $versionConstraint
+    ): bool {
+        $pluginDir = dirname(PluginApp::getMainPlugin()->getPluginDir());
+        $pluginAbsolutePathFile = $pluginDir . '/' . $pluginFile;
+        $pluginData = get_file_data($pluginAbsolutePathFile, array('Version'), 'plugin');
+        $pluginVersion = $pluginData[0];
+        if ($pluginVersion === '') {
+            return false;
+        }
+        return SemverWrapper::satisfies($pluginVersion, $versionConstraint);
     }
 }

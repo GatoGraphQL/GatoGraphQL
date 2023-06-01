@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Registries;
 
-use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
@@ -13,7 +12,6 @@ use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 
 use function dirname;
-use function get_file_data;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
@@ -230,7 +228,6 @@ class ModuleRegistry implements ModuleRegistryInterface
     protected function areDependedPluginsActive(string $module): bool
     {
         $moduleResolver = $this->getModuleResolver($module);
-        $pluginDir = null;
 
         /**
          * Check that all required plugins are active, and possibly
@@ -249,17 +246,10 @@ class ModuleRegistry implements ModuleRegistryInterface
                 continue;
             }
 
-            $pluginDir ??= dirname(PluginApp::getMainPlugin()->getPluginDir());
-            $dependedPluginAbsolutePathFile = $pluginDir . '/' . $dependedPlugin->file;
-            $dependedPluginData = get_file_data($dependedPluginAbsolutePathFile, array('Version'), 'plugin');
-            $dependedPluginVersion = $dependedPluginData[0];
-            if (
-                $dependedPluginVersion === ''
-                || !SemverWrapper::satisfies(
-                    $dependedPluginVersion,
-                    $dependedPlugin->versionConstraint
-                )
-            ) {
+            if (!PluginStaticHelpers::doesActivePluginSatisfyVersionConstraint(
+                $dependedPlugin->file,
+                $dependedPlugin->versionConstraint
+            )) {
                 return false;
             }
         }
