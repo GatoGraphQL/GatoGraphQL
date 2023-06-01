@@ -9,8 +9,8 @@ use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
-
 use PoP\Root\Services\BasicServiceTrait;
+
 use function get_plugin_data;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
