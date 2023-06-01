@@ -70,7 +70,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         return sprintf(
             '<p>%s</p>',
             sprintf(
-                __('%s Switch back to the <a href="%s">Extensions</a> view.', 'gato-graphql'),
+                __('%s <a href="%s" class="button">Switch to the <strong>Extensions</strong> view</a></span>', 'gato-graphql'),
                 $extensionsMenuPage->getHeaderMessage(),
                 \admin_url(sprintf(
                     'admin.php?page=%s',

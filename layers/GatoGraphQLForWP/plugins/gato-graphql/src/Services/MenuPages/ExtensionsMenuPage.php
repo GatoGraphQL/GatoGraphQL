@@ -116,7 +116,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         printf(
             '<p>%s</p>',
             sprintf(
-                __('%s Switch to the <a href="%s">Extension Docs</a> view to browse through their docs more easily.', 'gato-graphql'),
+                __('%s <a href="%s" class="button">Switch to the <strong>Extension Docs</strong> view</a>', 'gato-graphql'),
                 $this->getHeaderMessage(),
                 \admin_url(sprintf(
                     'admin.php?page=%s',
