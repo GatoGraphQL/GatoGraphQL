@@ -60,7 +60,7 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
          * @see https://getcomposer.org/doc/articles/versions.md
          */
         foreach ($this->getDependedWordPressPlugins($module) as $dependedWordPressPlugin) {
-            if (!PluginStaticHelpers::isWordPressPluginActive($dependedWordPressPlugin->slug)) {
+            if (!PluginStaticHelpers::isWordPressPluginActive($dependedWordPressPlugin->file)) {
                 return false;
             }
         }
