@@ -249,7 +249,7 @@ class ModuleListTable extends AbstractItemListTable
                     $item['description'],
                     $this->row_actions($actions, true)
                 );
-                
+
             case 'depends-on':
                 $dependedModuleLists = $item['depends-on-modules'];
                 $dependedPluginSlugs = $item['depends-on-plugins'];
@@ -314,7 +314,11 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependedPluginSlugs as $pluginSlug) {
-                    $pluginItems[] = sprintf('%s', $pluginSlug);
+                    $pluginItems[] = sprintf(
+                        '%1$s %2$s',
+                        '◇',
+                        $pluginSlug
+                    );
                 }
 
                 return implode('<br/>', array_merge($moduleItems, $pluginItems));
