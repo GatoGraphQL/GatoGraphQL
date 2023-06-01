@@ -100,6 +100,7 @@ class ModuleListTable extends AbstractItemListTable
                     'name' => $moduleResolver->getName($module),
                     'description' => $moduleResolver->getDescription($module),
                     'depends-on-modules' => $moduleResolver->getDependedModuleLists($module),
+                    'depends-on-plugins' => $moduleResolver->getDependedWordPressPluginSlugs($module),
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
@@ -249,15 +250,17 @@ class ModuleListTable extends AbstractItemListTable
                     $this->row_actions($actions, true)
                 );
             case 'depends-on':
+                $dependedModuleLists = $item['depends-on-modules'];
+                $dependedPlugins = $item['depends-on-plugins'];
+                if (!$dependedModuleLists && !$dependedPlugins) {
+                    return \__('-', 'gato-graphql');
+                }
+                
                 // Output the list with AND lists of dependencies
                 // Each list is an OR list of depended modules
                 // It's formatted like this: module1, module2, ..., module5 or module6
                 $items = [];
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
-                $dependedModuleLists = $item['depends-on-modules'];
-                if (!$dependedModuleLists) {
-                    return \__('-', 'gato-graphql');
-                }
                 /**
                  * This is a list of lists of modules, as to model both OR and AND conditions
                  */
