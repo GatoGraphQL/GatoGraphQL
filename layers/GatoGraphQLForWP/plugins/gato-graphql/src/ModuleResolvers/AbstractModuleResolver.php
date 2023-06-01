@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
+
 use PoP\Root\Services\BasicServiceTrait;
+use function get_plugin_data;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
 {
@@ -61,6 +64,20 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
          */
         foreach ($this->getDependedWordPressPlugins($module) as $dependedWordPressPlugin) {
             if (!PluginStaticHelpers::isWordPressPluginActive($dependedWordPressPlugin->file)) {
+                return false;
+            }
+            if ($dependedWordPressPlugin->versionConstraint === null) {
+                continue;
+            }
+            $dependedPluginData = get_plugin_data($dependedWordPressPlugin->file);
+            /** @var string */
+            $dependedPluginVersion = $dependedPluginData['Version'] ?? '';
+            if ($dependedPluginVersion === ''
+                || !SemverWrapper::satisfies(
+                    $dependedPluginVersion,
+                    $dependedWordPressPlugin->versionConstraint
+                )
+            ) {
                 return false;
             }
         }
