@@ -11,6 +11,10 @@ class PluginStaticHelpers
     /**
      * @var string[]|null
      */
+    private static ?array $activeWordPressPluginFiles = null;
+    /**
+     * @var string[]|null
+     */
     private static ?array $activeWordPressPluginSlugs = null;
 
     public static function getGitHubRepoDocsRootPathURL(): string
@@ -22,10 +26,29 @@ class PluginStaticHelpers
         return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/gato-graphql/';
     }
 
-    public static function isWordPressPluginActive(string $pluginSlug): bool
+    /**
+     * If param $pluginFileOrSlug ends with ".php", then it's the
+     * plugin file, otherwise it's the plugin slug.
+     */
+    public static function isWordPressPluginActive(string $pluginFileOrSlug): bool
     {
-        $activeWordPressPluginSlugs = static::getActiveWordPressPluginSlugs();
-        return in_array($pluginSlug, $activeWordPressPluginSlugs);
+        if (str_ends_with($pluginFileOrSlug, '.php')) {
+            $pluginFile = $pluginFileOrSlug;
+            return in_array($pluginFile, static::getActiveWordPressPluginSlugs());
+        }
+        $pluginSlug = $pluginFileOrSlug;
+        return in_array($pluginSlug, static::$activeWordPressPluginSlugs);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected static function getActiveWordPressPluginFiles(): array
+    {
+        if (self::$activeWordPressPluginFiles === null) {
+            self::$activeWordPressPluginFiles = apply_filters('active_plugins', get_option('active_plugins', []));
+        }
+        return self::$activeWordPressPluginFiles;
     }
 
     /**
@@ -34,7 +57,6 @@ class PluginStaticHelpers
     protected static function getActiveWordPressPluginSlugs(): array
     {
         if (self::$activeWordPressPluginSlugs === null) {
-            $activeWordPressPluginFiles = apply_filters('active_plugins', get_option('active_plugins', []));
             self::$activeWordPressPluginSlugs = array_map(
                 function (string $pluginFile): string
                 {
@@ -44,7 +66,7 @@ class PluginStaticHelpers
                     }
                     return substr($pluginFile, 0, $pos + 1);
                 },
-                $activeWordPressPluginFiles
+                static::getActiveWordPressPluginFiles()
             );
         }
         return self::$activeWordPressPluginSlugs;
