@@ -329,7 +329,7 @@ class ModuleListTable extends AbstractItemListTable
                         );
                     if ($dependedPlugin->versionConstraint !== null) {
                         $dependedPluginHTML = sprintf(
-                            \__('%s (version constraint: "%s")', 'gato-graphql'),
+                            \__('%s (version constraint: <code>%s</code>)', 'gato-graphql'),
                             $dependedPluginHTML,
                             $dependedPlugin->versionConstraint
                         );
