@@ -189,7 +189,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     ): string {
         return $entryTitle;
     }
-    
+
     /**
      * @param array{0:string,1:string} $entry
      */
