@@ -110,13 +110,15 @@ jobs:
             # When building bundles (i.e. containing 2 or more extension plugins), if 2 extensions
             # contain the same entry under "replace" in composer.json, then "require"ing both of
             # them in the bundle fails:
-            #   - Only one of these can be installed: pop-schema/schema-commons[dev-master], gato-graphql-pro/php-constants-and-environment-variables-via-schema[dev-master], gato-graphql-pro/helper-function-collection[dev-master]. [gato-graphql-pro/php-constants-and-environment-variables-via-schema, gato-graphql-pro/helper-function-collection] replace pop-schema/schema-commons and thus cannot coexist with it.
+            #
+            #   > Only one of these can be installed: pop-schema/schema-commons[dev-master], gato-graphql-pro/php-constants-and-environment-variables-via-schema[dev-master], gato-graphql-pro/helper-function-collection[dev-master]. [gato-graphql-pro/php-constants-and-environment-variables-via-schema, gato-graphql-pro/helper-function-collection] replace pop-schema/schema-commons and thus cannot coexist with it.
+            #
             # As a solution, when generating the bundle plugin, remove all the "replace" entries
             # in all the dependency packages (i.e. the extension plugins), and move them to the root
             # composer.json, for the bundle.
-            -   name: Transfer the "replace" entries in composer.json, from dependency packages to the root package
+            -   name: "Bundles: Transfer the 'replace' entries in composer.json, from the contained plugins to the bundle"
                 run: |
-                    vendor/bin/monorepo-builder transfer-composer-dependencies-replace-section-to-root-composer --config=config/monorepo-builder/transfer-composer-dependencies-replace-section-to-root-composer.php "${{ matrix.pluginConfig.path }}/composer.json"
+                    vendor/bin/monorepo-builder transfer-composer-replace-section-from-plugins-to-bundle --config=config/monorepo-builder/transfer-composer-replace-section-from-plugins-to-bundle.php "${{ matrix.pluginConfig.path }}/composer.json"
                 if: ${{ matrix.pluginConfig.transferReplaceEntriesToRootComposer }}
 
             -   name: Install plugin dependencies, avoiding v2 platform check
