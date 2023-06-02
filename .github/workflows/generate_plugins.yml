@@ -114,7 +114,7 @@ jobs:
             # As a solution, when generating the bundle plugin, remove all the "replace" entries
             # in all the dependency packages (i.e. the extension plugins), and move them to the root
             # composer.json, for the bundle.
-            -   name: Transfer the "replace" entries from dependencies to the root composer.json
+            -   name: Transfer the "replace" entries in composer.json, from dependency packages to the root package
                 run: |
                     vendor/bin/monorepo-builder transfer-composer-dependencies-replace-section-to-root-composer --config=config/monorepo-builder/transfer-composer-dependencies-replace-section-to-root-composer.php "${{ matrix.pluginConfig.path }}/composer.json"
                 if: ${{ matrix.pluginConfig.transferReplaceEntriesToRootComposer }}
