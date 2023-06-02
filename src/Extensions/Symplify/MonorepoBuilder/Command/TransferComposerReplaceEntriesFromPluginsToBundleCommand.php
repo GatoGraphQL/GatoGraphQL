@@ -44,8 +44,8 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
     {
         $this->sourcesPresenceValidator->validateRootComposerJsonName();
 
-        /** @var string $rootComposerPath */
-        $rootComposerPath = $input->getArgument(self::BUNDLE_COMPOSER_PATH);
+        /** @var string */
+        $bundleComposerPath = $input->getArgument(self::BUNDLE_COMPOSER_PATH);
 
         $rootComposerJson = $this->composerJsonProvider->getRootComposerJson();
 
@@ -57,10 +57,10 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
         $this->customDependencyUpdater->updateFileInfosWithVendorAndVersion(
             $this->composerJsonProvider->getPackagesComposerFileInfos(),
             $packageReplacements,
-            $rootComposerPath
+            $bundleComposerPath
         );
 
-        $successMessage = sprintf('Inter-dependencies of packages were updated to "%s".', $rootComposerPath);
+        $successMessage = sprintf('Inter-dependencies of packages were updated to "%s".', $bundleComposerPath);
         $this->symfonyStyle->success($successMessage);
 
         return self::SUCCESS;
