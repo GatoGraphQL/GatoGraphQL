@@ -24,10 +24,10 @@ final class ComposerReplaceEntriesRelocator
         array $excludeReplacePackageNames
     ): void {
         $bundleComposerJSON = $this->jsonFileManager->loadFromFilePath($bundleComposerPath);
-        
+
         // From the bundle composer.json, retrieve its dependencies
         $bundleComposerRequirePackageNames = array_keys($bundleComposerJSON[ComposerJsonSection::REQUIRE] ?? []);
-        
+
         // If it has any "replace" already, keep them
         $bundleComposerReplaceEntries = $bundleComposerJSON[ComposerJsonSection::REPLACE] ?? [];
 
@@ -36,7 +36,7 @@ final class ComposerReplaceEntriesRelocator
             $packageComposerJSON = $this->jsonFileManager->loadFromFileInfo($packageComposerFileInfo);
             /** @var string */
             $packageComposerName = $packageComposerJSON[ComposerJsonSection::NAME];
-            
+
             // Check the composer.json is from a contained plugin in the bundle
             if (!in_array($packageComposerName, $bundleComposerRequirePackageNames)) {
                 continue;
