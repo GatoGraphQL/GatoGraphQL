@@ -89,6 +89,7 @@ final class PluginConfigEntriesJsonProvider
 
             // Transfer the "replace" entries in composer.json, from dependency packages to the root package
             $entryConfig['isBundle'] ??= false;
+            $entryConfig['exclude_replace'] ??= [];
 
             // Hacks to be executed on the plugin
             $entryConfig['bashScripts'] ??= [];
