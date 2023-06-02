@@ -21,10 +21,15 @@ final class ComposerReplaceEntriesRelocator
         array $smartFileInfos,
         string $bundleComposerPath
     ): void {
-        // From the bundle composer.json, retrieve its dependencies
         $bundleComposerJSON = $this->jsonFileManager->loadFromFilePath($bundleComposerPath);
+        
+        // From the bundle composer.json, retrieve its dependencies
         $bundleComposerRequirePackageNames = array_keys($bundleComposerJSON[ComposerJsonSection::REQUIRE] ?? []);
-        $pluginComposerReplacePackageNames = $bundleComposerJSON[ComposerJsonSection::REPLACE] ?? [];
+        
+        // If it has any "replace" already, keep them
+        $bundleComposerReplaceEntries = $bundleComposerJSON[ComposerJsonSection::REPLACE] ?? [];
+
+        // Iterate all the packages and process those which are dependencies of the bundle
         foreach ($smartFileInfos as $packageComposerFileInfo) {
             $packageComposerJSON = $this->jsonFileManager->loadFromFileInfo($packageComposerFileInfo);
             /** @var string */
@@ -35,21 +40,22 @@ final class ComposerReplaceEntriesRelocator
                 continue;
             }
 
+            // Check it has any "replace" entry
             if (!isset($packageComposerJSON[ComposerJsonSection::REPLACE])) {
                 continue;
             }
 
             // Transfer the "replace" entries, and remove them from the plugin composer.json
-            $pluginComposerReplacePackageNames = array_merge(
-                $pluginComposerReplacePackageNames,
+            // Because this array is `key => value`, no need to do `array_unique`
+            $bundleComposerReplaceEntries = array_merge(
+                $bundleComposerReplaceEntries,
                 $packageComposerJSON[ComposerJsonSection::REPLACE]
             );
             unset($packageComposerJSON[ComposerJsonSection::REPLACE]);
             $this->jsonFileManager->printJsonToFileInfo($packageComposerJSON, $packageComposerFileInfo);
         }
 
-        // Because this array is `key => value`, no need to do `array_unique`
-        $bundleComposerJSON[ComposerJsonSection::REPLACE] = $pluginComposerReplacePackageNames;
+        $bundleComposerJSON[ComposerJsonSection::REPLACE] = $bundleComposerReplaceEntries;
         $this->jsonFileManager->printJsonToFileInfo($bundleComposerJSON, new SmartFileInfo($bundleComposerPath));
     }
 }
