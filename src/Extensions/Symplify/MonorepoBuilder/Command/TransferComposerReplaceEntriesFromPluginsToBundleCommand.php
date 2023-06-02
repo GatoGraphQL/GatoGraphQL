@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command;
 
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\CustomDependencyUpdater;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ComposerReplaceEntriesRelocator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,7 +22,7 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
     private const BUNDLE_COMPOSER_PATH = 'bundle-composer-path';
 
     public function __construct(
-        private CustomDependencyUpdater $customDependencyUpdater,
+        private ComposerReplaceEntriesRelocator $composerReplaceEntriesRelocator,
         private ComposerJsonProvider $composerJsonProvider,
         private SourcesPresenceValidator $sourcesPresenceValidator
     ) {
@@ -54,7 +54,7 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
             throw new ShouldNotHappenException();
         }
 
-        $this->customDependencyUpdater->updateFileInfosWithVendorAndVersion(
+        $this->composerReplaceEntriesRelocator->moveReplaceEntriesFromPluginsToBundle(
             $this->composerJsonProvider->getPackagesComposerFileInfos(),
             $packageReplacements,
             $bundleComposerPath
