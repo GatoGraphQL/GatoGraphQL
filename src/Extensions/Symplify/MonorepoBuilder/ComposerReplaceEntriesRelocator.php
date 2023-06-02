@@ -35,7 +35,6 @@ final class ComposerReplaceEntriesRelocator
     }
 
     /**
-     * @param string[] $packageReplacements
      * @param SmartFileInfo[] $smartFileInfos
      */
     public function moveReplaceEntriesFromPluginsToBundle(
