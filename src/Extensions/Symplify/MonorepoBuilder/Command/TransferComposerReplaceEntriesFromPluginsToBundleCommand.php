@@ -60,7 +60,7 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
             $bundleComposerPath
         );
 
-        $successMessage = sprintf('Inter-dependencies of packages were updated to "%s".', $bundleComposerPath);
+        $successMessage = sprintf('All "replace" entries in the contained plugins\' composer.json were moved to "%s".', $bundleComposerPath);
         $this->symfonyStyle->success($successMessage);
 
         return self::SUCCESS;
