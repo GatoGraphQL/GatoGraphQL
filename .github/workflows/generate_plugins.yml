@@ -123,7 +123,7 @@ jobs:
             -   name: "Bundles: Transfer the 'replace' entries in composer.json, from the contained plugins to the bundle"
                 run: |
                     vendor/bin/monorepo-builder transfer-composer-replace-entries-from-plugins-to-bundle --config=config/monorepo-builder/transfer-composer-replace-entries-from-plugins-to-bundle.php "${{ matrix.pluginConfig.path }}/composer.json"
-                if: ${{ matrix.pluginConfig.isBundle }}
+                if: ${{ matrix.pluginConfig.is_bundle }}
 
             -   name: Install plugin dependencies, avoiding v2 platform check
                 run: |
