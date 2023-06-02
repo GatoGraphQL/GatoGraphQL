@@ -47,16 +47,8 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
         /** @var string */
         $bundleComposerPath = $input->getArgument(self::BUNDLE_COMPOSER_PATH);
 
-        $rootComposerJson = $this->composerJsonProvider->getRootComposerJson();
-
-        $packageReplacements = array_keys($rootComposerJson->getReplace());
-        if ($packageReplacements === []) {
-            throw new ShouldNotHappenException();
-        }
-
         $this->composerReplaceEntriesRelocator->moveReplaceEntriesFromPluginsToBundle(
             $this->composerJsonProvider->getPackagesComposerFileInfos(),
-            $packageReplacements,
             $bundleComposerPath
         );
 
