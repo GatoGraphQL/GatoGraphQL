@@ -7,6 +7,7 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ComposerReplaceEntriesRelocator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\Validator\SourcesPresenceValidator;
@@ -19,6 +20,10 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
      * @var string
      */
     private const BUNDLE_COMPOSER_PATH = 'bundle-composer-path';
+    /**
+     * @var string
+     */
+    private const EXCLUDE_REPLACE = 'exclude-replace';
 
     public function __construct(
         private ComposerReplaceEntriesRelocator $composerReplaceEntriesRelocator,
@@ -37,6 +42,13 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
             InputArgument::REQUIRED,
             'Path to the bundle\'s "composer.json" file'
         );
+        $this->addOption(
+            self::EXCLUDE_REPLACE,
+            null,
+            InputOption::VALUE_OPTIONAL,
+            'Packages that must not be added to the bundle\'s "replace" section.',
+            ''
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -46,9 +58,14 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
         /** @var string */
         $bundleComposerPath = $input->getArgument(self::BUNDLE_COMPOSER_PATH);
 
+        /** @var string */
+        $excludeReplace = $input->getOption(self::EXCLUDE_REPLACE);
+        $excludeReplacePackageNames = explode(' ', $excludeReplace);
+
         $this->composerReplaceEntriesRelocator->moveReplaceEntriesFromPluginsToBundle(
             $this->composerJsonProvider->getPackagesComposerFileInfos(),
-            $bundleComposerPath
+            $bundleComposerPath,
+            $excludeReplacePackageNames
         );
 
         $successMessage = sprintf('All "replace" entries in the contained plugins\' composer.json were moved to "%s".', $bundleComposerPath);
