@@ -12,7 +12,6 @@ use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
 use Symplify\MonorepoBuilder\Validator\SourcesPresenceValidator;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
-use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends AbstractSymplifyCommand
 {
