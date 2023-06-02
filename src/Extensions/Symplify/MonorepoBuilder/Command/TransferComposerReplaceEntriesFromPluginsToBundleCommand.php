@@ -45,9 +45,9 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
         $this->addOption(
             self::EXCLUDE_REPLACE,
             null,
-            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+            InputOption::VALUE_OPTIONAL,
             'Packages that must not be added to the bundle\'s "replace" section.',
-            []
+            ''
         );
     }
 
@@ -58,8 +58,9 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
         /** @var string */
         $bundleComposerPath = $input->getArgument(self::BUNDLE_COMPOSER_PATH);
 
-        /** @var string[] */
-        $excludeReplacePackageNames = $input->getOption(self::EXCLUDE_REPLACE);
+        /** @var string */
+        $excludeReplace = $input->getOption(self::EXCLUDE_REPLACE);
+        $excludeReplacePackageNames = explode(' ', $excludeReplace);
 
         $this->composerReplaceEntriesRelocator->moveReplaceEntriesFromPluginsToBundle(
             $this->composerJsonProvider->getPackagesComposerFileInfos(),
