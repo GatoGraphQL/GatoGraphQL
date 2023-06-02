@@ -16,104 +16,40 @@ final class ComposerReplaceEntriesRelocator
 
     /**
      * @param SmartFileInfo[] $smartFileInfos
-     * @param string[] $packageNames
-     */
-    public function updateFileInfosWithPackagesAndVersion(
-        array $smartFileInfos,
-        array $packageNames,
-        string $version
-    ): void {
-        foreach ($smartFileInfos as $packageComposerFileInfo) {
-            $json = $this->jsonFileManager->loadFromFileInfo($packageComposerFileInfo);
-
-            $json = $this->processSectionWithPackages($json, $packageNames, $version, ComposerJsonSection::REQUIRE);
-            $json = $this->processSectionWithPackages($json, $packageNames, $version, ComposerJsonSection::REQUIRE_DEV);
-            $json = $this->processSectionWithPackages($json, $packageNames, $version, ComposerJsonSection::REPLACE);
-
-            $this->jsonFileManager->printJsonToFileInfo($json, $packageComposerFileInfo);
-        }
-    }
-
-    /**
-     * @param SmartFileInfo[] $smartFileInfos
      */
     public function moveReplaceEntriesFromPluginsToBundle(
         array $smartFileInfos,
         string $bundleComposerPath
     ): void {
+        // From the bundle composer.json, retrieve its dependencies
+        $bundleComposerJSON = $this->jsonFileManager->loadFromFilePath($bundleComposerPath);
+        $bundleComposerRequirePackageNames = array_keys($bundleComposerJSON[ComposerJsonSection::REQUIRE] ?? []);
+        $pluginComposerReplacePackageNames = $bundleComposerJSON[ComposerJsonSection::REPLACE] ?? [];
         foreach ($smartFileInfos as $packageComposerFileInfo) {
-            $json = $this->jsonFileManager->loadFromFileInfo($packageComposerFileInfo);
-
-            $json = $this->processSection($json, [], $bundleComposerPath, ComposerJsonSection::REQUIRE);
-            $json = $this->processSection($json, [], $bundleComposerPath, ComposerJsonSection::REQUIRE_DEV);
-            $json = $this->processSection($json, [], $bundleComposerPath, ComposerJsonSection::REPLACE);
-
-            $this->jsonFileManager->printJsonToFileInfo($json, $packageComposerFileInfo);
-        }
-    }
-
-    /**
-     * @param mixed[] $json
-     * @param string[] $packageNames
-     * @return mixed[]
-     */
-    private function processSectionWithPackages(
-        array $json,
-        array $packageNames,
-        string $targetVersion,
-        string $section
-    ): array {
-        if (! isset($json[$section])) {
-            return $json;
-        }
-
-        $sectionKeys = array_keys($json[$section]);
-        foreach ($sectionKeys as $packageName) {
-            if (! in_array($packageName, $packageNames, true)) {
+            $packageComposerJSON = $this->jsonFileManager->loadFromFileInfo($packageComposerFileInfo);
+            /** @var string */
+            $packageComposerName = $packageComposerJSON[ComposerJsonSection::NAME];
+            
+            // Check the composer.json is from a contained plugin in the bundle
+            if (!in_array($packageComposerName, $bundleComposerRequirePackageNames)) {
                 continue;
             }
 
-            $json[$section][$packageName] = $targetVersion;
-        }
-
-        return $json;
-    }
-
-    /**
-     * @param mixed[] $json
-     * @param string[] $packageReplacements
-     * @return mixed[]
-     */
-    private function processSection(array $json, array $packageReplacements, string $targetVersion, string $section): array
-    {
-        if (! isset($json[$section])) {
-            return $json;
-        }
-
-        foreach ($json[$section] as $packageName => $packageVersion) {
-            if ($this->shouldSkip($packageReplacements, $targetVersion, $packageName, $packageVersion)) {
+            if (!isset($packageComposerJSON[ComposerJsonSection::REPLACE])) {
                 continue;
             }
 
-            $json[$section][$packageName] = $targetVersion;
+            // Transfer the "replace" entries, and remove them from the plugin composer.json
+            $pluginComposerReplacePackageNames = array_merge(
+                $pluginComposerReplacePackageNames,
+                $packageComposerJSON[ComposerJsonSection::REPLACE]
+            );
+            unset($packageComposerJSON[ComposerJsonSection::REPLACE]);
+            $this->jsonFileManager->printJsonToFileInfo($packageComposerJSON, $packageComposerFileInfo);
         }
 
-        return $json;
-    }
-
-    /**
-     * @param string[] $packageReplacements
-     */
-    private function shouldSkip(
-        array $packageReplacements,
-        string $targetVersion,
-        string $packageName,
-        string $packageVersion
-    ): bool {
-        if (! in_array($packageName, $packageReplacements)) {
-            return true;
-        }
-
-        return $packageVersion === $targetVersion;
+        // Because this array is `key => value`, no need to do `array_unique`
+        $bundleComposerJSON[ComposerJsonSection::REPLACE] = $pluginComposerReplacePackageNames;
+        $this->jsonFileManager->printJsonToFileInfo($bundleComposerJSON, new SmartFileInfo($bundleComposerPath));
     }
 }
