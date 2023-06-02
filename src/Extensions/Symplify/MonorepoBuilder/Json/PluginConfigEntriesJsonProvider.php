@@ -88,7 +88,7 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['scope'] = isset($entryConfig['scoping']);
 
             // Transfer the "replace" entries in composer.json, from dependency packages to the root package
-            $entryConfig['transferReplaceEntriesToRootComposer'] ??= false;
+            $entryConfig['isBundle'] ??= false;
 
             // Hacks to be executed on the plugin
             $entryConfig['bashScripts'] ??= [];
