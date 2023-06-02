@@ -39,14 +39,14 @@ final class ComposerReplaceEntriesRelocator
      */
     public function moveReplaceEntriesFromPluginsToBundle(
         array $smartFileInfos,
-        string $version
+        string $bundleComposerPath
     ): void {
         foreach ($smartFileInfos as $packageComposerFileInfo) {
             $json = $this->jsonFileManager->loadFromFileInfo($packageComposerFileInfo);
 
-            $json = $this->processSection($json, [], $version, ComposerJsonSection::REQUIRE);
-            $json = $this->processSection($json, [], $version, ComposerJsonSection::REQUIRE_DEV);
-            $json = $this->processSection($json, [], $version, ComposerJsonSection::REPLACE);
+            $json = $this->processSection($json, [], $bundleComposerPath, ComposerJsonSection::REQUIRE);
+            $json = $this->processSection($json, [], $bundleComposerPath, ComposerJsonSection::REQUIRE_DEV);
+            $json = $this->processSection($json, [], $bundleComposerPath, ComposerJsonSection::REPLACE);
 
             $this->jsonFileManager->printJsonToFileInfo($json, $packageComposerFileInfo);
         }
