@@ -58,9 +58,13 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
         /** @var string */
         $bundleComposerPath = $input->getArgument(self::BUNDLE_COMPOSER_PATH);
 
+        /** @var string[] */
+        $excludeReplacePackageNames = $input->getOption(self::EXCLUDE_REPLACE);
+
         $this->composerReplaceEntriesRelocator->moveReplaceEntriesFromPluginsToBundle(
             $this->composerJsonProvider->getPackagesComposerFileInfos(),
-            $bundleComposerPath
+            $bundleComposerPath,
+            $excludeReplacePackageNames
         );
 
         $successMessage = sprintf('All "replace" entries in the contained plugins\' composer.json were moved to "%s".', $bundleComposerPath);

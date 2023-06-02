@@ -16,10 +16,12 @@ final class ComposerReplaceEntriesRelocator
 
     /**
      * @param SmartFileInfo[] $smartFileInfos
+     * @param string[] $excludeReplacePackageNames
      */
     public function moveReplaceEntriesFromPluginsToBundle(
         array $smartFileInfos,
-        string $bundleComposerPath
+        string $bundleComposerPath,
+        array $excludeReplacePackageNames
     ): void {
         $bundleComposerJSON = $this->jsonFileManager->loadFromFilePath($bundleComposerPath);
         
@@ -49,7 +51,12 @@ final class ComposerReplaceEntriesRelocator
             // Because this array is `key => value`, no need to do `array_unique`
             $bundleComposerReplaceEntries = array_merge(
                 $bundleComposerReplaceEntries,
-                $packageComposerJSON[ComposerJsonSection::REPLACE]
+                // Skip adding "exclude_replace" entries
+                array_filter(
+                    $packageComposerJSON[ComposerJsonSection::REPLACE],
+                    fn (string $packageName) => !in_array($packageName, $excludeReplacePackageNames),
+                    ARRAY_FILTER_USE_KEY
+                )
             );
             unset($packageComposerJSON[ComposerJsonSection::REPLACE]);
             $this->jsonFileManager->printJsonToFileInfo($packageComposerJSON, $packageComposerFileInfo);
