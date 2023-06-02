@@ -14,7 +14,7 @@ use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
-final class TransferComposerReplaceSectionFromPluginsToBundleCommand extends AbstractSymplifyCommand
+final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends AbstractSymplifyCommand
 {
     /**
      * @var string
