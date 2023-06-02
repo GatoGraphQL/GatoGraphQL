@@ -87,6 +87,9 @@ final class PluginConfigEntriesJsonProvider
             // Automatically set the entries for conditional checks in GitHub Actions
             $entryConfig['scope'] = isset($entryConfig['scoping']);
 
+            // Transfer the "replace" entries in composer.json, from dependency packages to the root package
+            $entryConfig['transferReplaceEntriesToRootComposer'] ??= false;
+
             // Hacks to be executed on the plugin
             $entryConfig['bashScripts'] ??= [];
 
