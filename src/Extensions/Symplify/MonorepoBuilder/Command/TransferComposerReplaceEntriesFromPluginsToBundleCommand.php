@@ -19,7 +19,7 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
     /**
      * @var string
      */
-    private const ROOT_COMPOSER_PATH = 'root-composer-path';
+    private const BUNDLE_COMPOSER_PATH = 'bundle-composer-path';
 
     public function __construct(
         private CustomDependencyUpdater $customDependencyUpdater,
@@ -32,11 +32,11 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
     protected function configure(): void
     {
         $this->setName(CommandNaming::classToName(self::class));
-        $this->setDescription('Transfer the "replace" entries in composer.json, from dependency packages to the root package');
+        $this->setDescription('Bundles: Transfer the "replace" entries in composer.json, from the contained plugins to the bundle');
         $this->addArgument(
-            self::ROOT_COMPOSER_PATH,
+            self::BUNDLE_COMPOSER_PATH,
             InputArgument::REQUIRED,
-            'Path to the root "composer.json" file'
+            'Path to the bundle\'s "composer.json" file'
         );
     }
 
@@ -45,7 +45,7 @@ final class TransferComposerReplaceEntriesFromPluginsToBundleCommand extends Abs
         $this->sourcesPresenceValidator->validateRootComposerJsonName();
 
         /** @var string $rootComposerPath */
-        $rootComposerPath = $input->getArgument(self::ROOT_COMPOSER_PATH);
+        $rootComposerPath = $input->getArgument(self::BUNDLE_COMPOSER_PATH);
 
         $rootComposerJson = $this->composerJsonProvider->getRootComposerJson();
 
