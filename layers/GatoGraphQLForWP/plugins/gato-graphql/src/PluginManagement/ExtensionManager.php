@@ -19,7 +19,7 @@ class ExtensionManager extends AbstractPluginManager
      * not show an error message when a certain 3rd party plugin
      * is not installed or active.
      */
-    private bool $loadExtensionsIfDependedUponPluginsAreNotActive = false;
+    private bool $skipLoadingExtensionsIfDependedUponPluginsAreNotActive = false;
 
     /**
      * Have the extensions organized by their class
@@ -152,13 +152,13 @@ class ExtensionManager extends AbstractPluginManager
         return $this->inactiveExtensionDependedUponPluginFiles;
     }
 
-    public function loadExtensionsIfDependedUponPluginsAreNotActive(): bool
+    public function skipLoadingExtensionsIfDependedUponPluginsAreNotActive(): bool
     {
-        return $this->loadExtensionsIfDependedUponPluginsAreNotActive;
+        return $this->skipLoadingExtensionsIfDependedUponPluginsAreNotActive;
     }
 
-    public function setLoadExtensionsIfDependedUponPluginsAreNotActive(bool $loadExtensionsIfDependedUponPluginsAreNotActive): void
+    public function setSkipLoadingExtensionsIfDependedUponPluginsAreNotActive(bool $skipLoadingExtensionsIfDependedUponPluginsAreNotActive): void
     {
-        $this->loadExtensionsIfDependedUponPluginsAreNotActive = $loadExtensionsIfDependedUponPluginsAreNotActive;
+        $this->skipLoadingExtensionsIfDependedUponPluginsAreNotActive = $skipLoadingExtensionsIfDependedUponPluginsAreNotActive;
     }
 }
