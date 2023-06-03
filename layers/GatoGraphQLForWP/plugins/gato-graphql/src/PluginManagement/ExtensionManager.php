@@ -93,7 +93,7 @@ class ExtensionManager extends AbstractPluginManager
              * case, just ignore the error message, and do nothing.
              */
             $installedExtensionVersion = $this->extensionClassInstances[$extensionClass]->getPluginVersion();
-            $errorMessage = $installedExtensionVersion === $extensionVersion
+            $errorMessage = $installedExtensionVersion === $extensionVersion && $this->isExtensionBundled($extensionClass)
                 ? sprintf(
                     __('Extension <strong>%s</strong> with version <code>%s</code> is already installed. Are both the extension and a bundle containing the extension being installed? If so, please keep the bundle only.', 'gato-graphql'),
                     $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
