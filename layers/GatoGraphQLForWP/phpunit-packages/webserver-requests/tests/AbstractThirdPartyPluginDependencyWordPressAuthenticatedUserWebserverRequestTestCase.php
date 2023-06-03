@@ -28,12 +28,18 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
          * Disable the plugin before executing the ":disabled" test
          */
         $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':disabled')) {
+        $isModuleEnabledByDefault = $this->isModuleEnabledByDefault($dataName);
+        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+        } elseif (!$isModuleEnabledByDefault && str_ends_with($dataName, ':enabled')) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkDeactivatePlugins(
                 $this->getBulkPluginDeactivationPluginFilesToSkip($dataName)
             );
+            if (!$isModuleEnabledByDefault) {
+                $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+            }
         }
     }
 
@@ -43,13 +49,24 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
          * Re-enable the plugin after executing the ":disabled" test
          */
         $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':disabled')) {
+        $isModuleEnabledByDefault = $this->isModuleEnabledByDefault($dataName);
+        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+        } elseif (!$isModuleEnabledByDefault && str_ends_with($dataName, ':enabled')) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkActivatePlugins();
+            if (!$isModuleEnabledByDefault) {
+                $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+            }
         }
 
         parent::tearDown();
+    }
+
+    protected function isModuleEnabledByDefault(string $dataName): bool
+    {
+        return true;
     }
 
     /**
