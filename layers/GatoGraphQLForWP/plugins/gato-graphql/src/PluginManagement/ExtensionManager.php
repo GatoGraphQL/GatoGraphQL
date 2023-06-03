@@ -14,12 +14,8 @@ class ExtensionManager extends AbstractPluginManager
     /** @var string[] */
     private array $inactiveExtensionDependedUponPluginFiles = [];
 
-    /**
-     * This variable can be changed by an Extension Bundle, as to
-     * not show an error message when a certain 3rd party plugin
-     * is not installed or active.
-     */
-    private bool $skipLoadingExtensionsIfDependedUponPluginsAreNotActive = true;
+    /** @var array<string,string> */
+    private array $bundledExtensionClassBundlingExtensionClasses = [];
 
     /**
      * Have the extensions organized by their class
@@ -152,13 +148,37 @@ class ExtensionManager extends AbstractPluginManager
         return $this->inactiveExtensionDependedUponPluginFiles;
     }
 
-    public function skipLoadingExtensionsIfDependedUponPluginsAreNotActive(): bool
-    {
-        return $this->skipLoadingExtensionsIfDependedUponPluginsAreNotActive;
+    /**
+     * Register that an Extension is bundled by some Extension Bundle
+     */
+    public function registerBundledExtension(
+        string $bundlingExtensionClass,
+        string $bundledExtensionClass,
+    ): void {
+        $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundlingExtensionClass;
     }
 
-    public function setSkipLoadingExtensionsIfDependedUponPluginsAreNotActive(bool $skipLoadingExtensionsIfDependedUponPluginsAreNotActive): void
+    /**
+     * Register that Extensions are bundled by some Extension Bundle
+     *
+     * @param string[] $bundledExtensionClasses
+     */
+    public function registerBundledExtensions(
+        string $bundlingExtensionClass,
+        array $bundledExtensionClasses,
+    ): void {
+        foreach ($bundledExtensionClasses as $bundledExtensionClass) {
+            $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundlingExtensionClass;
+        }
+    }
+
+    public function isExtensionBundled(string $bundledExtensionClass): bool
     {
-        $this->skipLoadingExtensionsIfDependedUponPluginsAreNotActive = $skipLoadingExtensionsIfDependedUponPluginsAreNotActive;
+        return $this->getBundlingExtensionClass($bundledExtensionClass) !== null;
+    }
+
+    public function getBundlingExtensionClass(string $bundledExtensionClass): ?string
+    {
+        return $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] ?? null;
     }
 }
