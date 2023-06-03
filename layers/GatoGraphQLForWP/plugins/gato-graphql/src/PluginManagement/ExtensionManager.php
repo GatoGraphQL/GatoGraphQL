@@ -86,14 +86,26 @@ class ExtensionManager extends AbstractPluginManager
     ): bool {
         // Validate that the extension is not registered yet.
         if (isset($this->extensionClassInstances[$extensionClass])) {
-            $this->printAdminNoticeErrorMessage(
-                sprintf(
-                    __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'gato-graphql'),
+            /**
+             * Check if the installed and new versions are the same.
+             * In that case, it may be that the Extension and a
+             * Bundle containing that same Extension are installed. In that
+             * case, just ignore the error message, and do nothing.
+             */
+            $installedExtensionVersion = $this->extensionClassInstances[$extensionClass]->getPluginVersion();
+            $errorMessage = $installedExtensionVersion === $extensionVersion
+                ? sprintf(
+                    __('Extension <strong>%s</strong> with version <code>%s</code> is already installed. Are both the extension and a bundle containing the extension being installed? If so, please keep the bundle only.', 'gato-graphql'),
                     $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
-                    $this->extensionClassInstances[$extensionClass]->getPluginVersion(),
                     $extensionVersion,
                 )
-            );
+                : sprintf(
+                    __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'gato-graphql'),
+                    $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
+                    $installedExtensionVersion,
+                    $extensionVersion,
+                );
+            $this->printAdminNoticeErrorMessage($errorMessage);
             return false;
         }
 
