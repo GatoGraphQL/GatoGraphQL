@@ -37,6 +37,9 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             $this->executeEndpointToBulkDeactivatePlugins(
                 $this->getBulkPluginDeactivationPluginFilesToSkip($dataName)
             );
+            if (!$isModuleEnabledByDefault) {
+                $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+            }
         }
     }
 
@@ -53,6 +56,9 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkActivatePlugins();
+            if (!$isModuleEnabledByDefault) {
+                $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+            }
         }
 
         parent::tearDown();
