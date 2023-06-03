@@ -18,13 +18,6 @@ class ExtensionManager extends AbstractPluginManager
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
     /**
-     * This variable can be changed by an Extension Bundle, as to
-     * not show an error message when a certain 3rd party plugin
-     * is not installed or active.
-     */
-    private bool $skipLoadingExtensionsIfDependedUponPluginsAreNotActive = true;
-
-    /**
      * Have the extensions organized by their class
      *
      * @var array<class-string<ExtensionInterface>,ExtensionInterface>
@@ -153,16 +146,6 @@ class ExtensionManager extends AbstractPluginManager
     public function getInactiveExtensionsDependedUponPluginFiles(): array
     {
         return $this->inactiveExtensionDependedUponPluginFiles;
-    }
-
-    public function skipLoadingExtensionsIfDependedUponPluginsAreNotActive(): bool
-    {
-        return $this->skipLoadingExtensionsIfDependedUponPluginsAreNotActive;
-    }
-
-    public function setSkipLoadingExtensionsIfDependedUponPluginsAreNotActive(bool $skipLoadingExtensionsIfDependedUponPluginsAreNotActive): void
-    {
-        $this->skipLoadingExtensionsIfDependedUponPluginsAreNotActive = $skipLoadingExtensionsIfDependedUponPluginsAreNotActive;
     }
 
     /**
