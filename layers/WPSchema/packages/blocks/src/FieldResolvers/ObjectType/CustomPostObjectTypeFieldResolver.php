@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPWPSchema\Blocks\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
+use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -14,6 +16,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Post;
+use stdClass;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -83,12 +86,45 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'blocks':
-                $blocks = [];
                 // @todo Implement logic for blocks!
-                return $blocks;
+                /**
+                 * @var array<stdClass>
+                 */
+                $parsedCustomPostBlockItems = [];
+                if ($parsedCustomPostBlockItems === null || $parsedCustomPostBlockItems === []) {
+                    return $parsedCustomPostBlockItems;
+                }
+
+                /** @var BlockInterface[] */
+                $blocks = array_map(
+                    $this->createBlock(...),
+                    $parsedCustomPostBlockItems
+                );
+                return array_map(
+                    fn (BlockInterface $block) => $block->getID(),
+                    $blocks
+                );
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    protected function createBlock(stdClass $blockItem): BlockInterface
+    {
+        $innerBlocks = null;
+        if (isset($blockItem->innerBlocks)) {
+            /** @var array<stdClass> */
+            $blockInnerBlocks = $blockItem->innerBlocks;
+            $innerBlocks = array_map(
+                $this->createBlock(...),
+                $blockInnerBlocks
+            );
+        }
+        return new GeneralBlock(
+            $blockItem->name,
+            $blockItem->attributes ?? null,
+            $innerBlocks
+        );
     }
 
     /**
