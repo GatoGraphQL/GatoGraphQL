@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\Blocks\FieldResolvers\ObjectType;
 
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
-use PoPWPSchema\Blocks\TypeResolvers\ObjectType\BlockObjectTypeResolver;
+use PoPWPSchema\Blocks\TypeResolvers\ObjectType\AbstractBlockObjectTypeResolver;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -57,7 +57,7 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            BlockObjectTypeResolver::class,
+            AbstractBlockObjectTypeResolver::class,
         ];
     }
 
