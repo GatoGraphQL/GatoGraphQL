@@ -50,6 +50,8 @@ services:
         - >-
           ../../layers/Engine/packages/definitions:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/definitions
         - >-
+          ../../layers/Engine/packages/dom-crawler:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/dom-crawler
+        - >-
           ../../layers/Engine/packages/engine-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine-wp
         - >-
           ../../layers/Engine/packages/engine:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine
