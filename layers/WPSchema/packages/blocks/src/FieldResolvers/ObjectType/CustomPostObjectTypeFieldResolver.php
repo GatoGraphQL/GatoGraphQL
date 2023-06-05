@@ -11,33 +11,22 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Post;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
-    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
-    {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        /** @var JSONObjectScalarTypeResolver */
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
 
     /**
@@ -71,7 +60,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'blocks' => $this->getStringScalarTypeResolver(),
+            'blocks' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -79,7 +68,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'blocks' => SchemaTypeModifiers::NON_NULLABLE,
+            'blocks' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -95,6 +84,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         switch ($fieldDataAccessor->getFieldName()) {
             case 'blocks':
                 $blocks = [];
+                // @todo Implement logic for blocks!
                 return $blocks;
         }
 
