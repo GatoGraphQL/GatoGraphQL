@@ -878,6 +878,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPCMSSchema\PostsWP\Module::class,
                 \PoPWPSchema\Posts\Module::class,
             ],
+            SchemaTypeModuleResolver::SCHEMA_BLOCKS => [
+                \PoPWPSchema\Blocks\Module::class,
+            ],
             SchemaTypeModuleResolver::SCHEMA_COMMENTS => [
                 CommentsModule::class,
                 \PoPCMSSchema\CommentsWP\Module::class,

@@ -44,6 +44,7 @@
         "pop-schema/directive-commons": "^0.11",
         "pop-schema/extended-schema-commons": "^0.11",
         "pop-schema/http-requests": "^0.11",
+        "pop-wp-schema/blocks": "^0.11",
         "pop-wp-schema/commentmeta": "^0.11",
         "pop-wp-schema/comments": "^0.11",
         "pop-wp-schema/custompostmeta": "^0.11",
