@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\DOMCrawler\CrawlerInterface:
+        class: \PoP\DOMCrawler\Crawler
+
