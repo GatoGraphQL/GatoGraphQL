@@ -14,6 +14,7 @@
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/cache-control": "${workspaceFolder}/layers/Engine/packages/cache-control",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/component-model": "${workspaceFolder}/layers/Engine/packages/component-model",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/definitions": "${workspaceFolder}/layers/Engine/packages/definitions",
+              "/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/dom-crawler": "${workspaceFolder}/layers/Engine/packages/dom-crawler",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine-wp": "${workspaceFolder}/layers/Engine/packages/engine-wp",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine": "${workspaceFolder}/layers/Engine/packages/engine",
               "/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/graphql-parser": "${workspaceFolder}/layers/Engine/packages/graphql-parser",
