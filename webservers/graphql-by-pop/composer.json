@@ -38,6 +38,7 @@
         "pop-cms-schema/user-state-mutations-wp": "dev-master",
         "pop-cms-schema/user-state-wp": "dev-master",
         "pop-wp-schema/block-metadata-for-wp": "dev-master",
+        "pop-wp-schema/blocks": "dev-master",
         "pop-wp-schema/commentmeta": "dev-master",
         "pop-wp-schema/custompostmeta": "dev-master",
         "pop-wp-schema/media": "dev-master",
