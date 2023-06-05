@@ -63,7 +63,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'blocks' => $this->__('Retrieve the format slug for a post', 'blocks'),
+            'blocks' => $this->__('(Gutenberg) Blocks in a custom post', 'blocks'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
