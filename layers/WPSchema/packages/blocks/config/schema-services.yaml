@@ -11,3 +11,6 @@ services:
 
     PoPWPSchema\Blocks\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPWPSchema\Blocks\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
