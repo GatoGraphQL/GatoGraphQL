@@ -109,6 +109,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
+    /**
+     * Given the name, attributes, and inner block data for a block,
+     * create Block object.
+     */
     protected function createBlock(stdClass $blockItem): BlockInterface
     {
         $innerBlocks = null;
