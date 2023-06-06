@@ -70,7 +70,7 @@ class BlockContentParser implements BlockContentParserInterface
             throw new BlockContentParserException($parsedBlockData);
         }
 
-		/** @var array<stdClass> */
+		/** @var array<array<string,mixed>> */
 		$parsedBlockDataItems = $parsedBlockData['blocks'];
         return new BlockContentParserPayload(
 			$this->castBlockDataItemsToObject($parsedBlockDataItems),
