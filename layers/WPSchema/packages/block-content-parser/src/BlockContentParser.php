@@ -20,10 +20,6 @@ use WP_Block_Type_Registry;
 class BlockContentParser implements BlockContentParserInterface
 {
     use BasicServiceTrait;
-
-	protected $block_registry;
-	protected $post_id;
-	protected $warnings = [];
     
     private ?CrawlerFactoryInterface $crawlerFactory = null;
     
@@ -60,6 +56,10 @@ class BlockContentParser implements BlockContentParserInterface
      * 
      * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
      */
+
+	protected $block_registry;
+	protected $post_id;
+	protected $warnings = [];
 
 	/**
 	 * @param WP_Block_Type_Registry|null $block_registry
