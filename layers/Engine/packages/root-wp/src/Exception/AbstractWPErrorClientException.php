@@ -19,7 +19,6 @@ abstract class AbstractWPErrorClientException extends AbstractClientException
     public ?stdClass $data;
 
     public function __construct(
-        string $message,
         WP_Error $wpError = null,
         int $code = 0,
         Throwable|null $previous = null
