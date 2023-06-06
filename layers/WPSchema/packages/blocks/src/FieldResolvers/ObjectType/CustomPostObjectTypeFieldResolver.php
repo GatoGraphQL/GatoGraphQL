@@ -101,9 +101,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'blocks':
-                $parsedCustomPostBlockItems = null;
+                $customPostBlockDataItems = null;
                 try {
-                    $parsedCustomPostBlockItems = $this->getBlockContentParser()->parseCustomPostIntoBlockData($customPost->ID);
+                    $customPostBlockDataItems = $this->getBlockContentParser()->parseCustomPostIntoBlockData($customPost->ID);
                 } catch (BlockContentParserException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
@@ -120,14 +120,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     return null;
                 }
 
-                if ($parsedCustomPostBlockItems === null || $parsedCustomPostBlockItems === []) {
-                    return $parsedCustomPostBlockItems;
+                if ($customPostBlockDataItems === null || $customPostBlockDataItems === []) {
+                    return $customPostBlockDataItems;
                 }
 
                 /** @var BlockInterface[] */
                 $blocks = array_map(
                     $this->createBlock(...),
-                    $parsedCustomPostBlockItems
+                    $customPostBlockDataItems
                 );
                 return array_map(
                     fn (BlockInterface $block) => $block->getID(),
