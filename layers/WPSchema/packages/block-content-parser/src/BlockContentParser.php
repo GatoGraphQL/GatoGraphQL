@@ -86,12 +86,23 @@ class BlockContentParser implements BlockContentParserInterface
              * @param array<string,mixed> $item
              */
             function (array $item): stdClass {
+				// Convert the block to stdClass
                 $item = (object) $item;
+
+				// Convert the block attributes to stdClass
+                if (isset($item->attributes)) {
+                    /** @var array<string,mixed> */
+                    $blockAttributes = $item->attributes;
+                    $item->attributes = (object) $blockAttributes;
+                }
+				
+				// Recursively call for the block's inner blocks'
                 if (isset($item->innerBlocks)) {
                     /** @var array<array<string,mixed>> */
                     $blockInnerBlockDataItems = $item->innerBlocks;
                     $item->innerBlocks = $this->castBlockDataItemsToObject($blockInnerBlockDataItems);
                 }
+				
                 return $item;
             },
             $blockDataItems
