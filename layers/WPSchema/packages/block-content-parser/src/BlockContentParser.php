@@ -11,8 +11,8 @@ use PoP\Root\Services\BasicServiceTrait;
 use Throwable;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
-
 use WP_Error;
+
 use function get_post;
 use function has_blocks;
 use function parse_blocks;
