@@ -6,12 +6,11 @@ namespace PoPWPSchema\BlockContentParser;
 
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
-use stdClass;
+use WP_Post;
 
 interface BlockContentParserInterface
 {
     /**
-	 * @param int $customPostID ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
 	 * @param array<string,mixed> $filterOptions An associative array of options for filtering blocks. Can contain keys:
 	 *              'exclude': An array of block names to block from the response.
 	 *              'include': An array of block names that are allowed in the response.
@@ -20,7 +19,7 @@ interface BlockContentParserInterface
      * @throws BlockContentParserException If there is any error processing the content
 	 */
 	public function parseCustomPostIntoBlockDataItems(
-        int $customPostID,
+        WP_Post|int $customPostObjectOrID,
         array $filterOptions = [],
     ): ?BlockContentParserPayload;
 

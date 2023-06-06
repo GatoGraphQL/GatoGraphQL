@@ -9,6 +9,7 @@ use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
 use PoP\DOMCrawler\Crawler;
 use PoP\Root\Services\BasicServiceTrait;
+use stdClass;
 use Throwable;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
@@ -18,7 +19,6 @@ use WP_Post;
 use function get_post;
 use function has_blocks;
 use function parse_blocks;
-use stdClass;
 
 /**
  * This class is based on class `ContentParser`
@@ -33,7 +33,6 @@ class BlockContentParser implements BlockContentParserInterface
     use BasicServiceTrait;
 
     /**
-     * @param int $customPostID ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
      * @param array<string,mixed> $filterOptions An associative array of options for filtering blocks. Can contain keys:
      *              'exclude': An array of block names to block from the response.
      *              'include': An array of block names that are allowed in the response.
@@ -42,14 +41,20 @@ class BlockContentParser implements BlockContentParserInterface
      * @throws BlockContentParserException If there is any error processing the content
      */
     public function parseCustomPostIntoBlockDataItems(
-        int $customPostID,
+        WP_Post|int $customPostObjectOrID,
         array $filterOptions = [],
     ): ?BlockContentParserPayload {
-        /** @var WP_Post|null */
-        $customPost = get_post($customPostID);
-        if ($customPost === null) {
-            return null;
-        }
+		if (is_object($customPostObjectOrID)) {
+			$customPost = $customPostObjectOrID;
+		} else {
+			/** @var int */
+			$customPostID = $customPostObjectOrID;
+			/** @var WP_Post|null */
+			$customPost = get_post($customPostID);
+			if ($customPost === null) {
+				return null;
+			}
+		}
         $customPostContent = $customPost->post_content;
         $parsedBlockData = $this->parse($customPostContent, $customPostID, $filterOptions);
         return $this->processParsedBlockData($parsedBlockData);
@@ -102,7 +107,7 @@ class BlockContentParser implements BlockContentParserInterface
                     $blockInnerBlockDataItems = $item->innerBlocks;
                     $item->innerBlocks = $this->castBlockDataItemsToObject($blockInnerBlockDataItems);
                 }
-				
+
                 return $item;
             },
             $blockDataItems
