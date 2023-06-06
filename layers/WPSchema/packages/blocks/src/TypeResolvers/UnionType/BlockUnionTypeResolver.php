@@ -7,6 +7,7 @@ namespace PoPWPSchema\Blocks\TypeResolvers\UnionType;
 use PoPWPSchema\Blocks\RelationalTypeDataLoaders\UnionType\BlockUnionTypeDataLoader;
 use PoPWPSchema\Blocks\TypeResolvers\InterfaceType\BlockInterfaceTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\AbstractUnionTypeResolver;
 
 class BlockUnionTypeResolver extends AbstractUnionTypeResolver
