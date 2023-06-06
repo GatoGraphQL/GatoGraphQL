@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoP\DOMCrawler\CrawlerInterface:
-        class: \PoP\DOMCrawler\Crawler
+    PoP\DOMCrawler\CrawlerFactoryInterface:
+        class: \PoP\DOMCrawler\CrawlerFactory
 

@@ -8,7 +8,7 @@ use DOMNodeList;
 use DOMNode;
 use Symfony\Component\DomCrawler\Crawler;
 
-interface CrawlerInterface
+interface CrawlerFactoryInterface
 {
     /**
      * @param DOMNodeList|DOMNode|DOMNode[]|string|null $node A Node to use as the base for the crawling
