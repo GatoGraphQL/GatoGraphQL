@@ -57,15 +57,10 @@ class BlockContentParser implements BlockContentParserInterface
         }
         $customPostContent = $customPost->post_content;
         $parsedBlockData = $this->parse($customPostContent, $customPostID, $filterOptions);
-        $this->throwExceptionIfWPError($parsedBlockData);
-        return $parsedBlockData;
-    }
-
-    protected function throwExceptionIfWPError(array|WP_Error $parsedBlockData): void
-    {
         if ($parsedBlockData instanceof WP_Error) {
             throw new BlockContentParserException($parsedBlockData);
         }
+        return $parsedBlockData;
     }
 
     /**
@@ -81,7 +76,9 @@ class BlockContentParser implements BlockContentParserInterface
         array $filterOptions = [],
     ): array {
         $parsedBlockData = $this->parse($customPostContent, null, $filterOptions);
-        $this->throwExceptionIfWPError($parsedBlockData);
+        if ($parsedBlockData instanceof WP_Error) {
+            throw new BlockContentParserException($parsedBlockData);
+        }
         return $parsedBlockData;
     }
 
