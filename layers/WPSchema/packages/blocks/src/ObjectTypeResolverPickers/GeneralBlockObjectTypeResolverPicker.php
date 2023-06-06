@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Blocks\ObjectTypeResolverPickers;
 
+use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
 use PoPWPSchema\Blocks\TypeResolvers\ObjectType\GeneralBlockObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
