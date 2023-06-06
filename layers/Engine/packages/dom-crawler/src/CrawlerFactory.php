@@ -8,11 +8,6 @@ use DOMNodeList;
 use DOMNode;
 use Symfony\Component\DomCrawler\Crawler;
 
-/**
- * Markdown formatter provided by `michelf/php-markdown`
- *
- * @see https://michelf.ca/projects/php-markdown/extra/
- */
 class CrawlerFactory implements CrawlerFactoryInterface
 {
     /**
