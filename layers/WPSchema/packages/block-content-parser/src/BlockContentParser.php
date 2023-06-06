@@ -63,10 +63,7 @@ class BlockContentParser implements BlockContentParserInterface
 	/** @var string[] */
     protected array $warnings = [];
 
-	/**
-	 * @param WP_Block_Type_Registry|null $block_registry
-	 */
-	public function __construct( $block_registry = null ) {
+	public function __construct( WP_Block_Type_Registry|null $block_registry = null ) {
 		if ( null === $block_registry ) {
 			$block_registry = WP_Block_Type_Registry::get_instance();
 		}
@@ -74,7 +71,11 @@ class BlockContentParser implements BlockContentParserInterface
 		$this->block_registry = $block_registry;
 	}
 
-	public function should_block_be_included( $block, $block_name, $filter_options ) {
+	/**
+     * @param array<string,mixed> $block
+     * @param array<string,mixed> $filter_options
+     */
+    public function should_block_be_included( array $block, string $block_name, array $filter_options ) {
 		$is_block_included = true;
 
 		if ( ! empty( $filter_options['include'] ) ) {
