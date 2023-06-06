@@ -12,6 +12,8 @@ use WP_Block_Type;
 use WP_Block_Type_Registry;
 
 use function get_post;
+use function has_blocks;
+use function parse_blocks;
 
 /**
  * This class is based on class `ContentParser`
@@ -68,7 +70,7 @@ class BlockContentParser implements BlockContentParserInterface
         string $customPostContent,
         array $filterOptions = [],
     ): array|WP_Error {
-        return $this->parse($customPostContent, $filterOptions);
+        return $this->parse($customPostContent, null, $filterOptions);
     }
 
     /**
@@ -118,13 +120,13 @@ class BlockContentParser implements BlockContentParserInterface
 	/**
 	 * @param string $post_content HTML content of a post.
 	 * @param int|null $post_id ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
-	 * @param array $filter_options An associative array of options for filtering blocks. Can contain keys:
+	 * @param array<string,mixed> $filter_options An associative array of options for filtering blocks. Can contain keys:
 	 *              'exclude': An array of block names to block from the response.
 	 *              'include': An array of block names that are allowed in the response.
 	 *
 	 * @return array|WP_Error
 	 */
-	protected function parse( $post_content, $post_id = null, $filter_options = [] ) {
+	protected function parse( string $post_content, ?int $post_id = null, array $filter_options = [] ) {
 		if ( isset( $filter_options['exclude'] ) && isset( $filter_options['include'] ) ) {
 			return new WP_Error( 'vip-block-data-api-invalid-params', 'Cannot provide blocks to exclude and include at the same time', [ 'status' => 400 ] );
 		}
