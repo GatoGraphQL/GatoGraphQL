@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\BlockContentParser;
 
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
+use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
 use stdClass;
 
 interface BlockContentParserInterface
@@ -15,13 +16,13 @@ interface BlockContentParserInterface
 	 *              'exclude': An array of block names to block from the response.
 	 *              'include': An array of block names that are allowed in the response.
 	 *
-	 * @return array<stdClass>|null `null` if the custom post does not exist
+	 * @return BlockContentParserPayload|null `null` if the custom post does not exist
      * @throws BlockContentParserException If there is any error processing the content
 	 */
 	public function parseCustomPostIntoBlockDataItems(
         int $customPostID,
         array $filterOptions = [],
-    ): ?array;
+    ): ?BlockContentParserPayload;
 
     /**
 	 * @param string $customPostContent HTML content of a post.
@@ -29,11 +30,10 @@ interface BlockContentParserInterface
 	 *              'exclude': An array of block names to block from the response.
 	 *              'include': An array of block names that are allowed in the response.
 	 *
-	 * @return array<stdClass>
      * @throws BlockContentParserException If there is any error processing the content
 	 */
 	public function parseCustomPostContentIntoBlockDataItems(
         string $customPostContent,
         array $filterOptions = [],
-    ): array;
+    ): BlockContentParserPayload;
 }

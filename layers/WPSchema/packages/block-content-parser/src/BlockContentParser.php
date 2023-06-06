@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace PoPWPSchema\BlockContentParser;
 
 use DOMNode;
+use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
+use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
 use PoP\DOMCrawler\Crawler;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
-use stdClass;
 use Throwable;
-use WP_Block_Type_Registry;
 use WP_Block_Type;
+use WP_Block_Type_Registry;
 use WP_Error;
 use WP_Post;
 
 use function get_post;
 use function has_blocks;
 use function parse_blocks;
+use stdClass;
 
 /**
  * This class is based on class `ContentParser`
@@ -37,13 +38,13 @@ class BlockContentParser implements BlockContentParserInterface
      *              'exclude': An array of block names to block from the response.
      *              'include': An array of block names that are allowed in the response.
      *
-     * @return array<stdClass>|null `null` if the custom post does not exist
+     * @return BlockContentParserPayload|null `null` if the custom post does not exist
      * @throws BlockContentParserException If there is any error processing the content
      */
     public function parseCustomPostIntoBlockDataItems(
         int $customPostID,
         array $filterOptions = [],
-    ): ?array {
+    ): ?BlockContentParserPayload {
         /** @var WP_Post|null */
         $customPost = get_post($customPostID);
         if ($customPost === null) {
@@ -56,7 +57,10 @@ class BlockContentParser implements BlockContentParserInterface
         }
 		/** @var array<stdClass> */
 		$parsedBlockDataItems = $parsedBlockData['blocks'];
-        return $this->castBlockDataItemsToObject($parsedBlockDataItems);
+        return new BlockContentParserPayload(
+			$this->castBlockDataItemsToObject($parsedBlockDataItems),
+			$parsedBlockDataItems['warnings'] ?? null
+		);
     }
 
     /**
@@ -91,20 +95,22 @@ class BlockContentParser implements BlockContentParserInterface
      *              'exclude': An array of block names to block from the response.
      *              'include': An array of block names that are allowed in the response.
      *
-     * @return array<stdClass>
      * @throws BlockContentParserException If there is any error processing the content
      */
     public function parseCustomPostContentIntoBlockDataItems(
         string $customPostContent,
         array $filterOptions = [],
-    ): array {
+    ): BlockContentParserPayload {
         $parsedBlockData = $this->parse($customPostContent, null, $filterOptions);
         if ($parsedBlockData instanceof WP_Error) {
             throw new BlockContentParserException($parsedBlockData);
         }
         /** @var array<stdClass> */
 		$parsedBlockDataItems = $parsedBlockData['blocks'];
-        return $this->castBlockDataItemsToObject($parsedBlockDataItems);
+        return new BlockContentParserPayload(
+			$this->castBlockDataItemsToObject($parsedBlockDataItems),
+			$parsedBlockDataItems['warnings'] ?? null
+		);
     }
 
     /**
