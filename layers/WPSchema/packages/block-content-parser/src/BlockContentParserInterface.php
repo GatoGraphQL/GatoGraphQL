@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\BlockContentParser;
 
+use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use WP_Error;
 
 interface BlockContentParserInterface
@@ -15,6 +16,7 @@ interface BlockContentParserInterface
 	 *              'include': An array of block names that are allowed in the response.
 	 *
 	 * @return array<string,mixed>|WP_Error|null `null` if the custom post does not exist
+     * @throws BlockContentParserException If there is any error processing the content
 	 */
 	public function parseCustomPostIntoBlockData(
         int $customPostID,
@@ -28,6 +30,7 @@ interface BlockContentParserInterface
 	 *              'include': An array of block names that are allowed in the response.
 	 *
 	 * @return array<string,mixed>|WP_Error
+     * @throws BlockContentParserException If there is any error processing the content
 	 */
 	public function parseCustomPostContentIntoBlockData(
         string $customPostContent,

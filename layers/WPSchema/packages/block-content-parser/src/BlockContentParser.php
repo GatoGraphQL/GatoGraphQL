@@ -45,6 +45,7 @@ class BlockContentParser implements BlockContentParserInterface
 	 *              'include': An array of block names that are allowed in the response.
 	 *
 	 * @return array<string,mixed>|WP_Error|null `null` if the custom post does not exist
+     * @throws BlockContentParserException If there is any error processing the content
 	 */
 	public function parseCustomPostIntoBlockData(
         int $customPostID,
@@ -70,6 +71,7 @@ class BlockContentParser implements BlockContentParserInterface
 	 *              'include': An array of block names that are allowed in the response.
 	 *
 	 * @return array<string,mixed>|WP_Error
+     * @throws BlockContentParserException If there is any error processing the content
 	 */
 	public function parseCustomPostContentIntoBlockData(
         string $customPostContent,
