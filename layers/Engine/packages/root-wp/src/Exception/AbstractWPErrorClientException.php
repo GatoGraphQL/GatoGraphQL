@@ -15,6 +15,8 @@ use WP_Error;
  */
 abstract class AbstractWPErrorClientException extends AbstractClientException
 {
+    use WPErrorDataProcessorTrait;
+    
     public int|string|null $errorCode;
     public ?stdClass $data;
 
@@ -23,7 +25,9 @@ abstract class AbstractWPErrorClientException extends AbstractClientException
         int $code = 0,
         Throwable|null $previous = null
     ) {
-        parent::__construct($message, $code, $previous);
+        $this->errorCode = $wpError->get_error_code() ? $wpError->get_error_code() : null;
+        $this->data = $this->getWPErrorData($wpError);
+        parent::__construct($wpError->get_error_message(), $code, $previous);
     }
 
     public function getErrorCode(): int|string|null
