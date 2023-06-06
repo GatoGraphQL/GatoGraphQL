@@ -25,18 +25,18 @@ class BlockContentParser implements BlockContentParserInterface
     }
 
     /**
-	 * @param string $customPostContent HTML content of a post.
-	 * @param int|null $customPostID ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
-	 * @param array<string,mixed> $filterOptions An associative array of options for filtering blocks. Can contain keys:
+	 * @param string $post_content HTML content of a post.
+	 * @param int|null $post_id ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
+	 * @param array<string,mixed> $filter_options An associative array of options for filtering blocks. Can contain keys:
 	 *              'exclude': An array of block names to block from the response.
 	 *              'include': An array of block names that are allowed in the response.
 	 *
 	 * @return array<string,mixed>|WP_Error
 	 */
 	public function parse(
-        string $customPostContent,
-        ?int $customPostID = null,
-        array $filterOptions = [],
+        string $post_content,
+        ?int $post_id = null,
+        array $filter_options = [],
     ): array|WP_Error {
         return [];
     }
