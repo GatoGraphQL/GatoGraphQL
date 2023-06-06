@@ -78,9 +78,8 @@ class BlockContentParser implements BlockContentParserInterface
      * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
      */
 
-	/** @var mixed[] */
-    protected array $block_registry;
-	protected int $post_id;
+    protected WP_Block_Type_Registry $block_registry;
+	protected ?int $post_id;
 	/** @var string[] */
     protected array $warnings = [];
 
@@ -125,7 +124,7 @@ class BlockContentParser implements BlockContentParserInterface
 	 *
 	 * @return array|WP_Error
 	 */
-	public function parse( $post_content, $post_id = null, $filter_options = [] ) {
+	protected function parse( $post_content, $post_id = null, $filter_options = [] ) {
 		if ( isset( $filter_options['exclude'] ) && isset( $filter_options['include'] ) ) {
 			return new WP_Error( 'vip-block-data-api-invalid-params', 'Cannot provide blocks to exclude and include at the same time', [ 'status' => 400 ] );
 		}
