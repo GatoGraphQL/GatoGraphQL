@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\BlockContentParser;
 
-use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
+use DOMNode;
 use PoP\DOMCrawler\Crawler;
 use PoP\DOMCrawler\CrawlerFactoryInterface;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use Throwable;
-use WP_Block_Type;
 use WP_Block_Type_Registry;
+use WP_Block_Type;
 use WP_Error;
 
 use function get_post;
@@ -632,13 +633,11 @@ class BlockContentParser implements BlockContentParserInterface
 	 * Helper function to process markup used by the deprecated 'node' and 'children' sources.
 	 * These sources can return a representation of the DOM tree and bypass the $crawler to access DOMNodes directly.
 	 *
-	 * @param \DOMNode $node
-	 *
-	 * @return array|string|null
+	 * @return mixed[]|string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function from_dom_node( $node ) {
+	protected function from_dom_node( DOMNode $node ): array|string|null {
 		// phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- external API calls
 
 		if ( XML_TEXT_NODE === $node->nodeType ) {
@@ -667,7 +666,7 @@ class BlockContentParser implements BlockContentParserInterface
 	/**
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function add_missing_block_warning( $block_name ) {
+    protected function add_missing_block_warning( string $block_name ): void {
 		$warning_message = sprintf( 'Block type "%s" is not server-side registered. Sourced block attributes will not be available.', $block_name );
 
 		if ( ! in_array( $warning_message, $this->warnings ) ) {
@@ -678,7 +677,7 @@ class BlockContentParser implements BlockContentParserInterface
 	/**
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function is_debug_enabled() {
+    protected function is_debug_enabled(): bool {
 		return defined( 'VIP_BLOCK_DATA_API__PARSE_DEBUG' ) && constant( 'VIP_BLOCK_DATA_API__PARSE_DEBUG' ) === true;
 	}
 }
