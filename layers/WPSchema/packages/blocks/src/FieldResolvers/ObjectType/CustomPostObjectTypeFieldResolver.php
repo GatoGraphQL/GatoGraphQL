@@ -6,16 +6,20 @@ namespace PoPWPSchema\Blocks\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPWPSchema\BlockContentParser\BlockContentParserInterface;
+use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
 use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider as EngineErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use WP_Post;
 use stdClass;
 
@@ -97,10 +101,25 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'blocks':
-                /**
-                 * @var array<stdClass>
-                 */
-                $parsedCustomPostBlockItems = $this->getBlockContentParser()->parseCustomPostIntoBlockData($customPost->ID);
+                $parsedCustomPostBlockItems = null;
+                try {
+                    $parsedCustomPostBlockItems = $this->getBlockContentParser()->parseCustomPostIntoBlockData($customPost->ID);
+                } catch (BlockContentParserException $e) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                EngineErrorFeedbackItemProvider::class,
+                                EngineErrorFeedbackItemProvider::E7,
+                                [
+                                    $e->getMessage(),
+                                ]
+                            ),
+                            $fieldDataAccessor->getField(),
+                        )
+                    );
+                    return null;
+                }
+
                 if ($parsedCustomPostBlockItems === null || $parsedCustomPostBlockItems === []) {
                     return $parsedCustomPostBlockItems;
                 }
