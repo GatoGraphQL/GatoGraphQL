@@ -17,7 +17,7 @@ interface BlockContentParserInterface
 	 *
 	 * @return array<string,mixed>|WP_Error
 	 */
-	public function parse(
+	public function parseCustomPostContentIntoBlockData(
         string $customPostContent,
         ?int $customPostID = null,
         array $filterOptions = [],
