@@ -120,7 +120,8 @@ class BlockContentParser implements BlockContentParserInterface
 		 * @param string $block         The result of parse_blocks() for this block.
 		 *                              Contains 'blockName', 'attrs', 'innerHTML', and 'innerBlocks' keys.
 		 */
-		return apply_filters( 'vip_block_data_api__allow_block', $is_block_included, $block_name, $block );
+		// return apply_filters( 'vip_block_data_api__allow_block', $is_block_included, $block_name, $block );
+		return $is_block_included;
 	}
 
 	/**
@@ -287,7 +288,7 @@ class BlockContentParser implements BlockContentParserInterface
 		 * @param string $post_id The post ID associated with the parsed block.
 		 * @param string $block The result of parse_blocks() for this block. Contains 'blockName', 'attrs', 'innerHTML', and 'innerBlocks' keys.
 		 */
-		$sourced_block = apply_filters( 'vip_block_data_api__sourced_block_result', $sourced_block, $block_name, $this->post_id, $block );
+		// $sourced_block = apply_filters( 'vip_block_data_api__sourced_block_result', $sourced_block, $block_name, $this->post_id, $block );
 
 		// If attributes are empty, explicitly use an object to avoid encoding an empty array in JSON
 		if ( empty( $sourced_block['attributes'] ) ) {
@@ -667,6 +668,7 @@ class BlockContentParser implements BlockContentParserInterface
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function is_debug_enabled(): bool {
-		return defined( 'VIP_BLOCK_DATA_API__PARSE_DEBUG' ) && constant( 'VIP_BLOCK_DATA_API__PARSE_DEBUG' ) === true;
+		// return defined( 'VIP_BLOCK_DATA_API__PARSE_DEBUG' ) && constant( 'VIP_BLOCK_DATA_API__PARSE_DEBUG' ) === true;
+		return false;
 	}
 }
