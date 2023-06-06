@@ -56,7 +56,7 @@ class BlockContentParser implements BlockContentParserInterface
 			}
 		}
         $customPostContent = $customPost->post_content;
-        $parsedBlockData = $this->parse($customPostContent, $customPostID, $filterOptions);
+        $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $filterOptions);
         return $this->processParsedBlockData($parsedBlockData);
     }
 
