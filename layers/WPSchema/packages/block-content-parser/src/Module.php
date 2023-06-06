@@ -16,6 +16,7 @@ class Module extends AbstractModule
     {
         return [
             \PoP\DOMCrawler\Module::class,
+            \PoP\EngineWP\Module::class,
         ];
     }
 
