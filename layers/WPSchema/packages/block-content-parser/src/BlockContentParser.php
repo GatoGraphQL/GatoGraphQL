@@ -13,6 +13,7 @@ use Throwable;
 use WP_Block_Type_Registry;
 use WP_Block_Type;
 use WP_Error;
+use WP_Post;
 
 use function get_post;
 use function has_blocks;
@@ -29,7 +30,7 @@ class BlockContentParser implements BlockContentParserInterface
     use BasicServiceTrait;
 
     /**
-     * @param int|null $customPostID ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
+     * @param int $customPostID ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
      * @param array<string,mixed> $filterOptions An associative array of options for filtering blocks. Can contain keys:
      *              'exclude': An array of block names to block from the response.
      *              'include': An array of block names that are allowed in the response.
