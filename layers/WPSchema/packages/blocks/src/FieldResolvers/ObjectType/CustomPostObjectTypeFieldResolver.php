@@ -121,6 +121,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     return null;
                 }
 
+                if ($blockContentParserPayload === null) {
+                    return $blockContentParserPayload;
+                }
+
                 if ($blockContentParserPayload->warnings !== null) {
                     foreach ($blockContentParserPayload->warnings as $warning) {
                         $objectTypeFieldResolutionFeedbackStore->addWarning(
@@ -136,10 +140,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                             )
                         );
                     }
-                }
-
-                if ($blockContentParserPayload === null) {
-                    return $blockContentParserPayload;
                 }
 
                 /** @var BlockInterface[] */
