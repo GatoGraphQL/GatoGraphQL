@@ -57,9 +57,11 @@ class BlockContentParser implements BlockContentParserInterface
      * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
      */
 
-	protected $block_registry;
-	protected $post_id;
-	protected $warnings = [];
+	/** @var mixed[] */
+    protected array $block_registry;
+	protected int $post_id;
+	/** @var string[] */
+    protected array $warnings = [];
 
 	/**
 	 * @param WP_Block_Type_Registry|null $block_registry
