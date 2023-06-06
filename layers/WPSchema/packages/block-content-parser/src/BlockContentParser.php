@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace PoPWPSchema\BlockContentParser;
 
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
+use PoP\DOMCrawler\Crawler;
 use PoP\DOMCrawler\CrawlerFactoryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use Throwable;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
-use WP_Error;
 
+use WP_Error;
 use function get_post;
 use function has_blocks;
 use function parse_blocks;
@@ -307,12 +308,11 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_attribute( $crawler, $block_attribute_definition ) {
+	protected function source_attribute( Crawler $crawler, array $block_attribute_definition ) {
 		$attribute_value         = null;
 		$attribute_default_value = $block_attribute_definition['default'] ?? null;
 		$attribute_source        = $block_attribute_definition['source'];
@@ -350,14 +350,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_attribute( $crawler, $block_attribute_definition ) {
+	protected function source_block_attribute( Crawler $crawler, array $block_attribute_definition ) {
 		// 'attribute' sources:
 		// https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#attribute-source
 
@@ -377,14 +376,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_html( $crawler, $block_attribute_definition ) {
+	protected function source_block_html( Crawler $crawler, array $block_attribute_definition ) {
 		// 'html' sources:
 		// https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#html-source
 
@@ -413,14 +411,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_text( $crawler, $block_attribute_definition ) {
+	protected function source_block_text( Crawler $crawler, array $block_attribute_definition ) {
 		// 'text' sources:
 		// https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#text-source
 
@@ -439,14 +436,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_query( $crawler, $block_attribute_definition ) {
+	protected function source_block_query( Crawler $crawler, array $block_attribute_definition ) {
 		// 'query' sources:
 		// https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#query-source
 
@@ -475,14 +471,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_tag( $crawler, $block_attribute_definition ) {
+	protected function source_block_tag( Crawler $crawler, array $block_attribute_definition ) {
 		// The only current usage of the 'tag' attribute is Gutenberg core is the 'core/table' block:
 		// https://github.com/WordPress/gutenberg/blob/796b800/packages/block-library/src/table/block.json#L39
 		// Also see tag attribute parsing in Gutenberg:
@@ -503,14 +498,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_raw( $crawler, $block_attribute_definition ) {
+	protected function source_block_raw( Crawler $crawler, array $block_attribute_definition ) {
 		// The only current usage of the 'raw' attribute in Gutenberg core is the 'core/html' block:
 		// https://github.com/WordPress/gutenberg/blob/6517008/packages/block-library/src/html/block.json#L13
 		// Also see tag attribute parsing in Gutenberg:
@@ -526,14 +520,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_meta( $block_attribute_definition ) {
+	protected function source_block_meta( array $block_attribute_definition ) {
 		// 'meta' sources:
 		// https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#meta-source
 
@@ -553,14 +546,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_children( $crawler, $block_attribute_definition ) {
+	protected function source_block_children( Crawler $crawler, array $block_attribute_definition ) {
 		// 'children' attribute usage was removed from core in 2018, but not officically deprecated until WordPress 6.1:
 		// https://github.com/WordPress/gutenberg/pull/44265
 		// Parsing code for 'children' sources can be found here:
@@ -603,14 +595,13 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-	 * @param Symfony\Component\DomCrawler\Crawler $crawler
-	 * @param array $block_attribute_definition
+	 * @param array<string,mixed> $block_attribute_definition
 	 *
 	 * @return string|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block_node( $crawler, $block_attribute_definition ) {
+	protected function source_block_node( Crawler $crawler, array $block_attribute_definition ) {
 		// 'node' attribute usage was removed from core in 2018, but not officically deprecated until WordPress 6.1:
 		// https://github.com/WordPress/gutenberg/pull/44265
 		// Parsing code for 'node' sources can be found here:
