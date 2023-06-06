@@ -64,10 +64,13 @@ class BlockContentParser implements BlockContentParserInterface
 	protected function castBlockDataItemsToObject(array $blockDataItems): array
 	{
         return array_map(
+			/**
+			 * @param array<string,mixed> $item
+			 */
 			function (array $item): stdClass {
 				$item = (object) $item;
 				if (isset($item->innerBlocks)) {
-					/** @var mixed[] */
+					/** @var array<array<string,mixed>> */
 					$blockInnerBlockDataItems = $item->innerBlocks;
 					$item->innerBlocks = $this->castBlockDataItemsToObject($blockInnerBlockDataItems);
 				}
