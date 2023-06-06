@@ -74,7 +74,7 @@ class BlockContentParser implements BlockContentParserInterface
 		$parsedBlockDataItems = $parsedBlockData['blocks'];
         return new BlockContentParserPayload(
 			$this->castBlockDataItemsToObject($parsedBlockDataItems),
-			$parsedBlockDataItems['warnings'] ?? null
+			$parsedBlockData['warnings'] ?? null
 		);
     }
 
