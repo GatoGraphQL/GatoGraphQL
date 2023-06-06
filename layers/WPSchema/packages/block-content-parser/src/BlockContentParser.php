@@ -44,7 +44,7 @@ class BlockContentParser implements BlockContentParserInterface
         WP_Post|int $customPostObjectOrID,
         array $filterOptions = [],
     ): ?BlockContentParserPayload {
-		if (is_object($customPostObjectOrID)) {
+		if ($customPostObjectOrID instanceof WP_Post) {
 			$customPost = $customPostObjectOrID;
 		} else {
 			/** @var int */
