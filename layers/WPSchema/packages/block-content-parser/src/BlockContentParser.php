@@ -41,16 +41,16 @@ class BlockContentParser implements BlockContentParserInterface
 	 *              'exclude': An array of block names to block from the response.
 	 *              'include': An array of block names that are allowed in the response.
 	 *
-	 * @return array<string,mixed>|WP_Error
+	 * @return array<string,mixed>|WP_Error|null `null` if the custom post does not exist
 	 */
 	public function parseCustomPostIntoBlockData(
         int $customPostID,
         array $filterOptions = [],
-    ): array|WP_Error {
+    ): array|WP_Error|null {
         /** @var WP_Post|null */
         $customPost = get_post($customPostID);
         if ($customPost === null) {
-            return [];
+            return null;
         }
         $customPostContent = $customPost->post_content;
         return $this->parse($customPostContent, $customPostID, $filterOptions);
