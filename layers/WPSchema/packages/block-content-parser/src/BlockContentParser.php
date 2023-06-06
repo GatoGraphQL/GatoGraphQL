@@ -21,9 +21,11 @@ use function parse_blocks;
 
 /**
  * This class is based on class `ContentParser`
- * from project `Automattic/vip-block-data-api`.
+ * from project `Automattic/vip-block-data-api`,
+ * released under `v1.0.0`.
  *
  * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
+ * @see https://github.com/Automattic/vip-block-data-api/tree/1.0.0
  */
 class BlockContentParser implements BlockContentParserInterface
 {
