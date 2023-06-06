@@ -50,10 +50,12 @@ class BlockContentParser implements BlockContentParserInterface
             return null;
         }
         $customPostContent = $customPost->post_content;
-        $parsedBlockDataItems = $this->parse($customPostContent, $customPostID, $filterOptions);
-        if ($parsedBlockDataItems instanceof WP_Error) {
-            throw new BlockContentParserException($parsedBlockDataItems);
+        $parsedBlockData = $this->parse($customPostContent, $customPostID, $filterOptions);
+        if ($parsedBlockData instanceof WP_Error) {
+            throw new BlockContentParserException($parsedBlockData);
         }
+		/** @var array<stdClass> */
+		$parsedBlockDataItems = $parsedBlockData['blocks'];
         return $this->castBlockDataItemsToObject($parsedBlockDataItems);
     }
 
@@ -96,10 +98,12 @@ class BlockContentParser implements BlockContentParserInterface
         string $customPostContent,
         array $filterOptions = [],
     ): array {
-        $parsedBlockDataItems = $this->parse($customPostContent, null, $filterOptions);
-        if ($parsedBlockDataItems instanceof WP_Error) {
-            throw new BlockContentParserException($parsedBlockDataItems);
+        $parsedBlockData = $this->parse($customPostContent, null, $filterOptions);
+        if ($parsedBlockData instanceof WP_Error) {
+            throw new BlockContentParserException($parsedBlockData);
         }
+        /** @var array<stdClass> */
+		$parsedBlockDataItems = $parsedBlockData['blocks'];
         return $this->castBlockDataItemsToObject($parsedBlockDataItems);
     }
 
