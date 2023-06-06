@@ -10,6 +10,7 @@ use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
 use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -118,6 +119,23 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                         )
                     );
                     return null;
+                }
+
+                if ($blockContentParserPayload->warnings !== null) {
+                    foreach ($blockContentParserPayload->warnings as $warning) {
+                        $objectTypeFieldResolutionFeedbackStore->addWarning(
+                            new ObjectTypeFieldResolutionFeedback(
+                                new FeedbackItemResolution(
+                                    GenericFeedbackItemProvider::class,
+                                    GenericFeedbackItemProvider::W1,
+                                    [
+                                        $warning,
+                                    ]
+                                ),
+                                $fieldDataAccessor->getField(),
+                            )
+                        );
+                    }
                 }
 
                 if ($blockContentParserPayload === null) {
