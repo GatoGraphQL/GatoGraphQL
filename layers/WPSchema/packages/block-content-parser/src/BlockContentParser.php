@@ -13,6 +13,7 @@ use WP_Block_Type_Registry;
 
 use function get_post;
 use function has_blocks;
+use function is_wp_error;
 use function parse_blocks;
 
 /**
@@ -48,14 +49,23 @@ class BlockContentParser implements BlockContentParserInterface
 	public function parseCustomPostIntoBlockData(
         int $customPostID,
         array $filterOptions = [],
-    ): array|WP_Error|null {
+    ): ?array {
         /** @var WP_Post|null */
         $customPost = get_post($customPostID);
         if ($customPost === null) {
             return null;
         }
         $customPostContent = $customPost->post_content;
-        return $this->parse($customPostContent, $customPostID, $filterOptions);
+        $parsedBlockData = $this->parse($customPostContent, $customPostID, $filterOptions);
+        $this->throwExceptionIfWPError($parsedBlockData);
+        return $parsedBlockData;
+    }
+
+    protected function throwExceptionIfWPError(array|WP_Error $parsedBlockData): void
+    {
+        if (is_wp_error($parsedBlockData)) {
+            
+        }
     }
 
     /**
@@ -69,8 +79,10 @@ class BlockContentParser implements BlockContentParserInterface
 	public function parseCustomPostContentIntoBlockData(
         string $customPostContent,
         array $filterOptions = [],
-    ): array|WP_Error {
-        return $this->parse($customPostContent, null, $filterOptions);
+    ): array {
+        $parsedBlockData = $this->parse($customPostContent, null, $filterOptions);
+        $this->throwExceptionIfWPError($parsedBlockData);
+        return $parsedBlockData;
     }
 
     /**

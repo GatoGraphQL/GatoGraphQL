@@ -19,7 +19,7 @@ interface BlockContentParserInterface
 	public function parseCustomPostIntoBlockData(
         int $customPostID,
         array $filterOptions = [],
-    ): array|WP_Error|null;
+    ): ?array;
 
     /**
 	 * @param string $customPostContent HTML content of a post.
@@ -32,5 +32,5 @@ interface BlockContentParserInterface
 	public function parseCustomPostContentIntoBlockData(
         string $customPostContent,
         array $filterOptions = [],
-    ): array|WP_Error;
+    ): array;
 }
