@@ -8,6 +8,12 @@ use PoP\DOMCrawler\CrawlerFactoryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
+/**
+ * This class is based on class ContentParser
+ * from project `Automattic/vip-block-data-api`.
+ * 
+ * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
+ */
 class BlockContentParser implements BlockContentParserInterface
 {
     use BasicServiceTrait;
