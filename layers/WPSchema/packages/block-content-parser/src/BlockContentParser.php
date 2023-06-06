@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\BlockContentParser;
 
+use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoP\DOMCrawler\CrawlerFactoryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use Throwable;
-use WP_Error;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
+use WP_Error;
 
 use function get_post;
 use function has_blocks;
-use function is_wp_error;
 use function parse_blocks;
 
 /**
@@ -63,8 +63,8 @@ class BlockContentParser implements BlockContentParserInterface
 
     protected function throwExceptionIfWPError(array|WP_Error $parsedBlockData): void
     {
-        if (is_wp_error($parsedBlockData)) {
-            
+        if ($parsedBlockData instanceof WP_Error) {
+            throw new BlockContentParserException($parsedBlockData);
         }
     }
 
