@@ -97,11 +97,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'blocks':
-                // @todo Implement logic for blocks!
                 /**
                  * @var array<stdClass>
                  */
-                $parsedCustomPostBlockItems = [];
+                $parsedCustomPostBlockItems = $this->getBlockContentParser()->parseCustomPostIntoBlockData($customPost->ID);
                 if ($parsedCustomPostBlockItems === null || $parsedCustomPostBlockItems === []) {
                     return $parsedCustomPostBlockItems;
                 }

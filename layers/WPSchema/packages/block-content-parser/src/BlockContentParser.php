@@ -47,11 +47,11 @@ class BlockContentParser implements BlockContentParserInterface
             return null;
         }
         $customPostContent = $customPost->post_content;
-        $parsedBlockData = $this->parse($customPostContent, $customPostID, $filterOptions);
-        if ($parsedBlockData instanceof WP_Error) {
-            throw new BlockContentParserException($parsedBlockData);
+        $parsedBlockDataItems = $this->parse($customPostContent, $customPostID, $filterOptions);
+        if ($parsedBlockDataItems instanceof WP_Error) {
+            throw new BlockContentParserException($parsedBlockDataItems);
         }
-        return $parsedBlockData;
+        return $parsedBlockDataItems;
     }
 
     /**
@@ -67,11 +67,11 @@ class BlockContentParser implements BlockContentParserInterface
         string $customPostContent,
         array $filterOptions = [],
     ): array {
-        $parsedBlockData = $this->parse($customPostContent, null, $filterOptions);
-        if ($parsedBlockData instanceof WP_Error) {
-            throw new BlockContentParserException($parsedBlockData);
+        $parsedBlockDataItems = $this->parse($customPostContent, null, $filterOptions);
+        if ($parsedBlockDataItems instanceof WP_Error) {
+            throw new BlockContentParserException($parsedBlockDataItems);
         }
-        return $parsedBlockData;
+        return $parsedBlockDataItems;
     }
 
     /**
