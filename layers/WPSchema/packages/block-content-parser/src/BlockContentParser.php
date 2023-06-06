@@ -51,7 +51,29 @@ class BlockContentParser implements BlockContentParserInterface
         if ($parsedBlockDataItems instanceof WP_Error) {
             throw new BlockContentParserException($parsedBlockDataItems);
         }
-        return $parsedBlockDataItems;
+        return $this->castBlockDataItemsToObject($parsedBlockDataItems);
+    }
+
+    /**
+	 * Convert each of the block data items from array to
+	 * object, and iteratively for its inner blocks.
+	 *
+	 * @return array<stdClass>
+	 */
+	protected function castBlockDataItemsToObject(array $blockDataItems): array
+	{
+        return array_map(
+			function (array $item): stdClass {
+				$item = (object) $item;
+				if (isset($item->innerBlocks)) {
+					/** @var mixed[] */
+					$blockInnerBlockDataItems = $item->innerBlocks;
+					$item->innerBlocks = $this->castBlockDataItemsToObject($blockInnerBlockDataItems);
+				}
+				return $item;
+			},
+			$blockDataItems
+		);
     }
 
     /**
@@ -71,7 +93,7 @@ class BlockContentParser implements BlockContentParserInterface
         if ($parsedBlockDataItems instanceof WP_Error) {
             throw new BlockContentParserException($parsedBlockDataItems);
         }
-        return $parsedBlockDataItems;
+        return $this->castBlockDataItemsToObject($parsedBlockDataItems);
     }
 
     /**
