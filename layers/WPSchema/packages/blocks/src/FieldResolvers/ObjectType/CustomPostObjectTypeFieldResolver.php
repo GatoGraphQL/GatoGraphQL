@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\Blocks\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPWPSchema\BlockContentParser\BlockContentParserInterface;
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
 use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
@@ -14,7 +15,6 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\DOMCrawler\CrawlerFactoryInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Post;
 use stdClass;
@@ -22,7 +22,7 @@ use stdClass;
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BlockUnionTypeResolver $blockUnionTypeResolver = null;
-    private ?CrawlerFactoryInterface $crawlerFactory = null;
+    private ?BlockContentParserInterface $blockContentParser = null;
 
     final public function setBlockUnionTypeResolver(BlockUnionTypeResolver $blockUnionTypeResolver): void
     {
@@ -33,14 +33,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         /** @var BlockUnionTypeResolver */
         return $this->blockUnionTypeResolver ??= $this->instanceManager->getInstance(BlockUnionTypeResolver::class);
     }
-    final public function setCrawlerFactory(CrawlerFactoryInterface $crawlerFactory): void
+    final public function setBlockContentParser(BlockContentParserInterface $blockContentParser): void
     {
-        $this->crawlerFactory = $crawlerFactory;
+        $this->blockContentParser = $blockContentParser;
     }
-    final protected function getCrawlerFactory(): CrawlerFactoryInterface
+    final protected function getBlockContentParser(): BlockContentParserInterface
     {
-        /** @var CrawlerFactoryInterface */
-        return $this->crawlerFactory ??= $this->instanceManager->getInstance(CrawlerFactoryInterface::class);
+        /** @var BlockContentParserInterface */
+        return $this->blockContentParser ??= $this->instanceManager->getInstance(BlockContentParserInterface::class);
     }
 
     /**
