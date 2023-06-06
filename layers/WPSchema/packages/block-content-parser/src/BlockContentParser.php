@@ -58,6 +58,7 @@ class BlockContentParser implements BlockContentParserInterface
 	 * Convert each of the block data items from array to
 	 * object, and iteratively for its inner blocks.
 	 *
+	 * @param array<array<string,mixed>> $blockDataItems
 	 * @return array<stdClass>
 	 */
 	protected function castBlockDataItemsToObject(array $blockDataItems): array
