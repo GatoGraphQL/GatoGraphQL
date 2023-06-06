@@ -335,7 +335,7 @@ class BlockContentParser implements BlockContentParserInterface
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_attribute(Crawler $crawler, array $block_attribute_definition): ?string
+    protected function source_attribute(Crawler $crawler, array $block_attribute_definition): array|string|null
     {
         $attribute_value         = null;
         $attribute_default_value = $block_attribute_definition['default'] ?? null;
@@ -629,11 +629,11 @@ class BlockContentParser implements BlockContentParserInterface
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
+     * @return mixed[]|string|null
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_block_node(Crawler $crawler, array $block_attribute_definition): ?string
+    protected function source_block_node(Crawler $crawler, array $block_attribute_definition): array|string|null
     {
         // 'node' attribute usage was removed from core in 2018, but not officically deprecated until WordPress 6.1:
         // https://github.com/WordPress/gutenberg/pull/44265
@@ -692,6 +692,8 @@ class BlockContentParser implements BlockContentParserInterface
         } else {
             return null;
         }
+
+		return null;
 
 		// phpcs:enable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
     }
