@@ -465,11 +465,11 @@ class BlockContentParser implements BlockContentParserInterface
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
+     * @return mixed[]|null
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_block_query(Crawler $crawler, array $block_attribute_definition): ?string
+    protected function source_block_query(Crawler $crawler, array $block_attribute_definition): ?array
     {
         // 'query' sources:
         // https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#query-source
@@ -579,11 +579,11 @@ class BlockContentParser implements BlockContentParserInterface
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
+     * @return mixed[]|null
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_block_children(Crawler $crawler, array $block_attribute_definition): ?string
+    protected function source_block_children(Crawler $crawler, array $block_attribute_definition): ?array
     {
         // 'children' attribute usage was removed from core in 2018, but not officically deprecated until WordPress 6.1:
         // https://github.com/WordPress/gutenberg/pull/44265
