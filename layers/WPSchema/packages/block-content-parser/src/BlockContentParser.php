@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace PoPWPSchema\BlockContentParser;
 
 use DOMNode;
-use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoP\DOMCrawler\Crawler;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
+use stdClass;
 use Throwable;
-use WP_Block_Type;
 use WP_Block_Type_Registry;
+use WP_Block_Type;
 use WP_Error;
 
 use function get_post;
 use function has_blocks;
 use function parse_blocks;
-use stdClass;
 
 /**
  * This class is based on class `ContentParser`
