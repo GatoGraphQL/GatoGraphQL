@@ -230,6 +230,8 @@ services:
         - >-
           ../../layers/Schema/packages/schema-commons:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-schema/schema-commons
         - >-
+          ../../layers/WPSchema/packages/block-content-parser:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/block-content-parser
+        - >-
           ../../layers/WPSchema/packages/blocks:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/blocks
         - >-
           ../../layers/WPSchema/packages/commentmeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/commentmeta
