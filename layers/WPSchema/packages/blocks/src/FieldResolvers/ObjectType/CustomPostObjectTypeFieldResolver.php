@@ -103,7 +103,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             case 'blocks':
                 $customPostBlockDataItems = null;
                 try {
-                    $customPostBlockDataItems = $this->getBlockContentParser()->parseCustomPostIntoBlockData($customPost->ID);
+                    $customPostBlockDataItems = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost->ID);
                 } catch (BlockContentParserException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(

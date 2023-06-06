@@ -18,7 +18,7 @@ interface BlockContentParserInterface
 	 * @return array<stdClass>|null `null` if the custom post does not exist
      * @throws BlockContentParserException If there is any error processing the content
 	 */
-	public function parseCustomPostIntoBlockData(
+	public function parseCustomPostIntoBlockDataItems(
         int $customPostID,
         array $filterOptions = [],
     ): ?array;
@@ -32,7 +32,7 @@ interface BlockContentParserInterface
 	 * @return array<stdClass>
      * @throws BlockContentParserException If there is any error processing the content
 	 */
-	public function parseCustomPostContentIntoBlockData(
+	public function parseCustomPostContentIntoBlockDataItems(
         string $customPostContent,
         array $filterOptions = [],
     ): array;
