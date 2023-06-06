@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\DOMCrawler;
 
-use DOMNodeList;
 use DOMNode;
-use Symfony\Component\DomCrawler\Crawler;
+use DOMNodeList;
 
 class CrawlerFactory implements CrawlerFactoryInterface
 {

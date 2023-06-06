@@ -6,7 +6,6 @@ namespace PoP\DOMCrawler;
 
 use DOMNodeList;
 use DOMNode;
-use Symfony\Component\DomCrawler\Crawler;
 
 interface CrawlerFactoryInterface
 {
