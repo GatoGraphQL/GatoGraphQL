@@ -14,6 +14,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\DOMCrawler\CrawlerFactoryInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Post;
 use stdClass;
@@ -21,6 +22,7 @@ use stdClass;
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BlockUnionTypeResolver $blockUnionTypeResolver = null;
+    private ?CrawlerFactoryInterface $crawlerFactory = null;
 
     final public function setBlockUnionTypeResolver(BlockUnionTypeResolver $blockUnionTypeResolver): void
     {
@@ -30,6 +32,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         /** @var BlockUnionTypeResolver */
         return $this->blockUnionTypeResolver ??= $this->instanceManager->getInstance(BlockUnionTypeResolver::class);
+    }
+    final public function setCrawlerFactory(CrawlerFactoryInterface $crawlerFactory): void
+    {
+        $this->crawlerFactory = $crawlerFactory;
+    }
+    final protected function getCrawlerFactory(): CrawlerFactoryInterface
+    {
+        /** @var CrawlerFactoryInterface */
+        return $this->crawlerFactory ??= $this->instanceManager->getInstance(CrawlerFactoryInterface::class);
     }
 
     /**
