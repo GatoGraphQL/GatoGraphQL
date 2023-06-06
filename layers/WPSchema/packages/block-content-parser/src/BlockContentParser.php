@@ -61,6 +61,7 @@ class BlockContentParser implements BlockContentParserInterface
     }
 
 	/**
+     * @param mixed[]|WP_Error $parsedBlockData
      * @throws BlockContentParserException
      */
     protected function processParsedBlockData(array|WP_Error $parsedBlockData): BlockContentParserPayload
