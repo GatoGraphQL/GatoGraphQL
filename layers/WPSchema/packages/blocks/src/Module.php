@@ -15,6 +15,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
+            \PoPWPSchema\BlockContentParser\Module::class,
             \PoPWPSchema\CustomPosts\Module::class,
         ];
     }
