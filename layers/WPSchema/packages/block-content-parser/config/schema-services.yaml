@@ -4,6 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPWPSchema\BlockContentParser\ContentParserInterface:
-        class: \PoPWPSchema\BlockContentParser\ContentParser
+    PoPWPSchema\BlockContentParser\BlockContentParserInterface:
+        class: \PoPWPSchema\BlockContentParser\BlockContentParser
 

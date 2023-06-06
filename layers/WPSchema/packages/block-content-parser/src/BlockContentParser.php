@@ -7,7 +7,7 @@ namespace PoPWPSchema\BlockContentParser;
 use PoP\DOMCrawler\CrawlerFactoryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
-class ContentParser implements ContentParserInterface
+class BlockContentParser implements BlockContentParserInterface
 {
     use BasicServiceTrait;
     
