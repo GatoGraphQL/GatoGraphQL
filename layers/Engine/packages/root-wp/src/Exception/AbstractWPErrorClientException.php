@@ -7,6 +7,7 @@ namespace PoP\RootWP\Exception;
 use PoP\Root\Exception\AbstractClientException;
 use stdClass;
 use Throwable;
+use WP_Error;
 
 /**
  * Abstract class to pass the error information
@@ -14,10 +15,12 @@ use Throwable;
  */
 abstract class AbstractWPErrorClientException extends AbstractClientException
 {
+    public int|string|null $errorCode;
+    public ?stdClass $data;
+
     public function __construct(
         string $message,
-        public int|string|null $errorCode = null,
-        public ?stdClass $data = null,
+        WP_Error $wpError = null,
         int $code = 0,
         Throwable|null $previous = null
     ) {
