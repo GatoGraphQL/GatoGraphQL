@@ -21,11 +21,11 @@ abstract class AbstractWPErrorClientException extends AbstractClientException
     public ?stdClass $data;
 
     public function __construct(
-        WP_Error $wpError = null,
+        WP_Error $wpError,
         int $code = 0,
         Throwable|null $previous = null
     ) {
-        $this->errorCode = $wpError->get_error_code() ? $wpError->get_error_code() : null;
+        $this->errorCode = empty($wpError->get_error_code()) ? null : $wpError->get_error_code();
         $this->data = $this->getWPErrorData($wpError);
         parent::__construct($wpError->get_error_message(), $code, $previous);
     }
