@@ -6,7 +6,6 @@ namespace PoPWPSchema\BlockContentParser;
 
 use DOMNode;
 use PoP\DOMCrawler\Crawler;
-use PoP\DOMCrawler\CrawlerFactoryInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use Throwable;
@@ -27,18 +26,6 @@ use function parse_blocks;
 class BlockContentParser implements BlockContentParserInterface
 {
     use BasicServiceTrait;
-    
-    private ?CrawlerFactoryInterface $crawlerFactory = null;
-    
-    final public function setCrawlerFactory(CrawlerFactoryInterface $crawlerFactory): void
-    {
-        $this->crawlerFactory = $crawlerFactory;
-    }
-    final protected function getCrawlerFactory(): CrawlerFactoryInterface
-    {
-        /** @var CrawlerFactoryInterface */
-        return $this->crawlerFactory ??= $this->instanceManager->getInstance(CrawlerFactoryInterface::class);
-    }
 
     /**
 	 * @param int|null $customPostID ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
@@ -257,7 +244,7 @@ class BlockContentParser implements BlockContentParserInterface
 			}
 
 			// Specify a manual doctype so that the parser will use the HTML5 parser
-			$crawler = $this->getCrawlerFactory()->createCrawler( sprintf( '<!doctype html><html><body>%s</body></html>', $block['innerHTML'] ) );
+			$crawler = new Crawler( sprintf( '<!doctype html><html><body>%s</body></html>', $block['innerHTML'] ) );
 
 			// Enter the <body> tag for block parsing
 			$crawler = $crawler->filter( 'body' );
