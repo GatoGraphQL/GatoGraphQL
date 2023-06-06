@@ -85,6 +85,8 @@ class BlockContentParser implements BlockContentParserInterface
     }
 
     /**
+     * ----------------------------------------------------------------
+     *
      * All code below has been copied from `ContentParser`
      * from project `Automattic/vip-block-data-api`.
      * 
@@ -107,6 +109,8 @@ class BlockContentParser implements BlockContentParserInterface
 	/**
      * @param array<string,mixed> $block
      * @param array<string,mixed> $filter_options
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     public function should_block_be_included( array $block, string $block_name, array $filter_options ) {
 		$is_block_included = true;
@@ -208,6 +212,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param WP_Block_Type[] $registered_blocks
 	 *
 	 * @return array[string]array|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block( $block, $registered_blocks, $filter_options ) {
 		$block_name = $block['blockName'];
@@ -302,6 +308,8 @@ class BlockContentParser implements BlockContentParserInterface
 	/**
 	 * @param Symfony\Component\DomCrawler\Crawler $crawler
 	 * @param array $block_attribute_definition
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_attribute( $crawler, $block_attribute_definition ) {
 		$attribute_value         = null;
@@ -345,6 +353,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_attribute( $crawler, $block_attribute_definition ) {
 		// 'attribute' sources:
@@ -370,6 +380,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_html( $crawler, $block_attribute_definition ) {
 		// 'html' sources:
@@ -404,6 +416,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_text( $crawler, $block_attribute_definition ) {
 		// 'text' sources:
@@ -428,6 +442,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_query( $crawler, $block_attribute_definition ) {
 		// 'query' sources:
@@ -462,6 +478,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_tag( $crawler, $block_attribute_definition ) {
 		// The only current usage of the 'tag' attribute is Gutenberg core is the 'core/table' block:
@@ -488,6 +506,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_raw( $crawler, $block_attribute_definition ) {
 		// The only current usage of the 'raw' attribute in Gutenberg core is the 'core/html' block:
@@ -509,6 +529,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_meta( $block_attribute_definition ) {
 		// 'meta' sources:
@@ -534,6 +556,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_children( $crawler, $block_attribute_definition ) {
 		// 'children' attribute usage was removed from core in 2018, but not officically deprecated until WordPress 6.1:
@@ -582,6 +606,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param array $block_attribute_definition
 	 *
 	 * @return string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function source_block_node( $crawler, $block_attribute_definition ) {
 		// 'node' attribute usage was removed from core in 2018, but not officically deprecated until WordPress 6.1:
@@ -617,6 +643,8 @@ class BlockContentParser implements BlockContentParserInterface
 	 * @param \DOMNode $node
 	 *
 	 * @return array|string|null
+     * 
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
 	protected function from_dom_node( $node ) {
 		// phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- external API calls
@@ -644,7 +672,10 @@ class BlockContentParser implements BlockContentParserInterface
 		// phpcs:enable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	}
 
-	protected function add_missing_block_warning( $block_name ) {
+	/**
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    protected function add_missing_block_warning( $block_name ) {
 		$warning_message = sprintf( 'Block type "%s" is not server-side registered. Sourced block attributes will not be available.', $block_name );
 
 		if ( ! in_array( $warning_message, $this->warnings ) ) {
@@ -652,7 +683,10 @@ class BlockContentParser implements BlockContentParserInterface
 		}
 	}
 
-	protected function is_debug_enabled() {
+	/**
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    protected function is_debug_enabled() {
 		return defined( 'VIP_BLOCK_DATA_API__PARSE_DEBUG' ) && constant( 'VIP_BLOCK_DATA_API__PARSE_DEBUG' ) === true;
 	}
 }
