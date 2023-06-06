@@ -11,6 +11,8 @@ use WP_Error;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
 
+use function get_post;
+
 /**
  * This class is based on class `ContentParser`
  * from project `Automattic/vip-block-data-api`.
@@ -45,7 +47,13 @@ class BlockContentParser implements BlockContentParserInterface
         int $customPostID,
         array $filterOptions = [],
     ): array|WP_Error {
-        return [];
+        /** @var WP_Post|null */
+        $customPost = get_post($customPostID);
+        if ($customPost === null) {
+            return [];
+        }
+        $customPostContent = $customPost->post_content;
+        return $this->parse($customPostContent, $customPostID, $filterOptions);
     }
 
     /**
@@ -60,7 +68,7 @@ class BlockContentParser implements BlockContentParserInterface
         string $customPostContent,
         array $filterOptions = [],
     ): array|WP_Error {
-        return [];
+        return $this->parse($customPostContent, $filterOptions);
     }
 
     /**
