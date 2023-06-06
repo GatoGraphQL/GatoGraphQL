@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPWPSchema\BlockContentParser\ContentParserInterface:
+        class: \PoPWPSchema\BlockContentParser\ContentParser
+
