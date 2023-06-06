@@ -107,7 +107,7 @@ class BlockContentParser implements BlockContentParserInterface
 	}
 
 	/**
-     * @param array<string,mixed> $block
+     * @param array[string]array $block
      * @param array<string,mixed> $filter_options
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
@@ -210,12 +210,13 @@ class BlockContentParser implements BlockContentParserInterface
 	/**
 	 * @param array[string]array $block
 	 * @param WP_Block_Type[] $registered_blocks
+     * @param array<string,mixed> $filter_options
 	 *
 	 * @return array[string]array|null
      * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 	 */
-	protected function source_block( $block, $registered_blocks, $filter_options ) {
+	protected function source_block( array $block, array $registered_blocks, array $filter_options ) {
 		$block_name = $block['blockName'];
 
 		if ( ! $this->should_block_be_included( $block, $block_name, $filter_options ) ) {
