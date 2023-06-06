@@ -13,7 +13,7 @@ class CrawlerFactory implements CrawlerFactoryInterface
      * @param DOMNodeList|DOMNode|DOMNode[]|string|null $node A Node to use as the base for the crawling
      */
     public function createCrawler(
-        DOMNodeList|DOMNode|array|string $node = null,
+        null|DOMNodeList|DOMNode|array|string $node = null,
         string $uri = null,
         string $baseHref = null,
         bool $useHtml5Parser = true,
