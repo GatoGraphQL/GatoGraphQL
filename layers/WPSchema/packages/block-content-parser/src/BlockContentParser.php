@@ -246,7 +246,7 @@ class BlockContentParser implements BlockContentParserInterface
 			}
 
 			// Specify a manual doctype so that the parser will use the HTML5 parser
-			$crawler = new Crawler( sprintf( '<!doctype html><html><body>%s</body></html>', $block['innerHTML'] ) );
+			$crawler = $this->getCrawlerFactory()->createCrawler( sprintf( '<!doctype html><html><body>%s</body></html>', $block['innerHTML'] ) );
 
 			// Enter the <body> tag for block parsing
 			$crawler = $crawler->filter( 'body' );
