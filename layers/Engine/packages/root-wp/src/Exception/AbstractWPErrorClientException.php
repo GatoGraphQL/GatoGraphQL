@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\RootWP;
+namespace PoP\RootWP\Exception;
 
 use PoP\Root\Exception\AbstractClientException;
 use stdClass;
