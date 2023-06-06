@@ -9,7 +9,11 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Parse a custom post and retrieve the content from its (Gutenberg) blocks
+Parse a custom post and retrieve the content from its (Gutenberg) blocks.
+
+This package is based on project [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api).
+
+We want to express our most sincere thanks to the awesome team who created that project and released it under GPL 3.0 license ❤️.
 
 ## Install
 
