@@ -333,6 +333,8 @@ class BlockContentParser implements BlockContentParserInterface
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
+     * @return mixed[]|string|null
+	 * 
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function source_attribute(Crawler $crawler, array $block_attribute_definition): array|string|null
