@@ -3,4 +3,4 @@ composer.lock
 /vendor/
 phpcs.xml
 phpunit.xml
-.phpunit.result.cache
+/.phpunit.cache
