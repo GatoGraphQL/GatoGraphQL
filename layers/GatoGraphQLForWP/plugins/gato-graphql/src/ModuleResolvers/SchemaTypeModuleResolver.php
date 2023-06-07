@@ -436,8 +436,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 /**
                  * Disable module if "Classic Editor" plugin is installed
                  */
-                $classicEditorPluginFile = 'classic-editor/classic-editor.php';
-                $isClassicEditorPluginActive = PluginStaticHelpers::isWordPressPluginActive($classicEditorPluginFile);
+                $isClassicEditorPluginActive = PluginStaticHelpers::isWordPressPluginActive('classic-editor/classic-editor.php');
                 return !$isClassicEditorPluginActive;
         }
         return parent::areRequirementsSatisfied($module);
