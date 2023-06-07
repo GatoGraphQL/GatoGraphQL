@@ -15,6 +15,11 @@ class NotServerSideRegisteredSchemaTestingBlock extends AbstractBlock
         return 'not-server-registered-schema-testing';
     }
 
+    protected function registerBlockServerSide(): bool
+    {
+        return false;
+    }
+
     protected function isDynamicBlock(): bool
     {
         return true;
