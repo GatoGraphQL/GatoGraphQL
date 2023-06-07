@@ -565,6 +565,132 @@
                     }
                 ]
             }
-        ]
+        ],
+        "includeBlockFilter": {
+            "id": 19,
+            "blocks": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "List Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "className": "has-top-margin",
+                        "content": "Columns Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/columns",
+                    "attributes": {
+                        "isStackedOnMobile": true
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/column",
+                            "attributes": {},
+                            "innerBlocks": null
+                        },
+                        {
+                            "name": "core\/column",
+                            "attributes": {},
+                            "innerBlocks": null
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Columns inside Columns (nested inner blocks)",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/columns",
+                    "attributes": {
+                        "isStackedOnMobile": true
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/column",
+                            "attributes": {},
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/columns",
+                                    "attributes": {
+                                        "isStackedOnMobile": true
+                                    },
+                                    "innerBlocks": [
+                                        {
+                                            "name": "core\/column",
+                                            "attributes": {
+                                                "width": "33.33%"
+                                            },
+                                            "innerBlocks": [
+                                                {
+                                                    "name": "core\/heading",
+                                                    "attributes": {
+                                                        "fontSize": "large",
+                                                        "content": "Life is so rich",
+                                                        "level": 2
+                                                    },
+                                                    "innerBlocks": null
+                                                },
+                                                {
+                                                    "name": "core\/heading",
+                                                    "attributes": {
+                                                        "level": 3,
+                                                        "content": "Life is so dynamic"
+                                                    },
+                                                    "innerBlocks": null
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "core\/column",
+                                            "attributes": {
+                                                "width": "66.66%"
+                                            },
+                                            "innerBlocks": [
+                                                {
+                                                    "name": "core\/columns",
+                                                    "attributes": {
+                                                        "isStackedOnMobile": true
+                                                    },
+                                                    "innerBlocks": [
+                                                        {
+                                                            "name": "core\/column",
+                                                            "attributes": {},
+                                                            "innerBlocks": null
+                                                        },
+                                                        {
+                                                            "name": "core\/column",
+                                                            "attributes": {},
+                                                            "innerBlocks": null
+                                                        },
+                                                        {
+                                                            "name": "core\/column",
+                                                            "attributes": {},
+                                                            "innerBlocks": null
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     }
 }

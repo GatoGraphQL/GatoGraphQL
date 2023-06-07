@@ -6,37 +6,52 @@
       ...BlockData
     }
   }
+
+  includeBlockFilter: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
 }
 
 fragment BlockData on Block {
+  name
+  attributes
+  innerBlocks {
     name
     attributes
     innerBlocks {
+      name
+      attributes
+      innerBlocks {
         name
         attributes
         innerBlocks {
-        name
-        attributes
-        innerBlocks {
+          name
+          attributes
+          innerBlocks {
             name
             attributes
             innerBlocks {
-            name
-            attributes
-            innerBlocks {
+              name
+              attributes
+              innerBlocks {
                 name
                 attributes
-                innerBlocks {
-                name
-                attributes
-                innerBlocks {
-                    name
-                    attributes
-                }
-                }
+              }
             }
-            }
+          }
         }
-        }
+      }
     }
+  }
 }
