@@ -144,7 +144,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
             if (
                 !($extensionBaseName === $pluginFile
-                || in_array($pluginFile, $extensionInstance->getDependedUponPluginFiles())
+                || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
                 || in_array($pluginFile, $inactiveExtensionDependedUponPluginFiles)
                 )
             ) {

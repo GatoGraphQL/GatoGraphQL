@@ -61,7 +61,7 @@ abstract class AbstractPlugin implements PluginInterface
      *
      * @return string[]
      */
-    public function getDependedUponPluginFiles(): array
+    public function getDependentOnPluginFiles(): array
     {
         return [];
     }
