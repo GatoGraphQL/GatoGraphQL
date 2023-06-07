@@ -8,7 +8,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
  * Test that enabling/disabling a plugin does not affect
  * the response of the query.
  */
-abstract class AbstractEnableDisablePluginSameResponseFixturePluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase
+abstract class AbstractEnableDisablePluginSameResponseFixturePluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase
 {
     /**
      * The response before/after must be the same.
