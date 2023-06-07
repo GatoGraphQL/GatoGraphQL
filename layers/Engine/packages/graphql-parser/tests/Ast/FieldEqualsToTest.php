@@ -35,7 +35,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected function getLeafFieldEqualsToLeafFieldProviderEntries(): array
+    public static function getLeafFieldEqualsToLeafFieldProviderEntries(): array
     {
         $inputObject1 = new stdClass();
         $inputObject1->someKey = new VariableReference('someVariable', null, new Location(1, 1));
