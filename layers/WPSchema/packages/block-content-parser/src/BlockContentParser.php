@@ -196,7 +196,12 @@ class BlockContentParser implements BlockContentParserInterface
     protected function parse(string $post_content, ?int $post_id = null, array $filter_options = []): array|WP_Error
     {
         if (isset($filter_options['exclude']) && isset($filter_options['include'])) {
-            return new WP_Error('vip-block-data-api-invalid-params', 'Cannot provide blocks to exclude and include at the same time', [ 'status' => 400 ]);
+            // return new WP_Error('vip-block-data-api-invalid-params', 'Cannot provide blocks to exclude and include at the same time', [ 'status' => 400 ]);
+            return new WP_Error(
+                'vip-block-data-api-invalid-params',
+                \__('Cannot provide blocks to exclude and include at the same time', 'gato-graphql'),
+                [ 'status' => 400 ]
+            );
         }
 
         $this->post_id  = $post_id;
@@ -205,9 +210,16 @@ class BlockContentParser implements BlockContentParserInterface
         $has_blocks = has_blocks($post_content);
 
         if (! $has_blocks) {
+            // $error_message = join(' ', [
+            //     sprintf('Error parsing post ID %d: This post does not appear to contain block content.', $post_id),
+            //     'The VIP Block Data API is designed to parse Gutenberg blocks and can not read classic editor content.',
+            // ]);
             $error_message = join(' ', [
-                sprintf('Error parsing post ID %d: This post does not appear to contain block content.', $post_id),
-                'The VIP Block Data API is designed to parse Gutenberg blocks and can not read classic editor content.',
+                sprintf(
+                    \__('Error parsing post ID %d: This post does not appear to contain block content.', 'gato-graphql'),
+                    $post_id
+                ),
+                \__('This fields is designed to parse Gutenberg blocks and can not read classic editor content.', 'gato-graphql'),
             ]);
 
             return new WP_Error('vip-block-data-api-no-blocks', $error_message, [ 'status' => 400 ]);
