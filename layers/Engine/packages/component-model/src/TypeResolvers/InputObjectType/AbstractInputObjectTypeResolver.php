@@ -339,6 +339,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                  */
                 $inputFieldValue = $inputCoercingService->maybeConvertInputValueFromSingleToList(
                     $inputFieldValue,
+                    $inputFieldIsNonNullable,
                     $inputFieldIsArrayType,
                     $inputFieldIsArrayOfArraysType,
                 );
@@ -350,6 +351,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldName,
+                $inputFieldIsNonNullable,
                 $inputFieldIsArrayType,
                 $inputFieldIsNonNullArrayItemsType,
                 $inputFieldIsArrayOfArraysType,

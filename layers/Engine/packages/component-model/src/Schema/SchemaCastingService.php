@@ -128,6 +128,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                  */
                 $argValue = $inputCoercingService->maybeConvertInputValueFromSingleToList(
                     $argValue,
+                    $fieldOrDirectiveArgIsNonNullable,
                     $fieldOrDirectiveArgIsArrayType,
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
@@ -148,6 +149,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $argName,
+                $fieldOrDirectiveArgIsNonNullable,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
