@@ -120,7 +120,7 @@
     ...on GenericCustomPost {
       id
       title
-      content
+      rawContent
       customPostType
       blocks {
         ...BlockData
@@ -133,7 +133,7 @@
     ...on GenericCustomPost {
       id
       title
-      content
+      rawContent
       customPostType
       blocks {
         ...BlockData
@@ -146,7 +146,7 @@
     ...on GenericCustomPost {
       id
       title
-      content
+      rawContent
       customPostType
       blocks {
         ...BlockData
@@ -159,7 +159,7 @@
     ...on GenericCustomPost {
       id
       title
-      content
+      rawContent
       customPostType
       blocks {
         ...BlockData
@@ -172,7 +172,7 @@
     ...on GenericCustomPost {
       id
       title
-      content
+      rawContent
       customPostType
       blocks {
         ...BlockData
