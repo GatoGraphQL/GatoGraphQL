@@ -3,39 +3,40 @@
     id
     title
     blocks {
-      ... on Block {
-        name
-        attributes
-        innerBlocks {
-          name
-          attributes
-          innerBlocks {
-            name
-            attributes
-            innerBlocks {
-              name
-              attributes
-              innerBlocks {
-                name
-                attributes
-                innerBlocks {
-                  name
-                  attributes
-                  innerBlocks {
-                    name
-                    attributes
-                    innerBlocks {
-                      name
-                      attributes
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      ...BlockData
     }
   }
 }
 
+fragment BlockData on Block {
+    name
+    attributes
+    innerBlocks {
+        name
+        attributes
+        innerBlocks {
+        name
+        attributes
+        innerBlocks {
+            name
+            attributes
+            innerBlocks {
+            name
+            attributes
+            innerBlocks {
+                name
+                attributes
+                innerBlocks {
+                name
+                attributes
+                innerBlocks {
+                    name
+                    attributes
+                }
+                }
+            }
+            }
+        }
+        }
+    }
+}
