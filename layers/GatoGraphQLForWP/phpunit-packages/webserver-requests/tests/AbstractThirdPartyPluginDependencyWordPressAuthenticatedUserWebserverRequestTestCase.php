@@ -29,9 +29,10 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         $isModuleEnabledByDefault = $this->isModuleEnabledByDefault($dataName);
-        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled')) {
+        $isPluginActiveByDefault = $this->isPluginActiveByDefault($dataName);
+        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled') && $isPluginActiveByDefault) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
-        } elseif (!$isModuleEnabledByDefault && str_ends_with($dataName, ':enabled')) {
+        } elseif ((!$isModuleEnabledByDefault || !$isPluginActiveByDefault) && str_ends_with($dataName, ':enabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkDeactivatePlugins(
@@ -50,9 +51,10 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         $isModuleEnabledByDefault = $this->isModuleEnabledByDefault($dataName);
-        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled')) {
+        $isPluginActiveByDefault = $this->isPluginActiveByDefault($dataName);
+        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled') && $isPluginActiveByDefault) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
-        } elseif (!$isModuleEnabledByDefault && str_ends_with($dataName, ':enabled')) {
+        } elseif ((!$isModuleEnabledByDefault || !$isPluginActiveByDefault) && str_ends_with($dataName, ':enabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkActivatePlugins();
@@ -65,6 +67,11 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     }
 
     protected function isModuleEnabledByDefault(string $dataName): bool
+    {
+        return true;
+    }
+
+    protected function isPluginActiveByDefault(string $dataName): bool
     {
         return true;
     }
