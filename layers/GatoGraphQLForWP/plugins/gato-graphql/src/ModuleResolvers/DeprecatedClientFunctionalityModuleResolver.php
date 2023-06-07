@@ -66,11 +66,10 @@ class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityM
 
     public function getDescription(string $module): string
     {
-        switch ($module) {
-            case self::GRAPHIQL_EXPLORER:
-                return \__('Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)', 'gato-graphql');
-        }
-        return parent::getDescription($module);
+        return match ($module) {
+            self::GRAPHIQL_EXPLORER => \__('Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)', 'gato-graphql'),
+            default => parent::getDescription($module),
+        };
     }
 
     /**

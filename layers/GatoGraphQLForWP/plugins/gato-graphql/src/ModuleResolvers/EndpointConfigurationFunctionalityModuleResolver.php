@@ -63,10 +63,9 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
 
     public function getDescription(string $module): string
     {
-        switch ($module) {
-            case self::API_HIERARCHY:
-                return \__('Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties', 'gato-graphql');
-        }
-        return parent::getDescription($module);
+        return match ($module) {
+            self::API_HIERARCHY => \__('Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties', 'gato-graphql'),
+            default => parent::getDescription($module),
+        };
     }
 }

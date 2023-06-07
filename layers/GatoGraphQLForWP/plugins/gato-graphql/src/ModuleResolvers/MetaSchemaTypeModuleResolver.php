@@ -157,30 +157,26 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 
     public function getDescription(string $module): string
     {
-        switch ($module) {
-            case self::SCHEMA_CUSTOMPOST_META:
-                return sprintf(
-                    \__('Query meta values from custom posts (such as type <code>%1$s</code>)', 'gato-graphql'),
-                    $this->getPostObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_USER_META:
-                return sprintf(
-                    \__('Query meta values from users (for type <code>%1$s</code>)', 'gato-graphql'),
-                    $this->getUserObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_COMMENT_META:
-                return sprintf(
-                    \__('Query meta values from comments (for type <code>%1$s</code>)', 'gato-graphql'),
-                    $this->getCommentObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_TAXONOMY_META:
-                return sprintf(
-                    \__('Query meta values for taxonomies (such as types <code>%1$s</code> and <code>%2$s</code>)', 'gato-graphql'),
-                    $this->getPostTagObjectTypeResolver()->getTypeName(),
-                    $this->getPostCategoryObjectTypeResolver()->getTypeName()
-                );
-        }
-        return parent::getDescription($module);
+        return match ($module) {
+            self::SCHEMA_CUSTOMPOST_META => sprintf(
+                \__('Query meta values from custom posts (such as type <code>%1$s</code>)', 'gato-graphql'),
+                $this->getPostObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_USER_META => sprintf(
+                \__('Query meta values from users (for type <code>%1$s</code>)', 'gato-graphql'),
+                $this->getUserObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_COMMENT_META => sprintf(
+                \__('Query meta values from comments (for type <code>%1$s</code>)', 'gato-graphql'),
+                $this->getCommentObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_TAXONOMY_META => sprintf(
+                \__('Query meta values for taxonomies (such as types <code>%1$s</code> and <code>%2$s</code>)', 'gato-graphql'),
+                $this->getPostTagObjectTypeResolver()->getTypeName(),
+                $this->getPostCategoryObjectTypeResolver()->getTypeName()
+            ),
+            default => parent::getDescription($module),
+        };
     }
 
     /**

@@ -354,79 +354,64 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
 
     public function getDescription(string $module): string
     {
-        switch ($module) {
-            case self::SCHEMA_POSTS:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('posts', 'gato-graphql'),
-                    $this->getPostObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_BLOCKS:
-                return \__('(Gutenberg) Blocks contained in the custom post', 'gato-graphql');
-            case self::SCHEMA_USERS:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('users', 'gato-graphql'),
-                    $this->getUserObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_USER_ROLES:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('user roles', 'gato-graphql'),
-                    $this->getUserRoleObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_USER_AVATARS:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('user avatars', 'gato-graphql'),
-                    $this->getUserAvatarObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_PAGES:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('pages', 'gato-graphql'),
-                    $this->getPageObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_MEDIA:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('media elements', 'gato-graphql'),
-                    $this->getMediaObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_COMMENTS:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('comments', 'gato-graphql'),
-                    $this->getCommentObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_POST_TAGS:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('post tags', 'gato-graphql'),
-                    $this->getPostTagObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_POST_CATEGORIES:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('post categories', 'gato-graphql'),
-                    $this->getPostCategoryObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_MENUS:
-                return sprintf(
-                    \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
-                    \__('menus', 'gato-graphql'),
-                    $this->getMenuObjectTypeResolver()->getTypeName()
-                );
-            case self::SCHEMA_SETTINGS:
-                return \__('Fetch settings from the site', 'gato-graphql');
-            case self::SCHEMA_CUSTOMPOSTS:
-                return \__('Base functionality for all custom posts', 'gato-graphql');
-            case self::SCHEMA_TAGS:
-                return \__('Base functionality for all tags', 'gato-graphql');
-            case self::SCHEMA_CATEGORIES:
-                return \__('Base functionality for all categories', 'gato-graphql');
-        }
-        return parent::getDescription($module);
+        return match ($module) {
+            self::SCHEMA_POSTS => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('posts', 'gato-graphql'),
+                $this->getPostObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_BLOCKS => \__('Retrieve the (Gutenberg) blocks contained in the custom post', 'gato-graphql'),
+            self::SCHEMA_USERS => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('users', 'gato-graphql'),
+                $this->getUserObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_USER_ROLES => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('user roles', 'gato-graphql'),
+                $this->getUserRoleObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_USER_AVATARS => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('user avatars', 'gato-graphql'),
+                $this->getUserAvatarObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_PAGES => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('pages', 'gato-graphql'),
+                $this->getPageObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_MEDIA => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('media elements', 'gato-graphql'),
+                $this->getMediaObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_COMMENTS => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('comments', 'gato-graphql'),
+                $this->getCommentObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_POST_TAGS => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('post tags', 'gato-graphql'),
+                $this->getPostTagObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_POST_CATEGORIES => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('post categories', 'gato-graphql'),
+                $this->getPostCategoryObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_MENUS => sprintf(
+                \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
+                \__('menus', 'gato-graphql'),
+                $this->getMenuObjectTypeResolver()->getTypeName()
+            ),
+            self::SCHEMA_SETTINGS => \__('Fetch settings from the site', 'gato-graphql'),
+            self::SCHEMA_CUSTOMPOSTS => \__('Base functionality for all custom posts', 'gato-graphql'),
+            self::SCHEMA_TAGS => \__('Base functionality for all tags', 'gato-graphql'),
+            self::SCHEMA_CATEGORIES => \__('Base functionality for all categories', 'gato-graphql'),
+            default => parent::getDescription($module),
+        };
     }
 
     /**
