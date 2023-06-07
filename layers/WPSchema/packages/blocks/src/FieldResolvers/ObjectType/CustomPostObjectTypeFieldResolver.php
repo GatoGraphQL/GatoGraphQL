@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Blocks\FieldResolvers\ObjectType;
 
+use GatoGraphQL\GatoGraphQL\App;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPWPSchema\BlockContentParser\BlockContentParserInterface;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
@@ -23,6 +24,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider as EngineErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use PoPWPSchema\Blocks\Constants\HookNames;
 use WP_Post;
 use stdClass;
 
@@ -200,6 +202,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
      */
     protected function createBlock(stdClass $blockItem): BlockInterface
     {
+        /** @var string */
+        $name = $blockItem->name;
+        /** @var stdClass|null */
+        $attributes = $blockItem->attributes ?? null;
         $innerBlocks = null;
         if (isset($blockItem->innerBlocks)) {
             /** @var array<stdClass> */
@@ -209,9 +215,44 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $blockInnerBlocks
             );
         }
+        return $this->createBlockObject(
+            $name,
+            $attributes,
+            $innerBlocks,
+        );
+    }
+
+    /**
+     * Allow to inject more specific blocks:
+     *
+     * - CoreParagraphBlock
+     * - CoreMediaBlock
+     * - CoreHeadingBlock
+     * - etc
+     *
+     * By default, it creates a `GeneralBlock`.
+     *
+     * @param BlockInterface[]|null $innerBlocks
+     */
+    protected function createBlockObject(
+        string $name,
+        ?stdClass $attributes,
+        ?array $innerBlocks
+    ): BlockInterface {
+        /** @var BlockInterface|null */
+        $injectedBlockObject = App::applyFilters(
+            HookNames::BLOCK_TYPE,
+            null,
+            $name,
+            $attributes,
+            $innerBlocks,
+        );
+        if ($injectedBlockObject !== null) {
+            return $injectedBlockObject;
+        }
         return new GeneralBlock(
-            $blockItem->name,
-            $blockItem->attributes ?? null,
+            $name,
+            $attributes,
             $innerBlocks
         );
     }
