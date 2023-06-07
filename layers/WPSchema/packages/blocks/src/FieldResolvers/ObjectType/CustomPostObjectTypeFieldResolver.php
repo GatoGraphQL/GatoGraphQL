@@ -9,7 +9,7 @@ use PoPWPSchema\BlockContentParser\BlockContentParserInterface;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
 use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
-use PoPWPSchema\Blocks\TypeResolvers\InputObjectType\BlockFilterInputObjectTypeResolver;
+use PoPWPSchema\Blocks\TypeResolvers\InputObjectType\BlockFilterByInputObjectTypeResolver;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -29,7 +29,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 {
     private ?BlockUnionTypeResolver $blockUnionTypeResolver = null;
     private ?BlockContentParserInterface $blockContentParser = null;
-    private ?BlockFilterInputObjectTypeResolver $blockFilterInputObjectTypeResolver = null;
+    private ?BlockFilterByInputObjectTypeResolver $blockFilterByInputObjectTypeResolver = null;
 
     final public function setBlockUnionTypeResolver(BlockUnionTypeResolver $blockUnionTypeResolver): void
     {
@@ -49,14 +49,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         /** @var BlockContentParserInterface */
         return $this->blockContentParser ??= $this->instanceManager->getInstance(BlockContentParserInterface::class);
     }
-    final public function setBlockFilterInputObjectTypeResolver(BlockFilterInputObjectTypeResolver $blockFilterInputObjectTypeResolver): void
+    final public function setBlockFilterByInputObjectTypeResolver(BlockFilterByInputObjectTypeResolver $blockFilterByInputObjectTypeResolver): void
     {
-        $this->blockFilterInputObjectTypeResolver = $blockFilterInputObjectTypeResolver;
+        $this->blockFilterByInputObjectTypeResolver = $blockFilterByInputObjectTypeResolver;
     }
-    final protected function getBlockFilterInputObjectTypeResolver(): BlockFilterInputObjectTypeResolver
+    final protected function getBlockFilterByInputObjectTypeResolver(): BlockFilterByInputObjectTypeResolver
     {
-        /** @var BlockFilterInputObjectTypeResolver */
-        return $this->blockFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(BlockFilterInputObjectTypeResolver::class);
+        /** @var BlockFilterByInputObjectTypeResolver */
+        return $this->blockFilterByInputObjectTypeResolver ??= $this->instanceManager->getInstance(BlockFilterByInputObjectTypeResolver::class);
     }
 
     /**
@@ -113,7 +113,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             'blocks' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getBlockFilterInputObjectTypeResolver(),
+                    'filter' => $this->getBlockFilterByInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
