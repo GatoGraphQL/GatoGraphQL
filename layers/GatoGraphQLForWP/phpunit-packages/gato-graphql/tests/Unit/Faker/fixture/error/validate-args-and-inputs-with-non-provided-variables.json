@@ -1,27 +1,6 @@
 {
     "errors": [
         {
-            "message": "Argument 'status' cannot receive an array with `null` values",
-            "locations": [
-                {
-                    "line": 16,
-                    "column": 13
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "{status: $nonProvidedVar}",
-                    "(filter: {status: $nonProvidedVar})",
-                    "posts(filter: {status: $nonProvidedVar}, pagination: {limit: 3}) { ... }",
-                    "query ($nonProvidedVar: String) { ... }"
-                ],
-                "type": "QueryRoot",
-                "field": "posts(filter: {status: $nonProvidedVar}, pagination: {limit: 3}) { ... }",
-                "code": "gql@5.6.1[10]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
-            }
-        },
-        {
             "message": "Argument 'if' in directive 'include' cannot be null",
             "locations": [
                 {
@@ -96,6 +75,16 @@
             "dateStr": null,
             "title": null
         },
-        "posts": null
+        "posts": [
+            {
+                "id": 1724
+            },
+            {
+                "id": 358
+            },
+            {
+                "id": 555
+            }
+        ]
     }
 }
