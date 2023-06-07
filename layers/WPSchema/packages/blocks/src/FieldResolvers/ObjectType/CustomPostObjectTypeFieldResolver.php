@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Blocks\FieldResolvers\ObjectType;
 
+use GatoGraphQL\GatoGraphQL\App;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPWPSchema\BlockContentParser\BlockContentParserInterface;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
@@ -23,6 +24,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider as EngineErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use PoPWPSchema\Blocks\Constants\HookNames;
 use WP_Post;
 use stdClass;
 
@@ -237,7 +239,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         ?stdClass $attributes,
         ?array $innerBlocks
     ): BlockInterface {
-        return new GeneralBlock(
+        return App::applyFilters(
+            HookNames::BLOCK_TYPE,
+            null,
+            $name,
+            $attributes,
+            $innerBlocks,
+        ) ?? new GeneralBlock(
             $name,
             $attributes,
             $innerBlocks
