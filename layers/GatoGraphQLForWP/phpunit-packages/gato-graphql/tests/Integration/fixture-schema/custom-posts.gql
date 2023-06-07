@@ -136,4 +136,14 @@ query {
       title
     }
   }
+
+  singleCustomPost: customPost(by: { id: 619 }) {
+    __typename
+    ...on CustomPost {
+      id
+      title
+      content
+      customPostType
+    }
+  }
 }
