@@ -1227,9 +1227,9 @@ Dolorum quo neque.]]></excerpt:encoded>
 <ul><li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li></ul>
 <!-- /wp:list -->
 
-<!-- wp:gato-graphql/not-server-registered-schema-testing {"someAttribute":false,"someOtherAttribute":"Hello"} /-->
+<!-- wp:gato-graphql/not-server-side-registered-schema-testing {"someAttribute":false,"someOtherAttribute":"Hello"} /-->
 
-<!-- wp:gato-graphql/not-server-registered-schema-testing {"someOtherAttribute":" world!","yetAnotherAttribute":["testing","non","server","side","registered","blocks"]} /-->
+<!-- wp:gato-graphql/not-server-side-registered-schema-testing {"someOtherAttribute":" world!","yetAnotherAttribute":["testing","non","server","side","registered","blocks"]} /-->
 
 <!-- wp:paragraph -->
 <p>And back to some text</p>
