@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 use GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
@@ -361,7 +362,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $this->getPostObjectTypeResolver()->getTypeName()
                 );
             case self::SCHEMA_BLOCKS:
-                return \__('(Gutenberg) Blocks contained in the custom post', 'gato-graphql');
+                return \__('(Gutenberg) Blocks contained in the custom post. This module is disabled if the "Classic Editor" plugin is active', 'gato-graphql');
             case self::SCHEMA_USERS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
@@ -426,6 +427,20 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 return \__('Base functionality for all categories', 'gato-graphql');
         }
         return parent::getDescription($module);
+    }
+
+    public function areRequirementsSatisfied(string $module): bool
+    {
+        switch ($module) {
+            case self::SCHEMA_BLOCKS:
+                /**
+                 * Disable module if "Classic Editor" plugin is installed
+                 */
+                $classicEditorPluginFile = 'classic-editor/classic-editor.php';
+                $isClassicEditorPluginActive = PluginStaticHelpers::isWordPressPluginActive($classicEditorPluginFile);
+                return !$isClassicEditorPluginActive;
+        }
+        return parent::areRequirementsSatisfied($module);
     }
 
     /**
