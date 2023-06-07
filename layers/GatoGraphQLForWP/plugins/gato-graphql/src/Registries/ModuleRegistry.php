@@ -232,7 +232,7 @@ class ModuleRegistry implements ModuleRegistryInterface
          *
          * @see https://getcomposer.org/doc/articles/versions.md
          */
-        foreach ($moduleResolver->getDependedWordPressPlugins($module) as $dependedPlugin) {
+        foreach ($moduleResolver->getDependentOnActiveWordPressPlugins($module) as $dependedPlugin) {
             // Check that all required plugins are active
             if (!PluginStaticHelpers::isWordPressPluginActive($dependedPlugin->file)) {
                 return false;

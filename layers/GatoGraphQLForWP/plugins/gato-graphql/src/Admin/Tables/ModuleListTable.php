@@ -102,7 +102,7 @@ class ModuleListTable extends AbstractItemListTable
                     'name' => $moduleResolver->getName($module),
                     'description' => $moduleResolver->getDescription($module),
                     'depends-on-modules' => $moduleResolver->getDependedModuleLists($module),
-                    'depends-on-plugins' => $moduleResolver->getDependedWordPressPlugins($module),
+                    'depends-on-plugins' => $moduleResolver->getDependentOnActiveWordPressPlugins($module),
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),

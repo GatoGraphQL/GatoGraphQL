@@ -37,7 +37,7 @@ interface ModuleResolverInterface
     /**
      * @return DependedWordPressPlugin[]
      */
-    public function getDependedWordPressPlugins(string $module): array;
+    public function getDependentOnActiveWordPressPlugins(string $module): array;
 
     /**
      * Indicates if a module has all requirements satisfied (such as version of WordPress) to be enabled
