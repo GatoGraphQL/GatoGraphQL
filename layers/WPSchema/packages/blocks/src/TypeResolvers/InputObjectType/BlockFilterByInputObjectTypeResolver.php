@@ -7,6 +7,7 @@ namespace PoPWPSchema\Blocks\TypeResolvers\InputObjectType;
 use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -86,6 +87,16 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
             'include' => $this->getIncludeFilterInput(),
             'exclude' => $this->getExcludeFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
+        };
+    }
+
+    public function getInputFieldTypeModifiers(string $inputFieldName): int
+    {
+        return match ($inputFieldName) {
+            'include',
+            'exclude'
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default => parent::getInputFieldTypeModifiers($inputFieldName)
         };
     }
 }
