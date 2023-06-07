@@ -8,7 +8,7 @@ const config = require( '@wordpress/scripts/config/webpack.config' );
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGatoGraphQLTestingSchemaNotServerSideRegisteredBlock';
+config.output.jsonpFunction = 'webpackJsonpGatoGraphQLTestingSchemaServerSideRegisteredBlock';
 // ------------------------------------------------------
 
 module.exports = config;
