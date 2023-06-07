@@ -569,6 +569,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
             ],
+            self::SCHEMA_BLOCKS => [
+                self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
+            ],
             self::SCHEMA_PAGES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
@@ -959,11 +962,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-        } elseif (
-            in_array($module, [
-                self::SCHEMA_SETTINGS,
-            ])
-        ) {
+        } elseif ($module === self::SCHEMA_SETTINGS) {
             $entriesTitle = \__('Settings entries', 'gato-graphql');
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gato-graphql');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'gato-graphql');
