@@ -796,22 +796,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
-            } elseif ($module === self::SCHEMA_BLOCKS) {
-                $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Use single type instead of union type?', 'gato-graphql'),
-                    Properties::DESCRIPTION => sprintf(
-                        \__('If type <code>%s</code> is composed of only one type (<code>%s</code>), then directly return this single type, instead of the union type?', 'gato-graphql'),
-                        $this->getBlockUnionTypeResolver()->getTypeName(),
-                        $this->getGeneralBlockObjectTypeResolver()->getTypeName(),
-                    ),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
             } elseif ($module === self::SCHEMA_USERS) {
                 $option = self::OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA;
                 $moduleSettings[] = [
@@ -925,6 +909,22 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::IS_MULTIPLE => true,
                 ];
             }
+        } elseif ($module === self::SCHEMA_BLOCKS) {
+            $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Use single type instead of union type?', 'gato-graphql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('If type <code>%s</code> is composed of only one type (<code>%s</code>), then directly return this single type, instead of the union type?', 'gato-graphql'),
+                    $this->getBlockUnionTypeResolver()->getTypeName(),
+                    $this->getGeneralBlockObjectTypeResolver()->getTypeName(),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
         } elseif ($module === self::SCHEMA_COMMENTS) {
             $option = self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT;
             $moduleSettings[] = [
