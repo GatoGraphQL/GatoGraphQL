@@ -153,6 +153,19 @@
       }
     }
   }
+
+  customPostWithNoContent: customPost(by: { id: 658 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      content
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
 }
 
 fragment BlockData on Block {
