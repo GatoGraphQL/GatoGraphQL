@@ -58,11 +58,6 @@ abstract class AbstractPHPUnit10ContainerConfigurationService extends AbstractCo
     protected function getSkip(): array
     {
         return [
-            // Skip tests
-            '*/tests/*',
-            '*/test/*',
-            '*/Test/*',
-            // Skip everything else
             '*/vendor/*',
             '*/node_modules/*',
             '*/migrate-*',
