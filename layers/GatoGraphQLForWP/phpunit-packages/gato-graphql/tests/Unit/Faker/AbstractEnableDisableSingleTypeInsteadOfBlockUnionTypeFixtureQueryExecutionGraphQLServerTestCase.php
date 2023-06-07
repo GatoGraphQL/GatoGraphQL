@@ -7,7 +7,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Unit\Faker;
 use PHPUnitForGatoGraphQL\WPFakerSchema\Unit\AbstractEnableDisableWPFakerFixtureQueryExecutionGraphQLServerTestCase;
 use PoP\Root\Module\ModuleInterface;
 
-abstract class AbstractEnableDisableSingleTypeInsteadOfCustomPostUnionTypeFixtureQueryExecutionGraphQLServerTestCase extends AbstractEnableDisableWPFakerFixtureQueryExecutionGraphQLServerTestCase
+abstract class AbstractEnableDisableSingleTypeInsteadOfBlockUnionTypeFixtureQueryExecutionGraphQLServerTestCase extends AbstractEnableDisableWPFakerFixtureQueryExecutionGraphQLServerTestCase
 {
     protected static function getFixtureFolder(): string
     {
@@ -22,8 +22,8 @@ abstract class AbstractEnableDisableSingleTypeInsteadOfCustomPostUnionTypeFixtur
         return [
             ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
-                \PoPCMSSchema\CustomPosts\Module::class => [
-                    \PoPCMSSchema\CustomPosts\Environment::USE_SINGLE_TYPE_INSTEAD_OF_CUSTOMPOST_UNION_TYPE => static::isEnabled(),
+                \PoPWPSchema\Blocks\Module::class => [
+                    \PoPWPSchema\Blocks\Environment::USE_SINGLE_TYPE_INSTEAD_OF_BLOCK_UNION_TYPE => static::isEnabled(),
                 ],
             ]
         ];
@@ -37,7 +37,7 @@ abstract class AbstractEnableDisableSingleTypeInsteadOfCustomPostUnionTypeFixtur
         return [
             ...parent::getGraphQLServerModuleClasses(),
             ...[
-                \PoPCMSSchema\PagesWP\Module::class,
+                \PoPWPSchema\Blocks\Module::class,
             ]
         ];
     }

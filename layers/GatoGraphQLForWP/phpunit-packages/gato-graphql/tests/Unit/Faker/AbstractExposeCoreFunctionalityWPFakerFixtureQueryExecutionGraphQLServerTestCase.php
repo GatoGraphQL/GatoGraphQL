@@ -12,7 +12,7 @@ abstract class AbstractExposeCoreFunctionalityWPFakerFixtureQueryExecutionGraphQ
 {
     use EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-expose-core-functionality';
     }

@@ -13,9 +13,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
         return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
     }
 
-    /**
-     * @dataProvider fixtureGraphQLServerExecutionProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('fixtureGraphQLServerExecutionProvider')]
     public function testFixtureGraphQLServerExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
     {
         $this->assertFixtureGraphQLQueryExecution($queryFile, $expectedResponseFile, $variablesFile, $operationName);
@@ -46,16 +44,16 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
          * Source folder for the .gql files and,
          * by default, their .json responses
          */
-        $fixtureFolder = $this->getFixtureFolder();
+        $fixtureFolder = static::getFixtureFolder();
         /**
          * Possibly define a different folder for the .json responses
          */
-        $responseFixtureFolder = $this->getResponseFixtureFolder();
+        $responseFixtureFolder = static::getResponseFixtureFolder();
 
         /**
          * Retrieve all non-disabled GraphQL files
          */
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
+        $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.gql', '*.graphql'],
             ['*.disabled.gql', '*.disabled.graphql']
@@ -85,13 +83,13 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
                 continue;
             }
 
-            $graphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName);
-            $graphQLVariablesFile = $this->getGraphQLVariablesFile($filePath, $fileName);
+            $graphQLResponseFile = static::getGraphQLResponseFile($filePath, $fileName);
+            $graphQLVariablesFile = static::getGraphQLVariablesFile($filePath, $fileName);
             if (!\file_exists($graphQLVariablesFile)) {
                 $graphQLVariablesFile = null;
             }
 
-            $mainFixtureOperationName = $this->getMainFixtureOperationName($dataName);
+            $mainFixtureOperationName = static::getMainFixtureOperationName($dataName);
 
             $providerItems[$dataName] = [
                 $graphQLQueryFile,
@@ -106,7 +104,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
              * again (maybe with this other .var.json), it should have these
              * other results"
              */
-            $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
+            $graphQLResponseForOperationFileNameFileInfos = static::findFilesInDirectory(
                 $responseFixtureFolder . ($graphQLFilesSubfolder !== '' ? \DIRECTORY_SEPARATOR . $graphQLFilesSubfolder : ''),
                 [$fileName . ':*.json'],
                 ['*.disabled.json', '*.var.json'],
@@ -115,7 +113,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
                 $graphQLResponseForOperationFile = $graphQLResponseForOperationFileInfo->getRealPath();
                 $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
                 $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
-                $graphQLVariablesForOperationFile = $this->getGraphQLVariablesFile($filePath, $fileName . ':' . $operationName);
+                $graphQLVariablesForOperationFile = static::getGraphQLVariablesFile($filePath, $fileName . ':' . $operationName);
                 if (!\file_exists($graphQLVariablesForOperationFile)) {
                     $graphQLVariablesForOperationFile = $graphQLVariablesFile;
                 }
@@ -135,7 +133,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
         return $providerItems;
     }
 
-    protected function getMainFixtureOperationName(string $dataName): ?string
+    protected static function getMainFixtureOperationName(string $dataName): ?string
     {
         return null;
     }

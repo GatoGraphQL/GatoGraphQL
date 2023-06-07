@@ -154,9 +154,7 @@ GRAPHQL;
         );
     }
 
-    /**
-     * @dataProvider wrongQueriesProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('wrongQueriesProvider')]
     public function testWrongQueries(string $query): void
     {
         $this->expectException(SyntaxErrorParserException::class);
@@ -168,7 +166,7 @@ GRAPHQL;
     /**
      * @return mixed[]
      */
-    public function wrongQueriesProvider(): array
+    public static function wrongQueriesProvider(): array
     {
         return [
             ['{ test (a: "asd", b: <basd>) { id }'],
@@ -520,9 +518,7 @@ GRAPHQL;
         );
     }
 
-    /**
-     * @dataProvider mutationProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('mutationProvider')]
     public function testMutations(
         string $query,
         Document $document,
@@ -546,7 +542,7 @@ GRAPHQL;
     /**
      * @return mixed[]
      */
-    public function mutationProvider(): array
+    public static function mutationProvider(): array
     {
         $variable = new Variable('variable', 'Int', false, false, false, false, false, [], new Location(1, 8));
         return [
@@ -648,9 +644,7 @@ GRAPHQL;
         ];
     }
 
-    /**
-     * @dataProvider queryWithVariablesProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('queryWithVariablesProvider')]
     public function testQueriesWithVariables(
         string $query,
         Document $document,
@@ -674,7 +668,7 @@ GRAPHQL;
     /**
      * @return mixed[]
      */
-    public function queryWithVariablesProvider(): array
+    public static function queryWithVariablesProvider(): array
     {
         $arrayVariable = new Variable('arrayVariable', 'String', false, true, false, false, false, [], new Location(2, 9));
         $arrayElemRequiredVariable = new Variable('arrayElemRequiredVariable', 'String', false, true, true, false, false, [], new Location(3, 9));
@@ -751,9 +745,7 @@ GRAPHQL;
         ];
     }
 
-    /**
-     * @dataProvider queryProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('queryProvider')]
     public function testQueries(
         string $query,
         Document $document,
@@ -779,7 +771,7 @@ GRAPHQL;
     /**
      * @return mixed[]
      */
-    public function queryProvider(): array
+    public static function queryProvider(): array
     {
         $filter = new stdClass();
         $filter->title = new Literal('unrequested', new Location(1, 26));
@@ -1217,9 +1209,7 @@ GRAPHQL;
         ];
     }
 
-    /**
-     * @dataProvider subscriptionProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('subscriptionProvider')]
     public function testSubscriptions(
         string $query,
         Document $document,
@@ -1243,7 +1233,7 @@ GRAPHQL;
     /**
      * @return mixed[]
      */
-    public function subscriptionProvider(): array
+    public static function subscriptionProvider(): array
     {
         return [
             [
@@ -1268,9 +1258,7 @@ GRAPHQL;
         ];
     }
 
-    /**
-     * @dataProvider queryWithDirectiveProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('queryWithDirectiveProvider')]
     public function testDirectives(
         string $query,
         Document $document,
@@ -1294,7 +1282,7 @@ GRAPHQL;
     /**
      * @return mixed[]
      */
-    public function queryWithDirectiveProvider(): array
+    public static function queryWithDirectiveProvider(): array
     {
         $formatVariable = new Variable('format', 'String', true, false, false, false, false, [], new Location(1, 24));
         $formatVariable2 = new Variable('format', 'String', true, false, false, false, false, [], new Location(1, 24));
@@ -1718,10 +1706,9 @@ GRAPHQL;
     }
 
     /**
-     * @dataProvider astNodeAncestorProvider
-     *
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('astNodeAncestorProvider')]
     public function testASTNodeAncestors(
         Document $document,
         SplObjectStorage $astNodeAncestors,
@@ -1735,7 +1722,7 @@ GRAPHQL;
     /**
      * @return mixed[]
      */
-    public function astNodeAncestorProvider(): array
+    public static function astNodeAncestorProvider(): array
     {
         $astNodeAncestors = [];
 

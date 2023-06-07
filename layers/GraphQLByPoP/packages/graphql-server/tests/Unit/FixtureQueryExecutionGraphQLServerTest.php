@@ -11,7 +11,7 @@ class FixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecuti
     /**
      * Directory under the fixture files are placed
      */
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture';
     }

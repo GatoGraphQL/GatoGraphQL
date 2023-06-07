@@ -10,12 +10,12 @@ class CustomEndpointOptionsOnCustomEndpointCPTBlockAttributesFixtureEndpointWebs
 {
     public const WEBSITE_CUSTOM_ENDPOINT_ID = 196;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/website/';
     }
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-custom-endpoint-options-on-custom-endpoint-in-cpt';
     }
@@ -47,7 +47,7 @@ class CustomEndpointOptionsOnCustomEndpointCPTBlockAttributesFixtureEndpointWebs
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
         $providerItems['query'][0] = 'text/html';

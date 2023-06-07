@@ -28,13 +28,13 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
      * - ${fileName}-access-granted.json: when access to the "unrestricted" field is granted
      * - ${fileName}-access-forbidden.json: when access to the "unrestricted" field is forbidden
      */
-    final protected function provideEndpointEntries(): array
+    final public static function provideEndpointEntries(): array
     {
         $accessGrantedEndpoint = 'wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=pluginOwnUse';
         $accessForbiddenEndpoint = 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
 
-        $fixtureFolder = $this->getFixtureFolder();
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
+        $fixtureFolder = static::getFixtureFolder();
+        $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],
             ['*.disabled.gql']
@@ -51,11 +51,11 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
             $filePath = $graphQLQueryFileInfo->getPath();
             $grantedAccessGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '-access-granted.json';
             if (!\file_exists($grantedAccessGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($grantedAccessGraphQLResponseFile);
+                static::throwFileNotExistsException($grantedAccessGraphQLResponseFile);
             }
             $forbiddenAccessGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '-access-forbidden.json';
             if (!\file_exists($forbiddenAccessGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($forbiddenAccessGraphQLResponseFile);
+                static::throwFileNotExistsException($forbiddenAccessGraphQLResponseFile);
             }
 
             $dataName = $fileName;

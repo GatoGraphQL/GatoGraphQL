@@ -8,11 +8,11 @@ trait FixtureQueryExecutionGraphQLServerTestCaseTrait
 {
     use FixtureTestCaseTrait;
 
-    protected function getGraphQLResponseFile(string $filePath, string $fileName): string
+    protected static function getGraphQLResponseFile(string $filePath, string $fileName): string
     {
         $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
-        $fixtureFolder = $this->getFixtureFolder();
-        $responseFixtureFolder = $this->getResponseFixtureFolder();
+        $fixtureFolder = static::getFixtureFolder();
+        $responseFixtureFolder = static::getResponseFixtureFolder();
         if ($responseFixtureFolder !== $fixtureFolder) {
             $graphQLResponseFile = str_replace(
                 $fixtureFolder,
@@ -23,11 +23,11 @@ trait FixtureQueryExecutionGraphQLServerTestCaseTrait
         return $graphQLResponseFile;
     }
 
-    protected function getGraphQLVariablesFile(string $filePath, string $fileName): string
+    protected static function getGraphQLVariablesFile(string $filePath, string $fileName): string
     {
         $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
-        $fixtureFolder = $this->getFixtureFolder();
-        $responseFixtureFolder = $this->getResponseFixtureFolder();
+        $fixtureFolder = static::getFixtureFolder();
+        $responseFixtureFolder = static::getResponseFixtureFolder();
         if ($responseFixtureFolder !== $fixtureFolder) {
             $graphQLVariablesFile = str_replace(
                 $fixtureFolder,

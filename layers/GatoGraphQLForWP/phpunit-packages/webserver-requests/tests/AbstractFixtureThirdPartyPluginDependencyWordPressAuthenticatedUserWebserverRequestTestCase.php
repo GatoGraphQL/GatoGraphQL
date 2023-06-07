@@ -26,8 +26,8 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
     protected function getPluginNameEntries(): array
     {
         $pluginEntries = [];
-        $fixtureFolder = $this->getFixtureFolder();
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
+        $fixtureFolder = static::getFixtureFolder();
+        $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],
             ['*.disabled.gql']
@@ -44,11 +44,11 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             $filePath = $graphQLQueryFileInfo->getPath();
             $pluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':enabled.json';
             if (!\file_exists($pluginEnabledGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($pluginEnabledGraphQLResponseFile);
+                static::throwFileNotExistsException($pluginEnabledGraphQLResponseFile);
             }
             $pluginDisabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':disabled.json';
             if (!\file_exists($pluginDisabledGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($pluginDisabledGraphQLResponseFile);
+                static::throwFileNotExistsException($pluginDisabledGraphQLResponseFile);
             }
             $pluginOnlyOneEnabledGraphQLResponse = null;
             $pluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';

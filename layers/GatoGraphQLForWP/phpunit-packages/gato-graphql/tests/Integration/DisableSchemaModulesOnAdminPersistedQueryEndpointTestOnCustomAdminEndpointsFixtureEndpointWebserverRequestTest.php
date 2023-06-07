@@ -13,7 +13,7 @@ class DisableSchemaModulesOnAdminPersistedQueryEndpointTestOnCustomAdminEndpoint
         return self::USER_ACCOUNT_PERSISTED_QUERY_ID;
     }
 
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-has-change';
     }

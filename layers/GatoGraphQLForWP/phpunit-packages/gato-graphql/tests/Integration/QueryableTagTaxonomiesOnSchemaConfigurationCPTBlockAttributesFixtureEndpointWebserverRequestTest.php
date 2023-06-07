@@ -14,7 +14,7 @@ class QueryableTagTaxonomiesOnSchemaConfigurationCPTBlockAttributesFixtureEndpoi
 
     public const MOBILE_APP_SCHEMA_CONFIGURATION_ID = 193;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         /**
          * This endpoint:

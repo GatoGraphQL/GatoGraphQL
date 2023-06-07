@@ -12,9 +12,9 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
      * Execute a GraphQL query against each of the endpoints
      * @return array<string,array<mixed>>
      */
-    protected function provideEndpointEntries(): array
+    public static function provideEndpointEntries(): array
     {
-        $query = $this->getGraphQLQuery();
+        $query = static::getGraphQLQuery();
         $expectedResponseBodyWithoutLimit = $this->getGraphQLExpectedResponseWithoutLimit();
         $expectedResponseBodyWithLimit = $this->getGraphQLExpectedResponseWithLimit();
         $expectedResponseBodyEmptyQuery = $this->getGraphQLExpectedResponseEmptyQuery();
@@ -53,7 +53,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
         return $entries;
     }
 
-    protected function getGraphQLQuery(): string
+    protected static function getGraphQLQuery(): string
     {
         return <<<GRAPHQL
             query MyQuery(\$limit: Int = 3) {

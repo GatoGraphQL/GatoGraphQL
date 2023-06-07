@@ -15,10 +15,10 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     public const RESPONSE_COMPARISON_REGEX = 2;
 
     /**
-     * @dataProvider provideEndpointEntries
      * @param array<string,mixed> $params
      * @param array<string,mixed> $variables
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideEndpointEntries')]
     public function testEndpoints(
         string $expectedContentType,
         ?string $expectedResponseBody,
@@ -29,7 +29,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         ?string $operationName = null,
         ?string $method = null,
     ): void {
-        $method ??= $this->getMethod();
+        $method ??= static::getMethod();
         if (!in_array($method, ["POST", "GET"])) {
             throw new RuntimeException(sprintf(
                 'Unsupported method \'%s\' for testing a GraphQL endpoint',
@@ -192,9 +192,9 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     /**
      * @return array<string,array<mixed>>
      */
-    abstract protected function provideEndpointEntries(): array;
+    abstract public static function provideEndpointEntries(): array;
 
-    protected function getMethod(): string
+    protected static function getMethod(): string
     {
         return 'POST';
     }

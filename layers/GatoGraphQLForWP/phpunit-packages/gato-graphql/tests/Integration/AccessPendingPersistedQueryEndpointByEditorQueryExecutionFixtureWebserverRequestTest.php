@@ -8,7 +8,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 
 class AccessPendingPersistedQueryEndpointByEditorQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPendingPersistedQueryEndpointQueryExecutionFixtureWebserverRequestTestCase
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-pending-persisted-query-endpoint-by-editor';
     }
@@ -35,7 +35,7 @@ class AccessPendingPersistedQueryEndpointByEditorQueryExecutionFixtureWebserverR
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
         $providerItems['pending-persisted-query-endpoint-query'][0] = 'text/html';

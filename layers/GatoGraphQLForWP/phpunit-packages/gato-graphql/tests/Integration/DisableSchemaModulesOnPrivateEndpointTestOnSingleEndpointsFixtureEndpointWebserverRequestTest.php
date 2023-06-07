@@ -6,12 +6,12 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class DisableSchemaModulesOnPrivateEndpointTestOnSingleEndpointsFixtureEndpointWebserverRequestTest extends AbstractDisableSchemaModulesOnPrivateEndpointsFixtureEndpointWebserverRequestTestCase
 {
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/';
     }
 
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-has-change';
     }

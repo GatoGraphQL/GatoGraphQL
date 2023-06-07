@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 trait AllowedTaxonomyMetaFixtureEndpointWebserverRequestTestTrait
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-allowed-taxonomy-meta';
     }

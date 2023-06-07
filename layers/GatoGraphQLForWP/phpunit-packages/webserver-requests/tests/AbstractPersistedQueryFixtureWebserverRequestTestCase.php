@@ -25,10 +25,10 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
      *
      * @return array<string,array<string|array<string,mixed>>>
      */
-    final protected function provideEndpointEntries(): array
+    final public static function provideEndpointEntries(): array
     {
-        $fixtureFolder = $this->getFixtureFolder();
-        $bodyResponseFileNameFileInfos = $this->findFilesInDirectory(
+        $fixtureFolder = static::getFixtureFolder();
+        $bodyResponseFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.json'],
             ['*.disabled.json', '*.var.json'],
@@ -41,26 +41,26 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
             $providerItems[$dataName] = [
                 'application/json',
                 $bodyResponseFileInfo->getContents(),
-                $this->getEndpoint($dataName),
-                $this->getParams($dataName),
-                $this->getQuery($dataName),
-                $this->getVariables($dataName),
-                $this->getOperationName($dataName),
-                $this->getEntryMethod($dataName),
+                static::getEndpoint($dataName),
+                static::getParams($dataName),
+                static::getQuery($dataName),
+                static::getVariables($dataName),
+                static::getOperationName($dataName),
+                static::getEntryMethod($dataName),
             ];
         }
         return $providerItems;
     }
 
-    protected function getEntryMethod(string $dataName): string
+    protected static function getEntryMethod(string $dataName): string
     {
-        return $this->getMethod();
+        return static::getMethod();
     }
 
     /**
      * @throws RuntimeException If the endpoint is not defined
      */
-    protected function getEndpoint(string $dataName): string
+    protected static function getEndpoint(string $dataName): string
     {
         throw new RuntimeException(
             sprintf(
@@ -73,12 +73,12 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
     /**
      * @return array<string,mixed>
      */
-    protected function getParams(string $dataName): array
+    protected static function getParams(string $dataName): array
     {
         return [];
     }
 
-    protected function getQuery(string $dataName): string
+    protected static function getQuery(string $dataName): string
     {
         return '';
     }
@@ -86,12 +86,12 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
     /**
      * @return array<string,mixed>
      */
-    protected function getVariables(string $dataName): array
+    protected static function getVariables(string $dataName): array
     {
         return [];
     }
 
-    protected function getOperationName(string $dataName): string
+    protected static function getOperationName(string $dataName): string
     {
         return '';
     }

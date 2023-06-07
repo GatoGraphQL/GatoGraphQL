@@ -36,9 +36,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         return new ExecutableDocument($document, $context);
     }
 
-    /**
-     * @dataProvider getExistingTypeOrInterfaceQueries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getExistingTypeOrInterfaceQueries')]
     public function testExistingTypeFragmentSpread(string $query): void
     {
         $document = $this->getParser()->parse($query);
@@ -51,7 +49,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @return mixed[]
      */
-    public function getExistingTypeOrInterfaceQueries(): array
+    public static function getExistingTypeOrInterfaceQueries(): array
     {
         return [
             'object-type-in-fragment' => [
@@ -149,9 +147,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         ];
     }
 
-    /**
-     * @dataProvider getNonExistingTypeOrInterfaceQueries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getNonExistingTypeOrInterfaceQueries')]
     public function testNonExistingTypeFragmentSpread(string $query): void
     {
         $this->expectException(InvalidRequestException::class);
@@ -166,7 +162,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @return mixed[]
      */
-    public function getNonExistingTypeOrInterfaceQueries(): array
+    public static function getNonExistingTypeOrInterfaceQueries(): array
     {
         return [
             'fragment' => [
@@ -234,9 +230,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         ];
     }
 
-    /**
-     * @dataProvider getNonCompositeTypeQueries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getNonCompositeTypeQueries')]
     public function testNonCompositeTypeFragmentSpread(string $query): void
     {
         $types = [
@@ -255,7 +249,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @return mixed[]
      */
-    public function getNonCompositeTypeQueries(): array
+    public static function getNonCompositeTypeQueries(): array
     {
         return [
             'scalar' => [
@@ -295,9 +289,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         ];
     }
 
-    /**
-     * @dataProvider getVariableIsInputTypeQueries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getVariableIsInputTypeQueries')]
     public function testVariableIsInputType(string $query): void
     {
         $document = $this->getParser()->parse($query);
@@ -310,7 +302,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @return mixed[]
      */
-    public function getVariableIsInputTypeQueries(): array
+    public static function getVariableIsInputTypeQueries(): array
     {
         return [
             'scalar' => [
@@ -337,9 +329,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         ];
     }
 
-    /**
-     * @dataProvider getVariableIsNotInputTypeQueries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getVariableIsNotInputTypeQueries')]
     public function testVariableIsNotInputType(string $query, string $variableType): void
     {
         $this->expectException(InvalidRequestException::class);
@@ -354,7 +344,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @return mixed[]
      */
-    public function getVariableIsNotInputTypeQueries(): array
+    public static function getVariableIsNotInputTypeQueries(): array
     {
         return [
             'object' => [

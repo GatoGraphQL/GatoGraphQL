@@ -14,7 +14,7 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
      *
      * @return array<string,string[]>
      */
-    protected function providePageEntries(): array
+    protected static function providePageEntries(): array
     {
         $pluginMenuName = $this->getPluginMenuName();
 

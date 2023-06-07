@@ -10,12 +10,12 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  */
 trait AccessPasswordProtectedCustomEndpointQueryExecutionFixtureWebserverRequestTestTrait
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-password-protected-custom-endpoints';
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return sprintf(
             'graphql/password-protected-custom-endpoint/%s',

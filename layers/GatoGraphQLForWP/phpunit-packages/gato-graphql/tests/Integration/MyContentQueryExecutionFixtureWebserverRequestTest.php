@@ -11,12 +11,12 @@ class MyContentQueryExecutionFixtureWebserverRequestTest extends AbstractFixture
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-my-content';
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/';
     }

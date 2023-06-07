@@ -23,9 +23,8 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTestCase extends Ab
      *
      * 1. The client under the new path returns a 200
      * 2. The client under the old path returns a 404
-     *
-     * @dataProvider providePathEntries
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providePathEntries')]
     public function testPathsUpdated(
         string $dataItem,
     ): void {
@@ -56,7 +55,7 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTestCase extends Ab
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
-    abstract protected function providePathEntries(): array;
+    abstract protected static function providePathEntries(): array;
 
     protected function getPluginSettingsNewValue(): mixed
     {

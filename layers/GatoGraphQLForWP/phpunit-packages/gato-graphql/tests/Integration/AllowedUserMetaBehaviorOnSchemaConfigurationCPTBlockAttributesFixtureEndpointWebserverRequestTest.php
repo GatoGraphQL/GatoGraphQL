@@ -9,7 +9,7 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class AllowedUserMetaBehaviorOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AllowedUserMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-allowed-user-meta-behavior';
     }

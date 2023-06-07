@@ -76,7 +76,7 @@ trait AccessPasswordProtectedPostWebserverRequestTestCaseTrait
         return true;
     }
 
-    protected function getMethod(): string
+    protected static function getMethod(): string
     {
         return 'POST';
     }

@@ -17,10 +17,10 @@ class WordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWeb
     /**
      * @return array<string,array<mixed>>
      */
-    protected function provideEndpointEntries(): array
+    public static function provideEndpointEntries(): array
     {
-        $query = $this->getGraphQLQuery();
-        $expectedResponseBody = $this->getGraphQLExpectedResponse();
+        $query = static::getGraphQLQuery();
+        $expectedResponseBody = static::getGraphQLExpectedResponse();
         $entries = [];
         foreach (WordPressAuthenticatedUserEndpoints::ENDPOINTS as $dataName => $endpoint) {
             $entries[$dataName] = [
@@ -34,7 +34,7 @@ class WordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWeb
         return $entries;
     }
 
-    protected function getGraphQLQuery(): string
+    protected static function getGraphQLQuery(): string
     {
         return <<<GRAPHQL
             {
@@ -43,7 +43,7 @@ class WordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWeb
         GRAPHQL;
     }
 
-    protected function getGraphQLExpectedResponse(): string
+    protected static function getGraphQLExpectedResponse(): string
     {
         return <<<JSON
             {

@@ -10,12 +10,12 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  */
 trait AccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTestTrait
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-private-persisted-queries';
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return sprintf(
             'graphql-query/comments-from-this-month/%s',

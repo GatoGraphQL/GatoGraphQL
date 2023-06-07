@@ -34,7 +34,7 @@ trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function reorderProviderEndpointEntriesToExecuteOriginalTestFirst(array $providerItems): array
+    protected static function reorderProviderEndpointEntriesToExecuteOriginalTestFirst(array $providerItems): array
     {
         $originalTestProviderItems = array_filter(
             $providerItems,

@@ -15,7 +15,7 @@ use PoP\Root\Module\ModuleInterface;
  */
 class InputObjectInnerValidationsWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-input-object-inner-validations';
     }

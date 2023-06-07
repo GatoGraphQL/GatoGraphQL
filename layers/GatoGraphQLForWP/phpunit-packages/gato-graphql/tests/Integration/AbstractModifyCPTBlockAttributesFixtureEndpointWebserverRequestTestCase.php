@@ -34,8 +34,8 @@ abstract class AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTe
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
-        return $this->reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
+        return static::reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
     }
 }

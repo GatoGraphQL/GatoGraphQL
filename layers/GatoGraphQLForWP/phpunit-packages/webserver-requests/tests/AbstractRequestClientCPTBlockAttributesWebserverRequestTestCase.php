@@ -36,9 +36,8 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
     /**
      * The client will always return a 200 status, whether
      * enabled or disabled. The difference is the custom header.
-     *
-     * @dataProvider provideClientEnabledDisabledEntries
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideClientEnabledDisabledEntries')]
     public function testClientEnabledDisabled(bool $enabled): void
     {
         $clientURL = $this->getClientURL();

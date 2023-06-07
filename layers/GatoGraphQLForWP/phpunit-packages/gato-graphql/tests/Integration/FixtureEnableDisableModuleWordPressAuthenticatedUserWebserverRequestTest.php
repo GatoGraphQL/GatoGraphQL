@@ -14,12 +14,12 @@ class FixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest e
     /**
      * Directory under the fixture files are placed
      */
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-enable-disable-modules';
     }
 
-    protected function getModuleEndpoint(string $fileName): ?string
+    protected static function getModuleEndpoint(string $fileName): ?string
     {
         return match ($fileName) {
             'schema-configuration' => 'graphql/customers/penguin-books/',

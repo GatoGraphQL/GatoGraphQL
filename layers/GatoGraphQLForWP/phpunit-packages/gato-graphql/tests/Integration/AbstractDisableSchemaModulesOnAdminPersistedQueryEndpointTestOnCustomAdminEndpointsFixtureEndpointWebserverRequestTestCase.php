@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 
 abstract class AbstractDisableSchemaModulesOnAdminPersistedQueryEndpointTestOnCustomAdminEndpointsFixtureEndpointWebserverRequestTestCase extends AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsFixtureEndpointWebserverRequestTestCase
 {
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return sprintf(
             '%s&persisted_query_id=%s',
@@ -19,7 +19,7 @@ abstract class AbstractDisableSchemaModulesOnAdminPersistedQueryEndpointTestOnCu
 
     abstract protected function getPersistedQueryID(): int;
 
-    protected function getAdminEndpointGroup(): string
+    protected static function getAdminEndpointGroup(): string
     {
         return AdminGraphQLEndpointGroups::PERSISTED_QUERY;
     }

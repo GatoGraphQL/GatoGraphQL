@@ -10,7 +10,7 @@ abstract class AbstractDefaultSchemaConfigurationForEndpointQueryExecutionModify
 {
     public const SCHEMA_CONFIGURATION_WEBSITE_ID = 191;
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-default-schema-configuration';
     }

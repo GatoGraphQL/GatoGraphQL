@@ -9,7 +9,7 @@ abstract class AbstractSingleEndpointQueryExecutionFixtureWebserverRequestTestCa
     /**
      * Single endpoint, with non-logged-in user
      */
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql';
     }

@@ -13,7 +13,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  */
 class CustomEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/website/';
     }

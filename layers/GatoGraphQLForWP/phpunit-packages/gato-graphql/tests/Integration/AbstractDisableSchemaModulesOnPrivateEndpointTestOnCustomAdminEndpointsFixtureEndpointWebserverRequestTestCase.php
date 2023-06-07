@@ -6,13 +6,13 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 abstract class AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsFixtureEndpointWebserverRequestTestCase extends AbstractDisableSchemaModulesOnPrivateEndpointsFixtureEndpointWebserverRequestTestCase
 {
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return sprintf(
             'wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=%s',
-            $this->getAdminEndpointGroup()
+            static::getAdminEndpointGroup()
         );
     }
 
-    abstract protected function getAdminEndpointGroup(): string;
+    abstract protected static function getAdminEndpointGroup(): string;
 }

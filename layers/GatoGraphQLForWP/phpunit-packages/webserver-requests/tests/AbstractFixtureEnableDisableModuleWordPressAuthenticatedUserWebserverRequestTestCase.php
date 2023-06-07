@@ -28,9 +28,9 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
     protected function getModuleNameEntries(): array
     {
         $moduleEntries = [];
-        $fixtureFolder = $this->getFixtureFolder();
+        $fixtureFolder = static::getFixtureFolder();
 
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
+        $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],
             ['*.disabled.gql']
@@ -45,13 +45,13 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
              */
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
-            $moduleEnabledGraphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName . ':enabled');
+            $moduleEnabledGraphQLResponseFile = static::getGraphQLResponseFile($filePath, $fileName . ':enabled');
             if (!\file_exists($moduleEnabledGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($moduleEnabledGraphQLResponseFile);
+                static::throwFileNotExistsException($moduleEnabledGraphQLResponseFile);
             }
-            $moduleDisabledGraphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName . ':disabled');
+            $moduleDisabledGraphQLResponseFile = static::getGraphQLResponseFile($filePath, $fileName . ':disabled');
             if (!\file_exists($moduleDisabledGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($moduleDisabledGraphQLResponseFile);
+                static::throwFileNotExistsException($moduleDisabledGraphQLResponseFile);
             }
 
             // The module name is created by the folder (module vendor) + fileName (module name)
@@ -76,9 +76,9 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
         return $moduleEntries;
     }
 
-    protected function getModuleEndpoint(string $fileName): ?string
+    protected static function getModuleEndpoint(string $fileName): ?string
     {
-        return $this->getEndpoint();
+        return static::getEndpoint();
     }
 
     /**

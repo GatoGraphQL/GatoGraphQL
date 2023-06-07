@@ -45,9 +45,9 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
     /**
      * @return array<string,array<mixed>>
      */
-    protected function provideEndpointEntries(): array
+    public static function provideEndpointEntries(): array
     {
-        $endpoint = $this->getEndpoint();
+        $endpoint = static::getEndpoint();
         $providerEntries = [];
         foreach ($this->getModuleNameEntries() as $moduleName => $moduleEntry) {
             $providerEntries[$moduleName . ':enabled'] = [
@@ -68,7 +68,7 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
         return $providerEntries;
     }
 
-    protected function getEndpoint(): ?string
+    protected static function getEndpoint(): ?string
     {
         if ($this->useAdminEndpoint()) {
             return $this->getAdminEndpoint();
