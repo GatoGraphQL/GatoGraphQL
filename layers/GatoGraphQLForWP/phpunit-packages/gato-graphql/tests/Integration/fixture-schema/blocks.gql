@@ -167,6 +167,20 @@
     }
   }
 
+  serverSideRegisteredBlocks: customPost(by: { id: 680 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      contentSource
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+}
+
   notServerSideRegisteredBlocks: customPost(by: { id: 660 }) {
     __typename
     ...on GenericCustomPost {
