@@ -103,6 +103,7 @@ class ModuleListTable extends AbstractItemListTable
                     'description' => $moduleResolver->getDescription($module),
                     'depends-on-modules' => $moduleResolver->getDependedModuleLists($module),
                     'depends-on-active-plugins' => $moduleResolver->getDependentOnActiveWordPressPlugins($module),
+                    'depends-on-inactive-plugins' => $moduleResolver->getDependentOnInactiveWordPressPlugins($module),
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
@@ -256,13 +257,16 @@ class ModuleListTable extends AbstractItemListTable
                 /** @var array<array<string>> */
                 $dependedModuleLists = $item['depends-on-modules'];
                 /** @var DependedWordPressPlugin[] */
-                $dependedPlugins = $item['depends-on-active-plugins'];
-                if (!$dependedModuleLists && !$dependedPlugins) {
+                $dependsOnActivePlugins = $item['depends-on-active-plugins'];
+                /** @var DependedWordPressPlugin[] */
+                $dependsOnInactivePlugins = $item['depends-on-inactive-plugins'];
+                if (!$dependedModuleLists && !$dependsOnActivePlugins && !$dependsOnInactivePlugins) {
                     return \__('-', 'gato-graphql');
                 }
 
                 $moduleItems = [];
-                $pluginItems = [];
+                $activePluginItems = [];
+                $inactivePluginItems = [];
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
 
                 /**
@@ -317,7 +321,7 @@ class ModuleListTable extends AbstractItemListTable
                  * List of WordPress plugin slugs that must be active
                  * for the module to be enabled
                  */
-                foreach ($dependedPlugins as $dependedPlugin) {
+                foreach ($dependsOnActivePlugins as $dependedPlugin) {
                     $dependedPluginHTML = $dependedPlugin->url === ''
                         ? $dependedPlugin->name
                         : sprintf(
@@ -334,14 +338,42 @@ class ModuleListTable extends AbstractItemListTable
                             $dependedPlugin->versionConstraint
                         );
                     }
-                    $pluginItems[] = sprintf(
+                    $activePluginItems[] = sprintf(
                         '%1$s %2$s',
-                        '◇',
+                        '☑︎',
                         $dependedPluginHTML
                     );
                 }
 
-                return implode('<br/>', array_merge($moduleItems, $pluginItems));
+                /**
+                 * List of WordPress plugin slugs that must be inactive
+                 * for the module to be enabled
+                 */
+                foreach ($dependsOnInactivePlugins as $dependedPlugin) {
+                    $dependedPluginHTML = $dependedPlugin->url === ''
+                        ? $dependedPlugin->name
+                        : sprintf(
+                            '<a href="%s" target="%s">%s%s</a>',
+                            $dependedPlugin->url,
+                            '_blank',
+                            $dependedPlugin->name,
+                            HTMLCodes::OPEN_IN_NEW_WINDOW
+                        );
+                    if ($dependedPlugin->versionConstraint !== null) {
+                        $dependedPluginHTML = sprintf(
+                            \__('%s (version constraint: <code>%s</code>)', 'gato-graphql'),
+                            $dependedPluginHTML,
+                            $dependedPlugin->versionConstraint
+                        );
+                    }
+                    $inactivePluginItems[] = sprintf(
+                        '%1$s %2$s',
+                        '☒',
+                        $dependedPluginHTML
+                    );
+                }
+
+                return implode('<br/>', array_merge($moduleItems, $activePluginItems, $inactivePluginItems));
 
             case 'enabled':
                 return \sprintf(
@@ -510,7 +542,7 @@ class ModuleListTable extends AbstractItemListTable
                 ],
             [
                 'desc' => \__('Description', 'gato-graphql'),
-                'depends-on' => \__('Depends on (▹ module, ◇ plugin)', 'gato-graphql'),
+                'depends-on' => \__('Depends on (▹ module, ☑︎ active plugin, ☒ inactive plugin)', 'gato-graphql'),
             ]
         );
     }
