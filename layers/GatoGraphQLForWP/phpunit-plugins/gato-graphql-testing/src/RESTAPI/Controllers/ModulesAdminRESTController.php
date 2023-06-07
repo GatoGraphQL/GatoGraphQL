@@ -16,8 +16,8 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\RESTResponse;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
-
 use WP_REST_Server;
+
 use function rest_ensure_response;
 use function rest_url;
 

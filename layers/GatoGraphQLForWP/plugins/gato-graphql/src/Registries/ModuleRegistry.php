@@ -252,7 +252,7 @@ class ModuleRegistry implements ModuleRegistryInterface
                 return false;
             }
         }
-        
+
         /**
          * Check that all required plugins are inactive
          */
