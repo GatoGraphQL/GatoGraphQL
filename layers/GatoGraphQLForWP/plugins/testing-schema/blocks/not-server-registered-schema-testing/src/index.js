@@ -52,6 +52,13 @@ registerBlockType( 'gato-graphql/not-server-registered-schema-testing', {
 			type: 'boolean',
 			default: true,
 		},
+		someOtherAttribute: {
+			type: 'string',
+		},
+		yetAnotherAttribute: {
+			type: 'array',
+			default: [],
+		},
 	},
 
 	/**
