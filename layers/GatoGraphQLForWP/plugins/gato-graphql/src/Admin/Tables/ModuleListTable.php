@@ -322,15 +322,7 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependsOnActivePlugins as $dependedPlugin) {
-                    $dependedPluginHTML = $dependedPlugin->url === ''
-                        ? $dependedPlugin->name
-                        : sprintf(
-                            '<a href="%s" target="%s">%s%s</a>',
-                            $dependedPlugin->url,
-                            '_blank',
-                            $dependedPlugin->name,
-                            HTMLCodes::OPEN_IN_NEW_WINDOW
-                        );
+                    $dependedPluginHTML = $this->getDependedPluginHTML($dependedPlugin);
                     if ($dependedPlugin->versionConstraint !== null) {
                         $dependedPluginHTML = sprintf(
                             \__('%s (version constraint: <code>%s</code>)', 'gato-graphql'),
@@ -350,15 +342,7 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependsOnInactivePlugins as $dependedPlugin) {
-                    $dependedPluginHTML = $dependedPlugin->url === ''
-                        ? $dependedPlugin->name
-                        : sprintf(
-                            '<a href="%s" target="%s">%s%s</a>',
-                            $dependedPlugin->url,
-                            '_blank',
-                            $dependedPlugin->name,
-                            HTMLCodes::OPEN_IN_NEW_WINDOW
-                        );
+                    $dependedPluginHTML = $this->getDependedPluginHTML($dependedPlugin);
                     if ($dependedPlugin->versionConstraint !== null) {
                         $dependedPluginHTML = sprintf(
                             \__('%s (version constraint: <code>%s</code>)', 'gato-graphql'),
@@ -383,6 +367,19 @@ class ModuleListTable extends AbstractItemListTable
                 );
         }
         return '';
+    }
+
+    protected function getDependedPluginHTML(DependedWordPressPlugin $dependedPlugin): string
+    {
+        return $dependedPlugin->url === ''
+            ? $dependedPlugin->name
+            : sprintf(
+                '<a href="%s" target="%s">%s%s</a>',
+                $dependedPlugin->url,
+                '_blank',
+                $dependedPlugin->name,
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            );
     }
 
     /**
