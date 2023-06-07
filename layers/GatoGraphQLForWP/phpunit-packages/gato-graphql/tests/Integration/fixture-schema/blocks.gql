@@ -115,7 +115,7 @@
     }
   }
 
-  customPostWithBlocks: customPost(by: { id: 654 }) {
+  customPost: customPost(by: { id: 654 }) {
     __typename
     ...on GenericCustomPost {
       id
@@ -128,7 +128,7 @@
     }
   }
 
-  customPostWithNoBlocks: customPost(by: { id: 619 }) {
+  contentWithoutBlocks: customPost(by: { id: 619 }) {
     __typename
     ...on GenericCustomPost {
       id
@@ -141,7 +141,7 @@
     }
   }
 
-  customPostWithNonExistingBlocks: customPost(by: { id: 656 }) {
+  nonExistingBlocks: customPost(by: { id: 656 }) {
     __typename
     ...on GenericCustomPost {
       id
@@ -154,7 +154,7 @@
     }
   }
 
-  customPostWithNoContent: customPost(by: { id: 658 }) {
+  noContent: customPost(by: { id: 658 }) {
     __typename
     ...on GenericCustomPost {
       id
