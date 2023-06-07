@@ -11,7 +11,7 @@ const EditBlock = ( props ) => {
 				<strong>{ __('This is a block for testing the schema', 'gato-graphql-testing-schema') }</strong>
 			</p>
 			<p>
-			{ __('In particular, to test field `CustomPost.blocks`, to see that blocks not registered on the server-side cannot be parsed.', 'gato-graphql-testing-schema') }
+			{ __('In particular, to test field `CustomPost.blocks`, to see that blocks not registered on the server-side display a warning when parsed.', 'gato-graphql-testing-schema') }
 			</p>
 		</div>
 	)

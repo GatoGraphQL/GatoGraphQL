@@ -27,14 +27,14 @@ registerBlockType( 'gato-graphql/not-server-registered-schema-testing', {
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Block for testing the schema', 'gato-graphql-testing-schema' ),
+	title: __( 'Gato GraphQL: Block for testing the schema', 'gato-graphql-testing-schema' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Test field `CustomPost.blocks`, to see that blocks not registered on the server-side cannot be parsed',
+		'Test field `CustomPost.blocks`, to see that blocks not registered on the server-side display a warning when parsed',
 		'gato-graphql-testing-schema'
 	),
 

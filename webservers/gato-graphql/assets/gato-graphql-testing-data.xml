@@ -1234,7 +1234,7 @@ Dolorum quo neque.]]></excerpt:encoded>
 <!-- wp:paragraph -->
 <p>And back to some text</p>
 <!-- /wp:paragraph -->]]></content:encoded>
-		<excerpt:encoded><![CDATA[Test field `CustomPost.blocks`, to see that blocks not registered on the server-side cannot be parsed.]]></excerpt:encoded>
+		<excerpt:encoded><![CDATA[Test field `CustomPost.blocks`, to see that blocks not registered on the server-side display a warning when parsed.]]></excerpt:encoded>
 		<wp:post_id>660</wp:post_id>
 		<wp:post_date><![CDATA[2022-12-22 20:00:46]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_date_gmt>
