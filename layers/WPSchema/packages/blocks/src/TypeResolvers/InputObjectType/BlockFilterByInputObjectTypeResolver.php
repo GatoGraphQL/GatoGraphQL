@@ -99,4 +99,15 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
             default => parent::getInputFieldTypeModifiers($inputFieldName)
         };
     }
+
+    protected function isOneOfInputPropertyNullable(
+        string $propertyName
+    ): bool {
+        return match ($propertyName) {
+            'include',
+            'exclude'
+                => true,
+            default => parent::isOneOfInputPropertyNullable($propertyName)
+        };
+    }
 }
