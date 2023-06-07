@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ObjectModels;
 
-class DependedOnActiveWordPressPlugin extends AbstractDependedOnWordPressPlugin
+final class DependedOnActiveWordPressPlugin extends AbstractDependedOnWordPressPlugin
 {
     public function __construct(
         string $name,
