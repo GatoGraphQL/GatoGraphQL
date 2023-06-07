@@ -9,6 +9,7 @@ use PoPWPSchema\BlockContentParser\BlockContentParserInterface;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
 use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
+use PoPWPSchema\Blocks\TypeResolvers\InputObjectType\BlockFilterInputObjectTypeResolver;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -28,6 +29,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 {
     private ?BlockUnionTypeResolver $blockUnionTypeResolver = null;
     private ?BlockContentParserInterface $blockContentParser = null;
+    private ?BlockFilterInputObjectTypeResolver $blockFilterInputObjectTypeResolver = null;
 
     final public function setBlockUnionTypeResolver(BlockUnionTypeResolver $blockUnionTypeResolver): void
     {
@@ -46,6 +48,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         /** @var BlockContentParserInterface */
         return $this->blockContentParser ??= $this->instanceManager->getInstance(BlockContentParserInterface::class);
+    }
+    final public function setBlockFilterInputObjectTypeResolver(BlockFilterInputObjectTypeResolver $blockFilterInputObjectTypeResolver): void
+    {
+        $this->blockFilterInputObjectTypeResolver = $blockFilterInputObjectTypeResolver;
+    }
+    final protected function getBlockFilterInputObjectTypeResolver(): BlockFilterInputObjectTypeResolver
+    {
+        /** @var BlockFilterInputObjectTypeResolver */
+        return $this->blockFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(BlockFilterInputObjectTypeResolver::class);
     }
 
     /**
@@ -92,19 +103,43 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         };
     }
 
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'blocks' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getBlockFilterInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
+        };
+    }
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         /** @var WP_Post */
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'blocks':
                 $blockContentParserPayload = null;
                 try {
-                    $blockContentParserPayload = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost);
+                    $filterOptions = [];
+                    if ($query['filter']['include'] ?? null) {
+                        $filterOptions = $query['filter']['include'];
+                    } elseif ($query['filter']['exclude'] ?? null) {
+                        $filterOptions = $query['filter']['exclude'];
+                    }
+                    $blockContentParserPayload = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost, $filterOptions);
                 } catch (BlockContentParserException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
