@@ -60,6 +60,60 @@
       ...BlockData
     }
   }
+
+  excludeBlockFilter1: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: "core/heading"
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  excludeBlockFilter2: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/columns"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  excludeBlockFilter3: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  excludeBlockFilter4: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/column"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
 }
 
 fragment BlockData on Block {
