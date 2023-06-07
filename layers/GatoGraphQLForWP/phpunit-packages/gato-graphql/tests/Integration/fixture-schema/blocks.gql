@@ -114,6 +114,45 @@
       ...BlockData
     }
   }
+
+  customPostWithBlocks: customPost(by: { id: 654 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      content
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+
+  customPostWithNoBlocks: customPost(by: { id: 619 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      content
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+
+  customPostWithNonExistingBlocks: customPost(by: { id: 656 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      content
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
 }
 
 fragment BlockData on Block {
