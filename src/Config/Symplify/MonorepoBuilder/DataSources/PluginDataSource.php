@@ -52,6 +52,9 @@ class PluginDataSource
                 'path' => 'layers/GatoGraphQLForWP/plugins/testing-schema',
                 'zip_file' => 'gato-graphql-testing-schema',
                 'main_file' => 'gato-graphql-testing-schema.php',
+                'exclude_files' => implode(' ', [
+                    sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
+                ]),
                 'dist_repo_organization' => 'GatoGraphQL',
                 'dist_repo_name' => 'gato-graphql-testing-schema-dist',
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing-schema/rector.php',
