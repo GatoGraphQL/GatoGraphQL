@@ -5,18 +5,15 @@ declare(strict_types=1);
 namespace PoP\PoP\Config\Rector\Upgrades\Configurators;
 
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
-use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
-use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 
 abstract class AbstractPHPUnit10ContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function configureContainer(): void
     {
-        $this->rectorConfig->rule(RemoveUselessParamTagRector::class);
-        $this->rectorConfig->rule(RemoveUselessReturnTagRector::class);
-
-        $this->rectorConfig->importNames();
-        $this->rectorConfig->importShortClasses();
+        $this->rectorConfig->sets([
+            PHPUnitSetList::PHPUNIT_100,
+        ]);
 
         // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
         if ($bootstrapFiles = $this->getBootstrapFiles()) {
