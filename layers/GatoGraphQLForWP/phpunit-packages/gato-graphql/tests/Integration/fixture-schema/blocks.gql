@@ -7,13 +7,52 @@
     }
   }
 
-  includeBlockFilter: post(by: { id: 19 }) {
+  includeBlockFilter1: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        include: "core/heading"
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  includeBlockFilter2: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  includeBlockFilter3: post(by: { id: 19 }) {
     id
     blocks(
       filterBy: {
         include: [
           "core/heading",
           "core/columns",
+          "core/column"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  includeBlockFilter4: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        include: [
+          "core/heading",
           "core/column"
         ]
       }

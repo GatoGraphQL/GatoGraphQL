@@ -566,7 +566,81 @@
                 ]
             }
         ],
-        "includeBlockFilter": {
+        "includeBlockFilter1": {
+            "id": 19,
+            "blocks": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "List Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "className": "has-top-margin",
+                        "content": "Columns Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Columns inside Columns (nested inner blocks)",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                }
+            ]
+        },
+        "includeBlockFilter2": {
+            "id": 19,
+            "blocks": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "List Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "className": "has-top-margin",
+                        "content": "Columns Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/columns",
+                    "attributes": {
+                        "isStackedOnMobile": true
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Columns inside Columns (nested inner blocks)",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/columns",
+                    "attributes": {
+                        "isStackedOnMobile": true
+                    },
+                    "innerBlocks": null
+                }
+            ]
+        },
+        "includeBlockFilter3": {
             "id": 19,
             "blocks": [
                 {
@@ -689,6 +763,36 @@
                             ]
                         }
                     ]
+                }
+            ]
+        },
+        "includeBlockFilter4": {
+            "id": 19,
+            "blocks": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "List Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "className": "has-top-margin",
+                        "content": "Columns Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Columns inside Columns (nested inner blocks)",
+                        "level": 2
+                    },
+                    "innerBlocks": null
                 }
             ]
         }
