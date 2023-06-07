@@ -232,23 +232,33 @@ class ModuleRegistry implements ModuleRegistryInterface
          *
          * @see https://getcomposer.org/doc/articles/versions.md
          */
-        foreach ($moduleResolver->getDependedWordPressPlugins($module) as $dependedPlugin) {
+        foreach ($moduleResolver->getDependentOnActiveWordPressPlugins($module) as $dependedActivePlugin) {
             // Check that all required plugins are active
-            if (!PluginStaticHelpers::isWordPressPluginActive($dependedPlugin->file)) {
+            if (!PluginStaticHelpers::isWordPressPluginActive($dependedActivePlugin->file)) {
                 return false;
             }
 
             // Check the version constraint (as Composer semver)
-            if ($dependedPlugin->versionConstraint === null || $dependedPlugin->versionConstraint === '') {
+            if ($dependedActivePlugin->versionConstraint === null || $dependedActivePlugin->versionConstraint === '') {
                 continue;
             }
 
             if (
                 !PluginStaticHelpers::doesActivePluginSatisfyVersionConstraint(
-                    $dependedPlugin->file,
-                    $dependedPlugin->versionConstraint
+                    $dependedActivePlugin->file,
+                    $dependedActivePlugin->versionConstraint
                 )
             ) {
+                return false;
+            }
+        }
+        
+        /**
+         * Check that all required plugins are inactive
+         */
+        foreach ($moduleResolver->getDependentOnInactiveWordPressPlugins($module) as $dependedInactivePlugin) {
+            // Check that all required plugins are inactive
+            if (PluginStaticHelpers::isWordPressPluginActive($dependedInactivePlugin->file)) {
                 return false;
             }
         }

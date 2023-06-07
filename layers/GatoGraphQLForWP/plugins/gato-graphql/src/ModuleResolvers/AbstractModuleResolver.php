@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use PoP\Root\Services\BasicServiceTrait;
@@ -43,9 +44,17 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     }
 
     /**
-     * @return DependedWordPressPlugin[]
+     * @return DependedOnActiveWordPressPlugin[]
      */
-    public function getDependedWordPressPlugins(string $module): array
+    public function getDependentOnActiveWordPressPlugins(string $module): array
+    {
+        return [];
+    }
+
+    /**
+     * @return DependedOnInactiveWordPressPlugin[]
+     */
+    public function getDependentOnInactiveWordPressPlugins(string $module): array
     {
         return [];
     }
