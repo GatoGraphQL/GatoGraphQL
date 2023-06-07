@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPWPSchema\Blocks\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPWPSchema\Blocks\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPWPSchema\Blocks\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPWPSchema\Blocks\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'

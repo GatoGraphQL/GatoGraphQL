@@ -1,0 +1,54 @@
+{
+    "name": "pop-wp-schema/blocks",
+    "type": "library",
+    "description": "Integration of Gutenberg blocks into the GraphQL schema",
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "blocks"],
+    "homepage": "https://github.com/PoPWPSchema/blocks",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "pop-wp-schema/block-content-parser": "^0.11",
+        "pop-wp-schema/customposts": "^0.11"
+    },
+    "require-dev": {
+        "johnpbloch/wordpress": ">=5.5",
+        "phpunit/phpunit": "^9.5",
+        "rector/rector": "^0.17",
+        "squizlabs/php_codesniffer": "^3.6",
+        "szepeviktor/phpstan-wordpress": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoPWPSchema\\Blocks\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPWPSchema\\Blocks\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "wordpress-install-dir": "vendor/wordpress/wordpress",
+        "branch-alias": {
+            "dev-master": "0.11-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

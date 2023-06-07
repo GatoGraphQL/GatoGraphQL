@@ -1006,6 +1006,296 @@ Ea et et dolor.]]></excerpt:encoded>
 		<wp:meta_value><![CDATA[650]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
+					<item>
+		<title><![CDATA[Dummy CPT with blocks]]></title>
+		<link>https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-blocks/</link>
+		<pubDate>Thu, 22 Dec 2022 20:00:46 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-blocks/</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:gallery {"linkTo":"none","className":"alignnone"} -->
+<figure class="wp-block-gallery columns-3 is-cropped alignnone"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/zd7Ehu+" alt="" data-id="1706" class="wp-image-1706"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/jXLtzZ+" alt="" data-id="1705" class="wp-image-1705"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/VhP9ud+" alt="" data-id="1704" class="wp-image-1704"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/HB0qXg+" alt="" data-id="1703" class="wp-image-1703"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/5cHfcd+" alt="" data-id="1699" class="wp-image-1699"/></figure></li></ul></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading -->
+<h2>List Block</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul><li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"className":"has-top-margin"} -->
+<h2 class="has-top-margin">Columns Block</h2>
+<!-- /wp:heading -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:image {"id":1701,"className":"layout-column-1"} -->
+<figure class="wp-block-image layout-column-1"><img src="https://d.pr/i/fW6V3V+" alt="" class="wp-image-1701"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph {"className":"layout-column-2"} -->
+<p class="layout-column-2">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24/365 communities.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Columns inside Columns (nested inner blocks)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:image {"id":1701,"className":"layout-column-1"} -->
+<figure class="wp-block-image layout-column-1"><img src="https://d.pr/i/fW6V3V+" alt="" class="wp-image-1701"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"33.33%"} -->
+<div class="wp-block-column" style="flex-basis:33.33%"><!-- wp:heading {"fontSize":"large"} -->
+<h2 class="wp-block-heading has-large-font-size">Life is so rich</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Life is so dynamic</h3>
+<!-- /wp:heading --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"66.66%"} -->
+<div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:paragraph -->
+<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a “hero” and leave your mark on this world.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:image {"id":361,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg" alt="" class="wp-image-361"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:image {"id":362,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="" class="wp-image-362"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Pariatur ab.
+
+Dolorum quo neque.]]></excerpt:encoded>
+		<wp:post_id>654</wp:post_id>
+		<wp:post_date><![CDATA[2022-12-22 20:00:46]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-12-22 20:00:46]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[dummy-cpt-with-blocks]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[dummy-cpt]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="dummy-category" nicename="absolute-brilliance"><![CDATA[Absolute Brilliance]]></category>
+		<category domain="dummy-tag" nicename="hip-hop"><![CDATA[Hip Hop]]></category>
+		<category domain="dummy-category" nicename="perestroika"><![CDATA[Perestroika]]></category>
+		<category domain="dummy-tag" nicename="tango"><![CDATA[Tango]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_some_random_int]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1231]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[635]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title><![CDATA[Dummy CPT with non-existing block]]></title>
+		<link>https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-non-existing-block/</link>
+		<pubDate>Thu, 22 Dec 2022 20:00:46 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-non-existing-block/</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:gallery {"linkTo":"none","className":"alignnone"} -->
+<figure class="wp-block-gallery columns-3 is-cropped alignnone"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/zd7Ehu+" alt="" data-id="1706" class="wp-image-1706"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/jXLtzZ+" alt="" data-id="1705" class="wp-image-1705"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/VhP9ud+" alt="" data-id="1704" class="wp-image-1704"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/HB0qXg+" alt="" data-id="1703" class="wp-image-1703"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/5cHfcd+" alt="" data-id="1699" class="wp-image-1699"/></figure></li></ul></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading -->
+<h2>List Block</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul><li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:nonexisting {"className":"has-top-margin"} -->
+<h2 class="has-top-margin">Columns Block</h2>
+<!-- /wp:nonexisting -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Pariatur ab.
+
+Dolorum quo neque.]]></excerpt:encoded>
+		<wp:post_id>656</wp:post_id>
+		<wp:post_date><![CDATA[2022-12-22 20:00:46]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-12-22 20:00:46]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[dummy-cpt-with-non-existing-block]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[dummy-cpt]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="dummy-category" nicename="absolute-brilliance"><![CDATA[Absolute Brilliance]]></category>
+		<category domain="dummy-tag" nicename="hip-hop"><![CDATA[Hip Hop]]></category>
+		<category domain="dummy-category" nicename="perestroika"><![CDATA[Perestroika]]></category>
+		<category domain="dummy-tag" nicename="tango"><![CDATA[Tango]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_some_random_int]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1231]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[635]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title><![CDATA[Dummy CPT with no content]]></title>
+		<link>https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-no-content/</link>
+		<pubDate>Thu, 22 Dec 2022 20:00:46 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-no-content/</guid>
+		<description></description>
+		<content:encoded></content:encoded>
+		<excerpt:encoded></excerpt:encoded>
+		<wp:post_id>658</wp:post_id>
+		<wp:post_date><![CDATA[2022-12-22 20:00:46]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-12-22 20:00:46]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[dummy-cpt-with-no-content]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[dummy-cpt]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="dummy-category" nicename="absolute-brilliance"><![CDATA[Absolute Brilliance]]></category>
+		<category domain="dummy-tag" nicename="hip-hop"><![CDATA[Hip Hop]]></category>
+		<category domain="dummy-category" nicename="perestroika"><![CDATA[Perestroika]]></category>
+		<category domain="dummy-tag" nicename="tango"><![CDATA[Tango]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_some_random_int]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1231]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[635]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title><![CDATA[Dummy CPT with non server-side-registered block]]></title>
+		<link>https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-non-server-side-registered-block/</link>
+		<pubDate>Thu, 22 Dec 2022 20:00:46 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-non-server-side-registered-block/</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:gallery {"linkTo":"none","className":"alignnone"} -->
+<figure class="wp-block-gallery columns-3 is-cropped alignnone"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/zd7Ehu+" alt="" data-id="1706" class="wp-image-1706"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/jXLtzZ+" alt="" data-id="1705" class="wp-image-1705"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/VhP9ud+" alt="" data-id="1704" class="wp-image-1704"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/HB0qXg+" alt="" data-id="1703" class="wp-image-1703"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/5cHfcd+" alt="" data-id="1699" class="wp-image-1699"/></figure></li></ul></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading -->
+<h2>List Block</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul><li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:gato-graphql/not-server-side-registered-block-schema-testing {"someAttribute":false,"someOtherAttribute":"Hello"} /-->
+
+<!-- wp:gato-graphql/not-server-side-registered-block-schema-testing {"someAttribute":true,"someOtherAttribute":" world!","yetAnotherAttribute":[]} /-->
+
+<!-- wp:gato-graphql/not-server-side-registered-block-schema-testing {"someOtherAttribute":" world!","yetAnotherAttribute":["testing","non","server","side","registered","blocks"]} /-->
+
+<!-- wp:paragraph -->
+<p>And back to some text</p>
+<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Test field `CustomPost.blocks`, to see that blocks not registered on the server-side display a warning when parsed.]]></excerpt:encoded>
+		<wp:post_id>660</wp:post_id>
+		<wp:post_date><![CDATA[2022-12-22 20:00:46]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-12-22 20:00:46]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[dummy-cpt-with-non-server-side-registered-block]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[dummy-cpt]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+							</item>
+					<item>
+		<title><![CDATA[Dummy CPT with server-side-registered block]]></title>
+		<link>https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-server-side-registered-block/</link>
+		<pubDate>Thu, 22 Dec 2022 20:00:46 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gato-graphql.lndo.site/dummy-cpt/dummy-cpt-with-server-side-registered-block/</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:gallery {"linkTo":"none","className":"alignnone"} -->
+<figure class="wp-block-gallery columns-3 is-cropped alignnone"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/zd7Ehu+" alt="" data-id="1706" class="wp-image-1706"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/jXLtzZ+" alt="" data-id="1705" class="wp-image-1705"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/VhP9ud+" alt="" data-id="1704" class="wp-image-1704"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/HB0qXg+" alt="" data-id="1703" class="wp-image-1703"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/5cHfcd+" alt="" data-id="1699" class="wp-image-1699"/></figure></li></ul></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading -->
+<h2>List Block</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul><li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:gato-graphql/server-side-registered-block-schema-testing {"someAttribute":false,"someOtherAttribute":"Hello"} /-->
+
+<!-- wp:gato-graphql/server-side-registered-block-schema-testing {"someAttribute":true,"someOtherAttribute":" world!","yetAnotherAttribute":[]} /-->
+
+<!-- wp:gato-graphql/server-side-registered-block-schema-testing {"someOtherAttribute":" world!","yetAnotherAttribute":["testing","non","server","side","registered","blocks"]} /-->
+
+<!-- wp:paragraph -->
+<p>And back to some text</p>
+<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Test field `CustomPost.blocks`, to see that blocks not registered on the server-side display a warning when parsed.]]></excerpt:encoded>
+		<wp:post_id>680</wp:post_id>
+		<wp:post_date><![CDATA[2022-12-22 20:00:46]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-12-22 20:00:46]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-12-22 20:00:46]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[dummy-cpt-with-server-side-registered-block]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[dummy-cpt]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+							</item>
 				</channel>
 </rss>
 	

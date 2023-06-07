@@ -39,7 +39,7 @@ interface PluginInterface
      *
      * @return string[]
      */
-    public function getDependedUponPluginFiles(): array;
+    public function getDependentOnPluginFiles(): array;
 
     /**
      * Commit hash when merging PR in repo, injected during the CI run

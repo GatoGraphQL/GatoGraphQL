@@ -1,0 +1,18 @@
+parameters:
+	level: 8
+	paths:
+		- src
+		- tests
+	ignoreErrors:
+		- 
+			message: '#Method PoP\\DOMCrawler\\CrawlerFactory::createCrawler\(\) has parameter \$node with generic class DOMNodeList but does not specify its types: TNode#'
+			path: src/CrawlerFactory.php
+		- 
+			message: '#Method PoP\\DOMCrawler\\CrawlerFactory::createCrawler\(\) has parameter \$node with no value type specified in iterable type array\.#'
+			path: src/CrawlerFactory.php
+		- 
+			message: '#Method PoP\\DOMCrawler\\CrawlerFactoryInterface::createCrawler\(\) has parameter \$node with generic class DOMNodeList but does not specify its types: TNode#'
+			path: src/CrawlerFactoryInterface.php
+		- 
+			message: '#Method PoP\\DOMCrawler\\CrawlerFactoryInterface::createCrawler\(\) has parameter \$node with no value type specified in iterable type array\.#'
+			path: src/CrawlerFactoryInterface.php

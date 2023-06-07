@@ -133,25 +133,31 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): void
     {
+        if (in_array($pluginFile, $this->getDependentOnPluginFiles())) {
+            $this->purgeContainer();
+            return;
+        }
+
+        $extensionManager = PluginApp::getExtensionManager();
+        if (in_array($pluginFile, $extensionManager->getInactiveExtensionsDependedUponPluginFiles())) {
+            $this->purgeContainer();
+            return;
+        }
+
         /**
          * Check that the activated/deactivated plugin is
          * a Gato GraphQL extension, or any plugin depended-upon
          * by any extension.
          */
-        $extensionManager = PluginApp::getExtensionManager();
-        $inactiveExtensionDependedUponPluginFiles = $extensionManager->getInactiveExtensionsDependedUponPluginFiles();
         $extensionBaseNameInstances = $extensionManager->getExtensions();
         foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
             if (
-                !($extensionBaseName === $pluginFile
-                || in_array($pluginFile, $extensionInstance->getDependedUponPluginFiles())
-                || in_array($pluginFile, $inactiveExtensionDependedUponPluginFiles)
-                )
+                $extensionBaseName === $pluginFile
+                || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
             ) {
-                continue;
+                $this->purgeContainer();
+                return;
             }
-            $this->purgeContainer();
-            break;
         }
     }
 

@@ -445,7 +445,9 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             }
         });
 
-        \register_block_type($blockFullName, $blockConfiguration);
+        if ($this->registerBlockServerSide()) {
+            \register_block_type($blockFullName, $blockConfiguration);
+        }
 
         /**
          * Register the documentation (from under folder "docs/"), for the locale and the default language
@@ -453,6 +455,15 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * @see https://github.com/leoloso/PoP/issues/254
          */
         // $this->initDocumentationScripts();
+    }
+
+    /**
+     * Allow to not register the block on the server-side
+     * for testing purposes.
+     */
+    protected function registerBlockServerSide(): bool
+    {
+        return true;
     }
 
     /**

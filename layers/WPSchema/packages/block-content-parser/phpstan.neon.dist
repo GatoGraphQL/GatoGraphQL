@@ -1,0 +1,18 @@
+parameters:
+	level: 8
+	paths:
+		- src
+		- tests
+	ignoreErrors:
+		- 
+			message: '#Cannot access property \$attributes on WP_Block_Type\|null\.#'
+			path: src/BlockContentParser.php
+		- 
+			message: '#Cannot access property \$nodeValue on DOMNode\|null\.#'
+			path: src/BlockContentParser.php
+		- 
+			message: '#Cannot access property \$childNodes on DOMNode\|null\.#'
+			path: src/BlockContentParser.php
+		- 
+			message: '#Parameter \#1 \$string of function trim expects string, string\|null given\.#'
+			path: src/BlockContentParser.php

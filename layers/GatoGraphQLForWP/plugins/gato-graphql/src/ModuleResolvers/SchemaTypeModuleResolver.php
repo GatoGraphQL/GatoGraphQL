@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 use GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
@@ -38,6 +39,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
 
     public final const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
     public final const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
+    public final const SCHEMA_BLOCKS = Plugin::NAMESPACE . '\schema-blocks';
     public final const SCHEMA_COMMENTS = Plugin::NAMESPACE . '\schema-comments';
     public final const SCHEMA_USERS = Plugin::NAMESPACE . '\schema-users';
     public final const SCHEMA_USER_ROLES = Plugin::NAMESPACE . '\schema-user-roles';
@@ -266,6 +268,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         return [
             self::SCHEMA_CUSTOMPOSTS,
             self::SCHEMA_POSTS,
+            self::SCHEMA_BLOCKS,
             self::SCHEMA_PAGES,
             self::SCHEMA_USERS,
             self::SCHEMA_USER_ROLES,
@@ -295,6 +298,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ],
                 ];
             case self::SCHEMA_POSTS:
+            case self::SCHEMA_BLOCKS:
             case self::SCHEMA_PAGES:
             case self::SCHEMA_COMMENTS:
             case self::SCHEMA_TAGS:
@@ -330,6 +334,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::SCHEMA_POSTS => \__('Posts', 'gato-graphql'),
+            self::SCHEMA_BLOCKS => \__('Blocks', 'gato-graphql'),
             self::SCHEMA_COMMENTS => \__('Comments', 'gato-graphql'),
             self::SCHEMA_USERS => \__('Users', 'gato-graphql'),
             self::SCHEMA_USER_ROLES => \__('User Roles', 'gato-graphql'),
@@ -356,6 +361,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     \__('posts', 'gato-graphql'),
                     $this->getPostObjectTypeResolver()->getTypeName()
                 );
+            case self::SCHEMA_BLOCKS:
+                return \__('(Gutenberg) Blocks contained in the custom post. This module is disabled if the "Classic Editor" plugin is active', 'gato-graphql');
             case self::SCHEMA_USERS:
                 return sprintf(
                     \__('Query %1$s, through type <code>%2$s</code> added to the schema', 'gato-graphql'),
@@ -420,6 +427,19 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 return \__('Base functionality for all categories', 'gato-graphql');
         }
         return parent::getDescription($module);
+    }
+
+    public function areRequirementsSatisfied(string $module): bool
+    {
+        switch ($module) {
+            case self::SCHEMA_BLOCKS:
+                /**
+                 * Disable module if "Classic Editor" plugin is installed
+                 */
+                $isClassicEditorPluginActive = PluginStaticHelpers::isWordPressPluginActive('classic-editor/classic-editor.php');
+                return !$isClassicEditorPluginActive;
+        }
+        return parent::areRequirementsSatisfied($module);
     }
 
     /**

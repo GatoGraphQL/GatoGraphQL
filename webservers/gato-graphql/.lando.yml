@@ -50,6 +50,8 @@ services:
         - >-
           ../../layers/Engine/packages/definitions:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/definitions
         - >-
+          ../../layers/Engine/packages/dom-crawler:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/dom-crawler
+        - >-
           ../../layers/Engine/packages/engine-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine-wp
         - >-
           ../../layers/Engine/packages/engine:/app/wordpress/wp-content/plugins/gato-graphql/vendor/getpop/engine
@@ -227,6 +229,10 @@ services:
           ../../layers/Schema/packages/http-requests:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-schema/http-requests
         - >-
           ../../layers/Schema/packages/schema-commons:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-schema/schema-commons
+        - >-
+          ../../layers/WPSchema/packages/block-content-parser:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/block-content-parser
+        - >-
+          ../../layers/WPSchema/packages/blocks:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/blocks
         - >-
           ../../layers/WPSchema/packages/commentmeta:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-wp-schema/commentmeta
         - >-

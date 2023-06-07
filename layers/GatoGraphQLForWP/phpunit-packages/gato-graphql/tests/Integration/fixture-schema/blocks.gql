@@ -1,0 +1,236 @@
+{
+  posts(pagination: { limit: 5 }) {
+    id
+    title
+    blocks {
+      ...BlockData
+    }
+  }
+
+  includeBlockFilter1: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        include: "core/heading"
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  includeBlockFilter2: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  includeBlockFilter3: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  includeBlockFilter4: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/column"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  excludeBlockFilter1: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: "core/heading"
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  excludeBlockFilter2: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/columns"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  excludeBlockFilter3: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  excludeBlockFilter4: post(by: { id: 19 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/column"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+  }
+
+  page(by: { id: 2 }) {
+    id
+    title
+    blocks {
+      ...BlockData
+    }
+  }
+
+  customPost(by: { id: 654 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      contentSource
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+
+  contentWithoutBlocks: customPost(by: { id: 619 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      contentSource
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+
+  nonExistingBlocks: customPost(by: { id: 656 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      contentSource
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+
+  noContent: customPost(by: { id: 658 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      contentSource
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+
+  serverSideRegisteredBlocks: customPost(by: { id: 680 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      contentSource
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+
+  notServerSideRegisteredBlocks: customPost(by: { id: 660 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      contentSource
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
+}
+
+fragment BlockData on Block {
+  name
+  attributes
+  innerBlocks {
+    name
+    attributes
+    innerBlocks {
+      name
+      attributes
+      innerBlocks {
+        name
+        attributes
+        innerBlocks {
+          name
+          attributes
+          innerBlocks {
+            name
+            attributes
+            innerBlocks {
+              name
+              attributes
+              innerBlocks {
+                name
+                attributes
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

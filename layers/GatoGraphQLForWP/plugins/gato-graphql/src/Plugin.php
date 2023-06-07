@@ -187,4 +187,17 @@ class Plugin extends AbstractMainPlugin
             }
         }
     }
+
+    /**
+     * Dependencies on other plugins, to regenerate the schema
+     * when these are activated/deactived
+     *
+     * @return string[]
+     */
+    public function getDependentOnPluginFiles(): array
+    {
+        return [
+            'classic-editor/classic-editor.php',
+        ];
+    }
 }

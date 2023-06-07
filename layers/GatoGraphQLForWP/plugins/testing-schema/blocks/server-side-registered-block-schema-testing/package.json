@@ -1,0 +1,27 @@
+{
+	"name": "server-side-registered-block-schema-testing",
+	"version": "1.0.0-dev",
+	"description": "Block for testing the schema",
+	"author": "Leonardo Losoviz",
+	"license": "MIT",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"format:js": "wp-scripts format-js",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"start": "wp-scripts start",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"devDependencies": {
+		"@wordpress/components": "^10.0.0",
+		"@wordpress/i18n": "^3.14.0",
+		"@wordpress/scripts": "^12.1.0",
+		"file-loader": "^6.2.0",
+		"highlight.js": "^11.6.0",
+		"html-loader": "^1.1.0",
+		"image-webpack-loader": "^8.1.0",
+		"markdown-loader": "^5.1.0",
+		"raw-loader": "^4.0.2"
+	}
+}
