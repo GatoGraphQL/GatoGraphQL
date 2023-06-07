@@ -10,7 +10,6 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\Plugin;
-use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 use GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
@@ -433,9 +432,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Disable the Blocks module if "Classic Editor" plugin is installed
      *
-     * @return DependedOnActiveWordPressPlugin[]
+     * @return DependedOnInactiveWordPressPlugin[]
      */
-    public function getDependentOnActiveWordPressPlugins(string $module): array
+    public function getDependentOnInactiveWordPressPlugins(string $module): array
     {
         return match ($module) {
             self::SCHEMA_BLOCKS => [
@@ -444,7 +443,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'classic-editor/classic-editor.php',
                 ),
             ],
-            default => parent::getDependentOnActiveWordPressPlugins($module),
+            default => parent::getDependentOnInactiveWordPressPlugins($module),
         };
     }
 
