@@ -166,6 +166,19 @@
       }
     }
   }
+
+  notServerSideRegisteredBlocks: customPost(by: { id: 660 }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      content
+      customPostType
+      blocks {
+        ...BlockData
+      }
+    }
+  }
 }
 
 fragment BlockData on Block {
