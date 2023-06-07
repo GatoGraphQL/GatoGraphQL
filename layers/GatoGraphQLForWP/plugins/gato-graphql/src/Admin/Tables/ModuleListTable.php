@@ -14,7 +14,7 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleTypeRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
-use GatoGraphQL\GatoGraphQL\ObjectModels\DependedWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
@@ -256,9 +256,9 @@ class ModuleListTable extends AbstractItemListTable
             case 'depends-on':
                 /** @var array<array<string>> */
                 $dependedModuleLists = $item['depends-on-modules'];
-                /** @var DependedWordPressPlugin[] */
+                /** @var DependedOnActiveWordPressPlugin[] */
                 $dependsOnActivePlugins = $item['depends-on-active-plugins'];
-                /** @var DependedWordPressPlugin[] */
+                /** @var DependedOnActiveWordPressPlugin[] */
                 $dependsOnInactivePlugins = $item['depends-on-inactive-plugins'];
                 if (!$dependedModuleLists && !$dependsOnActivePlugins && !$dependsOnInactivePlugins) {
                     return \__('-', 'gato-graphql');
@@ -369,7 +369,7 @@ class ModuleListTable extends AbstractItemListTable
         return '';
     }
 
-    protected function getDependedPluginHTML(DependedWordPressPlugin $dependedPlugin): string
+    protected function getDependedPluginHTML(DependedOnActiveWordPressPlugin $dependedPlugin): string
     {
         return $dependedPlugin->url === ''
             ? $dependedPlugin->name

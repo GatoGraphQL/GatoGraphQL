@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ObjectModels;
 
-class DependedWordPressPlugin
+class DependedOnActiveWordPressPlugin
 {
     public readonly string $slug;
     public readonly string $url;
