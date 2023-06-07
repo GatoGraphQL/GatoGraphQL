@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd"
   bootstrap="lib/bootstrap-phpunit.php"
   colors="true"
-  verbose="true"
   stderr="true"
   cacheResult="true"
+  cacheDirectory=".phpunit.cache"
 >
-  <coverage processUncoveredFiles="true">
-    <include>
-      <directory suffix=".php">layers/**/packages/*/src</directory>
-      <directory suffix=".php">layers/**/phpunit-packages/*/src</directory>
-      <directory suffix=".php">layers/**/phpunit-plugins/*/src</directory>
-      <directory suffix=".php">layers/**/plugins/*/src</directory>
-    </include>
-  </coverage>
+  <coverage/>
   <testsuite name="all">
     <directory>layers/**/packages/**/tests</directory>
     <directory>layers/**/phpunit-packages/**/tests</directory>
@@ -37,4 +30,12 @@
     <env name="INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_USERNAME" value="subscriber"/>
     <env name="INTEGRATION_TESTS_AUTHENTICATED_SUBSCRIBER_USER_PASSWORD" value="11111111"/>
   </php>
+  <source>
+    <include>
+      <directory suffix=".php">layers/**/packages/*/src</directory>
+      <directory suffix=".php">layers/**/phpunit-packages/*/src</directory>
+      <directory suffix=".php">layers/**/phpunit-plugins/*/src</directory>
+      <directory suffix=".php">layers/**/plugins/*/src</directory>
+    </include>
+  </source>
 </phpunit>
