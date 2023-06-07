@@ -14,7 +14,9 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleTypeRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ObjectModels\AbstractDependedOnWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
@@ -258,7 +260,7 @@ class ModuleListTable extends AbstractItemListTable
                 $dependedModuleLists = $item['depends-on-modules'];
                 /** @var DependedOnActiveWordPressPlugin[] */
                 $dependsOnActivePlugins = $item['depends-on-active-plugins'];
-                /** @var DependedOnActiveWordPressPlugin[] */
+                /** @var DependedOnInactiveWordPressPlugin[] */
                 $dependsOnInactivePlugins = $item['depends-on-inactive-plugins'];
                 if (!$dependedModuleLists && !$dependsOnActivePlugins && !$dependsOnInactivePlugins) {
                     return \__('-', 'gato-graphql');
@@ -343,13 +345,6 @@ class ModuleListTable extends AbstractItemListTable
                  */
                 foreach ($dependsOnInactivePlugins as $dependedPlugin) {
                     $dependedPluginHTML = $this->getDependedPluginHTML($dependedPlugin);
-                    if ($dependedPlugin->versionConstraint !== null) {
-                        $dependedPluginHTML = sprintf(
-                            \__('%s (version constraint: <code>%s</code>)', 'gato-graphql'),
-                            $dependedPluginHTML,
-                            $dependedPlugin->versionConstraint
-                        );
-                    }
                     $inactivePluginItems[] = sprintf(
                         '%1$s %2$s',
                         '☒',
@@ -369,7 +364,7 @@ class ModuleListTable extends AbstractItemListTable
         return '';
     }
 
-    protected function getDependedPluginHTML(DependedOnActiveWordPressPlugin $dependedPlugin): string
+    protected function getDependedPluginHTML(AbstractDependedOnWordPressPlugin $dependedPlugin): string
     {
         return $dependedPlugin->url === ''
             ? $dependedPlugin->name

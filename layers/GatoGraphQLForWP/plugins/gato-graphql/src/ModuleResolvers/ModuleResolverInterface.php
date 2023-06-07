@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 
 interface ModuleResolverInterface
 {
@@ -40,7 +41,7 @@ interface ModuleResolverInterface
     public function getDependentOnActiveWordPressPlugins(string $module): array;
 
     /**
-     * @return DependedOnActiveWordPressPlugin[]
+     * @return DependedOnInactiveWordPressPlugin[]
      */
     public function getDependentOnInactiveWordPressPlugins(string $module): array;
 
