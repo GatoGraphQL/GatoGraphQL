@@ -129,7 +129,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $pluginName = $this->getPluginNameFromDataName($dataName, $status === 'active' ? ':enabled' : ':disabled');
+        $pluginName = $this->getPluginNameFromDataName($dataName);
         $client->post(
             sprintf(
                 $endpointURLPlaceholder,
@@ -146,9 +146,17 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      * them off, as they are "this is another test of the
      * same plugin"
      */
-    protected function getPluginNameFromDataName(string $dataName, string $suffix): string
+    protected function getPluginNameFromDataName(string $dataName): string
     {
-        $pluginName = substr($dataName, 0, strlen($dataName) - strlen($suffix));
+        $pluginName = $dataName;
+        $possibleSuffixes = [':enabled', ':disabled', ':only-one-enabled'];
+        foreach ($possibleSuffixes as $suffix) {
+            if (!str_ends_with($dataName, $suffix)) {
+                continue;
+            }
+            $pluginName = substr($dataName, 0, strlen($dataName) - strlen($suffix));
+            break;
+        }
         $matches = [];
         if (preg_match('/(.*)\:\d+/', $pluginName, $matches)) {
             return $matches[1];
@@ -176,7 +184,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      */
     protected function getBulkPluginDeactivationPluginFilesToSkip(string $dataName): array
     {
-        $pluginName = $this->getPluginNameFromDataName($dataName, ':only-one-enabled');
+        $pluginName = $this->getPluginNameFromDataName($dataName);
         $pluginFile = $pluginName . '.php';
         return [
             $pluginFile,
