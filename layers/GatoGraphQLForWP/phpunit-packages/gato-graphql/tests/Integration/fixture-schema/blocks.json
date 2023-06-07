@@ -26,7 +26,7 @@
                 "message": "Block type \"gato-graphql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 177,
+                        "line": 190,
                         "column": 7
                     }
                 ],
@@ -1588,11 +1588,117 @@
             "customPostType": "dummy-cpt",
             "blocks": null
         },
+        "serverSideRegisteredBlocks": {
+            "__typename": "GenericCustomPost",
+            "id": 680,
+            "title": "Dummy CPT with server-side-registered block",
+            "contentSource": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:gato-graphql\/server-side-registered-block-schema-testing {\"someAttribute\":false,\"someOtherAttribute\":\"Hello\"} \/-->\n\n<!-- wp:gato-graphql\/server-side-registered-block-schema-testing {\"someAttribute\":true,\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[]} \/-->\n\n<!-- wp:gato-graphql\/server-side-registered-block-schema-testing {\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[\"testing\",\"non\",\"server\",\"side\",\"registered\",\"blocks\"]} \/-->\n\n<!-- wp:paragraph -->\n<p>And back to some text<\/p>\n<!-- \/wp:paragraph -->",
+            "customPostType": "dummy-cpt",
+            "blocks": [
+                {
+                    "name": "core\/gallery",
+                    "attributes": {
+                        "linkTo": "none",
+                        "className": "alignnone",
+                        "images": [
+                            {
+                                "url": "https:\/\/d.pr\/i\/zd7Ehu+",
+                                "alt": "",
+                                "id": "1706"
+                            },
+                            {
+                                "url": "https:\/\/d.pr\/i\/jXLtzZ+",
+                                "alt": "",
+                                "id": "1705"
+                            },
+                            {
+                                "url": "https:\/\/d.pr\/i\/VhP9ud+",
+                                "alt": "",
+                                "id": "1704"
+                            },
+                            {
+                                "url": "https:\/\/d.pr\/i\/HB0qXg+",
+                                "alt": "",
+                                "id": "1703"
+                            },
+                            {
+                                "url": "https:\/\/d.pr\/i\/5cHfcd+",
+                                "alt": "",
+                                "id": "1699"
+                            }
+                        ],
+                        "ids": [],
+                        "shortCodeTransforms": [],
+                        "imageCrop": true,
+                        "fixedHeight": true,
+                        "sizeSlug": "large",
+                        "allowResize": false
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "List Block",
+                        "level": 2
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/list",
+                    "attributes": {
+                        "ordered": false,
+                        "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gato-graphql\/server-side-registered-block-schema-testing",
+                    "attributes": {
+                        "someAttribute": false,
+                        "someOtherAttribute": "Hello"
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gato-graphql\/server-side-registered-block-schema-testing",
+                    "attributes": {
+                        "someAttribute": true,
+                        "someOtherAttribute": " world!",
+                        "yetAnotherAttribute": []
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gato-graphql\/server-side-registered-block-schema-testing",
+                    "attributes": {
+                        "someOtherAttribute": " world!",
+                        "yetAnotherAttribute": [
+                            "testing",
+                            "non",
+                            "server",
+                            "side",
+                            "registered",
+                            "blocks"
+                        ]
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "And back to some text",
+                        "dropCap": false
+                    },
+                    "innerBlocks": null
+                }
+            ]
+        },
         "notServerSideRegisteredBlocks": {
             "__typename": "GenericCustomPost",
             "id": 660,
             "title": "Dummy CPT with non server-side-registered block",
-            "contentSource": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:gato-graphql\/not-server-side-registered-block-schema-testing {\"someAttribute\":false,\"someOtherAttribute\":\"Hello\"} \/-->\n\n<!-- wp:gato-graphql\/not-server-side-registered-block-schema-testing {\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[\"testing\",\"non\",\"server\",\"side\",\"registered\",\"blocks\"]} \/-->\n\n<!-- wp:paragraph -->\n<p>And back to some text<\/p>\n<!-- \/wp:paragraph -->",
+            "contentSource": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:gato-graphql\/not-server-side-registered-block-schema-testing {\"someAttribute\":false,\"someOtherAttribute\":\"Hello\"} \/-->\n\n<!-- wp:gato-graphql\/not-server-side-registered-block-schema-testing {\"someAttribute\":true,\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[]} \/-->\n\n<!-- wp:gato-graphql\/not-server-side-registered-block-schema-testing {\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[\"testing\",\"non\",\"server\",\"side\",\"registered\",\"blocks\"]} \/-->\n\n<!-- wp:paragraph -->\n<p>And back to some text<\/p>\n<!-- \/wp:paragraph -->",
             "customPostType": "dummy-cpt",
             "blocks": [
                 {
@@ -1657,6 +1763,15 @@
                     "attributes": {
                         "someAttribute": false,
                         "someOtherAttribute": "Hello"
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gato-graphql\/not-server-side-registered-block-schema-testing",
+                    "attributes": {
+                        "someAttribute": true,
+                        "someOtherAttribute": " world!",
+                        "yetAnotherAttribute": []
                     },
                     "innerBlocks": null
                 },
