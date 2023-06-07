@@ -102,7 +102,7 @@ class ModuleListTable extends AbstractItemListTable
                     'name' => $moduleResolver->getName($module),
                     'description' => $moduleResolver->getDescription($module),
                     'depends-on-modules' => $moduleResolver->getDependedModuleLists($module),
-                    'depends-on-plugins' => $moduleResolver->getDependentOnActiveWordPressPlugins($module),
+                    'depends-on-active-plugins' => $moduleResolver->getDependentOnActiveWordPressPlugins($module),
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
@@ -256,7 +256,7 @@ class ModuleListTable extends AbstractItemListTable
                 /** @var array<array<string>> */
                 $dependedModuleLists = $item['depends-on-modules'];
                 /** @var DependedWordPressPlugin[] */
-                $dependedPlugins = $item['depends-on-plugins'];
+                $dependedPlugins = $item['depends-on-active-plugins'];
                 if (!$dependedModuleLists && !$dependedPlugins) {
                     return \__('-', 'gato-graphql');
                 }
