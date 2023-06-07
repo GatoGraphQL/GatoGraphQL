@@ -8,10 +8,11 @@ use GatoGraphQL\GatoGraphQL\App;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPWPSchema\BlockContentParser\BlockContentParserInterface;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
+use PoPWPSchema\Blocks\Constants\HookNames;
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
 use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
+use PoPWPSchema\Blocks\TypeHelpers\BlockUnionTypeHelpers;
 use PoPWPSchema\Blocks\TypeResolvers\InputObjectType\BlockFilterByInputObjectTypeResolver;
-use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -24,25 +25,14 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider as EngineErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPWPSchema\Blocks\Constants\HookNames;
 use WP_Post;
 use stdClass;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?BlockUnionTypeResolver $blockUnionTypeResolver = null;
     private ?BlockContentParserInterface $blockContentParser = null;
     private ?BlockFilterByInputObjectTypeResolver $blockFilterByInputObjectTypeResolver = null;
 
-    final public function setBlockUnionTypeResolver(BlockUnionTypeResolver $blockUnionTypeResolver): void
-    {
-        $this->blockUnionTypeResolver = $blockUnionTypeResolver;
-    }
-    final protected function getBlockUnionTypeResolver(): BlockUnionTypeResolver
-    {
-        /** @var BlockUnionTypeResolver */
-        return $this->blockUnionTypeResolver ??= $this->instanceManager->getInstance(BlockUnionTypeResolver::class);
-    }
     final public function setBlockContentParser(BlockContentParserInterface $blockContentParser): void
     {
         $this->blockContentParser = $blockContentParser;
@@ -93,7 +83,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'blocks' => $this->getBlockUnionTypeResolver(),
+            'blocks' => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
