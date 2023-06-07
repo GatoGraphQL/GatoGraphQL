@@ -113,7 +113,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             'blocks' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getBlockFilterByInputObjectTypeResolver(),
+                    'filterBy' => $this->getBlockFilterByInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
@@ -134,10 +134,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $blockContentParserPayload = null;
                 try {
                     $filterOptions = [];
-                    if ($query['filter']['include'] ?? null) {
-                        $filterOptions = $query['filter']['include'];
-                    } elseif ($query['filter']['exclude'] ?? null) {
-                        $filterOptions = $query['filter']['exclude'];
+                    if ($query['filterBy']['include'] ?? null) {
+                        $filterOptions = $query['filterBy']['include'];
+                    } elseif ($query['filterBy']['exclude'] ?? null) {
+                        $filterOptions = $query['filterBy']['exclude'];
                     }
                     $blockContentParserPayload = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost, $filterOptions);
                 } catch (BlockContentParserException $e) {
