@@ -1,0 +1,41 @@
+{
+  posts(pagination: { limit: 5 }) {
+    id
+    title
+    blocks {
+      ... on Block {
+        name
+        attributes
+        innerBlocks {
+          name
+          attributes
+          innerBlocks {
+            name
+            attributes
+            innerBlocks {
+              name
+              attributes
+              innerBlocks {
+                name
+                attributes
+                innerBlocks {
+                  name
+                  attributes
+                  innerBlocks {
+                    name
+                    attributes
+                    innerBlocks {
+                      name
+                      attributes
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
