@@ -137,7 +137,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $this->purgeContainer();
             return;
         }
-        
+
         /**
          * Check that the activated/deactivated plugin is
          * a Gato GraphQL extension, or any plugin depended-upon
@@ -148,15 +148,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $extensionBaseNameInstances = $extensionManager->getExtensions();
         foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
             if (
-                !($extensionBaseName === $pluginFile
+                $extensionBaseName === $pluginFile
                 || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
                 || in_array($pluginFile, $inactiveExtensionDependedUponPluginFiles)
-                )
             ) {
-                continue;
+                $this->purgeContainer();
+                return;
             }
-            $this->purgeContainer();
-            break;
         }
     }
 
