@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Config\Rector\CodeQuality\Configurators;
+namespace PoP\PoP\Config\Rector\Upgrades\Configurators;
 
 use PoP\PoP\Config\Rector\Configurators\ContainerConfigurationServiceTrait;
 
-class CodeQualityContainerConfigurationService extends AbstractCodeQualityContainerConfigurationService
+class PHPUnit10ContainerConfigurationService extends AbstractPHPUnit10ContainerConfigurationService
 {
     use ContainerConfigurationServiceTrait;
 

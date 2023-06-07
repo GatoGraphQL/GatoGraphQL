@@ -677,6 +677,7 @@
         "release-major": "monorepo-builder release major --config=config/monorepo-builder/release.php --ansi",
         "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi",
         "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi",
+        "upgrade-to-phpunit-10": "rector process --config=config/rector/upgrades/phpunit-10/rector.php --ansi",
         "remove-unused-imports": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
         "build-js": [
             "Composer\\Config::disableProcessTimeout",
@@ -734,6 +735,7 @@
         "release-major": "Release a new 'major' version (MAJOR.xx.xx) (bump version, commit, push, tag, revert to 'dev-master', commit, push)",
         "merge-phpstan": "Generate a single PHPStan config for the monorepo, invoking the config for the PHPStan config for all packages",
         "improve-code-quality": "Improve code quality (via Rector)",
+        "upgrade-to-phpunit-10": "Run Rector to upgrade PHPUnit tests to v10",
         "remove-unused-imports": "Remove unused `use` imports",
         "build-js": "Build all JS packages, blocks and editor scripts from Gato GraphQL",
         "install-deps-build-js": "Build all JS packages, blocks and editor scripts from Gato GraphQL, installing all dependencies from npm"
