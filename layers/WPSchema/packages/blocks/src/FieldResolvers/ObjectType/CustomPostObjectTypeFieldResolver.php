@@ -126,18 +126,20 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         /** @var WP_Post */
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'blocks':
+                /** @var stdClass|null */
+                $filterBy = $fieldDataAccessor->getValue('filterBy');
+                
                 $blockContentParserPayload = null;
                 try {
                     $filterOptions = [];
-                    if ($query['filterBy']['include'] ?? null) {
-                        $filterOptions = $query['filterBy']['include'];
-                    } elseif ($query['filterBy']['exclude'] ?? null) {
-                        $filterOptions = $query['filterBy']['exclude'];
+                    if (isset($filterBy->include)) {
+                        $filterOptions['include'] = $filterBy->include;
+                    } elseif (isset($filterBy->exclude)) {
+                        $filterOptions['exclude'] = $filterBy->exclude;
                     }
                     $blockContentParserPayload = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost, $filterOptions);
                 } catch (BlockContentParserException $e) {
