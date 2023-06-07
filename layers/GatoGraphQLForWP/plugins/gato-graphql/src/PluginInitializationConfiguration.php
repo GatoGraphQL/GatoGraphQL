@@ -58,6 +58,8 @@ use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
 use PoPCMSSchema\Users\Module as UsersModule;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPWPSchema\Blocks\Environment as BlocksEnvironment;
+use PoPWPSchema\Blocks\Module as BlocksModule;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Module as ComponentModelModule;
@@ -397,6 +399,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
+            ],
+            // Blocks, if there is only one custom type, use it instead of the Union
+            [
+                'class' => BlocksModule::class,
+                'envVariable' => BlocksEnvironment::USE_SINGLE_TYPE_INSTEAD_OF_BLOCK_UNION_TYPE,
+                'module' => SchemaTypeModuleResolver::SCHEMA_BLOCKS,
+                'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,
             ],
             // White/Blacklisted entries to Root.optionValue
             [
