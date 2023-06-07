@@ -239,13 +239,18 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         ?stdClass $attributes,
         ?array $innerBlocks
     ): BlockInterface {
-        return App::applyFilters(
+        /** @var BlockInterface|null */
+        $injectedBlockObject = App::applyFilters(
             HookNames::BLOCK_TYPE,
             null,
             $name,
             $attributes,
             $innerBlocks,
-        ) ?? new GeneralBlock(
+        );
+        if ($injectedBlockObject !== null) {
+            return $injectedBlockObject;
+        }
+        return new GeneralBlock(
             $name,
             $attributes,
             $innerBlocks
