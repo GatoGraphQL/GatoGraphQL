@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\TestingSchema\Services\Blocks;
 
 use GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractBlock;
-use GatoGraphQL\GatoGraphQL\Services\Blocks\MainPluginBlockTrait;
 
 class NotServerSideRegisteredSchemaTestingBlock extends AbstractBlock
 {
-    use MainPluginBlockTrait;
+    use ExtensionBlockTrait;
 
     protected function getBlockName(): string
     {
