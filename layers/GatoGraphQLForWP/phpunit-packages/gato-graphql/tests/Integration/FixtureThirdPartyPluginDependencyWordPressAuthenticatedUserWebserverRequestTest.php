@@ -18,4 +18,12 @@ class FixtureThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverReques
     {
         return __DIR__ . '/fixture-3rd-party-plugins';
     }
+
+    protected function isModuleEnabledByDefault(string $dataName): bool
+    {
+        if (str_starts_with($dataName, 'classic-editor')) {
+            return false;
+        }
+        return parent::isModuleEnabledByDefault($dataName);
+    }
 }
