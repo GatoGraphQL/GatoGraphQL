@@ -5,7 +5,7 @@
                 "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 151,
+                        "line": 159,
                         "column": 7
                     }
                 ],
@@ -26,7 +26,7 @@
                 "message": "Block type \"gato-graphql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 190,
+                        "line": 198,
                         "column": 7
                     }
                 ],
@@ -50,7 +50,7 @@
             "message": "Error parsing post ID 619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 138,
+                    "line": 146,
                     "column": 7
                 }
             ],
@@ -71,7 +71,7 @@
             "message": "Error parsing post ID 658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 164,
+                    "line": 172,
                     "column": 7
                 }
             ],
@@ -1252,6 +1252,52 @@
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
+                    },
+                    "innerBlocks": null
+                }
+            ]
+        },
+        "page": {
+            "id": 2,
+            "title": "Sample Page",
+            "blocks": [
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:",
+                        "dropCap": false
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/quote",
+                    "attributes": {
+                        "value": "<p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi\u00f1a coladas. (And gettin' caught in the rain.)<\/p>",
+                        "citation": ""
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "...or something like this:",
+                        "dropCap": false
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/quote",
+                    "attributes": {
+                        "value": "<p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p>",
+                        "citation": ""
+                    },
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "As a new WordPress user, you should go to <a href=\"https:\/\/gato-graphql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!",
+                        "dropCap": false
                     },
                     "innerBlocks": null
                 }

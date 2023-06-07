@@ -115,7 +115,15 @@
     }
   }
 
-  customPost: customPost(by: { id: 654 }) {
+  page(by: { id: 2 }) {
+    id
+    title
+    blocks {
+      ...BlockData
+    }
+  }
+
+  customPost(by: { id: 654 }) {
     __typename
     ...on GenericCustomPost {
       id
