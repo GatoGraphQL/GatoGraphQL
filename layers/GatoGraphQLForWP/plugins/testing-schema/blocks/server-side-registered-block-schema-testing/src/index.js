@@ -22,7 +22,7 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'gato-graphql/not-server-side-registered-schema-testing', {
+registerBlockType( 'gato-graphql/not-server-side-registered-block-schema-testing', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.

@@ -10,7 +10,7 @@ class NotServerSideRegisteredSchemaTestingBlock extends AbstractServerSideRegist
 {
     protected function getBlockName(): string
     {
-        return 'not-server-side-registered-schema-testing';
+        return 'not-server-side-registered-block-schema-testing';
     }
 
     protected function registerBlockServerSide(): bool
