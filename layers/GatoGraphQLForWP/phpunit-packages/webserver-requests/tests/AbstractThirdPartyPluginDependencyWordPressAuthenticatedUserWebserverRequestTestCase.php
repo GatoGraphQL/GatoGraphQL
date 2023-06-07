@@ -122,7 +122,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $pluginName = $this->getPluginNameFromDataName($dataName, ':disabled');
+        $pluginName = $this->getPluginNameFromDataName($dataName, $status === 'active' ? ':enabled' : ':disabled');
         $client->post(
             sprintf(
                 $endpointURLPlaceholder,
