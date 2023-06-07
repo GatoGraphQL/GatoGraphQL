@@ -132,15 +132,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             case 'blocks':
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
+                $filterOptions = [];
+                if (isset($filterBy->include)) {
+                    $filterOptions['include'] = $filterBy->include;
+                } elseif (isset($filterBy->exclude)) {
+                    $filterOptions['exclude'] = $filterBy->exclude;
+                }
                 
                 $blockContentParserPayload = null;
                 try {
-                    $filterOptions = [];
-                    if (isset($filterBy->include)) {
-                        $filterOptions['include'] = $filterBy->include;
-                    } elseif (isset($filterBy->exclude)) {
-                        $filterOptions['exclude'] = $filterBy->exclude;
-                    }
                     $blockContentParserPayload = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost, $filterOptions);
                 } catch (BlockContentParserException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
