@@ -61,11 +61,6 @@ abstract class AbstractCodeQualityContainerConfigurationService extends Abstract
     protected function getSkip(): array
     {
         return [
-            // Skip tests
-            '*/tests/*',
-            '*/test/*',
-            '*/Test/*',
-            // Skip everything else
             '*/vendor/*',
             '*/node_modules/*',
             '*/migrate-*',
