@@ -44,38 +44,38 @@ class BlockContentParser implements BlockContentParserInterface
         WP_Post|int $customPostObjectOrID,
         array $filterOptions = [],
     ): ?BlockContentParserPayload {
-		if ($customPostObjectOrID instanceof WP_Post) {
-			$customPost = $customPostObjectOrID;
-		} else {
-			/** @var int */
-			$customPostID = $customPostObjectOrID;
-			/** @var WP_Post|null */
-			$customPost = get_post($customPostID);
-			if ($customPost === null) {
-				return null;
-			}
-		}
+        if ($customPostObjectOrID instanceof WP_Post) {
+            $customPost = $customPostObjectOrID;
+        } else {
+            /** @var int */
+            $customPostID = $customPostObjectOrID;
+            /** @var WP_Post|null */
+            $customPost = get_post($customPostID);
+            if ($customPost === null) {
+                return null;
+            }
+        }
         $customPostContent = $customPost->post_content;
         $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $filterOptions);
         return $this->processParsedBlockData($parsedBlockData);
     }
 
-	/**
+    /**
      * @param mixed[]|WP_Error $parsedBlockData
      * @throws BlockContentParserException
      */
     protected function processParsedBlockData(array|WP_Error $parsedBlockData): BlockContentParserPayload
-	{
+    {
         if ($parsedBlockData instanceof WP_Error) {
             throw new BlockContentParserException($parsedBlockData);
         }
 
-		/** @var array<array<string,mixed>> */
-		$parsedBlockDataItems = $parsedBlockData['blocks'];
+        /** @var array<array<string,mixed>> */
+        $parsedBlockDataItems = $parsedBlockData['blocks'];
         return new BlockContentParserPayload(
-			$this->castBlockDataItemsToObject($parsedBlockDataItems),
-			$parsedBlockData['warnings'] ?? null
-		);
+            $this->castBlockDataItemsToObject($parsedBlockDataItems),
+            $parsedBlockData['warnings'] ?? null
+        );
     }
 
     /**
@@ -92,17 +92,17 @@ class BlockContentParser implements BlockContentParserInterface
              * @param array<string,mixed> $item
              */
             function (array $item): stdClass {
-				// Convert the block to stdClass
+                // Convert the block to stdClass
                 $item = (object) $item;
 
-				// Convert the block attributes to stdClass
+                // Convert the block attributes to stdClass
                 if (isset($item->attributes)) {
                     /** @var array<string,mixed> */
                     $blockAttributes = $item->attributes;
                     $item->attributes = (object) $blockAttributes;
                 }
-				
-				// Recursively call for the block's inner blocks'
+
+                // Recursively call for the block's inner blocks'
                 if (isset($item->innerBlocks)) {
                     /** @var array<array<string,mixed>> */
                     $blockInnerBlockDataItems = $item->innerBlocks;
@@ -376,7 +376,7 @@ class BlockContentParser implements BlockContentParserInterface
      * @param array<string,mixed> $block_attribute_definition
      *
      * @return mixed[]|string|null
-	 * 
+     *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function source_attribute(Crawler $crawler, array $block_attribute_definition): array|string|null
@@ -737,7 +737,7 @@ class BlockContentParser implements BlockContentParserInterface
             return null;
         }
 
-		return null;
+        return null;
 
 		// phpcs:enable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
     }

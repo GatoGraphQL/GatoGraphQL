@@ -139,7 +139,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 } elseif (isset($filterBy->exclude)) {
                     $filterOptions['exclude'] = $filterBy->exclude;
                 }
-                
+
                 $blockContentParserPayload = null;
                 try {
                     $blockContentParserPayload = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost, $filterOptions);

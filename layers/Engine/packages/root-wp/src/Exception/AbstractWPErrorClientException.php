@@ -16,7 +16,7 @@ use WP_Error;
 abstract class AbstractWPErrorClientException extends AbstractClientException
 {
     use WPErrorDataProcessorTrait;
-    
+
     public int|string|null $errorCode;
     public ?stdClass $data;
 
