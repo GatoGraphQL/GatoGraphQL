@@ -11,7 +11,9 @@ abstract class AbstractValueToQueryFilterInput extends AbstractFilterInput
      */
     final public function filterDataloadQueryArgs(array &$query, mixed $value): void
     {
-        $value = $this->getValue($value);
+        if ($value !== null) {
+            $value = $this->getValue($value);
+        }
         if ($this->avoidSettingValueIfEmpty() && empty($value)) {
             return;
         }
