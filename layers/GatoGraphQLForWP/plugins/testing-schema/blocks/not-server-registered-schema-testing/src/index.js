@@ -34,7 +34,7 @@ registerBlockType( 'gato-graphql/not-server-registered-schema-testing', {
 	 * It will be shown in the Block Tab in the Settings Sidebar.
 	 */
 	description: __(
-		'Provide access to the Voyager client for the GraphQL endpoint',
+		'Test field `CustomPost.blocks`, to see that blocks not registered on the server-side cannot be parsed',
 		'gato-graphql-testing-schema'
 	),
 
