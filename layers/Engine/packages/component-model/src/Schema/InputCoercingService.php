@@ -45,6 +45,7 @@ class InputCoercingService implements InputCoercingServiceInterface
      */
     public function maybeConvertInputValueFromSingleToList(
         mixed $inputValue,
+        bool $inputIsNonNullable,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
     ): mixed {
@@ -60,6 +61,12 @@ class InputCoercingService implements InputCoercingServiceInterface
         if (
             is_array($inputValue)
             || !$moduleConfiguration->convertInputValueFromSingleToList()
+        ) {
+            return $inputValue;
+        }
+        if (
+            $inputValue === null
+            && !$inputIsNonNullable
         ) {
             return $inputValue;
         }
@@ -90,6 +97,7 @@ class InputCoercingService implements InputCoercingServiceInterface
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         string $inputName,
+        ?bool $inputIsNonNullable,
         ?bool $inputIsArrayType,
         ?bool $inputIsNonNullArrayItemsType,
         ?bool $inputIsArrayOfArraysType,
@@ -102,6 +110,14 @@ class InputCoercingService implements InputCoercingServiceInterface
          * to validate
          */
         if ($inputIsArrayType === null && $inputIsArrayOfArraysType === null) {
+            return;
+        }
+
+        /**
+         * If the value is null and the input can be nullable, there's nothing
+         * to validate
+         */
+        if ($inputIsNonNullable === false && $inputValue === null) {
             return;
         }
 

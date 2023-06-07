@@ -21,6 +21,7 @@ interface InputCoercingServiceInterface
      */
     public function maybeConvertInputValueFromSingleToList(
         mixed $inputValue,
+        bool $inputIsNonNullable,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
     ): mixed;
@@ -43,6 +44,7 @@ interface InputCoercingServiceInterface
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         string $inputName,
+        ?bool $inputIsNonNullable,
         ?bool $inputIsArrayType,
         ?bool $inputIsNonNullArrayItemsType,
         ?bool $inputIsArrayOfArraysType,
