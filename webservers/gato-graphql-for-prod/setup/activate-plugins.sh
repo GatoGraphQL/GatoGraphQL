@@ -1,6 +1,8 @@
 #!/bin/sh
-# Download and activate external plugins
+# Download and maybe activate external plugins
 wp plugin install wordpress-importer --activate --path=/app/wordpress
+wp plugin install classic-editor --path=/app/wordpress
+
 # Install/activate own plugins
 if wp plugin is-installed gato-graphql --path=/app/wordpress; then
     wp plugin activate gato-graphql --path=/app/wordpress

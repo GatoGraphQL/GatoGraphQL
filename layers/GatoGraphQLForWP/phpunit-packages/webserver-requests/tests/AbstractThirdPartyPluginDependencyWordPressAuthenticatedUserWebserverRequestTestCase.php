@@ -29,9 +29,10 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         $isModuleEnabledByDefault = $this->isModuleEnabledByDefault($dataName);
-        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled')) {
+        $isPluginActiveByDefault = $this->isPluginActiveByDefault($dataName);
+        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled') && $isPluginActiveByDefault) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
-        } elseif (!$isModuleEnabledByDefault && str_ends_with($dataName, ':enabled')) {
+        } elseif ((!$isModuleEnabledByDefault || !$isPluginActiveByDefault) && str_ends_with($dataName, ':enabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkDeactivatePlugins(
@@ -50,9 +51,10 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         $isModuleEnabledByDefault = $this->isModuleEnabledByDefault($dataName);
-        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled')) {
+        $isPluginActiveByDefault = $this->isPluginActiveByDefault($dataName);
+        if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled') && $isPluginActiveByDefault) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
-        } elseif (!$isModuleEnabledByDefault && str_ends_with($dataName, ':enabled')) {
+        } elseif ((!$isModuleEnabledByDefault || !$isPluginActiveByDefault) && str_ends_with($dataName, ':enabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkActivatePlugins();
@@ -65,6 +67,11 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     }
 
     protected function isModuleEnabledByDefault(string $dataName): bool
+    {
+        return true;
+    }
+
+    protected function isPluginActiveByDefault(string $dataName): bool
     {
         return true;
     }
@@ -122,7 +129,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $pluginName = $this->getPluginNameFromDataName($dataName, ':disabled');
+        $pluginName = $this->getPluginNameFromDataName($dataName);
         $client->post(
             sprintf(
                 $endpointURLPlaceholder,
@@ -139,9 +146,17 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      * them off, as they are "this is another test of the
      * same plugin"
      */
-    protected function getPluginNameFromDataName(string $dataName, string $suffix): string
+    protected function getPluginNameFromDataName(string $dataName): string
     {
-        $pluginName = substr($dataName, 0, strlen($dataName) - strlen($suffix));
+        $pluginName = $dataName;
+        $possibleSuffixes = [':enabled', ':disabled', ':only-one-enabled'];
+        foreach ($possibleSuffixes as $suffix) {
+            if (!str_ends_with($dataName, $suffix)) {
+                continue;
+            }
+            $pluginName = substr($dataName, 0, strlen($dataName) - strlen($suffix));
+            break;
+        }
         $matches = [];
         if (preg_match('/(.*)\:\d+/', $pluginName, $matches)) {
             return $matches[1];
@@ -169,7 +184,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      */
     protected function getBulkPluginDeactivationPluginFilesToSkip(string $dataName): array
     {
-        $pluginName = $this->getPluginNameFromDataName($dataName, ':only-one-enabled');
+        $pluginName = $this->getPluginNameFromDataName($dataName);
         $pluginFile = $pluginName . '.php';
         return [
             $pluginFile,

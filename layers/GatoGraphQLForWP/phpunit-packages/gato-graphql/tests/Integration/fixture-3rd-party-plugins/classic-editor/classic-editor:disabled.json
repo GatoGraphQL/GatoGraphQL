@@ -1,0 +1,57 @@
+{
+    "data": {
+        "posts": [
+            {
+                "id": 28,
+                "blocks": [
+                    {
+                        "name": "core\/heading",
+                        "attributes": {
+                            "content": "Categories Block",
+                            "level": 2
+                        },
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/categories",
+                        "attributes": {
+                            "displayAsDropdown": false,
+                            "showHierarchy": false,
+                            "showPostCounts": false,
+                            "showOnlyTopLevel": false,
+                            "showEmpty": false
+                        },
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/heading",
+                        "attributes": {
+                            "content": "Latest Posts Block",
+                            "level": 2
+                        },
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/latest-posts",
+                        "attributes": {
+                            "postsToShow": 5,
+                            "displayPostContent": false,
+                            "displayPostContentRadio": "excerpt",
+                            "excerptLength": 55,
+                            "displayAuthor": false,
+                            "displayPostDate": false,
+                            "postLayout": "list",
+                            "columns": 3,
+                            "order": "desc",
+                            "orderBy": "date",
+                            "displayFeaturedImage": false,
+                            "featuredImageSizeSlug": "thumbnail",
+                            "addLinkToFeaturedImage": false
+                        },
+                        "innerBlocks": null
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'blocks' on type 'Post'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "blocks { ... }",
+                    "posts(pagination: {limit: 1}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Post",
+                "field": "blocks { ... }",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "posts": [
+            {
+                "id": 28,
+                "blocks": null
+            }
+        ]
+    }
+}

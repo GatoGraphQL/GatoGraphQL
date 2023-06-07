@@ -1,0 +1,15 @@
+{
+  posts(pagination: { limit: 1 }) {
+    id
+    blocks {
+      ...on Block {
+        name
+        attributes
+        innerBlocks {
+          name
+          attributes
+        }
+      }
+    }
+  }
+}
