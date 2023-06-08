@@ -19,7 +19,7 @@ abstract class AbstractEnableDisablePluginSameResponseFixturePluginDependencyWor
      * @param array<string,array<string,mixed>> $pluginEntries
      * @return array<string,array<string,mixed>>
      */
-    protected function customizePluginNameEntries(array $pluginEntries): array
+    protected static function customizePluginNameEntries(array $pluginEntries): array
     {
         $pluginEntries = parent::customizePluginNameEntries($pluginEntries);
         foreach ($pluginEntries as $pluginName => &$pluginEntry) {

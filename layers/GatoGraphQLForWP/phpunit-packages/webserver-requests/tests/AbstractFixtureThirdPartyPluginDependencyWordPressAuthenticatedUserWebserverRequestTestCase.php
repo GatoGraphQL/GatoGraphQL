@@ -68,14 +68,14 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                 $pluginEntries[$pluginName]['response-only-one-enabled'] = $pluginOnlyOneEnabledGraphQLResponse;
             }
         }
-        return $this->customizePluginNameEntries($pluginEntries);
+        return static::customizePluginNameEntries($pluginEntries);
     }
 
     /**
      * @param array<string,array<string,mixed>> $pluginEntries
      * @return array<string,array<string,mixed>>
      */
-    protected function customizePluginNameEntries(array $pluginEntries): array
+    protected static function customizePluginNameEntries(array $pluginEntries): array
     {
         return $pluginEntries;
     }
