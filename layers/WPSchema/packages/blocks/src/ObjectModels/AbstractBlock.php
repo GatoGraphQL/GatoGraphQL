@@ -13,9 +13,10 @@ abstract class AbstractBlock extends AbstractTransientObject implements BlockInt
      * @param BlockInterface[]|null $innerBlocks
      */
     public function __construct(
-        public string $name,
-        public readonly ?stdClass $attributes = null,
-        public readonly ?array $innerBlocks = null,
+        public readonly string $name,
+        public readonly ?stdClass $attributes,
+        public readonly ?array $innerBlocks,
+        public readonly string $contentSource,
     ) {
         parent::__construct();
     }
@@ -36,5 +37,10 @@ abstract class AbstractBlock extends AbstractTransientObject implements BlockInt
     public function getInnerBlocks(): ?array
     {
         return $this->innerBlocks;
+    }
+
+    public function getContentSource(): string
+    {
+        return $this->contentSource;
     }
 }
