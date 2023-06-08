@@ -81,6 +81,8 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     fn (BlockInterface $block) => $block->getID(),
                     $innerBlocks
                 );
+            case 'contentSource':
+                return $block->getContentSource();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

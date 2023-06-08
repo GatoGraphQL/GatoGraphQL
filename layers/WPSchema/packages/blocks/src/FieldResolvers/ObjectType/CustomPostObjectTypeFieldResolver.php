@@ -212,68 +212,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             );
         }
 
-        /**
-         * Regenerate the original content source.
-         *
-         * Please notice that it will not be exactly the same!
-         * Because:
-         *
-         * - the default attributes should not be included,
-         *   but they are
-         * - attributes stored inside the innerHTML are also
-         *   stored within the attributes
-         *
-         * A better solution is to retrieve the HTML content as is
-         * already when parsing the blocks in class
-         * `WP_Block_Parser_Block` (but this is currently not supported!)
-         *
-         * @see wp-includes/class-wp-block-parser.php
-         *
-         * @todo If `WP_Block_Parser_Block` ever retrieves the original HTML source, then improve this solution
-         *
-         * @see https://github.com/leoloso/PoP/issues/2346
-         */
-        $contentSource = serialize_block($this->getSerializeBlockData($blockItem));
-
         return $this->createBlockObject(
             $name,
             $attributes,
             $innerBlocks,
             $innerContent,
-            $contentSource,
+            $blockItem,
         );
-    }
-
-    /**
-     * Retrieve the properties that, passed to `serialize_block`,
-     * recreates the Block HTML.
-     *
-     * @return array<string,mixed>
-     */
-    protected function getSerializeBlockData(stdClass $blockItem): array
-    {
-        /** @var string */
-        $name = $blockItem->name;
-        /** @var stdClass|null */
-        $attributes = $blockItem->attributes ?? null;
-        /** @var array<string|null> */
-        $innerContent = $blockItem->innerContent;
-
-        $serializeBlockData = [
-            'blockName' => $name,
-            'attrs' => $attributes !== null ? (array) $attributes : [],
-            'innerContent' => $innerContent,
-        ];
-
-        if (isset($blockItem->innerBlocks)) {
-            /** @var array<stdClass> */
-            $blockInnerBlocks = $blockItem->innerBlocks;
-            $serializeBlockData['innerBlocks'] = array_map(
-                $this->getSerializeBlockData(...),
-                $blockInnerBlocks
-            );
-        }
-        return $serializeBlockData;
     }
 
     /**
@@ -294,7 +239,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         ?stdClass $attributes,
         ?array $innerBlocks,
         array $innerContent,
-        string $contentSource,
+        stdClass $blockItem,
     ): BlockInterface {
         /** @var BlockInterface|null */
         $injectedBlockObject = App::applyFilters(
@@ -304,7 +249,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $attributes,
             $innerBlocks,
             $innerContent,
-            $contentSource,
+            $blockItem,
         );
         if ($injectedBlockObject !== null) {
             return $injectedBlockObject;
@@ -314,7 +259,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $attributes,
             $innerBlocks,
             $innerContent,
-            $contentSource,
+            $blockItem,
         );
     }
 
