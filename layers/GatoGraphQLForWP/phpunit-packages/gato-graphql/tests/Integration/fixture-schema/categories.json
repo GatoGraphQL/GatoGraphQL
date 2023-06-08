@@ -178,12 +178,63 @@
             {
                 "__typename": "GenericCategory",
                 "taxonomy": "dummy-category",
-                "customPostCount": 4,
+                "customPostCount": 7,
                 "customPosts": [
                     {
                         "__typename": "GenericCustomPost",
                         "id": 634,
                         "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 25,
+                                "name": "Absolute Brilliance"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 654,
+                        "title": "Dummy CPT with blocks",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 25,
+                                "name": "Absolute Brilliance"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 656,
+                        "title": "Dummy CPT with non-existing block",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 25,
+                                "name": "Absolute Brilliance"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 658,
+                        "title": "Dummy CPT with no content",
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
@@ -254,7 +305,7 @@
                         ]
                     }
                 ],
-                "count": 4,
+                "count": 7,
                 "description": "",
                 "id": 30,
                 "metaValue": null,
@@ -559,12 +610,63 @@
             {
                 "__typename": "GenericCategory",
                 "taxonomy": "dummy-category",
-                "customPostCount": 6,
+                "customPostCount": 9,
                 "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 658,
+                        "title": "Dummy CPT with no content",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 25,
+                                "name": "Absolute Brilliance"
+                            }
+                        ]
+                    },
                     {
                         "__typename": "GenericCustomPost",
                         "id": 634,
                         "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 25,
+                                "name": "Absolute Brilliance"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 654,
+                        "title": "Dummy CPT with blocks",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 25,
+                                "name": "Absolute Brilliance"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 656,
+                        "title": "Dummy CPT with non-existing block",
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
@@ -669,7 +771,7 @@
                         ]
                     }
                 ],
-                "count": 6,
+                "count": 9,
                 "description": "",
                 "id": 25,
                 "metaValue": null,
@@ -721,6 +823,80 @@
                         "taxonomy": "dummy-category"
                     }
                 ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 654,
+                "title": "Dummy CPT with blocks",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 30,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 25,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 656,
+                "title": "Dummy CPT with non-existing block",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 30,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 25,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 658,
+                "title": "Dummy CPT with no content",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 30,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 25,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "customPostType": "dummy-cpt",
+                "categories": []
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "customPostType": "dummy-cpt",
+                "categories": []
             },
             {
                 "__typename": "GenericCustomPost",
