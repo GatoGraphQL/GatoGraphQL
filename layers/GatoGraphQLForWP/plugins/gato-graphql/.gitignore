@@ -1,4 +1,4 @@
-.phpunit.result.cache
+/.phpunit.cache
 composer*.local.json
 /vendor/
 /bin/

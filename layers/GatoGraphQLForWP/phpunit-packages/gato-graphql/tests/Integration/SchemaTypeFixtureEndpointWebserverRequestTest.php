@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class SchemaTypeFixtureEndpointWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-schema-type';
     }
@@ -14,7 +14,7 @@ class SchemaTypeFixtureEndpointWebserverRequestTest extends AbstractFixtureEndpo
     /**
      * Single endpoint
      */
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql';
     }

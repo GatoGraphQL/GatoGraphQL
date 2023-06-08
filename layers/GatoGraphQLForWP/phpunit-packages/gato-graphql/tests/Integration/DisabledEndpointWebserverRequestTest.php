@@ -14,7 +14,7 @@ class DisabledEndpointWebserverRequestTest extends AbstractEndpointWebserverRequ
      *
      * @return array<string,array<mixed>>
      */
-    protected function provideEndpointEntries(): array
+    public static function provideEndpointEntries(): array
     {
         $query = <<<GRAPHQL
             query {

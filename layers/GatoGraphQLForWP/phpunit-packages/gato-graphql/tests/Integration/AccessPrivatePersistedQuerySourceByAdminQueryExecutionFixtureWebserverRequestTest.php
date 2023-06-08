@@ -10,12 +10,12 @@ class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequ
      * This folder doesn't actually matter, as the content will
      * be overriden anyway
      */
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-private-persisted-queries-success';
     }
 
-    protected function viewSource(): bool
+    protected static function viewSource(): bool
     {
         return true;
     }
@@ -27,7 +27,7 @@ class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequ
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
         $providerItems['private-persisted-query'][0] = 'text/html';

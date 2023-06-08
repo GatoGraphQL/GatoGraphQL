@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class AccessDraftCustomEndpointByAdminQueryExecutionFixtureWebserverRequestTest extends AbstractAccessDraftCustomEndpointQueryExecutionFixtureWebserverRequestTestCase
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-draft-custom-endpoint-by-admin';
     }

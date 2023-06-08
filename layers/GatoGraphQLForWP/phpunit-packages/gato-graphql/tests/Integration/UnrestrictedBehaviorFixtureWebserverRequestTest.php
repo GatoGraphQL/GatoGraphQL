@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class UnrestrictedBehaviorFixtureWebserverRequestTest extends AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-unrestricted-behavior';
     }

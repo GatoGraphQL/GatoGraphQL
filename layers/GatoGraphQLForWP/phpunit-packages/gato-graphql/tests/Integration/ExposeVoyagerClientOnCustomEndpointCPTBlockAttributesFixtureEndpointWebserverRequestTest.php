@@ -10,7 +10,7 @@ class ExposeVoyagerClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebser
 {
     public const WEBSITE_CUSTOM_ENDPOINT_ID = 196;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/website/';
     }

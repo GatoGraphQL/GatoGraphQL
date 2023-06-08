@@ -10,7 +10,7 @@ class QueryableCustomPostsModifyPluginSettingsFixtureEndpointWebserverRequestTes
 {
     use QueryableCustomPostsFixtureEndpointWebserverRequestTestTrait;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/';
     }

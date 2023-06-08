@@ -34,6 +34,15 @@ class DataToAppendAndRemoveDataSource
                     'type' => 'vcs',
                     'url' => 'https://github.com/leoloso/monorepo-builder.git',
                 ],
+                /**
+                 * Also override "symplify/package-builder" because its dependency
+                 * of "sebastian/diff" is on "^4.0", which does not let PHPUnit v10
+                 * get installed. "leoloso/package-builder" upgrades it to "^5.0"
+                 */
+                [
+                    'type' => 'vcs',
+                    'url' => 'https://github.com/leoloso/package-builder.git',
+                ],
             ],
             // 'extra' => [
             //     'installer-paths' => [

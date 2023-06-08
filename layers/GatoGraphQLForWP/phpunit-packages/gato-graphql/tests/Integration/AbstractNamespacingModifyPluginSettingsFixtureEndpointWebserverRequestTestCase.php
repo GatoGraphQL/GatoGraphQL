@@ -12,7 +12,7 @@ abstract class AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRe
      * Custom endpoint "unrestricted-schema" has no ACLs (so we get all the
      * fields when doing introspection), and "Namespacing" as "default"
      */
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/unrestricted-schema/';
     }

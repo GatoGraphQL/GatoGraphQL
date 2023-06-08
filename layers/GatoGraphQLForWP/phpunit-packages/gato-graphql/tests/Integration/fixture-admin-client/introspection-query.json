@@ -761,6 +761,71 @@
         },
         {
           "kind": "OBJECT",
+          "name": "GeneralBlock",
+          "description": "Representation of a Block that works for all blocks, retrieving the block attributes as a non-strictly-typed JSON object",
+          "fields": [
+            {
+              "name": "attributes",
+              "description": "Block attributes, parsed to the type declared in their block.json schema",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "JSONObject",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "innerBlocks",
+              "description": "Block's inner blocks (if suitable)",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[BlockUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "BlockUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "BlockUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Block name",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Block",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "GenericCategory",
           "description": "A category that does not have its own type in the schema",
           "fields": [
@@ -1127,6 +1192,37 @@
                   "kind": "OBJECT",
                   "name": "User",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "blocks",
+              "description": "(Gutenberg) Blocks in a custom post",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to specify the property and data to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[BlockUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "BlockUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "BlockUnion",
+                    "ofType": null
+                  }
                 }
               },
               "isDeprecated": false,
@@ -3882,6 +3978,37 @@
               "deprecationReason": null
             },
             {
+              "name": "blocks",
+              "description": "(Gutenberg) Blocks in a custom post",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to specify the property and data to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[BlockUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "BlockUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "BlockUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "childCount",
               "description": "Number of child pages",
               "args": [
@@ -4665,6 +4792,37 @@
                   "kind": "OBJECT",
                   "name": "User",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "blocks",
+              "description": "(Gutenberg) Blocks in a custom post",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to specify the property and data to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[BlockUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "BlockUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "BlockUnion",
+                    "ofType": null
+                  }
                 }
               },
               "isDeprecated": false,
@@ -14577,6 +14735,71 @@
         },
         {
           "kind": "INTERFACE",
+          "name": "Block",
+          "description": "Entities representing a Block",
+          "fields": [
+            {
+              "name": "attributes",
+              "description": "Block attributes, parsed to the type declared in their block.json schema",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "JSONObject",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "innerBlocks",
+              "description": "Block's inner blocks (if suitable)",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[BlockUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "BlockUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "BlockUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Block name",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GeneralBlock",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "INTERFACE",
           "name": "Category",
           "description": "Entities representing a category",
           "fields": [
@@ -15784,6 +16007,53 @@
               "ofType": null
             }
           ]
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "BlockFilterByInput",
+          "description": "Oneof input to specify the property and data to filter blocks",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "exclude",
+              "description": "Names of blocks to be excluded",
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "include",
+              "description": "Names of blocks to be included",
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
         },
         {
           "kind": "INPUT_OBJECT",
@@ -22520,6 +22790,22 @@
             }
           ],
           "possibleTypes": null
+        },
+        {
+          "kind": "UNION",
+          "name": "BlockUnion",
+          "description": "Union of 'Block' types",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GeneralBlock",
+              "ofType": null
+            }
+          ]
         },
         {
           "kind": "UNION",

@@ -11,9 +11,7 @@ abstract class AbstractDisabledClientWebserverRequestTestCase extends AbstractWe
 {
     use ClientWebserverRequestTestCaseTrait;
 
-    /**
-     * @dataProvider provideDisabledClientEntries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideDisabledClientEntries')]
     public function testDisabledClients(
         string $clientEndpoint,
         int $expectedStatusCode,
@@ -24,5 +22,5 @@ abstract class AbstractDisabledClientWebserverRequestTestCase extends AbstractWe
     /**
      * @return array<string,mixed[]>
      */
-    abstract protected function provideDisabledClientEntries(): array;
+    abstract public static function provideDisabledClientEntries(): array;
 }

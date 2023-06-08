@@ -49,7 +49,7 @@ class SchemaConfigurationForSingleEndpointWithModuleDisabledQueryExecutionModify
         return parent::getModuleID($dataName);
     }
 
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-schema-configuration-for-single-endpoint-with-module-disabled';
     }
@@ -63,7 +63,7 @@ class SchemaConfigurationForSingleEndpointWithModuleDisabledQueryExecutionModify
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         $providerItems['admin-fields'][1] = $providerItems['admin-fields:0'][1];
         return $providerItems;

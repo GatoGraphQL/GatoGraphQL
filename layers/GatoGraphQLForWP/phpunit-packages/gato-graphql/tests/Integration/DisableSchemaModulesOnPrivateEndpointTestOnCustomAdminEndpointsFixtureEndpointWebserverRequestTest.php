@@ -10,7 +10,7 @@ class DisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsFixtureEndp
 {
     use DisableSchemaModulesOnPrivateEndpointNoChangeAdminEndpointsFixtureEndpointWebserverRequestTestTrait;
 
-    protected function getAdminEndpointGroup(): string
+    protected static function getAdminEndpointGroup(): string
     {
         return AddDummyCustomAdminEndpointHook::ADMIN_ENDPOINT_GROUP;
     }

@@ -8,12 +8,12 @@ use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractFixtureEndpointWebserv
 
 class PassQueryViaURLParamQueryExecutionFixtureWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-pass-query-via-url-param';
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         /**
          * Add the query in the endpoint. If no query is passed via the body,
@@ -25,7 +25,8 @@ class PassQueryViaURLParamQueryExecutionFixtureWebserverRequestTest extends Abst
 
     protected function getMethod(): string
     {
-        if ($this->dataName() === 'via-get-url-param-query-will-be-executed') {
+        $dataName = $this->getDataName();
+        if ($dataName === 'via-get-url-param-query-will-be-executed') {
             return 'GET';
         }
         return parent::getMethod();

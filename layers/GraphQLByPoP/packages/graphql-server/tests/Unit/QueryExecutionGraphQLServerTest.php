@@ -11,7 +11,7 @@ class QueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQLServe
     /**
      * @return mixed[]
      */
-    public function graphQLServerExecutionProvider(): array
+    public static function graphQLServerExecutionProvider(): array
     {
         return [
             'id' => [

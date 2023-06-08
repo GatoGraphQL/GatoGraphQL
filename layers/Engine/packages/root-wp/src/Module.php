@@ -20,7 +20,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoP\Root\Module::class,
+            RootModule::class,
         ];
     }
 

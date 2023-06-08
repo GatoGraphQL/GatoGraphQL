@@ -12,17 +12,17 @@ class AdminCustomEndpointSchemaQueryExecutionFixtureWebserverRequestTest extends
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-admin-endpoint';
     }
 
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-admin-endpoint-custom';
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return sprintf(
             'wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=%s',

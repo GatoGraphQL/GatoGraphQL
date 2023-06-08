@@ -9,13 +9,13 @@ use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 
 class DefaultMutationSchemeModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         // This endpoint has "Support nested mutations?" as "Default"
         return 'graphql/website/';
     }
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-default-mutation-scheme';
     }

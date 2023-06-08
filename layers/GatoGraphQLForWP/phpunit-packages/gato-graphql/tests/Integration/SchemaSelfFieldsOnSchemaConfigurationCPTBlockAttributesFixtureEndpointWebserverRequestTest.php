@@ -12,7 +12,7 @@ class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebs
 {
     public const MOBILE_APP_SCHEMA_CONFIGURATION_ID = 193;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         /**
          * This endpoint:
@@ -23,7 +23,7 @@ class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebs
         return 'graphql/mobile-app/';
     }
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-schema-self-fields';
     }

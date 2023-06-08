@@ -17,20 +17,23 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
     use FixtureTestCaseTrait;
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    public function getDataSetAsString(bool $includeData = true): string
-    {
-        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
-    }
+    /**
+     * Since PHPUnit v10, this is not possible anymore!
+     */
+    // final public function dataSetAsString(): string
+    // {
+    //     return $this->addFixtureFolderInfo(parent::dataSetAsString());
+    // }
 
     /**
      * @return array<string,array<string,mixed>> An array of [$moduleName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
-    protected function getModuleNameEntries(): array
+    protected static function getModuleNameEntries(): array
     {
         $moduleEntries = [];
-        $fixtureFolder = $this->getFixtureFolder();
+        $fixtureFolder = static::getFixtureFolder();
 
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
+        $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],
             ['*.disabled.gql']
@@ -45,13 +48,13 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
              */
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
-            $moduleEnabledGraphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName . ':enabled');
+            $moduleEnabledGraphQLResponseFile = static::getGraphQLResponseFile($filePath, $fileName . ':enabled');
             if (!\file_exists($moduleEnabledGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($moduleEnabledGraphQLResponseFile);
+                static::throwFileNotExistsException($moduleEnabledGraphQLResponseFile);
             }
-            $moduleDisabledGraphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName . ':disabled');
+            $moduleDisabledGraphQLResponseFile = static::getGraphQLResponseFile($filePath, $fileName . ':disabled');
             if (!\file_exists($moduleDisabledGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($moduleDisabledGraphQLResponseFile);
+                static::throwFileNotExistsException($moduleDisabledGraphQLResponseFile);
             }
 
             // The module name is created by the folder (module vendor) + fileName (module name)
@@ -61,24 +64,24 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
                 'query' => $query,
                 'response-enabled' => file_get_contents($moduleEnabledGraphQLResponseFile),
                 'response-disabled' => file_get_contents($moduleDisabledGraphQLResponseFile),
-                'endpoint' => $this->getModuleEndpoint($fileName),
+                'endpoint' => static::getModuleEndpoint($fileName),
             ];
         }
-        return $this->customizeModuleEntries($moduleEntries);
+        return static::customizeModuleEntries($moduleEntries);
     }
 
     /**
      * @param array<string,array<string,mixed>> $moduleEntries
      * @return array<string,array<string,mixed>>
      */
-    protected function customizeModuleEntries(array $moduleEntries): array
+    protected static function customizeModuleEntries(array $moduleEntries): array
     {
         return $moduleEntries;
     }
 
-    protected function getModuleEndpoint(string $fileName): ?string
+    protected static function getModuleEndpoint(string $fileName): ?string
     {
-        return $this->getEndpoint();
+        return static::getEndpoint();
     }
 
     /**

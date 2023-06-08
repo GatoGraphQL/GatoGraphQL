@@ -13,7 +13,7 @@ use PoP\Root\Module\ModuleInterface;
  */
 class GlobalFieldsAndMutationsWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-global-fields-and-mutations';
     }

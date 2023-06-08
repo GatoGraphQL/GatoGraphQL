@@ -36,9 +36,8 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
     /**
      * The client will always return a 200 status, whether
      * enabled or disabled. The difference is the custom header.
-     *
-     * @dataProvider provideClientEnabledDisabledEntries
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideClientEnabledDisabledEntries')]
     public function testClientEnabledDisabled(bool $enabled): void
     {
         $clientURL = $this->getClientURL();
@@ -53,9 +52,9 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
      *
      * @return array<string,array<mixed>>
      */
-    final protected function provideClientEnabledDisabledEntries(): array
+    final public static function provideClientEnabledDisabledEntries(): array
     {
-        $isUpdatedClientEnabled = $this->isUpdatedClientEnabled();
+        $isUpdatedClientEnabled = static::isUpdatedClientEnabled();
         return [
             self::ORIGINAL_DATA_NAME => [!$isUpdatedClientEnabled],
             self::UPDATED_DATA_NAME => [$isUpdatedClientEnabled],
@@ -75,7 +74,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [
-            BlockAttributeNames::IS_ENABLED => $this->isUpdatedClientEnabled(),
+            BlockAttributeNames::IS_ENABLED => static::isUpdatedClientEnabled(),
         ];
     }
 
@@ -83,7 +82,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
      * The default state is for the clients to be enabled.
      * Then, when updated, they will be disabled.
      */
-    protected function isUpdatedClientEnabled(): bool
+    protected static function isUpdatedClientEnabled(): bool
     {
         return false;
     }

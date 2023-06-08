@@ -9,7 +9,7 @@ class AccessPrivatePersistedQueryByNonLoggedInUserQueryExecutionFixtureWebserver
     use AccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTestTrait;
     use AccessPrivatePersistedQueryFailsQueryExecutionFixtureWebserverRequestTestTrait;
 
-    protected function viewSource(): bool
+    protected static function viewSource(): bool
     {
         return false;
     }

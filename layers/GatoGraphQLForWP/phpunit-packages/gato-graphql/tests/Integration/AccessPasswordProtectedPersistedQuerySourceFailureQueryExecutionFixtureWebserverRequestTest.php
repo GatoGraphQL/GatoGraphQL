@@ -9,7 +9,7 @@ class AccessPasswordProtectedPersistedQuerySourceFailureQueryExecutionFixtureWeb
     use AccessPasswordProtectedPersistedQueryQueryExecutionFixtureWebserverRequestTestTrait;
     use AccessPasswordProtectedPersistedQueryFailsQueryExecutionFixtureWebserverRequestTestTrait;
 
-    protected function viewSource(): bool
+    protected static function viewSource(): bool
     {
         return true;
     }

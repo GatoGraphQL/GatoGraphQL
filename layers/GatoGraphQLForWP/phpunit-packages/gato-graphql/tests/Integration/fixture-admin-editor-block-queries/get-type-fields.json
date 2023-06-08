@@ -168,6 +168,23 @@
           "description": "Error payload for: \"Setting the featured image is not supported by the custom post type\""
         },
         {
+          "name": "GeneralBlock",
+          "namespacedName": "GeneralBlock",
+          "fields": [
+            {
+              "name": "attributes"
+            },
+            {
+              "name": "innerBlocks"
+            },
+            {
+              "name": "name"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Representation of a Block that works for all blocks, retrieving the block attributes as a non-strictly-typed JSON object"
+        },
+        {
           "name": "GenericCategory",
           "namespacedName": "GenericCategory",
           "fields": [
@@ -229,6 +246,9 @@
             },
             {
               "name": "author"
+            },
+            {
+              "name": "blocks"
             },
             {
               "name": "categories"
@@ -662,6 +682,9 @@
               "name": "author"
             },
             {
+              "name": "blocks"
+            },
+            {
               "name": "childCount"
             },
             {
@@ -772,6 +795,9 @@
             },
             {
               "name": "author"
+            },
+            {
+              "name": "blocks"
             },
             {
               "name": "categories"
@@ -2171,6 +2197,23 @@
           "description": "URL Absolute Path scalar, such as \"\/my-fabulous-page\" in URL \"https:\/\/mysite.com\/my-fabulous-page\". The absolute path starts with \"\/\", followed by the URL relative path"
         },
         {
+          "name": "Block",
+          "namespacedName": "Block",
+          "fields": [
+            {
+              "name": "attributes"
+            },
+            {
+              "name": "innerBlocks"
+            },
+            {
+              "name": "name"
+            }
+          ],
+          "kind": "INTERFACE",
+          "description": "Entities representing a Block"
+        },
+        {
           "name": "Category",
           "namespacedName": "Category",
           "fields": [
@@ -2354,6 +2397,13 @@
           ],
           "kind": "INTERFACE",
           "description": "Fields with meta values"
+        },
+        {
+          "name": "BlockFilterByInput",
+          "namespacedName": "BlockFilterByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to specify the property and data to filter blocks"
         },
         {
           "name": "CategoryByInput",
@@ -2998,6 +3048,13 @@
           "fields": null,
           "kind": "ENUM",
           "description": null
+        },
+        {
+          "name": "BlockUnion",
+          "namespacedName": "BlockUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Block' types"
         },
         {
           "name": "CategoryUnion",

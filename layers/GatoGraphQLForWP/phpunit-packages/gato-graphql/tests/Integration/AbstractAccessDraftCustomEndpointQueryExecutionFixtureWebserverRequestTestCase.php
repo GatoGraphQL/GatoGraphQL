@@ -13,12 +13,12 @@ abstract class AbstractAccessDraftCustomEndpointQueryExecutionFixtureWebserverRe
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-draft-custom-endpoint';
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         /**
          * Using the "draft" endpoint (otherwise

@@ -6,12 +6,12 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class AccessPrivateCustomEndpointClientByAdminQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPrivateCustomEndpointQueryExecutionFixtureWebserverRequestTestCase
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-private-custom-endpoints-success';
     }
 
-    protected function accessClient(): bool
+    protected static function accessClient(): bool
     {
         return true;
     }
@@ -23,7 +23,7 @@ class AccessPrivateCustomEndpointClientByAdminQueryExecutionFixtureWebserverRequ
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
         $providerItems['private-custom-endpoint'][0] = 'text/html';

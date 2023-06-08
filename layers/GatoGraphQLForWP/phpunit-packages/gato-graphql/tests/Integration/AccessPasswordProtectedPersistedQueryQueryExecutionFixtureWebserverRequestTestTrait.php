@@ -10,20 +10,20 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  */
 trait AccessPasswordProtectedPersistedQueryQueryExecutionFixtureWebserverRequestTestTrait
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-password-protected-persisted-queries';
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return sprintf(
             'graphql-query/password-protected-persisted-query/%s',
-            $this->viewSource()
+            static::viewSource()
                 ? '?view=source'
                 : ''
         );
     }
 
-    abstract protected function viewSource(): bool;
+    abstract protected static function viewSource(): bool;
 }

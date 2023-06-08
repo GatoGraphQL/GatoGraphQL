@@ -13,12 +13,12 @@ abstract class AbstractAccessPendingPersistedQueryEndpointQueryExecutionFixtureW
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-pending-persisted-query-endpoint';
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         /**
          * Can't use "graphql-query/pending-persisted-query/" as

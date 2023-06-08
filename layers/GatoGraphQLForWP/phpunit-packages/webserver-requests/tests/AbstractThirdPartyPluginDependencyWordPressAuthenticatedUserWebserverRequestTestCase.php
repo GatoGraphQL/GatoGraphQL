@@ -79,11 +79,11 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @return array<string,array<mixed>>
      */
-    protected function provideEndpointEntries(): array
+    public static function provideEndpointEntries(): array
     {
-        $endpoint = $this->getEndpoint();
+        $endpoint = static::getEndpoint();
         $providerEntries = [];
-        foreach ($this->getPluginNameEntries() as $pluginName => $pluginEntry) {
+        foreach (static::getPluginNameEntries() as $pluginName => $pluginEntry) {
             $providerEntries[$pluginName . ':enabled'] = [
                 'application/json',
                 $pluginEntry['response-enabled'],
@@ -111,7 +111,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         return $providerEntries;
     }
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
     }
@@ -119,7 +119,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
-    abstract protected function getPluginNameEntries(): array;
+    abstract protected static function getPluginNameEntries(): array;
 
     /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/

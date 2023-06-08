@@ -8,7 +8,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractPluginWPAdminPageWebse
 
 class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPageWebserverRequestTestCase
 {
-    protected function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string
+    protected static function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string
     {
         return 'graphiql';
     }
@@ -22,7 +22,7 @@ class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPag
      *
      * @return string[]
      */
-    protected function getGatoGraphQLPluginMenuPageSlugs(): array
+    protected static function getGatoGraphQLPluginMenuPageSlugs(): array
     {
         return [
             'about',
@@ -45,7 +45,7 @@ class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPag
      *
      * @return string[]
      */
-    protected function getGatoGraphQLPluginCustomPostTypes(): array
+    protected static function getGatoGraphQLPluginCustomPostTypes(): array
     {
         return [
             'graphql-endpoint',

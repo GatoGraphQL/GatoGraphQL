@@ -6,9 +6,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 abstract class AbstractCacheControlWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
-    /**
-     * @dataProvider provideCacheControlEntries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideCacheControlEntries')]
     public function testCacheControl(
         string $endpoint,
         string $expectedCacheControlValue,
@@ -28,5 +26,5 @@ abstract class AbstractCacheControlWebserverRequestTestCase extends AbstractWebs
     /**
      * @return array<string,string[]>
      */
-    abstract protected function provideCacheControlEntries(): array;
+    abstract public static function provideCacheControlEntries(): array;
 }

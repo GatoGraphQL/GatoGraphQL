@@ -8,12 +8,12 @@ use PHPUnitForGatoGraphQL\WebserverRequests\AbstractPersistedQueryFixtureWebserv
 
 class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFixtureWebserverRequestTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-persisted-queries';
     }
 
-    protected function getEndpoint(string $dataName): string
+    protected static function getEndpoint(string $dataName): string
     {
         return match ($dataName) {
             'basic',
@@ -35,7 +35,7 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
         };
     }
 
-    protected function getEntryMethod(string $dataName): string
+    protected static function getEntryMethod(string $dataName): string
     {
         return match ($dataName) {
             'by-post',
@@ -49,7 +49,7 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
     /**
      * @return array<string,mixed>
      */
-    protected function getParams(string $dataName): array
+    protected static function getParams(string $dataName): array
     {
         return match ($dataName) {
             'passing-params',
@@ -66,7 +66,7 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
     /**
      * @return array<string,mixed>
      */
-    protected function getVariables(string $dataName): array
+    protected static function getVariables(string $dataName): array
     {
         return match ($dataName) {
             'by-post-passing-params-via-body' => [

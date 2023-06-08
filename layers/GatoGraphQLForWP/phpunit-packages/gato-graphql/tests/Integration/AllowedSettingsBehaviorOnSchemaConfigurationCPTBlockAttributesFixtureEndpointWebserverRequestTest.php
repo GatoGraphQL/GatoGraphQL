@@ -9,7 +9,7 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class AllowedSettingsBehaviorOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AllowedSettingsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-allowed-settings-behavior';
     }

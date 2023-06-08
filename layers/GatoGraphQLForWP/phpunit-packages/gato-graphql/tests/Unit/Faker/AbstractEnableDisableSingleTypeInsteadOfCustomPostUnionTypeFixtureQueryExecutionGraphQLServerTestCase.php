@@ -9,7 +9,7 @@ use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractEnableDisableSingleTypeInsteadOfCustomPostUnionTypeFixtureQueryExecutionGraphQLServerTestCase extends AbstractEnableDisableWPFakerFixtureQueryExecutionGraphQLServerTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-single-type-instead-of-custom-post-union-type';
     }

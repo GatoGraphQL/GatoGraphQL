@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class AdminEditorBlockQueriesQueryExecutionFixtureWebserverRequestTest extends AbstractAdminClientQueryExecutionFixtureWebserverRequestTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-admin-editor-block-queries';
     }

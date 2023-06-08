@@ -10,7 +10,7 @@ class AllowedCustomPostMetaModifyPluginSettingsFixtureEndpointWebserverRequestTe
 {
     use AllowedCustomPostMetaFixtureEndpointWebserverRequestTestTrait;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/';
     }

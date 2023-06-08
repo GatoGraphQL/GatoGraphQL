@@ -37,22 +37,22 @@ abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWPAdmin
     /**
      * @return array<string,string[]>
      */
-    final protected function providePageEntries(): array
+    final public static function providePageEntries(): array
     {
-        return $this->provideModuleDocEntries();
+        return static::provideModuleDocEntries();
     }
 
     /**
      * @return array<string,string[]>
      */
-    protected function provideModuleDocEntries(): array
+    protected static function provideModuleDocEntries(): array
     {
         $entries = [];
-        foreach ($this->getModules() as $module) {
+        foreach (static::getModules() as $module) {
             $pos = strrpos($module, '\\');
             $moduleSlug = $pos === false ? $module : substr($module, $pos);
             $entries[$moduleSlug] = [
-                $this->getModuleEndpoint($module),
+                static::getModuleEndpoint($module),
             ];
         }
         return $entries;
@@ -61,6 +61,6 @@ abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWPAdmin
     /**
      * @return string[]
      */
-    abstract protected function getModules(): array;
-    abstract protected function getModuleEndpoint(string $module): string;
+    abstract protected static function getModules(): array;
+    abstract protected static function getModuleEndpoint(string $module): string;
 }

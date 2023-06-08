@@ -17,34 +17,37 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
 {
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    public function getDataSetAsString(bool $includeData = true): string
-    {
-        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
-    }
+    /**
+     * Since PHPUnit v10, this is not possible anymore!
+     */
+    // final public function dataSetAsString(): string
+    // {
+    //     return $this->addFixtureFolderInfo(parent::dataSetAsString());
+    // }
 
     /**
      * Retrieve all GraphQL query files and their expected
      * responses from under the "/fixture" folder
      */
-    final protected function provideEndpointEntries(): array
+    final public static function provideEndpointEntries(): array
     {
-        $endpoint = $this->getEndpoint();
+        $endpoint = static::getEndpoint();
 
         /**
          * Source folder for the .gql files and,
          * by default, their .json responses
          */
-        $fixtureFolder = $this->getFixtureFolder();
+        $fixtureFolder = static::getFixtureFolder();
 
         /**
          * Possibly define a different folder for the .json responses
          */
-        $responseFixtureFolder = $this->getResponseFixtureFolder();
+        $responseFixtureFolder = static::getResponseFixtureFolder();
 
         /**
          * Retrieve all non-disabled GraphQL files
          */
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
+        $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],
             ['*.disabled.gql']
@@ -54,7 +57,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
         foreach ($graphQLQueryFileNameFileInfos as $graphQLQueryFileInfo) {
             // Allow to temporarily disable tests via code
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
-            if ($this->isGraphQLQueryProviderTestDisabled($fileName)) {
+            if (static::isGraphQLQueryProviderTestDisabled($fileName)) {
                 continue;
             }
 
@@ -64,13 +67,13 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
              * From the GraphQL query file name, generate the remaining file names
              */
             $filePath = $graphQLQueryFileInfo->getPath();
-            $graphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName);
+            $graphQLResponseFile = static::getGraphQLResponseFile($filePath, $fileName);
             if (!file_exists($graphQLResponseFile)) {
-                $this->throwFileNotExistsException($graphQLResponseFile);
+                static::throwFileNotExistsException($graphQLResponseFile);
             }
 
-            $graphQLVariablesFile = $this->getGraphQLVariablesFile($filePath, $fileName);
-            $variables = $this->getGraphQLVariables($graphQLVariablesFile);
+            $graphQLVariablesFile = static::getGraphQLVariablesFile($filePath, $fileName);
+            $variables = static::getGraphQLVariables($graphQLVariablesFile);
 
             /**
              * If the test is organized under a subfolder (such as "Success" or "Error"),
@@ -78,11 +81,11 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
              */
             $graphQLFilesSubfolder = substr($filePath, strlen($fixtureFolder) + 1);
             $dataName = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
-            $mainFixtureOperationName = $this->getMainFixtureOperationName($dataName);
+            $mainFixtureOperationName = static::getMainFixtureOperationName($dataName);
             $providerItems[$dataName] = [
                 'application/json',
                 file_get_contents($graphQLResponseFile),
-                $this->getFixtureCustomEndpoint($dataName) ?? $endpoint,
+                static::getFixtureCustomEndpoint($dataName) ?? $endpoint,
                 [],
                 $query,
                 $variables,
@@ -95,7 +98,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
              * operation name, but simply the re-execution of the same query, that will
              * produce a different response (eg: by not executing `setUp` and `tearDown`)
              */
-            $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
+            $graphQLResponseForOperationFileNameFileInfos = static::findFilesInDirectory(
                 $responseFixtureFolder . ($graphQLFilesSubfolder !== '' ? \DIRECTORY_SEPARATOR . $graphQLFilesSubfolder : ''),
                 [$fileName . ':*.json'],
                 ['*.disabled.json', '*.var.json'],
@@ -103,9 +106,9 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
             foreach ($graphQLResponseForOperationFileNameFileInfos as $graphQLResponseForOperationFileInfo) {
                 $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
                 $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
-                $graphQLVariablesForOperationFile = $this->getGraphQLVariablesFile($filePath, $fileName . ':' . $operationName);
+                $graphQLVariablesForOperationFile = static::getGraphQLVariablesFile($filePath, $fileName . ':' . $operationName);
                 if (\file_exists($graphQLVariablesForOperationFile)) {
-                    $graphQLVariablesForOperation = $this->getGraphQLVariables($graphQLVariablesForOperationFile);
+                    $graphQLVariablesForOperation = static::getGraphQLVariables($graphQLVariablesForOperationFile);
                 } else {
                     $graphQLVariablesForOperation = $variables;
                 }
@@ -118,7 +121,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 $providerItems[$operationDataName] = [
                     'application/json',
                     $graphQLResponseForOperationFileInfo->getContents(),
-                    $this->getFixtureCustomEndpoint($operationDataName) ?? $endpoint,
+                    static::getFixtureCustomEndpoint($operationDataName) ?? $endpoint,
                     [],
                     $query,
                     $graphQLVariablesForOperation,
@@ -126,13 +129,13 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 ];
             }
         }
-        return $this->customizeProviderEndpointEntries($providerItems);
+        return static::customizeProviderEndpointEntries($providerItems);
     }
 
     /**
      * @return array<string,mixed>
      */
-    protected function getGraphQLVariables(string $graphQLVariablesFile): array
+    protected static function getGraphQLVariables(string $graphQLVariablesFile): array
     {
         if (!file_exists($graphQLVariablesFile)) {
             return [];
@@ -159,12 +162,12 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
         return (array) $variables;
     }
 
-    protected function getMainFixtureOperationName(string $dataName): ?string
+    protected static function getMainFixtureOperationName(string $dataName): ?string
     {
         return null;
     }
 
-    protected function getFixtureCustomEndpoint(string $dataName): ?string
+    protected static function getFixtureCustomEndpoint(string $dataName): ?string
     {
         return null;
     }
@@ -173,14 +176,14 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         return $providerItems;
     }
 
-    abstract protected function getEndpoint(): string;
+    abstract protected static function getEndpoint(): string;
 
-    protected function isGraphQLQueryProviderTestDisabled(string $fileName): bool
+    protected static function isGraphQLQueryProviderTestDisabled(string $fileName): bool
     {
         return false;
     }
