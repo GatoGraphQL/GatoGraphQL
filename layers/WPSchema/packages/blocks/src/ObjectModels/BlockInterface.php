@@ -15,6 +15,9 @@ interface BlockInterface extends TransientObjectInterface
      * @return BlockInterface[]|null
      */
     public function getInnerBlocks(): ?array;
-    public function getInnerHTML(): string;
+    /**
+     * @return array<string|null>
+     */
+    public function getInnerContent(): array;
     public function getContentSource(): string;
 }

@@ -336,7 +336,7 @@ class BlockContentParser implements BlockContentParserInterface
             'attributes'    => $block_attributes,
             
             // Gato GraphQL addition
-            'innerHTML'     => trim($block['innerHTML']), // Remove the \n before/after the HTML
+            'innerContent'     => $block['innerContent'],
         ];
 
         if (isset($block['innerBlocks'])) {

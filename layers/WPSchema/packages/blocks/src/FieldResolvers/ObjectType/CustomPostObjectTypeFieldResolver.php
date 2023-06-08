@@ -198,8 +198,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $name = $blockItem->name;
         /** @var stdClass|null */
         $attributes = $blockItem->attributes ?? null;
-        /** @var string */
-        $innerHTML = $blockItem->innerHTML;
+        /** @var array<string|null> */
+        $innerContent = $blockItem->innerContent;
         /** @var BlockInterface[]|null */
         $innerBlocks = null;
         if (isset($blockItem->innerBlocks)) {
@@ -211,63 +211,48 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             );
         }
         // Regenerate the original content source
-        $contentSource = $this->getBlockContentSource($name, $attributes, $innerHTML, $innerBlocks);
+        $contentSource = serialize_block($this->getBlockContentSource($name, $attributes, $innerContent, $innerBlocks));
         return $this->createBlockObject(
             $name,
             $attributes,
             $innerBlocks,
-            $innerHTML,
+            $innerContent,
             $contentSource,
         );
     }
 
     /**
+     * @param array<string|null> $innerContent
      * @param BlockInterface[]|null $innerBlocks
      */
     protected function getBlockContentSource(
         string $name,
         ?stdClass $attributes,
-        string $innerHTML,
+        array $innerContent,
         ?array $innerBlocks,
-    ): string {
-        $innerContent = $innerBlocks !== null
+    ): array {
+        $blockInnerBlocks = [];
+        if ($innerBlocks !== null) {
             // Recursively produce the HTML for the inner blocks
-            ? array_map(
-                /**
-                 * This logic doesn't work, because $innerHTML may contain the opening
-                 * and closing tags all together, whereas its inner blocks content
-                 * would go in between these tags.
-                 *
-                 * For instance, "wp:columns" would be rendered as
-                 * `<div class="wp-block-columns"></div><!-- wp:column -->...<!-- /wp:column -->`,
-                 * which makes no sense.
-                 *
-                 * This logic is indeed a terrible hack, and most likely it will
-                 * not be workable. A proper solution is to retrieve the HTML content
-                 * already when parsing the blocks (but currently this is not supported!),
-                 * in class `WP_Block_Parser_Block`.
-                 *
-                 * @see wp-includes/class-wp-block-parser.php
-                 *
-                 * @todo Fix, this doesn't work!
-                 */
-                fn (BlockInterface $block) => $innerHTML . $this->getBlockContentSource(
+            $blockInnerBlocks = array_map(
+                fn (BlockInterface $block) => $this->getBlockContentSource(
                     $block->getName(),
                     $block->getAttributes(),
-                    $block->getInnerHTML(),
+                    $block->getInnerContent(),
                     $block->getInnerBlocks()
                 ),
                 $innerBlocks
-            )
+            );
+        } else {
             // Reached the deepest nested block
-            : [
-                $innerHTML,
-            ];
-        return serialize_block([
+            $innerContent = array_map(trim(...), $innerContent);
+        }
+        return [
             'blockName' => $name,
             'attrs' => $attributes !== null ? (array) $attributes : [],
             'innerContent' => $innerContent,
-        ]);
+            'innerBlocks' => $blockInnerBlocks,
+        ];
     }
 
     /**
@@ -280,13 +265,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
      *
      * By default, it creates a `GeneralBlock`.
      *
+     * @param array<string|null> $innerContent
      * @param BlockInterface[]|null $innerBlocks
      */
     protected function createBlockObject(
         string $name,
         ?stdClass $attributes,
         ?array $innerBlocks,
-        string $innerHTML,
+        array $innerContent,
         string $contentSource,
     ): BlockInterface {
         /** @var BlockInterface|null */
@@ -296,7 +282,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $name,
             $attributes,
             $innerBlocks,
-            $innerHTML,
+            $innerContent,
             $contentSource,
         );
         if ($injectedBlockObject !== null) {
@@ -306,7 +292,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $name,
             $attributes,
             $innerBlocks,
-            $innerHTML,
+            $innerContent,
             $contentSource,
         );
     }

@@ -67,7 +67,7 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
             'name',
             'attributes',
             'innerBlocks',
-            'innerHTML',
+            // 'innerHTML',
             'contentSource',
         ];
     }
@@ -78,7 +78,7 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
             'name' => $this->getStringScalarTypeResolver(),
             'attributes' => $this->getJSONObjectScalarTypeResolver(),
             'innerBlocks' => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
-            'innerHTML' => $this->getHTMLScalarTypeResolver(),
+            // 'innerHTML' => $this->getHTMLScalarTypeResolver(),
             'contentSource' => $this->getHTMLScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
@@ -88,7 +88,7 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     {
         return match ($fieldName) {
             'name',
-            'innerHTML',
+            // 'innerHTML',
             'contentSource'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'innerBlocks'
@@ -104,7 +104,7 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
             'name' => $this->__('Block name', 'blocks'),
             'attributes' => $this->__('Block attributes, parsed to the type declared in their block.json schema', 'blocks'),
             'innerBlocks' => $this->__('Block\'s inner blocks (if suitable)', 'blocks'),
-            'innerHTML' => $this->__('Block\'s inner HTML code', 'blocks'),
+            // 'innerHTML' => $this->__('Block\'s inner HTML code', 'blocks'),
             'contentSource' => $this->__('Block\'s whole HTML code, including the block comment delimiters', 'blocks'),
             default => parent::getFieldDescription($fieldName),
         };

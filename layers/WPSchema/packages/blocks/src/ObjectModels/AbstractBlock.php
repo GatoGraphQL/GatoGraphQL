@@ -10,13 +10,14 @@ use stdClass;
 abstract class AbstractBlock extends AbstractTransientObject implements BlockInterface
 {
     /**
+     * @param array<string|null> $innerContent
      * @param BlockInterface[]|null $innerBlocks
      */
     public function __construct(
         public readonly string $name,
         public readonly ?stdClass $attributes,
         public readonly ?array $innerBlocks,
-        public readonly string $innerHTML,
+        public readonly array $innerContent,
         public readonly string $contentSource,
     ) {
         parent::__construct();
@@ -40,9 +41,12 @@ abstract class AbstractBlock extends AbstractTransientObject implements BlockInt
         return $this->innerBlocks;
     }
 
-    public function getInnerHTML(): string
+    /**
+     * @return array<string|null>
+     */
+    public function getInnerContent(): array
     {
-        return $this->innerHTML;
+        return $this->innerContent;
     }
 
     public function getContentSource(): string
