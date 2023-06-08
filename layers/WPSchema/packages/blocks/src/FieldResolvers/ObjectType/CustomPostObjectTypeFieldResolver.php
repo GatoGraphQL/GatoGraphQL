@@ -222,8 +222,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     }
 
     /**
-     * Given the name, attributes, and inner block data for a block,
-     * create Block object.
+     * Retrieve the properties that, passed to `serialize_block`,
+     * recreates the Block HTML.
+     *
+     * @return array<string,mixed>
      */
     protected function getSerializableBlockProperties(stdClass $blockItem): array
     {
