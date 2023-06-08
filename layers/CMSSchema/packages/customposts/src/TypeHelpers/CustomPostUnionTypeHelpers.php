@@ -39,17 +39,24 @@ class CustomPostUnionTypeHelpers
             /** @var CustomPostUnionTypeResolver */
             $unionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
         }
+
         $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
-        if ($targetTypeResolvers) {
-            // By configuration: If there is only 1 item, return only that one
+        if ($targetTypeResolvers === []) {
+            return $unionTypeResolver;
+        }
+
+        /**
+         * If there is only 1 item, check if the configuration if
+         * to return only that one
+         */
+        if (count($targetTypeResolvers) === 1) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->useSingleTypeInsteadOfCustomPostUnionType()) {
-                return count($targetTypeResolvers) === 1 ?
-                    $targetTypeResolvers[0] :
-                    $unionTypeResolver;
-            }
+            return $moduleConfiguration->useSingleTypeInsteadOfCustomPostUnionType()
+                ? $targetTypeResolvers[0]
+                : $unionTypeResolver;
         }
+
         return $unionTypeResolver;
     }
 }

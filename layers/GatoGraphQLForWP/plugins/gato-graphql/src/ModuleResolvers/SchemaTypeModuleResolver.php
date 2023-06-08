@@ -29,6 +29,8 @@ use PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolv
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPWPSchema\Blocks\TypeResolvers\ObjectType\GeneralBlockObjectTypeResolver;
+use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -80,6 +82,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      */
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
+    private ?BlockUnionTypeResolver $blockUnionTypeResolver = null;
     private ?TagUnionTypeResolver $tagUnionTypeResolver = null;
     private ?CategoryUnionTypeResolver $categoryUnionTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
@@ -91,6 +94,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?GeneralBlockObjectTypeResolver $generalBlockObjectTypeResolver = null;
     private ?UserRoleObjectTypeResolver $userRoleObjectTypeResolver = null;
     private ?UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver = null;
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
@@ -114,6 +118,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var CustomPostUnionTypeResolver */
         return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+    }
+    final public function setBlockUnionTypeResolver(BlockUnionTypeResolver $blockUnionTypeResolver): void
+    {
+        $this->blockUnionTypeResolver = $blockUnionTypeResolver;
+    }
+    final protected function getBlockUnionTypeResolver(): BlockUnionTypeResolver
+    {
+        /** @var BlockUnionTypeResolver */
+        return $this->blockUnionTypeResolver ??= $this->instanceManager->getInstance(BlockUnionTypeResolver::class);
     }
     final public function setTagUnionTypeResolver(TagUnionTypeResolver $tagUnionTypeResolver): void
     {
@@ -213,6 +226,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     {
         /** @var PostObjectTypeResolver */
         return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+    }
+    final public function setGeneralBlockObjectTypeResolver(GeneralBlockObjectTypeResolver $generalBlockObjectTypeResolver): void
+    {
+        $this->generalBlockObjectTypeResolver = $generalBlockObjectTypeResolver;
+    }
+    final protected function getGeneralBlockObjectTypeResolver(): GeneralBlockObjectTypeResolver
+    {
+        /** @var GeneralBlockObjectTypeResolver */
+        return $this->generalBlockObjectTypeResolver ??= $this->instanceManager->getInstance(GeneralBlockObjectTypeResolver::class);
     }
     final public function setUserRoleObjectTypeResolver(UserRoleObjectTypeResolver $userRoleObjectTypeResolver): void
     {
@@ -569,6 +591,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
             ],
+            self::SCHEMA_BLOCKS => [
+                self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
+            ],
             self::SCHEMA_PAGES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
@@ -884,6 +909,22 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::IS_MULTIPLE => true,
                 ];
             }
+        } elseif ($module === self::SCHEMA_BLOCKS) {
+            $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Use single type instead of union type?', 'gato-graphql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('If type <code>%s</code> is composed of only one type (<code>%s</code>), then directly return this single type, instead of the union type?', 'gato-graphql'),
+                    $this->getBlockUnionTypeResolver()->getTypeName(),
+                    $this->getGeneralBlockObjectTypeResolver()->getTypeName(),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
         } elseif ($module === self::SCHEMA_COMMENTS) {
             $option = self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT;
             $moduleSettings[] = [
@@ -959,11 +1000,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-        } elseif (
-            in_array($module, [
-                self::SCHEMA_SETTINGS,
-            ])
-        ) {
+        } elseif ($module === self::SCHEMA_SETTINGS) {
             $entriesTitle = \__('Settings entries', 'gato-graphql');
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gato-graphql');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'gato-graphql');

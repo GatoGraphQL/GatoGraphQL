@@ -11,7 +11,7 @@ abstract class AbstractEnableDisableSingleTypeInsteadOfBlockUnionTypeFixtureQuer
 {
     protected static function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-single-type-instead-of-custom-post-union-type';
+        return __DIR__ . '/fixture-single-type-instead-of-block-union-type';
     }
 
     /**
@@ -37,6 +37,7 @@ abstract class AbstractEnableDisableSingleTypeInsteadOfBlockUnionTypeFixtureQuer
         return [
             ...parent::getGraphQLServerModuleClasses(),
             ...[
+                \PoPWPSchema\Posts\Module::class,
                 \PoPWPSchema\Blocks\Module::class,
             ]
         ];

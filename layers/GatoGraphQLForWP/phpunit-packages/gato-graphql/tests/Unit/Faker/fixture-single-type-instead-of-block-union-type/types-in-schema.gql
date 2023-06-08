@@ -1,0 +1,16 @@
+query TypesInSchema {
+    __schema {
+        types {
+            name
+            possibleTypes {
+                name
+            }
+            fields {
+                name
+                type {
+                    name
+                }
+            }
+        }
+    }
+}

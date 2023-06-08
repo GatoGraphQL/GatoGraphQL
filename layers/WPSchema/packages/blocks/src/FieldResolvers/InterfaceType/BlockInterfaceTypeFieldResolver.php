@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Blocks\FieldResolvers\InterfaceType;
 
+use PoPWPSchema\Blocks\TypeHelpers\BlockUnionTypeHelpers;
 use PoPWPSchema\Blocks\TypeResolvers\InterfaceType\BlockInterfaceTypeResolver;
-use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -17,7 +17,6 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?BlockUnionTypeResolver $blockUnionTypeResolver = null;
 
     final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -36,15 +35,6 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     {
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-    }
-    final public function setBlockUnionTypeResolver(BlockUnionTypeResolver $blockUnionTypeResolver): void
-    {
-        $this->blockUnionTypeResolver = $blockUnionTypeResolver;
-    }
-    final protected function getBlockUnionTypeResolver(): BlockUnionTypeResolver
-    {
-        /** @var BlockUnionTypeResolver */
-        return $this->blockUnionTypeResolver ??= $this->instanceManager->getInstance(BlockUnionTypeResolver::class);
     }
 
     /**
@@ -74,7 +64,7 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
         return match ($fieldName) {
             'name' => $this->getStringScalarTypeResolver(),
             'attributes' => $this->getJSONObjectScalarTypeResolver(),
-            'innerBlocks' => $this->getBlockUnionTypeResolver(),
+            'innerBlocks' => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }

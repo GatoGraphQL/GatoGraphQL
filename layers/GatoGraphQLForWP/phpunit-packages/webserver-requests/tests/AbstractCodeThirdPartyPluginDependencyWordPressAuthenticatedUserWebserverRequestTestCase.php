@@ -17,11 +17,11 @@ abstract class AbstractCodeThirdPartyPluginDependencyWordPressAuthenticatedUserW
     protected static function getPluginNameEntries(): array
     {
         $pluginEntries = [];
-        foreach ($this->getPluginNames() as $pluginName) {
+        foreach (static::getPluginNames() as $pluginName) {
             $pluginEntries[$pluginName] = [
-                'query' => $this->getPluginGraphQLQuery($pluginName),
-                'response-enabled' => $this->getPluginEnabledExpectedGraphQLResponse($pluginName),
-                'response-disabled' => $this->getPluginDisabledExpectedGraphQLResponse($pluginName),
+                'query' => static::getPluginGraphQLQuery($pluginName),
+                'response-enabled' => static::getPluginEnabledExpectedGraphQLResponse($pluginName),
+                'response-disabled' => static::getPluginDisabledExpectedGraphQLResponse($pluginName),
             ];
         }
         return $pluginEntries;
@@ -30,24 +30,24 @@ abstract class AbstractCodeThirdPartyPluginDependencyWordPressAuthenticatedUserW
     /**
      * @return string[]
      */
-    abstract protected function getPluginNames(): array;
+    abstract protected static function getPluginNames(): array;
 
-    protected function getPluginGraphQLQuery(string $pluginName): string
+    protected static function getPluginGraphQLQuery(string $pluginName): string
     {
-        $this->throwUnsupportedPluginName($pluginName);
+        static::throwUnsupportedPluginName($pluginName);
     }
 
-    protected function getPluginEnabledExpectedGraphQLResponse(string $pluginName): string
+    protected static function getPluginEnabledExpectedGraphQLResponse(string $pluginName): string
     {
-        $this->throwUnsupportedPluginName($pluginName);
+        static::throwUnsupportedPluginName($pluginName);
     }
 
-    protected function getPluginDisabledExpectedGraphQLResponse(string $pluginName): string
+    protected static function getPluginDisabledExpectedGraphQLResponse(string $pluginName): string
     {
-        $this->throwUnsupportedPluginName($pluginName);
+        static::throwUnsupportedPluginName($pluginName);
     }
 
-    protected function throwUnsupportedPluginName(string $pluginName): never
+    protected static function throwUnsupportedPluginName(string $pluginName): never
     {
         throw new ShouldNotHappenException(
             sprintf(
