@@ -28,7 +28,7 @@ abstract class AbstractWPAdminPageWebserverRequestTestCase extends AbstractWebse
     /**
      * @return array<string,string[]>
      */
-    abstract protected static function providePageEntries(): array;
+    abstract public static function providePageEntries(): array;
 
     protected function executeAsserts(
         ResponseInterface $response,

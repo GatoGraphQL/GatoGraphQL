@@ -37,7 +37,7 @@ abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWPAdmin
     /**
      * @return array<string,string[]>
      */
-    final protected static function providePageEntries(): array
+    final public static function providePageEntries(): array
     {
         return static::provideModuleDocEntries();
     }
