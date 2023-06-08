@@ -25,5 +25,5 @@ trait AccessPrivateCustomEndpointQueryExecutionFixtureWebserverRequestTestTrait
         );
     }
 
-    abstract protected function accessClient(): bool;
+    abstract protected static function accessClient(): bool;
 }

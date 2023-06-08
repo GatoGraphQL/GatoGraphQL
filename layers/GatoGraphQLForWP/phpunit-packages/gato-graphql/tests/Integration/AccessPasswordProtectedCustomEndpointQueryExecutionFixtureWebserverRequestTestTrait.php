@@ -19,11 +19,11 @@ trait AccessPasswordProtectedCustomEndpointQueryExecutionFixtureWebserverRequest
     {
         return sprintf(
             'graphql/password-protected-custom-endpoint/%s',
-            $this->accessClient()
+            static::accessClient()
                 ? '?view=graphiql'
                 : ''
         );
     }
 
-    abstract protected function accessClient(): bool;
+    abstract protected static function accessClient(): bool;
 }

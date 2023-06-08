@@ -20,7 +20,7 @@ class AccessPrivateCustomEndpointClientByEditorQueryExecutionFixtureWebserverReq
         return Environment::getIntegrationTestsAuthenticatedEditorUserPassword();
     }
 
-    protected function accessClient(): bool
+    protected static function accessClient(): bool
     {
         return true;
     }

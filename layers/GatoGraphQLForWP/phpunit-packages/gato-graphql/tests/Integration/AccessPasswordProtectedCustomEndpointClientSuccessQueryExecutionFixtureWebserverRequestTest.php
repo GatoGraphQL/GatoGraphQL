@@ -11,7 +11,7 @@ class AccessPasswordProtectedCustomEndpointClientSuccessQueryExecutionFixtureWeb
         return __DIR__ . '/fixture-password-protected-custom-endpoints-success';
     }
 
-    protected function accessClient(): bool
+    protected static function accessClient(): bool
     {
         return true;
     }
