@@ -38,7 +38,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
      *
      * @return mixed[]
      */
-    public function fixtureGraphQLServerExecutionProvider(): array
+    public static function fixtureGraphQLServerExecutionProvider(): array
     {
         /**
          * Source folder for the .gql files and,
