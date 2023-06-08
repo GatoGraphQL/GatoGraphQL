@@ -11,10 +11,13 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
 {
     use FixtureTestCaseTrait;
 
-    public function toString(): string
-    {
-        return $this->addFixtureFolderInfo(parent::toString());
-    }
+    /**
+     * Since PHPUnit v10, this is not possible anymore!
+     */
+    // final public function dataSetAsString(): string
+    // {
+    //     return $this->addFixtureFolderInfo(parent::dataSetAsString());
+    // }
 
     /**
      * Retrieve all files under the "/fixture" folder

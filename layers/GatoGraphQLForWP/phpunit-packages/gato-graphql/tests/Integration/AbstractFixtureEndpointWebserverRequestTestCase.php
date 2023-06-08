@@ -17,10 +17,13 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
 {
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    public function toString(): string
-    {
-        return $this->addFixtureFolderInfo(parent::toString());
-    }
+    /**
+     * Since PHPUnit v10, this is not possible anymore!
+     */
+    // final public function dataSetAsString(): string
+    // {
+    //     return $this->addFixtureFolderInfo(parent::dataSetAsString());
+    // }
 
     /**
      * Retrieve all GraphQL query files and their expected

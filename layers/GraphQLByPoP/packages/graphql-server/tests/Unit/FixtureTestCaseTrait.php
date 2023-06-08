@@ -51,12 +51,15 @@ trait FixtureTestCaseTrait
         );
     }
 
-    protected function addFixtureFolderInfo(string $string): string
-    {
-        return sprintf(
-            ' (fixture folder: "%s")%s',
-            static::getResponseFixtureFolder(),
-            $string,
-        );
-    }
+    /**
+     * Since PHPUnit v10, this is not possible anymore!
+     */
+    // protected function addFixtureFolderInfo(string $string): string
+    // {
+    //     return sprintf(
+    //         ' (fixture folder: "%s")%s',
+    //         static::getResponseFixtureFolder(),
+    //         $string,
+    //     );
+    // }
 }

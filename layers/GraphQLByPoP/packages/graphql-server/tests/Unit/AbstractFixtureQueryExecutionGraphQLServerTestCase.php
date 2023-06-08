@@ -8,10 +8,13 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
 {
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    public function toString(): string
-    {
-        return $this->addFixtureFolderInfo(parent::toString());
-    }
+    /**
+     * Since PHPUnit v10, this is not possible anymore!
+     */
+    // final public function dataSetAsString(): string
+    // {
+    //     return $this->addFixtureFolderInfo(parent::dataSetAsString());
+    // }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('fixtureGraphQLServerExecutionProvider')]
     public static function testFixtureGraphQLServerExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
