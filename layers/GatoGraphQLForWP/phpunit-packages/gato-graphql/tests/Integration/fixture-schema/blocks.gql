@@ -199,42 +199,42 @@
 fragment BlockData on Block {
   name
   attributes
-  innerHTML
+  # innerHTML
   contentSource
   innerBlocks {
     name
     attributes
-    innerHTML
+    # innerHTML
     contentSource
     innerBlocks {
       name
       attributes
-      innerHTML
+      # innerHTML
       contentSource
       innerBlocks {
         name
         attributes
-        innerHTML
+        # innerHTML
         contentSource
         innerBlocks {
           name
           attributes
-          innerHTML
+          # innerHTML
           contentSource
           innerBlocks {
             name
             attributes
-            innerHTML
+            # innerHTML
             contentSource
             innerBlocks {
               name
               attributes
-              innerHTML
+              # innerHTML
               contentSource
               innerBlocks {
                 name
                 attributes
-                innerHTML
+                # innerHTML
                 contentSource
               }
             }
