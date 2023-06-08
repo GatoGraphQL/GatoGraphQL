@@ -122,7 +122,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected static function getLeafFieldDoesNotEqualToLeafFieldProviderEntries(): array
+    public static function getLeafFieldDoesNotEqualToLeafFieldProviderEntries(): array
     {
         $inputObject1 = new stdClass();
         $inputObject1->someLiteral = new Literal('someValue', new Location(1, 1));
@@ -239,7 +239,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected static function getRelationalFieldEqualsToRelationalFieldProviderEntries(): array
+    public static function getRelationalFieldEqualsToRelationalFieldProviderEntries(): array
     {
         return [
             'relational' => [
@@ -302,7 +302,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected static function getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries(): array
+    public static function getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries(): array
     {
         return [
             'relational-with-different-args' => [

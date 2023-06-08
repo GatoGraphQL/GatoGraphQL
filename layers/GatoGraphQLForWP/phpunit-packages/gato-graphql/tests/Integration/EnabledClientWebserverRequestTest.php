@@ -14,7 +14,7 @@ class EnabledClientWebserverRequestTest extends AbstractEnabledClientWebserverRe
     /**
      * @return array<string,string[]>
      */
-    protected static function provideEnabledClientEntries(): array
+    public static function provideEnabledClientEntries(): array
     {
         return [
             'single-endpoint-graphiql' => [

@@ -52,7 +52,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
      *
      * @return array<string,array<mixed>>
      */
-    final public function provideClientEnabledDisabledEntries(): array
+    final public static function provideClientEnabledDisabledEntries(): array
     {
         $isUpdatedClientEnabled = $this->isUpdatedClientEnabled();
         return [
