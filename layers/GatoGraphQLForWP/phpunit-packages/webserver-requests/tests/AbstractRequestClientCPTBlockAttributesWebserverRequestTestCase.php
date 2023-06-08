@@ -54,7 +54,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
      */
     final public static function provideClientEnabledDisabledEntries(): array
     {
-        $isUpdatedClientEnabled = $this->isUpdatedClientEnabled();
+        $isUpdatedClientEnabled = static::isUpdatedClientEnabled();
         return [
             self::ORIGINAL_DATA_NAME => [!$isUpdatedClientEnabled],
             self::UPDATED_DATA_NAME => [$isUpdatedClientEnabled],
@@ -74,7 +74,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [
-            BlockAttributeNames::IS_ENABLED => $this->isUpdatedClientEnabled(),
+            BlockAttributeNames::IS_ENABLED => static::isUpdatedClientEnabled(),
         ];
     }
 
@@ -82,7 +82,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
      * The default state is for the clients to be enabled.
      * Then, when updated, they will be disabled.
      */
-    protected function isUpdatedClientEnabled(): bool
+    protected static function isUpdatedClientEnabled(): bool
     {
         return false;
     }
