@@ -19,7 +19,7 @@ trait AccessPrivateCustomEndpointQueryExecutionFixtureWebserverRequestTestTrait
     {
         return sprintf(
             'graphql/private-custom-endpoint/%s',
-            $this->accessClient()
+            static::accessClient()
                 ? '?view=graphiql'
                 : ''
         );
