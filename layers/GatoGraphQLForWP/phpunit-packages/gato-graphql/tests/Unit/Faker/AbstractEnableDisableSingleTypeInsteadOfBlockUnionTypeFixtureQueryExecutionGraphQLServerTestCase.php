@@ -37,6 +37,7 @@ abstract class AbstractEnableDisableSingleTypeInsteadOfBlockUnionTypeFixtureQuer
         return [
             ...parent::getGraphQLServerModuleClasses(),
             ...[
+                \PoPWPSchema\Posts\Module::class,
                 \PoPWPSchema\Blocks\Module::class,
             ]
         ];
