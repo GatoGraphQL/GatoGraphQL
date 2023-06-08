@@ -19,7 +19,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * @param array<string,mixed> $variables
      */
     #[\PHPUnit\Framework\Attributes\DataProvider('provideEndpointEntries')]
-    public function testEndpoints(
+    public static function testEndpoints(
         string $expectedContentType,
         ?string $expectedResponseBody,
         string $endpoint,
@@ -71,11 +71,11 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
 
         if ($params !== []) {
             /** @var array<string,mixed> */
-            $params = $this->maybeAddXDebugTriggerParam($params);
+            $params = static::maybeAddXDebugTriggerParam($params);
             $options[RequestOptions::QUERY] = $params;
         } else {
             /** @var string */
-            $endpointURL = $this->maybeAddXDebugTriggerParam($endpointURL);
+            $endpointURL = static::maybeAddXDebugTriggerParam($endpointURL);
         }
 
         if ($doingGET) {
@@ -94,12 +94,12 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             );
         }
 
-        $expectedResponseStatusCode = $this->getExpectedResponseStatusCode();
+        $expectedResponseStatusCode = static::getExpectedResponseStatusCode();
         if ($expectedResponseStatusCode !== 200) {
             $options[RequestOptions::HTTP_ERRORS] = false;
         }
 
-        $options = $this->customizeRequestOptions($options);
+        $options = static::customizeRequestOptions($options);
 
         $response = $client->request(
             $method,
@@ -107,29 +107,29 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $options
         );
 
-        $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
-        $this->assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
+        static::assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+        static::assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
         if ($expectedResponseBody !== null) {
             $responseBody = $response->getBody()->__toString();
             // Allow to modify the URLs for the "PROD Integration Tests"
-            $responseBody = $this->adaptResponseBody($responseBody);
-            $responseComparisonType = $this->getResponseComparisonType();
+            $responseBody = static::adaptResponseBody($responseBody);
+            $responseComparisonType = static::getResponseComparisonType();
             if ($responseComparisonType === self::RESPONSE_COMPARISON_EQUALS) {
-                $this->assertJsonStringEqualsJsonString($expectedResponseBody, $responseBody);
+                static::assertJsonStringEqualsJsonString($expectedResponseBody, $responseBody);
             } elseif ($responseComparisonType === self::RESPONSE_COMPARISON_NOT_EQUALS) {
-                $this->assertJsonStringNotEqualsJsonString($expectedResponseBody, $responseBody);
+                static::assertJsonStringNotEqualsJsonString($expectedResponseBody, $responseBody);
             } elseif ($responseComparisonType === self::RESPONSE_COMPARISON_REGEX) {
-                $this->assertMatchesRegularExpression($expectedResponseBody, $responseBody);
+                static::assertMatchesRegularExpression($expectedResponseBody, $responseBody);
             }
         }
     }
 
-    protected function adaptResponseBody(string $responseBody): string
+    protected static function adaptResponseBody(string $responseBody): string
     {
         return $responseBody;
     }
 
-    protected function getResponseComparisonType(): ?int
+    protected static function getResponseComparisonType(): ?int
     {
         return self::RESPONSE_COMPARISON_EQUALS;
     }
@@ -175,7 +175,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         return $options;
     }
 
-    protected function getExpectedResponseStatusCode(): int
+    protected static function getExpectedResponseStatusCode(): int
     {
         return 200;
     }
@@ -184,7 +184,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * @param array<string,mixed> $options
      * @return array<string,mixed>
      */
-    protected function customizeRequestOptions(array $options): array
+    protected static function customizeRequestOptions(array $options): array
     {
         return $options;
     }

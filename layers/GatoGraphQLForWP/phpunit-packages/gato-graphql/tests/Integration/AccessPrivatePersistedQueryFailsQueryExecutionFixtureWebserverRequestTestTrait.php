@@ -26,7 +26,7 @@ trait AccessPrivatePersistedQueryFailsQueryExecutionFixtureWebserverRequestTestT
         return $providerItems;
     }
 
-    protected function getExpectedResponseStatusCode(): int
+    protected static function getExpectedResponseStatusCode(): int
     {
         return 404;
     }

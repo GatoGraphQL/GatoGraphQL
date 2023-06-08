@@ -19,7 +19,7 @@ class SchemaQueryExecutionFixtureWebserverRequestTest extends AbstractSingleEndp
      * and "PROD Integration Tests", always printing the domain
      * from "Integration Tests" (as in the fixture .json file)
      */
-    protected function adaptResponseBody(string $responseBody): string
+    protected static function adaptResponseBody(string $responseBody): string
     {
         return str_replace(
             WebserverRequestsEnvironment::getIntegrationTestsWebserverDomain(),

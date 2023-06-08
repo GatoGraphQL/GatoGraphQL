@@ -23,7 +23,7 @@ class AccessPendingPersistedQueryEndpointByEditorQueryExecutionFixtureWebserverR
         return Environment::getIntegrationTestsAuthenticatedEditorUserPassword();
     }
 
-    protected function getExpectedResponseStatusCode(): int
+    protected static function getExpectedResponseStatusCode(): int
     {
         return 404;
     }
