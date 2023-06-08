@@ -190,7 +190,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 
     /**
      * Given the name, attributes, and inner block data for a block,
-     * create Block object.
+     * create a Block object.
      */
     protected function createBlock(stdClass $blockItem): BlockInterface
     {
@@ -220,6 +220,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
          *   but they are
          * - attributes stored inside the innerHTML are also
          *   stored within the attributes
+         *
+         * A better solution is to retrieve the HTML content as is
+         * already when parsing the blocks in class
+         * `WP_Block_Parser_Block` (but this is currently not supported!)
+         *
+         * @see wp-includes/class-wp-block-parser.php
+         *
+         * @todo If `WP_Block_Parser_Block` ever retrieves the original HTML source, then improve this solution
          */
         $contentSource = serialize_block($this->getSerializeBlockData($blockItem));
         return $this->createBlockObject(
