@@ -128,6 +128,7 @@
     ...on GenericCustomPost {
       id
       title
+      innerHTML
       contentSource
       customPostType
       blocks {
@@ -141,6 +142,7 @@
     ...on GenericCustomPost {
       id
       title
+      innerHTML
       contentSource
       customPostType
       blocks {
@@ -154,6 +156,7 @@
     ...on GenericCustomPost {
       id
       title
+      innerHTML
       contentSource
       customPostType
       blocks {
@@ -167,6 +170,7 @@
     ...on GenericCustomPost {
       id
       title
+      innerHTML
       contentSource
       customPostType
       blocks {
@@ -180,6 +184,7 @@
     ...on GenericCustomPost {
       id
       title
+      innerHTML
       contentSource
       customPostType
       blocks {
@@ -193,6 +198,7 @@
     ...on GenericCustomPost {
       id
       title
+      innerHTML
       contentSource
       customPostType
       blocks {
@@ -205,34 +211,42 @@
 fragment BlockData on Block {
   name
   attributes
+  innerHTML
   contentSource
   innerBlocks {
     name
     attributes
+    innerHTML
     contentSource
     innerBlocks {
       name
       attributes
+      innerHTML
       contentSource
       innerBlocks {
         name
         attributes
+        innerHTML
         contentSource
         innerBlocks {
           name
           attributes
+          innerHTML
           contentSource
           innerBlocks {
             name
             attributes
+            innerHTML
             contentSource
             innerBlocks {
               name
               attributes
+              innerHTML
               contentSource
               innerBlocks {
                 name
                 attributes
+                innerHTML
                 contentSource
               }
             }
