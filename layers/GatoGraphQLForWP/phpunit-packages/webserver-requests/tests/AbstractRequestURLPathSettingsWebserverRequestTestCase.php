@@ -59,7 +59,7 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTestCase extends Ab
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        $data = $this->getProvidedData();
+        $data = $this->providedData();
         return $data[0];
     }
 }
