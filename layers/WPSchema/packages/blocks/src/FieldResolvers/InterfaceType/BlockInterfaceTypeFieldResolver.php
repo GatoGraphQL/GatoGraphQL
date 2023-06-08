@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Blocks\FieldResolvers\InterfaceType;
 
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoPWPSchema\Blocks\TypeHelpers\BlockUnionTypeHelpers;
 use PoPWPSchema\Blocks\TypeResolvers\InterfaceType\BlockInterfaceTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
@@ -17,6 +18,7 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
 
     final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -35,6 +37,15 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     {
         /** @var StringScalarTypeResolver */
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
+    {
+        $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
+    }
+    final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
+    {
+        /** @var HTMLScalarTypeResolver */
+        return $this->htmlScalarTypeResolver ??= $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
     }
 
     /**
@@ -56,6 +67,8 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
             'name',
             'attributes',
             'innerBlocks',
+            // 'innerHTML',
+            'contentSource',
         ];
     }
 
@@ -65,6 +78,8 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
             'name' => $this->getStringScalarTypeResolver(),
             'attributes' => $this->getJSONObjectScalarTypeResolver(),
             'innerBlocks' => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
+            // 'innerHTML' => $this->getHTMLScalarTypeResolver(),
+            'contentSource' => $this->getHTMLScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
@@ -72,9 +87,14 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     public function getFieldTypeModifiers(string $fieldName): int
     {
         return match ($fieldName) {
-            'name' => SchemaTypeModifiers::NON_NULLABLE,
-            'innerBlocks' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getFieldTypeModifiers($fieldName),
+            'name',
+            // 'innerHTML',
+            'contentSource'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'innerBlocks'
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getFieldTypeModifiers($fieldName),
         };
     }
 
@@ -84,6 +104,8 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
             'name' => $this->__('Block name', 'blocks'),
             'attributes' => $this->__('Block attributes, parsed to the type declared in their block.json schema', 'blocks'),
             'innerBlocks' => $this->__('Block\'s inner blocks (if suitable)', 'blocks'),
+            // 'innerHTML' => $this->__('Block\'s inner HTML code', 'blocks'),
+            'contentSource' => $this->__('Block\'s whole HTML code, including the block comment delimiters', 'blocks'),
             default => parent::getFieldDescription($fieldName),
         };
     }
