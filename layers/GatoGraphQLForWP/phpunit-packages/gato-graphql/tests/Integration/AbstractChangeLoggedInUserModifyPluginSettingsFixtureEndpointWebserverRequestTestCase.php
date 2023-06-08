@@ -94,7 +94,7 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         return $options;
     }
 
-    protected static function getExpectedResponseStatusCode(): int
+    protected function getExpectedResponseStatusCode(): int
     {
         if ($this->differentExpectedResponseStatusCode !== null) {
             return $this->differentExpectedResponseStatusCode;

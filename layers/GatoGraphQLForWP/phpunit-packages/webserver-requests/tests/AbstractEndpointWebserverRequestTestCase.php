@@ -94,7 +94,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             );
         }
 
-        $expectedResponseStatusCode = static::getExpectedResponseStatusCode();
+        $expectedResponseStatusCode = $this->getExpectedResponseStatusCode();
         if ($expectedResponseStatusCode !== 200) {
             $options[RequestOptions::HTTP_ERRORS] = false;
         }
@@ -175,7 +175,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         return $options;
     }
 
-    protected static function getExpectedResponseStatusCode(): int
+    protected function getExpectedResponseStatusCode(): int
     {
         return 200;
     }
