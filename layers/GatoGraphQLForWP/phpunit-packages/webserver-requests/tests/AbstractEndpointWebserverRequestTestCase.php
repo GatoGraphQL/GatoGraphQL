@@ -107,19 +107,19 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $options
         );
 
-        static::assertEquals($expectedResponseStatusCode, $response->getStatusCode());
-        static::assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
+        $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
+        $this->assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
         if ($expectedResponseBody !== null) {
             $responseBody = $response->getBody()->__toString();
             // Allow to modify the URLs for the "PROD Integration Tests"
             $responseBody = $this->adaptResponseBody($responseBody);
             $responseComparisonType = $this->getResponseComparisonType();
             if ($responseComparisonType === self::RESPONSE_COMPARISON_EQUALS) {
-                static::assertJsonStringEqualsJsonString($expectedResponseBody, $responseBody);
+                $this->assertJsonStringEqualsJsonString($expectedResponseBody, $responseBody);
             } elseif ($responseComparisonType === self::RESPONSE_COMPARISON_NOT_EQUALS) {
-                static::assertJsonStringNotEqualsJsonString($expectedResponseBody, $responseBody);
+                $this->assertJsonStringNotEqualsJsonString($expectedResponseBody, $responseBody);
             } elseif ($responseComparisonType === self::RESPONSE_COMPARISON_REGEX) {
-                static::assertMatchesRegularExpression($expectedResponseBody, $responseBody);
+                $this->assertMatchesRegularExpression($expectedResponseBody, $responseBody);
             }
         }
     }
