@@ -142,6 +142,9 @@
               "/app/wordpress/WPSchema/": "${workspaceFolder}/layers/WPSchema/",
 
 
+              "/app/wordpress": "${workspaceFolder}/vendor/wordpress/wordpress",
+
+              
               "/app": "${workspaceFolder}"
             }
         },           
