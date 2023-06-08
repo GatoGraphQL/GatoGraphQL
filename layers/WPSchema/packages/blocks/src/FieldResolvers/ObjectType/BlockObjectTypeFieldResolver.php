@@ -57,6 +57,7 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'name',
             'attributes',
             'innerBlocks',
+            'contentSource',
         ];
     }
 
