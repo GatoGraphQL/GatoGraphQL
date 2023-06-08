@@ -83,7 +83,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     {
         $endpoint = static::getEndpoint();
         $providerEntries = [];
-        foreach ($this->getPluginNameEntries() as $pluginName => $pluginEntry) {
+        foreach (static::getPluginNameEntries() as $pluginName => $pluginEntry) {
             $providerEntries[$pluginName . ':enabled'] = [
                 'application/json',
                 $pluginEntry['response-enabled'],
@@ -119,7 +119,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
-    abstract protected function getPluginNameEntries(): array;
+    abstract protected static function getPluginNameEntries(): array;
 
     /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
