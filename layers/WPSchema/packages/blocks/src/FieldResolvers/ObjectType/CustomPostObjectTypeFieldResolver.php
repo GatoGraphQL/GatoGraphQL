@@ -245,10 +245,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $blockInnerBlocks
             );
         }
-        // else {
-        //     // Reached the deepest nested block
-        //     $innerContent = array_map(trim(...), $innerContent);
-        // }
         return [
             'blockName' => $name,
             'attrs' => $attributes !== null ? (array) $attributes : [],
