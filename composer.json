@@ -585,20 +585,20 @@
         ],
         "test": [
             "Composer\\Config::disableProcessTimeout",
-            "phpunit --log-junit=phpunit-test-results.xml"
+            "phpunit --testdox --log-junit=phpunit-test-results.xml"
         ],
-        "unit-test": "phpunit --filter='/^((?!Integration).)*$/' --log-junit=phpunit-test-results.xml",
-        "stopping-unit-test": "phpunit --filter='/^((?!Integration).)*$/' --log-junit=phpunit-test-results.xml --order-by=defects --stop-on-error --stop-on-failure",
+        "unit-test": "phpunit --testdox --filter='/^((?!Integration).)*$/' --log-junit=phpunit-test-results.xml",
+        "stopping-unit-test": "phpunit --testdox --filter='/^((?!Integration).)*$/' --log-junit=phpunit-test-results.xml --order-by=defects --stop-on-error --stop-on-failure",
         "integration-test": [
             "Composer\\Config::disableProcessTimeout",
             "@optimize-autoloader",
-            "phpunit --filter='Integration' --log-junit=phpunit-test-results.xml",
+            "phpunit --testdox --filter='Integration' --log-junit=phpunit-test-results.xml",
             "@deoptimize-autoloader"
         ],
         "stopping-integration-test": [
             "Composer\\Config::disableProcessTimeout",
             "@optimize-autoloader",
-            "phpunit --filter='Integration' --log-junit=phpunit-test-results.xml --order-by=defects --stop-on-error --stop-on-failure",
+            "phpunit --testdox --filter='Integration' --log-junit=phpunit-test-results.xml --order-by=defects --stop-on-error --stop-on-failure",
             "@deoptimize-autoloader"
         ],
         "prod-integration-test": [
