@@ -22,5 +22,5 @@ abstract class AbstractDisabledClientWebserverRequestTestCase extends AbstractWe
     /**
      * @return array<string,mixed[]>
      */
-    public protected static function provideDisabledClientEntries(): array;
+    abstract public static function provideDisabledClientEntries(): array;
 }
