@@ -26,5 +26,5 @@ abstract class AbstractCacheControlWebserverRequestTestCase extends AbstractWebs
     /**
      * @return array<string,string[]>
      */
-    abstract protected static function provideCacheControlEntries(): array;
+    abstract public static function provideCacheControlEntries(): array;
 }
