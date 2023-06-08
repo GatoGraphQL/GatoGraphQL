@@ -71,11 +71,11 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
 
         if ($params !== []) {
             /** @var array<string,mixed> */
-            $params = static::maybeAddXDebugTriggerParam($params);
+            $params = $this->maybeAddXDebugTriggerParam($params);
             $options[RequestOptions::QUERY] = $params;
         } else {
             /** @var string */
-            $endpointURL = static::maybeAddXDebugTriggerParam($endpointURL);
+            $endpointURL = $this->maybeAddXDebugTriggerParam($endpointURL);
         }
 
         if ($doingGET) {
@@ -138,7 +138,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * @param string|array<string,mixed> $urlOrParams
      * @return string|array<string,mixed>
      */
-    protected static function maybeAddXDebugTriggerParam(string|array $urlOrParams): string|array
+    protected function maybeAddXDebugTriggerParam(string|array $urlOrParams): string|array
     {
         if (getenv('XDEBUG_TRIGGER') === false) {
             return $urlOrParams;
