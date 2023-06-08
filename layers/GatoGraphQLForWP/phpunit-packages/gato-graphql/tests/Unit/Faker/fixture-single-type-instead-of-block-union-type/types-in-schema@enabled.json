@@ -13,6 +13,12 @@
                             }
                         },
                         {
+                            "name": "contentSource",
+                            "type": {
+                                "name": "HTML!"
+                            }
+                        },
+                        {
                             "name": "innerBlocks",
                             "type": {
                                 "name": "[GeneralBlock!]"
@@ -812,6 +818,12 @@
                             "name": "attributes",
                             "type": {
                                 "name": "JSONObject"
+                            }
+                        },
+                        {
+                            "name": "contentSource",
+                            "type": {
+                                "name": "HTML!"
                             }
                         },
                         {
