@@ -233,7 +233,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $innerContent = $innerBlocks !== null
             // Recursively produce the HTML for the inner blocks
             ? array_map(
-                fn (BlockInterface $block) => $this->getBlockContentSource(
+                fn (BlockInterface $block) => $innerHTML . $this->getBlockContentSource(
                     $block->getName(),
                     $block->getAttributes(),
                     $block->getInnerHTML(),
