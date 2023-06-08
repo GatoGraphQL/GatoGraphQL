@@ -39,7 +39,7 @@ class GatoGraphQLAdminEndpointsQueryExecutionFixtureWebserverRequestTest extends
                 static::getGraphQLExpectedResponse(),
                 static::getEndpoint(),
                 [],
-                $this->getGraphQLQuery(),
+                static::getGraphQLQuery(),
             ],
         ];
     }
