@@ -235,22 +235,22 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $attributes = $blockItem->attributes ?? null;
         /** @var array<string|null> */
         $innerContent = $blockItem->innerContent;
-        /** @var BlockInterface[]|null */
-        $innerBlocks = null;
+        
+        $serializeBlockData = [
+            'blockName' => $name,
+            'attrs' => $attributes !== null ? (array) $attributes : [],
+            'innerContent' => $innerContent,
+        ];
+        
         if (isset($blockItem->innerBlocks)) {
             /** @var array<stdClass> */
             $blockInnerBlocks = $blockItem->innerBlocks;
-            $innerBlocks = array_map(
+            $serializeBlockData['innerBlocks'] = array_map(
                 $this->getSerializeBlockData(...),
                 $blockInnerBlocks
             );
         }
-        return [
-            'blockName' => $name,
-            'attrs' => $attributes !== null ? (array) $attributes : [],
-            'innerContent' => $innerContent,
-            'innerBlocks' => $innerBlocks,
-        ];
+        return $serializeBlockData;
     }
 
     /**
