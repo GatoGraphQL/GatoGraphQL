@@ -211,7 +211,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             );
         }
         // Regenerate the original content source
-        $contentSource = serialize_block($this->getSerializableBlockProperties($blockItem));
+        $contentSource = serialize_block($this->getSerializeBlockData($blockItem));
         return $this->createBlockObject(
             $name,
             $attributes,
@@ -227,7 +227,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
      *
      * @return array<string,mixed>
      */
-    protected function getSerializableBlockProperties(stdClass $blockItem): array
+    protected function getSerializeBlockData(stdClass $blockItem): array
     {
         /** @var string */
         $name = $blockItem->name;
@@ -241,7 +241,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             /** @var array<stdClass> */
             $blockInnerBlocks = $blockItem->innerBlocks;
             $innerBlocks = array_map(
-                $this->getSerializableBlockProperties(...),
+                $this->getSerializeBlockData(...),
                 $blockInnerBlocks
             );
         }
