@@ -39,7 +39,7 @@ class CustomPostUnionTypeHelpers
             /** @var CustomPostUnionTypeResolver */
             $unionTypeResolver = $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
         }
-        
+
         $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
         if ($targetTypeResolvers === []) {
             return $unionTypeResolver;

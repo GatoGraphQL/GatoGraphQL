@@ -45,7 +45,8 @@ trait RequestURLWebserverRequestTestCaseTrait
             )
         );
 
-        if ($expectedContentType !== null
+        if (
+            $expectedContentType !== null
             && $expectedContentType !== '' // Avoid PHPStan error with "non-empty-string"
         ) {
             $this->assertStringStartsWith(
