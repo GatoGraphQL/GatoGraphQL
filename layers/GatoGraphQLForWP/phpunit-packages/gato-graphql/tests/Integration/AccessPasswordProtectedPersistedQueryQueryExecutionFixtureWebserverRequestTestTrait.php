@@ -19,11 +19,11 @@ trait AccessPasswordProtectedPersistedQueryQueryExecutionFixtureWebserverRequest
     {
         return sprintf(
             'graphql-query/password-protected-persisted-query/%s',
-            $this->viewSource()
+            static::viewSource()
                 ? '?view=source'
                 : ''
         );
     }
 
-    abstract protected function viewSource(): bool;
+    abstract protected static function viewSource(): bool;
 }

@@ -18,12 +18,12 @@ abstract class AbstractPersistedQueryBasePathSettingsWebserverRequestTestCase ex
     {
         return [
             'persisted-query-base-path' => [
-                $this->getNonExistingPathEntry(),
+                static::getNonExistingPathEntry(),
             ],
         ];
     }
 
-    abstract protected function getNonExistingPathEntry(): string;
+    abstract protected static function getNonExistingPathEntry(): string;
 
     protected function getNewPath(string $dataItem): string
     {

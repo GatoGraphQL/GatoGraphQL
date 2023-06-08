@@ -20,7 +20,7 @@ class AccessPrivatePersistedQueryByEditorQueryExecutionFixtureWebserverRequestTe
         return Environment::getIntegrationTestsAuthenticatedEditorUserPassword();
     }
 
-    protected function viewSource(): bool
+    protected static function viewSource(): bool
     {
         return false;
     }

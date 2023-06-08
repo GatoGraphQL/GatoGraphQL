@@ -19,11 +19,11 @@ trait AccessPrivatePersistedQueryQueryExecutionFixtureWebserverRequestTestTrait
     {
         return sprintf(
             'graphql-query/comments-from-this-month/%s',
-            $this->viewSource()
+            static::viewSource()
                 ? '?view=source'
                 : ''
         );
     }
 
-    abstract protected function viewSource(): bool;
+    abstract protected static function viewSource(): bool;
 }

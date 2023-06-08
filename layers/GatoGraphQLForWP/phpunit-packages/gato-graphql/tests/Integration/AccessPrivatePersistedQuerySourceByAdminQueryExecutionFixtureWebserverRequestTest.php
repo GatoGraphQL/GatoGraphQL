@@ -15,7 +15,7 @@ class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequ
         return __DIR__ . '/fixture-private-persisted-queries-success';
     }
 
-    protected function viewSource(): bool
+    protected static function viewSource(): bool
     {
         return true;
     }

@@ -11,7 +11,7 @@ class AccessPasswordProtectedPersistedQuerySuccessQueryExecutionFixtureWebserver
         return __DIR__ . '/fixture-password-protected-persisted-queries-success';
     }
 
-    protected function viewSource(): bool
+    protected static function viewSource(): bool
     {
         return false;
     }
