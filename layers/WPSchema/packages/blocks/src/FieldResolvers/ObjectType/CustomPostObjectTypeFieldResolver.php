@@ -255,40 +255,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         ];
     }
 
-    // /**
-    //  * @param array<string|null> $innerContent
-    //  * @param BlockInterface[]|null $innerBlocks
-    //  */
-    // protected function getBlockContentSource(
-    //     string $name,
-    //     ?stdClass $attributes,
-    //     array $innerContent,
-    //     ?array $innerBlocks,
-    // ): array {
-    //     $blockInnerBlocks = [];
-    //     if ($innerBlocks !== null) {
-    //         // Recursively produce the HTML for the inner blocks
-    //         $blockInnerBlocks = array_map(
-    //             fn (BlockInterface $block) => $this->getBlockContentSource(
-    //                 $block->getName(),
-    //                 $block->getAttributes(),
-    //                 $block->getInnerContent(),
-    //                 $block->getInnerBlocks()
-    //             ),
-    //             $innerBlocks
-    //         );
-    //     } else {
-    //         // Reached the deepest nested block
-    //         $innerContent = array_map(trim(...), $innerContent);
-    //     }
-    //     return [
-    //         'blockName' => $name,
-    //         'attrs' => $attributes !== null ? (array) $attributes : [],
-    //         'innerContent' => $innerContent,
-    //         'innerBlocks' => $blockInnerBlocks,
-    //     ];
-    // }
-
     /**
      * Allow to inject more specific blocks:
      *
