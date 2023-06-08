@@ -29,7 +29,8 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         ?string $operationName = null,
         ?string $method = null,
     ): void {
-        $method ??= static::getMethod();
+        $dataName = $this->getDataName();
+        $method ??= $this->getMethod($dataName);
         if (!in_array($method, ["POST", "GET"])) {
             throw new RuntimeException(sprintf(
                 'Unsupported method \'%s\' for testing a GraphQL endpoint',
@@ -194,7 +195,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      */
     abstract public static function provideEndpointEntries(): array;
 
-    protected static function getMethod(): string
+    protected function getMethod(string $dataName): string
     {
         return 'POST';
     }

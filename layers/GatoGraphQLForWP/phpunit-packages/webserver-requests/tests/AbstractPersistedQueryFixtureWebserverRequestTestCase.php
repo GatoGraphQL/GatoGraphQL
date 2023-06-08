@@ -57,7 +57,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
 
     protected static function getEntryMethod(string $dataName): string
     {
-        return static::getMethod();
+        return 'POST';
     }
 
     /**

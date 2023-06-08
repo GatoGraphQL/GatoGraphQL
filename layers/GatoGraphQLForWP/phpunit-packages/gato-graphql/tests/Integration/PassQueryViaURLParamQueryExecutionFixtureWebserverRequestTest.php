@@ -23,11 +23,11 @@ class PassQueryViaURLParamQueryExecutionFixtureWebserverRequestTest extends Abst
         return 'graphql/website/?query={ self { id } }';
     }
 
-    protected static function getMethod(): string
+    protected function getMethod(string $dataName): string
     {
-        if ($this->dataName() === 'via-get-url-param-query-will-be-executed') {
+        if ($dataName === 'via-get-url-param-query-will-be-executed') {
             return 'GET';
         }
-        return parent::getMethod();
+        return parent::getMethod($dataName);
     }
 }
