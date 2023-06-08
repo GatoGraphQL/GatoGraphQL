@@ -128,6 +128,7 @@
     ...on GenericCustomPost {
       id
       title
+      contentSource
       customPostType
       blocks {
         ...BlockData
@@ -140,6 +141,7 @@
     ...on GenericCustomPost {
       id
       title
+      contentSource
       customPostType
       blocks {
         ...BlockData
@@ -152,6 +154,7 @@
     ...on GenericCustomPost {
       id
       title
+      contentSource
       customPostType
       blocks {
         ...BlockData
@@ -164,6 +167,7 @@
     ...on GenericCustomPost {
       id
       title
+      contentSource
       customPostType
       blocks {
         ...BlockData
@@ -176,6 +180,7 @@
     ...on GenericCustomPost {
       id
       title
+      contentSource
       customPostType
       blocks {
         ...BlockData
@@ -188,6 +193,7 @@
     ...on GenericCustomPost {
       id
       title
+      contentSource
       customPostType
       blocks {
         ...BlockData
