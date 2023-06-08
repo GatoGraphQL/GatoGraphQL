@@ -14,6 +14,8 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
+use function get_comment_delimited_block_content;
+
 class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?BlockInterfaceTypeFieldResolver $blockInterfaceTypeFieldResolver = null;
@@ -80,6 +82,13 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return array_map(
                     fn (BlockInterface $block) => $block->getID(),
                     $innerBlocks
+                );
+
+            case 'contentSource':
+                return get_comment_delimited_block_content(
+                    $block->getName(),
+                    (array) $block->getAttributes(),
+                    $block->getInnerHTML(),
                 );
         }
 
