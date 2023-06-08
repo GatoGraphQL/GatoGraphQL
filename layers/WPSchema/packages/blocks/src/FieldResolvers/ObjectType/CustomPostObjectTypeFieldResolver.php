@@ -28,7 +28,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use WP_Post;
 use stdClass;
 
-use function get_comment_delimited_block_content;
+use function serialize_block;
 
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -210,11 +210,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $blockInnerBlocks
             );
         }
-        $contentSource = get_comment_delimited_block_content(
-            $name,
-            $attributes !== null ? (array) $attributes : [],
-            $innerHTML,
-        );
+        // Regenerate the original content source
+        $contentSource = $this->getBlockContentSource($name, $attributes, $innerHTML, $innerBlocks);
         return $this->createBlockObject(
             $name,
             $attributes,
@@ -222,6 +219,27 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $innerHTML,
             $contentSource,
         );
+    }
+
+    protected function getBlockContentSource(string $name, ?stdClass $attributes, string $innerHTML, ?array $innerBlocks): string
+    {
+        $serializableBlock = [
+            'blockName' => $name,
+            'attrs' => $attributes !== null ? (array) $attributes : [],
+        ];
+        if ($innerBlocks !== null) {
+            // Recursively produce the HTML for the inner blocks
+            $serializableBlock['innerContent'] = array_map(
+                fn (BlockInterface $block) => $this->getBlockContentSource($block->getName(), $block->getAttributes(), $block->getInnerHTML(), $block->getInnerBlocks()),
+                $innerBlocks
+            );
+        } else {
+            // Reached the deepest nested block
+            $serializableBlock['innerContent'] = [
+                $innerHTML,
+            ];
+        }
+        return serialize_block($serializableBlock);
     }
 
     /**
