@@ -211,7 +211,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             );
         }
         // Regenerate the original content source
-        $contentSource = serialize_block($this->getBlockContentSource($name, $attributes, $innerContent, $innerBlocks));
+        $contentSource = serialize_block($this->getSerializableBlockProperties($blockItem));
         return $this->createBlockObject(
             $name,
             $attributes,
@@ -222,38 +222,72 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     }
 
     /**
-     * @param array<string|null> $innerContent
-     * @param BlockInterface[]|null $innerBlocks
+     * Given the name, attributes, and inner block data for a block,
+     * create Block object.
      */
-    protected function getBlockContentSource(
-        string $name,
-        ?stdClass $attributes,
-        array $innerContent,
-        ?array $innerBlocks,
-    ): array {
-        $blockInnerBlocks = [];
-        if ($innerBlocks !== null) {
-            // Recursively produce the HTML for the inner blocks
-            $blockInnerBlocks = array_map(
-                fn (BlockInterface $block) => $this->getBlockContentSource(
-                    $block->getName(),
-                    $block->getAttributes(),
-                    $block->getInnerContent(),
-                    $block->getInnerBlocks()
-                ),
-                $innerBlocks
+    protected function getSerializableBlockProperties(stdClass $blockItem): array
+    {
+        /** @var string */
+        $name = $blockItem->name;
+        /** @var stdClass|null */
+        $attributes = $blockItem->attributes ?? null;
+        /** @var array<string|null> */
+        $innerContent = $blockItem->innerContent;
+        /** @var BlockInterface[]|null */
+        $innerBlocks = null;
+        if (isset($blockItem->innerBlocks)) {
+            /** @var array<stdClass> */
+            $blockInnerBlocks = $blockItem->innerBlocks;
+            $innerBlocks = array_map(
+                $this->getSerializableBlockProperties(...),
+                $blockInnerBlocks
             );
-        } else {
-            // Reached the deepest nested block
-            $innerContent = array_map(trim(...), $innerContent);
         }
+        // else {
+        //     // Reached the deepest nested block
+        //     $innerContent = array_map(trim(...), $innerContent);
+        // }
         return [
             'blockName' => $name,
             'attrs' => $attributes !== null ? (array) $attributes : [],
             'innerContent' => $innerContent,
-            'innerBlocks' => $blockInnerBlocks,
+            'innerBlocks' => $innerBlocks,
         ];
     }
+
+    // /**
+    //  * @param array<string|null> $innerContent
+    //  * @param BlockInterface[]|null $innerBlocks
+    //  */
+    // protected function getBlockContentSource(
+    //     string $name,
+    //     ?stdClass $attributes,
+    //     array $innerContent,
+    //     ?array $innerBlocks,
+    // ): array {
+    //     $blockInnerBlocks = [];
+    //     if ($innerBlocks !== null) {
+    //         // Recursively produce the HTML for the inner blocks
+    //         $blockInnerBlocks = array_map(
+    //             fn (BlockInterface $block) => $this->getBlockContentSource(
+    //                 $block->getName(),
+    //                 $block->getAttributes(),
+    //                 $block->getInnerContent(),
+    //                 $block->getInnerBlocks()
+    //             ),
+    //             $innerBlocks
+    //         );
+    //     } else {
+    //         // Reached the deepest nested block
+    //         $innerContent = array_map(trim(...), $innerContent);
+    //     }
+    //     return [
+    //         'blockName' => $name,
+    //         'attrs' => $attributes !== null ? (array) $attributes : [],
+    //         'innerContent' => $innerContent,
+    //         'innerBlocks' => $blockInnerBlocks,
+    //     ];
+    // }
 
     /**
      * Allow to inject more specific blocks:
