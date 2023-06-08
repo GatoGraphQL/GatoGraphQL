@@ -331,13 +331,12 @@ class BlockContentParser implements BlockContentParserInterface
             }
         }
 
-        $block_content_source = '';
         $sourced_block = [
             'name'          => $block_name,
             'attributes'    => $block_attributes,
-            // Gato GraphQL additions
+            
+            // Gato GraphQL addition
             'innerHTML'     => trim($block['innerHTML']), // Remove the \n before/after the HTML
-            'contentSource' => $block_content_source,
         ];
 
         if (isset($block['innerBlocks'])) {
