@@ -16,7 +16,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
  */
 class GatoGraphQLAdminEndpointsQueryExecutionFixtureWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return GeneralUtils::addQueryArgs(
             [
@@ -31,20 +31,20 @@ class GatoGraphQLAdminEndpointsQueryExecutionFixtureWebserverRequestTest extends
     /**
      * @return array<string,array<mixed>>
      */
-    protected function provideEndpointEntries(): array
+    public static function provideEndpointEntries(): array
     {
         return [
             'gato-graphql-admin-endpoints' => [
                 'application/json',
-                $this->getGraphQLExpectedResponse(),
-                $this->getEndpoint(),
+                static::getGraphQLExpectedResponse(),
+                static::getEndpoint(),
                 [],
-                $this->getGraphQLQuery(),
+                static::getGraphQLQuery(),
             ],
         ];
     }
 
-    protected function getGraphQLQuery(): string
+    protected static function getGraphQLQuery(): string
     {
         return <<<GRAPHQL
             {
@@ -53,7 +53,7 @@ class GatoGraphQLAdminEndpointsQueryExecutionFixtureWebserverRequestTest extends
         GRAPHQL;
     }
 
-    protected function getGraphQLExpectedResponse(): string
+    protected static function getGraphQLExpectedResponse(): string
     {
         return <<<JSON
         {

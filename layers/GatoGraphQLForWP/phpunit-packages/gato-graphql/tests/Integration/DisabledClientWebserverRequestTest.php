@@ -49,7 +49,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
     /**
      * @return array<string,mixed[]>
      */
-    protected function provideDisabledClientEntries(): array
+    public static function provideDisabledClientEntries(): array
     {
         return [
             'single-endpoint-graphiql' => [

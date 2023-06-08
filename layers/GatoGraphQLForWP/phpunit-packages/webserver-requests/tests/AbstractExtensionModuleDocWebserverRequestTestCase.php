@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 
 abstract class AbstractExtensionModuleDocWebserverRequestTestCase extends AbstractModuleDocWebserverRequestTestCase
 {
-    protected function getModuleEndpoint(string $module): string
+    protected static function getModuleEndpoint(string $module): string
     {
         $page = 'gato_graphql_extensions';
         return sprintf(

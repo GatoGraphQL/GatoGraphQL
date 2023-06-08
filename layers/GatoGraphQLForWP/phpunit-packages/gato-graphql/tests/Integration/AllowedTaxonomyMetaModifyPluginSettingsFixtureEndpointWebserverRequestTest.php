@@ -10,7 +10,7 @@ class AllowedTaxonomyMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest
 {
     use AllowedTaxonomyMetaFixtureEndpointWebserverRequestTestTrait;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/';
     }

@@ -12,7 +12,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  */
 class CanonicalNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-canonical-namespacing';
     }
@@ -24,7 +24,7 @@ class CanonicalNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTes
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         $providerItems = parent::customizeProviderEndpointEntries($providerItems);
         $providerItems['introspection-types:0'][1] = $providerItems['introspection-types'][1];

@@ -14,16 +14,16 @@ abstract class AbstractPersistedQueryBasePathSettingsWebserverRequestTestCase ex
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
-    protected function providePathEntries(): array
+    public static function providePathEntries(): array
     {
         return [
             'persisted-query-base-path' => [
-                $this->getNonExistingPathEntry(),
+                static::getNonExistingPathEntry(),
             ],
         ];
     }
 
-    abstract protected function getNonExistingPathEntry(): string;
+    abstract protected static function getNonExistingPathEntry(): string;
 
     protected function getNewPath(string $dataItem): string
     {

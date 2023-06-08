@@ -40,6 +40,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "GeneralBlock"
+        },
+        {
+          "kind": "OBJECT",
           "name": "GenericCategory"
         },
         {
@@ -300,6 +304,10 @@
         },
         {
           "kind": "INTERFACE",
+          "name": "Block"
+        },
+        {
+          "kind": "INTERFACE",
           "name": "Category"
         },
         {
@@ -337,6 +345,10 @@
         {
           "kind": "INTERFACE",
           "name": "WithMeta"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "BlockFilterByInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -705,6 +717,10 @@
         {
           "kind": "ENUM",
           "name": "UserOrderByEnum"
+        },
+        {
+          "kind": "UNION",
+          "name": "BlockUnion"
         },
         {
           "kind": "UNION",

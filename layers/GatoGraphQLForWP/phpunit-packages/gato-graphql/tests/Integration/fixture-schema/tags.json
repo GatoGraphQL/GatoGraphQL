@@ -4,12 +4,63 @@
             {
                 "__typename": "GenericTag",
                 "taxonomy": "dummy-tag",
-                "customPostCount": 9,
+                "customPostCount": 12,
                 "customPosts": [
                     {
                         "__typename": "GenericCustomPost",
                         "id": 634,
                         "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 654,
+                        "title": "Dummy CPT with blocks",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 656,
+                        "title": "Dummy CPT with non-existing block",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 658,
+                        "title": "Dummy CPT with no content",
                         "tags": [
                             {
                                 "__typename": "GenericTag",
@@ -159,53 +210,9 @@
                                 "name": "Heavy metal"
                             }
                         ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 613,
-                        "title": "Dolor facilis repellat pariatur veniam at",
-                        "tags": [
-                            {
-                                "__typename": "GenericTag",
-                                "id": 28,
-                                "name": "Tango"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 27,
-                                "name": "Jazz"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 26,
-                                "name": "Heavy metal"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 620,
-                        "title": "Dignissimos sed dolore aut",
-                        "tags": [
-                            {
-                                "__typename": "GenericTag",
-                                "id": 28,
-                                "name": "Tango"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 27,
-                                "name": "Jazz"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 33,
-                                "name": "Classical"
-                            }
-                        ]
                     }
                 ],
-                "count": 9,
+                "count": 12,
                 "description": "",
                 "id": 28,
                 "metaValue": null,
@@ -654,12 +661,63 @@
             {
                 "__typename": "GenericTag",
                 "taxonomy": "dummy-tag",
-                "customPostCount": 7,
+                "customPostCount": 10,
                 "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 656,
+                        "title": "Dummy CPT with non-existing block",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 658,
+                        "title": "Dummy CPT with no content",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
                     {
                         "__typename": "GenericCustomPost",
                         "id": 634,
                         "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 654,
+                        "title": "Dummy CPT with blocks",
                         "tags": [
                             {
                                 "__typename": "GenericTag",
@@ -816,7 +874,7 @@
                         ]
                     }
                 ],
-                "count": 7,
+                "count": 10,
                 "description": "",
                 "id": 29,
                 "metaValue": null,
@@ -1226,6 +1284,80 @@
                         "taxonomy": "dummy-tag"
                     }
                 ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 654,
+                "title": "Dummy CPT with blocks",
+                "customPostType": "dummy-cpt",
+                "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 656,
+                "title": "Dummy CPT with non-existing block",
+                "customPostType": "dummy-cpt",
+                "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 658,
+                "title": "Dummy CPT with no content",
+                "customPostType": "dummy-cpt",
+                "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "customPostType": "dummy-cpt",
+                "tags": []
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "customPostType": "dummy-cpt",
+                "tags": []
             },
             {
                 "__typename": "GenericCustomPost",
@@ -1892,6 +2024,42 @@
             {
                 "id": 634,
                 "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    }
+                ]
+            },
+            {
+                "id": 654,
+                "title": "Dummy CPT with blocks",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    }
+                ]
+            },
+            {
+                "id": 656,
+                "title": "Dummy CPT with non-existing block",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    }
+                ]
+            },
+            {
+                "id": 658,
+                "title": "Dummy CPT with no content",
                 "tags": [
                     {
                         "slug": "tango"

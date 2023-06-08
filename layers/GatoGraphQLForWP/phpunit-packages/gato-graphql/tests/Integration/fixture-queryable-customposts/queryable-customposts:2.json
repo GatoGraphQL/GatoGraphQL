@@ -89,8 +89,14 @@
     "dummyCustomPosts": [
       {
         "__typename": "GenericCustomPost",
-        "id": 649,
-        "title": "Nulla numquam totam eaque",
+        "id": 613,
+        "title": "Dolor facilis repellat pariatur veniam at",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 616,
+        "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
         "customPostType": "dummy-cpt"
       },
       {
@@ -101,20 +107,8 @@
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 634,
-        "title": "Recusandae vel deleniti est expedita dolores quasi",
-        "customPostType": "dummy-cpt"
-      },
-      {
-        "__typename": "GenericCustomPost",
-        "id": 636,
-        "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
-        "customPostType": "dummy-cpt"
-      },
-      {
-        "__typename": "GenericCustomPost",
-        "id": 639,
-        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+        "id": 620,
+        "title": "Dignissimos sed dolore aut",
         "customPostType": "dummy-cpt"
       },
       {
@@ -125,14 +119,14 @@
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 648,
-        "title": "Nostrum consequatur non fugit vel",
+        "id": 627,
+        "title": "Quis voluptatum tempore veniam est sit",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 644,
-        "title": "Impedit eaque numquam quas inventore",
+        "id": 629,
+        "title": "Qui ea incidunt qui",
         "customPostType": "dummy-cpt"
       },
       {
@@ -143,8 +137,14 @@
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 641,
-        "title": "Impedit necessitatibus dolor est",
+        "id": 631,
+        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+        "customPostType": "dummy-cpt"
+      },
+      {
+        "__typename": "GenericCustomPost",
+        "id": 634,
+        "title": "Recusandae vel deleniti est expedita dolores quasi",
         "customPostType": "dummy-cpt"
       }
     ]

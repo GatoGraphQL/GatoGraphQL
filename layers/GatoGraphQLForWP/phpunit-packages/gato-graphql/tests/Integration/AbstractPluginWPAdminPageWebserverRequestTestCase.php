@@ -14,13 +14,13 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
      *
      * @return array<string,string[]>
      */
-    protected function providePageEntries(): array
+    public static function providePageEntries(): array
     {
-        $pluginMenuName = $this->getPluginMenuName();
+        $pluginMenuName = static::getPluginMenuName();
 
         $entries = [];
 
-        $defaultMenuPageSlug = $this->getGatoGraphQLPluginDefaultMenuPageSlug();
+        $defaultMenuPageSlug = static::getGatoGraphQLPluginDefaultMenuPageSlug();
         if ($defaultMenuPageSlug !== null) {
             // Default menu page entry
             $entries['default'] = [
@@ -31,7 +31,7 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
             ];
         }
 
-        foreach ($this->getGatoGraphQLPluginMenuPageSlugs() as $pageSlug) {
+        foreach (static::getGatoGraphQLPluginMenuPageSlugs() as $pageSlug) {
             if ($pageSlug === $defaultMenuPageSlug) {
                 continue;
             }
@@ -44,7 +44,7 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
             ];
         }
 
-        foreach ($this->getGatoGraphQLPluginCustomPostTypes() as $customPostType) {
+        foreach (static::getGatoGraphQLPluginCustomPostTypes() as $customPostType) {
             $entries[$customPostType] = [
                 sprintf(
                     'wp-admin/edit.php?post_type=%s',
@@ -59,7 +59,7 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
     /**
      * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
      */
-    protected function getPluginMenuName(): string
+    protected static function getPluginMenuName(): string
     {
         return 'gato_graphql';
     }
@@ -73,9 +73,9 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
      *
      * @return string[]
      */
-    abstract protected function getGatoGraphQLPluginMenuPageSlugs(): array;
+    abstract protected static function getGatoGraphQLPluginMenuPageSlugs(): array;
 
-    protected function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string
+    protected static function getGatoGraphQLPluginDefaultMenuPageSlug(): ?string
     {
         return null;
     }
@@ -89,5 +89,5 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
      *
      * @return string[]
      */
-    abstract protected function getGatoGraphQLPluginCustomPostTypes(): array;
+    abstract protected static function getGatoGraphQLPluginCustomPostTypes(): array;
 }

@@ -22,9 +22,7 @@ use stdClass;
 
 class FieldEqualsToTest extends AbstractTestCase
 {
-    /**
-     * @dataProvider getLeafFieldEqualsToLeafFieldProviderEntries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getLeafFieldEqualsToLeafFieldProviderEntries')]
     public function testLeafFieldEqualsToLeafField(
         LeafField $leafField1,
         LeafField $leafField2
@@ -35,7 +33,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected function getLeafFieldEqualsToLeafFieldProviderEntries(): array
+    public static function getLeafFieldEqualsToLeafFieldProviderEntries(): array
     {
         $inputObject1 = new stdClass();
         $inputObject1->someKey = new VariableReference('someVariable', null, new Location(1, 1));
@@ -113,9 +111,7 @@ class FieldEqualsToTest extends AbstractTestCase
         ];
     }
 
-    /**
-     * @dataProvider getLeafFieldDoesNotEqualToLeafFieldProviderEntries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getLeafFieldDoesNotEqualToLeafFieldProviderEntries')]
     public function testLeafFieldDoesNotEqualToLeafField(
         LeafField $leafField1,
         LeafField $leafField2
@@ -126,7 +122,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected function getLeafFieldDoesNotEqualToLeafFieldProviderEntries(): array
+    public static function getLeafFieldDoesNotEqualToLeafFieldProviderEntries(): array
     {
         $inputObject1 = new stdClass();
         $inputObject1->someLiteral = new Literal('someValue', new Location(1, 1));
@@ -229,9 +225,9 @@ class FieldEqualsToTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider getRelationalFieldEqualsToRelationalFieldProviderEntries
      * @param Fragment[] $fragments
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getRelationalFieldEqualsToRelationalFieldProviderEntries')]
     public function testRelationalFieldEqualsToRelationalField(
         RelationalField $relationalField1,
         RelationalField $relationalField2,
@@ -243,7 +239,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected function getRelationalFieldEqualsToRelationalFieldProviderEntries(): array
+    public static function getRelationalFieldEqualsToRelationalFieldProviderEntries(): array
     {
         return [
             'relational' => [
@@ -295,9 +291,7 @@ class FieldEqualsToTest extends AbstractTestCase
         ];
     }
 
-    /**
-     * @dataProvider getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries')]
     public function testRelationalFieldDoesNotEqualToRelationalField(
         RelationalField $relationalField1,
         RelationalField $relationalField2
@@ -308,7 +302,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    protected function getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries(): array
+    public static function getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries(): array
     {
         return [
             'relational-with-different-args' => [

@@ -9,7 +9,7 @@ class AccessPasswordProtectedCustomEndpointFailureQueryExecutionFixtureWebserver
     use AccessPasswordProtectedCustomEndpointQueryExecutionFixtureWebserverRequestTestTrait;
     use AccessPasswordProtectedCustomEndpointFailsQueryExecutionFixtureWebserverRequestTestTrait;
 
-    protected function accessClient(): bool
+    protected static function accessClient(): bool
     {
         return false;
     }

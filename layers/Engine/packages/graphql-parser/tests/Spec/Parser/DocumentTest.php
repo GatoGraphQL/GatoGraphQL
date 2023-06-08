@@ -83,9 +83,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    /**
-     * @dataProvider cyclicalFragmentQueryProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('cyclicalFragmentQueryProvider')]
     public function testNoCyclicalFragments(string $query): void
     {
         $this->expectException(InvalidRequestException::class);
@@ -98,7 +96,7 @@ class DocumentTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    public function cyclicalFragmentQueryProvider(): array
+    public static function cyclicalFragmentQueryProvider(): array
     {
         return [
             'direct' => ['
@@ -426,9 +424,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    /**
-     * @dataProvider duplicateArgumentQueryProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('duplicateArgumentQueryProvider')]
     public function testDuplicateArgument(string $query): void
     {
         $this->expectException(InvalidRequestException::class);
@@ -441,7 +437,7 @@ class DocumentTest extends AbstractTestCase
     /**
      * @return mixed[]
      */
-    public function duplicateArgumentQueryProvider(): array
+    public static function duplicateArgumentQueryProvider(): array
     {
         return [
             ['

@@ -431,6 +431,43 @@
                     "enumValues": null
                 },
                 {
+                    "name": "GeneralBlock",
+                    "extensions": {
+                        "elementName": "GeneralBlock",
+                        "namespacedName": "GeneralBlock",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "attributes",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "innerBlocks",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "GenericCategory",
                     "extensions": {
                         "elementName": "GenericCategory",
@@ -627,6 +664,21 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": []
+                        },
+                        {
+                            "name": "blocks",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
                         },
                         {
                             "name": "categories",
@@ -2075,6 +2127,21 @@
                             "args": []
                         },
                         {
+                            "name": "blocks",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "childCount",
                             "extensions": {
                                 "isMutation": false,
@@ -2468,6 +2535,21 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": []
+                        },
+                        {
+                            "name": "blocks",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
                         },
                         {
                             "name": "categories",
@@ -7660,6 +7742,43 @@
                     "enumValues": null
                 },
                 {
+                    "name": "Block",
+                    "extensions": {
+                        "elementName": "Block",
+                        "namespacedName": "Block",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "attributes",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "innerBlocks",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "Category",
                     "extensions": {
                         "elementName": "Category",
@@ -8154,6 +8273,31 @@
                         }
                     ],
                     "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "BlockFilterByInput",
+                    "extensions": {
+                        "elementName": "BlockFilterByInput",
+                        "namespacedName": "BlockFilterByInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "exclude",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "include",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
                     "enumValues": null
                 },
                 {
@@ -12291,6 +12435,18 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "BlockUnion",
+                    "extensions": {
+                        "elementName": "BlockUnion",
+                        "namespacedName": "BlockUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
                 },
                 {
                     "name": "CategoryUnion",

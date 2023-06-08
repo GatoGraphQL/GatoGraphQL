@@ -13,13 +13,13 @@ abstract class AbstractExposeClientOnCustomEndpointCPTBlockAttributesFixtureEndp
     {
         return sprintf(
             '%s?%s=%s',
-            $this->getEndpoint(),
+            static::getEndpoint(),
             RequestParams::VIEW,
             $this->getClientName(),
         );
     }
 
-    abstract protected function getEndpoint(): string;
+    abstract protected static function getEndpoint(): string;
 
     abstract protected function getClientName(): string;
 }

@@ -15,9 +15,9 @@ class WordPressNonAuthenticatedUserWebserverRequestTest extends AbstractEndpoint
     /**
      * @return array<string,array<mixed>>
      */
-    protected function provideEndpointEntries(): array
+    public static function provideEndpointEntries(): array
     {
-        $query = $this->getGraphQLQuery();
+        $query = static::getGraphQLQuery();
         $entries = [];
         foreach (WordPressAuthenticatedUserEndpoints::ENDPOINTS as $dataName => $endpoint) {
             $entries[$dataName] = [
@@ -31,7 +31,7 @@ class WordPressNonAuthenticatedUserWebserverRequestTest extends AbstractEndpoint
         return $entries;
     }
 
-    protected function getGraphQLQuery(): string
+    protected static function getGraphQLQuery(): string
     {
         return <<<GRAPHQL
             {

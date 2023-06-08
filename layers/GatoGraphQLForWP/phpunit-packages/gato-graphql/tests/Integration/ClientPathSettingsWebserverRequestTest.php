@@ -16,7 +16,7 @@ class ClientPathSettingsWebserverRequestTest extends AbstractClientPathSettingsW
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newClientPath} ]
      */
-    protected function provideClientPathEntries(): array
+    protected static function provideClientPathEntries(): array
     {
         return [
             'single-endpoint-graphiql' => [

@@ -11,7 +11,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  */
 class SingleEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/';
     }
@@ -27,7 +27,7 @@ class SingleEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpoi
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         $providerItems['user-email:0'][1] = $providerItems['user-email'][1];
         return $providerItems;

@@ -14,9 +14,8 @@ class VariableTest extends AbstractTestCase
 {
     /**
      * Test if variable value equals expected value
-     *
-     * @dataProvider variableProvider
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('variableProvider')]
     public function testGetValue(mixed $actual, mixed $expected): void
     {
         $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));

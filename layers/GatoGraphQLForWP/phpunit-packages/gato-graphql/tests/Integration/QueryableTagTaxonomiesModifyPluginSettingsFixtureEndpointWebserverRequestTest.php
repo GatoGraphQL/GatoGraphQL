@@ -10,7 +10,7 @@ class QueryableTagTaxonomiesModifyPluginSettingsFixtureEndpointWebserverRequestT
 {
     use QueryableTagTaxonomiesFixtureEndpointWebserverRequestTestTrait;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/';
     }

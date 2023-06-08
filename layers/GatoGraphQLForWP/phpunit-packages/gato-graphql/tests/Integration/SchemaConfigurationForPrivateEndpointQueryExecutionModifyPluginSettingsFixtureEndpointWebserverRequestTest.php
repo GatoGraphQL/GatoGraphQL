@@ -9,12 +9,12 @@ class SchemaConfigurationForPrivateEndpointQueryExecutionModifyPluginSettingsFix
     /**
      * Admin client endpoint
      */
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
     }
 
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-default-schema-configuration-for-endpoints';
     }

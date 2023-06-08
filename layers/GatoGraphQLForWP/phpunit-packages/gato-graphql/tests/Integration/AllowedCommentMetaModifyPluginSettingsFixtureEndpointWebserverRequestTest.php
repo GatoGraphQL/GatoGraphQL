@@ -10,7 +10,7 @@ class AllowedCommentMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest 
 {
     use AllowedCommentMetaFixtureEndpointWebserverRequestTestTrait;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql/';
     }

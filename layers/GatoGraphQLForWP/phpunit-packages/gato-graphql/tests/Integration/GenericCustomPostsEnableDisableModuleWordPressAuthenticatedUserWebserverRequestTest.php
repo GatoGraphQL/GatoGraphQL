@@ -13,7 +13,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\AbstractFixtureEnableDisableModuleWo
  */
 class GenericCustomPostsEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest extends AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-generic-customposts-enable-disable-modules';
     }

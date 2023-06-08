@@ -9,7 +9,7 @@ class AccessPrivateCustomEndpointByNonLoggedInUserQueryExecutionFixtureWebserver
     use AccessPrivateCustomEndpointQueryExecutionFixtureWebserverRequestTestTrait;
     use AccessPrivateCustomEndpointFailsQueryExecutionFixtureWebserverRequestTestTrait;
 
-    protected function accessClient(): bool
+    protected static function accessClient(): bool
     {
         return false;
     }

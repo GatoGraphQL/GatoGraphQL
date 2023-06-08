@@ -15,10 +15,10 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     public const RESPONSE_COMPARISON_REGEX = 2;
 
     /**
-     * @dataProvider provideEndpointEntries
      * @param array<string,mixed> $params
      * @param array<string,mixed> $variables
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideEndpointEntries')]
     public function testEndpoints(
         string $expectedContentType,
         ?string $expectedResponseBody,
@@ -138,7 +138,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * @param string|array<string,mixed> $urlOrParams
      * @return string|array<string,mixed>
      */
-    protected static function maybeAddXDebugTriggerParam(string|array $urlOrParams): string|array
+    protected function maybeAddXDebugTriggerParam(string|array $urlOrParams): string|array
     {
         if (getenv('XDEBUG_TRIGGER') === false) {
             return $urlOrParams;
@@ -192,7 +192,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     /**
      * @return array<string,array<mixed>>
      */
-    abstract protected function provideEndpointEntries(): array;
+    abstract public static function provideEndpointEntries(): array;
 
     protected function getMethod(): string
     {

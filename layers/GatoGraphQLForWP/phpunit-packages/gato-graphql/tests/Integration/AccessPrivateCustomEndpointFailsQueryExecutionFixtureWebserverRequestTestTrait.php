@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 trait AccessPrivateCustomEndpointFailsQueryExecutionFixtureWebserverRequestTestTrait
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-private-custom-endpoints-failure';
     }
@@ -18,7 +18,7 @@ trait AccessPrivateCustomEndpointFailsQueryExecutionFixtureWebserverRequestTestT
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
         $providerItems['private-custom-endpoint'][0] = 'text/html';

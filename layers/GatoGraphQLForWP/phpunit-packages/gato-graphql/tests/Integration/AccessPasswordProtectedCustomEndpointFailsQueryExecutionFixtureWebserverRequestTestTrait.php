@@ -8,7 +8,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEndpointWebserverRequestTest
 
 trait AccessPasswordProtectedCustomEndpointFailsQueryExecutionFixtureWebserverRequestTestTrait
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-password-protected-custom-endpoints-failure';
     }
@@ -20,7 +20,7 @@ trait AccessPasswordProtectedCustomEndpointFailsQueryExecutionFixtureWebserverRe
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
         $providerItems['password-protected-custom-endpoint'][0] = 'text/html';

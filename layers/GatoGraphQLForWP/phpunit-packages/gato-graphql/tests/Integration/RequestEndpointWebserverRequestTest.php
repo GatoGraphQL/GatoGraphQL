@@ -12,12 +12,12 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
      * Execute a GraphQL query against each of the endpoints
      * @return array<string,array<mixed>>
      */
-    protected function provideEndpointEntries(): array
+    public static function provideEndpointEntries(): array
     {
-        $query = $this->getGraphQLQuery();
-        $expectedResponseBodyWithoutLimit = $this->getGraphQLExpectedResponseWithoutLimit();
-        $expectedResponseBodyWithLimit = $this->getGraphQLExpectedResponseWithLimit();
-        $expectedResponseBodyEmptyQuery = $this->getGraphQLExpectedResponseEmptyQuery();
+        $query = static::getGraphQLQuery();
+        $expectedResponseBodyWithoutLimit = static::getGraphQLExpectedResponseWithoutLimit();
+        $expectedResponseBodyWithLimit = static::getGraphQLExpectedResponseWithLimit();
+        $expectedResponseBodyEmptyQuery = static::getGraphQLExpectedResponseEmptyQuery();
         $endpoints = [
             'single-endpoint' => 'graphql/',
             'custom-endpoint' => 'graphql/mobile-app/',
@@ -53,7 +53,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
         return $entries;
     }
 
-    protected function getGraphQLQuery(): string
+    protected static function getGraphQLQuery(): string
     {
         return <<<GRAPHQL
             query MyQuery(\$limit: Int = 3) {
@@ -83,7 +83,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
         GRAPHQL;
     }
 
-    protected function getGraphQLExpectedResponseWithoutLimit(): string
+    protected static function getGraphQLExpectedResponseWithoutLimit(): string
     {
         return <<<JSON
             {
@@ -151,7 +151,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
         JSON;
     }
 
-    protected function getGraphQLExpectedResponseWithLimit(): string
+    protected static function getGraphQLExpectedResponseWithLimit(): string
     {
         return <<<JSON
             {
@@ -194,7 +194,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
         JSON;
     }
 
-    protected function getGraphQLExpectedResponseEmptyQuery(): string
+    protected static function getGraphQLExpectedResponseEmptyQuery(): string
     {
         return <<<JSON
             {

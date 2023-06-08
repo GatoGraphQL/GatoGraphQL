@@ -13,7 +13,7 @@ abstract class AbstractAdminClientQueryExecutionFixtureWebserverRequestTestCase 
     /**
      * Admin client endpoint
      */
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
     }

@@ -363,6 +363,16 @@
                 "__typename": "Post",
                 "id": 1,
                 "title": "Hello world!"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block"
             }
         ],
         "customPostsByStatus": [

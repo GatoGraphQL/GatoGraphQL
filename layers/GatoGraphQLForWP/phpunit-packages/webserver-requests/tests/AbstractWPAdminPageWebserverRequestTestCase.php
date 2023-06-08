@@ -10,9 +10,7 @@ abstract class AbstractWPAdminPageWebserverRequestTestCase extends AbstractWebse
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-    /**
-     * @dataProvider providePageEntries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('providePageEntries')]
     public function testPagesExist(
         string $endpoint,
     ): void {
@@ -30,7 +28,7 @@ abstract class AbstractWPAdminPageWebserverRequestTestCase extends AbstractWebse
     /**
      * @return array<string,string[]>
      */
-    abstract protected function providePageEntries(): array;
+    abstract public static function providePageEntries(): array;
 
     protected function executeAsserts(
         ResponseInterface $response,

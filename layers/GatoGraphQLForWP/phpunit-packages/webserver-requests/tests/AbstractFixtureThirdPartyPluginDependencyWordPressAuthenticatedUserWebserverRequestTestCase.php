@@ -15,19 +15,22 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
 {
     use FixtureTestCaseTrait;
 
-    public function getDataSetAsString(bool $includeData = true): string
-    {
-        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
-    }
+    /**
+     * Since PHPUnit v10, this is not possible anymore!
+     */
+    // final public function dataSetAsString(): string
+    // {
+    //     return $this->addFixtureFolderInfo(parent::dataSetAsString());
+    // }
 
     /**
      * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
-    protected function getPluginNameEntries(): array
+    protected static function getPluginNameEntries(): array
     {
         $pluginEntries = [];
-        $fixtureFolder = $this->getFixtureFolder();
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
+        $fixtureFolder = static::getFixtureFolder();
+        $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],
             ['*.disabled.gql']
@@ -44,11 +47,11 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             $filePath = $graphQLQueryFileInfo->getPath();
             $pluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':enabled.json';
             if (!\file_exists($pluginEnabledGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($pluginEnabledGraphQLResponseFile);
+                static::throwFileNotExistsException($pluginEnabledGraphQLResponseFile);
             }
             $pluginDisabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':disabled.json';
             if (!\file_exists($pluginDisabledGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($pluginDisabledGraphQLResponseFile);
+                static::throwFileNotExistsException($pluginDisabledGraphQLResponseFile);
             }
             $pluginOnlyOneEnabledGraphQLResponse = null;
             $pluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
@@ -68,14 +71,14 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                 $pluginEntries[$pluginName]['response-only-one-enabled'] = $pluginOnlyOneEnabledGraphQLResponse;
             }
         }
-        return $this->customizePluginNameEntries($pluginEntries);
+        return static::customizePluginNameEntries($pluginEntries);
     }
 
     /**
      * @param array<string,array<string,mixed>> $pluginEntries
      * @return array<string,array<string,mixed>>
      */
-    protected function customizePluginNameEntries(array $pluginEntries): array
+    protected static function customizePluginNameEntries(array $pluginEntries): array
     {
         return $pluginEntries;
     }

@@ -6,12 +6,12 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class AccessPasswordProtectedPersistedQuerySourceSuccessQueryExecutionFixtureWebserverRequestTest extends AbstractAccessPasswordProtectedPersistedQueryQueryExecutionFixtureWebserverRequestTestCase
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-password-protected-persisted-queries-success';
     }
 
-    protected function viewSource(): bool
+    protected static function viewSource(): bool
     {
         return true;
     }
@@ -23,7 +23,7 @@ class AccessPasswordProtectedPersistedQuerySourceSuccessQueryExecutionFixtureWeb
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
         $providerItems['password-protected-persisted-query'][0] = 'text/html';

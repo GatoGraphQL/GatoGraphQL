@@ -4,7 +4,7 @@
       "message": "Value 'dummy-cpt' for type 'CustomPostEnumString' is not valid (the only valid values are: 'attachment', 'custom_css', 'nav_menu_item', 'page', 'post', 'revision')",
       "locations": [
         {
-          "line": 33,
+          "line": 34,
           "column": 12
         }
       ],
@@ -12,11 +12,11 @@
         "path": [
           "{customPostTypes: \"dummy-cpt\"}",
           "(filter: {customPostTypes: \"dummy-cpt\"})",
-          "dummyCustomPosts: customPosts(filter: {customPostTypes: \"dummy-cpt\"}) { ... }",
+          "dummyCustomPosts: customPosts(sort: {by: ID, order: ASC}, filter: {customPostTypes: \"dummy-cpt\"}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "dummyCustomPosts: customPosts(filter: {customPostTypes: \"dummy-cpt\"}) { ... }",
+        "field": "dummyCustomPosts: customPosts(sort: {by: ID, order: ASC}, filter: {customPostTypes: \"dummy-cpt\"}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     }

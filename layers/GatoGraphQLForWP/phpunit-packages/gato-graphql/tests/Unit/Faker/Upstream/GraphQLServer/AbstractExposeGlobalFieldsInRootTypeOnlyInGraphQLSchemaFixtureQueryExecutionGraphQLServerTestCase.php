@@ -12,7 +12,7 @@ abstract class AbstractExposeGlobalFieldsInRootTypeOnlyInGraphQLSchemaFixtureQue
 {
     use EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-expose-global-fields-in-root-type-only-in-graphql-schema';
     }

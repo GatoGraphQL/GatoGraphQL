@@ -6,6 +6,9 @@
           "name": "Comment"
         },
         {
+          "name": "GeneralBlock"
+        },
+        {
           "name": "GenericCategory"
         },
         {
@@ -141,6 +144,9 @@
           "name": "URLAbsolutePath"
         },
         {
+          "name": "Block"
+        },
+        {
           "name": "Category"
         },
         {
@@ -166,6 +172,9 @@
         },
         {
           "name": "WithMeta"
+        },
+        {
+          "name": "BlockFilterByInput"
         },
         {
           "name": "CategoryByInput"
@@ -439,6 +448,9 @@
         },
         {
           "name": "UserOrderByEnum"
+        },
+        {
+          "name": "BlockUnion"
         },
         {
           "name": "CategoryUnion"

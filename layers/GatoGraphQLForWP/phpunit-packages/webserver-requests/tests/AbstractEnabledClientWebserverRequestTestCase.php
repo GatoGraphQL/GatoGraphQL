@@ -12,9 +12,7 @@ abstract class AbstractEnabledClientWebserverRequestTestCase extends AbstractWeb
 {
     use ClientWebserverRequestTestCaseTrait;
 
-    /**
-     * @dataProvider provideEnabledClientEntries
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('provideEnabledClientEntries')]
     public function testEnabledClients(
         string $clientEndpoint,
     ): void {
@@ -24,5 +22,5 @@ abstract class AbstractEnabledClientWebserverRequestTestCase extends AbstractWeb
     /**
      * @return array<string,string[]>
      */
-    abstract protected function provideEnabledClientEntries(): array;
+    abstract public static function provideEnabledClientEntries(): array;
 }

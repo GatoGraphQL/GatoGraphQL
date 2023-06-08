@@ -10,7 +10,7 @@ class DisableSchemaModulesOnPrivateEndpointTestOnBlockEditorAdminEndpointsFixtur
 {
     use DisableSchemaModulesOnPrivateEndpointNoChangeAdminEndpointsFixtureEndpointWebserverRequestTestTrait;
 
-    protected function getAdminEndpointGroup(): string
+    protected static function getAdminEndpointGroup(): string
     {
         return AdminGraphQLEndpointGroups::BLOCK_EDITOR;
     }

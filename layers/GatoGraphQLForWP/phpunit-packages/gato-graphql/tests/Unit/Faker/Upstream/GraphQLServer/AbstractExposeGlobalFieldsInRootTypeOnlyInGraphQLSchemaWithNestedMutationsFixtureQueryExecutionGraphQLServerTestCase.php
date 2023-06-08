@@ -8,7 +8,7 @@ use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractExposeGlobalFieldsInRootTypeOnlyInGraphQLSchemaWithNestedMutationsFixtureQueryExecutionGraphQLServerTestCase extends AbstractExposeGlobalFieldsInRootTypeOnlyInGraphQLSchemaFixtureQueryExecutionGraphQLServerTestCase
 {
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-expose-global-fields-in-root-type-only-in-graphql-schema-with-nested-mutations';
     }

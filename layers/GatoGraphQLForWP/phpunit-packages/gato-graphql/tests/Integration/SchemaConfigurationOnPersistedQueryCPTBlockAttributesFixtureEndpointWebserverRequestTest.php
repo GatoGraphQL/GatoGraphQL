@@ -11,12 +11,12 @@ class SchemaConfigurationOnPersistedQueryCPTBlockAttributesFixtureEndpointWebser
     public const HOME_USER_WIDGET_PERSISTED_QUERY_ID = 12;
     public const UNRESTRICTED_SCHEMA_SCHEMA_CONFIGURATION_ID = 304;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         return 'graphql-query/website/home-user-widget/';
     }
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-schema-config-on-persisted-query-in-cpt';
     }

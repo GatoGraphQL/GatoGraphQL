@@ -14,7 +14,7 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
-    protected function providePathEntries(): array
+    public static function providePathEntries(): array
     {
         return [
             'custom-endpoint-base-path' => [

@@ -11,7 +11,7 @@ class SchemaConfigurationOnCustomEndpointCPTBlockAttributesFixtureEndpointWebser
     public const WEBSITE_CUSTOM_ENDPOINT_ID = 196;
     public const UNRESTRICTED_SCHEMA_SCHEMA_CONFIGURATION_ID = 304;
 
-    protected function getEndpoint(): string
+    protected static function getEndpoint(): string
     {
         /**
          * This endpoint:
@@ -22,7 +22,7 @@ class SchemaConfigurationOnCustomEndpointCPTBlockAttributesFixtureEndpointWebser
         return 'graphql/website/';
     }
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-schema-config-on-custom-endpoint-in-cpt';
     }

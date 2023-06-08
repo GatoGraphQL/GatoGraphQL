@@ -27,15 +27,15 @@ abstract class AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCa
 
     protected function executePluginSettingsSetUpTearDown(string $dataName): bool
     {
-        return $this->executeSetUpTearDownUnlessIsOriginalTestCase($dataName);
+        return static::executeSetUpTearDownUnlessIsOriginalTestCase($dataName);
     }
 
     /**
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
-        return $this->reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
+        return static::reorderProviderEndpointEntriesToExecuteOriginalTestFirst($providerItems);
     }
 }

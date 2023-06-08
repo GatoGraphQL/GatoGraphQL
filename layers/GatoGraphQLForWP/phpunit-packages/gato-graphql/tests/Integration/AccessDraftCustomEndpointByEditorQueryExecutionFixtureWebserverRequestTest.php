@@ -8,7 +8,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 
 class AccessDraftCustomEndpointByEditorQueryExecutionFixtureWebserverRequestTest extends AbstractAccessDraftCustomEndpointQueryExecutionFixtureWebserverRequestTestCase
 {
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
         return __DIR__ . '/fixture-draft-custom-endpoint-by-editor';
     }
@@ -35,7 +35,7 @@ class AccessDraftCustomEndpointByEditorQueryExecutionFixtureWebserverRequestTest
      * @param array<string,mixed> $providerItems
      * @return array<string,mixed>
      */
-    protected function customizeProviderEndpointEntries(array $providerItems): array
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
     {
         // expectedContentType
         $providerItems['draft-custom-endpoint-query'][0] = 'text/html';

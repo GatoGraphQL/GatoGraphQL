@@ -13,15 +13,15 @@ trait FixtureTestCaseTrait
     /**
      * Directory under which the fixture files are placed
      */
-    abstract protected function getFixtureFolder(): string;
+    abstract protected static function getFixtureFolder(): string;
 
     /**
      * Directory under which the response fixture files are placed.
      * By default it's the same where the query fixture files are.
      */
-    protected function getResponseFixtureFolder(): string
+    protected static function getResponseFixtureFolder(): string
     {
-        return $this->getFixtureFolder();
+        return static::getFixtureFolder();
     }
 
     /**
@@ -29,7 +29,7 @@ trait FixtureTestCaseTrait
      * @param string[] $fileNames
      * @param string[] $notFileNames
      */
-    protected function findFilesInDirectory(string $directory, array $fileNames, array $notFileNames = []): array
+    protected static function findFilesInDirectory(string $directory, array $fileNames, array $notFileNames = []): array
     {
         $finder = Finder::create()->in($directory)->files()->name($fileNames)->notName($notFileNames);
         // Allow fixtures to be named with cardinal numbers, to execute the tests in a desired order
@@ -41,7 +41,7 @@ trait FixtureTestCaseTrait
     /**
      * @throws RuntimeException
      */
-    protected function throwFileNotExistsException(string $file): void
+    protected static function throwFileNotExistsException(string $file): void
     {
         throw new RuntimeException(
             sprintf(
@@ -51,12 +51,15 @@ trait FixtureTestCaseTrait
         );
     }
 
-    protected function addFixtureFolderInfo(string $string): string
-    {
-        return sprintf(
-            ' (fixture folder: "%s")%s',
-            $this->getResponseFixtureFolder(),
-            $string,
-        );
-    }
+    /**
+     * Since PHPUnit v10, this is not possible anymore!
+     */
+    // protected function addFixtureFolderInfo(string $string): string
+    // {
+    //     return sprintf(
+    //         ' (fixture folder: "%s")%s',
+    //         static::getResponseFixtureFolder(),
+    //         $string,
+    //     );
+    // }
 }

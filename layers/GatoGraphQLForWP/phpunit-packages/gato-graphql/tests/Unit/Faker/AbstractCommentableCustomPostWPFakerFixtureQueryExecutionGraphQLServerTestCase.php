@@ -12,7 +12,7 @@ abstract class AbstractCommentableCustomPostWPFakerFixtureQueryExecutionGraphQLS
 {
     use EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    protected function getFixtureFolder(): string
+    protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-commentable-custompost';
     }
