@@ -30,6 +30,7 @@
   }
   
   dummyCustomPosts: customPosts(
+    sort: { by: ID, order: ASC }
     filter:{
       customPostTypes: "dummy-cpt"
     }
