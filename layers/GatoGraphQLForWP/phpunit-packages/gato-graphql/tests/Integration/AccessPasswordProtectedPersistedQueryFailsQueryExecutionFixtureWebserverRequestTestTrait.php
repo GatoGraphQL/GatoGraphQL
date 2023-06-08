@@ -34,7 +34,7 @@ trait AccessPasswordProtectedPersistedQueryFailsQueryExecutionFixtureWebserverRe
         return $providerItems;
     }
 
-    protected static function getResponseComparisonType(): ?int
+    protected function getResponseComparisonType(): ?int
     {
         return AbstractEndpointWebserverRequestTestCase::RESPONSE_COMPARISON_REGEX;
     }

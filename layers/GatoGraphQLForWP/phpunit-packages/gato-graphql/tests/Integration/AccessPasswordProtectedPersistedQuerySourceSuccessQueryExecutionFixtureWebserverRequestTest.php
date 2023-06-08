@@ -36,7 +36,7 @@ class AccessPasswordProtectedPersistedQuerySourceSuccessQueryExecutionFixtureWeb
         return $providerItems;
     }
 
-    protected static function getResponseComparisonType(): ?int
+    protected function getResponseComparisonType(): ?int
     {
         return self::RESPONSE_COMPARISON_REGEX;
     }
