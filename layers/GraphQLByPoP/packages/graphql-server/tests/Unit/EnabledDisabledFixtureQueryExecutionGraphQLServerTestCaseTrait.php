@@ -10,7 +10,7 @@ trait EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait
 
     protected static function getGraphQLResponseFile(string $filePath, string $fileName): string
     {
-        $state = $this->getFileState();
+        $state = static::getFileState();
         return $filePath . \DIRECTORY_SEPARATOR . $fileName . '@' . $state . '.json';
     }
 
@@ -20,8 +20,8 @@ trait EnabledDisabledFixtureQueryExecutionGraphQLServerTestCaseTrait
     //     return $filePath . \DIRECTORY_SEPARATOR . $fileName . '@' . $state . '.var.json';
     // }
 
-    protected function getFileState(): string
+    protected static function getFileState(): string
     {
-        return $this->isEnabled() ? 'enabled' : 'disabled';
+        return static::isEnabled() ? 'enabled' : 'disabled';
     }
 }
