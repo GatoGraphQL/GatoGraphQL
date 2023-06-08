@@ -99,7 +99,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $options[RequestOptions::HTTP_ERRORS] = false;
         }
 
-        $options = static::customizeRequestOptions($options);
+        $options = $this->customizeRequestOptions($options);
 
         $response = $client->request(
             $method,
@@ -184,7 +184,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * @param array<string,mixed> $options
      * @return array<string,mixed>
      */
-    protected static function customizeRequestOptions(array $options): array
+    protected function customizeRequestOptions(array $options): array
     {
         return $options;
     }
