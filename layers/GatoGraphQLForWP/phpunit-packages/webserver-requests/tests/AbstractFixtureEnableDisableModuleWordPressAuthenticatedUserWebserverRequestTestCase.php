@@ -17,9 +17,9 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
     use FixtureTestCaseTrait;
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    public function getDataSetAsString(bool $includeData = true): string
+    public function toString(): string
     {
-        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
+        return $this->addFixtureFolderInfo(parent::toString());
     }
 
     /**

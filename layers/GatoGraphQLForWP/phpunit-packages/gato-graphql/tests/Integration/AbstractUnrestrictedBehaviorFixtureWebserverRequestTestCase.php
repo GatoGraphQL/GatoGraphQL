@@ -15,9 +15,9 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
     use FixtureTestCaseTrait;
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-    public function getDataSetAsString(bool $includeData = true): string
+    public function toString(): string
     {
-        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
+        return $this->addFixtureFolderInfo(parent::toString());
     }
 
     /**

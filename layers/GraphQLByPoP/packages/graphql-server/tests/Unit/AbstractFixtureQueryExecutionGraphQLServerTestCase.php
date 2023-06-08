@@ -8,9 +8,9 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
 {
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
-    public function getDataSetAsString(bool $includeData = true): string
+    public function toString(): string
     {
-        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
+        return $this->addFixtureFolderInfo(parent::toString());
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('fixtureGraphQLServerExecutionProvider')]
