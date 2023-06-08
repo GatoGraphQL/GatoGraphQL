@@ -19,7 +19,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * @param array<string,mixed> $variables
      */
     #[\PHPUnit\Framework\Attributes\DataProvider('provideEndpointEntries')]
-    public static function testEndpoints(
+    public function testEndpoints(
         string $expectedContentType,
         ?string $expectedResponseBody,
         string $endpoint,
