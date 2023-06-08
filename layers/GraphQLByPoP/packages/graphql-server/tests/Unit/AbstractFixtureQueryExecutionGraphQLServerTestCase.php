@@ -14,9 +14,9 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('fixtureGraphQLServerExecutionProvider')]
-    public function testFixtureGraphQLServerExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
+    public static function testFixtureGraphQLServerExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
     {
-        $this->assertFixtureGraphQLQueryExecution($queryFile, $expectedResponseFile, $variablesFile, $operationName);
+        static::assertFixtureGraphQLQueryExecution($queryFile, $expectedResponseFile, $variablesFile, $operationName);
     }
 
     /**
