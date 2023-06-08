@@ -230,6 +230,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
          * @see wp-includes/class-wp-block-parser.php
          *
          * @todo If `WP_Block_Parser_Block` ever retrieves the original HTML source, then improve this solution
+         *
+         * @see https://github.com/leoloso/PoP/issues/2346
          */
         $contentSource = serialize_block($this->getSerializeBlockData($blockItem));
 
