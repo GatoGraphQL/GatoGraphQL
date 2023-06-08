@@ -28,6 +28,8 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use WP_Post;
 use stdClass;
 
+use function get_comment_delimited_block_content;
+
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BlockContentParserInterface $blockContentParser = null;
@@ -198,8 +200,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $attributes = $blockItem->attributes ?? null;
         /** @var string */
         $innerHTML = $blockItem->innerHTML;
-        /** @var string */
-        $contentSource = $blockItem->contentSource;
         /** @var BlockInterface[]|null */
         $innerBlocks = null;
         if (isset($blockItem->innerBlocks)) {
@@ -210,6 +210,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $blockInnerBlocks
             );
         }
+        $contentSource = get_comment_delimited_block_content(
+            $name,
+            $attributes !== null ? (array) $attributes : [],
+            $innerHTML,
+        );
         return $this->createBlockObject(
             $name,
             $attributes,
