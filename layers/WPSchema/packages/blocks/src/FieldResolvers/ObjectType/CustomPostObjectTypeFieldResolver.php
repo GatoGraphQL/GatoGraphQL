@@ -197,7 +197,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         /** @var stdClass|null */
         $attributes = $blockItem->attributes ?? null;
         /** @var string */
+        $innerHTML = $blockItem->innerHTML;
+        /** @var string */
         $contentSource = $blockItem->contentSource;
+        /** @var BlockInterface[]|null */
         $innerBlocks = null;
         if (isset($blockItem->innerBlocks)) {
             /** @var array<stdClass> */
@@ -211,6 +214,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $name,
             $attributes,
             $innerBlocks,
+            $innerHTML,
             $contentSource,
         );
     }
@@ -231,6 +235,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         string $name,
         ?stdClass $attributes,
         ?array $innerBlocks,
+        string $innerHTML,
         string $contentSource,
     ): BlockInterface {
         /** @var BlockInterface|null */
@@ -240,6 +245,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $name,
             $attributes,
             $innerBlocks,
+            $innerHTML,
             $contentSource,
         );
         if ($injectedBlockObject !== null) {
@@ -249,6 +255,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $name,
             $attributes,
             $innerBlocks,
+            $innerHTML,
             $contentSource,
         );
     }

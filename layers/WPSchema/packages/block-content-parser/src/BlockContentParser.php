@@ -331,10 +331,12 @@ class BlockContentParser implements BlockContentParserInterface
             }
         }
 
+        $block_content_source = '';
         $sourced_block = [
-            'name'       => $block_name,
-            'attributes' => $block_attributes,
-            'innerHTML'  => $block['innerHTML'],
+            'name'          => $block_name,
+            'attributes'    => $block_attributes,
+            'innerHTML'     => $block['innerHTML'],
+            'contentSource' => $block_content_source,
         ];
 
         if (isset($block['innerBlocks'])) {
