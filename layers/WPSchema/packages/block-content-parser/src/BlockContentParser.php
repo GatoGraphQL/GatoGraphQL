@@ -335,7 +335,8 @@ class BlockContentParser implements BlockContentParserInterface
         $sourced_block = [
             'name'          => $block_name,
             'attributes'    => $block_attributes,
-            'innerHTML'     => $block['innerHTML'],
+            // Gato GraphQL additions
+            'innerHTML'     => trim($block['innerHTML']), // Remove the \n before/after the HTML
             'contentSource' => $block_content_source,
         ];
 
