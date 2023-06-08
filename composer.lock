@@ -7473,16 +7473,16 @@
         },
         {
             "name": "symplify/package-builder",
-            "version": "10.2.2.2",
+            "version": "10.2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/package-builder.git",
-                "reference": "82443e27168a4bd4f82a25c5f73cfe54315b9345"
+                "reference": "6a309b27735d019da0d6193eb01b5beed4f6f09a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/package-builder/zipball/82443e27168a4bd4f82a25c5f73cfe54315b9345",
-                "reference": "82443e27168a4bd4f82a25c5f73cfe54315b9345",
+                "url": "https://api.github.com/repos/leoloso/package-builder/zipball/6a309b27735d019da0d6193eb01b5beed4f6f09a",
+                "reference": "6a309b27735d019da0d6193eb01b5beed4f6f09a",
                 "shasum": ""
             },
             "require": {
@@ -7547,7 +7547,7 @@
             ],
             "description": "Dependency Injection, Console and Kernel toolkit for Symplify packages.",
             "support": {
-                "source": "https://github.com/leoloso/package-builder/tree/10.2.2.2",
+                "source": "https://github.com/leoloso/package-builder/tree/10.2.2.3",
                 "issues": "https://github.com/leoloso/package-builder/issues"
             },
             "funding": [
@@ -7560,7 +7560,7 @@
                     "url": "https://www.paypal.me/rectorphp"
                 }
             ],
-            "time": "2023-06-08T05:19:27+00:00"
+            "time": "2023-06-08T05:42:21+00:00"
         },
         {
             "name": "symplify/smart-file-system",
