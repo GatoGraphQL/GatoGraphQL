@@ -5,7 +5,7 @@
                 "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 156,
+                        "line": 159,
                         "column": 7
                     }
                 ],
@@ -26,7 +26,7 @@
                 "message": "Block type \"gato-graphql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 192,
+                        "line": 198,
                         "column": 7
                     }
                 ],
@@ -50,7 +50,7 @@
             "message": "Error parsing post ID 619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 144,
+                    "line": 146,
                     "column": 7
                 }
             ],
@@ -71,7 +71,7 @@
             "message": "Error parsing post ID 658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 168,
+                    "line": 172,
                     "column": 7
                 }
             ],
@@ -1423,6 +1423,7 @@
             "__typename": "GenericCustomPost",
             "id": 654,
             "title": "Dummy CPT with blocks",
+            "contentSource": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"className\":\"layout-column-2\"} -->\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Columns inside Columns (nested inner blocks)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\"} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg\" alt=\"\" class=\"wp-image-361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png\" alt=\"\" class=\"wp-image-362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
             "customPostType": "dummy-cpt",
             "blocks": [
                 {
@@ -1689,6 +1690,7 @@
             "__typename": "GenericCustomPost",
             "id": 619,
             "title": "Error debitis nulla vel est",
+            "contentSource": "<hr>\n<hr>\n<h1>Laudantium distinctio blanditiis et et voluptas. Nobis maxime et ab ut laboriosam provident<\/h1>\n<ul><li>Nisi dolorem<\/li><li>Dolorum<\/li><\/ul>\n<!--more-->\n<img class=\"alignleft\" alt=\"Illum neque aliquam fuga dolor ea voluptas\" src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/12\/c08092fd-0c80-38d0-a678-61e938599f7d.jpg\">",
             "customPostType": "dummy-cpt",
             "blocks": null
         },
@@ -1696,6 +1698,7 @@
             "__typename": "GenericCustomPost",
             "id": 656,
             "title": "Dummy CPT with non-existing block",
+            "contentSource": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:nonexisting {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n<!-- \/wp:nonexisting -->",
             "customPostType": "dummy-cpt",
             "blocks": [
                 {
@@ -1772,6 +1775,7 @@
             "__typename": "GenericCustomPost",
             "id": 658,
             "title": "Dummy CPT with no content",
+            "contentSource": "",
             "customPostType": "dummy-cpt",
             "blocks": null
         },
@@ -1779,6 +1783,7 @@
             "__typename": "GenericCustomPost",
             "id": 680,
             "title": "Dummy CPT with server-side-registered block",
+            "contentSource": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:gato-graphql\/server-side-registered-block-schema-testing {\"someAttribute\":false,\"someOtherAttribute\":\"Hello\"} \/-->\n\n<!-- wp:gato-graphql\/server-side-registered-block-schema-testing {\"someAttribute\":true,\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[]} \/-->\n\n<!-- wp:gato-graphql\/server-side-registered-block-schema-testing {\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[\"testing\",\"non\",\"server\",\"side\",\"registered\",\"blocks\"]} \/-->\n\n<!-- wp:paragraph -->\n<p>And back to some text<\/p>\n<!-- \/wp:paragraph -->",
             "customPostType": "dummy-cpt",
             "blocks": [
                 {
@@ -1891,6 +1896,7 @@
             "__typename": "GenericCustomPost",
             "id": 660,
             "title": "Dummy CPT with non server-side-registered block",
+            "contentSource": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:gato-graphql\/not-server-side-registered-block-schema-testing {\"someAttribute\":false,\"someOtherAttribute\":\"Hello\"} \/-->\n\n<!-- wp:gato-graphql\/not-server-side-registered-block-schema-testing {\"someAttribute\":true,\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[]} \/-->\n\n<!-- wp:gato-graphql\/not-server-side-registered-block-schema-testing {\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[\"testing\",\"non\",\"server\",\"side\",\"registered\",\"blocks\"]} \/-->\n\n<!-- wp:paragraph -->\n<p>And back to some text<\/p>\n<!-- \/wp:paragraph -->",
             "customPostType": "dummy-cpt",
             "blocks": [
                 {
