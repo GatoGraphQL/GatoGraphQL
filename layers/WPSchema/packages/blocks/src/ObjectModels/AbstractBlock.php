@@ -17,7 +17,7 @@ abstract class AbstractBlock extends AbstractTransientObject implements BlockInt
     /**
      * @param array<string|null> $innerContent
      * @param BlockInterface[]|null $innerBlocks
-     * @param stdClass<string,mixed> $blockItem Block data, needed to recreate the contentSource attribute lazily
+     * @param stdClass $blockItem Block data, needed to recreate the contentSource attribute lazily
      */
     public function __construct(
         public readonly string $name,

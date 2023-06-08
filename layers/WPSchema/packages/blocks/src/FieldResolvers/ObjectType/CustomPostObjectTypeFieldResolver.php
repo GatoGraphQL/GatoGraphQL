@@ -28,8 +28,6 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use WP_Post;
 use stdClass;
 
-use function serialize_block;
-
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BlockContentParserInterface $blockContentParser = null;
