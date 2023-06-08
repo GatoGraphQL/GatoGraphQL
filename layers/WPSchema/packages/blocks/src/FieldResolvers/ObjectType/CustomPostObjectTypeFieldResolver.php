@@ -200,6 +200,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $attributes = $blockItem->attributes ?? null;
         /** @var array<string|null> */
         $innerContent = $blockItem->innerContent;
+        
         /** @var BlockInterface[]|null */
         $innerBlocks = null;
         if (isset($blockItem->innerBlocks)) {
@@ -231,7 +232,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
          * @todo If `WP_Block_Parser_Block` ever retrieves the original HTML source, then improve this solution
          */
         $contentSource = serialize_block($this->getSerializeBlockData($blockItem));
-        
+
         return $this->createBlockObject(
             $name,
             $attributes,
