@@ -102,11 +102,11 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
     /**
      * Test by passing "fixture" files, from which to extract the content.
      */
-    protected static function assertFixtureGraphQLQueryExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
+    protected function assertFixtureGraphQLQueryExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
     {
         $graphQLQuery = file_get_contents($queryFile);
         if ($graphQLQuery === false) {
-            static::markTestIncomplete(
+            $this->markTestIncomplete(
                 sprintf(
                     'File "%s" (with the expected GraphQL query) does not exist.',
                     $queryFile
@@ -117,7 +117,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         if ($variablesFile !== null) {
             $graphQLVariablesJSON = file_get_contents($variablesFile);
             if ($graphQLVariablesJSON === false) {
-                static::markTestIncomplete(
+                $this->markTestIncomplete(
                     sprintf(
                         'File "%s" (with the optional GraphQL variables) does not exist.',
                         $variablesFile
@@ -142,20 +142,20 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             throw new RuntimeException('Obtaining the content of the response failed');
         }
 
-        $responseContent = static::adaptResponseContent($responseContent);
+        $responseContent = $this->adaptResponseContent($responseContent);
 
         // Allow to override method
-        static::doAssertFixtureGraphQLQueryExecution($expectedResponseFile, $responseContent);
+        $this->doAssertFixtureGraphQLQueryExecution($expectedResponseFile, $responseContent);
     }
 
-    protected static function adaptResponseContent(string $responseContent): string
+    protected function adaptResponseContent(string $responseContent): string
     {
         return $responseContent;
     }
 
-    protected static function doAssertFixtureGraphQLQueryExecution(string $expectedResponseFile, string $actualResponseContent): void
+    protected function doAssertFixtureGraphQLQueryExecution(string $expectedResponseFile, string $actualResponseContent): void
     {
-        static::assertJsonStringEqualsJsonFile(
+        $this->assertJsonStringEqualsJsonFile(
             $expectedResponseFile,
             $actualResponseContent
         );
