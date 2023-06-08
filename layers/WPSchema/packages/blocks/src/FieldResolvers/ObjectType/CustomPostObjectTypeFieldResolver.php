@@ -221,11 +221,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         );
     }
 
+    /**
+     * @param BlockInterface[]|null $innerBlocks
+     */
     protected function getBlockContentSource(
         string $name,
         ?stdClass $attributes,
         string $innerHTML,
-        ?array $innerBlocks
+        ?array $innerBlocks,
     ): string {
         $serializableBlock = [
             'blockName' => $name,
