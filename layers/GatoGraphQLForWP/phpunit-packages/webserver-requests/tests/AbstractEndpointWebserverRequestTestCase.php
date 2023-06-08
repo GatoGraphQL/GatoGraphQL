@@ -108,7 +108,9 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         );
 
         $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
-        $this->assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
+        if ($expectedContentType !== '') { // Avoid PHPStan error with "non-empty-string"
+            $this->assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
+        }
         if ($expectedResponseBody !== null) {
             $responseBody = $response->getBody()->__toString();
             // Allow to modify the URLs for the "PROD Integration Tests"
