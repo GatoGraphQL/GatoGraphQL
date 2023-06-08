@@ -55,7 +55,7 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTestCase extends Ab
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
-    abstract protected static function providePathEntries(): array;
+    abstract public static function providePathEntries(): array;
 
     protected function getPluginSettingsNewValue(): mixed
     {

@@ -23,7 +23,7 @@ abstract class AbstractClientPathSettingsWebserverRequestTestCase extends Abstra
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
-    protected static function providePathEntries(): array
+    public static function providePathEntries(): array
     {
         return static::provideClientPathEntries();
     }
