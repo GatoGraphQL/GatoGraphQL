@@ -233,6 +233,24 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $innerContent = $innerBlocks !== null
             // Recursively produce the HTML for the inner blocks
             ? array_map(
+                /**
+                 * This logic doesn't work, because $innerHTML may contain the opening
+                 * and closing tags all together, whereas its inner blocks content
+                 * would go in between these tags.
+                 *
+                 * For instance, "wp:columns" would be rendered as
+                 * `<div class="wp-block-columns"></div><!-- wp:column -->...<!-- /wp:column -->`,
+                 * which makes no sense.
+                 *
+                 * This logic is indeed a terrible hack, and most likely it will
+                 * not be workable. A proper solution is to retrieve the HTML content
+                 * already when parsing the blocks (but currently this is not supported!),
+                 * in class `WP_Block_Parser_Block`.
+                 *
+                 * @see wp-includes/class-wp-block-parser.php
+                 *
+                 * @todo Fix, this doesn't work!
+                 */
                 fn (BlockInterface $block) => $innerHTML . $this->getBlockContentSource(
                     $block->getName(),
                     $block->getAttributes(),
