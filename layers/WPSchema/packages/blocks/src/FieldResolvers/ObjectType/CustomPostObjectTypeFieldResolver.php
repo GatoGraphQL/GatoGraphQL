@@ -210,7 +210,17 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $blockInnerBlocks
             );
         }
-        // Regenerate the original content source
+        /**
+         * Regenerate the original content source.
+         * 
+         * Please notice that it will not be exactly the same!
+         * Because:
+         *
+         * - the default attributes should not be included,
+         *   but they are
+         * - attributes stored inside the innerHTML are also
+         *   stored within the attributes
+         */
         $contentSource = serialize_block($this->getSerializeBlockData($blockItem));
         return $this->createBlockObject(
             $name,
