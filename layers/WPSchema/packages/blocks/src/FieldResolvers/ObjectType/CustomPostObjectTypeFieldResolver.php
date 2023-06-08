@@ -200,7 +200,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $attributes = $blockItem->attributes ?? null;
         /** @var array<string|null> */
         $innerContent = $blockItem->innerContent;
-        
+
         /** @var BlockInterface[]|null */
         $innerBlocks = null;
         if (isset($blockItem->innerBlocks)) {
@@ -214,7 +214,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 
         /**
          * Regenerate the original content source.
-         * 
+         *
          * Please notice that it will not be exactly the same!
          * Because:
          *
@@ -256,13 +256,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $attributes = $blockItem->attributes ?? null;
         /** @var array<string|null> */
         $innerContent = $blockItem->innerContent;
-        
+
         $serializeBlockData = [
             'blockName' => $name,
             'attrs' => $attributes !== null ? (array) $attributes : [],
             'innerContent' => $innerContent,
         ];
-        
+
         if (isset($blockItem->innerBlocks)) {
             /** @var array<stdClass> */
             $blockInnerBlocks = $blockItem->innerBlocks;
