@@ -49,7 +49,7 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
     {
         $endpoint = static::getEndpoint();
         $providerEntries = [];
-        foreach ($this->getModuleNameEntries() as $moduleName => $moduleEntry) {
+        foreach (static::getModuleNameEntries() as $moduleName => $moduleEntry) {
             $providerEntries[$moduleName . ':enabled'] = [
                 'application/json',
                 $moduleEntry['response-enabled'],
@@ -70,18 +70,18 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
 
     protected static function getEndpoint(): ?string
     {
-        if ($this->useAdminEndpoint()) {
-            return $this->getAdminEndpoint();
+        if (static::useAdminEndpoint()) {
+            return static::getAdminEndpoint();
         }
         return 'graphql/';
     }
 
-    protected function useAdminEndpoint(): bool
+    protected static function useAdminEndpoint(): bool
     {
         return false;
     }
 
-    protected function getAdminEndpoint(): string
+    protected static function getAdminEndpoint(): string
     {
         return 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
     }
@@ -89,5 +89,5 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
     /**
      * @return array<string,array<string,mixed>> An array of [$moduleName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."], 'endpoint' => "..."]
      */
-    abstract protected function getModuleNameEntries(): array;
+    abstract protected static function getModuleNameEntries(): array;
 }

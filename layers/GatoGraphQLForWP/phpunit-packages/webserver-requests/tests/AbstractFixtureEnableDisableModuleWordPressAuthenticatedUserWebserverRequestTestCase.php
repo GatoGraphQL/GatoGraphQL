@@ -25,7 +25,7 @@ abstract class AbstractFixtureEnableDisableModuleWordPressAuthenticatedUserWebse
     /**
      * @return array<string,array<string,mixed>> An array of [$moduleName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
-    protected function getModuleNameEntries(): array
+    protected static function getModuleNameEntries(): array
     {
         $moduleEntries = [];
         $fixtureFolder = static::getFixtureFolder();
