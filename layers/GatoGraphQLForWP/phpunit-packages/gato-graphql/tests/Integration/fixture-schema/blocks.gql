@@ -205,27 +205,35 @@
 fragment BlockData on Block {
   name
   attributes
+  contentSource
   innerBlocks {
     name
     attributes
+    contentSource
     innerBlocks {
       name
       attributes
+      contentSource
       innerBlocks {
         name
         attributes
+        contentSource
         innerBlocks {
           name
           attributes
+          contentSource
           innerBlocks {
             name
             attributes
+            contentSource
             innerBlocks {
               name
               attributes
+              contentSource
               innerBlocks {
                 name
                 attributes
+                contentSource
               }
             }
           }
