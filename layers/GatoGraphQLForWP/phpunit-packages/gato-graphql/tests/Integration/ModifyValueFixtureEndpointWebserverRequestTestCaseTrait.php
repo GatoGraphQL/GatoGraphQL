@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
 {
-    protected function isOriginalTestCase(string $dataName): bool
+    protected static function isOriginalTestCase(string $dataName): bool
     {
         return str_ends_with($dataName, ':0');
     }
@@ -16,9 +16,9 @@ trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
      * testing that the current value in the DB produces a certain
      * result
      */
-    protected function executeSetUpTearDownUnlessIsOriginalTestCase(string $dataName): bool
+    protected static function executeSetUpTearDownUnlessIsOriginalTestCase(string $dataName): bool
     {
-        return !$this->isOriginalTestCase($dataName);
+        return !static::isOriginalTestCase($dataName);
     }
 
     /**
@@ -38,7 +38,7 @@ trait ModifyValueFixtureEndpointWebserverRequestTestCaseTrait
     {
         $originalTestProviderItems = array_filter(
             $providerItems,
-            fn (string $fixtureName) => $this->isOriginalTestCase($fixtureName),
+            fn (string $fixtureName) => static::isOriginalTestCase($fixtureName),
             ARRAY_FILTER_USE_KEY
         );
         if ($originalTestProviderItems === []) {

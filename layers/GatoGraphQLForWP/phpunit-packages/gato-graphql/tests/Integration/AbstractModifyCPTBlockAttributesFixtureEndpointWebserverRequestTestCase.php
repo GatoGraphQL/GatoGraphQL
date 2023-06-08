@@ -27,7 +27,7 @@ abstract class AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTe
 
     protected function executeCPTBlockAttributesSetUpTearDown(string $dataName): bool
     {
-        return $this->executeSetUpTearDownUnlessIsOriginalTestCase($dataName);
+        return static::executeSetUpTearDownUnlessIsOriginalTestCase($dataName);
     }
 
     /**
