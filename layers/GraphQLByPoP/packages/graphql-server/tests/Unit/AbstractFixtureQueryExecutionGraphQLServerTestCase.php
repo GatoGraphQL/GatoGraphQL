@@ -79,7 +79,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             /**
              * Make sure the test is not temporarily disabled
              */
-            if ($this->isProviderTestDisabled($dataName)) {
+            if (static::isProviderTestDisabled($dataName)) {
                 continue;
             }
 
@@ -138,7 +138,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
         return null;
     }
 
-    protected function isProviderTestDisabled(string $dataName): bool
+    protected static function isProviderTestDisabled(string $dataName): bool
     {
         return false;
     }
