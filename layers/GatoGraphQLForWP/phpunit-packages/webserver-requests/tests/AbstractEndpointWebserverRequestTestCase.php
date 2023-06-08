@@ -112,7 +112,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         if ($expectedResponseBody !== null) {
             $responseBody = $response->getBody()->__toString();
             // Allow to modify the URLs for the "PROD Integration Tests"
-            $responseBody = static::adaptResponseBody($responseBody);
+            $responseBody = $this->adaptResponseBody($responseBody);
             $responseComparisonType = static::getResponseComparisonType();
             if ($responseComparisonType === self::RESPONSE_COMPARISON_EQUALS) {
                 static::assertJsonStringEqualsJsonString($expectedResponseBody, $responseBody);
@@ -124,7 +124,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         }
     }
 
-    protected static function adaptResponseBody(string $responseBody): string
+    protected function adaptResponseBody(string $responseBody): string
     {
         return $responseBody;
     }
