@@ -210,6 +210,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $blockInnerBlocks
             );
         }
+
         /**
          * Regenerate the original content source.
          * 
@@ -230,6 +231,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
          * @todo If `WP_Block_Parser_Block` ever retrieves the original HTML source, then improve this solution
          */
         $contentSource = serialize_block($this->getSerializeBlockData($blockItem));
+        
         return $this->createBlockObject(
             $name,
             $attributes,
