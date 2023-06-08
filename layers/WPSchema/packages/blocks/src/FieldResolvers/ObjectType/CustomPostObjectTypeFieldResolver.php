@@ -221,8 +221,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         );
     }
 
-    protected function getBlockContentSource(string $name, ?stdClass $attributes, string $innerHTML, ?array $innerBlocks): string
-    {
+    protected function getBlockContentSource(
+        string $name,
+        ?stdClass $attributes,
+        string $innerHTML,
+        ?array $innerBlocks
+    ): string {
         $serializableBlock = [
             'blockName' => $name,
             'attrs' => $attributes !== null ? (array) $attributes : [],
@@ -230,7 +234,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         if ($innerBlocks !== null) {
             // Recursively produce the HTML for the inner blocks
             $serializableBlock['innerContent'] = array_map(
-                fn (BlockInterface $block) => $this->getBlockContentSource($block->getName(), $block->getAttributes(), $block->getInnerHTML(), $block->getInnerBlocks()),
+                fn (BlockInterface $block) => $this->getBlockContentSource(
+                    $block->getName(),
+                    $block->getAttributes(),
+                    $block->getInnerHTML(),
+                    $block->getInnerBlocks()
+                ),
                 $innerBlocks
             );
         } else {
