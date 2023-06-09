@@ -154,9 +154,16 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $filterOptions['exclude'] = $filterBy->exclude;
                 }
 
+                $options = [
+                    'filter' => $filterOptions,
+                ];
+                if ($fieldName === 'blocks') {
+                    $options['include-inner-content'] = true;
+                }
+
                 $blockContentParserPayload = null;
                 try {
-                    $blockContentParserPayload = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost, $filterOptions);
+                    $blockContentParserPayload = $this->getBlockContentParser()->parseCustomPostIntoBlockDataItems($customPost, $options);
                 } catch (BlockContentParserException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
