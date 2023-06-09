@@ -23,6 +23,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider as EngineErrorFeedbackItemProvider;
+use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use WP_Post;
@@ -32,6 +33,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 {
     private ?BlockContentParserInterface $blockContentParser = null;
     private ?BlockFilterByInputObjectTypeResolver $blockFilterByInputObjectTypeResolver = null;
+    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
     final public function setBlockContentParser(BlockContentParserInterface $blockContentParser): void
     {
@@ -51,6 +53,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         /** @var BlockFilterByInputObjectTypeResolver */
         return $this->blockFilterByInputObjectTypeResolver ??= $this->instanceManager->getInstance(BlockFilterByInputObjectTypeResolver::class);
     }
+    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
+    {
+        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+    }
+    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    {
+        /** @var JSONObjectScalarTypeResolver */
+        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -69,6 +80,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return [
             'blocks',
+            'blockData',
         ];
     }
 
@@ -76,6 +88,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'blocks' => $this->__('(Gutenberg) Blocks in a custom post', 'blocks'),
+            'blockData' => $this->__('Single JSON object containing all the (Gutenberg) blocks data from a custom post', 'blocks'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -84,6 +97,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'blocks' => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
+            'blockData' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -103,13 +117,16 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'blocks' => array_merge(
-                $fieldArgNameTypeResolvers,
-                [
-                    'filterBy' => $this->getBlockFilterByInputObjectTypeResolver(),
-                ]
-            ),
-            default => $fieldArgNameTypeResolvers,
+            'blocks',
+            'blockData'
+                => array_merge(
+                    $fieldArgNameTypeResolvers,
+                    [
+                        'filterBy' => $this->getBlockFilterByInputObjectTypeResolver(),
+                    ]
+                ),
+            default
+                => $fieldArgNameTypeResolvers,
         };
     }
 
@@ -121,8 +138,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     ): mixed {
         /** @var WP_Post */
         $customPost = $object;
-        switch ($fieldDataAccessor->getFieldName()) {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
             case 'blocks':
+            case 'blockData':
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
                 $filterOptions = [];
@@ -172,15 +191,20 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     }
                 }
 
-                /** @var BlockInterface[] */
-                $blocks = array_map(
-                    $this->createBlock(...),
-                    $blockContentParserPayload->blocks
-                );
-                return array_map(
-                    fn (BlockInterface $block) => $block->getID(),
-                    $blocks
-                );
+                if ($fieldName === 'blocks') {
+                    /** @var BlockInterface[] */
+                    $blocks = array_map(
+                        $this->createBlock(...),
+                        $blockContentParserPayload->blocks
+                    );
+                    return array_map(
+                        fn (BlockInterface $block) => $block->getID(),
+                        $blocks
+                    );
+                }
+
+                // $fieldName = 'blockData'
+                return $blockContentParserPayload->blocks;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
