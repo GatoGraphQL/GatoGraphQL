@@ -736,7 +736,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
      *
      * Eg:
      *
-     *   - @forEach(passKeyOnwardsAs: "key", passValueOnwardsAs: "value")
+     *   - @forEach(passIndexOnwardsAs: "key", passValueOnwardsAs: "value")
      *   - @underArrayItem(passOnwardsAs: "item")
      *
      * @return string[]
