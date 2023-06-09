@@ -567,7 +567,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
              * How could 3 @underEachArrayItem be nested, when the GraphQL Server
              * currently only supports 2 levels of nested arrays
              * (i.e.: [[String]], but not [[[String]]])?
-             * 
+             *
              * ------------------------------------------------------------
              *
              * Actually, can also do @underEachArrayItem on JSONObject, in which case
