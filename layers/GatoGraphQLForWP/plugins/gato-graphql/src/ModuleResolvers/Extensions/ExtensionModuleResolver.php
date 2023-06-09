@@ -22,7 +22,6 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const FIELD_RESOLUTION_CACHING = Plugin::NAMESPACE . '\\extensions\\field-resolution-caching';
     public const FIELD_RESPONSE_REMOVAL = Plugin::NAMESPACE . '\\extensions\\field-response-removal';
     public const FIELD_TO_INPUT = Plugin::NAMESPACE . '\\extensions\\field-to-input';
-    public const FIELD_VALUE_DATA_EXTRACTION_MANIPULATION = Plugin::NAMESPACE . '\\extensions\\field-value-data-extraction-and-manipulation';
     public const FIELD_VALUE_ITERATION_AND_MANIPULATION = Plugin::NAMESPACE . '\\extensions\\field-value-iteration-and-manipulation';
     public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
     public const HELPER_FUNCTION_COLLECTION = Plugin::NAMESPACE . '\\extensions\\helper-function-collection';
@@ -56,7 +55,6 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::FIELD_RESOLUTION_CACHING,
             self::FIELD_RESPONSE_REMOVAL,
             self::FIELD_TO_INPUT,
-            self::FIELD_VALUE_DATA_EXTRACTION_MANIPULATION,
             self::FIELD_VALUE_ITERATION_AND_MANIPULATION,
             self::GOOGLE_TRANSLATE,
             self::HELPER_FUNCTION_COLLECTION,
@@ -89,7 +87,6 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::FIELD_RESOLUTION_CACHING => \__('Field Resolution Caching', 'gato-graphql'),
             self::FIELD_RESPONSE_REMOVAL => \__('Field Response Removal', 'gato-graphql'),
             self::FIELD_TO_INPUT => \__('Field To Input', 'gato-graphql'),
-            self::FIELD_VALUE_DATA_EXTRACTION_MANIPULATION => \__('Field Value Data Extraction and Manipulation', 'gato-graphql'),
             self::FIELD_VALUE_ITERATION_AND_MANIPULATION => \__('Field Value Iteration and Manipulation', 'gato-graphql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gato-graphql'),
             self::HELPER_FUNCTION_COLLECTION => \__('Helper Function Collection', 'gato-graphql'),
@@ -123,7 +120,6 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::FIELD_RESOLUTION_CACHING => \__('Cache and retrieve the response for expensive field operations.', 'gato-graphql'),
             self::FIELD_RESPONSE_REMOVAL => \__('Remove the output of a field from the response.', 'gato-graphql'),
             self::FIELD_TO_INPUT => \__('Retrieve the value of a field, manipulate it, and input it into another field, all within the same query.', 'gato-graphql'),
-            self::FIELD_VALUE_DATA_EXTRACTION_MANIPULATION => \__('Extract and manipulate the deep inner values of array and object fields.', 'gato-graphql'),
             self::FIELD_VALUE_ITERATION_AND_MANIPULATION => \__('Iterate and manipulate the value elements of array and object fields.', 'gato-graphql'),
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gato-graphql'),
             self::HELPER_FUNCTION_COLLECTION => \__('Collection of fields providing useful functionality.', 'gato-graphql'),
