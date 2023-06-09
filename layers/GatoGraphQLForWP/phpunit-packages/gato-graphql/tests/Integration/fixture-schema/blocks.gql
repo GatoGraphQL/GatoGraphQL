@@ -17,6 +17,11 @@
     ) {
       ...BlockData
     }
+    blockData(
+      filterBy: {
+        include: "core/heading"
+      }
+    )
   }
 
   includeBlockFilter2: post(by: { id: 19 }) {
@@ -31,6 +36,14 @@
     ) {
       ...BlockData
     }
+    blockData(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns"
+        ]
+      }
+    )
   }
 
   includeBlockFilter3: post(by: { id: 19 }) {
@@ -46,6 +59,15 @@
     ) {
       ...BlockData
     }
+    blockData(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    )
   }
 
   includeBlockFilter4: post(by: { id: 19 }) {
@@ -60,6 +82,14 @@
     ) {
       ...BlockData
     }
+    blockData(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/column"
+        ]
+      }
+    )
   }
 
   excludeBlockFilter1: post(by: { id: 19 }) {
@@ -71,6 +101,11 @@
     ) {
       ...BlockData
     }
+    blockData(
+      filterBy: {
+        exclude: "core/heading"
+      }
+    )
   }
 
   excludeBlockFilter2: post(by: { id: 19 }) {
@@ -85,6 +120,14 @@
     ) {
       ...BlockData
     }
+    blockData(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/columns"
+        ]
+      }
+    )
   }
 
   excludeBlockFilter3: post(by: { id: 19 }) {
@@ -100,6 +143,15 @@
     ) {
       ...BlockData
     }
+    blockData(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    )
   }
 
   excludeBlockFilter4: post(by: { id: 19 }) {
@@ -114,6 +166,14 @@
     ) {
       ...BlockData
     }
+    blockData(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/column"
+        ]
+      }
+    )
   }
 
   page(by: { id: 2 }) {
