@@ -92,7 +92,7 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  *
                  * Eg: only `transformedAttributes` must be modified,
                  * but not `originalAttributes`:
-                 * 
+                 *
                  *   {
                  *     post(by: { id: 19 }) {
                  *       blocks(
@@ -103,11 +103,11 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  *         originalAttributes: attributes
                  *         transformedAttributes: attributes
                  *           @underJSONObjectProperty(by: { key: "content" })
-                 *             @strUpperCase      
+                 *             @strUpperCase
                  *       }
                  *     }
                  *   }
-                 * 
+                 *
                  * @see layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-pro/tests/Integration/fixture-directives/success/directive-on-parallel-field-does-not-override-original-value.gql
                  */
                 if ($block->getAttributes() === null) {
