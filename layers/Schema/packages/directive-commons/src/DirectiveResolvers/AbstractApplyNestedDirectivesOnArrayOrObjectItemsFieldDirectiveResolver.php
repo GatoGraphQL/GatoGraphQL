@@ -516,12 +516,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
 
     /**
      * For Serialization: Force the modifiers for "IsArrayOfArrays"
-     * and "IsArray", because the serialization for @forEach
+     * and "IsArray", because the serialization for @underEachArrayItem
      * will decrease on 1 level the cardinality of the value,
      * not corresponding anymore with that one from the type
      * in the field.
      *
-     * For instance, after applying @forEach, the cardinality
+     * For instance, after applying @underEachArrayItem, the cardinality
      * of the type modifiers must be handled like this:
      *
      * - [[String]] => [String]
@@ -529,7 +529,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
      * - String => ShouldNotHappenException!?
      *
      * If there's already a 'field-type-modifiers-for-serialization' use
-     * that one, as it could come from a previous @forEach.
+     * that one, as it could come from a previous @underEachArrayItem.
      *
      * Then return the previous state, so it can be restored
      * after executing the serialization.
@@ -564,13 +564,13 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             $fieldTypeModifiers &= ~SchemaTypeModifiers::IS_ARRAY;
         } else {
             /**
-             * How could 3 @forEach be nested, when the GraphQL Server
+             * How could 3 @underEachArrayItem be nested, when the GraphQL Server
              * currently only supports 2 levels of nested arrays
              * (i.e.: [[String]], but not [[[String]]])?
              * 
              * ------------------------------------------------------------
              *
-             * Actually, can also do @forEach on JSONObject, in which case
+             * Actually, can also do @underEachArrayItem on JSONObject, in which case
              * the cardinality must not be affected. So in that case,
              * it will enter in this `else` statement.
              */
@@ -585,7 +585,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
      * Indicate if the directive will decrease the
      * field type modifiers, such as [[String]] => [String].
      *
-     * - @forEach: decrease
+     * - @underEachArrayItem: decrease
      * - @underArrayItem: decrease
      * - @underJSONObject(Nested)Property: do not decrease
      */
@@ -737,7 +737,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
      *
      * Eg:
      *
-     *   - @forEach(passIndexOnwardsAs: "index", passValueOnwardsAs: "value")
+     *   - @underEachArrayItem(passIndexOnwardsAs: "index", passValueOnwardsAs: "value")
      *   - @underArrayItem(passOnwardsAs: "item")
      *
      * @return string[]

@@ -33,7 +33,7 @@ query {
 }
 ```
 
-The meta directive `@forEach` (provided via extension **Data Iteration Meta Directives**) can solve this problem, as it iterates over an array of elements and applies its nested directive on each of them, setting the stage before `@strUpperCase` is executed and making it receive a single element (of type `String`) instead of an array.
+The meta directive `@underEachArrayItem` (provided via extension **Data Iteration Meta Directives**) can solve this problem, as it iterates over an array of elements and applies its nested directive on each of them, setting the stage before `@strUpperCase` is executed and making it receive a single element (of type `String`) instead of an array.
 
 The query from above can be satisfied like this:
 
@@ -41,7 +41,7 @@ The query from above can be satisfied like this:
 query {
   user(by: {id: 1}) {
     capabilities
-      @forEach
+      @underEachArrayItem
         @strUpperCase
   }
 }
@@ -70,25 +70,25 @@ By default, argument `affectDirectivesUnderPos` has default value `[1]`, meaning
 
 In the example below, we have:
 
-- `@forEach` is the meta directive
-- `@strTranslate` is nested under `@forEach` (implicit default value `affectDirectivesUnderPos: [1]`)
+- `@underEachArrayItem` is the meta directive
+- `@strTranslate` is nested under `@underEachArrayItem` (implicit default value `affectDirectivesUnderPos: [1]`)
 
 ```graphql
 {
   someField
-    @forEach
+    @underEachArrayItem
       @strTranslate
 }
 ```
 
 In the example below, we instead have:
 
-- `@strTranslate` and `@strUpperCase` are nested under `@forEach` (as indicated by relative positions `[1, 2]` in argument `affectDirectivesUnderPos`)
+- `@strTranslate` and `@strUpperCase` are nested under `@underEachArrayItem` (as indicated by relative positions `[1, 2]` in argument `affectDirectivesUnderPos`)
 
 ```graphql
 {
   someField
-    @forEach(affectDirectivesUnderPos: [1, 2])
+    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
       @strTranslate
       @strUpperCase
 }
@@ -98,8 +98,8 @@ Meta directives can also be nested within meta directives.
 
 In the example below, we have:
 
-- `@forEach` is the topmost meta directive
-- `@underJSONObjectProperty` is nested under `@forEach`
+- `@underEachArrayItem` is the topmost meta directive
+- `@underJSONObjectProperty` is nested under `@underEachArrayItem`
 - `@strUpperCase` is nested under `@underJSONObjectProperty`
 
 ```graphql
@@ -112,7 +112,7 @@ query UppercaseEntriesInsideObject {
       text: "How do you like this software so far?"
     }
   ])
-   @forEach
+   @underEachArrayItem
       @underJSONObjectProperty(by: { key: "text" })
         @strUpperCase
   }
@@ -137,14 +137,14 @@ The response is:
 
 ### Exporting dynamic variables
 
-A meta directive can pass the value it contains as a "dynamic variable" to its nested directives, via a directive argument (`passValueOnwardsAs` for `@forEach`, or `passOnwardsAs` otherwise).
+A meta directive can pass the value it contains as a "dynamic variable" to its nested directives, via a directive argument (`passValueOnwardsAs` for `@underEachArrayItem`, or `passOnwardsAs` otherwise).
 
-In the query below, the array `["Hello everyone", "How are you?"]` is iterated upon using `@forEach`, and by defining argument `passValueOnwardsAs: "text"` each value in the array is made available to the nested directive `@applyField` under the dynamic variable `$text`:
+In the query below, the array `["Hello everyone", "How are you?"]` is iterated upon using `@underEachArrayItem`, and by defining argument `passValueOnwardsAs: "text"` each value in the array is made available to the nested directive `@applyField` under the dynamic variable `$text`:
 
 ```graphql
 query {
   _echo(value: ["Hello everyone", "How are you?"])
-    @forEach(passValueOnwardsAs: "text")
+    @underEachArrayItem(passValueOnwardsAs: "text")
       @applyField(
         name: "_strReplace"
         arguments: {
@@ -178,7 +178,7 @@ query {
     id
     title
     categoryNames
-      @forEach
+      @underEachArrayItem
         @strTranslate(
           from: "en",
           to: "fr"
@@ -206,7 +206,7 @@ query {
   postListData: _sendJSONObjectCollectionHTTPRequest(
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/?per_page=3&_fields=id,type,title,date"
   )
-    @forEach
+    @underEachArrayItem
       @underJSONObjectProperty(by: { path: "title.rendered" })
         @strUpperCase
 }

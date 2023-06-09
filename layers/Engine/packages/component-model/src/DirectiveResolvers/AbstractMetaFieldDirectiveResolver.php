@@ -87,7 +87,7 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
          * {
          *   posts {
          *     categoryNames
-         *       @forEach
+         *       @underEachArrayItem
          *         ## Nothing here!
          *   }
          * }
@@ -157,7 +157,7 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
          * if the directives in the downstream-nested-pipeline
          * can process the field or not.
          *
-         * For instance, @forEach modifies the type modifiers
+         * For instance, @underEachArrayItem modifies the type modifiers
          * from [[String]] => [String], so the underlying type,
          * `String`, does not change.
          *

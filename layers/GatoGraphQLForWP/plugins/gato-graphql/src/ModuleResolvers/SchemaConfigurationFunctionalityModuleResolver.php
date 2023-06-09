@@ -238,7 +238,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Enable composable directives?', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Enable adding composable directives (also called "meta-directives", such as <code>@forEach</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema.<br/>%s', 'gato-graphql'),
+                    \__('Enable adding composable directives (also called "meta-directives", such as <code>@underEachArrayItem</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema.<br/>%s', 'gato-graphql'),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,

@@ -12,7 +12,7 @@ query FilterExternalAPIData {
 
   usersWithWebsiteURL: _echo(value: $__userList)
     # Remove users without a website URL
-    @forEach(
+    @underEachArrayItem(
       passValueOnwardsAs: "userDataEntry"
       affectDirectivesUnderPos: [1, 2, 3]
     )

@@ -79,7 +79,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
 
         /**
          * First check if the value has been set for the specific field.
-         * (This allows @forEach to export the iterated upon values.)
+         * (This allows @underEachArrayItem to export the iterated upon values.)
          */
         $currentField = App::getState('object-resolved-dynamic-variables-current-field');
         if (

@@ -45,7 +45,7 @@ interface QueryASTTransformationServiceInterface
      *     }
      *
      *     query Two {
-     *       firstEcho: _echo(value: $name) @upperCase @export(as: "ucName")
+     *       firstEcho: _echo(value: $name) @strUpperCase @export(as: "ucName")
      *     }
      *
      *     query Three {
@@ -68,7 +68,7 @@ interface QueryASTTransformationServiceInterface
      *     query Two {
      *       self {
      *         self {
-     *           firstEcho: _echo(value: $name) @upperCase @export(as: "ucName")
+     *           firstEcho: _echo(value: $name) @strUpperCase @export(as: "ucName")
      *         }
      *       }
      *     }
