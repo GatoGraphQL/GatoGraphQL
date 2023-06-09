@@ -566,8 +566,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
              * How could 3 @forEach be nested, when the GraphQL Server
              * currently only supports 2 levels of nested arrays
              * (i.e.: [[String]], but not [[[String]]])?
+             * 
+             * ------------------------------------------------------------
              *
-             * @todo Consider if to throw ShouldNotHappenException
+             * Actually, can also do @forEach on JSONObject, in which case
+             * the cardinality must not be affected. So in that case,
+             * it will enter in this `else` statement.
              */
         }
 
