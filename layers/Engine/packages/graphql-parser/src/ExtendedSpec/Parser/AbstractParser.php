@@ -318,7 +318,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          *
          * Eg: @forEach(
          *   passValueOnwardsAs: "value"
-         *   passIndexOnwardsAs: "key"
+         *   passIndexOnwardsAs: "index"
          * )
          *
          * There is no need to check if there's a (static) Variable with
