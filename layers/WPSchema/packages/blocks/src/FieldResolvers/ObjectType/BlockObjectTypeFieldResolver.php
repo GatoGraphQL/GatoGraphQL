@@ -110,6 +110,9 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                  * 
                  * @see layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-pro/tests/Integration/fixture-directives/success/directive-on-parallel-field-does-not-override-original-value.gql
                  */
+                if ($block->getAttributes() === null) {
+                    return null;
+                }
                 return clone $block->getAttributes();
         }
 
