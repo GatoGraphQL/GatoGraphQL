@@ -5,6 +5,7 @@
     blocks {
       ...BlockData
     }
+    blockData
   }
 
   includeBlockFilter1: post(by: { id: 19 }) {
@@ -121,6 +122,7 @@
     blocks {
       ...BlockData
     }
+    blockData
   }
 
   customPost(by: { id: 654 }) {
@@ -133,6 +135,7 @@
       blocks {
         ...BlockData
       }
+      blockData
     }
   }
 
@@ -146,6 +149,7 @@
       blocks {
         ...BlockData
       }
+      blockData
     }
   }
 
@@ -159,6 +163,7 @@
       blocks {
         ...BlockData
       }
+      blockData
     }
   }
 
@@ -172,6 +177,7 @@
       blocks {
         ...BlockData
       }
+      blockData
     }
   }
 
@@ -185,6 +191,7 @@
       blocks {
         ...BlockData
       }
+      blockData
     }
   }
 
@@ -198,6 +205,7 @@
       blocks {
         ...BlockData
       }
+      blockData
     }
   }
 }
