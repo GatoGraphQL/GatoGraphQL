@@ -83,37 +83,6 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 );
             case 'contentSource':
                 return $block->getContentSource();
-            case 'attributes':
-                /**
-                 * Return a clone to the stdClass object, and not the
-                 * object directly, because applying a directive would
-                 * modify this object also in its source, and then the
-                 * modification will appear even when not requested.
-                 *
-                 * Eg: only `transformedAttributes` must be modified,
-                 * but not `originalAttributes`:
-                 *
-                 *   {
-                 *     post(by: { id: 19 }) {
-                 *       blocks(
-                 *         filterBy: {
-                 *           include: "core/heading"
-                 *         }
-                 *       ) {
-                 *         originalAttributes: attributes
-                 *         transformedAttributes: attributes
-                 *           @underJSONObjectProperty(by: { key: "content" })
-                 *             @strUpperCase
-                 *       }
-                 *     }
-                 *   }
-                 *
-                 * @see layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-pro/tests/Integration/fixture-directives/success/directive-on-parallel-field-does-not-override-original-value.gql
-                 */
-                if ($block->getAttributes() === null) {
-                    return null;
-                }
-                return clone $block->getAttributes();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
