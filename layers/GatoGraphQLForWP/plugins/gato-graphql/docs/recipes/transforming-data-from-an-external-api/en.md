@@ -12,7 +12,7 @@ query AdaptExternalAPIData {
 
   adaptedUserList: _echo(value: $__userList)
     # Set a default URL for users without any
-    @forEach
+    @underEachArrayItem
       @underJSONObjectProperty(
         by: {
           key: "url"
@@ -23,7 +23,7 @@ query AdaptExternalAPIData {
           condition: IS_EMPTY
         )
     # Add a new "link" entry on the JSON object
-    @forEach(
+    @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2, 3, 4],
       passValueOnwardsAs: "userListItem"
     )
@@ -88,7 +88,7 @@ query ExtractEmailsFromAPIAndUpperCaseSpecialOnes
     # Iterate all the entries, passing every entry
     # (under the dynamic variable $userEntry)
     # to each of the next 4 directives
-    @forEach(
+    @underEachArrayItem(
       passValueOnwardsAs: "userEntry"
       affectDirectivesUnderPos: [1, 2, 3, 4]
     )

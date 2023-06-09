@@ -316,7 +316,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * Every directive can pass the value being modified and, potentially,
          * additional variables used in the process.
          *
-         * Eg: @forEach(
+         * Eg: @underEachArrayItem(
          *   passValueOnwardsAs: "value"
          *   passIndexOnwardsAs: "index"
          * )
@@ -380,7 +380,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                  *
                  * Eg: This query is not valid (@strUpperCase is referenced twice):
                  *
-                 *   { groupCapabilities @forEach(affectDirectivesUnderPos: [1,2]) @underJSONObjectProperty(key: "someKey") @strUpperCase }
+                 *   { groupCapabilities @underEachArrayItem(affectDirectivesUnderPos: [1,2]) @underJSONObjectProperty(key: "someKey") @strUpperCase }
                  */
                 if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
                     throw new LogicErrorParserException(

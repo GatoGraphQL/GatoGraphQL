@@ -199,7 +199,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
 
     /**
      * The modifiers for "IsArrayOfArrays" and "IsArray"
-     * can be provided via the AppState, because @forEach
+     * can be provided via the AppState, because @underEachArrayItem
      * will decrease on 1 level the cardinality of the value,
      * not corresponding anymore with that one from the type
      * in the field.
@@ -212,7 +212,7 @@ class TypeSerializationService implements TypeSerializationServiceInterface
      *   {
      *     users {
      *       roleNames
-     *         @forEach(passOnwardsAs: "value")
+     *         @underEachArrayItem(passOnwardsAs: "value")
      *           @applyField(
      *             name: "_titleCase"
      *             arguments: {

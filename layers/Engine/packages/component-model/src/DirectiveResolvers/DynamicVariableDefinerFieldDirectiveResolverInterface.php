@@ -23,7 +23,7 @@ interface DynamicVariableDefinerFieldDirectiveResolverInterface extends FieldDir
      *
      * Eg:
      *
-     *   - @forEach(passIndexOnwardsAs: "index", passValueOnwardsAs: "value")
+     *   - @underEachArrayItem(passIndexOnwardsAs: "index", passValueOnwardsAs: "value")
      *   - @underArrayItem(passOnwardsAs: "item")
      *
      * @return string[]

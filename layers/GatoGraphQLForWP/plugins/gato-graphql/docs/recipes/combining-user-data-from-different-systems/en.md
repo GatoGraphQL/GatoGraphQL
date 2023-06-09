@@ -15,7 +15,7 @@ query ProvideNewsletterUserData {
     # @remove
 
   userEmails: _echo(value: $__userList)
-    @forEach(passValueOnwardsAs: "userListItemForEmail")
+    @underEachArrayItem(passValueOnwardsAs: "userListItemForEmail")
       @applyField(
         name: "_objectProperty",
         arguments: {

@@ -47,7 +47,7 @@ mutation RestorePosts
   @depends(on: "CreateVars")
 {
   restorePosts: _echo(value: $originalInputs)
-    @forEach(passValueOnwardsAs: "input")
+    @underEachArrayItem(passValueOnwardsAs: "input")
       @applyField(
         name: "updatePost"
         arguments: { input: $input }
@@ -129,7 +129,7 @@ mutation RestorePosts
   @depends(on: "CreateVars")
 {
   restorePosts: _echo(value: $originalInputs)
-    @forEach(passValueOnwardsAs: "input")
+    @underEachArrayItem(passValueOnwardsAs: "input")
       @applyField(
         name: "updatePost"
         arguments: { input: $input }

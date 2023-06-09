@@ -20,7 +20,7 @@ query CreatePostInputs {
 
   postInputs: _echo(value: $__githubPullRequestEntries)
     # For each entry: Extract the title and body
-    @forEach(
+    @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2, 3],
       passValueOnwardsAs: "item"
     )
@@ -78,7 +78,7 @@ mutation ImportContentAsNewPosts
 {
   createdPostIDs: _echo(value: $postInputs)
     # For each entry: Create a new post
-    @forEach(
+    @underEachArrayItem(
       passValueOnwardsAs: "postInput"
     )
       # The result is the list of IDs of the created posts
