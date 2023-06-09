@@ -88,7 +88,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             ],
             $this->passKeyOnwardsAsVariable()
                 ? [
-                    'passKeyOnwardsAs' => $this->getStringScalarTypeResolver(),
+                    $this->getPassKeyOnwardsAsVariableArgumentName() => $this->getStringScalarTypeResolver(),
                 ]
                 : []
         );
@@ -100,7 +100,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     {
         return match ($directiveArgName) {
             $this->getPassValueOnwardsAsVariableArgumentName() => $this->__('The name of the dynamic variable under which to export the array element value from the current iteration', 'component-model'),
-            'passKeyOnwardsAs' => $this->__('The name of the dynamic variable under which to export the array element key from the current iteration', 'component-model'),
+            $this->getPassKeyOnwardsAsVariableArgumentName() => $this->__('The name of the dynamic variable under which to export the array element key from the current iteration', 'component-model'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }
@@ -165,6 +165,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         $resolveDirectiveArgsOnObject = $this->directive->hasArgumentReferencingResolvedOnObjectPromise();
 
         $passValueOnwardsAsVariableArgumentName = $this->getPassValueOnwardsAsVariableArgumentName();
+        $passKeyOnwardsAsVariableArgumentName = $this->getPassKeyOnwardsAsVariableArgumentName();
 
         if (!$resolveDirectiveArgsOnObject) {
             $directiveArgs = $this->getResolvedDirectiveArgs(
@@ -186,11 +187,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                 return;
             }
             $passValueOnwardsAs = $directiveArgs[$passValueOnwardsAsVariableArgumentName] ?? null;
-            $passKeyOnwardsAs = $directiveArgs['passKeyOnwardsAs'] ?? null;
+            $passKeyOnwardsAs = $directiveArgs[$passKeyOnwardsAsVariableArgumentName] ?? null;
         }
 
         $valueArgument = $this->directive->getArgument($passValueOnwardsAsVariableArgumentName);
-        $keyArgument = $this->directive->getArgument('passKeyOnwardsAs');
+        $keyArgument = $this->directive->getArgument($passKeyOnwardsAsVariableArgumentName);
 
         $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
         $decreaseFieldTypeModifiersCardinalityForSerialization = $this->decreaseFieldTypeModifiersCardinalityForSerialization();
@@ -275,7 +276,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                         continue;
                     }
                     $passValueOnwardsAs = $directiveArgs[$passValueOnwardsAsVariableArgumentName] ?? null;
-                    $passKeyOnwardsAs = $directiveArgs['passKeyOnwardsAs'] ?? null;
+                    $passKeyOnwardsAs = $directiveArgs[$passKeyOnwardsAsVariableArgumentName] ?? null;
                 }
 
                 // The value is an array or an stdClass. Unpack all the elements into their own property
@@ -736,7 +737,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
      *
      * Eg:
      *
-     *   - @forEach(passKeyOnwardsAs: "key", passValueOnwardsAs: "value")
+     *   - @forEach(passIndexOnwardsAs: "index", passValueOnwardsAs: "value")
      *   - @underArrayItem(passOnwardsAs: "item")
      *
      * @return string[]
@@ -749,7 +750,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             ],
             $this->passKeyOnwardsAsVariable()
                 ? [
-                    'passKeyOnwardsAs',
+                    $this->getPassKeyOnwardsAsVariableArgumentName(),
                 ]
                 : []
         );
@@ -758,6 +759,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     protected function getPassValueOnwardsAsVariableArgumentName(): string
     {
         return $this->passKeyOnwardsAsVariable() ? 'passValueOnwardsAs' : 'passOnwardsAs';
+    }
+
+    protected function getPassKeyOnwardsAsVariableArgumentName(): string
+    {
+        return 'passKeyOnwardsAs';
     }
 
     final public function mustResolveDynamicVariableOnObject(): bool
