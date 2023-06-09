@@ -236,10 +236,7 @@
                         "attributes": {
                             "content": "Categories Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Categories Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/categories",
@@ -249,18 +246,14 @@
                             "showPostCounts": false,
                             "showOnlyTopLevel": false,
                             "showEmpty": false
-                        },
-                        "innerContent": []
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Latest Posts Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Latest Posts Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/latest-posts",
@@ -278,8 +271,7 @@
                             "displayFeaturedImage": false,
                             "featuredImageSizeSlug": "thumbnail",
                             "addLinkToFeaturedImage": false
-                        },
-                        "innerContent": []
+                        }
                     }
                 ]
             },
@@ -405,29 +397,20 @@
                         "attributes": {
                             "content": "Verse Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Verse Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/verse",
                         "attributes": {
                             "content": "Write poetry and other literary expressions honoring all spaces and line-breaks."
-                        },
-                        "innerContent": [
-                            "\n<pre class=\"wp-block-verse\">Write poetry and other literary expressions honoring all spaces and line-breaks.<\/pre>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Table Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Table Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/table",
@@ -475,29 +458,20 @@
                                 }
                             ],
                             "foot": []
-                        },
-                        "innerContent": [
-                            "\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1<\/td><td>Row 1 Column 2<\/td><\/tr><tr><td>Row 2 Column 1<\/td><td>Row 2 Column 2<\/td><\/tr><tr><td>Row 3 Column 1<\/td><td>Row 3 Column 2<\/td><\/tr><\/tbody><\/table><\/figure>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Separator Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Separator Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/separator",
                         "attributes": {
                             "opacity": "alpha-channel"
-                        },
-                        "innerContent": [
-                            "\n<hr class=\"wp-block-separator\"\/>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
@@ -505,19 +479,13 @@
                             "className": "has-top-margin",
                             "content": "Spacer Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2 class=\"has-top-margin\">Spacer Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/spacer",
                         "attributes": {
                             "height": "100px"
-                        },
-                        "innerContent": [
-                            "\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"><\/div>\n"
-                        ]
+                        }
                     }
                 ]
             },
@@ -604,29 +572,20 @@
                         "attributes": {
                             "content": "Audio Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Audio Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/audio",
                         "attributes": {
                             "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3"
-                        },
-                        "innerContent": [
-                            "\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><\/figure>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Video Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Video Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/video",
@@ -635,29 +594,20 @@
                             "preload": "metadata",
                             "src": "https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4",
                             "tracks": []
-                        },
-                        "innerContent": [
-                            "\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\"><\/video><\/figure>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Custom HTML Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Custom HTML Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/html",
                         "attributes": {
                             "content": "<strong>This is a HTML block.<\/strong>"
-                        },
-                        "innerContent": [
-                            "\n<strong>This is a HTML block.<\/strong>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
@@ -665,19 +615,13 @@
                             "className": "has-top-margin",
                             "content": "Preformatted Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2 class=\"has-top-margin\">Preformatted Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/preformatted",
                         "attributes": {
                             "content": "This is some preformatted text. Preformatted text keeps your s p a c e s, tabs and<br>linebreaks as they are."
-                        },
-                        "innerContent": [
-                            "\n<pre class=\"wp-block-preformatted\">This is some preformatted text. Preformatted text keeps your s p a c e s, tabs and<br>linebreaks as they are.<\/pre>\n"
-                        ]
+                        }
                     }
                 ]
             },
@@ -790,10 +734,7 @@
                         "attributes": {
                             "content": "Text Column Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Text Column Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/text-columns",
@@ -807,20 +748,14 @@
                                 }
                             ],
                             "columns": 2
-                        },
-                        "innerContent": [
-                            "\n<div class=\"wp-block-text-columns alignundefined columns-2\"><div class=\"wp-block-column\"><p>This is left text column.<br><br>Appropriately initiate pandemic data via economically sound scenarios. Credibly foster inexpensive methodologies via cross-media leadership. Dramatically monetize seamless infomediaries via principle-centered functionalities. Seamlessly morph cross functional outsourcing via team building meta-services. Intrinsicly embrace installed base products for enabled testing procedures.<br><\/p><\/div><div class=\"wp-block-column\"><p>This is right text column.<br><br>Completely disintermediate user friendly content through covalent core competencies. Enthusiastically seize intermandated alignments for resource sucking paradigms. Intrinsicly engineer sustainable initiatives through resource maximizing benefits. Efficiently fashion top-line vortals through distributed interfaces. Intrinsicly engage performance based mindshare with best-of-breed outsourcing.<br><\/p><\/div><\/div>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Button Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Button Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/button",
@@ -828,40 +763,28 @@
                             "className": "alignnone",
                             "url": "#",
                             "text": "Get Started"
-                        },
-                        "innerContent": [
-                            "\n<div class=\"wp-block-button alignnone\"><a class=\"wp-block-button__link\" href=\"#\">Get Started<\/a><\/div>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Quote Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Quote Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/quote",
                         "attributes": {
                             "value": "<p><em>Take up one idea, make that one idea your life. Think of it, dream of it, Live on that idea let the brain, muscles, nerves, every part of your body be full of that idea, and just leave every other idea alone. This is the way to success.<\/em><\/p>",
                             "citation": "Swami Vivekananda"
-                        },
-                        "innerContent": [
-                            "\n<blockquote class=\"wp-block-quote\"><p><em>Take up one idea, make that one idea your life. Think of it, dream of it, Live on that idea let the brain, muscles, nerves, every part of your body be full of that idea, and just leave every other idea alone. This is the way to success.<\/em><\/p><cite>Swami Vivekananda<\/cite><\/blockquote>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Quote Block (another style)",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Quote Block (another style)<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/quote",
@@ -869,29 +792,20 @@
                             "className": "is-large",
                             "value": "<p><em>Take up one idea, make that one idea your life. Think of it, <g class=\"gr_ gr_10 gr-alert gr_gramm gr_inline_cards gr_run_anim Grammar only-ins doubleReplace replaceWithoutSep\" id=\"10\" data-gr-id=\"10\">dream<\/g> of it, Live on that idea let the brain, muscles, nerves, every part of your body be full of that idea, and just leave every other idea alone. This is the way to success.<\/em><\/p>",
                             "citation": "Swami Vivekananda"
-                        },
-                        "innerContent": [
-                            "\n<blockquote class=\"wp-block-quote is-large\"><p><em>Take up one idea, make that one idea your life. Think of it, <g class=\"gr_ gr_10 gr-alert gr_gramm gr_inline_cards gr_run_anim Grammar only-ins doubleReplace replaceWithoutSep\" id=\"10\" data-gr-id=\"10\">dream<\/g> of it, Live on that idea let the brain, muscles, nerves, every part of your body be full of that idea, and just leave every other idea alone. This is the way to success.<\/em><\/p><cite>Swami Vivekananda<\/cite><\/blockquote>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "Code Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>Code Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/code",
                         "attributes": {
                             "content": "@media only screen and (min-width: 960px) {\n\n\tbody .alignfull {\n\t\twidth: auto;\n\t\tmax-width: 1000%;\n\n\t\tmargin-right: calc(50% - 50vw);\n\t\tmargin-left: calc(50% - 50vw);\n\t}\n\n\tbody .alignwide {\n\t\twidth: auto;\n\t\tmax-width: 1000%;\n\t\tmargin-right: calc(25% - 25vw);\n\t\tmargin-left: calc(25% - 25vw);\n\t}\n\n\t.alignwide img,\n\t.alignfull img {\n\t\tdisplay: block;\n\t\tmargin: 0 auto;\n\t}\n}"
-                        },
-                        "innerContent": [
-                            "\n<pre class=\"wp-block-code\"><code>@media only screen and (min-width: 960px) {\n\n\tbody .alignfull {\n\t\twidth: auto;\n\t\tmax-width: 1000%;\n\n\t\tmargin-right: calc(50% - 50vw);\n\t\tmargin-left: calc(50% - 50vw);\n\t}\n\n\tbody .alignwide {\n\t\twidth: auto;\n\t\tmax-width: 1000%;\n\t\tmargin-right: calc(25% - 25vw);\n\t\tmargin-left: calc(25% - 25vw);\n\t}\n\n\t.alignwide img,\n\t.alignfull img {\n\t\tdisplay: block;\n\t\tmargin: 0 auto;\n\t}\n}<\/code><\/pre>\n"
-                        ]
+                        }
                     }
                 ]
             },
@@ -1197,30 +1111,21 @@
                             "fixedHeight": true,
                             "sizeSlug": "large",
                             "allowResize": false
-                        },
-                        "innerContent": [
-                            "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
                         "attributes": {
                             "content": "List Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2>List Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/list",
                         "attributes": {
                             "ordered": false,
                             "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                        },
-                        "innerContent": [
-                            "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/heading",
@@ -1228,32 +1133,17 @@
                             "className": "has-top-margin",
                             "content": "Columns Block",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/columns",
                         "attributes": {
                             "isStackedOnMobile": true
                         },
-                        "innerContent": [
-                            "\n<div class=\"wp-block-columns\">",
-                            null,
-                            "\n\n",
-                            null,
-                            "<\/div>\n"
-                        ],
                         "innerBlocks": [
                             {
                                 "name": "core\/column",
                                 "attributes": {},
-                                "innerContent": [
-                                    "\n<div class=\"wp-block-column\">",
-                                    null,
-                                    "<\/div>\n"
-                                ],
                                 "innerBlocks": [
                                     {
                                         "name": "core\/image",
@@ -1262,21 +1152,13 @@
                                             "className": "layout-column-1",
                                             "url": "https:\/\/d.pr\/i\/fW6V3V+",
                                             "alt": ""
-                                        },
-                                        "innerContent": [
-                                            "\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n"
-                                        ]
+                                        }
                                     }
                                 ]
                             },
                             {
                                 "name": "core\/column",
                                 "attributes": {},
-                                "innerContent": [
-                                    "\n<div class=\"wp-block-column\">",
-                                    null,
-                                    "<\/div>\n"
-                                ],
                                 "innerBlocks": [
                                     {
                                         "name": "core\/paragraph",
@@ -1284,10 +1166,7 @@
                                             "className": "layout-column-2",
                                             "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.",
                                             "dropCap": false
-                                        },
-                                        "innerContent": [
-                                            "\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n"
-                                        ]
+                                        }
                                     }
                                 ]
                             }
@@ -1298,32 +1177,17 @@
                         "attributes": {
                             "content": "Columns inside Columns (nested inner blocks)",
                             "level": 2
-                        },
-                        "innerContent": [
-                            "\n<h2 class=\"wp-block-heading\">Columns inside Columns (nested inner blocks)<\/h2>\n"
-                        ]
+                        }
                     },
                     {
                         "name": "core\/columns",
                         "attributes": {
                             "isStackedOnMobile": true
                         },
-                        "innerContent": [
-                            "\n<div class=\"wp-block-columns\">",
-                            null,
-                            "<\/div>\n"
-                        ],
                         "innerBlocks": [
                             {
                                 "name": "core\/column",
                                 "attributes": {},
-                                "innerContent": [
-                                    "\n<div class=\"wp-block-column\">",
-                                    null,
-                                    "\n\n",
-                                    null,
-                                    "<\/div>\n"
-                                ],
                                 "innerBlocks": [
                                     {
                                         "name": "core\/image",
@@ -1332,36 +1196,19 @@
                                             "className": "layout-column-1",
                                             "url": "https:\/\/d.pr\/i\/fW6V3V+",
                                             "alt": ""
-                                        },
-                                        "innerContent": [
-                                            "\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n"
-                                        ]
+                                        }
                                     },
                                     {
                                         "name": "core\/columns",
                                         "attributes": {
                                             "isStackedOnMobile": true
                                         },
-                                        "innerContent": [
-                                            "\n<div class=\"wp-block-columns\">",
-                                            null,
-                                            "\n\n",
-                                            null,
-                                            "<\/div>\n"
-                                        ],
                                         "innerBlocks": [
                                             {
                                                 "name": "core\/column",
                                                 "attributes": {
                                                     "width": "33.33%"
                                                 },
-                                                "innerContent": [
-                                                    "\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">",
-                                                    null,
-                                                    "\n\n",
-                                                    null,
-                                                    "<\/div>\n"
-                                                ],
                                                 "innerBlocks": [
                                                     {
                                                         "name": "core\/heading",
@@ -1369,20 +1216,14 @@
                                                             "fontSize": "large",
                                                             "content": "Life is so rich",
                                                             "level": 2
-                                                        },
-                                                        "innerContent": [
-                                                            "\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n"
-                                                        ]
+                                                        }
                                                     },
                                                     {
                                                         "name": "core\/heading",
                                                         "attributes": {
                                                             "level": 3,
                                                             "content": "Life is so dynamic"
-                                                        },
-                                                        "innerContent": [
-                                                            "\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n"
-                                                        ]
+                                                        }
                                                     }
                                                 ]
                                             },
@@ -1391,47 +1232,23 @@
                                                 "attributes": {
                                                     "width": "66.66%"
                                                 },
-                                                "innerContent": [
-                                                    "\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\">",
-                                                    null,
-                                                    "\n\n",
-                                                    null,
-                                                    "<\/div>\n"
-                                                ],
                                                 "innerBlocks": [
                                                     {
                                                         "name": "core\/paragraph",
                                                         "attributes": {
                                                             "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
                                                             "dropCap": false
-                                                        },
-                                                        "innerContent": [
-                                                            "\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n"
-                                                        ]
+                                                        }
                                                     },
                                                     {
                                                         "name": "core\/columns",
                                                         "attributes": {
                                                             "isStackedOnMobile": true
                                                         },
-                                                        "innerContent": [
-                                                            "\n<div class=\"wp-block-columns\">",
-                                                            null,
-                                                            "\n\n",
-                                                            null,
-                                                            "\n\n",
-                                                            null,
-                                                            "<\/div>\n"
-                                                        ],
                                                         "innerBlocks": [
                                                             {
                                                                 "name": "core\/column",
                                                                 "attributes": {},
-                                                                "innerContent": [
-                                                                    "\n<div class=\"wp-block-column\">",
-                                                                    null,
-                                                                    "<\/div>\n"
-                                                                ],
                                                                 "innerBlocks": [
                                                                     {
                                                                         "name": "core\/image",
@@ -1441,28 +1258,17 @@
                                                                             "linkDestination": "none",
                                                                             "url": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg",
                                                                             "alt": ""
-                                                                        },
-                                                                        "innerContent": [
-                                                                            "\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg\" alt=\"\" class=\"wp-image-361\"\/><\/figure>\n"
-                                                                        ]
+                                                                        }
                                                                     }
                                                                 ]
                                                             },
                                                             {
                                                                 "name": "core\/column",
-                                                                "attributes": {},
-                                                                "innerContent": [
-                                                                    "\n<div class=\"wp-block-column\"><\/div>\n"
-                                                                ]
+                                                                "attributes": {}
                                                             },
                                                             {
                                                                 "name": "core\/column",
                                                                 "attributes": {},
-                                                                "innerContent": [
-                                                                    "\n<div class=\"wp-block-column\">",
-                                                                    null,
-                                                                    "<\/div>\n"
-                                                                ],
                                                                 "innerBlocks": [
                                                                     {
                                                                         "name": "core\/image",
@@ -1472,10 +1278,7 @@
                                                                             "linkDestination": "none",
                                                                             "url": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png",
                                                                             "alt": ""
-                                                                        },
-                                                                        "innerContent": [
-                                                                            "\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png\" alt=\"\" class=\"wp-image-362\"\/><\/figure>\n"
-                                                                        ]
+                                                                        }
                                                                     }
                                                                 ]
                                                             }
@@ -1530,10 +1333,7 @@
                     "attributes": {
                         "content": "List Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2>List Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
@@ -1541,20 +1341,14 @@
                         "className": "has-top-margin",
                         "content": "Columns Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
                     "attributes": {
                         "content": "Columns inside Columns (nested inner blocks)",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"wp-block-heading\">Columns inside Columns (nested inner blocks)<\/h2>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -1612,10 +1406,7 @@
                     "attributes": {
                         "content": "List Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2>List Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
@@ -1623,44 +1414,26 @@
                         "className": "has-top-margin",
                         "content": "Columns Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
-                    },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "\n\n",
-                        null,
-                        "<\/div>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
                     "attributes": {
                         "content": "Columns inside Columns (nested inner blocks)",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"wp-block-heading\">Columns inside Columns (nested inner blocks)<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
-                    },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "<\/div>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -1812,10 +1585,7 @@
                     "attributes": {
                         "content": "List Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2>List Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
@@ -1823,41 +1593,21 @@
                         "className": "has-top-margin",
                         "content": "Columns Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "\n\n",
-                        null,
-                        "<\/div>\n"
-                    ],
                     "innerBlocks": [
                         {
                             "name": "core\/column",
-                            "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "<\/div>\n"
-                            ]
+                            "attributes": {}
                         },
                         {
                             "name": "core\/column",
-                            "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "<\/div>\n"
-                            ]
+                            "attributes": {}
                         }
                     ]
                 },
@@ -1866,58 +1616,29 @@
                     "attributes": {
                         "content": "Columns inside Columns (nested inner blocks)",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"wp-block-heading\">Columns inside Columns (nested inner blocks)<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "<\/div>\n"
-                    ],
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "\n\n",
-                                null,
-                                "<\/div>\n"
-                            ],
                             "innerBlocks": [
                                 {
                                     "name": "core\/columns",
                                     "attributes": {
                                         "isStackedOnMobile": true
                                     },
-                                    "innerContent": [
-                                        "\n<div class=\"wp-block-columns\">",
-                                        null,
-                                        "\n\n",
-                                        null,
-                                        "<\/div>\n"
-                                    ],
                                     "innerBlocks": [
                                         {
                                             "name": "core\/column",
                                             "attributes": {
                                                 "width": "33.33%"
                                             },
-                                            "innerContent": [
-                                                "\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">",
-                                                null,
-                                                "\n\n",
-                                                null,
-                                                "<\/div>\n"
-                                            ],
                                             "innerBlocks": [
                                                 {
                                                     "name": "core\/heading",
@@ -1925,20 +1646,14 @@
                                                         "fontSize": "large",
                                                         "content": "Life is so rich",
                                                         "level": 2
-                                                    },
-                                                    "innerContent": [
-                                                        "\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n"
-                                                    ]
+                                                    }
                                                 },
                                                 {
                                                     "name": "core\/heading",
                                                     "attributes": {
                                                         "level": 3,
                                                         "content": "Life is so dynamic"
-                                                    },
-                                                    "innerContent": [
-                                                        "\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n"
-                                                    ]
+                                                    }
                                                 }
                                             ]
                                         },
@@ -1947,53 +1662,24 @@
                                             "attributes": {
                                                 "width": "66.66%"
                                             },
-                                            "innerContent": [
-                                                "\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\">",
-                                                null,
-                                                "\n\n",
-                                                null,
-                                                "<\/div>\n"
-                                            ],
                                             "innerBlocks": [
                                                 {
                                                     "name": "core\/columns",
                                                     "attributes": {
                                                         "isStackedOnMobile": true
                                                     },
-                                                    "innerContent": [
-                                                        "\n<div class=\"wp-block-columns\">",
-                                                        null,
-                                                        "\n\n",
-                                                        null,
-                                                        "\n\n",
-                                                        null,
-                                                        "<\/div>\n"
-                                                    ],
                                                     "innerBlocks": [
                                                         {
                                                             "name": "core\/column",
-                                                            "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\">",
-                                                                null,
-                                                                "<\/div>\n"
-                                                            ]
+                                                            "attributes": {}
                                                         },
                                                         {
                                                             "name": "core\/column",
-                                                            "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\"><\/div>\n"
-                                                            ]
+                                                            "attributes": {}
                                                         },
                                                         {
                                                             "name": "core\/column",
-                                                            "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\">",
-                                                                null,
-                                                                "<\/div>\n"
-                                                            ]
+                                                            "attributes": {}
                                                         }
                                                     ]
                                                 }
@@ -2045,10 +1731,7 @@
                     "attributes": {
                         "content": "List Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2>List Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
@@ -2056,20 +1739,14 @@
                         "className": "has-top-margin",
                         "content": "Columns Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
                     "attributes": {
                         "content": "Columns inside Columns (nested inner blocks)",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"wp-block-heading\">Columns inside Columns (nested inner blocks)<\/h2>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -2326,42 +2003,24 @@
                         "fixedHeight": true,
                         "sizeSlug": "large",
                         "allowResize": false
-                    },
-                    "innerContent": [
-                        "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/list",
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                    },
-                    "innerContent": [
-                        "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "\n\n",
-                        null,
-                        "<\/div>\n"
-                    ],
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "<\/div>\n"
-                            ],
                             "innerBlocks": [
                                 {
                                     "name": "core\/image",
@@ -2370,21 +2029,13 @@
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
                                         "alt": ""
-                                    },
-                                    "innerContent": [
-                                        "\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n"
-                                    ]
+                                    }
                                 }
                             ]
                         },
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "<\/div>\n"
-                            ],
                             "innerBlocks": [
                                 {
                                     "name": "core\/paragraph",
@@ -2392,10 +2043,7 @@
                                         "className": "layout-column-2",
                                         "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.",
                                         "dropCap": false
-                                    },
-                                    "innerContent": [
-                                        "\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n"
-                                    ]
+                                    }
                                 }
                             ]
                         }
@@ -2406,22 +2054,10 @@
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "<\/div>\n"
-                    ],
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "\n\n",
-                                null,
-                                "<\/div>\n"
-                            ],
                             "innerBlocks": [
                                 {
                                     "name": "core\/image",
@@ -2430,83 +2066,42 @@
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
                                         "alt": ""
-                                    },
-                                    "innerContent": [
-                                        "\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n"
-                                    ]
+                                    }
                                 },
                                 {
                                     "name": "core\/columns",
                                     "attributes": {
                                         "isStackedOnMobile": true
                                     },
-                                    "innerContent": [
-                                        "\n<div class=\"wp-block-columns\">",
-                                        null,
-                                        "\n\n",
-                                        null,
-                                        "<\/div>\n"
-                                    ],
                                     "innerBlocks": [
                                         {
                                             "name": "core\/column",
                                             "attributes": {
                                                 "width": "33.33%"
-                                            },
-                                            "innerContent": [
-                                                "\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">",
-                                                null,
-                                                "\n\n",
-                                                null,
-                                                "<\/div>\n"
-                                            ]
+                                            }
                                         },
                                         {
                                             "name": "core\/column",
                                             "attributes": {
                                                 "width": "66.66%"
                                             },
-                                            "innerContent": [
-                                                "\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\">",
-                                                null,
-                                                "\n\n",
-                                                null,
-                                                "<\/div>\n"
-                                            ],
                                             "innerBlocks": [
                                                 {
                                                     "name": "core\/paragraph",
                                                     "attributes": {
                                                         "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
                                                         "dropCap": false
-                                                    },
-                                                    "innerContent": [
-                                                        "\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n"
-                                                    ]
+                                                    }
                                                 },
                                                 {
                                                     "name": "core\/columns",
                                                     "attributes": {
                                                         "isStackedOnMobile": true
                                                     },
-                                                    "innerContent": [
-                                                        "\n<div class=\"wp-block-columns\">",
-                                                        null,
-                                                        "\n\n",
-                                                        null,
-                                                        "\n\n",
-                                                        null,
-                                                        "<\/div>\n"
-                                                    ],
                                                     "innerBlocks": [
                                                         {
                                                             "name": "core\/column",
                                                             "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\">",
-                                                                null,
-                                                                "<\/div>\n"
-                                                            ],
                                                             "innerBlocks": [
                                                                 {
                                                                     "name": "core\/image",
@@ -2516,28 +2111,17 @@
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg",
                                                                         "alt": ""
-                                                                    },
-                                                                    "innerContent": [
-                                                                        "\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg\" alt=\"\" class=\"wp-image-361\"\/><\/figure>\n"
-                                                                    ]
+                                                                    }
                                                                 }
                                                             ]
                                                         },
                                                         {
                                                             "name": "core\/column",
-                                                            "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\"><\/div>\n"
-                                                            ]
+                                                            "attributes": {}
                                                         },
                                                         {
                                                             "name": "core\/column",
                                                             "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\">",
-                                                                null,
-                                                                "<\/div>\n"
-                                                            ],
                                                             "innerBlocks": [
                                                                 {
                                                                     "name": "core\/image",
@@ -2547,10 +2131,7 @@
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png",
                                                                         "alt": ""
-                                                                    },
-                                                                    "innerContent": [
-                                                                        "\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png\" alt=\"\" class=\"wp-image-362\"\/><\/figure>\n"
-                                                                    ]
+                                                                    }
                                                                 }
                                                             ]
                                                         }
@@ -2660,20 +2241,14 @@
                         "fixedHeight": true,
                         "sizeSlug": "large",
                         "allowResize": false
-                    },
-                    "innerContent": [
-                        "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/list",
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                    },
-                    "innerContent": [
-                        "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -2771,20 +2346,14 @@
                         "fixedHeight": true,
                         "sizeSlug": "large",
                         "allowResize": false
-                    },
-                    "innerContent": [
-                        "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/list",
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                    },
-                    "innerContent": [
-                        "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -2898,44 +2467,26 @@
                         "fixedHeight": true,
                         "sizeSlug": "large",
                         "allowResize": false
-                    },
-                    "innerContent": [
-                        "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/list",
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                    },
-                    "innerContent": [
-                        "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
-                    },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "\n\n",
-                        null,
-                        "<\/div>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
-                    },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "<\/div>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -2995,50 +2546,35 @@
                     "attributes": {
                         "content": "This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:",
                         "dropCap": false
-                    },
-                    "innerContent": [
-                        "\n<p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/quote",
                     "attributes": {
                         "value": "<p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi\u00f1a coladas. (And gettin' caught in the rain.)<\/p>",
                         "citation": ""
-                    },
-                    "innerContent": [
-                        "\n<blockquote class=\"wp-block-quote\"><p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)<\/p><\/blockquote>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/paragraph",
                     "attributes": {
                         "content": "...or something like this:",
                         "dropCap": false
-                    },
-                    "innerContent": [
-                        "\n<p>...or something like this:<\/p>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/quote",
                     "attributes": {
                         "value": "<p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p>",
                         "citation": ""
-                    },
-                    "innerContent": [
-                        "\n<blockquote class=\"wp-block-quote\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/paragraph",
                     "attributes": {
                         "content": "As a new WordPress user, you should go to <a href=\"https:\/\/gato-graphql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!",
                         "dropCap": false
-                    },
-                    "innerContent": [
-                        "\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gato-graphql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -3347,30 +2883,21 @@
                         "fixedHeight": true,
                         "sizeSlug": "large",
                         "allowResize": false
-                    },
-                    "innerContent": [
-                        "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
                     "attributes": {
                         "content": "List Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2>List Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/list",
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                    },
-                    "innerContent": [
-                        "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
@@ -3378,32 +2905,17 @@
                         "className": "has-top-margin",
                         "content": "Columns Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "\n\n",
-                        null,
-                        "<\/div>\n"
-                    ],
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "<\/div>\n"
-                            ],
                             "innerBlocks": [
                                 {
                                     "name": "core\/image",
@@ -3412,21 +2924,13 @@
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
                                         "alt": ""
-                                    },
-                                    "innerContent": [
-                                        "\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n"
-                                    ]
+                                    }
                                 }
                             ]
                         },
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "<\/div>\n"
-                            ],
                             "innerBlocks": [
                                 {
                                     "name": "core\/paragraph",
@@ -3434,10 +2938,7 @@
                                         "className": "layout-column-2",
                                         "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.",
                                         "dropCap": false
-                                    },
-                                    "innerContent": [
-                                        "\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n"
-                                    ]
+                                    }
                                 }
                             ]
                         }
@@ -3448,32 +2949,17 @@
                     "attributes": {
                         "content": "Columns inside Columns (nested inner blocks)",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"wp-block-heading\">Columns inside Columns (nested inner blocks)<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "innerContent": [
-                        "\n<div class=\"wp-block-columns\">",
-                        null,
-                        "<\/div>\n"
-                    ],
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "innerContent": [
-                                "\n<div class=\"wp-block-column\">",
-                                null,
-                                "\n\n",
-                                null,
-                                "<\/div>\n"
-                            ],
                             "innerBlocks": [
                                 {
                                     "name": "core\/image",
@@ -3482,36 +2968,19 @@
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
                                         "alt": ""
-                                    },
-                                    "innerContent": [
-                                        "\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n"
-                                    ]
+                                    }
                                 },
                                 {
                                     "name": "core\/columns",
                                     "attributes": {
                                         "isStackedOnMobile": true
                                     },
-                                    "innerContent": [
-                                        "\n<div class=\"wp-block-columns\">",
-                                        null,
-                                        "\n\n",
-                                        null,
-                                        "<\/div>\n"
-                                    ],
                                     "innerBlocks": [
                                         {
                                             "name": "core\/column",
                                             "attributes": {
                                                 "width": "33.33%"
                                             },
-                                            "innerContent": [
-                                                "\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">",
-                                                null,
-                                                "\n\n",
-                                                null,
-                                                "<\/div>\n"
-                                            ],
                                             "innerBlocks": [
                                                 {
                                                     "name": "core\/heading",
@@ -3519,20 +2988,14 @@
                                                         "fontSize": "large",
                                                         "content": "Life is so rich",
                                                         "level": 2
-                                                    },
-                                                    "innerContent": [
-                                                        "\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n"
-                                                    ]
+                                                    }
                                                 },
                                                 {
                                                     "name": "core\/heading",
                                                     "attributes": {
                                                         "level": 3,
                                                         "content": "Life is so dynamic"
-                                                    },
-                                                    "innerContent": [
-                                                        "\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n"
-                                                    ]
+                                                    }
                                                 }
                                             ]
                                         },
@@ -3541,47 +3004,23 @@
                                             "attributes": {
                                                 "width": "66.66%"
                                             },
-                                            "innerContent": [
-                                                "\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\">",
-                                                null,
-                                                "\n\n",
-                                                null,
-                                                "<\/div>\n"
-                                            ],
                                             "innerBlocks": [
                                                 {
                                                     "name": "core\/paragraph",
                                                     "attributes": {
                                                         "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
                                                         "dropCap": false
-                                                    },
-                                                    "innerContent": [
-                                                        "\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n"
-                                                    ]
+                                                    }
                                                 },
                                                 {
                                                     "name": "core\/columns",
                                                     "attributes": {
                                                         "isStackedOnMobile": true
                                                     },
-                                                    "innerContent": [
-                                                        "\n<div class=\"wp-block-columns\">",
-                                                        null,
-                                                        "\n\n",
-                                                        null,
-                                                        "\n\n",
-                                                        null,
-                                                        "<\/div>\n"
-                                                    ],
                                                     "innerBlocks": [
                                                         {
                                                             "name": "core\/column",
                                                             "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\">",
-                                                                null,
-                                                                "<\/div>\n"
-                                                            ],
                                                             "innerBlocks": [
                                                                 {
                                                                     "name": "core\/image",
@@ -3591,28 +3030,17 @@
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg",
                                                                         "alt": ""
-                                                                    },
-                                                                    "innerContent": [
-                                                                        "\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public-1024x622.jpg\" alt=\"\" class=\"wp-image-361\"\/><\/figure>\n"
-                                                                    ]
+                                                                    }
                                                                 }
                                                             ]
                                                         },
                                                         {
                                                             "name": "core\/column",
-                                                            "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\"><\/div>\n"
-                                                            ]
+                                                            "attributes": {}
                                                         },
                                                         {
                                                             "name": "core\/column",
                                                             "attributes": {},
-                                                            "innerContent": [
-                                                                "\n<div class=\"wp-block-column\">",
-                                                                null,
-                                                                "<\/div>\n"
-                                                            ],
                                                             "innerBlocks": [
                                                                 {
                                                                     "name": "core\/image",
@@ -3622,10 +3050,7 @@
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png",
                                                                         "alt": ""
-                                                                    },
-                                                                    "innerContent": [
-                                                                        "\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema-1024x598.png\" alt=\"\" class=\"wp-image-362\"\/><\/figure>\n"
-                                                                    ]
+                                                                    }
                                                                 }
                                                             ]
                                                         }
@@ -3765,39 +3190,27 @@
                         "fixedHeight": true,
                         "sizeSlug": "large",
                         "allowResize": false
-                    },
-                    "innerContent": [
-                        "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
                     "attributes": {
                         "content": "List Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2>List Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/list",
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                    },
-                    "innerContent": [
-                        "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/nonexisting",
                     "attributes": {
                         "className": "has-top-margin"
-                    },
-                    "innerContent": [
-                        "\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -3961,38 +3374,28 @@
                         "fixedHeight": true,
                         "sizeSlug": "large",
                         "allowResize": false
-                    },
-                    "innerContent": [
-                        "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
                     "attributes": {
                         "content": "List Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2>List Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/list",
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                    },
-                    "innerContent": [
-                        "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "gato-graphql\/server-side-registered-block-schema-testing",
                     "attributes": {
                         "someAttribute": false,
                         "someOtherAttribute": "Hello"
-                    },
-                    "innerContent": []
+                    }
                 },
                 {
                     "name": "gato-graphql\/server-side-registered-block-schema-testing",
@@ -4000,8 +3403,7 @@
                         "someAttribute": true,
                         "someOtherAttribute": " world!",
                         "yetAnotherAttribute": []
-                    },
-                    "innerContent": []
+                    }
                 },
                 {
                     "name": "gato-graphql\/server-side-registered-block-schema-testing",
@@ -4015,18 +3417,14 @@
                             "registered",
                             "blocks"
                         ]
-                    },
-                    "innerContent": []
+                    }
                 },
                 {
                     "name": "core\/paragraph",
                     "attributes": {
                         "content": "And back to some text",
                         "dropCap": false
-                    },
-                    "innerContent": [
-                        "\n<p>And back to some text<\/p>\n"
-                    ]
+                    }
                 }
             ]
         },
@@ -4181,38 +3579,28 @@
                         "fixedHeight": true,
                         "sizeSlug": "large",
                         "allowResize": false
-                    },
-                    "innerContent": [
-                        "\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/heading",
                     "attributes": {
                         "content": "List Block",
                         "level": 2
-                    },
-                    "innerContent": [
-                        "\n<h2>List Block<\/h2>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "core\/list",
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
-                    },
-                    "innerContent": [
-                        "\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n"
-                    ]
+                    }
                 },
                 {
                     "name": "gato-graphql\/not-server-side-registered-block-schema-testing",
                     "attributes": {
                         "someAttribute": false,
                         "someOtherAttribute": "Hello"
-                    },
-                    "innerContent": []
+                    }
                 },
                 {
                     "name": "gato-graphql\/not-server-side-registered-block-schema-testing",
@@ -4220,8 +3608,7 @@
                         "someAttribute": true,
                         "someOtherAttribute": " world!",
                         "yetAnotherAttribute": []
-                    },
-                    "innerContent": []
+                    }
                 },
                 {
                     "name": "gato-graphql\/not-server-side-registered-block-schema-testing",
@@ -4235,18 +3622,14 @@
                             "registered",
                             "blocks"
                         ]
-                    },
-                    "innerContent": []
+                    }
                 },
                 {
                     "name": "core\/paragraph",
                     "attributes": {
                         "content": "And back to some text",
                         "dropCap": false
-                    },
-                    "innerContent": [
-                        "\n<p>And back to some text<\/p>\n"
-                    ]
+                    }
                 }
             ]
         }
