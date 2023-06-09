@@ -235,8 +235,8 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
          *
          *   ```
          *   {
-         *     id @upperCase @titleCase
-         *     id @titleCase @upperCase
+         *     id @strUpperCase @titleCase
+         *     id @titleCase @strUpperCase
          *   }
          *   ```
          */
