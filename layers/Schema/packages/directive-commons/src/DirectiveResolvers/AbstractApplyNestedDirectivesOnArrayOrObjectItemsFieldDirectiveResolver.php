@@ -345,7 +345,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          * $decreaseFieldTypeModifiersCardinalityForSerialization is true.
                          * That's because @underJSONObjectProperty does not decrease the
                          * cardinality, but the iterated elements must also receive the
-                         * fieldTypeModifiers from the level above:
+                         * fieldTypeModifiers from the level above, as in this query:
                          *
                          *   {
                          *     post(by: { id: 19 }) {
@@ -356,8 +356,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          *     }
                          *   }
                          */
-                        $fieldTypeModifiersByField[$arrayItemField] = $fieldTypeModifiersByField[$field];
-                        $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
+                        if (isset($fieldTypeModifiersByField[$field])) {
+                            $fieldTypeModifiersByField[$arrayItemField] = $fieldTypeModifiersByField[$field];
+                            $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
+                        }
                         
                         // Export the array item value into the dynamic variable
                         if (!empty($passValueOnwardsAs)) {
