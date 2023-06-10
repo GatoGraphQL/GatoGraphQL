@@ -504,14 +504,16 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                     );
                 }
 
-                $this->removeIDFieldSet(
-                    $succeedingPipelineIDFieldSet,
-                    $idFieldSet,
-                );
-                $this->setFieldResponseValueAsNull(
-                    $resolvedIDFieldValues,
-                    $idFieldSet
-                );
+                if ($setFieldAsNullIfDirectiveFailed) {
+                    $this->removeIDFieldSet(
+                        $succeedingPipelineIDFieldSet,
+                        $idFieldSet,
+                    );
+                    $this->setFieldResponseValueAsNull(
+                        $resolvedIDFieldValues,
+                        $idFieldSet
+                    );
+                }
                 return;
             }
 
