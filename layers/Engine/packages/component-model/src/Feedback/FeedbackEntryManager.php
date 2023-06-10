@@ -596,12 +596,21 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         }
         $entry[Tokens::CAUSES] = [];
         foreach ($feedbackItemResolution->getCauses() as $cause) {
+            if ($cause instanceof ObjectResolutionFeedbackInterface
+                || $cause instanceof SchemaFeedbackInterface
+            ) {
+                /** @var ObjectResolutionFeedbackInterface|SchemaFeedbackInterface */
+                $causeObjectOrSchemaFeedback = $cause;
+                $entry[Tokens::CAUSES][] = $this->getObjectOrSchemaFeedbackCommonEntry($causeObjectOrSchemaFeedback);
+                continue;
+            }
 
             /** @var FeedbackItemResolution */
             $causeFeedbackItemResolution = $cause;
             $causeSubentry = [
                 Tokens::MESSAGE => $causeFeedbackItemResolution->getMessage(),
             ];
+
             /**
              * The cause may itself have its own underlying causes
              */
