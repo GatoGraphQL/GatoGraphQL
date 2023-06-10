@@ -247,19 +247,35 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $pos = 0;
                 while ($blockStack !== []) {
                     $block = array_shift($blockStack);
+
+                    /**
+                     * Set the "parentBlockPosition" on all innerBlocks
+                     */
+                    foreach (($block->innerBlocks ?? []) as &$innerBlock) {
+                        $innerBlock->parentBlockPosition = $pos;
+                    }
+
+                    /**
+                     * The first level of Blocks will set "parentBlockPosition" as `null`.
+                     * If it is an innerBlock, it will have the "parentBlockPosition"
+                     * already set.
+                     */                    
                     if (isset($block->parentBlockPosition)) {
                         $blocks[$block->parentBlockPosition]->innerBlockPositions ??= [];
                         $blocks[$block->parentBlockPosition]->innerBlockPositions[] = $pos;
                     } else {
                         $block->parentBlockPosition = null;
                     }
-                    foreach (($block->innerBlocks ?? []) as $innerBlock) {
-                        $innerBlock->parentBlockPosition = $pos;
-                    }
+
+                    /**
+                     * Add the innerBlocks to the stack
+                     */
                     $blockStack = array_merge(
                         $blockStack,
                         $block->innerBlocks ?? []
                     );
+
+                    // Add the block to the response, and keep iterating
                     $blocks[] = $block;
                     $pos++;
                 }
