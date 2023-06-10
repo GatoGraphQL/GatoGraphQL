@@ -14,7 +14,9 @@ use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
+use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
@@ -458,7 +460,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             // If any item fails, set the whole response field as null
             if ($objectResolutionFeedbackStoreErrors !== [] || $schemaFeedbackStoreErrors !== []) {
                 // // Transfer the error to the composable directive
-                if ($schemaFeedbackStoreErrors !== [] > 0) {
+                if ($schemaFeedbackStoreErrors !== []) {
                     $fields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -467,7 +469,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 ErrorFeedbackItemProvider::E18,
                                 [
                                     $this->directive->asQueryString(),
-                                ]
+                                ],
+                                array_map(
+                                    fn (SchemaFeedbackInterface $schemaFeedback) => $schemaFeedback->getFeedbackItemResolution(),
+                                    $schemaFeedbackStoreErrors
+                                )
                             ),
                             $this->directive,
                             $relationalTypeResolver,
@@ -484,7 +490,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 ErrorFeedbackItemProvider::E18,
                                 [
                                     $this->directive->asQueryString(),
-                                ]
+                                ],
+                                array_map(
+                                    fn (ObjectResolutionFeedbackInterface $objectResolutionFeedback) => $objectResolutionFeedback->getFeedbackItemResolution(),
+                                    $objectResolutionFeedbackStoreErrors
+                                )
                             ),
                             $this->directive,
                             $relationalTypeResolver,
