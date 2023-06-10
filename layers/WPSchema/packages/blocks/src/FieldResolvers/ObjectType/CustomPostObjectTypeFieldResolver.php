@@ -290,6 +290,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $blocks[] = $block;
                     $pos++;
                 }
+                
                 return $blocks;
         }
 
