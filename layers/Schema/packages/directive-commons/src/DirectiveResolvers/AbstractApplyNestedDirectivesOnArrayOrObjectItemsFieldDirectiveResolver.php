@@ -470,10 +470,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 [
                                     $this->directive->asQueryString(),
                                 ],
-                                array_map(
-                                    fn (SchemaFeedbackInterface $schemaFeedback) => $schemaFeedback->getFeedbackItemResolution(),
-                                    $schemaFeedbackStoreErrors
-                                )
+                                $schemaFeedbackStoreErrors
                             ),
                             $this->directive,
                             $relationalTypeResolver,
@@ -491,10 +488,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 [
                                     $this->directive->asQueryString(),
                                 ],
-                                array_map(
-                                    fn (ObjectResolutionFeedbackInterface $objectResolutionFeedback) => $objectResolutionFeedback->getFeedbackItemResolution(),
-                                    $objectResolutionFeedbackStoreErrors
-                                )
+                                $objectResolutionFeedbackStoreErrors
                             ),
                             $this->directive,
                             $relationalTypeResolver,
