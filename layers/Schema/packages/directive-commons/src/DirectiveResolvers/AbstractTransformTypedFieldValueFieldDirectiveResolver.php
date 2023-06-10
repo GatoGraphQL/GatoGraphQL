@@ -30,7 +30,10 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): mixed {
-        if ($value === null) {
+        if (
+            $value === null
+            && $this->skipNullValue()
+        ) {
             return null;
         }
 
@@ -71,6 +74,11 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
         }
 
         return $this->transformTypeValue($value);
+    }
+
+    protected function skipNullValue(): bool
+    {
+        return true;
     }
 
     abstract protected function isMatchingType(mixed $value): bool;
