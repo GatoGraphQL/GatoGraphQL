@@ -90,7 +90,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return match ($fieldName) {
             'blocks' => $this->__('(Gutenberg) Blocks in a custom post', 'blocks'),
             'blockDataItems' => $this->__('(Gutenberg) Block data items (as JSON objects) in a custom post', 'blocks'),
-            'blockFlattenedDataItems' => $this->__('(Gutenberg) Flattened block data items (as JSON objects) in a custom post', 'blocks'),
+            'blockFlattenedDataItems' => $this->__('(Gutenberg) Flattened array containing the block data items (as JSON objects) in a custom post', 'blocks'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
