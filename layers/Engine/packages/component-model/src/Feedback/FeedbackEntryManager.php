@@ -540,6 +540,19 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         FeedbackItemResolution $feedbackItemResolution,
         array $ids,
     ): array {
+        $entry = [
+            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
+            Tokens::PATH => $this->getASTNodePath($astNode),
+        ];
+
+        /**
+         * The $ids could be empty if the error happened on a
+         * nested directive. In that case, do not output it
+         */
+        if ($ids !== []) {
+            $entry[Tokens::IDS] = $ids;
+        }
+        
         /**
          * If `null` use the Location from the astNode
          */
@@ -559,24 +572,12 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         if ($location !== null && !($location instanceof RuntimeLocation)) {
             $locations[] = $location->toArray();
         }
+        $entry[Tokens::LOCATIONS] = $locations;
+
         $extensions = $this->addFeedbackEntryExtensions(
             $extensions,
             $feedbackItemResolution
         );
-        $entry = [
-            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
-            Tokens::PATH => $this->getASTNodePath($astNode),
-        ];
-
-        /**
-         * The $ids could be empty if the error happened on a
-         * nested directive. In that case, do not output it
-         */
-        if ($ids !== []) {
-            $entry[Tokens::IDS] = $ids;
-        }
-        
-        $entry[Tokens::LOCATIONS] = $locations;
         $entry[Tokens::EXTENSIONS] = $extensions;
 
         /**
