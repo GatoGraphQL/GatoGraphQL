@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution as UpstreamFeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution as UpstreamFeedbackItemResolution;
 
 class FeedbackItemResolution extends UpstreamFeedbackItemResolution
 {
     /**
      * @phpstan-param class-string<FeedbackItemProviderInterface> $feedbackProviderServiceClass
      * @param array<string|int|float|bool> $messageParams
-     * @param FeedbackItemResolution[] $causes
+     * @param array<FeedbackItemResolution> $causes
      */
     public function __construct(
         string $feedbackProviderServiceClass,
