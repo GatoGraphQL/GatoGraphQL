@@ -22,10 +22,6 @@ class FeedbackItemResolution
         protected string $code,
         /** @var array<string|int|float|bool> */
         protected array $messageParams = [],
-        /**
-         * @see https://github.com/graphql/graphql-spec/issues/893
-         */
-        protected array $causes = [],
     ) {
     }
 
@@ -48,14 +44,6 @@ class FeedbackItemResolution
     public function getMessageParams(): array
     {
         return $this->messageParams;
-    }
-
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function getCauses(): array
-    {
-        return $this->causes;
     }
 
     final public function getFeedbackItemProvider(): FeedbackItemProviderInterface
