@@ -283,10 +283,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     /**
                      * Add the innerBlocks to the stack
                      */
-                    $blockStack = array_merge(
-                        $blockStack,
-                        $blockInnerBlocks
-                    );
+                    if ($blockInnerBlocks !== null) {
+                        $blockStack = array_merge(
+                            $blockStack,
+                            $blockInnerBlocks
+                        );
+                    }
 
                     // Add the block to the response, and keep iterating
                     $blocks[] = $block;
