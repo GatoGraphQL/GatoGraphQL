@@ -566,8 +566,6 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         $entry = [
             Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
             Tokens::PATH => $this->getASTNodePath($astNode),
-            Tokens::LOCATIONS => $locations,
-            Tokens::EXTENSIONS => $extensions,
         ];
 
         /**
