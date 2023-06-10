@@ -81,6 +81,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return [
             'blocks',
             'blockDataItems',
+            'blockFlattenedDataItems',
         ];
     }
 
@@ -89,6 +90,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return match ($fieldName) {
             'blocks' => $this->__('(Gutenberg) Blocks in a custom post', 'blocks'),
             'blockDataItems' => $this->__('(Gutenberg) Block data items (as JSON objects) in a custom post', 'blocks'),
+            'blockFlattenedDataItems' => $this->__('(Gutenberg) Flattened block data items (as JSON objects) in a custom post', 'blocks'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -96,9 +98,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'blocks' => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
-            'blockDataItems' => $this->getJSONObjectScalarTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'blocks'
+                => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
+            'blockDataItems',
+            'blockFlattenedDataItems'
+                => $this->getJSONObjectScalarTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
@@ -106,7 +112,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'blocks',
-            'blockDataItems'
+            'blockDataItems',
+            'blockFlattenedDataItems'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -121,7 +128,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
             'blocks',
-            'blockDataItems'
+            'blockDataItems',
+            'blockFlattenedDataItems'
                 => array_merge(
                     $fieldArgNameTypeResolvers,
                     [
