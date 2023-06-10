@@ -15,7 +15,6 @@ class FeedbackItemResolution
     /**
      * @phpstan-param class-string<FeedbackItemProviderInterface> $feedbackProviderServiceClass
      * @param array<string|int|float|bool> $messageParams
-     * @param FeedbackItemResolution[] $causes
      */
     public function __construct(
         protected string $feedbackProviderServiceClass,
