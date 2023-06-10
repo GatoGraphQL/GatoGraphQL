@@ -42,6 +42,12 @@
                     "possibleTypes": null,
                     "fields": [
                         {
+                            "name": "blockData",
+                            "type": {
+                                "name": "[JSONObject!]"
+                            }
+                        },
+                        {
                             "name": "blocks",
                             "type": {
                                 "name": "[GeneralBlock!]"
