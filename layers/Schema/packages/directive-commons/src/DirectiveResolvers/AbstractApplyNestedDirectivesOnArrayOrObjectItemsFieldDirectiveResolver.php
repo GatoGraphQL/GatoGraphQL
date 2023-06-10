@@ -585,11 +585,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
              * currently only supports 2 levels of nested arrays
              * (i.e.: [[String]], but not [[[String]]])?
              *
-             * ------------------------------------------------------------
-             *
-             * Actually, can also do @underEachArrayItem on JSONObject, in which case
-             * the cardinality must not be affected. So in that case,
-             * it will enter in this `else` statement.
+             * @todo Consider if to throw ShouldNotHappenException
              */
         }
 
