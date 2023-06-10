@@ -353,7 +353,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          *
                          *   {
                          *     post(by: { id: 19 }) {
-                         *       blockData
+                         *       blockDataItems
                          *         @underEachArrayItem
                          *           @underJSONObjectProperty(by: { path: "attributes.content" })
                          *             @export(as:"original")

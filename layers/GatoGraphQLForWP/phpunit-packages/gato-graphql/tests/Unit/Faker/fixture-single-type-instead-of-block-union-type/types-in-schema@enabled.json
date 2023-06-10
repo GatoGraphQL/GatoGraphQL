@@ -42,7 +42,7 @@
                     "possibleTypes": null,
                     "fields": [
                         {
-                            "name": "blockData",
+                            "name": "blockDataItems",
                             "type": {
                                 "name": "[JSONObject!]"
                             }

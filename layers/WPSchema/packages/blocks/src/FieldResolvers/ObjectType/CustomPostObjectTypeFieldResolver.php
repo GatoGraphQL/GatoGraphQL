@@ -80,7 +80,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return [
             'blocks',
-            'blockData',
+            'blockDataItems',
         ];
     }
 
@@ -88,7 +88,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'blocks' => $this->__('(Gutenberg) Blocks in a custom post', 'blocks'),
-            'blockData' => $this->__('(Gutenberg) Block data items (as JSON objects) in a custom post', 'blocks'),
+            'blockDataItems' => $this->__('(Gutenberg) Block data items (as JSON objects) in a custom post', 'blocks'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -97,7 +97,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'blocks' => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
-            'blockData' => $this->getJSONObjectScalarTypeResolver(),
+            'blockDataItems' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -106,7 +106,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'blocks',
-            'blockData'
+            'blockDataItems'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -121,7 +121,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
             'blocks',
-            'blockData'
+            'blockDataItems'
                 => array_merge(
                     $fieldArgNameTypeResolvers,
                     [
@@ -144,7 +144,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
             case 'blocks':
-            case 'blockData':
+            case 'blockDataItems':
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
                 $filterOptions = [];
@@ -213,7 +213,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     );
                 }
 
-                // $fieldName = 'blockData'
+                // $fieldName = 'blockDataItems'
                 return $blockContentParserPayload->blocks;
         }
 

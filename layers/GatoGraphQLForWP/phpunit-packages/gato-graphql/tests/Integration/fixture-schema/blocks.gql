@@ -5,7 +5,7 @@
     blocks {
       ...BlockData
     }
-    blockData
+    blockDataItems
   }
 
   includeBlockFilter1: post(by: { id: 19 }) {
@@ -17,7 +17,7 @@
     ) {
       ...BlockData
     }
-    blockData(
+    blockDataItems(
       filterBy: {
         include: "core/heading"
       }
@@ -36,7 +36,7 @@
     ) {
       ...BlockData
     }
-    blockData(
+    blockDataItems(
       filterBy: {
         include: [
           "core/heading",
@@ -59,7 +59,7 @@
     ) {
       ...BlockData
     }
-    blockData(
+    blockDataItems(
       filterBy: {
         include: [
           "core/heading",
@@ -82,7 +82,7 @@
     ) {
       ...BlockData
     }
-    blockData(
+    blockDataItems(
       filterBy: {
         include: [
           "core/heading",
@@ -101,7 +101,7 @@
     ) {
       ...BlockData
     }
-    blockData(
+    blockDataItems(
       filterBy: {
         exclude: "core/heading"
       }
@@ -120,7 +120,7 @@
     ) {
       ...BlockData
     }
-    blockData(
+    blockDataItems(
       filterBy: {
         exclude: [
           "core/heading",
@@ -143,7 +143,7 @@
     ) {
       ...BlockData
     }
-    blockData(
+    blockDataItems(
       filterBy: {
         exclude: [
           "core/heading",
@@ -166,7 +166,7 @@
     ) {
       ...BlockData
     }
-    blockData(
+    blockDataItems(
       filterBy: {
         exclude: [
           "core/heading",
@@ -182,7 +182,7 @@
     blocks {
       ...BlockData
     }
-    blockData
+    blockDataItems
   }
 
   customPost(by: { id: 654 }) {
@@ -195,7 +195,7 @@
       blocks {
         ...BlockData
       }
-      blockData
+      blockDataItems
     }
   }
 
@@ -209,7 +209,7 @@
       blocks {
         ...BlockData
       }
-      blockData
+      blockDataItems
     }
   }
 
@@ -223,7 +223,7 @@
       blocks {
         ...BlockData
       }
-      blockData
+      blockDataItems
     }
   }
 
@@ -237,7 +237,7 @@
       blocks {
         ...BlockData
       }
-      blockData
+      blockDataItems
     }
   }
 
@@ -251,7 +251,7 @@
       blocks {
         ...BlockData
       }
-      blockData
+      blockDataItems
     }
   }
 
@@ -265,7 +265,7 @@
       blocks {
         ...BlockData
       }
-      blockData
+      blockDataItems
     }
   }
 }

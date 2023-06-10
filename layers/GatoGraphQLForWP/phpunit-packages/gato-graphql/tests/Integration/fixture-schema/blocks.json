@@ -32,13 +32,13 @@
                 ],
                 "extensions": {
                     "path": [
-                        "blockData",
+                        "blockDataItems",
                         "...on GenericCustomPost { ... }",
                         "nonExistingBlocks: customPost(by: {id: 656}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
-                    "field": "blockData",
+                    "field": "blockDataItems",
                     "id": 656,
                     "code": "PoP\/ComponentModel@w1"
                 }
@@ -74,13 +74,13 @@
                 ],
                 "extensions": {
                     "path": [
-                        "blockData",
+                        "blockDataItems",
                         "...on GenericCustomPost { ... }",
                         "notServerSideRegisteredBlocks: customPost(by: {id: 660}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
-                    "field": "blockData",
+                    "field": "blockDataItems",
                     "id": 660,
                     "code": "PoP\/ComponentModel@w1"
                 }
@@ -119,13 +119,13 @@
             ],
             "extensions": {
                 "path": [
-                    "blockData",
+                    "blockDataItems",
                     "...on GenericCustomPost { ... }",
                     "contentWithoutBlocks: customPost(by: {id: 619}) { ... }",
                     "query { ... }"
                 ],
                 "type": "GenericCustomPost",
-                "field": "blockData",
+                "field": "blockDataItems",
                 "id": 619,
                 "code": "PoP\/Engine@e7"
             }
@@ -161,13 +161,13 @@
             ],
             "extensions": {
                 "path": [
-                    "blockData",
+                    "blockDataItems",
                     "...on GenericCustomPost { ... }",
                     "noContent: customPost(by: {id: 658}) { ... }",
                     "query { ... }"
                 ],
                 "type": "GenericCustomPost",
-                "field": "blockData",
+                "field": "blockDataItems",
                 "id": 658,
                 "code": "PoP\/Engine@e7"
             }
@@ -230,7 +230,7 @@
                         "innerBlocks": null
                     }
                 ],
-                "blockData": [
+                "blockDataItems": [
                     {
                         "name": "core\/heading",
                         "attributes": {
@@ -391,7 +391,7 @@
                         "innerBlocks": null
                     }
                 ],
-                "blockData": [
+                "blockDataItems": [
                     {
                         "name": "core\/heading",
                         "attributes": {
@@ -566,7 +566,7 @@
                         "innerBlocks": null
                     }
                 ],
-                "blockData": [
+                "blockDataItems": [
                     {
                         "name": "core\/heading",
                         "attributes": {
@@ -728,7 +728,7 @@
                         "innerBlocks": null
                     }
                 ],
-                "blockData": [
+                "blockDataItems": [
                     {
                         "name": "core\/heading",
                         "attributes": {
@@ -1072,7 +1072,7 @@
                         ]
                     }
                 ],
-                "blockData": [
+                "blockDataItems": [
                     {
                         "name": "core\/gallery",
                         "attributes": {
@@ -1327,7 +1327,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/heading",
                     "attributes": {
@@ -1400,7 +1400,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/heading",
                     "attributes": {
@@ -1579,7 +1579,7 @@
                     ]
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/heading",
                     "attributes": {
@@ -1725,7 +1725,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/heading",
                     "attributes": {
@@ -1964,7 +1964,7 @@
                     ]
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/gallery",
                     "attributes": {
@@ -2202,7 +2202,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/gallery",
                     "attributes": {
@@ -2307,7 +2307,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/gallery",
                     "attributes": {
@@ -2428,7 +2428,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/gallery",
                     "attributes": {
@@ -2540,7 +2540,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/paragraph",
                     "attributes": {
@@ -2844,7 +2844,7 @@
                     ]
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/gallery",
                     "attributes": {
@@ -3073,7 +3073,7 @@
             "contentSource": "<hr>\n<hr>\n<h1>Laudantium distinctio blanditiis et et voluptas. Nobis maxime et ab ut laboriosam provident<\/h1>\n<ul><li>Nisi dolorem<\/li><li>Dolorum<\/li><\/ul>\n<!--more-->\n<img class=\"alignleft\" alt=\"Illum neque aliquam fuga dolor ea voluptas\" src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/12\/c08092fd-0c80-38d0-a678-61e938599f7d.jpg\">",
             "customPostType": "dummy-cpt",
             "blocks": null,
-            "blockData": null
+            "blockDataItems": null
         },
         "nonExistingBlocks": {
             "__typename": "GenericCustomPost",
@@ -3151,7 +3151,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/gallery",
                     "attributes": {
@@ -3221,7 +3221,7 @@
             "contentSource": "",
             "customPostType": "dummy-cpt",
             "blocks": null,
-            "blockData": null
+            "blockDataItems": null
         },
         "serverSideRegisteredBlocks": {
             "__typename": "GenericCustomPost",
@@ -3335,7 +3335,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/gallery",
                     "attributes": {
@@ -3540,7 +3540,7 @@
                     "innerBlocks": null
                 }
             ],
-            "blockData": [
+            "blockDataItems": [
                 {
                     "name": "core\/gallery",
                     "attributes": {
