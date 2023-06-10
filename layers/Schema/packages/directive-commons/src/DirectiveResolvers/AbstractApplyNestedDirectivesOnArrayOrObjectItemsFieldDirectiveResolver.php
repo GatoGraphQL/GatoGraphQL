@@ -337,13 +337,28 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                         $resolvedIDFieldValues[$id][$arrayItemField] = $value;
                         // Place it into list of fields to process
                         $arrayItemIDsProperties[$id]->fields[] = $arrayItemField;
+                        
                         /**
-                         * Indicate the cardinality for the array item
+                         * Indicate the cardinality for the array item.
+                         * 
+                         * Important: do it ALWAYS, and not only when
+                         * $decreaseFieldTypeModifiersCardinalityForSerialization is true.
+                         * That's because @underJSONObjectProperty does not decrease the
+                         * cardinality, but the iterated elements must also receive the
+                         * fieldTypeModifiers from the level above:
+                         *
+                         *   {
+                         *     post(by: { id: 19 }) {
+                         *       blockData
+                         *         @underEachArrayItem
+                         *           @underJSONObjectProperty(by: { path: "attributes.content" })
+                         *             @export(as:"original")
+                         *     }
+                         *   }
                          */
-                        if ($decreaseFieldTypeModifiersCardinalityForSerialization) {
-                            $fieldTypeModifiersByField[$arrayItemField] = $fieldTypeModifiersByField[$field];
-                            $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
-                        }
+                        $fieldTypeModifiersByField[$arrayItemField] = $fieldTypeModifiersByField[$field];
+                        $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
+                        
                         // Export the array item value into the dynamic variable
                         if (!empty($passValueOnwardsAs)) {
                             /** @var Argument $valueArgument */
