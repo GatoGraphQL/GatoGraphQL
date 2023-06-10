@@ -228,9 +228,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 
                 /**
                  * $fieldName = 'blockFlattenedDataItems'
-                 * 
+                 *
                  * Traverse the "innerBlocks" property in each block, and:
-                 * 
+                 *
                  *   - Bring those Blocks upward
                  *   - Replace property "innerBlocks" with a corresponding
                  *     "innerBlockPositions" one, indicating where those blocks
@@ -238,7 +238,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                  *   - Add property "parentBlockPosition", with value `null`
                  *     for the first level of Blocks, or the position in the array
                  *     otherwise
-                 * 
+                 *
                  * @var stdClass[]
                  */
                 $blockStack = $blockContentParserPayload->blocks;
@@ -249,7 +249,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $pos = 0;
                 while ($blockStack !== []) {
                     $block = array_shift($blockStack);
-                    
+
                     /** @var stdClass[]|null */
                     $blockInnerBlocks = $block->innerBlocks;
                     unset($block->innerBlocks);
@@ -260,7 +260,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                          * children when they know their position in the array
                          */
                         $block->innerBlockPositions = [];
-                        
+
                         /**
                          * Set the "parentBlockPosition" on all innerBlocks
                          */
@@ -275,7 +275,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                      * The first level of Blocks will set "parentBlockPosition" as `null`.
                      * If it is an innerBlock, it will have the "parentBlockPosition"
                      * already set.
-                     */                    
+                     */
                     if (isset($block->parentBlockPosition)) {
                         $blocks[$block->parentBlockPosition]->innerBlockPositions[] = $pos;
                     } else {
