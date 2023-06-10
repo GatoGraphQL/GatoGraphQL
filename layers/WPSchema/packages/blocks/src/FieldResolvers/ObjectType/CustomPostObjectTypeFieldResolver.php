@@ -247,12 +247,24 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $pos = 0;
                 while ($blockStack !== []) {
                     $block = array_shift($blockStack);
+                    
+                    /** @var stdClass[]|null */
+                    $blockInnerBlocks = $block->innerBlocks;
+                    unset($block->innerBlocks);
 
-                    /**
-                     * Set the "parentBlockPosition" on all innerBlocks
-                     */
-                    foreach (($block->innerBlocks ?? []) as &$innerBlock) {
-                        $innerBlock->parentBlockPosition = $pos;
+                    if ($blockInnerBlocks !== null) {
+                        /**
+                         * Initialize the property, it will be filled by the
+                         * children when they know their position in the array
+                         */
+                        $block->innerBlockPositions = [];
+                        
+                        /**
+                         * Set the "parentBlockPosition" on all innerBlocks
+                         */
+                        foreach ($blockInnerBlocks as &$innerBlock) {
+                            $innerBlock->parentBlockPosition = $pos;
+                        }
                     }
 
                     /**
@@ -261,7 +273,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                      * already set.
                      */                    
                     if (isset($block->parentBlockPosition)) {
-                        $blocks[$block->parentBlockPosition]->innerBlockPositions ??= [];
                         $blocks[$block->parentBlockPosition]->innerBlockPositions[] = $pos;
                     } else {
                         $block->parentBlockPosition = null;
@@ -272,7 +283,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                      */
                     $blockStack = array_merge(
                         $blockStack,
-                        $block->innerBlocks ?? []
+                        $blockInnerBlocks
                     );
 
                     // Add the block to the response, and keep iterating
