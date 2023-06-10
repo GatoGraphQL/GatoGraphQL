@@ -17,6 +17,7 @@ use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\GraphQLParser\Exception\AbstractASTNodeException;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
@@ -152,21 +153,21 @@ class AppStateProvider extends AbstractAppStateProvider
         } catch (AbstractASTNodeException $astNodeException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
-                    $astNodeException->getFeedbackItemResolution(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($astNodeException->getFeedbackItemResolution()),
                     $astNodeException->getAstNode(),
                 )
             );
         } catch (AbstractASTNodeParserException $astNodeParserException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
-                    $astNodeParserException->getFeedbackItemResolution(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($astNodeParserException->getFeedbackItemResolution()),
                     $astNodeParserException->getAstNode(),
                 )
             );
         } catch (AbstractParserException $parserException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(
-                    $parserException->getFeedbackItemResolution(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($parserException->getFeedbackItemResolution()),
                     $parserException->getLocation(),
                 )
             );
@@ -185,7 +186,7 @@ class AppStateProvider extends AbstractAppStateProvider
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(
                     new QueryFeedback(
-                        $astNodeException->getFeedbackItemResolution(),
+                        FeedbackItemResolution::fromUpstreamFeedbackItemResolution($astNodeException->getFeedbackItemResolution()),
                         $astNodeException->getAstNode(),
                     )
                 );
@@ -193,7 +194,7 @@ class AppStateProvider extends AbstractAppStateProvider
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(
                     new QueryFeedback(
-                        $queryException->getFeedbackItemResolution(),
+                        FeedbackItemResolution::fromUpstreamFeedbackItemResolution($queryException->getFeedbackItemResolution()),
                         $queryException->getAstNode(),
                     )
                 );

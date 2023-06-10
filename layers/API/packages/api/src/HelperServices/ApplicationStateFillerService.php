@@ -8,6 +8,7 @@ use PoPAPI\API\QueryParsing\GraphQLParserHelperServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\QueryFeedback;
 use PoP\GraphQLParser\Exception\AbstractASTNodeException;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
@@ -75,21 +76,21 @@ class ApplicationStateFillerService implements ApplicationStateFillerServiceInte
         } catch (AbstractASTNodeException $astNodeException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
-                    $astNodeException->getFeedbackItemResolution(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($astNodeException->getFeedbackItemResolution()),
                     $astNodeException->getAstNode(),
                 )
             );
         } catch (AbstractASTNodeParserException $astNodeParserException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
-                    $astNodeParserException->getFeedbackItemResolution(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($astNodeParserException->getFeedbackItemResolution()),
                     $astNodeParserException->getAstNode(),
                 )
             );
         } catch (AbstractParserException $parserException) {
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new DocumentFeedback(
-                    $parserException->getFeedbackItemResolution(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($parserException->getFeedbackItemResolution()),
                     $parserException->getLocation(),
                 )
             );
@@ -110,7 +111,7 @@ class ApplicationStateFillerService implements ApplicationStateFillerServiceInte
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(
                     new QueryFeedback(
-                        $astNodeException->getFeedbackItemResolution(),
+                        FeedbackItemResolution::fromUpstreamFeedbackItemResolution($astNodeException->getFeedbackItemResolution()),
                         $astNodeException->getAstNode(),
                     )
                 );
@@ -118,7 +119,7 @@ class ApplicationStateFillerService implements ApplicationStateFillerServiceInte
                 $executableDocument = null;
                 App::getFeedbackStore()->documentFeedbackStore->addError(
                     new QueryFeedback(
-                        $queryException->getFeedbackItemResolution(),
+                        FeedbackItemResolution::fromUpstreamFeedbackItemResolution($queryException->getFeedbackItemResolution()),
                         $queryException->getAstNode(),
                     )
                 );

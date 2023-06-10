@@ -1275,7 +1275,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
                     $engineIterationFeedbackStore,
                 );
             } catch (AbstractQueryException $queryException) {
-                $feedbackItemResolution = $queryException->getFeedbackItemResolution();
+                $feedbackItemResolution = FeedbackItemResolution::fromUpstreamFeedbackItemResolution($queryException->getFeedbackItemResolution());
                 $astNode = $queryException->getAstNode();
             } catch (AbstractClientException $e) {
                 $feedbackItemResolution = new FeedbackItemResolution(

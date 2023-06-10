@@ -731,7 +731,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $valueResolutionPromiseException->getFeedbackItemResolution(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($valueResolutionPromiseException->getFeedbackItemResolution()),
                     $valueResolutionPromiseException->getAstNode(),
                 )
             );
@@ -800,7 +800,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $valueResolutionPromiseException->getFeedbackItemResolution(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($valueResolutionPromiseException->getFeedbackItemResolution()),
                     $valueResolutionPromiseException->getAstNode(),
                 )
             );
@@ -857,7 +857,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $valueResolutionPromiseException->getFeedbackItemResolution(),
+                        FeedbackItemResolution::fromUpstreamFeedbackItemResolution($valueResolutionPromiseException->getFeedbackItemResolution()),
                         $valueResolutionPromiseException->getAstNode(),
                     )
                 );
@@ -1661,7 +1661,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             } catch (AbstractValueResolutionPromiseException $valueResolutionPromiseException) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $valueResolutionPromiseException->getFeedbackItemResolution(),
+                        FeedbackItemResolution::fromUpstreamFeedbackItemResolution($valueResolutionPromiseException->getFeedbackItemResolution()),
                         $valueResolutionPromiseException->getAstNode(),
                     )
                 );
