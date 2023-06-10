@@ -276,13 +276,16 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                         ],
                         'date' => new DateTime($post->post_date),
                         'commentCount' => (int)$post->comment_count,
+                        'post_status' => 'publish',
                     ],
                     (object) [
                         'excerpt' => $post->post_excerpt,
                         'type' => $post->post_type,
+                        'post_status' => 'publish',
                     ],
                     (object) [
                         'hasComments' => ((int)$post->comment_count > 0),
+                        'post_status' => 'publish',
                     ],
                 ];
             case 'dummyListOfListsOfJSONObjects':
