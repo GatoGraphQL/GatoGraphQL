@@ -11,7 +11,7 @@ class FeedbackItemResolution extends UpstreamFeedbackItemResolution
     /**
      * @phpstan-param class-string<FeedbackItemProviderInterface> $feedbackProviderServiceClass
      * @param array<string|int|float|bool> $messageParams
-     * @param array<FeedbackItemResolution> $causes
+     * @param array<FeedbackItemResolution|SchemaFeedbackInterface|ObjectResolutionFeedbackInterface> $causes
      */
     public function __construct(
         string $feedbackProviderServiceClass,
@@ -31,7 +31,7 @@ class FeedbackItemResolution extends UpstreamFeedbackItemResolution
     }
 
     /**
-     * @return FeedbackItemResolution[]
+     * @return array<FeedbackItemResolution|SchemaFeedbackInterface|ObjectResolutionFeedbackInterface>
      */
     public function getCauses(): array
     {
