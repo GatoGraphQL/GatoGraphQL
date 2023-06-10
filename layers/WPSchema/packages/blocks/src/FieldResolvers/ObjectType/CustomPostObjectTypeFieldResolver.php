@@ -267,6 +267,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                         foreach ($blockInnerBlocks as &$innerBlock) {
                             $innerBlock->parentBlockPosition = $pos;
                         }
+                    } else {
+                        $block->innerBlockPositions = null;
                     }
 
                     /**
