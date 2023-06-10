@@ -566,10 +566,17 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         $entry = [
             Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
             Tokens::PATH => $this->getASTNodePath($astNode),
-            Tokens::IDS => $ids,
             Tokens::LOCATIONS => $locations,
             Tokens::EXTENSIONS => $extensions,
         ];
+
+        /**
+         * The $ids could be empty if the error happened on a
+         * nested directive. In that case, do not output it
+         */
+        if ($ids !== []) {
+            $entry[Tokens::IDS] = $ids;
+        }
         /**
          * Add the causes of the error, if any.
          *
