@@ -153,6 +153,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         switch ($fieldName) {
             case 'blocks':
             case 'blockDataItems':
+            case 'blockFlattenedDataItems':
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
                 $filterOptions = [];
@@ -221,7 +222,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     );
                 }
 
-                // $fieldName = 'blockDataItems'
+                if ($fieldName === 'blockDataItems') {
+                    return $blockContentParserPayload->blocks;
+                }
+
+                // $fieldName = 'blockFlattenedDataItems'
                 return $blockContentParserPayload->blocks;
         }
 
