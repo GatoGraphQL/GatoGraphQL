@@ -30,6 +30,16 @@ class FeedbackItemResolution extends UpstreamFeedbackItemResolution
         );
     }
 
+    public static function fromUpstreamFeedbackItemResolution(
+        UpstreamFeedbackItemResolution $upstreamFeedbackItemResolution,
+    ): self {
+        return new self(
+            $upstreamFeedbackItemResolution->getFeedbackProviderServiceClass(),
+            $upstreamFeedbackItemResolution->getCode(),
+            $upstreamFeedbackItemResolution->getMessageParams(),
+        );
+    }
+
     /**
      * @return array<FeedbackItemResolution|SchemaFeedbackInterface|ObjectResolutionFeedbackInterface>
      */
