@@ -229,12 +229,41 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 /**
                  * $fieldName = 'blockFlattenedDataItems'
                  * 
-                 * Traverse the "innerBlocks" property in each block,
-                 * bring those Blocks upward, and replace this property
-                 * with a corresponding "position" one, indicating where
-                 * those blocks are placed in the resulting array.
+                 * Traverse the "innerBlocks" property in each block, and:
+                 * 
+                 *   - Bring those Blocks upward
+                 *   - Replace property "innerBlocks" with a corresponding
+                 *     "innerBlockPositions" one, indicating where those blocks
+                 *     are placed in the resulting array.
+                 *   - Add property "parentBlockPosition", with value `null`
+                 *     for the first level of Blocks, or the position in the array
+                 *     otherwise
                  */
-                return $blockContentParserPayload->blocks;
+                $blockStack = $blockContentParserPayload->blocks;
+                /**
+                 * @var stdClass[]
+                 */
+                $blocks = [];
+                $pos = 0;
+                while ($blockStack !== []) {
+                    $block = array_shift($blockStack);
+                    if (isset($block->parentBlockPosition)) {
+                        $blocks[$block->parentBlockPosition]->innerBlockPositions ??= [];
+                        $blocks[$block->parentBlockPosition]->innerBlockPositions[] = $pos;
+                    } else {
+                        $block->parentBlockPosition = null;
+                    }
+                    foreach (($block->innerBlocks ?? []) as $innerBlock) {
+                        $innerBlock->parentBlockPosition = $pos;
+                    }
+                    $blockStack = array_merge(
+                        $blockStack,
+                        $block->innerBlocks ?? []
+                    );
+                    $blocks[] = $block;
+                    $pos++;
+                }
+                return $blocks;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
