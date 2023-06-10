@@ -226,7 +226,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     return $blockContentParserPayload->blocks;
                 }
 
-                // $fieldName = 'blockFlattenedDataItems'
+                /**
+                 * $fieldName = 'blockFlattenedDataItems'
+                 * 
+                 * Traverse the "innerBlocks" property in each block,
+                 * bring those Blocks upward, and replace this property
+                 * with a corresponding "position" one, indicating where
+                 * those blocks are placed in the resulting array.
+                 */
                 return $blockContentParserPayload->blocks;
         }
 
