@@ -238,6 +238,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                  *   - Add property "parentBlockPosition", with value `null`
                  *     for the first level of Blocks, or the position in the array
                  *     otherwise
+                 * 
+                 * @var stdClass[]
                  */
                 $blockStack = $blockContentParserPayload->blocks;
                 /**
@@ -290,7 +292,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $blocks[] = $block;
                     $pos++;
                 }
-                
+
                 return $blocks;
         }
 
