@@ -6,6 +6,7 @@
       ...BlockData
     }
     blockDataItems
+    blockFlattenedDataItems
   }
 
   includeBlockFilter1: post(by: { id: 19 }) {
@@ -18,6 +19,11 @@
       ...BlockData
     }
     blockDataItems(
+      filterBy: {
+        include: "core/heading"
+      }
+    )
+    blockFlattenedDataItems(
       filterBy: {
         include: "core/heading"
       }
@@ -37,6 +43,14 @@
       ...BlockData
     }
     blockDataItems(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns"
+        ]
+      }
+    )
+    blockFlattenedDataItems(
       filterBy: {
         include: [
           "core/heading",
@@ -68,6 +82,15 @@
         ]
       }
     )
+    blockFlattenedDataItems(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    )
   }
 
   includeBlockFilter4: post(by: { id: 19 }) {
@@ -83,6 +106,14 @@
       ...BlockData
     }
     blockDataItems(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/column"
+        ]
+      }
+    )
+    blockFlattenedDataItems(
       filterBy: {
         include: [
           "core/heading",
@@ -106,6 +137,11 @@
         exclude: "core/heading"
       }
     )
+    blockFlattenedDataItems(
+      filterBy: {
+        exclude: "core/heading"
+      }
+    )
   }
 
   excludeBlockFilter2: post(by: { id: 19 }) {
@@ -121,6 +157,14 @@
       ...BlockData
     }
     blockDataItems(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/columns"
+        ]
+      }
+    )
+    blockFlattenedDataItems(
       filterBy: {
         exclude: [
           "core/heading",
@@ -152,6 +196,15 @@
         ]
       }
     )
+    blockFlattenedDataItems(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    )
   }
 
   excludeBlockFilter4: post(by: { id: 19 }) {
@@ -174,6 +227,14 @@
         ]
       }
     )
+    blockFlattenedDataItems(
+      filterBy: {
+        exclude: [
+          "core/heading",
+          "core/column"
+        ]
+      }
+    )
   }
 
   page(by: { id: 2 }) {
@@ -183,6 +244,7 @@
       ...BlockData
     }
     blockDataItems
+    blockFlattenedDataItems
   }
 
   customPost(by: { id: 654 }) {
@@ -196,6 +258,7 @@
         ...BlockData
       }
       blockDataItems
+      blockFlattenedDataItems
     }
   }
 
@@ -210,6 +273,7 @@
         ...BlockData
       }
       blockDataItems
+      blockFlattenedDataItems
     }
   }
 
@@ -224,6 +288,7 @@
         ...BlockData
       }
       blockDataItems
+      blockFlattenedDataItems
     }
   }
 
@@ -238,6 +303,7 @@
         ...BlockData
       }
       blockDataItems
+      blockFlattenedDataItems
     }
   }
 
@@ -252,6 +318,7 @@
         ...BlockData
       }
       blockDataItems
+      blockFlattenedDataItems
     }
   }
 
@@ -266,6 +333,7 @@
         ...BlockData
       }
       blockDataItems
+      blockFlattenedDataItems
     }
   }
 }
