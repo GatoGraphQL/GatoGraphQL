@@ -11,11 +11,15 @@ use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaFieldDirectiveResolv
 use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -425,7 +429,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                 $nestedFieldDataAccessProviders[] = $nestedFieldDataAccessProvider;
             }
             // 2. Execute the composed directive pipeline on all arrayItems
-            $errorCount = $engineIterationFeedbackStore->getErrorCount();
+            $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $nestedDirectivePipeline->resolveDirectivePipeline(
                 $relationalTypeResolver,
                 $pipelineArrayItemIDsProperties, // Here we pass the properties to the array elements!
@@ -436,8 +440,13 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                 $previouslyResolvedIDFieldValues,
                 $resolvedIDFieldValues,
                 $messages,
-                $engineIterationFeedbackStore,
+                $separateEngineIterationFeedbackStore,
             );
+            $objectResolutionFeedbackStoreErrors = $separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors();
+            $schemaFeedbackStoreErrors = $separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors();
+            $separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->setErrors([]);
+            $separateEngineIterationFeedbackStore->schemaFeedbackStore->setErrors([]);
+            $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
 
             /**
              * Restore 'field-type-modifiers-for-serialization' to the previous state
@@ -447,7 +456,48 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             }
 
             // If any item fails, set the whole response field as null
-            if ($engineIterationFeedbackStore->getErrorCount() > $errorCount) {
+            if ($objectResolutionFeedbackStoreErrors !== [] || $schemaFeedbackStoreErrors !== []) {
+                // // Transfer the error to the composable directive
+                if ($schemaFeedbackStoreErrors !== [] > 0) {
+                    $fields = MethodHelpers::getFieldsFromIDFieldSet($idFieldSet);
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E18,
+                                [
+                                    $this->directive->asQueryString(),
+                                ]
+                            ),
+                            $this->directive,
+                            $relationalTypeResolver,
+                            $fields,
+                        )
+                    );
+                }
+
+                if ($objectResolutionFeedbackStoreErrors !== []) {
+                    $engineIterationFeedbackStore->objectResolutionFeedbackStore->addError(
+                        new ObjectResolutionFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E18,
+                                [
+                                    $this->directive->asQueryString(),
+                                ]
+                            ),
+                            $this->directive,
+                            $relationalTypeResolver,
+                            $this->directive,
+                            $idFieldSet
+                        )
+                    );
+                }
+
+                // $this->removeIDFieldSet(
+                //     $succeedingPipelineIDFieldSet,
+                //     $idFieldSet,
+                // );
                 $this->setFieldResponseValueAsNull(
                     $resolvedIDFieldValues,
                     $idFieldSet

@@ -26,6 +26,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E12 = 'e12';
     public final const E15 = 'e15';
     public final const E17 = 'e17';
+    public final const E18 = 'e18';
 
     /**
      * @return string[]
@@ -50,6 +51,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E12,
             self::E15,
             self::E17,
+            self::E18,
         ];
     }
 
@@ -73,6 +75,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E15 => $this->__('For directive \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
             self::E17 => $this->__('For field \'%s\', casting value \'%s\' for argument \'%s\' to type \'%s\' failed', 'component-model'),
+            self::E18 => $this->__('Resolving the nested directive(s) in meta directive \'%s\' produced errors', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
