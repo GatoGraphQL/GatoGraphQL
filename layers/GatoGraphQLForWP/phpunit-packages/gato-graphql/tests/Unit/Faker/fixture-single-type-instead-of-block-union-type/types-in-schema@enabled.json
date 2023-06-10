@@ -48,6 +48,12 @@
                             }
                         },
                         {
+                            "name": "blockFlattenedDataItems",
+                            "type": {
+                                "name": "[JSONObject!]"
+                            }
+                        },
+                        {
                             "name": "blocks",
                             "type": {
                                 "name": "[GeneralBlock!]"
