@@ -81,6 +81,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return [
             'blocks',
             'blockDataItems',
+            'blockFlattenedDataItems',
         ];
     }
 
@@ -89,6 +90,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return match ($fieldName) {
             'blocks' => $this->__('(Gutenberg) Blocks in a custom post', 'blocks'),
             'blockDataItems' => $this->__('(Gutenberg) Block data items (as JSON objects) in a custom post', 'blocks'),
+            'blockFlattenedDataItems' => $this->__('(Gutenberg) Flattened array containing the block data items (as JSON objects) in a custom post, and replacing property \'innerBlocks\' with \'innerBlockPositions\', indicating the position of the inner blocks in the array (starting from 0)', 'blocks'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -96,9 +98,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'blocks' => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
-            'blockDataItems' => $this->getJSONObjectScalarTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'blocks'
+                => BlockUnionTypeHelpers::getBlockUnionOrTargetObjectTypeResolver(),
+            'blockDataItems',
+            'blockFlattenedDataItems'
+                => $this->getJSONObjectScalarTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
@@ -106,7 +112,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'blocks',
-            'blockDataItems'
+            'blockDataItems',
+            'blockFlattenedDataItems'
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -121,7 +128,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
             'blocks',
-            'blockDataItems'
+            'blockDataItems',
+            'blockFlattenedDataItems'
                 => array_merge(
                     $fieldArgNameTypeResolvers,
                     [
@@ -145,6 +153,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         switch ($fieldName) {
             case 'blocks':
             case 'blockDataItems':
+            case 'blockFlattenedDataItems':
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
                 $filterOptions = [];
@@ -213,8 +222,83 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     );
                 }
 
-                // $fieldName = 'blockDataItems'
-                return $blockContentParserPayload->blocks;
+                if ($fieldName === 'blockDataItems') {
+                    return $blockContentParserPayload->blocks;
+                }
+
+                /**
+                 * $fieldName = 'blockFlattenedDataItems'
+                 * 
+                 * Traverse the "innerBlocks" property in each block, and:
+                 * 
+                 *   - Bring those Blocks upward
+                 *   - Replace property "innerBlocks" with a corresponding
+                 *     "innerBlockPositions" one, indicating where those blocks
+                 *     are placed in the resulting array.
+                 *   - Add property "parentBlockPosition", with value `null`
+                 *     for the first level of Blocks, or the position in the array
+                 *     otherwise
+                 * 
+                 * @var stdClass[]
+                 */
+                $blockStack = $blockContentParserPayload->blocks;
+                /**
+                 * @var stdClass[]
+                 */
+                $blocks = [];
+                $pos = 0;
+                while ($blockStack !== []) {
+                    $block = array_shift($blockStack);
+                    
+                    /** @var stdClass[]|null */
+                    $blockInnerBlocks = $block->innerBlocks;
+                    unset($block->innerBlocks);
+
+                    if ($blockInnerBlocks !== null) {
+                        /**
+                         * Initialize the property, it will be filled by the
+                         * children when they know their position in the array
+                         */
+                        $block->innerBlockPositions = [];
+                        
+                        /**
+                         * Set the "parentBlockPosition" on all innerBlocks
+                         */
+                        foreach ($blockInnerBlocks as &$innerBlock) {
+                            $innerBlock->parentBlockPosition = $pos;
+                        }
+                    } else {
+                        $block->innerBlockPositions = null;
+                    }
+
+                    /**
+                     * The first level of Blocks will set "parentBlockPosition" as `null`.
+                     * If it is an innerBlock, it will have the "parentBlockPosition"
+                     * already set.
+                     */                    
+                    if (isset($block->parentBlockPosition)) {
+                        $blocks[$block->parentBlockPosition]->innerBlockPositions[] = $pos;
+                    } else {
+                        $block->parentBlockPosition = null;
+                    }
+
+                    /**
+                     * Add the innerBlocks to the stack
+                     */
+                    if ($blockInnerBlocks !== null) {
+                        $blockStack = array_merge(
+                            // First place the innerBlocks in the stack, so they are all together
+                            $blockInnerBlocks,
+                            $blockStack,
+                        );
+                    }
+
+                    // Add the block to the response, and keep iterating
+                    $blocks[] = $block;
+                    $pos++;
+                }
+
+                return $blocks;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
