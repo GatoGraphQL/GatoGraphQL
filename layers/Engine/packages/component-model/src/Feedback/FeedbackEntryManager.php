@@ -577,6 +577,10 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         if ($ids !== []) {
             $entry[Tokens::IDS] = $ids;
         }
+        
+        $entry[Tokens::LOCATIONS] = $locations;
+        $entry[Tokens::EXTENSIONS] = $extensions;
+
         /**
          * Add the causes of the error, if any.
          *
