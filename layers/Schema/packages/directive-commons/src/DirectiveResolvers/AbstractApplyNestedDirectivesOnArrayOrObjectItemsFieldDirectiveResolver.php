@@ -14,9 +14,7 @@ use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
-use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
@@ -343,10 +341,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                         $resolvedIDFieldValues[$id][$arrayItemField] = $value;
                         // Place it into list of fields to process
                         $arrayItemIDsProperties[$id]->fields[] = $arrayItemField;
-                        
+
                         /**
                          * Indicate the cardinality for the array item.
-                         * 
+                         *
                          * Important: do it ALWAYS, and not only when
                          * $decreaseFieldTypeModifiersCardinalityForSerialization is true.
                          * That's because @underJSONObjectProperty does not decrease the
@@ -366,7 +364,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                             $fieldTypeModifiersByField[$arrayItemField] = $fieldTypeModifiersByField[$field];
                             $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
                         }
-                        
+
                         // Export the array item value into the dynamic variable
                         if (!empty($passValueOnwardsAs)) {
                             /** @var Argument $valueArgument */

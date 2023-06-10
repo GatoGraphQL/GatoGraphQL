@@ -552,7 +552,7 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         if ($ids !== []) {
             $entry[Tokens::IDS] = $ids;
         }
-        
+
         /**
          * If `null` use the Location from the astNode
          */
@@ -606,7 +606,8 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         }
         $entry[Tokens::CAUSES] = [];
         foreach ($feedbackItemResolution->getCauses() as $cause) {
-            if ($cause instanceof ObjectResolutionFeedbackInterface
+            if (
+                $cause instanceof ObjectResolutionFeedbackInterface
                 || $cause instanceof SchemaFeedbackInterface
             ) {
                 /** @var ObjectResolutionFeedbackInterface|SchemaFeedbackInterface */

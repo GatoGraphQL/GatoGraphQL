@@ -347,7 +347,7 @@ class BlockContentParser implements BlockContentParserInterface
          * Gato GraphQL addition
          */
         if ($this->includeInnerContent) {
-            $sourced_block['innerContent'] = $block['innerContent'];            
+            $sourced_block['innerContent'] = $block['innerContent'];
         }
 
         if (isset($block['innerBlocks'])) {
