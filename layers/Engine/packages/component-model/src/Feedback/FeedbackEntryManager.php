@@ -595,7 +595,10 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
             return;
         }
         $entry[Tokens::CAUSES] = [];
-        foreach ($feedbackItemResolution->getCauses() as $causeFeedbackItemResolution) {
+        foreach ($feedbackItemResolution->getCauses() as $cause) {
+
+            /** @var FeedbackItemResolution */
+            $causeFeedbackItemResolution = $cause;
             $causeSubentry = [
                 Tokens::MESSAGE => $causeFeedbackItemResolution->getMessage(),
             ];
