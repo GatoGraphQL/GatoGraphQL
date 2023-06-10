@@ -33,7 +33,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 use stdClass;
 
@@ -470,10 +470,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 [
                                     $this->directive->asQueryString(),
                                 ],
-                                array_map(
-                                    fn (SchemaFeedbackInterface $schemaFeedback) => $schemaFeedback->getFeedbackItemResolution(),
-                                    $schemaFeedbackStoreErrors
-                                )
+                                $schemaFeedbackStoreErrors
                             ),
                             $this->directive,
                             $relationalTypeResolver,
@@ -491,10 +488,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 [
                                     $this->directive->asQueryString(),
                                 ],
-                                array_map(
-                                    fn (ObjectResolutionFeedbackInterface $objectResolutionFeedback) => $objectResolutionFeedback->getFeedbackItemResolution(),
-                                    $objectResolutionFeedbackStoreErrors
-                                )
+                                $objectResolutionFeedbackStoreErrors
                             ),
                             $this->directive,
                             $relationalTypeResolver,

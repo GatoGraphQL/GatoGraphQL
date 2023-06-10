@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Exception\GenericClientException;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP_Forms_ConfigurationUtils;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver

@@ -13,7 +13,7 @@ use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP_ApplicationProcessors_Utils;
 
 abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends UpstreamAbstractCreateOrUpdateCustomPostMutationResolver

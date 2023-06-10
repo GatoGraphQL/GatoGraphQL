@@ -54,7 +54,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 /**
@@ -1275,7 +1275,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
                     $engineIterationFeedbackStore,
                 );
             } catch (AbstractQueryException $queryException) {
-                $feedbackItemResolution = $queryException->getFeedbackItemResolution();
+                $feedbackItemResolution = FeedbackItemResolution::fromUpstreamFeedbackItemResolution($queryException->getFeedbackItemResolution());
                 $astNode = $queryException->getAstNode();
             } catch (AbstractClientException $e) {
                 $feedbackItemResolution = new FeedbackItemResolution(

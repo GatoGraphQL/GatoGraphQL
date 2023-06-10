@@ -19,7 +19,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\ComponentModel\AbstractTestCase;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractMultipleQueryExecutionTestCase extends AbstractTestCase

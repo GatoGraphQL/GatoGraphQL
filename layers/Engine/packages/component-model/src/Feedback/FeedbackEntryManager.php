@@ -21,7 +21,7 @@ use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
@@ -540,6 +540,19 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         FeedbackItemResolution $feedbackItemResolution,
         array $ids,
     ): array {
+        $entry = [
+            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
+            Tokens::PATH => $this->getASTNodePath($astNode),
+        ];
+
+        /**
+         * The $ids could be empty if the error happened on a
+         * nested directive. In that case, do not output it
+         */
+        if ($ids !== []) {
+            $entry[Tokens::IDS] = $ids;
+        }
+        
         /**
          * If `null` use the Location from the astNode
          */
@@ -559,17 +572,14 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
         if ($location !== null && !($location instanceof RuntimeLocation)) {
             $locations[] = $location->toArray();
         }
+        $entry[Tokens::LOCATIONS] = $locations;
+
         $extensions = $this->addFeedbackEntryExtensions(
             $extensions,
             $feedbackItemResolution
         );
-        $entry = [
-            Tokens::MESSAGE => $feedbackItemResolution->getMessage(),
-            Tokens::PATH => $this->getASTNodePath($astNode),
-            Tokens::IDS => $ids,
-            Tokens::LOCATIONS => $locations,
-            Tokens::EXTENSIONS => $extensions,
-        ];
+        $entry[Tokens::EXTENSIONS] = $extensions;
+
         /**
          * Add the causes of the error, if any.
          *
@@ -595,10 +605,22 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
             return;
         }
         $entry[Tokens::CAUSES] = [];
-        foreach ($feedbackItemResolution->getCauses() as $causeFeedbackItemResolution) {
+        foreach ($feedbackItemResolution->getCauses() as $cause) {
+            if ($cause instanceof ObjectResolutionFeedbackInterface
+                || $cause instanceof SchemaFeedbackInterface
+            ) {
+                /** @var ObjectResolutionFeedbackInterface|SchemaFeedbackInterface */
+                $causeObjectOrSchemaFeedback = $cause;
+                $entry[Tokens::CAUSES][] = $this->getObjectOrSchemaFeedbackCommonEntry($causeObjectOrSchemaFeedback);
+                continue;
+            }
+
+            /** @var FeedbackItemResolution */
+            $causeFeedbackItemResolution = $cause;
             $causeSubentry = [
                 Tokens::MESSAGE => $causeFeedbackItemResolution->getMessage(),
             ];
+
             /**
              * The cause may itself have its own underlying causes
              */

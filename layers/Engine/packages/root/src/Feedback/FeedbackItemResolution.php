@@ -15,17 +15,12 @@ class FeedbackItemResolution
     /**
      * @phpstan-param class-string<FeedbackItemProviderInterface> $feedbackProviderServiceClass
      * @param array<string|int|float|bool> $messageParams
-     * @param FeedbackItemResolution[] $causes
      */
     public function __construct(
         protected string $feedbackProviderServiceClass,
         protected string $code,
         /** @var array<string|int|float|bool> */
         protected array $messageParams = [],
-        /**
-         * @see https://github.com/graphql/graphql-spec/issues/893
-         */
-        protected array $causes = [],
     ) {
     }
 
@@ -48,14 +43,6 @@ class FeedbackItemResolution
     public function getMessageParams(): array
     {
         return $this->messageParams;
-    }
-
-    /**
-     * @return FeedbackItemResolution[]
-     */
-    public function getCauses(): array
-    {
-        return $this->causes;
     }
 
     final public function getFeedbackItemProvider(): FeedbackItemProviderInterface

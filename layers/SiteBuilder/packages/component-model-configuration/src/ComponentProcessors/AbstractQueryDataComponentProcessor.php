@@ -8,7 +8,7 @@ use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\QueryDataComponentProcessorInterface;
 use PoP\ComponentModel\ComponentProcessors\QueryDataComponentProcessorTrait;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 abstract class AbstractQueryDataComponentProcessor extends AbstractComponentProcessor implements QueryDataComponentProcessorInterface
 {
