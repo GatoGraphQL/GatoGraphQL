@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 /**
  * Error that concern the GraphQL query. the `$astNode` is the

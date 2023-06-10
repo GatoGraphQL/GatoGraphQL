@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\OutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, OutputTypeResolverInterface

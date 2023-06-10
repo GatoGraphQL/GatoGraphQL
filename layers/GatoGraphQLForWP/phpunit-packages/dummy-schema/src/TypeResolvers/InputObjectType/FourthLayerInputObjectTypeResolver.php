@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 class FourthLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {

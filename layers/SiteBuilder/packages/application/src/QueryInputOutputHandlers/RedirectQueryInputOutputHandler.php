@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Application\QueryInputOutputHandlers;
 
 use PoP\Application\Constants\Response;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\Root\App;

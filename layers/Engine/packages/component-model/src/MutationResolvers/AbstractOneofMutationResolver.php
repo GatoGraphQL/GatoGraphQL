@@ -14,7 +14,7 @@ use PoP\ComponentModel\QueryResolution\InputObjectSubpropertyFieldDataAccessorIn
 use PoP\GraphQLParser\Exception\AbstractValueResolutionPromiseException;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractOneofMutationResolver extends AbstractMutationResolver

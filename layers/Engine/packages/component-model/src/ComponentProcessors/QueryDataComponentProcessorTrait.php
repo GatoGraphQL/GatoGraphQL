@@ -13,7 +13,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\App;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 trait QueryDataComponentProcessorTrait
 {

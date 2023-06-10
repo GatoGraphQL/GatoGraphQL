@@ -11,7 +11,7 @@ use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\SchemaCommons\FeedbackItemProviders\FeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\FilterInputs\LimitFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\OffsetFilterInput;

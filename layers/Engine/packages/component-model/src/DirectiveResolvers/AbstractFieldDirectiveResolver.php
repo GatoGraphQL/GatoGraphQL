@@ -54,7 +54,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 /**

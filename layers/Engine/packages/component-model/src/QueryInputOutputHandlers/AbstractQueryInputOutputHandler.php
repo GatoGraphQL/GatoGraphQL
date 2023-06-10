@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryInputOutputHandlers;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 abstract class AbstractQueryInputOutputHandler implements QueryInputOutputHandlerInterface
 {

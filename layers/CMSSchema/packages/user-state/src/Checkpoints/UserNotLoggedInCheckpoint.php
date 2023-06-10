@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserState\Checkpoints;
 
 use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 

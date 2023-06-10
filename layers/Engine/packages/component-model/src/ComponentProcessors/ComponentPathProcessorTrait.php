@@ -11,7 +11,7 @@ use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleInfo;
 use PoP\Root\App;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 trait ComponentPathProcessorTrait
 {

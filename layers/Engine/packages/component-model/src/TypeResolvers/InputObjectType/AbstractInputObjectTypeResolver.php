@@ -20,7 +20,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarType
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface

@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Component\Component;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 interface EngineInterface
 {

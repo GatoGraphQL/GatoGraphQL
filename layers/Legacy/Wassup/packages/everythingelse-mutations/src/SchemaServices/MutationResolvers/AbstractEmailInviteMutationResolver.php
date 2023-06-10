@@ -13,7 +13,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Exception\GenericClientException;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP_EmailSender_Utils;
 use PoP_FormUtils;
 

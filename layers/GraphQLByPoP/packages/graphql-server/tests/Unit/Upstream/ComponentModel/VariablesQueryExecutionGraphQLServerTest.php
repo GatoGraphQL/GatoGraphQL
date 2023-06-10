@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit\Upstream\ComponentModel;
 use GraphQLByPoP\GraphQLServer\Unit\AbstractGraphQLServerTestCase;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 class VariablesQueryExecutionGraphQLServerTest extends AbstractGraphQLServerTestCase
 {

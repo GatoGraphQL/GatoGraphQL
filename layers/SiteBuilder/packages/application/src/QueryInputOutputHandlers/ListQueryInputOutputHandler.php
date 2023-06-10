@@ -9,7 +9,7 @@ use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler as UpstreamListQueryInputOutputHandler;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;

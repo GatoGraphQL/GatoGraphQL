@@ -7,7 +7,7 @@ namespace PoP\Application\ComponentProcessors;
 use PoP\ComponentModel\Component\Component;
 use PoP\Application\Constants\Actions;
 use PoP\Application\Environment;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ConfigurationComponentModel\ComponentProcessors\AbstractComponentProcessor as UpstreamAbstractComponentProcessor;
 use PoP\Root\App;
 use PoP\SiteBuilderAPI\ComponentProcessors\AddAPIQueryToSourcesComponentProcessorTrait;

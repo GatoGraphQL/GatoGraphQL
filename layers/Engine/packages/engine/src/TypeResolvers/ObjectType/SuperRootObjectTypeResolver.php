@@ -15,7 +15,7 @@ use PoP\Engine\ObjectModels\SuperRoot;
 use PoP\Engine\RelationalTypeDataLoaders\ObjectType\SuperRootObjectTypeDataLoader;
 use PoP\Engine\StaticHelpers\SuperRootHelper;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 {

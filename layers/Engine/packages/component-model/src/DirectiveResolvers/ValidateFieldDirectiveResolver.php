@@ -17,7 +17,7 @@ use PoP\ComponentModel\TypeSerialization\TypeSerializationServiceInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver

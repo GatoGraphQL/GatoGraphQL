@@ -16,7 +16,7 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ConfigurationComponentModel\Constants\Targets;
 use PoP\Root\App;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class LazyLoadHookSet extends AbstractHookSet

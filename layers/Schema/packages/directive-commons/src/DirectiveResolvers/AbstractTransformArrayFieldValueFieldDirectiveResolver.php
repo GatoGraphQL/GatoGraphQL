@@ -8,7 +8,7 @@ use PoPSchema\DirectiveCommons\FeedbackItemProviders\FeedbackItemProvider;
 use PoPSchema\DirectiveCommons\ObjectModels\TypedDataValidationPayload;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 abstract class AbstractTransformArrayFieldValueFieldDirectiveResolver extends AbstractTransformTypedFieldValueFieldDirectiveResolver
 {
