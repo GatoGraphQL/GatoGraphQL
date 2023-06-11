@@ -262,34 +262,34 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                  *
                  * @var stdClass[]
                  */
-                $blockStack = $blockContentParserPayload->blocks;
+                $stack = $blockContentParserPayload->blocks;
                 /**
                  * @var stdClass[]
                  */
-                $blocks = [];
+                $blockDataItems = [];
                 $pos = 0;
-                while ($blockStack !== []) {
-                    $block = array_shift($blockStack);
+                while ($stack !== []) {
+                    $blockDataItem = array_shift($stack);
 
                     /** @var stdClass[]|null */
-                    $blockInnerBlocks = $block->innerBlocks;
-                    unset($block->innerBlocks);
+                    $blockDataItemInnerBlocks = $blockDataItem->innerBlocks;
+                    unset($blockDataItem->innerBlocks);
 
-                    if ($blockInnerBlocks !== null) {
+                    if ($blockDataItemInnerBlocks !== null) {
                         /**
                          * Initialize the property, it will be filled by the
                          * children when they know their position in the array
                          */
-                        $block->innerBlockPositions = [];
+                        $blockDataItem->innerBlockPositions = [];
 
                         /**
                          * Set the "parentBlockPosition" on all innerBlocks
                          */
-                        foreach ($blockInnerBlocks as &$innerBlock) {
+                        foreach ($blockDataItemInnerBlocks as &$innerBlock) {
                             $innerBlock->parentBlockPosition = $pos;
                         }
                     } else {
-                        $block->innerBlockPositions = null;
+                        $blockDataItem->innerBlockPositions = null;
                     }
 
                     /**
@@ -297,25 +297,25 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                      * If it is an innerBlock, it will have the "parentBlockPosition"
                      * already set.
                      */
-                    if (isset($block->parentBlockPosition)) {
-                        $blocks[$block->parentBlockPosition]->innerBlockPositions[] = $pos;
+                    if (isset($blockDataItem->parentBlockPosition)) {
+                        $blockDataItems[$blockDataItem->parentBlockPosition]->innerBlockPositions[] = $pos;
                     } else {
-                        $block->parentBlockPosition = null;
+                        $blockDataItem->parentBlockPosition = null;
                     }
 
                     /**
                      * Add the innerBlocks to the stack
                      */
-                    if ($blockInnerBlocks !== null) {
-                        $blockStack = array_merge(
+                    if ($blockDataItemInnerBlocks !== null) {
+                        $stack = array_merge(
                             // First place the innerBlocks in the stack, so they are all together
-                            $blockInnerBlocks,
-                            $blockStack,
+                            $blockDataItemInnerBlocks,
+                            $stack,
                         );
                     }
 
                     // Add the block to the response, and keep iterating
-                    $blocks[] = $block;
+                    $blockDataItems[] = $blockDataItem;
                     $pos++;
                 }
 
@@ -326,20 +326,20 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 if (isset($filterBy->include)) {
                     /** @var string[] */
                     $includeBlockNames = $filterBy->include;
-                    $blocks = array_values(array_filter(
-                        $blocks,
-                        fn (stdClass $blockItem) => in_array($blockItem->name, $includeBlockNames)
+                    $blockDataItems = array_values(array_filter(
+                        $blockDataItems,
+                        fn (stdClass $blockDataItemItem) => in_array($blockDataItemItem->name, $includeBlockNames)
                     ));
                 } elseif (isset($filterBy->exclude)) {
                     /** @var string[] */
                     $excludeBlockNames = $filterBy->exclude;
-                    $blocks = array_values(array_filter(
-                        $blocks,
-                        fn (stdClass $blockItem) => !in_array($blockItem->name, $excludeBlockNames)
+                    $blockDataItems = array_values(array_filter(
+                        $blockDataItems,
+                        fn (stdClass $blockDataItemItem) => !in_array($blockDataItemItem->name, $excludeBlockNames)
                     ));
                 }
                 
-                 return $blocks;
+                 return $blockDataItems;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
