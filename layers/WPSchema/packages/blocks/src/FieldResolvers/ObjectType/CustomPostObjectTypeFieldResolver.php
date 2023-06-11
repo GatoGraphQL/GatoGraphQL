@@ -285,8 +285,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                         /**
                          * Set the "parentBlockPosition" on all innerBlocks
                          */
-                        foreach ($blockDataItemInnerBlocks as &$innerBlock) {
-                            $innerBlock->parentBlockPosition = $pos;
+                        foreach ($blockDataItemInnerBlocks as &$innerBlockDataItem) {
+                            $innerBlockDataItem->parentBlockPosition = $pos;
                         }
                     } else {
                         $blockDataItem->innerBlockPositions = null;
