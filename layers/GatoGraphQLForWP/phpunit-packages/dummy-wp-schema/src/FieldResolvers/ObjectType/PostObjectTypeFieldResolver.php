@@ -290,6 +290,14 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                             'raw' => $post->post_content,
                         ],
                     ],
+                    'originalProperties' => (object) [
+                        'title' => (object) [
+                            'original' => $post->post_title,
+                        ],
+                        'content' => (object) [
+                            'original' => $post->post_content,
+                        ],
+                    ],
                 ];
             case 'dummyListOfJSONObjects':
                 return [
