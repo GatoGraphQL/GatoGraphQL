@@ -326,17 +326,17 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 if (isset($filterBy->include)) {
                     /** @var string[] */
                     $includeBlockNames = $filterBy->include;
-                    $blocks = array_filter(
+                    $blocks = array_values(array_filter(
                         $blocks,
                         fn (stdClass $blockItem) => in_array($blockItem->name, $includeBlockNames)
-                    );
+                    ));
                 } elseif (isset($filterBy->exclude)) {
                     /** @var string[] */
                     $excludeBlockNames = $filterBy->exclude;
-                    $blocks = array_filter(
+                    $blocks = array_values(array_filter(
                         $blocks,
                         fn (stdClass $blockItem) => !in_array($blockItem->name, $excludeBlockNames)
-                    );
+                    ));
                 }
                 
                  return $blocks;
