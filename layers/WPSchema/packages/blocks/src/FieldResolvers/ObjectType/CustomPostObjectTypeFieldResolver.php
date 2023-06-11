@@ -323,20 +323,32 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                  * The filtering is done only now, as to retrieve all
                  * blocks all the way down to the last level (see PHPDoc above)
                  */
-                if (isset($filterBy->include)) {
-                    /** @var string[] */
-                    $includeBlockNames = $filterBy->include;
-                    $blockDataItems = array_values(array_filter(
-                        $blockDataItems,
-                        fn (stdClass $blockDataItemItem) => in_array($blockDataItemItem->name, $includeBlockNames)
-                    ));
-                } elseif (isset($filterBy->exclude)) {
-                    /** @var string[] */
-                    $excludeBlockNames = $filterBy->exclude;
-                    $blockDataItems = array_values(array_filter(
-                        $blockDataItems,
-                        fn (stdClass $blockDataItemItem) => !in_array($blockDataItemItem->name, $excludeBlockNames)
-                    ));
+                if (isset($filterBy->include) || isset($filterBy->exclude)) {
+                    if (isset($filterBy->include)) {
+                        /** @var string[] */
+                        $includeBlockNames = $filterBy->include;
+                        $blockDataItems = array_values(array_filter(
+                            $blockDataItems,
+                            fn (stdClass $blockDataItemItem) => in_array($blockDataItemItem->name, $includeBlockNames)
+                        ));
+                    } elseif (isset($filterBy->exclude)) {
+                        /** @var string[] */
+                        $excludeBlockNames = $filterBy->exclude;
+                        $blockDataItems = array_values(array_filter(
+                            $blockDataItems,
+                            fn (stdClass $blockDataItemItem) => !in_array($blockDataItemItem->name, $excludeBlockNames)
+                        ));
+                    }
+
+                    /**
+                     * Remove the "parentBlockPosition" and "innerBlockPositions" properties,
+                     * as they make no sense anymore (they might point to a position that does
+                     * not exist, or is now occupied by a different block)
+                     */
+                    foreach ($blockDataItems as &$blockDataItem) {
+                        unset($blockDataItem->parentBlockPosition);
+                        unset($blockDataItem->innerBlockPositions);
+                    }
                 }
                 
                  return $blockDataItems;
