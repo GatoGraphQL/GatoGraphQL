@@ -156,18 +156,39 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             case 'blockFlattenedDataItems':
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
-                $filterOptions = [];
-                if (isset($filterBy->include)) {
-                    $filterOptions['include'] = $filterBy->include;
-                } elseif (isset($filterBy->exclude)) {
-                    $filterOptions['exclude'] = $filterBy->exclude;
-                }
 
-                $options = [
-                    'filter' => $filterOptions,
-                ];
-                if ($fieldName === 'blocks') {
-                    $options['include-inner-content'] = true;
+                $options = [];
+
+                /**
+                 * Add the filtering options.
+                 * 
+                 * Field "blockFlattenedDataItems" will do its own filtering
+                 * at the end, as to retrieve all blocks all the way down
+                 * to the last level.
+                 *
+                 * i.e. When filtering by "core/heading":
+                 * 
+                 *   - "blocks" and "blockDataItems" will exclude these blocks
+                 *     if they are innerBlocks inside "core/column"
+                 *   - "blockFlattenedDataItems" will retrieve all blocks, flatten them,
+                 *     and only then apply the filtering, hence innerBlocks in inside
+                 *     "core/column" will also show up
+                 */
+                if (in_array($fieldName, [
+                    'blocks',
+                    'blockDataItems'
+                ])) {
+                    $filterOptions = [];
+                    if (isset($filterBy->include)) {
+                        $filterOptions['include'] = $filterBy->include;
+                    } elseif (isset($filterBy->exclude)) {
+                        $filterOptions['exclude'] = $filterBy->exclude;
+                    }
+                    $options['filter'] = $filterOptions;
+
+                    if ($fieldName === 'blocks') {
+                        $options['include-inner-content'] = true;
+                    }
                 }
 
                 $blockContentParserPayload = null;
