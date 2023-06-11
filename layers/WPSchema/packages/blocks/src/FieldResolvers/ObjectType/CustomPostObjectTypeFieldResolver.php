@@ -260,9 +260,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                  *     for the first level of Blocks, or the position in the array
                  *     otherwise
                  *
-                 * Notice that the filtering is done only now, as to retrieve all
-                 * blocks all the way down to the last level (see PHPDoc above)
-                 *
                  * @var stdClass[]
                  */
                 $blockStack = $blockContentParserPayload->blocks;
@@ -322,7 +319,27 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $pos++;
                 }
 
-                return $blocks;
+                /**
+                 * The filtering is done only now, as to retrieve all
+                 * blocks all the way down to the last level (see PHPDoc above)
+                 */
+                if (isset($filterBy->include)) {
+                    /** @var string[] */
+                    $includeBlockNames = $filterBy->include;
+                    $blocks = array_filter(
+                        $blocks,
+                        fn (stdClass $blockItem) => in_array($blockItem->name, $includeBlockNames)
+                    );
+                } elseif (isset($filterBy->exclude)) {
+                    /** @var string[] */
+                    $excludeBlockNames = $filterBy->exclude;
+                    $blocks = array_filter(
+                        $blocks,
+                        fn (stdClass $blockItem) => !in_array($blockItem->name, $excludeBlockNames)
+                    );
+                }
+                
+                 return $blocks;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
