@@ -156,18 +156,39 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             case 'blockFlattenedDataItems':
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
-                $filterOptions = [];
-                if (isset($filterBy->include)) {
-                    $filterOptions['include'] = $filterBy->include;
-                } elseif (isset($filterBy->exclude)) {
-                    $filterOptions['exclude'] = $filterBy->exclude;
-                }
 
-                $options = [
-                    'filter' => $filterOptions,
-                ];
-                if ($fieldName === 'blocks') {
-                    $options['include-inner-content'] = true;
+                $options = [];
+
+                /**
+                 * Add the filtering options.
+                 * 
+                 * Field "blockFlattenedDataItems" will do its own filtering
+                 * at the end, as to retrieve all blocks all the way down
+                 * to the last level.
+                 *
+                 * i.e. When filtering by "core/heading":
+                 * 
+                 *   - "blocks" and "blockDataItems" will exclude these blocks
+                 *     if they are innerBlocks inside "core/column"
+                 *   - "blockFlattenedDataItems" will retrieve all blocks, flatten them,
+                 *     and only then apply the filtering, hence innerBlocks in inside
+                 *     "core/column" will also show up
+                 */
+                if (in_array($fieldName, [
+                    'blocks',
+                    'blockDataItems'
+                ])) {
+                    $filterOptions = [];
+                    if (isset($filterBy->include)) {
+                        $filterOptions['include'] = $filterBy->include;
+                    } elseif (isset($filterBy->exclude)) {
+                        $filterOptions['exclude'] = $filterBy->exclude;
+                    }
+                    $options['filter'] = $filterOptions;
+
+                    if ($fieldName === 'blocks') {
+                        $options['include-inner-content'] = true;
+                    }
                 }
 
                 $blockContentParserPayload = null;
@@ -241,34 +262,34 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                  *
                  * @var stdClass[]
                  */
-                $blockStack = $blockContentParserPayload->blocks;
+                $stack = $blockContentParserPayload->blocks;
                 /**
                  * @var stdClass[]
                  */
-                $blocks = [];
+                $blockDataItems = [];
                 $pos = 0;
-                while ($blockStack !== []) {
-                    $block = array_shift($blockStack);
+                while ($stack !== []) {
+                    $blockDataItem = array_shift($stack);
 
                     /** @var stdClass[]|null */
-                    $blockInnerBlocks = $block->innerBlocks;
-                    unset($block->innerBlocks);
+                    $blockDataItemInnerBlocks = $blockDataItem->innerBlocks;
+                    unset($blockDataItem->innerBlocks);
 
-                    if ($blockInnerBlocks !== null) {
+                    if ($blockDataItemInnerBlocks !== null) {
                         /**
                          * Initialize the property, it will be filled by the
                          * children when they know their position in the array
                          */
-                        $block->innerBlockPositions = [];
+                        $blockDataItem->innerBlockPositions = [];
 
                         /**
                          * Set the "parentBlockPosition" on all innerBlocks
                          */
-                        foreach ($blockInnerBlocks as &$innerBlock) {
-                            $innerBlock->parentBlockPosition = $pos;
+                        foreach ($blockDataItemInnerBlocks as &$innerBlockDataItem) {
+                            $innerBlockDataItem->parentBlockPosition = $pos;
                         }
                     } else {
-                        $block->innerBlockPositions = null;
+                        $blockDataItem->innerBlockPositions = null;
                     }
 
                     /**
@@ -276,29 +297,61 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                      * If it is an innerBlock, it will have the "parentBlockPosition"
                      * already set.
                      */
-                    if (isset($block->parentBlockPosition)) {
-                        $blocks[$block->parentBlockPosition]->innerBlockPositions[] = $pos;
+                    if (isset($blockDataItem->parentBlockPosition)) {
+                        $blockDataItems[$blockDataItem->parentBlockPosition]->innerBlockPositions[] = $pos;
                     } else {
-                        $block->parentBlockPosition = null;
+                        $blockDataItem->parentBlockPosition = null;
                     }
 
                     /**
                      * Add the innerBlocks to the stack
                      */
-                    if ($blockInnerBlocks !== null) {
-                        $blockStack = array_merge(
+                    if ($blockDataItemInnerBlocks !== null) {
+                        $stack = array_merge(
                             // First place the innerBlocks in the stack, so they are all together
-                            $blockInnerBlocks,
-                            $blockStack,
+                            $blockDataItemInnerBlocks,
+                            $stack,
                         );
                     }
 
                     // Add the block to the response, and keep iterating
-                    $blocks[] = $block;
+                    $blockDataItems[] = $blockDataItem;
                     $pos++;
                 }
 
-                return $blocks;
+                /**
+                 * The filtering is done only now, as to retrieve all
+                 * blocks all the way down to the last level (see PHPDoc above)
+                 */
+                if (isset($filterBy->include) || isset($filterBy->exclude)) {
+                    if (isset($filterBy->include)) {
+                        /** @var string[] */
+                        $includeBlockNames = $filterBy->include;
+                        $blockDataItems = array_values(array_filter(
+                            $blockDataItems,
+                            fn (stdClass $blockDataItemItem) => in_array($blockDataItemItem->name, $includeBlockNames)
+                        ));
+                    } elseif (isset($filterBy->exclude)) {
+                        /** @var string[] */
+                        $excludeBlockNames = $filterBy->exclude;
+                        $blockDataItems = array_values(array_filter(
+                            $blockDataItems,
+                            fn (stdClass $blockDataItemItem) => !in_array($blockDataItemItem->name, $excludeBlockNames)
+                        ));
+                    }
+
+                    /**
+                     * Remove the "parentBlockPosition" and "innerBlockPositions" properties,
+                     * as they make no sense anymore (they might point to a position that does
+                     * not exist, or is now occupied by a different block)
+                     */
+                    foreach ($blockDataItems as &$blockDataItem) {
+                        unset($blockDataItem->parentBlockPosition);
+                        unset($blockDataItem->innerBlockPositions);
+                    }
+                }
+                
+                 return $blockDataItems;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
