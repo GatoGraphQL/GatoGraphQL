@@ -260,6 +260,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                  *     for the first level of Blocks, or the position in the array
                  *     otherwise
                  *
+                 * Notice that the filtering is done only now, as to retrieve all
+                 * blocks all the way down to the last level (see PHPDoc above)
+                 *
                  * @var stdClass[]
                  */
                 $blockStack = $blockContentParserPayload->blocks;
