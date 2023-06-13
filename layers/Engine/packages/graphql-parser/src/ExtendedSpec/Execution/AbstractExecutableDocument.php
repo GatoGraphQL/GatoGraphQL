@@ -254,18 +254,25 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
              */
             $dependedUponOperationNames = array_values(array_unique($dependedUponOperationNames));
 
-            foreach ($dependedUponOperationNames as $dependedUponOperationName) {
-                /**
-                 * It can't be null, or it will already fail in ->validate
-                 *
-                 * @var OperationInterface
-                 */
-                $dependedUponOperation = $this->getOperationByName(
-                    $dependedUponOperationName,
-                    $operations,
-                );
-                $dependedUponOperations[] = $dependedUponOperation;
-            }
+            $dependedUponOperations = array_merge(
+                $dependedUponOperations,
+                array_map(
+                    function (string $dependedUponOperationName) use ($operations): OperationInterface
+                    {
+                        /**
+                         * It can't be null, or it will already fail in ->validate
+                         *
+                         * @var OperationInterface
+                         */                        
+                        $dependedUponOperation = $this->getOperationByName(
+                            $dependedUponOperationName,
+                            $operations,
+                        );
+                        return $dependedUponOperation;
+                    },
+                    $dependedUponOperationNames
+                )
+            );
         }
 
         return $dependedUponOperations;
