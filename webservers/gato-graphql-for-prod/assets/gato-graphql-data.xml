@@ -2486,7 +2486,7 @@ video/mp4
 		<guid isPermaLink="false">https://gato-graphql-pro.lndo.site/?p=1242</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">This is a heading (H1) - $1</h1>
+<h1 class="wp-block-heading">This is a heading (H1) - (Regex test: $1 #1)</h1>
 <!-- /wp:heading -->
 
 <!-- wp:heading -->
