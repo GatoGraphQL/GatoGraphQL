@@ -296,7 +296,15 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          * after the final loop, all operations still have
          * the right order of dependencies
          */
-        // foreach ($dependedUponOperation)
+        foreach ($this->getDependedUponOperations($dependedUponOperation, $operations) as $dependedUponOperationDependedUponOperation) {
+            $multipleQueryExecutionOperations = $this->moveDependedUponOperationBeforeOperation(
+                $multipleQueryExecutionOperations,
+                $operation,
+                $dependedUponOperationDependedUponOperation,
+                $upcomingDependedUponOperation,
+                $operations,
+            );
+        }
 
         /** @var int */
         $dependedUponOperationPos = array_search(
