@@ -792,10 +792,10 @@ class Document implements DocumentInterface
             /** @var SplObjectStorage<AstInterface,AstInterface> */
             $astNodeAncestors = new SplObjectStorage();
             foreach ($this->operations as $operation) {
-                $this->setAncestorsUnderOperation($astNodeAncestors, $operation);
+                $this->setASTNodeAncestorsUnderOperation($astNodeAncestors, $operation);
             }
             foreach ($this->fragments as $fragment) {
-                $this->setAncestorsUnderFragment($astNodeAncestors, $fragment);
+                $this->setASTNodeAncestorsUnderFragment($astNodeAncestors, $fragment);
             }
             $this->astNodeAncestors = $astNodeAncestors;
         }
@@ -806,77 +806,77 @@ class Document implements DocumentInterface
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderOperation(SplObjectStorage $astNodeAncestors, OperationInterface $operation): void
+    protected function setASTNodeAncestorsUnderOperation(SplObjectStorage $astNodeAncestors, OperationInterface $operation): void
     {
         foreach ($operation->getVariables() as $variable) {
             $astNodeAncestors[$variable] = $operation;
-            $this->setAncestorsUnderVariable($astNodeAncestors, $variable);
+            $this->setASTNodeAncestorsUnderVariable($astNodeAncestors, $variable);
         }
         foreach ($operation->getDirectives() as $directive) {
             $astNodeAncestors[$directive] = $operation;
-            $this->setAncestorsUnderDirective($astNodeAncestors, $directive);
+            $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
         }
         foreach ($operation->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
             $astNodeAncestors[$fieldOrFragmentBond] = $operation;
-            $this->setAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
+            $this->setASTNodeAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
         }
     }
 
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderVariable(SplObjectStorage $astNodeAncestors, Variable $variable): void
+    protected function setASTNodeAncestorsUnderVariable(SplObjectStorage $astNodeAncestors, Variable $variable): void
     {
         foreach ($variable->getDirectives() as $directive) {
             $astNodeAncestors[$directive] = $variable;
-            $this->setAncestorsUnderDirective($astNodeAncestors, $directive);
+            $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
         }
     }
 
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderDirective(SplObjectStorage $astNodeAncestors, Directive $directive): void
+    protected function setASTNodeAncestorsUnderDirective(SplObjectStorage $astNodeAncestors, Directive $directive): void
     {
         foreach ($directive->getArguments() as $argument) {
             $astNodeAncestors[$argument] = $directive;
-            $this->setAncestorsUnderArgument($astNodeAncestors, $argument);
+            $this->setASTNodeAncestorsUnderArgument($astNodeAncestors, $argument);
         }
     }
 
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderArgument(SplObjectStorage $astNodeAncestors, Argument $argument): void
+    protected function setASTNodeAncestorsUnderArgument(SplObjectStorage $astNodeAncestors, Argument $argument): void
     {
         /** @var Enum|InputList|InputObject|Literal|VariableReference */
         $argumentValueAST = $argument->getValueAST();
         $astNodeAncestors[$argumentValueAST] = $argument;
 
-        $this->setAncestorsUnderArgumentValueAst($astNodeAncestors, $argumentValueAST);
+        $this->setASTNodeAncestorsUnderArgumentValueAst($astNodeAncestors, $argumentValueAST);
     }
 
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderArgumentValueAst(SplObjectStorage $astNodeAncestors, Enum|InputList|InputObject|Literal|VariableReference $argumentValueAST): void
+    protected function setASTNodeAncestorsUnderArgumentValueAst(SplObjectStorage $astNodeAncestors, Enum|InputList|InputObject|Literal|VariableReference $argumentValueAST): void
     {
         if ($argumentValueAST instanceof InputList) {
             /** @var InputList */
             $inputList = $argumentValueAST;
-            $this->setAncestorsUnderInputList($astNodeAncestors, $inputList);
+            $this->setASTNodeAncestorsUnderInputList($astNodeAncestors, $inputList);
         }
         if ($argumentValueAST instanceof InputObject) {
             /** @var InputObject */
             $inputObject = $argumentValueAST;
-            $this->setAncestorsUnderInputObject($astNodeAncestors, $inputObject);
+            $this->setASTNodeAncestorsUnderInputObject($astNodeAncestors, $inputObject);
         }
     }
 
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderInputList(SplObjectStorage $astNodeAncestors, InputList $inputList): void
+    protected function setASTNodeAncestorsUnderInputList(SplObjectStorage $astNodeAncestors, InputList $inputList): void
     {
         foreach ($inputList->getAstValue() as $astValue) {
             if (
@@ -891,14 +891,14 @@ class Document implements DocumentInterface
                 continue;
             }
             $astNodeAncestors[$astValue] = $inputList;
-            $this->setAncestorsUnderArgumentValueAst($astNodeAncestors, $astValue);
+            $this->setASTNodeAncestorsUnderArgumentValueAst($astNodeAncestors, $astValue);
         }
     }
 
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderInputObject(SplObjectStorage $astNodeAncestors, InputObject $inputObject): void
+    protected function setASTNodeAncestorsUnderInputObject(SplObjectStorage $astNodeAncestors, InputObject $inputObject): void
     {
         foreach ((array) $inputObject->getAstValue() as $astValue) {
             if (
@@ -913,25 +913,25 @@ class Document implements DocumentInterface
                 continue;
             }
             $astNodeAncestors[$astValue] = $inputObject;
-            $this->setAncestorsUnderArgumentValueAst($astNodeAncestors, $astValue);
+            $this->setASTNodeAncestorsUnderArgumentValueAst($astNodeAncestors, $astValue);
         }
     }
 
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderFieldOrFragmentBond(SplObjectStorage $astNodeAncestors, FieldInterface|FragmentBondInterface $fieldOrFragmentBond): void
+    protected function setASTNodeAncestorsUnderFieldOrFragmentBond(SplObjectStorage $astNodeAncestors, FieldInterface|FragmentBondInterface $fieldOrFragmentBond): void
     {
         if ($fieldOrFragmentBond instanceof LeafField) {
             /** @var LeafField */
             $leafField = $fieldOrFragmentBond;
             foreach ($leafField->getArguments() as $argument) {
                 $astNodeAncestors[$argument] = $leafField;
-                $this->setAncestorsUnderArgument($astNodeAncestors, $argument);
+                $this->setASTNodeAncestorsUnderArgument($astNodeAncestors, $argument);
             }
             foreach ($leafField->getDirectives() as $directive) {
                 $astNodeAncestors[$directive] = $leafField;
-                $this->setAncestorsUnderDirective($astNodeAncestors, $directive);
+                $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
             }
             return;
         }
@@ -940,15 +940,15 @@ class Document implements DocumentInterface
             $relationalField = $fieldOrFragmentBond;
             foreach ($relationalField->getArguments() as $argument) {
                 $astNodeAncestors[$argument] = $relationalField;
-                $this->setAncestorsUnderArgument($astNodeAncestors, $argument);
+                $this->setASTNodeAncestorsUnderArgument($astNodeAncestors, $argument);
             }
             foreach ($relationalField->getDirectives() as $directive) {
                 $astNodeAncestors[$directive] = $relationalField;
-                $this->setAncestorsUnderDirective($astNodeAncestors, $directive);
+                $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
             }
             foreach ($relationalField->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
                 $astNodeAncestors[$fieldOrFragmentBond] = $relationalField;
-                $this->setAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
+                $this->setASTNodeAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
             }
             return;
         }
@@ -957,11 +957,11 @@ class Document implements DocumentInterface
             $inlineFragment = $fieldOrFragmentBond;
             foreach ($inlineFragment->getDirectives() as $directive) {
                 $astNodeAncestors[$directive] = $inlineFragment;
-                $this->setAncestorsUnderDirective($astNodeAncestors, $directive);
+                $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
             }
             foreach ($inlineFragment->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
                 $astNodeAncestors[$fieldOrFragmentBond] = $inlineFragment;
-                $this->setAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
+                $this->setASTNodeAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
             }
             return;
         }
@@ -973,15 +973,15 @@ class Document implements DocumentInterface
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderFragment(SplObjectStorage $astNodeAncestors, Fragment $fragment): void
+    protected function setASTNodeAncestorsUnderFragment(SplObjectStorage $astNodeAncestors, Fragment $fragment): void
     {
         foreach ($fragment->getDirectives() as $directive) {
             $astNodeAncestors[$directive] = $fragment;
-            $this->setAncestorsUnderDirective($astNodeAncestors, $directive);
+            $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
         }
         foreach ($fragment->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
             $astNodeAncestors[$fieldOrFragmentBond] = $fragment;
-            $this->setAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
+            $this->setASTNodeAncestorsUnderFieldOrFragmentBond($astNodeAncestors, $fieldOrFragmentBond);
         }
     }
 }
