@@ -185,6 +185,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                     $operation,
                     $dependedUponOperation,
                     $upcomingDependedUponOperation,
+                    $operations,
                 );
             } else {
                 $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
@@ -279,6 +280,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
      * So search for its position, and place it to the rightmost place.
      *
      * @param OperationInterface[] $multipleQueryExecutionOperations
+     * @param OperationInterface[] $operations
      * @return OperationInterface[]
      */
     protected function moveDependedUponOperationBeforeOperation(
@@ -286,6 +288,7 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         OperationInterface $operation,
         OperationInterface $dependedUponOperation,
         ?OperationInterface $upcomingDependedUponOperation,
+        array $operations,
     ): array {
         /**
          * Must also move the dependencies of the depended-upon
