@@ -2514,22 +2514,18 @@ video/mp4
 <!-- /wp:image -->
 
 <!-- wp:cover {"url":"https://graphql-api.com/assets/features/graphql-voyager-public.jpg","id":33,"dimRatio":50,"isDark":false} -->
-<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-33" src="https://graphql-api.com/assets/features/graphql-voyager-public.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
+<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-33" alt="" src="https://graphql-api.com/assets/features/graphql-voyager-public.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">This is a standard width cover image.</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:gallery {"columns":3,"linkTo":"none","className":"alignnone"} -->
-<figure class="wp-block-gallery has-nested-images columns-3 is-cropped alignnone"><!-- wp:image {"id":32,"linkDestination":"none"} -->
-<figure class="wp-block-image"><img src="https://graphql-api.com/assets/features/graphql-voyager-public.jpg" alt="" class="wp-image-32"/></figure>
+<!-- wp:gallery {"columns":3,"linkTo":"none","align":"wide","className":"alignnone"} -->
+<figure class="wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone"><!-- wp:image {"id":32,"linkDestination":"none"} -->
+<figure class="wp-block-image"><img src="https://graphql-api.com/assets/features/graphql-voyager-public.jpg" alt="Browsing the connections among entities" class="wp-image-32"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"id":31,"linkDestination":"none"} -->
-<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="" class="wp-image-31"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:image {"id":13,"linkDestination":"none"} -->
-<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-13"/><figcaption class="wp-element-caption">This is how the namespaced interactive schema looks like</figcaption></figure>
+<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-31"/></figure>
 <!-- /wp:image --></figure>
 <!-- /wp:gallery -->
 
@@ -2569,8 +2565,8 @@ video/mp4
 <!-- /wp:list-item --></ol>
 <!-- /wp:list -->
 
-<!-- wp:columns -->
-<div class="wp-block-columns"><!-- wp:column -->
+<!-- wp:columns {"align":"wide"} -->
+<div class="wp-block-columns alignwide"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:paragraph -->
 <p>If you want to know who controls you, look at who you are not allowed to criticize. (<a rel="noreferrer noopener" href="https://www.azquotes.com/author/15138-Voltaire" target="_blank">Quote by Voltaire</a>)</p>
 <!-- /wp:paragraph --></div>
@@ -2578,7 +2574,7 @@ video/mp4
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:media-text {"mediaId":362,"mediaLink":"https://gato-graphql-pro.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
-<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gato-graphql-pro.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="" class="wp-image-362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gato-graphql-pro.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="In red are the entities with a transformed name" class="wp-image-362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
 <p>This is the schema</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:media-text --></div>
@@ -2662,20 +2658,20 @@ PluginApp::getMainPluginManager()-&gt;register(new Plugin(
 
 <!-- wp:categories {"showHierarchy":true,"showPostCounts":true} /-->
 
-<!-- wp:embed {"url":"https://twitter.com/smashingmag/status/1628385745101529089","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<!-- wp:embed {"url":"https://twitter.com/WordPress/status/1666875287542300679?cxt=HHwWjoCw7cKP96EuAAAA","type":"rich","providerNameSlug":"twitter","responsive":true} -->
 <figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
-https://twitter.com/smashingmag/status/1628385745101529089
+https://twitter.com/WordPress/status/1666875287542300679?cxt=HHwWjoCw7cKP96EuAAAA
 </div></figure>
 <!-- /wp:embed -->
 
-<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Vm9oH0042TE","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=7Nmz3IjtPh0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=Vm9oH0042TE
-</div><figcaption class="wp-element-caption">Everywhere man blames nature and fate yet his fate is mostly but the echo of his character and passion, his mistakes and his weaknesses.</figcaption></figure>
+https://www.youtube.com/watch?v=7Nmz3IjtPh0
+</div><figcaption class="wp-element-caption">At this year's WCEU Keynote address in Athens, Greece. <a href="https://www.youtube.com/hashtag/wordpress">#WordPress</a> co-founder, Matt Mullenweg, Gutenberg Architect, Matías Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.</figcaption></figure>
 <!-- /wp:embed -->
 
-<!-- wp:embed {"url":"https://wordpress.org/about/","type":"wp-embed","providerNameSlug":"wordpress-org","align":"wide"} -->
-<figure class="wp-block-embed alignwide is-type-wp-embed is-provider-wordpress-org wp-block-embed-wordpress-org"><div class="wp-block-embed__wrapper">
+<!-- wp:embed {"url":"https://wordpress.org/about/","type":"wp-embed","providerNameSlug":"wordpress-org","align":"center"} -->
+<figure class="wp-block-embed aligncenter is-type-wp-embed is-provider-wordpress-org wp-block-embed-wordpress-org"><div class="wp-block-embed__wrapper">
 https://wordpress.org/about/
 </div><figcaption class="wp-element-caption">Democratizing publishing</figcaption></figure>
 <!-- /wp:embed -->]]></content:encoded>
