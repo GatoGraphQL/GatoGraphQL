@@ -10,6 +10,7 @@ use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\DOMCrawler\Crawler;
 use PoP\Root\Services\BasicServiceTrait;
+use stdClass;
 use Throwable;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
@@ -19,8 +20,6 @@ use WP_Post;
 use function get_post;
 use function has_blocks;
 use function parse_blocks;
-
-use stdClass;
 
 /**
  * This class is based on class `ContentParser`
