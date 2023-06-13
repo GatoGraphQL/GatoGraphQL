@@ -2510,7 +2510,7 @@ video/mp4
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"align":"wide","id":33} -->
-<figure class="wp-block-image alignwide"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-33"/><figcaption class="wp-element-caption">Namespaced interactive schema</figcaption></figure>
+<figure class="wp-block-image alignwide"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-33"/><figcaption class="wp-element-caption">This is how the namespaced interactive schema looks like</figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:cover {"url":"https://graphql-api.com/assets/features/graphql-voyager-public.jpg","id":33,"dimRatio":50,"isDark":false} -->
@@ -2529,7 +2529,7 @@ video/mp4
 <!-- /wp:image -->
 
 <!-- wp:image {"id":13,"linkDestination":"none"} -->
-<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-13"/><figcaption class="wp-element-caption">Namespaced interactive schema</figcaption></figure>
+<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-13"/><figcaption class="wp-element-caption">This is how the namespaced interactive schema looks like</figcaption></figure>
 <!-- /wp:image --></figure>
 <!-- /wp:gallery -->
 
