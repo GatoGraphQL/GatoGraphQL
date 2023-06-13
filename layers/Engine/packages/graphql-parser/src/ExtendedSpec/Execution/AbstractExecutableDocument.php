@@ -264,11 +264,10 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                          *
                          * @var OperationInterface
                          */                        
-                        $dependedUponOperation = $this->getOperationByName(
+                        return $this->getOperationByName(
                             $dependedUponOperationName,
                             $operations,
                         );
-                        return $dependedUponOperation;
                     },
                     $dependedUponOperationNames
                 )
