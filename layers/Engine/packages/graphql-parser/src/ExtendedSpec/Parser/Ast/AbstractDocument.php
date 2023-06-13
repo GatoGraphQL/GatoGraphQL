@@ -90,16 +90,16 @@ abstract class AbstractDocument extends UpstreamDocument
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    protected function setAncestorsUnderDirective(SplObjectStorage $astNodeAncestors, Directive $directive): void
+    protected function setASTNodeAncestorsUnderDirective(SplObjectStorage $astNodeAncestors, Directive $directive): void
     {
-        parent::setAncestorsUnderDirective($astNodeAncestors, $directive);
+        parent::setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
 
         if ($directive instanceof MetaDirective) {
             /** @var MetaDirective */
             $metaDirective = $directive;
             foreach ($metaDirective->getNestedDirectives() as $nestedDirective) {
                 $astNodeAncestors[$nestedDirective] = $directive;
-                $this->setAncestorsUnderDirective($astNodeAncestors, $nestedDirective);
+                $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $nestedDirective);
             }
         }
     }
