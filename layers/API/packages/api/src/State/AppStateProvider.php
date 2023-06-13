@@ -55,16 +55,16 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         $state['executable-document-ast'] = null;
-        $state['document-object-resolved-field-value-referenced-fields'] = [];
         $state['does-api-query-have-errors'] = null;
 
         /**
-         * This is not needed as it is already initialized at
+         * This is not needed as they are already initialized at
          * the ComponentModel level.
          *
          * @see layers/Engine/packages/component-model/src/State/AppStateProvider.php
          */
         // $state['document-ast-node-ancestors'] = null;
+        // $state['document-object-resolved-field-value-referenced-fields'] = [];
 
         /**
          * Passing the query via URL param? Eg: ?query={ posts { id } }

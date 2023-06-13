@@ -101,12 +101,12 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequest);
 
         /**
-         * This one will be filled at the API level, but it is
-         * created at this level since it is referenced at
-         * Component Model.
+         * These one will be filled at the API level, but they are
+         * created at this level since they are referenced at the
+         * Component Model too.
          * 
-         * This actual initialization object will not be ever referenced
-         * as the API level will replace the object, but instantiate it
+         * These initialization objects will not be actually ever referenced,
+         * as the API level will replace these objects, but instantiate them
          * anyway so that the logic has no flaws (eg: PHPStan validation.)
          *
          * @see layers/API/packages/api/src/State/AppStateProvider.php
@@ -115,6 +115,9 @@ class AppStateProvider extends AbstractAppStateProvider
          */
         $documentASTNodeAncestors = new SplObjectStorage();
         $state['document-ast-node-ancestors'] = $documentASTNodeAncestors;
+        /** @var FieldInterface[] */
+        $documentObjectResolvedFieldValueReferencedFields = [];
+        $state['document-object-resolved-field-value-referenced-fields'] = $documentObjectResolvedFieldValueReferencedFields;
     }
 
     /**
