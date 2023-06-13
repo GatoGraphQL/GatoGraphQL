@@ -150,6 +150,79 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
          */
         array_unshift($multipleQueryExecutionOperations, $operation);
 
+        $dependedUponOperations = $this->getDependedUponOperations($operation, $operations);
+
+        /**
+         * If multiple operations are depended-upon,
+         * when re-ordering them, then must inject the new one
+         * right before the upcoming one (which is processed first,
+         * as they are iterated from right to left)
+         *
+         * @var OperationInterface|null
+         */
+        $upcomingDependedUponOperation = null;
+
+        /**
+         * Because the new operation is added at the beginning of the array,
+         * then iterate them from right to left
+         */
+        foreach (array_reverse($dependedUponOperations) as $dependedUponOperation) {
+            /**
+             * If some operation is depended-upon by more than
+             * 1 operation, then avoid processing it twice.
+             */
+            if (in_array($dependedUponOperation, $multipleQueryExecutionOperations)) {
+                /**
+                 * Also place the current operation behind it,
+                 * to respect the execution/dependency order
+                 * (there are no existing loops, or ->validate
+                 * will already have failed).
+                 *
+                 * Also move the dependencies of the depended-upon operation
+                 */
+                $multipleQueryExecutionOperations = $this->moveDependedUponOperationBeforeOperation(
+                    $multipleQueryExecutionOperations,
+                    $operation,
+                    $dependedUponOperation,
+                    $upcomingDependedUponOperation,
+                );
+            } else {
+                $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
+                    $multipleQueryExecutionOperations,
+                    $dependedUponOperation,
+                    $operations
+                );
+            }
+
+            $upcomingDependedUponOperation = $dependedUponOperation;
+        }
+
+        /**
+         * 2 Operations could've loaded the same dependency.
+         * By doing `array_unique` we will return only 1 instance of each,
+         * while already with the right dependency order,
+         * so that the depended-upon Operation appears before
+         * all of its depending Operations.
+         */
+        $multipleQueryExecutionOperationsByName = [];
+        foreach ($multipleQueryExecutionOperations as $multipleQueryExecutionOperation) {
+            $multipleQueryExecutionOperationsByName[$multipleQueryExecutionOperation->getName()] = $multipleQueryExecutionOperation;
+        }
+        return array_values($multipleQueryExecutionOperationsByName);
+    }
+
+    /**
+     * Get all the Operations that the passed Operation
+     * depends on
+     *
+     * @param OperationInterface[] $operations
+     * @return OperationInterface[]
+     */
+    protected function getDependedUponOperations(
+        OperationInterface $operation,
+        array $operations,
+    ): array {
+        $dependedUponOperations = [];
         foreach ($operation->getDirectives() as $directive) {
             /**
              * Check if this Directive is a "OperationDependencyDefiner"
@@ -180,76 +253,20 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
              */
             $dependedUponOperationNames = array_values(array_unique($dependedUponOperationNames));
 
-            /**
-             * Because the new operation is added at the beginning of the array,
-             * then iterate them from right to left
-             */
-            $dependedUponOperationNames = array_reverse($dependedUponOperationNames);
-
-            /**
-             * If multiple operations are depended-upon,
-             * when re-ordering them, then must inject the new one
-             * right before the upcoming one (which is processed first,
-             * as they are iterated from right to left)
-             *
-             * @var OperationInterface|null
-             */
-            $upcomingDependedUponOperation = null;
-
             foreach ($dependedUponOperationNames as $dependedUponOperationName) {
                 /**
                  * It can't be null, or it will already fail in ->validate
                  *
                  * @var OperationInterface
                  */
-                $dependedUponOperation = $this->getOperationByName(
+                $dependedUponOperations[] = $this->getOperationByName(
                     $dependedUponOperationName,
                     $operations,
                 );
-
-                /**
-                 * If some operation is depended-upon by more than
-                 * 1 operation, then avoid processing it twice.
-                 */
-                if (in_array($dependedUponOperation, $multipleQueryExecutionOperations)) {
-                    /**
-                     * Also place the current operation behind it,
-                     * to respect the execution/dependency order
-                     * (there are no existing loops, or ->validate
-                     * will already have failed).
-                     *
-                     * Also move the dependencies of the depended-upon operation
-                     */
-                    $multipleQueryExecutionOperations = $this->moveDependedUponOperationBeforeOperation(
-                        $multipleQueryExecutionOperations,
-                        $operation,
-                        $dependedUponOperation,
-                        $upcomingDependedUponOperation,
-                    );
-                } else {
-                    $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
-                        $multipleQueryExecutionOperations,
-                        $dependedUponOperation,
-                        $operations
-                    );
-                }
-
-                $upcomingDependedUponOperation = $dependedUponOperation;
             }
         }
 
-        /**
-         * 2 Operations could've loaded the same dependency.
-         * By doing `array_unique` we will return only 1 instance of each,
-         * while already with the right dependency order,
-         * so that the depended-upon Operation appears before
-         * all of its depending Operations.
-         */
-        $multipleQueryExecutionOperationsByName = [];
-        foreach ($multipleQueryExecutionOperations as $multipleQueryExecutionOperation) {
-            $multipleQueryExecutionOperationsByName[$multipleQueryExecutionOperation->getName()] = $multipleQueryExecutionOperation;
-        }
-        return array_values($multipleQueryExecutionOperationsByName);
+        return $dependedUponOperations;
     }
 
     /**
