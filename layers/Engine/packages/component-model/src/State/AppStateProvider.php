@@ -104,13 +104,13 @@ class AppStateProvider extends AbstractAppStateProvider
          * These one will be filled at the API level, but they are
          * created at this level since they are referenced at the
          * Component Model too.
-         * 
+         *
          * These initialization objects will not be actually ever referenced,
          * as the API level will replace these objects, but instantiate them
          * anyway so that the logic has no flaws (eg: PHPStan validation.)
          *
          * @see layers/API/packages/api/src/State/AppStateProvider.php
-         * 
+         *
          * @var SplObjectStorage<AstInterface,AstInterface>
          */
         $documentASTNodeAncestors = new SplObjectStorage();
