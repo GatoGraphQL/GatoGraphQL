@@ -7,9 +7,9 @@ namespace PoPWPSchema\BlockContentParser;
 use DOMNode;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\DOMCrawler\Crawler;
 use PoP\Root\Services\BasicServiceTrait;
-use stdClass;
 use Throwable;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
@@ -19,6 +19,7 @@ use WP_Post;
 use function get_post;
 use function has_blocks;
 use function parse_blocks;
+use stdClass;
 
 /**
  * This class is based on class `ContentParser`
@@ -100,11 +101,14 @@ class BlockContentParser implements BlockContentParserInterface
                 // Convert the block to stdClass
                 $item = (object) $item;
 
-                // Convert the block attributes to stdClass
+                /**
+                 * Convert the block attributes to stdClass,
+                 * and all inner associative arrays too
+                 */
                 if (isset($item->attributes)) {
-                    /** @var array<string,mixed> */
+                    /** @var array<string,mixed>|stdClass */
                     $blockAttributes = $item->attributes;
-                    $item->attributes = (object) $blockAttributes;
+                    $item->attributes = MethodHelpers::recursivelyConvertAssociativeArrayToStdClass((array) $blockAttributes);
                 }
 
                 // Recursively call for the block's inner blocks'
