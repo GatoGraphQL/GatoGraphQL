@@ -19,6 +19,7 @@ use WP_Post;
 use function get_post;
 use function has_blocks;
 use function parse_blocks;
+
 use stdClass;
 
 /**
