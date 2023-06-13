@@ -14,6 +14,7 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Variables\VariableManagerInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
@@ -98,6 +99,22 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['dataoutputmode'] = EngineRequest::getDataOutputMode($enableModifyingEngineBehaviorViaRequest);
         $state['dboutputmode'] = EngineRequest::getDBOutputMode($enableModifyingEngineBehaviorViaRequest);
         $state['scheme'] = EngineRequest::getScheme($enableModifyingEngineBehaviorViaRequest);
+
+        /**
+         * This one will be filled at the API level, but it is
+         * created at this level since it is referenced at
+         * Component Model.
+         * 
+         * This actual initialization object will not be ever referenced
+         * as the API level will replace the object, but instantiate it
+         * anyway so that the logic has no flaws (eg: PHPStan validation.)
+         *
+         * @see layers/API/packages/api/src/State/AppStateProvider.php
+         * 
+         * @var SplObjectStorage<AstInterface,AstInterface>
+         */
+        $documentASTNodeAncestors = new SplObjectStorage();
+        $state['document-ast-node-ancestors'] = $documentASTNodeAncestors;
     }
 
     /**
