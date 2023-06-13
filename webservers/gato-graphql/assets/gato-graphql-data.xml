@@ -2510,7 +2510,7 @@ video/mp4
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"align":"wide","id":33} -->
-<figure class="wp-block-image alignwide"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="" class="wp-image-33"/><figcaption class="wp-element-caption">This is a caption</figcaption></figure>
+<figure class="wp-block-image alignwide"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-33"/><figcaption class="wp-element-caption">Namespaced interactive schema</figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:cover {"url":"https://graphql-api.com/assets/features/graphql-voyager-public.jpg","id":33,"dimRatio":50,"isDark":false} -->
@@ -2529,7 +2529,7 @@ video/mp4
 <!-- /wp:image -->
 
 <!-- wp:image {"id":13,"linkDestination":"none"} -->
-<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="" class="wp-image-13"/><figcaption class="wp-element-caption">This is a caption</figcaption></figure>
+<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-13"/><figcaption class="wp-element-caption">Namespaced interactive schema</figcaption></figure>
 <!-- /wp:image --></figure>
 <!-- /wp:gallery -->
 
@@ -2614,7 +2614,7 @@ video/mp4
 <!-- /wp:pullquote -->
 
 <!-- wp:audio -->
-<figure class="wp-block-audio"><audio controls src="https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3"></audio><figcaption class="wp-element-caption">This is a caption</figcaption></figure>
+<figure class="wp-block-audio"><audio controls src="https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3"></audio><figcaption class="wp-element-caption">"Broke for free" song</figcaption></figure>
 <!-- /wp:audio -->
 
 <!-- wp:video {"id":132,"tracks":[]} -->
