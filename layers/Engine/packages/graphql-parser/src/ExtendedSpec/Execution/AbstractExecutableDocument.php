@@ -217,6 +217,8 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
                      * to respect the execution/dependency order
                      * (there are no existing loops, or ->validate
                      * will already have failed).
+                     *
+                     * Also move the dependencies of the depended-upon operation
                      */
                     $multipleQueryExecutionOperations = $this->moveDependedUponOperationBeforeOperation(
                         $multipleQueryExecutionOperations,
@@ -268,6 +270,14 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         OperationInterface $dependedUponOperation,
         ?OperationInterface $upcomingDependedUponOperation,
     ): array {
+        /**
+         * Must also move the dependencies of the depended-upon
+         * directive. Start with them first, as to ensure that,
+         * after the final loop, all operations still have
+         * the right order of dependencies
+         */
+        // foreach ($dependedUponOperation)
+
         /** @var int */
         $dependedUponOperationPos = array_search(
             $dependedUponOperation,
