@@ -40,7 +40,7 @@ abstract class AbstractTransformBooleanFieldValueFieldDirectiveResolver extends 
         return $this->transformBoolValue($value);
     }
 
-    abstract protected function transformBoolValue(bool $value): bool;
+    abstract protected function transformBoolValue(bool $value): bool|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args
