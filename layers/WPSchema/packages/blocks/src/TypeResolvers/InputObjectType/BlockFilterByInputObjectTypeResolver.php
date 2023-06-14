@@ -107,7 +107,8 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
             'include',
             'exclude'
                 => true,
-            default => parent::isOneOfInputPropertyNullable($propertyName)
+            default
+                => parent::isOneOfInputPropertyNullable($propertyName)
         };
     }
 }
