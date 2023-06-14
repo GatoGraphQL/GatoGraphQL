@@ -103,7 +103,7 @@ trait ObjectTypeOrFieldDirectiveResolverTrait
         $currentObjectID = null;
         $currentField = null;
 
-        /** 
+        /**
          * Restore the previous ID/field from the stack as the new "current"
          *
          * @var array<string|int>
@@ -134,7 +134,7 @@ trait ObjectTypeOrFieldDirectiveResolverTrait
 
         /**
          * Move the current ID/field onto the stack
-         * 
+         *
          * @var string|int|null
          */
         $currentObjectID = App::getState('object-resolved-dynamic-variables-current-object-id');
