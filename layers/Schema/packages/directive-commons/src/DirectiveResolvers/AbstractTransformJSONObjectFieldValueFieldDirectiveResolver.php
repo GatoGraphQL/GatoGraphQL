@@ -39,7 +39,7 @@ abstract class AbstractTransformJSONObjectFieldValueFieldDirectiveResolver exten
         return $this->transformStdClassValue($value);
     }
 
-    abstract protected function transformStdClassValue(stdClass $value): stdClass;
+    abstract protected function transformStdClassValue(stdClass $value): stdClass|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args
