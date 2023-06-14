@@ -68,6 +68,11 @@ class AppStateProvider extends AbstractAppStateProvider
         // For Validating if the Directive supports only certain types
         $state['field-type-resolver-for-supported-directive-resolution'] = null;
 
+        $state['object-resolved-dynamic-variables-current-object-id'] = null;
+        $state['object-resolved-dynamic-variables-current-field'] = null;
+        $state['object-resolved-dynamic-variables-previous-object-ids'] = [];
+        $state['object-resolved-dynamic-variables-previous-fields'] = [];
+
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getVariableManager()->getVariablesFromRequest();
 
