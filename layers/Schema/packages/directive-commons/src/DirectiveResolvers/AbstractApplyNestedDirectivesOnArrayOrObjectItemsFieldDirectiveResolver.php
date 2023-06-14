@@ -527,10 +527,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                     }
 
                     if ($resolveDirectiveArgsOnObject) {
-                        // The current object ID for which to retrieve the dynamic variable for.
-                        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
-                        // The current field for which to retrieve the dynamic variable for.
-                        $appStateManager->override('object-resolved-dynamic-variables-current-field', $field);
+                        $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
                         $this->directiveDataAccessor->resetDirectiveArgs();
                     }
 
@@ -568,8 +565,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
          * Reset the AppState
          */
         if ($resolveDirectiveArgsOnObject) {
-            $appStateManager->override('object-resolved-dynamic-variables-current-object-id', null);
-            $appStateManager->override('object-resolved-dynamic-variables-current-field', null);
+            $this->resetResolvedDirectiveArgsInAppState();
             $this->directiveDataAccessor->resetDirectiveArgs();
         }
     }
