@@ -113,8 +113,8 @@ trait ObjectTypeOrFieldDirectiveResolverTrait
             /** @var FieldInterface[] */
             $previousFields = App::getState('object-resolved-dynamic-variables-previous-fields');
 
-            $currentObjectID = array_pop($previousObjectIDs);
-            $currentField = array_pop($previousFields);
+            $currentObjectID = array_shift($previousObjectIDs);
+            $currentField = array_shift($previousFields);
 
             $appStateManager->override('object-resolved-dynamic-variables-previous-object-ids', $previousObjectIDs);
             $appStateManager->override('object-resolved-dynamic-variables-previous-fields', $previousFields);
@@ -146,8 +146,8 @@ trait ObjectTypeOrFieldDirectiveResolverTrait
             /** @var FieldInterface[] */
             $previousFields = App::getState('object-resolved-dynamic-variables-previous-fields');
 
-            $previousObjectIDs[] = $currentObjectID;
-            $previousFields[] = $currentField;
+            array_unshift($previousObjectIDs, $currentObjectID);
+            array_unshift($previousFields, $currentField);
 
             $appStateManager->override('object-resolved-dynamic-variables-previous-object-ids', $previousObjectIDs);
             $appStateManager->override('object-resolved-dynamic-variables-previous-fields', $previousFields);
