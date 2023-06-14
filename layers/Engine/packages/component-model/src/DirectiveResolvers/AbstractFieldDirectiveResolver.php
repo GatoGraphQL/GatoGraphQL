@@ -368,6 +368,15 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         return $directiveArgs;
     }
 
+    protected function resetResolvedDirectiveArgsInAppState(): void
+    {
+        $appStateManager = App::getAppStateManager();
+        // The current object ID for which to retrieve the dynamic variable for.
+        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', null);
+        // The current field for which to retrieve the dynamic variable for.
+        $appStateManager->override('object-resolved-dynamic-variables-current-field', null);
+    }
+
     /**
      * Validate the directive data
      *
