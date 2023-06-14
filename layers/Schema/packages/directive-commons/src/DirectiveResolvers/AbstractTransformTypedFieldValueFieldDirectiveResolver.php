@@ -59,7 +59,6 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
 
         $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
         $typedDataValidationPayload = $this->validateTypeData($value);
-        $this->resetObjectResolvedDynamicVariablesInAppState();
         
         if ($typedDataValidationPayload !== null) {
             $this->handleError(
@@ -73,6 +72,10 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
                 $typedDataValidationPayload->astNode ?? $this->directive,
                 $engineIterationFeedbackStore,
             );
+
+            $this->resetObjectResolvedDynamicVariablesInAppState();
+            $this->directiveDataAccessor->resetDirectiveArgs();
+            
             return null;
         }
 
@@ -83,9 +86,10 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
          * Eg: `preg_replace` may throw an error if the regex
          * pattern is not right.
          */
-        $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
         $transformedTypeValue = $this->transformTypeValue($value);
+
         $this->resetObjectResolvedDynamicVariablesInAppState();
+        $this->directiveDataAccessor->resetDirectiveArgs();
         
         if ($transformedTypeValue instanceof TypedDataValidationPayload) {
             /** @var TypedDataValidationPayload */
