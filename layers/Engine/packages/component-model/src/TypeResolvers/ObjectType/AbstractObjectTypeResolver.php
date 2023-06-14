@@ -721,9 +721,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * The current object ID/Field for which to retrieve the dynamic variable for.
          */
-        $appStateManager = App::getAppStateManager();
-        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
-        $appStateManager->override('object-resolved-dynamic-variables-current-field', $field);
+        $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
 
         $fieldArgs = null;
         try {
@@ -737,8 +735,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
 
-        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', null);
-        $appStateManager->override('object-resolved-dynamic-variables-current-field', null);
+        $this->resetObjectResolvedDynamicVariablesInAppState();
 
         if ($fieldArgs === null) {
             $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;

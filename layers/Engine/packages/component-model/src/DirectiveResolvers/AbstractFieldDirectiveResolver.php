@@ -343,11 +343,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         string|int $id,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?array {
-        $appStateManager = App::getAppStateManager();
-        // The current object ID for which to retrieve the dynamic variable for.
-        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
-        // The current field for which to retrieve the dynamic variable for.
-        $appStateManager->override('object-resolved-dynamic-variables-current-field', $field);
+        $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
         $this->directiveDataAccessor->resetDirectiveArgs();
         $directiveArgs = $this->directiveDataAccessor->getDirectiveArgs();
 

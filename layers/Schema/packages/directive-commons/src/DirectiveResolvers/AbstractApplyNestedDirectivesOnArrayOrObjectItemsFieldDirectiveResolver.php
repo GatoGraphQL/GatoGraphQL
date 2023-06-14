@@ -512,10 +512,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             // 3. Compose the array from the results for each array item
             foreach ($idFieldSet as $id => $fieldSet) {
                 $object = $idObjects[$id];
-                if ($resolveDirectiveArgsOnObject) {
-                    // The current object ID for which to retrieve the dynamic variable for.
-                    $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
-                }
                 foreach ($fieldSet->fields as $field) {
                     $hasIDFieldBeenResolved = isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->contains($field);
                     $value = $hasIDFieldBeenResolved ?
@@ -531,8 +527,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                     }
 
                     if ($resolveDirectiveArgsOnObject) {
-                        // The current field for which to retrieve the dynamic variable for.
-                        $appStateManager->override('object-resolved-dynamic-variables-current-field', $field);
+                        $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
                         $this->directiveDataAccessor->resetDirectiveArgs();
                     }
 
@@ -570,8 +565,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
          * Reset the AppState
          */
         if ($resolveDirectiveArgsOnObject) {
-            $appStateManager->override('object-resolved-dynamic-variables-current-object-id', null);
-            $appStateManager->override('object-resolved-dynamic-variables-current-field', null);
+            $this->resetObjectResolvedDynamicVariablesInAppState();
             $this->directiveDataAccessor->resetDirectiveArgs();
         }
     }
