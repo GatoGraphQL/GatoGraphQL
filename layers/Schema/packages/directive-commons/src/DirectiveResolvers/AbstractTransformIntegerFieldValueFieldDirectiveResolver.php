@@ -42,7 +42,7 @@ abstract class AbstractTransformIntegerFieldValueFieldDirectiveResolver extends 
         return $this->transformIntValue($value);
     }
 
-    abstract protected function transformIntValue(int $value): int;
+    abstract protected function transformIntValue(int $value): int|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args
