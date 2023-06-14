@@ -42,7 +42,7 @@ abstract class AbstractTransformStringFieldValueFieldDirectiveResolver extends A
         return $this->transformStringValue($value);
     }
 
-    abstract protected function transformStringValue(string $value): string;
+    abstract protected function transformStringValue(string $value): string|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args
