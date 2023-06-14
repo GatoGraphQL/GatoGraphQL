@@ -42,7 +42,7 @@ abstract class AbstractTransformFloatFieldValueFieldDirectiveResolver extends Ab
         return $this->transformFloatValue((float) $value);
     }
 
-    abstract protected function transformFloatValue(float $value): float;
+    abstract protected function transformFloatValue(float $value): float|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args
