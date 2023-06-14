@@ -28,9 +28,9 @@ abstract class AbstractTransformArrayFieldValueFieldDirectiveResolver extends Ab
 
     /**
      * @param mixed[] $value
-     * @return mixed[]
+     * @return mixed[]|TypedDataValidationPayload
      */
-    abstract protected function transformArrayValue(array $value): array;
+    abstract protected function transformArrayValue(array $value): array|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args
