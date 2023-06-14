@@ -219,7 +219,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
         /**
          * The current objectID/field for which to retrieve the dynamic variable for.
          */
-        $this->resetResolvedDirectiveArgsInAppState();
+        $this->resetObjectResolvedDynamicVariablesInAppState();
     }
 
     /**

@@ -96,7 +96,7 @@ trait ObjectTypeOrFieldDirectiveResolverTrait
         return $fieldOrDirectiveArgs;
     }
 
-    protected function resetResolvedDirectiveArgsInAppState(): void
+    protected function resetObjectResolvedDynamicVariablesInAppState(): void
     {
         $appStateManager = App::getAppStateManager();
 

@@ -735,7 +735,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
 
-        $this->resetResolvedDirectiveArgsInAppState();
+        $this->resetObjectResolvedDynamicVariablesInAppState();
 
         if ($fieldArgs === null) {
             $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field] = null;

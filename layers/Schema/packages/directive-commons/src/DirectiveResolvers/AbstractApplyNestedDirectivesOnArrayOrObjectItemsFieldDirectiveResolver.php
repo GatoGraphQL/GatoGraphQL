@@ -565,7 +565,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
          * Reset the AppState
          */
         if ($resolveDirectiveArgsOnObject) {
-            $this->resetResolvedDirectiveArgsInAppState();
+            $this->resetObjectResolvedDynamicVariablesInAppState();
             $this->directiveDataAccessor->resetDirectiveArgs();
         }
     }
