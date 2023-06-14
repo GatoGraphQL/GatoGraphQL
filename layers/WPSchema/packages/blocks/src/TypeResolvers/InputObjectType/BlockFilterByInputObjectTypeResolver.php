@@ -53,7 +53,7 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to specify the property and data to filter blocks', 'blocks');
+        return $this->__('Oneof input to filter blocks', 'blocks');
     }
 
     protected function isOneInputValueMandatory(): bool
