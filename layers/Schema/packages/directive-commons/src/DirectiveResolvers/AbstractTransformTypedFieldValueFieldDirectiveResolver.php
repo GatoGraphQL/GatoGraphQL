@@ -73,7 +73,31 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
             return null;
         }
 
-        return $this->transformTypeValue($value);
+        /**
+         * Also the actual transformation could raise errors,
+         * and these can't be validated on the step before.
+         *
+         * Eg: `preg_replace` may throw an error if the regex
+         * pattern is not right.
+         */
+        $transformedTypeValue = $this->transformTypeValue($value);
+        if ($transformedTypeValue instanceof TypedDataValidationPayload) {
+            /** @var TypedDataValidationPayload */
+            $typedDataValidationPayload = $transformedTypeValue;
+            $this->handleError(
+                $value,
+                $id,
+                $field,
+                $relationalTypeResolver,
+                $succeedingPipelineIDFieldSet,
+                $resolvedIDFieldValues,
+                $typedDataValidationPayload->feedbackItemResolution,
+                $typedDataValidationPayload->astNode ?? $this->directive,
+                $engineIterationFeedbackStore,
+            );
+            return null;
+        }
+        return $transformedTypeValue;
     }
 
     protected function skipNullValue(): bool
@@ -91,6 +115,9 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
         return null;
     }
 
+    /**
+     * @return mixed TypedDataValidationPayload if error, or the value otherwise
+     */
     abstract protected function transformTypeValue(mixed $value): mixed;
 
     /**

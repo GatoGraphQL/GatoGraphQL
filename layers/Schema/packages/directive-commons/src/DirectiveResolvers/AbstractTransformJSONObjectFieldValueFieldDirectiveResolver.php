@@ -32,13 +32,14 @@ abstract class AbstractTransformJSONObjectFieldValueFieldDirectiveResolver exten
 
     /**
      * @param stdClass $value
+     * @return mixed TypedDataValidationPayload if error, or the value otherwise
      */
     final protected function transformTypeValue(mixed $value): mixed
     {
         return $this->transformStdClassValue($value);
     }
 
-    abstract protected function transformStdClassValue(stdClass $value): stdClass;
+    abstract protected function transformStdClassValue(stdClass $value): stdClass|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args

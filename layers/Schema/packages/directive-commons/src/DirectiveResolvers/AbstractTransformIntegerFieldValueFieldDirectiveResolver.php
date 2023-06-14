@@ -35,13 +35,14 @@ abstract class AbstractTransformIntegerFieldValueFieldDirectiveResolver extends 
 
     /**
      * @param int $value
+     * @return mixed TypedDataValidationPayload if error, or the value otherwise
      */
     final protected function transformTypeValue(mixed $value): mixed
     {
         return $this->transformIntValue($value);
     }
 
-    abstract protected function transformIntValue(int $value): int;
+    abstract protected function transformIntValue(int $value): int|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args

@@ -35,13 +35,14 @@ abstract class AbstractTransformFloatFieldValueFieldDirectiveResolver extends Ab
 
     /**
      * @param float|int $value
+     * @return mixed TypedDataValidationPayload if error, or the value otherwise
      */
     final protected function transformTypeValue(mixed $value): mixed
     {
         return $this->transformFloatValue((float) $value);
     }
 
-    abstract protected function transformFloatValue(float $value): float;
+    abstract protected function transformFloatValue(float $value): float|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args

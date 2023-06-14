@@ -35,13 +35,14 @@ abstract class AbstractTransformStringFieldValueFieldDirectiveResolver extends A
 
     /**
      * @param string $value
+     * @return mixed TypedDataValidationPayload if error, or the value otherwise
      */
     final protected function transformTypeValue(mixed $value): mixed
     {
         return $this->transformStringValue($value);
     }
 
-    abstract protected function transformStringValue(string $value): string;
+    abstract protected function transformStringValue(string $value): string|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args

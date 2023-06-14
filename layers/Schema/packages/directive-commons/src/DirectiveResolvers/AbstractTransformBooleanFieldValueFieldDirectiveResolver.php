@@ -33,13 +33,14 @@ abstract class AbstractTransformBooleanFieldValueFieldDirectiveResolver extends 
 
     /**
      * @param bool $value
+     * @return mixed TypedDataValidationPayload if error, or the value otherwise
      */
     final protected function transformTypeValue(mixed $value): mixed
     {
         return $this->transformBoolValue($value);
     }
 
-    abstract protected function transformBoolValue(bool $value): bool;
+    abstract protected function transformBoolValue(bool $value): bool|TypedDataValidationPayload;
 
     /**
      * Validate the value against the directive args
