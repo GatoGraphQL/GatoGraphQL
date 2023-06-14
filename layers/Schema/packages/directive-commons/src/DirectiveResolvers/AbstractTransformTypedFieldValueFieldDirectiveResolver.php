@@ -115,6 +115,9 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
         return null;
     }
 
+    /**
+     * @return mixed TypedDataValidationPayload if error, or the value otherwise
+     */
     abstract protected function transformTypeValue(mixed $value): mixed;
 
     /**

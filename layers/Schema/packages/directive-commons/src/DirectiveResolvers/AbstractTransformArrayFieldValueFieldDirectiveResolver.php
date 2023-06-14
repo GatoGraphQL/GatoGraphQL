@@ -19,6 +19,7 @@ abstract class AbstractTransformArrayFieldValueFieldDirectiveResolver extends Ab
 
     /**
      * @param mixed[] $value
+     * @return mixed TypedDataValidationPayload if error, or the value otherwise
      */
     final protected function transformTypeValue(mixed $value): mixed
     {
