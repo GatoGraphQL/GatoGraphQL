@@ -257,13 +257,12 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
             $dependedUponOperations = array_merge(
                 $dependedUponOperations,
                 array_map(
-                    function (string $dependedUponOperationName) use ($operations): OperationInterface
-                    {
+                    function (string $dependedUponOperationName) use ($operations): OperationInterface {
                         /**
                          * It can't be null, or it will already fail in ->validate
                          *
                          * @var OperationInterface
-                         */                        
+                         */
                         return $this->getOperationByName(
                             $dependedUponOperationName,
                             $operations,
