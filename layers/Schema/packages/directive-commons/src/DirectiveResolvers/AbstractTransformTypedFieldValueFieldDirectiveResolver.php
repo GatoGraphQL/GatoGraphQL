@@ -59,7 +59,7 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
 
         $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
         $typedDataValidationPayload = $this->validateTypeData($value);
-        
+
         if ($typedDataValidationPayload !== null) {
             $this->handleError(
                 $value,
@@ -75,7 +75,7 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
 
             $this->resetObjectResolvedDynamicVariablesInAppState();
             $this->directiveDataAccessor->resetDirectiveArgs();
-            
+
             return null;
         }
 
@@ -90,7 +90,7 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
 
         $this->resetObjectResolvedDynamicVariablesInAppState();
         $this->directiveDataAccessor->resetDirectiveArgs();
-        
+
         if ($transformedTypeValue instanceof TypedDataValidationPayload) {
             /** @var TypedDataValidationPayload */
             $typedDataValidationPayload = $transformedTypeValue;
