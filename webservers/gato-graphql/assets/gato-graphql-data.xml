@@ -2521,11 +2521,11 @@ video/mp4
 
 <!-- wp:gallery {"columns":3,"linkTo":"none","align":"wide","className":"alignnone"} -->
 <figure class="wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone"><!-- wp:image {"id":32,"linkDestination":"none"} -->
-<figure class="wp-block-image"><img src="https://graphql-api.com/assets/features/graphql-voyager-public.jpg" alt="Browsing the connections among entities" class="wp-image-32"/></figure>
+<figure class="wp-block-image"><img src="https://graphql-api.com/assets/features/graphql-voyager-public.jpg" alt="Browsing the connections among entities" class="wp-image-32"/><figcaption class="wp-element-caption">Entities can navigate into other entities through connections</figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"id":31,"linkDestination":"none"} -->
-<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-31"/></figure>
+<figure class="wp-block-image"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-31"/><figcaption class="wp-element-caption">It's a big family indeed!</figcaption></figure>
 <!-- /wp:image --></figure>
 <!-- /wp:gallery -->
 
