@@ -6,13 +6,16 @@ namespace PoPSchema\DirectiveCommons\DirectiveResolvers;
 
 use PoPSchema\DirectiveCommons\FeedbackItemProviders\FeedbackItemProvider;
 use PoPSchema\DirectiveCommons\ObjectModels\TypedDataValidationPayload;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedback;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
 
 abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends AbstractTransformFieldValueFieldDirectiveResolver
@@ -56,8 +59,35 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
             );
             return null;
         }
+        
+        /** @var ComponentModelModuleConfiguration */
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        $setFieldAsNullIfDirectiveFailed = $moduleConfiguration->setFieldAsNullIfDirectiveFailed();
 
-        $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
+        $resolveDirectiveArgsOnObject = $this->directive->hasArgumentReferencingResolvedOnObjectPromise();
+        if ($resolveDirectiveArgsOnObject) {
+            $directiveArgs = $this->getResolvedDirectiveArgsForObjectAndField(
+                $relationalTypeResolver,
+                $field,
+                $id,
+                $engineIterationFeedbackStore,
+            );
+            if ($directiveArgs === null) {
+                if ($setFieldAsNullIfDirectiveFailed) {
+                    $iterationFieldSet = [$id => new EngineIterationFieldSet([$field])];
+                    $this->removeIDFieldSet(
+                        $succeedingPipelineIDFieldSet,
+                        $iterationFieldSet,
+                    );
+                    $this->setFieldResponseValueAsNull(
+                        $resolvedIDFieldValues,
+                        $iterationFieldSet,
+                    );
+                }
+                return null;
+            }
+        }
+
         $typedDataValidationPayload = $this->validateTypeData($value);
 
         if ($typedDataValidationPayload !== null) {
@@ -73,9 +103,14 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
                 $engineIterationFeedbackStore,
             );
 
-            $this->resetObjectResolvedDynamicVariablesInAppState();
-            $this->directiveDataAccessor->resetDirectiveArgs();
-
+            /**
+             * Reset the AppState
+             */
+            if ($resolveDirectiveArgsOnObject) {
+                $this->resetObjectResolvedDynamicVariablesInAppState();
+                $this->directiveDataAccessor->resetDirectiveArgs();
+            }
+            
             return null;
         }
 
@@ -88,8 +123,13 @@ abstract class AbstractTransformTypedFieldValueFieldDirectiveResolver extends Ab
          */
         $transformedTypeValue = $this->transformTypeValue($value);
 
-        $this->resetObjectResolvedDynamicVariablesInAppState();
-        $this->directiveDataAccessor->resetDirectiveArgs();
+        /**
+         * Reset the AppState
+         */
+        if ($resolveDirectiveArgsOnObject) {
+            $this->resetObjectResolvedDynamicVariablesInAppState();
+            $this->directiveDataAccessor->resetDirectiveArgs();
+        }
 
         if ($transformedTypeValue instanceof TypedDataValidationPayload) {
             /** @var TypedDataValidationPayload */
