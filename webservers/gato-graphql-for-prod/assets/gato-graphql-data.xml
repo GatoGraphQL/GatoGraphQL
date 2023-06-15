@@ -2679,7 +2679,7 @@ PluginApp::getMainPluginManager()-&gt;register(new Plugin(
 <!-- /wp:verse -->
 
 <!-- wp:table {"hasFixedLayout":true,"align":"wide","className":"has-fixed-layout"} -->
-<figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><tbody><tr><td><strong>What I like</strong></td><td>Bananas</td><td>Apples</td></tr><tr><td><strong>What I have</strong></td><td>Oranges</td><td>Blueberries</td></tr><tr><td><strong>What I desire</strong></td><td>Avocado</td><td>Grapes</td></tr></tbody></table></figure>
+<figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><tbody><tr><td><strong>What I like</strong></td><td>Petting my cats in the morning</td><td>Riding my bike in the mountain</td></tr><tr><td><strong>What I have</strong></td><td>Not much, just enough to keep me going on</td><td>A balcony with plants</td></tr><tr><td><strong>What I desire</strong></td><td>Attending conferences and meeting plenty of interesting folks from the community</td><td>To be able to focus on the important things of life</td></tr></tbody></table></figure>
 <!-- /wp:table -->
 
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=7Nmz3IjtPh0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
