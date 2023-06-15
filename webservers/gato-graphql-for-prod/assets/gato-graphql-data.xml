@@ -2520,35 +2520,27 @@ https://wordpress.org/about/
 		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
-		<title><![CDATA[Single post with a lot of blocks]]></title>
+		<title><![CDATA[Welcome to a single post full of blocks!]]></title>
 		<link>https://gato-graphql-pro.lndo.site/single-post-with-a-lot-of-blocks/</link>
 		<pubDate>Mon, 12 Jun 2023 09:20:44 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://gato-graphql-pro.lndo.site/?p=1242</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">Welcome to the single post full of Gutenberg blocks!</h1>
-<!-- /wp:heading -->
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+<p>When I look back on my past and think how much time I wasted on nothing, how much time has been lost in futilities, errors, laziness, incapacity to live; how little I appreciated it, how many times I sinned against my heart and soul-then my heart bleeds. <strong>Life is a gift, life is happiness, every minute can be an eternity of happiness</strong>. (<a href="https://www.azquotes.com/author/4085-Fyodor_Dostoevsky" target="_blank" rel="noopener">Quote by Fyodor Dostoevsky</a>)<br></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:heading -->
-<h2 class="wp-block-heading">This blog post is to be transformed with the Gato GraphQL plugin, and see what happens (or not)</h2>
+<h2 class="wp-block-heading">This blog post will be transformed...</h2>
 <!-- /wp:heading -->
 
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">This heading (H3) helps testing the regex replacements (Regex test: $1 #1)</h3>
-<!-- /wp:heading -->
+<!-- wp:paragraph {"style":{"color":{"text":"#ffffff","background":"#709372"}}} -->
+<p class="has-text-color has-background" style="color:#ffffff;background-color:#709372">If you make it a habit not to blame others, you will feel the growth of the ability to love in your soul, and you will see the growth of goodness in your life. (<a href="https://www.azquotes.com/author/14706-Leo_Tolstoy" target="_blank" rel="noopener">Quote by Leo Tolstoy</a>)<br></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:separator {"opacity":"css"} -->
 <hr class="wp-block-separator has-css-opacity"/>
 <!-- /wp:separator -->
-
-<!-- wp:paragraph -->
-<p>This is a <strong>regular</strong> paragraph block. When I look back on my past and think how much time I wasted on nothing, how much time has been lost in futilities, errors, laziness, incapacity to live; how little I appreciated it, how many times I sinned against my heart and soul-then my heart bleeds. Life is a gift, life is happiness, every minute can be an eternity of happiness. (<a href="https://www.azquotes.com/author/4085-Fyodor_Dostoevsky" target="_blank" rel="noopener">Quote by Fyodor Dostoevsky</a>)<br></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph {"style":{"color":{"text":"#ffffff","background":"#709372"}}} -->
-<p class="has-text-color has-background" style="color:#ffffff;background-color:#709372">This is a paragraph block with a <strong>background</strong>. If you make it a habit not to blame others, you will feel the growth of the ability to love in your soul, and you will see the growth of goodness in your life. (<a href="https://www.azquotes.com/author/14706-Leo_Tolstoy" target="_blank" rel="noopener">Quote by Leo Tolstoy</a>)<br></p>
-<!-- /wp:paragraph -->
 
 <!-- wp:image {"align":"wide","id":33} -->
 <figure class="wp-block-image alignwide"><img src="https://graphql-api.com/assets/guides/namespaced-interactive-schema.png" alt="Namespaced interactive schema" class="wp-image-33"/><figcaption class="wp-element-caption">This is how the namespaced interactive schema looks like</figcaption></figure>
@@ -2559,6 +2551,10 @@ https://wordpress.org/about/
 <p class="has-text-align-center has-large-font-size">This is a standard width cover image.</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">This heading (H3) is boring (Regex test: $1 #1)</h3>
+<!-- /wp:heading -->
 
 <!-- wp:gallery {"columns":3,"linkTo":"none","align":"wide","className":"alignnone"} -->
 <figure class="wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone"><!-- wp:image {"id":32,"linkDestination":"none"} -->
@@ -2658,6 +2654,20 @@ https://wordpress.org/about/
 <!-- /wp:paragraph --><cite>Victor Hugo</cite></blockquote>
 <!-- /wp:quote -->
 
+<!-- wp:buttons {"align":"wide","layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-buttons alignwide"><!-- wp:button {"style":{"color":{"gradient":"linear-gradient(135deg,rgb(6,147,227) 0%,rgb(89,51,82) 53%,rgb(155,81,224) 100%)"}}} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-background wp-element-button" style="background:linear-gradient(135deg,rgb(6,147,227) 0%,rgb(89,51,82) 53%,rgb(155,81,224) 100%)">Surprise your mum with a phone call 🤙</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"style":{"color":{"gradient":"linear-gradient(135deg,rgb(6,147,227) 0%,rgb(159,45,31) 81%,rgb(155,81,224) 100%)"}}} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-background wp-element-button" style="background:linear-gradient(135deg,rgb(6,147,227) 0%,rgb(159,45,31) 81%,rgb(155,81,224) 100%)">Start a conversation with a stranger 😜</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","right":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|60"}},"color":{"background":"#382998"}},"fontSize":"extra-large"} -->
+<div class="wp-block-button has-custom-font-size has-extra-large-font-size"><a class="wp-block-button__link has-background wp-element-button" style="background-color:#382998;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)">Keep your soul satiated 🙏</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
 <!-- wp:pullquote -->
 <figure class="wp-block-pullquote"><blockquote><p>You only know me as you see me, not as I actually am.</p><cite>Immanuel Kant</cite></blockquote></figure>
 <!-- /wp:pullquote -->
@@ -2679,7 +2689,7 @@ https://wordpress.org/about/
 <!-- /wp:verse -->
 
 <!-- wp:table {"hasFixedLayout":true,"align":"wide","className":"has-fixed-layout"} -->
-<figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><tbody><tr><td><strong>What I like</strong></td><td>Petting my cats in the morning</td><td>Riding my bike in the mountain</td></tr><tr><td><strong>What I have</strong></td><td>Not much, just enough to keep me going on</td><td>A balcony with plants</td></tr><tr><td><strong>What I desire</strong></td><td>Attending conferences and meeting plenty of interesting folks from the community</td><td>To be able to focus on the important things of life</td></tr></tbody></table></figure>
+<figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><tbody><tr><td><strong>What I like</strong></td><td>Petting my 3 cats 😺😺😺 in the morning ☀️</td><td>Riding my bike in the mountain</td></tr><tr><td><strong>What I have</strong></td><td>Not much, just enough to <a href="https://keepmegoing.com">keep me going on</a></td><td>A <mark style="background-color:rgba(0, 0, 0, 0);color:#c22a2a" class="has-inline-color">balcony with plants</mark></td></tr><tr><td><strong>What I desire</strong></td><td>Attending <strong>conferences</strong> and meeting plenty of <strong>interesting folks</strong> from the community</td><td>To be able to focus on the important things of life</td></tr></tbody></table><figcaption class="wp-element-caption">Some items to consider for new year's resolution?</figcaption></figure>
 <!-- /wp:table -->
 
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=7Nmz3IjtPh0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
