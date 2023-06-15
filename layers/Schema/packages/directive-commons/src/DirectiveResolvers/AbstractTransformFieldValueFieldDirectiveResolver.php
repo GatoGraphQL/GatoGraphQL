@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSchema\DirectiveCommons\DirectiveResolvers;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
-use PoP\Engine\DirectiveResolvers\AbstractFieldDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Engine\DirectiveResolvers\AbstractFieldDirectiveResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
@@ -40,8 +43,62 @@ abstract class AbstractTransformFieldValueFieldDirectiveResolver extends Abstrac
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        /** 
+         * If the directive args contain any reference to a promise,
+         * validate it
+         */
+        /** @var ComponentModelModuleConfiguration */
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        $setFieldAsNullIfDirectiveFailed = $moduleConfiguration->setFieldAsNullIfDirectiveFailed();
+
+        $resolveDirectiveArgsOnObject = $this->directive->hasArgumentReferencingResolvedOnObjectPromise();
+
+        if (!$resolveDirectiveArgsOnObject) {
+            $directiveArgs = $this->getResolvedDirectiveArgs(
+                $relationalTypeResolver,
+                $idFieldSet,
+                $engineIterationFeedbackStore,
+            );
+            if ($directiveArgs === null) {
+                if ($setFieldAsNullIfDirectiveFailed) {
+                    $this->removeIDFieldSet(
+                        $succeedingPipelineIDFieldSet,
+                        $idFieldSet,
+                    );
+                    $this->setFieldResponseValueAsNull(
+                        $resolvedIDFieldValues,
+                        $idFieldSet,
+                    );
+                }
+                return;
+            }
+        }
+        
         foreach ($idFieldSet as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
+                if ($resolveDirectiveArgsOnObject) {
+                    $directiveArgs = $this->getResolvedDirectiveArgsForObjectAndField(
+                        $relationalTypeResolver,
+                        $field,
+                        $id,
+                        $engineIterationFeedbackStore,
+                    );
+                    if ($directiveArgs === null) {
+                        if ($setFieldAsNullIfDirectiveFailed) {
+                            $iterationFieldSet = [$id => new EngineIterationFieldSet([$field])];
+                            $this->removeIDFieldSet(
+                                $succeedingPipelineIDFieldSet,
+                                $iterationFieldSet,
+                            );
+                            $this->setFieldResponseValueAsNull(
+                                $resolvedIDFieldValues,
+                                $iterationFieldSet,
+                            );
+                        }
+                        continue;
+                    }
+                }
+
                 $resolvedIDFieldValues[$id][$field] = $this->transformValue(
                     $resolvedIDFieldValues[$id][$field],
                     $id,
@@ -52,6 +109,14 @@ abstract class AbstractTransformFieldValueFieldDirectiveResolver extends Abstrac
                     $engineIterationFeedbackStore,
                 );
             }
+        }
+
+        /**
+         * Reset the AppState
+         */
+        if ($resolveDirectiveArgsOnObject) {
+            $this->resetObjectResolvedDynamicVariablesInAppState();
+            $this->directiveDataAccessor->resetDirectiveArgs();
         }
     }
 
