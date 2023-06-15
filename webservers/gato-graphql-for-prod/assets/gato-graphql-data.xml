@@ -1672,6 +1672,33 @@ video/mp4
 
 <!-- wp:latest-posts /-->
 
+<!-- wp:html -->
+<div>
+	<h4>
+		Did you know?
+	</h4>
+	<p>
+		We are not rich by what we possess but by what we can do without.
+	</p>
+	<p>
+		Patience is the strength of the weak, impatience is the weakness of the strong.
+	</p>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>
+PluginApp::initializePlugin();
+
+PluginApp::getMainPluginManager()-&gt;register(new Plugin(
+	__FILE__,
+	$pluginVersion,
+	$pluginName,
+	$commitHash
+))-&gt;setup();
+</code></pre>
+<!-- /wp:code -->
+
 <!-- wp:categories {"showHierarchy":true,"showPostCounts":true} /-->
 
 <!-- wp:embed {"url":"https://twitter.com/WordPress/status/1666875287542300679?cxt=HHwWjoCw7cKP96EuAAAA","type":"rich","providerNameSlug":"twitter","responsive":true} -->
@@ -2642,33 +2669,6 @@ https://wordpress.org/about/
 <!-- wp:video {"id":132,"tracks":[]} -->
 <figure class="wp-block-video"><video controls src="https://download.samplelib.com/mp4/sample-5s.mp4"></video><figcaption class="wp-element-caption">Test video of a road in a city</figcaption></figure>
 <!-- /wp:video -->
-
-<!-- wp:html -->
-<div>
-	<h4>
-		Did you know?
-	</h4>
-	<p>
-		We are not rich by what we possess but by what we can do without.
-	</p>
-	<p>
-		Patience is the strength of the weak, impatience is the weakness of the strong.
-	</p>
-</div>
-<!-- /wp:html -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>
-PluginApp::initializePlugin();
-
-PluginApp::getMainPluginManager()-&gt;register(new Plugin(
-	__FILE__,
-	$pluginVersion,
-	$pluginName,
-	$commitHash
-))-&gt;setup();
-</code></pre>
-<!-- /wp:code -->
 
 <!-- wp:preformatted -->
 <pre class="wp-block-preformatted">Be a free thinker and don't accept everything you hear as truth. Be critical and evaluate what you believe in.</pre>
