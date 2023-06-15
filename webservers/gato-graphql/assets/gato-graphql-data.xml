@@ -2500,15 +2500,15 @@ https://wordpress.org/about/
 		<guid isPermaLink="false">https://gato-graphql-pro.lndo.site/?p=1242</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">This is a heading (H1) - (Regex test: $1 #1)</h1>
+<h1 class="wp-block-heading">Welcome to the single post full of Gutenberg blocks!</h1>
 <!-- /wp:heading -->
 
 <!-- wp:heading -->
-<h2 class="wp-block-heading">This is a heading (H2)</h2>
+<h2 class="wp-block-heading">This blog post is to be transformed with the Gato GraphQL plugin, and see what happens (or not)</h2>
 <!-- /wp:heading -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">This is a heading (H3)</h3>
+<h3 class="wp-block-heading">This heading (H3) helps testing the regex replacements (Regex test: $1 #1)</h3>
 <!-- /wp:heading -->
 
 <!-- wp:separator {"opacity":"css"} -->
