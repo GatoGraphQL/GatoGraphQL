@@ -1670,7 +1670,21 @@ video/mp4
 <h2>Latest Posts Block</h2>
 <!-- /wp:heading -->
 
-<!-- wp:latest-posts /-->]]></content:encoded>
+<!-- wp:latest-posts /-->
+
+<!-- wp:categories {"showHierarchy":true,"showPostCounts":true} /-->
+
+<!-- wp:embed {"url":"https://twitter.com/WordPress/status/1666875287542300679?cxt=HHwWjoCw7cKP96EuAAAA","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/WordPress/status/1666875287542300679?cxt=HHwWjoCw7cKP96EuAAAA
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://wordpress.org/about/","type":"wp-embed","providerNameSlug":"wordpress-org","align":"center"} -->
+<figure class="wp-block-embed aligncenter is-type-wp-embed is-provider-wordpress-org wp-block-embed-wordpress-org"><div class="wp-block-embed__wrapper">
+https://wordpress.org/about/
+</div><figcaption class="wp-element-caption">Democratizing publishing</figcaption></figure>
+<!-- /wp:embed -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>28</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:08:47]]></wp:post_date>
@@ -2668,24 +2682,10 @@ PluginApp::getMainPluginManager()-&gt;register(new Plugin(
 <figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><tbody><tr><td><strong>What I like</strong></td><td>Bananas</td><td>Apples</td></tr><tr><td><strong>What I have</strong></td><td>Oranges</td><td>Blueberries</td></tr><tr><td><strong>What I desire</strong></td><td>Avocado</td><td>Grapes</td></tr></tbody></table></figure>
 <!-- /wp:table -->
 
-<!-- wp:categories {"showHierarchy":true,"showPostCounts":true} /-->
-
-<!-- wp:embed {"url":"https://twitter.com/WordPress/status/1666875287542300679?cxt=HHwWjoCw7cKP96EuAAAA","type":"rich","providerNameSlug":"twitter","responsive":true} -->
-<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
-https://twitter.com/WordPress/status/1666875287542300679?cxt=HHwWjoCw7cKP96EuAAAA
-</div></figure>
-<!-- /wp:embed -->
-
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=7Nmz3IjtPh0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
 https://www.youtube.com/watch?v=7Nmz3IjtPh0
 </div><figcaption class="wp-element-caption">At this year's WCEU Keynote address in Athens, Greece. <a href="https://www.youtube.com/hashtag/wordpress">#WordPress</a> co-founder, Matt Mullenweg, Gutenberg Architect, Matías Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.</figcaption></figure>
-<!-- /wp:embed -->
-
-<!-- wp:embed {"url":"https://wordpress.org/about/","type":"wp-embed","providerNameSlug":"wordpress-org","align":"center"} -->
-<figure class="wp-block-embed aligncenter is-type-wp-embed is-provider-wordpress-org wp-block-embed-wordpress-org"><div class="wp-block-embed__wrapper">
-https://wordpress.org/about/
-</div><figcaption class="wp-element-caption">Democratizing publishing</figcaption></figure>
 <!-- /wp:embed -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>40</wp:post_id>
