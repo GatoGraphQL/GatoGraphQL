@@ -2608,7 +2608,7 @@ https://wordpress.org/about/
 <!-- /wp:cover -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><mark style="background-color:rgba(0, 0, 0, 0);color:#e31717" class="has-inline-color">When going to eat out, I normally go for one of these:</mark></h3>
+<h3 class="wp-block-heading">When going to eat out, I normally go for one of these:</h3>
 <!-- /wp:heading -->
 
 <!-- wp:list {"ordered":true} -->
