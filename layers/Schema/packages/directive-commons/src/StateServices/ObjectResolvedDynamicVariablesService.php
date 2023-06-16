@@ -88,6 +88,9 @@ class ObjectResolvedDynamicVariablesService implements ObjectResolvedDynamicVari
         /** @var SplObjectStorage<FieldInterface,array<string|int,array<string,mixed>>> SplObjectStorage<Field, [objectID => [dynamicVariableName => value]]> */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
 
+        /** @var bool */
+        $showWarningsOnExportingDuplicateDynamicVariableName = App::getState('show-warnings-on-exporting-duplicate-dynamic-variable-name');
+
         /**
          * If passing null, execute on objectID for all fields
          */
@@ -105,23 +108,25 @@ class ObjectResolvedDynamicVariablesService implements ObjectResolvedDynamicVari
              * situation or the response will be inundated with
              * unwarranted warnings.
              */
-            $addDynamicVariableAlreadySetWarningFeedback = count($dynamicVariableTargetFields) === 1
-                || $targetField !== $wildcardField;
-            if (
-                $addDynamicVariableAlreadySetWarningFeedback
-                && $objectResolvedDynamicVariables->contains($targetField)
-                && isset($objectResolvedDynamicVariables[$targetField][$id])
-                && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$targetField][$id])
-            ) {
-                $this->addDynamicVariableAlreadySetWarningFeedback(
-                    $targetObjectTypeResolver,
-                    $astNode,
-                    $directive,
-                    $dynamicVariableName,
-                    $id,
-                    $field,
-                    $engineIterationFeedbackStore,
-                );
+            if ($showWarningsOnExportingDuplicateDynamicVariableName) {
+                $addDynamicVariableAlreadySetWarningFeedback = count($dynamicVariableTargetFields) === 1
+                    || $targetField !== $wildcardField;
+                if (
+                    $addDynamicVariableAlreadySetWarningFeedback
+                    && $objectResolvedDynamicVariables->contains($targetField)
+                    && isset($objectResolvedDynamicVariables[$targetField][$id])
+                    && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$targetField][$id])
+                ) {
+                    $this->addDynamicVariableAlreadySetWarningFeedback(
+                        $targetObjectTypeResolver,
+                        $astNode,
+                        $directive,
+                        $dynamicVariableName,
+                        $id,
+                        $field,
+                        $engineIterationFeedbackStore,
+                    );
+                }
             }
 
             /** @var array<string|int,array<string,mixed>> */
