@@ -68,6 +68,9 @@ class AppStateProvider extends AbstractAppStateProvider
         // For Validating if the Directive supports only certain types
         $state['field-type-resolver-for-supported-directive-resolution'] = null;
 
+        // Show a warning when providing a duplicate variable name to `@export` or similar 
+        $state['enable-duplicate-dynamic-variable-name-warnings'] = true;
+
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getVariableManager()->getVariablesFromRequest();
 
