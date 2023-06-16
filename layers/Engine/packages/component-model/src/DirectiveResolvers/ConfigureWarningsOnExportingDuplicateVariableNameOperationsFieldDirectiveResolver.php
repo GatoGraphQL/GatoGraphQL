@@ -9,6 +9,8 @@ use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -173,5 +175,31 @@ class ConfigureWarningsOnExportingDuplicateVariableNameOperationsFieldDirectiveR
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        $directiveArgs = $this->getResolvedDirectiveArgs(
+            $relationalTypeResolver,
+            $idFieldSet,
+            $engineIterationFeedbackStore,
+        );
+        if ($directiveArgs === null) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            $setFieldAsNullIfDirectiveFailed = $moduleConfiguration->setFieldAsNullIfDirectiveFailed();
+            if ($setFieldAsNullIfDirectiveFailed) {
+                $this->removeIDFieldSet(
+                    $succeedingPipelineIDFieldSet,
+                    $idFieldSet,
+                );
+                $this->setFieldResponseValueAsNull(
+                    $resolvedIDFieldValues,
+                    $idFieldSet,
+                );
+            }
+            return;
+        }
+        /** @var bool */
+        $enabled = $directiveArgs['enabled'];
+
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->override('show-warnings-on-exporting-duplicate-dynamic-variable-name', $enabled);
     }
 }
