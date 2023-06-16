@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace GraphQLByPoP\DependsOnOperationsDirective\DirectiveResolvers;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\DirectiveResolvers\PureOperationDirectiveResolverTrait;
+use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
+use PoP\ComponentModel\Directives\FieldDirectiveBehaviors;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -13,6 +17,8 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\DirectiveResolvers\AbstractGlobalFieldDirectiveResolver;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 /**
  * @configureWarningsOnExportingDuplicateVariableName directive, 
@@ -63,8 +69,6 @@ use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
  */
 class ConfigureWarningsOnExportingDuplicateVariableNameOperationsFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
 {
-    use PureOperationDirectiveResolverTrait;
-
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
@@ -79,6 +83,11 @@ class ConfigureWarningsOnExportingDuplicateVariableNameOperationsFieldDirectiveR
     public function getDirectiveName(): string
     {
         return 'configureWarningsOnExportingDuplicateVariableName';
+    }
+    
+    public function getFieldDirectiveBehavior(): string
+    {
+        return FieldDirectiveBehaviors::OPERATION;
     }
 
     public function isDirectiveEnabled(): bool
@@ -137,5 +146,32 @@ class ConfigureWarningsOnExportingDuplicateVariableNameOperationsFieldDirectiveR
     public function isRepeatable(): bool
     {
         return false;
+    }
+
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string|int,object> $idObjects
+     * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param array<FieldDirectiveResolverInterface> $succeedingPipelineFieldDirectiveResolvers
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
+     * @param array<string,mixed> $messages
+     */
+    public function resolveDirective(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        array $succeedingPipelineFieldDirectiveResolvers,
+        array $idObjects,
+        array $unionTypeOutputKeyIDs,
+        array $previouslyResolvedIDFieldValues,
+        array &$succeedingPipelineIDFieldSet,
+        array &$succeedingPipelineFieldDataAccessProviders,
+        array &$resolvedIDFieldValues,
+        array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void {
     }
 }
