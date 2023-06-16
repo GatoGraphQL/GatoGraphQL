@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\DependsOnOperationsDirective\DirectiveResolvers;
+namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
