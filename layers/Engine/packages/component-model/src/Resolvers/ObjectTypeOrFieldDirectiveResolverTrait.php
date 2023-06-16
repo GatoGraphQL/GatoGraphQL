@@ -100,30 +100,10 @@ trait ObjectTypeOrFieldDirectiveResolverTrait
     {
         $appStateManager = App::getAppStateManager();
 
-        $currentObjectID = null;
-        $currentField = null;
-
-        /**
-         * Restore the previous ID/field from the stack as the new "current"
-         *
-         * @var array<string|int>
-         */
-        $previousObjectIDs = App::getState('object-resolved-dynamic-variables-previous-object-ids');
-        if ($previousObjectIDs !== []) {
-            /** @var FieldInterface[] */
-            $previousFields = App::getState('object-resolved-dynamic-variables-previous-fields');
-
-            $currentObjectID = array_shift($previousObjectIDs);
-            $currentField = array_shift($previousFields);
-
-            $appStateManager->override('object-resolved-dynamic-variables-previous-object-ids', $previousObjectIDs);
-            $appStateManager->override('object-resolved-dynamic-variables-previous-fields', $previousFields);
-        }
-
         // The current object ID for which to retrieve the dynamic variable for.
-        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $currentObjectID);
+        $appStateManager->override('object-resolved-dynamic-variables-current-object-id', null);
         // The current field for which to retrieve the dynamic variable for.
-        $appStateManager->override('object-resolved-dynamic-variables-current-field', $currentField);
+        $appStateManager->override('object-resolved-dynamic-variables-current-field', null);
     }
 
     protected function loadObjectResolvedDynamicVariablesInAppState(
@@ -131,27 +111,6 @@ trait ObjectTypeOrFieldDirectiveResolverTrait
         string|int $id,
     ): void {
         $appStateManager = App::getAppStateManager();
-
-        /**
-         * Move the current ID/field onto the stack
-         *
-         * @var string|int|null
-         */
-        $currentObjectID = App::getState('object-resolved-dynamic-variables-current-object-id');
-        if ($currentObjectID !== null) {
-            /** @var FieldInterface|null */
-            $currentField = App::getState('object-resolved-dynamic-variables-current-field');
-            /** @var array<string|int> */
-            $previousObjectIDs = App::getState('object-resolved-dynamic-variables-previous-object-ids');
-            /** @var FieldInterface[] */
-            $previousFields = App::getState('object-resolved-dynamic-variables-previous-fields');
-
-            array_unshift($previousObjectIDs, $currentObjectID);
-            array_unshift($previousFields, $currentField);
-
-            $appStateManager->override('object-resolved-dynamic-variables-previous-object-ids', $previousObjectIDs);
-            $appStateManager->override('object-resolved-dynamic-variables-previous-fields', $previousFields);
-        }
 
         // The current object ID for which to retrieve the dynamic variable for.
         $appStateManager->override('object-resolved-dynamic-variables-current-object-id', $id);
