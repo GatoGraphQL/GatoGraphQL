@@ -22,7 +22,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider as EngineErrorFeedbackItemProvider;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -200,8 +199,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
-                                EngineErrorFeedbackItemProvider::class,
-                                EngineErrorFeedbackItemProvider::E7,
+                                GenericFeedbackItemProvider::class,
+                                GenericFeedbackItemProvider::E1,
                                 [
                                     $e->getMessage(),
                                 ]
