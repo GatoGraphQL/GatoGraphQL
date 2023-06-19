@@ -10,9 +10,7 @@ This module adds the following fields to the `Root` type:
 - `blockData`
 - `blockFlattenedData`
 
-
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
-
 
 ## `blocks`
 
