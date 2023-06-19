@@ -1,7 +1,19 @@
 # Blocks
 
-Integration of Gutenberg blocks into the GraphQL schema.
+Integration of Gutenberg blocks into the GraphQL schema, via the addition of 3 `Root` fields:
 
-## Description
+- `blocks`
+- `blockData`
+- `blockFlattenedData`
 
-@todo Complete doc for blocks!!!!!!!
+## `blocks`
+
+
+
+## `blockData`
+
+
+
+## `blockFlattenedData`
+
+
