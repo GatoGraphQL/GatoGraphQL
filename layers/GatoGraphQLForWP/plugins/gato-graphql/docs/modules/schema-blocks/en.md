@@ -4,7 +4,7 @@ Integration of Gutenberg blocks into the GraphQL schema.
 
 ## Description
 
-This module adds the following fields to the `Root` type:
+This module adds the following fields to all the `CustomPost` types (such as `Post` and `Page`):
 
 - `blocks`
 - `blockData`
@@ -14,8 +14,45 @@ This module is disabled if the [Classic Editor](https://wordpress.org/plugins/cl
 
 ## `blocks`
 
-Only GeneralBlock only, but can add CoreParagraphBlock, CoreImageBlock, etc
-		with specific (typed) fields
+Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post:
+
+```graphql
+{
+  posts {
+    blocks {
+      # ...
+    }
+  }
+}
+```
+
+The result is a `BlockUnion` type, which contains all the possible Block types that have been mapped to the schema, all of them implementing the `Block` interface.
+
+Currently, there is only one Block type mapped: `GenericBlock`:
+
+```graphql
+interface Block {
+  name: String!
+  attributes: JSONObject
+  innerBlocks: [BlockUnion!]
+}
+
+type GenericBlock implements Block {
+  name: String!
+  attributes: JSONObject
+  innerBlocks: [BlockUnion!]
+}
+
+union BlockUnion = GenericBlock
+```
+
+`GenericBlock` offers field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block. As such, this block is sufficient to represent any Block type.
+
+Only GeneralBlock only, but can add CoreParagraphBlock, CoreImageBlock, etc with specific (typed) fields
+
+### Retrieving `BlockUnion` or `GeneralBlock`
+
+### Filtering blocks
 
 ## `blockData`
 
