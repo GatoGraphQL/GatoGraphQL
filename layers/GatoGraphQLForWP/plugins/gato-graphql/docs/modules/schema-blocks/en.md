@@ -1101,7 +1101,7 @@ In case we need to recreate the block hierarchy, the response also includes two 
 
 ### Filtering the flattened block data items
 
-Now that the block hierarchy has been flattened, filtering by `core/heading` will produce these blocks always, even if originally nested under a block that has been excluded.
+Now that the block hierarchy has been flattened, filtering by `core/heading` will produce all of these blocks (even if any of them is originally nested under a block that has been excluded).
 
 This query:
 
