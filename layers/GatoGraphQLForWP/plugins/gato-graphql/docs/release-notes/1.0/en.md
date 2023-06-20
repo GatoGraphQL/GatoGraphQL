@@ -941,6 +941,10 @@ Before, the service container (upon which the GraphQL schema is based) was regen
 
 Now, only Gato GraphQL extension plugins trigger this process.
 
+## Generating the service container is faster (after upgrading to Symfony v6.3)
+
+The plugin has upgraded its Symfony dependencies to the latest v6.3, which <a href="https://symfony.com/blog/new-in-symfony-6-3-performance-improvements" target="_blank">offers performance improvements</a>.
+
 ## Fixed
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)

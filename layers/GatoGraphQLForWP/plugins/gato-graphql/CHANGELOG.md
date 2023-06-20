@@ -22,6 +22,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added "state" column to tables for Custom Endpoints and Persisted Queries
 - Saving the Settings is faster, as it does not regenerate the service container anymore
 - Only activating/deactivating Gato GraphQL extension plugins will regenerate the service container
+- Generating the service container is faster (after upgrading to Symfony v6.3)
 
 ### Fixed
 
