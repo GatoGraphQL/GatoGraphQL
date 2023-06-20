@@ -726,7 +726,9 @@ The **PHP Functions via Schema** extension offers fields which expose functional
 - `_arrayUnique`
 - ...
 
-Functionality fields are not distinctively supported by the GraphQL spec. That's why Gato GraphQL offers them as a custom feature, under the name of "Global Fields". With this feature, after indicating that a field is global in the corresponding resolver (in PHP code), it will be made accessible under every single type in the GraphQL schema.
+Gato GraphQL offers "Global Fields" as a custom feature, as these are not distinctively supported by the GraphQL spec.
+
+With this feature, after indicating that a field is "global" in the corresponding resolver (in PHP code), it will be made accessible under every single type in the GraphQL schema.
 
 In order to configure the level of exposure of global fields in the schema, the Schema Configuration now has a new element "Global Fields":
 
