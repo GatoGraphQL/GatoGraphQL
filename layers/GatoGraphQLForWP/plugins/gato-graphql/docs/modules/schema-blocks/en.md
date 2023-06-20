@@ -1099,7 +1099,7 @@ In case we need to recreate the block hierarchy, the response also includes two 
 - `parentBlockPosition`: The position of the block's parent block within the returned array, or `null` if it is a top-level block
 - `innerBlockPositions`: An array with the positions of the block's inner blocks within the returned array
 
-### Filtering block flattened data items
+### Filtering the flattened block data items
 
 Now that the block hierarchy has been flattened, filtering by `core/heading` will produce these blocks always, even if originally nested under a block that has been excluded.
 
