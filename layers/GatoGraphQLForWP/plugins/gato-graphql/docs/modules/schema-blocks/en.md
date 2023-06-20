@@ -94,7 +94,9 @@ Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hen
 
 The `JSONObject` type is not strictly typed: its properties can have any type and cardinality (`String`, `Int`, `[Boolean!]`, etc), so we need to know this information for every block and deal with each case in the client.
 
-If we need strict typing (eg: to represent the content in the `core/paragraph` block as a `String`), we must extend the GraphQL schema via PHP code, adding block-specific types (such as `CoreParagraphBlock`) that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
+If we need strict typing, we must extend the GraphQL schema via PHP code, adding block-specific types that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
+
+For instance, we can add type `CoreParagraphBlock` that maps the `core/paragraph` block, with field `content` of type `String`.
 
 ### Retrieving `BlockUnion` or `GeneralBlock`
 
