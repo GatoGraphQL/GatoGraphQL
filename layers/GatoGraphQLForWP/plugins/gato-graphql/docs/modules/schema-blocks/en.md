@@ -149,6 +149,12 @@ Field `CustomPost.blocks` contains argument `filter` with 2 properties: `include
 
 ## `blockData`
 
+Field `blocks` has the disadvantage that, in order to retrieve the whole block data contained in the custom post, including the data for the inner blocks, and their own inner blocks, and so on, we must know how many nested block levels there are, and reflect that information in the query.
+
+Or, if we don't know, we must compose the GraphQL query with enough levels as to be sure that all data will be fetched.
+
+For instance, this query retrieves up to 7 levels of inner block nesting:
+
 ```graphql
 {
   post(by: { id: 1 }) {
