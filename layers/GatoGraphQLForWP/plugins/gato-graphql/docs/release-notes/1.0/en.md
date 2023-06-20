@@ -695,6 +695,37 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
 
+## Added support for "Global Fields"
+
+The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
+
+However, there is also a different kind of fields: those providing "functionality" instead of data. These fields need not be restricted to a specific type, as they are potentially useful to all types.
+
+"Functionality" fields are not distinctively supported by the GraphQL spec. As such, Gato GraphQL offers them as a custom feature, under the name of "Global Fields". This feature allows us to define a global field only once, and it will be made accessible under every single type in the GraphQL schema.
+
+These are some examples of global fields, offered by some of the extensions:
+
+The **HTTP Client** extension offers fields which connect to external API endpoints and retrieve data from them:
+
+- `_sendHTTPRequest`
+- `_sendJSONObjectItemHTTPRequest`
+- `_sendJSONObjectCollectionHTTPRequest`
+- `_sendGraphQLHTTPRequest`
+
+The **PHP Functions via Schema** extension offers fields which expose functionalities commonly found in programming languages (such as PHP):
+
+- `_not`
+- `_if`
+- `_equals`
+- `_isEmpty`
+- `_echo`
+- `_sprintf`
+- `_arrayItem`
+- `_arrayAddItem`
+- `_arrayUnique`
+
+
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
