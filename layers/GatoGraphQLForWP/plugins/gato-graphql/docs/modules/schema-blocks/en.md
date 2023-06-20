@@ -4,7 +4,7 @@ Integration of Gutenberg blocks into the GraphQL schema.
 
 ## Description
 
-This module adds the following fields to all the `CustomPost` types (such as `Post` and `Page`):
+This module adds `Block` types to the GraphQL schema, retrieved via the following fields added to all `CustomPost` types (such as `Post` and `Page`):
 
 - `blocks`
 - `blockDataItems`
@@ -16,7 +16,9 @@ This module is disabled if the [Classic Editor](https://wordpress.org/plugins/cl
 
 Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post.
 
-The result from `blocks` is a list of the `BlockUnion` union type, which contains all the possible Block types that have been mapped to the GraphQL schema. All these Block types implement the `Block` interface. The plugin implements one Block type, `GenericBlock`, which is already sufficient to retrieve the data for any block (via field `attributes: JSONObject`):
+The result from `blocks` is a list of the `BlockUnion` union type, which contains all the possible Block types that have been mapped to the GraphQL schema. All these Block types implement the `Block` interface.
+
+The plugin implements one Block type, `GenericBlock`, which is already sufficient to retrieve the data for any block (via field `attributes: JSONObject`).
 
 This query:
 
@@ -46,7 +48,7 @@ This query:
 }
 ```
 
-...produces this response:
+...may produce this response:
 
 ```json
 {
