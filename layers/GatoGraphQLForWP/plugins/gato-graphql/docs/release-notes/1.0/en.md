@@ -20,7 +20,7 @@ The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrie
 
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
 
-Below is a short summary of the 3 fields. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/351a79c7fb3fcdabf78c679e02661f4750b0f34d/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description.
+_🔗 Below is a short summary of the 3 fields. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description._
 
 ### `blocks`
 
@@ -697,6 +697,10 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ## Added support for the "Global Fields" custom feature
 
+_⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
+
+_🔗 The following is a short description of the feature. Please check the [Global Fields module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/global-fields/en.md) for a more thorough description._
+
 The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
 
 However, there is also a different kind of fields: those providing "functionality" instead of data. These fields need not be restricted to a specific type, as they are potentially useful to all types.
@@ -726,13 +730,116 @@ The **PHP Functions via Schema** extension offers fields which expose functional
 - `_arrayUnique`
 - ...
 
-Gato GraphQL offers "Global Fields" as a custom feature, as these are not distinctively supported by the GraphQL spec.
-
-With this feature, after indicating that a field is "global" in the corresponding resolver (in PHP code), it will be made accessible under every single type in the GraphQL schema.
+With the "Global Fields" feature, after indicating that a field is "global" in the corresponding resolver (in PHP code), it will be made accessible under every single type in the GraphQL schema.
 
 In order to configure the level of exposure of global fields in the schema, the Schema Configuration now has a new element "Global Fields":
 
 ![Global Fields in the Schema Configuration](../../images/schema-config-global-fields.png)
+
+## Added support for the "Composable Directives" custom feature
+
+_⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
+
+_🔗 The following is a short description of the feature. Please check the [Composable Directives module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/composable-directives/en.md) for a more thorough description._
+
+This feature allows directives to execute complex functionalities, by composing other directives inside. A directive that composes another directive is called a "meta" directive.
+
+A use case is to convert the type of the field value to the type expected by the nested directive. For instance, each element from an array can be provided to a directive that expects a single value.
+
+In this query, field `capabilities` returns `[String]` (an array of strings), and directive `@strUpperCase` (available via the **PHP Functions via Schema** extension) receives `String`. Hence, executing the following query:
+
+```graphql
+query {
+  user(by: {id: 1}) {
+    capabilities @strUpperCase
+  }
+}
+```
+
+...returns an error due to the type mismatch:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Directive 'strUpperCase' from field 'capabilities' cannot be applied on object with ID '1' because it is not a string"
+    }
+  ],
+  "data": {
+    "user": {
+      "capabilities": null
+    }
+  }
+}
+```
+
+The meta directive `@underEachArrayItem` (provided via extension **Data Iteration Meta Directives**) can solve this problem, as it iterates over an array of elements and applies its nested directive `@strUpperCase` on each of them, so that this latter directive receives a single element (of type `String`) instead of an array.
+
+The query from above can be satisfied like this:
+
+```graphql
+query {
+  user(by: {id: 1}) {
+    capabilities
+      @underEachArrayItem
+        @strUpperCase
+  }
+}
+```
+
+...producing the intended response:
+
+```json
+{
+  "data": {
+    "user": {
+      "capabilities": [
+        "READ",
+        "LEVEL_0"
+      ]
+    }
+  }
+}
+```
+
+In order to enable or disable composable directives in the schema for some specific endpoint, the Schema Configuration now has a new element "Composable Directives":
+
+<!-- @todo Create image schema-config-composable-directives.png -->
+
+![Composable Directives in the Schema Configuration](../../images/schema-config-composable-directives.png)
+
+## Added support for the "Multi-Field Directives" custom feature
+
+_⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
+
+_🔗 The following is a short description of the feature. Please check the [Multi-Field Directives module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/multifield-directives/en.md) for a more thorough description._
+
+This feature allows directives to be applied to multiple fields, instead of only one. When enabled, an argument `affectAdditionalFieldsUnderPos` is added to all directives, to indicate the relative positions of the additional fields on which to apply the directive.
+
+There are two main use cases for this feature:
+
+1. **Performance:** Process a computation on multiple fields simultaneously (the gain can be significant when it involves a call to an external API)
+2. **Extended functionality:** Gather/analyse fields from multiple fields at once, and do something with this extended dataset.
+
+For instance, in the following query, directive `@strTranslate` is applied not only to field `content` but also to `excerpt`, so that a single call to the Google Translation API can process and translate the entries for both fields:
+
+```graphql
+{
+  posts {
+    excerpt
+    content
+      @strTranslate(
+        affectAdditionalFieldsUnderPos: [1]
+      )
+  }
+}
+```
+
+In order to enable or disable multi-field directives in the schema for some specific endpoint, the Schema Configuration now has a new element "Multi-Field Directives":
+
+<!-- @todo Create image schema-config-multifield-directives.png -->
+
+![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png)
 
 ## The Settings page has been re-designed
 
