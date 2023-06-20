@@ -666,6 +666,14 @@ This query:
 
 @todo Complete Extensions page changelog!
 
+## Browse Recipes, providing examples of GraphQL queries for different use cases
+
+A new Recipes page has been added to the menu.
+
+It provides examples of GraphQL queries for plenty of use cases. These can help us visualize the possibilities of what's doable with Gato GraphQL, and we can copy/paste these queries into our sites to achieve our goals faster.
+
+![Recipes page](../../images/releases/v1.0/recipes-page.png)
+
 ## Browse "Additional Documentation" when editing a Schema Configuration
 
 Documentation for additional features in the Gato GraphQL can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
@@ -706,14 +714,6 @@ The plugin has provided restrictive and non-restrictive default behaviors for th
 Now it is possible to do the switch directly via the UI: The new "Plugin Management" tab in the Settings Page has an item "Reset Settings" which restores the default settings values, and allows to decide if to use the restrictive or the non-restrictive default behaviors.
 
 ![Reset Settings page](../../images/releases/v1.0/reset-settings-page.png)
-
-## Added the Recipes page, providing use examples of GraphQL queries for different use cases
-
-A new Recipes page has been added to the menu.
-
-It provides examples of GraphQL queries for plenty of use cases. These can help us visualize the possibilities of what's doable with Gato GraphQL, and we can copy/paste these queries into our sites to achieve our goals faster.
-
-![Recipes page](../../images/releases/v1.0/recipes-page.png)
 
 ## Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
 
