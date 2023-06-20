@@ -668,7 +668,11 @@ Both Custom Endpoints and Persisted Queries have been implemented as Custom Post
 
 Now, status values `private` and `password-protected` are also supported. This makes it possible to create endpoints that: Aare to be consumed internally only (in the former case), and; That can be accessed via a password only (in the latter case).
 
+### Private endpoints
 
+By setting the status of the Custom Endpoint or Persisted Query as `private`, the endpoint can only be accessed by the admin user. This prevents our data from being unintentionally shared with users who should not have access to the data.
+
+For instance, we can create private Persisted Queries that help manage the application, such as retrieving data to create reports with our metrics.
 
 ## Browse and install Gato GraphQL extensions
 
