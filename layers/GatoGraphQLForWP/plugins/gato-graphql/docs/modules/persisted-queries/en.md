@@ -143,13 +143,13 @@ For instance, we can create private Persisted Queries that help manage the appli
 
 If we create a Persisted Query for a specific client, we can assign a password to it, to provide an additional level of security that only that client will access the endpoint.
 
-When first accessing a password-protected endpoint (whether accessing the endpoint directly, or its GraphiQL or Interactive Schema clients), we encounter a screen requesting the password:
+![Password-protected Persisted Query](../../images/password-protected-persisted-query.png)
 
-![Password-protected Persisted Query: First access](../../images/password-protected-custom-endpoint-unauthorized.png)
+When first accessing a password-protected persisted query, we encounter a screen requesting the password:
 
-Once the password is provided and validated, only then the user will access the intended endpoint or client:
+![Password-protected Persisted Query: First access](../../images/password-protected-persisted-query-unauthorized.png)
 
-![Password-protected Persisted Query: After authorization](../../images/password-protected-custom-endpoint-authorized.png)
+Once the password is provided and validated, only then the user will access the intended endpoint.
 
 ### Making the persisted query dynamic via URL params
 
