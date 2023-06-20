@@ -456,26 +456,40 @@ fragment BlockData on Block {
   name
   attributes
   innerBlocks {
-    name
-    attributes
-    innerBlocks {
+    ...on Block {
       name
       attributes
       innerBlocks {
-        name
-        attributes
-        innerBlocks {
+        ...on Block {
           name
           attributes
           innerBlocks {
-            name
-            attributes
-            innerBlocks {
+            ...on Block {
               name
               attributes
               innerBlocks {
-                name
-                attributes
+                ...on Block {
+                  name
+                  attributes
+                  innerBlocks {
+                    ...on Block {
+                      name
+                      attributes
+                      innerBlocks {
+                        ...on Block {
+                          name
+                          attributes
+                          innerBlocks {
+                            ...on Block {
+                              name
+                              attributes
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
