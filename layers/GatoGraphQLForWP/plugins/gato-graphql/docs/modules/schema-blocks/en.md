@@ -284,20 +284,20 @@ interface Block {
   name: String!
   attributes: JSONObject
   innerBlocks: [BlockUnion!]
-  contentSource: String!
+  contentSource: HTML!
 }
 
 type GenericBlock implements Block {
   name: String!
   attributes: JSONObject
   innerBlocks: [BlockUnion!]
-  contentSource: String!
+  contentSource: HTML!
 }
 
 union BlockUnion = GenericBlock
 ```
 
-Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content:
+Field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content:
 
 ```graphql
 {
@@ -329,6 +329,8 @@ Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hen
   }
 }
 ```
+
+Field `Block.contentSource` retrieves the block's (Gutenberg) HTML source code, including the comment delimiters that contain the attributes. However, this field does not retrieve the exact same data as how it is stored in the DB (see [#2346](https://github.com/leoloso/PoP/issues/2346)), so use this field with care.
 
 ### Directly retrieving `GeneralBlock` (instead of `BlockUnion`)
 
