@@ -10,6 +10,8 @@ Here's an extensive description of all the changes.
 
 ## Integration of Gutenberg blocks into the GraphQL schema
 
+_This integration is heavily based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>. My deepest gratitude to this project's contributors, as their contribution has also benefitted this plugin. ❤️_
+
 ## Browse "Additional Documentation" when editing a Schema Configuration
 
 Documentation for additional features in the Gato GraphQL can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
