@@ -668,7 +668,7 @@ Both Custom Endpoints and Persisted Queries have been implemented as Custom Post
 
 Now, status value `private` is also supported and, if the `post_password` property is provided, then the endpoint is also made password-protected.
 
-As such, we can now create endpoints that are to be consumed internally only, or that the user needs to provided a password in order to access it, thus improving the security of our GraphQL API.
+As such, we can now create endpoints that are to be consumed internally only, or that the user needs to provided a password in order to access it, thus improving the security of our GraphQL APIs.
 
 ### Private endpoints
 
@@ -686,7 +686,7 @@ When first accessing a password-protected endpoint (whether accessing the endpoi
 
 ![Password-protected Custom Endpoint: First access](../../images/password-protected-custom-endpoint-unauthorized.png)
 
-Once the password is provided and validated, only then we access the actual destination:
+Once the password is provided and validated, only then the user will access the intended endpoint or client:
 
 ![Password-protected Custom Endpoint: After authorization](../../images/password-protected-custom-endpoint-authorized.png)
 
