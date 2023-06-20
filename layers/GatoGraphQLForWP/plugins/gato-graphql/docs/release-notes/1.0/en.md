@@ -769,7 +769,7 @@ query {
 }
 ```
 
-The meta directive `@underEachArrayItem` (provided via extension **Data Iteration Meta Directives**) can solve this problem, as it iterates over an array of elements and applies its nested directive on each of them, setting the stage before `@strUpperCase` is executed and making it receive a single element (of type `String`) instead of an array.
+The meta directive `@underEachArrayItem` (provided via extension **Data Iteration Meta Directives**) can solve this problem, as it iterates over an array of elements and applies its nested directive `@strUpperCase` on each of them, so that this latter directive receives a single element (of type `String`) instead of an array.
 
 The query from above can be satisfied like this:
 
@@ -797,6 +797,8 @@ query {
   }
 }
 ```
+
+In order to enable or disable composable directives in the schema for some specific endpoint, the Schema Configuration now has a new element "Composable Directives":
 
 <!-- @todo Create image schema-config-composable-directives.png -->
 
