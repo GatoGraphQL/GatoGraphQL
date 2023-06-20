@@ -7,7 +7,7 @@ Integration of Gutenberg blocks into the GraphQL schema.
 This module adds the following fields to all the `CustomPost` types (such as `Post` and `Page`):
 
 - `blocks`
-- `blockData`
+- `blockDataItems`
 - `blockFlattenedData`
 
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
@@ -147,7 +147,7 @@ Field `CustomPost.blocks` contains argument `filter` with 2 properties: `include
 }
 ```
 
-## `blockData`
+## `blockDataItems`
 
 Field `blocks` has the disadvantage that, in order to retrieve the whole block data contained in the custom post, including the data for the inner blocks, and their own inner blocks, and so on, we must know how many nested block levels there are, and reflect that information in the query.
 
@@ -201,6 +201,245 @@ fragment BlockData on Block {
           }
         }
       }
+    }
+  }
+}
+```
+
+It is in order to avoid this that there is field `CustomPost.blockDataItems`.
+
+Instead of returning `[BlockUnion]`, field `CustomPost.blockDataItems` returns `[JSONObject!]` instead:
+
+```graphql
+type CustomPost {
+  blockDataItems: [JSONObject!]
+}
+```
+
+The JSON object contains all the data for the block, under entries `name` and `attributes`, and also of all its inner blocks, under entry `innerBlocks`, recursively.
+
+For instance, the following query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    blockDataItems
+  }
+}
+```
+
+...might produce:
+
+```json
+{
+  "data": {
+    "post": {
+      "blockDataItems": [
+        {
+          "name": "core/gallery",
+          "attributes": {
+            "linkTo": "none",
+            "className": "alignnone",
+            "images": [
+              {
+                "url": "https://d.pr/i/zd7Ehu+",
+                "alt": "",
+                "id": "1706"
+              },
+              {
+                "url": "https://d.pr/i/jXLtzZ+",
+                "alt": "",
+                "id": "1705"
+              }
+            ],
+            "ids": [],
+            "shortCodeTransforms": [],
+            "imageCrop": true,
+            "fixedHeight": true,
+            "sizeSlug": "large",
+            "allowResize": false
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/list",
+          "attributes": {
+            "ordered": false,
+            "values": "<li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li>"
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlocks": [
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/image",
+                  "attributes": {
+                    "id": 1701,
+                    "className": "layout-column-1",
+                    "url": "https://d.pr/i/fW6V3V+",
+                    "alt": ""
+                  }
+                }
+              ]
+            },
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/paragraph",
+                  "attributes": {
+                    "className": "layout-column-2",
+                    "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24/365 communities.",
+                    "dropCap": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlocks": [
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/image",
+                  "attributes": {
+                    "id": 1701,
+                    "className": "layout-column-1",
+                    "url": "https://d.pr/i/fW6V3V+",
+                    "alt": ""
+                  }
+                },
+                {
+                  "name": "core/columns",
+                  "attributes": {
+                    "isStackedOnMobile": true
+                  },
+                  "innerBlocks": [
+                    {
+                      "name": "core/column",
+                      "attributes": {
+                        "width": "33.33%"
+                      },
+                      "innerBlocks": [
+                        {
+                          "name": "core/heading",
+                          "attributes": {
+                            "fontSize": "large",
+                            "content": "Life is so rich",
+                            "level": 2
+                          }
+                        },
+                        {
+                          "name": "core/heading",
+                          "attributes": {
+                            "level": 3,
+                            "content": "Life is so dynamic"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "core/column",
+                      "attributes": {
+                        "width": "66.66%"
+                      },
+                      "innerBlocks": [
+                        {
+                          "name": "core/paragraph",
+                          "attributes": {
+                            "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
+                            "dropCap": false
+                          }
+                        },
+                        {
+                          "name": "core/columns",
+                          "attributes": {
+                            "isStackedOnMobile": true
+                          },
+                          "innerBlocks": [
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": [
+                                {
+                                  "name": "core/image",
+                                  "attributes": {
+                                    "id": 361,
+                                    "sizeSlug": "large",
+                                    "linkDestination": "none",
+                                    "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg",
+                                    "alt": ""
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "name": "core/column",
+                              "attributes": {}
+                            },
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": [
+                                {
+                                  "name": "core/image",
+                                  "attributes": {
+                                    "id": 362,
+                                    "sizeSlug": "large",
+                                    "linkDestination": "none",
+                                    "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png",
+                                    "alt": ""
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 }
