@@ -16,7 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added support for the "Global Fields" custom feature
 - Added support for the "Composable Directives" custom feature
 - Added support for the "Multi-Field Directives" custom feature
-- Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for `content`
+- Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
@@ -37,6 +37,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
+- Must update mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others)
 - Non-restrictive Settings values are used by default
 - Env var `ENABLE_UNSAFE_DEFAULTS` has been removed and `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` added in its place, to indicate to use the restrictive Settings values by default
 - Renamed plugin to "Gato GraphQL"

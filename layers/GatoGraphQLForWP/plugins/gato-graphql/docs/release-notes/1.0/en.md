@@ -841,7 +841,7 @@ In order to enable or disable multi-field directives in the schema for some spec
 
 ![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png)
 
-## Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for `content`
+## Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
 
 Prior to v1.0, the following mutation fields received a `content` argument of type `String` (to create/update the content on custom posts or comments):
 
@@ -852,11 +852,11 @@ Prior to v1.0, the following mutation fields received a `content` argument of ty
 - `Root.createPost`
 - `Root.updatePost`
 
-This `content` argument has now been converted into a ["oneof" input object](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/implicit-features/oneof-input-object/en.md), containing a single property: `html: HTML!`.
+This `content` argument has now been renamed to `contentAs`, and converted into a ["oneof" input object](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/implicit-features/oneof-input-object/en.md) that contains a single property: `html: HTML!`.
 
-This is to avoid potential breaking changes in the future, when it is also possible to create and update custom posts and comments by passing their `Block` data (instead of the single blob of HTML data).
+This is to avoid potential breaking changes in the future, when it becomes possible to also create and update custom posts and comments by passing their `Block` data (instead of the single blob of HTML data).
 
-When that feature is supported, the `content` oneof input object will be added a second property: `blocks: [Block!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
+When that feature is supported, the `contentAs` oneof input object will be added a second property: `blocks: [BlockUnion!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
 
 ## The Settings page has been re-designed
 
@@ -1163,3 +1163,42 @@ The plugin has upgraded its Symfony dependencies to the latest v6.3, which <a hr
 - Non-restrictive Settings values are used by default
 - Env var `ENABLE_UNSAFE_DEFAULTS` has been removed and `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` added in its place, to indicate to use the restrictive Settings values by default
 - Renamed plugin to "Gato GraphQL"
+
+### Must update mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others)
+
+The followng mutations:
+
+- `Comment.reply`
+- `CustomPost.addComment`
+- `CustomPost.update`
+- `Root.addCommentToCustomPost`
+- `Root.createPost`
+- `Root.updatePost`
+
+must be updated, passing a "oneof" input object for the `content` argument.
+
+For instance, this GraphQL query:
+
+```graphql
+mutation CreatePost {
+  createPost(input: {
+    title: "New post"
+    content: "New content"
+  }) {
+    status
+  }
+}
+```
+
+must be transformed like this:
+
+```graphql
+mutation CreatePost {
+  createPost(input: {
+    title: "New post"
+    contentAs: { html: "New content" }
+  }) {
+    status
+  }
+}
+```
