@@ -664,9 +664,11 @@ This query:
 
 ## Support for private and password-protected endpoints
 
-Both Custom Endpoints and Persisted Queries have been implemented as Custom Post Types. So far, Gato GraphQL has reacted to the "status" property of these CPTs as being either `publish`, in which case it is available online, or `draft` or `pending`, in which case it was not published yet, but available for modification in the wp-admin.
+Both Custom Endpoints and Persisted Queries have been implemented as Custom Post Types. So far, Gato GraphQL has reacted to the "status" property of these CPTs as being either `publish` (in which case it is available online), or `draft` or `pending` (in which case it was not published yet, but available for modification in the wp-admin).
 
-Now, status values `private` and `password-protected` are also supported. This makes it possible to create endpoints that: Aare to be consumed internally only (in the former case), and; That can be accessed via a password only (in the latter case).
+Now, status value `private` is also supported and, if the `post_password` property is provided, then the endpoint is also made password-protected.
+
+As such, we can now create endpoints that are to be consumed internally only, or that the user needs to provided a password in order to access it.
 
 ### Private endpoints
 
