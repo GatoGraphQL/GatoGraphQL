@@ -18,9 +18,16 @@ Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks co
 
 ```graphql
 {
-  posts {
+  post(by: { id: 1 }) {
     blocks {
-      # ...
+      ...on Block {
+        name
+        attributes
+        innerBlocks {
+          name
+          attributes
+        }
+      }
     }
   }
 }
@@ -28,15 +35,17 @@ Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks co
 
 The result is a `BlockUnion` type, which contains all the possible Block types that have been mapped to the schema, all of them implementing the `Block` interface.
 
-Currently, there is only one Block type mapped: `GenericBlock`:
-
 ```graphql
 interface Block {
   name: String!
   attributes: JSONObject
   innerBlocks: [BlockUnion!]
 }
+```
 
+Currently, there is only one Block type mapped: `GenericBlock`:
+
+```graphql
 type GenericBlock implements Block {
   name: String!
   attributes: JSONObject
@@ -46,9 +55,9 @@ type GenericBlock implements Block {
 union BlockUnion = GenericBlock
 ```
 
-`GenericBlock` offers field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block. As such, this block is sufficient to represent any Block type.
+`GenericBlock` contains field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block. As such, this block is sufficient to represent any Block type.
 
-Only GeneralBlock only, but can add CoreParagraphBlock, CoreImageBlock, etc with specific (typed) fields
+The JSON object is not strictly typed though. If we need strict typing (eg: to represent the content in the `core/paragraph` block as a `String`), we must extend the GraphQL schema via PHP code, adding more-block-specific types (such as `CoreParagraphBlock`) that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
 
 ### Retrieving `BlockUnion` or `GeneralBlock`
 
