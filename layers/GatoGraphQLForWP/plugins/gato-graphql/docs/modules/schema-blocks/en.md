@@ -275,7 +275,9 @@ This query:
 }
 ```
 
-The result is a `BlockUnion` type, which contains all the possible Block types that have been mapped to the schema, all of them implementing the `Block` interface. Currently, there is only one Block type mapped: `GenericBlock`:
+The result from `blocks` is a `BlockUnion` type, which contains all the possible Block types that have been mapped to the GraphQL schema. All these Block types must implement the `Block` interface. The plugin implements one Block type, `GenericBlock`.
+
+As `GenericBlock` contains field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block, this block is already sufficient to retrieve the data for any Block type:
 
 ```graphql
 interface Block {
@@ -294,8 +296,6 @@ type GenericBlock implements Block {
 
 union BlockUnion = GenericBlock
 ```
-
-`GenericBlock` contains field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block. As such, this block is sufficient to represent any Block type.
 
 Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content:
 
