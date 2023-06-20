@@ -2,7 +2,7 @@
 
 After a reaaaaaaally long time (spanning several years), development of the Gato GraphQL plugin has finally reached v1.0! Yaaaaaaaaaaay 🎉🍾🎊🥳🍻👏🥂🎈🙌
 
-Starting from this version, the plugin will be released in the [WordPress plugins directory](https://wordpress.org/plugins/) (currently a work in progress), so you'll be able to install the plugin directly from your WordPress dashboard.
+Starting from this version, the plugin will be released in the [WordPress plugins directory](https://wordpress.org/plugins/) (submission process currently ongoing), so you'll be able to install the plugin directly from your WordPress dashboard.
 
 Version 1.0 brings plenty of improvements, including the **integration with the (Gutenberg) block editor**, and the **availability of (commercial) extensions** to extend the GraphQL schema and provide further functionality.
 
