@@ -1178,7 +1178,7 @@ Please check the <a href="https://github.com/Automattic/vip-block-data-api/#prea
 
 ## Limitations
 
-_(This documentation has been copied, and slightly adapted, from the [Limitations](https://github.com/Automattic/vip-block-data-api/#limitations) section in `Automattic/vip-block-data-api`.)_
+_(This documentation has been copied, and slightly adapted, from the <a href="https://github.com/Automattic/vip-block-data-api/#limitations" target="_blank">Limitations</a> section in `Automattic/vip-block-data-api`.)_
 
 ### Client-side blocks
 
