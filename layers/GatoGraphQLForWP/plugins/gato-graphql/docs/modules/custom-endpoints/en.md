@@ -84,13 +84,15 @@ On the list of Custom Endpoints, we can visualize their categories and, clicking
 
 By setting the status of the Custom Endpoint as `private`, the endpoint can only be accessed by the admin user. This prevents our data from being unintentionally shared with users who should not have access to the data.
 
-For instance, we can create private Persisted Queries that help manage the application, such as retrieving data to create reports with our metrics.
+For instance, we can create private Custom Endpoints that help manage the application, such as retrieving data to create reports with our metrics.
 
-![Private Persisted Query](../../images/private-persisted-query.png)
+![Private Custom Endpoint](../../images/private-custom-endpoint.png)
 
 ### Password-protected endpoints
 
-If we create a Custom Endpoint for a specific client, we can assign a password to it, to provide an additional level of security that only that client will access the endpoint.
+If we create a Custom Endpoint for a specific client, we can now assign a password to it, to provide an additional level of security that only that client will access the endpoint.
+
+![Password-protected Custom Endpoint](../../images/password-protected-custom-endpoint.png)
 
 When first accessing a password-protected endpoint (whether accessing the endpoint directly, or its GraphiQL or Interactive Schema clients), we encounter a screen requesting the password:
 
