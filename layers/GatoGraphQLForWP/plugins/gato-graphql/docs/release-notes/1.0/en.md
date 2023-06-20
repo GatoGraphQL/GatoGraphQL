@@ -808,6 +808,27 @@ In order to enable or disable composable directives in the schema for some speci
 
 _This is a custom feature (i.e. not present in the GraphQL spec) offered by Gato GraphQL._
 
+This feature allows directives to be applied to multiple fields, instead of only one. When enabled, an argument `affectAdditionalFieldsUnderPos` is added to all directives, to indicate the relative positions of the additional fields on which to apply the directive.
+
+There are two main use cases for this feature:
+
+1. **Performance:** Process a computation on multiple fields simultaneously (the gain can be significant when it involves a call to an external API)
+2. **Extended functionality:** Gather/analyse fields from multiple fields at once, and do something with this extended dataset.
+
+For instance, in the following query, directive `@strTranslate` is applied not only to field `content` but also to `excerpt`, so that a single call to the Google Translation API can process and translate the entries for both fields:
+
+```graphql
+{
+  posts {
+    excerpt
+    content
+      @strTranslate(
+        affectAdditionalFieldsUnderPos: [1]
+      )
+  }
+}
+```
+
 In order to enable or disable multi-field directives in the schema for some specific endpoint, the Schema Configuration now has a new element "Multi-Field Directives":
 
 <!-- @todo Create image schema-config-multifield-directives.png -->
