@@ -307,6 +307,7 @@ The `Block` interface (and, as such, the `GeneralBlock` type) contains the follo
 - `attributes` retrieves a JSON object containing all the attributes from the block.
 - `innerBlocks` retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content.
 - `contentSource` retrieves the block's (Gutenberg) HTML source code, including the comment delimiters that contain the attributes. However, this field does not retrieve the exact same data as how it is stored in the DB (see <a href="https://github.com/leoloso/PoP/issues/2346" target="_blank">#2346</a>), so use this field with care.
+
 ### Directly retrieving `GeneralBlock` (instead of `BlockUnion`)
 
 As currently there is only one Block type mapping blocks –`GeneralBlock`– it makes sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion` type.
@@ -806,7 +807,7 @@ Please notice that, similar to `blocks`, not all blocks of type `core/heading` h
 
 Both fields `blocks` and `blockDataItems` allow to filter what blocks are retrieved (via the `filterBy` argument). In both cases, if a block satisfies the inclusion condition, but is nested within a block that does not, then it will be excluded.
 
-There are ocassions, though, when we need to retrieve all blocks of a certain type from the custom post, independently of where these blocks are located within the hierarchy. For instance, we may want to include all blocks of type `core/image`, to retrieve all images included in a blog post.
+There are occasions, though, when we need to retrieve all blocks of a certain type from the custom post, independently of where these blocks are located within the hierarchy. For instance, we may want to include all blocks of type `core/image`, to retrieve all images included in a blog post.
 
 It is to satisfy this need that there is field `CustomPost.blockFlattenedDataItems`. Unlike fields `blocks` and `blockDataItems`, it flattens the block hierarchy into a single level.
 
@@ -1094,7 +1095,7 @@ This query:
 }
 ```
 
-In case we need to recreate the block hierarchy, the response also includes two additional attributes:
+Please notice how attribute `innerBlocks` has disappeared, as the blocks are not nested anymore. In its place, the response includes two other attributes (which allow us to recreate the block hierarchy):
 
 - `parentBlockPosition`: The position of the block's parent block within the returned array, or `null` if it is a top-level block
 - `innerBlockPositions`: An array with the positions of the block's inner blocks within the returned array
@@ -1174,11 +1175,11 @@ Please notice that the two additional attributes, `parentBlockPosition` and `inn
 
 ## Preact example
 
-Please check the <a href="https://github.com/Automattic/vip-block-data-api/#preact-example" target="_blank">Preact example</a> in `Automattic/vip-block-data-api`, to see an example of how to map the block data into customizedclient-side JavaScript components.
+Please check the <a href="https://github.com/Automattic/vip-block-data-api/tree/1.0.0/#preact-example" target="_blank">Preact example</a> in `Automattic/vip-block-data-api`, to see an example of how to map the block data into customizedclient-side JavaScript components.
 
 ## Limitations
 
-Please check the <a href="https://github.com/Automattic/vip-block-data-api/#limitations" target="_blank">Limitations</a> section in `Automattic/vip-block-data-api`, to learn about the limitations from retrieving block data.
+Please check the <a href="https://github.com/Automattic/vip-block-data-api/tree/1.0.0/#limitations" target="_blank">Limitations</a> section in `Automattic/vip-block-data-api`, to learn about the limitations from retrieving block data.
 
 ## Acknowledgements
 

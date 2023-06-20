@@ -1,5 +1,667 @@
 # Release Notes: 1.0
 
+After a reaaaaaaally long time (spanning several years), development of the Gato GraphQL plugin has finally reached v1.0! Yaaaaaaaaaaay 🎉🍾🎊🥳🍻👏🥂🎈🙌
+
+Starting from this version, the plugin will be released in the [WordPress plugins directory](https://wordpress.org/plugins/) (submission process currently ongoing), so you'll be able to install the plugin directly from your WordPress dashboard.
+
+Version 1.0 brings plenty of improvements, including the **integration with the (Gutenberg) block editor**, and the **availability of (commercial) extensions** to extend the GraphQL schema and provide further functionality.
+
+Here's a description of all the changes.
+
+## Integration of Gutenberg blocks into the GraphQL schema
+
+_This integration is heavily based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>. My deepest gratitude to this project's contributors, as their contribution has also benefitted this plugin. ❤️_
+
+The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrieved via the following fields added to all `CustomPost` types (such as `Post` and `Page`):
+
+- `blocks`
+- `blockDataItems`
+- `blockFlattenedDataItems`
+
+This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
+
+Below is a short summary of the 3 fields. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/351a79c7fb3fcdabf78c679e02661f4750b0f34d/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description.
+
+### `blocks`
+
+Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post.
+
+`blocks` returns a List of the Block types that have been mapped to the GraphQL schema. These Block types are all part of the `BlockUnion` type, and implement the `Block` interface.
+
+The plugin implements one Block type, `GenericBlock`, which is already sufficient to retrieve the data for any block (via field `attributes: JSONObject`).
+
+This query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    blocks {
+      ...on Block {
+        name
+        attributes
+        innerBlocks {
+          ...on Block {
+              name
+              attributes
+              innerBlocks {
+                ...on Block {
+                  name
+                  attributes
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+...will produce this response:
+
+```json
+{
+  "data": {
+    "post": {
+      "blocks": [
+        {
+          "name": "core/gallery",
+          "attributes": {
+            "linkTo": "none",
+            "className": "alignnone",
+            "images": [
+              {
+                "url": "https://d.pr/i/zd7Ehu+",
+                "alt": "",
+                "id": "1706"
+              },
+              {
+                "url": "https://d.pr/i/jXLtzZ+",
+                "alt": "",
+                "id": "1705"
+              }
+            ],
+            "ids": [],
+            "shortCodeTransforms": [],
+            "imageCrop": true,
+            "fixedHeight": true,
+            "sizeSlug": "large",
+            "allowResize": false
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/list",
+          "attributes": {
+            "ordered": false,
+            "values": "<li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li>"
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlocks": [
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/image",
+                  "attributes": {
+                    "id": 1701,
+                    "className": "layout-column-1",
+                    "url": "https://d.pr/i/fW6V3V+",
+                    "alt": ""
+                  },
+                  "innerBlocks": null
+                }
+              ]
+            },
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/paragraph",
+                  "attributes": {
+                    "className": "layout-column-2",
+                    "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital.",
+                    "dropCap": false
+                  },
+                  "innerBlocks": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlocks": [
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/image",
+                  "attributes": {
+                    "id": 1701,
+                    "className": "layout-column-1",
+                    "url": "https://d.pr/i/fW6V3V+",
+                    "alt": ""
+                  },
+                  "innerBlocks": null
+                },
+                {
+                  "name": "core/columns",
+                  "attributes": {
+                    "isStackedOnMobile": true
+                  },
+                  "innerBlocks": [
+                    {
+                      "name": "core/column",
+                      "attributes": {
+                        "width": "33.33%"
+                      },
+                      "innerBlocks": [
+                        {
+                          "name": "core/heading",
+                          "attributes": {
+                            "fontSize": "large",
+                            "content": "Life is so rich",
+                            "level": 2
+                          },
+                          "innerBlocks": null
+                        },
+                        {
+                          "name": "core/heading",
+                          "attributes": {
+                            "level": 3,
+                            "content": "Life is so dynamic"
+                          },
+                          "innerBlocks": null
+                        }
+                      ]
+                    },
+                    {
+                      "name": "core/column",
+                      "attributes": {
+                        "width": "66.66%"
+                      },
+                      "innerBlocks": [
+                        {
+                          "name": "core/paragraph",
+                          "attributes": {
+                            "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
+                            "dropCap": false
+                          },
+                          "innerBlocks": null
+                        },
+                        {
+                          "name": "core/columns",
+                          "attributes": {
+                            "isStackedOnMobile": true
+                          },
+                          "innerBlocks": [
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": [
+                                {
+                                  "name": "core/image",
+                                  "attributes": {
+                                    "id": 361,
+                                    "sizeSlug": "large",
+                                    "linkDestination": "none",
+                                    "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg",
+                                    "alt": ""
+                                  },
+                                  "innerBlocks": null
+                                }
+                              ]
+                            },
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": null
+                            },
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": [
+                                {
+                                  "name": "core/image",
+                                  "attributes": {
+                                    "id": 362,
+                                    "sizeSlug": "large",
+                                    "linkDestination": "none",
+                                    "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png",
+                                    "alt": ""
+                                  },
+                                  "innerBlocks": null
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+### `blockDataItems`
+
+This field differs from `blocks` in that it returns `[JSONObject!]` (instead of `[BlockUnion!]`):
+
+```graphql
+type CustomPost {
+  blockDataItems: [JSONObject!]
+}
+```
+
+In other words, instead of following the typical GraphQL way of having entities relate to entities and navigate across them, every Block entity at the top level already produces the whole block data for itself and all of its children, within a single `JSONObject` result.
+
+The JSON object contains the properties for the block (under entries `name` and `attributes`) and for its inner blocks (under entry `innerBlocks`), recursively.
+
+For instance, the following query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    blockDataItems
+  }
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "post": {
+      "blockDataItems": [
+        {
+          "name": "core/gallery",
+          "attributes": {
+            "linkTo": "none",
+            "className": "alignnone",
+            "images": [
+              {
+                "url": "https://d.pr/i/zd7Ehu+",
+                "alt": "",
+                "id": "1706"
+              },
+              {
+                "url": "https://d.pr/i/jXLtzZ+",
+                "alt": "",
+                "id": "1705"
+              }
+            ],
+            "ids": [],
+            "shortCodeTransforms": [],
+            "imageCrop": true,
+            "fixedHeight": true,
+            "sizeSlug": "large",
+            "allowResize": false
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/list",
+          "attributes": {
+            "ordered": false,
+            "values": "<li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li>"
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlocks": [
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/image",
+                  "attributes": {
+                    "id": 1701,
+                    "className": "layout-column-1",
+                    "url": "https://d.pr/i/fW6V3V+",
+                    "alt": ""
+                  }
+                }
+              ]
+            },
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/paragraph",
+                  "attributes": {
+                    "className": "layout-column-2",
+                    "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital.",
+                    "dropCap": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlocks": [
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/image",
+                  "attributes": {
+                    "id": 1701,
+                    "className": "layout-column-1",
+                    "url": "https://d.pr/i/fW6V3V+",
+                    "alt": ""
+                  }
+                },
+                {
+                  "name": "core/columns",
+                  "attributes": {
+                    "isStackedOnMobile": true
+                  },
+                  "innerBlocks": [
+                    {
+                      "name": "core/column",
+                      "attributes": {
+                        "width": "33.33%"
+                      },
+                      "innerBlocks": [
+                        {
+                          "name": "core/heading",
+                          "attributes": {
+                            "fontSize": "large",
+                            "content": "Life is so rich",
+                            "level": 2
+                          }
+                        },
+                        {
+                          "name": "core/heading",
+                          "attributes": {
+                            "level": 3,
+                            "content": "Life is so dynamic"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "core/column",
+                      "attributes": {
+                        "width": "66.66%"
+                      },
+                      "innerBlocks": [
+                        {
+                          "name": "core/paragraph",
+                          "attributes": {
+                            "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
+                            "dropCap": false
+                          }
+                        },
+                        {
+                          "name": "core/columns",
+                          "attributes": {
+                            "isStackedOnMobile": true
+                          },
+                          "innerBlocks": [
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": [
+                                {
+                                  "name": "core/image",
+                                  "attributes": {
+                                    "id": 361,
+                                    "sizeSlug": "large",
+                                    "linkDestination": "none",
+                                    "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg",
+                                    "alt": ""
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "name": "core/column",
+                              "attributes": {}
+                            },
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": [
+                                {
+                                  "name": "core/image",
+                                  "attributes": {
+                                    "id": 362,
+                                    "sizeSlug": "large",
+                                    "linkDestination": "none",
+                                    "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png",
+                                    "alt": ""
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+### `blockFlattenedDataItems`
+
+Both fields `blocks` and `blockDataItems` allow to filter what blocks are retrieved, via the `filterBy` argument. In both cases, if a block satisfies the inclusion condition, but is nested within a block that does not, then it will be excluded.
+
+For instance, this query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    id
+    blockDataItems(
+      filterBy: {
+        include: [
+          "core/heading"
+        ]
+      }
+    )
+  }
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "post": {
+      "blockDataItems": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          },
+          "innerBlocks": null
+        }
+      ]
+    }
+  }
+}
+```
+
+Please notice that not all blocks of type `core/heading` have been included: Those which are nested under `core/column` have been excluded, as there is no way to reach them (since blocks `core/columns` and `core/column` are themselves excluded).
+
+There are occasions, though, when we need to retrieve all blocks of a certain type from the custom post, independently of where these blocks are located within the hierarchy. For instance, we may want to include all blocks of type `core/image`, to retrieve all images included in a blog post.
+
+It is to satisfy this need that there is field `CustomPost.blockFlattenedDataItems`. Unlike fields `blocks` and `blockDataItems`, it flattens the block hierarchy into a single level.
+
+This query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    id
+    blockFlattenedDataItems(
+      filterBy: {
+        include: [
+          "core/heading"
+        ]
+      }
+    )
+  }
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "post": {
+      "blockFlattenedDataItems": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "fontSize": "large",
+            "content": "Life is so rich",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "level": 3,
+            "content": "Life is so dynamic"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
 ## Browse "Additional Documentation" when editing a Schema Configuration
 
 Documentation for additional features in the Gato GraphQL can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
