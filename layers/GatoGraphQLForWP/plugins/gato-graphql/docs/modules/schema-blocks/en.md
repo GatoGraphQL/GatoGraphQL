@@ -309,9 +309,9 @@ The `Block` interface (and, as such, the `GeneralBlock` type) contains the follo
 - `contentSource` retrieves the block's (Gutenberg) HTML source code, including the comment delimiters that contain the attributes. However, this field does not retrieve the exact same data as how it is stored in the DB (see <a href="https://github.com/leoloso/PoP/issues/2346" target="_blank">#2346</a>), so use this field with care.
 ### Directly retrieving `GeneralBlock` (instead of `BlockUnion`)
 
-As currently only the `GeneralBlock` type representing blocks, it could make sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion` union type.
+As currently there is only one Block type mapping blocks –`GeneralBlock`– it makes sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion` type.
 
-We can do this in the Settings page under the Blocks tab, by ticking on option `"Use single type instead of union type?"`:
+We can do this in the Settings page under the Blocks tab, by ticking on option `Use single type instead of union type?`:
 
 ![Configuring to directly retrieve `GeneralBlock` instead of `BlockUnion`](../../images/settings-blocks-single-type.png)
 
@@ -332,7 +332,7 @@ Then, the GraphQL query is simplified:
 }
 ```
 
-Keeping the response as a `BlockUnion` is good for forward compatibility: If we ever decide to add block-specific types to the schema (see section below), then there will be no breaking changes.
+Please notice that keeping the response type as `BlockUnion` is good for forward compatibility: If we ever decide to add block-specific types to the schema (see section below), then there will be no breaking changes.
 
 ### Mapping block-specific types
 
