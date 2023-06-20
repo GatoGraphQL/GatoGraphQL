@@ -20,7 +20,7 @@ The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrie
 
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
 
-_🔗 Below is a short summary of the 3 fields. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/351a79c7fb3fcdabf78c679e02661f4750b0f34d/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description._
+_🔗 Below is a short summary of the 3 fields. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description._
 
 ### `blocks`
 
@@ -699,7 +699,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
 
-_🔗 The following is a short description of the feature. Please check the [Global Fields module documentation](https://github.com/leoloso/PoP/blob/f3ef978227eb0a65ea07d92df29f50d3759249d2/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/global-fields/en.md) for a more thorough description._
+_🔗 The following is a short description of the feature. Please check the [Global Fields module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/global-fields/en.md) for a more thorough description._
 
 The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
 
@@ -740,7 +740,7 @@ In order to configure the level of exposure of global fields in the schema, the 
 
 _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
 
-_🔗 The following is a short description of the feature. Please check the [Composable Directives module documentation](https://github.com/leoloso/PoP/blob/afbb13a3dec6655ae03e2afe2abb9e7532d2e175/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/composable-directives/en.md) for a more thorough description._
+_🔗 The following is a short description of the feature. Please check the [Composable Directives module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/composable-directives/en.md) for a more thorough description._
 
 This feature allows directives to execute complex functionalities, by composing other directives inside. A directive that composes another directive is called a "meta" directive.
 
@@ -812,7 +812,7 @@ In order to enable or disable composable directives in the schema for some speci
 
 _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
 
-_🔗 The following is a short description of the feature. Please check the [Multi-Field Directives module documentation](https://github.com/leoloso/PoP/blob/1b45258688b5909b06c4662ca8c7c13da79ef976/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/multifield-directives/en.md) for a more thorough description._
+_🔗 The following is a short description of the feature. Please check the [Multi-Field Directives module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/multifield-directives/en.md) for a more thorough description._
 
 This feature allows directives to be applied to multiple fields, instead of only one. When enabled, an argument `affectAdditionalFieldsUnderPos` is added to all directives, to indicate the relative positions of the additional fields on which to apply the directive.
 
