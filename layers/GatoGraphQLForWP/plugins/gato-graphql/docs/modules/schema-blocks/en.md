@@ -350,7 +350,7 @@ Refer to the documentation in [`leoloso/PoP`](https://github.com/leoloso/PoP) to
 
 ### Filtering blocks
 
-Field `CustomPost.blocks` contains argument `filter` with 2 properties: `include` and `exclude`. We can use these to filter what blocks are retrieved, by the block name:
+Field `CustomPost.blocks` contains argument `filter` with two properties: `include` and `exclude`. We can use these to filter what blocks are retrieved, by the block name:
 
 ```graphql
 {
