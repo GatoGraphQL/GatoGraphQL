@@ -24,8 +24,10 @@ Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks co
         name
         attributes
         innerBlocks {
-          name
-          attributes
+          ...on Block {
+            name
+            attributes
+          }
         }
       }
     }
