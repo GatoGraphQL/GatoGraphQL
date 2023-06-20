@@ -932,7 +932,7 @@ The tables for the Custom Endpoint and Persisted Query CPTs now display two new 
 - "State", showing if entries are enabled or disabled
 - "Schema Configuration", providing a link to the corresponding schema configuration (if any)
 
-![State column in CPTs table](../../images/releases/v1.0/state-column-in-cpts-table.png)
+![State column in CPTs table](../../images/releases/v1.0/new-columns-in-cpts-table.png)
 
 ## Saving the Settings is faster, as it does not regenerate the service container anymore
 
