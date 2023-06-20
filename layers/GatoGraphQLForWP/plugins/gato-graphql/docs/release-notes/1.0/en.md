@@ -925,9 +925,12 @@ Because there are no additional types added, the GraphQL schema will look leaner
 
 ![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
 
-## Added "state" column to tables for Custom Endpoints and Persisted Queries
+## Added "State" and "Schema Configuration" columns to tables for Custom Endpoints and Persisted Queries
 
-The tables for the Custom Endpoint and Persisted Query CPTs now display the "state" column, showing if entries are enabled or disabled:
+The tables for the Custom Endpoint and Persisted Query CPTs now display two new columns:
+
+- "State", showing if entries are enabled or disabled
+- "Schema Configuration", providing a link to the corresponding schema configuration (if any)
 
 ![State column in CPTs table](../../images/releases/v1.0/state-column-in-cpts-table.png)
 
