@@ -1098,9 +1098,13 @@ This query:
 }
 ```
 
-For instance, this query would 
+To allow us to recreate the block hierarchy, the response includes 2 additional attributes:
 
-However, this
+- `parentBlockPosition`: The position of the block's parent block within the returned array, or `null` if it is a top-level block
+- `innerBlockPositions`: An array with the positions of the block's inner blocks within the returned array.
+
+### Filtering block flattened data items
+
 
 
 ## Using Block data in the client
