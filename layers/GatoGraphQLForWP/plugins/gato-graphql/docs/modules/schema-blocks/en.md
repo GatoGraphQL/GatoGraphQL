@@ -1095,7 +1095,7 @@ This query:
 }
 ```
 
-In case we need to recreate the block hierarchy, the response also includes two additional attributes:
+Please notice how attribute `innerBlocks` has disappeared, as the blocks are not nested anymore. In its place, the response includes two other attributes (which allow us to recreate the block hierarchy):
 
 - `parentBlockPosition`: The position of the block's parent block within the returned array, or `null` if it is a top-level block
 - `innerBlockPositions`: An array with the positions of the block's inner blocks within the returned array
