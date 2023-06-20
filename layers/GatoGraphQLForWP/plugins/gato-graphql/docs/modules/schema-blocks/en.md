@@ -48,7 +48,7 @@ This query:
 }
 ```
 
-...may produce this response:
+...will produce this response:
 
 ```json
 {
@@ -435,6 +435,8 @@ This will produce:
 }
 ```
 
+Please notice that not all blocks of type `core/heading` have been included: Those which are nested under `core/column` have been excluded, as there is no way to reach them (since blocks `core/columns` and `core/column` are themselves excluded).
+
 ### Inconveniences of field `blocks`
 
 Field `blocks` has the disadvantage that, in order to retrieve the whole block data contained in the custom post, including the data for the inner blocks, and their own inner blocks, and so on, we must know how many nested block levels there are, and reflect that information in the query.
@@ -526,7 +528,7 @@ For instance, the following query:
 }
 ```
 
-...might produce:
+...will produce:
 
 ```json
 {
@@ -743,7 +745,75 @@ For instance, the following query:
 }
 ```
 
+### Filtering block data items
+
+Similar to `blocks`, `blockDataItems` also allows to filter what blocks are retrieved, via the `filter` argument.
+
+This query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    id
+    blockDataItems(
+      filterBy: {
+        include: [
+          "core/heading"
+        ]
+      }
+    )
+  }
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "post": {
+      "blockDataItems": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          },
+          "innerBlocks": null
+        }
+      ]
+    }
+  }
+}
+```
+
+Please notice that, similar to `blocks`, not all blocks of type `core/heading` have been included: Those which are nested under `core/column` have been excluded, as there is no way to reach them (since blocks `core/columns` and `core/column` are themselves excluded).
+
 ## `blockFlattenedData`
+
+Both fields `blocks` and `blockDataItems` allow to filter what blocks are retrieved, via the `filter` argument.
+
+However, this
+
+
+## Using Block data in the client
 
 
 
