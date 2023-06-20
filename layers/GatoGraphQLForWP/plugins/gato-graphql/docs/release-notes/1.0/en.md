@@ -20,6 +20,8 @@ The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrie
 
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
 
+Here is a short summary of the 3 fields. To see a more thorough description of them, please check the [Blocks module documentation](../..//modules/schema-blocks/en.md).
+
 ### `blocks`
 
 Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post.
@@ -659,12 +661,6 @@ This query:
   }
 }
 ```
-
-Please notice that the two additional attributes, `parentBlockPosition` and `innerBlockPositions`, are removed when filtering, as they don't make sense anymore.
-
-
-
-
 
 ## Browse "Additional Documentation" when editing a Schema Configuration
 
