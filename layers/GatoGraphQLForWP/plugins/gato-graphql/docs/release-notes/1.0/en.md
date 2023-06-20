@@ -4,7 +4,7 @@ After a reaaaaaaally long time (spanning several years), development of the Gato
 
 Starting from this version, the plugin will be released in the [WordPress plugins directory](https://wordpress.org/plugins/) (submission process currently ongoing), so you'll be able to install the plugin directly from your WordPress dashboard.
 
-Version 1.0 brings plenty of improvements, including the **integration with the (Gutenberg) block editor**, and the **availability of (commercial) extensions** to extend the GraphQL schema and provide further functionality.
+Version 1.0 brings plenty of improvements, including the **integration with the (Gutenberg) block editor**, support for **private and password-protected endpoints**, and the **availability of (commercial) extensions** to extend the GraphQL schema and provide further functionality.
 
 Here's a description of all the changes.
 
