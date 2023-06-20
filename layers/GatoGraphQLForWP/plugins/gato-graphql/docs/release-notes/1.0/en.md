@@ -841,6 +841,23 @@ In order to enable or disable multi-field directives in the schema for some spec
 
 ![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png)
 
+## Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for `content`
+
+Prior to v1.0, the following mutation fields received a `content` argument of type `String` (to create/update the content on custom posts or comments):
+
+- `Comment.reply`
+- `CustomPost.addComment`
+- `CustomPost.update`
+- `Root.addCommentToCustomPost`
+- `Root.createPost`
+- `Root.updatePost`
+
+This `content` argument has now been converted into a ["oneof" input object](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/implicit-features/oneof-input-object/en.md), containing a single property: `html: HTML!`.
+
+This is to avoid potential breaking changes in the future, when it is also possible to create and update custom posts and comments by passing their `Block` data (instead of the single blob of HTML data).
+
+When that feature is supported, the `content` oneof input object will be added a second property: `blocks: [Block!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
