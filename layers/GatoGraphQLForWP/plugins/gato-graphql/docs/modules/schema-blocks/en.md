@@ -1233,11 +1233,11 @@ The block's output markup will render like this:
 ```html
 <!-- wp:wpvip/hero-block {"mediaID":9} -->
 <div class="wp-block-wpvip-hero-block">
-    <h2>Hero title</h2>
-    <div class="hero-image">
-        <img src="http://my.site/uploads/hero-image.png" />
-    </div>
-    <p class="hero-text">Hero summary</p>
+  <h2>Hero title</h2>
+  <div class="hero-image">
+    <img src="http://my.site/uploads/hero-image.png" />
+  </div>
+  <p class="hero-text">Hero summary</p>
 </div>
 <!-- /wp:wpvip/hero-block -->
 ```
