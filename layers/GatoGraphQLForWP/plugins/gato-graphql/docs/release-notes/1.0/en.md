@@ -20,7 +20,7 @@ The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrie
 
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
 
-_Below is a short summary of the 3 fields. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/351a79c7fb3fcdabf78c679e02661f4750b0f34d/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description._
+_🔗 Below is a short summary of the 3 fields. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/351a79c7fb3fcdabf78c679e02661f4750b0f34d/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description._
 
 ### `blocks`
 
