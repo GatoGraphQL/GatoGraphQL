@@ -360,8 +360,7 @@ Field `CustomPost.blocks` contains argument `filter` with 2 properties: `include
       filterBy: {
         include: [
           "core/heading",
-          "core/columns",
-          "core/column"
+          "core/gallery"
         ]
       }
     ) {
@@ -372,7 +371,71 @@ Field `CustomPost.blocks` contains argument `filter` with 2 properties: `include
 }
 ```
 
-### Inconveniences of `blocks`
+This will produce:
+
+```json
+{
+  "data": {
+    "post": {
+      "blocks": [
+        {
+          "name": "core/gallery",
+          "attributes": {
+            "linkTo": "none",
+            "className": "alignnone",
+            "images": [
+              {
+                "url": "https://d.pr/i/zd7Ehu+",
+                "alt": "",
+                "id": "1706"
+              },
+              {
+                "url": "https://d.pr/i/jXLtzZ+",
+                "alt": "",
+                "id": "1705"
+              }
+            ],
+            "ids": [],
+            "shortCodeTransforms": [],
+            "imageCrop": true,
+            "fixedHeight": true,
+            "sizeSlug": "large",
+            "allowResize": false
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          },
+          "innerBlocks": null
+        }
+      ]
+    }
+  }
+}
+```
+
+### Inconveniences of field `blocks`
 
 Field `blocks` has the disadvantage that, in order to retrieve the whole block data contained in the custom post, including the data for the inner blocks, and their own inner blocks, and so on, we must know how many nested block levels there are, and reflect that information in the query.
 
