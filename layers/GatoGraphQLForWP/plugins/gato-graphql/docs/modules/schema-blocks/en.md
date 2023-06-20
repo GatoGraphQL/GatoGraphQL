@@ -16,6 +16,8 @@ This module is disabled if the [Classic Editor](https://wordpress.org/plugins/cl
 
 Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post.
 
+The result from `blocks` is a list of the `BlockUnion` union type, which contains all the possible Block types that have been mapped to the GraphQL schema. All these Block types implement the `Block` interface. The plugin implements one Block type, `GenericBlock`, which is already sufficient to retrieve the data for any block (via field `attributes: JSONObject`):
+
 This query:
 
 ```graphql
@@ -132,7 +134,7 @@ This query:
                   "name": "core/paragraph",
                   "attributes": {
                     "className": "layout-column-2",
-                    "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes.",
+                    "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital.",
                     "dropCap": false
                   },
                   "innerBlocks": null
@@ -275,9 +277,7 @@ This query:
 }
 ```
 
-The result from `blocks` is a `BlockUnion` type, which contains all the possible Block types that have been mapped to the GraphQL schema. All these Block types must implement the `Block` interface. The plugin implements one Block type, `GenericBlock`.
-
-As `GenericBlock` contains field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block, this block is already sufficient to retrieve the data for any Block type:
+The GraphQL schema for the Block types looks like this:
 
 ```graphql
 interface Block {
@@ -297,38 +297,15 @@ type GenericBlock implements Block {
 union BlockUnion = GenericBlock
 ```
 
-Field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content:
+### `Block` fields
 
-```graphql
-{
-  post(by: { id: 1 }) {
-    blocks {
-      ...on Block {
-        name
-        attributes
-        innerBlocks {
-          ...on Block {
-            name
-            attributes
-            innerBlocks {
-              ...on Block {
-                name
-                attributes
-                innerBlocks {
-                  ...on Block {
-                    name
-                    attributes
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
+These are the fields from the `Block` interface (and, as such, the `GeneralBlock` type):
+
+Field `Block.name` retrieves the name of the block: `"core/paragraph"`, `"core/heading"` `"core/image"`, etc.
+
+Field `Block.attributes` retrieves a JSON object containing all the attributes from the block.
+
+Field `Block.innerBlocks` retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content.
 
 Field `Block.contentSource` retrieves the block's (Gutenberg) HTML source code, including the comment delimiters that contain the attributes. However, this field does not retrieve the exact same data as how it is stored in the DB (see [#2346](https://github.com/leoloso/PoP/issues/2346)), so use this field with care.
 
