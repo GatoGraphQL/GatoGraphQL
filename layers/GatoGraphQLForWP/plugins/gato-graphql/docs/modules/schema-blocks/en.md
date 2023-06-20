@@ -90,23 +90,15 @@ Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hen
 }
 ```
 
-### Mapping block-specific types
+### Directly retrieving `GeneralBlock` (instead of `BlockUnion`)
 
-The `JSONObject` type is not strictly typed: its properties can have any type and cardinality (`String`, `Int`, `[Boolean!]`, etc), so we need to know this information for every block and deal with each case in the client.
-
-If we need strict typing, we must extend the GraphQL schema via PHP code, adding block-specific types that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
-
-For instance, we can add type `CoreParagraphBlock` that maps the `core/paragraph` block, with field `content` of type `String`.
-
-### Retrieving `BlockUnion` or `GeneralBlock`
-
-As currently there is only one type representing blocks, `GeneralBlock`, it makes sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion`.
+As currently only the `GeneralBlock` type representing blocks, it makes sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion` union type.
 
 We can do this in the Settings page under the Blocks tab, by ticking on option `"Use single type instead of union type?"`:
 
 ![Configuring to directly retrieve `GeneralBlock` instead of `BlockUnion`](../../images/settings-blocks-single-type.png)
 
-Then, the GraphQL query is slightly simplified:
+Then, the GraphQL query is simplified:
 
 ```graphql
 {
@@ -122,6 +114,14 @@ Then, the GraphQL query is slightly simplified:
   }
 }
 ```
+
+### Mapping block-specific types
+
+The `JSONObject` type is not strictly typed: its properties can have any type and cardinality (`String`, `Int`, `[Boolean!]`, etc), so we need to know this information for every block and deal with each case in the client.
+
+If we need strict typing, we must extend the GraphQL schema via PHP code, adding block-specific types that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
+
+For instance, we can add type `CoreParagraphBlock` that maps the `core/paragraph` block, with field `content` of type `String`.
 
 ### Filtering blocks
 
