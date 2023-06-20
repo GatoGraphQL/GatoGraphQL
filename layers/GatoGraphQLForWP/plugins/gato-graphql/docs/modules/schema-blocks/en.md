@@ -301,7 +301,7 @@ union BlockUnion = GenericBlock
 
 ### `Block` fields
 
-These are the fields from the `Block` interface (and, as such, the `GeneralBlock` type):
+The `Block` interface (and, as such, the `GeneralBlock` type) contains the following fields.
 
 Field `Block.name` retrieves the name of the block: `"core/paragraph"`, `"core/heading"` `"core/image"`, etc.
 
@@ -313,7 +313,7 @@ Field `Block.contentSource` retrieves the block's (Gutenberg) HTML source code, 
 
 ### Directly retrieving `GeneralBlock` (instead of `BlockUnion`)
 
-As currently only the `GeneralBlock` type representing blocks, it makes sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion` union type.
+As currently only the `GeneralBlock` type representing blocks, it could make sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion` union type.
 
 We can do this in the Settings page under the Blocks tab, by ticking on option `"Use single type instead of union type?"`:
 
@@ -335,6 +335,8 @@ Then, the GraphQL query is simplified:
   }
 }
 ```
+
+Keeping the response as a `BlockUnion` is good for forward compatibility: If we ever decide to add block-specific types to the schema (see section below), then there will be no breaking changes.
 
 ### Mapping block-specific types
 
