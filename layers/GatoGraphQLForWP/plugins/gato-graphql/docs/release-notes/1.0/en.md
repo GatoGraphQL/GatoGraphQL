@@ -697,6 +697,8 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ## Added support for the "Global Fields" custom feature
 
+_This is a custom feature (not present in the GraphQL spec) offered by Gato GraphQL._
+
 The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
 
 However, there is also a different kind of fields: those providing "functionality" instead of data. These fields need not be restricted to a specific type, as they are potentially useful to all types.
@@ -736,11 +738,75 @@ In order to configure the level of exposure of global fields in the schema, the 
 
 ## Added support for the "Composable Directives" custom feature
 
+_This is a custom feature (not present in the GraphQL spec) offered by Gato GraphQL._
+
+This feature allows directives to nest and modify the behavior of other directives.
+
+This module allows directives to execute complex functionalities, by composing other directives inside, calling them before/after preparing the field value accordingly. Directives with this capability are called "meta directives".
+
+A use case is to convert the type of the field value to the type expected by the nested directive. For instance, each element from an array can be provided to a directive that expects a single value. In this query, field `capabilities` returns `[String]` (an array of strings), and directive `@strUpperCase` receives `String`. Hence, executing the following query:
+
+```graphql
+query {
+  user(by: {id: 1}) {
+    capabilities @strUpperCase
+  }
+}
+```
+
+...returns an error due to the type mismatch:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Directive 'strUpperCase' from field 'capabilities' cannot be applied on object with ID '1' because it is not a string"
+    }
+  ],
+  "data": {
+    "user": {
+      "capabilities": null
+    }
+  }
+}
+```
+
+The meta directive `@underEachArrayItem` (provided via extension **Data Iteration Meta Directives**) can solve this problem, as it iterates over an array of elements and applies its nested directive on each of them, setting the stage before `@strUpperCase` is executed and making it receive a single element (of type `String`) instead of an array.
+
+The query from above can be satisfied like this:
+
+```graphql
+query {
+  user(by: {id: 1}) {
+    capabilities
+      @underEachArrayItem
+        @strUpperCase
+  }
+}
+```
+
+...producing the intended response:
+
+```json
+{
+  "data": {
+    "user": {
+      "capabilities": [
+        "READ",
+        "LEVEL_0"
+      ]
+    }
+  }
+}
+```
+
 <!-- @todo Create image schema-config-composable-directives.png -->
 
 ![Composable Directives in the Schema Configuration](../../images/schema-config-composable-directives.png)
 
 ## Added support for the "Multi-Field Directives" custom feature
+
+_This is a custom feature (not present in the GraphQL spec) offered by Gato GraphQL._
 
 <!-- @todo Create image schema-config-multifield-directives.png -->
 
