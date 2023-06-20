@@ -1105,7 +1105,78 @@ To allow us to recreate the block hierarchy, the response includes 2 additional 
 
 ### Filtering block flattened data items
 
+Now that the block hierarchy has been flattened, filtering by `core/heading` will produce these blocks wherever they are placed.
 
+This query:
+
+This query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    id
+    blockFlattenedDataItems(
+      filterBy: {
+        include: [
+          "core/heading"
+        ]
+      }
+    )
+  }
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "post": {
+      "blockFlattenedDataItems": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "fontSize": "large",
+            "content": "Life is so rich",
+            "level": 2
+          }
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "level": 3,
+            "content": "Life is so dynamic"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+Please notice that the 2 additional attributes, `parentBlockPosition` and `innerBlockPositions`, are removed when filtering, as they don't make sense anymore.
 
 ## Using Block data in the client
 
