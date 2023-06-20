@@ -1306,8 +1306,8 @@ register_block_type( __DIR__ . '/block.json' );
 import metadata from './block.json';
 
 registerBlockType( metadata, {
-    edit: Edit,
-    // ...other client-side settings
+  edit: Edit,
+  // ...other client-side settings
 } );
 ```
 
