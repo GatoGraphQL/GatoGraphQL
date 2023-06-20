@@ -55,7 +55,7 @@ union BlockUnion = GenericBlock
 
 `GenericBlock` contains field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block. As such, this block is sufficient to represent any Block type.
 
-Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them:
+Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content:
 
 ```graphql
 {
@@ -65,11 +65,21 @@ Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hen
         name
         attributes
         innerBlocks {
-          name
-          attributes
-          innerBlocks {
+          ...on Block {
             name
             attributes
+            innerBlocks {
+              ...on Block {
+                name
+                attributes
+                innerBlocks {
+                  ...on Block {
+                    name
+                    attributes
+                  }
+                }
+              }
+            }
           }
         }
       }
