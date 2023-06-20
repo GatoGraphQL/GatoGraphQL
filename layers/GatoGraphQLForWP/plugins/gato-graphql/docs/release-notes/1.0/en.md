@@ -701,7 +701,9 @@ The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the 
 
 However, there is also a different kind of fields: those providing "functionality" instead of data. These fields need not be restricted to a specific type, as they are potentially useful to all types.
 
-For instance, functionality fields can be used to fetch data from another server, or for manipulating data once it has been retrieved (allowing us to transform a field value in whatever way it is required). These are examples of implemented global fields (offered via extensions):
+For instance, functionality fields can be used to fetch data from another server, or for manipulating data once it has been retrieved (allowing us to transform a field value in whatever way it is required).
+
+The following are examples of implemented global fields, offered via extensions:
 
 The **HTTP Client** extension offers fields which connect to external API endpoints and retrieve data from them:
 
