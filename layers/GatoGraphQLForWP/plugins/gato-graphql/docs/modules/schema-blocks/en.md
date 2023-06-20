@@ -307,6 +307,7 @@ The `Block` interface (and, as such, the `GeneralBlock` type) contains the follo
 - `attributes` retrieves a JSON object containing all the attributes from the block.
 - `innerBlocks` retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content.
 - `contentSource` retrieves the block's (Gutenberg) HTML source code, including the comment delimiters that contain the attributes. However, this field does not retrieve the exact same data as how it is stored in the DB (see <a href="https://github.com/leoloso/PoP/issues/2346" target="_blank">#2346</a>), so use this field with care.
+
 ### Directly retrieving `GeneralBlock` (instead of `BlockUnion`)
 
 As currently there is only one Block type mapping blocks –`GeneralBlock`– it makes sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion` type.
