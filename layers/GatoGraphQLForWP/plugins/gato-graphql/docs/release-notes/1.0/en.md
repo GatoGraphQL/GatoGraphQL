@@ -697,7 +697,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ## Added support for the "Global Fields" custom feature
 
-_This is a custom feature (not present in the GraphQL spec) offered by Gato GraphQL._
+_This is a custom feature (i.e. not present in the GraphQL spec) offered by Gato GraphQL._
 
 The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
 
@@ -736,7 +736,7 @@ In order to configure the level of exposure of global fields in the schema, the 
 
 ## Added support for the "Composable Directives" custom feature
 
-_This is a custom feature (not present in the GraphQL spec) offered by Gato GraphQL._
+_This is a custom feature (i.e. not present in the GraphQL spec) offered by Gato GraphQL._
 
 This feature allows directives to nest and modify the behavior of other directives.
 
@@ -804,7 +804,7 @@ query {
 
 ## Added support for the "Multi-Field Directives" custom feature
 
-_This is a custom feature (not present in the GraphQL spec) offered by Gato GraphQL._
+_This is a custom feature (i.e. not present in the GraphQL spec) offered by Gato GraphQL._
 
 <!-- @todo Create image schema-config-multifield-directives.png -->
 
