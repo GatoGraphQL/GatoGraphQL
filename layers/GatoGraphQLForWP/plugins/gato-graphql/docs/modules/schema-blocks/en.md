@@ -206,9 +206,7 @@ fragment BlockData on Block {
 }
 ```
 
-It is in order to avoid this that there is field `CustomPost.blockDataItems`.
-
-Instead of returning `[BlockUnion]`, field `CustomPost.blockDataItems` returns `[JSONObject!]` instead:
+It is in order to avoid this that there is field `CustomPost.blockDataItems`. This field, instead of returning `[BlockUnion]`, returns `[JSONObject!]`:
 
 ```graphql
 type CustomPost {
@@ -216,7 +214,7 @@ type CustomPost {
 }
 ```
 
-The JSON object contains all the data for the block, under entries `name` and `attributes`, and also of all its inner blocks, under entry `innerBlocks`, recursively.
+Every JSON object contains the data for the block (under entries `name` and `attributes`) and for its inner blocks (under entry `innerBlocks`), recursively.
 
 For instance, the following query:
 
@@ -311,7 +309,7 @@ For instance, the following query:
                   "name": "core/paragraph",
                   "attributes": {
                     "className": "layout-column-2",
-                    "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24/365 communities.",
+                    "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital.",
                     "dropCap": false
                   }
                 }
