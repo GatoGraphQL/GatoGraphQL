@@ -808,6 +808,8 @@ In order to enable or disable composable directives in the schema for some speci
 
 _This is a custom feature (i.e. not present in the GraphQL spec) offered by Gato GraphQL._
 
+In order to enable or disable multi-field directives in the schema for some specific endpoint, the Schema Configuration now has a new element "Multi-Field Directives":
+
 <!-- @todo Create image schema-config-multifield-directives.png -->
 
 ![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png)
