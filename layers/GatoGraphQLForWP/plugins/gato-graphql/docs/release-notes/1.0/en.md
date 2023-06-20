@@ -701,9 +701,7 @@ The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the 
 
 However, there is also a different kind of fields: those providing "functionality" instead of data. These fields need not be restricted to a specific type, as they are potentially useful to all types.
 
-"Functionality" fields are not distinctively supported by the GraphQL spec. As such, Gato GraphQL offers them as a custom feature, under the name of "Global Fields". This feature allows us to define a global field only once, and it will be made accessible under every single type in the GraphQL schema.
-
-These are some examples of global fields, offered by some of the extensions:
+For instance, functionality fields can be used to fetch data from another server, or for manipulating data once it has been retrieved (allowing us to transform a field value in whatever way it is required). These are examples of implemented global fields (offered via extensions):
 
 The **HTTP Client** extension offers fields which connect to external API endpoints and retrieve data from them:
 
@@ -711,6 +709,7 @@ The **HTTP Client** extension offers fields which connect to external API endpoi
 - `_sendJSONObjectItemHTTPRequest`
 - `_sendJSONObjectCollectionHTTPRequest`
 - `_sendGraphQLHTTPRequest`
+- ...
 
 The **PHP Functions via Schema** extension offers fields which expose functionalities commonly found in programming languages (such as PHP):
 
@@ -723,8 +722,9 @@ The **PHP Functions via Schema** extension offers fields which expose functional
 - `_arrayItem`
 - `_arrayAddItem`
 - `_arrayUnique`
+- ...
 
-
+Functionality fields are not distinctively supported by the GraphQL spec. That's why Gato GraphQL offers them as a custom feature, under the name of "Global Fields". With this feature, after indicating that a field is global in the corresponding resolver (in PHP code), it will be made accessible under every single type in the GraphQL schema.
 
 ## The Settings page has been re-designed
 
