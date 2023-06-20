@@ -14,7 +14,9 @@ This module is disabled if the [Classic Editor](https://wordpress.org/plugins/cl
 
 ## `blocks`
 
-Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post:
+Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post.
+
+This query:
 
 ```graphql
 {
@@ -25,11 +27,249 @@ Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks co
         attributes
         innerBlocks {
           ...on Block {
-            name
-            attributes
+              name
+              attributes
+              innerBlocks {
+                ...on Block {
+                  name
+                  attributes
+                }
+              }
+            }
           }
         }
       }
+    }
+  }
+}
+```
+
+...produces this response:
+
+```json
+{
+  "data": {
+    "post": {
+      "blocks": [
+        {
+          "name": "core/gallery",
+          "attributes": {
+            "linkTo": "none",
+            "className": "alignnone",
+            "images": [
+              {
+                "url": "https://d.pr/i/zd7Ehu+",
+                "alt": "",
+                "id": "1706"
+              },
+              {
+                "url": "https://d.pr/i/jXLtzZ+",
+                "alt": "",
+                "id": "1705"
+              }
+            ],
+            "ids": [],
+            "shortCodeTransforms": [],
+            "imageCrop": true,
+            "fixedHeight": true,
+            "sizeSlug": "large",
+            "allowResize": false
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/list",
+          "attributes": {
+            "ordered": false,
+            "values": "<li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li>"
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlocks": [
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/image",
+                  "attributes": {
+                    "id": 1701,
+                    "className": "layout-column-1",
+                    "url": "https://d.pr/i/fW6V3V+",
+                    "alt": ""
+                  },
+                  "innerBlocks": null
+                }
+              ]
+            },
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/paragraph",
+                  "attributes": {
+                    "className": "layout-column-2",
+                    "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes.",
+                    "dropCap": false
+                  },
+                  "innerBlocks": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          },
+          "innerBlocks": null
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlocks": [
+            {
+              "name": "core/column",
+              "attributes": {},
+              "innerBlocks": [
+                {
+                  "name": "core/image",
+                  "attributes": {
+                    "id": 1701,
+                    "className": "layout-column-1",
+                    "url": "https://d.pr/i/fW6V3V+",
+                    "alt": ""
+                  },
+                  "innerBlocks": null
+                },
+                {
+                  "name": "core/columns",
+                  "attributes": {
+                    "isStackedOnMobile": true
+                  },
+                  "innerBlocks": [
+                    {
+                      "name": "core/column",
+                      "attributes": {
+                        "width": "33.33%"
+                      },
+                      "innerBlocks": [
+                        {
+                          "name": "core/heading",
+                          "attributes": {
+                            "fontSize": "large",
+                            "content": "Life is so rich",
+                            "level": 2
+                          },
+                          "innerBlocks": null
+                        },
+                        {
+                          "name": "core/heading",
+                          "attributes": {
+                            "level": 3,
+                            "content": "Life is so dynamic"
+                          },
+                          "innerBlocks": null
+                        }
+                      ]
+                    },
+                    {
+                      "name": "core/column",
+                      "attributes": {
+                        "width": "66.66%"
+                      },
+                      "innerBlocks": [
+                        {
+                          "name": "core/paragraph",
+                          "attributes": {
+                            "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
+                            "dropCap": false
+                          },
+                          "innerBlocks": null
+                        },
+                        {
+                          "name": "core/columns",
+                          "attributes": {
+                            "isStackedOnMobile": true
+                          },
+                          "innerBlocks": [
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": [
+                                {
+                                  "name": "core/image",
+                                  "attributes": {
+                                    "id": 361,
+                                    "sizeSlug": "large",
+                                    "linkDestination": "none",
+                                    "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg",
+                                    "alt": ""
+                                  },
+                                  "innerBlocks": null
+                                }
+                              ]
+                            },
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": null
+                            },
+                            {
+                              "name": "core/column",
+                              "attributes": {},
+                              "innerBlocks": [
+                                {
+                                  "name": "core/image",
+                                  "attributes": {
+                                    "id": 362,
+                                    "sizeSlug": "large",
+                                    "linkDestination": "none",
+                                    "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png",
+                                    "alt": ""
+                                  },
+                                  "innerBlocks": null
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 }
