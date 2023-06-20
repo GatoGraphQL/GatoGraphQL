@@ -338,11 +338,11 @@ Please notice that keeping the response type as `BlockUnion` is good for forward
 
 The `JSONObject` type (as retrieved by `Block.attributes`) is not strictly typed: Its properties can have any type and cardinality (`String`, `Int`, `[Boolean!]`, etc), so we need to know this information for every block and deal with each case in the client.
 
-If we need strict typing, we must extend the GraphQL schema via PHP code, adding block-specific types that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
+If we need strict typing, we must extend the GraphQL schema via PHP code, adding block-specific types that map a block's specific attributes as fields, and make them part of `BlockUnion`.
 
 For instance, we can add type `CoreParagraphBlock` that maps the `core/paragraph` block, with field `content` of type `String`.
 
-Refer to the documentation in [`leoloso/PoP`](https://github.com/leoloso/PoP) to learn how to extend the GraphQL schema (this is currently a work in progress).
+Refer to the documentation in [`leoloso/PoP`](https://github.com/leoloso/PoP) to learn how to extend the GraphQL schema (currently a work in progress).
 
 ### Filtering blocks
 
