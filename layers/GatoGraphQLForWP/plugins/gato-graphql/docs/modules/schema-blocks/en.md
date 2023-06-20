@@ -340,7 +340,7 @@ Keeping the response as a `BlockUnion` is good for forward compatibility: If we 
 
 ### Mapping block-specific types
 
-The `JSONObject` type is not strictly typed: its properties can have any type and cardinality (`String`, `Int`, `[Boolean!]`, etc), so we need to know this information for every block and deal with each case in the client.
+The `JSONObject` type (as retrieved by `Block.attributes`) is not strictly typed: its properties can have any type and cardinality (`String`, `Int`, `[Boolean!]`, etc), so we need to know this information for every block and deal with each case in the client.
 
 If we need strict typing, we must extend the GraphQL schema via PHP code, adding block-specific types that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
 
