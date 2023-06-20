@@ -1182,7 +1182,7 @@ Please check the [Preact example](https://github.com/Automattic/vip-block-data-a
 
 ## Limitations
 
-_(This documentation has been copied from the [Limitations](https://github.com/Automattic/vip-block-data-api/#limitations) section in `Automattic/vip-block-data-api`.)_
+_(This documentation has been copied (and slightly adapted) from the [Limitations](https://github.com/Automattic/vip-block-data-api/#limitations) section in `Automattic/vip-block-data-api`.)_
 
 ### Client-side blocks
 
@@ -1388,9 +1388,9 @@ Retrieving the `caption` through the Block Data API yields this result:
 }
 ```
 
-`caption` now contains inline HTML. In order to view rich-text formatting in a decoupled component, direct HTML usage with `innerHTML` or `dangerouslySetInnerHTML` is necessary. You could also use the [`vip_block_data_api__sourced_block_result`](#vip_block_data_api__sourced_block_result) filter to remove HTML from attributes. Formatting would be removed as well, but the resulting data may be more flexible.
+`caption` now contains inline HTML. In order to view rich-text formatting in a decoupled component, direct HTML usage with `innerHTML` or `dangerouslySetInnerHTML` is necessary. <!--You could also use the [`vip_block_data_api__sourced_block_result`](#vip_block_data_api__sourced_block_result) filter to remove HTML from attributes.--> Formatting would be removed as well, but the resulting data may be more flexible.
 
-In the future we are considering providing a rich-text data format so that no direct HTML is required to render blocks correctly. This would improve the flexibility of the Block Data API in non-browser locations such as in native mobile applications. For now, however, some direct HTML is still required to render blocks with rich formatting.
+<!-- In the future we are considering providing a rich-text data format so that no direct HTML is required to render blocks correctly. This would improve the flexibility of the Block Data API in non-browser locations such as in native mobile applications. For now, however, some direct HTML is still required to render blocks with rich formatting. -->
 
 ### Deprecated blocks
 
@@ -1463,7 +1463,7 @@ The resulting `core/list` item from the Block Data API parses the list items as 
 
 Deprecated blocks can be a tricky problem when using the Block Data API to render multiple versions of the same block. A `core/list` block from a post in 2021 has a different data shape than a `core/list` block created in 2023. Consumers of the API need to be aware of legacy block structures in order to implement custom frontend components. This issue applies to custom blocks as well; if a block has legacy markup saved in the database, this can result in legacy block representation in the Block Data API.
 
-We are considering ways to mitigate this problem for consumers of the API, such as [implementing server-side block deprecation rules][wordpress-block-deprecation] or providing type structures to represent legacy block data shapes. For now, ensure that Block Data API consumers test against older content to ensure that legacy block versions used in content are covered by code.
+<!--We are considering ways to mitigate this problem for consumers of the API, such as [implementing server-side block deprecation rules][wordpress-block-deprecation] or providing type structures to represent legacy block data shapes. For now, -->Please ensure that Block Data API consumers test against older content to ensure that legacy block versions used in content are covered by code.
 
 ## Acknowledgments
 
