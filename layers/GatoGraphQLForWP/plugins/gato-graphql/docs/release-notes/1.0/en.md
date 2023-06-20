@@ -727,6 +727,47 @@ Now, the Gutenberg template (containing the blocks) is not locked anymore, then 
 
 ![Removing and adding blocks in the Schema Configuration](../../images/schema-configuration-removing-and-adding-blocks.gif)
 
+## Display warnings in the GraphQL response
+
+The GraphQL response can now display warnings, raised while resolving the GraphQL query, added for instance by field or directive resolvers.
+
+The warnings are printed under the `extensions` top-level entry in the JSON response.
+
+For instance, the newly-added `CustomPost.blocks` field raises a warning when a block has not been registered on the server-side:
+
+```json
+{
+  "extensions": {
+    "warnings": [
+      {
+        "message": "Block type \"owner/block-name\" is not server-side registered. Sourced block attributes will not be available.",
+        "locations": [
+          {
+            "line": 336,
+            "column": 7
+          }
+        ],
+        "extensions": {
+          "path": [
+            "blockFlattenedDataItems",
+            "...on GenericCustomPost { ... }",
+            "notServerSideRegisteredBlocks: customPost(by: {id: 660}) { ... }",
+            "query { ... }"
+          ],
+          "type": "GenericCustomPost",
+          "field": "blockFlattenedDataItems",
+          "id": 660,
+          "code": "PoP/ComponentModel@w1"
+        }
+      }
+    ]
+  },
+  "data": {
+    
+  }
+}
+```
+
 ## Implementation of standard custom scalar types
 
 Several standard custom scalar types have been implemented, so they are readily-available to be used in your GraphQL schema:
