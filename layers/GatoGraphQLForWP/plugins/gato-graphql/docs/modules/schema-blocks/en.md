@@ -8,7 +8,7 @@ This module adds `Block` types to the GraphQL schema, retrieved via the followin
 
 - `blocks`
 - `blockDataItems`
-- `blockFlattenedData`
+- `blockFlattenedDataItems`
 
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
 
@@ -806,9 +806,299 @@ This query:
 
 Please notice that, similar to `blocks`, not all blocks of type `core/heading` have been included: Those which are nested under `core/column` have been excluded, as there is no way to reach them (since blocks `core/columns` and `core/column` are themselves excluded).
 
-## `blockFlattenedData`
+## `blockFlattenedDataItems`
 
-Both fields `blocks` and `blockDataItems` allow to filter what blocks are retrieved, via the `filter` argument.
+Both fields `blocks` and `blockDataItems` allow to filter what blocks are retrieved (via the `filter` argument). In both cases, if a block satisfies the inclusion condition, but is nested within a block that does not, then it will be excluded.
+
+There are ocassions, though, when we need to retrieve all blocks of a certain type from the custom post, independently of where these blocks are located within the hierarchy. For instance, we may want to include all blocks of type `core/image`, to retrieve all images included in the blog posts.
+
+It is to satisfy this need that there is field `CustomPost.blockFlattenedDataItems`. Unlike fields `blocks` and `blockDataItems`, it flattens the block hierarchy into a single level.
+
+This query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    blockFlattenedDataItems
+  }
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "post": {
+      "blockFlattenedDataItems": [
+        {
+          "name": "core/gallery",
+          "attributes": {
+            "linkTo": "none",
+            "className": "alignnone",
+            "images": [
+              {
+                "url": "https://d.pr/i/zd7Ehu+",
+                "alt": "",
+                "id": "1706"
+              },
+              {
+                "url": "https://d.pr/i/jXLtzZ+",
+                "alt": "",
+                "id": "1705"
+              }
+            ],
+            "ids": [],
+            "shortCodeTransforms": [],
+            "imageCrop": true,
+            "fixedHeight": true,
+            "sizeSlug": "large",
+            "allowResize": false
+          },
+          "innerBlockPositions": null,
+          "parentBlockPosition": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "List Block",
+            "level": 2
+          },
+          "innerBlockPositions": null,
+          "parentBlockPosition": null
+        },
+        {
+          "name": "core/list",
+          "attributes": {
+            "ordered": false,
+            "values": "<li>List item 1</li><li>List item 2</li><li>List item 3</li><li>List item 4</li>"
+          },
+          "innerBlockPositions": null,
+          "parentBlockPosition": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "className": "has-top-margin",
+            "content": "Columns Block",
+            "level": 2
+          },
+          "innerBlockPositions": null,
+          "parentBlockPosition": null
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlockPositions": [
+            5,
+            7
+          ],
+          "parentBlockPosition": null
+        },
+        {
+          "name": "core/column",
+          "attributes": {},
+          "parentBlockPosition": 4,
+          "innerBlockPositions": [
+            6
+          ]
+        },
+        {
+          "name": "core/image",
+          "attributes": {
+            "id": 1701,
+            "className": "layout-column-1",
+            "url": "https://d.pr/i/fW6V3V+",
+            "alt": ""
+          },
+          "parentBlockPosition": 5,
+          "innerBlockPositions": null
+        },
+        {
+          "name": "core/column",
+          "attributes": {},
+          "parentBlockPosition": 4,
+          "innerBlockPositions": [
+            8
+          ]
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "className": "layout-column-2",
+            "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital.",
+            "dropCap": false
+          },
+          "parentBlockPosition": 7,
+          "innerBlockPositions": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "Columns inside Columns (nested inner blocks)",
+            "level": 2
+          },
+          "innerBlockPositions": null,
+          "parentBlockPosition": null
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "innerBlockPositions": [
+            11
+          ],
+          "parentBlockPosition": null
+        },
+        {
+          "name": "core/column",
+          "attributes": {},
+          "parentBlockPosition": 10,
+          "innerBlockPositions": [
+            12,
+            13
+          ]
+        },
+        {
+          "name": "core/image",
+          "attributes": {
+            "id": 1701,
+            "className": "layout-column-1",
+            "url": "https://d.pr/i/fW6V3V+",
+            "alt": ""
+          },
+          "parentBlockPosition": 11,
+          "innerBlockPositions": null
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "parentBlockPosition": 11,
+          "innerBlockPositions": [
+            14,
+            17
+          ]
+        },
+        {
+          "name": "core/column",
+          "attributes": {
+            "width": "33.33%"
+          },
+          "parentBlockPosition": 13,
+          "innerBlockPositions": [
+            15,
+            16
+          ]
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "fontSize": "large",
+            "content": "Life is so rich",
+            "level": 2
+          },
+          "parentBlockPosition": 14,
+          "innerBlockPositions": null
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "level": 3,
+            "content": "Life is so dynamic"
+          },
+          "parentBlockPosition": 14,
+          "innerBlockPositions": null
+        },
+        {
+          "name": "core/column",
+          "attributes": {
+            "width": "66.66%"
+          },
+          "parentBlockPosition": 13,
+          "innerBlockPositions": [
+            18,
+            19
+          ]
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
+            "dropCap": false
+          },
+          "parentBlockPosition": 17,
+          "innerBlockPositions": null
+        },
+        {
+          "name": "core/columns",
+          "attributes": {
+            "isStackedOnMobile": true
+          },
+          "parentBlockPosition": 17,
+          "innerBlockPositions": [
+            20,
+            22,
+            23
+          ]
+        },
+        {
+          "name": "core/column",
+          "attributes": {},
+          "parentBlockPosition": 19,
+          "innerBlockPositions": [
+            21
+          ]
+        },
+        {
+          "name": "core/image",
+          "attributes": {
+            "id": 361,
+            "sizeSlug": "large",
+            "linkDestination": "none",
+            "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg",
+            "alt": ""
+          },
+          "parentBlockPosition": 20,
+          "innerBlockPositions": null
+        },
+        {
+          "name": "core/column",
+          "attributes": {},
+          "parentBlockPosition": 19,
+          "innerBlockPositions": null
+        },
+        {
+          "name": "core/column",
+          "attributes": {},
+          "parentBlockPosition": 19,
+          "innerBlockPositions": [
+            24
+          ]
+        },
+        {
+          "name": "core/image",
+          "attributes": {
+            "id": 362,
+            "sizeSlug": "large",
+            "linkDestination": "none",
+            "url": "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png",
+            "alt": ""
+          },
+          "parentBlockPosition": 23,
+          "innerBlockPositions": null
+        }
+      ]
+    }
+  }
+}
+```
+
+For instance, this query would 
 
 However, this
 
