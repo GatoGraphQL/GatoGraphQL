@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Browse Recipes, providing examples of GraphQL queries for different use cases
 - Browse "Additional Documentation" when editing a Schema Configuration
 - Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
+- Added the "Global Fields" custom feature
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)

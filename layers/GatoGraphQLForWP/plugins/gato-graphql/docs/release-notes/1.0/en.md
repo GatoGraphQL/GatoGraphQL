@@ -695,6 +695,45 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
 
+## Added the "Global Fields" custom feature
+
+The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
+
+However, there is also a different kind of fields: those providing "functionality" instead of data. These fields need not be restricted to a specific type, as they are potentially useful to all types.
+
+For instance, functionality fields can be used to fetch data from another server, or for manipulating data once it has been retrieved (allowing us to transform a field value in whatever way it is required).
+
+The following are examples of implemented global fields, offered via extensions:
+
+The **HTTP Client** extension offers fields which connect to external API endpoints and retrieve data from them:
+
+- `_sendHTTPRequest`
+- `_sendJSONObjectItemHTTPRequest`
+- `_sendJSONObjectCollectionHTTPRequest`
+- `_sendGraphQLHTTPRequest`
+- ...
+
+The **PHP Functions via Schema** extension offers fields which expose functionalities commonly found in programming languages (such as PHP):
+
+- `_not`
+- `_if`
+- `_equals`
+- `_isEmpty`
+- `_echo`
+- `_sprintf`
+- `_arrayItem`
+- `_arrayAddItem`
+- `_arrayUnique`
+- ...
+
+Gato GraphQL offers "Global Fields" as a custom feature, as these are not distinctively supported by the GraphQL spec.
+
+With this feature, after indicating that a field is "global" in the corresponding resolver (in PHP code), it will be made accessible under every single type in the GraphQL schema.
+
+In order to configure the level of exposure of global fields in the schema, the Schema Configuration now has a new element "Global Fields":
+
+![Global Fields in the Schema Configuration](../../images/schema-config-global-fields.png)
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
