@@ -695,7 +695,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
 
-## Added the "Global Fields" custom feature
+## Added support for the "Global Fields" custom feature
 
 The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
 
