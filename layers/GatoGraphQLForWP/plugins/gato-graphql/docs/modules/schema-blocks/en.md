@@ -16,7 +16,7 @@ This module is disabled if the [Classic Editor](https://wordpress.org/plugins/cl
 
 Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post.
 
-The result from `blocks` is a list of the `BlockUnion` union type, which contains all the possible Block types that have been mapped to the GraphQL schema. All these Block types implement the `Block` interface.
+The result from `blocks` is a list of the possible Block types that have been mapped to the GraphQL schema. These Block types are part of the `BlockUnion` type, and implement the `Block` interface.
 
 The plugin implements one Block type, `GenericBlock`, which is already sufficient to retrieve the data for any block (via field `attributes: JSONObject`).
 
