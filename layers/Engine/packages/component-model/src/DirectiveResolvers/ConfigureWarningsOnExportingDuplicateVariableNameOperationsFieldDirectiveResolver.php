@@ -23,10 +23,10 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
 /**
- * @configureWarningsOnExportingDuplicateVariableName directive, 
+ * @configureWarningsOnExportingDuplicateVariableName directive,
  * to either enable or disable showing warnings when exporting
  * a duplicate variable name, as with "someVarName" in:
- * 
+ *
  *   ```
  *   {
  *     posts {
@@ -35,9 +35,9 @@ use SplObjectStorage;
  *     }
  *   }
  *   ```
- * 
+ *
  * Or "hasPostID" in:
- * 
+ *
  *   ```
  *   {
  *     transformedContentSource: _echo(value: $contentSource)
@@ -54,7 +54,7 @@ use SplObjectStorage;
  *           passOnwardsAs: "hasPostID"
  *         )
  *           @if (condition: $hasPostID)
- *             # ... * 
+ *             # ... *
  *
  *         @applyField(
  *           name: "_propertyExistsInJSONObject"
@@ -86,7 +86,7 @@ class ConfigureWarningsOnExportingDuplicateVariableNameOperationsFieldDirectiveR
     {
         return 'configureWarningsOnExportingDuplicateVariableName';
     }
-    
+
     public function getFieldDirectiveBehavior(): string
     {
         return FieldDirectiveBehaviors::OPERATION;

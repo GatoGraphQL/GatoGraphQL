@@ -43,7 +43,7 @@ abstract class AbstractTransformFieldValueFieldDirectiveResolver extends Abstrac
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        /** 
+        /**
          * If the directive args contain any reference to a promise,
          * validate it
          */
@@ -73,7 +73,7 @@ abstract class AbstractTransformFieldValueFieldDirectiveResolver extends Abstrac
                 return;
             }
         }
-        
+
         foreach ($idFieldSet as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
                 if ($resolveDirectiveArgsOnObject) {
