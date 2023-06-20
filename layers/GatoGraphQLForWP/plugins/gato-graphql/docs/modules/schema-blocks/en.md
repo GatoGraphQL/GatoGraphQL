@@ -807,7 +807,7 @@ Please notice that, similar to `blocks`, not all blocks of type `core/heading` h
 
 Both fields `blocks` and `blockDataItems` allow to filter what blocks are retrieved (via the `filterBy` argument). In both cases, if a block satisfies the inclusion condition, but is nested within a block that does not, then it will be excluded.
 
-There are ocassions, though, when we need to retrieve all blocks of a certain type from the custom post, independently of where these blocks are located within the hierarchy. For instance, we may want to include all blocks of type `core/image`, to retrieve all images included in a blog post.
+There are occasions, though, when we need to retrieve all blocks of a certain type from the custom post, independently of where these blocks are located within the hierarchy. For instance, we may want to include all blocks of type `core/image`, to retrieve all images included in a blog post.
 
 It is to satisfy this need that there is field `CustomPost.blockFlattenedDataItems`. Unlike fields `blocks` and `blockDataItems`, it flattens the block hierarchy into a single level.
 
