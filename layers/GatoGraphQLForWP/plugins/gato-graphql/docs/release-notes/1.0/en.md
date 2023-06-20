@@ -674,6 +674,8 @@ By setting the status of the Custom Endpoint or Persisted Query as `private`, th
 
 For instance, we can create private Persisted Queries that help manage the application, such as retrieving data to create reports with our metrics.
 
+![Private Persisted Query](../../images/private-persisted-query.png)
+
 ## Browse and install Gato GraphQL extensions
 
 @todo Complete Extensions page changelog!
