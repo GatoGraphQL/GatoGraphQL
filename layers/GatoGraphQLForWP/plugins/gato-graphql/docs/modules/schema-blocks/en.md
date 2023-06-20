@@ -12,6 +12,12 @@ This module adds `Block` types to the GraphQL schema, retrieved via the followin
 
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
 
+### Acknowledgements
+
+The logic to retrieve the (Gutenberg) block data is based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>.
+
+Many thanks to the folks who contributed to that project. ❤️
+
 ## `blocks`
 
 Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks contained in the custom post.
@@ -1464,12 +1470,6 @@ The resulting `core/list` item from the Block Data API parses the list items as 
 Deprecated blocks can be a tricky problem when using the Block Data API to render multiple versions of the same block. A `core/list` block from a post in 2021 has a different data shape than a `core/list` block created in 2023. Consumers of the API need to be aware of legacy block structures in order to implement custom frontend components. This issue applies to custom blocks as well; if a block has legacy markup saved in the database, this can result in legacy block representation in the Block Data API.
 
 <!--We are considering ways to mitigate this problem for consumers of the API, such as [implementing server-side block deprecation rules][wordpress-block-deprecation] or providing type structures to represent legacy block data shapes. For now, -->Please ensure that Block Data API consumers test against older content to ensure that legacy block versions used in content are covered by code.
-
-## Acknowledgments
-
-The logic to retrieve the (Gutenberg) block data is a fork of [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/).
-
-Many thanks to the folks who contributed to that project. ❤️
 
 <!-- Links -->
 [gutenberg-code-image-caption]: https://github.com/WordPress/gutenberg/blob/3d2a6d7eaa4509c4d89bde674e9b73743868db2c/packages/block-library/src/image/block.json#L30-L35
