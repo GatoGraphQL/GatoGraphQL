@@ -738,11 +738,11 @@ In order to configure the level of exposure of global fields in the schema, the 
 
 _This is a custom feature (i.e. not present in the GraphQL spec) offered by Gato GraphQL._
 
-This feature allows directives to nest and modify the behavior of other directives.
+This feature allows directives to execute complex functionalities, by composing other directives inside. A directive that composes another directive is called a "meta" directive.
 
-This module allows directives to execute complex functionalities, by composing other directives inside, calling them before/after preparing the field value accordingly. Directives with this capability are called "meta directives".
+A use case is to convert the type of the field value to the type expected by the nested directive. For instance, each element from an array can be provided to a directive that expects a single value.
 
-A use case is to convert the type of the field value to the type expected by the nested directive. For instance, each element from an array can be provided to a directive that expects a single value. In this query, field `capabilities` returns `[String]` (an array of strings), and directive `@strUpperCase` receives `String`. Hence, executing the following query:
+In this query, field `capabilities` returns `[String]` (an array of strings), and directive `@strUpperCase` (available via the **PHP Functions via Schema** extension) receives `String`. Hence, executing the following query:
 
 ```graphql
 query {
