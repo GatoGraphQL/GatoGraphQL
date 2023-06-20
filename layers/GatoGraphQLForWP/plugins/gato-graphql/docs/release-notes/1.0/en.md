@@ -743,7 +743,7 @@ Several standard custom scalar types have been implemented, so they are readily-
 - `StrictlyPositiveFloat`
 - `UUID`
 
-Please notice that these do not currently appear in the Interactive Schema client, as they are not being referenced anywhere within the WordPress model (as [defined by the spec](https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars), only types referenced by another type are reachable via introspection).
+Please notice that these do not currently appear in the Interactive Schema client, as they are not being referenced anywhere within the WordPress model (as <a href="https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars" target="_blank">defined by the spec</a>, only types referenced by another type are reachable via introspection).
 
 ## Sort the Schema Configuration entries by name
 
