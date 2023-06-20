@@ -1201,30 +1201,30 @@ For legacy block content or third-party blocks that are not registered server-si
 
 ```js
 blocks.registerBlockType('wpvip/hero-block', {
-    title: __('Hero Block', 'wpvip'),
-    icon: 'index-card',
-    category: 'text',
-    attributes: {
-        title: {
-            type: 'string',
-            source: 'html',
-            selector: 'h2',
-        },
-        mediaURL: {
-            type: 'string',
-            source: 'attribute',
-            selector: 'img',
-            attribute: 'src',
-        },
-        content: {
-            type: 'string',
-            source: 'html',
-            selector: '.hero-text',
-        },
-        mediaID: {
-            type: 'number',
-        }
+  title: __('Hero Block', 'wpvip'),
+  icon: 'index-card',
+  category: 'text',
+  attributes: {
+    title: {
+      type: 'string',
+      source: 'html',
+      selector: 'h2',
+    },
+    mediaURL: {
+      type: 'string',
+      source: 'attribute',
+      selector: 'img',
+      attribute: 'src',
+    },
+    content: {
+      type: 'string',
+      source: 'html',
+      selector: '.hero-text',
+    },
+    mediaID: {
+      type: 'number',
     }
+  }
 });
 ```
 
