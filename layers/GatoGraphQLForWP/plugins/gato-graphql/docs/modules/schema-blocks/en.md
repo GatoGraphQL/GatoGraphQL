@@ -346,6 +346,8 @@ If we need strict typing, we must extend the GraphQL schema via PHP code, adding
 
 For instance, we can add type `CoreParagraphBlock` that maps the `core/paragraph` block, with field `content` of type `String`.
 
+Refer to the documentation in [`leoloso/PoP`](https://github.com/leoloso/PoP) to learn how to extend the GraphQL schema (this is currently a work in progress).
+
 ### Filtering blocks
 
 Field `CustomPost.blocks` contains argument `filter` with 2 properties: `include` and `exclude`. We can use these to filter what blocks are retrieved, by the block name:
