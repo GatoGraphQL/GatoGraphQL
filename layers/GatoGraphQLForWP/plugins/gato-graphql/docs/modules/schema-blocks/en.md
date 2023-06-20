@@ -33,29 +33,50 @@ Field `CustomPost.blocks: [BlockUnion!]` retrieves the list of all the blocks co
 }
 ```
 
-The result is a `BlockUnion` type, which contains all the possible Block types that have been mapped to the schema, all of them implementing the `Block` interface.
+The result is a `BlockUnion` type, which contains all the possible Block types that have been mapped to the schema, all of them implementing the `Block` interface. Currently, there is only one Block type mapped: `GenericBlock`:
 
 ```graphql
 interface Block {
   name: String!
   attributes: JSONObject
   innerBlocks: [BlockUnion!]
+  contentSource: String!
 }
-```
 
-Currently, there is only one Block type mapped: `GenericBlock`:
-
-```graphql
 type GenericBlock implements Block {
   name: String!
   attributes: JSONObject
   innerBlocks: [BlockUnion!]
+  contentSource: String!
 }
 
 union BlockUnion = GenericBlock
 ```
 
 `GenericBlock` contains field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block. As such, this block is sufficient to represent any Block type.
+
+Please notice that field `Block.innerBlocks` also retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    blocks {
+      ...on Block {
+        name
+        attributes
+        innerBlocks {
+          name
+          attributes
+          innerBlocks {
+            name
+            attributes
+          }
+        }
+      }
+    }
+  }
+}
+```
 
 ### Mapping block-specific types
 
@@ -92,7 +113,56 @@ Then, the GraphQL query is slightly simplified:
 
 ## `blockData`
 
+```graphql
+{
+  post(by: { id: 1 }) {
+    blocks {
+      ...BlockData
+    }
+  }
+}
 
+fragment BlockData on Block {
+  name
+  attributes
+  contentSource
+  innerBlocks {
+    name
+    attributes
+    contentSource
+    innerBlocks {
+      name
+      attributes
+      contentSource
+      innerBlocks {
+        name
+        attributes
+        contentSource
+        innerBlocks {
+          name
+          attributes
+          contentSource
+          innerBlocks {
+            name
+            attributes
+            contentSource
+            innerBlocks {
+              name
+              attributes
+              contentSource
+              innerBlocks {
+                name
+                attributes
+                contentSource
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
 
 ## `blockFlattenedData`
 
