@@ -668,7 +668,7 @@ Both Custom Endpoints and Persisted Queries have been implemented as Custom Post
 
 Now, status value `private` is also supported and, if the `post_password` property is provided, then the endpoint is also made password-protected.
 
-As such, we can now create endpoints that are to be consumed internally only, or that the user needs to provided a password in order to access it.
+As such, we can now create endpoints that are to be consumed internally only, or that the user needs to provided a password in order to access it, thus improving the security of our GraphQL API.
 
 ### Private endpoints
 
@@ -677,6 +677,18 @@ By setting the status of the Custom Endpoint or Persisted Query as `private`, th
 For instance, we can create private Persisted Queries that help manage the application, such as retrieving data to create reports with our metrics.
 
 ![Private Persisted Query](../../images/private-persisted-query.png)
+
+### Password-protected endpoints
+
+If we create a Custom Endpoint for a specific client, we can now assign a password, to provide an additional level of security that only that client will access the endpoint.
+
+When first accessing a password-protected endpoint (whether accessing the endpoint directly, or its GraphiQL or Interactive Schema clients), we encounter a screen requesting the password:
+
+![Password-protected Custom Endpoint: First access](../../images/password-protected-custom-endpoint-unauthorized.png)
+
+Once the password is provided and validated, only then we access the actual destination:
+
+![Password-protected Custom Endpoint: After authorization](../../images/password-protected-custom-endpoint-authorized.png)
 
 ## Browse and install Gato GraphQL extensions
 
