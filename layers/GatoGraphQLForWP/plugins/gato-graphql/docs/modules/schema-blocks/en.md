@@ -346,7 +346,7 @@ Refer to the documentation in [`leoloso/PoP`](https://github.com/leoloso/PoP) to
 
 ### Filtering blocks
 
-Field `CustomPost.blocks` contains argument `filter` with two properties: `include` and `exclude`. We can use these to filter what blocks are retrieved, by the block name:
+Field `CustomPost.blocks` contains argument `filterBy` with two properties: `include` and `exclude`. We can use these to filter what blocks are retrieved, by the block name:
 
 ```graphql
 {
@@ -743,7 +743,7 @@ For instance, the following query:
 
 ### Filtering block data items
 
-Similar to `blocks`, `blockDataItems` also allows to filter what blocks are retrieved, via the `filter` argument.
+Similar to `blocks`, `blockDataItems` also allows to filter what blocks are retrieved, via the `filterBy` argument.
 
 This query:
 
@@ -804,7 +804,7 @@ Please notice that, similar to `blocks`, not all blocks of type `core/heading` h
 
 ## `blockFlattenedDataItems`
 
-Both fields `blocks` and `blockDataItems` allow to filter what blocks are retrieved (via the `filter` argument). In both cases, if a block satisfies the inclusion condition, but is nested within a block that does not, then it will be excluded.
+Both fields `blocks` and `blockDataItems` allow to filter what blocks are retrieved (via the `filterBy` argument). In both cases, if a block satisfies the inclusion condition, but is nested within a block that does not, then it will be excluded.
 
 There are ocassions, though, when we need to retrieve all blocks of a certain type from the custom post, independently of where these blocks are located within the hierarchy. For instance, we may want to include all blocks of type `core/image`, to retrieve all images included in a blog post.
 
