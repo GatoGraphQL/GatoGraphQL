@@ -734,6 +734,14 @@ In order to configure the level of exposure of global fields in the schema, the 
 
 ![Global Fields in the Schema Configuration](../../images/schema-config-global-fields.png)
 
+## Added support for the "Composable Directives" custom feature
+
+
+
+## Added support for the "Multi-Field Directives" custom feature
+
+
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
