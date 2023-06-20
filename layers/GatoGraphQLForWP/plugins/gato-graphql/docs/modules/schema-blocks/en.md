@@ -1174,7 +1174,7 @@ Please notice that the two additional attributes, `parentBlockPosition` and `inn
 
 ## Preact example
 
-Please check the <a href="https://github.com/Automattic/vip-block-data-api/#preact-example" target="_blank">Preact example</a> in `Automattic/vip-block-data-api`, to see an example of how to map the block data into customized client-side JavaScript components.
+Please check the <a href="https://github.com/Automattic/vip-block-data-api/#preact-example" target="_blank">Preact example</a> in `Automattic/vip-block-data-api`, to see an example of how to map the block data into customizedclient-side JavaScript components.
 
 ## Limitations
 
@@ -1184,4 +1184,4 @@ Please check the <a href="https://github.com/Automattic/vip-block-data-api/#limi
 
 The logic to retrieve the (Gutenberg) block data is based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>.
 
-Many thanks to everyone who contributed to that project. ❤️
+Many thanks to the folks who contributed to that project. ❤️
