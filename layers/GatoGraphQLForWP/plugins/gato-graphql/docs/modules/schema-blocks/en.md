@@ -67,9 +67,9 @@ If we need strict typing (eg: to represent the content in the `core/paragraph` b
 
 As currently there is only one type representing blocks, `GeneralBlock`, it makes sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion`.
 
-We can do this in the Settings page, by ticking on option "":
+We can do this in the Settings page under the Blocks tab, by ticking on option `"Use single type instead of union type?"`:
 
-![Configuring to directly retrieve `GeneralBlock` instead of `BlockUnion`](../../images/)
+![Configuring to directly retrieve `GeneralBlock` instead of `BlockUnion`](../../images/settings-blocks-single-type.png)
 
 Then, the GraphQL query is slightly simplified:
 
