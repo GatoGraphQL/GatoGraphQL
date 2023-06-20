@@ -57,7 +57,11 @@ union BlockUnion = GenericBlock
 
 `GenericBlock` contains field `attributes: JSONObject`, which returns a JSON object with all the attributes in the block. As such, this block is sufficient to represent any Block type.
 
-The JSON object is not strictly typed though. If we need strict typing (eg: to represent the content in the `core/paragraph` block as a `String`), we must extend the GraphQL schema via PHP code, adding more-block-specific types (such as `CoreParagraphBlock`) that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
+### Mapping block-specific types
+
+The `JSONObject` type is not strictly typed: its properties can have any type and cardinality (`String`, `Int`, `[Boolean!]`, etc), so we need to know this information for every block and deal with each case in the client.
+
+If we need strict typing (eg: to represent the content in the `core/paragraph` block as a `String`), we must extend the GraphQL schema via PHP code, adding block-specific types (such as `CoreParagraphBlock`) that map a block's specific attributes as fields, and make them part of the `BlockUnion`.
 
 ### Retrieving `BlockUnion` or `GeneralBlock`
 
