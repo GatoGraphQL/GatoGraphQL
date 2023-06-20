@@ -662,6 +662,8 @@ This query:
 }
 ```
 
+## Support for private endpoints
+
 ## Browse and install Gato GraphQL extensions
 
 @todo Complete Extensions page changelog!

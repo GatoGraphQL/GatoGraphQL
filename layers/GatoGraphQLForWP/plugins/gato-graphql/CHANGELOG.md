@@ -8,7 +8,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Integration of Gutenberg blocks into the GraphQL schema.
+- Integration of Gutenberg blocks into the GraphQL schema
+- Support for private endpoints
 - Browse and install Gato GraphQL extensions
 - Browse Recipes, providing examples of GraphQL queries for different use cases
 - Browse "Additional Documentation" when editing a Schema Configuration
