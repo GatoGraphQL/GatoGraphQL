@@ -14,6 +14,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Browse "Additional Documentation" when editing a Schema Configuration
 - Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
 - Added support for the "Global Fields" custom feature
+- Added support for the "Composable Directives" custom feature
+- Added support for the "Multi-Field Directives" custom feature
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
