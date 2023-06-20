@@ -125,6 +125,28 @@ For instance, we can add type `CoreParagraphBlock` that maps the `core/paragraph
 
 ### Filtering blocks
 
+Field `CustomPost.blocks` contains argument `filter` with 2 properties: `include` and `exclude`. We can use these to filter what blocks are retrieved, by the block name:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    id
+    blocks(
+      filterBy: {
+        include: [
+          "core/heading",
+          "core/columns",
+          "core/column"
+        ]
+      }
+    ) {
+      name
+      attributes
+    }
+  }
+}
+```
+
 ## `blockData`
 
 ```graphql
