@@ -736,11 +736,15 @@ In order to configure the level of exposure of global fields in the schema, the 
 
 ## Added support for the "Composable Directives" custom feature
 
+@todo Create image schema-config-composable-directives.png
 
+![Composable Directives in the Schema Configuration](../../images/schema-config-composable-directives.png)
 
 ## Added support for the "Multi-Field Directives" custom feature
 
+@todo Create image schema-config-multifield-directives.png
 
+![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png)
 
 ## The Settings page has been re-designed
 
