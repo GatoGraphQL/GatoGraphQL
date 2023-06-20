@@ -80,6 +80,26 @@ On the list of Custom Endpoints, we can visualize their categories and, clicking
 
 ![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
 
+### Private endpoints
+
+By setting the status of the Custom Endpoint as `private`, the endpoint can only be accessed by the admin user. This prevents our data from being unintentionally shared with users who should not have access to the data.
+
+For instance, we can create private Persisted Queries that help manage the application, such as retrieving data to create reports with our metrics.
+
+![Private Persisted Query](../../images/private-persisted-query.png)
+
+### Password-protected endpoints
+
+If we create a Custom Endpoint for a specific client, we can now assign a password, to provide an additional level of security that only that client will access the endpoint.
+
+When first accessing a password-protected endpoint (whether accessing the endpoint directly, or its GraphiQL or Interactive Schema clients), we encounter a screen requesting the password:
+
+![Password-protected Custom Endpoint: First access](../../images/password-protected-custom-endpoint-unauthorized.png)
+
+Once the password is provided and validated, only then the user will access the intended endpoint or client:
+
+![Password-protected Custom Endpoint: After authorization](../../images/password-protected-custom-endpoint-authorized.png)
+
 ## Editor Inputs
 
 These inputs in the body of the editor are shipped with the plugin (more inputs can be added by extensions):
