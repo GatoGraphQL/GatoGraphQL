@@ -695,7 +695,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
 
-## Added support for "Global Fields"
+## Added the "Global Fields" custom feature
 
 The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
 
@@ -725,6 +725,10 @@ The **PHP Functions via Schema** extension offers fields which expose functional
 - ...
 
 Functionality fields are not distinctively supported by the GraphQL spec. That's why Gato GraphQL offers them as a custom feature, under the name of "Global Fields". With this feature, after indicating that a field is global in the corresponding resolver (in PHP code), it will be made accessible under every single type in the GraphQL schema.
+
+In order to configure the level of exposure of global fields in the schema, the Schema Configuration now has a new element "Global Fields":
+
+![Global Fields in the Schema Configuration](../../images/schema-config-global-fields.png)
 
 ## The Settings page has been re-designed
 
