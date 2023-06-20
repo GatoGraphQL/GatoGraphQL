@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- Integration of Gutenberg blocks into the GraphQL schema.
 - Browse "Additional Documentation" when editing a Schema Configuration
 - Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically

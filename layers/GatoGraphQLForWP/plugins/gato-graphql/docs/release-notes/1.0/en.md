@@ -1,5 +1,7 @@
 # Release Notes: 1.0
 
+## Integration of Gutenberg blocks into the GraphQL schema
+
 ## Browse "Additional Documentation" when editing a Schema Configuration
 
 Documentation for additional features in the Gato GraphQL can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
