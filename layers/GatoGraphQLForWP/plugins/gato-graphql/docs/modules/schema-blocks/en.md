@@ -1105,9 +1105,7 @@ In case we need to recreate the block hierarchy, the response also includes two 
 
 ### Filtering block flattened data items
 
-Now that the block hierarchy has been flattened, filtering by `core/heading` will produce these blocks wherever they are placed.
-
-This query:
+Now that the block hierarchy has been flattened, filtering by `core/heading` will produce these blocks always, even if originally nested under a block that has been excluded.
 
 This query:
 
@@ -1176,7 +1174,7 @@ This query:
 }
 ```
 
-Please notice that the 2 additional attributes, `parentBlockPosition` and `innerBlockPositions`, are removed when filtering, as they don't make sense anymore.
+Please notice that the two additional attributes, `parentBlockPosition` and `innerBlockPositions`, are removed when filtering, as they don't make sense anymore.
 
 ## Using Block data in the client
 
