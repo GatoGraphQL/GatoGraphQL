@@ -670,7 +670,7 @@ This query:
 
 A new Recipes page has been added to the menu.
 
-It provides examples of GraphQL queries for plenty of use cases. These can help us visualize the possibilities of what's doable with Gato GraphQL, and we can copy/paste these queries into our sites to achieve our goals faster.
+It provides examples of GraphQL queries for plenty of use cases. These can help us visualize what's doable with Gato GraphQL, and we can copy these queries and paste them into our applications to achieve our goals faster.
 
 ![Recipes page](../../images/releases/v1.0/recipes-page.png)
 
