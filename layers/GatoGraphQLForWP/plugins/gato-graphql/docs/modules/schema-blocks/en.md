@@ -1174,7 +1174,7 @@ Please notice that the two additional attributes, `parentBlockPosition` and `inn
 
 ## Using Block data in the client
 
-Please check the [Preact example](https://github.com/Automattic/vip-block-data-api/#preact-example) in `Automattic/vip-block-data-api`, to see an example of how to map the block data into client-side JavaScript components.
+Please check the <a href="https://github.com/Automattic/vip-block-data-api/#preact-example" target="_blank">Preact example</a> in `Automattic/vip-block-data-api`, to see an example of how to map the block data into client-side JavaScript components.
 
 ## Limitations
 
