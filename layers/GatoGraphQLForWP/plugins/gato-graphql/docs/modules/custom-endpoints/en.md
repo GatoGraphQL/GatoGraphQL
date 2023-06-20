@@ -90,7 +90,7 @@ For instance, we can create private Persisted Queries that help manage the appli
 
 ### Password-protected endpoints
 
-If we create a Custom Endpoint for a specific client, we can now assign a password, to provide an additional level of security that only that client will access the endpoint.
+If we create a Custom Endpoint for a specific client, we can assign a password to it, to provide an additional level of security that only that client will access the endpoint.
 
 When first accessing a password-protected endpoint (whether accessing the endpoint directly, or its GraphiQL or Interactive Schema clients), we encounter a screen requesting the password:
 

@@ -131,6 +131,26 @@ On the list of Persisted Queries, we can visualize their categories and, clickin
 
 ![List of Persisted Queries with their categories](../../images/graphql-persisted-queries-with-categories.png)
 
+### Private persisted queries
+
+By setting the status of the Persisted Query as `private`, the endpoint can only be accessed by the admin user. This prevents our data from being unintentionally shared with users who should not have access to the data.
+
+For instance, we can create private Persisted Queries that help manage the application, such as retrieving data to create reports with our metrics.
+
+![Private Persisted Query](../../images/private-persisted-query.png)
+
+### Password-protected persisted queries
+
+If we create a Persisted Query for a specific client, we can assign a password to it, to provide an additional level of security that only that client will access the endpoint.
+
+When first accessing a password-protected endpoint (whether accessing the endpoint directly, or its GraphiQL or Interactive Schema clients), we encounter a screen requesting the password:
+
+![Password-protected Persisted Query: First access](../../images/password-protected-custom-endpoint-unauthorized.png)
+
+Once the password is provided and validated, only then the user will access the intended endpoint or client:
+
+![Password-protected Persisted Query: After authorization](../../images/password-protected-custom-endpoint-authorized.png)
+
 ### Making the persisted query dynamic via URL params
 
 If the query makes use of variables, and option "Accept variables as URL params?" is enabled, then the values of the variables can be set via URL param when executing the persisted query.
