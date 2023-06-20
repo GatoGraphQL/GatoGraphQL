@@ -147,7 +147,7 @@ Field `CustomPost.blocks` contains argument `filter` with 2 properties: `include
 }
 ```
 
-## `blockDataItems`
+### Inconveniences of `blocks`
 
 Field `blocks` has the disadvantage that, in order to retrieve the whole block data contained in the custom post, including the data for the inner blocks, and their own inner blocks, and so on, we must know how many nested block levels there are, and reflect that information in the query.
 
@@ -167,35 +167,27 @@ For instance, this query retrieves up to 7 levels of inner block nesting:
 fragment BlockData on Block {
   name
   attributes
-  contentSource
   innerBlocks {
     name
     attributes
-    contentSource
     innerBlocks {
       name
       attributes
-      contentSource
       innerBlocks {
         name
         attributes
-        contentSource
         innerBlocks {
           name
           attributes
-          contentSource
           innerBlocks {
             name
             attributes
-            contentSource
             innerBlocks {
               name
               attributes
-              contentSource
               innerBlocks {
                 name
                 attributes
-                contentSource
               }
             }
           }
@@ -205,6 +197,8 @@ fragment BlockData on Block {
   }
 }
 ```
+
+## `blockDataItems`
 
 It is in order to avoid this that there is field `CustomPost.blockDataItems`. This field, instead of returning `[BlockUnion]`, returns `[JSONObject!]`:
 
