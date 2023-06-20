@@ -502,7 +502,9 @@ fragment BlockData on Block {
 
 ## `blockDataItems`
 
-It is in order to avoid this that there is field `CustomPost.blockDataItems`. This field, instead of returning `[BlockUnion]`, returns `[JSONObject!]`:
+It is in order to avoid the inconvenience of field `blocks` that there is field `CustomPost.blockDataItems`.
+
+This field, instead of returning `[BlockUnion]`, returns `[JSONObject!]`:
 
 ```graphql
 type CustomPost {
@@ -510,7 +512,9 @@ type CustomPost {
 }
 ```
 
-Every JSON object contains the data for the block (under entries `name` and `attributes`) and for its inner blocks (under entry `innerBlocks`), recursively.
+In other words, instead of following the typical GraphQL way of having entities relate to entities and navigate across them, every Block entity at the top level already produces the whole block data for itself and all of its children, within a single `JSONObject` result.
+
+The JSON object contains the properties for the block (under entries `name` and `attributes`) and for its inner blocks (under entry `innerBlocks`), recursively.
 
 For instance, the following query:
 
