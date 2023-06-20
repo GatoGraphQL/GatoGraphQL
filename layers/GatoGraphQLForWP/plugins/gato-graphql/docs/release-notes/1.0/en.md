@@ -6,7 +6,7 @@ Starting from this version, the plugin will be released in the [WordPress plugin
 
 Version 1.0 brings plenty of improvements, including the **integration with the (Gutenberg) block editor**, and the **availability of (commercial) extensions** to extend the GraphQL schema and provide further functionality.
 
-Here's an extensive description of all the changes.
+Here's a description of all the changes.
 
 ## Integration of Gutenberg blocks into the GraphQL schema
 
