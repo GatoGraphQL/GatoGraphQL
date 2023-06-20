@@ -1182,7 +1182,7 @@ Please check the [Preact example](https://github.com/Automattic/vip-block-data-a
 
 ## Limitations
 
-_(This documentation has been copied (and slightly adapted) from the [Limitations](https://github.com/Automattic/vip-block-data-api/#limitations) section in `Automattic/vip-block-data-api`.)_
+_(This documentation has been copied, and slightly adapted, from the [Limitations](https://github.com/Automattic/vip-block-data-api/#limitations) section in `Automattic/vip-block-data-api`.)_
 
 ### Client-side blocks
 
