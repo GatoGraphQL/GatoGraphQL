@@ -1184,4 +1184,4 @@ Please check the <a href="https://github.com/Automattic/vip-block-data-api/#limi
 
 The logic to retrieve the (Gutenberg) block data is based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>.
 
-Many thanks to the folks who contributed to that project. ❤️
+Many thanks to everyone who contributed to that project. ❤️
