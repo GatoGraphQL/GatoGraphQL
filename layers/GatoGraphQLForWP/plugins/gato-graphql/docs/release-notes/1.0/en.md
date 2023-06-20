@@ -662,7 +662,7 @@ This query:
 }
 ```
 
-## Support for private endpoints
+## Support for private and password-protected endpoints
 
 ## Browse and install Gato GraphQL extensions
 
