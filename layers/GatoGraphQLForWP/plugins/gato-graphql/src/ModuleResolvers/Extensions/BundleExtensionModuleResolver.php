@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
 use GatoGraphQL\GatoGraphQL\Plugin;
 
-class BundleExtensionModuleResolver extends AbstractExtensionModuleResolver
+class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
     public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
 

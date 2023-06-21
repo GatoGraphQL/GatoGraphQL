@@ -1,0 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
+
+interface BundleExtensionModuleResolverInterface extends ExtensionModuleResolverInterface
+{
+}
