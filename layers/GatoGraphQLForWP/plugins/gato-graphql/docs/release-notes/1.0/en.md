@@ -1005,7 +1005,12 @@ var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://yoursite.com/wp-admin/ed
 
 ## Create custom internal endpoints to feed data to (Gutenberg) blocks
 
-Developers can create their own pre-defined internal endpoints, as to apply a specific configuration (eg: using nested mutations or not, using namespacing or not, pre-defining CPTs that can be queried, and any other configuration available in the Schema Configuration).
+Developers can create their own pre-defined internal endpoints, as to apply a specific configuration:
+
+- Using nested mutations or not
+- Using namespacing or not
+- Pre-defining CPTs that can be queried
+- Any other configuration available in the Schema Configuration
 
 The following PHP code defines a custom internal endpoint with name `accessMyPortfolioData`, that configures field `Root.customPosts` (from the "Custom Posts" module) to access the `MyPortfolio` CPT only:
 
