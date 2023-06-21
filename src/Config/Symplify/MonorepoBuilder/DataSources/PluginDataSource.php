@@ -88,6 +88,7 @@ class PluginDataSource
     {
         return implode(' ', [
             '%1$s/*/docs/\*',
+            '%1$s/*/graphql-documents/\*',
             '%1$s/*/src/\*',
             '%1$s/*/package-lock.json',
             '%1$s/*/package.json',
