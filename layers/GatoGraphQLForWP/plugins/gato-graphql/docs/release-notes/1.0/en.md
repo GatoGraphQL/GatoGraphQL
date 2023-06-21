@@ -983,7 +983,9 @@ Please notice that these do not currently appear in the Interactive Schema clien
 
 An internal GraphQL endpoint, called `blockEditor`, has been made accessible within the wp-admin only, to allow developers to fetch data for their Gutenberg blocks.
 
-It is accessible under URL: `https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor`
+It is accessible under URL:
+
+`https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor`
 
 This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.`
 
@@ -1003,7 +1005,7 @@ var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://yoursite.com/wp-admin/ed
 
 Developers can create their own pre-defined internal endpoints, as to apply a specific configuration (eg: using nested mutations or not, using namespacing or not, pre-defining CPTs that can be queried, and any other configuration available in the Schema Configuration).
 
-The following PHP code defines a custom internal endpoint, that configures field `Root.customPosts` (from the "Custom Posts" module) to access the `MyPortfolio` CPT only:
+The following PHP code defines a custom internal endpoint with name `accessMyPortfolioData`, that configures field `Root.customPosts` (from the "Custom Posts" module) to access the `MyPortfolio` CPT only:
 
 ```php
 <?php
@@ -1065,7 +1067,9 @@ add_action(
 );
 ```
 
-Finally, the endpoint is accessed by replacing param `endpoint_group` with the chosen name: `https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData`
+Finally, the endpoint is accessed by replacing param `endpoint_group` with the chosen name:
+
+`https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData`
 
 ## Sort the Schema Configuration entries by name
 
