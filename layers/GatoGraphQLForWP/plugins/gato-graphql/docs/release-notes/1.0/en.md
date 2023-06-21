@@ -979,11 +979,17 @@ Several standard custom scalar types have been implemented, so they are readily-
 
 Please notice that these do not currently appear in the Interactive Schema client, as they are not being referenced anywhere within the WordPress model (as <a href="https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars" target="_blank">defined by the spec</a>, only types referenced by another type are reachable via introspection).
 
-## Added JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` with URL of internal block-editor endpoint
+## Added internal endpoints to feed data to (Gutenberg) blocks
 
-An internal GraphQL endpoint called `blockEditor` is accessible within the wp-admin, to allow developers to fetch data for their Gutenberg blocks. This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.
+An internal GraphQL endpoint, called `blockEditor`, has been made accessible within the wp-admin only, to allow developers to fetch data for their Gutenberg blocks, under URL:
 
-A new global JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` prints the URL for this endpoint in the wp-admin editor for all users who can access the GraphQL schema, making it easier to point to this endpoint within the block's JavaScript code.
+`https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor`
+
+This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.`
+
+### Added JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` with URL of internal `blockEditor` endpoint
+
+A new global JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` prints the URL for the `blockEditor` endpoint in the wp-admin editor, for all users who can access the GraphQL schema. This makes it easier to point to this endpoint within the block's JavaScript code.
 
 Inspecting the source code in the wp-admin, you will find the following HTML:
 
@@ -992,6 +998,76 @@ Inspecting the source code in the wp-admin, you will find the following HTML:
 var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor"
 </script>
 ```
+
+## Create custom internal endpoints to feed data to (Gutenberg) blocks
+
+Developers can create their own pre-defined internal endpoints, as to apply a specific configuration (eg: using nested mutations or not, using namespacing or not, pre-defining CPTs that can be queried, and any other configuration available in the Schema Configuration).
+
+The following PHP code defines a custom internal endpoint, that configures field `Root.customPosts` (from the "Custom Posts" module) to access the `MyPortfolio` CPT only:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionHooks\AbstractAddCustomAdminEndpointHook;
+use PoP\Root\Module\ModuleInterface;
+use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+
+class MyPortfolioCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointHook
+{
+  protected function getAdminEndpointGroup(): string
+  {
+    return 'accessMyPortfolioData';
+  }
+
+  /**
+   * Allow querying a specific CPT
+   *
+   * @param array<class-string<ModuleInterface>,array<string,mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
+   * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
+   */
+  protected function doGetPredefinedAdminEndpointModuleClassConfiguration(
+    array $moduleClassConfiguration,
+  ): array {
+    $moduleClassConfiguration[CustomPostsModule::class][CustomPostsEnvironment::QUERYABLE_CUSTOMPOST_TYPES] = ['MyPortfolio'];
+    return $moduleClassConfiguration;
+  }
+
+  /**
+   * Do not disable any schema modules
+   *
+   * @param array<class-string<ModuleInterface>> $schemaModuleClassesToSkip List of `Module` class which must not initialize their Schema services
+   * @return array<class-string<ModuleInterface>> List of `Module` class which must not initialize their Schema services
+   */
+  protected function doGetSchemaModuleClassesToSkip(
+    array $schemaModuleClassesToSkip,
+  ): array {
+    return [];
+  }
+}
+```
+
+It must be initialized on the `plugins_loaded` hook:
+
+```php
+add_action(
+  'plugins_loaded',
+  function (): void {
+    // Validate Gato GraphQL is installed, or exit
+    if (!class_exists(\GatoGraphQL\GatoGraphQL\Plugin::class)) {
+      return;
+    }
+
+    new MyPortfolioCustomAdminEndpointHook();
+  }
+);
+```
+
+Finally, it can be accessed within your Gutenberg block's JavaScript code by replacing param `endpoint_group` with the chosen name:
+
+`https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData`
 
 ## Sort the Schema Configuration entries by name
 
