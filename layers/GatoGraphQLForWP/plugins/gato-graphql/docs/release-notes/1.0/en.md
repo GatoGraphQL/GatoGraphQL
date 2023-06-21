@@ -1077,6 +1077,17 @@ Finally, the endpoint is accessed by replacing param `endpoint_group` with the c
 https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData
 ```
 
+## Endpoints: Use 🟢 (green) to denote "public", 🟡 (yellow) to denote "private"
+
+The interface uses the following emojis to denote if an endpoint is public or private:
+
+- 🟢 (green): The endpoint is public (i.e. accessible on the Internet, possibly to everyone)
+- 🟡 (yellow): The endpoint is private (i.e. accessible within the wp-admin, to selected users only)
+
+Examples are the menu navigation (when the single endpoint is enabled), and the "Overview" panels in the Custom Endpoint and Persisted Query editors.
+
+![Menu navigation, with different emojis for public/private endpoints](../../images/releases/v1.0/public-private-endpoint-emojis-in-menu.png "Menu navigation, with different emojis for public/private endpoints")
+
 ## Sort the Schema Configuration entries by name
 
 In the Custom Endpoint and Persisted Query editors, the Schema Configuration entries are now sorted by name:
