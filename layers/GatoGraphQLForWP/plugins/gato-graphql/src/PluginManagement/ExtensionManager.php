@@ -66,6 +66,27 @@ class ExtensionManager extends AbstractPluginManager
         return $extension;
     }
 
+    public function registerBundle(BundleExtensionInterface $bundleExtension): ExtensionInterface
+    {
+        $extension = $this->register($bundleExtension);
+        
+        /**
+         * Register the bundled Extensions:
+         *
+         *   We must indicate that all the contained Extensions are in a Bundle,
+         *   as to let them decide if to enable some functionality or not
+         *   (eg: show an error if a required 3rd-party plugin is not active,
+         *   or enable a module or not.)
+         */
+        $bundlingExtensionClass = get_class($bundleExtension);
+        $bundledExtensionClasses = $bundleExtension::getBundledExtensionClasses();
+        foreach ($bundledExtensionClasses as $bundledExtensionClass) {
+            $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundlingExtensionClass;
+        }
+        
+        return $extension;
+    }
+
     /**
      * Validate that the extension can be registered:
      *
@@ -159,24 +180,6 @@ class ExtensionManager extends AbstractPluginManager
     public function getInactiveExtensionsDependedUponPluginFiles(): array
     {
         return $this->inactiveExtensionDependedUponPluginFiles;
-    }
-
-    /**
-     * Register that Extensions are bundled by some Extension Bundle.
-     *
-     * We must indicate that all the contained Extensions are in a Bundle,
-     * as to let them decide if to enable some functionality or not
-     * (eg: show an error if a required 3rd-party plugin is not active,
-     * or enable a module or not.)
-     *
-     * @param class-string<BundleExtensionInterface> $bundlingExtensionClass
-     */
-    public function registerBundledExtensions(string $bundlingExtensionClass): void
-    {
-        $bundledExtensionClasses = $bundlingExtensionClass::getBundledExtensionClasses();
-        foreach ($bundledExtensionClasses as $bundledExtensionClass) {
-            $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundlingExtensionClass;
-        }
     }
 
     public function isExtensionBundled(string $bundledExtensionClass): bool
