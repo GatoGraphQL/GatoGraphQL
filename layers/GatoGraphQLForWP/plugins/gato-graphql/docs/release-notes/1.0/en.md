@@ -727,7 +727,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 ## Added support for the "Global Fields" custom feature
 
-_⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
+<!-- _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._ -->
 
 _🔗 The following is a short description of the feature. Please check the [Global Fields module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/global-fields/en.md) for a more thorough description._
 
@@ -768,7 +768,7 @@ In order to configure the level of exposure of global fields in the schema, the 
 
 ## Added support for the "Composable Directives" custom feature
 
-_⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
+<!-- _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._ -->
 
 _🔗 The following is a short description of the feature. Please check the [Composable Directives module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/composable-directives/en.md) for a more thorough description._
 
@@ -840,7 +840,7 @@ In order to enable or disable composable directives in the schema for some speci
 
 ## Added support for the "Multi-Field Directives" custom feature
 
-_⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._
+<!-- _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._ -->
 
 _🔗 The following is a short description of the feature. Please check the [Multi-Field Directives module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/multifield-directives/en.md) for a more thorough description._
 
