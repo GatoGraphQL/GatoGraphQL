@@ -48,7 +48,8 @@ class ExtensionListTable extends AbstractExtensionListTable
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
-            $items[] = [
+            $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
+            $item = [
                 'name' => $moduleResolver->getName($module),
                 'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
                 'short_description' => $moduleResolver->getDescription($module),
@@ -62,8 +63,14 @@ class ExtensionListTable extends AbstractExtensionListTable
                  * but used internally to modify the generated HTML content
                  */
                 'gato_extension_module' => $module,
-                'gato_extension_is_bundle' => $moduleResolver instanceof BundleExtensionModuleResolverInterface,
+                'gato_extension_is_bundle' => $isBundleExtension,
             ];
+            if ($isBundleExtension) {
+                /** @var BundleExtensionModuleResolverInterface */
+                $bundleExtensionModuleResolver = $moduleResolver;
+                $item['gato_extension_bundled_extension_slugs'] = $bundleExtensionModuleResolver->getBundledExtensionSlugs($module);
+            }
+            $items[] = $item;
         }
         return $this->combineExtensionItemsWithCommonPluginData($items);
     }
