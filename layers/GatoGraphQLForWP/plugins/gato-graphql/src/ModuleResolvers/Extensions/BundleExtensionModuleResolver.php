@@ -49,4 +49,42 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             default => parent::getLogoURL($module),
         };
     }
+
+    /**
+     * @return string[]
+     */
+    public function getBundledExtensionSlugs(string $module): array
+    {
+        return match ($module) {
+            self::ALL_EXTENSIONS =>         [
+                'access-control',
+                'access-control-visitor-ip',
+                'automation',
+                'cache-control',
+                'conditional-field-manipulation',
+                'deprecation-notifier',
+                'email-sender',
+                'events-manager',
+                'field-default-value',
+                'field-deprecation',
+                'field-on-field',
+                'field-resolution-caching',
+                'field-response-removal',
+                'field-to-input',
+                'field-value-iteration-and-manipulation',
+                'google-translate',
+                'helper-function-collection',
+                'http-client',
+                'http-request-via-schema',
+                'internal-graphql-server',
+                'low-level-persisted-query-editing',
+                'multiple-query-execution',
+                'php-constants-and-environment-variables-via-schema',
+                'php-functions-via-schema',
+                'response-error-trigger',
+                'schema-editing-access',
+            ],
+            default => [],
+        };
+    }
 }
