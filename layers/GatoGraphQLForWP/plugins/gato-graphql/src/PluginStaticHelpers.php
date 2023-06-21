@@ -49,7 +49,7 @@ class PluginStaticHelpers
     protected static function getActiveWordPressPluginFiles(): array
     {
         if (self::$activeWordPressPluginFiles === null) {
-            self::$activeWordPressPluginFiles = apply_filters('active_plugins', get_option('active_plugins', []));
+            self::$activeWordPressPluginFiles = get_option('active_plugins', []);
         }
         return self::$activeWordPressPluginFiles;
     }
