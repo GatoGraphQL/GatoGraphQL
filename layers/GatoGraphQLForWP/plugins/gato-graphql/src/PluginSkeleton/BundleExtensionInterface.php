@@ -9,9 +9,18 @@ use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 interface BundleExtensionInterface extends ExtensionInterface
 {
     /**
-     * Provide the Extensions that are bundled by the Extension Bundle
+     * Provide the Extension classes that are bundled
+     * by this Extension Bundle
      *
      * @return array<class-string<ExtensionInterface>>
      */
     public static function getBundledExtensionClasses(): array;
+    
+    /**
+     * Provide the Extension plugin filenames that are bundled
+     * by this Extension Bundle
+     *
+     * @return string[]
+     */
+    public static function getBundledExtensionFilenames(): array;
 }
