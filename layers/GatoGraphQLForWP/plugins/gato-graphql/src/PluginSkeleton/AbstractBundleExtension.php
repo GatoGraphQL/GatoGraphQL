@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
+
 abstract class AbstractBundleExtension extends AbstractExtension implements BundleExtensionInterface
 {
     /**
@@ -13,16 +15,16 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
      */
     public function getBundledExtensionClasses(): array
     {
-        return array_values($this->getBundledExtensionSlugModuleClasses());
+        return array_values($this->getBundledExtensionSlugClasses());
     }
 
     /**
      * Convenience method, to return an array with the extension
      * slug => extension Module class
      *
-     * @return array<string,class-string<ModuleInterface>>
+     * @return array<string,class-string<ExtensionInterface>>
      */
-    abstract public function getBundledExtensionSlugModuleClasses(): array;
+    abstract public function getBundledExtensionSlugClasses(): array;
 
     /**
      * Provide the Extension plugin filenames that are bundled
@@ -32,7 +34,7 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
      */
     public function getBundledExtensionFilenames(): array
     {
-        $extensionSlugs = array_keys($this->getBundledExtensionSlugModuleClasses());
+        $extensionSlugs = array_keys($this->getBundledExtensionSlugClasses());
         return $this->getExtensionFilenames($extensionSlugs);
     }
 
