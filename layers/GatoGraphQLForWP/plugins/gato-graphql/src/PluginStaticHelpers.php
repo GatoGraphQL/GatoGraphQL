@@ -6,7 +6,6 @@ namespace GatoGraphQL\GatoGraphQL;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 
-use function apply_filters;
 use function get_file_data;
 
 class PluginStaticHelpers
