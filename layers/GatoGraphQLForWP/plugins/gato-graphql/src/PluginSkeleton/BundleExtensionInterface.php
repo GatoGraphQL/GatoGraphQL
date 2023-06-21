@@ -14,7 +14,7 @@ interface BundleExtensionInterface extends ExtensionInterface
      *
      * @return array<class-string<ExtensionInterface>>
      */
-    public static function getBundledExtensionClasses(): array;
+    public function getBundledExtensionClasses(): array;
     
     /**
      * Provide the Extension plugin filenames that are bundled

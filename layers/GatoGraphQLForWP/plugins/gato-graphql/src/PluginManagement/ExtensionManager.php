@@ -78,7 +78,7 @@ class ExtensionManager extends AbstractPluginManager
          *   (eg: show an error if a required 3rd-party plugin is not active,
          *   or enable a module or not.)
          */
-        $bundledExtensionClasses = $bundleExtension::getBundledExtensionClasses();
+        $bundledExtensionClasses = $bundleExtension->getBundledExtensionClasses();
         foreach ($bundledExtensionClasses as $bundledExtensionClass) {
             $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundleExtension;
         }
