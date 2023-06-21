@@ -981,9 +981,9 @@ Please notice that these do not currently appear in the Interactive Schema clien
 
 ## Added internal endpoints to feed data to (Gutenberg) blocks
 
-An internal GraphQL endpoint, called `blockEditor`, has been made accessible within the wp-admin only, to allow developers to fetch data for their Gutenberg blocks, under URL:
+An internal GraphQL endpoint, called `blockEditor`, has been made accessible within the wp-admin only, to allow developers to fetch data for their Gutenberg blocks.
 
-`https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor`
+It is accessible under URL: `https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor`
 
 This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.`
 
@@ -1065,9 +1065,7 @@ add_action(
 );
 ```
 
-Finally, it can be accessed within your Gutenberg block's JavaScript code by replacing param `endpoint_group` with the chosen name:
-
-`https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData`
+Finally, the endpoint is accessed by replacing param `endpoint_group` with the chosen name: `https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData`
 
 ## Sort the Schema Configuration entries by name
 
