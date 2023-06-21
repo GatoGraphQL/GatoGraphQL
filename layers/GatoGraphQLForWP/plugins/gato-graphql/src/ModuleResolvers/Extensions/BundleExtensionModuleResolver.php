@@ -46,7 +46,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         $logoURL = parent::getLogoURL($module);
         return match ($module) {
             self::ALL_EXTENSIONS => str_replace(
-                'GatoGraphQL-logo-paws-mirrored.png',
+                'GatoGraphQL-logo-back.png',
                 'GatoGraphQL-logo-face.png',
                 $logoURL,
             ),
