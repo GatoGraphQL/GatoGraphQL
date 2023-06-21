@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 
 class ExtensionManager extends AbstractPluginManager
@@ -14,7 +15,7 @@ class ExtensionManager extends AbstractPluginManager
     /** @var string[] */
     private array $inactiveExtensionDependedUponPluginFiles = [];
 
-    /** @var array<string,string> */
+    /** @var array<string,BundleExtensionInterface> */
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
     /**
@@ -62,6 +63,26 @@ class ExtensionManager extends AbstractPluginManager
         $extensionClass = get_class($extension);
         $this->extensionClassInstances[$extensionClass] = $extension;
         $this->extensionBaseNameInstances[$extension->getPluginBaseName()] = $extension;
+        return $extension;
+    }
+
+    public function registerBundle(BundleExtensionInterface $bundleExtension): ExtensionInterface
+    {
+        $extension = $this->register($bundleExtension);
+
+        /**
+         * Register the bundled Extensions:
+         *
+         *   We must indicate that all the contained Extensions are in a Bundle,
+         *   as to let them decide if to enable some functionality or not
+         *   (eg: show an error if a required 3rd-party plugin is not active,
+         *   or enable a module or not.)
+         */
+        $bundledExtensionClasses = $bundleExtension->getBundledExtensionClasses();
+        foreach ($bundledExtensionClasses as $bundledExtensionClass) {
+            $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundleExtension;
+        }
+
         return $extension;
     }
 
@@ -160,36 +181,12 @@ class ExtensionManager extends AbstractPluginManager
         return $this->inactiveExtensionDependedUponPluginFiles;
     }
 
-    /**
-     * Register that an Extension is bundled by some Extension Bundle
-     */
-    public function registerBundledExtension(
-        string $bundlingExtensionClass,
-        string $bundledExtensionClass,
-    ): void {
-        $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundlingExtensionClass;
-    }
-
-    /**
-     * Register that Extensions are bundled by some Extension Bundle
-     *
-     * @param string[] $bundledExtensionClasses
-     */
-    public function registerBundledExtensions(
-        string $bundlingExtensionClass,
-        array $bundledExtensionClasses,
-    ): void {
-        foreach ($bundledExtensionClasses as $bundledExtensionClass) {
-            $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundlingExtensionClass;
-        }
-    }
-
     public function isExtensionBundled(string $bundledExtensionClass): bool
     {
         return $this->getBundlingExtensionClass($bundledExtensionClass) !== null;
     }
 
-    public function getBundlingExtensionClass(string $bundledExtensionClass): ?string
+    public function getBundlingExtensionClass(string $bundledExtensionClass): ?BundleExtensionInterface
     {
         return $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] ?? null;
     }
