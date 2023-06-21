@@ -27,7 +27,7 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
      * [0]: Extension slug
      * [1]: Extension class
      *
-     * @return array{0:string,1:class-string<ExtensionInterface>}
+     * @return array<array{0:string,1:class-string<ExtensionInterface>}>
      */
     abstract public function getBundledExtensionDataItems(): array;
 
