@@ -67,10 +67,10 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
              * @return string[]
              */
             function (array $activePlugins): array {
-                return array_merge(
-                    $activePlugins,
-                    $this->getBundledExtensionSlugs()
-                );
+                foreach ($this->getBundledExtensionSlugs() as $extensionSlug) {
+                    $activePlugins[] = 'gato-graphql-' . $extensionSlug . '/gato-graphql-' . $extensionSlug . '.php';
+                }
+                return $activePlugins;
             }
         );
     }
