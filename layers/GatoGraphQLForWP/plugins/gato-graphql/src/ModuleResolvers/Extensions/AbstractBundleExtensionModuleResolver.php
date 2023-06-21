@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\BundleExtensionPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
@@ -22,5 +23,12 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     public function getModuleType(string $module): string
     {
         return ModuleTypeResolver::BUNDLE_EXTENSION;
+    }
+
+    public function getLogoURL(string $module): string
+    {
+        $mainPlugin = PluginApp::getMainPlugin();
+        $pluginURL = $mainPlugin->getPluginURL();
+        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo.png';
     }
 }
