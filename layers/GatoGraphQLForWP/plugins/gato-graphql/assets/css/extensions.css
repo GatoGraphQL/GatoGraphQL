@@ -69,3 +69,11 @@
 .plugin-card-top-request-extension .plugin-icon {
     top: 0;
 }
+
+/**
+ * If a bundler is installed, change the style of the bundled extensions too
+ */
+.plugin-card.plugin-card-non-installed.plugin-card-bundler-installed .plugin-action-buttons > li:first-child {
+    pointer-events: none;
+	opacity: 0.4;
+}
