@@ -165,12 +165,10 @@ class ExtensionManager extends AbstractPluginManager
      * Register that Extensions are bundled by some Extension Bundle
      *
      * @param class-string<BundleExtensionInterface> $bundlingExtensionClass
-     * @param array<class-string<ExtensionInterface>> $bundledExtensionClasses
      */
-    public function registerBundledExtensions(
-        string $bundlingExtensionClass,
-        array $bundledExtensionClasses,
-    ): void {
+    public function registerBundledExtensions(string $bundlingExtensionClass): void
+    {
+        $bundledExtensionClasses = $bundlingExtensionClass::getBundledExtensionClasses();
         foreach ($bundledExtensionClasses as $bundledExtensionClass) {
             $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundlingExtensionClass;
         }

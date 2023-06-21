@@ -11,7 +11,7 @@ interface BundleExtensionInterface extends ExtensionInterface
     /**
      * Provide the Extensions that are bundled by the Extension Bundle
      *
-     * @return array<class-string<ExtensionInterface>> $bundledExtensionClasses
+     * @return array<class-string<ExtensionInterface>>
      */
     public static function getBundledExtensionClasses(): array;
 }
