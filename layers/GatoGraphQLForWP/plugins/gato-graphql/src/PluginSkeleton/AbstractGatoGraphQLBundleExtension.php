@@ -7,14 +7,14 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 abstract class AbstractGatoGraphQLBundleExtension extends AbstractBundleExtension
 {
     /**
-     * @param string[] $extensions
+     * @param string[] $extensionSlugs
      * @return string[]
      */
-    protected static function getExtensionFilenames(array $extensions): array
+    protected static function getExtensionFilenames(array $extensionSlugs): array
     {
         return array_map(
-            fn (string $extension) => $extension . '/gato-graphql-' . $extension . '.php',
-            $extensions
+            fn (string $extensionSlug) => $extensionSlug . '/gato-graphql-' . $extensionSlug . '.php',
+            $extensionSlugs
         );
     }
 }
