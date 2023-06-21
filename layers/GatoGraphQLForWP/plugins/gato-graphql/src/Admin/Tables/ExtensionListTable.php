@@ -139,4 +139,43 @@ class ExtensionListTable extends AbstractExtensionListTable
             ]
         );
     }
+
+    /**
+     * Add a class to the bundled extensions
+     */
+    protected function adaptDisplayRowsHTML(string $html): string
+    {
+        $html = parent::adaptDisplayRowsHTML($html);
+
+        foreach ((array) $this->items as $plugin) {
+            // Check it is a Bundle Extension
+            if (!$plugin['gato_extension_is_bundle']) {
+                continue;
+            }
+
+            // Check it is active
+            $pluginName = $plugin['name'];
+            $actionLinks = $this->pluginActionLinks[$pluginName] ?? [];
+            if (!str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')) {
+                continue;
+            }
+
+            /**
+             * Add the "plugin-card-bundler-installed" classname
+             * to the bundled extensions.
+             * 
+             * @var string[]
+             */
+            $bundledExtensionSlugs = $plugin['gato_extension_bundled_extension_slugs'];
+            foreach ($bundledExtensionSlugs as $bundledExtensionSlug) {
+                $pluginCardClassname = 'plugin-card-' . sanitize_html_class($bundledExtensionSlug);
+                $pos = strpos($html, $pluginCardClassname);
+                if ($pos !== false) {
+                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-bundler-installed', $pos, strlen($pluginCardClassname));
+                }
+            }
+        }
+
+        return $html;
+    }
 }
