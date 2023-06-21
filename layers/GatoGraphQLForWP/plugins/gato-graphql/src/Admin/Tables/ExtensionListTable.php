@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 
 /**
@@ -60,6 +61,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                  * but used internally to modify the generated HTML content
                  */
                 'gato_extension_module' => $module,
+                'gato_extension_is_bundle' => $moduleResolver instanceof BundleExtensionModuleResolverInterface,
             ];
         }
         return $this->combineExtensionItemsWithCommonPluginData($items);
