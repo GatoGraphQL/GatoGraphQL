@@ -40,4 +40,17 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         return 20;
     }
+
+    public function getLogoURL(string $module): string
+    {
+        $logoURL = parent::getLogoURL($module);
+        return match ($module) {
+            self::ALL_EXTENSIONS => str_replace(
+                'GatoGraphQL-logo3.png',
+                'GatoGraphQL-logo.png',
+                $logoURL,
+            ),
+            default => $logoURL,
+        };
+    }
 }
