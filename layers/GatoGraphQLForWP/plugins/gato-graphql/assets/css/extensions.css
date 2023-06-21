@@ -78,6 +78,14 @@
     border: 1px solid #dcdcde;
 }
 .plugin-card.plugin-card-non-installed.plugin-card-bundler-installed .plugin-action-buttons > li:first-child {
-    pointer-events: none;
-	opacity: 0.4;
+    /* pointer-events: none;
+	opacity: 0.4; */
+
+    /* Same styles as class "button-disabled" */
+    color: #a7aaad !important;
+    border-color: #dcdcde !important;
+    background: #f6f7f7 !important;
+    box-shadow: none !important;
+    cursor: default;
+    transform: none !important;
 }
