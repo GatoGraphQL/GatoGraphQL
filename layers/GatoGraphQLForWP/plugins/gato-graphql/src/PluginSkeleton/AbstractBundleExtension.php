@@ -33,14 +33,14 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
     public function getBundledExtensionFilenames(): array
     {
         $extensionSlugs = array_keys($this->getBundledExtensionSlugModuleClasses());
-        return static::getExtensionFilenames($extensionSlugs);
+        return $this->getExtensionFilenames($extensionSlugs);
     }
 
     /**
      * @param string[] $extensionSlugs
      * @return string[]
      */
-    protected static function getExtensionFilenames(array $extensionSlugs): array
+    protected function getExtensionFilenames(array $extensionSlugs): array
     {
         return array_map(
             fn (string $extensionSlug) => $extensionSlug . '/' . $extensionSlug . '.php',

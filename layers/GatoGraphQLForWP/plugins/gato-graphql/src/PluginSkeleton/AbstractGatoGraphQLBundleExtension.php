@@ -10,7 +10,7 @@ abstract class AbstractGatoGraphQLBundleExtension extends AbstractBundleExtensio
      * @param string[] $extensionSlugs
      * @return string[]
      */
-    protected static function getExtensionFilenames(array $extensionSlugs): array
+    protected function getExtensionFilenames(array $extensionSlugs): array
     {
         return array_map(
             fn (string $extensionSlug) => $extensionSlug . '/gato-graphql-' . $extensionSlug . '.php',
