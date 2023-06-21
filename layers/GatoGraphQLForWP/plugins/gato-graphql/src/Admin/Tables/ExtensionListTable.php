@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 
@@ -73,6 +74,9 @@ class ExtensionListTable extends AbstractExtensionListTable
     public function getPluginInstallActionLabel(array $plugin): string
     {
         if ($plugin['gato_extension_is_bundle']) {
+            if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_EXTENSIONS) {
+                return \__('Join the Gato Club', 'gato-graphql');
+            }
             return \__('Get Bundle', 'gato-graphql');
         }
         return parent::getPluginInstallActionLabel($plugin);
