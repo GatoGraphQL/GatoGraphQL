@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 
 /**
@@ -60,9 +62,39 @@ class ExtensionListTable extends AbstractExtensionListTable
                  * but used internally to modify the generated HTML content
                  */
                 'gato_extension_module' => $module,
+                'gato_extension_is_bundle' => $moduleResolver instanceof BundleExtensionModuleResolverInterface,
             ];
         }
         return $this->combineExtensionItemsWithCommonPluginData($items);
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    public function getPluginInstallActionLabel(array $plugin): string
+    {
+        if ($plugin['gato_extension_is_bundle']) {
+            if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_EXTENSIONS) {
+                return \__('Join the Gato Club', 'gato-graphql');
+            }
+            return \__('Get Bundle', 'gato-graphql');
+        }
+        return parent::getPluginInstallActionLabel($plugin);
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    protected function getAdditionalPluginCardClassnames(array $plugin): ?string
+    {
+        if ($plugin['gato_extension_is_bundle']) {
+            $additionalPluginCardClassnames = 'plugin-card-extension-bundle';
+            if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_EXTENSIONS) {
+                $additionalPluginCardClassnames .= ' plugin-card-highlight';
+            }
+            return $additionalPluginCardClassnames;
+        }
+        return parent::getAdditionalPluginCardClassnames($plugin);
     }
 
     /**

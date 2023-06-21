@@ -26,9 +26,10 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public final const VERSIONING = Plugin::NAMESPACE . '\versioning';
 
     /**
-     * This is a special type, used to display extensions
+     * These are a special type, used to display extensions
      */
     public final const EXTENSION = Plugin::NAMESPACE . '\extension';
+    public final const BUNDLE_EXTENSION = Plugin::NAMESPACE . '\bundle-extension';
 
     /**
      * @return string[]
@@ -50,6 +51,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::USER_INTERFACE,
             self::VERSIONING,
             self::EXTENSION,
+            self::BUNDLE_EXTENSION,
         ];
     }
 
@@ -70,6 +72,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::USER_INTERFACE => $this->__('User Interface', 'gato-graphql'),
             self::VERSIONING => $this->__('Versioning', 'gato-graphql'),
             self::EXTENSION => $this->__('Extensions', 'gato-graphql'),
+            self::BUNDLE_EXTENSION => $this->__('Bundle Extensions', 'gato-graphql'),
             default => '',
         };
     }
@@ -77,8 +80,11 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public function isHidden(string $moduleType): bool
     {
         return match ($moduleType) {
-            self::EXTENSION => true,
-            default => parent::isHidden($moduleType),
+            self::EXTENSION,
+            self::BUNDLE_EXTENSION
+                => true,
+            default
+                => parent::isHidden($moduleType),
         };
     }
 }

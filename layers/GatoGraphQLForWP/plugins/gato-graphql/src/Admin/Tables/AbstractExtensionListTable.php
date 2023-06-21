@@ -146,7 +146,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $pluginURL = $mainPlugin->getPluginURL();
-        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo.png';
+        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-face.png';
     }
 
     /**
@@ -178,11 +178,19 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
                 esc_attr($plugin['name']),
                 '_blank',
-                \__('Get Extension', 'gato-graphql'),
+                $this->getPluginInstallActionLabel($plugin),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
         }
         return $action_links;
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    public function getPluginInstallActionLabel(array $plugin): string
+    {
+        return \__('Get Extension', 'gato-graphql');
     }
 
     /**
@@ -261,12 +269,21 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                  */
                 $pos = strpos($html, $pluginCardClassname);
                 if ($pos !== false) {
-                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed', $pos, strlen($pluginCardClassname));
+                    $additionalPluginCardClassnames = $this->getAdditionalPluginCardClassnames($plugin) ?? '';
+                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed ' . $additionalPluginCardClassnames, $pos, strlen($pluginCardClassname));
                 }
             }
         }
 
         return $html;
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    protected function getAdditionalPluginCardClassnames(array $plugin): ?string
+    {
+        return null;
     }
 
     protected function addArtificialRequestAnExtensionPluginItem(): bool
@@ -314,8 +331,8 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
         $alternativeGatoGraphQLLogoURL = str_replace(
-            'GatoGraphQL-logo.png',
-            'GatoGraphQL-logo4.png',
+            'GatoGraphQL-logo-face.png',
+            'GatoGraphQL-logo-sleeping.png',
             $this->getGatoGraphQLLogoURL(),
         );
 
