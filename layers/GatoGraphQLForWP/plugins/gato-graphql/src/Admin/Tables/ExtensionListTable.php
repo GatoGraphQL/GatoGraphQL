@@ -147,6 +147,14 @@ class ExtensionListTable extends AbstractExtensionListTable
     {
         $html = parent::adaptDisplayRowsHTML($html);
 
+        /**
+         * @see wp-admin/includes/class-wp-plugin-install-list-table.php
+         */
+        $activeButtonHTML = sprintf(
+            '<button type="button" class="button button-disabled" disabled="disabled">%s</button>',
+            _x('Active', 'plugin')
+        );
+
         foreach ((array) $this->items as $plugin) {
             // Check it is a Bundle Extension
             if (!$plugin['gato_extension_is_bundle']) {
@@ -156,7 +164,7 @@ class ExtensionListTable extends AbstractExtensionListTable
             // Check it is active
             $pluginName = $plugin['name'];
             $actionLinks = $this->pluginActionLinks[$pluginName] ?? [];
-            if (!str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')) {
+            if (($actionLinks[0] ?? '') !== $activeButtonHTML) {
                 continue;
             }
 
