@@ -1005,7 +1005,7 @@ var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://yoursite.com/wp-admin/ed
 
 ## Create custom internal endpoints to feed data to (Gutenberg) blocks
 
-Developers can create their own pre-defined internal endpoints, as to apply a specific configuration:
+Developers can create their own pre-defined internal endpoints (to feed data to their application or blocks), as to apply a specific configuration:
 
 - Using nested mutations or not
 - Using namespacing or not
