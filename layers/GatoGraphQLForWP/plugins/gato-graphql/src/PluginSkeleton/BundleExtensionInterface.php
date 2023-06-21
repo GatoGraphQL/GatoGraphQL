@@ -22,5 +22,5 @@ interface BundleExtensionInterface extends ExtensionInterface
      *
      * @return string[]
      */
-    public static function getBundledExtensionFilenames(): array;
+    public function getBundledExtensionFilenames(): array;
 }
