@@ -24,7 +24,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getName(string $module): string
     {
         return match ($module) {
-            self::ALL_EXTENSIONS => \__('All Extensions', 'gato-graphql'),
+            self::ALL_EXTENSIONS => \__('"All Extensions" Bundle', 'gato-graphql'),
             default => $module,
         };
     }
