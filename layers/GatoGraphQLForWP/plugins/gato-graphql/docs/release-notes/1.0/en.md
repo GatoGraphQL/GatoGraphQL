@@ -985,7 +985,9 @@ An internal GraphQL endpoint, called `blockEditor`, has been made accessible wit
 
 It is accessible under URL:
 
-`https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor`
+```
+https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor
+```
 
 This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.`
 
@@ -1069,7 +1071,9 @@ add_action(
 
 Finally, the endpoint is accessed by replacing param `endpoint_group` with the chosen name:
 
-`https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData`
+```
+https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData
+```
 
 ## Sort the Schema Configuration entries by name
 
