@@ -70,6 +70,17 @@ class ExtensionListTable extends AbstractExtensionListTable
     /**
      * @param array<string,mixed> $plugin
      */
+    public function getPluginInstallActionLabel(array $plugin): string
+    {
+        if ($plugin['gato_extension_is_bundle']) {
+            return \__('Get Bundle', 'gato-graphql');
+        }
+        return parent::getPluginInstallActionLabel($plugin);
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
     protected function getAdaptedDetailsLink(array $plugin): string
     {
         /**

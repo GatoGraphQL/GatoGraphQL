@@ -190,9 +190,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      */
     public function getPluginInstallActionLabel(array $plugin): string
     {
-        return $plugin['gato_extension_is_bundle']
-            ? \__('Get Bundle', 'gato-graphql')
-            : \__('Get Extension', 'gato-graphql');
+        return \__('Get Extension', 'gato-graphql');
     }
 
     /**
