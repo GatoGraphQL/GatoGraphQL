@@ -48,7 +48,8 @@ class ExtensionListTable extends AbstractExtensionListTable
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
-            $items[] = [
+            $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
+            $item = [
                 'name' => $moduleResolver->getName($module),
                 'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
                 'short_description' => $moduleResolver->getDescription($module),
@@ -62,8 +63,14 @@ class ExtensionListTable extends AbstractExtensionListTable
                  * but used internally to modify the generated HTML content
                  */
                 'gato_extension_module' => $module,
-                'gato_extension_is_bundle' => $moduleResolver instanceof BundleExtensionModuleResolverInterface,
+                'gato_extension_is_bundle' => $isBundleExtension,
             ];
+            if ($isBundleExtension) {
+                /** @var BundleExtensionModuleResolverInterface */
+                $bundleExtensionModuleResolver = $moduleResolver;
+                $item['gato_extension_bundled_extension_slugs'] = $bundleExtensionModuleResolver->getBundledExtensionSlugs($module);
+            }
+            $items[] = $item;
         }
         return $this->combineExtensionItemsWithCommonPluginData($items);
     }
@@ -131,5 +138,52 @@ class ExtensionListTable extends AbstractExtensionListTable
                 'gato-graphql-list-table',
             ]
         );
+    }
+
+    /**
+     * Add a class to the bundled extensions
+     */
+    protected function adaptDisplayRowsHTML(string $html): string
+    {
+        $html = parent::adaptDisplayRowsHTML($html);
+
+        /**
+         * @see wp-admin/includes/class-wp-plugin-install-list-table.php
+         */
+        $activeButtonHTML = sprintf(
+            '<button type="button" class="button button-disabled" disabled="disabled">%s</button>',
+            _x('Active', 'plugin')
+        );
+
+        foreach ((array) $this->items as $plugin) {
+            // Check it is a Bundle Extension
+            if (!$plugin['gato_extension_is_bundle']) {
+                continue;
+            }
+
+            // Check it is active
+            $pluginName = $plugin['name'];
+            $actionLinks = $this->pluginActionLinks[$pluginName] ?? [];
+            if (($actionLinks[0] ?? '') !== $activeButtonHTML) {
+                continue;
+            }
+
+            /**
+             * Add the "plugin-card-bundler-installed" classname
+             * to the bundled extensions.
+             * 
+             * @var string[]
+             */
+            $bundledExtensionSlugs = $plugin['gato_extension_bundled_extension_slugs'];
+            foreach ($bundledExtensionSlugs as $bundledExtensionSlug) {
+                $pluginCardClassname = 'plugin-card-' . sanitize_html_class($bundledExtensionSlug);
+                $pos = strpos($html, $pluginCardClassname);
+                if ($pos !== false) {
+                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-bundler-installed', $pos, strlen($pluginCardClassname));
+                }
+            }
+        }
+
+        return $html;
     }
 }

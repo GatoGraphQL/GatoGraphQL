@@ -69,3 +69,23 @@
 .plugin-card-top-request-extension .plugin-icon {
     top: 0;
 }
+
+/**
+ * If a bundler is installed, change the style of the bundled extensions too
+ */
+.plugin-card.plugin-card-non-installed.plugin-card-bundler-installed {
+    background-color: transparent;
+    border: 1px solid #dcdcde;
+}
+.plugin-card.plugin-card-non-installed.plugin-card-bundler-installed .plugin-action-buttons > li:first-child {
+    /* pointer-events: none;
+	opacity: 0.4; */
+
+    /* Same styles as class "button-disabled" */
+    color: #a7aaad !important;
+    border-color: #dcdcde !important;
+    background: #f6f7f7 !important;
+    box-shadow: none !important;
+    cursor: default;
+    transform: none !important;
+}
