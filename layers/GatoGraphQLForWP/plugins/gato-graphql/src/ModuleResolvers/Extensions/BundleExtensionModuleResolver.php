@@ -36,6 +36,11 @@ class BundleExtensionModuleResolver extends AbstractExtensionModuleResolver
         };
     }
 
+    public function getPriority(): int
+    {
+        return 20;
+    }
+
     // public function getLogoURL(string $module): string
     // {
     //     $logoURL = parent::getLogoURL($module);
