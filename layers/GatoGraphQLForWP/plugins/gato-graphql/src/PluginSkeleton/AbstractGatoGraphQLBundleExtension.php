@@ -6,14 +6,14 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 use PoP\Root\Module\ModuleInterface;
 
-abstract class AbstractBundleExtension extends AbstractExtension implements BundleExtensionInterface
+abstract class AbstractGatoGraphQLBundleExtension extends AbstractBundleExtension
 {
     /**
      * Provide the Extensions that are bundled by the Extension Bundle
      *
      * @return array<class-string<ExtensionInterface>>
      */
-    public function getBundledExtensionClasses(): array
+    final public function getBundledExtensionClasses(): array
     {
         return array_values($this->getGatoGraphQLBundledExtensionSlugModuleClasses());
     }
@@ -32,21 +32,9 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
      *
      * @return string[]
      */
-    public function getBundledExtensionFilenames(): array
+    final public function getBundledExtensionFilenames(): array
     {
         $extensions = array_keys($this->getGatoGraphQLBundledExtensionSlugModuleClasses());
         return static::getGatoGraphQLExtensionFilenames($extensions);
-    }
-
-    /**
-     * @param string[] $extensions
-     * @return string[]
-     */
-    protected static function getGatoGraphQLExtensionFilenames(array $extensions): array
-    {
-        return array_map(
-            fn (string $extension) => $extension . '/gato-graphql-' . $extension . '.php',
-            $extensions
-        );
     }
 }
