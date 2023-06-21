@@ -86,6 +86,10 @@ class PluginDataSource
 
     protected function getExcludeJSBlockFilesPlaceholder(): string
     {
-        return '%1$s/*/docs/\* %1$s/*/src/\* %1$s/*/webpack.config.js';
+        return implode(' ', [
+            '%1$s/*/docs/\*',
+            '%1$s/*/src/\*',
+            '%1$s/*/webpack.config.js',
+        ]);
     }
 }
