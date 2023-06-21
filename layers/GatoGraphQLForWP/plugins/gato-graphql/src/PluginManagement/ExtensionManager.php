@@ -162,7 +162,12 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * Register that Extensions are bundled by some Extension Bundle
+     * Register that Extensions are bundled by some Extension Bundle.
+     *
+     * We must indicate that all the contained Extensions are in a Bundle,
+     * as to let them decide if to enable some functionality or not
+     * (eg: show an error if a required 3rd-party plugin is not active,
+     * or enable a module or not.)
      *
      * @param class-string<BundleExtensionInterface> $bundlingExtensionClass
      */
