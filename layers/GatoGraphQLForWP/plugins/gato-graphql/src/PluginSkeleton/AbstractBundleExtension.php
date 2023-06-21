@@ -57,4 +57,34 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
             $extensionSlugs
         );
     }
+
+    /**
+     * When the Bundle is active, "pretend" that its bundled
+     * extensions are also active, so that it paints them
+     * without background color in the Extensions page.
+     *
+     * Do this by adding a hook to `get_option` for the
+     * "active_plugins" option.
+     *
+     * @see wordpress/wp-includes/option.php method `get_option`
+     */
+    protected function doSetup(): void
+    {
+        parent::doSetup();
+
+        $option = 'active_plugins';
+        \add_filter(
+            "option_{$option}",
+            /**
+             * @param string[] $activePlugins
+             * @return string[]
+             */
+            function (array $activePlugins): array {
+                return array_merge(
+                    $activePlugins,
+                    $this->getBundledExtensionFilenames()
+                );
+            }
+        );
+    }
 }
