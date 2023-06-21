@@ -23,7 +23,7 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
 
     /**
      * Convenience method to provide an array with the required data:
-     * 
+     *
      * [0]: Extension slug
      * [1]: Extension class
      *

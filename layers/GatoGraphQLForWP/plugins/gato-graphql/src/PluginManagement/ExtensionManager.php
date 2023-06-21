@@ -69,7 +69,7 @@ class ExtensionManager extends AbstractPluginManager
     public function registerBundle(BundleExtensionInterface $bundleExtension): ExtensionInterface
     {
         $extension = $this->register($bundleExtension);
-        
+
         /**
          * Register the bundled Extensions:
          *
@@ -82,7 +82,7 @@ class ExtensionManager extends AbstractPluginManager
         foreach ($bundledExtensionClasses as $bundledExtensionClass) {
             $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundleExtension;
         }
-        
+
         return $extension;
     }
 
