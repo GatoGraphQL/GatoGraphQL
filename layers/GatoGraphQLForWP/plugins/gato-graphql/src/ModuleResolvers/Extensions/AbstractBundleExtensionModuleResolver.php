@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\BundleExtensionPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
@@ -26,11 +27,8 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
 
     public function getLogoURL(string $module): string
     {
-        $logoURL = parent::getLogoURL($module);
-        return str_replace(
-            'GatoGraphQL-logo-paws.png',
-            'GatoGraphQL-logo-back.png',
-            $logoURL,
-        );
+        $mainPlugin = PluginApp::getMainPlugin();
+        $pluginURL = $mainPlugin->getPluginURL();
+        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-back.png';
     }
 }
