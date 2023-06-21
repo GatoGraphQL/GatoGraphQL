@@ -1,8 +1,8 @@
 query {
-  defaultMediaItems: mediaItems(pagination: { limit: 3 }) {
+  defaultMediaItems: mediaItems(pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
     ...MediaItemData
   }
-  anyMimeTypeMediaItems: mediaItems(pagination: { limit: 3 }, filter: { mimeTypes: "*" }) {
+  anyMimeTypeMediaItems: mediaItems(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { mimeTypes: "*" }) {
     ...MediaItemData
   }
 
