@@ -898,7 +898,7 @@ Now, the Settings page organizes all modules into 2 levels, and displays tabs ve
 
 ## Reset settings, and choose to use the restrictive or non-restrictive default settings
 
-A Gato GraphQL may be exposed publicly or only privately, and depending on which is the case there are options and features that need to be restricted or not.
+A GraphQL API may be exposed publicly or only privately, and depending on which is the case there are options and features that need to be restricted or not.
 
 For instance, querying values from the `wp_options` table can be unrestrained whenever building a static site (in which case the WordPress site may be on the developer's laptop, not exposed to the Internet), but must be limited to a handful of options (or even none at all) for a public API, for security reasons.
 
