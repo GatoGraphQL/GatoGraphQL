@@ -15,16 +15,21 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
      */
     public function getBundledExtensionClasses(): array
     {
-        return array_values($this->getBundledExtensionSlugClasses());
+        return array_map(
+            fn (array $item): string => $item[1],
+            $this->getBundledExtensionDataItems()
+        );
     }
 
     /**
-     * Convenience method, to return an array with the extension
-     * slug => extension Module class
+     * Convenience method to provide an array with the required data:
+     * 
+     * [0]: Extension slug
+     * [1]: Extension class
      *
-     * @return array<string,class-string<ExtensionInterface>>
+     * @return array{0:string,1:class-string<ExtensionInterface>}
      */
-    abstract public function getBundledExtensionSlugClasses(): array;
+    abstract public function getBundledExtensionDataItems(): array;
 
     /**
      * Provide the Extension plugin filenames that are bundled
@@ -34,7 +39,10 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
      */
     public function getBundledExtensionFilenames(): array
     {
-        $extensionSlugs = array_keys($this->getBundledExtensionSlugClasses());
+        $extensionSlugs = array_map(
+            fn (array $item): string => $item[0],
+            $this->getBundledExtensionDataItems()
+        );
         return $this->getExtensionFilenames($extensionSlugs);
     }
 
