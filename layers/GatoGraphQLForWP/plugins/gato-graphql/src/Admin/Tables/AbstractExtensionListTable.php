@@ -269,12 +269,21 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                  */
                 $pos = strpos($html, $pluginCardClassname);
                 if ($pos !== false) {
-                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed', $pos, strlen($pluginCardClassname));
+                    $additionalPluginCardClassnames = $this->getAdditionalPluginCardClassnames($plugin) ?? '';
+                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed ' . $additionalPluginCardClassnames, $pos, strlen($pluginCardClassname));
                 }
             }
         }
 
         return $html;
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
+    protected function getAdditionalPluginCardClassnames(array $plugin): ?string
+    {
+        return null;
     }
 
     protected function addArtificialRequestAnExtensionPluginItem(): bool

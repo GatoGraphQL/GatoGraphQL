@@ -85,6 +85,17 @@ class ExtensionListTable extends AbstractExtensionListTable
     /**
      * @param array<string,mixed> $plugin
      */
+    protected function getAdditionalPluginCardClassnames(array $plugin): ?string
+    {
+        if ($plugin['gato_extension_is_bundle']) {
+            return 'plugin-card-extension-bundle';
+        }
+        return parent::getAdditionalPluginCardClassnames($plugin);
+    }
+
+    /**
+     * @param array<string,mixed> $plugin
+     */
     protected function getAdaptedDetailsLink(array $plugin): string
     {
         /**
