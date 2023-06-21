@@ -23,7 +23,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
 /**
- * @configureWarningsOnExportingDuplicateVariableName directive,
+ * @configureWarningsOnExportingDuplicateVariable directive,
  * to either enable or disable showing warnings when exporting
  * a duplicate variable name, as with "someVarName" in:
  *
@@ -69,7 +69,7 @@ use SplObjectStorage;
  *   }
  *   ```
  */
-class ConfigureWarningsOnExportingDuplicateVariableNameOperationsFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
+class ConfigureWarningsOnExportingDuplicateVariableOperationsFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
@@ -84,7 +84,7 @@ class ConfigureWarningsOnExportingDuplicateVariableNameOperationsFieldDirectiveR
     }
     public function getDirectiveName(): string
     {
-        return 'configureWarningsOnExportingDuplicateVariableName';
+        return 'configureWarningsOnExportingDuplicateVariable';
     }
 
     public function getFieldDirectiveBehavior(): string
