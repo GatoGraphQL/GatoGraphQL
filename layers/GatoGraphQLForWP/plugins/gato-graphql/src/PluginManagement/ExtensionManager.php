@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 
 class ExtensionManager extends AbstractPluginManager
@@ -173,7 +174,8 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * Register that Extensions are bundled by some Extension Bundle
      *
-     * @param string[] $bundledExtensionClasses
+     * @param class-string<BundleExtensionInterface> $bundlingExtensionClass
+     * @param array<class-string<ExtensionInterface>> $bundledExtensionClasses
      */
     public function registerBundledExtensions(
         string $bundlingExtensionClass,
