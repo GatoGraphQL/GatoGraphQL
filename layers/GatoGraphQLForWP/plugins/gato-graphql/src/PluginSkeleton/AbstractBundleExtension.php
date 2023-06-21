@@ -46,18 +46,6 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
     }
 
     /**
-     * @param string[] $extensionSlugs
-     * @return string[]
-     */
-    protected function getExtensionFilenames(array $extensionSlugs): array
-    {
-        return array_map(
-            fn (string $extensionSlug) => $extensionSlug . '/' . $extensionSlug . '.php',
-            $extensionSlugs
-        );
-    }
-
-    /**
      * When the Bundle is active, "pretend" that its bundled
      * extensions are also active, so that it paints them
      * without background color in the Extensions page.
@@ -81,7 +69,7 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
             function (array $activePlugins): array {
                 return array_merge(
                     $activePlugins,
-                    $this->getBundledExtensionFilenames()
+                    $this->getBundledExtensionSlugs()
                 );
             }
         );
