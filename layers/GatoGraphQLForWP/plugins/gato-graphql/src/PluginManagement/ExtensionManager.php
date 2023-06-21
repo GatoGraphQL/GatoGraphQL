@@ -15,7 +15,7 @@ class ExtensionManager extends AbstractPluginManager
     /** @var string[] */
     private array $inactiveExtensionDependedUponPluginFiles = [];
 
-    /** @var array<string,string> */
+    /** @var array<string,BundleExtensionInterface> */
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
     /**
@@ -78,10 +78,9 @@ class ExtensionManager extends AbstractPluginManager
          *   (eg: show an error if a required 3rd-party plugin is not active,
          *   or enable a module or not.)
          */
-        $bundlingExtensionClass = get_class($bundleExtension);
         $bundledExtensionClasses = $bundleExtension::getBundledExtensionClasses();
         foreach ($bundledExtensionClasses as $bundledExtensionClass) {
-            $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundlingExtensionClass;
+            $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] = $bundleExtension;
         }
         
         return $extension;
@@ -187,7 +186,7 @@ class ExtensionManager extends AbstractPluginManager
         return $this->getBundlingExtensionClass($bundledExtensionClass) !== null;
     }
 
-    public function getBundlingExtensionClass(string $bundledExtensionClass): ?string
+    public function getBundlingExtensionClass(string $bundledExtensionClass): ?BundleExtensionInterface
     {
         return $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] ?? null;
     }
