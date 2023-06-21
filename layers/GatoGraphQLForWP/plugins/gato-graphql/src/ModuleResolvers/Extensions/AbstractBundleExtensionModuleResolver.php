@@ -28,8 +28,8 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     {
         $logoURL = parent::getLogoURL($module);
         return str_replace(
-            'GatoGraphQL-logo2.png',
-            'GatoGraphQL-logo3.png',
+            'GatoGraphQL-logo-paws.png',
+            'GatoGraphQL-logo-paws-mirrored.png',
             $logoURL,
         );
     }

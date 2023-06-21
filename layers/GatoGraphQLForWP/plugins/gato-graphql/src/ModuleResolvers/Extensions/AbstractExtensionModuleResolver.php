@@ -80,7 +80,7 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $pluginURL = $mainPlugin->getPluginURL();
-        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo2.png';
+        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-paws.png';
     }
 
     protected function getDocumentationMarkdownContentRelativePathDir(
