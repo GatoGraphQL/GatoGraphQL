@@ -52,6 +52,10 @@
     background-color: antiquewhite;
 }
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle {
+    border-color: darkturquoise;
+    background-color: #e0ffa9;
+}
+.plugin-card.plugin-card-non-installed.plugin-card-highlight {
     border-color: darksalmon;
     background-color: khaki;
 }
