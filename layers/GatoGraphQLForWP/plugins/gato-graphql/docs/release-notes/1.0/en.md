@@ -1061,17 +1061,14 @@ class MyPortfolioCustomAdminEndpointHook extends AbstractAddCustomAdminEndpointH
 It must be initialized on the `plugins_loaded` hook:
 
 ```php
-add_action(
-  'plugins_loaded',
-  function (): void {
-    // Validate Gato GraphQL is installed, or exit
-    if (!class_exists(\GatoGraphQL\GatoGraphQL\Plugin::class)) {
-      return;
-    }
-
-    new MyPortfolioCustomAdminEndpointHook();
+add_action('plugins_loaded', function () {
+  // Validate Gato GraphQL is installed, or exit
+  if (!class_exists(\GatoGraphQL\GatoGraphQL\Plugin::class)) {
+    return;
   }
-);
+
+  new MyPortfolioCustomAdminEndpointHook();
+});
 ```
 
 Finally, the endpoint is accessed by replacing param `endpoint_group` with the chosen name:
