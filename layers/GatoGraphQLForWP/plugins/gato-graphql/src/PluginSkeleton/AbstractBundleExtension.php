@@ -37,7 +37,7 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
      *
      * @return string[]
      */
-    public function getBundledExtensionFilenames(): array
+    public function getBundledExtensionSlugs(): array
     {
         $extensionSlugs = array_map(
             fn (array $item): string => $item[0],

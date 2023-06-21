@@ -17,10 +17,10 @@ interface BundleExtensionInterface extends ExtensionInterface
     public function getBundledExtensionClasses(): array;
 
     /**
-     * Provide the Extension plugin filenames that are bundled
+     * Provide the Extension slugs that are bundled
      * by this Extension Bundle
      *
      * @return string[]
      */
-    public function getBundledExtensionFilenames(): array;
+    public function getBundledExtensionSlugs(): array;
 }
