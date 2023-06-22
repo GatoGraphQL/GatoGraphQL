@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
-use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentRetrieverTrait;
 use PoP\Root\App;
 
 /**
@@ -13,8 +12,6 @@ use PoP\Root\App;
  */
 trait DocMenuPageTrait
 {
-    use MarkdownContentRetrieverTrait;
-    
     protected function getRelativePathDir(): string
     {
         return '';
@@ -70,4 +67,10 @@ trait DocMenuPageTrait
             ]
         );
     }
+
+    abstract protected function getMarkdownContent(
+        string $markdownFilename,
+        string $relativePathDir = '',
+        array $options = []
+    ): ?string;
 }
