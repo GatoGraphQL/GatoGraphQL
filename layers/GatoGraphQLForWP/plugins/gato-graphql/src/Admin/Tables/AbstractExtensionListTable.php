@@ -171,15 +171,14 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
              * Replace the "Install Now" action message
              */
             $action_links[0] = sprintf(
-                '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s%s</a>',
+                '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s</a>',
                 esc_attr($plugin['slug']),
                 esc_url($plugin['homepage']),
                 /* translators: %s: Plugin name and version. */
                 esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
                 esc_attr($plugin['name']),
                 '_blank',
-                $this->getPluginInstallActionLabel($plugin),
-                HTMLCodes::OPEN_IN_NEW_WINDOW
+                $this->getPluginInstallActionLabel($plugin)
             );
         }
         return $action_links;
@@ -190,7 +189,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      */
     public function getPluginInstallActionLabel(array $plugin): string
     {
-        return \__('Get Extension', 'gato-graphql');
+        return sprintf(
+            '%s%s',
+            \__('Get Extension', 'gato-graphql'),
+            HTMLCodes::OPEN_IN_NEW_WINDOW
+        );
     }
 
     /**
