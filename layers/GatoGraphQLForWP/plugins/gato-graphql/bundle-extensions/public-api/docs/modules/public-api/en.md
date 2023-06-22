@@ -1,6 +1,6 @@
 # “Public API” Bundle
 
-This bundle contains extensions for improving your public APIs:
+This bundle contains extensions to superpower your public APIs:
 
 - **Security:** Grant access to the API to selected users only via Access Control
 - **Speed:** Cache the response of the GraphQL API via standard HTTP caching
