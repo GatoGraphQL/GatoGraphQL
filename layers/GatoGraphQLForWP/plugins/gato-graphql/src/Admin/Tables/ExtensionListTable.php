@@ -85,7 +85,7 @@ class ExtensionListTable extends AbstractExtensionListTable
             if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_EXTENSIONS) {
                 return sprintf(
                     '%s%s',
-                    \__('Join the Gato Club', 'gato-graphql'),
+                    \__('Join the Club', 'gato-graphql'),
                     HTMLCodes::OPEN_IN_NEW_WINDOW
                 );
             }
