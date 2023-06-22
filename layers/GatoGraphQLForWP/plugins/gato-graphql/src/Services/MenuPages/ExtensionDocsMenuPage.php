@@ -53,7 +53,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @param array<array{0:string,1:string,2:string}> $entry
+     * @param array{0:string,1:string,2:string} $entry
      * @phpstan-ignore-next-line
      */
     protected function getEntryRelativePathDir(array $entry): string

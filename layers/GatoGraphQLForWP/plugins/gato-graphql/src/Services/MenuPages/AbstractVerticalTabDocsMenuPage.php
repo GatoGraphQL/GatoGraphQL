@@ -180,7 +180,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     }
 
     /**
-     * @param array<array{0:string,1:string}> $entry
+     * @param array{0:string,1:string} $entry
      */
     abstract protected function getEntryRelativePathDir(array $entry): string;
 
