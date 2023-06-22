@@ -48,8 +48,8 @@
  * Add a background-color to all extensions
  */
 .plugin-card.plugin-card-non-installed {
-    border-color: burlywood;
-    background-color: antiquewhite;
+    border-color: #df97d7;
+    background-color: #fad7e1;
 }
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle {
     border-color: darkturquoise;
