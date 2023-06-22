@@ -190,14 +190,15 @@ class ExtensionListTable extends AbstractExtensionListTable
             }
 
             /**
-             * Add the "plugin-card-bundler-installed" classname
-             * to the bundled extensions.
+             * Replace classname "plugin-card-non-installed" with
+             * "plugin-card-bundler-installed" in the bundled extensions.
              *
              * @var string[]
              */
             $bundledExtensionSlugs = $plugin['gato_extension_bundled_extension_slugs'];
             foreach ($bundledExtensionSlugs as $bundledExtensionSlug) {
                 $pluginCardClassname = 'plugin-card-' . sanitize_html_class($bundledExtensionSlug);
+                $pluginCardClassname .= ' plugin-card-non-installed';
                 $pos = strpos($html, $pluginCardClassname);
                 if ($pos !== false) {
                     $html = substr_replace($html, $pluginCardClassname . ' plugin-card-bundler-installed', $pos, strlen($pluginCardClassname));
