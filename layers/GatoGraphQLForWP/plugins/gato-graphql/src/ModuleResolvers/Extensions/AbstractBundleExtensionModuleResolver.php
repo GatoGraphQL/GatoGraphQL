@@ -43,7 +43,7 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $pluginURL = $mainPlugin->getPluginURL();
-        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-back.png';
+        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-back-long.png';
     }
 
     public function getGatoGraphQLExtensionSlug(string $module): string
