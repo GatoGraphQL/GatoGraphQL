@@ -33,7 +33,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      *
      * @var array<string,string[]>
      */
-    private array $pluginActionLinks = [];
+    protected array $pluginActionLinks = [];
 
     /**
      * @return void
