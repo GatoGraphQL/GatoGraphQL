@@ -36,4 +36,15 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     {
         return parent::getGatoGraphQLExtensionSlug($module) . '-bundle';
     }
+
+    /**
+     * @return string[]
+     */
+    final public function getGatoGraphQLBundledExtensionSlugs(string $module): array
+    {
+        return array_map(
+            fn (string $extensionSlug) => 'gato-graphql-' . $extensionSlug,
+            $this->getBundledExtensionSlugs($module)
+        );
+    }
 }
