@@ -12,7 +12,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 trait OpenInModalMenuPageTrait
 {
     use ResponsiveVideoContainerMenuPageTrait;
-    
+
     /**
      * Enqueue the required assets
      */
@@ -41,7 +41,7 @@ trait OpenInModalMenuPageTrait
             array(),
             $mainPluginVersion
         );
-        
+
         $this->enqueueResponsiveVideoContainerAssets();
     }
 }
