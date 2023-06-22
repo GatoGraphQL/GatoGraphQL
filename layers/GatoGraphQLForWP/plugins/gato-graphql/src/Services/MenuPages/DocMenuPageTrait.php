@@ -47,8 +47,11 @@ trait DocMenuPageTrait
             $doc,
             $relativePathDir
         ) ?? sprintf(
-            \__('Page \'%s\' does not exist', 'gato-graphql'),
-            $doc
+            '<p>%s</p>',
+            sprintf(
+                \__('Page \'%s\' does not exist', 'gato-graphql'),
+                $doc
+            )
         );
     }
 
