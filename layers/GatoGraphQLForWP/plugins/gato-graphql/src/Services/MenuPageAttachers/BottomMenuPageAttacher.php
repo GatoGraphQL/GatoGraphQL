@@ -364,10 +364,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
      */
     protected function getExtensionMenuPage(): MenuPageInterface
     {
-        return
-            $this->getMenuPageHelper()->isDocumentationScreen() ?
-                $this->getExtensionModuleDocumentationMenuPage()
-                : $this->getExtensionsMenuPage();
+        $extensionsMenuPage = $this->getExtensionsMenuPage();
+        $isExtensionModuleDocumentationMenuPage = $extensionsMenuPage->getScreenID() === App::query('page')
+            && $this->getMenuPageHelper()->isDocumentationScreen();
+        return $isExtensionModuleDocumentationMenuPage
+            ? $this->getExtensionModuleDocumentationMenuPage()
+            : $extensionsMenuPage;
     }
 
     /**
