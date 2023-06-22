@@ -89,11 +89,8 @@
     cursor: default;
     transform: none !important;
 }
-.plugin-card .gato-graphql-extension-bundle-action-label {
-    display: none;
-}
 .plugin-card.plugin-card-bundler-installed .gato-graphql-extension-bundle-action-label {
-    display: block;
+    display: block !important;
 }
 .plugin-card.plugin-card-bundler-installed .gato-graphql-extension-action-label {
     display: none;

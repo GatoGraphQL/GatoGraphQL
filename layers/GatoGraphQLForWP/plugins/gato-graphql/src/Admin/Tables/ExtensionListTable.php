@@ -103,7 +103,7 @@ class ExtensionListTable extends AbstractExtensionListTable
         return sprintf(
             <<<HTML
                 <span class="gato-graphql-extension-action-label">%s</span>
-                <span class="gato-graphql-extension-bundle-action-label">%s</span>
+                <span class="gato-graphql-extension-bundle-action-label" style="display: none;">%s</span>
             HTML,
             $extensionActionLabel,
             \__('Active (via Bundle)', 'gato-graphql')
