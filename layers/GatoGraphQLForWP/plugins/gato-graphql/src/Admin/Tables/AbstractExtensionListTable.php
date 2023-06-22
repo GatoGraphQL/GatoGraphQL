@@ -277,7 +277,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
 
             /**
              * Highlight non-installed extensions.
-             * 
+             *
              * Only replace the 1st occurrence, to avoid "access-control" also
              * being replaced in "access-control-visitor-ip"
              */
