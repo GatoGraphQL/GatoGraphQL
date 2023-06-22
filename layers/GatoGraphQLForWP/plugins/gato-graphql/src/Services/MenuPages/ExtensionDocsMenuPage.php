@@ -120,7 +120,6 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
                 'slug' => $moduleResolver->getSlug($module),
                 'name' => $moduleResolver->getName($module),
                 'module' => $module,
-                'module-resolver' => $moduleResolver,
             ];
         }
         return $items;
