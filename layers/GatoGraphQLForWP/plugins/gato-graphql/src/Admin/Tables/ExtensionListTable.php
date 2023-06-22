@@ -198,10 +198,9 @@ class ExtensionListTable extends AbstractExtensionListTable
             $bundledExtensionSlugs = $plugin['gato_extension_bundled_extension_slugs'];
             foreach ($bundledExtensionSlugs as $bundledExtensionSlug) {
                 $pluginCardClassname = 'plugin-card-' . sanitize_html_class($bundledExtensionSlug);
-                $pluginCardClassname .= ' plugin-card-non-installed';
-                $pos = strpos($html, $pluginCardClassname);
+                $pos = strpos($html, $pluginCardClassname . ' plugin-card-non-installed');
                 if ($pos !== false) {
-                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-bundler-active', $pos, strlen($pluginCardClassname));
+                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-bundler-active', $pos, strlen($pluginCardClassname . ' plugin-card-non-installed'));
                 }
             }
         }
