@@ -1,6 +1,12 @@
 # “Public API” Bundle
 
-@todo Complete intro
+This bundle contains extensions for improving your public APIs:
+
+- **Security:** Grant access to the API to selected users only via Access Control
+- **Speed:** Cache the response of the GraphQL API via standard HTTP caching
+- **Power:** Access and manipulate data with a plethora of fields and directives
+- **Schema Evolution:** Deprecate fields and inform your users of the changes
+- **Control:** Allow teammates to create and configure endpoints
 
 ## List of bundled extensions
 
