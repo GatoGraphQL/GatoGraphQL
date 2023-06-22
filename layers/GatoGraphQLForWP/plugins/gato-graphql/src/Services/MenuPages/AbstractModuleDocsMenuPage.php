@@ -54,7 +54,13 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         $result = [];
         parse_str(App::server('REQUEST_URI'), $result);
         /** @var string */
-        $requestedModule = $result[RequestParams::MODULE];
+        $requestedModule = $result[RequestParams::MODULE] ?? '';
+        if ($requestedModule === '') {
+            return sprintf(
+                '<p>%s</p>',
+                $this->getModuleCannotBeEmpty()
+            );
+        }
         $module = urldecode($requestedModule);
         try {
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
@@ -79,6 +85,14 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             );
         }
         return $documentation;
+    }
+
+    protected function getModuleCannotBeEmpty(): string
+    {
+        return sprintf(
+            \__('URL param \'%s\' cannot be empty', 'gato-graphql'),
+            RequestParams::MODULE
+        );
     }
 
     protected function getModuleDoesNotExistErrorMessage(string $module): string
