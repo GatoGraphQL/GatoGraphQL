@@ -11,6 +11,8 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
  */
 trait OpenInModalMenuPageTrait
 {
+    use ResponsiveVideoContainerMenuPageTrait;
+    
     /**
      * Enqueue the required assets
      */
@@ -29,6 +31,7 @@ trait OpenInModalMenuPageTrait
             array(),
             $mainPluginVersion
         );
+
         /**
          * Styles for content within the modal window
          */
@@ -38,5 +41,7 @@ trait OpenInModalMenuPageTrait
             array(),
             $mainPluginVersion
         );
+        
+        $this->enqueueResponsiveVideoContainerAssets();
     }
 }

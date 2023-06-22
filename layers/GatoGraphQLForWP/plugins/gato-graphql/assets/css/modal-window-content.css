@@ -44,26 +44,6 @@
 }
 
 /**
- * Make the embedded videos responsive
- */
-.video-responsive-container {
-    position:relative;
-    padding-bottom:56.25%;
-    padding-top:30px;
-    height:0;
-    overflow:hidden;
-}
-.video-responsive-container iframe,
-.video-responsive-container object,
-.video-responsive-container embed {
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-}
-
-/**
  * Style code. Must select all <pre> because it is not given any class
  * but it is aimed at <pre><code> only. Selector "pre:has(> code)" will
  * eventually solve it

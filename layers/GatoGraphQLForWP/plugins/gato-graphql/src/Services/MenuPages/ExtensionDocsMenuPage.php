@@ -170,5 +170,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         parent::enqueueAssets();
 
         $this->enqueueModalTriggerAssets();
+
+        $this->enqueueResponsiveVideoContainerAssets();
     }
 }
