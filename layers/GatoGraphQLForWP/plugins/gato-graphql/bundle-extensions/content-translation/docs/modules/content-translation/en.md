@@ -1,6 +1,6 @@
 # “Content Translation” Bundle
 
-Translate your content using the <a href="https://cloud.google.com/translate/" target="_blank">Google Translate API</a>, accessing and zooming into the specific pieces of data that need to be translated.
+Translate your content into 135 languages using the <a href="https://cloud.google.com/translate/" target="_blank">Google Translate API</a>, accessing and zooming into the specific pieces of data that need to be translated.
 
 For instance, you can translate the whole blog post, but also specific attributes deep within the (Gutenberg) block's structure.
 
