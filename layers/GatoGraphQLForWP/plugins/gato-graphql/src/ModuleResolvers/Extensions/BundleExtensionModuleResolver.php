@@ -10,6 +10,9 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
     public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
+    public const APPLICATION_GLUE_AND_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\application-glue-and-automator';
+    public const CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\content-translation';
+    public const PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\public-api';
 
     /**
      * @return string[]
@@ -18,13 +21,20 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         return [
             self::ALL_EXTENSIONS,
+            self::APPLICATION_GLUE_AND_AUTOMATOR,
+            self::CONTENT_TRANSLATION,
+            self::PUBLIC_API,
         ];
     }
 
     public function getName(string $module): string
     {
+        $placeholder = \__('“%s” Bundle', 'gato-graphql');
         return match ($module) {
-            self::ALL_EXTENSIONS => \__('“All Extensions” Bundle', 'gato-graphql'),
+            self::ALL_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gato-graphql')),
+            self::APPLICATION_GLUE_AND_AUTOMATOR => sprintf($placeholder, \__('Application Glue & Automator', 'gato-graphql')),
+            self::CONTENT_TRANSLATION => sprintf($placeholder, \__('Content Translation', 'gato-graphql')),
+            self::PUBLIC_API => sprintf($placeholder, \__('Public API', 'gato-graphql')),
             default => $module,
         };
     }
@@ -33,6 +43,9 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         return match ($module) {
             self::ALL_EXTENSIONS => \__('When being a member of the Gato GraphQL Club, you have access to all the extensions (from now and the future), via a single bundle.', 'gato-graphql'),
+            self::APPLICATION_GLUE_AND_AUTOMATOR => \__('Bundle with extensions to perform and automate tasks for the application.', 'gato-graphql'),
+            self::CONTENT_TRANSLATION => \__('Bundle of extensions to translate content (using the Google Translate API).', 'gato-graphql'),
+            self::PUBLIC_API => \__('Bundle of extensions to render the public API powerful, fast and secure.', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }
@@ -56,7 +69,91 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getBundledExtensionSlugs(string $module): array
     {
         return match ($module) {
-            self::ALL_EXTENSIONS =>         [
+            self::ALL_EXTENSIONS => [
+                'access-control',
+                'access-control-visitor-ip',
+                'automation',
+                'cache-control',
+                'conditional-field-manipulation',
+                'deprecation-notifier',
+                'email-sender',
+                'events-manager',
+                'field-default-value',
+                'field-deprecation',
+                'field-on-field',
+                'field-resolution-caching',
+                'field-response-removal',
+                'field-to-input',
+                'field-value-iteration-and-manipulation',
+                'google-translate',
+                'helper-function-collection',
+                'http-client',
+                'http-request-via-schema',
+                'internal-graphql-server',
+                'low-level-persisted-query-editing',
+                'multiple-query-execution',
+                'php-constants-and-environment-variables-via-schema',
+                'php-functions-via-schema',
+                'response-error-trigger',
+                'schema-editing-access',
+            ],
+            self::APPLICATION_GLUE_AND_AUTOMATOR => [
+                'access-control',
+                'access-control-visitor-ip',
+                'automation',
+                'cache-control',
+                'conditional-field-manipulation',
+                'deprecation-notifier',
+                'email-sender',
+                'events-manager',
+                'field-default-value',
+                'field-deprecation',
+                'field-on-field',
+                'field-resolution-caching',
+                'field-response-removal',
+                'field-to-input',
+                'field-value-iteration-and-manipulation',
+                'google-translate',
+                'helper-function-collection',
+                'http-client',
+                'http-request-via-schema',
+                'internal-graphql-server',
+                'low-level-persisted-query-editing',
+                'multiple-query-execution',
+                'php-constants-and-environment-variables-via-schema',
+                'php-functions-via-schema',
+                'response-error-trigger',
+                'schema-editing-access',
+            ],
+            self::CONTENT_TRANSLATION => [
+                'access-control',
+                'access-control-visitor-ip',
+                'automation',
+                'cache-control',
+                'conditional-field-manipulation',
+                'deprecation-notifier',
+                'email-sender',
+                'events-manager',
+                'field-default-value',
+                'field-deprecation',
+                'field-on-field',
+                'field-resolution-caching',
+                'field-response-removal',
+                'field-to-input',
+                'field-value-iteration-and-manipulation',
+                'google-translate',
+                'helper-function-collection',
+                'http-client',
+                'http-request-via-schema',
+                'internal-graphql-server',
+                'low-level-persisted-query-editing',
+                'multiple-query-execution',
+                'php-constants-and-environment-variables-via-schema',
+                'php-functions-via-schema',
+                'response-error-trigger',
+                'schema-editing-access',
+            ],
+            self::PUBLIC_API => [
                 'access-control',
                 'access-control-visitor-ip',
                 'automation',
