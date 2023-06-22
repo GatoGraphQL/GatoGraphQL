@@ -329,7 +329,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                     $menuName,
                     __('About', 'gato-graphql'),
                     __('About', 'gato-graphql'),
-                    $schemaEditorAccessCapability,
+                    'manage_options',
                     $aboutMenuPage->getScreenID(),
                     [$aboutMenuPage, 'print']
                 )
