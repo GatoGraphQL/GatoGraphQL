@@ -8,8 +8,9 @@ use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionModuleDocumentationMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionDocModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionDocsMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\MenuPageInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModuleDocumentationMenuPage;
@@ -29,6 +30,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ModuleDocumentationMenuPage $moduleDocumentationMenuPage = null;
     private ?ModulesMenuPage $modulesMenuPage = null;
     private ?ExtensionModuleDocumentationMenuPage $extensionModuleDocumentationMenuPage = null;
+    private ?ExtensionDocModuleDocumentationMenuPage $extensionDocModuleDocumentationMenuPage = null;
     private ?ExtensionsMenuPage $extensionsMenuPage = null;
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     private ?ExtensionDocsMenuPage $extensionDocsMenuPage = null;
@@ -98,6 +100,15 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     {
         /** @var ExtensionModuleDocumentationMenuPage */
         return $this->extensionModuleDocumentationMenuPage ??= $this->instanceManager->getInstance(ExtensionModuleDocumentationMenuPage::class);
+    }
+    final public function setExtensionDocModuleDocumentationMenuPage(ExtensionDocModuleDocumentationMenuPage $extensionDocModuleDocumentationMenuPage): void
+    {
+        $this->extensionDocModuleDocumentationMenuPage = $extensionDocModuleDocumentationMenuPage;
+    }
+    final protected function getExtensionDocModuleDocumentationMenuPage(): ExtensionDocModuleDocumentationMenuPage
+    {
+        /** @var ExtensionDocModuleDocumentationMenuPage */
+        return $this->extensionDocModuleDocumentationMenuPage ??= $this->instanceManager->getInstance(ExtensionDocModuleDocumentationMenuPage::class);
     }
     final public function setExtensionsMenuPage(ExtensionsMenuPage $extensionsMenuPage): void
     {
@@ -273,7 +284,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * So it doesn't appear on the menu, but it's still available
          * when opening it via the Extensions page
          */
-        $extensionDocsMenuPage = $this->getExtensionDocsMenuPage();
+        $extensionDocsMenuPage = $this->getExtensionDocMenuPage();
         if (App::query('page') === $extensionDocsMenuPage->getScreenID()) {
             /**
              * @var callable
@@ -284,7 +295,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                     $menuName,
                     __('Extension Docs', 'gato-graphql'),
                     __('Extension Docs', 'gato-graphql'),
-                    $schemaEditorAccessCapability,
+                    'manage_options',
                     $extensionDocsMenuPage->getScreenID(),
                     $callable
                 )
@@ -364,10 +375,26 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
      */
     protected function getExtensionMenuPage(): MenuPageInterface
     {
-        return
-            $this->getMenuPageHelper()->isDocumentationScreen() ?
-                $this->getExtensionModuleDocumentationMenuPage()
-                : $this->getExtensionsMenuPage();
+        $extensionsMenuPage = $this->getExtensionsMenuPage();
+        $isExtensionModuleDocumentationMenuPage = $extensionsMenuPage->getScreenID() === App::query('page')
+            && $this->getMenuPageHelper()->isDocumentationScreen();
+        return $isExtensionModuleDocumentationMenuPage
+            ? $this->getExtensionModuleDocumentationMenuPage()
+            : $extensionsMenuPage;
+    }
+
+    /**
+     * Either the Extensions menu page, or the Extension Documentation menu page,
+     * based on parameter ?tab="docs" or not
+     */
+    protected function getExtensionDocMenuPage(): MenuPageInterface
+    {
+        $extensionDocsMenuPage = $this->getExtensionDocsMenuPage();
+        $isExtensionDocModuleDocumentationMenuPage = $extensionDocsMenuPage->getScreenID() === App::query('page')
+            && $this->getMenuPageHelper()->isDocumentationScreen();
+        return $isExtensionDocModuleDocumentationMenuPage
+            ? $this->getExtensionDocModuleDocumentationMenuPage()
+            : $extensionDocsMenuPage;
     }
 
     /**

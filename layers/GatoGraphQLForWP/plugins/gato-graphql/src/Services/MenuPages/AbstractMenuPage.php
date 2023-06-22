@@ -87,7 +87,7 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     {
         // Check we are on the specific screen
         $currentScreen = \get_current_screen();
-        if (is_null($currentScreen)) {
+        if ($currentScreen === null) {
             return false;
         }
         $screenID = $this->getScreenID();

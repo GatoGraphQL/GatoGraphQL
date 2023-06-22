@@ -13,6 +13,7 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 
 class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 {
+    use OpenInModalTriggerMenuPageTrait;
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -159,5 +160,15 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
                 : \__('get extension', 'gato-graphql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
+    }
+
+    /**
+     * Enqueue the required assets
+     */
+    protected function enqueueAssets(): void
+    {
+        parent::enqueueAssets();
+
+        $this->enqueueModalTriggerAssets();
     }
 }
