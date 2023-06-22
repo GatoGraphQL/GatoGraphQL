@@ -68,7 +68,10 @@ class ExtensionListTable extends AbstractExtensionListTable
             if ($isBundleExtension) {
                 /** @var BundleExtensionModuleResolverInterface */
                 $bundleExtensionModuleResolver = $moduleResolver;
-                $item['gato_extension_bundled_extension_slugs'] = $bundleExtensionModuleResolver->getBundledExtensionSlugs($module);
+                $item['gato_extension_bundled_extension_slugs'] = array_map(
+                    fn (string $extensionSlug) => 'gato-graphql-' . $extensionSlug,
+                    $bundleExtensionModuleResolver->getBundledExtensionSlugs($module)
+                );
             }
             $items[] = $item;
         }
