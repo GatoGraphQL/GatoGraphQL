@@ -40,12 +40,6 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
 
     protected function getContentToPrint(): string
     {
-        // Enable "/" in the filename
-        add_filter(
-            'sanitize_file_name_chars',
-            $this->enableSpecialCharsForSanitization(...)
-        );
-
         $filename = App::query(RequestParams::DOC, '');
         $relativePathDir = $this->getRelativePathDir();
 
@@ -60,6 +54,11 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
             $relativePathDir .=  '/..';
         }
 
+        // Enable "/" in the filename
+        add_filter(
+            'sanitize_file_name_chars',
+            $this->enableSpecialCharsForSanitization(...)
+        );
         $doc = \sanitize_file_name($filename);
         remove_filter(
             'sanitize_file_name_chars',
