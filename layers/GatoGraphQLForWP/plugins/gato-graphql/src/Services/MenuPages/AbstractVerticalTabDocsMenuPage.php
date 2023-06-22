@@ -97,10 +97,11 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                     <div class="nav-tab-content">
         HTML;
 
-        $entryRelativePathDir = $this->getEntryRelativePathDir();
         foreach ($entries as $entry) {
             $entryName = $entry[0];
             $entryTitle = $entry[1];
+            
+            $entryRelativePathDir = $this->getEntryRelativePathDir($entry);
 
             $entryContent = $this->getMarkdownContent(
                 $entryName,
@@ -178,7 +179,10 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         return 'gato-graphql-vertical-tab-docs';
     }
 
-    abstract protected function getEntryRelativePathDir(): string;
+    /**
+     * @param array<array{0:string,1:string}> $entry
+     */
+    abstract protected function getEntryRelativePathDir(array $entry): string;
 
     /**
      * @param array{0:string,1:string} $entry

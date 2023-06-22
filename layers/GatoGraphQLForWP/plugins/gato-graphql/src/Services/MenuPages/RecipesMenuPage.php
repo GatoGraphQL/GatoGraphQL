@@ -41,7 +41,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return 'gato-graphql-recipes';
     }
 
-    protected function getEntryRelativePathDir(): string
+    /**
+     * @param array<array{0:string,1:string}> $entry
+     */
+    protected function getEntryRelativePathDir(array $entry): string
     {
         return 'docs/recipes';
     }

@@ -52,8 +52,19 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         return 'gato-graphql-extension-docs';
     }
 
-    protected function getEntryRelativePathDir(): string
+    /**
+     * @param array<array{0:string,1:string,2:string}> $entry
+     * @phpstan-ignore-next-line
+     */
+    protected function getEntryRelativePathDir(array $entry): string
     {
+        /** @var string */
+        $entryModule = $entry[2];
+        /** @var ExtensionModuleResolverInterface */
+        $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
+        if ($entryModuleResolver instanceof BundleExtensionModuleResolverInterface) {
+            return 'bundle-extensions';
+        }
         return 'extensions';
     }
 
