@@ -42,7 +42,8 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
          * Otherwise call method `getContentToPrint`
          */
         if ($this->getMenuPageHelper()->isDocumentationScreen()
-            && App::query(RequestParams::DOC, '') !== '') {
+            && App::query(RequestParams::DOC, '') !== ''
+        ) {
             $content = $this->getDocumentationContentToPrint();
         }
         ?>
