@@ -1,6 +1,18 @@
 # “Application Glue & Automator” Bundle
 
-@todo Complete intro
+This bundles gives you a toolbox for interacting with your data, and create workflows to automate tasks:
+
+- Keep content in sync, whether within the same site, or across multiple WordPress sites
+- Help migrate websites from one domain to another
+- Validate that a newly-published blog post contains mandatory blocks
+- Send a notification whenever a new comment is added
+- Send a welcome email to new users
+- Do a bulk replace of one (Gutenberg) block with another
+- Interact with cloud services
+- Convert data from 3rd-party APIs into the required format
+- Many more...
+
+All this power comes without endangering your site: An internal GraphQL server is provided, so you don't need to expose an endpoint over the Internet just to execute your own admin tasks.
 
 ## List of bundled extensions
 
