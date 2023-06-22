@@ -1,3 +1,3 @@
-# Content Translation Bundle
+# “Content Translation” Bundle
 
 @todo Complete doc for extension!

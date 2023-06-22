@@ -1,3 +1,3 @@
-# Application Glue & Automator Bundle
+# “Application Glue & Automator” Bundle
 
 @todo Complete doc for extension!
