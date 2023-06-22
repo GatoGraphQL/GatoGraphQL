@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use PHP_CodeSniffer\Generators\HTML;
 
 /**
  * Extension Table implementation, which retrieves the Extensions
@@ -86,7 +87,18 @@ class ExtensionListTable extends AbstractExtensionListTable
             }
             return \__('Get Bundle', 'gato-graphql');
         }
-        return parent::getPluginInstallActionLabel($plugin);
+        /**
+         * Allow to change the title for extensions active via a bundle
+         */
+        $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
+        return sprintf(
+            <<<HTML
+                <span class="gato-graphql-extension-action-label">%s</span>
+                <span class="gato-graphql-extension-bundle-action-label">%s</span>
+            HTML,
+            $extensionActionLabel,
+            \__('Active (via Bundle)', 'gato-graphql')
+        );
     }
 
     /**
@@ -171,7 +183,7 @@ class ExtensionListTable extends AbstractExtensionListTable
             /**
              * Add the "plugin-card-bundler-installed" classname
              * to the bundled extensions.
-             * 
+             *
              * @var string[]
              */
             $bundledExtensionSlugs = $plugin['gato_extension_bundled_extension_slugs'];
