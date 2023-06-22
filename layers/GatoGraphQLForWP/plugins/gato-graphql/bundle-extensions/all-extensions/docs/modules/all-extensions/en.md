@@ -4,7 +4,7 @@ This bundle contains **all of Gato GraphQL extensions**, in a single plugin.
 
 Members of the <a href="https://gatographql.com/club" target="_blank">Gato GraphQL Club</a> can also **access future extensions**, as these are added to the “All Extensions” bundle as they are created.
 
-## List of Bundled extensions
+## List of bundled extensions
 
 - [Access Control](../../../../../extensions/access-control/docs/modules/access-control/en.md)
 - [Access Control Visitor IP](../../../../../extensions/access-control-visitor-ip/docs/modules/access-control-visitor-ip/en.md)
