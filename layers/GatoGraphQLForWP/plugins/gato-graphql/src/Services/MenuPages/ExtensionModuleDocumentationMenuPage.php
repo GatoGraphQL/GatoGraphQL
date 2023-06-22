@@ -42,4 +42,22 @@ class ExtensionModuleDocumentationMenuPage extends AbstractModuleDocsMenuPage
             $moduleResolver->getName($module)
         );
     }
+
+    /**
+     * Any one document under bundle-extensions. It doesn't matter
+     * which one, as all links will start with "../" anyway
+     */
+    protected function getRelativePathDir(): string
+    {
+        $anyDocumentFolder = 'all-extensions';
+        return 'bundle-extensions/' . $anyDocumentFolder . '/docs/modules/' . $anyDocumentFolder;
+    }
+
+    /**
+     * Get the URL where to look for the documentation.
+     */
+    protected function getDocsFolder(): string
+    {
+        return '';
+    }
 }
