@@ -18,6 +18,6 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
 
     protected function getContentToPrint(): string
     {
-        return $this->getDocParamContent();
+        return $this->getDocumentationContentToPrint();
     }
 }

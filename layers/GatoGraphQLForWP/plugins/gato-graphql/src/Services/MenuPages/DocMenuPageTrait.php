@@ -17,7 +17,7 @@ trait DocMenuPageTrait
         return '';
     }
 
-    protected function getDocParamContent(): string
+    protected function getDocumentationContentToPrint(): string
     {
         $filename = App::query(RequestParams::DOC, '');
         $relativePathDir = $this->getRelativePathDir();

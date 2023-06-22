@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentRetrieverTrait;
 
@@ -17,6 +19,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
     use PrettyprintCodePageTrait;
     use MarkdownContentRetrieverTrait;
     use UseDocsMenuPageTrait;
+    use DocMenuPageTrait;
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -32,11 +35,21 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
 
     public function print(): void
     {
+        $content = null;
+
+        /**
+         * If passing the doc via ?doc=... already print it.
+         * Otherwise call method `getContentToPrint`
+         */
+        if ($this->getMenuPageHelper()->isDocumentationScreen()
+            && App::query(RequestParams::DOC, '') !== '') {
+            $content = $this->getDocumentationContentToPrint();
+        }
         ?>
         <div
             class="<?php echo implode(' ', $this->getDivClassNames()) ?>"
         >
-            <?php echo $this->getContentToPrint() ?>
+            <?php echo $content ?? $this->getContentToPrint() ?>
         </div>
         <?php
     }
