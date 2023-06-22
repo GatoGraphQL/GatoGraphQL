@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
@@ -138,11 +139,14 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         /** @var ExtensionModuleResolverInterface */
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
         return sprintf(
-            \__('%s <small>(<a href="%s" target="%s" title="%s">get extension%s</a>)</small>', 'gato-graphql'),
+            \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gato-graphql'),
             $entryTitle,
             $entryModuleResolver->getWebsiteURL($entryModule),
             '_blank',
             \__('Open in shop', 'gato-graphql'),
+            $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
+                ? \__('get bundle', 'gato-graphql')
+                : \__('get extension', 'gato-graphql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }
