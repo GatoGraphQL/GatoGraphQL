@@ -49,8 +49,8 @@ class ExtensionModuleDocumentationMenuPage extends AbstractModuleDocsMenuPage
      */
     protected function getRelativePathDir(): string
     {
-        $anyDocumentFolder = 'all-extensions';
-        return 'bundle-extensions/' . $anyDocumentFolder . '/docs/modules/' . $anyDocumentFolder;
+        $anyDocumentFolder = 'access-control';
+        return 'extensions/' . $anyDocumentFolder . '/docs/modules/' . $anyDocumentFolder;
     }
 
     /**
