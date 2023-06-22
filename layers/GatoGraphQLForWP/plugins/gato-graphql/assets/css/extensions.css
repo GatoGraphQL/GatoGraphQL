@@ -75,7 +75,7 @@
 /**
  * If a bundler is installed, change the style of the bundled extensions too
  */
-.plugin-card.plugin-card-bundler-installed .plugin-action-buttons > li:first-child > a {
+.plugin-card.plugin-card-bundler-active .plugin-action-buttons > li:first-child > a {
     pointer-events: none;
     /* opacity: 0.4; */
 
@@ -87,9 +87,9 @@
     cursor: default;
     transform: none !important;
 }
-.plugin-card.plugin-card-bundler-installed .gato-graphql-extension-bundle-action-label {
+.plugin-card.plugin-card-bundler-active .gato-graphql-extension-bundle-action-label {
     display: block !important;
 }
-.plugin-card.plugin-card-bundler-installed .gato-graphql-extension-action-label {
+.plugin-card.plugin-card-bundler-active .gato-graphql-extension-action-label {
     display: none;
 }

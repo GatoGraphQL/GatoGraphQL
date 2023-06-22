@@ -191,7 +191,7 @@ class ExtensionListTable extends AbstractExtensionListTable
 
             /**
              * Replace classname "plugin-card-non-installed" with
-             * "plugin-card-bundler-installed" in the bundled extensions.
+             * "plugin-card-bundler-active" in the bundled extensions.
              *
              * @var string[]
              */
@@ -201,7 +201,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 $pluginCardClassname .= ' plugin-card-non-installed';
                 $pos = strpos($html, $pluginCardClassname);
                 if ($pos !== false) {
-                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-bundler-installed', $pos, strlen($pluginCardClassname));
+                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-bundler-active', $pos, strlen($pluginCardClassname));
                 }
             }
         }
