@@ -258,23 +258,32 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             );
 
             /**
-             * Highlight non-installed extensions
-             *
              * @var string
              */
             $pluginName = $plugin['name'];
+            $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug']);
+            $pos = strpos($html, $pluginCardClassname);
+            if ($pos === false) {
+                continue;
+            }
+
+            /**
+             * Additional classes
+             */
+            $additionalPluginCardClassnames = $this->getAdditionalPluginCardClassnames($plugin);
+            if ($additionalPluginCardClassnames !== null) {
+                $html = substr_replace($html, $pluginCardClassname . ' ' . $additionalPluginCardClassnames, $pos, strlen($pluginCardClassname));
+            }
+
+            /**
+             * Highlight non-installed extensions.
+             * 
+             * Only replace the 1st occurrence, to avoid "access-control" also
+             * being replaced in "access-control-visitor-ip"
+             */
             $actionLinks = $this->pluginActionLinks[$pluginName] ?? [];
             if (str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')) {
-                $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug']);
-                /**
-                 * Only replace the 1st occurrence, to avoid "access-control" also
-                 * being replaced in "access-control-visitor-ip"
-                 */
-                $pos = strpos($html, $pluginCardClassname);
-                if ($pos !== false) {
-                    $additionalPluginCardClassnames = $this->getAdditionalPluginCardClassnames($plugin) ?? '';
-                    $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed ' . $additionalPluginCardClassnames, $pos, strlen($pluginCardClassname));
-                }
+                $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed', $pos, strlen($pluginCardClassname));
             }
         }
 
