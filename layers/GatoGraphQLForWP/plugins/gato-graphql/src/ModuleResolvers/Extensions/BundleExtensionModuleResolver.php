@@ -136,7 +136,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 'field-deprecation',
                 'field-to-input',
                 'field-value-iteration-and-manipulation',
-                'internal-graphql-server',
                 'low-level-persisted-query-editing',
                 'multiple-query-execution',
                 'response-error-trigger',
