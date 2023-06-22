@@ -100,7 +100,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         foreach ($entries as $entry) {
             $entryName = $entry[0];
             $entryTitle = $entry[1];
-            
+
             $entryRelativePathDir = $this->getEntryRelativePathDir($entry);
 
             $entryContent = $this->getMarkdownContent(
