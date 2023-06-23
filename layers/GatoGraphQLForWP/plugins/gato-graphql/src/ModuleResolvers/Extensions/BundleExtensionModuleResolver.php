@@ -45,7 +45,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::ALL_EXTENSIONS => \__('When being a member of the Gato GraphQL Club, you have access to all the extensions (from now and the future), via a single bundle.', 'gato-graphql'),
             self::APPLICATION_GLUE_AND_AUTOMATOR => \__('Keep content in sync, help migrate websites, send notifications, interact with 3rd-party services and APIs, create automation workflows, and more.', 'gato-graphql'),
             self::CONTENT_TRANSLATION => \__('Translate content via the Google Translate API, even within the deep structure of (Gutenberg) blocks.', 'gato-graphql'),
-            self::PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, and leverage tools to access data.', 'gato-graphql'),
+            self::PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, leverage tools to access data, and evolve the schema.', 'gato-graphql'),
             default => parent::getDescription($module),
         };
     }
