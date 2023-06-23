@@ -107,7 +107,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                 $entryName,
                 $entryRelativePathDir,
                 [
-                    ContentParserOptions::TAB_CONTENT => false,
+                    ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
                 ]
             ) ?? sprintf(
                 '<p>%s</p>',
