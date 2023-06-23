@@ -47,6 +47,25 @@ This query:
                 ...on Block {
                   name
                   attributes
+                  innerBlocks {
+                    ...on Block {
+                        name
+                        attributes
+                        innerBlocks {
+                          ...on Block {
+                            name
+                            attributes
+                            innerBlocks {
+                              ...on Block {
+                                name
+                                attributes
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
