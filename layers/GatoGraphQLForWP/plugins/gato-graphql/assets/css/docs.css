@@ -10,3 +10,12 @@ ul {
     background-color: lightcyan;
     box-sizing: border-box;
 }
+
+/**
+ * Make large images fit within the page
+ */
+.tab-content img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
