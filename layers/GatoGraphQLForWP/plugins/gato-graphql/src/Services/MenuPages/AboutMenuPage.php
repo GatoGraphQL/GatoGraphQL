@@ -39,7 +39,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
             'about',
             'general',
             [
-                ContentParserOptions::TAB_CONTENT => true,
+                ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
             ]
         ) ?? sprintf(
             '<p>%s</p>',

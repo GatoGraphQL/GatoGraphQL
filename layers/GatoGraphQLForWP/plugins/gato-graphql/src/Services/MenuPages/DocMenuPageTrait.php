@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use PoP\Root\App;
 
 /**
@@ -46,7 +47,10 @@ trait DocMenuPageTrait
         );
         return $this->getMarkdownContent(
             $doc,
-            $relativePathDir
+            $relativePathDir,
+            [
+                ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
+            ]
         ) ?? sprintf(
             '<p>%s</p>',
             sprintf(
@@ -55,6 +59,8 @@ trait DocMenuPageTrait
             )
         );
     }
+
+    abstract protected function useTabpanelForContent(): bool;
 
     /**
      * Enable "/" in the filename
