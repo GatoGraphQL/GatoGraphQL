@@ -292,7 +292,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
-            return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
+            return $this->getModuleRegistry()->isModuleEnabled($enablingModule)
+                && parent::isServiceEnabled();
         }
         return parent::isServiceEnabled();
     }
