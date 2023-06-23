@@ -20,6 +20,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public final const PLUGIN_GENERAL_SETTINGS = Plugin::NAMESPACE . '\plugin-general-settings';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
+    public final const SERVER_CONFIGURATION = Plugin::NAMESPACE . '\server-configuration';
     public final const SCHEMA_TYPE = Plugin::NAMESPACE . '\schema-type';
     public final const SCHEMA_DIRECTIVE = Plugin::NAMESPACE . '\schema-directive';
     public final const USER_INTERFACE = Plugin::NAMESPACE . '\user-interface';
@@ -46,6 +47,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::PLUGIN_GENERAL_SETTINGS,
             self::PLUGIN_MANAGEMENT,
             self::SCHEMA_CONFIGURATION,
+            self::SERVER_CONFIGURATION,
             self::SCHEMA_TYPE,
             self::SCHEMA_DIRECTIVE,
             self::USER_INTERFACE,
@@ -67,6 +69,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::PLUGIN_GENERAL_SETTINGS => $this->__('General Settings', 'gato-graphql'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'gato-graphql'),
             self::SCHEMA_CONFIGURATION => $this->__('Schema Configuration', 'gato-graphql'),
+            self::SERVER_CONFIGURATION => $this->__('Server Configuration', 'gato-graphql'),
             self::SCHEMA_TYPE => $this->__('Schema Type', 'gato-graphql'),
             self::SCHEMA_DIRECTIVE => $this->__('Schema Directive', 'gato-graphql'),
             self::USER_INTERFACE => $this->__('User Interface', 'gato-graphql'),
