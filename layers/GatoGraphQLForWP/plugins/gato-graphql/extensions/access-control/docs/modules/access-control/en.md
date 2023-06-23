@@ -6,26 +6,21 @@ Manage access to the GraphQL schema through Access Control Lists.
 
 This extension allows us to create Access Control Lists, to manage who can access the different elements (operations, fields and directives) from the GraphQL schema.
 
-A new "Access Control Lists" page is made available on the menu:
+A new "Access Control List" Custom Post Type is added to the site. We can browse its entries on the "Access Control Lists" page in the menu, and click on "Add New Access Control List" to add a new entry in the editor.
 
 ![Access Control Lists](../../images/access-control-lists.png "Access Control Lists")
 
-When creating a new Access Control List, we indicate what rules must be satisfied as to access any of the following elements:
+![Access Control List editor](../../images/access-control-list.png "Access Control List editor")
 
-- Operations (`query` or `mutation`)
-- Fields
-- Global Fields
-- Directives
-
-<!-- ![Creating an Access Control List](../../images/access-control-list.png "Creating an Access Control List") -->
+In the editor, we indicate what rules must be satisfied to access what schema elements, from among operations (`query` or `mutation`), fields, global fields, and directives.
 
 ![Creating an Access Control List](../../images/access-control.gif "Creating an Access Control List")
 
-We assign the Access Control List to the endpoint via the Schema Configuration.
+We assign the Access Control List to the desired endpoint (private endpoint, single endpoint, custom endpoints or persisted queries) via the Schema Configuration.
 
 ![Selecting an Access Control List in the Schema Configuration](../../images/schema-config-access-control-lists.png "Selecting an Access Control List in the Schema Configuration")
 
-When executing a GraphQL query, if it contains one of the selected schema elements, the rules from the corresponding Access Control List are evaluated.
+When executing a GraphQL query, if it contains any of the selected schema elements in the Access Control List, the chosen rules are evaluated.
 
 If any rule is not satisfied, access to that operation, field or directive is denied, and we can configure how the API must provide the response:
 
