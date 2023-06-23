@@ -23,3 +23,21 @@ For instance, any of these entries match IP address `"203.23.88.100"`:
 And under Behavior, select if to "Allow access" or "Deny access" to the schema for those entries.
 
 ![Adding entries in the Visitor IP block](../../images/acl-rule-visitor-ip-block.png "Adding entries in the Visitor IP block")
+
+When access is denied, the response will contain an error message like this one (in the public mode):
+
+```json
+{
+  "errors": [
+    {
+      "message": "The client IP address must satisfy constraint '#^255\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$#' to access field 'karma' for type 'Comment' (your IP address is '172.19.0.2')",
+      "locations": [
+        {
+          "line": 15,
+          "column": 5
+        }
+      ]
+    }
+  ]
+}
+```
