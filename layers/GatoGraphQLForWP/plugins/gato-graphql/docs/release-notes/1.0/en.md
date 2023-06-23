@@ -694,7 +694,17 @@ Once the password is provided and validated, only then the user will access the 
 
 ## Browse and install Gato GraphQL extensions
 
-@todo Complete Extensions page changelog!
+An Extensions page has been added, to browse the available (commercial) Gato GraphQL extensions:
+
+![Extensions page](../../images/releases/v1.0/extensions-page.png)
+
+Clicking on an Extension's title, it opens a modal window with documentation:
+
+![Extension modal with documentation](../../images/releases/v1.0/extension-modal.png)
+
+Clicking on "Switch to the Extension Docs view", we can browse the documentation for all extensions more easily:
+
+![Extension Docs page](../../images/releases/v1.0/extension-docs-page.png)
 
 ## Browse Recipes, providing examples of GraphQL queries for different use cases
 
