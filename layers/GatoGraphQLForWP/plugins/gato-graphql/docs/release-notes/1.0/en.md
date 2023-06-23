@@ -10,7 +10,7 @@ Here's a description of all the changes.
 
 ## Integration of Gutenberg blocks into the GraphQL schema
 
-_This integration is heavily based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>. My deepest gratitude to this project's contributors, as their contribution has also benefitted this plugin. ❤️_
+_This integration is based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>. My deepest gratitude to this project's contributors, as their contribution has also benefitted this plugin. ❤️_
 
 The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrieved via the following fields added to all `CustomPost` types (such as `Post` and `Page`):
 
