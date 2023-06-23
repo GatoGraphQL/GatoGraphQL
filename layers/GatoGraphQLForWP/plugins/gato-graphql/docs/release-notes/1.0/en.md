@@ -10,7 +10,9 @@ Here's a description of all the changes.
 
 ## Integration of Gutenberg blocks into the GraphQL schema
 
-_This integration is based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>. My deepest gratitude to this project's contributors, as their contribution has also benefitted this plugin. ❤️_
+_This integration is based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>. My deepest gratitude to this project's contributors, as their contribution has also benefitted Gato GraphQL. ❤️_
+
+_🔗 The following is a short description of the feature. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description._
 
 The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrieved via the following fields added to all `CustomPost` types (such as `Post` and `Page`):
 
@@ -19,8 +21,6 @@ The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrie
 - `blockFlattenedDataItems`
 
 This module is disabled if the [Classic Editor](https://wordpress.org/plugins/classic-editor/) plugin is active.
-
-_🔗 Below is a short summary of the 3 fields. Please check the [Blocks module documentation](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/modules/schema-blocks/en.md) for a more thorough description._
 
 ### `blocks`
 
