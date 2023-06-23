@@ -20,7 +20,7 @@ abstract class AbstractModuleEnabledHookSet extends AbstractHookSet
         /** @var ModuleRegistryInterface */
         return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
     }
-    
+
     public function getEnablingModule(): ?string
     {
         return null;
