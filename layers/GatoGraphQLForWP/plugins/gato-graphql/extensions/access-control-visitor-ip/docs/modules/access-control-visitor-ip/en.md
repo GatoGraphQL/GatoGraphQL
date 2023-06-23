@@ -1,11 +1,25 @@
 # Access Control: Visitor IP
 
-@todo Complete doc for extension!
+Access Control rule "Visitor IP", to grant access to the selected schema elements based on the visitor coming from an allowed IP address.
 
-![Some pic](../../images/acl-rule-visitor-ip-block.png)
+## Description
 
-## Access Control rules
+In the Access Control editor, a new rule "Visitor IP" is made available:
 
-The Access Control extension makes available the following access control rules:
+![Access Control: Visitor IP rule](../../images/acl-rule-visitor-ip.png "Access Control: Visitor IP rule")
 
-- Grant access only if the visitor comes from an allowed IP address
+We configure the rule with the list of IP addresses that can either access, or are denied access to, the schema elements.
+
+Each entry can either be:
+
+- A regex (regular expression), if it's surrounded by `/` or `#`, or
+- The full IP address, otherwise
+
+For instance, any of these entries match IP address `"203.23.88.100"`:
+
+- `203.23.88.100`
+- `#^203\.23\.[0-9]{1,3}\.[0-9]{1,3}$#`
+
+And under Behavior, select if to "Allow access" or "Deny access" to the schema for those entries.
+
+![Adding entries in the Visitor IP block](../../images/acl-rule-visitor-ip-block.png "Adding entries in the Visitor IP block")
