@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
-trait ServerConfigurationFunctionalityModuleResolverTrait
+trait ServerFunctionalityModuleResolverTrait
 {
     /**
      * The priority to display the modules from this resolver in the Modules page.
@@ -22,6 +22,6 @@ trait ServerConfigurationFunctionalityModuleResolverTrait
      */
     public function getModuleType(string $module): string
     {
-        return ModuleTypeResolver::SERVER_CONFIGURATION;
+        return ModuleTypeResolver::SERVER;
     }
 }
