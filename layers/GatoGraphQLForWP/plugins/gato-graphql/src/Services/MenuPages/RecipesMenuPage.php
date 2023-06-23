@@ -66,8 +66,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             return $entryContent;
         }
         $messagePlaceholder = count($entryExtensionModules) === 1
-            ? \__('%s This recipe requires extension %s to be active.', 'gato-graphql')
-            : \__('%s This recipe requires extensions %s to be active.', 'gato-graphql');
+            ? \__('%s This recipe requires extension %s.', 'gato-graphql')
+            : \__('%s This recipe requires extensions %s.', 'gato-graphql');
         $extensionHTMLItems = [];
         foreach ($entryExtensionModules as $entryExtensionModule) {
             /** @var ExtensionModuleResolverInterface */
