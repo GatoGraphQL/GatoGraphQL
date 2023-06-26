@@ -72,14 +72,14 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             : \__('This recipe requires extensions %s', 'gato-graphql');
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
-        
+
         $entryBundleExtensionModules = $entry[3] ?? [];
         $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
         $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
         $messageBundleExtensionPlaceholder = count($entryExtensionModules) === 1
             ? \__('(included in %s)', 'gato-graphql')
             : \__('(all included in %s)', 'gato-graphql');
-        
+
         $messageHTML = sprintf(
             \__('🌀 %s %s.', 'gato-graphql'),
             sprintf(
@@ -97,7 +97,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 )
             )
         );
-        
+
         return sprintf(
             <<<HTML
                 <div class="%s">
