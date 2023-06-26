@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
@@ -55,7 +56,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @param array{0:string,1:string,2?:string[]} $entry
+     * @param array{0:string,1:string,2?:string[],3?:string[]} $entry
      */
     protected function getEntryContent(
         string $entryContent,
@@ -65,29 +66,38 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         if ($entryExtensionModules === []) {
             return $entryContent;
         }
-        $messagePlaceholder = count($entryExtensionModules) === 1
-            ? \__('%s This recipe requires extension %s.', 'gato-graphql')
-            : \__('%s This recipe requires extensions %s.', 'gato-graphql');
-        $extensionHTMLItems = [];
-        foreach ($entryExtensionModules as $entryExtensionModule) {
-            /** @var ExtensionModuleResolverInterface */
-            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryExtensionModule);
-            $extensionHTMLItems[] = sprintf(
-                \__('<strong><a href="%s" target="%s">%s%s</a></strong>', 'gato-graphql'),
-                $extensionModuleResolver->getWebsiteURL($entryExtensionModule),
-                '_blank',
-                $extensionModuleResolver->getName($entryExtensionModule),
-                HTMLCodes::OPEN_IN_NEW_WINDOW
-            );
-        }
+
+        $messageExtensionPlaceholder = count($entryExtensionModules) === 1
+            ? \__('This recipe requires extension %s', 'gato-graphql')
+            : \__('This recipe requires extensions %s', 'gato-graphql');
+
+        $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
+        
+        $entryBundleExtensionModules = $entry[3] ?? [];
+        $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
+        $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
+        $messageBundleExtensionPlaceholder = count($entryExtensionModules) === 1
+            ? \__('(included in %s)', 'gato-graphql')
+            : \__('(all included in %s)', 'gato-graphql');
+        
         $messageHTML = sprintf(
-            $messagePlaceholder,
-            '🌀',
-            implode(
-                \__(', ', 'gato-graphql'),
-                $extensionHTMLItems
+            \__('🌀 %s %s.', 'gato-graphql'),
+            sprintf(
+                $messageExtensionPlaceholder,
+                implode(
+                    \__(', ', 'gato-graphql'),
+                    $extensionHTMLItems
+                )
+            ),
+            sprintf(
+                $messageBundleExtensionPlaceholder,
+                implode(
+                    \__(', ', 'gato-graphql'),
+                    $bundleExtensionHTMLItems
+                )
             )
         );
+        
         return sprintf(
             <<<HTML
                 <div class="%s">
@@ -100,7 +110,29 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string,2?:string[]}>
+     * @param string[] $entryExtensionModules
+     * @return string[]
+     */
+    protected function getExtensionHTMLItems(
+        array $entryExtensionModules,
+    ): array {
+        $extensionHTMLItems = [];
+        foreach ($entryExtensionModules as $entryExtensionModule) {
+            /** @var ExtensionModuleResolverInterface */
+            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryExtensionModule);
+            $extensionHTMLItems[] = sprintf(
+                \__('<strong><a href="%s" target="%s">%s%s</a></strong>', 'gato-graphql'),
+                $extensionModuleResolver->getWebsiteURL($entryExtensionModule),
+                '_blank',
+                $extensionModuleResolver->getName($entryExtensionModule),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            );
+        }
+        return $extensionHTMLItems;
+    }
+
+    /**
+     * @return array<array{0:string,1:string,2?:string[],3?:string[]}>
      */
     protected function getEntries(): array
     {
@@ -161,6 +193,9 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'fixing-content-issues',
@@ -221,6 +256,9 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                 ],
+                [
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
             ],
             [
                 'combining-user-data-from-different-systems',
