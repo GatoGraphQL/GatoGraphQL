@@ -86,7 +86,7 @@ mutation {
 }
 ```
 
-Combined with features from other extensions (in this case, **Field to Input** and **Function Fields**), we can create personalized messages for every user:
+Combined with features from other extensions (in this case, **Field to Input** and **PHP Functions via Schema**), we can create personalized messages for every user:
 
 ```graphql
 mutation {
