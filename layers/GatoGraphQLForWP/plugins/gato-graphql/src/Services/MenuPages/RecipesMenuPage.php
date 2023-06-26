@@ -256,6 +256,9 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                 ],
+                [
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
             ],
             [
                 'combining-user-data-from-different-systems',
