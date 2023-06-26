@@ -18,6 +18,10 @@ class Options
      */
     public final const ENDPOINT_CONFIGURATION = 'gato-graphql-endpoint-configuration';
     /**
+     * Option name under which to store the server configuration, defined by the user
+     */
+    public final const SERVER_CONFIGURATION = 'gato-graphql-server-configuration';
+    /**
      * Option name under which to store the Plugin Configuration, defined by the user
      */
     public final const PLUGIN_CONFIGURATION = 'gato-graphql-plugin-configuration';

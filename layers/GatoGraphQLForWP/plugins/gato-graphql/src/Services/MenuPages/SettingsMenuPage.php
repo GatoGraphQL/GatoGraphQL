@@ -115,8 +115,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $regenerateConfigSettingsCategories = [
             'schema' => SettingsCategoryResolver::SCHEMA_CONFIGURATION,
             'endpoint' => SettingsCategoryResolver::ENDPOINT_CONFIGURATION,
+            'server' => SettingsCategoryResolver::SERVER_CONFIGURATION,
             'plugin' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
-            'license-keys' => SettingsCategoryResolver::PLUGIN_CONFIGURATION,
+            'license-keys' => SettingsCategoryResolver::LICENSE_KEYS,
         ];
         $regenerateConfigFormOptions = array_map(
             fn (string $settingsCategory) => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory),
@@ -249,6 +250,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $resetOptions = [
             Options::SCHEMA_CONFIGURATION,
             Options::ENDPOINT_CONFIGURATION,
+            Options::SERVER_CONFIGURATION,
             Options::PLUGIN_CONFIGURATION,
         ];
         foreach ($resetOptions as $option) {
