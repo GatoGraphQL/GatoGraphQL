@@ -30,7 +30,7 @@ trait DocMenuPageTrait
          * for the relative path.
          *
          * This is to improve the security, to avoid users navigating
-         * out of the intended doc folder structure containing the docs.
+         * out of the folder structure containing the docs.
          */
         $count = 0;
         $relativePathDirLevels = count(explode('/', $relativePathDir));
