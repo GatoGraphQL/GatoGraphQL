@@ -34,7 +34,7 @@ trait DocMenuPageTrait
          */
         $count = 0;
         $relativePathDirLevels = count(explode('/', $relativePathDir));
-       
+
         /**
          * Move any potential "../" relative path from
          * $filename to $relativePathDir.
