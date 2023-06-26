@@ -25,6 +25,17 @@ trait DocMenuPageTrait
         $relativePathDir = $this->getRelativePathDir();
 
         /**
+         * Count the number of levels it goes down, and validate
+         * this number is not greater than the number of levels
+         * for the relative path.
+         *
+         * This is to improve the security, to avoid users navigating
+         * out of the folder structure containing the docs.
+         */
+        $count = 0;
+        $relativePathDirLevels = count(explode('/', $relativePathDir));
+
+        /**
          * Move any potential "../" relative path from
          * $filename to $relativePathDir.
          *
@@ -33,6 +44,13 @@ trait DocMenuPageTrait
         while (str_starts_with($filename, '../')) {
             $filename = substr($filename, 3);
             $relativePathDir .=  '/..';
+            $count++;
+        }
+        if ($count > $relativePathDirLevels) {
+            return sprintf(
+                '<p>%s</p>',
+                \__('Path is not reachable', 'gato-graphql')
+            );
         }
 
         // Enable "/" in the filename
