@@ -29,6 +29,15 @@ trait DocMenuPageTrait
          * $filename to $relativePathDir.
          *
          * Eg: Links to release-notes .md files in wp-admin/admin.php?page=gato_graphql_about
+         * 
+         * ------------------------------------------------------------------
+         *
+         * Count the number of levels it goes down, and validate
+         * this number is not greater than the number of levels
+         * for the relative path.
+         *
+         * This is to improve the security, to avoid users navigating
+         * out of the intended doc folder structure containing the docs.
          */
         while (str_starts_with($filename, '../')) {
             $filename = substr($filename, 3);
