@@ -142,7 +142,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p>',
                     sprintf(
-                        \__('Restore all settings (under tabs "%s", "%s", "%s" and "%s") to their default values.', 'gato-graphql'),
+                        \__('Restore all settings (under tabs <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code>) to their default values.', 'gato-graphql'),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::SCHEMA_CONFIGURATION)->getName(SettingsCategoryResolver::SCHEMA_CONFIGURATION),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::ENDPOINT_CONFIGURATION)->getName(SettingsCategoryResolver::ENDPOINT_CONFIGURATION),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::SERVER_CONFIGURATION)->getName(SettingsCategoryResolver::SERVER_CONFIGURATION),
