@@ -40,9 +40,9 @@ Once published, the schema configuration becomes available when editing a Custom
 
 ![Selecting the Schema Configuration in the Custom Endpoint](../../images/schema-configuration-in-custom-endpoint.png)
 
-If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema configuration selected in the Settings will be used:
+If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema configuration selected in the Settings for the corresponding endpoint, under tabs "Custom Endpoints" or "Persisted Queries", will be used:
 
-![Default Schema Configuration in the Settings](../../images/settings-default-schema-configuration.png)
+![Default Schema Configuration in the Settings](../../images/settings-default-schema-configuration-for-custom-endpoints.png)
 
 Opening the schema configuration's permalink in the browser will show its contents (as long as the user is logged-in and the user role has access to it):
 
