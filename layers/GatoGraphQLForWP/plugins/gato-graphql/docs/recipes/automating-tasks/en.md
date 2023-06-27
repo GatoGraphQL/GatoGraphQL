@@ -25,3 +25,11 @@ Add to Recipe:
         Read:
             https://developer.wordpress.org/plugins/cron/scheduling-wp-cron-events/
             https://wordpress.org/plugins/wp-crontrol/#how%20do%20i%20create%20a%20new%20cron%20event%3F
+
+
+
+	Add recipe "Chaining Automation queries"
+		Because can execute against InternalGraphQLServer on hook, can chain hooks
+		Disable the recipe, to be re-enabled with v1.1
+
+	
