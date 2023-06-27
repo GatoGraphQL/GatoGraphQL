@@ -215,6 +215,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Bulk editing content', 'gato-graphql'),
             ],
             [
+                'send-a-notification-when-some-event-happens',
+                \__('Send a notification when some event happens', 'gato-graphql'),
+            ],
+            [
                 'interacting-with-3rd-party-service-apis',
                 \__('Interacting with 3rd-party service APIs', 'gato-graphql'),
             ],
