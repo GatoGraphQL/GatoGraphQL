@@ -231,8 +231,18 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Transforming data from an external API', 'gato-graphql'),
             ],
             [
-                'translating-all-posts-to-a-different-language',
-                \__('Translating all posts to a different language', 'gato-graphql'),
+                'translating-a-post-to-a-different-language',
+                \__('Translating a post to a different language', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                ],
+                [
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
+            ],
+            [
+                'translating-multiple-posts-to-a-different-language',
+                \__('Translating multiple posts to a different language', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                 ],
