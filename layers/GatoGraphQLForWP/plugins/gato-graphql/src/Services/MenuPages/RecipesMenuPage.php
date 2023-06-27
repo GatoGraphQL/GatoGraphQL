@@ -146,10 +146,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Searching WordPress data', 'gato-graphql'),
             ],
             [
-                'exposing-the-single-endpoint-for-private-use',
-                \__('Exposing the single endpoint for private use', 'gato-graphql'),
-            ],
-            [
                 'fetching-data-to-build-headless-sites',
                 \__('Fetching data to build headless sites', 'gato-graphql'),
             ],
