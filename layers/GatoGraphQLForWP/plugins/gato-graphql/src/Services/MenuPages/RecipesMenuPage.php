@@ -182,6 +182,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Adapting content', 'gato-graphql'),
             ],
             [
+                'validating-that-a-new-post-contains-a-mandatory-block',
+                \__('Validating that a new post contains a mandatory block', 'gato-graphql')
+            ],
+            [
                 'inserting-a-gutenberg-block-in-all-posts',
                 \__('Inserting a Gutenberg block in all posts', 'gato-graphql'),
                 [
