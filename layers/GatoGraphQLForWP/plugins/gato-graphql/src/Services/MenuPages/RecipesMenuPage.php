@@ -150,20 +150,24 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Complementing WP-CLI', 'gato-graphql'),
             ],
             [
+                'testing-an-endpoint-before-publishing-it',
+                \__('Testing an endpoint before publishing it', 'gato-graphql'),
+            ],
+            [
                 'managing-the-exposure-of-the-api',
                 \__('Managing the exposure of the API', 'gato-graphql'),
+            ],
+            [
+                'exposing-a-secure-public-api',
+                \__('Exposing a secure public API', 'gato-graphql'),
             ],
             [
                 'building-headless-sites',
                 \__('Building headless sites', 'gato-graphql'),
             ],
             [
-                'duplicate-a-blog-post',
-                \__('Duplicate a blog post', 'gato-graphql'),
-            ],
-            [
-                'sending-an-email-using-markdown',
-                \__('Sending an email using Markdown', 'gato-graphql'),
+                'boosting-the-performance-of-the-api',
+                \__('Boosting the performance of the API', 'gato-graphql'),
             ],
             [
                 'feeding-data-to-blocks-in-the-editor',
@@ -174,20 +178,16 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('DRY code for blocks in Javascript and PHP', 'gato-graphql'),
             ],
             [
-                'testing-an-endpoint-before-publishing-it',
-                \__('Testing an endpoint before publishing it', 'gato-graphql'),
-            ],
-            [
-                'exposing-a-secure-public-api',
-                \__('Exposing a secure public API', 'gato-graphql'),
+                'duplicate-a-blog-post',
+                \__('Duplicate a blog post', 'gato-graphql'),
             ],
             [
                 'customizing-content-for-different-users',
                 \__('Customizing content for different users', 'gato-graphql'),
             ],
             [
-                'boosting-the-performance-of-the-api',
-                \__('Boosting the performance of the API', 'gato-graphql'),
+                'sending-an-email-using-markdown',
+                \__('Sending an email using Markdown', 'gato-graphql'),
             ],
             [
                 'site-migrations',
