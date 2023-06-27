@@ -29,3 +29,26 @@ PRO:
     Then copy again to gatographql.com
 Contents from:
     src/guides/config/removing-types-from-the-schema.md
+
+
+
+## Exposed the `__schema` introspection field in the ACLs
+
+The `__schema` field is now exposed in the Access Control Lists:
+
+![__schema field in the Access Control List](../../images/releases/v09/schema-introspection-field-in-acl.png)
+
+This allows us to disable introspection for the single endpoint or custom endpoints using access control rules, such as:
+
+- Disable always
+- Disable for logged-out users
+- Disable for users with or without a certain role or capability
+
+![Disabling the __schema field in the Access Control List](../../images/releases/v09/disabling-schema-introspection-field-in-acl.png)
+
+For instance, opening the GraphiQL client on a custom endpoint after disabling access to `__schema` we get an error:
+
+> Uncaught (in promise) Error: Invalid or incomplete introspection result. Ensure that you are passing "data" property of introspection response and no "errors" was returned alongside: { __schema: null }
+
+![GraphiQL error from disabled introspection](../../images/releases/v09/introspection-disabled-graphiql-error.png)
+

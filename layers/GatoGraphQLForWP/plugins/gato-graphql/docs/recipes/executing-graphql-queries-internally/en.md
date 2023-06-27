@@ -1,2 +1,0 @@
-# Executing GraphQL queries internally
-

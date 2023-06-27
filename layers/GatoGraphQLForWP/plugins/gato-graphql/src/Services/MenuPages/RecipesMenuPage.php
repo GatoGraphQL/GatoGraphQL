@@ -146,44 +146,48 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Searching WordPress data', 'gato-graphql'),
             ],
             [
-                'exposing-the-single-endpoint-for-private-use',
-                \__('Exposing the single endpoint for private use', 'gato-graphql'),
-            ],
-            [
-                'fetching-data-to-build-headless-sites',
-                \__('Fetching data to build headless sites', 'gato-graphql'),
-            ],
-            [
                 'complementing-wp-cli',
                 \__('Complementing WP-CLI', 'gato-graphql'),
             ],
             [
-                'exposing-safe-persisted-queries',
-                \__('Exposing safe persisted queries', 'gato-graphql'),
+                'testing-an-endpoint-before-publishing-it',
+                \__('Testing an endpoint before publishing it', 'gato-graphql'),
             ],
             [
-                'feeding-data-to-blocks-in-the-editor',
-                \__('Feeding data to blocks in the editor', 'gato-graphql'),
-            ],
-            [
-                'executing-graphql-queries-internally',
-                \__('Executing GraphQL queries internally', 'gato-graphql'),
-            ],
-            [
-                'defining-custom-private-endpoints',
-                \__('Defining custom private endpoints', 'gato-graphql'),
+                'managing-the-exposure-of-the-api',
+                \__('Managing the exposure of the API', 'gato-graphql'),
             ],
             [
                 'exposing-a-secure-public-api',
                 \__('Exposing a secure public API', 'gato-graphql'),
             ],
             [
-                'customizing-content-for-different-users',
-                \__('Customizing content for different users', 'gato-graphql'),
+                'building-headless-sites',
+                \__('Building headless sites', 'gato-graphql'),
             ],
             [
                 'boosting-the-performance-of-the-api',
                 \__('Boosting the performance of the API', 'gato-graphql'),
+            ],
+            [
+                'feeding-data-to-blocks-in-the-editor',
+                \__('Feeding data to blocks in the editor', 'gato-graphql'),
+            ],
+            [
+                'dry-code-for-blocks-in-javascript-and-php',
+                \__('DRY code for blocks in Javascript and PHP', 'gato-graphql'),
+            ],
+            [
+                'duplicate-a-blog-post',
+                \__('Duplicate a blog post', 'gato-graphql'),
+            ],
+            [
+                'customizing-content-for-different-users',
+                \__('Customizing content for different users', 'gato-graphql'),
+            ],
+            [
+                'sending-an-email-using-markdown',
+                \__('Sending an email using Markdown', 'gato-graphql'),
             ],
             [
                 'site-migrations',
@@ -198,8 +202,16 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'fixing-content-issues',
-                \__('Fixing content issues', 'gato-graphql'),
+                'search-and-replace-content',
+                \__('Search and replace content', 'gato-graphql'),
+            ],
+            [
+                'adapting-content',
+                \__('Adapting content', 'gato-graphql'),
+            ],
+            [
+                'validating-that-a-new-post-contains-a-mandatory-block',
+                \__('Validating that a new post contains a mandatory block', 'gato-graphql')
             ],
             [
                 'inserting-a-gutenberg-block-in-all-posts',
@@ -235,6 +247,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Bulk editing content', 'gato-graphql'),
             ],
             [
+                'send-a-notification-when-some-event-happens',
+                \__('Send a notification when some event happens', 'gato-graphql'),
+            ],
+            [
                 'interacting-with-3rd-party-service-apis',
                 \__('Interacting with 3rd-party service APIs', 'gato-graphql'),
             ],
@@ -251,8 +267,18 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Transforming data from an external API', 'gato-graphql'),
             ],
             [
-                'translating-all-posts-to-a-different-language',
-                \__('Translating all posts to a different language', 'gato-graphql'),
+                'translating-a-post-to-a-different-language',
+                \__('Translating a post to a different language', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                ],
+                [
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
+            ],
+            [
+                'translating-multiple-posts-to-a-different-language',
+                \__('Translating multiple posts to a different language', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                 ],
