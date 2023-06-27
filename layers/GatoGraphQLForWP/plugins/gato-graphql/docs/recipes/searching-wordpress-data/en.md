@@ -123,3 +123,10 @@ query {
   }
 }
 ```
+
+---
+
+Also use:
+
+Add recipe with "Representing a date with some specific format":
+  layers/GatoGraphQLForWP/phpunit-packages/gato-graphql-pro/tests/Unit/Faker/fixture-data-transformations/dates.gql
