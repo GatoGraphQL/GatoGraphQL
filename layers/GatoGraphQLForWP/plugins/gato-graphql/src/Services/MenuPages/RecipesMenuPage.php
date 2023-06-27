@@ -154,10 +154,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Feeding data to blocks in the editor', 'gato-graphql'),
             ],
             [
-                'defining-custom-private-endpoints',
-                \__('Defining custom private endpoints', 'gato-graphql'),
-            ],
-            [
                 'exposing-a-secure-public-api',
                 \__('Exposing a secure public API', 'gato-graphql'),
             ],
