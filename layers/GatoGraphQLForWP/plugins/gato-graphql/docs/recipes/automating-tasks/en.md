@@ -8,6 +8,16 @@ Internal GraphQL Server
 
 
 
+Add to recipe: "Using WP-Cron"
+    also: https://wordpress.org/plugins/wp-crontrol/
+
+Can be triggered using plugin "Code Snippets"
+    https://wordpress.org/plugins/code-snippets/
+eg:
+    add_action('post_updated', ...)
+Add to recipe!!!
+
+
 
 Add to Recipe:
     Add hook `do_action('gato_graphql_persisted_query', $persistedID)`

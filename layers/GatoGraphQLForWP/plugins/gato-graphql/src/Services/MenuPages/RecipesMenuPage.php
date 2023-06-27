@@ -162,6 +162,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Feeding data to blocks in the editor', 'gato-graphql'),
             ],
             [
+                'dry-code-for-blocks-in-javascript-and-php',
+                \__('DRY code for blocks in Javascript and PHP', 'gato-graphql'),
+            ],
+            [
                 'exposing-a-secure-public-api',
                 \__('Exposing a secure public API', 'gato-graphql'),
             ],
