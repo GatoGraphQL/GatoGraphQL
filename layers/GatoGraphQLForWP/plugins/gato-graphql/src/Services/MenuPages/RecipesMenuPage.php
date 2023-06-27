@@ -154,6 +154,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Duplicate a blog post', 'gato-graphql'),
             ],
             [
+                'sending-an-email-using-markdown',
+                \__('Sending an email using Markdown', 'gato-graphql'),
+            ],
+            [
                 'feeding-data-to-blocks-in-the-editor',
                 \__('Feeding data to blocks in the editor', 'gato-graphql'),
             ],
