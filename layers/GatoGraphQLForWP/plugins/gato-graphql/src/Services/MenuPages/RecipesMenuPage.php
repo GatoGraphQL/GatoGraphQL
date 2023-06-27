@@ -174,6 +174,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('DRY code for blocks in Javascript and PHP', 'gato-graphql'),
             ],
             [
+                'testing-an-endpoint-before-publishing-it',
+                \__('Testing an endpoint before publishing it', 'gato-graphql'),
+            ],
+            [
                 'exposing-a-secure-public-api',
                 \__('Exposing a secure public API', 'gato-graphql'),
             ],
