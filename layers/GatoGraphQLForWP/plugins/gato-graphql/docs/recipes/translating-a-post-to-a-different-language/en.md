@@ -1,3 +1,4 @@
 # Translating a post to a different language
 
-Complete!
+Add recipes:
+    graphql-queries/content-translation.gql
