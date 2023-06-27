@@ -150,10 +150,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Complementing WP-CLI', 'gato-graphql'),
             ],
             [
-                'exposing-safe-persisted-queries',
-                \__('Exposing safe persisted queries', 'gato-graphql'),
-            ],
-            [
                 'feeding-data-to-blocks-in-the-editor',
                 \__('Feeding data to blocks in the editor', 'gato-graphql'),
             ],
