@@ -42,7 +42,7 @@ This query, containing a variety of function fields and directives:
   objectAddEntry: _echo(value: {
     user: "Leo",
     contact: {
-      "email": "leo@test.com"
+      email: "leo@test.com"
     }
   })
     @objectAddEntry(key: "phone", value: "+0929094229", underPath: "contact")
@@ -61,7 +61,7 @@ This query, containing a variety of function fields and directives:
   arrayMerge: _echo(value: ["uno", "dos", "uno"]) @arrayMerge(with: ["tres", "cuatro", "dos", "cinco", "dos"])
   arrayDiff: _echo(value: ["uno", "dos"]) @arrayDiff (against: ["tres", "cuatro", "dos"])
   arrayFilter: _echo(value: ["uno", "dos", null, "tres", "", "dos", []]) @arrayFilter
-  objectKeepProperties: _echo(value: { user: "Leo", "email": "leo@test.com" } )
+  objectKeepProperties: _echo(value: { user: "Leo", email: "leo@test.com" } )
     @objectKeepProperties(
       keys: ["user"]
     )
@@ -128,7 +128,7 @@ This query, containing a variety of function fields and directives:
     "objectAddEntry": {
       "user": "Leo",
       "contact": {
-        "email": "leo@test.com",
+        email: "leo@test.com",
         "phone": "+0929094229",
         "methods": {
           "card": true
