@@ -150,6 +150,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Complementing WP-CLI', 'gato-graphql'),
             ],
             [
+                'duplicate-a-blog-post',
+                \__('Duplicate a blog post', 'gato-graphql'),
+            ],
+            [
                 'feeding-data-to-blocks-in-the-editor',
                 \__('Feeding data to blocks in the editor', 'gato-graphql'),
             ],
