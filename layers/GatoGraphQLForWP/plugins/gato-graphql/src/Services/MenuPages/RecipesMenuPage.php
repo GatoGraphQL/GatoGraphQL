@@ -178,8 +178,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'fixing-content-issues',
-                \__('Fixing content issues', 'gato-graphql'),
+                'adapting-content',
+                \__('Adapting content', 'gato-graphql'),
             ],
             [
                 'inserting-a-gutenberg-block-in-all-posts',

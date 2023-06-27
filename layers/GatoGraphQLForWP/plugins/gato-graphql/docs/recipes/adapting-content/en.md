@@ -1,4 +1,4 @@
-# Fixing content issues
+# Adapting content
 
 http => https
 URL without link => with link
