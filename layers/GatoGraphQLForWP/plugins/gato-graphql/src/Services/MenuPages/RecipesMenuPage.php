@@ -150,6 +150,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Complementing WP-CLI', 'gato-graphql'),
             ],
             [
+                'managing-the-exposure-of-the-api',
+                \__('Managing the exposure of the API', 'gato-graphql'),
+            ],
+            [
                 'building-headless-sites',
                 \__('Building headless sites', 'gato-graphql'),
             ],
