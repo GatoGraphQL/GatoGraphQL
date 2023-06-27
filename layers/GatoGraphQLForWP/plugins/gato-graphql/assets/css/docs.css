@@ -19,3 +19,11 @@ ul {
     width: auto;
     height: auto;
 }
+
+/**
+ * Can't use <h1> for the doc title, so use <h2> and make it bigger
+ * than the other <h2> in the doc
+ */
+h2.doc-title {
+    font-size: 1.5em;
+}

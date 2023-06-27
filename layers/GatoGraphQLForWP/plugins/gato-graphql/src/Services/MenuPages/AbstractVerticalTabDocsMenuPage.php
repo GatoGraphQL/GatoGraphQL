@@ -128,7 +128,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             $markdownContent .= sprintf(
                 <<<HTML
                     <div id="%s" class="%s" style="%s">
-                        <h2>%s</h2><hr/>
+                        <h2 class="doc-title">%s</h2><hr/>
                         %s
                     </div>
                 HTML,
