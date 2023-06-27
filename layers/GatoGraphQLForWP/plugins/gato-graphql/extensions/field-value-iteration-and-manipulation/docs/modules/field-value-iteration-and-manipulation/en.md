@@ -1,6 +1,12 @@
 # Field Value Iteration and Manipulation
 
-Addition of meta directives to the GraphQL schema, for iterating and manipulating the value elements of array and object fields.
+Addition of meta directives to the GraphQL schema, for iterating and manipulating the value elements of array and object fields:
+
+1. `@underArrayItem`
+2. `@underJSONObjectProperty`
+3. `@underEachArrayItem`
+4. `@underEachJSONObjectProperty`
+5. `@objectClone`
 
 <!-- ## Description
 
