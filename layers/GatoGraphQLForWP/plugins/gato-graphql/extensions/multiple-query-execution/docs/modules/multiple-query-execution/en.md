@@ -585,7 +585,7 @@ When a GraphQL query contains multiple operations in a Persisted Query, we must 
 
 For instance, to execute operation `GetPostsContainingString` in a Persisted Query with endpoint `/graphql-query/posts-with-user-name/`, we must invoke:
 
-```
+```http
 https://mysite.com/graphql-query/posts-with-user-name/?operationName=GetPostsContainingString
 ```
 
