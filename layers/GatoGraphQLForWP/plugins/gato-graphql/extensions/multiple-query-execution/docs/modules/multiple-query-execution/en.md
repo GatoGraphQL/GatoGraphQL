@@ -6,12 +6,26 @@ Multiple queries are combined together, and executed as a single operation, reus
 
 Multiple query execution combines the multiple queries into a single query, making sure they are executed in the same requested order. Operations can communicate state with each other via dynamic variables, which are computed only once but can be read multiple times throughout the document.
 
+```graphql
+query SomeQuery {
+  id @export(as: $rootID)
+}
+
+query AnotherQuery
+  @depends(on: "SomeQuery")
+{
+  _echo(value: $rootID )
+}
+```
+
 This feature offers several benefits:
 
 - It improves performance: Instead of executing a query against the GraphQL server, then wait for its response, and then use that result to execute another query, we can combine the queries together into one and execute them in a single request, thus avoiding the latency from the multiple HTTP connections.
 - It allows us to manage our GraphQL queries into atomic operations (or logical units) that depend on each other, and that can be conditionally executed based on the result from a previous operation.
 
 Multiple query execution is different from query batching, in which the GraphQL server also executes multiple queries in a single request, but those queries are merely executed one after the other, independently from each other.
+
+## Enabled directives
 
 When Multiple query execution is enabled, the following directives are made available in the GraphQL schema:
 
@@ -108,6 +122,64 @@ query FindPosts @depends(on: "GetLoggedInUserName") {
   posts(filter: { search: $loggedInUserName }) {
     id
   }
+}
+```
+
+## `@deferredExport`
+
+When the **Multi-Field Directives** feature is enabled and we export the value of multiple fields into a dictionary, use `@deferredExport` instead of `@export` to guarantee that all directives from each involved field have been executed before exporting the field's value.
+
+For instance, in this query, the first field has directive `@strUpperCase` applied to it, and the second has `@strTitleCase`. When executing `@deferredExport`, the exported value will have these directives applied:
+
+```graphql
+query One {
+  id @strUpperCase # Will be exported as "ROOT"
+  again: id @strTitleCase # Will be exported as "Root"
+    @deferredExport(as: "props", affectAdditionalFieldsUnderPos: [1])
+}
+
+query Two @depends(on: "One") {
+  mirrorProps: _echo(value: $props)
+}
+```
+
+Producing:
+
+```json
+{
+  "data": {
+    "id": "ROOT",
+    "again": "Root",
+    "mirrorProps": {
+      "id": "ROOT",
+      "again": "Root"
+    }
+  }
+}
+```
+
+## `@skip` and `@include` (in operations)
+
+When Multiple Query Execution is enabled, directives `@include` and `@skip` are also available as operation directives, and these can be used to conditionally execute an operation if it satisfies some condition.
+
+For instance, in this query, operation `CheckIfPostExists` exports a dynamic variable `$postExists` and, only if its value is `true`, will mutation `ExecuteOnlyIfPostExists` be executed:
+
+```graphql
+query CheckIfPostExists($id: ID!) {
+  # Initialize the dynamic variable to `false`
+  postExists: _echo(value: false) @export(as: "postExists")
+
+  post(by: { id: $id }) {
+    # Found the Post => Set dynamic variable to `true`
+    postExists: _echo(value: true) @export(as: "postExists")
+  }
+}
+
+mutation ExecuteOnlyIfPostExists
+  @depends(on: "CheckIfPostExists")
+  @include(if: $postExists)
+{
+  # Do something...
 }
 ```
 
@@ -483,31 +555,6 @@ This query:
 "List Block"
 ```
 
-## Conditional execution of operations
-
-When Multiple Query Execution is enabled, directives `@include` and `@skip` are also available as operation directives, and these can be used to conditionally execute an operation if it satisfies some condition.
-
-For instance, in this query, operation `CheckIfPostExists` exports a dynamic variable `$postExists` and, only if its value is `true`, will mutation `ExecuteOnlyIfPostExists` be executed:
-
-```graphql
-query CheckIfPostExists($id: ID!) {
-  # Initialize the dynamic variable to `false`
-  postExists: _echo(value: false) @export(as: "postExists")
-
-  post(by: { id: $id }) {
-    # Found the Post => Set dynamic variable to `true`
-    postExists: _echo(value: true) @export(as: "postExists")
-  }
-}
-
-mutation ExecuteOnlyIfPostExists
-  @depends(on: "CheckIfPostExists")
-  @include(if: $postExists)
-{
-  # Do something...
-}
-```
-
 ## Directive execution order
 
 If there are other directives before `@export`, the exported value will reflect the modifications by those previous directives.
@@ -542,39 +589,6 @@ Producing:
     "again": "ROOT",
     "mirrorID": "root",
     "mirrorAgain": "ROOT"
-  }
-}
-```
-
-## `@deferredExport` with Multi-Field Directives
-
-When the **Multi-Field Directives** feature is enabled and we export the value of multiple fields into a dictionary, use `@deferredExport` instead of `@export` to guarantee that all directives from each involved field have been executed before exporting the field's value.
-
-For instance, in this query, the first field has directive `@strUpperCase` applied to it, and the second has `@strTitleCase`. When executing `@deferredExport`, the exported value will have these directives applied:
-
-```graphql
-query One {
-  id @strUpperCase # Will be exported as "ROOT"
-  again: id @strTitleCase # Will be exported as "Root"
-    @deferredExport(as: "props", affectAdditionalFieldsUnderPos: [1])
-}
-
-query Two @depends(on: "One") {
-  mirrorProps: _echo(value: $props)
-}
-```
-
-Producing:
-
-```json
-{
-  "data": {
-    "id": "ROOT",
-    "again": "Root",
-    "mirrorProps": {
-      "id": "ROOT",
-      "again": "Root"
-    }
   }
 }
 ```
