@@ -39,7 +39,7 @@ jobs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
 
     main:
-        name: Scope the code from ${{ matrix.pluginConfig.zip_file }} (via PHP-Scoper), and execute tests
+        name: Scope the code from ${{ matrix.pluginConfig.plugin_slug }} (via PHP-Scoper), and execute tests
         needs: provide_data
         runs-on: ubuntu-latest
         strategy:

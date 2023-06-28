@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
+use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
@@ -31,7 +32,7 @@ final class PluginConfigEntriesJsonProvider
          */
         $requiredEntries = [
             'path',
-            'zip_file',
+            'plugin_slug',
             'main_file',
             'dist_repo_organization',
             'dist_repo_name',
@@ -77,6 +78,13 @@ final class PluginConfigEntriesJsonProvider
                     ));
                 }
             }
+
+            // The .zip filename is the plugin slug + the version
+            $entryConfig['zip_file'] ??= sprintf(
+                '%s-%s',
+                $entryConfig['plugin_slug'],
+                $entryConfig['version'] ??= MonorepoMetadata::VERSION
+            );
 
             // If it doens't specify a branch, use "master" by default
             $entryConfig['dist_repo_branch'] ??= 'master';

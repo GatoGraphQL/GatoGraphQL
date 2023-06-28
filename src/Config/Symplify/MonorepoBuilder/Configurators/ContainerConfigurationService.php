@@ -227,7 +227,8 @@ class ContainerConfigurationService
         $services
             ->set(NeonPrinter::class) // Required to inject into PHPStanNeonContentProvider
             ->load('PoP\\PoP\\Config\\', $this->rootDirectory . '/src/Config/*')
-            ->load('PoP\\PoP\\Extensions\\', $this->rootDirectory . '/src/Extensions/*');
+            ->load('PoP\\PoP\\Extensions\\', $this->rootDirectory . '/src/Extensions/*')
+            ->load('PoP\\PoP\\Monorepo\\', $this->rootDirectory . '/src/Monorepo/*');
     }
 
     protected function setReleaseWorkerServices(ServicesConfigurator $services): void
