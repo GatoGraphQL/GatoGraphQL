@@ -80,7 +80,7 @@ final class PluginConfigEntriesJsonProvider
             }
 
             // Attach the version to the generated .zip filename
-            $entryConfig['zip_file'] .= '-' . MonorepoMetadata::VERSION;
+            $entryConfig['version'] ??= MonorepoMetadata::VERSION;
 
             // If it doens't specify a branch, use "master" by default
             $entryConfig['dist_repo_branch'] ??= 'master';

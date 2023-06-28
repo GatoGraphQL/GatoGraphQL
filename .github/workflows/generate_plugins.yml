@@ -201,13 +201,13 @@ jobs:
     ###########################################################################
 
             -   name: Create plugin as zip
-                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }}.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* vendor/**/phpstan.neon vendor/**/phpstan.neon.dist vendor/**/composer.json vendor/**/README.md vendor/**/LICENSE.md tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
+                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }}-${{ matrix.pluginConfig.version }}.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* vendor/**/phpstan.neon vendor/**/phpstan.neon.dist vendor/**/composer.json vendor/**/README.md vendor/**/LICENSE.md tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Uncompress plugin zip contents into new folder
                 uses: montudor/action-zip@v0.1.0
                 with:
-                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}.zip -d build/dist-plugin/${{ matrix.pluginConfig.zip_file }}
+                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}-${{ matrix.pluginConfig.version }}.zip -d build/dist-plugin/${{ matrix.pluginConfig.zip_file }}
 
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v3
@@ -224,7 +224,7 @@ jobs:
             -   name: Upload to release
                 uses: JasonEtco/upload-to-release@master
                 with:
-                    args: build/${{ matrix.pluginConfig.zip_file }}.zip application/zip
+                    args: build/${{ matrix.pluginConfig.zip_file }}-${{ matrix.pluginConfig.version }}.zip application/zip
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 if: github.event_name == 'release'
