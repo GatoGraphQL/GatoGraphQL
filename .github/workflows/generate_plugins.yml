@@ -212,7 +212,7 @@ jobs:
             -   name: Upload plugin zip as artifact
                 uses: actions/upload-artifact@v3
                 with:
-                    name: ${{ matrix.pluginConfig.zip_file }}
+                    name: ${{ matrix.pluginConfig.zip_file }}-${{ matrix.pluginConfig.version }}
                     path: build/dist-plugin/
                     retention-days: ${{ needs.provide_data.outputs.retention_days }}
 
