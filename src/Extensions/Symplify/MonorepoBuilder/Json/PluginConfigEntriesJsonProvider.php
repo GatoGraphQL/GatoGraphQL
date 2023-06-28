@@ -95,8 +95,8 @@ final class PluginConfigEntriesJsonProvider
             // Hacks to be executed on the plugin
             $entryConfig['bashScripts'] ??= [];
 
-            // Version to attach to the generated .zip file
-            $entryConfig['version'] ??= MonorepoMetadata::VERSION;
+            // Attach the version to the generated .zip filename
+            $entryConfig['zip_file'] .= '-' . MonorepoMetadata::VERSION;
 
             $pluginConfigEntries[] = $entryConfig;
         }
