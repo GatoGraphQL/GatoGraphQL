@@ -32,7 +32,7 @@ final class PluginConfigEntriesJsonProvider
          */
         $requiredEntries = [
             'path',
-            'zip_file',
+            'plugin_slug',
             'main_file',
             'dist_repo_organization',
             'dist_repo_name',

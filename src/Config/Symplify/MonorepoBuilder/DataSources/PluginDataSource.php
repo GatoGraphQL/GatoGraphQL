@@ -20,7 +20,7 @@ class PluginDataSource
             // Gato GraphQL
             [
                 'path' => 'layers/GatoGraphQLForWP/plugins/gato-graphql',
-                'zip_file' => 'gato-graphql',
+                'plugin_slug' => 'gato-graphql',
                 'main_file' => 'gato-graphql.php',
                 'exclude_files' => implode(' ', [
                     'dev-helpers/\*',
@@ -50,7 +50,7 @@ class PluginDataSource
             // Gato GraphQL - Testing Schema <= To run integration tests
             [
                 'path' => 'layers/GatoGraphQLForWP/plugins/testing-schema',
-                'zip_file' => 'gato-graphql-testing-schema',
+                'plugin_slug' => 'gato-graphql-testing-schema',
                 'main_file' => 'gato-graphql-testing-schema.php',
                 'exclude_files' => implode(' ', [
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
@@ -63,7 +63,7 @@ class PluginDataSource
             // Gato GraphQL - Testing <= To run integration tests with InstaWP
             [
                 'path' => 'layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing',
-                'zip_file' => 'gato-graphql-testing',
+                'plugin_slug' => 'gato-graphql-testing',
                 'main_file' => 'gato-graphql-testing.php',
                 'dist_repo_organization' => 'GatoGraphQL',
                 'dist_repo_name' => 'gato-graphql-testing-dist',
@@ -74,7 +74,7 @@ class PluginDataSource
             // @todo Re-enable when the demo is actually complete
             // [
             //     'path' => 'layers/GatoGraphQLForWP/plugins/extension-demo',
-            //     'zip_file' => 'gato-graphql-extension-demo',
+            //     'plugin_slug' => 'gato-graphql-extension-demo',
             //     'main_file' => 'gato-graphql-extension-demo.php',
             //     'exclude_files' => 'docs/images/\*',
             //     'dist_repo_organization' => 'GatoGraphQL',
