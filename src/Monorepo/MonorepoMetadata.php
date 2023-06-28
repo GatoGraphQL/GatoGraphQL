@@ -9,5 +9,5 @@ final class MonorepoMetadata
     /**
      * Modify this const when bumping the code to a new version
      */
-    final private const VERSION = '1.0.0-dev';
+    final public const VERSION = '1.0.0-dev';
 }
