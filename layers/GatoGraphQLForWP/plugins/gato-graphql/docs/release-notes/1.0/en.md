@@ -902,20 +902,23 @@ In order to enable or disable multi-field directives in the schema for some spec
 
 ## Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
 
-Prior to v1.0, the following mutation fields received a `content` argument of type `String` (to create/update the content on custom posts or comments):
+Prior to v1.0, the following mutation fields received a `content` argument of type `String`, to create/update the content on custom posts:
 
 - `Comment.reply`
-- `CustomPost.addComment`
 - `CustomPost.update`
-- `Root.addCommentToCustomPost`
 - `Root.createPost`
 - `Root.updatePost`
 
-This `content` argument has now been renamed to `contentAs`, and converted into a ["oneof" input object](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/implicit-features/oneof-input-object/en.md) that contains a single property: `html: HTML!`.
+Similarly, these mutation fields received a `comment` argument of type `String`:
+
+- `CustomPost.addComment`
+- `Root.addCommentToCustomPost`
+
+These `content` and `comment` arguments have now been renamed to `contentAs` and `commentAs` respectively, and converted into a ["oneof" input object](https://github.com/leoloso/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gato-graphql/docs/implicit-features/oneof-input-object/en.md) that contains a single property: `html: HTML!`.
 
 This is to avoid potential breaking changes in the future, when it becomes possible to also create and update custom posts and comments by passing their `Block` data (instead of the single blob of HTML data).
 
-When that feature is supported, the `contentAs` oneof input object will be added a second property: `blocks: [BlockUnion!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
+When that feature is supported, the `contentAs` and `commentAs` oneof input objects will be added a second property: `blocks: [BlockUnion!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
 
 ## The Settings page has been re-designed
 
@@ -1343,7 +1346,7 @@ The followng mutations:
 - `Root.createPost`
 - `Root.updatePost`
 
-must be updated, passing a "oneof" input object for the `content` argument.
+must be updated, passing a "oneof" input object for the content argument (either `content` or `comment`).
 
 For instance, this GraphQL query:
 
