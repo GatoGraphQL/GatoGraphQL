@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
+use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
@@ -93,6 +94,9 @@ final class PluginConfigEntriesJsonProvider
 
             // Hacks to be executed on the plugin
             $entryConfig['bashScripts'] ??= [];
+
+            // Version to attach to the generated .zip file
+            $entryConfig['version'] ??= MonorepoMetadata::VERSION;
 
             $pluginConfigEntries[] = $entryConfig;
         }
