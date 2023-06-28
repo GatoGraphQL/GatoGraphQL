@@ -1,2 +1,0 @@
-# Duplicate a blog post
-

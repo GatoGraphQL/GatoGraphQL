@@ -178,8 +178,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('DRY code for blocks in Javascript and PHP', 'gato-graphql'),
             ],
             [
-                'duplicate-a-blog-post',
-                \__('Duplicate a blog post', 'gato-graphql'),
+                'duplicating-a-blog-post',
+                \__('Duplicating a blog post', 'gato-graphql'),
             ],
             [
                 'customizing-content-for-different-users',
@@ -202,8 +202,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'search-and-replace-content',
-                \__('Search and replace content', 'gato-graphql'),
+                'content-search-and-replace',
+                \__('Content search and replace', 'gato-graphql'),
             ],
             [
                 'adapting-content',
@@ -247,8 +247,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Bulk editing content', 'gato-graphql'),
             ],
             [
-                'send-a-notification-when-some-event-happens',
-                \__('Send a notification when some event happens', 'gato-graphql'),
+                'sending-a-notification-when-some-event-happens',
+                \__('Sending a notification when some event happens', 'gato-graphql'),
             ],
             [
                 'interacting-with-3rd-party-service-apis',
@@ -267,8 +267,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Transforming data from an external API', 'gato-graphql'),
             ],
             [
-                'translating-a-post-to-a-different-language',
-                \__('Translating a post to a different language', 'gato-graphql'),
+                'translating-block-content-in-a-post-to-a-different-language',
+                \__('Translating block content in a post to a different language', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                 ],
@@ -277,8 +277,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'translating-multiple-posts-to-a-different-language',
-                \__('Translating multiple posts to a different language', 'gato-graphql'),
+                'bulk-translating-block-content-in-multiple-posts-to-a-different-language',
+                \__('Bulk translating block content in multiple posts to a different language', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                 ],
