@@ -341,20 +341,20 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * to display the release notes on the modal window
          */
         $aboutMenuPage = $this->getReleaseNoteOrAboutMenuPage();
-        if (App::query('page') === $aboutMenuPage->getScreenID()) {
-            if (
-                $hookName = \add_submenu_page(
-                    $menuName,
-                    __('About', 'gato-graphql'),
-                    __('About', 'gato-graphql'),
-                    'manage_options',
-                    $aboutMenuPage->getScreenID(),
-                    [$aboutMenuPage, 'print']
-                )
-            ) {
-                $aboutMenuPage->setHookName($hookName);
-            }
+        // if (App::query('page') === $aboutMenuPage->getScreenID()) {
+        if (
+            $hookName = \add_submenu_page(
+                $menuName,
+                __('About', 'gato-graphql'),
+                __('About', 'gato-graphql'),
+                'manage_options',
+                $aboutMenuPage->getScreenID(),
+                [$aboutMenuPage, 'print']
+            )
+        ) {
+            $aboutMenuPage->setHookName($hookName);
         }
+        // }
     }
 
     /**
