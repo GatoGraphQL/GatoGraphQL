@@ -8,7 +8,7 @@ Gato GraphQL is a free and open source plugin for WordPress, augmented with exte
 
 ## Support
 
-...
+@todo Complete Support page!
 
 ## Release Notes
 
