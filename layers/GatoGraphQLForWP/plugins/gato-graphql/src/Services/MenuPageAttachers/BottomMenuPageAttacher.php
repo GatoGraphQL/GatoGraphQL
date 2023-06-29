@@ -317,6 +317,24 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
+        $recipesMenuPage = $this->getRecipesMenuPage();
+        /**
+         * @var callable
+         */
+        $callable = [$recipesMenuPage, 'print'];
+        if (
+            $hookName = \add_submenu_page(
+                $menuName,
+                __('Recipes', 'gato-graphql'),
+                __('Recipes', 'gato-graphql'),
+                $schemaEditorAccessCapability,
+                $recipesMenuPage->getScreenID(),
+                $callable
+            )
+        ) {
+            $recipesMenuPage->setHookName($hookName);
+        }
+
         /**
          * Only show the About page when actually loading it
          * So it doesn't appear on the menu, but it's still available
@@ -336,24 +354,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             ) {
                 $aboutMenuPage->setHookName($hookName);
             }
-        }
-
-        $recipesMenuPage = $this->getRecipesMenuPage();
-        /**
-         * @var callable
-         */
-        $callable = [$recipesMenuPage, 'print'];
-        if (
-            $hookName = \add_submenu_page(
-                $menuName,
-                __('Recipes', 'gato-graphql'),
-                __('Recipes', 'gato-graphql'),
-                $schemaEditorAccessCapability,
-                $recipesMenuPage->getScreenID(),
-                $callable
-            )
-        ) {
-            $recipesMenuPage->setHookName($hookName);
         }
     }
 
