@@ -33,7 +33,6 @@ class PluginDataSource
                 'dist_repo_organization' => 'GatoGraphQL',
                 'dist_repo_name' => 'gato-graphql-dist',
                 'additional_rector_configs' => [
-                    $this->rootDir . '/config/rector/downgrade/gato-graphql/chained-rules/rector-cacheitem.php',
                     $this->rootDir . '/config/rector/downgrade/gato-graphql/chained-rules/rector-arrowfunction-mixedtype.php',
                     $this->rootDir . '/config/rector/downgrade/gato-graphql/chained-rules/rector-arrowfunction-uniontype.php',
                 ],
