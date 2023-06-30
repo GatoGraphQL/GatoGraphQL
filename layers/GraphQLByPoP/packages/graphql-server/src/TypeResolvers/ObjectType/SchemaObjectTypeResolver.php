@@ -18,8 +18,12 @@ class SchemaObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
     }
     final protected function getSchemaObjectTypeDataLoader(): SchemaObjectTypeDataLoader
     {
-        /** @var SchemaObjectTypeDataLoader */
-        return $this->schemaObjectTypeDataLoader ??= $this->instanceManager->getInstance(SchemaObjectTypeDataLoader::class);
+        if ($this->schemaObjectTypeDataLoader === null) {
+            /** @var SchemaObjectTypeDataLoader */
+            $schemaObjectTypeDataLoader = $this->instanceManager->getInstance(SchemaObjectTypeDataLoader::class);
+            $this->schemaObjectTypeDataLoader = $schemaObjectTypeDataLoader;
+        }
+        return $this->schemaObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

@@ -18,8 +18,12 @@ abstract class AbstractObjectMutationPayloadObjectTypeResolver extends AbstractT
     }
     final protected function getObjectMutationPayloadObjectTypeDataLoader(): ObjectMutationPayloadObjectTypeDataLoader
     {
-        /** @var ObjectMutationPayloadObjectTypeDataLoader */
-        return $this->objectMutationPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(ObjectMutationPayloadObjectTypeDataLoader::class);
+        if ($this->objectMutationPayloadObjectTypeDataLoader === null) {
+            /** @var ObjectMutationPayloadObjectTypeDataLoader */
+            $objectMutationPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(ObjectMutationPayloadObjectTypeDataLoader::class);
+            $this->objectMutationPayloadObjectTypeDataLoader = $objectMutationPayloadObjectTypeDataLoader;
+        }
+        return $this->objectMutationPayloadObjectTypeDataLoader;
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

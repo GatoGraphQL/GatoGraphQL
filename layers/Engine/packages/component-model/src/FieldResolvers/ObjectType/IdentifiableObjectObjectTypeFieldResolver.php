@@ -22,8 +22,12 @@ class IdentifiableObjectObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     }
     final protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver
     {
-        /** @var IdentifiableObjectInterfaceTypeFieldResolver */
-        return $this->identifiableObjectInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(IdentifiableObjectInterfaceTypeFieldResolver::class);
+        if ($this->identifiableObjectInterfaceTypeFieldResolver === null) {
+            /** @var IdentifiableObjectInterfaceTypeFieldResolver */
+            $identifiableObjectInterfaceTypeFieldResolver = $this->instanceManager->getInstance(IdentifiableObjectInterfaceTypeFieldResolver::class);
+            $this->identifiableObjectInterfaceTypeFieldResolver = $identifiableObjectInterfaceTypeFieldResolver;
+        }
+        return $this->identifiableObjectInterfaceTypeFieldResolver;
     }
 
     /**

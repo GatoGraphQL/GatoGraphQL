@@ -20,8 +20,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getCMSRoutingStateService(): CMSRoutingStateServiceInterface
     {
-        /** @var CMSRoutingStateServiceInterface */
-        return $this->cmsRoutingStateService ??= $this->instanceManager->getInstance(CMSRoutingStateServiceInterface::class);
+        if ($this->cmsRoutingStateService === null) {
+            /** @var CMSRoutingStateServiceInterface */
+            $cmsRoutingStateService = $this->instanceManager->getInstance(CMSRoutingStateServiceInterface::class);
+            $this->cmsRoutingStateService = $cmsRoutingStateService;
+        }
+        return $this->cmsRoutingStateService;
     }
 
     /**

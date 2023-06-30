@@ -20,8 +20,12 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     }
     final protected function getPageObjectTypeDataLoader(): PageObjectTypeDataLoader
     {
-        /** @var PageObjectTypeDataLoader */
-        return $this->pageObjectTypeDataLoader ??= $this->instanceManager->getInstance(PageObjectTypeDataLoader::class);
+        if ($this->pageObjectTypeDataLoader === null) {
+            /** @var PageObjectTypeDataLoader */
+            $pageObjectTypeDataLoader = $this->instanceManager->getInstance(PageObjectTypeDataLoader::class);
+            $this->pageObjectTypeDataLoader = $pageObjectTypeDataLoader;
+        }
+        return $this->pageObjectTypeDataLoader;
     }
     final public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
     {
@@ -29,8 +33,12 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
     }
     final protected function getPageTypeAPI(): PageTypeAPIInterface
     {
-        /** @var PageTypeAPIInterface */
-        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
+        if ($this->pageTypeAPI === null) {
+            /** @var PageTypeAPIInterface */
+            $pageTypeAPI = $this->instanceManager->getInstance(PageTypeAPIInterface::class);
+            $this->pageTypeAPI = $pageTypeAPI;
+        }
+        return $this->pageTypeAPI;
     }
 
     public function getTypeName(): string

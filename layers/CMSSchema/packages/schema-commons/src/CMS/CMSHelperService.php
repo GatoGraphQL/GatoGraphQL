@@ -19,8 +19,12 @@ class CMSHelperService implements CMSHelperServiceInterface
     }
     final protected function getCMSService(): CMSServiceInterface
     {
-        /** @var CMSServiceInterface */
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+        if ($this->cmsService === null) {
+            /** @var CMSServiceInterface */
+            $cmsService = $this->instanceManager->getInstance(CMSServiceInterface::class);
+            $this->cmsService = $cmsService;
+        }
+        return $this->cmsService;
     }
 
     public function getLocalURLPath(string $url): ?string

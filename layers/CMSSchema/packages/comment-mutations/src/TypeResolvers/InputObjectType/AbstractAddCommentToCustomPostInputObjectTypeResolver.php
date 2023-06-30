@@ -30,8 +30,12 @@ abstract class AbstractAddCommentToCustomPostInputObjectTypeResolver extends Abs
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
     {
@@ -39,8 +43,12 @@ abstract class AbstractAddCommentToCustomPostInputObjectTypeResolver extends Abs
     }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
-        /** @var EmailScalarTypeResolver */
-        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+        if ($this->emailScalarTypeResolver === null) {
+            /** @var EmailScalarTypeResolver */
+            $emailScalarTypeResolver = $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+            $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+        }
+        return $this->emailScalarTypeResolver;
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -48,8 +56,12 @@ abstract class AbstractAddCommentToCustomPostInputObjectTypeResolver extends Abs
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        /** @var URLScalarTypeResolver */
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -57,8 +69,12 @@ abstract class AbstractAddCommentToCustomPostInputObjectTypeResolver extends Abs
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setCommentAsOneofInputObjectTypeResolver(CommentAsOneofInputObjectTypeResolver $commentAsOneofInputObjectTypeResolver): void
     {
@@ -66,8 +82,12 @@ abstract class AbstractAddCommentToCustomPostInputObjectTypeResolver extends Abs
     }
     final protected function getCommentAsOneofInputObjectTypeResolver(): CommentAsOneofInputObjectTypeResolver
     {
-        /** @var CommentAsOneofInputObjectTypeResolver */
-        return $this->commentAsOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentAsOneofInputObjectTypeResolver::class);
+        if ($this->commentAsOneofInputObjectTypeResolver === null) {
+            /** @var CommentAsOneofInputObjectTypeResolver */
+            $commentAsOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CommentAsOneofInputObjectTypeResolver::class);
+            $this->commentAsOneofInputObjectTypeResolver = $commentAsOneofInputObjectTypeResolver;
+        }
+        return $this->commentAsOneofInputObjectTypeResolver;
     }
 
     /**

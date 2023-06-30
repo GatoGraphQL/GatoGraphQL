@@ -24,8 +24,12 @@ class EntryComponentInitializationHookSet extends AbstractHookSet
     }
     final protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
     {
-        /** @var RESTDataStructureFormatter */
-        return $this->restDataStructureFormatter ??= $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
+        if ($this->restDataStructureFormatter === null) {
+            /** @var RESTDataStructureFormatter */
+            $restDataStructureFormatter = $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
+            $this->restDataStructureFormatter = $restDataStructureFormatter;
+        }
+        return $this->restDataStructureFormatter;
     }
     final public function setApplicationStateFillerService(ApplicationStateFillerServiceInterface $applicationStateFillerService): void
     {
@@ -33,8 +37,12 @@ class EntryComponentInitializationHookSet extends AbstractHookSet
     }
     final protected function getApplicationStateFillerService(): ApplicationStateFillerServiceInterface
     {
-        /** @var ApplicationStateFillerServiceInterface */
-        return $this->applicationStateFillerService ??= $this->instanceManager->getInstance(ApplicationStateFillerServiceInterface::class);
+        if ($this->applicationStateFillerService === null) {
+            /** @var ApplicationStateFillerServiceInterface */
+            $applicationStateFillerService = $this->instanceManager->getInstance(ApplicationStateFillerServiceInterface::class);
+            $this->applicationStateFillerService = $applicationStateFillerService;
+        }
+        return $this->applicationStateFillerService;
     }
 
     protected function init(): void

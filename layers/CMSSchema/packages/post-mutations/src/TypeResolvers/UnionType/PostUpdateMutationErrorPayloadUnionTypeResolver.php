@@ -18,8 +18,12 @@ class PostUpdateMutationErrorPayloadUnionTypeResolver extends AbstractCustomPost
     }
     final protected function getPostUpdateMutationErrorPayloadUnionTypeDataLoader(): PostUpdateMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var PostUpdateMutationErrorPayloadUnionTypeDataLoader */
-        return $this->postUpdateMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(PostUpdateMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->postUpdateMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var PostUpdateMutationErrorPayloadUnionTypeDataLoader */
+            $postUpdateMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostUpdateMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->postUpdateMutationErrorPayloadUnionTypeDataLoader = $postUpdateMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->postUpdateMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

@@ -18,8 +18,12 @@ abstract class AbstractErrorPayloadUnionTypeResolver extends AbstractUnionTypeRe
     }
     final protected function getErrorPayloadInterfaceTypeResolver(): ErrorPayloadInterfaceTypeResolver
     {
-        /** @var ErrorPayloadInterfaceTypeResolver */
-        return $this->errorPayloadInterfaceTypeResolver ??= $this->instanceManager->getInstance(ErrorPayloadInterfaceTypeResolver::class);
+        if ($this->errorPayloadInterfaceTypeResolver === null) {
+            /** @var ErrorPayloadInterfaceTypeResolver */
+            $errorPayloadInterfaceTypeResolver = $this->instanceManager->getInstance(ErrorPayloadInterfaceTypeResolver::class);
+            $this->errorPayloadInterfaceTypeResolver = $errorPayloadInterfaceTypeResolver;
+        }
+        return $this->errorPayloadInterfaceTypeResolver;
     }
 
     /**

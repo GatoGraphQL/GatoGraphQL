@@ -18,8 +18,12 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
     }
     final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
     {
-        /** @var EndpointBlockHelpers */
-        return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+        if ($this->endpointBlockHelpers === null) {
+            /** @var EndpointBlockHelpers */
+            $endpointBlockHelpers = $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+            $this->endpointBlockHelpers = $endpointBlockHelpers;
+        }
+        return $this->endpointBlockHelpers;
     }
 
     /**

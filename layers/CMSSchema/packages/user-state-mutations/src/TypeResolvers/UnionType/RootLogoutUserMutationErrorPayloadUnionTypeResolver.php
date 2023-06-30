@@ -17,8 +17,12 @@ class RootLogoutUserMutationErrorPayloadUnionTypeResolver extends AbstractUserSt
     }
     final protected function getRootLogoutUserMutationErrorPayloadUnionTypeDataLoader(): RootLogoutUserMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var RootLogoutUserMutationErrorPayloadUnionTypeDataLoader */
-        return $this->rootLogoutUserMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(RootLogoutUserMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->rootLogoutUserMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootLogoutUserMutationErrorPayloadUnionTypeDataLoader */
+            $rootLogoutUserMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootLogoutUserMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootLogoutUserMutationErrorPayloadUnionTypeDataLoader = $rootLogoutUserMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->rootLogoutUserMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

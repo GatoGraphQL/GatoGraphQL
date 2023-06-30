@@ -24,8 +24,12 @@ class TagUnionTypeDataLoader extends UpstreamTagUnionTypeDataLoader
     }
     final protected function getQueryableTagListObjectTypeDataLoader(): QueryableTagListObjectTypeDataLoader
     {
-        /** @var QueryableTagListObjectTypeDataLoader */
-        return $this->queryableTagListObjectTypeDataLoader ??= $this->instanceManager->getInstance(QueryableTagListObjectTypeDataLoader::class);
+        if ($this->queryableTagListObjectTypeDataLoader === null) {
+            /** @var QueryableTagListObjectTypeDataLoader */
+            $queryableTagListObjectTypeDataLoader = $this->instanceManager->getInstance(QueryableTagListObjectTypeDataLoader::class);
+            $this->queryableTagListObjectTypeDataLoader = $queryableTagListObjectTypeDataLoader;
+        }
+        return $this->queryableTagListObjectTypeDataLoader;
     }
 
     /**

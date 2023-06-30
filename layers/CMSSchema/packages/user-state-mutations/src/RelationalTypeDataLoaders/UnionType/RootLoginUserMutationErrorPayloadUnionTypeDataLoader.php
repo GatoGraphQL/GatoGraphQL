@@ -18,8 +18,12 @@ class RootLoginUserMutationErrorPayloadUnionTypeDataLoader extends AbstractUnion
     }
     final protected function getRootLoginUserMutationErrorPayloadUnionTypeResolver(): RootLoginUserMutationErrorPayloadUnionTypeResolver
     {
-        /** @var RootLoginUserMutationErrorPayloadUnionTypeResolver */
-        return $this->rootLoginUserMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(RootLoginUserMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->rootLoginUserMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootLoginUserMutationErrorPayloadUnionTypeResolver */
+            $rootLoginUserMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootLoginUserMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootLoginUserMutationErrorPayloadUnionTypeResolver = $rootLoginUserMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->rootLoginUserMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

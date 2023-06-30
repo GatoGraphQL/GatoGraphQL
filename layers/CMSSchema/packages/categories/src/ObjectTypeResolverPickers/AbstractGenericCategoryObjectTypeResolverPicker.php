@@ -34,8 +34,12 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
     }
     final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
     {
-        /** @var GenericCategoryObjectTypeResolver */
-        return $this->genericCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
+        if ($this->genericCategoryObjectTypeResolver === null) {
+            /** @var GenericCategoryObjectTypeResolver */
+            $genericCategoryObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
+            $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
+        }
+        return $this->genericCategoryObjectTypeResolver;
     }
     final public function setQueryableCategoryTypeAPI(QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI): void
     {
@@ -43,8 +47,12 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
     }
     final protected function getQueryableCategoryTypeAPI(): QueryableCategoryTypeAPIInterface
     {
-        /** @var QueryableCategoryTypeAPIInterface */
-        return $this->queryableCategoryTypeAPI ??= $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
+        if ($this->queryableCategoryTypeAPI === null) {
+            /** @var QueryableCategoryTypeAPIInterface */
+            $queryableCategoryTypeAPI = $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
+            $this->queryableCategoryTypeAPI = $queryableCategoryTypeAPI;
+        }
+        return $this->queryableCategoryTypeAPI;
     }
     final public function setCategoryObjectTypeResolverPickerRegistry(CategoryObjectTypeResolverPickerRegistryInterface $categoryObjectTypeResolverPickerRegistry): void
     {
@@ -52,8 +60,12 @@ abstract class AbstractGenericCategoryObjectTypeResolverPicker extends AbstractO
     }
     final protected function getCategoryObjectTypeResolverPickerRegistry(): CategoryObjectTypeResolverPickerRegistryInterface
     {
-        /** @var CategoryObjectTypeResolverPickerRegistryInterface */
-        return $this->categoryObjectTypeResolverPickerRegistry ??= $this->instanceManager->getInstance(CategoryObjectTypeResolverPickerRegistryInterface::class);
+        if ($this->categoryObjectTypeResolverPickerRegistry === null) {
+            /** @var CategoryObjectTypeResolverPickerRegistryInterface */
+            $categoryObjectTypeResolverPickerRegistry = $this->instanceManager->getInstance(CategoryObjectTypeResolverPickerRegistryInterface::class);
+            $this->categoryObjectTypeResolverPickerRegistry = $categoryObjectTypeResolverPickerRegistry;
+        }
+        return $this->categoryObjectTypeResolverPickerRegistry;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

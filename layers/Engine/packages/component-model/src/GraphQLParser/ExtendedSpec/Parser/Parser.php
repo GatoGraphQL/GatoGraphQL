@@ -31,8 +31,12 @@ class Parser extends AbstractParser
     }
     final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
     {
-        /** @var MetaDirectiveRegistryInterface */
-        return $this->metaDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(MetaDirectiveRegistryInterface::class);
+        if ($this->metaDirectiveRegistry === null) {
+            /** @var MetaDirectiveRegistryInterface */
+            $metaDirectiveRegistry = InstanceManagerFacade::getInstance()->getInstance(MetaDirectiveRegistryInterface::class);
+            $this->metaDirectiveRegistry = $metaDirectiveRegistry;
+        }
+        return $this->metaDirectiveRegistry;
     }
     final public function setDynamicVariableDefinerDirectiveRegistry(DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry): void
     {
@@ -40,8 +44,12 @@ class Parser extends AbstractParser
     }
     final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
     {
-        /** @var DynamicVariableDefinerDirectiveRegistryInterface */
-        return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
+        if ($this->dynamicVariableDefinerDirectiveRegistry === null) {
+            /** @var DynamicVariableDefinerDirectiveRegistryInterface */
+            $dynamicVariableDefinerDirectiveRegistry = InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
+            $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
+        }
+        return $this->dynamicVariableDefinerDirectiveRegistry;
     }
     final public function setFieldDirectiveResolverRegistry(FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry): void
     {
@@ -49,8 +57,12 @@ class Parser extends AbstractParser
     }
     final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
     {
-        /** @var FieldDirectiveResolverRegistryInterface */
-        return $this->fieldDirectiveResolverRegistry ??= InstanceManagerFacade::getInstance()->getInstance(FieldDirectiveResolverRegistryInterface::class);
+        if ($this->fieldDirectiveResolverRegistry === null) {
+            /** @var FieldDirectiveResolverRegistryInterface */
+            $fieldDirectiveResolverRegistry = InstanceManagerFacade::getInstance()->getInstance(FieldDirectiveResolverRegistryInterface::class);
+            $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
+        }
+        return $this->fieldDirectiveResolverRegistry;
     }
 
     protected function isMetaDirective(string $directiveName): bool

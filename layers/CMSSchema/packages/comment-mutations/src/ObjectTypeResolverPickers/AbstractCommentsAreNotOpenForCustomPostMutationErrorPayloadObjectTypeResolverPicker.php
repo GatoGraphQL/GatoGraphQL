@@ -19,8 +19,12 @@ abstract class AbstractCommentsAreNotOpenForCustomPostMutationErrorPayloadObject
     }
     final protected function getCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver(): CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver
     {
-        /** @var CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver */
-        return $this->commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver::class);
+        if ($this->commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver === null) {
+            /** @var CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver */
+            $commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver::class);
+            $this->commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver = $commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver;
+        }
+        return $this->commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

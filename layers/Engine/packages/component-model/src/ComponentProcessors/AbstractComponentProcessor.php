@@ -65,8 +65,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        /** @var ComponentPathHelpersInterface */
-        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+        if ($this->componentPathHelpers === null) {
+            /** @var ComponentPathHelpersInterface */
+            $componentPathHelpers = $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+            $this->componentPathHelpers = $componentPathHelpers;
+        }
+        return $this->componentPathHelpers;
     }
     final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
     {
@@ -74,8 +78,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
-        /** @var ComponentFilterManagerInterface */
-        return $this->componentFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
+        if ($this->componentFilterManager === null) {
+            /** @var ComponentFilterManagerInterface */
+            $componentFilterManager = $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
+            $this->componentFilterManager = $componentFilterManager;
+        }
+        return $this->componentFilterManager;
     }
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
@@ -83,8 +91,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        /** @var ComponentProcessorManagerInterface */
-        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+        if ($this->componentProcessorManager === null) {
+            /** @var ComponentProcessorManagerInterface */
+            $componentProcessorManager = $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+            $this->componentProcessorManager = $componentProcessorManager;
+        }
+        return $this->componentProcessorManager;
     }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -92,8 +104,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getNameResolver(): NameResolverInterface
     {
-        /** @var NameResolverInterface */
-        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+        if ($this->nameResolver === null) {
+            /** @var NameResolverInterface */
+            $nameResolver = $this->instanceManager->getInstance(NameResolverInterface::class);
+            $this->nameResolver = $nameResolver;
+        }
+        return $this->nameResolver;
     }
     final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
     {
@@ -101,8 +117,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
-        /** @var DataloadHelperServiceInterface */
-        return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
+        if ($this->dataloadHelperService === null) {
+            /** @var DataloadHelperServiceInterface */
+            $dataloadHelperService = $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
+            $this->dataloadHelperService = $dataloadHelperService;
+        }
+        return $this->dataloadHelperService;
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
@@ -110,8 +130,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
-        /** @var RequestHelperServiceInterface */
-        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+        if ($this->requestHelperService === null) {
+            /** @var RequestHelperServiceInterface */
+            $requestHelperService = $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+            $this->requestHelperService = $requestHelperService;
+        }
+        return $this->requestHelperService;
     }
     final public function setComponentPaths(ComponentPaths $componentPaths): void
     {
@@ -119,8 +143,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentPaths(): ComponentPaths
     {
-        /** @var ComponentPaths */
-        return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
+        if ($this->componentPaths === null) {
+            /** @var ComponentPaths */
+            $componentPaths = $this->instanceManager->getInstance(ComponentPaths::class);
+            $this->componentPaths = $componentPaths;
+        }
+        return $this->componentPaths;
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
@@ -128,8 +156,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        /** @var ComponentHelpersInterface */
-        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+        if ($this->componentHelpers === null) {
+            /** @var ComponentHelpersInterface */
+            $componentHelpers = $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+            $this->componentHelpers = $componentHelpers;
+        }
+        return $this->componentHelpers;
     }
 
     /**

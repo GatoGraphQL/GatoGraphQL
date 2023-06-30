@@ -49,8 +49,12 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
-        /** @var MarkdownContentParserInterface */
-        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+        if ($this->markdownContentParser === null) {
+            /** @var MarkdownContentParserInterface */
+            $markdownContentParser = $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+            $this->markdownContentParser = $markdownContentParser;
+        }
+        return $this->markdownContentParser;
     }
     final public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
     {
@@ -58,8 +62,12 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     }
     final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
     {
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+        if ($this->graphQLSchemaConfigurationCustomPostType === null) {
+            /** @var GraphQLSchemaConfigurationCustomPostType */
+            $graphQLSchemaConfigurationCustomPostType = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+            $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
+        }
+        return $this->graphQLSchemaConfigurationCustomPostType;
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -67,8 +75,12 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
-        /** @var EndpointHelpers */
-        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+        if ($this->endpointHelpers === null) {
+            /** @var EndpointHelpers */
+            $endpointHelpers = $this->instanceManager->getInstance(EndpointHelpers::class);
+            $this->endpointHelpers = $endpointHelpers;
+        }
+        return $this->endpointHelpers;
     }
     final public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
     {
@@ -76,8 +88,12 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     }
     final protected function getGraphiQLMenuPage(): GraphiQLMenuPage
     {
-        /** @var GraphiQLMenuPage */
-        return $this->graphiQLMenuPage ??= $this->instanceManager->getInstance(GraphiQLMenuPage::class);
+        if ($this->graphiQLMenuPage === null) {
+            /** @var GraphiQLMenuPage */
+            $graphiQLMenuPage = $this->instanceManager->getInstance(GraphiQLMenuPage::class);
+            $this->graphiQLMenuPage = $graphiQLMenuPage;
+        }
+        return $this->graphiQLMenuPage;
     }
     final public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
     {
@@ -85,8 +101,12 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     }
     final protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
     {
-        /** @var GraphQLVoyagerMenuPage */
-        return $this->graphQLVoyagerMenuPage ??= $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
+        if ($this->graphQLVoyagerMenuPage === null) {
+            /** @var GraphQLVoyagerMenuPage */
+            $graphQLVoyagerMenuPage = $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
+            $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
+        }
+        return $this->graphQLVoyagerMenuPage;
     }
     final public function setRecipesMenuPage(RecipesMenuPage $recipesMenuPage): void
     {
@@ -94,8 +114,12 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     }
     final protected function getRecipesMenuPage(): RecipesMenuPage
     {
-        /** @var RecipesMenuPage */
-        return $this->recipesMenuPage ??= $this->instanceManager->getInstance(RecipesMenuPage::class);
+        if ($this->recipesMenuPage === null) {
+            /** @var RecipesMenuPage */
+            $recipesMenuPage = $this->instanceManager->getInstance(RecipesMenuPage::class);
+            $this->recipesMenuPage = $recipesMenuPage;
+        }
+        return $this->recipesMenuPage;
     }
 
     /**

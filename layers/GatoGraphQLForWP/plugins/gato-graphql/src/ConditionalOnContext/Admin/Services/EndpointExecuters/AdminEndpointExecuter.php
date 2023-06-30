@@ -27,8 +27,12 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
     final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
@@ -36,8 +40,12 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     }
     final protected function getQueryRetriever(): QueryRetrieverInterface
     {
-        /** @var QueryRetrieverInterface */
-        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+        if ($this->queryRetriever === null) {
+            /** @var QueryRetrieverInterface */
+            $queryRetriever = $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+            $this->queryRetriever = $queryRetriever;
+        }
+        return $this->queryRetriever;
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -45,8 +53,12 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
-        /** @var EndpointHelpers */
-        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+        if ($this->endpointHelpers === null) {
+            /** @var EndpointHelpers */
+            $endpointHelpers = $this->instanceManager->getInstance(EndpointHelpers::class);
+            $this->endpointHelpers = $endpointHelpers;
+        }
+        return $this->endpointHelpers;
     }
     final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
     {
@@ -54,8 +66,12 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     }
     final protected function getTemplateHelpers(): TemplateHelpersInterface
     {
-        /** @var TemplateHelpersInterface */
-        return $this->templateHelpers ??= $this->instanceManager->getInstance(TemplateHelpersInterface::class);
+        if ($this->templateHelpers === null) {
+            /** @var TemplateHelpersInterface */
+            $templateHelpers = $this->instanceManager->getInstance(TemplateHelpersInterface::class);
+            $this->templateHelpers = $templateHelpers;
+        }
+        return $this->templateHelpers;
     }
 
     /**

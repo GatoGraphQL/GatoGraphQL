@@ -19,8 +19,12 @@ abstract class AbstractPersistedQueryEndpointGraphQLQueryResolutionEndpointExecu
     }
     final protected function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
     {
-        /** @var GraphQLQueryPostTypeHelpers */
-        return $this->graphQLQueryPostTypeHelpers ??= $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
+        if ($this->graphQLQueryPostTypeHelpers === null) {
+            /** @var GraphQLQueryPostTypeHelpers */
+            $graphQLQueryPostTypeHelpers = $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
+            $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
+        }
+        return $this->graphQLQueryPostTypeHelpers;
     }
 
     /**

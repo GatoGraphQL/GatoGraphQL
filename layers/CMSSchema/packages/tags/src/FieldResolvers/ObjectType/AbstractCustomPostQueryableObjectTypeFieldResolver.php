@@ -38,8 +38,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -47,8 +51,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setTagPaginationInputObjectTypeResolver(TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver): void
     {
@@ -56,8 +64,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getTagPaginationInputObjectTypeResolver(): TagPaginationInputObjectTypeResolver
     {
-        /** @var TagPaginationInputObjectTypeResolver */
-        return $this->tagPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(TagPaginationInputObjectTypeResolver::class);
+        if ($this->tagPaginationInputObjectTypeResolver === null) {
+            /** @var TagPaginationInputObjectTypeResolver */
+            $tagPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(TagPaginationInputObjectTypeResolver::class);
+            $this->tagPaginationInputObjectTypeResolver = $tagPaginationInputObjectTypeResolver;
+        }
+        return $this->tagPaginationInputObjectTypeResolver;
     }
     final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
     {
@@ -65,8 +77,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
     {
-        /** @var TaxonomySortInputObjectTypeResolver */
-        return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+        if ($this->taxonomySortInputObjectTypeResolver === null) {
+            /** @var TaxonomySortInputObjectTypeResolver */
+            $taxonomySortInputObjectTypeResolver = $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+            $this->taxonomySortInputObjectTypeResolver = $taxonomySortInputObjectTypeResolver;
+        }
+        return $this->taxonomySortInputObjectTypeResolver;
     }
     final public function setCustomPostTagsFilterInputObjectTypeResolver(CustomPostTagsFilterInputObjectTypeResolver $customPostTagsFilterInputObjectTypeResolver): void
     {
@@ -74,8 +90,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getCustomPostTagsFilterInputObjectTypeResolver(): CustomPostTagsFilterInputObjectTypeResolver
     {
-        /** @var CustomPostTagsFilterInputObjectTypeResolver */
-        return $this->customPostTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostTagsFilterInputObjectTypeResolver::class);
+        if ($this->customPostTagsFilterInputObjectTypeResolver === null) {
+            /** @var CustomPostTagsFilterInputObjectTypeResolver */
+            $customPostTagsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostTagsFilterInputObjectTypeResolver::class);
+            $this->customPostTagsFilterInputObjectTypeResolver = $customPostTagsFilterInputObjectTypeResolver;
+        }
+        return $this->customPostTagsFilterInputObjectTypeResolver;
     }
 
     /**

@@ -21,8 +21,12 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        /** @var ComponentProcessorManagerInterface */
-        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+        if ($this->componentProcessorManager === null) {
+            /** @var ComponentProcessorManagerInterface */
+            $componentProcessorManager = $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+            $this->componentProcessorManager = $componentProcessorManager;
+        }
+        return $this->componentProcessorManager;
     }
 
     /**

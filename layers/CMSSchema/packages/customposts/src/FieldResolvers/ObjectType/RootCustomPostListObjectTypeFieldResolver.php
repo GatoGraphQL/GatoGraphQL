@@ -40,8 +40,12 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     }
     final protected function getCustomPostByInputObjectTypeResolver(): CustomPostByInputObjectTypeResolver
     {
-        /** @var CustomPostByInputObjectTypeResolver */
-        return $this->customPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
+        if ($this->customPostByInputObjectTypeResolver === null) {
+            /** @var CustomPostByInputObjectTypeResolver */
+            $customPostByInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
+            $this->customPostByInputObjectTypeResolver = $customPostByInputObjectTypeResolver;
+        }
+        return $this->customPostByInputObjectTypeResolver;
     }
     final public function setRootCustomPostsFilterInputObjectTypeResolver(RootCustomPostsFilterInputObjectTypeResolver $rootCustomPostsFilterInputObjectTypeResolver): void
     {
@@ -49,8 +53,12 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     }
     final protected function getRootCustomPostsFilterInputObjectTypeResolver(): RootCustomPostsFilterInputObjectTypeResolver
     {
-        /** @var RootCustomPostsFilterInputObjectTypeResolver */
-        return $this->rootCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCustomPostsFilterInputObjectTypeResolver::class);
+        if ($this->rootCustomPostsFilterInputObjectTypeResolver === null) {
+            /** @var RootCustomPostsFilterInputObjectTypeResolver */
+            $rootCustomPostsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootCustomPostsFilterInputObjectTypeResolver::class);
+            $this->rootCustomPostsFilterInputObjectTypeResolver = $rootCustomPostsFilterInputObjectTypeResolver;
+        }
+        return $this->rootCustomPostsFilterInputObjectTypeResolver;
     }
 
     /**

@@ -37,8 +37,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
@@ -46,8 +50,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
-        /** @var GraphQLDataStructureFormatter */
-        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        if ($this->graphQLDataStructureFormatter === null) {
+            /** @var GraphQLDataStructureFormatter */
+            $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+            $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+        }
+        return $this->graphQLDataStructureFormatter;
     }
 
     /**

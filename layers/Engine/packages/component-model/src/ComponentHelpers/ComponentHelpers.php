@@ -22,8 +22,12 @@ class ComponentHelpers implements ComponentHelpersInterface
     }
     final protected function getDefinitionManager(): DefinitionManagerInterface
     {
-        /** @var DefinitionManagerInterface */
-        return $this->definitionManager ??= $this->instanceManager->getInstance(DefinitionManagerInterface::class);
+        if ($this->definitionManager === null) {
+            /** @var DefinitionManagerInterface */
+            $definitionManager = $this->instanceManager->getInstance(DefinitionManagerInterface::class);
+            $this->definitionManager = $definitionManager;
+        }
+        return $this->definitionManager;
     }
 
     public function getComponentFullName(Component $component): string

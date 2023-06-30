@@ -21,8 +21,12 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
     }
     final protected function getCreateUpdateWithCommunityOrganizationProfileMutationResolver(): CreateUpdateWithCommunityOrganizationProfileMutationResolver
     {
-        /** @var CreateUpdateWithCommunityOrganizationProfileMutationResolver */
-        return $this->createUpdateWithCommunityOrganizationProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolver::class);
+        if ($this->createUpdateWithCommunityOrganizationProfileMutationResolver === null) {
+            /** @var CreateUpdateWithCommunityOrganizationProfileMutationResolver */
+            $createUpdateWithCommunityOrganizationProfileMutationResolver = $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolver::class);
+            $this->createUpdateWithCommunityOrganizationProfileMutationResolver = $createUpdateWithCommunityOrganizationProfileMutationResolver;
+        }
+        return $this->createUpdateWithCommunityOrganizationProfileMutationResolver;
     }
     
     public function getMutationResolver(): MutationResolverInterface

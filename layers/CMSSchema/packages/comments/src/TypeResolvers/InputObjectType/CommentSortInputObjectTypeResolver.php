@@ -19,8 +19,12 @@ class CommentSortInputObjectTypeResolver extends SortInputObjectTypeResolver
     }
     final protected function getCommentOrderByEnumTypeResolver(): CommentOrderByEnumTypeResolver
     {
-        /** @var CommentOrderByEnumTypeResolver */
-        return $this->customPostSortByEnumTypeResolver ??= $this->instanceManager->getInstance(CommentOrderByEnumTypeResolver::class);
+        if ($this->customPostSortByEnumTypeResolver === null) {
+            /** @var CommentOrderByEnumTypeResolver */
+            $customPostSortByEnumTypeResolver = $this->instanceManager->getInstance(CommentOrderByEnumTypeResolver::class);
+            $this->customPostSortByEnumTypeResolver = $customPostSortByEnumTypeResolver;
+        }
+        return $this->customPostSortByEnumTypeResolver;
     }
 
     public function getTypeName(): string

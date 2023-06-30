@@ -17,8 +17,12 @@ class CustomPostStatusFilterInput extends AbstractValueToQueryFilterInput
     }
     final protected function getFilterCustomPostStatusEnumTypeResolver(): FilterCustomPostStatusEnumTypeResolver
     {
-        /** @var FilterCustomPostStatusEnumTypeResolver */
-        return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
+        if ($this->filterCustomPostStatusEnumTypeResolver === null) {
+            /** @var FilterCustomPostStatusEnumTypeResolver */
+            $filterCustomPostStatusEnumTypeResolver = $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
+            $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
+        }
+        return $this->filterCustomPostStatusEnumTypeResolver;
     }
 
     protected function getQueryArgKey(): string

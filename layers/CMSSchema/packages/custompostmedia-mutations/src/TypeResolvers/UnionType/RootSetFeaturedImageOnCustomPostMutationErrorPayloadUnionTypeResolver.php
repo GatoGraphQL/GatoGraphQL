@@ -17,8 +17,12 @@ class RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver exte
     }
     final protected function getRootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader(): RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader */
-        return $this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader */
+            $rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader = $rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

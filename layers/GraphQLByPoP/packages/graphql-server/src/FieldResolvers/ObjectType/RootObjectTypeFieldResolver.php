@@ -34,8 +34,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
-        /** @var SchemaObjectTypeResolver */
-        return $this->schemaObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
+        if ($this->schemaObjectTypeResolver === null) {
+            /** @var SchemaObjectTypeResolver */
+            $schemaObjectTypeResolver = $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
+            $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
+        }
+        return $this->schemaObjectTypeResolver;
     }
     final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
     {
@@ -43,8 +47,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
-        /** @var TypeObjectTypeResolver */
-        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+        if ($this->typeObjectTypeResolver === null) {
+            /** @var TypeObjectTypeResolver */
+            $typeObjectTypeResolver = $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+            $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        }
+        return $this->typeObjectTypeResolver;
     }
     final public function setSchemaObjectTypeDataLoader(SchemaObjectTypeDataLoader $schemaObjectTypeDataLoader): void
     {
@@ -52,8 +60,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSchemaObjectTypeDataLoader(): SchemaObjectTypeDataLoader
     {
-        /** @var SchemaObjectTypeDataLoader */
-        return $this->schemaObjectTypeDataLoader ??= $this->instanceManager->getInstance(SchemaObjectTypeDataLoader::class);
+        if ($this->schemaObjectTypeDataLoader === null) {
+            /** @var SchemaObjectTypeDataLoader */
+            $schemaObjectTypeDataLoader = $this->instanceManager->getInstance(SchemaObjectTypeDataLoader::class);
+            $this->schemaObjectTypeDataLoader = $schemaObjectTypeDataLoader;
+        }
+        return $this->schemaObjectTypeDataLoader;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -61,8 +73,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
 
     /**

@@ -36,8 +36,12 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
-        /** @var MarkdownContentParserInterface */
-        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+        if ($this->markdownContentParser === null) {
+            /** @var MarkdownContentParserInterface */
+            $markdownContentParser = $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+            $this->markdownContentParser = $markdownContentParser;
+        }
+        return $this->markdownContentParser;
     }
     final public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
     {
@@ -45,8 +49,12 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     }
     final protected function getModulesMenuPage(): ModulesMenuPage
     {
-        /** @var ModulesMenuPage */
-        return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
+        if ($this->modulesMenuPage === null) {
+            /** @var ModulesMenuPage */
+            $modulesMenuPage = $this->instanceManager->getInstance(ModulesMenuPage::class);
+            $this->modulesMenuPage = $modulesMenuPage;
+        }
+        return $this->modulesMenuPage;
     }
 
     /**

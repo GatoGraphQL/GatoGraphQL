@@ -20,8 +20,12 @@ class MetaQueryCompareByOneofInputObjectTypeResolver extends AbstractOneofInputO
     }
     final protected function getMetaQueryCompareByKeyInputObjectTypeResolver(): MetaQueryCompareByKeyInputObjectTypeResolver
     {
-        /** @var MetaQueryCompareByKeyInputObjectTypeResolver */
-        return $this->metaQueryCompareByKeyInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByKeyInputObjectTypeResolver::class);
+        if ($this->metaQueryCompareByKeyInputObjectTypeResolver === null) {
+            /** @var MetaQueryCompareByKeyInputObjectTypeResolver */
+            $metaQueryCompareByKeyInputObjectTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByKeyInputObjectTypeResolver::class);
+            $this->metaQueryCompareByKeyInputObjectTypeResolver = $metaQueryCompareByKeyInputObjectTypeResolver;
+        }
+        return $this->metaQueryCompareByKeyInputObjectTypeResolver;
     }
     final public function setMetaQueryCompareByNumericValueInputObjectTypeResolver(MetaQueryCompareByNumericValueInputObjectTypeResolver $metaQueryCompareByNumericValueInputObjectTypeResolver): void
     {
@@ -29,8 +33,12 @@ class MetaQueryCompareByOneofInputObjectTypeResolver extends AbstractOneofInputO
     }
     final protected function getMetaQueryCompareByNumericValueInputObjectTypeResolver(): MetaQueryCompareByNumericValueInputObjectTypeResolver
     {
-        /** @var MetaQueryCompareByNumericValueInputObjectTypeResolver */
-        return $this->metaQueryCompareByNumericValueInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByNumericValueInputObjectTypeResolver::class);
+        if ($this->metaQueryCompareByNumericValueInputObjectTypeResolver === null) {
+            /** @var MetaQueryCompareByNumericValueInputObjectTypeResolver */
+            $metaQueryCompareByNumericValueInputObjectTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByNumericValueInputObjectTypeResolver::class);
+            $this->metaQueryCompareByNumericValueInputObjectTypeResolver = $metaQueryCompareByNumericValueInputObjectTypeResolver;
+        }
+        return $this->metaQueryCompareByNumericValueInputObjectTypeResolver;
     }
     final public function setMetaQueryCompareByStringValueInputObjectTypeResolver(MetaQueryCompareByStringValueInputObjectTypeResolver $metaQueryCompareByStringValueInputObjectTypeResolver): void
     {
@@ -38,8 +46,12 @@ class MetaQueryCompareByOneofInputObjectTypeResolver extends AbstractOneofInputO
     }
     final protected function getMetaQueryCompareByStringValueInputObjectTypeResolver(): MetaQueryCompareByStringValueInputObjectTypeResolver
     {
-        /** @var MetaQueryCompareByStringValueInputObjectTypeResolver */
-        return $this->metaQueryCompareByStringValueInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByStringValueInputObjectTypeResolver::class);
+        if ($this->metaQueryCompareByStringValueInputObjectTypeResolver === null) {
+            /** @var MetaQueryCompareByStringValueInputObjectTypeResolver */
+            $metaQueryCompareByStringValueInputObjectTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByStringValueInputObjectTypeResolver::class);
+            $this->metaQueryCompareByStringValueInputObjectTypeResolver = $metaQueryCompareByStringValueInputObjectTypeResolver;
+        }
+        return $this->metaQueryCompareByStringValueInputObjectTypeResolver;
     }
     final public function setMetaQueryCompareByArrayValueInputObjectTypeResolver(MetaQueryCompareByArrayValueInputObjectTypeResolver $metaQueryCompareByArrayValueInputObjectTypeResolver): void
     {
@@ -47,8 +59,12 @@ class MetaQueryCompareByOneofInputObjectTypeResolver extends AbstractOneofInputO
     }
     final protected function getMetaQueryCompareByArrayValueInputObjectTypeResolver(): MetaQueryCompareByArrayValueInputObjectTypeResolver
     {
-        /** @var MetaQueryCompareByArrayValueInputObjectTypeResolver */
-        return $this->metaQueryCompareByArrayValueInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByArrayValueInputObjectTypeResolver::class);
+        if ($this->metaQueryCompareByArrayValueInputObjectTypeResolver === null) {
+            /** @var MetaQueryCompareByArrayValueInputObjectTypeResolver */
+            $metaQueryCompareByArrayValueInputObjectTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByArrayValueInputObjectTypeResolver::class);
+            $this->metaQueryCompareByArrayValueInputObjectTypeResolver = $metaQueryCompareByArrayValueInputObjectTypeResolver;
+        }
+        return $this->metaQueryCompareByArrayValueInputObjectTypeResolver;
     }
 
     public function getTypeName(): string

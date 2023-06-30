@@ -26,8 +26,12 @@ class GlobalFieldsBlockSchemaConfigurationExecuter extends AbstractBlockSchemaCo
     }
     final protected function getSchemaConfigGlobalFieldsBlock(): SchemaConfigGlobalFieldsBlock
     {
-        /** @var SchemaConfigGlobalFieldsBlock */
-        return $this->schemaConfigGlobalFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigGlobalFieldsBlock::class);
+        if ($this->schemaConfigGlobalFieldsBlock === null) {
+            /** @var SchemaConfigGlobalFieldsBlock */
+            $schemaConfigGlobalFieldsBlock = $this->instanceManager->getInstance(SchemaConfigGlobalFieldsBlock::class);
+            $this->schemaConfigGlobalFieldsBlock = $schemaConfigGlobalFieldsBlock;
+        }
+        return $this->schemaConfigGlobalFieldsBlock;
     }
 
     public function getEnablingModule(): ?string

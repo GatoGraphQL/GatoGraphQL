@@ -25,8 +25,12 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     }
     final protected function getMenuPageHelper(): MenuPageHelper
     {
-        /** @var MenuPageHelper */
-        return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
+        if ($this->menuPageHelper === null) {
+            /** @var MenuPageHelper */
+            $menuPageHelper = $this->instanceManager->getInstance(MenuPageHelper::class);
+            $this->menuPageHelper = $menuPageHelper;
+        }
+        return $this->menuPageHelper;
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -34,8 +38,12 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
-        /** @var EndpointHelpers */
-        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+        if ($this->endpointHelpers === null) {
+            /** @var EndpointHelpers */
+            $endpointHelpers = $this->instanceManager->getInstance(EndpointHelpers::class);
+            $this->endpointHelpers = $endpointHelpers;
+        }
+        return $this->endpointHelpers;
     }
 
     public function setHookName(string $hookName): void

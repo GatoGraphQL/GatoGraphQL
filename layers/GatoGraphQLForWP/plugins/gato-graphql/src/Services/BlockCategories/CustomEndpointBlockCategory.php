@@ -18,8 +18,12 @@ class CustomEndpointBlockCategory extends AbstractBlockCategory
     }
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        /** @var GraphQLCustomEndpointCustomPostType */
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        if ($this->graphQLCustomEndpointCustomPostType === null) {
+            /** @var GraphQLCustomEndpointCustomPostType */
+            $graphQLCustomEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+            $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        }
+        return $this->graphQLCustomEndpointCustomPostType;
     }
 
     /**

@@ -21,8 +21,12 @@ class SchemaCommentMetaBlockSchemaConfigurationExecuter extends AbstractSchemaMe
     }
     final protected function getSchemaConfigSchemaCommentMetaBlock(): SchemaConfigSchemaCommentMetaBlock
     {
-        /** @var SchemaConfigSchemaCommentMetaBlock */
-        return $this->schemaConfigSchemaCommentMetaBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaCommentMetaBlock::class);
+        if ($this->schemaConfigSchemaCommentMetaBlock === null) {
+            /** @var SchemaConfigSchemaCommentMetaBlock */
+            $schemaConfigSchemaCommentMetaBlock = $this->instanceManager->getInstance(SchemaConfigSchemaCommentMetaBlock::class);
+            $this->schemaConfigSchemaCommentMetaBlock = $schemaConfigSchemaCommentMetaBlock;
+        }
+        return $this->schemaConfigSchemaCommentMetaBlock;
     }
 
     public function getEnablingModule(): ?string

@@ -18,8 +18,12 @@ abstract class AbstractCustomPostListTaxonomyObjectTypeFieldResolver extends Abs
     }
     final protected function getTaxonomyCustomPostsFilterInputObjectTypeResolver(): TaxonomyCustomPostsFilterInputObjectTypeResolver
     {
-        /** @var TaxonomyCustomPostsFilterInputObjectTypeResolver */
-        return $this->taxonomyCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomyCustomPostsFilterInputObjectTypeResolver::class);
+        if ($this->taxonomyCustomPostsFilterInputObjectTypeResolver === null) {
+            /** @var TaxonomyCustomPostsFilterInputObjectTypeResolver */
+            $taxonomyCustomPostsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(TaxonomyCustomPostsFilterInputObjectTypeResolver::class);
+            $this->taxonomyCustomPostsFilterInputObjectTypeResolver = $taxonomyCustomPostsFilterInputObjectTypeResolver;
+        }
+        return $this->taxonomyCustomPostsFilterInputObjectTypeResolver;
     }
 
     protected function getCustomPostsFilterInputObjectTypeResolver(): AbstractCustomPostsFilterInputObjectTypeResolver

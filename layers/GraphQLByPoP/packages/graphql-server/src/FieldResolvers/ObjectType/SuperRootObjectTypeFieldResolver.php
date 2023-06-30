@@ -31,8 +31,12 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
-        /** @var RootObjectTypeResolver */
-        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+        if ($this->rootObjectTypeResolver === null) {
+            /** @var RootObjectTypeResolver */
+            $rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+            $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        }
+        return $this->rootObjectTypeResolver;
     }
     final public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
     {
@@ -40,8 +44,12 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
     {
-        /** @var QueryRootObjectTypeResolver */
-        return $this->queryRootObjectTypeResolver ??= $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+        if ($this->queryRootObjectTypeResolver === null) {
+            /** @var QueryRootObjectTypeResolver */
+            $queryRootObjectTypeResolver = $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+            $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+        }
+        return $this->queryRootObjectTypeResolver;
     }
     final public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
     {
@@ -49,8 +57,12 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
     {
-        /** @var MutationRootObjectTypeResolver */
-        return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+        if ($this->mutationRootObjectTypeResolver === null) {
+            /** @var MutationRootObjectTypeResolver */
+            $mutationRootObjectTypeResolver = $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+            $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+        }
+        return $this->mutationRootObjectTypeResolver;
     }
 
     /**

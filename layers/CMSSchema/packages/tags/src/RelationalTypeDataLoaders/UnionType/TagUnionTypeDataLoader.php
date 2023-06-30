@@ -18,8 +18,12 @@ class TagUnionTypeDataLoader extends AbstractUnionTypeDataLoader
     }
     final protected function getTagUnionTypeResolver(): TagUnionTypeResolver
     {
-        /** @var TagUnionTypeResolver */
-        return $this->tagUnionTypeResolver ??= $this->instanceManager->getInstance(TagUnionTypeResolver::class);
+        if ($this->tagUnionTypeResolver === null) {
+            /** @var TagUnionTypeResolver */
+            $tagUnionTypeResolver = $this->instanceManager->getInstance(TagUnionTypeResolver::class);
+            $this->tagUnionTypeResolver = $tagUnionTypeResolver;
+        }
+        return $this->tagUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

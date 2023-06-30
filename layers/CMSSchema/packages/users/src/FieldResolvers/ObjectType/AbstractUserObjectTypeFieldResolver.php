@@ -39,8 +39,12 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
+        }
+        return $this->userTypeAPI;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -48,8 +52,12 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
@@ -57,8 +65,12 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
-        /** @var UserObjectTypeResolver */
-        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+        if ($this->userObjectTypeResolver === null) {
+            /** @var UserObjectTypeResolver */
+            $userObjectTypeResolver = $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+            $this->userObjectTypeResolver = $userObjectTypeResolver;
+        }
+        return $this->userObjectTypeResolver;
     }
     final public function setUsersFilterInputObjectTypeResolver(UsersFilterInputObjectTypeResolver $usersFilterInputObjectTypeResolver): void
     {
@@ -66,8 +78,12 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getUsersFilterInputObjectTypeResolver(): UsersFilterInputObjectTypeResolver
     {
-        /** @var UsersFilterInputObjectTypeResolver */
-        return $this->usersFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(UsersFilterInputObjectTypeResolver::class);
+        if ($this->usersFilterInputObjectTypeResolver === null) {
+            /** @var UsersFilterInputObjectTypeResolver */
+            $usersFilterInputObjectTypeResolver = $this->instanceManager->getInstance(UsersFilterInputObjectTypeResolver::class);
+            $this->usersFilterInputObjectTypeResolver = $usersFilterInputObjectTypeResolver;
+        }
+        return $this->usersFilterInputObjectTypeResolver;
     }
     final public function setUserPaginationInputObjectTypeResolver(UserPaginationInputObjectTypeResolver $userPaginationInputObjectTypeResolver): void
     {
@@ -75,8 +91,12 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getUserPaginationInputObjectTypeResolver(): UserPaginationInputObjectTypeResolver
     {
-        /** @var UserPaginationInputObjectTypeResolver */
-        return $this->userPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserPaginationInputObjectTypeResolver::class);
+        if ($this->userPaginationInputObjectTypeResolver === null) {
+            /** @var UserPaginationInputObjectTypeResolver */
+            $userPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(UserPaginationInputObjectTypeResolver::class);
+            $this->userPaginationInputObjectTypeResolver = $userPaginationInputObjectTypeResolver;
+        }
+        return $this->userPaginationInputObjectTypeResolver;
     }
     final public function setUserSortInputObjectTypeResolver(UserSortInputObjectTypeResolver $userSortInputObjectTypeResolver): void
     {
@@ -84,8 +104,12 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     }
     final protected function getUserSortInputObjectTypeResolver(): UserSortInputObjectTypeResolver
     {
-        /** @var UserSortInputObjectTypeResolver */
-        return $this->userSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserSortInputObjectTypeResolver::class);
+        if ($this->userSortInputObjectTypeResolver === null) {
+            /** @var UserSortInputObjectTypeResolver */
+            $userSortInputObjectTypeResolver = $this->instanceManager->getInstance(UserSortInputObjectTypeResolver::class);
+            $this->userSortInputObjectTypeResolver = $userSortInputObjectTypeResolver;
+        }
+        return $this->userSortInputObjectTypeResolver;
     }
 
     /**

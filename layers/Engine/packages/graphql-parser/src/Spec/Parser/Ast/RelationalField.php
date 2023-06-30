@@ -23,8 +23,12 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
     }
     final protected function getASTHelperService(): ASTHelperServiceInterface
     {
-        /** @var ASTHelperServiceInterface */
-        return $this->astHelperService ??= InstanceManagerFacade::getInstance()->getInstance(ASTHelperServiceInterface::class);
+        if ($this->astHelperService === null) {
+            /** @var ASTHelperServiceInterface */
+            $astHelperService = InstanceManagerFacade::getInstance()->getInstance(ASTHelperServiceInterface::class);
+            $this->astHelperService = $astHelperService;
+        }
+        return $this->astHelperService;
     }
 
     /**

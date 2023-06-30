@@ -60,8 +60,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getDateQueryInputObjectTypeResolver(): DateQueryInputObjectTypeResolver
     {
-        /** @var DateQueryInputObjectTypeResolver */
-        return $this->dateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
+        if ($this->dateQueryInputObjectTypeResolver === null) {
+            /** @var DateQueryInputObjectTypeResolver */
+            $dateQueryInputObjectTypeResolver = $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
+            $this->dateQueryInputObjectTypeResolver = $dateQueryInputObjectTypeResolver;
+        }
+        return $this->dateQueryInputObjectTypeResolver;
     }
     final public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
     {
@@ -69,8 +73,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
     {
-        /** @var CommentStatusEnumTypeResolver */
-        return $this->commentStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
+        if ($this->commentStatusEnumTypeResolver === null) {
+            /** @var CommentStatusEnumTypeResolver */
+            $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
+            $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
+        }
+        return $this->commentStatusEnumTypeResolver;
     }
     final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
     {
@@ -78,8 +86,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
-        /** @var CustomPostStatusEnumTypeResolver */
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+        if ($this->customPostStatusEnumTypeResolver === null) {
+            /** @var CustomPostStatusEnumTypeResolver */
+            $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+            $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        }
+        return $this->customPostStatusEnumTypeResolver;
     }
     final public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
     {
@@ -87,8 +99,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
     {
-        /** @var CommentTypeEnumTypeResolver */
-        return $this->commentTypeEnumTypeResolver ??= $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
+        if ($this->commentTypeEnumTypeResolver === null) {
+            /** @var CommentTypeEnumTypeResolver */
+            $commentTypeEnumTypeResolver = $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
+            $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
+        }
+        return $this->commentTypeEnumTypeResolver;
     }
     final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
     {
@@ -96,8 +112,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {
-        /** @var CustomPostEnumStringScalarTypeResolver */
-        return $this->customPostEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
+        if ($this->customPostEnumStringScalarTypeResolver === null) {
+            /** @var CustomPostEnumStringScalarTypeResolver */
+            $customPostEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
+            $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
+        }
+        return $this->customPostEnumStringScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -105,8 +125,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setCommentStatusFilterInput(CommentStatusFilterInput $commentStatusFilterInput): void
     {
@@ -114,8 +138,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCommentStatusFilterInput(): CommentStatusFilterInput
     {
-        /** @var CommentStatusFilterInput */
-        return $this->commentStatusFilterInput ??= $this->instanceManager->getInstance(CommentStatusFilterInput::class);
+        if ($this->commentStatusFilterInput === null) {
+            /** @var CommentStatusFilterInput */
+            $commentStatusFilterInput = $this->instanceManager->getInstance(CommentStatusFilterInput::class);
+            $this->commentStatusFilterInput = $commentStatusFilterInput;
+        }
+        return $this->commentStatusFilterInput;
     }
     final public function setCommentTypesFilterInput(CommentTypesFilterInput $commentTypesFilterInput): void
     {
@@ -123,8 +151,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCommentTypesFilterInput(): CommentTypesFilterInput
     {
-        /** @var CommentTypesFilterInput */
-        return $this->commentTypesFilterInput ??= $this->instanceManager->getInstance(CommentTypesFilterInput::class);
+        if ($this->commentTypesFilterInput === null) {
+            /** @var CommentTypesFilterInput */
+            $commentTypesFilterInput = $this->instanceManager->getInstance(CommentTypesFilterInput::class);
+            $this->commentTypesFilterInput = $commentTypesFilterInput;
+        }
+        return $this->commentTypesFilterInput;
     }
     final public function setCustomPostIDFilterInput(CustomPostIDFilterInput $customPostIDFilterInput): void
     {
@@ -132,8 +164,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCustomPostIDFilterInput(): CustomPostIDFilterInput
     {
-        /** @var CustomPostIDFilterInput */
-        return $this->customPostIDFilterInput ??= $this->instanceManager->getInstance(CustomPostIDFilterInput::class);
+        if ($this->customPostIDFilterInput === null) {
+            /** @var CustomPostIDFilterInput */
+            $customPostIDFilterInput = $this->instanceManager->getInstance(CustomPostIDFilterInput::class);
+            $this->customPostIDFilterInput = $customPostIDFilterInput;
+        }
+        return $this->customPostIDFilterInput;
     }
     final public function setCustomPostIDsFilterInput(CustomPostIDsFilterInput $customPostIDsFilterInput): void
     {
@@ -141,8 +177,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCustomPostIDsFilterInput(): CustomPostIDsFilterInput
     {
-        /** @var CustomPostIDsFilterInput */
-        return $this->customPostIDsFilterInput ??= $this->instanceManager->getInstance(CustomPostIDsFilterInput::class);
+        if ($this->customPostIDsFilterInput === null) {
+            /** @var CustomPostIDsFilterInput */
+            $customPostIDsFilterInput = $this->instanceManager->getInstance(CustomPostIDsFilterInput::class);
+            $this->customPostIDsFilterInput = $customPostIDsFilterInput;
+        }
+        return $this->customPostIDsFilterInput;
     }
     final public function setCustomPostStatusFilterInput(CustomPostStatusFilterInput $customPostStatusFilterInput): void
     {
@@ -150,8 +190,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getCustomPostStatusFilterInput(): CustomPostStatusFilterInput
     {
-        /** @var CustomPostStatusFilterInput */
-        return $this->customPostStatusFilterInput ??= $this->instanceManager->getInstance(CustomPostStatusFilterInput::class);
+        if ($this->customPostStatusFilterInput === null) {
+            /** @var CustomPostStatusFilterInput */
+            $customPostStatusFilterInput = $this->instanceManager->getInstance(CustomPostStatusFilterInput::class);
+            $this->customPostStatusFilterInput = $customPostStatusFilterInput;
+        }
+        return $this->customPostStatusFilterInput;
     }
     final public function setExcludeCustomPostIDsFilterInput(ExcludeCustomPostIDsFilterInput $excludeCustomPostIDsFilterInput): void
     {
@@ -159,8 +203,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getExcludeCustomPostIDsFilterInput(): ExcludeCustomPostIDsFilterInput
     {
-        /** @var ExcludeCustomPostIDsFilterInput */
-        return $this->excludeCustomPostIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeCustomPostIDsFilterInput::class);
+        if ($this->excludeCustomPostIDsFilterInput === null) {
+            /** @var ExcludeCustomPostIDsFilterInput */
+            $excludeCustomPostIDsFilterInput = $this->instanceManager->getInstance(ExcludeCustomPostIDsFilterInput::class);
+            $this->excludeCustomPostIDsFilterInput = $excludeCustomPostIDsFilterInput;
+        }
+        return $this->excludeCustomPostIDsFilterInput;
     }
     final public function setUnionCustomPostTypesFilterInput(UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput): void
     {
@@ -168,8 +216,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getUnionCustomPostTypesFilterInput(): UnionCustomPostTypesFilterInput
     {
-        /** @var UnionCustomPostTypesFilterInput */
-        return $this->unionCustomPostTypesFilterInput ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInput::class);
+        if ($this->unionCustomPostTypesFilterInput === null) {
+            /** @var UnionCustomPostTypesFilterInput */
+            $unionCustomPostTypesFilterInput = $this->instanceManager->getInstance(UnionCustomPostTypesFilterInput::class);
+            $this->unionCustomPostTypesFilterInput = $unionCustomPostTypesFilterInput;
+        }
+        return $this->unionCustomPostTypesFilterInput;
     }
     final public function setExcludeParentIDsFilterInput(ExcludeParentIDsFilterInput $excludeParentIDsFilterInput): void
     {
@@ -177,8 +229,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getExcludeParentIDsFilterInput(): ExcludeParentIDsFilterInput
     {
-        /** @var ExcludeParentIDsFilterInput */
-        return $this->excludeParentIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeParentIDsFilterInput::class);
+        if ($this->excludeParentIDsFilterInput === null) {
+            /** @var ExcludeParentIDsFilterInput */
+            $excludeParentIDsFilterInput = $this->instanceManager->getInstance(ExcludeParentIDsFilterInput::class);
+            $this->excludeParentIDsFilterInput = $excludeParentIDsFilterInput;
+        }
+        return $this->excludeParentIDsFilterInput;
     }
     final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
     {
@@ -186,8 +242,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
-        /** @var SearchFilterInput */
-        return $this->searchFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
+        if ($this->searchFilterInput === null) {
+            /** @var SearchFilterInput */
+            $searchFilterInput = $this->instanceManager->getInstance(SearchFilterInput::class);
+            $this->searchFilterInput = $searchFilterInput;
+        }
+        return $this->searchFilterInput;
     }
     final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
     {
@@ -195,8 +255,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getParentIDFilterInput(): ParentIDFilterInput
     {
-        /** @var ParentIDFilterInput */
-        return $this->parentIDFilterInput ??= $this->instanceManager->getInstance(ParentIDFilterInput::class);
+        if ($this->parentIDFilterInput === null) {
+            /** @var ParentIDFilterInput */
+            $parentIDFilterInput = $this->instanceManager->getInstance(ParentIDFilterInput::class);
+            $this->parentIDFilterInput = $parentIDFilterInput;
+        }
+        return $this->parentIDFilterInput;
     }
     final public function setParentIDsFilterInput(ParentIDsFilterInput $parentIDsFilterInput): void
     {
@@ -204,8 +268,12 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     }
     final protected function getParentIDsFilterInput(): ParentIDsFilterInput
     {
-        /** @var ParentIDsFilterInput */
-        return $this->parentIDsFilterInput ??= $this->instanceManager->getInstance(ParentIDsFilterInput::class);
+        if ($this->parentIDsFilterInput === null) {
+            /** @var ParentIDsFilterInput */
+            $parentIDsFilterInput = $this->instanceManager->getInstance(ParentIDsFilterInput::class);
+            $this->parentIDsFilterInput = $parentIDsFilterInput;
+        }
+        return $this->parentIDsFilterInput;
     }
 
     /**

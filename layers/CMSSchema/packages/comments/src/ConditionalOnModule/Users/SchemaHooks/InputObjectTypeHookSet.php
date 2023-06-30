@@ -32,8 +32,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setCustomPostAuthorIDsFilterInput(CustomPostAuthorIDsFilterInput $customPostAuthorIDsFilterInput): void
     {
@@ -41,8 +45,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getCustomPostAuthorIDsFilterInput(): CustomPostAuthorIDsFilterInput
     {
-        /** @var CustomPostAuthorIDsFilterInput */
-        return $this->customPostAuthorIDsFilterInput ??= $this->instanceManager->getInstance(CustomPostAuthorIDsFilterInput::class);
+        if ($this->customPostAuthorIDsFilterInput === null) {
+            /** @var CustomPostAuthorIDsFilterInput */
+            $customPostAuthorIDsFilterInput = $this->instanceManager->getInstance(CustomPostAuthorIDsFilterInput::class);
+            $this->customPostAuthorIDsFilterInput = $customPostAuthorIDsFilterInput;
+        }
+        return $this->customPostAuthorIDsFilterInput;
     }
     final public function setExcludeCustomPostAuthorIDsFilterInput(ExcludeCustomPostAuthorIDsFilterInput $excludeCustomPostAuthorIDsFilterInput): void
     {
@@ -50,8 +58,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getExcludeCustomPostAuthorIDsFilterInput(): ExcludeCustomPostAuthorIDsFilterInput
     {
-        /** @var ExcludeCustomPostAuthorIDsFilterInput */
-        return $this->excludeCustomPostAuthorIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeCustomPostAuthorIDsFilterInput::class);
+        if ($this->excludeCustomPostAuthorIDsFilterInput === null) {
+            /** @var ExcludeCustomPostAuthorIDsFilterInput */
+            $excludeCustomPostAuthorIDsFilterInput = $this->instanceManager->getInstance(ExcludeCustomPostAuthorIDsFilterInput::class);
+            $this->excludeCustomPostAuthorIDsFilterInput = $excludeCustomPostAuthorIDsFilterInput;
+        }
+        return $this->excludeCustomPostAuthorIDsFilterInput;
     }
     final public function setAuthorIDsFilterInput(AuthorIDsFilterInput $authorIDsFilterInput): void
     {
@@ -59,8 +71,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getAuthorIDsFilterInput(): AuthorIDsFilterInput
     {
-        /** @var AuthorIDsFilterInput */
-        return $this->authorIDsFilterInput ??= $this->instanceManager->getInstance(AuthorIDsFilterInput::class);
+        if ($this->authorIDsFilterInput === null) {
+            /** @var AuthorIDsFilterInput */
+            $authorIDsFilterInput = $this->instanceManager->getInstance(AuthorIDsFilterInput::class);
+            $this->authorIDsFilterInput = $authorIDsFilterInput;
+        }
+        return $this->authorIDsFilterInput;
     }
     final public function setExcludeAuthorIDsFilterInput(ExcludeAuthorIDsFilterInput $excludeAuthorIDsFilterInput): void
     {
@@ -68,8 +84,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getExcludeAuthorIDsFilterInput(): ExcludeAuthorIDsFilterInput
     {
-        /** @var ExcludeAuthorIDsFilterInput */
-        return $this->excludeAuthorIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInput::class);
+        if ($this->excludeAuthorIDsFilterInput === null) {
+            /** @var ExcludeAuthorIDsFilterInput */
+            $excludeAuthorIDsFilterInput = $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInput::class);
+            $this->excludeAuthorIDsFilterInput = $excludeAuthorIDsFilterInput;
+        }
+        return $this->excludeAuthorIDsFilterInput;
     }
 
     protected function init(): void

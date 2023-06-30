@@ -17,8 +17,12 @@ class MutationRootObjectTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     final protected function getMutationRoot(): MutationRoot
     {
-        /** @var MutationRoot */
-        return $this->mutationRoot ??= $this->instanceManager->getInstance(MutationRoot::class);
+        if ($this->mutationRoot === null) {
+            /** @var MutationRoot */
+            $mutationRoot = $this->instanceManager->getInstance(MutationRoot::class);
+            $this->mutationRoot = $mutationRoot;
+        }
+        return $this->mutationRoot;
     }
 
     /**

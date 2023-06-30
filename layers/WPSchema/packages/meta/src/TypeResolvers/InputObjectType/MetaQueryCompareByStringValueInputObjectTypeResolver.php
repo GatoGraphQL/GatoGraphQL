@@ -22,8 +22,12 @@ class MetaQueryCompareByStringValueInputObjectTypeResolver extends AbstractInput
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setMetaQueryCompareByStringValueOperatorEnumTypeResolver(MetaQueryCompareByStringValueOperatorEnumTypeResolver $metaQueryCompareByStringValueOperatorEnumTypeResolver): void
     {
@@ -31,8 +35,12 @@ class MetaQueryCompareByStringValueInputObjectTypeResolver extends AbstractInput
     }
     final protected function getMetaQueryCompareByStringValueOperatorEnumTypeResolver(): MetaQueryCompareByStringValueOperatorEnumTypeResolver
     {
-        /** @var MetaQueryCompareByStringValueOperatorEnumTypeResolver */
-        return $this->metaQueryCompareByStringValueOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByStringValueOperatorEnumTypeResolver::class);
+        if ($this->metaQueryCompareByStringValueOperatorEnumTypeResolver === null) {
+            /** @var MetaQueryCompareByStringValueOperatorEnumTypeResolver */
+            $metaQueryCompareByStringValueOperatorEnumTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByStringValueOperatorEnumTypeResolver::class);
+            $this->metaQueryCompareByStringValueOperatorEnumTypeResolver = $metaQueryCompareByStringValueOperatorEnumTypeResolver;
+        }
+        return $this->metaQueryCompareByStringValueOperatorEnumTypeResolver;
     }
 
     public function getTypeName(): string

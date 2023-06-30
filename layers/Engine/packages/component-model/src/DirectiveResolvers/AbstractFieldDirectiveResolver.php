@@ -115,8 +115,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
     final protected function getSemverHelperService(): SemverHelperServiceInterface
     {
-        /** @var SemverHelperServiceInterface */
-        return $this->semverHelperService ??= $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
+        if ($this->semverHelperService === null) {
+            /** @var SemverHelperServiceInterface */
+            $semverHelperService = $this->instanceManager->getInstance(SemverHelperServiceInterface::class);
+            $this->semverHelperService = $semverHelperService;
+        }
+        return $this->semverHelperService;
     }
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
@@ -124,8 +128,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
-        /** @var AttachableExtensionManagerInterface */
-        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+        if ($this->attachableExtensionManager === null) {
+            /** @var AttachableExtensionManagerInterface */
+            $attachableExtensionManager = $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+            $this->attachableExtensionManager = $attachableExtensionManager;
+        }
+        return $this->attachableExtensionManager;
     }
     final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
@@ -133,8 +141,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
-        /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
-        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+        if ($this->dangerouslyNonSpecificScalarTypeScalarTypeResolver === null) {
+            /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
+            $dangerouslyNonSpecificScalarTypeScalarTypeResolver = $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+            $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
+        }
+        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver;
     }
     final public function setVersioningService(VersioningServiceInterface $versioningService): void
     {
@@ -142,8 +154,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
     final protected function getVersioningService(): VersioningServiceInterface
     {
-        /** @var VersioningServiceInterface */
-        return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
+        if ($this->versioningService === null) {
+            /** @var VersioningServiceInterface */
+            $versioningService = $this->instanceManager->getInstance(VersioningServiceInterface::class);
+            $this->versioningService = $versioningService;
+        }
+        return $this->versioningService;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -151,8 +167,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setSchemaCastingService(SchemaCastingServiceInterface $schemaCastingService): void
     {
@@ -160,8 +180,12 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     }
     final protected function getSchemaCastingService(): SchemaCastingServiceInterface
     {
-        /** @var SchemaCastingServiceInterface */
-        return $this->schemaCastingService ??= $this->instanceManager->getInstance(SchemaCastingServiceInterface::class);
+        if ($this->schemaCastingService === null) {
+            /** @var SchemaCastingServiceInterface */
+            $schemaCastingService = $this->instanceManager->getInstance(SchemaCastingServiceInterface::class);
+            $this->schemaCastingService = $schemaCastingService;
+        }
+        return $this->schemaCastingService;
     }
 
     /**

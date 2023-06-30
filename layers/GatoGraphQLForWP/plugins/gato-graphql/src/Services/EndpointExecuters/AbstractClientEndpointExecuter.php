@@ -23,8 +23,12 @@ abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecute
     }
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        /** @var GraphQLCustomEndpointCustomPostType */
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        if ($this->graphQLCustomEndpointCustomPostType === null) {
+            /** @var GraphQLCustomEndpointCustomPostType */
+            $graphQLCustomEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+            $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        }
+        return $this->graphQLCustomEndpointCustomPostType;
     }
     final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
     {
@@ -32,8 +36,12 @@ abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecute
     }
     final protected function getTemplateHelpers(): TemplateHelpersInterface
     {
-        /** @var TemplateHelpersInterface */
-        return $this->templateHelpers ??= $this->instanceManager->getInstance(TemplateHelpersInterface::class);
+        if ($this->templateHelpers === null) {
+            /** @var TemplateHelpersInterface */
+            $templateHelpers = $this->instanceManager->getInstance(TemplateHelpersInterface::class);
+            $this->templateHelpers = $templateHelpers;
+        }
+        return $this->templateHelpers;
     }
 
     protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface

@@ -18,8 +18,12 @@ class CustomPostAddCommentMutationErrorPayloadUnionTypeDataLoader extends Abstra
     }
     final protected function getCustomPostAddCommentMutationErrorPayloadUnionTypeResolver(): CustomPostAddCommentMutationErrorPayloadUnionTypeResolver
     {
-        /** @var CustomPostAddCommentMutationErrorPayloadUnionTypeResolver */
-        return $this->customPostAddCommentMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostAddCommentMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->customPostAddCommentMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var CustomPostAddCommentMutationErrorPayloadUnionTypeResolver */
+            $customPostAddCommentMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(CustomPostAddCommentMutationErrorPayloadUnionTypeResolver::class);
+            $this->customPostAddCommentMutationErrorPayloadUnionTypeResolver = $customPostAddCommentMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->customPostAddCommentMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

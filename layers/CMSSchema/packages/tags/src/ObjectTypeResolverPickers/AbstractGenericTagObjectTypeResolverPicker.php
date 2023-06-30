@@ -34,8 +34,12 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
     }
     final protected function getGenericTagObjectTypeResolver(): GenericTagObjectTypeResolver
     {
-        /** @var GenericTagObjectTypeResolver */
-        return $this->genericTagObjectTypeResolver ??= $this->instanceManager->getInstance(GenericTagObjectTypeResolver::class);
+        if ($this->genericTagObjectTypeResolver === null) {
+            /** @var GenericTagObjectTypeResolver */
+            $genericTagObjectTypeResolver = $this->instanceManager->getInstance(GenericTagObjectTypeResolver::class);
+            $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
+        }
+        return $this->genericTagObjectTypeResolver;
     }
     final public function setQueryableTagTypeAPI(QueryableTagTypeAPIInterface $queryableTagTypeAPI): void
     {
@@ -43,8 +47,12 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
     }
     final protected function getQueryableTagTypeAPI(): QueryableTagTypeAPIInterface
     {
-        /** @var QueryableTagTypeAPIInterface */
-        return $this->queryableTagTypeAPI ??= $this->instanceManager->getInstance(QueryableTagTypeAPIInterface::class);
+        if ($this->queryableTagTypeAPI === null) {
+            /** @var QueryableTagTypeAPIInterface */
+            $queryableTagTypeAPI = $this->instanceManager->getInstance(QueryableTagTypeAPIInterface::class);
+            $this->queryableTagTypeAPI = $queryableTagTypeAPI;
+        }
+        return $this->queryableTagTypeAPI;
     }
     final public function setTagObjectTypeResolverPickerRegistry(TagObjectTypeResolverPickerRegistryInterface $tagObjectTypeResolverPickerRegistry): void
     {
@@ -52,8 +60,12 @@ abstract class AbstractGenericTagObjectTypeResolverPicker extends AbstractObject
     }
     final protected function getTagObjectTypeResolverPickerRegistry(): TagObjectTypeResolverPickerRegistryInterface
     {
-        /** @var TagObjectTypeResolverPickerRegistryInterface */
-        return $this->tagObjectTypeResolverPickerRegistry ??= $this->instanceManager->getInstance(TagObjectTypeResolverPickerRegistryInterface::class);
+        if ($this->tagObjectTypeResolverPickerRegistry === null) {
+            /** @var TagObjectTypeResolverPickerRegistryInterface */
+            $tagObjectTypeResolverPickerRegistry = $this->instanceManager->getInstance(TagObjectTypeResolverPickerRegistryInterface::class);
+            $this->tagObjectTypeResolverPickerRegistry = $tagObjectTypeResolverPickerRegistry;
+        }
+        return $this->tagObjectTypeResolverPickerRegistry;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

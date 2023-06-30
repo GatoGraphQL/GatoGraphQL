@@ -20,8 +20,12 @@ class AddMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractAddMetaQuery
     }
     final protected function getTaxonomyMetaQueryInputObjectTypeResolver(): TaxonomyMetaQueryInputObjectTypeResolver
     {
-        /** @var TaxonomyMetaQueryInputObjectTypeResolver */
-        return $this->taxonomyMetaQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomyMetaQueryInputObjectTypeResolver::class);
+        if ($this->taxonomyMetaQueryInputObjectTypeResolver === null) {
+            /** @var TaxonomyMetaQueryInputObjectTypeResolver */
+            $taxonomyMetaQueryInputObjectTypeResolver = $this->instanceManager->getInstance(TaxonomyMetaQueryInputObjectTypeResolver::class);
+            $this->taxonomyMetaQueryInputObjectTypeResolver = $taxonomyMetaQueryInputObjectTypeResolver;
+        }
+        return $this->taxonomyMetaQueryInputObjectTypeResolver;
     }
 
     protected function getMetaQueryInputObjectTypeResolver(): AbstractMetaQueryInputObjectTypeResolver

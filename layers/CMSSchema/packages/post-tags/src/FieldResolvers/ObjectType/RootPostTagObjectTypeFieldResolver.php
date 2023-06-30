@@ -44,8 +44,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -53,8 +57,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -62,8 +70,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
-        /** @var PostTagObjectTypeResolver */
-        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+        if ($this->postTagObjectTypeResolver === null) {
+            /** @var PostTagObjectTypeResolver */
+            $postTagObjectTypeResolver = $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+            $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+        }
+        return $this->postTagObjectTypeResolver;
     }
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
@@ -71,8 +83,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
-        /** @var PostTagTypeAPIInterface */
-        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+        if ($this->postTagTypeAPI === null) {
+            /** @var PostTagTypeAPIInterface */
+            $postTagTypeAPI = $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+            $this->postTagTypeAPI = $postTagTypeAPI;
+        }
+        return $this->postTagTypeAPI;
     }
     final public function setPostTagByInputObjectTypeResolver(PostTagByInputObjectTypeResolver $postTagByInputObjectTypeResolver): void
     {
@@ -80,8 +96,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     final protected function getPostTagByInputObjectTypeResolver(): PostTagByInputObjectTypeResolver
     {
-        /** @var PostTagByInputObjectTypeResolver */
-        return $this->postTagByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagByInputObjectTypeResolver::class);
+        if ($this->postTagByInputObjectTypeResolver === null) {
+            /** @var PostTagByInputObjectTypeResolver */
+            $postTagByInputObjectTypeResolver = $this->instanceManager->getInstance(PostTagByInputObjectTypeResolver::class);
+            $this->postTagByInputObjectTypeResolver = $postTagByInputObjectTypeResolver;
+        }
+        return $this->postTagByInputObjectTypeResolver;
     }
     final public function setTagPaginationInputObjectTypeResolver(TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver): void
     {
@@ -89,8 +109,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     final protected function getTagPaginationInputObjectTypeResolver(): TagPaginationInputObjectTypeResolver
     {
-        /** @var TagPaginationInputObjectTypeResolver */
-        return $this->tagPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(TagPaginationInputObjectTypeResolver::class);
+        if ($this->tagPaginationInputObjectTypeResolver === null) {
+            /** @var TagPaginationInputObjectTypeResolver */
+            $tagPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(TagPaginationInputObjectTypeResolver::class);
+            $this->tagPaginationInputObjectTypeResolver = $tagPaginationInputObjectTypeResolver;
+        }
+        return $this->tagPaginationInputObjectTypeResolver;
     }
     final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
     {
@@ -98,8 +122,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
     {
-        /** @var TaxonomySortInputObjectTypeResolver */
-        return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+        if ($this->taxonomySortInputObjectTypeResolver === null) {
+            /** @var TaxonomySortInputObjectTypeResolver */
+            $taxonomySortInputObjectTypeResolver = $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+            $this->taxonomySortInputObjectTypeResolver = $taxonomySortInputObjectTypeResolver;
+        }
+        return $this->taxonomySortInputObjectTypeResolver;
     }
     final public function setRootTagsFilterInputObjectTypeResolver(RootTagsFilterInputObjectTypeResolver $rootTagsFilterInputObjectTypeResolver): void
     {
@@ -107,8 +135,12 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     }
     final protected function getRootTagsFilterInputObjectTypeResolver(): RootTagsFilterInputObjectTypeResolver
     {
-        /** @var RootTagsFilterInputObjectTypeResolver */
-        return $this->rootTagsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootTagsFilterInputObjectTypeResolver::class);
+        if ($this->rootTagsFilterInputObjectTypeResolver === null) {
+            /** @var RootTagsFilterInputObjectTypeResolver */
+            $rootTagsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootTagsFilterInputObjectTypeResolver::class);
+            $this->rootTagsFilterInputObjectTypeResolver = $rootTagsFilterInputObjectTypeResolver;
+        }
+        return $this->rootTagsFilterInputObjectTypeResolver;
     }
 
     /**

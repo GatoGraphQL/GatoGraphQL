@@ -37,8 +37,12 @@ class EndpointBlockHelpers
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
@@ -46,8 +50,12 @@ class EndpointBlockHelpers
     }
     final protected function getBlockHelpers(): BlockHelpers
     {
-        /** @var BlockHelpers */
-        return $this->blockHelpers ??= $this->instanceManager->getInstance(BlockHelpers::class);
+        if ($this->blockHelpers === null) {
+            /** @var BlockHelpers */
+            $blockHelpers = $this->instanceManager->getInstance(BlockHelpers::class);
+            $this->blockHelpers = $blockHelpers;
+        }
+        return $this->blockHelpers;
     }
     final public function setEndpointSchemaConfigurationBlock(EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock): void
     {
@@ -55,8 +63,12 @@ class EndpointBlockHelpers
     }
     final protected function getEndpointSchemaConfigurationBlock(): EndpointSchemaConfigurationBlock
     {
-        /** @var EndpointSchemaConfigurationBlock */
-        return $this->endpointSchemaConfigurationBlock ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+        if ($this->endpointSchemaConfigurationBlock === null) {
+            /** @var EndpointSchemaConfigurationBlock */
+            $endpointSchemaConfigurationBlock = $this->instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+            $this->endpointSchemaConfigurationBlock = $endpointSchemaConfigurationBlock;
+        }
+        return $this->endpointSchemaConfigurationBlock;
     }
 
     /**

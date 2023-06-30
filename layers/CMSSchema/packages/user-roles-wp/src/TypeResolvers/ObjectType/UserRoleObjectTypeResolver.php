@@ -19,8 +19,12 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getUserRoleObjectTypeDataLoader(): UserRoleObjectTypeDataLoader
     {
-        /** @var UserRoleObjectTypeDataLoader */
-        return $this->userRoleObjectTypeDataLoader ??= $this->instanceManager->getInstance(UserRoleObjectTypeDataLoader::class);
+        if ($this->userRoleObjectTypeDataLoader === null) {
+            /** @var UserRoleObjectTypeDataLoader */
+            $userRoleObjectTypeDataLoader = $this->instanceManager->getInstance(UserRoleObjectTypeDataLoader::class);
+            $this->userRoleObjectTypeDataLoader = $userRoleObjectTypeDataLoader;
+        }
+        return $this->userRoleObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

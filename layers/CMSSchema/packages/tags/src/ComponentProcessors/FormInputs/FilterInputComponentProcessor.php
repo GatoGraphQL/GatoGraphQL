@@ -37,8 +37,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -46,8 +50,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setTagSlugsFilterInput(TagSlugsFilterInput $tagSlugsFilterInput): void
     {
@@ -55,8 +63,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getTagSlugsFilterInput(): TagSlugsFilterInput
     {
-        /** @var TagSlugsFilterInput */
-        return $this->tagSlugsFilterInput ??= $this->instanceManager->getInstance(TagSlugsFilterInput::class);
+        if ($this->tagSlugsFilterInput === null) {
+            /** @var TagSlugsFilterInput */
+            $tagSlugsFilterInput = $this->instanceManager->getInstance(TagSlugsFilterInput::class);
+            $this->tagSlugsFilterInput = $tagSlugsFilterInput;
+        }
+        return $this->tagSlugsFilterInput;
     }
     final public function setTagIDsFilterInput(TagIDsFilterInput $tagIDsFilterInput): void
     {
@@ -64,8 +76,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getTagIDsFilterInput(): TagIDsFilterInput
     {
-        /** @var TagIDsFilterInput */
-        return $this->tagIDsFilterInput ??= $this->instanceManager->getInstance(TagIDsFilterInput::class);
+        if ($this->tagIDsFilterInput === null) {
+            /** @var TagIDsFilterInput */
+            $tagIDsFilterInput = $this->instanceManager->getInstance(TagIDsFilterInput::class);
+            $this->tagIDsFilterInput = $tagIDsFilterInput;
+        }
+        return $this->tagIDsFilterInput;
     }
     final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
     {
@@ -73,8 +89,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getTaxonomyFilterInput(): TaxonomyFilterInput
     {
-        /** @var TaxonomyFilterInput */
-        return $this->taxonomyFilterInput ??= $this->instanceManager->getInstance(TaxonomyFilterInput::class);
+        if ($this->taxonomyFilterInput === null) {
+            /** @var TaxonomyFilterInput */
+            $taxonomyFilterInput = $this->instanceManager->getInstance(TaxonomyFilterInput::class);
+            $this->taxonomyFilterInput = $taxonomyFilterInput;
+        }
+        return $this->taxonomyFilterInput;
     }
     final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
     {
@@ -82,8 +102,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
     {
-        /** @var TagTaxonomyEnumStringScalarTypeResolver */
-        return $this->tagTaxonomyEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(TagTaxonomyEnumStringScalarTypeResolver::class);
+        if ($this->tagTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var TagTaxonomyEnumStringScalarTypeResolver */
+            $tagTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(TagTaxonomyEnumStringScalarTypeResolver::class);
+            $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->tagTaxonomyEnumStringScalarTypeResolver;
     }
 
     /**

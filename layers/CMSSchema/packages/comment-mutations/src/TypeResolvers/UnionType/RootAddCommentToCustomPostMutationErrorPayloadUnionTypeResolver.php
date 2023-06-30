@@ -17,8 +17,12 @@ class RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver extends Ab
     }
     final protected function getRootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader(): RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader */
-        return $this->rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader */
+            $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader = $rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->rootAddCommentToCustomPostMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

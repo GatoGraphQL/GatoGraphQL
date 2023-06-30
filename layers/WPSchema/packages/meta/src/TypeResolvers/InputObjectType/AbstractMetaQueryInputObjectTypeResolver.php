@@ -36,8 +36,12 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     }
     final protected function getMetaQueryValueTypesEnumTypeResolver(): MetaQueryValueTypeEnumTypeResolver
     {
-        /** @var MetaQueryValueTypeEnumTypeResolver */
-        return $this->metaQueryValueTypesEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryValueTypeEnumTypeResolver::class);
+        if ($this->metaQueryValueTypesEnumTypeResolver === null) {
+            /** @var MetaQueryValueTypeEnumTypeResolver */
+            $metaQueryValueTypesEnumTypeResolver = $this->instanceManager->getInstance(MetaQueryValueTypeEnumTypeResolver::class);
+            $this->metaQueryValueTypesEnumTypeResolver = $metaQueryValueTypesEnumTypeResolver;
+        }
+        return $this->metaQueryValueTypesEnumTypeResolver;
     }
     final public function setMetaQueryCompareByOneofInputObjectTypeResolver(MetaQueryCompareByOneofInputObjectTypeResolver $metaQueryCompareByOneofInputObjectTypeResolver): void
     {
@@ -45,8 +49,12 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     }
     final protected function getMetaQueryCompareByOneofInputObjectTypeResolver(): MetaQueryCompareByOneofInputObjectTypeResolver
     {
-        /** @var MetaQueryCompareByOneofInputObjectTypeResolver */
-        return $this->metaQueryCompareByOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByOneofInputObjectTypeResolver::class);
+        if ($this->metaQueryCompareByOneofInputObjectTypeResolver === null) {
+            /** @var MetaQueryCompareByOneofInputObjectTypeResolver */
+            $metaQueryCompareByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByOneofInputObjectTypeResolver::class);
+            $this->metaQueryCompareByOneofInputObjectTypeResolver = $metaQueryCompareByOneofInputObjectTypeResolver;
+        }
+        return $this->metaQueryCompareByOneofInputObjectTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -54,8 +62,12 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setRelationEnumTypeResolver(RelationEnumTypeResolver $relationEnumTypeResolver): void
     {
@@ -63,8 +75,12 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     }
     final protected function getRelationEnumTypeResolver(): RelationEnumTypeResolver
     {
-        /** @var RelationEnumTypeResolver */
-        return $this->relationEnumTypeResolver ??= $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
+        if ($this->relationEnumTypeResolver === null) {
+            /** @var RelationEnumTypeResolver */
+            $relationEnumTypeResolver = $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
+            $this->relationEnumTypeResolver = $relationEnumTypeResolver;
+        }
+        return $this->relationEnumTypeResolver;
     }
     final public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
     {
@@ -72,8 +88,12 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     }
     final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
-        /** @var AllowOrDenySettingsServiceInterface */
-        return $this->allowOrDenySettingsService ??= $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
+        if ($this->allowOrDenySettingsService === null) {
+            /** @var AllowOrDenySettingsServiceInterface */
+            $allowOrDenySettingsService = $this->instanceManager->getInstance(AllowOrDenySettingsServiceInterface::class);
+            $this->allowOrDenySettingsService = $allowOrDenySettingsService;
+        }
+        return $this->allowOrDenySettingsService;
     }
 
     public function getTypeDescription(): ?string

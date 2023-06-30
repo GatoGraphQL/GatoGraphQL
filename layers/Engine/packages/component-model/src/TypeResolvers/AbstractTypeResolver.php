@@ -29,8 +29,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     final protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
     {
-        /** @var SchemaNamespacingServiceInterface */
-        return $this->schemaNamespacingService ??= $this->instanceManager->getInstance(SchemaNamespacingServiceInterface::class);
+        if ($this->schemaNamespacingService === null) {
+            /** @var SchemaNamespacingServiceInterface */
+            $schemaNamespacingService = $this->instanceManager->getInstance(SchemaNamespacingServiceInterface::class);
+            $this->schemaNamespacingService = $schemaNamespacingService;
+        }
+        return $this->schemaNamespacingService;
     }
     final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {
@@ -38,8 +42,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
-        /** @var SchemaDefinitionServiceInterface */
-        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+        if ($this->schemaDefinitionService === null) {
+            /** @var SchemaDefinitionServiceInterface */
+            $schemaDefinitionService = $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+            $this->schemaDefinitionService = $schemaDefinitionService;
+        }
+        return $this->schemaDefinitionService;
     }
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
@@ -47,8 +55,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
-        /** @var AttachableExtensionManagerInterface */
-        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+        if ($this->attachableExtensionManager === null) {
+            /** @var AttachableExtensionManagerInterface */
+            $attachableExtensionManager = $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+            $this->attachableExtensionManager = $attachableExtensionManager;
+        }
+        return $this->attachableExtensionManager;
     }
 
     public function getNamespace(): string

@@ -31,8 +31,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getHeadComponent(): HeadComponent
     {
-        /** @var HeadComponent */
-        return $this->headComponent ??= $this->instanceManager->getInstance(HeadComponent::class);
+        if ($this->headComponent === null) {
+            /** @var HeadComponent */
+            $headComponent = $this->instanceManager->getInstance(HeadComponent::class);
+            $this->headComponent = $headComponent;
+        }
+        return $this->headComponent;
     }    
     final public function setComponentPaths(ComponentPaths $componentPaths): void
     {
@@ -40,8 +44,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentPaths(): ComponentPaths
     {
-        /** @var ComponentPaths */
-        return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
+        if ($this->componentPaths === null) {
+            /** @var ComponentPaths */
+            $componentPaths = $this->instanceManager->getInstance(ComponentPaths::class);
+            $this->componentPaths = $componentPaths;
+        }
+        return $this->componentPaths;
     }
     final public function setMainContentComponent(MainContentComponent $mainContentComponent): void
     {
@@ -49,8 +57,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getMainContentComponent(): MainContentComponent
     {
-        /** @var MainContentComponent */
-        return $this->mainContentComponent ??= $this->instanceManager->getInstance(MainContentComponent::class);
+        if ($this->mainContentComponent === null) {
+            /** @var MainContentComponent */
+            $mainContentComponent = $this->instanceManager->getInstance(MainContentComponent::class);
+            $this->mainContentComponent = $mainContentComponent;
+        }
+        return $this->mainContentComponent;
     }
     final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager): void
     {
@@ -58,8 +70,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentRoutingProcessorManager(): ComponentRoutingProcessorManagerInterface
     {
-        /** @var ComponentRoutingProcessorManagerInterface */
-        return $this->routeComponentProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
+        if ($this->routeComponentProcessorManager === null) {
+            /** @var ComponentRoutingProcessorManagerInterface */
+            $routeComponentProcessorManager = $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
+            $this->routeComponentProcessorManager = $routeComponentProcessorManager;
+        }
+        return $this->routeComponentProcessorManager;
     }
     final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
@@ -67,8 +83,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        /** @var ComponentPathHelpersInterface */
-        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+        if ($this->componentPathHelpers === null) {
+            /** @var ComponentPathHelpersInterface */
+            $componentPathHelpers = $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+            $this->componentPathHelpers = $componentPathHelpers;
+        }
+        return $this->componentPathHelpers;
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
@@ -76,8 +96,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        /** @var ComponentHelpersInterface */
-        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+        if ($this->componentHelpers === null) {
+            /** @var ComponentHelpersInterface */
+            $componentHelpers = $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+            $this->componentHelpers = $componentHelpers;
+        }
+        return $this->componentHelpers;
     }
 
     /**

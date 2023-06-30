@@ -17,8 +17,12 @@ class CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver extends
     }
     final protected function getCustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader(): CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader */
-        return $this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader */
+            $customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader = $customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

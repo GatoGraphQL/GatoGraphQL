@@ -31,8 +31,12 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setStringConversion(StringConversion $stringConversion): void
     {
@@ -40,8 +44,12 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     }
     final protected function getStringConversion(): StringConversion
     {
-        /** @var StringConversion */
-        return $this->stringConversion ??= $this->instanceManager->getInstance(StringConversion::class);
+        if ($this->stringConversion === null) {
+            /** @var StringConversion */
+            $stringConversion = $this->instanceManager->getInstance(StringConversion::class);
+            $this->stringConversion = $stringConversion;
+        }
+        return $this->stringConversion;
     }
 
     /**

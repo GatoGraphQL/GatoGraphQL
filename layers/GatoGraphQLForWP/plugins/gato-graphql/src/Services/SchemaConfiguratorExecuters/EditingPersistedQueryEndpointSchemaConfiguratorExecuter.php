@@ -23,8 +23,12 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
-        /** @var EndpointHelpers */
-        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+        if ($this->endpointHelpers === null) {
+            /** @var EndpointHelpers */
+            $endpointHelpers = $this->instanceManager->getInstance(EndpointHelpers::class);
+            $this->endpointHelpers = $endpointHelpers;
+        }
+        return $this->endpointHelpers;
     }
     final public function setPersistedQueryEndpointSchemaConfigurator(PersistedQueryEndpointSchemaConfigurator $persistedQueryEndpointSchemaConfigurator): void
     {
@@ -32,8 +36,12 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     }
     final protected function getPersistedQueryEndpointSchemaConfigurator(): PersistedQueryEndpointSchemaConfigurator
     {
-        /** @var PersistedQueryEndpointSchemaConfigurator */
-        return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
+        if ($this->persistedQueryEndpointSchemaConfigurator === null) {
+            /** @var PersistedQueryEndpointSchemaConfigurator */
+            $persistedQueryEndpointSchemaConfigurator = $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
+            $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
+        }
+        return $this->persistedQueryEndpointSchemaConfigurator;
     }
     final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
     {
@@ -41,8 +49,12 @@ class EditingPersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractSc
     }
     final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
     {
-        /** @var EndpointBlockHelpers */
-        return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+        if ($this->endpointBlockHelpers === null) {
+            /** @var EndpointBlockHelpers */
+            $endpointBlockHelpers = $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+            $this->endpointBlockHelpers = $endpointBlockHelpers;
+        }
+        return $this->endpointBlockHelpers;
     }
 
     /**

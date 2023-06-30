@@ -29,8 +29,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setUserRolesFilterInput(UserRolesFilterInput $userRolesFilterInput): void
     {
@@ -38,8 +42,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getUserRolesFilterInput(): UserRolesFilterInput
     {
-        /** @var UserRolesFilterInput */
-        return $this->userRolesFilterInput ??= $this->instanceManager->getInstance(UserRolesFilterInput::class);
+        if ($this->userRolesFilterInput === null) {
+            /** @var UserRolesFilterInput */
+            $userRolesFilterInput = $this->instanceManager->getInstance(UserRolesFilterInput::class);
+            $this->userRolesFilterInput = $userRolesFilterInput;
+        }
+        return $this->userRolesFilterInput;
     }
     final public function setExcludeUserRolesFilterInput(ExcludeUserRolesFilterInput $excludeUserRolesFilterInput): void
     {
@@ -47,8 +55,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getExcludeUserRolesFilterInput(): ExcludeUserRolesFilterInput
     {
-        /** @var ExcludeUserRolesFilterInput */
-        return $this->excludeUserRolesFilterInput ??= $this->instanceManager->getInstance(ExcludeUserRolesFilterInput::class);
+        if ($this->excludeUserRolesFilterInput === null) {
+            /** @var ExcludeUserRolesFilterInput */
+            $excludeUserRolesFilterInput = $this->instanceManager->getInstance(ExcludeUserRolesFilterInput::class);
+            $this->excludeUserRolesFilterInput = $excludeUserRolesFilterInput;
+        }
+        return $this->excludeUserRolesFilterInput;
     }
 
     /**

@@ -20,8 +20,12 @@ class RootSetFeaturedImageOnCustomPostMutationPayloadErrorsFieldTransientOperati
     }
     final protected function getRootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver(): RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver
     {
-        /** @var RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver */
-        return $this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver */
+            $rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver = $rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver;
     }
 
     /**

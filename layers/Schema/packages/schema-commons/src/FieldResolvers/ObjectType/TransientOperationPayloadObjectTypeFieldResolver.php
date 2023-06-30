@@ -25,8 +25,12 @@ class TransientOperationPayloadObjectTypeFieldResolver extends AbstractObjectTyp
     }
     final protected function getOperationStatusEnumTypeResolver(): OperationStatusEnumTypeResolver
     {
-        /** @var OperationStatusEnumTypeResolver */
-        return $this->operationStatusEnumTypeResolver ??= $this->instanceManager->getInstance(OperationStatusEnumTypeResolver::class);
+        if ($this->operationStatusEnumTypeResolver === null) {
+            /** @var OperationStatusEnumTypeResolver */
+            $operationStatusEnumTypeResolver = $this->instanceManager->getInstance(OperationStatusEnumTypeResolver::class);
+            $this->operationStatusEnumTypeResolver = $operationStatusEnumTypeResolver;
+        }
+        return $this->operationStatusEnumTypeResolver;
     }
 
     /**

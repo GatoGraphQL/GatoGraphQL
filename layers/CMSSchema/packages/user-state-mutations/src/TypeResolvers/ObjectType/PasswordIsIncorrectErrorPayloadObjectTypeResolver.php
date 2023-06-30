@@ -18,8 +18,12 @@ class PasswordIsIncorrectErrorPayloadObjectTypeResolver extends AbstractErrorPay
     }
     final protected function getPasswordIsIncorrectErrorPayloadObjectTypeDataLoader(): PasswordIsIncorrectErrorPayloadObjectTypeDataLoader
     {
-        /** @var PasswordIsIncorrectErrorPayloadObjectTypeDataLoader */
-        return $this->passwordIsIncorrectErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(PasswordIsIncorrectErrorPayloadObjectTypeDataLoader::class);
+        if ($this->passwordIsIncorrectErrorPayloadObjectTypeDataLoader === null) {
+            /** @var PasswordIsIncorrectErrorPayloadObjectTypeDataLoader */
+            $passwordIsIncorrectErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(PasswordIsIncorrectErrorPayloadObjectTypeDataLoader::class);
+            $this->passwordIsIncorrectErrorPayloadObjectTypeDataLoader = $passwordIsIncorrectErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->passwordIsIncorrectErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

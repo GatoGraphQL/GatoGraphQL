@@ -21,8 +21,12 @@ class FlagCustomPostMutationResolverBridge extends AbstractFormComponentMutation
     }
     final protected function getFlagCustomPostMutationResolver(): FlagCustomPostMutationResolver
     {
-        /** @var FlagCustomPostMutationResolver */
-        return $this->flagCustomPostMutationResolver ??= $this->instanceManager->getInstance(FlagCustomPostMutationResolver::class);
+        if ($this->flagCustomPostMutationResolver === null) {
+            /** @var FlagCustomPostMutationResolver */
+            $flagCustomPostMutationResolver = $this->instanceManager->getInstance(FlagCustomPostMutationResolver::class);
+            $this->flagCustomPostMutationResolver = $flagCustomPostMutationResolver;
+        }
+        return $this->flagCustomPostMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

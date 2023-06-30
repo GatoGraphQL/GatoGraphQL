@@ -30,8 +30,12 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
+        }
+        return $this->userTypeAPI;
     }
     final public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
     {
@@ -39,8 +43,12 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     }
     final protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
     {
-        /** @var UserStateTypeMutationAPIInterface */
-        return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
+        if ($this->userStateTypeMutationAPI === null) {
+            /** @var UserStateTypeMutationAPIInterface */
+            $userStateTypeMutationAPI = $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
+            $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
+        }
+        return $this->userStateTypeMutationAPI;
     }
 
     public function validate(

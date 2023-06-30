@@ -18,8 +18,12 @@ class FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver 
     }
     final protected function getFeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(): FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader
     {
-        /** @var FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader */
-        return $this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader::class);
+        if ($this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader === null) {
+            /** @var FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader */
+            $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader::class);
+            $this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

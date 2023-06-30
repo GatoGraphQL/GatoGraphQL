@@ -21,8 +21,12 @@ class CategoryUnionTypeResolver extends AbstractUnionTypeResolver
     }
     final protected function getCategoryUnionTypeDataLoader(): CategoryUnionTypeDataLoader
     {
-        /** @var CategoryUnionTypeDataLoader */
-        return $this->categoryUnionTypeDataLoader ??= $this->instanceManager->getInstance(CategoryUnionTypeDataLoader::class);
+        if ($this->categoryUnionTypeDataLoader === null) {
+            /** @var CategoryUnionTypeDataLoader */
+            $categoryUnionTypeDataLoader = $this->instanceManager->getInstance(CategoryUnionTypeDataLoader::class);
+            $this->categoryUnionTypeDataLoader = $categoryUnionTypeDataLoader;
+        }
+        return $this->categoryUnionTypeDataLoader;
     }
     final public function setCategoryInterfaceTypeResolver(CategoryInterfaceTypeResolver $categoryInterfaceTypeResolver): void
     {
@@ -30,8 +34,12 @@ class CategoryUnionTypeResolver extends AbstractUnionTypeResolver
     }
     final protected function getCategoryInterfaceTypeResolver(): CategoryInterfaceTypeResolver
     {
-        /** @var CategoryInterfaceTypeResolver */
-        return $this->categoryInterfaceTypeResolver ??= $this->instanceManager->getInstance(CategoryInterfaceTypeResolver::class);
+        if ($this->categoryInterfaceTypeResolver === null) {
+            /** @var CategoryInterfaceTypeResolver */
+            $categoryInterfaceTypeResolver = $this->instanceManager->getInstance(CategoryInterfaceTypeResolver::class);
+            $this->categoryInterfaceTypeResolver = $categoryInterfaceTypeResolver;
+        }
+        return $this->categoryInterfaceTypeResolver;
     }
 
     public function getTypeName(): string

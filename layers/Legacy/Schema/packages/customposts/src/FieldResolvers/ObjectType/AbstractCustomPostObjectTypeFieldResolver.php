@@ -25,8 +25,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     final protected function getCustomPostInterfaceTypeFieldResolver(): CustomPostInterfaceTypeFieldResolver
     {
-        /** @var CustomPostInterfaceTypeFieldResolver */
-        return $this->customPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CustomPostInterfaceTypeFieldResolver::class);
+        if ($this->customPostInterfaceTypeFieldResolver === null) {
+            /** @var CustomPostInterfaceTypeFieldResolver */
+            $customPostInterfaceTypeFieldResolver = $this->instanceManager->getInstance(CustomPostInterfaceTypeFieldResolver::class);
+            $this->customPostInterfaceTypeFieldResolver = $customPostInterfaceTypeFieldResolver;
+        }
+        return $this->customPostInterfaceTypeFieldResolver;
     }
 
     /**

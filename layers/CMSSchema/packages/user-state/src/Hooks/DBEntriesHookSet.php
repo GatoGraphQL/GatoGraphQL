@@ -20,8 +20,12 @@ class DBEntriesHookSet extends AbstractHookSet
     }
     final protected function getObjectTypeFieldResolver(): ObjectTypeFieldResolver
     {
-        /** @var ObjectTypeFieldResolver */
-        return $this->globalObjectTypeFieldResolver ??= $this->instanceManager->getInstance(ObjectTypeFieldResolver::class);
+        if ($this->globalObjectTypeFieldResolver === null) {
+            /** @var ObjectTypeFieldResolver */
+            $globalObjectTypeFieldResolver = $this->instanceManager->getInstance(ObjectTypeFieldResolver::class);
+            $this->globalObjectTypeFieldResolver = $globalObjectTypeFieldResolver;
+        }
+        return $this->globalObjectTypeFieldResolver;
     }
 
     protected function init(): void

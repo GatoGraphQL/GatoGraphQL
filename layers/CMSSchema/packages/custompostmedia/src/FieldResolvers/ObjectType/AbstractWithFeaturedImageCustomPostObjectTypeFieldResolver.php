@@ -26,8 +26,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
     {
-        /** @var CustomPostMediaTypeAPIInterface */
-        return $this->customPostMediaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
+        if ($this->customPostMediaTypeAPI === null) {
+            /** @var CustomPostMediaTypeAPIInterface */
+            $customPostMediaTypeAPI = $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
+            $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
+        }
+        return $this->customPostMediaTypeAPI;
     }
     final public function setWithFeaturedImageInterfaceTypeFieldResolver(WithFeaturedImageInterfaceTypeFieldResolver $withFeaturedImageInterfaceTypeFieldResolver): void
     {
@@ -35,8 +39,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getWithFeaturedImageInterfaceTypeFieldResolver(): WithFeaturedImageInterfaceTypeFieldResolver
     {
-        /** @var WithFeaturedImageInterfaceTypeFieldResolver */
-        return $this->withFeaturedImageInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithFeaturedImageInterfaceTypeFieldResolver::class);
+        if ($this->withFeaturedImageInterfaceTypeFieldResolver === null) {
+            /** @var WithFeaturedImageInterfaceTypeFieldResolver */
+            $withFeaturedImageInterfaceTypeFieldResolver = $this->instanceManager->getInstance(WithFeaturedImageInterfaceTypeFieldResolver::class);
+            $this->withFeaturedImageInterfaceTypeFieldResolver = $withFeaturedImageInterfaceTypeFieldResolver;
+        }
+        return $this->withFeaturedImageInterfaceTypeFieldResolver;
     }
 
     /**

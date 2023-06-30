@@ -25,8 +25,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     final protected function getCustomPostUpdateInputObjectTypeResolver(): CustomPostUpdateInputObjectTypeResolver
     {
-        /** @var CustomPostUpdateInputObjectTypeResolver */
-        return $this->customPostUpdateInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostUpdateInputObjectTypeResolver::class);
+        if ($this->customPostUpdateInputObjectTypeResolver === null) {
+            /** @var CustomPostUpdateInputObjectTypeResolver */
+            $customPostUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostUpdateInputObjectTypeResolver::class);
+            $this->customPostUpdateInputObjectTypeResolver = $customPostUpdateInputObjectTypeResolver;
+        }
+        return $this->customPostUpdateInputObjectTypeResolver;
     }
 
     /**

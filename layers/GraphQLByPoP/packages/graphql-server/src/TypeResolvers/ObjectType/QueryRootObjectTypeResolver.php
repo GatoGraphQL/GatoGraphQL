@@ -22,8 +22,12 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
     }
     final protected function getQueryRootObjectTypeDataLoader(): QueryRootObjectTypeDataLoader
     {
-        /** @var QueryRootObjectTypeDataLoader */
-        return $this->queryRootObjectTypeDataLoader ??= $this->instanceManager->getInstance(QueryRootObjectTypeDataLoader::class);
+        if ($this->queryRootObjectTypeDataLoader === null) {
+            /** @var QueryRootObjectTypeDataLoader */
+            $queryRootObjectTypeDataLoader = $this->instanceManager->getInstance(QueryRootObjectTypeDataLoader::class);
+            $this->queryRootObjectTypeDataLoader = $queryRootObjectTypeDataLoader;
+        }
+        return $this->queryRootObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

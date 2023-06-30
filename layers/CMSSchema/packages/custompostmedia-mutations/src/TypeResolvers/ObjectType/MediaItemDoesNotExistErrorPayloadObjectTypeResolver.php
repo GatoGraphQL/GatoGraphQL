@@ -18,8 +18,12 @@ class MediaItemDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorP
     }
     final protected function getMediaItemDoesNotExistErrorPayloadObjectTypeDataLoader(): MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader
     {
-        /** @var MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader */
-        return $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+        if ($this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader === null) {
+            /** @var MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader */
+            $customPostDoesNotExistErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+            $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader = $customPostDoesNotExistErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

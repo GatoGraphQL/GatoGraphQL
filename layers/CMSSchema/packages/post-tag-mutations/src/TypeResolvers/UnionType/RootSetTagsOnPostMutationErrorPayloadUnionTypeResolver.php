@@ -17,8 +17,12 @@ class RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver extends AbstractPos
     }
     final protected function getRootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader(): RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader */
-        return $this->rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader */
+            $rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader = $rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

@@ -20,8 +20,12 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
     }
     final protected function getPersistedQueryEndpointSchemaConfigurator(): PersistedQueryEndpointSchemaConfigurator
     {
-        /** @var PersistedQueryEndpointSchemaConfigurator */
-        return $this->persistedQueryEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
+        if ($this->persistedQueryEndpointSchemaConfigurator === null) {
+            /** @var PersistedQueryEndpointSchemaConfigurator */
+            $persistedQueryEndpointSchemaConfigurator = $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurator::class);
+            $this->persistedQueryEndpointSchemaConfigurator = $persistedQueryEndpointSchemaConfigurator;
+        }
+        return $this->persistedQueryEndpointSchemaConfigurator;
     }
     final public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
     {
@@ -29,8 +33,12 @@ class PersistedQueryEndpointSchemaConfiguratorExecuter extends AbstractLoadingCP
     }
     final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        if ($this->graphQLPersistedQueryEndpointCustomPostType === null) {
+            /** @var GraphQLPersistedQueryEndpointCustomPostType */
+            $graphQLPersistedQueryEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+            $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+        }
+        return $this->graphQLPersistedQueryEndpointCustomPostType;
     }
 
     protected function getCustomPostType(): string

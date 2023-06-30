@@ -36,8 +36,12 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setSingleEndpointSchemaConfigurator(SingleEndpointSchemaConfigurator $singleEndpointSchemaConfigurator): void
     {
@@ -45,8 +49,12 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
     final protected function getSingleEndpointSchemaConfigurator(): SingleEndpointSchemaConfigurator
     {
-        /** @var SingleEndpointSchemaConfigurator */
-        return $this->singleEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(SingleEndpointSchemaConfigurator::class);
+        if ($this->singleEndpointSchemaConfigurator === null) {
+            /** @var SingleEndpointSchemaConfigurator */
+            $singleEndpointSchemaConfigurator = $this->instanceManager->getInstance(SingleEndpointSchemaConfigurator::class);
+            $this->singleEndpointSchemaConfigurator = $singleEndpointSchemaConfigurator;
+        }
+        return $this->singleEndpointSchemaConfigurator;
     }
     final public function setGraphQLEndpointHandler(GraphQLEndpointHandler $graphQLEndpointHandler): void
     {
@@ -54,8 +62,12 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
     final protected function getGraphQLEndpointHandler(): GraphQLEndpointHandler
     {
-        /** @var GraphQLEndpointHandler */
-        return $this->graphQLEndpointHandler ??= $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
+        if ($this->graphQLEndpointHandler === null) {
+            /** @var GraphQLEndpointHandler */
+            $graphQLEndpointHandler = $this->instanceManager->getInstance(GraphQLEndpointHandler::class);
+            $this->graphQLEndpointHandler = $graphQLEndpointHandler;
+        }
+        return $this->graphQLEndpointHandler;
     }
     final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
     {
@@ -63,8 +75,12 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     }
     final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
     {
-        /** @var EndpointBlockHelpers */
-        return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+        if ($this->endpointBlockHelpers === null) {
+            /** @var EndpointBlockHelpers */
+            $endpointBlockHelpers = $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+            $this->endpointBlockHelpers = $endpointBlockHelpers;
+        }
+        return $this->endpointBlockHelpers;
     }
 
     /**

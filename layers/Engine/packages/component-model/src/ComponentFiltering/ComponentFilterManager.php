@@ -54,8 +54,12 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        /** @var ComponentPathManagerInterface */
-        return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
+        if ($this->componentPathManager === null) {
+            /** @var ComponentPathManagerInterface */
+            $componentPathManager = $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
+            $this->componentPathManager = $componentPathManager;
+        }
+        return $this->componentPathManager;
     }
     final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
     {
@@ -63,8 +67,12 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        /** @var ComponentPathHelpersInterface */
-        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+        if ($this->componentPathHelpers === null) {
+            /** @var ComponentPathHelpersInterface */
+            $componentPathHelpers = $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+            $this->componentPathHelpers = $componentPathHelpers;
+        }
+        return $this->componentPathHelpers;
     }
 
     public function addComponentFilter(ComponentFilterInterface $componentFilter): void

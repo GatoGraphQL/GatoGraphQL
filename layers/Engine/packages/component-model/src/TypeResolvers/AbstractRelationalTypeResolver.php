@@ -82,8 +82,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     final protected function getMandatoryFieldDirectiveResolverRegistry(): MandatoryFieldDirectiveResolverRegistryInterface
     {
-        /** @var MandatoryFieldDirectiveResolverRegistryInterface */
-        return $this->mandatoryFieldDirectiveResolverRegistry ??= $this->instanceManager->getInstance(MandatoryFieldDirectiveResolverRegistryInterface::class);
+        if ($this->mandatoryFieldDirectiveResolverRegistry === null) {
+            /** @var MandatoryFieldDirectiveResolverRegistryInterface */
+            $mandatoryFieldDirectiveResolverRegistry = $this->instanceManager->getInstance(MandatoryFieldDirectiveResolverRegistryInterface::class);
+            $this->mandatoryFieldDirectiveResolverRegistry = $mandatoryFieldDirectiveResolverRegistry;
+        }
+        return $this->mandatoryFieldDirectiveResolverRegistry;
     }
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
@@ -91,8 +95,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
-        /** @var DirectivePipelineServiceInterface */
-        return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
+        if ($this->directivePipelineService === null) {
+            /** @var DirectivePipelineServiceInterface */
+            $directivePipelineService = $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
+            $this->directivePipelineService = $directivePipelineService;
+        }
+        return $this->directivePipelineService;
     }
 
     public function __construct()

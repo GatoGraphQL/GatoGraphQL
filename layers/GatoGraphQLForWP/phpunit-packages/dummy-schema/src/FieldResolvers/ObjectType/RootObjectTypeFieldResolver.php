@@ -29,8 +29,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setFirstLayerInputObjectTypeResolver(FirstLayerInputObjectTypeResolver $firstLayerInputObjectTypeResolver): void
     {
@@ -38,8 +42,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getFirstLayerInputObjectTypeResolver(): FirstLayerInputObjectTypeResolver
     {
-        /** @var FirstLayerInputObjectTypeResolver */
-        return $this->firstLayerInputObjectTypeResolver ??= $this->instanceManager->getInstance(FirstLayerInputObjectTypeResolver::class);
+        if ($this->firstLayerInputObjectTypeResolver === null) {
+            /** @var FirstLayerInputObjectTypeResolver */
+            $firstLayerInputObjectTypeResolver = $this->instanceManager->getInstance(FirstLayerInputObjectTypeResolver::class);
+            $this->firstLayerInputObjectTypeResolver = $firstLayerInputObjectTypeResolver;
+        }
+        return $this->firstLayerInputObjectTypeResolver;
     }
     final public function setDummyCreateStringMutationResolver(DummyCreateStringMutationResolver $dummyCreateStringMutationResolver): void
     {
@@ -47,8 +55,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getDummyCreateStringMutationResolver(): DummyCreateStringMutationResolver
     {
-        /** @var DummyCreateStringMutationResolver */
-        return $this->dummyCreateStringMutationResolver ??= $this->instanceManager->getInstance(DummyCreateStringMutationResolver::class);
+        if ($this->dummyCreateStringMutationResolver === null) {
+            /** @var DummyCreateStringMutationResolver */
+            $dummyCreateStringMutationResolver = $this->instanceManager->getInstance(DummyCreateStringMutationResolver::class);
+            $this->dummyCreateStringMutationResolver = $dummyCreateStringMutationResolver;
+        }
+        return $this->dummyCreateStringMutationResolver;
     }
 
     /**

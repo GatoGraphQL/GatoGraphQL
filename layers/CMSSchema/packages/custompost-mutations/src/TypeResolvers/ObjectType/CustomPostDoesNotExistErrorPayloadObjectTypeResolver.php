@@ -18,8 +18,12 @@ class CustomPostDoesNotExistErrorPayloadObjectTypeResolver extends AbstractError
     }
     final protected function getCustomPostDoesNotExistErrorPayloadObjectTypeDataLoader(): CustomPostDoesNotExistErrorPayloadObjectTypeDataLoader
     {
-        /** @var CustomPostDoesNotExistErrorPayloadObjectTypeDataLoader */
-        return $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+        if ($this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader === null) {
+            /** @var CustomPostDoesNotExistErrorPayloadObjectTypeDataLoader */
+            $customPostDoesNotExistErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(CustomPostDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+            $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader = $customPostDoesNotExistErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

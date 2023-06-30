@@ -29,8 +29,12 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
     {
@@ -38,8 +42,12 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
-        /** @var TypeObjectTypeResolver */
-        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+        if ($this->typeObjectTypeResolver === null) {
+            /** @var TypeObjectTypeResolver */
+            $typeObjectTypeResolver = $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+            $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        }
+        return $this->typeObjectTypeResolver;
     }
     final public function setInputValueExtensionsObjectTypeResolver(InputValueExtensionsObjectTypeResolver $inputValueExtensionsObjectTypeResolver): void
     {
@@ -47,8 +55,12 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getInputValueExtensionsObjectTypeResolver(): InputValueExtensionsObjectTypeResolver
     {
-        /** @var InputValueExtensionsObjectTypeResolver */
-        return $this->inputValueExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueExtensionsObjectTypeResolver::class);
+        if ($this->inputValueExtensionsObjectTypeResolver === null) {
+            /** @var InputValueExtensionsObjectTypeResolver */
+            $inputValueExtensionsObjectTypeResolver = $this->instanceManager->getInstance(InputValueExtensionsObjectTypeResolver::class);
+            $this->inputValueExtensionsObjectTypeResolver = $inputValueExtensionsObjectTypeResolver;
+        }
+        return $this->inputValueExtensionsObjectTypeResolver;
     }
 
     /**

@@ -23,8 +23,12 @@ class SelfFieldsBlockSchemaConfigurationExecuter extends AbstractDefaultEnableDi
     }
     final protected function getSchemaConfigSelfFieldsBlock(): SchemaConfigSelfFieldsBlock
     {
-        /** @var SchemaConfigSelfFieldsBlock */
-        return $this->schemaConfigSelfFieldsBlock ??= $this->instanceManager->getInstance(SchemaConfigSelfFieldsBlock::class);
+        if ($this->schemaConfigSelfFieldsBlock === null) {
+            /** @var SchemaConfigSelfFieldsBlock */
+            $schemaConfigSelfFieldsBlock = $this->instanceManager->getInstance(SchemaConfigSelfFieldsBlock::class);
+            $this->schemaConfigSelfFieldsBlock = $schemaConfigSelfFieldsBlock;
+        }
+        return $this->schemaConfigSelfFieldsBlock;
     }
 
     public function getEnablingModule(): ?string

@@ -28,8 +28,12 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setOffsetFilterInput(OffsetFilterInput $excludeIDsFilterInput): void
     {
@@ -37,8 +41,12 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     }
     final protected function getOffsetFilterInput(): OffsetFilterInput
     {
-        /** @var OffsetFilterInput */
-        return $this->excludeIDsFilterInput ??= $this->instanceManager->getInstance(OffsetFilterInput::class);
+        if ($this->excludeIDsFilterInput === null) {
+            /** @var OffsetFilterInput */
+            $excludeIDsFilterInput = $this->instanceManager->getInstance(OffsetFilterInput::class);
+            $this->excludeIDsFilterInput = $excludeIDsFilterInput;
+        }
+        return $this->excludeIDsFilterInput;
     }
     final public function setLimitFilterInput(LimitFilterInput $includeFilterInput): void
     {
@@ -46,8 +54,12 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     }
     final protected function getLimitFilterInput(): LimitFilterInput
     {
-        /** @var LimitFilterInput */
-        return $this->includeFilterInput ??= $this->instanceManager->getInstance(LimitFilterInput::class);
+        if ($this->includeFilterInput === null) {
+            /** @var LimitFilterInput */
+            $includeFilterInput = $this->instanceManager->getInstance(LimitFilterInput::class);
+            $this->includeFilterInput = $includeFilterInput;
+        }
+        return $this->includeFilterInput;
     }
 
     public function getTypeName(): string

@@ -18,8 +18,12 @@ class CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver exte
     }
     final protected function getCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(): CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader
     {
-        /** @var CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader */
-        return $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader::class);
+        if ($this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader === null) {
+            /** @var CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader */
+            $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader::class);
+            $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

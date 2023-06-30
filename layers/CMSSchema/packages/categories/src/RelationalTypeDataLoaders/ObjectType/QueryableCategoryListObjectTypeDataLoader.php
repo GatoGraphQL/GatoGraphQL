@@ -18,8 +18,12 @@ class QueryableCategoryListObjectTypeDataLoader extends AbstractCategoryObjectTy
     }
     final protected function getQueryableCategoryTypeAPI(): QueryableCategoryTypeAPIInterface
     {
-        /** @var QueryableCategoryTypeAPIInterface */
-        return $this->queryableCategoryListTypeAPI ??= $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
+        if ($this->queryableCategoryListTypeAPI === null) {
+            /** @var QueryableCategoryTypeAPIInterface */
+            $queryableCategoryListTypeAPI = $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
+            $this->queryableCategoryListTypeAPI = $queryableCategoryListTypeAPI;
+        }
+        return $this->queryableCategoryListTypeAPI;
     }
 
     public function getCategoryListTypeAPI(): CategoryListTypeAPIInterface

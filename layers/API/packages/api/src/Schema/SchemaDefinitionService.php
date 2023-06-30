@@ -66,8 +66,12 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
     final public function getPersistentCache(): PersistentCacheInterface
     {
-        /** @var PersistentCacheInterface */
-        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
+        if ($this->persistentCache === null) {
+            /** @var PersistentCacheInterface */
+            $persistentCache = $this->instanceManager->getInstance(PersistentCacheInterface::class);
+            $this->persistentCache = $persistentCache;
+        }
+        return $this->persistentCache;
     }
     final public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
     {
@@ -75,8 +79,12 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
     final protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
-        /** @var PersistedFragmentManagerInterface */
-        return $this->persistedFragmentManager ??= $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
+        if ($this->persistedFragmentManager === null) {
+            /** @var PersistedFragmentManagerInterface */
+            $persistedFragmentManager = $this->instanceManager->getInstance(PersistedFragmentManagerInterface::class);
+            $this->persistedFragmentManager = $persistedFragmentManager;
+        }
+        return $this->persistedFragmentManager;
     }
     final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
     {
@@ -84,8 +92,12 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     }
     final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
-        /** @var PersistedQueryManagerInterface */
-        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+        if ($this->persistedQueryManager === null) {
+            /** @var PersistedQueryManagerInterface */
+            $persistedQueryManager = $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+            $this->persistedQueryManager = $persistedQueryManager;
+        }
+        return $this->persistedQueryManager;
     }
 
     /**

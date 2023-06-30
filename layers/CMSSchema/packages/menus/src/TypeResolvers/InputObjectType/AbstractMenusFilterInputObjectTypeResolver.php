@@ -24,8 +24,12 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setSearchFilterInput(SearchFilterInput $seachFilterInput): void
     {
@@ -33,8 +37,12 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
-        /** @var SearchFilterInput */
-        return $this->seachFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
+        if ($this->seachFilterInput === null) {
+            /** @var SearchFilterInput */
+            $seachFilterInput = $this->instanceManager->getInstance(SearchFilterInput::class);
+            $this->seachFilterInput = $seachFilterInput;
+        }
+        return $this->seachFilterInput;
     }
     final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
     {
@@ -42,8 +50,12 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     }
     final protected function getSlugsFilterInput(): SlugsFilterInput
     {
-        /** @var SlugsFilterInput */
-        return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
+        if ($this->slugsFilterInput === null) {
+            /** @var SlugsFilterInput */
+            $slugsFilterInput = $this->instanceManager->getInstance(SlugsFilterInput::class);
+            $this->slugsFilterInput = $slugsFilterInput;
+        }
+        return $this->slugsFilterInput;
     }
 
     /**

@@ -29,8 +29,12 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        /** @var PostObjectTypeResolver */
-        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+        if ($this->postObjectTypeResolver === null) {
+            /** @var PostObjectTypeResolver */
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            $this->postObjectTypeResolver = $postObjectTypeResolver;
+        }
+        return $this->postObjectTypeResolver;
     }
     final public function setSetTagsOnPostMutationResolver(SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver): void
     {
@@ -38,8 +42,12 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getSetTagsOnPostMutationResolver(): SetTagsOnPostMutationResolver
     {
-        /** @var SetTagsOnPostMutationResolver */
-        return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
+        if ($this->setTagsOnPostMutationResolver === null) {
+            /** @var SetTagsOnPostMutationResolver */
+            $setTagsOnPostMutationResolver = $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
+            $this->setTagsOnPostMutationResolver = $setTagsOnPostMutationResolver;
+        }
+        return $this->setTagsOnPostMutationResolver;
     }
     final public function setRootSetTagsOnCustomPostInputObjectTypeResolver(RootSetTagsOnCustomPostInputObjectTypeResolver $rootSetTagsOnCustomPostInputObjectTypeResolver): void
     {
@@ -47,8 +55,12 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getRootSetTagsOnCustomPostInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
-        /** @var RootSetTagsOnCustomPostInputObjectTypeResolver */
-        return $this->rootSetTagsOnCustomPostInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetTagsOnCustomPostInputObjectTypeResolver::class);
+        if ($this->rootSetTagsOnCustomPostInputObjectTypeResolver === null) {
+            /** @var RootSetTagsOnCustomPostInputObjectTypeResolver */
+            $rootSetTagsOnCustomPostInputObjectTypeResolver = $this->instanceManager->getInstance(RootSetTagsOnCustomPostInputObjectTypeResolver::class);
+            $this->rootSetTagsOnCustomPostInputObjectTypeResolver = $rootSetTagsOnCustomPostInputObjectTypeResolver;
+        }
+        return $this->rootSetTagsOnCustomPostInputObjectTypeResolver;
     }
     final public function setPayloadableSetTagsOnPostMutationResolver(PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver): void
     {
@@ -56,8 +68,12 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getPayloadableSetTagsOnPostMutationResolver(): PayloadableSetTagsOnPostMutationResolver
     {
-        /** @var PayloadableSetTagsOnPostMutationResolver */
-        return $this->payloadableSetTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableSetTagsOnPostMutationResolver::class);
+        if ($this->payloadableSetTagsOnPostMutationResolver === null) {
+            /** @var PayloadableSetTagsOnPostMutationResolver */
+            $payloadableSetTagsOnPostMutationResolver = $this->instanceManager->getInstance(PayloadableSetTagsOnPostMutationResolver::class);
+            $this->payloadableSetTagsOnPostMutationResolver = $payloadableSetTagsOnPostMutationResolver;
+        }
+        return $this->payloadableSetTagsOnPostMutationResolver;
     }
     final public function setRootSetTagsOnPostMutationPayloadObjectTypeResolver(RootSetTagsOnPostMutationPayloadObjectTypeResolver $rootSetTagsOnPostMutationPayloadObjectTypeResolver): void
     {
@@ -65,8 +81,12 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     }
     final protected function getRootSetTagsOnPostMutationPayloadObjectTypeResolver(): RootSetTagsOnPostMutationPayloadObjectTypeResolver
     {
-        /** @var RootSetTagsOnPostMutationPayloadObjectTypeResolver */
-        return $this->rootSetTagsOnPostMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(RootSetTagsOnPostMutationPayloadObjectTypeResolver::class);
+        if ($this->rootSetTagsOnPostMutationPayloadObjectTypeResolver === null) {
+            /** @var RootSetTagsOnPostMutationPayloadObjectTypeResolver */
+            $rootSetTagsOnPostMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootSetTagsOnPostMutationPayloadObjectTypeResolver::class);
+            $this->rootSetTagsOnPostMutationPayloadObjectTypeResolver = $rootSetTagsOnPostMutationPayloadObjectTypeResolver;
+        }
+        return $this->rootSetTagsOnPostMutationPayloadObjectTypeResolver;
     }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface

@@ -18,8 +18,12 @@ class PostSetTagsMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTy
     }
     final protected function getPostSetTagsMutationErrorPayloadUnionTypeResolver(): PostSetTagsMutationErrorPayloadUnionTypeResolver
     {
-        /** @var PostSetTagsMutationErrorPayloadUnionTypeResolver */
-        return $this->postSetTagsMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(PostSetTagsMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->postSetTagsMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var PostSetTagsMutationErrorPayloadUnionTypeResolver */
+            $postSetTagsMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostSetTagsMutationErrorPayloadUnionTypeResolver::class);
+            $this->postSetTagsMutationErrorPayloadUnionTypeResolver = $postSetTagsMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->postSetTagsMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

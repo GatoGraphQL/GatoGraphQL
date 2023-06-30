@@ -28,8 +28,12 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     }
     final protected function getCreateUpdateOrganizationProfileMutationResolver(): CreateUpdateOrganizationProfileMutationResolver
     {
-        /** @var CreateUpdateOrganizationProfileMutationResolver */
-        return $this->createUpdateOrganizationProfileMutationResolver ??= $this->instanceManager->getInstance(CreateUpdateOrganizationProfileMutationResolver::class);
+        if ($this->createUpdateOrganizationProfileMutationResolver === null) {
+            /** @var CreateUpdateOrganizationProfileMutationResolver */
+            $createUpdateOrganizationProfileMutationResolver = $this->instanceManager->getInstance(CreateUpdateOrganizationProfileMutationResolver::class);
+            $this->createUpdateOrganizationProfileMutationResolver = $createUpdateOrganizationProfileMutationResolver;
+        }
+        return $this->createUpdateOrganizationProfileMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

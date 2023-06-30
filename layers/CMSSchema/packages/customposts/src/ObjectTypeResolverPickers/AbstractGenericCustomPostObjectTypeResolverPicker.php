@@ -25,8 +25,12 @@ abstract class AbstractGenericCustomPostObjectTypeResolverPicker extends Abstrac
     }
     final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
-        /** @var GenericCustomPostObjectTypeResolver */
-        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+        if ($this->genericCustomPostObjectTypeResolver === null) {
+            /** @var GenericCustomPostObjectTypeResolver */
+            $genericCustomPostObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+            $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+        }
+        return $this->genericCustomPostObjectTypeResolver;
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -34,8 +38,12 @@ abstract class AbstractGenericCustomPostObjectTypeResolverPicker extends Abstrac
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        /** @var CustomPostTypeAPIInterface */
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
     }
     final public function setCustomPostObjectTypeResolverPickerRegistry(CustomPostObjectTypeResolverPickerRegistryInterface $customPostObjectTypeResolverPickerRegistry): void
     {
@@ -43,8 +51,12 @@ abstract class AbstractGenericCustomPostObjectTypeResolverPicker extends Abstrac
     }
     final protected function getCustomPostObjectTypeResolverPickerRegistry(): CustomPostObjectTypeResolverPickerRegistryInterface
     {
-        /** @var CustomPostObjectTypeResolverPickerRegistryInterface */
-        return $this->customPostObjectTypeResolverPickerRegistry ??= $this->instanceManager->getInstance(CustomPostObjectTypeResolverPickerRegistryInterface::class);
+        if ($this->customPostObjectTypeResolverPickerRegistry === null) {
+            /** @var CustomPostObjectTypeResolverPickerRegistryInterface */
+            $customPostObjectTypeResolverPickerRegistry = $this->instanceManager->getInstance(CustomPostObjectTypeResolverPickerRegistryInterface::class);
+            $this->customPostObjectTypeResolverPickerRegistry = $customPostObjectTypeResolverPickerRegistry;
+        }
+        return $this->customPostObjectTypeResolverPickerRegistry;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

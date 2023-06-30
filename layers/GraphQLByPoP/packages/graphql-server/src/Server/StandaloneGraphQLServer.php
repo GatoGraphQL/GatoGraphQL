@@ -40,8 +40,12 @@ class StandaloneGraphQLServer extends AbstractGraphQLServer
     }
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {
-        /** @var GraphQLParserHelperServiceInterface */
-        return $this->graphQLParserHelperService ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLParserHelperServiceInterface::class);
+        if ($this->graphQLParserHelperService === null) {
+            /** @var GraphQLParserHelperServiceInterface */
+            $graphQLParserHelperService = InstanceManagerFacade::getInstance()->getInstance(GraphQLParserHelperServiceInterface::class);
+            $this->graphQLParserHelperService = $graphQLParserHelperService;
+        }
+        return $this->graphQLParserHelperService;
     }
     final public function setGraphQLServerAppStateProviderService(GraphQLServerAppStateProviderServiceInterface $graphQLServerAppStateProviderService): void
     {
@@ -49,8 +53,12 @@ class StandaloneGraphQLServer extends AbstractGraphQLServer
     }
     final protected function getGraphQLServerAppStateProviderService(): GraphQLServerAppStateProviderServiceInterface
     {
-        /** @var GraphQLServerAppStateProviderServiceInterface */
-        return $this->graphQLServerAppStateProviderService ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLServerAppStateProviderServiceInterface::class);
+        if ($this->graphQLServerAppStateProviderService === null) {
+            /** @var GraphQLServerAppStateProviderServiceInterface */
+            $graphQLServerAppStateProviderService = InstanceManagerFacade::getInstance()->getInstance(GraphQLServerAppStateProviderServiceInterface::class);
+            $this->graphQLServerAppStateProviderService = $graphQLServerAppStateProviderService;
+        }
+        return $this->graphQLServerAppStateProviderService;
     }
 
     /**

@@ -25,8 +25,12 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
     }
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
-        /** @var CustomPostStatusEnumTypeResolver */
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+        if ($this->customPostStatusEnumTypeResolver === null) {
+            /** @var CustomPostStatusEnumTypeResolver */
+            $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+            $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        }
+        return $this->customPostStatusEnumTypeResolver;
     }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -34,8 +38,12 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -43,8 +51,12 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setCustomPostContentAsOneofInputObjectTypeResolver(CustomPostContentAsOneofInputObjectTypeResolver $customPostContentAsOneofInputObjectTypeResolver): void
     {
@@ -52,8 +64,12 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
     }
     final protected function getCustomPostContentAsOneofInputObjectTypeResolver(): CustomPostContentAsOneofInputObjectTypeResolver
     {
-        /** @var CustomPostContentAsOneofInputObjectTypeResolver */
-        return $this->customPostContentAsOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostContentAsOneofInputObjectTypeResolver::class);
+        if ($this->customPostContentAsOneofInputObjectTypeResolver === null) {
+            /** @var CustomPostContentAsOneofInputObjectTypeResolver */
+            $customPostContentAsOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostContentAsOneofInputObjectTypeResolver::class);
+            $this->customPostContentAsOneofInputObjectTypeResolver = $customPostContentAsOneofInputObjectTypeResolver;
+        }
+        return $this->customPostContentAsOneofInputObjectTypeResolver;
     }
 
     public function getTypeDescription(): ?string

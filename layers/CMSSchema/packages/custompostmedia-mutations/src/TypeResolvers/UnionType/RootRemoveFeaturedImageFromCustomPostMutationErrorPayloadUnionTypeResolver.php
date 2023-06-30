@@ -17,8 +17,12 @@ class RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeResolver
     }
     final protected function getRootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader(): RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader */
-        return $this->rootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->rootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader */
+            $rootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader = $rootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->rootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

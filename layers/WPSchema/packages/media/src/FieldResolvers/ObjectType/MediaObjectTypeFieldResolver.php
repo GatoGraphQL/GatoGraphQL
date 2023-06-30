@@ -28,8 +28,12 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
-        /** @var CMSHelperServiceInterface */
-        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+        if ($this->cmsHelperService === null) {
+            /** @var CMSHelperServiceInterface */
+            $cmsHelperService = $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+            $this->cmsHelperService = $cmsHelperService;
+        }
+        return $this->cmsHelperService;
     }
     final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
@@ -37,8 +41,12 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getDateFormatter(): DateFormatterInterface
     {
-        /** @var DateFormatterInterface */
-        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+        if ($this->dateFormatter === null) {
+            /** @var DateFormatterInterface */
+            $dateFormatter = $this->instanceManager->getInstance(DateFormatterInterface::class);
+            $this->dateFormatter = $dateFormatter;
+        }
+        return $this->dateFormatter;
     }
     final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -46,8 +54,12 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
-        /** @var QueryableInterfaceTypeFieldResolver */
-        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+        if ($this->queryableInterfaceTypeFieldResolver === null) {
+            /** @var QueryableInterfaceTypeFieldResolver */
+            $queryableInterfaceTypeFieldResolver = $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+            $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+        }
+        return $this->queryableInterfaceTypeFieldResolver;
     }
 
     /**

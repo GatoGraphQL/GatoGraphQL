@@ -19,8 +19,12 @@ abstract class AbstractLoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadO
     }
     final protected function getLoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver(): LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver
     {
-        /** @var LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver */
-        return $this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver::class);
+        if ($this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver === null) {
+            /** @var LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver */
+            $loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver::class);
+            $this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver = $loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver;
+        }
+        return $this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

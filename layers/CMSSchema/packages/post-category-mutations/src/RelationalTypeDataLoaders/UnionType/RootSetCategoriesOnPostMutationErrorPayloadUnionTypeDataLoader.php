@@ -18,8 +18,12 @@ class RootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader extends Abs
     }
     final protected function getRootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver(): RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver
     {
-        /** @var RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver */
-        return $this->rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver */
+            $rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver = $rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

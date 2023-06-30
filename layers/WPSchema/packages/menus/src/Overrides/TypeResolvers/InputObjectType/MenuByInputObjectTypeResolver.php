@@ -20,8 +20,12 @@ class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolve
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setMenuLocationEnumStringTypeResolver(MenuLocationEnumStringScalarTypeResolver $menuLocationEnumStringScalarTypeResolver): void
     {
@@ -29,8 +33,12 @@ class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolve
     }
     final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringScalarTypeResolver
     {
-        /** @var MenuLocationEnumStringScalarTypeResolver */
-        return $this->menuLocationEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumStringScalarTypeResolver::class);
+        if ($this->menuLocationEnumStringScalarTypeResolver === null) {
+            /** @var MenuLocationEnumStringScalarTypeResolver */
+            $menuLocationEnumStringScalarTypeResolver = $this->instanceManager->getInstance(MenuLocationEnumStringScalarTypeResolver::class);
+            $this->menuLocationEnumStringScalarTypeResolver = $menuLocationEnumStringScalarTypeResolver;
+        }
+        return $this->menuLocationEnumStringScalarTypeResolver;
     }
 
     /**

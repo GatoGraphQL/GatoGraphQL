@@ -22,8 +22,12 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
     }
     final protected function getPrivateEndpointSchemaConfigurator(): PrivateEndpointSchemaConfigurator
     {
-        /** @var PrivateEndpointSchemaConfigurator */
-        return $this->privateEndpointSchemaConfigurator ??= $this->instanceManager->getInstance(PrivateEndpointSchemaConfigurator::class);
+        if ($this->privateEndpointSchemaConfigurator === null) {
+            /** @var PrivateEndpointSchemaConfigurator */
+            $privateEndpointSchemaConfigurator = $this->instanceManager->getInstance(PrivateEndpointSchemaConfigurator::class);
+            $this->privateEndpointSchemaConfigurator = $privateEndpointSchemaConfigurator;
+        }
+        return $this->privateEndpointSchemaConfigurator;
     }
     final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
     {
@@ -31,8 +35,12 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
     }
     final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
     {
-        /** @var EndpointBlockHelpers */
-        return $this->endpointBlockHelpers ??= $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+        if ($this->endpointBlockHelpers === null) {
+            /** @var EndpointBlockHelpers */
+            $endpointBlockHelpers = $this->instanceManager->getInstance(EndpointBlockHelpers::class);
+            $this->endpointBlockHelpers = $endpointBlockHelpers;
+        }
+        return $this->endpointBlockHelpers;
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -40,8 +48,12 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
-        /** @var EndpointHelpers */
-        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+        if ($this->endpointHelpers === null) {
+            /** @var EndpointHelpers */
+            $endpointHelpers = $this->instanceManager->getInstance(EndpointHelpers::class);
+            $this->endpointHelpers = $endpointHelpers;
+        }
+        return $this->endpointHelpers;
     }
 
     /**

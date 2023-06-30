@@ -24,8 +24,12 @@ abstract class AbstractTransientObject implements TransientObjectInterface
     }
     final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
-        /** @var ObjectDictionaryInterface */
-        return $this->objectDictionary ??= InstanceManagerFacade::getInstance()->getInstance(ObjectDictionaryInterface::class);
+        if ($this->objectDictionary === null) {
+            /** @var ObjectDictionaryInterface */
+            $objectDictionary = InstanceManagerFacade::getInstance()->getInstance(ObjectDictionaryInterface::class);
+            $this->objectDictionary = $objectDictionary;
+        }
+        return $this->objectDictionary;
     }
 
     /**

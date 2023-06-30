@@ -25,8 +25,12 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setExtensionsMenuPage(ExtensionsMenuPage $extensionsMenuPage): void
     {
@@ -34,8 +38,12 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
     final protected function getExtensionsMenuPage(): ExtensionsMenuPage
     {
-        /** @var ExtensionsMenuPage */
-        return $this->extensionsMenuPage ??= $this->instanceManager->getInstance(ExtensionsMenuPage::class);
+        if ($this->extensionsMenuPage === null) {
+            /** @var ExtensionsMenuPage */
+            $extensionsMenuPage = $this->instanceManager->getInstance(ExtensionsMenuPage::class);
+            $this->extensionsMenuPage = $extensionsMenuPage;
+        }
+        return $this->extensionsMenuPage;
     }
 
     public function getMenuPageSlug(): string

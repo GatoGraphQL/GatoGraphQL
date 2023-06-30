@@ -23,8 +23,12 @@ class SchemaConfigSchemaCategoriesBlock extends AbstractSchemaConfigCustomizable
     }
     final protected function getWPDataModelProvider(): WPDataModelProviderInterface
     {
-        /** @var WPDataModelProviderInterface */
-        return $this->wpDataModelProvider ??= $this->instanceManager->getInstance(WPDataModelProviderInterface::class);
+        if ($this->wpDataModelProvider === null) {
+            /** @var WPDataModelProviderInterface */
+            $wpDataModelProvider = $this->instanceManager->getInstance(WPDataModelProviderInterface::class);
+            $this->wpDataModelProvider = $wpDataModelProvider;
+        }
+        return $this->wpDataModelProvider;
     }
 
     protected function getBlockName(): string

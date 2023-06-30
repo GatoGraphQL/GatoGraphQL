@@ -42,8 +42,12 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     }
     final protected function getOutputService(): OutputServiceInterface
     {
-        /** @var OutputServiceInterface */
-        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+        if ($this->outputService === null) {
+            /** @var OutputServiceInterface */
+            $outputService = $this->instanceManager->getInstance(OutputServiceInterface::class);
+            $this->outputService = $outputService;
+        }
+        return $this->outputService;
     }
 
     /**

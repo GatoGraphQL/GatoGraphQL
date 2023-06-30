@@ -14,8 +14,12 @@ class ExtensionDocModuleDocumentationMenuPage extends AbstractExtensionModuleDoc
     }
     final protected function getExtensionDocsMenuPage(): ExtensionDocsMenuPage
     {
-        /** @var ExtensionDocsMenuPage */
-        return $this->extensionDocsMenuPage ??= $this->instanceManager->getInstance(ExtensionDocsMenuPage::class);
+        if ($this->extensionDocsMenuPage === null) {
+            /** @var ExtensionDocsMenuPage */
+            $extensionDocsMenuPage = $this->instanceManager->getInstance(ExtensionDocsMenuPage::class);
+            $this->extensionDocsMenuPage = $extensionDocsMenuPage;
+        }
+        return $this->extensionDocsMenuPage;
     }
 
     public function getMenuPageSlug(): string

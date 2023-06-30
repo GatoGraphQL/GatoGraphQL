@@ -18,8 +18,12 @@ class BlockUnionTypeDataLoader extends AbstractUnionTypeDataLoader
     }
     final protected function getBlockUnionTypeResolver(): BlockUnionTypeResolver
     {
-        /** @var BlockUnionTypeResolver */
-        return $this->blockUnionTypeResolver ??= $this->instanceManager->getInstance(BlockUnionTypeResolver::class);
+        if ($this->blockUnionTypeResolver === null) {
+            /** @var BlockUnionTypeResolver */
+            $blockUnionTypeResolver = $this->instanceManager->getInstance(BlockUnionTypeResolver::class);
+            $this->blockUnionTypeResolver = $blockUnionTypeResolver;
+        }
+        return $this->blockUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

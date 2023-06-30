@@ -21,8 +21,12 @@ class SetCategoriesOnPostMutationResolver extends AbstractSetCategoriesOnCustomP
     }
     final protected function getPostCategoryTypeMutationAPI(): PostCategoryTypeMutationAPIInterface
     {
-        /** @var PostCategoryTypeMutationAPIInterface */
-        return $this->postCategoryTypeMutationAPI ??= $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
+        if ($this->postCategoryTypeMutationAPI === null) {
+            /** @var PostCategoryTypeMutationAPIInterface */
+            $postCategoryTypeMutationAPI = $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
+            $this->postCategoryTypeMutationAPI = $postCategoryTypeMutationAPI;
+        }
+        return $this->postCategoryTypeMutationAPI;
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
@@ -30,8 +34,12 @@ class SetCategoriesOnPostMutationResolver extends AbstractSetCategoriesOnCustomP
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
-        /** @var PostCategoryTypeAPIInterface */
-        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+        if ($this->postCategoryTypeAPI === null) {
+            /** @var PostCategoryTypeAPIInterface */
+            $postCategoryTypeAPI = $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+            $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+        }
+        return $this->postCategoryTypeAPI;
     }
 
     protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface

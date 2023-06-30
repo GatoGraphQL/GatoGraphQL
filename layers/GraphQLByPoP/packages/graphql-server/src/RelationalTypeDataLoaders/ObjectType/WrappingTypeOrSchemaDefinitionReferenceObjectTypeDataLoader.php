@@ -26,8 +26,12 @@ class WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader extends Abstra
     }
     final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
-        /** @var SchemaDefinitionReferenceRegistryInterface */
-        return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+        if ($this->schemaDefinitionReferenceRegistry === null) {
+            /** @var SchemaDefinitionReferenceRegistryInterface */
+            $schemaDefinitionReferenceRegistry = $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+            $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+        }
+        return $this->schemaDefinitionReferenceRegistry;
     }
     final public function setGraphQLSyntaxService(GraphQLSyntaxServiceInterface $graphQLSyntaxService): void
     {
@@ -35,8 +39,12 @@ class WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader extends Abstra
     }
     final protected function getGraphQLSyntaxService(): GraphQLSyntaxServiceInterface
     {
-        /** @var GraphQLSyntaxServiceInterface */
-        return $this->graphQLSyntaxService ??= $this->instanceManager->getInstance(GraphQLSyntaxServiceInterface::class);
+        if ($this->graphQLSyntaxService === null) {
+            /** @var GraphQLSyntaxServiceInterface */
+            $graphQLSyntaxService = $this->instanceManager->getInstance(GraphQLSyntaxServiceInterface::class);
+            $this->graphQLSyntaxService = $graphQLSyntaxService;
+        }
+        return $this->graphQLSyntaxService;
     }
     final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
     {
@@ -44,8 +52,12 @@ class WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader extends Abstra
     }
     final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
-        /** @var ObjectDictionaryInterface */
-        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
+        if ($this->objectDictionary === null) {
+            /** @var ObjectDictionaryInterface */
+            $objectDictionary = $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
+            $this->objectDictionary = $objectDictionary;
+        }
+        return $this->objectDictionary;
     }
 
     /**

@@ -20,8 +20,12 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
+        }
+        return $this->userTypeAPI;
     }
     final public function setUserObjectTypeDataLoader(UserObjectTypeDataLoader $userObjectTypeDataLoader): void
     {
@@ -29,8 +33,12 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getUserObjectTypeDataLoader(): UserObjectTypeDataLoader
     {
-        /** @var UserObjectTypeDataLoader */
-        return $this->userObjectTypeDataLoader ??= $this->instanceManager->getInstance(UserObjectTypeDataLoader::class);
+        if ($this->userObjectTypeDataLoader === null) {
+            /** @var UserObjectTypeDataLoader */
+            $userObjectTypeDataLoader = $this->instanceManager->getInstance(UserObjectTypeDataLoader::class);
+            $this->userObjectTypeDataLoader = $userObjectTypeDataLoader;
+        }
+        return $this->userObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

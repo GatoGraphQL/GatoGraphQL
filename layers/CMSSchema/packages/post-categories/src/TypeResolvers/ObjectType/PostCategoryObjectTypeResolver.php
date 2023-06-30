@@ -21,8 +21,12 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     }
     final protected function getPostCategoryObjectTypeDataLoader(): PostCategoryObjectTypeDataLoader
     {
-        /** @var PostCategoryObjectTypeDataLoader */
-        return $this->postCategoryObjectTypeDataLoader ??= $this->instanceManager->getInstance(PostCategoryObjectTypeDataLoader::class);
+        if ($this->postCategoryObjectTypeDataLoader === null) {
+            /** @var PostCategoryObjectTypeDataLoader */
+            $postCategoryObjectTypeDataLoader = $this->instanceManager->getInstance(PostCategoryObjectTypeDataLoader::class);
+            $this->postCategoryObjectTypeDataLoader = $postCategoryObjectTypeDataLoader;
+        }
+        return $this->postCategoryObjectTypeDataLoader;
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
@@ -30,8 +34,12 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
-        /** @var PostCategoryTypeAPIInterface */
-        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+        if ($this->postCategoryTypeAPI === null) {
+            /** @var PostCategoryTypeAPIInterface */
+            $postCategoryTypeAPI = $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+            $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+        }
+        return $this->postCategoryTypeAPI;
     }
 
     public function getTypeName(): string

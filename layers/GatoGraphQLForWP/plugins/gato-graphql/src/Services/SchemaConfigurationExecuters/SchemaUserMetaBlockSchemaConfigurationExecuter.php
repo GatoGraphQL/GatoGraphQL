@@ -21,8 +21,12 @@ class SchemaUserMetaBlockSchemaConfigurationExecuter extends AbstractSchemaMetaB
     }
     final protected function getSchemaConfigSchemaUserMetaBlock(): SchemaConfigSchemaUserMetaBlock
     {
-        /** @var SchemaConfigSchemaUserMetaBlock */
-        return $this->schemaConfigSchemaUserMetaBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaUserMetaBlock::class);
+        if ($this->schemaConfigSchemaUserMetaBlock === null) {
+            /** @var SchemaConfigSchemaUserMetaBlock */
+            $schemaConfigSchemaUserMetaBlock = $this->instanceManager->getInstance(SchemaConfigSchemaUserMetaBlock::class);
+            $this->schemaConfigSchemaUserMetaBlock = $schemaConfigSchemaUserMetaBlock;
+        }
+        return $this->schemaConfigSchemaUserMetaBlock;
     }
 
     public function getEnablingModule(): ?string

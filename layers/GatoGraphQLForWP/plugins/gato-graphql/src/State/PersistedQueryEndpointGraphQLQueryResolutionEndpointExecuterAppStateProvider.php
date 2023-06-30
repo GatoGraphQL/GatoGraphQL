@@ -17,8 +17,12 @@ class PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuterAppStateProvid
     }
     final protected function getPersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter(): PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter
     {
-        /** @var PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter */
-        return $this->persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter::class);
+        if ($this->persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter === null) {
+            /** @var PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter */
+            $persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter = $this->instanceManager->getInstance(PersistedQueryEndpointGraphQLQueryResolutionEndpointExecuter::class);
+            $this->persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter = $persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
+        }
+        return $this->persistedQueryEndpointGraphQLQueryResolutionEndpointExecuter;
     }
 
     protected function getGraphQLQueryResolutionEndpointExecuter(): GraphQLQueryResolutionEndpointExecuterInterface

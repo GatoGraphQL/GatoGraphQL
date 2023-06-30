@@ -35,8 +35,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getUserAvatarTypeAPI(): UserAvatarTypeAPIInterface
     {
-        /** @var UserAvatarTypeAPIInterface */
-        return $this->userAvatarTypeAPI ??= $this->instanceManager->getInstance(UserAvatarTypeAPIInterface::class);
+        if ($this->userAvatarTypeAPI === null) {
+            /** @var UserAvatarTypeAPIInterface */
+            $userAvatarTypeAPI = $this->instanceManager->getInstance(UserAvatarTypeAPIInterface::class);
+            $this->userAvatarTypeAPI = $userAvatarTypeAPI;
+        }
+        return $this->userAvatarTypeAPI;
     }
     final public function setUserAvatarRuntimeRegistry(UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry): void
     {
@@ -44,8 +48,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getUserAvatarRuntimeRegistry(): UserAvatarRuntimeRegistryInterface
     {
-        /** @var UserAvatarRuntimeRegistryInterface */
-        return $this->userAvatarRuntimeRegistry ??= $this->instanceManager->getInstance(UserAvatarRuntimeRegistryInterface::class);
+        if ($this->userAvatarRuntimeRegistry === null) {
+            /** @var UserAvatarRuntimeRegistryInterface */
+            $userAvatarRuntimeRegistry = $this->instanceManager->getInstance(UserAvatarRuntimeRegistryInterface::class);
+            $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
+        }
+        return $this->userAvatarRuntimeRegistry;
     }
     final public function setUserAvatarObjectTypeResolver(UserAvatarObjectTypeResolver $userAvatarObjectTypeResolver): void
     {
@@ -53,8 +61,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getUserAvatarObjectTypeResolver(): UserAvatarObjectTypeResolver
     {
-        /** @var UserAvatarObjectTypeResolver */
-        return $this->userAvatarObjectTypeResolver ??= $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
+        if ($this->userAvatarObjectTypeResolver === null) {
+            /** @var UserAvatarObjectTypeResolver */
+            $userAvatarObjectTypeResolver = $this->instanceManager->getInstance(UserAvatarObjectTypeResolver::class);
+            $this->userAvatarObjectTypeResolver = $userAvatarObjectTypeResolver;
+        }
+        return $this->userAvatarObjectTypeResolver;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -62,8 +74,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
 
     /**

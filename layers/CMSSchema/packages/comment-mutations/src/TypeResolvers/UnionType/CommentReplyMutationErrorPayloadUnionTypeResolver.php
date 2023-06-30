@@ -17,8 +17,12 @@ class CommentReplyMutationErrorPayloadUnionTypeResolver extends AbstractCommentM
     }
     final protected function getCommentReplyMutationErrorPayloadUnionTypeDataLoader(): CommentReplyMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var CommentReplyMutationErrorPayloadUnionTypeDataLoader */
-        return $this->commentReplyMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(CommentReplyMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->commentReplyMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var CommentReplyMutationErrorPayloadUnionTypeDataLoader */
+            $commentReplyMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(CommentReplyMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->commentReplyMutationErrorPayloadUnionTypeDataLoader = $commentReplyMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->commentReplyMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

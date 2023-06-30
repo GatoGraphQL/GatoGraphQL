@@ -20,8 +20,12 @@ class DoingPostUserNotLoggedInAggregateCheckpoint extends AbstractAggregateCheck
     }
     final protected function getUserNotLoggedInCheckpoint(): UserNotLoggedInCheckpoint
     {
-        /** @var UserNotLoggedInCheckpoint */
-        return $this->userNotLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserNotLoggedInCheckpoint::class);
+        if ($this->userNotLoggedInCheckpoint === null) {
+            /** @var UserNotLoggedInCheckpoint */
+            $userNotLoggedInCheckpoint = $this->instanceManager->getInstance(UserNotLoggedInCheckpoint::class);
+            $this->userNotLoggedInCheckpoint = $userNotLoggedInCheckpoint;
+        }
+        return $this->userNotLoggedInCheckpoint;
     }
     final public function setDoingPostCheckpoint(DoingPostCheckpoint $doingPostCheckpoint): void
     {
@@ -29,8 +33,12 @@ class DoingPostUserNotLoggedInAggregateCheckpoint extends AbstractAggregateCheck
     }
     final protected function getDoingPostCheckpoint(): DoingPostCheckpoint
     {
-        /** @var DoingPostCheckpoint */
-        return $this->doingPostCheckpoint ??= $this->instanceManager->getInstance(DoingPostCheckpoint::class);
+        if ($this->doingPostCheckpoint === null) {
+            /** @var DoingPostCheckpoint */
+            $doingPostCheckpoint = $this->instanceManager->getInstance(DoingPostCheckpoint::class);
+            $this->doingPostCheckpoint = $doingPostCheckpoint;
+        }
+        return $this->doingPostCheckpoint;
     }
 
     /**

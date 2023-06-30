@@ -20,8 +20,12 @@ class MetaQueryCompareByKeyInputObjectTypeResolver extends AbstractInputObjectTy
     }
     final protected function getMetaQueryCompareByKeyOperatorEnumTypeResolver(): MetaQueryCompareByKeyOperatorEnumTypeResolver
     {
-        /** @var MetaQueryCompareByKeyOperatorEnumTypeResolver */
-        return $this->metaQueryCompareByKeyOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByKeyOperatorEnumTypeResolver::class);
+        if ($this->metaQueryCompareByKeyOperatorEnumTypeResolver === null) {
+            /** @var MetaQueryCompareByKeyOperatorEnumTypeResolver */
+            $metaQueryCompareByKeyOperatorEnumTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByKeyOperatorEnumTypeResolver::class);
+            $this->metaQueryCompareByKeyOperatorEnumTypeResolver = $metaQueryCompareByKeyOperatorEnumTypeResolver;
+        }
+        return $this->metaQueryCompareByKeyOperatorEnumTypeResolver;
     }
 
     public function getTypeName(): string

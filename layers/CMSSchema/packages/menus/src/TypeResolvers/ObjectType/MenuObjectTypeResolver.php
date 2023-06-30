@@ -20,8 +20,12 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getMenuObjectTypeDataLoader(): MenuObjectTypeDataLoader
     {
-        /** @var MenuObjectTypeDataLoader */
-        return $this->menuObjectTypeDataLoader ??= $this->instanceManager->getInstance(MenuObjectTypeDataLoader::class);
+        if ($this->menuObjectTypeDataLoader === null) {
+            /** @var MenuObjectTypeDataLoader */
+            $menuObjectTypeDataLoader = $this->instanceManager->getInstance(MenuObjectTypeDataLoader::class);
+            $this->menuObjectTypeDataLoader = $menuObjectTypeDataLoader;
+        }
+        return $this->menuObjectTypeDataLoader;
     }
     final public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {
@@ -29,8 +33,12 @@ class MenuObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
-        /** @var MenuTypeAPIInterface */
-        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+        if ($this->menuTypeAPI === null) {
+            /** @var MenuTypeAPIInterface */
+            $menuTypeAPI = $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+            $this->menuTypeAPI = $menuTypeAPI;
+        }
+        return $this->menuTypeAPI;
     }
 
     public function getTypeName(): string

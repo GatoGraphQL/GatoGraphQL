@@ -56,8 +56,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     final public function getPersistentCache(): PersistentCacheInterface
     {
-        /** @var PersistentCacheInterface */
-        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
+        if ($this->persistentCache === null) {
+            /** @var PersistentCacheInterface */
+            $persistentCache = $this->instanceManager->getInstance(PersistentCacheInterface::class);
+            $this->persistentCache = $persistentCache;
+        }
+        return $this->persistentCache;
     }
     final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
     {
@@ -65,8 +69,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
-        /** @var SchemaDefinitionServiceInterface */
-        return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+        if ($this->schemaDefinitionService === null) {
+            /** @var SchemaDefinitionServiceInterface */
+            $schemaDefinitionService = $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
+            $this->schemaDefinitionService = $schemaDefinitionService;
+        }
+        return $this->schemaDefinitionService;
     }
     final public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
     {
@@ -74,8 +82,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     final protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
     {
-        /** @var GraphQLSchemaDefinitionServiceInterface */
-        return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
+        if ($this->graphQLSchemaDefinitionService === null) {
+            /** @var GraphQLSchemaDefinitionServiceInterface */
+            $graphQLSchemaDefinitionService = $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
+            $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
+        }
+        return $this->graphQLSchemaDefinitionService;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -83,8 +95,12 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
 
     /**

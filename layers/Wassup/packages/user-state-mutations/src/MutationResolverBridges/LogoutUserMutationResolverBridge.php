@@ -18,8 +18,12 @@ class LogoutUserMutationResolverBridge extends AbstractComponentMutationResolver
     }
     final protected function getLogoutUserMutationResolver(): LogoutUserMutationResolver
     {
-        /** @var LogoutUserMutationResolver */
-        return $this->logoutUserMutationResolver ??= $this->instanceManager->getInstance(LogoutUserMutationResolver::class);
+        if ($this->logoutUserMutationResolver === null) {
+            /** @var LogoutUserMutationResolver */
+            $logoutUserMutationResolver = $this->instanceManager->getInstance(LogoutUserMutationResolver::class);
+            $this->logoutUserMutationResolver = $logoutUserMutationResolver;
+        }
+        return $this->logoutUserMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

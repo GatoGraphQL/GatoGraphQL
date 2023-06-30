@@ -24,8 +24,12 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     }
     final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
-        /** @var PageObjectTypeResolver */
-        return $this->pageObjectTypeResolver ??= $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+        if ($this->pageObjectTypeResolver === null) {
+            /** @var PageObjectTypeResolver */
+            $pageObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+            $this->pageObjectTypeResolver = $pageObjectTypeResolver;
+        }
+        return $this->pageObjectTypeResolver;
     }
 
     /**

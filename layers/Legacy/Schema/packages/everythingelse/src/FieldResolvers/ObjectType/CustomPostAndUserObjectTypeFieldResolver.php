@@ -29,8 +29,12 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setLocationObjectTypeResolver(LocationObjectTypeResolver $locationObjectTypeResolver): void
     {
@@ -38,8 +42,12 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     }
     final protected function getLocationObjectTypeResolver(): LocationObjectTypeResolver
     {
-        /** @var LocationObjectTypeResolver */
-        return $this->locationObjectTypeResolver ??= $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
+        if ($this->locationObjectTypeResolver === null) {
+            /** @var LocationObjectTypeResolver */
+            $locationObjectTypeResolver = $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
+            $this->locationObjectTypeResolver = $locationObjectTypeResolver;
+        }
+        return $this->locationObjectTypeResolver;
     }
 
     /**

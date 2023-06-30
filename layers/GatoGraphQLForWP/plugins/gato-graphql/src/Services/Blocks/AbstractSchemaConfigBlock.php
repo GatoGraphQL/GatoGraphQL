@@ -17,8 +17,12 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
     }
     final protected function getSchemaConfigurationBlockCategory(): SchemaConfigurationBlockCategory
     {
-        /** @var SchemaConfigurationBlockCategory */
-        return $this->schemaConfigurationBlockCategory ??= $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
+        if ($this->schemaConfigurationBlockCategory === null) {
+            /** @var SchemaConfigurationBlockCategory */
+            $schemaConfigurationBlockCategory = $this->instanceManager->getInstance(SchemaConfigurationBlockCategory::class);
+            $this->schemaConfigurationBlockCategory = $schemaConfigurationBlockCategory;
+        }
+        return $this->schemaConfigurationBlockCategory;
     }
 
     protected function isDynamicBlock(): bool

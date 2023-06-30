@@ -29,8 +29,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        /** @var CustomPostTypeAPIInterface */
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
     }
     final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
@@ -38,8 +42,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     final protected function getDateFormatter(): DateFormatterInterface
     {
-        /** @var DateFormatterInterface */
-        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+        if ($this->dateFormatter === null) {
+            /** @var DateFormatterInterface */
+            $dateFormatter = $this->instanceManager->getInstance(DateFormatterInterface::class);
+            $this->dateFormatter = $dateFormatter;
+        }
+        return $this->dateFormatter;
     }
     final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -47,8 +55,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
-        /** @var QueryableInterfaceTypeFieldResolver */
-        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+        if ($this->queryableInterfaceTypeFieldResolver === null) {
+            /** @var QueryableInterfaceTypeFieldResolver */
+            $queryableInterfaceTypeFieldResolver = $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+            $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+        }
+        return $this->queryableInterfaceTypeFieldResolver;
     }
     final public function setCustomPostInterfaceTypeFieldResolver(CustomPostInterfaceTypeFieldResolver $customPostInterfaceTypeFieldResolver): void
     {
@@ -56,8 +68,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
     final protected function getCustomPostInterfaceTypeFieldResolver(): CustomPostInterfaceTypeFieldResolver
     {
-        /** @var CustomPostInterfaceTypeFieldResolver */
-        return $this->customPostInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CustomPostInterfaceTypeFieldResolver::class);
+        if ($this->customPostInterfaceTypeFieldResolver === null) {
+            /** @var CustomPostInterfaceTypeFieldResolver */
+            $customPostInterfaceTypeFieldResolver = $this->instanceManager->getInstance(CustomPostInterfaceTypeFieldResolver::class);
+            $this->customPostInterfaceTypeFieldResolver = $customPostInterfaceTypeFieldResolver;
+        }
+        return $this->customPostInterfaceTypeFieldResolver;
     }
 
     /**

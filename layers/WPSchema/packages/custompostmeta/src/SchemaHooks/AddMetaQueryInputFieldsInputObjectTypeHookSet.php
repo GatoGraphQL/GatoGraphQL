@@ -20,8 +20,12 @@ class AddMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractAddMetaQuery
     }
     final protected function getCustomPostMetaQueryInputObjectTypeResolver(): CustomPostMetaQueryInputObjectTypeResolver
     {
-        /** @var CustomPostMetaQueryInputObjectTypeResolver */
-        return $this->customPostMetaQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostMetaQueryInputObjectTypeResolver::class);
+        if ($this->customPostMetaQueryInputObjectTypeResolver === null) {
+            /** @var CustomPostMetaQueryInputObjectTypeResolver */
+            $customPostMetaQueryInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostMetaQueryInputObjectTypeResolver::class);
+            $this->customPostMetaQueryInputObjectTypeResolver = $customPostMetaQueryInputObjectTypeResolver;
+        }
+        return $this->customPostMetaQueryInputObjectTypeResolver;
     }
 
     protected function getMetaQueryInputObjectTypeResolver(): AbstractMetaQueryInputObjectTypeResolver

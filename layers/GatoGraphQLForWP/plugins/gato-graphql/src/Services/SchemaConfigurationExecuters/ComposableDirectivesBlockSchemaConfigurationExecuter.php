@@ -23,8 +23,12 @@ class ComposableDirectivesBlockSchemaConfigurationExecuter extends AbstractDefau
     }
     final protected function getSchemaConfigComposableDirectivesBlock(): SchemaConfigComposableDirectivesBlock
     {
-        /** @var SchemaConfigComposableDirectivesBlock */
-        return $this->schemaConfigComposableDirectivesBlock ??= $this->instanceManager->getInstance(SchemaConfigComposableDirectivesBlock::class);
+        if ($this->schemaConfigComposableDirectivesBlock === null) {
+            /** @var SchemaConfigComposableDirectivesBlock */
+            $schemaConfigComposableDirectivesBlock = $this->instanceManager->getInstance(SchemaConfigComposableDirectivesBlock::class);
+            $this->schemaConfigComposableDirectivesBlock = $schemaConfigComposableDirectivesBlock;
+        }
+        return $this->schemaConfigComposableDirectivesBlock;
     }
 
     public function getEnablingModule(): ?string
