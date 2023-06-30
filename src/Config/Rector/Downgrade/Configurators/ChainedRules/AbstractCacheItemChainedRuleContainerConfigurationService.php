@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-use Rector\DowngradePhp70\Rector\ClassMethod\DowngradeSelfTypeDeclarationRector;
+use PoP\PoP\Extensions\Rector\DowngradePhp70\Rector\ClassMethod\DowngradeSelfTypeDeclarationRector;
 
 /**
  * Hack to fix bug.
