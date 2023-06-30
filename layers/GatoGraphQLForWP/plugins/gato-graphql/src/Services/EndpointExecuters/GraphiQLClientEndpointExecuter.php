@@ -22,8 +22,12 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter
     }
     final protected function getCustomEndpointGraphiQLClient(): CustomEndpointGraphiQLClient
     {
-        /** @var CustomEndpointGraphiQLClient */
-        return $this->customEndpointGraphiQLClient ??= $this->instanceManager->getInstance(CustomEndpointGraphiQLClient::class);
+        if ($this->customEndpointGraphiQLClient === null) {
+            /** @var CustomEndpointGraphiQLClient */
+            $customEndpointGraphiQLClient = $this->instanceManager->getInstance(CustomEndpointGraphiQLClient::class);
+            $this->customEndpointGraphiQLClient = $customEndpointGraphiQLClient;
+        }
+        return $this->customEndpointGraphiQLClient;
     }
     final public function setGraphiQLClientEndpointAnnotator(GraphiQLClientEndpointAnnotator $graphiQLClientEndpointAnnotator): void
     {
@@ -31,8 +35,12 @@ class GraphiQLClientEndpointExecuter extends AbstractClientEndpointExecuter
     }
     final protected function getGraphiQLClientEndpointAnnotator(): GraphiQLClientEndpointAnnotator
     {
-        /** @var GraphiQLClientEndpointAnnotator */
-        return $this->graphiQLClientEndpointAnnotator ??= $this->instanceManager->getInstance(GraphiQLClientEndpointAnnotator::class);
+        if ($this->graphiQLClientEndpointAnnotator === null) {
+            /** @var GraphiQLClientEndpointAnnotator */
+            $graphiQLClientEndpointAnnotator = $this->instanceManager->getInstance(GraphiQLClientEndpointAnnotator::class);
+            $this->graphiQLClientEndpointAnnotator = $graphiQLClientEndpointAnnotator;
+        }
+        return $this->graphiQLClientEndpointAnnotator;
     }
 
     public function getEnablingModule(): ?string

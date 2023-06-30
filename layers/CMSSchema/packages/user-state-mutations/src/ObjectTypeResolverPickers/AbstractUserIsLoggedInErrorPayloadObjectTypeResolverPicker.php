@@ -19,8 +19,12 @@ abstract class AbstractUserIsLoggedInErrorPayloadObjectTypeResolverPicker extend
     }
     final protected function getUserIsLoggedInErrorPayloadObjectTypeResolver(): UserIsLoggedInErrorPayloadObjectTypeResolver
     {
-        /** @var UserIsLoggedInErrorPayloadObjectTypeResolver */
-        return $this->userIsLoggedInErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(UserIsLoggedInErrorPayloadObjectTypeResolver::class);
+        if ($this->userIsLoggedInErrorPayloadObjectTypeResolver === null) {
+            /** @var UserIsLoggedInErrorPayloadObjectTypeResolver */
+            $userIsLoggedInErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(UserIsLoggedInErrorPayloadObjectTypeResolver::class);
+            $this->userIsLoggedInErrorPayloadObjectTypeResolver = $userIsLoggedInErrorPayloadObjectTypeResolver;
+        }
+        return $this->userIsLoggedInErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

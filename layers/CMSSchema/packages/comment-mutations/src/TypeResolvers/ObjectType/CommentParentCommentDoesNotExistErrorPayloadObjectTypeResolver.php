@@ -18,8 +18,12 @@ class CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver extends Abs
     }
     final protected function getCommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader(): CommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader
     {
-        /** @var CommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader */
-        return $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+        if ($this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader === null) {
+            /** @var CommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader */
+            $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(CommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+            $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader = $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

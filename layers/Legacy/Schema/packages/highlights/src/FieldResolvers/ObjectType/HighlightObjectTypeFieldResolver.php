@@ -31,8 +31,12 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -40,8 +44,12 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        /** @var URLScalarTypeResolver */
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
     }
 
     /**

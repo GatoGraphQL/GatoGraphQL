@@ -19,8 +19,12 @@ abstract class AbstractCommentsAreNotSupportedByCustomPostTypeMutationErrorPaylo
     }
     final protected function getCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver(): CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver
     {
-        /** @var CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver */
-        return $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver::class);
+        if ($this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver === null) {
+            /** @var CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver */
+            $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver::class);
+            $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver = $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver;
+        }
+        return $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

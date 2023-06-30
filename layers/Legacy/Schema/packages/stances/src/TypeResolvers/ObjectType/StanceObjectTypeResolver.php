@@ -19,8 +19,12 @@ class StanceObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getStanceObjectTypeDataLoader(): StanceObjectTypeDataLoader
     {
-        /** @var StanceObjectTypeDataLoader */
-        return $this->stanceObjectTypeDataLoader ??= $this->instanceManager->getInstance(StanceObjectTypeDataLoader::class);
+        if ($this->stanceObjectTypeDataLoader === null) {
+            /** @var StanceObjectTypeDataLoader */
+            $stanceObjectTypeDataLoader = $this->instanceManager->getInstance(StanceObjectTypeDataLoader::class);
+            $this->stanceObjectTypeDataLoader = $stanceObjectTypeDataLoader;
+        }
+        return $this->stanceObjectTypeDataLoader;
     }
     
     public function getTypeName(): string

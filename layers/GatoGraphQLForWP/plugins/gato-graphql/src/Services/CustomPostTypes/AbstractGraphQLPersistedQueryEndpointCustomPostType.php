@@ -28,8 +28,12 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
     }
     final protected function getPersistedQueryEndpointBlockRegistry(): PersistedQueryEndpointBlockRegistryInterface
     {
-        /** @var PersistedQueryEndpointBlockRegistryInterface */
-        return $this->persistedQueryEndpointBlockRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockRegistryInterface::class);
+        if ($this->persistedQueryEndpointBlockRegistry === null) {
+            /** @var PersistedQueryEndpointBlockRegistryInterface */
+            $persistedQueryEndpointBlockRegistry = $this->instanceManager->getInstance(PersistedQueryEndpointBlockRegistryInterface::class);
+            $this->persistedQueryEndpointBlockRegistry = $persistedQueryEndpointBlockRegistry;
+        }
+        return $this->persistedQueryEndpointBlockRegistry;
     }
     final public function setPersistedQueryEndpointOptionsBlock(PersistedQueryEndpointOptionsBlock $persistedQueryEndpointOptionsBlock): void
     {
@@ -37,8 +41,12 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
     }
     final protected function getPersistedQueryEndpointOptionsBlock(): PersistedQueryEndpointOptionsBlock
     {
-        /** @var PersistedQueryEndpointOptionsBlock */
-        return $this->persistedQueryEndpointOptionsBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+        if ($this->persistedQueryEndpointOptionsBlock === null) {
+            /** @var PersistedQueryEndpointOptionsBlock */
+            $persistedQueryEndpointOptionsBlock = $this->instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+            $this->persistedQueryEndpointOptionsBlock = $persistedQueryEndpointOptionsBlock;
+        }
+        return $this->persistedQueryEndpointOptionsBlock;
     }
     final public function setGraphQLEndpointCategoryTaxonomy(GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy): void
     {
@@ -46,8 +54,12 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
     }
     final protected function getGraphQLEndpointCategoryTaxonomy(): GraphQLEndpointCategoryTaxonomy
     {
-        /** @var GraphQLEndpointCategoryTaxonomy */
-        return $this->graphQLEndpointCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+        if ($this->graphQLEndpointCategoryTaxonomy === null) {
+            /** @var GraphQLEndpointCategoryTaxonomy */
+            $graphQLEndpointCategoryTaxonomy = $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+            $this->graphQLEndpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy;
+        }
+        return $this->graphQLEndpointCategoryTaxonomy;
     }
     final public function setPersistedQueryEndpointAnnotatorRegistry(PersistedQueryEndpointAnnotatorRegistryInterface $persistedQueryEndpointAnnotatorRegistry): void
     {
@@ -55,8 +67,12 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
     }
     final protected function getPersistedQueryEndpointAnnotatorRegistry(): PersistedQueryEndpointAnnotatorRegistryInterface
     {
-        /** @var PersistedQueryEndpointAnnotatorRegistryInterface */
-        return $this->persistedQueryEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+        if ($this->persistedQueryEndpointAnnotatorRegistry === null) {
+            /** @var PersistedQueryEndpointAnnotatorRegistryInterface */
+            $persistedQueryEndpointAnnotatorRegistry = $this->instanceManager->getInstance(PersistedQueryEndpointAnnotatorRegistryInterface::class);
+            $this->persistedQueryEndpointAnnotatorRegistry = $persistedQueryEndpointAnnotatorRegistry;
+        }
+        return $this->persistedQueryEndpointAnnotatorRegistry;
     }
 
     /**

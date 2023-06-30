@@ -18,8 +18,12 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
     }
     final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
     {
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        return $this->graphQLSchemaConfigurationCustomPostType ??= $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+        if ($this->graphQLSchemaConfigurationCustomPostType === null) {
+            /** @var GraphQLSchemaConfigurationCustomPostType */
+            $graphQLSchemaConfigurationCustomPostType = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+            $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
+        }
+        return $this->graphQLSchemaConfigurationCustomPostType;
     }
 
     /**

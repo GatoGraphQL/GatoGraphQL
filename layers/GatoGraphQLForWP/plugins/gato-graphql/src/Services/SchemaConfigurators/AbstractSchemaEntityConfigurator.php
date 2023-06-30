@@ -44,8 +44,12 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
     {
@@ -53,8 +57,12 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
     }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
-        /** @var TypeRegistryInterface */
-        return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
+        if ($this->typeRegistry === null) {
+            /** @var TypeRegistryInterface */
+            $typeRegistry = $this->instanceManager->getInstance(TypeRegistryInterface::class);
+            $this->typeRegistry = $typeRegistry;
+        }
+        return $this->typeRegistry;
     }
     final public function setFieldDirectiveResolverRegistry(FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry): void
     {
@@ -62,8 +70,12 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
     }
     final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
     {
-        /** @var FieldDirectiveResolverRegistryInterface */
-        return $this->fieldDirectiveResolverRegistry ??= $this->instanceManager->getInstance(FieldDirectiveResolverRegistryInterface::class);
+        if ($this->fieldDirectiveResolverRegistry === null) {
+            /** @var FieldDirectiveResolverRegistryInterface */
+            $fieldDirectiveResolverRegistry = $this->instanceManager->getInstance(FieldDirectiveResolverRegistryInterface::class);
+            $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
+        }
+        return $this->fieldDirectiveResolverRegistry;
     }
 
     /**

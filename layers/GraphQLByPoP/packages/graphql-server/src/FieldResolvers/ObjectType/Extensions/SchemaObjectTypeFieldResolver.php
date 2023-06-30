@@ -35,8 +35,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setFieldObjectTypeResolver(FieldObjectTypeResolver $fieldObjectTypeResolver): void
     {
@@ -44,8 +48,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getFieldObjectTypeResolver(): FieldObjectTypeResolver
     {
-        /** @var FieldObjectTypeResolver */
-        return $this->fieldObjectTypeResolver ??= $this->instanceManager->getInstance(FieldObjectTypeResolver::class);
+        if ($this->fieldObjectTypeResolver === null) {
+            /** @var FieldObjectTypeResolver */
+            $fieldObjectTypeResolver = $this->instanceManager->getInstance(FieldObjectTypeResolver::class);
+            $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
+        }
+        return $this->fieldObjectTypeResolver;
     }
     final public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
     {
@@ -53,8 +61,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
     {
-        /** @var GraphQLSchemaDefinitionServiceInterface */
-        return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
+        if ($this->graphQLSchemaDefinitionService === null) {
+            /** @var GraphQLSchemaDefinitionServiceInterface */
+            $graphQLSchemaDefinitionService = $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
+            $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
+        }
+        return $this->graphQLSchemaDefinitionService;
     }
 
     /**

@@ -18,8 +18,12 @@ class SingleEndpointSchemaConfigurator extends AbstractEndpointSchemaConfigurato
     }
     final protected function getEndpointSchemaConfigurationExecuterRegistry(): EndpointSchemaConfigurationExecuterRegistryInterface
     {
-        /** @var EndpointSchemaConfigurationExecuterRegistryInterface */
-        return $this->endpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(EndpointSchemaConfigurationExecuterRegistryInterface::class);
+        if ($this->endpointSchemaConfigurationExecuterRegistry === null) {
+            /** @var EndpointSchemaConfigurationExecuterRegistryInterface */
+            $endpointSchemaConfigurationExecuterRegistry = $this->instanceManager->getInstance(EndpointSchemaConfigurationExecuterRegistryInterface::class);
+            $this->endpointSchemaConfigurationExecuterRegistry = $endpointSchemaConfigurationExecuterRegistry;
+        }
+        return $this->endpointSchemaConfigurationExecuterRegistry;
     }
 
     protected function getEnablingModule(): string

@@ -27,8 +27,12 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
     }
     final protected function getTypeResolverHelper(): TypeResolverHelperInterface
     {
-        /** @var TypeResolverHelperInterface */
-        return $this->typeResolverHelper ??= $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
+        if ($this->typeResolverHelper === null) {
+            /** @var TypeResolverHelperInterface */
+            $typeResolverHelper = $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
+            $this->typeResolverHelper = $typeResolverHelper;
+        }
+        return $this->typeResolverHelper;
     }
     final public function setMutationRootObjectTypeDataLoader(MutationRootObjectTypeDataLoader $mutationRootObjectTypeDataLoader): void
     {
@@ -36,8 +40,12 @@ class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObj
     }
     final protected function getMutationRootObjectTypeDataLoader(): MutationRootObjectTypeDataLoader
     {
-        /** @var MutationRootObjectTypeDataLoader */
-        return $this->mutationRootObjectTypeDataLoader ??= $this->instanceManager->getInstance(MutationRootObjectTypeDataLoader::class);
+        if ($this->mutationRootObjectTypeDataLoader === null) {
+            /** @var MutationRootObjectTypeDataLoader */
+            $mutationRootObjectTypeDataLoader = $this->instanceManager->getInstance(MutationRootObjectTypeDataLoader::class);
+            $this->mutationRootObjectTypeDataLoader = $mutationRootObjectTypeDataLoader;
+        }
+        return $this->mutationRootObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

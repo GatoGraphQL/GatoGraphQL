@@ -25,8 +25,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSiteObjectTypeResolver(): SiteObjectTypeResolver
     {
-        /** @var SiteObjectTypeResolver */
-        return $this->siteObjectTypeResolver ??= $this->instanceManager->getInstance(SiteObjectTypeResolver::class);
+        if ($this->siteObjectTypeResolver === null) {
+            /** @var SiteObjectTypeResolver */
+            $siteObjectTypeResolver = $this->instanceManager->getInstance(SiteObjectTypeResolver::class);
+            $this->siteObjectTypeResolver = $siteObjectTypeResolver;
+        }
+        return $this->siteObjectTypeResolver;
     }
     final public function setSite(Site $site): void
     {
@@ -34,8 +38,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSite(): Site
     {
-        /** @var Site */
-        return $this->site ??= $this->instanceManager->getInstance(Site::class);
+        if ($this->site === null) {
+            /** @var Site */
+            $site = $this->instanceManager->getInstance(Site::class);
+            $this->site = $site;
+        }
+        return $this->site;
     }
 
     /**

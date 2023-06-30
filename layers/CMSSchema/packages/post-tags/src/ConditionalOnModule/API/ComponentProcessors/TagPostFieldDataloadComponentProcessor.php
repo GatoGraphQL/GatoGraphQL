@@ -29,8 +29,12 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        /** @var PostObjectTypeResolver */
-        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+        if ($this->postObjectTypeResolver === null) {
+            /** @var PostObjectTypeResolver */
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            $this->postObjectTypeResolver = $postObjectTypeResolver;
+        }
+        return $this->postObjectTypeResolver;
     }
     final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -38,8 +42,12 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
     }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
-        /** @var ListQueryInputOutputHandler */
-        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+        if ($this->listQueryInputOutputHandler === null) {
+            /** @var ListQueryInputOutputHandler */
+            $listQueryInputOutputHandler = $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+            $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+        }
+        return $this->listQueryInputOutputHandler;
     }
 
     /**

@@ -22,8 +22,12 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
     }
     final protected function getNumericScalarTypeResolver(): NumericScalarTypeResolver
     {
-        /** @var NumericScalarTypeResolver */
-        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(NumericScalarTypeResolver::class);
+        if ($this->anyBuiltInScalarScalarTypeResolver === null) {
+            /** @var NumericScalarTypeResolver */
+            $anyBuiltInScalarScalarTypeResolver = $this->instanceManager->getInstance(NumericScalarTypeResolver::class);
+            $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+        }
+        return $this->anyBuiltInScalarScalarTypeResolver;
     }
     final public function setMetaQueryCompareByNumericValueOperatorEnumTypeResolver(MetaQueryCompareByNumericValueOperatorEnumTypeResolver $metaQueryCompareByNumericValueOperatorEnumTypeResolver): void
     {
@@ -31,8 +35,12 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
     }
     final protected function getMetaQueryCompareByNumericValueOperatorEnumTypeResolver(): MetaQueryCompareByNumericValueOperatorEnumTypeResolver
     {
-        /** @var MetaQueryCompareByNumericValueOperatorEnumTypeResolver */
-        return $this->metaQueryCompareByNumericValueOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByNumericValueOperatorEnumTypeResolver::class);
+        if ($this->metaQueryCompareByNumericValueOperatorEnumTypeResolver === null) {
+            /** @var MetaQueryCompareByNumericValueOperatorEnumTypeResolver */
+            $metaQueryCompareByNumericValueOperatorEnumTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByNumericValueOperatorEnumTypeResolver::class);
+            $this->metaQueryCompareByNumericValueOperatorEnumTypeResolver = $metaQueryCompareByNumericValueOperatorEnumTypeResolver;
+        }
+        return $this->metaQueryCompareByNumericValueOperatorEnumTypeResolver;
     }
 
     public function getTypeName(): string

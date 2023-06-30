@@ -18,8 +18,12 @@ class CommentReplyMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionT
     }
     final protected function getCommentReplyMutationErrorPayloadUnionTypeResolver(): CommentReplyMutationErrorPayloadUnionTypeResolver
     {
-        /** @var CommentReplyMutationErrorPayloadUnionTypeResolver */
-        return $this->commentReplyMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(CommentReplyMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->commentReplyMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var CommentReplyMutationErrorPayloadUnionTypeResolver */
+            $commentReplyMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(CommentReplyMutationErrorPayloadUnionTypeResolver::class);
+            $this->commentReplyMutationErrorPayloadUnionTypeResolver = $commentReplyMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->commentReplyMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

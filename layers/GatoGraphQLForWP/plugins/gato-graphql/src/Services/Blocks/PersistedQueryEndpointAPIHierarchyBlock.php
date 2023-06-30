@@ -26,8 +26,12 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
     }
     final protected function getPersistedQueryEndpointBlockCategory(): PersistedQueryEndpointBlockCategory
     {
-        /** @var PersistedQueryEndpointBlockCategory */
-        return $this->persistedQueryEndpointBlockCategory ??= $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
+        if ($this->persistedQueryEndpointBlockCategory === null) {
+            /** @var PersistedQueryEndpointBlockCategory */
+            $persistedQueryEndpointBlockCategory = $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
+            $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
+        }
+        return $this->persistedQueryEndpointBlockCategory;
     }
 
     protected function getBlockName(): string

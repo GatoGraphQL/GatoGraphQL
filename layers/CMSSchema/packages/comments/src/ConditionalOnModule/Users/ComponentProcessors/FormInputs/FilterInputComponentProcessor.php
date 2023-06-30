@@ -29,8 +29,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setCustomPostAuthorIDsFilterInput(CustomPostAuthorIDsFilterInput $customPostAuthorIDsFilterInput): void
     {
@@ -38,8 +42,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getCustomPostAuthorIDsFilterInput(): CustomPostAuthorIDsFilterInput
     {
-        /** @var CustomPostAuthorIDsFilterInput */
-        return $this->customPostAuthorIDsFilterInput ??= $this->instanceManager->getInstance(CustomPostAuthorIDsFilterInput::class);
+        if ($this->customPostAuthorIDsFilterInput === null) {
+            /** @var CustomPostAuthorIDsFilterInput */
+            $customPostAuthorIDsFilterInput = $this->instanceManager->getInstance(CustomPostAuthorIDsFilterInput::class);
+            $this->customPostAuthorIDsFilterInput = $customPostAuthorIDsFilterInput;
+        }
+        return $this->customPostAuthorIDsFilterInput;
     }
     final public function setExcludeCustomPostAuthorIDsFilterInput(ExcludeCustomPostAuthorIDsFilterInput $excludeCustomPostAuthorIDsFilterInput): void
     {
@@ -47,8 +55,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getExcludeCustomPostAuthorIDsFilterInput(): ExcludeCustomPostAuthorIDsFilterInput
     {
-        /** @var ExcludeCustomPostAuthorIDsFilterInput */
-        return $this->excludeCustomPostAuthorIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeCustomPostAuthorIDsFilterInput::class);
+        if ($this->excludeCustomPostAuthorIDsFilterInput === null) {
+            /** @var ExcludeCustomPostAuthorIDsFilterInput */
+            $excludeCustomPostAuthorIDsFilterInput = $this->instanceManager->getInstance(ExcludeCustomPostAuthorIDsFilterInput::class);
+            $this->excludeCustomPostAuthorIDsFilterInput = $excludeCustomPostAuthorIDsFilterInput;
+        }
+        return $this->excludeCustomPostAuthorIDsFilterInput;
     }
 
     /**

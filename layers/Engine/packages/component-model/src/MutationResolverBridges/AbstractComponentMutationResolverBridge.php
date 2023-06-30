@@ -33,8 +33,12 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        /** @var ComponentProcessorManagerInterface */
-        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+        if ($this->componentProcessorManager === null) {
+            /** @var ComponentProcessorManagerInterface */
+            $componentProcessorManager = $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+            $this->componentProcessorManager = $componentProcessorManager;
+        }
+        return $this->componentProcessorManager;
     }
 
     public function getSuccessString(string|int $resultID): ?string

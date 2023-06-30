@@ -18,8 +18,12 @@ class FirstLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     }
     final protected function getSecondLayerInputObjectTypeResolver(): SecondLayerInputObjectTypeResolver
     {
-        /** @var SecondLayerInputObjectTypeResolver */
-        return $this->secondLayerFromInputObjectTypeResolver ??= $this->instanceManager->getInstance(SecondLayerInputObjectTypeResolver::class);
+        if ($this->secondLayerFromInputObjectTypeResolver === null) {
+            /** @var SecondLayerInputObjectTypeResolver */
+            $secondLayerFromInputObjectTypeResolver = $this->instanceManager->getInstance(SecondLayerInputObjectTypeResolver::class);
+            $this->secondLayerFromInputObjectTypeResolver = $secondLayerFromInputObjectTypeResolver;
+        }
+        return $this->secondLayerFromInputObjectTypeResolver;
     }
 
     public function getTypeName(): string

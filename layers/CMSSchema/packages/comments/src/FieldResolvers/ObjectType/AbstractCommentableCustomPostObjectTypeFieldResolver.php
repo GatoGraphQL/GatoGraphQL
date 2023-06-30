@@ -29,8 +29,12 @@ abstract class AbstractCommentableCustomPostObjectTypeFieldResolver extends Abst
     }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        /** @var CommentTypeAPIInterface */
-        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+        if ($this->commentTypeAPI === null) {
+            /** @var CommentTypeAPIInterface */
+            $commentTypeAPI = $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+            $this->commentTypeAPI = $commentTypeAPI;
+        }
+        return $this->commentTypeAPI;
     }
     final public function setCommentableInterfaceTypeFieldResolver(CommentableInterfaceTypeFieldResolver $commentableInterfaceTypeFieldResolver): void
     {
@@ -38,8 +42,12 @@ abstract class AbstractCommentableCustomPostObjectTypeFieldResolver extends Abst
     }
     final protected function getCommentableInterfaceTypeFieldResolver(): CommentableInterfaceTypeFieldResolver
     {
-        /** @var CommentableInterfaceTypeFieldResolver */
-        return $this->commentableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(CommentableInterfaceTypeFieldResolver::class);
+        if ($this->commentableInterfaceTypeFieldResolver === null) {
+            /** @var CommentableInterfaceTypeFieldResolver */
+            $commentableInterfaceTypeFieldResolver = $this->instanceManager->getInstance(CommentableInterfaceTypeFieldResolver::class);
+            $this->commentableInterfaceTypeFieldResolver = $commentableInterfaceTypeFieldResolver;
+        }
+        return $this->commentableInterfaceTypeFieldResolver;
     }
 
     /**

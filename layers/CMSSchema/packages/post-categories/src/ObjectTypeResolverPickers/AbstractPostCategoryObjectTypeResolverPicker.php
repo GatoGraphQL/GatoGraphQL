@@ -24,8 +24,12 @@ abstract class AbstractPostCategoryObjectTypeResolverPicker extends AbstractObje
     }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        /** @var PostCategoryObjectTypeResolver */
-        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        if ($this->postCategoryObjectTypeResolver === null) {
+            /** @var PostCategoryObjectTypeResolver */
+            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+            $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+        }
+        return $this->postCategoryObjectTypeResolver;
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
@@ -33,8 +37,12 @@ abstract class AbstractPostCategoryObjectTypeResolverPicker extends AbstractObje
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
-        /** @var PostCategoryTypeAPIInterface */
-        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+        if ($this->postCategoryTypeAPI === null) {
+            /** @var PostCategoryTypeAPIInterface */
+            $postCategoryTypeAPI = $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+            $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+        }
+        return $this->postCategoryTypeAPI;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

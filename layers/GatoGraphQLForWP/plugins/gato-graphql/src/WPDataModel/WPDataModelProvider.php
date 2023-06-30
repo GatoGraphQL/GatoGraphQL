@@ -34,8 +34,12 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     }
     final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {
-        /** @var CustomPostTypeRegistryInterface */
-        return $this->customPostTypeRegistry ??= $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+        if ($this->customPostTypeRegistry === null) {
+            /** @var CustomPostTypeRegistryInterface */
+            $customPostTypeRegistry = $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+            $this->customPostTypeRegistry = $customPostTypeRegistry;
+        }
+        return $this->customPostTypeRegistry;
     }
     final public function setTaxonomyRegistry(TaxonomyRegistryInterface $taxonomyRegistry): void
     {
@@ -43,8 +47,12 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     }
     final protected function getTaxonomyRegistry(): TaxonomyRegistryInterface
     {
-        /** @var TaxonomyRegistryInterface */
-        return $this->taxonomyRegistry ??= $this->instanceManager->getInstance(TaxonomyRegistryInterface::class);
+        if ($this->taxonomyRegistry === null) {
+            /** @var TaxonomyRegistryInterface */
+            $taxonomyRegistry = $this->instanceManager->getInstance(TaxonomyRegistryInterface::class);
+            $this->taxonomyRegistry = $taxonomyRegistry;
+        }
+        return $this->taxonomyRegistry;
     }
 
     /**

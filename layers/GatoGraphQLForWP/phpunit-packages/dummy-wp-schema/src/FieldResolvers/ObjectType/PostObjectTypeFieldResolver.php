@@ -33,8 +33,12 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        /** @var DateTimeScalarTypeResolver */
-        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+        if ($this->dateTimeScalarTypeResolver === null) {
+            /** @var DateTimeScalarTypeResolver */
+            $dateTimeScalarTypeResolver = $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+            $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
+        }
+        return $this->dateTimeScalarTypeResolver;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -42,8 +46,12 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -51,8 +59,12 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setFloatScalarTypeResolver(FloatScalarTypeResolver $floatScalarTypeResolver): void
     {
@@ -60,8 +72,12 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getFloatScalarTypeResolver(): FloatScalarTypeResolver
     {
-        /** @var FloatScalarTypeResolver */
-        return $this->floatScalarTypeResolver ??= $this->instanceManager->getInstance(FloatScalarTypeResolver::class);
+        if ($this->floatScalarTypeResolver === null) {
+            /** @var FloatScalarTypeResolver */
+            $floatScalarTypeResolver = $this->instanceManager->getInstance(FloatScalarTypeResolver::class);
+            $this->floatScalarTypeResolver = $floatScalarTypeResolver;
+        }
+        return $this->floatScalarTypeResolver;
     }
     final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -69,8 +85,12 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        /** @var JSONObjectScalarTypeResolver */
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        if ($this->jsonObjectScalarTypeResolver === null) {
+            /** @var JSONObjectScalarTypeResolver */
+            $jsonObjectScalarTypeResolver = $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+            $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        }
+        return $this->jsonObjectScalarTypeResolver;
     }
 
     /**

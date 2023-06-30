@@ -22,8 +22,12 @@ class SchemaObjectTypeDataLoader extends AbstractUseObjectDictionaryObjectTypeDa
     }
     final protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
-        /** @var SchemaObjectTypeResolver */
-        return $this->schemaObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
+        if ($this->schemaObjectTypeResolver === null) {
+            /** @var SchemaObjectTypeResolver */
+            $schemaObjectTypeResolver = $this->instanceManager->getInstance(SchemaObjectTypeResolver::class);
+            $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
+        }
+        return $this->schemaObjectTypeResolver;
     }
     final public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
     {
@@ -31,8 +35,12 @@ class SchemaObjectTypeDataLoader extends AbstractUseObjectDictionaryObjectTypeDa
     }
     final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
-        /** @var SchemaDefinitionReferenceRegistryInterface */
-        return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+        if ($this->schemaDefinitionReferenceRegistry === null) {
+            /** @var SchemaDefinitionReferenceRegistryInterface */
+            $schemaDefinitionReferenceRegistry = $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+            $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+        }
+        return $this->schemaDefinitionReferenceRegistry;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

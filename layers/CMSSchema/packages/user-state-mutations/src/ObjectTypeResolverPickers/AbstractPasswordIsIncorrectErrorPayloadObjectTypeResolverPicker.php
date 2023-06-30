@@ -19,8 +19,12 @@ abstract class AbstractPasswordIsIncorrectErrorPayloadObjectTypeResolverPicker e
     }
     final protected function getPasswordIsIncorrectErrorPayloadObjectTypeResolver(): PasswordIsIncorrectErrorPayloadObjectTypeResolver
     {
-        /** @var PasswordIsIncorrectErrorPayloadObjectTypeResolver */
-        return $this->userIsNotLoggedInErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(PasswordIsIncorrectErrorPayloadObjectTypeResolver::class);
+        if ($this->userIsNotLoggedInErrorPayloadObjectTypeResolver === null) {
+            /** @var PasswordIsIncorrectErrorPayloadObjectTypeResolver */
+            $userIsNotLoggedInErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(PasswordIsIncorrectErrorPayloadObjectTypeResolver::class);
+            $this->userIsNotLoggedInErrorPayloadObjectTypeResolver = $userIsNotLoggedInErrorPayloadObjectTypeResolver;
+        }
+        return $this->userIsNotLoggedInErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

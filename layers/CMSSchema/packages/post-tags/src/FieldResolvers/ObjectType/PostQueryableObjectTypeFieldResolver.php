@@ -23,8 +23,12 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
-        /** @var PostTagTypeAPIInterface */
-        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+        if ($this->postTagTypeAPI === null) {
+            /** @var PostTagTypeAPIInterface */
+            $postTagTypeAPI = $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+            $this->postTagTypeAPI = $postTagTypeAPI;
+        }
+        return $this->postTagTypeAPI;
     }
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -32,8 +36,12 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
-        /** @var PostTagObjectTypeResolver */
-        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+        if ($this->postTagObjectTypeResolver === null) {
+            /** @var PostTagObjectTypeResolver */
+            $postTagObjectTypeResolver = $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+            $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+        }
+        return $this->postTagObjectTypeResolver;
     }
 
     /**

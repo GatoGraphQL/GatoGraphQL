@@ -19,8 +19,12 @@ class HighlightObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getHighlightObjectTypeDataLoader(): HighlightObjectTypeDataLoader
     {
-        /** @var HighlightObjectTypeDataLoader */
-        return $this->highlightObjectTypeDataLoader ??= $this->instanceManager->getInstance(HighlightObjectTypeDataLoader::class);
+        if ($this->highlightObjectTypeDataLoader === null) {
+            /** @var HighlightObjectTypeDataLoader */
+            $highlightObjectTypeDataLoader = $this->instanceManager->getInstance(HighlightObjectTypeDataLoader::class);
+            $this->highlightObjectTypeDataLoader = $highlightObjectTypeDataLoader;
+        }
+        return $this->highlightObjectTypeDataLoader;
     }
     
     public function getTypeName(): string

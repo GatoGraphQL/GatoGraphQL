@@ -18,8 +18,12 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
     }
     final protected function getWrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader(): WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader
     {
-        /** @var WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader */
-        return $this->wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader ??= $this->instanceManager->getInstance(WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader::class);
+        if ($this->wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader === null) {
+            /** @var WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader */
+            $wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader = $this->instanceManager->getInstance(WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader::class);
+            $this->wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader = $wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader;
+        }
+        return $this->wrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

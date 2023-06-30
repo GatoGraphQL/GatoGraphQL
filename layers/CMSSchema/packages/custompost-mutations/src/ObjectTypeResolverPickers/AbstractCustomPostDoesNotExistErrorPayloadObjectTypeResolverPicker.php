@@ -19,8 +19,12 @@ abstract class AbstractCustomPostDoesNotExistErrorPayloadObjectTypeResolverPicke
     }
     final protected function getCustomPostDoesNotExistErrorPayloadObjectTypeResolver(): CustomPostDoesNotExistErrorPayloadObjectTypeResolver
     {
-        /** @var CustomPostDoesNotExistErrorPayloadObjectTypeResolver */
-        return $this->customPostDoesNotExistErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostDoesNotExistErrorPayloadObjectTypeResolver::class);
+        if ($this->customPostDoesNotExistErrorPayloadObjectTypeResolver === null) {
+            /** @var CustomPostDoesNotExistErrorPayloadObjectTypeResolver */
+            $customPostDoesNotExistErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(CustomPostDoesNotExistErrorPayloadObjectTypeResolver::class);
+            $this->customPostDoesNotExistErrorPayloadObjectTypeResolver = $customPostDoesNotExistErrorPayloadObjectTypeResolver;
+        }
+        return $this->customPostDoesNotExistErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

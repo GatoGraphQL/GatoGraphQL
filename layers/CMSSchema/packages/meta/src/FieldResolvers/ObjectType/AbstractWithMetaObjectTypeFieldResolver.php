@@ -25,8 +25,12 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
     }
     final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
     {
-        /** @var WithMetaInterfaceTypeFieldResolver */
-        return $this->withMetaInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
+        if ($this->withMetaInterfaceTypeFieldResolver === null) {
+            /** @var WithMetaInterfaceTypeFieldResolver */
+            $withMetaInterfaceTypeFieldResolver = $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
+            $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
+        }
+        return $this->withMetaInterfaceTypeFieldResolver;
     }
 
     /**

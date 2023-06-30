@@ -19,8 +19,12 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
     }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
-        /** @var CMSHelperServiceInterface */
-        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+        if ($this->cmsHelperService === null) {
+            /** @var CMSHelperServiceInterface */
+            $cmsHelperService = $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+            $this->cmsHelperService = $cmsHelperService;
+        }
+        return $this->cmsHelperService;
     }
 
     public function getPermalinkPath(string|int|object $customPostObjectOrID): ?string

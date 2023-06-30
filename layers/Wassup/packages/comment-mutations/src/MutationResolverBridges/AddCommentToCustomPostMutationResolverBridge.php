@@ -22,8 +22,12 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
     }
     final protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
     {
-        /** @var AddCommentToCustomPostMutationResolver */
-        return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
+        if ($this->addCommentToCustomPostMutationResolver === null) {
+            /** @var AddCommentToCustomPostMutationResolver */
+            $addCommentToCustomPostMutationResolver = $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
+            $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
+        }
+        return $this->addCommentToCustomPostMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

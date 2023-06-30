@@ -26,8 +26,12 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     }
     final protected function getCMSService(): CMSServiceInterface
     {
-        /** @var CMSServiceInterface */
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+        if ($this->cmsService === null) {
+            /** @var CMSServiceInterface */
+            $cmsService = $this->instanceManager->getInstance(CMSServiceInterface::class);
+            $this->cmsService = $cmsService;
+        }
+        return $this->cmsService;
     }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -35,8 +39,12 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
     }
     final protected function getNameResolver(): NameResolverInterface
     {
-        /** @var NameResolverInterface */
-        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+        if ($this->nameResolver === null) {
+            /** @var NameResolverInterface */
+            $nameResolver = $this->instanceManager->getInstance(NameResolverInterface::class);
+            $this->nameResolver = $nameResolver;
+        }
+        return $this->nameResolver;
     }
 
     protected function getLimit(): int

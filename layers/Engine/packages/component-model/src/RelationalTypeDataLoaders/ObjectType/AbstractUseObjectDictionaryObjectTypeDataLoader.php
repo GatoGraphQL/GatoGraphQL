@@ -18,8 +18,12 @@ abstract class AbstractUseObjectDictionaryObjectTypeDataLoader extends AbstractO
     }
     final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
-        /** @var ObjectDictionaryInterface */
-        return $this->objectDictionary ??= $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
+        if ($this->objectDictionary === null) {
+            /** @var ObjectDictionaryInterface */
+            $objectDictionary = $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
+            $this->objectDictionary = $objectDictionary;
+        }
+        return $this->objectDictionary;
     }
 
     /**

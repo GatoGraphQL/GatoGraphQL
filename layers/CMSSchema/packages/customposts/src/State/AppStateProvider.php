@@ -18,8 +18,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        /** @var CustomPostTypeAPIInterface */
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
     }
 
     /**

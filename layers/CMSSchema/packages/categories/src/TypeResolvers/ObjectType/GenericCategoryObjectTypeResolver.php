@@ -24,8 +24,12 @@ class GenericCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolv
     }
     final protected function getQueryableCategoryListObjectTypeDataLoader(): QueryableCategoryListObjectTypeDataLoader
     {
-        /** @var QueryableCategoryListObjectTypeDataLoader */
-        return $this->queryableCategoryListObjectTypeDataLoader ??= $this->instanceManager->getInstance(QueryableCategoryListObjectTypeDataLoader::class);
+        if ($this->queryableCategoryListObjectTypeDataLoader === null) {
+            /** @var QueryableCategoryListObjectTypeDataLoader */
+            $queryableCategoryListObjectTypeDataLoader = $this->instanceManager->getInstance(QueryableCategoryListObjectTypeDataLoader::class);
+            $this->queryableCategoryListObjectTypeDataLoader = $queryableCategoryListObjectTypeDataLoader;
+        }
+        return $this->queryableCategoryListObjectTypeDataLoader;
     }
     final public function setQueryableCategoryTypeAPI(QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI): void
     {
@@ -33,8 +37,12 @@ class GenericCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolv
     }
     final protected function getQueryableCategoryTypeAPI(): QueryableCategoryTypeAPIInterface
     {
-        /** @var QueryableCategoryTypeAPIInterface */
-        return $this->queryableCategoryListTypeAPI ??= $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
+        if ($this->queryableCategoryListTypeAPI === null) {
+            /** @var QueryableCategoryTypeAPIInterface */
+            $queryableCategoryListTypeAPI = $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
+            $this->queryableCategoryListTypeAPI = $queryableCategoryListTypeAPI;
+        }
+        return $this->queryableCategoryListTypeAPI;
     }
 
     public function getTypeName(): string

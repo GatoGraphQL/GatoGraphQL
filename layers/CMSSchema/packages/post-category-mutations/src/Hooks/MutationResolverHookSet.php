@@ -23,8 +23,12 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     }
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
-        /** @var PostTypeAPIInterface */
-        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+        if ($this->postTypeAPI === null) {
+            /** @var PostTypeAPIInterface */
+            $postTypeAPI = $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+            $this->postTypeAPI = $postTypeAPI;
+        }
+        return $this->postTypeAPI;
     }
     final public function setPostCategoryTypeMutationAPI(PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPIInterface): void
     {
@@ -32,8 +36,12 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     }
     final protected function getPostCategoryTypeMutationAPI(): PostCategoryTypeMutationAPIInterface
     {
-        /** @var PostCategoryTypeMutationAPIInterface */
-        return $this->postCategoryTypeMutationAPIInterface ??= $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
+        if ($this->postCategoryTypeMutationAPIInterface === null) {
+            /** @var PostCategoryTypeMutationAPIInterface */
+            $postCategoryTypeMutationAPIInterface = $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
+            $this->postCategoryTypeMutationAPIInterface = $postCategoryTypeMutationAPIInterface;
+        }
+        return $this->postCategoryTypeMutationAPIInterface;
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
@@ -41,8 +49,12 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
-        /** @var PostCategoryTypeAPIInterface */
-        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+        if ($this->postCategoryTypeAPI === null) {
+            /** @var PostCategoryTypeAPIInterface */
+            $postCategoryTypeAPI = $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+            $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+        }
+        return $this->postCategoryTypeAPI;
     }
 
     protected function getCustomPostType(): string

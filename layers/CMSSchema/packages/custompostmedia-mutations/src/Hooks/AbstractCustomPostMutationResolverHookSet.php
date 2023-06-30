@@ -26,8 +26,12 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
     final protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
     {
-        /** @var CustomPostMediaTypeMutationAPIInterface */
-        return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+        if ($this->customPostMediaTypeMutationAPI === null) {
+            /** @var CustomPostMediaTypeMutationAPIInterface */
+            $customPostMediaTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+            $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+        }
+        return $this->customPostMediaTypeMutationAPI;
     }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -35,8 +39,12 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
 
     protected function init(): void

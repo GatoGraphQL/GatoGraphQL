@@ -21,8 +21,12 @@ abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends 
     }
     final protected function getGraphQLQueryPostTypeHelpers(): GraphQLQueryPostTypeHelpers
     {
-        /** @var GraphQLQueryPostTypeHelpers */
-        return $this->graphQLQueryPostTypeHelpers ??= $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
+        if ($this->graphQLQueryPostTypeHelpers === null) {
+            /** @var GraphQLQueryPostTypeHelpers */
+            $graphQLQueryPostTypeHelpers = $this->instanceManager->getInstance(GraphQLQueryPostTypeHelpers::class);
+            $this->graphQLQueryPostTypeHelpers = $graphQLQueryPostTypeHelpers;
+        }
+        return $this->graphQLQueryPostTypeHelpers;
     }
     final public function setPersistedQueryEndpointAPIHierarchyBlockAccessor(PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor): void
     {
@@ -30,8 +34,12 @@ abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends 
     }
     final protected function getPersistedQueryEndpointAPIHierarchyBlockAccessor(): PersistedQueryEndpointAPIHierarchyBlockAccessor
     {
-        /** @var PersistedQueryEndpointAPIHierarchyBlockAccessor */
-        return $this->persistedQueryEndpointAPIHierarchyBlockAccessor ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlockAccessor::class);
+        if ($this->persistedQueryEndpointAPIHierarchyBlockAccessor === null) {
+            /** @var PersistedQueryEndpointAPIHierarchyBlockAccessor */
+            $persistedQueryEndpointAPIHierarchyBlockAccessor = $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlockAccessor::class);
+            $this->persistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
+        }
+        return $this->persistedQueryEndpointAPIHierarchyBlockAccessor;
     }
     final public function setPersistedQueryEndpointGraphiQLBlock(PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock): void
     {
@@ -39,8 +47,12 @@ abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends 
     }
     final protected function getPersistedQueryEndpointGraphiQLBlock(): PersistedQueryEndpointGraphiQLBlock
     {
-        /** @var PersistedQueryEndpointGraphiQLBlock */
-        return $this->persistedQueryEndpointGraphiQLBlock ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+        if ($this->persistedQueryEndpointGraphiQLBlock === null) {
+            /** @var PersistedQueryEndpointGraphiQLBlock */
+            $persistedQueryEndpointGraphiQLBlock = $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+            $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
+        }
+        return $this->persistedQueryEndpointGraphiQLBlock;
     }
 
     /**

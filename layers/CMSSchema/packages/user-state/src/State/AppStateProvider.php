@@ -17,8 +17,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getUserStateTypeAPI(): UserStateTypeAPIInterface
     {
-        /** @var UserStateTypeAPIInterface */
-        return $this->userStateTypeAPI ??= $this->instanceManager->getInstance(UserStateTypeAPIInterface::class);
+        if ($this->userStateTypeAPI === null) {
+            /** @var UserStateTypeAPIInterface */
+            $userStateTypeAPI = $this->instanceManager->getInstance(UserStateTypeAPIInterface::class);
+            $this->userStateTypeAPI = $userStateTypeAPI;
+        }
+        return $this->userStateTypeAPI;
     }
 
     /**

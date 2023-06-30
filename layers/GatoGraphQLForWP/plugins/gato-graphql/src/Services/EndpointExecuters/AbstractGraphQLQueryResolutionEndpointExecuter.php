@@ -20,8 +20,12 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractCP
     }
     final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
-        /** @var GraphQLDataStructureFormatter */
-        return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+        if ($this->graphQLDataStructureFormatter === null) {
+            /** @var GraphQLDataStructureFormatter */
+            $graphQLDataStructureFormatter = $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
+            $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+        }
+        return $this->graphQLDataStructureFormatter;
     }
     final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
     {
@@ -29,8 +33,12 @@ abstract class AbstractGraphQLQueryResolutionEndpointExecuter extends AbstractCP
     }
     final protected function getQueryRetriever(): QueryRetrieverInterface
     {
-        /** @var QueryRetrieverInterface */
-        return $this->queryRetriever ??= $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+        if ($this->queryRetriever === null) {
+            /** @var QueryRetrieverInterface */
+            $queryRetriever = $this->instanceManager->getInstance(QueryRetrieverInterface::class);
+            $this->queryRetriever = $queryRetriever;
+        }
+        return $this->queryRetriever;
     }
 
     protected function getView(): string

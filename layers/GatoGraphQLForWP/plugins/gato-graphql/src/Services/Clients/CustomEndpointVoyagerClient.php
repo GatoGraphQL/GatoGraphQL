@@ -21,8 +21,12 @@ class CustomEndpointVoyagerClient extends VoyagerClient
     }
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        /** @var GraphQLCustomEndpointCustomPostType */
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        if ($this->graphQLCustomEndpointCustomPostType === null) {
+            /** @var GraphQLCustomEndpointCustomPostType */
+            $graphQLCustomEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+            $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        }
+        return $this->graphQLCustomEndpointCustomPostType;
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
@@ -30,7 +34,11 @@ class CustomEndpointVoyagerClient extends VoyagerClient
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
-        /** @var RequestHelperServiceInterface */
-        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+        if ($this->requestHelperService === null) {
+            /** @var RequestHelperServiceInterface */
+            $requestHelperService = $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+            $this->requestHelperService = $requestHelperService;
+        }
+        return $this->requestHelperService;
     }
 }

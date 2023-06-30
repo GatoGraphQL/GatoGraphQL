@@ -50,8 +50,12 @@ class ExecutableDocument extends AbstractExecutableDocument
     }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
-        /** @var TypeRegistryInterface */
-        return $this->typeRegistry ??= InstanceManagerFacade::getInstance()->getInstance(TypeRegistryInterface::class);
+        if ($this->typeRegistry === null) {
+            /** @var TypeRegistryInterface */
+            $typeRegistry = InstanceManagerFacade::getInstance()->getInstance(TypeRegistryInterface::class);
+            $this->typeRegistry = $typeRegistry;
+        }
+        return $this->typeRegistry;
     }
     final public function setOperationDependencyDefinerDirectiveRegistry(OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry): void
     {
@@ -59,8 +63,12 @@ class ExecutableDocument extends AbstractExecutableDocument
     }
     final protected function getOperationDependencyDefinerDirectiveRegistry(): OperationDependencyDefinerDirectiveRegistryInterface
     {
-        /** @var OperationDependencyDefinerDirectiveRegistryInterface */
-        return $this->operationDependencyDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(OperationDependencyDefinerDirectiveRegistryInterface::class);
+        if ($this->operationDependencyDefinerDirectiveRegistry === null) {
+            /** @var OperationDependencyDefinerDirectiveRegistryInterface */
+            $operationDependencyDefinerDirectiveRegistry = InstanceManagerFacade::getInstance()->getInstance(OperationDependencyDefinerDirectiveRegistryInterface::class);
+            $this->operationDependencyDefinerDirectiveRegistry = $operationDependencyDefinerDirectiveRegistry;
+        }
+        return $this->operationDependencyDefinerDirectiveRegistry;
     }
 
     public function __construct(

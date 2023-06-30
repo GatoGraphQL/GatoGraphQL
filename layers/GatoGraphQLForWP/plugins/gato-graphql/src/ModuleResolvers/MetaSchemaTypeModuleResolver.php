@@ -42,8 +42,12 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        /** @var CommentObjectTypeResolver */
-        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        if ($this->commentObjectTypeResolver === null) {
+            /** @var CommentObjectTypeResolver */
+            $commentObjectTypeResolver = $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+            $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        }
+        return $this->commentObjectTypeResolver;
     }
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -51,8 +55,12 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
-        /** @var PostTagObjectTypeResolver */
-        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+        if ($this->postTagObjectTypeResolver === null) {
+            /** @var PostTagObjectTypeResolver */
+            $postTagObjectTypeResolver = $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+            $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+        }
+        return $this->postTagObjectTypeResolver;
     }
     final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -60,8 +68,12 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        /** @var PostCategoryObjectTypeResolver */
-        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        if ($this->postCategoryObjectTypeResolver === null) {
+            /** @var PostCategoryObjectTypeResolver */
+            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+            $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+        }
+        return $this->postCategoryObjectTypeResolver;
     }
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
     {
@@ -69,8 +81,12 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        /** @var PostObjectTypeResolver */
-        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+        if ($this->postObjectTypeResolver === null) {
+            /** @var PostObjectTypeResolver */
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            $this->postObjectTypeResolver = $postObjectTypeResolver;
+        }
+        return $this->postObjectTypeResolver;
     }
     final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
@@ -78,8 +94,12 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
-        /** @var UserObjectTypeResolver */
-        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+        if ($this->userObjectTypeResolver === null) {
+            /** @var UserObjectTypeResolver */
+            $userObjectTypeResolver = $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+            $this->userObjectTypeResolver = $userObjectTypeResolver;
+        }
+        return $this->userObjectTypeResolver;
     }
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -87,8 +107,12 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
-        /** @var MarkdownContentParserInterface */
-        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+        if ($this->markdownContentParser === null) {
+            /** @var MarkdownContentParserInterface */
+            $markdownContentParser = $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+            $this->markdownContentParser = $markdownContentParser;
+        }
+        return $this->markdownContentParser;
     }
 
     /**

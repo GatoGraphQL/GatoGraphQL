@@ -19,8 +19,12 @@ abstract class AbstractInvalidUserEmailErrorPayloadObjectTypeResolverPicker exte
     }
     final protected function getInvalidUserEmailErrorPayloadObjectTypeResolver(): InvalidUserEmailErrorPayloadObjectTypeResolver
     {
-        /** @var InvalidUserEmailErrorPayloadObjectTypeResolver */
-        return $this->userIsNotLoggedInErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(InvalidUserEmailErrorPayloadObjectTypeResolver::class);
+        if ($this->userIsNotLoggedInErrorPayloadObjectTypeResolver === null) {
+            /** @var InvalidUserEmailErrorPayloadObjectTypeResolver */
+            $userIsNotLoggedInErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(InvalidUserEmailErrorPayloadObjectTypeResolver::class);
+            $this->userIsNotLoggedInErrorPayloadObjectTypeResolver = $userIsNotLoggedInErrorPayloadObjectTypeResolver;
+        }
+        return $this->userIsNotLoggedInErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

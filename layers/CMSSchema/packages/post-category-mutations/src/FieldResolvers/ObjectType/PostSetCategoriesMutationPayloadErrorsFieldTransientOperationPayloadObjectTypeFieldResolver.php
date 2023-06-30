@@ -20,8 +20,12 @@ class PostSetCategoriesMutationPayloadErrorsFieldTransientOperationPayloadObject
     }
     final protected function getPostSetCategoriesMutationErrorPayloadUnionTypeResolver(): PostSetCategoriesMutationErrorPayloadUnionTypeResolver
     {
-        /** @var PostSetCategoriesMutationErrorPayloadUnionTypeResolver */
-        return $this->postSetCategoriesMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(PostSetCategoriesMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->postSetCategoriesMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var PostSetCategoriesMutationErrorPayloadUnionTypeResolver */
+            $postSetCategoriesMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostSetCategoriesMutationErrorPayloadUnionTypeResolver::class);
+            $this->postSetCategoriesMutationErrorPayloadUnionTypeResolver = $postSetCategoriesMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->postSetCategoriesMutationErrorPayloadUnionTypeResolver;
     }
 
     /**

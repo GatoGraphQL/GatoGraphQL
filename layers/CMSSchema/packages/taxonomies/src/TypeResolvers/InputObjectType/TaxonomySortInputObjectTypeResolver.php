@@ -19,8 +19,12 @@ class TaxonomySortInputObjectTypeResolver extends SortInputObjectTypeResolver
     }
     final protected function getTaxonomyOrderByEnumTypeResolver(): TaxonomyOrderByEnumTypeResolver
     {
-        /** @var TaxonomyOrderByEnumTypeResolver */
-        return $this->taxonomySortByEnumTypeResolver ??= $this->instanceManager->getInstance(TaxonomyOrderByEnumTypeResolver::class);
+        if ($this->taxonomySortByEnumTypeResolver === null) {
+            /** @var TaxonomyOrderByEnumTypeResolver */
+            $taxonomySortByEnumTypeResolver = $this->instanceManager->getInstance(TaxonomyOrderByEnumTypeResolver::class);
+            $this->taxonomySortByEnumTypeResolver = $taxonomySortByEnumTypeResolver;
+        }
+        return $this->taxonomySortByEnumTypeResolver;
     }
 
     public function getTypeName(): string

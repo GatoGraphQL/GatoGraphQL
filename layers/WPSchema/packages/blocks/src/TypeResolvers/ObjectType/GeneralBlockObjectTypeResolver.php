@@ -17,8 +17,12 @@ class GeneralBlockObjectTypeResolver extends AbstractBlockObjectTypeResolver
     }
     final protected function getGeneralBlockObjectTypeDataLoader(): GeneralBlockObjectTypeDataLoader
     {
-        /** @var GeneralBlockObjectTypeDataLoader */
-        return $this->genericBlockObjectTypeDataLoader ??= $this->instanceManager->getInstance(GeneralBlockObjectTypeDataLoader::class);
+        if ($this->genericBlockObjectTypeDataLoader === null) {
+            /** @var GeneralBlockObjectTypeDataLoader */
+            $genericBlockObjectTypeDataLoader = $this->instanceManager->getInstance(GeneralBlockObjectTypeDataLoader::class);
+            $this->genericBlockObjectTypeDataLoader = $genericBlockObjectTypeDataLoader;
+        }
+        return $this->genericBlockObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

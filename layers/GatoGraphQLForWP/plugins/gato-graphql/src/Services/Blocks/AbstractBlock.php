@@ -48,8 +48,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -57,8 +61,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
     final public function setStringConversion(StringConversion $stringConversion): void
     {
@@ -66,8 +74,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getStringConversion(): StringConversion
     {
-        /** @var StringConversion */
-        return $this->stringConversion ??= $this->instanceManager->getInstance(StringConversion::class);
+        if ($this->stringConversion === null) {
+            /** @var StringConversion */
+            $stringConversion = $this->instanceManager->getInstance(StringConversion::class);
+            $this->stringConversion = $stringConversion;
+        }
+        return $this->stringConversion;
     }
     final public function setEditorHelpers(EditorHelpers $editorHelpers): void
     {
@@ -75,8 +87,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getEditorHelpers(): EditorHelpers
     {
-        /** @var EditorHelpers */
-        return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
+        if ($this->editorHelpers === null) {
+            /** @var EditorHelpers */
+            $editorHelpers = $this->instanceManager->getInstance(EditorHelpers::class);
+            $this->editorHelpers = $editorHelpers;
+        }
+        return $this->editorHelpers;
     }
     final public function setLocaleHelper(LocaleHelper $localeHelper): void
     {
@@ -84,8 +100,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getLocaleHelper(): LocaleHelper
     {
-        /** @var LocaleHelper */
-        return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
+        if ($this->localeHelper === null) {
+            /** @var LocaleHelper */
+            $localeHelper = $this->instanceManager->getInstance(LocaleHelper::class);
+            $this->localeHelper = $localeHelper;
+        }
+        return $this->localeHelper;
     }
     final public function setRenderingHelpers(RenderingHelpers $renderingHelpers): void
     {
@@ -93,8 +113,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
     final protected function getRenderingHelpers(): RenderingHelpers
     {
-        /** @var RenderingHelpers */
-        return $this->renderingHelpers ??= $this->instanceManager->getInstance(RenderingHelpers::class);
+        if ($this->renderingHelpers === null) {
+            /** @var RenderingHelpers */
+            $renderingHelpers = $this->instanceManager->getInstance(RenderingHelpers::class);
+            $this->renderingHelpers = $renderingHelpers;
+        }
+        return $this->renderingHelpers;
     }
 
     /**

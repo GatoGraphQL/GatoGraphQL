@@ -29,8 +29,12 @@ class UserAuthorization implements UserAuthorizationInterface
     }
     final protected function getUserAuthorizationSchemeRegistry(): UserAuthorizationSchemeRegistryInterface
     {
-        /** @var UserAuthorizationSchemeRegistryInterface */
-        return $this->userAuthorizationSchemeRegistry ??= $this->instanceManager->getInstance(UserAuthorizationSchemeRegistryInterface::class);
+        if ($this->userAuthorizationSchemeRegistry === null) {
+            /** @var UserAuthorizationSchemeRegistryInterface */
+            $userAuthorizationSchemeRegistry = $this->instanceManager->getInstance(UserAuthorizationSchemeRegistryInterface::class);
+            $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
+        }
+        return $this->userAuthorizationSchemeRegistry;
     }
 
     protected function getUserAuthorizationScheme(): UserAuthorizationSchemeInterface

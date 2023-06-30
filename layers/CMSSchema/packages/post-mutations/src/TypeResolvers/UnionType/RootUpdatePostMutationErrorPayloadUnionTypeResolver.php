@@ -18,8 +18,12 @@ class RootUpdatePostMutationErrorPayloadUnionTypeResolver extends AbstractRootUp
     }
     final protected function getRootUpdatePostMutationErrorPayloadUnionTypeDataLoader(): RootUpdatePostMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var RootUpdatePostMutationErrorPayloadUnionTypeDataLoader */
-        return $this->rootUpdatePostMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(RootUpdatePostMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->rootUpdatePostMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootUpdatePostMutationErrorPayloadUnionTypeDataLoader */
+            $rootUpdatePostMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootUpdatePostMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootUpdatePostMutationErrorPayloadUnionTypeDataLoader = $rootUpdatePostMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->rootUpdatePostMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

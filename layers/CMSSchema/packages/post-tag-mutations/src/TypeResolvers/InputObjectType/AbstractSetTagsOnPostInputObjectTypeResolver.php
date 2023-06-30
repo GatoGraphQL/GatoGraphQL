@@ -18,8 +18,12 @@ abstract class AbstractSetTagsOnPostInputObjectTypeResolver extends AbstractSetT
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
-        /** @var PostTagObjectTypeResolver */
-        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+        if ($this->postTagObjectTypeResolver === null) {
+            /** @var PostTagObjectTypeResolver */
+            $postTagObjectTypeResolver = $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+            $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+        }
+        return $this->postTagObjectTypeResolver;
     }
 
     protected function getTagTypeResolver(): TagObjectTypeResolverInterface

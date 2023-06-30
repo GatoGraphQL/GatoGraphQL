@@ -17,8 +17,12 @@ class GenericErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTy
     }
     final protected function getGenericErrorPayloadObjectTypeDataLoader(): GenericErrorPayloadObjectTypeDataLoader
     {
-        /** @var GenericErrorPayloadObjectTypeDataLoader */
-        return $this->genericErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(GenericErrorPayloadObjectTypeDataLoader::class);
+        if ($this->genericErrorPayloadObjectTypeDataLoader === null) {
+            /** @var GenericErrorPayloadObjectTypeDataLoader */
+            $genericErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(GenericErrorPayloadObjectTypeDataLoader::class);
+            $this->genericErrorPayloadObjectTypeDataLoader = $genericErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->genericErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

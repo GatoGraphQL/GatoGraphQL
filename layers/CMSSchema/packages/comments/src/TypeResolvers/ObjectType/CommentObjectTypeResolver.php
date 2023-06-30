@@ -20,8 +20,12 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        /** @var CommentTypeAPIInterface */
-        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+        if ($this->commentTypeAPI === null) {
+            /** @var CommentTypeAPIInterface */
+            $commentTypeAPI = $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+            $this->commentTypeAPI = $commentTypeAPI;
+        }
+        return $this->commentTypeAPI;
     }
     final public function setCommentObjectTypeDataLoader(CommentObjectTypeDataLoader $commentObjectTypeDataLoader): void
     {
@@ -29,8 +33,12 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getCommentObjectTypeDataLoader(): CommentObjectTypeDataLoader
     {
-        /** @var CommentObjectTypeDataLoader */
-        return $this->commentObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentObjectTypeDataLoader::class);
+        if ($this->commentObjectTypeDataLoader === null) {
+            /** @var CommentObjectTypeDataLoader */
+            $commentObjectTypeDataLoader = $this->instanceManager->getInstance(CommentObjectTypeDataLoader::class);
+            $this->commentObjectTypeDataLoader = $commentObjectTypeDataLoader;
+        }
+        return $this->commentObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

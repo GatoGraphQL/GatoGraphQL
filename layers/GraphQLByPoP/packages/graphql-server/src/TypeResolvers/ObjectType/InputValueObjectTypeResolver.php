@@ -18,8 +18,12 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
     }
     final protected function getSchemaDefinitionReferenceObjectTypeDataLoader(): SchemaDefinitionReferenceObjectTypeDataLoader
     {
-        /** @var SchemaDefinitionReferenceObjectTypeDataLoader */
-        return $this->schemaDefinitionReferenceObjectTypeDataLoader ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceObjectTypeDataLoader::class);
+        if ($this->schemaDefinitionReferenceObjectTypeDataLoader === null) {
+            /** @var SchemaDefinitionReferenceObjectTypeDataLoader */
+            $schemaDefinitionReferenceObjectTypeDataLoader = $this->instanceManager->getInstance(SchemaDefinitionReferenceObjectTypeDataLoader::class);
+            $this->schemaDefinitionReferenceObjectTypeDataLoader = $schemaDefinitionReferenceObjectTypeDataLoader;
+        }
+        return $this->schemaDefinitionReferenceObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

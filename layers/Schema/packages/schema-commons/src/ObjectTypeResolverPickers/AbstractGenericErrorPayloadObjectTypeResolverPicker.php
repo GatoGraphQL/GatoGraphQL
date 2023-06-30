@@ -18,8 +18,12 @@ abstract class AbstractGenericErrorPayloadObjectTypeResolverPicker extends Abstr
     }
     final protected function getGenericErrorPayloadObjectTypeResolver(): GenericErrorPayloadObjectTypeResolver
     {
-        /** @var GenericErrorPayloadObjectTypeResolver */
-        return $this->genericErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(GenericErrorPayloadObjectTypeResolver::class);
+        if ($this->genericErrorPayloadObjectTypeResolver === null) {
+            /** @var GenericErrorPayloadObjectTypeResolver */
+            $genericErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(GenericErrorPayloadObjectTypeResolver::class);
+            $this->genericErrorPayloadObjectTypeResolver = $genericErrorPayloadObjectTypeResolver;
+        }
+        return $this->genericErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

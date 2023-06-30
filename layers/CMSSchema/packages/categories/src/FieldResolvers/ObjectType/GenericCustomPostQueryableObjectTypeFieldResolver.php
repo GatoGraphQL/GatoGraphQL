@@ -25,8 +25,12 @@ class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPo
     }
     final protected function getQueryableCategoryTypeAPI(): QueryableCategoryTypeAPIInterface
     {
-        /** @var QueryableCategoryTypeAPIInterface */
-        return $this->queryableCategoryTypeAPI ??= $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
+        if ($this->queryableCategoryTypeAPI === null) {
+            /** @var QueryableCategoryTypeAPIInterface */
+            $queryableCategoryTypeAPI = $this->instanceManager->getInstance(QueryableCategoryTypeAPIInterface::class);
+            $this->queryableCategoryTypeAPI = $queryableCategoryTypeAPI;
+        }
+        return $this->queryableCategoryTypeAPI;
     }
     final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
     {
@@ -34,8 +38,12 @@ class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPo
     }
     final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
     {
-        /** @var GenericCategoryObjectTypeResolver */
-        return $this->genericCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
+        if ($this->genericCategoryObjectTypeResolver === null) {
+            /** @var GenericCategoryObjectTypeResolver */
+            $genericCategoryObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
+            $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
+        }
+        return $this->genericCategoryObjectTypeResolver;
     }
 
     /**

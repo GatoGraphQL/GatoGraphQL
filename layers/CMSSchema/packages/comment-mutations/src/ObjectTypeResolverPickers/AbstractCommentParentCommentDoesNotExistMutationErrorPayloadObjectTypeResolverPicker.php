@@ -19,8 +19,12 @@ abstract class AbstractCommentParentCommentDoesNotExistMutationErrorPayloadObjec
     }
     final protected function getCommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver(): CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver
     {
-        /** @var CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver */
-        return $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver::class);
+        if ($this->commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver === null) {
+            /** @var CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver */
+            $commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver::class);
+            $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver = $commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver;
+        }
+        return $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

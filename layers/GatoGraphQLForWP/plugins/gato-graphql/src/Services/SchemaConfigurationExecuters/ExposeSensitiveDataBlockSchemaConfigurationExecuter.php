@@ -20,8 +20,12 @@ class ExposeSensitiveDataBlockSchemaConfigurationExecuter extends AbstractDefaul
     }
     final protected function getSchemaConfigExposeSensitiveDataBlock(): SchemaConfigExposeSensitiveDataBlock
     {
-        /** @var SchemaConfigExposeSensitiveDataBlock */
-        return $this->schemaConfigExposeSensitiveDataBlock ??= $this->instanceManager->getInstance(SchemaConfigExposeSensitiveDataBlock::class);
+        if ($this->schemaConfigExposeSensitiveDataBlock === null) {
+            /** @var SchemaConfigExposeSensitiveDataBlock */
+            $schemaConfigExposeSensitiveDataBlock = $this->instanceManager->getInstance(SchemaConfigExposeSensitiveDataBlock::class);
+            $this->schemaConfigExposeSensitiveDataBlock = $schemaConfigExposeSensitiveDataBlock;
+        }
+        return $this->schemaConfigExposeSensitiveDataBlock;
     }
 
     public function getEnablingModule(): ?string

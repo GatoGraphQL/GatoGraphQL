@@ -50,8 +50,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
     final protected function getSettingsNormalizer(): SettingsNormalizerInterface
     {
-        /** @var SettingsNormalizerInterface */
-        return $this->settingsNormalizer ??= $this->instanceManager->getInstance(SettingsNormalizerInterface::class);
+        if ($this->settingsNormalizer === null) {
+            /** @var SettingsNormalizerInterface */
+            $settingsNormalizer = $this->instanceManager->getInstance(SettingsNormalizerInterface::class);
+            $this->settingsNormalizer = $settingsNormalizer;
+        }
+        return $this->settingsNormalizer;
     }
     final public function setPluginGeneralSettingsFunctionalityModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver): void
     {
@@ -59,8 +63,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
     final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
     {
-        /** @var PluginGeneralSettingsFunctionalityModuleResolver */
-        return $this->PluginGeneralSettingsFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
+        if ($this->PluginGeneralSettingsFunctionalityModuleResolver === null) {
+            /** @var PluginGeneralSettingsFunctionalityModuleResolver */
+            $PluginGeneralSettingsFunctionalityModuleResolver = $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
+            $this->PluginGeneralSettingsFunctionalityModuleResolver = $PluginGeneralSettingsFunctionalityModuleResolver;
+        }
+        return $this->PluginGeneralSettingsFunctionalityModuleResolver;
     }
     final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
     {
@@ -68,8 +76,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
     final protected function getSettingsCategoryRegistry(): SettingsCategoryRegistryInterface
     {
-        /** @var SettingsCategoryRegistryInterface */
-        return $this->settingsCategoryRegistry ??= $this->instanceManager->getInstance(SettingsCategoryRegistryInterface::class);
+        if ($this->settingsCategoryRegistry === null) {
+            /** @var SettingsCategoryRegistryInterface */
+            $settingsCategoryRegistry = $this->instanceManager->getInstance(SettingsCategoryRegistryInterface::class);
+            $this->settingsCategoryRegistry = $settingsCategoryRegistry;
+        }
+        return $this->settingsCategoryRegistry;
     }
 
     public function getMenuPageSlug(): string

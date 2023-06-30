@@ -18,8 +18,12 @@ class ComponentPaths extends AbstractComponentFilter
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
-        /** @var ComponentPathHelpersInterface */
-        return $this->componentPathHelpers ??= $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+        if ($this->componentPathHelpers === null) {
+            /** @var ComponentPathHelpersInterface */
+            $componentPathHelpers = $this->instanceManager->getInstance(ComponentPathHelpersInterface::class);
+            $this->componentPathHelpers = $componentPathHelpers;
+        }
+        return $this->componentPathHelpers;
     }
 
     /**
@@ -43,8 +47,12 @@ class ComponentPaths extends AbstractComponentFilter
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        /** @var ComponentPathManagerInterface */
-        return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
+        if ($this->componentPathManager === null) {
+            /** @var ComponentPathManagerInterface */
+            $componentPathManager = $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
+            $this->componentPathManager = $componentPathManager;
+        }
+        return $this->componentPathManager;
     }
 
     protected function init(): void

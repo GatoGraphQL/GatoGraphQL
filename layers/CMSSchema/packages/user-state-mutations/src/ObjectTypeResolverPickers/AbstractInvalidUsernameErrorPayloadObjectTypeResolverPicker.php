@@ -19,8 +19,12 @@ abstract class AbstractInvalidUsernameErrorPayloadObjectTypeResolverPicker exten
     }
     final protected function getInvalidUsernameErrorPayloadObjectTypeResolver(): InvalidUsernameErrorPayloadObjectTypeResolver
     {
-        /** @var InvalidUsernameErrorPayloadObjectTypeResolver */
-        return $this->userIsNotLoggedInErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(InvalidUsernameErrorPayloadObjectTypeResolver::class);
+        if ($this->userIsNotLoggedInErrorPayloadObjectTypeResolver === null) {
+            /** @var InvalidUsernameErrorPayloadObjectTypeResolver */
+            $userIsNotLoggedInErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(InvalidUsernameErrorPayloadObjectTypeResolver::class);
+            $this->userIsNotLoggedInErrorPayloadObjectTypeResolver = $userIsNotLoggedInErrorPayloadObjectTypeResolver;
+        }
+        return $this->userIsNotLoggedInErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

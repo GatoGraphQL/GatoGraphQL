@@ -18,8 +18,12 @@ class InvalidUserEmailErrorPayloadObjectTypeResolver extends AbstractErrorPayloa
     }
     final protected function getInvalidUserEmailErrorPayloadObjectTypeDataLoader(): InvalidUserEmailErrorPayloadObjectTypeDataLoader
     {
-        /** @var InvalidUserEmailErrorPayloadObjectTypeDataLoader */
-        return $this->invalidUserEmailErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(InvalidUserEmailErrorPayloadObjectTypeDataLoader::class);
+        if ($this->invalidUserEmailErrorPayloadObjectTypeDataLoader === null) {
+            /** @var InvalidUserEmailErrorPayloadObjectTypeDataLoader */
+            $invalidUserEmailErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(InvalidUserEmailErrorPayloadObjectTypeDataLoader::class);
+            $this->invalidUserEmailErrorPayloadObjectTypeDataLoader = $invalidUserEmailErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->invalidUserEmailErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

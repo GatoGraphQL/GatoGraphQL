@@ -19,8 +19,12 @@ abstract class AbstractLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadOb
     }
     final protected function getLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver(): LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver
     {
-        /** @var LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver */
-        return $this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver::class);
+        if ($this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver === null) {
+            /** @var LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver */
+            $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver::class);
+            $this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver = $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver;
+        }
+        return $this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

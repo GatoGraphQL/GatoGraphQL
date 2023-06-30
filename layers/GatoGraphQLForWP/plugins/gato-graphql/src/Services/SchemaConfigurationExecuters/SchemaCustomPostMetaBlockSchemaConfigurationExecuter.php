@@ -21,8 +21,12 @@ class SchemaCustomPostMetaBlockSchemaConfigurationExecuter extends AbstractSchem
     }
     final protected function getSchemaConfigSchemaCustomPostMetaBlock(): SchemaConfigSchemaCustomPostMetaBlock
     {
-        /** @var SchemaConfigSchemaCustomPostMetaBlock */
-        return $this->schemaConfigCustomPostMetaBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaCustomPostMetaBlock::class);
+        if ($this->schemaConfigCustomPostMetaBlock === null) {
+            /** @var SchemaConfigSchemaCustomPostMetaBlock */
+            $schemaConfigCustomPostMetaBlock = $this->instanceManager->getInstance(SchemaConfigSchemaCustomPostMetaBlock::class);
+            $this->schemaConfigCustomPostMetaBlock = $schemaConfigCustomPostMetaBlock;
+        }
+        return $this->schemaConfigCustomPostMetaBlock;
     }
 
     public function getEnablingModule(): ?string

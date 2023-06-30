@@ -20,8 +20,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getRoutingManager(): RoutingManagerInterface
     {
-        /** @var RoutingManagerInterface */
-        return $this->routingManager ??= $this->instanceManager->getInstance(RoutingManagerInterface::class);
+        if ($this->routingManager === null) {
+            /** @var RoutingManagerInterface */
+            $routingManager = $this->instanceManager->getInstance(RoutingManagerInterface::class);
+            $this->routingManager = $routingManager;
+        }
+        return $this->routingManager;
     }
 
     /**

@@ -33,8 +33,12 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -42,8 +46,12 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setTagSlugsFilterInput(TagSlugsFilterInput $tagSlugsFilterInput): void
     {
@@ -51,8 +59,12 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     }
     final protected function getTagSlugsFilterInput(): TagSlugsFilterInput
     {
-        /** @var TagSlugsFilterInput */
-        return $this->tagSlugsFilterInput ??= $this->instanceManager->getInstance(TagSlugsFilterInput::class);
+        if ($this->tagSlugsFilterInput === null) {
+            /** @var TagSlugsFilterInput */
+            $tagSlugsFilterInput = $this->instanceManager->getInstance(TagSlugsFilterInput::class);
+            $this->tagSlugsFilterInput = $tagSlugsFilterInput;
+        }
+        return $this->tagSlugsFilterInput;
     }
     final public function setTagIDsFilterInput(TagIDsFilterInput $tagIDsFilterInput): void
     {
@@ -60,8 +72,12 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     }
     final protected function getTagIDsFilterInput(): TagIDsFilterInput
     {
-        /** @var TagIDsFilterInput */
-        return $this->tagIDsFilterInput ??= $this->instanceManager->getInstance(TagIDsFilterInput::class);
+        if ($this->tagIDsFilterInput === null) {
+            /** @var TagIDsFilterInput */
+            $tagIDsFilterInput = $this->instanceManager->getInstance(TagIDsFilterInput::class);
+            $this->tagIDsFilterInput = $tagIDsFilterInput;
+        }
+        return $this->tagIDsFilterInput;
     }
     final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
     {
@@ -69,8 +85,12 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     }
     final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
     {
-        /** @var TagTaxonomyEnumStringScalarTypeResolver */
-        return $this->tagTaxonomyEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(TagTaxonomyEnumStringScalarTypeResolver::class);
+        if ($this->tagTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var TagTaxonomyEnumStringScalarTypeResolver */
+            $tagTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(TagTaxonomyEnumStringScalarTypeResolver::class);
+            $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->tagTaxonomyEnumStringScalarTypeResolver;
     }
     final public function setTagTaxonomyFilterInput(TagTaxonomyFilterInput $tagTaxonomyFilterInput): void
     {
@@ -78,8 +98,12 @@ abstract class AbstractAddTagFilterInputObjectTypeHookSet extends AbstractHookSe
     }
     final protected function getTagTaxonomyFilterInput(): TagTaxonomyFilterInput
     {
-        /** @var TagTaxonomyFilterInput */
-        return $this->tagTaxonomyFilterInput ??= $this->instanceManager->getInstance(TagTaxonomyFilterInput::class);
+        if ($this->tagTaxonomyFilterInput === null) {
+            /** @var TagTaxonomyFilterInput */
+            $tagTaxonomyFilterInput = $this->instanceManager->getInstance(TagTaxonomyFilterInput::class);
+            $this->tagTaxonomyFilterInput = $tagTaxonomyFilterInput;
+        }
+        return $this->tagTaxonomyFilterInput;
     }
 
     protected function init(): void

@@ -17,8 +17,12 @@ class MarkAsReadNotificationMutationResolverBridge extends AbstractMarkAsReadOrU
     }
     final protected function getMarkAsReadNotificationMutationResolver(): MarkAsReadNotificationMutationResolver
     {
-        /** @var MarkAsReadNotificationMutationResolver */
-        return $this->markAsReadNotificationMutationResolver ??= $this->instanceManager->getInstance(MarkAsReadNotificationMutationResolver::class);
+        if ($this->markAsReadNotificationMutationResolver === null) {
+            /** @var MarkAsReadNotificationMutationResolver */
+            $markAsReadNotificationMutationResolver = $this->instanceManager->getInstance(MarkAsReadNotificationMutationResolver::class);
+            $this->markAsReadNotificationMutationResolver = $markAsReadNotificationMutationResolver;
+        }
+        return $this->markAsReadNotificationMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

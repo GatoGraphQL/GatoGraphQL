@@ -32,8 +32,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
-        /** @var TypeObjectTypeResolver */
-        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+        if ($this->typeObjectTypeResolver === null) {
+            /** @var TypeObjectTypeResolver */
+            $typeObjectTypeResolver = $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+            $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        }
+        return $this->typeObjectTypeResolver;
     }
     final public function setDirectiveObjectTypeResolver(DirectiveObjectTypeResolver $directiveObjectTypeResolver): void
     {
@@ -41,8 +45,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getDirectiveObjectTypeResolver(): DirectiveObjectTypeResolver
     {
-        /** @var DirectiveObjectTypeResolver */
-        return $this->directiveObjectTypeResolver ??= $this->instanceManager->getInstance(DirectiveObjectTypeResolver::class);
+        if ($this->directiveObjectTypeResolver === null) {
+            /** @var DirectiveObjectTypeResolver */
+            $directiveObjectTypeResolver = $this->instanceManager->getInstance(DirectiveObjectTypeResolver::class);
+            $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
+        }
+        return $this->directiveObjectTypeResolver;
     }
     final public function setSchemaExtensionsObjectTypeResolver(SchemaExtensionsObjectTypeResolver $schemaExtensionsObjectTypeResolver): void
     {
@@ -50,8 +58,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getSchemaExtensionsObjectTypeResolver(): SchemaExtensionsObjectTypeResolver
     {
-        /** @var SchemaExtensionsObjectTypeResolver */
-        return $this->schemaExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(SchemaExtensionsObjectTypeResolver::class);
+        if ($this->schemaExtensionsObjectTypeResolver === null) {
+            /** @var SchemaExtensionsObjectTypeResolver */
+            $schemaExtensionsObjectTypeResolver = $this->instanceManager->getInstance(SchemaExtensionsObjectTypeResolver::class);
+            $this->schemaExtensionsObjectTypeResolver = $schemaExtensionsObjectTypeResolver;
+        }
+        return $this->schemaExtensionsObjectTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -59,8 +71,12 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
 
     /**

@@ -34,8 +34,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -43,8 +47,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setHighlightObjectTypeResolver(HighlightObjectTypeResolver $highlightObjectTypeResolver): void
     {
@@ -52,8 +60,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getHighlightObjectTypeResolver(): HighlightObjectTypeResolver
     {
-        /** @var HighlightObjectTypeResolver */
-        return $this->highlightObjectTypeResolver ??= $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
+        if ($this->highlightObjectTypeResolver === null) {
+            /** @var HighlightObjectTypeResolver */
+            $highlightObjectTypeResolver = $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
+            $this->highlightObjectTypeResolver = $highlightObjectTypeResolver;
+        }
+        return $this->highlightObjectTypeResolver;
     }
 
     /**

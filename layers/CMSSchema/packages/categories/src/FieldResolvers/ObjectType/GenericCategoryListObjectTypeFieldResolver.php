@@ -23,8 +23,12 @@ class GenericCategoryListObjectTypeFieldResolver extends AbstractCustomPostListO
     }
     final protected function getTaxonomyCustomPostsFilterInputObjectTypeResolver(): TaxonomyCustomPostsFilterInputObjectTypeResolver
     {
-        /** @var TaxonomyCustomPostsFilterInputObjectTypeResolver */
-        return $this->taxonomyCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomyCustomPostsFilterInputObjectTypeResolver::class);
+        if ($this->taxonomyCustomPostsFilterInputObjectTypeResolver === null) {
+            /** @var TaxonomyCustomPostsFilterInputObjectTypeResolver */
+            $taxonomyCustomPostsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(TaxonomyCustomPostsFilterInputObjectTypeResolver::class);
+            $this->taxonomyCustomPostsFilterInputObjectTypeResolver = $taxonomyCustomPostsFilterInputObjectTypeResolver;
+        }
+        return $this->taxonomyCustomPostsFilterInputObjectTypeResolver;
     }
     final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
     {
@@ -32,8 +36,12 @@ class GenericCategoryListObjectTypeFieldResolver extends AbstractCustomPostListO
     }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {
-        /** @var TaxonomyTermTypeAPIInterface */
-        return $this->taxonomyTermTypeAPI ??= $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
+        if ($this->taxonomyTermTypeAPI === null) {
+            /** @var TaxonomyTermTypeAPIInterface */
+            $taxonomyTermTypeAPI = $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
+            $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+        }
+        return $this->taxonomyTermTypeAPI;
     }
 
     protected function getCustomPostsFilterInputObjectTypeResolver(): AbstractCustomPostsFilterInputObjectTypeResolver

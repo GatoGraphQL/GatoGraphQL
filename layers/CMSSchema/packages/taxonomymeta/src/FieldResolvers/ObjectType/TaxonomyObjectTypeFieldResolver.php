@@ -22,8 +22,12 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
     }
     final protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
     {
-        /** @var TaxonomyMetaTypeAPIInterface */
-        return $this->taxonomyMetaTypeAPI ??= $this->instanceManager->getInstance(TaxonomyMetaTypeAPIInterface::class);
+        if ($this->taxonomyMetaTypeAPI === null) {
+            /** @var TaxonomyMetaTypeAPIInterface */
+            $taxonomyMetaTypeAPI = $this->instanceManager->getInstance(TaxonomyMetaTypeAPIInterface::class);
+            $this->taxonomyMetaTypeAPI = $taxonomyMetaTypeAPI;
+        }
+        return $this->taxonomyMetaTypeAPI;
     }
 
     /**

@@ -19,8 +19,12 @@ abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiate
     }
     final protected function getLooseContractManager(): LooseContractManagerInterface
     {
-        /** @var LooseContractManagerInterface */
-        return $this->looseContractManager ??= $this->instanceManager->getInstance(LooseContractManagerInterface::class);
+        if ($this->looseContractManager === null) {
+            /** @var LooseContractManagerInterface */
+            $looseContractManager = $this->instanceManager->getInstance(LooseContractManagerInterface::class);
+            $this->looseContractManager = $looseContractManager;
+        }
+        return $this->looseContractManager;
     }
 
     public function initialize(): void

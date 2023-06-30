@@ -25,8 +25,12 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -34,8 +38,12 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -43,8 +51,12 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setRelationEnumTypeResolver(RelationEnumTypeResolver $relationEnumTypeResolver): void
     {
@@ -52,8 +64,12 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
     }
     final protected function getRelationEnumTypeResolver(): RelationEnumTypeResolver
     {
-        /** @var RelationEnumTypeResolver */
-        return $this->relationEnumTypeResolver ??= $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
+        if ($this->relationEnumTypeResolver === null) {
+            /** @var RelationEnumTypeResolver */
+            $relationEnumTypeResolver = $this->instanceManager->getInstance(RelationEnumTypeResolver::class);
+            $this->relationEnumTypeResolver = $relationEnumTypeResolver;
+        }
+        return $this->relationEnumTypeResolver;
     }
 
     /**

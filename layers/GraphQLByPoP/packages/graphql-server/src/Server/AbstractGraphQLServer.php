@@ -25,8 +25,12 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
     }
     final protected function getApplicationStateFillerService(): ApplicationStateFillerServiceInterface
     {
-        /** @var ApplicationStateFillerServiceInterface */
-        return $this->applicationStateFillerService ??= InstanceManagerFacade::getInstance()->getInstance(ApplicationStateFillerServiceInterface::class);
+        if ($this->applicationStateFillerService === null) {
+            /** @var ApplicationStateFillerServiceInterface */
+            $applicationStateFillerService = InstanceManagerFacade::getInstance()->getInstance(ApplicationStateFillerServiceInterface::class);
+            $this->applicationStateFillerService = $applicationStateFillerService;
+        }
+        return $this->applicationStateFillerService;
     }
     final public function setEngine(EngineInterface $engine): void
     {
@@ -34,8 +38,12 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
     }
     final protected function getEngine(): EngineInterface
     {
-        /** @var EngineInterface */
-        return $this->engine ??= InstanceManagerFacade::getInstance()->getInstance(EngineInterface::class);
+        if ($this->engine === null) {
+            /** @var EngineInterface */
+            $engine = InstanceManagerFacade::getInstance()->getInstance(EngineInterface::class);
+            $this->engine = $engine;
+        }
+        return $this->engine;
     }
 
     /**

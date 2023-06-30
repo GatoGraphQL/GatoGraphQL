@@ -30,8 +30,12 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getSuperRootObjectTypeDataLoader(): SuperRootObjectTypeDataLoader
     {
-        /** @var SuperRootObjectTypeDataLoader */
-        return $this->superRootObjectTypeDataLoader ??= $this->instanceManager->getInstance(SuperRootObjectTypeDataLoader::class);
+        if ($this->superRootObjectTypeDataLoader === null) {
+            /** @var SuperRootObjectTypeDataLoader */
+            $superRootObjectTypeDataLoader = $this->instanceManager->getInstance(SuperRootObjectTypeDataLoader::class);
+            $this->superRootObjectTypeDataLoader = $superRootObjectTypeDataLoader;
+        }
+        return $this->superRootObjectTypeDataLoader;
     }
     final public function setMandatoryOperationDirectiveResolverRegistry(MandatoryOperationDirectiveResolverRegistryInterface $mandatoryOperationDirectiveResolverRegistry): void
     {
@@ -39,8 +43,12 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getMandatoryOperationDirectiveResolverRegistry(): MandatoryOperationDirectiveResolverRegistryInterface
     {
-        /** @var MandatoryOperationDirectiveResolverRegistryInterface */
-        return $this->mandatoryOperationDirectiveResolverRegistry ??= $this->instanceManager->getInstance(MandatoryOperationDirectiveResolverRegistryInterface::class);
+        if ($this->mandatoryOperationDirectiveResolverRegistry === null) {
+            /** @var MandatoryOperationDirectiveResolverRegistryInterface */
+            $mandatoryOperationDirectiveResolverRegistry = $this->instanceManager->getInstance(MandatoryOperationDirectiveResolverRegistryInterface::class);
+            $this->mandatoryOperationDirectiveResolverRegistry = $mandatoryOperationDirectiveResolverRegistry;
+        }
+        return $this->mandatoryOperationDirectiveResolverRegistry;
     }
 
     public function getTypeName(): string

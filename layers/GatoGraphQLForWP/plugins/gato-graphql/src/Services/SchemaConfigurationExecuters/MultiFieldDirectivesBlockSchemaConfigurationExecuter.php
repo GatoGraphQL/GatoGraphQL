@@ -23,8 +23,12 @@ class MultiFieldDirectivesBlockSchemaConfigurationExecuter extends AbstractDefau
     }
     final protected function getSchemaConfigMultiFieldDirectivesBlock(): SchemaConfigMultiFieldDirectivesBlock
     {
-        /** @var SchemaConfigMultiFieldDirectivesBlock */
-        return $this->schemaConfigMultiFieldDirectivesBlock ??= $this->instanceManager->getInstance(SchemaConfigMultiFieldDirectivesBlock::class);
+        if ($this->schemaConfigMultiFieldDirectivesBlock === null) {
+            /** @var SchemaConfigMultiFieldDirectivesBlock */
+            $schemaConfigMultiFieldDirectivesBlock = $this->instanceManager->getInstance(SchemaConfigMultiFieldDirectivesBlock::class);
+            $this->schemaConfigMultiFieldDirectivesBlock = $schemaConfigMultiFieldDirectivesBlock;
+        }
+        return $this->schemaConfigMultiFieldDirectivesBlock;
     }
 
     public function getEnablingModule(): ?string

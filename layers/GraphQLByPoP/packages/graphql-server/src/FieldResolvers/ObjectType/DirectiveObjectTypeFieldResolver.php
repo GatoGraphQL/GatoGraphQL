@@ -33,8 +33,12 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -42,8 +46,12 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
     {
@@ -51,8 +59,12 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
     {
-        /** @var InputValueObjectTypeResolver */
-        return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
+        if ($this->inputValueObjectTypeResolver === null) {
+            /** @var InputValueObjectTypeResolver */
+            $inputValueObjectTypeResolver = $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
+            $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+        }
+        return $this->inputValueObjectTypeResolver;
     }
     final public function setDirectiveLocationEnumTypeResolver(DirectiveLocationEnumTypeResolver $directiveLocationEnumTypeResolver): void
     {
@@ -60,8 +72,12 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getDirectiveLocationEnumTypeResolver(): DirectiveLocationEnumTypeResolver
     {
-        /** @var DirectiveLocationEnumTypeResolver */
-        return $this->directiveLocationEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
+        if ($this->directiveLocationEnumTypeResolver === null) {
+            /** @var DirectiveLocationEnumTypeResolver */
+            $directiveLocationEnumTypeResolver = $this->instanceManager->getInstance(DirectiveLocationEnumTypeResolver::class);
+            $this->directiveLocationEnumTypeResolver = $directiveLocationEnumTypeResolver;
+        }
+        return $this->directiveLocationEnumTypeResolver;
     }
     final public function setDirectiveExtensionsObjectTypeResolver(DirectiveExtensionsObjectTypeResolver $directiveExtensionsObjectTypeResolver): void
     {
@@ -69,8 +85,12 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getDirectiveExtensionsObjectTypeResolver(): DirectiveExtensionsObjectTypeResolver
     {
-        /** @var DirectiveExtensionsObjectTypeResolver */
-        return $this->directiveExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(DirectiveExtensionsObjectTypeResolver::class);
+        if ($this->directiveExtensionsObjectTypeResolver === null) {
+            /** @var DirectiveExtensionsObjectTypeResolver */
+            $directiveExtensionsObjectTypeResolver = $this->instanceManager->getInstance(DirectiveExtensionsObjectTypeResolver::class);
+            $this->directiveExtensionsObjectTypeResolver = $directiveExtensionsObjectTypeResolver;
+        }
+        return $this->directiveExtensionsObjectTypeResolver;
     }
 
     /**

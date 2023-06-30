@@ -17,8 +17,12 @@ class MenuObjectTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
-        /** @var MenuTypeAPIInterface */
-        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+        if ($this->menuTypeAPI === null) {
+            /** @var MenuTypeAPIInterface */
+            $menuTypeAPI = $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+            $this->menuTypeAPI = $menuTypeAPI;
+        }
+        return $this->menuTypeAPI;
     }
 
     /**

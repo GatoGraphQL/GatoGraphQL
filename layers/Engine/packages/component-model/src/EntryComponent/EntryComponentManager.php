@@ -22,8 +22,12 @@ class EntryComponentManager implements EntryComponentManagerInterface
     }
     final protected function getComponentRoutingProcessorManager(): ComponentRoutingProcessorManagerInterface
     {
-        /** @var ComponentRoutingProcessorManagerInterface */
-        return $this->routeComponentProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
+        if ($this->routeComponentProcessorManager === null) {
+            /** @var ComponentRoutingProcessorManagerInterface */
+            $routeComponentProcessorManager = $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
+            $this->routeComponentProcessorManager = $routeComponentProcessorManager;
+        }
+        return $this->routeComponentProcessorManager;
     }
 
     public function getEntryComponent(): ?Component

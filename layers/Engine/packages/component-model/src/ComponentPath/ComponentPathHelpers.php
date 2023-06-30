@@ -27,8 +27,12 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
     }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
-        /** @var ComponentPathManagerInterface */
-        return $this->componentPathManager ??= $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
+        if ($this->componentPathManager === null) {
+            /** @var ComponentPathManagerInterface */
+            $componentPathManager = $this->instanceManager->getInstance(ComponentPathManagerInterface::class);
+            $this->componentPathManager = $componentPathManager;
+        }
+        return $this->componentPathManager;
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
@@ -36,8 +40,12 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        /** @var ComponentHelpersInterface */
-        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+        if ($this->componentHelpers === null) {
+            /** @var ComponentHelpersInterface */
+            $componentHelpers = $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+            $this->componentHelpers = $componentHelpers;
+        }
+        return $this->componentHelpers;
     }
 
     public function getStringifiedModulePropagationCurrentPath(Component $component): string

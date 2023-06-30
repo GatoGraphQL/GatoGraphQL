@@ -18,8 +18,12 @@ class CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver extends Abst
     }
     final protected function getCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader(): CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader
     {
-        /** @var CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader */
-        return $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader::class);
+        if ($this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader === null) {
+            /** @var CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader */
+            $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader::class);
+            $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader = $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

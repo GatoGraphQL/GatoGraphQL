@@ -20,8 +20,12 @@ class NamespacingBlockSchemaConfigurationExecuter extends AbstractDefaultEnableD
     }
     final protected function getSchemaConfigNamespacingBlock(): SchemaConfigNamespacingBlock
     {
-        /** @var SchemaConfigNamespacingBlock */
-        return $this->schemaConfigNamespacingBlock ??= $this->instanceManager->getInstance(SchemaConfigNamespacingBlock::class);
+        if ($this->schemaConfigNamespacingBlock === null) {
+            /** @var SchemaConfigNamespacingBlock */
+            $schemaConfigNamespacingBlock = $this->instanceManager->getInstance(SchemaConfigNamespacingBlock::class);
+            $this->schemaConfigNamespacingBlock = $schemaConfigNamespacingBlock;
+        }
+        return $this->schemaConfigNamespacingBlock;
     }
 
     public function getEnablingModule(): ?string

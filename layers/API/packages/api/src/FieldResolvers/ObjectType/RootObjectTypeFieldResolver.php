@@ -28,8 +28,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        /** @var JSONObjectScalarTypeResolver */
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        if ($this->jsonObjectScalarTypeResolver === null) {
+            /** @var JSONObjectScalarTypeResolver */
+            $jsonObjectScalarTypeResolver = $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+            $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        }
+        return $this->jsonObjectScalarTypeResolver;
     }
 
     /**

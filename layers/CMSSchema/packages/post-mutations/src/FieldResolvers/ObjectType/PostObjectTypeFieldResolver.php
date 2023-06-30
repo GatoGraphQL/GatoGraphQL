@@ -36,8 +36,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        /** @var PostObjectTypeResolver */
-        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+        if ($this->postObjectTypeResolver === null) {
+            /** @var PostObjectTypeResolver */
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            $this->postObjectTypeResolver = $postObjectTypeResolver;
+        }
+        return $this->postObjectTypeResolver;
     }
     final public function setPostUpdateMutationPayloadObjectTypeResolver(PostUpdateMutationPayloadObjectTypeResolver $postUpdateMutationPayloadObjectTypeResolver): void
     {
@@ -45,8 +49,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getPostUpdateMutationPayloadObjectTypeResolver(): PostUpdateMutationPayloadObjectTypeResolver
     {
-        /** @var PostUpdateMutationPayloadObjectTypeResolver */
-        return $this->postUpdateMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(PostUpdateMutationPayloadObjectTypeResolver::class);
+        if ($this->postUpdateMutationPayloadObjectTypeResolver === null) {
+            /** @var PostUpdateMutationPayloadObjectTypeResolver */
+            $postUpdateMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostUpdateMutationPayloadObjectTypeResolver::class);
+            $this->postUpdateMutationPayloadObjectTypeResolver = $postUpdateMutationPayloadObjectTypeResolver;
+        }
+        return $this->postUpdateMutationPayloadObjectTypeResolver;
     }
     final public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
     {
@@ -54,8 +62,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
     {
-        /** @var UpdatePostMutationResolver */
-        return $this->updatePostMutationResolver ??= $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
+        if ($this->updatePostMutationResolver === null) {
+            /** @var UpdatePostMutationResolver */
+            $updatePostMutationResolver = $this->instanceManager->getInstance(UpdatePostMutationResolver::class);
+            $this->updatePostMutationResolver = $updatePostMutationResolver;
+        }
+        return $this->updatePostMutationResolver;
     }
     final public function setPayloadableUpdatePostMutationResolver(PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver): void
     {
@@ -63,8 +75,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getPayloadableUpdatePostMutationResolver(): PayloadableUpdatePostMutationResolver
     {
-        /** @var PayloadableUpdatePostMutationResolver */
-        return $this->payloadableUpdatePostMutationResolver ??= $this->instanceManager->getInstance(PayloadableUpdatePostMutationResolver::class);
+        if ($this->payloadableUpdatePostMutationResolver === null) {
+            /** @var PayloadableUpdatePostMutationResolver */
+            $payloadableUpdatePostMutationResolver = $this->instanceManager->getInstance(PayloadableUpdatePostMutationResolver::class);
+            $this->payloadableUpdatePostMutationResolver = $payloadableUpdatePostMutationResolver;
+        }
+        return $this->payloadableUpdatePostMutationResolver;
     }
     final public function setPostUpdateInputObjectTypeResolver(PostUpdateInputObjectTypeResolver $postUpdateInputObjectTypeResolver): void
     {
@@ -72,8 +88,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getPostUpdateInputObjectTypeResolver(): PostUpdateInputObjectTypeResolver
     {
-        /** @var PostUpdateInputObjectTypeResolver */
-        return $this->postUpdateInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostUpdateInputObjectTypeResolver::class);
+        if ($this->postUpdateInputObjectTypeResolver === null) {
+            /** @var PostUpdateInputObjectTypeResolver */
+            $postUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(PostUpdateInputObjectTypeResolver::class);
+            $this->postUpdateInputObjectTypeResolver = $postUpdateInputObjectTypeResolver;
+        }
+        return $this->postUpdateInputObjectTypeResolver;
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
@@ -81,8 +101,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
-        /** @var UserLoggedInCheckpoint */
-        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+        if ($this->userLoggedInCheckpoint === null) {
+            /** @var UserLoggedInCheckpoint */
+            $userLoggedInCheckpoint = $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+            $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+        }
+        return $this->userLoggedInCheckpoint;
     }
 
     /**

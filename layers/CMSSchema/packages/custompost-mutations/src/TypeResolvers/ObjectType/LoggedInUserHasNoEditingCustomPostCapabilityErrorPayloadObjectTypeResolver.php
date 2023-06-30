@@ -18,8 +18,12 @@ class LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver
     }
     final protected function getLoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader
     {
-        /** @var LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader */
-        return $this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader::class);
+        if ($this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader === null) {
+            /** @var LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader */
+            $loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader::class);
+            $this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

@@ -17,8 +17,12 @@ class SchemaDefinitionReferenceObjectTypeDataLoader extends AbstractObjectTypeDa
     }
     final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {
-        /** @var SchemaDefinitionReferenceRegistryInterface */
-        return $this->schemaDefinitionReferenceRegistry ??= $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+        if ($this->schemaDefinitionReferenceRegistry === null) {
+            /** @var SchemaDefinitionReferenceRegistryInterface */
+            $schemaDefinitionReferenceRegistry = $this->instanceManager->getInstance(SchemaDefinitionReferenceRegistryInterface::class);
+            $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
+        }
+        return $this->schemaDefinitionReferenceRegistry;
     }
 
     /**

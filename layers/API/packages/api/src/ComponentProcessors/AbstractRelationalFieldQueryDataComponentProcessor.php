@@ -52,8 +52,12 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
     final protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {
-        /** @var QueryASTTransformationServiceInterface */
-        return $this->queryASTTransformationService ??= $this->instanceManager->getInstance(QueryASTTransformationServiceInterface::class);
+        if ($this->queryASTTransformationService === null) {
+            /** @var QueryASTTransformationServiceInterface */
+            $queryASTTransformationService = $this->instanceManager->getInstance(QueryASTTransformationServiceInterface::class);
+            $this->queryASTTransformationService = $queryASTTransformationService;
+        }
+        return $this->queryASTTransformationService;
     }
     final public function setASTNodeDuplicatorService(ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService): void
     {
@@ -61,8 +65,12 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
     final protected function getASTNodeDuplicatorService(): ASTNodeDuplicatorServiceInterface
     {
-        /** @var ASTNodeDuplicatorServiceInterface */
-        return $this->astNodeDuplicatorService ??= $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
+        if ($this->astNodeDuplicatorService === null) {
+            /** @var ASTNodeDuplicatorServiceInterface */
+            $astNodeDuplicatorService = $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
+            $this->astNodeDuplicatorService = $astNodeDuplicatorService;
+        }
+        return $this->astNodeDuplicatorService;
     }
 
     /**

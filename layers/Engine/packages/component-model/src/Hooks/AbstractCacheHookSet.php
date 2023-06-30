@@ -20,8 +20,12 @@ abstract class AbstractCacheHookSet extends AbstractHookSet
     }
     final protected function getPersistentCache(): PersistentCacheInterface
     {
-        /** @var PersistentCacheInterface */
-        return $this->persistentCache ??= $this->instanceManager->getInstance(PersistentCacheInterface::class);
+        if ($this->persistentCache === null) {
+            /** @var PersistentCacheInterface */
+            $persistentCache = $this->instanceManager->getInstance(PersistentCacheInterface::class);
+            $this->persistentCache = $persistentCache;
+        }
+        return $this->persistentCache;
     }
     final public function setTransientCache(TransientCacheInterface $transientCache): void
     {
@@ -29,8 +33,12 @@ abstract class AbstractCacheHookSet extends AbstractHookSet
     }
     final protected function getTransientCache(): TransientCacheInterface
     {
-        /** @var TransientCacheInterface */
-        return $this->transientCache ??= $this->instanceManager->getInstance(TransientCacheInterface::class);
+        if ($this->transientCache === null) {
+            /** @var TransientCacheInterface */
+            $transientCache = $this->instanceManager->getInstance(TransientCacheInterface::class);
+            $this->transientCache = $transientCache;
+        }
+        return $this->transientCache;
     }
 
     protected function init(): void

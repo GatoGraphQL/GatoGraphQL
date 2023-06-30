@@ -18,8 +18,12 @@ class QueryableTagListObjectTypeDataLoader extends AbstractTagObjectTypeDataLoad
     }
     final protected function getQueryableTagTypeAPI(): QueryableTagTypeAPIInterface
     {
-        /** @var QueryableTagTypeAPIInterface */
-        return $this->queryableTagListTypeAPI ??= $this->instanceManager->getInstance(QueryableTagTypeAPIInterface::class);
+        if ($this->queryableTagListTypeAPI === null) {
+            /** @var QueryableTagTypeAPIInterface */
+            $queryableTagListTypeAPI = $this->instanceManager->getInstance(QueryableTagTypeAPIInterface::class);
+            $this->queryableTagListTypeAPI = $queryableTagListTypeAPI;
+        }
+        return $this->queryableTagListTypeAPI;
     }
 
     public function getTagListTypeAPI(): TagListTypeAPIInterface

@@ -40,8 +40,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        /** @var MediaTypeAPIInterface */
-        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+        if ($this->mediaTypeAPI === null) {
+            /** @var MediaTypeAPIInterface */
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
+        }
+        return $this->mediaTypeAPI;
     }
     final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
@@ -49,8 +53,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     final protected function getDateFormatter(): DateFormatterInterface
     {
-        /** @var DateFormatterInterface */
-        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+        if ($this->dateFormatter === null) {
+            /** @var DateFormatterInterface */
+            $dateFormatter = $this->instanceManager->getInstance(DateFormatterInterface::class);
+            $this->dateFormatter = $dateFormatter;
+        }
+        return $this->dateFormatter;
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -58,8 +66,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        /** @var URLScalarTypeResolver */
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -67,8 +79,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -76,8 +92,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
@@ -85,8 +105,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        /** @var DateTimeScalarTypeResolver */
-        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+        if ($this->dateTimeScalarTypeResolver === null) {
+            /** @var DateTimeScalarTypeResolver */
+            $dateTimeScalarTypeResolver = $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+            $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
+        }
+        return $this->dateTimeScalarTypeResolver;
     }
     final public function setURLAbsolutePathScalarTypeResolver(URLAbsolutePathScalarTypeResolver $urlAbsolutePathScalarTypeResolver): void
     {
@@ -94,8 +118,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     }
     final protected function getURLAbsolutePathScalarTypeResolver(): URLAbsolutePathScalarTypeResolver
     {
-        /** @var URLAbsolutePathScalarTypeResolver */
-        return $this->urlAbsolutePathScalarTypeResolver ??= $this->instanceManager->getInstance(URLAbsolutePathScalarTypeResolver::class);
+        if ($this->urlAbsolutePathScalarTypeResolver === null) {
+            /** @var URLAbsolutePathScalarTypeResolver */
+            $urlAbsolutePathScalarTypeResolver = $this->instanceManager->getInstance(URLAbsolutePathScalarTypeResolver::class);
+            $this->urlAbsolutePathScalarTypeResolver = $urlAbsolutePathScalarTypeResolver;
+        }
+        return $this->urlAbsolutePathScalarTypeResolver;
     }
 
     /**

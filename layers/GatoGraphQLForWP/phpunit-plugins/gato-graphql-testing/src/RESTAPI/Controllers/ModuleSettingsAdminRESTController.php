@@ -46,8 +46,12 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
 
     final protected function getSettingsNormalizer(): SettingsNormalizerInterface
     {
-        /** @var SettingsNormalizerInterface */
-        return $this->settingsNormalizer ??= InstanceManagerFacade::getInstance()->getInstance(SettingsNormalizerInterface::class);
+        if ($this->settingsNormalizer === null) {
+            /** @var SettingsNormalizerInterface */
+            $settingsNormalizer = InstanceManagerFacade::getInstance()->getInstance(SettingsNormalizerInterface::class);
+            $this->settingsNormalizer = $settingsNormalizer;
+        }
+        return $this->settingsNormalizer;
     }
 
     /**

@@ -38,8 +38,12 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
-        /** @var CMSHelperServiceInterface */
-        return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+        if ($this->cmsHelperService === null) {
+            /** @var CMSHelperServiceInterface */
+            $cmsHelperService = $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+            $this->cmsHelperService = $cmsHelperService;
+        }
+        return $this->cmsHelperService;
     }
 
     protected function getTaxonomyTermFromObjectOrID(

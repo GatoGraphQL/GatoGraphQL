@@ -18,8 +18,12 @@ class SiteObjectTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     final protected function getSite(): Site
     {
-        /** @var Site */
-        return $this->site ??= $this->instanceManager->getInstance(Site::class);
+        if ($this->site === null) {
+            /** @var Site */
+            $site = $this->instanceManager->getInstance(Site::class);
+            $this->site = $site;
+        }
+        return $this->site;
     }
 
     /**

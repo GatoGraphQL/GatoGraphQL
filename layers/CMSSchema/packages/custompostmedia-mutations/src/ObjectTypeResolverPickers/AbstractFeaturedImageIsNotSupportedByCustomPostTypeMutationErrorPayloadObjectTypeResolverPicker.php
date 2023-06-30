@@ -19,8 +19,12 @@ abstract class AbstractFeaturedImageIsNotSupportedByCustomPostTypeMutationErrorP
     }
     final protected function getFeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver(): FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver
     {
-        /** @var FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver */
-        return $this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver::class);
+        if ($this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver === null) {
+            /** @var FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver */
+            $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver::class);
+            $this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver = $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver;
+        }
+        return $this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

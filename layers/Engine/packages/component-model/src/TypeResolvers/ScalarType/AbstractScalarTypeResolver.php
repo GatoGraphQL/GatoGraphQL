@@ -23,8 +23,12 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     }
     final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
     {
-        /** @var ObjectSerializationManagerInterface */
-        return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
+        if ($this->objectSerializationManager === null) {
+            /** @var ObjectSerializationManagerInterface */
+            $objectSerializationManager = $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
+            $this->objectSerializationManager = $objectSerializationManager;
+        }
+        return $this->objectSerializationManager;
     }
 
     public function getSpecifiedByURL(): ?string

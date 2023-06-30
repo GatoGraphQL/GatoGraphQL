@@ -18,8 +18,12 @@ class GeneralBlockObjectTypeResolverPicker extends AbstractBlockObjectTypeResolv
     }
     final protected function getGeneralBlockObjectTypeResolver(): GeneralBlockObjectTypeResolver
     {
-        /** @var GeneralBlockObjectTypeResolver */
-        return $this->generalBlockObjectTypeResolver ??= $this->instanceManager->getInstance(GeneralBlockObjectTypeResolver::class);
+        if ($this->generalBlockObjectTypeResolver === null) {
+            /** @var GeneralBlockObjectTypeResolver */
+            $generalBlockObjectTypeResolver = $this->instanceManager->getInstance(GeneralBlockObjectTypeResolver::class);
+            $this->generalBlockObjectTypeResolver = $generalBlockObjectTypeResolver;
+        }
+        return $this->generalBlockObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

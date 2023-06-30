@@ -19,8 +19,12 @@ class PrintEndpointInEditorHookSet extends AbstractHookSet
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -28,8 +32,12 @@ class PrintEndpointInEditorHookSet extends AbstractHookSet
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
-        /** @var EndpointHelpers */
-        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+        if ($this->endpointHelpers === null) {
+            /** @var EndpointHelpers */
+            $endpointHelpers = $this->instanceManager->getInstance(EndpointHelpers::class);
+            $this->endpointHelpers = $endpointHelpers;
+        }
+        return $this->endpointHelpers;
     }
 
     protected function init(): void

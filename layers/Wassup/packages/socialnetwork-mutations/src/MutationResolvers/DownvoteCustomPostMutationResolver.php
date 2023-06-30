@@ -20,8 +20,12 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     }
     final protected function getUpvoteCustomPostMutationResolver(): UpvoteCustomPostMutationResolver
     {
-        /** @var UpvoteCustomPostMutationResolver */
-        return $this->upvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
+        if ($this->upvoteCustomPostMutationResolver === null) {
+            /** @var UpvoteCustomPostMutationResolver */
+            $upvoteCustomPostMutationResolver = $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
+            $this->upvoteCustomPostMutationResolver = $upvoteCustomPostMutationResolver;
+        }
+        return $this->upvoteCustomPostMutationResolver;
     }
 
     public function validate(

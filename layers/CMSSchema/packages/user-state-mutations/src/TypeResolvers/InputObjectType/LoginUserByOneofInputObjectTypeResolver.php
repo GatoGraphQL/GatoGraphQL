@@ -17,8 +17,12 @@ class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
     }
     final protected function getLoginCredentialsInputObjectTypeResolver(): LoginCredentialsInputObjectTypeResolver
     {
-        /** @var LoginCredentialsInputObjectTypeResolver */
-        return $this->loginCredentialsInputObjectTypeResolver ??= $this->instanceManager->getInstance(LoginCredentialsInputObjectTypeResolver::class);
+        if ($this->loginCredentialsInputObjectTypeResolver === null) {
+            /** @var LoginCredentialsInputObjectTypeResolver */
+            $loginCredentialsInputObjectTypeResolver = $this->instanceManager->getInstance(LoginCredentialsInputObjectTypeResolver::class);
+            $this->loginCredentialsInputObjectTypeResolver = $loginCredentialsInputObjectTypeResolver;
+        }
+        return $this->loginCredentialsInputObjectTypeResolver;
     }
 
     public function getTypeName(): string

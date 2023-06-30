@@ -37,8 +37,12 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     }
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
-        /** @var CustomPostStatusEnumTypeResolver */
-        return $this->customPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+        if ($this->customPostStatusEnumTypeResolver === null) {
+            /** @var CustomPostStatusEnumTypeResolver */
+            $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+            $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        }
+        return $this->customPostStatusEnumTypeResolver;
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -46,8 +50,12 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
@@ -55,8 +63,12 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     }
     final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        /** @var DateTimeScalarTypeResolver */
-        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+        if ($this->dateTimeScalarTypeResolver === null) {
+            /** @var DateTimeScalarTypeResolver */
+            $dateTimeScalarTypeResolver = $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+            $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
+        }
+        return $this->dateTimeScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -64,8 +76,12 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
     {
@@ -73,8 +89,12 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     }
     final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
     {
-        /** @var HTMLScalarTypeResolver */
-        return $this->htmlScalarTypeResolver ??= $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
+        if ($this->htmlScalarTypeResolver === null) {
+            /** @var HTMLScalarTypeResolver */
+            $htmlScalarTypeResolver = $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
+            $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
+        }
+        return $this->htmlScalarTypeResolver;
     }
     final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -82,8 +102,12 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
-        /** @var QueryableInterfaceTypeFieldResolver */
-        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+        if ($this->queryableInterfaceTypeFieldResolver === null) {
+            /** @var QueryableInterfaceTypeFieldResolver */
+            $queryableInterfaceTypeFieldResolver = $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+            $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+        }
+        return $this->queryableInterfaceTypeFieldResolver;
     }
     final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
     {
@@ -91,8 +115,12 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     }
     final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {
-        /** @var CustomPostEnumStringScalarTypeResolver */
-        return $this->customPostEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
+        if ($this->customPostEnumStringScalarTypeResolver === null) {
+            /** @var CustomPostEnumStringScalarTypeResolver */
+            $customPostEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
+            $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
+        }
+        return $this->customPostEnumStringScalarTypeResolver;
     }
 
     /**

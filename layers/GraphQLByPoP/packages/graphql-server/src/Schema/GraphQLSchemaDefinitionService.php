@@ -28,8 +28,12 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     }
     final protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
     {
-        /** @var QueryRootObjectTypeResolver */
-        return $this->queryRootObjectTypeResolver ??= $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+        if ($this->queryRootObjectTypeResolver === null) {
+            /** @var QueryRootObjectTypeResolver */
+            $queryRootObjectTypeResolver = $this->instanceManager->getInstance(QueryRootObjectTypeResolver::class);
+            $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
+        }
+        return $this->queryRootObjectTypeResolver;
     }
     final public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
     {
@@ -37,8 +41,12 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     }
     final protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
     {
-        /** @var MutationRootObjectTypeResolver */
-        return $this->mutationRootObjectTypeResolver ??= $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+        if ($this->mutationRootObjectTypeResolver === null) {
+            /** @var MutationRootObjectTypeResolver */
+            $mutationRootObjectTypeResolver = $this->instanceManager->getInstance(MutationRootObjectTypeResolver::class);
+            $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
+        }
+        return $this->mutationRootObjectTypeResolver;
     }
 
     /**

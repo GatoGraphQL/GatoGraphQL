@@ -24,8 +24,12 @@ class PageObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
     }
     final protected function getPageTypeAPI(): PageTypeAPIInterface
     {
-        /** @var PageTypeAPIInterface */
-        return $this->pageTypeAPI ??= $this->instanceManager->getInstance(PageTypeAPIInterface::class);
+        if ($this->pageTypeAPI === null) {
+            /** @var PageTypeAPIInterface */
+            $pageTypeAPI = $this->instanceManager->getInstance(PageTypeAPIInterface::class);
+            $this->pageTypeAPI = $pageTypeAPI;
+        }
+        return $this->pageTypeAPI;
     }
 
     /**

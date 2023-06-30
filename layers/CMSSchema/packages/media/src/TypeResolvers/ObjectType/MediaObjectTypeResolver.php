@@ -20,8 +20,12 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        /** @var MediaTypeAPIInterface */
-        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+        if ($this->mediaTypeAPI === null) {
+            /** @var MediaTypeAPIInterface */
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
+        }
+        return $this->mediaTypeAPI;
     }
     final public function setMediaObjectTypeDataLoader(MediaObjectTypeDataLoader $mediaObjectTypeDataLoader): void
     {
@@ -29,8 +33,12 @@ class MediaObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getMediaObjectTypeDataLoader(): MediaObjectTypeDataLoader
     {
-        /** @var MediaObjectTypeDataLoader */
-        return $this->mediaObjectTypeDataLoader ??= $this->instanceManager->getInstance(MediaObjectTypeDataLoader::class);
+        if ($this->mediaObjectTypeDataLoader === null) {
+            /** @var MediaObjectTypeDataLoader */
+            $mediaObjectTypeDataLoader = $this->instanceManager->getInstance(MediaObjectTypeDataLoader::class);
+            $this->mediaObjectTypeDataLoader = $mediaObjectTypeDataLoader;
+        }
+        return $this->mediaObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

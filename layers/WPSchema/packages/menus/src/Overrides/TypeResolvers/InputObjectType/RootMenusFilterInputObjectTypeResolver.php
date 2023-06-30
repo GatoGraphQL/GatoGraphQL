@@ -22,8 +22,12 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
     }
     final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringScalarTypeResolver
     {
-        /** @var MenuLocationEnumStringScalarTypeResolver */
-        return $this->menuLocationEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(MenuLocationEnumStringScalarTypeResolver::class);
+        if ($this->menuLocationEnumStringScalarTypeResolver === null) {
+            /** @var MenuLocationEnumStringScalarTypeResolver */
+            $menuLocationEnumStringScalarTypeResolver = $this->instanceManager->getInstance(MenuLocationEnumStringScalarTypeResolver::class);
+            $this->menuLocationEnumStringScalarTypeResolver = $menuLocationEnumStringScalarTypeResolver;
+        }
+        return $this->menuLocationEnumStringScalarTypeResolver;
     }
     final public function setLocationsFilterInput(LocationsFilterInput $locationsFilterInput): void
     {
@@ -31,8 +35,12 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
     }
     final protected function getLocationsFilterInput(): LocationsFilterInput
     {
-        /** @var LocationsFilterInput */
-        return $this->locationsFilterInput ??= $this->instanceManager->getInstance(LocationsFilterInput::class);
+        if ($this->locationsFilterInput === null) {
+            /** @var LocationsFilterInput */
+            $locationsFilterInput = $this->instanceManager->getInstance(LocationsFilterInput::class);
+            $this->locationsFilterInput = $locationsFilterInput;
+        }
+        return $this->locationsFilterInput;
     }
 
     /**

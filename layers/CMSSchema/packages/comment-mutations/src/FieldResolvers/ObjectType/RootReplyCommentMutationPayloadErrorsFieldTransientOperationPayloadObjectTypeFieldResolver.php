@@ -20,8 +20,12 @@ class RootReplyCommentMutationPayloadErrorsFieldTransientOperationPayloadObjectT
     }
     final protected function getRootReplyCommentMutationErrorPayloadUnionTypeResolver(): RootReplyCommentMutationErrorPayloadUnionTypeResolver
     {
-        /** @var RootReplyCommentMutationErrorPayloadUnionTypeResolver */
-        return $this->rootReplyCommentMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(RootReplyCommentMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->rootReplyCommentMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootReplyCommentMutationErrorPayloadUnionTypeResolver */
+            $rootReplyCommentMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootReplyCommentMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootReplyCommentMutationErrorPayloadUnionTypeResolver = $rootReplyCommentMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->rootReplyCommentMutationErrorPayloadUnionTypeResolver;
     }
 
     /**

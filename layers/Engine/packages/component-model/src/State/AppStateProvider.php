@@ -33,8 +33,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getVariableManager(): VariableManagerInterface
     {
-        /** @var VariableManagerInterface */
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(VariableManagerInterface::class);
+        if ($this->fieldQueryInterpreter === null) {
+            /** @var VariableManagerInterface */
+            $fieldQueryInterpreter = $this->instanceManager->getInstance(VariableManagerInterface::class);
+            $this->fieldQueryInterpreter = $fieldQueryInterpreter;
+        }
+        return $this->fieldQueryInterpreter;
     }
     final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
     {
@@ -42,8 +46,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
-        /** @var ComponentFilterManagerInterface */
-        return $this->componentFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
+        if ($this->componentFilterManager === null) {
+            /** @var ComponentFilterManagerInterface */
+            $componentFilterManager = $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
+            $this->componentFilterManager = $componentFilterManager;
+        }
+        return $this->componentFilterManager;
     }
     final public function setEngine(EngineInterface $engine): void
     {
@@ -51,8 +59,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getEngine(): EngineInterface
     {
-        /** @var EngineInterface */
-        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
+        if ($this->engine === null) {
+            /** @var EngineInterface */
+            $engine = $this->instanceManager->getInstance(EngineInterface::class);
+            $this->engine = $engine;
+        }
+        return $this->engine;
     }
 
     /**

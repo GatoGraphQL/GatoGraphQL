@@ -30,8 +30,12 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     }
     final protected function getASTHelperService(): ASTHelperServiceInterface
     {
-        /** @var ASTHelperServiceInterface */
-        return $this->astHelperService ??= $this->instanceManager->getInstance(ASTHelperServiceInterface::class);
+        if ($this->astHelperService === null) {
+            /** @var ASTHelperServiceInterface */
+            $astHelperService = $this->instanceManager->getInstance(ASTHelperServiceInterface::class);
+            $this->astHelperService = $astHelperService;
+        }
+        return $this->astHelperService;
     }
     final public function setSuperRootObjectTypeResolver(SuperRootObjectTypeResolver $superRootObjectTypeResolver): void
     {
@@ -39,8 +43,12 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     }
     final protected function getSuperRootObjectTypeResolver(): SuperRootObjectTypeResolver
     {
-        /** @var SuperRootObjectTypeResolver */
-        return $this->superRootObjectTypeResolver ??= $this->instanceManager->getInstance(SuperRootObjectTypeResolver::class);
+        if ($this->superRootObjectTypeResolver === null) {
+            /** @var SuperRootObjectTypeResolver */
+            $superRootObjectTypeResolver = $this->instanceManager->getInstance(SuperRootObjectTypeResolver::class);
+            $this->superRootObjectTypeResolver = $superRootObjectTypeResolver;
+        }
+        return $this->superRootObjectTypeResolver;
     }
 
     public function getName(): string

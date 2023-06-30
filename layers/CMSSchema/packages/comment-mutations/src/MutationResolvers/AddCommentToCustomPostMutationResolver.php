@@ -44,8 +44,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        /** @var CommentTypeAPIInterface */
-        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+        if ($this->commentTypeAPI === null) {
+            /** @var CommentTypeAPIInterface */
+            $commentTypeAPI = $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+            $this->commentTypeAPI = $commentTypeAPI;
+        }
+        return $this->commentTypeAPI;
     }
     final public function setCommentTypeMutationAPI(CommentTypeMutationAPIInterface $commentTypeMutationAPI): void
     {
@@ -53,8 +57,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
     final protected function getCommentTypeMutationAPI(): CommentTypeMutationAPIInterface
     {
-        /** @var CommentTypeMutationAPIInterface */
-        return $this->commentTypeMutationAPI ??= $this->instanceManager->getInstance(CommentTypeMutationAPIInterface::class);
+        if ($this->commentTypeMutationAPI === null) {
+            /** @var CommentTypeMutationAPIInterface */
+            $commentTypeMutationAPI = $this->instanceManager->getInstance(CommentTypeMutationAPIInterface::class);
+            $this->commentTypeMutationAPI = $commentTypeMutationAPI;
+        }
+        return $this->commentTypeMutationAPI;
     }
     final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
@@ -62,8 +70,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
+        }
+        return $this->userTypeAPI;
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -71,8 +83,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        /** @var CustomPostTypeAPIInterface */
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
@@ -80,8 +96,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
-        /** @var RequestHelperServiceInterface */
-        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+        if ($this->requestHelperService === null) {
+            /** @var RequestHelperServiceInterface */
+            $requestHelperService = $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+            $this->requestHelperService = $requestHelperService;
+        }
+        return $this->requestHelperService;
     }
 
     public function validate(

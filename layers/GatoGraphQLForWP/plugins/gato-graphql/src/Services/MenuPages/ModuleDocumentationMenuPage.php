@@ -14,8 +14,12 @@ class ModuleDocumentationMenuPage extends AbstractModuleDocsMenuPage
     }
     final protected function getModulesMenuPage(): ModulesMenuPage
     {
-        /** @var ModulesMenuPage */
-        return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
+        if ($this->modulesMenuPage === null) {
+            /** @var ModulesMenuPage */
+            $modulesMenuPage = $this->instanceManager->getInstance(ModulesMenuPage::class);
+            $this->modulesMenuPage = $modulesMenuPage;
+        }
+        return $this->modulesMenuPage;
     }
 
     public function getMenuPageSlug(): string

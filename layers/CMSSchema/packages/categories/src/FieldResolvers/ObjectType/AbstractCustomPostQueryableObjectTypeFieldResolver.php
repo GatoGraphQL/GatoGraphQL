@@ -38,8 +38,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -47,8 +51,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setCustomPostCategoriesFilterInputObjectTypeResolver(CustomPostCategoriesFilterInputObjectTypeResolver $customPostCategoriesFilterInputObjectTypeResolver): void
     {
@@ -56,8 +64,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getCustomPostCategoriesFilterInputObjectTypeResolver(): CustomPostCategoriesFilterInputObjectTypeResolver
     {
-        /** @var CustomPostCategoriesFilterInputObjectTypeResolver */
-        return $this->customPostCategoriesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostCategoriesFilterInputObjectTypeResolver::class);
+        if ($this->customPostCategoriesFilterInputObjectTypeResolver === null) {
+            /** @var CustomPostCategoriesFilterInputObjectTypeResolver */
+            $customPostCategoriesFilterInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostCategoriesFilterInputObjectTypeResolver::class);
+            $this->customPostCategoriesFilterInputObjectTypeResolver = $customPostCategoriesFilterInputObjectTypeResolver;
+        }
+        return $this->customPostCategoriesFilterInputObjectTypeResolver;
     }
     final public function setCategoryPaginationInputObjectTypeResolver(CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver): void
     {
@@ -65,8 +77,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getCategoryPaginationInputObjectTypeResolver(): CategoryPaginationInputObjectTypeResolver
     {
-        /** @var CategoryPaginationInputObjectTypeResolver */
-        return $this->categoryPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CategoryPaginationInputObjectTypeResolver::class);
+        if ($this->categoryPaginationInputObjectTypeResolver === null) {
+            /** @var CategoryPaginationInputObjectTypeResolver */
+            $categoryPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryPaginationInputObjectTypeResolver::class);
+            $this->categoryPaginationInputObjectTypeResolver = $categoryPaginationInputObjectTypeResolver;
+        }
+        return $this->categoryPaginationInputObjectTypeResolver;
     }
     final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
     {
@@ -74,8 +90,12 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     }
     final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
     {
-        /** @var TaxonomySortInputObjectTypeResolver */
-        return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+        if ($this->taxonomySortInputObjectTypeResolver === null) {
+            /** @var TaxonomySortInputObjectTypeResolver */
+            $taxonomySortInputObjectTypeResolver = $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+            $this->taxonomySortInputObjectTypeResolver = $taxonomySortInputObjectTypeResolver;
+        }
+        return $this->taxonomySortInputObjectTypeResolver;
     }
 
     /**

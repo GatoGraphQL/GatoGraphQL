@@ -28,8 +28,12 @@ class ApplicationStateFillerService implements ApplicationStateFillerServiceInte
     }
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {
-        /** @var GraphQLParserHelperServiceInterface */
-        return $this->graphQLParserHelperService ??= $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+        if ($this->graphQLParserHelperService === null) {
+            /** @var GraphQLParserHelperServiceInterface */
+            $graphQLParserHelperService = $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+            $this->graphQLParserHelperService = $graphQLParserHelperService;
+        }
+        return $this->graphQLParserHelperService;
     }
 
     /**

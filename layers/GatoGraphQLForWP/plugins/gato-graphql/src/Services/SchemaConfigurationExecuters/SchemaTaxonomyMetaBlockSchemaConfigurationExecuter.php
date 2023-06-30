@@ -21,8 +21,12 @@ class SchemaTaxonomyMetaBlockSchemaConfigurationExecuter extends AbstractSchemaM
     }
     final protected function getSchemaConfigSchemaTaxonomyMetaBlock(): SchemaConfigSchemaTaxonomyMetaBlock
     {
-        /** @var SchemaConfigSchemaTaxonomyMetaBlock */
-        return $this->schemaConfigSchemaTaxonomyMetaBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaTaxonomyMetaBlock::class);
+        if ($this->schemaConfigSchemaTaxonomyMetaBlock === null) {
+            /** @var SchemaConfigSchemaTaxonomyMetaBlock */
+            $schemaConfigSchemaTaxonomyMetaBlock = $this->instanceManager->getInstance(SchemaConfigSchemaTaxonomyMetaBlock::class);
+            $this->schemaConfigSchemaTaxonomyMetaBlock = $schemaConfigSchemaTaxonomyMetaBlock;
+        }
+        return $this->schemaConfigSchemaTaxonomyMetaBlock;
     }
 
     public function getEnablingModule(): ?string

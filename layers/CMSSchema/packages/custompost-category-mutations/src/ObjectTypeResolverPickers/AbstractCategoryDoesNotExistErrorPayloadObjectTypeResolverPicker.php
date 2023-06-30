@@ -19,8 +19,12 @@ abstract class AbstractCategoryDoesNotExistErrorPayloadObjectTypeResolverPicker 
     }
     final protected function getCategoryDoesNotExistErrorPayloadObjectTypeResolver(): CategoryDoesNotExistErrorPayloadObjectTypeResolver
     {
-        /** @var CategoryDoesNotExistErrorPayloadObjectTypeResolver */
-        return $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CategoryDoesNotExistErrorPayloadObjectTypeResolver::class);
+        if ($this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver === null) {
+            /** @var CategoryDoesNotExistErrorPayloadObjectTypeResolver */
+            $mediaItemDoesNotExistErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(CategoryDoesNotExistErrorPayloadObjectTypeResolver::class);
+            $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver = $mediaItemDoesNotExistErrorPayloadObjectTypeResolver;
+        }
+        return $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

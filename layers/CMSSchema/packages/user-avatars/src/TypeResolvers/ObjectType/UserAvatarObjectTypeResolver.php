@@ -19,8 +19,12 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
     }
     final protected function getUserAvatarObjectTypeDataLoader(): UserAvatarObjectTypeDataLoader
     {
-        /** @var UserAvatarObjectTypeDataLoader */
-        return $this->userAvatarObjectTypeDataLoader ??= $this->instanceManager->getInstance(UserAvatarObjectTypeDataLoader::class);
+        if ($this->userAvatarObjectTypeDataLoader === null) {
+            /** @var UserAvatarObjectTypeDataLoader */
+            $userAvatarObjectTypeDataLoader = $this->instanceManager->getInstance(UserAvatarObjectTypeDataLoader::class);
+            $this->userAvatarObjectTypeDataLoader = $userAvatarObjectTypeDataLoader;
+        }
+        return $this->userAvatarObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

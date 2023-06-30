@@ -19,8 +19,12 @@ abstract class AbstractCommentAuthorNameIsMissingErrorPayloadObjectTypeResolverP
     }
     final protected function getCommentAuthorNameIsMissingErrorPayloadObjectTypeResolver(): CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver
     {
-        /** @var CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver */
-        return $this->commentAuthorNameIsMissingErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver::class);
+        if ($this->commentAuthorNameIsMissingErrorPayloadObjectTypeResolver === null) {
+            /** @var CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver */
+            $commentAuthorNameIsMissingErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver::class);
+            $this->commentAuthorNameIsMissingErrorPayloadObjectTypeResolver = $commentAuthorNameIsMissingErrorPayloadObjectTypeResolver;
+        }
+        return $this->commentAuthorNameIsMissingErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

@@ -39,8 +39,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setMenuObjectTypeResolver(MenuObjectTypeResolver $menuObjectTypeResolver): void
     {
@@ -48,8 +52,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getMenuObjectTypeResolver(): MenuObjectTypeResolver
     {
-        /** @var MenuObjectTypeResolver */
-        return $this->menuObjectTypeResolver ??= $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
+        if ($this->menuObjectTypeResolver === null) {
+            /** @var MenuObjectTypeResolver */
+            $menuObjectTypeResolver = $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
+            $this->menuObjectTypeResolver = $menuObjectTypeResolver;
+        }
+        return $this->menuObjectTypeResolver;
     }
     final public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
     {
@@ -57,8 +65,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
-        /** @var MenuTypeAPIInterface */
-        return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+        if ($this->menuTypeAPI === null) {
+            /** @var MenuTypeAPIInterface */
+            $menuTypeAPI = $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
+            $this->menuTypeAPI = $menuTypeAPI;
+        }
+        return $this->menuTypeAPI;
     }
     final public function setMenuByInputObjectTypeResolver(MenuByInputObjectTypeResolver $menuByInputObjectTypeResolver): void
     {
@@ -66,8 +78,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getMenuByInputObjectTypeResolver(): MenuByInputObjectTypeResolver
     {
-        /** @var MenuByInputObjectTypeResolver */
-        return $this->menuByInputObjectTypeResolver ??= $this->instanceManager->getInstance(MenuByInputObjectTypeResolver::class);
+        if ($this->menuByInputObjectTypeResolver === null) {
+            /** @var MenuByInputObjectTypeResolver */
+            $menuByInputObjectTypeResolver = $this->instanceManager->getInstance(MenuByInputObjectTypeResolver::class);
+            $this->menuByInputObjectTypeResolver = $menuByInputObjectTypeResolver;
+        }
+        return $this->menuByInputObjectTypeResolver;
     }
     final public function setRootMenusFilterInputObjectTypeResolver(RootMenusFilterInputObjectTypeResolver $rootMenusFilterInputObjectTypeResolver): void
     {
@@ -75,8 +91,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getRootMenusFilterInputObjectTypeResolver(): RootMenusFilterInputObjectTypeResolver
     {
-        /** @var RootMenusFilterInputObjectTypeResolver */
-        return $this->rootMenusFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootMenusFilterInputObjectTypeResolver::class);
+        if ($this->rootMenusFilterInputObjectTypeResolver === null) {
+            /** @var RootMenusFilterInputObjectTypeResolver */
+            $rootMenusFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootMenusFilterInputObjectTypeResolver::class);
+            $this->rootMenusFilterInputObjectTypeResolver = $rootMenusFilterInputObjectTypeResolver;
+        }
+        return $this->rootMenusFilterInputObjectTypeResolver;
     }
     final public function setRootMenuPaginationInputObjectTypeResolver(RootMenuPaginationInputObjectTypeResolver $rootMenuPaginationInputObjectTypeResolver): void
     {
@@ -84,8 +104,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getRootMenuPaginationInputObjectTypeResolver(): RootMenuPaginationInputObjectTypeResolver
     {
-        /** @var RootMenuPaginationInputObjectTypeResolver */
-        return $this->rootMenuPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootMenuPaginationInputObjectTypeResolver::class);
+        if ($this->rootMenuPaginationInputObjectTypeResolver === null) {
+            /** @var RootMenuPaginationInputObjectTypeResolver */
+            $rootMenuPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(RootMenuPaginationInputObjectTypeResolver::class);
+            $this->rootMenuPaginationInputObjectTypeResolver = $rootMenuPaginationInputObjectTypeResolver;
+        }
+        return $this->rootMenuPaginationInputObjectTypeResolver;
     }
     final public function setMenuSortInputObjectTypeResolver(MenuSortInputObjectTypeResolver $menuSortInputObjectTypeResolver): void
     {
@@ -93,8 +117,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getMenuSortInputObjectTypeResolver(): MenuSortInputObjectTypeResolver
     {
-        /** @var MenuSortInputObjectTypeResolver */
-        return $this->menuSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(MenuSortInputObjectTypeResolver::class);
+        if ($this->menuSortInputObjectTypeResolver === null) {
+            /** @var MenuSortInputObjectTypeResolver */
+            $menuSortInputObjectTypeResolver = $this->instanceManager->getInstance(MenuSortInputObjectTypeResolver::class);
+            $this->menuSortInputObjectTypeResolver = $menuSortInputObjectTypeResolver;
+        }
+        return $this->menuSortInputObjectTypeResolver;
     }
 
     /**

@@ -22,8 +22,12 @@ class CustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldRe
     }
     final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
-        /** @var DateScalarTypeResolver */
-        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+        if ($this->dateScalarTypeResolver === null) {
+            /** @var DateScalarTypeResolver */
+            $dateScalarTypeResolver = $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+            $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        }
+        return $this->dateScalarTypeResolver;
     }
     final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -31,8 +35,12 @@ class CustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldRe
     }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
-        /** @var QueryableInterfaceTypeFieldResolver */
-        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+        if ($this->queryableInterfaceTypeFieldResolver === null) {
+            /** @var QueryableInterfaceTypeFieldResolver */
+            $queryableInterfaceTypeFieldResolver = $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+            $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+        }
+        return $this->queryableInterfaceTypeFieldResolver;
     }
 
     /**

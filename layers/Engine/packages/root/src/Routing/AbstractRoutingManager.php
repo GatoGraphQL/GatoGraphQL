@@ -19,8 +19,12 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
     }
     final protected function getRoutingHelperService(): RoutingHelperServiceInterface
     {
-        /** @var RoutingHelperServiceInterface */
-        return $this->routingHelperService ??= $this->instanceManager->getInstance(RoutingHelperServiceInterface::class);
+        if ($this->routingHelperService === null) {
+            /** @var RoutingHelperServiceInterface */
+            $routingHelperService = $this->instanceManager->getInstance(RoutingHelperServiceInterface::class);
+            $this->routingHelperService = $routingHelperService;
+        }
+        return $this->routingHelperService;
     }
 
     /**

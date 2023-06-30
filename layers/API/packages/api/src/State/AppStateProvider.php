@@ -36,8 +36,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {
-        /** @var GraphQLParserHelperServiceInterface */
-        return $this->graphQLParserHelperService ??= $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+        if ($this->graphQLParserHelperService === null) {
+            /** @var GraphQLParserHelperServiceInterface */
+            $graphQLParserHelperService = $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+            $this->graphQLParserHelperService = $graphQLParserHelperService;
+        }
+        return $this->graphQLParserHelperService;
     }
     final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
     {
@@ -45,8 +49,12 @@ class AppStateProvider extends AbstractAppStateProvider
     }
     final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {
-        /** @var PersistedQueryManagerInterface */
-        return $this->persistedQueryManager ??= $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+        if ($this->persistedQueryManager === null) {
+            /** @var PersistedQueryManagerInterface */
+            $persistedQueryManager = $this->instanceManager->getInstance(PersistedQueryManagerInterface::class);
+            $this->persistedQueryManager = $persistedQueryManager;
+        }
+        return $this->persistedQueryManager;
     }
 
     /**

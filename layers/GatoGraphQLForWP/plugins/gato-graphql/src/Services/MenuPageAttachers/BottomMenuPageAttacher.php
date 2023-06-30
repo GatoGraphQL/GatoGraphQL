@@ -44,8 +44,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getMenuPageHelper(): MenuPageHelper
     {
-        /** @var MenuPageHelper */
-        return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
+        if ($this->menuPageHelper === null) {
+            /** @var MenuPageHelper */
+            $menuPageHelper = $this->instanceManager->getInstance(MenuPageHelper::class);
+            $this->menuPageHelper = $menuPageHelper;
+        }
+        return $this->menuPageHelper;
     }
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -53,8 +57,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -62,8 +70,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
     final public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
     {
@@ -71,8 +83,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getSettingsMenuPage(): SettingsMenuPage
     {
-        /** @var SettingsMenuPage */
-        return $this->settingsMenuPage ??= $this->instanceManager->getInstance(SettingsMenuPage::class);
+        if ($this->settingsMenuPage === null) {
+            /** @var SettingsMenuPage */
+            $settingsMenuPage = $this->instanceManager->getInstance(SettingsMenuPage::class);
+            $this->settingsMenuPage = $settingsMenuPage;
+        }
+        return $this->settingsMenuPage;
     }
     final public function setModuleDocumentationMenuPage(ModuleDocumentationMenuPage $moduleDocumentationMenuPage): void
     {
@@ -80,8 +96,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getModuleDocumentationMenuPage(): ModuleDocumentationMenuPage
     {
-        /** @var ModuleDocumentationMenuPage */
-        return $this->moduleDocumentationMenuPage ??= $this->instanceManager->getInstance(ModuleDocumentationMenuPage::class);
+        if ($this->moduleDocumentationMenuPage === null) {
+            /** @var ModuleDocumentationMenuPage */
+            $moduleDocumentationMenuPage = $this->instanceManager->getInstance(ModuleDocumentationMenuPage::class);
+            $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
+        }
+        return $this->moduleDocumentationMenuPage;
     }
     final public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
     {
@@ -89,8 +109,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getModulesMenuPage(): ModulesMenuPage
     {
-        /** @var ModulesMenuPage */
-        return $this->modulesMenuPage ??= $this->instanceManager->getInstance(ModulesMenuPage::class);
+        if ($this->modulesMenuPage === null) {
+            /** @var ModulesMenuPage */
+            $modulesMenuPage = $this->instanceManager->getInstance(ModulesMenuPage::class);
+            $this->modulesMenuPage = $modulesMenuPage;
+        }
+        return $this->modulesMenuPage;
     }
     final public function setExtensionModuleDocumentationMenuPage(ExtensionModuleDocumentationMenuPage $extensionModuleDocumentationMenuPage): void
     {
@@ -98,8 +122,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getExtensionModuleDocumentationMenuPage(): ExtensionModuleDocumentationMenuPage
     {
-        /** @var ExtensionModuleDocumentationMenuPage */
-        return $this->extensionModuleDocumentationMenuPage ??= $this->instanceManager->getInstance(ExtensionModuleDocumentationMenuPage::class);
+        if ($this->extensionModuleDocumentationMenuPage === null) {
+            /** @var ExtensionModuleDocumentationMenuPage */
+            $extensionModuleDocumentationMenuPage = $this->instanceManager->getInstance(ExtensionModuleDocumentationMenuPage::class);
+            $this->extensionModuleDocumentationMenuPage = $extensionModuleDocumentationMenuPage;
+        }
+        return $this->extensionModuleDocumentationMenuPage;
     }
     final public function setExtensionDocModuleDocumentationMenuPage(ExtensionDocModuleDocumentationMenuPage $extensionDocModuleDocumentationMenuPage): void
     {
@@ -107,8 +135,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getExtensionDocModuleDocumentationMenuPage(): ExtensionDocModuleDocumentationMenuPage
     {
-        /** @var ExtensionDocModuleDocumentationMenuPage */
-        return $this->extensionDocModuleDocumentationMenuPage ??= $this->instanceManager->getInstance(ExtensionDocModuleDocumentationMenuPage::class);
+        if ($this->extensionDocModuleDocumentationMenuPage === null) {
+            /** @var ExtensionDocModuleDocumentationMenuPage */
+            $extensionDocModuleDocumentationMenuPage = $this->instanceManager->getInstance(ExtensionDocModuleDocumentationMenuPage::class);
+            $this->extensionDocModuleDocumentationMenuPage = $extensionDocModuleDocumentationMenuPage;
+        }
+        return $this->extensionDocModuleDocumentationMenuPage;
     }
     final public function setExtensionsMenuPage(ExtensionsMenuPage $extensionsMenuPage): void
     {
@@ -116,8 +148,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getExtensionsMenuPage(): ExtensionsMenuPage
     {
-        /** @var ExtensionsMenuPage */
-        return $this->extensionsMenuPage ??= $this->instanceManager->getInstance(ExtensionsMenuPage::class);
+        if ($this->extensionsMenuPage === null) {
+            /** @var ExtensionsMenuPage */
+            $extensionsMenuPage = $this->instanceManager->getInstance(ExtensionsMenuPage::class);
+            $this->extensionsMenuPage = $extensionsMenuPage;
+        }
+        return $this->extensionsMenuPage;
     }
     final public function setReleaseNotesAboutMenuPage(ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage): void
     {
@@ -125,8 +161,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getReleaseNotesAboutMenuPage(): ReleaseNotesAboutMenuPage
     {
-        /** @var ReleaseNotesAboutMenuPage */
-        return $this->releaseNotesAboutMenuPage ??= $this->instanceManager->getInstance(ReleaseNotesAboutMenuPage::class);
+        if ($this->releaseNotesAboutMenuPage === null) {
+            /** @var ReleaseNotesAboutMenuPage */
+            $releaseNotesAboutMenuPage = $this->instanceManager->getInstance(ReleaseNotesAboutMenuPage::class);
+            $this->releaseNotesAboutMenuPage = $releaseNotesAboutMenuPage;
+        }
+        return $this->releaseNotesAboutMenuPage;
     }
     final public function setExtensionDocsMenuPage(ExtensionDocsMenuPage $extensionDocsMenuPage): void
     {
@@ -134,8 +174,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getExtensionDocsMenuPage(): ExtensionDocsMenuPage
     {
-        /** @var ExtensionDocsMenuPage */
-        return $this->extensionDocsMenuPage ??= $this->instanceManager->getInstance(ExtensionDocsMenuPage::class);
+        if ($this->extensionDocsMenuPage === null) {
+            /** @var ExtensionDocsMenuPage */
+            $extensionDocsMenuPage = $this->instanceManager->getInstance(ExtensionDocsMenuPage::class);
+            $this->extensionDocsMenuPage = $extensionDocsMenuPage;
+        }
+        return $this->extensionDocsMenuPage;
     }
     final public function setRecipesMenuPage(RecipesMenuPage $recipesMenuPage): void
     {
@@ -143,8 +187,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getRecipesMenuPage(): RecipesMenuPage
     {
-        /** @var RecipesMenuPage */
-        return $this->recipesMenuPage ??= $this->instanceManager->getInstance(RecipesMenuPage::class);
+        if ($this->recipesMenuPage === null) {
+            /** @var RecipesMenuPage */
+            $recipesMenuPage = $this->instanceManager->getInstance(RecipesMenuPage::class);
+            $this->recipesMenuPage = $recipesMenuPage;
+        }
+        return $this->recipesMenuPage;
     }
     final public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
     {
@@ -152,8 +200,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getAboutMenuPage(): AboutMenuPage
     {
-        /** @var AboutMenuPage */
-        return $this->aboutMenuPage ??= $this->instanceManager->getInstance(AboutMenuPage::class);
+        if ($this->aboutMenuPage === null) {
+            /** @var AboutMenuPage */
+            $aboutMenuPage = $this->instanceManager->getInstance(AboutMenuPage::class);
+            $this->aboutMenuPage = $aboutMenuPage;
+        }
+        return $this->aboutMenuPage;
     }
     final public function setGraphQLEndpointCategoryTaxonomy(GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy): void
     {
@@ -161,8 +213,12 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getGraphQLEndpointCategoryTaxonomy(): GraphQLEndpointCategoryTaxonomy
     {
-        /** @var GraphQLEndpointCategoryTaxonomy */
-        return $this->graphQLEndpointCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+        if ($this->graphQLEndpointCategoryTaxonomy === null) {
+            /** @var GraphQLEndpointCategoryTaxonomy */
+            $graphQLEndpointCategoryTaxonomy = $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+            $this->graphQLEndpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy;
+        }
+        return $this->graphQLEndpointCategoryTaxonomy;
     }
 
     /**

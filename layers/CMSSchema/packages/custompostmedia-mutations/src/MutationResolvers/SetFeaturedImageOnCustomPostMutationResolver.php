@@ -24,8 +24,12 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
     }
     final protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
     {
-        /** @var CustomPostMediaTypeMutationAPIInterface */
-        return $this->customPostMediaTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+        if ($this->customPostMediaTypeMutationAPI === null) {
+            /** @var CustomPostMediaTypeMutationAPIInterface */
+            $customPostMediaTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
+            $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+        }
+        return $this->customPostMediaTypeMutationAPI;
     }
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -33,8 +37,12 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        /** @var MediaTypeAPIInterface */
-        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+        if ($this->mediaTypeAPI === null) {
+            /** @var MediaTypeAPIInterface */
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
+        }
+        return $this->mediaTypeAPI;
     }
 
     /**

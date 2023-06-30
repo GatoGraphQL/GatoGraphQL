@@ -42,8 +42,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        /** @var MediaTypeAPIInterface */
-        return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+        if ($this->mediaTypeAPI === null) {
+            /** @var MediaTypeAPIInterface */
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
+        }
+        return $this->mediaTypeAPI;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -51,8 +55,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
@@ -60,8 +68,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        /** @var MediaObjectTypeResolver */
-        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+        if ($this->mediaObjectTypeResolver === null) {
+            /** @var MediaObjectTypeResolver */
+            $mediaObjectTypeResolver = $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+            $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
+        }
+        return $this->mediaObjectTypeResolver;
     }
     final public function setMediaItemByInputObjectTypeResolver(MediaItemByInputObjectTypeResolver $mediaItemByInputObjectTypeResolver): void
     {
@@ -69,8 +81,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getMediaItemByInputObjectTypeResolver(): MediaItemByInputObjectTypeResolver
     {
-        /** @var MediaItemByInputObjectTypeResolver */
-        return $this->mediaItemByInputObjectTypeResolver ??= $this->instanceManager->getInstance(MediaItemByInputObjectTypeResolver::class);
+        if ($this->mediaItemByInputObjectTypeResolver === null) {
+            /** @var MediaItemByInputObjectTypeResolver */
+            $mediaItemByInputObjectTypeResolver = $this->instanceManager->getInstance(MediaItemByInputObjectTypeResolver::class);
+            $this->mediaItemByInputObjectTypeResolver = $mediaItemByInputObjectTypeResolver;
+        }
+        return $this->mediaItemByInputObjectTypeResolver;
     }
     final public function setRootMediaItemsFilterInputObjectTypeResolver(RootMediaItemsFilterInputObjectTypeResolver $rootMediaItemsFilterInputObjectTypeResolver): void
     {
@@ -78,8 +94,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getRootMediaItemsFilterInputObjectTypeResolver(): RootMediaItemsFilterInputObjectTypeResolver
     {
-        /** @var RootMediaItemsFilterInputObjectTypeResolver */
-        return $this->rootMediaItemsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootMediaItemsFilterInputObjectTypeResolver::class);
+        if ($this->rootMediaItemsFilterInputObjectTypeResolver === null) {
+            /** @var RootMediaItemsFilterInputObjectTypeResolver */
+            $rootMediaItemsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootMediaItemsFilterInputObjectTypeResolver::class);
+            $this->rootMediaItemsFilterInputObjectTypeResolver = $rootMediaItemsFilterInputObjectTypeResolver;
+        }
+        return $this->rootMediaItemsFilterInputObjectTypeResolver;
     }
     final public function setRootMediaItemPaginationInputObjectTypeResolver(RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver): void
     {
@@ -87,8 +107,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getRootMediaItemPaginationInputObjectTypeResolver(): RootMediaItemPaginationInputObjectTypeResolver
     {
-        /** @var RootMediaItemPaginationInputObjectTypeResolver */
-        return $this->rootMediaItemPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootMediaItemPaginationInputObjectTypeResolver::class);
+        if ($this->rootMediaItemPaginationInputObjectTypeResolver === null) {
+            /** @var RootMediaItemPaginationInputObjectTypeResolver */
+            $rootMediaItemPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(RootMediaItemPaginationInputObjectTypeResolver::class);
+            $this->rootMediaItemPaginationInputObjectTypeResolver = $rootMediaItemPaginationInputObjectTypeResolver;
+        }
+        return $this->rootMediaItemPaginationInputObjectTypeResolver;
     }
     final public function setMediaItemSortInputObjectTypeResolver(MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver): void
     {
@@ -96,8 +120,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getMediaItemSortInputObjectTypeResolver(): MediaItemSortInputObjectTypeResolver
     {
-        /** @var MediaItemSortInputObjectTypeResolver */
-        return $this->mediaItemSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(MediaItemSortInputObjectTypeResolver::class);
+        if ($this->mediaItemSortInputObjectTypeResolver === null) {
+            /** @var MediaItemSortInputObjectTypeResolver */
+            $mediaItemSortInputObjectTypeResolver = $this->instanceManager->getInstance(MediaItemSortInputObjectTypeResolver::class);
+            $this->mediaItemSortInputObjectTypeResolver = $mediaItemSortInputObjectTypeResolver;
+        }
+        return $this->mediaItemSortInputObjectTypeResolver;
     }
 
     /**

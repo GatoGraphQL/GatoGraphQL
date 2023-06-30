@@ -22,8 +22,12 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
     }
     final protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface
     {
-        /** @var CommentMetaTypeAPIInterface */
-        return $this->commentMetaTypeAPI ??= $this->instanceManager->getInstance(CommentMetaTypeAPIInterface::class);
+        if ($this->commentMetaTypeAPI === null) {
+            /** @var CommentMetaTypeAPIInterface */
+            $commentMetaTypeAPI = $this->instanceManager->getInstance(CommentMetaTypeAPIInterface::class);
+            $this->commentMetaTypeAPI = $commentMetaTypeAPI;
+        }
+        return $this->commentMetaTypeAPI;
     }
 
     /**

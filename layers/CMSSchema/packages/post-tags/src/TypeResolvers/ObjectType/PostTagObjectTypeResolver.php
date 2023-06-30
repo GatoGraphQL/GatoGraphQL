@@ -21,8 +21,12 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     }
     final protected function getPostTagObjectTypeDataLoader(): PostTagObjectTypeDataLoader
     {
-        /** @var PostTagObjectTypeDataLoader */
-        return $this->postTagObjectTypeDataLoader ??= $this->instanceManager->getInstance(PostTagObjectTypeDataLoader::class);
+        if ($this->postTagObjectTypeDataLoader === null) {
+            /** @var PostTagObjectTypeDataLoader */
+            $postTagObjectTypeDataLoader = $this->instanceManager->getInstance(PostTagObjectTypeDataLoader::class);
+            $this->postTagObjectTypeDataLoader = $postTagObjectTypeDataLoader;
+        }
+        return $this->postTagObjectTypeDataLoader;
     }
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
@@ -30,8 +34,12 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
-        /** @var PostTagTypeAPIInterface */
-        return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+        if ($this->postTagTypeAPI === null) {
+            /** @var PostTagTypeAPIInterface */
+            $postTagTypeAPI = $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+            $this->postTagTypeAPI = $postTagTypeAPI;
+        }
+        return $this->postTagTypeAPI;
     }
 
     public function getTagTypeAPI(): TagTypeAPIInterface

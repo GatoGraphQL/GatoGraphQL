@@ -25,8 +25,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setIsStickyFilterInput(IsStickyFilterInput $isStickyFilterInput): void
     {
@@ -34,8 +38,12 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
     final protected function getIsStickyFilterInput(): IsStickyFilterInput
     {
-        /** @var IsStickyFilterInput */
-        return $this->isStickyFilterInput ??= $this->instanceManager->getInstance(IsStickyFilterInput::class);
+        if ($this->isStickyFilterInput === null) {
+            /** @var IsStickyFilterInput */
+            $isStickyFilterInput = $this->instanceManager->getInstance(IsStickyFilterInput::class);
+            $this->isStickyFilterInput = $isStickyFilterInput;
+        }
+        return $this->isStickyFilterInput;
     }
 
     protected function init(): void
