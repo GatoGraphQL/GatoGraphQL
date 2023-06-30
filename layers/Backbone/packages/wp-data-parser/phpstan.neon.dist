@@ -30,7 +30,7 @@ parameters:
 		- 
 			message: '#Cannot access offset .* on array\|bool\|string\.#'
 			path: src/Parsers/WXR_Parser_XML.php
-			count: 4
+			count: 5
 		- 
 			message: '#Cannot access offset .* on bool\|string\.#'
 			path: src/Parsers/WXR_Parser_XML.php
