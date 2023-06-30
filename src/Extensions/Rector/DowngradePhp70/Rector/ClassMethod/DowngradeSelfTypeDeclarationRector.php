@@ -19,7 +19,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * used in this codebase, it was reinstated here.
  *
  * @source https://github.com/rectorphp/rector-downgrade-php/blob/160715ae11294985cc284500967c40d96ef49cfe/rules/DowngradePhp70/Rector/ClassMethod/DowngradeSelfTypeDeclarationRector.php
- * 
+ *
  * @see https://github.com/rectorphp/rector-downgrade-php/pull/116
  */
 final class DowngradeSelfTypeDeclarationRector extends AbstractRector
