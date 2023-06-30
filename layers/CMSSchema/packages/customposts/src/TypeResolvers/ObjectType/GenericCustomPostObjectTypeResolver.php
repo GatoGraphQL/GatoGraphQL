@@ -21,8 +21,12 @@ class GenericCustomPostObjectTypeResolver extends AbstractCustomPostObjectTypeRe
     }
     final protected function getCustomPostObjectTypeDataLoader(): CustomPostObjectTypeDataLoader
     {
-        /** @var CustomPostObjectTypeDataLoader */
-        return $this->customPostObjectTypeDataLoader ??= $this->instanceManager->getInstance(CustomPostObjectTypeDataLoader::class);
+        if ($this->customPostObjectTypeDataLoader === null) {
+            /** @var CustomPostObjectTypeDataLoader */
+            $customPostObjectTypeDataLoader = $this->instanceManager->getInstance(CustomPostObjectTypeDataLoader::class);
+            $this->customPostObjectTypeDataLoader = $customPostObjectTypeDataLoader;
+        }
+        return $this->customPostObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

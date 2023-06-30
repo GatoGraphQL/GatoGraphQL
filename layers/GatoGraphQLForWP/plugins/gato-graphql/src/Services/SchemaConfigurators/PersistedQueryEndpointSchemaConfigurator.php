@@ -18,8 +18,12 @@ class PersistedQueryEndpointSchemaConfigurator extends AbstractEndpointSchemaCon
     }
     final protected function getPersistedQueryEndpointSchemaConfigurationExecuterRegistry(): PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface
     {
-        /** @var PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface */
-        return $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry ??= $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class);
+        if ($this->persistedQueryEndpointSchemaConfigurationExecuterRegistry === null) {
+            /** @var PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface */
+            $persistedQueryEndpointSchemaConfigurationExecuterRegistry = $this->instanceManager->getInstance(PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface::class);
+            $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry = $persistedQueryEndpointSchemaConfigurationExecuterRegistry;
+        }
+        return $this->persistedQueryEndpointSchemaConfigurationExecuterRegistry;
     }
 
     protected function getEnablingModule(): string

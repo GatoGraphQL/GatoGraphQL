@@ -20,8 +20,12 @@ class InstallSystemMutationResolver extends AbstractMutationResolver
     }
     final protected function getApplicationInfo(): ApplicationInfoInterface
     {
-        /** @var ApplicationInfoInterface */
-        return $this->applicationInfo ??= $this->instanceManager->getInstance(ApplicationInfoInterface::class);
+        if ($this->applicationInfo === null) {
+            /** @var ApplicationInfoInterface */
+            $applicationInfo = $this->instanceManager->getInstance(ApplicationInfoInterface::class);
+            $this->applicationInfo = $applicationInfo;
+        }
+        return $this->applicationInfo;
     }
 
     /**

@@ -20,8 +20,12 @@ class RootLogoutUserMutationPayloadErrorsFieldTransientOperationPayloadObjectTyp
     }
     final protected function getRootLogoutUserMutationErrorPayloadUnionTypeResolver(): RootLogoutUserMutationErrorPayloadUnionTypeResolver
     {
-        /** @var RootLogoutUserMutationErrorPayloadUnionTypeResolver */
-        return $this->rootLogoutUserMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(RootLogoutUserMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->rootLogoutUserMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootLogoutUserMutationErrorPayloadUnionTypeResolver */
+            $rootLogoutUserMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootLogoutUserMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootLogoutUserMutationErrorPayloadUnionTypeResolver = $rootLogoutUserMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->rootLogoutUserMutationErrorPayloadUnionTypeResolver;
     }
 
     /**

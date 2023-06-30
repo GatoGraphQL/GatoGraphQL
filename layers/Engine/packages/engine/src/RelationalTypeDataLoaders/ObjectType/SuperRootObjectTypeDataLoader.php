@@ -17,8 +17,12 @@ class SuperRootObjectTypeDataLoader extends AbstractObjectTypeDataLoader
     }
     final protected function getSuperRoot(): SuperRoot
     {
-        /** @var SuperRoot */
-        return $this->superRoot ??= $this->instanceManager->getInstance(SuperRoot::class);
+        if ($this->superRoot === null) {
+            /** @var SuperRoot */
+            $superRoot = $this->instanceManager->getInstance(SuperRoot::class);
+            $this->superRoot = $superRoot;
+        }
+        return $this->superRoot;
     }
 
     /**

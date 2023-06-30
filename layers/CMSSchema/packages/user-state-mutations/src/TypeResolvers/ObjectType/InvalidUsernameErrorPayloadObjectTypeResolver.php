@@ -18,8 +18,12 @@ class InvalidUsernameErrorPayloadObjectTypeResolver extends AbstractErrorPayload
     }
     final protected function getInvalidUsernameErrorPayloadObjectTypeDataLoader(): InvalidUsernameErrorPayloadObjectTypeDataLoader
     {
-        /** @var InvalidUsernameErrorPayloadObjectTypeDataLoader */
-        return $this->invalidUsernameErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(InvalidUsernameErrorPayloadObjectTypeDataLoader::class);
+        if ($this->invalidUsernameErrorPayloadObjectTypeDataLoader === null) {
+            /** @var InvalidUsernameErrorPayloadObjectTypeDataLoader */
+            $invalidUsernameErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(InvalidUsernameErrorPayloadObjectTypeDataLoader::class);
+            $this->invalidUsernameErrorPayloadObjectTypeDataLoader = $invalidUsernameErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->invalidUsernameErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

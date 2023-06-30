@@ -19,8 +19,12 @@ class CustomPostSortInputObjectTypeResolver extends SortInputObjectTypeResolver
     }
     final protected function getCustomPostOrderByEnumTypeResolver(): CustomPostOrderByEnumTypeResolver
     {
-        /** @var CustomPostOrderByEnumTypeResolver */
-        return $this->customPostSortByEnumTypeResolver ??= $this->instanceManager->getInstance(CustomPostOrderByEnumTypeResolver::class);
+        if ($this->customPostSortByEnumTypeResolver === null) {
+            /** @var CustomPostOrderByEnumTypeResolver */
+            $customPostSortByEnumTypeResolver = $this->instanceManager->getInstance(CustomPostOrderByEnumTypeResolver::class);
+            $this->customPostSortByEnumTypeResolver = $customPostSortByEnumTypeResolver;
+        }
+        return $this->customPostSortByEnumTypeResolver;
     }
 
     public function getTypeName(): string

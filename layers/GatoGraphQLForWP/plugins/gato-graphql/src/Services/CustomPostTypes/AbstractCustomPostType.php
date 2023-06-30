@@ -54,8 +54,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -63,8 +67,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
     final public function setCPTUtils(CPTUtils $cptUtils): void
     {
@@ -72,8 +80,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getCPTUtils(): CPTUtils
     {
-        /** @var CPTUtils */
-        return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
+        if ($this->cptUtils === null) {
+            /** @var CPTUtils */
+            $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
+            $this->cptUtils = $cptUtils;
+        }
+        return $this->cptUtils;
     }
     final public function setPluginMenu(PluginMenu $pluginMenu): void
     {
@@ -81,8 +93,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getPluginMenu(): PluginMenu
     {
-        /** @var PluginMenu */
-        return $this->pluginMenu ??= $this->instanceManager->getInstance(PluginMenu::class);
+        if ($this->pluginMenu === null) {
+            /** @var PluginMenu */
+            $pluginMenu = $this->instanceManager->getInstance(PluginMenu::class);
+            $this->pluginMenu = $pluginMenu;
+        }
+        return $this->pluginMenu;
     }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -90,8 +106,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
-        /** @var EndpointHelpers */
-        return $this->endpointHelpers ??= $this->instanceManager->getInstance(EndpointHelpers::class);
+        if ($this->endpointHelpers === null) {
+            /** @var EndpointHelpers */
+            $endpointHelpers = $this->instanceManager->getInstance(EndpointHelpers::class);
+            $this->endpointHelpers = $endpointHelpers;
+        }
+        return $this->endpointHelpers;
     }
     final public function setEditorHelpers(EditorHelpers $editorHelpers): void
     {
@@ -99,8 +119,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
     final protected function getEditorHelpers(): EditorHelpers
     {
-        /** @var EditorHelpers */
-        return $this->editorHelpers ??= $this->instanceManager->getInstance(EditorHelpers::class);
+        if ($this->editorHelpers === null) {
+            /** @var EditorHelpers */
+            $editorHelpers = $this->instanceManager->getInstance(EditorHelpers::class);
+            $this->editorHelpers = $editorHelpers;
+        }
+        return $this->editorHelpers;
     }
 
     /**

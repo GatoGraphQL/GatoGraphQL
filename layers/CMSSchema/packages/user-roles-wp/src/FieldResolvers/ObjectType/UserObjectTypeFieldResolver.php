@@ -29,8 +29,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
     {
@@ -38,8 +42,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
-        /** @var UserRoleTypeAPIInterface */
-        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+        if ($this->userRoleTypeAPI === null) {
+            /** @var UserRoleTypeAPIInterface */
+            $userRoleTypeAPI = $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+            $this->userRoleTypeAPI = $userRoleTypeAPI;
+        }
+        return $this->userRoleTypeAPI;
     }
 
     /**

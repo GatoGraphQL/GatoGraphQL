@@ -32,8 +32,12 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getDateFormatter(): DateFormatterInterface
     {
-        /** @var DateFormatterInterface */
-        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+        if ($this->dateFormatter === null) {
+            /** @var DateFormatterInterface */
+            $dateFormatter = $this->instanceManager->getInstance(DateFormatterInterface::class);
+            $this->dateFormatter = $dateFormatter;
+        }
+        return $this->dateFormatter;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -41,8 +45,12 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
@@ -50,8 +58,12 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     }
     final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        /** @var DateTimeScalarTypeResolver */
-        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+        if ($this->dateTimeScalarTypeResolver === null) {
+            /** @var DateTimeScalarTypeResolver */
+            $dateTimeScalarTypeResolver = $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+            $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
+        }
+        return $this->dateTimeScalarTypeResolver;
     }
 
     /**

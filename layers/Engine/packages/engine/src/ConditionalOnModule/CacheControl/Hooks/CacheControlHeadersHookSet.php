@@ -19,8 +19,12 @@ class CacheControlHeadersHookSet extends AbstractHookSet
     }
     final protected function getCacheControlEngine(): CacheControlEngineInterface
     {
-        /** @var CacheControlEngineInterface */
-        return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
+        if ($this->cacheControlEngine === null) {
+            /** @var CacheControlEngineInterface */
+            $cacheControlEngine = $this->instanceManager->getInstance(CacheControlEngineInterface::class);
+            $this->cacheControlEngine = $cacheControlEngine;
+        }
+        return $this->cacheControlEngine;
     }
 
     protected function init(): void

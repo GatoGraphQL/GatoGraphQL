@@ -18,8 +18,12 @@ class CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader exten
     }
     final protected function getCustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver(): CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver
     {
-        /** @var CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver */
-        return $this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver */
+            $customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver::class);
+            $this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver = $customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

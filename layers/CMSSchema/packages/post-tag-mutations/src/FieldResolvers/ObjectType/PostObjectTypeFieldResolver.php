@@ -29,8 +29,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        /** @var PostObjectTypeResolver */
-        return $this->postObjectTypeResolver ??= $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+        if ($this->postObjectTypeResolver === null) {
+            /** @var PostObjectTypeResolver */
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            $this->postObjectTypeResolver = $postObjectTypeResolver;
+        }
+        return $this->postObjectTypeResolver;
     }
     final public function setSetTagsOnPostMutationResolver(SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver): void
     {
@@ -38,8 +42,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getSetTagsOnPostMutationResolver(): SetTagsOnPostMutationResolver
     {
-        /** @var SetTagsOnPostMutationResolver */
-        return $this->setTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
+        if ($this->setTagsOnPostMutationResolver === null) {
+            /** @var SetTagsOnPostMutationResolver */
+            $setTagsOnPostMutationResolver = $this->instanceManager->getInstance(SetTagsOnPostMutationResolver::class);
+            $this->setTagsOnPostMutationResolver = $setTagsOnPostMutationResolver;
+        }
+        return $this->setTagsOnPostMutationResolver;
     }
     final public function setPostSetTagsInputObjectTypeResolver(PostSetTagsInputObjectTypeResolver $postSetTagsInputObjectTypeResolver): void
     {
@@ -47,8 +55,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getPostSetTagsInputObjectTypeResolver(): AbstractSetTagsOnCustomPostInputObjectTypeResolver
     {
-        /** @var PostSetTagsInputObjectTypeResolver */
-        return $this->postSetTagsInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostSetTagsInputObjectTypeResolver::class);
+        if ($this->postSetTagsInputObjectTypeResolver === null) {
+            /** @var PostSetTagsInputObjectTypeResolver */
+            $postSetTagsInputObjectTypeResolver = $this->instanceManager->getInstance(PostSetTagsInputObjectTypeResolver::class);
+            $this->postSetTagsInputObjectTypeResolver = $postSetTagsInputObjectTypeResolver;
+        }
+        return $this->postSetTagsInputObjectTypeResolver;
     }
     final public function setPayloadableSetTagsOnPostMutationResolver(PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver): void
     {
@@ -56,8 +68,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getPayloadableSetTagsOnPostMutationResolver(): PayloadableSetTagsOnPostMutationResolver
     {
-        /** @var PayloadableSetTagsOnPostMutationResolver */
-        return $this->payloadableSetTagsOnPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableSetTagsOnPostMutationResolver::class);
+        if ($this->payloadableSetTagsOnPostMutationResolver === null) {
+            /** @var PayloadableSetTagsOnPostMutationResolver */
+            $payloadableSetTagsOnPostMutationResolver = $this->instanceManager->getInstance(PayloadableSetTagsOnPostMutationResolver::class);
+            $this->payloadableSetTagsOnPostMutationResolver = $payloadableSetTagsOnPostMutationResolver;
+        }
+        return $this->payloadableSetTagsOnPostMutationResolver;
     }
     final public function setPostSetTagsMutationPayloadObjectTypeResolver(PostSetTagsMutationPayloadObjectTypeResolver $postSetTagsMutationPayloadObjectTypeResolver): void
     {
@@ -65,8 +81,12 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
     }
     final protected function getPostSetTagsMutationPayloadObjectTypeResolver(): PostSetTagsMutationPayloadObjectTypeResolver
     {
-        /** @var PostSetTagsMutationPayloadObjectTypeResolver */
-        return $this->postSetTagsMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(PostSetTagsMutationPayloadObjectTypeResolver::class);
+        if ($this->postSetTagsMutationPayloadObjectTypeResolver === null) {
+            /** @var PostSetTagsMutationPayloadObjectTypeResolver */
+            $postSetTagsMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostSetTagsMutationPayloadObjectTypeResolver::class);
+            $this->postSetTagsMutationPayloadObjectTypeResolver = $postSetTagsMutationPayloadObjectTypeResolver;
+        }
+        return $this->postSetTagsMutationPayloadObjectTypeResolver;
     }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface

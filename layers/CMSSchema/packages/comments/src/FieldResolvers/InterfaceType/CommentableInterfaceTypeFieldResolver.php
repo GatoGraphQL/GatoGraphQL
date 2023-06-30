@@ -35,8 +35,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -44,8 +48,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
@@ -53,8 +61,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        /** @var CommentObjectTypeResolver */
-        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        if ($this->commentObjectTypeResolver === null) {
+            /** @var CommentObjectTypeResolver */
+            $commentObjectTypeResolver = $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+            $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        }
+        return $this->commentObjectTypeResolver;
     }
     final public function setCustomPostCommentsFilterInputObjectTypeResolver(CustomPostCommentsFilterInputObjectTypeResolver $customPostCommentsFilterInputObjectTypeResolver): void
     {
@@ -62,8 +74,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     }
     final protected function getCustomPostCommentsFilterInputObjectTypeResolver(): CustomPostCommentsFilterInputObjectTypeResolver
     {
-        /** @var CustomPostCommentsFilterInputObjectTypeResolver */
-        return $this->customPostCommentsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostCommentsFilterInputObjectTypeResolver::class);
+        if ($this->customPostCommentsFilterInputObjectTypeResolver === null) {
+            /** @var CustomPostCommentsFilterInputObjectTypeResolver */
+            $customPostCommentsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostCommentsFilterInputObjectTypeResolver::class);
+            $this->customPostCommentsFilterInputObjectTypeResolver = $customPostCommentsFilterInputObjectTypeResolver;
+        }
+        return $this->customPostCommentsFilterInputObjectTypeResolver;
     }
     final public function setCustomPostCommentPaginationInputObjectTypeResolver(CustomPostCommentPaginationInputObjectTypeResolver $customPostCommentPaginationInputObjectTypeResolver): void
     {
@@ -71,8 +87,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     }
     final protected function getCustomPostCommentPaginationInputObjectTypeResolver(): CustomPostCommentPaginationInputObjectTypeResolver
     {
-        /** @var CustomPostCommentPaginationInputObjectTypeResolver */
-        return $this->customPostCommentPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostCommentPaginationInputObjectTypeResolver::class);
+        if ($this->customPostCommentPaginationInputObjectTypeResolver === null) {
+            /** @var CustomPostCommentPaginationInputObjectTypeResolver */
+            $customPostCommentPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostCommentPaginationInputObjectTypeResolver::class);
+            $this->customPostCommentPaginationInputObjectTypeResolver = $customPostCommentPaginationInputObjectTypeResolver;
+        }
+        return $this->customPostCommentPaginationInputObjectTypeResolver;
     }
     final public function setCommentSortInputObjectTypeResolver(CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver): void
     {
@@ -80,8 +100,12 @@ class CommentableInterfaceTypeFieldResolver extends AbstractQueryableSchemaInter
     }
     final protected function getCommentSortInputObjectTypeResolver(): CommentSortInputObjectTypeResolver
     {
-        /** @var CommentSortInputObjectTypeResolver */
-        return $this->commentSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
+        if ($this->commentSortInputObjectTypeResolver === null) {
+            /** @var CommentSortInputObjectTypeResolver */
+            $commentSortInputObjectTypeResolver = $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
+            $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
+        }
+        return $this->commentSortInputObjectTypeResolver;
     }
 
     /**

@@ -17,8 +17,12 @@ class InviteUsersMutationResolverBridge extends AbstractEmailInviteMutationResol
     }
     final protected function getInviteUsersMutationResolver(): InviteUsersMutationResolver
     {
-        /** @var InviteUsersMutationResolver */
-        return $this->inviteUsersMutationResolver ??= $this->instanceManager->getInstance(InviteUsersMutationResolver::class);
+        if ($this->inviteUsersMutationResolver === null) {
+            /** @var InviteUsersMutationResolver */
+            $inviteUsersMutationResolver = $this->instanceManager->getInstance(InviteUsersMutationResolver::class);
+            $this->inviteUsersMutationResolver = $inviteUsersMutationResolver;
+        }
+        return $this->inviteUsersMutationResolver;
     }
     
     public function getMutationResolver(): MutationResolverInterface

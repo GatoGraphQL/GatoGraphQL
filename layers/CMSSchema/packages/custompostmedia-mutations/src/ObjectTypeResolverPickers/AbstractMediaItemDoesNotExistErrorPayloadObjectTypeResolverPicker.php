@@ -19,8 +19,12 @@ abstract class AbstractMediaItemDoesNotExistErrorPayloadObjectTypeResolverPicker
     }
     final protected function getMediaItemDoesNotExistErrorPayloadObjectTypeResolver(): MediaItemDoesNotExistErrorPayloadObjectTypeResolver
     {
-        /** @var MediaItemDoesNotExistErrorPayloadObjectTypeResolver */
-        return $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(MediaItemDoesNotExistErrorPayloadObjectTypeResolver::class);
+        if ($this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver === null) {
+            /** @var MediaItemDoesNotExistErrorPayloadObjectTypeResolver */
+            $mediaItemDoesNotExistErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(MediaItemDoesNotExistErrorPayloadObjectTypeResolver::class);
+            $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver = $mediaItemDoesNotExistErrorPayloadObjectTypeResolver;
+        }
+        return $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

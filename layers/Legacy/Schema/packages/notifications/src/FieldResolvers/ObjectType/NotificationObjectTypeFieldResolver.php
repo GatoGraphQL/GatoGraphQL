@@ -43,8 +43,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        /** @var CommentTypeAPIInterface */
-        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+        if ($this->commentTypeAPI === null) {
+            /** @var CommentTypeAPIInterface */
+            $commentTypeAPI = $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+            $this->commentTypeAPI = $commentTypeAPI;
+        }
+        return $this->commentTypeAPI;
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -52,8 +56,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
     {
@@ -61,8 +69,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
-        /** @var DateScalarTypeResolver */
-        return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+        if ($this->dateScalarTypeResolver === null) {
+            /** @var DateScalarTypeResolver */
+            $dateScalarTypeResolver = $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+            $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        }
+        return $this->dateScalarTypeResolver;
     }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -70,8 +82,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setIPScalarTypeResolver(IPScalarTypeResolver $ipScalarTypeResolver): void
     {
@@ -79,8 +95,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getIPScalarTypeResolver(): IPScalarTypeResolver
     {
-        /** @var IPScalarTypeResolver */
-        return $this->ipScalarTypeResolver ??= $this->instanceManager->getInstance(IPScalarTypeResolver::class);
+        if ($this->ipScalarTypeResolver === null) {
+            /** @var IPScalarTypeResolver */
+            $ipScalarTypeResolver = $this->instanceManager->getInstance(IPScalarTypeResolver::class);
+            $this->ipScalarTypeResolver = $ipScalarTypeResolver;
+        }
+        return $this->ipScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -88,8 +108,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -97,8 +121,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        /** @var URLScalarTypeResolver */
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
     }
     final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
     {
@@ -106,8 +134,12 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
-        /** @var UserObjectTypeResolver */
-        return $this->userObjectTypeResolver ??= $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+        if ($this->userObjectTypeResolver === null) {
+            /** @var UserObjectTypeResolver */
+            $userObjectTypeResolver = $this->instanceManager->getInstance(UserObjectTypeResolver::class);
+            $this->userObjectTypeResolver = $userObjectTypeResolver;
+        }
+        return $this->userObjectTypeResolver;
     }
 
     /**

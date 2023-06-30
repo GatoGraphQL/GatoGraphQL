@@ -23,8 +23,12 @@ class EndpointBlockCategory extends AbstractBlockCategory
     }
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        /** @var GraphQLCustomEndpointCustomPostType */
-        return $this->graphQLCustomEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        if ($this->graphQLCustomEndpointCustomPostType === null) {
+            /** @var GraphQLCustomEndpointCustomPostType */
+            $graphQLCustomEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+            $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        }
+        return $this->graphQLCustomEndpointCustomPostType;
     }
     final public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
     {
@@ -32,8 +36,12 @@ class EndpointBlockCategory extends AbstractBlockCategory
     }
     final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        return $this->graphQLPersistedQueryEndpointCustomPostType ??= $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        if ($this->graphQLPersistedQueryEndpointCustomPostType === null) {
+            /** @var GraphQLPersistedQueryEndpointCustomPostType */
+            $graphQLPersistedQueryEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+            $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+        }
+        return $this->graphQLPersistedQueryEndpointCustomPostType;
     }
 
     /**

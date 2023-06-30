@@ -21,8 +21,12 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
     }
     final protected function getAccessControlManager(): AccessControlManagerInterface
     {
-        /** @var AccessControlManagerInterface */
-        return $this->accessControlManager ??= $this->instanceManager->getInstance(AccessControlManagerInterface::class);
+        if ($this->accessControlManager === null) {
+            /** @var AccessControlManagerInterface */
+            $accessControlManager = $this->instanceManager->getInstance(AccessControlManagerInterface::class);
+            $this->accessControlManager = $accessControlManager;
+        }
+        return $this->accessControlManager;
     }
 
     public function cmsBoot(): void

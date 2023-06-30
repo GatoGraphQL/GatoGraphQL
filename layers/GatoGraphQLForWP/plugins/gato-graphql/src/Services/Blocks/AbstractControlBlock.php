@@ -29,8 +29,12 @@ abstract class AbstractControlBlock extends AbstractBlock
     }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
-        /** @var TypeRegistryInterface */
-        return $this->typeRegistry ??= $this->instanceManager->getInstance(TypeRegistryInterface::class);
+        if ($this->typeRegistry === null) {
+            /** @var TypeRegistryInterface */
+            $typeRegistry = $this->instanceManager->getInstance(TypeRegistryInterface::class);
+            $this->typeRegistry = $typeRegistry;
+        }
+        return $this->typeRegistry;
     }
 
     protected function isDynamicBlock(): bool

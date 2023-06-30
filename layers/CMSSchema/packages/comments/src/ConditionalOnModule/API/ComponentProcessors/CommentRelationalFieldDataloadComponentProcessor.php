@@ -25,8 +25,12 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
     }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        /** @var CommentObjectTypeResolver */
-        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        if ($this->commentObjectTypeResolver === null) {
+            /** @var CommentObjectTypeResolver */
+            $commentObjectTypeResolver = $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+            $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        }
+        return $this->commentObjectTypeResolver;
     }
     final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -34,8 +38,12 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
     }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
-        /** @var ListQueryInputOutputHandler */
-        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+        if ($this->listQueryInputOutputHandler === null) {
+            /** @var ListQueryInputOutputHandler */
+            $listQueryInputOutputHandler = $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+            $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+        }
+        return $this->listQueryInputOutputHandler;
     }
 
     /**

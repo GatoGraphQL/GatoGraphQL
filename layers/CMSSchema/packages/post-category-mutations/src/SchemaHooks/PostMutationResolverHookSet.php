@@ -21,8 +21,12 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
     }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        /** @var PostCategoryObjectTypeResolver */
-        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        if ($this->postCategoryObjectTypeResolver === null) {
+            /** @var PostCategoryObjectTypeResolver */
+            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+            $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+        }
+        return $this->postCategoryObjectTypeResolver;
     }
 
     protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface

@@ -49,8 +49,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        /** @var MediaObjectTypeResolver */
-        return $this->mediaObjectTypeResolver ??= $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+        if ($this->mediaObjectTypeResolver === null) {
+            /** @var MediaObjectTypeResolver */
+            $mediaObjectTypeResolver = $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+            $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
+        }
+        return $this->mediaObjectTypeResolver;
     }
     final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {
@@ -58,8 +62,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
-        /** @var CustomPostUnionTypeResolver */
-        return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+        if ($this->customPostUnionTypeResolver === null) {
+            /** @var CustomPostUnionTypeResolver */
+            $customPostUnionTypeResolver = $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+            $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+        }
+        return $this->customPostUnionTypeResolver;
     }
     final public function setSetFeaturedImageOnCustomPostMutationResolver(SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver): void
     {
@@ -67,8 +75,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getSetFeaturedImageOnCustomPostMutationResolver(): SetFeaturedImageOnCustomPostMutationResolver
     {
-        /** @var SetFeaturedImageOnCustomPostMutationResolver */
-        return $this->setFeaturedImageOnCustomPostMutationResolver ??= $this->instanceManager->getInstance(SetFeaturedImageOnCustomPostMutationResolver::class);
+        if ($this->setFeaturedImageOnCustomPostMutationResolver === null) {
+            /** @var SetFeaturedImageOnCustomPostMutationResolver */
+            $setFeaturedImageOnCustomPostMutationResolver = $this->instanceManager->getInstance(SetFeaturedImageOnCustomPostMutationResolver::class);
+            $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
+        }
+        return $this->setFeaturedImageOnCustomPostMutationResolver;
     }
     final public function setRemoveFeaturedImageFromCustomPostMutationResolver(RemoveFeaturedImageFromCustomPostMutationResolver $removeFeaturedImageFromCustomPostMutationResolver): void
     {
@@ -76,8 +88,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getRemoveFeaturedImageFromCustomPostMutationResolver(): RemoveFeaturedImageFromCustomPostMutationResolver
     {
-        /** @var RemoveFeaturedImageFromCustomPostMutationResolver */
-        return $this->removeFeaturedImageFromCustomPostMutationResolver ??= $this->instanceManager->getInstance(RemoveFeaturedImageFromCustomPostMutationResolver::class);
+        if ($this->removeFeaturedImageFromCustomPostMutationResolver === null) {
+            /** @var RemoveFeaturedImageFromCustomPostMutationResolver */
+            $removeFeaturedImageFromCustomPostMutationResolver = $this->instanceManager->getInstance(RemoveFeaturedImageFromCustomPostMutationResolver::class);
+            $this->removeFeaturedImageFromCustomPostMutationResolver = $removeFeaturedImageFromCustomPostMutationResolver;
+        }
+        return $this->removeFeaturedImageFromCustomPostMutationResolver;
     }
     final public function setCustomPostSetFeaturedImageInputObjectTypeResolver(CustomPostSetFeaturedImageInputObjectTypeResolver $customPostSetFeaturedImageInputObjectTypeResolver): void
     {
@@ -85,8 +101,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getCustomPostSetFeaturedImageInputObjectTypeResolver(): CustomPostSetFeaturedImageInputObjectTypeResolver
     {
-        /** @var CustomPostSetFeaturedImageInputObjectTypeResolver */
-        return $this->customPostSetFeaturedImageInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSetFeaturedImageInputObjectTypeResolver::class);
+        if ($this->customPostSetFeaturedImageInputObjectTypeResolver === null) {
+            /** @var CustomPostSetFeaturedImageInputObjectTypeResolver */
+            $customPostSetFeaturedImageInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostSetFeaturedImageInputObjectTypeResolver::class);
+            $this->customPostSetFeaturedImageInputObjectTypeResolver = $customPostSetFeaturedImageInputObjectTypeResolver;
+        }
+        return $this->customPostSetFeaturedImageInputObjectTypeResolver;
     }
     final public function setPayloadableSetFeaturedImageOnCustomPostMutationResolver(PayloadableSetFeaturedImageOnCustomPostMutationResolver $payloadableSetFeaturedImageOnCustomPostMutationResolver): void
     {
@@ -94,8 +114,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getPayloadableSetFeaturedImageOnCustomPostMutationResolver(): PayloadableSetFeaturedImageOnCustomPostMutationResolver
     {
-        /** @var PayloadableSetFeaturedImageOnCustomPostMutationResolver */
-        return $this->payloadableSetFeaturedImageOnCustomPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableSetFeaturedImageOnCustomPostMutationResolver::class);
+        if ($this->payloadableSetFeaturedImageOnCustomPostMutationResolver === null) {
+            /** @var PayloadableSetFeaturedImageOnCustomPostMutationResolver */
+            $payloadableSetFeaturedImageOnCustomPostMutationResolver = $this->instanceManager->getInstance(PayloadableSetFeaturedImageOnCustomPostMutationResolver::class);
+            $this->payloadableSetFeaturedImageOnCustomPostMutationResolver = $payloadableSetFeaturedImageOnCustomPostMutationResolver;
+        }
+        return $this->payloadableSetFeaturedImageOnCustomPostMutationResolver;
     }
     final public function setPayloadableRemoveFeaturedImageFromCustomPostMutationResolver(PayloadableRemoveFeaturedImageFromCustomPostMutationResolver $payloadableRemoveFeaturedImageFromCustomPostMutationResolver): void
     {
@@ -103,8 +127,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getPayloadableRemoveFeaturedImageFromCustomPostMutationResolver(): PayloadableRemoveFeaturedImageFromCustomPostMutationResolver
     {
-        /** @var PayloadableRemoveFeaturedImageFromCustomPostMutationResolver */
-        return $this->payloadableRemoveFeaturedImageFromCustomPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableRemoveFeaturedImageFromCustomPostMutationResolver::class);
+        if ($this->payloadableRemoveFeaturedImageFromCustomPostMutationResolver === null) {
+            /** @var PayloadableRemoveFeaturedImageFromCustomPostMutationResolver */
+            $payloadableRemoveFeaturedImageFromCustomPostMutationResolver = $this->instanceManager->getInstance(PayloadableRemoveFeaturedImageFromCustomPostMutationResolver::class);
+            $this->payloadableRemoveFeaturedImageFromCustomPostMutationResolver = $payloadableRemoveFeaturedImageFromCustomPostMutationResolver;
+        }
+        return $this->payloadableRemoveFeaturedImageFromCustomPostMutationResolver;
     }
     final public function setCustomPostSetFeaturedImageMutationPayloadObjectTypeResolver(CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver $customPostSetFeaturedImageMutationPayloadObjectTypeResolver): void
     {
@@ -112,8 +140,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getCustomPostSetFeaturedImageMutationPayloadObjectTypeResolver(): CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver
     {
-        /** @var CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver */
-        return $this->customPostSetFeaturedImageMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver::class);
+        if ($this->customPostSetFeaturedImageMutationPayloadObjectTypeResolver === null) {
+            /** @var CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver */
+            $customPostSetFeaturedImageMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver::class);
+            $this->customPostSetFeaturedImageMutationPayloadObjectTypeResolver = $customPostSetFeaturedImageMutationPayloadObjectTypeResolver;
+        }
+        return $this->customPostSetFeaturedImageMutationPayloadObjectTypeResolver;
     }
     final public function setCustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver(CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver $customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver): void
     {
@@ -121,8 +153,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getCustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver(): CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver
     {
-        /** @var CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver */
-        return $this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver::class);
+        if ($this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver === null) {
+            /** @var CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver */
+            $customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver::class);
+            $this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver = $customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver;
+        }
+        return $this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver;
     }
     final public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
     {
@@ -130,8 +166,12 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     }
     final protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
     {
-        /** @var CustomPostMediaTypeAPIInterface */
-        return $this->customPostMediaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
+        if ($this->customPostMediaTypeAPI === null) {
+            /** @var CustomPostMediaTypeAPIInterface */
+            $customPostMediaTypeAPI = $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
+            $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
+        }
+        return $this->customPostMediaTypeAPI;
     }
 
     /**

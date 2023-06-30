@@ -33,8 +33,12 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -42,8 +46,12 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setFieldExtensionsObjectTypeResolver(FieldExtensionsObjectTypeResolver $fieldExtensionsObjectTypeResolver): void
     {
@@ -51,8 +59,12 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getFieldExtensionsObjectTypeResolver(): FieldExtensionsObjectTypeResolver
     {
-        /** @var FieldExtensionsObjectTypeResolver */
-        return $this->fieldExtensionsObjectTypeResolver ??= $this->instanceManager->getInstance(FieldExtensionsObjectTypeResolver::class);
+        if ($this->fieldExtensionsObjectTypeResolver === null) {
+            /** @var FieldExtensionsObjectTypeResolver */
+            $fieldExtensionsObjectTypeResolver = $this->instanceManager->getInstance(FieldExtensionsObjectTypeResolver::class);
+            $this->fieldExtensionsObjectTypeResolver = $fieldExtensionsObjectTypeResolver;
+        }
+        return $this->fieldExtensionsObjectTypeResolver;
     }
     final public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
     {
@@ -60,8 +72,12 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
     {
-        /** @var InputValueObjectTypeResolver */
-        return $this->inputValueObjectTypeResolver ??= $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
+        if ($this->inputValueObjectTypeResolver === null) {
+            /** @var InputValueObjectTypeResolver */
+            $inputValueObjectTypeResolver = $this->instanceManager->getInstance(InputValueObjectTypeResolver::class);
+            $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
+        }
+        return $this->inputValueObjectTypeResolver;
     }
     final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
     {
@@ -69,8 +85,12 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
-        /** @var TypeObjectTypeResolver */
-        return $this->typeObjectTypeResolver ??= $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+        if ($this->typeObjectTypeResolver === null) {
+            /** @var TypeObjectTypeResolver */
+            $typeObjectTypeResolver = $this->instanceManager->getInstance(TypeObjectTypeResolver::class);
+            $this->typeObjectTypeResolver = $typeObjectTypeResolver;
+        }
+        return $this->typeObjectTypeResolver;
     }
 
     /**

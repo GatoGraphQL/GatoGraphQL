@@ -21,8 +21,12 @@ abstract class AbstractObjectTypeResolverPicker implements ObjectTypeResolverPic
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
-        /** @var AttachableExtensionManagerInterface */
-        return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+        if ($this->attachableExtensionManager === null) {
+            /** @var AttachableExtensionManagerInterface */
+            $attachableExtensionManager = $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
+            $this->attachableExtensionManager = $attachableExtensionManager;
+        }
+        return $this->attachableExtensionManager;
     }
 
     /**

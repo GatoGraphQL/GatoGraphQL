@@ -30,8 +30,12 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
-        /** @var PostTagObjectTypeResolver */
-        return $this->postTagObjectTypeResolver ??= $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+        if ($this->postTagObjectTypeResolver === null) {
+            /** @var PostTagObjectTypeResolver */
+            $postTagObjectTypeResolver = $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
+            $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
+        }
+        return $this->postTagObjectTypeResolver;
     }
     final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -39,8 +43,12 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
     }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
-        /** @var ListQueryInputOutputHandler */
-        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+        if ($this->listQueryInputOutputHandler === null) {
+            /** @var ListQueryInputOutputHandler */
+            $listQueryInputOutputHandler = $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+            $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+        }
+        return $this->listQueryInputOutputHandler;
     }
 
     /**

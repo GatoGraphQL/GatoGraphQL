@@ -30,8 +30,12 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     }
     final protected function getDirectiveKindEnumTypeResolver(): DirectiveKindEnumTypeResolver
     {
-        /** @var DirectiveKindEnumTypeResolver */
-        return $this->directiveKindEnumTypeResolver ??= $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
+        if ($this->directiveKindEnumTypeResolver === null) {
+            /** @var DirectiveKindEnumTypeResolver */
+            $directiveKindEnumTypeResolver = $this->instanceManager->getInstance(DirectiveKindEnumTypeResolver::class);
+            $this->directiveKindEnumTypeResolver = $directiveKindEnumTypeResolver;
+        }
+        return $this->directiveKindEnumTypeResolver;
     }
     final public function setFieldDirectiveResolverRegistry(FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry): void
     {
@@ -39,8 +43,12 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     }
     final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
     {
-        /** @var FieldDirectiveResolverRegistryInterface */
-        return $this->fieldDirectiveResolverRegistry ??= $this->instanceManager->getInstance(FieldDirectiveResolverRegistryInterface::class);
+        if ($this->fieldDirectiveResolverRegistry === null) {
+            /** @var FieldDirectiveResolverRegistryInterface */
+            $fieldDirectiveResolverRegistry = $this->instanceManager->getInstance(FieldDirectiveResolverRegistryInterface::class);
+            $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
+        }
+        return $this->fieldDirectiveResolverRegistry;
     }
 
     /**

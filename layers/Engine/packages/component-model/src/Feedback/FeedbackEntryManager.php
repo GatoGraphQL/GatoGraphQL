@@ -37,8 +37,12 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
     }
     final protected function getDatabaseEntryManager(): DatabaseEntryManagerInterface
     {
-        /** @var DatabaseEntryManagerInterface */
-        return $this->databaseEntryManager ??= $this->instanceManager->getInstance(DatabaseEntryManagerInterface::class);
+        if ($this->databaseEntryManager === null) {
+            /** @var DatabaseEntryManagerInterface */
+            $databaseEntryManager = $this->instanceManager->getInstance(DatabaseEntryManagerInterface::class);
+            $this->databaseEntryManager = $databaseEntryManager;
+        }
+        return $this->databaseEntryManager;
     }
 
     /**

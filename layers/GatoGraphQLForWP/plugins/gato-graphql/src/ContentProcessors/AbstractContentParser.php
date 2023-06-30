@@ -54,8 +54,12 @@ abstract class AbstractContentParser implements ContentParserInterface
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
-        /** @var RequestHelperServiceInterface */
-        return $this->requestHelperService ??= $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+        if ($this->requestHelperService === null) {
+            /** @var RequestHelperServiceInterface */
+            $requestHelperService = $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
+            $this->requestHelperService = $requestHelperService;
+        }
+        return $this->requestHelperService;
     }
     final public function setLocaleHelper(LocaleHelper $localeHelper): void
     {
@@ -63,8 +67,12 @@ abstract class AbstractContentParser implements ContentParserInterface
     }
     final protected function getLocaleHelper(): LocaleHelper
     {
-        /** @var LocaleHelper */
-        return $this->localeHelper ??= $this->instanceManager->getInstance(LocaleHelper::class);
+        if ($this->localeHelper === null) {
+            /** @var LocaleHelper */
+            $localeHelper = $this->instanceManager->getInstance(LocaleHelper::class);
+            $this->localeHelper = $localeHelper;
+        }
+        return $this->localeHelper;
     }
 
     /**

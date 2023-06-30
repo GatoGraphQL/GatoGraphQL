@@ -25,8 +25,12 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        /** @var URLScalarTypeResolver */
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
     }
 
     protected function getDbobjectIdField()

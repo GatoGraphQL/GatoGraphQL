@@ -22,8 +22,12 @@ class MetaQueryCompareByArrayValueInputObjectTypeResolver extends AbstractInputO
     }
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
-        /** @var AnyBuiltInScalarScalarTypeResolver */
-        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+        if ($this->anyBuiltInScalarScalarTypeResolver === null) {
+            /** @var AnyBuiltInScalarScalarTypeResolver */
+            $anyBuiltInScalarScalarTypeResolver = $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+            $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+        }
+        return $this->anyBuiltInScalarScalarTypeResolver;
     }
     final public function setMetaQueryCompareByArrayValueOperatorEnumTypeResolver(MetaQueryCompareByArrayValueOperatorEnumTypeResolver $metaQueryCompareByArrayValueOperatorEnumTypeResolver): void
     {
@@ -31,8 +35,12 @@ class MetaQueryCompareByArrayValueInputObjectTypeResolver extends AbstractInputO
     }
     final protected function getMetaQueryCompareByArrayValueOperatorEnumTypeResolver(): MetaQueryCompareByArrayValueOperatorEnumTypeResolver
     {
-        /** @var MetaQueryCompareByArrayValueOperatorEnumTypeResolver */
-        return $this->metaQueryCompareByArrayValueOperatorEnumTypeResolver ??= $this->instanceManager->getInstance(MetaQueryCompareByArrayValueOperatorEnumTypeResolver::class);
+        if ($this->metaQueryCompareByArrayValueOperatorEnumTypeResolver === null) {
+            /** @var MetaQueryCompareByArrayValueOperatorEnumTypeResolver */
+            $metaQueryCompareByArrayValueOperatorEnumTypeResolver = $this->instanceManager->getInstance(MetaQueryCompareByArrayValueOperatorEnumTypeResolver::class);
+            $this->metaQueryCompareByArrayValueOperatorEnumTypeResolver = $metaQueryCompareByArrayValueOperatorEnumTypeResolver;
+        }
+        return $this->metaQueryCompareByArrayValueOperatorEnumTypeResolver;
     }
 
     public function getTypeName(): string

@@ -37,8 +37,12 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     }
     final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
-        /** @var GenericCustomPostObjectTypeResolver */
-        return $this->genericCustomPostObjectTypeResolver ??= $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+        if ($this->genericCustomPostObjectTypeResolver === null) {
+            /** @var GenericCustomPostObjectTypeResolver */
+            $genericCustomPostObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+            $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+        }
+        return $this->genericCustomPostObjectTypeResolver;
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -46,8 +50,12 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        /** @var CustomPostTypeAPIInterface */
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
     }
     final public function setCustomPostPaginationInputObjectTypeResolver(CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver): void
     {
@@ -55,8 +63,12 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     }
     final protected function getCustomPostPaginationInputObjectTypeResolver(): CustomPostPaginationInputObjectTypeResolver
     {
-        /** @var CustomPostPaginationInputObjectTypeResolver */
-        return $this->customPostPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostPaginationInputObjectTypeResolver::class);
+        if ($this->customPostPaginationInputObjectTypeResolver === null) {
+            /** @var CustomPostPaginationInputObjectTypeResolver */
+            $customPostPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostPaginationInputObjectTypeResolver::class);
+            $this->customPostPaginationInputObjectTypeResolver = $customPostPaginationInputObjectTypeResolver;
+        }
+        return $this->customPostPaginationInputObjectTypeResolver;
     }
     final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver): void
     {
@@ -64,8 +76,12 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     }
     final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
     {
-        /** @var CustomPostSortInputObjectTypeResolver */
-        return $this->customPostSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
+        if ($this->customPostSortInputObjectTypeResolver === null) {
+            /** @var CustomPostSortInputObjectTypeResolver */
+            $customPostSortInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
+            $this->customPostSortInputObjectTypeResolver = $customPostSortInputObjectTypeResolver;
+        }
+        return $this->customPostSortInputObjectTypeResolver;
     }
 
     /**

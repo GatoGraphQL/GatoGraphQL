@@ -20,8 +20,12 @@ abstract class AbstractCategoryTypeAPI extends UpstreamAbstractCategoryTypeAPI i
     }
     final protected function getCMSService(): CMSServiceInterface
     {
-        /** @var CMSServiceInterface */
-        return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
+        if ($this->cmsService === null) {
+            /** @var CMSServiceInterface */
+            $cmsService = $this->instanceManager->getInstance(CMSServiceInterface::class);
+            $this->cmsService = $cmsService;
+        }
+        return $this->cmsService;
     }
 
     public function hasCategory($cat_id, $post_id): bool

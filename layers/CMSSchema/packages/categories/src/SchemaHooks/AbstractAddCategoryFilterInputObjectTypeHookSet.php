@@ -29,8 +29,12 @@ abstract class AbstractAddCategoryFilterInputObjectTypeHookSet extends AbstractH
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setCategoryIDsFilterInput(CategoryIDsFilterInput $categoryIDsFilterInput): void
     {
@@ -38,8 +42,12 @@ abstract class AbstractAddCategoryFilterInputObjectTypeHookSet extends AbstractH
     }
     final protected function getCategoryIDsFilterInput(): CategoryIDsFilterInput
     {
-        /** @var CategoryIDsFilterInput */
-        return $this->categoryIDsFilterInput ??= $this->instanceManager->getInstance(CategoryIDsFilterInput::class);
+        if ($this->categoryIDsFilterInput === null) {
+            /** @var CategoryIDsFilterInput */
+            $categoryIDsFilterInput = $this->instanceManager->getInstance(CategoryIDsFilterInput::class);
+            $this->categoryIDsFilterInput = $categoryIDsFilterInput;
+        }
+        return $this->categoryIDsFilterInput;
     }
     final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
     {
@@ -47,8 +55,12 @@ abstract class AbstractAddCategoryFilterInputObjectTypeHookSet extends AbstractH
     }
     final protected function getCategoryTaxonomyEnumStringScalarTypeResolver(): CategoryTaxonomyEnumStringScalarTypeResolver
     {
-        /** @var CategoryTaxonomyEnumStringScalarTypeResolver */
-        return $this->categoryTaxonomyEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(CategoryTaxonomyEnumStringScalarTypeResolver::class);
+        if ($this->categoryTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var CategoryTaxonomyEnumStringScalarTypeResolver */
+            $categoryTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CategoryTaxonomyEnumStringScalarTypeResolver::class);
+            $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->categoryTaxonomyEnumStringScalarTypeResolver;
     }
     final public function setCategoryTaxonomyFilterInput(CategoryTaxonomyFilterInput $categoryTaxonomyFilterInput): void
     {
@@ -56,8 +68,12 @@ abstract class AbstractAddCategoryFilterInputObjectTypeHookSet extends AbstractH
     }
     final protected function getCategoryTaxonomyFilterInput(): CategoryTaxonomyFilterInput
     {
-        /** @var CategoryTaxonomyFilterInput */
-        return $this->categoryTaxonomyFilterInput ??= $this->instanceManager->getInstance(CategoryTaxonomyFilterInput::class);
+        if ($this->categoryTaxonomyFilterInput === null) {
+            /** @var CategoryTaxonomyFilterInput */
+            $categoryTaxonomyFilterInput = $this->instanceManager->getInstance(CategoryTaxonomyFilterInput::class);
+            $this->categoryTaxonomyFilterInput = $categoryTaxonomyFilterInput;
+        }
+        return $this->categoryTaxonomyFilterInput;
     }
 
     protected function init(): void

@@ -22,8 +22,12 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
     }
     final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
     {
-        /** @var GraphQLCustomEndpointCustomPostType */
-        return $this->graphQLCustomEndpointCustomPostType ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        if ($this->graphQLCustomEndpointCustomPostType === null) {
+            /** @var GraphQLCustomEndpointCustomPostType */
+            $graphQLCustomEndpointCustomPostType = InstanceManagerFacade::getInstance()->getInstance(GraphQLCustomEndpointCustomPostType::class);
+            $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        }
+        return $this->graphQLCustomEndpointCustomPostType;
     }
     final public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
     {
@@ -31,8 +35,12 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
     }
     final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
     {
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        return $this->graphQLPersistedQueryEndpointCustomPostType ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        if ($this->graphQLPersistedQueryEndpointCustomPostType === null) {
+            /** @var GraphQLPersistedQueryEndpointCustomPostType */
+            $graphQLPersistedQueryEndpointCustomPostType = InstanceManagerFacade::getInstance()->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+            $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
+        }
+        return $this->graphQLPersistedQueryEndpointCustomPostType;
     }
 
     public function getTaxonomy(): string

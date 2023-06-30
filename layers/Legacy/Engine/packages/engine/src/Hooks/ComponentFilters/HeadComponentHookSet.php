@@ -21,8 +21,12 @@ class HeadComponentHookSet extends AbstractHookSet
     }
     final protected function getHeadComponent(): HeadComponent
     {
-        /** @var HeadComponent */
-        return $this->headComponent ??= $this->instanceManager->getInstance(HeadComponent::class);
+        if ($this->headComponent === null) {
+            /** @var HeadComponent */
+            $headComponent = $this->instanceManager->getInstance(HeadComponent::class);
+            $this->headComponent = $headComponent;
+        }
+        return $this->headComponent;
     }
     final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
     {
@@ -30,8 +34,12 @@ class HeadComponentHookSet extends AbstractHookSet
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
-        /** @var ComponentHelpersInterface */
-        return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+        if ($this->componentHelpers === null) {
+            /** @var ComponentHelpersInterface */
+            $componentHelpers = $this->instanceManager->getInstance(ComponentHelpersInterface::class);
+            $this->componentHelpers = $componentHelpers;
+        }
+        return $this->componentHelpers;
     }
 
     protected function init(): void

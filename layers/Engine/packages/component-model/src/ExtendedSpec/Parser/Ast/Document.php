@@ -24,8 +24,12 @@ class Document extends AbstractDocument
     }
     final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
     {
-        /** @var DynamicVariableDefinerDirectiveRegistryInterface */
-        return $this->dynamicVariableDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
+        if ($this->dynamicVariableDefinerDirectiveRegistry === null) {
+            /** @var DynamicVariableDefinerDirectiveRegistryInterface */
+            $dynamicVariableDefinerDirectiveRegistry = InstanceManagerFacade::getInstance()->getInstance(DynamicVariableDefinerDirectiveRegistryInterface::class);
+            $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
+        }
+        return $this->dynamicVariableDefinerDirectiveRegistry;
     }
     final public function setOperationDependencyDefinerDirectiveRegistry(OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry): void
     {
@@ -33,8 +37,12 @@ class Document extends AbstractDocument
     }
     final protected function getOperationDependencyDefinerDirectiveRegistry(): OperationDependencyDefinerDirectiveRegistryInterface
     {
-        /** @var OperationDependencyDefinerDirectiveRegistryInterface */
-        return $this->operationDependencyDefinerDirectiveRegistry ??= InstanceManagerFacade::getInstance()->getInstance(OperationDependencyDefinerDirectiveRegistryInterface::class);
+        if ($this->operationDependencyDefinerDirectiveRegistry === null) {
+            /** @var OperationDependencyDefinerDirectiveRegistryInterface */
+            $operationDependencyDefinerDirectiveRegistry = InstanceManagerFacade::getInstance()->getInstance(OperationDependencyDefinerDirectiveRegistryInterface::class);
+            $this->operationDependencyDefinerDirectiveRegistry = $operationDependencyDefinerDirectiveRegistry;
+        }
+        return $this->operationDependencyDefinerDirectiveRegistry;
     }
 
     protected function isDynamicVariableDefinerDirective(Directive $directive): bool

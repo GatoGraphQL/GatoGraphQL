@@ -32,8 +32,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setCategoryIDsFilterInput(CategoryIDsFilterInput $categoryIDsFilterInput): void
     {
@@ -41,8 +45,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getCategoryIDsFilterInput(): CategoryIDsFilterInput
     {
-        /** @var CategoryIDsFilterInput */
-        return $this->categoryIDsFilterInput ??= $this->instanceManager->getInstance(CategoryIDsFilterInput::class);
+        if ($this->categoryIDsFilterInput === null) {
+            /** @var CategoryIDsFilterInput */
+            $categoryIDsFilterInput = $this->instanceManager->getInstance(CategoryIDsFilterInput::class);
+            $this->categoryIDsFilterInput = $categoryIDsFilterInput;
+        }
+        return $this->categoryIDsFilterInput;
     }
     final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
     {
@@ -50,8 +58,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getTaxonomyFilterInput(): TaxonomyFilterInput
     {
-        /** @var TaxonomyFilterInput */
-        return $this->taxonomyFilterInput ??= $this->instanceManager->getInstance(TaxonomyFilterInput::class);
+        if ($this->taxonomyFilterInput === null) {
+            /** @var TaxonomyFilterInput */
+            $taxonomyFilterInput = $this->instanceManager->getInstance(TaxonomyFilterInput::class);
+            $this->taxonomyFilterInput = $taxonomyFilterInput;
+        }
+        return $this->taxonomyFilterInput;
     }
     final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
     {
@@ -59,8 +71,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getCategoryTaxonomyEnumStringScalarTypeResolver(): CategoryTaxonomyEnumStringScalarTypeResolver
     {
-        /** @var CategoryTaxonomyEnumStringScalarTypeResolver */
-        return $this->categoryTaxonomyEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(CategoryTaxonomyEnumStringScalarTypeResolver::class);
+        if ($this->categoryTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var CategoryTaxonomyEnumStringScalarTypeResolver */
+            $categoryTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CategoryTaxonomyEnumStringScalarTypeResolver::class);
+            $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->categoryTaxonomyEnumStringScalarTypeResolver;
     }
 
     /**

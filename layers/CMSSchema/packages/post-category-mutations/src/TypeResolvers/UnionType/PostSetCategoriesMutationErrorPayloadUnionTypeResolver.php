@@ -17,8 +17,12 @@ class PostSetCategoriesMutationErrorPayloadUnionTypeResolver extends AbstractPos
     }
     final protected function getPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader(): PostSetCategoriesMutationErrorPayloadUnionTypeDataLoader
     {
-        /** @var PostSetCategoriesMutationErrorPayloadUnionTypeDataLoader */
-        return $this->postSetCategoriesMutationErrorPayloadUnionTypeDataLoader ??= $this->instanceManager->getInstance(PostSetCategoriesMutationErrorPayloadUnionTypeDataLoader::class);
+        if ($this->postSetCategoriesMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var PostSetCategoriesMutationErrorPayloadUnionTypeDataLoader */
+            $postSetCategoriesMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostSetCategoriesMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->postSetCategoriesMutationErrorPayloadUnionTypeDataLoader = $postSetCategoriesMutationErrorPayloadUnionTypeDataLoader;
+        }
+        return $this->postSetCategoriesMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

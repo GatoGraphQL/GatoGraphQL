@@ -44,8 +44,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -53,8 +57,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -62,8 +70,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
-        /** @var PostCategoryObjectTypeResolver */
-        return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+        if ($this->postCategoryObjectTypeResolver === null) {
+            /** @var PostCategoryObjectTypeResolver */
+            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+            $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+        }
+        return $this->postCategoryObjectTypeResolver;
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
@@ -71,8 +83,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
-        /** @var PostCategoryTypeAPIInterface */
-        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+        if ($this->postCategoryTypeAPI === null) {
+            /** @var PostCategoryTypeAPIInterface */
+            $postCategoryTypeAPI = $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+            $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+        }
+        return $this->postCategoryTypeAPI;
     }
     final public function setPostCategoryByInputObjectTypeResolver(PostCategoryByInputObjectTypeResolver $postCategoryByInputObjectTypeResolver): void
     {
@@ -80,8 +96,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     final protected function getPostCategoryByInputObjectTypeResolver(): PostCategoryByInputObjectTypeResolver
     {
-        /** @var PostCategoryByInputObjectTypeResolver */
-        return $this->postCategoryByInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryByInputObjectTypeResolver::class);
+        if ($this->postCategoryByInputObjectTypeResolver === null) {
+            /** @var PostCategoryByInputObjectTypeResolver */
+            $postCategoryByInputObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryByInputObjectTypeResolver::class);
+            $this->postCategoryByInputObjectTypeResolver = $postCategoryByInputObjectTypeResolver;
+        }
+        return $this->postCategoryByInputObjectTypeResolver;
     }
     final public function setRootCategoriesFilterInputObjectTypeResolver(RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver): void
     {
@@ -89,8 +109,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     final protected function getRootCategoriesFilterInputObjectTypeResolver(): RootCategoriesFilterInputObjectTypeResolver
     {
-        /** @var RootCategoriesFilterInputObjectTypeResolver */
-        return $this->rootCategoriesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootCategoriesFilterInputObjectTypeResolver::class);
+        if ($this->rootCategoriesFilterInputObjectTypeResolver === null) {
+            /** @var RootCategoriesFilterInputObjectTypeResolver */
+            $rootCategoriesFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootCategoriesFilterInputObjectTypeResolver::class);
+            $this->rootCategoriesFilterInputObjectTypeResolver = $rootCategoriesFilterInputObjectTypeResolver;
+        }
+        return $this->rootCategoriesFilterInputObjectTypeResolver;
     }
     final public function setCategoryPaginationInputObjectTypeResolver(CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver): void
     {
@@ -98,8 +122,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     final protected function getCategoryPaginationInputObjectTypeResolver(): CategoryPaginationInputObjectTypeResolver
     {
-        /** @var CategoryPaginationInputObjectTypeResolver */
-        return $this->categoryPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CategoryPaginationInputObjectTypeResolver::class);
+        if ($this->categoryPaginationInputObjectTypeResolver === null) {
+            /** @var CategoryPaginationInputObjectTypeResolver */
+            $categoryPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryPaginationInputObjectTypeResolver::class);
+            $this->categoryPaginationInputObjectTypeResolver = $categoryPaginationInputObjectTypeResolver;
+        }
+        return $this->categoryPaginationInputObjectTypeResolver;
     }
     final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
     {
@@ -107,8 +135,12 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     }
     final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
     {
-        /** @var TaxonomySortInputObjectTypeResolver */
-        return $this->taxonomySortInputObjectTypeResolver ??= $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+        if ($this->taxonomySortInputObjectTypeResolver === null) {
+            /** @var TaxonomySortInputObjectTypeResolver */
+            $taxonomySortInputObjectTypeResolver = $this->instanceManager->getInstance(TaxonomySortInputObjectTypeResolver::class);
+            $this->taxonomySortInputObjectTypeResolver = $taxonomySortInputObjectTypeResolver;
+        }
+        return $this->taxonomySortInputObjectTypeResolver;
     }
 
     /**

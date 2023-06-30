@@ -17,8 +17,12 @@ class PostUpdateInputObjectTypeResolver extends CustomPostUpdateInputObjectTypeR
     }
     final protected function getPostContentAsOneofInputObjectTypeResolver(): PostContentAsOneofInputObjectTypeResolver
     {
-        /** @var PostContentAsOneofInputObjectTypeResolver */
-        return $this->postContentAsOneofInputObjectTypeResolver ??= $this->instanceManager->getInstance(PostContentAsOneofInputObjectTypeResolver::class);
+        if ($this->postContentAsOneofInputObjectTypeResolver === null) {
+            /** @var PostContentAsOneofInputObjectTypeResolver */
+            $postContentAsOneofInputObjectTypeResolver = $this->instanceManager->getInstance(PostContentAsOneofInputObjectTypeResolver::class);
+            $this->postContentAsOneofInputObjectTypeResolver = $postContentAsOneofInputObjectTypeResolver;
+        }
+        return $this->postContentAsOneofInputObjectTypeResolver;
     }
 
     public function getTypeName(): string

@@ -17,8 +17,12 @@ abstract class AbstractUserUpdateUserMetaValueMutationResolverBridge extends Abs
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
+        }
+        return $this->userTypeAPI;
     }
 
     protected function getRequestKey(): string

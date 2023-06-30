@@ -37,8 +37,12 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
+        }
+        return $this->userTypeAPI;
     }
     final public function setGravityFormsAddEntryToFormMutationResolver(GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver): void
     {
@@ -46,8 +50,12 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     }
     final protected function getGravityFormsAddEntryToFormMutationResolver(): GravityFormsAddEntryToFormMutationResolver
     {
-        /** @var GravityFormsAddEntryToFormMutationResolver */
-        return $this->gravityFormsAddEntryToFormMutationResolver ??= $this->instanceManager->getInstance(GravityFormsAddEntryToFormMutationResolver::class);
+        if ($this->gravityFormsAddEntryToFormMutationResolver === null) {
+            /** @var GravityFormsAddEntryToFormMutationResolver */
+            $gravityFormsAddEntryToFormMutationResolver = $this->instanceManager->getInstance(GravityFormsAddEntryToFormMutationResolver::class);
+            $this->gravityFormsAddEntryToFormMutationResolver = $gravityFormsAddEntryToFormMutationResolver;
+        }
+        return $this->gravityFormsAddEntryToFormMutationResolver;
     }
 
     final public function initialize(): void

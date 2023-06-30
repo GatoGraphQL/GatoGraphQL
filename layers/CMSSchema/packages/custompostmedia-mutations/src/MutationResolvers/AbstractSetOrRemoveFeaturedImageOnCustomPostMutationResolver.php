@@ -34,8 +34,12 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
     }
     final protected function getNameResolver(): NameResolverInterface
     {
-        /** @var NameResolverInterface */
-        return $this->nameResolver ??= $this->instanceManager->getInstance(NameResolverInterface::class);
+        if ($this->nameResolver === null) {
+            /** @var NameResolverInterface */
+            $nameResolver = $this->instanceManager->getInstance(NameResolverInterface::class);
+            $this->nameResolver = $nameResolver;
+        }
+        return $this->nameResolver;
     }
     final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
     {
@@ -43,8 +47,12 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
     }
     final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
-        /** @var UserRoleTypeAPIInterface */
-        return $this->userRoleTypeAPI ??= $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+        if ($this->userRoleTypeAPI === null) {
+            /** @var UserRoleTypeAPIInterface */
+            $userRoleTypeAPI = $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+            $this->userRoleTypeAPI = $userRoleTypeAPI;
+        }
+        return $this->userRoleTypeAPI;
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -52,8 +60,12 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        /** @var CustomPostTypeAPIInterface */
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
     }
     final public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
     {
@@ -61,8 +73,12 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
     }
     final protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
     {
-        /** @var CustomPostMediaTypeAPIInterface */
-        return $this->customPostMediaTypeAPI ??= $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
+        if ($this->customPostMediaTypeAPI === null) {
+            /** @var CustomPostMediaTypeAPIInterface */
+            $customPostMediaTypeAPI = $this->instanceManager->getInstance(CustomPostMediaTypeAPIInterface::class);
+            $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
+        }
+        return $this->customPostMediaTypeAPI;
     }
     final public function setCustomPostTypeMutationAPI(CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI): void
     {
@@ -70,8 +86,12 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
     }
     final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
     {
-        /** @var CustomPostTypeMutationAPIInterface */
-        return $this->customPostTypeMutationAPI ??= $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
+        if ($this->customPostTypeMutationAPI === null) {
+            /** @var CustomPostTypeMutationAPIInterface */
+            $customPostTypeMutationAPI = $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
+            $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+        }
+        return $this->customPostTypeMutationAPI;
     }
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution

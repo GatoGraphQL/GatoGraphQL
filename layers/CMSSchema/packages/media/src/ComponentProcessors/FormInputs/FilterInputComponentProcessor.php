@@ -27,8 +27,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setMimeTypesFilterInput(MimeTypesFilterInput $mimeTypesFilterInput): void
     {
@@ -36,8 +40,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     }
     final protected function getMimeTypesFilterInput(): MimeTypesFilterInput
     {
-        /** @var MimeTypesFilterInput */
-        return $this->mimeTypesFilterInput ??= $this->instanceManager->getInstance(MimeTypesFilterInput::class);
+        if ($this->mimeTypesFilterInput === null) {
+            /** @var MimeTypesFilterInput */
+            $mimeTypesFilterInput = $this->instanceManager->getInstance(MimeTypesFilterInput::class);
+            $this->mimeTypesFilterInput = $mimeTypesFilterInput;
+        }
+        return $this->mimeTypesFilterInput;
     }
 
     /**

@@ -47,8 +47,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -56,8 +60,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
-        /** @var CustomPostTypeAPIInterface */
-        return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
     }
     final public function setCustomPostByInputObjectTypeResolver(CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver): void
     {
@@ -65,8 +73,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     final protected function getCustomPostByInputObjectTypeResolver(): CustomPostByInputObjectTypeResolver
     {
-        /** @var CustomPostByInputObjectTypeResolver */
-        return $this->customPostByInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
+        if ($this->customPostByInputObjectTypeResolver === null) {
+            /** @var CustomPostByInputObjectTypeResolver */
+            $customPostByInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
+            $this->customPostByInputObjectTypeResolver = $customPostByInputObjectTypeResolver;
+        }
+        return $this->customPostByInputObjectTypeResolver;
     }
     final public function setRootMyCustomPostsFilterInputObjectTypeResolver(RootMyCustomPostsFilterInputObjectTypeResolver $rootMyCustomPostsFilterInputObjectTypeResolver): void
     {
@@ -74,8 +86,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     final protected function getRootMyCustomPostsFilterInputObjectTypeResolver(): RootMyCustomPostsFilterInputObjectTypeResolver
     {
-        /** @var RootMyCustomPostsFilterInputObjectTypeResolver */
-        return $this->rootMyCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(RootMyCustomPostsFilterInputObjectTypeResolver::class);
+        if ($this->rootMyCustomPostsFilterInputObjectTypeResolver === null) {
+            /** @var RootMyCustomPostsFilterInputObjectTypeResolver */
+            $rootMyCustomPostsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootMyCustomPostsFilterInputObjectTypeResolver::class);
+            $this->rootMyCustomPostsFilterInputObjectTypeResolver = $rootMyCustomPostsFilterInputObjectTypeResolver;
+        }
+        return $this->rootMyCustomPostsFilterInputObjectTypeResolver;
     }
     final public function setCustomPostPaginationInputObjectTypeResolver(CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver): void
     {
@@ -83,8 +99,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     final protected function getCustomPostPaginationInputObjectTypeResolver(): CustomPostPaginationInputObjectTypeResolver
     {
-        /** @var CustomPostPaginationInputObjectTypeResolver */
-        return $this->customPostPaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostPaginationInputObjectTypeResolver::class);
+        if ($this->customPostPaginationInputObjectTypeResolver === null) {
+            /** @var CustomPostPaginationInputObjectTypeResolver */
+            $customPostPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostPaginationInputObjectTypeResolver::class);
+            $this->customPostPaginationInputObjectTypeResolver = $customPostPaginationInputObjectTypeResolver;
+        }
+        return $this->customPostPaginationInputObjectTypeResolver;
     }
     final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver): void
     {
@@ -92,8 +112,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
     {
-        /** @var CustomPostSortInputObjectTypeResolver */
-        return $this->customPostSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
+        if ($this->customPostSortInputObjectTypeResolver === null) {
+            /** @var CustomPostSortInputObjectTypeResolver */
+            $customPostSortInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
+            $this->customPostSortInputObjectTypeResolver = $customPostSortInputObjectTypeResolver;
+        }
+        return $this->customPostSortInputObjectTypeResolver;
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
@@ -101,8 +125,12 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
-        /** @var UserLoggedInCheckpoint */
-        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+        if ($this->userLoggedInCheckpoint === null) {
+            /** @var UserLoggedInCheckpoint */
+            $userLoggedInCheckpoint = $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+            $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+        }
+        return $this->userLoggedInCheckpoint;
     }
 
     /**

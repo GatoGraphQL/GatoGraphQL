@@ -37,8 +37,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
-        /** @var MarkdownContentParserInterface */
-        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+        if ($this->markdownContentParser === null) {
+            /** @var MarkdownContentParserInterface */
+            $markdownContentParser = $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+            $this->markdownContentParser = $markdownContentParser;
+        }
+        return $this->markdownContentParser;
     }
     final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
     {
@@ -46,8 +50,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     }
     final protected function getSettingsCategoryRegistry(): SettingsCategoryRegistryInterface
     {
-        /** @var SettingsCategoryRegistryInterface */
-        return $this->settingsCategoryRegistry ??= $this->instanceManager->getInstance(SettingsCategoryRegistryInterface::class);
+        if ($this->settingsCategoryRegistry === null) {
+            /** @var SettingsCategoryRegistryInterface */
+            $settingsCategoryRegistry = $this->instanceManager->getInstance(SettingsCategoryRegistryInterface::class);
+            $this->settingsCategoryRegistry = $settingsCategoryRegistry;
+        }
+        return $this->settingsCategoryRegistry;
     }
     final public function setPluginManagementFunctionalityModuleResolver(PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver): void
     {
@@ -55,8 +63,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     }
     final protected function getPluginManagementFunctionalityModuleResolver(): PluginManagementFunctionalityModuleResolver
     {
-        /** @var PluginManagementFunctionalityModuleResolver */
-        return $this->pluginManagementFunctionalityModuleResolver ??= $this->instanceManager->getInstance(PluginManagementFunctionalityModuleResolver::class);
+        if ($this->pluginManagementFunctionalityModuleResolver === null) {
+            /** @var PluginManagementFunctionalityModuleResolver */
+            $pluginManagementFunctionalityModuleResolver = $this->instanceManager->getInstance(PluginManagementFunctionalityModuleResolver::class);
+            $this->pluginManagementFunctionalityModuleResolver = $pluginManagementFunctionalityModuleResolver;
+        }
+        return $this->pluginManagementFunctionalityModuleResolver;
     }
 
     /**

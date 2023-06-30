@@ -17,8 +17,12 @@ class UndoUpvoteCustomPostMutationResolverBridge extends AbstractCustomPostUpdat
     }
     final protected function getUndoUpvoteCustomPostMutationResolver(): UndoUpvoteCustomPostMutationResolver
     {
-        /** @var UndoUpvoteCustomPostMutationResolver */
-        return $this->undoUpvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UndoUpvoteCustomPostMutationResolver::class);
+        if ($this->undoUpvoteCustomPostMutationResolver === null) {
+            /** @var UndoUpvoteCustomPostMutationResolver */
+            $undoUpvoteCustomPostMutationResolver = $this->instanceManager->getInstance(UndoUpvoteCustomPostMutationResolver::class);
+            $this->undoUpvoteCustomPostMutationResolver = $undoUpvoteCustomPostMutationResolver;
+        }
+        return $this->undoUpvoteCustomPostMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

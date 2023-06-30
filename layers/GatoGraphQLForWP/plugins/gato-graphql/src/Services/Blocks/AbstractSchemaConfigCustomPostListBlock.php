@@ -23,8 +23,12 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     }
     final protected function getBlockRenderingHelpers(): BlockRenderingHelpers
     {
-        /** @var BlockRenderingHelpers */
-        return $this->blockRenderingHelpers ??= $this->instanceManager->getInstance(BlockRenderingHelpers::class);
+        if ($this->blockRenderingHelpers === null) {
+            /** @var BlockRenderingHelpers */
+            $blockRenderingHelpers = $this->instanceManager->getInstance(BlockRenderingHelpers::class);
+            $this->blockRenderingHelpers = $blockRenderingHelpers;
+        }
+        return $this->blockRenderingHelpers;
     }
     final public function setCPTUtils(CPTUtils $cptUtils): void
     {
@@ -32,8 +36,12 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     }
     final protected function getCPTUtils(): CPTUtils
     {
-        /** @var CPTUtils */
-        return $this->cptUtils ??= $this->instanceManager->getInstance(CPTUtils::class);
+        if ($this->cptUtils === null) {
+            /** @var CPTUtils */
+            $cptUtils = $this->instanceManager->getInstance(CPTUtils::class);
+            $this->cptUtils = $cptUtils;
+        }
+        return $this->cptUtils;
     }
 
     abstract protected function getAttributeName(): string;

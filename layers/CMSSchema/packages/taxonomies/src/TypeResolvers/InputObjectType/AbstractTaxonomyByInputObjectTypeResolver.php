@@ -25,8 +25,12 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -34,8 +38,12 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
@@ -43,8 +51,12 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
-        /** @var IncludeFilterInput */
-        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
+        if ($this->includeFilterInput === null) {
+            /** @var IncludeFilterInput */
+            $includeFilterInput = $this->instanceManager->getInstance(IncludeFilterInput::class);
+            $this->includeFilterInput = $includeFilterInput;
+        }
+        return $this->includeFilterInput;
     }
     final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
     {
@@ -52,8 +64,12 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     }
     final protected function getSlugFilterInput(): SlugFilterInput
     {
-        /** @var SlugFilterInput */
-        return $this->slugFilterInput ??= $this->instanceManager->getInstance(SlugFilterInput::class);
+        if ($this->slugFilterInput === null) {
+            /** @var SlugFilterInput */
+            $slugFilterInput = $this->instanceManager->getInstance(SlugFilterInput::class);
+            $this->slugFilterInput = $slugFilterInput;
+        }
+        return $this->slugFilterInput;
     }
 
     public function getTypeDescription(): ?string

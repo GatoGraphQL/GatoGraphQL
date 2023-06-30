@@ -36,8 +36,12 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     }
     final protected function getDateQueryInputObjectTypeResolver(): DateQueryInputObjectTypeResolver
     {
-        /** @var DateQueryInputObjectTypeResolver */
-        return $this->dateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
+        if ($this->dateQueryInputObjectTypeResolver === null) {
+            /** @var DateQueryInputObjectTypeResolver */
+            $dateQueryInputObjectTypeResolver = $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
+            $this->dateQueryInputObjectTypeResolver = $dateQueryInputObjectTypeResolver;
+        }
+        return $this->dateQueryInputObjectTypeResolver;
     }
     final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
     {
@@ -45,8 +49,12 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     }
     final protected function getFilterCustomPostStatusEnumTypeResolver(): FilterCustomPostStatusEnumTypeResolver
     {
-        /** @var FilterCustomPostStatusEnumTypeResolver */
-        return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
+        if ($this->filterCustomPostStatusEnumTypeResolver === null) {
+            /** @var FilterCustomPostStatusEnumTypeResolver */
+            $filterCustomPostStatusEnumTypeResolver = $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
+            $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
+        }
+        return $this->filterCustomPostStatusEnumTypeResolver;
     }
     final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
     {
@@ -54,8 +62,12 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     }
     final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {
-        /** @var CustomPostEnumStringScalarTypeResolver */
-        return $this->customPostEnumStringScalarTypeResolver ??= $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
+        if ($this->customPostEnumStringScalarTypeResolver === null) {
+            /** @var CustomPostEnumStringScalarTypeResolver */
+            $customPostEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
+            $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
+        }
+        return $this->customPostEnumStringScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -63,8 +75,12 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setCustomPostStatusFilterInput(CustomPostStatusFilterInput $customPostStatusFilterInput): void
     {
@@ -72,8 +88,12 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     }
     final protected function getCustomPostStatusFilterInput(): CustomPostStatusFilterInput
     {
-        /** @var CustomPostStatusFilterInput */
-        return $this->customPostStatusFilterInput ??= $this->instanceManager->getInstance(CustomPostStatusFilterInput::class);
+        if ($this->customPostStatusFilterInput === null) {
+            /** @var CustomPostStatusFilterInput */
+            $customPostStatusFilterInput = $this->instanceManager->getInstance(CustomPostStatusFilterInput::class);
+            $this->customPostStatusFilterInput = $customPostStatusFilterInput;
+        }
+        return $this->customPostStatusFilterInput;
     }
     final public function setUnionCustomPostTypesFilterInput(UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput): void
     {
@@ -81,8 +101,12 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     }
     final protected function getUnionCustomPostTypesFilterInput(): UnionCustomPostTypesFilterInput
     {
-        /** @var UnionCustomPostTypesFilterInput */
-        return $this->unionCustomPostTypesFilterInput ??= $this->instanceManager->getInstance(UnionCustomPostTypesFilterInput::class);
+        if ($this->unionCustomPostTypesFilterInput === null) {
+            /** @var UnionCustomPostTypesFilterInput */
+            $unionCustomPostTypesFilterInput = $this->instanceManager->getInstance(UnionCustomPostTypesFilterInput::class);
+            $this->unionCustomPostTypesFilterInput = $unionCustomPostTypesFilterInput;
+        }
+        return $this->unionCustomPostTypesFilterInput;
     }
     final public function setSearchFilterInput(SearchFilterInput $seachFilterInput): void
     {
@@ -90,8 +114,12 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
-        /** @var SearchFilterInput */
-        return $this->seachFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
+        if ($this->seachFilterInput === null) {
+            /** @var SearchFilterInput */
+            $seachFilterInput = $this->instanceManager->getInstance(SearchFilterInput::class);
+            $this->seachFilterInput = $seachFilterInput;
+        }
+        return $this->seachFilterInput;
     }
 
     /**

@@ -26,8 +26,12 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getDateQueryInputObjectTypeResolver(): DateQueryInputObjectTypeResolver
     {
-        /** @var DateQueryInputObjectTypeResolver */
-        return $this->dateQueryInputObjectTypeResolver ??= $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
+        if ($this->dateQueryInputObjectTypeResolver === null) {
+            /** @var DateQueryInputObjectTypeResolver */
+            $dateQueryInputObjectTypeResolver = $this->instanceManager->getInstance(DateQueryInputObjectTypeResolver::class);
+            $this->dateQueryInputObjectTypeResolver = $dateQueryInputObjectTypeResolver;
+        }
+        return $this->dateQueryInputObjectTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -35,8 +39,12 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setMimeTypesFilterInput(MimeTypesFilterInput $mimeTypesFilterInput): void
     {
@@ -44,8 +52,12 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getMimeTypesFilterInput(): MimeTypesFilterInput
     {
-        /** @var MimeTypesFilterInput */
-        return $this->mimeTypesFilterInput ??= $this->instanceManager->getInstance(MimeTypesFilterInput::class);
+        if ($this->mimeTypesFilterInput === null) {
+            /** @var MimeTypesFilterInput */
+            $mimeTypesFilterInput = $this->instanceManager->getInstance(MimeTypesFilterInput::class);
+            $this->mimeTypesFilterInput = $mimeTypesFilterInput;
+        }
+        return $this->mimeTypesFilterInput;
     }
     final public function setSearchFilterInput(SearchFilterInput $seachFilterInput): void
     {
@@ -53,8 +65,12 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
-        /** @var SearchFilterInput */
-        return $this->seachFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
+        if ($this->seachFilterInput === null) {
+            /** @var SearchFilterInput */
+            $seachFilterInput = $this->instanceManager->getInstance(SearchFilterInput::class);
+            $this->seachFilterInput = $seachFilterInput;
+        }
+        return $this->seachFilterInput;
     }
 
     /**

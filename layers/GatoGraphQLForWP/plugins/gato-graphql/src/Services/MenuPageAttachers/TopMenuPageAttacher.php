@@ -25,8 +25,12 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getMenuPageHelper(): MenuPageHelper
     {
-        /** @var MenuPageHelper */
-        return $this->menuPageHelper ??= $this->instanceManager->getInstance(MenuPageHelper::class);
+        if ($this->menuPageHelper === null) {
+            /** @var MenuPageHelper */
+            $menuPageHelper = $this->instanceManager->getInstance(MenuPageHelper::class);
+            $this->menuPageHelper = $menuPageHelper;
+        }
+        return $this->menuPageHelper;
     }
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -34,8 +38,12 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
-        /** @var ModuleRegistryInterface */
-        return $this->moduleRegistry ??= $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -43,8 +51,12 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
     final public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
     {
@@ -52,8 +64,12 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getGraphiQLMenuPage(): GraphiQLMenuPage
     {
-        /** @var GraphiQLMenuPage */
-        return $this->graphiQLMenuPage ??= $this->instanceManager->getInstance(GraphiQLMenuPage::class);
+        if ($this->graphiQLMenuPage === null) {
+            /** @var GraphiQLMenuPage */
+            $graphiQLMenuPage = $this->instanceManager->getInstance(GraphiQLMenuPage::class);
+            $this->graphiQLMenuPage = $graphiQLMenuPage;
+        }
+        return $this->graphiQLMenuPage;
     }
     final public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
     {
@@ -61,8 +77,12 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
     final protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
     {
-        /** @var GraphQLVoyagerMenuPage */
-        return $this->graphQLVoyagerMenuPage ??= $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
+        if ($this->graphQLVoyagerMenuPage === null) {
+            /** @var GraphQLVoyagerMenuPage */
+            $graphQLVoyagerMenuPage = $this->instanceManager->getInstance(GraphQLVoyagerMenuPage::class);
+            $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
+        }
+        return $this->graphQLVoyagerMenuPage;
     }
 
     /**

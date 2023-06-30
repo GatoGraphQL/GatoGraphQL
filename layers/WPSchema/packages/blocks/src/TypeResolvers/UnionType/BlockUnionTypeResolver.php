@@ -21,8 +21,12 @@ class BlockUnionTypeResolver extends AbstractUnionTypeResolver
     }
     final protected function getBlockInterfaceTypeResolver(): BlockInterfaceTypeResolver
     {
-        /** @var BlockInterfaceTypeResolver */
-        return $this->blockInterfaceTypeResolver ??= $this->instanceManager->getInstance(BlockInterfaceTypeResolver::class);
+        if ($this->blockInterfaceTypeResolver === null) {
+            /** @var BlockInterfaceTypeResolver */
+            $blockInterfaceTypeResolver = $this->instanceManager->getInstance(BlockInterfaceTypeResolver::class);
+            $this->blockInterfaceTypeResolver = $blockInterfaceTypeResolver;
+        }
+        return $this->blockInterfaceTypeResolver;
     }
     final public function setBlockUnionTypeDataLoader(BlockUnionTypeDataLoader $blockUnionTypeDataLoader): void
     {
@@ -30,8 +34,12 @@ class BlockUnionTypeResolver extends AbstractUnionTypeResolver
     }
     final protected function getBlockUnionTypeDataLoader(): BlockUnionTypeDataLoader
     {
-        /** @var BlockUnionTypeDataLoader */
-        return $this->blockUnionTypeDataLoader ??= $this->instanceManager->getInstance(BlockUnionTypeDataLoader::class);
+        if ($this->blockUnionTypeDataLoader === null) {
+            /** @var BlockUnionTypeDataLoader */
+            $blockUnionTypeDataLoader = $this->instanceManager->getInstance(BlockUnionTypeDataLoader::class);
+            $this->blockUnionTypeDataLoader = $blockUnionTypeDataLoader;
+        }
+        return $this->blockUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

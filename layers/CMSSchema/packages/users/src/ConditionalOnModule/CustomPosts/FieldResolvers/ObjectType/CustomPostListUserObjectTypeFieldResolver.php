@@ -21,8 +21,12 @@ class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListOb
     }
     final protected function getUserCustomPostsFilterInputObjectTypeResolver(): UserCustomPostsFilterInputObjectTypeResolver
     {
-        /** @var UserCustomPostsFilterInputObjectTypeResolver */
-        return $this->userCustomPostsFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserCustomPostsFilterInputObjectTypeResolver::class);
+        if ($this->userCustomPostsFilterInputObjectTypeResolver === null) {
+            /** @var UserCustomPostsFilterInputObjectTypeResolver */
+            $userCustomPostsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(UserCustomPostsFilterInputObjectTypeResolver::class);
+            $this->userCustomPostsFilterInputObjectTypeResolver = $userCustomPostsFilterInputObjectTypeResolver;
+        }
+        return $this->userCustomPostsFilterInputObjectTypeResolver;
     }
 
     /**

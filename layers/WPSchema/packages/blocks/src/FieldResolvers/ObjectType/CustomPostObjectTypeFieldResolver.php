@@ -40,8 +40,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     }
     final protected function getBlockContentParser(): BlockContentParserInterface
     {
-        /** @var BlockContentParserInterface */
-        return $this->blockContentParser ??= $this->instanceManager->getInstance(BlockContentParserInterface::class);
+        if ($this->blockContentParser === null) {
+            /** @var BlockContentParserInterface */
+            $blockContentParser = $this->instanceManager->getInstance(BlockContentParserInterface::class);
+            $this->blockContentParser = $blockContentParser;
+        }
+        return $this->blockContentParser;
     }
     final public function setBlockFilterByInputObjectTypeResolver(BlockFilterByInputObjectTypeResolver $blockFilterByInputObjectTypeResolver): void
     {
@@ -49,8 +53,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     }
     final protected function getBlockFilterByInputObjectTypeResolver(): BlockFilterByInputObjectTypeResolver
     {
-        /** @var BlockFilterByInputObjectTypeResolver */
-        return $this->blockFilterByInputObjectTypeResolver ??= $this->instanceManager->getInstance(BlockFilterByInputObjectTypeResolver::class);
+        if ($this->blockFilterByInputObjectTypeResolver === null) {
+            /** @var BlockFilterByInputObjectTypeResolver */
+            $blockFilterByInputObjectTypeResolver = $this->instanceManager->getInstance(BlockFilterByInputObjectTypeResolver::class);
+            $this->blockFilterByInputObjectTypeResolver = $blockFilterByInputObjectTypeResolver;
+        }
+        return $this->blockFilterByInputObjectTypeResolver;
     }
     final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -58,8 +66,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
-        /** @var JSONObjectScalarTypeResolver */
-        return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+        if ($this->jsonObjectScalarTypeResolver === null) {
+            /** @var JSONObjectScalarTypeResolver */
+            $jsonObjectScalarTypeResolver = $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
+            $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        }
+        return $this->jsonObjectScalarTypeResolver;
     }
 
     /**

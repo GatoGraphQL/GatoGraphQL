@@ -20,8 +20,12 @@ class ComponentPathsHookSet extends AbstractHookSet
     }
     final protected function getComponentPaths(): ComponentPaths
     {
-        /** @var ComponentPaths */
-        return $this->componentPaths ??= $this->instanceManager->getInstance(ComponentPaths::class);
+        if ($this->componentPaths === null) {
+            /** @var ComponentPaths */
+            $componentPaths = $this->instanceManager->getInstance(ComponentPaths::class);
+            $this->componentPaths = $componentPaths;
+        }
+        return $this->componentPaths;
     }
 
     protected function init(): void

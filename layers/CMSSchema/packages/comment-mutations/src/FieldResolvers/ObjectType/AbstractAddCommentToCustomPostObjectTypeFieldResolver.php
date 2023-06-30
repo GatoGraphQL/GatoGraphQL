@@ -40,8 +40,12 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        /** @var CommentObjectTypeResolver */
-        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        if ($this->commentObjectTypeResolver === null) {
+            /** @var CommentObjectTypeResolver */
+            $commentObjectTypeResolver = $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+            $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        }
+        return $this->commentObjectTypeResolver;
     }
     final public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
     {
@@ -49,8 +53,12 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     }
     final protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
     {
-        /** @var AddCommentToCustomPostMutationResolver */
-        return $this->addCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
+        if ($this->addCommentToCustomPostMutationResolver === null) {
+            /** @var AddCommentToCustomPostMutationResolver */
+            $addCommentToCustomPostMutationResolver = $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
+            $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
+        }
+        return $this->addCommentToCustomPostMutationResolver;
     }
     final public function setCustomPostAddCommentInputObjectTypeResolver(CustomPostAddCommentInputObjectTypeResolver $customPostAddCommentInputObjectTypeResolver): void
     {
@@ -58,8 +66,12 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     }
     final protected function getCustomPostAddCommentInputObjectTypeResolver(): CustomPostAddCommentInputObjectTypeResolver
     {
-        /** @var CustomPostAddCommentInputObjectTypeResolver */
-        return $this->customPostAddCommentInputObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostAddCommentInputObjectTypeResolver::class);
+        if ($this->customPostAddCommentInputObjectTypeResolver === null) {
+            /** @var CustomPostAddCommentInputObjectTypeResolver */
+            $customPostAddCommentInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostAddCommentInputObjectTypeResolver::class);
+            $this->customPostAddCommentInputObjectTypeResolver = $customPostAddCommentInputObjectTypeResolver;
+        }
+        return $this->customPostAddCommentInputObjectTypeResolver;
     }
     final public function setCustomPostAddCommentMutationPayloadObjectTypeResolver(CustomPostAddCommentMutationPayloadObjectTypeResolver $customPostAddCommentMutationPayloadObjectTypeResolver): void
     {
@@ -67,8 +79,12 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     }
     final protected function getCustomPostAddCommentMutationPayloadObjectTypeResolver(): CustomPostAddCommentMutationPayloadObjectTypeResolver
     {
-        /** @var CustomPostAddCommentMutationPayloadObjectTypeResolver */
-        return $this->customPostAddCommentMutationPayloadObjectTypeResolver ??= $this->instanceManager->getInstance(CustomPostAddCommentMutationPayloadObjectTypeResolver::class);
+        if ($this->customPostAddCommentMutationPayloadObjectTypeResolver === null) {
+            /** @var CustomPostAddCommentMutationPayloadObjectTypeResolver */
+            $customPostAddCommentMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(CustomPostAddCommentMutationPayloadObjectTypeResolver::class);
+            $this->customPostAddCommentMutationPayloadObjectTypeResolver = $customPostAddCommentMutationPayloadObjectTypeResolver;
+        }
+        return $this->customPostAddCommentMutationPayloadObjectTypeResolver;
     }
     final public function setPayloadableAddCommentToCustomPostMutationResolver(PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver): void
     {
@@ -76,8 +92,12 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     }
     final protected function getPayloadableAddCommentToCustomPostMutationResolver(): PayloadableAddCommentToCustomPostMutationResolver
     {
-        /** @var PayloadableAddCommentToCustomPostMutationResolver */
-        return $this->payloadableAddCommentToCustomPostMutationResolver ??= $this->instanceManager->getInstance(PayloadableAddCommentToCustomPostMutationResolver::class);
+        if ($this->payloadableAddCommentToCustomPostMutationResolver === null) {
+            /** @var PayloadableAddCommentToCustomPostMutationResolver */
+            $payloadableAddCommentToCustomPostMutationResolver = $this->instanceManager->getInstance(PayloadableAddCommentToCustomPostMutationResolver::class);
+            $this->payloadableAddCommentToCustomPostMutationResolver = $payloadableAddCommentToCustomPostMutationResolver;
+        }
+        return $this->payloadableAddCommentToCustomPostMutationResolver;
     }
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
     {
@@ -85,8 +105,12 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        /** @var CommentTypeAPIInterface */
-        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+        if ($this->commentTypeAPI === null) {
+            /** @var CommentTypeAPIInterface */
+            $commentTypeAPI = $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+            $this->commentTypeAPI = $commentTypeAPI;
+        }
+        return $this->commentTypeAPI;
     }
 
     /**

@@ -30,8 +30,12 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
     }
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
-        /** @var TypeSerializationServiceInterface */
-        return $this->typeSerializationService ??= $this->instanceManager->getInstance(TypeSerializationServiceInterface::class);
+        if ($this->typeSerializationService === null) {
+            /** @var TypeSerializationServiceInterface */
+            $typeSerializationService = $this->instanceManager->getInstance(TypeSerializationServiceInterface::class);
+            $this->typeSerializationService = $typeSerializationService;
+        }
+        return $this->typeSerializationService;
     }
 
     public function getDirectiveName(): string

@@ -24,8 +24,12 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
@@ -33,8 +37,12 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
-        /** @var IncludeFilterInput */
-        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
+        if ($this->includeFilterInput === null) {
+            /** @var IncludeFilterInput */
+            $includeFilterInput = $this->instanceManager->getInstance(IncludeFilterInput::class);
+            $this->includeFilterInput = $includeFilterInput;
+        }
+        return $this->includeFilterInput;
     }
     final public function setExcludeFilterInput(ExcludeFilterInput $excludeFilterInput): void
     {
@@ -42,8 +50,12 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
     }
     final protected function getExcludeFilterInput(): ExcludeFilterInput
     {
-        /** @var ExcludeFilterInput */
-        return $this->excludeFilterInput ??= $this->instanceManager->getInstance(ExcludeFilterInput::class);
+        if ($this->excludeFilterInput === null) {
+            /** @var ExcludeFilterInput */
+            $excludeFilterInput = $this->instanceManager->getInstance(ExcludeFilterInput::class);
+            $this->excludeFilterInput = $excludeFilterInput;
+        }
+        return $this->excludeFilterInput;
     }
 
     public function getTypeName(): string

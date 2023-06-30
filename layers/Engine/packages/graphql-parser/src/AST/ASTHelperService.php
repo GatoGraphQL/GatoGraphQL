@@ -25,8 +25,12 @@ class ASTHelperService implements ASTHelperServiceInterface
     }
     final protected function getASTNodeDuplicatorService(): ASTNodeDuplicatorServiceInterface
     {
-        /** @var ASTNodeDuplicatorServiceInterface */
-        return $this->astNodeDuplicatorService ??= $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
+        if ($this->astNodeDuplicatorService === null) {
+            /** @var ASTNodeDuplicatorServiceInterface */
+            $astNodeDuplicatorService = $this->instanceManager->getInstance(ASTNodeDuplicatorServiceInterface::class);
+            $this->astNodeDuplicatorService = $astNodeDuplicatorService;
+        }
+        return $this->astNodeDuplicatorService;
     }
 
     /**

@@ -21,8 +21,12 @@ class TagUnionTypeResolver extends AbstractUnionTypeResolver
     }
     final protected function getTagUnionTypeDataLoader(): TagUnionTypeDataLoader
     {
-        /** @var TagUnionTypeDataLoader */
-        return $this->tagUnionTypeDataLoader ??= $this->instanceManager->getInstance(TagUnionTypeDataLoader::class);
+        if ($this->tagUnionTypeDataLoader === null) {
+            /** @var TagUnionTypeDataLoader */
+            $tagUnionTypeDataLoader = $this->instanceManager->getInstance(TagUnionTypeDataLoader::class);
+            $this->tagUnionTypeDataLoader = $tagUnionTypeDataLoader;
+        }
+        return $this->tagUnionTypeDataLoader;
     }
     final public function setTagInterfaceTypeResolver(TagInterfaceTypeResolver $tagInterfaceTypeResolver): void
     {
@@ -30,8 +34,12 @@ class TagUnionTypeResolver extends AbstractUnionTypeResolver
     }
     final protected function getTagInterfaceTypeResolver(): TagInterfaceTypeResolver
     {
-        /** @var TagInterfaceTypeResolver */
-        return $this->tagInterfaceTypeResolver ??= $this->instanceManager->getInstance(TagInterfaceTypeResolver::class);
+        if ($this->tagInterfaceTypeResolver === null) {
+            /** @var TagInterfaceTypeResolver */
+            $tagInterfaceTypeResolver = $this->instanceManager->getInstance(TagInterfaceTypeResolver::class);
+            $this->tagInterfaceTypeResolver = $tagInterfaceTypeResolver;
+        }
+        return $this->tagInterfaceTypeResolver;
     }
 
     public function getTypeName(): string

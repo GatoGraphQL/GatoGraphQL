@@ -22,8 +22,12 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
     }
     final protected function getQueryableTagTypeAPI(): QueryableTagTypeAPIInterface
     {
-        /** @var QueryableTagTypeAPIInterface */
-        return $this->queryableTagTypeAPI ??= $this->instanceManager->getInstance(QueryableTagTypeAPIInterface::class);
+        if ($this->queryableTagTypeAPI === null) {
+            /** @var QueryableTagTypeAPIInterface */
+            $queryableTagTypeAPI = $this->instanceManager->getInstance(QueryableTagTypeAPIInterface::class);
+            $this->queryableTagTypeAPI = $queryableTagTypeAPI;
+        }
+        return $this->queryableTagTypeAPI;
     }
     final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void
     {
@@ -31,8 +35,12 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
     }
     final protected function getGenericTagObjectTypeResolver(): GenericTagObjectTypeResolver
     {
-        /** @var GenericTagObjectTypeResolver */
-        return $this->genericTagObjectTypeResolver ??= $this->instanceManager->getInstance(GenericTagObjectTypeResolver::class);
+        if ($this->genericTagObjectTypeResolver === null) {
+            /** @var GenericTagObjectTypeResolver */
+            $genericTagObjectTypeResolver = $this->instanceManager->getInstance(GenericTagObjectTypeResolver::class);
+            $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
+        }
+        return $this->genericTagObjectTypeResolver;
     }
 
     public function getTagTypeAPI(): TagTypeAPIInterface

@@ -63,8 +63,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
-        /** @var CommentTypeAPIInterface */
-        return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+        if ($this->commentTypeAPI === null) {
+            /** @var CommentTypeAPIInterface */
+            $commentTypeAPI = $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
+            $this->commentTypeAPI = $commentTypeAPI;
+        }
+        return $this->commentTypeAPI;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -72,8 +76,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
     {
@@ -81,8 +89,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
     {
-        /** @var HTMLScalarTypeResolver */
-        return $this->htmlScalarTypeResolver ??= $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
+        if ($this->htmlScalarTypeResolver === null) {
+            /** @var HTMLScalarTypeResolver */
+            $htmlScalarTypeResolver = $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
+            $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
+        }
+        return $this->htmlScalarTypeResolver;
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -90,8 +102,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        /** @var URLScalarTypeResolver */
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
     }
     final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
     {
@@ -99,8 +115,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
-        /** @var EmailScalarTypeResolver */
-        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+        if ($this->emailScalarTypeResolver === null) {
+            /** @var EmailScalarTypeResolver */
+            $emailScalarTypeResolver = $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+            $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+        }
+        return $this->emailScalarTypeResolver;
     }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -108,8 +128,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -117,8 +141,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
     {
@@ -126,8 +154,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
-        /** @var DateTimeScalarTypeResolver */
-        return $this->dateTimeScalarTypeResolver ??= $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+        if ($this->dateTimeScalarTypeResolver === null) {
+            /** @var DateTimeScalarTypeResolver */
+            $dateTimeScalarTypeResolver = $this->instanceManager->getInstance(DateTimeScalarTypeResolver::class);
+            $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
+        }
+        return $this->dateTimeScalarTypeResolver;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -135,8 +167,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
-        /** @var IntScalarTypeResolver */
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
     }
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
@@ -144,8 +180,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
-        /** @var CommentObjectTypeResolver */
-        return $this->commentObjectTypeResolver ??= $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+        if ($this->commentObjectTypeResolver === null) {
+            /** @var CommentObjectTypeResolver */
+            $commentObjectTypeResolver = $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
+            $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        }
+        return $this->commentObjectTypeResolver;
     }
     final public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
     {
@@ -153,8 +193,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
     {
-        /** @var CommentStatusEnumTypeResolver */
-        return $this->commentStatusEnumTypeResolver ??= $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
+        if ($this->commentStatusEnumTypeResolver === null) {
+            /** @var CommentStatusEnumTypeResolver */
+            $commentStatusEnumTypeResolver = $this->instanceManager->getInstance(CommentStatusEnumTypeResolver::class);
+            $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
+        }
+        return $this->commentStatusEnumTypeResolver;
     }
     final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
     {
@@ -162,8 +206,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getDateFormatter(): DateFormatterInterface
     {
-        /** @var DateFormatterInterface */
-        return $this->dateFormatter ??= $this->instanceManager->getInstance(DateFormatterInterface::class);
+        if ($this->dateFormatter === null) {
+            /** @var DateFormatterInterface */
+            $dateFormatter = $this->instanceManager->getInstance(DateFormatterInterface::class);
+            $this->dateFormatter = $dateFormatter;
+        }
+        return $this->dateFormatter;
     }
     final public function setCommentResponsesFilterInputObjectTypeResolver(CommentResponsesFilterInputObjectTypeResolver $commentResponsesFilterInputObjectTypeResolver): void
     {
@@ -171,8 +219,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getCommentResponsesFilterInputObjectTypeResolver(): CommentResponsesFilterInputObjectTypeResolver
     {
-        /** @var CommentResponsesFilterInputObjectTypeResolver */
-        return $this->commentResponsesFilterInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentResponsesFilterInputObjectTypeResolver::class);
+        if ($this->commentResponsesFilterInputObjectTypeResolver === null) {
+            /** @var CommentResponsesFilterInputObjectTypeResolver */
+            $commentResponsesFilterInputObjectTypeResolver = $this->instanceManager->getInstance(CommentResponsesFilterInputObjectTypeResolver::class);
+            $this->commentResponsesFilterInputObjectTypeResolver = $commentResponsesFilterInputObjectTypeResolver;
+        }
+        return $this->commentResponsesFilterInputObjectTypeResolver;
     }
     final public function setCommentResponsePaginationInputObjectTypeResolver(CommentResponsePaginationInputObjectTypeResolver $commentResponsePaginationInputObjectTypeResolver): void
     {
@@ -180,8 +232,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getCommentResponsePaginationInputObjectTypeResolver(): CommentResponsePaginationInputObjectTypeResolver
     {
-        /** @var CommentResponsePaginationInputObjectTypeResolver */
-        return $this->commentResponsePaginationInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentResponsePaginationInputObjectTypeResolver::class);
+        if ($this->commentResponsePaginationInputObjectTypeResolver === null) {
+            /** @var CommentResponsePaginationInputObjectTypeResolver */
+            $commentResponsePaginationInputObjectTypeResolver = $this->instanceManager->getInstance(CommentResponsePaginationInputObjectTypeResolver::class);
+            $this->commentResponsePaginationInputObjectTypeResolver = $commentResponsePaginationInputObjectTypeResolver;
+        }
+        return $this->commentResponsePaginationInputObjectTypeResolver;
     }
     final public function setCommentSortInputObjectTypeResolver(CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver): void
     {
@@ -189,8 +245,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getCommentSortInputObjectTypeResolver(): CommentSortInputObjectTypeResolver
     {
-        /** @var CommentSortInputObjectTypeResolver */
-        return $this->commentSortInputObjectTypeResolver ??= $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
+        if ($this->commentSortInputObjectTypeResolver === null) {
+            /** @var CommentSortInputObjectTypeResolver */
+            $commentSortInputObjectTypeResolver = $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
+            $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
+        }
+        return $this->commentSortInputObjectTypeResolver;
     }
     final public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
     {
@@ -198,8 +258,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     }
     final protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
     {
-        /** @var CommentTypeEnumTypeResolver */
-        return $this->commentTypeEnumTypeResolver ??= $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
+        if ($this->commentTypeEnumTypeResolver === null) {
+            /** @var CommentTypeEnumTypeResolver */
+            $commentTypeEnumTypeResolver = $this->instanceManager->getInstance(CommentTypeEnumTypeResolver::class);
+            $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
+        }
+        return $this->commentTypeEnumTypeResolver;
     }
 
     /**

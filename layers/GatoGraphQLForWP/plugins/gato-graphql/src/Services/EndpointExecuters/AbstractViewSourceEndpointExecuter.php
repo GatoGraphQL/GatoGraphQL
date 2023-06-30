@@ -23,8 +23,12 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
     final public function setRenderingHelpers(RenderingHelpers $renderingHelpers): void
     {
@@ -32,8 +36,12 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
     }
     final protected function getRenderingHelpers(): RenderingHelpers
     {
-        /** @var RenderingHelpers */
-        return $this->renderingHelpers ??= $this->instanceManager->getInstance(RenderingHelpers::class);
+        if ($this->renderingHelpers === null) {
+            /** @var RenderingHelpers */
+            $renderingHelpers = $this->instanceManager->getInstance(RenderingHelpers::class);
+            $this->renderingHelpers = $renderingHelpers;
+        }
+        return $this->renderingHelpers;
     }
 
     protected function getView(): string

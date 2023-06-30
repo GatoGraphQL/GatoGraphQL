@@ -26,8 +26,12 @@ abstract class AbstractClient extends AbstractEndpointHandler
     }
     final protected function getTemplateHelpers(): TemplateHelpersInterface
     {
-        /** @var TemplateHelpersInterface */
-        return $this->templateHelpers ??= $this->instanceManager->getInstance(TemplateHelpersInterface::class);
+        if ($this->templateHelpers === null) {
+            /** @var TemplateHelpersInterface */
+            $templateHelpers = $this->instanceManager->getInstance(TemplateHelpersInterface::class);
+            $this->templateHelpers = $templateHelpers;
+        }
+        return $this->templateHelpers;
     }
 
     /**

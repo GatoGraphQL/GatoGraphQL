@@ -30,8 +30,12 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -39,8 +43,12 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        /** @var BooleanScalarTypeResolver */
-        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
     final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
     {
@@ -48,8 +56,12 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getParentIDFilterInput(): ParentIDFilterInput
     {
-        /** @var ParentIDFilterInput */
-        return $this->parentIDFilterInput ??= $this->instanceManager->getInstance(ParentIDFilterInput::class);
+        if ($this->parentIDFilterInput === null) {
+            /** @var ParentIDFilterInput */
+            $parentIDFilterInput = $this->instanceManager->getInstance(ParentIDFilterInput::class);
+            $this->parentIDFilterInput = $parentIDFilterInput;
+        }
+        return $this->parentIDFilterInput;
     }
     final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
     {
@@ -57,8 +69,12 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
-        /** @var SearchFilterInput */
-        return $this->searchFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
+        if ($this->searchFilterInput === null) {
+            /** @var SearchFilterInput */
+            $searchFilterInput = $this->instanceManager->getInstance(SearchFilterInput::class);
+            $this->searchFilterInput = $searchFilterInput;
+        }
+        return $this->searchFilterInput;
     }
     final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
     {
@@ -66,8 +82,12 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getSlugsFilterInput(): SlugsFilterInput
     {
-        /** @var SlugsFilterInput */
-        return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
+        if ($this->slugsFilterInput === null) {
+            /** @var SlugsFilterInput */
+            $slugsFilterInput = $this->instanceManager->getInstance(SlugsFilterInput::class);
+            $this->slugsFilterInput = $slugsFilterInput;
+        }
+        return $this->slugsFilterInput;
     }
     final public function setHideEmptyFilterInput(HideEmptyFilterInput $hideEmptyFilterInput): void
     {
@@ -75,8 +95,12 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     }
     final protected function getHideEmptyFilterInput(): HideEmptyFilterInput
     {
-        /** @var HideEmptyFilterInput */
-        return $this->hideEmptyFilterInput ??= $this->instanceManager->getInstance(HideEmptyFilterInput::class);
+        if ($this->hideEmptyFilterInput === null) {
+            /** @var HideEmptyFilterInput */
+            $hideEmptyFilterInput = $this->instanceManager->getInstance(HideEmptyFilterInput::class);
+            $this->hideEmptyFilterInput = $hideEmptyFilterInput;
+        }
+        return $this->hideEmptyFilterInput;
     }
 
     abstract protected function addParentIDInputField(): bool;

@@ -18,8 +18,12 @@ class LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver 
     }
     final protected function getLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader
     {
-        /** @var LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader */
-        return $this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader::class);
+        if ($this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader === null) {
+            /** @var LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader */
+            $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader::class);
+            $this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

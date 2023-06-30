@@ -22,8 +22,12 @@ abstract class AbstractCustomPostContentAsOneofInputObjectTypeResolver extends A
     }
     final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
     {
-        /** @var HTMLScalarTypeResolver */
-        return $this->htmlScalarTypeResolver ??= $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
+        if ($this->htmlScalarTypeResolver === null) {
+            /** @var HTMLScalarTypeResolver */
+            $htmlScalarTypeResolver = $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
+            $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
+        }
+        return $this->htmlScalarTypeResolver;
     }
 
     protected function isOneInputValueMandatory(): bool

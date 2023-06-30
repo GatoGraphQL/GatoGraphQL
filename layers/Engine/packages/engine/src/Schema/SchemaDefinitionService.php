@@ -23,8 +23,12 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     }
     final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
-        /** @var RootObjectTypeResolver */
-        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+        if ($this->rootObjectTypeResolver === null) {
+            /** @var RootObjectTypeResolver */
+            $rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+            $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        }
+        return $this->rootObjectTypeResolver;
     }
     final public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
     {
@@ -32,8 +36,12 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     }
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
-        /** @var AnyBuiltInScalarScalarTypeResolver */
-        return $this->anyBuiltInScalarScalarTypeResolver ??= $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+        if ($this->anyBuiltInScalarScalarTypeResolver === null) {
+            /** @var AnyBuiltInScalarScalarTypeResolver */
+            $anyBuiltInScalarScalarTypeResolver = $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+            $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+        }
+        return $this->anyBuiltInScalarScalarTypeResolver;
     }
 
     /**

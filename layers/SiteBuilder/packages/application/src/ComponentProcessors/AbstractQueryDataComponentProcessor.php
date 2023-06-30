@@ -22,8 +22,12 @@ abstract class AbstractQueryDataComponentProcessor extends AbstractComponentProc
     }
     final protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler
     {
-        /** @var ActionExecutionQueryInputOutputHandler */
-        return $this->actionExecutionQueryInputOutputHandler ??= $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
+        if ($this->actionExecutionQueryInputOutputHandler === null) {
+            /** @var ActionExecutionQueryInputOutputHandler */
+            $actionExecutionQueryInputOutputHandler = $this->instanceManager->getInstance(ActionExecutionQueryInputOutputHandler::class);
+            $this->actionExecutionQueryInputOutputHandler = $actionExecutionQueryInputOutputHandler;
+        }
+        return $this->actionExecutionQueryInputOutputHandler;
     }
 
     /**

@@ -32,8 +32,12 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -41,8 +45,12 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
     {
@@ -50,8 +58,12 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
-        /** @var EmailScalarTypeResolver */
-        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+        if ($this->emailScalarTypeResolver === null) {
+            /** @var EmailScalarTypeResolver */
+            $emailScalarTypeResolver = $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+            $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+        }
+        return $this->emailScalarTypeResolver;
     }
     final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
@@ -59,8 +71,12 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
-        /** @var IncludeFilterInput */
-        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
+        if ($this->includeFilterInput === null) {
+            /** @var IncludeFilterInput */
+            $includeFilterInput = $this->instanceManager->getInstance(IncludeFilterInput::class);
+            $this->includeFilterInput = $includeFilterInput;
+        }
+        return $this->includeFilterInput;
     }
     final public function setUsernameFilterInput(UsernameFilterInput $usernameFilterInput): void
     {
@@ -68,8 +84,12 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     }
     final protected function getUsernameFilterInput(): UsernameFilterInput
     {
-        /** @var UsernameFilterInput */
-        return $this->usernameFilterInput ??= $this->instanceManager->getInstance(UsernameFilterInput::class);
+        if ($this->usernameFilterInput === null) {
+            /** @var UsernameFilterInput */
+            $usernameFilterInput = $this->instanceManager->getInstance(UsernameFilterInput::class);
+            $this->usernameFilterInput = $usernameFilterInput;
+        }
+        return $this->usernameFilterInput;
     }
     final public function setEmailFilterInput(EmailFilterInput $emailFilterInput): void
     {
@@ -77,8 +97,12 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     }
     final protected function getEmailFilterInput(): EmailFilterInput
     {
-        /** @var EmailFilterInput */
-        return $this->emailFilterInput ??= $this->instanceManager->getInstance(EmailFilterInput::class);
+        if ($this->emailFilterInput === null) {
+            /** @var EmailFilterInput */
+            $emailFilterInput = $this->instanceManager->getInstance(EmailFilterInput::class);
+            $this->emailFilterInput = $emailFilterInput;
+        }
+        return $this->emailFilterInput;
     }
 
     public function getTypeName(): string

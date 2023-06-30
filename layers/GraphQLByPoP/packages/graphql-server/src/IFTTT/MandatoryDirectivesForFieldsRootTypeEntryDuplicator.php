@@ -27,8 +27,12 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     }
     final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
-        /** @var RootObjectTypeResolver */
-        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+        if ($this->rootObjectTypeResolver === null) {
+            /** @var RootObjectTypeResolver */
+            $rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+            $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        }
+        return $this->rootObjectTypeResolver;
     }
     final public function setTypeResolverHelper(TypeResolverHelperInterface $typeResolverHelper): void
     {
@@ -36,8 +40,12 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     }
     final protected function getTypeResolverHelper(): TypeResolverHelperInterface
     {
-        /** @var TypeResolverHelperInterface */
-        return $this->typeResolverHelper ??= $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
+        if ($this->typeResolverHelper === null) {
+            /** @var TypeResolverHelperInterface */
+            $typeResolverHelper = $this->instanceManager->getInstance(TypeResolverHelperInterface::class);
+            $this->typeResolverHelper = $typeResolverHelper;
+        }
+        return $this->typeResolverHelper;
     }
 
     /**

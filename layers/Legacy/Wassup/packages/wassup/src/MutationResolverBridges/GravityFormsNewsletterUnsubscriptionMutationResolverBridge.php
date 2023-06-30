@@ -23,8 +23,12 @@ class GravityFormsNewsletterUnsubscriptionMutationResolverBridge extends Abstrac
     }
     final protected function getGravityFormsNewsletterUnsubscriptionMutationResolver(): GravityFormsNewsletterUnsubscriptionMutationResolver
     {
-        /** @var GravityFormsNewsletterUnsubscriptionMutationResolver */
-        return $this->gravityFormsNewsletterUnsubscriptionMutationResolver ??= $this->instanceManager->getInstance(GravityFormsNewsletterUnsubscriptionMutationResolver::class);
+        if ($this->gravityFormsNewsletterUnsubscriptionMutationResolver === null) {
+            /** @var GravityFormsNewsletterUnsubscriptionMutationResolver */
+            $gravityFormsNewsletterUnsubscriptionMutationResolver = $this->instanceManager->getInstance(GravityFormsNewsletterUnsubscriptionMutationResolver::class);
+            $this->gravityFormsNewsletterUnsubscriptionMutationResolver = $gravityFormsNewsletterUnsubscriptionMutationResolver;
+        }
+        return $this->gravityFormsNewsletterUnsubscriptionMutationResolver;
     }
     
     public function getMutationResolver(): MutationResolverInterface

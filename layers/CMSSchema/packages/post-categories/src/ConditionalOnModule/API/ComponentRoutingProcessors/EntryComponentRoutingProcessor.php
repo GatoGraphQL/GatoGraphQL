@@ -28,8 +28,12 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
-        /** @var PostCategoryTypeAPIInterface */
-        return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+        if ($this->postCategoryTypeAPI === null) {
+            /** @var PostCategoryTypeAPIInterface */
+            $postCategoryTypeAPI = $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+            $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+        }
+        return $this->postCategoryTypeAPI;
     }
 
     /**

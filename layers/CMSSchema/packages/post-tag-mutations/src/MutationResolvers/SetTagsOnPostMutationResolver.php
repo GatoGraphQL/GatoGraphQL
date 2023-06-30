@@ -18,8 +18,12 @@ class SetTagsOnPostMutationResolver extends AbstractSetTagsOnCustomPostMutationR
     }
     final protected function getPostTagTypeMutationAPI(): PostTagTypeMutationAPIInterface
     {
-        /** @var PostTagTypeMutationAPIInterface */
-        return $this->postCategoryTypeMutationAPIInterface ??= $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
+        if ($this->postCategoryTypeMutationAPIInterface === null) {
+            /** @var PostTagTypeMutationAPIInterface */
+            $postCategoryTypeMutationAPIInterface = $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
+            $this->postCategoryTypeMutationAPIInterface = $postCategoryTypeMutationAPIInterface;
+        }
+        return $this->postCategoryTypeMutationAPIInterface;
     }
 
     protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface

@@ -20,8 +20,12 @@ class AdminGraphQLEndpointExecuterAppStateProvider extends AbstractGraphQLEndpoi
     }
     final protected function getAdminEndpointExecuter(): AdminEndpointExecuter
     {
-        /** @var AdminEndpointExecuter */
-        return $this->adminEndpointExecuter ??= $this->instanceManager->getInstance(AdminEndpointExecuter::class);
+        if ($this->adminEndpointExecuter === null) {
+            /** @var AdminEndpointExecuter */
+            $adminEndpointExecuter = $this->instanceManager->getInstance(AdminEndpointExecuter::class);
+            $this->adminEndpointExecuter = $adminEndpointExecuter;
+        }
+        return $this->adminEndpointExecuter;
     }
     final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
     {
@@ -29,8 +33,12 @@ class AdminGraphQLEndpointExecuterAppStateProvider extends AbstractGraphQLEndpoi
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
-        /** @var UserAuthorizationInterface */
-        return $this->userAuthorization ??= $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
 
     protected function getGraphQLEndpointExecuter(): GraphQLEndpointExecuterInterface

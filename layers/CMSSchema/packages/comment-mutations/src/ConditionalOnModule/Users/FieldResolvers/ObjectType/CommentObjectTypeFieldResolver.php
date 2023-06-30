@@ -29,8 +29,12 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     }
     final protected function getUserCommentTypeAPI(): UserCommentTypeAPIInterface
     {
-        /** @var UserCommentTypeAPIInterface */
-        return $this->userCommentTypeAPI ??= $this->instanceManager->getInstance(UserCommentTypeAPIInterface::class);
+        if ($this->userCommentTypeAPI === null) {
+            /** @var UserCommentTypeAPIInterface */
+            $userCommentTypeAPI = $this->instanceManager->getInstance(UserCommentTypeAPIInterface::class);
+            $this->userCommentTypeAPI = $userCommentTypeAPI;
+        }
+        return $this->userCommentTypeAPI;
     }
     final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
@@ -38,8 +42,12 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
+        }
+        return $this->userTypeAPI;
     }
 
     /**

@@ -22,8 +22,12 @@ class EndpointGraphiQLBlock extends AbstractBlock implements EndpointEditorBlock
     }
     final protected function getCustomEndpointBlockCategory(): CustomEndpointBlockCategory
     {
-        /** @var CustomEndpointBlockCategory */
-        return $this->customEndpointBlockCategory ??= $this->instanceManager->getInstance(CustomEndpointBlockCategory::class);
+        if ($this->customEndpointBlockCategory === null) {
+            /** @var CustomEndpointBlockCategory */
+            $customEndpointBlockCategory = $this->instanceManager->getInstance(CustomEndpointBlockCategory::class);
+            $this->customEndpointBlockCategory = $customEndpointBlockCategory;
+        }
+        return $this->customEndpointBlockCategory;
     }
 
     protected function getBlockName(): string

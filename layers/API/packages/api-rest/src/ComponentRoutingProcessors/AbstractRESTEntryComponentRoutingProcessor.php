@@ -21,8 +21,12 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
     }
     final protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
     {
-        /** @var RESTDataStructureFormatter */
-        return $this->restDataStructureFormatter ??= $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
+        if ($this->restDataStructureFormatter === null) {
+            /** @var RESTDataStructureFormatter */
+            $restDataStructureFormatter = $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
+            $this->restDataStructureFormatter = $restDataStructureFormatter;
+        }
+        return $this->restDataStructureFormatter;
     }
 
     public function getGraphQLQueryToResolveRESTEndpoint(): string

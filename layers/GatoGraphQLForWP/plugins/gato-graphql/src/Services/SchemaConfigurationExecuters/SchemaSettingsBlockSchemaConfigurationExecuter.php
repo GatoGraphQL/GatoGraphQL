@@ -21,8 +21,12 @@ class SchemaSettingsBlockSchemaConfigurationExecuter extends AbstractSchemaAllow
     }
     final protected function getSchemaConfigSchemaSettingsBlock(): SchemaConfigSchemaSettingsBlock
     {
-        /** @var SchemaConfigSchemaSettingsBlock */
-        return $this->schemaConfigSchemaSettingsBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaSettingsBlock::class);
+        if ($this->schemaConfigSchemaSettingsBlock === null) {
+            /** @var SchemaConfigSchemaSettingsBlock */
+            $schemaConfigSchemaSettingsBlock = $this->instanceManager->getInstance(SchemaConfigSchemaSettingsBlock::class);
+            $this->schemaConfigSchemaSettingsBlock = $schemaConfigSchemaSettingsBlock;
+        }
+        return $this->schemaConfigSchemaSettingsBlock;
     }
 
     public function getEnablingModule(): ?string

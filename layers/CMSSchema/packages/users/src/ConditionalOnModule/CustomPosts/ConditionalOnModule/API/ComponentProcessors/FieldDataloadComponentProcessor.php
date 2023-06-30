@@ -26,8 +26,12 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     }
     final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
-        /** @var CustomPostUnionTypeResolver */
-        return $this->customPostUnionTypeResolver ??= $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+        if ($this->customPostUnionTypeResolver === null) {
+            /** @var CustomPostUnionTypeResolver */
+            $customPostUnionTypeResolver = $this->instanceManager->getInstance(CustomPostUnionTypeResolver::class);
+            $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
+        }
+        return $this->customPostUnionTypeResolver;
     }
     final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
     {
@@ -35,8 +39,12 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
-        /** @var ListQueryInputOutputHandler */
-        return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+        if ($this->listQueryInputOutputHandler === null) {
+            /** @var ListQueryInputOutputHandler */
+            $listQueryInputOutputHandler = $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
+            $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
+        }
+        return $this->listQueryInputOutputHandler;
     }
 
     /**

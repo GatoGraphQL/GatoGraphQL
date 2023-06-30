@@ -17,8 +17,12 @@ class CreatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostLinkM
     }
     final protected function getCreatePostLinkMutationResolver(): CreatePostLinkMutationResolver
     {
-        /** @var CreatePostLinkMutationResolver */
-        return $this->createPostLinkMutationResolver ??= $this->instanceManager->getInstance(CreatePostLinkMutationResolver::class);
+        if ($this->createPostLinkMutationResolver === null) {
+            /** @var CreatePostLinkMutationResolver */
+            $createPostLinkMutationResolver = $this->instanceManager->getInstance(CreatePostLinkMutationResolver::class);
+            $this->createPostLinkMutationResolver = $createPostLinkMutationResolver;
+        }
+        return $this->createPostLinkMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

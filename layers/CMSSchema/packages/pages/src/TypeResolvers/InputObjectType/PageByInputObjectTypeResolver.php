@@ -19,8 +19,12 @@ class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeR
     }
     final protected function getPathOrPathsFilterInput(): PathOrPathsFilterInput
     {
-        /** @var PathOrPathsFilterInput */
-        return $this->pathOrPathsFilterInput ??= $this->instanceManager->getInstance(PathOrPathsFilterInput::class);
+        if ($this->pathOrPathsFilterInput === null) {
+            /** @var PathOrPathsFilterInput */
+            $pathOrPathsFilterInput = $this->instanceManager->getInstance(PathOrPathsFilterInput::class);
+            $this->pathOrPathsFilterInput = $pathOrPathsFilterInput;
+        }
+        return $this->pathOrPathsFilterInput;
     }
 
     public function getTypeName(): string

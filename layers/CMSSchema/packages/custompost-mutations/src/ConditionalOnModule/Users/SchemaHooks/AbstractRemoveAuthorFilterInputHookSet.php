@@ -19,8 +19,12 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
     }
     final protected function getUserCustomPostFilterInputHookSet(): UserCustomPostFilterInputHookSet
     {
-        /** @var UserCustomPostFilterInputHookSet */
-        return $this->userCustomPostFilterInputHookSet ??= $this->instanceManager->getInstance(UserCustomPostFilterInputHookSet::class);
+        if ($this->userCustomPostFilterInputHookSet === null) {
+            /** @var UserCustomPostFilterInputHookSet */
+            $userCustomPostFilterInputHookSet = $this->instanceManager->getInstance(UserCustomPostFilterInputHookSet::class);
+            $this->userCustomPostFilterInputHookSet = $userCustomPostFilterInputHookSet;
+        }
+        return $this->userCustomPostFilterInputHookSet;
     }
 
     protected function init(): void

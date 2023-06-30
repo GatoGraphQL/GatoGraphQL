@@ -22,8 +22,12 @@ class SchemaCategoriesBlockSchemaConfigurationExecuter extends AbstractCustomiza
     }
     final protected function getSchemaConfigSchemaCategoriesBlock(): SchemaConfigSchemaCategoriesBlock
     {
-        /** @var SchemaConfigSchemaCategoriesBlock */
-        return $this->schemaConfigCategoriesBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaCategoriesBlock::class);
+        if ($this->schemaConfigCategoriesBlock === null) {
+            /** @var SchemaConfigSchemaCategoriesBlock */
+            $schemaConfigCategoriesBlock = $this->instanceManager->getInstance(SchemaConfigSchemaCategoriesBlock::class);
+            $this->schemaConfigCategoriesBlock = $schemaConfigCategoriesBlock;
+        }
+        return $this->schemaConfigCategoriesBlock;
     }
 
     public function getEnablingModule(): ?string

@@ -18,8 +18,12 @@ class CommentAuthorEmailIsMissingErrorPayloadObjectTypeResolver extends Abstract
     }
     final protected function getCommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader(): CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader
     {
-        /** @var CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader */
-        return $this->commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader::class);
+        if ($this->commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader === null) {
+            /** @var CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader */
+            $commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader::class);
+            $this->commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader = $commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

@@ -18,8 +18,12 @@ class CategoryDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPa
     }
     final protected function getCategoryDoesNotExistErrorPayloadObjectTypeDataLoader(): CategoryDoesNotExistErrorPayloadObjectTypeDataLoader
     {
-        /** @var CategoryDoesNotExistErrorPayloadObjectTypeDataLoader */
-        return $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CategoryDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+        if ($this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader === null) {
+            /** @var CategoryDoesNotExistErrorPayloadObjectTypeDataLoader */
+            $customPostDoesNotExistErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(CategoryDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+            $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader = $customPostDoesNotExistErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

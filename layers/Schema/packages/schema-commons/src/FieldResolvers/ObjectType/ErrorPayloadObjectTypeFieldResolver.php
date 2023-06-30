@@ -26,8 +26,12 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setErrorPayloadInterfaceTypeFieldResolver(ErrorPayloadInterfaceTypeFieldResolver $errorPayloadInterfaceTypeFieldResolver): void
     {
@@ -35,8 +39,12 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     }
     final protected function getErrorPayloadInterfaceTypeFieldResolver(): ErrorPayloadInterfaceTypeFieldResolver
     {
-        /** @var ErrorPayloadInterfaceTypeFieldResolver */
-        return $this->errorPayloadInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(ErrorPayloadInterfaceTypeFieldResolver::class);
+        if ($this->errorPayloadInterfaceTypeFieldResolver === null) {
+            /** @var ErrorPayloadInterfaceTypeFieldResolver */
+            $errorPayloadInterfaceTypeFieldResolver = $this->instanceManager->getInstance(ErrorPayloadInterfaceTypeFieldResolver::class);
+            $this->errorPayloadInterfaceTypeFieldResolver = $errorPayloadInterfaceTypeFieldResolver;
+        }
+        return $this->errorPayloadInterfaceTypeFieldResolver;
     }
 
     /**

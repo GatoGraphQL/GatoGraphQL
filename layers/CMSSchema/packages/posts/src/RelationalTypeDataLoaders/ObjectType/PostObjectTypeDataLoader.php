@@ -17,8 +17,12 @@ class PostObjectTypeDataLoader extends AbstractCustomPostObjectTypeDataLoader
     }
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
-        /** @var PostTypeAPIInterface */
-        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+        if ($this->postTypeAPI === null) {
+            /** @var PostTypeAPIInterface */
+            $postTypeAPI = $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+            $this->postTypeAPI = $postTypeAPI;
+        }
+        return $this->postTypeAPI;
     }
 
     /**

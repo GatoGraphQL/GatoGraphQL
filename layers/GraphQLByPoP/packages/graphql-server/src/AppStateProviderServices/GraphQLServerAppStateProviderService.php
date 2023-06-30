@@ -22,8 +22,12 @@ class GraphQLServerAppStateProviderService implements GraphQLServerAppStateProvi
     }
     final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
-        /** @var GraphQLDataStructureFormatter */
-        return $this->graphQLDataStructureFormatter ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLDataStructureFormatter::class);
+        if ($this->graphQLDataStructureFormatter === null) {
+            /** @var GraphQLDataStructureFormatter */
+            $graphQLDataStructureFormatter = InstanceManagerFacade::getInstance()->getInstance(GraphQLDataStructureFormatter::class);
+            $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
+        }
+        return $this->graphQLDataStructureFormatter;
     }
 
     /**

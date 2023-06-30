@@ -18,8 +18,12 @@ class UserIsNotLoggedInErrorPayloadObjectTypeResolver extends AbstractErrorPaylo
     }
     final protected function getUserIsNotLoggedInErrorPayloadObjectTypeDataLoader(): UserIsNotLoggedInErrorPayloadObjectTypeDataLoader
     {
-        /** @var UserIsNotLoggedInErrorPayloadObjectTypeDataLoader */
-        return $this->userIsNotLoggedInErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(UserIsNotLoggedInErrorPayloadObjectTypeDataLoader::class);
+        if ($this->userIsNotLoggedInErrorPayloadObjectTypeDataLoader === null) {
+            /** @var UserIsNotLoggedInErrorPayloadObjectTypeDataLoader */
+            $userIsNotLoggedInErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(UserIsNotLoggedInErrorPayloadObjectTypeDataLoader::class);
+            $this->userIsNotLoggedInErrorPayloadObjectTypeDataLoader = $userIsNotLoggedInErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->userIsNotLoggedInErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

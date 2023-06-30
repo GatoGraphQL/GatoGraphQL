@@ -19,8 +19,12 @@ class MediaItemSortInputObjectTypeResolver extends SortInputObjectTypeResolver
     }
     final protected function getMediaItemOrderByEnumTypeResolver(): MediaItemOrderByEnumTypeResolver
     {
-        /** @var MediaItemOrderByEnumTypeResolver */
-        return $this->customPostSortByEnumTypeResolver ??= $this->instanceManager->getInstance(MediaItemOrderByEnumTypeResolver::class);
+        if ($this->customPostSortByEnumTypeResolver === null) {
+            /** @var MediaItemOrderByEnumTypeResolver */
+            $customPostSortByEnumTypeResolver = $this->instanceManager->getInstance(MediaItemOrderByEnumTypeResolver::class);
+            $this->customPostSortByEnumTypeResolver = $customPostSortByEnumTypeResolver;
+        }
+        return $this->customPostSortByEnumTypeResolver;
     }
 
     public function getTypeName(): string

@@ -18,8 +18,12 @@ class PostUpdateMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTyp
     }
     final protected function getPostUpdateMutationErrorPayloadUnionTypeResolver(): PostUpdateMutationErrorPayloadUnionTypeResolver
     {
-        /** @var PostUpdateMutationErrorPayloadUnionTypeResolver */
-        return $this->postUpdateMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(PostUpdateMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->postUpdateMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var PostUpdateMutationErrorPayloadUnionTypeResolver */
+            $postUpdateMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostUpdateMutationErrorPayloadUnionTypeResolver::class);
+            $this->postUpdateMutationErrorPayloadUnionTypeResolver = $postUpdateMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->postUpdateMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

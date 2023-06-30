@@ -18,8 +18,12 @@ class RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader extends AbstractU
     }
     final protected function getRootSetTagsOnPostMutationErrorPayloadUnionTypeResolver(): RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver
     {
-        /** @var RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver */
-        return $this->rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver ??= $this->instanceManager->getInstance(RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver::class);
+        if ($this->rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver */
+            $rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver = $rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver;
+        }
+        return $this->rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

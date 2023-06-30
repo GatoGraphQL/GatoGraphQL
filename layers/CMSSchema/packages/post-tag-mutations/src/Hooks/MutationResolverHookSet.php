@@ -20,8 +20,12 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     }
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
-        /** @var PostTypeAPIInterface */
-        return $this->postTypeAPI ??= $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+        if ($this->postTypeAPI === null) {
+            /** @var PostTypeAPIInterface */
+            $postTypeAPI = $this->instanceManager->getInstance(PostTypeAPIInterface::class);
+            $this->postTypeAPI = $postTypeAPI;
+        }
+        return $this->postTypeAPI;
     }
     final public function setPostTagTypeMutationAPI(PostTagTypeMutationAPIInterface $postTagTypeMutationAPI): void
     {
@@ -29,8 +33,12 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     }
     final protected function getPostTagTypeMutationAPI(): PostTagTypeMutationAPIInterface
     {
-        /** @var PostTagTypeMutationAPIInterface */
-        return $this->postTagTypeMutationAPI ??= $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
+        if ($this->postTagTypeMutationAPI === null) {
+            /** @var PostTagTypeMutationAPIInterface */
+            $postTagTypeMutationAPI = $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
+            $this->postTagTypeMutationAPI = $postTagTypeMutationAPI;
+        }
+        return $this->postTagTypeMutationAPI;
     }
 
     protected function getCustomPostType(): string

@@ -18,8 +18,12 @@ class CategoryUnionTypeDataLoader extends AbstractUnionTypeDataLoader
     }
     final protected function getCategoryUnionTypeResolver(): CategoryUnionTypeResolver
     {
-        /** @var CategoryUnionTypeResolver */
-        return $this->categoryUnionTypeResolver ??= $this->instanceManager->getInstance(CategoryUnionTypeResolver::class);
+        if ($this->categoryUnionTypeResolver === null) {
+            /** @var CategoryUnionTypeResolver */
+            $categoryUnionTypeResolver = $this->instanceManager->getInstance(CategoryUnionTypeResolver::class);
+            $this->categoryUnionTypeResolver = $categoryUnionTypeResolver;
+        }
+        return $this->categoryUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

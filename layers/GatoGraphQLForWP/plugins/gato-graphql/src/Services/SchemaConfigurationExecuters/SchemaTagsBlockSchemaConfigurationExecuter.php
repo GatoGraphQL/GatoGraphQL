@@ -22,8 +22,12 @@ class SchemaTagsBlockSchemaConfigurationExecuter extends AbstractCustomizableCon
     }
     final protected function getSchemaConfigSchemaTagsBlock(): SchemaConfigSchemaTagsBlock
     {
-        /** @var SchemaConfigSchemaTagsBlock */
-        return $this->schemaConfigTagsBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaTagsBlock::class);
+        if ($this->schemaConfigTagsBlock === null) {
+            /** @var SchemaConfigSchemaTagsBlock */
+            $schemaConfigTagsBlock = $this->instanceManager->getInstance(SchemaConfigSchemaTagsBlock::class);
+            $this->schemaConfigTagsBlock = $schemaConfigTagsBlock;
+        }
+        return $this->schemaConfigTagsBlock;
     }
 
     public function getEnablingModule(): ?string

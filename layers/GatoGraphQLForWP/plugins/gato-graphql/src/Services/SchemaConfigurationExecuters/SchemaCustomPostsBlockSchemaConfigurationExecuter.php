@@ -22,8 +22,12 @@ class SchemaCustomPostsBlockSchemaConfigurationExecuter extends AbstractCustomiz
     }
     final protected function getSchemaConfigSchemaCustomPostsBlock(): SchemaConfigSchemaCustomPostsBlock
     {
-        /** @var SchemaConfigSchemaCustomPostsBlock */
-        return $this->schemaConfigSchemaCustomPostsBlock ??= $this->instanceManager->getInstance(SchemaConfigSchemaCustomPostsBlock::class);
+        if ($this->schemaConfigSchemaCustomPostsBlock === null) {
+            /** @var SchemaConfigSchemaCustomPostsBlock */
+            $schemaConfigSchemaCustomPostsBlock = $this->instanceManager->getInstance(SchemaConfigSchemaCustomPostsBlock::class);
+            $this->schemaConfigSchemaCustomPostsBlock = $schemaConfigSchemaCustomPostsBlock;
+        }
+        return $this->schemaConfigSchemaCustomPostsBlock;
     }
 
     public function getEnablingModule(): ?string

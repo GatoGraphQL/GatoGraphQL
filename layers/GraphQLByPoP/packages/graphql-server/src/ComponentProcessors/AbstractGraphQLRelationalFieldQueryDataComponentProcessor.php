@@ -22,8 +22,12 @@ abstract class AbstractGraphQLRelationalFieldQueryDataComponentProcessor extends
     }
     final protected function getGraphQLQueryASTTransformationService(): GraphQLQueryASTTransformationServiceInterface
     {
-        /** @var GraphQLQueryASTTransformationServiceInterface */
-        return $this->graphQLQueryASTTransformationService ??= $this->instanceManager->getInstance(GraphQLQueryASTTransformationServiceInterface::class);
+        if ($this->graphQLQueryASTTransformationService === null) {
+            /** @var GraphQLQueryASTTransformationServiceInterface */
+            $graphQLQueryASTTransformationService = $this->instanceManager->getInstance(GraphQLQueryASTTransformationServiceInterface::class);
+            $this->graphQLQueryASTTransformationService = $graphQLQueryASTTransformationService;
+        }
+        return $this->graphQLQueryASTTransformationService;
     }
 
     /**

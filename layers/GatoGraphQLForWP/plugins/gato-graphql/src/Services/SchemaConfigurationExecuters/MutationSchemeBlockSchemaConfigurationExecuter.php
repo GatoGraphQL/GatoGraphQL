@@ -25,8 +25,12 @@ class MutationSchemeBlockSchemaConfigurationExecuter extends AbstractBlockSchema
     }
     final protected function getSchemaConfigMutationSchemeBlock(): SchemaConfigMutationSchemeBlock
     {
-        /** @var SchemaConfigMutationSchemeBlock */
-        return $this->schemaConfigMutationSchemeBlock ??= $this->instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
+        if ($this->schemaConfigMutationSchemeBlock === null) {
+            /** @var SchemaConfigMutationSchemeBlock */
+            $schemaConfigMutationSchemeBlock = $this->instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
+            $this->schemaConfigMutationSchemeBlock = $schemaConfigMutationSchemeBlock;
+        }
+        return $this->schemaConfigMutationSchemeBlock;
     }
 
     public function getEnablingModule(): ?string

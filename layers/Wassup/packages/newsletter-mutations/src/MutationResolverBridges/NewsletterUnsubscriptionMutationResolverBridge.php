@@ -19,8 +19,12 @@ class NewsletterUnsubscriptionMutationResolverBridge extends AbstractFormCompone
     }
     final protected function getNewsletterUnsubscriptionMutationResolver(): NewsletterUnsubscriptionMutationResolver
     {
-        /** @var NewsletterUnsubscriptionMutationResolver */
-        return $this->newsletterUnsubscriptionMutationResolver ??= $this->instanceManager->getInstance(NewsletterUnsubscriptionMutationResolver::class);
+        if ($this->newsletterUnsubscriptionMutationResolver === null) {
+            /** @var NewsletterUnsubscriptionMutationResolver */
+            $newsletterUnsubscriptionMutationResolver = $this->instanceManager->getInstance(NewsletterUnsubscriptionMutationResolver::class);
+            $this->newsletterUnsubscriptionMutationResolver = $newsletterUnsubscriptionMutationResolver;
+        }
+        return $this->newsletterUnsubscriptionMutationResolver;
     }
 
     public function getMutationResolver(): MutationResolverInterface

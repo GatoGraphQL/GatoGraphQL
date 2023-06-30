@@ -52,8 +52,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     }
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
-        /** @var DirectivePipelineServiceInterface */
-        return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
+        if ($this->directivePipelineService === null) {
+            /** @var DirectivePipelineServiceInterface */
+            $directivePipelineService = $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
+            $this->directivePipelineService = $directivePipelineService;
+        }
+        return $this->directivePipelineService;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -61,8 +65,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setObjectResolvedDynamicVariablesService(ObjectResolvedDynamicVariablesServiceInterface $objectResolvedDynamicVariablesService): void
     {
@@ -70,8 +78,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     }
     final protected function getObjectResolvedDynamicVariablesService(): ObjectResolvedDynamicVariablesServiceInterface
     {
-        /** @var ObjectResolvedDynamicVariablesServiceInterface */
-        return $this->objectResolvedDynamicVariablesService ??= $this->instanceManager->getInstance(ObjectResolvedDynamicVariablesServiceInterface::class);
+        if ($this->objectResolvedDynamicVariablesService === null) {
+            /** @var ObjectResolvedDynamicVariablesServiceInterface */
+            $objectResolvedDynamicVariablesService = $this->instanceManager->getInstance(ObjectResolvedDynamicVariablesServiceInterface::class);
+            $this->objectResolvedDynamicVariablesService = $objectResolvedDynamicVariablesService;
+        }
+        return $this->objectResolvedDynamicVariablesService;
     }
 
     public function __construct()

@@ -19,8 +19,12 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
     final protected function getEngine(): EngineInterface
     {
-        /** @var EngineInterface */
-        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
+        if ($this->engine === null) {
+            /** @var EngineInterface */
+            $engine = $this->instanceManager->getInstance(EngineInterface::class);
+            $this->engine = $engine;
+        }
+        return $this->engine;
     }
     final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
     {
@@ -28,8 +32,12 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {
-        /** @var GraphQLParserHelperServiceInterface */
-        return $this->graphQLParserHelperService ??= $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+        if ($this->graphQLParserHelperService === null) {
+            /** @var GraphQLParserHelperServiceInterface */
+            $graphQLParserHelperService = $this->instanceManager->getInstance(GraphQLParserHelperServiceInterface::class);
+            $this->graphQLParserHelperService = $graphQLParserHelperService;
+        }
+        return $this->graphQLParserHelperService;
     }
 
     public function getName(): string

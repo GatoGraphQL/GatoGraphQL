@@ -24,8 +24,12 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getBlockInterfaceTypeFieldResolver(): BlockInterfaceTypeFieldResolver
     {
-        /** @var BlockInterfaceTypeFieldResolver */
-        return $this->blockInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(BlockInterfaceTypeFieldResolver::class);
+        if ($this->blockInterfaceTypeFieldResolver === null) {
+            /** @var BlockInterfaceTypeFieldResolver */
+            $blockInterfaceTypeFieldResolver = $this->instanceManager->getInstance(BlockInterfaceTypeFieldResolver::class);
+            $this->blockInterfaceTypeFieldResolver = $blockInterfaceTypeFieldResolver;
+        }
+        return $this->blockInterfaceTypeFieldResolver;
     }
 
     /**

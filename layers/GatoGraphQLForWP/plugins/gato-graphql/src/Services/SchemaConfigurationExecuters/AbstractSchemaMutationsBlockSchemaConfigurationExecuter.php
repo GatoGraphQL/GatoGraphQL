@@ -21,8 +21,12 @@ abstract class AbstractSchemaMutationsBlockSchemaConfigurationExecuter extends A
     }
     final protected function getSchemaConfigPayloadTypesForMutationsBlock(): SchemaConfigPayloadTypesForMutationsBlock
     {
-        /** @var SchemaConfigPayloadTypesForMutationsBlock */
-        return $this->schemaConfigPayloadTypesForMutationsBlock ??= $this->instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
+        if ($this->schemaConfigPayloadTypesForMutationsBlock === null) {
+            /** @var SchemaConfigPayloadTypesForMutationsBlock */
+            $schemaConfigPayloadTypesForMutationsBlock = $this->instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
+            $this->schemaConfigPayloadTypesForMutationsBlock = $schemaConfigPayloadTypesForMutationsBlock;
+        }
+        return $this->schemaConfigPayloadTypesForMutationsBlock;
     }
 
     public function getEnablingModule(): ?string

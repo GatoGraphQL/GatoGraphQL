@@ -118,8 +118,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
-        /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
-        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+        if ($this->dangerouslyNonSpecificScalarTypeScalarTypeResolver === null) {
+            /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
+            $dangerouslyNonSpecificScalarTypeScalarTypeResolver = $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+            $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
+        }
+        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver;
     }
     final public function setOutputService(OutputServiceInterface $outputService): void
     {
@@ -127,8 +131,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
     final protected function getOutputService(): OutputServiceInterface
     {
-        /** @var OutputServiceInterface */
-        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+        if ($this->outputService === null) {
+            /** @var OutputServiceInterface */
+            $outputService = $this->instanceManager->getInstance(OutputServiceInterface::class);
+            $this->outputService = $outputService;
+        }
+        return $this->outputService;
     }
     final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
     {
@@ -136,8 +144,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
     final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
     {
-        /** @var ObjectSerializationManagerInterface */
-        return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
+        if ($this->objectSerializationManager === null) {
+            /** @var ObjectSerializationManagerInterface */
+            $objectSerializationManager = $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
+            $this->objectSerializationManager = $objectSerializationManager;
+        }
+        return $this->objectSerializationManager;
     }
     final public function setSchemaCastingService(SchemaCastingServiceInterface $schemaCastingService): void
     {
@@ -145,8 +157,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
     final protected function getSchemaCastingService(): SchemaCastingServiceInterface
     {
-        /** @var SchemaCastingServiceInterface */
-        return $this->schemaCastingService ??= $this->instanceManager->getInstance(SchemaCastingServiceInterface::class);
+        if ($this->schemaCastingService === null) {
+            /** @var SchemaCastingServiceInterface */
+            $schemaCastingService = $this->instanceManager->getInstance(SchemaCastingServiceInterface::class);
+            $this->schemaCastingService = $schemaCastingService;
+        }
+        return $this->schemaCastingService;
     }
     final public function setEngine(EngineInterface $engine): void
     {
@@ -154,8 +170,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
     final protected function getEngine(): EngineInterface
     {
-        /** @var EngineInterface */
-        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
+        if ($this->engine === null) {
+            /** @var EngineInterface */
+            $engine = $this->instanceManager->getInstance(EngineInterface::class);
+            $this->engine = $engine;
+        }
+        return $this->engine;
     }
 
     public function __construct()

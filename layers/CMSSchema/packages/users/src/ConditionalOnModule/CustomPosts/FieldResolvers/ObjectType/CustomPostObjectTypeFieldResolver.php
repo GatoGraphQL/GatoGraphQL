@@ -25,8 +25,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getCustomPostUserTypeAPI(): CustomPostUserTypeAPIInterface
     {
-        /** @var CustomPostUserTypeAPIInterface */
-        return $this->customPostUserTypeAPI ??= $this->instanceManager->getInstance(CustomPostUserTypeAPIInterface::class);
+        if ($this->customPostUserTypeAPI === null) {
+            /** @var CustomPostUserTypeAPIInterface */
+            $customPostUserTypeAPI = $this->instanceManager->getInstance(CustomPostUserTypeAPIInterface::class);
+            $this->customPostUserTypeAPI = $customPostUserTypeAPI;
+        }
+        return $this->customPostUserTypeAPI;
     }
     final public function setWithAuthorInterfaceTypeFieldResolver(WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver): void
     {
@@ -34,8 +38,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getWithAuthorInterfaceTypeFieldResolver(): WithAuthorInterfaceTypeFieldResolver
     {
-        /** @var WithAuthorInterfaceTypeFieldResolver */
-        return $this->withAuthorInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(WithAuthorInterfaceTypeFieldResolver::class);
+        if ($this->withAuthorInterfaceTypeFieldResolver === null) {
+            /** @var WithAuthorInterfaceTypeFieldResolver */
+            $withAuthorInterfaceTypeFieldResolver = $this->instanceManager->getInstance(WithAuthorInterfaceTypeFieldResolver::class);
+            $this->withAuthorInterfaceTypeFieldResolver = $withAuthorInterfaceTypeFieldResolver;
+        }
+        return $this->withAuthorInterfaceTypeFieldResolver;
     }
 
     /**

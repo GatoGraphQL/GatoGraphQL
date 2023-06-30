@@ -28,8 +28,12 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setUserByInputObjectTypeResolver(UserByInputObjectTypeResolver $userByInputObjectTypeResolver): void
     {
@@ -37,8 +41,12 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     }
     final protected function getUserByInputObjectTypeResolver(): UserByInputObjectTypeResolver
     {
-        /** @var UserByInputObjectTypeResolver */
-        return $this->userByInputObjectTypeResolver ??= $this->instanceManager->getInstance(UserByInputObjectTypeResolver::class);
+        if ($this->userByInputObjectTypeResolver === null) {
+            /** @var UserByInputObjectTypeResolver */
+            $userByInputObjectTypeResolver = $this->instanceManager->getInstance(UserByInputObjectTypeResolver::class);
+            $this->userByInputObjectTypeResolver = $userByInputObjectTypeResolver;
+        }
+        return $this->userByInputObjectTypeResolver;
     }
 
     /**

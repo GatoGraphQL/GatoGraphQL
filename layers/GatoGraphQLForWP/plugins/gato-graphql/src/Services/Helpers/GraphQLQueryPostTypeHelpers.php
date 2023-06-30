@@ -23,8 +23,12 @@ class GraphQLQueryPostTypeHelpers
     }
     final protected function getPersistedQueryEndpointGraphiQLBlockAccessor(): PersistedQueryEndpointGraphiQLBlockAccessor
     {
-        /** @var PersistedQueryEndpointGraphiQLBlockAccessor */
-        return $this->persistedQueryEndpointGraphiQLBlockAccessor ??= $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlockAccessor::class);
+        if ($this->persistedQueryEndpointGraphiQLBlockAccessor === null) {
+            /** @var PersistedQueryEndpointGraphiQLBlockAccessor */
+            $persistedQueryEndpointGraphiQLBlockAccessor = $this->instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlockAccessor::class);
+            $this->persistedQueryEndpointGraphiQLBlockAccessor = $persistedQueryEndpointGraphiQLBlockAccessor;
+        }
+        return $this->persistedQueryEndpointGraphiQLBlockAccessor;
     }
     final public function setPersistedQueryEndpointAPIHierarchyBlockAccessor(PersistedQueryEndpointAPIHierarchyBlockAccessor $persistedQueryEndpointAPIHierarchyBlockAccessor): void
     {
@@ -32,8 +36,12 @@ class GraphQLQueryPostTypeHelpers
     }
     final protected function getPersistedQueryEndpointAPIHierarchyBlockAccessor(): PersistedQueryEndpointAPIHierarchyBlockAccessor
     {
-        /** @var PersistedQueryEndpointAPIHierarchyBlockAccessor */
-        return $this->persistedQueryEndpointAPIHierarchyBlockAccessor ??= $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlockAccessor::class);
+        if ($this->persistedQueryEndpointAPIHierarchyBlockAccessor === null) {
+            /** @var PersistedQueryEndpointAPIHierarchyBlockAccessor */
+            $persistedQueryEndpointAPIHierarchyBlockAccessor = $this->instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlockAccessor::class);
+            $this->persistedQueryEndpointAPIHierarchyBlockAccessor = $persistedQueryEndpointAPIHierarchyBlockAccessor;
+        }
+        return $this->persistedQueryEndpointAPIHierarchyBlockAccessor;
     }
 
     /**

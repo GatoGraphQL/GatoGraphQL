@@ -22,8 +22,12 @@ abstract class AbstractUseRootAsSourceForSchemaObjectTypeResolver extends Abstra
     }
     final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
-        /** @var RootObjectTypeResolver */
-        return $this->rootObjectTypeResolver ??= $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+        if ($this->rootObjectTypeResolver === null) {
+            /** @var RootObjectTypeResolver */
+            $rootObjectTypeResolver = $this->instanceManager->getInstance(RootObjectTypeResolver::class);
+            $this->rootObjectTypeResolver = $rootObjectTypeResolver;
+        }
+        return $this->rootObjectTypeResolver;
     }
 
     protected function getTypeResolverToCalculateSchema(): RelationalTypeResolverInterface

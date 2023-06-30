@@ -24,8 +24,12 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
-        /** @var IDScalarTypeResolver */
-        return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final public function setExcludeIDsFilterInput(ExcludeIDsFilterInput $excludeIDsFilterInput): void
     {
@@ -33,8 +37,12 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
     }
     final protected function getExcludeIDsFilterInput(): ExcludeIDsFilterInput
     {
-        /** @var ExcludeIDsFilterInput */
-        return $this->excludeIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeIDsFilterInput::class);
+        if ($this->excludeIDsFilterInput === null) {
+            /** @var ExcludeIDsFilterInput */
+            $excludeIDsFilterInput = $this->instanceManager->getInstance(ExcludeIDsFilterInput::class);
+            $this->excludeIDsFilterInput = $excludeIDsFilterInput;
+        }
+        return $this->excludeIDsFilterInput;
     }
     final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
@@ -42,8 +50,12 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
-        /** @var IncludeFilterInput */
-        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
+        if ($this->includeFilterInput === null) {
+            /** @var IncludeFilterInput */
+            $includeFilterInput = $this->instanceManager->getInstance(IncludeFilterInput::class);
+            $this->includeFilterInput = $includeFilterInput;
+        }
+        return $this->includeFilterInput;
     }
 
     /**

@@ -18,8 +18,12 @@ class CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver extends AbstractE
     }
     final protected function getCommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader(): CommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader
     {
-        /** @var CommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader */
-        return $this->commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader ??= $this->instanceManager->getInstance(CommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader::class);
+        if ($this->commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader === null) {
+            /** @var CommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader */
+            $commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(CommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader::class);
+            $this->commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader = $commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader;
+        }
+        return $this->commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

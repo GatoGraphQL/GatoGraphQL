@@ -32,8 +32,12 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     final protected function getEndpointBlockRegistry(): EndpointBlockRegistryInterface
     {
-        /** @var EndpointBlockRegistryInterface */
-        return $this->endpointBlockRegistry ??= $this->instanceManager->getInstance(EndpointBlockRegistryInterface::class);
+        if ($this->endpointBlockRegistry === null) {
+            /** @var EndpointBlockRegistryInterface */
+            $endpointBlockRegistry = $this->instanceManager->getInstance(EndpointBlockRegistryInterface::class);
+            $this->endpointBlockRegistry = $endpointBlockRegistry;
+        }
+        return $this->endpointBlockRegistry;
     }
     final public function setCustomEndpointAnnotatorRegistry(CustomEndpointAnnotatorRegistryInterface $customEndpointAnnotatorRegistry): void
     {
@@ -41,8 +45,12 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     final protected function getCustomEndpointAnnotatorRegistry(): CustomEndpointAnnotatorRegistryInterface
     {
-        /** @var CustomEndpointAnnotatorRegistryInterface */
-        return $this->customEndpointAnnotatorRegistry ??= $this->instanceManager->getInstance(CustomEndpointAnnotatorRegistryInterface::class);
+        if ($this->customEndpointAnnotatorRegistry === null) {
+            /** @var CustomEndpointAnnotatorRegistryInterface */
+            $customEndpointAnnotatorRegistry = $this->instanceManager->getInstance(CustomEndpointAnnotatorRegistryInterface::class);
+            $this->customEndpointAnnotatorRegistry = $customEndpointAnnotatorRegistry;
+        }
+        return $this->customEndpointAnnotatorRegistry;
     }
     final public function setCustomEndpointOptionsBlock(CustomEndpointOptionsBlock $customEndpointOptionsBlock): void
     {
@@ -50,8 +58,12 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     final protected function getCustomEndpointOptionsBlock(): CustomEndpointOptionsBlock
     {
-        /** @var CustomEndpointOptionsBlock */
-        return $this->customEndpointOptionsBlock ??= $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
+        if ($this->customEndpointOptionsBlock === null) {
+            /** @var CustomEndpointOptionsBlock */
+            $customEndpointOptionsBlock = $this->instanceManager->getInstance(CustomEndpointOptionsBlock::class);
+            $this->customEndpointOptionsBlock = $customEndpointOptionsBlock;
+        }
+        return $this->customEndpointOptionsBlock;
     }
     final public function setGraphQLEndpointCategoryTaxonomy(GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy): void
     {
@@ -59,8 +71,12 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
     final protected function getGraphQLEndpointCategoryTaxonomy(): GraphQLEndpointCategoryTaxonomy
     {
-        /** @var GraphQLEndpointCategoryTaxonomy */
-        return $this->graphQLEndpointCategoryTaxonomy ??= $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+        if ($this->graphQLEndpointCategoryTaxonomy === null) {
+            /** @var GraphQLEndpointCategoryTaxonomy */
+            $graphQLEndpointCategoryTaxonomy = $this->instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+            $this->graphQLEndpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy;
+        }
+        return $this->graphQLEndpointCategoryTaxonomy;
     }
 
     /**

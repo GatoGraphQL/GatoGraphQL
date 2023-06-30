@@ -28,8 +28,12 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
     }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
-        /** @var MarkdownContentParserInterface */
-        return $this->markdownContentParser ??= $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+        if ($this->markdownContentParser === null) {
+            /** @var MarkdownContentParserInterface */
+            $markdownContentParser = $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
+            $this->markdownContentParser = $markdownContentParser;
+        }
+        return $this->markdownContentParser;
     }
 
     /**

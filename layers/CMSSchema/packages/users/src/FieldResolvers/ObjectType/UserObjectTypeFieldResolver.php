@@ -36,8 +36,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        /** @var UserTypeAPIInterface */
-        return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
+        }
+        return $this->userTypeAPI;
     }
     final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
     {
@@ -45,8 +49,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
-        /** @var EmailScalarTypeResolver */
-        return $this->emailScalarTypeResolver ??= $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+        if ($this->emailScalarTypeResolver === null) {
+            /** @var EmailScalarTypeResolver */
+            $emailScalarTypeResolver = $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
+            $this->emailScalarTypeResolver = $emailScalarTypeResolver;
+        }
+        return $this->emailScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -54,8 +62,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        /** @var StringScalarTypeResolver */
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
     final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
     {
@@ -63,8 +75,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        /** @var URLScalarTypeResolver */
-        return $this->urlScalarTypeResolver ??= $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
     }
     final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -72,8 +88,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
-        /** @var QueryableInterfaceTypeFieldResolver */
-        return $this->queryableInterfaceTypeFieldResolver ??= $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+        if ($this->queryableInterfaceTypeFieldResolver === null) {
+            /** @var QueryableInterfaceTypeFieldResolver */
+            $queryableInterfaceTypeFieldResolver = $this->instanceManager->getInstance(QueryableInterfaceTypeFieldResolver::class);
+            $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
+        }
+        return $this->queryableInterfaceTypeFieldResolver;
     }
 
     /**
