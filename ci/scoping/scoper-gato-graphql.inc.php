@@ -63,6 +63,7 @@ return [
                 // Exclude tests from libraries
                 '#nikic/fast-route/test/#',
                 '#psr/log/Psr/Log/Test/#',
+                '#symfony/dom-crawler/Test/#',
                 '#symfony/http-foundation/Test/#',
                 '#symfony/service-contracts/Test/#',
                 '#michelf/php-markdown/test/#',
