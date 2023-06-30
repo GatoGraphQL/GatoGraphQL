@@ -48,6 +48,7 @@ class SkipDowngradeTestPathsDataSource
             'vendor/symfony/cache/Messenger/EarlyExpirationHandler.php',
             'vendor/symfony/cache/Traits/Redis6Proxy.php',
             'vendor/symfony/cache/Traits/RedisCluster6Proxy.php',
+            'vendor/symfony/dom-crawler/Test/',
             'vendor/symfony/dotenv/Command/DebugCommand.php',
             'vendor/symfony/dotenv/Command/DotenvDumpCommand.php',
             'vendor/symfony/http-foundation/Test/',
