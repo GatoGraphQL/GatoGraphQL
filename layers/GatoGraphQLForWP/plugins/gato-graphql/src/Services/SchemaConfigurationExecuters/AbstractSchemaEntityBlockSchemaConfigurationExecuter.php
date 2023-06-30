@@ -18,8 +18,12 @@ abstract class AbstractSchemaEntityBlockSchemaConfigurationExecuter extends Abst
     }
     final protected function getUserSettingsHelpers(): UserSettingsHelpers
     {
-        /** @var UserSettingsHelpers */
-        return $this->userSettingsHelpers ??= $this->instanceManager->getInstance(UserSettingsHelpers::class);
+        if ($this->userSettingsHelpers === null) {
+            /** @var UserSettingsHelpers */
+            $userSettingsHelpers = $this->instanceManager->getInstance(UserSettingsHelpers::class);
+            $this->userSettingsHelpers = $userSettingsHelpers;
+        }
+        return $this->userSettingsHelpers;
     }
 
     protected function mustAlsoExecuteWhenSchemaConfigurationModuleIsDisabled(): bool
