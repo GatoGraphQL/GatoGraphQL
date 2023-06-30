@@ -51,6 +51,7 @@ return static function (RectorConfig $rectorConfig): void {
         // Exclude tests from libraries
         $pluginDir . '/vendor/nikic/fast-route/test/*',
         $pluginDir . '/vendor/psr/log/Psr/Log/Test/*',
+        $pluginDir . '/vendor/symfony/dom-crawler/Test/*',
         $pluginDir . '/vendor/symfony/http-foundation/Test/*',
         $pluginDir . '/vendor/symfony/service-contracts/Test/*',
         $pluginDir . '/vendor/michelf/php-markdown/test/*',
