@@ -19,6 +19,11 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         $this->rectorConfig->sets([
             DowngradeLevelSetList::DOWN_TO_PHP_71,
         ]);
+    
+        $this->rectorConfig
+            ->ruleWithConfiguration(\Rector\DowngradePhp72\Rector\ClassMethod\DowngradeParameterTypeWideningRector::class, [
+                WithInstanceManagerServiceTrait::class => ['getInstanceManager'],
+            ]);
 
         /**
          * @todo Uncomment this code
