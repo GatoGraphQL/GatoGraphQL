@@ -50,7 +50,63 @@ query {
 }
 ```
 
-let's say we have a meta key "
+We can use the `AND` (and also `OR`) relation to filter data more precisely. This query retrieves posts with a thumbnail that was marked as "needs to have the thumbnail replaced" via a custom meta entry `todo_action`:
+
+```graphql
+query {
+  posts(
+    filter: {
+      metaQuery: [
+        {
+          relation: AND
+          key: "_thumbnail_id",
+          compareBy: {
+            key: {
+              operator: EXISTS
+            }
+          }
+        },
+        {
+          key: "todo_action",
+          compareBy: {
+            stringValue: {
+              value: "replace"
+              operator: EQUALS
+            }
+          }
+        }
+      ]
+    }
+  ) {
+    id
+    title
+  }
+}
+```
+
+```graphql
+query {
+  posts(
+    filter: {
+      metaQuery: [
+        {
+          key: "_thumbnail_id",
+          compareBy: {
+            key: {
+              operator: NOT_EXISTS
+            }
+          }
+        }
+      ]
+    }
+  ) {
+    id
+    title
+  }
+}
+```
+
+Let's say we have a meta key "
 
 In WP can't look for posts or users with certain metadata. Here, can.
 
