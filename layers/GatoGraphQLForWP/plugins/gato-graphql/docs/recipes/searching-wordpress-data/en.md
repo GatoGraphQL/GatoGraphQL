@@ -143,9 +143,7 @@ query {
 }
 ```
 
-We can also search meta using regex expressions.
-
-This query searches for all users with a Spanish locale (for instance, `es_AR` for Argentina, `es_ES` for Spain, and so on):
+We can also search meta using regex expressions. This query searches for all users with a Spanish locale (for instance, `es_AR` for Argentina, `es_ES` for Spain, and so on):
 
 ```graphql
 query {
@@ -165,9 +163,7 @@ query {
 }
 ```
 
-With extensions, we can input dynamically-generated inputs to the filter.
-
-This query retrieves the number of comments added to the site starting from "yesterday", "1 year ago", "beginning of the month", and "beginning of the year":
+With extensions, we can input dynamically-generated inputs to the filter. This query retrieves the number of comments added to the site starting from "yesterday", "1 year ago", "beginning of the month", and "beginning of the year":
 
 ```graphql
 query {
