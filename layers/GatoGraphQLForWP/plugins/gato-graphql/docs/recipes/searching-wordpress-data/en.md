@@ -4,7 +4,7 @@ Searching for data within WordPress is limited in several cases, and Gato GraphQ
 
 <div class="doc-highlight" markdown=1>
 
-🔥 **Heads up!** We can create the queries described below as GraphQL Persisted Queries in our websites, as to keep them stored and execute them time and again. Since their use is for us (i.e. not for the application), we can <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/" target="_blank">set their status as `private`</a> (hence they are available only within the wp-admin). To manage these queries, we can <a href="https://gatographql.com/guides/use/creating-an-api-hierarchy/" target="_blank">create an API hierarchy</a>, placing them under some `internal/search/` (or other) parent Persisted Query.
+🔥 We can create the queries described below as GraphQL Persisted Queries in our website, as to keep them stored and execute them time and again. Since their use is for us (i.e. not for the application), we can <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/" target="_blank">set their status as `private`</a> (hence they are available only within the wp-admin). To manage these queries, we can <a href="https://gatographql.com/guides/use/creating-an-api-hierarchy/" target="_blank">create an API hierarchy</a>, placing them under some `internal/` parent Persisted Query.
 
 </div>
 
