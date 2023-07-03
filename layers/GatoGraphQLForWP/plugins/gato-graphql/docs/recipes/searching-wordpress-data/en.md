@@ -2,9 +2,9 @@
 
 Searching for data within WordPress is limited in several cases, and Gato GraphQL can help augment these capabilities.
 
-We can create a series of GraphQL Persisted Queries to help us find information. Since their use is for us (i.e. not for the application), we can <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/" target="_blank">set their status as `private`</a> (hence they are available only within the wp-admin). To manage these queries, we can <a href="http://localhost:8080/guides/use/creating-an-api-hierarchy/" target="_blank">create an API hierarchy</a>, placing them under some `internal/search/` (or other) parent Persisted Query.
+🔥 **Heads up!** We can create the queries described below as GraphQL Persisted Queries in our websites, as to keep them stored and execute them time and again. Since their use is for us (i.e. not for the application), we can <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/" target="_blank">set their status as `private`</a> (hence they are available only within the wp-admin). To manage these queries, we can <a href="https://gatographql.com/guides/use/creating-an-api-hierarchy/" target="_blank">create an API hierarchy</a>, placing them under some `internal/search/` (or other) parent Persisted Query.
 
-One such case where finding data in WordPress is limited concerns custom fields (i.e. meta values): We may use custom fields to add extra information to posts, users, comments, or taxonomies, however WordPress does not search within meta values.
+One such case where finding data in WordPress is limited concerns custom fields (i.e. meta values): We may use custom fields to add extra information to posts (and also to users, comments, and taxonomies), however when searching for posts with some keyword, WordPress does not search within meta values.
 
 We can then create a Gato GraphQL query that retrieves the required data. For instance, this query retrieves all posts that either have a thumbnail (and that specific data) or not:
 
