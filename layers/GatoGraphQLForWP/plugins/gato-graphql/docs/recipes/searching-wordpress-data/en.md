@@ -2,7 +2,11 @@
 
 Searching for data within WordPress is limited in several cases, and Gato GraphQL can help augment these capabilities.
 
-One such case is custom fields (i.e. meta values): We may use custom fields to add extra information to posts, users, comments, or taxonomies, however WordPress does not search within meta values.
+We can create a series of GraphQL Persisted Queries to help us find information. Since their use is for us, and not for the application, we can set their status as "private" (hence they are available only within the wp-admin). To manage these queries, we can place them under a `internal/search/` parent Persisted Query.
+
+
+
+One such case where finding data in WordPress is limited concerns custom fields (i.e. meta values): We may use custom fields to add extra information to posts, users, comments, or taxonomies, however WordPress does not search within meta values.
 
 We can then create a Gato GraphQL query that retrieves the required data. For instance, this query retrieves all posts that either have a thumbnail (and that specific data) or not:
 
