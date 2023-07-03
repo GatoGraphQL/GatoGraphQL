@@ -118,7 +118,7 @@ query {
 }
 ```
 
-Filtering by meta can also be combined with any of the standard data items. This query retrieves all posts without thumbnail that were created after a certain date:
+Filtering by meta can also be combined with any of the standard data items. This query retrieves all posts without thumbnail that were created after a certain date and have been tagged `"wordpress"`:
 
 ```graphql
 query {
@@ -134,11 +134,15 @@ query {
       },
       dateQuery: {
         after: "2020-07-01"
-      }
+      },
+      tagSlugs: [
+        "wordpress"
+      ]
     }
   ) {
     id
     title
+    tagNames
   }
 }
 ```
