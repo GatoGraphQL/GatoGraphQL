@@ -71,7 +71,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             return $entryContent;
         }
 
-        $messageExtensionPlaceholder = \__('<p>🌀 Extensions mentioned in this recipe:</p><ul><li>%s</li></ul>', 'gato-graphql');
+        $messageExtensionPlaceholder = \__('<p>🌀 Extensions referenced in this recipe:</p><ul><li>%s</li></ul>', 'gato-graphql');
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
