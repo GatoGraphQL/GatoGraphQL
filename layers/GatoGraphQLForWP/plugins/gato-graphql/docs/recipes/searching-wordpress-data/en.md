@@ -6,6 +6,8 @@ Such an example involves custom fields (i.e. meta values): We may use custom fie
 
 We can then use Gato GraphQL to search for posts (and also users, comments, and taxonomies) by meta key and value.
 
+## Examples
+
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
@@ -16,7 +18,7 @@ We can then use Gato GraphQL to search for posts (and also users, comments, and 
 
 </div>
 
-For instance, this query retrieves all posts that have a thumbnail, and those that do not:
+This query retrieves all posts that have a thumbnail, and those that do not:
 
 ```graphql
 query {
