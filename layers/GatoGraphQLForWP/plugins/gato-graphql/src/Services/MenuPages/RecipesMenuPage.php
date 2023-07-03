@@ -71,25 +71,26 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             return $entryContent;
         }
 
-        $messageExtensionPlaceholder = count($entryExtensionModules) === 1
-            ? \__('This recipe requires extension %s', 'gato-graphql')
-            : \__('This recipe requires extensions %s', 'gato-graphql');
+        $messageExtensionPlaceholder = \__('<p><strong>🔗 Extensions referenced in this recipe:</strong></p><ul><li>%s</li></ul>', 'gato-graphql');
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
         $entryBundleExtensionModules = $entry[3] ?? [];
         $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
         $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
-        $messageBundleExtensionPlaceholder = count($entryExtensionModules) === 1
-            ? \__('(included in %s)', 'gato-graphql')
-            : \__('(all included in %s)', 'gato-graphql');
+        $messageBundleExtensionPlaceholder = sprintf(
+            '<p><em>%s</em></p>',
+            count($entryExtensionModules) === 1
+                ? \__('(It is included in %s)', 'gato-graphql')
+                : \__('(They are all included in %s)', 'gato-graphql')
+        );
 
         $messageHTML = sprintf(
-            \__('🌀 %s %s.', 'gato-graphql'),
+            \__('%s %s', 'gato-graphql'),
             sprintf(
                 $messageExtensionPlaceholder,
                 implode(
-                    \__(', ', 'gato-graphql'),
+                    \__('</li><li>', 'gato-graphql'),
                     $extensionHTMLItems
                 )
             ),
@@ -105,7 +106,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return sprintf(
             <<<HTML
                 <div class="%s">
-                    <p>%s</p>
+                    %s
                 </div>
             HTML,
             'extension-highlight',
@@ -148,6 +149,15 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'searching-wordpress-data',
                 \__('Searching WordPress data', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'complementing-wp-cli',
