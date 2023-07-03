@@ -38,7 +38,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getPageTitle(): string
     {
-        return \__('Gato GraphQL - Recipes: Use Cases, Best Practices, and Query Snippets', 'gato-graphql');
+        return \__('Gato GraphQL - Recipes', 'gato-graphql');
     }
 
     protected function getContentID(): string
