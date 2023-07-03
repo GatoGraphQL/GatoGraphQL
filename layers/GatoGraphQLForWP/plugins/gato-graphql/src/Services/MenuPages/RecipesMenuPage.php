@@ -72,8 +72,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         }
 
         $messageExtensionPlaceholder = count($entryExtensionModules) === 1
-            ? \__('This recipe requires extension %s', 'gato-graphql')
-            : \__('This recipe requires extensions %s', 'gato-graphql');
+            ? \__('This recipe uses extension %s', 'gato-graphql')
+            : \__('This recipe uses extensions %s', 'gato-graphql');
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
