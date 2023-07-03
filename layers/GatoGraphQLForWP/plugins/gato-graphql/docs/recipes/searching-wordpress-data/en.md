@@ -63,8 +63,8 @@ This query retrieves all users who use the locale "Spanish from Argentina":
 ```graphql
 query {
   argentineSpanishLocaleUsers: users(
-    filter: { metaQuery:
-      {
+    filter: {
+      metaQuery: {
         key: "locale",
         compareBy: {
           stringValue: {
