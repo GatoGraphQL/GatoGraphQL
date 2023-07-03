@@ -4,7 +4,7 @@ Searching for data within WordPress is limited in several cases, and Gato GraphQ
 
 <div class="doc-highlight" markdown=1>
 
-🔥 Some recommendations:
+🔥 **Tips:**
 
 - Create the queries below as <a href="https://gatographql.com/guides/use/creating-a-persisted-query/" target="_blank">Persisted Queries</a>, as to keep them stored in the website, and execute them time and again
 - Publish them <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/" target="_blank">as `private`</a>, so that they are available only within the wp-admin, and only to the admin
