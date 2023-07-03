@@ -1,5 +1,57 @@
 # Searching WordPress data
 
+Searching for data within WordPress is limited in several cases, and Gato GraphQL can help augment these capabilities.
+
+One such case is custom fields (i.e. meta values): We may use custom fields to add extra information to posts, users, comments, or taxonomies, however WordPress does not search within meta values.
+
+We can then create a Gato GraphQL query that retrieves the required data. For instance, this query retrieves all posts that either have a thumbnail (and that specific data) or not:
+
+```graphql
+query {
+  postsWithThumbnail: posts(
+    filter: {
+      metaQuery: [
+        {
+          key: "_thumbnail_id",
+          compareBy: {
+            key: {
+              operator: EXISTS
+            }
+          }
+        }
+      ]
+    }
+  ) {
+    id
+    title
+    featuredImage {
+      id
+      src
+    }
+  }
+
+  postsWithoutThumbnail: posts(
+    filter: {
+      metaQuery: [
+        {
+          key: "_thumbnail_id",
+          compareBy: {
+            key: {
+              operator: NOT_EXISTS
+            }
+          }
+        }
+      ]
+    }
+  ) {
+    id
+    title
+  }
+}
+```
+
+let's say we have a meta key "
+
 In WP can't look for posts or users with certain metadata. Here, can.
 
 By meta queries:
