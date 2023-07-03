@@ -10,16 +10,14 @@ We can then create a Gato GraphQL query that retrieves the required data. For in
 query {
   postsWithThumbnail: posts(
     filter: {
-      metaQuery: [
-        {
-          key: "_thumbnail_id",
-          compareBy: {
-            key: {
-              operator: EXISTS
-            }
+      metaQuery: {
+        key: "_thumbnail_id",
+        compareBy: {
+          key: {
+            operator: EXISTS
           }
         }
-      ]
+      }
     }
   ) {
     id
@@ -32,16 +30,14 @@ query {
 
   postsWithoutThumbnail: posts(
     filter: {
-      metaQuery: [
-        {
-          key: "_thumbnail_id",
-          compareBy: {
-            key: {
-              operator: NOT_EXISTS
-            }
+      metaQuery: {
+        key: "_thumbnail_id",
+        compareBy: {
+          key: {
+            operator: NOT_EXISTS
           }
         }
-      ]
+      }
     }
   ) {
     id
@@ -76,6 +72,31 @@ query {
           }
         }
       ]
+    }
+  ) {
+    id
+    title
+  }
+}
+```
+
+Filtering by meta can also be combined with any of the standard data items. This query retrieves all posts without thumbnail that were created after a certain date:
+
+```graphql
+query {
+  posts(
+    filter: {
+      metaQuery: {
+        key: "_thumbnail_id",
+        compareBy: {
+          key: {
+            operator: NOT_EXISTS
+          }
+        }
+      },
+      dateQuery: {
+        after: "2020-07-01"
+      }
     }
   ) {
     id
