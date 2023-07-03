@@ -71,7 +71,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             return $entryContent;
         }
 
-        $messageExtensionPlaceholder = \__('<p>🔗 Extensions referenced in this recipe:</p><ul><li>%s</li></ul>', 'gato-graphql');
+        $messageExtensionPlaceholder = \__('<p><strong>🔗 Extensions referenced in this recipe:</strong></p><ul><li>%s</li></ul>', 'gato-graphql');
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
@@ -79,7 +79,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
         $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
         $messageBundleExtensionPlaceholder = sprintf(
-            '<p>%s</p>',
+            '<p><em>%s</em></p>',
             count($entryExtensionModules) === 1
                 ? \__('(It is included in %s)', 'gato-graphql')
                 : \__('(They are all included in %s)', 'gato-graphql')
