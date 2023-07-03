@@ -71,25 +71,26 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             return $entryContent;
         }
 
-        $messageExtensionPlaceholder = count($entryExtensionModules) === 1
-            ? \__('This recipe uses extension %s', 'gato-graphql')
-            : \__('This recipe uses extensions %s', 'gato-graphql');
+        $messageExtensionPlaceholder = \__('<p>🌀 Extensions mentioned in this recipe:</p><ul><li>%s</li></ul>', 'gato-graphql');
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
         $entryBundleExtensionModules = $entry[3] ?? [];
         $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
         $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
-        $messageBundleExtensionPlaceholder = count($entryExtensionModules) === 1
-            ? \__('(included in %s)', 'gato-graphql')
-            : \__('(all included in %s)', 'gato-graphql');
+        $messageBundleExtensionPlaceholder = sprintf(
+            '<p>%s</p>',
+            count($entryExtensionModules) === 1
+                ? \__('(It is included in %s)', 'gato-graphql')
+                : \__('(They are all included in %s)', 'gato-graphql')
+        );
 
         $messageHTML = sprintf(
-            \__('🌀 %s %s.', 'gato-graphql'),
+            \__('%s %s', 'gato-graphql'),
             sprintf(
                 $messageExtensionPlaceholder,
                 implode(
-                    \__(', ', 'gato-graphql'),
+                    \__('</li><li>', 'gato-graphql'),
                     $extensionHTMLItems
                 )
             ),
@@ -105,7 +106,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return sprintf(
             <<<HTML
                 <div class="%s">
-                    <p>%s</p>
+                    %s
                 </div>
             HTML,
             'extension-highlight',
