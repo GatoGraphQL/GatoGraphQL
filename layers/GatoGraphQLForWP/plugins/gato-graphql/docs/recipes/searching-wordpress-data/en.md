@@ -14,7 +14,9 @@ Searching for data within WordPress is limited in several cases, and Gato GraphQ
 
 One such case where finding data in WordPress is limited concerns custom fields (i.e. meta values): We may use custom fields to add extra information to posts (and also to users, comments, and taxonomies), however when searching for posts with some keyword, WordPress does not search within meta values.
 
-We can then create a Gato GraphQL query that retrieves the required data. For instance, this query retrieves all posts that either have a thumbnail (and that specific data) or not:
+We can use Gato GraphQL to retrieve posts (and also users, comments, and taxonomies), filtering them by meta key and value.
+
+For instance, this query retrieves all posts that have a thumbnail, and those that do not:
 
 ```graphql
 query {
@@ -56,7 +58,31 @@ query {
 }
 ```
 
-We can use the `AND` (and also `OR`) relation to filter data more precisely. This query retrieves posts with a thumbnail that was marked as "needs to have the thumbnail replaced" via a custom meta entry `todo_action`:
+This query retrieves all users who use the locale "Spanish from Argentina":
+
+```graphql
+query {
+  argentineSpanishLocaleUsers: users(
+    filter: { metaQuery:
+      {
+        key: "locale",
+        compareBy: {
+          stringValue: {
+            value: "es_AR"
+            operator: EQUALS
+          }
+        }
+      }
+    }
+  ) {
+    id
+    name
+    locale: metaValue(key: "locale")
+  }
+}
+```
+
+We can use the `AND` and `OR` relations to filter data more precisely. This query retrieves posts that both have a thumbnail, and also have a custom meta `todo_action` with value `"replace"` (meaning that it needs to have the thumbnail replaced):
 
 ```graphql
 query {
@@ -115,144 +141,18 @@ query {
 }
 ```
 
-```graphql
-query {
-  posts(
-    filter: {
-      metaQuery: [
-        {
-          key: "_thumbnail_id",
-          compareBy: {
-            key: {
-              operator: NOT_EXISTS
-            }
-          }
-        }
-      ]
-    }
-  ) {
-    id
-    title
-  }
-}
-```
+Moreover, we can search meta using regex expressions.
 
-Let's say we have a meta key "
-
-In WP can't look for posts or users with certain metadata. Here, can.
-
-By meta queries:
+This query searches for all users with a Spanish locale (for instance, `es_AR` for Argentina, `es_ES` for Spain, and so on):
 
 ```graphql
 query {
-  postsOR: posts(
-    filter: {
-      metaQuery: [
-        {
-          relation: OR
-          key: "_thumbnail_id",
-          compareBy: {
-            key: {
-              operator: EXISTS
-            }
-          }
-        },
-        {
-          key: "key_not_exists_so_all_entries_eval_false",
-          compareBy: {
-            key: {
-              operator: EXISTS
-            }
-          }
-        }
-      ]
-    }
-  ) {
-    id
-    title
-  }
-
-  postsAND: posts(
-    filter: {
-      metaQuery: [
-        {
-          relation: AND
-          key: "_thumbnail_id",
-          compareBy: {
-            key: {
-              operator: EXISTS
-            }
-          }
-        },
-        {
-          key: "key_not_exists_so_all_entries_eval_false",
-          compareBy: {
-            key: {
-              operator: EXISTS
-            }
-          }
-        }
-      ]
-    }
-  ) {
-    id
-    title
-  }
-
-  postsWithFeaturedImage: posts(filter: {
-    metaQuery: {
-      key: "_thumbnail_id",
-      compareBy: {
-        key: {
-          operator: EXISTS
-        }
-      }
-    }
-  }, sort: { by: ID, order: ASC }) {
-    id
-    title
-    featuredImage {
-      id
-    }
-  }
-  
-  postsWithoutFeaturedImage: posts(filter: {
-    metaQuery: {
-      key: "_thumbnail_id",
-      compareBy: {
-        key: {
-          operator: NOT_EXISTS
-        }
-      }
-    }
-  }, sort: { by: ID, order: ASC }) {
-    id
-    title
-    featuredImage {
-      id
-    }
-  }
-
   spanishLocaleUsers: users(filter: { metaQuery: {
     key: "locale",
     compareBy: {
       stringValue: {
         value: "es_[A-Z]+"
         operator: REGEXP
-      }
-    }
-  }}) {
-    id
-    name
-    locale: metaValue(key: "locale")
-  }
-
-  argentineSpanishLocaleUsers: users(filter: { metaQuery: {
-    key: "locale",
-    compareBy: {
-      stringValue: {
-        value: "es_AR"
-        operator: EQUALS
       }
     }
   }}) {
