@@ -2,19 +2,19 @@
 
 Searching for data within WordPress is limited in several cases, and Gato GraphQL can help augment these capabilities.
 
+Such an example involves custom fields (i.e. meta values): We may use custom fields to add extra information to posts (and also to users, comments, and taxonomies), however when searching for posts with some keyword, WordPress does not search within meta values.
+
+We can then use Gato GraphQL to search for posts (and also users, comments, and taxonomies) by meta key and value.
+
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
 
 - Create the queries below as <a href="https://gatographql.com/guides/use/creating-a-persisted-query/" target="_blank">Persisted Queries</a>, as to keep them stored in the website, and execute them time and again
 - Publish them <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/" target="_blank">as `private`</a>, so that they are available only within the wp-admin, and only to the admin
-- Use an <a href="https://gatographql.com/guides/use/creating-an-api-hierarchy/" target="_blank">API hierarchy</a> to manage them, eg: by placing them under `internal/` (eg: `internal/search/search-posts-without-thumbnail`)
+- Use an <a href="https://gatographql.com/guides/use/creating-an-api-hierarchy/" target="_blank">API hierarchy</a> to manage them (eg: by placing query `search-posts-without-thumbnail` under parent `internal`, it will be available as `internal/search-posts-without-thumbnail`)
 
 </div>
-
-One such case where finding data in WordPress is limited concerns custom fields (i.e. meta values): We may use custom fields to add extra information to posts (and also to users, comments, and taxonomies), however when searching for posts with some keyword, WordPress does not search within meta values.
-
-We can use Gato GraphQL to retrieve posts (and also users, comments, and taxonomies), filtering them by meta key and value.
 
 For instance, this query retrieves all posts that have a thumbnail, and those that do not:
 
