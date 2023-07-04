@@ -158,7 +158,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql.lndo.site/graphql/)
+  https://gato-graphql-pro.lndo.site/graphql/)
 ```
 
 ## Adding syntax highlighting to the GraphQL query
@@ -200,7 +200,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql.lndo.site/graphql/)
+  https://gato-graphql-pro.lndo.site/graphql/)
 ```
 
 ## Multiple results via `@export`
@@ -215,6 +215,7 @@ With the use of extensions, we can also produce multiple user IDs, with a single
 - We execute the operation `FormatAndPrintData`
 
 ```graphql
+# This query is stored in file "find-multiple-users-with-spanish-locale.gql"
 query RetrieveData {
   users(
     filter: {
@@ -265,29 +266,38 @@ The response to this query will be:
 }
 ```
 
-To execute the query from the terminal and extract the data, we adapt the regex accordingly, and indicate to execute operation `"FormatAndPrintData"` in the body of the request:
+To execute the query from the terminal, we must indicate to execute operation `"FormatAndPrintData"` in the body of the request:
 
 Must also pass the "operationName":
 
 ```bash
-GRAPHQL_QUERY=$(cat find-users-with-spanish-locale.gql)
+GRAPHQL_QUERY=$(cat find-multiple-users-with-spanish-locale.gql)
 GRAPHQL_BODY="{\"operationName\": \"FormatAndPrintData\", \"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
 GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql.lndo.site/graphql/)
+  https://gato-graphql-pro.lndo.site/graphql/)
 ```
 
-Then:
+We must also adapt the regex:
 
 ```bash
 SPANISH_LOCALE_USER_IDS=$(echo $GRAPHQL_RESPONSE \
-  | grep -E -o '"spanishLocaleUserIDs\":"([\d| ]+)"' \
+  | grep -E -o '"spanishLocaleUserIDs\":"((\d|\s)+)"' \
   | cut -d':' -f2- | cut -d'"' -f2- | rev | cut -d'"' -f2- | rev)
+```
 
-# I can't pass multiple IDs to `wp user meta`:
-# $ wp user meta update "$(echo $SPANISH_LOCALE_USER_IDS)" locale "fr_FR"
-# Then iterate the list, and execute command for each:
+Printing the contents of variable `SPANISH_LOCALE_USER_IDS`, we get all the IDs, separated with a space:
+
+```bash
+echo $SPANISH_LOCALE_USER_IDS
+# Response:
+# 3 2
+```
+
+We can now inject all IDs together to the WP-CLI command (if it supports it), or iterate them and execute the command for each of them:
+
+```bash
 for USER_ID in $(echo $SPANISH_LOCALE_USER_IDS); do wp user update "$(echo $USER_ID)" --locale=fr_FR; done
 ```
