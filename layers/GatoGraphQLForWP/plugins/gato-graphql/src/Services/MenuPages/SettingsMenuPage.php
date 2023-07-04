@@ -27,6 +27,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 {
     use UseTabpanelMenuPageTrait;
     use UseDocsMenuPageTrait;
+    use UseCollapsibleContentMenuPageTrait;
 
     public final const FORM_ORIGIN = 'form-origin';
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
@@ -587,12 +588,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $this->enqueueSettingsAssets();
 
+        $this->enqueueCollapsibleContentAssets();
+
         /**
          * Always enqueue (even if printModuleSettingsWithTabs() is false) as the
          * outer level (for settings category) uses tabs
          */
         $this->enqueueTabpanelAssets();
     }
+
     /**
      * Enqueue the required assets
      */
@@ -611,19 +615,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         \wp_enqueue_style(
             'gato-graphql-settings',
             $mainPluginURL . 'assets/css/settings.css',
-            array(),
-            $mainPluginVersion
-        );
-
-        \wp_enqueue_script(
-            'gato-graphql-collapse',
-            $mainPluginURL . 'assets/js/collapse.js',
-            array('jquery'),
-            $mainPluginVersion
-        );
-        \wp_enqueue_style(
-            'gato-graphql-collapse',
-            $mainPluginURL . 'assets/css/collapse.css',
             array(),
             $mainPluginVersion
         );

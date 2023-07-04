@@ -59,6 +59,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return true;
     }
 
+    protected function hasCollapsibleContent(): bool
+    {
+        return true;
+    }
+
     /**
      * @param array{0:string,1:string,2?:string[],3?:string[]} $entry
      */
@@ -79,30 +84,32 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
         $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
         $messageBundleExtensionPlaceholder = sprintf(
-            '<p><em>%s</em></p>',
+            '<hr/><em>%s</em>',
             count($entryExtensionModules) === 1
                 ? \__('(It is included in %s)', 'gato-graphql')
                 : \__('(They are all included in %s)', 'gato-graphql')
         );
 
         $messageHTML = sprintf(
-            \__('%s%s%s', 'gato-graphql'),
-            sprintf(
-                '<p><strong>🔗 %s</strong></p>',
-                \__('Extensions referenced in this recipe:', 'gato-graphql')
-            ),
-            sprintf(
-                $messageExtensionPlaceholder,
-                implode(
-                    \__('</li><li>', 'gato-graphql'),
-                    $extensionHTMLItems
-                )
-            ),
-            sprintf(
-                $messageBundleExtensionPlaceholder,
-                implode(
-                    \__(', ', 'gato-graphql'),
-                    $bundleExtensionHTMLItems
+            \__('<strong>🔗 %s</strong>: %s', 'gato-graphql'),
+            \__('Extensions referenced in this recipe', 'gato-graphql'),
+            $this->getCollapsible(
+                sprintf(
+                    '%s%s',
+                    sprintf(
+                        $messageExtensionPlaceholder,
+                        implode(
+                            \__('</li><li>', 'gato-graphql'),
+                            $extensionHTMLItems
+                        )
+                    ),
+                    sprintf(
+                        $messageBundleExtensionPlaceholder,
+                        implode(
+                            \__(', ', 'gato-graphql'),
+                            $bundleExtensionHTMLItems
+                        )
+                    )
                 )
             )
         );

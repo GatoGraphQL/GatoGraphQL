@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\ContentPrinters\CollapsibleContentPrinterTrait;
 use WP_Post;
 
 use function get_posts;
 
 trait CommonModuleResolverTrait
 {
+    use CollapsibleContentPrinterTrait;
+    
     /**
      * @param string[]|null $applicableItems
      */
@@ -55,17 +58,6 @@ trait CommonModuleResolverTrait
     protected function getPressCtrlToSelectMoreThanOneOptionLabel(): string
     {
         return \__('Press <code>ctrl</code> or <code>shift</code> keys to select more than one.', 'gato-graphql');
-    }
-
-    protected function getCollapsible(
-        string $content,
-        ?string $showDetailsLabel = null,
-    ): string {
-        return sprintf(
-            '<a href="#" type="button" class="collapsible">%s</a><span class="collapsible-content">%s</span>',
-            $showDetailsLabel ?? \__('Show details', 'gato-graphql'),
-            $content
-        );
     }
 
     protected function getSettingsInfoContent(string $content): string

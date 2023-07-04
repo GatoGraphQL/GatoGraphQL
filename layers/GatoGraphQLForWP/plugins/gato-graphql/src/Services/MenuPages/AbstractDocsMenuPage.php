@@ -16,6 +16,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
 {
     use OpenInModalMenuPageTrait;
     use UseTabpanelMenuPageTrait;
+    use UseCollapsibleContentMenuPageTrait;
     use PrettyprintCodePageTrait;
     use MarkdownContentRetrieverTrait;
     use UseDocsMenuPageTrait;
@@ -91,6 +92,11 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
         return true;
     }
 
+    protected function hasCollapsibleContent(): bool
+    {
+        return false;
+    }
+
     /**
      * Enqueue the required assets and initialize the localized scripts
      */
@@ -119,6 +125,13 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
          */
         if ($this->highlightCode()) {
             $this->enqueueHighlightJSAssets();
+        }
+
+        /**
+         * Add styles/scripts to use a tabpanel
+         */
+        if ($this->hasCollapsibleContent()) {
+            $this->enqueueCollapsibleContentAssets();
         }
     }
 }
