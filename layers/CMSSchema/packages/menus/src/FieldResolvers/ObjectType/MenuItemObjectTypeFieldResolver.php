@@ -163,8 +163,6 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'children',
             'classes'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-            'localURLPath'
-                => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -175,7 +173,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'children' => $this->__('Menu item children items', 'menus'),
             'label' => $this->__('Menu item label', 'menus'),
             'title' => $this->__('Menu item title', 'menus'),
-            'localURLPath' => $this->__('Path of a local URL, or empty if external URL', 'menus'),
+            'localURLPath' => $this->__('Path of a local URL, or null if external URL', 'menus'),
             'url' => $this->__('Menu item URL', 'menus'),
             'classes' => $this->__('Menu item classes', 'menus'),
             'target' => $this->__('Menu item target', 'menus'),
@@ -200,7 +198,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return array_keys($this->getMenuItemRuntimeRegistry()->getMenuItemChildren($menuItem));
             case 'localURLPath':
                 $url = $menuItem->url;
-                return $this->getCMSHelperService()->getLocalURLPath($url) ?? '';
+                return $this->getCMSHelperService()->getLocalURLPath($url);
             // These are all properties of MenuItem
             // Commented out since this is the default FieldResolver's response
             // case 'label':
