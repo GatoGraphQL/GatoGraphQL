@@ -67,7 +67,7 @@ curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"query": "query {\n  users(\n    filter: {\n      metaQuery: {\n        key: \"locale\",\n        compareBy: {\n          stringValue: {\n            value: \"es_[A-Z]+\"\n            operator: REGEXP\n          }\n        }\n      }\n    },\n    pagination: {\n      limit: 1\n    }\n  ) {\n    id\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}"}' \
-  https://yoursite.com/graphql/
+  https://mysite.com/graphql/
 ```
 
 This prints the response right in the terminal:
@@ -99,7 +99,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"query": "query {\n  users(\n    filter: {\n      metaQuery: {\n        key: \"locale\",\n        compareBy: {\n          stringValue: {\n            value: \"es_[A-Z]+\"\n            operator: REGEXP\n          }\n        }\n      }\n    },\n    pagination: {\n      limit: 1\n    }\n  ) {\n    spanishLocaleUserID: id\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}"}' \
-  https://yoursite.com/graphql/)
+  https://mysite.com/graphql/)
 ```
 
 Executing `echo $GRAPHQL_RESPONSE` we can visualize the response:
@@ -158,7 +158,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://yoursite.com/graphql/)
+  https://mysite.com/graphql/)
 ```
 
 ## Adding syntax highlighting to the GraphQL query
@@ -200,7 +200,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://yoursite.com/graphql/)
+  https://mysite.com/graphql/)
 ```
 
 ## Multiple results via `@export`
@@ -277,7 +277,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://yoursite.com/graphql/)
+  https://mysite.com/graphql/)
 ```
 
 We must also adapt the regex:
