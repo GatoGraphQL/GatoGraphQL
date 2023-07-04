@@ -181,10 +181,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
             ],
             [
-                'boosting-the-performance-of-the-api',
-                \__('Boosting the performance of the API', 'gato-graphql'),
-            ],
-            [
                 'feeding-data-to-blocks-in-the-editor',
                 \__('Feeding data to blocks in the editor', 'gato-graphql'),
             ],
