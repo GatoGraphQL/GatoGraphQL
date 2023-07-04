@@ -60,6 +60,18 @@ In the terminal, we can use `curl` to execute a query against the GraphQL server
 - Accepted content type is `application/json`
 - The query is passed via the body, as a dictionary under entry `"query"`
 - The query must be formatted: all `"` must be escaped as `\"`, and newlines are replaced with `\n`
+- The endpoint URL
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+- The endpoint can either be the single endpoint (under `graphql/`), or a custom endpoint (under `graphql/{custom-endpoint}`)
+- The single endpoint is <a href="https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/" target="_blank">disabled by default</a>, so it must be enabled
+- The single endpoint is public; to avoid unintentionally exposing private data, it is advised to enable it only when your website is not accessible to the Internet (eg: The WordPress site is on a development laptop, to feed data to build a headless site)
+- Otherwise, it is advised to <a href="https://gatographql.com/guides/use/creating-a-custom-endpoint/" target="_blank">create a custom endpoint</a>, and <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints" target="_blank">publish it as `private`</a>
+
+</div>
 
 ```bash
 curl \
