@@ -60,7 +60,7 @@ In the terminal, we can use `curl` (or a similar tool) to execute a query agains
 - Accepted content type is `application/json`
 - The query is passed via the body, as a dictionary under entry `"query"`
 - The query must be formatted: all `"` must be escaped as `\"`, and newlines are replaced with `\n`
-- The endpoint URL
+- The endpoint URL from Gato GraphQL (either for the single endpoint or some custom endpoint)
 
 ```bash
 curl \
@@ -80,15 +80,17 @@ This prints the response right in the terminal:
 
 🔥 **Tips:**
 
-- The endpoint can either be the single endpoint (under `graphql/`), or a custom endpoint (under `graphql/{custom-endpoint-name}`)
+- The single endpoint is (by default) accessible under `graphql/`, and a custom endpoint is (by default) accessible under `graphql/{custom-endpoint-slug}/`
 - The single endpoint is <a href="https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/" target="_blank">disabled by default</a>, so it must be enabled
 - The single endpoint is public; to avoid unintentionally exposing private data, it is advised to enable it only when your website is not accessible to the Internet (eg: the site is on a development laptop, used to build a headless site)
 - Otherwise, it is advised to <a href="https://gatographql.com/guides/use/creating-a-custom-endpoint/" target="_blank">create a custom endpoint</a>, <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints" target="_blank">publish it as `private`</a>, and pass the cookies added by WordPress (once the user has been authenticated) to `curl` (you can use DevTools to inspect the request headers when in the WordPress dashboard)
-- Alternatively (via extensions), we can restrict access to the endpoint via <a href="https://gatographql.com/guides/use/defining-access-control/" target="_blank">Access Control</a> (eg: checking that the <a href="https://gatographql.com/guides/config/restricting-access-by-visitor-ip/" target="_blank">visitor comes from IP `127.0.0.1`</a>).
+- Alternatively (via extensions), we can restrict access to the single or custom endpoint via <a href="https://gatographql.com/guides/use/defining-access-control/" target="_blank">Access Control</a> (eg: checking that the <a href="https://gatographql.com/guides/config/restricting-access-by-visitor-ip/" target="_blank">visitor comes from IP `127.0.0.1`</a>).
 
 </div>
 
 ## Extracting the ID from the GraphQL response
+
+Similar to doing `--field=ID`, `--format=ids` or `--porcelain` in WP-CLI, we need to find a way to extract only the ID from the GraphQL response.
 
 Let's use command-line tools for manipulating the GraphQL response, and extract from it the required data.
 
