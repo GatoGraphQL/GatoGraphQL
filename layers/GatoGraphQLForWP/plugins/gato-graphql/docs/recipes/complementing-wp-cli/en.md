@@ -122,7 +122,11 @@ Now, we can inject the value of this variable into WP-CLI:
 wp user update "$(echo $SPANISH_LOCALE_USER_ID)" --locale=fr_FR
 ```
 
-## Automating the bash script
+## Making the GraphQL query more readable
+
+Because we need to adapt the GraphQL query to input it into `curl`, it became difficult to read.
+
+A solution is to apply the transformations using bash commands, such as `tr` and `sed`:
 
 ```bash
 GRAPHQL_QUERY='
@@ -154,14 +158,15 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql.lndo.site/graphql/website/)
+  https://gato-graphql.lndo.site/graphql/)
 ```
 
-## Query with syntax highlighting
+## Adding syntax highlighting to the GraphQL query
 
-Do this:
+A further iteration from the previous step is to place the GraphQL query in a separate `.gql` file, which can then be edited with an editor (such as VSCode) and use its syntax highlighting:
 
 ```graphql
+# This query is stored in file "find-users-with-spanish-locale.gql"
 query {
   users(
     filter: {
@@ -186,16 +191,16 @@ query {
 }
 ```
 
-And:
+Then, we read the contents of this file using `cat`:
 
 ```bash
-GRAPHQL_QUERY=$(cat query.gql)
+GRAPHQL_QUERY=$(cat find-users-with-spanish-locale.gql)
 GRAPHQL_BODY="{\"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
 GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql.lndo.site/graphql/website/)
+  https://gato-graphql.lndo.site/graphql/)
 ```
 
 ## Multiple results via `@export`
@@ -238,7 +243,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql.lndo.site/graphql/website/)
+  https://gato-graphql.lndo.site/graphql/)
 ```
 
 Then:
