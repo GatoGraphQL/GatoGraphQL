@@ -91,24 +91,24 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         );
 
         $messageHTML = sprintf(
-            \__('%s%s', 'gato-graphql'),
-            sprintf(
-                '<strong>🔗 %s</strong>',
-                \__('Extensions referenced in this recipe: ', 'gato-graphql')
-            ),
+            \__('<strong>🔗 %s</strong>: %s', 'gato-graphql'),
+            \__('Extensions referenced in this recipe', 'gato-graphql'),
             $this->getCollapsible(
                 sprintf(
-                    $messageExtensionPlaceholder,
-                    implode(
-                        \__('</li><li>', 'gato-graphql'),
-                        $extensionHTMLItems
-                    )
-                )
-                . sprintf(
-                    $messageBundleExtensionPlaceholder,
-                    implode(
-                        \__(', ', 'gato-graphql'),
-                        $bundleExtensionHTMLItems
+                    '%s%s',
+                    sprintf(
+                        $messageExtensionPlaceholder,
+                        implode(
+                            \__('</li><li>', 'gato-graphql'),
+                            $extensionHTMLItems
+                        )
+                    ),
+                    sprintf(
+                        $messageBundleExtensionPlaceholder,
+                        implode(
+                            \__(', ', 'gato-graphql'),
+                            $bundleExtensionHTMLItems
+                        )
                     )
                 )
             )
