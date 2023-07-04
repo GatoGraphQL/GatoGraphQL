@@ -181,10 +181,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
             ],
             [
-                'building-headless-sites',
-                \__('Building headless sites', 'gato-graphql'),
-            ],
-            [
                 'boosting-the-performance-of-the-api',
                 \__('Boosting the performance of the API', 'gato-graphql'),
             ],
