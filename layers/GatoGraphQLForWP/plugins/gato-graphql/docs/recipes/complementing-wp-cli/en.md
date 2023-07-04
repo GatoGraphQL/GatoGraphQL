@@ -2,18 +2,34 @@
 
 <a href="https://wp-cli.org" target="_blank">WP-CLI</a> is a command-line tool to interact with WordPress, that helps us automate tasks. It allows us to install a new site, create or update posts, activate plugins, modify the options, and much more.
 
-Thanks to the `--porcelain` parameter available in many <a href="https://developer.wordpress.org/cli/commands/" target="_blank">WP-CLI commands</a>, which produces the ID of the involved resource, we are able to nest commands:
+WP-CLI commands can be nested:
 
-- Use WP-CLI to retrieve the ID of some resource
-- We inject that ID into another WP-CLI command, to execute an operation on that resource
+1. Execute a WP-CLI command that returns the ID of some resource
+2. Inject that ID into another WP-CLI command, to execute an operation on that resource
 
-For instance, this script executes the `wp menu item` command 3 times, to create 3 menu items and already set their hierarchy (`"Most ancestor menu item"` > `"Parent menu item"` > `"Child menu item"`):
+For instance, this script finds the ID for the post with some slug, and updates its meta:
+
+```bash
+wp post meta set $(wp post list --name="hello-world" --format=ids) _wp_page_template about.php
+```
+
+This script repeatedly creates a menu item and sets its ID as parent to another new menu item, thus defining their hierarchy (`"Most ancestor menu item"` > `"Parent menu item"` > `"Child menu item"`):
 
 ```bash
 wp menu item add-custom bottom-menu "Child menu item" https://bbc.com --parent-id=$(wp menu item add-post bottom-menu 1 --title="Parent menu item" --parent-id=$(wp menu item add-post bottom-menu 1 --title="Most ancestor menu item" --porcelain) --porcelain)
 ```
 
-In the previous recipe we learnt how to use Gato GraphQL to retrieve posts by some meta value. Let's use that same example to inject the post ID to WP-CLI to update the post
+As we learnt in the previous recipe, Gato GraphQL can augment WordPress capabilities for searching for data. As such, we can also use Gato GraphQL to find the data we need, and inject it into WP-CLI.
+
+The following queries will demonstrate how to do that.
+
+## Executing a GraphQL query from the terminal
+
+...
+
+## Extracting an ID from the GraphQL response
+
+Let's re-use the example from the previous recipe, to find users with the Spanish locale:
 
 ```graphql
 query {
