@@ -71,7 +71,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             return $entryContent;
         }
 
-        $messageExtensionPlaceholder = \__('<p><strong>🔗 Extensions referenced in this recipe:</strong></p><ul><li>%s</li></ul>', 'gato-graphql');
+        $messageExtensionPlaceholder = \__('<ul><li>%s</li></ul>', 'gato-graphql');
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
@@ -86,7 +86,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         );
 
         $messageHTML = sprintf(
-            \__('%s %s', 'gato-graphql'),
+            \__('%s%s%s', 'gato-graphql'),
+            sprintf(
+                '<p><strong>🔗 %s</strong></p>',
+                \__('Extensions referenced in this recipe:', 'gato-graphql')
+            ),
             sprintf(
                 $messageExtensionPlaceholder,
                 implode(
