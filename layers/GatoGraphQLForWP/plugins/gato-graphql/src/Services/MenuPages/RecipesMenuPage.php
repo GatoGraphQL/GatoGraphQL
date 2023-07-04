@@ -181,10 +181,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
             ],
             [
-                'managing-the-exposure-of-the-api',
-                \__('Managing the exposure of the API', 'gato-graphql'),
-            ],
-            [
                 'exposing-a-secure-public-api',
                 \__('Exposing a secure public API', 'gato-graphql'),
             ],
