@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQL\GatoGraphQL\ContentPrinters\CollapsibleContentPrinterTrait;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
@@ -11,6 +12,8 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
  */
 trait UseCollapsibleContentMenuPageTrait
 {
+    use CollapsibleContentPrinterTrait;
+    
     /**
      * Enqueue the required assets
      */
