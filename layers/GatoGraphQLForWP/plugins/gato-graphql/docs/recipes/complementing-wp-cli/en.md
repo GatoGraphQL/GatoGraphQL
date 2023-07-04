@@ -1,6 +1,19 @@
 # Complementing WP-CLI
 
-First a single result
+<a href="https://wp-cli.org" target="_blank">WP-CLI</a> is a command-line tool to interact with WordPress, that helps us automate tasks. It allows us to install a new site, create or update posts, activate plugins, modify the options, and much more.
+
+Thanks to the `--porcelain` parameter available in many <a href="https://developer.wordpress.org/cli/commands/" target="_blank">WP-CLI commands</a>, which produces the ID of the involved resource, we are able to nest commands:
+
+- Use WP-CLI to retrieve the ID of some resource
+- We inject that ID into another WP-CLI command, to execute an operation on that resource
+
+For instance, this script executes the `wp menu item` command 3 times, to create 3 menu items and already set their hierarchy (`"Most ancestor menu item"` > `"Parent menu item"` > `"Child menu item"`):
+
+```bash
+wp menu item add-custom bottom-menu "Child menu item" https://bbc.com --parent-id=$(wp menu item add-post bottom-menu 1 --title="Parent menu item" --parent-id=$(wp menu item add-post bottom-menu 1 --title="Most ancestor menu item" --porcelain) --porcelain)
+```
+
+In the previous recipe we learnt how to use Gato GraphQL to retrieve posts by some meta value. Let's use that same example to inject the post ID to WP-CLI to update the post
 
 ```graphql
 query {
