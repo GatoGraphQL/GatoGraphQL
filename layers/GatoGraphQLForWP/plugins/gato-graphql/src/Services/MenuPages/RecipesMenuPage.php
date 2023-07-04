@@ -162,6 +162,12 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'complementing-wp-cli',
                 \__('Complementing WP-CLI', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::ACCESS_CONTROL,
+                    ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
             ],
             [
                 'testing-an-endpoint-before-publishing-it',
