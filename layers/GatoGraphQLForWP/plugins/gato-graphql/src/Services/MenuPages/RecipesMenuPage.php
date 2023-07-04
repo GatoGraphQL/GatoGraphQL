@@ -181,10 +181,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
             ],
             [
-                'testing-an-endpoint-before-publishing-it',
-                \__('Testing an endpoint before publishing it', 'gato-graphql'),
-            ],
-            [
                 'managing-the-exposure-of-the-api',
                 \__('Managing the exposure of the API', 'gato-graphql'),
             ],
