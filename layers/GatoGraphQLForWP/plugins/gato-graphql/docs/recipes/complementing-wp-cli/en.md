@@ -90,21 +90,9 @@ This prints the response right in the terminal:
 
 ## Extracting the ID from the GraphQL response
 
-Similar to doing `--field=ID`, `--format=ids` or `--porcelain` in WP-CLI, we need to find a way to extract only the ID from the GraphQL response.
+Similar to doing `--field=ID`, `--format=ids` or `--porcelain` in WP-CLI, we need to find a way to extract the specific piece of data that we need from the GraphQL response. In this example, that is the user ID.
 
-Let's use command-line tools for manipulating the GraphQL response, and extract from it the required data.
-
-First, we assign the GraphQL response to an environment variable:
-
-```bash
-GRAPHQL_RESPONSE=$(curl \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"query": "query {\n  users(\n    filter: {\n      metaQuery: {\n        key: \"locale\",\n        compareBy: {\n          stringValue: {\n            value: \"es_[A-Z]+\"\n            operator: REGEXP\n          }\n        }\n      }\n    },\n    pagination: {\n      limit: 1\n    }\n  ) {\n    id\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}"}' \
-  https://gato-graphql-pro.lndo.site/graphql/)
-```
-
-We can do `echo $GRAPHQL_RESPONSE` to visualize the response.
+We assign the GraphQL response to an environment variable (such as `GRAPHQL_RESPONSE`), and identify the user ID with a particular alias (such as `spanishLocaleUserID`):
 
 ```bash
 GRAPHQL_RESPONSE=$(curl \
@@ -112,17 +100,25 @@ GRAPHQL_RESPONSE=$(curl \
   -H "Content-Type: application/json" \
   -d '{"query": "query {\n  users(\n    filter: {\n      metaQuery: {\n        key: \"locale\",\n        compareBy: {\n          stringValue: {\n            value: \"es_[A-Z]+\"\n            operator: REGEXP\n          }\n        }\n      }\n    },\n    pagination: {\n      limit: 1\n    }\n  ) {\n    spanishLocaleUserID: id\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}"}' \
   https://gato-graphql-pro.lndo.site/graphql/)
-
-echo $GRAPHQL_RESPONSE
 ```
 
-Input into WP-CLI:
+Executing `echo $GRAPHQL_RESPONSE` we can visualize the response:
+
+```json
+{"data":{"users":[{"spanishLocaleUserID":3,"name":"Subscriber Bennett","locale":"es_AR"}]}}
+```
+
+Next, we execute `grep` with a regex matching the `"spanishLocaleUserID":{ID}` pattern, and extract the ID into environment variable `SPANISH_LOCALE_USER_ID`:
 
 ```bash
 SPANISH_LOCALE_USER_ID=$(echo $GRAPHQL_RESPONSE \
-  | grep -E -o '"spanishLocaleUserID\":"(.*)"' \
+  | grep -E -o '"spanishLocaleUserID\":(\d+)' \
   | cut -d':' -f2- | cut -d'"' -f2- | rev | cut -d'"' -f2- | rev)
+```
 
+Now, we can inject the value of this variable into WP-CLI:
+
+```bash
 wp user update "$(echo $SPANISH_LOCALE_USER_ID)" --locale=fr_FR
 ```
 
