@@ -58,16 +58,16 @@ In the terminal, we can use `curl` (or a similar tool) to execute a query agains
 
 - Execute the `POST` method
 - Accepted content type is `application/json`
-- The query is passed via the body, as a dictionary under entry `"query"`
-- The query must be formatted: all `"` must be escaped as `\"`, and newlines are replaced with `\n`
-- The endpoint URL from Gato GraphQL (either for the single endpoint or some custom endpoint)
+- The body is a dictionary with entry `"query"` and the GraphQL query (and, if needed, also entries `"variables"` and `"operationName"`)
+- The query string must be formatted: All `"` must be escaped as `\"`, and newlines must be replaced with `\n`
+- Point against the endpoint URL from Gato GraphQL (either the single endpoint, or some custom endpoint)
 
 ```bash
 curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"query": "query {\n  users(\n    filter: {\n      metaQuery: {\n        key: \"locale\",\n        compareBy: {\n          stringValue: {\n            value: \"es_[A-Z]+\"\n            operator: REGEXP\n          }\n        }\n      }\n    },\n    pagination: {\n      limit: 1\n    }\n  ) {\n    id\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}"}' \
-  https://gato-graphql-pro.lndo.site/graphql/
+  https://yoursite.com/graphql/
 ```
 
 This prints the response right in the terminal:
@@ -99,7 +99,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"query": "query {\n  users(\n    filter: {\n      metaQuery: {\n        key: \"locale\",\n        compareBy: {\n          stringValue: {\n            value: \"es_[A-Z]+\"\n            operator: REGEXP\n          }\n        }\n      }\n    },\n    pagination: {\n      limit: 1\n    }\n  ) {\n    spanishLocaleUserID: id\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}"}' \
-  https://gato-graphql-pro.lndo.site/graphql/)
+  https://yoursite.com/graphql/)
 ```
 
 Executing `echo $GRAPHQL_RESPONSE` we can visualize the response:
@@ -158,7 +158,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql-pro.lndo.site/graphql/)
+  https://yoursite.com/graphql/)
 ```
 
 ## Adding syntax highlighting to the GraphQL query
@@ -200,7 +200,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql-pro.lndo.site/graphql/)
+  https://yoursite.com/graphql/)
 ```
 
 ## Multiple results via `@export`
@@ -277,7 +277,7 @@ GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
   -d $GRAPHQL_BODY \
-  https://gato-graphql-pro.lndo.site/graphql/)
+  https://yoursite.com/graphql/)
 ```
 
 We must also adapt the regex:
