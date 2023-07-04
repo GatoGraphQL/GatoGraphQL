@@ -166,7 +166,7 @@ GRAPHQL_RESPONSE=$(curl \
 A further iteration from the previous step is to place the GraphQL query in a separate `.gql` file, which can then be edited with an editor (such as VSCode) and use its syntax highlighting:
 
 ```graphql
-# This query is stored in file "find-users-with-spanish-locale.gql"
+# This query is stored in file "find-user-with-spanish-locale.gql"
 query {
   users(
     filter: {
@@ -194,7 +194,7 @@ query {
 Then, we read the contents of this file using `cat`:
 
 ```bash
-GRAPHQL_QUERY=$(cat find-users-with-spanish-locale.gql)
+GRAPHQL_QUERY=$(cat find-user-with-spanish-locale.gql)
 GRAPHQL_BODY="{\"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
 GRAPHQL_RESPONSE=$(curl \
   -X POST \
@@ -205,8 +205,17 @@ GRAPHQL_RESPONSE=$(curl \
 
 ## Multiple results via `@export`
 
+In the previous examples, we only produced a single user ID.
+
+With the use of extensions, we can also produce multiple user IDs, with a single GraphQL query:
+
+- We remove the `pagination` argument from the query, as to retrieve the list of all the users with Spanish locale
+- We export a list of the user IDs, under dynamic variable `$userIDs`
+- We print the elements of this array with `_arrayJoin`, joining the items with a space in between, under alias `spanishLocaleUserIDs`
+- We execute the operation `FormatAndPrintData`
+
 ```graphql
-query One {
+query RetrieveData {
   users(
     filter: {
       metaQuery: {
@@ -220,13 +229,13 @@ query One {
       }
     }
   ) {
-    id @export(as: "userIDs")
+    id @export(as: "userIDs", type: LIST)
     name
     locale: metaValue(key: "locale")
   }
 }
 
-query Two @depends(on: "One") {
+query FormatAndPrintData @depends(on: "RetrieveData") {
   spanishLocaleUserIDs: _arrayJoin(
     array: $userIDs,
     separator: " "
@@ -234,11 +243,35 @@ query Two @depends(on: "One") {
 }
 ```
 
+The response to this query will be:
+
+```json
+{
+  "data": {
+    "users": [
+      {
+        "id": 3,
+        "name": "Subscriber Bennett",
+        "locale": "es_AR"
+      },
+      {
+        "id": 2,
+        "name": "Blogger Davenport",
+        "locale": "es_ES"
+      }
+    ],
+    "spanishLocaleUserIDs": "3 2"
+  }
+}
+```
+
+To execute the query from the terminal and extract the data, we adapt the regex accordingly, and indicate to execute operation `"FormatAndPrintData"` in the body of the request:
+
 Must also pass the "operationName":
 
 ```bash
-GRAPHQL_QUERY=$(cat query.gql)
-GRAPHQL_BODY="{\"operationName\": \"Two\", \"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
+GRAPHQL_QUERY=$(cat find-users-with-spanish-locale.gql)
+GRAPHQL_BODY="{\"operationName\": \"FormatAndPrintData\", \"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
 GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
@@ -250,7 +283,7 @@ Then:
 
 ```bash
 SPANISH_LOCALE_USER_IDS=$(echo $GRAPHQL_RESPONSE \
-  | grep -E -o '"spanishLocaleUserIDs\":"(.*)"' \
+  | grep -E -o '"spanishLocaleUserIDs\":"([\d| ]+)"' \
   | cut -d':' -f2- | cut -d'"' -f2- | rev | cut -d'"' -f2- | rev)
 
 # I can't pass multiple IDs to `wp user meta`:
