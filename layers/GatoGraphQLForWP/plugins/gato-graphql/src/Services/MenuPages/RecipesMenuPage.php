@@ -59,6 +59,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return true;
     }
 
+    protected function hasCollapsibleContent(): bool
+    {
+        return true;
+    }
+
     /**
      * @param array{0:string,1:string,2?:string[],3?:string[]} $entry
      */
@@ -86,23 +91,25 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         );
 
         $messageHTML = sprintf(
-            \__('%s%s%s', 'gato-graphql'),
+            \__('%s%s', 'gato-graphql'),
             sprintf(
                 '<p><strong>🔗 %s</strong></p>',
                 \__('Extensions referenced in this recipe:', 'gato-graphql')
             ),
-            sprintf(
-                $messageExtensionPlaceholder,
-                implode(
-                    \__('</li><li>', 'gato-graphql'),
-                    $extensionHTMLItems
+            $this->getCollapsible(
+                sprintf(
+                    $messageExtensionPlaceholder,
+                    implode(
+                        \__('</li><li>', 'gato-graphql'),
+                        $extensionHTMLItems
+                    )
                 )
-            ),
-            sprintf(
-                $messageBundleExtensionPlaceholder,
-                implode(
-                    \__(', ', 'gato-graphql'),
-                    $bundleExtensionHTMLItems
+                . sprintf(
+                    $messageBundleExtensionPlaceholder,
+                    implode(
+                        \__(', ', 'gato-graphql'),
+                        $bundleExtensionHTMLItems
+                    )
                 )
             )
         );
