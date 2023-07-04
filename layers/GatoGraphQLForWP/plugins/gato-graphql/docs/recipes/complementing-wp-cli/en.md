@@ -25,18 +25,6 @@ The following queries will demonstrate how to do that.
 
 ## Executing a GraphQL query from the terminal
 
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-- The endpoint can either be the single endpoint (under `graphql/`), or a custom endpoint (under `graphql/{custom-endpoint}`)
-- The single endpoint is <a href="https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/" target="_blank">disabled by default</a>, so it must be enabled
-- The single endpoint is public; to avoid unintentionally exposing private data, it is advised to enable it only when your website is not accessible to the Internet (eg: The WordPress site is on a development laptop, to feed data to build a headless site)
-- Otherwise, it is advised to <a href="https://gatographql.com/guides/use/creating-a-custom-endpoint/" target="_blank">create a custom endpoint</a>, <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints" target="_blank">publish it as `private`</a>, and pass the cookies added by WordPress to `curl` (having the user authenticated)
-- Alternatively, we can restrict access to the endpoint via <a href="https://gatographql.com/guides/use/defining-access-control/" target="_blank">Access Control</a>, for instance checking that the <a href="https://gatographql.com/guides/config/restricting-access-by-visitor-ip/" target="_blank">visitor comes from IP `127.0.0.1`</a>.
-
-</div>
-
 Let's use the GraphQL query from the previous recipe, to find users with the Spanish locale, and execute a WP-CLI command on that user.
 
 We first limit the result to only 1 user (via `pagination: { limit: 1 }`):
@@ -87,6 +75,18 @@ This prints the response right in the terminal:
 ```json
 {"data":{"users":[{"id":3,"name":"Subscriber Bennett","locale":"es_AR"}]}}
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+- The endpoint can either be the single endpoint (under `graphql/`), or a custom endpoint (under `graphql/{custom-endpoint-name}`)
+- The single endpoint is <a href="https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/" target="_blank">disabled by default</a>, so it must be enabled
+- The single endpoint is public; to avoid unintentionally exposing private data, it is advised to enable it only when your website is not accessible to the Internet (eg: the site is on a development laptop, used to build a headless site)
+- Otherwise, it is advised to <a href="https://gatographql.com/guides/use/creating-a-custom-endpoint/" target="_blank">create a custom endpoint</a>, <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints" target="_blank">publish it as `private`</a>, and pass the cookies added by WordPress (once the user has been authenticated) to `curl` (you can use DevTools to inspect the request headers when in the WordPress dashboard)
+- Alternatively, we can restrict access to the endpoint via <a href="https://gatographql.com/guides/use/defining-access-control/" target="_blank">Access Control</a>, for instance checking that the <a href="https://gatographql.com/guides/config/restricting-access-by-visitor-ip/" target="_blank">visitor comes from IP `127.0.0.1`</a>.
+
+</div>
 
 ## Extracting the ID from the GraphQL response
 
