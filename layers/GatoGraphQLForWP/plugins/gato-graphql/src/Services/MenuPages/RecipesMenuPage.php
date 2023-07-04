@@ -84,7 +84,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
         $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
         $messageBundleExtensionPlaceholder = sprintf(
-            '<p><em>%s</em></p>',
+            '<hr/><em>%s</em>',
             count($entryExtensionModules) === 1
                 ? \__('(It is included in %s)', 'gato-graphql')
                 : \__('(They are all included in %s)', 'gato-graphql')
@@ -93,8 +93,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         $messageHTML = sprintf(
             \__('%s%s', 'gato-graphql'),
             sprintf(
-                '<p><strong>🔗 %s</strong></p>',
-                \__('Extensions referenced in this recipe:', 'gato-graphql')
+                '<strong>🔗 %s</strong>',
+                \__('Extensions referenced in this recipe: ', 'gato-graphql')
             ),
             $this->getCollapsible(
                 sprintf(

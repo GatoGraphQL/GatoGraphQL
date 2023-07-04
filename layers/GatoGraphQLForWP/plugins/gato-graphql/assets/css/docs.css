@@ -4,15 +4,18 @@ ul {
 }
 
 .doc-highlight,
-.extension-highlight {
-    padding: 0 1em;
+.extension-highlight {    
     border: 1px solid #c3c4c7;
     box-shadow: 0 1px 1px rgba(0,0,0,.04);
     box-sizing: border-box;
     background-color: white;
 }
+.doc-highlight {
+    padding: 0 1em;
+}
 .extension-highlight {
     background-color: lightcyan;
+    padding: 1em;
 }
 
 /**
