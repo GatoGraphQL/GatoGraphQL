@@ -124,7 +124,7 @@ wp user update "$(echo $SPANISH_LOCALE_USER_ID)" --locale=fr_FR
 
 ## Making the GraphQL query more readable
 
-Because we need to adapt the GraphQL query to input it into `curl`, it became difficult to read.
+When formatting the GraphQL query to input it into `curl`, it became difficult to read.
 
 A solution is to apply the transformations using bash commands, such as `tr` and `sed`:
 
@@ -203,11 +203,11 @@ GRAPHQL_RESPONSE=$(curl \
   https://mysite.com/graphql/)
 ```
 
-## Multiple results via `@export`
+## Retrieving multiple results at once
 
 In the previous examples, we only produced a single user ID.
 
-With the use of extensions, we can also produce multiple user IDs, with a single GraphQL query:
+With the use of extensions, we can retrieve multiple user IDs by executing a single GraphQL query:
 
 - We remove the `pagination` argument from the query, as to retrieve the list of all the users with Spanish locale
 - We export a list of the user IDs, under dynamic variable `$userIDs`
@@ -266,9 +266,7 @@ The response to this query will be:
 }
 ```
 
-To execute the query from the terminal, we must indicate to execute operation `"FormatAndPrintData"` in the body of the request:
-
-Must also pass the "operationName":
+When executing the query, the dictionary in the body of the request must indicate the name of the operation to execute (`"FormatAndPrintData"`):
 
 ```bash
 GRAPHQL_QUERY=$(cat find-multiple-users-with-spanish-locale.gql)
@@ -280,7 +278,7 @@ GRAPHQL_RESPONSE=$(curl \
   https://mysite.com/graphql/)
 ```
 
-We must also adapt the regex:
+We must also adapt the regex (due to the new alias, the space in between the IDs, and the quotes around this string):
 
 ```bash
 SPANISH_LOCALE_USER_IDS=$(echo $GRAPHQL_RESPONSE \
