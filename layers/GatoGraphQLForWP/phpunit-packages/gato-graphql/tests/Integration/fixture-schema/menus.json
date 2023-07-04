@@ -39,7 +39,7 @@
                 "items": [
                     {
                         "id": 691,
-                        "localURLPath": null,
+                        "localURLPath": "",
                         "label": "Yahoo",
                         "title": "",
                         "url": "https:\/\/yahoo.com",
@@ -183,7 +183,7 @@
                     },
                     {
                         "id": 683,
-                        "localURLPath": null,
+                        "localURLPath": "",
                         "label": "Apple",
                         "title": "",
                         "url": "https:\/\/apple.com",
@@ -404,7 +404,7 @@
                     },
                     {
                         "id": 685,
-                        "localURLPath": null,
+                        "localURLPath": "",
                         "label": "Google",
                         "title": "",
                         "url": "https:\/\/google.com",
@@ -431,7 +431,7 @@
                         "children": [
                             {
                                 "id": 687,
-                                "localURLPath": null,
+                                "localURLPath": "",
                                 "label": "Amazon",
                                 "title": "",
                                 "url": "https:\/\/amazon.com",
@@ -473,7 +473,7 @@
                                 "children": [
                                     {
                                         "id": 690,
-                                        "localURLPath": null,
+                                        "localURLPath": "",
                                         "label": "BBC",
                                         "title": "",
                                         "url": "https:\/\/bbc.com",
@@ -622,7 +622,7 @@
                 },
                 {
                     "id": 683,
-                    "localURLPath": null,
+                    "localURLPath": "",
                     "label": "Apple",
                     "title": "",
                     "url": "https:\/\/apple.com",
@@ -843,7 +843,7 @@
                 },
                 {
                     "id": 685,
-                    "localURLPath": null,
+                    "localURLPath": "",
                     "label": "Google",
                     "title": "",
                     "url": "https:\/\/google.com",
@@ -870,7 +870,7 @@
                     "children": [
                         {
                             "id": 687,
-                            "localURLPath": null,
+                            "localURLPath": "",
                             "label": "Amazon",
                             "title": "",
                             "url": "https:\/\/amazon.com",
@@ -912,7 +912,7 @@
                             "children": [
                                 {
                                     "id": 690,
-                                    "localURLPath": null,
+                                    "localURLPath": "",
                                     "label": "BBC",
                                     "title": "",
                                     "url": "https:\/\/bbc.com",
