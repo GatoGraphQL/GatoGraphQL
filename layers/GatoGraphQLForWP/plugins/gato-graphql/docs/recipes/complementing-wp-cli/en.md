@@ -25,7 +25,9 @@ The following queries will demonstrate how to do that.
 
 ## Executing a GraphQL query from the terminal
 
-Let's use the GraphQL query from the previous recipe, to find users with the Spanish locale, but limiting it to only 1 result (via `pagination: { limit: 1 }`):
+Let's use the GraphQL query from the previous recipe, to find users with the Spanish locale, and execute a WP-CLI command on that user.
+
+We first limit the result to only 1 user (via `pagination: { limit: 1 }`):
 
 ```graphql
 query {
@@ -57,7 +59,7 @@ In the terminal, we can use `curl` to execute a query against the GraphQL server
 - Execute the `POST` method
 - Accepted content type is `application/json`
 - The query is passed via the body, as a dictionary under entry `"query"`
-- The query must be formatted: all `"` must be escaped, and newlines are represented as `\n`
+- The query must be formatted: all `"` must be escaped as `\"`, and newlines are replaced with `\n`
 
 ```bash
 curl \
@@ -73,20 +75,21 @@ This prints the response right in the terminal:
 {"data":{"users":[{"id":3,"name":"Subscriber Bennett","locale":"es_AR"}]}}
 ```
 
+## Extracting the ID from the GraphQL response
+
+Let's use command-line tools for manipulating the GraphQL response, and extract from it the required data.
+
+First, we assign the GraphQL response to an environment variable:
 
 ```bash
 GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"query": "query {\n  users(\n    filter: {\n      metaQuery: {\n        key: \"locale\",\n        compareBy: {\n          stringValue: {\n            value: \"es_[A-Z]+\"\n            operator: REGEXP\n          }\n        }\n      }\n    },\n    pagination: {\n      limit: 1\n    }\n  ) {\n    spanishLocaleUserID: id\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}"}' \
+  -d '{"query": "query {\n  users(\n    filter: {\n      metaQuery: {\n        key: \"locale\",\n        compareBy: {\n          stringValue: {\n            value: \"es_[A-Z]+\"\n            operator: REGEXP\n          }\n        }\n      }\n    },\n    pagination: {\n      limit: 1\n    }\n  ) {\n    id\n    name\n    locale: metaValue(key: \"locale\")\n  }\n}"}' \
   https://gato-graphql-pro.lndo.site/graphql/)
-
-echo $GRAPHQL_RESPONSE
 ```
 
-## Extracting an ID from the GraphQL response
-
-Transforming query's '"' to '\"' and newlines to '\n':
+We can do `echo $GRAPHQL_RESPONSE` to visualize the response.
 
 ```bash
 GRAPHQL_RESPONSE=$(curl \
