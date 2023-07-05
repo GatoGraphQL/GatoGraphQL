@@ -2,13 +2,95 @@
 
 Gato GraphQL is a free and open source plugin for WordPress, augmented with extensions.
 
-- Website: <a href="https://gatographql.com" target="_blank">gatographql.com</a>
-- Open source repo: <a href="https://github.com/leoloso/PoP" target="_blank">github.com/leoloso/PoP</a>
-- Extensions shop: <a href="..." target="_blank">...</a>
+## Links
+
+**Website:** <a href="https://gatographql.com" target="_blank">gatographql.com</a>
+
+**Open source repo:** <a href="https://github.com/leoloso/PoP" target="_blank">github.com/leoloso/PoP</a>
+
+**Extensions shop:** <a href="https://shop.gatographql.com" target="_blank">shop.gatographql.com</a>
 
 ## Support
 
-@todo Complete Support page!
+<div class="hide-for-customers">
+
+_Support is provided to current customers of any Gato GraphQL product (bundles, extensions, etc)._
+
+</div>
+
+<div class="show-for-customers" markdown=1>
+
+Send your message to the Gato GraphQL Support team:
+
+<form action="https://gatographql.com/thank-you" method="POST" name="contact" target="_blank">
+  <input type="hidden" name="form-name" value="contact" />
+
+  <label for="field-name">Your name:</label>
+  <br/>
+  <input
+    type="text"
+    name="name"
+    id="field-name"
+    required=""
+    aria-required="true"
+    placeholder="Pedro Rivas"
+    autocomplete="name"
+    autocorrect="off"
+    autocapitalize="none"
+  />
+
+  <br/><br/>
+
+  <label for="field-email">Your email:</label>
+  <br/>
+  <input
+    type="email"
+    name="email"
+    id="field-email"
+    required=""
+    aria-required="true"
+    placeholder="pedro@yahoo.com"
+    autocomplete="email"
+  />
+
+  <br/><br/>
+
+  <label for="field-domain">Domain:</label>
+  <br/>
+  <input
+    type="text"
+    name="domain"
+    id="field-domain"
+    required=""
+    aria-required="true"
+    placeholder="mydomain.com"
+    autocomplete="domain"
+  />
+
+  <br/><br/>
+
+  <label for="field-message">Message:</label>
+  <br/>
+  <textarea
+    id="field-message"
+    name="message"
+    rows="5"
+    cols="100"
+    placeholder="What do you need support with?"
+    required=""
+    aria-required="true"
+    spellcheck="true"
+    autocapitalize="sentences"
+  ></textarea>
+  
+  <br/>
+
+  <button type="submit" class="button">
+    Send message
+  </button>
+</form>
+
+</div>
 
 ## Newsletter
 

@@ -6,4 +6,5 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 interface ExtensionInterface extends PluginInterface
 {
+    public function isCommercial(): bool;
 }

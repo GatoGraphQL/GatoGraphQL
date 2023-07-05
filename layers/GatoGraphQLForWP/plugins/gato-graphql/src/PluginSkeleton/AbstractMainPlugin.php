@@ -727,4 +727,26 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             }
         );
     }
+
+    /**
+     * Plugin's booting
+     */
+    public function boot(): void
+    {
+        parent::boot();
+
+        \add_filter(
+            'admin_body_class',
+            function (string $classes): string {
+                $extensions = PluginApp::getExtensionManager()->getExtensions();
+                foreach ($extensions as $extension) {
+                    if (!$extension->isCommercial()) {
+                        continue;
+                    }
+                    return $classes . ' is-gato-graphql-customer';
+                }
+                return $classes;
+            }
+        );
+    }
 }

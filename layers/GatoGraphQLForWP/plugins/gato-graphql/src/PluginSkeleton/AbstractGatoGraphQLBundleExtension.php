@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 abstract class AbstractGatoGraphQLBundleExtension extends AbstractBundleExtension
 {
+    use GatoGraphQLExtensionTrait;
+    
     /**
      * @param string[] $extensionSlugs
      * @return string[]
