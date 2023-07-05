@@ -44,16 +44,16 @@ This JavaScript code submits a query with variables to the GraphQL server, and p
   const limit = 3;
   const data = {
     query: `
-query GetPostsWithAuthor($limit: Int) {
-  posts(pagination: { limit: $limit }) {
-    id
-    title
-    author {
-      id
-      name
-    }
-  }
-}
+      query GetPostsWithAuthor($limit: Int) {
+        posts(pagination: { limit: $limit }) {
+          id
+          title
+          author {
+            id
+            name
+          }
+        }
+      }
     `,
     variables: {
       limit: `${ limit }`
@@ -92,17 +92,13 @@ query GetPostsWithAuthor($limit: Int) {
 
 ## Connecting via a GraphQL client library
 
-You can also use the GraphQL client library of your choice to connect to the server.
-
-Some options are:
+You can also use the GraphQL client library of your choice to connect to the server. Some options are:
 
 - [GraphQL Request](https://github.com/jasonkuhrt/graphql-request)
 - [urql](https://github.com/urql-graphql/urql)
 - [Apollo client](https://github.com/apollographql/apollo-client)
 
-This is an [example using GraphQL request](https://github.com/jasonkuhrt/graphql-request/blob/6b3396bbd4c3b678f84abe8bcf697a26e563721c/examples/other-package-commonjs.ts):
-
-You can use any client library to fetch
+Here is an [example using GraphQL request](https://github.com/jasonkuhrt/graphql-request/blob/6b3396bbd4c3b678f84abe8bcf697a26e563721c/examples/other-package-commonjs.ts):
 
 ```js
 /* eslint-disable */
@@ -113,16 +109,16 @@ main()
 
 async function main() {
   const query = gql`
-query {
-  posts {
-    id
-    title
-    author {
-      id
-      name
+    query {
+      posts {
+        id
+        title
+        author {
+          id
+          name
+        }
+      }
     }
-  }
-}
   `
 
   const data = await request(GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT, query)
