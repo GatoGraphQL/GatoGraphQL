@@ -32,7 +32,7 @@ const response = await fetch(endpoint, {
 } );
 ```
 
-However, we can also store the GraphQL query in a `.gql` or `.graphql` file, and import its contents using Webpack's [`raw-loader`](https://v4.webpack.js.org/loaders/raw-loader/):
+However, we can also store the GraphQL query in a `.gql` (or `.graphql`) file, and import its contents using Webpack's [`raw-loader`](https://v4.webpack.js.org/loaders/raw-loader/):
 
 ```js
 // File webpack.config.js
@@ -50,7 +50,7 @@ module.exports = config;
 
 _(This code works for Webpack v4; for v5, we must use [Asset Modules](https://webpack.js.org/guides/asset-modules/) instead.)_
 
-Then, we can place the GraphQL query inside a `.gql` file:
+Next, we place the GraphQL query inside a `.gql` file:
 
 ```gql
 # File graphql-documents/fetch-posts-with-author.gql
@@ -66,15 +66,13 @@ query {
 }
 ```
 
-We import the file containing GraphQL query into a variable:
+Finally, within the block's code, we import the file and pass its contents to `fetch`:
 
 ```js
 import graphQLQuery from './graphql-documents/fetch-posts-with-author.gql';
-```
 
-Finally, we reference the variable:
+// ...
 
-```js
 const response = await fetch(endpoint, {
   body: JSON.stringify({
     query: graphQLQuery
