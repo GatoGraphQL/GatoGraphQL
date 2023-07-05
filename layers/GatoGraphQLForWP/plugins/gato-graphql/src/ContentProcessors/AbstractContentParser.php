@@ -229,6 +229,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                 ContentParserOptions::APPEND_PATH_URL_TO_IMAGES => true,
                 ContentParserOptions::APPEND_PATH_URL_TO_ANCHORS => true,
                 ContentParserOptions::SUPPORT_MARKDOWN_LINKS => true,
+                ContentParserOptions::OPEN_EXTERNAL_LINKS_IN_NEW_TAB => true,
                 ContentParserOptions::ADD_CLASSES => true,
                 ContentParserOptions::EMBED_VIDEOS => true,
                 ContentParserOptions::HIGHLIGHT_CODE => true,
