@@ -229,6 +229,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                 ContentParserOptions::APPEND_PATH_URL_TO_ANCHORS => true,
                 ContentParserOptions::SUPPORT_MARKDOWN_LINKS => true,
                 ContentParserOptions::OPEN_EXTERNAL_LINKS_IN_NEW_TAB => true,
+                ContentParserOptions::ADD_EXTERNAL_LINK_ICON => true,
                 ContentParserOptions::ADD_CLASSES => true,
                 ContentParserOptions::EMBED_VIDEOS => true,
                 ContentParserOptions::HIGHLIGHT_CODE => true,
@@ -242,7 +243,8 @@ abstract class AbstractContentParser implements ContentParserInterface
         }
         // Open external links in new tab
         if ($options[ContentParserOptions::OPEN_EXTERNAL_LINKS_IN_NEW_TAB] ?? null) {
-            $htmlContent = $this->openExternalLinksInNewTab($htmlContent);
+            $addExternalLinkIcon = $options[ContentParserOptions::ADD_EXTERNAL_LINK_ICON] ?? true;
+            $htmlContent = $this->openExternalLinksInNewTab($htmlContent, $addExternalLinkIcon);
         }
         // Add the path to the images
         if ($options[ContentParserOptions::APPEND_PATH_URL_TO_IMAGES] ?? null) {
@@ -441,11 +443,11 @@ abstract class AbstractContentParser implements ContentParserInterface
     /**
      * Add `target="_blank"` to external links
      */
-    protected function openExternalLinksInNewTab(string $htmlContent): string
+    protected function openExternalLinksInNewTab(string $htmlContent, bool $addExternalLinkIcon): string
     {
         return (string)preg_replace_callback(
-            '/<a (.*?)href="(.*?)"(.*?)>/',
-            function (array $matches): string {
+            '/<a (.*?)href="(.*?)"(.*?)>(.*?)<\/a>/',
+            function (array $matches) use ($addExternalLinkIcon): string {
                 // If the element is not an external link, or already has a target, return
                 if (!$this->isAbsoluteURL($matches[2])
                     || $this->getCMSHelperService()->isCurrentDomain($matches[2])
@@ -455,10 +457,11 @@ abstract class AbstractContentParser implements ContentParserInterface
                     return $matches[0];
                 }
                 return sprintf(
-                    '<a %shref="%s"%s target="_blank">',
+                    '<a %shref="%s"%s target="_blank">%s</a>',
                     $matches[1],
                     $matches[2],
                     $matches[3],
+                    $matches[4] . ($addExternalLinkIcon ? '&#x2197;' : ''),
                 );
             },
             $htmlContent
