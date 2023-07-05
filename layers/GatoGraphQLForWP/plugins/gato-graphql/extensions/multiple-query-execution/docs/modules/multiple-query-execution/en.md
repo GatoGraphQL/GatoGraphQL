@@ -912,11 +912,3 @@ query ExecuteAllAddCommentOperations
   id @remove
 }
 ```
-
-<!-- ## GraphQL spec
-
-This functionality is currently not part of the GraphQL spec, but it has been requested:
-
-- <a href="https://github.com/graphql/graphql-spec/issues/375" target="_blank">Issue #375 - [RFC] Executing multiple operations in a query</a>
-- <a href="https://github.com/graphql/graphql-spec/issues/377" target="_blank">Issue #377 - [RFC] exporting variables between queries</a> -->
-

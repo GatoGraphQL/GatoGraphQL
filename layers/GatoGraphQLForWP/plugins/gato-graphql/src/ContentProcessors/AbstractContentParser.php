@@ -12,6 +12,7 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
@@ -27,6 +28,7 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?LocaleHelper $localeHelper = null;
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
 
     /**
      * @param string|null $baseDir Where to look for the documentation
@@ -73,6 +75,19 @@ abstract class AbstractContentParser implements ContentParserInterface
             $this->localeHelper = $localeHelper;
         }
         return $this->localeHelper;
+    }
+    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    final protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        if ($this->cmsHelperService === null) {
+            /** @var CMSHelperServiceInterface */
+            $cmsHelperService = $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
+            $this->cmsHelperService = $cmsHelperService;
+        }
+        return $this->cmsHelperService;
     }
 
     /**
@@ -213,6 +228,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                 ContentParserOptions::APPEND_PATH_URL_TO_IMAGES => true,
                 ContentParserOptions::APPEND_PATH_URL_TO_ANCHORS => true,
                 ContentParserOptions::SUPPORT_MARKDOWN_LINKS => true,
+                ContentParserOptions::OPEN_EXTERNAL_LINKS_IN_NEW_TAB => true,
                 ContentParserOptions::ADD_CLASSES => true,
                 ContentParserOptions::EMBED_VIDEOS => true,
                 ContentParserOptions::HIGHLIGHT_CODE => true,
@@ -223,6 +239,10 @@ abstract class AbstractContentParser implements ContentParserInterface
         // Convert Markdown links: execute before appending path to anchors
         if ($options[ContentParserOptions::SUPPORT_MARKDOWN_LINKS] ?? null) {
             $htmlContent = $this->convertMarkdownLinks($htmlContent);
+        }
+        // Open external links in new tab
+        if ($options[ContentParserOptions::OPEN_EXTERNAL_LINKS_IN_NEW_TAB] ?? null) {
+            $htmlContent = $this->openExternalLinksInNewTab($htmlContent);
         }
         // Add the path to the images
         if ($options[ContentParserOptions::APPEND_PATH_URL_TO_IMAGES] ?? null) {
@@ -413,6 +433,33 @@ abstract class AbstractContentParser implements ContentParserInterface
                     );
                 }
                 return $replacedLink;
+            },
+            $htmlContent
+        );
+    }
+
+    /**
+     * Add `target="_blank"` to external links
+     */
+    protected function openExternalLinksInNewTab(string $htmlContent): string
+    {
+        return (string)preg_replace_callback(
+            '/<a (.*?)href="(.*?)"(.*?)>/',
+            function (array $matches): string {
+                // If the element is not an external link, or already has a target, return
+                if (!$this->isAbsoluteURL($matches[2])
+                    || $this->getCMSHelperService()->isCurrentDomain($matches[2])
+                    || str_contains($matches[1], ' target=')
+                    || str_contains($matches[3], ' target=')
+                ) {
+                    return $matches[0];
+                }
+                return sprintf(
+                    '<a %shref="%s"%s target="_blank">',
+                    $matches[1],
+                    $matches[2],
+                    $matches[3],
+                );
             },
             $htmlContent
         );

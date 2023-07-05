@@ -105,5 +105,5 @@ query TypeQualifiedNames {
 
 This functionality is not yet part of the GraphQL spec, but has been requested:
 
-- <a href="https://github.com/graphql/graphql-spec/issues/300" target="_blank">Issue #300 - Expose user-defined meta-information via introspection API in form of directives</a>
-- <a href="https://github.com/graphql/graphql-wg/discussions/1096" target="_blank">Discussion #1096 - "Metadata Directives" Proposal</a>
+- [Issue #300 - Expose user-defined meta-information via introspection API in form of directives](https://github.com/graphql/graphql-spec/issues/300)
+- [Discussion #1096 - "Metadata Directives" Proposal](https://github.com/graphql/graphql-wg/discussions/1096)

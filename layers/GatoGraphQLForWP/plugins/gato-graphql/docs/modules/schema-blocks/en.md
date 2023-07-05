@@ -306,7 +306,7 @@ The `Block` interface (and, as such, the `GeneralBlock` type) contains the follo
 - `name` retrieves the name of the block: `"core/paragraph"`, `"core/heading"` `"core/image"`, etc.
 - `attributes` retrieves a JSON object containing all the attributes from the block.
 - `innerBlocks` retrieves `[BlockUnion!]`, hence we can query it to navigate the hierarchy of blocks containing inner blocks, and fetching the data for all of them, for as many levels down as we have in our content.
-- `contentSource` retrieves the block's (Gutenberg) HTML source code, including the comment delimiters that contain the attributes. However, this field does not retrieve the exact same data as how it is stored in the DB (see <a href="https://github.com/leoloso/PoP/issues/2346" target="_blank">#2346</a>), so use this field with care.
+- `contentSource` retrieves the block's (Gutenberg) HTML source code, including the comment delimiters that contain the attributes. However, this field does not retrieve the exact same data as how it is stored in the DB (see [#2346](https://github.com/leoloso/PoP/issues/2346)), so use this field with care.
 
 ### Directly retrieving `GeneralBlock` (instead of `BlockUnion`)
 
@@ -1175,14 +1175,14 @@ Please notice that the two additional attributes, `parentBlockPosition` and `inn
 
 ## Preact example
 
-Please check the <a href="https://github.com/Automattic/vip-block-data-api/tree/1.0.0/#preact-example" target="_blank">Preact example</a> in `Automattic/vip-block-data-api`, to see an example of how to map the block data into customizedclient-side JavaScript components.
+Please check the [Preact example](https://github.com/Automattic/vip-block-data-api/tree/1.0.0/#preact-example) in `Automattic/vip-block-data-api`, to see an example of how to map the block data into customizedclient-side JavaScript components.
 
 ## Limitations
 
-Please check the <a href="https://github.com/Automattic/vip-block-data-api/tree/1.0.0/#limitations" target="_blank">Limitations</a> section in `Automattic/vip-block-data-api`, to learn about the limitations from retrieving block data.
+Please check the [Limitations](https://github.com/Automattic/vip-block-data-api/tree/1.0.0/#limitations) section in `Automattic/vip-block-data-api`, to learn about the limitations from retrieving block data.
 
 ## Acknowledgements
 
-The logic to retrieve the (Gutenberg) block data is based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>.
+The logic to retrieve the (Gutenberg) block data is based on [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/).
 
 Many thanks to the folks who contributed to that project. ❤️

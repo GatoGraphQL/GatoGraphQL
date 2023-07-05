@@ -47,7 +47,7 @@ The parameters passed are:
 
 ## WP-Cron
 
-The following action hooks are provided, to be invoked from within <a href="https://developer.wordpress.org/plugins/cron/" target="_blank">WP-Cron</a>:
+The following action hooks are provided, to be invoked from within [WP-Cron](https://developer.wordpress.org/plugins/cron/):
 
 1. `gato_graphql__execute_query`
 2. `gato_graphql__execute_persisted_query`
@@ -262,7 +262,7 @@ Then, we schedule the WP-Cron event, either via PHP:
 );
 ```
 
-Or via the <a href="https://wordpress.org/plugins/wp-crontrol/" target="_blank">WP-Crontrol</a> plugin:
+Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 
 - Hook name: `gato_graphql__execute_persisted_query`
 - Arguments: `["daily-stats-by-email-number-of-comments",{"to":["admin@yoursite.com"]},"SendDailyStatsByEmailNumberOfComments",1]`
