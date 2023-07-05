@@ -6,8 +6,5 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 abstract class AbstractGatoGraphQLExtension extends AbstractExtension
 {
-    public function isCommercial(): bool
-    {
-        return true;
-    }
+    use GatoGraphQLExtensionTrait;
 }
