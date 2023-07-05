@@ -133,6 +133,15 @@ class GeneralUtils
         return $scheme . $host;
     }
 
+    public static function getHost(string $url): string
+    {
+        $url_parts = parse_url($url);
+        if (!is_array($url_parts)) {
+            return '';
+        }
+        return $url_parts['host'] ?? '';
+    }
+
     public static function removeDomain(string $url): string
     {
         return substr($url, strlen(self::getDomain($url)));
