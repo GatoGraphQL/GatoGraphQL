@@ -92,12 +92,13 @@ query GetPostsWithAuthor($limit: Int) {
 
 ## Connecting via a GraphQL client library
 
-We can use the GraphQL client library of your choice to connect to the server. Some options are:
+You can also use the GraphQL client library of your choice to connect to the server.
+
+Some options are:
 
 - [GraphQL Request](https://github.com/jasonkuhrt/graphql-request)
 - [urql](https://github.com/urql-graphql/urql)
 - [Apollo client](https://github.com/apollographql/apollo-client)
-- [Relay](https://github.com/facebook/relay)
 
 This is an [example using GraphQL request](https://github.com/jasonkuhrt/graphql-request/blob/6b3396bbd4c3b678f84abe8bcf697a26e563721c/examples/other-package-commonjs.ts):
 
