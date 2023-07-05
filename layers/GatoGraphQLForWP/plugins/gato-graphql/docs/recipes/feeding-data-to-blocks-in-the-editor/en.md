@@ -114,11 +114,11 @@ add_action(
 Then include the nonce value in the headers to `fetch`:
 
 ```js
-{
+// ...
   headers: {
-    'X-WP-Nonce': `${ WP_REST_NONCE }`
-  }
-}
+    'X-WP-Nonce': `${ WP_REST_NONCE }`,
+    // ...
+  };
 ```
 
 ## Connecting via a GraphQL client library
