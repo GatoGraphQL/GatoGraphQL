@@ -90,38 +90,51 @@ query GetPostsWithAuthor($limit: Int) {
 })();
 ```
 
+## Connecting via a GraphQL client library
+
+We can use the GraphQL client library of your choice to connect to the server. Some options are:
+
+- [GraphQL Request](https://github.com/jasonkuhrt/graphql-request)
+- [urql](https://github.com/urql-graphql/urql)
+- [Apollo client](https://github.com/apollographql/apollo-client)
+- [Relay](https://github.com/facebook/relay)
+
+This is an [example using GraphQL request](https://github.com/jasonkuhrt/graphql-request/blob/6b3396bbd4c3b678f84abe8bcf697a26e563721c/examples/other-package-commonjs.ts):
+
 You can use any client library to fetch
 
 ```js
+/* eslint-disable */
 
+const { request, gql } = require(`graphql-request`)
+
+main()
+
+async function main() {
+  const query = gql`
+query {
+  posts {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+  `
+
+  const data = await request(GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT, query)
+  console.log(data)
+}
 ```
 
-submodules/PoP/layers/GatoGraphQLForWP/plugins/gato-graphql/blocks/schema-configuration/src/store/controls.js
+<div class="doc-highlight" markdown=1>
 
-`GATO_GRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT`
+🔥 **Tips:**
 
-Document in some recipe:
-    `GATO_GRAPHQL_ADMIN_ENDPOINT`
-    `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT`
-Can use?:
-    ## Added JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` with URL of internal block-editor endpoint
+The Gato GraphQL plugin itself powers its blocks via GraphQL, using the `graphql-request` library.
 
-    An internal GraphQL endpoint called `blockEditor` is accessible within the wp-admin, to allow developers to fetch data for their Gutenberg blocks. This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.
+You can explore the code on how it's done: [Schema Configuration block's data store](https://github.com/leoloso/PoP/tree/24e27ad8b8011438a639fe6a27a22833c2d08287/layers/GatoGraphQLForWP/plugins/gato-graphql/blocks/schema-configuration/src/store).
 
-    A new global JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` prints the URL for this endpoint in the wp-admin editor for all users who can access the GraphQL schema, making it easier to point to this endpoint within the block's JavaScript code.
-
-    Inspecting the source code in the wp-admin, you will find the following HTML:
-
-    ```html
-    <script type="text/javascript">
-    var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://mysite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor"
-    </script>
-    ```
-
-
-Also:
-
-How developers can "lock" behavior for a specific wp-admin endpoint
-
-Use code in layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Hooks/AddDummyCustomAdminEndpointHook.php
-
+</div>
