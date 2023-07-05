@@ -1,6 +1,15 @@
 # DRY code for blocks in Javascript and PHP
 
+[Dynamic blocks](https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/) are blocks that build their structure and content on the fly when the block is rendered on the front end.
 
+To render a dynamic block, then, requires two different ways to fetch its data:
+
+- Connecting to the API on the client-side (JavaScript)
+- Calling WordPress functions on the server-side (PHP)
+
+With Gato GraphQL and extensions, it is possible to make this DRY, having a single source of truth to fetch data for both the client and server-sides.
+
+The previous recipe explained how to connect to the GraphQL server from the client, using JavaScript.
 
 	Document:
 		Move calling accessControlLists and all the others to a .gql file
