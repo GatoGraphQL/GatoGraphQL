@@ -31,6 +31,8 @@ If you need to apply some specific configuration for your blocks, such as:
 
 ...you can also create your own internal endpoint. Check out guide [Creating Custom Internal Endpoints for Blocks](https://gatographql.com/guides/config/creating-custom-internal-endpoints-for-blocks/) to learn how to do it.
 
+Alternatively, you can pre-define Persisted Queries and retrieve data from them (instead of from an endpoint). Check out how the client code (explained below) differs, in guide [Connecting to the GraphQL server from a client](https://gatographql.com/guides/intro/connecting-to-the-graphql-server-from-a-client/#heading-executing-persisted-queries).
+
 </div>
 
 ## Connecting via `fetch`
