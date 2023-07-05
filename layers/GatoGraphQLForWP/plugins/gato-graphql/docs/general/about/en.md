@@ -12,11 +12,17 @@ Gato GraphQL is a free and open source plugin for WordPress, augmented with exte
 
 ## Support
 
-<span class="hide-for-customers">
-_Support is provided to current customers of any Gato GraphQL product (bundles, extensions, etc)._
-</span>
+<div class="hide-for-customers">
 
-<form action="https://gatographql.com/thank-you" method="POST" name="contact" class="show-for-customers" target="_blank">
+_Support is provided to current customers of any Gato GraphQL product (bundles, extensions, etc)._
+
+</div>
+
+<div class="show-for-customers" markdown=1>
+
+Send your message to the Gato GraphQL Support team:
+
+<form action="https://gatographql.com/thank-you" method="POST" name="contact" target="_blank">
   <input type="hidden" name="form-name" value="contact" />
 
   <label for="field-name">Your name:</label>
@@ -83,6 +89,8 @@ _Support is provided to current customers of any Gato GraphQL product (bundles, 
     Send message
   </button>
 </form>
+
+</div>
 
 ## Newsletter
 
