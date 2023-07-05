@@ -12,7 +12,6 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\SchemaCommons\CMS\CMSHelperService;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 
 abstract class AbstractContentParser implements ContentParserInterface
@@ -84,8 +83,8 @@ abstract class AbstractContentParser implements ContentParserInterface
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
         if ($this->cmsHelperService === null) {
-            /** @var CMSHelperService */
-            $cmsHelperService = $this->instanceManager->getInstance(CMSHelperService::class);
+            /** @var CMSHelperServiceInterface */
+            $cmsHelperService = $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
             $this->cmsHelperService = $cmsHelperService;
         }
         return $this->cmsHelperService;
