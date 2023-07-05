@@ -2,7 +2,7 @@
 
 This bundle contains **all of Gato GraphQL extensions**, in a single plugin.
 
-Members of the <a href="https://gatographql.com/club" target="_blank">Gato GraphQL Club</a> can also **access future extensions**, as these are added to the “All Extensions” bundle as they are created.
+As new extensions are created and released, they will also be added to this bundle.
 
 ## List of bundled extensions
 
