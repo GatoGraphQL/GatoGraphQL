@@ -8,15 +8,15 @@
 
 <p markdown=1>
 
-**Website:** <a href="https://gatographql.com" target="_blank">gatographql.com</a>
+**Website:** [gatographql.com](https://gatographql.com)
 
 <br/>
 
-**Open source repo:** <a href="https://github.com/leoloso/PoP" target="_blank">github.com/leoloso/PoP</a>
+**Open source repo:** [github.com/leoloso/PoP](https://github.com/leoloso/PoP)
 
 <br/>
 
-**Extensions shop:** <a href="https://shop.gatographql.com" target="_blank">shop.gatographql.com</a>
+**Extensions shop:** [shop.gatographql.com](https://github.com/leoloso/PoP)
 
 </p>
 
