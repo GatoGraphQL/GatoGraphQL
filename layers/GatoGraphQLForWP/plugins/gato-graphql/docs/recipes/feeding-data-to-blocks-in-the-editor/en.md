@@ -1,13 +1,8 @@
 # Feeding data to blocks in the editor
 
-Also:
+submodules/PoP/layers/GatoGraphQLForWP/plugins/gato-graphql/blocks/schema-configuration/src/store/controls.js
 
-How developers can "lock" behavior for a specific wp-admin endpoint
-
-Use code in layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Hooks/AddDummyCustomAdminEndpointHook.php
-
-
-
+`GATO_GRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT`
 
 Document in some recipe:
     `GATO_GRAPHQL_ADMIN_ENDPOINT`
@@ -23,6 +18,14 @@ Can use?:
 
     ```html
     <script type="text/javascript">
-    var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://yoursite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor"
+    var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://mysite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor"
     </script>
     ```
+
+
+Also:
+
+How developers can "lock" behavior for a specific wp-admin endpoint
+
+Use code in layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Hooks/AddDummyCustomAdminEndpointHook.php
+
