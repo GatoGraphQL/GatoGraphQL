@@ -90,6 +90,37 @@ This JavaScript code submits a query with variables to the GraphQL server, and p
 })();
 ```
 
+### Sending the REST nonce header
+
+If you need to execute an operation including REST nonce, add the `X-WP-Nonce` header.
+
+Print a JS variable containing the nonce, via PHP code:
+
+```php
+// Generate HTML in the editor:
+// <script type="text/javascript">var WP_REST_NONCE = "{ Nonce value }"</script>
+add_action(
+  'admin_print_scripts',
+  function(): void {
+    printf(
+      '<script type="text/javascript">var %s = "%s"</script>',
+      'WP_REST_NONCE',
+      wp_create_nonce('wp_rest')
+    );
+  }
+);
+```
+
+Then include the nonce value in the headers to `fetch`:
+
+```js
+{
+  headers: {
+    'X-WP-Nonce': `${ WP_REST_NONCE }`
+  }
+}
+```
+
 ## Connecting via a GraphQL client library
 
 You can also use the GraphQL client library of your choice to connect to the server. Some options are:
