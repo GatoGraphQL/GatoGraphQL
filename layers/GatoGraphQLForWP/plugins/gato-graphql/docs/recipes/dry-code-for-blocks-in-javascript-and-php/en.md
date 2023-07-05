@@ -9,9 +9,82 @@ Then, rendering a dynamic block in the front-end (to display it in the WordPress
 
 With Gato GraphQL and extensions, it is possible to make this DRY, having a single source of truth to fetch data for both the client and server-sides.
 
-The previous recipe explained how to connect to the GraphQL server from the client, using JavaScript.
+## Storing GraphQL queries in `.gql` files
 
-	Document:
+In the previous recipe (which explained how to connect to the GraphQL server from the client), the GraphQL query to execute was embedded within the JavaScript code:
+
+```js
+const response = await fetch(endpoint, {
+  body: JSON.stringify({
+    query: `
+      query {
+        posts {
+          id
+          title
+          author {
+            id
+            name
+          }
+        }
+      }
+    `
+  )
+} );
+```
+
+However, we can also store the GraphQL query in a `.gql` or `.graphql` file, and import its contents using Webpack's [`raw-loader`](https://v4.webpack.js.org/loaders/raw-loader/):
+
+```js
+// File webpack.config.js
+const config = require( '@wordpress/scripts/config/webpack.config' );
+
+config.module.rules.push(
+  {
+    test: /\.(gql|graphql)$/i,
+    use: 'raw-loader',
+  },
+);
+
+module.exports = config;
+```
+
+_(This code works for Webpack v4; for v5, we must use [Asset Modules](https://webpack.js.org/guides/asset-modules/) instead.)_
+
+Then, we can place the GraphQL query inside a `.gql` file:
+
+```gql
+# File graphql-documents/fetch-posts-with-author.gql
+query {
+  posts {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+```
+
+We import the file containing GraphQL query into a variable:
+
+```js
+import graphQLQuery from './graphql-documents/fetch-posts-with-author.gql';
+```
+
+Finally, we reference the variable:
+
+```js
+const response = await fetch(endpoint, {
+  body: JSON.stringify({
+    query: graphQLQuery
+  )
+} );
+```
+
+
+
+  Document:
 		Move calling accessControlLists and all the others to a .gql file
 			So can use in docs!!!
 		Use:
