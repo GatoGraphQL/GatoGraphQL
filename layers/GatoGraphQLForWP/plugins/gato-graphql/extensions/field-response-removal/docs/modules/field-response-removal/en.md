@@ -172,10 +172,3 @@ query RetrieveGitHubActionArtifacts(
   )
 }
 ```
-
-<!-- ## GraphQL spec
-
-This functionality is currently not part of the GraphQL spec, but it has been requested:
-
-- <a href="https://github.com/graphql/graphql-spec/issues/275#issuecomment-338538911" target="_blank">Issue #275 - @include(unless null) ?</a>
-- <a href="https://github.com/graphql/graphql-spec/issues/766" target="_blank">Issue #766 - GraphQL query: skip value field if null</a> -->
