@@ -123,4 +123,4 @@ A "Mutation Scheme" section has been added to a Schema Configuration, allowing t
 
 This functionality is currently not part of the GraphQL spec, but it has been requested:
 
-- <a href="https://github.com/graphql/graphql-spec/issues/252" target="_blank">Issue #252 - Proposal: Serial fields (nested mutations)</a>
+- [Issue #252 - Proposal: Serial fields (nested mutations)](https://github.com/graphql/graphql-spec/issues/252)

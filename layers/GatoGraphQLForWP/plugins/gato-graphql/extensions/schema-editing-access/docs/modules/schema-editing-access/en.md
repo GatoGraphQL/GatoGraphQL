@@ -24,7 +24,7 @@ This is achieved via two different methods:
 
 Assign capability `manage_graphql_schema` to any user role or any specific user that must be able to edit the schema.
 
-(You can use a 3rd-party plugin to do this, such as <a href="https://wordpress.org/plugins/user-role-editor/" target="_blank">User Role Editor</a>.)
+(You can use a 3rd-party plugin to do this, such as [User Role Editor](https://wordpress.org/plugins/user-role-editor/).)
 
 You can also select a group of user roles which can edit the GraphQL schema.
 

@@ -47,7 +47,7 @@ The parameters passed are:
 
 ## WP-Cron
 
-The following action hooks are provided, to be invoked from within <a href="https://developer.wordpress.org/plugins/cron/" target="_blank">WP-Cron</a>:
+The following action hooks are provided, to be invoked from within [WP-Cron](https://developer.wordpress.org/plugins/cron/):
 
 1. `gato_graphql__execute_query`
 2. `gato_graphql__execute_persisted_query`

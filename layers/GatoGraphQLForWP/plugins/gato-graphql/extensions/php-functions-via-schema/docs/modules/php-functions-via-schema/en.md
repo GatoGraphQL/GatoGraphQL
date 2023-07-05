@@ -633,11 +633,11 @@ Append some string to the beginning of the string in the field value.
 
 ### `@strRegexReplace`
 
-Execute a regular expression to search and replace a string (see <a href="https://www.php.net/manual/en/function.preg-replace.php" target="_blank">documentation for PHP function `preg_replace`</a>).
+Execute a regular expression to search and replace a string (see [documentation for PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php)).
 
 ### `@strRegexReplaceMultiple`
 
-Execute regular expressions to search and replace a list of strings (see <a href="https://www.php.net/manual/en/function.preg-replace.php" target="_blank">documentation for PHP function `preg_replace`</a>).
+Execute regular expressions to search and replace a list of strings (see [documentation for PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php)).
 
 ### `@strRepeat`
 

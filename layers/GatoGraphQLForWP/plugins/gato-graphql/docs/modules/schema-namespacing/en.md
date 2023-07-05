@@ -48,4 +48,4 @@ Similarly, the Marketing and Tutorials teams from the same company can release t
 
 This functionality is currently not part of the GraphQL spec, but it has been requested:
 
-- <a href="https://github.com/graphql/graphql-spec/issues/163" target="_blank">Issue #163 - Namespaces</a>
+- [Issue #163 - Namespaces](https://github.com/graphql/graphql-spec/issues/163)

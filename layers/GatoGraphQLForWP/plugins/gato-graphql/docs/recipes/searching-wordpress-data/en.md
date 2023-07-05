@@ -12,9 +12,9 @@ We can then use Gato GraphQL to search for posts (and also users, comments, and 
 
 🔥 **Tips:**
 
-- Create the queries below as <a href="https://gatographql.com/guides/use/creating-a-persisted-query/" target="_blank">Persisted Queries</a>, as to keep them stored in the website, and execute them time and again
-- Publish them <a href="https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/" target="_blank">as `private`</a>, so that they are available only within the wp-admin, and only to the admin
-- Use an <a href="https://gatographql.com/guides/use/creating-an-api-hierarchy/" target="_blank">API hierarchy</a> to manage them (eg: have a Persisted Query `internal` be the ancestor to all the internal queries: `internal/search-posts-without-thumbnail`, `internal/search-users-by-locale`, etc)
+- Create the queries below as [Persisted Queries](https://gatographql.com/guides/use/creating-a-persisted-query/), as to keep them stored in the website, and execute them time and again
+- Publish them [as `private`](https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/), so that they are available only within the wp-admin, and only to the admin
+- Use an [API hierarchy](https://gatographql.com/guides/use/creating-an-api-hierarchy/) to manage them (eg: have a Persisted Query `internal` be the ancestor to all the internal queries: `internal/search-posts-without-thumbnail`, `internal/search-users-by-locale`, etc)
 
 </div>
 

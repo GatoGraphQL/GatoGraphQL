@@ -116,4 +116,4 @@ To achieve this, the value of the field is exported to dynamic variable `$postTi
 
 This functionality is currently not part of the GraphQL spec, but it has been requested:
 
-- <a href="https://github.com/graphql/graphql-spec/issues/583" target="_blank">Issue #583 - [RFC] Dynamic variable declaration</a>
+- [Issue #583 - [RFC] Dynamic variable declaration](https://github.com/graphql/graphql-spec/issues/583)
