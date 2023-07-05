@@ -12,6 +12,8 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPCMSSchema\SchemaCommons\CMS\CMSHelperService;
+use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
@@ -27,6 +29,7 @@ abstract class AbstractContentParser implements ContentParserInterface
 
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?LocaleHelper $localeHelper = null;
+    private ?CMSHelperServiceInterface $cmsHelperService = null;
 
     /**
      * @param string|null $baseDir Where to look for the documentation
@@ -73,6 +76,19 @@ abstract class AbstractContentParser implements ContentParserInterface
             $this->localeHelper = $localeHelper;
         }
         return $this->localeHelper;
+    }
+    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
+    {
+        $this->cmsHelperService = $cmsHelperService;
+    }
+    final protected function getCMSHelperService(): CMSHelperServiceInterface
+    {
+        if ($this->cmsHelperService === null) {
+            /** @var CMSHelperService */
+            $cmsHelperService = $this->instanceManager->getInstance(CMSHelperService::class);
+            $this->cmsHelperService = $cmsHelperService;
+        }
+        return $this->cmsHelperService;
     }
 
     /**
@@ -428,68 +444,22 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected function openExternalLinksInNewTab(string $htmlContent): string
     {
         return (string)preg_replace_callback(
-            '/<a.*href="(.*?)\.md".*?>/',
+            '/<a (.*?)href="(.*?)"(.*?)>/',
             function (array $matches): string {
-                // If the element has an absolute route, then no need
-                if ($this->isAbsoluteURL($matches[1]) || $this->isMailto($matches[1])) {
+                // If the element is not an external link, or already has a target, return
+                if (!$this->isAbsoluteURL($matches[2])
+                    || $this->getCMSHelperService()->isCurrentDomain($matches[2])
+                    || str_contains($matches[1], ' target=')
+                    || str_contains($matches[3], ' target=')
+                ) {
                     return $matches[0];
                 }
-                $doc = $matches[1];
-                /**
-                 * The doc might be of this kind:
-                 *
-                 *   "../../release-notes/0.9/en"
-                 *
-                 * It contains the language. This must be removed.
-                 * The result must be:
-                 *
-                 *   "../../release-notes/0.9"
-                 */
-                $langPos = strrpos($doc, '/');
-                if ($langPos !== false) {
-                    $doc = substr($doc, 0, $langPos);
-                }
-
-                // The URL is the current one, plus attr to open the .md file
-                // in a modal window
-                $elementURL = \add_query_arg(
-                    [
-                        RequestParams::TAB => RequestParams::TAB_DOCS,
-                        RequestParams::DOC => $doc,
-                        'TB_iframe' => 'true',
-                    ],
-                    $this->getRequestHelperService()->getRequestedFullURL()
+                return sprintf(
+                    '<a %shref="%s"%s target="_blank">',
+                    $matches[1],
+                    $matches[2],
+                    $matches[3],
                 );
-                /** @var string */
-                $link = str_replace(
-                    "href=\"{$matches[1]}.md\"",
-                    "href=\"{$elementURL}\"",
-                    $matches[0]
-                );
-                // Must also add some classnames
-                $classnames = 'thickbox open-plugin-details-modal';
-                // 1. If there are classes already
-                /** @var string */
-                $replacedLink = preg_replace_callback(
-                    '/ class="(.*?)"/',
-                    function (array $matches) use ($classnames): string {
-                        return str_replace(
-                            " class=\"{$matches[1]}\"",
-                            " class=\"{$matches[1]} {$classnames}\"",
-                            $matches[0]
-                        );
-                    },
-                    $link
-                );
-                // 2. If there were no classes
-                if ($replacedLink === $link) {
-                    $replacedLink = str_replace(
-                        "<a ",
-                        "<a class=\"{$classnames}\" ",
-                        $link
-                    );
-                }
-                return $replacedLink;
             },
             $htmlContent
         );
