@@ -80,26 +80,57 @@ const response = await fetch(endpoint, {
 } );
 ```
 
+## Resolving `.gql` files in the server-side
 
+The GraphQL file we created above will be our single source of truth to fetch data for the block. Let's now see how to resolve it on the server-side.
 
-  Document:
-		Move calling accessControlLists and all the others to a .gql file
-			So can use in docs!!!
-		Use:
-			https://v4.webpack.js.org/loaders/raw-loader/
-			https://stackoverflow.com/questions/47122504/import-raw-files-from-typescript-with-webpack-using-the-import-statement
-		Check:
-			submodules/PoP/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/blocks/schema-configuration/graphql-documents/schema-configurations.gql
+The extension **Internal GraphQL Server** installs a server that can be invoked within our application, using PHP code.
 
+It offers method `executeQueryInFile`:
 
+```php
+namespace GatoGraphQL\InternalGraphQLServer;
 
+use PoP\Root\HttpFoundation\Response;
 
-	Add recipe "Using GraphQL to feed data to blocks (frontend and backend)"
-		wp-admin endpoint can be used by blocks from the editor
-			then blocks can be rendered by executing a query against it
-			print the URL of this endpoint
-				Here and also in documentation in graphql-api.com
-		and PHP blocks can be rendered by calling GraphQLServerFactory::getInstance()->...
-		Demonstrate code re-using the same query.gql file, read by both:
-			- the .js (block)
-			- the .php (rendering)
+class GraphQLServer {
+  /**
+   * Execute a GraphQL query contained in a (`.gql`) file
+   */
+  public static function executeQueryInFile(
+      string $file,
+      array $variables = [],
+      ?string $operationName = null
+  ): Response {
+    // ...
+  }
+}
+```
+
+We can invoke this method when rendering the dynamic block, passing the `.gql` file created earlier on:
+
+```php
+$block = [
+  'render_callback' => function(array $attributes, string $content): string {
+    // Provide the GraphQL query file
+    $file = __DIR__ . '/blocks/my-block/graphql-documents/fetch-posts-with-author.gql';
+
+    // Execute the query against the internal server
+    $response = \GatoGraphQL\InternalGraphQLServer\GatoGraphQL::executeQueryInFile($query);
+
+    // Get the content and decode it
+    $responseContent = json_decode($response->getContent(), true);
+
+    // Access the data and errors from the response
+    $data = $responseContent["data"] ?? [];
+    $errors = $responseContent["errors"] ?? [];
+
+    // Do something with the data
+    // $content = $this->useGraphQLData($content, $data, $errors);
+
+    return $content;
+  },
+];
+register_block_type("namespace/my-block", $block);
+```
+
