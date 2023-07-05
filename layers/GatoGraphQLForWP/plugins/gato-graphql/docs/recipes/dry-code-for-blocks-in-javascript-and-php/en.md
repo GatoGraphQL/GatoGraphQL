@@ -2,7 +2,7 @@
 
 [Dynamic blocks](https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/) are blocks that build their structure and content on the fly when the block is rendered on the front end.
 
-To render a dynamic block, then, requires two different ways to fetch its data:
+Then, rendering a dynamic block in the front-end (to display it in the WordPress editor) and in the server-side (to generate the HTML for the blog post) must fetch its data twice, in two different ways:
 
 - Connecting to the API on the client-side (JavaScript)
 - Calling WordPress functions on the server-side (PHP)
