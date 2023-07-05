@@ -10,6 +10,21 @@ Gato GraphQL is a free and open source plugin for WordPress, augmented with exte
 
 @todo Complete Support page!
 
+## Newsletter
+
+Subscribe to our newsletter and receive timely updates concerning:
+
+- New versions of Gato GraphQL
+- New extensions
+- Updated documentation
+- Announcements
+
+<form action="https://graphql-api.us7.list-manage.com/subscribe/post?u=0dc2e614635ab3af220b3a78c&amp;id=bdfd6885fe" method="POST" name="mc-embedded-subscribe-form" target="_blank">
+  <label for="field-EMAIL">Email:</label>
+  <input type="email" name="EMAIL" id="field-EMAIL" required="" aria-required="true" placeholder="pedro@yahoo.com" autocomplete="email">
+  <button type="submit" class="button">Subscribe</button>
+</form>
+
 ## Release Notes
 
 New features released on each version:
