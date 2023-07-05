@@ -1,10 +1,10 @@
 # “Content Translation” Bundle
 
-Translate your content into over 100 languages using the <a href="https://cloud.google.com/translate/" target="_blank">Google Translate API</a>.
+Translate your content into over 100 languages using the [Google Translate API](https://cloud.google.com/translate/).
 
 The bundle provides extensions to access, iterate and manipulate the field value. With these, in addition to translating the whole blog post, you can also translate attributes deep within the (Gutenberg) block's structure, and then keep editing the content in the block editor!
 
-<a href="https://vimeo.com/836876255" target="_blank">Watch “Translating a blog post with blocks (Gutenberg integration demo)” in Vimeo</a>
+[Watch “Translating a blog post with blocks (Gutenberg integration demo)” in Vimeo](https://vimeo.com/836876255)
 
 ## List of bundled extensions
 
