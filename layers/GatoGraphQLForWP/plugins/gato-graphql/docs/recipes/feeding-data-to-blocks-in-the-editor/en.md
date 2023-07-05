@@ -22,15 +22,9 @@ Conveniently, we can also point to JavaScript global variable `GATO_GRAPHQL_BLOC
 
 🔥 **Tips:**
 
-You can also create your own internal endpoint, and pre-define whatever specific configuration required for your blocks (enabling nested mutations, enabling namespacing, defining what CPTs can be queried, or anything else available in the Schema Configuration).
+You can also [create your own internal endpoint](https://gatographql.com/guides/config/creating-custom-internal-endpoints-for-blocks/), and pre-define whatever specific configuration required for your blocks (enabling nested mutations, enabling namespacing, defining what CPTs can be queried, or anything else available in the Schema Configuration).
 
-Check out guide [Creating Custom Internal Endpoints for Blocks](https://gatographql.com/guides/config/creating-custom-internal-endpoints-for-blocks/) to learn how to do it.
-
----
-
-Alternatively, you can create Persisted Queries and retrieve data from them (instead of from an endpoint).
-
-Check out how the client code (explained below) differs, in guide [Connecting to the GraphQL server from a client](https://gatographql.com/guides/intro/connecting-to-the-graphql-server-from-a-client/#heading-executing-persisted-queries).
+Alternatively, you can create Persisted Queries and retrieve data from them (instead of from an endpoint). Check out how the [client code must be adapted](https://gatographql.com/guides/intro/connecting-to-the-graphql-server-from-a-client/#heading-executing-persisted-queries).
 
 </div>
 
