@@ -2,16 +2,16 @@
 
 [Dynamic blocks](https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/) are blocks that build their structure and content on the fly when the block is rendered on the front end.
 
-Rendering a dynamic block in the front-end (to display it in the WordPress editor) and in the server-side (to generate the HTML for the blog post) will typically fetch its data twice, in two different ways:
+Rendering a dynamic block in the front-end (to display it in the WordPress editor) and in the server-side (to generate the HTML for the blog post) will typically fetch its data in two different ways:
 
 - Connecting to the API on the client-side (JavaScript)
 - Calling WordPress functions on the server-side (PHP)
 
-With Gato GraphQL and extensions, it is possible to make this DRY, having a single source of truth to fetch data for both the client and server-sides.
+With Gato GraphQL and extensions, it is possible to make this logic DRY, having a single source of truth to fetch data for both the client and server-sides. Let's explore how to do this.
 
 ## Storing GraphQL queries in `.gql` files
 
-In the previous recipe (which explained how to connect to the GraphQL server from the client), the GraphQL query to execute was embedded within the JavaScript code:
+In the previous recipe (which explained how to connect to the GraphQL server from the client), the GraphQL query to be executed was embedded within the JavaScript code:
 
 ```js
 const response = await fetch(endpoint, {
@@ -82,16 +82,12 @@ const response = await fetch(endpoint, {
 
 ## Resolving `.gql` files in the server-side
 
-The GraphQL file we created above will be our single source of truth to fetch data for the block. Let's now see how to resolve it on the server-side.
+The GraphQL file we created above will be our single source of truth to fetch data for the block. It already satisfies this for the client-side; let's now see do it for the server-side.
 
-The extension **Internal GraphQL Server** installs a server that can be invoked within our application, using PHP code.
-
-It offers method `executeQueryInFile`:
+Extension **Internal GraphQL Server** installs a server that can be invoked within our application, using PHP code. It offers method `executeQueryInFile`:
 
 ```php
 namespace GatoGraphQL\InternalGraphQLServer;
-
-use PoP\Root\HttpFoundation\Response;
 
 class GraphQLServer {
   /**
@@ -107,7 +103,7 @@ class GraphQLServer {
 }
 ```
 
-We can invoke this method when rendering the dynamic block, passing the `.gql` file created earlier on:
+By invoking this method passing the `.gql` file created earlier on, we retrieve the data when rendering the dynamic block:
 
 ```php
 $block = [
@@ -116,7 +112,7 @@ $block = [
     $file = __DIR__ . '/blocks/my-block/graphql-documents/fetch-posts-with-author.gql';
 
     // Execute the query against the internal server
-    $response = \GatoGraphQL\InternalGraphQLServer\GatoGraphQL::executeQueryInFile($query);
+    $response = \GatoGraphQL\InternalGraphQLServer\GatoGraphQL::executeQueryInFile($file);
 
     // Get the content and decode it
     $responseContent = json_decode($response->getContent(), true);
@@ -127,6 +123,7 @@ $block = [
 
     // Do something with the data
     // $content = $this->useGraphQLData($content, $data, $errors);
+    // ...
 
     return $content;
   },
@@ -134,3 +131,4 @@ $block = [
 register_block_type("namespace/my-block", $block);
 ```
 
+That's it. Now, a single `.gql` file retrieves the data to power blocks on both the client and server-sides.
