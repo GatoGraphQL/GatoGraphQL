@@ -8,6 +8,7 @@ class ContentParserOptions
 {
     public final const APPEND_PATH_URL_TO_IMAGES = 'appendPathURLToImages';
     public final const SUPPORT_MARKDOWN_LINKS = 'supportMarkdownLinks';
+    public final const OPEN_EXTERNAL_LINKS_IN_NEW_TAB = 'openExternalLinksInNewTab';
     public final const APPEND_PATH_URL_TO_ANCHORS = 'appendPathURLToAnchors';
     public final const ADD_CLASSES = 'addClasses';
     public final const EMBED_VIDEOS = 'embedVideos';

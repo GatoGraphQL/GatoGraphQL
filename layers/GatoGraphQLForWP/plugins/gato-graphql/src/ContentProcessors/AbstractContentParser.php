@@ -224,6 +224,10 @@ abstract class AbstractContentParser implements ContentParserInterface
         if ($options[ContentParserOptions::SUPPORT_MARKDOWN_LINKS] ?? null) {
             $htmlContent = $this->convertMarkdownLinks($htmlContent);
         }
+        // Open external links in new tab
+        if ($options[ContentParserOptions::OPEN_EXTERNAL_LINKS_IN_NEW_TAB] ?? null) {
+            $htmlContent = $this->openExternalLinksInNewTab($htmlContent);
+        }
         // Add the path to the images
         if ($options[ContentParserOptions::APPEND_PATH_URL_TO_IMAGES] ?? null) {
             // Enable to override the path for images, to read them from
@@ -349,6 +353,79 @@ abstract class AbstractContentParser implements ContentParserInterface
      * so it works also within the plugin
      */
     protected function convertMarkdownLinks(string $htmlContent): string
+    {
+        return (string)preg_replace_callback(
+            '/<a.*href="(.*?)\.md".*?>/',
+            function (array $matches): string {
+                // If the element has an absolute route, then no need
+                if ($this->isAbsoluteURL($matches[1]) || $this->isMailto($matches[1])) {
+                    return $matches[0];
+                }
+                $doc = $matches[1];
+                /**
+                 * The doc might be of this kind:
+                 *
+                 *   "../../release-notes/0.9/en"
+                 *
+                 * It contains the language. This must be removed.
+                 * The result must be:
+                 *
+                 *   "../../release-notes/0.9"
+                 */
+                $langPos = strrpos($doc, '/');
+                if ($langPos !== false) {
+                    $doc = substr($doc, 0, $langPos);
+                }
+
+                // The URL is the current one, plus attr to open the .md file
+                // in a modal window
+                $elementURL = \add_query_arg(
+                    [
+                        RequestParams::TAB => RequestParams::TAB_DOCS,
+                        RequestParams::DOC => $doc,
+                        'TB_iframe' => 'true',
+                    ],
+                    $this->getRequestHelperService()->getRequestedFullURL()
+                );
+                /** @var string */
+                $link = str_replace(
+                    "href=\"{$matches[1]}.md\"",
+                    "href=\"{$elementURL}\"",
+                    $matches[0]
+                );
+                // Must also add some classnames
+                $classnames = 'thickbox open-plugin-details-modal';
+                // 1. If there are classes already
+                /** @var string */
+                $replacedLink = preg_replace_callback(
+                    '/ class="(.*?)"/',
+                    function (array $matches) use ($classnames): string {
+                        return str_replace(
+                            " class=\"{$matches[1]}\"",
+                            " class=\"{$matches[1]} {$classnames}\"",
+                            $matches[0]
+                        );
+                    },
+                    $link
+                );
+                // 2. If there were no classes
+                if ($replacedLink === $link) {
+                    $replacedLink = str_replace(
+                        "<a ",
+                        "<a class=\"{$classnames}\" ",
+                        $link
+                    );
+                }
+                return $replacedLink;
+            },
+            $htmlContent
+        );
+    }
+
+    /**
+     * Add `target="_blank"` to external links
+     */
+    protected function openExternalLinksInNewTab(string $htmlContent): string
     {
         return (string)preg_replace_callback(
             '/<a.*href="(.*?)\.md".*?>/',
