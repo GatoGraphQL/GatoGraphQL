@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 /**
  * About menu page
@@ -36,16 +37,39 @@ class AboutMenuPage extends AbstractDocsMenuPage
 
     protected function getContentToPrint(): string
     {
-        return $this->getMarkdownContent(
+        $content = $this->getMarkdownContent(
             'about',
             'general',
             [
                 ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
             ]
-        ) ?? sprintf(
-            '<p>%s</p>',
-            \__('Oops, there was a problem loading the page', 'gato-graphql')
         );
+
+        if ($content === null) {
+            return sprintf(
+                '<p>%s</p>',
+                \__('Oops, there was a problem loading the page', 'gato-graphql')
+            );
+        }
+
+        /**
+         * Input dynamic content into the form in the generated HTML
+         */
+        $valueInjections = [
+            'placeholder="pedro@yahoo.com"' => \get_option('admin_email', ''),
+            'placeholder="mydomain.com"' => GeneralUtils::getHost(\home_url()),
+        ];
+        $replacements = [];
+        foreach ($valueInjections as $search => $valueInject) {
+            $replacements[$search] = sprintf(
+                '%s value="%s"',
+                $search,
+                $valueInject
+            );
+        }
+        $content = str_replace(array_keys($replacements), array_values($replacements), $content);
+
+        return $content;
     }
 
     /**
