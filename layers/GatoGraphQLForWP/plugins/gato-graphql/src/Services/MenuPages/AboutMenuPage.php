@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
  * About menu page
@@ -55,5 +56,21 @@ class AboutMenuPage extends AbstractDocsMenuPage
         parent::enqueueAssets();
 
         $this->enqueueModalTriggerAssets();
+
+        $this->enqueueAboutPageAssets();
+    }
+    
+    protected function enqueueAboutPageAssets(): void
+    {
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginURL = $mainPlugin->getPluginURL();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
+
+        \wp_enqueue_style(
+            'gato-graphql-about',
+            $mainPluginURL . 'assets/css/about.css',
+            array(),
+            $mainPluginVersion
+        );
     }
 }
