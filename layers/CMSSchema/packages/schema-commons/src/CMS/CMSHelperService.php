@@ -34,4 +34,15 @@ class CMSHelperService implements CMSHelperServiceInterface
         }
         return null;
     }
+
+    /**
+     * Indicate if the URL belongs to the current domain,
+     * whether http or https
+     */
+    public function isCurrentDomain(string $url): bool
+    {
+        $homeURL = $this->getCMSService()->getHomeURL();
+
+        return GeneralUtils::getHost($url) === GeneralUtils::getHost($homeURL);
+    }
 }
