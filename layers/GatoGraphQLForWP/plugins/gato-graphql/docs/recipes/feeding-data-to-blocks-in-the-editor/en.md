@@ -1,14 +1,14 @@
 # Feeding data to blocks in the editor
 
-Content in the the WordPress editor is created via (Gutenberg) blocks, which fetch their data from the server via an API. WordPress core uses the WP REST API, but we can also decide to use Gato GraphQL to power our own blocks.
+Content in the the WordPress editor is created via (Gutenberg) blocks, which fetch their data from the server via an API. WordPress core uses the WP REST API, but we can also use Gato GraphQL to power our own blocks.
 
-Let's explore how the block can send a request against the GraphQL server.
+Let's explore how the block can fetch data from the GraphQL server.
 
 ## Endpoint
 
-Because blocks are used within the context of the WordPress editor, the user is already logged-in, and hence we can connect to an internal GraphQL endpoint (accessible within the wp-admin only).
+Because blocks are used within the context of the WordPress editor, the user is already logged-in, and hence we can connect to an internal GraphQL endpoint (accessible within the wp-admin only) instead of a public endpoint.
 
-This endpoint is called `blockEditor`, and is accessible under:
+This internal `blockEditor` endpoint is accessible under:
 
 ```
 https://mysite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor
@@ -35,17 +35,11 @@ If you need to apply some specific configuration for your blocks, such as:
 
 ## Connecting via `fetch`
 
-We can use the standard [`fetch` method](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) to connect to the server:
+We can use the standard [`fetch` method](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) to connect to the server.
 
 This JavaScript code submits a query with variables to the GraphQL server, and prints the response to console.
-```js
-/**
- * Replace here using either:
- * - The single endpoint's URL
- * - A custom endpoint's permalink
- */
-const GRAPHQL_ENDPOINT = '{ YOUR_ENDPOINT_URL }';
 
+```js
 (async function () {
   const limit = 3;
   const data = {
@@ -67,7 +61,7 @@ query GetPostsWithAuthor($limit: Int) {
   };
 
   const response = await fetch(
-    GRAPHQL_ENDPOINT,
+    GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT,
     {
       method: 'post',
       body: JSON.stringify(data),
