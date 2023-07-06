@@ -1,6 +1,6 @@
 # Duplicating a blog post
 
-GraphQL can be considered the Swiss Army Knife for dealing with data in a WordPress site, as it allows to retrieve, manipulate and store again any piece of data, in any desired way.
+You can think of GraphQL as a Swiss Army Knife for dealing with data in a WordPress site, as it allows to retrieve, manipulate and store again any piece of data, in any desired way.
 
 An example is the ability to duplicate a blog post. Let's explore how to do this.
 
