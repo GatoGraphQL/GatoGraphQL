@@ -86,6 +86,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/custompost-tags-wp:/app/vendor/pop-cms-schema/custompost-tags-wp
         - >-
+          ../../layers/CMSSchema/packages/custompost-user-mutations:/app/vendor/pop-cms-schema/custompost-user-mutations
+        - >-
           ../../layers/CMSSchema/packages/custompostmedia-mutations-wp:/app/vendor/pop-cms-schema/custompostmedia-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/custompostmedia-mutations:/app/vendor/pop-cms-schema/custompostmedia-mutations
