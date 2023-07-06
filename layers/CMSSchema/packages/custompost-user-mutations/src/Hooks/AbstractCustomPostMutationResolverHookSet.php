@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostUserMutations\Hooks;
 
-use PoP\Root\App;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostUserMutations\Module;
+use PoPCMSSchema\CustomPostUserMutations\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
@@ -101,10 +103,11 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $sensitiveInputFieldNames;
         }
-        if (true) {
-            return $sensitiveInputFieldNames;
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatAuthorInCustomPostMutationAsSensitiveData()) {
+            $sensitiveInputFieldNames[] = MutationInputProperties::AUTHOR_ID;
         }
-        $sensitiveInputFieldNames[] = MutationInputProperties::AUTHOR_ID;
         return $sensitiveInputFieldNames;
     }
 }
