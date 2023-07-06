@@ -32,7 +32,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     /**
      * Setting options
      */
-    public final const OPTION_TREAT_AUTHOR_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA = 'treat-author-in-custompost-mutation-as-sensitive-data';
+    public final const OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA = 'treat-author-input-in-custompost-mutation-as-sensitive-data';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -242,7 +242,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $defaultValues = [
             self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => [
-                self::OPTION_TREAT_AUTHOR_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA => true,
+                self::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -259,7 +259,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
         $sensitiveDataTitlePlaceholder = \__('Treat the %s as “sensitive” data', 'gato-graphql');
         $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gato-graphql');
         if ($module === self::SCHEMA_CUSTOMPOST_USER_MUTATIONS) {
-            $option = self::OPTION_TREAT_AUTHOR_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;
+            $option = self::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(

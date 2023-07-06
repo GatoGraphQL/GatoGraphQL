@@ -105,7 +105,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->treatAuthorInCustomPostMutationAsSensitiveData()) {
+        if ($moduleConfiguration->treatAuthorInputInCustomPostMutationAsSensitiveData()) {
             $sensitiveInputFieldNames[] = MutationInputProperties::AUTHOR_ID;
         }
         return $sensitiveInputFieldNames;

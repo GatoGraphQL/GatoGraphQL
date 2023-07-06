@@ -9,9 +9,9 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
-    public function treatAuthorInCustomPostMutationAsSensitiveData(): bool
+    public function treatAuthorInputInCustomPostMutationAsSensitiveData(): bool
     {
-        $envVariable = Environment::TREAT_AUTHOR_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;
+        $envVariable = Environment::TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
