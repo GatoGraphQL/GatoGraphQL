@@ -8,7 +8,6 @@ use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
 use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostUserMutations\ObjectModels\UserDoesNotExistErrorPayload;
-use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -21,7 +20,6 @@ use PoP\Root\Hooks\AbstractHookSet;
 class MutationResolverHookSet extends AbstractHookSet
 {
     private ?UserTypeAPIInterface $userTypeAPI = null;
-    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
     final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
@@ -35,19 +33,6 @@ class MutationResolverHookSet extends AbstractHookSet
             $this->userTypeAPI = $userTypeAPI;
         }
         return $this->userTypeAPI;
-    }
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
-    {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-    }
-    final protected function getMediaTypeAPI(): MediaTypeAPIInterface
-    {
-        if ($this->mediaTypeAPI === null) {
-            /** @var MediaTypeAPIInterface */
-            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
-            $this->mediaTypeAPI = $mediaTypeAPI;
-        }
-        return $this->mediaTypeAPI;
     }
 
     protected function init(): void
