@@ -120,7 +120,7 @@ mutation DuplicatePost
 {
   createPost(input: {
     status: draft,
-    author: $authorID,
+    authorID: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
       html: $contentSource
