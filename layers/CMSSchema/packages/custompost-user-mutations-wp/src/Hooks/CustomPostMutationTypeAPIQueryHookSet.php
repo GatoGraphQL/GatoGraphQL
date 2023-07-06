@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostUserMutations\Hooks;
+namespace PoPCMSSchema\CustomPostUserMutationsWP\Hooks;
 
-use PoPCMSSchema\CustomPostMutations\TypeAPIs\AbstractCustomPostTypeMutationAPI;
+use PoPCMSSchema\CustomPostMutationsWP\TypeAPIs\CustomPostTypeMutationAPI;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
@@ -13,7 +13,7 @@ class CustomPostMutationTypeAPIQueryHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            AbstractCustomPostTypeMutationAPI::HOOK_QUERY,
+            CustomPostTypeMutationAPI::HOOK_QUERY,
             $this->convertCustomPostsMutationQuery(...)
         );
     }
@@ -25,7 +25,7 @@ class CustomPostMutationTypeAPIQueryHookSet extends AbstractHookSet
     public function convertCustomPostsMutationQuery(array $query): array
     {
         if (isset($query['author-id'])) {
-            $query['author'] = $query['author-id'];
+            $query['post_author'] = $query['author-id'];
             unset($query['author-id']);
         }
 
