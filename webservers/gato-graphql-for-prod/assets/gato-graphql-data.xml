@@ -156,7 +156,7 @@
 		<wp:term_taxonomy><![CDATA[graphql-endpoint-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[authorization-required]]></wp:term_slug>
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
-		<wp:term_name><![CDATA[authorization-required]]></wp:term_name>
+		<wp:term_name><![CDATA[Authorization required]]></wp:term_name>
 	</wp:term>
 		
 			
