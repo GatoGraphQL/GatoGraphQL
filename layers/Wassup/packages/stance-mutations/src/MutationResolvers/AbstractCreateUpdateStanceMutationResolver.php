@@ -140,20 +140,6 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         }
     }
 
-    // Moved to WordPress-specific code
-    // protected function getCreatepostData(\PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor)
-    // {
-    //     $post_data = parent::getCreatepostData($fieldDataAccessor);
-
-    //     // Allow to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
-    //     // For that, General thoughts have menu_order "0" (already default one), article-related ones have menu_order "1"
-    //     if ($fieldDataAccessor->getValue('stancetarget')) {
-    //         $post_data['menu-order'] = 1;
-    //     }
-
-    //     return $post_data;
-    // }
-
     protected function createAdditionals(string|int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::createAdditionals($post_id, $fieldDataAccessor);

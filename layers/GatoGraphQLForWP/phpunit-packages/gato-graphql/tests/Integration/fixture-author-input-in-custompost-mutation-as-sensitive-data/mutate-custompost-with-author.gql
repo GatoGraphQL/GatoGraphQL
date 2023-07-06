@@ -1,0 +1,20 @@
+mutation CreatePostWithAuthor {
+  createPost(input: {
+    authorID: 3,
+    title: "Some trashed new post",
+    status: trash
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      author {
+        id
+      }
+    }
+  }
+}

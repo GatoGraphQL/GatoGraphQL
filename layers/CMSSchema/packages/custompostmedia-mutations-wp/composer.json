@@ -18,7 +18,7 @@
         "pop-cms-schema/custompostmedia-mutations": "^0.11",
         "pop-cms-schema/custompostmedia-wp": "^0.11",
         "pop-cms-schema/media-wp": "^0.11",
-        "pop-cms-schema/user-state-wp": "^0.11"
+        "pop-cms-schema/user-state-mutations-wp": "^0.11"
     },
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",

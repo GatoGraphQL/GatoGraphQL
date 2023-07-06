@@ -166,6 +166,8 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
                 $query['fields'] = 'ids';
             } elseif ($return_type === ReturnTypes::NAMES) {
                 $query['fields'] = 'names';
+            } elseif ($return_type === ReturnTypes::SLUGS) {
+                $query['fields'] = 'slugs';
             }
         }
 

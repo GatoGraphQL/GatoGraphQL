@@ -13,7 +13,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 trait UseCollapsibleContentMenuPageTrait
 {
     use CollapsibleContentPrinterTrait;
-    
+
     /**
      * Enqueue the required assets
      */

@@ -4,33 +4,32 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\SchemaHooks;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
-use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\TagsByOneofInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setTagsByOneofInputObjectTypeResolver(TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->tagsByOneofInputObjectTypeResolver = $tagsByOneofInputObjectTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getTagsByOneofInputObjectTypeResolver(): TagsByOneofInputObjectTypeResolver
     {
-        if ($this->stringScalarTypeResolver === null) {
-            /** @var StringScalarTypeResolver */
-            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        if ($this->tagsByOneofInputObjectTypeResolver === null) {
+            /** @var TagsByOneofInputObjectTypeResolver */
+            $tagsByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(TagsByOneofInputObjectTypeResolver::class);
+            $this->tagsByOneofInputObjectTypeResolver = $tagsByOneofInputObjectTypeResolver;
         }
-        return $this->stringScalarTypeResolver;
+        return $this->tagsByOneofInputObjectTypeResolver;
     }
 
     protected function init(): void
@@ -44,12 +43,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         App::addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             $this->maybeAddInputFieldDescription(...),
-            10,
-            3
-        );
-        App::addFilter(
-            HookNames::INPUT_FIELD_TYPE_MODIFIERS,
-            $this->maybeAddInputFieldTypeModifiers(...),
             10,
             3
         );
@@ -67,7 +60,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::TAGS] = $this->getStringScalarTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::TAGS_BY] = $this->getTagsByOneofInputObjectTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
@@ -84,21 +77,9 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $inputFieldName,
     ): ?string {
         // Only for the newly added inputFieldName
-        if ($inputFieldName !== MutationInputProperties::TAGS || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+        if ($inputFieldName !== MutationInputProperties::TAGS_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return $this->__('The tags to set', 'custompost-tag-mutations');
-    }
-
-    public function maybeAddInputFieldTypeModifiers(
-        int $inputFieldTypeModifiers,
-        InputObjectTypeResolverInterface $inputObjectTypeResolver,
-        string $inputFieldName,
-    ): int {
-        // Only for the newly added inputFieldName
-        if ($inputFieldName !== MutationInputProperties::TAGS || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
-            return $inputFieldTypeModifiers;
-        }
-        return SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
     }
 }

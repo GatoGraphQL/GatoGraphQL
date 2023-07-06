@@ -197,17 +197,14 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     {
     }
 
-    // protected function addCustomPostType(&$post_data)
-    // {
-    //     $post_data['custompost-type'] = $this->getCustomPostType();
-    // }
     /**
-     * @param array<string,mixed> $post_data
+     * @param array<string,mixed> $customPostData
+     * @return array<string,mixed>
      */
-    protected function addCreateOrUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function addCreateOrUpdateCustomPostData(array $customPostData, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
-            $post_data['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
+            $customPostData['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
         }
         /**
          * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
@@ -216,15 +213,20 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             /** @var stdClass */
             $contentAs = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT_AS);
             if (isset($contentAs->{MutationInputProperties::HTML})) {
-                $post_data['content'] = $contentAs->{MutationInputProperties::HTML};
+                $customPostData['content'] = $contentAs->{MutationInputProperties::HTML};
             }
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::EXCERPT)) {
-            $post_data['excerpt'] = $fieldDataAccessor->getValue(MutationInputProperties::EXCERPT);
+            $customPostData['excerpt'] = $fieldDataAccessor->getValue(MutationInputProperties::EXCERPT);
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
-            $post_data['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
+            $customPostData['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
         }
+
+        // Inject author, categories, tags, featured image, etc
+        $customPostData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_DATA, $customPostData, $fieldDataAccessor);
+
+        return $customPostData;
     }
 
     /**
@@ -232,12 +234,15 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
      */
     protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $post_data = array(
+        $customPostData = array(
             'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
         );
-        $this->addCreateOrUpdateCustomPostData($post_data, $fieldDataAccessor);
+        $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
-        return $post_data;
+        // Inject author, categories, tags, featured image, etc
+        $customPostData = App::applyFilters(HookNames::GET_UPDATE_DATA, $customPostData, $fieldDataAccessor);
+
+        return $customPostData;
     }
 
     /**
@@ -245,22 +250,25 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
      */
     protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $post_data = [
+        $customPostData = [
             'custompost-type' => $this->getCustomPostType(),
         ];
-        $this->addCreateOrUpdateCustomPostData($post_data, $fieldDataAccessor);
+        $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
-        return $post_data;
+        // Inject author, categories, tags, featured image, etc
+        $customPostData = App::applyFilters(HookNames::GET_CREATE_DATA, $customPostData, $fieldDataAccessor);
+
+        return $customPostData;
     }
 
     /**
-     * @param array<string,mixed> $post_data
+     * @param array<string,mixed> $customPostData
      * @return string|int the ID of the updated custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
-    protected function executeUpdateCustomPost(array $post_data): string|int
+    protected function executeUpdateCustomPost(array $customPostData): string|int
     {
-        return $this->getCustomPostTypeMutationAPI()->updateCustomPost($post_data);
+        return $this->getCustomPostTypeMutationAPI()->updateCustomPost($customPostData);
     }
 
     protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataAccessor, int|string $customPostID): void
@@ -285,15 +293,15 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $post_data = $this->getUpdateCustomPostData($fieldDataAccessor);
-        $customPostID = $post_data['id'];
+        $customPostData = $this->getUpdateCustomPostData($fieldDataAccessor);
+        $customPostID = $customPostData['id'];
 
         // Create the operation log, to see what changed. Needed for
         // - Send email only when post published
         // - Add user notification of post being referenced, only when the reference is new (otherwise it will add the notification each time the user updates the post)
         $log = $this->getUpdateCustomPostDataLog($customPostID, $fieldDataAccessor);
 
-        $customPostID = $this->executeUpdateCustomPost($post_data);
+        $customPostID = $this->executeUpdateCustomPost($customPostData);
 
         $this->createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
@@ -309,13 +317,13 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     }
 
     /**
-     * @param array<string,mixed> $post_data
+     * @param array<string,mixed> $customPostData
      * @return string|int the ID of the created custom post
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function executeCreateCustomPost(array $post_data): string|int
+    protected function executeCreateCustomPost(array $customPostData): string|int
     {
-        return $this->getCustomPostTypeMutationAPI()->createCustomPost($post_data);
+        return $this->getCustomPostTypeMutationAPI()->createCustomPost($customPostData);
     }
 
     /**
@@ -325,8 +333,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int {
-        $post_data = $this->getCreateCustomPostData($fieldDataAccessor);
-        $customPostID = $this->executeCreateCustomPost($post_data);
+        $customPostData = $this->getCreateCustomPostData($fieldDataAccessor);
+        $customPostID = $this->executeCreateCustomPost($customPostData);
 
         $this->createUpdateCustomPost($fieldDataAccessor, $customPostID);
 

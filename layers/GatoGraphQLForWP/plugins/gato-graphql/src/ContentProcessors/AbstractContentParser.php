@@ -449,7 +449,8 @@ abstract class AbstractContentParser implements ContentParserInterface
             '/<a (.*?)href="(.*?)"(.*?)>(.*?)<\/a>/',
             function (array $matches) use ($addExternalLinkIcon): string {
                 // If the element is not an external link, or already has a target, return
-                if (!$this->isAbsoluteURL($matches[2])
+                if (
+                    !$this->isAbsoluteURL($matches[2])
                     || $this->getCMSHelperService()->isCurrentDomain($matches[2])
                     || str_contains($matches[1], ' target=')
                     || str_contains($matches[3], ' target=')

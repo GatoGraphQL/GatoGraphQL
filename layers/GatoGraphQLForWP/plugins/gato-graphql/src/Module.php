@@ -34,6 +34,7 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\CommentMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMediaWP\Module::class,
+            \PoPCMSSchema\CustomPostUserMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMutationsWP\Module::class,
             \PoPCMSSchema\PageMutations\Module::class,
             \PoPCMSSchema\PostCategoriesWP\Module::class,

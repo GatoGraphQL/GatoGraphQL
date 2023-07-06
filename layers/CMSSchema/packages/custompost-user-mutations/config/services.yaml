@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CustomPostUserMutations\Hooks\:
+        resource: '../src/Hooks/*'
+
+    PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

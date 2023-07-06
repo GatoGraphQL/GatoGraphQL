@@ -11,6 +11,7 @@ use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use stdClass;
 
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
@@ -46,12 +47,18 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!$fieldDataAccessor->hasValue(MutationInputProperties::TAGS)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::TAGS_BY)) {
             return;
         }
-        $customPostTags = $fieldDataAccessor->getValue(MutationInputProperties::TAGS);
-        $customPostTagTypeMutationAPI = $this->getCustomPostTagTypeMutationAPI();
-        $customPostTagTypeMutationAPI->setTags($customPostID, $customPostTags, false);
+        /** @var stdClass */
+        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if (((array) $tagsBy) === []) {
+            return;
+        }
+        $customPostTags = isset($tagsBy->{MutationInputProperties::IDS})
+            ? $tagsBy->{MutationInputProperties::IDS}
+            : $tagsBy->{MutationInputProperties::SLUGS};
+        $this->getCustomPostTagTypeMutationAPI()->setTags($customPostID, $customPostTags, false);
     }
 
     abstract protected function getCustomPostType(): string;
