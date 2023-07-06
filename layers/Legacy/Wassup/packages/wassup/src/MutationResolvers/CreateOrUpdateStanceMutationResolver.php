@@ -8,9 +8,12 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Application\Environment;
 class CreateOrUpdateStanceMutationResolver extends \PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver
 {
-    protected function getCreatepostData(FieldDataAccessorInterface $fieldDataAccessor)
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $customPostData = parent::getCreatepostData($fieldDataAccessor);
+        $customPostData = parent::getCreateCustomPostData($fieldDataAccessor);
 
         // Property 'menu-order' only works for WordPress
         if (Environment::disableCustomCMSCode()) {
