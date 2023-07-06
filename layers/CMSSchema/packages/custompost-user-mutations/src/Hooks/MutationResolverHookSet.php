@@ -4,39 +4,37 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostUserMutations\Hooks;
 
-use PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostUserMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolverTrait;
-use PoPCMSSchema\CustomPostUserMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
-use PoPCMSSchema\CustomPostUserMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
+use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostUserMutations\ObjectModels\UserDoesNotExistErrorPayload;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class MutationResolverHookSet extends AbstractHookSet
 {
-    use SetFeaturedImageOnCustomPostMutationResolverTrait;
-
-    private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
+    private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
-    final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
+    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {
-        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+        $this->userTypeAPI = $userTypeAPI;
     }
-    final protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
+    final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
-        if ($this->customPostMediaTypeMutationAPI === null) {
-            /** @var CustomPostMediaTypeMutationAPIInterface */
-            $customPostMediaTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMediaTypeMutationAPIInterface::class);
-            $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
+        if ($this->userTypeAPI === null) {
+            /** @var UserTypeAPIInterface */
+            $userTypeAPI = $this->instanceManager->getInstance(UserTypeAPIInterface::class);
+            $this->userTypeAPI = $userTypeAPI;
         }
-        return $this->customPostMediaTypeMutationAPI;
+        return $this->userTypeAPI;
     }
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -56,13 +54,13 @@ class MutationResolverHookSet extends AbstractHookSet
     {
         App::addAction(
             HookNames::VALIDATE_CREATE_OR_UPDATE,
-            $this->maybeValidateFeaturedImage(...),
+            $this->maybeValidateAuthor(...),
             10,
             2
         );
-        App::addAction(
-            HookNames::EXECUTE_CREATE_OR_UPDATE,
-            $this->maybeSetOrRemoveFeaturedImage(...),
+        App::addFilter(
+            HookNames::GET_CREATE_OR_UPDATE_DATA,
+            $this->addCreateOrUpdateCustomPostData(...),
             10,
             2
         );
@@ -74,56 +72,49 @@ class MutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeValidateFeaturedImage(
+    public function maybeValidateAuthor(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$this->canExecuteMutation($fieldDataAccessor)) {
+        if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return;
         }
-        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_ID);
-        if ($featuredImageID === null) {
+        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
+        if ($authorID === null) {
             return;
         }
-        $this->validateMediaItemExists(
-            $featuredImageID,
+        $this->validateUserExists(
+            $authorID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
 
     /**
-     * Entry "featuredImageID" must either have an ID or `null` to execute
+     * Entry "authorID" must either have an ID or `null` to execute
      * the mutation. Only if not provided, then nothing to do.
      */
-    protected function canExecuteMutation(
+    protected function hasProvidedAuthorInput(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        return $fieldDataAccessor->hasValue(MutationInputProperties::FEATUREDIMAGE_ID);
+        return $fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_ID);
     }
 
     /**
-     * If entry "featuredImageID" has an ID, set it. If it is null, remove it
+     * @param array<string,mixed> $customPostData
+     * @return array<string,mixed>
      */
-    public function maybeSetOrRemoveFeaturedImage(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
-        if (!$this->canExecuteMutation($fieldDataAccessor)) {
-            return;
+    public function addCreateOrUpdateCustomPostData(
+        array $customPostData,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array {
+        if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
+            return $customPostData;
         }
-        /**
-         * If it has an ID, set the featured image
-         *
-         * @var string|int|null
-         */
-        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_ID);
-        if ($featuredImageID !== null) {
-            $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
-            return;
-        }
-        /**
-         * If is `null` => remove the featured image
-         */
-        $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
+        /** @var string|int */
+        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
+        $customPostData['author-id'] = $authorID;
+        return $customPostData;
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
@@ -138,11 +129,32 @@ class MutationResolverHookSet extends AbstractHookSet
         ) {
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
-            ] => new MediaItemDoesNotExistErrorPayload(
+                MutationErrorFeedbackItemProvider::E1,
+            ] => new UserDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => $errorPayload,
         };
+    }
+
+    public function validateUserExists(
+        string|int|null $userID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->getUserTypeAPI()->getUserByID($userID) === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E1,
+                        [
+                            $userID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
     }
 }
