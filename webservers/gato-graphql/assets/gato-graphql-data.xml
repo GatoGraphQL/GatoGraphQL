@@ -114,7 +114,7 @@
 	<wp:tag>
 		<wp:term_id>12</wp:term_id>
 		<wp:tag_slug><![CDATA[also-never-used]]></wp:tag_slug>
-		<wp:tag_name><![CDATA[also-never-used]]></wp:tag_name>
+		<wp:tag_name><![CDATA[Also never used]]></wp:tag_name>
 	</wp:tag>
 	<wp:term>
 		<wp:term>
