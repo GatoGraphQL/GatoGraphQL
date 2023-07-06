@@ -90,7 +90,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         }
         return $this->__('The ID of the user', 'custompost-user-mutations');
     }
-    
+
     /**
      * @param string[] $sensitiveInputFieldNames
      * @return string[]
