@@ -87,6 +87,13 @@
         "__typename": "Post"
       },
       {
+        "id": 40,
+        "title": "Welcome to a single post full of blocks!",
+        "customPostType": "post",
+        "status": "publish",
+        "__typename": "Post"
+      },
+      {
         "id": 361,
         "title": "graphql-api-header",
         "customPostType": "attachment",
