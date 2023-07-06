@@ -113,7 +113,7 @@ class MutationResolverHookSet extends AbstractHookSet
         }
         /** @var string|int */
         $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
-        $customPostData['authors'] = [$authorID];
+        $customPostData['author'] = $authorID;
         return $customPostData;
     }
 
