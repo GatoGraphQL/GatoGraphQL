@@ -614,23 +614,6 @@
                 "customPosts": [
                     {
                         "__typename": "GenericCustomPost",
-                        "id": 658,
-                        "title": "Dummy CPT with no content",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 25,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
                         "id": 634,
                         "title": "Recusandae vel deleniti est expedita dolores quasi",
                         "categories": [
@@ -667,6 +650,23 @@
                         "__typename": "GenericCustomPost",
                         "id": 656,
                         "title": "Dummy CPT with non-existing block",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 25,
+                                "name": "Absolute Brilliance"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 658,
+                        "title": "Dummy CPT with no content",
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
@@ -783,6 +783,19 @@
             }
         ],
         "customPosts": [
+            {
+                "__typename": "Post",
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 1,
+                        "name": "Uncategorized"
+                    }
+                ]
+            },
             {
                 "__typename": "GenericCustomPost",
                 "id": 649,
