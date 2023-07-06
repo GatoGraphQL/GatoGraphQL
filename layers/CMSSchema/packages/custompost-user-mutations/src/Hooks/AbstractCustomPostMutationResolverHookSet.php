@@ -92,7 +92,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     }
     
     /**
-     * @return string[] $sensitiveInputFieldNames
+     * @param string[] $sensitiveInputFieldNames
      * @return string[]
      */
     public function getSensitiveInputFieldNames(
