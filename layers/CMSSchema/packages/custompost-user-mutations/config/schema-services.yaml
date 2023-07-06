@@ -3,11 +3,11 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\:
+    PoPCMSSchema\CustomPostUserMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPCMSSchema\CustomPostMediaMutations\ObjectTypeResolverPickers\:
+    PoPCMSSchema\CustomPostUserMutations\ObjectTypeResolverPickers\:
         resource: '../src/ObjectTypeResolverPickers/*'
 
-    PoPCMSSchema\CustomPostMediaMutations\RelationalTypeDataLoaders\:
+    PoPCMSSchema\CustomPostUserMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'

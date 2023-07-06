@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\CustomPostUserMutations\TypeResolvers\ObjectType;
 
-use PoPCMSSchema\CustomPostMediaMutations\RelationalTypeDataLoaders\ObjectType\MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader;
+use PoPCMSSchema\CustomPostUserMutations\RelationalTypeDataLoaders\ObjectType\MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractErrorPayloadObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
@@ -33,7 +33,7 @@ class MediaItemDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorP
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested media item does not exist"', 'custompostmedia-mutations');
+        return $this->__('Error payload for: "The requested media item does not exist"', 'custompost-user-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

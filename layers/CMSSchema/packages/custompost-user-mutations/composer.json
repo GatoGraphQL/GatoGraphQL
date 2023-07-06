@@ -1,9 +1,9 @@
 {
-    "name": "pop-cms-schema/custompostmedia-mutations",
+    "name": "pop-cms-schema/custompost-user-mutations",
     "type": "library",
-    "description": "Adds support for media mutations on custom posts",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "custompostmedia-mutations"],
-    "homepage": "https://github.com/PoPCMSSchema/custompostmedia-mutations",
+    "description": "Integration for users with custom post mutations",
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-user-mutations"],
+    "homepage": "https://github.com/PoPCMSSchema/custompost-user-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPCMSSchema\\CustomPostMediaMutations\\": "src"
+            "PoPCMSSchema\\CustomPostUserMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPCMSSchema\\CustomPostMediaMutations\\": "tests"
+            "PoPCMSSchema\\CustomPostUserMutations\\": "tests"
         }
     },
     "scripts": {

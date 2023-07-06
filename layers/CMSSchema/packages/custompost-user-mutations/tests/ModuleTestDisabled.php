@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMediaMutations;
+namespace PoPCMSSchema\CustomPostUserMutations;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

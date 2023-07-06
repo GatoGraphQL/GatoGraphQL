@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\CustomPostMediaMutations\Hooks\:
+    PoPCMSSchema\CustomPostUserMutations\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\:
+    PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'

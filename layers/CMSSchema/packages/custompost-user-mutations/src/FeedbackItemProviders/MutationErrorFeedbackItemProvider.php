@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders;
+namespace PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders;
 
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
@@ -24,7 +24,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('There is no user with ID \'%s\'', 'custompostmedia-mutations'),
+            self::E1 => $this->__('There is no user with ID \'%s\'', 'custompost-user-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

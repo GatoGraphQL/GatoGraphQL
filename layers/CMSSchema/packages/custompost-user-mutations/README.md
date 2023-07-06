@@ -9,19 +9,19 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support for media mutations on custom posts
+Integration for users with custom post mutations
 
 ## Install
 
 Via Composer
 
 ``` bash
-composer require pop-cms-schema/custompostmedia-mutations
+composer require pop-cms-schema/custompost-user-mutations
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/custompostmedia-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/custompostmedia-mutations).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/custompost-user-mutations`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/custompost-user-mutations).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPCMSSchema\CustomPostMediaMutations\Module::class,
+    \PoPCMSSchema\CustomPostUserMutations\Module::class,
 ]);
 ```
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/custompostmedia-mutations.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/custompost-user-mutations.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-cms-schema/custompostmedia-mutations/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/custompostmedia-mutations.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/custompostmedia-mutations.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/custompostmedia-mutations.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/custompost-user-mutations/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/custompost-user-mutations.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/custompost-user-mutations.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/custompost-user-mutations.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-cms-schema/custompostmedia-mutations
-[link-travis]: https://travis-ci.org/pop-cms-schema/custompostmedia-mutations
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/custompostmedia-mutations/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/custompostmedia-mutations
-[link-downloads]: https://packagist.org/packages/pop-cms-schema/custompostmedia-mutations
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/custompost-user-mutations
+[link-travis]: https://travis-ci.org/pop-cms-schema/custompost-user-mutations
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/custompost-user-mutations/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/custompost-user-mutations
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/custompost-user-mutations
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
