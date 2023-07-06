@@ -17,6 +17,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use stdClass;
 
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
@@ -88,7 +89,11 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        $postTags = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        /** @var stdClass */
+        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        $postTags = isset($tagsBy->{MutationInputProperties::IDS})
+            ? $tagsBy->{MutationInputProperties::IDS}
+            : $tagsBy->{MutationInputProperties::SLUGS};
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         $customPostTagTypeAPI = $this->getCustomPostTagTypeMutationAPI();
         $customPostTagTypeAPI->setTags($customPostID, $postTags, $append);
