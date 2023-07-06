@@ -545,6 +545,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
             ],
+            [
+                'class' => \PoPCMSSchema\CustomPostUserMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\CustomPostUserMutations\Environment::TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA,
+                'module' => MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_USER_MUTATIONS,
+                'option' => MutationSchemaTypeModuleResolver::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA,
+            ],
         ];
     }
 
