@@ -940,9 +940,9 @@ mutation UpdatePostAuthor {
 }
 ```
 
-Modifying the author of a post should be done only for authorized users. For this reason, the `authorID` input has been set as a “sensitive” data element, which means that it will be exposed in the schema only when the Schema Configuration has option `Expose Sensitive Data in the Schema` enabled.
+Because modifying a post's author should be done by authorized users only, the `authorID` input has been set as a “sensitive” data element, and so it will be exposed in the schema only when the Schema Configuration has option `Expose Sensitive Data in the Schema` enabled.
 
-If we want to expose it always, we can also treat it as a normal input in the Settings page, under tab "Custom Post User Mutations":
+If we want to expose it always, we can also switch to treating it as a normal input, under tab "Custom Post User Mutations" in the Settings page:
 
 ![Settings for the Custom Post User Mutations module](../../images/releases/v1.0/settings-custompost-user-mutations.png)
 
