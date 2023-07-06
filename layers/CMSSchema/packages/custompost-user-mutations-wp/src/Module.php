@@ -25,10 +25,8 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMediaWP\Module::class,
             \PoPCMSSchema\CustomPostUserMutations\Module::class,
             \PoPCMSSchema\CustomPostMutationsWP\Module::class,
-            \PoPCMSSchema\MediaWP\Module::class,
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }
