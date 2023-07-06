@@ -82,14 +82,17 @@ Notice that some fields are meant to be duplicated (including the author, title,
 
 ## Duplicating the post
 
-With the **Multiple Query Execution** extension, we are able to export these data items, and inject them again into the `createPost` mutation, to create a new post:
+With the **Multiple Query Execution** extension, we are able to export the post's data items, and inject them again into the `createPost` mutation, to create a new post:
 
 ```graphql
 query GetPostAndExportData($id: ID!) {
   post(by: { id : $id }) {
+    # Fields not to be duplicated
     id
     slug
+    date
 
+    # Fields to be duplicated
     author {
       id @export(as: "authorID")
     }
@@ -158,7 +161,15 @@ mutation DuplicatePost
 }
 ```
 
-The response confirms that the "Fields to be duplicated" indeed contain the same data:
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Talk on `@export` and `@depends`
+
+</div>
+
+Executing the mutation, the response confirms that fields to be duplicated contain the same data in the new post:
 
 ```json
 
