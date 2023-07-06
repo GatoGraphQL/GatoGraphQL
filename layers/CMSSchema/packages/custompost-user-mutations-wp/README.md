@@ -1,4 +1,4 @@
-# Custom Posts Media Mutations for WordPress
+# Custom Posts User Mutations for WordPress
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Implementation for WordPress of contracts from package "Custom Posts Media Mutations"
+Implementation for WordPress of contracts from package "Custom Posts User Mutations"
 
 ## Install
 
