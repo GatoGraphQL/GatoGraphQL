@@ -1,4 +1,4 @@
-# Custom Post Media Mutations
+# Custom Post User Mutations
 
 <!--
 [![Build Status][ico-travis]][link-travis]
