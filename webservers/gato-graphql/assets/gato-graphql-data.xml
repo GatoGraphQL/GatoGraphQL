@@ -122,7 +122,7 @@
 		<wp:term_taxonomy><![CDATA[graphql-endpoint-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[development]]></wp:term_slug>
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
-		<wp:term_name><![CDATA[development]]></wp:term_name>
+		<wp:term_name><![CDATA[Development]]></wp:term_name>
 	</wp:term>
 		<wp:term>
 		<wp:term_id>36</wp:term_id>
