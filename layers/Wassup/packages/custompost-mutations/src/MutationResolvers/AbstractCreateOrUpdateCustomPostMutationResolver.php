@@ -296,14 +296,17 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
 
     /**
      * @param array<string,mixed> $customPostData
+     * @return array<string,mixed>
      */
-    protected function addCreateOrUpdateCustomPostData(array &$customPostData, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function addCreateOrUpdateCustomPostData(array $customPostData, FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        parent::addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
+        $customPostData = parent::addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
         if (!$this->supportsTitle()) {
             unset($customPostData['title']);
         }
+
+        return $customPostData;
     }
 
     /**

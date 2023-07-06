@@ -203,8 +203,9 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     // }
     /**
      * @param array<string,mixed> $customPostData
+     * @return array<string,mixed>
      */
-    protected function addCreateOrUpdateCustomPostData(array &$customPostData, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function addCreateOrUpdateCustomPostData(array $customPostData, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
             $customPostData['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
@@ -225,6 +226,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
             $customPostData['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
         }
+        return $customPostData;
     }
 
     /**
@@ -235,7 +237,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $customPostData = array(
             'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
         );
-        $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
+        $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
         return $customPostData;
     }
@@ -248,7 +250,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $customPostData = [
             'custompost-type' => $this->getCustomPostType(),
         ];
-        $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
+        $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
         return $customPostData;
     }
