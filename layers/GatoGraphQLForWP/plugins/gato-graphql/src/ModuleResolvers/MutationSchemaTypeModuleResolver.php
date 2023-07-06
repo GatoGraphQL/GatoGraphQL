@@ -23,6 +23,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public final const SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-custompostmedia-mutations';
     public final const SCHEMA_PAGEMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-pagemedia-mutations';
     public final const SCHEMA_POSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-postmedia-mutations';
+    public final const SCHEMA_CUSTOMPOST_USER_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-user-mutations';
     public final const SCHEMA_POST_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-post-tag-mutations';
     public final const SCHEMA_POST_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-post-category-mutations';
     public final const SCHEMA_COMMENT_MUTATIONS = Plugin::NAMESPACE . '\schema-comment-mutations';
@@ -56,6 +57,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS,
             self::SCHEMA_PAGEMEDIA_MUTATIONS,
             self::SCHEMA_POSTMEDIA_MUTATIONS,
+            self::SCHEMA_CUSTOMPOST_USER_MUTATIONS,
             self::SCHEMA_POST_TAG_MUTATIONS,
             self::SCHEMA_POST_CATEGORY_MUTATIONS,
             self::SCHEMA_COMMENT_MUTATIONS,
@@ -133,6 +135,12 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                         self::SCHEMA_POST_MUTATIONS,
                     ],
                 ];
+            case self::SCHEMA_CUSTOMPOST_USER_MUTATIONS:
+                return [
+                    [
+                        self::SCHEMA_CUSTOMPOST_MUTATIONS,
+                    ],
+                ];
             case self::SCHEMA_POST_TAG_MUTATIONS:
                 return [
                     [
@@ -174,6 +182,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Custom Post Media Mutations', 'gato-graphql'),
             self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Page Media Mutations', 'gato-graphql'),
             self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Post Media Mutations', 'gato-graphql'),
+            self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => \__('Custom Post User Mutations', 'gato-graphql'),
             self::SCHEMA_POST_TAG_MUTATIONS => \__('Post Tag Mutations', 'gato-graphql'),
             self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Post Category Mutations', 'gato-graphql'),
             self::SCHEMA_COMMENT_MUTATIONS => \__('Comment Mutations', 'gato-graphql'),
@@ -191,6 +200,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Execute mutations concerning media items on custom posts', 'gato-graphql'),
             self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Execute mutations concerning media items on pages', 'gato-graphql'),
             self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Execute mutations concerning media items on posts', 'gato-graphql'),
+            self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => \__('Input user data when creating/updating custom posts', 'gato-graphql'),
             self::SCHEMA_POST_TAG_MUTATIONS => \__('Add tags to posts', 'gato-graphql'),
             self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Add categories to posts', 'gato-graphql'),
             self::SCHEMA_COMMENT_MUTATIONS => \__('Create comments', 'gato-graphql'),
@@ -210,6 +220,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS:
             case self::SCHEMA_PAGEMEDIA_MUTATIONS:
             case self::SCHEMA_POSTMEDIA_MUTATIONS:
+            case self::SCHEMA_CUSTOMPOST_USER_MUTATIONS:
             case self::SCHEMA_POST_TAG_MUTATIONS:
             case self::SCHEMA_POST_CATEGORY_MUTATIONS:
             case self::SCHEMA_COMMENT_MUTATIONS:
