@@ -112,6 +112,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/custompost-user-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompost-user-mutations
         - >-
+          ../../layers/CMSSchema/packages/custompost-user-mutations-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompost-user-mutations-wp
+        - >-
           ../../layers/CMSSchema/packages/custompostmedia-mutations-wp:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompostmedia-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/custompostmedia-mutations:/app/wordpress/wp-content/plugins/gato-graphql/vendor/pop-cms-schema/custompostmedia-mutations

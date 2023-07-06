@@ -103,6 +103,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/custompost-user-mutations:/app/vendor/pop-cms-schema/custompost-user-mutations
         - >-
+          ../../layers/CMSSchema/packages/custompost-user-mutations-wp:/app/vendor/pop-cms-schema/custompost-user-mutations-wp
+        - >-
           ../../layers/CMSSchema/packages/custompostmedia:/app/vendor/pop-cms-schema/custompostmedia
         - >-
           ../../layers/CMSSchema/packages/custompostmedia-wp:/app/vendor/pop-cms-schema/custompostmedia-wp
