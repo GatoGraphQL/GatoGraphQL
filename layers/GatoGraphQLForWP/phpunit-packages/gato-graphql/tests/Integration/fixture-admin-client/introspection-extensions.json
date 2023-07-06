@@ -448,6 +448,14 @@
                             "args": []
                         },
                         {
+                            "name": "contentSource",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "innerBlocks",
                             "extensions": {
                                 "isMutation": false,
@@ -664,6 +672,36 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": []
+                        },
+                        {
+                            "name": "blockDataItems",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "blockFlattenedDataItems",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
                         },
                         {
                             "name": "blocks",
@@ -2127,6 +2165,36 @@
                             "args": []
                         },
                         {
+                            "name": "blockDataItems",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "blockFlattenedDataItems",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "blocks",
                             "extensions": {
                                 "isMutation": false,
@@ -2535,6 +2603,36 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": []
+                        },
+                        {
+                            "name": "blockDataItems",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "blockFlattenedDataItems",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
                         },
                         {
                             "name": "blocks",
@@ -6273,6 +6371,27 @@
                     "enumValues": null
                 },
                 {
+                    "name": "TagDoesNotExistErrorPayload",
+                    "extensions": {
+                        "elementName": "TagDoesNotExistErrorPayload",
+                        "namespacedName": "TagDoesNotExistErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "User",
                     "extensions": {
                         "elementName": "User",
@@ -6700,6 +6819,27 @@
                         },
                         {
                             "name": "src",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "UserDoesNotExistErrorPayload",
+                    "extensions": {
+                        "elementName": "UserDoesNotExistErrorPayload",
+                        "namespacedName": "UserDoesNotExistErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -7752,6 +7892,14 @@
                     "fields": [
                         {
                             "name": "attributes",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "contentSource",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -9737,6 +9885,12 @@
                     "fields": null,
                     "inputFields": [
                         {
+                            "name": "authorID",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
+                        {
                             "name": "categoryIDs",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -9767,7 +9921,7 @@
                             }
                         },
                         {
-                            "name": "tags",
+                            "name": "tagsBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10646,7 +10800,7 @@
                             }
                         },
                         {
-                            "name": "tags",
+                            "name": "tagsBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10714,6 +10868,12 @@
                     "fields": null,
                     "inputFields": [
                         {
+                            "name": "authorID",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
+                        {
                             "name": "categoryIDs",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -10750,7 +10910,7 @@
                             }
                         },
                         {
-                            "name": "tags",
+                            "name": "tagsBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10807,6 +10967,31 @@
                         },
                         {
                             "name": "offset",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "TagsByInput",
+                    "extensions": {
+                        "elementName": "TagsByInput",
+                        "namespacedName": "TagsByInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "ids",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

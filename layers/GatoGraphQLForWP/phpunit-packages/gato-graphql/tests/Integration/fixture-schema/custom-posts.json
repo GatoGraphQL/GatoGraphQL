@@ -41,7 +41,7 @@
                 "customPostType": "page",
                 "date": "2020-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2020",
-                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gato-graphql.lndo.site\/http-caching-improves-performance\/\">Continue reading <span class=\"screen-reader-text\">HTTP caching improves performance<\/span><\/a>",
+                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gato-graphql.lndo.site\/single-post-with-a-lot-of-blocks\/\">Continue reading <span class=\"screen-reader-text\">Welcome to a single post full of blocks!<\/span><\/a>",
                 "featuredImage": null,
                 "hasComments": false,
                 "hasFeaturedImage": false,
@@ -68,7 +68,7 @@
                         "id": 2
                     }
                 ],
-                "content": "<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<\/p>\n<h2 class=\"wp-block-heading\">Image Block (Standard<br \/>\n\t<g class=\"gr_ gr_3 gr-alert gr_spell gr_inline_cards gr_run_anim ContextualSpelling ins-del multiReplace\" id=\"3\" data-gr-id=\"3\">width<\/g>)<\/h2>\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
+                "content": "<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<\/p>\n<h2 class=\"wp-block-heading\">Image Block (Standard)<\/h2>\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
                 "customPostType": "post",
                 "date": "2020-12-12T03:56:13+00:00",
                 "dateStr": "December 12, 2020",
@@ -82,7 +82,7 @@
                 "id": 13,
                 "isStatus": false,
                 "metaValue": "361",
-                "rawContent": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.\nImage Block (Standard\n\twidth)\n\n",
+                "rawContent": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.\nImage Block (Standard)\n\n",
                 "slug": "released-v0-6-check-it-out",
                 "status": "publish",
                 "title": "Released v0.6, check it out",
@@ -230,14 +230,14 @@
                 "title": "HTTP caching improves performance"
             },
             {
-                "__typename": "GenericCustomPost",
-                "id": 613,
-                "title": "Dolor facilis repellat pariatur veniam at"
+                "__typename": "Post",
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
             },
             {
                 "__typename": "GenericCustomPost",
-                "id": 616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at"
             }
         ],
         "customPostsByExcludeIDs": [
@@ -277,6 +277,11 @@
                 "title": "Public or Private API mode, for extra security"
             },
             {
+                "__typename": "Post",
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 613,
                 "title": "Dolor facilis repellat pariatur veniam at"
@@ -285,11 +290,6 @@
                 "__typename": "GenericCustomPost",
                 "id": 616,
                 "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 619,
-                "title": "Error debitis nulla vel est"
             }
         ],
         "customPostsByHasPassword": [],
@@ -406,14 +406,14 @@
                 "title": "Working on flat chain syntax next"
             },
             {
+                "__typename": "Post",
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 631,
                 "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
-            },
-            {
-                "__typename": "Page",
-                "id": 2,
-                "title": "Sample Page"
             }
         ],
         "singleCustomPost": {

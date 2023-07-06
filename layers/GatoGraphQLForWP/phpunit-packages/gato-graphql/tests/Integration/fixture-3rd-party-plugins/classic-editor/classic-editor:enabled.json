@@ -11,7 +11,7 @@
             "extensions": {
                 "path": [
                     "blocks { ... }",
-                    "posts(pagination: {limit: 1}) { ... }",
+                    "posts(filter: {ids: [28]}) { ... }",
                     "query { ... }"
                 ],
                 "type": "Post",

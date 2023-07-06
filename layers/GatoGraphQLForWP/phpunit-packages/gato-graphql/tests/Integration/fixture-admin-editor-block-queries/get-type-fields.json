@@ -175,6 +175,9 @@
               "name": "attributes"
             },
             {
+              "name": "contentSource"
+            },
+            {
               "name": "innerBlocks"
             },
             {
@@ -246,6 +249,12 @@
             },
             {
               "name": "author"
+            },
+            {
+              "name": "blockDataItems"
+            },
+            {
+              "name": "blockFlattenedDataItems"
             },
             {
               "name": "blocks"
@@ -682,6 +691,12 @@
               "name": "author"
             },
             {
+              "name": "blockDataItems"
+            },
+            {
+              "name": "blockFlattenedDataItems"
+            },
+            {
               "name": "blocks"
             },
             {
@@ -795,6 +810,12 @@
             },
             {
               "name": "author"
+            },
+            {
+              "name": "blockDataItems"
+            },
+            {
+              "name": "blockFlattenedDataItems"
             },
             {
               "name": "blocks"
@@ -1609,6 +1630,17 @@
           "description": "Payload of executing an update mutation on a post"
         },
         {
+          "name": "TagDoesNotExistErrorPayload",
+          "namespacedName": "TagDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested tag does not exist\""
+        },
+        {
           "name": "User",
           "namespacedName": "User",
           "fields": [
@@ -1737,6 +1769,17 @@
           ],
           "kind": "OBJECT",
           "description": "User avatar"
+        },
+        {
+          "name": "UserDoesNotExistErrorPayload",
+          "namespacedName": "UserDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested media item does not exist\""
         },
         {
           "name": "UserIsLoggedInErrorPayload",
@@ -2204,6 +2247,9 @@
               "name": "attributes"
             },
             {
+              "name": "contentSource"
+            },
+            {
               "name": "innerBlocks"
             },
             {
@@ -2403,7 +2449,7 @@
           "namespacedName": "BlockFilterByInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to filter blocks"
+          "description": "Oneof input to filter blocks"
         },
         {
           "name": "CategoryByInput",
@@ -2824,6 +2870,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to paginate tags"
+        },
+        {
+          "name": "TagsByInput",
+          "namespacedName": "TagsByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": null
         },
         {
           "name": "TaxonomyCustomPostsFilterInput",

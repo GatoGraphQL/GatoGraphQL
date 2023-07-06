@@ -64,7 +64,7 @@
                         "id": 2
                     }
                 ],
-                "content": "<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<\/p>\n<h2 class=\"wp-block-heading\">Image Block (Standard<br \/>\n\t<g class=\"gr_ gr_3 gr-alert gr_spell gr_inline_cards gr_run_anim ContextualSpelling ins-del multiReplace\" id=\"3\" data-gr-id=\"3\">width<\/g>)<\/h2>\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
+                "content": "<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<\/p>\n<h2 class=\"wp-block-heading\">Image Block (Standard)<\/h2>\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
                 "customPostType": "post",
                 "date": "2020-12-12T03:56:13+00:00",
                 "dateStr": "December 12, 2020",
@@ -80,7 +80,7 @@
                 "isSticky": false,
                 "metaValue": "361",
                 "postFormat": "standard",
-                "rawContent": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.\nImage Block (Standard\n\twidth)\n\n",
+                "rawContent": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.\nImage Block (Standard)\n\n",
                 "slug": "released-v0-6-check-it-out",
                 "status": "publish",
                 "tagCount": 2,
@@ -120,7 +120,7 @@
                 ],
                 "commentCount": 0,
                 "comments": [],
-                "content": "<h2 class=\"wp-block-heading\">Image Block (Wide<br \/>\n\t<g class=\"gr_ gr_3 gr-alert gr_spell gr_inline_cards gr_run_anim ContextualSpelling ins-del multiReplace\" id=\"3\" data-gr-id=\"3\">width<\/g>)<\/h2>\n<figure class=\"wp-block-image alignwide\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<h2 class=\"wp-block-heading\">Image Block (Full width)<\/h2>\n<figure class=\"wp-block-image alignfull\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<h2 class=\"wp-block-heading\">Cover Image Block<\/h2>\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https:\/\/d.pr\/i\/8pTmgY+)\">\n<div class=\"wp-block-cover__inner-container\">\n<p class=\"has-text-align-center has-large-font-size\">This block can be used for Hero section.<br \/>Full width\u00c2 has been applied.<\/p>\n<\/div>\n<\/div>\n<h2 class=\"wp-block-heading\">Gallery Block<\/h2>\n",
+                "content": "<h2 class=\"wp-block-heading\">Image Block (Wide)<\/h2>\n<figure class=\"wp-block-image alignwide\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<h2 class=\"wp-block-heading\">Image Block (Full width)<\/h2>\n<figure class=\"wp-block-image alignfull\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<h2 class=\"wp-block-heading\">Cover Image Block<\/h2>\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https:\/\/d.pr\/i\/8pTmgY+)\">\n<div class=\"wp-block-cover__inner-container\">\n<p class=\"has-text-align-center has-large-font-size\">This block can be used for Hero section.<br \/>Full width\u00c2 has been applied.<\/p>\n<\/div>\n<\/div>\n<h2 class=\"wp-block-heading\">Gallery Block<\/h2>\n",
                 "customPostType": "post",
                 "date": "2020-12-12T03:59:07+00:00",
                 "dateStr": "December 12, 2020",
@@ -136,14 +136,14 @@
                 "isSticky": false,
                 "metaValue": "361",
                 "postFormat": "standard",
-                "rawContent": "Image Block (Wide\n\twidth)\n\nImage Block (Full width)\n\nCover Image Block\n\n\nThis block can be used for Hero section.Full width\u00c2 has been applied.\n\n\nGallery Block\n",
+                "rawContent": "Image Block (Wide)\n\nImage Block (Full width)\n\nCover Image Block\n\n\nThis block can be used for Hero section.Full width\u00c2 has been applied.\n\n\nGallery Block\n",
                 "slug": "working-on-flat-chain-syntax-next",
                 "status": "publish",
                 "tagCount": 4,
                 "tagNames": [
                     "wordpress",
                     "plugin",
-                    "graphql",
+                    "GraphQL",
                     "features"
                 ],
                 "tags": [
@@ -157,7 +157,7 @@
                     },
                     {
                         "id": 8,
-                        "name": "graphql"
+                        "name": "GraphQL"
                     },
                     {
                         "id": 7,
@@ -195,6 +195,10 @@
         ],
         "postsByCategoryIDs": [
             {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
                 "id": 23,
                 "title": "GraphQL or REST? Why not both?"
             },
@@ -218,6 +222,10 @@
             }
         ],
         "postsByExcludeAuthorIDs": [
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
             {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security"
@@ -248,6 +256,10 @@
             }
         ],
         "postsByExcludeIDs": [
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
             {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security"
@@ -359,12 +371,12 @@
                 "title": "Working on flat chain syntax next"
             },
             {
-                "id": 13,
-                "title": "Released v0.6, check it out"
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
             },
             {
-                "id": 25,
-                "title": "Public or Private API mode, for extra security"
+                "id": 13,
+                "title": "Released v0.6, check it out"
             }
         ]
     }

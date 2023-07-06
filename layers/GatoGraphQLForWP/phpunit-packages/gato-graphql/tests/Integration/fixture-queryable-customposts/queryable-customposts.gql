@@ -15,7 +15,7 @@
       ]
     },
     pagination: {
-      limit: 12
+      limit: 13
     }
     sort: {
       by: ID

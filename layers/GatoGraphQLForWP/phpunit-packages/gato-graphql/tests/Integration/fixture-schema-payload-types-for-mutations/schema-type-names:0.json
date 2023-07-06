@@ -126,10 +126,16 @@
           "name": "RootUpdatePostMutationPayload"
         },
         {
+          "name": "TagDoesNotExistErrorPayload"
+        },
+        {
           "name": "User"
         },
         {
           "name": "UserAvatar"
+        },
+        {
+          "name": "UserDoesNotExistErrorPayload"
         },
         {
           "name": "UserIsLoggedInErrorPayload"
@@ -442,6 +448,9 @@
         },
         {
           "name": "TagPaginationInput"
+        },
+        {
+          "name": "TagsByInput"
         },
         {
           "name": "TaxonomyCustomPostsFilterInput"

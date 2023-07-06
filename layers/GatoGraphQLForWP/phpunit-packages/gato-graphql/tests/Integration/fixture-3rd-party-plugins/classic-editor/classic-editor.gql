@@ -1,5 +1,5 @@
 {
-  posts(pagination: { limit: 1 }) {
+  posts(filter: { ids: [28] }) {
     id
     blocks {
       ...on Block {

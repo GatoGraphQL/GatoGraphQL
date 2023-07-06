@@ -18,10 +18,10 @@ use function user_can;
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
-    public const HOOK_QUERY = __CLASS__ . ':query';
-
     use BasicServiceTrait;
     use TypeMutationAPITrait;
+
+    public const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
      * @param array<string,mixed> $query

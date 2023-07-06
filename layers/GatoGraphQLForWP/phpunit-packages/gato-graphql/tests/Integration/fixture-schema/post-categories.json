@@ -4,15 +4,19 @@
             {
                 "childCount": 0,
                 "childNames": [],
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Uncategorized",
                 "parent": null,
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 40,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     {
                         "id": 23,
                         "title": "GraphQL or REST? Why not both?"
@@ -379,6 +383,15 @@
             ]
         },
         "postsByCategoryIDs": [
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
             {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security",
