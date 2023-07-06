@@ -168,11 +168,19 @@
         },
         {
           "kind": "OBJECT",
+          "name": "TagDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "User"
         },
         {
           "kind": "OBJECT",
           "name": "UserAvatar"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserDoesNotExistErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -589,6 +597,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "TagPaginationInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TagsByInput"
         },
         {
           "kind": "INPUT_OBJECT",
