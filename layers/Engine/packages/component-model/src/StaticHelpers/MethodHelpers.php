@@ -81,16 +81,13 @@ class MethodHelpers
      *
      * @see https://stackoverflow.com/a/4790485
      */
-    public static function recursivelyConvertAssociativeArrayToStdClass(array $array, bool $convertEmptyArrayToObject = false): array|stdClass
+    public static function recursivelyConvertAssociativeArrayToStdClass(array $array): array|stdClass
     {
-        if ($array === []) {
-            return $convertEmptyArrayToObject ? ((object) $array) : $array;
-        }
         foreach ($array as $key => $value) {
             if (!is_array($value)) {
                 continue;
             }
-            $array[$key] = static::recursivelyConvertAssociativeArrayToStdClass($value, $convertEmptyArrayToObject);
+            $array[$key] = static::recursivelyConvertAssociativeArrayToStdClass($value);
         }
         // If it is an associative array, transform to stdClass
         if (!array_is_list($array)) {
