@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 
 class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
@@ -27,6 +28,11 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public final const SCHEMA_POST_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-post-tag-mutations';
     public final const SCHEMA_POST_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-post-category-mutations';
     public final const SCHEMA_COMMENT_MUTATIONS = Plugin::NAMESPACE . '\schema-comment-mutations';
+
+    /**
+     * Setting options
+     */
+    public final const OPTION_TREAT_AUTHOR_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA = 'treat-author-in-custompost-mutation-as-sensitive-data';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -227,5 +233,51 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                 return false;
         }
         return $this->upstreamHasDocumentation($module);
+    }
+
+    /**
+     * Default value for an option set by the module
+     */
+    public function getSettingsDefaultValue(string $module, string $option): mixed
+    {
+        $defaultValues = [
+            self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => [
+                self::OPTION_TREAT_AUTHOR_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA => true,
+            ],
+        ];
+        return $defaultValues[$module][$option] ?? null;
+    }
+
+    /**
+     * Array with the inputs to show as settings for the module
+     *
+     * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
+     */
+    public function getSettings(string $module): array
+    {
+        $moduleSettings = parent::getSettings($module);
+        $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'gato-graphql');
+        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gato-graphql');
+        if ($module === self::SCHEMA_CUSTOMPOST_USER_MUTATIONS) {
+            $option = self::OPTION_TREAT_AUTHOR_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    $sensitiveDataTitlePlaceholder,
+                    \__('author input (when creating/updating custom posts)', 'gato-graphql'),
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    $sensitiveDataDescPlaceholder,
+                    \__('author input (when creating/updating custom posts)', 'gato-graphql'),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        }
+
+        return $moduleSettings;
     }
 }
