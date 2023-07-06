@@ -1,6 +1,12 @@
 # Duplicating a blog post
 
-This GraphQL query retrieves the fundamental data for a post.
+GraphQL can be considered the Swiss Army Knife for dealing with data in a WordPress site, as it allows to retrieve, manipulate and store again any piece of data, in any desired way.
+
+An example is the ability to duplicate a blog post. Let's explore how to do this.
+
+## Retrieving the post data
+
+This GraphQL query retrieves the fundamental data for a post:
 
 ```graphql
 query GetPost($id: ID!) {
@@ -71,6 +77,10 @@ Executing the query (passing the `$id` variable), the response may be:
   }
 }
 ```
+
+Notice that some fields are meant to be duplicated (including the author, title, and content), while others are not (such as the id, slug and creation date).
+
+## Duplicating the post
 
 With the **Multiple Query Execution** extension, we are able to export these data items, and inject them again into the `createPost` mutation, to create a new post:
 
@@ -161,3 +171,9 @@ The response confirms that the "Fields to be duplicated" indeed contain the same
 @todo Add createPost(input.author) as sensitive field!
 
 </div>
+
+## Duplicating a post with empty fields
+
+## Duplicating meta
+
+## Duplicating blog posts in bulk
