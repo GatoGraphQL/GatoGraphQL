@@ -22,6 +22,7 @@ use stdClass;
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
     use CreateOrUpdateCustomPostMutationResolverTrait;
+    use SetTagsOnCustomPostMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
@@ -125,6 +126,21 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
+        }
+
+        /** @var stdClass */
+        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if (isset($tagsBy->{MutationInputProperties::IDS})) {
+            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
+            $this->validateTagsExist(
+                $customPostTagIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+                return;
+            }
         }
 
         $this->validateCanLoggedInUserEditCustomPosts(

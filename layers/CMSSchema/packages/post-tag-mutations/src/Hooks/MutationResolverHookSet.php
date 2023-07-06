@@ -6,13 +6,16 @@ namespace PoPCMSSchema\PostTagMutations\Hooks;
 
 use PoPCMSSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
-use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPCMSSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
+use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
     private ?PostTagTypeMutationAPIInterface $postTagTypeMutationAPI = null;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
     final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {
@@ -40,6 +43,19 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
         }
         return $this->postTagTypeMutationAPI;
     }
+    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        if ($this->postTagTypeAPI === null) {
+            /** @var PostTagTypeAPIInterface */
+            $postTagTypeAPI = $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+            $this->postTagTypeAPI = $postTagTypeAPI;
+        }
+        return $this->postTagTypeAPI;
+    }
 
     protected function getCustomPostType(): string
     {
@@ -49,5 +65,10 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
     {
         return $this->getPostTagTypeMutationAPI();
+    }
+
+    protected function getTagTypeAPI(): TagTypeAPIInterface
+    {
+        return $this->getPostTagTypeAPI();
     }
 }

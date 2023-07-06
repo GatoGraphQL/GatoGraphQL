@@ -11,20 +11,20 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractCategoryDoesNotExistErrorPayloadObjectTypeResolverPicker extends AbstractErrorPayloadObjectTypeResolverPicker
 {
-    private ?CategoryDoesNotExistErrorPayloadObjectTypeResolver $mediaItemDoesNotExistErrorPayloadObjectTypeResolver = null;
+    private ?CategoryDoesNotExistErrorPayloadObjectTypeResolver $categoryDoesNotExistErrorPayloadObjectTypeResolver = null;
 
-    final public function setCategoryDoesNotExistErrorPayloadObjectTypeResolver(CategoryDoesNotExistErrorPayloadObjectTypeResolver $mediaItemDoesNotExistErrorPayloadObjectTypeResolver): void
+    final public function setCategoryDoesNotExistErrorPayloadObjectTypeResolver(CategoryDoesNotExistErrorPayloadObjectTypeResolver $categoryDoesNotExistErrorPayloadObjectTypeResolver): void
     {
-        $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver = $mediaItemDoesNotExistErrorPayloadObjectTypeResolver;
+        $this->categoryDoesNotExistErrorPayloadObjectTypeResolver = $categoryDoesNotExistErrorPayloadObjectTypeResolver;
     }
     final protected function getCategoryDoesNotExistErrorPayloadObjectTypeResolver(): CategoryDoesNotExistErrorPayloadObjectTypeResolver
     {
-        if ($this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver === null) {
+        if ($this->categoryDoesNotExistErrorPayloadObjectTypeResolver === null) {
             /** @var CategoryDoesNotExistErrorPayloadObjectTypeResolver */
-            $mediaItemDoesNotExistErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(CategoryDoesNotExistErrorPayloadObjectTypeResolver::class);
-            $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver = $mediaItemDoesNotExistErrorPayloadObjectTypeResolver;
+            $categoryDoesNotExistErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(CategoryDoesNotExistErrorPayloadObjectTypeResolver::class);
+            $this->categoryDoesNotExistErrorPayloadObjectTypeResolver = $categoryDoesNotExistErrorPayloadObjectTypeResolver;
         }
-        return $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver;
+        return $this->categoryDoesNotExistErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
