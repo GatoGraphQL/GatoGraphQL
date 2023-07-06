@@ -33,6 +33,8 @@ includes:
     - layers/CMSSchema/packages/custompost-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-tag-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-tags-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompost-user-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompost-user-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompostmedia/phpstan.neon.dist
     - layers/CMSSchema/packages/custompostmedia-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompostmedia-mutations-wp/phpstan.neon.dist

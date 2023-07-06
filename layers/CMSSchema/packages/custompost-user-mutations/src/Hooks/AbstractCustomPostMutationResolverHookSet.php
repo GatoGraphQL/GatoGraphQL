@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMediaMutations\Hooks;
+namespace PoPCMSSchema\CustomPostUserMutations\Hooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInte
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 
@@ -60,7 +60,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->getIDScalarTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::AUTHOR_ID] = $this->getIDScalarTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
@@ -77,9 +77,9 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $inputFieldName,
     ): ?string {
         // Only for the newly added inputFieldName
-        if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+        if ($inputFieldName !== MutationInputProperties::AUTHOR_ID || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The ID of the image to set as featured', 'custompost-mutations');
+        return $this->__('The ID of the user', 'custompost-user-mutations');
     }
 }

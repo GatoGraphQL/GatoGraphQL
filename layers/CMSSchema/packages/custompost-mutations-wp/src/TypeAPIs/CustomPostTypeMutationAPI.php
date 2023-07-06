@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostMutationsWP\TypeAPIs;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
+use PoP\ComponentModel\App;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
@@ -17,13 +18,16 @@ use function user_can;
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     use BasicServiceTrait;
     use TypeMutationAPITrait;
 
     /**
      * @param array<string,mixed> $query
+     * @return array<string,mixed> $query
      */
-    protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array &$query): void
+    protected function convertCustomPostsMutationQuery(array $query): array
     {
         // Convert the parameters
         if (isset($query['status'])) {
@@ -50,6 +54,11 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
             $query['post_type'] = $query['custompost-type'];
             unset($query['custompost-type']);
         }
+
+        return App::applyFilters(
+            self::HOOK_QUERY,
+            $query
+        );
     }
     /**
      * @param array<string,mixed> $data
@@ -59,7 +68,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     public function createCustomPost(array $data): string|int
     {
         // Convert the parameters
-        $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
+        $data = $this->convertCustomPostsMutationQuery($data);
         $postIDOrError = \wp_insert_post($data, true);
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
@@ -88,7 +97,7 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     public function updateCustomPost(array $data): string|int
     {
         // Convert the parameters
-        $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
+        $data = $this->convertCustomPostsMutationQuery($data);
         $postIDOrError = \wp_update_post($data, true);
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */

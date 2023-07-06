@@ -93,6 +93,18 @@ services:
         - >-
           ../../layers/CMSSchema/packages/custompost-mutations-wp:/app/vendor/pop-cms-schema/custompost-mutations-wp
         - >-
+          ../../layers/CMSSchema/packages/custompost-tag-mutations:/app/vendor/pop-cms-schema/custompost-tag-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompost-categories-wp:/app/vendor/pop-cms-schema/custompost-categories-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompost-category-mutations:/app/vendor/pop-cms-schema/custompost-category-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompost-tags-wp:/app/vendor/pop-cms-schema/custompost-tags-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompost-user-mutations:/app/vendor/pop-cms-schema/custompost-user-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompost-user-mutations-wp:/app/vendor/pop-cms-schema/custompost-user-mutations-wp
+        - >-
           ../../layers/CMSSchema/packages/custompostmedia:/app/vendor/pop-cms-schema/custompostmedia
         - >-
           ../../layers/CMSSchema/packages/custompostmedia-wp:/app/vendor/pop-cms-schema/custompostmedia-wp
@@ -100,14 +112,6 @@ services:
           ../../layers/CMSSchema/packages/custompostmedia-mutations:/app/vendor/pop-cms-schema/custompostmedia-mutations
         - >-
           ../../layers/CMSSchema/packages/custompostmedia-mutations-wp:/app/vendor/pop-cms-schema/custompostmedia-mutations-wp
-        - >-
-          ../../layers/CMSSchema/packages/custompost-tag-mutations:/app/vendor/pop-cms-schema/custompost-tag-mutations
-        - >-
-          ../../layers/CMSSchema/packages/custompost-category-mutations:/app/vendor/pop-cms-schema/custompost-category-mutations
-        - >-
-          ../../layers/CMSSchema/packages/custompost-tags-wp:/app/vendor/pop-cms-schema/custompost-tags-wp
-        - >-
-          ../../layers/CMSSchema/packages/custompost-categories-wp:/app/vendor/pop-cms-schema/custompost-categories-wp
         - >-
           ../../layers/CMSSchema/packages/customposts:/app/vendor/pop-cms-schema/customposts
         - >-

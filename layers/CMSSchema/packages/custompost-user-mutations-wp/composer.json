@@ -1,9 +1,9 @@
 {
-    "name": "pop-cms-schema/custompostmedia-mutations-wp",
+    "name": "pop-cms-schema/custompost-user-mutations-wp",
     "type": "library",
-    "description": "Implementation for WordPress of contracts from package \"Custom Post Media Mutations\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "custompostmedia-mutations-wp"],
-    "homepage": "https://github.com/PoPCMSSchema/custompostmedia-mutations-wp",
+    "description": "Implementation for WordPress of contracts from package \"Custom Post User Mutations\"",
+    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-user-mutations-wp"],
+    "homepage": "https://github.com/PoPCMSSchema/custompost-user-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -15,9 +15,7 @@
     "require": {
         "php": "^8.1",
         "pop-cms-schema/custompost-mutations-wp": "^0.11",
-        "pop-cms-schema/custompostmedia-mutations": "^0.11",
-        "pop-cms-schema/custompostmedia-wp": "^0.11",
-        "pop-cms-schema/media-wp": "^0.11",
+        "pop-cms-schema/custompost-user-mutations": "^0.11",
         "pop-cms-schema/user-state-mutations-wp": "^0.11"
     },
     "require-dev": {
@@ -29,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPCMSSchema\\CustomPostMediaMutationsWP\\": "src"
+            "PoPCMSSchema\\CustomPostUserMutationsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPCMSSchema\\CustomPostMediaMutationsWP\\": "tests"
+            "PoPCMSSchema\\CustomPostUserMutationsWP\\": "tests"
         }
     },
     "scripts": {
