@@ -90,3 +90,11 @@ mutation DuplicatePost
   }
 }
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+@todo Add createPost(input.author) as sensitive field!
+
+</div>
