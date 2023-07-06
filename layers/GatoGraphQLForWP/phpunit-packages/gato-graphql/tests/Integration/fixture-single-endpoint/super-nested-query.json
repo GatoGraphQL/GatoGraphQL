@@ -5123,7 +5123,7 @@
                 }
             },
             {
-                "excerpt": "Categories Block Latest Posts Block",
+                "excerpt": "Categories Block Latest Posts Block Did you know? We are not rich by what we possess but by what we can do without. Patience is the strength of the weak, impatience is the weakness of the strong.",
                 "title": "HTTP caching improves performance",
                 "author": {
                     "name": "Author Marquez",
@@ -5134,6 +5134,11 @@
                         }
                     ]
                 }
+            },
+            {
+                "excerpt": "When I look back on my past and think how much time I wasted on nothing, how much time has been lost in futilities, errors, laziness, incapacity to live; how little I appreciated it, how many times I sinned against my heart and soul-then my heart bleeds. Life is a gift, life is happiness, every&hellip;",
+                "title": "Welcome to a single post full of blocks!",
+                "author": null
             }
         ]
     }
