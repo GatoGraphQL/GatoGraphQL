@@ -357,6 +357,9 @@
           "name": "TagPaginationInput"
         },
         {
+          "name": "TagsByInput"
+        },
+        {
           "name": "TaxonomyCustomPostsFilterInput"
         },
         {
