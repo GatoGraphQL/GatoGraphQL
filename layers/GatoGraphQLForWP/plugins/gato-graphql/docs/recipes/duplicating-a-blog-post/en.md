@@ -15,6 +15,7 @@ query GetPost($id: ID!) {
     id
     slug
     date
+    status
 
     # Fields to be duplicated
     author {
@@ -82,7 +83,9 @@ Notice that some fields are meant to be duplicated (including the author, title,
 
 ## Duplicating the post
 
-With the **Multiple Query Execution** extension, we are able to export the post's data items, and inject them again into the `createPost` mutation, to create a new post:
+With the **Multiple Query Execution** extension, we are able to export the post's data items, and inject them again into another query in the same GraphQL document.
+
+This query will first retrieve and export the post's data via `GetPostAndExportData`, and inject these as input into the `createPost` mutation in `DuplicatePost`:
 
 ```graphql
 query GetPostAndExportData($id: ID!) {
@@ -91,6 +94,7 @@ query GetPostAndExportData($id: ID!) {
     id
     slug
     date
+    status
 
     # Fields to be duplicated
     author {
@@ -115,6 +119,7 @@ mutation DuplicatePost
   @depends(on: "GetPostAndExportData")
 {
   createPost(input: {
+    status: draft,
     author: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
@@ -139,6 +144,7 @@ mutation DuplicatePost
       id
       slug
       date
+      status
 
       # Fields to be duplicated
       author {
