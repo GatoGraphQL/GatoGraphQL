@@ -13,6 +13,6 @@ class MutationInputProperties
      * (post, event, etc)
      */
     public final const CUSTOMPOST_ID = 'id';
-    public final const TAGS = 'tags';
+    public final const TAGS_BY = 'tagsBy';
     public final const APPEND = 'append';
 }

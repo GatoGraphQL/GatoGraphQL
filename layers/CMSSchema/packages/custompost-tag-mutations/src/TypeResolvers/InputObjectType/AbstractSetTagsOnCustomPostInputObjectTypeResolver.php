@@ -73,7 +73,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::TAGS => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::TAGS_BY => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
         );
@@ -89,7 +89,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
                 $this->__('The ID of the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
-            MutationInputProperties::TAGS => $this->__('The tags to set', 'custompost-tag-mutations'),
+            MutationInputProperties::TAGS_BY => $this->__('The tags to set', 'custompost-tag-mutations'),
             MutationInputProperties::APPEND => $this->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
             default => null,
         };
@@ -108,7 +108,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
         return match ($inputFieldName) {
             MutationInputProperties::APPEND => SchemaTypeModifiers::NON_NULLABLE,
             MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::TAGS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::TAGS_BY => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
