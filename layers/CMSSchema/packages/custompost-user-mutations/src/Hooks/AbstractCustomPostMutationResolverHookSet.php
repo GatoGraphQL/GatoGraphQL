@@ -46,6 +46,12 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             10,
             3
         );
+        App::addFilter(
+            HookNames::SENSITIVE_INPUT_FIELD_NAMES,
+            $this->getSensitiveInputFieldNames(...),
+            10,
+            2
+        );
     }
 
     /**
@@ -81,5 +87,24 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return $this->__('The ID of the user', 'custompost-user-mutations');
+    }
+    
+    /**
+     * @return string[] $sensitiveInputFieldNames
+     * @return string[]
+     */
+    public function getSensitiveInputFieldNames(
+        array $sensitiveInputFieldNames,
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): array {
+        // Only for the newly added inputFieldName
+        if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+            return $sensitiveInputFieldNames;
+        }
+        if (true) {
+            return $sensitiveInputFieldNames;
+        }
+        $sensitiveInputFieldNames[] = MutationInputProperties::AUTHOR_ID;
+        return $sensitiveInputFieldNames;
     }
 }
