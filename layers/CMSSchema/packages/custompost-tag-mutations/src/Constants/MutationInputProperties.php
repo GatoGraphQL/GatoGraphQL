@@ -18,5 +18,4 @@ class MutationInputProperties
 
     public final const IDS = 'ids';
     public final const SLUGS = 'slugs';
-    public final const NAMES = 'names';
 }

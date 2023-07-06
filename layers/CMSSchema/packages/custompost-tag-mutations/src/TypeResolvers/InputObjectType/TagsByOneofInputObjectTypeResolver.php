@@ -61,7 +61,6 @@ class TagsByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeRes
         return [
             MutationInputProperties::IDS => $this->getIDScalarTypeResolver(),
             MutationInputProperties::SLUGS => $this->getStringScalarTypeResolver(),
-            MutationInputProperties::NAMES => $this->getStringScalarTypeResolver(),
         ];
     }
 
@@ -70,7 +69,6 @@ class TagsByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeRes
         return match ($inputFieldName) {
             MutationInputProperties::IDS => $this->__('Input the tag IDs', 'custompost-tag-mutations'),
             MutationInputProperties::SLUGS => $this->__('Input the tag slugs', 'custompost-tag-mutations'),
-            MutationInputProperties::NAMES => $this->__('Input the tag names', 'custompost-tag-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -79,8 +77,7 @@ class TagsByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeRes
     {
         return match ($inputFieldName) {
             MutationInputProperties::IDS,
-            MutationInputProperties::SLUGS,
-            MutationInputProperties::NAMES
+            MutationInputProperties::SLUGS
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getInputFieldTypeModifiers($inputFieldName),
