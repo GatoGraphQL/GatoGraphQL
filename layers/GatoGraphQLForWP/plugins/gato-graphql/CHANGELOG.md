@@ -45,6 +45,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Must update mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others)
+- Must update mutations `setTagsOnPost`, `createPost` and `updatePost`
 - Non-restrictive Settings values are used by default
 - Env var `ENABLE_UNSAFE_DEFAULTS` has been removed and `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` added in its place, to indicate to use the restrictive Settings values by default
 - Renamed plugin to "Gato GraphQL"

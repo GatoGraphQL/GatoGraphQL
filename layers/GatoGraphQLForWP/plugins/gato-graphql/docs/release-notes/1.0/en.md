@@ -950,7 +950,7 @@ If we want to expose it always, we can also switch to treating it as a normal in
 
 Prior to v1.0, mutations that can set tags on posts received input `tags` with the tag slugs.
 
-Now, they receive oneof input `tagsBy` with two properties: `ids` (as `[ID]`) and `slugs` (as `[String]`), so we can use one or the other to define the tags.
+Now, they receive "oneof" input `tagsBy` with two properties: `ids` (as `[ID]`) and `slugs` (as `[String]`), so we can use one or the other to define the tags.
 
 ## The Settings page has been re-designed
 
@@ -1400,6 +1400,38 @@ mutation CreatePost {
   createPost(input: {
     title: "New post"
     contentAs: { html: "New content" }
+  }) {
+    status
+  }
+}
+```
+
+### Must update mutations `setTagsOnPost`, `createPost` and `updatePost`
+
+Because mutations that can set tags on posts now receive a "oneof" input `tagsBy`, these mutations must be updated.
+
+For instance, this GraphQL query:
+
+```graphql
+mutation UpdateTagsOnPost {
+  updatePost(input: {
+    id: 1,
+    tags: ["wordpress"]
+  }) {
+    status
+  }
+}
+```
+
+must be transformed like this:
+
+```graphql
+mutation UpdateTagsOnPost {
+  updatePost(input: {
+    id: 1,
+    tagsBy: {
+      slugs: ["wordpress"]
+    }
   }) {
     status
   }
