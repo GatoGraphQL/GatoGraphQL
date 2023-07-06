@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CustomPostUserMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class MediaItemDoesNotExistErrorPayload extends AbstractErrorPayload
+final class UserDoesNotExistErrorPayload extends AbstractErrorPayload
 {
 }

@@ -8,7 +8,7 @@ use PoPCMSSchema\CustomPostUserMutations\TypeResolvers\UnionType\CustomPostSetFe
 use PoPCMSSchema\CustomPostUserMutations\TypeResolvers\UnionType\RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class MediaItemDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractMediaItemDoesNotExistErrorPayloadObjectTypeResolverPicker
+class UserDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractUserDoesNotExistErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

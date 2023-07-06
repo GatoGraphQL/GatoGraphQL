@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPostUserMutations\ObjectTypeResolverPickers;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\AbstractCustomPostMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class CreateOrUpdateCustomPostMediaItemDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractMediaItemDoesNotExistErrorPayloadObjectTypeResolverPicker
+class CreateOrUpdateCustomPostUserDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractUserDoesNotExistErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
