@@ -256,8 +256,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'gato-graphql');
-        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gato-graphql');
+        $sensitiveDataTitlePlaceholder = \__('Treat the %s as “sensitive” data', 'gato-graphql');
+        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gato-graphql');
         if ($module === self::SCHEMA_CUSTOMPOST_USER_MUTATIONS) {
             $option = self::OPTION_TREAT_AUTHOR_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;
             $moduleSettings[] = [
@@ -268,11 +268,11 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
-                    \__('author input (when creating/updating custom posts)', 'gato-graphql'),
+                    \__('<code>authorID</code> input (when creating/updating custom posts)', 'gato-graphql'),
                 ),
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
-                    \__('author input (when creating/updating custom posts)', 'gato-graphql'),
+                    \__('<code>authorID</code> input (when creating/updating custom posts)', 'gato-graphql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
