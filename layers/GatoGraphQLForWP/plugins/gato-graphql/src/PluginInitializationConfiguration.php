@@ -954,6 +954,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_MUTATIONS => [
                 \PoPCMSSchema\CustomPostUserMutations\Module::class,
+                \PoPCMSSchema\CustomPostUserMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_PAGE_MUTATIONS => [
                 \PoPCMSSchema\PageMutations\Module::class,
