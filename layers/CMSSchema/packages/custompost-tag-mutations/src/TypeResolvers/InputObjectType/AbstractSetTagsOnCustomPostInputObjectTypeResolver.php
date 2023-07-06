@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\TagsByOneofInputObjectTypeResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 
 abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -44,18 +44,18 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setTagsByOneofInputObjectTypeResolver(TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->tagsByOneofInputObjectTypeResolver = $tagsByOneofInputObjectTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getTagsByOneofInputObjectTypeResolver(): TagsByOneofInputObjectTypeResolver
     {
-        if ($this->stringScalarTypeResolver === null) {
-            /** @var StringScalarTypeResolver */
-            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        if ($this->tagsByOneofInputObjectTypeResolver === null) {
+            /** @var TagsByOneofInputObjectTypeResolver */
+            $tagsByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(TagsByOneofInputObjectTypeResolver::class);
+            $this->tagsByOneofInputObjectTypeResolver = $tagsByOneofInputObjectTypeResolver;
         }
-        return $this->stringScalarTypeResolver;
+        return $this->tagsByOneofInputObjectTypeResolver;
     }
 
     public function getTypeDescription(): ?string
@@ -73,7 +73,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::TAGS => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::TAGS_BY => $this->getTagsByOneofInputObjectTypeResolver(),
                 MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
         );
@@ -89,7 +89,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
                 $this->__('The ID of the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
-            MutationInputProperties::TAGS => $this->__('The tags to set', 'custompost-tag-mutations'),
+            MutationInputProperties::TAGS_BY => $this->__('The tags to set', 'custompost-tag-mutations'),
             MutationInputProperties::APPEND => $this->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
             default => null,
         };
@@ -106,10 +106,13 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::APPEND => SchemaTypeModifiers::NON_NULLABLE,
-            MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::TAGS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName),
+            MutationInputProperties::APPEND
+                => SchemaTypeModifiers::NON_NULLABLE,
+            MutationInputProperties::CUSTOMPOST_ID,
+            MutationInputProperties::TAGS_BY
+                => SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 }

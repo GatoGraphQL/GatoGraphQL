@@ -946,6 +946,12 @@ If we want to expose it always, we can also switch to treating it as a normal in
 
 ![Settings for the Custom Post User Mutations module](../../images/releases/v1.0/settings-custompost-user-mutations.png)
 
+## Mutations `setTagsOnPost`, `createPost` and `updatePost` now receive a oneof input object for tags
+
+Prior to v1.0, mutations that can set tags on posts received input `tags` with the tag slugs.
+
+Now, they receive "oneof" input `tagsBy` with two properties: `ids` (as `[ID]`) and `slugs` (as `[String]`), so we can use one or the other to define the tags.
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
@@ -1394,6 +1400,38 @@ mutation CreatePost {
   createPost(input: {
     title: "New post"
     contentAs: { html: "New content" }
+  }) {
+    status
+  }
+}
+```
+
+### Must update mutations `setTagsOnPost`, `createPost` and `updatePost`
+
+Because mutations that can set tags on posts now receive a "oneof" input `tagsBy` (instead of the previous `tags`), these mutations must be updated.
+
+For instance, this GraphQL query:
+
+```graphql
+mutation UpdateTagsOnPost {
+  updatePost(input: {
+    id: 1,
+    tags: ["wordpress"]
+  }) {
+    status
+  }
+}
+```
+
+must be transformed like this:
+
+```graphql
+mutation UpdateTagsOnPost {
+  updatePost(input: {
+    id: 1,
+    tagsBy: {
+      slugs: ["wordpress"]
+    }
   }) {
     status
   }
