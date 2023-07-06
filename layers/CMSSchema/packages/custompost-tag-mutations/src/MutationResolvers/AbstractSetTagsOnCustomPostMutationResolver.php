@@ -91,7 +91,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
         /** @var stdClass|null */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if ($tagsBy === null) {
+        if ($tagsBy === null || ((array) $tagsBy) === []) {
             return $customPostID;
         }
         $postTags = isset($tagsBy->{MutationInputProperties::IDS})

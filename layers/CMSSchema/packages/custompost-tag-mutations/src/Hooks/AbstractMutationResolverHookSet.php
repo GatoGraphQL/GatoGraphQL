@@ -52,6 +52,9 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
         /** @var stdClass */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if (((array) $tagsBy) === []) {
+            return;
+        }
         $customPostTags = isset($tagsBy->{MutationInputProperties::IDS})
             ? $tagsBy->{MutationInputProperties::IDS}
             : $tagsBy->{MutationInputProperties::SLUGS};
