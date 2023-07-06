@@ -46,12 +46,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             10,
             3
         );
-        App::addFilter(
-            HookNames::INPUT_FIELD_TYPE_MODIFIERS,
-            $this->maybeAddInputFieldTypeModifiers(...),
-            10,
-            3
-        );
     }
 
     /**
