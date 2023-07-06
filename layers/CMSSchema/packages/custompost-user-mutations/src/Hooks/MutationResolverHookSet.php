@@ -138,7 +138,7 @@ class MutationResolverHookSet extends AbstractHookSet
     }
 
     public function validateUserExists(
-        string|int|null $userID,
+        string|int $userID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
