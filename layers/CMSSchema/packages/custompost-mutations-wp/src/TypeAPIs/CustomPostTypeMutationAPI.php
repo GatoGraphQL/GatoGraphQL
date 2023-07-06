@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostMutationsWP\TypeAPIs;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
+use PoP\ComponentModel\App;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
@@ -17,6 +18,8 @@ use function user_can;
  */
 class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
     use BasicServiceTrait;
     use TypeMutationAPITrait;
 
@@ -51,7 +54,11 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
             $query['post_type'] = $query['custompost-type'];
             unset($query['custompost-type']);
         }
-        return $query;
+
+        return App::applyFilters(
+            self::HOOK_QUERY,
+            $query
+        );
     }
     /**
      * @param array<string,mixed> $data
