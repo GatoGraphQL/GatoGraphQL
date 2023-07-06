@@ -777,6 +777,22 @@
               "deprecationReason": null
             },
             {
+              "name": "contentSource",
+              "description": "Block's whole HTML code, including the block comment delimiters",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "HTML!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "HTML",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "innerBlocks",
               "description": "Block's inner blocks (if suitable)",
               "args": [],
@@ -1198,12 +1214,74 @@
               "deprecationReason": null
             },
             {
+              "name": "blockDataItems",
+              "description": "(Gutenberg) Block data items (as JSON objects) in a custom post",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[JSONObject!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "JSONObject!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "JSONObject",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "blockFlattenedDataItems",
+              "description": "(Gutenberg) Flattened array containing the block data items (as JSON objects) in a custom post, and replacing property 'innerBlocks' with 'innerBlockPositions', indicating the position of the inner blocks in the array (starting from 0)",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[JSONObject!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "JSONObject!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "JSONObject",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "blocks",
               "description": "(Gutenberg) Blocks in a custom post",
               "args": [
                 {
                   "name": "filterBy",
-                  "description": "Oneof input to specify the property and data to filter blocks",
+                  "description": "Oneof input to filter blocks",
                   "type": {
                     "kind": "INPUT_OBJECT",
                     "name": "BlockFilterByInput",
@@ -3978,12 +4056,74 @@
               "deprecationReason": null
             },
             {
+              "name": "blockDataItems",
+              "description": "(Gutenberg) Block data items (as JSON objects) in a custom post",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[JSONObject!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "JSONObject!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "JSONObject",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "blockFlattenedDataItems",
+              "description": "(Gutenberg) Flattened array containing the block data items (as JSON objects) in a custom post, and replacing property 'innerBlocks' with 'innerBlockPositions', indicating the position of the inner blocks in the array (starting from 0)",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[JSONObject!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "JSONObject!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "JSONObject",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "blocks",
               "description": "(Gutenberg) Blocks in a custom post",
               "args": [
                 {
                   "name": "filterBy",
-                  "description": "Oneof input to specify the property and data to filter blocks",
+                  "description": "Oneof input to filter blocks",
                   "type": {
                     "kind": "INPUT_OBJECT",
                     "name": "BlockFilterByInput",
@@ -4798,12 +4938,74 @@
               "deprecationReason": null
             },
             {
+              "name": "blockDataItems",
+              "description": "(Gutenberg) Block data items (as JSON objects) in a custom post",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[JSONObject!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "JSONObject!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "JSONObject",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "blockFlattenedDataItems",
+              "description": "(Gutenberg) Flattened array containing the block data items (as JSON objects) in a custom post, and replacing property 'innerBlocks' with 'innerBlockPositions', indicating the position of the inner blocks in the array (starting from 0)",
+              "args": [
+                {
+                  "name": "filterBy",
+                  "description": "Oneof input to filter blocks",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterByInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": "[JSONObject!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "JSONObject!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "JSONObject",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "blocks",
               "description": "(Gutenberg) Blocks in a custom post",
               "args": [
                 {
                   "name": "filterBy",
-                  "description": "Oneof input to specify the property and data to filter blocks",
+                  "description": "Oneof input to filter blocks",
                   "type": {
                     "kind": "INPUT_OBJECT",
                     "name": "BlockFilterByInput",
@@ -12207,6 +12409,39 @@
         },
         {
           "kind": "OBJECT",
+          "name": "TagDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The requested tag does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "User",
           "description": "Representation of a user",
           "fields": [
@@ -13079,6 +13314,39 @@
             {
               "kind": "INTERFACE",
               "name": "IdentifiableObject",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The requested media item does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
               "ofType": null
             }
           ],
@@ -14751,6 +15019,22 @@
               "deprecationReason": null
             },
             {
+              "name": "contentSource",
+              "description": "Block's whole HTML code, including the block comment delimiters",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "HTML!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "HTML",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "innerBlocks",
               "description": "Block's inner blocks (if suitable)",
               "args": [],
@@ -15465,6 +15749,16 @@
             },
             {
               "kind": "OBJECT",
+              "name": "TagDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "UserIsLoggedInErrorPayload",
               "ofType": null
             },
@@ -16011,7 +16305,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "BlockFilterByInput",
-          "description": "Oneof input to specify the property and data to filter blocks",
+          "description": "Oneof input to filter blocks",
           "fields": null,
           "inputFields": [
             {
@@ -18500,6 +18794,16 @@
           "fields": null,
           "inputFields": [
             {
+              "name": "authorID",
+              "description": "The ID of the user",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "categoryIDs",
               "description": "The IDs of the categories to set, of type 'PostCategory'",
               "type": {
@@ -18558,20 +18862,12 @@
               "defaultValue": null
             },
             {
-              "name": "tags",
+              "name": "tagsBy",
               "description": "The tags to set",
               "type": {
-                "kind": "LIST",
-                "name": "[String!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "String!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "TagsByInput",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -20451,19 +20747,15 @@
               "defaultValue": null
             },
             {
-              "name": "tags",
+              "name": "tagsBy",
               "description": "The tags to set",
               "type": {
                 "kind": "NON_NULL",
-                "name": "[String]!",
+                "name": "TagsByInput!",
                 "ofType": {
-                  "kind": "LIST",
-                  "name": "[String]",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "TagsByInput",
+                  "ofType": null
                 }
               },
               "defaultValue": null
@@ -20587,6 +20879,16 @@
           "fields": null,
           "inputFields": [
             {
+              "name": "authorID",
+              "description": "The ID of the user",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "categoryIDs",
               "description": "The IDs of the categories to set, of type 'PostCategory'",
               "type": {
@@ -20659,20 +20961,12 @@
               "defaultValue": null
             },
             {
-              "name": "tags",
+              "name": "tagsBy",
               "description": "The tags to set",
               "type": {
-                "kind": "LIST",
-                "name": "[String!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "String!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "TagsByInput",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -20745,6 +21039,53 @@
                 "kind": "SCALAR",
                 "name": "Int",
                 "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TagsByInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "ids",
+              "description": "Input the tag IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slugs",
+              "description": "Input the tag slugs",
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
               },
               "defaultValue": null
             }
@@ -22936,6 +23277,16 @@
             },
             {
               "kind": "OBJECT",
+              "name": "TagDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
@@ -23203,6 +23554,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "TagDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
@@ -23250,6 +23606,16 @@
             {
               "kind": "OBJECT",
               "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
               "ofType": null
             },
             {
