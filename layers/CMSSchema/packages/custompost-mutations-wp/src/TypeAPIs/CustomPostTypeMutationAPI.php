@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
-use PoPCMSSchema\CustomPostMutations\TypeAPIs\AbstractCustomPostTypeMutationAPI;
+use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
+use PoP\ComponentModel\App;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
 use function user_can;
@@ -14,8 +16,11 @@ use function user_can;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CustomPostTypeMutationAPI extends AbstractCustomPostTypeMutationAPI
+class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
 {
+    public const HOOK_QUERY = __CLASS__ . ':query';
+
+    use BasicServiceTrait;
     use TypeMutationAPITrait;
 
     /**
@@ -50,7 +55,10 @@ class CustomPostTypeMutationAPI extends AbstractCustomPostTypeMutationAPI
             unset($query['custompost-type']);
         }
 
-        return parent::convertCustomPostsMutationQuery($query);
+        return App::applyFilters(
+            self::HOOK_QUERY,
+            $query
+        );
     }
     /**
      * @param array<string,mixed> $data
