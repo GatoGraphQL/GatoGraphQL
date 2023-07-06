@@ -25,6 +25,7 @@
         "graphql-by-pop/graphql-server": "^0.11",
         "pop-cms-schema/comment-mutations-wp": "^0.11",
         "pop-cms-schema/custompost-mutations-wp": "^0.11",
+        "pop-cms-schema/custompost-user-mutations": "^0.11",
         "pop-cms-schema/custompostmedia-mutations-wp": "^0.11",
         "pop-cms-schema/custompostmedia-wp": "^0.11",
         "pop-cms-schema/page-mutations": "^0.11",
