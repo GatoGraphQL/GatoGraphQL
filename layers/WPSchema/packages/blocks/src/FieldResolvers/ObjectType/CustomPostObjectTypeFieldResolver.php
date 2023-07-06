@@ -378,14 +378,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         /** @var string */
         $name = $blockItem->name;
-        /**
-         * Watch out! $attributes can also be the empty array `[]`,
-         * because `recursivelyConvertAssociativeArrayToStdClass`
-         * (at the last recursion level) returns the same empty array.
-         *
-         * @var stdClass|null
-         */
-        $attributes = $blockItem->attributes === null ? null : (object) $blockItem->attributes;
+        /** @var stdClass|null */
+        $attributes = $blockItem->attributes ?? null;
         /** @var array<string|null> */
         $innerContent = $blockItem->innerContent;
 
