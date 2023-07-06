@@ -89,8 +89,11 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        /** @var stdClass */
+        /** @var stdClass|null */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if ($tagsBy === null) {
+            return $customPostID;
+        }
         $postTags = isset($tagsBy->{MutationInputProperties::IDS})
             ? $tagsBy->{MutationInputProperties::IDS}
             : $tagsBy->{MutationInputProperties::SLUGS};
