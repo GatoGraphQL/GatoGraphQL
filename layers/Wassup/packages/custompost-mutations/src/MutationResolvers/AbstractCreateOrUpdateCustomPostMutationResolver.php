@@ -295,15 +295,18 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
     }
 
     /**
-     * @param array<string,mixed> $post_data
+     * @param array<string,mixed> $customPostData
+     * @return array<string,mixed>
      */
-    protected function addCreateOrUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function addCreateOrUpdateCustomPostData(array $customPostData, FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        parent::addCreateOrUpdateCustomPostData($post_data, $fieldDataAccessor);
+        $customPostData = parent::addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
         if (!$this->supportsTitle()) {
-            unset($post_data['title']);
+            unset($customPostData['title']);
         }
+
+        return $customPostData;
     }
 
     /**
@@ -311,14 +314,14 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
      */
     protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $post_data = parent::getUpdateCustomPostData($fieldDataAccessor);
+        $customPostData = parent::getUpdateCustomPostData($fieldDataAccessor);
 
         // Status: If provided, Validate the value is permitted, or get the default value otherwise
-        if ($status = $post_data['status']) {
-            $post_data['status'] = GD_CreateUpdate_Utils::getUpdatepostStatus($status, $this->moderate());
+        if ($status = $customPostData['status']) {
+            $customPostData['status'] = GD_CreateUpdate_Utils::getUpdatepostStatus($status, $this->moderate());
         }
 
-        return $post_data;
+        return $customPostData;
     }
 
     protected function moderate()
@@ -331,12 +334,12 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
      */
     protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $post_data = parent::getCreateCustomPostData($fieldDataAccessor);
+        $customPostData = parent::getCreateCustomPostData($fieldDataAccessor);
 
         // Status: Validate the value is permitted, or get the default value otherwise
-        $post_data['status'] = GD_CreateUpdate_Utils::getCreatepostStatus($post_data['status'], $this->moderate());
+        $customPostData['status'] = GD_CreateUpdate_Utils::getCreatepostStatus($customPostData['status'], $this->moderate());
 
-        return $post_data;
+        return $customPostData;
     }
 
     protected function getCategories(FieldDataAccessorInterface $fieldDataAccessor): ?array
