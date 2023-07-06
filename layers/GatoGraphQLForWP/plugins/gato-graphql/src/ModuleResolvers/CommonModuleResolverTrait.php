@@ -12,7 +12,7 @@ use function get_posts;
 trait CommonModuleResolverTrait
 {
     use CollapsibleContentPrinterTrait;
-    
+
     /**
      * @param string[]|null $applicableItems
      */

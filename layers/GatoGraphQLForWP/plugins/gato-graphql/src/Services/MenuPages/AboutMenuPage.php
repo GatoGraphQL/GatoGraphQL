@@ -83,7 +83,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
 
         $this->enqueueAboutPageAssets();
     }
-    
+
     protected function enqueueAboutPageAssets(): void
     {
         $mainPlugin = PluginApp::getMainPlugin();

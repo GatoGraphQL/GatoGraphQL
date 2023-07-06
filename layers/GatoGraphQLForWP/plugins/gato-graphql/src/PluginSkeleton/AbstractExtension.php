@@ -163,7 +163,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
     {
         // Function to override
     }
-    
+
     public function isCommercial(): bool
     {
         return false;
