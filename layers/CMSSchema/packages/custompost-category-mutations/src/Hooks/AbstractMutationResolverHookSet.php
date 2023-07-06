@@ -84,7 +84,9 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
         // Only for that specific CPT
         $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
-        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
+        if ($customPostID !== null
+            && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()
+        ) {
             return false;
         }
         return true;
