@@ -197,10 +197,6 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     {
     }
 
-    // protected function addCustomPostType(&$customPostData)
-    // {
-    //     $customPostData['custompost-type'] = $this->getCustomPostType();
-    // }
     /**
      * @param array<string,mixed> $customPostData
      * @return array<string,mixed>
