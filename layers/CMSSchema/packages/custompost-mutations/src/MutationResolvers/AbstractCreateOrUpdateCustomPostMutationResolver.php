@@ -226,6 +226,10 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
             $customPostData['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
         }
+
+        // Inject author, categories, tags, featured image, etc
+        $customPostData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_DATA, $customPostData, $fieldDataAccessor);
+
         return $customPostData;
     }
 
@@ -239,6 +243,9 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         );
         $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
+        // Inject author, categories, tags, featured image, etc
+        $customPostData = App::applyFilters(HookNames::GET_UPDATE_DATA, $customPostData, $fieldDataAccessor);
+
         return $customPostData;
     }
 
@@ -251,6 +258,9 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             'custompost-type' => $this->getCustomPostType(),
         ];
         $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
+
+        // Inject author, categories, tags, featured image, etc
+        $customPostData = App::applyFilters(HookNames::GET_CREATE_DATA, $customPostData, $fieldDataAccessor);
 
         return $customPostData;
     }
