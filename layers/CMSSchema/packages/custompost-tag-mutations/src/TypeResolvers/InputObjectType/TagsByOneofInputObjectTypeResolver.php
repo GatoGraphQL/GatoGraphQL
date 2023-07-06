@@ -48,6 +48,11 @@ class TagsByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeRes
         return 'TagsByInput';
     }
 
+    protected function isOneInputValueMandatory(): bool
+    {
+        return false;
+    }
+
     /**
      * @return array<string,InputTypeResolverInterface>
      */
