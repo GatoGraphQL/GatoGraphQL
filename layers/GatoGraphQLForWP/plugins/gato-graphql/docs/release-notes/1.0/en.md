@@ -1408,7 +1408,7 @@ mutation CreatePost {
 
 ### Must update mutations `setTagsOnPost`, `createPost` and `updatePost`
 
-Because mutations that can set tags on posts now receive a "oneof" input `tagsBy`, these mutations must be updated.
+Because mutations that can set tags on posts now receive a "oneof" input `tagsBy` (instead of the previous `tags`), these mutations must be updated.
 
 For instance, this GraphQL query:
 
