@@ -108,7 +108,7 @@ class BlockContentParser implements BlockContentParserInterface
                 if (isset($item->attributes)) {
                     /** @var array<string,mixed>|stdClass */
                     $blockAttributes = $item->attributes;
-                    $item->attributes = MethodHelpers::recursivelyConvertAssociativeArrayToStdClass((array) $blockAttributes);
+                    $item->attributes = MethodHelpers::recursivelyConvertAssociativeArrayToStdClass((array) $blockAttributes, true);
                 }
 
                 // Recursively call for the block's inner blocks'
