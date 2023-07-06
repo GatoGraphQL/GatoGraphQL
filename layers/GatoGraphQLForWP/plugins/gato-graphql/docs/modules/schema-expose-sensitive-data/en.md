@@ -26,6 +26,10 @@ By default, the following data elements are treated as “sensitive” (they can
 
 - `status`
 
+**Custom Post Mutations:**
+
+- `authorID` input
+
 ## Inspecting the “sensitive” data elements via schema introspection
 
 The `isSensitiveDataElement` property is added to field `extensions` when doing schema introspection. To find out which are the “sensitive” data elements from the schema, execute this query:
