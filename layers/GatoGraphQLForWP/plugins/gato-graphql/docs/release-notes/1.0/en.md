@@ -920,6 +920,32 @@ This is to avoid potential breaking changes in the future, when it becomes possi
 
 When that feature is supported, the `contentAs` and `commentAs` oneof input objects will be added a second property: `blocks: [BlockUnion!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
 
+## Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
+
+Mutations `createPost` and `updatePost` can now indicate the author of the post, via the `authorID` input:
+
+```graphql
+mutation UpdatePostAuthor {
+  updatePost(input: {
+    id: 1,
+    authorID: 3,
+  }) {
+    status
+    post {
+      author {
+        id
+      }
+    }
+  }
+}
+```
+
+Modifying the author of a post should be done only for authorized users. For this reason, the `authorID` input has been set as a “sensitive” data element, which means that it will be exposed in the schema only when the Schema Configuration has option `Expose Sensitive Data in the Schema` enabled.
+
+If we want to expose it always, we can also treat it as a normal input in the Settings page, under tab "Custom Post User Mutations":
+
+
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
