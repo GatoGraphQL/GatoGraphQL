@@ -10,19 +10,19 @@ class CreateOrUpdateStanceMutationResolver extends \PoPSitesWassup\StanceMutatio
 {
     protected function getCreatepostData(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        $post_data = parent::getCreatepostData($fieldDataAccessor);
+        $customPostData = parent::getCreatepostData($fieldDataAccessor);
 
         // Property 'menu-order' only works for WordPress
         if (Environment::disableCustomCMSCode()) {
-            return $post_data;
+            return $customPostData;
         }
 
         // Allow to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
         // For that, General thoughts have menu_order "0" (already default one), article-related ones have menu_order "1"
         if ($fieldDataAccessor->getValue('stancetarget')) {
-            $post_data['menu-order'] = 1;
+            $customPostData['menu-order'] = 1;
         }
 
-        return $post_data;
+        return $customPostData;
     }
 }
