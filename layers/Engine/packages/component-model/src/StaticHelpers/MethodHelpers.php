@@ -93,6 +93,6 @@ class MethodHelpers
         if (!array_is_list($array)) {
             return (object) $array;
         }
-        return $array;
+        return (object) $array;
     }
 }
