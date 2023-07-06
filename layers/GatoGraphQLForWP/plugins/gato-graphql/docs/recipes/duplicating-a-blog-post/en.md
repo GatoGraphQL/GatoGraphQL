@@ -9,8 +9,8 @@ An example is the ability to duplicate a blog post. Let's explore how to do this
 This GraphQL query retrieves the fundamental data for a post:
 
 ```graphql
-query GetPost($id: ID!) {
-  post(by: { id : $id }) {
+query GetPost($postId: ID!) {
+  post(by: { id : $postId }) {
     # Fields not to be duplicated
     id
     slug
@@ -37,7 +37,7 @@ query GetPost($id: ID!) {
 }
 ```
 
-Executing the query (passing the `$id` variable), the response may be:
+Executing the query (passing the `$postId` variable), the response may be:
 
 ```json
 {
@@ -88,8 +88,8 @@ With the **Multiple Query Execution** extension, we are able to export the post'
 This query will first retrieve and export the post's data via `GetPostAndExportData`, and inject these as input into the `createPost` mutation in `DuplicatePost`:
 
 ```graphql
-query GetPostAndExportData($id: ID!) {
-  post(by: { id : $id }) {
+query GetPostAndExportData($postId: ID!) {
+  post(by: { id : $postId }) {
     # Fields not to be duplicated
     id
     slug
