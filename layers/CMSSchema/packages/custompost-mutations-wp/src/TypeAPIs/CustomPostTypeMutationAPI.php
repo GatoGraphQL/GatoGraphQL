@@ -22,7 +22,7 @@ class CustomPostTypeMutationAPI extends AbstractCustomPostTypeMutationAPI
      * @param array<string,mixed> $query
      * @return array<string,mixed> $query
      */
-    protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array $query): array
+    protected function convertCustomPostsMutationQuery(array $query): array
     {
         // Convert the parameters
         if (isset($query['status'])) {
@@ -50,7 +50,7 @@ class CustomPostTypeMutationAPI extends AbstractCustomPostTypeMutationAPI
             unset($query['custompost-type']);
         }
 
-        return parent::convertQueryArgsFromPoPToCMSForInsertUpdatePost($query);
+        return parent::convertCustomPostsMutationQuery($query);
     }
     /**
      * @param array<string,mixed> $data
@@ -60,7 +60,7 @@ class CustomPostTypeMutationAPI extends AbstractCustomPostTypeMutationAPI
     public function createCustomPost(array $data): string|int
     {
         // Convert the parameters
-        $data = $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
+        $data = $this->convertCustomPostsMutationQuery($data);
         $postIDOrError = \wp_insert_post($data, true);
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
@@ -89,7 +89,7 @@ class CustomPostTypeMutationAPI extends AbstractCustomPostTypeMutationAPI
     public function updateCustomPost(array $data): string|int
     {
         // Convert the parameters
-        $data = $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($data);
+        $data = $this->convertCustomPostsMutationQuery($data);
         $postIDOrError = \wp_update_post($data, true);
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */

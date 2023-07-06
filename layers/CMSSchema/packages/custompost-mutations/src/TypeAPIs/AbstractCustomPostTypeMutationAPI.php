@@ -20,7 +20,7 @@ abstract class AbstractCustomPostTypeMutationAPI implements CustomPostTypeMutati
      * @param array<string,mixed> $query
      * @return array<string,mixed> $query
      */
-    protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(array $query): array
+    protected function convertCustomPostsMutationQuery(array $query): array
     {
         return App::applyFilters(
             self::HOOK_QUERY,
