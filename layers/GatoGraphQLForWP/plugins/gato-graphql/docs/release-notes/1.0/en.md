@@ -933,7 +933,7 @@ mutation UpdatePostAuthor {
     status
     post {
       author {
-        id
+        id # This will print `3`
       }
     }
   }
@@ -944,7 +944,7 @@ Modifying the author of a post should be done only for authorized users. For thi
 
 If we want to expose it always, we can also treat it as a normal input in the Settings page, under tab "Custom Post User Mutations":
 
-
+![Settings for the Custom Post User Mutations module](../../images/releases/v1.0/settings-custompost-user-mutations.png)
 
 ## The Settings page has been re-designed
 
