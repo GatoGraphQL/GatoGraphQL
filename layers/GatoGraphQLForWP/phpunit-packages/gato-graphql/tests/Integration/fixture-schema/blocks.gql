@@ -1,4 +1,26 @@
 {
+  # This post contains blocks containing blocks containing blocks
+  singleLevelBlockPost: post(by: {id: 28}) {
+    id
+    title
+    blocks {
+      ...BlockData
+    }
+    blockDataItems
+    blockFlattenedDataItems
+  }
+
+  # This post contains blocks containing blocks containing blocks
+  multiLevelBlockPost: post(by: {id: 40}) {
+    id
+    title
+    blocks {
+      ...BlockData
+    }
+    blockDataItems
+    blockFlattenedDataItems
+  }
+
   posts(pagination: { limit: 5 }) {
     id
     title
