@@ -946,6 +946,12 @@ If we want to expose it always, we can also switch to treating it as a normal in
 
 ![Settings for the Custom Post User Mutations module](../../images/releases/v1.0/settings-custompost-user-mutations.png)
 
+## Mutations `setTagsOnPost`, `createPost` and `updatePost` now receive a oneof input object for tags
+
+Prior to v1.0, mutations that can set tags on posts received input `tags` with the tag slugs.
+
+Now, they receive oneof input `tagsBy` with two properties: `ids` (as `[ID]`) and `slugs` (as `[String]`), so we can use one or the other to define the tags.
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
