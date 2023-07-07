@@ -256,7 +256,7 @@ In the response, we can visualize that the fields of the new post are indeed the
 
 🔥 **Tips:**
 
-Multiple Query Execution pipelines can help us manage the GraphQL document into a series a logical/atomic units:
+**Multiple Query Execution** can help us manage the GraphQL document into a series a logical/atomic units:
 
 - There is no limit in how many operations can be added to the pipeline
 - Any operation can declare more than one dependency:
