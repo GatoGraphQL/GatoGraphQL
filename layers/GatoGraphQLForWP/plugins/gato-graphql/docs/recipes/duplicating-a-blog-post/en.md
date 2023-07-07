@@ -319,7 +319,7 @@ In the response, we can visualize that the fields of the new post are indeed the
 }
 ```
 
----
+### Issues with the first approach
 
 The query above will return an error when a connection field is empty, as the dynamic variable will not be exported.
 
@@ -551,7 +551,7 @@ mutation DuplicatePost
 }
 ```
 
----
+### Issues with the second approach
 
 The solution above only works for exporting IDs (as these are the values stored in the connection fields). It will not work for anything else, such as tag slugs:
 
