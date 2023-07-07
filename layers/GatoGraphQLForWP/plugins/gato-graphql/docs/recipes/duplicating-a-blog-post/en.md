@@ -569,7 +569,7 @@ The following approach deals with this problem.
 
 ## Duplicating the post: Third approach
 
-We can execute an additional operation at the beginning to initialize each of the dynamic variables with a `null` or empty value (via global field `_echo`).
+We can execute an additional operation at the beginning to initialize each of the dynamic variables with a `null` or empty value (via global field `_echo` from the **PHP Functions via Schema** extension).
 
 Then, each dynamic variable will always be exported, at least once. When the field value is not empty, then it will be exported again, and this second value will override the first one.
 
@@ -596,7 +596,7 @@ query ExportData($postId: ID!)
 
 🔥 **Tips:**
 
-- Global field `_echo` (from the **PHP Functions via Schema** extension) returns anything that is provided, whatever its type:
+- Global field `_echo` returns anything that is provided, whatever its type:
 
 ```graphql
 query {
