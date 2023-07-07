@@ -153,6 +153,7 @@ query GeneratePostInputData
         setResultInResponse: true
       )
     @export(as: "postInput")
+    @remove
 }
 
 mutation DuplicatePosts
@@ -172,6 +173,7 @@ mutation DuplicatePosts
         setResultInResponse: true
       )
     @export(as: "createdPostIDs")
+    @remove
 }
 
 query RetrieveCreatedPosts
