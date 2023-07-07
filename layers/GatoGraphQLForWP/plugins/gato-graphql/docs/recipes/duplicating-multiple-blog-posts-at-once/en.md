@@ -215,6 +215,6 @@ query RetrieveCreatedPosts
 
 Below is the detailed analysis of how the query works.
 
-### Retrieving the post data
+### ...
 
-This GraphQL query retrieves the fundamental data for a post:
+https://yoursite.com/graphql/mutations-nested-return-entity/
