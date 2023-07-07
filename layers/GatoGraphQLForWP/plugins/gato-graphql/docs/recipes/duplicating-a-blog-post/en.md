@@ -617,10 +617,4 @@ Now, dynamic variable `$tagSlugs` will always be exported at least once. When th
 }
 ```
 
-
-
 </div>
-
-## Duplicating meta
-
-## Duplicating blog posts in bulk
