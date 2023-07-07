@@ -553,6 +553,72 @@ mutation DuplicatePost
 
 ### 2. Initializing the dynamic variable with an empty value
 
+The solution above only works for IDs, as these are the values stored in the connection fields.
+
+For instance, it will not work to export the tag slugs:
+
+```graphql
+{
+  post {
+    tags {
+      slug @export(as: "tagSlugs", type: LIST)
+    }
+  }
+}
+```
+
+A different solution is to use global field `_echo` from **PHP Functions via Schema** to initialize the dynamic variables with an empty value:
+
+```graphql
+query InitializeDynamicVariables {
+  tagSlugs: _echo(value: []) @export(as: "tagSlugs")
+}
+
+query ExportData($postId: ID!)
+  @depends(on: "InitializeDynamicVariables")
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  post {
+    tags {
+      slug @export(as: "tagSlugs", type: LIST)
+    }
+  }
+}
+```
+
+Now, dynamic variable `$tagSlugs` will always be exported at least once. When the post has tags, then it will be exported again, and this second value will override the first one.
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Exporting a dynamic variable twice or more will produce a warning in the GraphQL response:
+
+```json
+{
+  "extensions": {
+    "warnings": [
+      {
+        "message": "Dynamic variable with name 'tagSlugs' had already been set, had its value overridden",
+        "locations": [
+          {
+            "line": 22,
+            "column": 21
+          }
+        ]
+      }
+    ]
+  },
+  "data": {
+    // ...
+  }
+}
+```
+
+To avoid this warning, we must add directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation.
+
+</div>
+
 ## Duplicating meta
 
 ## Duplicating blog posts in bulk
