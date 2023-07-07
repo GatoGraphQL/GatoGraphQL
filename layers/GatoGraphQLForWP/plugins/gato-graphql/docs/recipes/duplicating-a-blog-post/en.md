@@ -326,13 +326,11 @@ The query above will return an error when a connection field is empty, as the dy
 For instance, when the post to duplicate does not have a featured image, field `featuredImage` will be `null`, and so `id @export(as: "featuredImageID")` will never be executed:
 
 ```graphql
-query GetPostAndExportData($postId: ID!) {
-  post(by: { id : $postId }) {
-    # ...
+{
+  post {
     featuredImage {
       id @export(as: "featuredImageID")
     }
-    # ...
   }
 }
 ```
