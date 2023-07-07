@@ -565,7 +565,7 @@ The solution above only works for exporting IDs (as these are the values stored 
 }
 ```
 
-A different solution is to use global field `_echo` from **PHP Functions via Schema** to initialize the dynamic variable with an empty value:
+A different solution is to use global field `_echo` to initialize the dynamic variable with an empty value:
 
 ```graphql
 query InitializeDynamicVariables {
@@ -591,6 +591,25 @@ Now, dynamic variable `$tagSlugs` will always be exported at least once. When th
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
+
+- Global field `_echo` (from the **PHP Functions via Schema** extension) returns anything that is provided, whatever its type:
+
+```graphql
+query {
+  string: _echo(value: "page")
+  int: _echo(value: 3)
+  bool: _echo(value: true)
+  jsonObject: _echo(value: {
+    name: "Robert"
+    surname: "Spencer"
+  })
+  null: _echo(value: null)
+  arrayOfString: _echo(value: ["something", "new"])
+  arrayOfInt: _echo(value: [1, 3, 5])
+  arrayOfArraysOfBool: _echo(value: [[true, false], [false]])
+  arrayOfMixed: _echo(value: [1, true, "string", [1, 3, 5], {key: "value"}])
+}
+```
 
 - Directive `@remove` (from the **Field Response Removal** extension) is added to the field `tagSlugs` to remove it from the GraphQL response, as we are not really interested in its value (it's a helper field, useful during the query resolution only)
 
