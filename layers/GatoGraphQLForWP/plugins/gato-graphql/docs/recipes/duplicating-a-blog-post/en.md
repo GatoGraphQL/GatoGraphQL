@@ -553,9 +553,7 @@ mutation DuplicatePost
 
 ### 2. Initializing the dynamic variable with an empty value
 
-The solution above only works for IDs, as these are the values stored in the connection fields.
-
-For instance, it will not work to export the tag slugs:
+The solution above only works for IDs (as these are the values stored in the connection fields), but will not work to export the tag slugs:
 
 ```graphql
 {

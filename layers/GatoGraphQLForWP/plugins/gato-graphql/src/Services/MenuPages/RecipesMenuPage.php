@@ -199,6 +199,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Duplicating a blog post', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
