@@ -321,7 +321,48 @@ query CountMutatedResults @depends(on: "MutateData") {
 
 ## Duplicating a post with empty fields
 
-The query 
+The query above will return an error whenever a piece of data is not exported.
+
+For instance, passing variable `$postId` for a post without a featured image, field `featuredImage` will be `null`, and so `id @export(as: "featuredImageID")` will never be executed:
+
+```graphql
+query GetPostAndExportData($postId: ID!) {
+  post(by: { id : $postId }) {
+    # ...
+    featuredImage {
+      id @export(as: "featuredImageID")
+    }
+    # ...
+  }
+}
+```
+
+As dynamic variable `$featuredImageID` will then not exist, the response will give an error:
+
+```json
+{
+  "errors": [
+    {
+      "message": "No value has been exported for dynamic variable 'featuredImageID'",
+      "locations": [
+        {
+          "line": 39,
+          "column": 22
+        }
+      ]
+    }
+  ],
+  "data": {
+    // ...
+  }
+}
+```
+
+There are two solutions.
+
+### 1. Exporting the connection value (valid for IDs)
+
+### 2. Initializing the dynamic variable with an empty value
 
 ## Duplicating meta
 
