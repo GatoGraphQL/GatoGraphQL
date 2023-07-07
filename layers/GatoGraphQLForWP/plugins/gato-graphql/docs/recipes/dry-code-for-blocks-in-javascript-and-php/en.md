@@ -1,6 +1,6 @@
 # DRY code for blocks in Javascript and PHP
 
-[Dynamic blocks](https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/) are blocks that build their structure and content on the fly when the block is rendered on the front end.
+[Dynamic (Gutenberg) blocks](https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/) are blocks that build their structure and content on the fly when the block is rendered on the front end.
 
 Rendering a dynamic block in the front-end (to display it in the WordPress editor) and in the server-side (to generate the HTML for the blog post) will typically fetch its data in two different ways:
 
