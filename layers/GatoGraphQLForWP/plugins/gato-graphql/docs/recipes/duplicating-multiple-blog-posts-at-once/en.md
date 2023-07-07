@@ -41,7 +41,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     }
 ) {
     # Fields not to be duplicated
-    id
+    id @export(as: "postID", type: LIST)
     slug
     date
     status
@@ -65,54 +65,158 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
   }
 }
 
-mutation DuplicatePosts
+query GeneratePostInputData
   @depends(on: "GetPostsAndExportData")
 {
-  createPost(input: {
-    status: draft,
-    postAuthorID: $postAuthorID,
-    postCategoryIDs: $postCategoryIDs,
-    contentAs: {
-      html: $contentSource
-    },
-    excerpt: $excerpt
-    postFeaturedImageID: $postFeaturedImageID,
-    tagsBy: {
-      ids: $postTagIDs
-    },
-    title: $title
-  }) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-    post {
-      # Fields not to be duplicated
-      id
-      slug
-      date
-      status
+  postInput: _echo(value: $postID)
+    # For each entry: Create a new post
+    @underEachArrayItem(
+      passValueOnwardsAs: "id"
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5, 6, 7, 8]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postAuthorID,
+          by: {
+            key: $id,
+          }
+        },
+        passOnwardsAs: "authorID"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postCategoryIDs,
+          by: {
+            key: $id,
+          }
+        },
+        passOnwardsAs: "categoryIDs"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postContentSource,
+          by: {
+            key: $id,
+          }
+        },
+        passOnwardsAs: "contentSource"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postExcerpt,
+          by: {
+            key: $id,
+          }
+        },
+        passOnwardsAs: "excerpt"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postFeaturedImageID,
+          by: {
+            key: $id,
+          }
+        },
+        passOnwardsAs: "featuredImageID"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postTagIDs,
+          by: {
+            key: $id,
+          }
+        },
+        passOnwardsAs: "tagIDs"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postTitle,
+          by: {
+            key: $id,
+          }
+        },
+        passOnwardsAs: "title"
+      )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: {
+            status: draft,
+            authorID: $authorID,
+            categoryIDs: $categoryIDs,
+            contentAs: {
+              html: $contentSource
+            },
+            excerpt: $excerpt
+            featuredImageID: $featuredImageID,
+            tagsBy: {
+              ids: $tagIDs
+            },
+            title: $title
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "postInput")
+}
 
-      # Fields to be duplicated
-      author {
-        id
-      }
-      categories {
-        id
-      }
-      contentSource
-      excerpt
-      featuredImage {
-        id
-      }
-      tags {
-        id
-      }
-      title
+mutation DuplicatePosts
+  @depends(on: "GeneratePostInputData")
+{
+  createdPostIDs: _echo(value: $postInput)
+    # For each entry: Create a new post
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      # The result is the list of IDs of the created posts
+      @applyField(
+        name: "createPost"
+        arguments: {
+          input: $input
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createdPostIDs")
+}
+
+query RetrieveCreatedPosts
+  @depends(on: "DuplicatePosts")
+{
+  posts(
+    filter: {
+      ids: $createdPostIDs,
+      status: [draft]
     }
+  ) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author {
+      id
+    }
+    categories {
+      id
+    }
+    contentSource
+    excerpt
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+    title
   }
 }
 ```
