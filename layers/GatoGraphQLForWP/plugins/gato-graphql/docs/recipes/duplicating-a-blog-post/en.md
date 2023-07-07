@@ -569,7 +569,11 @@ The following approach deals with this problem.
 
 ## Duplicating the post: Third approach
 
-Another solution is to use global field `_echo` to initialize the dynamic variable with an empty value:
+We can execute an additional operation at the beginning to initialize each of the dynamic variables with a `null` or empty value (via global field `_echo`).
+
+Then, each dynamic variable will always be exported, at least once. When the field value is not empty, then it will be exported again, and this second value will override the first one.
+
+In this query, dynamic variable `$tagSlugs` is initialized with an empty array, and will then be exported again if the post has slugs:
 
 ```graphql
 query InitializeDynamicVariables {
@@ -589,8 +593,6 @@ query ExportData($postId: ID!)
   }
 }
 ```
-
-Now, dynamic variable `$tagSlugs` will always be exported at least once. When the post has tags, then it will be exported again, and this second value will override the first one.
 
 <div class="doc-highlight" markdown=1>
 
