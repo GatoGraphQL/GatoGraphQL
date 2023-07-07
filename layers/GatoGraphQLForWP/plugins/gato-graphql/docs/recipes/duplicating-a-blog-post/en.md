@@ -577,8 +577,7 @@ In this query, dynamic variable `$tagSlugs` is initialized with an empty array, 
 
 ```graphql
 query InitializeDynamicVariables {
-  tagSlugs: _echo(value: [])
-    @export(as: "tagSlugs")
+  tagSlugs: _echo(value: []) @export(as: "tagSlugs")
 }
 
 query ExportData($postId: ID!)
@@ -620,6 +619,98 @@ query {
 This solution is more comprehensive than the previous one, as it works to export any type of data (whether IDs or other).
 
 Adapting the GraphQL query, it now becomes:
+
+```graphql
+query InitializeDynamicVariables {
+  authorID: _echo(value: null) @export(as: "authorID")
+  categoryIDs: _echo(value: []) @export(as: "categoryIDs")
+  featuredImageID: _echo(value: null) @export(as: "featuredImageID")
+  tagIDs: _echo(value: []) @export(as: "tagIDs")}
+
+query GetPostAndExportData($postId: ID!)
+  @depends(on: "InitializeDynamicVariables")
+{
+  post(by: { id : $postId }) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author {
+      id @export(as: "authorID")
+    }
+    categories {
+      id @export(as: "categoryIDs", type: LIST)
+    }
+    contentSource @export(as: "contentSource")
+    excerpt @export(as: "excerpt")
+    featuredImage {
+      id @export(as: "featuredImageID")
+    }
+    tags {
+      id @export(as: "tagIDs", type: LIST)
+    }
+    title @export(as: "title")
+  }
+}
+
+mutation DuplicatePost
+  @depends(on: "GetPostAndExportData")
+{
+  createPost(input: {
+    status: draft,
+    authorID: $authorID,
+    categoryIDs: $categoryIDs,
+    contentAs: {
+      html: $contentSource
+    },
+    excerpt: $excerpt
+    featuredImageID: $featuredImageID,
+    tagsBy: {
+      ids: $tagIDs
+    },
+    title: $title
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
+
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      contentSource
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
+    }
+  }
+}
+```
+
+## Duplicating the post: Consolidated approach
+
+We use the previous approach, and in addition add directives `@remove` (from the **Field Response Removal** extension) and `@configureWarningsOnExportingDuplicateVariable` to remove unneeded elements from the GraphQL response:
 
 ```graphql
 query InitializeDynamicVariables {
@@ -726,9 +817,9 @@ mutation DuplicatePost
 
 🔥 **Tips:**
 
-- Directive `@remove` (from the **Field Response Removal** extension) is added to the fields initializing the dynamic variables as to remove them from the GraphQL response, as we are not really interested in its value (it's a helper field, useful during the query resolution only)
+- We are not interested in the values for the fields in `InitializeDynamicVariables` (these are helper fields only), hence we add `@remove` to them to have them removed from the GraphQL response
 
-- Directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` is added to the operation to skip printing a warning (raised whenever some dynamic variable is exported more than once) in the GraphQL response:
+- We can add directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation to skip printing the following warning (raised whenever some dynamic variable is exported more than once):
 
 ```json
 {
