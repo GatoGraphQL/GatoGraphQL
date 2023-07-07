@@ -358,11 +358,9 @@ As dynamic variable `$featuredImageID` will then not exist, the response will gi
 
 There are two solutions.
 
-### 1. Exporting the connection value (valid for IDs)
+### 1. Exporting the connection value (valid for IDs only)
 
-Connection fields also store a value in Gato GraphQL. When first resolved, these fields will contain the ID(s) of the resources they point to: either the ID of the linked resource, or an array with IDs of the linked resources.
-
-(Only later on, when the connection is resolved, will the ID(s) be replaced with the actual resource object(s).)
+Connection fields also store a value in Gato GraphQL. When first resolved, these fields will contain the ID(s) of the resource(s) they point to (either the ID of the linked resource, or an array with IDs of the linked resources). Only later on, when the connection is resolved, will the ID(s) be replaced with the actual resource object(s).
 
 For instance, in the following query:
 
@@ -379,7 +377,7 @@ For instance, in the following query:
 }
 ```
 
-...field `featuredImage` will initially contain value `362`, and the value of field `tags` is the array `[12, 7]`.
+...field `featuredImage` will initially contain `362` (that's the featured image's ID), and field `tags` will contain array `[12, 7]` (those are the tag IDs).
 
 When the value to export is an ID (such as `$featuredImageID`) or array of IDs (such as `$tagIDs`), we can benefit from this characteristic and already export the ID(s) in the connection field.
 
@@ -414,6 +412,11 @@ Instead of doing this:
 ```
 
 _(Notice that argument `type: LIST` was removed when exporting `$tagIDs`, as the connection field is already a list.)_
+
+Now, these dynamic variables will always be exported, with value:
+
+- `null` for `$featuredImageID` when the post has no featured image
+- the empty array `[]` for `$tagIDs` when the post has no tags
 
 Adapting the GraphQL query:
 
@@ -497,7 +500,7 @@ mutation DuplicatePost
 }
 ```
 
-...the response now works properly, providing `null` as `$featuredImageID` and `[]` as tags:
+...the response now works properly:
 
 ```json
 {
