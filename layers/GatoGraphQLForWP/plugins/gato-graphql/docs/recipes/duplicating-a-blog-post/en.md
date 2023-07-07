@@ -418,7 +418,7 @@ Now, these dynamic variables will always be exported, with value:
 - `null` for `$featuredImageID` when the post has no featured image
 - the empty array `[]` for `$tagIDs` when the post has no tags
 
-Adapting the GraphQL query:
+Adapting the GraphQL query, it now becomes:
 
 ```graphql
 query GetPostAndExportData($postId: ID!) {
