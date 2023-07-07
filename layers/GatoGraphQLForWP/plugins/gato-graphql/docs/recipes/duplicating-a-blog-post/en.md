@@ -362,6 +362,38 @@ There are two solutions.
 
 ### 1. Exporting the connection value (valid for IDs)
 
+When the value to export is an ID (such as `$featuredImageID`) or IDs (such as `$tagIDs`), we can directly export the value in the connection field.
+
+Then, instead of doing this:
+
+```graphql
+{
+  post {
+    featuredImage {
+      id @export(as: "featuredImageID")
+    }
+    tags {
+      id @export(as: "tagIDs", type: LIST)
+    }
+  }
+}
+```
+
+...we can do this:
+
+```graphql
+{
+  post {
+    featuredImage @export(as: "featuredImageID") {
+      id 
+    }
+    tags @export(as: "tagIDs") {
+      id
+    }
+  }
+}
+```
+
 ### 2. Initializing the dynamic variable with an empty value
 
 ## Duplicating meta
