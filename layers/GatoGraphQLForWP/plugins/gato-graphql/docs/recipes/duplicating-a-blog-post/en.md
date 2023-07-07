@@ -81,7 +81,7 @@ Executing the query (passing the `$postId` variable), the response may be:
 
 Notice that some fields are meant to be duplicated (including the author, title, and content), while others are not (such as the id, slug and creation date).
 
-## Duplicating the post
+## Duplicating the post: First approach
 
 With the **Multiple Query Execution** extension, we are able to export the post's data items, and inject them again into another `query` or `mutation` in the same GraphQL document.
 
@@ -319,7 +319,7 @@ query CountMutatedResults @depends(on: "MutateData") {
 
 </div>
 
-## Duplicating a post with empty fields
+---
 
 The query above will return an error when a connection field is empty, as the dynamic variable will not be exported.
 
@@ -356,9 +356,9 @@ As dynamic variable `$featuredImageID` will then not exist, the response will gi
 }
 ```
 
-There are two solutions.
+The following two approaches deal with this problem.
 
-### 1. Exporting the connection value (valid for IDs only)
+## Duplicating the post: Second approach
 
 Connection fields also store a value in Gato GraphQL. When first resolved, these fields will contain the ID(s) of the resource(s) they point to (either the ID of the linked resource, or an array with IDs of the linked resources). Only later on, when the connection is resolved, will the ID(s) be replaced with the actual resource object(s).
 
@@ -551,7 +551,7 @@ mutation DuplicatePost
 }
 ```
 
-### 2. Initializing the dynamic variable with an empty value
+---
 
 The solution above only works for exporting IDs (as these are the values stored in the connection fields). It will not work for anything else, such as tag slugs:
 
@@ -565,7 +565,11 @@ The solution above only works for exporting IDs (as these are the values stored 
 }
 ```
 
-A different solution is to use global field `_echo` to initialize the dynamic variable with an empty value:
+The following approach deals with this problem.
+
+## Duplicating the post: Third approach
+
+Another solution is to use global field `_echo` to initialize the dynamic variable with an empty value:
 
 ```graphql
 query InitializeDynamicVariables {
