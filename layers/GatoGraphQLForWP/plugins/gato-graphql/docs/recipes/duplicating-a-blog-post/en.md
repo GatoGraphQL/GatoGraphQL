@@ -171,6 +171,73 @@ mutation DuplicatePost
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+With **Multiple Query Execution** we can [execute complex functionality within a single request](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/), and better organize the logic by splitting the GraphQL document into a series a logical/atomic units:
+
+- There is no limit in how many operations can be added to the pipeline
+- Any operation can declare more than one dependency:
+
+```graphql
+query SomeQuery @depends(on: ["SomePreviousOp", "AnotherPreviousOp"]) {
+  # ...
+}
+```
+
+- Any operation can depend on another operation, which itself depends on another operation, and so on:
+
+```graphql
+query ExecuteFirst
+  # ...
+}
+query ExecuteSecond @depends(on: ["ExecuteFirst"]) {
+  # ...
+}
+query ExecuteThird @depends(on: ["ExecuteSecond"]) {
+  # ...
+}
+```
+
+- We can execute any of the operations in the document:
+  - `?operationName=ExecuteThird` executes `ExecuteFirst` > `ExecuteSecond` > `ExecuteThird`
+  - `?operationName=ExecuteSecond` executes `ExecuteFirst` > `ExecuteSecond`
+  - `?operationName=ExecuteFirst` executes `ExecuteFirst`
+
+- When `@depends` receives only one operation, it can receive a `String` (instead of `[String]`):
+
+```graphql
+query ExecuteFirst
+  # ...
+}
+query ExecuteSecond @depends(on: "ExecuteFirst") {
+  # ...
+}
+```
+
+- Both `query` and `mutation` operations can depend on each other:
+
+```graphql
+query GetAndExportData
+  # ...
+}
+mutation MutateData @depends(on: "GetAndExportData") {
+  # ...
+}
+query CountMutatedResults @depends(on: "MutateData") {
+  # ...
+}
+```
+
+- [Dynamic variables](https://gatographql.com/guides/augment/dynamic-variables/) do not need to be declared in the operation
+- Via input `@export(type:)` we can select the output of the data exported into the dynamic variable:
+  - `SINGLE` (default): A single field value
+  - `LIST`: An array containing the field value of multiple resources
+  - `DICTIONARY`: A dictionary containing the field value of multiple resources, with key: `${resource ID}` and value: `${field value}`
+
+</div>
+
 In the response, we can visualize that the fields of the new post are indeed the same:
 
 ```json
@@ -251,73 +318,6 @@ In the response, we can visualize that the fields of the new post are indeed the
   }
 }
 ```
-
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-With **Multiple Query Execution** we can [execute complex functionality within a single request](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/), and better organize the logic by splitting the GraphQL document into a series a logical/atomic units:
-
-- There is no limit in how many operations can be added to the pipeline
-- Any operation can declare more than one dependency:
-
-```graphql
-query SomeQuery @depends(on: ["SomePreviousOp", "AnotherPreviousOp"]) {
-  # ...
-}
-```
-
-- Any operation can depend on another operation, which itself depends on another operation, and so on:
-
-```graphql
-query ExecuteFirst
-  # ...
-}
-query ExecuteSecond @depends(on: ["ExecuteFirst"]) {
-  # ...
-}
-query ExecuteThird @depends(on: ["ExecuteSecond"]) {
-  # ...
-}
-```
-
-- We can execute any of the operations in the document:
-  - `?operationName=ExecuteThird` executes `ExecuteFirst` > `ExecuteSecond` > `ExecuteThird`
-  - `?operationName=ExecuteSecond` executes `ExecuteFirst` > `ExecuteSecond`
-  - `?operationName=ExecuteFirst` executes `ExecuteFirst`
-
-- When `@depends` receives only one operation, it can receive a `String` (instead of `[String]`):
-
-```graphql
-query ExecuteFirst
-  # ...
-}
-query ExecuteSecond @depends(on: "ExecuteFirst") {
-  # ...
-}
-```
-
-- Both `query` and `mutation` operations can depend on each other:
-
-```graphql
-query GetAndExportData
-  # ...
-}
-mutation MutateData @depends(on: "GetAndExportData") {
-  # ...
-}
-query CountMutatedResults @depends(on: "MutateData") {
-  # ...
-}
-```
-
-- [Dynamic variables](https://gatographql.com/guides/augment/dynamic-variables/) do not need to be declared in the operation
-- Via input `@export(type:)` we can select the output of the data exported into the dynamic variable:
-  - `SINGLE` (default): A single field value
-  - `LIST`: An array containing the field value of multiple resources
-  - `DICTIONARY`: A dictionary containing the field value of multiple resources, with key: `${resource ID}` and value: `${field value}`
-
-</div>
 
 ---
 
