@@ -497,7 +497,7 @@ The first 4 plugins are needed to produce the PoP API, and the 5th plugin (pop-e
 
 > Note: this way to install PoP is temporary. We are currently introducing Composer to the codebase, which will provide a more convenient way to install PoP. It should be ready sometime in March 2019.
 
-That's it. You can then access PoP's API by adding parameter `output=json` to any URL on the site: https://yoursite.com/?output=json.
+That's it. You can then access PoP's API by adding parameter `output=json` to any URL on the site: https://mysite.com/?output=json.
 
 ![If adding parameter output=json to your site produces a JSON response, then you got it!](https://uploads.getpop.org/wp-content/uploads/2018/12/api-json-response.png?)
 

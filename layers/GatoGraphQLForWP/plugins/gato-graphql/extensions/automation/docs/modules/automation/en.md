@@ -254,7 +254,7 @@ Then, we schedule the WP-Cron event, either via PHP:
   [
     'daily-stats-by-email-number-of-comments',
     [
-      'to' => ['admin@yoursite.com']
+      'to' => ['admin@mysite.com']
     ],
     'SendDailyStatsByEmailNumberOfComments',
     1 // This is the admin user's ID
@@ -265,7 +265,7 @@ Then, we schedule the WP-Cron event, either via PHP:
 Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 
 - Hook name: `gato_graphql__execute_persisted_query`
-- Arguments: `["daily-stats-by-email-number-of-comments",{"to":["admin@yoursite.com"]},"SendDailyStatsByEmailNumberOfComments",1]`
+- Arguments: `["daily-stats-by-email-number-of-comments",{"to":["admin@mysite.com"]},"SendDailyStatsByEmailNumberOfComments",1]`
 - Recurrence: Once Daily
 
 ![New entry in WP-Crontrol](../../images/wp-crontrol-entry.png "New entry in WP-Crontrol")

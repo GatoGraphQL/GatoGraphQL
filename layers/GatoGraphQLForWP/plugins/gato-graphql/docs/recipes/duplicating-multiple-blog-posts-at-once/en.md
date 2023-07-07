@@ -217,4 +217,4 @@ Below is the detailed analysis of how the query works.
 
 ### ...
 
-https://yoursite.com/graphql/mutations-nested-return-entity/
+https://mysite.com/graphql/mutations-nested-return-entity/
