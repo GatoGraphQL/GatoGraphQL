@@ -83,9 +83,13 @@ Notice that some fields are meant to be duplicated (including the author, title,
 
 ## Duplicating the post
 
-With the **Multiple Query Execution** extension, we are able to export the post's data items, and inject them again into another query in the same GraphQL document.
+With the **Multiple Query Execution** extension, we are able to export the post's data items, and inject them again into another `query` or `mutation` in the same GraphQL document.
 
-This query will first retrieve and export the post's data via `GetPostAndExportData`, and inject these as input into the `createPost` mutation in `DuplicatePost`:
+The following query creates a pipeline of two operations in the GraphQL document (`GetPostAndExportData` and `DuplicatePost`), which can share data with each other:
+
+- `DuplicatePost` indicates to execute `GetPostAndExportData` first, via directive `@depends`
+- `GetPostAndExportData` exports data via directive `@export` into dynamic variables
+- `DuplicatePost` then reads the dynamic variables, and inputs them into the `createPost` mutation
 
 ```graphql
 query GetPostAndExportData($postId: ID!) {
@@ -252,13 +256,7 @@ In the response, we can visualize that the fields of the new post are indeed the
 
 🔥 **Tips:**
 
-The query above creates a pipeline of two operations in the GraphQL document -`GetPostAndExportData` and `DuplicatePost`- which can share data with each other:
-
-- `DuplicatePost` indicates to execute `GetPostAndExportData` first, via directive `@depends`
-- `GetPostAndExportData` exports data via directive `@export` into dynamic variable(s)
-- `DuplicatePost` can then read the dynamic variables, and input them into field or directive arguments
-
-Pipelines can help us manage the GraphQL document into a series a logical/atomic units, where:
+Multiple Query Execution pipelines can help us manage the GraphQL document into a series a logical/atomic units:
 
 - There is no limit in how many operations can be added to the pipeline
 - Any operation can declare more than one dependency (eg: `@depends(on: ["SomePreviousOp", "AnotherPreviousOp"]`))
@@ -266,11 +264,7 @@ Pipelines can help us manage the GraphQL document into a series a logical/atomic
 
 </div>
 
-Executing the mutation, the response confirms that fields to be duplicated contain the same data in the new post:
-
-```json
-
-```
+---
 
 <div class="doc-highlight" markdown=1>
 
