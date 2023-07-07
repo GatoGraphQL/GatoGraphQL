@@ -217,6 +217,8 @@ Below is the detailed analysis of how the query works.
 
 ### ...
 
+Tips: Publish it as private
+
 https://mysite.com/graphql/mutations-nested-return-entity/
 
 ![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'")
