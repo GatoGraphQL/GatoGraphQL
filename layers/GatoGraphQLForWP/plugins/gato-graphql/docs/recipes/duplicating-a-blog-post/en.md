@@ -708,9 +708,44 @@ mutation DuplicatePost
 }
 ```
 
+### Warnings in the third approach
+
+Whenever a dynamic variable is exported more than once, the GraphQL engine by default appends a warning to the GraphQL response:
+
+```json
+{
+  "extensions": {
+    "warnings": [
+      {
+        "message": "Dynamic variable with name 'tagSlugs' had already been set, had its value overridden",
+        "locations": [
+          {
+            "line": 22,
+            "column": 21
+          }
+        ]
+      }
+    ]
+  },
+  "data": {
+    // ...
+  }
+}
+```
+
+The consolidated approach next deals with this warning.
+
 ## Duplicating the post: Consolidated approach
 
-We use the previous approach, and in addition add directives `@remove` (from the **Field Response Removal** extension) and `@configureWarningsOnExportingDuplicateVariable` to remove unneeded elements from the GraphQL response:
+We use the GraphQL query from the previous approach, and optimize it by not printing the unneeded elements in the response:
+
+1. The values for the fields in `InitializeDynamicVariables`
+2. The "duplicate dynamic variable" warning
+
+We deal with these two elements by (respectively):
+
+- Adding the `@remove` directive to each of the fields to remove from the GraphQL response
+- Adding directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation, to skip raising the warning
 
 ```graphql
 query InitializeDynamicVariables {
@@ -813,33 +848,4 @@ mutation DuplicatePost
 }
 ```
 
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-- We are not interested in the values for the fields in `InitializeDynamicVariables` (these are helper fields only), hence we add `@remove` to them to have them removed from the GraphQL response
-
-- We can add directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation to skip printing the following warning (raised whenever some dynamic variable is exported more than once):
-
-```json
-{
-  "extensions": {
-    "warnings": [
-      {
-        "message": "Dynamic variable with name 'tagSlugs' had already been set, had its value overridden",
-        "locations": [
-          {
-            "line": 22,
-            "column": 21
-          }
-        ]
-      }
-    ]
-  },
-  "data": {
-    // ...
-  }
-}
-```
-
-</div>
+This is the consolidated GraphQL query to duplicate a post.
