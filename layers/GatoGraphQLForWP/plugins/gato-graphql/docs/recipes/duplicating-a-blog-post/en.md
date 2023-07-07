@@ -739,13 +739,13 @@ The consolidated approach next deals with this warning.
 
 We use the GraphQL query from the previous approach, and optimize it by:
 
-- Not printing the values for the fields in `InitializeDynamicVariables` in the GraphQL response
 - Not raising the "duplicate dynamic variable" warning
+- Not printing the values for the fields in `InitializeDynamicVariables` in the GraphQL response (as there's no need for them, they are just helper fields)
 
 We deal with these elements by (respectively):
 
-- Adding the `@remove` directive to each of the fields to remove (as there's no need for them, they are just helper fields)
 - Adding directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation, which disables raising the warning
+- Adding the `@remove` directive (from the **Field Response Removal** extension) to each of the fields to remove
 
 This is the consolidated GraphQL query to duplicate a post:
 
