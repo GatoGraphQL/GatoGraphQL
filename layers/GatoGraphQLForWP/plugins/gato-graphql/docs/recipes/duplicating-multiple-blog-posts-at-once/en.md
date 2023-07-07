@@ -4,33 +4,42 @@ We can extend the previous recipe, to duplicate multiple posts at once, with a s
 
 ## GraphQL query to duplicate multiple posts at once
 
-This GraphQL query duplicates the multiple posts retrieved via the provided `$numberItems` and `$pagination` variables:
+This GraphQL query duplicates the posts retrieved via the provided `$limit` and `$offset` variables:
 
 ```graphql
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  postAuthorID: _echo(value: null)
+  postAuthorID: _echo(value: {})
     @export(as: "postAuthorID")
     @remove
 
-  postCategoryIDs: _echo(value: [])
+  postCategoryIDs: _echo(value: {})
     @export(as: "postCategoryIDs")
     @remove
 
-  postFeaturedImageID: _echo(value: null)
+  postFeaturedImageID: _echo(value: {})
     @export(as: "postFeaturedImageID")
     @remove
 
-  postTagIDs: _echo(value: [])
+  postTagIDs: _echo(value: {})
     @export(as: "postTagIDs")
     @remove
 }
 
-query GetPostAndExportData($postId: ID!)
+query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
   @depends(on: "InitializeDynamicVariables")
 {
-  post(by: { id : $postId }) {
+  posts(
+    pagination: {
+      limit : $limit
+      offset: $offset
+    }
+    sort: {
+      by: ID,
+      order: ASC
+    }
+) {
     # Fields not to be duplicated
     id
     slug
@@ -44,20 +53,20 @@ query GetPostAndExportData($postId: ID!)
     categories @export(as: "postCategoryIDs", type: DICTIONARY) {
       id
     }
-    contentSource @export(as: "contentSource", type: DICTIONARY)
-    excerpt @export(as: "excerpt", type: DICTIONARY)
+    contentSource @export(as: "postContentSource", type: DICTIONARY)
+    excerpt @export(as: "postExcerpt", type: DICTIONARY)
     featuredImage @export(as: "postFeaturedImageID", type: DICTIONARY) {
       id
     }
     tags @export(as: "postTagIDs", type: DICTIONARY) {
       id
     }
-    title @export(as: "title", type: DICTIONARY)
+    title @export(as: "postTitle", type: DICTIONARY)
   }
 }
 
-mutation DuplicatePost
-  @depends(on: "GetPostAndExportData")
+mutation DuplicatePosts
+  @depends(on: "GetPostsAndExportData")
 {
   createPost(input: {
     status: draft,
