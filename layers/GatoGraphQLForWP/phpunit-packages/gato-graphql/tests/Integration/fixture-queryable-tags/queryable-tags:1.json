@@ -91,7 +91,7 @@
       {
         "__typename": "PostTag",
         "id": 12,
-        "name": "security"
+        "name": "Security"
       },
       {
         "__typename": "PostTag",
@@ -111,7 +111,7 @@
       {
         "__typename": "PostTag",
         "id": 8,
-        "name": "graphql"
+        "name": "GraphQL"
       },
       {
         "__typename": "PostTag",
@@ -121,7 +121,7 @@
       {
         "__typename": "PostTag",
         "id": 14,
-        "name": "also-never-used"
+        "name": "Also never used"
       },
       {
         "__typename": "PostTag",
@@ -137,13 +137,13 @@
     "postTagCount": 9,
     "postTagNames": [
       "wordpress",
-      "security",
+      "Security",
       "release",
       "plugin",
       "ideas",
-      "graphql",
+      "GraphQL",
       "features",
-      "also-never-used",
+      "Also never used",
       "advanced"
     ],
     "dummyTags": null,

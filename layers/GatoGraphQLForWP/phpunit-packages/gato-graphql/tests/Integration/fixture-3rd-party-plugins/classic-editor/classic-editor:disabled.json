@@ -49,6 +49,57 @@
                             "addLinkToFeaturedImage": false
                         },
                         "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/html",
+                        "attributes": {
+                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                        },
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/code",
+                        "attributes": {
+                            "content": "\nPluginApp::initializePlugin();\n\nPluginApp::getMainPluginManager()-&gt;register(new Plugin(\n\t__FILE__,\n\t$pluginVersion,\n\t$pluginName,\n\t$commitHash\n))-&gt;setup();\n"
+                        },
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/categories",
+                        "attributes": {
+                            "showHierarchy": true,
+                            "showPostCounts": true,
+                            "displayAsDropdown": false,
+                            "showOnlyTopLevel": false,
+                            "showEmpty": false
+                        },
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/embed",
+                        "attributes": {
+                            "url": "https:\/\/twitter.com\/WordPress\/status\/1666875287542300679?cxt=HHwWjoCw7cKP96EuAAAA",
+                            "type": "rich",
+                            "providerNameSlug": "twitter",
+                            "responsive": true,
+                            "allowResponsive": true,
+                            "previewable": true
+                        },
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/embed",
+                        "attributes": {
+                            "url": "https:\/\/wordpress.org\/about\/",
+                            "type": "wp-embed",
+                            "providerNameSlug": "wordpress-org",
+                            "align": "center",
+                            "caption": "Democratizing publishing",
+                            "allowResponsive": true,
+                            "responsive": false,
+                            "previewable": true
+                        },
+                        "innerBlocks": null
                     }
                 ]
             }

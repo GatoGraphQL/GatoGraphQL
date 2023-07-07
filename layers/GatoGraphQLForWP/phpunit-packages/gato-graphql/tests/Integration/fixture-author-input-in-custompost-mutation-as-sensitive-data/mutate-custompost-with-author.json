@@ -1,26 +1,13 @@
 {
-  "errors": [
-    {
-      "message": "You must have role 'contributor' to access field 'createPost' for type 'MutationRoot'",
-      "locations": [
-        {
-          "line": 2,
-          "column": 3
+  "data": {
+    "createPost": {
+      "status": "SUCCESS",
+      "errors": null,
+      "post": {
+        "author": {
+          "id": 3
         }
-      ],
-      "extensions": {
-        "path": [
-          "createPost(input: {authorID: 3, title: \"Some trashed new post\", status: trash}) { ... }",
-          "mutation CreatePostWithAuthor { ... }"
-        ],
-        "type": "MutationRoot",
-        "field": "createPost(input: {authorID: 3, title: \"Some trashed new post\", status: trash}) { ... }",
-        "id": "root",
-        "code": "PoPCMSSchema\/UserRolesAccessControl@e2"
       }
     }
-  ],
-  "data": {
-    "createPost": null
   }
 }

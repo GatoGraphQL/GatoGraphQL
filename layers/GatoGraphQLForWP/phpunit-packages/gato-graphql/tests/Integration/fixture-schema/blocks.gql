@@ -1,5 +1,5 @@
 {
-  posts(pagination: { limit: 5 }) {
+  posts(pagination: { limit: 6 }) {
     id
     title
     blocks {
@@ -335,6 +335,30 @@
       blockDataItems
       blockFlattenedDataItems
     }
+  }
+  
+  # This post contains blocks containing blocks containing blocks
+  singleLevelBlockPost: post(by: {id: 28}) {
+    id
+    title
+    blocks {
+      ...BlockData
+    }
+    blockDataItems
+    blockFlattenedDataItems
+  }
+
+  # This post contains blocks containing blocks containing blocks,
+  # and a last level with empty attributes (that must be returned)
+  # as {}, not as []
+  multiLevelBlockPost: post(by: {id: 40}) {
+    id
+    title
+    blocks {
+      ...BlockData
+    }
+    blockDataItems
+    blockFlattenedDataItems
   }
 }
 

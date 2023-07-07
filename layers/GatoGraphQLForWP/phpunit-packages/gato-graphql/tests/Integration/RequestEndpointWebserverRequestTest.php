@@ -133,7 +133,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                                     "name": "plugin"
                                 },
                                 {
-                                    "name": "graphql"
+                                    "name": "GraphQL"
                                 },
                                 {
                                     "name": "features"

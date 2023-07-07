@@ -29,7 +29,7 @@
                 "id": 12,
                 "metaValue": null,
                 "metaValues": null,
-                "name": "security",
+                "name": "Security",
                 "postCount": 1,
                 "posts": [
                     {
@@ -109,7 +109,7 @@
                 "id": 8,
                 "metaValue": null,
                 "metaValues": null,
-                "name": "graphql",
+                "name": "GraphQL",
                 "postCount": 1,
                 "posts": [
                     {
@@ -157,7 +157,7 @@
                 "id": 14,
                 "metaValue": null,
                 "metaValues": null,
-                "name": "also-never-used",
+                "name": "Also never used",
                 "postCount": 0,
                 "posts": [],
                 "slug": "also-never-used",
@@ -190,7 +190,7 @@
             },
             {
                 "id": 12,
-                "name": "security"
+                "name": "Security"
             },
             {
                 "id": 11,
@@ -206,7 +206,7 @@
             },
             {
                 "id": 8,
-                "name": "graphql"
+                "name": "GraphQL"
             },
             {
                 "id": 7,
@@ -225,7 +225,7 @@
                     "id": 12,
                     "metaValue": null,
                     "metaValues": null,
-                    "name": "security",
+                    "name": "Security",
                     "postCount": 1,
                     "posts": [
                         {
@@ -302,13 +302,13 @@
                 },
                 {
                     "id": 12,
-                    "name": "security"
+                    "name": "Security"
                 }
             ],
             "tagsBySortDESC": [
                 {
                     "id": 12,
-                    "name": "security"
+                    "name": "Security"
                 },
                 {
                     "id": 7,

@@ -665,40 +665,6 @@
                 "customPosts": [
                     {
                         "__typename": "GenericCustomPost",
-                        "id": 656,
-                        "title": "Dummy CPT with non-existing block",
-                        "tags": [
-                            {
-                                "__typename": "GenericTag",
-                                "id": 28,
-                                "name": "Tango"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 29,
-                                "name": "Hip Hop"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 658,
-                        "title": "Dummy CPT with no content",
-                        "tags": [
-                            {
-                                "__typename": "GenericTag",
-                                "id": 28,
-                                "name": "Tango"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 29,
-                                "name": "Hip Hop"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
                         "id": 634,
                         "title": "Recusandae vel deleniti est expedita dolores quasi",
                         "tags": [
@@ -718,6 +684,40 @@
                         "__typename": "GenericCustomPost",
                         "id": 654,
                         "title": "Dummy CPT with blocks",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 656,
+                        "title": "Dummy CPT with non-existing block",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 658,
+                        "title": "Dummy CPT with no content",
                         "tags": [
                             {
                                 "__typename": "GenericTag",
@@ -1220,6 +1220,13 @@
         ],
         "customPosts": [
             {
+                "__typename": "Post",
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!",
+                "customPostType": "post",
+                "tags": []
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 649,
                 "title": "Nulla numquam totam eaque",
@@ -1713,7 +1720,7 @@
                     {
                         "__typename": "PostTag",
                         "id": 12,
-                        "name": "security"
+                        "name": "Security"
                     },
                     {
                         "__typename": "PostTag",
@@ -1794,7 +1801,7 @@
                     {
                         "__typename": "PostTag",
                         "id": 8,
-                        "name": "graphql"
+                        "name": "GraphQL"
                     },
                     {
                         "__typename": "PostTag",

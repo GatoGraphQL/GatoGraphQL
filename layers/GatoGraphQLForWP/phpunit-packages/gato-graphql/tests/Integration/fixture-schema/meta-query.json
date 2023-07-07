@@ -63,6 +63,11 @@
                 "id": 28,
                 "title": "HTTP caching improves performance",
                 "featuredImage": null
+            },
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!",
+                "featuredImage": null
             }
         ],
         "spanishLocaleUsers": [

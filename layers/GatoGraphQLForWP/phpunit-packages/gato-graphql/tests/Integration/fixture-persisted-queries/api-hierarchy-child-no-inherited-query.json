@@ -2,6 +2,12 @@
     "data": {
         "posts": [
             {
+                "id": 40,
+                "slug": "single-post-with-a-lot-of-blocks",
+                "title": "Welcome to a single post full of blocks!",
+                "author": null
+            },
+            {
                 "id": 28,
                 "slug": "http-caching-improves-performance",
                 "title": "HTTP caching improves performance",
@@ -15,16 +21,6 @@
                 "id": 25,
                 "slug": "public-or-private-api-mode-for-extra-security",
                 "title": "Public or Private API mode, for extra security",
-                "author": {
-                    "id": 2,
-                    "username": "blogger",
-                    "slug": "blogger"
-                }
-            },
-            {
-                "id": 23,
-                "slug": "graphql-or-rest-you-can-have-both",
-                "title": "GraphQL or REST? Why not both?",
                 "author": {
                     "id": 2,
                     "username": "blogger",
