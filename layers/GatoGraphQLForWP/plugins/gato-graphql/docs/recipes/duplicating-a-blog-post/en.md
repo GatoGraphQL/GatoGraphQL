@@ -737,18 +737,22 @@ The consolidated approach next deals with this warning.
 
 ## Duplicating the post: Consolidated approach
 
-We use the GraphQL query from the previous approach, and optimize it by not printing the unneeded elements in the response:
+We use the GraphQL query from the previous approach, and optimize it by:
 
-1. The values for the fields in `InitializeDynamicVariables`
-2. The "duplicate dynamic variable" warning
+- Not printing the values for the fields in `InitializeDynamicVariables` in the GraphQL response
+- Not raising the "duplicate dynamic variable" warning
 
-We deal with these two elements by (respectively):
+We deal with these elements by (respectively):
 
-- Adding the `@remove` directive to each of the fields to remove from the GraphQL response
-- Adding directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation, to skip raising the warning
+- Adding the `@remove` directive to each of the fields to remove (as there's no need for them, they are just helper fields)
+- Adding directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation, which disables raising the warning
+
+This is the consolidated GraphQL query to duplicate a post:
 
 ```graphql
-query InitializeDynamicVariables {
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
   authorID: _echo(value: null)
     @export(as: "authorID")
     @remove
@@ -768,7 +772,6 @@ query InitializeDynamicVariables {
 
 query GetPostAndExportData($postId: ID!)
   @depends(on: "InitializeDynamicVariables")
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   post(by: { id : $postId }) {
     # Fields not to be duplicated
@@ -847,5 +850,3 @@ mutation DuplicatePost
   }
 }
 ```
-
-This is the consolidated GraphQL query to duplicate a post.
