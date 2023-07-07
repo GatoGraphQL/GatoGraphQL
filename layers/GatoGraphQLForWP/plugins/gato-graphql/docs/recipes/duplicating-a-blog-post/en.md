@@ -579,12 +579,10 @@ In this query, dynamic variable `$tagSlugs` is initialized with an empty array, 
 query InitializeDynamicVariables {
   tagSlugs: _echo(value: [])
     @export(as: "tagSlugs")
-    @remove
 }
 
 query ExportData($postId: ID!)
   @depends(on: "InitializeDynamicVariables")
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   post {
     tags {
@@ -614,31 +612,6 @@ query {
   arrayOfInt: _echo(value: [1, 3, 5])
   arrayOfArraysOfBool: _echo(value: [[true, false], [false]])
   arrayOfMixed: _echo(value: [1, true, "string", [1, 3, 5], {key: "value"}])
-}
-```
-
-- Directive `@remove` (from the **Field Response Removal** extension) is added to the field `tagSlugs` to remove it from the GraphQL response, as we are not really interested in its value (it's a helper field, useful during the query resolution only)
-
-- Directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` is added to the operation to skip printing a warning (raised whenever some dynamic variable is exported more than once) in the GraphQL response:
-
-```json
-{
-  "extensions": {
-    "warnings": [
-      {
-        "message": "Dynamic variable with name 'tagSlugs' had already been set, had its value overridden",
-        "locations": [
-          {
-            "line": 22,
-            "column": 21
-          }
-        ]
-      }
-    ]
-  },
-  "data": {
-    // ...
-  }
 }
 ```
 
@@ -748,3 +721,34 @@ mutation DuplicatePost
   }
 }
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+- Directive `@remove` (from the **Field Response Removal** extension) is added to the fields initializing the dynamic variables as to remove them from the GraphQL response, as we are not really interested in its value (it's a helper field, useful during the query resolution only)
+
+- Directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` is added to the operation to skip printing a warning (raised whenever some dynamic variable is exported more than once) in the GraphQL response:
+
+```json
+{
+  "extensions": {
+    "warnings": [
+      {
+        "message": "Dynamic variable with name 'tagSlugs' had already been set, had its value overridden",
+        "locations": [
+          {
+            "line": 22,
+            "column": 21
+          }
+        ]
+      }
+    ]
+  },
+  "data": {
+    // ...
+  }
+}
+```
+
+</div>
