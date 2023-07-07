@@ -1,8 +1,112 @@
 # Duplicating a blog post
 
-You can think of GraphQL as a Swiss Army Knife for dealing with data in a WordPress site, as it allows to retrieve, manipulate and store again any piece of data, in any desired way.
+You can think of GraphQL as a Swiss Army Knife for dealing with data in a WordPress site, as it allows to retrieve, manipulate and store again any piece of data, in any desired way. Duplicating a post is an example of this ability.
 
-An example is the ability to duplicate a blog post. Let's explore how to do this.
+This GraphQL query duplicates the post indicated by variable `$postId`:
+
+```graphql
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  authorID: _echo(value: null)
+    @export(as: "authorID")
+    @remove
+
+  categoryIDs: _echo(value: [])
+    @export(as: "categoryIDs")
+    @remove
+
+  featuredImageID: _echo(value: null)
+    @export(as: "featuredImageID")
+    @remove
+
+  tagIDs: _echo(value: [])
+    @export(as: "tagIDs")
+    @remove
+}
+
+query GetPostAndExportData($postId: ID!)
+  @depends(on: "InitializeDynamicVariables")
+{
+  post(by: { id : $postId }) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author {
+      id @export(as: "authorID")
+    }
+    categories {
+      id @export(as: "categoryIDs", type: LIST)
+    }
+    contentSource @export(as: "contentSource")
+    excerpt @export(as: "excerpt")
+    featuredImage {
+      id @export(as: "featuredImageID")
+    }
+    tags {
+      id @export(as: "tagIDs", type: LIST)
+    }
+    title @export(as: "title")
+  }
+}
+
+mutation DuplicatePost
+  @depends(on: "GetPostAndExportData")
+{
+  createPost(input: {
+    status: draft,
+    authorID: $authorID,
+    categoryIDs: $categoryIDs,
+    contentAs: {
+      html: $contentSource
+    },
+    excerpt: $excerpt
+    featuredImageID: $featuredImageID,
+    tagsBy: {
+      ids: $tagIDs
+    },
+    title: $title
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
+
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      contentSource
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
+    }
+  }
+}
+```
+
+Below is a thorough analysis of how it works.
 
 ## Retrieving the post data
 
