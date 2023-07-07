@@ -252,7 +252,17 @@ In the response, we can visualize that the fields of the new post are indeed the
 
 🔥 **Tips:**
 
-Talk on `@export` and `@depends`
+The query above creates a pipeline of two operations in the GraphQL document -`GetPostAndExportData` and `DuplicatePost`- which can share data with each other:
+
+- `DuplicatePost` indicates to execute `GetPostAndExportData` first, via directive `@depends`
+- `GetPostAndExportData` exports data via directive `@export` into dynamic variable(s)
+- `DuplicatePost` can then read the dynamic variables, and input them into field or directive arguments
+
+Pipelines can help us manage the GraphQL document into a series a logical/atomic units, where:
+
+- There is no limit in how many operations can be added to the pipeline
+- Any operation can declare more than one dependency (eg: `@depends(on: ["SomePreviousOp", "AnotherPreviousOp"]`))
+- Both `query` and `mutation` operations can depend on each other
 
 </div>
 
