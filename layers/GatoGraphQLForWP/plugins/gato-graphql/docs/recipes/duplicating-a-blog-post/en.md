@@ -592,7 +592,9 @@ Now, dynamic variable `$tagSlugs` will always be exported at least once. When th
 
 🔥 **Tips:**
 
-Exporting a dynamic variable twice or more will produce a warning in the GraphQL response:
+- Directive `@remove` (from the **Field Response Removal** extension) is added to the field `tagSlugs` to remove it from the GraphQL response, as we are not really interested in its value (it's a helper field, useful during the query resolution only)
+
+- Directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` is added to the operation to skip printing a warning (raised whenever some dynamic variable is exported more than once) in the GraphQL response:
 
 ```json
 {
@@ -615,7 +617,7 @@ Exporting a dynamic variable twice or more will produce a warning in the GraphQL
 }
 ```
 
-To avoid this warning, we must add directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation.
+
 
 </div>
 
