@@ -362,9 +362,30 @@ There are two solutions.
 
 ### 1. Exporting the connection value (valid for IDs)
 
-When the value to export is an ID (such as `$featuredImageID`) or IDs (such as `$tagIDs`), we can directly export the value in the connection field.
+Connection fields also store a value in Gato GraphQL. When first resolved, these fields will contain the ID(s) of the resources they point to: either the ID of the linked resource, or an array with IDs of the linked resources.
 
-Then, instead of doing this:
+(Only later on, when the connection is resolved, will the ID(s) be replaced with the actual resource object(s).)
+
+For instance, in the following query:
+
+```graphql
+{
+  post {
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+  }
+}
+```
+
+...field `featuredImage` will initially contain value `362`, and the value of field `tags` is the array `[12, 7]`.
+
+When the value to export is an ID (such as `$featuredImageID`) or array of IDs (such as `$tagIDs`), we can benefit from this characteristic and already export the ID(s) in the connection field.
+
+Instead of doing this:
 
 ```graphql
 {
@@ -393,6 +414,8 @@ Then, instead of doing this:
   }
 }
 ```
+
+Notice that argument `type: LIST` was removed when exporting `$tagIDs`, as the connection field is already a list.
 
 ### 2. Initializing the dynamic variable with an empty value
 
