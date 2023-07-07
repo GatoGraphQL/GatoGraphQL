@@ -64,6 +64,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return true;
     }
 
+    protected function getDocsFolder(): string
+    {
+        return '';
+    }
+
     /**
      * @param array{0:string,1:string,2?:string[],3?:string[]} $entry
      */
