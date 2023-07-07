@@ -553,7 +553,7 @@ mutation DuplicatePost
 
 ### 2. Initializing the dynamic variable with an empty value
 
-The solution above only works for IDs (as these are the values stored in the connection fields), but will not work to export the tag slugs:
+The solution above only works for exporting IDs (as these are the values stored in the connection fields). It will not work for anything else, such as tag slugs:
 
 ```graphql
 {
@@ -565,11 +565,13 @@ The solution above only works for IDs (as these are the values stored in the con
 }
 ```
 
-A different solution is to use global field `_echo` from **PHP Functions via Schema** to initialize the dynamic variables with an empty value:
+A different solution is to use global field `_echo` from **PHP Functions via Schema** to initialize the dynamic variable with an empty value:
 
 ```graphql
 query InitializeDynamicVariables {
-  tagSlugs: _echo(value: []) @export(as: "tagSlugs")
+  tagSlugs: _echo(value: [])
+    @export(as: "tagSlugs")
+    @remove
 }
 
 query ExportData($postId: ID!)
