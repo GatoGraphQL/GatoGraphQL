@@ -30,7 +30,7 @@ query InitializeDynamicVariables
 query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
   @depends(on: "InitializeDynamicVariables")
 {
-  posts(
+  postsToDuplicate: posts(
     pagination: {
       limit : $limit
       offset: $offset
@@ -189,7 +189,7 @@ mutation DuplicatePosts
 query RetrieveCreatedPosts
   @depends(on: "DuplicatePosts")
 {
-  posts(
+  createdPosts: posts(
     filter: {
       ids: $createdPostIDs,
       status: [draft]
