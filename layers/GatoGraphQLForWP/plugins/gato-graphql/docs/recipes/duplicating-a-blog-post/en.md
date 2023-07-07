@@ -259,8 +259,57 @@ In the response, we can visualize that the fields of the new post are indeed the
 Multiple Query Execution pipelines can help us manage the GraphQL document into a series a logical/atomic units:
 
 - There is no limit in how many operations can be added to the pipeline
-- Any operation can declare more than one dependency (eg: `@depends(on: ["SomePreviousOp", "AnotherPreviousOp"]`))
-- Both `query` and `mutation` operations can depend on each other
+- Any operation can declare more than one dependency:
+
+```graphql
+query SomeQuery @depends(on: ["SomePreviousOp", "AnotherPreviousOp"]) {
+  # ...
+}
+```
+
+- Any operation can depend on another operation, which itself depends on another operation, and so on:
+
+```graphql
+query ExecuteFirst
+  # ...
+}
+query ExecuteSecond @depends(on: ["ExecuteFirst"]) {
+  # ...
+}
+query ExecuteThird @depends(on: ["ExecuteSecond"]) {
+  # ...
+}
+```
+
+- We can execute any of the operations in the document:
+  - `?operationName=ExecuteThird` executes `ExecuteFirst` > `ExecuteSecond` > `ExecuteThird`
+  - `?operationName=ExecuteSecond` executes `ExecuteFirst` > `ExecuteSecond`
+  - `?operationName=ExecuteFirst` executes `ExecuteFirst`
+
+- When `@depends` receives only one operation, it can receive a `String` (instead of `[String]`):
+
+```graphql
+query ExecuteFirst
+  # ...
+}
+query ExecuteSecond @depends(on: "ExecuteFirst") {
+  # ...
+}
+```
+
+- Both `query` and `mutation` operations can depend on each other:
+
+```graphql
+query GetAndExportData
+  # ...
+}
+mutation MutateData @depends(on: "GetAndExportData") {
+  # ...
+}
+query CountMutatedResults @depends(on: "MutateData") {
+  # ...
+}
+```
 
 </div>
 
