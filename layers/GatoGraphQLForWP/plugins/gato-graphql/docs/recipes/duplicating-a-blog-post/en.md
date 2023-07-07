@@ -2,6 +2,8 @@
 
 You can think of GraphQL as a Swiss Army Knife for dealing with data in a WordPress site, as it allows to retrieve, manipulate and store again any piece of data, in any desired way. Duplicating a post is an example of this ability.
 
+## GraphQL query to duplicate blog post
+
 This GraphQL query duplicates the post indicated by variable `$postId`:
 
 ```graphql
@@ -106,9 +108,11 @@ mutation DuplicatePost
 }
 ```
 
-Below is a thorough analysis of how it works.
+## Step by step: creating the GraphQL query
 
-## Retrieving the post data
+Below is the detailed analysis of how the query works.
+
+### Retrieving the post data
 
 This GraphQL query retrieves the fundamental data for a post:
 
@@ -185,7 +189,7 @@ Executing the query (passing the `$postId` variable), the response may be:
 
 Notice that some fields are meant to be duplicated (including the author, title, and content), while others are not (such as the id, slug and creation date).
 
-## Duplicating the post: First approach
+### Duplicating the post: First approach
 
 With the **Multiple Query Execution** extension, we are able to export the post's data items, and inject them again into another `query` or `mutation` in the same GraphQL document.
 
@@ -462,7 +466,7 @@ As dynamic variable `$featuredImageID` will then not exist, the response will gi
 
 The following two approaches deal with this problem.
 
-## Duplicating the post: Second approach
+### Duplicating the post: Second approach
 
 Connection fields also store a value in Gato GraphQL. When first resolved, these fields will contain the ID(s) of the resource(s) they point to (either the ID of the linked resource, or an array with IDs of the linked resources). Only later on, when the connection is resolved, will the ID(s) be replaced with the actual resource object(s).
 
@@ -671,7 +675,7 @@ The solution above only works for exporting IDs (as these are the values stored 
 
 The following approach deals with this problem.
 
-## Duplicating the post: Third approach
+### Duplicating the post: Third approach
 
 We can execute an additional operation at the beginning to initialize each of the dynamic variables with a `null` or empty value (via global field `_echo` from the **PHP Functions via Schema** extension).
 
@@ -839,7 +843,7 @@ Whenever a dynamic variable is exported more than once, the GraphQL engine by de
 
 The consolidated approach next deals with this warning.
 
-## Duplicating the post: Consolidated approach
+### Duplicating the post: Consolidated approach
 
 We use the GraphQL query from the previous approach, and optimize it by:
 
