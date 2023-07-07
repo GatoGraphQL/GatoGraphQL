@@ -311,6 +311,11 @@ query CountMutatedResults @depends(on: "MutateData") {
 }
 ```
 
+- Via input `@export(type:)` we can select the output of the exported data:
+  - `SINGLE` (default): A single field value
+  - `LIST`: An array containing the field value of multiple resources
+  - `DICTIONARY`: A dictionary containing the field value of multiple resources, with key: `${resource ID}` and value: `${field value}`
+
 </div>
 
 ---
