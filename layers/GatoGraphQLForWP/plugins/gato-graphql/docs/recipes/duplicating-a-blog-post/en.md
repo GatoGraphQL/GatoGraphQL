@@ -321,9 +321,9 @@ query CountMutatedResults @depends(on: "MutateData") {
 
 ## Duplicating a post with empty fields
 
-The query above will return an error whenever a piece of data is not exported.
+The query above will return an error when a connection field is empty, as the dynamic variable will not be exported.
 
-For instance, passing variable `$postId` for a post without a featured image, field `featuredImage` will be `null`, and so `id @export(as: "featuredImageID")` will never be executed:
+For instance, when the post to duplicate does not have a featured image, field `featuredImage` will be `null`, and so `id @export(as: "featuredImageID")` will never be executed:
 
 ```graphql
 query GetPostAndExportData($postId: ID!) {
@@ -415,7 +415,140 @@ Instead of doing this:
 }
 ```
 
-Notice that argument `type: LIST` was removed when exporting `$tagIDs`, as the connection field is already a list.
+_(Notice that argument `type: LIST` was removed when exporting `$tagIDs`, as the connection field is already a list.)_
+
+Adapting the GraphQL query:
+
+```graphql
+query GetPostAndExportData($postId: ID!) {
+  post(by: { id : $postId }) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author @export(as: "authorID") {
+      id
+    }
+    categories @export(as: "categoryIDs") {
+      id
+    }
+    contentSource @export(as: "contentSource")
+    excerpt @export(as: "excerpt")
+    featuredImage @export(as: "featuredImageID") {
+      id 
+    }
+    tags @export(as: "tagIDs") {
+      id
+    }
+    title @export(as: "title")    
+  }
+}
+
+mutation DuplicatePost
+  @depends(on: "GetPostAndExportData")
+{
+  createPost(input: {
+    status: draft,
+    authorID: $authorID,
+    categoryIDs: $categoryIDs,
+    contentAs: {
+      html: $contentSource
+    },
+    excerpt: $excerpt
+    featuredImageID: $featuredImageID,
+    tagsBy: {
+      ids: $tagIDs
+    },
+    title: $title
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
+
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      contentSource
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
+    }
+  }
+}
+```
+
+...the response now works properly, providing `null` as `$featuredImageID` and `[]` as tags:
+
+```json
+{
+  "data": {
+    "post": {
+      "id": 23,
+      "slug": "graphql-or-rest-you-can-have-both",
+      "date": "2020-12-12T04:04:54+00:00",
+      "status": "publish",
+      "author": {
+        "id": 2
+      },
+      "categories": [
+        {
+          "id": 1
+        }
+      ],
+      "contentSource": "<!-- wp:heading -->\n<h2>Audio Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:audio -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3\"></audio></figure>\n<!-- /wp:audio -->\n\n<!-- wp:heading -->\n<h2>Video Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->\n\n<!-- wp:heading -->\n<h2>Custom HTML Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:html -->\n<strong>This is a HTML block.</strong>\n<!-- /wp:html -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Preformatted Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:preformatted -->\n<pre class=\"wp-block-preformatted\">This is some preformatted text. Preformatted text keeps your s p a c e s, tabs and<br>linebreaks as they are.</pre>\n<!-- /wp:preformatted -->",
+      "excerpt": "Audio Block Video Block Custom HTML Block This is a HTML block. Preformatted Block This is some preformatted text. Preformatted text keeps your s p a c e s, tabs andlinebreaks as they are.",
+      "featuredImage": null,
+      "tags": [],
+      "title": "GraphQL or REST? Why not both?"
+    },
+    "createPost": {
+      "status": "SUCCESS",
+      "errors": null,
+      "post": {
+        "id": 1209,
+        "slug": "graphql-or-rest-why-not-both",
+        "date": "2023-07-07T03:24:31+00:00",
+        "status": "draft",
+        "author": {
+          "id": 2
+        },
+        "categories": [
+          {
+            "id": 1
+          }
+        ],
+        "contentSource": "<!-- wp:heading -->\n<h2>Audio Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:audio -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3\"></audio></figure>\n<!-- /wp:audio -->\n\n<!-- wp:heading -->\n<h2>Video Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->\n\n<!-- wp:heading -->\n<h2>Custom HTML Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:html -->\n<strong>This is a HTML block.</strong>\n<!-- /wp:html -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Preformatted Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:preformatted -->\n<pre class=\"wp-block-preformatted\">This is some preformatted text. Preformatted text keeps your s p a c e s, tabs and<br>linebreaks as they are.</pre>\n<!-- /wp:preformatted -->",
+        "excerpt": "Audio Block Video Block Custom HTML Block This is a HTML block. Preformatted Block This is some preformatted text. Preformatted text keeps your s p a c e s, tabs andlinebreaks as they are.",
+        "featuredImage": null,
+        "tags": [],
+        "title": "GraphQL or REST? Why not both?"
+      }
+    }
+  }
+}
+```
 
 ### 2. Initializing the dynamic variable with an empty value
 
