@@ -10,20 +10,8 @@ This GraphQL query duplicates the posts retrieved via the provided `$limit` and 
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  postAuthorID: _echo(value: {})
-    @export(as: "postAuthorID")
-    @remove
-
-  postCategoryIDs: _echo(value: {})
-    @export(as: "postCategoryIDs")
-    @remove
-
-  postFeaturedImageID: _echo(value: {})
-    @export(as: "postFeaturedImageID")
-    @remove
-
-  postTagIDs: _echo(value: {})
-    @export(as: "postTagIDs")
+  postID: _echo(value: [])
+    @export(as: "postID")
     @remove
 }
 
