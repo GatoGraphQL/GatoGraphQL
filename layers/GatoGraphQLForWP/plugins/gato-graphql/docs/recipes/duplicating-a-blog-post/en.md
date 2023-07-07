@@ -256,7 +256,7 @@ In the response, we can visualize that the fields of the new post are indeed the
 
 🔥 **Tips:**
 
-**Multiple Query Execution** can help us manage the GraphQL document into a series a logical/atomic units:
+With **Multiple Query Execution** we can [execute complex functionality within a single request](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/), and better organize the logic by splitting the GraphQL document into a series a logical/atomic units:
 
 - There is no limit in how many operations can be added to the pipeline
 - Any operation can declare more than one dependency:
@@ -311,7 +311,8 @@ query CountMutatedResults @depends(on: "MutateData") {
 }
 ```
 
-- Via input `@export(type:)` we can select the output of the exported data:
+- [Dynamic variables](https://gatographql.com/guides/augment/dynamic-variables/) do not need to be declared in the operation
+- Via input `@export(type:)` we can select the output of the data exported into the dynamic variable:
   - `SINGLE` (default): A single field value
   - `LIST`: An array containing the field value of multiple resources
   - `DICTIONARY`: A dictionary containing the field value of multiple resources, with key: `${resource ID}` and value: `${field value}`
@@ -319,6 +320,8 @@ query CountMutatedResults @depends(on: "MutateData") {
 </div>
 
 ## Duplicating a post with empty fields
+
+The query 
 
 ## Duplicating meta
 
