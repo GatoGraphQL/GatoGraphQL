@@ -258,6 +258,42 @@ mutation DuplicatePost
 }
 ```
 
+## Executing `createPost` for multiple posts
+
+Let's first convert the query to retrieve multiple posts to be duplicated:
+
+- Retrieve the posts via `posts(pagination: { limit : $limit, offset: $offset}) { ... }`
+- Export `postInput` as a list (i.e. an array containing all the inputs for the queried posts)
+
+```graphql
+query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
+  @depends(on: "InitializeDynamicVariables")
+{
+  postsToDuplicate: posts(
+    pagination: {
+      limit : $limit
+      offset: $offset
+    }
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    # ...
+
+    postInput: _echo(value: {
+      # ...
+    })
+      @export(
+        as: "postInput",
+        type: LIST
+      )
+  }
+}
+```
+
+In the previous recipe, we retrieved a single post to be duplicated.
+
 Let's iterate on this idea, but 
 
 
