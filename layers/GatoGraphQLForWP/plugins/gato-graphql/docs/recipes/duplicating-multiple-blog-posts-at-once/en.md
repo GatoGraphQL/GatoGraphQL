@@ -415,8 +415,8 @@ mutation DuplicatePosts
 
 For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have the following configuration:
 
-- The ID of the mutated entity must be returned (so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts)
-- Nested Mutations must be enabled (as to use field `_echo` inside a `mutation`)
+- The [mutation must return the ID of the entity](https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations/) (so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts)
+- [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) must be enabled (as to use field `_echo` inside a `mutation`)
 
 ![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'"){.width-640}
 
