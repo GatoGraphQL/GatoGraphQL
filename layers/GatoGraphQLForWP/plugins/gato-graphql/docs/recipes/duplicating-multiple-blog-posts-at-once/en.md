@@ -369,6 +369,15 @@ mutation DuplicatePosts
 }
 ```
 
+For this to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have the following configuration:
+
+- Return the ID of the mutated entity (instead of the ID of some mutation payload type), so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts
+- Nested Mutations must be enabled, as to use field `_echo` inside a `mutation`
+
+![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'"){.width-640}
+
+Finally, we can use dynamic variable `$createdPostIDs` to retrieve the data for the newly-created posts:
+
 ```graphql
 query RetrieveCreatedPosts
   @depends(on: "DuplicatePosts")
@@ -440,5 +449,4 @@ Tips: Publish it as private
 
 https://mysite.com/graphql/mutations-nested-return-entity/
 
-![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'"){.width-640}
 
