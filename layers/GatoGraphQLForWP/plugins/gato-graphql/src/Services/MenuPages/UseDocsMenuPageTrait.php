@@ -14,12 +14,15 @@ trait UseDocsMenuPageTrait
         $mainPluginURL = $mainPlugin->getPluginURL();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
 
-        /**
-         * Add tabs to the documentation
-         */
         \wp_enqueue_style(
             'gato-graphql-docs',
             $mainPluginURL . 'assets/css/docs.css',
+            array(),
+            $mainPluginVersion
+        );
+        \wp_enqueue_style(
+            'gato-graphql-image-widths',
+            $mainPluginURL . 'assets/css/image-widths.css',
             array(),
             $mainPluginVersion
         );
