@@ -416,37 +416,127 @@ query RetrieveCreatedPosts
 
 🔥 **Tips:**
 
-The **Field to Input** extension allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
 
-The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
-
-```graphql
-{
-  posts {
-    excerpt
-
-    # Referencing previous field with name "excerpt"
-    isEmptyExcerpt: _isEmpty(value: $__excerpt)
-
-    # Referencing previous field with alias "isEmptyExcerpt"
-    isNotEmptyExcerpt: _not(value: $__isEmptyExcerpt)
-  }
-}
-```
 
 </div>
 
+The consolidated GraphQL query is:
 
+```graphql
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  postInput: _echo(value: [])
+    @export(as: "postInput")
+    @remove
+}
 
+query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
+  @depends(on: "InitializeDynamicVariables")
+{
+  postsToDuplicate: posts(
+    pagination: {
+      limit : $limit
+      offset: $offset
+    }
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
 
-In the previous recipe, we retrieved a single post to be duplicated.
+    # Fields to be duplicated
+    author {
+      id
+    }
+    categories {
+      id
+    }
+    contentSource
+    excerpt
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+    title
 
-Let's iterate on this idea, but 
+    # Already create (and export) the inputs for the mutation
+    postInput: _echo(value: {
+      status: draft,
+      authorID: $__author,
+      categoryIDs: $__categories,
+      contentAs: {
+        html: $__contentSource
+      },
+      excerpt: $__excerpt
+      featuredImageID: $__featuredImage,
+      tagsBy: {
+        ids: $__tags
+      },
+      title: $__title
+    })
+      @export(as: "postInput", type: LIST)
+      @remove
+  }
+}
 
+mutation DuplicatePosts
+  @depends(on: "GetPostsAndExportData")
+{
+  createdPostIDs: _echo(value: $postInput)
+    # For each entry: Create a new post
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      # The result is the list of IDs of the created posts
+      @applyField(
+        name: "createPost"
+        arguments: {
+          input: $input
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createdPostIDs")
+}
 
+query RetrieveCreatedPosts
+  @depends(on: "DuplicatePosts")
+{
+  createdPosts: posts(
+    filter: {
+      ids: $createdPostIDs,
+      status: [draft]
+    }
+  ) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
 
-Tips: Publish it as private
-
-https://mysite.com/graphql/mutations-nested-return-entity/
-
-
+    # Fields to be duplicated
+    author {
+      id
+    }
+    categories {
+      id
+    }
+    contentSource
+    excerpt
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+    title
+  }
+}
+```
