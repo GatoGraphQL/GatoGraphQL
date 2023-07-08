@@ -258,11 +258,11 @@ mutation DuplicatePost
 }
 ```
 
-## Executing `createPost` for multiple posts
+## Retrieving multiple posts
 
-Let's first convert the query to retrieve multiple posts to be duplicated:
+We must convert the query to retrieve the multiple posts to be duplicated:
 
-- Retrieve the posts via `posts(pagination: { limit : $limit, offset: $offset}) { ... }`
+- Query the posts via `posts(pagination: { limit : $limit, offset: $offset}) { ... }`
 - Export `postInput` as a list (i.e. an array containing all the inputs for the queried posts)
 
 ```graphql
@@ -291,6 +291,55 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
   }
 }
 ```
+
+## Executing `createPost` for multiple posts
+
+Dynamic variable `$postInput` now contains an array with all the input data for each of the posts to duplicate:
+
+```json
+[
+  {
+    "status": "draft",
+    "authorID": "2",
+    "categoryIDs": [
+      1
+    ],
+    "contentAs": {
+      "html": "<!-- wp:paragraph -->\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n<!-- /wp:paragraph -->"
+    },
+    "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+    "featuredImageID": null,
+    "tagsBy": {
+      "ids": []
+    },
+    "title": "Hello world!"
+  },
+  {
+    "status": "draft",
+    "authorID": "3",
+    "categoryIDs": [
+      3
+    ],
+    "contentAs": {
+      "html": "<!-- wp:paragraph -->\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2>Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"id\":1755} -->\n<figure class=\"wp-block-image\"><img src=\"https://d.pr/i/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"/></figure>\n<!-- /wp:image -->"
+    },
+    "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
+    "featuredImageID": 361,
+    "tagsBy": {
+      "ids": [
+        11,
+        10
+      ]
+    },
+    "title": "Released v0.6, check it out"
+  }
+]
+```
+
+Mutation `createPost` receives a single `input` object, and not an array of them. Similarly, there is no mutation `createPosts` in the GraphQL schema.
+
+
+
 
 In the previous recipe, we retrieved a single post to be duplicated.
 
