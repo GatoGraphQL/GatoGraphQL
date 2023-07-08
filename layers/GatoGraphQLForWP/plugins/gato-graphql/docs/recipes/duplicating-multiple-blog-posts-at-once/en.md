@@ -221,11 +221,5 @@ Tips: Publish it as private
 
 https://mysite.com/graphql/mutations-nested-return-entity/
 
-![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'")
-
-![Custom Endpoint 'Mutations: nested + return entity'](../../images/recipes/custom-endpoint-nested-mutations-and-return-entity.png "Custom Endpoint 'Mutations: nested + return entity'")
-
-![Open the GraphiQL client from the Custom Endpoint Overview sidebar](../../images/recipes/custom-endpoint-overview-nested-mutations-and-return-entity.png "Open the GraphiQL client from the Custom Endpoint Overview sidebar")
-
-![GraphiQL client for the 'Mutations: nested + return entity' Custom Endpoint](../../images/recipes/custom-endpoint-graphiql-nested-mutations-and-return-entity.png "GraphiQL client for the 'Mutations: nested + return entity' Custom Endpoint")
+![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'"){.width-640}
 
