@@ -341,10 +341,12 @@ In the Gato GraphQL schema, there is no mutation to create multiple posts:
 - Mutation `createPost` receives a single `input` object, not an array of them
 - There is no mutation `createPosts`
 
-The solution is provided via extensions
+The solution is to use extensions:
 
 - **Field Value Iteration and Manipulation** provides directive `@underEachArrayItem` to iterate over all the items in `$postInput`
 - **Field on Field** provides directive `@applyField`, to apply the `createPost` mutation on each iterated-upon item from the array
+
+This GraphQL query passes iterates all items in `$postInput`, assigns each of them to dynamic variable `$input`, injects into the `createPost` mutation, and finally exports the IDs of the created posts under dynamic variable `$createdPostIDs`:
 
 ```graphql
 mutation DuplicatePosts
@@ -365,7 +367,9 @@ mutation DuplicatePosts
       )
     @export(as: "createdPostIDs")
 }
+```
 
+```graphql
 query RetrieveCreatedPosts
   @depends(on: "DuplicatePosts")
 {
