@@ -336,12 +336,92 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
 ]
 ```
 
-Given the Gato GraphQL schema, it appears as if multiple posts could not be created within a single GraphQL query, because:
+In the Gato GraphQL schema, there is no mutation to create multiple posts:
 
-- Mutation `createPost` receives a single `input` object, and not an array of them
+- Mutation `createPost` receives a single `input` object, not an array of them
 - There is no mutation `createPosts`
 
-The solution is to use the **Field Value Iteration and Manipulation** extension, to iterate over all the items in `$postInput` and, for each of them, pass that input data to the `createPost` mutation.
+The solution is provided via extensions
+
+- **Field Value Iteration and Manipulation** provides directive `@underEachArrayItem` to iterate over all the items in `$postInput`
+- **Field on Field** provides directive `@applyField`, to apply the `createPost` mutation on each iterated-upon item from the array
+
+```graphql
+mutation DuplicatePosts
+  @depends(on: "GetPostsAndExportData")
+{
+  createdPostIDs: _echo(value: $postInput)
+    # For each entry: Create a new post
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      # The result is the list of IDs of the created posts
+      @applyField(
+        name: "createPost"
+        arguments: {
+          input: $input
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createdPostIDs")
+}
+
+query RetrieveCreatedPosts
+  @depends(on: "DuplicatePosts")
+{
+  createdPosts: posts(
+    filter: {
+      ids: $createdPostIDs,
+      status: [draft]
+    }
+  ) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author {
+      id
+    }
+    categories {
+      id
+    }
+    contentSource
+    excerpt
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+    title
+  }
+}
+```
+
+🔥 **Tips:**
+
+The **Field to Input** extension allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
+
+The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
+
+```graphql
+{
+  posts {
+    excerpt
+
+    # Referencing previous field with name "excerpt"
+    isEmptyExcerpt: _isEmpty(value: $__excerpt)
+
+    # Referencing previous field with alias "isEmptyExcerpt"
+    isNotEmptyExcerpt: _not(value: $__isEmptyExcerpt)
+  }
+}
+```
+
+</div>
 
 
 

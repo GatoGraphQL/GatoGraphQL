@@ -215,6 +215,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'duplicating-multiple-blog-posts-at-once',
                 \__('Duplicating multiple blog posts at once', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                 ],
