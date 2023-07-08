@@ -127,9 +127,9 @@ query RetrieveCreatedPosts
 
 Below is the detailed analysis of how the query works.
 
-### Introducing **Field to Input** to the query from the "Duplicating a blog post" recipe
+### Extending the "Duplicating a blog post" recipe
 
-The previous recipe employs the following strategy on the GraphQL query for the second approach:
+The previous recipe employs the following strategy (on the GraphQL query of the second approach):
 
 1. Export the resource IDs from the fields (including connection fields):
 
