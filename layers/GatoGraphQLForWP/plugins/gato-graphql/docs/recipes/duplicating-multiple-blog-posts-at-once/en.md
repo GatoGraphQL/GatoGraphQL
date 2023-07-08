@@ -129,7 +129,38 @@ query RetrieveCreatedPosts
 
 Below is the detailed analysis of how the query works.
 
-### ...
+### Starting from the "Duplicating blog post" recipe
+
+The previous recipe contains this section in the GraphQL query for the second approach:
+
+```graphql
+{
+  post {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author @export(as: "authorID") {
+      id
+    }
+    categories @export(as: "categoryIDs") {
+      id
+    }
+    contentSource @export(as: "contentSource")
+    excerpt @export(as: "excerpt")
+    featuredImage @export(as: "featuredImageID") {
+      id 
+    }
+    tags @export(as: "tagIDs") {
+      id
+    }
+    title @export(as: "title")    
+  }
+}
+```
 
 Tips: Publish it as private
 
