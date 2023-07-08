@@ -173,7 +173,6 @@ mutation DuplicatePosts
         setResultInResponse: true
       )
     @export(as: "createdPostIDs")
-    @remove
 }
 
 query RetrieveCreatedPosts
