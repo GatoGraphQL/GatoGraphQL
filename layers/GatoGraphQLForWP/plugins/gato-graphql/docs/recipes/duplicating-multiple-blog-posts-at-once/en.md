@@ -129,20 +129,15 @@ query RetrieveCreatedPosts
 
 Below is the detailed analysis of how the query works.
 
-### Starting from the "Duplicating blog post" recipe
+### Introducing **Field to Input** to the query from the "Duplicating a blog post" recipe
 
-The previous recipe contains this section in the GraphQL query for the second approach:
+The previous recipe employs the following strategy on the GraphQL query for the second approach:
+
+1. Export the resource IDs from the fields (including connection fields):
 
 ```graphql
-{
+query GetPostAndExportData {
   post {
-    # Fields not to be duplicated
-    id
-    slug
-    date
-    status
-
-    # Fields to be duplicated
     author @export(as: "authorID") {
       id
     }
@@ -161,6 +156,111 @@ The previous recipe contains this section in the GraphQL query for the second ap
   }
 }
 ```
+
+2. Create the input object for `createPost(input:)` from those dynamic variables:
+
+```graphql
+mutation DuplicatePost
+  @depends(on: "GetPostAndExportData")
+{
+  createPost(input: {
+    status: draft,
+    authorID: $authorID,
+    categoryIDs: $categoryIDs,
+    contentAs: {
+      html: $contentSource
+    },
+    excerpt: $excerpt
+    featuredImageID: $featuredImageID,
+    tagsBy: {
+      ids: $tagIDs
+    },
+    title: $title
+  }) {
+    # ...
+  }
+}
+```
+
+Thanks to the **Field to Input** extension, we can create the input object already on the first operation, and export all the required post data under a single dynamic variable:
+
+```graphql
+query GetPostAndExportData {
+  post {
+    author {
+      id
+    }
+    categories {
+      id
+    }
+    contentSource
+    excerpt
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+    title
+
+    postInput: _echo(value: {
+      status: draft,
+      authorID: $__author,
+      categoryIDs: $__categories,
+      contentAs: {
+        html: $__contentSource
+      },
+      excerpt: $__excerpt
+      featuredImageID: $__featuredImage,
+      tagsBy: {
+        ids: $__tags
+      },
+      title: $__title
+    })
+      @export(as: "postInput")
+  }
+}
+```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+The **Field to Input** extension allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
+
+The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
+
+```graphql
+{
+  posts {
+    excerpt
+
+    # Referencing previous field with name "excerpt"
+    isEmptyExcerpt: _isEmpty(value: $__excerpt)
+
+    # Referencing previous field with alias "isEmptyExcerpt"
+    isNotEmptyExcerpt: _not(value: $__isEmptyExcerpt)
+  }
+}
+```
+
+</div>
+
+Then, in the following mutation, `createPost(input:)` directly receives dynamic variable `$postInput`:
+
+```graphql
+mutation DuplicatePost
+  @depends(on: "GetPostAndExportData")
+{
+  createPost(input: $postInput) {
+    # ...
+  }
+}
+```
+
+Let's iterate on this idea, but 
+
+
 
 Tips: Publish it as private
 
