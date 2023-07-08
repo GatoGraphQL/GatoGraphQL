@@ -292,19 +292,6 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 
 ### Creating multiple posts in a single GraphQL query
 
-<div class="doc-config-highlight" markdown=1>
-
-⚙️ **Configuration alert:**
-
-For the strategy described below to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have the following configuration:
-
-- The ID of the mutated entity must be returned (so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts)
-- Nested Mutations must be enabled (as to use field `_echo` inside a `mutation`)
-
-![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'"){.width-640}
-
-</div>
-
 Dynamic variable `$postInput` by now contains an array with all the input data for each of the posts to duplicate:
 
 ```json
@@ -357,27 +344,6 @@ The solution is to use extensions:
 - **Field Value Iteration and Manipulation** provides directive `@underEachArrayItem` to iterate over all the items in `$postInput`
 - **Field on Field** provides directive `@applyField`, to apply the `createPost` mutation on each iterated-upon item from the array
 
-This GraphQL query passes iterates all items in `$postInput`, assigns each of them to dynamic variable `$input`, injects into the `createPost` mutation, and finally exports the IDs of the created posts under dynamic variable `$createdPostIDs`:
-
-```graphql
-mutation DuplicatePosts
-  @depends(on: "GetPostsAndExportData")
-{
-  createdPostIDs: _echo(value: $postInput)
-    @underEachArrayItem(
-      passValueOnwardsAs: "input"
-    )
-      @applyField(
-        name: "createPost"
-        arguments: {
-          input: $input
-        },
-        setResultInResponse: true
-      )
-    @export(as: "createdPostIDs")
-}
-```
-
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
@@ -419,6 +385,40 @@ Thanks to `@underEachArrayItem`, we can convert all capability items to upper ca
   }
 }
 ```
+
+</div>
+
+This GraphQL query passes iterates all items in `$postInput`, assigns each of them to dynamic variable `$input`, injects into the `createPost` mutation, and finally exports the IDs of the created posts under dynamic variable `$createdPostIDs`:
+
+```graphql
+mutation DuplicatePosts
+  @depends(on: "GetPostsAndExportData")
+{
+  createdPostIDs: _echo(value: $postInput)
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      @applyField(
+        name: "createPost"
+        arguments: {
+          input: $input
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createdPostIDs")
+}
+```
+
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **Configuration alert:**
+
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have the following configuration:
+
+- The ID of the mutated entity must be returned (so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts)
+- Nested Mutations must be enabled (as to use field `_echo` inside a `mutation`)
+
+![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'"){.width-640}
 
 </div>
 
