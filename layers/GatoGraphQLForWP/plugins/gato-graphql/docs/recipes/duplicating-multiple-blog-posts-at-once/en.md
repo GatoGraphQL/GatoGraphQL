@@ -1,6 +1,6 @@
 # Duplicating multiple blog posts at once
 
-We can extend the previous recipe, to duplicate multiple posts at once, with a single GraphQL request.
+We can extend the previous recipe, to duplicate multiple posts with a single GraphQL request.
 
 ## GraphQL query to duplicate multiple posts at once
 
@@ -75,11 +75,9 @@ mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
   createdPostIDs: _echo(value: $postInput)
-    # For each entry: Create a new post
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
-      # The result is the list of IDs of the created posts
       @applyField(
         name: "createPost"
         arguments: {
@@ -366,11 +364,9 @@ mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
   createdPostIDs: _echo(value: $postInput)
-    # For each entry: Create a new post
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
-      # The result is the list of IDs of the created posts
       @applyField(
         name: "createPost"
         arguments: {
@@ -536,11 +532,9 @@ mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
   createdPostIDs: _echo(value: $postInput)
-    # For each entry: Create a new post
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
-      # The result is the list of IDs of the created posts
       @applyField(
         name: "createPost"
         arguments: {
