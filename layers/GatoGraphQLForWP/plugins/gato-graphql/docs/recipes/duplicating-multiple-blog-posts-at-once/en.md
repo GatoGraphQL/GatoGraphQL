@@ -463,6 +463,8 @@ query RetrieveCreatedPosts
 
 ### Removing unneeded data
 
+The final step is to remove all fields that are auxiliary (and as such we don't need to print their output in the response) via `@remove`.
+
 The consolidated GraphQL query is:
 
 ```graphql
