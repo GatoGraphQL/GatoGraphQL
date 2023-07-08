@@ -384,12 +384,12 @@ mutation DuplicatePosts
 
 `@underEachArrayItem` is a [composable directive](https://gatographql.com/guides/schema/using-composable-directives/) (i.e. a directive which can contain nested directives) that iterates over an array of elements, and applies its nested directive on each of them.
 
-`@underEachArrayItem` helps bridge GraphQL types, as it can make a field that returns a `[String]` value, be applied a directive that receives a `String` value as input.
+Composable directives help bridge GraphQL types, as they can make a field that returns a `[String]` value, be applied a directive that receives a `String` value as input (or other combinations).
 
-In this query:
+For instance, in the query below:
 
 - Field `User.capabilities` returns `[String]`
-- Directive `@strUpperCase` receives a `String` as input
+- Directive `@strUpperCase` receives `String`
 
 Thanks to `@underEachArrayItem`, we can convert all capability items to upper case:
 
