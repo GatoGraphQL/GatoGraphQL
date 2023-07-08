@@ -258,7 +258,7 @@ mutation DuplicatePost
 }
 ```
 
-## Retrieving multiple posts
+### Retrieving multiple posts
 
 We must convert the query to retrieve the multiple posts to be duplicated:
 
@@ -292,7 +292,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 }
 ```
 
-## Creating multiple posts in a single GraphQL query
+### Creating multiple posts in a single GraphQL query
 
 Dynamic variable `$postInput` by now contains an array with all the input data for each of the posts to duplicate:
 
@@ -369,6 +369,47 @@ mutation DuplicatePosts
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+`@underEachArrayItem` is a [composable directive](https://gatographql.com/guides/schema/using-composable-directives/), where a directive can modify the behavior of a nested directive (or directives).
+
+In this case, `@underEachArrayItem` iterates over an array of elements, and applies its nested directive (`@applyField` in the query above) on each of them.
+
+`@underEachArrayItem` helps bridge GraphQL types, as it can make a field that returns a `[String]` value, be applied a directive that receives a `String` value as input.
+
+For instance, while `User.capabilities` returns `[String]` and `@strUpperCase` receives a `String`, we can do the following:
+
+```graphql
+{
+  user(by: { id: 3 }) {
+    capabilities
+      @underEachArrayItem
+        @strUpperCase
+  }
+}
+```
+
+...producing:
+
+```json
+{
+  "data": {
+    "user": {
+      "capabilities": [
+        "LEVEL_0",
+        "READ",
+        "READ_PRIVATE_EVENTS",
+        "READ_PRIVATE_LOCATIONS"
+      ]
+    }
+  }
+}
+```
+
+</div>
+
 For this to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have the following configuration:
 
 - Return the ID of the mutated entity (instead of the ID of some mutation payload type), so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts
@@ -413,6 +454,8 @@ query RetrieveCreatedPosts
   }
 }
 ```
+
+### Removing unneeded data
 
 The consolidated GraphQL query is:
 
