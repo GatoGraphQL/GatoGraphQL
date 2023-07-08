@@ -414,12 +414,6 @@ query RetrieveCreatedPosts
 }
 ```
 
-🔥 **Tips:**
-
-
-
-</div>
-
 The consolidated GraphQL query is:
 
 ```graphql
