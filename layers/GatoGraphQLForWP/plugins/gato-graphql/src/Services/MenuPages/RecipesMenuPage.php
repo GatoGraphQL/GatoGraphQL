@@ -64,6 +64,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return true;
     }
 
+    protected function getDocsFolder(): string
+    {
+        return '';
+    }
+
     /**
      * @param array{0:string,1:string,2?:string[],3?:string[]} $entry
      */
@@ -209,6 +214,17 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'duplicating-multiple-blog-posts-at-once',
                 \__('Duplicating multiple blog posts at once', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'customizing-content-for-different-users',
