@@ -34,3 +34,13 @@ ul {
 h2.doc-title {
     font-size: 1.5em;
 }
+
+img.width-640 {
+    width: 640px;
+}
+img.width-1024 {
+    width: 1024px;
+}
+img.width-280 {
+    width: 280px;
+}
