@@ -292,9 +292,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 }
 ```
 
-## Executing `createPost` for multiple posts
+## Creating multiple posts in a single GraphQL query
 
-Dynamic variable `$postInput` now contains an array with all the input data for each of the posts to duplicate:
+Dynamic variable `$postInput` by now contains an array with all the input data for each of the posts to duplicate:
 
 ```json
 [
@@ -336,7 +336,12 @@ Dynamic variable `$postInput` now contains an array with all the input data for 
 ]
 ```
 
-Mutation `createPost` receives a single `input` object, and not an array of them. Similarly, there is no mutation `createPosts` in the GraphQL schema.
+Given the Gato GraphQL schema, it appears as if multiple posts could not be created within a single GraphQL query, because:
+
+- Mutation `createPost` receives a single `input` object, and not an array of them
+- There is no mutation `createPosts`
+
+The solution is to use the **Field Value Iteration and Manipulation** extension, to iterate over all the items in `$postInput` and, for each of them, pass that input data to the `createPost` mutation.
 
 
 
