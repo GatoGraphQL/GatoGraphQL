@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\CustomPosts\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -18,6 +19,7 @@ use WP_Post;
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -31,6 +33,19 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
+    }
+    final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
+    {
+        $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
+    }
+    final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
+    {
+        if ($this->htmlScalarTypeResolver === null) {
+            /** @var HTMLScalarTypeResolver */
+            $htmlScalarTypeResolver = $this->instanceManager->getInstance(HTMLScalarTypeResolver::class);
+            $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
+        }
+        return $this->htmlScalarTypeResolver;
     }
 
     /**
@@ -50,6 +65,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return [
             'contentSource',
+            'editURL',
         ];
     }
 
@@ -57,6 +73,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'contentSource' => $this->__('Retrieve the content in its \'source\' format, including the (Gutenberg) block delimiter HTML comments', 'customposts'),
+            'editURL' => $this->__('The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -65,6 +82,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldName) {
             'contentSource' => $this->getStringScalarTypeResolver(),
+            'editURL' => $this->getHTMLScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -88,6 +106,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         switch ($fieldDataAccessor->getFieldName()) {
             case 'contentSource':
                 return $customPost->post_content;
+            case 'editURL':
+                return \get_edit_post_link($customPost->ID);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
