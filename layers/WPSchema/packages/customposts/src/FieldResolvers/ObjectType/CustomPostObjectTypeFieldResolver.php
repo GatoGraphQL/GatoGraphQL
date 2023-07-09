@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPWPSchema\CustomPosts\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoPWPSchema\CustomPosts\Module;
 use PoPWPSchema\CustomPosts\ModuleConfiguration;
@@ -24,7 +23,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
-    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -51,19 +49,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
         }
         return $this->htmlScalarTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
-    }
-    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
-    {
-        if ($this->userLoggedInCheckpoint === null) {
-            /** @var UserLoggedInCheckpoint */
-            $userLoggedInCheckpoint = $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
-            $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
-        }
-        return $this->userLoggedInCheckpoint;
     }
 
     /**
@@ -139,6 +124,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             case 'contentSource':
                 return $customPost->post_content;
             case 'editURL':
+                // Validate the user can edit the post
+                if (!App::getState('is-user-logged-in')) {
+                    return null;
+                }
+                /** @var int */
+                $userID = App::getState('current-user-id');
+                if (!user_can($userID, 'edit_post', $customPost->ID)) {
+                    return null;
+                }
                 return \get_edit_post_link($customPost->ID);
         }
 
@@ -154,27 +148,5 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         FieldInterface $field,
     ): bool {
         return false;
-    }
-
-    /**
-     * @return CheckpointInterface[]
-     */
-    public function getValidationCheckpoints(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        object $object,
-    ): array {
-        $validationCheckpoints = parent::getValidationCheckpoints(
-            $objectTypeResolver,
-            $fieldDataAccessor,
-            $object,
-        );
-
-        switch ($fieldDataAccessor->getFieldName()) {
-            case 'editURL':
-                $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
-                break;
-        }
-        return $validationCheckpoints;
     }
 }
