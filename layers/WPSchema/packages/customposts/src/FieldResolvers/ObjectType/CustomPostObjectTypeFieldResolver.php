@@ -6,6 +6,9 @@ namespace PoPWPSchema\CustomPosts\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
+use PoPWPSchema\CustomPosts\Module;
+use PoPWPSchema\CustomPosts\ModuleConfiguration;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -67,6 +70,20 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             'contentSource',
             'editURL',
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldNames = parent::getSensitiveFieldNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatCustomPostEditURLAsSensitiveData()) {
+            $sensitiveFieldNames[] = 'editURL';
+        }
+        return $sensitiveFieldNames;
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
