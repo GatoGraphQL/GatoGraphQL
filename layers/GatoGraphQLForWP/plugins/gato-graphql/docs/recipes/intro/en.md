@@ -1,6 +1,8 @@
 # Intro
 
-Gato GraphQL is a **productivity tool for interacting with data in your WordPress site**. Among others, it allows you to:
+Gato GraphQL is a **productivity tool for interacting with data in your WordPress site**. You can think of it as a Swiss Army Knife for dealing with data in a WordPress site, as it allows to retrieve, manipulate and store again any piece of data, in any desired way.
+
+Among others, it allows you to:
 
 - Query data to create headless sites
 - Expose public and private APIs
@@ -16,4 +18,6 @@ Gato GraphQL is a **productivity tool for interacting with data in your WordPres
 - Validate that a new post contains a mandatory block
 - And much more...
 
-The links in this section showcase use cases and best practices for this tool, and demonstrate GraphQL queries to achieve each objective.
+The links in this section demonstrate GraphQL queries to achieve each objective that you can easily copy and paste in your application, or in the GraphiQL client to play with it.
+
+By reading these recipes, you will also learn several use cases and best practices for Gato GraphQL.
