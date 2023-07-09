@@ -19,6 +19,7 @@ query {
     customPostType
     date
     dateStr
+    editURL
     excerpt
     featuredImage {
       id
