@@ -387,6 +387,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
             ],
+            [
+                'class' => \PoPWPSchema\CustomPosts\Module::class,
+                'envVariable' => \PoPWPSchema\CustomPosts\Environment::TREAT_CUSTOMPOST_EDIT_URL_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_EDIT_URL_AS_SENSITIVE_DATA,
+            ],
             // Custom post, if there is only one custom type, use it instead of the Union
             [
                 'class' => CustomPostsModule::class,
