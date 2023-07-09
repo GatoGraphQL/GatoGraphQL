@@ -688,7 +688,7 @@ query InitializeDynamicVariables {
   tagSlugs: _echo(value: []) @export(as: "tagSlugs")
 }
 
-query ExportData($postId: ID!)
+query ExportData
   @depends(on: "InitializeDynamicVariables")
 {
   post {
