@@ -924,6 +924,28 @@ When that feature is supported, the `contentAs` and `commentAs` oneof input obje
 
 Field `editURL` has been added to all `CustomPost` types (`Post`, `Page`, etc). It retrieves the link to edit the custom post in the wp-admin, or `null` if the visitor does not have the right to edit it.
 
+This query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    editURL
+  }
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "post": {
+      "editURL": "https://mysite.com/wp-admin/post.php?post=1&amp;action=edit"
+    }
+  }
+}
+```
+
 This field has been marked as a “sensitive” data element, and so it will be exposed in the schema only when the Schema Configuration has option `Expose Sensitive Data in the Schema` enabled.
 
 If we want to expose it always, we can also switch to treating it as a normal field, under tab "Custom Posts" in the Settings page:
