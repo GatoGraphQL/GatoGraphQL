@@ -20,16 +20,15 @@ This query retrieves the number of comments added to the site starting from "yes
 
 ```graphql
 query {
-  DATE_ISO8601: _env(name: DATE_ISO8601)
   timeToday: _time  
   timeYesterday: _intSubstract(substract: 86400, from: $__timeToday)
-  dateYesterday: _date(format: $__DATE_ISO8601, timestamp: $__timeYesterday)  
+  dateYesterday: _date(format: "Y-m-d", timestamp: $__timeYesterday)  
   time1YearAgo: _intSubstract(substract: 31536000, from: $__timeToday)
-  date1YearAgo: _date(format: $__DATE_ISO8601, timestamp: $__time1YearAgo)
+  date1YearAgo: _date(format: "Y-m-d", timestamp: $__time1YearAgo)
   timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
-  dateBegOfThisMonth: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisMonth)
+  dateBegOfThisMonth: _date(format: "Y-m-d", timestamp: $__timeBegOfThisMonth)
   timeBegOfThisYear: _makeTime(hour: 0, minute: 0, second: 0, month: 1, day: 1)
-  dateBegOfThisYear: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisYear)
+  dateBegOfThisYear: _date(format: "Y-m-d", timestamp: $__timeBegOfThisYear)
   
   commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__dateYesterday } } )  
   commentsAddedInLast1Year: commentCount(filter: { dateQuery: { after: $__date1YearAgo } } )  
@@ -56,5 +55,34 @@ Fields `_time`, `_intSubstract`, `_date` and `_makeTime` are available through t
 - `_strRegexReplace`
 - `_strSubstr`
 - And many more...
+
+</div>
+
+This query is the same as the previous one, however it retrieves the value of PHP constant `DATE_ISO8601` to format the date in a standardized way:
+
+```graphql
+query {
+  DATE_ISO8601: _env(name: DATE_ISO8601)
+  timeToday: _time  
+  timeYesterday: _intSubstract(substract: 86400, from: $__timeToday)
+  dateYesterday: _date(format: $__DATE_ISO8601, timestamp: $__timeYesterday)  
+  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeToday)
+  date1YearAgo: _date(format: $__DATE_ISO8601, timestamp: $__time1YearAgo)
+  timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
+  dateBegOfThisMonth: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisMonth)
+  timeBegOfThisYear: _makeTime(hour: 0, minute: 0, second: 0, month: 1, day: 1)
+  dateBegOfThisYear: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisYear)
+  
+  commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__dateYesterday } } )  
+  commentsAddedInLast1Year: commentCount(filter: { dateQuery: { after: $__date1YearAgo } } )  
+  commentsAddedSinceBegOfThisMonth: commentCount(filter: { dateQuery: { after: $__dateBegOfThisMonth } } )  
+  commentsAddedSinceBegOfThisYear: commentCount(filter: { dateQuery: { after: $__dateBegOfThisYear } } )
+}
+```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
 
 </div>
