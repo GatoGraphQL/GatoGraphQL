@@ -86,3 +86,26 @@ query
   }
 }
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+The **PHP Functions Via Schema** extension provides the most common PHP functions as global fields, including:
+
+- `_arrayItem`
+- `_equals`
+- `_inArray`
+- `_intAdd`
+- `_isEmpty`
+- `_isNull`
+- `_objectProperty`
+- `_sprintf`
+- `_strContains`
+- `_strRegexReplace`
+- `_strSubstr`
+- And many more
+
+These global fields are useful to manipulate the field value to check if it satisfies a condition (as with `_inArray`), format fields into the expected output (as with `_sprintf`), and others.
+
+</div>
