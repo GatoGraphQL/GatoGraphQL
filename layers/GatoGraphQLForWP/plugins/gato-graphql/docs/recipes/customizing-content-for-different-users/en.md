@@ -4,7 +4,7 @@ We can retrieve a different response in a field depending on some piece of queri
 
 ## GraphQL query to customize content for different users
 
-This GraphQL query retrieves the post content, appending an "edit post" link at the bottom of the content for the admin user only:
+This GraphQL query retrieves the post content, appending an "Edit this post" link at the bottom of the content for the admin user only:
 
 ```graphql
 query InitializeDynamicVariables
