@@ -920,6 +920,38 @@ This is to avoid potential breaking changes in the future, when it becomes possi
 
 When that feature is supported, the `contentAs` and `commentAs` oneof input objects will be added a second property: `blocks: [BlockUnion!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
 
+## Added field `CustomPost.wpAdminEditURL`
+
+Field `wpAdminEditURL` has been added to all `CustomPost` types (`Post`, `Page`, etc). It retrieves the link to edit the custom post in the wp-admin, or `null` if the visitor does not have the right to edit it.
+
+This query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    wpAdminEditURL
+  }
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "post": {
+      "wpAdminEditURL": "https://mysite.com/wp-admin/post.php?post=1&amp;action=edit"
+    }
+  }
+}
+```
+
+This field has been marked as a “sensitive” data element, and so it will be exposed in the schema only when the Schema Configuration has option `Expose Sensitive Data in the Schema` enabled.
+
+If we want to expose it always, we can also switch to treating it as a normal field, under tab "Custom Posts" in the Settings page:
+
+![Settings for the Custom Posts module](../../images/releases/v1.0/settings-customposts.png)
+
 ## Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
 
 Mutations `createPost` and `updatePost` can now indicate the author of the post, via the `authorID` input:
@@ -940,7 +972,7 @@ mutation UpdatePostAuthor {
 }
 ```
 
-Because modifying a post's author should be done by authorized users only, the `authorID` input has been set as a “sensitive” data element, and so it will be exposed in the schema only when the Schema Configuration has option `Expose Sensitive Data in the Schema` enabled.
+Because modifying a post's author should be done by authorized users only, the `authorID` input has been set as a “sensitive” data element.
 
 If we want to expose it always, we can also switch to treating it as a normal input, under tab "Custom Post User Mutations" in the Settings page:
 

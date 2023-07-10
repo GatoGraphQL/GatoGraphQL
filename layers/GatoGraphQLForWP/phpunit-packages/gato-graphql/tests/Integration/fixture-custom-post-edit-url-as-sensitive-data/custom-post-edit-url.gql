@@ -1,0 +1,6 @@
+{
+  post(by: { id: 1 }) {
+    id
+    wpAdminEditURL
+  }
+}

@@ -19,6 +19,7 @@ query {
     customPostType
     date
     dateStr
+    wpAdminEditURL
     excerpt
     featuredImage {
       id
