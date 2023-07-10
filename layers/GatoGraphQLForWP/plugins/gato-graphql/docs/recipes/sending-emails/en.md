@@ -20,14 +20,16 @@ mutation {
         email: "from@email.com"
         name: "Me myself"
       }
+      replyTo: "replyTo@email.com"
+
       to: "target@email.com"
+      cc: ["cc1@email.com", "cc2@email.com"]
+      bcc: ["bcc1@email.com", "bcc2@email.com", "bcc3@email.com"]
+      
       subject: "Email with text content"
       messageAs: {
         text: "Hello world!"
       }
-      replyTo: "replyTo@email.com"
-      cc: ["cc1@email.com", "cc2@email.com"]
-      bcc: ["bcc1@email.com", "bcc2@email.com", "bcc3@email.com"]
     }
   ) {
     status
