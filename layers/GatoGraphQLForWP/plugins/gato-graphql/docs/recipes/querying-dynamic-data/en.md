@@ -81,7 +81,7 @@ The field to obtain the value from is referenced using the "Variable" syntax `$`
 
 </div>
 
-This query retrieves the number of comments added to the site starting from "yesterday", "1 year ago", "beginning of the month", and "beginning of the year":
+This query retrieves the number of comments added to the site starting from "24 hs ago", "1 year ago", "beginning of the month", and "beginning of the year":
 
 ```graphql
 query {
