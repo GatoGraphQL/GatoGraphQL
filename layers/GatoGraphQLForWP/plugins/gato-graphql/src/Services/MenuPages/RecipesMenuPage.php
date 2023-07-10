@@ -184,9 +184,21 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 [
                     ExtensionModuleResolver::ACCESS_CONTROL,
                     ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                ],
+                [
+                    BundleExtensionModuleResolver::PUBLIC_API,
+                ]
+            ],
+            [
+                'injecting-multiple-resources-into-wp-cli',
+                \__('Injecting multiple resources into WP-CLI', 'gato-graphql'),
+                [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'feeding-data-to-blocks-in-the-editor',

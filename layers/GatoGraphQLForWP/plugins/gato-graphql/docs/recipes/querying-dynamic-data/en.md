@@ -15,6 +15,7 @@ Gato GraphQL provides function fields under the concept of [Global fields](https
 The **PHP Functions Via Schema** extension provides many of the most common PHP functions as global fields, including:
 
 - `_arrayItem`
+- `_arrayJoin`
 - `_date`
 - `_equals`
 - `_inArray`
