@@ -133,7 +133,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 if (!user_can($userID, 'edit_post', $customPost->ID)) {
                     return null;
                 }
-                return \get_edit_post_link($customPost->ID);
+                return \get_edit_post_link($customPost);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
