@@ -33,6 +33,53 @@ Function fields  are available through the **PHP Functions Via Schema** extensio
 
 We can create dynamically-generated data, and input it into a filter to fetch posts, comments, etc.
 
+This query retrieves the number of comments added to the site starting from "yesterday", which is computed as "today minus 86400 seconds":
+
+```graphql
+query {
+  timeToday: _time  
+  timeYesterday: _intSubstract(
+    substract: 86400,
+    from: $__timeToday
+  )
+  dateYesterday: _date(
+    format: "Y-m-d",
+    timestamp: $__timeYesterday
+  )  
+  commentsAddedInLast24Hs: commentCount(
+    filter: {
+      dateQuery: {
+        after: $__dateYesterday
+      }
+    }
+  ) 
+}
+```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+`$__timeToday` is a variable dynamically created by the **Field to Input** extension, which allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
+
+The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
+
+```graphql
+{
+  posts {
+    excerpt
+
+    # Referencing previous field with name "excerpt"
+    isEmptyExcerpt: _isEmpty(value: $__excerpt)
+
+    # Referencing previous field with alias "isEmptyExcerpt"
+    isNotEmptyExcerpt: _not(value: $__isEmptyExcerpt)
+  }
+}
+```
+
+</div>
+
 This query retrieves the number of comments added to the site starting from "yesterday", "1 year ago", "beginning of the month", and "beginning of the year":
 
 ```graphql
@@ -53,30 +100,6 @@ query {
   commentsAddedSinceBegOfThisYear: commentCount(filter: { dateQuery: { after: $__dateBegOfThisYear } } )
 }
 ```
-
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-The **Field to Input** extension allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
-
-The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
-
-```graphql
-{
-  posts {
-    excerpt
-
-    # Referencing previous field with name "excerpt"
-    isEmptyExcerpt: _isEmpty(value: $__excerpt)
-
-    # Referencing previous field with alias "isEmptyExcerpt"
-    isNotEmptyExcerpt: _not(value: $__isEmptyExcerpt)
-  }
-}
-```
-
-</div>
 
 This query is the same as the previous one, however it retrieves the value of PHP constant `DATE_ISO8601` to format the date in a standardized way:
 
