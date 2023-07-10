@@ -99,9 +99,9 @@ For non-admin users, the response will be:
 
 🔥 **Tips:**
 
-Having the GraphQL server perform logic, and dynamically compute the required value given all the possible multiple conditions, simplifies the logic of the application and makes it less prone to contain bugs, specially when multiple clients access the GraphQL server as they must perform the same logic.
+Having the GraphQL server dynamically compute the required value for a field given all the possible multiple conditions, simplifies the logic of the application and makes it less prone to contain bugs, specially when multiple clients access data from the server.
 
-In an extreme case, if the clients are based on different technologies (eg: website using JavaScript, Android app using Java), different implementations of the code can lead to bugs. By having the logic implemented in the GraphQL query, there is a single source of truth, the code becomes DRY, and clients don't need to implement their own logic anymore.
+In particular, if the clients are based on different technologies (eg: a website using JavaScript, Android app using Java, iPhone app using Swift, and others), different implementations of the same logic can be non-identical, potentially leading to bugs. By having the logic implemented in the GraphQL query, there is a single source of truth, the code becomes DRY, and clients don't need to implement their own logic anymore.
 
 </div>
 
