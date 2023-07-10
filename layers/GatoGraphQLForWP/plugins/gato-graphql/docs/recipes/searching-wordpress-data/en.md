@@ -166,25 +166,3 @@ query {
   }
 }
 ```
-
-With extensions, we can input dynamically-generated inputs to the filter. This query retrieves the number of comments added to the site starting from "yesterday", "1 year ago", "beginning of the month", and "beginning of the year":
-
-```graphql
-query {
-  DATE_ISO8601: _env(name: DATE_ISO8601) @remove
-  timeToday: _time @remove  
-  timeYesterday: _intSubstract(substract: 86400, from: $__timeToday) @remove
-  dateYesterday: _date(format: $__DATE_ISO8601, timestamp: $__timeYesterday) @remove  
-  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeToday) @remove
-  date1YearAgo: _date(format: $__DATE_ISO8601, timestamp: $__time1YearAgo) @remove
-  timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1) @remove
-  dateBegOfThisMonth: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisMonth) @remove
-  timeBegOfThisYear: _makeTime(hour: 0, minute: 0, second: 0, month: 1, day: 1) @remove
-  dateBegOfThisYear: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisYear) @remove
-  
-  commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__dateYesterday } } )  
-  commentsAddedInLast1Year: commentCount(filter: { dateQuery: { after: $__date1YearAgo } } )  
-  commentsAddedSinceBegOfThisMonth: commentCount(filter: { dateQuery: { after: $__dateBegOfThisMonth } } )  
-  commentsAddedSinceBegOfThisYear: commentCount(filter: { dateQuery: { after: $__dateBegOfThisYear } } )
-}
-```
