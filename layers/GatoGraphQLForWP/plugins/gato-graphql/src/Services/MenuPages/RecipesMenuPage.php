@@ -255,8 +255,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'sending-a-notification-when-some-event-happens',
-                \__('Sending a notification when some event happens', 'gato-graphql'),
+                'sending-a-notification-email',
+                \__('Sending a notification email', 'gato-graphql'),
             ],
             [
                 'sending-an-email-using-markdown',
