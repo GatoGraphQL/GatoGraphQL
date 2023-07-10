@@ -263,6 +263,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Using Markdown to compose the email', 'gato-graphql'),
             ],
             [
+                'sending-a-notification-email-to-the-admin',
+                \__('Sending a notification email to the admin', 'gato-graphql'),
+            ],
+            [
                 'sending-a-personalized-email-to-users',
                 \__('Sending a personalized email to users', 'gato-graphql'),
             ],
