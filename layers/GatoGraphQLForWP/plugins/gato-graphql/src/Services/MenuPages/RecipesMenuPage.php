@@ -170,7 +170,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'querying-dynamic-data',
                 \__('Querying dynamic data', 'gato-graphql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
