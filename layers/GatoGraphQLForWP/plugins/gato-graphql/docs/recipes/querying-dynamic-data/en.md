@@ -41,6 +41,26 @@ query {
 
 🔥 **Tips:**
 
+The **Field to Input** extension allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
+
+The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
+
+```graphql
+{
+  posts {
+    excerpt
+
+    # Referencing previous field with name "excerpt"
+    isEmptyExcerpt: _isEmpty(value: $__excerpt)
+
+    # Referencing previous field with alias "isEmptyExcerpt"
+    isNotEmptyExcerpt: _not(value: $__isEmptyExcerpt)
+  }
+}
+```
+
+---
+
 Fields `_time`, `_intSubstract`, `_date` and `_makeTime` are available through the **PHP Functions Via Schema** extension, which provides many of the most common PHP functions as global fields, including:
 
 - `_arrayItem`
@@ -84,5 +104,19 @@ query {
 
 🔥 **Tips:**
 
+Fields `_time`, `_intSubstract`, `_date` and `_makeTime` are available through the **PHP Functions Via Schema** extension, which provides many of the most common PHP functions as global fields, including:
+
+- `_arrayItem`
+- `_equals`
+- `_inArray`
+- `_intAdd`
+- `_isEmpty`
+- `_isNull`
+- `_objectProperty`
+- `_sprintf`
+- `_strContains`
+- `_strRegexReplace`
+- `_strSubstr`
+- And many more...
 
 </div>
