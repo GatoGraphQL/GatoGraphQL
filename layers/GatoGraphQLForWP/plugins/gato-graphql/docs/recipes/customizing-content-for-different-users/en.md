@@ -65,6 +65,36 @@ query ExecuteAll
 }
 ```
 
+For admin users, the response will be:
+
+```json
+{
+  "data": {
+    "user": {
+      "isAdminUser": true
+    },
+    "post": {
+      "content": "\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n<p><a href=\"https:\/\/mysite.com\/wp-admin\/post.php?post=1&amp;action=edit\">(Admin only) Edit post<\/a><\/p>"
+    }
+  }
+}
+```
+
+For non-admin users, the response will be:
+
+```json
+{
+  "data": {
+    "user": {
+      "isAdminUser": false
+    },
+    "post": {
+      "content": "\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n"
+    }
+  }
+}
+```
+
 ## Step by step: creating the GraphQL query
 
 Below is the detailed analysis of how the query works.
