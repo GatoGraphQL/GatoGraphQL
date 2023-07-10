@@ -1,11 +1,11 @@
 # Injecting multiple resources into WP-CLI
 
-In the previous recipe, we only retrieved (and injected into WP-CLI) a single user ID.
+In the previous recipe, we only retrieved (and injected into WP-CLI) a single user ID. Now, let's retrieve multiple user IDs while executing a single GraphQL query.
 
-With the use of extensions, we can retrieve multiple user IDs by executing a single GraphQL query:
+In this GraphQL query:
 
 - We remove the `pagination` argument from the query, as to retrieve the list of all the users with Spanish locale
-- We export a list of the user IDs, under dynamic variable `$userIDs`
+- We use **Multiple Query Execution** to export a list of the user IDs, under dynamic variable `$userIDs`
 - We print the elements of this array with `_arrayJoin`, joining the items with a space in between, under alias `spanishLocaleUserIDs`
 - We execute the operation `FormatAndPrintData`
 
