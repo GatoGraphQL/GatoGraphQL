@@ -165,6 +165,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'searching-wordpress-data',
                 \__('Searching WordPress data', 'gato-graphql'),
+            ],
+            [
+                'querying-dynamic-data',
+                \__('Querying dynamic data', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,

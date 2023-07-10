@@ -1,10 +1,8 @@
-# Searching WordPress data
+# Querying dynamic data
 
-Searching for data within WordPress is limited in several cases, and Gato GraphQL can help augment these capabilities.
+The previous recipe demonstrated how Gato GraphQL can augment WordPress capabilities to augment data.
 
-Such an example involves custom fields (i.e. meta values): We may use custom fields to add extra information to posts (and also to users, comments, and taxonomies), however when searching for posts with some keyword, WordPress does not search within meta values.
-
-We can then use Gato GraphQL to search for posts (and also users, comments, and taxonomies) by meta key and value.
+These capabilities are enhanced further by querying dynamic data, where the GraphQL query contains logic that will affect the response.
 
 ## Examples
 
@@ -164,5 +162,27 @@ query {
     name
     locale: metaValue(key: "locale")
   }
+}
+```
+
+With extensions, we can input dynamically-generated inputs to the filter. This query retrieves the number of comments added to the site starting from "yesterday", "1 year ago", "beginning of the month", and "beginning of the year":
+
+```graphql
+query {
+  DATE_ISO8601: _env(name: DATE_ISO8601) @remove
+  timeToday: _time @remove  
+  timeYesterday: _intSubstract(substract: 86400, from: $__timeToday) @remove
+  dateYesterday: _date(format: $__DATE_ISO8601, timestamp: $__timeYesterday) @remove  
+  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeToday) @remove
+  date1YearAgo: _date(format: $__DATE_ISO8601, timestamp: $__time1YearAgo) @remove
+  timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1) @remove
+  dateBegOfThisMonth: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisMonth) @remove
+  timeBegOfThisYear: _makeTime(hour: 0, minute: 0, second: 0, month: 1, day: 1) @remove
+  dateBegOfThisYear: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisYear) @remove
+  
+  commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__dateYesterday } } )  
+  commentsAddedInLast1Year: commentCount(filter: { dateQuery: { after: $__date1YearAgo } } )  
+  commentsAddedSinceBegOfThisMonth: commentCount(filter: { dateQuery: { after: $__dateBegOfThisMonth } } )  
+  commentsAddedSinceBegOfThisYear: commentCount(filter: { dateQuery: { after: $__dateBegOfThisYear } } )
 }
 ```
