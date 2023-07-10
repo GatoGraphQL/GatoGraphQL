@@ -177,7 +177,7 @@ query RetrieveContentForNonAdminUser
 Let's provide two different responses for the post's `content` field depending on the user being an admin or not:
 
 - The first operation uses `content` as an alias, and computes the field's value dynamically, appending fields `originalContent` and `wpAdminEditURL` together via `_sprintf`
-- The second operation retrieves this field directly
+- The second operation retrieves the `content` field directly
 
 ```graphql
 query RetrieveContentForAdminUser($postId: ID!)
@@ -212,7 +212,7 @@ query RetrieveContentForNonAdminUser($postId: ID!)
 
 Now we have two operations that may be executed, however we can provide only one `?operationName=...` when executing the query.
 
-Then, we add operation `ExecuteAll` that depends on both `RetrieveContentForAdminUser` and `RetrieveContentForNonAdminUser`, and add the simple field `id` just to fetch something with it:
+Then, we add operation `ExecuteAll` that depends on both `RetrieveContentForAdminUser` and `RetrieveContentForNonAdminUser`, containing the simple field `id` (because we must query something in the operation):
 
 ```graphql
 query ExecuteAll
