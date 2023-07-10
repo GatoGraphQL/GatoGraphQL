@@ -33,8 +33,8 @@ query RetrieveContentForAdminUser($postId: ID!)
   @include(if: $isAdminUser)
 {
   post(by: { id : $postId }) {
-    wpAdminEditURL @remove
     originalContent: content @remove
+    wpAdminEditURL @remove
     content: _sprintf(
       string: "%s<p><a href=\"%s\">%s</a></p>",
       values: [
@@ -144,8 +144,8 @@ query RetrieveContentForAdminUser($postId: ID!)
   @include(if: $isAdminUser)
 {
   post(by: { id : $postId }) {
-    wpAdminEditURL
     originalContent: content
+    wpAdminEditURL
     content: _sprintf(
       string: "%s<p><a href=\"%s\">%s</a></p>",
       values: [
