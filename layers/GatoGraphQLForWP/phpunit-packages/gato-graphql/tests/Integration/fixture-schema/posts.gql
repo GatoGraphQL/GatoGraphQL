@@ -19,7 +19,7 @@ query {
     customPostType
     date
     dateStr
-    editURL
+    wpAdminEditURL
     excerpt
     featuredImage {
       id

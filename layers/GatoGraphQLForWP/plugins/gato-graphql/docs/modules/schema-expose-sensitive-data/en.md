@@ -19,7 +19,7 @@ By default, the following data elements are treated as “sensitive” (they can
 **Custom Posts:**
 
 - `status`
-- `editURL`
+- `wpAdminEditURL`
 - `hasPassword`
 - `password`
 

@@ -920,16 +920,16 @@ This is to avoid potential breaking changes in the future, when it becomes possi
 
 When that feature is supported, the `contentAs` and `commentAs` oneof input objects will be added a second property: `blocks: [BlockUnion!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
 
-## Added field `CustomPost.editURL`
+## Added field `CustomPost.wpAdminEditURL`
 
-Field `editURL` has been added to all `CustomPost` types (`Post`, `Page`, etc). It retrieves the link to edit the custom post in the wp-admin, or `null` if the visitor does not have the right to edit it.
+Field `wpAdminEditURL` has been added to all `CustomPost` types (`Post`, `Page`, etc). It retrieves the link to edit the custom post in the wp-admin, or `null` if the visitor does not have the right to edit it.
 
 This query:
 
 ```graphql
 {
   post(by: { id: 1 }) {
-    editURL
+    wpAdminEditURL
   }
 }
 ```
@@ -940,7 +940,7 @@ This query:
 {
   "data": {
     "post": {
-      "editURL": "https://mysite.com/wp-admin/post.php?post=1&amp;action=edit"
+      "wpAdminEditURL": "https://mysite.com/wp-admin/post.php?post=1&amp;action=edit"
     }
   }
 }
