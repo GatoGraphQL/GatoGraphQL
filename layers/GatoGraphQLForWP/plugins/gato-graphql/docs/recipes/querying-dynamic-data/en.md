@@ -106,21 +106,17 @@ This query is the same as the previous one, however it formats the date using th
 
 ```graphql
 query {
+  # This PHP constant will provide standard time format "Y-m-d\\TH:i:sO"
   DATE_ISO8601: _env(name: DATE_ISO8601)
   timeNow: _time  
-  time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
-  date24HsAgo: _date(format: $__DATE_ISO8601, timestamp: $__time24HsAgo)  
-  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeNow)
-  date1YearAgo: _date(format: $__DATE_ISO8601, timestamp: $__time1YearAgo)
-  timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
-  dateBegOfThisMonth: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisMonth)
-  timeBegOfThisYear: _makeTime(hour: 0, minute: 0, second: 0, month: 1, day: 1)
-  dateBegOfThisYear: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisYear)
-  
-  commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__date24HsAgo } } )  
-  commentsAddedInLast1Year: commentCount(filter: { dateQuery: { after: $__date1YearAgo } } )  
-  commentsAddedSinceBegOfThisMonth: commentCount(filter: { dateQuery: { after: $__dateBegOfThisMonth } } )  
-  commentsAddedSinceBegOfThisYear: commentCount(filter: { dateQuery: { after: $__dateBegOfThisYear } } )
+  time24HsAgo: _intSubstract(
+    substract: 86400,
+    from: $__timeNow
+  )
+  date24HsAgo: _date(
+    format: $__DATE_ISO8601,
+    timestamp: $__time24HsAgo
+  )
 }
 ```
 
@@ -128,19 +124,8 @@ query {
 
 🔥 **Tips:**
 
-Fields `_time`, `_intSubstract`, `_date` and `_makeTime` are available through the **PHP Functions Via Schema** extension, which provides many of the most common PHP functions as global fields, including:
+Field `_env` is provided via the **PHP Constants and Environment Variables via Schema** extension.
 
-- `_arrayItem`
-- `_equals`
-- `_inArray`
-- `_intAdd`
-- `_isEmpty`
-- `_isNull`
-- `_objectProperty`
-- `_sprintf`
-- `_strContains`
-- `_strRegexReplace`
-- `_strSubstr`
-- And many more...
+What constants and environment variables are queryable can be configured.
 
 </div>
