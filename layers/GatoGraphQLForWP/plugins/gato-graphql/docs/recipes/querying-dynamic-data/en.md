@@ -81,7 +81,7 @@ The field to obtain the value from is referenced using the "Variable" syntax `$`
 
 </div>
 
-This query retrieves the number of comments added to the site starting from "24 hs ago", "1 year ago", "beginning of the month", and "beginning of the year":
+This query retrieves the number of comments added to the site starting from "24 hours ago", "1 year ago", "beginning of the month", and "beginning of the year":
 
 ```graphql
 query {
@@ -102,7 +102,7 @@ query {
 }
 ```
 
-This query is the same as the previous one, however it retrieves the value of PHP constant `DATE_ISO8601` to format the date in a standardized way:
+This query is the same as the previous one, however it formats the date using the standardized time format `"Y-m-d\\TH:i:sO"` from PHP constant `DATE_ISO8601`:
 
 ```graphql
 query {
