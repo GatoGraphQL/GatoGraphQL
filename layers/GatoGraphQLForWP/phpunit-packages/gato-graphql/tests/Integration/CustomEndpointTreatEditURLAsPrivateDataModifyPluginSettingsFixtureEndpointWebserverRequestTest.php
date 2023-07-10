@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment as WebserverRequestsEnvironment;
+
 /**
  * Use a custom endpoint that has option "Expose sensitive data in the schema"
  * with value "Do not expose sensitive data".
@@ -16,5 +18,14 @@ class CustomEndpointTreatEditURLAsPrivateDataModifyPluginSettingsFixtureEndpoint
     protected static function getEndpoint(): string
     {
         return 'graphql/website/';
+    }
+
+    protected function adaptResponseBody(string $responseBody): string
+    {
+        return str_replace(
+            WebserverRequestsEnvironment::getIntegrationTestsWebserverDomain(),
+            'gato-graphql.lndo.site',
+            parent::adaptResponseBody($responseBody)
+        );
     }
 }
