@@ -259,12 +259,12 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Sending emails', 'gato-graphql'),
             ],
             [
-                'using-markdown-to-composer-the-email',
+                'using-markdown-to-compose-the-email',
                 \__('Using Markdown to compose the email', 'gato-graphql'),
             ],
             [
-                'reacting-to-events',
-                \__('Reacting to events', 'gato-graphql'),
+                'sending-a-daily-summary-of-activity',
+                \__('Sending a daily summary of activity', 'gato-graphql'),
             ],
             [
                 'site-migrations',
@@ -322,6 +322,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'bulk-editing-content',
                 \__('Bulk editing content', 'gato-graphql'),
+            ],
+            [
+                'reacting-to-events',
+                \__('Reacting to events', 'gato-graphql'),
             ],
             [
                 'interacting-with-3rd-party-service-apis',
