@@ -133,7 +133,10 @@ query RetrieveContentForNonAdminUser($postId: ID!)
 }
 ```
 
-In our case, if the user is an admin, we want to provide a different value for the post's `content` field. While the second operation retrieves this field directly, the first operation uses `content` as an alias, and computes its value dynamically:
+Let's provide two different responses for the post's `content` field depending on the user being an admin or not:
+
+- The first operation uses `content` as an alias, and computes the field's value dynamically, appending fields `originalContent` and `wpAdminEditURL` together via `_sprintf`
+- The second operation retrieves this field directly
 
 ```graphql
 query RetrieveContentForAdminUser($postId: ID!)
