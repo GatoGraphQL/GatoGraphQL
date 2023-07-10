@@ -12,6 +12,24 @@ Gato GraphQL provides these fields under the concept of [Global fields](https://
 
 🔥 **Tips:**
 
+Function fields  are available through the **PHP Functions Via Schema** extension, which provides many of the most common PHP functions as global fields, including:
+
+- `_arrayItem`
+- `_date`
+- `_equals`
+- `_inArray`
+- `_intAdd`
+- `_intAdd`,
+- `_isEmpty`
+- `_isNull`
+- `_makeTime`
+- `_objectProperty`
+- `_sprintf`
+- `_strContains`
+- `_strRegexReplace`
+- `_strSubstr`
+- `_time`,
+- And many more...
 
 </div>
 
@@ -59,23 +77,6 @@ The field to obtain the value from is referenced using the "Variable" syntax `$`
   }
 }
 ```
-
----
-
-Fields `_time`, `_intSubstract`, `_date` and `_makeTime` are available through the **PHP Functions Via Schema** extension, which provides many of the most common PHP functions as global fields, including:
-
-- `_arrayItem`
-- `_equals`
-- `_inArray`
-- `_intAdd`
-- `_isEmpty`
-- `_isNull`
-- `_objectProperty`
-- `_sprintf`
-- `_strContains`
-- `_strRegexReplace`
-- `_strSubstr`
-- And many more...
 
 </div>
 
