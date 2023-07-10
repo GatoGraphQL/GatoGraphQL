@@ -68,6 +68,9 @@ class RootMeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'me':
+                if (!App::getState('is-user-logged-in')) {
+                    return null;
+                }
                 return App::getState('current-user-id');
         }
 
