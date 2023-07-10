@@ -128,6 +128,6 @@ Field `_env` is provided via the **PHP Constants and Environment Variables via S
 
 Via the applied Schema Configuration and plugin Settings, we can configure [which constants and environment variables can be queried](https://gatographql.com/guides/config/configuring-what-environment-variables-and-php-constants-can-be-queried/).
 
-![Defining the entries on the Schema Configuration](../../../extensions/php-constants-and-environment-variables-via-schema/docs/images/environment-fields-schema-configuration-entries.png "Defining the entries on the Schema Configuration")
+![Defining the entries on the Schema Configuration](../../../extensions/php-constants-and-environment-variables-via-schema/docs/images/environment-fields-schema-configuration-entries.png "Defining the entries on the Schema Configuration"){.width-1024}
 
 </div>
