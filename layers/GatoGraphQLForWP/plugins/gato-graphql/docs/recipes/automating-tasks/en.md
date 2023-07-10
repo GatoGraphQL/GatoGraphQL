@@ -1,5 +1,9 @@
 # Automating tasks
 
+Everything here:
+    submodules/PoP/layers/GatoGraphQLForWP/plugins/gato-graphql/extensions/automation/docs/modules/automation/en.md
+
+
 By having a persisted query act as a webhook
     passing vars with postId or what
 Have an external system trigger an action on the WordPress site
