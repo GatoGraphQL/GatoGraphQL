@@ -166,3 +166,87 @@ query RetrieveContentForNonAdminUser($postId: ID!)
   }
 }
 ```
+
+### Adding the operation to be executed
+
+Now we have two operations that may be executed, however we can provide only one `?operationName=...` when executing the query.
+
+Then, we add operation `ExecuteAll` that depends on both `RetrieveContentForAdminUser` and `RetrieveContentForNonAdminUser`, and add the simple field `id` just to fetch something with it:
+
+```graphql
+query ExecuteAll
+  @depends(on: [
+    "RetrieveContentForAdminUser",
+    "RetrieveContentForNonAdminUser"
+  ])
+{
+  id
+}
+```
+
+Invoking the endpoint with `?operationName=ExecuteAll` will now load both operations, however only one of them will be actually executed.
+
+### Removing unneeded data
+
+The final step is to remove all fields that are auxiliary (and as such we don't need to print their output in the response) via `@remove`.
+
+The consolidated GraphQL query is:
+
+```graphql
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  isAdminUser: _echo(value: false)
+    @export(as: "isAdminUser")
+    @remove
+}
+
+query ExportConditionalVariables
+  @depends(on: "InitializeDynamicVariables")
+{
+  me {
+    roleNames @remove
+    isAdminUser: _inArray(
+        value: "administrator",
+        array: $__roleNames
+    )
+      @export(as: "isAdminUser")
+  }
+}
+
+query RetrieveContentForAdminUser($postId: ID!)
+  @depends(on: "ExportConditionalVariables")
+  @include(if: $isAdminUser)
+{
+  post(by: { id : $postId }) {
+    originalContent: content @remove
+    wpAdminEditURL @remove
+    content: _sprintf(
+      string: "%s<p><a href=\"%s\">%s</a></p>",
+      values: [
+        $__originalContent,
+        $__wpAdminEditURL,
+        "(Admin only) Edit post"
+      ]
+    )
+  }
+}
+
+query RetrieveContentForNonAdminUser($postId: ID!)
+  @depends(on: "ExportConditionalVariables")
+  @skip(if: $isAdminUser)
+{
+  post(by: { id : $postId }) {
+    content
+  }
+}
+
+query ExecuteAll
+  @depends(on: [
+    "RetrieveContentForAdminUser",
+    "RetrieveContentForNonAdminUser"
+  ])
+{
+  id @remove
+}
+```
