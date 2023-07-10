@@ -920,6 +920,10 @@ This is to avoid potential breaking changes in the future, when it becomes possi
 
 When that feature is supported, the `contentAs` and `commentAs` oneof input objects will be added a second property: `blocks: [BlockUnion!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
 
+## Added field `CustomPost.editURL`
+
+Field `editURL` has been added to all `CustomPost` types (`Post`, `Page`, etc). It retrieves the link to edit the custom post in the wp-admin, or `null` if the visitor does not have the right to edit it.
+
 ## Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
 
 Mutations `createPost` and `updatePost` can now indicate the author of the post, via the `authorID` input:
