@@ -128,27 +128,6 @@ query
 }
 ```
 
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-Field `_inArray` is available through the **PHP Functions Via Schema** extension, which provides the most common PHP functions as global fields, including:
-
-- `_arrayItem`
-- `_equals`
-- `_inArray`
-- `_intAdd`
-- `_isEmpty`
-- `_isNull`
-- `_objectProperty`
-- `_sprintf`
-- `_strContains`
-- `_strRegexReplace`
-- `_strSubstr`
-- And many more
-
-</div>
-
 ### Conditional execution of operations
 
 When **Multiple Query Execution** is enabled, directives `@include` and `@skip` can also be applied to operations. This way, we can execute an operation or not depending on the value of some dynamic variable.

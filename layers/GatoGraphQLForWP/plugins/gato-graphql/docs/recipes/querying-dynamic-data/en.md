@@ -8,9 +8,7 @@ Gato GraphQL can further augment WordPress' capabilities to search data via the 
 
 🔥 **Tips:**
 
-"Functionality" fields belong not to a specific type, such as `Post` or `User`, but to all the types in the schema. That's why these are handled in a distinctive way in Gato GraphQL, under the name of **Global fields**.
-
-Global fields are fields that are accessible under every single type in the GraphQL schema (while being defined only once).
+"Functionality" fields are **Global fields**: fields that are accessible not under a specific type (such as `Post` or `User`), but under all the types from the GraphQL schema (while being defined only once).
 
 </div>
 
@@ -37,3 +35,24 @@ query {
   commentsAddedSinceBegOfThisYear: commentCount(filter: { dateQuery: { after: $__dateBegOfThisYear } } )
 }
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Fields `_time`, `_intSubstract`, `_date` and `_makeTime` are available through the **PHP Functions Via Schema** extension, which provides many of the most common PHP functions as global fields, including:
+
+- `_arrayItem`
+- `_equals`
+- `_inArray`
+- `_intAdd`
+- `_isEmpty`
+- `_isNull`
+- `_objectProperty`
+- `_sprintf`
+- `_strContains`
+- `_strRegexReplace`
+- `_strSubstr`
+- And many more...
+
+</div>
