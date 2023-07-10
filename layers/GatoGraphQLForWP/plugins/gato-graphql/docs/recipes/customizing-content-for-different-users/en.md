@@ -159,14 +159,14 @@ In the query below, only one of the two operations will be executed:
 - `RetrieveContentForNonAdminUser` is executed only when `$isAdminUser` is `false`
 
 ```graphql
-query RetrieveContentForAdminUser($postId: ID!)
+query RetrieveContentForAdminUser
   @depends(on: "ExportConditionalVariables")
   @include(if: $isAdminUser)
 {
   # ...
 }
 
-query RetrieveContentForNonAdminUser($postId: ID!)
+query RetrieveContentForNonAdminUser
   @depends(on: "ExportConditionalVariables")
   @skip(if: $isAdminUser)
 {
