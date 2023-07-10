@@ -66,4 +66,6 @@ query ExecuteAll
 
 Below is the detailed analysis of how the query works.
 
-### Retrieving the post data
+### ...
+
+...
