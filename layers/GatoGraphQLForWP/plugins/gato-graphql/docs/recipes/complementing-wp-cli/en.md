@@ -84,7 +84,7 @@ This prints the response right in the terminal:
 - The single endpoint is [disabled by default](https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/), so it must be enabled
 - The single endpoint is public; to avoid unintentionally exposing private data, it is advised to enable it only when your website is not accessible to the Internet (eg: the site is on a development laptop, used to build a headless site)
 - Otherwise, it is advised to [create a custom endpoint](https://gatographql.com/guides/use/creating-a-custom-endpoint/), [publish it as `private`](https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints), and pass the cookies added by WordPress (once the user has been authenticated) to `curl` (you can use DevTools to inspect the request headers when in the WordPress dashboard)
-- Alternatively (via extensions), we can restrict access to the single or custom endpoint via [Access Control](https://gatographql.com/guides/use/defining-access-control/) (eg: checking that the [visitor comes from IP `127.0.0.1`](https://gatographql.com/guides/config/restricting-access-by-visitor-ip/)).
+- Alternatively, we can use the **Access Control** extension to [restrict access to the endpoint](https://gatographql.com/guides/use/defining-access-control/) based on user roles/capabilities, and enhance it with the **Access Control: Visitor IP** extension to check that the [visitor comes from IP `127.0.0.1`](https://gatographql.com/guides/config/restricting-access-by-visitor-ip/).
 
 </div>
 
