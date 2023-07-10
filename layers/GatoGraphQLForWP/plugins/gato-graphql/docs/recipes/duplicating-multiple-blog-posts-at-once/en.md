@@ -326,7 +326,7 @@ The solution is to use extensions:
 
 `@underEachArrayItem` is a [composable directive](https://gatographql.com/guides/schema/using-composable-directives/) (i.e. a directive which can contain nested directives) that iterates over an array of elements, and applies its nested directive on each of them.
 
-Composable directives help bridge GraphQL types, as they can make a field that returns a `[String]` value, be applied a directive that receives a `String` value as input (or other combinations).
+`@underEachArrayItem` helps bridge GraphQL types, as it can make a field that returns a `[String]` value, be applied a directive that receives a `String` value as input (or other combinations).
 
 For instance, in the query below:
 
