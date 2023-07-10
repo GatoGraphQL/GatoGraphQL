@@ -33,14 +33,14 @@ Function fields  are available through the **PHP Functions Via Schema** extensio
 
 We can create dynamically-generated data, and input it into a filter to fetch posts, comments, etc.
 
-This query retrieves the number of comments added to the site starting from "yesterday", which is computed as "today minus 86400 seconds":
+This query retrieves the number of comments added to the site in the last 24 hs, which is computed as "time now minus 86400 seconds":
 
 ```graphql
 query {
-  timeToday: _time  
+  timeNow: _time  
   timeYesterday: _intSubstract(
     substract: 86400,
-    from: $__timeToday
+    from: $__timeNow
   )
   dateYesterday: _date(
     format: "Y-m-d",
@@ -60,7 +60,7 @@ query {
 
 🔥 **Tips:**
 
-`$__timeToday` is a variable dynamically created by the **Field to Input** extension, which allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
+`$__timeNow` is a variable dynamically created by the **Field to Input** extension, which allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
 
 The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
 
@@ -84,10 +84,10 @@ This query retrieves the number of comments added to the site starting from "yes
 
 ```graphql
 query {
-  timeToday: _time  
-  timeYesterday: _intSubstract(substract: 86400, from: $__timeToday)
+  timeNow: _time  
+  timeYesterday: _intSubstract(substract: 86400, from: $__timeNow)
   dateYesterday: _date(format: "Y-m-d", timestamp: $__timeYesterday)  
-  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeToday)
+  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeNow)
   date1YearAgo: _date(format: "Y-m-d", timestamp: $__time1YearAgo)
   timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
   dateBegOfThisMonth: _date(format: "Y-m-d", timestamp: $__timeBegOfThisMonth)
@@ -106,10 +106,10 @@ This query is the same as the previous one, however it retrieves the value of PH
 ```graphql
 query {
   DATE_ISO8601: _env(name: DATE_ISO8601)
-  timeToday: _time  
-  timeYesterday: _intSubstract(substract: 86400, from: $__timeToday)
+  timeNow: _time  
+  timeYesterday: _intSubstract(substract: 86400, from: $__timeNow)
   dateYesterday: _date(format: $__DATE_ISO8601, timestamp: $__timeYesterday)  
-  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeToday)
+  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeNow)
   date1YearAgo: _date(format: $__DATE_ISO8601, timestamp: $__time1YearAgo)
   timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
   dateBegOfThisMonth: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisMonth)
