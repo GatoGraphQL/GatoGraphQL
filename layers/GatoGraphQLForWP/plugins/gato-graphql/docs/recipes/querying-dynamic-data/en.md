@@ -1,8 +1,6 @@
 # Querying dynamic data
 
-Gato GraphQL can further augment WordPress' capabilities to search data via the use of "functionality" fields (a distinct type of field which provides functionality instead of data), allowing us to dynamically compute data, input it back into the query, and affect the response with granular control.
-
-Gato GraphQL provides these fields under the concept of [Global fields](https://gatographql.com/guides/special-features/global-fields/): Fields that are accessible under all the types from the GraphQL schema. (Typical fields in GraphQL, in contrast, are accessible only under some specific type, such as `Post` or `User`).
+Gato GraphQL can further augment WordPress' capabilities to search data via the use of "function" fields (a distinct type of field which provides functionality instead of data), allowing us to dynamically compute data, input it back into the query, and affect the response with granular control.
 
 ## Examples
 
@@ -10,14 +8,17 @@ Gato GraphQL provides these fields under the concept of [Global fields](https://
 
 🔥 **Tips:**
 
-Function fields  are available through the **PHP Functions Via Schema** extension, which provides many of the most common PHP functions as global fields, including:
+Gato GraphQL provides function fields under the concept of [Global fields](https://gatographql.com/guides/special-features/global-fields/): Fields that are accessible under all the types from the GraphQL schema.
+
+(Typical fields in GraphQL, in contrast, are accessible only under some specific type, such as `Post` or `User`).
+
+The **PHP Functions Via Schema** extension provides many of the most common PHP functions as global fields, including:
 
 - `_arrayItem`
 - `_date`
 - `_equals`
 - `_inArray`
 - `_intAdd`
-- `_intAdd`,
 - `_isEmpty`
 - `_isNull`
 - `_makeTime`
