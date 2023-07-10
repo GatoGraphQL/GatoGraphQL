@@ -39,18 +39,18 @@ This query retrieves the number of comments added to the site in the last 24 hs,
 ```graphql
 query {
   timeNow: _time  
-  timeYesterday: _intSubstract(
+  time24HsAgo: _intSubstract(
     substract: 86400,
     from: $__timeNow
   )
-  dateYesterday: _date(
+  date24HsAgo: _date(
     format: "Y-m-d",
-    timestamp: $__timeYesterday
+    timestamp: $__time24HsAgo
   )  
   commentsAddedInLast24Hs: commentCount(
     filter: {
       dateQuery: {
-        after: $__dateYesterday
+        after: $__date24HsAgo
       }
     }
   ) 
@@ -86,8 +86,8 @@ This query retrieves the number of comments added to the site starting from "yes
 ```graphql
 query {
   timeNow: _time  
-  timeYesterday: _intSubstract(substract: 86400, from: $__timeNow)
-  dateYesterday: _date(format: "Y-m-d", timestamp: $__timeYesterday)  
+  time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
+  date24HsAgo: _date(format: "Y-m-d", timestamp: $__time24HsAgo)  
   time1YearAgo: _intSubstract(substract: 31536000, from: $__timeNow)
   date1YearAgo: _date(format: "Y-m-d", timestamp: $__time1YearAgo)
   timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
@@ -95,7 +95,7 @@ query {
   timeBegOfThisYear: _makeTime(hour: 0, minute: 0, second: 0, month: 1, day: 1)
   dateBegOfThisYear: _date(format: "Y-m-d", timestamp: $__timeBegOfThisYear)
   
-  commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__dateYesterday } } )  
+  commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__date24HsAgo } } )  
   commentsAddedInLast1Year: commentCount(filter: { dateQuery: { after: $__date1YearAgo } } )  
   commentsAddedSinceBegOfThisMonth: commentCount(filter: { dateQuery: { after: $__dateBegOfThisMonth } } )  
   commentsAddedSinceBegOfThisYear: commentCount(filter: { dateQuery: { after: $__dateBegOfThisYear } } )
@@ -108,8 +108,8 @@ This query is the same as the previous one, however it retrieves the value of PH
 query {
   DATE_ISO8601: _env(name: DATE_ISO8601)
   timeNow: _time  
-  timeYesterday: _intSubstract(substract: 86400, from: $__timeNow)
-  dateYesterday: _date(format: $__DATE_ISO8601, timestamp: $__timeYesterday)  
+  time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
+  date24HsAgo: _date(format: $__DATE_ISO8601, timestamp: $__time24HsAgo)  
   time1YearAgo: _intSubstract(substract: 31536000, from: $__timeNow)
   date1YearAgo: _date(format: $__DATE_ISO8601, timestamp: $__time1YearAgo)
   timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
@@ -117,7 +117,7 @@ query {
   timeBegOfThisYear: _makeTime(hour: 0, minute: 0, second: 0, month: 1, day: 1)
   dateBegOfThisYear: _date(format: $__DATE_ISO8601, timestamp: $__timeBegOfThisYear)
   
-  commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__dateYesterday } } )  
+  commentsAddedInLast24Hs: commentCount(filter: { dateQuery: { after: $__date24HsAgo } } )  
   commentsAddedInLast1Year: commentCount(filter: { dateQuery: { after: $__date1YearAgo } } )  
   commentsAddedSinceBegOfThisMonth: commentCount(filter: { dateQuery: { after: $__dateBegOfThisMonth } } )  
   commentsAddedSinceBegOfThisYear: commentCount(filter: { dateQuery: { after: $__dateBegOfThisYear } } )
