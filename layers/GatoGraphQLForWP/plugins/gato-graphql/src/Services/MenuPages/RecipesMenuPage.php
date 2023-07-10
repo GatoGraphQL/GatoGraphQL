@@ -259,8 +259,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Sending a notification email', 'gato-graphql'),
             ],
             [
-                'sending-an-email-using-markdown',
-                \__('Sending an email using Markdown', 'gato-graphql'),
+                'using-markdown-to-composer-the-email',
+                \__('Using Markdown to compose the email', 'gato-graphql'),
             ],
             [
                 'site-migrations',

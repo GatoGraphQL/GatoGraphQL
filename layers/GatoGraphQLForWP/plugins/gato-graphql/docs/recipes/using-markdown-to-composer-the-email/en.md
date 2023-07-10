@@ -1,4 +1,4 @@
-# Sending an email using Markdown
+# Using Markdown to compose the email
 
 
 
