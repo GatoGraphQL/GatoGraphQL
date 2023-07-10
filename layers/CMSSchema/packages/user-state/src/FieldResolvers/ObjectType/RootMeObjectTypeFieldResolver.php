@@ -6,6 +6,7 @@ namespace PoPCMSSchema\UserState\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -13,7 +14,7 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 
-class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldResolver
+class RootMeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
@@ -67,6 +68,9 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'me':
+                if (!App::getState('is-user-logged-in')) {
+                    return null;
+                }
                 return App::getState('current-user-id');
         }
 
