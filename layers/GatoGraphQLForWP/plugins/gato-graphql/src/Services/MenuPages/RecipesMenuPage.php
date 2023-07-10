@@ -230,6 +230,9 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'customizing-content-for-different-users',
                 \__('Customizing content for different users', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
                 [

@@ -109,3 +109,56 @@ The **PHP Functions Via Schema** extension provides the most common PHP function
 These global fields are useful to manipulate the field value to check if it satisfies a condition (as with `_inArray`), format fields into the expected output (as with `_sprintf`), and others.
 
 </div>
+
+### Conditional execution of operations
+
+When **Multiple Query Execution** is enabled, directives `@include` and `@skip` can also be applied to operations, to execute an operation or not depending on the value of the `if` argument, which can receive a dynamic variable.
+
+In this query, operation `RetrieveContentForAdminUser` will only be executed when `$isAdminUser` is `true`, and `RetrieveContentForNonAdminUser` when it is `false`:
+
+```graphql
+query RetrieveContentForAdminUser($postId: ID!)
+  @depends(on: "ExportConditionalVariables")
+  @include(if: $isAdminUser)
+{
+  # ...
+}
+
+query RetrieveContentForNonAdminUser($postId: ID!)
+  @depends(on: "ExportConditionalVariables")
+  @skip(if: $isAdminUser)
+{
+  # ...
+}
+```
+
+In our case, if the user is an admin, we want to provide a different value for the `content` field. In the first operation, by using `content` as an `alias`, the result for the field can be dynamically computed from other fields:
+
+```graphql
+query RetrieveContentForAdminUser($postId: ID!)
+  @depends(on: "ExportConditionalVariables")
+  @include(if: $isAdminUser)
+{
+  post(by: { id : $postId }) {
+    wpAdminEditURL
+    originalContent: content
+    content: _sprintf(
+      string: "%s<p><a href=\"%s\">%s</a></p>",
+      values: [
+        $__originalContent,
+        $__wpAdminEditURL,
+        "(Admin only) Edit post"
+      ]
+    )
+  }
+}
+
+query RetrieveContentForNonAdminUser($postId: ID!)
+  @depends(on: "ExportConditionalVariables")
+  @skip(if: $isAdminUser)
+{
+  post(by: { id : $postId }) {
+    content
+  }
+}
+```
