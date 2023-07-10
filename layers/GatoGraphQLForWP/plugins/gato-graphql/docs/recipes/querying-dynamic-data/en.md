@@ -102,7 +102,7 @@ query {
 }
 ```
 
-This query is the same as the previous one, however it formats the date using the standardized time format `"Y-m-d\\TH:i:sO"` from PHP constant `DATE_ISO8601`:
+This query is the same as the previous one, however it retrieves the standardized time format `"Y-m-d\\TH:i:sO"` from PHP constant `DATE_ISO8601`:
 
 ```graphql
 query {
