@@ -8,7 +8,7 @@ Gato GraphQL can further augment WordPress' capabilities to search data via the 
 
 🔥 **Tips:**
 
-"Functionality" fields are **Global fields**: fields that are accessible not under a specific type (such as `Post` or `User`), but under all the types from the GraphQL schema (while being defined only once).
+To support "functionality" fields efficiently, Gato GraphQL has created the concept of [Global fields](https://gatographql.com/guides/special-features/global-fields/): Fields that are accessible not under a specific type (such as `Post` or `User`), but under all the types from the GraphQL schema (while being defined only once).
 
 </div>
 
