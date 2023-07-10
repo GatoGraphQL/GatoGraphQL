@@ -130,7 +130,7 @@ query
 
 ### Conditional execution of operations
 
-When **Multiple Query Execution** is enabled, directives `@include` and `@skip` can also be applied to operations. This way, we can execute an operation or not depending on the value of some dynamic variable.
+When [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) is enabled, directives `@include` and `@skip` can also be applied to operations. This way, we can execute an operation or not depending on the value of some dynamic variable.
 
 In the query below, only one of the two operations will be executed:
 

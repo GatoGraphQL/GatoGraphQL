@@ -5,7 +5,7 @@ In the previous recipe, we only retrieved (and injected into WP-CLI) a single us
 In this GraphQL query:
 
 - We remove the `pagination` argument from the query, as to retrieve the list of all the users with Spanish locale
-- We use **Multiple Query Execution** to export a list of the user IDs, under dynamic variable `$userIDs`
+- We use [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) to export a list of the user IDs, under dynamic variable `$userIDs`
 - We print the elements of this array with `_arrayJoin`, joining the items with a space in between, under alias `spanishLocaleUserIDs`
 - We execute the operation `FormatAndPrintData`
 
@@ -43,7 +43,7 @@ query FormatAndPrintData @depends(on: "RetrieveData") {
 
 🔥 **Tips:**
 
-With **Multiple Query Execution** we can [execute complex functionality within a single request](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/), and better organize the logic by splitting the GraphQL document into a series a logical/atomic units:
+With [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) we can [execute complex functionality within a single request](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/), and better organize the logic by splitting the GraphQL document into a series a logical/atomic units:
 
 - There is no limit in how many operations can be added to the pipeline
 - Any operation can declare more than one dependency:

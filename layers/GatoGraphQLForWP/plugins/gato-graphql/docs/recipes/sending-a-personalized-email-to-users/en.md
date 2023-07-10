@@ -32,7 +32,7 @@ mutation {
 }
 ```
 
-Combined with features from other extensions (in this case, **Field to Input** and **PHP Functions via Schema**), we can create personalized messages for every user:
+Combined with features from other extensions (in this case, [**Field to Input**](https://gatographql.com/extensions/field-to-input/) and [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/)), we can create personalized messages for every user:
 
 ```graphql
 mutation {

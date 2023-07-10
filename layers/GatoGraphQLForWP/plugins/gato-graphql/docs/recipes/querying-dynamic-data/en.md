@@ -12,7 +12,7 @@ Gato GraphQL provides function fields under the concept of [Global fields](https
 
 (Typical fields in GraphQL, in contrast, are accessible only under some specific type, such as `Post` or `User`).
 
-The **PHP Functions Via Schema** extension provides many of the most common PHP functions as global fields, including:
+The [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension provides many of the most common PHP functions as global fields, including:
 
 - `_arrayItem`
 - `_arrayJoin`
@@ -62,7 +62,7 @@ query {
 
 🔥 **Tips:**
 
-`$__timeNow` is a variable dynamically created by the **Field to Input** extension, which allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
+`$__timeNow` is a variable dynamically created by the [**Field to Input**](https://gatographql.com/extensions/field-to-input/) extension, which allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
 
 The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
 
@@ -125,7 +125,7 @@ query {
 
 🔥 **Tips:**
 
-Field `_env` is provided via the **PHP Constants and Environment Variables via Schema** extension.
+Field `_env` is provided via the [**PHP Constants and Environment Variables via Schema**](https://gatographql.com/extensions/php-constants-and-environment-variables-via-schema/) extension.
 
 Via the applied Schema Configuration and plugin Settings, we can configure [which constants and environment variables can be queried](https://gatographql.com/guides/config/configuring-what-environment-variables-and-php-constants-can-be-queried/).
 

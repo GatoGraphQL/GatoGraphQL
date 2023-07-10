@@ -84,7 +84,7 @@ const response = await fetch(endpoint, {
 
 The GraphQL file we created above will be our single source of truth to fetch data for the block. It already satisfies this for the client-side; let's now see do it for the server-side.
 
-Extension **Internal GraphQL Server** installs a server that can be invoked within our application, using PHP code. It offers method `executeQueryInFile`:
+The [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension installs a server that can be invoked within our application, using PHP code. It offers method `executeQueryInFile`:
 
 ```php
 namespace GatoGraphQL\InternalGraphQLServer;

@@ -191,7 +191,7 @@ Notice that some fields are meant to be duplicated (including the author, title,
 
 ### Duplicating the post: First approach
 
-With the **Multiple Query Execution** extension, we are able to export the post's data items, and inject them again into another `query` or `mutation` in the same GraphQL document.
+With the [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) extension, we are able to export the post's data items, and inject them again into another `query` or `mutation` in the same GraphQL document.
 
 The following query creates a pipeline of two operations in the GraphQL document (`GetPostAndExportData` and `DuplicatePost`), which can share data with each other:
 
@@ -610,7 +610,7 @@ The following approach deals with this problem.
 
 ### Duplicating the post: Third approach
 
-We can execute an additional operation at the beginning to initialize each of the dynamic variables with a `null` or empty value (via global field `_echo` from the **PHP Functions via Schema** extension).
+We can execute an additional operation at the beginning to initialize each of the dynamic variables with a `null` or empty value (via global field `_echo` from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension).
 
 Then, each dynamic variable will always be exported, at least once. When the field value is not empty, then it will be exported again, and this second value will override the first one.
 
@@ -786,7 +786,7 @@ We use the GraphQL query from the previous approach, and optimize it by:
 We deal with these elements by (respectively):
 
 - Adding directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation, which disables raising the warning
-- Adding the `@remove` directive (from the **Field Response Removal** extension) to each of the fields to remove
+- Adding the `@remove` directive (from the [**Field Response Removal**](https://gatographql.com/extensions/field-response-removal/) extension) to each of the fields to remove
 
 This is the consolidated GraphQL query to duplicate a post:
 
