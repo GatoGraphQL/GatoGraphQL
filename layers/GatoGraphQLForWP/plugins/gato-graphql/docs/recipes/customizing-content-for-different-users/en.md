@@ -99,9 +99,10 @@ For non-admin users, the response will be:
 
 🔥 **Tips:**
 
-Having the GraphQL server dynamically compute the required value for a field given all the possible multiple conditions, simplifies the logic of the application and makes it less prone to contain bugs, specially when multiple clients access data from the server.
+Having the GraphQL server (given all the possible multiple conditions) dynamically compute the required value for a field:
 
-In particular, if the clients are based on different technologies (eg: a website using JavaScript, Android app using Java, iPhone app using Swift, and others), different implementations of the same logic can be non-identical, potentially leading to bugs. By having the logic implemented in the GraphQL query, there is a single source of truth, the code becomes DRY, and clients don't need to implement their own logic anymore.
+- Simplifies the logic of the application, as there is a single source of truth, the code becomes DRY, and clients don't need to implement the corresponding logic anymore
+- Makes the application more reliable, specially when multiple clients access data from the server, as different implementations of the same logic can be non-identical, potentially leading to bugs (more so when clients are based on different technologies, such as JavaScript for a website, Java for an Android app, Swift for an iPhone app, and others)
 
 </div>
 
