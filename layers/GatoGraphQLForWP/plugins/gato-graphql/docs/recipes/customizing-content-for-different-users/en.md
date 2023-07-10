@@ -71,7 +71,7 @@ Below is the detailed analysis of how the query works.
 
 ### Finding out if the user is an admin
 
-This query finds out if the logged-in user is an admin, by querying the roles and checking if `"administrator"` is one of them, and exports this condition under dynamic variable `$isAdminUser`:
+This query checks if the logged-in user has the `"administrator"` role, and exports this condition under dynamic variable `$isAdminUser`:
 
 ```graphql
 query
@@ -91,7 +91,7 @@ query
 
 🔥 **Tips:**
 
-The **PHP Functions Via Schema** extension provides the most common PHP functions as global fields, including:
+Field `_inArray` is available through the **PHP Functions Via Schema** extension, which provides the most common PHP functions as global fields, including:
 
 - `_arrayItem`
 - `_equals`
@@ -106,15 +106,20 @@ The **PHP Functions Via Schema** extension provides the most common PHP function
 - `_strSubstr`
 - And many more
 
-These global fields are useful to manipulate the field value to check if it satisfies a condition (as with `_inArray`), format fields into the expected output (as with `_sprintf`), and others.
-
 </div>
 
 ### Conditional execution of operations
 
 When **Multiple Query Execution** is enabled, directives `@include` and `@skip` can also be applied to operations, to execute an operation or not depending on the value of the `if` argument, which can receive a dynamic variable.
 
-In this query, operation `RetrieveContentForAdminUser` will only be executed when `$isAdminUser` is `true`, and `RetrieveContentForNonAdminUser` when it is `false`:
+In the query below, only one of the two operations will be executed, because:
+
+- When `$isAdminUser` is `true`
+  - `RetrieveContentForAdminUser` is included
+  - `RetrieveContentForNonAdminUser` is skipped
+- When `$isAdminUser` is `false`
+  - `RetrieveContentForAdminUser` is skipped
+  - `RetrieveContentForNonAdminUser` is included
 
 ```graphql
 query RetrieveContentForAdminUser($postId: ID!)
