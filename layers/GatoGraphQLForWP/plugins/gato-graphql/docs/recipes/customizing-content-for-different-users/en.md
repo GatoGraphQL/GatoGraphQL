@@ -1,6 +1,6 @@
 # Customizing content for different users
 
-We can retrieve a different response in a field depending on the capabilities of the logged-in user.
+We can retrieve a different response in a field depending on some piece of queried data, such as the roles of the logged-in user.
 
 ## GraphQL query to customize content for different users
 
@@ -20,7 +20,10 @@ query ExportConditionalVariables
 {
   me {
     roleNames @remove
-    isAdminUser: _inArray(value: "administrator", array: $__roleNames)
+    isAdminUser: _inArray(
+        value: "administrator",
+        array: $__roleNames
+    )
       @export(as: "isAdminUser")
   }
 }
@@ -66,6 +69,20 @@ query ExecuteAll
 
 Below is the detailed analysis of how the query works.
 
-### ...
+### Finding out if the user is an admin
 
-...
+This query finds out if the logged-in user is an admin, by querying the roles and checking if `"administrator"` is one of them, and exports this condition under dynamic variable `$isAdminUser`:
+
+```graphql
+query
+{
+  me {
+    roleNames
+    isAdminUser: _inArray(
+        value: "administrator",
+        array: $__roleNames
+    )
+      @export(as: "isAdminUser")
+  }
+}
+```
