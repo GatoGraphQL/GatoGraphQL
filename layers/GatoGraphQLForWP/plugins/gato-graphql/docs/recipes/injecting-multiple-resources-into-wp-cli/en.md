@@ -1,4 +1,4 @@
-# Injecting multiple results at once into WP-CLI
+# Injecting multiple resources into WP-CLI
 
 In the previous recipe, we only retrieved (and injected into WP-CLI) a single user ID.
 

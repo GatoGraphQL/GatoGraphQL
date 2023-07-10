@@ -190,8 +190,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'injecting-multiple-results-at-once-into-wp-cli',
-                \__('Injecting multiple results at once into WP-CLI', 'gato-graphql'),
+                'injecting-multiple-resources-into-wp-cli',
+                \__('Injecting multiple resources into WP-CLI', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
