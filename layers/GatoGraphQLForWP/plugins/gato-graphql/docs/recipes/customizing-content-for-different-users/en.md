@@ -2,11 +2,6 @@
 
 We can retrieve a different response in a field depending on some piece of queried data, such as the roles of the logged-in user.
 
-This simplifies the logic of the application, and makes it less prone to contain bugs, specially when multiple clients access the GraphQL server as they must perform the same logic. In an extreme case, if the clients are based on different technologies (eg: website using JavaScript, Android app using Java), different implementations of the code can lead to bugs.
-
-This simplifies the logic of the application: Instead of retrieving multiple fields from the server, evaluating multiple conditions, and dynamically producing the required value in the client, we can already have the GraphQL server perform this logic and retrieve the final expected value in the GraphQL response.
-
-
 ## GraphQL query to customize content for different users
 
 This GraphQL query retrieves the post content, appending an "edit post" link at the bottom of the content for the admin user only:
@@ -99,6 +94,16 @@ For non-admin users, the response will be:
   }
 }
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Having the GraphQL server perform logic, and dynamically compute the required value given all the possible multiple conditions, simplifies the logic of the application and makes it less prone to contain bugs, specially when multiple clients access the GraphQL server as they must perform the same logic.
+
+In an extreme case, if the clients are based on different technologies (eg: website using JavaScript, Android app using Java), different implementations of the code can lead to bugs. By having the logic implemented in the GraphQL query, there is a single source of truth, the code becomes DRY, and clients don't need to implement their own logic anymore.
+
+</div>
 
 ## Step by step: creating the GraphQL query
 
