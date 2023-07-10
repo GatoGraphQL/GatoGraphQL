@@ -110,16 +110,12 @@ Field `_inArray` is available through the **PHP Functions Via Schema** extension
 
 ### Conditional execution of operations
 
-When **Multiple Query Execution** is enabled, directives `@include` and `@skip` can also be applied to operations, to execute an operation or not depending on the value of the `if` argument, which can receive a dynamic variable.
+When **Multiple Query Execution** is enabled, directives `@include` and `@skip` can also be applied to operations. This way, we can execute an operation or not depending on the value of some dynamic variable.
 
-In the query below, only one of the two operations will be executed, because:
+In the query below, only one of the two operations will be executed:
 
-- When `$isAdminUser` is `true`
-  - `RetrieveContentForAdminUser` is included
-  - `RetrieveContentForNonAdminUser` is skipped
-- When `$isAdminUser` is `false`
-  - `RetrieveContentForAdminUser` is skipped
-  - `RetrieveContentForNonAdminUser` is included
+- `RetrieveContentForAdminUser` is executed only when `$isAdminUser` is `true`
+- `RetrieveContentForNonAdminUser` is executed only when `$isAdminUser` is `false`
 
 ```graphql
 query RetrieveContentForAdminUser($postId: ID!)
@@ -137,7 +133,7 @@ query RetrieveContentForNonAdminUser($postId: ID!)
 }
 ```
 
-In our case, if the user is an admin, we want to provide a different value for the `content` field. In the first operation, by using `content` as an `alias`, the result for the field can be dynamically computed from other fields:
+In our case, if the user is an admin, we want to provide a different value for the post's `content` field. While the second operation retrieves this field directly, the first operation uses `content` as an alias, and computes its value dynamically:
 
 ```graphql
 query RetrieveContentForAdminUser($postId: ID!)
