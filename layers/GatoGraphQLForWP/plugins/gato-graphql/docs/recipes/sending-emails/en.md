@@ -1,20 +1,33 @@
 # Sending emails
 
-Mutation `_sendEmail` sends emails by executing WordPress `wp_mail` function. As a result, it will use the configuration defined for sending emails in WordPress (such as the SMTP provider to use).
+We send emails via mutation `_sendEmail` provided by the [**Email Sender**](https://gatographql.com/extensions/email-sender/) extension.
 
-The email can be sent with content types "text" or "HTML", depending on the value of the `messageAs` input (which is a "oneof" InputObject, so that only one of its properties can be provided).
+<div class="doc-highlight" markdown=1>
 
-To send as text, provide property `messageAs.text`:
+🔥 **Tips:**
+
+- The emails is sent with content type "text" or "HTML" depending on what property from the `messageAs` input is used
+- The `from` input is optional; if not provided, the settings stored in WordPress is used
+- `_sendEmail` executes WordPress `wp_mail` function, so it will use the configuration defined for sending emails in WordPress (such as the SMTP provider to use)
+
+</div>
 
 ```graphql
 mutation {
-  _sendEmail(
+  sendTextEmail: _sendEmail(
     input: {
+      from: {
+        email: "from@email.com"
+        name: "Me myself"
+      }
       to: "target@email.com"
       subject: "Email with text content"
       messageAs: {
         text: "Hello world!"
       }
+      replyTo: "replyTo@email.com"
+      cc: ["cc1@email.com", "cc2@email.com"]
+      bcc: ["bcc1@email.com", "bcc2@email.com", "bcc3@email.com"]
     }
   ) {
     status
@@ -25,14 +38,8 @@ mutation {
       }
     }
   }
-}
-```
-
-To send as HTML, provide property `messageAs.html`:
-
-```graphql
-mutation {
-  _sendEmail(
+  
+  sendHTMLEmail: _sendEmail(
     input: {
       to: "target@email.com"
       subject: "Email with HTML content"
