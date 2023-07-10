@@ -1,10 +1,8 @@
 # Querying dynamic data
 
-Gato GraphQL can further augment WordPress' capabilities to search data via the use of "functionality" fields, allowing us to dynamically compute data, input it back into the query, and affect the response with granular control.
+Gato GraphQL can further augment WordPress' capabilities to search data via the use of "functionality" fields (a distinct type of field which provides functionality instead of data), allowing us to dynamically compute data, input it back into the query, and affect the response with granular control.
 
-Functionality fields are different than typical fields in GraphQL in that these provide some specific functionality instead of data.
-
-Gato GraphQL provides these fields under the concept of [Global fields](https://gatographql.com/guides/special-features/global-fields/): Fields that are accessible under all the types from the GraphQL schema. (Typical fields in GraphQL, in contrast, are accessible only under some specific type (such as `Post` or `User`).
+Gato GraphQL provides these fields under the concept of [Global fields](https://gatographql.com/guides/special-features/global-fields/): Fields that are accessible under all the types from the GraphQL schema. (Typical fields in GraphQL, in contrast, are accessible only under some specific type, such as `Post` or `User`).
 
 ## Examples
 
