@@ -1,8 +1,6 @@
 # Querying dynamic data
 
-The previous recipe demonstrated how Gato GraphQL can augment WordPress capabilities to augment data.
-
-These capabilities are enhanced further by querying dynamic data, where the GraphQL query contains logic that will affect the response.
+Via the availability of "function" fields, Gato GraphQL can further augment WordPress' capabilities to search data, as these can be used to dynamically compute data, input it back into the query, and affect the response with granular control.
 
 ## Examples
 
