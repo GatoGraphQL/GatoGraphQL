@@ -141,6 +141,34 @@ To execute the query, we provide the dictionary of `variables`:
 }
 ```
 
+## Adding missing links
+
+This GraphQL query adds all missing links in the post's HTML content: For all URLs which are not surrounded by an anchor tag, such as:
+
+```html
+<p>Visit my website: https://mysite.com.</p>
+```
+
+...it adds the correspondig `<a>` tag around them (while removing the domain from the text, and adding a `target` to open in a new window):
+
+```html
+<p>Visit my website: <a href="https://mysite.com" target="_blank">mysite.com</a>.</p>
+```
+
+```graphql
+query GetPostData($postId: ID!) {
+  post(by: { id: $postId }) {
+    id
+    contentSource
+    contentSourceWithLinks: _strRegexReplace(
+      searchRegex: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
+      replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
+      in: $__contentSource
+    )
+  }
+}
+```
+
 ## Replace HTTP with HTTPS
 
 This GraphQL query identifies all HTML anchors in the post's content, extracts their URLs, and replaces those starting with `"http://"` with `"https://"`:
