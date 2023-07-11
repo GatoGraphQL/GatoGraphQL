@@ -47,7 +47,7 @@ mutation ReplaceOldWithNewDomainInPosts {
 }
 ```
 
-## Replacing a page slug
+## Replacing a post or page URL
 
 After changing the slug of a post or page, we can convert all content to point to the new URL.
 
