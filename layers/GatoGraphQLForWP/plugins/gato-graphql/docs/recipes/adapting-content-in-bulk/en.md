@@ -77,5 +77,6 @@ mutation UpdatePost(
 - When [Multi-Field Directives](https://gatographql.com/guides/special-features/multifield-directives/) is enabled, we can apply a directive to more than one field, indicating the relative position(s) of the additional field(s) via argument `affectAdditionalFieldsUnderPos`
 - When applying a directive to some field and then exporting its value, we [must use `@deferredExport` instead of `@export`](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/#heading-multi-field-directives)
 - When using Multi-Field Directives together with `@export`( or `@deferredExport`), the [exported value is a JSON object containing all the fields](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/#heading-dictionary-type-/-multi-field)
+- Mutation `Post.update` is available in the schema only when the Nested Mutations feature is enabled
 
 </div>
