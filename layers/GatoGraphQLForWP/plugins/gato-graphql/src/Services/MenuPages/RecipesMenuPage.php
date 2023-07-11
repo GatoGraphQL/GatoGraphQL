@@ -289,18 +289,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'automating-admin-tasks',
-                \__('Automating admin tasks', 'gato-graphql'),
-            ],
-            [
-                'sending-a-daily-summary-of-activity',
-                \__('Sending a daily summary of activity', 'gato-graphql'),
-            ],
-            [
-                'validating-that-a-new-post-contains-a-mandatory-block',
-                \__('Validating that a new post contains a mandatory block', 'gato-graphql')
-            ],
-            [
                 'inserting-a-gutenberg-block-in-all-posts',
                 \__('Inserting a Gutenberg block in all posts', 'gato-graphql'),
                 [
@@ -312,6 +300,18 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'removing-a-gutenberg-block-from-all-posts',
                 \__('Removing a Gutenberg block from all posts', 'gato-graphql'),
+            ],
+            [
+                'automating-admin-tasks',
+                \__('Automating admin tasks', 'gato-graphql'),
+            ],
+            [
+                'sending-a-daily-summary-of-activity',
+                \__('Sending a daily summary of activity', 'gato-graphql'),
+            ],
+            [
+                'validating-that-a-new-post-contains-a-mandatory-block',
+                \__('Validating that a new post contains a mandatory block', 'gato-graphql')
             ],
             // [
             //     'converting-content-to-gutenberg-blocks',
