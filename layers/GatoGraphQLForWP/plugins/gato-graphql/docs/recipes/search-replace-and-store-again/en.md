@@ -143,7 +143,7 @@ The dictionary of `variables` now receives a list of strings to search and repla
 
 ## Adding missing links
 
-This GraphQL query adds all missing links in the post's HTML content:
+This GraphQL query does a regex search and replace to add missing links in the post's HTML content:
 
 ```graphql
 query GetPostData($postId: ID!) {
@@ -198,10 +198,8 @@ All URLs which are not surrounded by an anchor tag, such as:
 
 🔥 **Tips:**
 
-The `"\"` character must be escaped inside the regex patterns:
-
-- `"#\.#"` is written as `"#\\.#"`
-- `"/^https?:\/\//"` is written as `"/^https?:\\/\\//"`
+- The `"\"` character must be escaped as `"\\"` inside the regex pattern. For instance, `"/^https?:\/\//"` is written as `"/^https?:\\/\\//"`
+- The documentation for [PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php) explains how to use [replacement references](https://www.php.net/manual/en/function.preg-replace.php#refsect1-function.preg-replace-parameters) (eg: `$1`) and [PRCE modifiers](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php).
 
 </div>
 
@@ -245,11 +243,3 @@ mutation UpdatePost($postId: ID!)
   }
 }
 ```
-
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-The documentation for [PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php) explains how to use [replacement references](https://www.php.net/manual/en/function.preg-replace.php#refsect1-function.preg-replace-parameters) (eg: `$1`) and [PRCE modifiers](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php).
-
-</div>
