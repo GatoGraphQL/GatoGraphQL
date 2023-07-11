@@ -7,19 +7,27 @@ Among other use cases, this is useful for promoting campaigns (such as when offe
 - Before the campaign, we create a custom block with our message, and execute a bulk operation to add it to all posts in the website
 - After the campaign, we execute a bulk operation to remove the block from all posts
 
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **Configuration alert:**
+
+For the GraphQL queries in this recipe to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have  [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+
+</div>
+
 ## Inserting a block in bulk
 
-Making use of the delimiter comment in a Gutenberg block, after 3 paragraph blocks
-
-Mention it's very crude, and it breaks with nested blocks
-
-inject-block-after-several-paragraph-blocks.gql:
+This GraphQL query identifies the 3rd paragraph block in a post (by searching for `<!-- /wp:paragraph -->`) and places the custom block's HTML content right after it (in this case, it is the HTML code for a `core/video` block).
 
 ```graphql
 mutation InjectBlock(
-  $postIDs: [ID!]!
+  $limit: Int! = 5,
+  $offset: Int! = 0
 ) {
-  posts(filter: { ids: $postIDs } ) {
+  posts: posts(
+    pagination: { limit: $limit, offset: $offset }
+    sort: { by: ID, order: ASC }
+  ) {
     id
     contentSource
     adaptedContentSource: _strRegexReplace(
@@ -47,15 +55,9 @@ mutation InjectBlock(
 }
 ```
 
-vars:
+## Inserting a block in bulk (again)
 
-```json
-{
-  "postIDs": [664]
-}
-```
-
-detailed:
+This GraphQL query is similar to the previos one, but it also allows to choose the block type to search for, and after what occurrence number to place our block:
 
 ```graphql
 query CreateRegex(
@@ -87,12 +89,16 @@ query CreateRegex(
 }
 
 mutation InjectBlock(
-  $postIDs: [ID!]!
+  $limit: Int! = 5,
+  $offset: Int! = 0
   $times: Int! = 1
 )
   @depends(on: "CreateRegex")
 {
-  posts(filter: { ids: $postIDs } ) {
+  posts: posts(
+    pagination: { limit: $limit, offset: $offset }
+    sort: { by: ID, order: ASC }
+  ) {
     id
     contentSource
     adaptedContentSource: _strRegexReplace(
@@ -117,42 +123,6 @@ mutation InjectBlock(
       }
     }
   }
-}
-
-mutation RestorePosts(
-  $postIDs: [ID!]!
-  $injectBlockMarkup: String!
-) {
-  restorePosts: posts(filter: { ids: $postIDs } ) {
-    id
-    contentSource
-    restoredContentSource: _strReplace(
-      in: $__contentSource,
-      search: $injectBlockMarkup,
-      replaceWith: ""
-    )
-    update(input: {
-      contentAs: { html: $__restoredContentSource },
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        id
-        contentSource
-      }
-    }
-  }
-}
-
-query InjectBlockAndThenRestorePosts
-  @depends(on: ["InjectBlock", "RestorePosts"])
-{
-  id
 }
 ```
 
