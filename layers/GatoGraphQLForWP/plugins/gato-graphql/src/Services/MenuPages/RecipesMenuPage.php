@@ -292,6 +292,16 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'inserting-removing-a-gutenberg-block-in-bulk',
+                \__('Inserting/Removing a (Gutenberg) block in bulk', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+            ],
+            [
                 'sending-emails-with-pleasure',
                 \__('Sending emails with pleasure', 'gato-graphql'),
                 [
@@ -304,16 +314,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
-            ],
-            [
-                'inserting-removing-a-gutenberg-block-in-bulk',
-                \__('Inserting/Removing a (Gutenberg) block in bulk', 'gato-graphql'),
-                [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
             ],
             [
                 'automating-admin-tasks',
