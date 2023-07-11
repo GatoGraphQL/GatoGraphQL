@@ -1,6 +1,6 @@
 # Search, replace, and store again
 
-This recipe (which requires the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) provides examples of content adaptations involving search and replace, and then storing the resource back to the DB.
+This recipe provides examples of content adaptations involving search and replace, and then storing the resource back to the DB. It requires the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension.
 
 <div class="doc-highlight" markdown=1>
 
@@ -17,7 +17,7 @@ The [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functi
 
 ## Search and replace a string
 
-This GraphQL query retrieves a post, replaces all occurrences in its content and title of some string with another one, and stores the post again:
+This GraphQL query retrieves a post, replaces all occurrences of some string with another one in the post's content and title, and stores the post again:
 
 ```graphql
 query GetPostData(
@@ -68,7 +68,7 @@ mutation UpdatePost($postId: ID!)
 }
 ```
 
-To execute the query, we provide the dictionary of `variables`:
+To execute the query, we provide the dictionary of `variables` with the strings to search and replace:
 
 ```json
 {
@@ -131,7 +131,7 @@ mutation UpdatePost($postId: ID!)
 }
 ```
 
-To execute the query, we provide the dictionary of `variables`:
+The dictionary of `variables` now receives a list of strings to search and replace:
 
 ```json
 {
@@ -143,17 +143,7 @@ To execute the query, we provide the dictionary of `variables`:
 
 ## Adding missing links
 
-This GraphQL query adds all missing links in the post's HTML content: For all URLs which are not surrounded by an anchor tag, such as:
-
-```html
-<p>Visit my website: https://mysite.com.</p>
-```
-
-...it adds the correspondig `<a>` tag around them (while removing the domain from the text, and adding a `target` to open in a new window):
-
-```html
-<p>Visit my website: <a href="https://mysite.com" target="_blank">mysite.com</a>.</p>
-```
+This GraphQL query adds all missing links in the post's HTML content:
 
 ```graphql
 query GetPostData($postId: ID!) {
@@ -191,6 +181,18 @@ mutation UpdatePost($postId: ID!)
     }
   }
 }
+```
+
+All URLs which are not surrounded by an anchor tag, such as:
+
+```html
+<p>Visit my website: https://mysite.com.</p>
+```
+
+...are added the correspondig `<a>` tag around them (while also removing the domain from the text, and adding a `target` to open in a new window), becoming:
+
+```html
+<p>Visit my website: <a href="https://mysite.com" target="_blank">mysite.com</a>.</p>
 ```
 
 <div class="doc-highlight" markdown=1>
@@ -250,6 +252,6 @@ mutation UpdatePost($postId: ID!)
 
 🔥 **Tips:**
 
-The documentation for [PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php) explains how to use [replacement references](https://www.php.net/manual/en/function.preg-replace.php#refsect1-function.preg-replace-parameters) (eg: `$1`) and [supported PRCE modifiers](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php).
+The documentation for [PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php) explains how to use [replacement references](https://www.php.net/manual/en/function.preg-replace.php#refsect1-function.preg-replace-parameters) (eg: `$1`) and [PRCE modifiers](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php).
 
 </div>
