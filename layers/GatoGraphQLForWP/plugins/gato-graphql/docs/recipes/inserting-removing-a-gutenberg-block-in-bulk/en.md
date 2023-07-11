@@ -152,17 +152,19 @@ We provide the `variables` dictionary like this:
 
 ## Removing a block in bulk
 
-remove-block-by-type.gql
+This GraphQL query searches for all posts containing the custom block, and removes it from their HTML source:
 
 ```graphql
 query CreateVars {
-  foundPosts: posts(filter: { search: "\"<!-- /wp:columns -->\"" } ) {
+  foundPosts: posts(filter: { search: "\"<!-- /mycompany:black-friday-campaign-video -->\"" } ) {
     id @export(as: "postIDs", type: LIST)
     contentSource
     originalInputs: _echo(value: {
       id: $__id,
       contentAs: { html: $__contentSource }
-    }) @export(as: "originalInputs")
+    })
+      @export(as: "originalInputs")
+      @remove
   }
 }
 
@@ -174,7 +176,7 @@ mutation RemoveBlock
     contentSource
     adaptedContentSource: _strRegexReplace(
       in: $__contentSource,
-      searchRegex: "#(<!-- wp:columns -->[\\s\\S]+<!-- /wp:columns -->)#",
+      searchRegex: "#(<!-- mycompany:black-friday-campaign-video -->[\\s\\S]+<!-- /mycompany:black-friday-campaign-video -->)#",
       replaceWith: ""
     )
     update(input: {
@@ -256,6 +258,6 @@ vars:
 
 ```json
 {
-  "removeBlockType": "wp:columns"
+  "removeBlockType": "mycompany:black-friday-campaign-video"
 }
 ```
