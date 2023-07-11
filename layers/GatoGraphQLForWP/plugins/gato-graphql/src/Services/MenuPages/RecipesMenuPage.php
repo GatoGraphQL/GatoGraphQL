@@ -322,10 +322,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Persisted Queries as Webhooks', 'gato-graphql'),
             ],
             [
-                'splitting-a-big-db-update-via-recursive-queries',
-                \__('Splitting a big DB update via recursive queries', 'gato-graphql'),
-            ],
-            [
                 'interacting-with-3rd-party-service-apis',
                 \__('Interacting with 3rd-party service APIs', 'gato-graphql'),
             ],
@@ -340,6 +336,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'transforming-data-from-an-external-api',
                 \__('Transforming data from an external API', 'gato-graphql'),
+            ],
+            [
+                'splitting-a-big-db-update-via-recursive-queries',
+                \__('Splitting a big DB update via recursive queries', 'gato-graphql'),
             ],
             [
                 'translating-block-content-in-a-post-to-a-different-language',
