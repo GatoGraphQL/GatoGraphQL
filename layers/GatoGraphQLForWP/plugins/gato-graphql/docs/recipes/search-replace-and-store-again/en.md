@@ -25,9 +25,7 @@ query GetPostData(
   $replaceFrom: String!,
   $replaceTo: String!
 ) {
-  post(by: {id: $postId}) {
-    id
-
+  post(by: { id: $postId }) {
     title
     adaptedPostTitle: _strReplace(
       search: $replaceFrom
@@ -46,7 +44,7 @@ query GetPostData(
   }
 }
 
-mutation StoreAdaptedPostData
+mutation StoreAdaptedPostData($postId: ID!)
   @depends(on: "GetPostData")
 {
   updatePost(input: {
