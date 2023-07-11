@@ -11,7 +11,7 @@ We send emails via mutation `_sendEmail` provided by the [**Email Sender**](http
 🔥 **Tips:**
 
 - The email is sent with content type "text" or "HTML" depending on what property from the `messageAs` input is used
-- The `from` input is optional; if not provided, the settings stored in WordPress is used
+- The `from` input is optional; if not provided, the settings stored in WordPress are used
 - `_sendEmail` executes WordPress `wp_mail` function, so it will use the configuration defined for sending emails in WordPress (such as the SMTP provider to use)
 
 </div>
@@ -69,7 +69,7 @@ mutation {
 
 Field `_strConvertMarkdownToHTML` from the [**Helper Function Collection**](https://gatographql.com/extensions/helper-function-collection/) extension converts Markdown to HTML.
 
-We can use this field (together with [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/)) use Markdown to compose the email:
+We can use this field to compose the email using Markdown:
 
 ```graphql
 query GetEmailData {
