@@ -164,7 +164,6 @@ mutation UpdatePost($postId: ID!)
 {
   updatePost(input: {
     id: $postId,
-    title: $adaptedPostTitle,
     contentAs: { html: $adaptedContentSource },
   }) {
     status
@@ -229,7 +228,6 @@ mutation UpdatePost($postId: ID!)
 {
   updatePost(input: {
     id: $postId,
-    title: $adaptedPostTitle,
     contentAs: { html: $adaptedContentSource },
   }) {
     status
