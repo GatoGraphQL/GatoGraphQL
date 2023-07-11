@@ -309,6 +309,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'inserting-removing-a-gutenberg-block-in-bulk',
                 \__('Inserting/Removing a (Gutenberg) block in bulk', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
