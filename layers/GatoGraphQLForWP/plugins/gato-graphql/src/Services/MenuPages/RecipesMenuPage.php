@@ -257,6 +257,12 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'sending-emails',
                 \__('Sending emails', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::EMAIL_SENDER,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'using-markdown-to-compose-the-email',
