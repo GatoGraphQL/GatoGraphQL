@@ -233,7 +233,7 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 Because `_sendEmail` is a global field (or, more precisely, a global mutation), it can be executed on any type from the GraphQL schema, including `User`.
 
-This query retrieves a list of users and sends a personalized an email to each of them:
+This query retrieves a list of users, obtains their data (name, email and number of remaining credits, which is stored as meta), and sends a personalized email to each of them:
 
 ```graphql
 mutation {
@@ -241,22 +241,31 @@ mutation {
     email
     displayName
     remainingCredits: metaValue(key: "credits")
+
+    emailMessageTemplate: _strConvertMarkdownToHTML(
+      text: """
+
+        Hello %s,
+
+        Your have **%s remaining credits** in your account.
+
+        Would you like to [buy more](%s)?
+
+      """
+    )
     emailMessage: _sprintf(
-      string: """
-      <p>Hello %s!</p>
-      <p>Your have <strong>%s remaining credits</strong> in your account.</p>
-      <p><a href="%s">Buy more?</a></p>
-      """,
+      string: $__emailMessageTemplate,
       values: [
         $__displayName,
         $__remainingCredits,
         "https://mysite.com/buy-credits"
       ]
     )
+
     _sendEmail(
       input: {
         to: $__email
-        subject: "Remaining credits"
+        subject: "Remaining credits alert"
         messageAs: {
           html: $__emailMessage
         }
