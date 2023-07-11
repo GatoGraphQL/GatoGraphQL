@@ -2,8 +2,6 @@
 
 This recipe executes a search/replace of content in bulk, i.e. on multiple posts with a single GraphQL request.
 
-## Using nested mutations
-
 <div class="doc-config-highlight" markdown=1>
 
 ⚙️ **Configuration alert:**
@@ -68,16 +66,13 @@ mutation UpdatePost(
 }
 ```
 
-The dictionary of `variables` receives the list of strings to search and replace, and how many posts to affect:
+<div class="doc-highlight" markdown=1>
 
-```json
-{
-  "limit": 10,
-  "offset": 0,
-  "replaceFrom": ["Old string 2", "Old string 2"],
-  "replaceTo": ["New string1", "New string 2"]
-}
-```
+🔥 **Tips:**
 
+- In addition to function fields, the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension also provides functionality via their corresponding "function directives", such as `@strReplaceMultiple`
+- When [Multi-Field Directives](https://gatographql.com/guides/special-features/multifield-directives/) is enabled, we can apply a directive to more than one field, indicating the relative position(s) of the additional field(s) via argument `affectAdditionalFieldsUnderPos`
+- When applying a directive to multiple fields, we [must use `@deferredExport` instead of `@export`](http://localhost:8080/guides/schema/executing-multiple-queries-concurrently/#heading-multi-field-directives)
+- When applying a single `@export` or `@deferredExport` directive to multiple fields, the [exported value is a JSON object containing all the fields](http://localhost:8080/guides/schema/executing-multiple-queries-concurrently/#heading-dictionary-type-/-multi-field)
 
-## Using multiple 
+</div>
