@@ -255,8 +255,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'content-search-and-replace',
-                \__('Content search and replace', 'gato-graphql'),
+                'search-replace-and-store-again',
+                \__('Search, replace, and store again', 'gato-graphql'),
             ],
             [
                 'adapting-content-in-bulk',
