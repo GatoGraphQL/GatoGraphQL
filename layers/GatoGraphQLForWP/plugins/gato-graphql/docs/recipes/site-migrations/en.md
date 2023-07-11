@@ -1,6 +1,6 @@
 # Site migrations
 
-We can execute a batch of GraphQL queries to adapt our site's content.
+We can execute a batch of GraphQL queries to adapt the content in the site when migrating it to a new domain, moving pages to a different URL, or others.
 
 <div class="doc-config-highlight" markdown=1>
 
@@ -51,7 +51,7 @@ mutation ReplaceOldWithNewDomainInPosts {
 
 After changing the slug of a post or page, we can convert all content to point to the new URL.
 
-This GraphQL also retrieves the domain from the `"siteurl"` WordPress settings to recreate the page's old and new URLs:
+This GraphQL first retrieves the domain from the `"siteurl"` WordPress settings to recreate the page's old and new URLs:
 
 ```graphql
 query ExportData(
