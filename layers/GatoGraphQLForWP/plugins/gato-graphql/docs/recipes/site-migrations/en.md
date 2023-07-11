@@ -10,7 +10,7 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 </div>
 
-## Replacing the old domain to the new domain
+## Replacing the old domain with the new domain
 
 This GraphQL query first filters all posts containing `"https://my-old-domain.com"` in its content, and replaces this string with `"https://my-new-domain.com"`:
 
