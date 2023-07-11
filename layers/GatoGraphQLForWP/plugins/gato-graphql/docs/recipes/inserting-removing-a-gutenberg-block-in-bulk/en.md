@@ -146,7 +146,7 @@ We provide the `variables` dictionary like this:
 
 🔥 **Tips:**
 
-- Remove the `@remove` directive from the fields in the `CreateRegex` operation to visualize their output
+- During development/testing of the GraphQL query, remove the `@remove` directive from the fields in the `CreateRegex` operation to visualize their output
 
 </div>
 
