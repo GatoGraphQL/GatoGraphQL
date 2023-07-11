@@ -1,32 +1,72 @@
 # Site migrations
 
-Replacing old domain to new domain in content
+We can execute a batch of GraphQL queries to adapt the content in the site when migrating it to a new domain, moving pages to a different URL, or others.
+
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **Configuration alert:**
+
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have  [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+
+</div>
+
+## Adapting content to the new domain
+
+This GraphQL query first filters all posts containing `"https://my-old-domain.com"` in its content, and replaces this string with `"https://my-new-domain.com"`:
 
 ```graphql
-query ExportSiteURL
-{
-  siteURL: optionValue(name: "siteurl")
-    # Hack for this test to work in both "Integration Tests" and "PROD Integration Tests"
-    @strReplace(
-      search: "-for-prod.lndo.site"
-      replaceWith: ".lndo.site"
+mutation ReplaceOldWithNewDomainInPosts {
+  posts(
+    filter: {
+      search: "https://my-old-domain.com"
+    }
+  ) {
+    id
+    contentSource
+    adaptedContentSource: _strReplace(
+      search: "https://my-old-domain.com"
+      replaceWith: "https://my-new-domain.com"
+      in: $__contentSource
     )
-    @export(as: "siteURL")
+    update(input: {
+      contentAs: { html: $__adaptedContentSource }
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        id
+        contentSource
+      }
+    }
+  }
 }
+```
 
+## Adapting content to a new post or page URL
+
+After changing the slug of a post or page, we can convert all content to point to the new URL.
+
+This GraphQL first retrieves the domain from the `"siteurl"` WordPress settings to recreate the page's old and new URLs:
+
+```graphql
 query ExportData(
   $oldPageSlug: String!
   $newPageSlug: String!
-)
-  @depends(on: "ExportSiteURL")
-{
+) {
+  siteURL: optionValue(name: "siteurl")
+
   oldPageURL: _strAppend(
-    after: $siteURL,
+    after: $__siteURL,
     append: $oldPageSlug
   ) @export(as: "oldPageURL")
 
   newPageURL: _strAppend(
-    after: $siteURL,
+    after: $__siteURL,
     append: $newPageSlug
   ) @export(as: "newPageURL")
 }
@@ -34,7 +74,12 @@ query ExportData(
 mutation ReplaceOldWithNewURLInPosts
   @depends(on: "ExportData")
 {
-  posts(filter: { search: $oldPageURL }, sort: {by: ID, order: ASC}) {
+  posts(
+    filter: {
+      search: $oldPageURL
+    },
+    sort: { by: ID, order: ASC }
+  ) {
     id
     contentSource
     adaptedContentSource: _strReplace(
@@ -61,7 +106,7 @@ mutation ReplaceOldWithNewURLInPosts
 }
 ```
 
-var:
+We then provide the old and new page slugs via the `variables` dictionary:
 
 ```json
 {

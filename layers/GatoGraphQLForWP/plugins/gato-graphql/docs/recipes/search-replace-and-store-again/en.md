@@ -1,78 +1,57 @@
 # Search, replace, and store again
 
-Move tips
+This recipe provides examples of content adaptations involving search and replace, and then storing the resource back to the DB. It requires the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension.
 
-Talk about $1 in docs:
-	_strRegexReplaceMultiple(searchRegex: ["/^https?:\\/\\//", "/([a-z]*)/"], replaceWith: ["", "$1$1"], in: "https://gatographql.com")
-	regexWithHashMultiple: _strRegexReplaceMultiple(searchRegex: ["#^https?://#", "/([a-z]*)/"], replaceWith: ["", "$1$1"], in: "https://gatographql.com")
-	regexWithVarsMultiple: _strRegexReplaceMultiple(searchRegex: ["/<!\\[CDATA\\[([a-zA-Z !?]*)\\]\\]>/", "/([a-z]*)/"], replaceWith: ["<Inside: $1>", "$1$1"], in: "<![CDATA[Hello world!]]><![CDATA[Everything OK?]]>")
-	regexWithVarsAndLimitMultiple: _strRegexReplaceMultiple(searchRegex: ["/<!\\[CDATA\\[([a-zA-Z !?]*)\\]\\]>/", "/([a-z]*)/"], replaceWith: ["<Inside: $1>", "$1$1"], in: "<![CDATA[Hello world!]]><![CDATA[Everything OK?]]>", limit: 1)
+<div class="doc-highlight" markdown=1>
 
+🔥 **Tips:**
 
+The [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension provides the following "search and replace" fields:
 
+- `_strReplace`: Replace a string with another string
+- `_strReplaceMultiple`: Replace a list of strings with another list of strings
+- `_strRegexReplace`: Search for the string to replace using a regular expression
+- `_strRegexReplaceMultiple`: Search for the strings to replace using a list of regular expressions
 
-## HTTP to HTTPS everywhere
+</div>
 
-http => https
-URL without link => with link
+## Search and replace a string
 
-1-transform-post-data.gql:
+This GraphQL query retrieves a post, replaces all occurrences of some string with another one in the post's content and title, and stores the post again:
 
 ```graphql
 query GetPostData(
   $postId: ID!
+  $replaceFrom: String!,
+  $replaceTo: String!
 ) {
-  post(by: {id: $postId}) {
-    id
-    title @export(as: "postTitle")
-    contentSource @export(as: "postContent")
+  post(by: { id: $postId }) {
+    title
+    adaptedPostTitle: _strReplace(
+      search: $replaceFrom
+      replaceWith: $replaceTo
+      in: $__title
+    )
+      @export(as: "adaptedPostTitle")
+
+    contentSource
+    adaptedContentSource: _strReplace(
+      search: $replaceFrom
+      replaceWith: $replaceTo
+      in: $__contentSource
+    )
+      @export(as: "adaptedContentSource")
   }
 }
 
-query AdaptPostData(
-  $replaceFrom: String!,
-  $replaceTo: String!
-) @depends(on: "GetPostData") {
-  adaptedPostTitle: _echo(value: $postTitle)
-  	@passOnwards(as: "titleInput")
-    @applyField(
-      name: "_strReplace"
-      arguments: {
-        search: $replaceFrom
-        replaceWith: $replaceTo
-        in: $titleInput
-      },
-      setResultInResponse: true
-    )
-    @export(as: "adaptedPostTitle")
-
-  adaptedPostContent: _echo(value: $postContent)
-  	@passOnwards(as: "contentInput")
-    @applyField(
-      name: "_strReplace"
-      arguments: {
-        search: $replaceFrom
-        replaceWith: $replaceTo
-        in: $contentInput
-      },
-      setResultInResponse: true
-    )
-    @export(as: "adaptedPostContent")
-}
-
-query PreparePostDataAsInput(
-  $postId: ID!
-) @depends(on: "AdaptPostData") {
-  adaptedPostData: _echo(value: {
+mutation UpdatePost($postId: ID!)
+  @depends(on: "GetPostData")
+{
+  updatePost(input: {
     id: $postId,
     title: $adaptedPostTitle,
-    contentAs: { html: $adaptedPostContent },
-  })
-    @export(as: "adaptedPostData")
-}
-
-mutation StoreAdaptedPostData @depends(on: "PreparePostDataAsInput") {
-  updatePost(input: $adaptedPostData) {
+    contentAs: { html: $adaptedContentSource },
+  }) {
     status
     errors {
       __typename
@@ -89,165 +68,178 @@ mutation StoreAdaptedPostData @depends(on: "PreparePostDataAsInput") {
 }
 ```
 
-var
+To execute the query, we provide the dictionary of `variables` with the strings to search and replace:
 
 ```json
 {
   "postId": 1,
-  "replaceFrom": " ",
-  "replaceTo": "|||"
+  "replaceFrom": "Old string",
+  "replaceTo": "New string"
 }
 ```
 
+## Search and replace multiple strings
 
-regex-replace-url-in-post-content.gql:
+This is the same query as above, but by using `_strReplaceMultiple` we can replace a list of strings with another list of strings:
 
 ```graphql
 query GetPostData(
   $postId: ID!
+  $replaceFrom: [String!]!,
+  $replaceTo: [String!]!
 ) {
-  post(by: {id: $postId}) {
+  post(by: { id: $postId }) {
+    title
+    adaptedPostTitle: _strReplaceMultiple(
+      search: $replaceFrom
+      replaceWith: $replaceTo
+      in: $__title
+    )
+      @export(as: "adaptedPostTitle")
+
+    contentSource
+    adaptedContentSource: _strReplaceMultiple(
+      search: $replaceFrom
+      replaceWith: $replaceTo
+      in: $__contentSource
+    )
+      @export(as: "adaptedContentSource")
+  }
+}
+
+mutation UpdatePost($postId: ID!)
+  @depends(on: "GetPostData")
+{
+  updatePost(input: {
+    id: $postId,
+    title: $adaptedPostTitle,
+    contentAs: { html: $adaptedContentSource },
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      contentSource
+    }
+  }
+}
+```
+
+The dictionary of `variables` now receives a list of strings to search and replace:
+
+```json
+{
+  "postId": 1,
+  "replaceFrom": ["Old string 2", "Old string 2"],
+  "replaceTo": ["New string1", "New string 2"]
+}
+```
+
+## Adding missing links
+
+This GraphQL query does a regex search and replace to add missing links in the post's HTML content:
+
+```graphql
+query GetPostData($postId: ID!) {
+  post(by: { id: $postId }) {
     id
     contentSource
-    contentSourceWithLinks: _strRegexReplace(
-      # @see https://stackoverflow.com/a/206087
-      searchRegex: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
+    adaptedContentSource: _strRegexReplace(
+      searchRegex: "#\\s+((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
       replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
       in: $__contentSource
     )
+      @export(as: "adaptedContentSource")
+  }
+}
+
+mutation UpdatePost($postId: ID!)
+  @depends(on: "GetPostData")
+{
+  updatePost(input: {
+    id: $postId,
+    contentAs: { html: $adaptedContentSource },
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      contentSource
+    }
   }
 }
 ```
 
-var
+All URLs which are not surrounded by an anchor tag, such as:
 
-```json
-{
-  "postId": 662
-}
+```html
+<p>Visit my website: https://mysite.com.</p>
 ```
 
-This one is repeated from Site Migrations:
+...are added the correspondig `<a>` tag around them (while also removing the domain from the text, and adding a `target` to open in a new window), becoming:
 
-nested/1-replace-url-in-post-content.gql:
+```html
+<p>Visit my website: <a href="https://mysite.com" target="_blank">mysite.com</a>.</p>
+```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+- The `"\"` character must be escaped as `"\\"` inside the regex pattern. For instance, `"/^https?:\/\//"` is written as `"/^https?:\\/\\//"`
+- The documentation for [PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php) explains how to use [replacement references](https://www.php.net/manual/en/function.preg-replace.php#refsect1-function.preg-replace-parameters) (eg: `$1`) and [PRCE modifiers](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php).
+
+</div>
+
+## Replacing HTTP with HTTPS
+
+This GraphQL query replaces all `http` URLs with `https` in HTML image sources:
 
 ```graphql
-query ExportSiteURL
-{
-  siteURL: optionValue(name: "siteurl")
-    # Hack for this test to work in both "Integration Tests" and "PROD Integration Tests"
-    @strReplace(
-      search: "-for-prod.lndo.site"
-      replaceWith: ".lndo.site"
-    )
-    @export(as: "siteURL")
-}
-
-query ExportData(
-  $oldPageSlug: String!
-  $newPageSlug: String!
-)
-  @depends(on: "ExportSiteURL")
-{
-  oldPageURL: _strAppend(
-    after: $siteURL,
-    append: $oldPageSlug
-  ) @export(as: "oldPageURL")
-
-  newPageURL: _strAppend(
-    after: $siteURL,
-    append: $newPageSlug
-  ) @export(as: "newPageURL")
-}
-
-mutation ReplaceOldWithNewURLInPosts
-  @depends(on: "ExportData")
-{
-  posts(filter: { search: $oldPageURL }, sort: {by: ID, order: ASC}) {
+query GetPostData($postId: ID!) {
+  post(by: {id: $postId}) {
     id
     contentSource
-    adaptedContentSource: _strReplace(
-      search: $oldPageURL
-      replaceWith: $newPageURL
+    adaptedContentSource: _strRegexReplace(
+      searchRegex: "/<img(\\s+)?([^>]*?\\s+?)?src=([\"'])http:\\/\\/(.*?)/"
+      replaceWith: "<img$1$2src=$3https://$4$3"
       in: $__contentSource
     )
-    update(input: {
-      contentAs: { html: $__adaptedContentSource }
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        id
-        contentSource
+      @export(as: "adaptedContentSource")
+  }
+}
+
+mutation UpdatePost($postId: ID!)
+  @depends(on: "GetPostData")
+{
+  updatePost(input: {
+    id: $postId,
+    contentAs: { html: $adaptedContentSource },
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
       }
     }
-  }
-}
-```
-
-var
-
-```json
-{
-  "oldPageSlug": "/privacy/",
-  "newPageSlug": "/user-privacy/"
-}
-```
-
-nested/3-transform-post-properties.gql
-
-```graphql
-query ExportAndTransformData(
-  $replaceFrom: String!
-  $replaceTo: String!
-) {
-  # Exclude ID 28 because its blocks render the domain, so it doesn't work for "PROD Integration Tests"
-  posts: posts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { excludeIDs: 28 }) {
-    id @export(as: "postIDs")
-    title @strReverse
-    excerpt
-      @strReplace(
-        search: $replaceFrom
-        replaceWith: $replaceTo
-      )
-      @deferredExport(
-        as: "postProps"
-        affectAdditionalFieldsUnderPos: 1
-      )
-  }
-}
-mutation TransformPostData @depends(on: "ExportAndTransformData") {
-  adaptedPosts: posts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { excludeIDs: 28 }) {
-    id
-    positionInArray: _arraySearch(array: $postIDs, element: $__id)
-    postData: _arrayItem(array: $postProps, position: $__positionInArray)
-    update(input: $__postData) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        title
-        contentSource
-      }
+    post {
+      id
+      title
+      contentSource
     }
   }
-}
-```
-
-var
-
-```json
-{
-  "replaceFrom": " ",
-  "replaceTo": "|||"
 }
 ```

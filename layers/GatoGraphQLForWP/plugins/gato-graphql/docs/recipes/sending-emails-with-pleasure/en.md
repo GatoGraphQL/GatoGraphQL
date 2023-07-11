@@ -164,19 +164,6 @@ mutation SendEmail @depends(on: "GetEmailData") {
 }
 ```
 
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-There are several "search and replace" fields we can use (provided by [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/)):
-
-- `_strReplace`: Replace a string with another string
-- `_strReplaceMultiple`: Replace a list of strings with another list of strings
-- `_strRegexReplace`: Search for the string to replace using a regular expression
-- `_strRegexReplaceMultiple`: Search for the strings to replace using a list of regular expressions
-
-</div>
-
 ## Sending a notification email to the admin
 
 We can retrieve the email of the admin user from the WordPress `wp_options` table, and inject this value into the `to` field:
