@@ -182,7 +182,7 @@ There are several "search and replace" fields we can use (provided by [**PHP Fun
 We can retrieve the email of the admin user from the WordPress `wp_options` table, and inject this value into the `to` field:
 
 ```graphql
-query ExportData @depends {
+query ExportData {
   adminEmail: optionValue(name: "admin_email")
     @export(as: "adminEmail")
 }
