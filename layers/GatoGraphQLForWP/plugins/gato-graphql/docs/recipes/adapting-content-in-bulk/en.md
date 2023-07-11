@@ -1,6 +1,6 @@
 # Adapting content in bulk
 
-The previous recipes on searching, replacing and storing content again can be executed in bulk.
+This recipe executes a search/replace of content in bulk, i.e. on multiple posts with a single GraphQL request.
 
 ## Using nested mutations
 
