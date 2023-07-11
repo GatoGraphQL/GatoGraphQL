@@ -10,6 +10,20 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 </div>
 
+The GraphQL query below retrieves the data for the multiple posts, executes a search and replace on both `title` and `excerpt` fields for each of them, and exports a single dynamic variable `$postInputs` with all the results as a dictionary, with format:
+
+```json
+{
+  "${post ID}": {
+    "title": "${adapted post title}",
+    "excerpt": "${adapted post excerpt}"
+  },
+  // repeat for all other posts ...
+}
+```
+
+In the `mutation` operation, each of these entries is then retrieved via `_objectProperty` (using `${post ID}` as the key) and passed as the `input` to update the post:
+
 ```graphql
 query TransformAndExportData(
   $limit: Int! = 5,
