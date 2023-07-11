@@ -306,17 +306,14 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'inserting-a-gutenberg-block-in-all-posts',
-                \__('Inserting a Gutenberg block in all posts', 'gato-graphql'),
+                'inserting-removing-a-gutenberg-block-in-bulk',
+                \__('Inserting/Removing a (Gutenberg) block in bulk', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
-            ],
-            [
-                'removing-a-gutenberg-block-from-all-posts',
-                \__('Removing a Gutenberg block from all posts', 'gato-graphql'),
             ],
             [
                 'automating-admin-tasks',
