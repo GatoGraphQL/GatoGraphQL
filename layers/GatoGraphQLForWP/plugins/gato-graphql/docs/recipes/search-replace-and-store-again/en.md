@@ -160,14 +160,39 @@ query GetPostData($postId: ID!) {
   post(by: { id: $postId }) {
     id
     contentSource
-    contentSourceWithLinks: _strRegexReplace(
+    adaptedContentSource: _strRegexReplace(
       searchRegex: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
       replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
       in: $__contentSource
     )
+      @export(as: "adaptedContentSource")
+  }
+}
+
+mutation UpdatePost($postId: ID!)
+  @depends(on: "GetPostData")
+{
+  updatePost(input: {
+    id: $postId,
+    title: $adaptedPostTitle,
+    contentAs: { html: $adaptedContentSource },
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      contentSource
+    }
   }
 }
 ```
+
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
@@ -188,11 +213,35 @@ query GetPostData($postId: ID!) {
   post(by: {id: $postId}) {
     id
     contentSource
-    contentSourceWithLinks: _strRegexReplace(
+    adaptedContentSource: _strRegexReplace(
       searchRegex: "/<img(\\s+)?([^>]*?\\s+?)?src=([\"'])http:\\/\\/(.*?)/"
       replaceWith: "<img$1$2src=$3https://$4$3"
       in: $__contentSource
     )
+      @export(as: "adaptedContentSource")
+  }
+}
+
+mutation UpdatePost($postId: ID!)
+  @depends(on: "GetPostData")
+{
+  updatePost(input: {
+    id: $postId,
+    title: $adaptedPostTitle,
+    contentAs: { html: $adaptedContentSource },
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      contentSource
+    }
   }
 }
 ```
