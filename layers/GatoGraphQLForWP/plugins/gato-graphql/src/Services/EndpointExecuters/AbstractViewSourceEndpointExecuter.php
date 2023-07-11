@@ -131,6 +131,10 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
         );
         $content .= sprintf(
             $scriptTagPlaceholder,
+            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/xml.min.js'
+        );
+        $content .= sprintf(
+            $scriptTagPlaceholder,
             $mainPluginURL . 'assets/js/run_highlight.js'
         );
 
