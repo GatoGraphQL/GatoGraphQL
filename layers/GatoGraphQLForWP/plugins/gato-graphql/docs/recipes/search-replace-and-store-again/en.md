@@ -1,6 +1,18 @@
 # Search, replace, and store again
 
-Move tips
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+There are several "search and replace" fields we can use (provided by [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/)):
+
+- `_strReplace`: Replace a string with another string
+- `_strReplaceMultiple`: Replace a list of strings with another list of strings
+- `_strRegexReplace`: Search for the string to replace using a regular expression
+- `_strRegexReplaceMultiple`: Search for the strings to replace using a list of regular expressions
+
+</div>
 
 Talk about $1 in docs:
 	_strRegexReplaceMultiple(searchRegex: ["/^https?:\\/\\//", "/([a-z]*)/"], replaceWith: ["", "$1$1"], in: "https://gatographql.com")
