@@ -236,7 +236,7 @@ mutation RemoveBlock
 }
 ```
 
-vars:
+We provide the `variables` dictionary like this:
 
 ```json
 {
