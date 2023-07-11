@@ -155,23 +155,8 @@ We provide the `variables` dictionary like this:
 This GraphQL query searches for all posts containing the custom block, and removes it from their HTML source:
 
 ```graphql
-query CreateVars {
-  foundPosts: posts(filter: { search: "\"<!-- /mycompany:black-friday-campaign-video -->\"" } ) {
-    id @export(as: "postIDs", type: LIST)
-    contentSource
-    originalInputs: _echo(value: {
-      id: $__id,
-      contentAs: { html: $__contentSource }
-    })
-      @export(as: "originalInputs")
-      @remove
-  }
-}
-
-mutation RemoveBlock
-  @depends(on: "CreateVars")
-{
-  posts(filter: { ids: $postIDs } ) {
+mutation RemoveBlock {
+  posts(filter: { search: "\"<!-- /mycompany:black-friday-campaign-video -->\"" } ) {
     id
     contentSource
     adaptedContentSource: _strRegexReplace(
