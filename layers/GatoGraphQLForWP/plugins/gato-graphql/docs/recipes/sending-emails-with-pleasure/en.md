@@ -65,46 +65,49 @@ mutation {
 }
 ```
 
-## Using Markdown to compose the email
+## Composing the email using Markdown
 
 Field `_strConvertMarkdownToHTML` from the [**Helper Function Collection**](https://gatographql.com/extensions/helper-function-collection/) extension converts Markdown to HTML.
 
-We can use this field, together with [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/), to compose an email with Markdown:
+We can use this field (together with [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/)) use Markdown to compose the email:
 
 ```graphql
 query GetEmailData {
-  emailMessageTemplate: _strConvertMarkdownToHTML(
+  emailMessage: _strConvertMarkdownToHTML(
     text: """
 
-Hi {$user}, **we have incredible news!**:
+We have great news: **Version 1.0 of our plugin will be released soon!**
 
-Our plugin will be released soon. Would you like to be part of the beta testing?
+If you'd like to help us beta test it, please complete [this form](https://forms.gle/FpXNromWAsZYC1zB8).
 
-If so, please complete this form: [Read online]({$formLink})
+_Please reply by 30th June 🙏_
+
+Thanks!
 
     """
   )
-  emailMessage: _strReplaceMultiple(
-    search: ["{$postAuthorName}", "{$postAuthorLink}", "{$postTitle}", "{$postExcerpt}", "{$postLink}"],
-    replaceWith: [$postAuthorName, $postAuthorLink, $postTitle, $postExcerpt, $postLink],
-    in: $__emailMessageTemplate
-  )
     @export(as: "emailMessage")
-  subject: _sprintf(string: "New post created by %s", values: [$postAuthorName])
-    @export(as: "emailSubject")
 }
 
 mutation SendEmail @depends(on: "GetEmailData") {
   _sendEmail(
     input: {
       to: "target@email.com"
-      subject: $emailSubject
+      subject: "Great news!"
       messageAs: {
         html: $emailMessage
       }
     }
   ) {
     status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
   }
 }
 ```
+
+## Injecting dynamic data into the email
