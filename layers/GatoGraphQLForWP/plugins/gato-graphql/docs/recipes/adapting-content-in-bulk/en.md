@@ -21,7 +21,6 @@ query TransformAndExportData(
     pagination: { limit: $limit, offset: $offset }
     sort: { by: ID, order: ASC }
   ) {
-    id
     title
     excerpt
       @strReplaceMultiple(
@@ -51,7 +50,7 @@ mutation UpdatePost(
     postInput: _objectProperty(
       object: $postInputs,
       by: { key: $__id }
-    )
+    ) @remove
     update(input: $__postInput) {
       status
       errors {
@@ -62,7 +61,7 @@ mutation UpdatePost(
       }
       post {
         title
-        contentSource
+        excerpt
       }
     }
   }
