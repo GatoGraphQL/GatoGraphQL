@@ -57,7 +57,7 @@ mutation InjectBlock(
 
 ## Inserting a block in bulk (again)
 
-This GraphQL query is similar to the previos one, but it also allows to choose the block type to search for, and after what occurrence number to place our block:
+This GraphQL query is similar to the previous one, but it also allows to choose the block type to search for, and after how many such blocks to place the custom block:
 
 ```graphql
 query CreateRegex(
@@ -69,23 +69,30 @@ query CreateRegex(
     string: "<!-- /%s -->",
     values: [$searchBlockType]
   )
+    @remove
   endingBlockMarkupArray: _arrayPad(
     array: [],
     length: $injectAfterBlockCount,
     value: $__endingBlockMarkup
   )
+    @remove
   regexString: _arrayJoin(
     array: $__endingBlockMarkupArray,
     separator: "[\\s\\S]+"
   )
+    @remove
   regex: _sprintf(
     string: "#(%s)#U",
     values: [$__regexString]
-  ) @export(as: "regex")
+  )
+    @export(as: "regex")
+    @remove
   replaceWith: _sprintf(
     string: "$1%s",
     values: [$injectBlockMarkup]
-  ) @export(as: "replaceWith")
+  )
+    @export(as: "replaceWith")
+    @remove
 }
 
 mutation InjectBlock(
@@ -126,11 +133,10 @@ mutation InjectBlock(
 }
 ```
 
-vars:
+We provide the `variables` dictionary like this:
 
 ```json
 {
-  "postIDs": [664],
   "injectBlockMarkup": "<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
   "injectAfterBlockCount": 3
 }
