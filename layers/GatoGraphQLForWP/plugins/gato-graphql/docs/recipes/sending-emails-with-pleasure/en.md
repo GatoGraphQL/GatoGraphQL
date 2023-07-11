@@ -223,38 +223,17 @@ mutation SendEmail {
 
 ## Sending a personalized email to users
 
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **Configuration alert:**
+
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have  [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+
+</div>
+
 Because `_sendEmail` is a global field (or, more precisely, a global mutation), it can be executed on any type from the GraphQL schema, including `User`.
 
-
-[Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/)
-
-This is useful for iterating a list of users, and sending an email to each of them (in this case, the mutation is triggered while in the `User` type):
-
-```graphql
-mutation {
-  users {
-    email
-    _sendEmail(
-      input: {
-        to: $__email
-        subject: "..."
-        messageAs: {
-          text: "..."
-        }
-      }
-    ) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-  }
-}
-```
-
-Combined with features from other extensions (in this case, [**Field to Input**](https://gatographql.com/extensions/field-to-input/) and [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/)), we can create personalized messages for every user:
+This query retrieves a list of users and sends a personalized an email to each of them:
 
 ```graphql
 mutation {
