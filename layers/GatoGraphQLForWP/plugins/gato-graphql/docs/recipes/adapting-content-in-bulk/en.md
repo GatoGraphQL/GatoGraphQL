@@ -48,7 +48,10 @@ mutation UpdatePost(
     sort: { by: ID, order: ASC }
   ) {
     id
-    postInput: _objectProperty(object: $postInputs, by: { key: $__id })
+    postInput: _objectProperty(
+      object: $postInputs,
+      by: { key: $__id }
+    )
     update(input: $__postInput) {
       status
       errors {
