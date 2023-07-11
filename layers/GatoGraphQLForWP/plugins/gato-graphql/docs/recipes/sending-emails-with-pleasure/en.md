@@ -111,3 +111,68 @@ mutation SendEmail @depends(on: "GetEmailData") {
 ```
 
 ## Injecting dynamic data into the email
+
+Using the function fields provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/), we can create a message template containing placeholders, and replace them with dynamic data:
+
+```graphql
+query GetPostData($postID: ID!) {
+  post(by: {id: $postID}) {
+    title @export(as: "postTitle")
+    excerpt @export(as: "postExcerpt")
+    url @export(as: "postLink")
+    author {
+      name @export(as: "postAuthorName")
+      url @export(as: "postAuthorLink")
+    }
+  }
+}
+
+query GetEmailData @depends(on: "GetPostData") {
+  emailMessageTemplate: _strConvertMarkdownToHTML(
+    text: """
+
+There is a new post by [{$postAuthorName}]({$postAuthorLink}):
+
+**{$postTitle}**: {$postExcerpt}
+
+[Read online]({$postLink})
+
+    """
+  )
+  emailMessage: _strReplaceMultiple(
+    search: ["{$postAuthorName}", "{$postAuthorLink}", "{$postTitle}", "{$postExcerpt}", "{$postLink}"],
+    replaceWith: [$postAuthorName, $postAuthorLink, $postTitle, $postExcerpt, $postLink],
+    in: $__emailMessageTemplate
+  )
+    @export(as: "emailMessage")
+  subject: _sprintf(string: "New post created by %s", values: [$postAuthorName])
+    @export(as: "emailSubject")
+}
+
+mutation SendEmail @depends(on: "GetEmailData") {
+  _sendEmail(
+    input: {
+      to: "target@email.com"
+      subject: $emailSubject
+      messageAs: {
+        html: $emailMessage
+      }
+    }
+  ) {
+    status
+  }
+}
+```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+There are several "search and replace" fields we can use (provided by [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/)):
+
+- `_strReplace`: Replace a string with another string
+- `_strReplaceMultiple`: Replace a list of strings with another list of strings
+- `_strRegexReplace`: Search for the string to replace using a regular expression
+- `_strRegexReplaceMultiple`: Search for the strings to replace using a list of regular expressions
+
+</div>

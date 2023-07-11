@@ -259,6 +259,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Sending emails (with pleasure)', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
