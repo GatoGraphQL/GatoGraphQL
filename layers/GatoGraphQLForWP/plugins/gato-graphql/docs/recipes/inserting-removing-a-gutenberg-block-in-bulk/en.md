@@ -17,7 +17,7 @@ For the GraphQL queries in this recipe to work, the [Schema Configuration](https
 
 ## Inserting a block in bulk
 
-This GraphQL query identifies the 3rd paragraph block in a post (by searching for `<!-- /wp:paragraph -->`) and places the custom block's HTML content right after it (in this case, it is the HTML code for a `core/video` block).
+This GraphQL query identifies the 3rd paragraph block in a post (by searching for `<!-- /wp:paragraph -->`) and places the custom block's HTML content right after it:
 
 ```graphql
 mutation InjectBlock(
@@ -33,7 +33,7 @@ mutation InjectBlock(
     adaptedContentSource: _strRegexReplace(
       in: $__contentSource,
       searchRegex: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
-      replaceWith: "$1<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
+      replaceWith: "$1<!-- mycompany:black-friday-campaign-video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure>\n<!-- /mycompany:black-friday-campaign-video -->",
       limit: 1
     )
     update(input: {
@@ -137,7 +137,7 @@ We provide the `variables` dictionary like this:
 
 ```json
 {
-  "injectBlockMarkup": "<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->",
+  "injectBlockMarkup": "<!-- mycompany:black-friday-campaign-video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure>\n<!-- /mycompany:black-friday-campaign-video -->",
   "injectAfterBlockCount": 3
 }
 ```
@@ -150,7 +150,7 @@ We provide the `variables` dictionary like this:
 
 </div>
 
-# Removing a block in bulk
+## Removing a block in bulk
 
 remove-block-by-type.gql
 
@@ -196,7 +196,7 @@ mutation RemoveBlock
 }
 ```
 
-detailed:
+## Removing a block with more options
 
 ```graphql
 query CreateVars(
