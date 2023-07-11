@@ -289,6 +289,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'automating-admin-tasks',
+                \__('Automating admin tasks', 'gato-graphql'),
+            ],
+            [
                 'sending-a-daily-summary-of-activity',
                 \__('Sending a daily summary of activity', 'gato-graphql'),
             ],
@@ -316,14 +320,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'persisted-queries-as-webhooks',
                 \__('Persisted Queries as Webhooks', 'gato-graphql'),
-            ],
-            [
-                'automating-tasks',
-                \__('Automating tasks', 'gato-graphql'),
-            ],
-            [
-                'executing-admin-tasks',
-                \__('Executing admin tasks', 'gato-graphql'),
             ],
             [
                 'bulk-editing-content',
