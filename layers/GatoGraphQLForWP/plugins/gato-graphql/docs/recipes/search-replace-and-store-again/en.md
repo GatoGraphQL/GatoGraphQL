@@ -1,11 +1,12 @@
 # Search, replace, and store again
 
+This recipe (which requires the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) provides examples of content adaptations involving search and replace, and then storing the resource back to the DB.
 
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
 
-There are several "search and replace" fields we can use (provided by [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/)):
+The [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension provides the following "search and replace" fields:
 
 - `_strReplace`: Replace a string with another string
 - `_strReplaceMultiple`: Replace a list of strings with another list of strings
