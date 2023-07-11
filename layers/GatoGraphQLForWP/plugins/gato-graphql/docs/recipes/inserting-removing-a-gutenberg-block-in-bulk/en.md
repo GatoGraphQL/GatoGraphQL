@@ -55,9 +55,9 @@ mutation InjectBlock(
 }
 ```
 
-## Inserting a block in bulk (again)
+## Inserting the block with more options
 
-This GraphQL query is similar to the previous one, but it also allows to choose the block type to search for, and after how many such blocks to place the custom block:
+This GraphQL query is an improvement on the previous one: It generates the regex dynamically, allowing us to input the block type to search for, and after how many such blocks to place the custom block:
 
 ```graphql
 query CreateRegex(
@@ -141,6 +141,14 @@ We provide the `variables` dictionary like this:
   "injectAfterBlockCount": 3
 }
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+- Remove the `@remove` directive from the fields in the `CreateRegex` operation to visualize their output
+
+</div>
 
 # Removing a block in bulk
 
