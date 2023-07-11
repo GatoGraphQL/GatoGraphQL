@@ -44,7 +44,7 @@ query GetPostData(
   }
 }
 
-mutation StoreAdaptedPostData($postId: ID!)
+mutation UpdatePost($postId: ID!)
   @depends(on: "GetPostData")
 {
   updatePost(input: {
@@ -75,6 +75,69 @@ To execute the query, we provide the dictionary of `variables`:
   "postId": 1,
   "replaceFrom": "Old string",
   "replaceTo": "New string"
+}
+```
+
+## Search and replace multiple strings
+
+This is the same query as above, but by using `_strReplaceMultiple` we can replace a list of strings with another list of strings:
+
+```graphql
+query GetPostData(
+  $postId: ID!
+  $replaceFrom: [String!]!,
+  $replaceTo: [String!]!
+) {
+  post(by: { id: $postId }) {
+    title
+    adaptedPostTitle: _strReplaceMultiple(
+      search: $replaceFrom
+      replaceWith: $replaceTo
+      in: $__title
+    )
+      @export(as: "adaptedPostTitle")
+
+    contentSource
+    adaptedContentSource: _strReplaceMultiple(
+      search: $replaceFrom
+      replaceWith: $replaceTo
+      in: $__contentSource
+    )
+      @export(as: "adaptedContentSource")
+  }
+}
+
+mutation UpdatePost($postId: ID!)
+  @depends(on: "GetPostData")
+{
+  updatePost(input: {
+    id: $postId,
+    title: $adaptedPostTitle,
+    contentAs: { html: $adaptedContentSource },
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      contentSource
+    }
+  }
+}
+```
+
+To execute the query, we provide the dictionary of `variables`:
+
+```json
+{
+  "postId": 1,
+  "replaceFrom": ["Old string 2", "Old string 2"],
+  "replaceTo": ["New string1", "New string 2"]
 }
 ```
 
