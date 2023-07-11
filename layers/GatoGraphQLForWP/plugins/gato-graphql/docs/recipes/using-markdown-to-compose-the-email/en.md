@@ -1,34 +1,19 @@
 # Using Markdown to compose the email
 
-The query below sends an email to the admin user with some post's content (eg: it can be triggered whenever a new post is published). It uses:
+Field `_strConvertMarkdownToHTML` from the [**Helper Function Collection**](https://gatographql.com/extensions/helper-function-collection/) extension converts Markdown to HTML.
 
-- [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) to manage the query into logical units
-- Field `_strConvertMarkdownToHTML` from **Helper Fields** to compose the email message using Markdown
-- Fields `_strReplaceMultiple` and `_sprintf` from **Function Fields** to dynamically inject values into the email subject and message
-- [**Field to Input**](https://gatographql.com/extensions/field-to-input/) to retrieve and provide the admin's email from `wp_options`
+We can use this field, together with [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/), to compose an email with Markdown:
 
 ```graphql
-query GetPostData($postID: ID!) {
-  post(by: {id: $postID}) {
-    title @export(as: "postTitle")
-    excerpt @export(as: "postExcerpt")
-    url @export(as: "postLink")
-    author {
-      name @export(as: "postAuthorName")
-      url @export(as: "postAuthorLink")
-    }
-  }
-}
-
-query GetEmailData @depends(on: "GetPostData") {
+query GetEmailData {
   emailMessageTemplate: _strConvertMarkdownToHTML(
     text: """
 
-There is a new post by [{$postAuthorName}]({$postAuthorLink}):
+Hi {$user}, **we have incredible news!**:
 
-**{$postTitle}**: {$postExcerpt}
+Our plugin will be released soon. Would you like to be part of the beta testing?
 
-[Read online]({$postLink})
+If so, please complete this form: [Read online]({$formLink})
 
     """
   )
