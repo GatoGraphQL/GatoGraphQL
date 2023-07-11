@@ -141,32 +141,21 @@ To execute the query, we provide the dictionary of `variables`:
 }
 ```
 
-## HTTP to HTTPS
+## Replace HTTP with HTTPS
 
-This GraphQL query queries a post, converts all URLs starting with `"http://"` to `"https://"` in its content, and stores the post again:
+This GraphQL query identifies all HTML anchors in the post's content, extracts their URLs, and replaces those starting with `"http://"` with `"https://"`:
 
 ```graphql
-query GetPostData(
-  $postId: ID!
-) {
+query GetPostData($postId: ID!) {
   post(by: {id: $postId}) {
     id
     contentSource
     contentSourceWithLinks: _strRegexReplace(
-      # @see https://stackoverflow.com/a/206087
       searchRegex: "#((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
       replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
       in: $__contentSource
     )
   }
-}
-```
-
-var
-
-```json
-{
-  "postId": 662
 }
 ```
 
