@@ -57,7 +57,7 @@ mutation InjectBlock(
 
 ## Inserting the block with more options
 
-This GraphQL query is an improvement on the previous one: It generates the regex dynamically, allowing us to input the block type to search for, and after how many such blocks to place the custom block:
+This GraphQL query, similar to the previous one, generates the regex dynamically, allowing us to input the block type to search for, and after how many such blocks to place the custom block:
 
 ```graphql
 query CreateRegex(
@@ -185,6 +185,8 @@ mutation RemoveBlock {
 
 ## Removing a block with more options
 
+This GraphQL query, similar to the previous one, generates the regex dynamically, allowing us to input the block type to be removed:
+
 ```graphql
 query CreateVars(
   $removeBlockType: String!
@@ -192,27 +194,22 @@ query CreateVars(
   regex: _sprintf(
     string: "#(<!-- %1$s -->[\\s\\S]+<!-- /%1$s -->)#",
     values: [$removeBlockType]
-  ) @export(as: "regex")
+  )
+    @export(as: "regex")
+    @remove
 
   search: _sprintf(
     string: "\"<!-- /%1$s -->\"",
     values: [$removeBlockType]
   )
-  
-  foundPosts: posts(filter: { search: $__search } ) {
-    id @export(as: "postIDs", type: LIST)
-    contentSource
-    originalInputs: _echo(value: {
-      id: $__id,
-      contentAs: { html: $__contentSource }
-    }) @export(as: "originalInputs")
-  }
+    @export(as: "search")
+    @remove
 }
 
 mutation RemoveBlock
   @depends(on: "CreateVars")
 {
-  posts(filter: { ids: $postIDs } ) {
+  posts(filter: { search: $search } ) {
     id
     contentSource
     adaptedContentSource: _strRegexReplace(
