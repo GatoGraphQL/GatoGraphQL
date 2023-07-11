@@ -15,7 +15,7 @@ The [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functi
 
 </div>
 
-## Search and replace some string
+## Search and replace a string
 
 This GraphQL query retrieves a post, replaces all occurrences in its content and title of some string with another one, and stores the post again:
 
