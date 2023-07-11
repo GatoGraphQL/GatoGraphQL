@@ -194,32 +194,6 @@ mutation RemoveBlock
     }
   }
 }
-
-mutation RestorePosts
-  @depends(on: "CreateVars")
-{
-  restorePosts: _echo(value: $originalInputs)
-    @underEachArrayItem(passValueOnwardsAs: "input")
-      @applyField(
-        name: "updatePost"
-        arguments: { input: $input }
-      )
-}
-
-query CheckRestoredPosts
-  @depends(on: "CreateVars")
-{
-  restoredPosts: posts(filter: { ids: $postIDs } ) {
-    id
-    contentSource
-  }
-}
-
-query RemoveBlockAndThenRestorePosts
-  @depends(on: ["RemoveBlock", "RestorePosts", "CheckRestoredPosts"])
-{
-  id
-}
 ```
 
 detailed:
@@ -275,32 +249,6 @@ mutation RemoveBlock
       }
     }
   }
-}
-
-mutation RestorePosts
-  @depends(on: "CreateVars")
-{
-  restorePosts: _echo(value: $originalInputs)
-    @underEachArrayItem(passValueOnwardsAs: "input")
-      @applyField(
-        name: "updatePost"
-        arguments: { input: $input }
-      )
-}
-
-query CheckRestoredPosts
-  @depends(on: "CreateVars")
-{
-  restoredPosts: posts(filter: { ids: $postIDs } ) {
-    id
-    contentSource
-  }
-}
-
-query RemoveBlockAndThenRestorePosts
-  @depends(on: ["RemoveBlock", "RestorePosts", "CheckRestoredPosts"])
-{
-  id
 }
 ```
 
