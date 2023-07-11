@@ -4,7 +4,7 @@ We can update posts by modifying their (Gutenberg) block's HTML content.
 
 Among other use cases, this is useful for promoting campaigns (such as when offering a discount during Black Friday):
 
-- Before the campaign, we create a custom block with our message, and execute a bulk operation to add it to all posts in the website
+- Before the campaign, we create a custom block `mycompany:black-friday-campaign-video` with our Call To Action, and execute a bulk operation to add it to all posts in the website
 - After the campaign, we execute a bulk operation to remove the block from all posts
 
 <div class="doc-config-highlight" markdown=1>
