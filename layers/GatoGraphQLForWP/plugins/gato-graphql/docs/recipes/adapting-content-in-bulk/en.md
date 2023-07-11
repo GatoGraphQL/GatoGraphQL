@@ -4,8 +4,13 @@ This recipe executes a search/replace of content in bulk, i.e. on multiple posts
 
 ## Using nested mutations
 
+<div class="doc-config-highlight" markdown=1>
 
-nested/3-transform-post-properties.gql
+⚙️ **Configuration alert:**
+
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have  [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+
+</div>
 
 ```graphql
 query TransformAndExportData(
@@ -18,7 +23,7 @@ query TransformAndExportData(
     pagination: { limit: $limit, offset: $offset }
     sort: { by: ID, order: ASC }
   ) {
-    id @export(as: "postIDs")
+    id
     title
     excerpt
       @strReplaceMultiple(
@@ -28,6 +33,7 @@ query TransformAndExportData(
       )
       @deferredExport(
         as: "postInputs"
+        type: DICTIONARY
         affectAdditionalFieldsUnderPos: 1
       )
   }
@@ -44,8 +50,7 @@ mutation UpdatePost(
     sort: { by: ID, order: ASC }
   ) {
     id
-    positionInArray: _arraySearch(array: $postIDs, element: $__id)
-    postInput: _arrayItem(array: $postInputs, position: $__positionInArray)
+    postInput: _objectProperty(object: $postInputs, by: { key: $__id })
     update(input: $__postInput) {
       status
       errors {

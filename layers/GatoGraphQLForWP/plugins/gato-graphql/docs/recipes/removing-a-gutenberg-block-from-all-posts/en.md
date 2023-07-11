@@ -5,7 +5,7 @@ remove-block-by-type.gql
 ```graphql
 query CreateVars {
   foundPosts: posts(filter: { search: "\"<!-- /wp:columns -->\"" } ) {
-    id @export(as: "postIDs")
+    id @export(as: "postIDs", type: LIST)
     contentSource
     originalInputs: _echo(value: {
       id: $__id,
@@ -87,7 +87,7 @@ query CreateVars(
   )
   
   foundPosts: posts(filter: { search: $__search } ) {
-    id @export(as: "postIDs")
+    id @export(as: "postIDs", type: LIST)
     contentSource
     originalInputs: _echo(value: {
       id: $__id,
