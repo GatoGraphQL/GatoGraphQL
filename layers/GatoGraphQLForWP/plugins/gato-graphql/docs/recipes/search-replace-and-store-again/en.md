@@ -250,13 +250,6 @@ mutation UpdatePost($postId: ID!)
 
 🔥 **Tips:**
 
-Talk about $1 in docs:
-
-_strRegexReplaceMultiple(searchRegex: ["/^https?:\\/\\//", "/([a-z]*)/"], replaceWith: ["", "$1$1"], in: "https://gatographql.com")
-regexWithHashMultiple: _strRegexReplaceMultiple(searchRegex: ["#^https?://#", "/([a-z]*)/"], replaceWith: ["", "$1$1"], in: "https://gatographql.com")
-regexWithVarsMultiple: _strRegexReplaceMultiple(searchRegex: ["/<!\\[CDATA\\[([a-zA-Z !?]*)\\]\\]>/", "/([a-z]*)/"], replaceWith: ["<Inside: $1>", "$1$1"], in: "<![CDATA[Hello world!]]><![CDATA[Everything OK?]]>")
-regexWithVarsAndLimitMultiple: _strRegexReplaceMultiple(searchRegex: ["/<!\\[CDATA\\[([a-zA-Z !?]*)\\]\\]>/", "/([a-z]*)/"], replaceWith: ["<Inside: $1>", "$1$1"], in: "<![CDATA[Hello world!]]><![CDATA[Everything OK?]]>", limit: 1)
+The documentation for [PHP function `preg_replace`](https://www.php.net/manual/en/function.preg-replace.php) explains how to use [replacement references](https://www.php.net/manual/en/function.preg-replace.php#refsect1-function.preg-replace-parameters) (eg: `$1`) and [supported PRCE modifiers](https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php).
 
 </div>
-
-Also talk about \" and \"" or what
