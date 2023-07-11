@@ -255,6 +255,26 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'content-search-and-replace',
+                \__('Content search and replace', 'gato-graphql'),
+            ],
+            [
+                'adapting-content-in-bulk',
+                \__('Adapting content in bulk', 'gato-graphql'),
+            ],
+            [
+                'site-migrations',
+                \__('Site migrations', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
+            ],
+            [
                 'sending-emails-with-pleasure',
                 \__('Sending emails with pleasure', 'gato-graphql'),
                 [
@@ -271,26 +291,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'sending-a-daily-summary-of-activity',
                 \__('Sending a daily summary of activity', 'gato-graphql'),
-            ],
-            [
-                'site-migrations',
-                \__('Site migrations', 'gato-graphql'),
-                [
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                ]
-            ],
-            [
-                'content-search-and-replace',
-                \__('Content search and replace', 'gato-graphql'),
-            ],
-            [
-                'adapting-content',
-                \__('Adapting content', 'gato-graphql'),
             ],
             [
                 'validating-that-a-new-post-contains-a-mandatory-block',
