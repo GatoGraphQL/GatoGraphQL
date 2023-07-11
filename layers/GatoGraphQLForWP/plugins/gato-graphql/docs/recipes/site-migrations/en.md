@@ -10,7 +10,7 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 </div>
 
-## Replacing the old domain with the new domain
+## Adapting content to the new domain
 
 This GraphQL query first filters all posts containing `"https://my-old-domain.com"` in its content, and replaces this string with `"https://my-new-domain.com"`:
 
@@ -47,7 +47,7 @@ mutation ReplaceOldWithNewDomainInPosts {
 }
 ```
 
-## Replacing a post or page URL
+## Adapting content to a new post or page URL
 
 After changing the slug of a post or page, we can convert all content to point to the new URL.
 
