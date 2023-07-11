@@ -176,3 +176,47 @@ There are several "search and replace" fields we can use (provided by [**PHP Fun
 - `_strRegexReplaceMultiple`: Search for the strings to replace using a list of regular expressions
 
 </div>
+
+## Sending a notification email to the admin
+
+We can retrieve the email of the admin user from the WordPress `wp_options` table, and inject this value into the `to` field:
+
+```graphql
+query ExportData @depends {
+  adminEmail: optionValue(name: "admin_email")
+    @export(as: "adminEmail")
+}
+
+mutation SendEmail @depends(on: "ExportData") {
+  _sendEmail(
+    input: {
+      to: $adminEmail
+      subject: "Admin notification"
+      messageAs: {
+        html: "There is a new post on the site, go check!"
+      }
+    }
+  ) {
+    status
+  }
+}
+```
+
+Alternatively, if [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) is enabled in the Schema Configuration, we can retrieve the admin email in the `mutation` operation already (and inject it into the mutation via [**Field to Input**](https://gatographql.com/extensions/field-to-input/)):
+
+```graphql
+mutation SendEmail {
+  adminEmail: optionValue(name: "admin_email")
+  _sendEmail(
+    input: {
+      to: $__adminEmail
+      subject: "Admin notification"
+      messageAs: {
+        html: "There is a new post on the site, go check!"
+      }
+    }
+  ) {
+    status
+  }
+}
+```
