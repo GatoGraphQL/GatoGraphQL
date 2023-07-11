@@ -322,8 +322,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Persisted Queries as Webhooks', 'gato-graphql'),
             ],
             [
-                'bulk-editing-content',
-                \__('Bulk editing content', 'gato-graphql'),
+                'splitting-a-big-db-update-via-recursive-queries',
+                \__('Splitting a big DB update via recursive queries', 'gato-graphql'),
             ],
             [
                 'interacting-with-3rd-party-service-apis',
