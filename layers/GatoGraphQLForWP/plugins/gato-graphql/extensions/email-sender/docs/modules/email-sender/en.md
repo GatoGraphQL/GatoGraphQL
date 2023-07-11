@@ -58,7 +58,7 @@ mutation {
 
 ## Global Field
 
-`_sendEmail` is a global field (or, more precisely, a global mutation). This means that, if **Nested Mutations** are enabled, this mutations can be executed on any type from the GraphQL schema (i.e. not only in `MutationRoot`).
+`_sendEmail` is a global field (or, more precisely, a global mutation). This means that, if the **Nested Mutations** feature is enabled, this mutation can be executed on any type from the GraphQL schema (i.e. not only in `MutationRoot`).
 
 This is useful for iterating a list of users, and sending an email to each of them (in this case, the mutation is triggered while in the `User` type):
 
