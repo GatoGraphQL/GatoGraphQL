@@ -10,7 +10,7 @@ We send emails via mutation `_sendEmail` provided by the [**Email Sender**](http
 
 🔥 **Tips:**
 
-- The emails is sent with content type "text" or "HTML" depending on what property from the `messageAs` input is used
+- The email is sent with content type "text" or "HTML" depending on what property from the `messageAs` input is used
 - The `from` input is optional; if not provided, the settings stored in WordPress is used
 - `_sendEmail` executes WordPress `wp_mail` function, so it will use the configuration defined for sending emails in WordPress (such as the SMTP provider to use)
 
