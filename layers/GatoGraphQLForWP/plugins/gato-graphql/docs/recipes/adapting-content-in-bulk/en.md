@@ -1,39 +1,52 @@
 # Adapting content in bulk
 
-...
+The previous recipes on searching, replacing and storing content again can be executed in bulk.
 
-Also nested mutations!
-
+## Using nested mutations
 
 
 nested/3-transform-post-properties.gql
 
 ```graphql
-query ExportAndTransformData(
+query TransformAndExportData(
+  $limit: Int! = 5,
+  $offset: Int! = 0,
   $replaceFrom: String!
   $replaceTo: String!
 ) {
-  # Exclude ID 28 because its blocks render the domain, so it doesn't work for "PROD Integration Tests"
-  posts: posts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { excludeIDs: 28 }) {
+  posts: posts(
+    pagination: { limit: $limit, offset: $offset }
+    sort: { by: ID, order: ASC }
+  ) {
     id @export(as: "postIDs")
-    title @strReverse
+    title
     excerpt
-      @strReplace(
+      @strReplaceMultiple(
         search: $replaceFrom
         replaceWith: $replaceTo
+        affectAdditionalFieldsUnderPos: 1
       )
       @deferredExport(
-        as: "postProps"
+        as: "postInputs"
         affectAdditionalFieldsUnderPos: 1
       )
   }
 }
-mutation TransformPostData @depends(on: "ExportAndTransformData") {
-  adaptedPosts: posts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { excludeIDs: 28 }) {
+
+mutation UpdatePost(
+  $limit: Int! = 5,
+  $offset: Int! = 0
+)
+  @depends(on: "TransformAndExportData")
+{
+  adaptedPosts: posts(
+    pagination: { limit: $limit, offset: $offset }
+    sort: { by: ID, order: ASC }
+  ) {
     id
     positionInArray: _arraySearch(array: $postIDs, element: $__id)
-    postData: _arrayItem(array: $postProps, position: $__positionInArray)
-    update(input: $__postData) {
+    postInput: _arrayItem(array: $postInputs, position: $__positionInArray)
+    update(input: $__postInput) {
       status
       errors {
         __typename
@@ -50,11 +63,16 @@ mutation TransformPostData @depends(on: "ExportAndTransformData") {
 }
 ```
 
-var
+The dictionary of `variables` receives the list of strings to search and replace, and how many posts to affect:
 
 ```json
 {
-  "replaceFrom": " ",
-  "replaceTo": "|||"
+  "limit": 10,
+  "offset": 0,
+  "replaceFrom": ["Old string 2", "Old string 2"],
+  "replaceTo": ["New string1", "New string 2"]
 }
 ```
+
+
+## Using multiple 
