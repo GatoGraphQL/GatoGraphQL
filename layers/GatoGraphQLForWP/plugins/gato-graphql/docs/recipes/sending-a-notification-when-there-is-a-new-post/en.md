@@ -164,3 +164,38 @@ add_action(
   }
 );
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Chaining GraphQL queries allows to execute a single query, even though many resources were created or updated.
+
+For instance, this GraphQL query updates many resources:
+
+```graphql
+mutation ReplaceOldWithNewDomainInPosts {
+  posts {
+    id
+    contentSource
+    adaptedContentSource: _strReplace(
+      search: "https://my-old-domain.com"
+      replaceWith: "https://my-new-domain.com"
+      in: $__contentSource
+    )
+    update(input: {
+      contentAs: { html: $__adaptedContentSource }
+    }) {
+      status
+      postID
+    }
+  }
+}
+```
+
+Then, either one or multiple GraphQL queries will be executed:
+
+- If we hook into WordPress action `post_updated`, then a GraphQL query will be executed for every one of the updated posts.
+- If we hook into GraphQL query `ReplaceOldWithNewDomainInPosts`, then only 1 GraphQL query will be executed in total (and it will receive the data for all updated posts).
+
+</div>
