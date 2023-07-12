@@ -92,9 +92,27 @@ Class `GatoGraphQL\InternalGraphQLServer\GraphQLServer` provides 3 static method
 - `executeQueryInFile`: Execute a GraphQL query contained in a (`.gql`) file
 - `executePersistedQuery`: Execute a persisted GraphQL query (providing its ID as an int, or slug as a string)
 
+---
+
+Executing mutation `createPost` will use the standard `wp_insert_post` method from WordPress, hence it will also trigger hook `wp_insert_post`.
+
+Then, if we are executing a GraphQL query against a public endpoint (such as the single endpoint), and it creates a post, the GraphQL server performs the following sequence of actions:
+
+| GraphQL Server | Internal GraphQL Server |
+| --- | --- |
+| Execute GraphQL query against single endpoint (using its own Schema Configuration) | |
+| Create post, trigger `wp_insert_post` | |
+| | React to hook, spin the internal GraphQL server (using its own Schema Configuration) to execute the query to send an email |
+| | Send email, end of that query |
+| | End execution of server |
+| Continue execution of query, end of that query |
+| End execution of server | |
+
 </div>
 
 ## Option 2: Chaining GraphQL queries
+
+we can listen for the execution of
 
 This PHP code is chaining 2 GraphQL query executions:
 
