@@ -65,6 +65,7 @@ We hook into the WordPress core action `wp_insert_post`, retrieve the data from 
 
 ```php
 use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
+use WP_Post;
 
 // The GraphQL query, under var `$query`, is the one defined above
 add_action(
