@@ -40,9 +40,7 @@ Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),
 
 ## Extracting the data from the payload
 
-## Executing some action with the data
-
-This GraphQL query deals with the `subscriber.subscriber_unsubscribe` event, sending an email to the person.
+This GraphQL query extracts items `"subscriber.first_name"` and `"subscriber.email_address"` from the payload, and exports them as dynamic variables:
 
 ```graphql
 query ExtractPayloadData {
@@ -61,7 +59,15 @@ query ExtractPayloadData {
   )
     @export(as: "subscriberEmail")
 }
+```
 
+## Executing some action with the data
+
+Once we have extracted the data from the payload, we can execute some action with it.
+
+This GraphQL query deals with the `subscriber.subscriber_unsubscribe` event, sending an email to the person asking for feedback.
+
+```graphql
 query CreateEmailMessage
   @depends(on: "ExtractPayloadData")
 {
