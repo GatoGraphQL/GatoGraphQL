@@ -349,8 +349,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'automatically-adding-a-mandatory-block-to-all-new-posts',
-                \__('Automatically adding a mandatory block to all new posts', 'gato-graphql'),
+                'automatically-adding-a-mandatory-block',
+                \__('Automatically adding a mandatory block', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
