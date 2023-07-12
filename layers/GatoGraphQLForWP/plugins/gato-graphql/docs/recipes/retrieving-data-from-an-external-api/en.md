@@ -214,6 +214,40 @@ Response
 }
 ```
 
+## Extracting list members
+
+Use:
+
+```graphql
+query GetDataFromMailchimp {
+  mailchimpListMembersJSONObject: _sendJSONObjectItemHTTPRequest(input: {
+    url: "https://us7.api.mailchimp.com/3.0/lists/{LIST_ID}/members",
+    method: GET,
+    options: {
+      auth: {
+        username: "{USER}",
+        password: "{API_TOKEN}"
+      }
+    }
+  })
+    @underJSONObjectProperty(by: { key: "members"})
+      @underEachArrayItem
+        @underJSONObjectProperty(by: { key: "email_address"})
+          @export(as: "mailchimpListMemberEmails", type: LIST)
+}
+
+query CombineData
+  @depends(on: "GetDataFromMailchimp")
+{
+  mailchimpListMemberEmails: _echo(value: $mailchimpListMemberEmails)
+  users(filter: { searchBy: { emails: $mailchimpListMemberEmails} } ) {
+    id
+    name
+    email
+  }
+}
+```
+
 ## GraphQL query to retrieve users subscribed to Mailchimp account
 
 Get the email from the API, get `users` with those emails, print their data.
