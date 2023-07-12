@@ -1,4 +1,4 @@
-# Creating Webhooks to interact with external services
+# Interacting with external services via webhooks
 
 A webhook is an HTTP-based callback function that an external service calls when it produces an event, passing a payload of data along with it. Webhooks enable these different webapps and services to communicate with each other.
 

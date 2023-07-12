@@ -362,8 +362,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'creating-webhooks-via-persisted-queries',
-                \__('Creating Webhooks (via Persisted Queries)', 'gato-graphql'),
+                'interacting-with-external-services-via-webhooks',
+                \__('Interacting with external services via webhooks', 'gato-graphql'),
             ],
             [
                 'interacting-with-3rd-party-service-apis',
