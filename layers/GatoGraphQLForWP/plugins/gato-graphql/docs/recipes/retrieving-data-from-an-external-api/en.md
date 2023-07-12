@@ -248,6 +248,11 @@ query CombineData
 }
 ```
 
+Tips: talk about:
+
+underJSONObjectProperty
+underEachArrayItem
+
 ## GraphQL query to retrieve users subscribed to Mailchimp account
 
 Get the email from the API, get `users` with those emails, print their data.
