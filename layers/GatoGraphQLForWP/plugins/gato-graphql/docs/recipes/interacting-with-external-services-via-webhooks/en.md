@@ -1,10 +1,10 @@
 # Interacting with external services via webhooks
 
-A webhook is an HTTP-based callback function that an external service calls when it produces an event, passing a payload of data along with it. Webhooks enable these different webapps and services to communicate with each other.
+A webhook is an HTTP-based callback function that an external service calls to notify of some event, passing a payload of data along with it. Webhooks enable different webapps and services to communicate with each other.
 
 Some examples of services invoking webhooks include:
 
-- GitHub, when a repository has a new release
+- GitHub, when a repository has a commit pushed
 - Dropbox, when a document is updated
 - WooCommerce, when an order is added
 - Microsoft Teams, to receive rich text messages and post in public channels
@@ -12,8 +12,8 @@ Some examples of services invoking webhooks include:
 
 With Gato GraphQL, we can create Persisted Queries that act as webhooks:
 
-- Because the Persisted Query is exposed under its own URL, this one can conveniently be input as the target URL for the webhook
-- The Persisted Query can deal with that webhook exclusively
+- Because the Persisted Query is exposed under its own URL, it can be used as the target for the webhook
+- Every Persisted Query can deal exclusively with some specific webhook
 
 In this recipe, we will create a Persisted Query to interact with ConvertKit.
 
