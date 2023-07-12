@@ -1,5 +1,10 @@
 # Retrieving data from an external API
 
+Idea: Connect to Mailchimp, extract the email of those users, and fetch extra data from them.
+
+More idea: Next recipe is the one combining data from different sources!
+
+
 Mailchimp API: https://mailchimp.com/developer/marketing/docs/fundamentals/
 
 Query to retrieve List members:
@@ -208,3 +213,8 @@ Response
   }
 }
 ```
+
+## GraphQL query to retrieve users subscribed to Mailchimp account
+
+Get the email from the API, get `users` with those emails, print their data.
+
