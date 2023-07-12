@@ -2,7 +2,7 @@
 
 Gato GraphQL can help us automate tasks in the application, such as sending a notification email to the admin when there is a new post.
 
-In this recipe we will explore a few examples.
+In this recipe we will explore two ways to achieve this.
 
 ## GraphQL query to send a notification email to the admin
 
@@ -29,8 +29,8 @@ There is a [new post on the site]({$postURL}):
     """
   )
   emailMessage: _strReplaceMultiple(
-    search: ["{$postTitle}", "{$postContent}"],
-    replaceWith: [$postTitle, $postContent],
+    search: ["{$postTitle}", "{$postContent}", "{$postURL}"],
+    replaceWith: [$postTitle, $postContent, $postURL],
     in: $__emailMessageTemplate
   )
     @export(as: "emailMessage")
